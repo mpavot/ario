@@ -725,6 +725,7 @@ ario_search_do_plus (GtkButton *button,
         GtkCellRenderer *renderer;
         GtkTreeIter iter, prev_iter;
         GtkWidget *image;
+        int len;
 
         ArioSearchConstraint *search_constraint = (ArioSearchConstraint *) g_malloc (sizeof (ArioSearchConstraint));
 
@@ -740,7 +741,7 @@ ario_search_do_plus (GtkButton *button,
                           "clicked", G_CALLBACK (ario_search_do_minus), search);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips), 
                               GTK_WIDGET (search_constraint->minus_button), 
-                              _("Add a search criteria"), NULL);
+                              _("Remove a search criteria"), NULL);
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_cell_layout_clear (GTK_CELL_LAYOUT (search_constraint->combo_box));
@@ -777,12 +778,15 @@ ario_search_do_plus (GtkButton *button,
         search->priv->search_constraints = g_list_append (search->priv->search_constraints,
                                                           search_constraint);
 
-        if (g_list_length (search->priv->search_constraints) > 4)
-                gtk_widget_set_sensitive (search->priv->plus_button, FALSE);
-
-        if (g_list_length (search->priv->search_constraints) == 1) {    
+        len = g_list_length (search->priv->search_constraints);
+        if (len == 1) {
                 search_constraint = (g_list_first (search->priv->search_constraints))->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, FALSE);
+        } else if ( len > 4) {
+                gtk_widget_set_sensitive (search->priv->plus_button, FALSE);
+        } else if (len == 2) {
+                search_constraint = (g_list_first (search->priv->search_constraints))->data;
+                gtk_widget_set_sensitive (search_constraint->minus_button, TRUE);
         }
 }
 
@@ -814,7 +818,7 @@ ario_search_do_minus (GtkButton *button,
 
         gtk_widget_set_sensitive (search->priv->plus_button, TRUE);
 
-        if (g_list_length (search->priv->search_constraints) == 1) {    
+        if (g_list_length (search->priv->search_constraints) == 1) {
                 search_constraint = (g_list_first (search->priv->search_constraints))->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, FALSE);
         }

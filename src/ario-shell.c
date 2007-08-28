@@ -376,7 +376,7 @@ ario_shell_construct (ArioShell *shell)
                                                 shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
-        eel_gconf_notification_add (STATE_VPANED_POSITION,
+        eel_gconf_notification_add (CONF_VPANED_POSITION,
                                     (GConfClientNotifyFunc) ario_shell_paned_changed_cb,
                                     shell);
 
@@ -474,7 +474,7 @@ ario_shell_sync_paned (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         int pos;
 
-        pos = eel_gconf_get_integer (STATE_VPANED_POSITION);
+        pos = eel_gconf_get_integer (CONF_VPANED_POSITION);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
@@ -535,7 +535,7 @@ ario_shell_vpaned_size_allocate_cb (GtkWidget *widget,
                                     ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        eel_gconf_set_integer (STATE_VPANED_POSITION,
+        eel_gconf_set_integer (CONF_VPANED_POSITION,
                                gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
 }
 

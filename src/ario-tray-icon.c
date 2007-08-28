@@ -91,11 +91,6 @@ enum
         VISIBILITY_TOGGLE
 };
 
-enum
-{
-        LAST_SIGNAL,
-};
-
 static GObjectClass *parent_class = NULL;
 
 GType
@@ -120,8 +115,8 @@ ario_tray_icon_get_type (void)
                 };
 
                 ario_tray_icon_type = g_type_register_static (EGG_TYPE_TRAY_ICON,
-                                                         "ArioTrayIcon",
-                                                         &our_info, 0);
+                                                              "ArioTrayIcon",
+                                                              &our_info, 0);
         }
 
         return ario_tray_icon_type;
@@ -197,7 +192,6 @@ ario_tray_icon_init (ArioTrayIcon *icon)
         icon->priv->visible = TRUE;
 
         gtk_container_add (GTK_CONTAINER (icon), icon->priv->ebox);
-        gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
 }
 
 static GObject *

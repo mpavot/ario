@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-28 21:16+0200\n"
+"POT-Creation-Date: 2007-08-28 22:41+0200\n"
 "PO-Revision-Date: 2007-08-15 18:47+0200\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
@@ -46,98 +46,102 @@ msgid "Define if Ario must use authentication to connect to mpd or not."
 msgstr "Définit si Ario doit s'authentifier pour se connecter à MPD ou pas"
 
 #: ../data/ario.schemas.in.h:8
+msgid "Define if the view tabs are shown."
+msgstr "Définit si les onglets sont affichés."
+
+#: ../data/ario.schemas.in.h:9
 msgid "Define the address of the proxy"
 msgstr "Definit l'addresse du proxy"
 
-#: ../data/ario.schemas.in.h:9
+#: ../data/ario.schemas.in.h:10
 msgid "Define the port of the proxy"
 msgstr "Definit le port du proxy"
 
-#: ../data/ario.schemas.in.h:10
+#: ../data/ario.schemas.in.h:11
 msgid "Define the port of the proxy."
 msgstr "Definit le port du proxy"
 
-#: ../data/ario.schemas.in.h:11
+#: ../data/ario.schemas.in.h:12
 msgid "Define the source used in Ario"
 msgstr "Definit la utilisée par Ario"
 
-#: ../data/ario.schemas.in.h:12
+#: ../data/ario.schemas.in.h:13
 msgid "Hide the covers in the albums treeview"
 msgstr "Cacher les pochettes dans la liste d'albums"
 
-#: ../data/ario.schemas.in.h:13
+#: ../data/ario.schemas.in.h:14
 msgid "Host to connect to"
 msgstr "Hôte"
 
-#: ../data/ario.schemas.in.h:14
+#: ../data/ario.schemas.in.h:15
 msgid "Host to connect to."
 msgstr "Hôte"
 
-#: ../data/ario.schemas.in.h:15
+#: ../data/ario.schemas.in.h:16
 msgid "If true, the main window is maximized."
 msgstr "Si vrai, la fenêtre principale est maximisée."
 
-#: ../data/ario.schemas.in.h:16
+#: ../data/ario.schemas.in.h:17
 msgid "Main window height"
 msgstr "Hauteur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:17
+#: ../data/ario.schemas.in.h:18
 msgid "Main window height."
 msgstr "Hauteur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:18
+#: ../data/ario.schemas.in.h:19
 msgid "Main window maximization state"
 msgstr "État de maximisation de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:19
+#: ../data/ario.schemas.in.h:20
 msgid "Main window width"
 msgstr "Largeur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:20
+#: ../data/ario.schemas.in.h:21
 msgid "Main window width."
 msgstr "Largeur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:21
+#: ../data/ario.schemas.in.h:22
 msgid "Port to connect to"
 msgstr "Port"
 
-#: ../data/ario.schemas.in.h:22
+#: ../data/ario.schemas.in.h:23
 msgid "Port to connect to."
 msgstr "Port"
 
-#: ../data/ario.schemas.in.h:23
+#: ../data/ario.schemas.in.h:24
 msgid "Position of main window pane"
 msgstr "Position du panneau de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:24
+#: ../data/ario.schemas.in.h:25
 msgid "Position of main window pane."
 msgstr "Position du panneau de la fenêtre principale."
 
-#: ../data/ario.schemas.in.h:25
+#: ../data/ario.schemas.in.h:26
 msgid "The amazon country to use to get the covers"
 msgstr "Le pays d'Amazon à utiliser pour récupérer les pochettes"
 
-#: ../data/ario.schemas.in.h:26
+#: ../data/ario.schemas.in.h:27
 msgid "The password to connect to mpd"
 msgstr "Le mot de passe pour se connecter à mpd"
 
-#: ../data/ario.schemas.in.h:27
+#: ../data/ario.schemas.in.h:28
 msgid "The password to connect to mpd."
 msgstr "Le mot de passe pour se connecter à mpd"
 
-#: ../data/ario.schemas.in.h:28
+#: ../data/ario.schemas.in.h:29
 msgid "The timeout for the connection to mpd"
 msgstr "Timeout pour la connexion à mpd (en secondes)"
 
-#: ../data/ario.schemas.in.h:29
+#: ../data/ario.schemas.in.h:30
 msgid "The timeout for the connection to mpd."
 msgstr "Timeout pour la connexion à mpd (en secondes)"
 
-#: ../data/ario.schemas.in.h:30
+#: ../data/ario.schemas.in.h:31
 msgid "When enabled, ario hide the covers in the albums treeview"
 msgstr "Si activé, Ario cache les pochettes dans la liste d'albums"
 
-#: ../data/ario.schemas.in.h:31
+#: ../data/ario.schemas.in.h:32
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -426,7 +430,7 @@ msgstr "Fichier"
 msgid "Any"
 msgstr "Tous"
 
-#: ../src/ario-search.c:263 ../src/ario-search.c:743
+#: ../src/ario-search.c:263
 msgid "Add a search criteria"
 msgstr "Ajouter un critère de recherche"
 
@@ -434,15 +438,19 @@ msgstr "Ajouter un critère de recherche"
 msgid "Search songs in the library"
 msgstr "Chercher une chanson dans la bibliothèque"
 
-#: ../src/ario-source.c:133
+#: ../src/ario-search.c:743
+msgid "Remove a search criteria"
+msgstr "Enlever un critère de recherche"
+
+#: ../src/ario-source.c:137
 msgid "Library"
 msgstr "Bibliothèque"
 
-#: ../src/ario-source.c:141
+#: ../src/ario-source.c:145
 msgid "Web Radios"
 msgstr "Web Radios"
 
-#: ../src/ario-source.c:150
+#: ../src/ario-source.c:154
 msgid "Search"
 msgstr "Recherche"
 
@@ -688,15 +696,15 @@ msgstr "Chercher dans la bibliothèque"
 msgid "%d Songs - %s"
 msgstr "%d Titres - %s"
 
-#: ../src/ario-tray-icon.c:178 ../src/ario-tray-icon.c:399
+#: ../src/ario-tray-icon.c:173 ../src/ario-tray-icon.c:393
 msgid "Not playing"
 msgstr "Ne joue pas"
 
-#: ../src/ario-tray-icon.c:310
+#: ../src/ario-tray-icon.c:304
 msgid "Ario tray icon"
 msgstr "Ario - Icône de notification"
 
-#: ../src/ario-tray-icon.c:392
+#: ../src/ario-tray-icon.c:386
 #, c-format
 msgid ""
 "Artist: %s\n"

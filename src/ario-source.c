@@ -36,7 +36,10 @@ gboolean ario_source_page_changed_cb (GtkNotebook *notebook,
                                       GtkNotebookPage *page,
                                       gint page_nb,
                                       ArioSource *source);
-
+static void ario_source_showtabs_changed_cb (GConfClient *client,
+                                             guint cnxn_id,
+                                             GConfEntry *entry,
+                                             ArioSource *source);
 struct ArioSourcePrivate
 {
         GtkWidget *browser;
@@ -123,6 +126,7 @@ ario_source_new (GtkUIManager *mgr,
 
         source = g_object_new (TYPE_ARIO_SOURCE,
                                NULL);
+        g_return_val_if_fail (source->priv != NULL, NULL);
 
         source->priv->browser = ario_browser_new (mgr,
                                                   group,
@@ -154,7 +158,9 @@ ario_source_new (GtkUIManager *mgr,
                                  G_CALLBACK (ario_source_page_changed_cb),
                                  source, 0);
 
-        g_return_val_if_fail (source->priv != NULL, NULL);
+        eel_gconf_notification_add (CONF_SHOW_TABS,
+                                    (GConfClientNotifyFunc) ario_source_showtabs_changed_cb,
+                                    source);
 
         return GTK_WIDGET (source);
 }
@@ -195,5 +201,15 @@ ario_source_page_changed_cb (GtkNotebook *notebook,
         }
 
         return TRUE;
+}
+
+static void
+ario_source_showtabs_changed_cb (GConfClient *client,
+                                 guint cnxn_id,
+                                 GConfEntry *entry,
+                                 ArioSource *source)
+{
+        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (source),
+                                    eel_gconf_get_boolean (CONF_SHOW_TABS));
 }
 
