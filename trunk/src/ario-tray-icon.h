@@ -21,7 +21,6 @@
  *
  */
 
-#include <gtk/gtkactiongroup.h>
 #include <gtk/gtkuimanager.h>
 
 #include "eggtrayicon.h"

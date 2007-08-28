@@ -192,5 +192,17 @@
         </locale>
       </schema>
 
+      <schema>
+        <key>/schemas/apps/ario/show_tabs</key>
+        <applyto>/apps/ario/show_tabs</applyto>
+        <owner>ario</owner>
+        <type>bool</type>
+        <default>1</default>
+        <locale name="C">
+	<short>Define if the view tabs are shown.</short>
+	<long>Define if the view tabs are shown.</long>
+        </locale>
+      </schema>
+
     </schemalist>
 </gconfschemafile>
