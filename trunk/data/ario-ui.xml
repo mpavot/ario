@@ -1,0 +1,80 @@
+<ui>
+	<menubar name="MenuBar">
+
+		<menu name="FileMenu" action="File">  
+			<menuitem name="FileQuit" action="FileQuit"/>
+		</menu>
+
+		<menu name="EditMenu" action="Edit">
+			<menuitem name="EditPreferencesMenu" action="EditPreferences"/> 
+		</menu>
+
+		<menu name="ViewMenu" action="View">
+			<menuitem name="LibraryViewMenu" action="LibraryView"/>
+			<menuitem name="RadioViewMenu" action="RadioView"/>
+			<menuitem name="SearchViewMenu" action="SearchView"/>
+		</menu>
+
+		<menu name="ToolMenu" action="Tool">
+			<menuitem name="ToolCoverMenu" action="ToolCover"/>
+		</menu>
+
+		<menu name="HelpMenu" action="Help">
+			<menuitem name="HelpAboutMenu" action="HelpAbout"/>
+		</menu>
+
+	</menubar>
+
+	<popup name="TrayPopup">
+		<menuitem name="PlayPauseTray" action="ControlPlayPause"/>
+		<menuitem name="StopTray" action="ControlStop"/>
+		<separator/>
+		<menuitem name="NextTray" action="ControlNext"/>
+		<menuitem name="PreviousTray" action="ControlPrevious"/>
+		<separator/>
+		<menuitem name="FileQuit" action="FileQuit"/>
+	</popup>
+
+	<popup name="PlaylistPopup">
+		<menuitem name="PlaylistClear" action="PlaylistClear"/>
+		<menuitem name="PlaylistRemove" action="PlaylistRemove"/>
+	</popup>
+
+	<popup name="BrowserArtistsPopup">
+		<menuitem name="BrowserAddArtists" action="BrowserAddArtists"/>
+		<separator/>
+		<menuitem name="CoverArtistGetAmazon" action="CoverArtistGetAmazon"/>
+		<menuitem name="CoverArtistRemove" action="CoverArtistRemove"/>
+	</popup>
+
+	<popup name="BrowserAlbumsPopup">
+		<menuitem name="BrowserAddAlbums" action="BrowserAddAlbums"/>
+		<separator/>
+		<menuitem name="CoverAlbumGetAmazon" action="CoverAlbumGetAmazon"/>
+		<menuitem name="CoverAlbumRemove" action="CoverAlbumRemove"/>
+	</popup>
+
+	<popup name="BrowserSongsPopup">
+		<menuitem name="BrowserAddSongs" action="BrowserAddSongs"/>
+	</popup>
+
+	<popup name="RadioPopupSingle">
+		<menuitem name="RadioAddRadios" action="RadioAddRadios"/>
+		<separator/>
+		<menuitem name="RadioNewRadio" action="RadioNewRadio"/>
+		<menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
+		<separator/>
+		<menuitem name="RadioProperties" action="RadioProperties"/>
+	</popup>
+
+	<popup name="RadioPopupMultiple">
+		<menuitem name="RadioAddRadios" action="RadioAddRadios"/>
+		<separator/>
+		<menuitem name="RadioNewRadio" action="RadioNewRadio"/>
+		<menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
+	</popup>
+
+	<popup name="SearchPopup">
+		<menuitem name="SearchAddSongs" action="SearchAddSongs"/>
+	</popup>
+</ui>

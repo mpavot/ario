@@ -1,0 +1,5 @@
+2007-06-02  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): New variable.
+
