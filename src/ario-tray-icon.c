@@ -309,6 +309,35 @@ ario_tray_icon_new (GtkUIManager *mgr,
 }
 
 static void
+ario_tray_icon_double_click (ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        int trayicon_behavior;
+
+        trayicon_behavior = eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR);
+
+        switch (trayicon_behavior) {
+        case TRAY_ICON_PLAY_PAUSE:
+                        if (ario_mpd_is_paused (icon->priv->mpd))
+                                ario_mpd_do_play (icon->priv->mpd);
+                        else
+                                ario_mpd_do_pause (icon->priv->mpd);
+                break;
+
+        case TRAY_ICON_NEXT_SONG:
+                ario_mpd_do_next (icon->priv->mpd);
+                break;
+
+        case TRAY_ICON_DO_NOTHING:
+        default:
+                break;
+        }
+
+
+
+}
+
+static void
 ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                                       ArioTrayIcon *icon)
 {
@@ -325,10 +354,7 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                 break;
 
         case 2:
-                if (ario_mpd_is_paused (icon->priv->mpd))
-                        ario_mpd_do_play (icon->priv->mpd);
-                else
-                        ario_mpd_do_pause (icon->priv->mpd);
+                ario_tray_icon_double_click (icon);
                 break;
 
         case 3:

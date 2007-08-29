@@ -9,6 +9,7 @@ data/cover-prefs.glade
 data/cover-progress.glade
 data/cover-select.glade
 data/server-prefs.glade
+data/interface-prefs.glade
 src/ario-browser.c
 src/ario-browser.h
 src/ario-radio.c

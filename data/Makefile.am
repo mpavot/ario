@@ -21,6 +21,7 @@ art_DATA = ario.png		\
 gladedir = $(pkgdatadir)/ario/glade
 glade_DATA = connection-prefs.glade	\
 	     cover-prefs.glade		\
+	     interface-prefs.glade	\
 	     server-prefs.glade		\
 	     cover-progress.glade	\
 	     cover-select.glade
