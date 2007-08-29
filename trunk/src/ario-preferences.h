@@ -49,6 +49,15 @@ G_BEGIN_DECLS
 #define CONF_PROXY_ADDRESS              "/apps/ario/proxy_address"
 #define CONF_PROXY_PORT                 "/apps/ario/proxy_port"
 #define CONF_SHOW_TABS                  "/apps/ario/show_tabs"
+#define CONF_TRAYICON_BEHAVIOR          "/apps/ario/trayicon_behavior"
+
+enum
+{
+        TRAY_ICON_PLAY_PAUSE,
+        TRAY_ICON_NEXT_SONG,
+        TRAY_ICON_DO_NOTHING,
+        TRAY_ICON_N_BEHAVIOR
+};
 
 typedef struct ArioPreferencesPrivate ArioPreferencesPrivate;
 

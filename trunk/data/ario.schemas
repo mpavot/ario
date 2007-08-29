@@ -289,5 +289,22 @@
         </locale>
       </schema>
 
+      <schema>
+        <key>/schemas/apps/ario/trayicon_behavior</key>
+        <applyto>/apps/ario/trayicon_behavior</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>0</default>
+        <locale name="C">
+	<short>Define the behavior of a double click on the tray icon.</short>
+	<long>0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'.</long>
+        </locale>
+
+        <locale name="fr">
+	<short>Definit le comportement d&apos;un double clic sur l&apos;icône.</short>
+	<long>0 pour &apos;play/pause&apos;, 1 pour &apos;jouer la chanson suivante&apos;, 2 pour &apos;ne rien faire&apos;</long>
+        </locale>
+      </schema>
+
     </schemalist>
 </gconfschemafile>

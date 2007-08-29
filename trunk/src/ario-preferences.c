@@ -40,6 +40,7 @@ static void ario_preferences_response_cb (GtkDialog *dialog,
                                           ArioPreferences *preferences);
 static void ario_preferences_sync (ArioPreferences *preferences);
 static void ario_preferences_sync_cover (ArioPreferences *preferences);
+static void ario_preferences_sync_interface (ArioPreferences *preferences);
 static void ario_preferences_set_property (GObject *object,
                                            guint prop_id,
                                            const GValue *value,
@@ -53,6 +54,10 @@ static void ario_preferences_show_cb (GtkWidget *widget,
 void ario_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                   ArioPreferences *preferences);
 void ario_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
+                                                 ArioPreferences *preferences);
+void ario_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
+                                                    ArioPreferences *preferences);
+void ario_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                                  ArioPreferences *preferences);
 static gboolean ario_preferences_update_mpd (ArioPreferences *preferences);
 void ario_preferences_host_changed_cb (GtkWidget *widget,
@@ -92,6 +97,13 @@ static const char *amazon_countries[] = {
         NULL
 };
 
+static const char *trayicon_behavior[] = {
+        N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE
+        N_("Play next song"),   // TRAY_ICON_NEXT_SONG
+        N_("Do nothing"),       // TRAY_ICON_DO_NOTHING
+        NULL
+};
+
 enum
 {
         PROP_0,
@@ -112,7 +124,6 @@ struct ArioPreferencesPrivate
         GtkWidget *disconnect_button;
         GtkWidget *connect_button;
 
-
         GtkWidget *crossfade_checkbutton;
         GtkWidget *crossfadetime_spinbutton;
         GtkWidget *updatedb_label;
@@ -124,6 +135,9 @@ struct ArioPreferencesPrivate
         GtkWidget *proxy_address_entry;
         GtkWidget *proxy_port_spinbutton;
         
+        GtkWidget *showtabs_check;
+        GtkWidget *trayicon_combobox;
+
         gboolean loading;
         gboolean sync_mpd;
 
@@ -402,6 +416,56 @@ ario_preferences_append_ario_cover_config (ArioPreferences *preferences)
         g_object_unref (G_OBJECT (xml));
 }
 
+static void
+ario_preferences_append_ario_interface_config (ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        GladeXML *xml;
+        GtkListStore *list_store;
+        GtkCellRenderer *renderer;
+        GtkTreeIter iter;
+        int i;
+
+        g_return_if_fail (IS_ARIO_PREFERENCES (preferences));
+
+        xml = rb_glade_xml_new (GLADE_PATH "interface-prefs.glade",
+                                "interface_vbox",
+                                preferences);
+
+        preferences->priv->showtabs_check =
+                glade_xml_get_widget (xml, "showtabs_checkbutton");
+        preferences->priv->trayicon_combobox = 
+                glade_xml_get_widget (xml, "trayicon_combobox");
+                
+        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+
+        for (i = 0; i < TRAY_ICON_N_BEHAVIOR; i++) {
+                gtk_list_store_append (list_store, &iter);
+                gtk_list_store_set (list_store, &iter,
+                                    0, gettext (trayicon_behavior[i]),
+                                    1, i,
+                                    -1);
+        }
+
+        gtk_combo_box_set_model (GTK_COMBO_BOX (preferences->priv->trayicon_combobox),
+                                 GTK_TREE_MODEL (list_store));
+        g_object_unref (list_store);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (preferences->priv->trayicon_combobox));
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (preferences->priv->trayicon_combobox), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (preferences->priv->trayicon_combobox), renderer,
+                                        "text", 0, NULL);
+        
+        ario_preferences_sync_interface (preferences);
+
+        gtk_notebook_append_page (GTK_NOTEBOOK (preferences->priv->notebook),
+                                  glade_xml_get_widget (xml, "interface_vbox"),
+                                  gtk_label_new (_("Interface")));
+
+        g_object_unref (G_OBJECT (xml));
+}
+
 GtkWidget *
 ario_preferences_new (ArioMpd *mpd)
 {
@@ -415,12 +479,14 @@ ario_preferences_new (ArioMpd *mpd)
         g_return_val_if_fail (preferences->priv != NULL, NULL);
 
         ario_preferences_append_connection_config (preferences,
-                                              mpd);
+                                                   mpd);
 
         ario_preferences_append_server_config (preferences,
-                                          mpd);
+                                               mpd);
 
         ario_preferences_append_ario_cover_config (preferences);
+
+        ario_preferences_append_ario_interface_config (preferences);
 
         ario_preferences_sync (preferences);
         ario_preferences_update_mpd (preferences);
@@ -718,6 +784,28 @@ ario_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
                               amazon_countries[i]);
 }
 
+void
+ario_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
+                                               ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        int i;
+
+        i = gtk_combo_box_get_active (GTK_COMBO_BOX (preferences->priv->trayicon_combobox));
+
+        eel_gconf_set_integer (CONF_TRAYICON_BEHAVIOR, 
+                               i);
+}
+
+void
+ario_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
+                                            ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        eel_gconf_set_boolean (CONF_SHOW_TABS,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (preferences->priv->showtabs_check)));
+}
+
 static void
 ario_preferences_sync_cover (ArioPreferences *preferences)
 {
@@ -758,3 +846,14 @@ ario_preferences_sync_cover (ArioPreferences *preferences)
         g_free(proxy_address);
 }
 
+static void
+ario_preferences_sync_interface (ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (preferences->priv->showtabs_check), 
+                                      eel_gconf_get_boolean (CONF_SHOW_TABS));
+
+        gtk_combo_box_set_active (GTK_COMBO_BOX (preferences->priv->trayicon_combobox),
+                                  eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR));
+}
