@@ -162,6 +162,9 @@ ario_source_new (GtkUIManager *mgr,
                                     (GConfClientNotifyFunc) ario_source_showtabs_changed_cb,
                                     source);
 
+        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (source),
+                                    eel_gconf_get_boolean (CONF_SHOW_TABS));
+
         return GTK_WIDGET (source);
 }
 
