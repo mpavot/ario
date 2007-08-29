@@ -372,8 +372,8 @@ ario_shell_construct (ArioShell *shell)
 
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->ui_manager,
-                                                win,
-                                                shell->priv->mpd);
+                                                     win,
+                                                     shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
         eel_gconf_notification_add (CONF_VPANED_POSITION,
@@ -499,13 +499,8 @@ ario_shell_sync_source (ArioShell *shell)
         GtkAction *action;
 
         source_type = eel_gconf_get_integer (CONF_STATE_SOURCE);
-
-        ario_source_set_source (ARIO_SOURCE (shell->priv->source),
-                                source_type);
-
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "LibraryView");
-
         if (source_type == ARIO_SOURCE_RADIO) {
                 gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
                                                     ARIO_SOURCE_RADIO);

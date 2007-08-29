@@ -32,10 +32,15 @@
 static void ario_source_class_init (ArioSourceClass *klass);
 static void ario_source_init (ArioSource *source);
 static void ario_source_finalize (GObject *object);
-gboolean ario_source_page_changed_cb (GtkNotebook *notebook,
-                                      GtkNotebookPage *page,
-                                      gint page_nb,
-                                      ArioSource *source);
+static void ario_source_source_changed_cb (GConfClient *client,
+                                           guint cnxn_id,
+                                           GConfEntry *entry,
+                                           ArioSource *source);
+static void ario_source_sync_source (ArioSource *source);
+static gboolean ario_source_page_changed_cb (GtkNotebook *notebook,
+                                             GtkNotebookPage *page,
+                                             gint page_nb,
+                                             ArioSource *source);
 static void ario_source_showtabs_changed_cb (GConfClient *client,
                                              guint cnxn_id,
                                              GConfEntry *entry,
@@ -153,6 +158,13 @@ ario_source_new (GtkUIManager *mgr,
                                   source->priv->search,
                                   gtk_label_new (_("Search")));
 #endif  /* ENABLE_SEARCH */
+        gtk_widget_show_all (GTK_WIDGET (source));
+        ario_source_sync_source (source);
+
+        eel_gconf_notification_add (CONF_STATE_SOURCE,
+                                    (GConfClientNotifyFunc) ario_source_source_changed_cb,
+                                    source);
+
         g_signal_connect_object (G_OBJECT (source),
                                  "switch_page",
                                  G_CALLBACK (ario_source_page_changed_cb),
@@ -168,12 +180,15 @@ ario_source_new (GtkUIManager *mgr,
         return GTK_WIDGET (source);
 }
 
-void
-ario_source_set_source (ArioSource *source,
-                        ArioSourceType source_type)
+static void
+ario_source_sync_source (ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START
 #ifdef MULTIPLE_VIEW
+        ArioSourceType source_type;
+
+        source_type = eel_gconf_get_integer (CONF_STATE_SOURCE);
+
         if (source_type == ARIO_SOURCE_RADIO) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_RADIO);
         } else if (source_type == ARIO_SOURCE_SEARCH) {
@@ -184,24 +199,25 @@ ario_source_set_source (ArioSource *source,
 #endif  /* MULTIPLE_VIEW */
 }
 
-gboolean
+static void
+ario_source_source_changed_cb (GConfClient *client,
+                               guint cnxn_id,
+                               GConfEntry *entry,
+                               ArioSource *source)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_source_sync_source (source);
+}
+
+static gboolean
 ario_source_page_changed_cb (GtkNotebook *notebook,
                              GtkNotebookPage *page,
                              gint page_nb,
                              ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START
-
-        if (page_nb == ARIO_SOURCE_RADIO) {
-                eel_gconf_set_integer (CONF_STATE_SOURCE,
-                                       ARIO_SOURCE_RADIO);
-        } else if (page_nb == ARIO_SOURCE_SEARCH) {
-                eel_gconf_set_integer (CONF_STATE_SOURCE,
-                                       ARIO_SOURCE_SEARCH);
-        } else {
-                eel_gconf_set_integer (CONF_STATE_SOURCE,
-                                       ARIO_SOURCE_BROWSER);
-        }
+        eel_gconf_set_integer (CONF_STATE_SOURCE,
+                               page_nb);
 
         return TRUE;
 }
