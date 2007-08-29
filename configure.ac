@@ -40,18 +40,18 @@ fi
 
 dnl Radios
 AC_ARG_ENABLE(radios,
-              AC_HELP_STRING([--enable-radios],
-                             [Add support of internet radios]))
-if test x"$enable_radios" = xyes; then
+              AC_HELP_STRING([--disable-radios],
+                             [Disable support of internet radios]))
+if test x"$enable_radios" != xno; then
    AC_DEFINE(ENABLE_RADIOS, 1, [Add support of internet radios])
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search])
 fi
 
 dnl Search
 AC_ARG_ENABLE(search,
-              AC_HELP_STRING([--enable-search],
-                             [Add support of search view]))
-if test x"$enable_search" = xyes; then
+              AC_HELP_STRING([--disable-search],
+                             [Disable support of search view]))
+if test x"$enable_search" != xno; then
    AC_DEFINE(ENABLE_SEARCH, 1, [Add support of search view])
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search])
 fi
@@ -71,13 +71,13 @@ if test x${enable_debug} = xyes; then
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
 fi
-if test x${enable_radios} = xyes; then
-        echo "Internet radios support is:               ENABLED"
+if test x${enable_radios} != xno; then
+        echo "Internet radios support is:               ENABLED  (--disable-radios)"
 else
-        echo "Internet radios support is:               DISABLED (--enable-radios)"
+        echo "Internet radios support is:               DISABLED"
 fi
-if test x${enable_search} = xyes; then
-        echo "Search view support is:                   ENABLED"
+if test x${enable_search} != xno; then
+        echo "Search view support is:                   ENABLED  (--disable-search)"
 else
-        echo "Search view support is:                   DISABLED (--enable-search)"
+        echo "Search view support is:                   DISABLED"
 fi

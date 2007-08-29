@@ -61,9 +61,6 @@ GtkWidget*              ario_source_new        (GtkUIManager *mgr,
                                                 ArioMpd *mpd,
                                                 ArioPlaylist *playlist);
 
-void                    ario_source_set_source (ArioSource *source,
-                                                ArioSourceType source_type);
-
 G_END_DECLS
 
 #endif /* __ARIO_SOURCE_H */

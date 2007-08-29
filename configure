@@ -1348,8 +1348,8 @@ Optional Features:
   --enable-dependency-tracking   do not reject slow dependency extractors
   --disable-schemas-install	Disable the schemas installation
   --enable-debug          Add runtime debugging information (slower)
-  --enable-radios         Add support of internet radios
-  --enable-search         Add support of search view
+  --disable-radios        Disable support of internet radios
+  --disable-search        Disable support of search view
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -6501,7 +6501,7 @@ if test "${enable_radios+set}" = set; then
   enableval=$enable_radios;
 fi
 
-if test x"$enable_radios" = xyes; then
+if test x"$enable_radios" != xno; then
 
 cat >>confdefs.h <<\_ACEOF
 #define ENABLE_RADIOS 1
@@ -6519,7 +6519,7 @@ if test "${enable_search+set}" = set; then
   enableval=$enable_search;
 fi
 
-if test x"$enable_search" = xyes; then
+if test x"$enable_search" != xno; then
 
 cat >>confdefs.h <<\_ACEOF
 #define ENABLE_SEARCH 1
@@ -8036,13 +8036,13 @@ if test x${enable_debug} = xyes; then
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
 fi
-if test x${enable_radios} = xyes; then
-        echo "Internet radios support is:               ENABLED"
+if test x${enable_radios} != xno; then
+        echo "Internet radios support is:               ENABLED  (--disable-radios)"
 else
-        echo "Internet radios support is:               DISABLED (--enable-radios)"
+        echo "Internet radios support is:               DISABLED"
 fi
-if test x${enable_search} = xyes; then
-        echo "Search view support is:                   ENABLED"
+if test x${enable_search} != xno; then
+        echo "Search view support is:                   ENABLED  (--disable-search)"
 else
-        echo "Search view support is:                   DISABLED (--enable-search)"
+        echo "Search view support is:                   DISABLED"
 fi
