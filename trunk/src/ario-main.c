@@ -72,11 +72,16 @@ main (int argc, char *argv[])
         curl_global_init(0);
 
         eel_gconf_monitor_add ("/apps/ario");
-
         shell = ario_shell_new ();
         ario_shell_construct (shell);
 
         gtk_main ();
+
+        ario_shell_shutdown (shell);
+        eel_gconf_monitor_remove ("/apps/ario");
+
+
+        g_object_unref (G_OBJECT (shell));
 
         return 0;
 }

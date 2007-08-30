@@ -50,7 +50,10 @@ G_BEGIN_DECLS
 #define CONF_PROXY_PORT                 "/apps/ario/proxy_port"
 #define CONF_SHOW_TABS                  "/apps/ario/show_tabs"
 #define CONF_TRAYICON_BEHAVIOR          "/apps/ario/trayicon_behavior"
-
+#define CONF_TRACK_COLUMN_SIZE          "/apps/ario/track_column_size"
+#define CONF_TITLE_COLUMN_SIZE          "/apps/ario/title_column_size"
+#define CONF_ARTIST_COLUMN_SIZE         "/apps/ario/artist_column_size"
+#define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/album_column_size"
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

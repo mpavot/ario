@@ -20,12 +20,14 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
-
 #include <glib/gi18n.h>
+#include "eel-gconf-extensions.h"
+
 #include "ario-playlist.h"
 #include "ario-mpd.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "ario-preferences.h"
 
 #define DRAG_THRESHOLD 1
 
@@ -82,6 +84,11 @@ struct ArioPlaylistPrivate
         GtkWidget *tree;
         GtkListStore *model;
         GtkTreeSelection *selection;
+
+        GtkTreeViewColumn *track_column;
+        GtkTreeViewColumn *title_column;
+        GtkTreeViewColumn *artist_column;
+        GtkTreeViewColumn *album_column;
 
         ArioMpd *mpd;
 
@@ -242,39 +249,47 @@ ario_playlist_init (ArioPlaylist *playlist)
 
         /* Track column */
         renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Track"),
-                                                           renderer,
-                                                           "text", TRACK_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        playlist->priv->track_column = gtk_tree_view_column_new_with_attributes (_("Track"),
+                                                                                 renderer,
+                                                                                 "text", TRACK_COLUMN,
+                                                                                 NULL);
+        gtk_tree_view_column_set_resizable (playlist->priv->track_column, TRUE);
+        gtk_tree_view_column_set_sizing (playlist->priv->track_column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (playlist->priv->track_column, eel_gconf_get_integer (CONF_TRACK_COLUMN_SIZE));
+        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->track_column);
 
         /* Title column */
         renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Title"),
-                                                           renderer,
-                                                           "text", TITLE_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        playlist->priv->title_column = gtk_tree_view_column_new_with_attributes (_("Title"),
+                                                                                 renderer,
+                                                                                 "text", TITLE_COLUMN,
+                                                                                 NULL);
+        gtk_tree_view_column_set_resizable (playlist->priv->title_column, TRUE);
+        gtk_tree_view_column_set_sizing (playlist->priv->title_column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (playlist->priv->title_column, eel_gconf_get_integer (CONF_TITLE_COLUMN_SIZE));
+        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->title_column);
 
         /* Artist column */
         renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                           renderer,
-                                                           "text", ARTIST_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        playlist->priv->artist_column = gtk_tree_view_column_new_with_attributes (_("Artist"),
+                                                                                  renderer,
+                                                                                  "text", ARTIST_COLUMN,
+                                                                                  NULL);
+        gtk_tree_view_column_set_resizable (playlist->priv->artist_column, TRUE);
+        gtk_tree_view_column_set_sizing (playlist->priv->artist_column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (playlist->priv->artist_column, eel_gconf_get_integer (CONF_ARTIST_COLUMN_SIZE));
+        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->artist_column);
 
         /* Album column */
         renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Album"),
-                                                           renderer,
-                                                           "text", ALBUM_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        playlist->priv->album_column = gtk_tree_view_column_new_with_attributes (_("Album"),
+                                                                                 renderer,
+                                                                                 "text", ALBUM_COLUMN,
+                                                                                 NULL);
+        gtk_tree_view_column_set_resizable (playlist->priv->album_column, TRUE);
+        gtk_tree_view_column_set_sizing (playlist->priv->album_column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (playlist->priv->album_column, eel_gconf_get_integer (CONF_ALBUM_COLUMN_SIZE));
+        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->album_column);
 
         /* Duration column */
         renderer = gtk_cell_renderer_text_new ();
@@ -304,14 +319,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_tree_selection_set_mode (playlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
         gtk_container_add (GTK_CONTAINER (scrolledwindow), playlist->priv->tree);
-
-/*
-        gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (playlist->priv->tree),
-                                                GDK_BUTTON1_MASK,
-                                                internal_targets, G_N_ELEMENTS (internal_targets),
-                                                GDK_ACTION_MOVE);
-*/
-        gtk_drag_source_set (playlist->priv->tree,
+        gtk_drag_source_set (playlist->priv->tree,
                              GDK_BUTTON1_MASK,
                              internal_targets,
                              G_N_ELEMENTS (internal_targets),
@@ -358,19 +366,35 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_box_pack_start (GTK_BOX (playlist), scrolledwindow, TRUE, TRUE, 0);
 }
 
+void
+ario_playlist_store_column_sizes (ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+
+        eel_gconf_set_integer (CONF_TRACK_COLUMN_SIZE,
+                               gtk_tree_view_column_get_width (playlist->priv->track_column));
+
+        eel_gconf_set_integer (CONF_TITLE_COLUMN_SIZE,
+                               gtk_tree_view_column_get_width (playlist->priv->title_column));
+
+        eel_gconf_set_integer (CONF_ARTIST_COLUMN_SIZE,
+                               gtk_tree_view_column_get_width (playlist->priv->artist_column));
+
+        eel_gconf_set_integer (CONF_ALBUM_COLUMN_SIZE,
+                               gtk_tree_view_column_get_width (playlist->priv->album_column));
+}
+
 static void
 ario_playlist_finalize (GObject *object)
 {
         ARIO_LOG_FUNCTION_START
-        ArioPlaylist *playlist;
-
+        ArioPlaylist *playlist;
         g_return_if_fail (object != NULL);
         g_return_if_fail (IS_ARIO_PLAYLIST (object));
 
         playlist = ARIO_PLAYLIST (object);
 
         g_return_if_fail (playlist->priv != NULL);
-
         g_object_unref (G_OBJECT (playlist->priv->play_pixbuf));
         g_free (playlist->priv);
 

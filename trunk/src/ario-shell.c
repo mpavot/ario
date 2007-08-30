@@ -61,10 +61,6 @@ static void ario_shell_cmd_about (GtkAction *action,
 static void ario_shell_vpaned_size_allocate_cb (GtkWidget *widget,
                                                 GtkAllocation *allocation,
                                                 ArioShell *shell);
-static void ario_shell_paned_changed_cb (GConfClient *client,
-                                         guint cnxn_id,
-                                         GConfEntry *entry,
-                                         ArioShell *shell);
 static void ario_shell_source_changed_cb (GConfClient *client,
                                           guint cnxn_id,
                                           GConfEntry *entry,
@@ -245,6 +241,7 @@ ario_shell_finalize (GObject *object)
         ArioShell *shell = ARIO_SHELL (object);
 
         gtk_widget_hide (shell->priv->window);
+
         gtk_widget_destroy (shell->priv->window);
         
         g_free (shell->priv);
@@ -376,10 +373,6 @@ ario_shell_construct (ArioShell *shell)
                                                      shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
-        eel_gconf_notification_add (CONF_VPANED_POSITION,
-                                    (GConfClientNotifyFunc) ario_shell_paned_changed_cb,
-                                    shell);
-
         eel_gconf_notification_add (CONF_STATE_SOURCE,
                                     (GConfClientNotifyFunc) ario_shell_source_changed_cb,
                                     shell);
@@ -398,6 +391,12 @@ ario_shell_construct (ArioShell *shell)
                                  shell, 0);
 
         g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, shell->priv->mpd);
+}
+
+void
+ario_shell_shutdown (ArioShell *shell)
+{
+        ario_playlist_store_column_sizes (ARIO_PLAYLIST (shell->priv->playlist));
 }
 
 static void
@@ -478,16 +477,6 @@ ario_shell_sync_paned (ArioShell *shell)
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
-}
-
-static void
-ario_shell_paned_changed_cb (GConfClient *client,
-                             guint cnxn_id,
-                             GConfEntry *entry,
-                             ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_shell_sync_paned (shell);
 }
 
 static void
