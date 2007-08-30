@@ -1157,7 +1157,7 @@ ario_mpd_queue_add (ArioMpd *mpd,
 
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_ADD;
-        queue_action->path = g_strdup(path);
+        queue_action->path = path;
         
         mpd->priv->queue = g_list_append (mpd->priv->queue, queue_action);
 }
@@ -1239,7 +1239,7 @@ ario_mpd_queue_commit (ArioMpd *mpd)
         mpd_finishCommand(mpd->priv->connection);
         ario_mpd_update_status (mpd);
         
-        // g_list_foreach(artists, (GFunc) TODO, NULL);
+        g_list_foreach(mpd->priv->queue, (GFunc) g_free, NULL);
         g_list_free (mpd->priv->queue);
         mpd->priv->queue = NULL;
 }
