@@ -1,10 +1,8 @@
+AUTOMAKE_OPTIONS = foreign 1.6
+
 SUBDIRS = data\
           po\
 	  src
-	  
-
-
-ACLOCAL_AMFLAGS = -I m4
 
 EXTRA_DIST = 			\
 	intltool-extract.in 	\
