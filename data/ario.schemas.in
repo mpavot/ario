@@ -216,5 +216,55 @@
         </locale>
       </schema>
 
+
+      <schema>
+        <key>/schemas/apps/ario/track_column_size</key>
+        <applyto>/apps/ario/track_column_size</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>50</default>
+        <locale name="C">
+	<short>Define the size of the track column.</short>
+	<long>Define the size of the track column.</long>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/title_column_size</key>
+        <applyto>/apps/ario/title_column_size</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>200</default>
+        <locale name="C">
+	<short>Define the size of the title column.</short>
+	<long>Define the size of the title column.</long>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/artist_column_size</key>
+        <applyto>/apps/ario/artist_column_size</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>200</default>
+        <locale name="C">
+	<short>Define the size of the artist column.</short>
+	<long>Define the size of the artist column.</long>
+        </locale>
+      </schema>
+
+
+      <schema>
+        <key>/schemas/apps/ario/album_column_size</key>
+        <applyto>/apps/ario/album_column_size</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>200</default>
+        <locale name="C">
+	<short>Define the size of the album column.</short>
+	<long>Define the size of the album column.</long>
+        </locale>
+      </schema>
+
     </schemalist>
 </gconfschemafile>

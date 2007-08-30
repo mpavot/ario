@@ -112,9 +112,6 @@ ario_source_finalize (GObject *object)
         source = ARIO_SOURCE (object);
 
         g_return_if_fail (source->priv != NULL);
-        g_free (source->priv->browser);
-        g_free (source->priv->radio);
-        g_free (source->priv->search);
         g_free (source->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);

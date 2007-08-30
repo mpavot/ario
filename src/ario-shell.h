@@ -49,6 +49,8 @@ ArioShell *     ario_shell_new          (void);
 
 void            ario_shell_construct    (ArioShell *shell);
 
+void            ario_shell_shutdown     (ArioShell *shell);
+
 G_END_DECLS
 
 #endif /* __ARIO_SHELL_H */
