@@ -58,9 +58,6 @@ static void ario_shell_cmd_covers (GtkAction *action,
                                    ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
                                   ArioShell *shell);
-static void ario_shell_vpaned_size_allocate_cb (GtkWidget *widget,
-                                                GtkAllocation *allocation,
-                                                ArioShell *shell);
 static void ario_shell_source_changed_cb (GConfClient *client,
                                           guint cnxn_id,
                                           GConfEntry *entry,
@@ -204,7 +201,6 @@ ario_shell_set_property (GObject *object,
                          GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
-        /*ArioShell *shell = ARIO_SHELL (object);*/
 
         switch (prop_id)
         {
@@ -381,22 +377,28 @@ ario_shell_construct (ArioShell *shell)
                                  G_CALLBACK (ario_shell_window_state_cb),
                                  shell, 0);
 
-        g_signal_connect_object (G_OBJECT (win), "configure-event",
-                                 G_CALLBACK (ario_shell_window_state_cb),
-                                 shell, 0);
-
-        g_signal_connect_object (G_OBJECT (shell->priv->playlist),
-                                 "size_allocate",
-                                 G_CALLBACK (ario_shell_vpaned_size_allocate_cb),
-                                 shell, 0);
-
         g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, shell->priv->mpd);
 }
 
 void
 ario_shell_shutdown (ArioShell *shell)
 {
-        ario_playlist_store_column_sizes (ARIO_PLAYLIST (shell->priv->playlist));
+        ARIO_LOG_FUNCTION_START
+        int width, height;
+
+        eel_gconf_set_integer (CONF_VPANED_POSITION,
+                               gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
+
+        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                             &width,
+                             &height);
+
+        if (!eel_gconf_get_boolean (CONF_STATE_WINDOW_MAXIMIZED)) {
+                eel_gconf_set_integer (CONF_STATE_WINDOW_WIDTH, width);
+                eel_gconf_set_integer (CONF_STATE_WINDOW_HEIGHT, height);
+        }
+
+        ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
 }
 
 static void
@@ -513,39 +515,26 @@ ario_shell_source_changed_cb (GConfClient *client,
         ario_shell_sync_source (shell);
 }
 
-static void
-ario_shell_vpaned_size_allocate_cb (GtkWidget *widget,
-                                    GtkAllocation *allocation,
-                                    ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START
-        eel_gconf_set_integer (CONF_VPANED_POSITION,
-                               gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
-}
-
 static gboolean
 ario_shell_window_state_cb (GtkWidget *widget,
                             GdkEvent *event,
                             ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
+        int width, height;
         g_return_val_if_fail (widget != NULL, FALSE);
 
-        switch (event->type)
-        {
-        case GDK_WINDOW_STATE:
+        if (event->type == GDK_WINDOW_STATE) {
                 eel_gconf_set_boolean (CONF_STATE_WINDOW_MAXIMIZED,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
-                break;
-        case GDK_CONFIGURE:
-                if (!eel_gconf_get_boolean (CONF_STATE_WINDOW_MAXIMIZED)) {
-                        eel_gconf_set_integer (CONF_STATE_WINDOW_WIDTH, event->configure.width);
-                        eel_gconf_set_integer (CONF_STATE_WINDOW_HEIGHT, event->configure.height);
-                }
-                break;
-        default:
-                break;
+
+                gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                                     &width,
+                                     &height);
+
+                eel_gconf_set_integer (CONF_STATE_WINDOW_WIDTH, width);
+                eel_gconf_set_integer (CONF_STATE_WINDOW_HEIGHT, height);
         }
 
         return FALSE;

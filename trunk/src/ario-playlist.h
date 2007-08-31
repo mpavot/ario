@@ -60,7 +60,7 @@ void            ario_playlist_append_songs      (ArioPlaylist *playlist, GList *
 
 void            ario_playlist_append_radio      (ArioPlaylist *playlist, GList *songs);
 
-void            ario_playlist_store_column_sizes (ArioPlaylist *playlist);
+void            ario_playlist_shutdown          (ArioPlaylist *playlist);
 G_END_DECLS
 
 #endif /* __ARIO_PLAYLIST_H */
