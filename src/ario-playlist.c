@@ -367,7 +367,7 @@ ario_playlist_init (ArioPlaylist *playlist)
 }
 
 void
-ario_playlist_store_column_sizes (ArioPlaylist *playlist)
+ario_playlist_shutdown (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
 
