@@ -1,7 +1,9 @@
 <ui>
 	<menubar name="MenuBar">
 
-		<menu name="FileMenu" action="File">  
+		<menu name="FileMenu" action="File">
+			<menuitem name="FileSave" action="FileSave"/>
+        		<separator/>
 			<menuitem name="FileQuit" action="FileQuit"/>
 		</menu>
 

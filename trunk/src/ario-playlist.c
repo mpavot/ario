@@ -64,8 +64,6 @@ static void ario_playlist_cmd_clear (GtkAction *action,
                                      ArioPlaylist *playlist);
 static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
-static void ario_playlist_cmd_save (GtkAction *action,
-                                    ArioPlaylist *playlist);
 static gboolean ario_playlist_view_button_press_cb (GtkTreeView *treeview,
                                                     GdkEventButton *event,
                                                     ArioPlaylist *playlist);
@@ -1090,7 +1088,7 @@ ario_playlist_cmd_remove (GtkAction *action,
         ario_playlist_remove (playlist);
 }
 
-static void
+void
 ario_playlist_cmd_save (GtkAction *action,
                         ArioPlaylist *playlist)
 {
