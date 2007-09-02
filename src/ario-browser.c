@@ -714,7 +714,7 @@ ario_browser_artists_selection_update (ArioBrowser *browser)
 }
 
 static void
-ario_browser_artists_selection_changed_cb (GtkTreeSelection * selection,
+ario_browser_artists_selection_changed_cb (GtkTreeSelection *selection,
                                            ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
@@ -766,7 +766,7 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
                 temp = g_list_next (temp);
         }
 
-        g_list_foreach (songs, (GFunc) mpd_freeSong, NULL);
+        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
         g_list_free (songs);
 }
 

@@ -111,6 +111,7 @@ enum
         RANDOM_CHANGED,
         REPEAT_CHANGED,
         DBTIME_CHANGED,
+        STOREDPLAYLISTS_CHANGED,
         LAST_SIGNAL
 };
 
@@ -301,6 +302,16 @@ ario_mpd_class_init (ArioMpdClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
+
+        ario_mpd_signals[STOREDPLAYLISTS_CHANGED] =
+                g_signal_new ("storedplaylists_changed",
+                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (ArioMpdClass, storedplaylists_changed),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
 }
 
 static void
@@ -353,7 +364,7 @@ ario_mpd_set_property (GObject *object,
                 mpd->priv->song_id = g_value_get_int (value);
 
                 if (mpd->priv->ario_mpd_song != NULL) {
-                        mpd_freeSong (mpd->priv->ario_mpd_song);
+                        ario_mpd_free_song (mpd->priv->ario_mpd_song);
                         mpd->priv->ario_mpd_song = NULL;
                 }
 
@@ -670,6 +681,50 @@ ario_mpd_get_songs (ArioMpd *mpd,
         }
 
         return songs;
+}
+
+GList *
+ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
+                                  char *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        GList *songs = NULL;
+        mpd_InfoEntity *ent = NULL;
+
+        /* check if there is a connection */
+        if (!ario_mpd_is_connected (mpd))
+                return NULL;
+
+        mpd_sendListPlaylistInfoCommand(mpd->priv->connection, playlist);
+	while ((ent = mpd_getNextInfoEntity(mpd->priv->connection))) {
+                songs = g_list_append (songs, mpd_songDup (ent->info.song));
+		mpd_freeInfoEntity(ent);
+	}
+
+        return songs;
+}
+
+GList *
+ario_mpd_get_playlists (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        GList *playlists = NULL;
+        mpd_InfoEntity *ent = NULL;
+
+        /* check if there is a connection */
+        if (!ario_mpd_is_connected (mpd))
+                return NULL;
+
+        mpd_sendLsInfoCommand(mpd->priv->connection, "/");
+
+        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
+                if (ent->type == MPD_INFO_ENTITY_TYPE_PLAYLISTFILE) {
+                        playlists = g_list_append (playlists, g_strdup (ent->info.playlistFile->path));
+                }
+                mpd_freeInfoEntity (ent);
+        }
+
+        return playlists;
 }
 
 GList *
@@ -1250,7 +1305,6 @@ ario_mpd_search (ArioMpd *mpd,
                  GList *search_criterias)
 {
         ARIO_LOG_FUNCTION_START
-        mpd_Connection *connection;
         mpd_InfoEntity *ent = NULL;
         GList *tmp;
         ArioMpdSearchCriteria *search_criteria;
@@ -1259,22 +1313,46 @@ ario_mpd_search (ArioMpd *mpd,
         if (!ario_mpd_is_connected (mpd))
                 return NULL;
 
-        connection = ario_mpd_get_connection (mpd);
-
-        mpd_startSearch(connection, FALSE);
+        mpd_startSearch(mpd->priv->connection, FALSE);
 
         for (tmp = search_criterias; tmp; tmp = g_list_next (tmp)) {
                 search_criteria = tmp->data;
-                mpd_addConstraintSearch(connection,
+                mpd_addConstraintSearch(mpd->priv->connection,
                                         search_criteria->type,
                                         search_criteria->value);
         }
-        mpd_commitSearch(connection);
+        mpd_commitSearch(mpd->priv->connection);
 
-        while ((ent = mpd_getNextInfoEntity (connection)) != NULL) {
+        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
                 songs = g_list_append (songs, mpd_songDup (ent->info.song));
                 mpd_freeInfoEntity(ent);
         }
 
         return songs;
 }
+
+int
+ario_mpd_save_playlist (ArioMpd *mpd,
+                        const char *name)
+{
+	mpd_sendSaveCommand (mpd->priv->connection, name);
+	mpd_finishCommand (mpd->priv->connection);
+
+        if (mpd->priv->connection->error == MPD_ERROR_ACK && mpd->priv->connection->errorCode == MPD_ACK_ERROR_EXIST)
+                return 1;
+
+        g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
+
+        return 0;
+}
+
+void
+ario_mpd_delete_playlist (ArioMpd *mpd,
+                          const char *name)
+{
+	mpd_sendRmCommand (mpd->priv->connection, name);
+	mpd_finishCommand (mpd->priv->connection);
+
+        g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
+}
+

@@ -13,6 +13,7 @@
 			<menuitem name="LibraryViewMenu" action="LibraryView"/>
 			<menuitem name="RadioViewMenu" action="RadioView"/>
 			<menuitem name="SearchViewMenu" action="SearchView"/>
+			<menuitem name="StoredplaylistsMenu" action="StoredplaylistsView"/>
 		</menu>
 
 		<menu name="ToolMenu" action="Tool">
@@ -38,6 +39,8 @@
 	<popup name="PlaylistPopup">
 		<menuitem name="PlaylistClear" action="PlaylistClear"/>
 		<menuitem name="PlaylistRemove" action="PlaylistRemove"/>
+		<separator/>
+		<menuitem name="PlaylistSave" action="PlaylistSave"/>
 	</popup>
 
 	<popup name="BrowserArtistsPopup">
@@ -76,5 +79,14 @@
 
 	<popup name="SearchPopup">
 		<menuitem name="SearchAddSongs" action="SearchAddSongs"/>
+	</popup>
+
+	<popup name="StoredplaylistsPopup">
+		<menuitem name="StoredplaylistsAddPlaylists" action="StoredplaylistsAddPlaylists"/>
+		<menuitem name="StoredplaylistsDelete" action="StoredplaylistsDelete"/>
+	</popup>
+
+	<popup name="StoredplaylistsSongsPopup">
+		<menuitem name="StoredplaylistsAddSongs" action="StoredplaylistsAddSongs"/>
 	</popup>
 </ui>

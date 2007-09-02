@@ -54,6 +54,7 @@ G_BEGIN_DECLS
 #define CONF_TITLE_COLUMN_SIZE          "/apps/ario/title_column_size"
 #define CONF_ARTIST_COLUMN_SIZE         "/apps/ario/artist_column_size"
 #define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/album_column_size"
+#define CONF_PLAYLISTS_HPANED_SIZE      "/apps/ario/state/playlists_hpaned_position"
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

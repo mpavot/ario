@@ -51,7 +51,8 @@ typedef enum
 {
         ARIO_SOURCE_BROWSER,
         ARIO_SOURCE_RADIO,
-        ARIO_SOURCE_SEARCH
+        ARIO_SOURCE_SEARCH,
+        ARIO_SOURCE_PLAYLISTS
 }ArioSourceType;
 
 GType                   ario_source_get_type   (void);
@@ -60,6 +61,8 @@ GtkWidget*              ario_source_new        (GtkUIManager *mgr,
                                                 GtkActionGroup *group,
                                                 ArioMpd *mpd,
                                                 ArioPlaylist *playlist);
+
+void                    ario_source_shutdown   (ArioSource *source);
 
 G_END_DECLS
 

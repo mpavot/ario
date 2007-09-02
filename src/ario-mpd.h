@@ -56,6 +56,7 @@ typedef struct ArioMpdSearchCriteria
 } ArioMpdSearchCriteria;
 
 typedef mpd_Song ArioMpdSong;
+#define ario_mpd_free_song mpd_freeSong
 
 typedef struct
 {
@@ -76,6 +77,8 @@ typedef struct
         void (*repeat_changed)          (ArioMpd *mpd);
 
         void (*dbtime_changed)          (ArioMpd *mpd);
+
+        void (*storedplaylists_changed) (ArioMpd *mpd);
 } ArioMpdClass;
 
 GType                   ario_mpd_get_type                               (void);
@@ -101,6 +104,10 @@ GList *                 ario_mpd_get_albums                             (ArioMpd
 GList *                 ario_mpd_get_songs                              (ArioMpd *mpd,
                                                                          const char *artist,
                                                                          const char *album);
+GList *                 ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
+                                                                         char *playlist);
+GList *                 ario_mpd_get_playlists                          (ArioMpd *mpd);
+
 GList *                 ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
                                                                          int playlist_id);
 char *                  ario_mpd_get_current_title                      (ArioMpd *mpd);
@@ -182,7 +189,11 @@ void                    ario_mpd_queue_commit                           (ArioMpd
 
 GList*                  ario_mpd_search                                 (ArioMpd *mpd,
                                                                          GList *search_criterias);
-
+// returns 0 if OK, 1 if playlist already exists
+int                     ario_mpd_save_playlist                          (ArioMpd *mpd,
+                                                                         const char *name);
+void                    ario_mpd_delete_playlist                        (ArioMpd *mpd,
+                                                                         const char *name);
 G_END_DECLS
 
 #endif /* __ARIO_MPD_H */

@@ -64,6 +64,8 @@ static void ario_playlist_cmd_clear (GtkAction *action,
                                      ArioPlaylist *playlist);
 static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
+static void ario_playlist_cmd_save (GtkAction *action,
+                                    ArioPlaylist *playlist);
 static gboolean ario_playlist_view_button_press_cb (GtkTreeView *treeview,
                                                     GdkEventButton *event,
                                                     ArioPlaylist *playlist);
@@ -116,6 +118,9 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
           N_("Remove the selected songs"),
           G_CALLBACK (ario_playlist_cmd_remove) },
+        { "PlaylistSave", GTK_STOCK_SAVE, N_("_Save"), NULL,
+          N_("Save the playlist"),
+          G_CALLBACK (ario_playlist_cmd_save) }
 };
 
 static guint ario_playlist_n_actions = G_N_ELEMENTS (ario_playlist_actions);
@@ -573,7 +578,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                 temp = g_list_next (temp);
         }
 
-        g_list_foreach (songs, (GFunc) mpd_freeSong, NULL);
+        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
         g_list_free (songs);
 
         playlist->priv->playlist_length = ario_mpd_get_current_playlist_length (mpd);
@@ -775,7 +780,7 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
                         temp_songs = g_list_next (temp_songs);
                 }
 
-                g_list_foreach (songs, (GFunc) mpd_freeSong, NULL);
+                g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                 g_list_free (songs);
                 temp_albums = g_list_next (temp_albums);
         }
@@ -815,7 +820,7 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
                                 filenames = g_list_append (filenames, g_strdup (mpd_song->file));
                                 temp_songs = g_list_next (temp_songs);
                         }
-                        g_list_foreach (songs, (GFunc) mpd_freeSong, NULL);
+                        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                         g_list_free (songs);
                         temp_albums = g_list_next (temp_albums);
                 }
@@ -943,6 +948,25 @@ ario_playlist_append_songs (ArioPlaylist *playlist,
         ario_playlist_add_songs (playlist, songs, -1, -1);
 }
 
+
+void
+ario_playlist_append_mpd_songs (ArioPlaylist *playlist,
+                                GList *songs)
+{
+        ARIO_LOG_FUNCTION_START
+        GList *tmp;
+        GList *char_songs = NULL;
+        ArioMpdSong *song;
+
+        for (tmp = songs; tmp; tmp = g_list_next (tmp)) {
+                song = tmp->data;
+                char_songs = g_list_append (char_songs, song->file);
+        }
+
+        ario_playlist_add_songs (playlist, char_songs, -1, -1);
+        g_list_free (char_songs);
+}
+
 void
 ario_playlist_append_albums (ArioPlaylist *playlist,
                              GList *albums)
@@ -1064,6 +1088,63 @@ ario_playlist_cmd_remove (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_remove (playlist);
+}
+
+static void
+ario_playlist_cmd_save (GtkAction *action,
+                        ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *dialog;
+        GtkWidget *hbox;
+        GtkWidget *label, *entry;
+        gint retval = GTK_RESPONSE_CANCEL;
+        gchar *name;
+
+        /* Create the widgets */
+        dialog = gtk_dialog_new_with_buttons (_("Save playlist"),
+                                              NULL,
+                                              GTK_DIALOG_DESTROY_WITH_PARENT,
+                                              GTK_STOCK_CANCEL,
+                                              GTK_RESPONSE_CANCEL,
+                                              GTK_STOCK_OK,
+                                              GTK_RESPONSE_OK,
+                                              NULL);
+        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+                                         GTK_RESPONSE_OK);
+        label = gtk_label_new (_("Playlist name : "));        entry = gtk_entry_new ();
+        hbox = gtk_hbox_new (FALSE, 5);
+
+        gtk_box_pack_start_defaults (GTK_BOX (hbox), label);
+        gtk_box_pack_start_defaults (GTK_BOX (hbox), entry);
+        gtk_container_set_border_width (GTK_CONTAINER (hbox), 10);
+        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
+                           hbox);
+        gtk_widget_show_all (dialog);
+
+        retval = gtk_dialog_run (GTK_DIALOG(dialog));
+        if (retval != GTK_RESPONSE_OK) {
+                gtk_widget_destroy (dialog);
+                return;
+        }
+        name = g_strdup (gtk_entry_get_text (GTK_ENTRY(entry)));
+        gtk_widget_destroy (dialog);
+
+        if (ario_mpd_save_playlist (playlist->priv->mpd, name)) {
+                dialog = gtk_message_dialog_new (NULL,
+                                                GTK_DIALOG_MODAL,
+                                                GTK_MESSAGE_QUESTION,
+                                                GTK_BUTTONS_YES_NO,
+                                                _("Playlist already exists. Do you want to ovewrite it?"));
+
+                retval = gtk_dialog_run (GTK_DIALOG (dialog));
+                gtk_widget_destroy (dialog);
+                if (retval == GTK_RESPONSE_YES) {
+                        ario_mpd_delete_playlist(playlist->priv->mpd, name);
+                        ario_mpd_save_playlist (playlist->priv->mpd, name);
+                }
+        }
+        g_free (name);
 }
 
 static gboolean

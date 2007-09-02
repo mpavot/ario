@@ -132,6 +132,12 @@ static GtkRadioActionEntry ario_shell_radio [] =
           N_("Search view"),
           ARIO_SOURCE_SEARCH }
 #endif  /* ENABLE_SEARCH */
+#ifdef ENABLE_STOREDPLAYLISTS
+        ,
+        { "StoredplaylistsView", NULL, N_("_Playlists"), NULL,
+          N_("Playlists view"),
+          ARIO_SOURCE_PLAYLISTS }
+#endif  /* ENABLE_STOREDPLAYLISTS */
 };
 static guint ario_shell_n_radio = G_N_ELEMENTS (ario_shell_radio);
 
@@ -399,6 +405,7 @@ ario_shell_shutdown (ArioShell *shell)
         }
 
         ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
+        ario_source_shutdown (ARIO_SOURCE (shell->priv->source));
 }
 
 static void
@@ -498,6 +505,9 @@ ario_shell_sync_source (ArioShell *shell)
         } else if (source_type == ARIO_SOURCE_SEARCH) {
                 gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
                                                     ARIO_SOURCE_SEARCH);
+        } else if (source_type == ARIO_SOURCE_PLAYLISTS) {
+                gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
+                                                    ARIO_SOURCE_PLAYLISTS);
         } else {
                 gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
                                                     ARIO_SOURCE_BROWSER);

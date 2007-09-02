@@ -16,6 +16,8 @@ src/ario-radio.c
 src/ario-radio.h
 src/ario-search.c
 src/ario-search.h
+src/ario-storedplaylists.c
+src/ario-storedplaylists.h
 src/ario-source.c
 src/ario-source.h
 src/ario-cover.c

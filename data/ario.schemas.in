@@ -13,6 +13,18 @@
       </schema>
 
       <schema>
+        <key>/schemas/apps/ario/state/playlists_hpaned_position</key>
+        <applyto>/apps/ario/state/playlists_hpaned_position</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>250</default>
+        <locale name="C">
+	<short>Position of playlists pane</short>
+	<long>Position of playlists pane.</long>
+        </locale>
+      </schema>
+
+      <schema>
         <key>/schemas/apps/ario/host</key>
         <applyto>/apps/ario/host</applyto>
         <owner>ario</owner>
