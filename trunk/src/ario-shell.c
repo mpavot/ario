@@ -459,7 +459,6 @@ ario_shell_cmd_about (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         const char *authors[] = {
-                "",
 #include "AUTHORS"
                 "",
                 NULL
@@ -467,7 +466,7 @@ ario_shell_cmd_about (GtkAction *action,
 
         gtk_show_about_dialog (GTK_WINDOW (shell->priv->window),
                                "name", "Ario",
-                               "version", VERSION,
+                               "version", PACKAGE_VERSION,
                                "copyright", "Copyright \xc2\xa9 2005-2007 Marc Pavot",
                                "comments", "Music player and browser for MPD",
                                "authors", (const char **) authors,
