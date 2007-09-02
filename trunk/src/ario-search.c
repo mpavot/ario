@@ -873,9 +873,8 @@ ario_search_do_search (GtkButton *button,
                                     FILENAME_COLUMN, song->file,
                                     -1);
                 g_free (title);
-        }
-        /* TODO : typedef or define or function for mpd_freeSong indep from libmpdclient */
-        g_list_foreach (songs, (GFunc) mpd_freeSong, NULL);
+        }
+        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
         g_list_free (songs);
 }
 #endif  /* ENABLE_SEARCH */

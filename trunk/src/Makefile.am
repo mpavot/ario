@@ -20,6 +20,8 @@ ario_SOURCES = \
 	ario-source.h\
 	ario-search.c\
 	ario-search.h\
+	ario-storedplaylists.c\
+	ario-storedplaylists.h\
 	ario-mpd.c\
 	ario-mpd.h\
 	libmpdclient.c\

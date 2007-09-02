@@ -9,13 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-29 21:13+0200\n"
-"PO-Revision-Date: 2007-08-15 18:47+0200\n"
+"POT-Creation-Date: 2007-09-02 16:40+0200\n"
+"PO-Revision-Date: 2007-09-02 16:40+0200\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
@@ -72,86 +72,110 @@ msgid "Define the port of the proxy."
 msgstr "Definit le port du proxy"
 
 #: ../data/ario.schemas.in.h:14
+msgid "Define the size of the album column."
+msgstr "Definit la taille de la colonne albums"
+
+#: ../data/ario.schemas.in.h:15
+msgid "Define the size of the artist column."
+msgstr "Definit la taille de la colonne artistes"
+
+#: ../data/ario.schemas.in.h:16
+msgid "Define the size of the title column."
+msgstr "Definit la taille de la colonne titres"
+
+#: ../data/ario.schemas.in.h:17
+msgid "Define the size of the track column."
+msgstr "Definit la taille de la colonne pistes"
+
+#: ../data/ario.schemas.in.h:18
 msgid "Define the source used in Ario"
 msgstr "Definit la utilisée par Ario"
 
-#: ../data/ario.schemas.in.h:15
+#: ../data/ario.schemas.in.h:19
 msgid "Hide the covers in the albums treeview"
 msgstr "Cacher les pochettes dans la liste d'albums"
 
-#: ../data/ario.schemas.in.h:16
+#: ../data/ario.schemas.in.h:20
 msgid "Host to connect to"
 msgstr "Hôte"
 
-#: ../data/ario.schemas.in.h:17
+#: ../data/ario.schemas.in.h:21
 msgid "Host to connect to."
 msgstr "Hôte"
 
-#: ../data/ario.schemas.in.h:18
+#: ../data/ario.schemas.in.h:22
 msgid "If true, the main window is maximized."
 msgstr "Si vrai, la fenêtre principale est maximisée."
 
-#: ../data/ario.schemas.in.h:19
+#: ../data/ario.schemas.in.h:23
 msgid "Main window height"
 msgstr "Hauteur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:20
+#: ../data/ario.schemas.in.h:24
 msgid "Main window height."
 msgstr "Hauteur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:21
+#: ../data/ario.schemas.in.h:25
 msgid "Main window maximization state"
 msgstr "État de maximisation de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:22
+#: ../data/ario.schemas.in.h:26
 msgid "Main window width"
 msgstr "Largeur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:23
+#: ../data/ario.schemas.in.h:27
 msgid "Main window width."
 msgstr "Largeur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:24
+#: ../data/ario.schemas.in.h:28
 msgid "Port to connect to"
 msgstr "Port"
 
-#: ../data/ario.schemas.in.h:25
+#: ../data/ario.schemas.in.h:29
 msgid "Port to connect to."
 msgstr "Port"
 
-#: ../data/ario.schemas.in.h:26
+#: ../data/ario.schemas.in.h:30
 msgid "Position of main window pane"
 msgstr "Position du panneau de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:27
+#: ../data/ario.schemas.in.h:31
 msgid "Position of main window pane."
 msgstr "Position du panneau de la fenêtre principale."
 
-#: ../data/ario.schemas.in.h:28
+#: ../data/ario.schemas.in.h:32
+msgid "Position of playlists pane"
+msgstr "Position du panneau de la playlist"
+
+#: ../data/ario.schemas.in.h:33
+msgid "Position of playlists pane."
+msgstr "Position du panneau de la playlist."
+
+#: ../data/ario.schemas.in.h:34
 msgid "The amazon country to use to get the covers"
 msgstr "Le pays d'Amazon à utiliser pour récupérer les pochettes"
 
-#: ../data/ario.schemas.in.h:29
+#: ../data/ario.schemas.in.h:35
 msgid "The password to connect to mpd"
 msgstr "Le mot de passe pour se connecter à mpd"
 
-#: ../data/ario.schemas.in.h:30
+#: ../data/ario.schemas.in.h:36
 msgid "The password to connect to mpd."
 msgstr "Le mot de passe pour se connecter à mpd"
 
-#: ../data/ario.schemas.in.h:31
+#: ../data/ario.schemas.in.h:37
 msgid "The timeout for the connection to mpd"
 msgstr "Timeout pour la connexion à mpd (en secondes)"
 
-#: ../data/ario.schemas.in.h:32
+#: ../data/ario.schemas.in.h:38
 msgid "The timeout for the connection to mpd."
 msgstr "Timeout pour la connexion à mpd (en secondes)"
 
-#: ../data/ario.schemas.in.h:33
+#: ../data/ario.schemas.in.h:39
 msgid "When enabled, ario hide the covers in the albums treeview"
 msgstr "Si activé, Ario cache les pochettes dans la liste d'albums"
 
-#: ../data/ario.schemas.in.h:34
+#: ../data/ario.schemas.in.h:40
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -325,11 +349,13 @@ msgstr "Afficher les onglets"
 
 #: ../src/ario-browser.c:125 ../src/ario-browser.c:128
 #: ../src/ario-browser.c:131 ../src/ario-radio.c:108 ../src/ario-search.c:130
+#: ../src/ario-storedplaylists.c:108 ../src/ario-storedplaylists.c:111
 msgid "_Add to playlist"
 msgstr "_Ajouter à la playlist"
 
 #: ../src/ario-browser.c:126 ../src/ario-browser.c:129
 #: ../src/ario-browser.c:132 ../src/ario-radio.c:109 ../src/ario-search.c:131
+#: ../src/ario-storedplaylists.c:109 ../src/ario-storedplaylists.c:112
 msgid "Add to the playlist"
 msgstr "_Ajouter à la playlist"
 
@@ -350,13 +376,13 @@ msgid "Delete the selected covers"
 msgstr "Supprimer les pochettes sélectionnées"
 
 #: ../src/ario-browser.c:282 ../src/ario-search.c:43 ../src/ario-search.c:324
-#: ../src/ario-playlist.c:263
+#: ../src/ario-storedplaylists.c:311 ../src/ario-playlist.c:279
 msgid "Artist"
 msgstr "Artiste"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/ario-browser.c:336 ../src/ario-search.c:44 ../src/ario-search.c:337
-#: ../src/ario-playlist.c:272
+#: ../src/ario-storedplaylists.c:324 ../src/ario-playlist.c:290
 msgid "Album"
 msgstr "Album"
 
@@ -366,13 +392,13 @@ msgstr "Pochette"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/ario-browser.c:410 ../src/ario-search.c:46
-#: ../src/ario-playlist.c:245
+#: ../src/ario-playlist.c:257
 msgid "Track"
 msgstr "Piste"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/ario-browser.c:417 ../src/ario-search.c:45 ../src/ario-search.c:311
-#: ../src/ario-playlist.c:254
+#: ../src/ario-storedplaylists.c:298 ../src/ario-playlist.c:268
 msgid "Title"
 msgstr "Titre"
 
@@ -468,17 +494,37 @@ msgstr "Chercher une chanson dans la bibliothèque"
 msgid "Remove a search criteria"
 msgstr "Enlever un critère de recherche"
 
-#: ../src/ario-source.c:137
+#: ../src/ario-storedplaylists.c:114
+msgid "_Delete"
+msgstr "_Supprimer"
+
+#: ../src/ario-storedplaylists.c:115
+msgid "Delete this playlists"
+msgstr "Supprimer les playlists"
+
+#: ../src/ario-storedplaylists.c:241
+msgid "Playlist"
+msgstr "Playlist"
+
+#: ../src/ario-storedplaylists.c:717
+msgid "Are you sure that you want to delete all the selected playlists?"
+msgstr "Êtes-vous sur de vouloir supprimer toutes les playlists sélectionnées?"
+
+#: ../src/ario-source.c:141
 msgid "Library"
 msgstr "Bibliothèque"
 
-#: ../src/ario-source.c:145
+#: ../src/ario-source.c:149
 msgid "Web Radios"
 msgstr "Web Radios"
 
-#: ../src/ario-source.c:154
+#: ../src/ario-source.c:158
 msgid "Search"
 msgstr "Recherche"
+
+#: ../src/ario-source.c:167
+msgid "Playlists"
+msgstr "Playlists"
 
 #: ../src/ario-cover.c:422
 msgid "The cover already exists. Do you want to replace it?"
@@ -562,7 +608,7 @@ msgstr "Activer/désactiver le repeat"
 msgid "Change the music volume"
 msgstr "Change le volume de la musique"
 
-#: ../src/ario-mpd.c:494
+#: ../src/ario-mpd.c:505
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible de se connecter à MPD. Vérifiez vos options de connexion."
 
@@ -570,25 +616,46 @@ msgstr "Impossible de se connecter à MPD. Vérifiez vos options de connexion."
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../src/ario-playlist.c:106
+#: ../src/ario-playlist.c:115
 msgid "_Clear"
 msgstr "_Effacer"
 
-#: ../src/ario-playlist.c:107
+#: ../src/ario-playlist.c:116
 msgid "Clear the playlist"
 msgstr "Effacer la playlist"
 
-#: ../src/ario-playlist.c:109
+#: ../src/ario-playlist.c:118
 msgid "_Remove"
 msgstr "_Retirer"
 
-#: ../src/ario-playlist.c:110
+#: ../src/ario-playlist.c:119
 msgid "Remove the selected songs"
 msgstr "Enlever la chanson sélectionnée"
 
-#: ../src/ario-playlist.c:281
+#: ../src/ario-playlist.c:121
+msgid "_Save"
+msgstr "_Sauver"
+
+#: ../src/ario-playlist.c:122
+msgid "Save the playlist"
+msgstr "Sauve la playlist"
+
+#: ../src/ario-playlist.c:301
 msgid "Duration"
 msgstr "Durée"
+
+#. Create the widgets
+#: ../src/ario-playlist.c:1107
+msgid "Save playlist"
+msgstr "Sauver la playlist"
+
+#: ../src/ario-playlist.c:1117
+msgid "Playlist name : "
+msgstr "Nom de la playlist : "
+
+#: ../src/ario-playlist.c:1142
+msgid "Playlist already exists. Do you want to ovewrite it?"
+msgstr "La playlist existe déjà. Voulez-vous la remplacer?"
 
 #: ../src/ario-preferences.c:101
 msgid "Play/Pause"
@@ -655,81 +722,89 @@ msgstr "Erreur lors de la lecture du fichier"
 msgid "Error saving file"
 msgstr "Erreur lors de l'écriture du fichier"
 
-#: ../src/ario-shell.c:104
+#: ../src/ario-shell.c:97
 msgid "_File"
 msgstr "_Fichier"
 
-#: ../src/ario-shell.c:105
+#: ../src/ario-shell.c:98
 msgid "_Edit"
 msgstr "É_dition"
 
-#: ../src/ario-shell.c:106
+#: ../src/ario-shell.c:99
 msgid "_View"
 msgstr "_Affichage"
 
-#: ../src/ario-shell.c:107
+#: ../src/ario-shell.c:100
 msgid "_Tool"
 msgstr "_Outils"
 
-#: ../src/ario-shell.c:108
+#: ../src/ario-shell.c:101
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../src/ario-shell.c:110
+#: ../src/ario-shell.c:103
 msgid "_Quit"
 msgstr "_Quitter"
 
-#: ../src/ario-shell.c:111
+#: ../src/ario-shell.c:104
 msgid "Quit"
 msgstr "_Quitter"
 
-#: ../src/ario-shell.c:113
+#: ../src/ario-shell.c:106
 msgid "Prefere_nces"
 msgstr "Préfére_nces"
 
-#: ../src/ario-shell.c:114
+#: ../src/ario-shell.c:107
 msgid "Edit music player preferences"
 msgstr "Modifier les préférences"
 
-#: ../src/ario-shell.c:116
+#: ../src/ario-shell.c:109
 msgid "Download album _covers"
 msgstr "Télécharger les pochettes"
 
-#: ../src/ario-shell.c:117
+#: ../src/ario-shell.c:110
 msgid "Download covers form amazon"
 msgstr "Télécharger des pochettes depuis amazon"
 
-#: ../src/ario-shell.c:119
+#: ../src/ario-shell.c:112
 msgid "_About"
 msgstr "_À propos"
 
-#: ../src/ario-shell.c:120
+#: ../src/ario-shell.c:113
 msgid "Show information about the music player"
 msgstr "Affichier des informations sur le lecteur de musique"
 
-#: ../src/ario-shell.c:127
+#: ../src/ario-shell.c:120
 msgid "_Library"
 msgstr "_Bibliothèque"
 
-#: ../src/ario-shell.c:128
+#: ../src/ario-shell.c:121
 msgid "Library view"
 msgstr "Affichage de la bibliothèque"
 
-#: ../src/ario-shell.c:132
+#: ../src/ario-shell.c:125
 msgid "_Web Radios"
 msgstr "_Web Radios"
 
-#: ../src/ario-shell.c:133
+#: ../src/ario-shell.c:126
 msgid "Web Radios view"
 msgstr "Affichage des Web Radios"
 
-#: ../src/ario-shell.c:138
+#: ../src/ario-shell.c:131
 msgid "_Search"
 msgstr "_Recherche"
 
-#: ../src/ario-shell.c:139
+#: ../src/ario-shell.c:132
 msgid "Search view"
 msgstr "Chercher dans la bibliothèque"
+
+#: ../src/ario-shell.c:137
+msgid "_Playlists"
+msgstr "_Playlists"
+
+#: ../src/ario-shell.c:138
+msgid "Playlists view"
+msgstr "Affichage des Playlists"
 
 #: ../src/ario-status-bar.c:204
 #, c-format
@@ -784,3 +859,6 @@ msgstr "+"
 #: ../src/ario-volume.c:239
 msgid "-"
 msgstr "-"
+
+#~ msgid "_Delete this playlists"
+#~ msgstr "_Supprimer les playlists"

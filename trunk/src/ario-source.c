@@ -26,6 +26,7 @@
 #include "ario-browser.h"
 #include "ario-radio.h"
 #include "ario-search.h"
+#include "ario-storedplaylists.h"
 #include "ario-preferences.h"
 #include "ario-debug.h"
 
@@ -50,6 +51,7 @@ struct ArioSourcePrivate
         GtkWidget *browser;
         GtkWidget *radio;
         GtkWidget *search;
+        GtkWidget *storedplaylists;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -155,6 +157,15 @@ ario_source_new (GtkUIManager *mgr,
                                   source->priv->search,
                                   gtk_label_new (_("Search")));
 #endif  /* ENABLE_SEARCH */
+#ifdef ENABLE_STOREDPLAYLISTS
+        source->priv->storedplaylists = ario_storedplaylists_new (mgr,
+                                                group,
+                                                mpd,
+                                                playlist);
+        gtk_notebook_append_page (GTK_NOTEBOOK (source),
+                                  source->priv->storedplaylists,
+                                  gtk_label_new (_("Playlists")));
+#endif  /* ENABLE_STOREDPLAYLISTS */
         gtk_widget_show_all (GTK_WIDGET (source));
         ario_source_sync_source (source);
 
@@ -177,6 +188,14 @@ ario_source_new (GtkUIManager *mgr,
         return GTK_WIDGET (source);
 }
 
+void
+ario_source_shutdown (ArioSource *source)
+{
+#ifdef ENABLE_STOREDPLAYLISTS
+        ario_storedplaylists_shutdown (ARIO_STOREDPLAYLISTS (source->priv->storedplaylists));
+#endif  /* ENABLE_STOREDPLAYLISTS */
+}
+
 static void
 ario_source_sync_source (ArioSource *source)
 {
@@ -190,6 +209,8 @@ ario_source_sync_source (ArioSource *source)
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_RADIO);
         } else if (source_type == ARIO_SOURCE_SEARCH) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_SEARCH);
+        } else if (source_type == ARIO_SOURCE_PLAYLISTS) {
+                gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_PLAYLISTS);
         } else {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_BROWSER);
         }
