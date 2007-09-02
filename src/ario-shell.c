@@ -47,6 +47,8 @@ static void ario_shell_get_property (GObject *object,
                                      GParamSpec *pspec);
 static void ario_shell_cmd_quit (GtkAction *action,
                                  ArioShell *shell);
+static void ario_shell_cmd_save (GtkAction *action,
+                                 ArioShell *shell);
 static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 #ifdef MULTIPLE_VIEW
@@ -103,6 +105,9 @@ static GtkActionEntry ario_shell_actions [] =
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
           N_("Quit"),
           G_CALLBACK (ario_shell_cmd_quit) },
+        { "FileSave", GTK_STOCK_SAVE, N_("_Save Playlist"), "<control>S",
+          N_("Save Playlist"),
+          G_CALLBACK (ario_shell_cmd_save) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
           N_("Edit music player preferences"),
           G_CALLBACK (ario_shell_cmd_preferences) },
@@ -414,6 +419,14 @@ ario_shell_cmd_quit (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         gtk_main_quit ();
+}
+
+static void
+ario_shell_cmd_save (GtkAction *action,
+                     ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_playlist_cmd_save (action, ARIO_PLAYLIST (shell->priv->playlist));
 }
 
 static void
