@@ -377,6 +377,7 @@ ario_mpd_set_property (GObject *object,
                                 mpd_finishCommand (mpd->priv->connection);
                                 mpd_freeInfoEntity (ent);
                         }
+                        mpd_finishCommand (mpd->priv->connection);
                         mpd->priv->total_time = mpd->priv->status->totalTime;
                 }
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[SONG_CHANGED], 0);
@@ -600,6 +601,8 @@ ario_mpd_get_artists (ArioMpd *mpd)
         while ((artist_char = mpd_getNextArtist (mpd->priv->connection)) != NULL)
                 artists = g_list_append (artists, artist_char);
 
+        mpd_finishCommand (mpd->priv->connection);
+
         return artists;
 }
 
@@ -611,6 +614,7 @@ ario_mpd_get_albums (ArioMpd *mpd,
         GList *albums = NULL;
         mpd_InfoEntity *entity = NULL;
         gchar *prev_album = "";
+        ArioMpdAlbum *ario_mpd_album;
 
         /* check if there is a connection */
         if (!ario_mpd_is_connected (mpd))
@@ -630,7 +634,7 @@ ario_mpd_get_albums (ArioMpd *mpd,
                         }
                 }
 
-                ArioMpdAlbum *ario_mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
+                ario_mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
                 if (entity->info.song->album)
                         ario_mpd_album->album = g_strdup (entity->info.song->album);
                 else
@@ -646,6 +650,7 @@ ario_mpd_get_albums (ArioMpd *mpd,
                 
                 mpd_freeInfoEntity (entity);
         }
+        mpd_finishCommand (mpd->priv->connection);
 
         return albums;
 }
@@ -679,6 +684,7 @@ ario_mpd_get_songs (ArioMpd *mpd,
                 }
                 mpd_freeInfoEntity (entity);
         }
+        mpd_finishCommand (mpd->priv->connection);
 
         return songs;
 }
@@ -700,6 +706,7 @@ ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
                 songs = g_list_append (songs, mpd_songDup (ent->info.song));
 		mpd_freeInfoEntity(ent);
 	}
+        mpd_finishCommand (mpd->priv->connection);
 
         return songs;
 }
@@ -723,6 +730,7 @@ ario_mpd_get_playlists (ArioMpd *mpd)
                 }
                 mpd_freeInfoEntity (ent);
         }
+        mpd_finishCommand (mpd->priv->connection);
 
         return playlists;
 }
@@ -746,6 +754,7 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
                         songs = g_list_append (songs, mpd_songDup (entity->info.song));
                 mpd_freeInfoEntity (entity);
         }
+        mpd_finishCommand (mpd->priv->connection);
 
         return songs;
 }
@@ -967,6 +976,7 @@ ario_mpd_get_current_playlist_total_time (ArioMpd *mpd)
                         total_time = total_time + song->time;
                 mpd_freeInfoEntity(ent);
         }
+        mpd_finishCommand (mpd->priv->connection);
 
         return total_time;
 }
@@ -1327,6 +1337,7 @@ ario_mpd_search (ArioMpd *mpd,
                 songs = g_list_append (songs, mpd_songDup (ent->info.song));
                 mpd_freeInfoEntity(ent);
         }
+        mpd_finishCommand (mpd->priv->connection);
 
         return songs;
 }
