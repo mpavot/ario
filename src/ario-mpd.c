@@ -398,7 +398,10 @@ ario_mpd_set_property (GObject *object,
                 break;
         case PROP_STATE:
                 mpd->priv->state = g_value_get_int (value);
-                mpd->priv->total_time = mpd->priv->status->totalTime;
+                if (mpd->priv->status)
+                        mpd->priv->total_time = mpd->priv->status->totalTime;
+                else
+                        mpd->priv->total_time = 0;
                 mpd->priv->signals_to_emit |= STATE_CHANGED_FLAG;
                 break;
         case PROP_VOLUME:
@@ -821,17 +824,20 @@ ario_mpd_update_status (ArioMpd *mpd)
         mpd->priv->is_updating = TRUE;
         mpd->priv->signals_to_emit = 0;
 
-        if (mpd->priv->status != NULL)
-                mpd_freeStatus (mpd->priv->status);
-        mpd_sendStatusCommand (mpd->priv->connection);
-        mpd->priv->status = mpd_getStatus (mpd->priv->connection);
+        if (ario_mpd_is_connected (mpd)) {
+                if (mpd->priv->status != NULL)
+                        mpd_freeStatus (mpd->priv->status);
+                mpd_sendStatusCommand (mpd->priv->connection);
+                mpd->priv->status = mpd_getStatus (mpd->priv->connection);
 
-        if (mpd->priv->stats != NULL)
-                mpd_freeStats (mpd->priv->stats);
-        mpd_sendStatsCommand (mpd->priv->connection);
-        mpd->priv->stats = mpd_getStats (mpd->priv->connection);
+                if (mpd->priv->stats != NULL)
+                        mpd_freeStats (mpd->priv->stats);
+                mpd_sendStatsCommand (mpd->priv->connection);
+                mpd->priv->stats = mpd_getStats (mpd->priv->connection);
 
-        ario_mpd_check_errors(mpd);
+                ario_mpd_check_errors(mpd);
+        }
+
         /* check if there is a connection */
         if (!ario_mpd_is_connected (mpd)) {
                 ario_mpd_set_default (mpd);
@@ -1219,6 +1225,7 @@ ario_mpd_clear (ArioMpd *mpd)
 
         mpd_sendClearCommand (mpd->priv->connection);
         mpd_finishCommand (mpd->priv->connection);
+        ario_mpd_update_status (mpd);
 }
 
 void
