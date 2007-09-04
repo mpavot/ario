@@ -738,17 +738,14 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
                 }
         }
 
-        temp_songs = songs;        
         /* For each filename :*/
-        while (temp_songs) {
+        for (temp_songs = songs; temp_songs; temp_songs = g_list_next (temp_songs)) {
                 /* Add it in the playlist*/
                 ario_mpd_queue_add (playlist->priv->mpd, temp_songs->data);
                 offset ++;
                 /* move it in the right place */
                 if (!do_not_move)
                         ario_mpd_queue_move (playlist->priv->mpd, end + offset, drop + offset);
-
-                temp_songs = g_list_next (temp_songs);
         }
 
         ario_mpd_queue_commit (playlist->priv->mpd);
@@ -828,8 +825,8 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
         }
 
         ario_playlist_add_songs (playlist,
-                            filenames,
-                            x, y);
+                                 filenames,
+                                 x, y);
 
         g_list_foreach (filenames, (GFunc) g_free, NULL);
         g_list_free (filenames);
@@ -1047,7 +1044,6 @@ ario_playlist_cmd_clear (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_clear (playlist->priv->mpd);
-        ario_mpd_update_status (playlist->priv->mpd);
 }
 
 static void
