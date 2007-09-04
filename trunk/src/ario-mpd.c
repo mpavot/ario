@@ -86,6 +86,8 @@ struct ArioMpdPrivate
         unsigned long dbtime;
         
         GList *queue;
+
+        int signals_to_emit;
 };
 
 enum
@@ -114,8 +116,20 @@ enum
         STOREDPLAYLISTS_CHANGED,
         LAST_SIGNAL
 };
-
 static guint ario_mpd_signals[LAST_SIGNAL] = { 0 };
+
+enum
+{
+        SONG_CHANGED_FLAG = 2 << SONG_CHANGED,
+        STATE_CHANGED_FLAG = 2 << STATE_CHANGED,
+        VOLUME_CHANGED_FLAG = 2 << VOLUME_CHANGED,
+        ELAPSED_CHANGED_FLAG = 2 << ELAPSED_CHANGED,
+        PLAYLIST_CHANGED_FLAG = 2 << PLAYLIST_CHANGED,
+        RANDOM_CHANGED_FLAG = 2 << RANDOM_CHANGED,
+        REPEAT_CHANGED_FLAG = 2 << REPEAT_CHANGED,
+        DBTIME_CHANGED_FLAG = 2 << DBTIME_CHANGED,
+        STOREDPLAYLISTS_CHANGED_FLAG = 2 << STOREDPLAYLISTS_CHANGED
+};
 
 static GObjectClass *parent_class = NULL;
 
@@ -374,25 +388,25 @@ ario_mpd_set_property (GObject *object,
                         ent = mpd_getNextInfoEntity (mpd->priv->connection);
                         if (ent != NULL) {
                                 mpd->priv->ario_mpd_song = mpd_songDup (ent->info.song);
-                                mpd_finishCommand (mpd->priv->connection);
                                 mpd_freeInfoEntity (ent);
                         }
                         mpd_finishCommand (mpd->priv->connection);
                         mpd->priv->total_time = mpd->priv->status->totalTime;
                 }
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[SONG_CHANGED], 0);
+                mpd->priv->signals_to_emit |= SONG_CHANGED_FLAG;
                 break;
         case PROP_STATE:
                 mpd->priv->state = g_value_get_int (value);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
+                mpd->priv->total_time = mpd->priv->status->totalTime;
+                mpd->priv->signals_to_emit |= STATE_CHANGED_FLAG;
                 break;
         case PROP_VOLUME:
                 mpd->priv->volume = g_value_get_int (value);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[VOLUME_CHANGED], 0);
+                mpd->priv->signals_to_emit |= VOLUME_CHANGED_FLAG;
                 break;
         case PROP_ELAPSED:
                 mpd->priv->elapsed = g_value_get_int (value);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[ELAPSED_CHANGED], 0);
+                mpd->priv->signals_to_emit |= ELAPSED_CHANGED_FLAG;
                 break;
         case PROP_PLAYLISTID:
                 mpd->priv->playlist_id = g_value_get_int (value);
@@ -400,21 +414,21 @@ ario_mpd_set_property (GObject *object,
                         mpd->priv->playlist_length = mpd->priv->status->playlistLength;
                 else
                         mpd->priv->playlist_length = 0;
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[PLAYLIST_CHANGED], 0);
+                mpd->priv->signals_to_emit |= PLAYLIST_CHANGED_FLAG;
                 break;
         case PROP_RANDOM:
                 mpd->priv->random = g_value_get_boolean (value);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[RANDOM_CHANGED], 0);
+                mpd->priv->signals_to_emit |= RANDOM_CHANGED_FLAG;
                 break;
         case PROP_REPEAT:
                 mpd->priv->repeat = g_value_get_boolean (value);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[REPEAT_CHANGED], 0);
+                mpd->priv->signals_to_emit |= REPEAT_CHANGED_FLAG;
                 break;
         case PROP_DBTIME:
                 need_emit = (mpd->priv->dbtime != 0);
                 mpd->priv->dbtime = g_value_get_ulong (value);
                 if (need_emit)
-                        g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[DBTIME_CHANGED], 0);
+                        mpd->priv->signals_to_emit |= DBTIME_CHANGED_FLAG;
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -800,57 +814,67 @@ ario_mpd_update_status (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
         // ARIO_LOG_FUNCTION_START
-        /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd)) {
-                ario_mpd_set_default (mpd);
-                return TRUE;
-        }
+        
+        mpd->priv->signals_to_emit = 0;
 
         if (mpd->priv->status != NULL)
                 mpd_freeStatus (mpd->priv->status);
         mpd_sendStatusCommand (mpd->priv->connection);
         mpd->priv->status = mpd_getStatus (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
 
         if (mpd->priv->stats != NULL)
                 mpd_freeStats (mpd->priv->stats);
         mpd_sendStatsCommand (mpd->priv->connection);
         mpd->priv->stats = mpd_getStats (mpd->priv->connection);
 
-        mpd_finishCommand (mpd->priv->connection);
-
         ario_mpd_check_errors(mpd);
         /* check if there is a connection */
         if (!ario_mpd_is_connected (mpd)) {
                 ario_mpd_set_default (mpd);
-                return TRUE;
+        } else {
+                if (mpd->priv->song_id != mpd->priv->status->songid)
+                        g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
+
+                if (mpd->priv->state != mpd->priv->status->state)
+                        g_object_set (G_OBJECT (mpd), "state", mpd->priv->status->state, NULL);
+
+                if (mpd->priv->volume != mpd->priv->status->volume)
+                        g_object_set (G_OBJECT (mpd), "volume", mpd->priv->status->volume, NULL);
+
+                if (mpd->priv->elapsed != mpd->priv->status->elapsedTime)
+                        g_object_set (G_OBJECT (mpd), "elapsed", mpd->priv->status->elapsedTime, NULL);
+
+                if (mpd->priv->playlist_id != (int) mpd->priv->status->playlist) {
+                        g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
+                        g_object_set (G_OBJECT (mpd), "playlist_id", mpd->priv->status->playlist, NULL);
+                }
+
+                if (mpd->priv->random != (gboolean) mpd->priv->status->random)
+                        g_object_set (G_OBJECT (mpd), "random", mpd->priv->status->random, NULL);
+
+                if (mpd->priv->repeat != (gboolean) mpd->priv->status->repeat)
+                        g_object_set (G_OBJECT (mpd), "repeat", mpd->priv->status->repeat, NULL);
+
+                if (mpd->priv->dbtime != (unsigned long) mpd->priv->stats->dbUpdateTime)
+                        g_object_set (G_OBJECT (mpd), "dbtime", mpd->priv->stats->dbUpdateTime, NULL);
         }
 
-        if (mpd->priv->song_id != mpd->priv->status->songid)
-                g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
-
-        if (mpd->priv->state != mpd->priv->status->state)
-                g_object_set (G_OBJECT (mpd), "state", mpd->priv->status->state, NULL);
-
-        if (mpd->priv->volume != mpd->priv->status->volume)
-                g_object_set (G_OBJECT (mpd), "volume", mpd->priv->status->volume, NULL);
-
-        if (mpd->priv->elapsed != mpd->priv->status->elapsedTime)
-                g_object_set (G_OBJECT (mpd), "elapsed", mpd->priv->status->elapsedTime, NULL);
-
-        if (mpd->priv->playlist_id != (int) mpd->priv->status->playlist) {
-                g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
-                g_object_set (G_OBJECT (mpd), "playlist_id", mpd->priv->status->playlist, NULL);
-        }
-
-        if (mpd->priv->random != (gboolean) mpd->priv->status->random)
-                g_object_set (G_OBJECT (mpd), "random", mpd->priv->status->random, NULL);
-
-        if (mpd->priv->repeat != (gboolean) mpd->priv->status->repeat)
-                g_object_set (G_OBJECT (mpd), "repeat", mpd->priv->status->repeat, NULL);
-
-        if (mpd->priv->dbtime != (unsigned long) mpd->priv->stats->dbUpdateTime)
-                g_object_set (G_OBJECT (mpd), "dbtime", mpd->priv->stats->dbUpdateTime, NULL);
+        if (mpd->priv->signals_to_emit & SONG_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[SONG_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & STATE_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & VOLUME_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[VOLUME_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & ELAPSED_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[ELAPSED_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & PLAYLIST_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[PLAYLIST_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & RANDOM_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[RANDOM_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & REPEAT_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[REPEAT_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & DBTIME_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[DBTIME_CHANGED], 0);
 
         return TRUE;
 }
@@ -960,17 +984,16 @@ ario_mpd_get_current_playlist_total_time (ArioMpd *mpd)
         ARIO_LOG_FUNCTION_START
         int total_time = 0;
         ArioMpdSong *song;
-        mpd_Connection *connection;
         mpd_InfoEntity *ent = NULL;
 
         if (!ario_mpd_is_connected (mpd))
                 return 0;
 
-        connection = ario_mpd_get_connection (mpd);
-
-        mpd_sendPlaylistInfoCommand(connection, -1);
-
-        while ((ent = mpd_getNextInfoEntity (connection)) != NULL) {
+        // We go to MPD server for each call to this function but it is not a problem as it is
+        // called only once for each playlist change (by status bar). I may change this implementation
+        // if this function is called more than once for performance reasons.
+        mpd_sendPlaylistInfoCommand(mpd->priv->connection, -1);
+        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
                 song = ent->info.song;
                 if (song->time != MPD_SONG_NO_TIME)
                         total_time = total_time + song->time;
