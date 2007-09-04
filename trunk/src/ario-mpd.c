@@ -86,6 +86,7 @@ struct ArioMpdPrivate
         unsigned long dbtime;
         
         GList *queue;
+        gboolean is_updating; 
 
         int signals_to_emit;
 };
@@ -337,6 +338,7 @@ ario_mpd_init (ArioMpd *mpd)
         mpd->priv->song_id = -1;
         mpd->priv->playlist_id = -1;
         mpd->priv->volume = 0;
+        mpd->priv->is_updating = FALSE;
 
         if (eel_gconf_get_boolean (CONF_AUTOCONNECT))
                 ario_mpd_connect (mpd);
@@ -376,7 +378,6 @@ ario_mpd_set_property (GObject *object,
         switch (prop_id) {
         case PROP_SONGID:
                 mpd->priv->song_id = g_value_get_int (value);
-
                 if (mpd->priv->ario_mpd_song != NULL) {
                         ario_mpd_free_song (mpd->priv->ario_mpd_song);
                         mpd->priv->ario_mpd_song = NULL;
@@ -814,7 +815,10 @@ ario_mpd_update_status (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
         // ARIO_LOG_FUNCTION_START
-        
+
+        if (mpd->priv->is_updating)
+                return TRUE;
+        mpd->priv->is_updating = TRUE;
         mpd->priv->signals_to_emit = 0;
 
         if (mpd->priv->status != NULL)
@@ -876,6 +880,7 @@ ario_mpd_update_status (ArioMpd *mpd)
         if (mpd->priv->signals_to_emit & DBTIME_CHANGED_FLAG)
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[DBTIME_CHANGED], 0);
 
+        mpd->priv->is_updating = FALSE;
         return TRUE;
 }
 
