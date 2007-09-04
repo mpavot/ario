@@ -648,6 +648,9 @@ ario_preferences_crossfadetime_changed_cb (GtkWidget *widget,
         if (!preferences->priv->sync_mpd && !preferences->priv->loading) {
                 ario_mpd_set_crossfadetime (preferences->priv->mpd,
                                        gtk_spin_button_get_value (GTK_SPIN_BUTTON (preferences->priv->crossfadetime_spinbutton)));
+
+                ario_mpd_update_status (preferences->priv->mpd);
+                ario_preferences_update_mpd (preferences);
         }
 }
 
@@ -663,6 +666,9 @@ ario_preferences_crossfade_changed_cb (GtkWidget *widget,
                 else
                         ario_mpd_set_crossfadetime (preferences->priv->mpd,
                                                0);
+
+                ario_mpd_update_status (preferences->priv->mpd);
+                ario_preferences_update_mpd (preferences);
         }
 }
 
