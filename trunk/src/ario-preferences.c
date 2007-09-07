@@ -50,6 +50,8 @@ static void ario_preferences_sync_connection (ArioPreferences *preferences);
 static void ario_preferences_sync_server (ArioPreferences *preferences);
 static void ario_preferences_sync_cover (ArioPreferences *preferences);
 static void ario_preferences_sync_interface (ArioPreferences *preferences);
+static void ario_preferences_server_changed_cb(ArioMpd *mpd,
+                                               ArioPreferences *preferences);
 static gboolean ario_preferences_window_delete_cb (GtkWidget *window,
                                                    GdkEventAny *event,
                                                    ArioPreferences *preferences);
@@ -290,6 +292,12 @@ ario_preferences_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 preferences->priv->mpd = g_value_get_object (value);
+                g_signal_connect_object (G_OBJECT (preferences->priv->mpd),
+                                         "state_changed", G_CALLBACK (ario_preferences_server_changed_cb),
+                                         preferences, 0);
+                g_signal_connect_object (G_OBJECT (preferences->priv->mpd),
+                                         "dbtime_changed", G_CALLBACK (ario_preferences_server_changed_cb),
+                                         preferences, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -560,8 +568,9 @@ ario_preferences_sync_server (ArioPreferences *preferences)
         }
 
         preferences->priv->sync_mpd = TRUE;
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (preferences->priv->crossfade_checkbutton), (crossfadetime != 0));
-        gtk_widget_set_sensitive (preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (preferences->priv->crossfade_checkbutton), (crossfadetime != 0) && (state != MPD_STATUS_STATE_UNKNOWN));
+        gtk_widget_set_sensitive (preferences->priv->crossfade_checkbutton, state != MPD_STATUS_STATE_UNKNOWN);
+        gtk_widget_set_sensitive (preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0) && (state != MPD_STATUS_STATE_UNKNOWN));
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (preferences->priv->crossfadetime_spinbutton), (gdouble) crossfadetime);
 
         gtk_widget_set_sensitive (preferences->priv->updatedb_button, (!updating && state != MPD_STATUS_STATE_UNKNOWN));
@@ -620,6 +629,14 @@ ario_preferences_sync_interface (ArioPreferences *preferences)
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (preferences->priv->trayicon_combobox),
                                   eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR));
+}
+
+static void
+ario_preferences_server_changed_cb(ArioMpd *mpd,
+                                   ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_preferences_sync_server (preferences);
 }static gboolean
 ario_preferences_window_delete_cb (GtkWidget *window,
                                    GdkEventAny *event,
