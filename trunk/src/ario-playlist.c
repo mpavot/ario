@@ -391,7 +391,7 @@ static void
 ario_playlist_finalize (GObject *object)
 {
         ARIO_LOG_FUNCTION_START
-        ArioPlaylist *playlist;
+        ArioPlaylist *playlist;
         g_return_if_fail (object != NULL);
         g_return_if_fail (IS_ARIO_PLAYLIST (object));
 
@@ -1120,7 +1120,7 @@ ario_playlist_cmd_save (GtkAction *action,
         if (retval != GTK_RESPONSE_OK) {
                 gtk_widget_destroy (dialog);
                 return;
-        }
+        }
         name = g_strdup (gtk_entry_get_text (GTK_ENTRY(entry)));
         gtk_widget_destroy (dialog);
 
