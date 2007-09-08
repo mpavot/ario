@@ -275,11 +275,7 @@ ario_cover_make_amazon_xml_uri (const char *artist,
         */
 
         /* What is the amazon country choosen in the preferences? */
-        locale = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY);
-
-        /* By default, we use amazon US (amazon.com) */
-        if (!locale)
-                locale = g_strdup ("com");
+        locale = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
 
         /* The default mode is "music" and the default extension is ".com" */
         music_mode = "music";

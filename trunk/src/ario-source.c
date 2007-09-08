@@ -183,7 +183,7 @@ ario_source_new (GtkUIManager *mgr,
                                     source);
 
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (source),
-                                    eel_gconf_get_boolean (CONF_SHOW_TABS));
+                                    eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
 
         return GTK_WIDGET (source);
 }
@@ -203,7 +203,7 @@ ario_source_sync_source (ArioSource *source)
 #ifdef MULTIPLE_VIEW
         ArioSourceType source_type;
 
-        source_type = eel_gconf_get_integer (CONF_SOURCE);
+        source_type = eel_gconf_get_integer (CONF_SOURCE, TRUE);
 
         if (source_type == ARIO_SOURCE_RADIO) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_RADIO);
@@ -247,6 +247,6 @@ ario_source_showtabs_changed_cb (GConfClient *client,
                                  ArioSource *source)
 {
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (source),
-                                    eel_gconf_get_boolean (CONF_SHOW_TABS));
+                                    eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
 }
 

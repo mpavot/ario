@@ -344,9 +344,9 @@ ario_util_download_file (const char *uri,
         /* set NO SIGNAL */
         curl_easy_setopt(curl, CURLOPT_NOSIGNAL, TRUE);
 
-        if(eel_gconf_get_boolean (CONF_USE_PROXY)) {
-                address = eel_gconf_get_string (CONF_PROXY_ADDRESS);
-                port =  eel_gconf_get_integer (CONF_PROXY_PORT);
+        if(eel_gconf_get_boolean (CONF_USE_PROXY, FALSE)) {
+                address = eel_gconf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
+                port =  eel_gconf_get_integer (CONF_PROXY_PORT, 8080);
                 if(address) {
                         curl_easy_setopt(curl, CURLOPT_PROXY, address);
                         curl_easy_setopt(curl, CURLOPT_PROXYPORT, port);

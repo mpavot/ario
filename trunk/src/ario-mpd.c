@@ -340,7 +340,7 @@ ario_mpd_init (ArioMpd *mpd)
         mpd->priv->volume = 0;
         mpd->priv->is_updating = FALSE;
 
-        if (eel_gconf_get_boolean (CONF_AUTOCONNECT))
+        if (eel_gconf_get_boolean (CONF_AUTOCONNECT, FALSE))
                 ario_mpd_connect (mpd);
 }
 
@@ -505,10 +505,10 @@ ario_mpd_connect_to (ArioMpd *mpd,
 
         mpd->priv->connection = mpd_newConnection (hostname, port, timeout);
 
-        if (eel_gconf_get_boolean (CONF_AUTH)) {
+        if (eel_gconf_get_boolean (CONF_AUTH, FALSE)) {
                 gchar *password;
 
-                password = eel_gconf_get_string (CONF_PASSWORD);
+                password = eel_gconf_get_string (CONF_PASSWORD, NULL);
                 mpd_sendPasswordCommand (mpd->priv->connection, password);
                 mpd_finishCommand (mpd->priv->connection);
                 g_free (password);
@@ -542,8 +542,8 @@ ario_mpd_connect (ArioMpd *mpd)
         if (ario_mpd_is_connected (mpd))
                 return;
 
-        hostname = eel_gconf_get_string (CONF_HOST);
-        port = eel_gconf_get_integer (CONF_PORT);
+        hostname = eel_gconf_get_string (CONF_HOST, "localhpst");
+        port = eel_gconf_get_integer (CONF_PORT, 6600);
         timeout = 8.0;
 
         if (hostname == NULL)
