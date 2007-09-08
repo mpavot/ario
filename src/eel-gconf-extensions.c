@@ -70,6 +70,32 @@ eel_gconf_handle_error (GError **error)
         return FALSE;
 }
 
+static gboolean
+eel_gconf_is_set (const char *key)
+{
+        gboolean result = TRUE;
+        GConfClient *client;
+        GError *error = NULL;
+	GConfValue *value;
+
+        g_return_val_if_fail (key != NULL, FALSE);
+        
+        client = eel_gconf_client_get_global ();
+        g_return_val_if_fail (client != NULL, FALSE);
+        
+        value = gconf_client_get (client, key, &error);
+        
+        if (eel_gconf_handle_error (&error) || !value) {
+                result = FALSE;
+        }
+
+	if (value) {
+		gconf_value_free (value);
+	}
+        
+        return result;
+}
+
 void
 eel_gconf_set_boolean (const char *key,
                             gboolean boolean_value)
@@ -101,7 +127,7 @@ eel_gconf_get_boolean (const char *key,
         
         result = gconf_client_get_bool (client, key, &error);
         
-        if (eel_gconf_handle_error (&error)) {
+        if (eel_gconf_handle_error (&error) || !eel_gconf_is_set (key)) {
                 result = default_value;
         }
         
@@ -139,7 +165,7 @@ eel_gconf_get_integer (const char *key,
         
         result = gconf_client_get_int (client, key, &error);
 
-        if (eel_gconf_handle_error (&error)) {
+        if (eel_gconf_handle_error (&error) || !eel_gconf_is_set (key)) {
                 result = default_value;
         }
 
@@ -177,7 +203,7 @@ eel_gconf_get_float (const char *key,
         
         result = gconf_client_get_float (client, key, &error);
 
-        if (eel_gconf_handle_error (&error)) {
+        if (eel_gconf_handle_error (&error) || !eel_gconf_is_set (key)) {
                 result = default_value;
         }
 
@@ -216,7 +242,7 @@ eel_gconf_get_string (const char *key,
         
         result = gconf_client_get_string (client, key, &error);
         
-        if (eel_gconf_handle_error (&error)) {
+        if (eel_gconf_handle_error (&error) || !eel_gconf_is_set (key)) {
 		if (default_value) {
 	                result = g_strdup (default_value);
 		} else {
