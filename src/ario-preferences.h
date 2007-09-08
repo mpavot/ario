@@ -40,21 +40,23 @@ G_BEGIN_DECLS
 #define CONF_PASSWORD                   "/apps/ario/password"
 #define CONF_COVER_TREE_HIDDEN          "/apps/ario/ario_cover_tree_hidden"
 #define CONF_COVER_AMAZON_COUNTRY       "/apps/ario/ario_cover_amazon_country"
-#define CONF_STATE_WINDOW_WIDTH         "/apps/ario/state/window_width"
-#define CONF_STATE_WINDOW_HEIGHT        "/apps/ario/state/window_height"
-#define CONF_STATE_WINDOW_MAXIMIZED     "/apps/ario/state/window_maximized"
-#define CONF_VPANED_POSITION            "/apps/ario/state/vpaned_position"
-#define CONF_STATE_SOURCE               "/apps/ario/state/source"
 #define CONF_USE_PROXY                  "/apps/ario/use_proxy"
 #define CONF_PROXY_ADDRESS              "/apps/ario/proxy_address"
 #define CONF_PROXY_PORT                 "/apps/ario/proxy_port"
 #define CONF_SHOW_TABS                  "/apps/ario/show_tabs"
 #define CONF_TRAYICON_BEHAVIOR          "/apps/ario/trayicon_behavior"
-#define CONF_TRACK_COLUMN_SIZE          "/apps/ario/track_column_size"
-#define CONF_TITLE_COLUMN_SIZE          "/apps/ario/title_column_size"
-#define CONF_ARTIST_COLUMN_SIZE         "/apps/ario/artist_column_size"
-#define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/album_column_size"
+
+#define CONF_WINDOW_WIDTH         "/apps/ario/state/window_width"
+#define CONF_WINDOW_HEIGHT        "/apps/ario/state/window_height"
+#define CONF_WINDOW_MAXIMIZED     "/apps/ario/state/window_maximized"
+#define CONF_VPANED_POSITION            "/apps/ario/state/vpaned_position"
 #define CONF_PLAYLISTS_HPANED_SIZE      "/apps/ario/state/playlists_hpaned_position"
+#define CONF_SOURCE               "/apps/ario/state/source"
+#define CONF_TRACK_COLUMN_SIZE          "/apps/ario/state/track_column_size"
+#define CONF_TITLE_COLUMN_SIZE          "/apps/ario/state/title_column_size"
+#define CONF_ARTIST_COLUMN_SIZE         "/apps/ario/state/artist_column_size"
+#define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/state/album_column_size"
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

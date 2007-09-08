@@ -169,7 +169,7 @@ ario_source_new (GtkUIManager *mgr,
         gtk_widget_show_all (GTK_WIDGET (source));
         ario_source_sync_source (source);
 
-        eel_gconf_notification_add (CONF_STATE_SOURCE,
+        eel_gconf_notification_add (CONF_SOURCE,
                                     (GConfClientNotifyFunc) ario_source_source_changed_cb,
                                     source);
 
@@ -203,7 +203,7 @@ ario_source_sync_source (ArioSource *source)
 #ifdef MULTIPLE_VIEW
         ArioSourceType source_type;
 
-        source_type = eel_gconf_get_integer (CONF_STATE_SOURCE);
+        source_type = eel_gconf_get_integer (CONF_SOURCE);
 
         if (source_type == ARIO_SOURCE_RADIO) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_RADIO);
@@ -234,7 +234,7 @@ ario_source_page_changed_cb (GtkNotebook *notebook,
                              ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START
-        eel_gconf_set_integer (CONF_STATE_SOURCE,
+        eel_gconf_set_integer (CONF_SOURCE,
                                page_nb);
 
         return TRUE;
