@@ -230,8 +230,8 @@
 
 
       <schema>
-        <key>/schemas/apps/ario/track_column_size</key>
-        <applyto>/apps/ario/track_column_size</applyto>
+        <key>/schemas/apps/ario/state/track_column_size</key>
+        <applyto>/apps/ario/state/track_column_size</applyto>
         <owner>ario</owner>
         <type>int</type>
         <default>50</default>
@@ -242,8 +242,8 @@
       </schema>
 
       <schema>
-        <key>/schemas/apps/ario/title_column_size</key>
-        <applyto>/apps/ario/title_column_size</applyto>
+        <key>/schemas/apps/ario/state/title_column_size</key>
+        <applyto>/apps/ario/state/title_column_size</applyto>
         <owner>ario</owner>
         <type>int</type>
         <default>200</default>
@@ -254,8 +254,8 @@
       </schema>
 
       <schema>
-        <key>/schemas/apps/ario/artist_column_size</key>
-        <applyto>/apps/ario/artist_column_size</applyto>
+        <key>/schemas/apps/ario/state/artist_column_size</key>
+        <applyto>/apps/ario/state/artist_column_size</applyto>
         <owner>ario</owner>
         <type>int</type>
         <default>200</default>
@@ -267,8 +267,8 @@
 
 
       <schema>
-        <key>/schemas/apps/ario/album_column_size</key>
-        <applyto>/apps/ario/album_column_size</applyto>
+        <key>/schemas/apps/ario/state/album_column_size</key>
+        <applyto>/apps/ario/state/album_column_size</applyto>
         <owner>ario</owner>
         <type>int</type>
         <default>200</default>

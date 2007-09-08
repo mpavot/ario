@@ -413,3 +413,19 @@ ario_util_string_replace (char **string,
                 }
         }
 }
+
+int
+ario_util_min (int a,
+               int b)
+{
+        ARIO_LOG_FUNCTION_START
+	return (a > b ? b : a);
+}
+
+int
+ario_util_max (int a,
+               int b)
+{
+        ARIO_LOG_FUNCTION_START
+	return (a > b ? a : b);
+}

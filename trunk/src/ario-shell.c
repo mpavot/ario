@@ -380,7 +380,7 @@ ario_shell_construct (ArioShell *shell)
                                                      shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
-        eel_gconf_notification_add (CONF_STATE_SOURCE,
+        eel_gconf_notification_add (CONF_SOURCE,
                                     (GConfClientNotifyFunc) ario_shell_source_changed_cb,
                                     shell);
 
@@ -404,9 +404,9 @@ ario_shell_shutdown (ArioShell *shell)
                              &width,
                              &height);
 
-        if (!eel_gconf_get_boolean (CONF_STATE_WINDOW_MAXIMIZED)) {
-                eel_gconf_set_integer (CONF_STATE_WINDOW_WIDTH, width);
-                eel_gconf_set_integer (CONF_STATE_WINDOW_HEIGHT, height);
+        if (!eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED)) {
+                eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
+                eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
         }
 
         ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
@@ -449,7 +449,7 @@ ario_shell_cmd_radio_view (GtkRadioAction *action,
 		           GtkRadioAction *current,
 		           ArioShell *shell)
 {
-        eel_gconf_set_integer (CONF_STATE_SOURCE,
+        eel_gconf_set_integer (CONF_SOURCE,
                                gtk_radio_action_get_current_value(current));
 }
 #endif  /* MULTIPLE_VIEW */
@@ -508,7 +508,7 @@ ario_shell_sync_source (ArioShell *shell)
         ArioSourceType source_type;
         GtkAction *action;
 
-        source_type = eel_gconf_get_integer (CONF_STATE_SOURCE);
+        source_type = eel_gconf_get_integer (CONF_SOURCE);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "LibraryView");
         if (source_type == ARIO_SOURCE_RADIO) {
@@ -547,7 +547,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
         g_return_val_if_fail (widget != NULL, FALSE);
 
         if (event->type == GDK_WINDOW_STATE) {
-                eel_gconf_set_boolean (CONF_STATE_WINDOW_MAXIMIZED,
+                eel_gconf_set_boolean (CONF_WINDOW_MAXIMIZED,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
 
@@ -555,8 +555,8 @@ ario_shell_window_state_cb (GtkWidget *widget,
                                      &width,
                                      &height);
 
-                eel_gconf_set_integer (CONF_STATE_WINDOW_WIDTH, width);
-                eel_gconf_set_integer (CONF_STATE_WINDOW_HEIGHT, height);
+                eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
+                eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
         }
 
         return FALSE;
@@ -566,9 +566,9 @@ static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        int width = eel_gconf_get_integer (CONF_STATE_WINDOW_WIDTH); 
-        int height = eel_gconf_get_integer (CONF_STATE_WINDOW_HEIGHT);
-        gboolean maximized = eel_gconf_get_boolean (CONF_STATE_WINDOW_MAXIMIZED);
+        int width = eel_gconf_get_integer (CONF_WINDOW_WIDTH); 
+        int height = eel_gconf_get_integer (CONF_WINDOW_HEIGHT);
+        gboolean maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED);
         GdkGeometry hints;
 
         gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
