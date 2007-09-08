@@ -511,11 +511,11 @@ ario_preferences_sync_connection (ArioPreferences *preferences)
 
         preferences->priv->loading = TRUE;
 
-        host = eel_gconf_get_string (CONF_HOST);
-        port = eel_gconf_get_integer (CONF_PORT);
-        autoconnect = eel_gconf_get_boolean (CONF_AUTOCONNECT);
-        authentication = eel_gconf_get_boolean (CONF_AUTH);
-        password = eel_gconf_get_string (CONF_PASSWORD);
+        host = eel_gconf_get_string (CONF_HOST, "localhost");
+        port = eel_gconf_get_integer (CONF_PORT, 6600);
+        autoconnect = eel_gconf_get_boolean (CONF_AUTOCONNECT, FALSE);
+        authentication = eel_gconf_get_boolean (CONF_AUTH, FALSE);
+        password = eel_gconf_get_string (CONF_PASSWORD, NULL);
 
         if (ario_mpd_is_connected (preferences->priv->mpd)) {
                 gtk_widget_set_sensitive (preferences->priv->connect_button, FALSE);
@@ -589,11 +589,9 @@ ario_preferences_sync_cover (ArioPreferences *preferences)
         int proxy_port;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (preferences->priv->covertree_check), 
-                                      !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN));
+                                      !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
 
-        current_country = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY);
-        if (!current_country)
-                current_country = g_strdup("com");
+        current_country = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
         for (i = 0; amazon_countries[i] != NULL; i++) {
                 if (!strcmp (amazon_countries[i], current_country)) {
                         gtk_combo_box_set_active (GTK_COMBO_BOX (preferences->priv->amazon_country), i);
@@ -605,14 +603,10 @@ ario_preferences_sync_cover (ArioPreferences *preferences)
         g_free (current_country);
         
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (preferences->priv->proxy_check), 
-                                      eel_gconf_get_boolean (CONF_USE_PROXY));
+                                      eel_gconf_get_boolean (CONF_USE_PROXY, FALSE));
         
-        proxy_address = eel_gconf_get_string (CONF_PROXY_ADDRESS);
-        if (!proxy_address)
-                proxy_address = g_strdup("192.168.0.1");
-        proxy_port = eel_gconf_get_integer (CONF_PROXY_PORT);
-        if (proxy_port == 0)
-                proxy_port = 8080;
+        proxy_address = eel_gconf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
+        proxy_port = eel_gconf_get_integer (CONF_PROXY_PORT, 8080);
         
         gtk_entry_set_text (GTK_ENTRY (preferences->priv->proxy_address_entry), proxy_address);
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (preferences->priv->proxy_port_spinbutton), (gdouble) proxy_port);
@@ -625,10 +619,10 @@ ario_preferences_sync_interface (ArioPreferences *preferences)
         ARIO_LOG_FUNCTION_START
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (preferences->priv->showtabs_check), 
-                                      eel_gconf_get_boolean (CONF_SHOW_TABS));
+                                      eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (preferences->priv->trayicon_combobox),
-                                  eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR));
+                                  eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR, 0));
 }
 
 static void

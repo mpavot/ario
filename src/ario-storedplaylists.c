@@ -373,7 +373,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         /* Hpaned properties */        gtk_paned_pack1 (GTK_PANED (storedplaylists), scrolledwindow_storedplaylists, FALSE, FALSE);
         gtk_paned_pack2 (GTK_PANED (storedplaylists), scrolledwindow_songs, TRUE, FALSE);
 
-        pos = eel_gconf_get_integer (CONF_PLAYLISTS_HPANED_SIZE);
+        pos = eel_gconf_get_integer (CONF_PLAYLISTS_HPANED_SIZE, 250);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (storedplaylists),
                                         pos);

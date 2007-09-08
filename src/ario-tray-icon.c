@@ -314,7 +314,7 @@ ario_tray_icon_double_click (ArioTrayIcon *icon)
         ARIO_LOG_FUNCTION_START
         int trayicon_behavior;
 
-        trayicon_behavior = eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR);
+        trayicon_behavior = eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR, 0);
 
         switch (trayicon_behavior) {
         case TRAY_ICON_PLAY_PAUSE:
@@ -486,7 +486,7 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                         ario_tray_icon_restore_main_window (icon);
                         gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
                 } else {
-                        icon->priv->maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED);
+                        icon->priv->maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
                         gtk_window_get_position (icon->priv->main_window,
                                                  &icon->priv->window_x,
                                                  &icon->priv->window_y);

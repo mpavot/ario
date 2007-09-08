@@ -404,7 +404,7 @@ ario_shell_shutdown (ArioShell *shell)
                              &width,
                              &height);
 
-        if (!eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED)) {
+        if (!eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE)) {
                 eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
                 eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
         }
@@ -494,7 +494,7 @@ ario_shell_sync_paned (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         int pos;
 
-        pos = eel_gconf_get_integer (CONF_VPANED_POSITION);
+        pos = eel_gconf_get_integer (CONF_VPANED_POSITION, 400);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
@@ -508,7 +508,7 @@ ario_shell_sync_source (ArioShell *shell)
         ArioSourceType source_type;
         GtkAction *action;
 
-        source_type = eel_gconf_get_integer (CONF_SOURCE);
+        source_type = eel_gconf_get_integer (CONF_SOURCE, 0);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "LibraryView");
         if (source_type == ARIO_SOURCE_RADIO) {
@@ -566,9 +566,9 @@ static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        int width = eel_gconf_get_integer (CONF_WINDOW_WIDTH); 
-        int height = eel_gconf_get_integer (CONF_WINDOW_HEIGHT);
-        gboolean maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED);
+        int width = eel_gconf_get_integer (CONF_WINDOW_WIDTH, 600); 
+        int height = eel_gconf_get_integer (CONF_WINDOW_HEIGHT, 600);
+        gboolean maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
         GdkGeometry hints;
 
         gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
