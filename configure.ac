@@ -15,7 +15,7 @@ AC_STDC_HEADERS
 
 AC_PROG_INTLTOOL([0.35.0])
 
-PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.6 glib-2.0 >= 2.4 gobject-2.0 >= 2.4 libglade-2.0 gconf-2.0 gmodule-2.0 libcurl])
+PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.10 glib-2.0 >= 2.4 gobject-2.0 >= 2.4 libglade-2.0 gconf-2.0 gmodule-2.0 libcurl])
 
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
