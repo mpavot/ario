@@ -255,7 +255,7 @@ ario_util_unlink_uri (const char *uri)
 void
 ario_util_mkdir (const char *uri)
 {
-        g_mkdir (uri, 0750);
+        g_mkdir_with_parents (uri, 0750);
 }
 
 void

@@ -331,9 +331,7 @@ ario_cover_load_amazon_covers (const char *artist,
         if (!xml_uri)
                 return FALSE;
 
-        /* We laod the xml file in xml_data */
-                
-        printf("xml_uri:%s\n", xml_uri);
+        /* We load the xml file in xml_data */
         ario_util_download_file (xml_uri,
                                  &xml_size,
                                  &xml_data);
