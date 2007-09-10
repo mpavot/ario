@@ -2,6 +2,9 @@
 	<menubar name="MenuBar">
 
 		<menu name="FileMenu" action="File">
+			<menuitem name="FileConnect" action="FileConnect"/>
+			<menuitem name="FileDisconnect" action="FileDisconnect"/>
+        		<separator/>
 			<menuitem name="FileSave" action="FileSave"/>
         		<separator/>
 			<menuitem name="FileQuit" action="FileQuit"/>
