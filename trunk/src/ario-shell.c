@@ -49,17 +49,23 @@ static void ario_shell_cmd_quit (GtkAction *action,
                                  ArioShell *shell);
 static void ario_shell_cmd_save (GtkAction *action,
                                  ArioShell *shell);
+static void ario_shell_cmd_connect (GtkAction *action,
+                                    ArioShell *shell);
+static void ario_shell_cmd_disconnect (GtkAction *action,
+                                       ArioShell *shell);
 static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 #ifdef MULTIPLE_VIEW
 static void ario_shell_cmd_radio_view (GtkRadioAction *action,
-                		       GtkRadioAction *current,
-                		       ArioShell *shell);
+                                       GtkRadioAction *current,
+                                       ArioShell *shell);
 #endif  /* MULTIPLE_VIEW */
 static void ario_shell_cmd_covers (GtkAction *action,
                                    ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
                                   ArioShell *shell);
+static void ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
+                                             ArioShell *shell);
 static void ario_shell_source_changed_cb (GConfClient *client,
                                           guint cnxn_id,
                                           GConfEntry *entry,
@@ -70,7 +76,7 @@ static gboolean ario_shell_window_state_cb (GtkWidget *widget,
 static void ario_shell_sync_window_state (ArioShell *shell);
 static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_source (ArioShell *shell);
-
+static void ario_shell_sync_mpd (ArioShell *shell);
 enum
 {
         PROP_NONE,
@@ -92,6 +98,8 @@ struct ArioShellPrivate
         GtkActionGroup *actiongroup;
 
         ArioTrayIcon *tray_icon;
+
+        gboolean connected;
 };
 
 static GtkActionEntry ario_shell_actions [] =
@@ -102,12 +110,18 @@ static GtkActionEntry ario_shell_actions [] =
         { "Tool", NULL, N_("_Tool") },
         { "Help", NULL, N_("_Help") },
 
-        { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
-          N_("Quit"),
-          G_CALLBACK (ario_shell_cmd_quit) },
         { "FileSave", GTK_STOCK_SAVE, N_("_Save Playlist"), "<control>S",
           N_("Save Playlist"),
           G_CALLBACK (ario_shell_cmd_save) },
+        { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), NULL,
+          N_("Connect"),
+          G_CALLBACK (ario_shell_cmd_connect) },
+        { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), NULL,
+          N_("Disconnect"),
+          G_CALLBACK (ario_shell_cmd_disconnect) },
+        { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
+          N_("Quit"),
+          G_CALLBACK (ario_shell_cmd_quit) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
           N_("Edit music player preferences"),
           G_CALLBACK (ario_shell_cmd_preferences) },
@@ -203,6 +217,7 @@ ario_shell_init (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
         shell->priv = g_new0 (ArioShellPrivate, 1);
+        shell->priv->connected = FALSE;
 }
 
 static void
@@ -321,11 +336,11 @@ ario_shell_construct (ArioShell *shell)
                                       ario_shell_actions,
                                       ario_shell_n_actions, shell);
 #ifdef MULTIPLE_VIEW
-	gtk_action_group_add_radio_actions (shell->priv->actiongroup,
-					    ario_shell_radio,
-					    ario_shell_n_radio,
+        gtk_action_group_add_radio_actions (shell->priv->actiongroup,
+                                            ario_shell_radio,
+                                            ario_shell_n_radio,
                                             0, G_CALLBACK (ario_shell_cmd_radio_view),
-					    shell);
+                                            shell);
 #endif  /* MULTIPLE_VIEW */
         gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
                                             shell->priv->actiongroup, 0);
@@ -373,6 +388,7 @@ ario_shell_construct (ArioShell *shell)
         gtk_widget_show_all (GTK_WIDGET (win));
         ario_shell_sync_paned (shell);
         ario_shell_sync_source (shell);
+        ario_shell_sync_mpd (shell);
 
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->ui_manager,
@@ -386,6 +402,10 @@ ario_shell_construct (ArioShell *shell)
 
         g_signal_connect_object (G_OBJECT (win), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
+                                 shell, 0);
+
+        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
+                                 "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
                                  shell, 0);
 
         g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, shell->priv->mpd);
@@ -430,6 +450,22 @@ ario_shell_cmd_save (GtkAction *action,
 }
 
 static void
+ario_shell_cmd_connect (GtkAction *action,
+                        ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_connect (shell->priv->mpd);
+}
+
+static void
+ario_shell_cmd_disconnect (GtkAction *action,
+                           ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_disconnect (shell->priv->mpd);
+}
+
+static void
 ario_shell_cmd_preferences (GtkAction *action,
                             ArioShell *shell)
 {
@@ -446,8 +482,8 @@ ario_shell_cmd_preferences (GtkAction *action,
 #ifdef MULTIPLE_VIEW
 static void
 ario_shell_cmd_radio_view (GtkRadioAction *action,
-		           GtkRadioAction *current,
-		           ArioShell *shell)
+                           GtkRadioAction *current,
+                           ArioShell *shell)
 {
         eel_gconf_set_integer (CONF_SOURCE,
                                gtk_radio_action_get_current_value(current));
@@ -471,6 +507,17 @@ ario_shell_cmd_about (GtkAction *action,
                                "comments", "Music player and browser for MPD",
                                "authors", (const char **) authors,
                                NULL);
+}
+
+static void
+ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
+                                 ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        if (shell->priv->connected != ario_mpd_is_connected (mpd)) {
+                shell->priv->connected = ario_mpd_is_connected (mpd);
+                ario_shell_sync_mpd (shell);
+        }
 }
 
 static void
@@ -585,3 +632,16 @@ ario_shell_sync_window_state (ArioShell *shell)
         else
                 gtk_window_unmaximize (GTK_WINDOW (shell->priv->window));
 }
+
+static void
+ario_shell_sync_mpd (ArioShell *shell)
+{
+        GtkAction *connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                                 "FileConnect");
+        GtkAction *disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                                    "FileDisconnect");
+
+        gtk_action_set_visible (connect_action, !shell->priv->connected);
+        gtk_action_set_visible (disconnect_action, shell->priv->connected);
+}
+
