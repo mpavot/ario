@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 5), cdbs, autotools-dev, libgtk2.0-dev (>= 2.10.0),
 Standards-Version: 3.7.2
 
 Package: ario
-Architecture: i386
+Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: mpd
 Enhances: mpd

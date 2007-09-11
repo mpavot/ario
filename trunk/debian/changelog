@@ -1,6 +1,13 @@
+ario (0.2-1) unstable; urgency=low
+
+  * Fix some packaging problems
+  * Now install application icon in menu 
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Tue, 11 Sep 2007 22:04:10 +0200
+
 ario (0.2-0) unstable; urgency=low
 
-  * Initial release
+  * Initial release (Closes: #441448)
 
  -- Marc Pavot <marc.pavot@gmail.com>  Sat,  8 Sep 2007 18:01:54 +0200
 
