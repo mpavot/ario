@@ -5,15 +5,58 @@ It was downloaded from http://ario-player.sourceforge.net/
 
 Upstream Author: Marc Pavot <marc.pavot@gmail.com>
 
-Copyright: Copyright 2005-2007 Marc Pavot
+Copyright:
+For ario:
+        Copyright (C) 2005-2007 Marc Pavot <marc.pavot@gmail.com>
+For eel-gconf-extensions:
+        Copyright (C) 2000, 2001 Eazel, Inc.
+For rb-glade-helpers:
+        Copyright (C) 2002 Jorn Baayen
+For libmpdclient:
+        c)2003-2006 by Warren Dukes (warren.dukes@gmail.com)
+For eggtrayicon:
+        Copyright (C) 2002 Anders Carlsson <andersca@gnu.org>
 
-License: GPL
+License:
 
+For eggtrayicon and eel-gconf-extensions:
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with this library; if not, write to the
+   Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+   Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU Lesser General
+Public License can be found in `/usr/share/common-licenses/LGPL'.
+
+
+For ario and rb-glade-helpers:
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+ 
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
 
 The Debian packaging is (C) 2007, marc <marc.pavot@gmail.com> and
-is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
-
-
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.
+is licensed under the GPL, see above.
 
