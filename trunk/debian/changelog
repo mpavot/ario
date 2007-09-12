@@ -1,13 +1,18 @@
+ario (0.2-2) unstable; urgency=low
+
+  * Fix : configure-generated-file-in-source config.log
+  * Fix : binary-without-manpage
+  * Fix : desktop-entry-contains-encoding-key
+  * Fix : desktop-entry-invalid-category
+  * Fix : menu-item-uses-apps-section
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Wed, 12 Sep 2007 13:38:11 +0200
+
 ario (0.2-1) unstable; urgency=low
 
+  * Initial release (Closes: #441448)
   * Fix some packaging problems
   * Now install application icon in menu 
 
  -- Marc Pavot <marc.pavot@gmail.com>  Tue, 11 Sep 2007 22:04:10 +0200
-
-ario (0.2-0) unstable; urgency=low
-
-  * Initial release (Closes: #441448)
-
- -- Marc Pavot <marc.pavot@gmail.com>  Sat,  8 Sep 2007 18:01:54 +0200
 
