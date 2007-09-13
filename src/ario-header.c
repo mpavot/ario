@@ -134,7 +134,7 @@ enum
 
 static GObjectClass *parent_class = NULL;
 
-#define SONG_MARKUP(xSONG) g_strdup_printf ("<big><b>%s</b></big>", xSONG);
+#define SONG_MARKUP(xSONG) g_markup_printf_escaped ("<big><b>%s</b></big>", xSONG);
 #define FROM_MARKUP(xALBUM, xARTIST) g_strdup_printf (_("from %s by %s"), xALBUM, xARTIST);
 
 GType
@@ -210,7 +210,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         ArioHeaderClass *klass;
         GObjectClass *parent_class;
 
-        GtkWidget *image, *hbox, *vbox, *alignment, *label;
+        GtkWidget *image, *hbox, *hbox2, *vbox, *alignment, *label;
 
         klass = ARIO_HEADER_CLASS (g_type_class_peek (TYPE_ARIO_HEADER));
 
@@ -305,15 +305,16 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_misc_set_alignment (GTK_MISC (header->priv->song), 0, 0);
 
         header->priv->artist_album = gtk_label_new ("");
+        gtk_label_set_ellipsize (GTK_LABEL (header->priv->artist_album), PANGO_ELLIPSIZE_END);
         gtk_misc_set_alignment (GTK_MISC (header->priv->artist_album), 0, 0);
 
         vbox = gtk_vbox_new (FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (vbox), header->priv->song, FALSE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (vbox), header->priv->artist_album, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox), header->priv->song, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox), header->priv->artist_album, TRUE, TRUE, 0);
 
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
         gtk_container_add (GTK_CONTAINER (alignment), vbox);
-        gtk_box_pack_start (GTK_BOX (header), alignment, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (header), alignment, TRUE, TRUE, 0);
 
         /* Construct the time slider and display */
         header->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 10.0, 1.0, 10.0, 0.0));
@@ -337,6 +338,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
 
         vbox = gtk_vbox_new (FALSE, 0);
         hbox = gtk_hbox_new (FALSE, 0);
+        hbox2 = gtk_hbox_new (FALSE, 5);
 
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->elapsed, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
@@ -344,11 +346,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
 
         gtk_box_pack_start (GTK_BOX (vbox), header->priv->scale, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
-
-        alignment = gtk_alignment_new (1.0, 0.5, 0.0, 0.0);
-
-        gtk_container_add (GTK_CONTAINER (alignment), vbox);
-        gtk_box_pack_start (GTK_BOX (header), alignment, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox2), vbox, FALSE, TRUE, 0);
 
         /* Random button */
         image = gtk_image_new_from_stock ("random",
@@ -373,12 +371,14 @@ ario_header_constructor (GType type, guint n_construct_properties,
                               _("Toggle repeat on/off"), NULL);
 
         /* Buttons Container */
-        hbox = gtk_hbox_new (FALSE, 5);
+        hbox = gtk_hbox_new (FALSE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->random_button, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->repeat_button, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox2), hbox, FALSE, TRUE, 0);
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
-        gtk_container_add (GTK_CONTAINER (alignment), hbox);
-        gtk_box_pack_start (GTK_BOX (header), alignment, FALSE, TRUE, 0);
+
+        gtk_container_add (GTK_CONTAINER (alignment), hbox2);
+        gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 0);
 
         return G_OBJECT (header);
 }
@@ -486,6 +486,9 @@ ario_header_new (GtkActionGroup *group, ArioMpd *mpd)
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
         gtk_container_add (GTK_CONTAINER (alignment), header->priv->ario_volume_button);
         gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 5);
+        gtk_box_reorder_child (GTK_BOX (header),
+                               alignment,
+                               0);
 
         g_return_val_if_fail (header->priv != NULL, NULL);
 
