@@ -78,10 +78,11 @@ static gboolean ario_search_button_press_cb (GtkWidget *widget,
 static gboolean ario_search_button_release_cb (GtkWidget *widget,
                                               GdkEventButton *event,
                                               ArioSearch *search);
-static gboolean ario_search_motion_notify (GtkWidget *widget, 
+static gboolean ario_search_motion_notify_cb (GtkWidget *widget, 
                                           GdkEventMotion *event,
                                           ArioSearch *search);
-
+static void ario_search_realize_cb (GtkWidget *widget, 
+                                    ArioSearch *search);
 static void ario_search_searchs_selection_drag_foreach (GtkTreeModel *model,
                                                       GtkTreePath *path,
                                                       GtkTreeIter *iter,
@@ -380,10 +381,14 @@ ario_search_init (ArioSearch *search)
                                  0);
         g_signal_connect_object (G_OBJECT (search->priv->searchs),
                                  "motion_notify_event",
-                                 G_CALLBACK (ario_search_motion_notify),
+                                 G_CALLBACK (ario_search_motion_notify_cb),
                                  search,
                                  0);
-
+        g_signal_connect_object (G_OBJECT (search),
+                                 "realize",
+                                 G_CALLBACK (ario_search_realize_cb),
+                                 search,
+                                 0);
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (search), FALSE);
         gtk_box_set_spacing (GTK_BOX (search), 4);
@@ -648,7 +653,7 @@ ario_search_button_release_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_search_motion_notify (GtkWidget *widget, 
+ario_search_motion_notify_cb (GtkWidget *widget, 
                             GdkEventMotion *event,
                             ArioSearch *search)
 {
@@ -670,6 +675,16 @@ ario_search_motion_notify (GtkWidget *widget,
                 search->priv->dragging = TRUE;
 
         return FALSE;
+}
+
+static void
+ario_search_realize_cb (GtkWidget *widget, 
+                        ArioSearch *search)
+{
+        ARIO_LOG_FUNCTION_START
+
+        GTK_WIDGET_SET_FLAGS (search->priv->search_button, GTK_CAN_DEFAULT);
+        gtk_widget_grab_default (search->priv->search_button);
 }
 
 static void
@@ -732,6 +747,7 @@ ario_search_do_plus (GtkButton *button,
         search_constraint->hbox = gtk_hbox_new (FALSE, 3);
         search_constraint->combo_box = gtk_combo_box_new_with_model (GTK_TREE_MODEL (search->priv->list_store));
         search_constraint->entry = gtk_entry_new ();
+        gtk_entry_set_activates_default (GTK_ENTRY (search_constraint->entry), TRUE);
         image = gtk_image_new_from_stock (GTK_STOCK_REMOVE,
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         search_constraint->minus_button = gtk_button_new ();
@@ -873,7 +889,7 @@ ario_search_do_search (GtkButton *button,
                                     FILENAME_COLUMN, song->file,
                                     -1);
                 g_free (title);
-        }
+        }
         g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
         g_list_free (songs);
 }

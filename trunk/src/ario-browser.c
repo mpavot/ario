@@ -601,10 +601,15 @@ ario_browser_fill_artists (ArioBrowser *browser)
         GList *artists;
         GList *temp;
         GtkTreeIter artist_iter;
+        GList* paths;
+        GtkTreePath *path;
+        GtkTreeModel *models = GTK_TREE_MODEL (browser->priv->artists_model);
 
         g_signal_handlers_block_by_func (G_OBJECT (browser->priv->artists_selection),
                                          G_CALLBACK (ario_browser_artists_selection_changed_cb),
                                          browser);
+
+        paths = gtk_tree_selection_get_selected_rows (browser->priv->artists_selection, &models);
 
         gtk_list_store_clear (browser->priv->artists_model);
 
@@ -621,8 +626,19 @@ ario_browser_fill_artists (ArioBrowser *browser)
         g_list_free (artists);
 
         gtk_tree_selection_unselect_all (browser->priv->artists_selection);
-        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (browser->priv->artists_model), &artist_iter))
-                gtk_tree_selection_select_iter (browser->priv->artists_selection, &artist_iter);
+        if (paths) {
+                path = paths->data;
+                if (path) {
+                        gtk_tree_selection_select_path (browser->priv->artists_selection, path);
+                }
+        } else {
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (browser->priv->artists_model), &artist_iter))
+                        gtk_tree_selection_select_iter (browser->priv->artists_selection, &artist_iter);
+        }
+
+        g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
+        g_list_free (paths);
+
         g_signal_handlers_unblock_by_func (G_OBJECT (browser->priv->artists_selection),
                                            G_CALLBACK (ario_browser_artists_selection_changed_cb),
                                            browser);

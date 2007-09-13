@@ -370,7 +370,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                                  storedplaylists,
                                  0);
 
-        /* Hpaned properties */        gtk_paned_pack1 (GTK_PANED (storedplaylists), scrolledwindow_storedplaylists, FALSE, FALSE);
+        /* Hpaned properties */        gtk_paned_pack1 (GTK_PANED (storedplaylists), scrolledwindow_storedplaylists, FALSE, FALSE);
         gtk_paned_pack2 (GTK_PANED (storedplaylists), scrolledwindow_songs, TRUE, FALSE);
 
         pos = eel_gconf_get_integer (CONF_PLAYLISTS_HPANED_SIZE, 250);
@@ -619,7 +619,7 @@ storedplaylists_foreach (GtkTreeModel *model,
         GList **storedplaylists = (GList **) userdata;
         gchar *val = NULL;
 
-        gtk_tree_model_get (model, iter, PLAYLISTS_NAME_COLUMN, &val, -1);
+        gtk_tree_model_get (model, iter, PLAYLISTS_NAME_COLUMN, &val, -1);
         *storedplaylists = g_list_append (*storedplaylists, val);
 }
 
@@ -705,7 +705,7 @@ ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
-        GList *playlists = NULL;        GList *tmp;
+        GList *playlists = NULL;        GList *tmp;
 
         dialog = gtk_message_dialog_new (NULL,
                                         GTK_DIALOG_MODAL,
@@ -933,7 +933,7 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
                                 strlen (str_playlists->str) * sizeof(guchar));
 
         g_string_free (str_playlists, TRUE);
-}
+}
 static void
 ario_storedplaylists_songs_selection_drag_foreach (GtkTreeModel *model,
                                           GtkTreePath *path,
