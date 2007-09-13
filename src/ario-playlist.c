@@ -322,7 +322,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_tree_selection_set_mode (playlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
         gtk_container_add (GTK_CONTAINER (scrolledwindow), playlist->priv->tree);
-        gtk_drag_source_set (playlist->priv->tree,
+        gtk_drag_source_set (playlist->priv->tree,
                              GDK_BUTTON1_MASK,
                              internal_targets,
                              G_N_ELEMENTS (internal_targets),
@@ -1106,7 +1106,8 @@ ario_playlist_cmd_save (GtkAction *action,
                                               NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog),
                                          GTK_RESPONSE_OK);
-        label = gtk_label_new (_("Playlist name : "));        entry = gtk_entry_new ();
+        label = gtk_label_new (_("Playlist name : "));
+        entry = gtk_entry_new ();
         hbox = gtk_hbox_new (FALSE, 5);
 
         gtk_box_pack_start_defaults (GTK_BOX (hbox), label);

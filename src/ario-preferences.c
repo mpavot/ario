@@ -631,7 +631,9 @@ ario_preferences_server_changed_cb(ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         ario_preferences_sync_server (preferences);
-}static gboolean
+}
+
+static gboolean
 ario_preferences_window_delete_cb (GtkWidget *window,
                                    GdkEventAny *event,
                                    ArioPreferences *preferences)

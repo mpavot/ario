@@ -505,6 +505,11 @@ ario_radio_fill_radios (ArioRadio *radio)
         GList *radios;
         GList *temp;
         GtkTreeIter radio_iter;
+        GList* paths;
+        GtkTreePath *path;
+        GtkTreeModel *models = GTK_TREE_MODEL (radio->priv->radios_model);
+
+        paths = gtk_tree_selection_get_selected_rows (radio->priv->radios_selection, &models);
 
         gtk_list_store_clear (radio->priv->radios_model);
 
@@ -523,8 +528,19 @@ ario_radio_fill_radios (ArioRadio *radio)
         g_list_free (radios);
 
         gtk_tree_selection_unselect_all (radio->priv->radios_selection);
-        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (radio->priv->radios_model), &radio_iter))
-                gtk_tree_selection_select_iter (radio->priv->radios_selection, &radio_iter);
+
+        if (paths) {
+                path = paths->data;
+                if (path) {
+                        gtk_tree_selection_select_path (radio->priv->radios_selection, path);
+                }
+        } else {
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (radio->priv->radios_model), &radio_iter))
+                        gtk_tree_selection_select_iter (radio->priv->radios_selection, &radio_iter);
+        }
+
+        g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
+        g_list_free (paths);
 }
 
 static void
@@ -847,6 +863,8 @@ ario_radio_cmd_new_radio (GtkAction *action,
 
         entry1 = gtk_entry_new ();
         entry2 = gtk_entry_new ();
+        gtk_entry_set_activates_default (GTK_ENTRY (entry1), TRUE);
+        gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
 
         table = gtk_table_new (2, 2 , FALSE);
 
@@ -976,6 +994,8 @@ ario_radio_cmd_delete_radios (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GList *internet_radios = NULL;
 
+        /* TODO : Ask before delete */
+
         gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
                                              radios_foreach2,
                                              &internet_radios);
@@ -1084,10 +1104,11 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
         label2 = gtk_label_new (_("URL : "));
 
         entry1 = gtk_entry_new ();
-        gtk_entry_set_text (GTK_ENTRY (entry1), internet_radio->name);
         entry2 = gtk_entry_new ();
+        gtk_entry_set_text (GTK_ENTRY (entry1), internet_radio->name);
         gtk_entry_set_text (GTK_ENTRY (entry2), internet_radio->url);
-
+        gtk_entry_set_activates_default (GTK_ENTRY (entry1), TRUE);
+        gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
         table = gtk_table_new (2, 2 , FALSE);
 
         gtk_table_attach_defaults (GTK_TABLE(table),
