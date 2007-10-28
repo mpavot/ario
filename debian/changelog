@@ -1,3 +1,29 @@
+ario (0.2a-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Sun, 28 Oct 2007 18:11:56 +0100
+
+ario (0.2-5) unstable; urgency=low
+
+  * Convert Homepage pseudo tag to source package tag.
+  * Change Description
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Mon, 01 Oct 2007 19:49:20 +0200
+
+ario (0.2-4) unstable; urgency=low
+
+  * Add libmpdclient license.
+  * Change description and fix 'description-synopsis-is-duplicated'
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Sun, 30 Sep 2007 07:20:10 +0200
+
+ario (0.2-3) unstable; urgency=low
+
+  * Use Homepage instead of URL
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Thu, 13 Sep 2007 19:11:10 +0200
+
 ario (0.2-2) unstable; urgency=low
 
   * Fix : configure-generated-file-in-source config.log
