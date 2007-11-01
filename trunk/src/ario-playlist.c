@@ -373,18 +373,27 @@ void
 ario_playlist_shutdown (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
+        int width;
 
-        eel_gconf_set_integer (CONF_TRACK_COLUMN_SIZE,
-                               gtk_tree_view_column_get_width (playlist->priv->track_column));
+        width = gtk_tree_view_column_get_width (playlist->priv->track_column);
+        if (width > 10)
+                eel_gconf_set_integer (CONF_TRACK_COLUMN_SIZE,
+                                       width);
 
-        eel_gconf_set_integer (CONF_TITLE_COLUMN_SIZE,
-                               gtk_tree_view_column_get_width (playlist->priv->title_column));
+        width = gtk_tree_view_column_get_width (playlist->priv->title_column);
+        if (width > 10)
+                eel_gconf_set_integer (CONF_TITLE_COLUMN_SIZE,
+                                       width);
 
-        eel_gconf_set_integer (CONF_ARTIST_COLUMN_SIZE,
-                               gtk_tree_view_column_get_width (playlist->priv->artist_column));
+        width = gtk_tree_view_column_get_width (playlist->priv->artist_column);
+        if (width > 10)
+                eel_gconf_set_integer (CONF_ARTIST_COLUMN_SIZE,
+                                       width);
 
-        eel_gconf_set_integer (CONF_ALBUM_COLUMN_SIZE,
-                               gtk_tree_view_column_get_width (playlist->priv->album_column));
+        width = gtk_tree_view_column_get_width (playlist->priv->album_column);
+        if (width > 10)
+                eel_gconf_set_integer (CONF_ALBUM_COLUMN_SIZE,
+                                       width);
 }
 
 static void

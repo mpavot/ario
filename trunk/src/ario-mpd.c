@@ -339,9 +339,6 @@ ario_mpd_init (ArioMpd *mpd)
         mpd->priv->playlist_id = -1;
         mpd->priv->volume = 0;
         mpd->priv->is_updating = FALSE;
-
-        if (eel_gconf_get_boolean (CONF_AUTOCONNECT, FALSE))
-                ario_mpd_connect (mpd);
 }
 
 static void
@@ -585,7 +582,7 @@ void
 ario_mpd_check_errors (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START
         if (!ario_mpd_is_connected(mpd))
                 return;
 
@@ -599,7 +596,7 @@ gboolean
 ario_mpd_is_connected (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START
         return (mpd->priv->connection != NULL);
 }
 
@@ -817,7 +814,7 @@ gboolean
 ario_mpd_update_status (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START
 
         if (mpd->priv->is_updating)
                 return TRUE;

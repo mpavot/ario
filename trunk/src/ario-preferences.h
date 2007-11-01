@@ -45,6 +45,7 @@ G_BEGIN_DECLS
 #define CONF_PROXY_PORT                 "/apps/ario/proxy_port"
 #define CONF_SHOW_TABS                  "/apps/ario/show_tabs"
 #define CONF_TRAYICON_BEHAVIOR          "/apps/ario/trayicon_behavior"
+#define CONF_FIRST_TIME                 "/apps/ario/first_time_flag"
 
 #define CONF_WINDOW_WIDTH               "/apps/ario/state/window_width"
 #define CONF_WINDOW_HEIGHT              "/apps/ario/state/window_height"
