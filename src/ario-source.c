@@ -203,7 +203,7 @@ ario_source_sync_source (ArioSource *source)
 #ifdef MULTIPLE_VIEW
         ArioSourceType source_type;
 
-        source_type = eel_gconf_get_integer (CONF_SOURCE, TRUE);
+        source_type = eel_gconf_get_integer (CONF_SOURCE, ARIO_SOURCE_BROWSER);
 
         if (source_type == ARIO_SOURCE_RADIO) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (source), ARIO_SOURCE_RADIO);
