@@ -867,6 +867,7 @@ ario_radio_cmd_new_radio (GtkAction *action,
         gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
 
         table = gtk_table_new (2, 2 , FALSE);
+        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
 
         gtk_table_attach_defaults (GTK_TABLE(table),
                                    label1,
@@ -1110,6 +1111,7 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
         gtk_entry_set_activates_default (GTK_ENTRY (entry1), TRUE);
         gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
         table = gtk_table_new (2, 2 , FALSE);
+        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
 
         gtk_table_attach_defaults (GTK_TABLE(table),
                                    label1,

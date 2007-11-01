@@ -12,6 +12,8 @@ ario_SOURCES = \
 	ario-main.c\
 	ario-shell.c\
 	ario-shell.h\
+	ario-firstlaunch.c\
+	ario-firstlaunch.h\
 	ario-browser.c\
 	ario-browser.h\
 	ario-radio.c\

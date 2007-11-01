@@ -32,19 +32,13 @@
 #include "ario-status-bar.h"
 #include "ario-preferences.h"
 #include "ario-shell-coverdownloader.h"
+#include "ario-firstlaunch.h"
 #include "ario-debug.h"
 
 static void ario_shell_class_init (ArioShellClass *klass);
 static void ario_shell_init (ArioShell *shell);
 static void ario_shell_finalize (GObject *object);
-static void ario_shell_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec);
-static void ario_shell_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec);
+static void ario_shell_show (ArioShell *shell);
 static void ario_shell_cmd_quit (GtkAction *action,
                                  ArioShell *shell);
 static void ario_shell_cmd_save (GtkAction *action,
@@ -77,11 +71,8 @@ static void ario_shell_sync_window_state (ArioShell *shell);
 static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_source (ArioShell *shell);
 static void ario_shell_sync_mpd (ArioShell *shell);
-enum
-{
-        PROP_NONE,
-        PROP_UI_MANAGER
-};
+static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
+			                      ArioShell *shell);
 
 struct ArioShellPrivate
 {
@@ -94,12 +85,15 @@ struct ArioShellPrivate
         GtkWidget *playlist;
         GtkWidget *status_bar;
 
+        ArioFirstlaunch *firstlaunch;
+
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 
         ArioTrayIcon *tray_icon;
 
         gboolean connected;
+        gboolean shown;
 };
 
 static GtkActionEntry ario_shell_actions [] =
@@ -199,17 +193,7 @@ ario_shell_class_init (ArioShellClass *klass)
 
         parent_class = g_type_class_peek_parent (klass);
 
-        object_class->set_property = ario_shell_set_property;
-        object_class->get_property = ario_shell_get_property;
         object_class->finalize = ario_shell_finalize;
-
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager", 
-                                                              "GtkUIManager", 
-                                                              "GtkUIManager object", 
-                                                              GTK_TYPE_UI_MANAGER,
-                                                               G_PARAM_READABLE));
 }
 
 static void
@@ -218,42 +202,7 @@ ario_shell_init (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         shell->priv = g_new0 (ArioShellPrivate, 1);
         shell->priv->connected = FALSE;
-}
-
-static void
-ario_shell_set_property (GObject *object,
-                         guint prop_id,
-                         const GValue *value,
-                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-
-        switch (prop_id)
-        {
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_shell_get_property (GObject *object,
-                         guint prop_id,
-                         GValue *value,
-                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShell *shell = ARIO_SHELL (object);
-
-        switch (prop_id)
-        {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, shell->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
+        shell->priv->shown = FALSE;
 }
 
 static void
@@ -385,10 +334,6 @@ ario_shell_construct (ArioShell *shell)
         gtk_container_add (GTK_CONTAINER (win), vbox);
 
         ario_shell_sync_window_state (shell);
-        gtk_widget_show_all (GTK_WIDGET (win));
-        ario_shell_sync_paned (shell);
-        ario_shell_sync_source (shell);
-        ario_shell_sync_mpd (shell);
 
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->ui_manager,
@@ -396,19 +341,16 @@ ario_shell_construct (ArioShell *shell)
                                                      shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
-        eel_gconf_notification_add (CONF_SOURCE,
-                                    (GConfClientNotifyFunc) ario_shell_source_changed_cb,
-                                    shell);
-
-        g_signal_connect_object (G_OBJECT (win), "window-state-event",
-                                 G_CALLBACK (ario_shell_window_state_cb),
-                                 shell, 0);
-
-        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
-                                 "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
-                                 shell, 0);
-
-        g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, shell->priv->mpd);
+        /* First launch assistant */
+        if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {
+                shell->priv->firstlaunch = ario_firstlaunch_new ();
+                g_signal_connect_object (G_OBJECT (shell->priv->firstlaunch), "destroy",
+                                         G_CALLBACK (ario_shell_firstlaunch_delete_cb),
+                                         shell, 0);
+	        gtk_widget_show_all (GTK_WIDGET (shell->priv->firstlaunch));
+        } else {
+                ario_shell_show (shell);
+        }
 }
 
 void
@@ -417,20 +359,52 @@ ario_shell_shutdown (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         int width, height;
 
-        eel_gconf_set_integer (CONF_VPANED_POSITION,
-                               gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
+        if (shell->priv->shown) {
+                eel_gconf_set_integer (CONF_VPANED_POSITION,
+                                       gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
 
-        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
-                             &width,
-                             &height);
+                gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                                     &width,
+                                     &height);
 
-        if (!eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE)) {
-                eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
-                eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
+                if (!eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE)) {
+                        eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
+                        eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
+                }
+
+                ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
+                ario_source_shutdown (ARIO_SOURCE (shell->priv->source));
         }
+}
 
-        ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
-        ario_source_shutdown (ARIO_SOURCE (shell->priv->source));
+static void
+ario_shell_show (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+
+        if (eel_gconf_get_boolean (CONF_AUTOCONNECT, TRUE))
+                ario_mpd_connect (shell->priv->mpd);
+
+        gtk_widget_show_all (GTK_WIDGET (shell->priv->window));
+        ario_shell_sync_paned (shell);
+        ario_shell_sync_source (shell);
+        ario_shell_sync_mpd (shell);
+
+        eel_gconf_notification_add (CONF_SOURCE,
+                                    (GConfClientNotifyFunc) ario_shell_source_changed_cb,
+                                    shell);
+
+        g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
+                                 G_CALLBACK (ario_shell_window_state_cb),
+                                 shell, 0);
+
+        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
+                                 "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
+                                 shell, 0);
+
+        g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, shell->priv->mpd);
+
+        shell->priv->shown = TRUE;
 }
 
 static void
@@ -636,6 +610,7 @@ ario_shell_sync_window_state (ArioShell *shell)
 static void
 ario_shell_sync_mpd (ArioShell *shell)
 {
+        ARIO_LOG_FUNCTION_START
         GtkAction *connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                                                  "FileConnect");
         GtkAction *disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
@@ -645,3 +620,10 @@ ario_shell_sync_mpd (ArioShell *shell)
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
 }
 
+static void
+ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
+			          ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+	ario_shell_show (shell);
+}

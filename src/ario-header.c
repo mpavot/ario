@@ -135,7 +135,7 @@ enum
 static GObjectClass *parent_class = NULL;
 
 #define SONG_MARKUP(xSONG) g_markup_printf_escaped ("<big><b>%s</b></big>", xSONG);
-#define FROM_MARKUP(xALBUM, xARTIST) g_strdup_printf (_("from %s by %s"), xALBUM, xARTIST);
+#define FROM_MARKUP(xALBUM, xARTIST) g_strdup_printf (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
 
 GType
 ario_header_get_type (void)
@@ -548,7 +548,7 @@ ario_header_change_labels (ArioHeader *header)
                 g_free (tmp);
 
                 tmp = FROM_MARKUP (album, artist);
-                gtk_label_set_label (GTK_LABEL (header->priv->artist_album), tmp);
+                gtk_label_set_markup (GTK_LABEL (header->priv->artist_album), tmp);
                 g_free (tmp);
                 break;
         case MPD_STATUS_STATE_UNKNOWN:

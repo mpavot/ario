@@ -278,5 +278,17 @@
         </locale>
       </schema>
 
+      <schema>
+        <key>/schemas/apps/ario/first_time_flag</key>
+        <applyto>/apps/ario/first_time_flag</applyto>
+        <owner>ario</owner>
+        <type>bool</type>
+        <default>FALSE</default>
+        <locale name="C">
+	<short>True if the initial assistant has already been run.</short>
+	<long>True if the initial assistant has already been run.</long>
+        </locale>
+      </schema>
+
     </schemalist>
 </gconfschemafile>
