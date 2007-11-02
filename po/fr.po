@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-02 21:54+0100\n"
+"POT-Creation-Date: 2007-11-02 22:23+0100\n"
 "PO-Revision-Date: 2007-11-02 21:53+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
@@ -517,7 +517,7 @@ msgstr "Chercher une chanson dans la bibliothèque"
 msgid "Remove a search criteria"
 msgstr "Enlever un critère de recherche"
 
-#: ../src/ario-firstlaunch.c:197
+#: ../src/ario-firstlaunch.c:193
 #, c-format
 msgid ""
 "The following configuration will be used: \n"
@@ -530,7 +530,7 @@ msgstr ""
 "Hôte:·<b>%s</b>\n"
 "Port:·<b>%d</b>"
 
-#: ../src/ario-firstlaunch.c:260
+#: ../src/ario-firstlaunch.c:256
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -538,27 +538,27 @@ msgstr ""
 "C'est la première fois que vous lancez Ario.\n"
 "Cet assistant va vous aider à le configurer."
 
-#: ../src/ario-firstlaunch.c:265
+#: ../src/ario-firstlaunch.c:261
 msgid "Welcome to Ario"
 msgstr "Bienvenue dans Ario"
 
-#: ../src/ario-firstlaunch.c:290
+#: ../src/ario-firstlaunch.c:286
 msgid "Name"
 msgstr "Nom"
 
-#: ../src/ario-firstlaunch.c:298
+#: ../src/ario-firstlaunch.c:294
 msgid "Host"
 msgstr "Hôte"
 
-#: ../src/ario-firstlaunch.c:306
+#: ../src/ario-firstlaunch.c:302
 msgid "Port"
 msgstr "Port"
 
-#: ../src/ario-firstlaunch.c:323
+#: ../src/ario-firstlaunch.c:320
 msgid "Configuration"
 msgstr "Configuration"
 
-#: ../src/ario-firstlaunch.c:335
+#: ../src/ario-firstlaunch.c:332
 msgid "Confirmation"
 msgstr "Confirmation"
 
