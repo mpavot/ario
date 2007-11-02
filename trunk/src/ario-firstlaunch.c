@@ -164,15 +164,11 @@ static void
 ario_firstlaunch_mode_sync (ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreeIter iter;
 
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (firstlaunch->priv->automatic_radiobutton))) {
                 gtk_widget_set_sensitive (firstlaunch->priv->treeview, TRUE);
                 gtk_widget_set_sensitive (firstlaunch->priv->host_entry, FALSE);
                 gtk_widget_set_sensitive (firstlaunch->priv->port_entry, FALSE);
-
-                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (firstlaunch->priv->hosts_model), &iter))
-                        gtk_tree_selection_select_iter (firstlaunch->priv->hosts_selection, &iter);
         } else {
                 gtk_widget_set_sensitive (firstlaunch->priv->treeview, FALSE);
                 gtk_widget_set_sensitive (firstlaunch->priv->host_entry, TRUE);
@@ -320,6 +316,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_tree_selection_set_mode (firstlaunch->priv->hosts_selection,
                                      GTK_SELECTION_BROWSE);
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
+        g_object_unref (G_OBJECT (xml));
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Configuration"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_CONTENT);
         gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
