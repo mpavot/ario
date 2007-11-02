@@ -5,11 +5,14 @@ data/ario.schemas.in
 data/ario.desktop.in.in
 data/cover-prefs.glade
 data/connection-prefs.glade
+data/connection-assistant.glade
 data/cover-prefs.glade
 data/cover-progress.glade
 data/cover-select.glade
 data/server-prefs.glade
 data/interface-prefs.glade
+src/ario-avahi.c
+src/ario-avahi.h
 src/ario-browser.c
 src/ario-browser.h
 src/ario-radio.c

@@ -257,7 +257,7 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
         gtk_container_add (GTK_CONTAINER (ario_shell_coverdownloader), 
                            vbox);
         gtk_window_set_position (GTK_WINDOW (ario_shell_coverdownloader),
-                                  GTK_WIN_POS_CENTER);
+                                 GTK_WIN_POS_CENTER);
 
         g_signal_connect_object (G_OBJECT (ario_shell_coverdownloader->priv->cancel_button),
                                  "clicked",

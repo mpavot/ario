@@ -22,9 +22,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
+#include <glade/glade.h>
+#include "rb-glade-helpers.h"
 #include "eel-gconf-extensions.h"
 #include "ario-firstlaunch.h"
 #include "ario-preferences.h"
+#include "ario-avahi.h"
 #include "ario-debug.h"
 
 static void ario_firstlaunch_class_init (ArioFirstlaunchClass *klass);
@@ -37,7 +40,24 @@ struct ArioFirstlaunchPrivate
         GtkWidget *port_entry;
         GtkWidget *final_label;
 
+        GtkWidget *automatic_radiobutton;
+        GtkWidget *manual_radiobutton;
+
+        GtkWidget *treeview;
+        GtkListStore *hosts_model;
+        GtkTreeSelection *hosts_selection;
+
+        ArioAvahi *avahi;
+
         gboolean applied;
+};
+
+enum
+{
+        NAME_COLUMN,
+        HOST_COLUMN,
+        PORT_COLUMN,
+        N_COLUMN
 };
 
 static GObjectClass *parent_class;
@@ -92,15 +112,48 @@ ario_firstlaunch_cancel_cb (GtkWidget *widget,
 }
 
 static void
+ario_firstlaunch_get_host_port (ArioFirstlaunch *firstlaunch,
+                                gchar **host,
+                                int *port)
+{
+        ARIO_LOG_FUNCTION_START
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (firstlaunch->priv->automatic_radiobutton))) {
+                GtkTreeIter iter;
+                gchar *tmp;
+                GtkTreeModel *model = GTK_TREE_MODEL (firstlaunch->priv->hosts_model);
+                if (gtk_tree_selection_get_selected (firstlaunch->priv->hosts_selection,
+                                                     &model,
+                                                     &iter)) {
+                        gtk_tree_model_get (model, &iter,
+                                            HOST_COLUMN, host,
+                                            PORT_COLUMN, &tmp, -1);
+                        *port = atoi (tmp);
+                        free (tmp);
+                } else {
+                        *host = g_strdup ("localhost");
+                        *port = 6600;
+                }
+        } else {
+                *host = g_strdup (gtk_entry_get_text (GTK_ENTRY (firstlaunch->priv->host_entry)));
+                *port = atoi (gtk_entry_get_text (GTK_ENTRY (firstlaunch->priv->port_entry)));
+        }
+}
+
+static void
 ario_firstlaunch_apply_cb (GtkWidget *widget,
                            ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START
-        eel_gconf_set_string (CONF_HOST,
-                              gtk_entry_get_text (GTK_ENTRY (firstlaunch->priv->host_entry)));
+        char *host;
+        int port;
 
-        eel_gconf_set_integer (CONF_PORT,
-                               atoi (gtk_entry_get_text (GTK_ENTRY (firstlaunch->priv->port_entry))));
+        ario_firstlaunch_get_host_port (firstlaunch,
+                                        &host,
+                                        &port);
+
+        eel_gconf_set_string (CONF_HOST, host);
+        eel_gconf_set_integer (CONF_PORT, port);
+        g_free (host);
 
         firstlaunch->priv->applied = TRUE;
         eel_gconf_set_boolean (CONF_FIRST_TIME, TRUE);
@@ -108,18 +161,82 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
 }
 
 static void
-ario_firstlaunch_page2_prepare_cb (GtkAssistant *assistant,
-                                   GtkWidget    *page,
-			           ArioFirstlaunch *firstlaunch)
+ario_firstlaunch_mode_sync (ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
 
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (firstlaunch->priv->automatic_radiobutton))) {
+                gtk_widget_set_sensitive (firstlaunch->priv->treeview, TRUE);
+                gtk_widget_set_sensitive (firstlaunch->priv->host_entry, FALSE);
+                gtk_widget_set_sensitive (firstlaunch->priv->port_entry, FALSE);
+
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (firstlaunch->priv->hosts_model), &iter))
+                        gtk_tree_selection_select_iter (firstlaunch->priv->hosts_selection, &iter);
+        } else {
+                gtk_widget_set_sensitive (firstlaunch->priv->treeview, FALSE);
+                gtk_widget_set_sensitive (firstlaunch->priv->host_entry, TRUE);
+                gtk_widget_set_sensitive (firstlaunch->priv->port_entry, TRUE);
+        }
+}
+
+static void
+ario_firstlaunch_page_prepare_cb (GtkAssistant *assistant,
+                                  GtkWidget    *page,
+			          ArioFirstlaunch *firstlaunch)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *host;
+        int port;
         gchar *text;
-        text = g_strdup_printf (_("The following configuration will be used: \n\nHost: <b>%s</b>\nPort: <b>%s</b>"),
-                                gtk_entry_get_text (GTK_ENTRY (firstlaunch->priv->host_entry)),
-                                gtk_entry_get_text (GTK_ENTRY (firstlaunch->priv->port_entry)));
+
+        ario_firstlaunch_get_host_port (firstlaunch,
+                                        &host,
+                                        &port);
+
+        text = g_strdup_printf (_("The following configuration will be used: \n\nHost: <b>%s</b>\nPort: <b>%d</b>"),
+                                host,
+                                port);
+        g_free (host);
         gtk_label_set_markup (GTK_LABEL (firstlaunch->priv->final_label), text);
         g_free (text);
+
+        ario_firstlaunch_mode_sync (firstlaunch);
+}
+
+static void
+ario_firstlaunch_hosts_changed_cb (ArioAvahi *avahi,
+                                   ArioFirstlaunch *firstlaunch)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
+        GList *hosts = ario_avahi_get_hosts (avahi);
+        gtk_list_store_clear (firstlaunch->priv->hosts_model);
+
+        while (hosts) {
+                ArioHost *host = hosts->data;
+                char *tmp;
+                gtk_list_store_append (firstlaunch->priv->hosts_model, &iter);
+                tmp = g_strdup_printf ("%d", host->port);
+                gtk_list_store_set (firstlaunch->priv->hosts_model, &iter,
+                                    NAME_COLUMN, host->name,
+                                    HOST_COLUMN, host->host,
+                                    PORT_COLUMN, tmp,
+                                    -1);
+                g_free (tmp);
+                hosts = g_list_next (hosts);
+        }
+
+        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (firstlaunch->priv->hosts_model), &iter))
+                gtk_tree_selection_select_iter (firstlaunch->priv->hosts_selection, &iter);
+}
+
+static void
+ario_firstlaunch_radiobutton_toogled_cb (GtkToggleAction *toggleaction,
+                                         ArioFirstlaunch *firstlaunch)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_firstlaunch_mode_sync (firstlaunch);
 }
 
 static void
@@ -127,7 +244,10 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START
         GdkPixbuf *pixbuf;
-        GtkWidget *label, *vbox, *table;
+        GtkWidget *label, *vbox;
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+        GladeXML *xml;
 
         firstlaunch->priv = g_new0 (ArioFirstlaunchPrivate, 1);
         firstlaunch->priv->applied = FALSE;
@@ -148,46 +268,62 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
 
         /* Page 2 */
-        vbox = gtk_vbox_new (FALSE, 0);
-        gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
+        xml = rb_glade_xml_new (GLADE_PATH "connection-assistant.glade",
+                                "vbox",
+                                firstlaunch);
 
-        label = gtk_label_new (_("You need to specify an MPD server to connect to:"));
-        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+        vbox = glade_xml_get_widget (xml, "vbox");
+        firstlaunch->priv->host_entry = 
+                glade_xml_get_widget (xml, "host_entry");
+        firstlaunch->priv->port_entry = 
+                glade_xml_get_widget (xml, "port_entry");
+        firstlaunch->priv->automatic_radiobutton = 
+                glade_xml_get_widget (xml, "automatic_radiobutton");
+        firstlaunch->priv->manual_radiobutton = 
+                glade_xml_get_widget (xml, "manual_radiobutton");
+        firstlaunch->priv->treeview = glade_xml_get_widget (xml, "treeview");
 
-        table = gtk_table_new (2, 2, FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
-        label = gtk_label_new (_("Host: "));
-        firstlaunch->priv->host_entry = gtk_entry_new ();
-        gtk_entry_set_text (GTK_ENTRY (firstlaunch->priv->host_entry), "localhost");
-        gtk_table_attach_defaults (GTK_TABLE (table),
-                                   label,
-                                   0, 1,
-                                   0, 1);
-        gtk_table_attach_defaults (GTK_TABLE (table),
-                                   firstlaunch->priv->host_entry,
-                                   1, 2,
-                                   0, 1);
-        label = gtk_label_new (_("Port: "));
-        firstlaunch->priv->port_entry = gtk_entry_new ();
-        gtk_entry_set_text (GTK_ENTRY (firstlaunch->priv->port_entry), "6600");
-        gtk_table_attach_defaults (GTK_TABLE (table),
-                                   label,
-                                   0, 1,
-                                   1, 2);
-        gtk_table_attach_defaults (GTK_TABLE (table),
-                                   firstlaunch->priv->port_entry,
-                                   1, 2,
-                                   1, 2);
+        g_signal_connect (G_OBJECT (firstlaunch->priv->automatic_radiobutton), "toggled",
+		          G_CALLBACK (ario_firstlaunch_radiobutton_toogled_cb), firstlaunch);
 
-        gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, FALSE, 0);
-
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Name"),
+                                                           renderer,
+                                                           "text", NAME_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 150);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (firstlaunch->priv->treeview), column);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Host"),
+                                                           renderer,
+                                                           "text", HOST_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 150);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (firstlaunch->priv->treeview), column);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Port"),
+                                                           renderer,
+                                                           "text", PORT_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 50);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (firstlaunch->priv->treeview), column);
+        firstlaunch->priv->hosts_model = gtk_list_store_new (N_COLUMN,
+                                                             G_TYPE_STRING,
+                                                             G_TYPE_STRING,
+                                                             G_TYPE_STRING);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (firstlaunch->priv->treeview),
+                                 GTK_TREE_MODEL (firstlaunch->priv->hosts_model));
+        firstlaunch->priv->hosts_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (firstlaunch->priv->treeview));
+        gtk_tree_selection_set_mode (firstlaunch->priv->hosts_selection,
+                                     GTK_SELECTION_BROWSE);
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Configuration"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_CONTENT);
         gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
-	g_signal_connect_object (G_OBJECT (firstlaunch), "prepare", G_CALLBACK (ario_firstlaunch_page2_prepare_cb), firstlaunch, 0);
 
         /* Page 3 */
         firstlaunch->priv->final_label = gtk_label_new (NULL);
@@ -203,12 +339,20 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 
         g_object_unref (pixbuf);
 
+        firstlaunch->priv->avahi = ario_avahi_new ();
+        g_signal_connect_object (G_OBJECT (firstlaunch->priv->avahi),
+                                 "hosts_changed", G_CALLBACK (ario_firstlaunch_hosts_changed_cb),
+                                 firstlaunch, 0);
+
         g_signal_connect (G_OBJECT (firstlaunch), "cancel",
 		          G_CALLBACK (ario_firstlaunch_cancel_cb), firstlaunch);
         g_signal_connect (G_OBJECT (firstlaunch), "close",
 		          G_CALLBACK (ario_firstlaunch_apply_cb),firstlaunch);
 
         gtk_window_set_position (GTK_WINDOW (firstlaunch), GTK_WIN_POS_CENTER);
+        gtk_window_set_default_size (GTK_WINDOW (firstlaunch), 400, 450);
+
+	g_signal_connect_object (G_OBJECT (firstlaunch), "prepare", G_CALLBACK (ario_firstlaunch_page_prepare_cb), firstlaunch, 0);
 }
 
 static void
@@ -217,7 +361,9 @@ ario_firstlaunch_finalize (GObject *object)
         ARIO_LOG_FUNCTION_START
         ArioFirstlaunch *firstlaunch = ARIO_FIRSTLAUNCH (object);
         
+        g_object_unref (firstlaunch->priv->avahi);
         g_free (firstlaunch->priv);
+
 
         parent_class->finalize (G_OBJECT (firstlaunch));
 }
@@ -226,11 +372,11 @@ ArioFirstlaunch *
 ario_firstlaunch_new (void)
 {
         ARIO_LOG_FUNCTION_START
-        ArioFirstlaunch *s;
+        ArioFirstlaunch *firstlaunch;
 
-        s = g_object_new (TYPE_ARIO_FIRSTLAUNCH, NULL);
+        firstlaunch = g_object_new (TYPE_ARIO_FIRSTLAUNCH, NULL);
 
-        return s;
+        return firstlaunch;
 }
 
 

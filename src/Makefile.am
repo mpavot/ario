@@ -12,6 +12,8 @@ ario_SOURCES = \
 	ario-main.c\
 	ario-shell.c\
 	ario-shell.h\
+	ario-avahi.c\
+	ario-avahi.h\
 	ario-firstlaunch.c\
 	ario-firstlaunch.h\
 	ario-browser.c\
