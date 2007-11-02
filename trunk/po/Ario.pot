@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-01 16:05+0100\n"
+"POT-Creation-Date: 2007-11-02 21:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -230,7 +230,7 @@ msgstr ""
 msgid "<b>Connection</b>"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:3
+#: ../data/connection-prefs.glade.h:3 ../data/connection-assistant.glade.h:2
 msgid "Host:"
 msgstr ""
 
@@ -238,7 +238,7 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:5
+#: ../data/connection-prefs.glade.h:5 ../data/connection-assistant.glade.h:4
 msgid "Port:"
 msgstr ""
 
@@ -256,6 +256,21 @@ msgstr ""
 
 #: ../data/connection-prefs.glade.h:9
 msgid "_Use Authentication"
+msgstr ""
+
+#: ../data/connection-assistant.glade.h:1
+msgid "Automatic configuration"
+msgstr ""
+
+#: ../data/connection-assistant.glade.h:3
+msgid "Manual configuration"
+msgstr ""
+
+#: ../data/connection-assistant.glade.h:5
+msgid ""
+"You need to specify an MPD server to connect to. If you don't see your MPD "
+"server thanks to the automatic configuration, you should check that zeroconf "
+"is activated in your MPD configuration or use the manual configuration."
 msgstr ""
 
 #: ../data/cover-progress.glade.h:1
@@ -407,7 +422,7 @@ msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/ario-browser.c:1355
+#: ../src/ario-browser.c:1352
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -491,42 +506,42 @@ msgstr ""
 msgid "Remove a search criteria"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:118
+#: ../src/ario-firstlaunch.c:197
 #, c-format
 msgid ""
 "The following configuration will be used: \n"
 "\n"
 "Host: <b>%s</b>\n"
-"Port: <b>%s</b>"
+"Port: <b>%d</b>"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:140
+#: ../src/ario-firstlaunch.c:260
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:145
+#: ../src/ario-firstlaunch.c:265
 msgid "Welcome to Ario"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:154
-msgid "You need to specify an MPD server to connect to:"
+#: ../src/ario-firstlaunch.c:290
+msgid "Name"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:160
-msgid "Host: "
+#: ../src/ario-firstlaunch.c:298
+msgid "Host"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:171
-msgid "Port: "
+#: ../src/ario-firstlaunch.c:306
+msgid "Port"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:186
+#: ../src/ario-firstlaunch.c:323
 msgid "Configuration"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:199
+#: ../src/ario-firstlaunch.c:335
 msgid "Confirmation"
 msgstr ""
 

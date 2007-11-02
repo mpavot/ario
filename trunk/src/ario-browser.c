@@ -1306,17 +1306,14 @@ get_album_cover (ArioBrowser *browser,
                                              get_selected_albums_foreach,
                                              &albums);
 
-        if (g_list_length(albums) == 1 && operation == GET_AMAZON_COVERS)
-        {
+        if (g_list_length(albums) == 1 && operation == GET_AMAZON_COVERS) {
                 GtkWidget *coverselect;
                 ArioMpdAlbum *ario_mpd_album = albums->data;
                 coverselect = ario_shell_coverselect_new (ario_mpd_album->artist,
                                                      ario_mpd_album->album);
                 gtk_dialog_run (GTK_DIALOG(coverselect));
                 gtk_widget_destroy (coverselect);
-        }
-        else
-        {
+        } else {
                 GtkWidget *coverdownloader;
                 coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
 
