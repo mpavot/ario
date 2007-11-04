@@ -1,3 +1,9 @@
+ario (0.2a-2) unstable; urgency=low
+
+  * Update changelog to close a bug (Closes: #447053)
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Wed, 31 Oct 2007 19:17:26 +0100
+
 ario (0.2a-1) unstable; urgency=low
 
   * New upstream release
