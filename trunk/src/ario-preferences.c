@@ -20,12 +20,14 @@
 #include <config.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <glib/gi18n.h>
 #include "rb-glade-helpers.h"
 #include "eel-gconf-extensions.h"
 #include "libmpdclient.h"
-#include <glib/gi18n.h>
+#include "ario-avahi.h"
 #include "ario-preferences.h"
 #include "ario-debug.h"
 
@@ -68,6 +70,8 @@ void ario_preferences_authentication_changed_cb (GtkWidget *widget,
                                                  ArioPreferences *preferences);
 void ario_preferences_password_changed_cb (GtkWidget *widget,
                                            ArioPreferences *preferences);
+void ario_preferences_autodetect_cb (GtkWidget *widget,
+                                     ArioPreferences *preferences);
 void ario_preferences_connect_cb (GtkWidget *widget,
                                   ArioPreferences *preferences);
 void ario_preferences_disconnect_cb (GtkWidget *widget,
@@ -127,8 +131,11 @@ struct ArioPreferencesPrivate
         GtkWidget *authentication_checkbutton;
         GtkWidget *password_entry;
         GtkWidget *autoconnect_checkbutton;
+        GtkWidget *autodetect_button;
         GtkWidget *disconnect_button;
         GtkWidget *connect_button;
+        GtkListStore *autodetect_model;
+        GtkTreeSelection *autodetect_selection;
 
         GtkWidget *crossfade_checkbutton;
         GtkWidget *crossfadetime_spinbutton;
@@ -147,6 +154,15 @@ struct ArioPreferencesPrivate
         gboolean loading;
         gboolean sync_mpd;
 };
+
+enum
+{
+        NAME_COLUMN,
+        HOST_COLUMN,
+        PORT_COLUMN,
+        N_COLUMN
+};
+
 
 static GObjectClass *parent_class = NULL;
 
@@ -348,6 +364,8 @@ ario_preferences_append_connection_config (ArioPreferences *preferences,
                 glade_xml_get_widget (xml, "password_entry");
         preferences->priv->autoconnect_checkbutton = 
                 glade_xml_get_widget (xml, "autoconnect_checkbutton");
+        preferences->priv->autodetect_button = 
+                glade_xml_get_widget (xml, "autodetect_button");
         preferences->priv->disconnect_button = 
                 glade_xml_get_widget (xml, "disconnect_button");
         preferences->priv->connect_button = 
@@ -626,8 +644,8 @@ ario_preferences_sync_interface (ArioPreferences *preferences)
 }
 
 static void
-ario_preferences_server_changed_cb(ArioMpd *mpd,
-                                   ArioPreferences *preferences)
+ario_preferences_server_changed_cb (ArioMpd *mpd,
+                                    ArioPreferences *preferences)
 {
         ARIO_LOG_FUNCTION_START
         ario_preferences_sync_server (preferences);
@@ -710,6 +728,157 @@ ario_preferences_password_changed_cb (GtkWidget *widget,
         if (!preferences->priv->loading)
                 eel_gconf_set_string (CONF_PASSWORD,
                                       gtk_entry_get_text (GTK_ENTRY (preferences->priv->password_entry)));
+}
+
+static void
+ario_preferences_autohosts_changed_cb (ArioAvahi *avahi,
+                                       ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
+        GList *hosts = ario_avahi_get_hosts (avahi);
+        gtk_list_store_clear (preferences->priv->autodetect_model);
+
+        while (hosts) {
+                ArioHost *host = hosts->data;
+                char *tmp;
+                gtk_list_store_append (preferences->priv->autodetect_model, &iter);
+                tmp = g_strdup_printf ("%d", host->port);
+                gtk_list_store_set (preferences->priv->autodetect_model, &iter,
+                                    NAME_COLUMN, host->name,
+                                    HOST_COLUMN, host->host,
+                                    PORT_COLUMN, tmp,
+                                    -1);
+                g_free (tmp);
+                hosts = g_list_next (hosts);
+        }
+
+        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (preferences->priv->autodetect_model), &iter))
+                gtk_tree_selection_select_iter (preferences->priv->autodetect_selection, &iter);
+}
+
+void
+ario_preferences_autodetect_cb (GtkWidget *widget,
+                                ArioPreferences *preferences)
+{
+        ARIO_LOG_FUNCTION_START
+
+        ArioAvahi *avahi;
+        GtkWidget *dialog, *error_dialog;
+        GtkWidget *vbox;
+        GtkWidget *label;
+        GtkWidget *treeview;
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+        GtkTreeModel *treemodel;
+        GtkTreeIter iter;
+        gchar *tmp;
+        gchar *host;
+        int port;
+
+        gint retval = GTK_RESPONSE_CANCEL;
+
+        avahi = ario_avahi_new ();
+
+        /* Create the widgets */
+        dialog = gtk_dialog_new_with_buttons (_("Server autodetection"),
+                                              NULL,
+                                              GTK_DIALOG_DESTROY_WITH_PARENT,
+                                              GTK_STOCK_CANCEL,
+                                              GTK_RESPONSE_CANCEL,
+                                              GTK_STOCK_OK,
+                                              GTK_RESPONSE_OK,
+                                              NULL);
+        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+                                         GTK_RESPONSE_CANCEL);
+        vbox = gtk_vbox_new (FALSE, 12);
+        label = gtk_label_new (_("If you don't see your MPD server thanks to the automatic detection, you should check that zeroconf is activated in your MPD configuration or use the manual configuration."));
+        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+
+        treeview = gtk_tree_view_new ();
+
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Name"),
+                                                           renderer,
+                                                           "text", NAME_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 150);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Host"),
+                                                           renderer,
+                                                           "text", HOST_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 150);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Port"),
+                                                           renderer,
+                                                           "text", PORT_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 50);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+        preferences->priv->autodetect_model = gtk_list_store_new (N_COLUMN,
+                                                                  G_TYPE_STRING,
+                                                                  G_TYPE_STRING,
+                                                                  G_TYPE_STRING);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
+                                 GTK_TREE_MODEL (preferences->priv->autodetect_model));
+        preferences->priv->autodetect_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+        gtk_tree_selection_set_mode (preferences->priv->autodetect_selection,
+                                     GTK_SELECTION_BROWSE);
+
+        gtk_box_pack_start (GTK_BOX (vbox), treeview, TRUE, TRUE, 0);
+
+        g_signal_connect_object (G_OBJECT (avahi),
+                                 "hosts_changed", G_CALLBACK (ario_preferences_autohosts_changed_cb),
+                                 preferences, 0);
+
+        gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
+        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
+                           vbox);
+        gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 280);
+        gtk_widget_show_all (dialog);
+
+        retval = gtk_dialog_run (GTK_DIALOG(dialog));
+        if (retval != GTK_RESPONSE_OK) {
+                gtk_widget_destroy (dialog);
+                return;
+        }
+
+        treemodel = GTK_TREE_MODEL (preferences->priv->autodetect_model);
+        if (gtk_tree_selection_get_selected (preferences->priv->autodetect_selection,
+                                             &treemodel,
+                                             &iter)) {
+                gtk_tree_model_get (treemodel, &iter,
+                                    HOST_COLUMN, &host,
+                                    PORT_COLUMN, &tmp, -1);
+                port = atoi (tmp);
+                g_free (tmp);
+
+                eel_gconf_set_string (CONF_HOST,
+                                      host);
+
+                eel_gconf_set_integer (CONF_PORT,
+                                       port);
+        } else {
+                error_dialog = gtk_message_dialog_new(NULL,
+                                                      GTK_DIALOG_MODAL,
+                                                      GTK_MESSAGE_ERROR,
+                                                      GTK_BUTTONS_OK,
+                                                      _("You must select a server."));
+                gtk_dialog_run(GTK_DIALOG(error_dialog));
+                gtk_widget_destroy(error_dialog);
+        }
+
+        g_object_unref (avahi);
+        gtk_widget_destroy (dialog);
+
+        ario_preferences_sync_connection (preferences);
 }
 
 void
