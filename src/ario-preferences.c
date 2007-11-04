@@ -767,6 +767,7 @@ ario_preferences_autodetect_cb (GtkWidget *widget,
         GtkWidget *dialog, *error_dialog;
         GtkWidget *vbox;
         GtkWidget *label;
+        GtkWidget *scrolledwindow;
         GtkWidget *treeview;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
@@ -796,6 +797,9 @@ ario_preferences_autodetect_cb (GtkWidget *widget,
         gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
         gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
+        scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
         treeview = gtk_tree_view_new ();
 
         renderer = gtk_cell_renderer_text_new ();
@@ -832,7 +836,8 @@ ario_preferences_autodetect_cb (GtkWidget *widget,
         gtk_tree_selection_set_mode (preferences->priv->autodetect_selection,
                                      GTK_SELECTION_BROWSE);
 
-        gtk_box_pack_start (GTK_BOX (vbox), treeview, TRUE, TRUE, 0);
+        gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
+        gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
 
         g_signal_connect_object (G_OBJECT (avahi),
                                  "hosts_changed", G_CALLBACK (ario_preferences_autohosts_changed_cb),
