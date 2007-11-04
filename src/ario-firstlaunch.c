@@ -128,7 +128,7 @@ ario_firstlaunch_get_host_port (ArioFirstlaunch *firstlaunch,
                                             HOST_COLUMN, host,
                                             PORT_COLUMN, &tmp, -1);
                         *port = atoi (tmp);
-                        free (tmp);
+                        g_free (tmp);
                 } else {
                         *host = g_strdup ("localhost");
                         *port = 6600;
