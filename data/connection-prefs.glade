@@ -31,6 +31,9 @@
                         <property name="column_spacing">6</property>
                         <property name="row_spacing">6</property>
                         <child>
+                          <placeholder/>
+                        </child>
+                        <child>
                           <widget class="GtkButton" id="autodetect_button">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -70,9 +73,6 @@
                             <property name="x_options"></property>
                             <property name="y_options"></property>
                           </packing>
-                        </child>
-                        <child>
-                          <placeholder/>
                         </child>
                         <child>
                           <widget class="GtkLabel" id="host_label">
@@ -254,7 +254,8 @@
         <child>
           <widget class="GtkHBox" id="hbox8">
             <property name="visible">True</property>
-            <property name="spacing">14</property>
+            <property name="border_width">12</property>
+            <property name="spacing">12</property>
             <child>
               <widget class="GtkButton" id="disconnect_button">
                 <property name="visible">True</property>
@@ -358,7 +359,6 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="padding">12</property>
             <property name="position">2</property>
           </packing>
         </child>

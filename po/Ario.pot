@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-02 22:23+0100\n"
+"POT-Creation-Date: 2007-11-05 01:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -230,31 +230,35 @@ msgstr ""
 msgid "<b>Connection</b>"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:3 ../data/connection-assistant.glade.h:2
+#: ../data/connection-prefs.glade.h:3
+msgid "Auto detect"
+msgstr ""
+
+#: ../data/connection-prefs.glade.h:4 ../data/connection-assistant.glade.h:2
 msgid "Host:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:4
+#: ../data/connection-prefs.glade.h:5
 msgid "Password:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:5 ../data/connection-assistant.glade.h:4
+#: ../data/connection-prefs.glade.h:6 ../data/connection-assistant.glade.h:4
 msgid "Port:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:6
-msgid "_Autoconnect"
+#: ../data/connection-prefs.glade.h:7
+msgid "_Autoconnect on startup"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:7 ../src/ario-shell.c:110
+#: ../data/connection-prefs.glade.h:8 ../src/ario-shell.c:110
 msgid "_Connect"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:8 ../src/ario-shell.c:113
+#: ../data/connection-prefs.glade.h:9 ../src/ario-shell.c:113
 msgid "_Disconnect"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:9
+#: ../data/connection-prefs.glade.h:10
 msgid "_Use Authentication"
 msgstr ""
 
@@ -525,15 +529,15 @@ msgstr ""
 msgid "Welcome to Ario"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:286
+#: ../src/ario-firstlaunch.c:286 ../src/ario-preferences.c:806
 msgid "Name"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:294
+#: ../src/ario-firstlaunch.c:294 ../src/ario-preferences.c:814
 msgid "Host"
 msgstr ""
 
-#: ../src/ario-firstlaunch.c:302
+#: ../src/ario-firstlaunch.c:302 ../src/ario-preferences.c:822
 msgid "Port"
 msgstr ""
 
@@ -639,7 +643,7 @@ msgid "Stop the music"
 msgstr ""
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/ario-header.c:279 ../src/ario-preferences.c:108
+#: ../src/ario-header.c:279 ../src/ario-preferences.c:112
 msgid "Play next song"
 msgstr ""
 
@@ -708,41 +712,57 @@ msgstr ""
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
-#: ../src/ario-preferences.c:107
+#: ../src/ario-preferences.c:111
 msgid "Play/Pause"
 msgstr ""
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/ario-preferences.c:109
+#: ../src/ario-preferences.c:113
 msgid "Do nothing"
 msgstr ""
 
-#: ../src/ario-preferences.c:226
+#: ../src/ario-preferences.c:242
 msgid "Ario Preferences"
 msgstr ""
 
-#: ../src/ario-preferences.c:360
+#: ../src/ario-preferences.c:378
 msgid "Connection"
 msgstr ""
 
-#: ../src/ario-preferences.c:392
+#: ../src/ario-preferences.c:410
 msgid "Server"
 msgstr ""
 
-#: ../src/ario-preferences.c:447
+#: ../src/ario-preferences.c:465
 msgid "Covers"
 msgstr ""
 
-#: ../src/ario-preferences.c:497
+#: ../src/ario-preferences.c:515
 msgid "Interface"
 msgstr ""
 
-#: ../src/ario-preferences.c:556
+#: ../src/ario-preferences.c:574
 msgid "Not connected"
 msgstr ""
 
-#: ../src/ario-preferences.c:561 ../src/ario-preferences.c:777
+#: ../src/ario-preferences.c:579 ../src/ario-preferences.c:951
 msgid "Updating..."
+msgstr ""
+
+#. Create the widgets
+#: ../src/ario-preferences.c:785
+msgid "Server autodetection"
+msgstr ""
+
+#: ../src/ario-preferences.c:796
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+
+#: ../src/ario-preferences.c:878
+msgid "You must select a server."
 msgstr ""
 
 #: ../src/ario-shell-coverdownloader.c:256 ../src/ario-shell-coverselect.c:239
