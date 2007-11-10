@@ -21,7 +21,7 @@
 #define __ARIO_MPD_H
 
 #include <glib-object.h>
-#include "libmpdclient.h"
+#include "lib/libmpdclient.h"
 
 G_BEGIN_DECLS
 

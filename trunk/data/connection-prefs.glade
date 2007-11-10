@@ -19,20 +19,100 @@
                 <property name="visible">True</property>
                 <property name="left_padding">12</property>
                 <child>
-                  <widget class="GtkVBox" id="vbox1">
+                  <widget class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="border_width">12</property>
                     <child>
-                      <widget class="GtkTable" id="table">
+                      <widget class="GtkVBox" id="vbox1">
+                        <property name="visible">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <child>
+                          <widget class="GtkScrolledWindow" id="scrolledwindow">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
+                            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                            <property name="shadow_type">GTK_SHADOW_IN</property>
+                            <child>
+                              <widget class="GtkTreeView" id="profile_treeview">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="headers_clickable">True</property>
+                              </widget>
+                            </child>
+                          </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkHBox" id="hbox3">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <widget class="GtkButton" id="newprofile_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="response_id">0</property>
+                                <signal name="clicked" handler="ario_connection_preferences_new_profile_cb"/>
+                                <child>
+                                  <widget class="GtkImage" id="image4">
+                                    <property name="visible">True</property>
+                                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                    <property name="stock">gtk-new</property>
+                                    <property name="icon_size">2</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkButton" id="deleteprofile_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="response_id">0</property>
+                                <signal name="clicked" handler="ario_connection_preferences_delete_profile_cb"/>
+                                <child>
+                                  <widget class="GtkImage" id="image5">
+                                    <property name="visible">True</property>
+                                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                    <property name="stock">gtk-delete</property>
+                                    <property name="icon_size">2</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="padding">4</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkTable" id="table1">
                         <property name="visible">True</property>
                         <property name="border_width">12</property>
-                        <property name="n_rows">3</property>
+                        <property name="n_rows">5</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">6</property>
                         <property name="row_spacing">6</property>
-                        <child>
-                          <placeholder/>
-                        </child>
                         <child>
                           <widget class="GtkButton" id="autodetect_button">
                             <property name="visible">True</property>
@@ -40,9 +120,9 @@
                             <property name="receives_default">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="response_id">0</property>
-                            <signal name="clicked" handler="ario_preferences_autodetect_cb"/>
+                            <signal name="clicked" handler="ario_connection_preferences_autodetect_cb"/>
                             <child>
-                              <widget class="GtkHBox" id="hbox1">
+                              <widget class="GtkHBox" id="hbox2">
                                 <property name="visible">True</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                 <child>
@@ -51,6 +131,10 @@
                                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                                     <property name="stock">gtk-find</property>
                                   </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                  </packing>
                                 </child>
                                 <child>
                                   <widget class="GtkLabel" id="label1">
@@ -59,6 +143,8 @@
                                     <property name="label" translatable="yes">Auto detect</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -66,10 +152,9 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
-                            <property name="top_attach">2</property>
-                            <property name="bottom_attach">3</property>
+                            <property name="top_attach">4</property>
+                            <property name="bottom_attach">5</property>
                             <property name="x_options"></property>
                             <property name="y_options"></property>
                           </packing>
@@ -81,6 +166,8 @@
                             <property name="label" translatable="yes">Host:</property>
                           </widget>
                           <packing>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
                             <property name="x_options">GTK_FILL</property>
                             <property name="y_options"></property>
                           </packing>
@@ -92,8 +179,8 @@
                             <property name="label" translatable="yes">Port:</property>
                           </widget>
                           <packing>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
                             <property name="x_options">GTK_FILL</property>
                             <property name="y_options"></property>
                           </packing>
@@ -102,17 +189,17 @@
                           <widget class="GtkSpinButton" id="port_spinbutton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="adjustment">2100 1 65536 1 10 10</property>
+                            <property name="adjustment">6600 1 65536 1 10 10</property>
                             <property name="climb_rate">1</property>
                             <property name="snap_to_ticks">True</property>
                             <property name="numeric">True</property>
-                            <signal name="value_changed" handler="ario_preferences_port_changed_cb"/>
+                            <signal name="value_changed" handler="ario_connection_preferences_port_changed_cb"/>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
                             <property name="y_options"></property>
                           </packing>
                         </child>
@@ -123,7 +210,35 @@
                             <property name="max_length">256</property>
                             <property name="invisible_char">*</property>
                             <property name="text">localhost</property>
-                            <signal name="changed" handler="ario_preferences_host_changed_cb"/>
+                            <signal name="changed" handler="ario_connection_preferences_host_changed_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="name_label">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="xalign">1</property>
+                            <property name="label" translatable="yes">Name:</property>
+                          </widget>
+                          <packing>
+                            <property name="x_options">GTK_FILL</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkEntry" id="name_entry">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="text" translatable="yes">Default</property>
+                            <signal name="changed" handler="ario_connection_preferences_name_changed_cb"/>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -131,17 +246,33 @@
                             <property name="y_options"></property>
                           </packing>
                         </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="autoconnect_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">_Autoconnect on startup</property>
-                        <property name="use_underline">True</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_preferences_autoconnect_changed_cb"/>
+                        <child>
+                          <widget class="GtkEntry" id="password_entry">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="max_length">255</property>
+                            <property name="visibility">False</property>
+                            <property name="invisible_char">*</property>
+                            <signal name="changed" handler="ario_connection_preferences_password_changed_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="password_label">
+                            <property name="visible">True</property>
+                            <property name="xalign">1</property>
+                            <property name="label" translatable="yes">Password:</property>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
                         <property name="position">1</property>
@@ -164,105 +295,83 @@
           </widget>
         </child>
         <child>
-          <widget class="GtkFrame" id="frame2">
-            <property name="visible">True</property>
-            <property name="border_width">14</property>
-            <property name="label_xalign">0</property>
-            <property name="shadow_type">GTK_SHADOW_IN</property>
-            <child>
-              <widget class="GtkAlignment" id="alignment5">
-                <property name="visible">True</property>
-                <property name="bottom_padding">8</property>
-                <property name="left_padding">12</property>
-                <child>
-                  <widget class="GtkVBox" id="vbox2">
-                    <property name="visible">True</property>
-                    <property name="border_width">12</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <widget class="GtkCheckButton" id="authentication_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">_Use Authentication</property>
-                        <property name="use_underline">True</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_preferences_authentication_changed_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkHBox" id="hbox4">
-                        <property name="visible">True</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <widget class="GtkLabel" id="password_label">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">Password:</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="pack_type">GTK_PACK_END</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkEntry" id="password_entry">
-                            <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">True</property>
-                            <property name="max_length">255</property>
-                            <property name="visibility">False</property>
-                            <property name="invisible_char">*</property>
-                            <signal name="changed" handler="ario_preferences_password_changed_cb"/>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="pack_type">GTK_PACK_END</property>
-                          </packing>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </widget>
-                </child>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="authentication_label">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;b&gt;Authentication&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
-              </widget>
-              <packing>
-                <property name="type">label_item</property>
-              </packing>
-            </child>
-          </widget>
-          <packing>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
           <widget class="GtkHBox" id="hbox8">
             <property name="visible">True</property>
             <property name="border_width">12</property>
             <property name="spacing">12</property>
+            <child>
+              <widget class="GtkCheckButton" id="autoconnect_checkbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="label" translatable="yes">_Autoconnect on startup</property>
+                <property name="use_underline">True</property>
+                <property name="response_id">0</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="ario_connection_preferences_autoconnect_changed_cb"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="connect_button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="ario_connection_preferences_connect_cb"/>
+                <child>
+                  <widget class="GtkAlignment" id="alignment9">
+                    <property name="visible">True</property>
+                    <property name="xscale">0</property>
+                    <property name="yscale">0</property>
+                    <child>
+                      <widget class="GtkHBox" id="hbox7">
+                        <property name="visible">True</property>
+                        <property name="spacing">2</property>
+                        <child>
+                          <widget class="GtkImage" id="image2">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-ok</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label6">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">_Connect</property>
+                            <property name="use_underline">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="padding">12</property>
+                <property name="pack_type">GTK_PACK_END</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
             <child>
               <widget class="GtkButton" id="disconnect_button">
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="response_id">0</property>
-                <signal name="clicked" handler="ario_preferences_disconnect_cb"/>
+                <signal name="clicked" handler="ario_connection_preferences_disconnect_cb"/>
                 <child>
                   <widget class="GtkAlignment" id="alignment7">
                     <property name="visible">True</property>
@@ -306,60 +415,11 @@
                 <property name="position">1</property>
               </packing>
             </child>
-            <child>
-              <widget class="GtkButton" id="connect_button">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="response_id">0</property>
-                <signal name="clicked" handler="ario_preferences_connect_cb"/>
-                <child>
-                  <widget class="GtkAlignment" id="alignment9">
-                    <property name="visible">True</property>
-                    <property name="xscale">0</property>
-                    <property name="yscale">0</property>
-                    <child>
-                      <widget class="GtkHBox" id="hbox7">
-                        <property name="visible">True</property>
-                        <property name="spacing">2</property>
-                        <child>
-                          <widget class="GtkImage" id="image2">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-ok</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="label6">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">_Connect</property>
-                            <property name="use_underline">True</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="padding">12</property>
-                <property name="pack_type">GTK_PACK_END</property>
-              </packing>
-            </child>
           </widget>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </widget>

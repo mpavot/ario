@@ -73,18 +73,6 @@
       </schema>
 
       <schema>
-        <key>/schemas/apps/ario/auth</key>
-        <applyto>/apps/ario/auth</applyto>
-        <owner>ario</owner>
-        <type>bool</type>
-        <default>0</default>
-        <locale name="C">
-	<short>Define if Ario must use authentication to connect to mpd or not</short>
-	<long>Define if Ario must use authentication to connect to mpd or not.</long>
-        </locale>
-      </schema>
-
-      <schema>
         <key>/schemas/apps/ario/password</key>
         <applyto>/apps/ario/password</applyto>
         <owner>ario</owner>

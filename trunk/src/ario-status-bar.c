@@ -18,7 +18,7 @@
  */
 
 
-#include "ario-status-bar.h"
+#include "widgets/ario-status-bar.h"
 #include "ario-util.h"
 #include <glib/gi18n.h>
 #include "ario-debug.h"

@@ -34,7 +34,8 @@ uidir = $(pkgdatadir)/ario/ui
 ui_DATA = ario-ui.xml
 
 alldatadir = $(pkgdatadir)/ario/data
-alldata_DATA = radios.xml.default
+alldata_DATA = radios.xml.default       \
+               profiles.xml.default 
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:

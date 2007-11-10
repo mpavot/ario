@@ -22,9 +22,9 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include "ario-header.h"
+#include "widgets/ario-header.h"
 #include "ario-util.h"
-#include "ario-volume.h"
+#include "widgets/ario-volume.h"
 #include "ario-debug.h"
 #include "ario-cover.h"
 

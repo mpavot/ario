@@ -23,13 +23,12 @@
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <string.h>
-
-#include "eel-gconf-extensions.h"
 #include <glib/gi18n.h>
+#include "lib/eel-gconf-extensions.h"
 #include "ario-cover.h"
 #include "ario-mpd.h"
 #include "ario-util.h"
-#include "ario-preferences.h"
+#include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
 #define AMAZON_URI  "http://xml.amazon.%s/onca/xml3?t=webservices-20&dev-t=%s&KeywordSearch=%s&mode=%s&locale=%s&type=lite&page=1&f=xml"

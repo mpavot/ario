@@ -20,9 +20,9 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
-#include "libmpdclient.h"
 #include <glib/gi18n.h>
-#include "ario-search.h"
+#include "lib/libmpdclient.h"
+#include "sources/ario-search.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 

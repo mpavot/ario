@@ -22,10 +22,10 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
-#include "eel-gconf-extensions.h"
-#include "ario-mpd.h"
-#include "ario-preferences.h"
 #include <glib/gi18n.h>
+#include "lib/eel-gconf-extensions.h"
+#include "ario-mpd.h"
+#include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
 static void ario_mpd_class_init (ArioMpdClass *klass);
@@ -499,13 +499,12 @@ ario_mpd_connect_to (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         mpd_Stats *stats;
+        gchar *password;
 
         mpd->priv->connection = mpd_newConnection (hostname, port, timeout);
 
-        if (eel_gconf_get_boolean (CONF_AUTH, FALSE)) {
-                gchar *password;
-
-                password = eel_gconf_get_string (CONF_PASSWORD, NULL);
+        password = eel_gconf_get_string (CONF_PASSWORD, NULL);
+        if (password) {
                 mpd_sendPasswordCommand (mpd->priv->connection, password);
                 mpd_finishCommand (mpd->priv->connection);
                 g_free (password);

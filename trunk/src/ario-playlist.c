@@ -21,13 +21,12 @@
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "eel-gconf-extensions.h"
-
-#include "ario-playlist.h"
+#include "lib/eel-gconf-extensions.h"
+#include "widgets/ario-playlist.h"
 #include "ario-mpd.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include "ario-preferences.h"
+#include "preferences/ario-preferences.h"
 
 #define DRAG_THRESHOLD 1
 

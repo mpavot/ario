@@ -24,11 +24,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <curl/curl.h>
-#include "eel-gconf-extensions.h"
+#include <glib/gi18n.h>
+#include "lib/eel-gconf-extensions.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include <glib/gi18n.h>
-#include "ario-preferences.h"
+#include "preferences/ario-preferences.h"
 
 static char *config_dir = NULL;
 

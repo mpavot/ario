@@ -21,10 +21,10 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "ario-radio.h"
+#include <libxml/parser.h>
+#include "sources/ario-radio.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include <libxml/parser.h>
 
 #ifdef ENABLE_RADIOS
 
@@ -427,6 +427,7 @@ ario_radio_get_xml_filename (void)
 static GList*
 ario_radio_get_radios (ArioRadio *radio)
 {
+        ARIO_LOG_FUNCTION_START
         GList* radios = NULL;
         ArioInternetRadio *internet_radio;
         xmlDocPtr doc;
@@ -524,7 +525,7 @@ ario_radio_fill_radios (ArioRadio *radio)
                 ario_radio_append_radio (radio, internet_radio);
                 temp = g_list_next (temp);
         }
-        g_list_foreach(radios, (GFunc) ario_radio_free_internet_radio, NULL);
+        g_list_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
         g_list_free (radios);
 
         gtk_tree_selection_unselect_all (radio->priv->radios_selection);
@@ -788,6 +789,7 @@ static void
 ario_radio_add_new_radio (ArioRadio *radio,
                           ArioInternetRadio *internet_radio)
 {
+        ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
         xmlNodePtr cur, cur2;
         char *xml_filename;

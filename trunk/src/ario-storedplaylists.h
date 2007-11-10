@@ -23,7 +23,7 @@
 #include <gtk/gtkhpaned.h>
 #include <config.h>
 #include "ario-mpd.h"
-#include "ario-playlist.h"
+#include "widgets/ario-playlist.h"
 
 #ifdef ENABLE_STOREDPLAYLISTS
 

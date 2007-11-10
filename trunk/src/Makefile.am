@@ -9,53 +9,66 @@ INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 	   -Wcast-align -Wall
 
 ario_SOURCES = \
-	ario-main.c\
-	ario-shell.c\
-	ario-shell.h\
 	ario-avahi.c\
 	ario-avahi.h\
-	ario-firstlaunch.c\
-	ario-firstlaunch.h\
-	ario-browser.c\
-	ario-browser.h\
-	ario-radio.c\
-	ario-radio.h\
-	ario-source.c\
-	ario-source.h\
-	ario-search.c\
-	ario-search.h\
-	ario-storedplaylists.c\
-	ario-storedplaylists.h\
-	ario-mpd.c\
-	ario-mpd.h\
-	libmpdclient.c\
-	libmpdclient.h\
-	ario-header.c\
-	ario-header.h\
-	eggtrayicon.c\
-	eggtrayicon.h\
-	eel-gconf-extensions.c\
-	eel-gconf-extensions.h\
-	ario-tray-icon.c\
-	ario-tray-icon.h\
-	ario-playlist.c\
-	ario-playlist.h\
-	rb-glade-helpers.c\
-	rb-glade-helpers.h\
-	ario-util.c\
-	ario-util.h\
-	ario-preferences.c\
-	ario-preferences.h\
 	ario-cover.c\
 	ario-cover.h\
-	ario-volume.c\
-	ario-volume.h\
-	ario-shell-coverdownloader.c\
-	ario-shell-coverdownloader.h\
-	ario-shell-coverselect.c\
-	ario-shell-coverselect.h\
-	ario-status-bar.c\
-	ario-status-bar.h
+	ario-debug.h\
+	ario-main.c\
+	ario-mpd.c\
+	ario-mpd.h\
+	ario-profiles.c\
+	ario-profiles.h\
+	ario-util.c\
+	ario-util.h\
+	lib/eel-gconf-extensions.c\
+	lib/eel-gconf-extensions.h\
+	lib/eggtrayicon.c\
+	lib/eggtrayicon.h\
+	lib/libmpdclient.c\
+	lib/libmpdclient.h\
+	lib/rb-glade-helpers.c\
+	lib/rb-glade-helpers.h\
+	preferences/ario-connection-preferences.c\
+	preferences/ario-connection-preferences.h\
+	preferences/ario-cover-preferences.c\
+	preferences/ario-cover-preferences.h\
+	preferences/ario-interface-preferences.c\
+	preferences/ario-interface-preferences.h\
+	preferences/ario-server-preferences.c\
+	preferences/ario-server-preferences.h\
+	preferences/ario-preferences.h\
+	sources/ario-browser.c\
+	sources/ario-browser.h\
+	sources/ario-radio.c\
+	sources/ario-radio.h\
+	sources/ario-search.c\
+	sources/ario-search.h\
+	sources/ario-source.c\
+	sources/ario-source.h\
+	sources/ario-storedplaylists.c\
+	sources/ario-storedplaylists.h\
+	shell/ario-shell.c\
+	shell/ario-shell.h\
+	shell/ario-shell-coverdownloader.c\
+	shell/ario-shell-coverdownloader.h\
+	shell/ario-shell-coverselect.c\
+	shell/ario-shell-coverselect.h\
+	shell/ario-shell-preferences.c\
+	shell/ario-shell-preferences.h\
+	widgets/ario-firstlaunch.c\
+	widgets/ario-firstlaunch.h\
+	widgets/ario-header.c\
+	widgets/ario-header.h\
+	widgets/ario-playlist.c\
+	widgets/ario-playlist.h\
+	widgets/ario-status-bar.c\
+	widgets/ario-status-bar.h\
+	widgets/ario-tray-icon.c\
+	widgets/ario-tray-icon.h\
+	widgets/ario-volume.c\
+	widgets/ario-volume.h
+
 
 ario_LDADD = $(DEPS_LIBS)
 

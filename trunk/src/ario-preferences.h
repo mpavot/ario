@@ -17,26 +17,13 @@
  *
  */
 
-#include <gtk/gtkdialog.h>
-#include "ario-mpd.h"
-
 #ifndef __ARIO_PREFERENCES_H
 #define __ARIO_PREFERENCES_H
-
-G_BEGIN_DECLS
-
-#define TYPE_ARIO_PREFERENCES         (ario_preferences_get_type ())
-#define ARIO_PREFERENCES(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_PREFERENCES, ArioPreferences))
-#define ARIO_PREFERENCES_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), TYPE_ARIO_PREFERENCES, ArioPreferencesClass))
-#define IS_ARIO_PREFERENCES(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), TYPE_ARIO_PREFERENCES))
-#define IS_ARIO_PREFERENCES_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_PREFERENCES))
-#define ARIO_PREFERENCES_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_PREFERENCES, ArioPreferencesClass))
 
 #define CONF_HOST                       "/apps/ario/host"
 #define CONF_PORT                       "/apps/ario/port"
 #define CONF_TIMEOUT                    "/apps/ario/timeout"
 #define CONF_AUTOCONNECT                "/apps/ario/autoconnect"
-#define CONF_AUTH                       "/apps/ario/state/auth"
 #define CONF_PASSWORD                   "/apps/ario/password"
 #define CONF_COVER_TREE_HIDDEN          "/apps/ario/ario_cover_tree_hidden"
 #define CONF_COVER_AMAZON_COUNTRY       "/apps/ario/ario_cover_amazon_country"
@@ -65,25 +52,5 @@ enum
         TRAY_ICON_DO_NOTHING,
         TRAY_ICON_N_BEHAVIOR
 };
-
-typedef struct ArioPreferencesPrivate ArioPreferencesPrivate;
-
-typedef struct
-{
-        GtkDialog parent;
-
-        ArioPreferencesPrivate *priv;
-} ArioPreferences;
-
-typedef struct
-{
-        GtkDialogClass parent_class;
-} ArioPreferencesClass;
-
-GType              ario_preferences_get_type         (void);
-
-GtkWidget *        ario_preferences_new              (ArioMpd *mpd);
-
-G_END_DECLS
 
 #endif /* __ARIO_PREFERENCES_H */
