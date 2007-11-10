@@ -290,6 +290,7 @@ ario_connection_preferences_new (ArioMpd *mpd)
                                                            "text", 0,
                                                            NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 120);
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (connection_preferences->priv->profile_treeview), column);
         g_signal_connect_object (G_OBJECT (connection_preferences->priv->profile_selection),
@@ -623,7 +624,7 @@ ario_connection_preferences_new_profile_cb (GtkWidget *widget,
         GList *tmp;
 
         profile = (ArioProfile *) g_malloc (sizeof (ArioProfile));
-        profile->name = g_strdup (_("Default"));
+        profile->name = g_strdup (_("New Profile"));
         profile->host = g_strdup ("localhost");
         profile->port = 6600;
         profile->password = NULL;

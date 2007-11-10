@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-10 17:43+0100\n"
+"POT-Creation-Date: 2007-11-10 18:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -222,9 +222,7 @@ msgstr ""
 msgid "Auto detect"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:3
-#: ../src/preferences/ario-connection-preferences.c:626
-#: ../src/widgets/ario-firstlaunch.c:161
+#: ../data/connection-prefs.glade.h:3 ../src/widgets/ario-firstlaunch.c:161
 msgid "Default"
 msgstr ""
 
@@ -405,34 +403,38 @@ msgid "Profile"
 msgstr ""
 
 #. Create the widgets
-#: ../src/preferences/ario-connection-preferences.c:512
+#: ../src/preferences/ario-connection-preferences.c:513
 msgid "Server autodetection"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:523
+#: ../src/preferences/ario-connection-preferences.c:524
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:533
+#: ../src/preferences/ario-connection-preferences.c:534
 #: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:541
+#: ../src/preferences/ario-connection-preferences.c:542
 #: ../src/widgets/ario-firstlaunch.c:306
 msgid "Host"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:549
+#: ../src/preferences/ario-connection-preferences.c:550
 #: ../src/widgets/ario-firstlaunch.c:314
 msgid "Port"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:607
+#: ../src/preferences/ario-connection-preferences.c:608
 msgid "You must select a server."
+msgstr ""
+
+#: ../src/preferences/ario-connection-preferences.c:627
+msgid "New Profile"
 msgstr ""
 
 #: ../src/preferences/ario-interface-preferences.c:44
