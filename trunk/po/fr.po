@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-10 14:44+0100\n"
-"PO-Revision-Date: 2007-11-10 14:44+0100\n"
+"POT-Creation-Date: 2007-11-10 17:43+0100\n"
+"PO-Revision-Date: 2007-11-10 17:44+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -44,142 +44,134 @@ msgid "Define if Ario must use a proxy for remote connections."
 msgstr "Définit si Ario doit utiliser un proxy pour les connexions distantes"
 
 #: ../data/ario.schemas.in.h:7
-msgid "Define if Ario must use authentication to connect to mpd or not"
-msgstr "Définit si Ario doit s'authentifier pour se connecter à MPD ou pas"
-
-#: ../data/ario.schemas.in.h:8
-msgid "Define if Ario must use authentication to connect to mpd or not."
-msgstr "Définit si Ario doit s'authentifier pour se connecter à MPD ou pas"
-
-#: ../data/ario.schemas.in.h:9
 msgid "Define if the view tabs are shown."
 msgstr "Définit si les onglets sont affichés."
 
-#: ../data/ario.schemas.in.h:10
+#: ../data/ario.schemas.in.h:8
 msgid "Define the address of the proxy"
 msgstr "Definit l'addresse du proxy"
 
-#: ../data/ario.schemas.in.h:11
+#: ../data/ario.schemas.in.h:9
 msgid "Define the behavior of a double click on the tray icon."
 msgstr "Definit le comportement d'un double clic sur l'icône."
 
-#: ../data/ario.schemas.in.h:12
+#: ../data/ario.schemas.in.h:10
 msgid "Define the port of the proxy"
 msgstr "Definit le port du proxy"
 
-#: ../data/ario.schemas.in.h:13
+#: ../data/ario.schemas.in.h:11
 msgid "Define the port of the proxy."
 msgstr "Definit le port du proxy"
 
-#: ../data/ario.schemas.in.h:14
+#: ../data/ario.schemas.in.h:12
 msgid "Define the size of the album column."
 msgstr "Definit la taille de la colonne albums"
 
-#: ../data/ario.schemas.in.h:15
+#: ../data/ario.schemas.in.h:13
 msgid "Define the size of the artist column."
 msgstr "Definit la taille de la colonne artistes"
 
-#: ../data/ario.schemas.in.h:16
+#: ../data/ario.schemas.in.h:14
 msgid "Define the size of the title column."
 msgstr "Definit la taille de la colonne titres"
 
-#: ../data/ario.schemas.in.h:17
+#: ../data/ario.schemas.in.h:15
 msgid "Define the size of the track column."
 msgstr "Definit la taille de la colonne pistes"
 
-#: ../data/ario.schemas.in.h:18
+#: ../data/ario.schemas.in.h:16
 msgid "Define the source used in Ario"
 msgstr "Definit la utilisée par Ario"
 
-#: ../data/ario.schemas.in.h:19
+#: ../data/ario.schemas.in.h:17
 msgid "Hide the covers in the albums treeview"
 msgstr "Cacher les pochettes dans la liste d'albums"
 
-#: ../data/ario.schemas.in.h:20
+#: ../data/ario.schemas.in.h:18
 msgid "Host to connect to"
 msgstr "Hôte"
 
-#: ../data/ario.schemas.in.h:21
+#: ../data/ario.schemas.in.h:19
 msgid "Host to connect to."
 msgstr "Hôte"
 
-#: ../data/ario.schemas.in.h:22
+#: ../data/ario.schemas.in.h:20
 msgid "If true, the main window is maximized."
 msgstr "Si vrai, la fenêtre principale est maximisée."
 
-#: ../data/ario.schemas.in.h:23
+#: ../data/ario.schemas.in.h:21
 msgid "Main window height"
 msgstr "Hauteur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:24
+#: ../data/ario.schemas.in.h:22
 msgid "Main window height."
 msgstr "Hauteur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:25
+#: ../data/ario.schemas.in.h:23
 msgid "Main window maximization state"
 msgstr "État de maximisation de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:26
+#: ../data/ario.schemas.in.h:24
 msgid "Main window width"
 msgstr "Largeur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:27
+#: ../data/ario.schemas.in.h:25
 msgid "Main window width."
 msgstr "Largeur de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:28
+#: ../data/ario.schemas.in.h:26
 msgid "Port to connect to"
 msgstr "Port"
 
-#: ../data/ario.schemas.in.h:29
+#: ../data/ario.schemas.in.h:27
 msgid "Port to connect to."
 msgstr "Port"
 
-#: ../data/ario.schemas.in.h:30
+#: ../data/ario.schemas.in.h:28
 msgid "Position of main window pane"
 msgstr "Position du panneau de la fenêtre principale"
 
-#: ../data/ario.schemas.in.h:31
+#: ../data/ario.schemas.in.h:29
 msgid "Position of main window pane."
 msgstr "Position du panneau de la fenêtre principale."
 
-#: ../data/ario.schemas.in.h:32
+#: ../data/ario.schemas.in.h:30
 msgid "Position of playlists pane"
 msgstr "Position du panneau de la playlist"
 
-#: ../data/ario.schemas.in.h:33
+#: ../data/ario.schemas.in.h:31
 msgid "Position of playlists pane."
 msgstr "Position du panneau de la playlist."
 
-#: ../data/ario.schemas.in.h:34
+#: ../data/ario.schemas.in.h:32
 msgid "The amazon country to use to get the covers"
 msgstr "Le pays d'Amazon à utiliser pour récupérer les pochettes"
 
-#: ../data/ario.schemas.in.h:35
+#: ../data/ario.schemas.in.h:33
 msgid "The password to connect to mpd"
 msgstr "Le mot de passe pour se connecter à mpd"
 
-#: ../data/ario.schemas.in.h:36
+#: ../data/ario.schemas.in.h:34
 msgid "The password to connect to mpd."
 msgstr "Le mot de passe pour se connecter à mpd"
 
-#: ../data/ario.schemas.in.h:37
+#: ../data/ario.schemas.in.h:35
 msgid "The timeout for the connection to mpd"
 msgstr "Timeout pour la connexion à mpd (en secondes)"
 
-#: ../data/ario.schemas.in.h:38
+#: ../data/ario.schemas.in.h:36
 msgid "The timeout for the connection to mpd."
 msgstr "Timeout pour la connexion à mpd (en secondes)"
 
-#: ../data/ario.schemas.in.h:39
+#: ../data/ario.schemas.in.h:37
 msgid "True if the initial assistant has already been run."
 msgstr "Vrai si l'assistant a déjà été lancé."
 
-#: ../data/ario.schemas.in.h:40
+#: ../data/ario.schemas.in.h:38
 msgid "When enabled, ario hide the covers in the albums treeview"
 msgstr "Si activé, Ario cache les pochettes dans la liste d'albums"
 
-#: ../data/ario.schemas.in.h:41
+#: ../data/ario.schemas.in.h:39
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -236,6 +228,8 @@ msgid "Auto detect"
 msgstr "Détection automatique"
 
 #: ../data/connection-prefs.glade.h:3
+#: ../src/preferences/ario-connection-preferences.c:626
+#: ../src/widgets/ario-firstlaunch.c:161
 msgid "Default"
 msgstr "Défaut"
 
@@ -266,10 +260,6 @@ msgstr "_Connecter"
 #: ../data/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:114
 msgid "_Disconnect"
 msgstr "_Déconnecter"
-
-#: ../data/connection-prefs.glade.h:11
-msgid "_Use Authentication"
-msgstr "_Utiliser l'authentification"
 
 #: ../data/connection-assistant.glade.h:1
 msgid "Automatic configuration"
@@ -382,7 +372,7 @@ msgstr "Afficher les onglets"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La pochette existe déjà. Voulez-vous la remplacer?"
 
-#: ../src/ario-mpd.c:521
+#: ../src/ario-mpd.c:520
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible de se connecter à MPD. Vérifiez vos options de connexion."
 
@@ -418,12 +408,16 @@ msgstr "Orientation"
 msgid "The orientation of the tray."
 msgstr "Orientation de l'icône de notification"
 
+#: ../src/preferences/ario-connection-preferences.c:288
+msgid "Profile"
+msgstr "Profile"
+
 #. Create the widgets
-#: ../src/preferences/ario-connection-preferences.c:403
+#: ../src/preferences/ario-connection-preferences.c:512
 msgid "Server autodetection"
 msgstr "Autodetection de serveur"
 
-#: ../src/preferences/ario-connection-preferences.c:414
+#: ../src/preferences/ario-connection-preferences.c:523
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -432,46 +426,46 @@ msgstr ""
 "Si vous ne voyez pas votre serveur MPD, vous devriez vérifier que zeroconf "
 "est activé sur votre serveur MPD ou utiliser la configuration manuelle."
 
-#: ../src/preferences/ario-connection-preferences.c:424
-#: ../src/widgets/ario-firstlaunch.c:286
+#: ../src/preferences/ario-connection-preferences.c:533
+#: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
 msgstr "Nom"
 
-#: ../src/preferences/ario-connection-preferences.c:432
-#: ../src/widgets/ario-firstlaunch.c:294
+#: ../src/preferences/ario-connection-preferences.c:541
+#: ../src/widgets/ario-firstlaunch.c:306
 msgid "Host"
 msgstr "Hôte"
 
-#: ../src/preferences/ario-connection-preferences.c:440
-#: ../src/widgets/ario-firstlaunch.c:302
+#: ../src/preferences/ario-connection-preferences.c:549
+#: ../src/widgets/ario-firstlaunch.c:314
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:496
+#: ../src/preferences/ario-connection-preferences.c:607
 msgid "You must select a server."
 msgstr "Vous devez sélectionner un serveur."
 
-#: ../src/preferences/ario-interface-preferences.c:45
+#: ../src/preferences/ario-interface-preferences.c:44
 msgid "Play/Pause"
 msgstr "Play/Pause"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:46
+#: ../src/preferences/ario-interface-preferences.c:45
 #: ../src/widgets/ario-header.c:279
 msgid "Play next song"
 msgstr "Jouer la chanson suivante"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:47
+#: ../src/preferences/ario-interface-preferences.c:46
 msgid "Do nothing"
 msgstr "Ne rien faire"
 
-#: ../src/preferences/ario-server-preferences.c:246
+#: ../src/preferences/ario-server-preferences.c:245
 msgid "Not connected"
 msgstr "Déconnecté"
 
-#: ../src/preferences/ario-server-preferences.c:251
-#: ../src/preferences/ario-server-preferences.c:324
+#: ../src/preferences/ario-server-preferences.c:250
+#: ../src/preferences/ario-server-preferences.c:323
 msgid "Updating..."
 msgstr "En cours de mise à jour..."
 
@@ -788,27 +782,27 @@ msgstr "Erreur lors de la lecture du fichier"
 msgid "Error saving file"
 msgstr "Erreur lors de l'écriture du fichier"
 
-#: ../src/shell/ario-shell-preferences.c:143
+#: ../src/shell/ario-shell-preferences.c:142
 msgid "Ario Preferences"
 msgstr "Préférences d'Ario"
 
-#: ../src/shell/ario-shell-preferences.c:173
+#: ../src/shell/ario-shell-preferences.c:172
 msgid "Connection"
 msgstr "Connexion"
 
-#: ../src/shell/ario-shell-preferences.c:178
+#: ../src/shell/ario-shell-preferences.c:177
 msgid "Server"
 msgstr "Serveur"
 
-#: ../src/shell/ario-shell-preferences.c:183
+#: ../src/shell/ario-shell-preferences.c:182
 msgid "Covers"
 msgstr "Pochettes"
 
-#: ../src/shell/ario-shell-preferences.c:188
+#: ../src/shell/ario-shell-preferences.c:187
 msgid "Interface"
 msgstr "Interface"
 
-#: ../src/widgets/ario-firstlaunch.c:193
+#: ../src/widgets/ario-firstlaunch.c:205
 #, c-format
 msgid ""
 "The following configuration will be used: \n"
@@ -821,7 +815,7 @@ msgstr ""
 "Hôte:·<b>%s</b>\n"
 "Port:·<b>%d</b>"
 
-#: ../src/widgets/ario-firstlaunch.c:256
+#: ../src/widgets/ario-firstlaunch.c:268
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -829,15 +823,15 @@ msgstr ""
 "C'est la première fois que vous lancez Ario.\n"
 "Cet assistant va vous aider à le configurer."
 
-#: ../src/widgets/ario-firstlaunch.c:261
+#: ../src/widgets/ario-firstlaunch.c:273
 msgid "Welcome to Ario"
 msgstr "Bienvenue dans Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:320
+#: ../src/widgets/ario-firstlaunch.c:332
 msgid "Configuration"
 msgstr "Configuration"
 
-#: ../src/widgets/ario-firstlaunch.c:332
+#: ../src/widgets/ario-firstlaunch.c:344
 msgid "Confirmation"
 msgstr "Confirmation"
 
@@ -980,6 +974,15 @@ msgstr "+"
 #: ../src/widgets/ario-volume.c:238
 msgid "-"
 msgstr "-"
+
+#~ msgid "Define if Ario must use authentication to connect to mpd or not"
+#~ msgstr "Définit si Ario doit s'authentifier pour se connecter à MPD ou pas"
+
+#~ msgid "Define if Ario must use authentication to connect to mpd or not."
+#~ msgstr "Définit si Ario doit s'authentifier pour se connecter à MPD ou pas"
+
+#~ msgid "_Use Authentication"
+#~ msgstr "_Utiliser l'authentification"
 
 #~ msgid "<b>Authentication</b>"
 #~ msgstr "<b>Authentification</b>"
