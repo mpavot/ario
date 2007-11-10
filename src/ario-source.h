@@ -22,7 +22,7 @@
 
 #include <gtk/gtknotebook.h>
 #include "ario-mpd.h"
-#include "ario-playlist.h"
+#include "widgets/ario-playlist.h"
 
 G_BEGIN_DECLS
 

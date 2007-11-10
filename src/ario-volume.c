@@ -23,11 +23,10 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <config.h>
-
 #include <glib/gi18n.h>
-#include "ario-volume.h"
+#include "widgets/ario-volume.h"
 #include "ario-debug.h"
-#include "libmpdclient.h"
+#include "lib/libmpdclient.h"
 
 static void ario_volume_class_init (ArioVolumeClass *klass);
 static void ario_volume_init (ArioVolume *link);

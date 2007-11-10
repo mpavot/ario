@@ -30,7 +30,7 @@
                         <property name="use_underline">True</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_preferences_covertree_check_changed_cb"/>
+                        <signal name="toggled" handler="ario_cover_preferences_covertree_check_changed_cb"/>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -53,7 +53,7 @@
                         <child>
                           <widget class="GtkComboBox" id="amazon_country_combobox">
                             <property name="visible">True</property>
-                            <signal name="changed" handler="ario_preferences_amazon_country_changed_cb"/>
+                            <signal name="changed" handler="ario_cover_preferences_amazon_country_changed_cb"/>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -109,7 +109,7 @@
                         <property name="use_underline">True</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_preferences_proxy_check_changed_cb"/>
+                        <signal name="toggled" handler="ario_cover_preferences_proxy_check_changed_cb"/>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -149,7 +149,7 @@
                             <property name="can_focus">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="text" translatable="yes">192.168.0.1</property>
-                            <signal name="changed" handler="ario_preferences_proxy_address_changed_cb"/>
+                            <signal name="changed" handler="ario_cover_preferences_proxy_address_changed_cb"/>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -162,7 +162,7 @@
                             <property name="can_focus">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="adjustment">8080 0 10000 1 10 10</property>
-                            <signal name="value_changed" handler="ario_preferences_proxy_port_changed_cb"/>
+                            <signal name="value_changed" handler="ario_cover_preferences_proxy_port_changed_cb"/>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>

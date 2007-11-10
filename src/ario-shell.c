@@ -21,18 +21,19 @@
 #include <gdk/gdk.h>
 #include <config.h>
 #include <string.h>
-#include "eel-gconf-extensions.h"
+#include "lib/eel-gconf-extensions.h"
 #include <glib/gi18n.h>
-#include "ario-shell.h"
-#include "ario-source.h"
+#include "shell/ario-shell.h"
+#include "sources/ario-source.h"
 #include "ario-mpd.h"
-#include "ario-playlist.h"
-#include "ario-header.h"
-#include "ario-tray-icon.h"
-#include "ario-status-bar.h"
-#include "ario-preferences.h"
-#include "ario-shell-coverdownloader.h"
-#include "ario-firstlaunch.h"
+#include "widgets/ario-playlist.h"
+#include "widgets/ario-header.h"
+#include "widgets/ario-tray-icon.h"
+#include "widgets/ario-status-bar.h"
+#include "preferences/ario-preferences.h"
+#include "shell/ario-shell-preferences.h"
+#include "shell/ario-shell-coverdownloader.h"
+#include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
 
 static void ario_shell_class_init (ArioShellClass *klass);
@@ -446,7 +447,7 @@ ario_shell_cmd_preferences (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *prefs;
 
-        prefs = ario_preferences_new (shell->priv->mpd);
+        prefs = ario_shell_preferences_new (shell->priv->mpd);
 
         gtk_window_set_transient_for (GTK_WINDOW (prefs),
                                       GTK_WINDOW (shell->priv->window));

@@ -22,11 +22,11 @@
 #include <config.h>
 #include <libxml/parser.h>
 #include <glib/gi18n.h>
-#include "eel-gconf-extensions.h"
-#include "ario-storedplaylists.h"
+#include "lib/eel-gconf-extensions.h"
+#include "sources/ario-storedplaylists.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include "ario-preferences.h"
+#include "preferences/ario-preferences.h"
 
 #ifdef ENABLE_STOREDPLAYLISTS
 

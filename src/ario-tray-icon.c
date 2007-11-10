@@ -26,12 +26,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <glib/gi18n.h>
-#include "ario-tray-icon.h"
+#include "widgets/ario-tray-icon.h"
 #include "ario-util.h"
-#include "ario-preferences.h"
-#include "eel-gconf-extensions.h"
+#include "preferences/ario-preferences.h"
+#include "lib/eel-gconf-extensions.h"
 #include "ario-debug.h"
 
 static void ario_tray_icon_class_init (ArioTrayIconClass *klass);

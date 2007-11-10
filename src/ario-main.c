@@ -22,8 +22,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <curl/curl.h>
-#include "eel-gconf-extensions.h"
-#include "ario-shell.h"
+#include "lib/eel-gconf-extensions.h"
+#include "shell/ario-shell.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 

@@ -22,8 +22,8 @@
 
 #include <glib/gi18n.h>
 #include "ario-cover.h"
-#include "ario-shell-coverdownloader.h"
-#include "rb-glade-helpers.h"
+#include "shell/ario-shell-coverdownloader.h"
+#include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 
 static void ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass);

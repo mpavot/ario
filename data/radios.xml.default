@@ -1,20 +1,13 @@
 <?xml version="1.0" standalone="no"?>
 <ario-radios>
-  <radio url="http://213.205.96.91:9929">France Info - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9913">France Inter - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9905">France Bleu - Ile de France - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9909">France Culture - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9917">France Musique - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9925">France Vivace - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9921">Le Mouv - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9901">FIP - Bas d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9915">France Inter - Haut d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9907">France Bleu - Ile de France - Haut d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9911">France Culture - Haut d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9919">France Musique - Haut d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9927">France Vivace - Haut d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9923">Le Mouv - Haut d&#xE9;bit</radio>
-  <radio url="http://213.205.96.91:9903">FIP - Haut d&#xE9;bit</radio>
+  <radio url="http://213.205.96.91:9929">France Info</radio>
+  <radio url="http://213.205.96.91:9915">France Inter</radio>
+  <radio url="http://213.205.96.91:9907">France Bleu - Ile de France</radio>
+  <radio url="http://213.205.96.91:9911">France Culture</radio>
+  <radio url="http://213.205.96.91:9919">France Musique</radio>
+  <radio url="http://213.205.96.91:9927">France Vivace</radio>
+  <radio url="http://213.205.96.91:9923">Le Mouv</radio>
+  <radio url="http://213.205.96.91:9903">FIP</radio>
   <radio url="http://s6.streaming.novanet.fr:80/tsfjazz">TSF Jazz</radio>
   <radio url="http://broadcast.infomaniak.net:80/ouifm-high.mp3">OUI FM</radio>
 </ario-radios>

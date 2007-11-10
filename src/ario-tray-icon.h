@@ -23,7 +23,7 @@
 
 #include <gtk/gtkuimanager.h>
 
-#include "eggtrayicon.h"
+#include "lib/eggtrayicon.h"
 #include "ario-mpd.h"
 
 #ifndef __ARIO_TRAY_ICON_H

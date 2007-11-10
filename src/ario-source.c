@@ -20,14 +20,14 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
-#include "eel-gconf-extensions.h"
-#include "ario-source.h"
 #include <glib/gi18n.h>
-#include "ario-browser.h"
-#include "ario-radio.h"
-#include "ario-search.h"
-#include "ario-storedplaylists.h"
-#include "ario-preferences.h"
+#include "lib/eel-gconf-extensions.h"
+#include "sources/ario-source.h"
+#include "sources/ario-browser.h"
+#include "sources/ario-radio.h"
+#include "sources/ario-search.h"
+#include "sources/ario-storedplaylists.h"
+#include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
 static void ario_source_class_init (ArioSourceClass *klass);

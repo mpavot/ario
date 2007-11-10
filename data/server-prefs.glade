@@ -29,7 +29,7 @@
                     <property name="label" translatable="yes">enable crossfade</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
-                    <signal name="toggled" handler="ario_preferences_crossfade_changed_cb"/>
+                    <signal name="toggled" handler="ario_server_preferences_crossfade_changed_cb"/>
                   </widget>
                   <packing>
                     <property name="right_attach">2</property>
@@ -58,7 +58,7 @@
                     <property name="climb_rate">1</property>
                     <property name="snap_to_ticks">True</property>
                     <property name="numeric">True</property>
-                    <signal name="changed" handler="ario_preferences_crossfadetime_changed_cb"/>
+                    <signal name="changed" handler="ario_server_preferences_crossfadetime_changed_cb"/>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -134,7 +134,7 @@
                       <widget class="GtkButton" id="updatedb_button">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <signal name="clicked" handler="ario_preferences_updatedb_button_cb"/>
+                        <signal name="clicked" handler="ario_server_preferences_updatedb_button_cb"/>
                         <child>
                           <widget class="GtkAlignment" id="alignment2">
                             <property name="visible">True</property>

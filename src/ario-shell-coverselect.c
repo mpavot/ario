@@ -21,10 +21,10 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include "eel-gconf-extensions.h"
-#include "ario-shell-coverselect.h"
+#include "lib/eel-gconf-extensions.h"
+#include "shell/ario-shell-coverselect.h"
 #include "ario-cover.h"
-#include "rb-glade-helpers.h"
+#include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 
 #define CURRENT_COVER_SIZE 130

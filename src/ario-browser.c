@@ -19,14 +19,14 @@
 
 #include <gtk/gtk.h>
 #include <string.h>
-#include "eel-gconf-extensions.h"
+#include "lib/eel-gconf-extensions.h"
 #include <glib/gi18n.h>
-#include "ario-browser.h"
+#include "sources/ario-browser.h"
 #include "ario-util.h"
 #include "ario-cover.h"
-#include "ario-shell-coverselect.h"
-#include "ario-shell-coverdownloader.h"
-#include "ario-preferences.h"
+#include "shell/ario-shell-coverselect.h"
+#include "shell/ario-shell-coverdownloader.h"
+#include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
 #define DRAG_THRESHOLD 1
