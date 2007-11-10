@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-10 17:43+0100\n"
+"POT-Creation-Date: 2007-11-10 18:04+0100\n"
 "PO-Revision-Date: 2007-11-10 17:44+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
@@ -227,9 +227,7 @@ msgstr "<b>Connexion</b>"
 msgid "Auto detect"
 msgstr "Détection automatique"
 
-#: ../data/connection-prefs.glade.h:3
-#: ../src/preferences/ario-connection-preferences.c:626
-#: ../src/widgets/ario-firstlaunch.c:161
+#: ../data/connection-prefs.glade.h:3 ../src/widgets/ario-firstlaunch.c:161
 msgid "Default"
 msgstr "Défaut"
 
@@ -410,14 +408,14 @@ msgstr "Orientation de l'icône de notification"
 
 #: ../src/preferences/ario-connection-preferences.c:288
 msgid "Profile"
-msgstr "Profile"
+msgstr "Profil"
 
 #. Create the widgets
-#: ../src/preferences/ario-connection-preferences.c:512
+#: ../src/preferences/ario-connection-preferences.c:513
 msgid "Server autodetection"
 msgstr "Autodetection de serveur"
 
-#: ../src/preferences/ario-connection-preferences.c:523
+#: ../src/preferences/ario-connection-preferences.c:524
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -426,24 +424,28 @@ msgstr ""
 "Si vous ne voyez pas votre serveur MPD, vous devriez vérifier que zeroconf "
 "est activé sur votre serveur MPD ou utiliser la configuration manuelle."
 
-#: ../src/preferences/ario-connection-preferences.c:533
+#: ../src/preferences/ario-connection-preferences.c:534
 #: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
 msgstr "Nom"
 
-#: ../src/preferences/ario-connection-preferences.c:541
+#: ../src/preferences/ario-connection-preferences.c:542
 #: ../src/widgets/ario-firstlaunch.c:306
 msgid "Host"
 msgstr "Hôte"
 
-#: ../src/preferences/ario-connection-preferences.c:549
+#: ../src/preferences/ario-connection-preferences.c:550
 #: ../src/widgets/ario-firstlaunch.c:314
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:607
+#: ../src/preferences/ario-connection-preferences.c:608
 msgid "You must select a server."
 msgstr "Vous devez sélectionner un serveur."
+
+#: ../src/preferences/ario-connection-preferences.c:627
+msgid "New Profile"
+msgstr "Nouveau Profil"
 
 #: ../src/preferences/ario-interface-preferences.c:44
 msgid "Play/Pause"
