@@ -411,11 +411,11 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
 
 void
 ario_shell_coverdownloader_get_covers_from_artists (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                    GList *artists,
+                                                    GSList *artists,
                                                     ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        GList *albums = NULL, *temp_albums = NULL, *temp;
+        GSList *albums = NULL, *temp_albums = NULL, *temp;
 
         if (!artists)
                 return;
@@ -425,24 +425,24 @@ ario_shell_coverdownloader_get_covers_from_artists (ArioShellCoverdownloader *ar
                 temp_albums = ario_mpd_get_albums (ario_shell_coverdownloader->priv->mpd, (gchar *) temp->data);
 
                 /* We add the result of the query to a list */
-                albums = g_list_concat (albums, temp_albums);
+                albums = g_slist_concat (albums, temp_albums);
         }
 
         /* We search for all the covers of the entry in the list */
         ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader, albums, operation);
 
         /* We free the list */
-        g_list_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-        g_list_free (albums);
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
 }
 
 void
 ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                   GList *albums,
+                                                   GSList *albums,
                                                    ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        GList *temp;
+        GSList *temp;
 
         if (!albums)
                 return;
@@ -453,7 +453,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         if (operation == GET_AMAZON_COVERS)
                 ario_shell_coverdownloader_progress_start (ario_shell_coverdownloader);
 
-        ario_shell_coverdownloader->priv->nb_covers = g_list_length (albums);
+        ario_shell_coverdownloader->priv->nb_covers = g_slist_length (albums);
 
         /* While there are still covers to search */
         while (temp) {
@@ -465,7 +465,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
                 ario_shell_coverdownloader_get_cover_from_album (ario_shell_coverdownloader,
                                                                       temp->data,
                                                                       operation);
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
 
         /* We change the window to show a close button and infos about the search */
@@ -523,7 +523,7 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
 {
         ARIO_LOG_FUNCTION_START
         GArray *size;
-        GList *data = NULL, *ario_cover_uris = NULL;
+        GSList *data = NULL, *ario_cover_uris = NULL;
         gboolean ret;
 
         size = g_array_new (TRUE, TRUE, sizeof (int));
@@ -541,7 +541,7 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
         if (ret && ario_cover_size_is_valid (g_array_index (size, int, 0))) {
                 ret = ario_cover_save_cover (artist,
                                              album,
-                                             g_list_nth_data (data, 0),
+                                             g_slist_nth_data (data, 0),
                                              g_array_index (size, int, 0),
                                              OVERWRITE_MODE_SKIP);
 
@@ -554,8 +554,8 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
         }
 
         g_array_free (size, TRUE);
-        g_list_foreach (data, (GFunc) g_free, NULL);
-        g_list_free (data);
-        g_list_foreach (ario_cover_uris, (GFunc) g_free, NULL);
-        g_list_free (ario_cover_uris);
+        g_slist_foreach (data, (GFunc) g_free, NULL);
+        g_slist_free (data);
+        g_slist_foreach (ario_cover_uris, (GFunc) g_free, NULL);
+        g_slist_free (ario_cover_uris);
 }

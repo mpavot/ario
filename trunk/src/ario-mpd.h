@@ -97,18 +97,18 @@ gboolean                ario_mpd_update_status                          (ArioMpd
 
 void                    ario_mpd_update_db                              (ArioMpd *mpd);
 
-GList *                 ario_mpd_get_artists                            (ArioMpd *mpd);
+GSList *                 ario_mpd_get_artists                            (ArioMpd *mpd);
 
-GList *                 ario_mpd_get_albums                             (ArioMpd *mpd,
+GSList *                 ario_mpd_get_albums                             (ArioMpd *mpd,
                                                                          const char *artist);
-GList *                 ario_mpd_get_songs                              (ArioMpd *mpd,
+GSList *                 ario_mpd_get_songs                              (ArioMpd *mpd,
                                                                          const char *artist,
                                                                          const char *album);
-GList *                 ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
+GSList *                 ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
                                                                          char *playlist);
-GList *                 ario_mpd_get_playlists                          (ArioMpd *mpd);
+GSList *                 ario_mpd_get_playlists                          (ArioMpd *mpd);
 
-GList *                 ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
+GSList *                 ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
                                                                          int playlist_id);
 char *                  ario_mpd_get_current_title                      (ArioMpd *mpd);
 
@@ -187,8 +187,8 @@ void                    ario_mpd_queue_move                             (ArioMpd
                                                                          int new_pos);
 void                    ario_mpd_queue_commit                           (ArioMpd *mpd);
 
-GList*                  ario_mpd_search                                 (ArioMpd *mpd,
-                                                                         GList *search_criterias);
+GSList*                  ario_mpd_search                                 (ArioMpd *mpd,
+                                                                         GSList *search_criterias);
 // returns 0 if OK, 1 if playlist already exists
 int                     ario_mpd_save_playlist                          (ArioMpd *mpd,
                                                                          const char *name);

@@ -85,7 +85,7 @@ struct ArioMpdPrivate
 
         unsigned long dbtime;
         
-        GList *queue;
+        GSList *queue;
         gboolean is_updating; 
 
         int signals_to_emit;
@@ -599,11 +599,11 @@ ario_mpd_is_connected (ArioMpd *mpd)
         return (mpd->priv->connection != NULL);
 }
 
-GList *
+GSList *
 ario_mpd_get_artists (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        GList *artists = NULL;
+        GSList *artists = NULL;
         gchar *artist_char;
 
         /* check if there is a connection */
@@ -613,19 +613,19 @@ ario_mpd_get_artists (ArioMpd *mpd)
         mpd_sendListCommand (mpd->priv->connection, MPD_TABLE_ARTIST, NULL);
 
         while ((artist_char = mpd_getNextArtist (mpd->priv->connection)) != NULL)
-                artists = g_list_append (artists, artist_char);
+                artists = g_slist_append (artists, artist_char);
 
         mpd_finishCommand (mpd->priv->connection);
 
         return artists;
 }
 
-GList *
+GSList *
 ario_mpd_get_albums (ArioMpd *mpd,
                      const char *artist)
 {
         ARIO_LOG_FUNCTION_START
-        GList *albums = NULL;
+        GSList *albums = NULL;
         mpd_InfoEntity *entity = NULL;
         gchar *prev_album = "";
         ArioMpdAlbum *ario_mpd_album;
@@ -660,7 +660,7 @@ ario_mpd_get_albums (ArioMpd *mpd,
                         ario_mpd_album->artist = g_strdup (ARIO_MPD_UNKNOWN);
 
                 prev_album = ario_mpd_album->album;
-                albums = g_list_append (albums, ario_mpd_album);
+                albums = g_slist_append (albums, ario_mpd_album);
                 
                 mpd_freeInfoEntity (entity);
         }
@@ -669,13 +669,13 @@ ario_mpd_get_albums (ArioMpd *mpd,
         return albums;
 }
 
-GList *
+GSList *
 ario_mpd_get_songs (ArioMpd *mpd,
                     const char *artist, 
                     const char *album)
 {
         ARIO_LOG_FUNCTION_START
-        GList *songs = NULL;
+        GSList *songs = NULL;
         mpd_InfoEntity *entity = NULL;
         gboolean is_album_unknown;
 
@@ -694,7 +694,7 @@ ario_mpd_get_songs (ArioMpd *mpd,
                 if (!g_utf8_collate (entity->info.song->artist, artist)) {
                         if (entity->info.song)
                                 if (!is_album_unknown || !entity->info.song->album)
-                                        songs = g_list_append (songs, mpd_songDup (entity->info.song));
+                                        songs = g_slist_append (songs, mpd_songDup (entity->info.song));
                 }
                 mpd_freeInfoEntity (entity);
         }
@@ -703,12 +703,12 @@ ario_mpd_get_songs (ArioMpd *mpd,
         return songs;
 }
 
-GList *
+GSList *
 ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
                                   char *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        GList *songs = NULL;
+        GSList *songs = NULL;
         mpd_InfoEntity *ent = NULL;
 
         /* check if there is a connection */
@@ -717,7 +717,7 @@ ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
 
         mpd_sendListPlaylistInfoCommand(mpd->priv->connection, playlist);
 	while ((ent = mpd_getNextInfoEntity(mpd->priv->connection))) {
-                songs = g_list_append (songs, mpd_songDup (ent->info.song));
+                songs = g_slist_append (songs, mpd_songDup (ent->info.song));
 		mpd_freeInfoEntity(ent);
 	}
         mpd_finishCommand (mpd->priv->connection);
@@ -725,11 +725,11 @@ ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
         return songs;
 }
 
-GList *
+GSList *
 ario_mpd_get_playlists (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        GList *playlists = NULL;
+        GSList *playlists = NULL;
         mpd_InfoEntity *ent = NULL;
 
         /* check if there is a connection */
@@ -740,7 +740,7 @@ ario_mpd_get_playlists (ArioMpd *mpd)
 
         while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
                 if (ent->type == MPD_INFO_ENTITY_TYPE_PLAYLISTFILE) {
-                        playlists = g_list_append (playlists, g_strdup (ent->info.playlistFile->path));
+                        playlists = g_slist_append (playlists, g_strdup (ent->info.playlistFile->path));
                 }
                 mpd_freeInfoEntity (ent);
         }
@@ -749,12 +749,12 @@ ario_mpd_get_playlists (ArioMpd *mpd)
         return playlists;
 }
 
-GList *
+GSList *
 ario_mpd_get_playlist_changes (ArioMpd *mpd,
                                int playlist_id)
 {
         ARIO_LOG_FUNCTION_START
-        GList *songs = NULL;
+        GSList *songs = NULL;
         mpd_InfoEntity *entity = NULL;
 
         /* check if there is a connection */
@@ -765,7 +765,7 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
 
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 if (entity->info.song)
-                        songs = g_list_append (songs, mpd_songDup (entity->info.song));
+                        songs = g_slist_append (songs, mpd_songDup (entity->info.song));
                 mpd_freeInfoEntity (entity);
         }
         mpd_finishCommand (mpd->priv->connection);
@@ -1255,7 +1255,7 @@ ario_mpd_queue_add (ArioMpd *mpd,
         queue_action->type = ARIO_MPD_ACTION_ADD;
         queue_action->path = path;
         
-        mpd->priv->queue = g_list_append (mpd->priv->queue, queue_action);
+        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
 
 void
@@ -1266,7 +1266,7 @@ ario_mpd_queue_delete_id (ArioMpd *mpd,
         queue_action->type = ARIO_MPD_ACTION_DELETE_ID;
         queue_action->id = id;
         
-        mpd->priv->queue = g_list_append (mpd->priv->queue, queue_action);
+        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
 
 void
@@ -1278,7 +1278,7 @@ ario_mpd_queue_delete_pos (ArioMpd *mpd,
         queue_action->type = ARIO_MPD_ACTION_DELETE_POS;
         queue_action->pos = pos;
         
-        mpd->priv->queue = g_list_append (mpd->priv->queue, queue_action);
+        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
                     
 void
@@ -1292,7 +1292,7 @@ ario_mpd_queue_move (ArioMpd *mpd,
         queue_action->old_pos = old_pos;
         queue_action->new_pos = new_pos;
      
-        mpd->priv->queue = g_list_append (mpd->priv->queue, queue_action);
+        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
 
 
@@ -1300,7 +1300,7 @@ void
 ario_mpd_queue_commit (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        GList *temp;
+        GSList *temp;
         
         /* check if there is a connection */
         if (!ario_mpd_is_connected (mpd))
@@ -1329,34 +1329,34 @@ ario_mpd_queue_commit (ArioMpd *mpd)
                         }
                 }
 
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
         mpd_sendCommandListEnd(mpd->priv->connection);
         mpd_finishCommand(mpd->priv->connection);
         ario_mpd_update_status (mpd);
         
-        g_list_foreach(mpd->priv->queue, (GFunc) g_free, NULL);
-        g_list_free (mpd->priv->queue);
+        g_slist_foreach(mpd->priv->queue, (GFunc) g_free, NULL);
+        g_slist_free (mpd->priv->queue);
         mpd->priv->queue = NULL;
 }
 
 
-GList*
+GSList*
 ario_mpd_search (ArioMpd *mpd,
-                 GList *search_criterias)
+                 GSList *search_criterias)
 {
         ARIO_LOG_FUNCTION_START
         mpd_InfoEntity *ent = NULL;
-        GList *tmp;
+        GSList *tmp;
         ArioMpdSearchCriteria *search_criteria;
-        GList *songs = NULL;
+        GSList *songs = NULL;
 
         if (!ario_mpd_is_connected (mpd))
                 return NULL;
 
         mpd_startSearch(mpd->priv->connection, FALSE);
 
-        for (tmp = search_criterias; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = search_criterias; tmp; tmp = g_slist_next (tmp)) {
                 search_criteria = tmp->data;
                 mpd_addConstraintSearch(mpd->priv->connection,
                                         search_criteria->type,
@@ -1365,7 +1365,7 @@ ario_mpd_search (ArioMpd *mpd,
         mpd_commitSearch(mpd->priv->connection);
 
         while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
-                songs = g_list_append (songs, mpd_songDup (ent->info.song));
+                songs = g_slist_append (songs, mpd_songDup (ent->info.song));
                 mpd_freeInfoEntity(ent);
         }
         mpd_finishCommand (mpd->priv->connection);

@@ -78,7 +78,7 @@ struct ArioConnectionPreferencesPrivate
         GtkWidget *profile_treeview;
         GtkListStore *profile_model;
         GtkTreeSelection *profile_selection;
-        GList *profiles;
+        GSList *profiles;
         ArioProfile *current_profile;
 
         GtkWidget *name_entry;
@@ -174,7 +174,7 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
         GList *paths;
         gint *indices;
         GtkTreeModel *model = GTK_TREE_MODEL (connection_preferences->priv->profile_model);
-        GList *tmp = connection_preferences->priv->profiles;
+        GSList *tmp = connection_preferences->priv->profiles;
         int i;
 
         paths = gtk_tree_selection_get_selected_rows (connection_preferences->priv->profile_selection,
@@ -185,7 +185,7 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
 
         indices = gtk_tree_path_get_indices ((GtkTreePath *) paths->data);
         for (i = 0; i < indices[0] && tmp; ++i) {
-                tmp = g_list_next (tmp);
+                tmp = g_slist_next (tmp);
         }
         g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (paths);
@@ -215,13 +215,13 @@ static void
 ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        GList *tmp;
+        GSList *tmp;
         GtkTreeIter iter;
         ArioProfile *profile;
         GtkTreeModel *model = GTK_TREE_MODEL (connection_preferences->priv->profile_model);
 
         gtk_list_store_clear (connection_preferences->priv->profile_model);
-        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
                 gtk_list_store_append (connection_preferences->priv->profile_model, &iter);
                 gtk_list_store_set (connection_preferences->priv->profile_model, &iter,
@@ -230,7 +230,7 @@ ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *
         }
 
         gtk_tree_model_get_iter_first (model, &iter);
-        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
                 if (profile->current) {
                         gtk_tree_selection_select_iter (connection_preferences->priv->profile_selection, &iter);
@@ -324,8 +324,8 @@ ario_connection_preferences_finalize (GObject *object)
         g_return_if_fail (connection_preferences->priv != NULL);
 
         ario_profiles_save (connection_preferences->priv->profiles);
-        g_list_foreach (connection_preferences->priv->profiles, (GFunc) ario_profiles_free, NULL);
-        g_list_free (connection_preferences->priv->profiles);
+        g_slist_foreach (connection_preferences->priv->profiles, (GFunc) ario_profiles_free, NULL);
+        g_slist_free (connection_preferences->priv->profiles);
 
         g_free (connection_preferences->priv);
 
@@ -464,7 +464,7 @@ ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
-        GList *hosts = ario_avahi_get_hosts (avahi);
+        GSList *hosts = ario_avahi_get_hosts (avahi);
         gtk_list_store_clear (connection_preferences->priv->autodetect_model);
 
         while (hosts) {
@@ -478,7 +478,7 @@ ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
                                     PORT_COLUMN, tmp,
                                     -1);
                 g_free (tmp);
-                hosts = g_list_next (hosts);
+                hosts = g_slist_next (hosts);
         }
 
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (connection_preferences->priv->autodetect_model), &iter))
@@ -622,7 +622,7 @@ ario_connection_preferences_new_profile_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         ArioProfile *profile;
         ArioProfile *tmp_profile;
-        GList *tmp;
+        GSList *tmp;
 
         profile = (ArioProfile *) g_malloc (sizeof (ArioProfile));
         profile->name = g_strdup (_("New Profile"));
@@ -630,12 +630,12 @@ ario_connection_preferences_new_profile_cb (GtkWidget *widget,
         profile->port = 6600;
         profile->password = NULL;
 
-        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
                 tmp_profile = (ArioProfile *) tmp->data;
                 tmp_profile->current = FALSE;
         }
         profile->current = TRUE;
-        connection_preferences->priv->profiles = g_list_append (connection_preferences->priv->profiles, profile);
+        connection_preferences->priv->profiles = g_slist_append (connection_preferences->priv->profiles, profile);
         ario_connection_preferences_profile_update_profiles (connection_preferences);
 }
 
@@ -646,11 +646,11 @@ ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         ArioProfile *first_profile;
 
-        if (g_list_length (connection_preferences->priv->profiles) < 2)
+        if (g_slist_length (connection_preferences->priv->profiles) < 2)
                 return;
 
         if (connection_preferences->priv->current_profile) {
-                connection_preferences->priv->profiles = g_list_remove (connection_preferences->priv->profiles, connection_preferences->priv->current_profile);
+                connection_preferences->priv->profiles = g_slist_remove (connection_preferences->priv->profiles, connection_preferences->priv->current_profile);
                 ario_profiles_free (connection_preferences->priv->current_profile);
                 if (connection_preferences->priv->profiles) {
                         first_profile = (ArioProfile *) connection_preferences->priv->profiles->data;

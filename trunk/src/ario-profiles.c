@@ -72,11 +72,11 @@ ario_profiles_free (ArioProfile* profile)
         g_free (profile);
 }
 
-GList*
+GSList*
 ario_profiles_read (void)
 {
         ARIO_LOG_FUNCTION_START
-        GList* profiles = NULL;
+        GSList* profiles = NULL;
         ArioProfile *profile;
         xmlDocPtr doc;
         xmlNodePtr cur;
@@ -146,7 +146,7 @@ ario_profiles_read (void)
                                 profile->current = FALSE;
                         }
 
-                        profiles = g_list_append (profiles, profile);
+                        profiles = g_slist_append (profiles, profile);
                 }
                 cur = cur->next;
         }
@@ -156,14 +156,14 @@ ario_profiles_read (void)
 }
 
 void
-ario_profiles_save (GList* profiles)
+ario_profiles_save (GSList* profiles)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
         xmlNodePtr cur, cur2;
         char *xml_filename;
         ArioProfile *profile;
-        GList *tmp;
+        GSList *tmp;
         gchar *port_char;
 
         xml_filename = ario_profiles_get_xml_filename();
@@ -189,7 +189,7 @@ ario_profiles_save (GList* profiles)
         }
         xmlDocSetRootElement (doc, cur);
 
-        for (tmp = profiles; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
                 port_char = g_strdup_printf ("%d",  profile->port);
 
@@ -214,13 +214,13 @@ ario_profiles_save (GList* profiles)
 }
 
 ArioProfile*
-ario_profiles_get_current (GList* profiles)
+ario_profiles_get_current (GSList* profiles)
 {
         ARIO_LOG_FUNCTION_START
-        GList *tmp;
+        GSList *tmp;
         ArioProfile *profile;
 
-        for (tmp = profiles; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
                 if (profile->current)
                         return profile;
@@ -229,15 +229,15 @@ ario_profiles_get_current (GList* profiles)
 }
 
 void
-ario_profiles_set_current (GList* profiles,
+ario_profiles_set_current (GSList* profiles,
                            ArioProfile* profile)
 {
         ARIO_LOG_FUNCTION_START
-        GList *tmp;
+        GSList *tmp;
         ArioProfile *tmp_profile;
 
-        if (g_list_find (profiles, profile)) {
-                for (tmp = profiles; tmp; tmp = g_list_next (tmp)) {
+        if (g_slist_find (profiles, profile)) {
+                for (tmp = profiles; tmp; tmp = g_slist_next (tmp)) {
                         tmp_profile = (ArioProfile *) tmp->data;
                         if (tmp_profile == profile) {
                                 tmp_profile->current = TRUE;

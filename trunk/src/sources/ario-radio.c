@@ -424,11 +424,11 @@ ario_radio_get_xml_filename (void)
         return xml_filename;
 }
 
-static GList*
+static GSList*
 ario_radio_get_radios (ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        GList* radios = NULL;
+        GSList* radios = NULL;
         ArioInternetRadio *internet_radio;
         xmlDocPtr doc;
         xmlNodePtr cur;
@@ -476,7 +476,7 @@ ario_radio_get_radios (ArioRadio *radio)
                         internet_radio->url = g_strdup ((char *) xml_url);
                         xmlFree(xml_url);
 
-                        radios = g_list_append (radios, internet_radio);
+                        radios = g_slist_append (radios, internet_radio);
                 }
                 cur = cur->next;
         }
@@ -503,8 +503,8 @@ static void
 ario_radio_fill_radios (ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        GList *radios;
-        GList *temp;
+        GSList *radios;
+        GSList *temp;
         GtkTreeIter radio_iter;
         GList* paths;
         GtkTreePath *path;
@@ -523,10 +523,10 @@ ario_radio_fill_radios (ArioRadio *radio)
         while (temp) {
                 ArioInternetRadio *internet_radio = (ArioInternetRadio *) temp->data;
                 ario_radio_append_radio (radio, internet_radio);
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
-        g_list_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
-        g_list_free (radios);
+        g_slist_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
+        g_slist_free (radios);
 
         gtk_tree_selection_unselect_all (radio->priv->radios_selection);
 
@@ -562,12 +562,12 @@ radios_foreach (GtkTreeModel *model,
                 gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **radios = (GList **) userdata;
+        GSList **radios = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, RADIO_URL_COLUMN, &val, -1);
 
-        *radios = g_list_append (*radios, val);
+        *radios = g_slist_append (*radios, val);
 }
 
 static void
@@ -577,28 +577,28 @@ radios_foreach2 (GtkTreeModel *model,
                  gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **internet_radios = (GList **) userdata;
+        GSList **internet_radios = (GSList **) userdata;
         ArioInternetRadio *internet_radio = (ArioInternetRadio *) g_malloc (sizeof (ArioInternetRadio));
 
         gtk_tree_model_get (model, iter, RADIO_NAME_COLUMN, &internet_radio->name, -1);
         gtk_tree_model_get (model, iter, RADIO_URL_COLUMN, &internet_radio->url, -1);
 
-        *internet_radios = g_list_append (*internet_radios, internet_radio);
+        *internet_radios = g_slist_append (*internet_radios, internet_radio);
 }
 
 static void
 ario_radio_add_in_playlist (ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        GList *radios = NULL;
+        GSList *radios = NULL;
 
         gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
                                              radios_foreach,
                                              &radios);
         ario_playlist_append_songs (radio->priv->playlist, radios);
 
-        g_list_foreach (radios, (GFunc) g_free, NULL);
-        g_list_free (radios);
+        g_slist_foreach (radios, (GFunc) g_free, NULL);
+        g_slist_free (radios);
 }
 
 static void
@@ -995,7 +995,7 @@ ario_radio_cmd_delete_radios (GtkAction *action,
                               ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        GList *internet_radios = NULL;
+        GSList *internet_radios = NULL;
 
         /* TODO : Ask before delete */
 
@@ -1003,9 +1003,9 @@ ario_radio_cmd_delete_radios (GtkAction *action,
                                              radios_foreach2,
                                              &internet_radios);
 
-        g_list_foreach (internet_radios, (GFunc) ario_radio_delete_radio, radio);
-        g_list_foreach (internet_radios, (GFunc) ario_radio_free_internet_radio, NULL);
-        g_list_free (internet_radios);
+        g_slist_foreach (internet_radios, (GFunc) ario_radio_delete_radio, radio);
+        g_slist_foreach (internet_radios, (GFunc) ario_radio_free_internet_radio, NULL);
+        g_slist_free (internet_radios);
 }
 
 static void

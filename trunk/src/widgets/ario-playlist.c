@@ -520,7 +520,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
         GtkTreeIter iter;
         gchar *time, *track;
         gchar *title;
-        GList *songs = NULL, *temp;
+        GSList *songs = NULL, *temp;
         ArioMpdSong *song;
 
         if (!ario_mpd_is_connected (mpd)) {
@@ -581,11 +581,11 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                         g_free (track);
                 }
 
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
 
-        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-        g_list_free (songs);
+        g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+        g_slist_free (songs);
 
         playlist->priv->playlist_length = ario_mpd_get_current_playlist_length (mpd);
         playlist->priv->playlist_id = ario_mpd_get_current_playlist_id (mpd);
@@ -718,11 +718,11 @@ ario_playlist_move_rows (ArioPlaylist *playlist,
 
 static void
 ario_playlist_add_songs (ArioPlaylist *playlist,
-                         GList *songs,
+                         GSList *songs,
                          gint x, gint y)
 {
         ARIO_LOG_FUNCTION_START
-        GList *temp_songs;
+        GSList *temp_songs;
         gint *indice;
         int end, offset = 0, drop = 0;
         GtkTreePath *path = NULL;
@@ -747,7 +747,7 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
         }
 
         /* For each filename :*/
-        for (temp_songs = songs; temp_songs; temp_songs = g_list_next (temp_songs)) {
+        for (temp_songs = songs; temp_songs; temp_songs = g_slist_next (temp_songs)) {
                 /* Add it in the playlist*/
                 ario_mpd_queue_add (playlist->priv->mpd, temp_songs->data);
                 offset ++;
@@ -761,11 +761,11 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
 
 static void
 ario_playlist_add_albums (ArioPlaylist *playlist,
-                          GList *albums,
+                          GSList *albums,
                           gint x, gint y)
 {
         ARIO_LOG_FUNCTION_START
-        GList *filenames = NULL, *songs = NULL, *temp_albums, *temp_songs;
+        GSList *filenames = NULL, *songs = NULL, *temp_albums, *temp_songs;
         ArioMpdAlbum *mpd_album;
         ArioMpdSong *mpd_song;
 
@@ -779,30 +779,30 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
                 temp_songs = songs;
                 while (temp_songs) {
                         mpd_song = temp_songs->data;
-                        filenames = g_list_append (filenames, g_strdup (mpd_song->file));
-                        temp_songs = g_list_next (temp_songs);
+                        filenames = g_slist_append (filenames, g_strdup (mpd_song->file));
+                        temp_songs = g_slist_next (temp_songs);
                 }
 
-                g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-                g_list_free (songs);
-                temp_albums = g_list_next (temp_albums);
+                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_free (songs);
+                temp_albums = g_slist_next (temp_albums);
         }
 
         ario_playlist_add_songs (playlist,
                             filenames,
                             x, y);
 
-        g_list_foreach (filenames, (GFunc) g_free, NULL);
-        g_list_free (filenames);
+        g_slist_foreach (filenames, (GFunc) g_free, NULL);
+        g_slist_free (filenames);
 }
 
 static void
 ario_playlist_add_artists (ArioPlaylist *playlist,
-                           GList *artists,
+                           GSList *artists,
                            gint x, gint y)
 {
         ARIO_LOG_FUNCTION_START
-        GList *albums = NULL, *filenames = NULL, *songs = NULL, *temp_artists, *temp_albums, *temp_songs;
+        GSList *albums = NULL, *filenames = NULL, *songs = NULL, *temp_artists, *temp_albums, *temp_songs;
         ArioMpdAlbum *mpd_album;
         ArioMpdSong *mpd_song;
 
@@ -820,24 +820,24 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
                         temp_songs = songs;
                         while (temp_songs) {
                                 mpd_song = temp_songs->data;
-                                filenames = g_list_append (filenames, g_strdup (mpd_song->file));
-                                temp_songs = g_list_next (temp_songs);
+                                filenames = g_slist_append (filenames, g_strdup (mpd_song->file));
+                                temp_songs = g_slist_next (temp_songs);
                         }
-                        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-                        g_list_free (songs);
-                        temp_albums = g_list_next (temp_albums);
+                        g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                        g_slist_free (songs);
+                        temp_albums = g_slist_next (temp_albums);
                 }
-                g_list_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-                g_list_free (albums);
-                temp_artists = g_list_next (temp_artists);
+                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_free (albums);
+                temp_artists = g_slist_next (temp_artists);
         }
 
         ario_playlist_add_songs (playlist,
                                  filenames,
                                  x, y);
 
-        g_list_foreach (filenames, (GFunc) g_free, NULL);
-        g_list_free (filenames);
+        g_slist_foreach (filenames, (GFunc) g_free, NULL);
+        g_slist_free (filenames);
 }
 
 static void
@@ -847,21 +847,21 @@ ario_playlist_drop_radios (ArioPlaylist *playlist,
 {
         ARIO_LOG_FUNCTION_START
         gchar **radios;
-        GList *radio_urls = NULL;
+        GSList *radio_urls = NULL;
         int i;
 
         radios = g_strsplit ((const gchar *) data->data, "\n", 0);
 
         /* For each radio url :*/
         for (i=0; radios[i]!=NULL && g_utf8_collate (radios[i], ""); i++)
-                radio_urls = g_list_append (radio_urls, radios[i]);
+                radio_urls = g_slist_append (radio_urls, radios[i]);
 
         ario_playlist_add_songs (playlist,
                                  radio_urls,
                                  x, y);
 
         g_strfreev (radios);
-        g_list_free (radio_urls);
+        g_slist_free (radio_urls);
 }
 
 static void
@@ -871,21 +871,21 @@ ario_playlist_drop_songs (ArioPlaylist *playlist,
 {
         ARIO_LOG_FUNCTION_START
         gchar **songs;
-        GList *filenames = NULL;
+        GSList *filenames = NULL;
         int i;
 
         songs = g_strsplit ((const gchar *) data->data, "\n", 0);
 
         /* For each filename :*/
         for (i=0; songs[i]!=NULL && g_utf8_collate (songs[i], ""); i++)
-                filenames = g_list_append (filenames, songs[i]);
+                filenames = g_slist_append (filenames, songs[i]);
 
         ario_playlist_add_songs (playlist,
                             filenames,
                             x, y);
 
         g_strfreev (songs);
-        g_list_free (filenames);
+        g_slist_free (filenames);
 }
 
 static void
@@ -895,7 +895,7 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
 {
         ARIO_LOG_FUNCTION_START
         gchar **artists_albums;
-        GList *albums_list = NULL;
+        GSList *albums_list = NULL;
         ArioMpdAlbum *mpd_album;
         int i;
 
@@ -906,7 +906,7 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
                 mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
                 mpd_album->artist = artists_albums[i];
                 mpd_album->album = artists_albums[i+1];
-                albums_list = g_list_append (albums_list, mpd_album);
+                albums_list = g_slist_append (albums_list, mpd_album);
         }
 
         ario_playlist_add_albums (playlist,
@@ -915,8 +915,8 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
 
         g_strfreev (artists_albums);
 
-        g_list_foreach (albums_list, (GFunc) g_free, NULL);
-        g_list_free (albums_list);
+        g_slist_foreach (albums_list, (GFunc) g_free, NULL);
+        g_slist_free (albums_list);
 }
 
 static void
@@ -926,26 +926,26 @@ ario_playlist_drop_artists (ArioPlaylist *playlist,
 {
         ARIO_LOG_FUNCTION_START
         gchar **artists;
-        GList *artists_list = NULL;
+        GSList *artists_list = NULL;
         int i;
 
         artists = g_strsplit ((const gchar *) data->data, "\n", 0);
 
         /* For each artist :*/
         for (i=0; artists[i]!=NULL && g_utf8_collate (artists[i], ""); i++)
-                artists_list = g_list_append (artists_list, artists[i]);
+                artists_list = g_slist_append (artists_list, artists[i]);
 
         ario_playlist_add_artists (playlist,
                                    artists_list,
                                    x, y);
 
         g_strfreev (artists);
-        g_list_free (artists_list);
+        g_slist_free (artists_list);
 }
 
 void
 ario_playlist_append_songs (ArioPlaylist *playlist,
-                            GList *songs)
+                            GSList *songs)
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_songs (playlist, songs, -1, -1);
@@ -954,25 +954,25 @@ ario_playlist_append_songs (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_mpd_songs (ArioPlaylist *playlist,
-                                GList *songs)
+                                GSList *songs)
 {
         ARIO_LOG_FUNCTION_START
-        GList *tmp;
-        GList *char_songs = NULL;
+        GSList *tmp;
+        GSList *char_songs = NULL;
         ArioMpdSong *song;
 
-        for (tmp = songs; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
-                char_songs = g_list_append (char_songs, song->file);
+                char_songs = g_slist_append (char_songs, song->file);
         }
 
         ario_playlist_add_songs (playlist, char_songs, -1, -1);
-        g_list_free (char_songs);
+        g_slist_free (char_songs);
 }
 
 void
 ario_playlist_append_albums (ArioPlaylist *playlist,
-                             GList *albums)
+                             GSList *albums)
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_albums (playlist, albums, -1, -1);
@@ -980,7 +980,7 @@ ario_playlist_append_albums (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_artists (ArioPlaylist *playlist,
-                              GList *artists)
+                              GSList *artists)
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_artists (playlist, artists, -1, -1);

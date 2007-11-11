@@ -100,8 +100,8 @@ struct ArioShellCoverselectPrivate
         int coversize;
 
         GArray *file_size;
-        GList *ario_cover_uris;
-        GList *file_contents;
+        GSList *ario_cover_uris;
+        GSList *file_contents;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -173,10 +173,10 @@ ario_shell_coverselect_finalize (GObject *object)
 
         if (ario_shell_coverselect->priv->file_size)
                 g_array_free (ario_shell_coverselect->priv->file_size, TRUE);
-        g_list_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
-        g_list_free (ario_shell_coverselect->priv->file_contents);
-        g_list_foreach (ario_shell_coverselect->priv->ario_cover_uris, (GFunc) g_free, NULL);
-        g_list_free (ario_shell_coverselect->priv->ario_cover_uris);
+        g_slist_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
+        g_slist_free (ario_shell_coverselect->priv->file_contents);
+        g_slist_foreach (ario_shell_coverselect->priv->ario_cover_uris, (GFunc) g_free, NULL);
+        g_slist_free (ario_shell_coverselect->priv->ario_cover_uris);
         g_free (ario_shell_coverselect->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -432,11 +432,11 @@ ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
 
         if (ario_shell_coverselect->priv->file_size)
                 g_array_free (ario_shell_coverselect->priv->file_size, TRUE);
-        g_list_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
-        g_list_free (ario_shell_coverselect->priv->file_contents);
+        g_slist_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
+        g_slist_free (ario_shell_coverselect->priv->file_contents);
         ario_shell_coverselect->priv->file_contents = NULL;
-        g_list_foreach (ario_shell_coverselect->priv->ario_cover_uris, (GFunc) g_free, NULL);
-        g_list_free (ario_shell_coverselect->priv->ario_cover_uris);
+        g_slist_foreach (ario_shell_coverselect->priv->ario_cover_uris, (GFunc) g_free, NULL);
+        g_slist_free (ario_shell_coverselect->priv->ario_cover_uris);
         ario_shell_coverselect->priv->ario_cover_uris = NULL;
 
         ario_shell_coverselect->priv->file_size = g_array_new (TRUE, TRUE, sizeof (int));
@@ -462,7 +462,7 @@ ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
         int i = 0;
-        GList *temp;
+        GSList *temp;
         GdkPixbuf *pixbuf;
         GtkTreePath *tree_path;
         GdkPixbufLoader *loader;
@@ -491,7 +491,7 @@ ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect
 
                         g_object_unref (G_OBJECT (pixbuf));
                 }
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
                 i++;
         }
 
@@ -528,7 +528,7 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
 
                 ret = ario_cover_save_cover (ario_shell_coverselect->priv->file_artist,
                                              ario_shell_coverselect->priv->file_album,
-                                             g_list_nth_data (ario_shell_coverselect->priv->file_contents, indice[0]),
+                                             g_slist_nth_data (ario_shell_coverselect->priv->file_contents, indice[0]),
                                              g_array_index (ario_shell_coverselect->priv->file_size, int, indice[0]),
                                              OVERWRITE_MODE_ASK);
                 gtk_tree_path_free (tree_path);

@@ -500,8 +500,8 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter storedplaylists_iter;
-        GList *playlists;
-        GList *tmp;
+        GSList *playlists;
+        GSList *tmp;
 
         gtk_list_store_clear (storedplaylists->priv->storedplaylists_model);
 
@@ -509,14 +509,14 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
                 return;
 
         playlists = ario_mpd_get_playlists (storedplaylists->priv->mpd);
-        for (tmp = playlists; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 gtk_list_store_append (storedplaylists->priv->storedplaylists_model, &storedplaylists_iter);
                 gtk_list_store_set (storedplaylists->priv->storedplaylists_model, &storedplaylists_iter, 0,
                                     tmp->data, -1);
         }
 
-        g_list_foreach(playlists, (GFunc) g_free, NULL);
-        g_list_free (playlists);
+        g_slist_foreach(playlists, (GFunc) g_free, NULL);
+        g_slist_free (playlists);
 
         gtk_tree_selection_unselect_all (storedplaylists->priv->storedplaylists_selection);
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (storedplaylists->priv->storedplaylists_model), &storedplaylists_iter))
@@ -532,7 +532,7 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
         ARIO_LOG_FUNCTION_START
         ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (userdata);
         gchar* playlist = NULL;
-        GList *songs = NULL, *temp;
+        GSList *songs = NULL, *temp;
         ArioMpdSong *song;
         GtkTreeIter song_iter;
         gchar *title;
@@ -547,7 +547,7 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
         songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, playlist);
         g_free (playlist);
 
-        for (temp = songs; temp; temp = g_list_next (temp)) {
+        for (temp = songs; temp; temp = g_slist_next (temp)) {
                 song = temp->data;
                 gtk_list_store_append (storedplaylists->priv->songs_model, &song_iter);
 
@@ -561,8 +561,8 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
                 g_free (title);
         }
 
-        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-        g_list_free (songs);
+        g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+        g_slist_free (songs);
 }
 
 static void
@@ -616,35 +616,35 @@ storedplaylists_foreach (GtkTreeModel *model,
                          gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **storedplaylists = (GList **) userdata;
+        GSList **storedplaylists = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, PLAYLISTS_NAME_COLUMN, &val, -1);
-        *storedplaylists = g_list_append (*storedplaylists, val);
+        *storedplaylists = g_slist_append (*storedplaylists, val);
 }
 
 static void
 ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START
-        GList *playlists = NULL;
-        GList *songs = NULL;
-        GList *tmp;
+        GSList *playlists = NULL;
+        GSList *songs = NULL;
+        GSList *tmp;
 
         gtk_tree_selection_selected_foreach (storedplaylists->priv->storedplaylists_selection,
                                              storedplaylists_foreach,
                                              &playlists);
 
-        for (tmp = playlists; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, tmp->data);
                 ario_playlist_append_mpd_songs (storedplaylists->priv->playlist, songs);
 
-                g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-                g_list_free (songs);
+                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_free (songs);
         }
 
-        g_list_foreach (playlists, (GFunc) g_free, NULL);
-        g_list_free (playlists);
+        g_slist_foreach (playlists, (GFunc) g_free, NULL);
+        g_slist_free (playlists);
 }
 
 static void
@@ -654,19 +654,19 @@ songs_foreach (GtkTreeModel *model,
                 gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **storedplaylists = (GList **) userdata;
+        GSList **storedplaylists = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, SONGS_FILENAME_COLUMN, &val, -1);
 
-        *storedplaylists = g_list_append (*storedplaylists, val);
+        *storedplaylists = g_slist_append (*storedplaylists, val);
 }
 
 static void
 ario_storedplaylists_add_songs (ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START
-        GList *songs = NULL;
+        GSList *songs = NULL;
 
         gtk_tree_selection_selected_foreach (storedplaylists->priv->songs_selection,
                                              songs_foreach,
@@ -674,8 +674,8 @@ ario_storedplaylists_add_songs (ArioStoredplaylists *storedplaylists)
 
         ario_playlist_append_songs (storedplaylists->priv->playlist, songs);
 
-        g_list_foreach (songs, (GFunc) g_free, NULL);
-        g_list_free (songs);
+        g_slist_foreach (songs, (GFunc) g_free, NULL);
+        g_slist_free (songs);
 }
 
 static void
@@ -705,7 +705,7 @@ ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
-        GList *playlists = NULL;        GList *tmp;
+        GSList *playlists = NULL;        GSList *tmp;
 
         dialog = gtk_message_dialog_new (NULL,
                                         GTK_DIALOG_MODAL,
@@ -722,12 +722,12 @@ ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
                                              storedplaylists_foreach,
                                              &playlists);
 
-        for (tmp = playlists; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
         	ario_mpd_delete_playlist (storedplaylists->priv->mpd, tmp->data);
         }
 
-        g_list_foreach (playlists, (GFunc) g_free, NULL);
-        g_list_free (playlists);
+        g_slist_foreach (playlists, (GFunc) g_free, NULL);
+        g_slist_free (playlists);
 }
 
 static void
@@ -879,12 +879,12 @@ ario_storedplaylists_playlists_selection_drag_foreach (GtkTreeModel *model,
                                           gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **playlists = (GList **) userdata;
+        GSList **playlists = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, PLAYLISTS_NAME_COLUMN, &val, -1);
 
-        *playlists = g_list_append (*playlists, val);
+        *playlists = g_slist_append (*playlists, val);
 }
 
 static void
@@ -896,9 +896,9 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
         ARIO_LOG_FUNCTION_START
         ArioStoredplaylists *storedplaylists;
         ArioMpdSong *song;
-        GList *playlists = NULL;
-        GList *songs;
-        GList *tmp, *tmp2;
+        GSList *playlists = NULL;
+        GSList *songs;
+        GSList *tmp, *tmp2;
         GString *str_playlists;
 
         storedplaylists = ARIO_STOREDPLAYLISTS (data);
@@ -913,21 +913,21 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
                                              &playlists);
 
         str_playlists = g_string_new("");
-        for (tmp = playlists; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, tmp->data);
 
-                for (tmp2 = songs; tmp2; tmp2 = g_list_next (tmp2)) {
+                for (tmp2 = songs; tmp2; tmp2 = g_slist_next (tmp2)) {
                         song = tmp2->data;
                         g_string_append (str_playlists, song->file);
                         g_string_append (str_playlists, "\n");
         	}
 
-                g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-                g_list_free (songs);
+                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_free (songs);
         }
 
-        g_list_foreach (playlists, (GFunc) g_free, NULL);
-        g_list_free (playlists);
+        g_slist_foreach (playlists, (GFunc) g_free, NULL);
+        g_slist_free (playlists);
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) str_playlists->str,
                                 strlen (str_playlists->str) * sizeof(guchar));

@@ -61,10 +61,10 @@ GtkWidget *     ario_shell_coverdownloader_new                          (ArioMpd
 void            ario_shell_coverdownloader_get_covers                   (ArioShellCoverdownloader *ario_shell_coverdownloader,
                                                                          ArioShellCoverdownloaderOperation operation);
 void            ario_shell_coverdownloader_get_covers_from_artists      (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                                         GList *artists,
+                                                                         GSList *artists,
                                                                          ArioShellCoverdownloaderOperation operation);
 void            ario_shell_coverdownloader_get_covers_from_albums       (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                                         GList *albums,
+                                                                         GSList *albums,
                                                                          ArioShellCoverdownloaderOperation operation);
 
 G_END_DECLS

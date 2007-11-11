@@ -20,7 +20,7 @@
 #ifndef __ARIO_PROFILES_H
 #define __ARIO_PROFILES_H
 
-#include <glib/glist.h>
+#include <glib/gslist.h>
 
 G_BEGIN_DECLS
 
@@ -33,15 +33,15 @@ typedef struct
         gboolean current;
 } ArioProfile;
 
-GList*                  ario_profiles_read              (void);
+GSList*                  ario_profiles_read              (void);
 
-void                    ario_profiles_save              (GList* profiles);
+void                    ario_profiles_save              (GSList* profiles);
 
 void                    ario_profiles_free              (ArioProfile* profile);
 
-ArioProfile*            ario_profiles_get_current       (GList* profiles);
+ArioProfile*            ario_profiles_get_current       (GSList* profiles);
 
-void                    ario_profiles_set_current       (GList* profiles,
+void                    ario_profiles_set_current       (GSList* profiles,
                                                          ArioProfile* profile);
 
 G_END_DECLS
