@@ -595,6 +595,7 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
 
                 g_free (connection_preferences->priv->current_profile->host);
                 connection_preferences->priv->current_profile->host = g_strdup (host);
+                g_free (host);
                 connection_preferences->priv->current_profile->port = port;
                 g_free (connection_preferences->priv->current_profile->password);
                 connection_preferences->priv->current_profile->password = NULL;
@@ -629,8 +630,6 @@ ario_connection_preferences_new_profile_cb (GtkWidget *widget,
         profile->port = 6600;
         profile->password = NULL;
 
-
-
         for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_list_next (tmp)) {
                 tmp_profile = (ArioProfile *) tmp->data;
                 tmp_profile->current = FALSE;
@@ -652,6 +651,7 @@ ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
 
         if (connection_preferences->priv->current_profile) {
                 connection_preferences->priv->profiles = g_list_remove (connection_preferences->priv->profiles, connection_preferences->priv->current_profile);
+                ario_profiles_free (connection_preferences->priv->current_profile);
                 if (connection_preferences->priv->profiles) {
                         first_profile = (ArioProfile *) connection_preferences->priv->profiles->data;
                         first_profile->current = TRUE;
