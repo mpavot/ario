@@ -52,15 +52,15 @@ GtkWidget *     ario_playlist_new               (GtkUIManager *mgr,
                                                  GtkActionGroup *group,
                                                  ArioMpd *mpd);
 
-void            ario_playlist_append_artists    (ArioPlaylist *playlist, GList *artists);
+void            ario_playlist_append_artists    (ArioPlaylist *playlist, GSList *artists);
 
-void            ario_playlist_append_albums     (ArioPlaylist *playlist, GList *albums);
+void            ario_playlist_append_albums     (ArioPlaylist *playlist, GSList *albums);
 
-void            ario_playlist_append_songs      (ArioPlaylist *playlist, GList *songs);
+void            ario_playlist_append_songs      (ArioPlaylist *playlist, GSList *songs);
 
-void            ario_playlist_append_mpd_songs  (ArioPlaylist *playlist, GList *songs);
+void            ario_playlist_append_mpd_songs  (ArioPlaylist *playlist, GSList *songs);
 
-void            ario_playlist_append_radio      (ArioPlaylist *playlist, GList *songs);
+void            ario_playlist_append_radio      (ArioPlaylist *playlist, GSList *songs);
 
 void            ario_playlist_cmd_save          (GtkAction *action,
                                                  ArioPlaylist *playlist);

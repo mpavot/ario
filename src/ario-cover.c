@@ -41,7 +41,7 @@ static void ario_cover_create_ario_cover_dir (void);
 static char* ario_cover_make_amazon_xml_uri (const char *artist, 
                                              const char *album);
 
-static GList* ario_cover_parse_amazon_xml_file (char *xmldata,
+static GSList* ario_cover_parse_amazon_xml_file (char *xmldata,
                                                 int size,
                                                 ArioCoverAmazonOperation operation,
                                                 ArioCoverAmazonCoversSize ario_cover_size);
@@ -124,7 +124,7 @@ ario_cover_size_is_valid (int size)
         return (size < 1024 * 200 && size > 900);
 }
 
-static GList *
+static GSList *
 ario_cover_parse_amazon_xml_file (char *xmldata,
                                   int size,
                                   ArioCoverAmazonOperation operation,
@@ -134,7 +134,7 @@ ario_cover_parse_amazon_xml_file (char *xmldata,
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlChar *key;
-        GList *ario_cover_uris = NULL;
+        GSList *ario_cover_uris = NULL;
         char *ario_cover_size_text;
 
         /* Amazon provides 3 different covers sizes. By default, we use the medium one */
@@ -181,7 +181,7 @@ ario_cover_parse_amazon_xml_file (char *xmldata,
                                 if ((!xmlStrcmp (cur2->name, (const xmlChar *) ario_cover_size_text))) {
                                         /* A possible cover uri has been found, we add it to the list*/
                                         key = xmlNodeListGetString (doc, cur2->xmlChildrenNode, 1);
-                                        ario_cover_uris = g_list_append (ario_cover_uris, key);
+                                        ario_cover_uris = g_slist_append (ario_cover_uris, key);
                                         if (operation == GET_FIRST_COVER) {
                                                 /* If we only want one cover, we now stop to parse the file */
                                                 xmlFreeDoc (doc);
@@ -308,9 +308,9 @@ ario_cover_make_amazon_xml_uri (const char *artist,
 gboolean
 ario_cover_load_amazon_covers (const char *artist,
                                const char *album,
-                               GList **ario_cover_uris,
+                               GSList **ario_cover_uris,
                                GArray **file_size,
-                               GList **file_contents,
+                               GSList **file_contents,
                                ArioCoverAmazonOperation operation,
                                ArioCoverAmazonCoversSize ario_cover_size)
 {
@@ -318,7 +318,7 @@ ario_cover_load_amazon_covers (const char *artist,
         char *xml_uri;
         int xml_size;
         char *xml_data;
-        GList *temp;
+        GSList *temp;
         int temp_size;
         char *temp_contents;
         gboolean ret;
@@ -361,7 +361,7 @@ ario_cover_load_amazon_covers (const char *artist,
                         if (ario_cover_size_is_valid (temp_size)) {
                                 /* If the cover is not too big and not too small (blank amazon image), we append it to file_contents */
                                 g_array_append_val (*file_size, temp_size);
-                                *file_contents = g_list_append (*file_contents, temp_contents);
+                                *file_contents = g_slist_append (*file_contents, temp_contents);
                                 /* If at least one cover is found, we return OK */
                                 ret = TRUE;
                         }

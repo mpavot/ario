@@ -122,7 +122,7 @@ struct ArioSearchPrivate
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 
-        GList *search_constraints;
+        GSList *search_constraints;
         GtkListStore *list_store;
 };
 
@@ -519,27 +519,27 @@ searchs_foreach (GtkTreeModel *model,
                  gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **searchs = (GList **) userdata;
+        GSList **searchs = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
 
-        *searchs = g_list_append (*searchs, val);
+        *searchs = g_slist_append (*searchs, val);
 }
 
 static void
 ario_search_add_in_playlist (ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
-        GList *searchs = NULL;
+        GSList *searchs = NULL;
 
         gtk_tree_selection_selected_foreach (search->priv->searchs_selection,
                                              searchs_foreach,
                                              &searchs);
         ario_playlist_append_songs (search->priv->playlist, searchs);
 
-        g_list_foreach (searchs, (GFunc) g_free, NULL);
-        g_list_free (searchs);
+        g_slist_foreach (searchs, (GFunc) g_free, NULL);
+        g_slist_free (searchs);
 }
 
 static void
@@ -791,17 +791,17 @@ ario_search_do_plus (GtkButton *button,
 
         gtk_widget_show_all (search_constraint->hbox);
 
-        search->priv->search_constraints = g_list_append (search->priv->search_constraints,
+        search->priv->search_constraints = g_slist_append (search->priv->search_constraints,
                                                           search_constraint);
 
-        len = g_list_length (search->priv->search_constraints);
+        len = g_slist_length (search->priv->search_constraints);
         if (len == 1) {
-                search_constraint = (g_list_first (search->priv->search_constraints))->data;
+                search_constraint = search->priv->search_constraints->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, FALSE);
         } else if ( len > 4) {
                 gtk_widget_set_sensitive (search->priv->plus_button, FALSE);
         } else if (len == 2) {
-                search_constraint = (g_list_first (search->priv->search_constraints))->data;
+                search_constraint = search->priv->search_constraints->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, TRUE);
         }
 }
@@ -813,9 +813,9 @@ ario_search_do_minus (GtkButton *button,
 {
         ARIO_LOG_FUNCTION_START
         ArioSearchConstraint *search_constraint;
-        GList *tmp;
+        GSList *tmp;
 
-        for (tmp = search->priv->search_constraints; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
                 search_constraint = tmp->data;
                 if (search_constraint->minus_button == (GtkWidget* ) button)
                         break;
@@ -828,14 +828,14 @@ ario_search_do_minus (GtkButton *button,
         gtk_widget_destroy (search_constraint->minus_button);
         gtk_widget_destroy (search_constraint->hbox);
 
-        search->priv->search_constraints = g_list_remove (search->priv->search_constraints,
+        search->priv->search_constraints = g_slist_remove (search->priv->search_constraints,
                                                           search_constraint);
         g_free (search_constraint);
 
         gtk_widget_set_sensitive (search->priv->plus_button, TRUE);
 
-        if (g_list_length (search->priv->search_constraints) == 1) {
-                search_constraint = (g_list_first (search->priv->search_constraints))->data;
+        if (g_slist_length (search->priv->search_constraints) == 1) {
+                search_constraint = search->priv->search_constraints->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, FALSE);
         }
 }
@@ -847,15 +847,15 @@ ario_search_do_search (GtkButton *button,
         ARIO_LOG_FUNCTION_START
         ArioSearchConstraint *search_constraint;
         ArioMpdSearchCriteria *search_criteria;
-        GList *search_criterias = NULL;
-        GList *tmp;
-        GList *songs;
+        GSList *search_criterias = NULL;
+        GSList *tmp;
+        GSList *songs;
         ArioMpdSong *song;
         GtkTreeIter iter;
         gchar *title;
         GValue *value;
 
-        for (tmp = search->priv->search_constraints; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
                 search_constraint = tmp->data;
 
                 search_criteria = (ArioMpdSearchCriteria *) g_malloc (sizeof (ArioMpdSearchCriteria));
@@ -868,16 +868,16 @@ ario_search_do_search (GtkButton *button,
                 search_criteria->type = g_value_get_int(value);
                 g_free (value);
                 search_criteria->value = gtk_entry_get_text (GTK_ENTRY (search_constraint->entry));
-                search_criterias = g_list_append (search_criterias, search_criteria);
+                search_criterias = g_slist_append (search_criterias, search_criteria);
         }
 
         songs = ario_mpd_search (search->priv->mpd, search_criterias);
-        g_list_foreach (search_criterias, (GFunc) g_free, NULL);
-        g_list_free (search_criterias);
+        g_slist_foreach (search_criterias, (GFunc) g_free, NULL);
+        g_slist_free (search_criterias);
         
         gtk_list_store_clear (search->priv->searchs_model);
 
-        for (tmp = songs; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
 
                 gtk_list_store_append (search->priv->searchs_model, &iter);
@@ -890,8 +890,8 @@ ario_search_do_search (GtkButton *button,
                                     -1);
                 g_free (title);
         }
-        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-        g_list_free (songs);
+        g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+        g_slist_free (songs);
 }
 #endif  /* ENABLE_SEARCH */
 

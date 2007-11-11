@@ -56,7 +56,7 @@ GType           ario_avahi_get_type     (void);
 
 ArioAvahi *     ario_avahi_new          (void);
 
-GList *         ario_avahi_get_hosts    (ArioAvahi *avahi);
+GSList *         ario_avahi_get_hosts    (ArioAvahi *avahi);
 
 G_END_DECLS
 

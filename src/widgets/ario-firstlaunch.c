@@ -146,7 +146,7 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         ArioProfile *profile;
-        GList *profiles = NULL;
+        GSList *profiles = NULL;
         char *host;
         int port;
 
@@ -164,7 +164,7 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
         profile->password = NULL;
         g_free (host);
 
-        profiles = g_list_append (profiles, profile);
+        profiles = g_slist_append (profiles, profile);
         ario_profiles_save (profiles);
 
         firstlaunch->priv->applied = TRUE;
@@ -218,7 +218,7 @@ ario_firstlaunch_hosts_changed_cb (ArioAvahi *avahi,
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
-        GList *hosts = ario_avahi_get_hosts (avahi);
+        GSList *hosts = ario_avahi_get_hosts (avahi);
         gtk_list_store_clear (firstlaunch->priv->hosts_model);
 
         while (hosts) {
@@ -232,7 +232,7 @@ ario_firstlaunch_hosts_changed_cb (ArioAvahi *avahi,
                                     PORT_COLUMN, tmp,
                                     -1);
                 g_free (tmp);
-                hosts = g_list_next (hosts);
+                hosts = g_slist_next (hosts);
         }
 
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (firstlaunch->priv->hosts_model), &iter))

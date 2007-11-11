@@ -71,7 +71,7 @@ struct ArioAvahiPrivate
         AvahiClient *client;
         AvahiServiceBrowser *browser;
 
-        GList *hosts;
+        GSList *hosts;
 };
 
 enum
@@ -184,8 +184,8 @@ ario_avahi_finalize (GObject *object)
 
         avahi_client_free (avahi->priv->client);
         avahi_glib_poll_free (avahi->priv->glib_poll);
-        g_list_foreach (avahi->priv->hosts, (GFunc) ario_avahi_free_hosts, NULL);
-        g_list_free (avahi->priv->hosts);
+        g_slist_foreach (avahi->priv->hosts, (GFunc) ario_avahi_free_hosts, NULL);
+        g_slist_free (avahi->priv->hosts);
         g_free (avahi->priv);
 
         parent_class->finalize (G_OBJECT (avahi));
@@ -239,7 +239,7 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                         host->host = g_strdup (a);
                         host->port = port;
 
-                        avahi->priv->hosts = g_list_append (avahi->priv->hosts, host);
+                        avahi->priv->hosts = g_slist_append (avahi->priv->hosts, host);
 
                         g_signal_emit (G_OBJECT (avahi), ario_avahi_signals[HOSTS_CHANGED], 0);
                 }
@@ -252,12 +252,12 @@ static void ario_avahi_remove_host (ArioAvahi *avahi,
                                     const gchar *name)
 {
         ARIO_LOG_FUNCTION_START
-        GList *tmp;
+        GSList *tmp;
 
-        for (tmp = avahi->priv->hosts; tmp; tmp = g_list_next (tmp)) {
+        for (tmp = avahi->priv->hosts; tmp; tmp = g_slist_next (tmp)) {
                 ArioHost *host = tmp->data;
                 if (name && host->name && !strcmp (host->name, name)) {
-                        avahi->priv->hosts = g_list_remove (avahi->priv->hosts, host);
+                        avahi->priv->hosts = g_slist_remove (avahi->priv->hosts, host);
                         g_signal_emit (G_OBJECT (avahi), ario_avahi_signals[HOSTS_CHANGED], 0);
                 }
         }
@@ -322,7 +322,7 @@ static void ario_avahi_client_callback (AvahiClient *c,
         }
 }
 
-GList *
+GSList *
 ario_avahi_get_hosts (ArioAvahi *avahi)
 {
         ARIO_LOG_FUNCTION_START

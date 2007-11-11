@@ -598,8 +598,8 @@ static void
 ario_browser_fill_artists (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        GList *artists;
-        GList *temp;
+        GSList *artists;
+        GSList *temp;
         GtkTreeIter artist_iter;
         GList* paths;
         GtkTreePath *path;
@@ -620,10 +620,10 @@ ario_browser_fill_artists (ArioBrowser *browser)
                 gtk_list_store_append (browser->priv->artists_model, &artist_iter);
                 gtk_list_store_set (browser->priv->artists_model, &artist_iter, 0,
                                     temp->data, -1);
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
-        g_list_foreach(artists, (GFunc) g_free, NULL);
-        g_list_free (artists);
+        g_slist_foreach(artists, (GFunc) g_free, NULL);
+        g_slist_free (artists);
 
         gtk_tree_selection_unselect_all (browser->priv->artists_selection);
         if (paths) {
@@ -655,7 +655,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser = ARIO_BROWSER (userdata);
         gchar* artist = NULL;
-        GList *albums = NULL, *temp;
+        GSList *albums = NULL, *temp;
         ArioMpdAlbum *ario_mpd_album;
         GtkTreeIter album_iter;
         gchar *ario_cover_path;
@@ -695,12 +695,12 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                                     ALBUM_COVER_COLUMN, cover,
                                     -1);
                 g_object_unref (G_OBJECT (cover));
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
 
 
-        g_list_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-        g_list_free (albums);
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
 }
 
 static void
@@ -746,7 +746,7 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser = ARIO_BROWSER (userdata);
         gchar *artist = NULL, *album = NULL;
-        GList *songs = NULL, *temp;
+        GSList *songs = NULL, *temp;
         ArioMpdSong *song;
         GtkTreeIter songs_iter;
         gchar *track;
@@ -779,11 +779,11 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
                                         -1);
                 g_free (title);
                 g_free (track);
-                temp = g_list_next (temp);
+                temp = g_slist_next (temp);
         }
 
-        g_list_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-        g_list_free (songs);
+        g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+        g_slist_free (songs);
 }
 
 static void
@@ -1100,27 +1100,27 @@ get_selected_artists_foreach (GtkTreeModel *model,
                               gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **artists = (GList **) userdata;
+        GSList **artists = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, 0, &val, -1);
 
-        *artists = g_list_append (*artists, val);
+        *artists = g_slist_append (*artists, val);
 }
 
 static void
 ario_browser_add_artists (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        GList *artists = NULL;
+        GSList *artists = NULL;
 
         gtk_tree_selection_selected_foreach (browser->priv->artists_selection,
                                              get_selected_artists_foreach,
                                              &artists);
         ario_playlist_append_artists (browser->priv->playlist, artists);
 
-        g_list_foreach (artists, (GFunc) g_free, NULL);
-        g_list_free (artists);
+        g_slist_foreach (artists, (GFunc) g_free, NULL);
+        g_slist_free (artists);
 }
 
 static void
@@ -1138,7 +1138,7 @@ get_selected_albums_foreach (GtkTreeModel *model,
                              gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **albums = (GList **) userdata;
+        GSList **albums = (GSList **) userdata;
 
         ArioMpdAlbum *ario_mpd_album;
 
@@ -1146,14 +1146,14 @@ get_selected_albums_foreach (GtkTreeModel *model,
         gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &ario_mpd_album->artist, -1);
         gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &ario_mpd_album->album, -1);
 
-        *albums = g_list_append (*albums, ario_mpd_album);
+        *albums = g_slist_append (*albums, ario_mpd_album);
 }
 
 static void
 ario_browser_add_albums (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        GList *albums = NULL;
+        GSList *albums = NULL;
 
         gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
                                              get_selected_albums_foreach,
@@ -1161,8 +1161,8 @@ ario_browser_add_albums (ArioBrowser *browser)
 
         ario_playlist_append_albums (browser->priv->playlist, albums);
 
-        g_list_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-        g_list_free (albums);
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
 }
 
 static void
@@ -1180,27 +1180,27 @@ songs_foreach (GtkTreeModel *model,
                gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GList **songs = (GList **) userdata;
+        GSList **songs = (GSList **) userdata;
         gchar *val = NULL;
 
         gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
 
-        *songs = g_list_append (*songs, val);
+        *songs = g_slist_append (*songs, val);
 }
 
 static void
 ario_browser_add_songs (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        GList *songs = NULL;
+        GSList *songs = NULL;
 
         gtk_tree_selection_selected_foreach (browser->priv->songs_selection,
                                              songs_foreach,
                                              &songs);
         ario_playlist_append_songs (browser->priv->playlist, songs);
 
-        g_list_foreach (songs, (GFunc) g_free, NULL);
-        g_list_free (songs);
+        g_slist_foreach (songs, (GFunc) g_free, NULL);
+        g_slist_free (songs);
 }
 
 static void
@@ -1246,7 +1246,7 @@ get_artist_cover (ArioBrowser *browser,
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *coverdownloader;
-        GList *artists = NULL;
+        GSList *artists = NULL;
 
         coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
 
@@ -1258,8 +1258,8 @@ get_artist_cover (ArioBrowser *browser,
                                                             artists,
                                                             operation);
 
-        g_list_foreach (artists, (GFunc) g_free, NULL);
-        g_list_free (artists);
+        g_slist_foreach (artists, (GFunc) g_free, NULL);
+        g_slist_free (artists);
 
         gtk_widget_destroy (coverdownloader);
         ario_browser_get_covers_end (browser);
@@ -1300,13 +1300,13 @@ get_album_cover (ArioBrowser *browser,
                  guint operation)
 {
         ARIO_LOG_FUNCTION_START
-        GList *albums = NULL;
+        GSList *albums = NULL;
 
         gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
                                              get_selected_albums_foreach,
                                              &albums);
 
-        if (g_list_length(albums) == 1 && operation == GET_AMAZON_COVERS) {
+        if (g_slist_length(albums) == 1 && operation == GET_AMAZON_COVERS) {
                 GtkWidget *coverselect;
                 ArioMpdAlbum *ario_mpd_album = albums->data;
                 coverselect = ario_shell_coverselect_new (ario_mpd_album->artist,
@@ -1323,8 +1323,8 @@ get_album_cover (ArioBrowser *browser,
                 gtk_widget_destroy (coverdownloader);
         }
 
-        g_list_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-        g_list_free (albums);
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
 
         ario_browser_get_covers_end (browser);
 }

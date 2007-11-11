@@ -254,7 +254,7 @@ eel_gconf_get_string (const char *key,
 }
 
 void
-eel_gconf_set_string_list (const char *key,
+eel_gconf_set_string_slist (const char *key,
                                 const GSList *slist)
 {
         GConfClient *client;
@@ -274,7 +274,7 @@ eel_gconf_set_string_list (const char *key,
 }
 
 GSList *
-eel_gconf_get_string_list (const char *key)
+eel_gconf_get_string_slist (const char *key)
 {
         GSList *slist;
         GConfClient *client;
