@@ -587,7 +587,7 @@ ario_shell_coverselect_set_current_cover (ArioShellCoverselect *ario_shell_cover
         GdkPixbuf *pixbuf;
         gchar *ario_cover_path;
 
-        if (ario_cover_ario_cover_exists (ario_shell_coverselect->priv->file_artist, ario_shell_coverselect->priv->file_album)) {
+        if (ario_cover_cover_exists (ario_shell_coverselect->priv->file_artist, ario_shell_coverselect->priv->file_album)) {
                 ario_cover_path = ario_cover_make_ario_cover_path (ario_shell_coverselect->priv->file_artist,
                                                        ario_shell_coverselect->priv->file_album,
                                                        NORMAL_COVER);

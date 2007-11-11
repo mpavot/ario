@@ -67,7 +67,7 @@ void                         ario_cover_remove_cover         (const gchar *artis
                                                               const gchar *album);
 gboolean                     ario_cover_size_is_valid        (int size);
 
-gboolean                     ario_cover_ario_cover_exists    (const gchar *artist,
+gboolean                     ario_cover_cover_exists         (const gchar *artist,
                                                               const gchar *album);
 gchar*                       ario_cover_make_ario_cover_path (const gchar *artist,
                                                               const gchar *album,
