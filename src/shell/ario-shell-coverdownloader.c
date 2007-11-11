@@ -463,8 +463,8 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
 
                 /* We search for a new cover */
                 ario_shell_coverdownloader_get_cover_from_album (ario_shell_coverdownloader,
-                                                                      temp->data,
-                                                                      operation);
+                                                                 temp->data,
+                                                                 operation);
                 temp = g_slist_next (temp);
         }
 
@@ -496,7 +496,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
                 /* We update the progress bar */
                 ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
 
-                if (ario_cover_ario_cover_exists (artist, album))
+                if (ario_cover_cover_exists (artist, album))
                         /* The cover already exists, we do nothing */
                         ario_shell_coverdownloader->priv->nb_covers_already_exist++;
                 else

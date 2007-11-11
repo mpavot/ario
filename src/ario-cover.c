@@ -77,8 +77,8 @@ ario_cover_make_ario_cover_path (const gchar *artist,
 }
 
 gboolean
-ario_cover_ario_cover_exists (const gchar *artist,
-                              const gchar *album)
+ario_cover_cover_exists (const gchar *artist,
+                         const gchar *album)
 {
         ARIO_LOG_FUNCTION_START
         gchar *ario_cover_path, *small_ario_cover_path;
@@ -379,7 +379,7 @@ ario_cover_remove_cover (const gchar *artist,
         gchar *small_ario_cover_path;
         gchar *ario_cover_path;
 
-        if (!ario_cover_ario_cover_exists (artist, album))
+        if (!ario_cover_cover_exists (artist, album))
                 return;
 
         /* Delete the small cover*/
@@ -405,7 +405,7 @@ ario_cover_can_overwrite_cover (const gchar *artist,
         gint retval;
 
         /* If the cover already exists, we can ask, replace or skip depending of the overwrite_mode argument */
-        if (ario_cover_ario_cover_exists (artist, album)) {
+        if (ario_cover_cover_exists (artist, album)) {
                 switch (overwrite_mode) {
                 case OVERWRITE_MODE_ASK:
                         dialog = gtk_message_dialog_new (NULL,
