@@ -16,6 +16,8 @@ src/ario-avahi.h
 src/ario-cover.c
 src/ario-cover.h
 src/ario-debug.h
+src/ario-lyrics.c
+src/ario-lyrics.h
 src/ario-main.c
 src/ario-mpd.c
 src/ario-mpd.h
@@ -56,6 +58,8 @@ src/shell/ario-shell-coverdownloader.c
 src/shell/ario-shell-coverdownloader.h
 src/shell/ario-shell-coverselect.c
 src/shell/ario-shell-coverselect.h
+src/shell/ario-shell-lyrics.c
+src/shell/ario-shell-lyrics.h
 src/shell/ario-shell-preferences.c
 src/shell/ario-shell-preferences.h
 src/widgets/ario-firstlaunch.c

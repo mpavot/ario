@@ -27,7 +27,6 @@
 #include "ario-util.h"
 #include "ario-debug.h"
 
-
 int
 main (int argc, char *argv[])
 {
@@ -47,6 +46,7 @@ main (int argc, char *argv[])
 
         ario_util_init_stock_icons ();
         curl_global_init(0);
+        if (!g_thread_supported ()) g_thread_init (NULL);
 
         eel_gconf_monitor_add ("/apps/ario");
         shell = ario_shell_new ();

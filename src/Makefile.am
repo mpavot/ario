@@ -14,6 +14,8 @@ ario_SOURCES = \
 	ario-cover.c\
 	ario-cover.h\
 	ario-debug.h\
+	ario-lyrics.c\
+	ario-lyrics.h\
 	ario-main.c\
 	ario-mpd.c\
 	ario-mpd.h\
@@ -54,6 +56,8 @@ ario_SOURCES = \
 	shell/ario-shell-coverdownloader.h\
 	shell/ario-shell-coverselect.c\
 	shell/ario-shell-coverselect.h\
+	shell/ario-shell-lyrics.c\
+	shell/ario-shell-lyrics.h\
 	shell/ario-shell-preferences.c\
 	shell/ario-shell-preferences.h\
 	widgets/ario-firstlaunch.c\

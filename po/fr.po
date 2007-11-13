@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-10 18:04+0100\n"
-"PO-Revision-Date: 2007-11-10 17:44+0100\n"
+"POT-Creation-Date: 2007-11-13 23:43+0100\n"
+"PO-Revision-Date: 2007-11-12 23:48+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -251,11 +251,11 @@ msgstr "Port:"
 msgid "_Autoconnect on startup"
 msgstr "_Connexion automatique au démarrage"
 
-#: ../data/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:111
+#: ../data/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:114
 msgid "_Connect"
 msgstr "_Connecter"
 
-#: ../data/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:114
+#: ../data/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:117
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 
@@ -366,7 +366,7 @@ msgstr "Lors d'un double clic sur l'icône de notification : "
 msgid "Show tabs"
 msgstr "Afficher les onglets"
 
-#: ../src/ario-cover.c:415
+#: ../src/ario-cover.c:411
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La pochette existe déjà. Voulez-vous la remplacer?"
 
@@ -439,11 +439,11 @@ msgstr "Hôte"
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:608
+#: ../src/preferences/ario-connection-preferences.c:609
 msgid "You must select a server."
 msgstr "Vous devez sélectionner un serveur."
 
-#: ../src/preferences/ario-connection-preferences.c:627
+#: ../src/preferences/ario-connection-preferences.c:628
 msgid "New Profile"
 msgstr "Nouveau Profil"
 
@@ -572,25 +572,25 @@ msgid "Internet Radios"
 msgstr "Radios Internet"
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:853
+#: ../src/sources/ario-radio.c:852
 msgid "Add a WebRadio"
 msgstr "Ajouter une WebRadio"
 
-#: ../src/sources/ario-radio.c:863 ../src/sources/ario-radio.c:1106
+#: ../src/sources/ario-radio.c:862 ../src/sources/ario-radio.c:1105
 msgid "Name : "
 msgstr "Nom : "
 
-#: ../src/sources/ario-radio.c:864 ../src/sources/ario-radio.c:1107
+#: ../src/sources/ario-radio.c:863 ../src/sources/ario-radio.c:1106
 msgid "URL : "
 msgstr "URL : "
 
-#: ../src/sources/ario-radio.c:915 ../src/sources/ario-radio.c:1159
+#: ../src/sources/ario-radio.c:914 ../src/sources/ario-radio.c:1158
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Mauvais paramètres. Vous devez spécifier un nom et une URL pour la radio."
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:1096
+#: ../src/sources/ario-radio.c:1095
 msgid "Edit a WebRadio"
 msgstr "Éditer une WebRadio"
 
@@ -655,103 +655,111 @@ msgstr "Playlist"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Êtes-vous sur de vouloir supprimer toutes les playlists sélectionnées?"
 
-#: ../src/shell/ario-shell.c:102
+#: ../src/shell/ario-shell.c:105
 msgid "_File"
 msgstr "_Fichier"
 
-#: ../src/shell/ario-shell.c:103
+#: ../src/shell/ario-shell.c:106
 msgid "_Edit"
 msgstr "É_dition"
 
-#: ../src/shell/ario-shell.c:104
+#: ../src/shell/ario-shell.c:107
 msgid "_View"
 msgstr "_Affichage"
 
-#: ../src/shell/ario-shell.c:105
+#: ../src/shell/ario-shell.c:108
 msgid "_Tool"
 msgstr "_Outils"
 
-#: ../src/shell/ario-shell.c:106
+#: ../src/shell/ario-shell.c:109
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../src/shell/ario-shell.c:108
+#: ../src/shell/ario-shell.c:111
 msgid "_Save Playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/shell/ario-shell.c:109
+#: ../src/shell/ario-shell.c:112
 msgid "Save Playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/shell/ario-shell.c:112
+#: ../src/shell/ario-shell.c:115
 msgid "Connect"
 msgstr "_Connecter"
 
-#: ../src/shell/ario-shell.c:115
+#: ../src/shell/ario-shell.c:118
 msgid "Disconnect"
 msgstr "_Déconnecter"
 
-#: ../src/shell/ario-shell.c:117
+#: ../src/shell/ario-shell.c:120
 msgid "_Quit"
 msgstr "_Quitter"
 
-#: ../src/shell/ario-shell.c:118
+#: ../src/shell/ario-shell.c:121
 msgid "Quit"
 msgstr "_Quitter"
 
-#: ../src/shell/ario-shell.c:120
+#: ../src/shell/ario-shell.c:123
 msgid "Prefere_nces"
 msgstr "Préfére_nces"
 
-#: ../src/shell/ario-shell.c:121
+#: ../src/shell/ario-shell.c:124
 msgid "Edit music player preferences"
 msgstr "Modifier les préférences"
 
-#: ../src/shell/ario-shell.c:123
+#: ../src/shell/ario-shell.c:126
 msgid "Download album _covers"
 msgstr "Télécharger les pochettes"
 
-#: ../src/shell/ario-shell.c:124
+#: ../src/shell/ario-shell.c:127
 msgid "Download covers form amazon"
 msgstr "Télécharger des pochettes depuis amazon"
 
-#: ../src/shell/ario-shell.c:126
+#: ../src/shell/ario-shell.c:129
 msgid "_About"
 msgstr "_À propos"
 
-#: ../src/shell/ario-shell.c:127
+#: ../src/shell/ario-shell.c:130
 msgid "Show information about the music player"
 msgstr "Affichier des informations sur le lecteur de musique"
 
-#: ../src/shell/ario-shell.c:134
+#: ../src/shell/ario-shell.c:132
+msgid "Show _lyrics"
+msgstr "Afficher les _Paroles"
+
+#: ../src/shell/ario-shell.c:133
+msgid "Show song lyrics"
+msgstr "Affiche les paroles des chansons"
+
+#: ../src/shell/ario-shell.c:140
 msgid "_Library"
 msgstr "_Bibliothèque"
 
-#: ../src/shell/ario-shell.c:135
+#: ../src/shell/ario-shell.c:141
 msgid "Library view"
 msgstr "Affichage de la bibliothèque"
 
-#: ../src/shell/ario-shell.c:139
+#: ../src/shell/ario-shell.c:145
 msgid "_Web Radios"
 msgstr "_Web Radios"
 
-#: ../src/shell/ario-shell.c:140
+#: ../src/shell/ario-shell.c:146
 msgid "Web Radios view"
 msgstr "Affichage des Web Radios"
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:151
 msgid "_Search"
 msgstr "_Recherche"
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:152
 msgid "Search view"
 msgstr "Chercher dans la bibliothèque"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:157
 msgid "_Playlists"
 msgstr "_Playlists"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:158
 msgid "Playlists view"
 msgstr "Affichage des Playlists"
 
@@ -784,23 +792,35 @@ msgstr "Erreur lors de la lecture du fichier"
 msgid "Error saving file"
 msgstr "Erreur lors de l'écriture du fichier"
 
-#: ../src/shell/ario-shell-preferences.c:142
+#: ../src/shell/ario-shell-lyrics.c:141
+msgid "Ario Lyrics"
+msgstr "Ario Paroles"
+
+#: ../src/shell/ario-shell-lyrics.c:329
+msgid "Downloading lyrics..."
+msgstr "Téléchargement des paroles..."
+
+#: ../src/shell/ario-shell-lyrics.c:358
+msgid "Lyrics not found"
+msgstr "Paroles introuvables"
+
+#: ../src/shell/ario-shell-preferences.c:137
 msgid "Ario Preferences"
 msgstr "Préférences d'Ario"
 
-#: ../src/shell/ario-shell-preferences.c:172
+#: ../src/shell/ario-shell-preferences.c:167
 msgid "Connection"
 msgstr "Connexion"
 
-#: ../src/shell/ario-shell-preferences.c:177
+#: ../src/shell/ario-shell-preferences.c:172
 msgid "Server"
 msgstr "Serveur"
 
-#: ../src/shell/ario-shell-preferences.c:182
+#: ../src/shell/ario-shell-preferences.c:177
 msgid "Covers"
 msgstr "Pochettes"
 
-#: ../src/shell/ario-shell-preferences.c:187
+#: ../src/shell/ario-shell-preferences.c:182
 msgid "Interface"
 msgstr "Interface"
 
@@ -931,15 +951,15 @@ msgid "Duration"
 msgstr "Durée"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1107
+#: ../src/widgets/ario-playlist.c:1106
 msgid "Save playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/widgets/ario-playlist.c:1117
+#: ../src/widgets/ario-playlist.c:1116
 msgid "Playlist name : "
 msgstr "Nom de la playlist : "
 
-#: ../src/widgets/ario-playlist.c:1141
+#: ../src/widgets/ario-playlist.c:1140
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La playlist existe déjà. Voulez-vous la remplacer?"
 
@@ -976,6 +996,10 @@ msgstr "+"
 #: ../src/widgets/ario-volume.c:238
 msgid "-"
 msgstr "-"
+
+#, fuzzy
+#~ msgid "The lyrics already exists. Do you want to replace it?"
+#~ msgstr "La pochette existe déjà. Voulez-vous la remplacer?"
 
 #~ msgid "Define if Ario must use authentication to connect to mpd or not"
 #~ msgstr "Définit si Ario doit s'authentifier pour se connecter à MPD ou pas"

@@ -302,7 +302,7 @@ ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
 {
         ARIO_LOG_FUNCTION_START
         if (!ario_shell_coverdownloader->priv->cancelled)
-                /*window destroyed for the first time : we wait until the end of the current download and we stop the search */
+                /* window destroyed for the first time : we wait until the end of the current download and we stop the search */
                 ario_shell_coverdownloader->priv->cancelled = TRUE;
         else
                 /* window destroyed for the second time : we close and destroy the window */
