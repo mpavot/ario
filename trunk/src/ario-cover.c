@@ -69,7 +69,7 @@ ario_cover_make_ario_cover_path (const gchar *artist,
                         *tmp = ' ';
         }
 
-        /* The returned path is ~/.gnome2/ario/covers/filename */
+        /* The returned path is ~/.config/ario/covers/filename */
         ario_cover_path = g_build_filename (ario_util_config_dir (), "covers", filename, NULL);
         g_free (filename);
 
@@ -133,6 +133,7 @@ ario_cover_parse_amazon_xml_file (char *xmldata,
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
         xmlNodePtr cur;
+        xmlNodePtr cur2;
         xmlChar *key;
         GSList *ario_cover_uris = NULL;
         char *ario_cover_size_text;
@@ -172,12 +173,9 @@ ario_cover_parse_amazon_xml_file (char *xmldata,
                 xmlFreeDoc (doc);
                 return NULL;
         }
-        cur = cur->xmlChildrenNode;
-        while (cur != NULL) {
+        for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"Details")){
-                        xmlNodePtr cur2;
-                        cur2 = cur->xmlChildrenNode;
-                        while (cur2 != NULL) {
+                        for (cur2 = cur->xmlChildrenNode; cur2; cur2 = cur2->next) {
                                 if ((!xmlStrcmp (cur2->name, (const xmlChar *) ario_cover_size_text))) {
                                         /* A possible cover uri has been found, we add it to the list*/
                                         key = xmlNodeListGetString (doc, cur2->xmlChildrenNode, 1);
@@ -188,10 +186,8 @@ ario_cover_parse_amazon_xml_file (char *xmldata,
                                                 return ario_cover_uris;
                                         }
                                 }
-                                cur2 = cur2->next;
                         }
                 }
-                cur = cur->next;
         }
 
         xmlFreeDoc (doc);
@@ -217,8 +213,8 @@ ario_cover_make_amazon_xml_uri (const char *artist,
         const char *mykey = "1BDCAEREYT743R9SXE02";
 
         /* List of modifications done on the keuword used for the search */
-        const gchar *to_replace[] = {"é", "è", "ê", "à", "ù", "ç", "#", "/", "?", "'", "-", "\"", "&", ":", "*", "(", ")", NULL};
-        const gchar *replace_to[] = {"e", "e", "e", "a", "u", "c", " ", " ", " ", " ", " ", " ",  " ", " ", " ", " ", " ", NULL};
+        const gchar *to_replace[] = {"é", "è", "ê", "à", "ù", "ç", "ö", "#", "/", "?", "'", "-", "\"", "&", ":", "*", "(", ")", NULL};
+        const gchar *replace_to[] = {"e", "e", "e", "a", "u", "c", "o", " ", " ", " ", " ", " ", " ",  " ", " ", " ", " ", " ", NULL};
         const gchar *to_remove[] = {"cd 1", "cd 2", "cd 3", "cd 4", "CD 5", "disc", "disk", "disque", NULL};
 
         if (!album || !artist)

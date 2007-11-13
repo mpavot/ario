@@ -467,7 +467,6 @@ ario_radio_get_radios (ArioRadio *radio)
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"radio")){
                         internet_radio = (ArioInternetRadio *) g_malloc (sizeof (ArioInternetRadio));
 
-
                         xml_name = xmlNodeGetContent (cur);
                         internet_radio->name = g_strdup ((char *) xml_name);
                         xmlFree(xml_name);

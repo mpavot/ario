@@ -32,6 +32,7 @@
 #include "widgets/ario-status-bar.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell-preferences.h"
+#include "shell/ario-shell-lyrics.h"
 #include "shell/ario-shell-coverdownloader.h"
 #include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
@@ -50,6 +51,8 @@ static void ario_shell_cmd_disconnect (GtkAction *action,
                                        ArioShell *shell);
 static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
+static void ario_shell_cmd_lyrics (GtkAction *action,
+                                   ArioShell *shell);
 #ifdef MULTIPLE_VIEW
 static void ario_shell_cmd_radio_view (GtkRadioAction *action,
                                        GtkRadioAction *current,
@@ -125,7 +128,10 @@ static GtkActionEntry ario_shell_actions [] =
           G_CALLBACK (ario_shell_cmd_covers) },
         { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
           N_("Show information about the music player"),
-          G_CALLBACK (ario_shell_cmd_about) }
+          G_CALLBACK (ario_shell_cmd_about) },
+        { "Lyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
+          N_("Show song lyrics"),
+          G_CALLBACK (ario_shell_cmd_lyrics) },
 };
 static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 
@@ -454,6 +460,19 @@ ario_shell_cmd_preferences (GtkAction *action,
 
         gtk_widget_show_all (prefs);
 }
+
+static void
+ario_shell_cmd_lyrics (GtkAction *action,
+                       ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *lyrics;
+
+        lyrics = ario_shell_lyrics_new (shell->priv->mpd);
+
+        gtk_widget_show_all (lyrics);
+}
+
 #ifdef MULTIPLE_VIEW
 static void
 ario_shell_cmd_radio_view (GtkRadioAction *action,

@@ -581,7 +581,7 @@ void
 ario_mpd_check_errors (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
-        ARIO_LOG_FUNCTION_START
+        //ARIO_LOG_FUNCTION_START
         if (!ario_mpd_is_connected(mpd))
                 return;
 
@@ -595,7 +595,7 @@ gboolean
 ario_mpd_is_connected (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
-        ARIO_LOG_FUNCTION_START
+        //ARIO_LOG_FUNCTION_START
         return (mpd->priv->connection != NULL);
 }
 

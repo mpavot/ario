@@ -320,13 +320,13 @@ ario_util_download_file (const char *uri,
         download_struct download_data;
         gchar* address = NULL;
         int port;
-        
+
         CURL* curl = curl_easy_init();
         if(!curl)
                 return;
          
-         *size = 0;
-         *data = NULL;
+        *size = 0;
+        *data = NULL;
 
         download_data.size = 0;
         download_data.data = NULL;
@@ -338,13 +338,13 @@ ario_util_download_file (const char *uri,
         /* set callback function */
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ario_util_write_data);
         /* set timeout */
-        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 5);
         /* set redirect */
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION ,1);
         /* set NO SIGNAL */
         curl_easy_setopt(curl, CURLOPT_NOSIGNAL, TRUE);
 
-        if(eel_gconf_get_boolean (CONF_USE_PROXY, FALSE)) {
+        if (eel_gconf_get_boolean (CONF_USE_PROXY, FALSE)) {
                 address = eel_gconf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
                 port =  eel_gconf_get_integer (CONF_PROXY_PORT, 8080);
                 if(address) {

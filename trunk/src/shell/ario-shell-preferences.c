@@ -19,20 +19,15 @@
 
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "shell/ario-shell-preferences.h"
-#include "preferences/ario-preferences.h"
 #include "preferences/ario-connection-preferences.h"
 #include "preferences/ario-cover-preferences.h"
 #include "preferences/ario-interface-preferences.h"
 #include "preferences/ario-server-preferences.h"
-#include "lib/rb-glade-helpers.h"
-#include "lib/eel-gconf-extensions.h"
-#include "ario-avahi.h"
 #include "ario-debug.h"
 
 static void ario_shell_preferences_class_init (ArioShellPreferencesClass *klass);

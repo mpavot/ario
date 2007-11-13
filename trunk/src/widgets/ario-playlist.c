@@ -1030,7 +1030,6 @@ ario_playlist_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (widget != NULL);
         g_return_if_fail (selection_data != NULL);
 
-
         gtk_selection_data_set (selection_data, selection_data->target, 8,
                                 NULL, 0);
 }
