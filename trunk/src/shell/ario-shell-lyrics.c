@@ -51,11 +51,15 @@ static gboolean ario_shell_lyrics_window_delete_cb (GtkWidget *window,
                                                    ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_close_cb (GtkButton *button,
                                         ArioShellLyrics *shell_lyrics);
+static void ario_shell_lyrics_save_cb (GtkButton *button,
+                                       ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_free_data (ArioShellLyricsData *data);
 static void ario_shell_lyrics_get_lyrics_thread (ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
                                                ArioShellLyrics *shell_lyrics);
+static void ario_shell_lyrics_textbuffer_changed_cb (GtkTextBuffer *textbuffer,
+                                                     ArioShellLyrics *shell_lyrics);
 
 enum
 {
@@ -65,7 +69,9 @@ enum
 
 struct ArioShellLyricsPrivate
 {
+        GtkTextBuffer *textbuffer;
         GtkWidget *textview;
+        GtkWidget *save_button;
 
         ArioMpd *mpd;
 
@@ -165,11 +171,13 @@ ario_shell_lyrics_new (ArioMpd *mpd)
         hbox = gtk_hbox_new (FALSE, 5);
         separator = gtk_hseparator_new ();
         close_button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+        shell_lyrics->priv->save_button = gtk_button_new_from_stock (GTK_STOCK_SAVE);
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
         shell_lyrics->priv->textview = gtk_text_view_new ();
+        shell_lyrics->priv->textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (shell_lyrics->priv->textview));
 
         gtk_container_add (GTK_CONTAINER (scrolledwindow),
                            shell_lyrics->priv->textview);
@@ -186,6 +194,10 @@ ario_shell_lyrics_new (ArioMpd *mpd)
                           close_button,
                           FALSE, FALSE, 0);
 
+        gtk_box_pack_end (GTK_BOX (hbox),
+                          shell_lyrics->priv->save_button,
+                          FALSE, FALSE, 0);
+
         gtk_box_pack_start (GTK_BOX (vbox),
                             hbox,
                             FALSE, FALSE, 0);
@@ -197,9 +209,19 @@ ario_shell_lyrics_new (ArioMpd *mpd)
         gtk_window_set_default_size (GTK_WINDOW (shell_lyrics), 350, 500);
         gtk_window_set_position (GTK_WINDOW (shell_lyrics), GTK_WIN_POS_CENTER);
 
+        g_signal_connect_object (G_OBJECT (shell_lyrics->priv->textbuffer),
+                                 "changed",
+                                 G_CALLBACK (ario_shell_lyrics_textbuffer_changed_cb),
+                                 shell_lyrics, 0);
+
         g_signal_connect_object (G_OBJECT (close_button),
                                  "clicked",
                                  G_CALLBACK (ario_shell_lyrics_close_cb),
+                                 shell_lyrics, 0);
+
+        g_signal_connect_object (G_OBJECT (shell_lyrics->priv->save_button),
+                                 "clicked",
+                                 G_CALLBACK (ario_shell_lyrics_save_cb),
                                  shell_lyrics, 0);
 
         shell_lyrics->priv->queue = g_async_queue_new ();
@@ -232,7 +254,7 @@ ario_shell_lyrics_finalize (GObject *object)
         shell_lyrics->priv->lyrics = NULL;
         data = (ArioShellLyricsData *) g_malloc0 (sizeof (ArioShellLyricsData));
         data->finalize = TRUE;
-        g_async_queue_unref (shell_lyrics->priv->queue);
+        g_async_queue_push (shell_lyrics->priv->queue, data);
 
         g_free (shell_lyrics->priv);
 
@@ -302,6 +324,30 @@ ario_shell_lyrics_close_cb (GtkButton *button,
 }
 
 static void
+ario_shell_lyrics_save_cb (GtkButton *button,
+                           ArioShellLyrics *shell_lyrics)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTextIter start;
+        GtkTextIter end;
+        gchar *lyrics;
+        gchar *title;
+
+        gtk_text_buffer_get_bounds (shell_lyrics->priv->textbuffer,
+                                    &start, &end);
+
+        lyrics = gtk_text_buffer_get_text (shell_lyrics->priv->textbuffer,
+                                           &start, &end,
+                                           TRUE);
+
+        title = ario_util_format_title (ario_mpd_get_current_song (shell_lyrics->priv->mpd));
+        ario_lyrics_save_lyrics (ario_mpd_get_current_artist (shell_lyrics->priv->mpd),
+                                 title,
+                                 lyrics);
+        g_free (title);
+}
+
+static void
 ario_shell_lyrics_free_data (ArioShellLyricsData *data)
 {
         ARIO_LOG_FUNCTION_START
@@ -314,8 +360,6 @@ static void
 ario_shell_lyrics_get_lyrics_thread (ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTextBuffer *textbuffer;
-        GString *text;
         ArioShellLyricsData *data;
 
         g_async_queue_ref (shell_lyrics->priv->queue);
@@ -325,8 +369,13 @@ ario_shell_lyrics_get_lyrics_thread (ArioShellLyrics *shell_lyrics)
                 if (data->finalize) {
                         break;
                 }
-                textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (shell_lyrics->priv->textview));
-                gtk_text_buffer_set_text (textbuffer, _("Downloading lyrics..."), -1);
+                gtk_widget_set_sensitive (shell_lyrics->priv->save_button, FALSE);
+                g_signal_handlers_block_by_func (G_OBJECT (shell_lyrics->priv->textbuffer),
+                                                 G_CALLBACK (ario_shell_lyrics_textbuffer_changed_cb),
+                                                 shell_lyrics);
+
+                shell_lyrics->priv->textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (shell_lyrics->priv->textview));
+                gtk_text_buffer_set_text (shell_lyrics->priv->textbuffer, _("Downloading lyrics..."), -1);
 
                 ario_lyrics_free (shell_lyrics->priv->lyrics);
                 shell_lyrics->priv->lyrics = ario_lyrics_get_lyrics (data->artist,
@@ -335,29 +384,14 @@ ario_shell_lyrics_get_lyrics_thread (ArioShellLyrics *shell_lyrics)
                 if (shell_lyrics->priv->lyrics
                     && shell_lyrics->priv->lyrics->lyrics
                     && strlen (shell_lyrics->priv->lyrics->lyrics)) {
-                        text = g_string_new("");
-
-                        if (shell_lyrics->priv->lyrics->artist) {
-                                g_string_append (text, shell_lyrics->priv->lyrics->artist);
-                        } else {
-                                g_string_append (text, ARIO_MPD_UNKNOWN);
-                        }
-                        g_string_append (text, " - ");
-                        if (shell_lyrics->priv->lyrics->title) {
-                                g_string_append (text, shell_lyrics->priv->lyrics->title);
-                        } else {
-                                g_string_append (text, ARIO_MPD_UNKNOWN);
-                        }
-                        g_string_append (text, "\n\n");
-                        g_string_append (text, shell_lyrics->priv->lyrics->lyrics);
-
-                        gtk_text_buffer_set_text (textbuffer, text->str, -1);
-
-                        g_string_free (text, TRUE);
+                        gtk_text_buffer_set_text (shell_lyrics->priv->textbuffer, shell_lyrics->priv->lyrics->lyrics, -1);
                 } else {
-                        gtk_text_buffer_set_text (textbuffer, _("Lyrics not found"), -1);
+                        gtk_text_buffer_set_text (shell_lyrics->priv->textbuffer, _("Lyrics not found"), -1);
                 }
                 ario_shell_lyrics_free_data (data);
+                g_signal_handlers_unblock_by_func (G_OBJECT (shell_lyrics->priv->textbuffer),
+                                                   G_CALLBACK (ario_shell_lyrics_textbuffer_changed_cb),
+                                                   shell_lyrics);
         }
 
         g_async_queue_unref (shell_lyrics->priv->queue);
@@ -385,4 +419,11 @@ ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
         ario_shell_lyrics_add_to_queue (shell_lyrics);
 }
 
+static void
+ario_shell_lyrics_textbuffer_changed_cb (GtkTextBuffer *textbuffer,
+                                         ArioShellLyrics *shell_lyrics)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_widget_set_sensitive (shell_lyrics->priv->save_button, TRUE);
+}
 
