@@ -228,7 +228,7 @@ ario_shell_lyrics_new (ArioMpd *mpd)
 
         shell_lyrics->priv->thread = g_thread_create ((GThreadFunc) ario_shell_lyrics_get_lyrics_thread,
                                                       shell_lyrics,
-                                                      FALSE,
+                                                      TRUE,
                                                       NULL);
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
@@ -255,6 +255,7 @@ ario_shell_lyrics_finalize (GObject *object)
         data = (ArioShellLyricsData *) g_malloc0 (sizeof (ArioShellLyricsData));
         data->finalize = TRUE;
         g_async_queue_push (shell_lyrics->priv->queue, data);
+        g_thread_join (shell_lyrics->priv->thread);
 
         g_free (shell_lyrics->priv);
 
