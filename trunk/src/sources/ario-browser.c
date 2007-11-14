@@ -1237,7 +1237,6 @@ ario_browser_get_covers_end (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
         ario_browser_artists_selection_update (browser);
-        /*g_signal_emit (G_OBJECT (browser), ario_browser_signals[COVER_CHANGED], 0);*/
 }
 
 static void

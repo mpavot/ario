@@ -256,7 +256,7 @@ ario_shell_lyrics_finalize (GObject *object)
         data->finalize = TRUE;
         g_async_queue_push (shell_lyrics->priv->queue, data);
         g_thread_join (shell_lyrics->priv->thread);
-
+        g_async_queue_unref (shell_lyrics->priv->queue);
         g_free (shell_lyrics->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -345,6 +345,8 @@ ario_shell_lyrics_save_cb (GtkButton *button,
         ario_lyrics_save_lyrics (ario_mpd_get_current_artist (shell_lyrics->priv->mpd),
                                  title,
                                  lyrics);
+
+        gtk_widget_set_sensitive (shell_lyrics->priv->save_button, FALSE);
         g_free (title);
 }
 

@@ -27,6 +27,7 @@
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
 #include "ario-cover.h"
+#include "shell/ario-shell-coverselect.h"
 
 static void ario_header_class_init (ArioHeaderClass *klass);
 static void ario_header_init (ArioHeader *header);
@@ -41,6 +42,9 @@ static void ario_header_get_property (GObject *object,
                                       guint prop_id,
                                       GValue *value,
                                       GParamSpec *pspec);
+static gboolean ario_header_image_press_cb (GtkWidget *widget,
+                                            GdkEventButton *event,
+                                            ArioHeader *header);
 static gboolean slider_press_callback (GtkWidget *widget,
                                        GdkEventButton *event,
                                        ArioHeader *header);
@@ -95,7 +99,7 @@ struct ArioHeaderPrivate
         GtkWidget *elapsed;
         GtkWidget *total;
 
-        GtkWidget *ario_volume_button;
+        GtkWidget *volume_button;
 
         int total_time;
 
@@ -209,6 +213,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         ArioHeader *header;
         ArioHeaderClass *klass;
         GObjectClass *parent_class;
+        GtkWidget *event_box;
 
         GtkWidget *image, *hbox, *hbox2, *vbox, *alignment, *label;
 
@@ -292,11 +297,17 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (header), alignment, FALSE, TRUE, 0);
 
         /* Construct the cover display */
+        event_box = gtk_event_box_new ();
         header->priv->image = gtk_image_new ();
-        gtk_box_pack_start (GTK_BOX (header), header->priv->image, FALSE, TRUE, 0);
         gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &header->priv->image_width, &header->priv->image_height);
         header->priv->image_width += 18;
         header->priv->image_height += 18;
+        gtk_container_add (GTK_CONTAINER (event_box), header->priv->image);
+        gtk_box_pack_start (GTK_BOX (header), event_box, FALSE, TRUE, 0);
+        g_signal_connect_object (G_OBJECT (event_box),
+                                 "button_press_event",
+                                 G_CALLBACK (ario_header_image_press_cb),
+                                 header, 0);
 
         /* Construct the Song/Artist/Album display */
         header->priv->song = gtk_label_new ("");
@@ -478,13 +489,13 @@ ario_header_new (GtkActionGroup *group, ArioMpd *mpd)
                                        NULL));
 
         /* Construct the volume button */
-        header->priv->ario_volume_button = GTK_WIDGET (ario_volume_new (header->priv->mpd));
+        header->priv->volume_button = GTK_WIDGET (ario_volume_new (header->priv->mpd));
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->ario_volume_button), 
+                              GTK_WIDGET (header->priv->volume_button), 
                               _("Change the music volume"), NULL);
 
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
-        gtk_container_add (GTK_CONTAINER (alignment), header->priv->ario_volume_button);
+        gtk_container_add (GTK_CONTAINER (alignment), header->priv->volume_button);
         gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 5);
         gtk_box_reorder_child (GTK_BOX (header),
                                alignment,
@@ -587,7 +598,7 @@ ario_header_state_changed_cb (ArioMpd *mpd,
 
                 gtk_widget_set_sensitive (header->priv->scale, FALSE);
 
-                gtk_widget_set_sensitive (header->priv->ario_volume_button, FALSE);
+                gtk_widget_set_sensitive (header->priv->volume_button, FALSE);
         } else {
                 gtk_widget_set_sensitive (header->priv->prev_button, TRUE);
                 gtk_widget_set_sensitive (header->priv->play_pause_button, TRUE);
@@ -600,7 +611,7 @@ ario_header_state_changed_cb (ArioMpd *mpd,
 
                 gtk_widget_set_sensitive (header->priv->scale, TRUE);
 
-                gtk_widget_set_sensitive (header->priv->ario_volume_button, TRUE);
+                gtk_widget_set_sensitive (header->priv->volume_button, TRUE);
         }
 
         ario_header_change_labels (header);
@@ -669,6 +680,35 @@ ario_header_repeat_changed_cb (ArioMpd *mpd,
                                       repeat);
         g_signal_connect_swapped (G_OBJECT (header->priv->repeat_button),
                                   "clicked", G_CALLBACK (ario_header_do_repeat), header);
+}
+
+static gboolean
+ario_header_image_press_cb (GtkWidget *widget,
+                            GdkEventButton *event,
+                            ArioHeader *header)
+{
+        GtkWidget *coverselect;
+        char *artist;
+        char *album;
+
+        /* filter out double, triple clicks */
+        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
+                artist = ario_mpd_get_current_artist (header->priv->mpd);
+                album = ario_mpd_get_current_album (header->priv->mpd);
+
+                if (!album)
+                        album = ARIO_MPD_UNKNOWN;
+
+                if (!artist)
+                        artist = ARIO_MPD_UNKNOWN;
+
+                coverselect = ario_shell_coverselect_new (artist,
+                                                          album);
+                gtk_dialog_run (GTK_DIALOG (coverselect));
+                gtk_widget_destroy (coverselect);
+        }
+
+        return FALSE;
 }
 
 static gboolean
