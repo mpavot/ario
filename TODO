@@ -1,5 +1,7 @@
 - Song properties
 - Add to playlist and play
 - Playlists : Save playlist from search (is it possible?)
-- double click on small album cover => cover select
 - Cover select in menu
+- Update cover in header and in browser if changed in coverselect
+- keep lyrics window size in gconf
+- add other lyrics sources & possibility to activate them in preferences

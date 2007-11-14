@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-13 23:43+0100\n"
+"POT-Creation-Date: 2007-11-14 20:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -443,7 +443,7 @@ msgstr ""
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:45
-#: ../src/widgets/ario-header.c:279
+#: ../src/widgets/ario-header.c:284
 msgid "Play next song"
 msgstr ""
 
@@ -521,12 +521,12 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1288
+#: ../src/sources/ario-browser.c:1287
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1352
+#: ../src/sources/ario-browser.c:1351
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -776,15 +776,15 @@ msgstr ""
 msgid "Error saving file"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:141
+#: ../src/shell/ario-shell-lyrics.c:147
 msgid "Ario Lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:329
+#: ../src/shell/ario-shell-lyrics.c:381
 msgid "Downloading lyrics..."
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:358
+#: ../src/shell/ario-shell-lyrics.c:392
 msgid "Lyrics not found"
 msgstr ""
 
@@ -835,68 +835,68 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:112
+#: ../src/widgets/ario-header.c:116
 msgid "_Play/Pause"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:113
+#: ../src/widgets/ario-header.c:117
 msgid "Start playback"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:115
+#: ../src/widgets/ario-header.c:119
 msgid "_Stop"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:116
+#: ../src/widgets/ario-header.c:120
 msgid "Stop playback"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:118
+#: ../src/widgets/ario-header.c:122
 msgid "_Next"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:119
+#: ../src/widgets/ario-header.c:123
 msgid "Start playing the next song"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:121
+#: ../src/widgets/ario-header.c:125
 msgid "P_revious"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:122
+#: ../src/widgets/ario-header.c:126
 msgid "Start playing the previous song"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:138
+#: ../src/widgets/ario-header.c:142
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:237
+#: ../src/widgets/ario-header.c:242
 msgid "Play previous song"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:257
+#: ../src/widgets/ario-header.c:262
 msgid "Play/Pause the music"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:268
+#: ../src/widgets/ario-header.c:273
 msgid "Stop the music"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:336
+#: ../src/widgets/ario-header.c:347
 msgid " of "
 msgstr ""
 
-#: ../src/widgets/ario-header.c:360
+#: ../src/widgets/ario-header.c:371
 msgid "Toggle random on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:371
+#: ../src/widgets/ario-header.c:382
 msgid "Toggle repeat on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:484
+#: ../src/widgets/ario-header.c:495
 msgid "Change the music volume"
 msgstr ""
 
