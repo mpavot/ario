@@ -58,6 +58,8 @@ static void ario_shell_lyrics_get_lyrics_thread (ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
                                                ArioShellLyrics *shell_lyrics);
+static void ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
+                                                ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_textbuffer_changed_cb (GtkTextBuffer *textbuffer,
                                                      ArioShellLyrics *shell_lyrics);
 
@@ -277,6 +279,9 @@ ario_shell_lyrics_set_property (GObject *object,
                 g_signal_connect_object (G_OBJECT (shell_lyrics->priv->mpd),
                                          "song_changed", G_CALLBACK (ario_shell_lyrics_song_changed_cb),
                                          shell_lyrics, 0);
+                g_signal_connect_object (G_OBJECT (shell_lyrics->priv->mpd),
+                                         "state_changed", G_CALLBACK (ario_shell_lyrics_state_changed_cb),
+                                         shell_lyrics, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -408,8 +413,15 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
 
         data = (ArioShellLyricsData *) g_malloc0 (sizeof (ArioShellLyricsData));
 
-        data->artist = g_strdup (ario_mpd_get_current_artist (shell_lyrics->priv->mpd));
-        data->title = ario_util_format_title (ario_mpd_get_current_song (shell_lyrics->priv->mpd));
+        if (!ario_mpd_is_connected (shell_lyrics->priv->mpd)
+            || ario_mpd_get_current_state (shell_lyrics->priv->mpd) == MPD_STATUS_STATE_STOP
+            || ario_mpd_get_current_state (shell_lyrics->priv->mpd) == MPD_STATUS_STATE_UNKNOWN) {
+                data->artist = NULL;
+                data->title = NULL;
+        } else {
+                data->artist = g_strdup (ario_mpd_get_current_artist (shell_lyrics->priv->mpd));
+                data->title = ario_util_format_title (ario_mpd_get_current_song (shell_lyrics->priv->mpd));
+        }
 
         g_async_queue_push (shell_lyrics->priv->queue, data);
 }
@@ -419,6 +431,15 @@ ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
                                    ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START
+        ario_shell_lyrics_add_to_queue (shell_lyrics);
+}
+
+static void
+ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
+                                    ArioShellLyrics *shell_lyrics)
+{
+        ARIO_LOG_FUNCTION_START
+
         ario_shell_lyrics_add_to_queue (shell_lyrics);
 }
 
