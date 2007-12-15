@@ -25,6 +25,7 @@ glade_DATA = connection-prefs.glade	\
 	     interface-prefs.glade	\
 	     server-prefs.glade		\
 	     cover-progress.glade	\
+	     lyrics-select.glade	\
 	     cover-select.glade
 
 appicon_DATA = ario.png

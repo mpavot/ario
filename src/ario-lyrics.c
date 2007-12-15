@@ -143,7 +143,7 @@ ario_lyrics_make_first_xml_uri (const gchar *artist,
         ario_util_string_replace (&conv_title, " ", "%20");
 
         /* We make the xml uri with all the parameters */
-        if (!strcmp (artist, ARIO_MPD_UNKNOWN))
+        if (strcmp (artist, ARIO_MPD_UNKNOWN))
                 xml_uri = g_strdup_printf (LEOSLYRICS_FIRST_URI, conv_artist, conv_title);
         else
                 xml_uri = g_strdup_printf (LEOSLYRICS_FIRST_URI, "", conv_title);
@@ -200,6 +200,81 @@ ario_lyrics_parse_first_xml_file (gchar *xmldata,
         xmlFreeDoc (doc);
 
         return NULL;
+}
+
+static GSList *
+ario_lyrics_parse_first_xml_file_for_candidates (gchar *xmldata,
+                                                 int size)
+{
+        ARIO_LOG_FUNCTION_START
+        xmlDocPtr doc;
+        xmlNodePtr cur;
+        xmlNodePtr cur2;
+        xmlNodePtr cur3;
+        xmlNodePtr cur4;
+        xmlChar *hid = NULL;
+        xmlChar *xml_title = NULL;
+        xmlChar *xml_artist = NULL;
+        GSList *candidates = NULL;
+        ArioLyricsCandidate *lyrics = NULL;
+
+        doc = xmlParseMemory (xmldata, size);
+        if (doc == NULL ) {
+                return NULL;
+        }
+
+        cur = xmlDocGetRootElement(doc);
+        if (cur == NULL) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        /* We check that the root node name is "leoslyrics" */
+        if (xmlStrcmp (cur->name, (const xmlChar *) "leoslyrics")) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+        for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
+                if (!xmlStrcmp (cur->name, (const xmlChar *) "searchResults")){
+                        for (cur2 = cur->xmlChildrenNode; cur2; cur2 = cur2->next) {
+                                if (!xmlStrcmp (cur2->name, (const xmlChar *) "result")) {
+                                        hid = xmlGetProp (cur2, (const xmlChar *)"hid");
+                                        if (hid) {
+                                                lyrics = (ArioLyricsCandidate *) g_malloc0 (sizeof (ArioLyricsCandidate));
+                                                lyrics->hid = g_strdup ((const gchar *) hid);
+                                                xmlFree (hid);
+                                                for (cur3 = cur2->xmlChildrenNode; cur3; cur3 = cur3->next) {
+                                                        if ((cur3->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur3->name, (const xmlChar *) "title"))) {
+                                                                xml_title = xmlNodeGetContent (cur3);
+                                                                if (xml_title) {
+                                                                        lyrics->title = g_strdup ((const gchar *) xml_title);
+                                                                        xmlFree (xml_title);
+                                                                }
+                                                        } else if ((cur3->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur3->name, (const xmlChar *) "artist"))) {
+                                                                for (cur4 = cur3->xmlChildrenNode; cur4; cur4 = cur4->next) {
+                                                                        if ((cur4->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur4->name, (const xmlChar *) "name"))) {
+                                                                                xml_artist = xmlNodeGetContent (cur4);
+                                                                                if (xml_artist) {
+                                                                                        lyrics->artist = g_strdup ((const gchar *) xml_artist);
+                                                                                        xmlFree (xml_artist);
+                                                                                }
+                                                                        }
+                                                                }
+                                                        }
+                                                }
+                                                if (lyrics) {
+                                                        candidates = g_slist_append (candidates, lyrics);
+                                                        lyrics = NULL;
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
+
+        xmlFreeDoc (doc);
+
+        return candidates;
 }
 
 static ArioLyrics *
@@ -371,6 +446,75 @@ ario_lyrics_get_lyrics (const gchar *artist,
         return lyrics;
 }
 
+ArioLyrics *
+ario_lyrics_get_lyrics_from_hid (const gchar *artist,
+                                 const gchar *title,
+                                 const gchar *hid)
+{
+        ARIO_LOG_FUNCTION_START
+        int lyrics_size;
+        char *lyrics_data;
+        ArioLyrics *lyrics = NULL;
+        gchar *lyrics_uri;
+
+        lyrics_uri = g_strdup_printf (LEOSLYRICS_SECOND_URI, hid);
+
+        ario_util_download_file (lyrics_uri,
+                                 &lyrics_size,
+                                 &lyrics_data);
+        g_free (lyrics_uri);
+        if (lyrics_size == 0)
+                return NULL;
+
+        lyrics = ario_lyrics_parse_second_xml_file (lyrics_data,
+                                                    lyrics_size);
+        g_free (lyrics_data);
+
+        if (lyrics)
+                ario_lyrics_save_lyrics (artist,
+                                         title,
+                                         lyrics->lyrics);
+
+        return lyrics;
+}
+
+GSList *
+ario_lyrics_get_lyrics_candidates (const gchar *artist,
+                                   const gchar *title)
+{
+        ARIO_LOG_FUNCTION_START
+        char *xml_uri;
+        int xml_size;
+        char *xml_data;
+        GSList *candidates;
+
+        /* We construct the uri to make a request */
+        xml_uri = ario_lyrics_make_first_xml_uri (artist,
+                                                  title);
+
+        if (!xml_uri)
+                return NULL;
+
+        /* We load the xml file in xml_data */
+        ario_util_download_file (xml_uri,
+                                 &xml_size,
+                                 &xml_data);
+        g_free (xml_uri);
+
+        if (xml_size == 0)
+                return NULL;
+
+        /* TODO : detect errors */
+
+        /* We parse the xml file to extract the lyrics hid */
+        candidates = ario_lyrics_parse_first_xml_file_for_candidates (xml_data,
+                                                                      xml_size);
+
+        g_free (xml_data);
+
+        return candidates;
+}
+
 void
 ario_lyrics_free (ArioLyrics *lyrics)
 {
@@ -379,6 +523,17 @@ ario_lyrics_free (ArioLyrics *lyrics)
                 g_free (lyrics->title);
                 g_free (lyrics->lyrics);
                 g_free (lyrics);
+        }
+}
+
+void
+ario_lyrics_candidates_free (ArioLyricsCandidate *candidate)
+{
+        if (candidate) {
+                g_free (candidate->artist);
+                g_free (candidate->title);
+                g_free (candidate->hid);
+                g_free (candidate);
         }
 }
 

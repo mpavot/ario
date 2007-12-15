@@ -58,6 +58,8 @@ ario_SOURCES = \
 	shell/ario-shell-coverselect.h\
 	shell/ario-shell-lyrics.c\
 	shell/ario-shell-lyrics.h\
+	shell/ario-shell-lyricsselect.c\
+	shell/ario-shell-lyricsselect.h\
 	shell/ario-shell-preferences.c\
 	shell/ario-shell-preferences.h\
 	widgets/ario-firstlaunch.c\

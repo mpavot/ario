@@ -28,23 +28,39 @@ typedef struct ArioLyrics
         gchar *lyrics;
 } ArioLyrics;
 
-ArioLyrics *    ario_lyrics_get_lyrics          (const gchar *artist,
-                                                 const gchar *title);
+typedef struct ArioLyricsCandidate
+{
+        gchar *artist;
+        gchar *title;
+        gchar *hid;
+} ArioLyricsCandidate;
 
-void            ario_lyrics_free                (ArioLyrics *lyrics);
+ArioLyrics *    ario_lyrics_get_lyrics                  (const gchar *artist,
+                                                         const gchar *title);
 
-gboolean        ario_lyrics_save_lyrics         (const gchar *artist,
-                                                 const gchar *title,
-                                                 const gchar *lyrics);
+ArioLyrics *    ario_lyrics_get_lyrics_from_hid         (const gchar *artist,
+                                                         const gchar *title,
+                                                         const gchar *hid);
 
-void            ario_lyrics_remove_lyrics       (const gchar *artist,
-                                                 const gchar *title);
+GSList *        ario_lyrics_get_lyrics_candidates       (const gchar *artist,
+                                                         const gchar *title);
 
-gboolean        ario_lyrics_lyrics_exists       (const gchar *artist,
-                                                 const gchar *title);
+void            ario_lyrics_free                        (ArioLyrics *lyrics);
 
-gchar*          ario_lyrics_make_lyrics_path    (const gchar *artist,
-                                                 const gchar *title);
+void            ario_lyrics_candidates_free             (ArioLyricsCandidate *candidate);
+
+gboolean        ario_lyrics_save_lyrics                 (const gchar *artist,
+                                                         const gchar *title,
+                                                         const gchar *lyrics);
+
+void            ario_lyrics_remove_lyrics               (const gchar *artist,
+                                                         const gchar *title);
+
+gboolean        ario_lyrics_lyrics_exists               (const gchar *artist,
+                                                         const gchar *title);
+
+gchar*          ario_lyrics_make_lyrics_path            (const gchar *artist,
+                                                         const gchar *title);
 
 G_END_DECLS
 

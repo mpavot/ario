@@ -691,7 +691,6 @@ ario_header_image_press_cb (GtkWidget *widget,
         char *artist;
         char *album;
 
-        /* filter out double, triple clicks */
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 artist = ario_mpd_get_current_artist (header->priv->mpd);
                 album = ario_mpd_get_current_album (header->priv->mpd);

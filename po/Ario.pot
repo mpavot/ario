@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-14 20:35+0100\n"
+"POT-Creation-Date: 2007-12-15 19:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -751,7 +751,6 @@ msgid "Playlists view"
 msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:256
-#: ../src/shell/ario-shell-coverselect.c:239
 msgid "Music Player Cover Download"
 msgstr ""
 
@@ -768,6 +767,19 @@ msgid ""
 "%i covers already exist"
 msgstr ""
 
+#: ../src/shell/ario-shell-coverselect.c:239
+msgid "Cover Download"
+msgstr ""
+
+#: ../src/shell/ario-shell-coverselect.c:251
+#: ../src/shell/ario-shell-preferences.c:177
+msgid "Covers"
+msgstr ""
+
+#: ../src/shell/ario-shell-coverselect.c:389
+msgid "Select a file"
+msgstr ""
+
 #: ../src/shell/ario-shell-coverselect.c:554
 msgid "Error reading file"
 msgstr ""
@@ -776,15 +788,15 @@ msgstr ""
 msgid "Error saving file"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:147
+#: ../src/shell/ario-shell-lyrics.c:154
 msgid "Ario Lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:381
+#: ../src/shell/ario-shell-lyrics.c:436
 msgid "Downloading lyrics..."
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:392
+#: ../src/shell/ario-shell-lyrics.c:453
 msgid "Lyrics not found"
 msgstr ""
 
@@ -798,10 +810,6 @@ msgstr ""
 
 #: ../src/shell/ario-shell-preferences.c:172
 msgid "Server"
-msgstr ""
-
-#: ../src/shell/ario-shell-preferences.c:177
-msgid "Covers"
 msgstr ""
 
 #: ../src/shell/ario-shell-preferences.c:182
