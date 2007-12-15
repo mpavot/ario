@@ -469,8 +469,8 @@ ario_shell_cmd_lyrics (GtkAction *action,
         GtkWidget *lyrics;
 
         lyrics = ario_shell_lyrics_new (shell->priv->mpd);
-
-        gtk_widget_show_all (lyrics);
+        if (lyrics)
+                gtk_widget_show_all (lyrics);
 }
 
 #ifdef MULTIPLE_VIEW
