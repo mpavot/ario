@@ -236,7 +236,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (ario_shell_coverselect)->vbox), 
                            vbox);
 
-        gtk_window_set_title (GTK_WINDOW (ario_shell_coverselect), _("Music Player Cover Download"));
+        gtk_window_set_title (GTK_WINDOW (ario_shell_coverselect), _("Cover Download"));
         gtk_window_set_default_size (GTK_WINDOW (ario_shell_coverselect), 520, 620);
         gtk_dialog_add_button (GTK_DIALOG (ario_shell_coverselect),
                                GTK_STOCK_CANCEL,
@@ -248,7 +248,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                                          GTK_RESPONSE_OK);
 
         cell_renderer = gtk_cell_renderer_pixbuf_new ();
-        column = gtk_tree_view_column_new_with_attributes ("Covers", 
+        column = gtk_tree_view_column_new_with_attributes (_("Covers"), 
                                                           cell_renderer, 
                                                           "pixbuf", 
                                                           BMP_COLUMN, NULL);
@@ -386,8 +386,8 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         GtkWidget *fileselection;
 
-        fileselection = gtk_file_selection_new ("Select a file");
-           gtk_window_set_modal (GTK_WINDOW (fileselection), TRUE);
+        fileselection = gtk_file_selection_new (_("Select a file"));
+        gtk_window_set_modal (GTK_WINDOW (fileselection), TRUE);
 
         gtk_file_selection_set_filename (GTK_FILE_SELECTION (fileselection),
                                          g_get_home_dir ());

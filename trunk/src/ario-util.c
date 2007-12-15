@@ -316,7 +316,7 @@ ario_util_download_file (const char *uri,
                          char** data)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_LOG_DBG("Download:%s\n", uri);
+        ARIO_LOG_DBG ("Download:%s\n", uri);
         download_struct download_data;
         gchar* address = NULL;
         int port;
