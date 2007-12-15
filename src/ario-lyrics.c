@@ -369,6 +369,32 @@ ario_lyrics_get_local_lyrics (const gchar *artist,
         return lyrics;
 }
 
+static void
+ario_lyrics_prepend_infos (ArioLyrics *lyrics)
+{
+        GString *string;
+        gchar *toprepend;
+
+        if (!lyrics)
+                return;
+
+        if (lyrics->artist && lyrics->title) {
+                toprepend = g_strdup_printf ("%s - %s\n\n", lyrics->artist, lyrics->title);
+        } else if (lyrics->artist) {
+                toprepend = g_strdup_printf ("%s\n\n", lyrics->artist);
+        } else if (lyrics->title) {
+                toprepend = g_strdup_printf ("%s\n\n", lyrics->title);
+        } else {
+                return;
+        }
+
+        string = g_string_new (lyrics->lyrics);
+        string = g_string_prepend (string, toprepend);
+        g_free (lyrics->lyrics);
+        lyrics->lyrics = g_string_free (string, FALSE);
+        g_free (toprepend);
+}
+
 static ArioLyrics *
 ario_lyrics_get_leoslyrics_lyrics (const gchar *artist,
                                    const gchar *title)
@@ -421,6 +447,7 @@ ario_lyrics_get_leoslyrics_lyrics (const gchar *artist,
 
         lyrics = ario_lyrics_parse_second_xml_file (lyrics_data,
                                                     lyrics_size);
+
         g_free (lyrics_data);
 
         return lyrics;
@@ -437,10 +464,12 @@ ario_lyrics_get_lyrics (const gchar *artist,
                 lyrics = ario_lyrics_get_local_lyrics (artist, title);
         } else {
                 lyrics = ario_lyrics_get_leoslyrics_lyrics (artist, title);
-                if (lyrics)
+                if (lyrics) {
+                        ario_lyrics_prepend_infos (lyrics);
                         ario_lyrics_save_lyrics (artist,
                                                  title,
                                                  lyrics->lyrics);
+                }
         }
 
         return lyrics;
@@ -468,12 +497,15 @@ ario_lyrics_get_lyrics_from_hid (const gchar *artist,
 
         lyrics = ario_lyrics_parse_second_xml_file (lyrics_data,
                                                     lyrics_size);
+
         g_free (lyrics_data);
 
-        if (lyrics)
+        if (lyrics) {
+                ario_lyrics_prepend_infos (lyrics);
                 ario_lyrics_save_lyrics (artist,
                                          title,
                                          lyrics->lyrics);
+        }
 
         return lyrics;
 }
