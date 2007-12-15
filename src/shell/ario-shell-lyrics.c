@@ -88,6 +88,8 @@ struct ArioShellLyricsPrivate
         GAsyncQueue *queue;
 };
 
+static gboolean is_instantiated = FALSE;
+
 static GObjectClass *parent_class = NULL;
 
 GType
@@ -167,6 +169,11 @@ ario_shell_lyrics_new (ArioMpd *mpd)
         GtkWidget *vbox;
         GtkWidget *hbox;
         GtkWidget *close_button;
+
+        if (is_instantiated)
+                return NULL;
+        else
+                is_instantiated = TRUE;
 
         shell_lyrics = g_object_new (TYPE_ARIO_SHELL_LYRICS,
                                    "mpd", mpd,
@@ -275,6 +282,8 @@ ario_shell_lyrics_finalize (GObject *object)
         g_thread_join (shell_lyrics->priv->thread);
         g_async_queue_unref (shell_lyrics->priv->queue);
         g_free (shell_lyrics->priv);
+
+        is_instantiated = FALSE;
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
