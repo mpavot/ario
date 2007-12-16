@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-16 13:25+0100\n"
+"POT-Creation-Date: 2007-12-16 17:16+0100\n"
 "PO-Revision-Date: 2007-11-12 23:48+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
@@ -227,35 +227,47 @@ msgstr "<b>Connexion</b>"
 msgid "Auto detect"
 msgstr "Détection automatique"
 
-#: ../data/connection-prefs.glade.h:3 ../src/widgets/ario-firstlaunch.c:161
+#: ../data/connection-prefs.glade.h:3
+msgid "Autodetect MPD servers"
+msgstr "Détection automatique de serveurs MPD"
+
+#: ../data/connection-prefs.glade.h:4 ../src/widgets/ario-firstlaunch.c:161
 msgid "Default"
 msgstr "Défaut"
 
-#: ../data/connection-prefs.glade.h:4 ../data/connection-assistant.glade.h:2
+#: ../data/connection-prefs.glade.h:5
+msgid "Delete profile"
+msgstr "Supprimer un profile"
+
+#: ../data/connection-prefs.glade.h:6 ../data/connection-assistant.glade.h:2
 msgid "Host:"
 msgstr "Hôte:"
 
-#: ../data/connection-prefs.glade.h:5
+#: ../data/connection-prefs.glade.h:7
 msgid "Name:"
 msgstr "Nom:"
 
-#: ../data/connection-prefs.glade.h:6
+#: ../data/connection-prefs.glade.h:8
+msgid "New profile"
+msgstr "Nouveau Profil"
+
+#: ../data/connection-prefs.glade.h:9
 msgid "Password:"
 msgstr "Mot de passe:"
 
-#: ../data/connection-prefs.glade.h:7 ../data/connection-assistant.glade.h:4
+#: ../data/connection-prefs.glade.h:10 ../data/connection-assistant.glade.h:4
 msgid "Port:"
 msgstr "Port:"
 
-#: ../data/connection-prefs.glade.h:8
+#: ../data/connection-prefs.glade.h:11
 msgid "_Autoconnect on startup"
 msgstr "_Connexion automatique au démarrage"
 
-#: ../data/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:114
+#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:114
 msgid "_Connect"
 msgstr "_Connecter"
 
-#: ../data/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:117
+#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:117
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 
