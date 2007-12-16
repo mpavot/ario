@@ -434,6 +434,7 @@ ario_shell_lyrics_get_lyrics_thread (ArioShellLyrics *shell_lyrics)
         while (TRUE) {
                 data = (ArioShellLyricsData *) g_async_queue_pop (shell_lyrics->priv->queue);
                 if (data->finalize) {
+                        ario_shell_lyrics_free_data (data);
                         break;
                 }
                 gtk_widget_set_sensitive (shell_lyrics->priv->save_button, FALSE);

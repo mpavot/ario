@@ -580,6 +580,7 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
         if (retval != GTK_RESPONSE_OK) {
                 gtk_widget_destroy (dialog);
+                g_object_unref (avahi);
                 return;
         }
 

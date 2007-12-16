@@ -221,7 +221,7 @@ ario_shell_finalize (GObject *object)
         gtk_widget_hide (shell->priv->window);
 
         gtk_widget_destroy (shell->priv->window);
-        
+        g_object_unref (shell->priv->mpd);
         g_free (shell->priv);
 
         parent_class->finalize (G_OBJECT (shell));

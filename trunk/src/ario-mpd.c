@@ -356,6 +356,15 @@ ario_mpd_finalize (GObject *object)
 
         ario_mpd_disconnect (mpd);
 
+        if (mpd->priv->ario_mpd_song != NULL)
+                ario_mpd_free_song (mpd->priv->ario_mpd_song);
+
+        if (mpd->priv->status != NULL)
+                mpd_freeStatus (mpd->priv->status);
+
+        if (mpd->priv->stats != NULL)
+                mpd_freeStats (mpd->priv->stats);
+
         g_free (mpd->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
