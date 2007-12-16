@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-15 23:46+0100\n"
+"POT-Creation-Date: 2007-12-16 13:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -358,11 +358,11 @@ msgstr ""
 msgid "Show tabs"
 msgstr ""
 
-#: ../src/ario-cover.c:411
+#: ../src/ario-cover.c:412
 msgid "The cover already exists. Do you want to replace it?"
 msgstr ""
 
-#: ../src/ario-mpd.c:520
+#: ../src/ario-mpd.c:529
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
 
@@ -429,11 +429,11 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:609
+#: ../src/preferences/ario-connection-preferences.c:610
 msgid "You must select a server."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:628
+#: ../src/preferences/ario-connection-preferences.c:629
 msgid "New Profile"
 msgstr ""
 
@@ -788,15 +788,15 @@ msgstr ""
 msgid "Error saving file"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:154
+#: ../src/shell/ario-shell-lyrics.c:156
 msgid "Ario Lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:436
+#: ../src/shell/ario-shell-lyrics.c:446
 msgid "Downloading lyrics..."
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:453
+#: ../src/shell/ario-shell-lyrics.c:463
 msgid "Lyrics not found"
 msgstr ""
 

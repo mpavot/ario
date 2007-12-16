@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-15 23:46+0100\n"
+"POT-Creation-Date: 2007-12-16 13:25+0100\n"
 "PO-Revision-Date: 2007-11-12 23:48+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
@@ -366,11 +366,11 @@ msgstr "Lors d'un double clic sur l'icône de notification : "
 msgid "Show tabs"
 msgstr "Afficher les onglets"
 
-#: ../src/ario-cover.c:411
+#: ../src/ario-cover.c:412
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La pochette existe déjà. Voulez-vous la remplacer?"
 
-#: ../src/ario-mpd.c:520
+#: ../src/ario-mpd.c:529
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible de se connecter à MPD. Vérifiez vos options de connexion."
 
@@ -439,11 +439,11 @@ msgstr "Hôte"
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:609
+#: ../src/preferences/ario-connection-preferences.c:610
 msgid "You must select a server."
 msgstr "Vous devez sélectionner un serveur."
 
-#: ../src/preferences/ario-connection-preferences.c:628
+#: ../src/preferences/ario-connection-preferences.c:629
 msgid "New Profile"
 msgstr "Nouveau Profil"
 
@@ -804,15 +804,15 @@ msgstr "Erreur lors de la lecture du fichier"
 msgid "Error saving file"
 msgstr "Erreur lors de l'écriture du fichier"
 
-#: ../src/shell/ario-shell-lyrics.c:154
+#: ../src/shell/ario-shell-lyrics.c:156
 msgid "Ario Lyrics"
 msgstr "Ario Paroles"
 
-#: ../src/shell/ario-shell-lyrics.c:436
+#: ../src/shell/ario-shell-lyrics.c:446
 msgid "Downloading lyrics..."
 msgstr "Téléchargement des paroles..."
 
-#: ../src/shell/ario-shell-lyrics.c:453
+#: ../src/shell/ario-shell-lyrics.c:463
 msgid "Lyrics not found"
 msgstr "Paroles introuvables"
 
