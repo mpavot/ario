@@ -498,7 +498,7 @@ ario_shell_cmd_about (GtkAction *action,
                                "name", "Ario",
                                "version", PACKAGE_VERSION,
                                "copyright", "Copyright \xc2\xa9 2005-2007 Marc Pavot",
-                               "comments", "Music player and browser for MPD",
+                               "comments", _("GTK client for MPD"),
                                "authors", (const char **) authors,
                                NULL);
 }
