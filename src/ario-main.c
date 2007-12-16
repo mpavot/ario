@@ -22,6 +22,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <curl/curl.h>
+#include <libxml/parser.h>
 #include "lib/eel-gconf-extensions.h"
 #include "shell/ario-shell.h"
 #include "ario-util.h"
@@ -57,8 +58,8 @@ main (int argc, char *argv[])
         ario_shell_shutdown (shell);
         eel_gconf_monitor_remove ("/apps/ario");
 
-
         g_object_unref (G_OBJECT (shell));
+        xmlCleanupParser ();
 
         return 0;
 }

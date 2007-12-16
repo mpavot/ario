@@ -114,6 +114,7 @@ ario_cover_create_ario_cover_dir (void)
         /* If the cover directory doesn't exist, we create it */
         if (!ario_util_uri_exists (ario_cover_dir))
                 ario_util_mkdir (ario_cover_dir);
+        g_free (ario_cover_dir);
 }
 
 gboolean

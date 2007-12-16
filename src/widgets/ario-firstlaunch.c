@@ -373,7 +373,6 @@ ario_firstlaunch_finalize (GObject *object)
         g_object_unref (firstlaunch->priv->avahi);
         g_free (firstlaunch->priv);
 
-
         parent_class->finalize (G_OBJECT (firstlaunch));
 }
 

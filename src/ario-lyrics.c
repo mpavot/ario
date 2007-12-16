@@ -71,6 +71,7 @@ ario_lyrics_create_ario_lyrics_dir (void)
         /* If the lyrics directory doesn't exist, we create it */
         if (!ario_util_uri_exists (ario_lyrics_dir))
                 ario_util_mkdir (ario_lyrics_dir);
+        g_free (ario_lyrics_dir);
 }
 
 void
@@ -365,6 +366,7 @@ ario_lyrics_get_local_lyrics (const gchar *artist,
                 lyrics->artist = g_strdup (artist);
                 lyrics->title = g_strdup (title);         
         }
+        g_free (ario_lyrics_path);
 
         return lyrics;
 }
