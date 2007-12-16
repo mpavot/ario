@@ -397,18 +397,17 @@ ario_shell_lyrics_search_cb (GtkButton *button,
 
         if (gtk_dialog_run (GTK_DIALOG (lyricsselect)) == GTK_RESPONSE_OK) {
                 candidate = ario_shell_lyricsselect_get_lyrics_candidate (ARIO_SHELL_LYRICSSELECT (lyricsselect));
+                if (candidate) {
+                        data = (ArioShellLyricsData *) g_malloc0 (sizeof (ArioShellLyricsData));
+                        data->artist = g_strdup (artist);
+                        data->title = g_strdup (title);
+                        data->hid = g_strdup (candidate->hid);
 
-                data = (ArioShellLyricsData *) g_malloc0 (sizeof (ArioShellLyricsData));
-                data->artist = g_strdup (artist);
-                data->title = g_strdup (title);
-                data->hid = g_strdup (candidate->hid);
+                        g_async_queue_push (shell_lyrics->priv->queue, data);
 
-                g_async_queue_push (shell_lyrics->priv->queue, data);
-
-                ario_lyrics_candidates_free (candidate);
+                        ario_lyrics_candidates_free (candidate);
+                }
         }
-
-
         gtk_widget_destroy (lyricsselect);
         g_free (title);
 }

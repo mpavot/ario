@@ -344,19 +344,24 @@ ario_shell_lyricsselect_get_lyrics_candidate (ArioShellLyricsselect *ario_shell_
         ARIO_LOG_FUNCTION_START
         GList* paths;
         GtkTreeIter iter;
-        ArioLyricsCandidate *candidate = (ArioLyricsCandidate *) g_malloc (sizeof (ArioLyricsCandidate));;
+        ArioLyricsCandidate *candidate;
         GtkTreeModel *tree_model = GTK_TREE_MODEL (ario_shell_lyricsselect->priv->liststore);
         GtkTreePath *path;
         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ario_shell_lyricsselect->priv->treeview));
 
         paths = gtk_tree_selection_get_selected_rows (selection,
                                                       &tree_model);
+        if (!paths)
+                return NULL;
 
         path = g_list_first(paths)->data;
+        if (!path)
+                return NULL;
+
         gtk_tree_model_get_iter (tree_model,
                                  &iter,
                                  path);
-
+        candidate = (ArioLyricsCandidate *) g_malloc (sizeof (ArioLyricsCandidate));;
         gtk_tree_model_get (tree_model, &iter, ARTIST_COLUMN, &candidate->artist, -1);
         gtk_tree_model_get (tree_model, &iter, TITLE_COLUMN, &candidate->title, -1);
         gtk_tree_model_get (tree_model, &iter, HID_COLUMN, &candidate->hid, -1);

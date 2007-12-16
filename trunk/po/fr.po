@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-16 17:16+0100\n"
-"PO-Revision-Date: 2007-11-12 23:48+0100\n"
+"POT-Creation-Date: 2007-12-16 22:22+0100\n"
+"PO-Revision-Date: 2007-12-16 22:19+0100\n"
 "Last-Translator: marc <>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -298,6 +298,7 @@ msgid "Album : "
 msgstr "Album : "
 
 #: ../data/cover-progress.glade.h:3 ../data/cover-select.glade.h:6
+#: ../data/lyrics-select.glade.h:3
 msgid "Artist : "
 msgstr "Artiste : "
 
@@ -305,7 +306,7 @@ msgstr "Artiste : "
 msgid "<b>Album : </b>"
 msgstr "<b>Album : </b>"
 
-#: ../data/cover-select.glade.h:2
+#: ../data/cover-select.glade.h:2 ../data/lyrics-select.glade.h:1
 msgid "<b>Artist : </b>"
 msgstr "<b>Artiste : </b>"
 
@@ -332,6 +333,30 @@ msgstr "Pochette moyenne"
 #: ../data/cover-select.glade.h:10
 msgid "Small cover (Faster)"
 msgstr "Petite pochette (Plus rapide)"
+
+#: ../data/interface-prefs.glade.h:1
+msgid "<b>Tabs</b>"
+msgstr "<b>Onglets</b>"
+
+#: ../data/interface-prefs.glade.h:2
+msgid "<b>Tray icon</b>"
+msgstr "<b>Icône de notification</b>"
+
+#: ../data/interface-prefs.glade.h:3
+msgid "On double click on tray icon : "
+msgstr "Lors d'un double clic sur l'icône de notification : "
+
+#: ../data/interface-prefs.glade.h:4
+msgid "Show tabs"
+msgstr "Afficher les onglets"
+
+#: ../data/lyrics-select.glade.h:2
+msgid "<b>Title : </b>"
+msgstr "<b>Titre : </b>"
+
+#: ../data/lyrics-select.glade.h:4
+msgid "Title : "
+msgstr "Titre : "
 
 #: ../data/server-prefs.glade.h:1
 msgid "<b>Crossfade</b>"
@@ -361,22 +386,6 @@ msgstr "Durée du fondu (s):"
 #, c-format
 msgid "n/a"
 msgstr "n/a"
-
-#: ../data/interface-prefs.glade.h:1
-msgid "<b>Tabs</b>"
-msgstr "<b>Onglets</b>"
-
-#: ../data/interface-prefs.glade.h:2
-msgid "<b>Tray icon</b>"
-msgstr "<b>Icône de notification</b>"
-
-#: ../data/interface-prefs.glade.h:3
-msgid "On double click on tray icon : "
-msgstr "Lors d'un double clic sur l'icône de notification : "
-
-#: ../data/interface-prefs.glade.h:4
-msgid "Show tabs"
-msgstr "Afficher les onglets"
 
 #: ../src/ario-cover.c:412
 msgid "The cover already exists. Do you want to replace it?"
@@ -515,6 +524,7 @@ msgstr "Supprimer les pochettes sélectionnées"
 
 #: ../src/sources/ario-browser.c:282 ../src/sources/ario-search.c:43
 #: ../src/sources/ario-search.c:325 ../src/sources/ario-storedplaylists.c:311
+#: ../src/shell/ario-shell-lyricsselect.c:199
 #: ../src/widgets/ario-playlist.c:276
 msgid "Artist"
 msgstr "Artiste"
@@ -539,6 +549,7 @@ msgstr "Piste"
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:417 ../src/sources/ario-search.c:45
 #: ../src/sources/ario-search.c:312 ../src/sources/ario-storedplaylists.c:298
+#: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/widgets/ario-playlist.c:265
 msgid "Title"
 msgstr "Titre"
@@ -775,6 +786,10 @@ msgstr "_Playlists"
 msgid "Playlists view"
 msgstr "Affichage des Playlists"
 
+#: ../src/shell/ario-shell.c:501
+msgid "GTK client for MPD"
+msgstr "Client GTK pour MPD"
+
 #: ../src/shell/ario-shell-coverdownloader.c:256
 msgid "Music Player Cover Download"
 msgstr "Téléchargement de pochettes"
@@ -820,13 +835,17 @@ msgstr "Erreur lors de l'écriture du fichier"
 msgid "Ario Lyrics"
 msgstr "Ario Paroles"
 
-#: ../src/shell/ario-shell-lyrics.c:446
+#: ../src/shell/ario-shell-lyrics.c:445
 msgid "Downloading lyrics..."
 msgstr "Téléchargement des paroles..."
 
-#: ../src/shell/ario-shell-lyrics.c:463
+#: ../src/shell/ario-shell-lyrics.c:462
 msgid "Lyrics not found"
 msgstr "Paroles introuvables"
+
+#: ../src/shell/ario-shell-lyricsselect.c:187
+msgid "Lyrics Download"
+msgstr "Téléchargement de paroles"
 
 #: ../src/shell/ario-shell-preferences.c:137
 msgid "Ario Preferences"

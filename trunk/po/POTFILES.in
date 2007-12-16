@@ -9,8 +9,9 @@ data/connection-assistant.glade
 data/cover-prefs.glade
 data/cover-progress.glade
 data/cover-select.glade
-data/server-prefs.glade
 data/interface-prefs.glade
+data/lyrics-select.glade
+data/server-prefs.glade
 src/ario-avahi.c
 src/ario-avahi.h
 src/ario-cover.c
@@ -60,6 +61,8 @@ src/shell/ario-shell-coverselect.c
 src/shell/ario-shell-coverselect.h
 src/shell/ario-shell-lyrics.c
 src/shell/ario-shell-lyrics.h
+src/shell/ario-shell-lyricsselect.c
+src/shell/ario-shell-lyricsselect.h
 src/shell/ario-shell-preferences.c
 src/shell/ario-shell-preferences.h
 src/widgets/ario-firstlaunch.c
