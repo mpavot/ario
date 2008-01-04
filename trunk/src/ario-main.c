@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <locale.h>
 #include <libintl.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
