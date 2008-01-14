@@ -344,6 +344,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_widget_set_size_request (header->priv->scale, 150, -1);
 
         header->priv->elapsed = gtk_label_new ("0:00");
+        /* Translators - This " of " is used to count the elapsed time
+           of a song like in "00:59 of 03:24" */
         label = gtk_label_new (_(" of "));
         header->priv->total = gtk_label_new ("0:00");
 
