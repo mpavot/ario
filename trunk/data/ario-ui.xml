@@ -28,6 +28,8 @@
                 </menu>
 
                 <menu name="HelpMenu" action="Help">
+                        <menuitem name="HelpTranslateMenu" action="HelpTranslate"/>
+                        <separator/>
                         <menuitem name="HelpAboutMenu" action="HelpAbout"/>
                 </menu>
 
