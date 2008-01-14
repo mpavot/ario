@@ -62,6 +62,8 @@ static void ario_shell_cmd_covers (GtkAction *action,
                                    ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
                                   ArioShell *shell);
+static void ario_shell_cmd_translate (GtkAction *action,
+                                      ArioShell *shell);
 static void ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                              ArioShell *shell);
 static void ario_shell_source_changed_cb (GConfClient *client,
@@ -126,12 +128,15 @@ static GtkActionEntry ario_shell_actions [] =
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
           N_("Download covers form amazon"),
           G_CALLBACK (ario_shell_cmd_covers) },
-        { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
-          N_("Show information about the music player"),
-          G_CALLBACK (ario_shell_cmd_about) },
         { "Lyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
           N_("Show song lyrics"),
           G_CALLBACK (ario_shell_cmd_lyrics) },
+        { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
+          N_("Show information about the music player"),
+          G_CALLBACK (ario_shell_cmd_about) },
+        { "HelpTranslate", GTK_STOCK_EDIT, N_("_Translate this application..."), NULL,
+          N_("Translate this application"),
+          G_CALLBACK (ario_shell_cmd_translate) },
 };
 static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 
@@ -501,6 +506,15 @@ ario_shell_cmd_about (GtkAction *action,
                                "comments", _("GTK client for MPD"),
                                "authors", (const char **) authors,
                                NULL);
+}
+
+static void
+ario_shell_cmd_translate (GtkAction *action,
+                          ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        const gchar *command = "x-www-browser https://translations.launchpad.net/ario/trunk/";
+        g_spawn_command_line_async (command, NULL);
 }
 
 static void
