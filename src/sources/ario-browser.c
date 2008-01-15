@@ -342,6 +342,7 @@ ario_browser_init (ArioBrowser *browser)
         gtk_tree_view_append_column (GTK_TREE_VIEW (browser->priv->albums), column);
                 /* Cover column */
         renderer = gtk_cell_renderer_pixbuf_new ();
+                /* Translators - This "Cover" refers to an album cover art */
         column = gtk_tree_view_column_new_with_attributes (_("Cover"), 
                                                           renderer, 
                                                           "pixbuf", 

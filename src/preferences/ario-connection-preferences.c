@@ -509,7 +509,6 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
 
         avahi = ario_avahi_new ();
 
-        /* Create the widgets */
         dialog = gtk_dialog_new_with_buttons (_("Server autodetection"),
                                               NULL,
                                               GTK_DIALOG_DESTROY_WITH_PARENT,

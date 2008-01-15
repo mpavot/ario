@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-14 22:19+0100\n"
+"POT-Creation-Date: 2008-01-16 00:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,34 +183,30 @@ msgid "Client apllication to mpd"
 msgstr ""
 
 #: ../data/cover-prefs.glade.h:1
-msgid "192.168.0.1"
-msgstr ""
-
-#: ../data/cover-prefs.glade.h:2
 msgid "<b>Covers</b>"
 msgstr ""
 
-#: ../data/cover-prefs.glade.h:3
+#: ../data/cover-prefs.glade.h:2
 msgid "<b>Proxy</b>"
 msgstr ""
 
-#: ../data/cover-prefs.glade.h:4
+#: ../data/cover-prefs.glade.h:3
 msgid "Proxy Address: "
 msgstr ""
 
-#: ../data/cover-prefs.glade.h:5
+#: ../data/cover-prefs.glade.h:4
 msgid "Proxy Port: "
 msgstr ""
 
-#: ../data/cover-prefs.glade.h:6
+#: ../data/cover-prefs.glade.h:5
 msgid "Show the covers in the albums list"
 msgstr ""
 
-#: ../data/cover-prefs.glade.h:7
+#: ../data/cover-prefs.glade.h:6
 msgid "Use Amazon."
 msgstr ""
 
-#: ../data/cover-prefs.glade.h:8
+#: ../data/cover-prefs.glade.h:7
 msgid "Use a proxy"
 msgstr ""
 
@@ -423,38 +419,37 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#. Create the widgets
-#: ../src/preferences/ario-connection-preferences.c:513
+#: ../src/preferences/ario-connection-preferences.c:512
 msgid "Server autodetection"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:524
+#: ../src/preferences/ario-connection-preferences.c:523
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:534
+#: ../src/preferences/ario-connection-preferences.c:533
 #: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:542
+#: ../src/preferences/ario-connection-preferences.c:541
 #: ../src/widgets/ario-firstlaunch.c:306
 msgid "Host"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:550
+#: ../src/preferences/ario-connection-preferences.c:549
 #: ../src/widgets/ario-firstlaunch.c:314
 msgid "Port"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:610
+#: ../src/preferences/ario-connection-preferences.c:609
 msgid "You must select a server."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:629
+#: ../src/preferences/ario-connection-preferences.c:628
 msgid "New Profile"
 msgstr ""
 
@@ -526,30 +521,31 @@ msgstr ""
 msgid "Album"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:345
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-browser.c:346
 msgid "Cover"
 msgstr ""
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:410 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:411 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:254
 msgid "Track"
 msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:417 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:418 ../src/sources/ario-search.c:45
 #: ../src/sources/ario-search.c:312 ../src/sources/ario-storedplaylists.c:298
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/widgets/ario-playlist.c:265
 msgid "Title"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1287
+#: ../src/sources/ario-browser.c:1288
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1351
+#: ../src/sources/ario-browser.c:1352
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -641,11 +637,12 @@ msgstr ""
 msgid "Web Radios"
 msgstr ""
 
-#: ../src/sources/ario-source.c:158
+#. Translators - This "Search" is a name (like in "a search"), not a verb
+#: ../src/sources/ario-source.c:159
 msgid "Search"
 msgstr ""
 
-#: ../src/sources/ario-source.c:167
+#: ../src/sources/ario-source.c:168
 msgid "Playlists"
 msgstr ""
 
@@ -765,24 +762,29 @@ msgstr ""
 msgid "Web Radios view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:156
+#. Translators - This "Search" is a name (like in "a search"), not a verb
+#: ../src/shell/ario-shell.c:157
 msgid "_Search"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:158
 msgid "Search view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:163
 msgid "_Playlists"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:164
 msgid "Playlists view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:506
+#: ../src/shell/ario-shell.c:512
 msgid "GTK client for MPD"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:513
+msgid "translator-credits"
 msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:256

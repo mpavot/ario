@@ -10,6 +10,7 @@ schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
 
 artdir = $(pkgdatadir)/ario/art
 art_DATA = ario.png		\
+	   logo.png		\
 	   play.png		\
 	   shuffle.png		\
 	   volume-medium.png    \
