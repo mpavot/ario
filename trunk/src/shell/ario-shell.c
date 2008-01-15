@@ -153,6 +153,7 @@ static GtkRadioActionEntry ario_shell_radio [] =
 #endif  /* ENABLE_RADIOS */
 #ifdef ENABLE_SEARCH
         ,
+        /* Translators - This "Search" is a name (like in "a search"), not a verb */
         { "SearchView", NULL, N_("_Search"), NULL,
           N_("Search view"),
           ARIO_SOURCE_SEARCH }
@@ -498,14 +499,24 @@ ario_shell_cmd_about (GtkAction *action,
                 "",
                 NULL
         };
-
+        const char *artists[] = {
+                "Luc Pavot",
+                NULL
+        };
+        GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "logo.png", NULL);
         gtk_show_about_dialog (GTK_WINDOW (shell->priv->window),
                                "name", "Ario",
+                               "program-name", "Ario",
                                "version", PACKAGE_VERSION,
-                               "copyright", "Copyright \xc2\xa9 2005-2007 Marc Pavot",
+                               "copyright", "Copyright \xc2\xa9 2005-2008 Marc Pavot",
                                "comments", _("GTK client for MPD"),
+                               "translator-credits", _("translator-credits"),
                                "authors", (const char **) authors,
+                               "artists", (const char **) artists,
+                               "logo", logo_pixbuf,
                                NULL);
+        if (logo_pixbuf)
+                g_object_unref(logo_pixbuf);
 }
 
 static void

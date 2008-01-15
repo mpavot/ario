@@ -180,7 +180,7 @@ ario_tray_icon_init (ArioTrayIcon *icon)
                                  "scroll_event",
                                  G_CALLBACK (ario_tray_icon_scroll_cb),
                                  icon, 0);
-        image = gtk_image_new_from_stock ("volume-max",
+        image = gtk_image_new_from_stock ("ario",
                                           GTK_ICON_SIZE_SMALL_TOOLBAR);
         gtk_container_add (GTK_CONTAINER (icon->priv->ebox), image);
         

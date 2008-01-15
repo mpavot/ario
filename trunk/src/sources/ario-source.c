@@ -155,6 +155,7 @@ ario_source_new (GtkUIManager *mgr,
                                                 playlist);
         gtk_notebook_append_page (GTK_NOTEBOOK (source),
                                   source->priv->search,
+                                  /* Translators - This "Search" is a name (like in "a search"), not a verb */
                                   gtk_label_new (_("Search")));
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS

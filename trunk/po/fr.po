@@ -10,23 +10,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-14 22:19+0100\n"
+"POT-Creation-Date: 2008-01-16 00:53+0100\n"
 "PO-Revision-Date: 2008-01-14 22:22+0100\n"
-"Last-Translator: Marc Pavot <>\n"
-"Language-Team: French <Project-Id-Version: gtranslator 1.0.1"
-"Report-Msgid-Bugs-To: "
-"POT-Creation-Date: 2004-02-17 01:25+0100"
-"PO-Revision-Date: 2004-02-17 00:53+0100"
-"Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>"
-"Language-Team: GNOME French Team <gnomefr@traduc.org>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=2; plural=n>1;"
-">\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
@@ -199,34 +189,30 @@ msgid "Client apllication to mpd"
 msgstr "Client pour MPD"
 
 #: ../data/cover-prefs.glade.h:1
-msgid "192.168.0.1"
-msgstr "192.168.0.1"
-
-#: ../data/cover-prefs.glade.h:2
 msgid "<b>Covers</b>"
 msgstr "<b>Pochettes</b>"
 
-#: ../data/cover-prefs.glade.h:3
+#: ../data/cover-prefs.glade.h:2
 msgid "<b>Proxy</b>"
 msgstr "<b>Proxy</b>"
 
-#: ../data/cover-prefs.glade.h:4
+#: ../data/cover-prefs.glade.h:3
 msgid "Proxy Address: "
 msgstr "Adresse du proxy"
 
-#: ../data/cover-prefs.glade.h:5
+#: ../data/cover-prefs.glade.h:4
 msgid "Proxy Port: "
 msgstr "Port du proxy"
 
-#: ../data/cover-prefs.glade.h:6
+#: ../data/cover-prefs.glade.h:5
 msgid "Show the covers in the albums list"
 msgstr "Afficher les pochettes dans la liste d'albums"
 
-#: ../data/cover-prefs.glade.h:7
+#: ../data/cover-prefs.glade.h:6
 msgid "Use Amazon."
 msgstr "Utiliser Amazon."
 
-#: ../data/cover-prefs.glade.h:8
+#: ../data/cover-prefs.glade.h:7
 msgid "Use a proxy"
 msgstr "Utiliser un proxy"
 
@@ -442,12 +428,11 @@ msgstr "Orientation de l'icône de notification"
 msgid "Profile"
 msgstr "Profil"
 
-#. Create the widgets
-#: ../src/preferences/ario-connection-preferences.c:513
+#: ../src/preferences/ario-connection-preferences.c:512
 msgid "Server autodetection"
 msgstr "Autodetection de serveur"
 
-#: ../src/preferences/ario-connection-preferences.c:524
+#: ../src/preferences/ario-connection-preferences.c:523
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -456,26 +441,26 @@ msgstr ""
 "Si vous ne voyez pas votre serveur MPD, vous devriez vérifier que zeroconf "
 "est activé sur votre serveur MPD ou utiliser la configuration manuelle."
 
-#: ../src/preferences/ario-connection-preferences.c:534
+#: ../src/preferences/ario-connection-preferences.c:533
 #: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
 msgstr "Nom"
 
-#: ../src/preferences/ario-connection-preferences.c:542
+#: ../src/preferences/ario-connection-preferences.c:541
 #: ../src/widgets/ario-firstlaunch.c:306
 msgid "Host"
 msgstr "Hôte"
 
-#: ../src/preferences/ario-connection-preferences.c:550
+#: ../src/preferences/ario-connection-preferences.c:549
 #: ../src/widgets/ario-firstlaunch.c:314
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:610
+#: ../src/preferences/ario-connection-preferences.c:609
 msgid "You must select a server."
 msgstr "Vous devez sélectionner un serveur."
 
-#: ../src/preferences/ario-connection-preferences.c:629
+#: ../src/preferences/ario-connection-preferences.c:628
 msgid "New Profile"
 msgstr "Nouveau Profil"
 
@@ -547,31 +532,32 @@ msgstr "Artiste"
 msgid "Album"
 msgstr "Album"
 
-#: ../src/sources/ario-browser.c:345
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-browser.c:346
 msgid "Cover"
 msgstr "Pochette"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:410 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:411 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:254
 msgid "Track"
 msgstr "Piste"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:417 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:418 ../src/sources/ario-search.c:45
 #: ../src/sources/ario-search.c:312 ../src/sources/ario-storedplaylists.c:298
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/widgets/ario-playlist.c:265
 msgid "Title"
 msgstr "Titre"
 
-#: ../src/sources/ario-browser.c:1287
+#: ../src/sources/ario-browser.c:1288
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Êtes-vous sur de vouloir effacer les pochettes des artites sélectionnés?"
 
-#: ../src/sources/ario-browser.c:1351
+#: ../src/sources/ario-browser.c:1352
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -665,11 +651,12 @@ msgstr "Bibliothèque"
 msgid "Web Radios"
 msgstr "Web Radios"
 
-#: ../src/sources/ario-source.c:158
+#. Translators - This "Search" is a name (like in "a search"), not a verb
+#: ../src/sources/ario-source.c:159
 msgid "Search"
 msgstr "Recherche"
 
-#: ../src/sources/ario-source.c:167
+#: ../src/sources/ario-source.c:168
 msgid "Playlists"
 msgstr "Playlists"
 
@@ -789,25 +776,30 @@ msgstr "_Web Radios"
 msgid "Web Radios view"
 msgstr "Affichage des Web Radios"
 
-#: ../src/shell/ario-shell.c:156
+#. Translators - This "Search" is a name (like in "a search"), not a verb
+#: ../src/shell/ario-shell.c:157
 msgid "_Search"
 msgstr "_Recherche"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:158
 msgid "Search view"
 msgstr "Chercher dans la bibliothèque"
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:163
 msgid "_Playlists"
 msgstr "_Playlists"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:164
 msgid "Playlists view"
 msgstr "Affichage des Playlists"
 
-#: ../src/shell/ario-shell.c:506
+#: ../src/shell/ario-shell.c:512
 msgid "GTK client for MPD"
 msgstr "Client GTK pour MPD"
+
+#: ../src/shell/ario-shell.c:513
+msgid "translator-credits"
+msgstr "Marc Pavot <marc.pavot@gmail.com>"
 
 #: ../src/shell/ario-shell-coverdownloader.c:256
 msgid "Music Player Cover Download"
