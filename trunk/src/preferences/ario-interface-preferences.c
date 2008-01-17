@@ -128,7 +128,7 @@ ario_interface_preferences_new (void)
                 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 
-        for (i = 0; i < TRAY_ICON_N_BEHAVIOR; i++) {
+        for (i = 0; i < TRAY_ICON_N_BEHAVIOR; ++i) {
                 gtk_list_store_append (list_store, &iter);
                 gtk_list_store_set (list_store, &iter,
                                     0, gettext (trayicon_behavior[i]),

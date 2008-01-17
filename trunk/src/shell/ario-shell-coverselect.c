@@ -492,7 +492,7 @@ ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect
                         g_object_unref (G_OBJECT (pixbuf));
                 }
                 temp = g_slist_next (temp);
-                i++;
+                ++i;
         }
 
         tree_path = gtk_tree_path_new_from_indices (0, -1);

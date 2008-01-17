@@ -396,7 +396,7 @@ ario_shell_coverdownloader_nocover (ArioShellCoverdownloader *ario_shell_coverdo
 {
         ARIO_LOG_FUNCTION_START
         /* This information will be displayed at the end of the search */
-        ario_shell_coverdownloader->priv->nb_covers_not_found ++;
+        ++ario_shell_coverdownloader->priv->nb_covers_not_found;
 }
 
 void
@@ -498,7 +498,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
 
                 if (ario_cover_cover_exists (artist, album))
                         /* The cover already exists, we do nothing */
-                        ario_shell_coverdownloader->priv->nb_covers_already_exist++;
+                        ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
                 else
                         /* We search for the cover on amazon */
                         ario_shell_coverdownloader_find_amazon_image (ario_shell_coverdownloader, artist, album);
@@ -546,9 +546,9 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
                                              OVERWRITE_MODE_SKIP);
 
                 if (ret)
-                        ario_shell_coverdownloader->priv->nb_covers_found ++;
+                        ++ario_shell_coverdownloader->priv->nb_covers_found;
                 else
-                        ario_shell_coverdownloader->priv->nb_covers_not_found ++;
+                        ++ario_shell_coverdownloader->priv->nb_covers_not_found;
         } else {
                 ario_shell_coverdownloader_nocover (ario_shell_coverdownloader);
         }

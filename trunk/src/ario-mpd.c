@@ -850,31 +850,34 @@ ario_mpd_update_status (ArioMpd *mpd)
 
                 ario_mpd_check_errors(mpd);
 
-                if (mpd->priv->song_id != mpd->priv->status->songid)
-                        g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
+                if (mpd->priv->status) {
+                        if (mpd->priv->song_id != mpd->priv->status->songid)
+                                g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
 
-                if (mpd->priv->state != mpd->priv->status->state)
-                        g_object_set (G_OBJECT (mpd), "state", mpd->priv->status->state, NULL);
+                        if (mpd->priv->state != mpd->priv->status->state)
+                                g_object_set (G_OBJECT (mpd), "state", mpd->priv->status->state, NULL);
 
-                if (mpd->priv->volume != mpd->priv->status->volume)
-                        g_object_set (G_OBJECT (mpd), "volume", mpd->priv->status->volume, NULL);
+                        if (mpd->priv->volume != mpd->priv->status->volume)
+                                g_object_set (G_OBJECT (mpd), "volume", mpd->priv->status->volume, NULL);
 
-                if (mpd->priv->elapsed != mpd->priv->status->elapsedTime)
-                        g_object_set (G_OBJECT (mpd), "elapsed", mpd->priv->status->elapsedTime, NULL);
+                        if (mpd->priv->elapsed != mpd->priv->status->elapsedTime)
+                                g_object_set (G_OBJECT (mpd), "elapsed", mpd->priv->status->elapsedTime, NULL);
 
-                if (mpd->priv->playlist_id != (int) mpd->priv->status->playlist) {
-                        g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
-                        g_object_set (G_OBJECT (mpd), "playlist_id", mpd->priv->status->playlist, NULL);
+                        if (mpd->priv->playlist_id != (int) mpd->priv->status->playlist) {
+                                g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
+                                g_object_set (G_OBJECT (mpd), "playlist_id", mpd->priv->status->playlist, NULL);
+                        }
+
+                        if (mpd->priv->random != (gboolean) mpd->priv->status->random)
+                                g_object_set (G_OBJECT (mpd), "random", mpd->priv->status->random, NULL);
+
+                        if (mpd->priv->repeat != (gboolean) mpd->priv->status->repeat)
+                                g_object_set (G_OBJECT (mpd), "repeat", mpd->priv->status->repeat, NULL);
                 }
-
-                if (mpd->priv->random != (gboolean) mpd->priv->status->random)
-                        g_object_set (G_OBJECT (mpd), "random", mpd->priv->status->random, NULL);
-
-                if (mpd->priv->repeat != (gboolean) mpd->priv->status->repeat)
-                        g_object_set (G_OBJECT (mpd), "repeat", mpd->priv->status->repeat, NULL);
-
-                if (mpd->priv->dbtime != (unsigned long) mpd->priv->stats->dbUpdateTime)
-                        g_object_set (G_OBJECT (mpd), "dbtime", mpd->priv->stats->dbUpdateTime, NULL);
+                if (mpd->priv->stats) {
+                        if (mpd->priv->dbtime != (unsigned long) mpd->priv->stats->dbUpdateTime)
+                                g_object_set (G_OBJECT (mpd), "dbtime", mpd->priv->stats->dbUpdateTime, NULL);
+                }
         }
 
         if (mpd->priv->signals_to_emit & SONG_CHANGED_FLAG)
@@ -1250,7 +1253,7 @@ ario_mpd_remove (ArioMpd *mpd,
 
         mpd_sendCommandListBegin (mpd->priv->connection);
 
-        for (i=0; i<song->len; i++)
+        for (i=0; i<song->len; ++i)
                 if ((g_array_index (song, int, i) - i) >= 0)
                         mpd_sendDeleteCommand (mpd->priv->connection, g_array_index (song, int, i) - i);
 
@@ -1428,6 +1431,7 @@ void
 ario_mpd_use_count_dec (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        --mpd->priv->use_count;
+        if (mpd->priv->use_count > 0)
+                --mpd->priv->use_count;
 }
 
