@@ -31,6 +31,8 @@ ario_SOURCES = \
 	lib/libmpdclient.h\
 	lib/rb-glade-helpers.c\
 	lib/rb-glade-helpers.h\
+	lib/libsexy/sexy-tooltip.c\
+	lib/libsexy/sexy-tooltip.h\
 	preferences/ario-connection-preferences.c\
 	preferences/ario-connection-preferences.h\
 	preferences/ario-cover-preferences.c\
