@@ -1,21 +1,21 @@
-# Translation of Ario.
-# Copyright (C) 2007 THE Ario'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the Ario package.
-# marc <>, 2007.
-# , fuzzy
-# 
-# 
+# German translation for ario
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the ario package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Ario 0.2\n"
+"Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 21:10+0100\n"
-"PO-Revision-Date: 2007-11-12 23:48+0100\n"
-"Last-Translator: marc <>\n"
-"Language-Team: ario\n"
+"POT-Creation-Date: 2008-01-17 22:18+0100\n"
+"PO-Revision-Date: 2008-01-15 14:04+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-01-17 21:16+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
@@ -95,11 +95,11 @@ msgstr ""
 
 #: ../data/ario.schemas.in.h:20
 msgid "If true, the main window is maximized."
-msgstr ""
+msgstr "Wenn true, dann wird das Hauptfenster maximiert."
 
 #: ../data/ario.schemas.in.h:21
 msgid "Main window height"
-msgstr ""
+msgstr "Höhe des Hauptfensters"
 
 #: ../data/ario.schemas.in.h:22
 msgid "Main window height."
@@ -107,15 +107,15 @@ msgstr ""
 
 #: ../data/ario.schemas.in.h:23
 msgid "Main window maximization state"
-msgstr ""
+msgstr "Maximierung des Hauptfensters"
 
 #: ../data/ario.schemas.in.h:24
 msgid "Main window width"
-msgstr ""
+msgstr "Breite des Hauptfensters"
 
 #: ../data/ario.schemas.in.h:25
 msgid "Main window width."
-msgstr ""
+msgstr "Breite des Hauptfensters"
 
 #: ../data/ario.schemas.in.h:26
 msgid "Port to connect to"
@@ -189,7 +189,7 @@ msgstr ""
 
 #: ../data/cover-prefs.glade.h:2
 msgid "<b>Proxy</b>"
-msgstr ""
+msgstr "<b>Proxy</b>"
 
 #: ../data/cover-prefs.glade.h:3
 msgid "Proxy Address: "
@@ -213,7 +213,7 @@ msgstr ""
 
 #: ../data/connection-prefs.glade.h:1
 msgid "<b>Connection</b>"
-msgstr ""
+msgstr "<b>Verbindung</b>"
 
 #: ../data/connection-prefs.glade.h:2
 msgid "Auto detect"
@@ -237,15 +237,15 @@ msgstr ""
 
 #: ../data/connection-prefs.glade.h:7
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: ../data/connection-prefs.glade.h:8
 msgid "New profile"
-msgstr ""
+msgstr "Neues Profil"
 
 #: ../data/connection-prefs.glade.h:9
 msgid "Password:"
-msgstr ""
+msgstr "Passwort:"
 
 #: ../data/connection-prefs.glade.h:10 ../data/connection-assistant.glade.h:4
 msgid "Port:"
@@ -257,11 +257,11 @@ msgstr ""
 
 #: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:116
 msgid "_Connect"
-msgstr ""
+msgstr "_Verbinden"
 
 #: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:119
 msgid "_Disconnect"
-msgstr ""
+msgstr "Verbindung trennen"
 
 #: ../data/connection-assistant.glade.h:1
 msgid "Automatic configuration"
@@ -357,11 +357,11 @@ msgstr ""
 
 #: ../data/server-prefs.glade.h:3
 msgid "Last updated:"
-msgstr ""
+msgstr "Letzte Aktualisierung:"
 
 #: ../data/server-prefs.glade.h:4
 msgid "_Update"
-msgstr ""
+msgstr "Akt_ualisieren"
 
 #: ../data/server-prefs.glade.h:5
 msgid "enable crossfade"
@@ -374,7 +374,7 @@ msgstr ""
 #: ../data/server-prefs.glade.h:7 ../src/ario-util.c:42 ../src/ario-util.c:60
 #, c-format
 msgid "n/a"
-msgstr ""
+msgstr "n/v"
 
 #: ../src/ario-cover.c:412
 msgid "The cover already exists. Do you want to replace it?"
@@ -386,12 +386,12 @@ msgstr ""
 
 #: ../src/ario-mpd.h:28
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: ../src/ario-util.c:71
 #, c-format
 msgid "%d seconds"
-msgstr ""
+msgstr "%d Sekunden"
 
 #: ../src/ario-util.c:74
 #, c-format
@@ -410,7 +410,7 @@ msgstr ""
 
 #: ../src/lib/eggtrayicon.c:120
 msgid "Orientation"
-msgstr ""
+msgstr "Ausrichtung"
 
 #: ../src/lib/eggtrayicon.c:121
 msgid "The orientation of the tray."
@@ -418,7 +418,7 @@ msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:288
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: ../src/preferences/ario-connection-preferences.c:512
 msgid "Server autodetection"
@@ -434,7 +434,7 @@ msgstr ""
 #: ../src/preferences/ario-connection-preferences.c:533
 #: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: ../src/preferences/ario-connection-preferences.c:541
 #: ../src/widgets/ario-firstlaunch.c:306
@@ -452,7 +452,7 @@ msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:628
 msgid "New Profile"
-msgstr ""
+msgstr "Neues Profil"
 
 #: ../src/preferences/ario-interface-preferences.c:44
 msgid "Play/Pause"
@@ -462,21 +462,21 @@ msgstr ""
 #: ../src/preferences/ario-interface-preferences.c:45
 #: ../src/widgets/ario-header.c:284
 msgid "Play next song"
-msgstr ""
+msgstr "Den nächsten Titel wiedergeben"
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-interface-preferences.c:46
 msgid "Do nothing"
-msgstr ""
+msgstr "Nichts machen"
 
 #: ../src/preferences/ario-server-preferences.c:245
 msgid "Not connected"
-msgstr ""
+msgstr "Nicht verbunden"
 
 #: ../src/preferences/ario-server-preferences.c:250
 #: ../src/preferences/ario-server-preferences.c:323
 msgid "Updating..."
-msgstr ""
+msgstr "Aktualisieren …"
 
 #: ../src/sources/ario-browser.c:125 ../src/sources/ario-browser.c:128
 #: ../src/sources/ario-browser.c:131 ../src/sources/ario-radio.c:108
@@ -520,7 +520,7 @@ msgstr ""
 #: ../src/sources/ario-search.c:338 ../src/sources/ario-storedplaylists.c:324
 #: ../src/widgets/ario-playlist.c:287
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-browser.c:346
@@ -569,7 +569,7 @@ msgstr ""
 
 #: ../src/sources/ario-radio.c:117
 msgid "_Properties"
-msgstr ""
+msgstr "_Eigenschaften"
 
 #: ../src/sources/ario-radio.c:118
 msgid "Change properties of this radio"
@@ -586,11 +586,11 @@ msgstr ""
 
 #: ../src/sources/ario-radio.c:862 ../src/sources/ario-radio.c:1105
 msgid "Name : "
-msgstr ""
+msgstr "Name : "
 
 #: ../src/sources/ario-radio.c:863 ../src/sources/ario-radio.c:1106
 msgid "URL : "
-msgstr ""
+msgstr "URL : "
 
 #: ../src/sources/ario-radio.c:914 ../src/sources/ario-radio.c:1158
 msgid "Bad parameters. You must specify a name and a URL for the radio."
@@ -616,7 +616,7 @@ msgstr ""
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/sources/ario-search.c:55
 msgid "Any"
-msgstr ""
+msgstr "Alle"
 
 #: ../src/sources/ario-search.c:264
 msgid "Add a search criteria"
@@ -641,7 +641,7 @@ msgstr ""
 #. Translators - This "Search" is a name (like in "a search"), not a verb
 #: ../src/sources/ario-source.c:159
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 #: ../src/sources/ario-source.c:168
 msgid "Playlists"
@@ -681,7 +681,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:111
 msgid "_Help"
-msgstr ""
+msgstr "_Hilfe"
 
 #: ../src/shell/ario-shell.c:113
 msgid "_Save Playlist"
@@ -693,27 +693,27 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:117
 msgid "Connect"
-msgstr ""
+msgstr "Verbinden"
 
 #: ../src/shell/ario-shell.c:120
 msgid "Disconnect"
-msgstr ""
+msgstr "Verbindung trennen"
 
 #: ../src/shell/ario-shell.c:122
 msgid "_Quit"
-msgstr ""
+msgstr "_Beenden"
 
 #: ../src/shell/ario-shell.c:123
 msgid "Quit"
-msgstr ""
+msgstr "Beenden"
 
 #: ../src/shell/ario-shell.c:125
 msgid "Prefere_nces"
-msgstr ""
+msgstr "_Einstellungen"
 
 #: ../src/shell/ario-shell.c:126
 msgid "Edit music player preferences"
-msgstr ""
+msgstr "Die Einstellungen des Musik-Players festlegen"
 
 #: ../src/shell/ario-shell.c:128
 msgid "Download album _covers"
@@ -733,7 +733,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:134
 msgid "_About"
-msgstr ""
+msgstr "_Über"
 
 #: ../src/shell/ario-shell.c:135
 msgid "Show information about the music player"
@@ -820,11 +820,11 @@ msgstr ""
 
 #: ../src/shell/ario-shell-coverselect.c:554
 msgid "Error reading file"
-msgstr ""
+msgstr "Fehler beim Lesen der Datei."
 
 #: ../src/shell/ario-shell-coverselect.c:577
 msgid "Error saving file"
-msgstr ""
+msgstr "Fehler beim Speichern der Datei"
 
 #: ../src/shell/ario-shell-lyrics.c:156
 msgid "Ario Lyrics"
@@ -848,7 +848,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell-preferences.c:167
 msgid "Connection"
-msgstr ""
+msgstr "Verbindung"
 
 #: ../src/shell/ario-shell-preferences.c:172
 msgid "Server"
@@ -879,11 +879,11 @@ msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:332
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #: ../src/widgets/ario-firstlaunch.c:344
 msgid "Confirmation"
-msgstr ""
+msgstr "Bestätigung"
 
 #: ../src/widgets/ario-header.c:116
 msgid "_Play/Pause"
@@ -903,28 +903,28 @@ msgstr ""
 
 #: ../src/widgets/ario-header.c:122
 msgid "_Next"
-msgstr ""
+msgstr "_Nächstes"
 
 #: ../src/widgets/ario-header.c:123
 msgid "Start playing the next song"
-msgstr ""
+msgstr "Den nächsten Titel wiedergeben"
 
 #: ../src/widgets/ario-header.c:125
 msgid "P_revious"
-msgstr ""
+msgstr "_Vorheriger"
 
 #: ../src/widgets/ario-header.c:126
 msgid "Start playing the previous song"
-msgstr ""
+msgstr "Den vorherigen Titel wiedergeben"
 
-#: ../src/widgets/ario-header.c:142 ../src/widgets/ario-tray-icon.c:40
+#: ../src/widgets/ario-header.c:142 ../src/widgets/ario-tray-icon.c:39
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr ""
 
 #: ../src/widgets/ario-header.c:242
 msgid "Play previous song"
-msgstr ""
+msgstr "Den vorherigen Titel wiedergeben"
 
 #: ../src/widgets/ario-header.c:262
 msgid "Play/Pause the music"
@@ -936,7 +936,7 @@ msgstr ""
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:624
+#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:608
 msgid " of "
 msgstr ""
 
@@ -950,7 +950,7 @@ msgstr ""
 
 #: ../src/widgets/ario-header.c:497
 msgid "Change the music volume"
-msgstr ""
+msgstr "Die Wiedergabelautstärke festlegen"
 
 #: ../src/widgets/ario-playlist.c:112
 msgid "_Clear"
@@ -962,7 +962,7 @@ msgstr ""
 
 #: ../src/widgets/ario-playlist.c:115
 msgid "_Remove"
-msgstr ""
+msgstr "_Entfernen"
 
 #: ../src/widgets/ario-playlist.c:116
 msgid "Remove the selected songs"
@@ -970,7 +970,7 @@ msgstr ""
 
 #: ../src/widgets/ario-playlist.c:118
 msgid "_Save"
-msgstr ""
+msgstr "_Speichern"
 
 #: ../src/widgets/ario-playlist.c:119
 msgid "Save the playlist"
@@ -1002,7 +1002,7 @@ msgstr ""
 msgid "Not playing"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.c:340
+#: ../src/widgets/ario-tray-icon.c:338
 msgid "Ario tray icon"
 msgstr ""
 
@@ -1010,8 +1010,11 @@ msgstr ""
 #. ** I don't know if there are sensible alternatives in other languages
 #: ../src/widgets/ario-volume.c:237
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: ../src/widgets/ario-volume.c:238
 msgid "-"
-msgstr ""
+msgstr "-"
+
+#~ msgid "192.168.0.1"
+#~ msgstr "192.168.0.1"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 21:10+0100\n"
+"POT-Creation-Date: 2008-01-17 22:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -916,7 +916,7 @@ msgstr ""
 msgid "Start playing the previous song"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:142 ../src/widgets/ario-tray-icon.c:40
+#: ../src/widgets/ario-header.c:142 ../src/widgets/ario-tray-icon.c:39
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr ""
@@ -935,7 +935,7 @@ msgstr ""
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:624
+#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:608
 msgid " of "
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgstr ""
 msgid "Not playing"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.c:340
+#: ../src/widgets/ario-tray-icon.c:338
 msgid "Ario tray icon"
 msgstr ""
 
