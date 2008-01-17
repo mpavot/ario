@@ -194,6 +194,9 @@ int                     ario_mpd_save_playlist                          (ArioMpd
                                                                          const char *name);
 void                    ario_mpd_delete_playlist                        (ArioMpd *mpd,
                                                                          const char *name);
+void                    ario_mpd_use_count_inc                          (ArioMpd *mpd);
+
+void                    ario_mpd_use_count_dec                          (ArioMpd *mpd);
 G_END_DECLS
 
 #endif /* __ARIO_MPD_H */
