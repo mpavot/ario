@@ -36,7 +36,7 @@
 #include "ario-cover.h"
 
 #define TRAY_ICON_DEFAULT_TOOLTIP _("Not playing")
-#define FROM_MARKUP(xALBUM, xARTIST) g_strdup_printf (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
+#define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
 
 static void ario_tray_icon_class_init (ArioTrayIconClass *klass);
 static void ario_tray_icon_init (ArioTrayIcon *ario_shell_player);
@@ -618,8 +618,9 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
                                                        0);
                 break;
         default:
-                gtk_label_set_text (GTK_LABEL (icon->priv->tooltip_progress_bar),
-                                    "");
+                gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), NULL);
+                gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar),
+                                               0);
                 break;
         }
 }
