@@ -385,8 +385,8 @@ ario_util_string_replace (char **string,
         
         while (left >= oldlen) {
                 if (strncmp (offset + *string, old, oldlen) != 0) {
-                        left--;
-                        offset++;
+                        --left;
+                        ++offset;
                         continue;
                 }
                 if (diff == 0) {

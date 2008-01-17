@@ -64,7 +64,7 @@ ario_cover_make_ario_cover_path (const gchar *artist,
                 filename = g_strdup_printf ("%s-%s.jpg", artist, album);
 
         /* We replace some special characters with spaces. */
-        for (tmp = filename; *tmp != '\0'; tmp++) {
+        for (tmp = filename; *tmp != '\0'; ++tmp) {
                 if (strchr (to_strip, *tmp))
                         *tmp = ' ';
         }
@@ -242,19 +242,19 @@ ario_cover_make_amazon_xml_uri (const char *artist,
         keywords = tmp;
 
         /* We replace some special characters to make more accurate requests */
-        for (i = 0; to_replace[i]; i++) {
+        for (i = 0; to_replace[i]; ++i) {
                 if (replace_to[i])
                         ario_util_string_replace (&keywords, to_replace[i], replace_to[i]);
         }
 
         /* We remove some useless words to make more accurate requests */
-        for (i = 0; to_remove[i]; i++) {
+        for (i = 0; to_remove[i]; ++i) {
                 ario_util_string_replace (&keywords, to_remove[i], " ");
         }
 
         /* We escape the other special characters */
         length = g_utf8_strlen(keywords, -1);
-	for(i = 0; i < length;i++)
+	for(i = 0; i < length; ++i)
 	{
 		if (!g_unichar_isalnum(keywords[i])) {
 		        keywords[i]=' ';

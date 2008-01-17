@@ -146,7 +146,7 @@ ario_cover_preferences_new (void)
                 
         list_store = gtk_list_store_new (1, G_TYPE_STRING);
 
-        for (i = 0; amazon_countries[i] != NULL; i++) {
+        for (i = 0; amazon_countries[i] != NULL; ++i) {
                 gtk_list_store_append (list_store, &iter);
                 gtk_list_store_set (list_store, &iter,
                                     0, amazon_countries[i],
@@ -202,7 +202,7 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
                                       !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
 
         current_country = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
-        for (i = 0; amazon_countries[i] != NULL; i++) {
+        for (i = 0; amazon_countries[i] != NULL; ++i) {
                 if (!strcmp (amazon_countries[i], current_country)) {
                         gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), i);
                         break;

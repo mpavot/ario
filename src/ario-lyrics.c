@@ -48,7 +48,7 @@ ario_lyrics_make_lyrics_path (const gchar *artist,
         filename = g_strdup_printf ("%s-%s.txt", artist, title);
 
         /* We replace some special characters with spaces. */
-        for (tmp = filename; *tmp != '\0'; tmp++) {
+        for (tmp = filename; *tmp != '\0'; ++tmp) {
                 if (strchr (to_strip, *tmp))
                         *tmp = ' ';
         }
@@ -125,14 +125,14 @@ ario_lyrics_make_first_xml_uri (const gchar *artist,
 
         /* We escape special characters */
         length = g_utf8_strlen (conv_artist, -1);
-	for(i = 0; i < length;i++)
+	for(i = 0; i < length; ++i)
 	{
 		if (!g_unichar_isalnum (conv_artist[i])) {
 		        conv_artist[i]=' ';
 		}
 	}
         length = g_utf8_strlen (conv_title, -1);
-	for(i = 0; i < length;i++)
+	for(i = 0; i < length; ++i)
 	{
 		if (!g_unichar_isalnum (conv_title[i])) {
 		        conv_title[i]=' ';

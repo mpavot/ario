@@ -596,7 +596,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                         gtk_list_store_remove (playlist->priv->model, &iter);
 
                 g_free (path);
-                old_length--;
+                --old_length;
         }
 
         ario_playlist_sync_song (playlist);
@@ -677,7 +677,7 @@ ario_playlist_move_rows (ArioPlaylist *playlist,
 
                 /* adjust position acording to drop after or for, also take last song in account */
                 if (pos == GTK_TREE_VIEW_DROP_AFTER && pos2 < playlist->priv->playlist_length - 1)
-                        pos2 ++;
+                        ++pos2;
         }
 
         gtk_tree_path_free (path);
@@ -697,12 +697,12 @@ ario_playlist_move_rows (ArioPlaylist *playlist,
 
                         /* compensate */
                         if (pos2 > pos1)
-                                pos2 --;
+                                --pos2;
 
                         ario_mpd_queue_move (playlist->priv->mpd, pos1 + offset, pos2);
 
                         if (pos2 < pos1)
-                                offset ++;
+                                ++offset;
 
                         path_to_select = gtk_tree_path_new_from_indices (pos2, -1);
                         gtk_tree_selection_select_path (playlist->priv->selection, path_to_select);
@@ -750,7 +750,7 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
         for (temp_songs = songs; temp_songs; temp_songs = g_slist_next (temp_songs)) {
                 /* Add it in the playlist*/
                 ario_mpd_queue_add (playlist->priv->mpd, temp_songs->data);
-                offset ++;
+                ++offset;
                 /* move it in the right place */
                 if (!do_not_move)
                         ario_mpd_queue_move (playlist->priv->mpd, end + offset, drop + offset);
@@ -853,7 +853,7 @@ ario_playlist_drop_radios (ArioPlaylist *playlist,
         radios = g_strsplit ((const gchar *) data->data, "\n", 0);
 
         /* For each radio url :*/
-        for (i=0; radios[i]!=NULL && g_utf8_collate (radios[i], ""); i++)
+        for (i=0; radios[i]!=NULL && g_utf8_collate (radios[i], ""); ++i)
                 radio_urls = g_slist_append (radio_urls, radios[i]);
 
         ario_playlist_add_songs (playlist,
@@ -877,7 +877,7 @@ ario_playlist_drop_songs (ArioPlaylist *playlist,
         songs = g_strsplit ((const gchar *) data->data, "\n", 0);
 
         /* For each filename :*/
-        for (i=0; songs[i]!=NULL && g_utf8_collate (songs[i], ""); i++)
+        for (i=0; songs[i]!=NULL && g_utf8_collate (songs[i], ""); ++i)
                 filenames = g_slist_append (filenames, songs[i]);
 
         ario_playlist_add_songs (playlist,
@@ -932,7 +932,7 @@ ario_playlist_drop_artists (ArioPlaylist *playlist,
         artists = g_strsplit ((const gchar *) data->data, "\n", 0);
 
         /* For each artist :*/
-        for (i=0; artists[i]!=NULL && g_utf8_collate (artists[i], ""); i++)
+        for (i=0; artists[i]!=NULL && g_utf8_collate (artists[i], ""); ++i)
                 artists_list = g_slist_append (artists_list, artists[i]);
 
         ario_playlist_add_artists (playlist,
