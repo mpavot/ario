@@ -534,7 +534,7 @@ ario_header_change_labels (ArioHeader *header)
         char *artist;
         char *album;
         char *tmp;
-        gchar *ario_cover_path;
+        gchar *cover_path;
         GdkPixbuf *cover;
 
         switch (ario_mpd_get_current_state (header->priv->mpd)) {
@@ -550,9 +550,9 @@ ario_header_change_labels (ArioHeader *header)
                 if (!artist)
                         artist = ARIO_MPD_UNKNOWN;
 
-                ario_cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
-                cover = gdk_pixbuf_new_from_file_at_size (ario_cover_path, header->priv->image_width, header->priv->image_height, NULL);
-                g_free (ario_cover_path);
+                cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
+                cover = gdk_pixbuf_new_from_file_at_size (cover_path, header->priv->image_width, header->priv->image_height, NULL);
+                g_free (cover_path);
                 gtk_image_set_from_pixbuf(GTK_IMAGE(header->priv->image), cover);
 
                 tmp = SONG_MARKUP (title);

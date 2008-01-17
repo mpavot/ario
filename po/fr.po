@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-16 00:53+0100\n"
+"POT-Creation-Date: 2008-01-17 21:10+0100\n"
 "PO-Revision-Date: 2008-01-14 22:22+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -939,7 +939,7 @@ msgstr "_Précédent"
 msgid "Start playing the previous song"
 msgstr "Jouer la chanson précédente"
 
-#: ../src/widgets/ario-header.c:142
+#: ../src/widgets/ario-header.c:142 ../src/widgets/ario-tray-icon.c:40
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>de</i> %s <i>par</i> %s"
@@ -958,7 +958,7 @@ msgstr "Stop la musique"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:349
+#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:624
 msgid " of "
 msgstr " sur "
 
@@ -1020,24 +1020,13 @@ msgstr "La playlist existe déjà. Voulez-vous la remplacer?"
 msgid "%d Songs - %s"
 msgstr "%d Titres - %s"
 
-#: ../src/widgets/ario-tray-icon.c:172 ../src/widgets/ario-tray-icon.c:418
+#: ../src/widgets/ario-tray-icon.c:38
 msgid "Not playing"
 msgstr "Ne joue pas"
 
-#: ../src/widgets/ario-tray-icon.c:303
+#: ../src/widgets/ario-tray-icon.c:340
 msgid "Ario tray icon"
 msgstr "Ario - Icône de notification"
-
-#: ../src/widgets/ario-tray-icon.c:411
-#, c-format
-msgid ""
-"Artist: %s\n"
-"Album: %s\n"
-"Title: %s"
-msgstr ""
-"Artiste: %s\n"
-"Album: %s\n"
-"Titre: %s"
 
 #. Translators - The + and - refer to increasing and decreasing the volume.
 #. ** I don't know if there are sensible alternatives in other languages
@@ -1048,6 +1037,15 @@ msgstr "+"
 #: ../src/widgets/ario-volume.c:238
 msgid "-"
 msgstr "-"
+
+#~ msgid ""
+#~ "Artist: %s\n"
+#~ "Album: %s\n"
+#~ "Title: %s"
+#~ msgstr ""
+#~ "Artiste: %s\n"
+#~ "Album: %s\n"
+#~ "Titre: %s"
 
 #, fuzzy
 #~ msgid "The lyrics already exists. Do you want to replace it?"

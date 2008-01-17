@@ -390,7 +390,7 @@ ario_mpd_set_property (GObject *object,
                 }
 
                 /* check if there is a connection */
-                if (ario_mpd_is_connected (mpd)) {
+                if (mpd->priv->connection) {
                         mpd_sendCurrentSongCommand (mpd->priv->connection);
                         ent = mpd_getNextInfoEntity (mpd->priv->connection);
                         if (ent != NULL) {
@@ -420,7 +420,7 @@ ario_mpd_set_property (GObject *object,
                 break;
         case PROP_PLAYLISTID:
                 mpd->priv->playlist_id = g_value_get_int (value);
-                if (ario_mpd_is_connected (mpd))
+                if (mpd->priv->connection)
                         mpd->priv->playlist_length = mpd->priv->status->playlistLength;
                 else
                         mpd->priv->playlist_length = 0;
@@ -544,7 +544,7 @@ ario_mpd_connect (ArioMpd *mpd)
         float timeout;
 
         /* check if there is a connection */
-        if (ario_mpd_is_connected (mpd))
+        if (mpd->priv->connection)
                 return;
 
         hostname = eel_gconf_get_string (CONF_HOST, "localhpst");
@@ -567,7 +567,7 @@ ario_mpd_disconnect (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_closeConnection (mpd->priv->connection);
@@ -579,7 +579,7 @@ ario_mpd_update_db (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendUpdateCommand (mpd->priv->connection, "");
@@ -591,7 +591,7 @@ ario_mpd_check_errors (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START
-        if (!ario_mpd_is_connected(mpd))
+        if (!mpd->priv->connection)
                 return;
 
         if  (mpd->priv->connection->error) {
@@ -616,7 +616,7 @@ ario_mpd_get_artists (ArioMpd *mpd)
         gchar *artist_char;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         mpd_sendListCommand (mpd->priv->connection, MPD_TABLE_ARTIST, NULL);
@@ -640,7 +640,7 @@ ario_mpd_get_albums (ArioMpd *mpd,
         ArioMpdAlbum *ario_mpd_album;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ARTIST, artist);
@@ -689,7 +689,7 @@ ario_mpd_get_songs (ArioMpd *mpd,
         gboolean is_album_unknown;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         is_album_unknown = !g_utf8_collate (album, ARIO_MPD_UNKNOWN);
@@ -721,7 +721,7 @@ ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
         mpd_InfoEntity *ent = NULL;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         mpd_sendListPlaylistInfoCommand(mpd->priv->connection, playlist);
@@ -742,7 +742,7 @@ ario_mpd_get_playlists (ArioMpd *mpd)
         mpd_InfoEntity *ent = NULL;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         mpd_sendLsInfoCommand(mpd->priv->connection, "/");
@@ -767,7 +767,7 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
         mpd_InfoEntity *entity = NULL;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         mpd_sendPlChangesCommand (mpd->priv->connection, playlist_id);
@@ -822,14 +822,17 @@ gboolean
 ario_mpd_update_status (ArioMpd *mpd)
 {
         // desactivated to make the logs more readable
-        ARIO_LOG_FUNCTION_START
+        //ARIO_LOG_FUNCTION_START
 
         if (mpd->priv->is_updating)
                 return TRUE;
         mpd->priv->is_updating = TRUE;
         mpd->priv->signals_to_emit = 0;
 
-        if (ario_mpd_is_connected (mpd)) {
+        /* check if there is a connection */
+        if (!mpd->priv->connection) {
+                ario_mpd_set_default (mpd);
+        } else {
                 if (mpd->priv->status != NULL)
                         mpd_freeStatus (mpd->priv->status);
                 mpd_sendStatusCommand (mpd->priv->connection);
@@ -841,12 +844,7 @@ ario_mpd_update_status (ArioMpd *mpd)
                 mpd->priv->stats = mpd_getStats (mpd->priv->connection);
 
                 ario_mpd_check_errors(mpd);
-        }
 
-        /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd)) {
-                ario_mpd_set_default (mpd);
-        } else {
                 if (mpd->priv->song_id != mpd->priv->status->songid)
                         g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
 
@@ -1002,7 +1000,7 @@ ario_mpd_get_current_playlist_total_time (ArioMpd *mpd)
         ArioMpdSong *song;
         mpd_InfoEntity *ent = NULL;
 
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return 0;
 
         // We go to MPD server for each call to this function but it is not a problem as it is
@@ -1076,7 +1074,7 @@ ario_mpd_do_next (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendNextCommand (mpd->priv->connection);
@@ -1088,7 +1086,7 @@ ario_mpd_do_prev (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendPrevCommand (mpd->priv->connection);
@@ -1100,7 +1098,7 @@ ario_mpd_do_play (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendPlayCommand (mpd->priv->connection, -1);
@@ -1113,7 +1111,7 @@ ario_mpd_do_play_id (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         /* send mpd the play command */
@@ -1126,7 +1124,7 @@ ario_mpd_do_pause (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendPauseCommand (mpd->priv->connection, TRUE);
@@ -1138,7 +1136,7 @@ ario_mpd_do_stop (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendStopCommand (mpd->priv->connection);
@@ -1160,7 +1158,7 @@ ario_mpd_set_current_elapsed (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendSeekCommand (mpd->priv->connection, mpd->priv->status->song, elapsed);
@@ -1173,7 +1171,7 @@ ario_mpd_set_current_volume (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendSetvolCommand (mpd->priv->connection, volume);
@@ -1187,7 +1185,7 @@ ario_mpd_set_current_random (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendRandomCommand (mpd->priv->connection, random);
@@ -1200,7 +1198,7 @@ ario_mpd_set_current_repeat (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendRepeatCommand (mpd->priv->connection, repeat);
@@ -1213,7 +1211,7 @@ ario_mpd_set_crossfadetime (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendCrossfadeCommand (mpd->priv->connection, crossfadetime);        
@@ -1225,7 +1223,7 @@ ario_mpd_clear (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendClearCommand (mpd->priv->connection);
@@ -1241,7 +1239,7 @@ ario_mpd_remove (ArioMpd *mpd,
         int i;
 
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
 
         mpd_sendCommandListBegin (mpd->priv->connection);
@@ -1312,7 +1310,7 @@ ario_mpd_queue_commit (ArioMpd *mpd)
         GSList *temp;
         
         /* check if there is a connection */
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return;
                 
         mpd_sendCommandListBegin(mpd->priv->connection);
@@ -1360,7 +1358,7 @@ ario_mpd_search (ArioMpd *mpd,
         ArioMpdSearchCriteria *search_criteria;
         GSList *songs = NULL;
 
-        if (!ario_mpd_is_connected (mpd))
+        if (!mpd->priv->connection)
                 return NULL;
 
         mpd_startSearch(mpd->priv->connection, FALSE);
