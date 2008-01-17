@@ -362,6 +362,7 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
 {
         icon->priv->tooltips_pointer_above = TRUE;
         ario_tray_icon_update_tooltip_visibility (icon);
+        ario_mpd_use_count_inc (icon->priv->mpd);
 }
 
 static void
@@ -371,6 +372,7 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
 {
         icon->priv->tooltips_pointer_above = FALSE;
         ario_tray_icon_update_tooltip_visibility (icon);
+        ario_mpd_use_count_dec (icon->priv->mpd);
 }
 
 static void
@@ -419,7 +421,7 @@ ario_tray_icon_construct_tooltip (ArioTrayIcon *icon)
         gtk_box_pack_start (GTK_BOX (icon->priv->tooltip_image_box), icon->priv->image,
                             TRUE, FALSE, 0);
 
-        hbox = gtk_hbox_new (FALSE, 12);
+        hbox = gtk_hbox_new (FALSE, 6);
         vbox = gtk_vbox_new (FALSE, 2);
         icon->priv->tooltip_progress_bar = gtk_progress_bar_new ();
 
@@ -693,6 +695,7 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                 if (icon->priv->visible == TRUE) {
                         ario_tray_icon_restore_main_window (icon);
                         gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
+                        ario_mpd_use_count_inc (icon->priv->mpd);
                 } else {
                         icon->priv->maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
                         gtk_window_get_position (icon->priv->main_window,
@@ -702,6 +705,7 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                                              &icon->priv->window_w,
                                              &icon->priv->window_h);
                         gtk_widget_hide (GTK_WIDGET (icon->priv->main_window));
+                        ario_mpd_use_count_dec (icon->priv->mpd);
                 }
         }
 }

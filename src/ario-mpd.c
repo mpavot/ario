@@ -89,6 +89,9 @@ struct ArioMpdPrivate
         gboolean is_updating; 
 
         int signals_to_emit;
+
+        int use_count;
+        gboolean is_looping;
 };
 
 enum
@@ -339,6 +342,8 @@ ario_mpd_init (ArioMpd *mpd)
         mpd->priv->playlist_id = -1;
         mpd->priv->volume = 0;
         mpd->priv->is_updating = FALSE;
+        mpd->priv->use_count = 0;
+        mpd->priv->is_looping = FALSE;
 }
 
 static void
@@ -890,7 +895,8 @@ ario_mpd_update_status (ArioMpd *mpd)
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[DBTIME_CHANGED], 0);
 
         mpd->priv->is_updating = FALSE;
-        return TRUE;
+        mpd->priv->is_looping = (mpd->priv->use_count > 0);
+        return mpd->priv->is_looping;
 }
 
 char *
@@ -1384,6 +1390,7 @@ int
 ario_mpd_save_playlist (ArioMpd *mpd,
                         const char *name)
 {
+        ARIO_LOG_FUNCTION_START
 	mpd_sendSaveCommand (mpd->priv->connection, name);
 	mpd_finishCommand (mpd->priv->connection);
 
@@ -1399,9 +1406,28 @@ void
 ario_mpd_delete_playlist (ArioMpd *mpd,
                           const char *name)
 {
+        ARIO_LOG_FUNCTION_START
 	mpd_sendRmCommand (mpd->priv->connection, name);
 	mpd_finishCommand (mpd->priv->connection);
 
         g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
+}
+
+void
+ario_mpd_use_count_inc (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        ++mpd->priv->use_count;
+        if (!mpd->priv->is_looping) {
+                ario_mpd_update_status (mpd);
+                g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, mpd);
+        }
+}
+
+void
+ario_mpd_use_count_dec (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        --mpd->priv->use_count;
 }
 

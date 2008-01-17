@@ -415,8 +415,7 @@ ario_shell_show (ArioShell *shell)
                                  "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
                                  shell, 0);
 
-        g_timeout_add (500, (GSourceFunc) ario_mpd_update_status, shell->priv->mpd);
-
+        ario_mpd_use_count_inc (shell->priv->mpd);
         shell->priv->shown = TRUE;
 }
 
