@@ -5,4 +5,3 @@
 - Update cover in header and in browser if changed in coverselect
 - keep lyrics window size in gconf
 - add other lyrics sources & possibility to activate them in preferences
-- bug with gtk_label_set_markup and "&"

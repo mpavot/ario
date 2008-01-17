@@ -139,7 +139,7 @@ enum
 static GObjectClass *parent_class = NULL;
 
 #define SONG_MARKUP(xSONG) g_markup_printf_escaped ("<big><b>%s</b></big>", xSONG);
-#define FROM_MARKUP(xALBUM, xARTIST) g_strdup_printf (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
+#define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
 
 GType
 ario_header_get_type (void)
