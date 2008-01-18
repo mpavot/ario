@@ -559,6 +559,7 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
                 secondary = FROM_MARKUP (album, artist);
                 gtk_label_set_markup (GTK_LABEL (icon->priv->tooltip_secondary),
                                       secondary);
+                gtk_widget_show (icon->priv->tooltip_secondary);
                 g_free(secondary);
 
                 /* Icon */
@@ -578,11 +579,12 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
                                     TRAY_ICON_DEFAULT_TOOLTIP);
                 gtk_label_set_markup (GTK_LABEL (icon->priv->tooltip_secondary),
                                       "");
+                gtk_widget_hide (icon->priv->tooltip_secondary);
                 cover = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COVER_SIZE, COVER_SIZE);
                 gdk_pixbuf_fill (cover, 0); /* transparent */
                 gtk_image_set_from_pixbuf (GTK_IMAGE (icon->priv->image), cover);
                 g_object_unref(cover);
-                      gtk_widget_hide (icon->priv->image);
+                gtk_widget_hide (icon->priv->image);
                 break;
         }
 }
@@ -618,11 +620,13 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
                 else
                         gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar),
                                                        0);
+                gtk_widget_show (icon->priv->tooltip_progress_bar);
                 break;
         default:
                 gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), NULL);
                 gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar),
                                                0);
+                gtk_widget_hide (icon->priv->tooltip_progress_bar);
                 break;
         }
 }

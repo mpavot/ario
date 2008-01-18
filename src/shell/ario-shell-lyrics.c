@@ -256,6 +256,7 @@ ario_shell_lyrics_new (ArioMpd *mpd)
                                                       NULL);
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
+        ario_mpd_use_count_inc (shell_lyrics->priv->mpd);
 
         return GTK_WIDGET (shell_lyrics);
 }
@@ -281,6 +282,7 @@ ario_shell_lyrics_finalize (GObject *object)
         g_async_queue_push (shell_lyrics->priv->queue, data);
         g_thread_join (shell_lyrics->priv->thread);
         g_async_queue_unref (shell_lyrics->priv->queue);
+        ario_mpd_use_count_dec (shell_lyrics->priv->mpd);
         g_free (shell_lyrics->priv);
 
         is_instantiated = FALSE;
