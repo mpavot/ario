@@ -199,7 +199,7 @@ ario_server_preferences_set_property (GObject *object,
                                          "state_changed", G_CALLBACK (ario_server_preferences_server_changed_cb),
                                          server_preferences, 0);
                 g_signal_connect_object (G_OBJECT (server_preferences->priv->mpd),
-                                         "dbtime_changed", G_CALLBACK (ario_server_preferences_server_changed_cb),
+                                         "updatingdb_changed", G_CALLBACK (ario_server_preferences_server_changed_cb),
                                          server_preferences, 0);
                 break;
         default:

@@ -24,7 +24,7 @@
 #include "ario-debug.h"
 
 static void ario_status_bar_class_init (ArioStatusBarClass *klass);
-static void ario_status_bar_init (ArioStatusBar *ario_shell_player);
+static void ario_status_bar_init (ArioStatusBar *status_bar);
 static void ario_status_bar_finalize (GObject *object);
 static void ario_status_bar_set_property (GObject *object,
                                           guint prop_id,
@@ -144,6 +144,9 @@ ario_status_bar_set_property (GObject *object,
                 g_signal_connect_object (G_OBJECT (status_bar->priv->mpd),
                                          "playlist_changed", G_CALLBACK (ario_status_bar_playlist_changed_cb),
                                          status_bar, 0);
+                g_signal_connect_object (G_OBJECT (status_bar->priv->mpd),
+                                         "updatingdb_changed", G_CALLBACK (ario_status_bar_playlist_changed_cb),
+                                         status_bar, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -191,7 +194,7 @@ ario_status_bar_playlist_changed_cb (ArioMpd *mpd,
                                      ArioStatusBar *status_bar)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *msg;
+        gchar *msg, *tmp;
         gchar *formated_total_time;
         int ario_playlist_length;
         int ario_playlist_total_time;
@@ -203,6 +206,12 @@ ario_status_bar_playlist_changed_cb (ArioMpd *mpd,
 
         msg = g_strdup_printf (_("%d Songs - %s"), ario_playlist_length, formated_total_time);
         g_free (formated_total_time);
+
+        if (ario_mpd_get_updating (status_bar->priv->mpd)) {
+                tmp = g_strdup_printf ("%s - %s", msg, _("Updating..."));
+                g_free (msg);
+                msg = tmp;
+        }                
 
         gtk_statusbar_pop (GTK_STATUSBAR(status_bar), status_bar->priv->ario_playlist_context_id);
         gtk_statusbar_push (GTK_STATUSBAR (status_bar), status_bar->priv->ario_playlist_context_id, msg);

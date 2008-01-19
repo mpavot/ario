@@ -76,7 +76,7 @@ typedef struct
 
         void (*repeat_changed)          (ArioMpd *mpd);
 
-        void (*dbtime_changed)          (ArioMpd *mpd);
+        void (*updatingdb_changed)      (ArioMpd *mpd);
 
         void (*storedplaylists_changed) (ArioMpd *mpd);
 } ArioMpdClass;

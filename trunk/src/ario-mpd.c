@@ -87,7 +87,7 @@ struct ArioMpdPrivate
         gboolean random;
         gboolean repeat;
 
-        unsigned long dbtime;
+        int updatingdb;
         
         GSList *queue;
         gboolean is_updating; 
@@ -107,7 +107,7 @@ enum
         PROP_ELAPSED,
         PROP_PLAYLISTID,
         PROP_RANDOM,
-        PROP_DBTIME,
+        PROP_UPDATINGDB,
         PROP_REPEAT
 };
 
@@ -120,7 +120,7 @@ enum
         PLAYLIST_CHANGED,
         RANDOM_CHANGED,
         REPEAT_CHANGED,
-        DBTIME_CHANGED,
+        UPDATINGDB_CHANGED,
         STOREDPLAYLISTS_CHANGED,
         LAST_SIGNAL
 };
@@ -135,7 +135,7 @@ enum
         PLAYLIST_CHANGED_FLAG = 2 << PLAYLIST_CHANGED,
         RANDOM_CHANGED_FLAG = 2 << RANDOM_CHANGED,
         REPEAT_CHANGED_FLAG = 2 << REPEAT_CHANGED,
-        DBTIME_CHANGED_FLAG = 2 << DBTIME_CHANGED,
+        UPDATINGDB_CHANGED_FLAG = 2 << UPDATINGDB_CHANGED,
         STOREDPLAYLISTS_CHANGED_FLAG = 2 << STOREDPLAYLISTS_CHANGED
 };
 
@@ -238,12 +238,12 @@ ario_mpd_class_init (ArioMpdClass *klass)
                                                                G_PARAM_READWRITE));
 
         g_object_class_install_property (object_class,
-                                         PROP_DBTIME,
-                                         g_param_spec_ulong ("dbtime",
-                                                             "dbtime",
-                                                             "dbtime",
-                                                             0, ULONG_MAX, 0,
-                                                             G_PARAM_READWRITE));
+                                         PROP_UPDATINGDB,
+                                         g_param_spec_int ("updatingdb",
+                                                           "updatingdb",
+                                                           "updatingdb",
+                                                           -1, INT_MAX, 0,
+                                                           G_PARAM_READWRITE));
 
         ario_mpd_signals[SONG_CHANGED] =
                 g_signal_new ("song_changed",
@@ -315,11 +315,11 @@ ario_mpd_class_init (ArioMpdClass *klass)
                               G_TYPE_NONE,
                               0);
 
-        ario_mpd_signals[DBTIME_CHANGED] =
-                g_signal_new ("dbtime_changed",
+        ario_mpd_signals[UPDATINGDB_CHANGED] =
+                g_signal_new ("updatingdb_changed",
                               G_OBJECT_CLASS_TYPE (object_class),
                               G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (ArioMpdClass, dbtime_changed),
+                              G_STRUCT_OFFSET (ArioMpdClass, updatingdb_changed),
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
@@ -388,7 +388,6 @@ ario_mpd_set_property (GObject *object,
         ARIO_LOG_FUNCTION_START
         ArioMpd *mpd = ARIO_MPD (object);
         mpd_InfoEntity *ent = NULL;
-        gboolean need_emit = FALSE;
 
         switch (prop_id) {
         case PROP_SONGID:
@@ -443,11 +442,9 @@ ario_mpd_set_property (GObject *object,
                 mpd->priv->repeat = g_value_get_boolean (value);
                 mpd->priv->signals_to_emit |= REPEAT_CHANGED_FLAG;
                 break;
-        case PROP_DBTIME:
-                need_emit = (mpd->priv->dbtime != 0);
-                mpd->priv->dbtime = g_value_get_ulong (value);
-                if (need_emit)
-                        mpd->priv->signals_to_emit |= DBTIME_CHANGED_FLAG;
+        case PROP_UPDATINGDB:
+                mpd->priv->updatingdb = g_value_get_int (value);
+                mpd->priv->signals_to_emit |= UPDATINGDB_CHANGED_FLAG;
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -486,8 +483,8 @@ ario_mpd_get_property (GObject *object,
         case PROP_REPEAT:
                 g_value_set_boolean (value, mpd->priv->repeat);
                 break;
-        case PROP_DBTIME:
-                g_value_set_ulong (value, mpd->priv->dbtime);
+        case PROP_UPDATINGDB:
+                g_value_set_int (value, mpd->priv->updatingdb);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -823,8 +820,8 @@ ario_mpd_set_default (ArioMpd *mpd)
         if (mpd->priv->repeat != FALSE)
                 g_object_set (G_OBJECT (mpd), "repeat", FALSE, NULL);
 
-        if (mpd->priv->dbtime != 0)
-                g_object_set (G_OBJECT (mpd), "dbtime", 0, NULL);
+        if (mpd->priv->updatingdb != 0)
+                g_object_set (G_OBJECT (mpd), "updatingdb", 0, NULL);
 }
 
 gboolean
@@ -846,11 +843,6 @@ ario_mpd_update_status (ArioMpd *mpd)
                         mpd_freeStatus (mpd->priv->status);
                 mpd_sendStatusCommand (mpd->priv->connection);
                 mpd->priv->status = mpd_getStatus (mpd->priv->connection);
-
-                if (mpd->priv->stats != NULL)
-                        mpd_freeStats (mpd->priv->stats);
-                mpd_sendStatsCommand (mpd->priv->connection);
-                mpd->priv->stats = mpd_getStats (mpd->priv->connection);
 
                 ario_mpd_check_errors(mpd);
 
@@ -877,10 +869,9 @@ ario_mpd_update_status (ArioMpd *mpd)
 
                         if (mpd->priv->repeat != (gboolean) mpd->priv->status->repeat)
                                 g_object_set (G_OBJECT (mpd), "repeat", mpd->priv->status->repeat, NULL);
-                }
-                if (mpd->priv->stats) {
-                        if (mpd->priv->dbtime != (unsigned long) mpd->priv->stats->dbUpdateTime)
-                                g_object_set (G_OBJECT (mpd), "dbtime", mpd->priv->stats->dbUpdateTime, NULL);
+
+                        if (mpd->priv->updatingdb != mpd->priv->status->updatingDb)
+                                g_object_set (G_OBJECT (mpd), "updatingdb", mpd->priv->status->updatingDb, NULL);
                 }
         }
 
@@ -898,8 +889,8 @@ ario_mpd_update_status (ArioMpd *mpd)
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[RANDOM_CHANGED], 0);
         if (mpd->priv->signals_to_emit & REPEAT_CHANGED_FLAG)
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[REPEAT_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & DBTIME_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[DBTIME_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & UPDATINGDB_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[UPDATINGDB_CHANGED], 0);
 
         mpd->priv->is_updating = FALSE;
         return TRUE;
@@ -1059,7 +1050,7 @@ ario_mpd_get_updating (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         if (mpd->priv->status)
-                return mpd->priv->status->updatingDb;
+                return mpd->priv->updatingdb;
         else
                 return FALSE;
 }
@@ -1068,6 +1059,14 @@ unsigned long
 ario_mpd_get_last_update (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
+
+        if (mpd->priv->stats != NULL)
+                mpd_freeStats (mpd->priv->stats);
+        mpd_sendStatsCommand (mpd->priv->connection);
+        mpd->priv->stats = mpd_getStats (mpd->priv->connection);
+
+        ario_mpd_check_errors(mpd);
+
         if (mpd->priv->stats)
                 return mpd->priv->stats->dbUpdateTime;
         else

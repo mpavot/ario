@@ -506,7 +506,7 @@ ario_browser_set_property (GObject *object,
                                          browser, 0);
 
                 g_signal_connect_object (G_OBJECT (browser->priv->mpd),
-                                         "dbtime_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
+                                         "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
                                          browser, 0);
                 break;
         case PROP_PLAYLIST:
@@ -592,7 +592,8 @@ ario_browser_dbtime_changed_cb (ArioMpd *mpd,
                                 ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        ario_browser_fill_artists (browser);
+        if (!ario_mpd_get_updating (browser->priv->mpd))
+                ario_browser_fill_artists (browser);
 }
 
 static void
