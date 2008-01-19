@@ -336,7 +336,11 @@ ario_cover_load_amazon_covers (const char *artist,
         if (xml_size == 0) {
                 return FALSE;
         }
-        /* TODO : detect "404 - Document Not Found" */
+
+        if (g_strrstr (xml_data, "404 Not Found")) {
+                return FALSE;
+                g_free (xml_data);
+        }
 
         /* We parse the xml file to extract the cover uris */
         *ario_cover_uris = ario_cover_parse_amazon_xml_file (xml_data,

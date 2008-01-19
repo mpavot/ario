@@ -10,4 +10,6 @@
   <radio url="http://213.205.96.91:9903">FIP</radio>
   <radio url="http://s6.streaming.novanet.fr:80/tsfjazz">TSF Jazz</radio>
   <radio url="http://broadcast.infomaniak.net:80/ouifm-high.mp3">OUI FM</radio>
+  <radio url="http://www.smgradio.com/core/audio/ogg/live.pls?service=vcbb">Virgin Radio Classic Rock</radio>
+  <radio url="http://ubuntu.hbr1.com:19800/trance.ogg">HBR1.com - I.D.M. Tranceponder</radio>
 </ario-radios>
