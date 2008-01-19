@@ -91,7 +91,7 @@ static void ario_browser_cmd_remove_album_cover (GtkAction *action,
 static void ario_browser_covertree_visible_changed_cb (GConfClient *client,
                                                        guint cnxn_id,
                                                        GConfEntry *entry,
-                                                       GtkTreeView *treeview);
+                                                       ArioBrowser *browser);
 
 struct ArioBrowserPrivate
 {        
@@ -398,7 +398,7 @@ ario_browser_init (ArioBrowser *browser)
                                  0);
         eel_gconf_notification_add (CONF_COVER_TREE_HIDDEN,
                                     (GConfClientNotifyFunc) ario_browser_covertree_visible_changed_cb,
-                                    GTK_TREE_VIEW (browser->priv->albums)); 
+                                    browser); 
 
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
@@ -1364,9 +1364,10 @@ static void
 ario_browser_covertree_visible_changed_cb (GConfClient *client,
                                            guint cnxn_id,
                                            GConfEntry *entry,
-                                           GtkTreeView *treeview)
+                                           ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        gtk_tree_view_column_set_visible (gtk_tree_view_get_column (treeview, 1),
+        gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (browser->priv->albums), 1),
                                           !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
+        ario_browser_artists_selection_update (browser);
 }
