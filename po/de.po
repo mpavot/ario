@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 22:18+0100\n"
+"POT-Creation-Date: 2008-01-19 13:18+0100\n"
 "PO-Revision-Date: 2008-01-15 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: German <de@li.org>\n"
@@ -376,11 +376,11 @@ msgstr ""
 msgid "n/a"
 msgstr "n/v"
 
-#: ../src/ario-cover.c:412
+#: ../src/ario-cover.c:416
 msgid "The cover already exists. Do you want to replace it?"
 msgstr ""
 
-#: ../src/ario-mpd.c:529
+#: ../src/ario-mpd.c:535
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
 
@@ -475,6 +475,7 @@ msgstr "Nicht verbunden"
 
 #: ../src/preferences/ario-server-preferences.c:250
 #: ../src/preferences/ario-server-preferences.c:323
+#: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
 msgstr "Aktualisieren …"
 
@@ -541,12 +542,12 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1288
+#: ../src/sources/ario-browser.c:1289
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1352
+#: ../src/sources/ario-browser.c:1353
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -584,20 +585,24 @@ msgstr ""
 msgid "Add a WebRadio"
 msgstr ""
 
-#: ../src/sources/ario-radio.c:862 ../src/sources/ario-radio.c:1105
+#: ../src/sources/ario-radio.c:862 ../src/sources/ario-radio.c:1116
 msgid "Name : "
 msgstr "Name : "
 
-#: ../src/sources/ario-radio.c:863 ../src/sources/ario-radio.c:1106
+#: ../src/sources/ario-radio.c:863 ../src/sources/ario-radio.c:1117
 msgid "URL : "
 msgstr "URL : "
 
-#: ../src/sources/ario-radio.c:914 ../src/sources/ario-radio.c:1158
+#: ../src/sources/ario-radio.c:914 ../src/sources/ario-radio.c:1169
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 
+#: ../src/sources/ario-radio.c:1005
+msgid "Are you sure you want to delete all the selected radios?"
+msgstr ""
+
 #. Create the widgets
-#: ../src/sources/ario-radio.c:1095
+#: ../src/sources/ario-radio.c:1106
 msgid "Edit a WebRadio"
 msgstr ""
 
@@ -780,11 +785,11 @@ msgstr ""
 msgid "Playlists view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:512
+#: ../src/shell/ario-shell.c:511
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:513
+#: ../src/shell/ario-shell.c:512
 msgid "translator-credits"
 msgstr ""
 
@@ -830,11 +835,11 @@ msgstr "Fehler beim Speichern der Datei"
 msgid "Ario Lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:445
+#: ../src/shell/ario-shell-lyrics.c:447
 msgid "Downloading lyrics..."
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:462
+#: ../src/shell/ario-shell-lyrics.c:464
 msgid "Lyrics not found"
 msgstr ""
 
@@ -936,7 +941,7 @@ msgstr ""
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:608
+#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:612
 msgid " of "
 msgstr ""
 
@@ -993,7 +998,7 @@ msgstr ""
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
-#: ../src/widgets/ario-status-bar.c:204
+#: ../src/widgets/ario-status-bar.c:207
 #, c-format
 msgid "%d Songs - %s"
 msgstr ""
