@@ -427,7 +427,10 @@ ario_lyrics_get_leoslyrics_lyrics (const gchar *artist,
         if (xml_size == 0)
                 return NULL;
 
-        /* TODO : detect errors */
+        if (g_strrstr (xml_data, " - Error report</title>")) {
+                return NULL;
+                g_free (xml_data);
+        }
 
         /* We parse the xml file to extract the lyrics hid */
         hid = ario_lyrics_parse_first_xml_file (xml_data,
@@ -538,7 +541,10 @@ ario_lyrics_get_lyrics_candidates (const gchar *artist,
         if (xml_size == 0)
                 return NULL;
 
-        /* TODO : detect errors */
+        if (g_strrstr (xml_data, " - Error report</title>")) {
+                return NULL;
+                g_free (xml_data);
+        }
 
         /* We parse the xml file to extract the lyrics hid */
         candidates = ario_lyrics_parse_first_xml_file_for_candidates (xml_data,

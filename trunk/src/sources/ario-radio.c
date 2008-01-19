@@ -995,8 +995,19 @@ ario_radio_cmd_delete_radios (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         GSList *internet_radios = NULL;
+        GtkWidget *dialog;
+        gint retval = GTK_RESPONSE_NO;
 
-        /* TODO : Ask before delete */
+        dialog = gtk_message_dialog_new (NULL,
+                                        GTK_DIALOG_MODAL,
+                                        GTK_MESSAGE_QUESTION,
+                                        GTK_BUTTONS_YES_NO,
+                                        _("Are you sure you want to delete all the selected radios?"));
+
+        retval = gtk_dialog_run (GTK_DIALOG(dialog));
+        gtk_widget_destroy (dialog);
+        if (retval != GTK_RESPONSE_YES)
+                return;
 
         gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
                                              radios_foreach2,
