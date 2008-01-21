@@ -128,8 +128,8 @@ ario_connection_preferences_get_type (void)
                 };
 
                 ario_connection_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                           "ArioConnectionPreferences",
-                                                           &our_info, 0);
+                                                                           "ArioConnectionPreferences",
+                                                                           &our_info, 0);
         }
 
         return ario_connection_preferences_type;
@@ -334,13 +334,13 @@ ario_connection_preferences_finalize (GObject *object)
 
 static void
 ario_connection_preferences_set_property (GObject *object,
-                               guint prop_id,
-                               const GValue *value,
-                               GParamSpec *pspec)
+                                          guint prop_id,
+                                          const GValue *value,
+                                          GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioConnectionPreferences *connection_preferences = ARIO_CONNECTION_PREFERENCES (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 connection_preferences->priv->mpd = g_value_get_object (value);
@@ -353,9 +353,9 @@ ario_connection_preferences_set_property (GObject *object,
 
 static void 
 ario_connection_preferences_get_property (GObject *object,
-                               guint prop_id,
-                               GValue *value,
-                               GParamSpec *pspec)
+                                          guint prop_id,
+                                          GValue *value,
+                                          GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioConnectionPreferences *connection_preferences = ARIO_CONNECTION_PREFERENCES (object);
@@ -407,7 +407,7 @@ ario_connection_preferences_name_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_preferences_host_changed_cb (GtkWidget *widget,
-                                  ArioConnectionPreferences *connection_preferences)
+                                             ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         if (!connection_preferences->priv->loading) {
@@ -420,7 +420,7 @@ ario_connection_preferences_host_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_preferences_port_changed_cb (GtkWidget *widget,
-                                  ArioConnectionPreferences *connection_preferences)
+                                             ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         if (!connection_preferences->priv->loading) {
@@ -432,7 +432,7 @@ ario_connection_preferences_port_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
-                                         ArioConnectionPreferences *connection_preferences)
+                                                    ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         if (!connection_preferences->priv->loading)
@@ -442,7 +442,7 @@ ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_preferences_password_changed_cb (GtkWidget *widget,
-                                      ArioConnectionPreferences *connection_preferences)
+                                                 ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *password;
@@ -460,7 +460,7 @@ ario_connection_preferences_password_changed_cb (GtkWidget *widget,
 
 static void
 ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
-                                       ArioConnectionPreferences *connection_preferences)
+                                                  ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
@@ -487,7 +487,7 @@ ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
 
 void
 ario_connection_preferences_autodetect_cb (GtkWidget *widget,
-                                ArioConnectionPreferences *connection_preferences)
+                                           ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
 
@@ -554,9 +554,9 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
         gtk_tree_view_column_set_fixed_width (column, 50);
         gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
         connection_preferences->priv->autodetect_model = gtk_list_store_new (N_COLUMN,
-                                                                  G_TYPE_STRING,
-                                                                  G_TYPE_STRING,
-                                                                  G_TYPE_STRING);
+                                                                             G_TYPE_STRING,
+                                                                             G_TYPE_STRING,
+                                                                             G_TYPE_STRING);
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (connection_preferences->priv->autodetect_model));
         connection_preferences->priv->autodetect_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -662,7 +662,7 @@ ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
 
 void
 ario_connection_preferences_connect_cb (GtkWidget *widget,
-                             ArioConnectionPreferences *connection_preferences)
+                                        ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_connect (connection_preferences->priv->mpd);
@@ -671,7 +671,7 @@ ario_connection_preferences_connect_cb (GtkWidget *widget,
 
 void
 ario_connection_preferences_disconnect_cb (GtkWidget *widget,
-                                ArioConnectionPreferences *connection_preferences)
+                                           ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_disconnect (connection_preferences->priv->mpd);

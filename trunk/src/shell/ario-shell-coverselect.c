@@ -128,8 +128,8 @@ ario_shell_coverselect_get_type (void)
                 };
 
                 ario_shell_coverselect_type = g_type_register_static (GTK_TYPE_DIALOG,
-                                                                    "ArioShellCoverselect",
-                                                                    &our_info, 0);
+                                                                      "ArioShellCoverselect",
+                                                                      &our_info, 0);
         }
 
         return ario_shell_coverselect_type;
@@ -200,7 +200,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
 
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         ario_shell_coverselect = ARIO_SHELL_COVERSELECT (parent_class->constructor (type, n_construct_properties,
-                                                                           construct_properties));
+                                                                                    construct_properties));
 
         xml = rb_glade_xml_new (GLADE_PATH "cover-select.glade", "vbox", NULL);
         vbox = glade_xml_get_widget (xml, "vbox");
@@ -249,14 +249,14 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
 
         cell_renderer = gtk_cell_renderer_pixbuf_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Covers"), 
-                                                          cell_renderer, 
-                                                          "pixbuf", 
-                                                          BMP_COLUMN, NULL);
+                                                           cell_renderer, 
+                                                           "pixbuf", 
+                                                           BMP_COLUMN, NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (ario_shell_coverselect->priv->listview), 
-                                    column);
+                                     column);
 
         gtk_tree_view_set_model (GTK_TREE_VIEW (ario_shell_coverselect->priv->listview),
-                                      GTK_TREE_MODEL (ario_shell_coverselect->priv->liststore));
+                                 GTK_TREE_MODEL (ario_shell_coverselect->priv->liststore));
 
         switch (ario_shell_coverselect->priv->coversize) {
         case AMAZON_SMALL_COVER:
@@ -274,28 +274,28 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         }
 
         g_signal_connect_object  (G_OBJECT (ario_shell_coverselect),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_coverselect_window_delete_cb),
-                                 ario_shell_coverselect, 0);
+                                  "delete_event",
+                                  G_CALLBACK (ario_shell_coverselect_window_delete_cb),
+                                  ario_shell_coverselect, 0);
         g_signal_connect_object (G_OBJECT (ario_shell_coverselect),
                                  "response",
                                  G_CALLBACK (ario_shell_coverselect_response_cb),
                                  ario_shell_coverselect, 0);                                         
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->get_amazon_covers_button),
-                         "clicked", G_CALLBACK (ario_shell_coverselect_get_amazon_covers_cb),
-                         ario_shell_coverselect);
+                          "clicked", G_CALLBACK (ario_shell_coverselect_get_amazon_covers_cb),
+                          ario_shell_coverselect);
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->option_small), 
-                         "clicked", G_CALLBACK (ario_shell_coverselect_option_small_cb),
-                         ario_shell_coverselect);
+                          "clicked", G_CALLBACK (ario_shell_coverselect_option_small_cb),
+                          ario_shell_coverselect);
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->option_medium), 
-                         "clicked", G_CALLBACK (ario_shell_coverselect_option_medium_cb),
-                         ario_shell_coverselect);
+                          "clicked", G_CALLBACK (ario_shell_coverselect_option_medium_cb),
+                          ario_shell_coverselect);
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->option_large), 
-                         "clicked", G_CALLBACK (ario_shell_coverselect_option_large_cb),
-                         ario_shell_coverselect);
+                          "clicked", G_CALLBACK (ario_shell_coverselect_option_large_cb),
+                          ario_shell_coverselect);
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->local_open_button), 
-                         "clicked", G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
-                         ario_shell_coverselect);
+                          "clicked", G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
+                          ario_shell_coverselect);
 
         return G_OBJECT (ario_shell_coverselect);
 }
@@ -308,7 +308,7 @@ ario_shell_coverselect_new (const char *artist,
         ArioShellCoverselect *ario_shell_coverselect;
 
         ario_shell_coverselect = g_object_new (TYPE_ARIO_SHELL_COVERSELECT,
-                                          NULL);
+                                               NULL);
 
         ario_shell_coverselect->priv->file_artist = artist;        
         ario_shell_coverselect->priv->file_album = album;
@@ -321,12 +321,12 @@ ario_shell_coverselect_new (const char *artist,
                             ario_shell_coverselect->priv->file_album);
 
         gtk_label_set_label (GTK_LABEL (ario_shell_coverselect->priv->artist_label), 
-                            ario_shell_coverselect->priv->file_artist);
+                             ario_shell_coverselect->priv->file_artist);
         gtk_label_set_label (GTK_LABEL (ario_shell_coverselect->priv->album_label), 
-                            ario_shell_coverselect->priv->file_album);
+                             ario_shell_coverselect->priv->file_album);
 
         g_return_val_if_fail (ario_shell_coverselect->priv != NULL, NULL);
-        
+
         return GTK_WIDGET (ario_shell_coverselect);
 }
 
@@ -391,7 +391,7 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
 
         gtk_file_selection_set_filename (GTK_FILE_SELECTION (fileselection),
                                          g_get_home_dir ());
-                                         
+
         if (gtk_dialog_run (GTK_DIALOG (fileselection)) == GTK_RESPONSE_OK)
                 gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->local_file_entry), 
                                     gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselection)));
@@ -505,7 +505,7 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
 {        
         ARIO_LOG_FUNCTION_START
         GtkWidget *dialog;
-        
+
         GtkTreeSelection *selection;
         GtkTreeIter iter;
         GtkTreePath *tree_path;
@@ -518,7 +518,7 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
         switch (gtk_notebook_get_current_page (GTK_NOTEBOOK (ario_shell_coverselect->priv->notebook))) {
         case AMAZON_PAGE:
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ario_shell_coverselect->priv->listview));
-                
+
                 if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
                         return;
                 tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (ario_shell_coverselect->priv->liststore), 
@@ -589,8 +589,8 @@ ario_shell_coverselect_set_current_cover (ArioShellCoverselect *ario_shell_cover
 
         if (ario_cover_cover_exists (ario_shell_coverselect->priv->file_artist, ario_shell_coverselect->priv->file_album)) {
                 ario_cover_path = ario_cover_make_ario_cover_path (ario_shell_coverselect->priv->file_artist,
-                                                       ario_shell_coverselect->priv->file_album,
-                                                       NORMAL_COVER);
+                                                                   ario_shell_coverselect->priv->file_album,
+                                                                   NORMAL_COVER);
                 gtk_widget_show_all (ario_shell_coverselect->priv->current_cover);
                 pixbuf = gdk_pixbuf_new_from_file_at_size (ario_cover_path, CURRENT_COVER_SIZE, CURRENT_COVER_SIZE, NULL);
                 g_free (ario_cover_path);

@@ -114,17 +114,17 @@ struct ArioHeaderPrivate
 static GtkActionEntry ario_header_actions [] =
 {
         { "ControlPlayPause", GTK_STOCK_MEDIA_PLAY, N_("_Play/Pause"), "<control>space",
-          N_("Start playback"),
-          G_CALLBACK (ario_header_cmd_playpause) },
+                N_("Start playback"),
+                G_CALLBACK (ario_header_cmd_playpause) },
         { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), NULL,
-          N_("Stop playback"),
-          G_CALLBACK (ario_header_cmd_stop) },
+                N_("Stop playback"),
+                G_CALLBACK (ario_header_cmd_stop) },
         { "ControlNext", GTK_STOCK_MEDIA_NEXT, N_("_Next"), "<control>Right",
-          N_("Start playing the next song"),
-          G_CALLBACK (ario_header_cmd_next) },
+                N_("Start playing the next song"),
+                G_CALLBACK (ario_header_cmd_next) },
         { "ControlPrevious", GTK_STOCK_MEDIA_PREVIOUS, N_("P_revious"), "<control>Left",
-          N_("Start playing the previous song"),
-          G_CALLBACK (ario_header_cmd_previous) },
+                N_("Start playing the previous song"),
+                G_CALLBACK (ario_header_cmd_previous) },
 };
 
 static guint ario_header_n_actions = G_N_ELEMENTS (ario_header_actions);
@@ -162,8 +162,8 @@ ario_header_get_type (void)
                 };
 
                 ario_header_type = g_type_register_static (GTK_TYPE_HBOX,
-                                                      "ArioHeader",
-                                                      &our_info, 0);
+                                                           "ArioHeader",
+                                                           &our_info, 0);
         }
 
         return ario_header_type;
@@ -221,7 +221,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
 
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         header = ARIO_HEADER (parent_class->constructor (type, n_construct_properties,
-                                                     construct_properties));
+                                                         construct_properties));
 
 
         gtk_box_set_spacing (GTK_BOX (header), 12);
@@ -486,9 +486,9 @@ ario_header_new (GtkActionGroup *group, ArioMpd *mpd)
         GtkWidget *alignment;
 
         header = ARIO_HEADER (g_object_new (TYPE_ARIO_HEADER,
-                                       "action-group", group,
-                                       "mpd", mpd,
-                                       NULL));
+                                            "action-group", group,
+                                            "mpd", mpd,
+                                            NULL));
 
         /* Construct the volume button */
         header->priv->volume_button = GTK_WIDGET (ario_volume_new (header->priv->mpd));
@@ -730,7 +730,7 @@ slider_release_callback (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         header->priv->slider_dragging = FALSE;
         ario_mpd_set_current_elapsed (header->priv->mpd, 
-                                 (int) gtk_range_get_value (GTK_RANGE (header->priv->scale)));
+                                      (int) gtk_range_get_value (GTK_RANGE (header->priv->scale)));
         return FALSE;
 }
 

@@ -78,7 +78,7 @@ ario_source_get_type (void)
 
                 type = g_type_register_static (GTK_TYPE_NOTEBOOK,
                                                "ArioSource",
-                                                &our_info, 0);
+                                               &our_info, 0);
         }
         return type;
 }
@@ -160,9 +160,9 @@ ario_source_new (GtkUIManager *mgr,
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         source->priv->storedplaylists = ario_storedplaylists_new (mgr,
-                                                group,
-                                                mpd,
-                                                playlist);
+                                                                  group,
+                                                                  mpd,
+                                                                  playlist);
         gtk_notebook_append_page (GTK_NOTEBOOK (source),
                                   source->priv->storedplaylists,
                                   gtk_label_new (_("Playlists")));

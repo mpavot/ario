@@ -78,7 +78,7 @@ static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_source (ArioShell *shell);
 static void ario_shell_sync_mpd (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
-			                      ArioShell *shell);
+                                              ArioShell *shell);
 
 struct ArioShellPrivate
 {
@@ -111,58 +111,58 @@ static GtkActionEntry ario_shell_actions [] =
         { "Help", NULL, N_("_Help") },
 
         { "FileSave", GTK_STOCK_SAVE, N_("_Save Playlist"), "<control>S",
-          N_("Save Playlist"),
-          G_CALLBACK (ario_shell_cmd_save) },
+                N_("Save Playlist"),
+                G_CALLBACK (ario_shell_cmd_save) },
         { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>C",
-          N_("Connect"),
-          G_CALLBACK (ario_shell_cmd_connect) },
+                N_("Connect"),
+                G_CALLBACK (ario_shell_cmd_connect) },
         { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), "<control>D",
-          N_("Disconnect"),
-          G_CALLBACK (ario_shell_cmd_disconnect) },
+                N_("Disconnect"),
+                G_CALLBACK (ario_shell_cmd_disconnect) },
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
-          N_("Quit"),
-          G_CALLBACK (ario_shell_cmd_quit) },
+                N_("Quit"),
+                G_CALLBACK (ario_shell_cmd_quit) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
-          N_("Edit music player preferences"),
-          G_CALLBACK (ario_shell_cmd_preferences) },
+                N_("Edit music player preferences"),
+                G_CALLBACK (ario_shell_cmd_preferences) },
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
-          N_("Download covers form amazon"),
-          G_CALLBACK (ario_shell_cmd_covers) },
+                N_("Download covers form amazon"),
+                G_CALLBACK (ario_shell_cmd_covers) },
         { "Lyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
-          N_("Show song lyrics"),
-          G_CALLBACK (ario_shell_cmd_lyrics) },
+                N_("Show song lyrics"),
+                G_CALLBACK (ario_shell_cmd_lyrics) },
         { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
-          N_("Show information about the music player"),
-          G_CALLBACK (ario_shell_cmd_about) },
+                N_("Show information about the music player"),
+                G_CALLBACK (ario_shell_cmd_about) },
         { "HelpTranslate", GTK_STOCK_EDIT, N_("_Translate this application..."), NULL,
-          N_("Translate this application"),
-          G_CALLBACK (ario_shell_cmd_translate) },
+                N_("Translate this application"),
+                G_CALLBACK (ario_shell_cmd_translate) },
 };
 static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 
 static GtkRadioActionEntry ario_shell_radio [] =
 {
         { "LibraryView", NULL, N_("_Library"), NULL,
-          N_("Library view"),
-          ARIO_SOURCE_BROWSER }
+                N_("Library view"),
+                ARIO_SOURCE_BROWSER }
 #ifdef ENABLE_RADIOS
         ,
-        { "RadioView", NULL, N_("_Web Radios"), NULL,
-          N_("Web Radios view"),
-          ARIO_SOURCE_RADIO }
+                { "RadioView", NULL, N_("_Web Radios"), NULL,
+                        N_("Web Radios view"),
+                        ARIO_SOURCE_RADIO }
 #endif  /* ENABLE_RADIOS */
 #ifdef ENABLE_SEARCH
         ,
-        /* Translators - This "Search" is a name (like in "a search"), not a verb */
-        { "SearchView", NULL, N_("_Search"), NULL,
-          N_("Search view"),
-          ARIO_SOURCE_SEARCH }
+                /* Translators - This "Search" is a name (like in "a search"), not a verb */
+                { "SearchView", NULL, N_("_Search"), NULL,
+                        N_("Search view"),
+                        ARIO_SOURCE_SEARCH }
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         ,
-        { "StoredplaylistsView", NULL, N_("_Playlists"), NULL,
-          N_("Playlists view"),
-          ARIO_SOURCE_PLAYLISTS }
+                { "StoredplaylistsView", NULL, N_("_Playlists"), NULL,
+                        N_("Playlists view"),
+                        ARIO_SOURCE_PLAYLISTS }
 #endif  /* ENABLE_STOREDPLAYLISTS */
 };
 static guint ario_shell_n_radio = G_N_ELEMENTS (ario_shell_radio);
@@ -174,7 +174,7 @@ ario_shell_get_type (void)
 {
         ARIO_LOG_FUNCTION_START
         static GType type = 0;
-                                                                              
+
         if (type == 0)
         { 
                 static GTypeInfo info =
@@ -278,7 +278,7 @@ ario_shell_construct (ArioShell *shell)
         g_signal_connect_object (G_OBJECT (win), "delete_event",
                                  G_CALLBACK (ario_shell_window_delete_cb),
                                  shell, 0);
-  
+
         shell->priv->ui_manager = gtk_ui_manager_new ();
         shell->priv->actiongroup = gtk_action_group_new ("MainActions");
 
@@ -360,7 +360,7 @@ ario_shell_construct (ArioShell *shell)
                 g_signal_connect_object (G_OBJECT (shell->priv->firstlaunch), "destroy",
                                          G_CALLBACK (ario_shell_firstlaunch_delete_cb),
                                          shell, 0);
-	        gtk_widget_show_all (GTK_WIDGET (shell->priv->firstlaunch));
+                gtk_widget_show_all (GTK_WIDGET (shell->priv->firstlaunch));
         } else {
                 ario_shell_show (shell);
         }
@@ -641,9 +641,9 @@ ario_shell_sync_window_state (ArioShell *shell)
         gtk_window_resize (GTK_WINDOW (shell->priv->window),
                            width, height);
         gtk_window_set_geometry_hints (GTK_WINDOW (shell->priv->window),
-                                        NULL,
-                                        &hints,
-                                        0);
+                                       NULL,
+                                       &hints,
+                                       0);
 
         if (maximized)
                 gtk_window_maximize (GTK_WINDOW (shell->priv->window));
@@ -666,8 +666,8 @@ ario_shell_sync_mpd (ArioShell *shell)
 
 static void
 ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
-			          ArioShell *shell)
+                                  ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-	ario_shell_show (shell);
+        ario_shell_show (shell);
 }

@@ -41,16 +41,16 @@ static void ario_shell_lyrics_class_init (ArioShellLyricsClass *klass);
 static void ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_finalize (GObject *object);
 static void ario_shell_lyrics_set_property (GObject *object,
-                                           guint prop_id,
-                                           const GValue *value,
-                                           GParamSpec *pspec);
+                                            guint prop_id,
+                                            const GValue *value,
+                                            GParamSpec *pspec);
 static void ario_shell_lyrics_get_property (GObject *object,
-                                           guint prop_id,
-                                           GValue *value,
-                                           GParamSpec *pspec);
+                                            guint prop_id,
+                                            GValue *value,
+                                            GParamSpec *pspec);
 static gboolean ario_shell_lyrics_window_delete_cb (GtkWidget *window,
-                                                   GdkEventAny *event,
-                                                   ArioShellLyrics *shell_lyrics);
+                                                    GdkEventAny *event,
+                                                    ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_close_cb (GtkButton *button,
                                         ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_save_cb (GtkButton *button,
@@ -176,8 +176,8 @@ ario_shell_lyrics_new (ArioMpd *mpd)
                 is_instantiated = TRUE;
 
         shell_lyrics = g_object_new (TYPE_ARIO_SHELL_LYRICS,
-                                   "mpd", mpd,
-                                   NULL);
+                                     "mpd", mpd,
+                                     NULL);
 
         g_return_val_if_fail (shell_lyrics->priv != NULL, NULL);
 
@@ -292,13 +292,13 @@ ario_shell_lyrics_finalize (GObject *object)
 
 static void
 ario_shell_lyrics_set_property (GObject *object,
-                               guint prop_id,
-                               const GValue *value,
-                               GParamSpec *pspec)
+                                guint prop_id,
+                                const GValue *value,
+                                GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellLyrics *shell_lyrics = ARIO_SHELL_LYRICS (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 shell_lyrics->priv->mpd = g_value_get_object (value);
@@ -317,9 +317,9 @@ ario_shell_lyrics_set_property (GObject *object,
 
 static void 
 ario_shell_lyrics_get_property (GObject *object,
-                               guint prop_id,
-                               GValue *value,
-                               GParamSpec *pspec)
+                                guint prop_id,
+                                GValue *value,
+                                GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellLyrics *shell_lyrics = ARIO_SHELL_LYRICS (object);

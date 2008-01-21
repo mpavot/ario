@@ -103,21 +103,21 @@ struct ArioPlaylistPrivate
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
-        
+
         int indice;
 };
 
 static GtkActionEntry ario_playlist_actions [] =
 {
         { "PlaylistClear", GTK_STOCK_CLEAR, N_("_Clear"), NULL,
-          N_("Clear the playlist"),
-          G_CALLBACK (ario_playlist_cmd_clear) },
+                N_("Clear the playlist"),
+                G_CALLBACK (ario_playlist_cmd_clear) },
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
-          N_("Remove the selected songs"),
-          G_CALLBACK (ario_playlist_cmd_remove) },
+                N_("Remove the selected songs"),
+                G_CALLBACK (ario_playlist_cmd_remove) },
         { "PlaylistSave", GTK_STOCK_SAVE, N_("_Save"), NULL,
-          N_("Save the playlist"),
-          G_CALLBACK (ario_playlist_cmd_save) }
+                N_("Save the playlist"),
+                G_CALLBACK (ario_playlist_cmd_save) }
 };
 
 static guint ario_playlist_n_actions = G_N_ELEMENTS (ario_playlist_actions);
@@ -178,7 +178,7 @@ ario_playlist_get_type (void)
 
                 type = g_type_register_static (GTK_TYPE_HBOX,
                                                "ArioPlaylist",
-                                                &our_info, 0);
+                                               &our_info, 0);
         }
         return type;
 }
@@ -420,7 +420,7 @@ ario_playlist_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioPlaylist *playlist = ARIO_PLAYLIST (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 playlist->priv->mpd = g_value_get_object (value);
@@ -789,8 +789,8 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
         }
 
         ario_playlist_add_songs (playlist,
-                            filenames,
-                            x, y);
+                                 filenames,
+                                 x, y);
 
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
@@ -881,8 +881,8 @@ ario_playlist_drop_songs (ArioPlaylist *playlist,
                 filenames = g_slist_append (filenames, songs[i]);
 
         ario_playlist_add_songs (playlist,
-                            filenames,
-                            x, y);
+                                 filenames,
+                                 x, y);
 
         g_strfreev (songs);
         g_slist_free (filenames);
@@ -910,8 +910,8 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
         }
 
         ario_playlist_add_albums (playlist,
-                             albums_list,
-                             x, y);
+                                  albums_list,
+                                  x, y);
 
         g_strfreev (artists_albums);
 
@@ -1072,7 +1072,7 @@ static void
 ario_playlist_remove (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        
+
         playlist->priv->indice = 0;
         gtk_tree_selection_selected_foreach (playlist->priv->selection,
                                              ario_playlist_selection_remove_foreach,
@@ -1134,10 +1134,10 @@ ario_playlist_cmd_save (GtkAction *action,
 
         if (ario_mpd_save_playlist (playlist->priv->mpd, name)) {
                 dialog = gtk_message_dialog_new (NULL,
-                                                GTK_DIALOG_MODAL,
-                                                GTK_MESSAGE_QUESTION,
-                                                GTK_BUTTONS_YES_NO,
-                                                _("Playlist already exists. Do you want to ovewrite it?"));
+                                                 GTK_DIALOG_MODAL,
+                                                 GTK_MESSAGE_QUESTION,
+                                                 GTK_BUTTONS_YES_NO,
+                                                 _("Playlist already exists. Do you want to ovewrite it?"));
 
                 retval = gtk_dialog_run (GTK_DIALOG (dialog));
                 gtk_widget_destroy (dialog);

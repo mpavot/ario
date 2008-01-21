@@ -74,8 +74,8 @@ ario_status_bar_get_type (void)
                 };
 
                 ario_status_bar_type = g_type_register_static (GTK_TYPE_STATUSBAR,
-                                                         "ArioStatusBar",
-                                                         &our_info, 0);
+                                                               "ArioStatusBar",
+                                                               &our_info, 0);
         }
 
         return ario_status_bar_type;

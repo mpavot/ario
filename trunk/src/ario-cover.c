@@ -42,9 +42,9 @@ static char* ario_cover_make_amazon_xml_uri (const char *artist,
                                              const char *album);
 
 static GSList* ario_cover_parse_amazon_xml_file (char *xmldata,
-                                                int size,
-                                                ArioCoverAmazonOperation operation,
-                                                ArioCoverAmazonCoversSize ario_cover_size);
+                                                 int size,
+                                                 ArioCoverAmazonOperation operation,
+                                                 ArioCoverAmazonCoversSize ario_cover_size);
 
 gchar *
 ario_cover_make_ario_cover_path (const gchar *artist,
@@ -86,13 +86,13 @@ ario_cover_cover_exists (const gchar *artist,
 
         /* The path for the normal cover */
         ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                            album,
-                                            NORMAL_COVER);
+                                                           album,
+                                                           NORMAL_COVER);
 
         /* The path for the small cover */
         small_ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                  album,
-                                                  SMALL_COVER);
+                                                                 album,
+                                                                 SMALL_COVER);
 
         /* We consider that the cover exists only if the normal and small covers exist */
         result = (ario_util_uri_exists (ario_cover_path) && ario_util_uri_exists (small_ario_cover_path));
@@ -235,7 +235,7 @@ ario_cover_make_amazon_xml_uri (const char *artist,
         tmp = g_utf8_normalize(keywords, -1, G_NORMALIZE_ALL);
         g_free(keywords);
         keywords = tmp;
-        
+
         /* Converts all upper case ASCII letters to lower case ASCII letters */
         tmp = g_ascii_strdown(keywords, -1);
         g_free(keywords);
@@ -254,21 +254,21 @@ ario_cover_make_amazon_xml_uri (const char *artist,
 
         /* We escape the other special characters */
         length = g_utf8_strlen(keywords, -1);
-	for(i = 0; i < length; ++i)
-	{
-		if (!g_unichar_isalnum(keywords[i])) {
-		        keywords[i]=' ';
-		}
-	}
-	
+        for(i = 0; i < length; ++i)
+        {
+                if (!g_unichar_isalnum(keywords[i])) {
+                        keywords[i]=' ';
+                }
+        }
+
         /* We escape spaces */
         ario_util_string_replace (&keywords, " ", "%20");
-        
+
         /*
-        tmp = gnome_vfs_escape_string (keywords);
-        g_free (keywords);
-        keywords = tmp;
-        */
+           tmp = gnome_vfs_escape_string (keywords);
+           g_free (keywords);
+           keywords = tmp;
+           */
 
         /* What is the amazon country choosen in the preferences? */
         locale = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
@@ -357,8 +357,8 @@ ario_cover_load_amazon_covers (const char *artist,
                 if (temp->data) {
                         /* For each cover uri, we load the image data in temp_contents */
                         ario_util_download_file (temp->data,
-                                            &temp_size,
-                                            &temp_contents);
+                                                 &temp_size,
+                                                 &temp_contents);
                         if (ario_cover_size_is_valid (temp_size)) {
                                 /* If the cover is not too big and not too small (blank amazon image), we append it to file_contents */
                                 g_array_append_val (*file_size, temp_size);
@@ -464,13 +464,13 @@ ario_cover_save_cover (const gchar *artist,
 
         /* The path for the normal cover */
         ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                               album,
-                                               NORMAL_COVER);
+                                                           album,
+                                                           NORMAL_COVER);
 
         /* The path for the small cover */
         small_ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                     album,
-                                                     SMALL_COVER);
+                                                                 album,
+                                                                 SMALL_COVER);
 
         loader = gdk_pixbuf_loader_new ();
 
