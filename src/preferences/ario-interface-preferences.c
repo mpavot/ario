@@ -36,9 +36,9 @@ static void ario_interface_preferences_init (ArioInterfacePreferences *interface
 static void ario_interface_preferences_finalize (GObject *object);
 static void ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_preferences);
 void ario_interface_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
-                                                    ArioInterfacePreferences *interface_preferences);
+                                                              ArioInterfacePreferences *interface_preferences);
 void ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
-                                                 ArioInterfacePreferences *interface_preferences);
+                                                           ArioInterfacePreferences *interface_preferences);
 
 static const char *trayicon_behavior[] = {
         N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE
@@ -77,8 +77,8 @@ ario_interface_preferences_get_type (void)
                 };
 
                 ario_interface_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                           "ArioInterfacePreferences",
-                                                           &our_info, 0);
+                                                                          "ArioInterfacePreferences",
+                                                                          &our_info, 0);
         }
 
         return ario_interface_preferences_type;
@@ -125,7 +125,7 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "showtabs_checkbutton");
         interface_preferences->priv->trayicon_combobox = 
                 glade_xml_get_widget (xml, "trayicon_combobox");
-                
+
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 
         for (i = 0; i < TRAY_ICON_N_BEHAVIOR; ++i) {
@@ -145,7 +145,7 @@ ario_interface_preferences_new (void)
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (interface_preferences->priv->trayicon_combobox), renderer, TRUE);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (interface_preferences->priv->trayicon_combobox), renderer,
                                         "text", 0, NULL);
-        
+
         ario_interface_preferences_sync_interface (interface_preferences);
 
         gtk_box_pack_start (GTK_BOX (interface_preferences), glade_xml_get_widget (xml, "interface_vbox"), TRUE, TRUE, 0);
@@ -187,7 +187,7 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
 
 void
 ario_interface_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
-                                               ArioInterfacePreferences *interface_preferences)
+                                                         ArioInterfacePreferences *interface_preferences)
 {
         ARIO_LOG_FUNCTION_START
         int i;
@@ -200,7 +200,7 @@ ario_interface_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combo
 
 void
 ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
-                                            ArioInterfacePreferences *interface_preferences)
+                                                      ArioInterfacePreferences *interface_preferences)
 {
         ARIO_LOG_FUNCTION_START
         eel_gconf_set_boolean (CONF_SHOW_TABS,

@@ -42,13 +42,13 @@ static void ario_radio_class_init (ArioRadioClass *klass);
 static void ario_radio_init (ArioRadio *radio);
 static void ario_radio_finalize (GObject *object);
 static void ario_radio_set_property (GObject *object,
-                                       guint prop_id,
-                                       const GValue *value,
-                                       GParamSpec *pspec);
+                                     guint prop_id,
+                                     const GValue *value,
+                                     GParamSpec *pspec);
 static void ario_radio_get_property (GObject *object,
-                                       guint prop_id,
-                                       GValue *value,
-                                       GParamSpec *pspec);
+                                     guint prop_id,
+                                     GValue *value,
+                                     GParamSpec *pspec);
 static void ario_radio_state_changed_cb (ArioMpd *mpd,
                                          ArioRadio *radio);
 static void ario_radio_add_in_playlist (ArioRadio *radio);
@@ -106,17 +106,17 @@ struct ArioRadioPrivate
 static GtkActionEntry ario_radio_actions [] =
 {
         { "RadioAddRadios", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-          N_("Add to the playlist"),
-          G_CALLBACK (ario_radio_cmd_add_radios) },
+                N_("Add to the playlist"),
+                G_CALLBACK (ario_radio_cmd_add_radios) },
         { "RadioNewRadio", GTK_STOCK_ADD, N_("Add a _new radio"), NULL,
-          N_("Add a new radio"),
-          G_CALLBACK (ario_radio_cmd_new_radio) },
+                N_("Add a new radio"),
+                G_CALLBACK (ario_radio_cmd_new_radio) },
         { "RadioDeleteRadios", GTK_STOCK_DELETE, N_("_Delete this radios"), NULL,
-          N_("Delete this radios"),
-          G_CALLBACK (ario_radio_cmd_delete_radios) },
+                N_("Delete this radios"),
+                G_CALLBACK (ario_radio_cmd_delete_radios) },
         { "RadioProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-          N_("Change properties of this radio"),
-          G_CALLBACK (ario_radio_cmd_radio_properties) }
+                N_("Change properties of this radio"),
+                G_CALLBACK (ario_radio_cmd_radio_properties) }
 };
 static guint ario_radio_n_actions = G_N_ELEMENTS (ario_radio_actions);
 
@@ -164,7 +164,7 @@ ario_radio_get_type (void)
 
                 type = g_type_register_static (GTK_TYPE_HBOX,
                                                "ArioRadio",
-                                                &our_info, 0);
+                                               &our_info, 0);
         }
         return type;
 }
@@ -309,7 +309,7 @@ ario_radio_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio = ARIO_RADIO (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 radio->priv->mpd = g_value_get_object (value);
@@ -339,9 +339,9 @@ ario_radio_set_property (GObject *object,
 
 static void 
 ario_radio_get_property (GObject *object,
-                           guint prop_id,
-                           GValue *value,
-                           GParamSpec *pspec)
+                         guint prop_id,
+                         GValue *value,
+                         GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio = ARIO_RADIO (object);
@@ -367,9 +367,9 @@ ario_radio_get_property (GObject *object,
 
 GtkWidget *
 ario_radio_new (GtkUIManager *mgr,
-                  GtkActionGroup *group,
-                  ArioMpd *mpd,
-                  ArioPlaylist *playlist)
+                GtkActionGroup *group,
+                ArioMpd *mpd,
+                ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio;
@@ -692,8 +692,8 @@ ario_radio_button_press_cb (GtkWidget *widget,
 
 static gboolean
 ario_radio_button_release_cb (GtkWidget *widget,
-                                GdkEventButton *event,
-                                ArioRadio *radio)
+                              GdkEventButton *event,
+                              ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
         if (!radio->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
@@ -716,8 +716,8 @@ ario_radio_button_release_cb (GtkWidget *widget,
 
 static gboolean
 ario_radio_motion_notify (GtkWidget *widget, 
-                            GdkEventMotion *event,
-                            ArioRadio *radio)
+                          GdkEventMotion *event,
+                          ArioRadio *radio)
 {
         // desactivated to make the logs more readable
         // ARIO_LOG_FUNCTION_START
@@ -780,7 +780,7 @@ ario_radio_drag_data_get_cb (GtkWidget * widget,
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) radios->str,
                                 strlen (radios->str) * sizeof(guchar));
-        
+
         g_string_free (radios, TRUE);
 }
 
@@ -999,10 +999,10 @@ ario_radio_cmd_delete_radios (GtkAction *action,
         gint retval = GTK_RESPONSE_NO;
 
         dialog = gtk_message_dialog_new (NULL,
-                                        GTK_DIALOG_MODAL,
-                                        GTK_MESSAGE_QUESTION,
-                                        GTK_BUTTONS_YES_NO,
-                                        _("Are you sure you want to delete all the selected radios?"));
+                                         GTK_DIALOG_MODAL,
+                                         GTK_MESSAGE_QUESTION,
+                                         GTK_BUTTONS_YES_NO,
+                                         _("Are you sure you want to delete all the selected radios?"));
 
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
         gtk_widget_destroy (dialog);

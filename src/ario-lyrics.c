@@ -125,20 +125,20 @@ ario_lyrics_make_first_xml_uri (const gchar *artist,
 
         /* We escape special characters */
         length = g_utf8_strlen (conv_artist, -1);
-	for(i = 0; i < length; ++i)
-	{
-		if (!g_unichar_isalnum (conv_artist[i])) {
-		        conv_artist[i]=' ';
-		}
-	}
+        for(i = 0; i < length; ++i)
+        {
+                if (!g_unichar_isalnum (conv_artist[i])) {
+                        conv_artist[i]=' ';
+                }
+        }
         length = g_utf8_strlen (conv_title, -1);
-	for(i = 0; i < length; ++i)
-	{
-		if (!g_unichar_isalnum (conv_title[i])) {
-		        conv_title[i]=' ';
-		}
-	}
-	
+        for(i = 0; i < length; ++i)
+        {
+                if (!g_unichar_isalnum (conv_title[i])) {
+                        conv_title[i]=' ';
+                }
+        }
+
         /* We escape spaces */
         ario_util_string_replace (&conv_artist, " ", "%20");
         ario_util_string_replace (&conv_title, " ", "%20");

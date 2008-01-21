@@ -53,14 +53,14 @@ static void ario_tray_icon_get_property (GObject *object,
                                          GParamSpec *pspec);
 static void ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon);
 static void ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
-                                    GdkEvent *event,
-                                    GtkWidget *widget);
+                                                  GdkEvent *event,
+                                                  GtkWidget *widget);
 static void ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
-                                    GdkEvent *event,
-                                    GtkWidget *widget);
+                                                  GdkEvent *event,
+                                                  GtkWidget *widget);
 static void ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
-                                       GtkAllocation *allocation,
-                                       GtkWidget *tooltip);
+                                                     GtkAllocation *allocation,
+                                                     GtkWidget *tooltip);
 static void ario_tray_icon_construct_tooltip (ArioTrayIcon *icon);
 static void ario_tray_icon_set_visibility (ArioTrayIcon *tray, int state);
 static void ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
@@ -214,7 +214,7 @@ ario_tray_icon_init (ArioTrayIcon *icon)
         image = gtk_image_new_from_stock ("ario",
                                           GTK_ICON_SIZE_SMALL_TOOLBAR);
         gtk_container_add (GTK_CONTAINER (icon->priv->ebox), image);
-        
+
         icon->priv->window_x = -1;
         icon->priv->window_y = -1;
         icon->priv->window_w = -1;
@@ -238,7 +238,7 @@ ario_tray_icon_constructor (GType type, guint n_construct_properties,
 
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         tray = ARIO_TRAY_ICON (parent_class->constructor (type, n_construct_properties,
-                                                        construct_properties));
+                                                          construct_properties));
 
         ario_tray_icon_set_visibility (tray, VISIBILITY_VISIBLE);
         return G_OBJECT (tray);
@@ -256,7 +256,7 @@ ario_tray_icon_finalize (GObject *object)
         tray = ARIO_TRAY_ICON (object);
 
         g_return_if_fail (tray->priv != NULL);
-        
+
         gtk_object_destroy (GTK_OBJECT (tray->priv->tooltip));
 
         g_free (tray->priv);
@@ -357,8 +357,8 @@ ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
 
 static void
 ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
-                                    GdkEvent *event,
-                                    GtkWidget *widget)
+                                      GdkEvent *event,
+                                      GtkWidget *widget)
 {
         icon->priv->tooltips_pointer_above = TRUE;
         ario_tray_icon_update_tooltip_visibility (icon);
@@ -367,8 +367,8 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
 
 static void
 ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
-                                    GdkEvent *event,
-                                    GtkWidget *widget)
+                                      GdkEvent *event,
+                                      GtkWidget *widget)
 {
         icon->priv->tooltips_pointer_above = FALSE;
         ario_tray_icon_update_tooltip_visibility (icon);
@@ -377,8 +377,8 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
 
 static void
 ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
-                                       GtkAllocation *allocation,
-                                       GtkWidget *tooltip)
+                                         GtkAllocation *allocation,
+                                         GtkWidget *tooltip)
 {
         sexy_tooltip_position_to_widget (SEXY_TOOLTIP (icon->priv->tooltip),
                                          icon->priv->ebox);
@@ -450,10 +450,10 @@ ario_tray_icon_double_click (ArioTrayIcon *icon)
 
         switch (trayicon_behavior) {
         case TRAY_ICON_PLAY_PAUSE:
-                        if (ario_mpd_is_paused (icon->priv->mpd))
-                                ario_mpd_do_play (icon->priv->mpd);
-                        else
-                                ario_mpd_do_pause (icon->priv->mpd);
+                if (ario_mpd_is_paused (icon->priv->mpd))
+                        ario_mpd_do_play (icon->priv->mpd);
+                else
+                        ario_mpd_do_pause (icon->priv->mpd);
                 break;
 
         case TRAY_ICON_NEXT_SONG:
@@ -689,7 +689,7 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
         switch (state)
         {
         case VISIBILITY_HIDDEN:
-               case VISIBILITY_VISIBLE:
+        case VISIBILITY_VISIBLE:
                 if (icon->priv->visible != state)
                         ario_tray_icon_set_visibility (icon, VISIBILITY_TOGGLE);
                 break;

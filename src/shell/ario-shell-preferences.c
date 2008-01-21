@@ -34,19 +34,19 @@ static void ario_shell_preferences_class_init (ArioShellPreferencesClass *klass)
 static void ario_shell_preferences_init (ArioShellPreferences *shell_preferences);
 static void ario_shell_preferences_finalize (GObject *object);
 static void ario_shell_preferences_set_property (GObject *object,
-                                           guint prop_id,
-                                           const GValue *value,
-                                           GParamSpec *pspec);
+                                                 guint prop_id,
+                                                 const GValue *value,
+                                                 GParamSpec *pspec);
 static void ario_shell_preferences_get_property (GObject *object,
-                                           guint prop_id,
-                                           GValue *value,
-                                           GParamSpec *pspec);
+                                                 guint prop_id,
+                                                 GValue *value,
+                                                 GParamSpec *pspec);
 static gboolean ario_shell_preferences_window_delete_cb (GtkWidget *window,
-                                                   GdkEventAny *event,
-                                                   ArioShellPreferences *shell_preferences);
+                                                         GdkEventAny *event,
+                                                         ArioShellPreferences *shell_preferences);
 static void ario_shell_preferences_response_cb (GtkDialog *dialog,
-                                          int response_id,
-                                          ArioShellPreferences *shell_preferences);
+                                                int response_id,
+                                                ArioShellPreferences *shell_preferences);
 enum
 {
         PROP_0,
@@ -84,8 +84,8 @@ ario_shell_preferences_get_type (void)
                 };
 
                 ario_shell_preferences_type = g_type_register_static (GTK_TYPE_DIALOG,
-                                                           "ArioShellPreferences",
-                                                           &our_info, 0);
+                                                                      "ArioShellPreferences",
+                                                                      &our_info, 0);
         }
 
         return ario_shell_preferences_type;
@@ -156,8 +156,8 @@ ario_shell_preferences_new (ArioMpd *mpd)
         GtkWidget *widget;
 
         shell_preferences = g_object_new (TYPE_ARIO_SHELL_PREFERENCES,
-                                   "mpd", mpd,
-                                   NULL);
+                                          "mpd", mpd,
+                                          NULL);
 
         g_return_val_if_fail (shell_preferences->priv != NULL, NULL);
 
@@ -204,13 +204,13 @@ ario_shell_preferences_finalize (GObject *object)
 
 static void
 ario_shell_preferences_set_property (GObject *object,
-                               guint prop_id,
-                               const GValue *value,
-                               GParamSpec *pspec)
+                                     guint prop_id,
+                                     const GValue *value,
+                                     GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellPreferences *shell_preferences = ARIO_SHELL_PREFERENCES (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 shell_preferences->priv->mpd = g_value_get_object (value);
@@ -223,9 +223,9 @@ ario_shell_preferences_set_property (GObject *object,
 
 static void 
 ario_shell_preferences_get_property (GObject *object,
-                               guint prop_id,
-                               GValue *value,
-                               GParamSpec *pspec)
+                                     guint prop_id,
+                                     GValue *value,
+                                     GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellPreferences *shell_preferences = ARIO_SHELL_PREFERENCES (object);
@@ -242,8 +242,8 @@ ario_shell_preferences_get_property (GObject *object,
 
 static gboolean
 ario_shell_preferences_window_delete_cb (GtkWidget *window,
-                                   GdkEventAny *event,
-                                   ArioShellPreferences *shell_preferences)
+                                         GdkEventAny *event,
+                                         ArioShellPreferences *shell_preferences)
 {
         ARIO_LOG_FUNCTION_START
         gtk_widget_hide (GTK_WIDGET (shell_preferences));
@@ -254,8 +254,8 @@ ario_shell_preferences_window_delete_cb (GtkWidget *window,
 
 static void
 ario_shell_preferences_response_cb (GtkDialog *dialog,
-                              int response_id,
-                              ArioShellPreferences *shell_preferences)
+                                    int response_id,
+                                    ArioShellPreferences *shell_preferences)
 {
         ARIO_LOG_FUNCTION_START
         if (response_id == GTK_RESPONSE_CLOSE) {

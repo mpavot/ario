@@ -104,8 +104,8 @@ ario_volume_get_type (void)
                 };
 
                 ario_volume_type = g_type_register_static (GTK_TYPE_EVENT_BOX,
-                                                       "ArioVolume",
-                                                       &our_info, 0);
+                                                           "ArioVolume",
+                                                           &our_info, 0);
         }
 
         return ario_volume_type;
@@ -149,16 +149,16 @@ ario_volume_init (ArioVolume *volume)
         gtk_container_add (GTK_CONTAINER (volume), volume->priv->button);
 
         volume->priv->max_image = gtk_image_new_from_stock ("volume-max",
-                                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
+                                                            GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (G_OBJECT (volume->priv->max_image));
         volume->priv->medium_image = gtk_image_new_from_stock ("volume-medium",
-                                                             GTK_ICON_SIZE_LARGE_TOOLBAR);
+                                                               GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (G_OBJECT (volume->priv->medium_image));
         volume->priv->min_image = gtk_image_new_from_stock ("volume-min",
-                                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
+                                                            GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (G_OBJECT (volume->priv->min_image));
         volume->priv->zero_image = gtk_image_new_from_stock ("volume-zero",
-                                                            GTK_ICON_SIZE_LARGE_TOOLBAR);
+                                                             GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (G_OBJECT (volume->priv->zero_image));
 
         gtk_container_add (GTK_CONTAINER (volume->priv->button), volume->priv->max_image);
@@ -193,7 +193,7 @@ ario_volume_init (ArioVolume *volume)
 
         event = gtk_event_box_new ();
         /* This signal is to not let button press close the popup when the press is
-        ** in the scale */
+         ** in the scale */
         g_signal_connect_after (event, "button_press_event",
                                 G_CALLBACK (scale_button_event_cb), volume);
 
@@ -212,7 +212,7 @@ ario_volume_init (ArioVolume *volume)
                                  volume, 0);
 
         /* button event on the scale widget are not catched by its parent window
-        ** so we must connect to this widget as well */
+         ** so we must connect to this widget as well */
         g_signal_connect_object (G_OBJECT (volume->priv->scale),
                                  "button-release-event",
                                  (GCallback) scale_button_release_event_cb,
@@ -233,7 +233,7 @@ ario_volume_init (ArioVolume *volume)
         gtk_container_add (GTK_CONTAINER (frame), inner_frame);
 
         /* Translators - The + and - refer to increasing and decreasing the volume.
-        ** I don't know if there are sensible alternatives in other languages */
+         ** I don't know if there are sensible alternatives in other languages */
         pluslabel = gtk_label_new (_("+"));
         minuslabel = gtk_label_new (_("-"));
 
@@ -253,7 +253,7 @@ ario_volume_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioVolume *volume = ARIO_VOLUME (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 volume->priv->mpd = g_value_get_object (value);
@@ -371,17 +371,17 @@ clicked_cb (GtkButton *button,
 
         gint volume_slider_x;
         gint volume_slider_y;
-        
 
-/*         if (GTK_WIDGET_VISIBLE (GTK_WIDGET (volume->priv->window))) */
-/*                 return; */
+
+        /*         if (GTK_WIDGET_VISIBLE (GTK_WIDGET (volume->priv->window))) */
+        /*                 return; */
 
         /*
          * Position the popup right next to the button.
          */
-        
+
         max_y = gdk_screen_height ();
-        
+
         gtk_widget_size_request (GTK_WIDGET (volume->priv->window), &req);
 
         gdk_window_get_origin (gtk_widget_get_parent_window (GTK_BIN (volume->priv->button)->child), &x, &y);
@@ -389,12 +389,12 @@ clicked_cb (GtkButton *button,
 
 
 
-        
+
         gtk_widget_show_all (volume->priv->window);
         gdk_drawable_get_size (gtk_widget_get_parent_window (GTK_BIN (volume->priv->window)->child), &window_width, &window_height);
-        
+
         volume_slider_x = x + (button_width - window_width) / 2;
-        
+
         if (y + button_width + window_height + spacing < max_y) {
                 /* if volume slider will fit on the screen, display it under
                  * the volume button
@@ -404,7 +404,7 @@ clicked_cb (GtkButton *button,
                 /* otherwise display it above the volume button */
                 volume_slider_y = y - window_height - spacing;
         }
-        
+
         gtk_window_move (GTK_WINDOW (volume->priv->window), volume_slider_x, volume_slider_y);
 
         /*
@@ -482,7 +482,7 @@ ario_volume_popup_hide (ArioVolume *volume)
 
         gtk_widget_hide (GTK_WIDGET (volume->priv->window));
 
-/*         gtk_frame_set_shadow_type (GTK_FRAME (data->frame), GTK_SHADOW_NONE); */
+        /*         gtk_frame_set_shadow_type (GTK_FRAME (data->frame), GTK_SHADOW_NONE); */
 }
 
 static gboolean

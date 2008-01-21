@@ -26,7 +26,7 @@ char*                   ario_util_format_total_time          (int time);
 gchar*                  ario_util_format_track               (gchar *track);
 
 gchar*                  ario_util_format_title               (ArioMpdSong *mpd_song);
- 
+
 void                    ario_util_init_stock_icons           (void);
 
 gint                    ario_util_abs                        (gint a);
@@ -46,7 +46,8 @@ void                    ario_util_download_file              (const char *uri,
                                                               char** data);
 void                    ario_util_string_replace             (char **string,
                                                               const char *old,
-                                                              const char *new);int                     ario_util_min		             (int a,
+                                                              const char *new);
+int                     ario_util_min		             (int a,
                                                               int b);
 int                     ario_util_max		             (int a,
                                                               int b);

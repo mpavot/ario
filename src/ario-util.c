@@ -37,7 +37,7 @@ ario_util_format_time (int time)
 {
         ARIO_LOG_FUNCTION_START
         int sec, min;
-        
+
         if (time < 0)
                 return g_strdup_printf (_("n/a"));
 
@@ -93,7 +93,7 @@ ario_util_format_total_time (int time)
                 g_free (res);
                 res = temp2;
         }
-                
+
         return res;
 }
 
@@ -144,7 +144,7 @@ ario_util_format_title (ArioMpdSong *mpd_song)
                                 splited_title = next_splited_title;
                                 next_splited_title = splited_title + 1;
                         }
-                        
+
                         if (*splited_title) {
                                 splited_filenames = g_strsplit (*splited_title, ".", 2);
                                 res = g_strdup (*splited_filenames);
@@ -240,7 +240,7 @@ ario_util_config_dir (void)
                 if (!g_file_test (config_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
                         ario_util_mkdir (config_dir);
         }
-        
+
         return config_dir;
 }
 
@@ -331,13 +331,13 @@ ario_util_download_file (const char *uri,
         CURL* curl = curl_easy_init();
         if(!curl)
                 return;
-         
+
         *size = 0;
         *data = NULL;
 
         download_data.size = 0;
         download_data.data = NULL;
-             
+
         /* set uri */
         curl_easy_setopt(curl, CURLOPT_URL, uri);
         /* set callback data */
@@ -363,10 +363,10 @@ ario_util_download_file (const char *uri,
         }
 
         curl_easy_perform(curl);
-        
+
         *size = download_data.size;
         *data = download_data.data;
-        
+
         g_free(address);
         curl_easy_cleanup(curl);
 }
@@ -382,7 +382,7 @@ ario_util_string_replace (char **string,
         int oldlen = strlen (old);
         int newlen = strlen (new);
         int diff = newlen - oldlen;
-        
+
         while (left >= oldlen) {
                 if (strncmp (offset + *string, old, oldlen) != 0) {
                         --left;
@@ -401,7 +401,7 @@ ario_util_string_replace (char **string,
                         memmove (offset + *string + newlen,
                                  offset + *string +oldlen,
                                  left);
-                        
+
                         memcpy (offset + *string,
                                 new,
                                 newlen);
@@ -411,7 +411,7 @@ ario_util_string_replace (char **string,
                         memmove (offset + *string + newlen,
                                  offset + *string + oldlen,
                                  left);
-                        
+
                         memcpy (offset + *string,
                                 new,
                                 newlen);
@@ -426,7 +426,7 @@ ario_util_min (int a,
                int b)
 {
         ARIO_LOG_FUNCTION_START
-	return (a > b ? b : a);
+        return (a > b ? b : a);
 }
 
 int
@@ -434,5 +434,5 @@ ario_util_max (int a,
                int b)
 {
         ARIO_LOG_FUNCTION_START
-	return (a > b ? a : b);
+        return (a > b ? a : b);
 }

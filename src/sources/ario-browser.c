@@ -123,28 +123,28 @@ struct ArioBrowserPrivate
 static GtkActionEntry ario_browser_actions [] =
 {
         { "BrowserAddArtists", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-          N_("Add to the playlist"),
-          G_CALLBACK (ario_browser_cmd_add_artists) },
+                N_("Add to the playlist"),
+                G_CALLBACK (ario_browser_cmd_add_artists) },
         { "BrowserAddAlbums", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-          N_("Add to the playlist"),
-          G_CALLBACK (ario_browser_cmd_add_albums) },
+                N_("Add to the playlist"),
+                G_CALLBACK (ario_browser_cmd_add_albums) },
         { "BrowserAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-          N_("Add to the playlist"),
-          G_CALLBACK (ario_browser_cmd_add_songs) },
+                N_("Add to the playlist"),
+                G_CALLBACK (ario_browser_cmd_add_songs) },
 
         { "CoverArtistGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
-          N_("Download the cover from Amazon"),
-          G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
+                N_("Download the cover from Amazon"),
+                G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
         { "CoverArtistRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
-          N_("Delete the selected covers"),
-          G_CALLBACK (ario_browser_cmd_remove_artist_cover) },
+                N_("Delete the selected covers"),
+                G_CALLBACK (ario_browser_cmd_remove_artist_cover) },
 
         { "CoverAlbumGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
-          N_("Download the cover from Amazon"),
-          G_CALLBACK (ario_browser_cmd_get_album_ario_cover_amazon) },
+                N_("Download the cover from Amazon"),
+                G_CALLBACK (ario_browser_cmd_get_album_ario_cover_amazon) },
         { "CoverAlbumRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
-          N_("Delete the selected covers"),
-          G_CALLBACK (ario_browser_cmd_remove_album_cover) },
+                N_("Delete the selected covers"),
+                G_CALLBACK (ario_browser_cmd_remove_album_cover) },
 };
 static guint ario_browser_n_actions = G_N_ELEMENTS (ario_browser_actions);
 
@@ -209,7 +209,7 @@ ario_browser_get_type (void)
 
                 type = g_type_register_static (GTK_TYPE_HBOX,
                                                "ArioBrowser",
-                                                &our_info, 0);
+                                               &our_info, 0);
         }
         return type;
 }
@@ -280,9 +280,9 @@ ario_browser_init (ArioBrowser *browser)
         browser->priv->artists = gtk_tree_view_new ();
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                                  renderer,
-                                                                  "text", 0,
-                                                                  NULL);
+                                                           renderer,
+                                                           "text", 0,
+                                                           NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_append_column (GTK_TREE_VIEW (browser->priv->artists), column);
         browser->priv->artists_model = gtk_list_store_new (1, G_TYPE_STRING);
@@ -331,7 +331,7 @@ ario_browser_init (ArioBrowser *browser)
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_albums), GTK_SHADOW_IN);
         browser->priv->albums = gtk_tree_view_new ();
         //gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (browser->priv->albums), TRUE);
-                /* Text column */
+        /* Text column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Album"),
                                                            renderer,
@@ -340,13 +340,13 @@ ario_browser_init (ArioBrowser *browser)
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (browser->priv->albums), column);
-                /* Cover column */
+        /* Cover column */
         renderer = gtk_cell_renderer_pixbuf_new ();
-                /* Translators - This "Cover" refers to an album cover art */
+        /* Translators - This "Cover" refers to an album cover art */
         column = gtk_tree_view_column_new_with_attributes (_("Cover"), 
-                                                          renderer, 
-                                                          "pixbuf", 
-                                                          ALBUM_COVER_COLUMN, NULL);        
+                                                           renderer, 
+                                                           "pixbuf", 
+                                                           ALBUM_COVER_COLUMN, NULL);        
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, COVER_SIZE + 30);
         gtk_tree_view_column_set_spacing (column, 0);
@@ -354,7 +354,7 @@ ario_browser_init (ArioBrowser *browser)
                                      column);
         gtk_tree_view_column_set_visible (column,
                                           !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
-                /* Model */
+        /* Model */
         browser->priv->albums_model = gtk_list_store_new (ALBUM_N_COLUMN,
                                                           G_TYPE_STRING,
                                                           G_TYPE_STRING,
@@ -406,19 +406,19 @@ ario_browser_init (ArioBrowser *browser)
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_SHADOW_IN);
         browser->priv->songs = gtk_tree_view_new ();
-                /* Track column */
+        /* Track column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Track"),
-                                                                  renderer,
-                                                                  "text", TRACK_COLUMN,
-                                                                  NULL);
+                                                           renderer,
+                                                           "text", TRACK_COLUMN,
+                                                           NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (browser->priv->songs), column);
-                /* Title column */
+        /* Title column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Title"),
-                                                                  renderer,
-                                                                  "text", TITLE_COLUMN,
-                                                                  NULL);
+                                                           renderer,
+                                                           "text", TITLE_COLUMN,
+                                                           NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_append_column (GTK_TREE_VIEW (browser->priv->songs), column);
 
@@ -495,7 +495,7 @@ ario_browser_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser = ARIO_BROWSER (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 browser->priv->mpd = g_value_get_object (value);
@@ -775,10 +775,10 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
                 track = ario_util_format_track (song->track);
                 title = ario_util_format_title (song);
                 gtk_list_store_set (browser->priv->songs_model, &songs_iter,
-                                        TRACK_COLUMN, track,
-                                        TITLE_COLUMN, title,
-                                        FILENAME_COLUMN, song->file,
-                                        -1);
+                                    TRACK_COLUMN, track,
+                                    TITLE_COLUMN, title,
+                                    FILENAME_COLUMN, song->file,
+                                    -1);
                 g_free (title);
                 g_free (track);
                 temp = g_slist_next (temp);
@@ -855,7 +855,7 @@ ario_browser_artists_drag_data_get_cb (GtkWidget * widget,
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) artists->str,
                                 strlen (artists->str) * sizeof(guchar));
-        
+
         g_string_free (artists, TRUE);
 }
 
@@ -905,7 +905,7 @@ ario_browser_albums_drag_data_get_cb (GtkWidget * widget,
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) albums->str,
                                 strlen (albums->str) * sizeof(guchar));
-        
+
         g_string_free (albums, TRUE);
 }
 
@@ -951,7 +951,7 @@ ario_browser_songs_drag_data_get_cb (GtkWidget * widget,
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) filenames->str,
                                 strlen (filenames->str) * sizeof(guchar));
-        
+
         g_string_free (filenames, TRUE);
 }
 
@@ -1283,10 +1283,10 @@ ario_browser_cmd_remove_artist_cover (GtkAction *action,
         gint retval = GTK_RESPONSE_NO;
 
         dialog = gtk_message_dialog_new (NULL,
-                                        GTK_DIALOG_MODAL,
-                                        GTK_MESSAGE_QUESTION,
-                                        GTK_BUTTONS_YES_NO,
-                                        _("Are you sure that you want to remove all the covers of the selected artists?"));
+                                         GTK_DIALOG_MODAL,
+                                         GTK_MESSAGE_QUESTION,
+                                         GTK_BUTTONS_YES_NO,
+                                         _("Are you sure that you want to remove all the covers of the selected artists?"));
 
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
         gtk_widget_destroy (dialog);
@@ -1311,7 +1311,7 @@ get_album_cover (ArioBrowser *browser,
                 GtkWidget *coverselect;
                 ArioMpdAlbum *ario_mpd_album = albums->data;
                 coverselect = ario_shell_coverselect_new (ario_mpd_album->artist,
-                                                     ario_mpd_album->album);
+                                                          ario_mpd_album->album);
                 gtk_dialog_run (GTK_DIALOG(coverselect));
                 gtk_widget_destroy (coverselect);
         } else {
@@ -1319,8 +1319,8 @@ get_album_cover (ArioBrowser *browser,
                 coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
 
                 ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
-                                                              albums,
-                                                              operation);
+                                                                   albums,
+                                                                   operation);
                 gtk_widget_destroy (coverdownloader);
         }
 
@@ -1347,10 +1347,10 @@ ario_browser_cmd_remove_album_cover (GtkAction *action,
         gint retval = GTK_RESPONSE_NO;
 
         dialog = gtk_message_dialog_new (NULL,
-                                        GTK_DIALOG_MODAL,
-                                        GTK_MESSAGE_QUESTION,
-                                        GTK_BUTTONS_YES_NO,
-                                        _("Are you sure that you want to remove all the covers of the selected albums?"));
+                                         GTK_DIALOG_MODAL,
+                                         GTK_MESSAGE_QUESTION,
+                                         GTK_BUTTONS_YES_NO,
+                                         _("Are you sure that you want to remove all the covers of the selected albums?"));
 
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
         gtk_widget_destroy (dialog);

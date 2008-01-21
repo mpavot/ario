@@ -105,8 +105,8 @@ ario_shell_coverdownloader_get_type (void)
                 };
 
                 ario_shell_coverdownloader_type = g_type_register_static (GTK_TYPE_WINDOW,
-                                                                     "ArioShellCoverdownloader",
-                                                                     &our_info, 0);
+                                                                          "ArioShellCoverdownloader",
+                                                                          &our_info, 0);
         }
         return ario_shell_coverdownloader_type;
 }
@@ -229,7 +229,7 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
 
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         ario_shell_coverdownloader = ARIO_SHELL_COVERDOWNLOADER (parent_class->constructor (type, n_construct_properties,
-                                                                                construct_properties));
+                                                                                            construct_properties));
 
         xml = rb_glade_xml_new (GLADE_PATH "cover-progress.glade", "vbox", NULL);
         vbox =
@@ -340,8 +340,8 @@ ario_shell_coverdownloader_progress_update (ArioShellCoverdownloader *ario_shell
         ARIO_LOG_FUNCTION_START
         /* We have already searched for nb_covers_done covers */
         gdouble nb_covers_done = (ario_shell_coverdownloader->priv->nb_covers_found 
-                                + ario_shell_coverdownloader->priv->nb_covers_not_found 
-                                + ario_shell_coverdownloader->priv->nb_covers_already_exist);
+                                  + ario_shell_coverdownloader->priv->nb_covers_not_found 
+                                  + ario_shell_coverdownloader->priv->nb_covers_already_exist);
 
         /* We update the progress bar */
         gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (ario_shell_coverdownloader->priv->progressbar), 
@@ -490,29 +490,29 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
 
         if (!album || !artist)
                 return;
-        
+
         switch (operation) {
         case GET_AMAZON_COVERS: {
-                /* We update the progress bar */
-                ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
+                                        /* We update the progress bar */
+                                        ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
 
-                if (ario_cover_cover_exists (artist, album))
-                        /* The cover already exists, we do nothing */
-                        ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
-                else
-                        /* We search for the cover on amazon */
-                        ario_shell_coverdownloader_find_amazon_image (ario_shell_coverdownloader, artist, album);
-        }
-                break;
+                                        if (ario_cover_cover_exists (artist, album))
+                                                /* The cover already exists, we do nothing */
+                                                ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
+                                        else
+                                                /* We search for the cover on amazon */
+                                                ario_shell_coverdownloader_find_amazon_image (ario_shell_coverdownloader, artist, album);
+                                }
+                                break;
 
         case REMOVE_COVERS: {
-                /* We remove the cover from the ~/.gnome2/ario/covers/ directory */
-                ario_cover_remove_cover (artist, album);
-        }
-                break;
+                                    /* We remove the cover from the ~/.gnome2/ario/covers/ directory */
+                                    ario_cover_remove_cover (artist, album);
+                            }
+                            break;
 
         default:
-                break;
+                            break;
         }
 }
 

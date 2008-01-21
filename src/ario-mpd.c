@@ -88,7 +88,7 @@ struct ArioMpdPrivate
         gboolean repeat;
 
         int updatingdb;
-        
+
         GSList *queue;
         gboolean is_updating; 
 
@@ -163,7 +163,7 @@ ario_mpd_get_type (void)
 
                 type = g_type_register_static (G_TYPE_OBJECT,
                                                "ArioMpd",
-                                                &our_info, 0);
+                                               &our_info, 0);
         }
         return type;
 }
@@ -676,7 +676,7 @@ ario_mpd_get_albums (ArioMpd *mpd,
 
                 prev_album = ario_mpd_album->album;
                 albums = g_slist_append (albums, ario_mpd_album);
-                
+
                 mpd_freeInfoEntity (entity);
         }
         mpd_finishCommand (mpd->priv->connection);
@@ -731,10 +731,10 @@ ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
                 return NULL;
 
         mpd_sendListPlaylistInfoCommand(mpd->priv->connection, playlist);
-	while ((ent = mpd_getNextInfoEntity(mpd->priv->connection))) {
+        while ((ent = mpd_getNextInfoEntity(mpd->priv->connection))) {
                 songs = g_slist_append (songs, mpd_songDup (ent->info.song));
-		mpd_freeInfoEntity(ent);
-	}
+                mpd_freeInfoEntity(ent);
+        }
         mpd_finishCommand (mpd->priv->connection);
 
         return songs;
@@ -1272,7 +1272,7 @@ ario_mpd_queue_add (ArioMpd *mpd,
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_ADD;
         queue_action->path = path;
-        
+
         mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
 
@@ -1283,7 +1283,7 @@ ario_mpd_queue_delete_id (ArioMpd *mpd,
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_DELETE_ID;
         queue_action->id = id;
-        
+
         mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
 
@@ -1295,10 +1295,10 @@ ario_mpd_queue_delete_pos (ArioMpd *mpd,
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_DELETE_POS;
         queue_action->pos = pos;
-        
+
         mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
-                    
+
 void
 ario_mpd_queue_move (ArioMpd *mpd,
                      int old_pos,
@@ -1309,7 +1309,7 @@ ario_mpd_queue_move (ArioMpd *mpd,
         queue_action->type = ARIO_MPD_ACTION_MOVE;
         queue_action->old_pos = old_pos;
         queue_action->new_pos = new_pos;
-     
+
         mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
 }
 
@@ -1319,11 +1319,11 @@ ario_mpd_queue_commit (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         GSList *temp;
-        
+
         /* check if there is a connection */
         if (!mpd->priv->connection)
                 return;
-                
+
         mpd_sendCommandListBegin(mpd->priv->connection);
         /* get first item */
         temp = mpd->priv->queue;
@@ -1352,7 +1352,7 @@ ario_mpd_queue_commit (ArioMpd *mpd)
         mpd_sendCommandListEnd(mpd->priv->connection);
         mpd_finishCommand(mpd->priv->connection);
         ario_mpd_update_status (mpd);
-        
+
         g_slist_foreach(mpd->priv->queue, (GFunc) g_free, NULL);
         g_slist_free (mpd->priv->queue);
         mpd->priv->queue = NULL;
@@ -1396,8 +1396,8 @@ ario_mpd_save_playlist (ArioMpd *mpd,
                         const char *name)
 {
         ARIO_LOG_FUNCTION_START
-	mpd_sendSaveCommand (mpd->priv->connection, name);
-	mpd_finishCommand (mpd->priv->connection);
+        mpd_sendSaveCommand (mpd->priv->connection, name);
+        mpd_finishCommand (mpd->priv->connection);
 
         if (mpd->priv->connection->error == MPD_ERROR_ACK && mpd->priv->connection->errorCode == MPD_ACK_ERROR_EXIST)
                 return 1;
@@ -1412,8 +1412,8 @@ ario_mpd_delete_playlist (ArioMpd *mpd,
                           const char *name)
 {
         ARIO_LOG_FUNCTION_START
-	mpd_sendRmCommand (mpd->priv->connection, name);
-	mpd_finishCommand (mpd->priv->connection);
+        mpd_sendRmCommand (mpd->priv->connection, name);
+        mpd_finishCommand (mpd->priv->connection);
 
         g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
 }

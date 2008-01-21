@@ -35,22 +35,22 @@ static void ario_server_preferences_class_init (ArioServerPreferencesClass *klas
 static void ario_server_preferences_init (ArioServerPreferences *server_preferences);
 static void ario_server_preferences_finalize (GObject *object);
 static void ario_server_preferences_set_property (GObject *object,
-                                           guint prop_id,
-                                           const GValue *value,
-                                           GParamSpec *pspec);
+                                                  guint prop_id,
+                                                  const GValue *value,
+                                                  GParamSpec *pspec);
 static void ario_server_preferences_get_property (GObject *object,
-                                           guint prop_id,
-                                           GValue *value,
-                                           GParamSpec *pspec);
+                                                  guint prop_id,
+                                                  GValue *value,
+                                                  GParamSpec *pspec);
 static void ario_server_preferences_sync_server (ArioServerPreferences *server_preferences);
 static void ario_server_preferences_server_changed_cb(ArioMpd *mpd,
-                                               ArioServerPreferences *server_preferences);
+                                                      ArioServerPreferences *server_preferences);
 void ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
-                                                ArioServerPreferences *server_preferences);
+                                                       ArioServerPreferences *server_preferences);
 void ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
-                                            ArioServerPreferences *server_preferences);
+                                                   ArioServerPreferences *server_preferences);
 void ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
-                                          ArioServerPreferences *server_preferences);
+                                                 ArioServerPreferences *server_preferences);
 
 
 enum
@@ -138,7 +138,7 @@ ario_server_preferences_new (ArioMpd *mpd)
         GladeXML *xml;
 
         server_preferences = g_object_new (TYPE_ARIO_SERVER_PREFERENCES,
-                                          "mpd", mpd,
+                                           "mpd", mpd,
                                            NULL);
 
         g_return_val_if_fail (server_preferences->priv != NULL, NULL);
@@ -185,13 +185,13 @@ ario_server_preferences_finalize (GObject *object)
 
 static void
 ario_server_preferences_set_property (GObject *object,
-                               guint prop_id,
-                               const GValue *value,
-                               GParamSpec *pspec)
+                                      guint prop_id,
+                                      const GValue *value,
+                                      GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioServerPreferences *server_preferences = ARIO_SERVER_PREFERENCES (object);
-        
+
         switch (prop_id) {
         case PROP_MPD:
                 server_preferences->priv->mpd = g_value_get_object (value);
@@ -210,9 +210,9 @@ ario_server_preferences_set_property (GObject *object,
 
 static void 
 ario_server_preferences_get_property (GObject *object,
-                               guint prop_id,
-                               GValue *value,
-                               GParamSpec *pspec)
+                                      guint prop_id,
+                                      GValue *value,
+                                      GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioServerPreferences *server_preferences = ARIO_SERVER_PREFERENCES (object);
@@ -270,7 +270,7 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
 
 static void
 ario_server_preferences_server_changed_cb (ArioMpd *mpd,
-                                    ArioServerPreferences *server_preferences)
+                                           ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START
         ario_server_preferences_sync_server (server_preferences);
@@ -278,7 +278,7 @@ ario_server_preferences_server_changed_cb (ArioMpd *mpd,
 
 void
 ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
-                                           ArioServerPreferences *server_preferences)
+                                                  ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START
         int crossfadetime;
@@ -293,7 +293,7 @@ ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
 
 void
 ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
-                                       ArioServerPreferences *server_preferences)
+                                              ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START
         gboolean is_active;
@@ -316,7 +316,7 @@ ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
 
 void
 ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
-                                     ArioServerPreferences *server_preferences)
+                                            ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, FALSE);

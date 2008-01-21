@@ -31,12 +31,12 @@ static void ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klas
 static void ario_shell_lyricsselect_init (ArioShellLyricsselect *ario_shell_lyricsselect);
 static void ario_shell_lyricsselect_finalize (GObject *object);
 static GObject * ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
-                                                     GObjectConstructParam *construct_properties);
+                                                      GObjectConstructParam *construct_properties);
 static gboolean ario_shell_lyricsselect_window_delete_cb (GtkWidget *window,
-                                                         GdkEventAny *event,
-                                                         ArioShellLyricsselect *ario_shell_lyricsselect);
+                                                          GdkEventAny *event,
+                                                          ArioShellLyricsselect *ario_shell_lyricsselect);
 static void ario_shell_lyricsselect_search_cb (GtkWidget *widget,
-                                                         ArioShellLyricsselect *ario_shell_lyricsselect);
+                                               ArioShellLyricsselect *ario_shell_lyricsselect);
 static void ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *ario_shell_lyricsselect);
 
 enum
@@ -146,7 +146,7 @@ ario_shell_lyricsselect_finalize (GObject *object)
 
 static GObject *
 ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
-                                    GObjectConstructParam *construct_properties)
+                                     GObjectConstructParam *construct_properties)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellLyricsselect *ario_shell_lyricsselect;
@@ -162,7 +162,7 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
 
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         ario_shell_lyricsselect = ARIO_SHELL_LYRICSSELECT (parent_class->constructor (type, n_construct_properties,
-                                                                           construct_properties));
+                                                                                      construct_properties));
 
         xml = rb_glade_xml_new (GLADE_PATH "lyrics-select.glade", "vbox", NULL);
         vbox = glade_xml_get_widget (xml, "vbox");
@@ -197,32 +197,32 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
 
         cell_renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                          cell_renderer, 
-                                                          "text", 
-                                                          ARTIST_COLUMN, NULL);
+                                                           cell_renderer, 
+                                                           "text", 
+                                                           ARTIST_COLUMN, NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (ario_shell_lyricsselect->priv->treeview), 
                                      column);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 125);
         cell_renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Title"),
-                                                          cell_renderer, 
-                                                          "text", 
-                                                          TITLE_COLUMN, NULL);
+                                                           cell_renderer, 
+                                                           "text", 
+                                                           TITLE_COLUMN, NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (ario_shell_lyricsselect->priv->treeview), 
-                                    column);
+                                     column);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 125);
         gtk_tree_view_set_model (GTK_TREE_VIEW (ario_shell_lyricsselect->priv->treeview),
                                  GTK_TREE_MODEL (ario_shell_lyricsselect->priv->liststore));
 
         g_signal_connect_object  (G_OBJECT (ario_shell_lyricsselect),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_lyricsselect_window_delete_cb),
-                                 ario_shell_lyricsselect, 0);                  
+                                  "delete_event",
+                                  G_CALLBACK (ario_shell_lyricsselect_window_delete_cb),
+                                  ario_shell_lyricsselect, 0);                  
         g_signal_connect (G_OBJECT (ario_shell_lyricsselect->priv->search_button),
-                         "clicked", G_CALLBACK (ario_shell_lyricsselect_search_cb),
-                         ario_shell_lyricsselect);
+                          "clicked", G_CALLBACK (ario_shell_lyricsselect_search_cb),
+                          ario_shell_lyricsselect);
 
         return G_OBJECT (ario_shell_lyricsselect);
 }
@@ -246,19 +246,19 @@ ario_shell_lyricsselect_new (const char *artist,
                             ario_shell_lyricsselect->priv->file_title);
 
         gtk_label_set_label (GTK_LABEL (ario_shell_lyricsselect->priv->artist_label), 
-                            ario_shell_lyricsselect->priv->file_artist);
+                             ario_shell_lyricsselect->priv->file_artist);
         gtk_label_set_label (GTK_LABEL (ario_shell_lyricsselect->priv->title_label), 
-                            ario_shell_lyricsselect->priv->file_title);
+                             ario_shell_lyricsselect->priv->file_title);
 
         g_return_val_if_fail (ario_shell_lyricsselect->priv != NULL, NULL);
-        
+
         return GTK_WIDGET (ario_shell_lyricsselect);
 }
 
 static gboolean
 ario_shell_lyricsselect_window_delete_cb (GtkWidget *window,
-                                         GdkEventAny *event,
-                                         ArioShellLyricsselect *ario_shell_lyricsselect)
+                                          GdkEventAny *event,
+                                          ArioShellLyricsselect *ario_shell_lyricsselect)
 {
         ARIO_LOG_FUNCTION_START
         gtk_widget_hide (GTK_WIDGET (ario_shell_lyricsselect));
@@ -267,7 +267,7 @@ ario_shell_lyricsselect_window_delete_cb (GtkWidget *window,
 
 static void
 ario_shell_lyricsselect_set_sensitive (ArioShellLyricsselect *ario_shell_lyricsselect,
-                                      gboolean sensitive)
+                                       gboolean sensitive)
 {
         ARIO_LOG_FUNCTION_START
         gtk_dialog_set_response_sensitive (GTK_DIALOG (ario_shell_lyricsselect),
@@ -320,17 +320,17 @@ ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *ario_shell_lyricssel
         gtk_list_store_clear (ario_shell_lyricsselect->priv->liststore);
 
         for (tmp = ario_shell_lyricsselect->priv->lyrics; tmp; tmp = g_slist_next (tmp)) {
-                        candidate = (ArioLyricsCandidate *) tmp->data;
-                        gtk_list_store_append(ario_shell_lyricsselect->priv->liststore, 
-                                              &iter);
-                        gtk_list_store_set (ario_shell_lyricsselect->priv->liststore, 
-                                            &iter, 
-                                            ARTIST_COLUMN, 
-                                            candidate->artist,
-                                            TITLE_COLUMN, 
-                                            candidate->title,
-                                            HID_COLUMN, 
-                                            candidate->hid, -1);
+                candidate = (ArioLyricsCandidate *) tmp->data;
+                gtk_list_store_append(ario_shell_lyricsselect->priv->liststore, 
+                                      &iter);
+                gtk_list_store_set (ario_shell_lyricsselect->priv->liststore, 
+                                    &iter, 
+                                    ARTIST_COLUMN, 
+                                    candidate->artist,
+                                    TITLE_COLUMN, 
+                                    candidate->title,
+                                    HID_COLUMN, 
+                                    candidate->hid, -1);
         }
 
         tree_path = gtk_tree_path_new_from_indices (0, -1);
