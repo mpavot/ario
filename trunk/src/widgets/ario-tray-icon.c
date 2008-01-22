@@ -763,7 +763,6 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                 if (icon->priv->visible == TRUE) {
                         ario_tray_icon_restore_main_window (icon);
                         gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
-                        ario_mpd_use_count_inc (icon->priv->mpd);
                 } else {
                         icon->priv->maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
                         gtk_window_get_position (icon->priv->main_window,
@@ -773,7 +772,6 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                                              &icon->priv->window_w,
                                              &icon->priv->window_h);
                         gtk_widget_hide (GTK_WIDGET (icon->priv->main_window));
-                        ario_mpd_use_count_dec (icon->priv->mpd);
                 }
         }
 }

@@ -74,6 +74,10 @@ static void ario_shell_source_changed_cb (GConfClient *client,
                                           guint cnxn_id,
                                           GConfEntry *entry,
                                           ArioShell *shell);
+static void ario_shell_window_show_cb (GtkWidget *widget,
+                                       ArioShell *shell);
+static void ario_shell_window_hide_cb (GtkWidget *widget,
+                                       ArioShell *shell);
 static gboolean ario_shell_window_state_cb (GtkWidget *widget,
                                             GdkEvent *event,
                                             ArioShell *shell);
@@ -358,6 +362,14 @@ ario_shell_construct (ArioShell *shell)
 
         gtk_container_add (GTK_CONTAINER (win), vbox);
 
+        g_signal_connect_object (G_OBJECT (shell->priv->window), "show",
+                                 G_CALLBACK (ario_shell_window_show_cb),
+                                 shell, 0);
+
+        g_signal_connect_object (G_OBJECT (shell->priv->window), "hide",
+                                 G_CALLBACK (ario_shell_window_hide_cb),
+                                 shell, 0);
+
         ario_shell_sync_window_state (shell);
 
         /* initialize tray icon */
@@ -428,7 +440,6 @@ ario_shell_show (ArioShell *shell)
                                  "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
                                  shell, 0);
 
-        ario_mpd_use_count_inc (shell->priv->mpd);
         shell->priv->shown = TRUE;
 }
 
@@ -637,6 +648,22 @@ ario_shell_source_changed_cb (GConfClient *client,
 {
         ARIO_LOG_FUNCTION_START
         ario_shell_sync_source (shell);
+}
+
+static void
+ario_shell_window_show_cb (GtkWidget *widget,
+                           ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_use_count_inc (shell->priv->mpd);
+}
+
+static void
+ario_shell_window_hide_cb (GtkWidget *widget,
+                           ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_use_count_dec (shell->priv->mpd);
 }
 
 static gboolean
