@@ -779,7 +779,7 @@ ario_storedplaylists_button_press_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         gboolean selected;
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         selected = gtk_tree_selection_path_is_selected (selection, path);
@@ -808,7 +808,7 @@ ario_storedplaylists_button_press_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         if (!gtk_tree_selection_path_is_selected (selection, path)) {
                                 gtk_tree_selection_unselect_all (selection);
@@ -833,7 +833,7 @@ ario_storedplaylists_button_release_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         gtk_tree_selection_unselect_all (selection);
                         gtk_tree_selection_select_path (selection, path);

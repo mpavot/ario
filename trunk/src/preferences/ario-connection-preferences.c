@@ -464,10 +464,10 @@ ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
-        GSList *hosts = ario_avahi_get_hosts (avahi);
+        GSList *hosts;
         gtk_list_store_clear (connection_preferences->priv->autodetect_model);
 
-        while (hosts) {
+        for (hosts = ario_avahi_get_hosts (avahi); hosts; hosts = g_slist_next (hosts)) {
                 ArioHost *host = hosts->data;
                 char *tmp;
                 gtk_list_store_append (connection_preferences->priv->autodetect_model, &iter);
@@ -478,7 +478,6 @@ ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
                                     PORT_COLUMN, tmp,
                                     -1);
                 g_free (tmp);
-                hosts = g_slist_next (hosts);
         }
 
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (connection_preferences->priv->autodetect_model), &iter))

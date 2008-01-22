@@ -534,8 +534,8 @@ ario_playlist_changed_cb (ArioMpd *mpd,
 
         songs = ario_mpd_get_playlist_changes(playlist->priv->mpd,
                                               playlist->priv->playlist_id);
-        temp = songs;
-        while (temp) {
+        
+        for (temp = songs; temp; temp = g_slist_next (temp)) {
                 song = temp->data;
                 /*
                  * decide wether to update or to add 
@@ -580,8 +580,6 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                         g_free (time);
                         g_free (track);
                 }
-
-                temp = g_slist_next (temp);
         }
 
         g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
@@ -737,7 +735,7 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
                 /* get drop location */
                 gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (playlist->priv->tree), x, y, &path, &pos);
 
-                if (path != NULL) {
+                if (path) {
                         /* grab drop localtion */
                         indice = gtk_tree_path_get_indices (path);
                         drop = indice[0];
@@ -769,23 +767,19 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
         ArioMpdAlbum *mpd_album;
         ArioMpdSong *mpd_song;
 
-        temp_albums = albums;        
         /* For each album :*/
-        while (temp_albums) {
+        for (temp_albums = albums; temp_albums; temp_albums = g_slist_next (temp_albums)) {
                 mpd_album = temp_albums->data;
                 songs = ario_mpd_get_songs (playlist->priv->mpd, mpd_album->artist, mpd_album->album);
 
                 /* For each song */
-                temp_songs = songs;
-                while (temp_songs) {
+                for (temp_songs = songs; temp_songs; temp_songs = g_slist_next (temp_songs)) {
                         mpd_song = temp_songs->data;
                         filenames = g_slist_append (filenames, g_strdup (mpd_song->file));
-                        temp_songs = g_slist_next (temp_songs);
                 }
 
                 g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                 g_slist_free (songs);
-                temp_albums = g_slist_next (temp_albums);
         }
 
         ario_playlist_add_songs (playlist,
@@ -806,30 +800,24 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
         ArioMpdAlbum *mpd_album;
         ArioMpdSong *mpd_song;
 
-        temp_artists = artists;
         /* For each artist :*/
-        while (temp_artists) {
+        for (temp_artists = artists; temp_artists; temp_artists = g_slist_next (temp_artists)) {
                 albums = ario_mpd_get_albums (playlist->priv->mpd, temp_artists->data);
                 /* For each album */
-                temp_albums = albums;
-                while (temp_albums) {
+                for (temp_albums = albums; temp_albums; temp_albums = g_slist_next (temp_albums)) {
                         mpd_album = temp_albums->data;
                         songs = ario_mpd_get_songs (playlist->priv->mpd, mpd_album->artist, mpd_album->album);
 
                         /* For each song */
-                        temp_songs = songs;
-                        while (temp_songs) {
+                        for (temp_songs = songs; temp_songs; temp_songs = g_slist_next (temp_songs)) {
                                 mpd_song = temp_songs->data;
                                 filenames = g_slist_append (filenames, g_strdup (mpd_song->file));
-                                temp_songs = g_slist_next (temp_songs);
                         }
                         g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                         g_slist_free (songs);
-                        temp_albums = g_slist_next (temp_albums);
                 }
                 g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
                 g_slist_free (albums);
-                temp_artists = g_slist_next (temp_artists);
         }
 
         ario_playlist_add_songs (playlist,
@@ -1177,7 +1165,7 @@ ario_playlist_view_button_press_cb (GtkTreeView *treeview,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         gboolean selected;
                         if (event->type == GDK_2BUTTON_PRESS)
                                 ario_playlist_activate_row (playlist, path);
@@ -1205,7 +1193,7 @@ ario_playlist_view_button_press_cb (GtkTreeView *treeview,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         if (!gtk_tree_selection_path_is_selected (playlist->priv->selection, path)) {
                                 gtk_tree_selection_unselect_all (playlist->priv->selection);
                                 gtk_tree_selection_select_path (playlist->priv->selection, path);
@@ -1230,7 +1218,7 @@ ario_playlist_view_button_release_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         gtk_tree_selection_unselect_all (selection);
                         gtk_tree_selection_select_path (selection, path);

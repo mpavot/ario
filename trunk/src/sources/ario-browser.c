@@ -617,12 +617,10 @@ ario_browser_fill_artists (ArioBrowser *browser)
 
         artists = ario_mpd_get_artists (browser->priv->mpd);
 
-        temp = artists;
-        while (temp) {
+        for (temp = artists; temp; temp = g_slist_next (temp)) {
                 gtk_list_store_append (browser->priv->artists_model, &artist_iter);
                 gtk_list_store_set (browser->priv->artists_model, &artist_iter, 0,
                                     temp->data, -1);
-                temp = g_slist_next (temp);
         }
         g_slist_foreach(artists, (GFunc) g_free, NULL);
         g_slist_free (artists);
@@ -673,8 +671,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
         albums = ario_mpd_get_albums (browser->priv->mpd, artist);
         g_free (artist);
 
-        temp = albums;
-        while (temp) {
+        for (temp = albums; temp; temp = g_slist_next (temp)) {
                 ario_mpd_album = temp->data;
 
                 ario_cover_path = ario_cover_make_ario_cover_path (ario_mpd_album->artist, ario_mpd_album->album, SMALL_COVER);
@@ -697,7 +694,6 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                                     ALBUM_COVER_COLUMN, cover,
                                     -1);
                 g_object_unref (G_OBJECT (cover));
-                temp = g_slist_next (temp);
         }
 
 
@@ -766,9 +762,7 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
         g_free (artist);
         g_free (album);
 
-
-        temp = songs;
-        while (temp) {
+        for (temp = songs; temp; temp = g_slist_next (temp)) {
                 song = temp->data;
                 gtk_list_store_append (browser->priv->songs_model, &songs_iter);
 
@@ -781,7 +775,6 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
                                     -1);
                 g_free (title);
                 g_free (track);
-                temp = g_slist_next (temp);
         }
 
         g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
@@ -1002,7 +995,7 @@ ario_browser_button_press_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         gboolean selected;
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         selected = gtk_tree_selection_path_is_selected (selection, path);
@@ -1031,7 +1024,7 @@ ario_browser_button_press_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         if (!gtk_tree_selection_path_is_selected (selection, path)) {
                                 gtk_tree_selection_unselect_all (selection);
@@ -1056,7 +1049,7 @@ ario_browser_button_release_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         gtk_tree_selection_unselect_all (selection);
                         gtk_tree_selection_select_path (selection, path);

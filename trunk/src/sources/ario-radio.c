@@ -461,8 +461,7 @@ ario_radio_get_radios (ArioRadio *radio)
                 return radios;
         }
 
-        cur = cur->children;
-        while (cur != NULL) {
+        for (cur = cur->children; cur; cur = cur->next) {
                 /* For each "radio" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"radio")){
                         internet_radio = (ArioInternetRadio *) g_malloc (sizeof (ArioInternetRadio));
@@ -477,7 +476,6 @@ ario_radio_get_radios (ArioRadio *radio)
 
                         radios = g_slist_append (radios, internet_radio);
                 }
-                cur = cur->next;
         }
         xmlFreeDoc (doc);
 
@@ -518,11 +516,9 @@ ario_radio_fill_radios (ArioRadio *radio)
 
         radios = ario_radio_get_radios (radio);
 
-        temp = radios;
-        while (temp) {
+        for (temp = radios; temp; temp = g_slist_next (temp)) {
                 ArioInternetRadio *internet_radio = (ArioInternetRadio *) temp->data;
                 ario_radio_append_radio (radio, internet_radio);
-                temp = g_slist_next (temp);
         }
         g_slist_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
         g_slist_free (radios);
@@ -646,7 +642,7 @@ ario_radio_button_press_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         gboolean selected;
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         selected = gtk_tree_selection_path_is_selected (selection, path);
@@ -675,7 +671,7 @@ ario_radio_button_press_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         if (!gtk_tree_selection_path_is_selected (selection, path)) {
                                 gtk_tree_selection_unselect_all (selection);
@@ -700,7 +696,7 @@ ario_radio_button_release_cb (GtkWidget *widget,
                 GtkTreePath *path;
 
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path != NULL) {
+                if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         gtk_tree_selection_unselect_all (selection);
                         gtk_tree_selection_select_path (selection, path);
@@ -961,8 +957,7 @@ ario_radio_delete_radio (ArioInternetRadio *internet_radio,
                 return;
         }
 
-        cur = cur->children;
-        while (cur != NULL) {
+        for (cur = cur->children; cur; cur = next_cur) {
                 next_cur = cur->next;
                 /* For each "radio" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"radio")){
@@ -977,7 +972,6 @@ ario_radio_delete_radio (ArioInternetRadio *internet_radio,
                         xmlFree(xml_name);
                         xmlFree(xml_url);
                 }
-                cur = next_cur;
         }
 
         /* We save the xml file */
@@ -1059,8 +1053,7 @@ ario_radio_modify_radio (ArioRadio *radio,
                 return;
         }
 
-        cur = cur->children;
-        while (cur != NULL) {
+        for (cur = cur->children; cur; cur = next_cur) {
                 next_cur = cur->next;
                 /* For each "radio" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"radio")){
@@ -1077,7 +1070,6 @@ ario_radio_modify_radio (ArioRadio *radio,
                         xmlFree(xml_name);
                         xmlFree(xml_url);
                 }
-                cur = next_cur;
         }
 
         /* We save the xml file */

@@ -377,13 +377,13 @@ ario_mpd_finalize (GObject *object)
 
         ario_mpd_disconnect (mpd);
 
-        if (mpd->priv->ario_mpd_song != NULL)
+        if (mpd->priv->ario_mpd_song)
                 ario_mpd_free_song (mpd->priv->ario_mpd_song);
 
-        if (mpd->priv->status != NULL)
+        if (mpd->priv->status)
                 mpd_freeStatus (mpd->priv->status);
 
-        if (mpd->priv->stats != NULL)
+        if (mpd->priv->stats)
                 mpd_freeStats (mpd->priv->stats);
 
         g_free (mpd->priv);
@@ -672,7 +672,7 @@ ario_mpd_get_artists (ArioMpd *mpd)
 
         mpd_sendListCommand (mpd->priv->connection, MPD_TABLE_ARTIST, NULL);
 
-        while ((artist_char = mpd_getNextArtist (mpd->priv->connection)) != NULL)
+        while ((artist_char = mpd_getNextArtist (mpd->priv->connection)))
                 artists = g_slist_append (artists, artist_char);
 
         mpd_finishCommand (mpd->priv->connection);
@@ -798,7 +798,7 @@ ario_mpd_get_playlists (ArioMpd *mpd)
 
         mpd_sendLsInfoCommand(mpd->priv->connection, "/");
 
-        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
+        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 if (ent->type == MPD_INFO_ENTITY_TYPE_PLAYLISTFILE) {
                         playlists = g_slist_append (playlists, g_strdup (ent->info.playlistFile->path));
                 }
@@ -884,7 +884,7 @@ ario_mpd_update_status (ArioMpd *mpd)
         if (!mpd->priv->connection) {
                 ario_mpd_set_default (mpd);
         } else {
-                if (mpd->priv->status != NULL)
+                if (mpd->priv->status)
                         mpd_freeStatus (mpd->priv->status);
                 mpd_sendStatusCommand (mpd->priv->connection);
                 mpd->priv->status = mpd_getStatus (mpd->priv->connection);
@@ -1057,7 +1057,7 @@ ario_mpd_get_current_playlist_total_time (ArioMpd *mpd)
         // called only once for each playlist change (by status bar). I may change this implementation
         // if this function is called more than once for performance reasons.
         mpd_sendPlaylistInfoCommand(mpd->priv->connection, -1);
-        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
+        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 song = ent->info.song;
                 if (song->time != MPD_SONG_NO_TIME)
                         total_time = total_time + song->time;
@@ -1107,7 +1107,7 @@ ario_mpd_get_last_update (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
 
-        if (mpd->priv->stats != NULL)
+        if (mpd->priv->stats)
                 mpd_freeStats (mpd->priv->stats);
         mpd_sendStatsCommand (mpd->priv->connection);
         mpd->priv->stats = mpd_getStats (mpd->priv->connection);
@@ -1372,12 +1372,11 @@ ario_mpd_queue_commit (ArioMpd *mpd)
                 return;
 
         mpd_sendCommandListBegin(mpd->priv->connection);
-        /* get first item */
-        temp = mpd->priv->queue;
-        while (temp) {
+
+        for (temp = mpd->priv->queue; temp; temp = g_slist_next (temp)) {
                 ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) temp->data;
                 if(queue_action->type == ARIO_MPD_ACTION_ADD) {
-                        if(queue_action->path != NULL) {
+                        if(queue_action->path) {
                                 mpd_sendAddCommand(mpd->priv->connection, queue_action->path);
                         }
                 } else if (queue_action->type == ARIO_MPD_ACTION_DELETE_ID) {
@@ -1393,8 +1392,6 @@ ario_mpd_queue_commit (ArioMpd *mpd)
                                 mpd_sendMoveCommand(mpd->priv->connection, queue_action->old_pos, queue_action->new_pos);
                         }
                 }
-
-                temp = g_slist_next (temp);
         }
         mpd_sendCommandListEnd(mpd->priv->connection);
         mpd_finishCommand(mpd->priv->connection);
@@ -1429,7 +1426,7 @@ ario_mpd_search (ArioMpd *mpd,
         }
         mpd_commitSearch(mpd->priv->connection);
 
-        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection)) != NULL) {
+        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 songs = g_slist_append (songs, mpd_songDup (ent->info.song));
                 mpd_freeInfoEntity(ent);
         }
