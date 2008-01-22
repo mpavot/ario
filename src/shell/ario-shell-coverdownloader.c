@@ -448,8 +448,6 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         if (!albums)
                 return;
 
-        temp = albums;
-
         /* We show the window with the progress bar */
         if (operation == GET_AMAZON_COVERS)
                 ario_shell_coverdownloader_progress_start (ario_shell_coverdownloader);
@@ -457,7 +455,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         ario_shell_coverdownloader->priv->nb_covers = g_slist_length (albums);
 
         /* While there are still covers to search */
-        while (temp) {
+        for (temp = albums; temp; temp = g_slist_next (temp)) {
                 /* The user has pressed the "cancel button" or has closed the window : we stop the search */
                 if (ario_shell_coverdownloader->priv->cancelled)
                         break;
@@ -466,7 +464,6 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
                 ario_shell_coverdownloader_get_cover_from_album (ario_shell_coverdownloader,
                                                                  temp->data,
                                                                  operation);
-                temp = g_slist_next (temp);
         }
 
         /* We change the window to show a close button and infos about the search */

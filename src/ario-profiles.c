@@ -112,8 +112,7 @@ ario_profiles_read (void)
                 return profiles;
         }
 
-        cur = cur->children;
-        while (cur != NULL) {
+        for (cur = cur->children; cur; cur = cur->next) {
                 /* For each "profiles" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"profile")){
                         profile = (ArioProfile *) g_malloc (sizeof (ArioProfile));
@@ -148,7 +147,6 @@ ario_profiles_read (void)
 
                         profiles = g_slist_append (profiles, profile);
                 }
-                cur = cur->next;
         }
         xmlFreeDoc (doc);
 
