@@ -21,13 +21,13 @@
  *
  */
 
-#include <gtk/gtkuimanager.h>
-
-#include "lib/eggtrayicon.h"
-#include "ario-mpd.h"
-
 #ifndef __ARIO_TRAY_ICON_H
 #define __ARIO_TRAY_ICON_H
+
+#include <gtk/gtkuimanager.h>
+#include "lib/eggtrayicon.h"
+#include "ario-mpd.h"
+#include "ario-cover-handler.h"
 
 G_BEGIN_DECLS
 
@@ -56,7 +56,8 @@ GType                   ario_tray_icon_get_type         (void);
 
 ArioTrayIcon *          ario_tray_icon_new              (GtkUIManager *mgr,
                                                          GtkWindow *window,
-                                                         ArioMpd *mpd);
+                                                         ArioMpd *mpd,
+                                                         ArioCoverHandler *cover_handler);
 
 G_END_DECLS
 

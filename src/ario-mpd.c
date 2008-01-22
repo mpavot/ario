@@ -114,6 +114,7 @@ enum
 enum
 {
         SONG_CHANGED,
+        ALBUM_CHANGED,
         STATE_CHANGED,
         VOLUME_CHANGED,
         ELAPSED_CHANGED,
@@ -129,6 +130,7 @@ static guint ario_mpd_signals[LAST_SIGNAL] = { 0 };
 enum
 {
         SONG_CHANGED_FLAG = 2 << SONG_CHANGED,
+        ALBUM_CHANGED_FLAG = 2 << ALBUM_CHANGED,
         STATE_CHANGED_FLAG = 2 << STATE_CHANGED,
         VOLUME_CHANGED_FLAG = 2 << VOLUME_CHANGED,
         ELAPSED_CHANGED_FLAG = 2 << ELAPSED_CHANGED,
@@ -250,6 +252,16 @@ ario_mpd_class_init (ArioMpdClass *klass)
                               G_OBJECT_CLASS_TYPE (object_class),
                               G_SIGNAL_RUN_LAST,
                               G_STRUCT_OFFSET (ArioMpdClass, song_changed),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
+
+        ario_mpd_signals[ALBUM_CHANGED] =
+                g_signal_new ("album_changed",
+                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (ArioMpdClass, album_changed),
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
@@ -387,27 +399,60 @@ ario_mpd_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioMpd *mpd = ARIO_MPD (object);
-        mpd_InfoEntity *ent = NULL;
 
         switch (prop_id) {
         case PROP_SONGID:
                 mpd->priv->song_id = g_value_get_int (value);
-                if (mpd->priv->ario_mpd_song != NULL) {
-                        ario_mpd_free_song (mpd->priv->ario_mpd_song);
-                        mpd->priv->ario_mpd_song = NULL;
-                }
 
                 /* check if there is a connection */
                 if (mpd->priv->connection) {
+                        mpd_InfoEntity *ent ;
+                        ArioMpdSong *new_song = NULL;
+                        ArioMpdSong *old_song = mpd->priv->ario_mpd_song;
+                        gboolean state_changed;
+                        gboolean artist_changed = FALSE;
+                        gboolean album_changed = FALSE;
+
                         mpd_sendCurrentSongCommand (mpd->priv->connection);
                         ent = mpd_getNextInfoEntity (mpd->priv->connection);
-                        if (ent != NULL) {
-                                mpd->priv->ario_mpd_song = mpd_songDup (ent->info.song);
-                                mpd_freeInfoEntity (ent);
-                        }
+                        if (ent)
+                                new_song = ent->info.song;
                         mpd_finishCommand (mpd->priv->connection);
-                        mpd->priv->total_time = mpd->priv->status->totalTime;
+                        state_changed = (!old_song || !new_song);
+                        if (!state_changed) {
+                                artist_changed = ( (old_song->artist && !new_song->artist)
+                                                || (!old_song->artist && new_song->artist)
+                                                || (old_song->artist && new_song->artist && g_utf8_collate (old_song->artist, new_song->artist)) );
+                                if (!artist_changed) {
+                                        album_changed = ( (old_song->album && !new_song->album)
+                                                        || (!old_song->album && new_song->album)
+                                                        || (old_song->album && new_song->album && g_utf8_collate (old_song->album, new_song->album)) );
+                                }
+                        }
+
+                        if (state_changed || artist_changed || album_changed)
+                                mpd->priv->signals_to_emit |= ALBUM_CHANGED_FLAG;
+
+                        if (mpd->priv->ario_mpd_song)
+                                ario_mpd_free_song (mpd->priv->ario_mpd_song);
+
+                        if (new_song)
+                                mpd->priv->ario_mpd_song = mpd_songDup (new_song);
+                        else
+                                mpd->priv->ario_mpd_song = NULL;
+
+                        if (ent)
+                                mpd_freeInfoEntity (ent);
+
+                        if (mpd->priv->status)
+                                mpd->priv->total_time = mpd->priv->status->totalTime;
+                } else {
+                        if (mpd->priv->ario_mpd_song) {
+                                ario_mpd_free_song (mpd->priv->ario_mpd_song);
+                                mpd->priv->ario_mpd_song = NULL;
+                        }
                 }
+
                 mpd->priv->signals_to_emit |= SONG_CHANGED_FLAG;
                 break;
         case PROP_STATE:
@@ -877,6 +922,8 @@ ario_mpd_update_status (ArioMpd *mpd)
 
         if (mpd->priv->signals_to_emit & SONG_CHANGED_FLAG)
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[SONG_CHANGED], 0);
+        if (mpd->priv->signals_to_emit & ALBUM_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[ALBUM_CHANGED], 0);
         if (mpd->priv->signals_to_emit & STATE_CHANGED_FLAG)
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
         if (mpd->priv->signals_to_emit & VOLUME_CHANGED_FLAG)

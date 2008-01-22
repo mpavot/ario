@@ -16,6 +16,8 @@ src/ario-avahi.c
 src/ario-avahi.h
 src/ario-cover.c
 src/ario-cover.h
+src/ario-cover-handler.c
+src/ario-cover-handler.h
 src/ario-debug.h
 src/ario-lyrics.c
 src/ario-lyrics.h

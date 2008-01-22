@@ -26,7 +26,6 @@
 #include "ario-util.h"
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
-#include "ario-cover.h"
 #include "shell/ario-shell-coverselect.h"
 
 static void ario_header_class_init (ArioHeaderClass *klass);
@@ -53,7 +52,11 @@ static gboolean slider_release_callback (GtkWidget *widget,
                                          ArioHeader *header);
 static void ario_header_song_changed_cb (ArioMpd *mpd,
                                          ArioHeader *header);
+static void ario_header_album_changed_cb (ArioMpd *mpd,
+                                          ArioHeader *header);
 static void ario_header_state_changed_cb (ArioMpd *mpd,
+                                          ArioHeader *header);
+static void ario_header_cover_changed_cb (ArioCoverHandler *cover_handler,
                                           ArioHeader *header);
 static void ario_header_elapsed_changed_cb (ArioMpd *mpd,
                                             ArioHeader *header);
@@ -75,6 +78,7 @@ static void ario_header_cmd_previous (GtkAction *action,
 struct ArioHeaderPrivate
 {
         ArioMpd *mpd;
+        ArioCoverHandler *cover_handler;
 
         GtkTooltips *tooltips;
         GtkWidget *prev_button;
@@ -133,6 +137,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
+        PROP_COVERHANDLER,
         PROP_ACTION_GROUP,
 };
 
@@ -188,6 +193,13 @@ ario_header_class_init (ArioHeaderClass *klass)
                                                               "ArioMpd",
                                                               "ArioMpd object",
                                                               TYPE_ARIO_MPD,
+                                                              G_PARAM_READWRITE));
+        g_object_class_install_property (object_class,
+                                         PROP_COVERHANDLER,
+                                         g_param_spec_object ("cover_handler",
+                                                              "ArioCoverHandler",
+                                                              "ArioCoverHandler object",
+                                                              TYPE_ARIO_COVER_HANDLER,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
                                          PROP_ACTION_GROUP,
@@ -432,6 +444,9 @@ ario_header_set_property (GObject *object,
                                          "song_changed", G_CALLBACK (ario_header_song_changed_cb),
                                          header, 0);
                 g_signal_connect_object (G_OBJECT (header->priv->mpd),
+                                         "album_changed", G_CALLBACK (ario_header_album_changed_cb),
+                                         header, 0);
+                g_signal_connect_object (G_OBJECT (header->priv->mpd),
                                          "state_changed", G_CALLBACK (ario_header_state_changed_cb),
                                          header, 0);
                 g_signal_connect_object (G_OBJECT (header->priv->mpd),
@@ -442,6 +457,12 @@ ario_header_set_property (GObject *object,
                                          header, 0);
                 g_signal_connect_object (G_OBJECT (header->priv->mpd),
                                          "repeat_changed", G_CALLBACK (ario_header_repeat_changed_cb),
+                                         header, 0);
+                break;
+        case PROP_COVERHANDLER:
+                header->priv->cover_handler = g_value_get_object (value);
+                g_signal_connect_object (G_OBJECT (header->priv->cover_handler),
+                                         "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
                                          header, 0);
                 break;
         case PROP_ACTION_GROUP:
@@ -469,6 +490,9 @@ ario_header_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, header->priv->mpd);
                 break;
+        case PROP_COVERHANDLER:
+                g_value_set_object (value, header->priv->cover_handler);
+                break;
         case PROP_ACTION_GROUP:
                 g_value_set_object (value, header->priv->actiongroup);
                 break;
@@ -479,7 +503,9 @@ ario_header_get_property (GObject *object,
 }
 
 GtkWidget *
-ario_header_new (GtkActionGroup *group, ArioMpd *mpd)
+ario_header_new (GtkActionGroup *group,
+                 ArioMpd *mpd,
+                 ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
         ArioHeader *header;
@@ -488,6 +514,7 @@ ario_header_new (GtkActionGroup *group, ArioMpd *mpd)
         header = ARIO_HEADER (g_object_new (TYPE_ARIO_HEADER,
                                             "action-group", group,
                                             "mpd", mpd,
+                                            "cover_handler", cover_handler,
                                             NULL));
 
         /* Construct the volume button */
@@ -527,38 +554,49 @@ ario_header_change_total_time (ArioHeader *header)
 }
 
 static void
-ario_header_change_labels (ArioHeader *header)
+ario_header_change_song_label (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
         char *title;
+        char *tmp;
+
+        switch (ario_mpd_get_current_state (header->priv->mpd)) {
+        case MPD_STATUS_STATE_PLAY:
+        case MPD_STATUS_STATE_PAUSE:
+                title = ario_util_format_title(ario_mpd_get_current_song (header->priv->mpd));
+
+                tmp = SONG_MARKUP (title);
+                g_free (title);
+                gtk_label_set_markup (GTK_LABEL (header->priv->song), tmp);
+                g_free (tmp);
+                break;
+        case MPD_STATUS_STATE_UNKNOWN:
+        case MPD_STATUS_STATE_STOP:
+        default:
+                gtk_label_set_label (GTK_LABEL (header->priv->song), "");
+                break;
+        }
+}
+
+static void
+ario_header_change_artist_album_label (ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START
         char *artist;
         char *album;
         char *tmp;
-        gchar *cover_path;
-        GdkPixbuf *cover;
 
         switch (ario_mpd_get_current_state (header->priv->mpd)) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 artist = ario_mpd_get_current_artist (header->priv->mpd);
                 album = ario_mpd_get_current_album (header->priv->mpd);
-                title = ario_util_format_title(ario_mpd_get_current_song (header->priv->mpd));
 
                 if (!album)
                         album = ARIO_MPD_UNKNOWN;
 
                 if (!artist)
                         artist = ARIO_MPD_UNKNOWN;
-
-                cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
-                cover = gdk_pixbuf_new_from_file_at_size (cover_path, header->priv->image_width, header->priv->image_height, NULL);
-                g_free (cover_path);
-                gtk_image_set_from_pixbuf(GTK_IMAGE(header->priv->image), cover);
-
-                tmp = SONG_MARKUP (title);
-                g_free (title);
-                gtk_label_set_markup (GTK_LABEL (header->priv->song), tmp);
-                g_free (tmp);
 
                 tmp = FROM_MARKUP (album, artist);
                 gtk_label_set_markup (GTK_LABEL (header->priv->artist_album), tmp);
@@ -567,9 +605,38 @@ ario_header_change_labels (ArioHeader *header)
         case MPD_STATUS_STATE_UNKNOWN:
         case MPD_STATUS_STATE_STOP:
         default:
-                gtk_label_set_label (GTK_LABEL (header->priv->song), "");
                 gtk_label_set_label (GTK_LABEL (header->priv->artist_album), "");
-                gtk_image_set_from_pixbuf(GTK_IMAGE(header->priv->image), NULL);
+                break;
+        }
+}
+
+static void
+ario_header_change_cover (ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START
+        GdkPixbuf *cover;
+        GdkPixbuf *small_cover = NULL;
+
+        switch (ario_mpd_get_current_state (header->priv->mpd)) {
+        case MPD_STATUS_STATE_PLAY:
+        case MPD_STATUS_STATE_PAUSE:
+                cover = ario_cover_handler_get_cover (header->priv->cover_handler);
+                if (cover) {
+                        small_cover = gdk_pixbuf_scale_simple (cover,
+                                                               header->priv->image_width,
+                                                               header->priv->image_height,
+                                                               GDK_INTERP_BILINEAR);
+                }
+
+                gtk_image_set_from_pixbuf (GTK_IMAGE (header->priv->image), small_cover);
+
+                if (small_cover)
+                        g_object_unref (small_cover);
+                break;
+        case MPD_STATUS_STATE_UNKNOWN:
+        case MPD_STATUS_STATE_STOP:
+        default:
+                gtk_image_set_from_pixbuf (GTK_IMAGE (header->priv->image), NULL);
                 break;
         }
 }
@@ -579,8 +646,24 @@ ario_header_song_changed_cb (ArioMpd *mpd,
                              ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
-        ario_header_change_labels (header);
+        ario_header_change_song_label (header);
         ario_header_change_total_time (header);
+}
+
+static void
+ario_header_album_changed_cb (ArioMpd *mpd,
+                              ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_header_change_artist_album_label (header);
+}
+
+static void
+ario_header_cover_changed_cb (ArioCoverHandler *cover_handler,
+                              ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_header_change_cover (header);
 }
 
 static void
@@ -616,7 +699,8 @@ ario_header_state_changed_cb (ArioMpd *mpd,
                 gtk_widget_set_sensitive (header->priv->volume_button, TRUE);
         }
 
-        ario_header_change_labels (header);
+        ario_header_change_song_label (header);
+        ario_header_change_artist_album_label (header);
         ario_header_change_total_time (header);
 
         gtk_container_remove (GTK_CONTAINER (header->priv->play_pause_button),

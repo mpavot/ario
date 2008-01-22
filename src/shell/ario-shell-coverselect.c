@@ -26,6 +26,7 @@
 #include "ario-cover.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
+#include "ario-cover-handler.h"
 
 #define CURRENT_COVER_SIZE 130
 
@@ -578,6 +579,7 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
                 gtk_dialog_run(GTK_DIALOG(dialog));
                 gtk_widget_destroy(dialog);
         }
+        ario_cover_handler_force_reload();
 }
 
 static void
