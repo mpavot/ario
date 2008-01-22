@@ -24,6 +24,7 @@
                 </menu>
 
                 <menu name="ToolMenu" action="Tool">
+                        <menuitem name="ToolCoverSelectMenu" action="ToolCoverSelect"/>
                         <menuitem name="ToolCoverMenu" action="ToolCover"/>
                 </menu>
 
