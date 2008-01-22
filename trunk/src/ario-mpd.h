@@ -64,6 +64,8 @@ typedef struct
 
         void (*song_changed)            (ArioMpd *mpd);
 
+        void (*album_changed)           (ArioMpd *mpd);
+
         void (*state_changed)           (ArioMpd *mpd);
 
         void (*volume_changed)          (ArioMpd *mpd);

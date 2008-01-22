@@ -26,6 +26,7 @@
 #include "shell/ario-shell.h"
 #include "sources/ario-source.h"
 #include "ario-mpd.h"
+#include "ario-cover-handler.h"
 #include "widgets/ario-playlist.h"
 #include "widgets/ario-header.h"
 #include "widgets/ario-tray-icon.h"
@@ -85,6 +86,7 @@ struct ArioShellPrivate
         GtkWidget *window;
 
         ArioMpd *mpd;
+        ArioCoverHandler *cover_handler;
         GtkWidget *header;
         GtkWidget *vpaned;
         GtkWidget *source;
@@ -227,6 +229,7 @@ ario_shell_finalize (GObject *object)
         gtk_widget_hide (shell->priv->window);
 
         gtk_widget_destroy (shell->priv->window);
+        g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->mpd);
         g_free (shell->priv);
 
@@ -289,7 +292,10 @@ ario_shell_construct (ArioShell *shell)
         vbox = gtk_vbox_new (FALSE, 0);
 
         shell->priv->mpd = ario_mpd_new ();
-        shell->priv->header = ario_header_new (shell->priv->actiongroup, shell->priv->mpd);
+        shell->priv->cover_handler = ario_cover_handler_new (shell->priv->mpd);
+        shell->priv->header = ario_header_new (shell->priv->actiongroup,
+                                               shell->priv->mpd,
+                                               shell->priv->cover_handler);
         separator = gtk_hseparator_new ();
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
         shell->priv->source = ario_source_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
@@ -351,7 +357,8 @@ ario_shell_construct (ArioShell *shell)
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->ui_manager,
                                                      win,
-                                                     shell->priv->mpd);
+                                                     shell->priv->mpd,
+                                                     shell->priv->cover_handler);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
         /* First launch assistant */

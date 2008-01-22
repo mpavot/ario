@@ -25,6 +25,7 @@
 #include "shell/ario-shell-coverdownloader.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
+#include "ario-cover-handler.h"
 
 static void ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass);
 static void ario_shell_coverdownloader_init (ArioShellCoverdownloader *ario_shell_coverdownloader);
@@ -471,6 +472,8 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         /* We change the window to show a close button and infos about the search */
         if (operation == GET_AMAZON_COVERS)
                 ario_shell_coverdownloader_progress_end (ario_shell_coverdownloader);
+
+        ario_cover_handler_force_reload();
 }
 
 static void
@@ -492,27 +495,25 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
                 return;
 
         switch (operation) {
-        case GET_AMAZON_COVERS: {
-                                        /* We update the progress bar */
-                                        ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
+        case GET_AMAZON_COVERS:
+                /* We update the progress bar */
+                ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
 
-                                        if (ario_cover_cover_exists (artist, album))
-                                                /* The cover already exists, we do nothing */
-                                                ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
-                                        else
-                                                /* We search for the cover on amazon */
-                                                ario_shell_coverdownloader_find_amazon_image (ario_shell_coverdownloader, artist, album);
-                                }
-                                break;
+                if (ario_cover_cover_exists (artist, album))
+                        /* The cover already exists, we do nothing */
+                        ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
+                else
+                        /* We search for the cover on amazon */
+                        ario_shell_coverdownloader_find_amazon_image (ario_shell_coverdownloader, artist, album);
+                break;
 
-        case REMOVE_COVERS: {
-                                    /* We remove the cover from the ~/.gnome2/ario/covers/ directory */
-                                    ario_cover_remove_cover (artist, album);
-                            }
-                            break;
+        case REMOVE_COVERS: 
+                /* We remove the cover from the ~/.gnome2/ario/covers/ directory */
+                ario_cover_remove_cover (artist, album);
+                break;
 
         default:
-                            break;
+                break;
         }
 }
 

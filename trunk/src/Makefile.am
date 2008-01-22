@@ -13,6 +13,8 @@ ario_SOURCES = \
 	ario-avahi.h\
 	ario-cover.c\
 	ario-cover.h\
+	ario-cover-handler.c\
+	ario-cover-handler.h\
 	ario-debug.h\
 	ario-lyrics.c\
 	ario-lyrics.h\

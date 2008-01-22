@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-19 13:18+0100\n"
+"POT-Creation-Date: 2008-01-22 19:45+0100\n"
 "PO-Revision-Date: 2008-01-17 18:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -261,11 +261,11 @@ msgstr "Puerto:"
 msgid "_Autoconnect on startup"
 msgstr "Conectar _automáticamente en el arranque"
 
-#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:116
+#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:118
 msgid "_Connect"
 msgstr "_Conectar"
 
-#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:119
+#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:121
 msgid "_Disconnect"
 msgstr "_Desconectar"
 
@@ -393,7 +393,7 @@ msgstr "n/d"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La carátula ya existe. ¿Desea reemplazarla?"
 
-#: ../src/ario-mpd.c:535
+#: ../src/ario-mpd.c:580
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
 
@@ -473,7 +473,7 @@ msgstr "Reproducir/Pausa"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:45
-#: ../src/widgets/ario-header.c:284
+#: ../src/widgets/ario-header.c:296
 msgid "Play next song"
 msgstr "Reproducir la canción siguiente"
 
@@ -689,142 +689,142 @@ msgstr "Lista de reproducción"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:107
+#: ../src/shell/ario-shell.c:109
 msgid "_File"
 msgstr "_Fichero"
 
-#: ../src/shell/ario-shell.c:108
+#: ../src/shell/ario-shell.c:110
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../src/shell/ario-shell.c:109
+#: ../src/shell/ario-shell.c:111
 msgid "_View"
 msgstr "_Vista"
 
-#: ../src/shell/ario-shell.c:110
+#: ../src/shell/ario-shell.c:112
 msgid "_Tool"
 msgstr "Herramien_ta"
 
-#: ../src/shell/ario-shell.c:111
+#: ../src/shell/ario-shell.c:113
 msgid "_Help"
 msgstr "A_yuda"
 
-#: ../src/shell/ario-shell.c:113
+#: ../src/shell/ario-shell.c:115
 msgid "_Save Playlist"
 msgstr "Guardar li_sta de reproducción"
 
-#: ../src/shell/ario-shell.c:114
+#: ../src/shell/ario-shell.c:116
 msgid "Save Playlist"
 msgstr "Guardar la lista de reproducción"
 
-#: ../src/shell/ario-shell.c:117
+#: ../src/shell/ario-shell.c:119
 msgid "Connect"
 msgstr "Conectar"
 
-#: ../src/shell/ario-shell.c:120
+#: ../src/shell/ario-shell.c:122
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: ../src/shell/ario-shell.c:122
+#: ../src/shell/ario-shell.c:124
 msgid "_Quit"
 msgstr "_Salir"
 
-#: ../src/shell/ario-shell.c:123
+#: ../src/shell/ario-shell.c:125
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/shell/ario-shell.c:125
+#: ../src/shell/ario-shell.c:127
 msgid "Prefere_nces"
 msgstr "Prefere_ncias"
 
-#: ../src/shell/ario-shell.c:126
+#: ../src/shell/ario-shell.c:128
 msgid "Edit music player preferences"
 msgstr "Preferencias del editor del reproductor de música"
 
-#: ../src/shell/ario-shell.c:128
+#: ../src/shell/ario-shell.c:130
 msgid "Download album _covers"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:129
+#: ../src/shell/ario-shell.c:131
 msgid "Download covers form amazon"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:131
+#: ../src/shell/ario-shell.c:133
 msgid "Show _lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:132
+#: ../src/shell/ario-shell.c:134
 msgid "Show song lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:134
+#: ../src/shell/ario-shell.c:136
 msgid "_About"
 msgstr "_Acerca de"
 
-#: ../src/shell/ario-shell.c:135
+#: ../src/shell/ario-shell.c:137
 msgid "Show information about the music player"
 msgstr "Mostrar información sobre el reproductor de música"
 
-#: ../src/shell/ario-shell.c:137
+#: ../src/shell/ario-shell.c:139
 msgid "_Translate this application..."
 msgstr "_Traducir esta aplicación..."
 
-#: ../src/shell/ario-shell.c:138
+#: ../src/shell/ario-shell.c:140
 msgid "Translate this application"
 msgstr "Traducir esta aplicación"
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:147
 msgid "_Library"
 msgstr "Bib_lioteca"
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:148
 #, fuzzy
 msgid "Library view"
 msgstr "Vista de biblioteca"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:152
 msgid "_Web Radios"
 msgstr "Radios _web"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:153
 msgid "Web Radios view"
 msgstr "Vista de radios web"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:159
 msgid "_Search"
 msgstr "Bu_scar"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:160
 msgid "Search view"
 msgstr "Vista de búsqueda"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:165
 msgid "_Playlists"
 msgstr "Listas de re_producción"
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:166
 msgid "Playlists view"
 msgstr "Vista de listas de reproducción"
 
-#: ../src/shell/ario-shell.c:511
+#: ../src/shell/ario-shell.c:518
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:512
+#: ../src/shell/ario-shell.c:519
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverdownloader.c:256
+#: ../src/shell/ario-shell-coverdownloader.c:257
 msgid "Music Player Cover Download"
 msgstr "Descargar el reproductor de música de carátulas"
 
-#: ../src/shell/ario-shell-coverdownloader.c:374
+#: ../src/shell/ario-shell-coverdownloader.c:375
 msgid "Download Finished!"
 msgstr "Bajada terminada"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:377
+#: ../src/shell/ario-shell-coverdownloader.c:378
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -835,24 +835,24 @@ msgstr ""
 "%i carátulas no encontradas\n"
 "%i carátulas ya existen"
 
-#: ../src/shell/ario-shell-coverselect.c:239
+#: ../src/shell/ario-shell-coverselect.c:240
 msgid "Cover Download"
 msgstr "Descargar carátula"
 
-#: ../src/shell/ario-shell-coverselect.c:251
+#: ../src/shell/ario-shell-coverselect.c:252
 #: ../src/shell/ario-shell-preferences.c:177
 msgid "Covers"
 msgstr "Carátulas"
 
-#: ../src/shell/ario-shell-coverselect.c:389
+#: ../src/shell/ario-shell-coverselect.c:390
 msgid "Select a file"
 msgstr "Seleccione un archivo"
 
-#: ../src/shell/ario-shell-coverselect.c:554
+#: ../src/shell/ario-shell-coverselect.c:555
 msgid "Error reading file"
 msgstr "Error al leer el archivo"
 
-#: ../src/shell/ario-shell-coverselect.c:577
+#: ../src/shell/ario-shell-coverselect.c:578
 msgid "Error saving file"
 msgstr "Error guardando el archivo"
 
@@ -915,70 +915,70 @@ msgstr "Configuración"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#: ../src/widgets/ario-header.c:116
+#: ../src/widgets/ario-header.c:120
 msgid "_Play/Pause"
 msgstr "_Reproducir/Pausar"
 
-#: ../src/widgets/ario-header.c:117
+#: ../src/widgets/ario-header.c:121
 msgid "Start playback"
 msgstr "Iniciar reproducción"
 
-#: ../src/widgets/ario-header.c:119
+#: ../src/widgets/ario-header.c:123
 msgid "_Stop"
 msgstr "_Detener"
 
-#: ../src/widgets/ario-header.c:120
+#: ../src/widgets/ario-header.c:124
 msgid "Stop playback"
 msgstr "Detener reproducción"
 
-#: ../src/widgets/ario-header.c:122
+#: ../src/widgets/ario-header.c:126
 msgid "_Next"
 msgstr "_Siguiente"
 
-#: ../src/widgets/ario-header.c:123
+#: ../src/widgets/ario-header.c:127
 msgid "Start playing the next song"
 msgstr "Comenzar la reproducción de la siguiente canción"
 
-#: ../src/widgets/ario-header.c:125
+#: ../src/widgets/ario-header.c:129
 msgid "P_revious"
 msgstr "_Anterior"
 
-#: ../src/widgets/ario-header.c:126
+#: ../src/widgets/ario-header.c:130
 msgid "Start playing the previous song"
 msgstr "Comenzar la reproducción de la canción anterior"
 
-#: ../src/widgets/ario-header.c:142 ../src/widgets/ario-tray-icon.c:39
+#: ../src/widgets/ario-header.c:147 ../src/widgets/ario-tray-icon.c:38
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>desde</i> %s <i>por</i> %s"
 
-#: ../src/widgets/ario-header.c:242
+#: ../src/widgets/ario-header.c:254
 msgid "Play previous song"
 msgstr "Reproducir la canción anterior"
 
-#: ../src/widgets/ario-header.c:262
+#: ../src/widgets/ario-header.c:274
 msgid "Play/Pause the music"
 msgstr "Reproducir/Pausar la música"
 
-#: ../src/widgets/ario-header.c:273
+#: ../src/widgets/ario-header.c:285
 msgid "Stop the music"
 msgstr "Parar la música"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:349 ../src/widgets/ario-tray-icon.c:612
+#: ../src/widgets/ario-header.c:361 ../src/widgets/ario-tray-icon.c:659
 msgid " of "
 msgstr " de "
 
-#: ../src/widgets/ario-header.c:373
+#: ../src/widgets/ario-header.c:385
 msgid "Toggle random on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:384
+#: ../src/widgets/ario-header.c:396
 msgid "Toggle repeat on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:497
+#: ../src/widgets/ario-header.c:524
 msgid "Change the music volume"
 msgstr "Cambiar el volumen de la música"
 
@@ -1028,11 +1028,11 @@ msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
 msgid "%d Songs - %s"
 msgstr "%d Canciones - %s"
 
-#: ../src/widgets/ario-tray-icon.c:38
+#: ../src/widgets/ario-tray-icon.c:37
 msgid "Not playing"
 msgstr "No se está reproduciendo nada"
 
-#: ../src/widgets/ario-tray-icon.c:338
+#: ../src/widgets/ario-tray-icon.c:364
 msgid "Ario tray icon"
 msgstr ""
 
