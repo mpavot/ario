@@ -35,6 +35,7 @@
 #include "shell/ario-shell-preferences.h"
 #include "shell/ario-shell-lyrics.h"
 #include "shell/ario-shell-coverdownloader.h"
+#include "shell/ario-shell-coverselect.h"
 #include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
 
@@ -59,6 +60,8 @@ static void ario_shell_cmd_radio_view (GtkRadioAction *action,
                                        GtkRadioAction *current,
                                        ArioShell *shell);
 #endif  /* MULTIPLE_VIEW */
+static void ario_shell_cmd_cover_select (GtkAction *action,
+                                         ArioShell *shell);
 static void ario_shell_cmd_covers (GtkAction *action,
                                    ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
@@ -127,6 +130,9 @@ static GtkActionEntry ario_shell_actions [] =
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
                 N_("Edit music player preferences"),
                 G_CALLBACK (ario_shell_cmd_preferences) },
+       { "ToolCoverSelect", GTK_STOCK_FIND, N_("_Change current album cover"), NULL,
+                N_("Change current album cover"),
+                G_CALLBACK (ario_shell_cmd_cover_select) },
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
                 N_("Download covers form amazon"),
                 G_CALLBACK (ario_shell_cmd_covers) },
@@ -543,6 +549,30 @@ ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                 shell->priv->connected = ario_mpd_is_connected (mpd);
                 ario_shell_sync_mpd (shell);
         }
+}
+
+static void
+ario_shell_cmd_cover_select (GtkAction *action,
+                             ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *coverselect;
+        char *artist;
+        char *album;
+
+        artist = ario_mpd_get_current_artist (shell->priv->mpd);
+        album = ario_mpd_get_current_album (shell->priv->mpd);
+
+        if (!album)
+                album = ARIO_MPD_UNKNOWN;
+
+        if (!artist)
+                artist = ARIO_MPD_UNKNOWN;
+
+        coverselect = ario_shell_coverselect_new (artist,
+                                                  album);
+        gtk_dialog_run (GTK_DIALOG (coverselect));
+        gtk_widget_destroy (coverselect);
 }
 
 static void

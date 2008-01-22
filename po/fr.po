@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-22 19:45+0100\n"
+"POT-Creation-Date: 2008-01-22 20:09+0100\n"
 "PO-Revision-Date: 2008-01-14 22:22+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -260,11 +260,11 @@ msgstr "Port:"
 msgid "_Autoconnect on startup"
 msgstr "_Connexion automatique au démarrage"
 
-#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:118
+#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:121
 msgid "_Connect"
 msgstr "_Connecter"
 
-#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:121
+#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:124
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 
@@ -681,128 +681,136 @@ msgstr "Playlist"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Êtes-vous sûr de vouloir supprimer toutes les playlists sélectionnées?"
 
-#: ../src/shell/ario-shell.c:109
+#: ../src/shell/ario-shell.c:112
 msgid "_File"
 msgstr "_Fichier"
 
-#: ../src/shell/ario-shell.c:110
+#: ../src/shell/ario-shell.c:113
 msgid "_Edit"
 msgstr "É_dition"
 
-#: ../src/shell/ario-shell.c:111
+#: ../src/shell/ario-shell.c:114
 msgid "_View"
 msgstr "_Affichage"
 
-#: ../src/shell/ario-shell.c:112
+#: ../src/shell/ario-shell.c:115
 msgid "_Tool"
 msgstr "_Outils"
 
-#: ../src/shell/ario-shell.c:113
+#: ../src/shell/ario-shell.c:116
 msgid "_Help"
 msgstr "_Aide"
 
-#: ../src/shell/ario-shell.c:115
+#: ../src/shell/ario-shell.c:118
 msgid "_Save Playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/shell/ario-shell.c:116
+#: ../src/shell/ario-shell.c:119
 msgid "Save Playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/shell/ario-shell.c:119
+#: ../src/shell/ario-shell.c:122
 msgid "Connect"
 msgstr "_Connecter"
 
-#: ../src/shell/ario-shell.c:122
+#: ../src/shell/ario-shell.c:125
 msgid "Disconnect"
 msgstr "_Déconnecter"
 
-#: ../src/shell/ario-shell.c:124
+#: ../src/shell/ario-shell.c:127
 msgid "_Quit"
 msgstr "_Quitter"
 
-#: ../src/shell/ario-shell.c:125
+#: ../src/shell/ario-shell.c:128
 msgid "Quit"
 msgstr "_Quitter"
 
-#: ../src/shell/ario-shell.c:127
+#: ../src/shell/ario-shell.c:130
 msgid "Prefere_nces"
 msgstr "Préfére_nces"
 
-#: ../src/shell/ario-shell.c:128
+#: ../src/shell/ario-shell.c:131
 msgid "Edit music player preferences"
 msgstr "Modifier les préférences"
 
-#: ../src/shell/ario-shell.c:130
+#: ../src/shell/ario-shell.c:133
+msgid "_Change current album cover"
+msgstr "_Changer la pochette actuelle"
+
+#: ../src/shell/ario-shell.c:134
+msgid "Change current album cover"
+msgstr "Changer la pochette actuelle"
+
+#: ../src/shell/ario-shell.c:136
 msgid "Download album _covers"
 msgstr "Télécharger les pochettes"
 
-#: ../src/shell/ario-shell.c:131
+#: ../src/shell/ario-shell.c:137
 msgid "Download covers form amazon"
 msgstr "Télécharger des pochettes depuis amazon"
 
-#: ../src/shell/ario-shell.c:133
+#: ../src/shell/ario-shell.c:139
 msgid "Show _lyrics"
 msgstr "Afficher les _Paroles"
 
-#: ../src/shell/ario-shell.c:134
+#: ../src/shell/ario-shell.c:140
 msgid "Show song lyrics"
 msgstr "Affiche les paroles des chansons"
 
-#: ../src/shell/ario-shell.c:136
+#: ../src/shell/ario-shell.c:142
 msgid "_About"
 msgstr "_À propos"
 
-#: ../src/shell/ario-shell.c:137
+#: ../src/shell/ario-shell.c:143
 msgid "Show information about the music player"
 msgstr "Affichier des informations sur le lecteur de musique"
 
-#: ../src/shell/ario-shell.c:139
+#: ../src/shell/ario-shell.c:145
 msgid "_Translate this application..."
 msgstr "_Traduire cette application..."
 
-#: ../src/shell/ario-shell.c:140
+#: ../src/shell/ario-shell.c:146
 msgid "Translate this application"
 msgstr "Traduire cette application"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:153
 msgid "_Library"
 msgstr "_Bibliothèque"
 
-#: ../src/shell/ario-shell.c:148
+#: ../src/shell/ario-shell.c:154
 msgid "Library view"
 msgstr "Affichage de la bibliothèque"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:158
 msgid "_Web Radios"
 msgstr "_Web Radios"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:159
 msgid "Web Radios view"
 msgstr "Affichage des Web Radios"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:165
 msgid "_Search"
 msgstr "_Recherche"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:166
 msgid "Search view"
 msgstr "Chercher dans la bibliothèque"
 
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:171
 msgid "_Playlists"
 msgstr "_Playlists"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:172
 msgid "Playlists view"
 msgstr "Affichage des Playlists"
 
-#: ../src/shell/ario-shell.c:518
+#: ../src/shell/ario-shell.c:524
 msgid "GTK client for MPD"
 msgstr "Client GTK pour MPD"
 
-#: ../src/shell/ario-shell.c:519
+#: ../src/shell/ario-shell.c:525
 msgid "translator-credits"
 msgstr "Marc Pavot <marc.pavot@gmail.com>"
 

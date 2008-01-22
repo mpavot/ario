@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-22 19:45+0100\n"
+"POT-Creation-Date: 2008-01-22 20:09+0100\n"
 "PO-Revision-Date: 2008-01-15 13:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -257,11 +257,11 @@ msgstr ""
 msgid "_Autoconnect on startup"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:118
+#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:121
 msgid "_Connect"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:121
+#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:124
 msgid "_Disconnect"
 msgstr ""
 
@@ -675,128 +675,136 @@ msgstr ""
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Apakah anda yakin ingin menghapus semua daftar main?"
 
-#: ../src/shell/ario-shell.c:109
+#: ../src/shell/ario-shell.c:112
 msgid "_File"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:110
+#: ../src/shell/ario-shell.c:113
 msgid "_Edit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:111
+#: ../src/shell/ario-shell.c:114
 msgid "_View"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:112
+#: ../src/shell/ario-shell.c:115
 msgid "_Tool"
 msgstr "perkakas"
 
-#: ../src/shell/ario-shell.c:113
+#: ../src/shell/ario-shell.c:116
 msgid "_Help"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:115
+#: ../src/shell/ario-shell.c:118
 msgid "_Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:116
+#: ../src/shell/ario-shell.c:119
 msgid "Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:119
+#: ../src/shell/ario-shell.c:122
 msgid "Connect"
 msgstr "koneksikan"
 
-#: ../src/shell/ario-shell.c:122
+#: ../src/shell/ario-shell.c:125
 msgid "Disconnect"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:124
+#: ../src/shell/ario-shell.c:127
 msgid "_Quit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:125
+#: ../src/shell/ario-shell.c:128
 msgid "Quit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:127
+#: ../src/shell/ario-shell.c:130
 msgid "Prefere_nces"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:128
+#: ../src/shell/ario-shell.c:131
 msgid "Edit music player preferences"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:130
-msgid "Download album _covers"
-msgstr "donwload sampul album"
-
-#: ../src/shell/ario-shell.c:131
-msgid "Download covers form amazon"
-msgstr "donwload sampul album dari Amazon"
-
 #: ../src/shell/ario-shell.c:133
-msgid "Show _lyrics"
+msgid "_Change current album cover"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:134
-msgid "Show song lyrics"
+msgid "Change current album cover"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:136
-msgid "_About"
-msgstr ""
+msgid "Download album _covers"
+msgstr "donwload sampul album"
 
 #: ../src/shell/ario-shell.c:137
-msgid "Show information about the music player"
-msgstr ""
+msgid "Download covers form amazon"
+msgstr "donwload sampul album dari Amazon"
 
 #: ../src/shell/ario-shell.c:139
-msgid "_Translate this application..."
+msgid "Show _lyrics"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:140
+msgid "Show song lyrics"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:142
+msgid "_About"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:143
+msgid "Show information about the music player"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:145
+msgid "_Translate this application..."
+msgstr ""
+
+#: ../src/shell/ario-shell.c:146
 msgid "Translate this application"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:153
 msgid "_Library"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:148
+#: ../src/shell/ario-shell.c:154
 msgid "Library view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:158
 msgid "_Web Radios"
 msgstr "Radio jaringan"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:159
 msgid "Web Radios view"
 msgstr "tampilan radio jaringan"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:165
 msgid "_Search"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:166
 msgid "Search view"
 msgstr "tampilan menu cari"
 
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:171
 msgid "_Playlists"
 msgstr "Daftar main"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:172
 msgid "Playlists view"
 msgstr "Tampilan daftar main"
 
-#: ../src/shell/ario-shell.c:518
+#: ../src/shell/ario-shell.c:524
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:519
+#: ../src/shell/ario-shell.c:525
 msgid "translator-credits"
 msgstr ""
 
