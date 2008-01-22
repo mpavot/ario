@@ -152,6 +152,7 @@ static GtkActionEntry ario_shell_actions [] =
 };
 static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 
+#ifdef MULTIPLE_VIEW
 static GtkRadioActionEntry ario_shell_radio [] =
 {
         { "LibraryView", NULL, N_("_Library"), NULL,
@@ -178,6 +179,7 @@ static GtkRadioActionEntry ario_shell_radio [] =
 #endif  /* ENABLE_STOREDPLAYLISTS */
 };
 static guint ario_shell_n_radio = G_N_ELEMENTS (ario_shell_radio);
+#endif  /* MULTIPLE_VIEW */
 
 static GObjectClass *parent_class;
 
