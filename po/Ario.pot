@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-22 20:09+0100\n"
+"POT-Creation-Date: 2008-01-23 22:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,47 +218,35 @@ msgstr ""
 msgid "Auto detect"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:3
-msgid "Autodetect MPD servers"
-msgstr ""
-
-#: ../data/connection-prefs.glade.h:4 ../src/widgets/ario-firstlaunch.c:161
+#: ../data/connection-prefs.glade.h:3 ../src/widgets/ario-firstlaunch.c:161
 msgid "Default"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:5
-msgid "Delete profile"
-msgstr ""
-
-#: ../data/connection-prefs.glade.h:6 ../data/connection-assistant.glade.h:2
+#: ../data/connection-prefs.glade.h:4 ../data/connection-assistant.glade.h:2
 msgid "Host:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:7
+#: ../data/connection-prefs.glade.h:5
 msgid "Name:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:8
-msgid "New profile"
-msgstr ""
-
-#: ../data/connection-prefs.glade.h:9
+#: ../data/connection-prefs.glade.h:6
 msgid "Password:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:10 ../data/connection-assistant.glade.h:4
+#: ../data/connection-prefs.glade.h:7 ../data/connection-assistant.glade.h:4
 msgid "Port:"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:11
+#: ../data/connection-prefs.glade.h:8
 msgid "_Autoconnect on startup"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:121
+#: ../data/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:125
 msgid "_Connect"
 msgstr ""
 
-#: ../data/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:124
+#: ../data/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:128
 msgid "_Disconnect"
 msgstr ""
 
@@ -347,30 +335,34 @@ msgid "Title : "
 msgstr ""
 
 #: ../data/server-prefs.glade.h:1
-msgid "<b>Crossfade</b>"
+msgid "<b>Audio outputs</b>"
 msgstr ""
 
 #: ../data/server-prefs.glade.h:2
-msgid "<b>Database</b>"
+msgid "<b>Crossfade</b>"
 msgstr ""
 
 #: ../data/server-prefs.glade.h:3
-msgid "Last updated:"
+msgid "<b>Database</b>"
 msgstr ""
 
 #: ../data/server-prefs.glade.h:4
-msgid "_Update"
+msgid "Last updated:"
 msgstr ""
 
 #: ../data/server-prefs.glade.h:5
-msgid "enable crossfade"
+msgid "_Update"
 msgstr ""
 
 #: ../data/server-prefs.glade.h:6
+msgid "enable crossfade"
+msgstr ""
+
+#: ../data/server-prefs.glade.h:7
 msgid "fade time (s):"
 msgstr ""
 
-#: ../data/server-prefs.glade.h:7 ../src/ario-util.c:42 ../src/ario-util.c:60
+#: ../data/server-prefs.glade.h:8 ../src/ario-util.c:42 ../src/ario-util.c:60
 #, c-format
 msgid "n/a"
 msgstr ""
@@ -419,37 +411,38 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:512
+#: ../src/preferences/ario-connection-preferences.c:511
 msgid "Server autodetection"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:523
+#: ../src/preferences/ario-connection-preferences.c:522
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:533
+#: ../src/preferences/ario-connection-preferences.c:532
+#: ../src/preferences/ario-server-preferences.c:214
 #: ../src/widgets/ario-firstlaunch.c:298
 msgid "Name"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:541
+#: ../src/preferences/ario-connection-preferences.c:540
 #: ../src/widgets/ario-firstlaunch.c:306
 msgid "Host"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:549
+#: ../src/preferences/ario-connection-preferences.c:548
 #: ../src/widgets/ario-firstlaunch.c:314
 msgid "Port"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:609
+#: ../src/preferences/ario-connection-preferences.c:608
 msgid "You must select a server."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:628
+#: ../src/preferences/ario-connection-preferences.c:627
 msgid "New Profile"
 msgstr ""
 
@@ -468,12 +461,16 @@ msgstr ""
 msgid "Do nothing"
 msgstr ""
 
-#: ../src/preferences/ario-server-preferences.c:245
+#: ../src/preferences/ario-server-preferences.c:203
+msgid "Enabled"
+msgstr ""
+
+#: ../src/preferences/ario-server-preferences.c:311
 msgid "Not connected"
 msgstr ""
 
-#: ../src/preferences/ario-server-preferences.c:250
-#: ../src/preferences/ario-server-preferences.c:323
+#: ../src/preferences/ario-server-preferences.c:316
+#: ../src/preferences/ario-server-preferences.c:403
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
 msgstr ""
@@ -541,12 +538,12 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1289
+#: ../src/sources/ario-browser.c:1282
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1353
+#: ../src/sources/ario-browser.c:1346
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -580,28 +577,28 @@ msgid "Internet Radios"
 msgstr ""
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:852
+#: ../src/sources/ario-radio.c:848
 msgid "Add a WebRadio"
 msgstr ""
 
-#: ../src/sources/ario-radio.c:862 ../src/sources/ario-radio.c:1116
+#: ../src/sources/ario-radio.c:858 ../src/sources/ario-radio.c:1108
 msgid "Name : "
 msgstr ""
 
-#: ../src/sources/ario-radio.c:863 ../src/sources/ario-radio.c:1117
+#: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1109
 msgid "URL : "
 msgstr ""
 
-#: ../src/sources/ario-radio.c:914 ../src/sources/ario-radio.c:1169
+#: ../src/sources/ario-radio.c:910 ../src/sources/ario-radio.c:1161
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 
-#: ../src/sources/ario-radio.c:1005
+#: ../src/sources/ario-radio.c:999
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:1106
+#: ../src/sources/ario-radio.c:1098
 msgid "Edit a WebRadio"
 msgstr ""
 
@@ -667,136 +664,136 @@ msgstr ""
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:112
+#: ../src/shell/ario-shell.c:116
 msgid "_File"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:113
+#: ../src/shell/ario-shell.c:117
 msgid "_Edit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:114
+#: ../src/shell/ario-shell.c:118
 msgid "_View"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:115
+#: ../src/shell/ario-shell.c:119
 msgid "_Tool"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:116
+#: ../src/shell/ario-shell.c:120
 msgid "_Help"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:118
+#: ../src/shell/ario-shell.c:122
 msgid "_Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:119
+#: ../src/shell/ario-shell.c:123
 msgid "Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:122
+#: ../src/shell/ario-shell.c:126
 msgid "Connect"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:125
+#: ../src/shell/ario-shell.c:129
 msgid "Disconnect"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:127
+#: ../src/shell/ario-shell.c:131
 msgid "_Quit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:128
+#: ../src/shell/ario-shell.c:132
 msgid "Quit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:130
+#: ../src/shell/ario-shell.c:134
 msgid "Prefere_nces"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:131
+#: ../src/shell/ario-shell.c:135
 msgid "Edit music player preferences"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:133
+#: ../src/shell/ario-shell.c:137
 msgid "_Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:134
+#: ../src/shell/ario-shell.c:138
 msgid "Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:136
+#: ../src/shell/ario-shell.c:140
 msgid "Download album _covers"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:137
+#: ../src/shell/ario-shell.c:141
 msgid "Download covers form amazon"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:139
+#: ../src/shell/ario-shell.c:143
 msgid "Show _lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:140
+#: ../src/shell/ario-shell.c:144
 msgid "Show song lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:142
+#: ../src/shell/ario-shell.c:146
 msgid "_About"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:143
+#: ../src/shell/ario-shell.c:147
 msgid "Show information about the music player"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:149
 msgid "_Translate this application..."
 msgstr ""
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:150
 msgid "Translate this application"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:158
 msgid "_Library"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:159
 msgid "Library view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:163
 msgid "_Web Radios"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:164
 msgid "Web Radios view"
 msgstr ""
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:170
 msgid "_Search"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:171
 msgid "Search view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:176
 msgid "_Playlists"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:177
 msgid "Playlists view"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:524
+#: ../src/shell/ario-shell.c:537
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:525
+#: ../src/shell/ario-shell.c:538
 msgid "translator-credits"
 msgstr ""
 
@@ -993,15 +990,15 @@ msgid "Duration"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1106
+#: ../src/widgets/ario-playlist.c:1094
 msgid "Save playlist"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1116
+#: ../src/widgets/ario-playlist.c:1104
 msgid "Playlist name : "
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1140
+#: ../src/widgets/ario-playlist.c:1128
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 

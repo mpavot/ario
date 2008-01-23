@@ -1496,3 +1496,41 @@ ario_mpd_launch_timeout (ArioMpd *mpd)
                                                (GSourceFunc) ario_mpd_update_status,
                                                mpd);
 }
+
+GSList *
+ario_mpd_get_outputs (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *outputs = NULL;
+        mpd_OutputEntity *output_ent;
+
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return NULL;
+
+        mpd_sendOutputsCommand (mpd->priv->connection);
+
+        while ((output_ent = mpd_getNextOutput (mpd->priv->connection)))
+                outputs = g_slist_append (outputs, output_ent);
+
+        mpd_finishCommand (mpd->priv->connection);
+
+        return outputs;
+}
+
+void
+ario_mpd_enable_output (ArioMpd *mpd,
+                        int id,
+                        gboolean enabled)
+{
+        ARIO_LOG_FUNCTION_START
+
+        if (enabled) {
+                mpd_sendEnableOutputCommand(mpd->priv->connection, id);
+        } else {
+                mpd_sendDisableOutputCommand(mpd->priv->connection, id);
+        }
+
+        mpd_finishCommand (mpd->priv->connection);
+}
+
