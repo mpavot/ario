@@ -67,8 +67,18 @@ struct ArioServerPreferencesPrivate
         GtkWidget *crossfadetime_spinbutton;
         GtkWidget *updatedb_label;
         GtkWidget *updatedb_button;
+        GtkWidget *outputs_treeview;
+        GtkListStore *outputs_model;
 
         gboolean sync_mpd;
+};
+
+enum
+{
+        ENABLED_COLUMN,
+        NAME_COLUMN,
+        ID_COLUMN,
+        N_COLUMN
 };
 
 static GObjectClass *parent_class = NULL;
@@ -130,12 +140,37 @@ ario_server_preferences_init (ArioServerPreferences *server_preferences)
         server_preferences->priv = g_new0 (ArioServerPreferencesPrivate, 1);
 }
 
+static void
+ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
+                                           gchar *path_str,
+                                           ArioServerPreferences *server_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        gboolean state;
+        gint id;
+        GtkTreeIter iter;
+        GtkTreeModel *model = GTK_TREE_MODEL (server_preferences->priv->outputs_model);
+        GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+
+        if (gtk_tree_model_get_iter (model, &iter, path)) {
+                gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id,-1);
+                state = !state;
+                ario_mpd_enable_output (server_preferences->priv->mpd,
+                                        id,
+                                        state);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, ENABLED_COLUMN, state, -1);
+        }
+        gtk_tree_path_free (path);
+}
+
 GtkWidget *
 ario_server_preferences_new (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioServerPreferences *server_preferences;
         GladeXML *xml;
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
 
         server_preferences = g_object_new (TYPE_ARIO_SERVER_PREFERENCES,
                                            "mpd", mpd,
@@ -155,6 +190,33 @@ ario_server_preferences_new (ArioMpd *mpd)
                 glade_xml_get_widget (xml, "updatedb_label");
         server_preferences->priv->updatedb_button = 
                 glade_xml_get_widget (xml, "updatedb_button");
+        server_preferences->priv->outputs_treeview = 
+                glade_xml_get_widget (xml, "outputs_treeview");
+
+        server_preferences->priv->outputs_model = gtk_list_store_new (N_COLUMN,
+                                                                      G_TYPE_BOOLEAN,
+                                                                      G_TYPE_STRING,
+                                                                      G_TYPE_INT);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (server_preferences->priv->outputs_treeview),
+                                 GTK_TREE_MODEL (server_preferences->priv->outputs_model));
+        renderer = gtk_cell_renderer_toggle_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Enabled"),
+                                                           renderer,
+                                                           "active", ENABLED_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 80);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (server_preferences->priv->outputs_treeview), column);
+        g_signal_connect (GTK_OBJECT (renderer),
+                          "toggled",
+                          G_CALLBACK (ario_server_preferences_output_toggled_cb), server_preferences);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Name"),
+                                                           renderer,
+                                                           "text", NAME_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (server_preferences->priv->outputs_treeview), column);
 
         ario_server_preferences_sync_server (server_preferences);
 
@@ -236,6 +298,10 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         gboolean updating;
         long last_update;
         gchar *last_update_char;
+        GtkTreeIter iter;
+        GSList *tmp;
+        ArioMpdOutput *output;
+        GSList *outputs;
 
         state = ario_mpd_get_current_state (server_preferences->priv->mpd);
         updating = ario_mpd_get_updating (server_preferences->priv->mpd);
@@ -264,6 +330,20 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
 
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, (!updating && state != MPD_STATUS_STATE_UNKNOWN));
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), last_update_char);
+
+        outputs = ario_mpd_get_outputs (server_preferences->priv->mpd);
+        gtk_list_store_clear (server_preferences->priv->outputs_model);
+        for (tmp = outputs; tmp; tmp = g_slist_next (tmp)) {
+                output = (ArioMpdOutput *) tmp->data;
+                gtk_list_store_append (server_preferences->priv->outputs_model, &iter);
+                gtk_list_store_set (server_preferences->priv->outputs_model, &iter,
+                                    ENABLED_COLUMN, output->enabled,
+                                    NAME_COLUMN, output->name,
+                                    ID_COLUMN, output->id,
+                                    -1);
+        }
+        g_slist_foreach (outputs, (GFunc) ario_mpd_free_output, NULL);
+        g_slist_free (outputs);
 
         server_preferences->priv->sync_mpd = FALSE;
 }

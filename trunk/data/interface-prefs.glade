@@ -11,7 +11,7 @@
         <child>
           <widget class="GtkFrame" id="frame1">
             <property name="visible">True</property>
-            <property name="border_width">14</property>
+            <property name="border_width">10</property>
             <property name="label_xalign">0</property>
             <property name="shadow_type">GTK_SHADOW_IN</property>
             <child>
@@ -61,7 +61,7 @@
         <child>
           <widget class="GtkFrame" id="frame2">
             <property name="visible">True</property>
-            <property name="border_width">14</property>
+            <property name="border_width">10</property>
             <property name="label_xalign">0</property>
             <property name="shadow_type">GTK_SHADOW_IN</property>
             <child>

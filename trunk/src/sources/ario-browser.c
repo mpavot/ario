@@ -683,7 +683,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                 if (!GDK_IS_PIXBUF (cover)) {
                         /* There is no cover, we show a transparent picture */
                         cover = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COVER_SIZE, COVER_SIZE);
-                        gdk_pixbuf_fill (cover, 0xffffff00);
+                        gdk_pixbuf_fill (cover, 0);
                 }
 
                 gtk_list_store_append (browser->priv->albums_model, &album_iter);

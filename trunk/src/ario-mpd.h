@@ -56,7 +56,9 @@ typedef struct ArioMpdSearchCriteria
 } ArioMpdSearchCriteria;
 
 typedef mpd_Song ArioMpdSong;
+typedef mpd_OutputEntity ArioMpdOutput;
 #define ario_mpd_free_song mpd_freeSong
+#define ario_mpd_free_output mpd_freeOutputElement
 
 typedef struct
 {
@@ -99,19 +101,19 @@ gboolean                ario_mpd_update_status                          (ArioMpd
 
 void                    ario_mpd_update_db                              (ArioMpd *mpd);
 
-GSList *                 ario_mpd_get_artists                            (ArioMpd *mpd);
+GSList *                ario_mpd_get_artists                            (ArioMpd *mpd);
 
-GSList *                 ario_mpd_get_albums                             (ArioMpd *mpd,
-                                                                          const char *artist);
-GSList *                 ario_mpd_get_songs                              (ArioMpd *mpd,
-                                                                          const char *artist,
-                                                                          const char *album);
-GSList *                 ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
-                                                                          char *playlist);
-GSList *                 ario_mpd_get_playlists                          (ArioMpd *mpd);
+GSList *                ario_mpd_get_albums                             (ArioMpd *mpd,
+                                                                         const char *artist);
+GSList *                ario_mpd_get_songs                              (ArioMpd *mpd,
+                                                                         const char *artist,
+                                                                         const char *album);
+GSList *                ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
+                                                                         char *playlist);
+GSList *                ario_mpd_get_playlists                          (ArioMpd *mpd);
 
-GSList *                 ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
-                                                                          int playlist_id);
+GSList *                ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
+                                                                         int playlist_id);
 char *                  ario_mpd_get_current_title                      (ArioMpd *mpd);
 
 char *                  ario_mpd_get_current_name                       (ArioMpd *mpd);
@@ -189,8 +191,8 @@ void                    ario_mpd_queue_move                             (ArioMpd
                                                                          int new_pos);
 void                    ario_mpd_queue_commit                           (ArioMpd *mpd);
 
-GSList*                  ario_mpd_search                                 (ArioMpd *mpd,
-                                                                          GSList *search_criterias);
+GSList*                 ario_mpd_search                                 (ArioMpd *mpd,
+                                                                         GSList *search_criterias);
 // returns 0 if OK, 1 if playlist already exists
 int                     ario_mpd_save_playlist                          (ArioMpd *mpd,
                                                                          const char *name);
@@ -199,6 +201,13 @@ void                    ario_mpd_delete_playlist                        (ArioMpd
 void                    ario_mpd_use_count_inc                          (ArioMpd *mpd);
 
 void                    ario_mpd_use_count_dec                          (ArioMpd *mpd);
+
+GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
+
+void                    ario_mpd_enable_output                          (ArioMpd *mpd,
+                                                                         int id,
+                                                                         gboolean enabled);
+
 G_END_DECLS
 
 #endif /* __ARIO_MPD_H */
