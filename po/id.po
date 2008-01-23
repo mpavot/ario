@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-23 22:38+0100\n"
+"POT-Creation-Date: 2008-01-23 23:50+0100\n"
 "PO-Revision-Date: 2008-01-15 13:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -374,6 +374,39 @@ msgstr "waktu pudar"
 msgid "n/a"
 msgstr ""
 
+#: ../data/stats-prefs.glade.h:1
+msgid "<b>Database play time:</b>"
+msgstr ""
+
+#: ../data/stats-prefs.glade.h:2
+#, fuzzy
+msgid "<b>Number of albums:</b>"
+msgstr "Album:"
+
+#: ../data/stats-prefs.glade.h:3
+#, fuzzy
+msgid "<b>Number of artists:</b>"
+msgstr "Artis:"
+
+#: ../data/stats-prefs.glade.h:4
+msgid "<b>Number of songs:</b>"
+msgstr ""
+
+#: ../data/stats-prefs.glade.h:5
+#, fuzzy
+msgid "<b>Play time:</b>"
+msgstr "Album:"
+
+#: ../data/stats-prefs.glade.h:6
+#, fuzzy
+msgid "<b>Statistics</b>"
+msgstr "Artis:"
+
+#: ../data/stats-prefs.glade.h:7
+#, fuzzy
+msgid "<b>Uptime:</b>"
+msgstr "Artis:"
+
 #: ../src/ario-cover.c:416
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Sampul telah ada. Ingin menggantinya?"
@@ -473,6 +506,12 @@ msgid "Enabled"
 msgstr ""
 
 #: ../src/preferences/ario-server-preferences.c:311
+#: ../src/preferences/ario-stats-preferences.c:254
+#: ../src/preferences/ario-stats-preferences.c:255
+#: ../src/preferences/ario-stats-preferences.c:256
+#: ../src/preferences/ario-stats-preferences.c:257
+#: ../src/preferences/ario-stats-preferences.c:258
+#: ../src/preferences/ario-stats-preferences.c:259
 msgid "Not connected"
 msgstr ""
 
@@ -827,7 +866,7 @@ msgid "Cover Download"
 msgstr ""
 
 #: ../src/shell/ario-shell-coverselect.c:252
-#: ../src/shell/ario-shell-preferences.c:177
+#: ../src/shell/ario-shell-preferences.c:178
 msgid "Covers"
 msgstr ""
 
@@ -859,20 +898,24 @@ msgstr "lirik tak ditemukan"
 msgid "Lyrics Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:137
+#: ../src/shell/ario-shell-preferences.c:138
 msgid "Ario Preferences"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:167
+#: ../src/shell/ario-shell-preferences.c:168
 msgid "Connection"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:172
+#: ../src/shell/ario-shell-preferences.c:173
 msgid "Server"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:182
+#: ../src/shell/ario-shell-preferences.c:183
 msgid "Interface"
+msgstr ""
+
+#: ../src/shell/ario-shell-preferences.c:188
+msgid "Statistics"
 msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:205

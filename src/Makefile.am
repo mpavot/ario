@@ -43,6 +43,8 @@ ario_SOURCES = \
 	preferences/ario-interface-preferences.h\
 	preferences/ario-server-preferences.c\
 	preferences/ario-server-preferences.h\
+        preferences/ario-stats-preferences.c\
+        preferences/ario-stats-preferences.h\
 	preferences/ario-preferences.h\
 	sources/ario-browser.c\
 	sources/ario-browser.h\

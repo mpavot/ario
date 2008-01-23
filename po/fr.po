@@ -10,13 +10,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-23 22:38+0100\n"
-"PO-Revision-Date: 2008-01-23 22:38+0100\n"
+"POT-Creation-Date: 2008-01-23 23:50+0100\n"
+"PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
@@ -376,6 +376,34 @@ msgstr "Durée du fondu (s):"
 msgid "n/a"
 msgstr "n/a"
 
+#: ../data/stats-prefs.glade.h:1
+msgid "<b>Database play time:</b>"
+msgstr ""
+
+#: ../data/stats-prefs.glade.h:2
+msgid "<b>Number of albums:</b>"
+msgstr "<b>Nombre d'albums:</b>"
+
+#: ../data/stats-prefs.glade.h:3
+msgid "<b>Number of artists:</b>"
+msgstr "<b>Nombre d'artistes:</b>"
+
+#: ../data/stats-prefs.glade.h:4
+msgid "<b>Number of songs:</b>"
+msgstr "<b>Numbre de chansons</b>"
+
+#: ../data/stats-prefs.glade.h:5
+msgid "<b>Play time:</b>"
+msgstr "<b>Durée de lecture:</b>"
+
+#: ../data/stats-prefs.glade.h:6
+msgid "<b>Statistics</b>"
+msgstr "<b>Statistiques</b>"
+
+#: ../data/stats-prefs.glade.h:7
+msgid "<b>Uptime:</b>"
+msgstr "<b>Durée d'activitée:</b>"
+
 #: ../src/ario-cover.c:416
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La pochette existe déjà. Voulez-vous la remplacer?"
@@ -477,6 +505,12 @@ msgid "Enabled"
 msgstr "Activéee"
 
 #: ../src/preferences/ario-server-preferences.c:311
+#: ../src/preferences/ario-stats-preferences.c:254
+#: ../src/preferences/ario-stats-preferences.c:255
+#: ../src/preferences/ario-stats-preferences.c:256
+#: ../src/preferences/ario-stats-preferences.c:257
+#: ../src/preferences/ario-stats-preferences.c:258
+#: ../src/preferences/ario-stats-preferences.c:259
 msgid "Not connected"
 msgstr "Déconnecté"
 
@@ -836,7 +870,7 @@ msgid "Cover Download"
 msgstr "Téléchargement de pochettes"
 
 #: ../src/shell/ario-shell-coverselect.c:252
-#: ../src/shell/ario-shell-preferences.c:177
+#: ../src/shell/ario-shell-preferences.c:178
 msgid "Covers"
 msgstr "Pochettes"
 
@@ -868,21 +902,25 @@ msgstr "Paroles introuvables"
 msgid "Lyrics Download"
 msgstr "Téléchargement de paroles"
 
-#: ../src/shell/ario-shell-preferences.c:137
+#: ../src/shell/ario-shell-preferences.c:138
 msgid "Ario Preferences"
 msgstr "Préférences d'Ario"
 
-#: ../src/shell/ario-shell-preferences.c:167
+#: ../src/shell/ario-shell-preferences.c:168
 msgid "Connection"
 msgstr "Connexion"
 
-#: ../src/shell/ario-shell-preferences.c:172
+#: ../src/shell/ario-shell-preferences.c:173
 msgid "Server"
 msgstr "Serveur"
 
-#: ../src/shell/ario-shell-preferences.c:182
+#: ../src/shell/ario-shell-preferences.c:183
 msgid "Interface"
 msgstr "Interface"
+
+#: ../src/shell/ario-shell-preferences.c:188
+msgid "Statistics"
+msgstr "Statistiques"
 
 #: ../src/widgets/ario-firstlaunch.c:205
 #, c-format

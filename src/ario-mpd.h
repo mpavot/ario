@@ -57,6 +57,8 @@ typedef struct ArioMpdSearchCriteria
 
 typedef mpd_Song ArioMpdSong;
 typedef mpd_OutputEntity ArioMpdOutput;
+typedef mpd_Stats ArioMpdStats;
+
 #define ario_mpd_free_song mpd_freeSong
 #define ario_mpd_free_output mpd_freeOutputElement
 
@@ -153,7 +155,7 @@ unsigned long           ario_mpd_get_last_update                        (ArioMpd
 void                    ario_mpd_set_current_elapsed                    (ArioMpd *mpd,
                                                                          gint elapsed);
 void                    ario_mpd_set_current_volume                     (ArioMpd *mpd,
-                                                                         gint volume);
+                                                                         gint volume);GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
 void                    ario_mpd_set_current_random                     (ArioMpd *mpd,
                                                                          gboolean random);
 void                    ario_mpd_set_current_repeat                     (ArioMpd *mpd,
@@ -207,6 +209,7 @@ GSList *                ario_mpd_get_outputs                            (ArioMpd
 void                    ario_mpd_enable_output                          (ArioMpd *mpd,
                                                                          int id,
                                                                          gboolean enabled);
+ArioMpdStats *          ario_mpd_get_stats                              (ArioMpd *mpd);
 
 G_END_DECLS
 

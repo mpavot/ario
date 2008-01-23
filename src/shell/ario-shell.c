@@ -422,6 +422,10 @@ ario_shell_show (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
 
+        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
+                                 "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
+                                 shell, 0);
+
         if (eel_gconf_get_boolean (CONF_AUTOCONNECT, TRUE))
                 ario_mpd_connect (shell->priv->mpd);
 
@@ -436,10 +440,6 @@ ario_shell_show (ArioShell *shell)
 
         g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
-                                 shell, 0);
-
-        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
-                                 "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
                                  shell, 0);
 
         shell->priv->shown = TRUE;
