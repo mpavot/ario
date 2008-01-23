@@ -1106,6 +1106,9 @@ unsigned long
 ario_mpd_get_last_update (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return 0;
 
         if (mpd->priv->stats)
                 mpd_freeStats (mpd->priv->stats);
@@ -1534,3 +1537,20 @@ ario_mpd_enable_output (ArioMpd *mpd,
         mpd_finishCommand (mpd->priv->connection);
 }
 
+ArioMpdStats *
+ario_mpd_get_stats (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return NULL;
+
+        if (mpd->priv->stats)
+                mpd_freeStats (mpd->priv->stats);
+        mpd_sendStatsCommand (mpd->priv->connection);
+        mpd->priv->stats = mpd_getStats (mpd->priv->connection);
+
+        ario_mpd_check_errors (mpd);
+
+        return mpd->priv->stats;
+}

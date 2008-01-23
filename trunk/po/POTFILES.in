@@ -12,6 +12,7 @@ data/cover-select.glade
 data/interface-prefs.glade
 data/lyrics-select.glade
 data/server-prefs.glade
+data/stats-prefs.glade
 src/ario-avahi.c
 src/ario-avahi.h
 src/ario-cover.c
@@ -44,6 +45,8 @@ src/preferences/ario-interface-preferences.c
 src/preferences/ario-interface-preferences.h
 src/preferences/ario-server-preferences.c
 src/preferences/ario-server-preferences.h
+src/preferences/ario-stats-preferences.c
+src/preferences/ario-stats-preferences.h
 src/preferences/ario-preferences.h
 src/sources/ario-browser.c
 src/sources/ario-browser.h

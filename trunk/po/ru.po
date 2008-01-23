@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-23 22:38+0100\n"
+"POT-Creation-Date: 2008-01-23 23:50+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -377,6 +377,40 @@ msgstr "время затухания (s):"
 msgid "n/a"
 msgstr "недоступно"
 
+#: ../data/stats-prefs.glade.h:1
+#, fuzzy
+msgid "<b>Database play time:</b>"
+msgstr "<b>База данных</b>"
+
+#: ../data/stats-prefs.glade.h:2
+#, fuzzy
+msgid "<b>Number of albums:</b>"
+msgstr "<b>Альбом : </b>"
+
+#: ../data/stats-prefs.glade.h:3
+#, fuzzy
+msgid "<b>Number of artists:</b>"
+msgstr "<b>Исполнитель : </b>"
+
+#: ../data/stats-prefs.glade.h:4
+msgid "<b>Number of songs:</b>"
+msgstr ""
+
+#: ../data/stats-prefs.glade.h:5
+#, fuzzy
+msgid "<b>Play time:</b>"
+msgstr "<b>Иконка в трее</b>"
+
+#: ../data/stats-prefs.glade.h:6
+#, fuzzy
+msgid "<b>Statistics</b>"
+msgstr "<b>Исполнитель : </b>"
+
+#: ../data/stats-prefs.glade.h:7
+#, fuzzy
+msgid "<b>Uptime:</b>"
+msgstr "<b>Заголовок : </b>"
+
 #: ../src/ario-cover.c:416
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Обложка уже существует. Вы точно хотите заменить?"
@@ -479,6 +513,12 @@ msgid "Enabled"
 msgstr ""
 
 #: ../src/preferences/ario-server-preferences.c:311
+#: ../src/preferences/ario-stats-preferences.c:254
+#: ../src/preferences/ario-stats-preferences.c:255
+#: ../src/preferences/ario-stats-preferences.c:256
+#: ../src/preferences/ario-stats-preferences.c:257
+#: ../src/preferences/ario-stats-preferences.c:258
+#: ../src/preferences/ario-stats-preferences.c:259
 msgid "Not connected"
 msgstr "Не подключен"
 
@@ -835,7 +875,7 @@ msgid "Cover Download"
 msgstr "Загрузить обложку"
 
 #: ../src/shell/ario-shell-coverselect.c:252
-#: ../src/shell/ario-shell-preferences.c:177
+#: ../src/shell/ario-shell-preferences.c:178
 msgid "Covers"
 msgstr "Обложки"
 
@@ -867,21 +907,25 @@ msgstr "Тексты песен не найдены"
 msgid "Lyrics Download"
 msgstr "Загрузить тексты песен"
 
-#: ../src/shell/ario-shell-preferences.c:137
+#: ../src/shell/ario-shell-preferences.c:138
 msgid "Ario Preferences"
 msgstr "Ario Настройки"
 
-#: ../src/shell/ario-shell-preferences.c:167
+#: ../src/shell/ario-shell-preferences.c:168
 msgid "Connection"
 msgstr "Соединение"
 
-#: ../src/shell/ario-shell-preferences.c:172
+#: ../src/shell/ario-shell-preferences.c:173
 msgid "Server"
 msgstr "Сервер"
 
-#: ../src/shell/ario-shell-preferences.c:182
+#: ../src/shell/ario-shell-preferences.c:183
 msgid "Interface"
 msgstr "Внешний вид"
+
+#: ../src/shell/ario-shell-preferences.c:188
+msgid "Statistics"
+msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:205
 #, c-format

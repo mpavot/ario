@@ -27,7 +27,8 @@ glade_DATA = connection-prefs.glade	\
 	     server-prefs.glade		\
 	     cover-progress.glade	\
 	     lyrics-select.glade	\
-	     cover-select.glade
+	     cover-select.glade	        \
+	     stats-prefs.glade
 
 appicon_DATA = ario.png
 appicondir = $(datadir)/icons/hicolor/48x48/apps
