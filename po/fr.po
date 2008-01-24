@@ -502,7 +502,7 @@ msgstr "Ne rien faire"
 
 #: ../src/preferences/ario-server-preferences.c:203
 msgid "Enabled"
-msgstr "Activéee"
+msgstr "Activée"
 
 #: ../src/preferences/ario-server-preferences.c:311
 #: ../src/preferences/ario-stats-preferences.c:254

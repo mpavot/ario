@@ -150,6 +150,12 @@ ario_stats_preferences_new (ArioMpd *mpd)
                 glade_xml_get_widget (xml, "playtime_label");
         stats_preferences->priv->dbplay_time_label = 
                 glade_xml_get_widget (xml, "dbplay_time_label");
+        gtk_widget_set_size_request(stats_preferences->priv->nbartists_label, 250, -1);
+        gtk_widget_set_size_request(stats_preferences->priv->nbalbums_label, 250, -1);
+        gtk_widget_set_size_request(stats_preferences->priv->nbsongs_label, 250, -1);
+        gtk_widget_set_size_request(stats_preferences->priv->uptime_label, 250, -1);
+        gtk_widget_set_size_request(stats_preferences->priv->playtime_label, 250, -1);
+        gtk_widget_set_size_request(stats_preferences->priv->dbplay_time_label, 250, -1);
 
         ario_stats_preferences_sync_stats (stats_preferences);
 
@@ -239,15 +245,15 @@ ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences)
                 gtk_label_set_text (GTK_LABEL (stats_preferences->priv->nbsongs_label), tmp);
                 g_free (tmp);
 
-                tmp = ario_util_format_total_time ( stats->uptime);
+                tmp = ario_util_format_total_time (stats->uptime);
                 gtk_label_set_text (GTK_LABEL (stats_preferences->priv->uptime_label), tmp);
                 g_free (tmp);
 
-                tmp = ario_util_format_total_time ( stats->playTime);
+                tmp = ario_util_format_total_time (stats->playTime);
                 gtk_label_set_text (GTK_LABEL (stats_preferences->priv->playtime_label), tmp);
                 g_free (tmp);
 
-                tmp = ario_util_format_total_time ( stats->dbPlayTime);
+                tmp = ario_util_format_total_time (stats->dbPlayTime);
                 gtk_label_set_text (GTK_LABEL (stats_preferences->priv->dbplay_time_label), tmp);
                 g_free (tmp);
         } else {
