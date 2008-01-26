@@ -38,6 +38,7 @@
 #include "shell/ario-shell-coverselect.h"
 #include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
+#include "ario-util.h"
 
 static void ario_shell_class_init (ArioShellClass *klass);
 static void ario_shell_init (ArioShell *shell);
@@ -70,6 +71,8 @@ static void ario_shell_cmd_translate (GtkAction *action,
                                       ArioShell *shell);
 static void ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                              ArioShell *shell);
+static void ario_shell_mpd_song_changed_cb (ArioMpd *mpd,
+                                            ArioShell *shell);
 static void ario_shell_source_changed_cb (GConfClient *client,
                                           guint cnxn_id,
                                           GConfEntry *entry,
@@ -426,6 +429,10 @@ ario_shell_show (ArioShell *shell)
                                  "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
                                  shell, 0);
 
+        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
+                                 "song_changed", G_CALLBACK (ario_shell_mpd_song_changed_cb),
+                                 shell, 0);
+                                 
         if (eel_gconf_get_boolean (CONF_AUTOCONNECT, TRUE))
                 ario_mpd_connect (shell->priv->mpd);
 
@@ -554,6 +561,37 @@ ario_shell_cmd_translate (GtkAction *action,
 }
 
 static void
+ario_shell_mpd_song_set_title (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *window_title;
+        gchar *tmp;
+        
+        switch (ario_mpd_get_current_state (shell->priv->mpd)) {
+        case MPD_STATUS_STATE_PLAY:
+        case MPD_STATUS_STATE_PAUSE:
+                tmp = ario_util_format_title (ario_mpd_get_current_song (shell->priv->mpd));
+                window_title = g_strdup_printf ("Ario - %s", tmp);
+                g_free (tmp);
+                break;
+        default:
+                window_title = g_strdup("Ario");
+                break;
+        }
+        
+        gtk_window_set_title (GTK_WINDOW (shell->priv->window), window_title);
+        g_free (window_title);
+}
+
+static void
+ario_shell_mpd_song_changed_cb (ArioMpd *mpd,
+                                ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_shell_mpd_song_set_title (shell);
+}
+
+static void
 ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                  ArioShell *shell)
 {
@@ -562,6 +600,7 @@ ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                 shell->priv->connected = ario_mpd_is_connected (mpd);
                 ario_shell_sync_mpd (shell);
         }
+        ario_shell_mpd_song_set_title (shell);
 }
 
 static void
