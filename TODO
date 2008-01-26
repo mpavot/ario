@@ -1,4 +1,4 @@
-- add lyrics in song properties
+- shar more code between ario-shell-songinfos & ario-shell-lytics
 - Add to playlist and play
 - Playlists : Save playlist from search (is it possible?)
 - keep lyrics window size in gconf
