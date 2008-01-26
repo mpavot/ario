@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.0 on Thu Jan 24 20:17:58 2008 -->
+<!--Generated with glade3 3.4.0 on Sat Jan 26 01:10:58 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="window1">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -111,6 +111,7 @@
                       <widget class="GtkLabel" id="dbplay_time_const_label">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">&lt;b&gt;Database play time:&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
@@ -120,21 +121,10 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="playtime_const_label">
-                        <property name="visible">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Play time:&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">4</property>
-                        <property name="bottom_attach">5</property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="GtkLabel" id="uptime_const_label">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">&lt;b&gt;Uptime:&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
@@ -147,6 +137,7 @@
                       <widget class="GtkLabel" id="nbsongs_const_label">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">&lt;b&gt;Number of songs:&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
@@ -159,6 +150,7 @@
                       <widget class="GtkLabel" id="nbalbums_const_label">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">&lt;b&gt;Number of albums:&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
@@ -168,9 +160,23 @@
                       </packing>
                     </child>
                     <child>
+                      <widget class="GtkLabel" id="playtime_const_label">
+                        <property name="visible">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">&lt;b&gt;Play time:&lt;/b&gt;</property>
+                        <property name="use_markup">True</property>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                      </packing>
+                    </child>
+                    <child>
                       <widget class="GtkLabel" id="nbartists_const_label">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">&lt;b&gt;Number of artists:&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>

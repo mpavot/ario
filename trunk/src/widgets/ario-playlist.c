@@ -27,6 +27,7 @@
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
+#include "shell/ario-shell-songinfos.h"
 
 #define DRAG_THRESHOLD 1
 
@@ -63,6 +64,8 @@ static void ario_playlist_cmd_clear (GtkAction *action,
                                      ArioPlaylist *playlist);
 static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
+static void ario_playlist_cmd_songs_properties (GtkAction *action,
+                                                ArioPlaylist *playlist);
 static gboolean ario_playlist_view_button_press_cb (GtkTreeView *treeview,
                                                     GdkEventButton *event,
                                                     ArioPlaylist *playlist);
@@ -117,7 +120,10 @@ static GtkActionEntry ario_playlist_actions [] =
                 G_CALLBACK (ario_playlist_cmd_remove) },
         { "PlaylistSave", GTK_STOCK_SAVE, N_("_Save"), NULL,
                 N_("Save the playlist"),
-                G_CALLBACK (ario_playlist_cmd_save) }
+                G_CALLBACK (ario_playlist_cmd_save) },
+        { "PlaylistSongProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+                N_("Show songs properties"),
+                G_CALLBACK (ario_playlist_cmd_songs_properties) }
 };
 
 static guint ario_playlist_n_actions = G_N_ELEMENTS (ario_playlist_actions);
@@ -139,6 +145,7 @@ enum
         ALBUM_COLUMN,
         DURATION_COLUMN,
         ID_COLUMN,
+        PATH_COLUMN,
         N_COLUMN
 };
 
@@ -309,7 +316,8 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
-                                                    G_TYPE_INT);
+                                                    G_TYPE_INT,
+                                                    G_TYPE_STRING);
 
         gtk_tree_view_set_model (GTK_TREE_VIEW (playlist->priv->tree),
                                  GTK_TREE_MODEL (playlist->priv->model));
@@ -557,6 +565,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                                                     ALBUM_COLUMN, song->album,
                                                     DURATION_COLUMN, time,
                                                     ID_COLUMN, song->id,
+                                                    PATH_COLUMN, song->file,
                                                     -1);
                                 g_free (title);
                                 g_free (time);
@@ -575,6 +584,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                                             ALBUM_COLUMN, song->album,
                                             DURATION_COLUMN, time,
                                             ID_COLUMN, song->id,
+                                            PATH_COLUMN, song->file,
                                             -1);
                         g_free (title);
                         g_free (time);
@@ -1077,6 +1087,49 @@ ario_playlist_cmd_remove (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_remove (playlist);
+}
+
+static void
+ario_playlist_selection_properties_foreach (GtkTreeModel *model,
+                                            GtkTreePath *path,
+                                            GtkTreeIter *iter,
+                                            gpointer userdata)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList **paths = (GSList **) userdata;
+        gchar *val = NULL;
+
+        gtk_tree_model_get (model, iter, PATH_COLUMN, &val, -1);
+
+        *paths = g_slist_append (*paths, val);
+}
+
+static void
+ario_playlist_cmd_songs_properties (GtkAction *action,
+                                    ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        
+
+                                             
+        ARIO_LOG_FUNCTION_START
+        GSList *paths = NULL;
+        GList *songs;
+        GtkWidget *songinfos;
+                
+        gtk_tree_selection_selected_foreach (playlist->priv->selection,
+                                             ario_playlist_selection_properties_foreach,
+                                             &paths);
+
+        songs = ario_mpd_get_songs_info (playlist->priv->mpd,
+                                         paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
+        
+        songinfos = ario_shell_songinfos_new (playlist->priv->mpd,
+                                              songs);
+        if (songinfos)
+                gtk_widget_show_all (songinfos);
 }
 
 void

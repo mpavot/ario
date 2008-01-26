@@ -211,6 +211,9 @@ void                    ario_mpd_enable_output                          (ArioMpd
                                                                          gboolean enabled);
 ArioMpdStats *          ario_mpd_get_stats                              (ArioMpd *mpd);
 
+GList *                 ario_mpd_get_songs_info                         (ArioMpd *mpd,
+                                                                         GSList *paths);
+
 G_END_DECLS
 
 #endif /* __ARIO_MPD_H */

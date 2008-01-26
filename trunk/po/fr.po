@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-23 23:50+0100\n"
+"POT-Creation-Date: 2008-01-26 12:14+0100\n"
 "PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -188,83 +188,86 @@ msgstr "Ario music player"
 msgid "Client apllication to mpd"
 msgstr "Client pour MPD"
 
-#: ../data/cover-prefs.glade.h:1
+#: ../data/glade/cover-prefs.glade.h:1
 msgid "<b>Covers</b>"
 msgstr "<b>Pochettes</b>"
 
-#: ../data/cover-prefs.glade.h:2
+#: ../data/glade/cover-prefs.glade.h:2
 msgid "<b>Proxy</b>"
 msgstr "<b>Proxy</b>"
 
-#: ../data/cover-prefs.glade.h:3
+#: ../data/glade/cover-prefs.glade.h:3
 msgid "Proxy Address: "
 msgstr "Adresse du proxy"
 
-#: ../data/cover-prefs.glade.h:4
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Proxy Port: "
 msgstr "Port du proxy"
 
-#: ../data/cover-prefs.glade.h:5
+#: ../data/glade/cover-prefs.glade.h:5
 msgid "Show the covers in the albums list"
 msgstr "Afficher les pochettes dans la liste d'albums"
 
-#: ../data/cover-prefs.glade.h:6
+#: ../data/glade/cover-prefs.glade.h:6
 msgid "Use Amazon."
 msgstr "Utiliser Amazon."
 
-#: ../data/cover-prefs.glade.h:7
+#: ../data/glade/cover-prefs.glade.h:7
 msgid "Use a proxy"
 msgstr "Utiliser un proxy"
 
-#: ../data/connection-prefs.glade.h:1
+#: ../data/glade/connection-prefs.glade.h:1
 msgid "<b>Connection</b>"
 msgstr "<b>Connexion</b>"
 
-#: ../data/connection-prefs.glade.h:2
+#: ../data/glade/connection-prefs.glade.h:2
 msgid "Auto detect"
 msgstr "Détection automatique"
 
-#: ../data/connection-prefs.glade.h:3 ../src/widgets/ario-firstlaunch.c:161
+#: ../data/glade/connection-prefs.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:161
 msgid "Default"
 msgstr "Défaut"
 
-#: ../data/connection-prefs.glade.h:4 ../data/connection-assistant.glade.h:2
+#: ../data/glade/connection-prefs.glade.h:4
+#: ../data/glade/connection-assistant.glade.h:2
 msgid "Host:"
 msgstr "Hôte:"
 
-#: ../data/connection-prefs.glade.h:5
+#: ../data/glade/connection-prefs.glade.h:5
 msgid "Name:"
 msgstr "Nom:"
 
-#: ../data/connection-prefs.glade.h:6
+#: ../data/glade/connection-prefs.glade.h:6
 msgid "Password:"
 msgstr "Mot de passe:"
 
-#: ../data/connection-prefs.glade.h:7 ../data/connection-assistant.glade.h:4
+#: ../data/glade/connection-prefs.glade.h:7
+#: ../data/glade/connection-assistant.glade.h:4
 msgid "Port:"
 msgstr "Port:"
 
-#: ../data/connection-prefs.glade.h:8
+#: ../data/glade/connection-prefs.glade.h:8
 msgid "_Autoconnect on startup"
 msgstr "_Connexion automatique au démarrage"
 
-#: ../data/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:125
+#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:125
 msgid "_Connect"
 msgstr "_Connecter"
 
-#: ../data/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:128
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:128
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 
-#: ../data/connection-assistant.glade.h:1
+#: ../data/glade/connection-assistant.glade.h:1
 msgid "Automatic configuration"
 msgstr "Configuration Automatique"
 
-#: ../data/connection-assistant.glade.h:3
+#: ../data/glade/connection-assistant.glade.h:3
 msgid "Manual configuration"
 msgstr "Configuration Manuelle"
 
-#: ../data/connection-assistant.glade.h:5
+#: ../data/glade/connection-assistant.glade.h:5
 msgid ""
 "You need to specify an MPD server to connect to. If you don't see your MPD "
 "server thanks to the automatic configuration, you should check that zeroconf "
@@ -274,141 +277,194 @@ msgstr ""
 "vous ne voyez pas votre serveur MPD, vous devriez vérifier que zeroconf est "
 "activé sur votre serveur MPD ou utiliser la configuration manuelle."
 
-#: ../data/cover-progress.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1
 msgid "<b>Downloading cover</b>"
 msgstr "<b>Télécharger les pochettes</b>"
 
-#: ../data/cover-progress.glade.h:2 ../data/cover-select.glade.h:4
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:4
 msgid "Album : "
 msgstr "Album : "
 
-#: ../data/cover-progress.glade.h:3 ../data/cover-select.glade.h:6
-#: ../data/lyrics-select.glade.h:3
+#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:6
+#: ../data/glade/lyrics-select.glade.h:3
 msgid "Artist : "
 msgstr "Artiste : "
 
-#: ../data/cover-select.glade.h:1
+#: ../data/glade/cover-select.glade.h:1
 msgid "<b>Album : </b>"
 msgstr "<b>Album : </b>"
 
-#: ../data/cover-select.glade.h:2 ../data/lyrics-select.glade.h:1
+#: ../data/glade/cover-select.glade.h:2 ../data/glade/lyrics-select.glade.h:1
 msgid "<b>Artist : </b>"
 msgstr "<b>Artiste : </b>"
 
-#: ../data/cover-select.glade.h:3
+#: ../data/glade/cover-select.glade.h:3
 msgid "<b>Cover size</b>"
 msgstr "<b>Taille de la pochette</b>"
 
-#: ../data/cover-select.glade.h:5
+#: ../data/glade/cover-select.glade.h:5
 msgid "Amazon search"
 msgstr "Recherche sur amazon"
 
-#: ../data/cover-select.glade.h:7
+#: ../data/glade/cover-select.glade.h:7
 msgid "Large cover (Slower)"
 msgstr "Grande pochette (plus lent)"
 
-#: ../data/cover-select.glade.h:8
+#: ../data/glade/cover-select.glade.h:8
 msgid "Local search"
 msgstr "Recherche locale"
 
-#: ../data/cover-select.glade.h:9
+#: ../data/glade/cover-select.glade.h:9
 msgid "Medium cover"
 msgstr "Pochette moyenne"
 
-#: ../data/cover-select.glade.h:10
+#: ../data/glade/cover-select.glade.h:10
 msgid "Small cover (Faster)"
 msgstr "Petite pochette (Plus rapide)"
 
-#: ../data/interface-prefs.glade.h:1
+#: ../data/glade/interface-prefs.glade.h:1
 msgid "<b>Tabs</b>"
 msgstr "<b>Onglets</b>"
 
-#: ../data/interface-prefs.glade.h:2
+#: ../data/glade/interface-prefs.glade.h:2
 msgid "<b>Tray icon</b>"
 msgstr "<b>Icône de notification</b>"
 
-#: ../data/interface-prefs.glade.h:3
+#: ../data/glade/interface-prefs.glade.h:3
 msgid "On double click on tray icon : "
 msgstr "Lors d'un double clic sur l'icône de notification : "
 
-#: ../data/interface-prefs.glade.h:4
+#: ../data/glade/interface-prefs.glade.h:4
 msgid "Show tabs"
 msgstr "Afficher les onglets"
 
-#: ../data/lyrics-select.glade.h:2
+#: ../data/glade/lyrics-select.glade.h:2
 msgid "<b>Title : </b>"
 msgstr "<b>Titre : </b>"
 
-#: ../data/lyrics-select.glade.h:4
+#: ../data/glade/lyrics-select.glade.h:4
 msgid "Title : "
 msgstr "Titre : "
 
-#: ../data/server-prefs.glade.h:1
+#: ../data/glade/server-prefs.glade.h:1
 msgid "<b>Audio outputs</b>"
 msgstr "<b>Sorties Audio</b>"
 
-#: ../data/server-prefs.glade.h:2
+#: ../data/glade/server-prefs.glade.h:2
 msgid "<b>Crossfade</b>"
 msgstr "<b>Fondu</b>"
 
-#: ../data/server-prefs.glade.h:3
+#: ../data/glade/server-prefs.glade.h:3
 msgid "<b>Database</b>"
 msgstr "<b>Base de données</b>"
 
-#: ../data/server-prefs.glade.h:4
+#: ../data/glade/server-prefs.glade.h:4
 msgid "Last updated:"
 msgstr "Dernière mise à jour:"
 
-#: ../data/server-prefs.glade.h:5
+#: ../data/glade/server-prefs.glade.h:5
 msgid "_Update"
 msgstr "_Mettre à jour"
 
-#: ../data/server-prefs.glade.h:6
+#: ../data/glade/server-prefs.glade.h:6
 msgid "enable crossfade"
 msgstr "Activer le fondu"
 
-#: ../data/server-prefs.glade.h:7
+#: ../data/glade/server-prefs.glade.h:7
 msgid "fade time (s):"
 msgstr "Durée du fondu (s):"
 
-#: ../data/server-prefs.glade.h:8 ../src/ario-util.c:42 ../src/ario-util.c:60
+#: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
+#: ../src/ario-util.c:42 ../src/ario-util.c:60
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
-#: ../data/stats-prefs.glade.h:1
+#: ../data/glade/stats-prefs.glade.h:1
 msgid "<b>Database play time:</b>"
 msgstr ""
 
-#: ../data/stats-prefs.glade.h:2
+#: ../data/glade/stats-prefs.glade.h:2
 msgid "<b>Number of albums:</b>"
 msgstr "<b>Nombre d'albums:</b>"
 
-#: ../data/stats-prefs.glade.h:3
+#: ../data/glade/stats-prefs.glade.h:3
 msgid "<b>Number of artists:</b>"
 msgstr "<b>Nombre d'artistes:</b>"
 
-#: ../data/stats-prefs.glade.h:4
+#: ../data/glade/stats-prefs.glade.h:4
 msgid "<b>Number of songs:</b>"
-msgstr "<b>Numbre de chansons</b>"
+msgstr "<b>Numbre de chansons:</b>"
 
-#: ../data/stats-prefs.glade.h:5
+#: ../data/glade/stats-prefs.glade.h:5
 msgid "<b>Play time:</b>"
 msgstr "<b>Durée de lecture:</b>"
 
-#: ../data/stats-prefs.glade.h:6
+#: ../data/glade/stats-prefs.glade.h:6
 msgid "<b>Statistics</b>"
 msgstr "<b>Statistiques</b>"
 
-#: ../data/stats-prefs.glade.h:7
+#: ../data/glade/stats-prefs.glade.h:7
 msgid "<b>Uptime:</b>"
 msgstr "<b>Durée d'activitée:</b>"
+
+#: ../data/glade/song-infos.glade.h:1
+msgid "<b>Album:</b>"
+msgstr "<b>Album :</b>"
+
+#: ../data/glade/song-infos.glade.h:2
+msgid "<b>Artist:</b>"
+msgstr "<b>Artiste :</b>"
+
+#: ../data/glade/song-infos.glade.h:3
+msgid "<b>Comment:</b>"
+msgstr "<b>Commentaire:</b>"
+
+#: ../data/glade/song-infos.glade.h:4
+msgid "<b>Composer:</b>"
+msgstr "<b>Compositeur:</b>"
+
+#: ../data/glade/song-infos.glade.h:5
+msgid "<b>Date:</b>"
+msgstr "<b>Date:</b>"
+
+#: ../data/glade/song-infos.glade.h:6
+msgid "<b>Disc:</b>"
+msgstr "<b>Disque :</b>"
+
+#: ../data/glade/song-infos.glade.h:7
+msgid "<b>Filename:</b>"
+msgstr "<b>Fichier:</b>"
+
+#: ../data/glade/song-infos.glade.h:8
+msgid "<b>Genre:</b>"
+msgstr "<b>Genre:</b>"
+
+#: ../data/glade/song-infos.glade.h:9
+msgid "<b>Length:</b>"
+msgstr "<b>Durée:</b>"
+
+#: ../data/glade/song-infos.glade.h:10
+msgid "<b>Performer:</b>"
+msgstr "<b>Interpréte:</b>"
+
+#: ../data/glade/song-infos.glade.h:11
+msgid "<b>Song</b>"
+msgstr "<b>Chanson</b>"
+
+#: ../data/glade/song-infos.glade.h:12
+msgid "<b>Title:</b>"
+msgstr "<b>Titre :</b>"
+
+#: ../data/glade/song-infos.glade.h:13
+msgid "<b>Track:</b>"
+msgstr "<b>Piste:</b>"
 
 #: ../src/ario-cover.c:416
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La pochette existe déjà. Voulez-vous la remplacer?"
 
-#: ../src/ario-mpd.c:580
+#: ../src/ario-mpd.c:582
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible de se connecter à MPD. Vérifiez vos options de connexion."
 
@@ -505,12 +561,12 @@ msgid "Enabled"
 msgstr "Activée"
 
 #: ../src/preferences/ario-server-preferences.c:311
-#: ../src/preferences/ario-stats-preferences.c:254
-#: ../src/preferences/ario-stats-preferences.c:255
-#: ../src/preferences/ario-stats-preferences.c:256
-#: ../src/preferences/ario-stats-preferences.c:257
-#: ../src/preferences/ario-stats-preferences.c:258
-#: ../src/preferences/ario-stats-preferences.c:259
+#: ../src/preferences/ario-stats-preferences.c:260
+#: ../src/preferences/ario-stats-preferences.c:261
+#: ../src/preferences/ario-stats-preferences.c:262
+#: ../src/preferences/ario-stats-preferences.c:263
+#: ../src/preferences/ario-stats-preferences.c:264
+#: ../src/preferences/ario-stats-preferences.c:265
 msgid "Not connected"
 msgstr "Déconnecté"
 
@@ -520,76 +576,85 @@ msgstr "Déconnecté"
 msgid "Updating..."
 msgstr "En cours de mise à jour..."
 
-#: ../src/sources/ario-browser.c:125 ../src/sources/ario-browser.c:128
-#: ../src/sources/ario-browser.c:131 ../src/sources/ario-radio.c:108
+#: ../src/sources/ario-browser.c:127 ../src/sources/ario-browser.c:130
+#: ../src/sources/ario-browser.c:133 ../src/sources/ario-radio.c:108
 #: ../src/sources/ario-search.c:131 ../src/sources/ario-storedplaylists.c:108
 #: ../src/sources/ario-storedplaylists.c:111
 msgid "_Add to playlist"
 msgstr "_Ajouter à la playlist"
 
-#: ../src/sources/ario-browser.c:126 ../src/sources/ario-browser.c:129
-#: ../src/sources/ario-browser.c:132 ../src/sources/ario-radio.c:109
+#: ../src/sources/ario-browser.c:128 ../src/sources/ario-browser.c:131
+#: ../src/sources/ario-browser.c:134 ../src/sources/ario-radio.c:109
 #: ../src/sources/ario-search.c:132 ../src/sources/ario-storedplaylists.c:109
 #: ../src/sources/ario-storedplaylists.c:112
 msgid "Add to the playlist"
 msgstr "_Ajouter à la playlist"
 
-#: ../src/sources/ario-browser.c:135 ../src/sources/ario-browser.c:142
+#: ../src/sources/ario-browser.c:137 ../src/sources/ario-radio.c:117
+#: ../src/widgets/ario-playlist.c:124
+msgid "_Properties"
+msgstr "Propriétés"
+
+#: ../src/sources/ario-browser.c:138 ../src/widgets/ario-playlist.c:125
+msgid "Show songs properties"
+msgstr "Affiche les propriétés des chansons"
+
+#: ../src/sources/ario-browser.c:141 ../src/sources/ario-browser.c:148
 msgid "Get the covers from _Amazon"
 msgstr "Obtenir les pochettes depuis Amazon"
 
-#: ../src/sources/ario-browser.c:136 ../src/sources/ario-browser.c:143
+#: ../src/sources/ario-browser.c:142 ../src/sources/ario-browser.c:149
 msgid "Download the cover from Amazon"
 msgstr "Télécharger la pochette depuis amazon"
 
-#: ../src/sources/ario-browser.c:138 ../src/sources/ario-browser.c:145
+#: ../src/sources/ario-browser.c:144 ../src/sources/ario-browser.c:151
 msgid "_Delete the covers"
 msgstr "_Supprimer les pochettes"
 
-#: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:146
+#: ../src/sources/ario-browser.c:145 ../src/sources/ario-browser.c:152
 msgid "Delete the selected covers"
 msgstr "Supprimer les pochettes sélectionnées"
 
-#: ../src/sources/ario-browser.c:282 ../src/sources/ario-search.c:43
+#: ../src/sources/ario-browser.c:288 ../src/sources/ario-search.c:43
 #: ../src/sources/ario-search.c:325 ../src/sources/ario-storedplaylists.c:311
 #: ../src/shell/ario-shell-lyricsselect.c:199
-#: ../src/widgets/ario-playlist.c:276
+#: ../src/widgets/ario-playlist.c:283
 msgid "Artist"
 msgstr "Artiste"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:336 ../src/sources/ario-search.c:44
+#: ../src/sources/ario-browser.c:342 ../src/sources/ario-search.c:44
 #: ../src/sources/ario-search.c:338 ../src/sources/ario-storedplaylists.c:324
-#: ../src/widgets/ario-playlist.c:287
+#: ../src/widgets/ario-playlist.c:294
 msgid "Album"
 msgstr "Album"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:346
+#: ../src/sources/ario-browser.c:352
 msgid "Cover"
 msgstr "Pochette"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:411 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:254
+#: ../src/sources/ario-browser.c:417 ../src/sources/ario-search.c:46
+#: ../src/widgets/ario-playlist.c:261
 msgid "Track"
 msgstr "Piste"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:418 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:424 ../src/sources/ario-search.c:45
 #: ../src/sources/ario-search.c:312 ../src/sources/ario-storedplaylists.c:298
 #: ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/widgets/ario-playlist.c:265
+#: ../src/widgets/ario-playlist.c:272
 msgid "Title"
 msgstr "Titre"
 
-#: ../src/sources/ario-browser.c:1282
+#: ../src/sources/ario-browser.c:1305
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Êtes-vous sûr de vouloir effacer les pochettes des artites sélectionnés?"
 
-#: ../src/sources/ario-browser.c:1346
+#: ../src/sources/ario-browser.c:1369
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -610,10 +675,6 @@ msgstr "_Supprimer les radios"
 #: ../src/sources/ario-radio.c:115
 msgid "Delete this radios"
 msgstr "Supprimer les radios"
-
-#: ../src/sources/ario-radio.c:117
-msgid "_Properties"
-msgstr "Propriétés"
 
 #: ../src/sources/ario-radio.c:118
 msgid "Change properties of this radio"
@@ -922,6 +983,11 @@ msgstr "Interface"
 msgid "Statistics"
 msgstr "Statistiques"
 
+#: ../src/shell/ario-shell-songinfos.c:168
+#: ../src/shell/ario-shell-songinfos.c:244
+msgid "Song Properties"
+msgstr "Propriétés de la chanson"
+
 #: ../src/widgets/ario-firstlaunch.c:205
 #, c-format
 msgid ""
@@ -1022,44 +1088,44 @@ msgstr "Activer/désactiver le repeat"
 msgid "Change the music volume"
 msgstr "Change le volume de la musique"
 
-#: ../src/widgets/ario-playlist.c:112
+#: ../src/widgets/ario-playlist.c:115
 msgid "_Clear"
 msgstr "_Effacer"
 
-#: ../src/widgets/ario-playlist.c:113
+#: ../src/widgets/ario-playlist.c:116
 msgid "Clear the playlist"
 msgstr "Effacer la playlist"
 
-#: ../src/widgets/ario-playlist.c:115
+#: ../src/widgets/ario-playlist.c:118
 msgid "_Remove"
 msgstr "_Retirer"
 
-#: ../src/widgets/ario-playlist.c:116
+#: ../src/widgets/ario-playlist.c:119
 msgid "Remove the selected songs"
 msgstr "Enlever la chanson sélectionnée"
 
-#: ../src/widgets/ario-playlist.c:118
+#: ../src/widgets/ario-playlist.c:121
 msgid "_Save"
 msgstr "_Sauver"
 
-#: ../src/widgets/ario-playlist.c:119
+#: ../src/widgets/ario-playlist.c:122
 msgid "Save the playlist"
 msgstr "Sauve la playlist"
 
-#: ../src/widgets/ario-playlist.c:298
+#: ../src/widgets/ario-playlist.c:305
 msgid "Duration"
 msgstr "Durée"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1094
+#: ../src/widgets/ario-playlist.c:1147
 msgid "Save playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/widgets/ario-playlist.c:1104
+#: ../src/widgets/ario-playlist.c:1157
 msgid "Playlist name : "
 msgstr "Nom de la playlist : "
 
-#: ../src/widgets/ario-playlist.c:1128
+#: ../src/widgets/ario-playlist.c:1181
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La playlist existe déjà. Voulez-vous la remplacer?"
 
@@ -1085,6 +1151,13 @@ msgstr "+"
 #: ../src/widgets/ario-volume.c:238
 msgid "-"
 msgstr "-"
+
+#, fuzzy
+#~ msgid "_Song properties"
+#~ msgstr "Propriétés"
+
+#~ msgid "Ario - Song Properties"
+#~ msgstr "Ario - Propriétés de la chanson"
 
 #~ msgid "Autodetect MPD servers"
 #~ msgstr "Détection automatique de serveurs MPD"

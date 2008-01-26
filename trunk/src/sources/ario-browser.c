@@ -26,6 +26,7 @@
 #include "ario-cover.h"
 #include "shell/ario-shell-coverselect.h"
 #include "shell/ario-shell-coverdownloader.h"
+#include "shell/ario-shell-songinfos.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
@@ -78,8 +79,9 @@ static void ario_browser_cmd_add_albums (GtkAction *action,
                                          ArioBrowser *browser);
 static void ario_browser_cmd_add_songs (GtkAction *action,
                                         ArioBrowser *browser);
+static void ario_browser_cmd_songs_properties (GtkAction *action,
+                                               ArioBrowser *browser);                              
 static void ario_browser_add_in_playlist (ArioBrowser *browser);
-void ario_browser_refresh_albumview (ArioBrowser *browser);
 static void ario_browser_cmd_get_artist_ario_cover_amazon (GtkAction *action,
                                                            ArioBrowser *browser);
 static void ario_browser_cmd_remove_artist_cover (GtkAction *action,
@@ -131,7 +133,11 @@ static GtkActionEntry ario_browser_actions [] =
         { "BrowserAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 N_("Add to the playlist"),
                 G_CALLBACK (ario_browser_cmd_add_songs) },
-
+                
+        { "BrowserSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+                N_("Show songs properties"),
+                G_CALLBACK (ario_browser_cmd_songs_properties) },
+                
         { "CoverArtistGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
                 N_("Download the cover from Amazon"),
                 G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
@@ -1207,6 +1213,30 @@ ario_browser_cmd_add_songs (GtkAction *action,
 }
 
 static void
+ario_browser_cmd_songs_properties (GtkAction *action,
+                                   ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *paths = NULL;
+        GList *songs;
+        GtkWidget *songinfos;
+                
+        gtk_tree_selection_selected_foreach (browser->priv->songs_selection,
+                                             songs_foreach,
+                                             &paths);
+
+        songs = ario_mpd_get_songs_info (browser->priv->mpd,
+                                         paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
+        
+        songinfos = ario_shell_songinfos_new (browser->priv->mpd,
+                                              songs);
+        if (songinfos)
+                gtk_widget_show_all (songinfos);
+}
+
+static void
 ario_browser_add_in_playlist (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
@@ -1218,13 +1248,6 @@ ario_browser_add_in_playlist (ArioBrowser *browser)
 
         if (GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (browser->priv->songs)))
                 ario_browser_add_songs (browser);
-}
-
-void 
-ario_browser_refresh_albumview (ArioBrowser *browser)
-{
-        ARIO_LOG_FUNCTION_START
-        gtk_widget_queue_draw (GTK_WIDGET (browser->priv->albums));
 }
 
 static void 

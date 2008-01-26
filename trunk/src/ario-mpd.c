@@ -436,10 +436,12 @@ ario_mpd_set_property (GObject *object,
                         if (mpd->priv->ario_mpd_song)
                                 ario_mpd_free_song (mpd->priv->ario_mpd_song);
 
-                        if (new_song)
-                                mpd->priv->ario_mpd_song = mpd_songDup (new_song);
-                        else
+                        if (new_song) {
+                                mpd->priv->ario_mpd_song = new_song;
+                                ent->info.song = NULL;
+                        } else {
                                 mpd->priv->ario_mpd_song = NULL;
+                        }
 
                         if (ent)
                                 mpd_freeInfoEntity (ent);
@@ -753,8 +755,10 @@ ario_mpd_get_songs (ArioMpd *mpd,
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 if (!g_utf8_collate (entity->info.song->artist, artist)) {
                         if (entity->info.song)
-                                if (!is_album_unknown || !entity->info.song->album)
-                                        songs = g_slist_append (songs, mpd_songDup (entity->info.song));
+                                if (!is_album_unknown || !entity->info.song->album) {
+                                        songs = g_slist_append (songs, entity->info.song);
+                                        entity->info.song = NULL;
+                                }
                 }
                 mpd_freeInfoEntity (entity);
         }
@@ -777,7 +781,8 @@ ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
 
         mpd_sendListPlaylistInfoCommand(mpd->priv->connection, playlist);
         while ((ent = mpd_getNextInfoEntity(mpd->priv->connection))) {
-                songs = g_slist_append (songs, mpd_songDup (ent->info.song));
+                songs = g_slist_append (songs, ent->info.song);
+                ent->info.song = NULL;
                 mpd_freeInfoEntity(ent);
         }
         mpd_finishCommand (mpd->priv->connection);
@@ -824,8 +829,10 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
         mpd_sendPlChangesCommand (mpd->priv->connection, playlist_id);
 
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
-                if (entity->info.song)
-                        songs = g_slist_append (songs, mpd_songDup (entity->info.song));
+                if (entity->info.song) {
+                        songs = g_slist_append (songs, entity->info.song);
+                        entity->info.song = NULL;
+                }
                 mpd_freeInfoEntity (entity);
         }
         mpd_finishCommand (mpd->priv->connection);
@@ -1430,7 +1437,8 @@ ario_mpd_search (ArioMpd *mpd,
         mpd_commitSearch(mpd->priv->connection);
 
         while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
-                songs = g_slist_append (songs, mpd_songDup (ent->info.song));
+                songs = g_slist_append (songs, ent->info.song);
+                ent->info.song = NULL;
                 mpd_freeInfoEntity(ent);
         }
         mpd_finishCommand (mpd->priv->connection);
@@ -1553,4 +1561,39 @@ ario_mpd_get_stats (ArioMpd *mpd)
         ario_mpd_check_errors (mpd);
 
         return mpd->priv->stats;
+}
+
+GList *
+ario_mpd_get_songs_info(ArioMpd *mpd,
+                        GSList *paths)
+{
+        ARIO_LOG_FUNCTION_START
+        const gchar *path = NULL;
+        GSList *temp;
+        GList *songs = NULL;
+        mpd_InfoEntity *ent;
+        
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return NULL;
+
+        for (temp = paths; temp; temp = g_slist_next (temp)) {
+                path = temp->data;
+
+                mpd_sendListallInfoCommand (mpd->priv->connection, path);
+
+	        ent = mpd_getNextInfoEntity (mpd->priv->connection);
+
+	        mpd_finishCommand (mpd->priv->connection);
+                if (!ent)
+                        continue;
+
+	        songs = g_list_append (songs, ent->info.song);
+	        ent->info.song = NULL;
+
+	        mpd_freeInfoEntity (ent);
+                ario_mpd_check_errors (mpd);
+        }
+
+        return songs;
 }

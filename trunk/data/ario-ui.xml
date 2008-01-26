@@ -51,6 +51,8 @@
                 <menuitem name="PlaylistRemove" action="PlaylistRemove"/>
                 <separator/>
                 <menuitem name="PlaylistSave" action="PlaylistSave"/>
+                <separator/>
+                <menuitem name="PlaylistSongProperties" action="PlaylistSongProperties"/>
         </popup>
 
         <popup name="BrowserArtistsPopup">
@@ -69,6 +71,7 @@
 
         <popup name="BrowserSongsPopup">
                 <menuitem name="BrowserAddSongs" action="BrowserAddSongs"/>
+                <menuitem name="BrowserSongsProperties" action="BrowserSongsProperties"/>
         </popup>
 
         <popup name="RadioPopupSingle">

@@ -20,15 +20,16 @@ art_DATA = ario.png		\
 	   volume-min.png
 
 gladedir = $(pkgdatadir)/ario/glade
-glade_DATA = connection-prefs.glade	\
-             connection-assistant.glade	\
-	     cover-prefs.glade		\
-	     interface-prefs.glade	\
-	     server-prefs.glade		\
-	     cover-progress.glade	\
-	     lyrics-select.glade	\
-	     cover-select.glade	        \
-	     stats-prefs.glade
+glade_DATA = glade/connection-prefs.glade	\
+             glade/connection-assistant.glade	\
+	     glade/cover-prefs.glade		\
+	     glade/interface-prefs.glade	\
+	     glade/server-prefs.glade		\
+	     glade/cover-progress.glade         \
+	     glade/lyrics-select.glade          \
+	     glade/cover-select.glade	        \
+	     glade/song-infos.glade	        \
+	     glade/stats-prefs.glade
 
 appicon_DATA = ario.png
 appicondir = $(datadir)/icons/hicolor/48x48/apps

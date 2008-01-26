@@ -3,16 +3,17 @@
 # Source files
 data/ario.schemas.in
 data/ario.desktop.in.in
-data/cover-prefs.glade
-data/connection-prefs.glade
-data/connection-assistant.glade
-data/cover-prefs.glade
-data/cover-progress.glade
-data/cover-select.glade
-data/interface-prefs.glade
-data/lyrics-select.glade
-data/server-prefs.glade
-data/stats-prefs.glade
+data/glade/cover-prefs.glade
+data/glade/connection-prefs.glade
+data/glade/connection-assistant.glade
+data/glade/cover-prefs.glade
+data/glade/cover-progress.glade
+data/glade/cover-select.glade
+data/glade/interface-prefs.glade
+data/glade/lyrics-select.glade
+data/glade/server-prefs.glade
+data/glade/stats-prefs.glade
+data/glade/song-infos.glade
 src/ario-avahi.c
 src/ario-avahi.h
 src/ario-cover.c
@@ -70,6 +71,8 @@ src/shell/ario-shell-lyricsselect.c
 src/shell/ario-shell-lyricsselect.h
 src/shell/ario-shell-preferences.c
 src/shell/ario-shell-preferences.h
+src/shell/ario-shell-songinfos.c
+src/shell/ario-shell-songinfos.h
 src/widgets/ario-firstlaunch.c
 src/widgets/ario-firstlaunch.h
 src/widgets/ario-header.c
