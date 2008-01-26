@@ -23,6 +23,8 @@ src/ario-cover-handler.h
 src/ario-debug.h
 src/ario-lyrics.c
 src/ario-lyrics.h
+src/ario-lyrics-editor.c
+src/ario-lyrics-editor.h
 src/ario-main.c
 src/ario-mpd.c
 src/ario-mpd.h

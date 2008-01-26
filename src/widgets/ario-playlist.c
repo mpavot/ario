@@ -749,6 +749,7 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
                         /* grab drop localtion */
                         indice = gtk_tree_path_get_indices (path);
                         drop = indice[0];
+                        gtk_tree_path_free (path);
                 } else {
                         do_not_move = TRUE;
                 }
