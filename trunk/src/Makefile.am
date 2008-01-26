@@ -18,6 +18,8 @@ ario_SOURCES = \
 	ario-debug.h\
 	ario-lyrics.c\
 	ario-lyrics.h\
+	ario-lyrics-editor.c\
+	ario-lyrics-editor.h\
 	ario-main.c\
 	ario-mpd.c\
 	ario-mpd.h\
