@@ -1,4 +1,5 @@
-- Song properties
+- add lyrics in song properties
+- Add song in window title
 - Add to playlist and play
 - Playlists : Save playlist from search (is it possible?)
 - keep lyrics window size in gconf
