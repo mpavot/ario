@@ -79,6 +79,8 @@ static void ario_browser_cmd_add_albums (GtkAction *action,
                                          ArioBrowser *browser);
 static void ario_browser_cmd_add_songs (GtkAction *action,
                                         ArioBrowser *browser);
+static void ario_browser_cmd_albums_properties (GtkAction *action,
+                                                ArioBrowser *browser);
 static void ario_browser_cmd_songs_properties (GtkAction *action,
                                                ArioBrowser *browser);                              
 static void ario_browser_add_in_playlist (ArioBrowser *browser);
@@ -134,6 +136,9 @@ static GtkActionEntry ario_browser_actions [] =
                 N_("Add to the playlist"),
                 G_CALLBACK (ario_browser_cmd_add_songs) },
                 
+        { "BrowserAlbumsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+                N_("Show albums properties"),
+                G_CALLBACK (ario_browser_cmd_albums_properties) },              
         { "BrowserSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 N_("Show songs properties"),
                 G_CALLBACK (ario_browser_cmd_songs_properties) },
@@ -967,7 +972,10 @@ ario_browser_popup_menu (ArioBrowser *browser)
         }
 
         if (GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (browser->priv->albums))) {
-                menu = gtk_ui_manager_get_widget (browser->priv->ui_manager, "/BrowserAlbumsPopup");
+                if (gtk_tree_selection_count_selected_rows (browser->priv->albums_selection) == 1)
+                        menu = gtk_ui_manager_get_widget (browser->priv->ui_manager, "/BrowserAlbumsPopupSingle");
+                else
+                        menu = gtk_ui_manager_get_widget (browser->priv->ui_manager, "/BrowserAlbumsPopupMultiple");
                 gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
                                 gtk_get_current_event_time ());
         }
@@ -1212,6 +1220,37 @@ ario_browser_cmd_add_songs (GtkAction *action,
         ario_browser_add_songs (browser);
 }
 
+static void 
+ario_browser_get_covers_end (ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_artists_selection_update (browser);
+}
+
+static void
+ario_browser_cmd_albums_properties (GtkAction *action,
+                                    ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *coverselect;
+        GSList *albums = NULL;
+        ArioMpdAlbum *ario_mpd_album;
+
+        gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
+                                             get_selected_albums_foreach,
+                                             &albums);
+
+        ario_mpd_album = albums->data;
+        coverselect = ario_shell_coverselect_new (ario_mpd_album->artist,
+                                                  ario_mpd_album->album);
+        gtk_dialog_run (GTK_DIALOG(coverselect));
+        gtk_widget_destroy (coverselect);
+
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
+        ario_browser_get_covers_end (browser);
+}
+
 static void
 ario_browser_cmd_songs_properties (GtkAction *action,
                                    ArioBrowser *browser)
@@ -1248,13 +1287,6 @@ ario_browser_add_in_playlist (ArioBrowser *browser)
 
         if (GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (browser->priv->songs)))
                 ario_browser_add_songs (browser);
-}
-
-static void 
-ario_browser_get_covers_end (ArioBrowser *browser)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_browser_artists_selection_update (browser);
 }
 
 static void
@@ -1318,27 +1350,18 @@ get_album_cover (ArioBrowser *browser,
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL;
+        GtkWidget *coverdownloader;
 
         gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
                                              get_selected_albums_foreach,
                                              &albums);
 
-        if (g_slist_length(albums) == 1 && operation == GET_AMAZON_COVERS) {
-                GtkWidget *coverselect;
-                ArioMpdAlbum *ario_mpd_album = albums->data;
-                coverselect = ario_shell_coverselect_new (ario_mpd_album->artist,
-                                                          ario_mpd_album->album);
-                gtk_dialog_run (GTK_DIALOG(coverselect));
-                gtk_widget_destroy (coverselect);
-        } else {
-                GtkWidget *coverdownloader;
-                coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
+        coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
 
-                ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
-                                                                   albums,
-                                                                   operation);
-                gtk_widget_destroy (coverdownloader);
-        }
+        ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
+                                                           albums,
+                                                           operation);
+        gtk_widget_destroy (coverdownloader);
 
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (albums);

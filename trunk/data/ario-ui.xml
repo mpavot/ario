@@ -62,7 +62,16 @@
                 <menuitem name="CoverArtistRemove" action="CoverArtistRemove"/>
         </popup>
 
-        <popup name="BrowserAlbumsPopup">
+        <popup name="BrowserAlbumsPopupSingle">
+                <menuitem name="BrowserAddAlbums" action="BrowserAddAlbums"/>
+                <separator/>
+                <menuitem name="CoverAlbumGetAmazon" action="CoverAlbumGetAmazon"/>
+                <menuitem name="CoverAlbumRemove" action="CoverAlbumRemove"/>
+                <separator/>
+                <menuitem name="BrowserAlbumsProperties" action="BrowserAlbumsProperties"/>
+        </popup>
+        
+        <popup name="BrowserAlbumsPopupMultiple">
                 <menuitem name="BrowserAddAlbums" action="BrowserAddAlbums"/>
                 <separator/>
                 <menuitem name="CoverAlbumGetAmazon" action="CoverAlbumGetAmazon"/>
