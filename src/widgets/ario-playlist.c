@@ -369,7 +369,6 @@ ario_playlist_init (ArioPlaylist *playlist)
                           G_CALLBACK (ario_playlist_drag_data_get_cb),
                           playlist);
 
-
         gtk_box_set_homogeneous (GTK_BOX (playlist), TRUE);
         gtk_box_set_spacing (GTK_BOX (playlist), 4);
 
@@ -786,7 +785,8 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
                 /* For each song */
                 for (temp_songs = songs; temp_songs; temp_songs = g_slist_next (temp_songs)) {
                         mpd_song = temp_songs->data;
-                        filenames = g_slist_append (filenames, g_strdup (mpd_song->file));
+                        filenames = g_slist_append (filenames, mpd_song->file);
+                        mpd_song->file = NULL;
                 }
 
                 g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
@@ -822,7 +822,8 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
                         /* For each song */
                         for (temp_songs = songs; temp_songs; temp_songs = g_slist_next (temp_songs)) {
                                 mpd_song = temp_songs->data;
-                                filenames = g_slist_append (filenames, g_strdup (mpd_song->file));
+                                filenames = g_slist_append (filenames, mpd_song->file);
+                                mpd_song->file = NULL;
                         }
                         g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                         g_slist_free (songs);
@@ -1110,10 +1111,6 @@ ario_playlist_cmd_songs_properties (GtkAction *action,
                                     ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        
-
-                                             
-        ARIO_LOG_FUNCTION_START
         GSList *paths = NULL;
         GList *songs;
         GtkWidget *songinfos;
@@ -1171,7 +1168,7 @@ ario_playlist_cmd_save (GtkAction *action,
                 gtk_widget_destroy (dialog);
                 return;
         }
-        name = g_strdup (gtk_entry_get_text (GTK_ENTRY(entry)));
+        name = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
         gtk_widget_destroy (dialog);
 
         if (ario_mpd_save_playlist (playlist->priv->mpd, name)) {
