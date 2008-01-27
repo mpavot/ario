@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-26 19:57+0100\n"
+"POT-Creation-Date: 2008-01-27 11:05+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1152,15 +1152,15 @@ msgid "Duration"
 msgstr "Продолжительность"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1148
+#: ../src/widgets/ario-playlist.c:1145
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: ../src/widgets/ario-playlist.c:1158
+#: ../src/widgets/ario-playlist.c:1155
 msgid "Playlist name : "
 msgstr "Название плейлиста : "
 
-#: ../src/widgets/ario-playlist.c:1182
+#: ../src/widgets/ario-playlist.c:1179
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
