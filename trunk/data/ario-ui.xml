@@ -101,6 +101,7 @@
 
         <popup name="SearchPopup">
                 <menuitem name="SearchAddSongs" action="SearchAddSongs"/>
+                <menuitem name="SearchSongsProperties" action="SearchSongsProperties"/>
         </popup>
 
         <popup name="StoredplaylistsPopup">
@@ -110,5 +111,6 @@
 
         <popup name="StoredplaylistsSongsPopup">
                 <menuitem name="StoredplaylistsAddSongs" action="StoredplaylistsAddSongs"/>
+                <menuitem name="StoredplaylistsSongsProperties" action="StoredplaylistsSongsProperties"/>
         </popup>
 </ui>

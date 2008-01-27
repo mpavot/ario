@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 #include "lib/eel-gconf-extensions.h"
 #include "sources/ario-storedplaylists.h"
+#include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
@@ -54,6 +55,8 @@ static void ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
                                                              ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_cmd_add_songs (GtkAction *action,
                                                 ArioStoredplaylists *storedplaylists);
+static void ario_storedplaylists_cmd_songs_properties (GtkAction *action,
+                                                       ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_popup_menu (ArioStoredplaylists *storedplaylists);
 static gboolean ario_storedplaylists_button_press_cb (GtkWidget *widget,
                                                       GdkEventButton *event,
@@ -111,6 +114,9 @@ static GtkActionEntry ario_storedplaylists_actions [] =
         { "StoredplaylistsAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 N_("Add to the playlist"),
                 G_CALLBACK (ario_storedplaylists_cmd_add_songs) },
+        { "StoredplaylistsSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+                N_("Show songs properties"),
+                G_CALLBACK (ario_storedplaylists_cmd_songs_properties) },
         { "StoredplaylistsDelete", GTK_STOCK_DELETE, N_("_Delete"), NULL,
                 N_("Delete this playlists"),
                 G_CALLBACK (ario_storedplaylists_cmd_delete_storedplaylists) }
@@ -302,8 +308,6 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         gtk_tree_view_column_set_sizing (column,GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 200);
         gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
         gtk_tree_view_append_column (GTK_TREE_VIEW (storedplaylists->priv->songs), column);
 
         /* Artists */
@@ -315,8 +319,6 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width(column, 200);
         gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, SONGS_ARTIST_COLUMN);
         gtk_tree_view_append_column (GTK_TREE_VIEW (storedplaylists->priv->songs), column);
 
         /* Albums */
@@ -328,8 +330,6 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width(column, 200);
         gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, SONGS_ALBUM_COLUMN);
         gtk_tree_view_append_column (GTK_TREE_VIEW (storedplaylists->priv->songs), column);
 
         storedplaylists->priv->songs_model = gtk_list_store_new (SONGS_N_COLUMN,
@@ -736,6 +736,30 @@ ario_storedplaylists_cmd_add_songs (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_storedplaylists_add_songs (storedplaylists);
+}
+
+static void
+ario_storedplaylists_cmd_songs_properties (GtkAction *action,
+                                           ArioStoredplaylists *storedplaylists)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *paths = NULL;
+        GList *songs;
+        GtkWidget *songinfos;
+                
+        gtk_tree_selection_selected_foreach (storedplaylists->priv->songs_selection,
+                                             songs_foreach,
+                                             &paths);
+
+        songs = ario_mpd_get_songs_info (storedplaylists->priv->mpd,
+                                         paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
+        
+        songinfos = ario_shell_songinfos_new (storedplaylists->priv->mpd,
+                                              songs);
+        if (songinfos)
+                gtk_widget_show_all (songinfos);
 }
 
 static void

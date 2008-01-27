@@ -2,3 +2,6 @@
 - Playlists : Save playlist from search (is it possible?)
 - keep lyrics window size in gconf
 - add other lyrics sources & possibility to activate them in preferences
+- share code between search and storedpalylist (for song treeview)
+- Plugins
+- Last.fm support
