@@ -49,6 +49,8 @@ static void ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
                                                ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
                                                 ArioShellLyrics *shell_lyrics);
+                                                
+#define BASE_TITLE _("Ario Lyrics")
 
 enum
 {
@@ -128,7 +130,7 @@ ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
                                  G_CALLBACK (ario_shell_lyrics_window_delete_cb),
                                  shell_lyrics, 0);
 
-        gtk_window_set_title (GTK_WINDOW (shell_lyrics), _("Ario Lyrics"));
+        gtk_window_set_title (GTK_WINDOW (shell_lyrics), BASE_TITLE);
         gtk_window_set_resizable (GTK_WINDOW (shell_lyrics), FALSE);
 
         gtk_container_set_border_width (GTK_CONTAINER (shell_lyrics), 5);
@@ -272,6 +274,7 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START
         ArioLyricsEditorData *data;
+        gchar *window_title;
 
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
 
@@ -280,12 +283,16 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
             || ario_mpd_get_current_state (shell_lyrics->priv->mpd) == MPD_STATUS_STATE_UNKNOWN) {
                 data->artist = NULL;
                 data->title = NULL;
+                window_title = g_strdup (BASE_TITLE);
         } else {
                 data->artist = g_strdup (ario_mpd_get_current_artist (shell_lyrics->priv->mpd));
                 data->title = ario_util_format_title (ario_mpd_get_current_song (shell_lyrics->priv->mpd));
+                window_title = g_strdup_printf ("%s - %s", BASE_TITLE, data->title);
         }
 
         ario_lyrics_editor_push (ARIO_LYRICS_EDITOR (shell_lyrics->priv->lyrics_editor), data);
+        gtk_window_set_title (GTK_WINDOW (shell_lyrics), window_title);
+        g_free (window_title);
 }
 
 static void

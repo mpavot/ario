@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-27 11:05+0100\n"
+"POT-Creation-Date: 2008-01-27 19:56+0100\n"
 "PO-Revision-Date: 2008-01-15 13:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -968,7 +968,7 @@ msgstr ""
 msgid "Error saving file"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:131
+#: ../src/shell/ario-shell-lyrics.c:53
 msgid "Ario Lyrics"
 msgstr ""
 
@@ -1088,7 +1088,7 @@ msgstr ""
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:361 ../src/widgets/ario-tray-icon.c:659
+#: ../src/widgets/ario-header.c:361 ../src/widgets/ario-tray-icon.c:661
 msgid " of "
 msgstr ""
 
