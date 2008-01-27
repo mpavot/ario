@@ -103,8 +103,6 @@ struct ArioShellPrivate
         GtkWidget *playlist;
         GtkWidget *status_bar;
 
-        ArioFirstlaunch *firstlaunch;
-
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 
@@ -281,6 +279,7 @@ ario_shell_construct (ArioShell *shell)
         GtkWidget *separator;
         GtkWidget *vbox;
         GdkPixbuf *pixbuf;
+        ArioFirstlaunch *firstlaunch;
         GError *error = NULL;
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
@@ -386,11 +385,11 @@ ario_shell_construct (ArioShell *shell)
 
         /* First launch assistant */
         if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {
-                shell->priv->firstlaunch = ario_firstlaunch_new ();
-                g_signal_connect_object (G_OBJECT (shell->priv->firstlaunch), "destroy",
+                firstlaunch = ario_firstlaunch_new ();
+                g_signal_connect_object (G_OBJECT (firstlaunch), "destroy",
                                          G_CALLBACK (ario_shell_firstlaunch_delete_cb),
                                          shell, 0);
-                gtk_widget_show_all (GTK_WIDGET (shell->priv->firstlaunch));
+                gtk_widget_show_all (GTK_WIDGET (firstlaunch));
         } else {
                 ario_shell_show (shell);
         }

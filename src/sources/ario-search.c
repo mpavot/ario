@@ -23,6 +23,7 @@
 #include <glib/gi18n.h>
 #include "lib/libmpdclient.h"
 #include "sources/ario-search.h"
+#include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 
@@ -71,6 +72,8 @@ static void ario_search_state_changed_cb (ArioMpd *mpd,
 static void ario_search_add_in_playlist (ArioSearch *search);
 static void ario_search_cmd_add_searchs (GtkAction *action,
                                          ArioSearch *search);
+static void ario_search_cmd_songs_properties (GtkAction *action,
+                                              ArioSearch *search);
 static void ario_search_popup_menu (ArioSearch *search);
 static gboolean ario_search_button_press_cb (GtkWidget *widget,
                                              GdkEventButton *event,
@@ -130,7 +133,10 @@ static GtkActionEntry ario_search_actions [] =
 {
         { "SearchAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 N_("Add to the playlist"),
-                G_CALLBACK (ario_search_cmd_add_searchs) }
+                G_CALLBACK (ario_search_cmd_add_searchs) },
+        { "SearchSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+                N_("Show songs properties"),
+                G_CALLBACK (ario_search_cmd_songs_properties) },
 };
 static guint ario_search_n_actions = G_N_ELEMENTS (ario_search_actions);
 
@@ -548,6 +554,30 @@ ario_search_cmd_add_searchs (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_search_add_in_playlist (search);
+}
+
+static void
+ario_search_cmd_songs_properties (GtkAction *action,
+                                  ArioSearch *search)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *paths = NULL;
+        GList *songs;
+        GtkWidget *songinfos;
+                
+        gtk_tree_selection_selected_foreach (search->priv->searchs_selection,
+                                             searchs_foreach,
+                                             &paths);
+
+        songs = ario_mpd_get_songs_info (search->priv->mpd,
+                                         paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
+        
+        songinfos = ario_shell_songinfos_new (search->priv->mpd,
+                                              songs);
+        if (songinfos)
+                gtk_widget_show_all (songinfos);
 }
 
 static void

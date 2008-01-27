@@ -397,10 +397,10 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
                                       GdkEvent *event,
                                       GtkWidget *widget)
 {
-        if (icon->priv->tooltips_pointer_above)
+        if (icon->priv->tooltips_pointer_above) {
                 ario_mpd_use_count_dec (icon->priv->mpd);
-
-        icon->priv->tooltips_pointer_above = FALSE;
+                icon->priv->tooltips_pointer_above = FALSE;
+        }
         ario_tray_icon_update_tooltip_visibility (icon);
 }
 

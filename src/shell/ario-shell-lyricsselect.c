@@ -204,6 +204,9 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
                                      column);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 125);
+        gtk_tree_view_column_set_resizable (column, TRUE);
+        gtk_tree_view_column_set_sort_indicator (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, ARTIST_COLUMN);
         cell_renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Title"),
                                                            cell_renderer, 
@@ -213,6 +216,9 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
                                      column);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 125);
+        gtk_tree_view_column_set_resizable (column, TRUE);
+        gtk_tree_view_column_set_sort_indicator (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, TITLE_COLUMN);
         gtk_tree_view_set_model (GTK_TREE_VIEW (ario_shell_lyricsselect->priv->treeview),
                                  GTK_TREE_MODEL (ario_shell_lyricsselect->priv->liststore));
 
