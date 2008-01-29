@@ -54,6 +54,8 @@ ario_SOURCES = \
 	sources/ario-radio.h\
 	sources/ario-search.c\
 	sources/ario-search.h\
+        sources/ario-songlist.c\
+	sources/ario-songlist.h\
 	sources/ario-source.c\
 	sources/ario-source.h\
 	sources/ario-storedplaylists.c\

@@ -22,14 +22,13 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/libmpdclient.h"
+#include "sources/ario-songlist.h"
 #include "sources/ario-search.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 
 #ifdef ENABLE_SEARCH
-
-#define DRAG_THRESHOLD 1
 
 typedef struct ArioSearchConstraint
 {
@@ -69,32 +68,8 @@ static void ario_search_get_property (GObject *object,
                                       GParamSpec *pspec);
 static void ario_search_state_changed_cb (ArioMpd *mpd,
                                           ArioSearch *search);
-static void ario_search_add_in_playlist (ArioSearch *search);
-static void ario_search_cmd_add_searchs (GtkAction *action,
-                                         ArioSearch *search);
-static void ario_search_cmd_songs_properties (GtkAction *action,
-                                              ArioSearch *search);
-static void ario_search_popup_menu (ArioSearch *search);
-static gboolean ario_search_button_press_cb (GtkWidget *widget,
-                                             GdkEventButton *event,
-                                             ArioSearch *search);
-static gboolean ario_search_button_release_cb (GtkWidget *widget,
-                                               GdkEventButton *event,
-                                               ArioSearch *search);
-static gboolean ario_search_motion_notify_cb (GtkWidget *widget, 
-                                              GdkEventMotion *event,
-                                              ArioSearch *search);
 static void ario_search_realize_cb (GtkWidget *widget, 
                                     ArioSearch *search);
-static void ario_search_searchs_selection_drag_foreach (GtkTreeModel *model,
-                                                        GtkTreePath *path,
-                                                        GtkTreeIter *iter,
-                                                        gpointer userdata);
-
-static void ario_search_drag_data_get_cb (GtkWidget * widget,
-                                          GdkDragContext * context,
-                                          GtkSelectionData * selection_data,
-                                          guint info, guint time, gpointer data);
 static void ario_search_do_plus (GtkButton *button,
                                  ArioSearch *search);
 static void ario_search_do_minus (GtkButton *button,
@@ -104,8 +79,6 @@ static void ario_search_do_search (GtkButton *button,
 struct ArioSearchPrivate
 {        
         GtkWidget *searchs;
-        GtkListStore *searchs_model;
-        GtkTreeSelection *searchs_selection;
 
         GtkTooltips *tooltips;
 
@@ -114,11 +87,6 @@ struct ArioSearchPrivate
         GtkWidget *search_button;
 
         gboolean connected;
-
-        gboolean dragging;
-        gboolean pressed;
-        gint drag_start_x;
-        gint drag_start_y;
 
         ArioMpd *mpd;
         ArioPlaylist *playlist;
@@ -133,10 +101,10 @@ static GtkActionEntry ario_search_actions [] =
 {
         { "SearchAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 N_("Add to the playlist"),
-                G_CALLBACK (ario_search_cmd_add_searchs) },
+                G_CALLBACK (ario_songlist_cmd_add_songlists) },
         { "SearchSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 N_("Show songs properties"),
-                G_CALLBACK (ario_search_cmd_songs_properties) },
+                G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
 static guint ario_search_n_actions = G_N_ELEMENTS (ario_search_actions);
 
@@ -147,15 +115,6 @@ enum
         PROP_PLAYLIST,
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP
-};
-
-enum
-{
-        TITLE_COLUMN,
-        ARTIST_COLUMN,
-        ALBUM_COLUMN,
-        FILENAME_COLUMN,
-        N_COLUMN
 };
 
 static const GtkTargetEntry songs_targets  [] = {
@@ -238,10 +197,7 @@ static void
 ario_search_init (ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
         GtkWidget *hbox;
-        GtkWidget *scrolledwindow_searchs;
         GtkTreeIter iter;
         GtkWidget *image;
         int i;
@@ -306,102 +262,16 @@ ario_search_init (ArioSearch *search)
 
         ario_search_do_plus (NULL, search);
 
-        /* Searchs list */
-        scrolledwindow_searchs = gtk_scrolled_window_new (NULL, NULL);
-        gtk_widget_show (scrolledwindow_searchs);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_SHADOW_IN);
-        search->priv->searchs = gtk_tree_view_new ();
 
-        /* Titles */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Title"),
-                                                           renderer,
-                                                           "text", TITLE_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, TITLE_COLUMN);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (search->priv->searchs), column);
+        /* Hbox properties */
+        gtk_box_set_homogeneous (GTK_BOX (search), FALSE);
+        gtk_box_set_spacing (GTK_BOX (search), 4);
 
-        /* Artists */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                           renderer,
-                                                           "text", ARTIST_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, ARTIST_COLUMN);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (search->priv->searchs), column);
-
-        /* Albums */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Album"),
-                                                           renderer,
-                                                           "text", ALBUM_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, ALBUM_COLUMN);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (search->priv->searchs), column);
-
-        search->priv->searchs_model = gtk_list_store_new (N_COLUMN,
-                                                          G_TYPE_STRING,
-                                                          G_TYPE_STRING,
-                                                          G_TYPE_STRING,
-                                                          G_TYPE_STRING);
-
-        gtk_tree_view_set_model (GTK_TREE_VIEW (search->priv->searchs),
-                                 GTK_TREE_MODEL (search->priv->searchs_model));
-        search->priv->searchs_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (search->priv->searchs));
-        gtk_tree_selection_set_mode (search->priv->searchs_selection,
-                                     GTK_SELECTION_MULTIPLE);
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_searchs), search->priv->searchs);
-
-        gtk_drag_source_set (search->priv->searchs,
-                             GDK_BUTTON1_MASK,
-                             songs_targets,
-                             G_N_ELEMENTS (songs_targets),
-                             GDK_ACTION_COPY);
-
-        g_signal_connect (GTK_TREE_VIEW (search->priv->searchs),
-                          "drag_data_get", 
-                          G_CALLBACK (ario_search_drag_data_get_cb), search);
-
-        g_signal_connect_object (G_OBJECT (search->priv->searchs),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_search_button_press_cb),
-                                 search,
-                                 0);
-        g_signal_connect_object (G_OBJECT (search->priv->searchs),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_search_button_release_cb),
-                                 search,
-                                 0);
-        g_signal_connect_object (G_OBJECT (search->priv->searchs),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_search_motion_notify_cb),
-                                 search,
-                                 0);
         g_signal_connect_object (G_OBJECT (search),
                                  "realize",
                                  G_CALLBACK (ario_search_realize_cb),
                                  search,
                                  0);
-        /* Hbox properties */
-        gtk_box_set_homogeneous (GTK_BOX (search), FALSE);
-        gtk_box_set_spacing (GTK_BOX (search), 4);
-
-        gtk_box_pack_start (GTK_BOX (search),
-                            scrolledwindow_searchs,
-                            TRUE, TRUE, 0);
 }
 
 static void
@@ -448,9 +318,6 @@ ario_search_set_property (GObject *object,
                 break;
         case PROP_ACTION_GROUP:
                 search->priv->actiongroup = g_value_get_object (value);
-                gtk_action_group_add_actions (search->priv->actiongroup,
-                                              ario_search_actions,
-                                              ario_search_n_actions, search);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -494,6 +361,7 @@ ario_search_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         ArioSearch *search;
+        GtkWidget *scrolledwindow_searchs;
 
         search = g_object_new (TYPE_ARIO_SEARCH,
                                "ui-manager", mgr,
@@ -503,6 +371,26 @@ ario_search_new (GtkUIManager *mgr,
                                NULL);
 
         g_return_val_if_fail (search->priv != NULL, NULL);
+        
+        /* Searchs list */
+        scrolledwindow_searchs = gtk_scrolled_window_new (NULL, NULL);
+        gtk_widget_show (scrolledwindow_searchs);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_SHADOW_IN);
+        search->priv->searchs = ario_songlist_new (mgr,
+                                                   mpd,
+                                                   playlist,
+                                                   "/SearchPopup",
+                                                   TRUE);
+
+        gtk_container_add (GTK_CONTAINER (scrolledwindow_searchs), search->priv->searchs);
+        gtk_box_pack_start (GTK_BOX (search),
+                            scrolledwindow_searchs,
+                            TRUE, TRUE, 0);
+
+        gtk_action_group_add_actions (search->priv->actiongroup,
+                                      ario_search_actions,
+                                      ario_search_n_actions, search->priv->searchs);
 
         return GTK_WIDGET (search);
 }
@@ -519,195 +407,6 @@ ario_search_state_changed_cb (ArioMpd *mpd,
 }
 
 static void
-searchs_foreach (GtkTreeModel *model,
-                 GtkTreePath *path,
-                 GtkTreeIter *iter,
-                 gpointer userdata)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList **searchs = (GSList **) userdata;
-        gchar *val = NULL;
-
-        gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
-
-        *searchs = g_slist_append (*searchs, val);
-}
-
-static void
-ario_search_add_in_playlist (ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList *searchs = NULL;
-
-        gtk_tree_selection_selected_foreach (search->priv->searchs_selection,
-                                             searchs_foreach,
-                                             &searchs);
-        ario_playlist_append_songs (search->priv->playlist, searchs);
-
-        g_slist_foreach (searchs, (GFunc) g_free, NULL);
-        g_slist_free (searchs);
-}
-
-static void
-ario_search_cmd_add_searchs (GtkAction *action,
-                             ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_search_add_in_playlist (search);
-}
-
-static void
-ario_search_cmd_songs_properties (GtkAction *action,
-                                  ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList *paths = NULL;
-        GList *songs;
-        GtkWidget *songinfos;
-                
-        gtk_tree_selection_selected_foreach (search->priv->searchs_selection,
-                                             searchs_foreach,
-                                             &paths);
-
-        songs = ario_mpd_get_songs_info (search->priv->mpd,
-                                         paths);
-        g_slist_foreach (paths, (GFunc) g_free, NULL);
-        g_slist_free (paths);
-        
-        songinfos = ario_shell_songinfos_new (search->priv->mpd,
-                                              songs);
-        if (songinfos)
-                gtk_widget_show_all (songinfos);
-}
-
-static void
-ario_search_popup_menu (ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START
-        GtkWidget *menu;
-
-        menu = gtk_ui_manager_get_widget (search->priv->ui_manager, "/SearchPopup");
-
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
-                        gtk_get_current_event_time ());
-}
-
-static gboolean
-ario_search_button_press_cb (GtkWidget *widget,
-                             GdkEventButton *event,
-                             ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
-                gtk_widget_grab_focus (widget);
-
-        if (search->priv->dragging)
-                return FALSE;
-
-        if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
-                return FALSE;
-
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
-                ario_search_add_in_playlist (search);
-
-        if (event->button == 1) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        gboolean selected;
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        selected = gtk_tree_selection_path_is_selected (selection, path);
-                        if (!selected) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-
-                        GdkModifierType mods;
-                        int x, y;
-
-                        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                        search->priv->drag_start_x = x;
-                        search->priv->drag_start_y = y;
-                        search->priv->pressed = TRUE;
-
-                        gtk_tree_path_free (path);
-                        if (selected)
-                                return TRUE;
-                        else
-                                return FALSE;
-                }
-        }
-
-        if (event->button == 3) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        if (!gtk_tree_selection_path_is_selected (selection, path)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        ario_search_popup_menu (search);
-                        gtk_tree_path_free (path);
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
-
-static gboolean
-ario_search_button_release_cb (GtkWidget *widget,
-                               GdkEventButton *event,
-                               ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START
-        if (!search->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        gtk_tree_selection_unselect_all (selection);
-                        gtk_tree_selection_select_path (selection, path);
-                        gtk_tree_path_free (path);
-                }
-        }
-
-        search->priv->dragging = FALSE;
-        search->priv->pressed = FALSE;
-
-        return FALSE;
-}
-
-static gboolean
-ario_search_motion_notify_cb (GtkWidget *widget, 
-                              GdkEventMotion *event,
-                              ArioSearch *search)
-{
-        // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
-        GdkModifierType mods;
-        int x, y;
-        int dx, dy;
-
-        if ((search->priv->dragging) || !(search->priv->pressed))
-                return FALSE;
-
-        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-
-        dx = x - search->priv->drag_start_x;
-        dy = y - search->priv->drag_start_y;
-
-        if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
-                search->priv->dragging = TRUE;
-
-        return FALSE;
-}
-
-static void
 ario_search_realize_cb (GtkWidget *widget, 
                         ArioSearch *search)
 {
@@ -715,51 +414,6 @@ ario_search_realize_cb (GtkWidget *widget,
 
         GTK_WIDGET_SET_FLAGS (search->priv->search_button, GTK_CAN_DEFAULT);
         gtk_widget_grab_default (search->priv->search_button);
-}
-
-static void
-ario_search_searchs_selection_drag_foreach (GtkTreeModel *model,
-                                            GtkTreePath *path,
-                                            GtkTreeIter *iter,
-                                            gpointer userdata)
-{
-        ARIO_LOG_FUNCTION_START
-        GString *searchs = (GString *) userdata;
-        g_return_if_fail (searchs != NULL);
-
-        gchar* val = NULL;
-
-        gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
-        g_string_append (searchs, val);
-        g_string_append (searchs, "\n");
-        g_free (val);
-}
-
-static void
-ario_search_drag_data_get_cb (GtkWidget * widget,
-                              GdkDragContext * context,
-                              GtkSelectionData * selection_data,
-                              guint info, guint time, gpointer data)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioSearch *search;
-        GString* searchs = NULL;
-
-        search = ARIO_SEARCH (data);
-
-        g_return_if_fail (IS_ARIO_SEARCH (search));
-        g_return_if_fail (widget != NULL);
-        g_return_if_fail (selection_data != NULL);
-
-        searchs = g_string_new("");
-        gtk_tree_selection_selected_foreach (search->priv->searchs_selection,
-                                             ario_search_searchs_selection_drag_foreach,
-                                             searchs);
-
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) searchs->str,
-                                strlen (searchs->str) * sizeof(guchar));
-
-        g_string_free (searchs, TRUE);
 }
 
 static void
@@ -884,6 +538,7 @@ ario_search_do_search (GtkButton *button,
         GtkTreeIter iter;
         gchar *title;
         GValue *value;
+        GtkListStore *liststore = ario_songlist_get_liststore (ARIO_SONGLIST (search->priv->searchs));
 
         for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
                 search_constraint = tmp->data;
@@ -905,18 +560,18 @@ ario_search_do_search (GtkButton *button,
         g_slist_foreach (search_criterias, (GFunc) g_free, NULL);
         g_slist_free (search_criterias);
 
-        gtk_list_store_clear (search->priv->searchs_model);
+        gtk_list_store_clear (liststore);
 
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
 
-                gtk_list_store_append (search->priv->searchs_model, &iter);
+                gtk_list_store_append (liststore, &iter);
                 title = ario_util_format_title (song);
-                gtk_list_store_set (search->priv->searchs_model, &iter,
-                                    TITLE_COLUMN, title,
-                                    ARTIST_COLUMN, song->artist,
-                                    ALBUM_COLUMN, song->album,
-                                    FILENAME_COLUMN, song->file,
+                gtk_list_store_set (liststore, &iter,
+                                    SONGS_TITLE_COLUMN, title,
+                                    SONGS_ARTIST_COLUMN, song->artist,
+                                    SONGS_ALBUM_COLUMN, song->album,
+                                    SONGS_FILENAME_COLUMN, song->file,
                                     -1);
                 g_free (title);
         }
