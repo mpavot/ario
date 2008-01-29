@@ -49,7 +49,7 @@ static gboolean ario_shell_songinfos_window_delete_cb (GtkWidget *window,
 static void ario_shell_songinfos_response_cb (GtkDialog *dialog,
                                               int response_id,
                                               ArioShellSonginfos *shell_songinfos);
-static void ario_shell_set_current_song (ArioShellSonginfos *shell_songinfos);
+static void ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos);
 
 enum
 {
@@ -252,7 +252,7 @@ ario_shell_songinfos_new (ArioMpd *mpd,
                                   gtk_label_new (_("Lyrics")));
 
         shell_songinfos->priv->songs = songs;
-        ario_shell_set_current_song (shell_songinfos);
+        ario_shell_songinfos_set_current_song (shell_songinfos);
 
         return GTK_WIDGET (shell_songinfos);
 }
@@ -343,22 +343,23 @@ ario_shell_songinfos_response_cb (GtkDialog *dialog,
         case ARIO_PREVIOUS:
                 if (g_list_previous (shell_songinfos->priv->songs)) {
                         shell_songinfos->priv->songs = g_list_previous (shell_songinfos->priv->songs);
-                        ario_shell_set_current_song (shell_songinfos);
+                        ario_shell_songinfos_set_current_song (shell_songinfos);
                 }
                 break;
         case ARIO_NEXT:
                 if (g_list_next (shell_songinfos->priv->songs)) {
                         shell_songinfos->priv->songs = g_list_next (shell_songinfos->priv->songs);
-                        ario_shell_set_current_song (shell_songinfos);
+                        ario_shell_songinfos_set_current_song (shell_songinfos);
                 }
                 break;
         }
 }
 
 static void
-ario_shell_set_current_song (ArioShellSonginfos *shell_songinfos)
+ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START
+        g_return_if_fail(shell_songinfos->priv->songs);
         ArioMpdSong *song = shell_songinfos->priv->songs->data;
         gchar *length;
         gchar *window_title;
