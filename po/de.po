@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-30 19:22+0100\n"
+"POT-Creation-Date: 2008-01-30 19:53+0100\n"
 "PO-Revision-Date: 2008-01-15 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: German <de@li.org>\n"
@@ -576,20 +576,20 @@ msgstr "Aktualisieren …"
 
 #: ../src/sources/ario-browser.c:129 ../src/sources/ario-browser.c:132
 #: ../src/sources/ario-browser.c:135 ../src/sources/ario-radio.c:108
-#: ../src/sources/ario-search.c:102 ../src/sources/ario-storedplaylists.c:100
+#: ../src/sources/ario-search.c:100 ../src/sources/ario-storedplaylists.c:100
 #: ../src/sources/ario-storedplaylists.c:111
 msgid "_Add to playlist"
 msgstr ""
 
 #: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
 #: ../src/sources/ario-browser.c:136 ../src/sources/ario-radio.c:109
-#: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:101
+#: ../src/sources/ario-search.c:101 ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
 msgid "Add to the playlist"
 msgstr ""
 
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
-#: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:105
+#: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:114
 #: ../src/widgets/ario-playlist.c:124
 msgid "_Properties"
@@ -599,7 +599,7 @@ msgstr "_Eigenschaften"
 msgid "Show albums properties"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:106
+#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:104
 #: ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:125
 msgid "Show songs properties"
@@ -623,13 +623,13 @@ msgstr ""
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:199
-#: ../src/widgets/ario-playlist.c:283 ../src/widgets/ario-songlist.c:274
+#: ../src/widgets/ario-playlist.c:283 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr ""
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:294 ../src/widgets/ario-songlist.c:289
+#: ../src/widgets/ario-playlist.c:294 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr "Album"
 
@@ -647,7 +647,7 @@ msgstr ""
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:211
-#: ../src/widgets/ario-playlist.c:272 ../src/widgets/ario-songlist.c:259
+#: ../src/widgets/ario-playlist.c:272 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr ""
 
@@ -728,15 +728,15 @@ msgstr ""
 msgid "Any"
 msgstr "Alle"
 
-#: ../src/sources/ario-search.c:226
+#: ../src/sources/ario-search.c:224
 msgid "Add a search criteria"
 msgstr ""
 
-#: ../src/sources/ario-search.c:233
+#: ../src/sources/ario-search.c:231
 msgid "Search songs in the library"
 msgstr ""
 
-#: ../src/sources/ario-search.c:444
+#: ../src/sources/ario-search.c:434
 msgid "Remove a search criteria"
 msgstr ""
 
