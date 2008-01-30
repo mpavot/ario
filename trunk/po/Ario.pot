@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-28 19:06+0100\n"
+"POT-Creation-Date: 2008-01-30 00:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -575,21 +575,21 @@ msgstr ""
 
 #: ../src/sources/ario-browser.c:129 ../src/sources/ario-browser.c:132
 #: ../src/sources/ario-browser.c:135 ../src/sources/ario-radio.c:108
-#: ../src/sources/ario-search.c:134 ../src/sources/ario-storedplaylists.c:111
-#: ../src/sources/ario-storedplaylists.c:114
+#: ../src/sources/ario-search.c:102 ../src/sources/ario-storedplaylists.c:100
+#: ../src/sources/ario-storedplaylists.c:111
 msgid "_Add to playlist"
 msgstr ""
 
 #: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
 #: ../src/sources/ario-browser.c:136 ../src/sources/ario-radio.c:109
-#: ../src/sources/ario-search.c:135 ../src/sources/ario-storedplaylists.c:112
-#: ../src/sources/ario-storedplaylists.c:115
+#: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:101
+#: ../src/sources/ario-storedplaylists.c:112
 msgid "Add to the playlist"
 msgstr ""
 
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
-#: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:137
-#: ../src/sources/ario-storedplaylists.c:117
+#: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:105
+#: ../src/sources/ario-storedplaylists.c:114
 #: ../src/widgets/ario-playlist.c:124
 msgid "_Properties"
 msgstr ""
@@ -598,8 +598,8 @@ msgstr ""
 msgid "Show albums properties"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:138
-#: ../src/sources/ario-storedplaylists.c:118
+#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:106
+#: ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:125
 msgid "Show songs properties"
 msgstr ""
@@ -620,17 +620,16 @@ msgstr ""
 msgid "Delete the selected covers"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:44
-#: ../src/sources/ario-search.c:331 ../src/sources/ario-storedplaylists.c:315
+#: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
+#: ../src/sources/ario-songlist.c:181
 #: ../src/shell/ario-shell-lyricsselect.c:199
 #: ../src/widgets/ario-playlist.c:283
 msgid "Artist"
 msgstr ""
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:45
-#: ../src/sources/ario-search.c:344 ../src/sources/ario-storedplaylists.c:326
-#: ../src/widgets/ario-playlist.c:294
+#: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
+#: ../src/sources/ario-songlist.c:194 ../src/widgets/ario-playlist.c:294
 msgid "Album"
 msgstr ""
 
@@ -640,14 +639,14 @@ msgid "Cover"
 msgstr ""
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:422 ../src/sources/ario-search.c:47
+#: ../src/sources/ario-browser.c:422 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:261
 msgid "Track"
 msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:46
-#: ../src/sources/ario-search.c:318 ../src/sources/ario-storedplaylists.c:304
+#: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-songlist.c:168
 #: ../src/shell/ario-shell-lyricsselect.c:211
 #: ../src/widgets/ario-playlist.c:272
 msgid "Title"
@@ -721,24 +720,24 @@ msgstr ""
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/sources/ario-search.c:55
+#: ../src/sources/ario-search.c:54
 msgid "Filename"
 msgstr ""
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/sources/ario-search.c:56
+#: ../src/sources/ario-search.c:55
 msgid "Any"
 msgstr ""
 
-#: ../src/sources/ario-search.c:270
+#: ../src/sources/ario-search.c:226
 msgid "Add a search criteria"
 msgstr ""
 
-#: ../src/sources/ario-search.c:277
+#: ../src/sources/ario-search.c:233
 msgid "Search songs in the library"
 msgstr ""
 
-#: ../src/sources/ario-search.c:790
+#: ../src/sources/ario-search.c:444
 msgid "Remove a search criteria"
 msgstr ""
 
@@ -759,19 +758,19 @@ msgstr ""
 msgid "Playlists"
 msgstr ""
 
-#: ../src/sources/ario-storedplaylists.c:120
+#: ../src/sources/ario-storedplaylists.c:103
 msgid "_Delete"
 msgstr ""
 
-#: ../src/sources/ario-storedplaylists.c:121
+#: ../src/sources/ario-storedplaylists.c:104
 msgid "Delete this playlists"
 msgstr ""
 
-#: ../src/sources/ario-storedplaylists.c:247
+#: ../src/sources/ario-storedplaylists.c:231
 msgid "Playlist"
 msgstr ""
 
-#: ../src/sources/ario-storedplaylists.c:714
+#: ../src/sources/ario-storedplaylists.c:599
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 
@@ -983,7 +982,7 @@ msgstr ""
 msgid "Lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell-songinfos.c:392
+#: ../src/shell/ario-shell-songinfos.c:393
 #, c-format
 msgid "Song Properties - %s"
 msgstr ""
