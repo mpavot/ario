@@ -158,87 +158,8 @@ static void
 ario_songlist_init (ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
 
         songlist->priv = g_new0 (ArioSonglistPrivate, 1);
-
-        /* Titles */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Title"),
-                                                           renderer,
-                                                           "text", SONGS_TITLE_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
-
-        /* Artists */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                           renderer,
-                                                           "text", SONGS_ARTIST_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, SONGS_ARTIST_COLUMN);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
-
-        /* Albums */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Album"),
-                                                           renderer,
-                                                           "text", SONGS_ALBUM_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sort_indicator (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, SONGS_ALBUM_COLUMN);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
-
-        songlist->priv->songlists_model = gtk_list_store_new (SONGS_N_COLUMN,
-                                                              G_TYPE_STRING,
-                                                              G_TYPE_STRING,
-                                                              G_TYPE_STRING,
-                                                              G_TYPE_STRING);
-
-        gtk_tree_view_set_model (GTK_TREE_VIEW (songlist),
-                                 GTK_TREE_MODEL (songlist->priv->songlists_model));
-        songlist->priv->songlists_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (songlist));
-        gtk_tree_selection_set_mode (songlist->priv->songlists_selection,
-                                     GTK_SELECTION_MULTIPLE);
-
-        gtk_drag_source_set (GTK_WIDGET (songlist),
-                             GDK_BUTTON1_MASK,
-                             songs_targets,
-                             G_N_ELEMENTS (songs_targets),
-                             GDK_ACTION_COPY);
-
-        g_signal_connect (GTK_TREE_VIEW (songlist),
-                          "drag_data_get", 
-                          G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
-
-        g_signal_connect_object (G_OBJECT (songlist),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_songlist_button_press_cb),
-                                 songlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (songlist),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_songlist_button_release_cb),
-                                 songlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (songlist),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_songlist_motion_notify_cb),
-                                 songlist,
-                                 0);
 }
 
 static void
@@ -318,7 +239,9 @@ ario_songlist_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         ArioSonglist *songlist;
-
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+        
         songlist = g_object_new (TYPE_ARIO_SONGLIST,
                                  "ui-manager", mgr,
                                  "mpd", mpd,
@@ -327,7 +250,93 @@ ario_songlist_new (GtkUIManager *mgr,
                                  
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
-        
+
+
+        songlist->priv = g_new0 (ArioSonglistPrivate, 1);
+
+        /* Titles */
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Title"),
+                                                           renderer,
+                                                           "text", SONGS_TITLE_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width(column, 200);
+        gtk_tree_view_column_set_resizable (column, TRUE);
+        if (is_sortable) {
+                gtk_tree_view_column_set_sort_indicator (column, TRUE);
+                gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
+        }
+        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
+
+        /* Artists */
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Artist"),
+                                                           renderer,
+                                                           "text", SONGS_ARTIST_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width(column, 200);
+        gtk_tree_view_column_set_resizable (column, TRUE);
+        if (is_sortable) {
+                gtk_tree_view_column_set_sort_indicator (column, TRUE);
+                gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
+        }
+        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
+
+        /* Albums */
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Album"),
+                                                           renderer,
+                                                           "text", SONGS_ALBUM_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width(column, 200);
+        gtk_tree_view_column_set_resizable (column, TRUE);
+        if (is_sortable) {
+                gtk_tree_view_column_set_sort_indicator (column, TRUE);
+                gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
+        }
+        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
+
+        songlist->priv->songlists_model = gtk_list_store_new (SONGS_N_COLUMN,
+                                                              G_TYPE_STRING,
+                                                              G_TYPE_STRING,
+                                                              G_TYPE_STRING,
+                                                              G_TYPE_STRING);
+
+        gtk_tree_view_set_model (GTK_TREE_VIEW (songlist),
+                                 GTK_TREE_MODEL (songlist->priv->songlists_model));
+        songlist->priv->songlists_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (songlist));
+        gtk_tree_selection_set_mode (songlist->priv->songlists_selection,
+                                     GTK_SELECTION_MULTIPLE);
+
+        gtk_drag_source_set (GTK_WIDGET (songlist),
+                             GDK_BUTTON1_MASK,
+                             songs_targets,
+                             G_N_ELEMENTS (songs_targets),
+                             GDK_ACTION_COPY);
+
+        g_signal_connect (GTK_TREE_VIEW (songlist),
+                          "drag_data_get", 
+                          G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
+
+        g_signal_connect_object (G_OBJECT (songlist),
+                                 "button_press_event",
+                                 G_CALLBACK (ario_songlist_button_press_cb),
+                                 songlist,
+                                 0);
+        g_signal_connect_object (G_OBJECT (songlist),
+                                 "button_release_event",
+                                 G_CALLBACK (ario_songlist_button_release_cb),
+                                 songlist,
+                                 0);
+        g_signal_connect_object (G_OBJECT (songlist),
+                                 "motion_notify_event",
+                                 G_CALLBACK (ario_songlist_motion_notify_cb),
+                                 songlist,
+                                 0);
+
         songlist->priv->popup = g_strdup (popup);
 
         return GTK_WIDGET (songlist);
