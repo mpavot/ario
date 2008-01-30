@@ -68,8 +68,6 @@ static void ario_search_get_property (GObject *object,
                                       GParamSpec *pspec);
 static void ario_search_state_changed_cb (ArioMpd *mpd,
                                           ArioSearch *search);
-static void ario_search_realize_cb (GtkWidget *widget, 
-                                    ArioSearch *search);
 static void ario_search_do_plus (GtkButton *button,
                                  ArioSearch *search);
 static void ario_search_do_minus (GtkButton *button,
@@ -262,16 +260,9 @@ ario_search_init (ArioSearch *search)
 
         ario_search_do_plus (NULL, search);
 
-
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (search), FALSE);
         gtk_box_set_spacing (GTK_BOX (search), 4);
-
-        g_signal_connect_object (G_OBJECT (search),
-                                 "realize",
-                                 G_CALLBACK (ario_search_realize_cb),
-                                 search,
-                                 0);
 }
 
 static void
@@ -407,11 +398,10 @@ ario_search_state_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_search_realize_cb (GtkWidget *widget, 
-                        ArioSearch *search)
+ario_search_entry_grab_focus (GtkEntry *entry, 
+                              ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
-
         GTK_WIDGET_SET_FLAGS (search->priv->search_button, GTK_CAN_DEFAULT);
         gtk_widget_grab_default (search->priv->search_button);
 }
@@ -488,6 +478,10 @@ ario_search_do_plus (GtkButton *button,
                 search_constraint = search->priv->search_constraints->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, TRUE);
         }
+        g_signal_connect_object (G_OBJECT (search_constraint->entry),
+                                 "grab-focus",
+                                 G_CALLBACK (ario_search_entry_grab_focus),
+                                 search, 0);
 }
 
 static void
