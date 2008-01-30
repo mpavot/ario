@@ -21,7 +21,7 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "sources/ario-songlist.h"
+#include "widgets/ario-songlist.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"

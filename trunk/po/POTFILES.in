@@ -57,8 +57,6 @@ src/sources/ario-radio.c
 src/sources/ario-radio.h
 src/sources/ario-search.c
 src/sources/ario-search.h
-src/sources/ario-songlist.c
-src/sources/ario-songlist.h
 src/sources/ario-source.c
 src/sources/ario-source.h
 src/sources/ario-storedplaylists.c
@@ -83,6 +81,8 @@ src/widgets/ario-header.c
 src/widgets/ario-header.h
 src/widgets/ario-playlist.c
 src/widgets/ario-playlist.h
+src/widgets/ario-songlist.c
+src/widgets/ario-songlist.h
 src/widgets/ario-status-bar.c
 src/widgets/ario-status-bar.h
 src/widgets/ario-tray-icon.c

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-30 00:30+0100\n"
+"POT-Creation-Date: 2008-01-30 19:22+0100\n"
 "PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -632,15 +632,14 @@ msgid "Delete the selected covers"
 msgstr "Supprimer les pochettes sélectionnées"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
-#: ../src/sources/ario-songlist.c:181
 #: ../src/shell/ario-shell-lyricsselect.c:199
-#: ../src/widgets/ario-playlist.c:283
+#: ../src/widgets/ario-playlist.c:283 ../src/widgets/ario-songlist.c:274
 msgid "Artist"
 msgstr "Artiste"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
-#: ../src/sources/ario-songlist.c:194 ../src/widgets/ario-playlist.c:294
+#: ../src/widgets/ario-playlist.c:294 ../src/widgets/ario-songlist.c:289
 msgid "Album"
 msgstr "Album"
 
@@ -657,9 +656,8 @@ msgstr "Piste"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
-#: ../src/sources/ario-songlist.c:168
 #: ../src/shell/ario-shell-lyricsselect.c:211
-#: ../src/widgets/ario-playlist.c:272
+#: ../src/widgets/ario-playlist.c:272 ../src/widgets/ario-songlist.c:259
 msgid "Title"
 msgstr "Titre"
 
