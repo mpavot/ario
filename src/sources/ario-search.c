@@ -22,7 +22,7 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/libmpdclient.h"
-#include "sources/ario-songlist.h"
+#include "widgets/ario-songlist.h"
 #include "sources/ario-search.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"

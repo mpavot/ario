@@ -54,8 +54,6 @@ ario_SOURCES = \
 	sources/ario-radio.h\
 	sources/ario-search.c\
 	sources/ario-search.h\
-        sources/ario-songlist.c\
-	sources/ario-songlist.h\
 	sources/ario-source.c\
 	sources/ario-source.h\
 	sources/ario-storedplaylists.c\
@@ -80,6 +78,8 @@ ario_SOURCES = \
 	widgets/ario-header.h\
 	widgets/ario-playlist.c\
 	widgets/ario-playlist.h\
+        widgets/ario-songlist.c\
+	widgets/ario-songlist.h\
 	widgets/ario-status-bar.c\
 	widgets/ario-status-bar.h\
 	widgets/ario-tray-icon.c\
