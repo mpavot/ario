@@ -247,12 +247,8 @@ ario_songlist_new (GtkUIManager *mgr,
                                  "mpd", mpd,
                                  "playlist", playlist,
                                  NULL);
-                                 
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
-
-
-        songlist->priv = g_new0 (ArioSonglistPrivate, 1);
 
         /* Titles */
         renderer = gtk_cell_renderer_text_new ();
