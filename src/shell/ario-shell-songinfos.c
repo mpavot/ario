@@ -375,12 +375,15 @@ static void
 ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START
-        g_return_if_fail(shell_songinfos->priv->songs);
-        ArioMpdSong *song = shell_songinfos->priv->songs->data;
+        ArioMpdSong *song;
         gchar *length;
         gchar *window_title;
         ArioLyricsEditorData *data;
 
+        if (!shell_songinfos->priv->songs)
+                return;
+                
+        song = shell_songinfos->priv->songs->data;
         if (song) {
                 gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->title_label), song->title);
                 gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->artist_label), song->artist);
