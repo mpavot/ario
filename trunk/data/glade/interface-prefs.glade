@@ -45,8 +45,7 @@
             <child>
               <widget class="GtkLabel" id="tabs_label">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;b&gt;Tabs&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
+                <property name="label" translatable="yes">Tabs</property>
               </widget>
               <packing>
                 <property name="type">label_item</property>
@@ -82,7 +81,7 @@
                           <widget class="GtkLabel" id="label1">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="label" translatable="yes">On double click on tray icon : </property>
+                            <property name="label" translatable="yes">On double click on tray icon :</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -117,10 +116,9 @@
               </widget>
             </child>
             <child>
-              <widget class="GtkLabel" id="authentication_label">
+              <widget class="GtkLabel" id="trayicon_label">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;b&gt;Tray icon&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
+                <property name="label" translatable="yes">Tray icon</property>
               </widget>
               <packing>
                 <property name="type">label_item</property>

@@ -231,6 +231,10 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                 glade_xml_get_widget (xml, "local_file_entry");
         ario_shell_coverselect->priv->local_open_button =
                 glade_xml_get_widget (xml, "local_open_button");
+                
+        rb_glade_boldify_label (xml, "cover_frame_label");
+        rb_glade_boldify_label (xml, "static_artist_label");
+        rb_glade_boldify_label (xml, "static_album_label");
 
         g_object_unref (G_OBJECT (xml));
 

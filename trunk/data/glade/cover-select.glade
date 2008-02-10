@@ -17,11 +17,11 @@
                 <child>
                   <widget class="GtkHBox" id="hbox2">
                     <property name="visible">True</property>
+                    <property name="spacing">4</property>
                     <child>
                       <widget class="GtkLabel" id="static_artist_label">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Artist : &lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Artist :</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -48,11 +48,11 @@
                 <child>
                   <widget class="GtkHBox" id="hbox3">
                     <property name="visible">True</property>
+                    <property name="spacing">4</property>
                     <child>
                       <widget class="GtkLabel" id="static_album_label">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Album : &lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Album :</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -162,7 +162,7 @@
                           <widget class="GtkLabel" id="label8">
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Album : </property>
+                            <property name="label" translatable="yes">Album :</property>
                           </widget>
                           <packing>
                             <property name="top_attach">1</property>
@@ -175,7 +175,7 @@
                           <widget class="GtkLabel" id="label7">
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Artist : </property>
+                            <property name="label" translatable="yes">Artist :</property>
                           </widget>
                           <packing>
                             <property name="x_options">GTK_FILL</property>
@@ -250,10 +250,9 @@
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label9">
+                          <widget class="GtkLabel" id="cover_frame_label">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Cover size&lt;/b&gt;</property>
-                            <property name="use_markup">True</property>
+                            <property name="label" translatable="yes">Cover size</property>
                           </widget>
                           <packing>
                             <property name="type">label_item</property>

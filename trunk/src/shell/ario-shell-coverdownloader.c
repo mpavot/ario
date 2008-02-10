@@ -251,6 +251,8 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
                 glade_xml_get_widget (xml, "cancel_button");
         ario_shell_coverdownloader->priv->close_button =
                 glade_xml_get_widget (xml, "close_button");
+                
+        rb_glade_boldify_label (xml, "operation_label");
 
         g_object_unref (G_OBJECT (xml));
 

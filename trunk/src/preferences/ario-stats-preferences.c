@@ -157,6 +157,14 @@ ario_stats_preferences_new (ArioMpd *mpd)
         gtk_widget_set_size_request(stats_preferences->priv->playtime_label, 250, -1);
         gtk_widget_set_size_request(stats_preferences->priv->dbplay_time_label, 250, -1);
 
+        rb_glade_boldify_label (xml, "statistics_frame_label");
+        rb_glade_boldify_label (xml, "nbartists_const_label");
+        rb_glade_boldify_label (xml, "nbalbums_const_label");
+        rb_glade_boldify_label (xml, "nbsongs_const_label");
+        rb_glade_boldify_label (xml, "uptime_const_label");
+        rb_glade_boldify_label (xml, "playtime_const_label");
+        rb_glade_boldify_label (xml, "dbplay_time_const_label");
+
         ario_stats_preferences_sync_stats (stats_preferences);
 
         gtk_box_pack_start (GTK_BOX (stats_preferences), glade_xml_get_widget (xml, "vbox"), TRUE, TRUE, 0);

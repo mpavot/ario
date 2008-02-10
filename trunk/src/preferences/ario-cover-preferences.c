@@ -144,6 +144,9 @@ ario_cover_preferences_new (void)
         cover_preferences->priv->proxy_port_spinbutton = 
                 glade_xml_get_widget (xml, "proxy_port_spinbutton");
 
+        rb_glade_boldify_label (xml, "cover_frame_label");
+        rb_glade_boldify_label (xml, "proxy_frame_label");
+        
         list_store = gtk_list_store_new (1, G_TYPE_STRING);
 
         for (i = 0; amazon_countries[i]; ++i) {

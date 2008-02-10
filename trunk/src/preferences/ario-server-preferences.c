@@ -193,6 +193,10 @@ ario_server_preferences_new (ArioMpd *mpd)
         server_preferences->priv->outputs_treeview = 
                 glade_xml_get_widget (xml, "outputs_treeview");
 
+        rb_glade_boldify_label (xml, "crossfade_frame_label");
+        rb_glade_boldify_label (xml, "database_frame_label");
+        rb_glade_boldify_label (xml, "ouputs_frame_label");
+
         server_preferences->priv->outputs_model = gtk_list_store_new (N_COLUMN,
                                                                       G_TYPE_BOOLEAN,
                                                                       G_TYPE_STRING,
