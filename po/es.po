@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-10 13:01+0100\n"
+"POT-Creation-Date: 2008-02-10 20:03+0100\n"
 "PO-Revision-Date: 2008-01-17 18:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -486,7 +486,7 @@ msgstr "Reproducir/Pausa"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:45
-#: ../src/widgets/ario-header.c:296
+#: ../src/widgets/ario-header.c:260
 msgid "Play next song"
 msgstr "Reproducir la canción siguiente"
 
@@ -745,11 +745,11 @@ msgstr "Bu_scar"
 msgid "_Playlists"
 msgstr "Listas de re_producción"
 
-#: ../src/shell/ario-shell.c:543
+#: ../src/shell/ario-shell.c:542
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:544
+#: ../src/shell/ario-shell.c:543
 msgid "translator-credits"
 msgstr ""
 
@@ -811,7 +811,7 @@ msgstr "Interfaz"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
-#: ../src/shell/ario-shell-songinfos.c:409
+#: ../src/shell/ario-shell-songinfos.c:412
 msgid "Song Properties"
 msgstr ""
 
@@ -837,54 +837,38 @@ msgstr "Configuración"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#: ../src/widgets/ario-header.c:120
-msgid "_Play/Pause"
-msgstr "_Reproducir/Pausar"
-
-#: ../src/widgets/ario-header.c:123
-msgid "_Stop"
-msgstr "_Detener"
-
-#: ../src/widgets/ario-header.c:126
-msgid "_Next"
-msgstr "_Siguiente"
-
-#: ../src/widgets/ario-header.c:129
-msgid "P_revious"
-msgstr "_Anterior"
-
-#: ../src/widgets/ario-header.c:147 ../src/widgets/ario-tray-icon.c:38
+#: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:38
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>desde</i> %s <i>por</i> %s"
 
-#: ../src/widgets/ario-header.c:254
+#: ../src/widgets/ario-header.c:218
 msgid "Play previous song"
 msgstr "Reproducir la canción anterior"
 
-#: ../src/widgets/ario-header.c:274
+#: ../src/widgets/ario-header.c:238
 msgid "Play/Pause the music"
 msgstr "Reproducir/Pausar la música"
 
-#: ../src/widgets/ario-header.c:285
+#: ../src/widgets/ario-header.c:249
 msgid "Stop the music"
 msgstr "Parar la música"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:361 ../src/widgets/ario-tray-icon.c:661
+#: ../src/widgets/ario-header.c:325 ../src/widgets/ario-tray-icon.c:714
 msgid " of "
 msgstr " de "
 
-#: ../src/widgets/ario-header.c:385
+#: ../src/widgets/ario-header.c:349
 msgid "Toggle random on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:396
+#: ../src/widgets/ario-header.c:360
 msgid "Toggle repeat on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:524
+#: ../src/widgets/ario-header.c:477
 msgid "Change the music volume"
 msgstr "Cambiar el volumen de la música"
 
@@ -925,6 +909,26 @@ msgstr "Canciones"
 #: ../src/widgets/ario-tray-icon.c:37
 msgid "Not playing"
 msgstr "No se está reproduciendo nada"
+
+#: ../src/widgets/ario-tray-icon.c:124
+msgid "_Play"
+msgstr "_Reproducir"
+
+#: ../src/widgets/ario-tray-icon.c:127
+msgid "_Pause"
+msgstr "_Pausar"
+
+#: ../src/widgets/ario-tray-icon.c:130
+msgid "_Stop"
+msgstr "_Detener"
+
+#: ../src/widgets/ario-tray-icon.c:133
+msgid "_Next"
+msgstr "_Siguiente"
+
+#: ../src/widgets/ario-tray-icon.c:136
+msgid "P_revious"
+msgstr "_Anterior"
 
 #, fuzzy
 #~ msgid "Library view"

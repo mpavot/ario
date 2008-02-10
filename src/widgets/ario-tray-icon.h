@@ -54,7 +54,8 @@ typedef struct
 
 GType                   ario_tray_icon_get_type         (void);
 
-ArioTrayIcon *          ario_tray_icon_new              (GtkUIManager *mgr,
+ArioTrayIcon *          ario_tray_icon_new              (GtkActionGroup *group,
+                                                         GtkUIManager *mgr,
                                                          GtkWindow *window,
                                                          ArioMpd *mpd,
                                                          ArioCoverHandler *cover_handler);

@@ -66,14 +66,6 @@ static void ario_header_repeat_changed_cb (ArioMpd *mpd,
                                            ArioHeader *header);
 static void ario_header_do_random (ArioHeader *header);
 static void ario_header_do_repeat (ArioHeader *header);
-static void ario_header_cmd_playpause (GtkAction *action,
-                                       ArioHeader *header);
-static void ario_header_cmd_stop (GtkAction *action,
-                                  ArioHeader *header);
-static void ario_header_cmd_next (GtkAction *action,
-                                  ArioHeader *header);
-static void ario_header_cmd_previous (GtkAction *action,
-                                      ArioHeader *header);
 
 struct ArioHeaderPrivate
 {
@@ -109,36 +101,15 @@ struct ArioHeaderPrivate
 
         gboolean slider_dragging;
 
-        GtkActionGroup *actiongroup;
-
         gint image_width;
         gint image_height;
 };
-
-static GtkActionEntry ario_header_actions [] =
-{
-        { "ControlPlayPause", GTK_STOCK_MEDIA_PLAY, N_("_Play/Pause"), "<control>space",
-                NULL,
-                G_CALLBACK (ario_header_cmd_playpause) },
-        { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), NULL,
-                NULL,
-                G_CALLBACK (ario_header_cmd_stop) },
-        { "ControlNext", GTK_STOCK_MEDIA_NEXT, N_("_Next"), "<control>Right",
-                NULL,
-                G_CALLBACK (ario_header_cmd_next) },
-        { "ControlPrevious", GTK_STOCK_MEDIA_PREVIOUS, N_("P_revious"), "<control>Left",
-                NULL,
-                G_CALLBACK (ario_header_cmd_previous) },
-};
-
-static guint ario_header_n_actions = G_N_ELEMENTS (ario_header_actions);
 
 enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_COVERHANDLER,
-        PROP_ACTION_GROUP,
+        PROP_COVERHANDLER
 };
 
 static GObjectClass *parent_class = NULL;
@@ -201,13 +172,6 @@ ario_header_class_init (ArioHeaderClass *klass)
                                                               "ArioCoverHandler object",
                                                               TYPE_ARIO_COVER_HANDLER,
                                                               G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 static void
@@ -465,12 +429,6 @@ ario_header_set_property (GObject *object,
                                          "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
                                          header, 0);
                 break;
-        case PROP_ACTION_GROUP:
-                header->priv->actiongroup = g_value_get_object (value);
-                gtk_action_group_add_actions (header->priv->actiongroup,
-                                              ario_header_actions,
-                                              ario_header_n_actions, header);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -493,9 +451,6 @@ ario_header_get_property (GObject *object,
         case PROP_COVERHANDLER:
                 g_value_set_object (value, header->priv->cover_handler);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, header->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -503,8 +458,7 @@ ario_header_get_property (GObject *object,
 }
 
 GtkWidget *
-ario_header_new (GtkActionGroup *group,
-                 ArioMpd *mpd,
+ario_header_new (ArioMpd *mpd,
                  ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
@@ -512,7 +466,6 @@ ario_header_new (GtkActionGroup *group,
         GtkWidget *alignment;
 
         header = ARIO_HEADER (g_object_new (TYPE_ARIO_HEADER,
-                                            "action-group", group,
                                             "mpd", mpd,
                                             "cover_handler", cover_handler,
                                             NULL));
@@ -867,36 +820,4 @@ ario_header_do_repeat (ArioHeader *header)
         ARIO_LOG_FUNCTION_START
         g_return_if_fail (IS_ARIO_HEADER (header));
         ario_mpd_set_current_repeat (header->priv->mpd, !ario_mpd_get_current_repeat (header->priv->mpd));
-}
-
-static void
-ario_header_cmd_playpause (GtkAction *action,
-                           ArioHeader *header)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_header_playpause (header);
-}
-
-static void
-ario_header_cmd_stop (GtkAction *action,
-                      ArioHeader *header)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_header_stop (header);
-}
-
-static void
-ario_header_cmd_next (GtkAction *action,
-                      ArioHeader *header)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_header_do_next (header);
-}
-
-static void
-ario_header_cmd_previous (GtkAction *action,
-                          ArioHeader *header)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_header_do_previous (header);
 }

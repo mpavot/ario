@@ -68,6 +68,7 @@ static void ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon);
+static void ario_tray_icon_sync_popup (ArioTrayIcon *icon);
 static gboolean ario_tray_icon_scroll_cb (GtkWidget *widget, GdkEvent *event,
                                           ArioTrayIcon *icon);
 static void ario_tray_icon_song_changed_cb (ArioMpd *mpd,
@@ -80,6 +81,17 @@ static void ario_tray_icon_time_changed_cb (ArioMpd *mpd,
                                             ArioTrayIcon *icon);
 static void ario_tray_icon_cover_changed_cb (ArioCoverHandler *cover_handler,
                                              ArioTrayIcon *icon);
+static void ario_tray_icon_cmd_play (GtkAction *action,
+                                     ArioTrayIcon *icon);
+static void ario_tray_icon_cmd_pause (GtkAction *action,
+                                      ArioTrayIcon *icon);
+static void ario_tray_icon_cmd_stop (GtkAction *action,
+                                     ArioTrayIcon *icon);
+static void ario_tray_icon_cmd_next (GtkAction *action,
+                                     ArioTrayIcon *icon);
+static void ario_tray_icon_cmd_previous (GtkAction *action,
+                                         ArioTrayIcon *icon);
+
 struct ArioTrayIconPrivate
 {
         GtkWidget *tooltip;
@@ -91,6 +103,7 @@ struct ArioTrayIconPrivate
         GtkWidget *image;
 
         GtkUIManager *ui_manager;
+        GtkActionGroup *actiongroup;
 
         GtkWindow *main_window;
         GtkWidget *ebox;
@@ -106,10 +119,32 @@ struct ArioTrayIconPrivate
         ArioCoverHandler *cover_handler;
 };
 
+static GtkActionEntry ario_tray_icon_actions [] =
+{
+        { "ControlPlay", GTK_STOCK_MEDIA_PLAY, N_("_Play"), "<control>space",
+                NULL,
+                G_CALLBACK (ario_tray_icon_cmd_play) },
+        { "ControlPause", GTK_STOCK_MEDIA_PAUSE, N_("_Pause"), "<control>space",
+                NULL,
+                G_CALLBACK (ario_tray_icon_cmd_pause) },
+        { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), NULL,
+                NULL,
+                G_CALLBACK (ario_tray_icon_cmd_stop) },
+        { "ControlNext", GTK_STOCK_MEDIA_NEXT, N_("_Next"), "<control>Right",
+                NULL,
+                G_CALLBACK (ario_tray_icon_cmd_next) },
+        { "ControlPrevious", GTK_STOCK_MEDIA_PREVIOUS, N_("P_revious"), "<control>Left",
+                NULL,
+                G_CALLBACK (ario_tray_icon_cmd_previous) },
+};
+
+static guint ario_tray_icon_n_actions = G_N_ELEMENTS (ario_tray_icon_actions);
+
 enum
 {
         PROP_0,
         PROP_UI_MANAGER,
+        PROP_ACTION_GROUP,
         PROP_WINDOW,
         PROP_MPD,
         PROP_COVERHANDLER
@@ -195,6 +230,13 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
                                                               "ArioCoverHandler object",
                                                               TYPE_ARIO_COVER_HANDLER,
                                                               G_PARAM_READWRITE));
+        g_object_class_install_property (object_class,
+                                         PROP_ACTION_GROUP,
+                                         g_param_spec_object ("action-group",
+                                                              "GtkActionGroup",
+                                                              "GtkActionGroup object",
+                                                              GTK_TYPE_ACTION_GROUP,
+                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 static void
@@ -318,6 +360,12 @@ ario_tray_icon_set_property (GObject *object,
                                          "cover_changed", G_CALLBACK (ario_tray_icon_cover_changed_cb),
                                          tray, 0);
                 break;
+        case PROP_ACTION_GROUP:
+                tray->priv->actiongroup = g_value_get_object (value);
+                gtk_action_group_add_actions (tray->priv->actiongroup,
+                                              ario_tray_icon_actions,
+                                              ario_tray_icon_n_actions, tray);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -347,6 +395,9 @@ ario_tray_icon_get_property (GObject *object,
         case PROP_COVERHANDLER:
                 g_value_set_object (value, tray->priv->cover_handler);
                 break;
+        case PROP_ACTION_GROUP:
+                g_value_set_object (value, tray->priv->actiongroup);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -354,13 +405,15 @@ ario_tray_icon_get_property (GObject *object,
 }
 
 ArioTrayIcon *
-ario_tray_icon_new (GtkUIManager *mgr,
+ario_tray_icon_new (GtkActionGroup *group,
+                    GtkUIManager *mgr,
                     GtkWindow *window,
                     ArioMpd *mpd,
                     ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
         return g_object_new (TYPE_ARIO_TRAY_ICON,
+                             "action-group", group,
                              "title", "Ario",
                              "ui-manager", mgr,
                              "window", window,
@@ -681,6 +734,18 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
 }
 
 static void
+ario_tray_icon_sync_popup (ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        int state = ario_mpd_get_current_state (icon->priv->mpd);
+
+        gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPlay"),
+                                state != MPD_STATUS_STATE_PLAY);
+        gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPause"),
+                                state == MPD_STATUS_STATE_PLAY);
+}
+
+static void
 ario_tray_icon_song_changed_cb (ArioMpd *mpd,
                                 ArioTrayIcon *icon)
 {
@@ -705,6 +770,7 @@ ario_tray_icon_state_changed_cb (ArioMpd *mpd,
         ario_tray_icon_sync_tooltip_song (icon);
         ario_tray_icon_sync_tooltip_album (icon);
         ario_tray_icon_sync_tooltip_time (icon);
+        ario_tray_icon_sync_popup (icon);
 }
 
 static void
@@ -776,4 +842,44 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                         gtk_widget_hide (GTK_WIDGET (icon->priv->main_window));
                 }
         }
+}
+
+static void
+ario_tray_icon_cmd_play (GtkAction *action,
+                         ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_do_play (icon->priv->mpd);
+}
+
+static void
+ario_tray_icon_cmd_pause (GtkAction *action,
+                          ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_do_pause (icon->priv->mpd);
+}
+
+static void
+ario_tray_icon_cmd_stop (GtkAction *action,
+                        ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_do_stop (icon->priv->mpd);
+}
+
+static void
+ario_tray_icon_cmd_next (GtkAction *action,
+                         ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_do_next (icon->priv->mpd);
+}
+
+static void
+ario_tray_icon_cmd_previous (GtkAction *action,
+                             ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_do_prev (icon->priv->mpd);
 }
