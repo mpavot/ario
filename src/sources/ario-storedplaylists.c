@@ -98,10 +98,10 @@ struct ArioStoredplaylistsPrivate
 static GtkActionEntry ario_storedplaylists_actions [] =
 {
         { "StoredplaylistsAddPlaylists", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_add_storedplaylists) },
         { "StoredplaylistsDelete", GTK_STOCK_DELETE, N_("_Delete"), NULL,
-                N_("Delete this playlists"),
+                NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_delete_storedplaylists) }
 };
 static guint ario_storedplaylists_n_actions = G_N_ELEMENTS (ario_storedplaylists_actions);
@@ -109,10 +109,10 @@ static guint ario_storedplaylists_n_actions = G_N_ELEMENTS (ario_storedplaylists
 static GtkActionEntry ario_storedplaylists_songs_actions [] =
 {
         { "StoredplaylistsAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
         { "StoredplaylistsSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-                N_("Show songs properties"),
+                NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
 static guint ario_storedplaylists_n_songs_actions = G_N_ELEMENTS (ario_storedplaylists_songs_actions);

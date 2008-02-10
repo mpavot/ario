@@ -113,16 +113,16 @@ struct ArioPlaylistPrivate
 static GtkActionEntry ario_playlist_actions [] =
 {
         { "PlaylistClear", GTK_STOCK_CLEAR, N_("_Clear"), NULL,
-                N_("Clear the playlist"),
+                NULL,
                 G_CALLBACK (ario_playlist_cmd_clear) },
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
-                N_("Remove the selected songs"),
+                NULL,
                 G_CALLBACK (ario_playlist_cmd_remove) },
         { "PlaylistSave", GTK_STOCK_SAVE, N_("_Save"), NULL,
-                N_("Save the playlist"),
+                NULL,
                 G_CALLBACK (ario_playlist_cmd_save) },
         { "PlaylistSongProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-                N_("Show songs properties"),
+                NULL,
                 G_CALLBACK (ario_playlist_cmd_songs_properties) }
 };
 

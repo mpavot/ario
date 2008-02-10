@@ -127,34 +127,34 @@ struct ArioBrowserPrivate
 static GtkActionEntry ario_browser_actions [] =
 {
         { "BrowserAddArtists", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_add_artists) },
         { "BrowserAddAlbums", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_add_albums) },
         { "BrowserAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_add_songs) },
                 
         { "BrowserAlbumsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-                N_("Show albums properties"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_albums_properties) },              
         { "BrowserSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-                N_("Show songs properties"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_songs_properties) },
                 
         { "CoverArtistGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
-                N_("Download the cover from Amazon"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
         { "CoverArtistRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
-                N_("Delete the selected covers"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_remove_artist_cover) },
 
         { "CoverAlbumGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
-                N_("Download the cover from Amazon"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_get_album_ario_cover_amazon) },
         { "CoverAlbumRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
-                N_("Delete the selected covers"),
+                NULL,
                 G_CALLBACK (ario_browser_cmd_remove_album_cover) },
 };
 static guint ario_browser_n_actions = G_N_ELEMENTS (ario_browser_actions);

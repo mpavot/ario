@@ -118,16 +118,16 @@ struct ArioHeaderPrivate
 static GtkActionEntry ario_header_actions [] =
 {
         { "ControlPlayPause", GTK_STOCK_MEDIA_PLAY, N_("_Play/Pause"), "<control>space",
-                N_("Start playback"),
+                NULL,
                 G_CALLBACK (ario_header_cmd_playpause) },
         { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), NULL,
-                N_("Stop playback"),
+                NULL,
                 G_CALLBACK (ario_header_cmd_stop) },
         { "ControlNext", GTK_STOCK_MEDIA_NEXT, N_("_Next"), "<control>Right",
-                N_("Start playing the next song"),
+                NULL,
                 G_CALLBACK (ario_header_cmd_next) },
         { "ControlPrevious", GTK_STOCK_MEDIA_PREVIOUS, N_("P_revious"), "<control>Left",
-                N_("Start playing the previous song"),
+                NULL,
                 G_CALLBACK (ario_header_cmd_previous) },
 };
 

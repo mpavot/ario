@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-10 11:28+0100\n"
+"POT-Creation-Date: 2008-02-10 13:01+0100\n"
 "PO-Revision-Date: 2008-01-15 13:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -188,21 +188,22 @@ msgstr ""
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:207
-msgid "Host:"
+msgid "Host :"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:5
-msgid "Name:"
-msgstr ""
+#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:858
+#: ../src/sources/ario-radio.c:1111
+msgid "Name :"
+msgstr "Nama :"
 
 #: ../data/glade/connection-prefs.glade.h:6
-msgid "Password:"
+msgid "Password :"
 msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:209
-msgid "Port:"
+msgid "Port :"
 msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:8
@@ -421,23 +422,19 @@ msgid "Unknown"
 msgstr ""
 
 #: ../src/ario-util.c:71
-#, c-format
-msgid "%d seconds"
+msgid "seconds"
 msgstr ""
 
 #: ../src/ario-util.c:74
-#, c-format
-msgid "%d minutes, "
+msgid "minutes"
 msgstr ""
 
 #: ../src/ario-util.c:82
-#, c-format
-msgid "%d hours, "
+msgid "hours"
 msgstr ""
 
 #: ../src/ario-util.c:90
-#, c-format
-msgid "%d days, "
+msgid "days"
 msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:290
@@ -521,13 +518,6 @@ msgstr ""
 msgid "_Add to playlist"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
-#: ../src/sources/ario-browser.c:136 ../src/sources/ario-radio.c:109
-#: ../src/sources/ario-search.c:101 ../src/sources/ario-storedplaylists.c:101
-#: ../src/sources/ario-storedplaylists.c:112
-msgid "Add to the playlist"
-msgstr "tambahkan ke daftar main"
-
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:114
@@ -535,31 +525,13 @@ msgstr "tambahkan ke daftar main"
 msgid "_Properties"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:140
-msgid "Show albums properties"
-msgstr ""
-
-#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:104
-#: ../src/sources/ario-storedplaylists.c:115
-#: ../src/widgets/ario-playlist.c:125
-msgid "Show songs properties"
-msgstr ""
-
 #: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:153
 msgid "Get the covers from _Amazon"
 msgstr "Ambil sampul dari Amazon"
 
-#: ../src/sources/ario-browser.c:147 ../src/sources/ario-browser.c:154
-msgid "Download the cover from Amazon"
-msgstr "Download sampul dari Amazon"
-
 #: ../src/sources/ario-browser.c:149 ../src/sources/ario-browser.c:156
 msgid "_Delete the covers"
 msgstr "Hapus sampul"
-
-#: ../src/sources/ario-browser.c:150 ../src/sources/ario-browser.c:157
-msgid "Delete the selected covers"
-msgstr "Hapus sampul yang dipilh"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
@@ -605,21 +577,9 @@ msgstr ""
 msgid "Add a _new radio"
 msgstr ""
 
-#: ../src/sources/ario-radio.c:112
-msgid "Add a new radio"
-msgstr "tambah radio baru"
-
 #: ../src/sources/ario-radio.c:114
 msgid "_Delete this radios"
 msgstr "hapus radio ini"
-
-#: ../src/sources/ario-radio.c:115
-msgid "Delete this radios"
-msgstr "hapus radio ini"
-
-#: ../src/sources/ario-radio.c:118
-msgid "Change properties of this radio"
-msgstr "ganti properti radio ini"
 
 #: ../src/sources/ario-radio.c:235
 msgid "Internet Radios"
@@ -629,10 +589,6 @@ msgstr "Radio internet"
 #: ../src/sources/ario-radio.c:848
 msgid "Add a WebRadio"
 msgstr ""
-
-#: ../src/sources/ario-radio.c:858 ../src/sources/ario-radio.c:1111
-msgid "Name :"
-msgstr "Nama :"
 
 #: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1112
 msgid "URL :"
@@ -702,10 +658,6 @@ msgstr ""
 msgid "_Delete"
 msgstr ""
 
-#: ../src/sources/ario-storedplaylists.c:104
-msgid "Delete this playlists"
-msgstr "hapus daftar main"
-
 #: ../src/sources/ario-storedplaylists.c:231
 msgid "Playlist"
 msgstr ""
@@ -738,106 +690,50 @@ msgstr ""
 msgid "_Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:124
-msgid "Save Playlist"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:127
-msgid "Connect"
-msgstr "koneksikan"
-
-#: ../src/shell/ario-shell.c:130
-msgid "Disconnect"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:132
 msgid "_Quit"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:133
-msgid "Quit"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:135
 msgid "Prefere_nces"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:136
-msgid "Edit music player preferences"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:138
 msgid "_Change current album cover"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:139
-msgid "Change current album cover"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:141
 msgid "Download album _covers"
 msgstr "donwload sampul album"
 
-#: ../src/shell/ario-shell.c:142
-msgid "Download covers form amazon"
-msgstr "donwload sampul album dari Amazon"
-
 #: ../src/shell/ario-shell.c:144
 msgid "Show _lyrics"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:145
-msgid "Show song lyrics"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:147
 msgid "_About"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:148
-msgid "Show information about the music player"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:150
 msgid "_Translate this application..."
-msgstr ""
-
-#: ../src/shell/ario-shell.c:151
-msgid "Translate this application"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Library"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:160
-msgid "Library view"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:164
 msgid "_Web Radios"
 msgstr "Radio jaringan"
-
-#: ../src/shell/ario-shell.c:165
-msgid "Web Radios view"
-msgstr "tampilan radio jaringan"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
 #: ../src/shell/ario-shell.c:171
 msgid "_Search"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:172
-msgid "Search view"
-msgstr "tampilan menu cari"
-
 #: ../src/shell/ario-shell.c:177
 msgid "_Playlists"
 msgstr "Daftar main"
-
-#: ../src/shell/ario-shell.c:178
-msgid "Playlists view"
-msgstr "Tampilan daftar main"
 
 #: ../src/shell/ario-shell.c:543
 msgid "GTK client for MPD"
@@ -880,8 +776,8 @@ msgstr ""
 msgid "Error saving file"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyrics.c:53
-msgid "Ario Lyrics"
+#: ../src/shell/ario-shell-lyrics.c:53 ../src/shell/ario-shell-songinfos.c:268
+msgid "Lyrics"
 msgstr ""
 
 #: ../src/shell/ario-shell-lyricsselect.c:190
@@ -902,16 +798,8 @@ msgstr ""
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
-msgid "Song Properties"
-msgstr ""
-
-#: ../src/shell/ario-shell-songinfos.c:268
-msgid "Lyrics"
-msgstr ""
-
 #: ../src/shell/ario-shell-songinfos.c:409
-#, c-format
-msgid "Song Properties - %s"
+msgid "Song Properties"
 msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:206
@@ -940,32 +828,16 @@ msgstr "Persetujuan"
 msgid "_Play/Pause"
 msgstr "main/berhenti"
 
-#: ../src/widgets/ario-header.c:121
-msgid "Start playback"
-msgstr ""
-
 #: ../src/widgets/ario-header.c:123
 msgid "_Stop"
-msgstr ""
-
-#: ../src/widgets/ario-header.c:124
-msgid "Stop playback"
 msgstr ""
 
 #: ../src/widgets/ario-header.c:126
 msgid "_Next"
 msgstr "Selanjutnya"
 
-#: ../src/widgets/ario-header.c:127
-msgid "Start playing the next song"
-msgstr "Mulai mainkan lagu berikutnya"
-
 #: ../src/widgets/ario-header.c:129
 msgid "P_revious"
-msgstr ""
-
-#: ../src/widgets/ario-header.c:130
-msgid "Start playing the previous song"
 msgstr ""
 
 #: ../src/widgets/ario-header.c:147 ../src/widgets/ario-tray-icon.c:38
@@ -1007,25 +879,13 @@ msgstr "ubah volume musik"
 msgid "_Clear"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:116
-msgid "Clear the playlist"
-msgstr ""
-
 #: ../src/widgets/ario-playlist.c:118
 msgid "_Remove"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:119
-msgid "Remove the selected songs"
-msgstr "pindahkan lagu-lagu yang dipilh"
-
 #: ../src/widgets/ario-playlist.c:121
 msgid "_Save"
 msgstr ""
-
-#: ../src/widgets/ario-playlist.c:122
-msgid "Save the playlist"
-msgstr "simpan daftar main"
 
 #: ../src/widgets/ario-playlist.c:305
 msgid "Duration"
@@ -1045,14 +905,54 @@ msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
 #: ../src/widgets/ario-status-bar.c:207
-#, c-format
-msgid "%d Songs - %s"
+msgid "Songs"
 msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:37
 msgid "Not playing"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.c:364
-msgid "Ario tray icon"
-msgstr ""
+#~ msgid "Web Radios view"
+#~ msgstr "tampilan radio jaringan"
+
+#~ msgid "Search view"
+#~ msgstr "tampilan menu cari"
+
+#~ msgid "Playlists view"
+#~ msgstr "Tampilan daftar main"
+
+#~ msgid "Add to the playlist"
+#~ msgstr "tambahkan ke daftar main"
+
+#~ msgid "Download the cover from Amazon"
+#~ msgstr "Download sampul dari Amazon"
+
+#~ msgid "Delete the selected covers"
+#~ msgstr "Hapus sampul yang dipilh"
+
+#~ msgid "Delete this playlists"
+#~ msgstr "hapus daftar main"
+
+#~ msgid "Connect"
+#~ msgstr "koneksikan"
+
+#~ msgid "Download covers form amazon"
+#~ msgstr "donwload sampul album dari Amazon"
+
+#~ msgid "Start playing the next song"
+#~ msgstr "Mulai mainkan lagu berikutnya"
+
+#~ msgid "Remove the selected songs"
+#~ msgstr "pindahkan lagu-lagu yang dipilh"
+
+#~ msgid "Save the playlist"
+#~ msgstr "simpan daftar main"
+
+#~ msgid "Add a new radio"
+#~ msgstr "tambah radio baru"
+
+#~ msgid "Delete this radios"
+#~ msgstr "hapus radio ini"
+
+#~ msgid "Change properties of this radio"
+#~ msgstr "ganti properti radio ini"
