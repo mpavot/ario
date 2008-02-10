@@ -307,8 +307,7 @@ ario_shell_construct (ArioShell *shell)
 
         shell->priv->mpd = ario_mpd_new ();
         shell->priv->cover_handler = ario_cover_handler_new (shell->priv->mpd);
-        shell->priv->header = ario_header_new (shell->priv->actiongroup,
-                                               shell->priv->mpd,
+        shell->priv->header = ario_header_new (shell->priv->mpd,
                                                shell->priv->cover_handler);
         separator = gtk_hseparator_new ();
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
@@ -331,10 +330,17 @@ ario_shell_construct (ArioShell *shell)
         gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
                                     gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
 
+        /* initialize tray icon */
+        shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
+                                                     shell->priv->ui_manager,
+                                                     win,
+                                                     shell->priv->mpd,
+                                                     shell->priv->cover_handler);
+        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
+
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
-
 
         gtk_paned_pack1 (GTK_PANED (shell->priv->vpaned),
                          shell->priv->source,
@@ -375,13 +381,6 @@ ario_shell_construct (ArioShell *shell)
                                  shell, 0);
 
         ario_shell_sync_window_state (shell);
-
-        /* initialize tray icon */
-        shell->priv->tray_icon = ario_tray_icon_new (shell->priv->ui_manager,
-                                                     win,
-                                                     shell->priv->mpd,
-                                                     shell->priv->cover_handler);
-        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 
         /* First launch assistant */
         if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {

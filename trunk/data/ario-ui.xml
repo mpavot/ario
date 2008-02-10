@@ -37,7 +37,8 @@
         </menubar>
 
         <popup name="TrayPopup">
-                <menuitem name="PlayPauseTray" action="ControlPlayPause"/>
+                <menuitem name="PlayTray" action="ControlPlay"/>
+                <menuitem name="PauseTray" action="ControlPause"/>
                 <menuitem name="StopTray" action="ControlStop"/>
                 <separator/>
                 <menuitem name="NextTray" action="ControlNext"/>
