@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-10 11:28+0100\n"
+"POT-Creation-Date: 2008-02-10 13:01+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -191,22 +191,23 @@ msgstr "По умолчанию"
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:207
-msgid "Host:"
-msgstr "Хост:"
+msgid "Host :"
+msgstr "Хост :"
 
-#: ../data/glade/connection-prefs.glade.h:5
-msgid "Name:"
-msgstr "Название:"
+#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:858
+#: ../src/sources/ario-radio.c:1111
+msgid "Name :"
+msgstr "Название :"
 
 #: ../data/glade/connection-prefs.glade.h:6
-msgid "Password:"
-msgstr "Пароль:"
+msgid "Password :"
+msgstr "Пароль :"
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:209
-msgid "Port:"
-msgstr "Порт:"
+msgid "Port :"
+msgstr "Порт :"
 
 #: ../data/glade/connection-prefs.glade.h:8
 msgid "_Autoconnect on startup"
@@ -420,24 +421,20 @@ msgid "Unknown"
 msgstr "Неизвестно"
 
 #: ../src/ario-util.c:71
-#, c-format
-msgid "%d seconds"
-msgstr "%d секунд"
+msgid "seconds"
+msgstr "секунд"
 
 #: ../src/ario-util.c:74
-#, c-format
-msgid "%d minutes, "
-msgstr "%d минут, "
+msgid "minutes"
+msgstr "минут"
 
 #: ../src/ario-util.c:82
-#, c-format
-msgid "%d hours, "
-msgstr "%d часов, "
+msgid "hours"
+msgstr "часов"
 
 #: ../src/ario-util.c:90
-#, c-format
-msgid "%d days, "
-msgstr "%d дней, "
+msgid "days"
+msgstr "дней"
 
 #: ../src/preferences/ario-connection-preferences.c:290
 msgid "Profile"
@@ -523,13 +520,6 @@ msgstr "Обновление..."
 msgid "_Add to playlist"
 msgstr "_Добавить в плейлист"
 
-#: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
-#: ../src/sources/ario-browser.c:136 ../src/sources/ario-radio.c:109
-#: ../src/sources/ario-search.c:101 ../src/sources/ario-storedplaylists.c:101
-#: ../src/sources/ario-storedplaylists.c:112
-msgid "Add to the playlist"
-msgstr "Добавить плейлист"
-
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:114
@@ -537,33 +527,13 @@ msgstr "Добавить плейлист"
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../src/sources/ario-browser.c:140
-#, fuzzy
-msgid "Show albums properties"
-msgstr "Показать слова песен"
-
-#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:104
-#: ../src/sources/ario-storedplaylists.c:115
-#: ../src/widgets/ario-playlist.c:125
-#, fuzzy
-msgid "Show songs properties"
-msgstr "Показать слова песен"
-
 #: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:153
 msgid "Get the covers from _Amazon"
 msgstr "Получить обложку с _Amazon"
 
-#: ../src/sources/ario-browser.c:147 ../src/sources/ario-browser.c:154
-msgid "Download the cover from Amazon"
-msgstr "Загрузить обложку с Amazon"
-
 #: ../src/sources/ario-browser.c:149 ../src/sources/ario-browser.c:156
 msgid "_Delete the covers"
 msgstr "_Удалить обложки"
-
-#: ../src/sources/ario-browser.c:150 ../src/sources/ario-browser.c:157
-msgid "Delete the selected covers"
-msgstr "Удалить выбранные обложки"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
@@ -609,21 +579,9 @@ msgstr "Вы действительно хотите удалить все об�
 msgid "Add a _new radio"
 msgstr "Добавить _новое радио"
 
-#: ../src/sources/ario-radio.c:112
-msgid "Add a new radio"
-msgstr "Добавить новое радио"
-
 #: ../src/sources/ario-radio.c:114
 msgid "_Delete this radios"
 msgstr "_Удалить эти радиостанции"
-
-#: ../src/sources/ario-radio.c:115
-msgid "Delete this radios"
-msgstr "Удалить эти радиостанции"
-
-#: ../src/sources/ario-radio.c:118
-msgid "Change properties of this radio"
-msgstr "Сменить настройки этой радиостанции"
 
 #: ../src/sources/ario-radio.c:235
 msgid "Internet Radios"
@@ -633,10 +591,6 @@ msgstr "Интернет-Радио"
 #: ../src/sources/ario-radio.c:848
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
-
-#: ../src/sources/ario-radio.c:858 ../src/sources/ario-radio.c:1111
-msgid "Name :"
-msgstr "Название :"
 
 #: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1112
 msgid "URL :"
@@ -705,10 +659,6 @@ msgstr "Плейлисты"
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: ../src/sources/ario-storedplaylists.c:104
-msgid "Delete this playlists"
-msgstr "Удалить эти плейлисты"
-
 #: ../src/sources/ario-storedplaylists.c:231
 msgid "Playlist"
 msgstr "Плейлист"
@@ -741,106 +691,50 @@ msgstr "_Помощь"
 msgid "_Save Playlist"
 msgstr "_Сохранить плейлист"
 
-#: ../src/shell/ario-shell.c:124
-msgid "Save Playlist"
-msgstr "Сохранить плейлист"
-
-#: ../src/shell/ario-shell.c:127
-msgid "Connect"
-msgstr "Соединиться"
-
-#: ../src/shell/ario-shell.c:130
-msgid "Disconnect"
-msgstr "Отсоединиться"
-
 #: ../src/shell/ario-shell.c:132
 msgid "_Quit"
 msgstr "_Выход"
-
-#: ../src/shell/ario-shell.c:133
-msgid "Quit"
-msgstr "Выход"
 
 #: ../src/shell/ario-shell.c:135
 msgid "Prefere_nces"
 msgstr "_Параметры"
 
-#: ../src/shell/ario-shell.c:136
-msgid "Edit music player preferences"
-msgstr "Редактировать настройки музыкального проигрывателя"
-
 #: ../src/shell/ario-shell.c:138
 msgid "_Change current album cover"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:139
-msgid "Change current album cover"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:141
 msgid "Download album _covers"
 msgstr "Скачать альбомные _обложки"
 
-#: ../src/shell/ario-shell.c:142
-msgid "Download covers form amazon"
-msgstr "Скачать обложки с amazon"
-
 #: ../src/shell/ario-shell.c:144
 msgid "Show _lyrics"
 msgstr "Показать _слова песен"
-
-#: ../src/shell/ario-shell.c:145
-msgid "Show song lyrics"
-msgstr "Показать слова песен"
 
 #: ../src/shell/ario-shell.c:147
 msgid "_About"
 msgstr "_О программе"
 
-#: ../src/shell/ario-shell.c:148
-msgid "Show information about the music player"
-msgstr "Показать информацию о музыкальном проигрывателе"
-
 #: ../src/shell/ario-shell.c:150
 msgid "_Translate this application..."
-msgstr ""
-
-#: ../src/shell/ario-shell.c:151
-msgid "Translate this application"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Library"
 msgstr "_Библиотека"
 
-#: ../src/shell/ario-shell.c:160
-msgid "Library view"
-msgstr "Просмотр библиотеки"
-
 #: ../src/shell/ario-shell.c:164
 msgid "_Web Radios"
 msgstr "_ВебРадиостанции"
-
-#: ../src/shell/ario-shell.c:165
-msgid "Web Radios view"
-msgstr "Просмотр ВебРадиостанций"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
 #: ../src/shell/ario-shell.c:171
 msgid "_Search"
 msgstr "_Поиск"
 
-#: ../src/shell/ario-shell.c:172
-msgid "Search view"
-msgstr "Просмотр поиска"
-
 #: ../src/shell/ario-shell.c:177
 msgid "_Playlists"
 msgstr "_Плейлист"
-
-#: ../src/shell/ario-shell.c:178
-msgid "Playlists view"
-msgstr "Просмотр плейлиста"
 
 #: ../src/shell/ario-shell.c:543
 msgid "GTK client for MPD"
@@ -886,9 +780,9 @@ msgstr "Ошибка чтения файла"
 msgid "Error saving file"
 msgstr "Ошибка записи файла"
 
-#: ../src/shell/ario-shell-lyrics.c:53
-msgid "Ario Lyrics"
-msgstr "Ario Тексты песен"
+#: ../src/shell/ario-shell-lyrics.c:53 ../src/shell/ario-shell-songinfos.c:268
+msgid "Lyrics"
+msgstr "Тексты песен"
 
 #: ../src/shell/ario-shell-lyricsselect.c:190
 msgid "Lyrics Download"
@@ -908,21 +802,12 @@ msgstr "Внешний вид"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
+#: ../src/shell/ario-shell-songinfos.c:409
 #, fuzzy
 msgid "Song Properties"
 msgstr "_Свойства"
 
-#: ../src/shell/ario-shell-songinfos.c:268
-msgid "Lyrics"
-msgstr "Тексты песен"
-
-#: ../src/shell/ario-shell-songinfos.c:409
-#, fuzzy, c-format
-msgid "Song Properties - %s"
-msgstr "_Свойства"
-
 #: ../src/widgets/ario-firstlaunch.c:206
-#, fuzzy
 msgid "The following configuration will be used:"
 msgstr "Следующая конфигурация будет использована:"
 
@@ -950,33 +835,17 @@ msgstr "Подтверждение"
 msgid "_Play/Pause"
 msgstr "_Играть/Пауза"
 
-#: ../src/widgets/ario-header.c:121
-msgid "Start playback"
-msgstr "Начать воспроизведение"
-
 #: ../src/widgets/ario-header.c:123
 msgid "_Stop"
 msgstr "_Остановить"
-
-#: ../src/widgets/ario-header.c:124
-msgid "Stop playback"
-msgstr "Остановить воспроизведение"
 
 #: ../src/widgets/ario-header.c:126
 msgid "_Next"
 msgstr "_Далее"
 
-#: ../src/widgets/ario-header.c:127
-msgid "Start playing the next song"
-msgstr "Начать воспроизведение следующей песни"
-
 #: ../src/widgets/ario-header.c:129
 msgid "P_revious"
 msgstr "П_ред."
-
-#: ../src/widgets/ario-header.c:130
-msgid "Start playing the previous song"
-msgstr "Начать воспроизведение предыдущей песни"
 
 #: ../src/widgets/ario-header.c:147 ../src/widgets/ario-tray-icon.c:38
 #, c-format
@@ -1017,25 +886,13 @@ msgstr "Изменение громкости воспроизведения"
 msgid "_Clear"
 msgstr "_Очистить"
 
-#: ../src/widgets/ario-playlist.c:116
-msgid "Clear the playlist"
-msgstr "Очистить плейлист"
-
 #: ../src/widgets/ario-playlist.c:118
 msgid "_Remove"
 msgstr "_Удалить"
 
-#: ../src/widgets/ario-playlist.c:119
-msgid "Remove the selected songs"
-msgstr ""
-
 #: ../src/widgets/ario-playlist.c:121
 msgid "_Save"
 msgstr "_Сохранить"
-
-#: ../src/widgets/ario-playlist.c:122
-msgid "Save the playlist"
-msgstr "Сохранить плейлист"
 
 #: ../src/widgets/ario-playlist.c:305
 msgid "Duration"
@@ -1055,14 +912,104 @@ msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
 #: ../src/widgets/ario-status-bar.c:207
-#, c-format
-msgid "%d Songs - %s"
-msgstr "%d Композиций - %s"
+msgid "Songs"
+msgstr "Композиций"
 
 #: ../src/widgets/ario-tray-icon.c:37
 msgid "Not playing"
 msgstr "Не воспроизводится"
 
-#: ../src/widgets/ario-tray-icon.c:364
-msgid "Ario tray icon"
-msgstr "Иконка Ario в трее"
+#~ msgid "Ario Lyrics"
+#~ msgstr "Ario Тексты песен"
+
+#~ msgid "Library view"
+#~ msgstr "Просмотр библиотеки"
+
+#~ msgid "Web Radios view"
+#~ msgstr "Просмотр ВебРадиостанций"
+
+#~ msgid "Search view"
+#~ msgstr "Просмотр поиска"
+
+#~ msgid "Playlists view"
+#~ msgstr "Просмотр плейлиста"
+
+#~ msgid "Host:"
+#~ msgstr "Хост:"
+
+#~ msgid "Port:"
+#~ msgstr "Порт:"
+
+#~ msgid "Name:"
+#~ msgstr "Название:"
+
+#~ msgid "Add to the playlist"
+#~ msgstr "Добавить плейлист"
+
+#, fuzzy
+#~ msgid "Show albums properties"
+#~ msgstr "Показать слова песен"
+
+#, fuzzy
+#~ msgid "Show songs properties"
+#~ msgstr "Показать слова песен"
+
+#~ msgid "Download the cover from Amazon"
+#~ msgstr "Загрузить обложку с Amazon"
+
+#~ msgid "Delete the selected covers"
+#~ msgstr "Удалить выбранные обложки"
+
+#~ msgid "Delete this playlists"
+#~ msgstr "Удалить эти плейлисты"
+
+#~ msgid "Save Playlist"
+#~ msgstr "Сохранить плейлист"
+
+#~ msgid "Connect"
+#~ msgstr "Соединиться"
+
+#~ msgid "Disconnect"
+#~ msgstr "Отсоединиться"
+
+#~ msgid "Quit"
+#~ msgstr "Выход"
+
+#~ msgid "Edit music player preferences"
+#~ msgstr "Редактировать настройки музыкального проигрывателя"
+
+#~ msgid "Download covers form amazon"
+#~ msgstr "Скачать обложки с amazon"
+
+#~ msgid "Show song lyrics"
+#~ msgstr "Показать слова песен"
+
+#~ msgid "Show information about the music player"
+#~ msgstr "Показать информацию о музыкальном проигрывателе"
+
+#~ msgid "Start playback"
+#~ msgstr "Начать воспроизведение"
+
+#~ msgid "Stop playback"
+#~ msgstr "Остановить воспроизведение"
+
+#~ msgid "Start playing the next song"
+#~ msgstr "Начать воспроизведение следующей песни"
+
+#~ msgid "Start playing the previous song"
+#~ msgstr "Начать воспроизведение предыдущей песни"
+
+#~ msgid "Clear the playlist"
+#~ msgstr "Очистить плейлист"
+
+#~ msgid "Save the playlist"
+#~ msgstr "Сохранить плейлист"
+
+#~ msgid "Add a new radio"
+#~ msgstr "Добавить новое радио"
+
+#~ msgid "Delete this radios"
+#~ msgstr "Удалить эти радиостанции"
+
+#~ msgid "Change properties of this radio"
+#~ msgstr "Сменить настройки этой радиостанции"

@@ -50,7 +50,7 @@ static void ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
 static void ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
                                                 ArioShellLyrics *shell_lyrics);
                                                 
-#define BASE_TITLE _("Ario Lyrics")
+#define BASE_TITLE _("Lyrics")
 
 enum
 {

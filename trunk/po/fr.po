@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-10 11:28+0100\n"
+"POT-Creation-Date: 2008-02-10 13:01+0100\n"
 "PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -191,22 +191,23 @@ msgstr "Défaut"
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:207
-msgid "Host:"
-msgstr "Hôte:"
+msgid "Host :"
+msgstr "Hôte :"
 
-#: ../data/glade/connection-prefs.glade.h:5
-msgid "Name:"
-msgstr "Nom:"
+#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:858
+#: ../src/sources/ario-radio.c:1111
+msgid "Name :"
+msgstr "Nom :"
 
 #: ../data/glade/connection-prefs.glade.h:6
-msgid "Password:"
-msgstr "Mot de passe:"
+msgid "Password :"
+msgstr "Mot de passe :"
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:209
-msgid "Port:"
-msgstr "Port:"
+msgid "Port :"
+msgstr "Port :"
 
 #: ../data/glade/connection-prefs.glade.h:8
 msgid "_Autoconnect on startup"
@@ -420,24 +421,20 @@ msgid "Unknown"
 msgstr "Inconnu"
 
 #: ../src/ario-util.c:71
-#, c-format
-msgid "%d seconds"
-msgstr "%d secondes"
+msgid "seconds"
+msgstr "secondes"
 
 #: ../src/ario-util.c:74
-#, c-format
-msgid "%d minutes, "
-msgstr "%d minutes, "
+msgid "minutes"
+msgstr "minutes"
 
 #: ../src/ario-util.c:82
-#, c-format
-msgid "%d hours, "
-msgstr "%d heures, "
+msgid "hours"
+msgstr "heures"
 
 #: ../src/ario-util.c:90
-#, c-format
-msgid "%d days, "
-msgstr "%d jours, "
+msgid "days"
+msgstr "jours"
 
 #: ../src/preferences/ario-connection-preferences.c:290
 msgid "Profile"
@@ -522,13 +519,6 @@ msgstr "En cours de mise à jour..."
 msgid "_Add to playlist"
 msgstr "_Ajouter à la playlist"
 
-#: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
-#: ../src/sources/ario-browser.c:136 ../src/sources/ario-radio.c:109
-#: ../src/sources/ario-search.c:101 ../src/sources/ario-storedplaylists.c:101
-#: ../src/sources/ario-storedplaylists.c:112
-msgid "Add to the playlist"
-msgstr "_Ajouter à la playlist"
-
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:114
@@ -536,31 +526,13 @@ msgstr "_Ajouter à la playlist"
 msgid "_Properties"
 msgstr "Propriétés"
 
-#: ../src/sources/ario-browser.c:140
-msgid "Show albums properties"
-msgstr "Affiche les propriétés des album"
-
-#: ../src/sources/ario-browser.c:143 ../src/sources/ario-search.c:104
-#: ../src/sources/ario-storedplaylists.c:115
-#: ../src/widgets/ario-playlist.c:125
-msgid "Show songs properties"
-msgstr "Affiche les propriétés des chansons"
-
 #: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:153
 msgid "Get the covers from _Amazon"
 msgstr "Obtenir les pochettes depuis Amazon"
 
-#: ../src/sources/ario-browser.c:147 ../src/sources/ario-browser.c:154
-msgid "Download the cover from Amazon"
-msgstr "Télécharger la pochette depuis amazon"
-
 #: ../src/sources/ario-browser.c:149 ../src/sources/ario-browser.c:156
 msgid "_Delete the covers"
 msgstr "_Supprimer les pochettes"
-
-#: ../src/sources/ario-browser.c:150 ../src/sources/ario-browser.c:157
-msgid "Delete the selected covers"
-msgstr "Supprimer les pochettes sélectionnées"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
@@ -608,21 +580,9 @@ msgstr ""
 msgid "Add a _new radio"
 msgstr "Ajouter une nouvelle radio"
 
-#: ../src/sources/ario-radio.c:112
-msgid "Add a new radio"
-msgstr "Ajouter une nouvelle radio"
-
 #: ../src/sources/ario-radio.c:114
 msgid "_Delete this radios"
 msgstr "_Supprimer les radios"
-
-#: ../src/sources/ario-radio.c:115
-msgid "Delete this radios"
-msgstr "Supprimer les radios"
-
-#: ../src/sources/ario-radio.c:118
-msgid "Change properties of this radio"
-msgstr "Changer les propriétés de cette radio"
 
 #: ../src/sources/ario-radio.c:235
 msgid "Internet Radios"
@@ -632,10 +592,6 @@ msgstr "Radios Internet"
 #: ../src/sources/ario-radio.c:848
 msgid "Add a WebRadio"
 msgstr "Ajouter une WebRadio"
-
-#: ../src/sources/ario-radio.c:858 ../src/sources/ario-radio.c:1111
-msgid "Name :"
-msgstr "Nom :"
 
 #: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1112
 msgid "URL :"
@@ -705,10 +661,6 @@ msgstr "Playlists"
 msgid "_Delete"
 msgstr "_Supprimer"
 
-#: ../src/sources/ario-storedplaylists.c:104
-msgid "Delete this playlists"
-msgstr "Supprimer les playlists"
-
 #: ../src/sources/ario-storedplaylists.c:231
 msgid "Playlist"
 msgstr "Playlist"
@@ -741,106 +693,50 @@ msgstr "_Aide"
 msgid "_Save Playlist"
 msgstr "Sauver la playlist"
 
-#: ../src/shell/ario-shell.c:124
-msgid "Save Playlist"
-msgstr "Sauver la playlist"
-
-#: ../src/shell/ario-shell.c:127
-msgid "Connect"
-msgstr "_Connecter"
-
-#: ../src/shell/ario-shell.c:130
-msgid "Disconnect"
-msgstr "_Déconnecter"
-
 #: ../src/shell/ario-shell.c:132
 msgid "_Quit"
-msgstr "_Quitter"
-
-#: ../src/shell/ario-shell.c:133
-msgid "Quit"
 msgstr "_Quitter"
 
 #: ../src/shell/ario-shell.c:135
 msgid "Prefere_nces"
 msgstr "Préfére_nces"
 
-#: ../src/shell/ario-shell.c:136
-msgid "Edit music player preferences"
-msgstr "Modifier les préférences"
-
 #: ../src/shell/ario-shell.c:138
 msgid "_Change current album cover"
 msgstr "_Changer la pochette actuelle"
-
-#: ../src/shell/ario-shell.c:139
-msgid "Change current album cover"
-msgstr "Changer la pochette actuelle"
 
 #: ../src/shell/ario-shell.c:141
 msgid "Download album _covers"
 msgstr "Télécharger les pochettes"
 
-#: ../src/shell/ario-shell.c:142
-msgid "Download covers form amazon"
-msgstr "Télécharger des pochettes depuis amazon"
-
 #: ../src/shell/ario-shell.c:144
 msgid "Show _lyrics"
 msgstr "Afficher les _Paroles"
-
-#: ../src/shell/ario-shell.c:145
-msgid "Show song lyrics"
-msgstr "Affiche les paroles des chansons"
 
 #: ../src/shell/ario-shell.c:147
 msgid "_About"
 msgstr "_À propos"
 
-#: ../src/shell/ario-shell.c:148
-msgid "Show information about the music player"
-msgstr "Affichier des informations sur le lecteur de musique"
-
 #: ../src/shell/ario-shell.c:150
 msgid "_Translate this application..."
 msgstr "_Traduire cette application..."
-
-#: ../src/shell/ario-shell.c:151
-msgid "Translate this application"
-msgstr "Traduire cette application"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Library"
 msgstr "_Bibliothèque"
 
-#: ../src/shell/ario-shell.c:160
-msgid "Library view"
-msgstr "Affichage de la bibliothèque"
-
 #: ../src/shell/ario-shell.c:164
 msgid "_Web Radios"
 msgstr "_Web Radios"
-
-#: ../src/shell/ario-shell.c:165
-msgid "Web Radios view"
-msgstr "Affichage des Web Radios"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
 #: ../src/shell/ario-shell.c:171
 msgid "_Search"
 msgstr "_Recherche"
 
-#: ../src/shell/ario-shell.c:172
-msgid "Search view"
-msgstr "Chercher dans la bibliothèque"
-
 #: ../src/shell/ario-shell.c:177
 msgid "_Playlists"
 msgstr "_Playlists"
-
-#: ../src/shell/ario-shell.c:178
-msgid "Playlists view"
-msgstr "Affichage des Playlists"
 
 #: ../src/shell/ario-shell.c:543
 msgid "GTK client for MPD"
@@ -886,9 +782,9 @@ msgstr "Erreur lors de la lecture du fichier"
 msgid "Error saving file"
 msgstr "Erreur lors de l'écriture du fichier"
 
-#: ../src/shell/ario-shell-lyrics.c:53
-msgid "Ario Lyrics"
-msgstr "Ario Paroles"
+#: ../src/shell/ario-shell-lyrics.c:53 ../src/shell/ario-shell-songinfos.c:268
+msgid "Lyrics"
+msgstr "Paroles"
 
 #: ../src/shell/ario-shell-lyricsselect.c:190
 msgid "Lyrics Download"
@@ -908,17 +804,9 @@ msgstr "Interface"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
+#: ../src/shell/ario-shell-songinfos.c:409
 msgid "Song Properties"
 msgstr "Propriétés de la chanson"
-
-#: ../src/shell/ario-shell-songinfos.c:268
-msgid "Lyrics"
-msgstr "Paroles"
-
-#: ../src/shell/ario-shell-songinfos.c:409
-#, c-format
-msgid "Song Properties - %s"
-msgstr "Propriétés de la chanson - %s"
 
 #: ../src/widgets/ario-firstlaunch.c:206
 msgid "The following configuration will be used:"
@@ -948,33 +836,17 @@ msgstr "Confirmation"
 msgid "_Play/Pause"
 msgstr "_Play/Pause"
 
-#: ../src/widgets/ario-header.c:121
-msgid "Start playback"
-msgstr "Jouer"
-
 #: ../src/widgets/ario-header.c:123
 msgid "_Stop"
 msgstr "_Stop"
-
-#: ../src/widgets/ario-header.c:124
-msgid "Stop playback"
-msgstr "Stop"
 
 #: ../src/widgets/ario-header.c:126
 msgid "_Next"
 msgstr "_Suivant"
 
-#: ../src/widgets/ario-header.c:127
-msgid "Start playing the next song"
-msgstr "Jouer la chanson suivante"
-
 #: ../src/widgets/ario-header.c:129
 msgid "P_revious"
 msgstr "_Précédent"
-
-#: ../src/widgets/ario-header.c:130
-msgid "Start playing the previous song"
-msgstr "Jouer la chanson précédente"
 
 #: ../src/widgets/ario-header.c:147 ../src/widgets/ario-tray-icon.c:38
 #, c-format
@@ -1015,25 +887,13 @@ msgstr "Change le volume de la musique"
 msgid "_Clear"
 msgstr "_Effacer"
 
-#: ../src/widgets/ario-playlist.c:116
-msgid "Clear the playlist"
-msgstr "Effacer la playlist"
-
 #: ../src/widgets/ario-playlist.c:118
 msgid "_Remove"
 msgstr "_Retirer"
 
-#: ../src/widgets/ario-playlist.c:119
-msgid "Remove the selected songs"
-msgstr "Enlever la chanson sélectionnée"
-
 #: ../src/widgets/ario-playlist.c:121
 msgid "_Save"
 msgstr "_Sauver"
-
-#: ../src/widgets/ario-playlist.c:122
-msgid "Save the playlist"
-msgstr "Sauve la playlist"
 
 #: ../src/widgets/ario-playlist.c:305
 msgid "Duration"
@@ -1053,14 +913,111 @@ msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La playlist existe déjà. Voulez-vous la remplacer?"
 
 #: ../src/widgets/ario-status-bar.c:207
-#, c-format
-msgid "%d Songs - %s"
-msgstr "%d Titres - %s"
+msgid "Songs"
+msgstr "Chansons"
 
 #: ../src/widgets/ario-tray-icon.c:37
 msgid "Not playing"
 msgstr "Ne joue pas"
 
-#: ../src/widgets/ario-tray-icon.c:364
-msgid "Ario tray icon"
-msgstr "Ario - Icône de notification"
+#~ msgid "Ario Lyrics"
+#~ msgstr "Ario Paroles"
+
+#~ msgid "Library view"
+#~ msgstr "Affichage de la bibliothèque"
+
+#~ msgid "Web Radios view"
+#~ msgstr "Affichage des Web Radios"
+
+#~ msgid "Search view"
+#~ msgstr "Chercher dans la bibliothèque"
+
+#~ msgid "Playlists view"
+#~ msgstr "Affichage des Playlists"
+
+#~ msgid "Host:"
+#~ msgstr "Hôte:"
+
+#~ msgid "Port:"
+#~ msgstr "Port:"
+
+#~ msgid "Name:"
+#~ msgstr "Nom:"
+
+#~ msgid "Add to the playlist"
+#~ msgstr "_Ajouter à la playlist"
+
+#~ msgid "Show albums properties"
+#~ msgstr "Affiche les propriétés des album"
+
+#~ msgid "Show songs properties"
+#~ msgstr "Affiche les propriétés des chansons"
+
+#~ msgid "Download the cover from Amazon"
+#~ msgstr "Télécharger la pochette depuis amazon"
+
+#~ msgid "Delete the selected covers"
+#~ msgstr "Supprimer les pochettes sélectionnées"
+
+#~ msgid "Delete this playlists"
+#~ msgstr "Supprimer les playlists"
+
+#~ msgid "Save Playlist"
+#~ msgstr "Sauver la playlist"
+
+#~ msgid "Connect"
+#~ msgstr "_Connecter"
+
+#~ msgid "Disconnect"
+#~ msgstr "_Déconnecter"
+
+#~ msgid "Quit"
+#~ msgstr "_Quitter"
+
+#~ msgid "Edit music player preferences"
+#~ msgstr "Modifier les préférences"
+
+#~ msgid "Change current album cover"
+#~ msgstr "Changer la pochette actuelle"
+
+#~ msgid "Download covers form amazon"
+#~ msgstr "Télécharger des pochettes depuis amazon"
+
+#~ msgid "Show song lyrics"
+#~ msgstr "Affiche les paroles des chansons"
+
+#~ msgid "Show information about the music player"
+#~ msgstr "Affichier des informations sur le lecteur de musique"
+
+#~ msgid "Translate this application"
+#~ msgstr "Traduire cette application"
+
+#~ msgid "Start playback"
+#~ msgstr "Jouer"
+
+#~ msgid "Stop playback"
+#~ msgstr "Stop"
+
+#~ msgid "Start playing the next song"
+#~ msgstr "Jouer la chanson suivante"
+
+#~ msgid "Start playing the previous song"
+#~ msgstr "Jouer la chanson précédente"
+
+#~ msgid "Clear the playlist"
+#~ msgstr "Effacer la playlist"
+
+#~ msgid "Remove the selected songs"
+#~ msgstr "Enlever la chanson sélectionnée"
+
+#~ msgid "Save the playlist"
+#~ msgstr "Sauve la playlist"
+
+#~ msgid "Add a new radio"
+#~ msgstr "Ajouter une nouvelle radio"
+
+#~ msgid "Delete this radios"
+#~ msgstr "Supprimer les radios"
+
+#~ msgid "Change properties of this radio"
+#~ msgstr "Changer les propriétés de cette radio"

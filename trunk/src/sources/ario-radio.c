@@ -106,16 +106,16 @@ struct ArioRadioPrivate
 static GtkActionEntry ario_radio_actions [] =
 {
         { "RadioAddRadios", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_radio_cmd_add_radios) },
         { "RadioNewRadio", GTK_STOCK_ADD, N_("Add a _new radio"), NULL,
-                N_("Add a new radio"),
+                NULL,
                 G_CALLBACK (ario_radio_cmd_new_radio) },
         { "RadioDeleteRadios", GTK_STOCK_DELETE, N_("_Delete this radios"), NULL,
-                N_("Delete this radios"),
+                NULL,
                 G_CALLBACK (ario_radio_cmd_delete_radios) },
         { "RadioProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-                N_("Change properties of this radio"),
+                NULL,
                 G_CALLBACK (ario_radio_cmd_radio_properties) }
 };
 static guint ario_radio_n_actions = G_N_ELEMENTS (ario_radio_actions);

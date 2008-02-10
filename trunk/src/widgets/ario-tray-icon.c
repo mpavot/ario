@@ -361,7 +361,7 @@ ario_tray_icon_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         return g_object_new (TYPE_ARIO_TRAY_ICON,
-                             "title", _("Ario tray icon"),
+                             "title", "Ario",
                              "ui-manager", mgr,
                              "window", window,
                              "mpd", mpd,

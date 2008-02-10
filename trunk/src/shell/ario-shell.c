@@ -121,34 +121,34 @@ static GtkActionEntry ario_shell_actions [] =
         { "Help", NULL, N_("_Help") },
 
         { "FileSave", GTK_STOCK_SAVE, N_("_Save Playlist"), "<control>S",
-                N_("Save Playlist"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_save) },
         { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>C",
-                N_("Connect"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_connect) },
         { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), "<control>D",
-                N_("Disconnect"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_disconnect) },
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
-                N_("Quit"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
-                N_("Edit music player preferences"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_preferences) },
        { "ToolCoverSelect", GTK_STOCK_FIND, N_("_Change current album cover"), NULL,
-                N_("Change current album cover"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_cover_select) },
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
-                N_("Download covers form amazon"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_covers) },
         { "Lyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
-                N_("Show song lyrics"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
         { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
-                N_("Show information about the music player"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_about) },
         { "HelpTranslate", GTK_STOCK_EDIT, N_("_Translate this application..."), NULL,
-                N_("Translate this application"),
+                NULL,
                 G_CALLBACK (ario_shell_cmd_translate) },
 };
 static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
@@ -157,25 +157,25 @@ static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 static GtkRadioActionEntry ario_shell_radio [] =
 {
         { "LibraryView", NULL, N_("_Library"), NULL,
-                N_("Library view"),
+                NULL,
                 ARIO_SOURCE_BROWSER }
 #ifdef ENABLE_RADIOS
         ,
                 { "RadioView", NULL, N_("_Web Radios"), NULL,
-                        N_("Web Radios view"),
+                        NULL,
                         ARIO_SOURCE_RADIO }
 #endif  /* ENABLE_RADIOS */
 #ifdef ENABLE_SEARCH
         ,
                 /* Translators - This "Search" is a name (like in "a search"), not a verb */
                 { "SearchView", NULL, N_("_Search"), NULL,
-                        N_("Search view"),
+                        NULL,
                         ARIO_SOURCE_SEARCH }
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         ,
                 { "StoredplaylistsView", NULL, N_("_Playlists"), NULL,
-                        N_("Playlists view"),
+                        NULL,
                         ARIO_SOURCE_PLAYLISTS }
 #endif  /* ENABLE_STOREDPLAYLISTS */
 };

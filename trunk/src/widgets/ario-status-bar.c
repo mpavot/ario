@@ -204,7 +204,7 @@ ario_status_bar_playlist_changed_cb (ArioMpd *mpd,
         ario_playlist_total_time = ario_mpd_get_current_playlist_total_time (mpd);
         formated_total_time = ario_util_format_total_time (ario_playlist_total_time);
 
-        msg = g_strdup_printf (_("%d Songs - %s"), ario_playlist_length, formated_total_time);
+        msg = g_strdup_printf ("%d %s - %s", ario_playlist_length, _("Songs"), formated_total_time);
         g_free (formated_total_time);
 
         if (ario_mpd_get_updating (status_bar->priv->mpd)) {

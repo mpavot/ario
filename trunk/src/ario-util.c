@@ -68,10 +68,10 @@ ario_util_format_total_time (int time)
         min = (int)(temp_time / 60);
         sec = (temp_time % 60);
 
-        res = g_strdup_printf (_("%d seconds"), sec);
+        res = g_strdup_printf ("%d %s", sec, _("seconds"));
 
         if (min != 0) {
-                temp1 = g_strdup_printf (_("%d minutes, "), min);
+                temp1 = g_strdup_printf ("%d %s, ", min, _("minutes"));
                 temp2 = g_strconcat (temp1, res, NULL);
                 g_free (temp1);
                 g_free (res);
@@ -79,7 +79,7 @@ ario_util_format_total_time (int time)
         }
 
         if (hours != 0) {
-                temp1 = g_strdup_printf (_("%d hours, "), hours);
+                temp1 = g_strdup_printf ("%d %s, ", hours, _("hours"));
                 temp2 = g_strconcat (temp1, res, NULL);
                 g_free (temp1);
                 g_free (res);
@@ -87,7 +87,7 @@ ario_util_format_total_time (int time)
         }
 
         if (days != 0) {
-                temp1 = g_strdup_printf (_("%d days, "), days);
+                temp1 = g_strdup_printf ("%d %s, ", days, _("days"));
                 temp2 = g_strconcat (temp1, res, NULL);
                 g_free (temp1);
                 g_free (res);

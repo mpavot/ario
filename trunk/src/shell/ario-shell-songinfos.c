@@ -406,7 +406,7 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         data->title = ario_util_format_title (song);
         ario_lyrics_editor_push (ARIO_LYRICS_EDITOR (shell_songinfos->priv->lyrics_editor), data);
 
-        window_title = g_strdup_printf (_("Song Properties - %s"), data->title);
+        window_title = g_strdup_printf ("%s - %s", _("Song Properties"), data->title);
         gtk_window_set_title (GTK_WINDOW (shell_songinfos), window_title);
         g_free (window_title);
 }

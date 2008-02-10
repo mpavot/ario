@@ -98,10 +98,10 @@ struct ArioSearchPrivate
 static GtkActionEntry ario_search_actions [] =
 {
         { "SearchAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
-                N_("Add to the playlist"),
+                NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
         { "SearchSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
-                N_("Show songs properties"),
+                NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
 static guint ario_search_n_actions = G_N_ELEMENTS (ario_search_actions);
