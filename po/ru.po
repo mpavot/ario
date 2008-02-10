@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-09 23:56+0100\n"
+"POT-Creation-Date: 2008-02-10 11:28+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -32,148 +32,103 @@ msgid "Define if Ario must autoconnect to mpd or not"
 msgstr "Проверить автосоединен ли Ario обязательно с mpd или нет"
 
 #: ../data/ario.schemas.in.h:4
-msgid "Define if Ario must autoconnect to mpd or not."
-msgstr "Проверить автосоединен ли Ario обязательно с mpd или нет."
-
-#: ../data/ario.schemas.in.h:5
 msgid "Define if Ario must use a proxy for remote connections"
 msgstr ""
 "Проверить использует ли обязательно Ario прокси для удаленных соединений"
 
-#: ../data/ario.schemas.in.h:6
-msgid "Define if Ario must use a proxy for remote connections."
-msgstr ""
-"Проверить использует ли обязательно Ario прокси для удаленных соединений."
-
-#: ../data/ario.schemas.in.h:7
+#: ../data/ario.schemas.in.h:5
 msgid "Define if the view tabs are shown."
 msgstr "Проверить показан ли вид вкладок"
 
-#: ../data/ario.schemas.in.h:8
+#: ../data/ario.schemas.in.h:6
 msgid "Define the address of the proxy"
 msgstr "Проверить адрес прокси"
 
-#: ../data/ario.schemas.in.h:9
+#: ../data/ario.schemas.in.h:7
 msgid "Define the behavior of a double click on the tray icon."
 msgstr "Проверить поведение двойного щелчка на иконку в трее."
 
-#: ../data/ario.schemas.in.h:10
+#: ../data/ario.schemas.in.h:8
 msgid "Define the port of the proxy"
 msgstr "Проверить порт прокси"
 
-#: ../data/ario.schemas.in.h:11
-msgid "Define the port of the proxy."
-msgstr "Проверить порт прокси."
-
-#: ../data/ario.schemas.in.h:12
+#: ../data/ario.schemas.in.h:9
 msgid "Define the size of the album column."
 msgstr "Проверить размер колонки альбома."
 
-#: ../data/ario.schemas.in.h:13
+#: ../data/ario.schemas.in.h:10
 msgid "Define the size of the artist column."
 msgstr "Проверить размер колонки исполнителя."
 
-#: ../data/ario.schemas.in.h:14
+#: ../data/ario.schemas.in.h:11
 msgid "Define the size of the title column."
 msgstr "Проверить размер колонки загаловка."
 
-#: ../data/ario.schemas.in.h:15
+#: ../data/ario.schemas.in.h:12
 msgid "Define the size of the track column."
 msgstr "Проверить размер колонки дорожки."
 
-#: ../data/ario.schemas.in.h:16
+#: ../data/ario.schemas.in.h:13
 msgid "Define the source used in Ario"
 msgstr "Проверить исходные коды, использованные в Ario"
 
-#: ../data/ario.schemas.in.h:17
+#: ../data/ario.schemas.in.h:14
 msgid "Hide the covers in the albums treeview"
 msgstr "Скрыть обложки в дереве просмотра альбомов"
 
-#: ../data/ario.schemas.in.h:18
+#: ../data/ario.schemas.in.h:15
 msgid "Host to connect to"
 msgstr "Хост соединения к"
 
-#: ../data/ario.schemas.in.h:19
-msgid "Host to connect to."
-msgstr "Хост соединения к."
-
-#: ../data/ario.schemas.in.h:20
+#: ../data/ario.schemas.in.h:16
 msgid "If true, the main window is maximized."
 msgstr "Если этот ключ установлен, главное окно будет развёрнуто."
 
-#: ../data/ario.schemas.in.h:21
+#: ../data/ario.schemas.in.h:17
 msgid "Main window height"
 msgstr "Высота главного окна"
 
-#: ../data/ario.schemas.in.h:22
-msgid "Main window height."
-msgstr "Высота главного окна."
-
-#: ../data/ario.schemas.in.h:23
+#: ../data/ario.schemas.in.h:18
 msgid "Main window maximization state"
 msgstr "Состояние развёрнутости главного окна"
 
-#: ../data/ario.schemas.in.h:24
+#: ../data/ario.schemas.in.h:19
 msgid "Main window width"
 msgstr "Ширина главного окна"
 
-#: ../data/ario.schemas.in.h:25
-msgid "Main window width."
-msgstr "Ширина главного окна."
-
-#: ../data/ario.schemas.in.h:26
+#: ../data/ario.schemas.in.h:20
 msgid "Port to connect to"
 msgstr "Порт соединения к"
 
-#: ../data/ario.schemas.in.h:27
-msgid "Port to connect to."
-msgstr "Порт соединения к."
-
-#: ../data/ario.schemas.in.h:28
+#: ../data/ario.schemas.in.h:21
 msgid "Position of main window pane"
 msgstr "Положение панели главного окна"
 
-#: ../data/ario.schemas.in.h:29
-msgid "Position of main window pane."
-msgstr "Положение панели главного окна."
-
-#: ../data/ario.schemas.in.h:30
+#: ../data/ario.schemas.in.h:22
 msgid "Position of playlists pane"
 msgstr "Положение панели плэйлиста"
 
-#: ../data/ario.schemas.in.h:31
-msgid "Position of playlists pane."
-msgstr "Положение панели плейлиста."
-
-#: ../data/ario.schemas.in.h:32
+#: ../data/ario.schemas.in.h:23
 msgid "The amazon country to use to get the covers"
 msgstr "Страна на Amazon.Com для получения обложек"
 
-#: ../data/ario.schemas.in.h:33
+#: ../data/ario.schemas.in.h:24
 msgid "The password to connect to mpd"
 msgstr "Пароль для соединения к mpd"
 
-#: ../data/ario.schemas.in.h:34
-msgid "The password to connect to mpd."
-msgstr "Пароль для соединения к mpd."
-
-#: ../data/ario.schemas.in.h:35
+#: ../data/ario.schemas.in.h:25
 msgid "The timeout for the connection to mpd"
 msgstr "Время"
 
-#: ../data/ario.schemas.in.h:36
-msgid "The timeout for the connection to mpd."
-msgstr "Тайм-аут для соединения к mpd."
-
-#: ../data/ario.schemas.in.h:37
+#: ../data/ario.schemas.in.h:26
 msgid "True if the initial assistant has already been run."
 msgstr ""
 
-#: ../data/ario.schemas.in.h:38
+#: ../data/ario.schemas.in.h:27
 msgid "When enabled, ario hide the covers in the albums treeview"
 msgstr "Когда включено, Ario скрывает обложки в дереве просмотра"
 
-#: ../data/ario.schemas.in.h:39
+#: ../data/ario.schemas.in.h:28
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -190,20 +145,22 @@ msgid "Client apllication to mpd"
 msgstr "Клиент-приложение для mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
-msgid "<b>Covers</b>"
-msgstr "<b>Обложки</b>"
+#: ../src/shell/ario-shell-coverselect.c:256
+#: ../src/shell/ario-shell-preferences.c:178
+msgid "Covers"
+msgstr "Обложки"
 
 #: ../data/glade/cover-prefs.glade.h:2
-msgid "<b>Proxy</b>"
-msgstr "<b>Прокси</b>"
+msgid "Proxy"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:3
-msgid "Proxy Address: "
-msgstr "Адрес прокси: "
+msgid "Proxy Address :"
+msgstr "Адрес прокси :"
 
 #: ../data/glade/cover-prefs.glade.h:4
-msgid "Proxy Port: "
-msgstr "Порт прокси: "
+msgid "Proxy Port :"
+msgstr "Порт прокси :"
 
 #: ../data/glade/cover-prefs.glade.h:5
 msgid "Show the covers in the albums list"
@@ -218,12 +175,13 @@ msgid "Use a proxy"
 msgstr "Использовать прокси"
 
 #: ../data/glade/connection-prefs.glade.h:1
-msgid "<b>Connection</b>"
-msgstr "<b>Соединение</b>"
-
-#: ../data/glade/connection-prefs.glade.h:2
 msgid "Auto detect"
 msgstr "Автоопределение"
+
+#: ../data/glade/connection-prefs.glade.h:2
+#: ../src/shell/ario-shell-preferences.c:168
+msgid "Connection"
+msgstr "Соединение"
 
 #: ../data/glade/connection-prefs.glade.h:3
 #: ../src/widgets/ario-firstlaunch.c:161
@@ -232,6 +190,7 @@ msgstr "По умолчанию"
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
+#: ../src/widgets/ario-firstlaunch.c:207
 msgid "Host:"
 msgstr "Хост:"
 
@@ -245,6 +204,7 @@ msgstr "Пароль:"
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../data/glade/connection-assistant.glade.h:4
+#: ../src/widgets/ario-firstlaunch.c:209
 msgid "Port:"
 msgstr "Порт:"
 
@@ -278,86 +238,75 @@ msgstr ""
 "Ваш MPD-сервер, воспользуйтесь автоматической настройкой, проверьте активно "
 "ли zeroconf на Вашей конфигурации MPD или используйте ручную настройку."
 
-#: ../data/glade/cover-progress.glade.h:1
-msgid "<b>Downloading cover</b>"
-msgstr "<b>Закачка обложки</b>"
+#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/song-infos.glade.h:1
+msgid "Album :"
+msgstr "Альбом :"
 
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:4
-msgid "Album : "
-msgstr "Альбом : "
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:3
+#: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
+msgid "Artist :"
+msgstr "Исполнитель :"
 
-#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:6
-#: ../data/glade/lyrics-select.glade.h:3
-msgid "Artist : "
-msgstr "Исполнитель : "
+#: ../data/glade/cover-progress.glade.h:3
+msgid "Downloading cover"
+msgstr "Закачка обложки"
 
-#: ../data/glade/cover-select.glade.h:1
-msgid "<b>Album : </b>"
-msgstr "<b>Альбом : </b>"
-
-#: ../data/glade/cover-select.glade.h:2 ../data/glade/lyrics-select.glade.h:1
-msgid "<b>Artist : </b>"
-msgstr "<b>Исполнитель : </b>"
-
-#: ../data/glade/cover-select.glade.h:3
-msgid "<b>Cover size</b>"
-msgstr "<b>Размер обложки</b>"
-
-#: ../data/glade/cover-select.glade.h:5
+#: ../data/glade/cover-select.glade.h:2
 msgid "Amazon search"
 msgstr "Amazon поиск"
 
-#: ../data/glade/cover-select.glade.h:7
+#: ../data/glade/cover-select.glade.h:4
+msgid "Cover size"
+msgstr "Размер обложки"
+
+#: ../data/glade/cover-select.glade.h:5
 msgid "Large cover (Slower)"
 msgstr "Большая обложка (Медленнее)"
 
-#: ../data/glade/cover-select.glade.h:8
+#: ../data/glade/cover-select.glade.h:6
 msgid "Local search"
 msgstr "Местный поиск"
 
-#: ../data/glade/cover-select.glade.h:9
+#: ../data/glade/cover-select.glade.h:7
 msgid "Medium cover"
 msgstr "Средняя обложка"
 
-#: ../data/glade/cover-select.glade.h:10
+#: ../data/glade/cover-select.glade.h:8
 msgid "Small cover (Faster)"
 msgstr "Маленькая обложка (Быстрее)"
 
 #: ../data/glade/interface-prefs.glade.h:1
-msgid "<b>Tabs</b>"
-msgstr "<b>Вкладки</b>"
+msgid "On double click on tray icon :"
+msgstr "На двойной щелчок по иконки в трее :"
 
 #: ../data/glade/interface-prefs.glade.h:2
-msgid "<b>Tray icon</b>"
-msgstr "<b>Иконка в трее</b>"
-
-#: ../data/glade/interface-prefs.glade.h:3
-msgid "On double click on tray icon : "
-msgstr "На двойной щелчок по иконки в трее : "
-
-#: ../data/glade/interface-prefs.glade.h:4
 msgid "Show tabs"
 msgstr "Показать вкладки"
 
-#: ../data/glade/lyrics-select.glade.h:2
-msgid "<b>Title : </b>"
-msgstr "<b>Заголовок : </b>"
+#: ../data/glade/interface-prefs.glade.h:3
+msgid "Tabs"
+msgstr ""
 
-#: ../data/glade/lyrics-select.glade.h:4
-msgid "Title : "
-msgstr "Заголовок : "
+#: ../data/glade/interface-prefs.glade.h:4
+msgid "Tray icon"
+msgstr "Иконка в трее"
+
+#: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
+msgid "Title :"
+msgstr "Заголовок :"
 
 #: ../data/glade/server-prefs.glade.h:1
-msgid "<b>Audio outputs</b>"
+msgid "Audio outputs"
 msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:2
-msgid "<b>Crossfade</b>"
-msgstr "<b>Угасание</b>"
+msgid "Crossfade"
+msgstr "Угасание"
 
 #: ../data/glade/server-prefs.glade.h:3
-msgid "<b>Database</b>"
-msgstr "<b>База данных</b>"
+msgid "Database"
+msgstr "База данных"
 
 #: ../data/glade/server-prefs.glade.h:4
 msgid "Last updated:"
@@ -382,103 +331,73 @@ msgid "n/a"
 msgstr "недоступно"
 
 #: ../data/glade/stats-prefs.glade.h:1
-#, fuzzy
-msgid "<b>Database play time:</b>"
-msgstr "<b>База данных</b>"
+msgid "Database play time :"
+msgstr "База данных"
 
 #: ../data/glade/stats-prefs.glade.h:2
-#, fuzzy
-msgid "<b>Number of albums:</b>"
+msgid "Number of albums :"
 msgstr "<b>Альбом : </b>"
 
 #: ../data/glade/stats-prefs.glade.h:3
-#, fuzzy
-msgid "<b>Number of artists:</b>"
-msgstr "<b>Исполнитель : </b>"
+msgid "Number of artists :"
+msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:4
-msgid "<b>Number of songs:</b>"
+msgid "Number of songs :"
 msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:5
-#, fuzzy
-msgid "<b>Play time:</b>"
-msgstr "<b>Иконка в трее</b>"
+msgid "Play time :"
+msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:6
-#, fuzzy
-msgid "<b>Statistics</b>"
-msgstr "<b>Исполнитель : </b>"
+#: ../src/shell/ario-shell-preferences.c:188
+msgid "Statistics"
+msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:7
-#, fuzzy
-msgid "<b>Uptime:</b>"
-msgstr "<b>Заголовок : </b>"
-
-#: ../data/glade/song-infos.glade.h:1
-#, fuzzy
-msgid "<b>Album:</b>"
-msgstr "<b>Альбом : </b>"
-
-#: ../data/glade/song-infos.glade.h:2
-#, fuzzy
-msgid "<b>Artist:</b>"
-msgstr "<b>Исполнитель : </b>"
+msgid "Uptime :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:3
-#, fuzzy
-msgid "<b>Comment:</b>"
-msgstr "<b>Обложки</b>"
+msgid "Comment :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:4
-#, fuzzy
-msgid "<b>Composer:</b>"
-msgstr "<b>Обложки</b>"
+msgid "Composer :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:5
-#, fuzzy
-msgid "<b>Date:</b>"
-msgstr "<b>База данных</b>"
+msgid "Date :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:6
-#, fuzzy
-msgid "<b>Disc:</b>"
-msgstr "<b>Исполнитель : </b>"
+msgid "Disc :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:7
-#, fuzzy
-msgid "<b>Filename:</b>"
-msgstr "<b>Заголовок : </b>"
+msgid "Filename :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:8
-#, fuzzy
-msgid "<b>Genre:</b>"
-msgstr "<b>Обложки</b>"
+msgid "Genre :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:9
-#, fuzzy
-msgid "<b>Length:</b>"
-msgstr "<b>Заголовок : </b>"
+msgid "Length :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:10
-#, fuzzy
-msgid "<b>Performer:</b>"
-msgstr "<b>Прокси</b>"
+msgid "Performer :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:11
-#, fuzzy
-msgid "<b>Song</b>"
-msgstr "<b>Прокси</b>"
-
-#: ../data/glade/song-infos.glade.h:12
-#, fuzzy
-msgid "<b>Title:</b>"
-msgstr "<b>Заголовок : </b>"
+msgid "Song"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:13
-#, fuzzy
-msgid "<b>Track:</b>"
-msgstr "<b>Иконка в трее</b>"
+msgid "Track :"
+msgstr ""
 
 #: ../src/ario-cover.c:416
 msgid "The cover already exists. Do you want to replace it?"
@@ -520,23 +439,15 @@ msgstr "%d часов, "
 msgid "%d days, "
 msgstr "%d дней, "
 
-#: ../src/lib/eggtrayicon.c:120
-msgid "Orientation"
-msgstr "Расположение"
-
-#: ../src/lib/eggtrayicon.c:121
-msgid "The orientation of the tray."
-msgstr "Расположение панели."
-
-#: ../src/preferences/ario-connection-preferences.c:288
+#: ../src/preferences/ario-connection-preferences.c:290
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/preferences/ario-connection-preferences.c:511
+#: ../src/preferences/ario-connection-preferences.c:513
 msgid "Server autodetection"
 msgstr "Сервер автоопределения"
 
-#: ../src/preferences/ario-connection-preferences.c:522
+#: ../src/preferences/ario-connection-preferences.c:524
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -546,27 +457,27 @@ msgstr ""
 "проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
 "ручную настройку."
 
-#: ../src/preferences/ario-connection-preferences.c:532
-#: ../src/preferences/ario-server-preferences.c:214
-#: ../src/widgets/ario-firstlaunch.c:298
+#: ../src/preferences/ario-connection-preferences.c:534
+#: ../src/preferences/ario-server-preferences.c:218
+#: ../src/widgets/ario-firstlaunch.c:301
 msgid "Name"
 msgstr "Название"
 
-#: ../src/preferences/ario-connection-preferences.c:540
-#: ../src/widgets/ario-firstlaunch.c:306
+#: ../src/preferences/ario-connection-preferences.c:542
+#: ../src/widgets/ario-firstlaunch.c:309
 msgid "Host"
 msgstr "Хост"
 
-#: ../src/preferences/ario-connection-preferences.c:548
-#: ../src/widgets/ario-firstlaunch.c:314
+#: ../src/preferences/ario-connection-preferences.c:550
+#: ../src/widgets/ario-firstlaunch.c:317
 msgid "Port"
 msgstr "Порт"
 
-#: ../src/preferences/ario-connection-preferences.c:608
+#: ../src/preferences/ario-connection-preferences.c:610
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/preferences/ario-connection-preferences.c:627
+#: ../src/preferences/ario-connection-preferences.c:629
 msgid "New Profile"
 msgstr "Новый профиль"
 
@@ -585,22 +496,22 @@ msgstr "Играть следующую песню"
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
-#: ../src/preferences/ario-server-preferences.c:203
+#: ../src/preferences/ario-server-preferences.c:207
 msgid "Enabled"
 msgstr ""
 
-#: ../src/preferences/ario-server-preferences.c:311
-#: ../src/preferences/ario-stats-preferences.c:260
-#: ../src/preferences/ario-stats-preferences.c:261
-#: ../src/preferences/ario-stats-preferences.c:262
-#: ../src/preferences/ario-stats-preferences.c:263
-#: ../src/preferences/ario-stats-preferences.c:264
-#: ../src/preferences/ario-stats-preferences.c:265
+#: ../src/preferences/ario-server-preferences.c:315
+#: ../src/preferences/ario-stats-preferences.c:268
+#: ../src/preferences/ario-stats-preferences.c:269
+#: ../src/preferences/ario-stats-preferences.c:270
+#: ../src/preferences/ario-stats-preferences.c:271
+#: ../src/preferences/ario-stats-preferences.c:272
+#: ../src/preferences/ario-stats-preferences.c:273
 msgid "Not connected"
 msgstr "Не подключен"
 
-#: ../src/preferences/ario-server-preferences.c:316
-#: ../src/preferences/ario-server-preferences.c:403
+#: ../src/preferences/ario-server-preferences.c:320
+#: ../src/preferences/ario-server-preferences.c:407
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
 msgstr "Обновление..."
@@ -655,7 +566,7 @@ msgid "Delete the selected covers"
 msgstr "Удалить выбранные обложки"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:199
+#: ../src/shell/ario-shell-lyricsselect.c:202
 #: ../src/widgets/ario-playlist.c:283 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Исполнитель"
@@ -679,7 +590,7 @@ msgstr "Дорожка"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
-#: ../src/shell/ario-shell-lyricsselect.c:211
+#: ../src/shell/ario-shell-lyricsselect.c:214
 #: ../src/widgets/ario-playlist.c:272 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Заголовок"
@@ -723,24 +634,24 @@ msgstr "Интернет-Радио"
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
 
-#: ../src/sources/ario-radio.c:858 ../src/sources/ario-radio.c:1108
-msgid "Name : "
-msgstr "Название : "
+#: ../src/sources/ario-radio.c:858 ../src/sources/ario-radio.c:1111
+msgid "Name :"
+msgstr "Название :"
 
-#: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1109
-msgid "URL : "
-msgstr "URL : "
+#: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1112
+msgid "URL :"
+msgstr "URL :"
 
-#: ../src/sources/ario-radio.c:910 ../src/sources/ario-radio.c:1161
+#: ../src/sources/ario-radio.c:913 ../src/sources/ario-radio.c:1167
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Неверные параметры. Вы должны обязательно указать имя и URL радио."
 
-#: ../src/sources/ario-radio.c:999
+#: ../src/sources/ario-radio.c:1002
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:1098
+#: ../src/sources/ario-radio.c:1101
 msgid "Edit a WebRadio"
 msgstr "Редактировать ВебРадио"
 
@@ -939,16 +850,16 @@ msgstr "GTK клиент для MPD"
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverdownloader.c:257
+#: ../src/shell/ario-shell-coverdownloader.c:259
 msgid "Music Player Cover Download"
 msgstr "Загрузка обложки музыкального проигрывателя"
 
-#: ../src/shell/ario-shell-coverdownloader.c:375
+#: ../src/shell/ario-shell-coverdownloader.c:377
 msgid "Download Finished!"
 msgstr "Загрузка завершена!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:378
+#: ../src/shell/ario-shell-coverdownloader.c:380
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -959,24 +870,19 @@ msgstr ""
 "%i обложек не найдено\n"
 "%i обложек уже существует"
 
-#: ../src/shell/ario-shell-coverselect.c:240
+#: ../src/shell/ario-shell-coverselect.c:244
 msgid "Cover Download"
 msgstr "Загрузить обложку"
 
-#: ../src/shell/ario-shell-coverselect.c:252
-#: ../src/shell/ario-shell-preferences.c:178
-msgid "Covers"
-msgstr "Обложки"
-
-#: ../src/shell/ario-shell-coverselect.c:390
+#: ../src/shell/ario-shell-coverselect.c:394
 msgid "Select a file"
 msgstr "Выбрать файл"
 
-#: ../src/shell/ario-shell-coverselect.c:555
+#: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
 msgstr "Ошибка чтения файла"
 
-#: ../src/shell/ario-shell-coverselect.c:578
+#: ../src/shell/ario-shell-coverselect.c:582
 msgid "Error saving file"
 msgstr "Ошибка записи файла"
 
@@ -984,17 +890,13 @@ msgstr "Ошибка записи файла"
 msgid "Ario Lyrics"
 msgstr "Ario Тексты песен"
 
-#: ../src/shell/ario-shell-lyricsselect.c:187
+#: ../src/shell/ario-shell-lyricsselect.c:190
 msgid "Lyrics Download"
 msgstr "Загрузить тексты песен"
 
 #: ../src/shell/ario-shell-preferences.c:138
 msgid "Ario Preferences"
 msgstr "Ario Настройки"
-
-#: ../src/shell/ario-shell-preferences.c:168
-msgid "Connection"
-msgstr "Соединение"
 
 #: ../src/shell/ario-shell-preferences.c:173
 msgid "Server"
@@ -1004,40 +906,27 @@ msgstr "Сервер"
 msgid "Interface"
 msgstr "Внешний вид"
 
-#: ../src/shell/ario-shell-preferences.c:188
-msgid "Statistics"
-msgstr ""
-
 #: ../src/shell/ario-shell-songinfos.c:171
-#: ../src/shell/ario-shell-songinfos.c:247
+#: ../src/shell/ario-shell-songinfos.c:263
 #, fuzzy
 msgid "Song Properties"
 msgstr "_Свойства"
 
-#: ../src/shell/ario-shell-songinfos.c:252
-#, fuzzy
+#: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
-msgstr "Ario Тексты песен"
+msgstr "Тексты песен"
 
-#: ../src/shell/ario-shell-songinfos.c:393
+#: ../src/shell/ario-shell-songinfos.c:409
 #, fuzzy, c-format
 msgid "Song Properties - %s"
 msgstr "_Свойства"
 
-#: ../src/widgets/ario-firstlaunch.c:205
-#, c-format
-msgid ""
-"The following configuration will be used: \n"
-"\n"
-"Host: <b>%s</b>\n"
-"Port: <b>%d</b>"
-msgstr ""
-"Следующая конфигурация будет использована:\n"
-"\n"
-"Хост: <b>%s</b>\n"
-"Портt: <b>%d</b>"
+#: ../src/widgets/ario-firstlaunch.c:206
+#, fuzzy
+msgid "The following configuration will be used:"
+msgstr "Следующая конфигурация будет использована:"
 
-#: ../src/widgets/ario-firstlaunch.c:268
+#: ../src/widgets/ario-firstlaunch.c:271
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -1045,15 +934,15 @@ msgstr ""
 "Это Ваш первый запуск Ario.\n"
 "Этот ассистент поможет Вам настроить проигрыватель."
 
-#: ../src/widgets/ario-firstlaunch.c:273
+#: ../src/widgets/ario-firstlaunch.c:276
 msgid "Welcome to Ario"
 msgstr "Добро пожаловать в Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:332
+#: ../src/widgets/ario-firstlaunch.c:335
 msgid "Configuration"
 msgstr "Настройка"
 
-#: ../src/widgets/ario-firstlaunch.c:344
+#: ../src/widgets/ario-firstlaunch.c:347
 msgid "Confirmation"
 msgstr "Подтверждение"
 
@@ -1158,10 +1047,10 @@ msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
 #: ../src/widgets/ario-playlist.c:1155
-msgid "Playlist name : "
-msgstr "Название плейлиста : "
+msgid "Playlist name :"
+msgstr "Название плейлиста :"
 
-#: ../src/widgets/ario-playlist.c:1179
+#: ../src/widgets/ario-playlist.c:1180
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
@@ -1177,42 +1066,3 @@ msgstr "Не воспроизводится"
 #: ../src/widgets/ario-tray-icon.c:364
 msgid "Ario tray icon"
 msgstr "Иконка Ario в трее"
-
-#. Translators - The + and - refer to increasing and decreasing the volume.
-#. ** I don't know if there are sensible alternatives in other languages
-#: ../src/widgets/ario-volume.c:237
-msgid "+"
-msgstr "+"
-
-#: ../src/widgets/ario-volume.c:238
-msgid "-"
-msgstr "-"
-
-#, fuzzy
-#~ msgid "_Song properties"
-#~ msgstr "_Свойства"
-
-#, fuzzy
-#~ msgid "Ario - Song Properties"
-#~ msgstr "_Свойства"
-
-#~ msgid "Autodetect MPD servers"
-#~ msgstr "Автоопределение MPD-серверов"
-
-#~ msgid "Delete profile"
-#~ msgstr "Удалить профиль"
-
-#~ msgid "New profile"
-#~ msgstr "Новый профиль"
-
-#~ msgid "192.168.0.1"
-#~ msgstr "192.168.0.1"
-
-#~ msgid ""
-#~ "Artist: %s\n"
-#~ "Album: %s\n"
-#~ "Title: %s"
-#~ msgstr ""
-#~ "Исполнитель: %s\n"
-#~ "Альбом: %s\n"
-#~ "Название: %s"

@@ -278,6 +278,8 @@ ario_connection_preferences_new (ArioMpd *mpd)
         connection_preferences->priv->connect_button = 
                 glade_xml_get_widget (xml, "connect_button");
 
+        rb_glade_boldify_label (xml, "connection_label");
+
         connection_preferences->priv->profile_model = gtk_list_store_new (1, G_TYPE_STRING);
         gtk_tree_view_set_model (GTK_TREE_VIEW (connection_preferences->priv->profile_treeview),
                                  GTK_TREE_MODEL (connection_preferences->priv->profile_model));

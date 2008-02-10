@@ -125,6 +125,9 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "showtabs_checkbutton");
         interface_preferences->priv->trayicon_combobox = 
                 glade_xml_get_widget (xml, "trayicon_combobox");
+                
+        rb_glade_boldify_label (xml, "tabs_label");
+        rb_glade_boldify_label (xml, "trayicon_label");
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 

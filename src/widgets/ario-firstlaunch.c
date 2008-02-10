@@ -202,8 +202,11 @@ ario_firstlaunch_page_prepare_cb (GtkAssistant *assistant,
                                         &host,
                                         &port);
 
-        text = g_strdup_printf (_("The following configuration will be used: \n\nHost: <b>%s</b>\nPort: <b>%d</b>"),
+        text = g_strdup_printf ("%s \n\n%s <b>%s</b>\n%s <b>%d</b>",
+                                _("The following configuration will be used:"),
+                                _("Host:"),
                                 host,
+                                _("Port:"),
                                 port);
         g_free (host);
         gtk_label_set_markup (GTK_LABEL (firstlaunch->priv->final_label), text);

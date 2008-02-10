@@ -232,10 +232,8 @@ ario_volume_init (ArioVolume *volume)
 
         gtk_container_add (GTK_CONTAINER (frame), inner_frame);
 
-        /* Translators - The + and - refer to increasing and decreasing the volume.
-         ** I don't know if there are sensible alternatives in other languages */
-        pluslabel = gtk_label_new (_("+"));
-        minuslabel = gtk_label_new (_("-"));
+        pluslabel = gtk_label_new ("+");
+        minuslabel = gtk_label_new ("-");
 
         gtk_box_pack_start (GTK_BOX (box), pluslabel, FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (box), minuslabel, FALSE, FALSE, 0);

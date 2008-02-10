@@ -229,6 +229,22 @@ ario_shell_songinfos_new (ArioMpd *mpd,
         shell_songinfos->priv->comment_label = 
                 glade_xml_get_widget (xml, "comment_label");
 
+	rb_glade_boldify_label (xml, "frame_label");
+	rb_glade_boldify_label (xml, "title_const_label");
+	rb_glade_boldify_label (xml, "artist_const_label");
+	rb_glade_boldify_label (xml, "album_const_label");
+	rb_glade_boldify_label (xml, "track_const_label");
+	rb_glade_boldify_label (xml, "length_const_label");
+	rb_glade_boldify_label (xml, "date_const_label");
+	rb_glade_boldify_label (xml, "file_const_label");
+	rb_glade_boldify_label (xml, "genre_const_label");
+	rb_glade_boldify_label (xml, "composer_const_label");
+	rb_glade_boldify_label (xml, "performer_const_label");
+	rb_glade_boldify_label (xml, "disc_const_label");
+	rb_glade_boldify_label (xml, "comment_const_label");
+
+        g_object_unref (G_OBJECT (xml));
+
         gtk_widget_set_size_request(shell_songinfos->priv->title_label, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->artist_label, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->album_label, 280, -1);

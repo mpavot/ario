@@ -855,8 +855,8 @@ ario_radio_cmd_new_radio (GtkAction *action,
                                               NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog),
                                          GTK_RESPONSE_OK);
-        label1 = gtk_label_new (_("Name : "));
-        label2 = gtk_label_new (_("URL : "));
+        label1 = gtk_label_new (_("Name :"));
+        label2 = gtk_label_new (_("URL :"));
 
         entry1 = gtk_entry_new ();
         entry2 = gtk_entry_new ();
@@ -885,6 +885,9 @@ ario_radio_cmd_new_radio (GtkAction *action,
                                    entry2,
                                    1, 2,
                                    1, 2);
+
+        gtk_table_set_col_spacing (GTK_TABLE(table),
+                                   0, 4);
 
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
                            table);
@@ -1105,8 +1108,8 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
                                               NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog),
                                          GTK_RESPONSE_OK);
-        label1 = gtk_label_new (_("Name : "));
-        label2 = gtk_label_new (_("URL : "));
+        label1 = gtk_label_new (_("Name :"));
+        label2 = gtk_label_new (_("URL :"));
 
         entry1 = gtk_entry_new ();
         entry2 = gtk_entry_new ();
@@ -1136,6 +1139,9 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
                                    entry2,
                                    1, 2,
                                    1, 2);
+
+        gtk_table_set_col_spacing (GTK_TABLE(table),
+                                   0, 4);
 
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
                            table);

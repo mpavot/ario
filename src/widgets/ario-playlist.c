@@ -1152,13 +1152,14 @@ ario_playlist_cmd_save (GtkAction *action,
                                               NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog),
                                          GTK_RESPONSE_OK);
-        label = gtk_label_new (_("Playlist name : "));
+        label = gtk_label_new (_("Playlist name :"));
         entry = gtk_entry_new ();
         hbox = gtk_hbox_new (FALSE, 5);
 
         gtk_box_pack_start_defaults (GTK_BOX (hbox), label);
         gtk_box_pack_start_defaults (GTK_BOX (hbox), entry);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 10);
+        gtk_box_set_spacing (GTK_BOX (hbox), 4);
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
                            hbox);
         gtk_widget_show_all (dialog);
