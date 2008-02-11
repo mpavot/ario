@@ -166,7 +166,8 @@ ario_lyrics_editor_new (void)
                                  "clicked",
                                  G_CALLBACK (ario_lyrics_editor_search_cb),
                                  lyrics_editor, 0);
-
+        g_object_ref (lyrics_editor->priv->textbuffer);
+        g_object_ref (lyrics_editor->priv->textview);
         lyrics_editor->priv->queue = g_async_queue_new ();
 
         lyrics_editor->priv->thread = g_thread_create ((GThreadFunc) ario_lyrics_editor_get_lyrics_thread,
@@ -191,14 +192,15 @@ ario_lyrics_editor_finalize (GObject *object)
         g_return_if_fail (lyrics_editor->priv != NULL);
 
         while ((data = (ArioLyricsEditorData *) g_async_queue_try_pop (lyrics_editor->priv->queue))) {
-                        ario_lyrics_editor_free_data (data);
+                ario_lyrics_editor_free_data (data);
         }
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
         data->finalize = TRUE;
         g_async_queue_push (lyrics_editor->priv->queue, data);
         g_thread_join (lyrics_editor->priv->thread);
         g_async_queue_unref (lyrics_editor->priv->queue);
-
+        g_object_unref (lyrics_editor->priv->textview);
+        g_object_unref (lyrics_editor->priv->textbuffer);
         if (lyrics_editor->priv->data) {
                 ario_lyrics_editor_free_data (lyrics_editor->priv->data);
                 lyrics_editor->priv->data = NULL;
@@ -295,7 +297,6 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
                                                  G_CALLBACK (ario_lyrics_editor_textbuffer_changed_cb),
                                                  lyrics_editor);
 
-                lyrics_editor->priv->textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (lyrics_editor->priv->textview));
                 gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Downloading lyrics..."), -1);
 
                 if (data->hid) {
@@ -315,10 +316,7 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
                         gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Lyrics not found"), -1);
                 }
                 ario_lyrics_free (lyrics);
-                if (lyrics_editor->priv->data) {
-                        ario_lyrics_editor_free_data (lyrics_editor->priv->data);
-                        lyrics_editor->priv->data = NULL;
-                }
+                ario_lyrics_editor_free_data (lyrics_editor->priv->data);
                 lyrics_editor->priv->data = data;
                 g_signal_handlers_unblock_by_func (G_OBJECT (lyrics_editor->priv->textbuffer),
                                                    G_CALLBACK (ario_lyrics_editor_textbuffer_changed_cb),
