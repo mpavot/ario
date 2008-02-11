@@ -66,10 +66,12 @@ void
 ario_profiles_free (ArioProfile* profile)
 {
         ARIO_LOG_FUNCTION_START
-        g_free (profile->name);
-        g_free (profile->host);
-        g_free (profile->password);
-        g_free (profile);
+        if (profile) {
+                g_free (profile->name);
+                g_free (profile->host);
+                g_free (profile->password);
+                g_free (profile);
+        }
 }
 
 GSList*

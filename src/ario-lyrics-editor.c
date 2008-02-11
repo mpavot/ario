@@ -48,8 +48,6 @@ struct ArioLyricsEditorPrivate
         GtkWidget *save_button;
         GtkWidget *search_button;
 
-        ArioLyrics *lyrics;
-
         GThread *thread;
         GAsyncQueue *queue;
 
@@ -192,8 +190,9 @@ ario_lyrics_editor_finalize (GObject *object)
 
         g_return_if_fail (lyrics_editor->priv != NULL);
 
-        ario_lyrics_free (lyrics_editor->priv->lyrics);
-        lyrics_editor->priv->lyrics = NULL;
+        while ((data = (ArioLyricsEditorData *) g_async_queue_try_pop (lyrics_editor->priv->queue))) {
+                        ario_lyrics_editor_free_data (data);
+        }
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
         data->finalize = TRUE;
         g_async_queue_push (lyrics_editor->priv->queue, data);
@@ -267,10 +266,12 @@ static void
 ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
 {
         ARIO_LOG_FUNCTION_START
-        g_free (data->artist);
-        g_free (data->title);
-        g_free (data->hid);
-        g_free (data);
+        if (data) {
+                g_free (data->artist);
+                g_free (data->title);
+                g_free (data->hid);
+                g_free (data);
+        }
 }
 
 static void
@@ -278,6 +279,7 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
 {
         ARIO_LOG_FUNCTION_START
         ArioLyricsEditorData *data;
+        ArioLyrics *lyrics;
 
         g_async_queue_ref (lyrics_editor->priv->queue);
 
@@ -287,6 +289,7 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
                         ario_lyrics_editor_free_data (data);
                         break;
                 }
+
                 gtk_widget_set_sensitive (lyrics_editor->priv->save_button, FALSE);
                 g_signal_handlers_block_by_func (G_OBJECT (lyrics_editor->priv->textbuffer),
                                                  G_CALLBACK (ario_lyrics_editor_textbuffer_changed_cb),
@@ -295,23 +298,23 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
                 lyrics_editor->priv->textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (lyrics_editor->priv->textview));
                 gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Downloading lyrics..."), -1);
 
-                ario_lyrics_free (lyrics_editor->priv->lyrics);
                 if (data->hid) {
-                        lyrics_editor->priv->lyrics = ario_lyrics_get_lyrics_from_hid (data->artist,
-                                                                                       data->title,
-                                                                                       data->hid);
+                        lyrics = ario_lyrics_get_lyrics_from_hid (data->artist,
+                                                                  data->title,
+                                                                  data->hid);
                 } else {
-                        lyrics_editor->priv->lyrics = ario_lyrics_get_lyrics (data->artist,
-                                                                              data->title);
+                        lyrics = ario_lyrics_get_lyrics (data->artist,
+                                                         data->title);
                 }
 
-                if (lyrics_editor->priv->lyrics
-                    && lyrics_editor->priv->lyrics->lyrics
-                    && strlen (lyrics_editor->priv->lyrics->lyrics)) {
-                        gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, lyrics_editor->priv->lyrics->lyrics, -1);
+                if (lyrics
+                    && lyrics->lyrics
+                    && strlen (lyrics->lyrics)) {
+                        gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, lyrics->lyrics, -1);
                 } else {
                         gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Lyrics not found"), -1);
                 }
+                ario_lyrics_free (lyrics);
                 if (lyrics_editor->priv->data) {
                         ario_lyrics_editor_free_data (lyrics_editor->priv->data);
                         lyrics_editor->priv->data = NULL;

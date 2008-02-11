@@ -390,9 +390,11 @@ static void
 ario_radio_free_internet_radio (ArioInternetRadio *internet_radio)
 {
         ARIO_LOG_FUNCTION_START
-        g_free (internet_radio->name);
-        g_free (internet_radio->url);
-        g_free (internet_radio);
+        if (internet_radio) {
+                g_free (internet_radio->name);
+                g_free (internet_radio->url);
+                g_free (internet_radio);
+        }
 }
 
 static void
