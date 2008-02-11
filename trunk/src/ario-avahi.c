@@ -171,9 +171,11 @@ ario_avahi_free_hosts (ArioHost *host)
 {
         ARIO_LOG_FUNCTION_START
 
-        g_free (host->name);
-        g_free (host->host);
-        g_free (host);
+        if (host) {
+                g_free (host->name);
+                g_free (host->host);
+                g_free (host);
+        }
 }
 
 static void

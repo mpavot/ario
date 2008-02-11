@@ -602,7 +602,7 @@ ario_mpd_connect (ArioMpd *mpd)
 
         hostname = eel_gconf_get_string (CONF_HOST, "localhpst");
         port = eel_gconf_get_integer (CONF_PORT, 6600);
-        timeout = 8.0;
+        timeout = 5.0;
 
         if (hostname == NULL)
                 hostname = g_strdup ("localhost");
@@ -1215,9 +1215,11 @@ void
 ario_mpd_free_album (ArioMpdAlbum *ario_mpd_album)
 {
         ARIO_LOG_FUNCTION_START
-        g_free (ario_mpd_album->album);
-        g_free (ario_mpd_album->artist);
-        g_free (ario_mpd_album);
+        if (ario_mpd_album) {
+                g_free (ario_mpd_album->album);
+                g_free (ario_mpd_album->artist);
+                g_free (ario_mpd_album);
+        }
 }
 
 void
