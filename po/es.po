@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-10 20:03+0100\n"
+"POT-Creation-Date: 2008-02-14 00:29+0100\n"
 "PO-Revision-Date: 2008-01-17 18:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -195,8 +195,8 @@ msgstr "Predeterminado"
 msgid "Host :"
 msgstr "Anfitrión :"
 
-#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:858
-#: ../src/sources/ario-radio.c:1111
+#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:860
+#: ../src/sources/ario-radio.c:1113
 msgid "Name :"
 msgstr ""
 
@@ -409,11 +409,11 @@ msgstr "Pista :"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La carátula ya existe. ¿Desea reemplazarla?"
 
-#: ../src/ario-lyrics-editor.c:296
+#: ../src/ario-lyrics-editor.c:300
 msgid "Downloading lyrics..."
 msgstr "Descargando letras..."
 
-#: ../src/ario-lyrics-editor.c:313
+#: ../src/ario-lyrics-editor.c:316
 msgid "Lyrics not found"
 msgstr "Letras no encontradas"
 
@@ -539,13 +539,13 @@ msgstr "_Borrar las carátulas"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
-#: ../src/widgets/ario-playlist.c:283 ../src/widgets/ario-songlist.c:270
+#: ../src/widgets/ario-playlist.c:282 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Artista"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:294 ../src/widgets/ario-songlist.c:285
+#: ../src/widgets/ario-playlist.c:293 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr "Álbum"
 
@@ -556,14 +556,14 @@ msgstr "Carátula"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:422 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:261
+#: ../src/widgets/ario-playlist.c:260
 msgid "Track"
 msgstr "Pista"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
-#: ../src/widgets/ario-playlist.c:272 ../src/widgets/ario-songlist.c:255
+#: ../src/widgets/ario-playlist.c:271 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Título"
 
@@ -596,25 +596,25 @@ msgid "Internet Radios"
 msgstr "Radios en Internet"
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:848
+#: ../src/sources/ario-radio.c:850
 msgid "Add a WebRadio"
 msgstr "Añadir una radio web"
 
-#: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1112
+#: ../src/sources/ario-radio.c:861 ../src/sources/ario-radio.c:1114
 msgid "URL :"
 msgstr "URL :"
 
-#: ../src/sources/ario-radio.c:913 ../src/sources/ario-radio.c:1167
+#: ../src/sources/ario-radio.c:915 ../src/sources/ario-radio.c:1169
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Parámetros incorrectos. Debe especificar el nombre y la URL de la radio."
 
-#: ../src/sources/ario-radio.c:1002
+#: ../src/sources/ario-radio.c:1004
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "¿Estás seguro de que quieres eliminar todos los radios seleccionados?"
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:1101
+#: ../src/sources/ario-radio.c:1103
 msgid "Edit a WebRadio"
 msgstr "Editar una radio web"
 
@@ -745,11 +745,11 @@ msgstr "Bu_scar"
 msgid "_Playlists"
 msgstr "Listas de re_producción"
 
-#: ../src/shell/ario-shell.c:542
+#: ../src/shell/ario-shell.c:545
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:543
+#: ../src/shell/ario-shell.c:546
 msgid "translator-credits"
 msgstr ""
 
@@ -884,21 +884,21 @@ msgstr "_Eliminar"
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/widgets/ario-playlist.c:305
+#: ../src/widgets/ario-playlist.c:304
 msgid "Duration"
 msgstr "Duración"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1145
+#: ../src/widgets/ario-playlist.c:1144
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: ../src/widgets/ario-playlist.c:1155
+#: ../src/widgets/ario-playlist.c:1154
 #, fuzzy
 msgid "Playlist name :"
 msgstr "Nombre de lista de reprodución: "
 
-#: ../src/widgets/ario-playlist.c:1180
+#: ../src/widgets/ario-playlist.c:1179
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
 

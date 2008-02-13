@@ -174,8 +174,8 @@ ario_songlist_finalize (GObject *object)
         songlist = ARIO_SONGLIST (object);
 
         g_return_if_fail (songlist->priv != NULL);
-        g_free (songlist->priv);
         g_free (songlist->priv->popup);
+        g_free (songlist->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }

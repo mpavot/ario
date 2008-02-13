@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-10 20:03+0100\n"
+"POT-Creation-Date: 2008-02-14 00:29+0100\n"
 "PO-Revision-Date: 2008-01-15 13:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -191,8 +191,8 @@ msgstr ""
 msgid "Host :"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:858
-#: ../src/sources/ario-radio.c:1111
+#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:860
+#: ../src/sources/ario-radio.c:1113
 msgid "Name :"
 msgstr "Nama :"
 
@@ -405,11 +405,11 @@ msgstr ""
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Sampul telah ada. Ingin menggantinya?"
 
-#: ../src/ario-lyrics-editor.c:296
+#: ../src/ario-lyrics-editor.c:300
 msgid "Downloading lyrics..."
 msgstr "Download lirik"
 
-#: ../src/ario-lyrics-editor.c:313
+#: ../src/ario-lyrics-editor.c:316
 msgid "Lyrics not found"
 msgstr "lirik tak ditemukan"
 
@@ -535,13 +535,13 @@ msgstr "Hapus sampul"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
-#: ../src/widgets/ario-playlist.c:283 ../src/widgets/ario-songlist.c:270
+#: ../src/widgets/ario-playlist.c:282 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr ""
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:294 ../src/widgets/ario-songlist.c:285
+#: ../src/widgets/ario-playlist.c:293 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr ""
 
@@ -552,14 +552,14 @@ msgstr ""
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:422 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:261
+#: ../src/widgets/ario-playlist.c:260
 msgid "Track"
 msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
-#: ../src/widgets/ario-playlist.c:272 ../src/widgets/ario-songlist.c:255
+#: ../src/widgets/ario-playlist.c:271 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr ""
 
@@ -586,25 +586,25 @@ msgid "Internet Radios"
 msgstr "Radio internet"
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:848
+#: ../src/sources/ario-radio.c:850
 msgid "Add a WebRadio"
 msgstr ""
 
-#: ../src/sources/ario-radio.c:859 ../src/sources/ario-radio.c:1112
+#: ../src/sources/ario-radio.c:861 ../src/sources/ario-radio.c:1114
 msgid "URL :"
 msgstr "URL :"
 
-#: ../src/sources/ario-radio.c:913 ../src/sources/ario-radio.c:1167
+#: ../src/sources/ario-radio.c:915 ../src/sources/ario-radio.c:1169
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Parameter yang buruk. Anda harus menspesifikasikan nama dan URL untuk radio"
 
-#: ../src/sources/ario-radio.c:1002
+#: ../src/sources/ario-radio.c:1004
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../src/sources/ario-radio.c:1101
+#: ../src/sources/ario-radio.c:1103
 msgid "Edit a WebRadio"
 msgstr ""
 
@@ -735,11 +735,11 @@ msgstr ""
 msgid "_Playlists"
 msgstr "Daftar main"
 
-#: ../src/shell/ario-shell.c:542
+#: ../src/shell/ario-shell.c:545
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:543
+#: ../src/shell/ario-shell.c:546
 msgid "translator-credits"
 msgstr ""
 
@@ -871,20 +871,20 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:305
+#: ../src/widgets/ario-playlist.c:304
 msgid "Duration"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1145
+#: ../src/widgets/ario-playlist.c:1144
 msgid "Save playlist"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1155
+#: ../src/widgets/ario-playlist.c:1154
 msgid "Playlist name :"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1180
+#: ../src/widgets/ario-playlist.c:1179
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 

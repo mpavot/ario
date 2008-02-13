@@ -240,7 +240,6 @@ ario_playlist_init (ArioPlaylist *playlist)
         playlist->priv->play_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "play.png", NULL);
 
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-        gtk_widget_show (scrolledwindow);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
