@@ -244,6 +244,9 @@ ario_shell_finalize (GObject *object)
         gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->mpd);
+        gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));
+        g_object_unref (shell->priv->ui_manager);
+        g_object_unref (shell->priv->actiongroup);
         g_free (shell->priv);
 
         parent_class->finalize (G_OBJECT (shell));
