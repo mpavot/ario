@@ -8,20 +8,19 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-14 00:29+0100\n"
-"PO-Revision-Date: 2008-01-15 13:24+0000\n"
+"PO-Revision-Date: 2008-02-12 07:59+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-17 21:16+0000\n"
+"X-Launchpad-Export-Date: 2008-02-14 19:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 msgstr ""
-"0 untuk main/berhenti, 1 untuk memainkan lagu selanjutnya, 2 untuk tidak "
-"melakukan apa-apa"
+"0 untuk 'mulai/jeda', 1 untuk memulai lagu selanjutnya, 2 untuk 'diam'."
 
 #: ../data/ario.schemas.in.h:2
 msgid "0 for the library, 1 for the radios, etc..."
@@ -29,11 +28,12 @@ msgstr "0 utuk  pustaka, 1 untuk radio, dll"
 
 #: ../data/ario.schemas.in.h:3
 msgid "Define if Ario must autoconnect to mpd or not"
-msgstr "Definisikan jika Ario harus terhubung otomatis ke mpd atau tidak"
+msgstr "tegaskan jika Ario harus terhubung otomatis ke mpd atau tidak"
 
 #: ../data/ario.schemas.in.h:4
 msgid "Define if Ario must use a proxy for remote connections"
-msgstr "Definisikan jika Ario harus menggunakan proxy untuk koneksi jarak jauh"
+msgstr ""
+"tegaskan jika Ario harus menggunakan proxy untuk koneksi kendali jarak jauh"
 
 #: ../data/ario.schemas.in.h:5
 msgid "Define if the view tabs are shown."
@@ -53,11 +53,11 @@ msgstr "Definisikan port pada proxy"
 
 #: ../data/ario.schemas.in.h:9
 msgid "Define the size of the album column."
-msgstr ""
+msgstr "tegaskan ukuran kolom album"
 
 #: ../data/ario.schemas.in.h:10
 msgid "Define the size of the artist column."
-msgstr ""
+msgstr "tegaskan ukuran kolom artis"
 
 #: ../data/ario.schemas.in.h:11
 msgid "Define the size of the title column."
@@ -72,12 +72,13 @@ msgid "Define the source used in Ario"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:14
+#, fuzzy
 msgid "Hide the covers in the albums treeview"
-msgstr ""
+msgstr "sembunyikan sampul dari bagan album"
 
 #: ../data/ario.schemas.in.h:15
 msgid "Host to connect to"
-msgstr ""
+msgstr "host sambungan ke"
 
 #: ../data/ario.schemas.in.h:16
 msgid "If true, the main window is maximized."
@@ -97,7 +98,7 @@ msgstr "Lebar jendela utama"
 
 #: ../data/ario.schemas.in.h:20
 msgid "Port to connect to"
-msgstr ""
+msgstr "Port sambungan ke"
 
 #: ../data/ario.schemas.in.h:21
 msgid "Position of main window pane"
@@ -105,7 +106,7 @@ msgstr "Posisi dari panel jendela utama"
 
 #: ../data/ario.schemas.in.h:22
 msgid "Position of playlists pane"
-msgstr ""
+msgstr "Posisi panel playlist"
 
 #: ../data/ario.schemas.in.h:23
 msgid "The amazon country to use to get the covers"
@@ -173,7 +174,7 @@ msgstr "gunakan sebuah proxy"
 
 #: ../data/glade/connection-prefs.glade.h:1
 msgid "Auto detect"
-msgstr "deteksi otomatis"
+msgstr "Deteksi otomatis"
 
 #: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:168
@@ -224,7 +225,7 @@ msgstr ""
 
 #: ../data/glade/connection-assistant.glade.h:3
 msgid "Manual configuration"
-msgstr "konfigurasi manual"
+msgstr "Konfigurasi manual"
 
 #: ../data/glade/connection-assistant.glade.h:5
 msgid ""
@@ -250,32 +251,32 @@ msgstr "Artis :"
 #: ../data/glade/cover-progress.glade.h:3
 #, fuzzy
 msgid "Downloading cover"
-msgstr "donwload sampul album"
+msgstr "Donwload sampul album"
 
 #: ../data/glade/cover-select.glade.h:2
 msgid "Amazon search"
-msgstr "pencarian dengan Amazon"
+msgstr "Pencarian dengan Amazon"
 
 #: ../data/glade/cover-select.glade.h:4
 #, fuzzy
 msgid "Cover size"
-msgstr "ukuran cover"
+msgstr "Ukuran cover"
 
 #: ../data/glade/cover-select.glade.h:5
 msgid "Large cover (Slower)"
-msgstr "cover besar(lebih lambat)"
+msgstr "Cover besar(lebih lambat)"
 
 #: ../data/glade/cover-select.glade.h:6
 msgid "Local search"
-msgstr "pencarian lokal"
+msgstr "Pencarian lokal"
 
 #: ../data/glade/cover-select.glade.h:7
 msgid "Medium cover"
-msgstr "sampul sedang"
+msgstr "Sampul sedang"
 
 #: ../data/glade/cover-select.glade.h:8
 msgid "Small cover (Faster)"
-msgstr "sampul kecil"
+msgstr "Sampul kecil"
 
 #: ../data/glade/interface-prefs.glade.h:1
 #, fuzzy
@@ -704,7 +705,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:141
 msgid "Download album _covers"
-msgstr "donwload sampul album"
+msgstr "Donwload sampul album"
 
 #: ../src/shell/ario-shell.c:144
 msgid "Show _lyrics"
@@ -742,6 +743,10 @@ msgstr ""
 #: ../src/shell/ario-shell.c:546
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Nestanet https://launchpad.net/~nesta-101106\n"
+"  reza https://launchpad.net/~edja-kun"
 
 #: ../src/shell/ario-shell-coverdownloader.c:259
 msgid "Music Player Cover Download"
@@ -897,12 +902,14 @@ msgid "Not playing"
 msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:124
+#, fuzzy
 msgid "_Play"
-msgstr ""
+msgstr "_Main"
 
 #: ../src/widgets/ario-tray-icon.c:127
+#, fuzzy
 msgid "_Pause"
-msgstr ""
+msgstr "_Berhenti"
 
 #: ../src/widgets/ario-tray-icon.c:130
 msgid "_Stop"
@@ -915,48 +922,3 @@ msgstr "Selanjutnya"
 #: ../src/widgets/ario-tray-icon.c:136
 msgid "P_revious"
 msgstr ""
-
-#~ msgid "Web Radios view"
-#~ msgstr "tampilan radio jaringan"
-
-#~ msgid "Search view"
-#~ msgstr "tampilan menu cari"
-
-#~ msgid "Playlists view"
-#~ msgstr "Tampilan daftar main"
-
-#~ msgid "Add to the playlist"
-#~ msgstr "tambahkan ke daftar main"
-
-#~ msgid "Download the cover from Amazon"
-#~ msgstr "Download sampul dari Amazon"
-
-#~ msgid "Delete the selected covers"
-#~ msgstr "Hapus sampul yang dipilh"
-
-#~ msgid "Delete this playlists"
-#~ msgstr "hapus daftar main"
-
-#~ msgid "Connect"
-#~ msgstr "koneksikan"
-
-#~ msgid "Download covers form amazon"
-#~ msgstr "donwload sampul album dari Amazon"
-
-#~ msgid "Start playing the next song"
-#~ msgstr "Mulai mainkan lagu berikutnya"
-
-#~ msgid "Remove the selected songs"
-#~ msgstr "pindahkan lagu-lagu yang dipilh"
-
-#~ msgid "Save the playlist"
-#~ msgstr "simpan daftar main"
-
-#~ msgid "Add a new radio"
-#~ msgstr "tambah radio baru"
-
-#~ msgid "Delete this radios"
-#~ msgstr "hapus radio ini"
-
-#~ msgid "Change properties of this radio"
-#~ msgstr "ganti properti radio ini"
