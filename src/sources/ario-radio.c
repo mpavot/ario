@@ -1187,7 +1187,7 @@ ario_radio_cmd_radio_properties (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GList* paths;
         GtkTreeIter iter;
-        ArioInternetRadio internet_radio;
+        ArioInternetRadio *internet_radio;
         GtkTreeModel *tree_model = GTK_TREE_MODEL (radio->priv->radios_model);
         GtkTreePath *path;
 
@@ -1198,14 +1198,16 @@ ario_radio_cmd_radio_properties (GtkAction *action,
         gtk_tree_model_get_iter (tree_model,
                                  &iter,
                                  path);
-
-        gtk_tree_model_get (tree_model, &iter, RADIO_NAME_COLUMN, &internet_radio.name, -1);
-        gtk_tree_model_get (tree_model, &iter, RADIO_URL_COLUMN, &internet_radio.url, -1);
-
-        ario_radio_edit_radio_properties (radio, &internet_radio);
-
         g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (paths);
+
+        internet_radio = (ArioInternetRadio *) g_malloc (sizeof (ArioInternetRadio));;
+        gtk_tree_model_get (tree_model, &iter, RADIO_NAME_COLUMN, &internet_radio->name, -1);
+        gtk_tree_model_get (tree_model, &iter, RADIO_URL_COLUMN, &internet_radio->url, -1);
+
+        ario_radio_edit_radio_properties (radio, internet_radio);
+
+        ario_radio_free_internet_radio (internet_radio);
 }
 
 #endif  /* ENABLE_RADIOS */

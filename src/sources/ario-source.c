@@ -127,6 +127,7 @@ ario_source_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         ArioSource *source;
+        GtkWidget *hbox;
 
         source = g_object_new (TYPE_ARIO_SOURCE,
                                NULL);
@@ -136,36 +137,68 @@ ario_source_new (GtkUIManager *mgr,
                                                   group,
                                                   mpd,
                                                   playlist);
+        hbox = gtk_hbox_new (FALSE, 4);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_image_new_from_stock (GTK_STOCK_HARDDISK, GTK_ICON_SIZE_MENU),
+                            TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_label_new (_("Library")),
+                            TRUE, TRUE, 0);
+        gtk_widget_show_all (hbox);
         gtk_notebook_append_page (GTK_NOTEBOOK (source),
                                   source->priv->browser,
-                                  gtk_label_new (_("Library")));
+                                  hbox);
 #ifdef ENABLE_RADIOS
         source->priv->radio = ario_radio_new (mgr,
                                               group,
                                               mpd,
                                               playlist);
+        hbox = gtk_hbox_new (FALSE, 4);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_image_new_from_stock (GTK_STOCK_NETWORK, GTK_ICON_SIZE_MENU),
+                            TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_label_new (_("Web Radios")),
+                            TRUE, TRUE, 0);
+        gtk_widget_show_all (hbox);
         gtk_notebook_append_page (GTK_NOTEBOOK (source),
                                   source->priv->radio,
-                                  gtk_label_new (_("Web Radios")));
+                                  hbox);
 #endif  /* ENABLE_RADIOS */
 #ifdef ENABLE_SEARCH
         source->priv->search = ario_search_new (mgr,
                                                 group,
                                                 mpd,
                                                 playlist);
+        hbox = gtk_hbox_new (FALSE, 4);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU),
+                            TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            /* Translators - This "Search" is a name (like in "a search"), not a verb */
+                            gtk_label_new (_("Search")),
+                            TRUE, TRUE, 0);
+        gtk_widget_show_all (hbox);
         gtk_notebook_append_page (GTK_NOTEBOOK (source),
-                                  source->priv->search,
-                                  /* Translators - This "Search" is a name (like in "a search"), not a verb */
-                                  gtk_label_new (_("Search")));
+                                  source->priv->search,                                  
+                                  hbox);
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         source->priv->storedplaylists = ario_storedplaylists_new (mgr,
                                                                   group,
                                                                   mpd,
                                                                   playlist);
+        hbox = gtk_hbox_new (FALSE, 4);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_image_new_from_stock (GTK_STOCK_INDEX, GTK_ICON_SIZE_MENU),
+                            TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_label_new (_("Playlists")),
+                            TRUE, TRUE, 0);
+        gtk_widget_show_all (hbox);
         gtk_notebook_append_page (GTK_NOTEBOOK (source),
                                   source->priv->storedplaylists,
-                                  gtk_label_new (_("Playlists")));
+                                  hbox);
 #endif  /* ENABLE_STOREDPLAYLISTS */
         gtk_widget_show_all (GTK_WIDGET (source));
         ario_source_sync_source (source);
