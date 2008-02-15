@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-14 00:29+0100\n"
+"POT-Creation-Date: 2008-02-15 21:42+0100\n"
 "PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -640,20 +640,20 @@ msgstr "Chercher une chanson dans la bibliothèque"
 msgid "Remove a search criteria"
 msgstr "Enlever un critère de recherche"
 
-#: ../src/sources/ario-source.c:141
+#: ../src/sources/ario-source.c:145
 msgid "Library"
 msgstr "Bibliothèque"
 
-#: ../src/sources/ario-source.c:149
+#: ../src/sources/ario-source.c:161
 msgid "Web Radios"
 msgstr "Web Radios"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/sources/ario-source.c:159
+#: ../src/sources/ario-source.c:179
 msgid "Search"
 msgstr "Recherche"
 
-#: ../src/sources/ario-source.c:168
+#: ../src/sources/ario-source.c:196
 msgid "Playlists"
 msgstr "Playlists"
 

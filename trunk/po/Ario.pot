@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-14 00:29+0100\n"
+"POT-Creation-Date: 2008-02-15 21:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -626,20 +626,20 @@ msgstr ""
 msgid "Remove a search criteria"
 msgstr ""
 
-#: ../src/sources/ario-source.c:141
+#: ../src/sources/ario-source.c:145
 msgid "Library"
 msgstr ""
 
-#: ../src/sources/ario-source.c:149
+#: ../src/sources/ario-source.c:161
 msgid "Web Radios"
 msgstr ""
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/sources/ario-source.c:159
+#: ../src/sources/ario-source.c:179
 msgid "Search"
 msgstr ""
 
-#: ../src/sources/ario-source.c:168
+#: ../src/sources/ario-source.c:196
 msgid "Playlists"
 msgstr ""
 
