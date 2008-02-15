@@ -1,3 +1,16 @@
+ario (0.4-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Fri, 15 Feb 2008 22:06:53 +0100
+
+ario (0.3-1) unstable; urgency=low
+
+  * New upstream release
+  * Add watch file (Closes: #456465)
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Wed, 09 Jan 2008 23:49:59 +0100
+
 ario (0.2a-2) unstable; urgency=low
 
   * Update changelog to close a bug (Closes: #447053)
