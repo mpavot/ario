@@ -2,7 +2,7 @@ Source: ario
 Section: sound
 Priority: optional
 Maintainer: Marc Pavot <marc.pavot@gmail.com>
-Build-Depends: debhelper (>= 5), cdbs, autotools-dev, libgtk2.0-dev (>= 2.10.0), libglib2.0-dev, libglade2-dev, libgconf2-dev, libcurl3-dev, intltool
+Build-Depends: debhelper (>= 5), cdbs, autotools-dev, libgtk2.0-dev (>= 2.10.0), libglib2.0-dev, libglade2-dev, libgconf2-dev, libcurl3-dev, intltool, libavahi-client-dev, libavahi-glib-dev
 Standards-Version: 3.7.2
 Homepage: http://ario-player.sourceforge.net/
 
