@@ -37,6 +37,7 @@
 #define CONF_WINDOW_WIDTH               "/apps/ario/state/window_width"
 #define CONF_WINDOW_HEIGHT              "/apps/ario/state/window_height"
 #define CONF_WINDOW_MAXIMIZED           "/apps/ario/state/window_maximized"
+#define CONF_STATUSBAR_HIDDEN           "/apps/ario/state/statusbar_hidden"
 #define CONF_VPANED_POSITION            "/apps/ario/state/vpaned_position"
 #define CONF_PLAYLISTS_HPANED_SIZE      "/apps/ario/state/playlists_hpaned_position"
 #define CONF_SOURCE                     "/apps/ario/state/source"

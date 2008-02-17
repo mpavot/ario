@@ -7,8 +7,8 @@
         <type>int</type>
         <default>400</default>
         <locale name="C">
-	<short>Position of main window pane</short>
-	<long>Position of main window pane</long>
+        <short>Position of main window pane</short>
+        <long>Position of main window pane</long>
         </locale>
       </schema>
 
@@ -19,8 +19,20 @@
         <type>int</type>
         <default>250</default>
         <locale name="C">
-	<short>Position of playlists pane</short>
-	<long>Position of playlists pane</long>
+        <short>Position of playlists pane</short>
+        <long>Position of playlists pane</long>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/state/statusbar_hidden</key>
+        <applyto>/apps/ario/state/statusbar_hidden</applyto>
+        <owner>ario</owner>
+        <type>bool</type>
+        <default>FALSE</default>
+        <locale name="C">
+        <short>Statusbar visibility</short>
+        <long>If true, the statusbar is hidden.</long>
         </locale>
       </schema>
 
@@ -31,8 +43,8 @@
         <type>string</type>
         <default>localhost</default>
         <locale name="C">
-	<short>Host to connect to</short>
-	<long>Host to connect to</long>
+        <short>Host to connect to</short>
+        <long>Host to connect to</long>
         </locale>
       </schema>
 
@@ -43,8 +55,8 @@
         <type>int</type>
         <default>6600</default>
         <locale name="C">
-	<short>Port to connect to</short>
-	<long>Port to connect to</long>
+        <short>Port to connect to</short>
+        <long>Port to connect to</long>
         </locale>
       </schema>
 
@@ -55,8 +67,8 @@
         <type>float</type>
         <default>8.0</default>
         <locale name="C">
-	<short>The timeout for the connection to mpd</short>
-	<long>The timeout for the connection to mpd</long>
+        <short>The timeout for the connection to mpd</short>
+        <long>The timeout for the connection to mpd</long>
         </locale>
       </schema>
 
@@ -67,8 +79,8 @@
         <type>bool</type>
         <default>1</default>
         <locale name="C">
-	<short>Define if Ario must autoconnect to mpd or not</short>
-	<long>Define if Ario must autoconnect to mpd or not</long>
+        <short>Define if Ario must autoconnect to mpd or not</short>
+        <long>Define if Ario must autoconnect to mpd or not</long>
         </locale>
       </schema>
 
@@ -79,33 +91,33 @@
         <type>string</type>
         <default></default>
         <locale name="C">
-	<short>The password to connect to mpd</short>
-	<long>The password to connect to mpd</long>
+        <short>The password to connect to mpd</short>
+        <long>The password to connect to mpd</long>
         </locale>
       </schema>
 
       <schema>
         <key>/schemas/apps/ario/cover_tree_hidden</key>
-	<applyto>/apps/ario/cover_tree_hidden</applyto>
-	<owner>ario</owner>
-	<type>bool</type>
-	<default>0</default>
-	<locale name="C">
-	<short>Hide the covers in the albums treeview</short>
-	<long>When enabled, ario hide the covers in the albums treeview</long>
-	</locale>
+        <applyto>/apps/ario/cover_tree_hidden</applyto>
+        <owner>ario</owner>
+        <type>bool</type>
+        <default>0</default>
+        <locale name="C">
+        <short>Hide the covers in the albums treeview</short>
+        <long>When enabled, ario hide the covers in the albums treeview</long>
+        </locale>
       </schema>
 
       <schema>
         <key>/schemas/apps/ario/cover_amazon_country</key>
-	<applyto>/apps/ario/cover_amazon_country</applyto>
-	<owner>ario</owner>
-	<type>string</type>
-	<default>com</default>
-	<locale name="C">
-	<short>The amazon country to use to get the covers</short>
-	<long>You can search for your cover on amazon.com .fr .de .uk or .ca to have more accurate results</long>
-	</locale>
+        <applyto>/apps/ario/cover_amazon_country</applyto>
+        <owner>ario</owner>
+        <type>string</type>
+        <default>com</default>
+        <locale name="C">
+        <short>The amazon country to use to get the covers</short>
+        <long>You can search for your cover on amazon.com .fr .de .uk or .ca to have more accurate results</long>
+        </locale>
       </schema>
 
       <schema>
@@ -115,8 +127,8 @@
         <type>int</type>
         <default>600</default>
         <locale name="C">
-	<short>Main window width</short>
-	<long>Main window width</long>
+        <short>Main window width</short>
+        <long>Main window width</long>
         </locale>
       </schema>
 
@@ -127,8 +139,8 @@
         <type>int</type>
         <default>600</default>
         <locale name="C">
-	<short>Main window height</short>
-	<long>Main window height</long>
+        <short>Main window height</short>
+        <long>Main window height</long>
         </locale>
       </schema>
 
@@ -139,8 +151,8 @@
         <type>bool</type>
         <default>1</default>
         <locale name="C">
-	<short>Main window maximization state</short>
-	<long>If true, the main window is maximized.</long>
+        <short>Main window maximization state</short>
+        <long>If true, the main window is maximized.</long>
         </locale>
       </schema>
       
@@ -151,21 +163,21 @@
         <type>bool</type>
         <default>0</default>
         <locale name="C">
-	<short>Define if Ario must use a proxy for remote connections</short>
-	<long>Define if Ario must use a proxy for remote connections</long>
+        <short>Define if Ario must use a proxy for remote connections</short>
+        <long>Define if Ario must use a proxy for remote connections</long>
         </locale>
       </schema>
 
       <schema>
         <key>/schemas/apps/ario/proxy_address</key>
-	<applyto>/apps/ario/proxy_address</applyto>
-	<owner>ario</owner>
-	<type>string</type>
-	<default>192.168.0.1</default>
-	<locale name="C">
-	<short>Define the address of the proxy</short>
-	<long>Define the address of the proxy</long>
-	</locale>
+        <applyto>/apps/ario/proxy_address</applyto>
+        <owner>ario</owner>
+        <type>string</type>
+        <default>192.168.0.1</default>
+        <locale name="C">
+        <short>Define the address of the proxy</short>
+        <long>Define the address of the proxy</long>
+        </locale>
       </schema>
 
       <schema>
@@ -175,8 +187,8 @@
         <type>int</type>
         <default>8080</default>
         <locale name="C">
-	<short>Define the port of the proxy</short>
-	<long>Define the port of the proxy</long>
+        <short>Define the port of the proxy</short>
+        <long>Define the port of the proxy</long>
         </locale>
       </schema>
 
@@ -187,8 +199,8 @@
         <type>int</type>
         <default>0</default>
         <locale name="C">
-	<short>Define the source used in Ario</short>
-	<long>0 for the library, 1 for the radios, etc...</long>
+        <short>Define the source used in Ario</short>
+        <long>0 for the library, 1 for the radios, etc...</long>
         </locale>
       </schema>
 
@@ -199,8 +211,8 @@
         <type>bool</type>
         <default>1</default>
         <locale name="C">
-	<short>Define if the view tabs are shown.</short>
-	<long>Define if the view tabs are shown.</long>
+        <short>Define if the view tabs are shown.</short>
+        <long>Define if the view tabs are shown.</long>
         </locale>
       </schema>
 
@@ -211,8 +223,8 @@
         <type>int</type>
         <default>0</default>
         <locale name="C">
-	<short>Define the behavior of a double click on the tray icon.</short>
-	<long>0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'.</long>
+        <short>Define the behavior of a double click on the tray icon.</short>
+        <long>0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'.</long>
         </locale>
       </schema>
 
@@ -224,8 +236,8 @@
         <type>int</type>
         <default>50</default>
         <locale name="C">
-	<short>Define the size of the track column.</short>
-	<long>Define the size of the track column.</long>
+        <short>Define the size of the track column.</short>
+        <long>Define the size of the track column.</long>
         </locale>
       </schema>
 
@@ -236,8 +248,8 @@
         <type>int</type>
         <default>200</default>
         <locale name="C">
-	<short>Define the size of the title column.</short>
-	<long>Define the size of the title column.</long>
+        <short>Define the size of the title column.</short>
+        <long>Define the size of the title column.</long>
         </locale>
       </schema>
 
@@ -248,8 +260,8 @@
         <type>int</type>
         <default>200</default>
         <locale name="C">
-	<short>Define the size of the artist column.</short>
-	<long>Define the size of the artist column.</long>
+        <short>Define the size of the artist column.</short>
+        <long>Define the size of the artist column.</long>
         </locale>
       </schema>
 
@@ -261,8 +273,8 @@
         <type>int</type>
         <default>200</default>
         <locale name="C">
-	<short>Define the size of the album column.</short>
-	<long>Define the size of the album column.</long>
+        <short>Define the size of the album column.</short>
+        <long>Define the size of the album column.</long>
         </locale>
       </schema>
 
@@ -273,8 +285,8 @@
         <type>bool</type>
         <default>FALSE</default>
         <locale name="C">
-	<short>True if the initial assistant has already been run.</short>
-	<long>True if the initial assistant has already been run.</long>
+        <short>True if the initial assistant has already been run.</short>
+        <long>True if the initial assistant has already been run.</long>
         </locale>
       </schema>
 

@@ -15,6 +15,8 @@
                 </menu>
 
                 <menu name="ViewMenu" action="View">
+                        <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
+                        <separator/>
                         <menuitem name="LibraryViewMenu" action="LibraryView"/>
                         <menuitem name="RadioViewMenu" action="RadioView"/>
                         <menuitem name="SearchViewMenu" action="SearchView"/>

@@ -90,6 +90,9 @@ static void ario_shell_sync_source (ArioShell *shell);
 static void ario_shell_sync_mpd (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                               ArioShell *shell);
+static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
+				                  ArioShell *shell);
+static void ario_shell_sync_statusbar_visibility (ArioShell *shell);
 
 struct ArioShellPrivate
 {
@@ -108,6 +111,7 @@ struct ArioShellPrivate
 
         ArioTrayIcon *tray_icon;
 
+	gboolean statusbar_hidden;
         gboolean connected;
         gboolean shown;
 };
@@ -181,6 +185,14 @@ static GtkRadioActionEntry ario_shell_radio [] =
 };
 static guint ario_shell_n_radio = G_N_ELEMENTS (ario_shell_radio);
 #endif  /* MULTIPLE_VIEW */
+
+static GtkToggleActionEntry ario_shell_toggle [] =
+{
+        { "ViewStatusbar", NULL, N_("S_tatusbar"), NULL,
+	  N_("Change the visibility of the statusbar"),
+	  G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE }
+};
+static guint ario_shell_n_toggle = G_N_ELEMENTS (ario_shell_toggle);
 
 static GObjectClass *parent_class;
 
@@ -284,6 +296,7 @@ ario_shell_construct (ArioShell *shell)
         GdkPixbuf *pixbuf;
         ArioFirstlaunch *firstlaunch;
         GError *error = NULL;
+        GtkAction *action;
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
@@ -326,6 +339,10 @@ ario_shell_construct (ArioShell *shell)
                                             0, G_CALLBACK (ario_shell_cmd_radio_view),
                                             shell);
 #endif  /* MULTIPLE_VIEW */
+	gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
+					     ario_shell_toggle,
+					     ario_shell_n_toggle,
+					     shell);
         gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
                                             shell->priv->actiongroup, 0);
         gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
@@ -344,6 +361,11 @@ ario_shell_construct (ArioShell *shell)
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
+	shell->priv->statusbar_hidden = eel_gconf_get_boolean (CONF_STATUSBAR_HIDDEN, FALSE);
+        action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                              "ViewStatusbar");
+        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+                                      !shell->priv->statusbar_hidden);
 
         gtk_paned_pack1 (GTK_PANED (shell->priv->vpaned),
                          shell->priv->source,
@@ -395,6 +417,7 @@ ario_shell_construct (ArioShell *shell)
         } else {
                 ario_shell_show (shell);
         }
+        ario_shell_sync_statusbar_visibility (shell);
 }
 
 void
@@ -776,4 +799,23 @@ ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
 {
         ARIO_LOG_FUNCTION_START
         ario_shell_show (shell);
+}
+
+static void
+ario_shell_view_statusbar_changed_cb (GtkAction *action,
+				      ArioShell *shell)
+{
+	shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+	eel_gconf_set_boolean (CONF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
+
+	ario_shell_sync_statusbar_visibility (shell);
+}
+
+static void
+ario_shell_sync_statusbar_visibility (ArioShell *shell)
+{
+	if (shell->priv->statusbar_hidden)
+		gtk_widget_hide (GTK_WIDGET (shell->priv->status_bar));
+	else
+		gtk_widget_show (GTK_WIDGET (shell->priv->status_bar));
 }
