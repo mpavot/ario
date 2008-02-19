@@ -1,6 +1,7 @@
 AUTOMAKE_OPTIONS = foreign 1.6
 
 SUBDIRS = data\
+          plugins\
           po\
 	  src
 

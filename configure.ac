@@ -12,7 +12,7 @@ AM_INIT_AUTOMAKE($PACKAGE,$VERSION)
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_STDC_HEADERS
-
+AM_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.35.0])
 
 PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.10
@@ -73,10 +73,16 @@ if test x"$enable_playlists" != xno; then
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
+PLUGINDIR='${libdir}/ario/plugins'
+AC_SUBST(PLUGINDIR)
+
 AC_OUTPUT([
 Makefile
 src/Makefile
 data/Makefile
+plugins/Makefile
+plugins/sample/Makefile
+plugins/wikipedia/Makefile
 po/Makefile.in
 data/ario.desktop.in
 ])
