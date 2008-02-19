@@ -166,13 +166,19 @@ ario_util_init_stock_icons (void)
         GtkIconFactory *factory;
         GdkPixbuf *pb;
         GtkIconSet *set;
+	int icon_size;
         factory = gtk_icon_factory_new ();
+
+	gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
 
         pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png",
                                        NULL);
         set = gtk_icon_set_new_from_pixbuf (pb);
         gtk_icon_factory_add (factory, "ario", set);
-        g_object_unref (G_OBJECT (pb));
+	gtk_icon_theme_add_builtin_icon ("ario",
+					 icon_size,
+					 pb);
+       // g_object_unref (G_OBJECT (pb));
 
 
         pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "volume-zero.png",

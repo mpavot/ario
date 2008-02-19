@@ -11,6 +11,7 @@
                 </menu>
 
                 <menu name="EditMenu" action="Edit">
+                        <menuitem name="EditPluginsMenu" action="EditPlugins"/>
                         <menuitem name="EditPreferencesMenu" action="EditPreferences"/> 
                 </menu>
 
@@ -28,6 +29,7 @@
                 <menu name="ToolMenu" action="Tool">
                         <menuitem name="ToolCoverSelectMenu" action="ToolCoverSelect"/>
                         <menuitem name="ToolCoverMenu" action="ToolCover"/>
+                        <placeholder name="ToolMenuPluginPlaceholder" />
                 </menu>
 
                 <menu name="HelpMenu" action="Help">

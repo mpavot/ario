@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-15 21:42+0100\n"
+"POT-Creation-Date: 2008-02-19 21:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,50 +81,58 @@ msgid "If true, the main window is maximized."
 msgstr ""
 
 #: ../data/ario.schemas.in.h:17
-msgid "Main window height"
+msgid "If true, the statusbar is hidden."
 msgstr ""
 
 #: ../data/ario.schemas.in.h:18
-msgid "Main window maximization state"
+msgid "Main window height"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:19
-msgid "Main window width"
+msgid "Main window maximization state"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:20
-msgid "Port to connect to"
+msgid "Main window width"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:21
-msgid "Position of main window pane"
+msgid "Port to connect to"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:22
-msgid "Position of playlists pane"
+msgid "Position of main window pane"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:23
-msgid "The amazon country to use to get the covers"
+msgid "Position of playlists pane"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:24
-msgid "The password to connect to mpd"
+msgid "Statusbar visibility"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:25
-msgid "The timeout for the connection to mpd"
+msgid "The amazon country to use to get the covers"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:26
-msgid "True if the initial assistant has already been run."
+msgid "The password to connect to mpd"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:27
-msgid "When enabled, ario hide the covers in the albums treeview"
+msgid "The timeout for the connection to mpd"
 msgstr ""
 
 #: ../data/ario.schemas.in.h:28
+msgid "True if the initial assistant has already been run."
+msgstr ""
+
+#: ../data/ario.schemas.in.h:29
+msgid "When enabled, ario hide the covers in the albums treeview"
+msgstr ""
+
+#: ../data/ario.schemas.in.h:30
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -207,11 +215,11 @@ msgstr ""
 msgid "_Autoconnect on startup"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:126
+#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:152
 msgid "_Connect"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:129
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:155
 msgid "_Disconnect"
 msgstr ""
 
@@ -427,6 +435,39 @@ msgstr ""
 msgid "days"
 msgstr ""
 
+#: ../src/plugins/ario-plugin-manager.c:45
+msgid "Plugin"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:46
+#: ../src/preferences/ario-server-preferences.c:207
+msgid "Enabled"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:467 ../src/shell/ario-shell.c:176
+msgid "_About"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:475
+msgid "C_onfigure"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:484
+msgid "A_ctivate"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:495
+msgid "Ac_tivate All"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:500
+msgid "_Deactivate All"
+msgstr ""
+
+#: ../src/plugins/ario-plugin-manager.c:749
+msgid "Active plugins"
+msgstr ""
+
 #: ../src/preferences/ario-connection-preferences.c:290
 msgid "Profile"
 msgstr ""
@@ -479,10 +520,6 @@ msgstr ""
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-interface-preferences.c:46
 msgid "Do nothing"
-msgstr ""
-
-#: ../src/preferences/ario-server-preferences.c:207
-msgid "Enabled"
 msgstr ""
 
 #: ../src/preferences/ario-server-preferences.c:315
@@ -655,81 +692,97 @@ msgstr ""
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:117
+#: ../src/shell/ario-shell.c:143
 msgid "_File"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:118
+#: ../src/shell/ario-shell.c:144
 msgid "_Edit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:119
+#: ../src/shell/ario-shell.c:145
 msgid "_View"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:120
+#: ../src/shell/ario-shell.c:146
 msgid "_Tool"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:121
+#: ../src/shell/ario-shell.c:147
 msgid "_Help"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:123
+#: ../src/shell/ario-shell.c:149
 msgid "_Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:132
+#: ../src/shell/ario-shell.c:158
 msgid "_Quit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:135
-msgid "Prefere_nces"
+#: ../src/shell/ario-shell.c:161
+msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:138
-msgid "_Change current album cover"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:141
-msgid "Download album _covers"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:144
-msgid "Show _lyrics"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:147
-msgid "_About"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:150
-msgid "_Translate this application..."
-msgstr ""
-
-#: ../src/shell/ario-shell.c:159
-msgid "_Library"
+#: ../src/shell/ario-shell.c:162
+msgid "Change and configure plugins"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:164
+msgid "Prefere_nces"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:167
+msgid "_Change current album cover"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:170
+msgid "Download album _covers"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:173
+msgid "Show _lyrics"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:179
+msgid "_Translate this application..."
+msgstr ""
+
+#: ../src/shell/ario-shell.c:188
+msgid "_Library"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:193
 msgid "_Web Radios"
 msgstr ""
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:200
 msgid "_Search"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:177
+#: ../src/shell/ario-shell.c:206
 msgid "_Playlists"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:545
+#: ../src/shell/ario-shell.c:216
+msgid "S_tatusbar"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:217
+msgid "Change the visibility of the statusbar"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:669
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:546
+#: ../src/shell/ario-shell.c:670
 msgid "translator-credits"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:950
+msgid "Configure Plugins"
 msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:259
@@ -903,4 +956,17 @@ msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:136
 msgid "P_revious"
+msgstr ""
+
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:42
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:43
+msgid "Find artist on Wikipedia"
+msgstr ""
+
+#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
+msgid "A plugin to search current artist on wikipedia"
+msgstr ""
+
+#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
+msgid "Wikipedia"
 msgstr ""

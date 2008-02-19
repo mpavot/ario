@@ -37,6 +37,17 @@ ario_SOURCES = \
 	lib/rb-glade-helpers.h\
 	lib/libsexy/sexy-tooltip.c\
 	lib/libsexy/sexy-tooltip.h\
+	plugins/ario-module.c\
+	plugins/ario-module.h\
+	plugins/ario-plugin.c\
+	plugins/ario-plugin.h\
+	plugins/ario-plugin-info.c\
+	plugins/ario-plugin-info.h\
+	plugins/ario-plugin-info-priv.h\
+	plugins/ario-plugin-manager.c\
+	plugins/ario-plugin-manager.h\
+	plugins/ario-plugins-engine.c\
+	plugins/ario-plugins-engine.h\
 	preferences/ario-connection-preferences.c\
 	preferences/ario-connection-preferences.h\
 	preferences/ario-cover-preferences.c\
@@ -95,5 +106,6 @@ AM_CPPFLAGS = $(DEPS_CFLAGS) \
                 -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\
                 -DDATA_PATH=\""$(pkgdatadir)/ario/data/"\"\
                 -DUI_PATH=\""$(pkgdatadir)/ario/ui/"\"\
+        	-DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
                 -DGLADE_PATH=\""$(pkgdatadir)/ario/glade/"\"
 
