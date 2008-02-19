@@ -21,6 +21,7 @@
 #define __ARIO_DEBUG_H
 
 #include <config.h>
+#include <stdio.h>
 
 #define ARIO_LOG_ERROR(x,args...) {printf("[ERROR](%s:%d) %s : ", __FILE__, __LINE__, __FUNCTION__); printf(x, ##args);printf("\n");}
 

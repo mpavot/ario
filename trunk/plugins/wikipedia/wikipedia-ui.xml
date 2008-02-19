@@ -1,0 +1,12 @@
+<ui>
+        <menubar name="MenuBar">
+
+                <menu name="ToolMenu" action="Tool">
+                        <placeholder name="ToolMenuPluginPlaceholder">
+                        <separator/>
+                        <menuitem name="ToolWikipediaMenu" action="ToolWikipedia"/>
+                        </placeholder>
+                </menu>
+
+        </menubar>
+</ui>

@@ -40,6 +40,17 @@ src/lib/libmpdclient.c
 src/lib/libmpdclient.h
 src/lib/rb-glade-helpers.c
 src/lib/rb-glade-helpers.h
+src/plugins/ario-module.c
+src/plugins/ario-module.h
+src/plugins/ario-plugin.c
+src/plugins/ario-plugin.h
+src/plugins/ario-plugin-info.c
+src/plugins/ario-plugin-info.h
+src/plugins/ario-plugin-info-priv.h
+src/plugins/ario-plugin-manager.c
+src/plugins/ario-plugin-manager.h
+src/plugins/ario-plugins-engine.c
+src/plugins/ario-plugins-engine.h
 src/preferences/ario-connection-preferences.c
 src/preferences/ario-connection-preferences.h
 src/preferences/ario-cover-preferences.c
@@ -89,3 +100,6 @@ src/widgets/ario-tray-icon.c
 src/widgets/ario-tray-icon.h
 src/widgets/ario-volume.c
 src/widgets/ario-volume.h
+plugins/wikipedia/ario-wikipedia-plugin.c
+plugins/wikipedia/ario-wikipedia-plugin.h
+plugins/wikipedia/wikipedia.ario-plugin.desktop.in

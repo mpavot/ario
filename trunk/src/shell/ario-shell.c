@@ -39,10 +39,20 @@
 #include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "plugins/ario-plugins-engine.h"
+#include "plugins/ario-plugin-manager.h"
 
 static void ario_shell_class_init (ArioShellClass *klass);
 static void ario_shell_init (ArioShell *shell);
 static void ario_shell_finalize (GObject *object);
+static void ario_shell_set_property (GObject *object,
+                                     guint prop_id,
+                                     const GValue *value,
+                                     GParamSpec *pspec);
+static void ario_shell_get_property (GObject *object,
+                                     guint prop_id,
+                                     GValue *value,
+                                     GParamSpec *pspec);
 static void ario_shell_show (ArioShell *shell);
 static void ario_shell_cmd_quit (GtkAction *action,
                                  ArioShell *shell);
@@ -52,6 +62,8 @@ static void ario_shell_cmd_connect (GtkAction *action,
                                     ArioShell *shell);
 static void ario_shell_cmd_disconnect (GtkAction *action,
                                        ArioShell *shell);
+static void ario_shell_cmd_plugins (GtkAction *action,
+		                    ArioShell *shell);
 static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 static void ario_shell_cmd_lyrics (GtkAction *action,
@@ -111,9 +123,19 @@ struct ArioShellPrivate
 
         ArioTrayIcon *tray_icon;
 
+        GtkWidget *plugins;
+
 	gboolean statusbar_hidden;
         gboolean connected;
         gboolean shown;
+};
+
+enum
+{
+        PROP_0,
+        PROP_MPD,
+        PROP_UI_MANAGER,
+        PROP_ACTION_GROUP
 };
 
 static GtkActionEntry ario_shell_actions [] =
@@ -136,6 +158,9 @@ static GtkActionEntry ario_shell_actions [] =
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
+	{ "EditPlugins", NULL, N_("Plu_gins"), NULL,
+	  N_("Change and configure plugins"),
+	  G_CALLBACK (ario_shell_cmd_plugins) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_preferences) },
@@ -233,7 +258,31 @@ ario_shell_class_init (ArioShellClass *klass)
 
         parent_class = g_type_class_peek_parent (klass);
 
+        object_class->set_property = ario_shell_set_property;
+        object_class->get_property = ario_shell_get_property;
         object_class->finalize = ario_shell_finalize;
+
+        g_object_class_install_property (object_class,
+                                         PROP_MPD,
+                                         g_param_spec_object ("mpd",
+                                                              "mpd",
+                                                              "mpd",
+                                                              TYPE_ARIO_MPD,
+                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+        g_object_class_install_property (object_class,
+                                         PROP_UI_MANAGER,
+                                         g_param_spec_object ("ui-manager",
+                                                              "GtkUIManager",
+                                                              "GtkUIManager object",
+                                                              GTK_TYPE_UI_MANAGER,
+                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+        g_object_class_install_property (object_class,
+                                         PROP_ACTION_GROUP,
+                                         g_param_spec_object ("action-group",
+                                                              "GtkActionGroup",
+                                                              "GtkActionGroup object",
+                                                              GTK_TYPE_ACTION_GROUP,
+                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 static void
@@ -262,6 +311,56 @@ ario_shell_finalize (GObject *object)
         g_free (shell->priv);
 
         parent_class->finalize (G_OBJECT (shell));
+}
+
+static void
+ario_shell_set_property (GObject *object,
+                         guint prop_id,
+                         const GValue *value,
+                         GParamSpec *pspec)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioShell *shell = ARIO_SHELL (object);
+
+        switch (prop_id) {
+        case PROP_MPD:
+                shell->priv->mpd = g_value_get_object (value);
+                break;
+        case PROP_UI_MANAGER:
+                shell->priv->ui_manager = g_value_get_object (value);
+                break;
+        case PROP_ACTION_GROUP:
+                shell->priv->actiongroup = g_value_get_object (value);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                break;
+        }
+}
+
+static void 
+ario_shell_get_property (GObject *object,
+                         guint prop_id,
+                         GValue *value,
+                         GParamSpec *pspec)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioShell *shell = ARIO_SHELL (object);
+
+        switch (prop_id) {
+        case PROP_MPD:
+                g_value_set_object (value, shell->priv->mpd);
+                break;
+        case PROP_UI_MANAGER:
+                g_value_set_object (value, shell->priv->ui_manager);
+                break;
+        case PROP_ACTION_GROUP:
+                g_value_set_object (value, shell->priv->actiongroup);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                break;
+        }
 }
 
 ArioShell *
@@ -295,7 +394,6 @@ ario_shell_construct (ArioShell *shell)
         GtkWidget *vbox;
         GdkPixbuf *pixbuf;
         ArioFirstlaunch *firstlaunch;
-        GError *error = NULL;
         GtkAction *action;
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
@@ -346,7 +444,7 @@ ario_shell_construct (ArioShell *shell)
         gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
                                             shell->priv->actiongroup, 0);
         gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
-                                         UI_PATH "ario-ui.xml", &error);
+                                         UI_PATH "ario-ui.xml", NULL);
         gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
                                     gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
 
@@ -406,6 +504,9 @@ ario_shell_construct (ArioShell *shell)
                                  shell, 0);
 
         ario_shell_sync_window_state (shell);
+	ario_plugins_engine_set_shell (shell);
+        ario_plugins_engine_update_plugins_ui (ario_plugins_engine_get_default (),
+                                               shell, TRUE);
 
         /* First launch assistant */
         if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {
@@ -818,4 +919,58 @@ ario_shell_sync_statusbar_visibility (ArioShell *shell)
 		gtk_widget_hide (GTK_WIDGET (shell->priv->status_bar));
 	else
 		gtk_widget_show (GTK_WIDGET (shell->priv->status_bar));
+}
+
+static gboolean
+ario_shell_plugins_window_delete_cb (GtkWidget *window,
+				     GdkEventAny *event,
+				     gpointer data)
+{
+	gtk_widget_hide (window);
+
+	return TRUE;
+}
+
+static void
+ario_shell_plugins_response_cb (GtkDialog *dialog,
+			        int response_id,
+			        gpointer data)
+{
+	if (response_id == GTK_RESPONSE_CLOSE)
+		gtk_widget_hide (GTK_WIDGET (dialog));
+}
+
+static void
+ario_shell_cmd_plugins (GtkAction *action,
+		        ArioShell *shell)
+{
+	if (shell->priv->plugins == NULL) {
+		GtkWidget *manager;
+
+		shell->priv->plugins = gtk_dialog_new_with_buttons (_("Configure Plugins"),
+								    GTK_WINDOW (shell->priv->window),
+								    GTK_DIALOG_DESTROY_WITH_PARENT,
+								    GTK_STOCK_CLOSE,
+								    GTK_RESPONSE_CLOSE,
+								    NULL);
+	    	gtk_container_set_border_width (GTK_CONTAINER (shell->priv->plugins), 5);
+		gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell->priv->plugins)->vbox), 2);
+		gtk_dialog_set_has_separator (GTK_DIALOG (shell->priv->plugins), FALSE);
+
+		g_signal_connect_object (G_OBJECT (shell->priv->plugins),
+					 "delete_event",
+					 G_CALLBACK (ario_shell_plugins_window_delete_cb),
+					 NULL, 0);
+		g_signal_connect_object (G_OBJECT (shell->priv->plugins),
+					 "response",
+					 G_CALLBACK (ario_shell_plugins_response_cb),
+					 NULL, 0);
+
+		manager = ario_plugin_manager_new ();
+		gtk_widget_show_all (GTK_WIDGET (manager));
+		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell->priv->plugins)->vbox),
+				   manager);
+	}
+
+	gtk_window_present (GTK_WINDOW (shell->priv->plugins));
 }
