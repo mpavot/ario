@@ -126,7 +126,7 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistSongProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_songs_properties) },
-        { "PlaylistGotoPlaying", GTK_STOCK_GOTO_BOTTOM, N_("_Go to playing song"), "<control>L",
+        { "PlaylistGotoPlaying", GTK_STOCK_JUMP_TO, N_("_Go to playing song"), "<control>L",
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_goto_playing_song) }
 };
