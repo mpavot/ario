@@ -1,6 +1,4 @@
 - Add to playlist and play
 - keep lyrics window size in gconf
 - add other lyrics sources & possibility to activate them in preferences
-- Plugins
 - Plugin: Last.fm support
-- Plugin: Search on Wikipedia
