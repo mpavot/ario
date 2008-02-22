@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-22 20:15+0100\n"
+"POT-Creation-Date: 2008-02-22 20:41+0100\n"
 "PO-Revision-Date: 2008-01-17 18:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -569,7 +569,7 @@ msgstr "_Añadir a la lista de reproducción"
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:114
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:126
 msgid "_Properties"
 msgstr "_Propiedades"
 
@@ -583,13 +583,13 @@ msgstr "_Borrar las carátulas"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
-#: ../src/widgets/ario-playlist.c:282 ../src/widgets/ario-songlist.c:270
+#: ../src/widgets/ario-playlist.c:287 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Artista"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:293 ../src/widgets/ario-songlist.c:285
+#: ../src/widgets/ario-playlist.c:298 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr "Álbum"
 
@@ -600,14 +600,14 @@ msgstr "Carátula"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:422 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:260
+#: ../src/widgets/ario-playlist.c:265
 msgid "Track"
 msgstr "Pista"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
-#: ../src/widgets/ario-playlist.c:271 ../src/widgets/ario-songlist.c:255
+#: ../src/widgets/ario-playlist.c:276 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Título"
 
@@ -933,33 +933,38 @@ msgstr ""
 msgid "Change the music volume"
 msgstr "Cambiar el volumen de la música"
 
-#: ../src/widgets/ario-playlist.c:115
+#: ../src/widgets/ario-playlist.c:117
 msgid "_Clear"
 msgstr "_Limpiar"
 
-#: ../src/widgets/ario-playlist.c:118
+#: ../src/widgets/ario-playlist.c:120
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: ../src/widgets/ario-playlist.c:121
+#: ../src/widgets/ario-playlist.c:123
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/widgets/ario-playlist.c:304
+#: ../src/widgets/ario-playlist.c:129
+#, fuzzy
+msgid "_Go to playing song"
+msgstr "No se está reproduciendo nada"
+
+#: ../src/widgets/ario-playlist.c:309
 msgid "Duration"
 msgstr "Duración"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1144
+#: ../src/widgets/ario-playlist.c:1179
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: ../src/widgets/ario-playlist.c:1154
+#: ../src/widgets/ario-playlist.c:1189
 #, fuzzy
 msgid "Playlist name :"
 msgstr "Nombre de lista de reprodución: "
 
-#: ../src/widgets/ario-playlist.c:1179
+#: ../src/widgets/ario-playlist.c:1214
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
 

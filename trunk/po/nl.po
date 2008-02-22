@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-22 20:15+0100\n"
+"POT-Creation-Date: 2008-02-22 20:41+0100\n"
 "PO-Revision-Date: 2008-02-12 11:06+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -568,7 +568,7 @@ msgstr "_Voeg toe aan afspeellijst"
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:114
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:126
 msgid "_Properties"
 msgstr "_Eigenschappen"
 
@@ -582,13 +582,13 @@ msgstr "_Verwijder de covers"
 
 #: ../src/sources/ario-browser.c:293 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
-#: ../src/widgets/ario-playlist.c:282 ../src/widgets/ario-songlist.c:270
+#: ../src/widgets/ario-playlist.c:287 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Artiest"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:347 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:293 ../src/widgets/ario-songlist.c:285
+#: ../src/widgets/ario-playlist.c:298 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr "Album"
 
@@ -599,14 +599,14 @@ msgstr "Cover"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:422 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:260
+#: ../src/widgets/ario-playlist.c:265
 msgid "Track"
 msgstr "Nummer"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:429 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
-#: ../src/widgets/ario-playlist.c:271 ../src/widgets/ario-songlist.c:255
+#: ../src/widgets/ario-playlist.c:276 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Titel"
 
@@ -938,32 +938,37 @@ msgstr "Schakel herhalen aan/uit"
 msgid "Change the music volume"
 msgstr "Geluidssterkte aanpassen"
 
-#: ../src/widgets/ario-playlist.c:115
+#: ../src/widgets/ario-playlist.c:117
 msgid "_Clear"
 msgstr "_Wissen"
 
-#: ../src/widgets/ario-playlist.c:118
+#: ../src/widgets/ario-playlist.c:120
 msgid "_Remove"
 msgstr "_Verwijderen"
 
-#: ../src/widgets/ario-playlist.c:121
+#: ../src/widgets/ario-playlist.c:123
 msgid "_Save"
 msgstr "_Opslaan"
 
-#: ../src/widgets/ario-playlist.c:304
+#: ../src/widgets/ario-playlist.c:129
+#, fuzzy
+msgid "_Go to playing song"
+msgstr "Afspelen gestopt"
+
+#: ../src/widgets/ario-playlist.c:309
 msgid "Duration"
 msgstr "Duur"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1144
+#: ../src/widgets/ario-playlist.c:1179
 msgid "Save playlist"
 msgstr "Afspeellijst opslaan"
 
-#: ../src/widgets/ario-playlist.c:1154
+#: ../src/widgets/ario-playlist.c:1189
 msgid "Playlist name :"
 msgstr "Naam van de afspeellijst"
 
-#: ../src/widgets/ario-playlist.c:1179
+#: ../src/widgets/ario-playlist.c:1214
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Afspeellijst bestaat al. Wil je het overschrijven?"
 
