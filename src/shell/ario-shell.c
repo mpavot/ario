@@ -39,7 +39,6 @@
 #include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
 #include "ario-util.h"
-#include "plugins/ario-plugins-engine.h"
 #include "plugins/ario-plugin-manager.h"
 
 static void ario_shell_class_init (ArioShellClass *klass);
@@ -504,9 +503,6 @@ ario_shell_construct (ArioShell *shell)
                                  shell, 0);
 
         ario_shell_sync_window_state (shell);
-	ario_plugins_engine_set_shell (shell);
-        ario_plugins_engine_update_plugins_ui (ario_plugins_engine_get_default (),
-                                               shell, TRUE);
 
         /* First launch assistant */
         if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {

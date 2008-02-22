@@ -54,8 +54,6 @@ struct _ArioPluginManagerPrivate
         GtkWidget* about_button;
         GtkWidget* configure_button;
 
-        ArioPluginsEngine* engine;
-
         GtkWidget* about;
         
         GtkWidget* popup_menu;
@@ -132,8 +130,7 @@ configure_button_cb (GtkWidget* button,
 
         toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm)));
 
-        ario_plugins_engine_configure_plugin (pm->priv->engine,
-                                               info, toplevel);
+        ario_plugins_engine_configure_plugin (info, toplevel);
 
         ARIO_LOG_DBG ("Done");        
 }
@@ -257,7 +254,7 @@ plugin_manager_populate_lists (ArioPluginManager *pm)
         GtkListStore *model;
         GtkTreeIter iter;
 
-        plugins = ario_plugins_engine_get_plugin_list (pm->priv->engine);
+        plugins = ario_plugins_engine_get_plugin_list ();
 
         model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree)));
 
@@ -307,7 +304,7 @@ plugin_manager_set_active (ArioPluginManager *pm,
 
         if (active) {
                 /* activate the plugin */
-                if (!ario_plugins_engine_activate_plugin (pm->priv->engine, info)) {
+                if (!ario_plugins_engine_activate_plugin (info)) {
                         ARIO_LOG_DBG ("Could not activate %s.\n", 
                                              ario_plugin_info_get_name (info));
 
@@ -315,13 +312,22 @@ plugin_manager_set_active (ArioPluginManager *pm,
                 }
         } else {
                 /* deactivate the plugin */
-                if (!ario_plugins_engine_deactivate_plugin (pm->priv->engine, info)) {
+                if (!ario_plugins_engine_deactivate_plugin (info)) {
                         ARIO_LOG_DBG ("Could not deactivate %s.\n", 
                                              ario_plugin_info_get_name (info));
 
                         res = FALSE;
                 }
         }
+
+	gtk_list_store_set (GTK_LIST_STORE (model),
+			    iter,
+			    ACTIVE_COLUMN,
+			    ario_plugin_info_is_active (info),
+			    -1);
+
+	/* cause the configure button sensitivity to be updated */
+	cursor_changed_cb (GTK_TREE_VIEW (pm->priv->tree), pm);
 
         return res;
 }
@@ -692,45 +698,6 @@ plugin_manager_construct_tree (ArioPluginManager *pm)
         gtk_widget_show (pm->priv->tree);
 }
 
-static void
-plugin_toggled_cb (ArioPluginsEngine *engine,
-                   ArioPluginInfo    *info,
-                   ArioPluginManager *pm)
-{
-        GtkTreeSelection *selection;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gboolean info_found = FALSE;
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
-
-        if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-                /* There is an item selected: it's probably the one we want! */
-                ArioPluginInfo *tinfo;
-                gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
-                info_found = info == tinfo;
-        }
-
-        if (!info_found) {
-                gtk_tree_model_get_iter_first (model, &iter);
-
-                do {
-                        ArioPluginInfo *tinfo;
-                        gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
-                        info_found = info == tinfo;
-                }
-                while (!info_found && gtk_tree_model_iter_next (model, &iter));
-        }
-
-        if (!info_found) {
-                g_warning ("ArioPluginManager: plugin '%s' not found in the tree model",
-                           ario_plugin_info_get_name (info));
-                return;
-        }
-
-        gtk_list_store_set (GTK_LIST_STORE (model), &iter, ACTIVE_COLUMN, ario_plugin_info_is_active (info), -1);
-}
-
 static void 
 ario_plugin_manager_init (ArioPluginManager *pm)
 {
@@ -795,19 +762,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
 
         plugin_manager_construct_tree (pm);
 
-        /* get the plugin engine and populate the treeview */
-        pm->priv->engine = ario_plugins_engine_get_default ();
-
-        g_signal_connect_after (pm->priv->engine,
-                                "activate-plugin",
-                                G_CALLBACK (plugin_toggled_cb),
-                                pm);
-        g_signal_connect_after (pm->priv->engine,
-                                "deactivate-plugin",
-                                G_CALLBACK (plugin_toggled_cb),
-                                pm);
-
-        if (ario_plugins_engine_get_plugin_list (pm->priv->engine) != NULL) {
+        if (ario_plugins_engine_get_plugin_list () != NULL) {
                 plugin_manager_populate_lists (pm);
         } else {
                 gtk_widget_set_sensitive (pm->priv->about_button, FALSE);
@@ -819,10 +774,6 @@ static void
 ario_plugin_manager_finalize (GObject *object)
 {
         ArioPluginManager *pm = ARIO_PLUGIN_MANAGER (object);
-
-        g_signal_handlers_disconnect_by_func (pm->priv->engine,
-                                              plugin_toggled_cb,
-                                              pm);
 
         if (pm->priv->popup_menu)
                 gtk_widget_destroy (pm->priv->popup_menu);

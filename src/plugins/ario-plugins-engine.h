@@ -28,64 +28,19 @@
 #include "plugins/ario-plugin-info.h"
 #include "plugins/ario-plugin.h"
 
-G_BEGIN_DECLS
+void                    ario_plugins_engine_init                (ArioShell *shell);
 
-#define ARIO_TYPE_PLUGINS_ENGINE              (ario_plugins_engine_get_type ())
-#define ARIO_PLUGINS_ENGINE(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), ARIO_TYPE_PLUGINS_ENGINE, ArioPluginsEngine))
-#define ARIO_PLUGINS_ENGINE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), ARIO_TYPE_PLUGINS_ENGINE, ArioPluginsEngineClass))
-#define ARIO_IS_PLUGINS_ENGINE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), ARIO_TYPE_PLUGINS_ENGINE))
-#define ARIO_IS_PLUGINS_ENGINE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), ARIO_TYPE_PLUGINS_ENGINE))
-#define ARIO_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), ARIO_TYPE_PLUGINS_ENGINE, ArioPluginsEngineClass))
+void                    ario_plugins_engine_shutdown            (void);
 
-typedef struct _ArioPluginsEngine               ArioPluginsEngine;
-typedef struct _ArioPluginsEnginePrivate        ArioPluginsEnginePrivate;
+const GList             *ario_plugins_engine_get_plugin_list    (void);
 
-struct _ArioPluginsEngine
-{
-        GObject parent;
-        ArioPluginsEnginePrivate *priv;
-};
+gboolean                ario_plugins_engine_activate_plugin     (ArioPluginInfo    *info);
+gboolean                ario_plugins_engine_deactivate_plugin   (ArioPluginInfo    *info);
 
-typedef struct _ArioPluginsEngineClass          ArioPluginsEngineClass;
-
-struct _ArioPluginsEngineClass
-{
-        GObjectClass parent_class;
-
-        void         (* activate_plugin)        (ArioPluginsEngine *engine,
-                                                 ArioPluginInfo    *info);
-
-        void         (* deactivate_plugin)      (ArioPluginsEngine *engine,
-                                                 ArioPluginInfo    *info);
-};
-
-GType                   ario_plugins_engine_get_type            (void) G_GNUC_CONST;
-
-void                    ario_plugins_engine_set_shell           (ArioShell *shell);
-
-ArioPluginsEngine       *ario_plugins_engine_get_default        (void);
-
-void                    ario_plugins_engine_garbage_collect     (ArioPluginsEngine *engine);
-
-const GList             *ario_plugins_engine_get_plugin_list    (ArioPluginsEngine *engine);
-
-gboolean                ario_plugins_engine_activate_plugin     (ArioPluginsEngine *engine,
-                                                                 ArioPluginInfo    *info);
-gboolean                ario_plugins_engine_deactivate_plugin   (ArioPluginsEngine *engine,
-                                                                 ArioPluginInfo    *info);
-
-void                    ario_plugins_engine_configure_plugin    (ArioPluginsEngine *engine,
-                                                                 ArioPluginInfo    *info,
+void                    ario_plugins_engine_configure_plugin    (ArioPluginInfo    *info,
                                                                  GtkWindow          *parent);
-
-/* 
- * new_window == TRUE if this function is called because a new top window
- * has been created
- */
-void                    ario_plugins_engine_update_plugins_ui   (ArioPluginsEngine *engine,
-                                                                 ArioShell        *shell, 
-                                                                 gboolean          new_shell);
-
-G_END_DECLS
+#ifdef ENABLE_PYTHON
+void                    ario_plugins_engine_garbage_collect     (void);
+#endif
 
 #endif  /* __ARIO_PLUGINS_ENGINE_H__ */
