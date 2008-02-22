@@ -66,6 +66,8 @@ static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
 static void ario_playlist_cmd_songs_properties (GtkAction *action,
                                                 ArioPlaylist *playlist);
+static void ario_playlist_cmd_goto_playing_song (GtkAction *action,
+                                                 ArioPlaylist *playlist);
 static gboolean ario_playlist_view_button_press_cb (GtkTreeView *treeview,
                                                     GdkEventButton *event,
                                                     ArioPlaylist *playlist);
@@ -123,7 +125,10 @@ static GtkActionEntry ario_playlist_actions [] =
                 G_CALLBACK (ario_playlist_cmd_save) },
         { "PlaylistSongProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
-                G_CALLBACK (ario_playlist_cmd_songs_properties) }
+                G_CALLBACK (ario_playlist_cmd_songs_properties) },
+        { "PlaylistGotoPlaying", GTK_STOCK_GOTO_BOTTOM, N_("_Go to playing song"), "<control>L",
+                NULL,
+                G_CALLBACK (ario_playlist_cmd_goto_playing_song) }
 };
 
 static guint ario_playlist_n_actions = G_N_ELEMENTS (ario_playlist_actions);
@@ -1043,6 +1048,25 @@ ario_playlist_popup_menu (ArioPlaylist *playlist)
         gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
                         gtk_get_current_event_time ());
 }
+static gboolean
+ario_playlist_model_foreach (GtkTreeModel *model,
+                             GtkTreePath *path,
+                             GtkTreeIter *iter,
+                             ArioPlaylist *playlist)
+{
+        int song_id;
+
+        gtk_tree_model_get (model, iter, ID_COLUMN, &song_id, -1);
+
+        if (song_id == ario_mpd_get_current_song_id (playlist->priv->mpd)) {
+                gtk_tree_view_set_cursor (GTK_TREE_VIEW (playlist->priv->tree),
+                                          path,
+                                          NULL, FALSE);
+                return TRUE;
+        }
+
+        return FALSE;
+}
 
 static void
 ario_playlist_cmd_clear (GtkAction *action,
@@ -1127,6 +1151,17 @@ ario_playlist_cmd_songs_properties (GtkAction *action,
                                               songs);
         if (songinfos)
                 gtk_widget_show_all (songinfos);
+}
+
+static void
+ario_playlist_cmd_goto_playing_song (GtkAction *action,
+                                     ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (playlist->priv->model),
+                                (GtkTreeModelForeachFunc) ario_playlist_model_foreach,
+                                playlist);
 }
 
 void
