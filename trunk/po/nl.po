@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-19 21:30+0100\n"
+"POT-Creation-Date: 2008-02-22 20:15+0100\n"
 "PO-Revision-Date: 2008-02-12 11:06+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -26,117 +26,127 @@ msgstr ""
 msgid "0 for the library, 1 for the radios, etc..."
 msgstr "0 voor de bibliotheek, 1 voor de radio's, etc..."
 
-#: ../data/ario.schemas.in.h:3
+#: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:716
+msgid "Active plugins"
+msgstr ""
+
+#: ../data/ario.schemas.in.h:4
 msgid "Define if Ario must autoconnect to mpd or not"
 msgstr "Geef aan of Ario automatisch moet verbinden naar mpd of niet"
 
-#: ../data/ario.schemas.in.h:4
+#: ../data/ario.schemas.in.h:5
 msgid "Define if Ario must use a proxy for remote connections"
 msgstr "Geef aan of Ario een proxy moet gebruiken voor verbindingen op afstand"
 
-#: ../data/ario.schemas.in.h:5
+#: ../data/ario.schemas.in.h:6
 msgid "Define if the view tabs are shown."
 msgstr "Geef aan of het beeld tabbladen getoond is."
 
-#: ../data/ario.schemas.in.h:6
+#: ../data/ario.schemas.in.h:7
 msgid "Define the address of the proxy"
 msgstr "Geef het adres van de proxy aan"
 
-#: ../data/ario.schemas.in.h:7
+#: ../data/ario.schemas.in.h:8
 msgid "Define the behavior of a double click on the tray icon."
 msgstr ""
 "Geef het gedrag aan van een dubbel klik op het pictogram in het systeemvak."
 
-#: ../data/ario.schemas.in.h:8
+#: ../data/ario.schemas.in.h:9
 msgid "Define the port of the proxy"
 msgstr "Geef de poort van de proxy aan"
 
-#: ../data/ario.schemas.in.h:9
+#: ../data/ario.schemas.in.h:10
 msgid "Define the size of the album column."
 msgstr "Geef de grootte van de kolom 'album' aan."
 
-#: ../data/ario.schemas.in.h:10
+#: ../data/ario.schemas.in.h:11
 msgid "Define the size of the artist column."
 msgstr "Geef de grootte van de kolom artiest aan."
 
-#: ../data/ario.schemas.in.h:11
+#: ../data/ario.schemas.in.h:12
 msgid "Define the size of the title column."
 msgstr "Geef de grootte van de kolom titel aan."
 
-#: ../data/ario.schemas.in.h:12
+#: ../data/ario.schemas.in.h:13
 msgid "Define the size of the track column."
 msgstr "Geef de grootte van de kolom nummer aan."
 
-#: ../data/ario.schemas.in.h:13
+#: ../data/ario.schemas.in.h:14
 msgid "Define the source used in Ario"
 msgstr "Geef de bron die gebruikt wordt in Ario"
 
-#: ../data/ario.schemas.in.h:14
+#: ../data/ario.schemas.in.h:15
 msgid "Hide the covers in the albums treeview"
 msgstr "Verberg de"
 
-#: ../data/ario.schemas.in.h:15
+#: ../data/ario.schemas.in.h:16
 msgid "Host to connect to"
 msgstr "Host om naar te verbinden"
 
-#: ../data/ario.schemas.in.h:16
+#: ../data/ario.schemas.in.h:17
 msgid "If true, the main window is maximized."
 msgstr "Indien aangevinkt wordt het hoofvenster gemaximaliseerd."
 
-#: ../data/ario.schemas.in.h:17
+#: ../data/ario.schemas.in.h:18
 msgid "If true, the statusbar is hidden."
 msgstr ""
 
-#: ../data/ario.schemas.in.h:18
+#: ../data/ario.schemas.in.h:19
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .ario-plugin file for obtaining the \"Location\" of a given plugin."
+msgstr ""
+
+#: ../data/ario.schemas.in.h:20
 msgid "Main window height"
 msgstr "Hoogte van het hoofdvenster"
 
-#: ../data/ario.schemas.in.h:19
+#: ../data/ario.schemas.in.h:21
 msgid "Main window maximization state"
 msgstr "Maximalisatiestatus van het hoofdvenster"
 
-#: ../data/ario.schemas.in.h:20
+#: ../data/ario.schemas.in.h:22
 msgid "Main window width"
 msgstr "Breedte van het hoofdvenster"
 
-#: ../data/ario.schemas.in.h:21
+#: ../data/ario.schemas.in.h:23
 msgid "Port to connect to"
 msgstr "Poort om naar te verbinden"
 
-#: ../data/ario.schemas.in.h:22
+#: ../data/ario.schemas.in.h:24
 msgid "Position of main window pane"
 msgstr "Positie van het hoofdvenster"
 
-#: ../data/ario.schemas.in.h:23
+#: ../data/ario.schemas.in.h:25
 msgid "Position of playlists pane"
 msgstr "Positie van het playlistvenster"
 
-#: ../data/ario.schemas.in.h:24
+#: ../data/ario.schemas.in.h:26
 msgid "Statusbar visibility"
 msgstr ""
 
-#: ../data/ario.schemas.in.h:25
+#: ../data/ario.schemas.in.h:27
 msgid "The amazon country to use to get the covers"
 msgstr "Het te gebruik Amazon land om de covers te ontvangen"
 
-#: ../data/ario.schemas.in.h:26
+#: ../data/ario.schemas.in.h:28
 msgid "The password to connect to mpd"
 msgstr "Het wachtwoord om te verbinden naar mpd"
 
-#: ../data/ario.schemas.in.h:27
+#: ../data/ario.schemas.in.h:29
 msgid "The timeout for the connection to mpd"
 msgstr "De timeout voor de connectie naar mpd"
 
-#: ../data/ario.schemas.in.h:28
+#: ../data/ario.schemas.in.h:30
 msgid "True if the initial assistant has already been run."
 msgstr "Waar als de hoofd-assistent al heeft gedraaid."
 
-#: ../data/ario.schemas.in.h:29
+#: ../data/ario.schemas.in.h:31
 msgid "When enabled, ario hide the covers in the albums treeview"
 msgstr ""
 "Wanneer ingeschakeld, verbergt ario de covers in de album mappenstructuur"
 
-#: ../data/ario.schemas.in.h:30
+#: ../data/ario.schemas.in.h:32
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -221,11 +231,11 @@ msgstr "Poort :"
 msgid "_Autoconnect on startup"
 msgstr "_Autoverbind bij startup"
 
-#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:152
+#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:151
 msgid "_Connect"
 msgstr "_Verbinden"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:154
 msgid "_Disconnect"
 msgstr "_Verbinding verbreken"
 
@@ -454,29 +464,25 @@ msgstr ""
 msgid "Enabled"
 msgstr "Geactiveerd"
 
-#: ../src/plugins/ario-plugin-manager.c:467 ../src/shell/ario-shell.c:176
+#: ../src/plugins/ario-plugin-manager.c:473 ../src/shell/ario-shell.c:175
 msgid "_About"
 msgstr "_Over"
 
-#: ../src/plugins/ario-plugin-manager.c:475
+#: ../src/plugins/ario-plugin-manager.c:481
 #, fuzzy
 msgid "C_onfigure"
 msgstr "Configuratie"
 
-#: ../src/plugins/ario-plugin-manager.c:484
+#: ../src/plugins/ario-plugin-manager.c:490
 msgid "A_ctivate"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:495
+#: ../src/plugins/ario-plugin-manager.c:501
 msgid "Ac_tivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:500
+#: ../src/plugins/ario-plugin-manager.c:506
 msgid "_Deactivate All"
-msgstr ""
-
-#: ../src/plugins/ario-plugin-manager.c:749
-msgid "Active plugins"
 msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:290
@@ -711,92 +717,92 @@ msgstr "Afspeellijst"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Weet je zeker dat je de geslecteerde afspeellijsten wil verwijderen?"
 
-#: ../src/shell/ario-shell.c:143
+#: ../src/shell/ario-shell.c:142
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../src/shell/ario-shell.c:144
+#: ../src/shell/ario-shell.c:143
 msgid "_Edit"
 msgstr "_Bewerken"
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:144
 msgid "_View"
 msgstr "_Beeld"
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:145
 msgid "_Tool"
 msgstr "_Gereedschap"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:146
 msgid "_Help"
 msgstr "_Help"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:148
 msgid "_Save Playlist"
 msgstr "_Sla Afspeellijst op"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:157
 msgid "_Quit"
 msgstr "_Aflsuiten"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:160
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:161
 msgid "Change and configure plugins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:163
 msgid "Prefere_nces"
 msgstr "Voorkeu_ren"
 
-#: ../src/shell/ario-shell.c:167
+#: ../src/shell/ario-shell.c:166
 msgid "_Change current album cover"
 msgstr "_Verander hudige albumcover"
 
-#: ../src/shell/ario-shell.c:170
+#: ../src/shell/ario-shell.c:169
 msgid "Download album _covers"
 msgstr "Download album_covers"
 
-#: ../src/shell/ario-shell.c:173
+#: ../src/shell/ario-shell.c:172
 msgid "Show _lyrics"
 msgstr "Laat_songteksten zien"
 
-#: ../src/shell/ario-shell.c:179
+#: ../src/shell/ario-shell.c:178
 msgid "_Translate this application..."
 msgstr "_Vertaal deze applicatie..."
 
-#: ../src/shell/ario-shell.c:188
+#: ../src/shell/ario-shell.c:187
 msgid "_Library"
 msgstr "_Bibliotheek"
 
-#: ../src/shell/ario-shell.c:193
+#: ../src/shell/ario-shell.c:192
 msgid "_Web Radios"
 msgstr "_Web Radio's"
 
 #. Translators - This "Search" is a name (like in "a search"), not a verb
-#: ../src/shell/ario-shell.c:200
+#: ../src/shell/ario-shell.c:199
 msgid "_Search"
 msgstr "_Zoeken"
 
-#: ../src/shell/ario-shell.c:206
+#: ../src/shell/ario-shell.c:205
 msgid "_Playlists"
 msgstr "_Afspeellijsten"
 
-#: ../src/shell/ario-shell.c:216
+#: ../src/shell/ario-shell.c:215
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:217
+#: ../src/shell/ario-shell.c:216
 msgid "Change the visibility of the statusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:669
+#: ../src/shell/ario-shell.c:665
 msgid "GTK client for MPD"
 msgstr "GTK client voor MPD"
 
-#: ../src/shell/ario-shell.c:670
+#: ../src/shell/ario-shell.c:666
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -806,7 +812,7 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Robert Wubs https://launchpad.net/~wubsieonline"
 
-#: ../src/shell/ario-shell.c:950
+#: ../src/shell/ario-shell.c:946
 #, fuzzy
 msgid "Configure Plugins"
 msgstr "Configuratie"

@@ -27,13 +27,14 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 
 #include "plugins/ario-plugins-engine.h"
 #include "plugins/ario-plugin-info-priv.h"
 #include "plugins/ario-plugin.h"
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "preferences/ario-preferences.h"
+#include "lib/eel-gconf-extensions.h"
 
 #include "ario-module.h"
 #ifdef ENABLE_PYTHON
@@ -45,34 +46,12 @@
 
 #define PLUGIN_EXT ".ario-plugin"
 
-/* Signals */
-enum
-{
-        ACTIVATE_PLUGIN,
-        DEACTIVATE_PLUGIN,
-        LAST_SIGNAL
-};
-
-static guint signals[LAST_SIGNAL];
-
-G_DEFINE_TYPE(ArioPluginsEngine, ario_plugins_engine, G_TYPE_OBJECT)
-
-struct _ArioPluginsEnginePrivate
-{
-        GList *plugin_list;
-        GConfClient *gconf_client;
-};
-
-ArioPluginsEngine *default_engine = NULL;
-
 static void ario_plugins_engine_active_plugins_changed (GConfClient* client,
                                                         guint cnxn_id, 
                                                         GConfEntry* entry, 
                                                         gpointer user_data);
-static void ario_plugins_engine_activate_plugin_real (ArioPluginsEngine* engine,
-                                                      ArioPluginInfo* info);
-static void ario_plugins_engine_deactivate_plugin_real (ArioPluginsEngine* engine,
-                                                        ArioPluginInfo* info);
+static void ario_plugins_engine_activate_plugin_real (ArioPluginInfo* info);
+static void ario_plugins_engine_deactivate_plugin_real (ArioPluginInfo* info);
 
 static gint
 compare_plugin_info (ArioPluginInfo *info1,
@@ -81,18 +60,17 @@ compare_plugin_info (ArioPluginInfo *info1,
         return strcmp (info1->module_name, info2->module_name);
 }
 
+static GList *plugin_list;
 static ArioShell *static_shell;
 
 static void
-ario_plugins_engine_load_dir (ArioPluginsEngine *engine,
-                              const gchar        *dir,
+ario_plugins_engine_load_dir (const gchar        *dir,
                               GSList             *active_plugins)
 {
         GError *error = NULL;
         GDir *d;
         const gchar *dirent;
 
-        g_return_if_fail (engine->priv->gconf_client != NULL);
         g_return_if_fail (dir != NULL);
 
         ARIO_LOG_DBG ("DIR: %s", dir);
@@ -118,7 +96,7 @@ ario_plugins_engine_load_dir (ArioPluginsEngine *engine,
 
                         /* If a plugin with this name has already been loaded
                          * drop this one (user plugins override system plugins) */
-                        if (g_list_find_custom (engine->priv->plugin_list,
+                        if (g_list_find_custom (plugin_list,
                                                 info,
                                                 (GCompareFunc)compare_plugin_info) != NULL) {
                                 g_warning ("Two or more plugins named '%s'. "
@@ -136,7 +114,7 @@ ario_plugins_engine_load_dir (ArioPluginsEngine *engine,
                                                             info->module_name,
                                                             (GCompareFunc)strcmp) != NULL;
 
-                        engine->priv->plugin_list = g_list_prepend (engine->priv->plugin_list, info);
+                        plugin_list = g_list_prepend (plugin_list, info);
 
                         ARIO_LOG_DBG ("Plugin %s loaded", info->name);
                 }
@@ -146,7 +124,7 @@ ario_plugins_engine_load_dir (ArioPluginsEngine *engine,
 }
 
 static void
-ario_plugins_engine_load_all (ArioPluginsEngine *engine)
+ario_plugins_engine_load_all (void)
 {
         GSList *active_plugins;
         const gchar *home;
@@ -154,10 +132,7 @@ ario_plugins_engine_load_all (ArioPluginsEngine *engine)
         gchar **pdirs;
         int i;
 
-        active_plugins = gconf_client_get_list (engine->priv->gconf_client,
-                                                ARIO_PLUGINS_ENGINE_KEY,
-                                                GCONF_VALUE_STRING,
-                                                NULL);
+        active_plugins = eel_gconf_get_string_slist (CONF_PLUGINS_LIST);
 
         /* load user's plugins */
         home = g_get_home_dir ();
@@ -169,7 +144,7 @@ ario_plugins_engine_load_all (ArioPluginsEngine *engine)
                 pdir = g_build_filename (ario_util_config_dir (), "plugins", NULL);
 
                 if (g_file_test (pdir, G_FILE_TEST_IS_DIR))
-                        ario_plugins_engine_load_dir (engine, pdir, active_plugins);
+                        ario_plugins_engine_load_dir (pdir, active_plugins);
                 g_free (pdir);
         }
 
@@ -182,128 +157,9 @@ ario_plugins_engine_load_all (ArioPluginsEngine *engine)
         pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
 
         for (i = 0; pdirs[i] != NULL; i++)
-                ario_plugins_engine_load_dir (engine, pdirs[i], active_plugins);
+                ario_plugins_engine_load_dir (pdirs[i], active_plugins);
 
         g_strfreev (pdirs);
-}
-
-static void
-ario_plugins_engine_init (ArioPluginsEngine *engine)
-{
-        if (!g_module_supported ()) {
-                g_warning ("ario is not able to initialize the plugins engine.");
-                return;
-        }
-
-        engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
-                                                    ARIO_TYPE_PLUGINS_ENGINE,
-                                                    ArioPluginsEnginePrivate);
-
-        engine->priv->gconf_client = gconf_client_get_default ();
-        g_return_if_fail (engine->priv->gconf_client != NULL);
-
-        gconf_client_add_dir (engine->priv->gconf_client,
-                              ARIO_PLUGINS_ENGINE_BASE_KEY,
-                              GCONF_CLIENT_PRELOAD_ONELEVEL,
-                              NULL);
-
-        gconf_client_notify_add (engine->priv->gconf_client,
-                                 ARIO_PLUGINS_ENGINE_KEY,
-                                 ario_plugins_engine_active_plugins_changed,
-                                 engine, NULL, NULL);
-
-        ario_plugins_engine_load_all (engine);
-}
-
-void
-ario_plugins_engine_garbage_collect (ArioPluginsEngine *engine)
-{
-#ifdef ENABLE_PYTHON
-        ario_python_garbage_collect ();
-#endif
-}
-
-static void
-ario_plugins_engine_finalize (GObject *object)
-{
-        ArioPluginsEngine *engine = ARIO_PLUGINS_ENGINE (object);
-
-#ifdef ENABLE_PYTHON
-        /* Note: that this may cause finalization of objects (typically
-         * the ArioShell) by running the garbage collector. Since some
-         * of the plugin may have installed callbacks upon object
-         * finalization (typically they need to free the WindowData)
-         * it must run before we get rid of the plugins.
-         */
-        ario_python_shutdown ();
-#endif
-
-        g_return_if_fail (engine->priv->gconf_client != NULL);
-
-        g_list_foreach (engine->priv->plugin_list,
-                        (GFunc) _ario_plugin_info_unref, NULL);
-        g_list_free (engine->priv->plugin_list);
-
-        g_object_unref (engine->priv->gconf_client);
-}
-
-static void
-ario_plugins_engine_class_init (ArioPluginsEngineClass *klass)
-{
-        GType the_type = G_TYPE_FROM_CLASS (klass);
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        object_class->finalize = ario_plugins_engine_finalize;
-        klass->activate_plugin = ario_plugins_engine_activate_plugin_real;
-        klass->deactivate_plugin = ario_plugins_engine_deactivate_plugin_real;
-
-        signals[ACTIVATE_PLUGIN] =
-                g_signal_new ("activate-plugin",
-                              the_type,
-                              G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (ArioPluginsEngineClass, activate_plugin),
-                              NULL, NULL,
-                              g_cclosure_marshal_VOID__BOXED,
-                              G_TYPE_NONE,
-                              1,
-                              ARIO_TYPE_PLUGIN_INFO | G_SIGNAL_TYPE_STATIC_SCOPE);
-
-        signals[DEACTIVATE_PLUGIN] =
-                g_signal_new ("deactivate-plugin",
-                              the_type,
-                              G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (ArioPluginsEngineClass, deactivate_plugin),
-                              NULL, NULL,
-                              g_cclosure_marshal_VOID__BOXED,
-                              G_TYPE_NONE,
-                              1,
-                              ARIO_TYPE_PLUGIN_INFO | G_SIGNAL_TYPE_STATIC_SCOPE);
-
-        g_type_class_add_private (klass, sizeof (ArioPluginsEnginePrivate));
-}
-
-void
-ario_plugins_engine_set_shell (ArioShell *shell)
-{
-        static_shell = shell;
-}
-
-ArioPluginsEngine *
-ario_plugins_engine_get_default (void)
-{
-        if (default_engine != NULL)
-                return default_engine;
-
-        default_engine = ARIO_PLUGINS_ENGINE (g_object_new (ARIO_TYPE_PLUGINS_ENGINE, NULL));
-        g_object_add_weak_pointer (G_OBJECT (default_engine),
-                                   (gpointer) &default_engine);
-        return default_engine;
-}
-
-const GList *
-ario_plugins_engine_get_plugin_list (ArioPluginsEngine *engine)
-{
-        return engine->priv->plugin_list;
 }
 
 static gboolean
@@ -420,13 +276,74 @@ load_plugin_module (ArioPluginInfo *info)
 }
 
 static void
-save_active_plugin_list (ArioPluginsEngine *engine)
+reactivate_all ()
+{
+        GList *pl;
+
+        for (pl = plugin_list; pl; pl = pl->next) {
+                gboolean res = TRUE;
+                
+                ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
+
+                /* If plugin is not available, don't try to activate/load it */
+                if (info->available && info->active) {                
+                        if (info->plugin == NULL)
+                                res = load_plugin_module (info);
+                                
+                        if (res)
+                                ario_plugin_activate (info->plugin,
+                                                      static_shell);                        
+                }
+        }
+        
+        ARIO_LOG_DBG ("End");
+}
+
+void
+ario_plugins_engine_init (ArioShell *shell)
+{
+        static_shell = shell;
+
+        eel_gconf_notification_add (ARIO_PLUGINS_ENGINE_KEY,
+                                    ario_plugins_engine_active_plugins_changed,
+                                    NULL);
+
+        ario_plugins_engine_load_all ();
+
+        reactivate_all (shell);
+}
+
+void
+ario_plugins_engine_shutdown ()
+{
+#ifdef ENABLE_PYTHON
+        /* Note: that this may cause finalization of objects (typically
+         * the ArioShell) by running the garbage collector. Since some
+         * of the plugin may have installed callbacks upon object
+         * finalization (typically they need to free the WindowData)
+         * it must run before we get rid of the plugins.
+         */
+        ario_python_shutdown ();
+#endif
+
+        g_list_foreach (plugin_list,
+                        (GFunc) _ario_plugin_info_unref, NULL);
+        g_list_free (plugin_list);
+}
+
+const GList *
+ario_plugins_engine_get_plugin_list ()
+{
+        return plugin_list;
+}
+
+static void
+save_active_plugin_list ()
 {
         GSList *active_plugins = NULL;
         GList *l;
-        gboolean res;
 
-        for (l = engine->priv->plugin_list; l != NULL; l = l->next) {
+        for (l = plugin_list; l != NULL; l = l->next) {
                 const ArioPluginInfo *info = (const ArioPluginInfo *) l->data;
                 if (info->active) {
                         active_plugins = g_slist_prepend (active_plugins,
@@ -434,21 +351,13 @@ save_active_plugin_list (ArioPluginsEngine *engine)
                 }
         }
 
-        res = gconf_client_set_list (engine->priv->gconf_client,
-                                     ARIO_PLUGINS_ENGINE_KEY,
-                                     GCONF_VALUE_STRING,
-                                     active_plugins,
-                                     NULL);
-
-        if (!res)
-                g_warning ("Error saving the list of active plugins.");
+        eel_gconf_set_string_slist (CONF_PLUGINS_LIST, active_plugins);
 
         g_slist_free (active_plugins);
 }
 
 static void
-ario_plugins_engine_activate_plugin_real (ArioPluginsEngine *engine,
-                                           ArioPluginInfo *info)
+ario_plugins_engine_activate_plugin_real (ArioPluginInfo *info)
 {
         gboolean res = TRUE;
 
@@ -467,8 +376,7 @@ ario_plugins_engine_activate_plugin_real (ArioPluginsEngine *engine,
 }
 
 gboolean
-ario_plugins_engine_activate_plugin (ArioPluginsEngine *engine,
-                                      ArioPluginInfo    *info)
+ario_plugins_engine_activate_plugin (ArioPluginInfo    *info)
 {
         g_return_val_if_fail (info != NULL, FALSE);
 
@@ -478,16 +386,15 @@ ario_plugins_engine_activate_plugin (ArioPluginsEngine *engine,
         if (info->active)
                 return TRUE;
 
-        g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
+        ario_plugins_engine_activate_plugin_real (info);
         if (info->active)
-                save_active_plugin_list (engine);
+                save_active_plugin_list ();
 
         return info->active;
 }
 
 static void
-ario_plugins_engine_deactivate_plugin_real (ArioPluginsEngine *engine,
-                                             ArioPluginInfo *info)
+ario_plugins_engine_deactivate_plugin_real (ArioPluginInfo *info)
 {
         if (!info->active || !info->available)
                 return;
@@ -498,74 +405,22 @@ ario_plugins_engine_deactivate_plugin_real (ArioPluginsEngine *engine,
 }
 
 gboolean
-ario_plugins_engine_deactivate_plugin (ArioPluginsEngine *engine,
-                                        ArioPluginInfo    *info)
+ario_plugins_engine_deactivate_plugin (ArioPluginInfo    *info)
 {
         g_return_val_if_fail (info != NULL, FALSE);
 
         if (!info->active || !info->available)
                 return TRUE;
 
-        g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
+        ario_plugins_engine_deactivate_plugin_real (info);
         if (!info->active)
-                save_active_plugin_list (engine);
+                save_active_plugin_list ();
 
         return !info->active;
 }
 
-static void
-reactivate_all (ArioPluginsEngine *engine,
-                ArioShell        *shell)
-{
-        GList *pl;
-
-        for (pl = engine->priv->plugin_list; pl; pl = pl->next) {
-                gboolean res = TRUE;
-                
-                ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
-
-                /* If plugin is not available, don't try to activate/load it */
-                if (info->available && info->active) {                
-                        if (info->plugin == NULL)
-                                res = load_plugin_module (info);
-                                
-                        if (res)
-                                ario_plugin_activate (info->plugin,
-                                                       shell);                        
-                }
-        }
-        
-        ARIO_LOG_DBG ("End");
-}
-
-void
-ario_plugins_engine_update_plugins_ui (ArioPluginsEngine *engine,
-                                        ArioShell        *shell,
-                                        gboolean            new_shell)
-{
-        GList *pl;
-
-        g_return_if_fail (IS_ARIO_SHELL (shell));
-
-        if (new_shell)
-                reactivate_all (engine, shell);
-
-        /* updated ui of all the plugins that implement update_ui */
-        for (pl = engine->priv->plugin_list; pl; pl = pl->next) {
-                ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
-
-                if (!info->available || !info->active)
-                        continue;
-                        
-                       ARIO_LOG_DBG ("Updating UI of %s", info->name);
-                
-                ario_plugin_update_ui (info->plugin, shell);
-        }
-}
-
 void          
-ario_plugins_engine_configure_plugin (ArioPluginsEngine *engine,
-                                       ArioPluginInfo    *info,
+ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
                                        GtkWindow          *parent)
 {
         GtkWidget *conf_dlg;
@@ -594,19 +449,16 @@ ario_plugins_engine_configure_plugin (ArioPluginsEngine *engine,
 
 static void 
 ario_plugins_engine_active_plugins_changed (GConfClient *client,
-                                             guint cnxn_id,
-                                             GConfEntry *entry,
-                                             gpointer user_data)
+                                            guint cnxn_id,
+                                            GConfEntry *entry,
+                                            gpointer user_data)
 {
-        ArioPluginsEngine *engine;
         GList *pl;
         gboolean to_activate;
         GSList *active_plugins;
 
         g_return_if_fail (entry->key != NULL);
         g_return_if_fail (entry->value != NULL);
-
-        engine = ARIO_PLUGINS_ENGINE (user_data);
         
         if (!((entry->value->type == GCONF_VALUE_LIST) && 
               (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING))) {
@@ -614,12 +466,9 @@ ario_plugins_engine_active_plugins_changed (GConfClient *client,
                 return;
         }
         
-        active_plugins = gconf_client_get_list (engine->priv->gconf_client,
-                                                ARIO_PLUGINS_ENGINE_KEY,
-                                                GCONF_VALUE_STRING,
-                                                NULL);
+        active_plugins = eel_gconf_get_string_slist (CONF_PLUGINS_LIST);
 
-        for (pl = engine->priv->plugin_list; pl; pl = pl->next) {
+        for (pl = plugin_list; pl; pl = pl->next) {
                 ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
 
                 if (!info->available)
@@ -630,13 +479,21 @@ ario_plugins_engine_active_plugins_changed (GConfClient *client,
                                                     (GCompareFunc)strcmp) != NULL);
 
                 if (!info->active && to_activate)
-                        g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
+                        ario_plugins_engine_activate_plugin_real (info);
                 else if (info->active && !to_activate)
-                        g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
+                        ario_plugins_engine_deactivate_plugin_real (info);
         }
 
         g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
         g_slist_free (active_plugins);
 }
+
+#ifdef ENABLE_PYTHON
+void
+ario_plugins_engine_garbage_collect (void)
+{
+        ario_python_garbage_collect ();
+}
+#endif
 
 

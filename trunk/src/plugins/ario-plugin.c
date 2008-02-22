@@ -52,7 +52,6 @@ ario_plugin_class_init (ArioPluginClass *klass)
 {
         klass->activate = dummy;
         klass->deactivate = dummy;
-        klass->update_ui = dummy;
         
         klass->create_configure_dialog = create_configure_dialog;
         klass->is_configurable = is_configurable;
@@ -82,16 +81,6 @@ ario_plugin_deactivate (ArioPlugin *plugin,
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
         ARIO_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, shell);
-}
-                                 
-void
-ario_plugin_update_ui (ArioPlugin *plugin,
-                         ArioShell *shell)
-{
-        g_return_if_fail (ARIO_IS_PLUGIN (plugin));
-        g_return_if_fail (IS_ARIO_SHELL (shell));
-
-        ARIO_PLUGIN_GET_CLASS (plugin)->update_ui (plugin, shell);
 }
 
 gboolean

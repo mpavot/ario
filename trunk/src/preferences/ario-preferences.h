@@ -45,6 +45,7 @@
 #define CONF_TITLE_COLUMN_SIZE          "/apps/ario/state/title_column_size"
 #define CONF_ARTIST_COLUMN_SIZE         "/apps/ario/state/artist_column_size"
 #define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/state/album_column_size"
+#define CONF_PLUGINS_LIST               "/apps/ario/plugins/active-plugins"
 
 enum
 {

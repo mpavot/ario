@@ -20,6 +20,8 @@
 #ifndef __ARIO_SHELL_H
 #define __ARIO_SHELL_H
 
+#include <glib-object.h>
+
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_SHELL         (ario_shell_get_type ())

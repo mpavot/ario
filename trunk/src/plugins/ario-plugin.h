@@ -66,9 +66,6 @@ struct _ArioPluginClass
         void            (*deactivate)                   (ArioPlugin *plugin,
                                                          ArioShell *shell);
 
-        void            (*update_ui)                    (ArioPlugin *plugin,
-                                                         ArioShell *shell);
-
         GtkWidget       *(*create_configure_dialog)     (ArioPlugin *plugin);
 
         /* Plugins should not override this, it's handled automatically by
@@ -90,9 +87,6 @@ GType           ario_plugin_get_type                    (void) G_GNUC_CONST;
 void            ario_plugin_activate                    (ArioPlugin *plugin,
                                                          ArioShell *shell);
 void            ario_plugin_deactivate                  (ArioPlugin *plugin,
-                                                         ArioShell *shell);
-                                 
-void            ario_plugin_update_ui                   (ArioPlugin *plugin,
                                                          ArioShell *shell);
 
 gboolean        ario_plugin_is_configurable             (ArioPlugin *plugin);

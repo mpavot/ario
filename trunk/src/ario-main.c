@@ -36,7 +36,6 @@ main (int argc, char *argv[])
         ARIO_LOG_FUNCTION_START
 
         ArioShell *shell;
-	ArioPluginsEngine *engine;
 
 #ifdef ENABLE_NLS
         setlocale (LC_ALL, "");
@@ -48,9 +47,6 @@ main (int argc, char *argv[])
         gtk_set_locale ();
         gtk_init (&argc, &argv);
 
-	/* Init plugins engine */
-	engine = ario_plugins_engine_get_default ();
-
         ario_util_init_stock_icons ();
         curl_global_init(0);
         if (!g_thread_supported ()) g_thread_init (NULL);
@@ -58,6 +54,7 @@ main (int argc, char *argv[])
         eel_gconf_monitor_add ("/apps/ario");
         shell = ario_shell_new ();
         ario_shell_construct (shell);
+	ario_plugins_engine_init (shell);
 
         gtk_main ();
 
@@ -66,7 +63,7 @@ main (int argc, char *argv[])
 
         g_object_unref (G_OBJECT (shell));
 
-	g_object_unref (engine);
+	ario_plugins_engine_shutdown ();
 
         xmlCleanupParser ();
 

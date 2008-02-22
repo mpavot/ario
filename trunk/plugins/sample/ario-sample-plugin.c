@@ -72,13 +72,6 @@ impl_deactivate (ArioPlugin *plugin,
 {
         printf ("ArioSamplePlugin deactivate\n");
 }
-                 
-static void
-impl_update_ui (ArioPlugin *plugin,
-                 ArioShell *shell)
-{
-        printf ("ArioSamplePlugin update_ui\n");
-}
 
 static void
 ario_sample_plugin_class_init (ArioSamplePluginClass *klass)
@@ -90,7 +83,6 @@ ario_sample_plugin_class_init (ArioSamplePluginClass *klass)
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-        plugin_class->update_ui = impl_update_ui;
         
         g_type_class_add_private (object_class, sizeof (ArioSamplePluginPrivate));
 }
