@@ -316,5 +316,18 @@
         </locale>
       </schema>
 
+      <schema>
+        <key>/schemas/apps/ario/state/sources-order</key>
+        <applyto>/apps/ario/state/sources-order</applyto>
+        <owner>ario</owner>
+        <type>list</type>
+        <list_type>string</list_type>
+        <default>[]</default>
+        <locale name="C">
+	<short>Sources order</short>
+	<long>Ordered list of sources.</long>
+        </locale>
+      </schema>
+
     </schemalist>
 </gconfschemafile>

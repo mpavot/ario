@@ -36,6 +36,7 @@
 static void ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass);
 static void ario_storedplaylists_init (ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_finalize (GObject *object);
+static void ario_storedplaylists_shutdown (ArioSource *source);
 static void ario_storedplaylists_set_property (GObject *object,
                                                guint prop_id,
                                                const GValue *value,
@@ -80,6 +81,7 @@ struct ArioStoredplaylistsPrivate
         GtkTreeSelection *storedplaylists_selection;
 
         GtkWidget *songs;
+        GtkWidget *paned;
 
         gboolean connected;
 
@@ -157,11 +159,29 @@ ario_storedplaylists_get_type (void)
                         (GInstanceInitFunc) ario_storedplaylists_init
                 };
 
-                type = g_type_register_static (GTK_TYPE_HPANED,
+                type = g_type_register_static (ARIO_TYPE_SOURCE,
                                                "ArioStoredplaylists",
                                                &our_info, 0);
         }
         return type;
+}
+
+static gchar *
+ario_storedplaylists_get_id (ArioSource *source)
+{
+        return "storedplaylists";
+}
+
+static gchar *
+ario_storedplaylists_get_name (ArioSource *source)
+{
+        return _("Playlists");
+}
+
+static gchar *
+ario_storedplaylists_get_icon (ArioSource *source)
+{
+        return GTK_STOCK_INDEX;
 }
 
 static void
@@ -169,6 +189,7 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -176,6 +197,11 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
 
         object_class->set_property = ario_storedplaylists_set_property;
         object_class->get_property = ario_storedplaylists_get_property;
+
+        source_class->get_id = ario_storedplaylists_get_id;
+        source_class->get_name = ario_storedplaylists_get_name;
+        source_class->get_icon = ario_storedplaylists_get_icon;
+        source_class->shutdown = ario_storedplaylists_shutdown;
 
         g_object_class_install_property (object_class,
                                          PROP_MPD,
@@ -275,19 +301,24 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                                  storedplaylists, 0);
 
         /* Hpaned properties */
-        gtk_paned_pack1 (GTK_PANED (storedplaylists), scrolledwindow_storedplaylists, FALSE, FALSE);
+        storedplaylists->priv->paned = gtk_hpaned_new ();
+        gtk_paned_pack1 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_storedplaylists, FALSE, FALSE);
 
         pos = eel_gconf_get_integer (CONF_PLAYLISTS_HPANED_SIZE, 250);
         if (pos > 0)
-                gtk_paned_set_position (GTK_PANED (storedplaylists),
+                gtk_paned_set_position (GTK_PANED (storedplaylists->priv->paned),
                                         pos);
+
+        gtk_box_pack_start (GTK_BOX (storedplaylists), storedplaylists->priv->paned, TRUE, TRUE, 0);
 }
 
 void
-ario_storedplaylists_shutdown (ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_shutdown (ArioSource *source)
 {
+        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (source);
         int pos;
-        pos = gtk_paned_get_position (GTK_PANED (storedplaylists));
+
+        pos = gtk_paned_get_position (GTK_PANED (storedplaylists->priv->paned));
         if (pos > 0)
                 eel_gconf_set_integer (CONF_PLAYLISTS_HPANED_SIZE,
                                        pos);
@@ -404,7 +435,7 @@ ario_storedplaylists_new (GtkUIManager *mgr,
                                                           playlist,
                                                           "/StoredplaylistsSongsPopup",
                                                           FALSE);
-        gtk_paned_pack2 (GTK_PANED (storedplaylists), scrolledwindow_songs, TRUE, FALSE);
+        gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_songs, TRUE, FALSE);
 
         gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), storedplaylists->priv->songs);
 

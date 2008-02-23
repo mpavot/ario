@@ -24,6 +24,7 @@
 #include <config.h>
 #include "ario-mpd.h"
 #include "widgets/ario-playlist.h"
+#include "sources/ario-source.h"
 
 #ifdef ENABLE_SEARCH
 
@@ -40,14 +41,14 @@ typedef struct ArioSearchPrivate ArioSearchPrivate;
 
 typedef struct
 {
-        GtkHBox parent;
+        ArioSource parent;
 
         ArioSearchPrivate *priv;
 } ArioSearch;
 
 typedef struct
 {
-        GtkHBoxClass parent;
+        ArioSourceClass parent;
 } ArioSearchClass;
 
 GType                   ario_search_get_type   (void);

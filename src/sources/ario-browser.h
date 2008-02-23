@@ -23,6 +23,7 @@
 #include <gtk/gtkhbox.h>
 #include "ario-mpd.h"
 #include "widgets/ario-playlist.h"
+#include "sources/ario-source.h"
 
 G_BEGIN_DECLS
 
@@ -37,14 +38,14 @@ typedef struct ArioBrowserPrivate ArioBrowserPrivate;
 
 typedef struct
 {
-        GtkHBox parent;
+        ArioSource parent;
 
         ArioBrowserPrivate *priv;
 } ArioBrowser;
 
 typedef struct
 {
-        GtkHBoxClass parent;
+        ArioSourceClass parent;
 } ArioBrowserClass;
 
 GType                   ario_browser_get_type   (void);

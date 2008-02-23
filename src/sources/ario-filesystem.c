@@ -35,6 +35,7 @@
 static void ario_filesystem_class_init (ArioFilesystemClass *klass);
 static void ario_filesystem_init (ArioFilesystem *filesystem);
 static void ario_filesystem_finalize (GObject *object);
+static void ario_filesystem_shutdown (ArioSource *source);
 static void ario_filesystem_set_property (GObject *object,
                                                guint prop_id,
                                                const GValue *value,
@@ -75,8 +76,9 @@ static void ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                              ArioFilesystem *filesystem);
 
 struct ArioFilesystemPrivate
-{        
+{
         GtkWidget *filesystem;
+        GtkWidget *paned;
         GtkTreeStore *filesystem_model;
         GtkTreeSelection *filesystem_selection;
 
@@ -158,11 +160,29 @@ ario_filesystem_get_type (void)
                         (GInstanceInitFunc) ario_filesystem_init
                 };
 
-                type = g_type_register_static (GTK_TYPE_HPANED,
+                type = g_type_register_static (ARIO_TYPE_SOURCE,
                                                "ArioFilesystem",
                                                &our_info, 0);
         }
         return type;
+}
+
+static gchar *
+ario_filesystem_get_id (ArioSource *source)
+{
+        return "filesystem";
+}
+
+static gchar *
+ario_filesystem_get_name (ArioSource *source)
+{
+        return _("File System");
+}
+
+static gchar *
+ario_filesystem_get_icon (ArioSource *source)
+{
+        return GTK_STOCK_HARDDISK;
 }
 
 static void
@@ -170,6 +190,7 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -177,6 +198,11 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
 
         object_class->set_property = ario_filesystem_set_property;
         object_class->get_property = ario_filesystem_get_property;
+
+        source_class->get_id = ario_filesystem_get_id;
+        source_class->get_name = ario_filesystem_get_name;
+        source_class->get_icon = ario_filesystem_get_icon;
+        source_class->shutdown = ario_filesystem_shutdown;
 
         g_object_class_install_property (object_class,
                                          PROP_MPD,
@@ -287,19 +313,23 @@ ario_filesystem_init (ArioFilesystem *filesystem)
                                  filesystem, 0);
 
         /* Hpaned properties */
-        gtk_paned_pack1 (GTK_PANED (filesystem), scrolledwindow_filesystem, FALSE, FALSE);
+        filesystem->priv->paned = gtk_hpaned_new ();
+        gtk_paned_pack1 (GTK_PANED (filesystem->priv->paned), scrolledwindow_filesystem, FALSE, FALSE);
 
         pos = eel_gconf_get_integer (CONF_FILSYSTEM_HPANED_SIZE, 250);
         if (pos > 0)
-                gtk_paned_set_position (GTK_PANED (filesystem),
+                gtk_paned_set_position (GTK_PANED (filesystem->priv->paned),
                                         pos);
+        gtk_box_pack_start (GTK_BOX (filesystem), filesystem->priv->paned, TRUE, TRUE, 0);
 }
 
 void
-ario_filesystem_shutdown (ArioFilesystem *filesystem)
+ario_filesystem_shutdown (ArioSource *source)
 {
+        ArioFilesystem *filesystem = ARIO_FILESYSTEM (source);
         int pos;
-        pos = gtk_paned_get_position (GTK_PANED (filesystem));
+
+        pos = gtk_paned_get_position (GTK_PANED (filesystem->priv->paned));
         if (pos > 0)
                 eel_gconf_set_integer (CONF_FILSYSTEM_HPANED_SIZE,
                                        pos);
@@ -416,7 +446,7 @@ ario_filesystem_new (GtkUIManager *mgr,
                                                           playlist,
                                                           "/FilesystemSongsPopup",
                                                           FALSE);
-        gtk_paned_pack2 (GTK_PANED (filesystem), scrolledwindow_songs, TRUE, FALSE);
+        gtk_paned_pack2 (GTK_PANED (filesystem->priv->paned), scrolledwindow_songs, TRUE, FALSE);
 
         gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), filesystem->priv->songs);
 

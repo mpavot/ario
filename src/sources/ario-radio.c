@@ -162,11 +162,29 @@ ario_radio_get_type (void)
                         (GInstanceInitFunc) ario_radio_init
                 };
 
-                type = g_type_register_static (GTK_TYPE_HBOX,
+                type = g_type_register_static (ARIO_TYPE_SOURCE,
                                                "ArioRadio",
                                                &our_info, 0);
         }
         return type;
+}
+
+static gchar *
+ario_radio_get_id (ArioSource *source)
+{
+        return "radios";
+}
+
+static gchar *
+ario_radio_get_name (ArioSource *source)
+{
+        return _("Web Radios");
+}
+
+static gchar *
+ario_radio_get_icon (ArioSource *source)
+{
+        return GTK_STOCK_NETWORK;
 }
 
 static void
@@ -174,6 +192,7 @@ ario_radio_class_init (ArioRadioClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -181,6 +200,10 @@ ario_radio_class_init (ArioRadioClass *klass)
 
         object_class->set_property = ario_radio_set_property;
         object_class->get_property = ario_radio_get_property;
+
+        source_class->get_id = ario_radio_get_id;
+        source_class->get_name = ario_radio_get_name;
+        source_class->get_icon = ario_radio_get_icon;
 
         g_object_class_install_property (object_class,
                                          PROP_MPD,
