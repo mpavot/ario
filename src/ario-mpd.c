@@ -1445,6 +1445,29 @@ ario_mpd_search (ArioMpd *mpd,
         }
         mpd_finishCommand (mpd->priv->connection);
 
+mpd_InfoEntity *entity;
+mpd_sendLsInfoCommand(mpd->priv->connection, "/");
+while ((entity = mpd_getNextInfoEntity(mpd->priv->connection)))
+{
+	if(entity->type == MPD_INFO_ENTITY_TYPE_DIRECTORY)
+	{
+		printf ("dir : %s\n", entity->info.directory->path);
+	}
+	else if (entity->type == MPD_INFO_ENTITY_TYPE_SONG)
+	{
+		printf ("dir : %s\n", entity->info.song->file);
+	}
+	else if (entity->type == MPD_INFO_ENTITY_TYPE_PLAYLISTFILE)
+	{
+		printf ("dir : %s\n", entity->info.playlistFile->path);
+	}
+
+	mpd_freeInfoEntity(entity);
+}
+
+
+
+
         return songs;
 }
 
@@ -1566,8 +1589,8 @@ ario_mpd_get_stats (ArioMpd *mpd)
 }
 
 GList *
-ario_mpd_get_songs_info(ArioMpd *mpd,
-                        GSList *paths)
+ario_mpd_get_songs_info (ArioMpd *mpd,
+                         GSList *paths)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *path = NULL;
@@ -1598,4 +1621,50 @@ ario_mpd_get_songs_info(ArioMpd *mpd,
         }
 
         return songs;
+}
+
+ArioMpdFileList *
+ario_mpd_list_files (ArioMpd *mpd,
+                     const char *path,
+                     gboolean recursive)
+{
+        ARIO_LOG_FUNCTION_START
+        mpd_InfoEntity *entity;
+        ArioMpdFileList *files = (ArioMpdFileList *) g_malloc0 (sizeof (ArioMpdFileList));
+
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return files;
+
+        if (recursive)
+                mpd_sendListallCommand (mpd->priv->connection, path);
+        else
+                mpd_sendLsInfoCommand (mpd->priv->connection, path);
+
+        while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
+	        if (entity->type == MPD_INFO_ENTITY_TYPE_DIRECTORY) {
+                        files->directories = g_slist_append (files->directories, entity->info.directory->path);
+                        entity->info.directory->path = NULL;
+	        } else if (entity->type == MPD_INFO_ENTITY_TYPE_SONG) {
+                        files->songs = g_slist_append (files->songs, entity->info.song);
+                        entity->info.song = NULL;
+                }
+
+                mpd_freeInfoEntity(entity);
+        }
+
+        return files;
+}
+
+void
+ario_mpd_free_file_list (ArioMpdFileList *files)
+{
+        ARIO_LOG_FUNCTION_START
+        if (files) {
+                g_slist_foreach(files->directories, (GFunc) g_free, NULL);
+                g_slist_free (files->directories);
+                g_slist_foreach(files->songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_free (files->songs);
+                g_free (files);
+        }
 }

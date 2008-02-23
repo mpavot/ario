@@ -25,6 +25,18 @@
       </schema>
 
       <schema>
+        <key>/schemas/apps/ario/state/filesystem_hpaned_position</key>
+        <applyto>/apps/ario/state/filesystem_hpaned_position</applyto>
+        <owner>ario</owner>
+        <type>int</type>
+        <default>250</default>
+        <locale name="C">
+        <short>Position of filesystem pane</short>
+        <long>Position of filesystem pane</long>
+        </locale>
+      </schema>
+
+      <schema>
         <key>/schemas/apps/ario/state/statusbar_hidden</key>
         <applyto>/apps/ario/state/statusbar_hidden</applyto>
         <owner>ario</owner>
