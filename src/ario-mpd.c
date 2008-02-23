@@ -1445,29 +1445,6 @@ ario_mpd_search (ArioMpd *mpd,
         }
         mpd_finishCommand (mpd->priv->connection);
 
-mpd_InfoEntity *entity;
-mpd_sendLsInfoCommand(mpd->priv->connection, "/");
-while ((entity = mpd_getNextInfoEntity(mpd->priv->connection)))
-{
-	if(entity->type == MPD_INFO_ENTITY_TYPE_DIRECTORY)
-	{
-		printf ("dir : %s\n", entity->info.directory->path);
-	}
-	else if (entity->type == MPD_INFO_ENTITY_TYPE_SONG)
-	{
-		printf ("dir : %s\n", entity->info.song->file);
-	}
-	else if (entity->type == MPD_INFO_ENTITY_TYPE_PLAYLISTFILE)
-	{
-		printf ("dir : %s\n", entity->info.playlistFile->path);
-	}
-
-	mpd_freeInfoEntity(entity);
-}
-
-
-
-
         return songs;
 }
 

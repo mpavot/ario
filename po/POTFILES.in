@@ -103,3 +103,8 @@ src/widgets/ario-volume.h
 plugins/wikipedia/ario-wikipedia-plugin.c
 plugins/wikipedia/ario-wikipedia-plugin.h
 plugins/wikipedia/wikipedia.ario-plugin.desktop.in
+plugins/filesystem/ario-filesystem.c
+plugins/filesystem/ario-filesystem.h
+plugins/filesystem/ario-filesystem-plugin.c
+plugins/filesystem/ario-filesystem-plugin.h
+plugins/filesystem/filesystem.ario-plugin.desktop.in

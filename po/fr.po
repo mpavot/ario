@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:46+0100\n"
+"POT-Creation-Date: 2008-02-23 23:56+0100\n"
 "PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -119,9 +119,8 @@ msgid "Port to connect to"
 msgstr "Port"
 
 #: ../data/ario.schemas.in.h:25
-#, fuzzy
 msgid "Position of filesystem pane"
-msgstr "Position du panneau de la playlist"
+msgstr "Position du panneau du système de fichiers"
 
 #: ../data/ario.schemas.in.h:26
 msgid "Position of main window pane"
@@ -481,21 +480,20 @@ msgid "_About"
 msgstr "_À propos"
 
 #: ../src/plugins/ario-plugin-manager.c:481
-#, fuzzy
 msgid "C_onfigure"
-msgstr "Configuration"
+msgstr "C_onfigurer"
 
 #: ../src/plugins/ario-plugin-manager.c:490
 msgid "A_ctivate"
-msgstr ""
+msgstr "A_ctiver"
 
 #: ../src/plugins/ario-plugin-manager.c:501
 msgid "Ac_tivate All"
-msgstr ""
+msgstr "Tout Ac_tiver"
 
 #: ../src/plugins/ario-plugin-manager.c:506
 msgid "_Deactivate All"
-msgstr ""
+msgstr "Tout _Désactiver"
 
 #: ../src/preferences/ario-connection-preferences.c:290
 msgid "Profile"
@@ -573,6 +571,8 @@ msgstr "En cours de mise à jour..."
 #: ../src/sources/ario-browser.c:135 ../src/sources/ario-radio.c:108
 #: ../src/sources/ario-search.c:100 ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
+#: ../plugins/filesystem/ario-filesystem.c:103
+#: ../plugins/filesystem/ario-filesystem.c:111
 msgid "_Add to playlist"
 msgstr "_Ajouter à la playlist"
 
@@ -580,6 +580,7 @@ msgstr "_Ajouter à la playlist"
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
+#: ../plugins/filesystem/ario-filesystem.c:114
 msgid "_Properties"
 msgstr "Propriétés"
 
@@ -757,10 +758,6 @@ msgstr "_Quitter"
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:151
-msgid "Change and configure plugins"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:153
 msgid "Prefere_nces"
 msgstr "Préfére_nces"
@@ -785,10 +782,6 @@ msgstr "_Traduire cette application..."
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:177
-msgid "Change the visibility of the statusbar"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:605
 msgid "GTK client for MPD"
 msgstr "Client GTK pour MPD"
@@ -798,9 +791,8 @@ msgid "translator-credits"
 msgstr "Marc Pavot <marc.pavot@gmail.com>"
 
 #: ../src/shell/ario-shell.c:849
-#, fuzzy
 msgid "Configure Plugins"
-msgstr "Configuration"
+msgstr "Configure les plugins"
 
 #: ../src/shell/ario-shell-coverdownloader.c:259
 msgid "Music Player Cover Download"
@@ -936,9 +928,8 @@ msgid "_Save"
 msgstr "_Sauver"
 
 #: ../src/widgets/ario-playlist.c:129
-#, fuzzy
 msgid "_Go to playing song"
-msgstr "Ne joue pas"
+msgstr "_Aller à la chanson jouée"
 
 #: ../src/widgets/ario-playlist.c:309
 msgid "Duration"
@@ -996,6 +987,18 @@ msgstr ""
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
+msgstr ""
+
+#: ../plugins/filesystem/ario-filesystem.c:180
+msgid "File System"
+msgstr ""
+
+#: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
+msgid "A File System Browser"
+msgstr ""
+
+#: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
+msgid "File System Browser"
 msgstr ""
 
 #~ msgid "_Library"
