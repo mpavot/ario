@@ -60,7 +60,7 @@ void            ario_playlist_append_songs      (ArioPlaylist *playlist, GSList 
 
 void            ario_playlist_append_mpd_songs  (ArioPlaylist *playlist, GSList *songs);
 
-void            ario_playlist_append_radio      (ArioPlaylist *playlist, GSList *songs);
+void            ario_playlist_append_dir        (ArioPlaylist *playlist, gchar *dir);
 
 void            ario_playlist_cmd_save          (GtkAction *action,
                                                  ArioPlaylist *playlist);

@@ -40,6 +40,7 @@
 #define CONF_STATUSBAR_HIDDEN           "/apps/ario/state/statusbar_hidden"
 #define CONF_VPANED_POSITION            "/apps/ario/state/vpaned_position"
 #define CONF_PLAYLISTS_HPANED_SIZE      "/apps/ario/state/playlists_hpaned_position"
+#define CONF_FILSYSTEM_HPANED_SIZE      "/apps/ario/state/filesystem_hpaned_position"
 #define CONF_SOURCE                     "/apps/ario/state/source"
 #define CONF_TRACK_COLUMN_SIZE          "/apps/ario/state/track_column_size"
 #define CONF_TITLE_COLUMN_SIZE          "/apps/ario/state/title_column_size"

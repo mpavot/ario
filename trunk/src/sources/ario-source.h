@@ -45,6 +45,9 @@ typedef struct
 typedef struct
 {
         GtkNotebookClass parent;
+
+        void (*source_changed)            (ArioSource *source);
+
 } ArioSourceClass;
 
 typedef enum
@@ -52,7 +55,8 @@ typedef enum
         ARIO_SOURCE_BROWSER,
         ARIO_SOURCE_RADIO,
         ARIO_SOURCE_SEARCH,
-        ARIO_SOURCE_PLAYLISTS
+        ARIO_SOURCE_PLAYLISTS,
+        ARIO_SOURCE_FILESYSTEM
 }ArioSourceType;
 
 GType                   ario_source_get_type   (void);
@@ -61,6 +65,11 @@ GtkWidget*              ario_source_new        (GtkUIManager *mgr,
                                                 GtkActionGroup *group,
                                                 ArioMpd *mpd,
                                                 ArioPlaylist *playlist);
+
+void                    ario_source_set_page   (ArioSource *source,
+                                                gint page);
+
+gint                    ario_source_get_page   (ArioSource *source);
 
 void                    ario_source_shutdown   (ArioSource *source);
 

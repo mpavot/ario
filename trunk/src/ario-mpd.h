@@ -49,6 +49,12 @@ typedef struct ArioMpdAlbum
         gchar *album;
 } ArioMpdAlbum;
 
+typedef struct ArioMpdFileList
+{
+        GSList *directories;
+        GSList *songs;
+} ArioMpdFileList;
+
 typedef struct ArioMpdSearchCriteria
 {
         gint type;
@@ -214,6 +220,10 @@ ArioMpdStats *          ario_mpd_get_stats                              (ArioMpd
 GList *                 ario_mpd_get_songs_info                         (ArioMpd *mpd,
                                                                          GSList *paths);
 
+ArioMpdFileList*        ario_mpd_list_files                             (ArioMpd *mpd,
+                                                                         const char *path,
+                                                                         gboolean recursive);
+void                    ario_mpd_free_file_list                         (ArioMpdFileList *files);
 G_END_DECLS
 
 #endif /* __ARIO_MPD_H */

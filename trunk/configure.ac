@@ -81,7 +81,6 @@ Makefile
 src/Makefile
 data/Makefile
 plugins/Makefile
-plugins/sample/Makefile
 plugins/wikipedia/Makefile
 po/Makefile.in
 data/ario.desktop.in

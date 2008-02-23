@@ -23,6 +23,7 @@
                         <menuitem name="RadioViewMenu" action="RadioView"/>
                         <menuitem name="SearchViewMenu" action="SearchView"/>
                         <menuitem name="StoredplaylistsMenu" action="StoredplaylistsView"/>
+                        <menuitem name="FilesystemMenu" action="FilesystemView"/>
                         <separator/>
                         <menuitem name="LyricsMenu" action="Lyrics"/> 
                 </menu>
@@ -119,5 +120,14 @@
         <popup name="StoredplaylistsSongsPopup">
                 <menuitem name="StoredplaylistsAddSongs" action="StoredplaylistsAddSongs"/>
                 <menuitem name="StoredplaylistsSongsProperties" action="StoredplaylistsSongsProperties"/>
+        </popup>
+
+        <popup name="FilesystemPopup">
+                <menuitem name="FilesystemAddDir" action="FilesystemAddDir"/>
+        </popup>
+
+        <popup name="FilesystemSongsPopup">
+                <menuitem name="FilesystemAddSongs" action="FilesystemAddSongs"/>
+                <menuitem name="FilesystemSongsProperties" action="FilesystemSongsProperties"/>
         </popup>
 </ui>

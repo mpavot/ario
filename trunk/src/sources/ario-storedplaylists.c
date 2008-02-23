@@ -20,7 +20,6 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
-#include <libxml/parser.h>
 #include <glib/gi18n.h>
 #include "lib/eel-gconf-extensions.h"
 #include "sources/ario-storedplaylists.h"
@@ -236,7 +235,6 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         gtk_tree_view_column_set_fixed_width (column, 50);
         gtk_tree_view_append_column (GTK_TREE_VIEW (storedplaylists->priv->storedplaylists), column);
         storedplaylists->priv->storedplaylists_model = gtk_list_store_new (PLAYLISTS_N_COLUMN,
-                                                                           G_TYPE_STRING,
                                                                            G_TYPE_STRING);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (storedplaylists->priv->storedplaylists_model),
                                               0, GTK_SORT_ASCENDING);

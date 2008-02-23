@@ -84,9 +84,7 @@ static void ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                              ArioShell *shell);
 static void ario_shell_mpd_song_changed_cb (ArioMpd *mpd,
                                             ArioShell *shell);
-static void ario_shell_source_changed_cb (GConfClient *client,
-                                          guint cnxn_id,
-                                          GConfEntry *entry,
+static void ario_shell_source_changed_cb (ArioSource *source,
                                           ArioShell *shell);
 static void ario_shell_window_show_cb (GtkWidget *widget,
                                        ArioShell *shell);
@@ -157,7 +155,7 @@ static GtkActionEntry ario_shell_actions [] =
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
-	{ "EditPlugins", NULL, N_("Plu_gins"), NULL,
+	{ "EditPlugins", GTK_STOCK_EXECUTE, N_("Plu_gins"), NULL,
 	  N_("Change and configure plugins"),
 	  G_CALLBACK (ario_shell_cmd_plugins) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
@@ -206,6 +204,10 @@ static GtkRadioActionEntry ario_shell_radio [] =
                         NULL,
                         ARIO_SOURCE_PLAYLISTS }
 #endif  /* ENABLE_STOREDPLAYLISTS */
+        ,
+                { "FilesystemView", NULL, N_("_File System"), NULL,
+                        NULL,
+                        ARIO_SOURCE_FILESYSTEM }
 };
 static guint ario_shell_n_radio = G_N_ELEMENTS (ario_shell_radio);
 #endif  /* MULTIPLE_VIEW */
@@ -562,9 +564,9 @@ ario_shell_show (ArioShell *shell)
         ario_shell_sync_source (shell);
         ario_shell_sync_mpd (shell);
 
-        eel_gconf_notification_add (CONF_SOURCE,
-                                    (GConfClientNotifyFunc) ario_shell_source_changed_cb,
-                                    shell);
+        g_signal_connect_object (G_OBJECT (shell->priv->source),
+                                 "source_changed", G_CALLBACK (ario_shell_source_changed_cb),
+                                 shell, 0);
 
         g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
@@ -638,8 +640,16 @@ ario_shell_cmd_radio_view (GtkRadioAction *action,
                            GtkRadioAction *current,
                            ArioShell *shell)
 {
-        eel_gconf_set_integer (CONF_SOURCE,
-                               gtk_radio_action_get_current_value(current));
+        g_signal_handlers_block_by_func (G_OBJECT (shell->priv->source),
+                                         G_CALLBACK (ario_shell_source_changed_cb),
+                                         shell);
+
+        ario_source_set_page (ARIO_SOURCE (shell->priv->source),
+                              gtk_radio_action_get_current_value (current));
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (shell->priv->source),
+                                           G_CALLBACK (ario_shell_source_changed_cb),
+                                           shell);
 }
 #endif  /* MULTIPLE_VIEW */
 static void
@@ -780,32 +790,17 @@ ario_shell_sync_source (ArioShell *shell)
 {
 #ifdef MULTIPLE_VIEW
         ARIO_LOG_FUNCTION_START
-        ArioSourceType source_type;
         GtkAction *action;
 
-        source_type = eel_gconf_get_integer (CONF_SOURCE, 0);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "LibraryView");
-        if (source_type == ARIO_SOURCE_RADIO) {
-                gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
-                                                    ARIO_SOURCE_RADIO);
-        } else if (source_type == ARIO_SOURCE_SEARCH) {
-                gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
-                                                    ARIO_SOURCE_SEARCH);
-        } else if (source_type == ARIO_SOURCE_PLAYLISTS) {
-                gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
-                                                    ARIO_SOURCE_PLAYLISTS);
-        } else {
-                gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
-                                                    ARIO_SOURCE_BROWSER);
-        }
+        gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
+                                            ario_source_get_page (ARIO_SOURCE (shell->priv->source)));
 #endif  /* MULTIPLE_VIEW */
 }
 
 static void
-ario_shell_source_changed_cb (GConfClient *client,
-                              guint cnxn_id,
-                              GConfEntry *entry,
+ario_shell_source_changed_cb (ArioSource *source,
                               ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START

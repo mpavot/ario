@@ -990,6 +990,27 @@ ario_playlist_append_artists (ArioPlaylist *playlist,
         ario_playlist_add_artists (playlist, artists, -1, -1);
 }
 
+void
+ario_playlist_append_dir (ArioPlaylist *playlist,
+                          gchar *dir)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *tmp;
+        ArioMpdFileList *files;
+        ArioMpdSong *song;
+        GSList *char_songs = NULL;
+
+        files = ario_mpd_list_files (playlist->priv->mpd, dir, TRUE);
+        for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
+                song = tmp->data;
+                char_songs = g_slist_append (char_songs, song->file);
+        }
+
+        ario_playlist_add_songs (playlist, char_songs, -1, -1);
+        g_slist_free (char_songs);
+	ario_mpd_free_file_list (files);
+}
+
 static void
 ario_playlist_drag_leave_cb (GtkWidget *widget,
                              GdkDragContext *context,
