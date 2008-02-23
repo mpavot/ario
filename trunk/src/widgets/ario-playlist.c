@@ -160,6 +160,7 @@ static const GtkTargetEntry targets  [] = {
         { "text/albums-list", 0, 30 },
         { "text/songs-list", 0, 40 },
         { "text/radios-list", 0, 40 },
+        { "text/directory", 0, 50 },
 };
 
 static const GtkTargetEntry internal_targets  [] = {
@@ -845,6 +846,27 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
 }
 
 static void
+ario_playlist_add_dir (ArioPlaylist *playlist,
+                       const gchar *dir,
+                       gint x, gint y)
+{
+        GSList *tmp;
+        ArioMpdFileList *files;
+        ArioMpdSong *song;
+        GSList *char_songs = NULL;
+
+        files = ario_mpd_list_files (playlist->priv->mpd, dir, TRUE);
+        for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
+                song = tmp->data;
+                char_songs = g_slist_append (char_songs, song->file);
+        }
+
+        ario_playlist_add_songs (playlist, char_songs, x, y);
+        g_slist_free (char_songs);
+	ario_mpd_free_file_list (files);
+}
+
+static void
 ario_playlist_drop_radios (ArioPlaylist *playlist,
                            int x, int y,
                            GtkSelectionData *data)
@@ -947,6 +969,19 @@ ario_playlist_drop_artists (ArioPlaylist *playlist,
         g_slist_free (artists_list);
 }
 
+static void
+ario_playlist_drop_dir (ArioPlaylist *playlist,
+                        int x, int y,
+                        GtkSelectionData *data)
+{
+        ARIO_LOG_FUNCTION_START
+        const gchar *dir = (const gchar *) data->data;
+
+        ario_playlist_add_dir (playlist,
+                               dir,
+                               x, y);
+}
+
 void
 ario_playlist_append_songs (ArioPlaylist *playlist,
                             GSList *songs)
@@ -995,20 +1030,7 @@ ario_playlist_append_dir (ArioPlaylist *playlist,
                           gchar *dir)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *tmp;
-        ArioMpdFileList *files;
-        ArioMpdSong *song;
-        GSList *char_songs = NULL;
-
-        files = ario_mpd_list_files (playlist->priv->mpd, dir, TRUE);
-        for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
-                song = tmp->data;
-                char_songs = g_slist_append (char_songs, song->file);
-        }
-
-        ario_playlist_add_songs (playlist, char_songs, -1, -1);
-        g_slist_free (char_songs);
-	ario_mpd_free_file_list (files);
+        ario_playlist_add_dir (playlist, dir, -1, -1);
 }
 
 static void
@@ -1035,6 +1057,8 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
                 ario_playlist_drop_songs (playlist, x, y, data);
         else if (data->type == gdk_atom_intern ("text/radios-list", TRUE))
                 ario_playlist_drop_radios (playlist, x, y, data);
+        else if (data->type == gdk_atom_intern ("text/directory", TRUE))
+                ario_playlist_drop_dir (playlist, x, y, data);
 
         /* finish the drag */
         gtk_drag_finish (context, TRUE, FALSE, time);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:46+0100\n"
+"POT-Creation-Date: 2008-02-23 23:56+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -574,6 +574,8 @@ msgstr "Обновление..."
 #: ../src/sources/ario-browser.c:135 ../src/sources/ario-radio.c:108
 #: ../src/sources/ario-search.c:100 ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
+#: ../plugins/filesystem/ario-filesystem.c:103
+#: ../plugins/filesystem/ario-filesystem.c:111
 msgid "_Add to playlist"
 msgstr "_Добавить в плейлист"
 
@@ -581,6 +583,7 @@ msgstr "_Добавить в плейлист"
 #: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
+#: ../plugins/filesystem/ario-filesystem.c:114
 msgid "_Properties"
 msgstr "_Свойства"
 
@@ -755,10 +758,6 @@ msgstr "_Выход"
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:151
-msgid "Change and configure plugins"
-msgstr ""
-
 #: ../src/shell/ario-shell.c:153
 msgid "Prefere_nces"
 msgstr "_Параметры"
@@ -781,10 +780,6 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:176
 msgid "S_tatusbar"
-msgstr ""
-
-#: ../src/shell/ario-shell.c:177
-msgid "Change the visibility of the statusbar"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:605
@@ -995,6 +990,18 @@ msgstr ""
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
+msgstr ""
+
+#: ../plugins/filesystem/ario-filesystem.c:180
+msgid "File System"
+msgstr ""
+
+#: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
+msgid "A File System Browser"
+msgstr ""
+
+#: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
+msgid "File System Browser"
 msgstr ""
 
 #~ msgid "_Library"

@@ -148,8 +148,8 @@ static GtkActionEntry ario_shell_actions [] =
                 NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
 	{ "EditPlugins", GTK_STOCK_EXECUTE, N_("Plu_gins"), NULL,
-	  N_("Change and configure plugins"),
-	  G_CALLBACK (ario_shell_cmd_plugins) },
+	        NULL,
+	        G_CALLBACK (ario_shell_cmd_plugins) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_preferences) },
@@ -174,7 +174,7 @@ static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 static GtkToggleActionEntry ario_shell_toggle [] =
 {
         { "ViewStatusbar", NULL, N_("S_tatusbar"), NULL,
-	  N_("Change the visibility of the statusbar"),
+	  NULL,
 	  G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE }
 };
 static guint ario_shell_n_toggle = G_N_ELEMENTS (ario_shell_toggle);

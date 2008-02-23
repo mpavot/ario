@@ -135,8 +135,8 @@ enum
         PLAYLISTS_N_COLUMN
 };
 
-static const GtkTargetEntry songs_targets  [] = {
-        { "text/songs-list", 0, 0 },
+static const GtkTargetEntry dirs_targets  [] = {
+        { "text/directory", 0, 0 },
 };
 
 static GObjectClass *parent_class = NULL;
@@ -282,8 +282,8 @@ ario_filesystem_init (ArioFilesystem *filesystem)
 
         gtk_drag_source_set (filesystem->priv->filesystem,
                              GDK_BUTTON1_MASK,
-                             songs_targets,
-                             G_N_ELEMENTS (songs_targets),
+                             dirs_targets,
+                             G_N_ELEMENTS (dirs_targets),
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (filesystem->priv->filesystem),
@@ -596,9 +596,7 @@ static void
 ario_filesystem_add_playlists (ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *dir;
-
-	GtkTreeIter iter;
+        gchar *dir;	GtkTreeIter iter;
         GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
 
         if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
@@ -608,6 +606,7 @@ ario_filesystem_add_playlists (ArioFilesystem *filesystem)
 
         gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter,
                             PLAYLISTS_DIR_COLUMN, &dir, -1);
+
         g_return_if_fail (dir);
 
         ario_playlist_append_dir (filesystem->priv->playlist, dir);
@@ -740,21 +739,6 @@ ario_filesystem_motion_notify (GtkWidget *widget,
 }
 
 static void
-ario_filesystem_playlists_selection_drag_foreach (GtkTreeModel *model,
-                                                       GtkTreePath *path,
-                                                       GtkTreeIter *iter,
-                                                       gpointer userdata)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList **playlists = (GSList **) userdata;
-        gchar *val = NULL;
-
-        gtk_tree_model_get (model, iter, PLAYLISTS_DIR_COLUMN, &val, -1);
-
-        *playlists = g_slist_append (*playlists, val);
-}
-
-static void
 ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
                                                  GdkDragContext * context,
                                                  GtkSelectionData * selection_data,
@@ -763,10 +747,9 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;
         ArioMpdSong *song;
-        GSList *playlists = NULL;
-        GSList *songs;
-        GSList *tmp, *tmp2;
-        GString *str_playlists;
+	GtkTreeIter iter;
+        GtkTreeModel *model;
+        const guchar* dir;
 
         filesystem = ARIO_FILESYSTEM (data);
 
@@ -774,30 +757,16 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (widget != NULL);
         g_return_if_fail (selection_data != NULL);
 
+        model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
 
-        gtk_tree_selection_selected_foreach (filesystem->priv->filesystem_selection,
-                                             ario_filesystem_playlists_selection_drag_foreach,
-                                             &playlists);
+        if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
+                                              &model,
+                                              &iter))
+                return;
 
-        str_playlists = g_string_new("");
-        for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
-                songs = ario_mpd_get_songs_from_playlist (filesystem->priv->mpd, tmp->data);
+        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter,
+                            PLAYLISTS_DIR_COLUMN, &dir, -1);
 
-                for (tmp2 = songs; tmp2; tmp2 = g_slist_next (tmp2)) {
-                        song = tmp2->data;
-                        g_string_append (str_playlists, song->file);
-                        g_string_append (str_playlists, "\n");
-                }
-
-                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
-                g_slist_free (songs);
-        }
-
-        g_slist_foreach (playlists, (GFunc) g_free, NULL);
-        g_slist_free (playlists);
-
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) str_playlists->str,
-                                strlen (str_playlists->str) * sizeof(guchar));
-
-        g_string_free (str_playlists, TRUE);
+        gtk_selection_data_set (selection_data, selection_data->target, 8, dir,
+                                strlen (dir) * sizeof(guchar));
 }
