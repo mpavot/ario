@@ -67,6 +67,9 @@ GtkWidget*              ario_sourcemanager_new          (GtkUIManager *mgr,
 
 void                    ario_sourcemanager_append       (ArioSourceManager *sourcemanager,
                                                          ArioSource *source);
+void                    ario_sourcemanager_remove       (ArioSourceManager *sourcemanager,
+                                                         ArioSource *source);
+void                    ario_sourcemanager_reorder      (ArioSourceManager *sourcemanager);
 void                    ario_sourcemanager_shutdown     (ArioSourceManager *sourcemanager);
 
 G_END_DECLS

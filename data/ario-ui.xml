@@ -131,14 +131,4 @@
                 <menuitem name="StoredplaylistsSongsProperties" action="StoredplaylistsSongsProperties"/>
         </popup>
 
-        <popup name="FilesystemPopup">
-                <menuitem name="FilesystemAddDir" action="FilesystemAddDir"/>
-                <placeholder name="FilesystemPopupPluginPlaceholder" />
-        </popup>
-
-        <popup name="FilesystemSongsPopup">
-                <menuitem name="FilesystemAddSongs" action="FilesystemAddSongs"/>
-                <placeholder name="FilesystemSongsPopupPluginPlaceholder" />
-                <menuitem name="FilesystemSongsProperties" action="FilesystemSongsProperties"/>
-        </popup>
 </ui>

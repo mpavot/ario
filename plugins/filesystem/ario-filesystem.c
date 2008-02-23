@@ -23,7 +23,7 @@
 #include <libxml/parser.h>
 #include <glib/gi18n.h>
 #include "lib/eel-gconf-extensions.h"
-#include "sources/ario-filesystem.h"
+#include "ario-filesystem.h"
 #include "widgets/ario-songlist.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
@@ -74,6 +74,7 @@ static void ario_filesystem_playlists_row_activated_cb (GtkTreeView *tree_view,
                                                         ArioFilesystem *filesystem);
 static void ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                              ArioFilesystem *filesystem);
+static void ario_filesystem_fill_filesystem (ArioFilesystem *filesystem);
 
 struct ArioFilesystemPrivate
 {
@@ -343,7 +344,6 @@ ario_filesystem_finalize (GObject *object)
 
         g_return_if_fail (object != NULL);
         g_return_if_fail (IS_ARIO_FILESYSTEM (object));
-
         filesystem = ARIO_FILESYSTEM (object);
 
         g_return_if_fail (filesystem->priv != NULL);
@@ -426,6 +426,7 @@ ario_filesystem_new (GtkUIManager *mgr,
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;
         GtkWidget *scrolledwindow_songs;
+        static gboolean is_loaded = FALSE;
         
         filesystem = g_object_new (TYPE_ARIO_FILESYSTEM,
                                         "ui-manager", mgr,
@@ -450,12 +451,17 @@ ario_filesystem_new (GtkUIManager *mgr,
 
         gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), filesystem->priv->songs);
 
-        gtk_action_group_add_actions (filesystem->priv->actiongroup,
-                                      ario_filesystem_actions,
-                                      ario_filesystem_n_actions, filesystem);
-        gtk_action_group_add_actions (filesystem->priv->actiongroup,
-                                      ario_filesystem_songs_actions,
-                                      ario_filesystem_n_songs_actions, filesystem->priv->songs);
+       if (!is_loaded) {
+                gtk_action_group_add_actions (filesystem->priv->actiongroup,
+                                              ario_filesystem_actions,
+                                              ario_filesystem_n_actions, filesystem);
+                gtk_action_group_add_actions (filesystem->priv->actiongroup,
+                                              ario_filesystem_songs_actions,
+                                              ario_filesystem_n_songs_actions, filesystem->priv->songs);
+                is_loaded = TRUE;
+        }
+
+        ario_filesystem_fill_filesystem (filesystem);
 
         return GTK_WIDGET (filesystem);
 }
@@ -677,7 +683,7 @@ ario_filesystem_button_press_cb (GtkWidget *widget,
                         }
                         ario_filesystem_popup_menu (filesystem);
                         gtk_tree_path_free (path);
-                        return TRUE;
+                        return FALSE;
                 }
         }
 
