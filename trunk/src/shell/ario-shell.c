@@ -873,3 +873,15 @@ ario_shell_cmd_plugins (GtkAction *action,
 
 	gtk_window_present (GTK_WINDOW (shell->priv->plugins));
 }
+
+GtkWidget *
+ario_shell_get_playlist (ArioShell *shell)
+{
+        return shell->priv->playlist;
+}
+
+GtkWidget *
+ario_shell_get_sourcemanager (ArioShell *shell)
+{
+        return shell->priv->sourcemanager;
+}

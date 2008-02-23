@@ -22,8 +22,6 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <shell/ario-shell.h>
-#include <ario-debug.h>
 
 G_BEGIN_DECLS
 

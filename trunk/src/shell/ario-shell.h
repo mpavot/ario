@@ -21,6 +21,7 @@
 #define __ARIO_SHELL_H
 
 #include <glib-object.h>
+#include <gtk/gtkwidget.h>
 
 G_BEGIN_DECLS
 
@@ -45,13 +46,17 @@ typedef struct
         GObjectClass parent_class;
 } ArioShellClass;
 
-GType           ario_shell_get_type     (void);
+GType           ario_shell_get_type             (void);
 
-ArioShell *     ario_shell_new          (void);
+ArioShell *     ario_shell_new                  (void);
 
-void            ario_shell_construct    (ArioShell *shell);
+void            ario_shell_construct            (ArioShell *shell);
 
-void            ario_shell_shutdown     (ArioShell *shell);
+void            ario_shell_shutdown             (ArioShell *shell);
+
+GtkWidget *     ario_shell_get_playlist         (ArioShell *shell);
+
+GtkWidget *     ario_shell_get_sourcemanager    (ArioShell *shell);
 
 G_END_DECLS
 
