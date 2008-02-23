@@ -24,6 +24,7 @@
 #include <config.h>
 #include "ario-mpd.h"
 #include "widgets/ario-playlist.h"
+#include "sources/ario-source.h"
 
 #ifdef ENABLE_RADIOS
 
@@ -40,14 +41,14 @@ typedef struct ArioRadioPrivate ArioRadioPrivate;
 
 typedef struct
 {
-        GtkHBox parent;
+        ArioSource parent;
 
         ArioRadioPrivate *priv;
 } ArioRadio;
 
 typedef struct
 {
-        GtkHBoxClass parent;
+        ArioSourceClass parent;
 } ArioRadioClass;
 
 GType                   ario_radio_get_type   (void);

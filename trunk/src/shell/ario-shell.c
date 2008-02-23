@@ -24,7 +24,7 @@
 #include "lib/eel-gconf-extensions.h"
 #include <glib/gi18n.h>
 #include "shell/ario-shell.h"
-#include "sources/ario-source.h"
+#include "sources/ario-source-manager.h"
 #include "ario-mpd.h"
 #include "ario-cover-handler.h"
 #include "widgets/ario-playlist.h"
@@ -67,11 +67,6 @@ static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 static void ario_shell_cmd_lyrics (GtkAction *action,
                                    ArioShell *shell);
-#ifdef MULTIPLE_VIEW
-static void ario_shell_cmd_radio_view (GtkRadioAction *action,
-                                       GtkRadioAction *current,
-                                       ArioShell *shell);
-#endif  /* MULTIPLE_VIEW */
 static void ario_shell_cmd_cover_select (GtkAction *action,
                                          ArioShell *shell);
 static void ario_shell_cmd_covers (GtkAction *action,
@@ -84,8 +79,6 @@ static void ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                              ArioShell *shell);
 static void ario_shell_mpd_song_changed_cb (ArioMpd *mpd,
                                             ArioShell *shell);
-static void ario_shell_source_changed_cb (ArioSource *source,
-                                          ArioShell *shell);
 static void ario_shell_window_show_cb (GtkWidget *widget,
                                        ArioShell *shell);
 static void ario_shell_window_hide_cb (GtkWidget *widget,
@@ -95,7 +88,6 @@ static gboolean ario_shell_window_state_cb (GtkWidget *widget,
                                             ArioShell *shell);
 static void ario_shell_sync_window_state (ArioShell *shell);
 static void ario_shell_sync_paned (ArioShell *shell);
-static void ario_shell_sync_source (ArioShell *shell);
 static void ario_shell_sync_mpd (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                               ArioShell *shell);
@@ -111,7 +103,7 @@ struct ArioShellPrivate
         ArioCoverHandler *cover_handler;
         GtkWidget *header;
         GtkWidget *vpaned;
-        GtkWidget *source;
+        GtkWidget *sourcemanager;
         GtkWidget *playlist;
         GtkWidget *status_bar;
 
@@ -178,39 +170,6 @@ static GtkActionEntry ario_shell_actions [] =
                 G_CALLBACK (ario_shell_cmd_translate) },
 };
 static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
-
-#ifdef MULTIPLE_VIEW
-static GtkRadioActionEntry ario_shell_radio [] =
-{
-        { "LibraryView", NULL, N_("_Library"), NULL,
-                NULL,
-                ARIO_SOURCE_BROWSER }
-#ifdef ENABLE_RADIOS
-        ,
-                { "RadioView", NULL, N_("_Web Radios"), NULL,
-                        NULL,
-                        ARIO_SOURCE_RADIO }
-#endif  /* ENABLE_RADIOS */
-#ifdef ENABLE_SEARCH
-        ,
-                /* Translators - This "Search" is a name (like in "a search"), not a verb */
-                { "SearchView", NULL, N_("_Search"), NULL,
-                        NULL,
-                        ARIO_SOURCE_SEARCH }
-#endif  /* ENABLE_SEARCH */
-#ifdef ENABLE_STOREDPLAYLISTS
-        ,
-                { "StoredplaylistsView", NULL, N_("_Playlists"), NULL,
-                        NULL,
-                        ARIO_SOURCE_PLAYLISTS }
-#endif  /* ENABLE_STOREDPLAYLISTS */
-        ,
-                { "FilesystemView", NULL, N_("_File System"), NULL,
-                        NULL,
-                        ARIO_SOURCE_FILESYSTEM }
-};
-static guint ario_shell_n_radio = G_N_ELEMENTS (ario_shell_radio);
-#endif  /* MULTIPLE_VIEW */
 
 static GtkToggleActionEntry ario_shell_toggle [] =
 {
@@ -426,18 +385,12 @@ ario_shell_construct (ArioShell *shell)
                                                shell->priv->cover_handler);
         separator = gtk_hseparator_new ();
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
-        shell->priv->source = ario_source_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
+        shell->priv->sourcemanager = ario_sourcemanager_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
 
         gtk_action_group_add_actions (shell->priv->actiongroup,
                                       ario_shell_actions,
                                       ario_shell_n_actions, shell);
-#ifdef MULTIPLE_VIEW
-        gtk_action_group_add_radio_actions (shell->priv->actiongroup,
-                                            ario_shell_radio,
-                                            ario_shell_n_radio,
-                                            0, G_CALLBACK (ario_shell_cmd_radio_view),
-                                            shell);
-#endif  /* MULTIPLE_VIEW */
+
 	gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
 					     ario_shell_toggle,
 					     ario_shell_n_toggle,
@@ -467,7 +420,7 @@ ario_shell_construct (ArioShell *shell)
                                       !shell->priv->statusbar_hidden);
 
         gtk_paned_pack1 (GTK_PANED (shell->priv->vpaned),
-                         shell->priv->source,
+                         shell->priv->sourcemanager,
                          FALSE, FALSE);
 
         gtk_paned_pack2 (GTK_PANED (shell->priv->vpaned),
@@ -539,7 +492,7 @@ ario_shell_shutdown (ArioShell *shell)
                 }
 
                 ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
-                ario_source_shutdown (ARIO_SOURCE (shell->priv->source));
+                ario_sourcemanager_shutdown (ARIO_SOURCEMANAGER (shell->priv->sourcemanager));
         }
 }
 
@@ -561,12 +514,7 @@ ario_shell_show (ArioShell *shell)
 
         gtk_widget_show_all (GTK_WIDGET (shell->priv->window));
         ario_shell_sync_paned (shell);
-        ario_shell_sync_source (shell);
         ario_shell_sync_mpd (shell);
-
-        g_signal_connect_object (G_OBJECT (shell->priv->source),
-                                 "source_changed", G_CALLBACK (ario_shell_source_changed_cb),
-                                 shell, 0);
 
         g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
@@ -634,24 +582,6 @@ ario_shell_cmd_lyrics (GtkAction *action,
                 gtk_widget_show_all (lyrics);
 }
 
-#ifdef MULTIPLE_VIEW
-static void
-ario_shell_cmd_radio_view (GtkRadioAction *action,
-                           GtkRadioAction *current,
-                           ArioShell *shell)
-{
-        g_signal_handlers_block_by_func (G_OBJECT (shell->priv->source),
-                                         G_CALLBACK (ario_shell_source_changed_cb),
-                                         shell);
-
-        ario_source_set_page (ARIO_SOURCE (shell->priv->source),
-                              gtk_radio_action_get_current_value (current));
-
-        g_signal_handlers_unblock_by_func (G_OBJECT (shell->priv->source),
-                                           G_CALLBACK (ario_shell_source_changed_cb),
-                                           shell);
-}
-#endif  /* MULTIPLE_VIEW */
 static void
 ario_shell_cmd_about (GtkAction *action,
                       ArioShell *shell)
@@ -783,28 +713,6 @@ ario_shell_sync_paned (ArioShell *shell)
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
-}
-
-static void
-ario_shell_sync_source (ArioShell *shell)
-{
-#ifdef MULTIPLE_VIEW
-        ARIO_LOG_FUNCTION_START
-        GtkAction *action;
-
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "LibraryView");
-        gtk_radio_action_set_current_value (GTK_RADIO_ACTION (action),
-                                            ario_source_get_page (ARIO_SOURCE (shell->priv->source)));
-#endif  /* MULTIPLE_VIEW */
-}
-
-static void
-ario_shell_source_changed_cb (ArioSource *source,
-                              ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_shell_sync_source (shell);
 }
 
 static void

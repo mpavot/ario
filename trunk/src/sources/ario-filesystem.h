@@ -24,6 +24,7 @@
 #include <config.h>
 #include "ario-mpd.h"
 #include "widgets/ario-playlist.h"
+#include "sources/ario-source.h"
 
 G_BEGIN_DECLS
 
@@ -38,14 +39,14 @@ typedef struct ArioFilesystemPrivate ArioFilesystemPrivate;
 
 typedef struct
 {
-        GtkHPaned parent;
+        ArioSource parent;
 
         ArioFilesystemPrivate *priv;
 } ArioFilesystem;
 
 typedef struct
 {
-        GtkHPanedClass parent;
+        ArioSourceClass parent;
 } ArioFilesystemClass;
 
 GType                   ario_filesystem_get_type   (void);
@@ -54,7 +55,6 @@ GtkWidget*              ario_filesystem_new        (GtkUIManager *mgr,
                                                      GtkActionGroup *group,
                                                      ArioMpd *mpd,
                                                      ArioPlaylist *playlist);
-void                    ario_filesystem_shutdown   (ArioFilesystem *filesystem);
 G_END_DECLS
 
 #endif /* __ARIO_FILESYSTEM_H */

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2005 Marc Pavot <marc.pavot@gmail.com>
+ *  Copyright (C) 2008 Marc Pavot <marc.pavot@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,62 +17,67 @@
  *
  */
 
-#ifndef __ARIO_SOURCE_H
-#define __ARIO_SOURCE_H
+#ifndef __ARIO_SOURCE_H__
+#define __ARIO_SOURCE_H__
 
-#include <gtk/gtknotebook.h>
-#include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
+#include <glib-object.h>
+#include <gtk/gtk.h>
+#include <shell/ario-shell.h>
+#include <ario-debug.h>
 
 G_BEGIN_DECLS
 
-#define TYPE_ARIO_SOURCE         (ario_source_get_type ())
-#define ARIO_SOURCE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_SOURCE, ArioSource))
-#define ARIO_SOURCE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), TYPE_ARIO_SOURCE, ArioSourceClass))
-#define IS_ARIO_SOURCE(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), TYPE_ARIO_SOURCE))
-#define IS_ARIO_SOURCE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_SOURCE))
-#define ARIO_SOURCE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_SOURCE, ArioSourceClass))
+/*
+ * Type checking and casting macros
+ */
+#define ARIO_TYPE_SOURCE              (ario_source_get_type())
+#define ARIO_SOURCE(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), ARIO_TYPE_SOURCE, ArioSource))
+#define ARIO_SOURCE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), ARIO_TYPE_SOURCE, ArioSourceClass))
+#define ARIO_IS_SOURCE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), ARIO_TYPE_SOURCE))
+#define ARIO_IS_SOURCE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), ARIO_TYPE_SOURCE))
+#define ARIO_SOURCE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), ARIO_TYPE_SOURCE, ArioSourceClass))
 
-typedef struct ArioSourcePrivate ArioSourcePrivate;
-
-typedef struct
+/*
+ * Main object structure
+ */
+typedef struct _ArioSource 
 {
-        GtkNotebook parent;
-
-        ArioSourcePrivate *priv;
+        GtkHBox parent;
 } ArioSource;
 
-typedef struct
+/*
+ * Class definition
+ */
+typedef struct 
 {
-        GtkNotebookClass parent;
+        GtkHBoxClass parent_class;
 
-        void (*source_changed)            (ArioSource *source);
+        /* Virtual public methods */
+       
+        gchar*          (*get_id)                       (ArioSource *source);
+ 
+        gchar*          (*get_name)                     (ArioSource *source);
 
+        gchar*          (*get_icon)                     (ArioSource *source);
+
+        void            (*shutdown)                     (ArioSource *source);
 } ArioSourceClass;
 
-typedef enum
-{
-        ARIO_SOURCE_BROWSER,
-        ARIO_SOURCE_RADIO,
-        ARIO_SOURCE_SEARCH,
-        ARIO_SOURCE_PLAYLISTS,
-        ARIO_SOURCE_FILESYSTEM
-}ArioSourceType;
+/*
+ * Public methods
+ */
+GType           ario_source_get_type            (void) G_GNUC_CONST;
 
-GType                   ario_source_get_type   (void);
+gchar*          ario_source_get_id              (ArioSource *source);
 
-GtkWidget*              ario_source_new        (GtkUIManager *mgr,
-                                                GtkActionGroup *group,
-                                                ArioMpd *mpd,
-                                                ArioPlaylist *playlist);
+gchar*          ario_source_get_name            (ArioSource *source);
 
-void                    ario_source_set_page   (ArioSource *source,
-                                                gint page);
+gchar*          ario_source_get_icon            (ArioSource *source);
 
-gint                    ario_source_get_page   (ArioSource *source);
-
-void                    ario_source_shutdown   (ArioSource *source);
+void            ario_source_shutdown            (ArioSource *source);
 
 G_END_DECLS
 
-#endif /* __ARIO_SOURCE_H */
+#endif  /* __ARIO_SOURCE_H__ */
+
+

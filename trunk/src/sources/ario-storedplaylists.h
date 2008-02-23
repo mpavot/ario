@@ -24,6 +24,7 @@
 #include <config.h>
 #include "ario-mpd.h"
 #include "widgets/ario-playlist.h"
+#include "sources/ario-source.h"
 
 #ifdef ENABLE_STOREDPLAYLISTS
 
@@ -40,14 +41,14 @@ typedef struct ArioStoredplaylistsPrivate ArioStoredplaylistsPrivate;
 
 typedef struct
 {
-        GtkHPaned parent;
+        ArioSource parent;
 
         ArioStoredplaylistsPrivate *priv;
 } ArioStoredplaylists;
 
 typedef struct
 {
-        GtkHPanedClass parent;
+        ArioSourceClass parent;
 } ArioStoredplaylistsClass;
 
 GType                   ario_storedplaylists_get_type   (void);
@@ -56,7 +57,6 @@ GtkWidget*              ario_storedplaylists_new        (GtkUIManager *mgr,
                                                          GtkActionGroup *group,
                                                          ArioMpd *mpd,
                                                          ArioPlaylist *playlist);
-void                    ario_storedplaylists_shutdown   (ArioStoredplaylists *storedplaylists);
 G_END_DECLS
 
 #endif  /* ENABLE_STOREDPLAYLISTS */

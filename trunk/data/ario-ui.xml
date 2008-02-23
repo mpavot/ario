@@ -7,6 +7,7 @@
                         <separator/>
                         <menuitem name="FileSave" action="FileSave"/>
                         <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>
+                        <placeholder name="FileMenuPluginPlaceholder" />
                         <separator/>
                         <menuitem name="FileQuit" action="FileQuit"/>
                 </menu>
@@ -14,18 +15,14 @@
                 <menu name="EditMenu" action="Edit">
                         <menuitem name="EditPluginsMenu" action="EditPlugins"/>
                         <menuitem name="EditPreferencesMenu" action="EditPreferences"/> 
+                        <placeholder name="EditMenuPluginPlaceholder" />
                 </menu>
 
                 <menu name="ViewMenu" action="View">
                         <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
                         <separator/>
-                        <menuitem name="LibraryViewMenu" action="LibraryView"/>
-                        <menuitem name="RadioViewMenu" action="RadioView"/>
-                        <menuitem name="SearchViewMenu" action="SearchView"/>
-                        <menuitem name="StoredplaylistsMenu" action="StoredplaylistsView"/>
-                        <menuitem name="FilesystemMenu" action="FilesystemView"/>
-                        <separator/>
                         <menuitem name="LyricsMenu" action="Lyrics"/> 
+                        <placeholder name="ViewMenuPluginPlaceholder" />
                 </menu>
 
                 <menu name="ToolMenu" action="Tool">
@@ -38,6 +35,7 @@
                         <menuitem name="HelpTranslateMenu" action="HelpTranslate"/>
                         <separator/>
                         <menuitem name="HelpAboutMenu" action="HelpAbout"/>
+                        <placeholder name="HelpMenuPluginPlaceholder" />
                 </menu>
 
         </menubar>
@@ -49,6 +47,7 @@
                 <separator/>
                 <menuitem name="NextTray" action="ControlNext"/>
                 <menuitem name="PreviousTray" action="ControlPrevious"/>
+                <placeholder name="TrayPopupPluginPlaceholder" />
                 <separator/>
                 <menuitem name="FileQuit" action="FileQuit"/>
         </popup>
@@ -59,6 +58,7 @@
                 <separator/>
                 <menuitem name="PlaylistSave" action="PlaylistSave"/>
                 <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>
+                <placeholder name="PlaylistPopupPluginPlaceholder" />
                 <separator/>
                 <menuitem name="PlaylistSongProperties" action="PlaylistSongProperties"/>
         </popup>
@@ -68,6 +68,7 @@
                 <separator/>
                 <menuitem name="CoverArtistGetAmazon" action="CoverArtistGetAmazon"/>
                 <menuitem name="CoverArtistRemove" action="CoverArtistRemove"/>
+                <placeholder name="BrowserArtistsPopupPluginPlaceholder" />
         </popup>
 
         <popup name="BrowserAlbumsPopupSingle">
@@ -75,6 +76,7 @@
                 <separator/>
                 <menuitem name="CoverAlbumGetAmazon" action="CoverAlbumGetAmazon"/>
                 <menuitem name="CoverAlbumRemove" action="CoverAlbumRemove"/>
+                <placeholder name="BrowserAlbumsPopupSinglePluginPlaceholder" />
                 <separator/>
                 <menuitem name="BrowserAlbumsProperties" action="BrowserAlbumsProperties"/>
         </popup>
@@ -84,10 +86,12 @@
                 <separator/>
                 <menuitem name="CoverAlbumGetAmazon" action="CoverAlbumGetAmazon"/>
                 <menuitem name="CoverAlbumRemove" action="CoverAlbumRemove"/>
+                <placeholder name="BrowserAlbumsPopupMultiplePluginPlaceholder" />
         </popup>
 
         <popup name="BrowserSongsPopup">
                 <menuitem name="BrowserAddSongs" action="BrowserAddSongs"/>
+                <placeholder name="BrowserSongsPopupPluginPlaceholder" />
                 <menuitem name="BrowserSongsProperties" action="BrowserSongsProperties"/>
         </popup>
 
@@ -96,6 +100,7 @@
                 <separator/>
                 <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
                 <menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
+                <placeholder name="RadioPopupSinglePluginPlaceholder" />
                 <separator/>
                 <menuitem name="RadioProperties" action="RadioProperties"/>
         </popup>
@@ -105,29 +110,35 @@
                 <separator/>
                 <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
                 <menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
+                <placeholder name="RadioPopupMultiplePluginPlaceholder" />
         </popup>
 
         <popup name="SearchPopup">
                 <menuitem name="SearchAddSongs" action="SearchAddSongs"/>
+                <placeholder name="SearchPopupPluginPlaceholder" />
                 <menuitem name="SearchSongsProperties" action="SearchSongsProperties"/>
         </popup>
 
         <popup name="StoredplaylistsPopup">
                 <menuitem name="StoredplaylistsAddPlaylists" action="StoredplaylistsAddPlaylists"/>
                 <menuitem name="StoredplaylistsDelete" action="StoredplaylistsDelete"/>
+                <placeholder name="StoredplaylistsPopupPluginPlaceholder" />
         </popup>
 
         <popup name="StoredplaylistsSongsPopup">
                 <menuitem name="StoredplaylistsAddSongs" action="StoredplaylistsAddSongs"/>
+                <placeholder name="StoredplaylistsSongsPopupPluginPlaceholder" />
                 <menuitem name="StoredplaylistsSongsProperties" action="StoredplaylistsSongsProperties"/>
         </popup>
 
         <popup name="FilesystemPopup">
                 <menuitem name="FilesystemAddDir" action="FilesystemAddDir"/>
+                <placeholder name="FilesystemPopupPluginPlaceholder" />
         </popup>
 
         <popup name="FilesystemSongsPopup">
                 <menuitem name="FilesystemAddSongs" action="FilesystemAddSongs"/>
+                <placeholder name="FilesystemSongsPopupPluginPlaceholder" />
                 <menuitem name="FilesystemSongsProperties" action="FilesystemSongsProperties"/>
         </popup>
 </ui>

@@ -69,6 +69,8 @@ ario_SOURCES = \
 	sources/ario-search.h\
 	sources/ario-source.c\
 	sources/ario-source.h\
+	sources/ario-source-manager.c\
+	sources/ario-source-manager.h\
 	sources/ario-storedplaylists.c\
 	sources/ario-storedplaylists.h\
 	shell/ario-shell.c\
