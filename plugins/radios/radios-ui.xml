@@ -1,0 +1,19 @@
+<ui>
+        <popup name="RadioPopupSingle">
+                <menuitem name="RadioAddRadios" action="RadioAddRadios"/>
+                <separator/>
+                <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
+                <menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
+                <placeholder name="RadioPopupSinglePluginPlaceholder" />
+                <separator/>
+                <menuitem name="RadioProperties" action="RadioProperties"/>
+        </popup>
+
+        <popup name="RadioPopupMultiple">
+                <menuitem name="RadioAddRadios" action="RadioAddRadios"/>
+                <separator/>
+                <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
+                <menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
+                <placeholder name="RadioPopupMultiplePluginPlaceholder" />
+        </popup>
+</ui>

@@ -46,15 +46,6 @@ if test x"$enable_debug" = xyes; then
    AC_DEFINE(DEBUG, 1, [Add runtime debugging information (slower)])
 fi
 
-dnl Radios
-AC_ARG_ENABLE(radios,
-              AC_HELP_STRING([--disable-radios],
-                             [Disable support of internet radios]))
-if test x"$enable_radios" != xno; then
-   AC_DEFINE(ENABLE_RADIOS, 1, [Add support of internet radios])
-   AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
-fi
-
 dnl Search
 AC_ARG_ENABLE(search,
               AC_HELP_STRING([--disable-search],
@@ -82,6 +73,7 @@ src/Makefile
 data/Makefile
 plugins/Makefile
 plugins/filesystem/Makefile
+plugins/radios/Makefile
 plugins/wikipedia/Makefile
 po/Makefile.in
 data/ario.desktop.in
@@ -93,11 +85,6 @@ if test x${enable_debug} = xyes; then
         echo "Debug information is:                     ENABLED"
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
-fi
-if test x${enable_radios} != xno; then
-        echo "Internet radios support is:               ENABLED  (--disable-radios)"
-else
-        echo "Internet radios support is:               DISABLED"
 fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"

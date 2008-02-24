@@ -24,7 +24,6 @@
 #include "lib/eel-gconf-extensions.h"
 #include "sources/ario-source-manager.h"
 #include "sources/ario-browser.h"
-#include "sources/ario-radio.h"
 #include "sources/ario-search.h"
 #include "sources/ario-storedplaylists.h"
 #include "preferences/ario-preferences.h"
@@ -33,7 +32,7 @@
 static void ario_sourcemanager_class_init (ArioSourceManagerClass *klass);
 static void ario_sourcemanager_init (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_finalize (GObject *object);
-static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager, GtkActionGroup *group);
+static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
                                              guint cnxn_id,
                                              GConfEntry *entry,
@@ -133,14 +132,6 @@ ario_sourcemanager_new (GtkUIManager *mgr,
         ario_sourcemanager_append (sourcemanager,
                                    ARIO_SOURCE (source));
 
-#ifdef ENABLE_RADIOS
-        source = ario_radio_new (mgr,
-                                 group,
-                                 mpd,
-                                 playlist);
-        ario_sourcemanager_append (sourcemanager,
-                                   ARIO_SOURCE (source));
-#endif  /* ENABLE_RADIOS */
 #ifdef ENABLE_SEARCH
         source = ario_search_new (mgr,
                                   group,
@@ -159,7 +150,6 @@ ario_sourcemanager_new (GtkUIManager *mgr,
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
         ario_sourcemanager_reorder (sourcemanager);
-        ario_sourcemanager_sync (sourcemanager, group);
 
         eel_gconf_notification_add (CONF_SHOW_TABS,
                                     (GConfClientNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
@@ -208,6 +198,7 @@ ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
                         if (!strcmp (ario_source_get_id (source), ordered_tmp->data)) {
                                 gtk_notebook_reorder_child (GTK_NOTEBOOK (sourcemanager),
                                                             GTK_WIDGET (source), i);
+                                break;
                         }
                 }
                 ++i;
@@ -215,11 +206,12 @@ ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
 
         g_slist_foreach (ordered_sources, (GFunc) g_free, NULL);
         g_slist_free (ordered_sources);
+
+        ario_sourcemanager_sync (sourcemanager);
 }
 
 static void
-ario_sourcemanager_sync (ArioSourceManager *sourcemanager,
-                                       GtkActionGroup *group)
+ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START
 #ifdef MULTIPLE_VIEW

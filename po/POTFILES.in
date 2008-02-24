@@ -64,8 +64,6 @@ src/preferences/ario-stats-preferences.h
 src/preferences/ario-preferences.h
 src/sources/ario-browser.c
 src/sources/ario-browser.h
-src/sources/ario-radio.c
-src/sources/ario-radio.h
 src/sources/ario-search.c
 src/sources/ario-search.h
 src/sources/ario-source.c
@@ -108,3 +106,8 @@ plugins/filesystem/ario-filesystem.h
 plugins/filesystem/ario-filesystem-plugin.c
 plugins/filesystem/ario-filesystem-plugin.h
 plugins/filesystem/filesystem.ario-plugin.desktop.in
+plugins/radios/ario-radio.c
+plugins/radios/ario-radio.h
+plugins/radios/ario-radios-plugin.c
+plugins/radios/ario-radios-plugin.h
+plugins/radios/radios.ario-plugin.desktop.in

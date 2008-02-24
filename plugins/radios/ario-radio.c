@@ -22,11 +22,9 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include <libxml/parser.h>
-#include "sources/ario-radio.h"
+#include "ario-radio.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-
-#ifdef ENABLE_RADIOS
 
 #define DRAG_THRESHOLD 1
 #define XML_ROOT_NAME (const unsigned char *)"ario-radios"
@@ -83,6 +81,7 @@ static void ario_radio_drag_data_get_cb (GtkWidget * widget,
 static void ario_radio_free_internet_radio (ArioInternetRadio *internet_radio);
 static void ario_radio_create_xml_file (char *xml_filename);
 static char* ario_radio_get_xml_filename (void);
+static void ario_radio_fill_radios (ArioRadio *radio);
 
 struct ArioRadioPrivate
 {        
@@ -246,8 +245,6 @@ ario_radio_init (ArioRadio *radio)
 
         radio->priv = g_new0 (ArioRadioPrivate, 1);
 
-        radio->priv->connected = FALSE;
-
         /* Radios list */
         scrolledwindow_radios = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (scrolledwindow_radios);
@@ -332,6 +329,7 @@ ario_radio_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio = ARIO_RADIO (object);
+        static gboolean is_loaded = FALSE;
 
         switch (prop_id) {
         case PROP_MPD:
@@ -341,6 +339,8 @@ ario_radio_set_property (GObject *object,
                 g_signal_connect_object (G_OBJECT (radio->priv->mpd),
                                          "state_changed", G_CALLBACK (ario_radio_state_changed_cb),
                                          radio, 0);
+
+                radio->priv->connected = ario_mpd_is_connected (radio->priv->mpd);
                 break;
         case PROP_PLAYLIST:
                 radio->priv->playlist = g_value_get_object (value);
@@ -350,9 +350,12 @@ ario_radio_set_property (GObject *object,
                 break;
         case PROP_ACTION_GROUP:
                 radio->priv->actiongroup = g_value_get_object (value);
-                gtk_action_group_add_actions (radio->priv->actiongroup,
-                                              ario_radio_actions,
-                                              ario_radio_n_actions, radio);
+               if (!is_loaded) {
+                        gtk_action_group_add_actions (radio->priv->actiongroup,
+                                                      ario_radio_actions,
+                                                      ario_radio_n_actions, radio);
+                        is_loaded = TRUE;
+                }
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -405,6 +408,8 @@ ario_radio_new (GtkUIManager *mgr,
                               NULL);
 
         g_return_val_if_fail (radio->priv != NULL, NULL);
+
+        ario_radio_fill_radios (radio);
 
         return GTK_WIDGET (radio);
 }
@@ -569,6 +574,7 @@ ario_radio_state_changed_cb (ArioMpd *mpd,
                              ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
+
         if (radio->priv->connected != ario_mpd_is_connected (mpd)) {
                 radio->priv->connected = ario_mpd_is_connected (mpd);
                 ario_radio_fill_radios (radio);
@@ -1233,4 +1239,3 @@ ario_radio_cmd_radio_properties (GtkAction *action,
         ario_radio_free_internet_radio (internet_radio);
 }
 
-#endif  /* ENABLE_RADIOS */
