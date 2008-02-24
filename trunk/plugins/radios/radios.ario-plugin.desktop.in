@@ -1,0 +1,9 @@
+[Ario Plugin]
+Module=radios
+IAge=1
+_Name=Web Radios
+_Description=Listen to webradios
+Icon=gtk-network
+Authors=Marc Pavot <marc.pavot@gmail.com>
+Copyright=Copyright © 2008 Marc Pavot
+Website=http://ario-player.sourceforge.net

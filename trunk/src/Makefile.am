@@ -61,8 +61,6 @@ ario_SOURCES = \
 	preferences/ario-preferences.h\
 	sources/ario-browser.c\
 	sources/ario-browser.h\
-	sources/ario-radio.c\
-	sources/ario-radio.h\
 	sources/ario-search.c\
 	sources/ario-search.h\
 	sources/ario-source.c\

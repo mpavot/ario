@@ -26,8 +26,6 @@
 #include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
-#ifdef ENABLE_RADIOS
-
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_RADIO         (ario_radio_get_type ())
@@ -59,7 +57,5 @@ GtkWidget*              ario_radio_new        (GtkUIManager *mgr,
                                                ArioPlaylist *playlist);
 
 G_END_DECLS
-
-#endif  /* ENABLE_RADIOS */
 
 #endif /* __ARIO_RADIO_H */

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-23 23:56+0100\n"
+"POT-Creation-Date: 2008-02-24 11:03+0100\n"
 "PO-Revision-Date: 2008-02-12 11:06+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -225,8 +225,8 @@ msgstr "Standaard"
 msgid "Host :"
 msgstr "Host :"
 
-#: ../data/glade/connection-prefs.glade.h:5 ../src/sources/ario-radio.c:883
-#: ../src/sources/ario-radio.c:1136
+#: ../data/glade/connection-prefs.glade.h:5 ../plugins/radios/ario-radio.c:889
+#: ../plugins/radios/ario-radio.c:1142
 msgid "Name :"
 msgstr "Naam :"
 
@@ -572,19 +572,20 @@ msgid "Updating..."
 msgstr "Bezig met bijwerken..."
 
 #: ../src/sources/ario-browser.c:129 ../src/sources/ario-browser.c:132
-#: ../src/sources/ario-browser.c:135 ../src/sources/ario-radio.c:108
-#: ../src/sources/ario-search.c:100 ../src/sources/ario-storedplaylists.c:101
+#: ../src/sources/ario-browser.c:135 ../src/sources/ario-search.c:100
+#: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:103
 #: ../plugins/filesystem/ario-filesystem.c:111
+#: ../plugins/radios/ario-radio.c:107
 msgid "_Add to playlist"
 msgstr "_Voeg toe aan afspeellijst"
 
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
-#: ../src/sources/ario-radio.c:117 ../src/sources/ario-search.c:103
-#: ../src/sources/ario-storedplaylists.c:115
+#: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
 #: ../plugins/filesystem/ario-filesystem.c:114
+#: ../plugins/radios/ario-radio.c:116
 msgid "_Properties"
 msgstr "_Eigenschappen"
 
@@ -602,13 +603,13 @@ msgstr "Bibliotheek"
 
 #: ../src/sources/ario-browser.c:316 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
-#: ../src/widgets/ario-playlist.c:287 ../src/widgets/ario-songlist.c:270
+#: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Artiest"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:370 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:298 ../src/widgets/ario-songlist.c:285
+#: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr "Album"
 
@@ -619,14 +620,14 @@ msgstr "Cover"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:445 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:265
+#: ../src/widgets/ario-playlist.c:266
 msgid "Track"
 msgstr "Nummer"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:452 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
-#: ../src/widgets/ario-playlist.c:276 ../src/widgets/ario-songlist.c:255
+#: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Titel"
 
@@ -642,46 +643,6 @@ msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
 "Weet je zeker dat je alle covers wil verwijderen van de geslecteerde albums?"
-
-#: ../src/sources/ario-radio.c:111
-msgid "Add a _new radio"
-msgstr "Voeg een_nieuwe radio toe"
-
-#: ../src/sources/ario-radio.c:114
-msgid "_Delete this radios"
-msgstr "_Verwijder deze radio's"
-
-#: ../src/sources/ario-radio.c:181
-msgid "Web Radios"
-msgstr "Web Radio's"
-
-#: ../src/sources/ario-radio.c:258
-msgid "Internet Radios"
-msgstr "Internet Radio's"
-
-#. Create the widgets
-#: ../src/sources/ario-radio.c:873
-msgid "Add a WebRadio"
-msgstr "Voeg een Web Radio toe"
-
-#: ../src/sources/ario-radio.c:884 ../src/sources/ario-radio.c:1137
-msgid "URL :"
-msgstr "URL :"
-
-#: ../src/sources/ario-radio.c:938 ../src/sources/ario-radio.c:1192
-msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr ""
-"Slechte parameters. Je moet de naam en het webadres specificeren voor de "
-"radio."
-
-#: ../src/sources/ario-radio.c:1027
-msgid "Are you sure you want to delete all the selected radios?"
-msgstr "Weet ie zeker dat je alle geselcteerde radio's wil verwijderen?"
-
-#. Create the widgets
-#: ../src/sources/ario-radio.c:1126
-msgid "Edit a WebRadio"
-msgstr "Bewerk een Web Radio"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
@@ -945,20 +906,20 @@ msgstr "_Opslaan"
 msgid "_Go to playing song"
 msgstr "Afspelen gestopt"
 
-#: ../src/widgets/ario-playlist.c:309
+#: ../src/widgets/ario-playlist.c:310
 msgid "Duration"
 msgstr "Duur"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1200
+#: ../src/widgets/ario-playlist.c:1224
 msgid "Save playlist"
 msgstr "Afspeellijst opslaan"
 
-#: ../src/widgets/ario-playlist.c:1210
+#: ../src/widgets/ario-playlist.c:1234
 msgid "Playlist name :"
 msgstr "Naam van de afspeellijst"
 
-#: ../src/widgets/ario-playlist.c:1235
+#: ../src/widgets/ario-playlist.c:1259
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Afspeellijst bestaat al. Wil je het overschrijven?"
 
@@ -1013,6 +974,51 @@ msgstr ""
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:110
+msgid "Add a _new radio"
+msgstr "Voeg een_nieuwe radio toe"
+
+#: ../plugins/radios/ario-radio.c:113
+msgid "_Delete this radios"
+msgstr "_Verwijder deze radio's"
+
+#: ../plugins/radios/ario-radio.c:180
+#: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
+msgid "Web Radios"
+msgstr "Web Radio's"
+
+#: ../plugins/radios/ario-radio.c:255
+msgid "Internet Radios"
+msgstr "Internet Radio's"
+
+#. Create the widgets
+#: ../plugins/radios/ario-radio.c:879
+msgid "Add a WebRadio"
+msgstr "Voeg een Web Radio toe"
+
+#: ../plugins/radios/ario-radio.c:890 ../plugins/radios/ario-radio.c:1143
+msgid "URL :"
+msgstr "URL :"
+
+#: ../plugins/radios/ario-radio.c:944 ../plugins/radios/ario-radio.c:1198
+msgid "Bad parameters. You must specify a name and a URL for the radio."
+msgstr ""
+"Slechte parameters. Je moet de naam en het webadres specificeren voor de "
+"radio."
+
+#: ../plugins/radios/ario-radio.c:1033
+msgid "Are you sure you want to delete all the selected radios?"
+msgstr "Weet ie zeker dat je alle geselcteerde radio's wil verwijderen?"
+
+#. Create the widgets
+#: ../plugins/radios/ario-radio.c:1132
+msgid "Edit a WebRadio"
+msgstr "Bewerk een Web Radio"
+
+#: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
+msgid "Listen to webradios"
 msgstr ""
 
 #~ msgid "_Library"
