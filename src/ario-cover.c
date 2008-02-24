@@ -460,7 +460,7 @@ ario_cover_save_cover (const gchar *artist,
 
         /* If the cover already exists, can we overwrite it? */
         if (!ario_cover_can_overwrite_cover (artist, album, overwrite_mode))
-                return FALSE;
+                return TRUE;
 
         /* The path for the normal cover */
         ario_cover_path = ario_cover_make_ario_cover_path (artist,

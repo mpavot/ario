@@ -458,6 +458,7 @@ ario_shell_construct (ArioShell *shell)
                                  shell, 0);
 
         ario_shell_sync_window_state (shell);
+        gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
 
         /* First launch assistant */
         if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {
