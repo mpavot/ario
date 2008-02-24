@@ -60,10 +60,6 @@ static gboolean ario_filesystem_button_release_cb (GtkWidget *widget,
 static gboolean ario_filesystem_motion_notify (GtkWidget *widget, 
                                                GdkEventMotion *event,
                                                ArioFilesystem *filesystem);
-static void ario_filesystem_playlists_selection_drag_foreach (GtkTreeModel *model,
-                                                              GtkTreePath *path,
-                                                              GtkTreeIter *iter,
-                                                              gpointer userdata);
 static void ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
                                                         GdkDragContext * context,
                                                         GtkSelectionData * selection_data,
@@ -764,7 +760,6 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
 {
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;
-        ArioMpdSong *song;
         GtkTreeIter iter;
         GtkTreeModel *model;
         guchar* dir;
@@ -786,6 +781,6 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
                             PLAYLISTS_DIR_COLUMN, &dir, -1);
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, dir,
-                                strlen (dir) * sizeof(guchar));
+                                strlen ((const gchar*) dir) * sizeof(guchar));
         g_free (dir);
 }

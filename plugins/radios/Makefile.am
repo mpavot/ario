@@ -25,7 +25,14 @@ INCLUDES = 						\
 	-I$(top_srcdir)/src/lib                        	\
 	-I$(top_srcdir)/src/plugins                   	\
 	-I$(top_srcdir)/src/sources                   	\
-	-I$(top_srcdir)/src/shell
+	-I$(top_srcdir)/src/shell                       \
+        -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
+        -Wmain -Wmissing-braces -Wparentheses -Wsequence-point \
+        -Wreturn-type -Wswitch -Wtrigraphs -Wunused-function \
+        -Wunused-label -Wunused-value \
+        -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes \
+        -Wnested-externs -Wpointer-arith \
+        -Wcast-align -Wall
 
 plugin_in_files = radios.ario-plugin.desktop.in
 
