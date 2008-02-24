@@ -51,9 +51,9 @@ typedef struct
         GtkHBoxClass parent_class;
 
         /* Virtual public methods */
-       
+
         gchar*          (*get_id)                       (ArioSource *source);
- 
+
         gchar*          (*get_name)                     (ArioSource *source);
 
         gchar*          (*get_icon)                     (ArioSource *source);

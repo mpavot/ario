@@ -62,7 +62,7 @@ static void ario_shell_cmd_connect (GtkAction *action,
 static void ario_shell_cmd_disconnect (GtkAction *action,
                                        ArioShell *shell);
 static void ario_shell_cmd_plugins (GtkAction *action,
-		                    ArioShell *shell);
+                                    ArioShell *shell);
 static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 static void ario_shell_cmd_lyrics (GtkAction *action,
@@ -92,7 +92,7 @@ static void ario_shell_sync_mpd (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                               ArioShell *shell);
 static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
-				                  ArioShell *shell);
+                                                  ArioShell *shell);
 static void ario_shell_sync_statusbar_visibility (ArioShell *shell);
 
 struct ArioShellPrivate
@@ -114,7 +114,7 @@ struct ArioShellPrivate
 
         GtkWidget *plugins;
 
-	gboolean statusbar_hidden;
+        gboolean statusbar_hidden;
         gboolean connected;
         gboolean shown;
 };
@@ -147,13 +147,13 @@ static GtkActionEntry ario_shell_actions [] =
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
-	{ "EditPlugins", GTK_STOCK_EXECUTE, N_("Plu_gins"), NULL,
-	        NULL,
-	        G_CALLBACK (ario_shell_cmd_plugins) },
+        { "EditPlugins", GTK_STOCK_EXECUTE, N_("Plu_gins"), NULL,
+                NULL,
+                G_CALLBACK (ario_shell_cmd_plugins) },
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_preferences) },
-       { "ToolCoverSelect", GTK_STOCK_FIND, N_("_Change current album cover"), NULL,
+        { "ToolCoverSelect", GTK_STOCK_FIND, N_("_Change current album cover"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_cover_select) },
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
@@ -174,8 +174,8 @@ static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 static GtkToggleActionEntry ario_shell_toggle [] =
 {
         { "ViewStatusbar", NULL, N_("S_tatusbar"), NULL,
-	  NULL,
-	  G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE }
+                NULL,
+                G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE }
 };
 static guint ario_shell_n_toggle = G_N_ELEMENTS (ario_shell_toggle);
 
@@ -391,10 +391,10 @@ ario_shell_construct (ArioShell *shell)
                                       ario_shell_actions,
                                       ario_shell_n_actions, shell);
 
-	gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
-					     ario_shell_toggle,
-					     ario_shell_n_toggle,
-					     shell);
+        gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
+                                             ario_shell_toggle,
+                                             ario_shell_n_toggle,
+                                             shell);
         gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
                                             shell->priv->actiongroup, 0);
         gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
@@ -413,7 +413,7 @@ ario_shell_construct (ArioShell *shell)
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
-	shell->priv->statusbar_hidden = eel_gconf_get_boolean (CONF_STATUSBAR_HIDDEN, FALSE);
+        shell->priv->statusbar_hidden = eel_gconf_get_boolean (CONF_STATUSBAR_HIDDEN, FALSE);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewStatusbar");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
@@ -508,7 +508,7 @@ ario_shell_show (ArioShell *shell)
         g_signal_connect_object (G_OBJECT (shell->priv->mpd),
                                  "song_changed", G_CALLBACK (ario_shell_mpd_song_changed_cb),
                                  shell, 0);
-                                 
+
         if (eel_gconf_get_boolean (CONF_AUTOCONNECT, TRUE))
                 ario_mpd_connect (shell->priv->mpd);
 
@@ -628,7 +628,7 @@ ario_shell_mpd_song_set_title (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         gchar *window_title;
         gchar *tmp;
-        
+
         switch (ario_mpd_get_current_state (shell->priv->mpd)) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
@@ -640,7 +640,7 @@ ario_shell_mpd_song_set_title (ArioShell *shell)
                 window_title = g_strdup("Ario");
                 break;
         }
-        
+
         gtk_window_set_title (GTK_WINDOW (shell->priv->window), window_title);
         g_free (window_title);
 }
@@ -804,78 +804,78 @@ ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
 
 static void
 ario_shell_view_statusbar_changed_cb (GtkAction *action,
-				      ArioShell *shell)
+                                      ArioShell *shell)
 {
-	shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-	eel_gconf_set_boolean (CONF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
+        shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+        eel_gconf_set_boolean (CONF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
 
-	ario_shell_sync_statusbar_visibility (shell);
+        ario_shell_sync_statusbar_visibility (shell);
 }
 
 static void
 ario_shell_sync_statusbar_visibility (ArioShell *shell)
 {
-	if (shell->priv->statusbar_hidden)
-		gtk_widget_hide (GTK_WIDGET (shell->priv->status_bar));
-	else
-		gtk_widget_show (GTK_WIDGET (shell->priv->status_bar));
+        if (shell->priv->statusbar_hidden)
+                gtk_widget_hide (GTK_WIDGET (shell->priv->status_bar));
+        else
+                gtk_widget_show (GTK_WIDGET (shell->priv->status_bar));
 }
 
 static gboolean
 ario_shell_plugins_window_delete_cb (GtkWidget *window,
-				     GdkEventAny *event,
-				     gpointer data)
+                                     GdkEventAny *event,
+                                     gpointer data)
 {
-	gtk_widget_hide (window);
+        gtk_widget_hide (window);
 
-	return TRUE;
+        return TRUE;
 }
 
 static void
 ario_shell_plugins_response_cb (GtkDialog *dialog,
-			        int response_id,
-			        gpointer data)
+                                int response_id,
+                                gpointer data)
 {
-	if (response_id == GTK_RESPONSE_CLOSE)
-		gtk_widget_hide (GTK_WIDGET (dialog));
+        if (response_id == GTK_RESPONSE_CLOSE)
+                gtk_widget_hide (GTK_WIDGET (dialog));
 }
 
 static void
 ario_shell_cmd_plugins (GtkAction *action,
-		        ArioShell *shell)
+                        ArioShell *shell)
 {
-	if (shell->priv->plugins == NULL) {
-		GtkWidget *manager;
+        if (shell->priv->plugins == NULL) {
+                GtkWidget *manager;
 
-		shell->priv->plugins = gtk_dialog_new_with_buttons (_("Configure Plugins"),
-								    GTK_WINDOW (shell->priv->window),
-								    GTK_DIALOG_DESTROY_WITH_PARENT,
-								    GTK_STOCK_CLOSE,
-								    GTK_RESPONSE_CLOSE,
-								    NULL);
-	    	gtk_container_set_border_width (GTK_CONTAINER (shell->priv->plugins), 5);
-		gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell->priv->plugins)->vbox), 2);
-		gtk_dialog_set_has_separator (GTK_DIALOG (shell->priv->plugins), FALSE);
+                shell->priv->plugins = gtk_dialog_new_with_buttons (_("Configure Plugins"),
+                                                                    GTK_WINDOW (shell->priv->window),
+                                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                                    GTK_STOCK_CLOSE,
+                                                                    GTK_RESPONSE_CLOSE,
+                                                                    NULL);
+                gtk_container_set_border_width (GTK_CONTAINER (shell->priv->plugins), 5);
+                gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell->priv->plugins)->vbox), 2);
+                gtk_dialog_set_has_separator (GTK_DIALOG (shell->priv->plugins), FALSE);
 
-		g_signal_connect_object (G_OBJECT (shell->priv->plugins),
-					 "delete_event",
-					 G_CALLBACK (ario_shell_plugins_window_delete_cb),
-					 NULL, 0);
-		g_signal_connect_object (G_OBJECT (shell->priv->plugins),
-					 "response",
-					 G_CALLBACK (ario_shell_plugins_response_cb),
-					 NULL, 0);
+                g_signal_connect_object (G_OBJECT (shell->priv->plugins),
+                                         "delete_event",
+                                         G_CALLBACK (ario_shell_plugins_window_delete_cb),
+                                         NULL, 0);
+                g_signal_connect_object (G_OBJECT (shell->priv->plugins),
+                                         "response",
+                                         G_CALLBACK (ario_shell_plugins_response_cb),
+                                         NULL, 0);
 
-		manager = ario_plugin_manager_new ();
-		gtk_widget_show_all (GTK_WIDGET (manager));
-		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell->priv->plugins)->vbox),
-				   manager);
+                manager = ario_plugin_manager_new ();
+                gtk_widget_show_all (GTK_WIDGET (manager));
+                gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell->priv->plugins)->vbox),
+                                   manager);
 
-                
+
                 gtk_window_set_default_size (GTK_WINDOW (shell->priv->plugins), 300, 350);
-	}
+        }
 
-	gtk_window_present (GTK_WINDOW (shell->priv->plugins));
+        gtk_window_present (GTK_WINDOW (shell->priv->plugins));
 }
 
 GtkWidget *

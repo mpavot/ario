@@ -69,7 +69,7 @@ struct _ArioPluginManagerClass
 GType           ario_plugin_manager_get_type    (void) G_GNUC_CONST;
 
 GtkWidget*      ario_plugin_manager_new         (void);
-   
+
 G_END_DECLS
 
 #endif  /* __ARIO_PLUGIN_MANAGER_H__  */

@@ -189,7 +189,7 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
+        ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -415,16 +415,16 @@ ario_storedplaylists_new (GtkUIManager *mgr,
         ARIO_LOG_FUNCTION_START
         ArioStoredplaylists *storedplaylists;
         GtkWidget *scrolledwindow_songs;
-        
+
         storedplaylists = g_object_new (TYPE_ARIO_STOREDPLAYLISTS,
                                         "ui-manager", mgr,
                                         "action-group", group,
                                         "mpd", mpd,
                                         "playlist", playlist,
                                         NULL);
-                                        
+
         g_return_val_if_fail (storedplaylists->priv != NULL, NULL);   
-             
+
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (scrolledwindow_songs);

@@ -171,7 +171,7 @@ ario_search_class_init (ArioSearchClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
+        ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -385,7 +385,7 @@ ario_search_new (GtkUIManager *mgr,
                                NULL);
 
         g_return_val_if_fail (search->priv != NULL, NULL);
-        
+
         /* Searchs list */
         scrolledwindow_searchs = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (scrolledwindow_searchs);

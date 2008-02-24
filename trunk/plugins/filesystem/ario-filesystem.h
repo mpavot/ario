@@ -52,9 +52,9 @@ typedef struct
 GType                   ario_filesystem_get_type   (void);
 
 GtkWidget*              ario_filesystem_new        (GtkUIManager *mgr,
-                                                     GtkActionGroup *group,
-                                                     ArioMpd *mpd,
-                                                     ArioPlaylist *playlist);
+                                                    GtkActionGroup *group,
+                                                    ArioMpd *mpd,
+                                                    ArioPlaylist *playlist);
 G_END_DECLS
 
 #endif /* __ARIO_FILESYSTEM_H */

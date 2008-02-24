@@ -55,15 +55,15 @@ struct _ArioPluginManagerPrivate
         GtkWidget* configure_button;
 
         GtkWidget* about;
-        
+
         GtkWidget* popup_menu;
 };
 
 G_DEFINE_TYPE(ArioPluginManager, ario_plugin_manager, GTK_TYPE_VBOX)
 
-static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm); 
-static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
-static void ario_plugin_manager_finalize (GObject *object);
+        static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm); 
+        static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
+        static void ario_plugin_manager_finalize (GObject *object);
 
 static void 
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
@@ -90,13 +90,13 @@ about_button_cb (GtkWidget* button,
                 gtk_widget_destroy (pm->priv->about);
 
         pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-                "name", ario_plugin_info_get_name (info),
-                "copyright", ario_plugin_info_get_copyright (info),
-                "authors", ario_plugin_info_get_authors (info),
-                "comments", ario_plugin_info_get_description (info),
-                "website", ario_plugin_info_get_website (info),
-                "logo-icon-name", ario_plugin_info_get_icon_name (info),
-                NULL);
+                                        "name", ario_plugin_info_get_name (info),
+                                        "copyright", ario_plugin_info_get_copyright (info),
+                                        "authors", ario_plugin_info_get_authors (info),
+                                        "comments", ario_plugin_info_get_description (info),
+                                        "website", ario_plugin_info_get_website (info),
+                                        "logo-icon-name", ario_plugin_info_get_icon_name (info),
+                                        NULL);
 
         gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about),
                                             TRUE);
@@ -144,7 +144,7 @@ plugin_manager_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 {
         ArioPluginInfo *info;
         gchar *text;
-        
+
         g_return_if_fail (tree_model != NULL);
         g_return_if_fail (tree_column != NULL);
 
@@ -172,7 +172,7 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
                                   gpointer           data)
 {
         ArioPluginInfo *info;
-        
+
         g_return_if_fail (tree_model != NULL);
         g_return_if_fail (tree_column != NULL);
 
@@ -223,7 +223,7 @@ cursor_changed_cb (GtkTreeView *view,
                                   info != NULL);
         gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
                                   (info != NULL) && 
-                                   ario_plugin_info_is_configurable (info));
+                                  ario_plugin_info_is_configurable (info));
 }
 
 static void
@@ -278,7 +278,7 @@ plugin_manager_populate_lists (ArioPluginManager *pm)
 
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
                 g_return_if_fail (selection != NULL);
-                
+
                 gtk_tree_selection_select_iter (selection, &iter);
 
                 gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
@@ -297,7 +297,7 @@ plugin_manager_set_active (ArioPluginManager *pm,
 {
         ArioPluginInfo *info;
         gboolean res = TRUE;
-        
+
         gtk_tree_model_get (model, iter, INFO_COLUMN, &info, -1);
 
         g_return_val_if_fail (info != NULL, FALSE);
@@ -306,7 +306,7 @@ plugin_manager_set_active (ArioPluginManager *pm,
                 /* activate the plugin */
                 if (!ario_plugins_engine_activate_plugin (info)) {
                         ARIO_LOG_DBG ("Could not activate %s.\n", 
-                                             ario_plugin_info_get_name (info));
+                                      ario_plugin_info_get_name (info));
 
                         res = FALSE;
                 }
@@ -314,20 +314,20 @@ plugin_manager_set_active (ArioPluginManager *pm,
                 /* deactivate the plugin */
                 if (!ario_plugins_engine_deactivate_plugin (info)) {
                         ARIO_LOG_DBG ("Could not deactivate %s.\n", 
-                                             ario_plugin_info_get_name (info));
+                                      ario_plugin_info_get_name (info));
 
                         res = FALSE;
                 }
         }
 
-	gtk_list_store_set (GTK_LIST_STORE (model),
-			    iter,
-			    ACTIVE_COLUMN,
-			    ario_plugin_info_is_active (info),
-			    -1);
+        gtk_list_store_set (GTK_LIST_STORE (model),
+                            iter,
+                            ACTIVE_COLUMN,
+                            ario_plugin_info_is_active (info),
+                            -1);
 
-	/* cause the configure button sensitivity to be updated */
-	cursor_changed_cb (GTK_TREE_VIEW (pm->priv->tree), pm);
+        /* cause the configure button sensitivity to be updated */
+        cursor_changed_cb (GTK_TREE_VIEW (pm->priv->tree), pm);
 
         return res;
 }
@@ -338,7 +338,7 @@ plugin_manager_toggle_active (ArioPluginManager *pm,
                               GtkTreeModel       *model)
 {
         gboolean active;
-        
+
         gtk_tree_model_get (model, iter, ACTIVE_COLUMN, &active, -1);
 
         active ^= 1;
@@ -363,7 +363,7 @@ plugin_manager_get_selected_plugin (ArioPluginManager *pm)
         if (gtk_tree_selection_get_selected (selection, NULL, &iter)) {
                 gtk_tree_model_get (model, &iter, INFO_COLUMN, &info, -1);
         }
-        
+
         return info;
 }
 
@@ -507,9 +507,9 @@ create_tree_popup_menu (ArioPluginManager *pm)
         g_signal_connect (item, "activate",
                           G_CALLBACK (disable_all_menu_cb), pm);
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-        
+
         gtk_widget_show_all (menu);
-        
+
         return menu;
 }
 
@@ -529,7 +529,7 @@ show_tree_popup_menu (GtkTreeView        *tree,
                 gtk_widget_destroy (pm->priv->popup_menu);
 
         pm->priv->popup_menu = create_tree_popup_menu (pm);
-        
+
         gtk_menu_attach_to_widget (GTK_MENU (pm->priv->popup_menu),
                                    GTK_WIDGET (pm),
                                    (GtkMenuDetachFunc) tree_popup_menu_detach);
@@ -575,7 +575,7 @@ button_press_event_cb (GtkWidget          *tree,
 
         if (!handled)
                 return FALSE;
-                
+
         /* The selection is fully updated by now */
         show_tree_popup_menu (GTK_TREE_VIEW (tree), pm, event);
         return TRUE;
@@ -596,7 +596,7 @@ model_name_sort_func (GtkTreeModel *model,
                       gpointer      user_data)
 {
         ArioPluginInfo *info1, *info2;
-        
+
         gtk_tree_model_get (model, iter1, INFO_COLUMN, &info1, -1);
         gtk_tree_model_get (model, iter2, INFO_COLUMN, &info2, -1);
 
@@ -649,15 +649,15 @@ plugin_manager_construct_tree (ArioPluginManager *pm)
         gtk_tree_view_column_set_cell_data_func (column, cell,
                                                  plugin_manager_view_icon_cell_cb,
                                                  pm, NULL);
-        
+
         cell = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, cell, TRUE);
         g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         gtk_tree_view_column_set_cell_data_func (column, cell,
                                                  plugin_manager_view_info_cell_cb,
                                                  pm, NULL);
-        
-        
+
+
         gtk_tree_view_column_set_spacing (column, 6);
         gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
@@ -718,13 +718,13 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         g_free (markup);
         gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
         gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-        
+
         gtk_box_pack_start (GTK_BOX (pm), label, FALSE, TRUE, 0);
-        
+
         alignment = gtk_alignment_new (0., 0., 1., 1.);
         gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
         gtk_box_pack_start (GTK_BOX (pm), alignment, TRUE, TRUE, 0);
-        
+
         viewport = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (viewport),
                                         GTK_POLICY_AUTOMATIC,

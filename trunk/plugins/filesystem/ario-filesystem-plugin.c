@@ -37,7 +37,7 @@
 
 struct _ArioFilesystemPluginPrivate
 {
-	guint ui_merge_id;
+        guint ui_merge_id;
         GtkWidget *source;
 };
 
@@ -59,15 +59,15 @@ static void
 impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
-	GtkUIManager *uimanager;
+        GtkUIManager *uimanager;
         GtkActionGroup *actiongroup;
         ArioMpd *mpd;
-	ArioFilesystemPlugin *pi = ARIO_FILESYSTEM_PLUGIN (plugin);
+        ArioFilesystemPlugin *pi = ARIO_FILESYSTEM_PLUGIN (plugin);
         ArioSourceManager *sourcemanager;
 
-	g_object_get (shell, "ui-manager", &uimanager, NULL);
+        g_object_get (shell, "ui-manager", &uimanager, NULL);
         g_object_get (shell, "action-group", &actiongroup, NULL);
-	g_object_get (shell, "mpd", &mpd, NULL);
+        g_object_get (shell, "mpd", &mpd, NULL);
 
         pi->priv->source = ario_filesystem_new (uimanager,
                                                 actiongroup,
@@ -91,13 +91,13 @@ static void
 impl_deactivate (ArioPlugin *plugin,
                  ArioShell *shell)
 {
-	GtkUIManager *uimanager;
+        GtkUIManager *uimanager;
 
-	ArioFilesystemPlugin *pi = ARIO_FILESYSTEM_PLUGIN (plugin);
+        ArioFilesystemPlugin *pi = ARIO_FILESYSTEM_PLUGIN (plugin);
 
-	g_object_get (shell, "ui-manager", &uimanager, NULL);
-	gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
-	g_object_unref (uimanager);
+        g_object_get (shell, "ui-manager", &uimanager, NULL);
+        gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
+        g_object_unref (uimanager);
 
         ario_sourcemanager_remove (ARIO_SOURCEMANAGER (ario_shell_get_sourcemanager (shell)),
                                    ARIO_SOURCE (pi->priv->source));
@@ -113,6 +113,6 @@ ario_filesystem_plugin_class_init (ArioFilesystemPluginClass *klass)
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-        
+
         g_type_class_add_private (object_class, sizeof (ArioFilesystemPluginPrivate));
 }
