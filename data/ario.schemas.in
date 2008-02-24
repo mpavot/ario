@@ -308,7 +308,7 @@
         <owner>ario</owner>
         <type>list</type>
         <list_type>string</list_type>
-        <default>[]</default>
+        <default>[filesystem,radios,wikipedia]</default>
         <locale name="C">
 	<short>Active plugins</short>
 	<long>List of active plugins. It contains the "Location" of the active plugins. See the .ario-plugin file for obtaining
