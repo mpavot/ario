@@ -512,9 +512,10 @@ ario_shell_show (ArioShell *shell)
         if (eel_gconf_get_boolean (CONF_AUTOCONNECT, TRUE))
                 ario_mpd_connect (shell->priv->mpd);
 
-        gtk_widget_show_all (GTK_WIDGET (shell->priv->window));
         ario_shell_sync_paned (shell);
         ario_shell_sync_mpd (shell);
+
+        gtk_widget_show_all (GTK_WIDGET (shell->priv->window));
 
         g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
@@ -869,6 +870,9 @@ ario_shell_cmd_plugins (GtkAction *action,
 		gtk_widget_show_all (GTK_WIDGET (manager));
 		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell->priv->plugins)->vbox),
 				   manager);
+
+                
+                gtk_window_set_default_size (GTK_WINDOW (shell->priv->plugins), 300, 350);
 	}
 
 	gtk_window_present (GTK_WINDOW (shell->priv->plugins));

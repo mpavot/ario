@@ -72,6 +72,10 @@ static void ario_filesystem_playlists_row_activated_cb (GtkTreeView *tree_view,
                                                         GtkTreePath *path,
                                                         GtkTreeViewColumn *column,
                                                         ArioFilesystem *filesystem);
+static void ario_filesystem_playlists_row_expanded_cb (GtkTreeView *tree_view,
+                                                       GtkTreeIter *iter,
+                                                       GtkTreePath *path,
+                                                       ArioFilesystem *filesystem);
 static void ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                              ArioFilesystem *filesystem);
 static void ario_filesystem_fill_filesystem (ArioFilesystem *filesystem);
@@ -309,6 +313,10 @@ ario_filesystem_init (ArioFilesystem *filesystem)
                                  G_CALLBACK (ario_filesystem_playlists_row_activated_cb),
                                  filesystem, 0);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
+                                 "test-expand-row",
+                                 G_CALLBACK (ario_filesystem_playlists_row_expanded_cb),
+                                 filesystem, 0);
+        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "cursor-changed",
                                  G_CALLBACK (ario_filesystem_cursor_moved_cb),
                                  filesystem, 0);
@@ -530,6 +538,16 @@ ario_filesystem_playlists_row_activated_cb (GtkTreeView *tree_view,
         }
 }
 
+static void ario_filesystem_playlists_row_expanded_cb (GtkTreeView *tree_view,
+                                                       GtkTreeIter *iter,
+                                                       GtkTreePath *path,
+                                                       ArioFilesystem *filesystem)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_filesystem_cursor_moved_cb (tree_view,
+                                         filesystem);
+}
+
 static void
 ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                  ArioFilesystem *filesystem)
@@ -749,7 +767,7 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
         ArioMpdSong *song;
 	GtkTreeIter iter;
         GtkTreeModel *model;
-        const guchar* dir;
+        guchar* dir;
 
         filesystem = ARIO_FILESYSTEM (data);
 
@@ -769,4 +787,5 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, dir,
                                 strlen (dir) * sizeof(guchar));
+        g_free (dir);
 }
