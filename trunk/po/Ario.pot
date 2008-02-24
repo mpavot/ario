@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 11:03+0100\n"
+"POT-Creation-Date: 2008-02-24 15:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -731,15 +731,15 @@ msgstr ""
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:605
+#: ../src/shell/ario-shell.c:606
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:606
+#: ../src/shell/ario-shell.c:607
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:849
+#: ../src/shell/ario-shell.c:850
 msgid "Configure Plugins"
 msgstr ""
 
@@ -920,9 +920,17 @@ msgstr ""
 msgid "P_revious"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:42
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:43
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:45
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:46
 msgid "Find artist on Wikipedia"
+msgstr ""
+
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:174
+msgid "Wikipedia Plugin - Configuration"
+msgstr ""
+
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:183
+msgid "Wikipedia language :"
 msgstr ""
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1

@@ -1,0 +1,16 @@
+<gconfschemafile>
+  <schemalist>
+
+      <schema>
+        <key>/schemas/apps/ario/plugins/wikipedia-language</key>
+        <applyto>/apps/ario/plugins/wikipedia-language</applyto>
+        <owner>ario</owner>
+        <type>string</type>
+        <default>en</default>
+        <locale name="C">
+        <short>Wikipedia language</short>
+        </locale>
+      </schema>
+
+  </schemalist>
+</gconfschemafile>

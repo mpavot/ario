@@ -31,11 +31,14 @@
 #include <ario-debug.h>
 #include <ario-shell.h>
 #include <ario-util.h>
+#include "lib/eel-gconf-extensions.h"
 
 static void ario_wikipedia_cmd_find_artist (GtkAction *action,
                                             ArioWikipediaPlugin *plugin);
 
 #define ARIO_WIKIPEDIA_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_WIKIPEDIA_PLUGIN, ArioWikipediaPluginPrivate))
+
+#define CONF_WIKIPEDIA_LANGUAGE                "/apps/ario/plugins/wikipedia-language"
 
 static GtkActionEntry ario_wikipedia_actions [] =
 {
@@ -48,6 +51,28 @@ struct _ArioWikipediaPluginPrivate
 {
 	guint ui_merge_id;
         ArioShell *shell;
+};
+
+static const char *wikipedia_languages[] = {
+        "Català", "ca",
+        "Deutsch", "de",
+        "English", "en",
+        "Español", "es",
+        "Français", "fr",
+        "Italiano", "it",
+        "Nederlands", "nl",
+        "日本語", "ja",
+        "Norsk (bokmål)", "no",
+        "Polski", "pl",
+        "Português", "pt",
+        "Русский", "ru",
+        "Română", "ro",
+        "Suomi", "fi",
+        "Svenska", "sv",
+        "Türkçe", "tr",
+        "Volapük", "vo",
+        "中文", "zh",
+        NULL
 };
 
 ARIO_PLUGIN_REGISTER_TYPE(ArioWikipediaPlugin, ario_wikipedia_plugin)
@@ -114,6 +139,102 @@ impl_deactivate (ArioPlugin *plugin,
 }
 
 static void
+configure_dialog_response_cb (GtkWidget *widget,
+			      gint response,
+			      GtkWidget *dialog)
+{
+        gtk_widget_destroy (dialog);
+}
+
+static void
+combobox_changed_cb (GtkComboBox *widget,
+                     gpointer null)
+{
+        int i;
+
+        i = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+
+        eel_gconf_set_string (CONF_WIKIPEDIA_LANGUAGE, 
+                              wikipedia_languages[2*i + 1]);
+}
+
+static GtkWidget *
+impl_create_configure_dialog (ArioPlugin *plugin)
+{
+	GtkWidget *dialog;
+	GtkWidget *hbox;
+	GtkWidget *label;
+	GtkWidget *combobox;
+        GtkListStore *list_store;
+        GtkCellRenderer *renderer;
+        GtkTreeIter iter;
+        int i;
+        char *current_language;
+
+        dialog = gtk_dialog_new_with_buttons (_("Wikipedia Plugin - Configuration"),
+					      NULL,
+					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_STOCK_CLOSE,
+					      GTK_RESPONSE_CLOSE,
+					      NULL);
+
+        hbox = gtk_hbox_new (FALSE, 6);
+        gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
+        label = gtk_label_new (_("Wikipedia language :"));
+
+        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+
+        for (i = 0; wikipedia_languages[2*i]; ++i) {
+                gtk_list_store_append (list_store, &iter);
+                gtk_list_store_set (list_store, &iter,
+                                    0, wikipedia_languages[2*i],
+                                    1, wikipedia_languages[2*i+1],
+                                    -1);
+        }
+
+        combobox = gtk_combo_box_new_with_model (GTK_TREE_MODEL (list_store));
+        g_object_unref (list_store);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (combobox));
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+                                        "text", 0, NULL);
+
+        current_language = eel_gconf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
+        for (i = 0; wikipedia_languages[2*i]; ++i) {
+                if (!strcmp (wikipedia_languages[2*i+1], current_language)) {
+                        gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), i);
+                        break;
+                }
+                gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), 0);
+        }
+        g_free (current_language);
+
+	gtk_box_pack_start_defaults (GTK_BOX (hbox),
+				     label);
+	gtk_box_pack_start_defaults (GTK_BOX (hbox),
+				     combobox);
+
+	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+				     hbox);
+
+	g_signal_connect (combobox,
+			  "changed",
+			  G_CALLBACK (combobox_changed_cb),
+			  NULL);
+
+	g_signal_connect (dialog,
+			  "response",
+			  G_CALLBACK (configure_dialog_response_cb),
+			  dialog);
+
+        gtk_widget_show_all (dialog);
+
+        return dialog;
+}
+
+static void
 ario_wikipedia_plugin_class_init (ArioWikipediaPluginClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -123,7 +244,8 @@ ario_wikipedia_plugin_class_init (ArioWikipediaPluginClass *klass)
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-        
+        plugin_class->create_configure_dialog = impl_create_configure_dialog;
+
         g_type_class_add_private (object_class, sizeof (ArioWikipediaPluginPrivate));
 }
 
@@ -134,6 +256,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
         ArioMpd *mpd;
         gchar *artist;
         gchar *command;
+        gchar *language;
 
         g_return_if_fail (ARIO_IS_WIKIPEDIA_PLUGIN (plugin));
 
@@ -143,8 +266,10 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
         if (artist) {
                 ario_util_string_replace (&artist, " ", "_");
                 ario_util_string_replace (&artist, "/", "_");
-                /* TODO : Change the locale in configuration */
-                command = g_strdup_printf("x-www-browser http://%s.wikipedia.org/wiki/%s", "en", artist);
+                
+                language = eel_gconf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
+                command = g_strdup_printf("x-www-browser http://%s.wikipedia.org/wiki/%s", language, artist);
+                g_free (language);
                 g_free (artist);
                 g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
                 g_free (command);
