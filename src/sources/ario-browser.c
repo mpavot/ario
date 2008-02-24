@@ -135,14 +135,14 @@ static GtkActionEntry ario_browser_actions [] =
         { "BrowserAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_add_songs) },
-                
+
         { "BrowserAlbumsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_albums_properties) },              
         { "BrowserSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_songs_properties) },
-                
+
         { "CoverArtistGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
@@ -248,7 +248,7 @@ ario_browser_class_init (ArioBrowserClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
+        ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -1282,7 +1282,7 @@ ario_browser_cmd_songs_properties (GtkAction *action,
         GSList *paths = NULL;
         GList *songs;
         GtkWidget *songinfos;
-                
+
         gtk_tree_selection_selected_foreach (browser->priv->songs_selection,
                                              songs_foreach,
                                              &paths);
@@ -1291,7 +1291,7 @@ ario_browser_cmd_songs_properties (GtkAction *action,
                                          paths);
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
-        
+
         songinfos = ario_shell_songinfos_new (browser->priv->mpd,
                                               songs);
         if (songinfos)

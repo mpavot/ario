@@ -191,7 +191,7 @@ ario_radio_class_init (ArioRadioClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
+        ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
 
@@ -350,7 +350,7 @@ ario_radio_set_property (GObject *object,
                 break;
         case PROP_ACTION_GROUP:
                 radio->priv->actiongroup = g_value_get_object (value);
-               if (!is_loaded) {
+                if (!is_loaded) {
                         gtk_action_group_add_actions (radio->priv->actiongroup,
                                                       ario_radio_actions,
                                                       ario_radio_n_actions, radio);

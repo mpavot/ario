@@ -52,7 +52,7 @@ ario_plugin_class_init (ArioPluginClass *klass)
 {
         klass->activate = dummy;
         klass->deactivate = dummy;
-        
+
         klass->create_configure_dialog = create_configure_dialog;
         klass->is_configurable = is_configurable;
 }
@@ -65,17 +65,17 @@ ario_plugin_init (ArioPlugin *plugin)
 
 void
 ario_plugin_activate (ArioPlugin *plugin,
-                       ArioShell *shell)
+                      ArioShell *shell)
 {
         g_return_if_fail (ARIO_IS_PLUGIN (plugin));
         g_return_if_fail (IS_ARIO_SHELL (shell));
-        
+
         ARIO_PLUGIN_GET_CLASS (plugin)->activate (plugin, shell);
 }
 
 void
 ario_plugin_deactivate (ArioPlugin *plugin,
-                         ArioShell *shell)
+                        ArioShell *shell)
 {
         g_return_if_fail (ARIO_IS_PLUGIN (plugin));
         g_return_if_fail (IS_ARIO_SHELL (shell));
@@ -95,6 +95,6 @@ GtkWidget *
 ario_plugin_create_configure_dialog (ArioPlugin *plugin)
 {
         g_return_val_if_fail (ARIO_IS_PLUGIN (plugin), NULL);
-        
+
         return ARIO_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
 }

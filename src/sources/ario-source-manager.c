@@ -34,9 +34,9 @@ static void ario_sourcemanager_init (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_finalize (GObject *object);
 static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
-                                             guint cnxn_id,
-                                             GConfEntry *entry,
-                                             ArioSourceManager *sourcemanager);
+                                                    guint cnxn_id,
+                                                    GConfEntry *entry,
+                                                    ArioSourceManager *sourcemanager);
 
 struct ArioSourceManagerPrivate
 {
@@ -111,16 +111,16 @@ ario_sourcemanager_finalize (GObject *object)
 
 GtkWidget *
 ario_sourcemanager_new (GtkUIManager *mgr,
-                 GtkActionGroup *group,
-                 ArioMpd *mpd,
-                 ArioPlaylist *playlist)
+                        GtkActionGroup *group,
+                        ArioMpd *mpd,
+                        ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
         ArioSourceManager *sourcemanager;
         GtkWidget *source;
 
         sourcemanager = g_object_new (TYPE_ARIO_SOURCEMANAGER,
-                               NULL);
+                                      NULL);
         g_return_val_if_fail (sourcemanager->priv != NULL, NULL);
 
         sourcemanager->priv->group = group;
@@ -224,9 +224,9 @@ ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 
 static void
 ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
-                                 guint cnxn_id,
-                                 GConfEntry *entry,
-                                 ArioSourceManager *sourcemanager)
+                                        guint cnxn_id,
+                                        GConfEntry *entry,
+                                        ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),

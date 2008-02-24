@@ -86,7 +86,7 @@ ario_plugins_engine_load_dir (const gchar        *dir,
                 if (g_str_has_suffix (dirent, PLUGIN_EXT)) {
                         gchar *plugin_file;
                         ArioPluginInfo *info;
-                        
+
                         plugin_file = g_build_filename (dir, dirent, NULL);
                         info = _ario_plugin_info_new (plugin_file);
                         g_free (plugin_file);
@@ -151,7 +151,7 @@ ario_plugins_engine_load_all (void)
         //pdirs_env = g_getenv ("ARIO_PLUGINS_PATH");
         /* What if no env var is set? We use the default location(s)! */
         //if (pdirs_env == NULL)
-                pdirs_env = ARIO_PLUGIN_DIR;
+        pdirs_env = ARIO_PLUGIN_DIR;
 
         ARIO_LOG_DBG ("ARIO_PLUGINS_PATH=%s", pdirs_env);
         pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
@@ -161,8 +161,8 @@ ario_plugins_engine_load_all (void)
 
         g_strfreev (pdirs);
 
-	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
-	g_slist_free (active_plugins);
+        g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
+        g_slist_free (active_plugins);
 }
 
 static gboolean
@@ -176,31 +176,31 @@ load_plugin_module (ArioPluginInfo *info)
         g_return_val_if_fail (info->module_name != NULL, FALSE);
         g_return_val_if_fail (info->plugin == NULL, FALSE);
         g_return_val_if_fail (info->available, FALSE);
-        
+
         switch (info->loader)
         {
-                case ARIO_PLUGIN_LOADER_C:
-                        dirname = g_path_get_dirname (info->file);        
-                        g_return_val_if_fail (dirname != NULL, FALSE);
+        case ARIO_PLUGIN_LOADER_C:
+                dirname = g_path_get_dirname (info->file);        
+                g_return_val_if_fail (dirname != NULL, FALSE);
 
-                        path = g_module_build_path (dirname, info->module_name);
-                        g_free (dirname);
-                        g_return_val_if_fail (path != NULL, FALSE);
-        
-                        info->module = G_TYPE_MODULE (ario_module_new (path));
-                        g_free (path);
-                        
-                        break;
+                path = g_module_build_path (dirname, info->module_name);
+                g_free (dirname);
+                g_return_val_if_fail (path != NULL, FALSE);
+
+                info->module = G_TYPE_MODULE (ario_module_new (path));
+                g_free (path);
+
+                break;
 
 #ifdef ENABLE_PYTHON
-                case ARIO_PLUGIN_LOADER_PY:
+        case ARIO_PLUGIN_LOADER_PY:
                 {
                         gchar *dir;
-                        
+
                         if (!ario_python_init ()) {
                                 /* Mark plugin as unavailable and fails */
                                 info->available = FALSE;
-                                
+
                                 g_warning ("Cannot load Python plugin '%s' since ario "
                                            "was not able to initialize the Python interpreter.",
                                            info->name);
@@ -209,72 +209,72 @@ load_plugin_module (ArioPluginInfo *info)
                         }
 
                         dir = g_path_get_dirname (info->file);
-                        
+
                         g_return_val_if_fail ((info->module_name != NULL) &&
                                               (info->module_name[0] != '\0'),
                                               FALSE);
 
                         info->module = G_TYPE_MODULE (
-                                        ario_python_module_new (dir, info->module_name));
-                                        
+                                                      ario_python_module_new (dir, info->module_name));
+
                         g_free (dir);
                         break;
                 }
 #endif
-                default:
-                        g_return_val_if_reached (FALSE);
+        default:
+                g_return_val_if_reached (FALSE);
         }
 
         if (!g_type_module_use (info->module)) {
                 switch (info->loader)
                 {
-                        case ARIO_PLUGIN_LOADER_C:
-                                g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
-                                           info->name,                                   
-                                           ario_module_get_path (ARIO_MODULE (info->module)));
-                                break;
+                case ARIO_PLUGIN_LOADER_C:
+                        g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
+                                   info->name,                                   
+                                   ario_module_get_path (ARIO_MODULE (info->module)));
+                        break;
 
-                        case ARIO_PLUGIN_LOADER_PY:
-                                g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
-                                           info->name,                                   
-                                           info->module_name);
-                                break;
+                case ARIO_PLUGIN_LOADER_PY:
+                        g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
+                                   info->name,                                   
+                                   info->module_name);
+                        break;
 
-                        default:
-                                g_return_val_if_reached (FALSE);                                
+                default:
+                        g_return_val_if_reached (FALSE);                                
                 }
-                           
+
                 g_object_unref (G_OBJECT (info->module));
                 info->module = NULL;
 
                 /* Mark plugin as unavailable and fails */
                 info->available = FALSE;
-                
+
                 return FALSE;
         }
-        
+
         switch (info->loader)
         {
-                case ARIO_PLUGIN_LOADER_C:
-                        info->plugin = 
-                                ARIO_PLUGIN (ario_module_new_object (ARIO_MODULE (info->module)));
-                        break;
+        case ARIO_PLUGIN_LOADER_C:
+                info->plugin = 
+                        ARIO_PLUGIN (ario_module_new_object (ARIO_MODULE (info->module)));
+                break;
 
 #ifdef ENABLE_PYTHON
-                case ARIO_PLUGIN_LOADER_PY:
-                        info->plugin = 
-                                ARIO_PLUGIN (ario_python_module_new_object (ARIO_PYTHON_MODULE (info->module)));
-                        break;
+        case ARIO_PLUGIN_LOADER_PY:
+                info->plugin = 
+                        ARIO_PLUGIN (ario_python_module_new_object (ARIO_PYTHON_MODULE (info->module)));
+                break;
 #endif
 
-                default:
-                        g_return_val_if_reached (FALSE);
+        default:
+                g_return_val_if_reached (FALSE);
         }
-        
+
         g_type_module_unuse (info->module);
 
         ARIO_LOG_DBG ("End");
-        
+
         return TRUE;
 }
 
@@ -285,20 +285,20 @@ reactivate_all ()
 
         for (pl = plugin_list; pl; pl = pl->next) {
                 gboolean res = TRUE;
-                
+
                 ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
 
                 /* If plugin is not available, don't try to activate/load it */
                 if (info->available && info->active) {                
                         if (info->plugin == NULL)
                                 res = load_plugin_module (info);
-                                
+
                         if (res)
                                 ario_plugin_activate (info->plugin,
                                                       static_shell);                        
                 }
         }
-        
+
         ARIO_LOG_DBG ("End");
 }
 
@@ -385,7 +385,7 @@ ario_plugins_engine_activate_plugin (ArioPluginInfo    *info)
 
         if (!info->available)
                 return FALSE;
-                
+
         if (info->active)
                 return TRUE;
 
@@ -424,12 +424,12 @@ ario_plugins_engine_deactivate_plugin (ArioPluginInfo    *info)
 
 void          
 ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
-                                       GtkWindow          *parent)
+                                      GtkWindow          *parent)
 {
         GtkWidget *conf_dlg;
-        
+
         GtkWindowGroup *wg;
-        
+
         g_return_if_fail (info != NULL);
 
         conf_dlg = ario_plugin_create_configure_dialog (info->plugin);
@@ -442,10 +442,10 @@ ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
                 wg = gtk_window_group_new ();
                 gtk_window_group_add_window (wg, parent);
         }
-                        
+
         gtk_window_group_add_window (wg,
                                      GTK_WINDOW (conf_dlg));
-                
+
         gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);                     
         gtk_widget_show (conf_dlg);
 }
@@ -462,13 +462,13 @@ ario_plugins_engine_active_plugins_changed (GConfClient *client,
 
         g_return_if_fail (entry->key != NULL);
         g_return_if_fail (entry->value != NULL);
-        
+
         if (!((entry->value->type == GCONF_VALUE_LIST) && 
               (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING))) {
                 g_warning ("The gconf key '%s' may be corrupted.", ARIO_PLUGINS_ENGINE_KEY);
                 return;
         }
-        
+
         active_plugins = eel_gconf_get_string_slist (CONF_PLUGINS_LIST);
 
         for (pl = plugin_list; pl; pl = pl->next) {

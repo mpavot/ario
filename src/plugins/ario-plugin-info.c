@@ -56,7 +56,7 @@ _ario_plugin_info_unref (ArioPluginInfo *info)
                 ARIO_LOG_DBG ("Unref plugin %s", info->name);
 
                 g_object_unref (info->plugin);
-                
+
                 /* info->module must not be unref since it is not possible to finalize 
                  * a type module */
         }
@@ -89,9 +89,9 @@ ario_plugin_info_get_type (void)
 
         if (G_UNLIKELY (!the_type))
                 the_type = g_boxed_type_register_static (
-                                        "ArioPluginInfo",
-                                        (GBoxedCopyFunc) ario_plugin_info_copy,
-                                        (GBoxedFreeFunc) _ario_plugin_info_unref);
+                                                         "ArioPluginInfo",
+                                                         (GBoxedCopyFunc) ario_plugin_info_copy,
+                                                         (GBoxedFreeFunc) _ario_plugin_info_unref);
 
         return the_type;
 } 
@@ -126,13 +126,13 @@ _ario_plugin_info_new (const gchar *file)
         }
 
         if (!g_key_file_has_key (plugin_file,
-                                    "Ario Plugin",
+                                 "Ario Plugin",
                                  "IAge",
                                  NULL)) {
                 ARIO_LOG_DBG ("IAge key does not exist in file: %s", file);
                 goto error;
         }
-        
+
         /* Check IAge=1 */
         if (g_key_file_get_integer (plugin_file,
                                     "Ario Plugin",
@@ -141,7 +141,7 @@ _ario_plugin_info_new (const gchar *file)
                 ARIO_LOG_DBG ("Wrong IAge in file: %s", file);
                 goto error;
         }
-                                    
+
         /* Get module name */
         str = g_key_file_get_string (plugin_file,
                                      "Ario Plugin",
@@ -250,11 +250,11 @@ _ario_plugin_info_new (const gchar *file)
         }
 
         g_key_file_free (plugin_file);
-        
+
         /* If we know nothing about the availability of the plugin,
            set it as available */
         info->available = TRUE;
-        
+
         return info;
 
 error:
