@@ -413,7 +413,7 @@ ario_shell_construct (ArioShell *shell)
                                                      win,
                                                      shell->priv->mpd,
                                                      shell->priv->cover_handler);
-        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon))
+        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 #endif
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();

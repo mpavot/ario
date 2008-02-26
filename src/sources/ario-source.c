@@ -23,8 +23,6 @@
 static void ario_source_class_init (ArioSourceClass *klass);
 static void ario_source_init (ArioSource *source);
 
-static GObjectClass *parent_class = NULL;
-
 GType
 ario_source_get_type (void)
 {
@@ -66,9 +64,6 @@ dummy_char (ArioSource *source)
 static void 
 ario_source_class_init (ArioSourceClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        parent_class = g_type_class_peek_parent (klass);
-
         klass->get_name = dummy_char;
         klass->get_icon = dummy_char;
         klass->get_id = dummy_char;

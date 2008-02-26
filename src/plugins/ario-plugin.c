@@ -29,8 +29,6 @@
 static void ario_plugin_class_init (ArioPluginClass *klass);
 static void ario_plugin_init (ArioPlugin *plugin);
 
-static GObjectClass *parent_class = NULL;
-
 GType
 ario_plugin_get_type (void)
 {
