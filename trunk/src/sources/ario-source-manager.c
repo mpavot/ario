@@ -152,11 +152,11 @@ ario_sourcemanager_new (GtkUIManager *mgr,
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
         ario_sourcemanager_reorder (sourcemanager);
-/*
+#ifndef WIN32
         eel_gconf_notification_add (CONF_SHOW_TABS,
                                     (GConfClientNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
                                     sourcemanager);
-*/
+#endif
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
                                     eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
 
