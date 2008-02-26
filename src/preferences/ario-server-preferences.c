@@ -28,7 +28,6 @@
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/eel-gconf-extensions.h"
-#include "ario-avahi.h"
 #include "ario-debug.h"
 
 static void ario_server_preferences_class_init (ArioServerPreferencesClass *klass);
@@ -45,12 +44,12 @@ static void ario_server_preferences_get_property (GObject *object,
 static void ario_server_preferences_sync_server (ArioServerPreferences *server_preferences);
 static void ario_server_preferences_server_changed_cb(ArioMpd *mpd,
                                                       ArioServerPreferences *server_preferences);
-void ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
-                                                       ArioServerPreferences *server_preferences);
-void ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
-                                                   ArioServerPreferences *server_preferences);
-void ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
-                                                 ArioServerPreferences *server_preferences);
+G_MODULE_EXPORT void ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
+                                                                       ArioServerPreferences *server_preferences);
+G_MODULE_EXPORT void ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
+                                                                   ArioServerPreferences *server_preferences);
+G_MODULE_EXPORT void ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
+                                                                 ArioServerPreferences *server_preferences);
 
 
 enum
@@ -322,7 +321,8 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
                         last_update = (long) ario_mpd_get_last_update (server_preferences->priv->mpd);
                         last_update_char = ctime (&last_update);
                         /* Remove the new line */
-                        last_update_char[strlen (last_update_char)-1] = '\0';
+                        if (last_update_char && strlen(last_update_char))
+                                last_update_char[strlen (last_update_char)-1] = '\0';
                 }
         }
 

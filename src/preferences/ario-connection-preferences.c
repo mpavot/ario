@@ -19,7 +19,6 @@
 
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -28,7 +27,9 @@
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/eel-gconf-extensions.h"
+#ifndef WIN32
 #include "ario-avahi.h"
+#endif
 #include "ario-debug.h"
 #include "ario-profiles.h"
 
@@ -44,26 +45,26 @@ static void ario_connection_preferences_get_property (GObject *object,
                                                       GValue *value,
                                                       GParamSpec *pspec);
 static void ario_connection_preferences_sync_connection (ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_name_changed_cb (GtkWidget *widget,
-                                                  ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_host_changed_cb (GtkWidget *widget,
-                                                  ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_port_changed_cb (GtkWidget *widget,
-                                                  ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
-                                                         ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_password_changed_cb (GtkWidget *widget,
-                                                      ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_autodetect_cb (GtkWidget *widget,
-                                                ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_new_profile_cb (GtkWidget *widget,
-                                                 ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
+G_MODULE_EXPORT void ario_connection_preferences_name_changed_cb (GtkWidget *widget,
+                                                                  ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_host_changed_cb (GtkWidget *widget,
+                                                                  ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_port_changed_cb (GtkWidget *widget,
+                                                                  ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
+                                                                         ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_password_changed_cb (GtkWidget *widget,
+                                                                      ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_autodetect_cb (GtkWidget *widget,
+                                                                ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_new_profile_cb (GtkWidget *widget,
+                                                                 ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
                                                     ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_connect_cb (GtkWidget *widget,
-                                             ArioConnectionPreferences *connection_preferences);
-void ario_connection_preferences_disconnect_cb (GtkWidget *widget,
-                                                ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_connect_cb (GtkWidget *widget,
+                                                             ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_disconnect_cb (GtkWidget *widget,
+                                                                ArioConnectionPreferences *connection_preferences);
 
 enum
 {
@@ -459,7 +460,7 @@ ario_connection_preferences_password_changed_cb (GtkWidget *widget,
                 }
         }
 }
-
+#ifndef WIN32
 static void
 ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
                                                   ArioConnectionPreferences *connection_preferences)
@@ -485,13 +486,13 @@ ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (connection_preferences->priv->autodetect_model), &iter))
                 gtk_tree_selection_select_iter (connection_preferences->priv->autodetect_selection, &iter);
 }
-
+#endif
 void
 ario_connection_preferences_autodetect_cb (GtkWidget *widget,
                                            ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-
+#ifndef WIN32
         ArioAvahi *avahi;
         GtkWidget *dialog, *error_dialog;
         GtkWidget *vbox;
@@ -614,6 +615,7 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
 
         g_object_unref (avahi);
         gtk_widget_destroy (dialog);
+#endif
 }
 
 void

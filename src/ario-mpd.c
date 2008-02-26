@@ -600,7 +600,7 @@ ario_mpd_connect (ArioMpd *mpd)
         if (mpd->priv->connection)
                 return;
 
-        hostname = eel_gconf_get_string (CONF_HOST, "localhpst");
+        hostname = eel_gconf_get_string (CONF_HOST, "localhost");
         port = eel_gconf_get_integer (CONF_PORT, 6600);
         timeout = 5.0;
 
@@ -1306,7 +1306,7 @@ ario_mpd_remove (ArioMpd *mpd,
                  GArray *song)
 {
         ARIO_LOG_FUNCTION_START
-        int i;
+        guint i;
 
         /* check if there is a connection */
         if (!mpd->priv->connection)

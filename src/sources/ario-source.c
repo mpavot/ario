@@ -20,7 +20,36 @@
 #include <config.h>
 #include "sources/ario-source.h"
 
-G_DEFINE_TYPE(ArioSource, ario_source, GTK_TYPE_HBOX)
+static void ario_source_class_init (ArioSourceClass *klass);
+static void ario_source_init (ArioSource *source);
+
+static GObjectClass *parent_class = NULL;
+
+GType
+ario_source_get_type (void)
+{
+        static GType type = 0;
+
+        if (!type) {
+                static const GTypeInfo our_info =
+                {
+                        sizeof (ArioSourceClass),
+                        NULL,
+                        NULL,
+                        (GClassInitFunc) ario_source_class_init,
+                        NULL,
+                        NULL,
+                        sizeof (ArioSource),
+                        0,
+                        (GInstanceInitFunc) ario_source_init
+                };
+
+                type = g_type_register_static (GTK_TYPE_HBOX,
+                                               "ArioSource",
+                                               &our_info, 0);
+        }
+        return type;
+}
 
 static void
 dummy (ArioSource *source)
@@ -37,6 +66,9 @@ dummy_char (ArioSource *source)
 static void 
 ario_source_class_init (ArioSourceClass *klass)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        parent_class = g_type_class_peek_parent (klass);
+
         klass->get_name = dummy_char;
         klass->get_icon = dummy_char;
         klass->get_id = dummy_char;
