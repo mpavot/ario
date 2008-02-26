@@ -35,16 +35,16 @@ static void ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
 static void ario_cover_preferences_init (ArioCoverPreferences *cover_preferences);
 static void ario_cover_preferences_finalize (GObject *object);
 static void ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences);
-void ario_cover_preferences_proxy_address_changed_cb (GtkWidget *widget,
-                                                      ArioCoverPreferences *cover_preferences);
-void ario_cover_preferences_proxy_port_changed_cb (GtkWidget *widget,
-                                                   ArioCoverPreferences *cover_preferences);
-void ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
-                                                        ArioCoverPreferences *cover_preferences);
-void ario_cover_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
-                                                    ArioCoverPreferences *cover_preferences);
-void ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
-                                                       ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_proxy_address_changed_cb (GtkWidget *widget,
+                                                                      ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_proxy_port_changed_cb (GtkWidget *widget,
+                                                                   ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
+                                                                        ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
+                                                                    ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
+                                                                       ArioCoverPreferences *cover_preferences);
 
 struct ArioCoverPreferencesPrivate
 {

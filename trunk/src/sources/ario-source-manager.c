@@ -33,10 +33,12 @@ static void ario_sourcemanager_class_init (ArioSourceManagerClass *klass);
 static void ario_sourcemanager_init (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_finalize (GObject *object);
 static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
+#ifndef WIN32
 static void ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
                                                     guint cnxn_id,
                                                     GConfEntry *entry,
                                                     ArioSourceManager *sourcemanager);
+#endif
 
 struct ArioSourceManagerPrivate
 {
@@ -150,11 +152,11 @@ ario_sourcemanager_new (GtkUIManager *mgr,
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
         ario_sourcemanager_reorder (sourcemanager);
-
+/*
         eel_gconf_notification_add (CONF_SHOW_TABS,
                                     (GConfClientNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
                                     sourcemanager);
-
+*/
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
                                     eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
 
@@ -221,7 +223,7 @@ ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
         gtk_notebook_set_current_page (GTK_NOTEBOOK (sourcemanager), page);
 #endif  /* MULTIPLE_VIEW */
 }
-
+#ifndef WIN32
 static void
 ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
                                         guint cnxn_id,
@@ -232,7 +234,7 @@ ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
                                     eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
 }
-
+#endif
 void
 ario_sourcemanager_append (ArioSourceManager *sourcemanager,
                            ArioSource *source)
@@ -252,9 +254,11 @@ ario_sourcemanager_append (ArioSourceManager *sourcemanager,
         gtk_notebook_append_page (GTK_NOTEBOOK (sourcemanager),
                                   GTK_WIDGET (source),
                                   hbox);
+#ifndef WIN32
         gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK (sourcemanager),
                                           GTK_WIDGET (source),
                                           TRUE);
+#endif
         gtk_widget_show_all (GTK_WIDGET (sourcemanager));
 }
 

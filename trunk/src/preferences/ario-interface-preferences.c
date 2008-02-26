@@ -35,10 +35,10 @@ static void ario_interface_preferences_class_init (ArioInterfacePreferencesClass
 static void ario_interface_preferences_init (ArioInterfacePreferences *interface_preferences);
 static void ario_interface_preferences_finalize (GObject *object);
 static void ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_preferences);
-void ario_interface_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
-                                                              ArioInterfacePreferences *interface_preferences);
-void ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
-                                                           ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
+                                                                              ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
+                                                                           ArioInterfacePreferences *interface_preferences);
 
 static const char *trayicon_behavior[] = {
         N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE

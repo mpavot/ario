@@ -56,6 +56,9 @@ ario_cover_make_ario_cover_path (const gchar *artist,
         char *filename;
         const char *to_strip = "#/";
 
+        if (!artist || !album)
+                return NULL;
+
         /* There are 2 different files : a small one for the labums list
          * and a normal one for the album-cover widget */
         if (ario_cover_size == SMALL_COVER)

@@ -92,11 +92,12 @@ static void ario_browser_cmd_get_album_ario_cover_amazon (GtkAction *action,
                                                           ArioBrowser *browser);
 static void ario_browser_cmd_remove_album_cover (GtkAction *action,
                                                  ArioBrowser *browser);
+#ifndef WIN32
 static void ario_browser_covertree_visible_changed_cb (GConfClient *client,
                                                        guint cnxn_id,
                                                        GConfEntry *entry,
                                                        ArioBrowser *browser);
-
+#endif
 struct ArioBrowserPrivate
 {        
         GtkWidget *artists;
@@ -430,9 +431,11 @@ ario_browser_init (ArioBrowser *browser)
                                  G_CALLBACK (ario_browser_motion_notify),
                                  browser,
                                  0);
+#ifndef WIN32
         eel_gconf_notification_add (CONF_COVER_TREE_HIDDEN,
                                     (GConfClientNotifyFunc) ario_browser_covertree_visible_changed_cb,
                                     browser); 
+#endif
 
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
@@ -656,7 +659,7 @@ ario_browser_fill_artists (ArioBrowser *browser)
                 gtk_list_store_set (browser->priv->artists_model, &artist_iter, 0,
                                     temp->data, -1);
         }
-        g_slist_foreach(artists, (GFunc) g_free, NULL);
+        g_slist_foreach (artists, (GFunc) g_free, NULL);
         g_slist_free (artists);
 
         gtk_tree_selection_unselect_all (browser->priv->artists_selection);
@@ -849,9 +852,9 @@ ario_browser_artists_selection_drag_foreach (GtkTreeModel *model,
 {
         ARIO_LOG_FUNCTION_START
         GString *artists = (GString *) userdata;
-        g_return_if_fail (artists != NULL);
-
         gchar* val = NULL;
+
+        g_return_if_fail (artists != NULL);
 
         gtk_tree_model_get (model, iter, 0, &val, -1);
         g_string_append (artists, val);
@@ -894,9 +897,8 @@ ario_browser_albums_selection_drag_foreach (GtkTreeModel *model,
 {
         ARIO_LOG_FUNCTION_START
         GString *albums = (GString *) userdata;
-        g_return_if_fail (albums != NULL);
-
         gchar* val = NULL;
+        g_return_if_fail (albums != NULL);
 
         gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &val, -1);
         g_string_append (albums, val);
@@ -944,9 +946,8 @@ ario_browser_songs_selection_drag_foreach (GtkTreeModel *model,
 {
         ARIO_LOG_FUNCTION_START
         GString *filenames = (GString *) userdata;
-        g_return_if_fail (filenames != NULL);
-
         gchar* val = NULL;
+        g_return_if_fail (filenames != NULL);
 
         gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
         g_string_append (filenames, val);
@@ -1016,6 +1017,9 @@ ario_browser_button_press_cb (GtkWidget *widget,
                               ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
+        GdkModifierType mods;
+        int x, y;
+
         if (!GTK_WIDGET_HAS_FOCUS (widget))
                 gtk_widget_grab_focus (widget);
 
@@ -1040,9 +1044,6 @@ ario_browser_button_press_cb (GtkWidget *widget,
                                 gtk_tree_selection_unselect_all (selection);
                                 gtk_tree_selection_select_path (selection, path);
                         }
-
-                        GdkModifierType mods;
-                        int x, y;
 
                         gdk_window_get_pointer (widget->window, &x, &y, &mods);
                         browser->priv->drag_start_x = x;
@@ -1421,7 +1422,7 @@ ario_browser_cmd_remove_album_cover (GtkAction *action,
 
         get_album_cover (browser, REMOVE_COVERS);
 }
-
+#ifndef WIN32
 static void
 ario_browser_covertree_visible_changed_cb (GConfClient *client,
                                            guint cnxn_id,
@@ -1433,3 +1434,4 @@ ario_browser_covertree_visible_changed_cb (GConfClient *client,
                                           !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
         ario_browser_artists_selection_update (browser);
 }
+#endif

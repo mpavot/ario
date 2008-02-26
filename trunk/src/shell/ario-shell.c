@@ -29,17 +29,19 @@
 #include "ario-cover-handler.h"
 #include "widgets/ario-playlist.h"
 #include "widgets/ario-header.h"
-#include "widgets/ario-tray-icon.h"
 #include "widgets/ario-status-bar.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell-preferences.h"
 #include "shell/ario-shell-lyrics.h"
 #include "shell/ario-shell-coverdownloader.h"
 #include "shell/ario-shell-coverselect.h"
-#include "widgets/ario-firstlaunch.h"
 #include "ario-debug.h"
 #include "ario-util.h"
 #include "plugins/ario-plugin-manager.h"
+#ifndef WIN32
+#include "widgets/ario-tray-icon.h"
+#include "widgets/ario-firstlaunch.h"
+#endif
 
 static void ario_shell_class_init (ArioShellClass *klass);
 static void ario_shell_init (ArioShell *shell);
@@ -109,9 +111,9 @@ struct ArioShellPrivate
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
-
+#ifndef WIN32
         ArioTrayIcon *tray_icon;
-
+#endif
         GtkWidget *plugins;
 
         gboolean statusbar_hidden;
@@ -265,7 +267,9 @@ ario_shell_finalize (GObject *object)
         gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->mpd);
+#ifndef WIN32
         gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));
+#endif
         g_object_unref (shell->priv->ui_manager);
         g_object_unref (shell->priv->actiongroup);
         g_free (shell->priv);
@@ -353,9 +357,10 @@ ario_shell_construct (ArioShell *shell)
         GtkWidget *separator;
         GtkWidget *vbox;
         GdkPixbuf *pixbuf;
-        ArioFirstlaunch *firstlaunch;
         GtkAction *action;
-
+#ifndef WIN32
+        ArioFirstlaunch *firstlaunch;
+#endif
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
         /* initialize UI */
@@ -401,15 +406,15 @@ ario_shell_construct (ArioShell *shell)
                                          UI_PATH "ario-ui.xml", NULL);
         gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
                                     gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
-
+#ifndef WIN32
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
                                                      win,
                                                      shell->priv->mpd,
                                                      shell->priv->cover_handler);
-        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
-
+        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon))
+#endif
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
@@ -459,7 +464,7 @@ ario_shell_construct (ArioShell *shell)
 
         ario_shell_sync_window_state (shell);
         gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
-
+#ifndef WIN32
         /* First launch assistant */
         if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {
                 firstlaunch = ario_firstlaunch_new ();
@@ -468,8 +473,11 @@ ario_shell_construct (ArioShell *shell)
                                          shell, 0);
                 gtk_widget_show_all (GTK_WIDGET (firstlaunch));
         } else {
-                ario_shell_show (shell);
+                 ario_shell_show (shell);
         }
+#else
+        ario_shell_show (shell);
+#endif
         ario_shell_sync_statusbar_visibility (shell);
 }
 

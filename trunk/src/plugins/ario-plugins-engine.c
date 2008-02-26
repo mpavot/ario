@@ -45,11 +45,12 @@
 #define ARIO_PLUGINS_ENGINE_KEY ARIO_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
 
 #define PLUGIN_EXT ".ario-plugin"
-
+#ifndef WIN32
 static void ario_plugins_engine_active_plugins_changed (GConfClient* client,
                                                         guint cnxn_id, 
                                                         GConfEntry* entry, 
                                                         gpointer user_data);
+#endif
 static void ario_plugins_engine_activate_plugin_real (ArioPluginInfo* info);
 static void ario_plugins_engine_deactivate_plugin_real (ArioPluginInfo* info);
 
@@ -306,11 +307,11 @@ void
 ario_plugins_engine_init (ArioShell *shell)
 {
         static_shell = shell;
-
+#ifndef WIN32
         eel_gconf_notification_add (ARIO_PLUGINS_ENGINE_KEY,
                                     ario_plugins_engine_active_plugins_changed,
                                     NULL);
-
+#endif
         ario_plugins_engine_load_all ();
 
         reactivate_all (shell);
@@ -449,7 +450,7 @@ ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
         gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);                     
         gtk_widget_show (conf_dlg);
 }
-
+#ifndef WIN32
 static void 
 ario_plugins_engine_active_plugins_changed (GConfClient *client,
                                             guint cnxn_id,
@@ -490,7 +491,7 @@ ario_plugins_engine_active_plugins_changed (GConfClient *client,
         g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
         g_slist_free (active_plugins);
 }
-
+#endif
 #ifdef ENABLE_PYTHON
 void
 ario_plugins_engine_garbage_collect (void)
