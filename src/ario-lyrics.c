@@ -23,7 +23,6 @@
 #include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
 #include "ario-lyrics.h"
 #include "ario-mpd.h"
 #include "ario-util.h"

@@ -24,7 +24,7 @@
 #include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "ario-cover.h"
 #include "ario-mpd.h"
 #include "ario-util.h"
@@ -274,7 +274,7 @@ ario_cover_make_amazon_xml_uri (const char *artist,
            */
 
         /* What is the amazon country choosen in the preferences? */
-        locale = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
+        locale = ario_conf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
 
         /* The default mode is "music" and the default extension is ".com" */
         music_mode = "music";

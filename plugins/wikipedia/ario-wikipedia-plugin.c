@@ -31,7 +31,7 @@
 #include <ario-debug.h>
 #include <ario-shell.h>
 #include <ario-util.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 
 static void ario_wikipedia_cmd_find_artist (GtkAction *action,
                                             ArioWikipediaPlugin *plugin);
@@ -154,7 +154,7 @@ combobox_changed_cb (GtkComboBox *widget,
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 
-        eel_gconf_set_string (CONF_WIKIPEDIA_LANGUAGE, 
+        ario_conf_set_string (CONF_WIKIPEDIA_LANGUAGE, 
                               wikipedia_languages[2*i + 1]);
 }
 
@@ -201,7 +201,7 @@ impl_create_configure_dialog (ArioPlugin *plugin)
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
                                         "text", 0, NULL);
 
-        current_language = eel_gconf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
+        current_language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
         for (i = 0; wikipedia_languages[2*i]; ++i) {
                 if (!strcmp (wikipedia_languages[2*i+1], current_language)) {
                         gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), i);
@@ -267,7 +267,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
                 ario_util_string_replace (&artist, " ", "_");
                 ario_util_string_replace (&artist, "/", "_");
                 
-                language = eel_gconf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
+                language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
                 command = g_strdup_printf("x-www-browser http://%s.wikipedia.org/wiki/%s", language, artist);
                 g_free (language);
                 g_free (artist);

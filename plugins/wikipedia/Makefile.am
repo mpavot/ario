@@ -31,6 +31,7 @@ INCLUDES = 						\
         -DUI_PATH=\""$(uixmldir)/"\"\
         -DPLUGINDIR=\""$(plugindir)/"\"\
 	$(DEPS_CFLAGS)   				\
+	$(GCONF_CFLAGS)   				\
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src      			\
 	-I$(top_srcdir)/src/lib                        	\

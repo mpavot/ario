@@ -27,7 +27,6 @@
 #include "preferences/ario-server-preferences.h"
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
-#include "lib/eel-gconf-extensions.h"
 #include "ario-debug.h"
 
 static void ario_server_preferences_class_init (ArioServerPreferencesClass *klass);

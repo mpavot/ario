@@ -34,23 +34,16 @@
 #include "ario-debug.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 
 #include "ario-module.h"
 #ifdef ENABLE_PYTHON
 #include "ario-python-module.h"
 #endif
 
-#define ARIO_PLUGINS_ENGINE_BASE_KEY "/apps/ario/plugins"
-#define ARIO_PLUGINS_ENGINE_KEY ARIO_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
-
 #define PLUGIN_EXT ".ario-plugin"
-#ifndef WIN32
-static void ario_plugins_engine_active_plugins_changed (GConfClient* client,
-                                                        guint cnxn_id, 
-                                                        GConfEntry* entry, 
-                                                        gpointer user_data);
-#endif
+
+static void ario_plugins_engine_active_plugins_changed (void);
 static void ario_plugins_engine_activate_plugin_real (ArioPluginInfo* info);
 static void ario_plugins_engine_deactivate_plugin_real (ArioPluginInfo* info);
 
@@ -133,7 +126,7 @@ ario_plugins_engine_load_all (void)
         gchar **pdirs;
         int i;
 
-        active_plugins = eel_gconf_get_string_slist (CONF_PLUGINS_LIST);
+        active_plugins = ario_conf_get_string_slist (CONF_PLUGINS_LIST);
 
         /* load user's plugins */
         home = g_get_home_dir ();
@@ -307,11 +300,7 @@ void
 ario_plugins_engine_init (ArioShell *shell)
 {
         static_shell = shell;
-#ifndef WIN32
-        eel_gconf_notification_add (ARIO_PLUGINS_ENGINE_KEY,
-                                    ario_plugins_engine_active_plugins_changed,
-                                    NULL);
-#endif
+
         ario_plugins_engine_load_all ();
 
         reactivate_all (shell);
@@ -355,9 +344,10 @@ save_active_plugin_list ()
                 }
         }
 
-        eel_gconf_set_string_slist (CONF_PLUGINS_LIST, active_plugins);
-
+        ario_conf_set_string_slist (CONF_PLUGINS_LIST, active_plugins);
         g_slist_free (active_plugins);
+
+        ario_plugins_engine_active_plugins_changed ();
 }
 
 static void
@@ -450,27 +440,15 @@ ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
         gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);                     
         gtk_widget_show (conf_dlg);
 }
-#ifndef WIN32
+
 static void 
-ario_plugins_engine_active_plugins_changed (GConfClient *client,
-                                            guint cnxn_id,
-                                            GConfEntry *entry,
-                                            gpointer user_data)
+ario_plugins_engine_active_plugins_changed (void)
 {
         GList *pl;
         gboolean to_activate;
         GSList *active_plugins;
 
-        g_return_if_fail (entry->key != NULL);
-        g_return_if_fail (entry->value != NULL);
-
-        if (!((entry->value->type == GCONF_VALUE_LIST) && 
-              (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING))) {
-                g_warning ("The gconf key '%s' may be corrupted.", ARIO_PLUGINS_ENGINE_KEY);
-                return;
-        }
-
-        active_plugins = eel_gconf_get_string_slist (CONF_PLUGINS_LIST);
+        active_plugins = ario_conf_get_string_slist (CONF_PLUGINS_LIST);
 
         for (pl = plugin_list; pl; pl = pl->next) {
                 ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
@@ -491,7 +469,7 @@ ario_plugins_engine_active_plugins_changed (GConfClient *client,
         g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
         g_slist_free (active_plugins);
 }
-#endif
+
 #ifdef ENABLE_PYTHON
 void
 ario_plugins_engine_garbage_collect (void)

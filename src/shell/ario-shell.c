@@ -21,7 +21,7 @@
 #include <gdk/gdk.h>
 #include <config.h>
 #include <string.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include <glib/gi18n.h>
 #include "shell/ario-shell.h"
 #include "sources/ario-source-manager.h"
@@ -114,7 +114,6 @@ struct ArioShellPrivate
 #ifndef WIN32
         ArioTrayIcon *tray_icon;
 #endif
-        GtkWidget *plugins;
 
         gboolean statusbar_hidden;
         gboolean connected;
@@ -418,7 +417,7 @@ ario_shell_construct (ArioShell *shell)
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
-        shell->priv->statusbar_hidden = eel_gconf_get_boolean (CONF_STATUSBAR_HIDDEN, FALSE);
+        shell->priv->statusbar_hidden = ario_conf_get_boolean (CONF_STATUSBAR_HIDDEN, FALSE);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewStatusbar");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
@@ -466,7 +465,7 @@ ario_shell_construct (ArioShell *shell)
         gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
 #ifndef WIN32
         /* First launch assistant */
-        if (!eel_gconf_get_boolean (CONF_FIRST_TIME, FALSE)) {
+        if (!ario_conf_get_boolean (CONF_FIRST_TIME, FALSE)) {
                 firstlaunch = ario_firstlaunch_new ();
                 g_signal_connect_object (G_OBJECT (firstlaunch), "destroy",
                                          G_CALLBACK (ario_shell_firstlaunch_delete_cb),
@@ -488,16 +487,16 @@ ario_shell_shutdown (ArioShell *shell)
         int width, height;
 
         if (shell->priv->shown) {
-                eel_gconf_set_integer (CONF_VPANED_POSITION,
+                ario_conf_set_integer (CONF_VPANED_POSITION,
                                        gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
 
                 gtk_window_get_size (GTK_WINDOW (shell->priv->window),
                                      &width,
                                      &height);
 
-                if (!eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE)) {
-                        eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
-                        eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
+                if (!ario_conf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE)) {
+                        ario_conf_set_integer (CONF_WINDOW_WIDTH, width);
+                        ario_conf_set_integer (CONF_WINDOW_HEIGHT, height);
                 }
 
                 ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
@@ -518,7 +517,7 @@ ario_shell_show (ArioShell *shell)
                                  "song_changed", G_CALLBACK (ario_shell_mpd_song_changed_cb),
                                  shell, 0);
 
-        if (eel_gconf_get_boolean (CONF_AUTOCONNECT, TRUE))
+        if (ario_conf_get_boolean (CONF_AUTOCONNECT, TRUE))
                 ario_mpd_connect (shell->priv->mpd);
 
         ario_shell_sync_paned (shell);
@@ -719,7 +718,7 @@ ario_shell_sync_paned (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         int pos;
 
-        pos = eel_gconf_get_integer (CONF_VPANED_POSITION, 400);
+        pos = ario_conf_get_integer (CONF_VPANED_POSITION, 400);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
@@ -751,7 +750,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
         g_return_val_if_fail (widget != NULL, FALSE);
 
         if (event->type == GDK_WINDOW_STATE) {
-                eel_gconf_set_boolean (CONF_WINDOW_MAXIMIZED,
+                ario_conf_set_boolean (CONF_WINDOW_MAXIMIZED,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
 
@@ -759,8 +758,8 @@ ario_shell_window_state_cb (GtkWidget *widget,
                                      &width,
                                      &height);
 
-                eel_gconf_set_integer (CONF_WINDOW_WIDTH, width);
-                eel_gconf_set_integer (CONF_WINDOW_HEIGHT, height);
+                ario_conf_set_integer (CONF_WINDOW_WIDTH, width);
+                ario_conf_set_integer (CONF_WINDOW_HEIGHT, height);
         }
 
         return FALSE;
@@ -770,9 +769,9 @@ static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        int width = eel_gconf_get_integer (CONF_WINDOW_WIDTH, 600); 
-        int height = eel_gconf_get_integer (CONF_WINDOW_HEIGHT, 600);
-        gboolean maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
+        int width = ario_conf_get_integer (CONF_WINDOW_WIDTH, 600); 
+        int height = ario_conf_get_integer (CONF_WINDOW_HEIGHT, 600);
+        gboolean maximized = ario_conf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
         GdkGeometry hints;
 
         gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
@@ -816,7 +815,7 @@ ario_shell_view_statusbar_changed_cb (GtkAction *action,
                                       ArioShell *shell)
 {
         shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-        eel_gconf_set_boolean (CONF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
+        ario_conf_set_boolean (CONF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
 
         ario_shell_sync_statusbar_visibility (shell);
 }
@@ -835,8 +834,7 @@ ario_shell_plugins_window_delete_cb (GtkWidget *window,
                                      GdkEventAny *event,
                                      gpointer data)
 {
-        gtk_widget_hide (window);
-
+        gtk_widget_destroy (GTK_WIDGET (window));
         return TRUE;
 }
 
@@ -845,46 +843,43 @@ ario_shell_plugins_response_cb (GtkDialog *dialog,
                                 int response_id,
                                 gpointer data)
 {
-        if (response_id == GTK_RESPONSE_CLOSE)
-                gtk_widget_hide (GTK_WIDGET (dialog));
+        gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
 ario_shell_cmd_plugins (GtkAction *action,
                         ArioShell *shell)
 {
-        if (shell->priv->plugins == NULL) {
-                GtkWidget *manager;
+        GtkWidget *window;
+        GtkWidget *manager;
 
-                shell->priv->plugins = gtk_dialog_new_with_buttons (_("Configure Plugins"),
-                                                                    GTK_WINDOW (shell->priv->window),
-                                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                                    GTK_STOCK_CLOSE,
-                                                                    GTK_RESPONSE_CLOSE,
-                                                                    NULL);
-                gtk_container_set_border_width (GTK_CONTAINER (shell->priv->plugins), 5);
-                gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell->priv->plugins)->vbox), 2);
-                gtk_dialog_set_has_separator (GTK_DIALOG (shell->priv->plugins), FALSE);
+        window = gtk_dialog_new_with_buttons (_("Configure Plugins"),
+                                              GTK_WINDOW (shell->priv->window),
+                                              GTK_DIALOG_DESTROY_WITH_PARENT,
+                                              GTK_STOCK_CLOSE,
+                                              GTK_RESPONSE_CLOSE,
+                                              NULL);
+        gtk_container_set_border_width (GTK_CONTAINER (window), 5);
+        gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (window)->vbox), 2);
+        gtk_dialog_set_has_separator (GTK_DIALOG (window), FALSE);
 
-                g_signal_connect_object (G_OBJECT (shell->priv->plugins),
-                                         "delete_event",
-                                         G_CALLBACK (ario_shell_plugins_window_delete_cb),
-                                         NULL, 0);
-                g_signal_connect_object (G_OBJECT (shell->priv->plugins),
-                                         "response",
-                                         G_CALLBACK (ario_shell_plugins_response_cb),
-                                         NULL, 0);
+        g_signal_connect_object (G_OBJECT (window),
+                                 "delete_event",
+                                 G_CALLBACK (ario_shell_plugins_window_delete_cb),
+                                 NULL, 0);
+        g_signal_connect_object (G_OBJECT (window),
+                                 "response",
+                                 G_CALLBACK (ario_shell_plugins_response_cb),
+                                 NULL, 0);
 
-                manager = ario_plugin_manager_new ();
-                gtk_widget_show_all (GTK_WIDGET (manager));
-                gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell->priv->plugins)->vbox),
-                                   manager);
+        manager = ario_plugin_manager_new ();
+        gtk_widget_show_all (GTK_WIDGET (manager));
+        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (window)->vbox),
+                           manager);
 
+        gtk_window_set_default_size (GTK_WINDOW (window), 300, 350);
 
-                gtk_window_set_default_size (GTK_WINDOW (shell->priv->plugins), 300, 350);
-        }
-
-        gtk_window_present (GTK_WINDOW (shell->priv->plugins));
+        gtk_window_present (GTK_WINDOW (window));
 }
 
 GtkWidget *

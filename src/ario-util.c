@@ -25,7 +25,7 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
@@ -166,18 +166,18 @@ ario_util_init_stock_icons (void)
         GtkIconFactory *factory;
         GdkPixbuf *pb;
         GtkIconSet *set;
-	int icon_size;
+        int icon_size;
         factory = gtk_icon_factory_new ();
 
-	gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
+        gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
 
         pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png",
                                        NULL);
         set = gtk_icon_set_new_from_pixbuf (pb);
         gtk_icon_factory_add (factory, "ario", set);
-	gtk_icon_theme_add_builtin_icon ("ario",
-					 icon_size,
-					 pb);
+        gtk_icon_theme_add_builtin_icon ("ario",
+                                         icon_size,
+                                         pb);
        // g_object_unref (G_OBJECT (pb));
 
 
@@ -357,9 +357,9 @@ ario_util_download_file (const char *uri,
         /* set NO SIGNAL */
         curl_easy_setopt(curl, CURLOPT_NOSIGNAL, TRUE);
 
-        if (eel_gconf_get_boolean (CONF_USE_PROXY, FALSE)) {
-                address = eel_gconf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
-                port =  eel_gconf_get_integer (CONF_PROXY_PORT, 8080);
+        if (ario_conf_get_boolean (CONF_USE_PROXY, FALSE)) {
+                address = ario_conf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
+                port =  ario_conf_get_integer (CONF_PROXY_PORT, 8080);
                 if(address) {
                         curl_easy_setopt(curl, CURLOPT_PROXY, address);
                         curl_easy_setopt(curl, CURLOPT_PROXYPORT, port);

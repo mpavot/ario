@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "lib/libsexy/sexy-tooltip.h"
 #include "widgets/ario-tray-icon.h"
 #include "ario-util.h"
@@ -528,7 +528,7 @@ ario_tray_icon_double_click (ArioTrayIcon *icon)
         ARIO_LOG_FUNCTION_START
         int trayicon_behavior;
 
-        trayicon_behavior = eel_gconf_get_integer (CONF_TRAYICON_BEHAVIOR, 0);
+        trayicon_behavior = ario_conf_get_integer (CONF_TRAYICON_BEHAVIOR, 0);
 
         switch (trayicon_behavior) {
         case TRAY_ICON_PLAY_PAUSE:
@@ -832,7 +832,7 @@ ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                         ario_tray_icon_restore_main_window (icon);
                         gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
                 } else {
-                        icon->priv->maximized = eel_gconf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
+                        icon->priv->maximized = ario_conf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
                         gtk_window_get_position (icon->priv->main_window,
                                                  &icon->priv->window_x,
                                                  &icon->priv->window_y);

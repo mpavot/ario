@@ -21,7 +21,7 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "shell/ario-shell-coverselect.h"
 #include "ario-cover.h"
 #include "lib/rb-glade-helpers.h"

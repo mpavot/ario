@@ -26,7 +26,7 @@
 #include "preferences/ario-connection-preferences.h"
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #ifndef WIN32
 #include "ario-avahi.h"
 #endif
@@ -381,7 +381,7 @@ ario_connection_preferences_sync_connection (ArioConnectionPreferences *connecti
 
         connection_preferences->priv->loading = TRUE;
 
-        autoconnect = eel_gconf_get_boolean (CONF_AUTOCONNECT, FALSE);
+        autoconnect = ario_conf_get_boolean (CONF_AUTOCONNECT, FALSE);
 
         if (ario_mpd_is_connected (connection_preferences->priv->mpd)) {
                 gtk_widget_set_sensitive (connection_preferences->priv->connect_button, FALSE);
@@ -414,7 +414,7 @@ ario_connection_preferences_host_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         if (!connection_preferences->priv->loading) {
-                eel_gconf_set_string (CONF_HOST,
+                ario_conf_set_string (CONF_HOST,
                                       gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
                 g_free (connection_preferences->priv->current_profile->host);
                 connection_preferences->priv->current_profile->host = g_strdup (gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
@@ -427,7 +427,7 @@ ario_connection_preferences_port_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         if (!connection_preferences->priv->loading) {
-                eel_gconf_set_integer (CONF_PORT,
+                ario_conf_set_integer (CONF_PORT,
                                        (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton)));
                 connection_preferences->priv->current_profile->port = (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton));
         }
@@ -439,7 +439,7 @@ ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         if (!connection_preferences->priv->loading)
-                eel_gconf_set_boolean (CONF_AUTOCONNECT,
+                ario_conf_set_boolean (CONF_AUTOCONNECT,
                                        gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->autoconnect_checkbutton)));
 }
 
@@ -451,7 +451,7 @@ ario_connection_preferences_password_changed_cb (GtkWidget *widget,
         const gchar *password;
         if (!connection_preferences->priv->loading) {
                 password = gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->password_entry));
-                eel_gconf_set_string (CONF_PASSWORD, password);
+                ario_conf_set_string (CONF_PASSWORD, password);
                 g_free (connection_preferences->priv->current_profile->password);
                 if (password && strcmp(password, "")) {
                         connection_preferences->priv->current_profile->password = g_strdup (password);
