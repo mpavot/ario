@@ -97,6 +97,7 @@ static void
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_plugin_manager_finalize;
 
@@ -802,12 +803,11 @@ static void
 ario_plugin_manager_finalize (GObject *object)
 {
         ArioPluginManager *pm = ARIO_PLUGIN_MANAGER (object);
-
+printf ("final\n");
         if (pm->priv->popup_menu)
                 gtk_widget_destroy (pm->priv->popup_menu);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
-
 }
 
 GtkWidget *ario_plugin_manager_new (void)

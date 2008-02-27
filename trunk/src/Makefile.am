@@ -27,8 +27,7 @@ ario_SOURCES = \
 	ario-profiles.h\
 	ario-util.c\
 	ario-util.h\
-	lib/eel-gconf-extensions.c\
-	lib/eel-gconf-extensions.h\
+	lib/ario-conf.h\
 	lib/eggtrayicon.c\
 	lib/eggtrayicon.h\
 	lib/libmpdclient.c\
@@ -98,10 +97,19 @@ ario_SOURCES = \
 	widgets/ario-volume.c\
 	widgets/ario-volume.h
 
+if USE_GCONF
+        ario_SOURCES += lib/ario-gconf.c
+else
+        ario_SOURCES += lib/ario-xml-conf.c
+endif
 
-ario_LDADD = $(DEPS_LIBS)
+ario_LDADD = \
+        $(DEPS_LIBS)\
+        $(GCONF_LIBS)
 
-AM_CPPFLAGS = $(DEPS_CFLAGS) \
+AM_CPPFLAGS = \
+                $(DEPS_CFLAGS) \
+                $(GCONF_CFLAGS) \
                 -DLOCALE_DIR=\""$(pkgdatadir)/locale"\"\
                 -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\
                 -DDATA_PATH=\""$(pkgdatadir)/ario/data/"\"\

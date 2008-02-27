@@ -21,7 +21,7 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "sources/ario-storedplaylists.h"
 #include "widgets/ario-songlist.h"
 #include "shell/ario-shell-songinfos.h"
@@ -304,7 +304,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         storedplaylists->priv->paned = gtk_hpaned_new ();
         gtk_paned_pack1 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_storedplaylists, FALSE, FALSE);
 
-        pos = eel_gconf_get_integer (CONF_PLAYLISTS_HPANED_SIZE, 250);
+        pos = ario_conf_get_integer (CONF_PLAYLISTS_HPANED_SIZE, 250);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (storedplaylists->priv->paned),
                                         pos);
@@ -320,7 +320,7 @@ ario_storedplaylists_shutdown (ArioSource *source)
 
         pos = gtk_paned_get_position (GTK_PANED (storedplaylists->priv->paned));
         if (pos > 0)
-                eel_gconf_set_integer (CONF_PLAYLISTS_HPANED_SIZE,
+                ario_conf_set_integer (CONF_PLAYLISTS_HPANED_SIZE,
                                        pos);
 }
 

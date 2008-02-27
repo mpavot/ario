@@ -21,7 +21,7 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "sources/ario-source-manager.h"
 #include "sources/ario-browser.h"
 #include "sources/ario-search.h"
@@ -33,12 +33,10 @@ static void ario_sourcemanager_class_init (ArioSourceManagerClass *klass);
 static void ario_sourcemanager_init (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_finalize (GObject *object);
 static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
-#ifndef WIN32
-static void ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
-                                                    guint cnxn_id,
-                                                    GConfEntry *entry,
+static void ario_sourcemanager_showtabs_changed_cb (gpointer do_not_use1,
+                                                    guint notification_id,
+                                                    gpointer do_not_use2,
                                                     ArioSourceManager *sourcemanager);
-#endif
 
 struct ArioSourceManagerPrivate
 {
@@ -152,13 +150,13 @@ ario_sourcemanager_new (GtkUIManager *mgr,
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
         ario_sourcemanager_reorder (sourcemanager);
-#ifndef WIN32
-        eel_gconf_notification_add (CONF_SHOW_TABS,
-                                    (GConfClientNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
+
+        ario_conf_notification_add (CONF_SHOW_TABS,
+                                    (ArioNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
                                     sourcemanager);
-#endif
+
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
-                                    eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
+                                    ario_conf_get_boolean (CONF_SHOW_TABS, TRUE));
 
         return GTK_WIDGET (sourcemanager);
 }
@@ -176,11 +174,11 @@ ario_sourcemanager_shutdown (ArioSourceManager *sourcemanager)
 {
         GSList *ordered_sources = NULL;
 
-        eel_gconf_set_integer (CONF_SOURCE,
+        ario_conf_set_integer (CONF_SOURCE,
                                gtk_notebook_get_current_page (GTK_NOTEBOOK (sourcemanager)));
 
         gtk_container_foreach (GTK_CONTAINER (sourcemanager), (GtkCallback) ario_sourcemanager_shutdown_foreach, &ordered_sources);
-        eel_gconf_set_string_slist (CONF_SOURCE_LIST, ordered_sources);
+        ario_conf_set_string_slist (CONF_SOURCE_LIST, ordered_sources);
         g_slist_free (ordered_sources);
 }
 
@@ -192,7 +190,7 @@ ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
         ArioSource *source;
         GSList *ordered_tmp;
         GSList *sources_tmp;
-        GSList *ordered_sources = eel_gconf_get_string_slist (CONF_SOURCE_LIST);
+        GSList *ordered_sources = ario_conf_get_string_slist (CONF_SOURCE_LIST);
 
         for (ordered_tmp = ordered_sources; ordered_tmp; ordered_tmp = g_slist_next (ordered_tmp)) {
                 for (sources_tmp = sourcemanager->priv->sources; sources_tmp; sources_tmp = g_slist_next (sources_tmp)) {
@@ -219,22 +217,22 @@ ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 #ifdef MULTIPLE_VIEW
         gint page;
 
-        page = eel_gconf_get_integer (CONF_SOURCE, ARIO_SOURCE_BROWSER);
+        page = ario_conf_get_integer (CONF_SOURCE, ARIO_SOURCE_BROWSER);
         gtk_notebook_set_current_page (GTK_NOTEBOOK (sourcemanager), page);
 #endif  /* MULTIPLE_VIEW */
 }
-#ifndef WIN32
+
 static void
-ario_sourcemanager_showtabs_changed_cb (GConfClient *client,
-                                        guint cnxn_id,
-                                        GConfEntry *entry,
+ario_sourcemanager_showtabs_changed_cb (gpointer do_not_use1,
+                                        guint notification_id,
+                                        gpointer do_not_use2,
                                         ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
-                                    eel_gconf_get_boolean (CONF_SHOW_TABS, TRUE));
+                                    ario_conf_get_boolean (CONF_SHOW_TABS, TRUE));
 }
-#endif
+
 void
 ario_sourcemanager_append (ArioSourceManager *sourcemanager,
                            ArioSource *source)
@@ -266,6 +264,7 @@ void
 ario_sourcemanager_remove (ArioSourceManager *sourcemanager,
                            ArioSource *source)
 {
+        ario_source_shutdown (source);
         sourcemanager->priv->sources = g_slist_remove (sourcemanager->priv->sources, source);
         gtk_container_remove (GTK_CONTAINER (sourcemanager), GTK_WIDGET (source));
 }

@@ -27,7 +27,7 @@
 #include "preferences/ario-cover-preferences.h"
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "ario-avahi.h"
 #include "ario-debug.h"
 
@@ -202,9 +202,9 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
         int proxy_port;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check), 
-                                      !eel_gconf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
+                                      !ario_conf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
 
-        current_country = eel_gconf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
+        current_country = ario_conf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
         for (i = 0; amazon_countries[i]; ++i) {
                 if (!strcmp (amazon_countries[i], current_country)) {
                         gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), i);
@@ -216,10 +216,10 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
         g_free (current_country);
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->proxy_check), 
-                                      eel_gconf_get_boolean (CONF_USE_PROXY, FALSE));
+                                      ario_conf_get_boolean (CONF_USE_PROXY, FALSE));
 
-        proxy_address = eel_gconf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
-        proxy_port = eel_gconf_get_integer (CONF_PROXY_PORT, 8080);
+        proxy_address = ario_conf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
+        proxy_port = ario_conf_get_integer (CONF_PROXY_PORT, 8080);
 
         gtk_entry_set_text (GTK_ENTRY (cover_preferences->priv->proxy_address_entry), proxy_address);
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (cover_preferences->priv->proxy_port_spinbutton), (gdouble) proxy_port);
@@ -231,7 +231,7 @@ ario_cover_preferences_proxy_address_changed_cb (GtkWidget *widget,
                                                  ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        eel_gconf_set_string (CONF_PROXY_ADDRESS,
+        ario_conf_set_string (CONF_PROXY_ADDRESS,
                               gtk_entry_get_text (GTK_ENTRY (cover_preferences->priv->proxy_address_entry)));
 }
 
@@ -240,7 +240,7 @@ ario_cover_preferences_proxy_port_changed_cb (GtkWidget *widget,
                                               ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        eel_gconf_set_integer (CONF_PROXY_PORT,
+        ario_conf_set_integer (CONF_PROXY_PORT,
                                (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (cover_preferences->priv->proxy_port_spinbutton)));
 }
 
@@ -249,7 +249,7 @@ ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                    ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        eel_gconf_set_boolean (CONF_COVER_TREE_HIDDEN,
+        ario_conf_set_boolean (CONF_COVER_TREE_HIDDEN,
                                !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check)));
 }
 
@@ -260,7 +260,7 @@ ario_cover_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
         ARIO_LOG_FUNCTION_START
         gboolean active;
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->proxy_check));
-        eel_gconf_set_boolean (CONF_USE_PROXY,
+        ario_conf_set_boolean (CONF_USE_PROXY,
                                active);
 
         gtk_widget_set_sensitive (cover_preferences->priv->proxy_address_entry, active);
@@ -276,7 +276,7 @@ ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country));
 
-        eel_gconf_set_string (CONF_COVER_AMAZON_COUNTRY, 
+        ario_conf_set_string (CONF_COVER_AMAZON_COUNTRY, 
                               amazon_countries[i]);
 }
 

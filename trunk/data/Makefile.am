@@ -40,7 +40,7 @@ ui_DATA = ario-ui.xml
 alldatadir = $(pkgdatadir)/ario/data
 alldata_DATA = profiles.xml.default 
 
-if GCONF_SCHEMAS_INSTALL
+if USE_GCONF
 install-data-local:
 	        if test -z "$(DESTDIR)" ; then \
 	                for p in $(schemas_DATA) ; do \

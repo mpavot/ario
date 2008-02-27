@@ -24,7 +24,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <curl/curl.h>
 #include <libxml/parser.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "shell/ario-shell.h"
 #include "plugins/ario-plugins-engine.h"
 #include "ario-util.h"
@@ -51,19 +51,19 @@ main (int argc, char *argv[])
         curl_global_init(0);
         if (!g_thread_supported ()) g_thread_init (NULL);
 
-        eel_gconf_monitor_add ("/apps/ario");
+        ario_conf_init ();
         shell = ario_shell_new ();
         ario_shell_construct (shell);
-	ario_plugins_engine_init (shell);
+        ario_plugins_engine_init (shell);
 
         gtk_main ();
 
         ario_shell_shutdown (shell);
-        eel_gconf_monitor_remove ("/apps/ario");
+        ario_conf_shutdown ();
 
         g_object_unref (G_OBJECT (shell));
 
-	ario_plugins_engine_shutdown ();
+        ario_plugins_engine_shutdown ();
 
         xmlCleanupParser ();
 

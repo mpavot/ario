@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include <limits.h>
 #include <glib/gi18n.h>
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "ario-mpd.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -565,7 +565,7 @@ ario_mpd_connect_to (ArioMpd *mpd,
 
         mpd->priv->connection = mpd_newConnection (hostname, port, timeout);
 
-        password = eel_gconf_get_string (CONF_PASSWORD, NULL);
+        password = ario_conf_get_string (CONF_PASSWORD, NULL);
         if (password) {
                 mpd_sendPasswordCommand (mpd->priv->connection, password);
                 mpd_finishCommand (mpd->priv->connection);
@@ -600,8 +600,8 @@ ario_mpd_connect (ArioMpd *mpd)
         if (mpd->priv->connection)
                 return;
 
-        hostname = eel_gconf_get_string (CONF_HOST, "localhost");
-        port = eel_gconf_get_integer (CONF_PORT, 6600);
+        hostname = ario_conf_get_string (CONF_HOST, "localhost");
+        port = ario_conf_get_integer (CONF_PORT, 6600);
         timeout = 5.0;
 
         if (hostname == NULL)

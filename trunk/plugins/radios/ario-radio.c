@@ -100,6 +100,8 @@ struct ArioRadioPrivate
         ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
+
+        xmlDocPtr doc;
 };
 
 static GtkActionEntry ario_radio_actions [] =
@@ -315,7 +317,8 @@ ario_radio_finalize (GObject *object)
         radio = ARIO_RADIO (object);
 
         g_return_if_fail (radio->priv != NULL);
-
+        if (radio->priv->doc)
+                xmlFreeDoc (radio->priv->doc);
         g_free (radio->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -447,11 +450,47 @@ ario_radio_create_xml_file (char *xml_filename)
 static char*
 ario_radio_get_xml_filename (void)
 {
-        char *xml_filename;
+        static char *xml_filename = NULL;
 
-        xml_filename = g_build_filename (ario_util_config_dir (), "radios" , "radios.xml", NULL);
+        if (!xml_filename)
+                xml_filename = g_build_filename (ario_util_config_dir (), "radios" , "radios.xml", NULL);
 
         return xml_filename;
+}
+
+// Return TRUE on success
+static gboolean
+ario_radio_fill_doc (ArioRadio *radio)
+{
+        ARIO_LOG_FUNCTION_START
+        char *xml_filename;
+        xmlNodePtr cur;
+
+        if (!radio->priv->doc) {
+                xml_filename = ario_radio_get_xml_filename();
+
+                /* If radios.xml file doesn't exist, we create it */
+                ario_radio_create_xml_file (xml_filename);
+
+                /* This option is necessary to save a well formated xml file */
+                xmlKeepBlanksDefault (0);
+
+                radio->priv->doc = xmlParseFile (xml_filename);
+                if (radio->priv->doc == NULL )
+                        return FALSE;
+
+                /* We check that the root node has the right name */
+                cur = xmlDocGetRootElement (radio->priv->doc);
+                if (cur == NULL) {
+                        xmlFreeDoc (radio->priv->doc);
+                        return FALSE;
+                }
+                if (xmlStrcmp(cur->name, (const xmlChar *) XML_ROOT_NAME)) {
+                        xmlFreeDoc (radio->priv->doc);
+                        return FALSE;
+                }
+        }
+        return TRUE;
 }
 
 static GSList*
@@ -460,37 +499,14 @@ ario_radio_get_radios (ArioRadio *radio)
         ARIO_LOG_FUNCTION_START
         GSList* radios = NULL;
         ArioInternetRadio *internet_radio;
-        xmlDocPtr doc;
         xmlNodePtr cur;
-        char *xml_filename;
         xmlChar *xml_name;
         xmlChar *xml_url;
 
-        xml_filename = ario_radio_get_xml_filename();
+        if (!ario_radio_fill_doc (radio))
+                return NULL;
 
-        /* If radios.xml file doesn't exist, we create it */
-        ario_radio_create_xml_file (xml_filename);
-
-        /* This option is necessary to save a well formated xml file */
-        xmlKeepBlanksDefault (0);
-
-        doc = xmlParseFile (xml_filename);
-        g_free (xml_filename);
-        if (doc == NULL )
-                return radios;
-
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL) {
-                xmlFreeDoc (doc);
-                return radios;
-        }
-
-        /* We check that the root node has the right name */
-        if (xmlStrcmp(cur->name, (const xmlChar *) XML_ROOT_NAME)) {
-                xmlFreeDoc (doc);
-                return radios;
-        }
-
+        cur = xmlDocGetRootElement (radio->priv->doc);
         for (cur = cur->children; cur; cur = cur->next) {
                 /* For each "radio" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"radio")){
@@ -507,7 +523,6 @@ ario_radio_get_radios (ArioRadio *radio)
                         radios = g_slist_append (radios, internet_radio);
                 }
         }
-        xmlFreeDoc (doc);
 
         return radios;
 }
@@ -816,48 +831,20 @@ ario_radio_add_new_radio (ArioRadio *radio,
                           ArioInternetRadio *internet_radio)
 {
         ARIO_LOG_FUNCTION_START
-        xmlDocPtr doc;
         xmlNodePtr cur, cur2;
-        char *xml_filename;
 
-        xml_filename = ario_radio_get_xml_filename();
-
-        /* If radios.xml file doesn't exist, we create it */
-        ario_radio_create_xml_file (xml_filename);
-
-        /* This option is necessary to save a well formated xml file */
-        xmlKeepBlanksDefault (0);
-
-        doc = xmlParseFile (xml_filename);
-        if (doc == NULL ) {
-                g_free (xml_filename);
+        if (!ario_radio_fill_doc (radio))
                 return;
-        }
 
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL) {
-                g_free (xml_filename);
-                xmlFreeDoc (doc);
-                return;
-        }
-
-        /* We check that the root node has the right name */
-        if (xmlStrcmp(cur->name, (const xmlChar *) XML_ROOT_NAME)) {
-                g_free (xml_filename);
-                xmlFreeDoc (doc);
-                return;
-        }
+        cur = xmlDocGetRootElement (radio->priv->doc);
 
         /* We add a new "radio" entry */
         cur2 = xmlNewChild (cur, NULL, (const xmlChar *)"radio", NULL);
         xmlSetProp (cur2, (const xmlChar *)"url", (const xmlChar *) internet_radio->url);
         xmlNodeAddContent (cur2, (const xmlChar *) internet_radio->name);
 
-
         /* We save the xml file */
-        xmlSaveFormatFile (xml_filename, doc, TRUE);
-        g_free (xml_filename);
-        xmlFreeDoc (doc);
+        xmlSaveFormatFile (ario_radio_get_xml_filename(), radio->priv->doc, TRUE);
 
         ario_radio_append_radio (radio, internet_radio);
 }
@@ -959,38 +946,14 @@ ario_radio_delete_radio (ArioInternetRadio *internet_radio,
                          ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        xmlDocPtr doc;
         xmlNodePtr cur, next_cur;
-        char *xml_filename;
         xmlChar *xml_name;
         xmlChar *xml_url;
 
-        xml_filename = ario_radio_get_xml_filename();
-
-        /* If radios.xml file doesn't exist, we create it */
-        ario_radio_create_xml_file (xml_filename);
-
-        /* This option is necessary to save a well formated xml file */
-        xmlKeepBlanksDefault (0);
-
-        doc = xmlParseFile (xml_filename);
-        if (doc == NULL )
+        if (!ario_radio_fill_doc (radio))
                 return;
 
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL) {
-                g_free (xml_filename);
-                xmlFreeDoc (doc);
-                return;
-        }
-
-        /* We check that the root node has the right name */
-        if (xmlStrcmp(cur->name, (const xmlChar *) XML_ROOT_NAME)) {
-                g_free (xml_filename);
-                xmlFreeDoc (doc);
-                return;
-        }
-
+        cur = xmlDocGetRootElement (radio->priv->doc);
         for (cur = cur->children; cur; cur = next_cur) {
                 next_cur = cur->next;
                 /* For each "radio" entry */
@@ -1009,11 +972,8 @@ ario_radio_delete_radio (ArioInternetRadio *internet_radio,
         }
 
         /* We save the xml file */
-        xmlSaveFormatFile (xml_filename, doc, TRUE);
-        g_free (xml_filename);
-        xmlFreeDoc (doc);
+        xmlSaveFormatFile (ario_radio_get_xml_filename(), radio->priv->doc, TRUE);
 
-        /* TODO : not very efficient */
         ario_radio_fill_radios (radio);
 }
 
@@ -1054,39 +1014,15 @@ ario_radio_modify_radio (ArioRadio *radio,
         ARIO_LOG_FUNCTION_START
 
         ARIO_LOG_FUNCTION_START
-        xmlDocPtr doc;
         xmlNodePtr cur, next_cur;
-        char *xml_filename;
         xmlChar *xml_name;
         xmlChar *xml_url;
         xmlChar *new_xml_name;
 
-        xml_filename = ario_radio_get_xml_filename();
-
-        /* If radios.xml file doesn't exist, we create it */
-        ario_radio_create_xml_file (xml_filename);
-
-        /* This option is necessary to save a well formated xml file */
-        xmlKeepBlanksDefault (0);
-
-        doc = xmlParseFile (xml_filename);
-        if (doc == NULL )
+        if (!ario_radio_fill_doc (radio))
                 return;
 
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL) {
-                g_free (xml_filename);
-                xmlFreeDoc (doc);
-                return;
-        }
-
-        /* We check that the root node has the right name */
-        if (xmlStrcmp(cur->name, (const xmlChar *) XML_ROOT_NAME)) {
-                g_free (xml_filename);
-                xmlFreeDoc (doc);
-                return;
-        }
-
+        cur = xmlDocGetRootElement (radio->priv->doc);
         for (cur = cur->children; cur; cur = next_cur) {
                 next_cur = cur->next;
                 /* For each "radio" entry */
@@ -1096,7 +1032,7 @@ ario_radio_modify_radio (ArioRadio *radio,
                         if (!xmlStrcmp (xml_name, (const xmlChar *)old_internet_radio->name)
                             && !xmlStrcmp (xml_url, (const xmlChar *)old_internet_radio->url)) {
                                 xmlSetProp (cur, (const xmlChar *)"url", (const xmlChar *) new_internet_radio->url);
-                                new_xml_name = xmlEncodeEntitiesReentrant (doc, (const xmlChar *) new_internet_radio->name);
+                                new_xml_name = xmlEncodeEntitiesReentrant (radio->priv->doc, (const xmlChar *) new_internet_radio->name);
                                 xmlNodeSetContent (cur, new_xml_name);
                                 xmlFree(new_xml_name);
                         }
@@ -1107,11 +1043,8 @@ ario_radio_modify_radio (ArioRadio *radio,
         }
 
         /* We save the xml file */
-        xmlSaveFormatFile (xml_filename, doc, TRUE);
-        g_free (xml_filename);
-        xmlFreeDoc (doc);
+        xmlSaveFormatFile (ario_radio_get_xml_filename(), radio->priv->doc, TRUE);
 
-        /* TODO : not very efficient */
         ario_radio_fill_radios (radio);
 }
 

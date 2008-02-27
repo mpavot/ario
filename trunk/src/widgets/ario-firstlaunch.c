@@ -24,7 +24,7 @@
 #include <glib/gi18n.h>
 #include <glade/glade.h>
 #include "lib/rb-glade-helpers.h"
-#include "lib/eel-gconf-extensions.h"
+#include "lib/ario-conf.h"
 #include "widgets/ario-firstlaunch.h"
 #include "preferences/ario-preferences.h"
 #include "ario-avahi.h"
@@ -154,8 +154,8 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
                                         &host,
                                         &port);
 
-        eel_gconf_set_string (CONF_HOST, host);
-        eel_gconf_set_integer (CONF_PORT, port);
+        ario_conf_set_string (CONF_HOST, host);
+        ario_conf_set_integer (CONF_PORT, port);
 
         profile = (ArioProfile *) g_malloc (sizeof (ArioProfile));
         profile->name = g_strdup (_("Default"));
@@ -168,7 +168,7 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
         ario_profiles_save (profiles);
 
         firstlaunch->priv->applied = TRUE;
-        eel_gconf_set_boolean (CONF_FIRST_TIME, TRUE);
+        ario_conf_set_boolean (CONF_FIRST_TIME, TRUE);
         gtk_widget_destroy (GTK_WIDGET (firstlaunch));
 }
 
