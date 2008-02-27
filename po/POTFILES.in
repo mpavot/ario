@@ -32,8 +32,9 @@ src/ario-profiles.c
 src/ario-profiles.h
 src/ario-util.c
 src/ario-util.h
-src/lib/eel-gconf-extensions.c
-src/lib/eel-gconf-extensions.h
+src/lib/ario-gconf.c
+src/lib/ario-xml-conf.c
+src/lib/ario-conf.h
 src/lib/eggtrayicon.c
 src/lib/eggtrayicon.h
 src/lib/libmpdclient.c
