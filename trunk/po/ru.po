@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 15:36+0100\n"
+"POT-Creation-Date: 2008-02-27 20:50+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "0 for the library, 1 for the radios, etc..."
 msgstr "0 для библиотеки, 1 для радио и т.д..."
 
-#: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:716
+#: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:745
 msgid "Active plugins"
 msgstr ""
 
@@ -225,8 +225,8 @@ msgstr "По умолчанию"
 msgid "Host :"
 msgstr "Хост :"
 
-#: ../data/glade/connection-prefs.glade.h:5 ../plugins/radios/ario-radio.c:889
-#: ../plugins/radios/ario-radio.c:1142
+#: ../data/glade/connection-prefs.glade.h:5 ../plugins/radios/ario-radio.c:876
+#: ../plugins/radios/ario-radio.c:1075
 msgid "Name :"
 msgstr "Название :"
 
@@ -244,11 +244,11 @@ msgstr "Порт :"
 msgid "_Autoconnect on startup"
 msgstr "Автосоединение при запуске"
 
-#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:141
+#: ../data/glade/connection-prefs.glade.h:9 ../src/shell/ario-shell.c:142
 msgid "_Connect"
 msgstr "_Соединить"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:144
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:145
 msgid "_Disconnect"
 msgstr "_Отключить"
 
@@ -431,7 +431,7 @@ msgstr ""
 msgid "Track :"
 msgstr ""
 
-#: ../src/ario-cover.c:416
+#: ../src/ario-cover.c:419
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Обложка уже существует. Вы точно хотите заменить?"
 
@@ -472,40 +472,40 @@ msgid "Plugin"
 msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-server-preferences.c:207
+#: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:473 ../src/shell/ario-shell.c:165
+#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:166
 msgid "_About"
 msgstr "_О программе"
 
-#: ../src/plugins/ario-plugin-manager.c:481
+#: ../src/plugins/ario-plugin-manager.c:510
 #, fuzzy
 msgid "C_onfigure"
 msgstr "Настройка"
 
-#: ../src/plugins/ario-plugin-manager.c:490
+#: ../src/plugins/ario-plugin-manager.c:519
 msgid "A_ctivate"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:501
+#: ../src/plugins/ario-plugin-manager.c:530
 msgid "Ac_tivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:506
+#: ../src/plugins/ario-plugin-manager.c:535
 msgid "_Deactivate All"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:290
+#: ../src/preferences/ario-connection-preferences.c:291
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/preferences/ario-connection-preferences.c:513
+#: ../src/preferences/ario-connection-preferences.c:514
 msgid "Server autodetection"
 msgstr "Сервер автоопределения"
 
-#: ../src/preferences/ario-connection-preferences.c:524
+#: ../src/preferences/ario-connection-preferences.c:525
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -515,27 +515,27 @@ msgstr ""
 "проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
 "ручную настройку."
 
-#: ../src/preferences/ario-connection-preferences.c:534
-#: ../src/preferences/ario-server-preferences.c:218
+#: ../src/preferences/ario-connection-preferences.c:535
+#: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:301
 msgid "Name"
 msgstr "Название"
 
-#: ../src/preferences/ario-connection-preferences.c:542
+#: ../src/preferences/ario-connection-preferences.c:543
 #: ../src/widgets/ario-firstlaunch.c:309
 msgid "Host"
 msgstr "Хост"
 
-#: ../src/preferences/ario-connection-preferences.c:550
+#: ../src/preferences/ario-connection-preferences.c:551
 #: ../src/widgets/ario-firstlaunch.c:317
 msgid "Port"
 msgstr "Порт"
 
-#: ../src/preferences/ario-connection-preferences.c:610
+#: ../src/preferences/ario-connection-preferences.c:611
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/preferences/ario-connection-preferences.c:629
+#: ../src/preferences/ario-connection-preferences.c:631
 msgid "New Profile"
 msgstr "Новый профиль"
 
@@ -554,18 +554,18 @@ msgstr "Играть следующую песню"
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
-#: ../src/preferences/ario-server-preferences.c:315
+#: ../src/preferences/ario-server-preferences.c:313
+#: ../src/preferences/ario-stats-preferences.c:267
 #: ../src/preferences/ario-stats-preferences.c:268
 #: ../src/preferences/ario-stats-preferences.c:269
 #: ../src/preferences/ario-stats-preferences.c:270
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
-#: ../src/preferences/ario-stats-preferences.c:273
 msgid "Not connected"
 msgstr "Не подключен"
 
-#: ../src/preferences/ario-server-preferences.c:320
-#: ../src/preferences/ario-server-preferences.c:407
+#: ../src/preferences/ario-server-preferences.c:318
+#: ../src/preferences/ario-server-preferences.c:406
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
 msgstr "Обновление..."
@@ -576,7 +576,7 @@ msgstr "Обновление..."
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:103
 #: ../plugins/filesystem/ario-filesystem.c:111
-#: ../plugins/radios/ario-radio.c:107
+#: ../plugins/radios/ario-radio.c:109
 msgid "_Add to playlist"
 msgstr "_Добавить в плейлист"
 
@@ -584,7 +584,7 @@ msgstr "_Добавить в плейлист"
 #: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
 #: ../plugins/filesystem/ario-filesystem.c:114
-#: ../plugins/radios/ario-radio.c:116
+#: ../plugins/radios/ario-radio.c:118
 msgid "_Properties"
 msgstr "_Свойства"
 
@@ -618,24 +618,24 @@ msgid "Cover"
 msgstr "Обложка"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:445 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:446 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
 msgid "Track"
 msgstr "Дорожка"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:452 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:453 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Заголовок"
 
-#: ../src/sources/ario-browser.c:1360
+#: ../src/sources/ario-browser.c:1359
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr "Вы действительно хотите удалить все обложки выбранных исполнителей?"
 
-#: ../src/sources/ario-browser.c:1415
+#: ../src/sources/ario-browser.c:1414
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr "Вы действительно хотите удалить все обложки выбранных альбомов?"
@@ -689,71 +689,71 @@ msgstr "Плейлист"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Вы действительно хотите удалить все выбранные плейлисты?"
 
-#: ../src/shell/ario-shell.c:132
+#: ../src/shell/ario-shell.c:133
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/shell/ario-shell.c:133
+#: ../src/shell/ario-shell.c:134
 msgid "_Edit"
 msgstr "_Редактировать"
 
-#: ../src/shell/ario-shell.c:134
+#: ../src/shell/ario-shell.c:135
 msgid "_View"
 msgstr "_Вид"
 
-#: ../src/shell/ario-shell.c:135
+#: ../src/shell/ario-shell.c:136
 msgid "_Tool"
 msgstr "_Инструменты"
 
-#: ../src/shell/ario-shell.c:136
+#: ../src/shell/ario-shell.c:137
 msgid "_Help"
 msgstr "_Помощь"
 
-#: ../src/shell/ario-shell.c:138
+#: ../src/shell/ario-shell.c:139
 msgid "_Save Playlist"
 msgstr "_Сохранить плейлист"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:148
 msgid "_Quit"
 msgstr "_Выход"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:151
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:154
 msgid "Prefere_nces"
 msgstr "_Параметры"
 
-#: ../src/shell/ario-shell.c:156
+#: ../src/shell/ario-shell.c:157
 msgid "_Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:160
 msgid "Download album _covers"
 msgstr "Скачать альбомные _обложки"
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:163
 msgid "Show _lyrics"
 msgstr "Показать _слова песен"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:169
 msgid "_Translate this application..."
 msgstr ""
 
-#: ../src/shell/ario-shell.c:176
+#: ../src/shell/ario-shell.c:177
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:606
+#: ../src/shell/ario-shell.c:614
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:607
+#: ../src/shell/ario-shell.c:615
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:850
+#: ../src/shell/ario-shell.c:856
 #, fuzzy
 msgid "Configure Plugins"
 msgstr "Настройка"
@@ -955,6 +955,10 @@ msgstr ""
 msgid "Wikipedia language :"
 msgstr ""
 
+#: ../plugins/wikipedia/ario-wikipedia.schemas.in.h:1
+msgid "Wikipedia language"
+msgstr ""
+
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
 msgstr ""
@@ -975,42 +979,42 @@ msgstr ""
 msgid "File System Browser"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:110
+#: ../plugins/radios/ario-radio.c:112
 msgid "Add a _new radio"
 msgstr "Добавить _новое радио"
 
-#: ../plugins/radios/ario-radio.c:113
+#: ../plugins/radios/ario-radio.c:115
 msgid "_Delete this radios"
 msgstr "_Удалить эти радиостанции"
 
-#: ../plugins/radios/ario-radio.c:180
+#: ../plugins/radios/ario-radio.c:182
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "ВебРадиостанции"
 
-#: ../plugins/radios/ario-radio.c:255
+#: ../plugins/radios/ario-radio.c:257
 msgid "Internet Radios"
 msgstr "Интернет-Радио"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:879
+#: ../plugins/radios/ario-radio.c:866
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
 
-#: ../plugins/radios/ario-radio.c:890 ../plugins/radios/ario-radio.c:1143
+#: ../plugins/radios/ario-radio.c:877 ../plugins/radios/ario-radio.c:1076
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:944 ../plugins/radios/ario-radio.c:1198
+#: ../plugins/radios/ario-radio.c:931 ../plugins/radios/ario-radio.c:1131
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Неверные параметры. Вы должны обязательно указать имя и URL радио."
 
-#: ../plugins/radios/ario-radio.c:1033
+#: ../plugins/radios/ario-radio.c:993
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1132
+#: ../plugins/radios/ario-radio.c:1065
 msgid "Edit a WebRadio"
 msgstr "Редактировать ВебРадио"
 
