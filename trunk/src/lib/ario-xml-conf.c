@@ -119,9 +119,7 @@ ario_conf_set (const char *key,
                 /* We add a new "option" entry */
                 cur = xmlNewChild (xmlDocGetRootElement(doc), NULL, (const xmlChar *) "option", NULL);
                 xmlSetProp (cur, (const xmlChar *) "key", (const xmlChar *) key);
-                xml_value = xmlEncodeEntitiesReentrant (doc, (const xmlChar *) value);
-                xmlNodeAddContent (cur, (const xmlChar *) xml_value);
-                xmlFree (xml_value);
+                xmlNodeAddContent (cur, (const xmlChar *) value);
         }
 
         /* Notifications */
