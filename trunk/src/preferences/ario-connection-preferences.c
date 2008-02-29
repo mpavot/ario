@@ -196,10 +196,42 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
                 connection_preferences->priv->current_profile = profile;
                 ario_profiles_set_current (connection_preferences->priv->profiles, profile);
 
+                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->name_entry),
+                                                 G_CALLBACK (ario_connection_preferences_name_changed_cb),
+                                                 connection_preferences);
+                
+                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->host_entry),
+                                                 G_CALLBACK (ario_connection_preferences_host_changed_cb),
+                                                 connection_preferences);
+                
+                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->port_spinbutton),
+                                                 G_CALLBACK (ario_connection_preferences_port_changed_cb),
+                                                 connection_preferences);
+                
+                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->password_entry),
+                                                 G_CALLBACK (ario_connection_preferences_password_changed_cb),
+                                                 connection_preferences);
+                
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->name_entry), profile->name);
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->host_entry), profile->host);
                 gtk_spin_button_set_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton), (gdouble) profile->port);
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->password_entry), profile->password ? profile->password : "");
+
+                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->name_entry),
+                                                   G_CALLBACK (ario_connection_preferences_name_changed_cb),
+                                                   connection_preferences);
+
+                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->host_entry),
+                                                   G_CALLBACK (ario_connection_preferences_host_changed_cb),
+                                                   connection_preferences);
+
+                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->port_spinbutton),
+                                                   G_CALLBACK (ario_connection_preferences_port_changed_cb),
+                                                   connection_preferences);
+
+                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->password_entry),
+                                                   G_CALLBACK (ario_connection_preferences_password_changed_cb),
+                                                   connection_preferences);
         }
 }
 
