@@ -217,6 +217,12 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
                 gtk_spin_button_set_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton), (gdouble) profile->port);
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->password_entry), profile->password ? profile->password : "");
 
+                ario_conf_set_string (CONF_HOST,
+                                      gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
+                ario_conf_set_integer (CONF_PORT,
+                                       (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton)));
+                ario_conf_set_string (CONF_PASSWORD, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->password_entry)));
+
                 g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->name_entry),
                                                    G_CALLBACK (ario_connection_preferences_name_changed_cb),
                                                    connection_preferences);
