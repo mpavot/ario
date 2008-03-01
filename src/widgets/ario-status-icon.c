@@ -379,9 +379,11 @@ ario_status_icon_popup_cb (GtkStatusIcon *status_icon,
 
         popup = gtk_ui_manager_get_widget (GTK_UI_MANAGER (icon->priv->ui_manager),
                                            "/TrayPopup");
-        gtk_menu_set_screen (GTK_MENU (popup), gtk_status_icon_get_screen (status_icon));
+
+        gtk_menu_set_screen (GTK_MENU (popup), gdk_screen_get_default());
+
         gtk_menu_popup (GTK_MENU (popup), NULL, NULL,
-                        gtk_status_icon_position_menu, status_icon, 2,
+                        NULL, NULL, button,
                         gtk_get_current_event_time ());
 }
 
