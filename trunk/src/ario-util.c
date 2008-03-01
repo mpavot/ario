@@ -437,7 +437,7 @@ ario_util_load_uri (const char *uri)
 #ifdef WIN32
         ShellExecute (GetDesktopWindow(), "open", uri, NULL, NULL, SW_SHOW);
 #else
-        command = g_strdup_printf("x-www-browser %s", uri);
+        gchar *command = g_strdup_printf("x-www-browser %s", uri);
         g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
         g_free (command);
 #endif                
