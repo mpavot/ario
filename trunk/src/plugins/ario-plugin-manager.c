@@ -803,7 +803,7 @@ static void
 ario_plugin_manager_finalize (GObject *object)
 {
         ArioPluginManager *pm = ARIO_PLUGIN_MANAGER (object);
-printf ("final\n");
+
         if (pm->priv->popup_menu)
                 gtk_widget_destroy (pm->priv->popup_menu);
 
