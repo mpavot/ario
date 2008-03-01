@@ -229,8 +229,10 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler)
 
         cover_path = ario_cover_make_ario_cover_path (ario_mpd_get_current_artist (cover_handler->priv->mpd),
                                                       ario_mpd_get_current_album (cover_handler->priv->mpd), SMALL_COVER);
-        cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
-        g_free (cover_path);
+        if (cover_path) {
+                cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
+                g_free (cover_path);
+        }
 }
 
 static void
