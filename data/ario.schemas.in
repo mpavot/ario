@@ -193,6 +193,18 @@
       </schema>
 
       <schema>
+        <key>/schemas/apps/ario/music-dir</key>
+        <applyto>/apps/ario/music-dir</applyto>
+        <owner>ario</owner>
+        <type>string</type>
+        <default></default>
+        <locale name="C">
+        <short>Define the path to the music</short>
+        <long>Define the path to the music</long>
+        </locale>
+      </schema>
+
+      <schema>
         <key>/schemas/apps/ario/proxy_port</key>
         <applyto>/apps/ario/proxy_port</applyto>
         <owner>ario</owner>

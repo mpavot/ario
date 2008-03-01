@@ -70,6 +70,7 @@ ario_profiles_free (ArioProfile* profile)
                 g_free (profile->name);
                 g_free (profile->host);
                 g_free (profile->password);
+                g_free (profile->musicdir);
                 g_free (profile);
         }
 }
@@ -87,6 +88,7 @@ ario_profiles_read (void)
         xmlChar *xml_host;
         xmlChar *xml_port;
         xmlChar *xml_password;
+        xmlChar *xml_musicdir;
         xmlChar *xml_current;
 
         xml_filename = ario_profiles_get_xml_filename();
@@ -137,6 +139,14 @@ ario_profiles_read (void)
                                 xmlFree(xml_password);
                         } else {
                                 profile->password = NULL;
+                        }
+
+                        xml_musicdir = xmlGetProp (cur, (const unsigned char *)"musicdir");
+                        if (xml_musicdir) {
+                                profile->musicdir = g_strdup ((char *) xml_musicdir);
+                                xmlFree(xml_musicdir);
+                        } else {
+                                profile->musicdir = NULL;
                         }
 
                         xml_current = xmlGetProp (cur, (const unsigned char *)"current");
@@ -200,6 +210,9 @@ ario_profiles_save (GSList* profiles)
                 xmlSetProp (cur2, (const xmlChar *)"port", (const xmlChar *) port_char);
                 if (profile->password) {
                         xmlSetProp (cur2, (const xmlChar *)"password", (const xmlChar *) profile->password);
+                }
+                if (profile->musicdir) {
+                        xmlSetProp (cur2, (const xmlChar *)"musicdir", (const xmlChar *) profile->musicdir);
                 }
                 if (profile->current) {
                         xmlSetProp (cur2, (const xmlChar *)"current", (const xmlChar *) "true");
