@@ -640,8 +640,8 @@ ario_shell_cmd_translate (GtkAction *action,
                           ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        const gchar *command = "x-www-browser https://translations.launchpad.net/ario/trunk/";
-        g_spawn_command_line_async (command, NULL);
+        const gchar *uri = "https://translations.launchpad.net/ario/trunk/";
+        ario_util_load_uri (uri);
 }
 
 static void

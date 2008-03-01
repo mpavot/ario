@@ -30,6 +30,11 @@
 #define XML_ROOT_NAME (const unsigned char *)"ario-radios"
 #define XML_VERSION (const unsigned char *)"1.0"
 
+#ifdef WIN32
+#undef DATA_PATH 
+#define DATA_PATH "plugins\\"
+#endif
+
 typedef struct ArioInternetRadio
 {
         gchar *name;

@@ -17,10 +17,8 @@
  *
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 
+#include <config.h>
 #include <string.h> /* For strlen */
 
 #include "ario-filesystem-plugin.h"
@@ -34,6 +32,11 @@
 #include "ario-filesystem.h"
 
 #define ARIO_FILESYSTEM_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_FILESYSTEM_PLUGIN, ArioFilesystemPluginPrivate))
+
+#ifdef WIN32
+#undef UI_PATH 
+#define UI_PATH "plugins\\"
+#endif
 
 struct _ArioFilesystemPluginPrivate
 {
@@ -74,6 +77,7 @@ impl_activate (ArioPlugin *plugin,
                                                 mpd,
                                                 ARIO_PLAYLIST (ario_shell_get_playlist (shell)));
         g_return_if_fail (IS_ARIO_FILESYSTEM (pi->priv->source));
+
         pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
                                                                  UI_PATH "filesystem-ui.xml", NULL);
 

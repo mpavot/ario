@@ -29,6 +29,9 @@
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 static char *config_dir = NULL;
 
@@ -427,6 +430,19 @@ ario_util_string_replace (char **string,
         }
 }
 
+void
+ario_util_load_uri (const char *uri)
+{
+        ARIO_LOG_FUNCTION_START
+#ifdef WIN32
+        ShellExecute (GetDesktopWindow(), "open", uri, NULL, NULL, SW_SHOW);
+#else
+        command = g_strdup_printf("x-www-browser %s", uri);
+        g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
+        g_free (command);
+#endif                
+}
+                   
 int
 ario_util_min (int a,
                int b)
