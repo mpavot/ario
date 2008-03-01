@@ -252,11 +252,11 @@ ario_sourcemanager_append (ArioSourceManager *sourcemanager,
         gtk_notebook_append_page (GTK_NOTEBOOK (sourcemanager),
                                   GTK_WIDGET (source),
                                   hbox);
-#ifndef WIN32
+
         gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK (sourcemanager),
                                           GTK_WIDGET (source),
                                           TRUE);
-#endif
+
         gtk_widget_show_all (GTK_WIDGET (sourcemanager));
 }
 
