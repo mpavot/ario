@@ -523,7 +523,7 @@ ario_tray_icon_construct_tooltip (ArioTrayIcon *icon)
 }
 
 static void
-ario_tray_icon_double_click (ArioTrayIcon *icon)
+ario_tray_icon_middle_click (ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         int trayicon_behavior;
@@ -565,7 +565,7 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                 break;
 
         case 2:
-                ario_tray_icon_double_click (icon);
+                ario_tray_icon_middle_click (icon);
                 break;
 
         case 3:

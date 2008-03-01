@@ -76,6 +76,15 @@ if test x"$enable_playlists" != xno; then
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
+dnl Eggtrayicon
+AC_ARG_ENABLE(eggtrayicon,
+              AC_HELP_STRING([--disable-eggtrayicon],
+                             [Disable support of eggtrayicon]))
+if test x"$enable_eggtrayicon" != xno; then
+   AC_DEFINE(ENABLE_EGGTRAYICON, 1, [Add support of eggtrayicon])
+fi
+AM_CONDITIONAL(USE_EGGTRAYICON, test x"$enable_eggtrayicon" != xno)
+
 PLUGINDIR='${libdir}/ario/plugins'
 AC_SUBST(PLUGINDIR)
 
@@ -107,6 +116,11 @@ if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"
 else
         echo "Search view support is:                   DISABLED"
+fi
+if test x${enable_eggtrayicon} != xno; then
+        echo "Eggtrayicon support is:                   ENABLED  (--disable-eggtrayicon)"
+else
+        echo "Eggtrayicon support is:                   DISABLED"
 fi
 if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"

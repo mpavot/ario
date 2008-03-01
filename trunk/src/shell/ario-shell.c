@@ -39,8 +39,12 @@
 #include "ario-util.h"
 #include "plugins/ario-plugin-manager.h"
 #ifndef WIN32
-#include "widgets/ario-tray-icon.h"
 #include "widgets/ario-firstlaunch.h"
+#endif
+#ifdef ENABLE_EGGTRAYICON
+#include "widgets/ario-tray-icon.h"
+#else
+#include "widgets/ario-status-icon.h"
 #endif
 
 static void ario_shell_class_init (ArioShellClass *klass);
@@ -111,10 +115,11 @@ struct ArioShellPrivate
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
-#ifndef WIN32
+#ifdef ENABLE_EGGTRAYICON
         ArioTrayIcon *tray_icon;
+#else
+        ArioStatusIcon *status_icon;
 #endif
-
         gboolean statusbar_hidden;
         gboolean connected;
         gboolean shown;
@@ -266,9 +271,12 @@ ario_shell_finalize (GObject *object)
         gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->mpd);
-#ifndef WIN32
-        gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));
+#ifdef ENABLE_EGGTRAYICON
+        gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));;
+#else
+        g_object_unref (G_OBJECT (shell->priv->status_icon));
 #endif
+
         g_object_unref (shell->priv->ui_manager);
         g_object_unref (shell->priv->actiongroup);
         g_free (shell->priv);
@@ -405,7 +413,7 @@ ario_shell_construct (ArioShell *shell)
                                          UI_PATH "ario-ui.xml", NULL);
         gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
                                     gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
-#ifndef WIN32
+#ifdef ENABLE_EGGTRAYICON
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
@@ -413,6 +421,12 @@ ario_shell_construct (ArioShell *shell)
                                                      shell->priv->mpd,
                                                      shell->priv->cover_handler);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
+#else
+        /* initialize tray icon */
+        shell->priv->status_icon = ario_status_icon_new (shell->priv->actiongroup,
+                                                         shell->priv->ui_manager,
+                                                         win,
+                                                         shell->priv->mpd);
 #endif
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();

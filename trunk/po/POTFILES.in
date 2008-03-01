@@ -97,6 +97,8 @@ src/widgets/ario-status-bar.c
 src/widgets/ario-status-bar.h
 src/widgets/ario-tray-icon.c
 src/widgets/ario-tray-icon.h
+src/widgets/ario-status-icon.c
+src/widgets/ario-status-icon.h
 src/widgets/ario-volume.c
 src/widgets/ario-volume.h
 plugins/wikipedia/ario-wikipedia-plugin.c
