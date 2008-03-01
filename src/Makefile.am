@@ -92,8 +92,6 @@ ario_SOURCES = \
 	widgets/ario-songlist.h\
 	widgets/ario-status-bar.c\
 	widgets/ario-status-bar.h\
-	widgets/ario-tray-icon.c\
-	widgets/ario-tray-icon.h\
 	widgets/ario-volume.c\
 	widgets/ario-volume.h
 
@@ -102,6 +100,15 @@ if USE_GCONF
 else
         ario_SOURCES += lib/ario-xml-conf.c
 endif
+
+if USE_EGGTRAYICON
+        ario_SOURCES +=  widgets/ario-tray-icon.c\
+	                 widgets/ario-tray-icon.h
+else
+        ario_SOURCES +=  widgets/ario-status-icon.c\
+	                 widgets/ario-status-icon.h
+endif
+
 
 ario_LDADD = \
         $(DEPS_LIBS)\
