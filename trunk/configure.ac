@@ -85,6 +85,15 @@ if test x"$enable_eggtrayicon" != xno; then
 fi
 AM_CONDITIONAL(USE_EGGTRAYICON, test x"$enable_eggtrayicon" != xno)
 
+dnl Avahi
+AC_ARG_ENABLE(avahi,
+              AC_HELP_STRING([--disable-avahi],
+                             [Disable support of avahi]))
+if test x"$enable_avahi" != xno; then
+   AC_DEFINE(ENABLE_AVAHI, 1, [Add support of avahi])
+fi
+AM_CONDITIONAL(USE_AVAHI, test x"$enable_avahi" != xno)
+
 PLUGINDIR='${libdir}/ario/plugins'
 AC_SUBST(PLUGINDIR)
 
@@ -117,10 +126,10 @@ if test x${enable_search} != xno; then
 else
         echo "Search view support is:                   DISABLED"
 fi
-if test x${enable_eggtrayicon} != xno; then
-        echo "Eggtrayicon support is:                   ENABLED  (--disable-eggtrayicon)"
+if test x${enable_avahi} != xno; then
+        echo "Avahi support is:                         ENABLED  (--disable-avahi)"
 else
-        echo "Eggtrayicon support is:                   DISABLED"
+        echo "Avahi support is:                         DISABLED"
 fi
 if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"

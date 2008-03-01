@@ -27,7 +27,7 @@
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/ario-conf.h"
-#ifndef WIN32
+#ifdef ENABLE_AVAHI
 #include "ario-avahi.h"
 #endif
 #include "ario-debug.h"
@@ -384,7 +384,7 @@ ario_connection_preferences_new (ArioMpd *mpd)
         connection_preferences->priv->profiles = ario_profiles_read ();
         ario_connection_preferences_profile_update_profiles (connection_preferences);
 
-#ifdef WIN32
+#ifndef ENABLE_AVAHI
         gtk_widget_hide (connection_preferences->priv->autodetect_button);
 #endif
 
@@ -564,7 +564,7 @@ ario_connection_preferences_musicdir_changed_cb (GtkWidget *widget,
                 }
         }
 }
-#ifndef WIN32
+#ifdef ENABLE_AVAHI
 static void
 ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
                                                   ArioConnectionPreferences *connection_preferences)
@@ -596,7 +596,7 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
                                            ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-#ifndef WIN32
+#ifdef ENABLE_AVAHI
         ArioAvahi *avahi;
         GtkWidget *dialog, *error_dialog;
         GtkWidget *vbox;
