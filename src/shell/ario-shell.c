@@ -38,9 +38,7 @@
 #include "ario-debug.h"
 #include "ario-util.h"
 #include "plugins/ario-plugin-manager.h"
-#ifndef WIN32
 #include "widgets/ario-firstlaunch.h"
-#endif
 #ifdef ENABLE_EGGTRAYICON
 #include "widgets/ario-tray-icon.h"
 #else
@@ -365,9 +363,8 @@ ario_shell_construct (ArioShell *shell)
         GtkWidget *vbox;
         GdkPixbuf *pixbuf;
         GtkAction *action;
-#ifndef WIN32
         ArioFirstlaunch *firstlaunch;
-#endif
+
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
         /* initialize UI */
@@ -477,7 +474,7 @@ ario_shell_construct (ArioShell *shell)
 
         ario_shell_sync_window_state (shell);
         gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
-#ifndef WIN32
+
         /* First launch assistant */
         if (!ario_conf_get_boolean (CONF_FIRST_TIME, FALSE)) {
                 firstlaunch = ario_firstlaunch_new ();
@@ -488,9 +485,7 @@ ario_shell_construct (ArioShell *shell)
         } else {
                  ario_shell_show (shell);
         }
-#else
-        ario_shell_show (shell);
-#endif
+
         ario_shell_sync_statusbar_visibility (shell);
 }
 

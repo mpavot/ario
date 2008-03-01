@@ -119,7 +119,7 @@ ario_profiles_read (void)
         for (cur = cur->children; cur; cur = cur->next) {
                 /* For each "profiles" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"profile")){
-                        profile = (ArioProfile *) g_malloc (sizeof (ArioProfile));
+                        profile = (ArioProfile *) g_malloc0 (sizeof (ArioProfile));
 
                         xml_name = xmlNodeGetContent (cur);
                         profile->name = g_strdup ((char *) xml_name);
@@ -137,16 +137,12 @@ ario_profiles_read (void)
                         if (xml_password) {
                                 profile->password = g_strdup ((char *) xml_password);
                                 xmlFree(xml_password);
-                        } else {
-                                profile->password = NULL;
                         }
 
                         xml_musicdir = xmlGetProp (cur, (const unsigned char *)"musicdir");
                         if (xml_musicdir) {
                                 profile->musicdir = g_strdup ((char *) xml_musicdir);
                                 xmlFree(xml_musicdir);
-                        } else {
-                                profile->musicdir = NULL;
                         }
 
                         xml_current = xmlGetProp (cur, (const unsigned char *)"current");

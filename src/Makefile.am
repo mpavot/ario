@@ -9,8 +9,6 @@ INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 	   -Wcast-align -Wall
 
 ario_SOURCES = \
-	ario-avahi.c\
-	ario-avahi.h\
 	ario-cover.c\
 	ario-cover.h\
 	ario-cover-handler.c\
@@ -109,6 +107,10 @@ else
 	                 widgets/ario-status-icon.h
 endif
 
+if USE_AVAHI
+        ario_SOURCES += ario-avahi.c\
+	                ario-avahi.h
+endif
 
 ario_LDADD = \
         $(DEPS_LIBS)\
