@@ -114,11 +114,13 @@ endif
 
 ario_LDADD = \
         $(DEPS_LIBS)\
-        $(GCONF_LIBS)
+        $(GCONF_LIBS)\
+        $(AVAHI_LIBS)
 
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
                 $(GCONF_CFLAGS) \
+                $(AVAHI_CFLAGS) \
                 -DLOCALE_DIR=\""$(pkgdatadir)/locale"\"\
                 -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\
                 -DDATA_PATH=\""$(pkgdatadir)/ario/data/"\"\
