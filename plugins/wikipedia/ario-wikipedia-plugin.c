@@ -40,6 +40,12 @@ static void ario_wikipedia_cmd_find_artist (GtkAction *action,
 
 #define CONF_WIKIPEDIA_LANGUAGE                "/apps/ario/plugins/wikipedia-language"
 
+#ifdef WIN32
+#undef UI_PATH 
+#define UI_PATH "plugins\\"
+#define PLUGINDIR "plugins\\"
+#endif
+
 static GtkActionEntry ario_wikipedia_actions [] =
 {
 	{ "ToolWikipedia", GTK_STOCK_FIND, N_("Find artist on Wikipedia"), NULL,
@@ -255,7 +261,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 {
         ArioMpd *mpd;
         gchar *artist;
-        gchar *command;
+        gchar *uri;
         gchar *language;
 
         g_return_if_fail (ARIO_IS_WIKIPEDIA_PLUGIN (plugin));
@@ -268,10 +274,10 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
                 ario_util_string_replace (&artist, "/", "_");
                 
                 language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
-                command = g_strdup_printf("x-www-browser http://%s.wikipedia.org/wiki/%s", language, artist);
+                uri = g_strdup_printf ("http://%s.wikipedia.org/wiki/%s", language, artist);
                 g_free (language);
                 g_free (artist);
-                g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
-                g_free (command);
+                ario_util_load_uri (uri);
+                g_free (uri);
         }
 }

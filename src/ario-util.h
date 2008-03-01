@@ -47,8 +47,9 @@ void                    ario_util_download_file              (const char *uri,
 void                    ario_util_string_replace             (char **string,
                                                               const char *old,
                                                               const char *new);
-int                     ario_util_min		             (int a,
+void                    ario_util_load_uri                   (const char *uri);
+int                     ario_util_min		                  (int a,
                                                               int b);
-int                     ario_util_max		             (int a,
+int                     ario_util_max		                  (int a,
                                                               int b);
                                                               

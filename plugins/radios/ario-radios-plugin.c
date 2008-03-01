@@ -35,6 +35,11 @@
 
 #define ARIO_RADIOS_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_RADIOS_PLUGIN, ArioRadiosPluginPrivate))
 
+#ifdef WIN32
+#undef UI_PATH 
+#define UI_PATH "plugins\\"
+#endif
+
 struct _ArioRadiosPluginPrivate
 {
         guint ui_merge_id;
