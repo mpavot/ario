@@ -21,9 +21,7 @@ PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.10
                          libglade-2.0
                          gmodule-2.0
                          gthread-2.0
-                         libcurl
-                         avahi-client
-                         avahi-glib])
+                         libcurl])
 
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
@@ -91,6 +89,10 @@ AC_ARG_ENABLE(avahi,
                              [Disable support of avahi]))
 if test x"$enable_avahi" != xno; then
    AC_DEFINE(ENABLE_AVAHI, 1, [Add support of avahi])
+   PKG_CHECK_MODULES(AVAHI, [avahi-client
+                             avahi-glib])
+   AC_SUBST(AVAHI_CFLAGS)
+   AC_SUBST(AVAHI_LIBS)
 fi
 AM_CONDITIONAL(USE_AVAHI, test x"$enable_avahi" != xno)
 
