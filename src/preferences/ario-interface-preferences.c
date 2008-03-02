@@ -111,6 +111,7 @@ ario_interface_preferences_new (void)
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
+        GtkWidget *tray_frame;
         int i;
 
         interface_preferences = g_object_new (TYPE_ARIO_INTERFACE_PREFERENCES, NULL);
@@ -125,9 +126,14 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "showtabs_checkbutton");
         interface_preferences->priv->trayicon_combobox = 
                 glade_xml_get_widget (xml, "trayicon_combobox");
-                
+        tray_frame = 
+                glade_xml_get_widget (xml, "tray_frame");
         rb_glade_boldify_label (xml, "tabs_label");
         rb_glade_boldify_label (xml, "trayicon_label");
+
+#ifndef ENABLE_EGGTRAYICON
+        gtk_widget_hide (tray_frame);
+#endif
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 
