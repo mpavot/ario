@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-01 17:57+0100\n"
+"POT-Creation-Date: 2008-03-02 13:03+0100\n"
 "PO-Revision-Date: 2007-12-27 11:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -220,13 +220,13 @@ msgid "Connection"
 msgstr "Соединение"
 
 #: ../data/glade/connection-prefs.glade.h:3
-#: ../src/widgets/ario-firstlaunch.c:161
+#: ../src/widgets/ario-firstlaunch.c:163
 msgid "Default"
 msgstr "По умолчанию"
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
-#: ../src/widgets/ario-firstlaunch.c:207
+#: ../src/widgets/ario-firstlaunch.c:209
 msgid "Host :"
 msgstr "Хост :"
 
@@ -245,7 +245,7 @@ msgstr "Пароль :"
 
 #: ../data/glade/connection-prefs.glade.h:8
 #: ../data/glade/connection-assistant.glade.h:4
-#: ../src/widgets/ario-firstlaunch.c:209
+#: ../src/widgets/ario-firstlaunch.c:211
 msgid "Port :"
 msgstr "Порт :"
 
@@ -253,11 +253,11 @@ msgstr "Порт :"
 msgid "_Autoconnect on startup"
 msgstr "Автосоединение при запуске"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:147
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:145
 msgid "_Connect"
 msgstr "_Соединить"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:150
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:148
 msgid "_Disconnect"
 msgstr "_Отключить"
 
@@ -486,7 +486,7 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:171
+#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:169
 msgid "_About"
 msgstr "_О программе"
 
@@ -511,11 +511,11 @@ msgstr ""
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/preferences/ario-connection-preferences.c:614
+#: ../src/preferences/ario-connection-preferences.c:618
 msgid "Server autodetection"
 msgstr "Сервер автоопределения"
 
-#: ../src/preferences/ario-connection-preferences.c:625
+#: ../src/preferences/ario-connection-preferences.c:629
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -525,27 +525,27 @@ msgstr ""
 "проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
 "ручную настройку."
 
-#: ../src/preferences/ario-connection-preferences.c:635
+#: ../src/preferences/ario-connection-preferences.c:639
 #: ../src/preferences/ario-server-preferences.c:216
-#: ../src/widgets/ario-firstlaunch.c:301
+#: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
 msgstr "Название"
 
-#: ../src/preferences/ario-connection-preferences.c:643
-#: ../src/widgets/ario-firstlaunch.c:309
+#: ../src/preferences/ario-connection-preferences.c:647
+#: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
 msgstr "Хост"
 
-#: ../src/preferences/ario-connection-preferences.c:651
-#: ../src/widgets/ario-firstlaunch.c:317
+#: ../src/preferences/ario-connection-preferences.c:655
+#: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
 msgstr "Порт"
 
-#: ../src/preferences/ario-connection-preferences.c:713
+#: ../src/preferences/ario-connection-preferences.c:717
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/preferences/ario-connection-preferences.c:733
+#: ../src/preferences/ario-connection-preferences.c:737
 msgid "New Profile"
 msgstr "Новый профиль"
 
@@ -699,71 +699,71 @@ msgstr "Плейлист"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Вы действительно хотите удалить все выбранные плейлисты?"
 
-#: ../src/shell/ario-shell.c:138
+#: ../src/shell/ario-shell.c:136
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/shell/ario-shell.c:139
+#: ../src/shell/ario-shell.c:137
 msgid "_Edit"
 msgstr "_Редактировать"
 
-#: ../src/shell/ario-shell.c:140
+#: ../src/shell/ario-shell.c:138
 msgid "_View"
 msgstr "_Вид"
 
-#: ../src/shell/ario-shell.c:141
+#: ../src/shell/ario-shell.c:139
 msgid "_Tool"
 msgstr "_Инструменты"
 
-#: ../src/shell/ario-shell.c:142
+#: ../src/shell/ario-shell.c:140
 msgid "_Help"
 msgstr "_Помощь"
 
-#: ../src/shell/ario-shell.c:144
+#: ../src/shell/ario-shell.c:142
 msgid "_Save Playlist"
 msgstr "_Сохранить плейлист"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:151
 msgid "_Quit"
 msgstr "_Выход"
 
-#: ../src/shell/ario-shell.c:156
+#: ../src/shell/ario-shell.c:154
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:157
 msgid "Prefere_nces"
 msgstr "_Параметры"
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:160
 msgid "_Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:163
 msgid "Download album _covers"
 msgstr "Скачать альбомные _обложки"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:166
 msgid "Show _lyrics"
 msgstr "Показать _слова песен"
 
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:172
 msgid "_Translate this application..."
 msgstr ""
 
-#: ../src/shell/ario-shell.c:182
+#: ../src/shell/ario-shell.c:180
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:628
+#: ../src/shell/ario-shell.c:623
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:629
+#: ../src/shell/ario-shell.c:624
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:870
+#: ../src/shell/ario-shell.c:865
 #, fuzzy
 msgid "Configure Plugins"
 msgstr "Настройка"
@@ -831,11 +831,11 @@ msgstr "Внешний вид"
 msgid "Song Properties"
 msgstr "_Свойства"
 
-#: ../src/widgets/ario-firstlaunch.c:206
+#: ../src/widgets/ario-firstlaunch.c:208
 msgid "The following configuration will be used:"
 msgstr "Следующая конфигурация будет использована:"
 
-#: ../src/widgets/ario-firstlaunch.c:271
+#: ../src/widgets/ario-firstlaunch.c:273
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -843,15 +843,15 @@ msgstr ""
 "Это Ваш первый запуск Ario.\n"
 "Этот ассистент поможет Вам настроить проигрыватель."
 
-#: ../src/widgets/ario-firstlaunch.c:276
+#: ../src/widgets/ario-firstlaunch.c:278
 msgid "Welcome to Ario"
 msgstr "Добро пожаловать в Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:335
+#: ../src/widgets/ario-firstlaunch.c:341
 msgid "Configuration"
 msgstr "Настройка"
 
-#: ../src/widgets/ario-firstlaunch.c:347
+#: ../src/widgets/ario-firstlaunch.c:353
 msgid "Confirmation"
 msgstr "Подтверждение"
 
@@ -1039,6 +1039,14 @@ msgstr "Редактировать ВебРадио"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
+msgstr ""
+
+#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
+msgid "Add multimedia keys support"
+msgstr ""
+
+#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
+msgid "Multimedia Keys"
 msgstr ""
 
 #~ msgid "_Library"

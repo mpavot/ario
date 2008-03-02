@@ -115,3 +115,6 @@ plugins/radios/ario-radio.h
 plugins/radios/ario-radios-plugin.c
 plugins/radios/ario-radios-plugin.h
 plugins/radios/radios.ario-plugin.desktop.in
+plugins/mmkeys/ario-mmkeys-plugin.c
+plugins/mmkeys/ario-mmkeys-plugin.h
+plugins/mmkeys/mmkeys.ario-plugin.desktop.in

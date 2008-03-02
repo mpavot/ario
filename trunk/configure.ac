@@ -83,6 +83,18 @@ if test x"$enable_eggtrayicon" != xno; then
 fi
 AM_CONDITIONAL(USE_EGGTRAYICON, test x"$enable_eggtrayicon" != xno)
 
+dnl DBUS
+AC_ARG_ENABLE(dbus,
+              AC_HELP_STRING([--disable-dbus],
+                             [Disable support of dbus]))
+if test x"$enable_dbus" != xno; then
+   PKG_CHECK_MODULES(DBUS, [dbus-glib-1 >= 0.35])
+   DBUS_CFLAGS="$DBUS_CFLAGS -DDBUS_API_SUBJECT_TO_CHANGE"
+   DBUS_GLIB_BIN="`$PKG_CONFIG --variable=exec_prefix dbus-glib-1`/bin"
+   AC_SUBST(DBUS_GLIB_BIN)
+fi
+AM_CONDITIONAL(USE_DBUS, test x"$enable_dbus" != xno)
+
 dnl Avahi
 AC_ARG_ENABLE(avahi,
               AC_HELP_STRING([--disable-avahi],
@@ -105,6 +117,7 @@ src/Makefile
 data/Makefile
 plugins/Makefile
 plugins/filesystem/Makefile
+plugins/mmkeys/Makefile
 plugins/radios/Makefile
 plugins/wikipedia/Makefile
 po/Makefile.in
@@ -132,6 +145,11 @@ if test x${enable_avahi} != xno; then
         echo "Avahi support is:                         ENABLED  (--disable-avahi)"
 else
         echo "Avahi support is:                         DISABLED"
+fi
+if test x${enable_dbus} != xno; then
+        echo "DBUS support is:                          ENABLED  (--disable-dbus)"
+else
+        echo "DBUS support is:                          DISABLED"
 fi
 if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"
