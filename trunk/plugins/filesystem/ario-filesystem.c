@@ -60,15 +60,15 @@ static gboolean ario_filesystem_button_release_cb (GtkWidget *widget,
 static gboolean ario_filesystem_motion_notify (GtkWidget *widget, 
                                                GdkEventMotion *event,
                                                ArioFilesystem *filesystem);
-static void ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
+static void ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
                                                         GdkDragContext * context,
                                                         GtkSelectionData * selection_data,
                                                         guint info, guint time, gpointer data);
-static void ario_filesystem_playlists_row_activated_cb (GtkTreeView *tree_view,
+static void ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
                                                         GtkTreePath *path,
                                                         GtkTreeViewColumn *column,
                                                         ArioFilesystem *filesystem);
-static void ario_filesystem_playlists_row_expanded_cb (GtkTreeView *tree_view,
+static void ario_filesystem_filetree_row_expanded_cb (GtkTreeView *tree_view,
                                                        GtkTreeIter *iter,
                                                        GtkTreePath *path,
                                                        ArioFilesystem *filesystem);
@@ -128,11 +128,11 @@ enum
 
 enum
 {
-        PLAYLISTS_ICON_COLUMN,
-        PLAYLISTS_ICONSIZE_COLUMN,
-        PLAYLISTS_NAME_COLUMN,
-        PLAYLISTS_DIR_COLUMN,
-        PLAYLISTS_N_COLUMN
+        FILETREE_ICON_COLUMN,
+        FILETREE_ICONSIZE_COLUMN,
+        FILETREE_NAME_COLUMN,
+        FILETREE_DIR_COLUMN,
+        FILETREE_N_COLUMN
 };
 
 static const GtkTargetEntry dirs_targets  [] = {
@@ -258,15 +258,15 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         renderer = gtk_cell_renderer_pixbuf_new ();
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_pack_start (column, renderer, FALSE);
-        gtk_tree_view_column_set_attributes (column, renderer, "icon-name", PLAYLISTS_ICON_COLUMN, "stock-size", PLAYLISTS_ICONSIZE_COLUMN, NULL);
+        gtk_tree_view_column_set_attributes (column, renderer, "icon-name", FILETREE_ICON_COLUMN, "stock-size", FILETREE_ICONSIZE_COLUMN, NULL);
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
-        gtk_tree_view_column_set_attributes (column, renderer, "text", PLAYLISTS_NAME_COLUMN, NULL);
+        gtk_tree_view_column_set_attributes (column, renderer, "text", FILETREE_NAME_COLUMN, NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 50);
         gtk_tree_view_append_column (GTK_TREE_VIEW (filesystem->priv->filesystem), column);
-        filesystem->priv->filesystem_model = gtk_tree_store_new (PLAYLISTS_N_COLUMN,
+        filesystem->priv->filesystem_model = gtk_tree_store_new (FILETREE_N_COLUMN,
                                                                  G_TYPE_STRING,
                                                                  G_TYPE_UINT,
                                                                  G_TYPE_STRING,
@@ -288,7 +288,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
 
         g_signal_connect (GTK_TREE_VIEW (filesystem->priv->filesystem),
                           "drag_data_get", 
-                          G_CALLBACK (ario_filesystem_playlists_drag_data_get_cb), filesystem);
+                          G_CALLBACK (ario_filesystem_filetree_drag_data_get_cb), filesystem);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "button_press_event",
                                  G_CALLBACK (ario_filesystem_button_press_cb),
@@ -306,11 +306,11 @@ ario_filesystem_init (ArioFilesystem *filesystem)
                                  0);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "row-activated",
-                                 G_CALLBACK (ario_filesystem_playlists_row_activated_cb),
+                                 G_CALLBACK (ario_filesystem_filetree_row_activated_cb),
                                  filesystem, 0);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "test-expand-row",
-                                 G_CALLBACK (ario_filesystem_playlists_row_expanded_cb),
+                                 G_CALLBACK (ario_filesystem_filetree_row_expanded_cb),
                                  filesystem, 0);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "cursor-changed",
@@ -486,10 +486,10 @@ ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
                 path = tmp->data;
                 gtk_tree_store_append (filesystem->priv->filesystem_model, &filesystem_iter, NULL);
                 gtk_tree_store_set (filesystem->priv->filesystem_model, &filesystem_iter,
-                                    PLAYLISTS_ICON_COLUMN, GTK_STOCK_DIRECTORY,
-                                    PLAYLISTS_ICONSIZE_COLUMN, 1,
-                                    PLAYLISTS_NAME_COLUMN, path,
-                                    PLAYLISTS_DIR_COLUMN, path, -1);
+                                    FILETREE_ICON_COLUMN, GTK_STOCK_DIRECTORY,
+                                    FILETREE_ICONSIZE_COLUMN, 1,
+                                    FILETREE_NAME_COLUMN, path,
+                                    FILETREE_DIR_COLUMN, path, -1);
                 gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &filesystem_iter);
         }
 
@@ -520,7 +520,7 @@ ario_filesystem_filesystem_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_filesystem_playlists_row_activated_cb (GtkTreeView *tree_view,
+ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
                                             GtkTreePath *path,
                                             GtkTreeViewColumn *column,
                                             ArioFilesystem *filesystem)
@@ -534,7 +534,7 @@ ario_filesystem_playlists_row_activated_cb (GtkTreeView *tree_view,
         }
 }
 
-static void ario_filesystem_playlists_row_expanded_cb (GtkTreeView *tree_view,
+static void ario_filesystem_filetree_row_expanded_cb (GtkTreeView *tree_view,
                                                        GtkTreeIter *iter,
                                                        GtkTreePath *path,
                                                        ArioFilesystem *filesystem)
@@ -571,7 +571,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                 while (gtk_tree_store_remove (GTK_TREE_STORE (filesystem->priv->filesystem_model), &child)) { }
         }
         gtk_list_store_clear (liststore);
-        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter, PLAYLISTS_DIR_COLUMN, &dir, -1);
+        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter, FILETREE_DIR_COLUMN, &dir, -1);
         g_return_if_fail (dir);
 
         files = ario_mpd_list_files (filesystem->priv->mpd, dir, FALSE);
@@ -579,10 +579,10 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                 path = tmp->data;
                 gtk_tree_store_append (filesystem->priv->filesystem_model, &child, &iter);
                 gtk_tree_store_set (filesystem->priv->filesystem_model, &child,
-                                    PLAYLISTS_ICON_COLUMN, GTK_STOCK_DIRECTORY,
-                                    PLAYLISTS_ICONSIZE_COLUMN, 1,
-                                    PLAYLISTS_NAME_COLUMN, path + strlen (dir) + 1,
-                                    PLAYLISTS_DIR_COLUMN, path, -1);
+                                    FILETREE_ICON_COLUMN, GTK_STOCK_DIRECTORY,
+                                    FILETREE_ICONSIZE_COLUMN, 1,
+                                    FILETREE_NAME_COLUMN, path + strlen (dir) + 1,
+                                    FILETREE_DIR_COLUMN, path, -1);
                 gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &child);
         }
         for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
@@ -607,7 +607,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
 }
 
 static void
-ario_filesystem_add_playlists (ArioFilesystem *filesystem)
+ario_filesystem_add_filetree (ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
         gchar *dir;	GtkTreeIter iter;
@@ -619,7 +619,7 @@ ario_filesystem_add_playlists (ArioFilesystem *filesystem)
                 return;
 
         gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter,
-                            PLAYLISTS_DIR_COLUMN, &dir, -1);
+                            FILETREE_DIR_COLUMN, &dir, -1);
 
         g_return_if_fail (dir);
 
@@ -632,7 +632,7 @@ ario_filesystem_cmd_add_filesystem (GtkAction *action,
                                     ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
-        ario_filesystem_add_playlists (filesystem);
+        ario_filesystem_add_filetree (filesystem);
 }
 
 static void
@@ -753,7 +753,7 @@ ario_filesystem_motion_notify (GtkWidget *widget,
 }
 
 static void
-ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
+ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
                                             GdkDragContext * context,
                                             GtkSelectionData * selection_data,
                                             guint info, guint time, gpointer data)
@@ -778,7 +778,7 @@ ario_filesystem_playlists_drag_data_get_cb (GtkWidget * widget,
                 return;
 
         gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter,
-                            PLAYLISTS_DIR_COLUMN, &dir, -1);
+                            FILETREE_DIR_COLUMN, &dir, -1);
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, dir,
                                 strlen ((const gchar*) dir) * sizeof(guchar));

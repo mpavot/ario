@@ -103,7 +103,6 @@ impl_activate (ArioPlugin *plugin,
         GtkActionGroup *actiongroup;
 	ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
         static gboolean is_loaded = FALSE;
-        GdkPixbuf *pb;
 
 	g_object_get (shell, "ui-manager", &uimanager, NULL);
         pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
@@ -111,19 +110,13 @@ impl_activate (ArioPlugin *plugin,
 	g_object_unref (uimanager);
 
         if (!is_loaded) {
-        	int icon_size;
 	        g_object_get (shell, "action-group", &actiongroup, NULL);
                 gtk_action_group_add_actions (actiongroup,
                                               ario_wikipedia_actions,
                                               G_N_ELEMENTS (ario_wikipedia_actions), pi);
 	        g_object_unref (actiongroup);
 
-                pb = gdk_pixbuf_new_from_file (PLUGINDIR "wikipedia.png",
-                                               NULL);
-        	gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
-	        gtk_icon_theme_add_builtin_icon ("wikipedia",
-					         icon_size,
-					         pb);
+                ario_util_add_stock_icons ("wikipedia", PLUGINDIR "wikipedia.png");
 
                 is_loaded = TRUE;
         }
