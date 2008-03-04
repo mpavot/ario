@@ -211,7 +211,7 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
                 return;
 
         g_object_set (G_OBJECT (cell),
-                      "icon-name", ario_plugin_info_get_icon_name (info),
+                      "stock-id", ario_plugin_info_get_icon_name (info),
                       "sensitive", ario_plugin_info_is_available (info),
                       NULL);
 }

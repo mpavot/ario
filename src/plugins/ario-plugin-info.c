@@ -31,6 +31,7 @@
 #include "plugins/ario-plugin-info.h"
 #include "plugins/ario-plugin-info-priv.h"
 #include "ario-debug.h"
+#include "ario-util.h"
 #include "plugins/ario-plugin.h"
 
 void
@@ -320,9 +321,7 @@ ario_plugin_info_get_icon_name (ArioPluginInfo *info)
         /* use the ario icon as a default if the plugin does not
            have its own */
 
-        if (info->icon_name != NULL && 
-            gtk_icon_theme_has_icon (gtk_icon_theme_get_default (),
-                                     info->icon_name))
+        if (info->icon_name && ario_util_has_stock_icons (info->icon_name))
                 return info->icon_name;
         else
                 return "ario";

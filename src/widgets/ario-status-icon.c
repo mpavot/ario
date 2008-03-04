@@ -47,6 +47,7 @@ static void ario_status_icon_get_property (GObject *object,
                                          GParamSpec *pspec);
 static void ario_status_icon_set_visibility (ArioStatusIcon *status, int state);
 static void ario_status_icon_sync_tooltip (ArioStatusIcon *icon);
+static void ario_status_icon_sync_icon (ArioStatusIcon *icon);
 static void ario_status_icon_sync_popup (ArioStatusIcon *icon);
 static void ario_status_icon_activate_cb (GtkStatusIcon *status_icon,
                                           ArioStatusIcon *icon);
@@ -415,6 +416,24 @@ ario_status_icon_sync_tooltip (ArioStatusIcon *icon)
 }
 
 static void
+ario_status_icon_sync_icon (ArioStatusIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+
+        switch (ario_mpd_get_current_state (icon->priv->mpd)) {
+        case MPD_STATUS_STATE_PLAY:
+                gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-play");
+                break;
+        case MPD_STATUS_STATE_PAUSE:
+                gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-pause");
+                break;
+        default:
+                gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario");
+                break;
+        }
+}
+
+static void
 ario_status_icon_sync_popup (ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
@@ -440,6 +459,7 @@ ario_status_icon_state_changed_cb (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         ario_status_icon_sync_tooltip (icon);
+        ario_status_icon_sync_icon (icon);
         ario_status_icon_sync_popup (icon);
 }
 

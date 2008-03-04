@@ -162,70 +162,52 @@ ario_util_format_title (ArioMpdSong *mpd_song)
         }
 }
 
+static GtkIconFactory *factory = NULL;
+
+void
+ario_util_add_stock_icons (const char *stock_id,
+                           const char *filename)
+{
+        ARIO_LOG_FUNCTION_START
+
+        static int icon_size = 0;
+        GdkPixbuf *pb;
+        GtkIconSet *set;
+
+        if (!icon_size)
+                gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
+
+        pb = gdk_pixbuf_new_from_file (filename,
+                                       NULL);
+        set = gtk_icon_set_new_from_pixbuf (pb);
+        gtk_icon_factory_add (factory, stock_id, set);
+        g_object_unref (G_OBJECT (pb));
+}
+
 void
 ario_util_init_stock_icons (void)
 {
         ARIO_LOG_FUNCTION_START
-        GtkIconFactory *factory;
-        GdkPixbuf *pb;
-        GtkIconSet *set;
-        int icon_size;
+
         factory = gtk_icon_factory_new ();
 
-        gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "ario", set);
-        gtk_icon_theme_add_builtin_icon ("ario",
-                                         icon_size,
-                                         pb);
-       // g_object_unref (G_OBJECT (pb));
-
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "volume-zero.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "volume-zero", set);
-        g_object_unref (G_OBJECT (pb));
-
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "volume-min.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "volume-min", set);
-        g_object_unref (G_OBJECT (pb));
-
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "volume-medium.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "volume-medium", set);
-        g_object_unref (G_OBJECT (pb));
-
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "volume-max.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "volume-max", set);
-        g_object_unref (G_OBJECT (pb));
-
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "repeat.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "repeat", set);
-        g_object_unref (G_OBJECT (pb));
-
-
-        pb = gdk_pixbuf_new_from_file (PIXMAP_PATH "shuffle.png",
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, "random", set);
-        g_object_unref (G_OBJECT (pb));
+        ario_util_add_stock_icons ("ario", PIXMAP_PATH "ario.png");
+        ario_util_add_stock_icons ("ario-play", PIXMAP_PATH "ario-play.png");
+        ario_util_add_stock_icons ("ario-pause", PIXMAP_PATH "ario-pause.png");
+        ario_util_add_stock_icons ("volume-zero", PIXMAP_PATH "volume-zero.png");
+        ario_util_add_stock_icons ("volume-min", PIXMAP_PATH "volume-min.png");
+        ario_util_add_stock_icons ("volume-medium", PIXMAP_PATH "volume-medium.png");
+        ario_util_add_stock_icons ("volume-max", PIXMAP_PATH "volume-max.png");
+        ario_util_add_stock_icons ("repeat", PIXMAP_PATH "repeat.png");
+        ario_util_add_stock_icons ("random", PIXMAP_PATH "shuffle.png");
 
         gtk_icon_factory_add_default (factory);
+}
+
+gboolean
+ario_util_has_stock_icons (const char *stock_id)
+{
+        return (gtk_icon_factory_lookup_default (stock_id) != NULL);
 }
 
 gint

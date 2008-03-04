@@ -122,7 +122,6 @@ ario_plugins_engine_load_all (void)
 {
         GSList *active_plugins;
         const gchar *home;
-        const gchar *pdirs_env;
         gchar **pdirs;
         int i;
 
@@ -142,13 +141,8 @@ ario_plugins_engine_load_all (void)
                 g_free (pdir);
         }
 
-        //pdirs_env = g_getenv ("ARIO_PLUGINS_PATH");
-        /* What if no env var is set? We use the default location(s)! */
-        //if (pdirs_env == NULL)
-        pdirs_env = ARIO_PLUGIN_DIR;
-
-        ARIO_LOG_DBG ("ARIO_PLUGINS_PATH=%s", pdirs_env);
-        pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
+        ARIO_LOG_DBG ("ARIO_PLUGINS_PATH=%s", ARIO_PLUGIN_DIR);
+        pdirs = g_strsplit (ARIO_PLUGIN_DIR, G_SEARCHPATH_SEPARATOR_S, 0);
 
         for (i = 0; pdirs[i] != NULL; i++)
                 ario_plugins_engine_load_dir (pdirs[i], active_plugins);

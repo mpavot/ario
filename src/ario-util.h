@@ -27,7 +27,11 @@ gchar*                  ario_util_format_track               (gchar *track);
 
 gchar*                  ario_util_format_title               (ArioMpdSong *mpd_song);
 
+void                    ario_util_add_stock_icons            (const char *stock_id,
+                                                              const char *filename);
 void                    ario_util_init_stock_icons           (void);
+
+gboolean                ario_util_has_stock_icons            (const char *stock_id);
 
 gint                    ario_util_abs                        (gint a);
 
