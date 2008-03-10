@@ -888,6 +888,7 @@ ario_tray_icon_cmd_play (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_play (icon->priv->mpd);
+        ario_mpd_update_status (icon->priv->mpd);
 }
 
 static void
@@ -896,6 +897,7 @@ ario_tray_icon_cmd_pause (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_pause (icon->priv->mpd);
+        ario_mpd_update_status (icon->priv->mpd);
 }
 
 static void
@@ -904,6 +906,7 @@ ario_tray_icon_cmd_stop (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_stop (icon->priv->mpd);
+        ario_mpd_update_status (icon->priv->mpd);
 }
 
 static void
