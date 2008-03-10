@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-02 13:03+0100\n"
+"POT-Creation-Date: 2008-03-10 21:56+0100\n"
 "PO-Revision-Date: 2008-01-23 23:52+0100\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -872,7 +872,7 @@ msgstr "Stop la musique"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:325 ../src/widgets/ario-tray-icon.c:714
+#: ../src/widgets/ario-header.c:325 ../src/widgets/ario-tray-icon.c:729
 msgid " of "
 msgstr " sur "
 
@@ -929,27 +929,27 @@ msgstr "Chansons"
 msgid "Not playing"
 msgstr "Ne joue pas"
 
-#: ../src/widgets/ario-tray-icon.c:124 ../src/widgets/ario-status-icon.c:93
+#: ../src/widgets/ario-tray-icon.c:129 ../src/widgets/ario-status-icon.c:94
 msgid "_Play"
 msgstr "_Lecture"
 
-#: ../src/widgets/ario-tray-icon.c:127 ../src/widgets/ario-status-icon.c:96
+#: ../src/widgets/ario-tray-icon.c:132 ../src/widgets/ario-status-icon.c:97
 msgid "_Pause"
 msgstr "_Pause"
 
-#: ../src/widgets/ario-tray-icon.c:130 ../src/widgets/ario-status-icon.c:99
+#: ../src/widgets/ario-tray-icon.c:135 ../src/widgets/ario-status-icon.c:100
 msgid "_Stop"
 msgstr "_Stop"
 
-#: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:102
+#: ../src/widgets/ario-tray-icon.c:138 ../src/widgets/ario-status-icon.c:103
 msgid "_Next"
 msgstr "_Suivant"
 
-#: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:105
+#: ../src/widgets/ario-tray-icon.c:141 ../src/widgets/ario-status-icon.c:106
 msgid "P_revious"
 msgstr "_Précédent"
 
-#: ../src/widgets/ario-status-icon.c:401
+#: ../src/widgets/ario-status-icon.c:402
 #, c-format
 msgid ""
 "Artist: %s\n"
@@ -962,11 +962,11 @@ msgstr ""
 msgid "Find artist on Wikipedia"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:180
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
 msgid "Wikipedia Plugin - Configuration"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:189
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
 msgid "Wikipedia language :"
 msgstr ""
 

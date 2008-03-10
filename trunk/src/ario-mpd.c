@@ -582,7 +582,8 @@ ario_mpd_connect_to (ArioMpd *mpd,
                                                             _("Impossible to connect to mpd. Check the connection options."));
                 ario_mpd_disconnect (mpd);
                 gtk_dialog_run (GTK_DIALOG (dialog));
-                gtk_widget_destroy (dialog);        
+                gtk_widget_destroy (dialog);
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
         }
         else
                 mpd_freeStats(stats);

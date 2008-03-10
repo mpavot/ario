@@ -473,7 +473,7 @@ ario_header_new (ArioMpd *mpd,
         /* Construct the volume button */
         header->priv->volume_button = GTK_WIDGET (ario_volume_new (header->priv->mpd));
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->volume_button), 
+                              header->priv->volume_button,
                               _("Change the music volume"), NULL);
 
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
