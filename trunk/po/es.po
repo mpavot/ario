@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 21:56+0100\n"
-"PO-Revision-Date: 2008-01-17 18:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-03-10 23:28+0100\n"
+"PO-Revision-Date: 2008-03-10 21:45+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-17 21:16+0000\n"
+"X-Launchpad-Export-Date: 2008-03-10 22:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.schemas.in.h:1
@@ -458,7 +458,7 @@ msgstr "Descargando letras..."
 msgid "Lyrics not found"
 msgstr "Letras no encontradas"
 
-#: ../src/ario-mpd.c:582
+#: ../src/ario-mpd.c:638
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
 
@@ -769,6 +769,10 @@ msgstr "Cliente GTK para MPD"
 #: ../src/shell/ario-shell.c:624
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Paco Molinero https://launchpad.net/~franciscomol"
 
 #: ../src/shell/ario-shell.c:865
 #, fuzzy
@@ -924,7 +928,7 @@ msgstr "Guardar lista de reproducción"
 #: ../src/widgets/ario-playlist.c:1234
 #, fuzzy
 msgid "Playlist name :"
-msgstr "Nombre de lista de reprodución: "
+msgstr "Nombre de lista de reprodución:"
 
 #: ../src/widgets/ario-playlist.c:1259
 msgid "Playlist already exists. Do you want to ovewrite it?"
@@ -965,6 +969,9 @@ msgid ""
 "Album: %s\n"
 "Title: %s"
 msgstr ""
+"Artista: %s\n"
+"Album: %s\n"
+"Título: %s"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:52
@@ -1055,101 +1062,3 @@ msgstr ""
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
 msgstr ""
-
-#~ msgid "_Library"
-#~ msgstr "Bib_lioteca"
-
-#~ msgid "_Web Radios"
-#~ msgstr "Radios _web"
-
-#~ msgid "_Search"
-#~ msgstr "Bu_scar"
-
-#~ msgid "_Playlists"
-#~ msgstr "Listas de re_producción"
-
-#, fuzzy
-#~ msgid "Library view"
-#~ msgstr "Vista de biblioteca"
-
-#~ msgid "Web Radios view"
-#~ msgstr "Vista de radios web"
-
-#~ msgid "Search view"
-#~ msgstr "Vista de búsqueda"
-
-#~ msgid "Playlists view"
-#~ msgstr "Vista de listas de reproducción"
-
-#~ msgid "Host:"
-#~ msgstr "Anfitrión:"
-
-#~ msgid "Port:"
-#~ msgstr "Puerto:"
-
-#~ msgid "Name:"
-#~ msgstr "Nombre:"
-
-#~ msgid "Add to the playlist"
-#~ msgstr "Añadir a la lista de reproducción"
-
-#~ msgid "Download the cover from Amazon"
-#~ msgstr "Bajar la carátula desde Amazon"
-
-#~ msgid "Delete the selected covers"
-#~ msgstr "Borrar las carátulas seleccionadas"
-
-#~ msgid "Delete this playlists"
-#~ msgstr "Borrar esta lista de reproducción"
-
-#~ msgid "Save Playlist"
-#~ msgstr "Guardar la lista de reproducción"
-
-#~ msgid "Connect"
-#~ msgstr "Conectar"
-
-#~ msgid "Disconnect"
-#~ msgstr "Desconectar"
-
-#~ msgid "Quit"
-#~ msgstr "Salir"
-
-#~ msgid "Edit music player preferences"
-#~ msgstr "Preferencias del editor del reproductor de música"
-
-#~ msgid "Show information about the music player"
-#~ msgstr "Mostrar información sobre el reproductor de música"
-
-#~ msgid "Translate this application"
-#~ msgstr "Traducir esta aplicación"
-
-#~ msgid "Start playback"
-#~ msgstr "Iniciar reproducción"
-
-#~ msgid "Stop playback"
-#~ msgstr "Detener reproducción"
-
-#~ msgid "Start playing the next song"
-#~ msgstr "Comenzar la reproducción de la siguiente canción"
-
-#~ msgid "Start playing the previous song"
-#~ msgstr "Comenzar la reproducción de la canción anterior"
-
-#~ msgid "Clear the playlist"
-#~ msgstr "Limpiar la lista de reproducción"
-
-#~ msgid "Remove the selected songs"
-#~ msgstr "Eliminar las canciones seleccionadas"
-
-#~ msgid "Save the playlist"
-#~ msgstr "Guardar la lista de reproducción"
-
-#, fuzzy
-#~ msgid "Add a new radio"
-#~ msgstr "Añadir una nueva radio"
-
-#~ msgid "Delete this radios"
-#~ msgstr "Borrar estas radios"
-
-#~ msgid "Change properties of this radio"
-#~ msgstr "Cambiar propiedades de esta radio"

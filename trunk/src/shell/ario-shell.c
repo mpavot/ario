@@ -163,7 +163,7 @@ static GtkActionEntry ario_shell_actions [] =
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_covers) },
-        { "Lyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
+        { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
         { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
@@ -675,10 +675,9 @@ ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                  ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        if (shell->priv->connected != ario_mpd_is_connected (mpd)) {
-                shell->priv->connected = ario_mpd_is_connected (mpd);
-                ario_shell_sync_mpd (shell);
-        }
+        shell->priv->connected = ario_mpd_is_connected (mpd);
+
+        ario_shell_sync_mpd (shell);
         ario_shell_mpd_song_set_title (shell);
 }
 
@@ -809,6 +808,18 @@ ario_shell_sync_mpd (ArioShell *shell)
 
         gtk_action_set_visible (connect_action, !shell->priv->connected);
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
+
+        gboolean is_playing = ((shell->priv->connected)
+                               && ((ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PLAY)
+                                    || (ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PAUSE)));
+
+
+        GtkAction *lyrics_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                                "ViewLyrics");
+        gtk_action_set_sensitive (lyrics_action, is_playing);
+        GtkAction *covers_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                                "ToolCoverSelect");
+        gtk_action_set_sensitive (covers_action, is_playing);
 }
 
 static void

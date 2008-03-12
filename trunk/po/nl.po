@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 21:56+0100\n"
-"PO-Revision-Date: 2008-02-12 11:06+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-03-10 23:28+0100\n"
+"PO-Revision-Date: 2008-03-10 21:45+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-02-14 19:48+0000\n"
+"X-Launchpad-Export-Date: 2008-03-10 22:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.schemas.in.h:1
@@ -28,7 +28,7 @@ msgstr "0 voor de bibliotheek, 1 voor de radio's, etc..."
 
 #: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:745
 msgid "Active plugins"
-msgstr ""
+msgstr "Actieve plugins"
 
 #: ../data/ario.schemas.in.h:4
 msgid "Define if Ario must autoconnect to mpd or not"
@@ -454,7 +454,7 @@ msgstr "Downloaden van songteksten..."
 msgid "Lyrics not found"
 msgstr "Songteksten niet gevonden"
 
-#: ../src/ario-mpd.c:582
+#: ../src/ario-mpd.c:638
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Onmogelijk om te verbinden naar mpd. Kijk de verbindingsopties na."
 
@@ -480,7 +480,7 @@ msgstr "dagen"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-server-preferences.c:205
@@ -498,15 +498,15 @@ msgstr "Configuratie"
 
 #: ../src/plugins/ario-plugin-manager.c:519
 msgid "A_ctivate"
-msgstr ""
+msgstr "_Activeren"
 
 #: ../src/plugins/ario-plugin-manager.c:530
 msgid "Ac_tivate All"
-msgstr ""
+msgstr "Alles acti_veren"
 
 #: ../src/plugins/ario-plugin-manager.c:535
 msgid "_Deactivate All"
-msgstr ""
+msgstr "Alles _deactiveren"
 
 #: ../src/preferences/ario-connection-preferences.c:371
 msgid "Profile"
@@ -733,7 +733,7 @@ msgstr "_Aflsuiten"
 
 #: ../src/shell/ario-shell.c:154
 msgid "Plu_gins"
-msgstr ""
+msgstr "Plu_gins"
 
 #: ../src/shell/ario-shell.c:157
 msgid "Prefere_nces"
@@ -757,7 +757,7 @@ msgstr "_Vertaal deze applicatie..."
 
 #: ../src/shell/ario-shell.c:180
 msgid "S_tatusbar"
-msgstr ""
+msgstr "S_tatusbalk"
 
 #: ../src/shell/ario-shell.c:623
 msgid "GTK client for MPD"
@@ -767,6 +767,10 @@ msgstr "GTK client voor MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Robert Wubs https://launchpad.net/~wubsieonline\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Robert Wubs https://launchpad.net/~wubsieonline\n"
 "\n"
 "Launchpad Contributions:\n"
@@ -993,11 +997,11 @@ msgstr ""
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr ""
+msgstr "Wikipedia"
 
 #: ../plugins/filesystem/ario-filesystem.c:180
 msgid "File System"
-msgstr ""
+msgstr "Bestandsysteem"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
@@ -1059,15 +1063,3 @@ msgstr ""
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
 msgstr ""
-
-#~ msgid "_Library"
-#~ msgstr "_Bibliotheek"
-
-#~ msgid "_Web Radios"
-#~ msgstr "_Web Radio's"
-
-#~ msgid "_Search"
-#~ msgstr "_Zoeken"
-
-#~ msgid "_Playlists"
-#~ msgstr "_Afspeellijsten"

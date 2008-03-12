@@ -21,7 +21,7 @@
                 <menu name="ViewMenu" action="View">
                         <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
                         <separator/>
-                        <menuitem name="LyricsMenu" action="Lyrics"/> 
+                        <menuitem name="LyricsMenu" action="ViewLyrics"/> 
                         <placeholder name="ViewMenuPluginPlaceholder" />
                 </menu>
 
