@@ -1,16 +1,16 @@
-# Indonesian translation for ario
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# English (United Kingdom) translation for ario
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the ario package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-10 23:28+0100\n"
-"PO-Revision-Date: 2008-03-10 21:45+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
-"Language-Team: Indonesian <id@li.org>\n"
+"PO-Revision-Date: 2008-02-29 00:08+0000\n"
+"Last-Translator: AndrewB <andrew-alex-barber@ubuntu.com>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,214 +19,213 @@ msgstr ""
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
-msgstr ""
-"0 untuk 'mulai/jeda', 1 untuk memulai lagu selanjutnya, 2 untuk 'diam'."
+msgstr "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 
 #: ../data/ario.schemas.in.h:2
 msgid "0 for the library, 1 for the radios, etc..."
-msgstr "0 utuk  pustaka, 1 untuk radio, dll"
+msgstr "0 for the library, 1 for the radios, etc..."
 
 #: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:745
 msgid "Active plugins"
-msgstr ""
+msgstr "Active plugins"
 
 #: ../data/ario.schemas.in.h:4
 msgid "Define if Ario must autoconnect to mpd or not"
-msgstr "tegaskan jika Ario harus terhubung otomatis ke mpd atau tidak"
+msgstr "Define if Ario must autoconnect to mpd or not"
 
 #: ../data/ario.schemas.in.h:5
 msgid "Define if Ario must use a proxy for remote connections"
-msgstr ""
-"tegaskan jika Ario harus menggunakan proxy untuk koneksi kendali jarak jauh"
+msgstr "Define if Ario must use a proxy for remote connections"
 
 #: ../data/ario.schemas.in.h:6
 msgid "Define if the view tabs are shown."
-msgstr ""
+msgstr "Define if the view tabs are shown."
 
 #: ../data/ario.schemas.in.h:7
 msgid "Define the address of the proxy"
-msgstr "Definisikan alamat proxy"
+msgstr "Define the address of the proxy"
 
 #: ../data/ario.schemas.in.h:8
 msgid "Define the behavior of a double click on the tray icon."
-msgstr "Definisikan perilaku dari klik ganda pada tray icon"
+msgstr "Define the behavior of a double click on the tray icon."
 
 #: ../data/ario.schemas.in.h:9
-#, fuzzy
 msgid "Define the path to the music"
-msgstr "Definisikan port pada proxy"
+msgstr ""
 
 #: ../data/ario.schemas.in.h:10
 msgid "Define the port of the proxy"
-msgstr "Definisikan port pada proxy"
+msgstr "Define the port of the proxy"
 
 #: ../data/ario.schemas.in.h:11
 msgid "Define the size of the album column."
-msgstr "tegaskan ukuran kolom album"
+msgstr "Define the size of the album column."
 
 #: ../data/ario.schemas.in.h:12
 msgid "Define the size of the artist column."
-msgstr "tegaskan ukuran kolom artis"
+msgstr "Define the size of the artist column."
 
 #: ../data/ario.schemas.in.h:13
 msgid "Define the size of the title column."
-msgstr ""
+msgstr "Define the size of the title column."
 
 #: ../data/ario.schemas.in.h:14
 msgid "Define the size of the track column."
-msgstr ""
+msgstr "Define the size of the track column."
 
 #: ../data/ario.schemas.in.h:15
 msgid "Define the source used in Ario"
-msgstr ""
+msgstr "Define the source used in Ario"
 
 #: ../data/ario.schemas.in.h:16
-#, fuzzy
 msgid "Hide the covers in the albums treeview"
-msgstr "sembunyikan sampul dari bagan album"
+msgstr "Hide the covers in the albums treeview"
 
 #: ../data/ario.schemas.in.h:17
 msgid "Host to connect to"
-msgstr "host sambungan ke"
+msgstr "Host to connect to"
 
 #: ../data/ario.schemas.in.h:18
 msgid "If true, the main window is maximized."
-msgstr "Jika benar, jendela utama dimaksimalkan."
+msgstr "If true, the main window is maximized."
 
 #: ../data/ario.schemas.in.h:19
 msgid "If true, the statusbar is hidden."
-msgstr ""
+msgstr "If true, the statusbar is hidden."
 
 #: ../data/ario.schemas.in.h:20
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .ario-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .ario-plugin file for obtaining the \"Location\" of a given plugin."
 
 #: ../data/ario.schemas.in.h:21
 msgid "Main window height"
-msgstr "Tinggi jendela utama"
+msgstr "Main window height"
 
 #: ../data/ario.schemas.in.h:22
 msgid "Main window maximization state"
-msgstr "Keadaan maksimal jendela utama"
+msgstr "Main window maximization state"
 
 #: ../data/ario.schemas.in.h:23
 msgid "Main window width"
-msgstr "Lebar jendela utama"
+msgstr "Main window width"
 
 #: ../data/ario.schemas.in.h:24
 msgid "Ordered list of sources."
-msgstr ""
+msgstr "Ordered list of sources."
 
 #: ../data/ario.schemas.in.h:25
 msgid "Port to connect to"
-msgstr "Port sambungan ke"
+msgstr "Port to connect to"
 
 #: ../data/ario.schemas.in.h:26
-#, fuzzy
 msgid "Position of filesystem pane"
-msgstr "Posisi panel playlist"
+msgstr "Position of filesystem pane"
 
 #: ../data/ario.schemas.in.h:27
 msgid "Position of main window pane"
-msgstr "Posisi dari panel jendela utama"
+msgstr "Position of main window pane"
 
 #: ../data/ario.schemas.in.h:28
 msgid "Position of playlists pane"
-msgstr "Posisi panel playlist"
+msgstr "Position of playlists pane"
 
 #: ../data/ario.schemas.in.h:29
 msgid "Sources order"
-msgstr ""
+msgstr "Sources order"
 
 #: ../data/ario.schemas.in.h:30
 msgid "Statusbar visibility"
-msgstr ""
+msgstr "Statusbar visability"
 
 #: ../data/ario.schemas.in.h:31
 msgid "The amazon country to use to get the covers"
-msgstr ""
+msgstr "The amazon country to use to get the covers"
 
 #: ../data/ario.schemas.in.h:32
 msgid "The password to connect to mpd"
-msgstr "Password ontok koneksi pada mpd"
+msgstr "The password to connect to mpd"
 
 #: ../data/ario.schemas.in.h:33
 msgid "The timeout for the connection to mpd"
-msgstr "Waktu habis untuk koneks pada mpd"
+msgstr "The timeout for the connection to mpd"
 
 #: ../data/ario.schemas.in.h:34
 msgid "True if the initial assistant has already been run."
-msgstr "Benar jika inisial asisten telah berjalan"
+msgstr "True if the initial assistant has already been run."
 
 #: ../data/ario.schemas.in.h:35
 msgid "When enabled, ario hide the covers in the albums treeview"
-msgstr ""
+msgstr "When enabled, ario hide the covers in the albums treeview"
 
 #: ../data/ario.schemas.in.h:36
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
 msgstr ""
+"You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
+"accurate results"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr ""
+msgstr "Ario music player"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client apllication to mpd"
-msgstr "Aplikasi klien pada mpd"
+msgstr "Client apllication to mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
 #: ../src/shell/ario-shell-coverselect.c:256
 #: ../src/shell/ario-shell-preferences.c:178
 msgid "Covers"
-msgstr ""
+msgstr "Covers"
 
 #: ../data/glade/cover-prefs.glade.h:2
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../data/glade/cover-prefs.glade.h:3
 msgid "Proxy Address :"
-msgstr ""
+msgstr "Proxy Address :"
 
 #: ../data/glade/cover-prefs.glade.h:4
 msgid "Proxy Port :"
-msgstr ""
+msgstr "Proxy Port :"
 
 #: ../data/glade/cover-prefs.glade.h:5
 msgid "Show the covers in the albums list"
-msgstr ""
+msgstr "Show the covers in the albums list"
 
 #: ../data/glade/cover-prefs.glade.h:6
 msgid "Use Amazon."
-msgstr ""
+msgstr "Use Amazon."
 
 #: ../data/glade/cover-prefs.glade.h:7
 msgid "Use a proxy"
-msgstr "gunakan sebuah proxy"
+msgstr "Use a proxy"
 
 #: ../data/glade/connection-prefs.glade.h:1
 msgid "Auto detect"
-msgstr "Deteksi otomatis"
+msgstr "Auto detect"
 
 #: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:168
 msgid "Connection"
-msgstr ""
+msgstr "Connection"
 
 #: ../data/glade/connection-prefs.glade.h:3
 #: ../src/widgets/ario-firstlaunch.c:163
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:209
 msgid "Host :"
-msgstr ""
+msgstr "Host :"
 
 #: ../data/glade/connection-prefs.glade.h:5
 msgid "Music directory :"
@@ -235,37 +234,37 @@ msgstr ""
 #: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:881
 #: ../plugins/radios/ario-radio.c:1080
 msgid "Name :"
-msgstr "Nama :"
+msgstr "Name :"
 
 #: ../data/glade/connection-prefs.glade.h:7
 msgid "Password :"
-msgstr ""
+msgstr "Password :"
 
 #: ../data/glade/connection-prefs.glade.h:8
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:211
 msgid "Port :"
-msgstr ""
+msgstr "Port :"
 
 #: ../data/glade/connection-prefs.glade.h:9
 msgid "_Autoconnect on startup"
-msgstr ""
+msgstr "_Autoconnect on startup"
 
 #: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:145
 msgid "_Connect"
-msgstr ""
+msgstr "_Connect"
 
 #: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:148
 msgid "_Disconnect"
-msgstr ""
+msgstr "_Disconnect"
 
 #: ../data/glade/connection-assistant.glade.h:1
 msgid "Automatic configuration"
-msgstr ""
+msgstr "Automatic configuration"
 
 #: ../data/glade/connection-assistant.glade.h:3
 msgid "Manual configuration"
-msgstr "Konfigurasi manual"
+msgstr "Manual configuration"
 
 #: ../data/glade/connection-assistant.glade.h:5
 msgid ""
@@ -273,10 +272,9 @@ msgid ""
 "server thanks to the automatic configuration, you should check that zeroconf "
 "is activated in your MPD configuration or use the manual configuration."
 msgstr ""
-"Anda harus menspesifikasikan server MPD untuk lkoneksi. Jika and tidak "
-"melihat server MPD berterima kasihlah pada konfigurasi otomatis, Anda "
-"seharusnya mengecek bahwa zerocnf diaktifkan pada konfigurasi MPD atau "
-"menggunakan konfigurasi manual"
+"You need to specify an MPD server to connect to. If you don't see your MPD "
+"server thanks to the automatic configuration, you should check that zeroconf "
+"is activated in your MPD configuration or use the manual configuration."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -286,234 +284,231 @@ msgstr "Album :"
 #: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:3
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
-msgstr "Artis :"
+msgstr "Artist :"
 
 #: ../data/glade/cover-progress.glade.h:3
-#, fuzzy
 msgid "Downloading cover"
-msgstr "Donwload sampul album"
+msgstr "Downloading cover"
 
 #: ../data/glade/cover-select.glade.h:2
 msgid "Amazon search"
-msgstr "Pencarian dengan Amazon"
+msgstr "Amazon search"
 
 #: ../data/glade/cover-select.glade.h:4
-#, fuzzy
 msgid "Cover size"
-msgstr "Ukuran cover"
+msgstr "Cover size"
 
 #: ../data/glade/cover-select.glade.h:5
 msgid "Large cover (Slower)"
-msgstr "Cover besar(lebih lambat)"
+msgstr "Large cover (Slower)"
 
 #: ../data/glade/cover-select.glade.h:6
 msgid "Local search"
-msgstr "Pencarian lokal"
+msgstr "Local search"
 
 #: ../data/glade/cover-select.glade.h:7
 msgid "Medium cover"
-msgstr "Sampul sedang"
+msgstr "Medium cover"
 
 #: ../data/glade/cover-select.glade.h:8
 msgid "Small cover (Faster)"
-msgstr "Sampul kecil"
+msgstr "Small cover (Faster)"
 
 #: ../data/glade/interface-prefs.glade.h:1
-#, fuzzy
 msgid "On middle button click on tray icon :"
-msgstr "Definisikan perilaku dari klik ganda pada tray icon"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Show tabs"
-msgstr ""
+msgstr "Show tabs"
 
 #: ../data/glade/interface-prefs.glade.h:3
 msgid "Tabs"
-msgstr ""
+msgstr "Tabs"
 
 #: ../data/glade/interface-prefs.glade.h:4
 msgid "Tray icon"
-msgstr ""
+msgstr "Tray icon"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 msgid "Title :"
-msgstr "Judul :"
+msgstr "Title :"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
-msgstr ""
+msgstr "Audio outputs"
 
 #: ../data/glade/server-prefs.glade.h:2
 msgid "Crossfade"
-msgstr ""
+msgstr "Crossfade"
 
 #: ../data/glade/server-prefs.glade.h:3
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: ../data/glade/server-prefs.glade.h:4
 msgid "Last updated:"
-msgstr ""
+msgstr "Last updated:"
 
 #: ../data/glade/server-prefs.glade.h:5
 msgid "_Update"
-msgstr ""
+msgstr "_Update"
 
 #: ../data/glade/server-prefs.glade.h:6
 msgid "enable crossfade"
-msgstr ""
+msgstr "enable crossfade"
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "fade time (s):"
-msgstr "waktu pudar"
+msgstr "fade time (s):"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
 #: ../src/ario-util.c:45 ../src/ario-util.c:63
 #, c-format
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 #: ../data/glade/stats-prefs.glade.h:1
 msgid "Database play time :"
-msgstr ""
+msgstr "Database play time :"
 
 #: ../data/glade/stats-prefs.glade.h:2
 msgid "Number of albums :"
-msgstr ""
+msgstr "Number of albums :"
 
 #: ../data/glade/stats-prefs.glade.h:3
 msgid "Number of artists :"
-msgstr ""
+msgstr "Number of artists :"
 
 #: ../data/glade/stats-prefs.glade.h:4
 msgid "Number of songs :"
-msgstr ""
+msgstr "Number of songs :"
 
 #: ../data/glade/stats-prefs.glade.h:5
 msgid "Play time :"
-msgstr ""
+msgstr "Play time :"
 
 #: ../data/glade/stats-prefs.glade.h:6
 #: ../src/shell/ario-shell-preferences.c:188
 msgid "Statistics"
-msgstr ""
+msgstr "Statistics"
 
 #: ../data/glade/stats-prefs.glade.h:7
 msgid "Uptime :"
-msgstr ""
+msgstr "Uptime :"
 
 #: ../data/glade/song-infos.glade.h:3
 msgid "Comment :"
-msgstr ""
+msgstr "Comment :"
 
 #: ../data/glade/song-infos.glade.h:4
 msgid "Composer :"
-msgstr ""
+msgstr "Composer :"
 
 #: ../data/glade/song-infos.glade.h:5
 msgid "Date :"
-msgstr ""
+msgstr "Date :"
 
 #: ../data/glade/song-infos.glade.h:6
 msgid "Disc :"
-msgstr ""
+msgstr "Disc :"
 
 #: ../data/glade/song-infos.glade.h:7
 msgid "Filename :"
-msgstr ""
+msgstr "Filename :"
 
 #: ../data/glade/song-infos.glade.h:8
 msgid "Genre :"
-msgstr ""
+msgstr "Genre :"
 
 #: ../data/glade/song-infos.glade.h:9
 msgid "Length :"
-msgstr ""
+msgstr "Length :"
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
-msgstr ""
+msgstr "Performer :"
 
 #: ../data/glade/song-infos.glade.h:11
 msgid "Song"
-msgstr ""
+msgstr "Song"
 
 #: ../data/glade/song-infos.glade.h:13
 msgid "Track :"
-msgstr ""
+msgstr "Track :"
 
 #: ../src/ario-cover.c:419
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "Sampul telah ada. Ingin menggantinya?"
+msgstr "The cover already exists. Do you want to replace it?"
 
 #: ../src/ario-lyrics-editor.c:300
 msgid "Downloading lyrics..."
-msgstr "Download lirik"
+msgstr "Downloading lyrics..."
 
 #: ../src/ario-lyrics-editor.c:316
 msgid "Lyrics not found"
-msgstr "lirik tak ditemukan"
+msgstr "Lyrics not found"
 
 #: ../src/ario-mpd.c:638
 msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
+msgstr "Impossible to connect to mpd. Check the connection options."
 
 #: ../src/ario-mpd.h:28
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 #: ../src/ario-util.c:74
 msgid "seconds"
-msgstr ""
+msgstr "seconds"
 
 #: ../src/ario-util.c:77
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 #: ../src/ario-util.c:85
 msgid "hours"
-msgstr ""
+msgstr "hours"
 
 #: ../src/ario-util.c:93
 msgid "days"
-msgstr ""
+msgstr "days"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr ""
+msgstr "Plug-in"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
-msgstr ""
+msgstr "Enabled"
 
 #: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:169
 msgid "_About"
-msgstr ""
+msgstr "_About"
 
 #: ../src/plugins/ario-plugin-manager.c:510
 msgid "C_onfigure"
-msgstr ""
+msgstr "C_onfigure"
 
 #: ../src/plugins/ario-plugin-manager.c:519
 msgid "A_ctivate"
-msgstr ""
+msgstr "A_ctivate"
 
 #: ../src/plugins/ario-plugin-manager.c:530
 msgid "Ac_tivate All"
-msgstr ""
+msgstr "Ac_tivate All"
 
 #: ../src/plugins/ario-plugin-manager.c:535
 msgid "_Deactivate All"
-msgstr ""
+msgstr "_Deactivate All"
 
 #: ../src/preferences/ario-connection-preferences.c:371
 msgid "Profile"
-msgstr ""
+msgstr "Profile"
 
 #: ../src/preferences/ario-connection-preferences.c:618
 msgid "Server autodetection"
-msgstr "Deteksi otomatis server"
+msgstr "Server autodetection"
 
 #: ../src/preferences/ario-connection-preferences.c:629
 msgid ""
@@ -521,45 +516,48 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
 
 #: ../src/preferences/ario-connection-preferences.c:639
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: ../src/preferences/ario-connection-preferences.c:647
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 #: ../src/preferences/ario-connection-preferences.c:655
 #: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../src/preferences/ario-connection-preferences.c:717
 msgid "You must select a server."
-msgstr ""
+msgstr "You must select a server."
 
 #: ../src/preferences/ario-connection-preferences.c:737
 msgid "New Profile"
-msgstr ""
+msgstr "New Profile"
 
 #: ../src/preferences/ario-interface-preferences.c:44
 msgid "Play/Pause"
-msgstr ""
+msgstr "Play/Pause"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:45
 #: ../src/widgets/ario-header.c:260
 msgid "Play next song"
-msgstr ""
+msgstr "Play next song"
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-interface-preferences.c:46
 msgid "Do nothing"
-msgstr ""
+msgstr "Do nothing"
 
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
@@ -569,13 +567,13 @@ msgstr ""
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
 msgid "Not connected"
-msgstr ""
+msgstr "Not connected"
 
 #: ../src/preferences/ario-server-preferences.c:318
 #: ../src/preferences/ario-server-preferences.c:406
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
-msgstr ""
+msgstr "Updating..."
 
 #: ../src/sources/ario-browser.c:129 ../src/sources/ario-browser.c:132
 #: ../src/sources/ario-browser.c:135 ../src/sources/ario-search.c:100
@@ -585,7 +583,7 @@ msgstr ""
 #: ../plugins/filesystem/ario-filesystem.c:111
 #: ../plugins/radios/ario-radio.c:114
 msgid "_Add to playlist"
-msgstr ""
+msgstr "_Add to playlist"
 
 #: ../src/sources/ario-browser.c:139 ../src/sources/ario-browser.c:142
 #: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
@@ -593,59 +591,61 @@ msgstr ""
 #: ../plugins/filesystem/ario-filesystem.c:114
 #: ../plugins/radios/ario-radio.c:123
 msgid "_Properties"
-msgstr ""
+msgstr "_Properties"
 
 #: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:153
 msgid "Get the covers from _Amazon"
-msgstr "Ambil sampul dari Amazon"
+msgstr "Get the covers from _Amazon"
 
 #: ../src/sources/ario-browser.c:149 ../src/sources/ario-browser.c:156
 msgid "_Delete the covers"
-msgstr "Hapus sampul"
+msgstr "_Delete the covers"
 
 #: ../src/sources/ario-browser.c:237
 msgid "Library"
-msgstr ""
+msgstr "Library"
 
 #: ../src/sources/ario-browser.c:316 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
-msgstr ""
+msgstr "Artist"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:370 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:285
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-browser.c:380
 msgid "Cover"
-msgstr ""
+msgstr "Cover"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:446 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
 msgid "Track"
-msgstr ""
+msgstr "Track"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:453 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:255
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 #: ../src/sources/ario-browser.c:1359
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
+"Are you sure that you want to remove all the covers of the selected artists?"
 
 #: ../src/sources/ario-browser.c:1414
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
+"Are you sure that you want to remove all the covers of the selected albums?"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
@@ -657,20 +657,20 @@ msgstr ""
 #. MPD_TAG_ITEM_DISC
 #: ../src/sources/ario-search.c:54
 msgid "Filename"
-msgstr ""
+msgstr "Filename"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/sources/ario-search.c:55
 msgid "Any"
-msgstr ""
+msgstr "Any"
 
 #: ../src/sources/ario-search.c:160
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: ../src/sources/ario-search.c:247
 msgid "Add a search criteria"
-msgstr ""
+msgstr "Add a search criteria"
 
 #: ../src/sources/ario-search.c:254
 msgid "Search songs in the library"
@@ -694,7 +694,7 @@ msgstr ""
 
 #: ../src/sources/ario-storedplaylists.c:628
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr "Apakah anda yakin ingin menghapus semua daftar main?"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:136
 msgid "_File"
@@ -710,7 +710,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:139
 msgid "_Tool"
-msgstr "perkakas"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:140
 msgid "_Help"
@@ -738,7 +738,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:163
 msgid "Download album _covers"
-msgstr "Donwload sampul album"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:166
 msgid "Show _lyrics"
@@ -760,14 +760,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nestanet https://launchpad.net/~nesta-101106\n"
-"  reza https://launchpad.net/~edja-kun\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nestanet https://launchpad.net/~nesta-101106\n"
-"  reza https://launchpad.net/~edja-kun"
+"  AndrewB https://launchpad.net/~andrew-alex-barber"
 
 #: ../src/shell/ario-shell.c:865
 msgid "Configure Plugins"
@@ -779,7 +772,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:377
 msgid "Download Finished!"
-msgstr "Download selesai"
+msgstr ""
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:380
@@ -852,7 +845,7 @@ msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:353
 msgid "Confirmation"
-msgstr "Persetujuan"
+msgstr ""
 
 #: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:38
 #: ../src/widgets/ario-status-icon.c:33
@@ -888,7 +881,7 @@ msgstr ""
 
 #: ../src/widgets/ario-header.c:477
 msgid "Change the music volume"
-msgstr "ubah volume musik"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:117
 msgid "_Clear"
@@ -932,14 +925,12 @@ msgid "Not playing"
 msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:129 ../src/widgets/ario-status-icon.c:94
-#, fuzzy
 msgid "_Play"
-msgstr "_Main"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:132 ../src/widgets/ario-status-icon.c:97
-#, fuzzy
 msgid "_Pause"
-msgstr "_Berhenti"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:135 ../src/widgets/ario-status-icon.c:100
 msgid "_Stop"
@@ -947,7 +938,7 @@ msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:138 ../src/widgets/ario-status-icon.c:103
 msgid "_Next"
-msgstr "Selanjutnya"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:141 ../src/widgets/ario-status-icon.c:106
 msgid "P_revious"
@@ -1000,25 +991,25 @@ msgstr ""
 
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add a _new radio"
-msgstr ""
+msgstr "Add a _new radio"
 
 #: ../plugins/radios/ario-radio.c:120
 msgid "_Delete this radios"
-msgstr "hapus radio ini"
+msgstr "_Delete this radios"
 
 #: ../plugins/radios/ario-radio.c:187
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr ""
+msgstr "Web Radios"
 
 #: ../plugins/radios/ario-radio.c:262
 msgid "Internet Radios"
-msgstr "Radio internet"
+msgstr "Internet Radios"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:871
 msgid "Add a WebRadio"
-msgstr ""
+msgstr "Add a WebRadio"
 
 #: ../plugins/radios/ario-radio.c:882 ../plugins/radios/ario-radio.c:1081
 msgid "URL :"
@@ -1026,17 +1017,16 @@ msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:936 ../plugins/radios/ario-radio.c:1136
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr ""
-"Parameter yang buruk. Anda harus menspesifikasikan nama dan URL untuk radio"
+msgstr "Bad parameters. You must specify a name and a URL for the radio."
 
 #: ../plugins/radios/ario-radio.c:998
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr ""
+msgstr "Are you sure you want to delete all the selected radios?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1070
 msgid "Edit a WebRadio"
-msgstr ""
+msgstr "Edit a WebRadio"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"

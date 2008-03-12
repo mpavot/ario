@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 21:56+0100\n"
+"POT-Creation-Date: 2008-03-10 23:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -441,7 +441,7 @@ msgstr ""
 msgid "Lyrics not found"
 msgstr ""
 
-#: ../src/ario-mpd.c:582
+#: ../src/ario-mpd.c:638
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
 

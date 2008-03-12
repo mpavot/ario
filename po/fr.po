@@ -4,19 +4,21 @@
 # marc <>, 2007.
 # , fuzzy
 # marc <>, 2008.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 21:56+0100\n"
-"PO-Revision-Date: 2008-01-23 23:52+0100\n"
+"POT-Creation-Date: 2008-03-10 23:28+0100\n"
+"PO-Revision-Date: 2008-03-10 21:45+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-03-10 22:12+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.schemas.in.h:1
 msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
@@ -30,7 +32,7 @@ msgstr "0 pour la bibliothèque, 1 pour les radios, etc..."
 
 #: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:745
 msgid "Active plugins"
-msgstr ""
+msgstr "Greffons actifs"
 
 #: ../data/ario.schemas.in.h:4
 msgid "Define if Ario must autoconnect to mpd or not"
@@ -95,7 +97,7 @@ msgstr "Si vrai, la fenêtre principale est maximisée."
 
 #: ../data/ario.schemas.in.h:19
 msgid "If true, the statusbar is hidden."
-msgstr ""
+msgstr "Si la valeur est 'true', la barre d'état est cachée."
 
 #: ../data/ario.schemas.in.h:20
 msgid ""
@@ -117,7 +119,7 @@ msgstr "Largeur de la fenêtre principale"
 
 #: ../data/ario.schemas.in.h:24
 msgid "Ordered list of sources."
-msgstr ""
+msgstr "Liste ordonnée des sources"
 
 #: ../data/ario.schemas.in.h:25
 msgid "Port to connect to"
@@ -137,7 +139,7 @@ msgstr "Position du panneau de la playlist"
 
 #: ../data/ario.schemas.in.h:29
 msgid "Sources order"
-msgstr ""
+msgstr "Ordre des sources"
 
 #: ../data/ario.schemas.in.h:30
 msgid "Statusbar visibility"
@@ -452,7 +454,7 @@ msgstr "Téléchargement des paroles..."
 msgid "Lyrics not found"
 msgstr "Paroles introuvables"
 
-#: ../src/ario-mpd.c:582
+#: ../src/ario-mpd.c:638
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible de se connecter à MPD. Vérifiez vos options de connexion."
 
@@ -478,7 +480,7 @@ msgstr "jours"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr ""
+msgstr "Greffon"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-server-preferences.c:205
@@ -728,7 +730,7 @@ msgstr "_Quitter"
 
 #: ../src/shell/ario-shell.c:154
 msgid "Plu_gins"
-msgstr ""
+msgstr "_Greffons"
 
 #: ../src/shell/ario-shell.c:157
 msgid "Prefere_nces"
@@ -752,7 +754,7 @@ msgstr "_Traduire cette application..."
 
 #: ../src/shell/ario-shell.c:180
 msgid "S_tatusbar"
-msgstr ""
+msgstr "Barre d'é_tat"
 
 #: ../src/shell/ario-shell.c:623
 msgid "GTK client for MPD"
@@ -760,7 +762,12 @@ msgstr "Client GTK pour MPD"
 
 #: ../src/shell/ario-shell.c:624
 msgid "translator-credits"
-msgstr "Marc Pavot <marc.pavot@gmail.com>"
+msgstr ""
+"Marc Pavot <marc.pavot@gmail.com>\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Morgan GERMAIN https://launchpad.net/~morgan-germain"
 
 #: ../src/shell/ario-shell.c:865
 msgid "Configure Plugins"
@@ -956,11 +963,14 @@ msgid ""
 "Album: %s\n"
 "Title: %s"
 msgstr ""
+"Artiste: %s\n"
+"Album: %s\n"
+"Titre: %s"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:52
 msgid "Find artist on Wikipedia"
-msgstr ""
+msgstr "Trouver l'artiste sur Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
 msgid "Wikipedia Plugin - Configuration"
@@ -976,19 +986,19 @@ msgstr ""
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr ""
+msgstr "Un plugin pour chercher l'artiste en cours sur Wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr ""
+msgstr "Wikipédia"
 
 #: ../plugins/filesystem/ario-filesystem.c:180
 msgid "File System"
-msgstr ""
+msgstr "Système de fichier"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr ""
+msgstr "Un explorateur de système de fichiers"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
@@ -1046,56 +1056,32 @@ msgstr ""
 msgid "Multimedia Keys"
 msgstr ""
 
-#~ msgid "_Library"
-#~ msgstr "_Bibliothèque"
-
-#~ msgid "_Web Radios"
-#~ msgstr "_Web Radios"
-
-#~ msgid "_Search"
-#~ msgstr "_Recherche"
-
-#~ msgid "_Playlists"
-#~ msgstr "_Playlists"
-
-#~ msgid "Ario Lyrics"
-#~ msgstr "Ario Paroles"
-
-#~ msgid "Library view"
-#~ msgstr "Affichage de la bibliothèque"
-
-#~ msgid "Web Radios view"
-#~ msgstr "Affichage des Web Radios"
-
-#~ msgid "Search view"
-#~ msgstr "Chercher dans la bibliothèque"
-
-#~ msgid "Playlists view"
-#~ msgstr "Affichage des Playlists"
-
 #~ msgid "Host:"
 #~ msgstr "Hôte:"
-
-#~ msgid "Port:"
-#~ msgstr "Port:"
 
 #~ msgid "Name:"
 #~ msgstr "Nom:"
 
+#~ msgid "Port:"
+#~ msgstr "Port:"
+
 #~ msgid "Add to the playlist"
 #~ msgstr "_Ajouter à la playlist"
-
-#~ msgid "Show albums properties"
-#~ msgstr "Affiche les propriétés des album"
-
-#~ msgid "Show songs properties"
-#~ msgstr "Affiche les propriétés des chansons"
 
 #~ msgid "Download the cover from Amazon"
 #~ msgstr "Télécharger la pochette depuis amazon"
 
 #~ msgid "Delete the selected covers"
 #~ msgstr "Supprimer les pochettes sélectionnées"
+
+#~ msgid "Add a new radio"
+#~ msgstr "Ajouter une nouvelle radio"
+
+#~ msgid "Delete this radios"
+#~ msgstr "Supprimer les radios"
+
+#~ msgid "Change properties of this radio"
+#~ msgstr "Changer les propriétés de cette radio"
 
 #~ msgid "Delete this playlists"
 #~ msgstr "Supprimer les playlists"
@@ -1115,20 +1101,41 @@ msgstr ""
 #~ msgid "Edit music player preferences"
 #~ msgstr "Modifier les préférences"
 
-#~ msgid "Change current album cover"
-#~ msgstr "Changer la pochette actuelle"
-
 #~ msgid "Download covers form amazon"
 #~ msgstr "Télécharger des pochettes depuis amazon"
-
-#~ msgid "Show song lyrics"
-#~ msgstr "Affiche les paroles des chansons"
 
 #~ msgid "Show information about the music player"
 #~ msgstr "Affichier des informations sur le lecteur de musique"
 
-#~ msgid "Translate this application"
-#~ msgstr "Traduire cette application"
+#~ msgid "Show song lyrics"
+#~ msgstr "Affiche les paroles des chansons"
+
+#~ msgid "_Library"
+#~ msgstr "_Bibliothèque"
+
+#~ msgid "Library view"
+#~ msgstr "Affichage de la bibliothèque"
+
+#~ msgid "_Web Radios"
+#~ msgstr "_Web Radios"
+
+#~ msgid "Web Radios view"
+#~ msgstr "Affichage des Web Radios"
+
+#~ msgid "_Search"
+#~ msgstr "_Recherche"
+
+#~ msgid "Search view"
+#~ msgstr "Chercher dans la bibliothèque"
+
+#~ msgid "_Playlists"
+#~ msgstr "_Playlists"
+
+#~ msgid "Playlists view"
+#~ msgstr "Affichage des Playlists"
+
+#~ msgid "Ario Lyrics"
+#~ msgstr "Ario Paroles"
 
 #~ msgid "Start playback"
 #~ msgstr "Jouer"
@@ -1151,11 +1158,14 @@ msgstr ""
 #~ msgid "Save the playlist"
 #~ msgstr "Sauve la playlist"
 
-#~ msgid "Add a new radio"
-#~ msgstr "Ajouter une nouvelle radio"
+#~ msgid "Translate this application"
+#~ msgstr "Traduire cette application"
 
-#~ msgid "Delete this radios"
-#~ msgstr "Supprimer les radios"
+#~ msgid "Show albums properties"
+#~ msgstr "Affiche les propriétés des album"
 
-#~ msgid "Change properties of this radio"
-#~ msgstr "Changer les propriétés de cette radio"
+#~ msgid "Show songs properties"
+#~ msgstr "Affiche les propriétés des chansons"
+
+#~ msgid "Change current album cover"
+#~ msgstr "Changer la pochette actuelle"
