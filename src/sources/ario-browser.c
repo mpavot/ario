@@ -143,14 +143,14 @@ static GtkActionEntry ario_browser_actions [] =
                 NULL,
                 G_CALLBACK (ario_browser_cmd_songs_properties) },
 
-        { "CoverArtistGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
+        { "CoverArtistGetAmazon", GTK_STOCK_CDROM, N_("Get the covers from _Amazon"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
         { "CoverArtistRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_remove_artist_cover) },
 
-        { "CoverAlbumGetAmazon", GTK_STOCK_FIND, N_("Get the covers from _Amazon"), NULL,
+        { "CoverAlbumGetAmazon", GTK_STOCK_CDROM, N_("Get the covers from _Amazon"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_get_album_ario_cover_amazon) },
         { "CoverAlbumRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,

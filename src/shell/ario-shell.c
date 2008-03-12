@@ -157,7 +157,7 @@ static GtkActionEntry ario_shell_actions [] =
         { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_preferences) },
-        { "ToolCoverSelect", GTK_STOCK_FIND, N_("_Change current album cover"), NULL,
+        { "ToolCoverSelect", GTK_STOCK_CDROM, N_("_Change current album cover"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_cover_select) },
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
