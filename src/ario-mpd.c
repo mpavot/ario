@@ -656,6 +656,7 @@ ario_mpd_connect (ArioMpd *mpd)
         gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
 
         gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
+        gtk_window_set_title (GTK_WINDOW (win), "Ario");
         gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
         gtk_widget_show_all (win);
 
