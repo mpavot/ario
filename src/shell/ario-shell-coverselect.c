@@ -101,7 +101,6 @@ struct ArioShellCoverselectPrivate
         int coversize;
 
         GArray *file_size;
-        GSList *ario_cover_uris;
         GSList *file_contents;
 };
 
@@ -156,7 +155,6 @@ ario_shell_coverselect_init (ArioShellCoverselect *ario_shell_coverselect)
         ario_shell_coverselect->priv->liststore = gtk_list_store_new (1, GDK_TYPE_PIXBUF);
         ario_shell_coverselect->priv->coversize = AMAZON_MEDIUM_COVER;
         ario_shell_coverselect->priv->file_contents = NULL;
-        ario_shell_coverselect->priv->ario_cover_uris = NULL;
 }
 
 static void
@@ -176,8 +174,6 @@ ario_shell_coverselect_finalize (GObject *object)
                 g_array_free (ario_shell_coverselect->priv->file_size, TRUE);
         g_slist_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
         g_slist_free (ario_shell_coverselect->priv->file_contents);
-        g_slist_foreach (ario_shell_coverselect->priv->ario_cover_uris, (GFunc) g_free, NULL);
-        g_slist_free (ario_shell_coverselect->priv->ario_cover_uris);
         g_free (ario_shell_coverselect->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -440,15 +436,11 @@ ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
         g_slist_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
         g_slist_free (ario_shell_coverselect->priv->file_contents);
         ario_shell_coverselect->priv->file_contents = NULL;
-        g_slist_foreach (ario_shell_coverselect->priv->ario_cover_uris, (GFunc) g_free, NULL);
-        g_slist_free (ario_shell_coverselect->priv->ario_cover_uris);
-        ario_shell_coverselect->priv->ario_cover_uris = NULL;
 
         ario_shell_coverselect->priv->file_size = g_array_new (TRUE, TRUE, sizeof (int));
 
         ret = ario_cover_load_amazon_covers (artist,
                                              album,
-                                             &ario_shell_coverselect->priv->ario_cover_uris,
                                              &ario_shell_coverselect->priv->file_size,
                                              &ario_shell_coverselect->priv->file_contents,
                                              GET_ALL_COVERS,

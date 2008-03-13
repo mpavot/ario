@@ -308,7 +308,6 @@ ario_cover_make_amazon_xml_uri (const char *artist,
 gboolean
 ario_cover_load_amazon_covers (const char *artist,
                                const char *album,
-                               GSList **ario_cover_uris,
                                GArray **file_size,
                                GSList **file_contents,
                                ArioCoverAmazonOperation operation,
@@ -322,6 +321,7 @@ ario_cover_load_amazon_covers (const char *artist,
         int temp_size;
         char *temp_contents;
         gboolean ret;
+        GSList *ario_cover_uris;
 
         /* We construct the uri to make a request on the amazon WebServices */
         xml_uri = ario_cover_make_amazon_xml_uri (artist,
@@ -346,17 +346,17 @@ ario_cover_load_amazon_covers (const char *artist,
         }
 
         /* We parse the xml file to extract the cover uris */
-        *ario_cover_uris = ario_cover_parse_amazon_xml_file (xml_data,
-                                                             xml_size,
-                                                             operation,
-                                                             ario_cover_size);
+        ario_cover_uris = ario_cover_parse_amazon_xml_file (xml_data,
+                                                            xml_size,
+                                                            operation,
+                                                            ario_cover_size);
 
         g_free (xml_data);
 
         /* By default, we return an error */
         ret = FALSE;
 
-        for (temp = *ario_cover_uris; temp; temp = temp->next) {
+        for (temp = ario_cover_uris; temp; temp = temp->next) {
                 if (temp->data) {
                         /* For each cover uri, we load the image data in temp_contents */
                         ario_util_download_file (temp->data,
@@ -371,6 +371,9 @@ ario_cover_load_amazon_covers (const char *artist,
                         }
                 }
         }
+
+        g_slist_foreach (ario_cover_uris, (GFunc) g_free, NULL);
+        g_slist_free (ario_cover_uris);
 
         return ret;
 }
