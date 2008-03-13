@@ -801,24 +801,29 @@ static void
 ario_shell_sync_mpd (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        GtkAction *connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                                                 "FileConnect");
-        GtkAction *disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                                                    "FileDisconnect");
+        GtkAction *connect_action;
+        GtkAction *disconnect_action;
+        gboolean is_playing;
+        GtkAction *lyrics_action;
+        GtkAction *covers_action;
+
+        connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                      "FileConnect");
+        disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                         "FileDisconnect");
 
         gtk_action_set_visible (connect_action, !shell->priv->connected);
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
 
-        gboolean is_playing = ((shell->priv->connected)
-                               && ((ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PLAY)
-                                    || (ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PAUSE)));
+        is_playing = ((shell->priv->connected)
+                      && ((ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PLAY)
+                           || (ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PAUSE)));
 
-
-        GtkAction *lyrics_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                                                "ViewLyrics");
+        lyrics_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                     "ViewLyrics");
         gtk_action_set_sensitive (lyrics_action, is_playing);
-        GtkAction *covers_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                                                "ToolCoverSelect");
+        covers_action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                                     "ToolCoverSelect");
         gtk_action_set_sensitive (covers_action, is_playing);
 }
 
