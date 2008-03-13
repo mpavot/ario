@@ -53,7 +53,6 @@ typedef enum
 
 gboolean                     ario_cover_load_amazon_covers   (const char *artist,
                                                               const char *album,
-                                                              GSList **ario_cover_uris,
                                                               GArray **file_size,
                                                               GSList **file_contents,
                                                               ArioCoverAmazonOperation operation,

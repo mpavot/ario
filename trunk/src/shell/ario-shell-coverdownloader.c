@@ -523,7 +523,7 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
 {
         ARIO_LOG_FUNCTION_START
         GArray *size;
-        GSList *data = NULL, *ario_cover_uris = NULL;
+        GSList *data = NULL;
         gboolean ret;
 
         size = g_array_new (TRUE, TRUE, sizeof (int));
@@ -531,7 +531,6 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
         /* If a cover is found on amazon, it is loaded in data(0) */
         ret = ario_cover_load_amazon_covers (artist,
                                              album,
-                                             &ario_cover_uris,
                                              &size,
                                              &data,
                                              GET_FIRST_COVER,
@@ -556,6 +555,4 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
         g_array_free (size, TRUE);
         g_slist_foreach (data, (GFunc) g_free, NULL);
         g_slist_free (data);
-        g_slist_foreach (ario_cover_uris, (GFunc) g_free, NULL);
-        g_slist_free (ario_cover_uris);
 }
