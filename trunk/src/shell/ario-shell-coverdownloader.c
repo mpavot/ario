@@ -453,7 +453,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
                 return;
 
         /* We show the window with the progress bar */
-        if (operation == GET_AMAZON_COVERS)
+        if (operation == GET_COVERS)
                 ario_shell_coverdownloader_progress_start (ario_shell_coverdownloader);
 
         ario_shell_coverdownloader->priv->nb_covers = g_slist_length (albums);
@@ -471,7 +471,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         }
 
         /* We change the window to show a close button and infos about the search */
-        if (operation == GET_AMAZON_COVERS)
+        if (operation == GET_COVERS)
                 ario_shell_coverdownloader_progress_end (ario_shell_coverdownloader);
 
         ario_cover_handler_force_reload();
@@ -498,7 +498,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
                 return;
 
         switch (operation) {
-        case GET_AMAZON_COVERS:
+        case GET_COVERS:
                 /* We update the progress bar */
                 ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
 
@@ -506,7 +506,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
                         /* The cover already exists, we do nothing */
                         ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
                 else
-                        /* We search for the cover on amazon */
+                        /* We search for the cover */
                         ario_shell_coverdownloader_get_cover (ario_shell_coverdownloader, artist, album, path);
                 break;
 
@@ -533,7 +533,7 @@ ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_cover
 
         size = g_array_new (TRUE, TRUE, sizeof (int));
 
-        /* If a cover is found on amazon, it is loaded in data(0) */
+        /* If a cover is found, it is loaded in data(0) */
         ret = ario_cover_manager_get_covers (ario_cover_manager_get_instance (),
                                              artist,
                                              album,
@@ -542,7 +542,7 @@ ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_cover
                                              &data,
                                              GET_FIRST_COVER);
 
-        /* If the cover is not too big and not too small (blank amazon image), we save it */
+        /* If the cover is not too big and not too small (blank image), we save it */
         if (ret && ario_cover_size_is_valid (g_array_index (size, int, 0))) {
                 ret = ario_cover_save_cover (artist,
                                              album,

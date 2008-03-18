@@ -157,7 +157,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkEntry" id="amazon_artist_entry">
+                          <widget class="GtkEntry" id="artist_entry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">*</property>
@@ -169,7 +169,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkEntry" id="amazon_album_entry">
+                          <widget class="GtkEntry" id="album_entry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">*</property>
@@ -232,7 +232,7 @@
             <child>
               <widget class="GtkLabel" id="label6">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Amazon search</property>
+                <property name="label" translatable="yes">Search</property>
               </widget>
               <packing>
                 <property name="type">tab</property>

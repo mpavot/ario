@@ -49,8 +49,7 @@ typedef struct
 
 typedef enum
 {
-        GET_LOCAL_COVERS,
-        GET_AMAZON_COVERS,
+        GET_COVERS,
         REMOVE_COVERS
 } ArioShellCoverdownloaderOperation;
 
