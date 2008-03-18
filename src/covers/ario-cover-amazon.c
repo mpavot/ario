@@ -31,11 +31,11 @@
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-#define AMAZON_URI  "http://xml.amazon.%s/onca/xml3?t=webservices-20&dev-t=%s&KeywordSearch=%s&mode=%s&locale=%s&type=lite&page=1&f=xml"
+#define AMAZON_URI  "http://webservices.amazon.%s/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SearchIndex=Music&ResponseGroup=Images&SubscriptionId=%s&Keywords=%s"
 
-#define COVER_SMALL "ImageUrlSmall"
-#define COVER_MEDIUM "ImageUrlMedium"
-#define COVER_LARGE "ImageUrlLarge"
+#define COVER_SMALL "SmallImage"
+#define COVER_MEDIUM "MediumImage"
+#define COVER_LARGE "LargeImage"
 
 static void ario_cover_amazon_class_init (ArioCoverAmazonClass *klass);
 static void ario_cover_amazon_init (ArioCoverAmazon *cover_amazon);
@@ -56,7 +56,7 @@ gboolean ario_cover_amazon_get_covers (ArioCoverProvider *cover_provider,
 
 struct ArioCoverAmazonPrivate
 {
-        gboolean is_waiting;
+        gboolean dummy;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -121,7 +121,6 @@ ario_cover_amazon_init (ArioCoverAmazon *cover_amazon)
 {
         ARIO_LOG_FUNCTION_START
         cover_amazon->priv = g_new0 (ArioCoverAmazonPrivate, 1);
-        cover_amazon->priv->is_waiting = FALSE;
 }
 
 static void
@@ -165,6 +164,7 @@ ario_cover_amazon_parse_xml_file (char *xmldata,
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlNodePtr cur2;
+        xmlNodePtr cur3;
         xmlChar *key;
         GSList *ario_cover_uris = NULL;
 
@@ -176,32 +176,48 @@ ario_cover_amazon_parse_xml_file (char *xmldata,
 
         cur = xmlDocGetRootElement(doc);
 
-        if (cur == NULL) {
+        if (!cur) {
                 xmlFreeDoc (doc);
                 return NULL;
         }
 
-        /* We check that the root node name is "ProductInfo" */
-        if (xmlStrcmp (cur->name, (const xmlChar *) "ProductInfo")) {
+        /* We check that the root node name is "ItemSearchResponse" */
+        if (xmlStrcmp (cur->name, (const xmlChar *) "ItemSearchResponse")) {
                 xmlFreeDoc (doc);
                 return NULL;
         }
+
         for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
-                if (!xmlStrcmp (cur->name, (const xmlChar *)"Details")){
+                if (!xmlStrcmp (cur->name, (const xmlChar *) "Items"))
+                        break;
+        }
+
+        if (!cur) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
+                if (!xmlStrcmp (cur->name, (const xmlChar *) "Item")){
                         for (cur2 = cur->xmlChildrenNode; cur2; cur2 = cur2->next) {
                                 if ((!xmlStrcmp (cur2->name, (const xmlChar *) cover_size))) {
-                                        /* A possible cover uri has been found, we add it to the list*/
-                                        key = xmlNodeListGetString (doc, cur2->xmlChildrenNode, 1);
-                                        ario_cover_uris = g_slist_append (ario_cover_uris, key);
-                                        if (operation == GET_FIRST_COVER) {
-                                                /* If we only want one cover, we now stop to parse the file */
-                                                xmlFreeDoc (doc);
-                                                return ario_cover_uris;
+                                        for (cur3 = cur2->xmlChildrenNode; cur3; cur3 = cur3->next) {
+                                                if ((!xmlStrcmp (cur3->name, (const xmlChar *) "URL"))) {
+                                                        /* A possible cover uri has been found, we add it to the list*/
+                                                        key = xmlNodeListGetString (doc, cur3->xmlChildrenNode, 1);
+                                                        ario_cover_uris = g_slist_append (ario_cover_uris, key);
+                                                        if (operation == GET_FIRST_COVER) {
+                                                                /* If we only want one cover, we now stop to parse the file */
+                                                                xmlFreeDoc (doc);
+                                                                return ario_cover_uris;
+                                                        }
+                                                }
                                         }
                                 }
                         }
                 }
         }
+
 
         xmlFreeDoc (doc);
 
@@ -215,15 +231,13 @@ ario_cover_amazon_make_xml_uri (const char *artist,
         ARIO_LOG_FUNCTION_START
         char *xml_uri;
         char *keywords;
-        char *locale;
-        const char *music_mode;
         const char *ext;
         char *tmp;
         int i;
         int length;
 
         /* This is the key used to send requests on the amazon WebServices */
-        const char *mykey = "1BDCAEREYT743R9SXE02";
+        const char *mykey = "14Z4RJ90F1ZE98DXRJG2";
 
         /* List of modifications done on the keuword used for the search */
         const gchar *to_replace[] = {"é", "è", "ê", "à", "ù", "ç", "ö", "#", "/", "?", "'", "-", "\"", "&", ":", "*", "(", ")", NULL};
@@ -283,42 +297,18 @@ ario_cover_amazon_make_xml_uri (const char *artist,
            */
 
         /* What is the amazon country choosen in the preferences? */
-        locale = ario_conf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
+        ext = ario_conf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
 
-        /* The default mode is "music" and the default extension is ".com" */
-        music_mode = "music";
-        ext = "com";
-
-        /* The french amazon need a different mode */
-        if (!strcmp (locale, "fr"))
-                music_mode = "music-fr";
-
-        /* The japanese amazon need a different mode and a different extension */
-        if (!strcmp (locale, "jp")) {
-                music_mode = "music-jp";
+        /* The japanese amazon need a different extension */
+        if (!strcmp (ext, "jp")) {
                 ext = "co.jp";
         }
 
-        /* For amazon.com, we need to use "us" for the "locale" argument */
-        if (!strcmp (locale, "com")) {
-                g_free (locale);
-                locale = g_strdup ("us");
-        }
-
         /* We make the xml uri with all the parameters */
-        xml_uri = g_strdup_printf (AMAZON_URI, ext, mykey, keywords, music_mode, locale);
-
+        xml_uri = g_strdup_printf (AMAZON_URI, ext, mykey, keywords);
         g_free (keywords);
-        g_free (locale);
 
         return xml_uri;
-}
-
-static gboolean
-ario_cover_amazon_wait_end (ArioCoverAmazon *cover_amazon)
-{
-        cover_amazon->priv->is_waiting = FALSE;
-        return FALSE;
 }
 
 gboolean
@@ -331,7 +321,6 @@ ario_cover_amazon_get_covers (ArioCoverProvider *cover_provider,
                               ArioCoverProviderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        ArioCoverAmazon *cover_amazon = ARIO_COVER_AMAZON (cover_provider);
         char *xml_uri;
         int xml_size;
         char *xml_data;
@@ -348,23 +337,16 @@ ario_cover_amazon_get_covers (ArioCoverProvider *cover_provider,
         if (!xml_uri)
                 return FALSE;
 
-        /* Wait between 2 transactions */
-        while (cover_amazon->priv->is_waiting)
-                gtk_main_iteration ();
-
-        cover_amazon->priv->is_waiting = TRUE;
-
         /* We load the xml file in xml_data */
         ario_util_download_file (xml_uri,
                                  &xml_size,
                                  &xml_data);
-        g_timeout_add (1100, (GSourceFunc) ario_cover_amazon_wait_end, cover_amazon);
         g_free (xml_uri);
 
         if (xml_size == 0) {
                 return FALSE;
         }
-printf("%s\n", xml_data);
+
         if (g_strrstr (xml_data, "<ErrorMsg>") || g_strrstr (xml_data, "<html>")) {
                 return FALSE;
                 g_free (xml_data);
