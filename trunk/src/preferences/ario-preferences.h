@@ -48,6 +48,8 @@
 #define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/state/album_column_size"
 #define CONF_PLUGINS_LIST               "/apps/ario/plugins/active-plugins"
 #define CONF_SOURCE_LIST                "/apps/ario/state/sources-order"
+#define COVER_PROVIDERS_LIST            "/apps/ario/cover-providers"
+#define COVER_ACTIVE_PROVIDERS_LIST     "/apps/ario/active-cover-providers"
 #define CONF_MUSIC_DIR                  "/apps/ario/music-dir"
 
 enum

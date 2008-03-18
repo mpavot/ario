@@ -341,5 +341,29 @@
         </locale>
       </schema>
 
+      <schema>
+        <key>/schemas/apps/ario/cover-providers</key>
+        <applyto>/apps/ario/cover-providers</applyto>
+        <owner>ario</owner>
+        <type>list</type>
+        <list_type>string</list_type>
+        <default>[local,amazon]</default>
+        <locale name="C">
+	<short>Covers providers</short>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/active-cover-providers</key>
+        <applyto>/apps/ario/active-cover-providers</applyto>
+        <owner>ario</owner>
+        <type>list</type>
+        <list_type>string</list_type>
+        <default>[local,amazon]</default>
+        <locale name="C">
+	<short>Active covers providers</short>
+        </locale>
+      </schema>
+
     </schemalist>
 </gconfschemafile>

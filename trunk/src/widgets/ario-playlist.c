@@ -929,7 +929,7 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
 
         /* For each album :*/
         for (i=0; artists_albums[i]!=NULL && g_utf8_collate (artists_albums[i], ""); i+=2) {
-                mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
+                mpd_album = (ArioMpdAlbum *) g_malloc0 (sizeof (ArioMpdAlbum));
                 mpd_album->artist = artists_albums[i];
                 mpd_album->album = artists_albums[i+1];
                 albums_list = g_slist_append (albums_list, mpd_album);

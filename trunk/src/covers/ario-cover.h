@@ -27,19 +27,6 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-        GET_FIRST_COVER,
-        GET_ALL_COVERS
-}ArioCoverAmazonOperation;
-
-typedef enum
-{
-        AMAZON_SMALL_COVER,
-        AMAZON_MEDIUM_COVER,
-        AMAZON_LARGE_COVER
-}ArioCoverAmazonCoversSize;
-
-typedef enum
-{
         SMALL_COVER,
         NORMAL_COVER
 }ArioCoverHomeCoversSize;
@@ -51,12 +38,6 @@ typedef enum
         OVERWRITE_MODE_SKIP
 }ArioCoverOverwriteMode;
 
-gboolean                     ario_cover_load_amazon_covers   (const char *artist,
-                                                              const char *album,
-                                                              GArray **file_size,
-                                                              GSList **file_contents,
-                                                              ArioCoverAmazonOperation operation,
-                                                              ArioCoverAmazonCoversSize ario_cover_size);
 gboolean                     ario_cover_save_cover           (const gchar *artist,
                                                               const gchar *album,
                                                               char *data,

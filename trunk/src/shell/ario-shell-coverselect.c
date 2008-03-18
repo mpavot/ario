@@ -23,10 +23,11 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "shell/ario-shell-coverselect.h"
-#include "ario-cover.h"
+#include "covers/ario-cover.h"
+#include "covers/ario-cover-manager.h"
+#include "covers/ario-cover-handler.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
-#include "ario-cover-handler.h"
 
 #define CURRENT_COVER_SIZE 130
 
@@ -41,12 +42,6 @@ static gboolean ario_shell_coverselect_window_delete_cb (GtkWidget *window,
 static void ario_shell_coverselect_response_cb (GtkDialog *dialog,
                                                 int response_id,
                                                 ArioShellCoverselect *ario_shell_coverselect);
-static void ario_shell_coverselect_option_small_cb (GtkWidget *widget,
-                                                    ArioShellCoverselect *ario_shell_coverselect);
-static void ario_shell_coverselect_option_medium_cb (GtkWidget *widget,
-                                                     ArioShellCoverselect *ario_shell_coverselect);
-static void ario_shell_coverselect_option_large_cb (GtkWidget *widget,
-                                                    ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                                                          ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
@@ -97,8 +92,7 @@ struct ArioShellCoverselectPrivate
 
         const gchar *file_artist;
         const gchar *file_album;
-
-        int coversize;
+        const gchar *path;
 
         GArray *file_size;
         GSList *file_contents;
@@ -153,7 +147,6 @@ ario_shell_coverselect_init (ArioShellCoverselect *ario_shell_coverselect)
         ARIO_LOG_FUNCTION_START
         ario_shell_coverselect->priv = g_new0 (ArioShellCoverselectPrivate, 1);
         ario_shell_coverselect->priv->liststore = gtk_list_store_new (1, GDK_TYPE_PIXBUF);
-        ario_shell_coverselect->priv->coversize = AMAZON_MEDIUM_COVER;
         ario_shell_coverselect->priv->file_contents = NULL;
 }
 
@@ -227,8 +220,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                 glade_xml_get_widget (xml, "local_file_entry");
         ario_shell_coverselect->priv->local_open_button =
                 glade_xml_get_widget (xml, "local_open_button");
-                
-        rb_glade_boldify_label (xml, "cover_frame_label");
+
         rb_glade_boldify_label (xml, "static_artist_label");
         rb_glade_boldify_label (xml, "static_album_label");
 
@@ -259,21 +251,6 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         gtk_tree_view_set_model (GTK_TREE_VIEW (ario_shell_coverselect->priv->listview),
                                  GTK_TREE_MODEL (ario_shell_coverselect->priv->liststore));
 
-        switch (ario_shell_coverselect->priv->coversize) {
-        case AMAZON_SMALL_COVER:
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ario_shell_coverselect->priv->option_small), TRUE);
-                break;
-        case AMAZON_MEDIUM_COVER:
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ario_shell_coverselect->priv->option_medium), TRUE);
-                break;
-        case AMAZON_LARGE_COVER:
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ario_shell_coverselect->priv->option_large), TRUE);
-                break;
-        default:
-                g_assert_not_reached ();
-                break;
-        }
-
         g_signal_connect_object  (G_OBJECT (ario_shell_coverselect),
                                   "delete_event",
                                   G_CALLBACK (ario_shell_coverselect_window_delete_cb),
@@ -285,15 +262,6 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->get_amazon_covers_button),
                           "clicked", G_CALLBACK (ario_shell_coverselect_get_amazon_covers_cb),
                           ario_shell_coverselect);
-        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->option_small), 
-                          "clicked", G_CALLBACK (ario_shell_coverselect_option_small_cb),
-                          ario_shell_coverselect);
-        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->option_medium), 
-                          "clicked", G_CALLBACK (ario_shell_coverselect_option_medium_cb),
-                          ario_shell_coverselect);
-        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->option_large), 
-                          "clicked", G_CALLBACK (ario_shell_coverselect_option_large_cb),
-                          ario_shell_coverselect);
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->local_open_button), 
                           "clicked", G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
                           ario_shell_coverselect);
@@ -302,8 +270,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
 }
 
 GtkWidget *
-ario_shell_coverselect_new (const char *artist,
-                            const char *album)
+ario_shell_coverselect_new (ArioMpdAlbum *mpd_album)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellCoverselect *ario_shell_coverselect;
@@ -311,8 +278,9 @@ ario_shell_coverselect_new (const char *artist,
         ario_shell_coverselect = g_object_new (TYPE_ARIO_SHELL_COVERSELECT,
                                                NULL);
 
-        ario_shell_coverselect->priv->file_artist = artist;        
-        ario_shell_coverselect->priv->file_album = album;
+        ario_shell_coverselect->priv->file_artist = mpd_album->artist;
+        ario_shell_coverselect->priv->file_album = mpd_album->album;
+        ario_shell_coverselect->priv->path = mpd_album->path;
 
         ario_shell_coverselect_set_current_cover (ario_shell_coverselect);
 
@@ -354,30 +322,6 @@ ario_shell_coverselect_response_cb (GtkDialog *dialog,
 
         if (response_id == GTK_RESPONSE_CANCEL)
                 gtk_widget_hide (GTK_WIDGET (ario_shell_coverselect));
-}
-
-static void
-ario_shell_coverselect_option_small_cb (GtkWidget *widget,
-                                        ArioShellCoverselect *ario_shell_coverselect)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_shell_coverselect->priv->coversize = AMAZON_SMALL_COVER;
-}
-
-static void
-ario_shell_coverselect_option_medium_cb (GtkWidget *widget,
-                                         ArioShellCoverselect *ario_shell_coverselect)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_shell_coverselect->priv->coversize = AMAZON_MEDIUM_COVER;
-}
-
-static void
-ario_shell_coverselect_option_large_cb (GtkWidget *widget,
-                                        ArioShellCoverselect *ario_shell_coverselect)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_shell_coverselect->priv->coversize = AMAZON_LARGE_COVER;
 }
 
 static void
@@ -439,12 +383,13 @@ ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
 
         ario_shell_coverselect->priv->file_size = g_array_new (TRUE, TRUE, sizeof (int));
 
-        ret = ario_cover_load_amazon_covers (artist,
+        ret = ario_cover_manager_get_covers (ario_cover_manager_get_instance (),
+                                             artist,
                                              album,
+                                             ario_shell_coverselect->priv->path,
                                              &ario_shell_coverselect->priv->file_size,
                                              &ario_shell_coverselect->priv->file_contents,
-                                             GET_ALL_COVERS,
-                                             ario_shell_coverselect->priv->coversize);
+                                             GET_ALL_COVERS);
         g_free (artist);
         g_free (album);
 

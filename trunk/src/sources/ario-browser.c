@@ -23,7 +23,7 @@
 #include <glib/gi18n.h>
 #include "sources/ario-browser.h"
 #include "ario-util.h"
-#include "ario-cover.h"
+#include "covers/ario-cover.h"
 #include "shell/ario-shell-coverselect.h"
 #include "shell/ario-shell-coverdownloader.h"
 #include "shell/ario-shell-songinfos.h"
@@ -173,6 +173,7 @@ enum
         ALBUM_ALBUM_COLUMN,
         ALBUM_ARTIST_COLUMN,
         ALBUM_COVER_COLUMN,
+        ALBUM_PATH_COLUMN,
         ALBUM_N_COLUMN
 };
 
@@ -392,7 +393,8 @@ ario_browser_init (ArioBrowser *browser)
         browser->priv->albums_model = gtk_list_store_new (ALBUM_N_COLUMN,
                                                           G_TYPE_STRING,
                                                           G_TYPE_STRING,
-                                                          GDK_TYPE_PIXBUF);
+                                                          GDK_TYPE_PIXBUF,
+                                                          G_TYPE_STRING);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (browser->priv->albums_model),
                                               0, GTK_SORT_ASCENDING);
         gtk_tree_view_set_model (GTK_TREE_VIEW (browser->priv->albums),
@@ -727,6 +729,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                                     ALBUM_ALBUM_COLUMN, ario_mpd_album->album,
                                     ALBUM_ARTIST_COLUMN, ario_mpd_album->artist,
                                     ALBUM_COVER_COLUMN, cover,
+                                    ALBUM_PATH_COLUMN, ario_mpd_album->path,
                                     -1);
                 g_object_unref (G_OBJECT (cover));
         }
@@ -787,8 +790,9 @@ ario_browser_albums_selection_foreach (GtkTreeModel *model,
 
         g_return_if_fail (IS_ARIO_BROWSER (browser));
 
-        gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &artist, -1);
-        gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &album, -1);
+        gtk_tree_model_get (model, iter,
+                            ALBUM_ARTIST_COLUMN, &artist,
+                            ALBUM_ALBUM_COLUMN, &album, -1);
 
         if (!artist || !album)
                 return;
@@ -1174,8 +1178,10 @@ get_selected_albums_foreach (GtkTreeModel *model,
         ArioMpdAlbum *ario_mpd_album;
 
         ario_mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
-        gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &ario_mpd_album->artist, -1);
-        gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &ario_mpd_album->album, -1);
+        gtk_tree_model_get (model, iter,
+                            ALBUM_ARTIST_COLUMN, &ario_mpd_album->artist,
+                            ALBUM_ALBUM_COLUMN, &ario_mpd_album->album,
+                            ALBUM_PATH_COLUMN, &ario_mpd_album->path, -1);
 
         *albums = g_slist_append (*albums, ario_mpd_album);
 }
@@ -1242,11 +1248,54 @@ ario_browser_cmd_add_songs (GtkAction *action,
         ario_browser_add_songs (browser);
 }
 
+static gboolean
+ario_browser_covers_update (GtkTreeModel *model,
+                            GtkTreePath *path,
+                            GtkTreeIter *iter,
+                            gpointer userdata)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioBrowser *browser = ARIO_BROWSER (userdata);
+        gchar* artist;
+        gchar *album;
+        gchar *ario_cover_path;
+        GdkPixbuf *cover;
+
+        g_return_val_if_fail (IS_ARIO_BROWSER (browser), FALSE);
+
+        gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &artist, ALBUM_ALBUM_COLUMN, &album, -1);
+
+        ario_cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
+
+        /* The small cover exists, we show it */
+        cover = gdk_pixbuf_new_from_file_at_size (ario_cover_path, COVER_SIZE, COVER_SIZE, NULL);
+        g_free (ario_cover_path);
+
+        if (!GDK_IS_PIXBUF (cover)) {
+                /* There is no cover, we show a transparent picture */
+                cover = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COVER_SIZE, COVER_SIZE);
+                gdk_pixbuf_fill (cover, 0);
+        }
+
+        gtk_list_store_set (browser->priv->albums_model, iter,
+                            ALBUM_ARTIST_COLUMN, artist, ALBUM_ALBUM_COLUMN, album,
+                            ALBUM_COVER_COLUMN, cover,
+                            -1);
+
+        g_free (artist);
+        g_free (album);
+        g_object_unref (G_OBJECT (cover));
+
+        return FALSE;
+}
+
 static void 
 ario_browser_get_covers_end (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        ario_browser_artists_selection_update (browser);
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                (GtkTreeModelForeachFunc) ario_browser_covers_update,
+                                browser);
 }
 
 static void
@@ -1263,8 +1312,7 @@ ario_browser_cmd_albums_properties (GtkAction *action,
                                              &albums);
 
         ario_mpd_album = albums->data;
-        coverselect = ario_shell_coverselect_new (ario_mpd_album->artist,
-                                                  ario_mpd_album->album);
+        coverselect = ario_shell_coverselect_new (ario_mpd_album);
         gtk_dialog_run (GTK_DIALOG(coverselect));
         gtk_widget_destroy (coverselect);
 

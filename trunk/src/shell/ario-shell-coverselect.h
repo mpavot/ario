@@ -21,6 +21,8 @@
 #ifndef __ARIO_SHELL_COVERSELECT_H
 #define __ARIO_SHELL_COVERSELECT_H
 
+#include "ario-mpd.h"
+
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_SHELL_COVERSELECT         (ario_shell_coverselect_get_type ())
@@ -46,8 +48,7 @@ typedef struct
 
 GType           ario_shell_coverselect_get_type (void);
 
-GtkWidget *     ario_shell_coverselect_new      (const char *artist,
-                                                 const char *album);
+GtkWidget *     ario_shell_coverselect_new      (ArioMpdAlbum *mpd_album);
 
 G_END_DECLS
 

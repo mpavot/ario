@@ -76,7 +76,6 @@ struct _ArioPluginClass
         void            (*_ario_reserved1)              (void);
         void            (*_ario_reserved2)              (void);
         void            (*_ario_reserved3)              (void);
-        void            (*_ario_reserved4)              (void);
 };
 
 /*

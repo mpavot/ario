@@ -58,16 +58,6 @@ enum
         LAST_SIGNAL
 };
 
-static const char *valid_cover_names[] = {
-	"folder.png",
-	".folder.png",
-	"cover.png",
-	"folder.jpg",
-	".folder.jpg",
-	"cover.jpg",
-	NULL
-};
-
 static guint ario_cover_handler_signals[LAST_SIGNAL] = { 0 };
 
 struct ArioCoverHandlerPrivate
@@ -233,13 +223,6 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
         gchar *cover_path;
-        gchar *musicdir;
-        gchar *songdir;
-        gchar *filename;
-        int i;
-        gchar *data;
-        gsize size;
-        gboolean ret = FALSE;
 
         if (cover_handler->priv->pixbuf) {
                 g_object_unref(cover_handler->priv->pixbuf);
@@ -252,31 +235,8 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler)
         if (cover_path) {
                 cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
                 g_free (cover_path);
+                /* TODO: Automatic download of cover */
                 if (!cover_handler->priv->pixbuf) {
-                        musicdir = ario_conf_get_string (CONF_MUSIC_DIR, NULL);
-                        songdir = g_path_get_dirname ((ario_mpd_get_current_song (cover_handler->priv->mpd))->file);
-                        if (musicdir && strlen(musicdir) > 1) {
-                                for (i = 0; valid_cover_names[i] && !ret; i++) {
-                                        filename = g_build_filename (musicdir, songdir, valid_cover_names[i], NULL);
-                                        if (ario_util_uri_exists (filename)) {
-                                                ret = g_file_get_contents (filename,
-                                                                           &data,
-                                                                           &size,
-                                                                           NULL);
-                                                if (ret) {
-                                                        ario_cover_save_cover (ario_mpd_get_current_artist (cover_handler->priv->mpd),
-                                                                               ario_mpd_get_current_album (cover_handler->priv->mpd),
-                                                                               data,
-                                                                               size,
-                                                                               OVERWRITE_MODE_SKIP);
-                                                }
-                                                g_free (data);
-                                        }
-                                        g_free (filename);
-	                        }
-                        }
-                        g_free (songdir);
-                        g_free (musicdir);
                 }
         }
 }

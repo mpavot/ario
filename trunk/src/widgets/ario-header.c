@@ -727,21 +727,20 @@ ario_header_image_press_cb (GtkWidget *widget,
                             ArioHeader *header)
 {
         GtkWidget *coverselect;
-        char *artist;
-        char *album;
+        ArioMpdAlbum mpd_album;
 
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                artist = ario_mpd_get_current_artist (header->priv->mpd);
-                album = ario_mpd_get_current_album (header->priv->mpd);
+                mpd_album.artist = ario_mpd_get_current_artist (header->priv->mpd);
+                mpd_album.album = ario_mpd_get_current_album (header->priv->mpd);
+                mpd_album.path = (ario_mpd_get_current_song (header->priv->mpd))->file;
 
-                if (!album)
-                        album = ARIO_MPD_UNKNOWN;
+                if (!mpd_album.album)
+                        mpd_album.album = ARIO_MPD_UNKNOWN;
 
-                if (!artist)
-                        artist = ARIO_MPD_UNKNOWN;
+                if (!mpd_album.artist)
+                        mpd_album.artist = ARIO_MPD_UNKNOWN;
 
-                coverselect = ario_shell_coverselect_new (artist,
-                                                          album);
+                coverselect = ario_shell_coverselect_new (&mpd_album);
                 gtk_dialog_run (GTK_DIALOG (coverselect));
                 gtk_widget_destroy (coverselect);
         }
