@@ -26,7 +26,8 @@
 #include "shell/ario-shell.h"
 #include "sources/ario-source-manager.h"
 #include "ario-mpd.h"
-#include "ario-cover-handler.h"
+#include "covers/ario-cover-handler.h"
+#include "covers/ario-cover-manager.h"
 #include "widgets/ario-playlist.h"
 #include "widgets/ario-header.h"
 #include "widgets/ario-status-bar.h"
@@ -510,6 +511,8 @@ ario_shell_shutdown (ArioShell *shell)
 
                 ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
                 ario_sourcemanager_shutdown (ARIO_SOURCEMANAGER (shell->priv->sourcemanager));
+
+                ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
         }
 }
 
@@ -687,20 +690,19 @@ ario_shell_cmd_cover_select (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *coverselect;
-        char *artist;
-        char *album;
+        ArioMpdAlbum mpd_album;
 
-        artist = ario_mpd_get_current_artist (shell->priv->mpd);
-        album = ario_mpd_get_current_album (shell->priv->mpd);
+        mpd_album.artist = ario_mpd_get_current_artist (shell->priv->mpd);
+        mpd_album.album = ario_mpd_get_current_album (shell->priv->mpd);
+        mpd_album.path = (ario_mpd_get_current_song (shell->priv->mpd))->file;
 
-        if (!album)
-                album = ARIO_MPD_UNKNOWN;
+        if (!mpd_album.album)
+                mpd_album.album = ARIO_MPD_UNKNOWN;
 
-        if (!artist)
-                artist = ARIO_MPD_UNKNOWN;
+        if (!mpd_album.artist)
+                mpd_album.artist = ARIO_MPD_UNKNOWN;
 
-        coverselect = ario_shell_coverselect_new (artist,
-                                                  album);
+        coverselect = ario_shell_coverselect_new (&mpd_album);
         gtk_dialog_run (GTK_DIALOG (coverselect));
         gtk_widget_destroy (coverselect);
 }

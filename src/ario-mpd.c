@@ -769,15 +769,25 @@ ario_mpd_get_albums (ArioMpd *mpd,
                 }
 
                 ario_mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
-                if (entity->info.song->album)
-                        ario_mpd_album->album = g_strdup (entity->info.song->album);
-                else
+                if (entity->info.song->album) {
+                        ario_mpd_album->album = entity->info.song->album;
+                        entity->info.song->album = NULL;
+                } else {
                         ario_mpd_album->album = g_strdup (ARIO_MPD_UNKNOWN);
+                }
 
-                if (entity->info.song->artist)
-                        ario_mpd_album->artist = g_strdup (entity->info.song->artist);
-                else
+                if (entity->info.song->artist) {
+                        ario_mpd_album->artist = entity->info.song->artist;
+                        entity->info.song->artist = NULL;
+                } else {
                         ario_mpd_album->artist = g_strdup (ARIO_MPD_UNKNOWN);
+                }
+
+                if (entity->info.song->file) {
+                        ario_mpd_album->path = g_path_get_dirname (entity->info.song->file);
+                } else {
+                        ario_mpd_album->path = NULL;
+                }
 
                 prev_album = ario_mpd_album->album;
                 albums = g_slist_append (albums, ario_mpd_album);
@@ -1276,6 +1286,7 @@ ario_mpd_free_album (ArioMpdAlbum *ario_mpd_album)
         if (ario_mpd_album) {
                 g_free (ario_mpd_album->album);
                 g_free (ario_mpd_album->artist);
+                g_free (ario_mpd_album->path);
                 g_free (ario_mpd_album);
         }
 }

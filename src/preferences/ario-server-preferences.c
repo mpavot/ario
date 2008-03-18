@@ -151,7 +151,7 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
         GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
 
         if (gtk_tree_model_get_iter (model, &iter, path)) {
-                gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id,-1);
+                gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id, -1);
                 state = !state;
                 ario_mpd_enable_output (server_preferences->priv->mpd,
                                         id,

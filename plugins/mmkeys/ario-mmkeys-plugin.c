@@ -117,8 +117,6 @@ impl_activate (ArioPlugin *pl,
 					   G_TYPE_INVALID,
 					   G_TYPE_INVALID);
 			if (!error) {
-				GtkWindow *window;
-
 				ARIO_LOG_DBG ("created dbus proxy for org.gnome.SettingsDaemon; grabbing keys");
 				dbus_g_object_register_marshaller (ario_marshal_VOID__STRING_STRING,
 						G_TYPE_NONE, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID);

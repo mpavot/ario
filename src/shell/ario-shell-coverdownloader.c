@@ -21,11 +21,12 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include "ario-cover.h"
+#include "covers/ario-cover.h"
+#include "covers/ario-cover-manager.h"
 #include "shell/ario-shell-coverdownloader.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
-#include "ario-cover-handler.h"
+#include "covers/ario-cover-handler.h"
 
 static void ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass);
 static void ario_shell_coverdownloader_init (ArioShellCoverdownloader *ario_shell_coverdownloader);
@@ -43,15 +44,16 @@ static GObject * ario_shell_coverdownloader_constructor (GType type, guint n_con
 static gboolean ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
                                                              GdkEventAny *event,
                                                              ArioShellCoverdownloader *ario_shell_coverdownloader);
-static void ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_shell_coverdownloader,
+static void ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_coverdownloader,
                                                           const char *artist,
-                                                          const char *album);
+                                                          const char *album,
+                                                          const char *path);
 static void ario_shell_coverdownloader_close_cb (GtkButton *button,
                                                  ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_cancel_cb (GtkButton *button,
                                                   ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                             ArioMpdAlbum *ario_mpd_album,
+                                                             ArioMpdAlbum *mpd_album,
                                                              ArioShellCoverdownloaderOperation operation);
 enum
 {
@@ -477,18 +479,20 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
 
 static void
 ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                 ArioMpdAlbum *ario_mpd_album,
+                                                 ArioMpdAlbum *mpd_album,
                                                  ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *artist;
         const gchar *album;
+        const gchar *path;
 
-        if (!ario_mpd_album)
+        if (!mpd_album)
                 return;
 
-        artist = ario_mpd_album->artist;
-        album = ario_mpd_album->album;
+        artist = mpd_album->artist;
+        album = mpd_album->album;
+        path = mpd_album->path;
 
         if (!album || !artist)
                 return;
@@ -503,7 +507,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
                         ++ario_shell_coverdownloader->priv->nb_covers_already_exist;
                 else
                         /* We search for the cover on amazon */
-                        ario_shell_coverdownloader_find_amazon_image (ario_shell_coverdownloader, artist, album);
+                        ario_shell_coverdownloader_get_cover (ario_shell_coverdownloader, artist, album, path);
                 break;
 
         case REMOVE_COVERS: 
@@ -517,9 +521,10 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
 }
 
 static void 
-ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                              const char *artist,
-                                              const char *album)
+ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_coverdownloader,
+                                      const char *artist,
+                                      const char *album,
+                                      const char *path)
 {
         ARIO_LOG_FUNCTION_START
         GArray *size;
@@ -529,12 +534,13 @@ ario_shell_coverdownloader_find_amazon_image (ArioShellCoverdownloader *ario_she
         size = g_array_new (TRUE, TRUE, sizeof (int));
 
         /* If a cover is found on amazon, it is loaded in data(0) */
-        ret = ario_cover_load_amazon_covers (artist,
+        ret = ario_cover_manager_get_covers (ario_cover_manager_get_instance (),
+                                             artist,
                                              album,
+                                             path,
                                              &size,
                                              &data,
-                                             GET_FIRST_COVER,
-                                             AMAZON_MEDIUM_COVER);
+                                             GET_FIRST_COVER);
 
         /* If the cover is not too big and not too small (blank amazon image), we save it */
         if (ret && ario_cover_size_is_valid (g_array_index (size, int, 0))) {

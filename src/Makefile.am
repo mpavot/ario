@@ -9,10 +9,6 @@ INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 	   -Wcast-align -Wall
 
 ario_SOURCES = \
-	ario-cover.c\
-	ario-cover.h\
-	ario-cover-handler.c\
-	ario-cover-handler.h\
 	ario-debug.h\
 	ario-lyrics.c\
 	ario-lyrics.h\
@@ -25,6 +21,18 @@ ario_SOURCES = \
 	ario-profiles.h\
 	ario-util.c\
 	ario-util.h\
+	covers/ario-cover-amazon.c\
+	covers/ario-cover-amazon.h\
+	covers/ario-cover.c\
+	covers/ario-cover.h\
+	covers/ario-cover-handler.c\
+	covers/ario-cover-handler.h\
+	covers/ario-cover-local.c\
+	covers/ario-cover-local.h\
+	covers/ario-cover-manager.c\
+	covers/ario-cover-manager.h\
+	covers/ario-cover-provider.c\
+	covers/ario-cover-provider.h\
 	lib/ario-conf.h\
 	lib/eggtrayicon.c\
 	lib/eggtrayicon.h\

@@ -22,7 +22,7 @@
 
 #include <gtk/gtkhbox.h>
 #include "ario-mpd.h"
-#include "ario-cover-handler.h"
+#include "covers/ario-cover-handler.h"
 
 G_BEGIN_DECLS
 
