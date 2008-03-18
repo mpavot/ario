@@ -84,12 +84,12 @@ static void ario_browser_cmd_albums_properties (GtkAction *action,
 static void ario_browser_cmd_songs_properties (GtkAction *action,
                                                ArioBrowser *browser);                              
 static void ario_browser_add_in_playlist (ArioBrowser *browser);
-static void ario_browser_cmd_get_artist_ario_cover_amazon (GtkAction *action,
-                                                           ArioBrowser *browser);
+static void ario_browser_cmd_get_artist_cover (GtkAction *action,
+                                               ArioBrowser *browser);
 static void ario_browser_cmd_remove_artist_cover (GtkAction *action,
                                                   ArioBrowser *browser);
-static void ario_browser_cmd_get_album_ario_cover_amazon (GtkAction *action,
-                                                          ArioBrowser *browser);
+static void ario_browser_cmd_get_album_cover (GtkAction *action,
+                                              ArioBrowser *browser);
 static void ario_browser_cmd_remove_album_cover (GtkAction *action,
                                                  ArioBrowser *browser);
 static void ario_browser_covertree_visible_changed_cb (gpointer do_not_use1,
@@ -143,17 +143,17 @@ static GtkActionEntry ario_browser_actions [] =
                 NULL,
                 G_CALLBACK (ario_browser_cmd_songs_properties) },
 
-        { "CoverArtistGetAmazon", GTK_STOCK_CDROM, N_("Get the covers from _Amazon"), NULL,
+        { "BrowserGetCoverArtist", GTK_STOCK_CDROM, N_("Get the covers"), NULL,
                 NULL,
-                G_CALLBACK (ario_browser_cmd_get_artist_ario_cover_amazon) },
-        { "CoverArtistRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
+                G_CALLBACK (ario_browser_cmd_get_artist_cover) },
+        { "BrowserRemoveCoverArtist", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_remove_artist_cover) },
 
-        { "CoverAlbumGetAmazon", GTK_STOCK_CDROM, N_("Get the covers from _Amazon"), NULL,
+        { "BrowserGetCoverAlbum", GTK_STOCK_CDROM, N_("Get the covers"), NULL,
                 NULL,
-                G_CALLBACK (ario_browser_cmd_get_album_ario_cover_amazon) },
-        { "CoverAlbumRemove", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
+                G_CALLBACK (ario_browser_cmd_get_album_cover) },
+        { "BrowserRemoveCoverAlbum", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_remove_album_cover) },
 };
@@ -1385,11 +1385,11 @@ get_artist_cover (ArioBrowser *browser,
 }
 
 static void 
-ario_browser_cmd_get_artist_ario_cover_amazon (GtkAction *action,
-                                               ArioBrowser *browser)
+ario_browser_cmd_get_artist_cover (GtkAction *action,
+                                   ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        get_artist_cover (browser, GET_AMAZON_COVERS);
+        get_artist_cover (browser, GET_COVERS);
 }
 
 static void 
@@ -1440,11 +1440,11 @@ get_album_cover (ArioBrowser *browser,
 }
 
 static void 
-ario_browser_cmd_get_album_ario_cover_amazon (GtkAction *action,
-                                              ArioBrowser *browser)
+ario_browser_cmd_get_album_cover (GtkAction *action,
+                                  ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        get_album_cover (browser, GET_AMAZON_COVERS);
+        get_album_cover (browser, GET_COVERS);
 }
 
 static void 

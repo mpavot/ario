@@ -44,8 +44,8 @@ static void ario_shell_coverselect_response_cb (GtkDialog *dialog,
                                                 ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                                                          ArioShellCoverselect *ario_shell_coverselect);
-static void ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
-                                                         ArioShellCoverselect *ario_shell_coverselect);
+static void ario_shell_coverselect_get_covers_cb (GtkWidget *widget,
+                                                  ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_set_current_cover (ArioShellCoverselect *ario_shell_coverselect);
@@ -63,21 +63,21 @@ enum
 
 enum 
 {
-        AMAZON_PAGE,
+        GLOBAL_PAGE,
         LOCAL_PAGE
 };
 
 struct ArioShellCoverselectPrivate
 {
-        GtkWidget *amazon_artist_entry;
-        GtkWidget *amazon_album_entry;
+        GtkWidget *artist_entry;
+        GtkWidget *album_entry;
 
         GtkWidget *notebook;
 
         GtkWidget *artist_label;
         GtkWidget *album_label;
 
-        GtkWidget *get_amazon_covers_button;
+        GtkWidget *get_covers_button;
         GtkWidget *current_cover;
 
         GtkWidget *listview;
@@ -200,11 +200,11 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                 glade_xml_get_widget (xml, "album_label");
         ario_shell_coverselect->priv->notebook =
                 glade_xml_get_widget (xml, "notebook");
-        ario_shell_coverselect->priv->amazon_artist_entry =
-                glade_xml_get_widget (xml, "amazon_artist_entry");
-        ario_shell_coverselect->priv->amazon_album_entry =
-                glade_xml_get_widget (xml, "amazon_album_entry");
-        ario_shell_coverselect->priv->get_amazon_covers_button =
+        ario_shell_coverselect->priv->artist_entry =
+                glade_xml_get_widget (xml, "artist_entry");
+        ario_shell_coverselect->priv->album_entry =
+                glade_xml_get_widget (xml, "album_entry");
+        ario_shell_coverselect->priv->get_covers_button =
                 glade_xml_get_widget (xml, "search_button");
         ario_shell_coverselect->priv->current_cover =
                 glade_xml_get_widget (xml, "current_cover");
@@ -259,8 +259,8 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                                  "response",
                                  G_CALLBACK (ario_shell_coverselect_response_cb),
                                  ario_shell_coverselect, 0);                                         
-        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->get_amazon_covers_button),
-                          "clicked", G_CALLBACK (ario_shell_coverselect_get_amazon_covers_cb),
+        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->get_covers_button),
+                          "clicked", G_CALLBACK (ario_shell_coverselect_get_covers_cb),
                           ario_shell_coverselect);
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->local_open_button), 
                           "clicked", G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
@@ -284,9 +284,9 @@ ario_shell_coverselect_new (ArioMpdAlbum *mpd_album)
 
         ario_shell_coverselect_set_current_cover (ario_shell_coverselect);
 
-        gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->amazon_artist_entry), 
+        gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->artist_entry), 
                             ario_shell_coverselect->priv->file_artist);
-        gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->amazon_album_entry), 
+        gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->album_entry), 
                             ario_shell_coverselect->priv->file_album);
 
         gtk_label_set_label (GTK_LABEL (ario_shell_coverselect->priv->artist_label), 
@@ -352,9 +352,9 @@ ario_shell_coverselect_set_sensitive (ArioShellCoverselect *ario_shell_coversele
         gtk_dialog_set_response_sensitive (GTK_DIALOG (ario_shell_coverselect),
                                            GTK_RESPONSE_CLOSE,
                                            sensitive);
-        gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->amazon_artist_entry), sensitive);
-        gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->amazon_album_entry), sensitive);
-        gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->get_amazon_covers_button), sensitive);
+        gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->artist_entry), sensitive);
+        gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->album_entry), sensitive);
+        gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->get_covers_button), sensitive);
         gtk_widget_set_sensitive (GTK_WIDGET (ario_shell_coverselect->priv->listview), sensitive);
 
         while (gtk_events_pending ())
@@ -362,8 +362,8 @@ ario_shell_coverselect_set_sensitive (ArioShellCoverselect *ario_shell_coversele
 }
 
 static void 
-ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
-                                             ArioShellCoverselect *ario_shell_coverselect)
+ario_shell_coverselect_get_covers_cb (GtkWidget *widget,
+                                      ArioShellCoverselect *ario_shell_coverselect)
 {
         ARIO_LOG_FUNCTION_START
         gchar *artist;
@@ -372,8 +372,8 @@ ario_shell_coverselect_get_amazon_covers_cb (GtkWidget *widget,
 
         ario_shell_coverselect_set_sensitive (ario_shell_coverselect, FALSE);
 
-        artist = gtk_editable_get_chars (GTK_EDITABLE (ario_shell_coverselect->priv->amazon_artist_entry), 0, -1);
-        album = gtk_editable_get_chars (GTK_EDITABLE (ario_shell_coverselect->priv->amazon_album_entry), 0, -1);
+        artist = gtk_editable_get_chars (GTK_EDITABLE (ario_shell_coverselect->priv->artist_entry), 0, -1);
+        album = gtk_editable_get_chars (GTK_EDITABLE (ario_shell_coverselect->priv->album_entry), 0, -1);
 
         if (ario_shell_coverselect->priv->file_size)
                 g_array_free (ario_shell_coverselect->priv->file_size, TRUE);
@@ -458,7 +458,7 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
         gboolean ret;
 
         switch (gtk_notebook_get_current_page (GTK_NOTEBOOK (ario_shell_coverselect->priv->notebook))) {
-        case AMAZON_PAGE:
+        case GLOBAL_PAGE:
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ario_shell_coverselect->priv->listview));
 
                 if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
