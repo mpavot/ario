@@ -52,8 +52,8 @@ void                    ario_util_string_replace             (char **string,
                                                               const char *old,
                                                               const char *new);
 void                    ario_util_load_uri                   (const char *uri);
-int                     ario_util_min		                  (int a,
+int                     ario_util_min                        (int a,
                                                               int b);
-int                     ario_util_max		                  (int a,
+int                     ario_util_max                        (int a,
                                                               int b);
-                                                              
+char *                  ario_util_format_keyword             (const char *keyword);
