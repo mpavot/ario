@@ -24,6 +24,7 @@
 #include "lib/ario-conf.h"
 #include "covers/ario-cover-manager.h"
 #include "covers/ario-cover-amazon.h"
+#include "covers/ario-cover-lastfm.h"
 #include "covers/ario-cover-local.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -120,6 +121,10 @@ ario_cover_manager_get_instance (void)
                                                  ARIO_COVER_PROVIDER (cover_provider));
 
                 cover_provider = ario_cover_amazon_new ();
+                ario_cover_manager_add_provider (cover_manager,
+                                                 ARIO_COVER_PROVIDER (cover_provider));
+
+                cover_provider = ario_cover_lastfm_new ();
                 ario_cover_manager_add_provider (cover_manager,
                                                  ARIO_COVER_PROVIDER (cover_provider));
 

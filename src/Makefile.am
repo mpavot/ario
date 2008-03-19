@@ -27,6 +27,8 @@ ario_SOURCES = \
 	covers/ario-cover.h\
 	covers/ario-cover-handler.c\
 	covers/ario-cover-handler.h\
+	covers/ario-cover-lastfm.c\
+	covers/ario-cover-lastfm.h\
 	covers/ario-cover-local.c\
 	covers/ario-cover-local.h\
 	covers/ario-cover-manager.c\

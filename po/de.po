@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 23:28+0100\n"
+"POT-Creation-Date: 2008-03-19 23:35+0100\n"
 "PO-Revision-Date: 2008-03-10 21:45+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -26,75 +26,84 @@ msgstr ""
 msgid "0 for the library, 1 for the radios, etc..."
 msgstr "0 für die Bibliothek. 1 für die Radiosender, etc..."
 
-#: ../data/ario.schemas.in.h:3 ../src/plugins/ario-plugin-manager.c:745
+#: ../data/ario.schemas.in.h:3
+msgid "Active covers providers"
+msgstr ""
+
+#: ../data/ario.schemas.in.h:4 ../src/plugins/ario-plugin-manager.c:745
 msgid "Active plugins"
 msgstr "Aktive Plugins"
 
-#: ../data/ario.schemas.in.h:4
+#: ../data/ario.schemas.in.h:5
+#, fuzzy
+msgid "Covers providers"
+msgstr "Größe des Covers"
+
+#: ../data/ario.schemas.in.h:6
 msgid "Define if Ario must autoconnect to mpd or not"
 msgstr "Darf  Ario automatisch neu verbinden?"
 
-#: ../data/ario.schemas.in.h:5
+#: ../data/ario.schemas.in.h:7
 msgid "Define if Ario must use a proxy for remote connections"
 msgstr "Soll Ario einen Proxy für entfernte Verbindungen benutzen?"
 
-#: ../data/ario.schemas.in.h:6
+#: ../data/ario.schemas.in.h:8
 msgid "Define if the view tabs are shown."
 msgstr "Sollen die Reiter angezeigt werden?"
 
-#: ../data/ario.schemas.in.h:7
+#: ../data/ario.schemas.in.h:9
 msgid "Define the address of the proxy"
 msgstr "Wie lautet die Adresse des Proxys?"
 
-#: ../data/ario.schemas.in.h:8
+#: ../data/ario.schemas.in.h:10
 msgid "Define the behavior of a double click on the tray icon."
 msgstr "Wie soll sich Ario bei einem Doppelklick auf das Tray- Icon verhalten?"
 
-#: ../data/ario.schemas.in.h:9
+#: ../data/ario.schemas.in.h:11
 msgid "Define the path to the music"
 msgstr ""
 
-#: ../data/ario.schemas.in.h:10
+#: ../data/ario.schemas.in.h:12
 msgid "Define the port of the proxy"
 msgstr "Wie lautet der Proxy Port?"
 
-#: ../data/ario.schemas.in.h:11
+#: ../data/ario.schemas.in.h:13
 msgid "Define the size of the album column."
 msgstr "Wie breit soll die Breite der Spalte des Albums sein?"
 
-#: ../data/ario.schemas.in.h:12
+#: ../data/ario.schemas.in.h:14
 msgid "Define the size of the artist column."
 msgstr "Definieren Sie die Größe der Künstlerspalte."
 
-#: ../data/ario.schemas.in.h:13
+#: ../data/ario.schemas.in.h:15
 msgid "Define the size of the title column."
 msgstr "Definieren Sie die Größe der Titelspalte."
 
-#: ../data/ario.schemas.in.h:14
+#: ../data/ario.schemas.in.h:16
 msgid "Define the size of the track column."
 msgstr "Definieren Sie die Größe der Spurspalte."
 
-#: ../data/ario.schemas.in.h:15
+#: ../data/ario.schemas.in.h:17
 msgid "Define the source used in Ario"
 msgstr "Definieren Sie die Quelle, die in Ario benutzt werden soll."
 
-#: ../data/ario.schemas.in.h:16
+#: ../data/ario.schemas.in.h:18
 msgid "Hide the covers in the albums treeview"
 msgstr "Verstecken der Cover in der Album Ansicht"
 
-#: ../data/ario.schemas.in.h:17
+#: ../data/ario.schemas.in.h:19
 msgid "Host to connect to"
 msgstr "Zu verbindender Host"
 
-#: ../data/ario.schemas.in.h:18
+#: ../data/ario.schemas.in.h:20
 msgid "If true, the main window is maximized."
 msgstr "Wenn true, dann wird das Hauptfenster maximiert."
 
-#: ../data/ario.schemas.in.h:19
+#: ../data/ario.schemas.in.h:21
 msgid "If true, the statusbar is hidden."
 msgstr "Falls wahr dann ist die Statusleiste versteckt."
 
-#: ../data/ario.schemas.in.h:20
+#: ../data/ario.schemas.in.h:22
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .ario-plugin file for obtaining the \"Location\" of a given plugin."
@@ -103,67 +112,67 @@ msgstr ""
 "Erweiterungen. Schauen Sie die Datei .ario-plugin an, um einen bestimmten "
 "\"Ort\" einer Erweiterung zu ermitteln."
 
-#: ../data/ario.schemas.in.h:21
+#: ../data/ario.schemas.in.h:23
 msgid "Main window height"
 msgstr "Höhe des Hauptfensters"
 
-#: ../data/ario.schemas.in.h:22
+#: ../data/ario.schemas.in.h:24
 msgid "Main window maximization state"
 msgstr "Maximierung des Hauptfensters"
 
-#: ../data/ario.schemas.in.h:23
+#: ../data/ario.schemas.in.h:25
 msgid "Main window width"
 msgstr "Breite des Hauptfensters"
 
-#: ../data/ario.schemas.in.h:24
+#: ../data/ario.schemas.in.h:26
 msgid "Ordered list of sources."
 msgstr "Bestellte Liste der Quellen."
 
-#: ../data/ario.schemas.in.h:25
+#: ../data/ario.schemas.in.h:27
 msgid "Port to connect to"
 msgstr "Zu verbindender Port"
 
-#: ../data/ario.schemas.in.h:26
+#: ../data/ario.schemas.in.h:28
 msgid "Position of filesystem pane"
 msgstr "Position des Dateifensters"
 
-#: ../data/ario.schemas.in.h:27
+#: ../data/ario.schemas.in.h:29
 msgid "Position of main window pane"
 msgstr "Position des Hauptfensters"
 
-#: ../data/ario.schemas.in.h:28
+#: ../data/ario.schemas.in.h:30
 msgid "Position of playlists pane"
 msgstr "Position des Wiedergabelistenfensters"
 
-#: ../data/ario.schemas.in.h:29
+#: ../data/ario.schemas.in.h:31
 msgid "Sources order"
 msgstr "Quellenbestellung"
 
-#: ../data/ario.schemas.in.h:30
+#: ../data/ario.schemas.in.h:32
 msgid "Statusbar visibility"
 msgstr "Sichtbarkeit der Statusleiste"
 
-#: ../data/ario.schemas.in.h:31
+#: ../data/ario.schemas.in.h:33
 msgid "The amazon country to use to get the covers"
 msgstr "Das Amazon-Land das genutzt werden soll, um die Cover zu erhalten"
 
-#: ../data/ario.schemas.in.h:32
+#: ../data/ario.schemas.in.h:34
 msgid "The password to connect to mpd"
 msgstr "Das Paßwort um mit mpd sich zu verbinden"
 
-#: ../data/ario.schemas.in.h:33
+#: ../data/ario.schemas.in.h:35
 msgid "The timeout for the connection to mpd"
 msgstr "Die maximale Verbindungszeit für eine Verbindung zu mpd"
 
-#: ../data/ario.schemas.in.h:34
+#: ../data/ario.schemas.in.h:36
 msgid "True if the initial assistant has already been run."
 msgstr "Wahr, falls der Einrichtungsassistent bereits gelaufen ist."
 
-#: ../data/ario.schemas.in.h:35
+#: ../data/ario.schemas.in.h:37
 msgid "When enabled, ario hide the covers in the albums treeview"
 msgstr "Falls eingeschaltet versteckt ario die Cover in der Albumanzeige"
 
-#: ../data/ario.schemas.in.h:36
+#: ../data/ario.schemas.in.h:38
 msgid ""
 "You can search for your cover on amazon.com .fr .de .uk or .ca to have more "
 "accurate results"
@@ -180,32 +189,37 @@ msgid "Client apllication to mpd"
 msgstr "Client Anwendung für mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
-#: ../src/shell/ario-shell-coverselect.c:256
+#: ../src/shell/ario-shell-coverselect.c:244
 #: ../src/shell/ario-shell-preferences.c:178
 msgid "Covers"
 msgstr "Cover"
 
 #: ../data/glade/cover-prefs.glade.h:2
+#, fuzzy
+msgid "Covers Sources"
+msgstr "Cover"
+
+#: ../data/glade/cover-prefs.glade.h:3
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../data/glade/cover-prefs.glade.h:3
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Proxy Address :"
 msgstr "Proxy Adresse :"
 
-#: ../data/glade/cover-prefs.glade.h:4
+#: ../data/glade/cover-prefs.glade.h:5
 msgid "Proxy Port :"
 msgstr "Proxy Port :"
 
-#: ../data/glade/cover-prefs.glade.h:5
+#: ../data/glade/cover-prefs.glade.h:6
 msgid "Show the covers in the albums list"
 msgstr "Anzeige der Cover in der Albumliste"
 
-#: ../data/glade/cover-prefs.glade.h:6
+#: ../data/glade/cover-prefs.glade.h:7
 msgid "Use Amazon."
 msgstr "Benutzung von Amazon"
 
-#: ../data/glade/cover-prefs.glade.h:7
+#: ../data/glade/cover-prefs.glade.h:8
 msgid "Use a proxy"
 msgstr "Benutzung eines Proxies"
 
@@ -252,11 +266,11 @@ msgstr "Port :"
 msgid "_Autoconnect on startup"
 msgstr "_Automatisches Verbinden beim Start"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:145
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:146
 msgid "_Connect"
 msgstr "_Verbinden"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:148
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:149
 msgid "_Disconnect"
 msgstr "Verbindung trennen"
 
@@ -284,7 +298,7 @@ msgstr ""
 msgid "Album :"
 msgstr "Album :"
 
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:3
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Künstler :"
@@ -293,29 +307,13 @@ msgstr "Künstler :"
 msgid "Downloading cover"
 msgstr "Cover wird heruntergeladen"
 
-#: ../data/glade/cover-select.glade.h:2
-msgid "Amazon search"
-msgstr "Suche auf Amazon"
-
-#: ../data/glade/cover-select.glade.h:4
-msgid "Cover size"
-msgstr "Größe des Covers"
-
-#: ../data/glade/cover-select.glade.h:5
-msgid "Large cover (Slower)"
-msgstr "Große Cover (langsamer)"
-
-#: ../data/glade/cover-select.glade.h:6
+#: ../data/glade/cover-select.glade.h:3
 msgid "Local search"
 msgstr "Lokale Suche"
 
-#: ../data/glade/cover-select.glade.h:7
-msgid "Medium cover"
-msgstr "Mittelgroße Cover"
-
-#: ../data/glade/cover-select.glade.h:8
-msgid "Small cover (Faster)"
-msgstr "Kleine Cover (schneller)"
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:160
+msgid "Search"
+msgstr "Suche"
 
 #: ../data/glade/interface-prefs.glade.h:1
 msgid "On middle button click on tray icon :"
@@ -440,10 +438,6 @@ msgstr "Lied"
 msgid "Track :"
 msgstr "Titel :"
 
-#: ../src/ario-cover.c:419
-msgid "The cover already exists. Do you want to replace it?"
-msgstr "das Cover existiert bereits. Möchten Sie es ersetzen?"
-
 #: ../src/ario-lyrics-editor.c:300
 msgid "Downloading lyrics..."
 msgstr "Herunterladen des Liedtextes..."
@@ -452,9 +446,14 @@ msgstr "Herunterladen des Liedtextes..."
 msgid "Lyrics not found"
 msgstr "Liedtext nicht gefunden"
 
-#: ../src/ario-mpd.c:638
+#: ../src/ario-mpd.c:618
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Keine Verbindung zu mpd. Bitte prüfen Sie die Verbindungsoptionen."
+
+#: ../src/ario-mpd.c:651
+#, fuzzy
+msgid "Connecting..."
+msgstr "Verbindung"
 
 #: ../src/ario-mpd.h:28
 msgid "Unknown"
@@ -476,16 +475,25 @@ msgstr "Stunden"
 msgid "days"
 msgstr "Tage"
 
+#: ../src/covers/ario-cover.c:159
+msgid "The cover already exists. Do you want to replace it?"
+msgstr "das Cover existiert bereits. Möchten Sie es ersetzen?"
+
+#: ../src/covers/ario-cover-local.c:95
+msgid "Music Directory"
+msgstr ""
+
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
 msgstr "Erweiterung"
 
 #: ../src/plugins/ario-plugin-manager.c:46
+#: ../src/preferences/ario-cover-preferences.c:206
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
 msgstr "aktiviert"
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:169
+#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:170
 msgid "_About"
 msgstr "_Über"
 
@@ -524,6 +532,7 @@ msgstr ""
 "oder versuchen Sie die manuelle Konfiguration."
 
 #: ../src/preferences/ario-connection-preferences.c:639
+#: ../src/preferences/ario-cover-preferences.c:217
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
@@ -597,55 +606,56 @@ msgid "_Properties"
 msgstr "_Eigenschaften"
 
 #: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:153
-msgid "Get the covers from _Amazon"
-msgstr "Herunterladen der Cover von _Amazon"
+#, fuzzy
+msgid "Get the covers"
+msgstr "_Löschung aller Cover"
 
 #: ../src/sources/ario-browser.c:149 ../src/sources/ario-browser.c:156
 msgid "_Delete the covers"
 msgstr "_Löschung aller Cover"
 
-#: ../src/sources/ario-browser.c:237
+#: ../src/sources/ario-browser.c:238
 msgid "Library"
 msgstr "Musiksammlung"
 
-#: ../src/sources/ario-browser.c:316 ../src/sources/ario-search.c:43
+#: ../src/sources/ario-browser.c:317 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Künstler"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:370 ../src/sources/ario-search.c:44
+#: ../src/sources/ario-browser.c:371 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr "Album"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:380
+#: ../src/sources/ario-browser.c:381
 msgid "Cover"
 msgstr "Cover"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:446 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:448 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
 msgid "Track"
 msgstr "Stück"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:453 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:455 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:214
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr "Titel"
 
-#: ../src/sources/ario-browser.c:1359
+#: ../src/sources/ario-browser.c:1407
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Sind Sie sicher, daß Sie alle Cover des ausgewählten Künstlers entfernen "
 "möchten?"
 
-#: ../src/sources/ario-browser.c:1414
+#: ../src/sources/ario-browser.c:1462
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -667,10 +677,6 @@ msgstr "Dateiname"
 #: ../src/sources/ario-search.c:55
 msgid "Any"
 msgstr "Alle"
-
-#: ../src/sources/ario-search.c:160
-msgid "Search"
-msgstr "Suche"
 
 #: ../src/sources/ario-search.c:247
 msgid "Add a search criteria"
@@ -700,67 +706,67 @@ msgstr "Wiedergabeliste"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Sind Sie sicher, daß Sie alle Wiedergabelisten entfernen möchten?"
 
-#: ../src/shell/ario-shell.c:136
+#: ../src/shell/ario-shell.c:137
 msgid "_File"
 msgstr "_Datei"
 
-#: ../src/shell/ario-shell.c:137
+#: ../src/shell/ario-shell.c:138
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
-#: ../src/shell/ario-shell.c:138
+#: ../src/shell/ario-shell.c:139
 msgid "_View"
 msgstr "_Ansicht"
 
-#: ../src/shell/ario-shell.c:139
+#: ../src/shell/ario-shell.c:140
 msgid "_Tool"
 msgstr "_Werkzeug"
 
-#: ../src/shell/ario-shell.c:140
+#: ../src/shell/ario-shell.c:141
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../src/shell/ario-shell.c:142
+#: ../src/shell/ario-shell.c:143
 msgid "_Save Playlist"
 msgstr "_Speichern der Wiedergabeliste"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:152
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:155
 msgid "Plu_gins"
 msgstr "Erweiterun_gen"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:158
 msgid "Prefere_nces"
 msgstr "_Einstellungen"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:161
 msgid "_Change current album cover"
 msgstr "Ändern des aktuellen Album_covers"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:164
 msgid "Download album _covers"
 msgstr "Herunterladen der Album_cover"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:167
 msgid "Show _lyrics"
 msgstr "Anzeige der _Liedtexte"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:173
 msgid "_Translate this application..."
 msgstr "_Übersetzten dieser Anwendung..."
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:181
 msgid "S_tatusbar"
 msgstr "S_tatusleiste"
 
-#: ../src/shell/ario-shell.c:623
+#: ../src/shell/ario-shell.c:626
 msgid "GTK client for MPD"
 msgstr "GTK client für MPD"
 
-#: ../src/shell/ario-shell.c:624
+#: ../src/shell/ario-shell.c:627
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -768,20 +774,20 @@ msgstr ""
 "  Oliver Laub https://launchpad.net/~oliver-laub\n"
 "  tnc https://launchpad.net/~ahs-tnc"
 
-#: ../src/shell/ario-shell.c:865
+#: ../src/shell/ario-shell.c:883
 msgid "Configure Plugins"
 msgstr "Konfiguriere Erweiterungen"
 
-#: ../src/shell/ario-shell-coverdownloader.c:259
+#: ../src/shell/ario-shell-coverdownloader.c:261
 msgid "Music Player Cover Download"
 msgstr "Herunterladen der Albencover"
 
-#: ../src/shell/ario-shell-coverdownloader.c:377
+#: ../src/shell/ario-shell-coverdownloader.c:379
 msgid "Download Finished!"
 msgstr "Herunterladen beendet!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:380
+#: ../src/shell/ario-shell-coverdownloader.c:382
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -792,19 +798,19 @@ msgstr ""
 "%i Cover nicht gefunden\n"
 "%i Cover existieren bereits"
 
-#: ../src/shell/ario-shell-coverselect.c:244
+#: ../src/shell/ario-shell-coverselect.c:232
 msgid "Cover Download"
 msgstr "Herunterladen des Covers"
 
-#: ../src/shell/ario-shell-coverselect.c:394
+#: ../src/shell/ario-shell-coverselect.c:334
 msgid "Select a file"
 msgstr "Datei auswählen"
 
-#: ../src/shell/ario-shell-coverselect.c:559
+#: ../src/shell/ario-shell-coverselect.c:496
 msgid "Error reading file"
 msgstr "Fehler beim Lesen der Datei."
 
-#: ../src/shell/ario-shell-coverselect.c:582
+#: ../src/shell/ario-shell-coverselect.c:519
 msgid "Error saving file"
 msgstr "Fehler beim Speichern der Datei"
 
@@ -1052,3 +1058,18 @@ msgstr ""
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
 msgstr ""
+
+#~ msgid "Amazon search"
+#~ msgstr "Suche auf Amazon"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Große Cover (langsamer)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Mittelgroße Cover"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Kleine Cover (schneller)"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Herunterladen der Cover von _Amazon"
