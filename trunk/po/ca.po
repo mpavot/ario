@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-19 23:35+0100\n"
+"POT-Creation-Date: 2008-03-20 21:55+0100\n"
 "PO-Revision-Date: 2008-03-09 17:52+0000\n"
 "Last-Translator: el_libre <el.libre@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -183,7 +183,7 @@ msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 #: ../src/shell/ario-shell-coverselect.c:244
-#: ../src/shell/ario-shell-preferences.c:178
+#: ../src/shell/ario-shell-preferences.c:179
 msgid "Covers"
 msgstr ""
 
@@ -192,27 +192,11 @@ msgid "Covers Sources"
 msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:3
-msgid "Proxy"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:4
-msgid "Proxy Address :"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:5
-msgid "Proxy Port :"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:6
 msgid "Show the covers in the albums list"
 msgstr ""
 
-#: ../data/glade/cover-prefs.glade.h:7
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Use Amazon."
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:8
-msgid "Use a proxy"
 msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:1
@@ -220,7 +204,7 @@ msgid "Auto detect"
 msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:168
+#: ../src/shell/ario-shell-preferences.c:169
 msgid "Connection"
 msgstr "Connexió"
 
@@ -378,7 +362,7 @@ msgid "Play time :"
 msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:188
+#: ../src/shell/ario-shell-preferences.c:194
 msgid "Statistics"
 msgstr "Estadístiques"
 
@@ -476,7 +460,7 @@ msgid "Plugin"
 msgstr "Connector"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:206
+#: ../src/preferences/ario-cover-preferences.c:189
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
 msgstr "Activat"
@@ -517,7 +501,7 @@ msgid ""
 msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:639
-#: ../src/preferences/ario-cover-preferences.c:217
+#: ../src/preferences/ario-cover-preferences.c:200
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
@@ -798,17 +782,21 @@ msgstr "Lletra"
 msgid "Lyrics Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:138
+#: ../src/shell/ario-shell-preferences.c:139
 msgid "Ario Preferences"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:173
+#: ../src/shell/ario-shell-preferences.c:174
 msgid "Server"
 msgstr "Servidor"
 
-#: ../src/shell/ario-shell-preferences.c:183
+#: ../src/shell/ario-shell-preferences.c:184
 msgid "Interface"
 msgstr "Interfície"
+
+#: ../src/shell/ario-shell-preferences.c:189
+msgid "Proxy"
+msgstr ""
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263

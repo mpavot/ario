@@ -25,6 +25,7 @@ gladedir = $(pkgdatadir)/ario/glade
 glade_DATA = glade/connection-prefs.glade	\
              glade/connection-assistant.glade	\
 	     glade/cover-prefs.glade		\
+	     glade/proxy-prefs.glade		\
 	     glade/interface-prefs.glade	\
 	     glade/server-prefs.glade		\
 	     glade/cover-progress.glade         \

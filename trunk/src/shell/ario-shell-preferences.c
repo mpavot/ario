@@ -27,6 +27,7 @@
 #include "preferences/ario-connection-preferences.h"
 #include "preferences/ario-cover-preferences.h"
 #include "preferences/ario-interface-preferences.h"
+#include "preferences/ario-proxy-preferences.h"
 #include "preferences/ario-server-preferences.h"
 #include "preferences/ario-stats-preferences.h"
 #include "ario-debug.h"
@@ -181,6 +182,11 @@ ario_shell_preferences_new (ArioMpd *mpd)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Interface")));
+
+        widget = ario_proxy_preferences_new ();
+        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
+                                  widget,
+                                  gtk_label_new (_("Proxy")));
 
         widget = ario_stats_preferences_new (mpd);
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-19 23:35+0100\n"
+"POT-Creation-Date: 2008-03-20 21:55+0100\n"
 "PO-Revision-Date: 2008-03-10 21:45+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -191,7 +191,7 @@ msgstr "Cliënt applicatie naar mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
 #: ../src/shell/ario-shell-coverselect.c:244
-#: ../src/shell/ario-shell-preferences.c:178
+#: ../src/shell/ario-shell-preferences.c:179
 msgid "Covers"
 msgstr "Covers"
 
@@ -201,35 +201,19 @@ msgid "Covers Sources"
 msgstr "Covers"
 
 #: ../data/glade/cover-prefs.glade.h:3
-msgid "Proxy"
-msgstr "Proxy"
-
-#: ../data/glade/cover-prefs.glade.h:4
-msgid "Proxy Address :"
-msgstr "Proxy Adres :"
-
-#: ../data/glade/cover-prefs.glade.h:5
-msgid "Proxy Port :"
-msgstr "Proxy Poort :"
-
-#: ../data/glade/cover-prefs.glade.h:6
 msgid "Show the covers in the albums list"
 msgstr "Laat de covers zien in de albumlijst"
 
-#: ../data/glade/cover-prefs.glade.h:7
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Use Amazon."
 msgstr "Gebruik Amazon"
-
-#: ../data/glade/cover-prefs.glade.h:8
-msgid "Use a proxy"
-msgstr "Gebruik een proxy"
 
 #: ../data/glade/connection-prefs.glade.h:1
 msgid "Auto detect"
 msgstr "Auto detectie"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:168
+#: ../src/shell/ario-shell-preferences.c:169
 msgid "Connection"
 msgstr "Aansluiting"
 
@@ -392,7 +376,7 @@ msgid "Play time :"
 msgstr "Afspeeltijd :"
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:188
+#: ../src/shell/ario-shell-preferences.c:194
 msgid "Statistics"
 msgstr "Statistieken"
 
@@ -490,7 +474,7 @@ msgid "Plugin"
 msgstr "Plugin"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:206
+#: ../src/preferences/ario-cover-preferences.c:189
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
 msgstr "Geactiveerd"
@@ -535,7 +519,7 @@ msgstr ""
 "handmatige configuratie."
 
 #: ../src/preferences/ario-connection-preferences.c:639
-#: ../src/preferences/ario-cover-preferences.c:217
+#: ../src/preferences/ario-cover-preferences.c:200
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
@@ -832,17 +816,21 @@ msgstr "Songteksten"
 msgid "Lyrics Download"
 msgstr "Songteksten Download"
 
-#: ../src/shell/ario-shell-preferences.c:138
+#: ../src/shell/ario-shell-preferences.c:139
 msgid "Ario Preferences"
 msgstr "Ario Instellingen"
 
-#: ../src/shell/ario-shell-preferences.c:173
+#: ../src/shell/ario-shell-preferences.c:174
 msgid "Server"
 msgstr "Server"
 
-#: ../src/shell/ario-shell-preferences.c:183
+#: ../src/shell/ario-shell-preferences.c:184
 msgid "Interface"
 msgstr "Uiterlijk"
+
+#: ../src/shell/ario-shell-preferences.c:189
+msgid "Proxy"
+msgstr "Proxy"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
@@ -1069,6 +1057,15 @@ msgstr ""
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
 msgstr ""
+
+#~ msgid "Proxy Address :"
+#~ msgstr "Proxy Adres :"
+
+#~ msgid "Proxy Port :"
+#~ msgstr "Proxy Poort :"
+
+#~ msgid "Use a proxy"
+#~ msgstr "Gebruik een proxy"
 
 #~ msgid "Amazon search"
 #~ msgstr "Op Amazon zoeken"

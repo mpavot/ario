@@ -61,6 +61,8 @@ ario_SOURCES = \
 	preferences/ario-cover-preferences.h\
 	preferences/ario-interface-preferences.c\
 	preferences/ario-interface-preferences.h\
+	preferences/ario-proxy-preferences.c\
+	preferences/ario-proxy-preferences.h\
 	preferences/ario-server-preferences.c\
 	preferences/ario-server-preferences.h\
         preferences/ario-stats-preferences.c\
