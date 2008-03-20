@@ -62,7 +62,7 @@ G_MODULE_EXPORT void ario_connection_preferences_autodetect_cb (GtkWidget *widge
 G_MODULE_EXPORT void ario_connection_preferences_new_profile_cb (GtkWidget *widget,
                                                                  ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
-                                                    ArioConnectionPreferences *connection_preferences);
+                                                                    ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_connect_cb (GtkWidget *widget,
                                                              ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_disconnect_cb (GtkWidget *widget,
@@ -285,6 +285,9 @@ ario_connection_preferences_profile_selection_changed_cb (GtkTreeSelection * sel
 {
         ARIO_LOG_FUNCTION_START
         ario_connection_preferences_profile_selection_update (connection_preferences);
+        ario_mpd_disconnect (connection_preferences->priv->mpd);
+        ario_mpd_connect (connection_preferences->priv->mpd);
+        ario_connection_preferences_sync_connection (connection_preferences);
 }
 
 
