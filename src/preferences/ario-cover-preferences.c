@@ -36,14 +36,8 @@ static void ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
 static void ario_cover_preferences_init (ArioCoverPreferences *cover_preferences);
 static void ario_cover_preferences_finalize (GObject *object);
 static void ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences);
-G_MODULE_EXPORT void ario_cover_preferences_proxy_address_changed_cb (GtkWidget *widget,
-                                                                      ArioCoverPreferences *cover_preferences);
-G_MODULE_EXPORT void ario_cover_preferences_proxy_port_changed_cb (GtkWidget *widget,
-                                                                   ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                                         ArioCoverPreferences *cover_preferences);
-G_MODULE_EXPORT void ario_cover_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
-                                                                    ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
                                                                        ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_top_button_cb (GtkWidget *widget,
@@ -63,9 +57,6 @@ struct ArioCoverPreferencesPrivate
 {
         GtkWidget *covertree_check;
         GtkWidget *amazon_country;
-        GtkWidget *proxy_check;
-        GtkWidget *proxy_address_entry;
-        GtkWidget *proxy_port_spinbutton;
 
         GtkWidget *covers_treeview;
         GtkListStore *covers_model;
@@ -163,18 +154,10 @@ ario_cover_preferences_new (void)
                 glade_xml_get_widget (xml, "covertree_checkbutton");
         cover_preferences->priv->amazon_country =
                 glade_xml_get_widget (xml, "amazon_country_combobox");
-        cover_preferences->priv->proxy_check =
-                glade_xml_get_widget (xml, "proxy_checkbutton");
-        cover_preferences->priv->proxy_address_entry = 
-                glade_xml_get_widget (xml, "proxy_address_entry");
-        cover_preferences->priv->proxy_port_spinbutton = 
-                glade_xml_get_widget (xml, "proxy_port_spinbutton");
-
         cover_preferences->priv->covers_treeview = 
                 glade_xml_get_widget (xml, "covers_treeview");
 
         rb_glade_boldify_label (xml, "cover_frame_label");
-        rb_glade_boldify_label (xml, "proxy_frame_label");
         rb_glade_boldify_label (xml, "cover_sources_frame_label");
 
         list_store = gtk_list_store_new (1, G_TYPE_STRING);
@@ -301,8 +284,6 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
         ARIO_LOG_FUNCTION_START
         int i;
         char *current_country;
-        char *proxy_address;
-        int proxy_port;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check), 
                                       !ario_conf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
@@ -318,35 +299,7 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
 
         g_free (current_country);
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->proxy_check), 
-                                      ario_conf_get_boolean (CONF_USE_PROXY, FALSE));
-
-        proxy_address = ario_conf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
-        proxy_port = ario_conf_get_integer (CONF_PROXY_PORT, 8080);
-
-        gtk_entry_set_text (GTK_ENTRY (cover_preferences->priv->proxy_address_entry), proxy_address);
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (cover_preferences->priv->proxy_port_spinbutton), (gdouble) proxy_port);
-        g_free(proxy_address);
-
         ario_cover_preferences_sync_cover_providers (cover_preferences);
-}
-
-void
-ario_cover_preferences_proxy_address_changed_cb (GtkWidget *widget,
-                                                 ArioCoverPreferences *cover_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_conf_set_string (CONF_PROXY_ADDRESS,
-                              gtk_entry_get_text (GTK_ENTRY (cover_preferences->priv->proxy_address_entry)));
-}
-
-void
-ario_cover_preferences_proxy_port_changed_cb (GtkWidget *widget,
-                                              ArioCoverPreferences *cover_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_conf_set_integer (CONF_PROXY_PORT,
-                               (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (cover_preferences->priv->proxy_port_spinbutton)));
 }
 
 void
@@ -356,20 +309,6 @@ ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
         ARIO_LOG_FUNCTION_START
         ario_conf_set_boolean (CONF_COVER_TREE_HIDDEN,
                                !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check)));
-}
-
-void
-ario_cover_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
-                                               ArioCoverPreferences *cover_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        gboolean active;
-        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->proxy_check));
-        ario_conf_set_boolean (CONF_USE_PROXY,
-                               active);
-
-        gtk_widget_set_sensitive (cover_preferences->priv->proxy_address_entry, active);
-        gtk_widget_set_sensitive (cover_preferences->priv->proxy_port_spinbutton, active);
 }
 
 void

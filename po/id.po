@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-19 23:35+0100\n"
+"POT-Creation-Date: 2008-03-20 21:55+0100\n"
 "PO-Revision-Date: 2008-03-10 21:45+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -189,7 +189,7 @@ msgstr "Aplikasi klien pada mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
 #: ../src/shell/ario-shell-coverselect.c:244
-#: ../src/shell/ario-shell-preferences.c:178
+#: ../src/shell/ario-shell-preferences.c:179
 msgid "Covers"
 msgstr ""
 
@@ -198,35 +198,19 @@ msgid "Covers Sources"
 msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:3
-msgid "Proxy"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:4
-msgid "Proxy Address :"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:5
-msgid "Proxy Port :"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:6
 msgid "Show the covers in the albums list"
 msgstr ""
 
-#: ../data/glade/cover-prefs.glade.h:7
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Use Amazon."
 msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:8
-msgid "Use a proxy"
-msgstr "gunakan sebuah proxy"
 
 #: ../data/glade/connection-prefs.glade.h:1
 msgid "Auto detect"
 msgstr "Deteksi otomatis"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:168
+#: ../src/shell/ario-shell-preferences.c:169
 msgid "Connection"
 msgstr ""
 
@@ -390,7 +374,7 @@ msgid "Play time :"
 msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:188
+#: ../src/shell/ario-shell-preferences.c:194
 msgid "Statistics"
 msgstr ""
 
@@ -487,7 +471,7 @@ msgid "Plugin"
 msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:206
+#: ../src/preferences/ario-cover-preferences.c:189
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
 msgstr ""
@@ -528,7 +512,7 @@ msgid ""
 msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:639
-#: ../src/preferences/ario-cover-preferences.c:217
+#: ../src/preferences/ario-cover-preferences.c:200
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
@@ -817,16 +801,20 @@ msgstr ""
 msgid "Lyrics Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:138
+#: ../src/shell/ario-shell-preferences.c:139
 msgid "Ario Preferences"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:173
+#: ../src/shell/ario-shell-preferences.c:174
 msgid "Server"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:183
+#: ../src/shell/ario-shell-preferences.c:184
 msgid "Interface"
+msgstr ""
+
+#: ../src/shell/ario-shell-preferences.c:189
+msgid "Proxy"
 msgstr ""
 
 #: ../src/shell/ario-shell-songinfos.c:171
@@ -1052,6 +1040,9 @@ msgstr ""
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
 msgstr ""
+
+#~ msgid "Use a proxy"
+#~ msgstr "gunakan sebuah proxy"
 
 #~ msgid "Amazon search"
 #~ msgstr "Pencarian dengan Amazon"
