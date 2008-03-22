@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-20 21:55+0100\n"
+"POT-Creation-Date: 2008-03-22 11:22+0100\n"
 "PO-Revision-Date: 2008-03-10 21:45+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -319,6 +319,23 @@ msgstr ""
 msgid "Title :"
 msgstr "Judul :"
 
+#: ../data/glade/proxy-prefs.glade.h:1
+#: ../src/shell/ario-shell-preferences.c:189
+msgid "Proxy"
+msgstr ""
+
+#: ../data/glade/proxy-prefs.glade.h:2
+msgid "Proxy Address :"
+msgstr ""
+
+#: ../data/glade/proxy-prefs.glade.h:3
+msgid "Proxy Port :"
+msgstr ""
+
+#: ../data/glade/proxy-prefs.glade.h:4
+msgid "Use a proxy"
+msgstr "gunakan sebuah proxy"
+
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
 msgstr ""
@@ -438,7 +455,8 @@ msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
 msgid "Connecting..."
 msgstr ""
 
-#: ../src/ario-mpd.h:28
+#. impossible time or broken locale settings
+#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1290
 msgid "Unknown"
 msgstr ""
 
@@ -496,43 +514,43 @@ msgstr ""
 msgid "_Deactivate All"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:371
+#: ../src/preferences/ario-connection-preferences.c:374
 msgid "Profile"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:618
+#: ../src/preferences/ario-connection-preferences.c:623
 msgid "Server autodetection"
 msgstr "Deteksi otomatis server"
 
-#: ../src/preferences/ario-connection-preferences.c:629
+#: ../src/preferences/ario-connection-preferences.c:634
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:639
+#: ../src/preferences/ario-connection-preferences.c:644
 #: ../src/preferences/ario-cover-preferences.c:200
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:647
+#: ../src/preferences/ario-connection-preferences.c:652
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:655
+#: ../src/preferences/ario-connection-preferences.c:660
 #: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:717
+#: ../src/preferences/ario-connection-preferences.c:722
 msgid "You must select a server."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:737
+#: ../src/preferences/ario-connection-preferences.c:742
 msgid "New Profile"
 msgstr ""
 
@@ -813,10 +831,6 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:189
-msgid "Proxy"
-msgstr ""
-
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
 #: ../src/shell/ario-shell-songinfos.c:412
@@ -952,29 +966,142 @@ msgid ""
 "Title: %s"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:52
-msgid "Find artist on Wikipedia"
+#. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1234
+msgid "Today %I:%M %p"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
-msgid "Wikipedia Plugin - Configuration"
+#. Translators: "friendly time" string for the previous day,
+#. * strftime format. e.g. "Yesterday 12:34 am"
+#.
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1247
+msgid "Yesterday %I:%M %p"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
-msgid "Wikipedia language :"
+#. Translators: "friendly time" string for a day in the current week,
+#. * strftime format. e.g. "Wed 12:34 am"
+#.
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1263
+msgid "%a %I:%M %p"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia.schemas.in.h:1
-msgid "Wikipedia language"
+#. Translators: "friendly time" string for a day in the current year,
+#. * strftime format. e.g. "Feb 12 12:34 am"
+#.
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1275
+msgid "%b %d %I:%M %p"
 msgstr ""
 
-#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
-msgid "A plugin to search current artist on wikipedia"
+#. Translators: "friendly time" string for a day in a different year,
+#. * strftime format. e.g. "Feb 12 1997"
+#.
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1280
+msgid "%b %d %Y"
 msgstr ""
 
-#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
-msgid "Wikipedia"
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1364
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
+msgid "Never"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1387
+msgid "OK"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1390
+msgid "Logging in"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1393
+msgid "Request failed"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1396
+msgid "Incorrect username"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1399
+msgid "Incorrect password"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1402
+msgid "Handshake failed"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1405
+msgid "Client update required"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1408
+msgid "Track submission failed"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1411
+msgid "Queue is too long"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1414
+msgid "Track submission failed too many times"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1464
+msgid "Audioscrobbler preferences"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.schemas.in.h:1
+msgid "Audioscrobbler password"
+msgstr ""
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.schemas.in.h:2
+msgid "Audioscrobbler username"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
+msgid "Check Last.fm server status at"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
+msgid "Disabled"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
+msgid "Find out about Last.fm at "
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
+msgid "Last submission time:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
+msgid "Last.fm Profile"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Queued tracks:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
+msgid "Status:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
+msgid "Tracks submitted:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
+msgid "_Password:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
+msgid "_Username:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
+msgid "Last.fm"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
+msgid "Submits song information to last.fm and plays last.fm radio streams"
 msgstr ""
 
 #: ../plugins/filesystem/ario-filesystem.c:180
@@ -987,6 +1114,14 @@ msgstr ""
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
+msgstr ""
+
+#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
+msgid "Add multimedia keys support"
+msgstr ""
+
+#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
+msgid "Multimedia Keys"
 msgstr ""
 
 #: ../plugins/radios/ario-radio.c:117
@@ -1033,16 +1168,30 @@ msgstr ""
 msgid "Listen to webradios"
 msgstr ""
 
-#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
-msgid "Add multimedia keys support"
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:52
+msgid "Find artist on Wikipedia"
 msgstr ""
 
-#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
-msgid "Multimedia Keys"
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
+msgid "Wikipedia Plugin - Configuration"
 msgstr ""
 
-#~ msgid "Use a proxy"
-#~ msgstr "gunakan sebuah proxy"
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
+msgid "Wikipedia language :"
+msgstr ""
+
+#: ../plugins/wikipedia/ario-wikipedia.schemas.in.h:1
+msgid "Wikipedia language"
+msgstr ""
+
+#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
+msgid "A plugin to search current artist on wikipedia"
+msgstr ""
+
+#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
+msgid "Wikipedia"
+msgstr ""
 
 #~ msgid "Amazon search"
 #~ msgstr "Pencarian dengan Amazon"
