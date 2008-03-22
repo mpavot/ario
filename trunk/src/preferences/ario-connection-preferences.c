@@ -379,10 +379,6 @@ ario_connection_preferences_new (ArioMpd *mpd)
         gtk_tree_view_column_set_fixed_width (column, 120);
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (connection_preferences->priv->profile_treeview), column);
-        g_signal_connect_object (G_OBJECT (connection_preferences->priv->profile_selection),
-                                 "changed",
-                                 G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
-                                 connection_preferences, 0);
 
         connection_preferences->priv->profiles = ario_profiles_read ();
         ario_connection_preferences_profile_update_profiles (connection_preferences);
@@ -392,6 +388,12 @@ ario_connection_preferences_new (ArioMpd *mpd)
 #endif
 
         ario_connection_preferences_sync_connection (connection_preferences);
+
+        g_signal_connect_object (G_OBJECT (connection_preferences->priv->profile_selection),
+                                 "changed",
+                                 G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
+                                 connection_preferences, 0);
+        ario_connection_preferences_profile_selection_update (connection_preferences);
 
         gtk_box_pack_start (GTK_BOX (connection_preferences), glade_xml_get_widget (xml, "vbox"), TRUE, TRUE, 0);
 
