@@ -95,6 +95,34 @@ if test x"$enable_dbus" != xno; then
 fi
 AM_CONDITIONAL(USE_DBUS, test x"$enable_dbus" != xno)
 
+dnl AUDIOSCROBBLER
+AC_ARG_ENABLE(audioscrobbler,
+              AC_HELP_STRING([--disable-audioscrobbler],
+                             [Disable support of audioscrobbler]))
+if test x"$enable_audioscrobbler" != xno; then
+	PKG_CHECK_MODULES(SOUP,                            \
+		libsoup-2.4,
+		have_libsoup24=yes,
+		have_libsoup24=no)
+	if test x"$have_libsoup24" = "xno"; then
+		PKG_CHECK_MODULES(SOUP,
+			libsoup-2.2,
+			have_libsoup22=yes,
+			have_libsoup22=no)
+	fi
+	if test x"$have_libsoup24" = "xyes" || test x"$have_libsoup22" = "xyes"; then
+		have_libsoup=yes
+		AC_DEFINE(HAVE_LIBSOUP, 1, [Define if libsoup support is enabled])
+	fi
+	if test x"$have_libsoup24" = "xyes"; then
+		AC_DEFINE(HAVE_LIBSOUP_2_4, 1, [Define if libsoup 2.4 support is enabled])
+	fi
+	if test x"$have_libsoup22" = "xyes"; then
+		AC_DEFINE(HAVE_LIBSOUP_2_2, 1, [Define if libsoup 2.2 support is enabled])
+	fi
+fi
+AM_CONDITIONAL(USE_AUDIOSCROBBLER, test x"$enable_audioscrobbler" != xno)
+
 dnl Avahi
 AC_ARG_ENABLE(avahi,
               AC_HELP_STRING([--disable-avahi],
@@ -116,6 +144,7 @@ Makefile
 src/Makefile
 data/Makefile
 plugins/Makefile
+plugins/audioscrobbler/Makefile
 plugins/filesystem/Makefile
 plugins/mmkeys/Makefile
 plugins/radios/Makefile
@@ -155,4 +184,9 @@ if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"
 else
         echo "Playlists support is:                     DISABLED"
+fi
+if test x${enable_audioscrobbler} != xno; then
+        echo "Audioscrobbler support is:                ENABLED  (--disable-audioscrobbler)"
+else
+        echo "Audioscrobbler support is:                DISABLED"
 fi

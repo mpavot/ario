@@ -1,0 +1,27 @@
+<gconfschemafile>
+  <schemalist>
+
+      <schema>
+        <key>/schemas/apps/ario/plugins/audio-scrobbler-username</key>
+        <applyto>/apps/ario/audio-scrobbler-username</applyto>
+        <owner>ario</owner>
+        <type>string</type>
+        <default></default>
+        <locale name="C">
+        <short>Audioscrobbler username</short>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/plugins/audio-scrobbler-password</key>
+        <applyto>/apps/ario/audio-scrobbler-password</applyto>
+        <owner>ario</owner>
+        <type>string</type>
+        <default></default>
+        <locale name="C">
+        <short>Audioscrobbler password</short>
+        </locale>
+      </schema>
+
+  </schemalist>
+</gconfschemafile>

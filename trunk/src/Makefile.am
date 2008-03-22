@@ -40,6 +40,8 @@ ario_SOURCES = \
 	lib/eggtrayicon.h\
 	lib/libmpdclient.c\
 	lib/libmpdclient.h\
+	lib/md5.c\
+	lib/md5.h\
 	lib/rb-glade-helpers.c\
 	lib/rb-glade-helpers.h\
 	lib/libsexy/sexy-tooltip.c\
