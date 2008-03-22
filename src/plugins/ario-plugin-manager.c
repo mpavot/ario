@@ -456,7 +456,7 @@ name_search_cb (GtkTreeModel *model,
 }
 
 static void
-enable_plugin_menu_cb (GtkMenu            *menu,
+enable_plugin_menu_cb (GtkMenu *menu,
                        ArioPluginManager *pm)
 {
         GtkTreeModel *model;
@@ -474,14 +474,14 @@ enable_plugin_menu_cb (GtkMenu            *menu,
 }
 
 static void
-enable_all_menu_cb (GtkMenu            *menu,
+enable_all_menu_cb (GtkMenu *menu,
                     ArioPluginManager *pm)
 {
         plugin_manager_set_active_all (pm, TRUE);
 }
 
 static void
-disable_all_menu_cb (GtkMenu            *menu,
+disable_all_menu_cb (GtkMenu *menu,
                      ArioPluginManager *pm)
 {
         plugin_manager_set_active_all (pm, FALSE);
@@ -544,15 +544,15 @@ create_tree_popup_menu (ArioPluginManager *pm)
 
 static void
 tree_popup_menu_detach (ArioPluginManager *pm,
-                        GtkMenu            *menu)
+                        GtkMenu *menu)
 {
         pm->priv->popup_menu = NULL;
 }
 
 static void
-show_tree_popup_menu (GtkTreeView        *tree,
+show_tree_popup_menu (GtkTreeView *tree,
                       ArioPluginManager *pm,
-                      GdkEventButton     *event)
+                      GdkEventButton *event)
 {
         if (pm->priv->popup_menu)
                 gtk_widget_destroy (pm->priv->popup_menu);
@@ -579,8 +579,8 @@ show_tree_popup_menu (GtkTreeView        *tree,
 }
 
 static gboolean
-button_press_event_cb (GtkWidget          *tree,
-                       GdkEventButton     *event,
+button_press_event_cb (GtkWidget *tree,
+                       GdkEventButton *event,
                        ArioPluginManager *pm)
 {
         /* We want the treeview selection to be updated before showing the menu.
@@ -611,7 +611,7 @@ button_press_event_cb (GtkWidget          *tree,
 }
 
 static gboolean
-popup_menu_cb (GtkTreeView        *tree,
+popup_menu_cb (GtkTreeView *tree,
                ArioPluginManager *pm)
 {
         show_tree_popup_menu (tree, pm, NULL);

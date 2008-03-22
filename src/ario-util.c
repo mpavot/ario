@@ -319,7 +319,7 @@ ario_util_download_file (const char *uri,
         gchar* address = NULL;
         int port;
 
-        CURL* curl = curl_easy_init();
+        CURL* curl = curl_easy_init ();
         if(!curl)
                 return;
 
@@ -330,36 +330,36 @@ ario_util_download_file (const char *uri,
         download_data.data = NULL;
 
         /* set uri */
-        curl_easy_setopt(curl, CURLOPT_URL, uri);
+        curl_easy_setopt (curl, CURLOPT_URL, uri);
         /* set callback data */
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &download_data);
+        curl_easy_setopt (curl, CURLOPT_WRITEDATA, &download_data);
         /* set callback function */
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, ario_util_write_data);
+        curl_easy_setopt (curl, CURLOPT_WRITEFUNCTION, ario_util_write_data);
         /* set timeout */
-        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_easy_setopt (curl, CURLOPT_CONNECTTIMEOUT, 5);
         /* set redirect */
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION ,1);
+        curl_easy_setopt (curl, CURLOPT_FOLLOWLOCATION ,1);
         /* set NO SIGNAL */
-        curl_easy_setopt(curl, CURLOPT_NOSIGNAL, TRUE);
+        curl_easy_setopt (curl, CURLOPT_NOSIGNAL, TRUE);
 
         if (ario_conf_get_boolean (CONF_USE_PROXY, FALSE)) {
                 address = ario_conf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
                 port =  ario_conf_get_integer (CONF_PROXY_PORT, 8080);
-                if(address) {
-                        curl_easy_setopt(curl, CURLOPT_PROXY, address);
-                        curl_easy_setopt(curl, CURLOPT_PROXYPORT, port);
+                if (address) {
+                        curl_easy_setopt (curl, CURLOPT_PROXY, address);
+                        curl_easy_setopt (curl, CURLOPT_PROXYPORT, port);
                 } else {
-                        ARIO_LOG_DBG("Proxy enabled, but no proxy defined");
+                        ARIO_LOG_DBG ("Proxy enabled, but no proxy defined");
                 }
         }
 
-        curl_easy_perform(curl);
+        curl_easy_perform (curl);
 
         *size = download_data.size;
         *data = download_data.data;
 
         g_free(address);
-        curl_easy_cleanup(curl);
+        curl_easy_cleanup (curl);
 }
 
 void
