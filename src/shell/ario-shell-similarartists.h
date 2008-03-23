@@ -46,7 +46,7 @@ typedef struct
         GtkWindowClass parent_class;
 } ArioShellSimilarartistsClass;
 
-GType              ario_shell_similarartists_get_type         (void);
+GType              ario_shell_similarartists_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_shell_similarartists_new              (ArioMpd *mpd);
 

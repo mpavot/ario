@@ -47,7 +47,7 @@ typedef struct
         GtkHBoxClass parent;
 } ArioHeaderClass;
 
-GType           ario_header_get_type                 (void);
+GType           ario_header_get_type                 (void) G_GNUC_CONST;
 
 GtkWidget *     ario_header_new                      (ArioMpd *mpd,
                                                       ArioCoverHandler *cover_handler);

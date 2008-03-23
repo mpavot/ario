@@ -46,7 +46,7 @@ typedef struct
         GtkDialogClass parent_class;
 } ArioShellSonginfosClass;
 
-GType              ario_shell_songinfos_get_type         (void);
+GType              ario_shell_songinfos_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_shell_songinfos_new              (ArioMpd *mpd,
                                                           GList *songs);

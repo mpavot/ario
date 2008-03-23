@@ -45,7 +45,7 @@ typedef struct
         GtkAssistantClass parent_class;
 } ArioFirstlaunchClass;
 
-GType                   ario_firstlaunch_get_type     (void);
+GType                   ario_firstlaunch_get_type     (void) G_GNUC_CONST;
 
 ArioFirstlaunch *       ario_firstlaunch_new          (void);
 

@@ -94,7 +94,7 @@ typedef struct
         void (*storedplaylists_changed) (ArioMpd *mpd);
 } ArioMpdClass;
 
-GType                   ario_mpd_get_type                               (void);
+GType                   ario_mpd_get_type                               (void) G_GNUC_CONST;
 
 ArioMpd *               ario_mpd_new                                    (void);
 

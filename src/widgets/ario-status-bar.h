@@ -47,7 +47,7 @@ typedef struct
         GtkStatusbarClass parent_class;
 } ArioStatusBarClass;
 
-GType           ario_status_bar_get_type        (void);
+GType           ario_status_bar_get_type        (void) G_GNUC_CONST;
 
 GtkWidget *     ario_status_bar_new             (ArioMpd *mpd);
 

@@ -49,7 +49,7 @@ typedef struct
         ArioSourceClass parent;
 } ArioFilesystemClass;
 
-GType                   ario_filesystem_get_type   (void);
+GType                   ario_filesystem_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_filesystem_new        (GtkUIManager *mgr,
                                                     GtkActionGroup *group,

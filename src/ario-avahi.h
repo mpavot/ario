@@ -52,7 +52,7 @@ typedef struct ArioHost
         int port;
 } ArioHost;
 
-GType           ario_avahi_get_type     (void);
+GType           ario_avahi_get_type     (void) G_GNUC_CONST;
 
 ArioAvahi *     ario_avahi_new          (void);
 

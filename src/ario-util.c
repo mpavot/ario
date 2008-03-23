@@ -36,7 +36,7 @@
 static char *config_dir = NULL;
 
 char *
-ario_util_format_time (int time)
+ario_util_format_time (const int time)
 {
         ARIO_LOG_FUNCTION_START
         int sec, min;
@@ -51,7 +51,7 @@ ario_util_format_time (int time)
 }
 
 char *
-ario_util_format_total_time (int time)
+ario_util_format_total_time (const int time)
 {
         ARIO_LOG_FUNCTION_START
         gchar *res;
@@ -101,7 +101,7 @@ ario_util_format_total_time (int time)
 }
 
 gchar *
-ario_util_format_track (gchar *track)
+ario_util_format_track (const gchar *track)
 {
         ARIO_LOG_FUNCTION_START
         gchar **splited_track;
@@ -118,7 +118,7 @@ ario_util_format_track (gchar *track)
 }
 
 gchar *
-ario_util_format_title (ArioMpdSong *mpd_song)
+ario_util_format_title (const ArioMpdSong *mpd_song)
 {
         ARIO_LOG_FUNCTION_START
         gchar **splited_titles;
@@ -211,7 +211,7 @@ ario_util_has_stock_icons (const char *stock_id)
 }
 
 gint
-ario_util_abs (gint a)
+ario_util_abs (const gint a)
 {
         ARIO_LOG_FUNCTION_START
         if (a > 0)
@@ -426,16 +426,16 @@ ario_util_load_uri (const char *uri)
 }
                    
 int
-ario_util_min (int a,
-               int b)
+ario_util_min (const int a,
+               const int b)
 {
         ARIO_LOG_FUNCTION_START
         return (a > b ? b : a);
 }
 
 int
-ario_util_max (int a,
-               int b)
+ario_util_max (const int a,
+               const int b)
 {
         ARIO_LOG_FUNCTION_START
         return (a > b ? a : b);

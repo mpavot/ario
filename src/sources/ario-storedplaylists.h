@@ -51,7 +51,7 @@ typedef struct
         ArioSourceClass parent;
 } ArioStoredplaylistsClass;
 
-GType                   ario_storedplaylists_get_type   (void);
+GType                   ario_storedplaylists_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_storedplaylists_new        (GtkUIManager *mgr,
                                                          GtkActionGroup *group,

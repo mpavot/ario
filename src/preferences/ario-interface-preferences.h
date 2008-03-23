@@ -45,7 +45,7 @@ typedef struct
         GtkDialogClass parent_class;
 } ArioInterfacePreferencesClass;
 
-GType              ario_interface_preferences_get_type         (void);
+GType              ario_interface_preferences_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_interface_preferences_new              (void);
 

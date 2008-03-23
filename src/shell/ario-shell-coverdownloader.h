@@ -53,7 +53,7 @@ typedef enum
         REMOVE_COVERS
 } ArioShellCoverdownloaderOperation;
 
-GType           ario_shell_coverdownloader_get_type                     (void);
+GType           ario_shell_coverdownloader_get_type                     (void) G_GNUC_CONST;
 
 GtkWidget *     ario_shell_coverdownloader_new                          (ArioMpd *mpd);
 

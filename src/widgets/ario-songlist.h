@@ -57,7 +57,7 @@ enum
         SONGS_N_COLUMN
 };
 
-GType                   ario_songlist_get_type                  (void);
+GType                   ario_songlist_get_type                  (void) G_GNUC_CONST;
 
 GtkWidget*              ario_songlist_new                       (GtkUIManager *mgr,
                                                                  ArioMpd *mpd,

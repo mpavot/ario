@@ -52,7 +52,7 @@ typedef struct
         EggTrayIconClass parent_class;
 } ArioTrayIconClass;
 
-GType                   ario_tray_icon_get_type         (void);
+GType                   ario_tray_icon_get_type         (void) G_GNUC_CONST;
 
 ArioTrayIcon *          ario_tray_icon_new              (GtkActionGroup *group,
                                                          GtkUIManager *mgr,

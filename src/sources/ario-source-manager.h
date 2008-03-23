@@ -58,7 +58,7 @@ typedef struct
 
 } ArioSourceManagerClass;
 
-GType                   ario_sourcemanager_get_type     (void);
+GType                   ario_sourcemanager_get_type     (void) G_GNUC_CONST;
 
 GtkWidget*              ario_sourcemanager_new          (GtkUIManager *mgr,
                                                          GtkActionGroup *group,

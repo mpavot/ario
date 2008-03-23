@@ -46,7 +46,7 @@ typedef struct
         GtkEventBoxClass parent;
 } ArioVolumeClass;
 
-GType           ario_volume_get_type    (void);
+GType           ario_volume_get_type    (void) G_GNUC_CONST;
 
 ArioVolume *    ario_volume_new         (ArioMpd *mpd);
 

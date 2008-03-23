@@ -46,7 +46,7 @@ typedef struct
         ArioCoverProviderClass parent;
 } ArioCoverAmazonClass;
 
-GType                   ario_cover_amazon_get_type      (void);
+GType                   ario_cover_amazon_get_type      (void) G_GNUC_CONST;
 
 ArioCoverProvider*      ario_cover_amazon_new           (void);
 

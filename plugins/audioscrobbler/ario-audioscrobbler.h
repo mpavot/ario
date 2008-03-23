@@ -56,7 +56,7 @@ typedef struct
 } ArioAudioscrobblerClass;
 
 
-GType                   ario_audioscrobbler_get_type (void);
+GType                   ario_audioscrobbler_get_type (void) G_GNUC_CONST;
 
 ArioAudioscrobbler*     ario_audioscrobbler_new (ArioMpd *mpd);
 

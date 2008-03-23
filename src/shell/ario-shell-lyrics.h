@@ -46,7 +46,7 @@ typedef struct
         GtkWindowClass parent_class;
 } ArioShellLyricsClass;
 
-GType              ario_shell_lyrics_get_type         (void);
+GType              ario_shell_lyrics_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_shell_lyrics_new              (ArioMpd *mpd);
 
