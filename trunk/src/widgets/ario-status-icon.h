@@ -46,7 +46,7 @@ typedef struct
         GtkStatusIconClass parent_class;
 } ArioStatusIconClass;
 
-GType                   ario_status_icon_get_type       (void);
+GType                   ario_status_icon_get_type       (void) G_GNUC_CONST;
 
 ArioStatusIcon *        ario_status_icon_new            (GtkActionGroup *group,
                                                          GtkUIManager *mgr,

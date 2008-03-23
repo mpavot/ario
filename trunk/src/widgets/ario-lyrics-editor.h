@@ -53,7 +53,7 @@ typedef struct ArioLyricsEditorData
         gboolean finalize;
 } ArioLyricsEditorData;
 
-GType              ario_lyrics_editor_get_type         (void);
+GType              ario_lyrics_editor_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_lyrics_editor_new              (void);
 

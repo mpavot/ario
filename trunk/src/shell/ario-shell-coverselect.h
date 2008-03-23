@@ -46,7 +46,7 @@ typedef struct
         GtkDialogClass parent_class;
 } ArioShellCoverselectClass;
 
-GType           ario_shell_coverselect_get_type (void);
+GType           ario_shell_coverselect_get_type (void) G_GNUC_CONST;
 
 GtkWidget *     ario_shell_coverselect_new      (ArioMpdAlbum *mpd_album);
 

@@ -93,6 +93,7 @@ struct ArioHeaderPrivate
         GtkAdjustment *adjustment;
 
         GtkWidget *elapsed;
+        GtkWidget *of;
         GtkWidget *total;
 
         GtkWidget *volume_button;
@@ -191,7 +192,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         GObjectClass *parent_class;
         GtkWidget *event_box;
 
-        GtkWidget *image, *hbox, *hbox2, *vbox, *alignment, *label;
+        GtkWidget *image, *hbox, *hbox2, *vbox, *alignment;
 
         klass = ARIO_HEADER_CLASS (g_type_class_peek (TYPE_ARIO_HEADER));
 
@@ -322,7 +323,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->elapsed = gtk_label_new ("0:00");
         /* Translators - This " of " is used to count the elapsed time
            of a song like in "00:59 of 03:24" */
-        label = gtk_label_new (_(" of "));
+        header->priv->of = gtk_label_new (_(" of "));
         header->priv->total = gtk_label_new ("0:00");
 
         vbox = gtk_vbox_new (FALSE, 0);
@@ -330,7 +331,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         hbox2 = gtk_hbox_new (FALSE, 5);
 
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->elapsed, FALSE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), header->priv->of, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->total, FALSE, TRUE, 0);
 
         gtk_box_pack_start (GTK_BOX (vbox), header->priv->scale, FALSE, TRUE, 0);
@@ -499,9 +500,16 @@ ario_header_change_total_time (ArioHeader *header)
         else
                 header->priv->total_time = 0;
 
-        tmp = ario_util_format_time (header->priv->total_time);
-        gtk_label_set_text (GTK_LABEL (header->priv->total), tmp);
-        g_free (tmp);
+        if (header->priv->total_time > 0) {
+                tmp = ario_util_format_time (header->priv->total_time);
+                gtk_label_set_text (GTK_LABEL (header->priv->total), tmp);
+                g_free (tmp);
+                gtk_widget_show (header->priv->total);
+                gtk_widget_show (header->priv->of);
+        } else {
+                gtk_widget_hide (header->priv->total);
+                gtk_widget_hide (header->priv->of);
+        }
 
         header->priv->adjustment->upper = header->priv->total_time;
 }

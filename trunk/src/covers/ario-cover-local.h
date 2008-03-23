@@ -46,7 +46,7 @@ typedef struct
         ArioCoverProviderClass parent;
 } ArioCoverLocalClass;
 
-GType                   ario_cover_local_get_type      (void);
+GType                   ario_cover_local_get_type      (void) G_GNUC_CONST;
 
 ArioCoverProvider*      ario_cover_local_new           (void);
 

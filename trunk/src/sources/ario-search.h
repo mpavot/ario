@@ -51,7 +51,7 @@ typedef struct
         ArioSourceClass parent;
 } ArioSearchClass;
 
-GType                   ario_search_get_type   (void);
+GType                   ario_search_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_search_new        (GtkUIManager *mgr,
                                                 GtkActionGroup *group,

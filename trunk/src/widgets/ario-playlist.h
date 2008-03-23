@@ -46,7 +46,7 @@ typedef struct
         GtkHBoxClass parent;
 } ArioPlaylistClass;
 
-GType           ario_playlist_get_type          (void);
+GType           ario_playlist_get_type          (void) G_GNUC_CONST;
 
 GtkWidget *     ario_playlist_new               (GtkUIManager *mgr,
                                                  GtkActionGroup *group,

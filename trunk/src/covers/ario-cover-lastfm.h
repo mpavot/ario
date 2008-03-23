@@ -46,7 +46,7 @@ typedef struct
         ArioCoverProviderClass parent;
 } ArioCoverLastfmClass;
 
-GType                   ario_cover_lastfm_get_type      (void);
+GType                   ario_cover_lastfm_get_type      (void) G_GNUC_CONST;
 
 ArioCoverProvider*      ario_cover_lastfm_new           (void);
 

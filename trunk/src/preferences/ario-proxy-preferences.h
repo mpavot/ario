@@ -45,7 +45,7 @@ typedef struct
         GtkDialogClass parent_class;
 } ArioProxyPreferencesClass;
 
-GType              ario_proxy_preferences_get_type         (void);
+GType              ario_proxy_preferences_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_proxy_preferences_new              (void);
 

@@ -45,7 +45,7 @@ typedef struct
         GtkDialogClass parent_class;
 } ArioCoverPreferencesClass;
 
-GType              ario_cover_preferences_get_type         (void);
+GType              ario_cover_preferences_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *        ario_cover_preferences_new              (void);
 

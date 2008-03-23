@@ -48,7 +48,7 @@ typedef struct
         void (*cover_changed)            (ArioCoverHandler *cover_handler);
 } ArioCoverHandlerClass;
 
-GType              ario_cover_handler_get_type         (void);
+GType              ario_cover_handler_get_type         (void) G_GNUC_CONST;
 
 ArioCoverHandler * ario_cover_handler_new              (ArioMpd *mpd);
 

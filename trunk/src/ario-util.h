@@ -19,13 +19,13 @@
 
 #include "ario-mpd.h"
 
-char*                   ario_util_format_time                (int time);
+char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
-char*                   ario_util_format_total_time          (int time);
+char*                   ario_util_format_total_time          (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
-gchar*                  ario_util_format_track               (gchar *track);
+gchar*                  ario_util_format_track               (const gchar *track) G_GNUC_MALLOC;
 
-gchar*                  ario_util_format_title               (ArioMpdSong *mpd_song);
+gchar*                  ario_util_format_title               (const ArioMpdSong *mpd_song) G_GNUC_MALLOC;
 
 void                    ario_util_add_stock_icons            (const char *stock_id,
                                                               const char *filename);
@@ -33,7 +33,7 @@ void                    ario_util_init_stock_icons           (void);
 
 gboolean                ario_util_has_stock_icons            (const char *stock_id);
 
-gint                    ario_util_abs                        (gint a);
+gint                    ario_util_abs                        (const gint a) G_GNUC_CONST;
 
 const char*             ario_util_config_dir                 (void);
 
@@ -52,8 +52,8 @@ void                    ario_util_string_replace             (char **string,
                                                               const char *old,
                                                               const char *new);
 void                    ario_util_load_uri                   (const char *uri);
-int                     ario_util_min                        (int a,
-                                                              int b);
-int                     ario_util_max                        (int a,
-                                                              int b);
-char *                  ario_util_format_keyword             (const char *keyword);
+int                     ario_util_min                        (const int a,
+                                                              const int b) G_GNUC_CONST;
+int                     ario_util_max                        (const int a,
+                                                              const int b) G_GNUC_CONST;
+char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;

@@ -46,7 +46,7 @@ typedef struct
         GObjectClass parent;
 } ArioCoverManagerClass;
 
-GType                   ario_cover_manager_get_type                     (void);
+GType                   ario_cover_manager_get_type                     (void) G_GNUC_CONST;
 
 ArioCoverManager*       ario_cover_manager_get_instance                 (void);
 

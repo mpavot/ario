@@ -46,7 +46,7 @@ typedef struct
         GObjectClass parent_class;
 } ArioShellClass;
 
-GType           ario_shell_get_type             (void);
+GType           ario_shell_get_type             (void) G_GNUC_CONST;
 
 ArioShell *     ario_shell_new                  (void);
 
