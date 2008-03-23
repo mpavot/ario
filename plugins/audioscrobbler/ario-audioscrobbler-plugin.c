@@ -110,6 +110,7 @@ impl_activate (ArioPlugin *plugin,
         asplugin->audioscrobbler = ario_audioscrobbler_new (asplugin->mpd);
 
         ario_mpd_use_count_inc (asplugin->mpd);
+        g_object_unref (asplugin->mpd);
 
         if (!is_loaded) {
                 ario_util_add_stock_icons ("audioscrobbler", PLUGINDIR "audioscrobbler.png");
@@ -128,7 +129,6 @@ impl_deactivate (ArioPlugin *plugin,
 
         if (asplugin->mpd) {
                 ario_mpd_use_count_dec (asplugin->mpd);
-                g_object_unref (asplugin->mpd);
                 asplugin->mpd = NULL;
         }
 }

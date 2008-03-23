@@ -12,8 +12,6 @@ ario_SOURCES = \
 	ario-debug.h\
 	ario-lyrics.c\
 	ario-lyrics.h\
-	ario-lyrics-editor.c\
-	ario-lyrics-editor.h\
 	ario-main.c\
 	ario-mpd.c\
 	ario-mpd.h\
@@ -94,10 +92,14 @@ ario_SOURCES = \
 	shell/ario-shell-preferences.h\
 	shell/ario-shell-songinfos.c\
 	shell/ario-shell-songinfos.h\
+	shell/ario-shell-similarartists.c\
+	shell/ario-shell-similarartists.h\
 	widgets/ario-firstlaunch.c\
 	widgets/ario-firstlaunch.h\
 	widgets/ario-header.c\
 	widgets/ario-header.h\
+	widgets/ario-lyrics-editor.c\
+	widgets/ario-lyrics-editor.h\
 	widgets/ario-playlist.c\
 	widgets/ario-playlist.h\
         widgets/ario-songlist.c\

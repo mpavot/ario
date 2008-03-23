@@ -324,6 +324,7 @@ ario_radio_finalize (GObject *object)
         g_return_if_fail (radio->priv != NULL);
         if (radio->priv->doc)
                 xmlFreeDoc (radio->priv->doc);
+        radio->priv->doc = NULL;
         g_free (radio->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -488,10 +489,12 @@ ario_radio_fill_doc (ArioRadio *radio)
                 cur = xmlDocGetRootElement (radio->priv->doc);
                 if (cur == NULL) {
                         xmlFreeDoc (radio->priv->doc);
+                        radio->priv->doc = NULL;
                         return FALSE;
                 }
                 if (xmlStrcmp(cur->name, (const xmlChar *) XML_ROOT_NAME)) {
                         xmlFreeDoc (radio->priv->doc);
+                        radio->priv->doc = NULL;
                         return FALSE;
                 }
         }

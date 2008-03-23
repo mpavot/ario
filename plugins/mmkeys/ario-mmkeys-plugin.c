@@ -100,6 +100,7 @@ impl_activate (ArioPlugin *pl,
 	g_object_get (shell,
 		      "mpd", &plugin->priv->mpd,
 		      NULL);
+        g_object_unref (plugin->priv->mpd);
 
 	bus = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
 	if (bus) {
@@ -153,11 +154,6 @@ impl_deactivate (ArioPlugin *pl,
                  ArioShell *shell)
 {
         ArioMmkeysPlugin *plugin = ARIO_MMKEYS_PLUGIN (pl);
-
-	if (plugin->priv->mpd != NULL) {
-		g_object_unref (plugin->priv->mpd);
-		plugin->priv->mpd = NULL;
-	}
 
 	if (plugin->priv->proxy != NULL) {
 		GError *error = NULL;

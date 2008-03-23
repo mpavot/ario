@@ -13,6 +13,7 @@ data/glade/interface-prefs.glade
 data/glade/lyrics-select.glade
 data/glade/proxy-prefs.glade
 data/glade/server-prefs.glade
+data/glade/similar-artists.glade
 data/glade/stats-prefs.glade
 data/glade/song-infos.glade
 src/ario-avahi.c
@@ -20,8 +21,6 @@ src/ario-avahi.h
 src/ario-debug.h
 src/ario-lyrics.c
 src/ario-lyrics.h
-src/ario-lyrics-editor.c
-src/ario-lyrics-editor.h
 src/ario-main.c
 src/ario-mpd.c
 src/ario-mpd.h
@@ -96,12 +95,16 @@ src/shell/ario-shell-lyricsselect.c
 src/shell/ario-shell-lyricsselect.h
 src/shell/ario-shell-preferences.c
 src/shell/ario-shell-preferences.h
+src/shell/ario-shell-similarartists.c
+src/shell/ario-shell-similarartists.h
 src/shell/ario-shell-songinfos.c
 src/shell/ario-shell-songinfos.h
 src/widgets/ario-firstlaunch.c
 src/widgets/ario-firstlaunch.h
 src/widgets/ario-header.c
 src/widgets/ario-header.h
+src/widgets/ario-lyrics-editor.c
+src/widgets/ario-lyrics-editor.h
 src/widgets/ario-playlist.c
 src/widgets/ario-playlist.h
 src/widgets/ario-songlist.c
