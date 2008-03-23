@@ -101,23 +101,16 @@ AC_ARG_ENABLE(audioscrobbler,
                              [Disable support of audioscrobbler]))
 if test x"$enable_audioscrobbler" != xno; then
 	PKG_CHECK_MODULES(SOUP,                            \
-		libsoup-2.4,
-		have_libsoup24=yes,
-		have_libsoup24=no)
+			  libsoup-2.4,
+			  have_libsoup24=yes,
+		          have_libsoup24=no)
 	if test x"$have_libsoup24" = "xno"; then
 		PKG_CHECK_MODULES(SOUP,
-			libsoup-2.2,
-			have_libsoup22=yes,
-			have_libsoup22=no)
-	fi
-	if test x"$have_libsoup24" = "xyes" || test x"$have_libsoup22" = "xyes"; then
-		have_libsoup=yes
-		AC_DEFINE(HAVE_LIBSOUP, 1, [Define if libsoup support is enabled])
+				  libsoup-2.2)
 	fi
 	if test x"$have_libsoup24" = "xyes"; then
 		AC_DEFINE(HAVE_LIBSOUP_2_4, 1, [Define if libsoup 2.4 support is enabled])
-	fi
-	if test x"$have_libsoup22" = "xyes"; then
+	else
 		AC_DEFINE(HAVE_LIBSOUP_2_2, 1, [Define if libsoup 2.2 support is enabled])
 	fi
 fi
