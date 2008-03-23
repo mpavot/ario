@@ -23,7 +23,7 @@
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "ario-lyrics-editor.h"
+#include "widgets/ario-lyrics-editor.h"
 #include "shell/ario-shell-lyricsselect.h"
 #include "ario-debug.h"
 #include "ario-lyrics.h"

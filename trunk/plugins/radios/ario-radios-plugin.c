@@ -70,9 +70,10 @@ impl_activate (ArioPlugin *plugin,
         ArioRadiosPlugin *pi = ARIO_RADIOS_PLUGIN (plugin);
         ArioSourceManager *sourcemanager;
 
-        g_object_get (shell, "ui-manager", &uimanager, NULL);
-        g_object_get (shell, "action-group", &actiongroup, NULL);
-        g_object_get (shell, "mpd", &mpd, NULL);
+        g_object_get (shell,
+                      "ui-manager", &uimanager,
+                      "action-group", &actiongroup,
+                      "mpd", &mpd, NULL);
 
         pi->priv->source = ario_radio_new (uimanager,
                                            actiongroup,

@@ -418,7 +418,6 @@ ario_audioscrobbler_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 audioscrobbler->priv->mpd = g_value_get_object (value);
-                g_object_ref (G_OBJECT (audioscrobbler->priv->mpd));
                 g_signal_connect_object (G_OBJECT (audioscrobbler->priv->mpd),
                                          "song-changed",
                                          G_CALLBACK (ario_audioscrobbler_song_changed_cb),

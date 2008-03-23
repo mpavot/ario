@@ -25,7 +25,7 @@
 #include <glib/gi18n.h>
 #include "shell/ario-shell-lyrics.h"
 #include "ario-debug.h"
-#include "ario-lyrics-editor.h"
+#include "widgets/ario-lyrics-editor.h"
 #include "ario-util.h"
 
 static void ario_shell_lyrics_class_init (ArioShellLyricsClass *klass);

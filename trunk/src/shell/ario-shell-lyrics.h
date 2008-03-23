@@ -17,7 +17,7 @@
  *
  */
 
-#include <gtk/gtkdialog.h>
+#include <gtk/gtkwindow.h>
 #include "ario-mpd.h"
 
 #ifndef __ARIO_SHELL_LYRICS_H

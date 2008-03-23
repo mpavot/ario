@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-22 11:22+0100\n"
+"POT-Creation-Date: 2008-03-23 13:38+0100\n"
 "PO-Revision-Date: 2008-03-09 17:52+0000\n"
 "Last-Translator: el_libre <el.libre@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -223,8 +223,8 @@ msgstr "Hoste :"
 msgid "Music directory :"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:881
-#: ../plugins/radios/ario-radio.c:1080
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:884
+#: ../plugins/radios/ario-radio.c:1083
 msgid "Name :"
 msgstr "Nom:"
 
@@ -242,11 +242,11 @@ msgstr "Port :"
 msgid "_Autoconnect on startup"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:146
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:149
 msgid "_Connect"
 msgstr "_Connecta"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:149
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:152
 msgid "_Disconnect"
 msgstr "_Desconnecta"
 
@@ -359,6 +359,14 @@ msgstr ""
 msgid "n/a"
 msgstr "n/a"
 
+#: ../data/glade/similar-artists.glade.h:1
+msgid "Find on Last.fm"
+msgstr ""
+
+#: ../data/glade/similar-artists.glade.h:2
+msgid "gtk-close"
+msgstr ""
+
 #: ../data/glade/stats-prefs.glade.h:1
 msgid "Database play time :"
 msgstr ""
@@ -428,25 +436,17 @@ msgstr "Cançó"
 msgid "Track :"
 msgstr ""
 
-#: ../src/ario-lyrics-editor.c:300
-msgid "Downloading lyrics..."
-msgstr ""
-
-#: ../src/ario-lyrics-editor.c:316
-msgid "Lyrics not found"
-msgstr ""
-
-#: ../src/ario-mpd.c:618
+#: ../src/ario-mpd.c:617
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
 
-#: ../src/ario-mpd.c:651
+#: ../src/ario-mpd.c:650
 #, fuzzy
 msgid "Connecting..."
 msgstr "Connexió"
 
 #. impossible time or broken locale settings
-#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1290
+#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1289
 msgid "Unknown"
 msgstr "Desconegut/da"
 
@@ -484,7 +484,7 @@ msgstr "Connector"
 msgid "Enabled"
 msgstr "Activat"
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:170
+#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:176
 msgid "_About"
 msgstr "_Quant a"
 
@@ -607,6 +607,7 @@ msgstr "Biblioteca"
 
 #: ../src/sources/ario-browser.c:317 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:202
+#: ../src/shell/ario-shell-similarartists.c:319
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Artista"
@@ -690,73 +691,77 @@ msgstr "Llista de reproducció"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:137
+#: ../src/shell/ario-shell.c:140
 msgid "_File"
 msgstr "_Arxiu"
 
-#: ../src/shell/ario-shell.c:138
+#: ../src/shell/ario-shell.c:141
 msgid "_Edit"
 msgstr "_Edita"
 
-#: ../src/shell/ario-shell.c:139
+#: ../src/shell/ario-shell.c:142
 msgid "_View"
 msgstr "_Visualització"
 
-#: ../src/shell/ario-shell.c:140
+#: ../src/shell/ario-shell.c:143
 msgid "_Tool"
 msgstr "_Eina"
 
-#: ../src/shell/ario-shell.c:141
+#: ../src/shell/ario-shell.c:144
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: ../src/shell/ario-shell.c:143
+#: ../src/shell/ario-shell.c:146
 msgid "_Save Playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:155
 msgid "_Quit"
 msgstr "_Surt"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:158
 msgid "Plu_gins"
 msgstr "_Connectors"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:161
 msgid "Prefere_nces"
 msgstr "_Preferències"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:164
 msgid "_Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:167
 msgid "Download album _covers"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:167
-msgid "Show _lyrics"
+#: ../src/shell/ario-shell.c:170
+msgid "Find similar artists"
 msgstr ""
 
 #: ../src/shell/ario-shell.c:173
+msgid "Show _lyrics"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:179
 msgid "_Translate this application..."
 msgstr ""
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:187
 msgid "S_tatusbar"
 msgstr "Barra d'_estat"
 
-#: ../src/shell/ario-shell.c:626
+#: ../src/shell/ario-shell.c:632
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:627
+#: ../src/shell/ario-shell.c:633
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  el_libre https://launchpad.net/~el-libre"
 
-#: ../src/shell/ario-shell.c:883
+#: ../src/shell/ario-shell.c:901
 msgid "Configure Plugins"
 msgstr "Configura els connectors"
 
@@ -812,6 +817,10 @@ msgstr "Servidor"
 #: ../src/shell/ario-shell-preferences.c:184
 msgid "Interface"
 msgstr "Interfície"
+
+#: ../src/shell/ario-shell-similarartists.c:308
+msgid "Image"
+msgstr ""
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
@@ -876,6 +885,14 @@ msgstr ""
 #: ../src/widgets/ario-header.c:477
 msgid "Change the music volume"
 msgstr "Canvia el volum de la música"
+
+#: ../src/widgets/ario-lyrics-editor.c:300
+msgid "Downloading lyrics..."
+msgstr ""
+
+#: ../src/widgets/ario-lyrics-editor.c:316
+msgid "Lyrics not found"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:117
 msgid "_Clear"
@@ -947,85 +964,85 @@ msgid ""
 msgstr ""
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1234
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1233
 msgid "Today %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1247
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1246
 msgid "Yesterday %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1263
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1262
 msgid "%a %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1275
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
 msgid "%b %d %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1280
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1279
 msgid "%b %d %Y"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1364
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1363
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 #, fuzzy
 msgid "Never"
 msgstr "Servidor"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1387
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1386
 msgid "OK"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1390
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1389
 msgid "Logging in"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1393
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1392
 msgid "Request failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1396
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1395
 msgid "Incorrect username"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1399
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1398
 msgid "Incorrect password"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1402
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1401
 msgid "Handshake failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1405
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1404
 msgid "Client update required"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1408
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1407
 msgid "Track submission failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1411
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1410
 msgid "Queue is too long"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1414
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1413
 msgid "Track submission failed too many times"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1464
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1463
 msgid "Audioscrobbler preferences"
 msgstr ""
 
@@ -1127,24 +1144,24 @@ msgid "Internet Radios"
 msgstr ""
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:871
+#: ../plugins/radios/ario-radio.c:874
 msgid "Add a WebRadio"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:882 ../plugins/radios/ario-radio.c:1081
+#: ../plugins/radios/ario-radio.c:885 ../plugins/radios/ario-radio.c:1084
 msgid "URL :"
 msgstr "Adreça URL :"
 
-#: ../plugins/radios/ario-radio.c:936 ../plugins/radios/ario-radio.c:1136
+#: ../plugins/radios/ario-radio.c:939 ../plugins/radios/ario-radio.c:1139
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:998
+#: ../plugins/radios/ario-radio.c:1001
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1070
+#: ../plugins/radios/ario-radio.c:1073
 msgid "Edit a WebRadio"
 msgstr ""
 

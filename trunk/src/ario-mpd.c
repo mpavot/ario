@@ -374,7 +374,6 @@ ario_mpd_finalize (GObject *object)
         g_return_if_fail (IS_ARIO_MPD (object));
 
         mpd = ARIO_MPD (object);
-
         g_return_if_fail (mpd->priv != NULL);
 
         ario_mpd_disconnect (mpd);

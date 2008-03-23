@@ -32,6 +32,7 @@ glade_DATA = glade/connection-prefs.glade	\
 	     glade/lyrics-select.glade          \
 	     glade/cover-select.glade	        \
 	     glade/song-infos.glade	        \
+	     glade/similar-artists.glade        \
 	     glade/stats-prefs.glade
 
 appicon_DATA = ario.png

@@ -27,7 +27,7 @@
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 #include "ario-util.h"
-#include "ario-lyrics-editor.h"
+#include "widgets/ario-lyrics-editor.h"
 
 #define ARIO_PREVIOUS 1
 #define ARIO_NEXT 2

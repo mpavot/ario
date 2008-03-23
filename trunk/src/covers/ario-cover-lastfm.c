@@ -281,8 +281,8 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
         }
 
         if (!g_strrstr (xml_data, "<coverart>")) {
-                return FALSE;
                 g_free (xml_data);
+                return FALSE;
         }
 
         /* We parse the xml file to extract the cover uris */

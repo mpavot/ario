@@ -34,6 +34,7 @@
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell-preferences.h"
 #include "shell/ario-shell-lyrics.h"
+#include "shell/ario-shell-similarartists.h"
 #include "shell/ario-shell-coverdownloader.h"
 #include "shell/ario-shell-coverselect.h"
 #include "ario-debug.h"
@@ -76,6 +77,8 @@ static void ario_shell_cmd_cover_select (GtkAction *action,
                                          ArioShell *shell);
 static void ario_shell_cmd_covers (GtkAction *action,
                                    ArioShell *shell);
+static void ario_shell_cmd_similar_artists (GtkAction *action,
+                                            ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
                                   ArioShell *shell);
 static void ario_shell_cmd_translate (GtkAction *action,
@@ -164,6 +167,9 @@ static GtkActionEntry ario_shell_actions [] =
         { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_covers) },
+        { "ToolSimilarArtist", GTK_STOCK_INDEX, N_("Find similar artists"), NULL,
+                NULL,
+                G_CALLBACK (ario_shell_cmd_similar_artists) },
         { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
@@ -720,6 +726,18 @@ ario_shell_cmd_covers (GtkAction *action,
                                                GET_COVERS);
 
         gtk_widget_destroy (coverdownloader);
+}
+
+static void
+ario_shell_cmd_similar_artists (GtkAction *action,
+                                ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *similarartists;
+
+        similarartists = ario_shell_similarartists_new (shell->priv->mpd);
+        if (similarartists)
+                gtk_widget_show_all (similarartists);
 }
 
 static void
