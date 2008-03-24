@@ -98,7 +98,7 @@ GType                   ario_mpd_get_type                               (void) G
 
 ArioMpd *               ario_mpd_new                                    (void);
 
-void                    ario_mpd_connect                                (ArioMpd *mpd);
+gboolean                ario_mpd_connect                                (ArioMpd *mpd);
 
 void                    ario_mpd_disconnect                             (ArioMpd *mpd);
 

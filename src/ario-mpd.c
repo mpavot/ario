@@ -590,8 +590,8 @@ ario_mpd_connect_to (ArioMpd *mpd,
         return TRUE;
 }
 
-static gpointer
-ario_mpd_connect_thread (ArioMpd *mpd)
+static void
+ario_mpd_connect_real (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         gchar *hostname;
@@ -624,52 +624,38 @@ ario_mpd_connect_thread (ArioMpd *mpd)
 
         g_free (hostname);
         mpd->priv->connecting = FALSE;
-        g_thread_exit (NULL);
-
-        return NULL;
 }
 
-void
+gboolean
 ario_mpd_connect (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        GtkWidget *win, *vbox,*label, *bar;
-        GThread* thread;
+        GtkWidget *win, *vbox,*label;
 
         /* check if there is a connection */
         if (mpd->priv->connection || mpd->priv->connecting)
-                return;
-
-        mpd->priv->connecting = TRUE;
-
-        thread = g_thread_create ((GThreadFunc) ario_mpd_connect_thread,
-                                  mpd, TRUE, NULL);
+                return FALSE;
 
         win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        vbox = gtk_vbox_new (FALSE, 0);
-        label = gtk_label_new (_("Connecting..."));
-        bar = gtk_progress_bar_new ();
+        vbox = gtk_vbox_new (FALSE, 12);
+        label = gtk_label_new (_("Connecting to MPD server..."));
 
         gtk_container_add (GTK_CONTAINER (win), vbox);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
-        gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
+        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 12);
 
         gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
         gtk_window_set_title (GTK_WINDOW (win), "Ario");
         gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
         gtk_widget_show_all (win);
 
-        while (mpd->priv->connecting) {
-                gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
-                while (gtk_events_pending ())
-                        gtk_main_iteration ();
-                g_usleep (300000);
-        }
+        while (gtk_events_pending ())
+                gtk_main_iteration ();
 
-        g_thread_join (thread);
+        ario_mpd_connect_real (mpd);
 
         gtk_widget_hide (win);
         gtk_widget_destroy (win);
+                return FALSE;
 }
 
 void

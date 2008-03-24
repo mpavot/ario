@@ -536,7 +536,7 @@ ario_shell_show (ArioShell *shell)
                                  shell, 0);
 
         if (ario_conf_get_boolean (CONF_AUTOCONNECT, TRUE))
-                ario_mpd_connect (shell->priv->mpd);
+                gtk_init_add ((GtkFunction) ario_mpd_connect, shell->priv->mpd);
 
         ario_shell_sync_paned (shell);
         ario_shell_sync_mpd (shell);
