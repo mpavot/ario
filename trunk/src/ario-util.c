@@ -310,6 +310,9 @@ ario_util_write_data(void *buffer,
 
 void
 ario_util_download_file (const char *uri,
+                         const char *post_data,
+                         const int post_size,
+                         const struct curl_slist *headers,
                          int* size,
                          char** data)
 {
@@ -351,6 +354,16 @@ ario_util_download_file (const char *uri,
                 } else {
                         ARIO_LOG_DBG ("Proxy enabled, but no proxy defined");
                 }
+        }
+
+        if (post_data) {
+	        curl_easy_setopt(curl, CURLOPT_POST, TRUE); 
+	        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data);
+	        curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, post_size);
+        }
+
+        if (headers) {
+                curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
         }
 
         curl_easy_perform (curl);

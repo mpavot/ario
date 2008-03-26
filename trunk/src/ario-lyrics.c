@@ -28,10 +28,12 @@
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include <curl/curl.h>
 
 #define LEOSLYRICS_FIRST_URI "http://api.leoslyrics.com/api_search.php?auth=Ario&artist=%s&songtitle=%s"
 #define LEOSLYRICS_SECOND_URI "http://api.leoslyrics.com/api_lyrics.php?auth=Ario&hid=%s"
 
+#define LYRICWIKI_URI "http://lyricwiki.org/server.php"
 
 static void ario_lyrics_create_ario_lyrics_dir (void);
 
@@ -91,8 +93,8 @@ ario_lyrics_remove_lyrics (const gchar *artist,
 }
 
 static char *
-ario_lyrics_make_first_xml_uri (const gchar *artist,
-                                const gchar *title)
+ario_leoslyrics_make_first_xml_uri (const gchar *artist,
+                                    const gchar *title)
 {
         ARIO_LOG_FUNCTION_START
         char *xml_uri;
@@ -155,8 +157,8 @@ ario_lyrics_make_first_xml_uri (const gchar *artist,
 }
 
 static gchar *
-ario_lyrics_parse_first_xml_file (gchar *xmldata,
-                                  int size)
+ario_leoslyrics_parse_first_xml_file (gchar *xmldata,
+                                      int size)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
@@ -203,8 +205,8 @@ ario_lyrics_parse_first_xml_file (gchar *xmldata,
 }
 
 static GSList *
-ario_lyrics_parse_first_xml_file_for_candidates (gchar *xmldata,
-                                                 int size)
+ario_leoslyrics_parse_first_xml_file_for_candidates (gchar *xmldata,
+                                                     int size)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
@@ -278,8 +280,8 @@ ario_lyrics_parse_first_xml_file_for_candidates (gchar *xmldata,
 }
 
 static ArioLyrics *
-ario_lyrics_parse_second_xml_file (gchar *xmldata,
-                                   int size)
+ario_leoslyrics_parse_second_xml_file (gchar *xmldata,
+                                       int size)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
@@ -411,14 +413,15 @@ ario_lyrics_get_leoslyrics_lyrics (const gchar *artist,
         gchar *lyrics_uri;
 
         /* We construct the uri to make a request */
-        xml_uri = ario_lyrics_make_first_xml_uri (artist,
-                                                  title);
+        xml_uri = ario_leoslyrics_make_first_xml_uri (artist,
+                                                      title);
 
         if (!xml_uri)
                 return NULL;
 
         /* We load the xml file in xml_data */
         ario_util_download_file (xml_uri,
+                                 NULL, 0, NULL,
                                  &xml_size,
                                  &xml_data);
         g_free (xml_uri);
@@ -427,13 +430,13 @@ ario_lyrics_get_leoslyrics_lyrics (const gchar *artist,
                 return NULL;
 
         if (g_strrstr (xml_data, " - Error report</title>")) {
-                return NULL;
                 g_free (xml_data);
+                return NULL;
         }
 
         /* We parse the xml file to extract the lyrics hid */
-        hid = ario_lyrics_parse_first_xml_file (xml_data,
-                                                xml_size);
+        hid = ario_leoslyrics_parse_first_xml_file (xml_data,
+                                                    xml_size);
 
         g_free (xml_data);
         if (!hid)
@@ -443,14 +446,150 @@ ario_lyrics_get_leoslyrics_lyrics (const gchar *artist,
         g_free (hid);
 
         ario_util_download_file (lyrics_uri,
+                                 NULL, 0, NULL,
                                  &lyrics_size,
                                  &lyrics_data);
         g_free (lyrics_uri);
         if (lyrics_size == 0)
                 return NULL;
 
-        lyrics = ario_lyrics_parse_second_xml_file (lyrics_data,
-                                                    lyrics_size);
+        lyrics = ario_leoslyrics_parse_second_xml_file (lyrics_data,
+                                                        lyrics_size);
+
+        g_free (lyrics_data);
+
+        return lyrics;
+}
+
+static ArioLyrics *
+ario_lyricwiki_parse_xml_file (gchar *xmldata,
+                               int size)
+{
+        ARIO_LOG_FUNCTION_START
+        xmlDocPtr doc;
+        xmlNodePtr cur;
+        xmlChar *xml_lyrics = NULL;
+        xmlChar *xml_title = NULL;
+        xmlChar *xml_artist = NULL;
+        ArioLyrics *lyrics = NULL;
+
+        doc = xmlParseMemory (xmldata, size);
+        if (doc == NULL ) {
+                return NULL;
+        }
+
+        cur = xmlDocGetRootElement(doc);
+        if (cur == NULL) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        /* We check that the root node name is "SOAP-ENV:Envelope" */
+        if (xmlStrcmp (cur->name, (const xmlChar *) "Envelope")) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        cur = cur->xmlChildrenNode;
+        if (xmlStrcmp (cur->name, (const xmlChar *) "Body")) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        cur = cur->xmlChildrenNode;
+        if (xmlStrcmp (cur->name, (const xmlChar *) "getSongResponse")) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        cur = cur->xmlChildrenNode;
+        if (xmlStrcmp (cur->name, (const xmlChar *) "return")) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        lyrics = (ArioLyrics *) g_malloc0 (sizeof (ArioLyrics));
+        for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
+                if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "lyrics"))) {
+                        xml_lyrics = xmlNodeGetContent (cur);
+                        if (xml_lyrics) {
+                                lyrics->lyrics = g_strdup ((const gchar *) xml_lyrics);
+                                xmlFree (xml_lyrics);
+                        }
+                } else if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "song"))) {
+                        xml_title = xmlNodeGetContent (cur);
+                        if (xml_title) {
+                                lyrics->title = g_strdup ((const gchar *) xml_title);
+                                xmlFree (xml_title);
+                        }
+                } else if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "artist"))) {
+                        xml_artist = xmlNodeGetContent (cur);
+                        if (xml_artist) {
+                                lyrics->artist = g_strdup ((const gchar *) xml_artist);
+                                xmlFree (xml_artist);
+                        }
+                }
+        }
+
+        xmlFreeDoc (doc);
+
+        return lyrics;
+}
+
+static ArioLyrics *
+ario_lyrics_get_lyricwiki_lyrics (const gchar *artist,
+                                  const gchar *title)
+{
+        ARIO_LOG_FUNCTION_START
+        int lyrics_size;
+        char *lyrics_data;
+        ArioLyrics *lyrics = NULL;
+        xmlChar *xml_artist;
+        xmlChar *xml_title;
+	GString *msg;
+
+        xml_artist = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) artist);
+        xml_title = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) title);
+
+	msg = g_string_new ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+	                    "<SOAP-ENV:Envelope SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
+        		    "xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+        		    "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+        		    "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+        		    "xmlns:SOAP-ENC=\"http://schemas.xmlsoapL.org/soap/encoding/\" "
+        		    "xmlns:tns=\"urn:LyricWiki\">"
+        		    "<SOAP-ENV:Body>\n<tns:getSong xmlns:tns=\"urn:LyricWiki\">"
+	                    "<artist xsi:type=\"xsd:string\">");
+	g_string_append(msg, (const gchar *) xml_artist); 
+	g_string_append(msg, "</artist><song xsi:type=\"xsd:string\">");
+	g_string_append(msg, (const gchar *) xml_title);
+	g_string_append(msg, "</song></tns:getSong></SOAP-ENV:Body></SOAP-ENV:Envelope>\n");
+        xmlFree (xml_artist);
+        xmlFree (xml_title);
+
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append (headers, "SOAPAction: urn:LyricWiki#getSong");
+        headers = curl_slist_append (headers, "Content-Type: text/xml; charset=UTF-8");
+
+        /* We load the xml file in xml_data */
+        ario_util_download_file (LYRICWIKI_URI,
+                                 msg->str, msg->len,
+                                 headers,
+                                 &lyrics_size,
+                                 &lyrics_data);
+	curl_slist_free_all (headers);
+        g_string_free (msg, FALSE);
+
+        if (lyrics_size == 0)
+                return NULL;
+
+        if (g_strrstr (lyrics_data, "<lyrics xsi:type=\"xsd:string\">Not found</lyrics>")) {
+                g_free (lyrics_data);
+                return NULL;
+        }
+
+        lyrics = ario_lyricwiki_parse_xml_file (lyrics_data,
+                                                lyrics_size);
 
         g_free (lyrics_data);
 
@@ -468,6 +607,10 @@ ario_lyrics_get_lyrics (const gchar *artist,
                 lyrics = ario_lyrics_get_local_lyrics (artist, title);
         } else {
                 lyrics = ario_lyrics_get_leoslyrics_lyrics (artist, title);
+                if (!lyrics) {
+                        lyrics = ario_lyrics_get_lyricwiki_lyrics (artist, title);
+                }
+
                 if (lyrics) {
                         ario_lyrics_prepend_infos (lyrics);
                         ario_lyrics_save_lyrics (artist,
@@ -493,14 +636,15 @@ ario_lyrics_get_lyrics_from_hid (const gchar *artist,
         lyrics_uri = g_strdup_printf (LEOSLYRICS_SECOND_URI, hid);
 
         ario_util_download_file (lyrics_uri,
+                                 NULL, 0, NULL,
                                  &lyrics_size,
                                  &lyrics_data);
         g_free (lyrics_uri);
         if (lyrics_size == 0)
                 return NULL;
 
-        lyrics = ario_lyrics_parse_second_xml_file (lyrics_data,
-                                                    lyrics_size);
+        lyrics = ario_leoslyrics_parse_second_xml_file (lyrics_data,
+                                                        lyrics_size);
 
         g_free (lyrics_data);
 
@@ -525,14 +669,15 @@ ario_lyrics_get_lyrics_candidates (const gchar *artist,
         GSList *candidates;
 
         /* We construct the uri to make a request */
-        xml_uri = ario_lyrics_make_first_xml_uri (artist,
-                                                  title);
+        xml_uri = ario_leoslyrics_make_first_xml_uri (artist,
+                                                      title);
 
         if (!xml_uri)
                 return NULL;
 
         /* We load the xml file in xml_data */
         ario_util_download_file (xml_uri,
+                                 NULL, 0, NULL,
                                  &xml_size,
                                  &xml_data);
         g_free (xml_uri);
@@ -546,8 +691,8 @@ ario_lyrics_get_lyrics_candidates (const gchar *artist,
         }
 
         /* We parse the xml file to extract the lyrics hid */
-        candidates = ario_lyrics_parse_first_xml_file_for_candidates (xml_data,
-                                                                      xml_size);
+        candidates = ario_leoslyrics_parse_first_xml_file_for_candidates (xml_data,
+                                                                          xml_size);
 
         g_free (xml_data);
 
