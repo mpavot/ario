@@ -156,7 +156,9 @@ enum
 
 static const GtkTargetEntry targets  [] = {
         { "text/internal-list", 0, 10},
+#if 0 // Deactivated
         { "text/artists-list", 0, 20 },
+#endif
         { "text/albums-list", 0, 30 },
         { "text/songs-list", 0, 40 },
         { "text/radios-list", 0, 40 },
@@ -805,7 +807,7 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
 }
-
+#if 0 // Deactivated
 static void
 ario_playlist_add_artists (ArioPlaylist *playlist,
                            GSList *artists,
@@ -844,7 +846,7 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
 }
-
+#endif
 static void
 ario_playlist_add_dir (ArioPlaylist *playlist,
                        const gchar *dir,
@@ -944,7 +946,7 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
         g_slist_foreach (albums_list, (GFunc) g_free, NULL);
         g_slist_free (albums_list);
 }
-
+#if 0 // Deactivated
 static void
 ario_playlist_drop_artists (ArioPlaylist *playlist,
                             int x, int y,
@@ -968,7 +970,7 @@ ario_playlist_drop_artists (ArioPlaylist *playlist,
         g_strfreev (artists);
         g_slist_free (artists_list);
 }
-
+#endif
 static void
 ario_playlist_drop_dir (ArioPlaylist *playlist,
                         int x, int y,
@@ -1016,7 +1018,7 @@ ario_playlist_append_albums (ArioPlaylist *playlist,
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_albums (playlist, albums, -1, -1);
 }
-
+#if 0 // Deactivated
 void
 ario_playlist_append_artists (ArioPlaylist *playlist,
                               GSList *artists)
@@ -1024,7 +1026,7 @@ ario_playlist_append_artists (ArioPlaylist *playlist,
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_artists (playlist, artists, -1, -1);
 }
-
+#endif
 void
 ario_playlist_append_dir (ArioPlaylist *playlist,
                           gchar *dir)
@@ -1049,8 +1051,10 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
 
         if (data->type == gdk_atom_intern ("text/internal-list", TRUE))
                 ario_playlist_move_rows (playlist, x, y);
+#if 0 // Deactivated
         else if (data->type == gdk_atom_intern ("text/artists-list", TRUE))
                 ario_playlist_drop_artists (playlist, x, y, data);
+#endif
         else if (data->type == gdk_atom_intern ("text/albums-list", TRUE))
                 ario_playlist_drop_albums (playlist, x, y, data);
         else if (data->type == gdk_atom_intern ("text/songs-list", TRUE))

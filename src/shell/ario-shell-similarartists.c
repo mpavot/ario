@@ -217,6 +217,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         g_free (keyword);
 
         ario_util_download_file (xml_uri,
+                                 NULL, 0, NULL,
                                  &xml_size,
                                  &xml_data);
         g_free (xml_uri);
@@ -234,6 +235,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                 similar_artist = tmp->data;
 
                 ario_util_download_file ((const gchar *) similar_artist->image,
+                                         NULL, 0, NULL,
                                          &xml_size,
                                          &xml_data);
 

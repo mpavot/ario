@@ -51,9 +51,9 @@ GType           ario_playlist_get_type          (void) G_GNUC_CONST;
 GtkWidget *     ario_playlist_new               (GtkUIManager *mgr,
                                                  GtkActionGroup *group,
                                                  ArioMpd *mpd);
-
+#if 0 // Deactivated
 void            ario_playlist_append_artists    (ArioPlaylist *playlist, GSList *artists);
-
+#endif
 void            ario_playlist_append_albums     (ArioPlaylist *playlist, GSList *albums);
 
 void            ario_playlist_append_songs      (ArioPlaylist *playlist, GSList *songs);

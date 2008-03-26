@@ -18,6 +18,7 @@
  */
 
 #include "ario-mpd.h"
+struct curl_slist;
 
 char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
@@ -46,6 +47,9 @@ void                    ario_util_mkdir                      (const char *uri);
 void                    ario_util_copy_file                  (const char *src_uri,
                                                               const char *dest_uri);
 void                    ario_util_download_file              (const char *uri,
+                                                              const char *post_data,
+                                                              const int post_size,
+                                                              const struct curl_slist *headers,
                                                               int* size,
                                                               char** data);
 void                    ario_util_string_replace             (char **string,

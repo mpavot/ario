@@ -803,8 +803,7 @@ ario_audioscrobbler_perform (ArioAudioscrobbler *audioscrobbler,
                 SoupURI *uri;
 
                 uri = ario_audioscrobbler_get_libsoup_uri ();
-                audioscrobbler->priv->soup_session = soup_session_async_new_with_options (
-                                                                                          "proxy-uri", uri,
+                audioscrobbler->priv->soup_session = soup_session_async_new_with_options ("proxy-uri", uri,
                                                                                           NULL);
                 if (uri)
                         soup_uri_free (uri);

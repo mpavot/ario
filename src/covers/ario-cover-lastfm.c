@@ -272,6 +272,7 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
 
         /* We load the xml file in xml_data */
         ario_util_download_file (xml_uri,
+                                 NULL, 0, NULL,
                                  &xml_size,
                                  &xml_data);
         g_free (xml_uri);
@@ -300,6 +301,7 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
                 if (temp->data) {
                         /* For each cover uri, we load the image data in temp_contents */
                         ario_util_download_file (temp->data,
+                                                 NULL, 0, NULL,
                                                  &temp_size,
                                                  &temp_contents);
                         if (ario_cover_size_is_valid (temp_size)) {

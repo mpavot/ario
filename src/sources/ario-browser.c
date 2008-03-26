@@ -193,10 +193,6 @@ static const GtkTargetEntry albums_targets  [] = {
         { "text/albums-list", 0, 0 },
 };
 
-static const GtkTargetEntry artists_targets  [] = {
-        { "text/artists-list", 0, 0 },
-};
-
 static GObjectClass *parent_class = NULL;
 
 GType
@@ -336,8 +332,8 @@ ario_browser_init (ArioBrowser *browser)
 
         gtk_drag_source_set (browser->priv->artists,
                              GDK_BUTTON1_MASK,
-                             artists_targets,
-                             G_N_ELEMENTS (artists_targets),
+                             albums_targets,
+                             G_N_ELEMENTS (albums_targets),
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (browser->priv->artists),
@@ -410,8 +406,8 @@ ario_browser_init (ArioBrowser *browser)
 
         gtk_drag_source_set (browser->priv->albums,
                              GDK_BUTTON1_MASK,
-                             albums_targets,
-                             G_N_ELEMENTS (albums_targets),
+                             songs_targets,
+                             G_N_ELEMENTS (songs_targets),
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (browser->priv->albums),
@@ -847,51 +843,6 @@ ario_browser_albums_selection_changed_cb (GtkTreeSelection * selection,
 }
 
 static void
-ario_browser_artists_selection_drag_foreach (GtkTreeModel *model,
-                                             GtkTreePath *path,
-                                             GtkTreeIter *iter,
-                                             gpointer userdata)
-{
-        ARIO_LOG_FUNCTION_START
-        GString *artists = (GString *) userdata;
-        gchar* val = NULL;
-
-        g_return_if_fail (artists != NULL);
-
-        gtk_tree_model_get (model, iter, 0, &val, -1);
-        g_string_append (artists, val);
-        g_string_append (artists, "\n");
-        g_free (val);
-}
-
-static void
-ario_browser_artists_drag_data_get_cb (GtkWidget * widget,
-                                       GdkDragContext * context,
-                                       GtkSelectionData * selection_data,
-                                       guint info, guint time, gpointer data)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioBrowser *browser;
-        GString* artists = NULL;
-
-        browser = ARIO_BROWSER (data);
-
-        g_return_if_fail (IS_ARIO_BROWSER (browser));
-        g_return_if_fail (widget != NULL);
-        g_return_if_fail (selection_data != NULL);
-
-        artists = g_string_new("");
-        gtk_tree_selection_selected_foreach (browser->priv->artists_selection,
-                                             ario_browser_artists_selection_drag_foreach,
-                                             artists);
-
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) artists->str,
-                                strlen (artists->str) * sizeof(guchar));
-
-        g_string_free (artists, TRUE);
-}
-
-static void
 ario_browser_albums_selection_drag_foreach (GtkTreeModel *model,
                                             GtkTreePath *path,
                                             GtkTreeIter *iter,
@@ -913,11 +864,25 @@ ario_browser_albums_selection_drag_foreach (GtkTreeModel *model,
         g_free (val);
 }
 
+static gboolean
+ario_browser_albums_drag_foreach (GtkTreeModel *model,
+                                  GtkTreePath *path,
+                                  GtkTreeIter *iter,
+                                  gpointer userdata)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_albums_selection_drag_foreach (model,
+                                                    path,
+                                                    iter,
+                                                    userdata);
+        return FALSE;
+}
+
 static void
-ario_browser_albums_drag_data_get_cb (GtkWidget * widget,
-                                      GdkDragContext * context,
-                                      GtkSelectionData * selection_data,
-                                      guint info, guint time, gpointer data)
+ario_browser_artists_drag_data_get_cb (GtkWidget * widget,
+                                       GdkDragContext * context,
+                                       GtkSelectionData * selection_data,
+                                       guint info, guint time, gpointer data)
 {
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser;
@@ -930,9 +895,9 @@ ario_browser_albums_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (selection_data != NULL);
 
         albums = g_string_new("");
-        gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
-                                             ario_browser_albums_selection_drag_foreach,
-                                             albums);
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                ario_browser_albums_drag_foreach,
+                                albums);
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) albums->str,
                                 strlen (albums->str) * sizeof(guchar));
@@ -956,6 +921,47 @@ ario_browser_songs_selection_drag_foreach (GtkTreeModel *model,
         g_string_append (filenames, "\n");
 
         g_free (val);
+}
+
+static gboolean
+ario_browser_songs_drag_foreach (GtkTreeModel *model,
+                                 GtkTreePath *path,
+                                 GtkTreeIter *iter,
+                                 gpointer userdata)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_songs_selection_drag_foreach (model,
+                                                   path,
+                                                   iter,
+                                                   userdata);
+        return FALSE;
+}
+
+static void
+ario_browser_albums_drag_data_get_cb (GtkWidget * widget,
+                                      GdkDragContext * context,
+                                      GtkSelectionData * selection_data,
+                                      guint info, guint time, gpointer data)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioBrowser *browser;
+        GString* songs = NULL;
+
+        browser = ARIO_BROWSER (data);
+
+        g_return_if_fail (IS_ARIO_BROWSER (browser));
+        g_return_if_fail (widget != NULL);
+        g_return_if_fail (selection_data != NULL);
+
+        songs = g_string_new("");
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->songs_model),
+                                ario_browser_songs_drag_foreach,
+                                songs);
+
+        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) songs->str,
+                                strlen (songs->str) * sizeof(guchar));
+
+        g_string_free (songs, TRUE);
 }
 
 static void
@@ -1129,41 +1135,31 @@ ario_browser_motion_notify (GtkWidget *widget,
 }
 
 static void
-get_selected_artists_foreach (GtkTreeModel *model,
-                              GtkTreePath *path,
-                              GtkTreeIter *iter,
-                              gpointer userdata)
+get_selected_songs_foreach (GtkTreeModel *model,
+                            GtkTreePath *path,
+                            GtkTreeIter *iter,
+                            gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GSList **artists = (GSList **) userdata;
+        GSList **songs = (GSList **) userdata;
         gchar *val = NULL;
 
-        gtk_tree_model_get (model, iter, 0, &val, -1);
+        gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
 
-        *artists = g_slist_append (*artists, val);
+        *songs = g_slist_append (*songs, val);
 }
 
-static void
-ario_browser_add_artists (ArioBrowser *browser)
+static gboolean
+get_songs_foreach (GtkTreeModel *model,
+                   GtkTreePath *path,
+                   GtkTreeIter *iter,
+                   gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *artists = NULL;
 
-        gtk_tree_selection_selected_foreach (browser->priv->artists_selection,
-                                             get_selected_artists_foreach,
-                                             &artists);
-        ario_playlist_append_artists (browser->priv->playlist, artists);
+        get_selected_songs_foreach (model, path, iter, userdata);
 
-        g_slist_foreach (artists, (GFunc) g_free, NULL);
-        g_slist_free (artists);
-}
-
-static void
-ario_browser_cmd_add_artists (GtkAction *action,
-                              ArioBrowser *browser)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_browser_add_artists (browser);
+        return FALSE;
 }
 
 static void
@@ -1186,20 +1182,55 @@ get_selected_albums_foreach (GtkTreeModel *model,
         *albums = g_slist_append (*albums, ario_mpd_album);
 }
 
+static gboolean
+get_albums_foreach (GtkTreeModel *model,
+                    GtkTreePath *path,
+                    GtkTreeIter *iter,
+                    gpointer userdata)
+{
+        ARIO_LOG_FUNCTION_START
+
+        get_selected_albums_foreach (model, path, iter, userdata);
+
+        return FALSE;
+}
+
 static void
-ario_browser_add_albums (ArioBrowser *browser)
+ario_browser_add_artists (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL;
 
-        gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
-                                             get_selected_albums_foreach,
-                                             &albums);
-
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                get_albums_foreach,
+                                &albums);
         ario_playlist_append_albums (browser->priv->playlist, albums);
 
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (albums);
+}
+
+static void
+ario_browser_cmd_add_artists (GtkAction *action,
+                              ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_add_artists (browser);
+}
+
+static void
+ario_browser_add_albums (ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *songs = NULL;
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->songs_model),
+                                get_songs_foreach,
+                                &songs);
+        ario_playlist_append_songs (browser->priv->playlist, songs);
+
+        g_slist_foreach (songs, (GFunc) g_free, NULL);
+        g_slist_free (songs);
 }
 
 static void
@@ -1211,28 +1242,13 @@ ario_browser_cmd_add_albums (GtkAction *action,
 }
 
 static void
-songs_foreach (GtkTreeModel *model,
-               GtkTreePath *path,
-               GtkTreeIter *iter,
-               gpointer userdata)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList **songs = (GSList **) userdata;
-        gchar *val = NULL;
-
-        gtk_tree_model_get (model, iter, FILENAME_COLUMN, &val, -1);
-
-        *songs = g_slist_append (*songs, val);
-}
-
-static void
 ario_browser_add_songs (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
 
         gtk_tree_selection_selected_foreach (browser->priv->songs_selection,
-                                             songs_foreach,
+                                             get_selected_songs_foreach,
                                              &songs);
         ario_playlist_append_songs (browser->priv->playlist, songs);
 
@@ -1331,7 +1347,7 @@ ario_browser_cmd_songs_properties (GtkAction *action,
         GtkWidget *songinfos;
 
         gtk_tree_selection_selected_foreach (browser->priv->songs_selection,
-                                             songs_foreach,
+                                             get_selected_songs_foreach,
                                              &paths);
 
         songs = ario_mpd_get_songs_info (browser->priv->mpd,
@@ -1365,20 +1381,19 @@ get_artist_cover (ArioBrowser *browser,
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *coverdownloader;
-        GSList *artists = NULL;
+        GSList *albums = NULL;
 
         coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
 
-        gtk_tree_selection_selected_foreach (browser->priv->artists_selection,
-                                             get_selected_artists_foreach,
-                                             &artists);
-
-        ario_shell_coverdownloader_get_covers_from_artists (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
-                                                            artists,
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                get_albums_foreach,
+                                &albums);
+        ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
+                                                            albums,
                                                             operation);
 
-        g_slist_foreach (artists, (GFunc) g_free, NULL);
-        g_slist_free (artists);
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
 
         gtk_widget_destroy (coverdownloader);
         ario_browser_get_covers_end (browser);
