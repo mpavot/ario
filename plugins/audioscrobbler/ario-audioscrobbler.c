@@ -40,8 +40,8 @@
 #include "lib/md5.h"
 #include "ario-plugin.h"
 
-#define CLIENT_ID "tst" //"ari"
-#define CLIENT_VERSION "1.0" //PACKAGE_VERSION
+#define CLIENT_ID "ari"
+#define CLIENT_VERSION "0.1"
 #define MAX_QUEUE_SIZE 1000
 #define MAX_SUBMIT_SIZE        10
 #define SCROBBLER_URL "http://post.audioscrobbler.com/"
