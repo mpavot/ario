@@ -37,7 +37,7 @@ struct _ArioLyricsCandidate
 {
         gchar *artist;
         gchar *title;
-        gchar *hid;
+        gchar *data;
         ArioLyricsProvider *lyrics_provider;
 };
 

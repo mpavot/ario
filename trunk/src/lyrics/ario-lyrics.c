@@ -129,7 +129,7 @@ ario_lyrics_candidate_free (ArioLyricsCandidate *candidate)
         if (candidate) {
                 g_free (candidate->artist);
                 g_free (candidate->title);
-                g_free (candidate->hid);
+                g_free (candidate->data);
                 g_free (candidate);
         }
 }
@@ -143,7 +143,7 @@ ario_lyrics_candidate_copy (ArioLyricsCandidate *candidate)
 
         ret->artist = g_strdup (candidate->artist);
         ret->title = g_strdup (candidate->title);
-        ret->hid = g_strdup (candidate->hid);
+        ret->data = g_strdup (candidate->data);
         ret->lyrics_provider = candidate->lyrics_provider;
 
         return ret;

@@ -23,10 +23,11 @@
 #include <config.h>
 #include <stdio.h>
 
-#define ARIO_LOG_ERROR(x,args...) {printf("[ERROR](%s:%d) %s : ", __FILE__, __LINE__, __FUNCTION__); printf(x, ##args);printf("\n");}
+#define ARIO_LOG_ERROR(x,args...) {printf("[ERROR](%s:%d) %s : " x "\n", __FILE__, __LINE__, __FUNCTION__, ##args);}
+#define ARIO_LOG_INFO(x,args...) {printf("[info]" x "\n", ##args);}
 
 #ifdef DEBUG
-#define ARIO_LOG_DBG(x,args...) {printf("[debug](%s:%d) %s : ", __FILE__, __LINE__, __FUNCTION__); printf(x, ##args);printf("\n");}
+#define ARIO_LOG_DBG(x,args...) {printf("[debug](%s:%d) %s : " x "\n", __FILE__, __LINE__, __FUNCTION__, ##args);}
 #define ARIO_LOG_FUNCTION_START      ARIO_LOG_DBG("Function start")
 #define ARIO_LOG_FUNCTION_END        ARIO_LOG_DBG("Function end")
 #else
