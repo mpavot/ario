@@ -152,7 +152,7 @@ ario_lyrics_leoslyrics_new (void)
 
 static char *
 ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
-                                    const gchar *song)
+                                           const gchar *song)
 {
         ARIO_LOG_FUNCTION_START
         char *xml_uri;
@@ -216,7 +216,7 @@ ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
 
 static gchar *
 ario_lyrics_leoslyrics_parse_first_xml_file (gchar *xmldata,
-                                      int size)
+                                             int size)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
@@ -264,7 +264,7 @@ ario_lyrics_leoslyrics_parse_first_xml_file (gchar *xmldata,
 
 static ArioLyrics *
 ario_lyrics_leoslyrics_parse_second_xml_file (gchar *xmldata,
-                                       int size)
+                                              int size)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
@@ -347,7 +347,7 @@ ario_lyrics_leoslyrics_get_lyrics (ArioLyricsProvider *lyrics_provider,
 
         /* We construct the uri to make a request */
         xml_uri = ario_lyrics_leoslyrics_make_first_xml_uri (artist,
-                                                      song);
+                                                             song);
 
         if (!xml_uri)
                 return NULL;
@@ -369,7 +369,7 @@ ario_lyrics_leoslyrics_get_lyrics (ArioLyricsProvider *lyrics_provider,
 
         /* We parse the xml file to extract the lyrics hid */
         hid = ario_lyrics_leoslyrics_parse_first_xml_file (xml_data,
-                                                    xml_size);
+                                                           xml_size);
 
         g_free (xml_data);
         if (!hid)
@@ -387,7 +387,7 @@ ario_lyrics_leoslyrics_get_lyrics (ArioLyricsProvider *lyrics_provider,
                 return NULL;
 
         lyrics = ario_lyrics_leoslyrics_parse_second_xml_file (lyrics_data,
-                                                        lyrics_size);
+                                                               lyrics_size);
 
         g_free (lyrics_data);
 
@@ -482,7 +482,7 @@ ario_lyrics_leoslyrics_get_lyrics_candidates (ArioLyricsProvider *lyrics_provide
 
         /* We construct the uri to make a request */
         xml_uri = ario_lyrics_leoslyrics_make_first_xml_uri (artist,
-                                                      title);
+                                                             title);
 
         if (!xml_uri)
                 return;

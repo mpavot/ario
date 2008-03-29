@@ -37,16 +37,16 @@ static void ario_lyrics_preferences_init (ArioLyricsPreferences *lyrics_preferen
 static void ario_lyrics_preferences_finalize (GObject *object);
 static void ario_lyrics_preferences_sync_lyrics_providers (ArioLyricsPreferences *lyrics_preferences);
 G_MODULE_EXPORT void ario_lyrics_preferences_top_button_cb (GtkWidget *widget,
-                                                           ArioLyricsPreferences *lyrics_preferences);
-G_MODULE_EXPORT void ario_lyrics_preferences_up_button_cb (GtkWidget *widget,
-                                                          ArioLyricsPreferences *lyrics_preferences);
-G_MODULE_EXPORT void ario_lyrics_preferences_down_button_cb (GtkWidget *widget,
                                                             ArioLyricsPreferences *lyrics_preferences);
+G_MODULE_EXPORT void ario_lyrics_preferences_up_button_cb (GtkWidget *widget,
+                                                           ArioLyricsPreferences *lyrics_preferences);
+G_MODULE_EXPORT void ario_lyrics_preferences_down_button_cb (GtkWidget *widget,
+                                                             ArioLyricsPreferences *lyrics_preferences);
 G_MODULE_EXPORT void ario_lyrics_preferences_bottom_button_cb (GtkWidget *widget,
-                                                              ArioLyricsPreferences *lyrics_preferences);
+                                                               ArioLyricsPreferences *lyrics_preferences);
 static void ario_lyrics_preferences_lyrics_toggled_cb (GtkCellRendererToggle *cell,
-                                                     gchar *path_str,
-                                                     ArioLyricsPreferences *lyrics_preferences);
+                                                       gchar *path_str,
+                                                       ArioLyricsPreferences *lyrics_preferences);
 
 
 struct ArioLyricsPreferencesPrivate
@@ -88,8 +88,8 @@ ario_lyrics_preferences_get_type (void)
                 };
 
                 ario_lyrics_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                      "ArioLyricsPreferences",
-                                                                      &our_info, 0);
+                                                                       "ArioLyricsPreferences",
+                                                                       &our_info, 0);
         }
 
         return ario_lyrics_preferences_type;
@@ -136,9 +136,9 @@ ario_lyrics_preferences_new (void)
         rb_glade_boldify_label (xml, "lyrics_sources_frame_label");
 
         lyrics_preferences->priv->lyrics_model = gtk_list_store_new (N_COLUMN,
-                                                                    G_TYPE_BOOLEAN,
-                                                                    G_TYPE_STRING,
-                                                                    G_TYPE_STRING);
+                                                                     G_TYPE_BOOLEAN,
+                                                                     G_TYPE_STRING,
+                                                                     G_TYPE_STRING);
         gtk_tree_view_set_model (GTK_TREE_VIEW (lyrics_preferences->priv->lyrics_treeview),
                                  GTK_TREE_MODEL (lyrics_preferences->priv->lyrics_model));
         renderer = gtk_cell_renderer_toggle_new ();
@@ -229,14 +229,14 @@ ario_lyrics_preferences_sync_lyrics_providers (ArioLyricsPreferences *lyrics_pre
                                 g_free (tmp_id);
                         } while (gtk_tree_model_iter_next (model, &iter));
                 }
-                
+
                 g_free (id);
         }
 }
 
 void
 ario_lyrics_preferences_top_button_cb (GtkWidget *widget,
-                                      ArioLyricsPreferences *lyrics_preferences)
+                                       ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
@@ -264,7 +264,7 @@ ario_lyrics_preferences_top_button_cb (GtkWidget *widget,
 
 void
 ario_lyrics_preferences_up_button_cb (GtkWidget *widget,
-                                     ArioLyricsPreferences *lyrics_preferences)
+                                      ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
@@ -295,7 +295,7 @@ ario_lyrics_preferences_up_button_cb (GtkWidget *widget,
 
 void
 ario_lyrics_preferences_down_button_cb (GtkWidget *widget,
-                                       ArioLyricsPreferences *lyrics_preferences)
+                                        ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
@@ -324,7 +324,7 @@ ario_lyrics_preferences_down_button_cb (GtkWidget *widget,
 
 void
 ario_lyrics_preferences_bottom_button_cb (GtkWidget *widget,
-                                         ArioLyricsPreferences *lyrics_preferences)
+                                          ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
@@ -352,8 +352,8 @@ ario_lyrics_preferences_bottom_button_cb (GtkWidget *widget,
 
 static void
 ario_lyrics_preferences_lyrics_toggled_cb (GtkCellRendererToggle *cell,
-                                         gchar *path_str,
-                                         ArioLyricsPreferences *lyrics_preferences)
+                                           gchar *path_str,
+                                           ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START
         gboolean state;

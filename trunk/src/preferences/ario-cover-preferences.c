@@ -273,7 +273,7 @@ ario_cover_preferences_sync_cover_providers (ArioCoverPreferences *cover_prefere
                                 g_free (tmp_id);
                         } while (gtk_tree_model_iter_next (model, &iter));
                 }
-                
+
                 g_free (id);
         }
 }

@@ -32,13 +32,13 @@ static void ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
 static void ario_stats_preferences_init (ArioStatsPreferences *stats_preferences);
 static void ario_stats_preferences_finalize (GObject *object);
 static void ario_stats_preferences_set_property (GObject *object,
-                                                      guint prop_id,
-                                                      const GValue *value,
-                                                      GParamSpec *pspec);
+                                                 guint prop_id,
+                                                 const GValue *value,
+                                                 GParamSpec *pspec);
 static void ario_stats_preferences_get_property (GObject *object,
-                                                      guint prop_id,
-                                                      GValue *value,
-                                                      GParamSpec *pspec);
+                                                 guint prop_id,
+                                                 GValue *value,
+                                                 GParamSpec *pspec);
 static void ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences);
 static void ario_stats_preferences_stats_changed_cb (ArioMpd *mpd,
                                                      ArioStatsPreferences *stats_preferences);
@@ -193,9 +193,9 @@ ario_stats_preferences_finalize (GObject *object)
 
 static void
 ario_stats_preferences_set_property (GObject *object,
-                                          guint prop_id,
-                                          const GValue *value,
-                                          GParamSpec *pspec)
+                                     guint prop_id,
+                                     const GValue *value,
+                                     GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioStatsPreferences *stats_preferences = ARIO_STATS_PREFERENCES (object);
@@ -215,9 +215,9 @@ ario_stats_preferences_set_property (GObject *object,
 
 static void 
 ario_stats_preferences_get_property (GObject *object,
-                                          guint prop_id,
-                                          GValue *value,
-                                          GParamSpec *pspec)
+                                     guint prop_id,
+                                     GValue *value,
+                                     GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioStatsPreferences *stats_preferences = ARIO_STATS_PREFERENCES (object);
@@ -275,7 +275,7 @@ ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences)
 
 static void
 ario_stats_preferences_stats_changed_cb (ArioMpd *mpd,
-                                          ArioStatsPreferences *stats_preferences)
+                                         ArioStatsPreferences *stats_preferences)
 {
         ARIO_LOG_FUNCTION_START
         ario_stats_preferences_sync_stats (stats_preferences);
