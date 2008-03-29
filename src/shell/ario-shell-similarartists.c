@@ -290,6 +290,12 @@ ario_shell_similarartists_new (ArioMpd *mpd)
         GtkWidget *treeview;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
+        gchar *artist;
+
+        artist = ario_mpd_get_current_artist (mpd);
+
+        if (!artist)
+                return NULL;
 
         shell_similarartists = g_object_new (TYPE_ARIO_SHELL_SIMILARARTISTS, NULL);
 
@@ -341,7 +347,7 @@ ario_shell_similarartists_new (ArioMpd *mpd)
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 
-        shell_similarartists->priv->artist = ario_mpd_get_current_artist (mpd);
+        shell_similarartists->priv->artist = artist;
         shell_similarartists->priv->thread = g_thread_create ((GThreadFunc) ario_shell_similarartists_get_artists,
                                                                shell_similarartists,
                                                                TRUE,
