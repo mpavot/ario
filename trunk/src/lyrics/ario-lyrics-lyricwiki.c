@@ -40,6 +40,12 @@ ArioLyrics* ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provide
                                                const char *artist,
                                                const char *song,
                                                const char *file);
+static void ario_lyrics_lyricwiki_get_lyrics_candidates (ArioLyricsProvider *lyrics_provider,
+                                                         const gchar *artist,
+                                                         const gchar *song,
+                                                         GSList **candidates);
+static ArioLyrics * ario_lyrics_lyricwiki_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_provider,
+                                                                     const ArioLyricsCandidate *candidate);
 
 struct ArioLyricsLyricwikiPrivate
 {
@@ -101,6 +107,8 @@ ario_lyrics_lyricwiki_class_init (ArioLyricsLyricwikiClass *klass)
         lyrics_provider_class->get_id = ario_lyrics_lyricwiki_get_id;
         lyrics_provider_class->get_name = ario_lyrics_lyricwiki_get_name;
         lyrics_provider_class->get_lyrics = ario_lyrics_lyricwiki_get_lyrics;
+        lyrics_provider_class->get_lyrics_candidates = ario_lyrics_lyricwiki_get_lyrics_candidates;
+        lyrics_provider_class->get_lyrics_from_candidate = ario_lyrics_lyricwiki_get_lyrics_from_candidate;
 }
 
 static void
@@ -274,6 +282,55 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                                 lyrics_size);
 
         g_free (lyrics_data);
+
+        return lyrics;
+}
+
+static void
+ario_lyrics_lyricwiki_get_lyrics_candidates (ArioLyricsProvider *lyrics_provider,
+                                             const gchar *artist,
+                                             const gchar *title,
+                                             GSList **candidates)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioLyrics *lyrics;
+        ArioLyricsCandidate *candidate;
+
+        lyrics = ario_lyrics_lyricwiki_get_lyrics (lyrics_provider,
+                                                   artist,
+                                                   title,
+                                                   NULL);
+        if (!lyrics)
+                return;
+
+        candidate = (ArioLyricsCandidate *) g_malloc0 (sizeof (ArioLyricsCandidate));
+        candidate->artist = g_strdup (lyrics->artist);
+        candidate->title = g_strdup (lyrics->title);
+        // FIXME: We put the data in the hid field as we can' really get candidates for lyricwiki
+        candidate->hid = g_strdup (lyrics->lyrics);
+        candidate->lyrics_provider = lyrics_provider;
+
+        *candidates = g_slist_append (*candidates, candidate);
+
+        ario_lyrics_free (lyrics);
+}
+
+static ArioLyrics *
+ario_lyrics_lyricwiki_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_provider,
+                                                 const ArioLyricsCandidate *candidate)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioLyrics *lyrics;
+
+        lyrics = (ArioLyrics *) g_malloc0 (sizeof (ArioLyrics));
+        lyrics->artist = g_strdup (candidate->artist);
+        lyrics->title = g_strdup (candidate->title);
+        lyrics->lyrics = g_strdup (candidate->hid);
+
+        ario_lyrics_prepend_infos (lyrics);
+        ario_lyrics_save_lyrics (candidate->artist,
+                                 candidate->title,
+                                 lyrics->lyrics);
 
         return lyrics;
 }
