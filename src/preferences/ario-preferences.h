@@ -50,6 +50,8 @@
 #define CONF_SOURCE_LIST                "/apps/ario/state/sources-order"
 #define COVER_PROVIDERS_LIST            "/apps/ario/cover-providers"
 #define COVER_ACTIVE_PROVIDERS_LIST     "/apps/ario/active-cover-providers"
+#define LYRICS_PROVIDERS_LIST           "/apps/ario/lyrics-providers"
+#define LYRICS_ACTIVE_PROVIDERS_LIST    "/apps/ario/active-lyrics-providers"
 #define CONF_MUSIC_DIR                  "/apps/ario/music-dir"
 
 enum

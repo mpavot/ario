@@ -30,6 +30,7 @@ glade_DATA = glade/connection-prefs.glade	\
 	     glade/server-prefs.glade		\
 	     glade/cover-progress.glade         \
 	     glade/lyrics-select.glade          \
+	     glade/lyrics-prefs.glade           \
 	     glade/cover-select.glade	        \
 	     glade/song-infos.glade	        \
 	     glade/similar-artists.glade        \

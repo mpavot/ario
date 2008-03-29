@@ -22,7 +22,7 @@
 #define __ARIO_SHELL_LYRICSSELECT_H
 
 G_BEGIN_DECLS
-#include "ario-lyrics.h"
+#include "lyrics/ario-lyrics.h"
 
 #define TYPE_ARIO_SHELL_LYRICSSELECT         (ario_shell_lyricsselect_get_type ())
 #define ARIO_SHELL_LYRICSSELECT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_SHELL_LYRICSSELECT, ArioShellLyricsselect))

@@ -10,8 +10,6 @@ INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 
 ario_SOURCES = \
 	ario-debug.h\
-	ario-lyrics.c\
-	ario-lyrics.h\
 	ario-main.c\
 	ario-mpd.c\
 	ario-mpd.h\
@@ -44,6 +42,16 @@ ario_SOURCES = \
 	lib/rb-glade-helpers.h\
 	lib/libsexy/sexy-tooltip.c\
 	lib/libsexy/sexy-tooltip.h\
+        lyrics/ario-lyrics-leoslyrics.c\
+        lyrics/ario-lyrics-leoslyrics.h\
+        lyrics/ario-lyrics-lyricwiki.c\
+        lyrics/ario-lyrics-lyricwiki.h\
+        lyrics/ario-lyrics-manager.c\
+        lyrics/ario-lyrics-manager.h\
+        lyrics/ario-lyrics-provider.c\
+        lyrics/ario-lyrics-provider.h\
+        lyrics/ario-lyrics.c\
+        lyrics/ario-lyrics.h\
 	plugins/ario-module.c\
 	plugins/ario-module.h\
 	plugins/ario-plugin.c\
@@ -61,6 +69,8 @@ ario_SOURCES = \
 	preferences/ario-cover-preferences.h\
 	preferences/ario-interface-preferences.c\
 	preferences/ario-interface-preferences.h\
+	preferences/ario-lyrics-preferences.c\
+	preferences/ario-lyrics-preferences.h\
 	preferences/ario-proxy-preferences.c\
 	preferences/ario-proxy-preferences.h\
 	preferences/ario-server-preferences.c\

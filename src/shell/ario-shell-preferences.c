@@ -26,6 +26,7 @@
 #include "shell/ario-shell-preferences.h"
 #include "preferences/ario-connection-preferences.h"
 #include "preferences/ario-cover-preferences.h"
+#include "preferences/ario-lyrics-preferences.h"
 #include "preferences/ario-interface-preferences.h"
 #include "preferences/ario-proxy-preferences.h"
 #include "preferences/ario-server-preferences.h"
@@ -177,6 +178,11 @@ ario_shell_preferences_new (ArioMpd *mpd)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Covers")));
+
+        widget = ario_lyrics_preferences_new ();
+        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
+                                  widget,
+                                  gtk_label_new (_("Lyrics")));
 
         widget = ario_interface_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
