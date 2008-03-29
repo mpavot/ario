@@ -37,9 +37,9 @@ static void ario_lyrics_lyricwiki_class_init (ArioLyricsLyricwikiClass *klass);
 static void ario_lyrics_lyricwiki_init (ArioLyricsLyricwiki *lyrics_lyricwiki);
 static void ario_lyrics_lyricwiki_finalize (GObject *object);
 ArioLyrics* ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
-                                               const char *artist,
-                                               const char *song,
-                                               const char *file);
+                                              const char *artist,
+                                              const char *song,
+                                              const char *file);
 static void ario_lyrics_lyricwiki_get_lyrics_candidates (ArioLyricsProvider *lyrics_provider,
                                                          const gchar *artist,
                                                          const gchar *song,
@@ -142,7 +142,7 @@ ario_lyrics_lyricwiki_new (void)
         ArioLyricsLyricwiki *lyricwiki;
 
         lyricwiki = g_object_new (TYPE_ARIO_LYRICS_LYRICWIKI,
-                                   NULL);
+                                  NULL);
 
         g_return_val_if_fail (lyricwiki->priv != NULL, NULL);
 
@@ -151,7 +151,7 @@ ario_lyrics_lyricwiki_new (void)
 
 static ArioLyrics *
 ario_lyrics_lyricwiki_parse_xml_file (gchar *xmldata,
-                               int size)
+                                      int size)
 {
         ARIO_LOG_FUNCTION_START
         xmlDocPtr doc;
@@ -236,24 +236,24 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
         ArioLyrics *lyrics = NULL;
         xmlChar *xml_artist;
         xmlChar *xml_title;
-	GString *msg;
+        GString *msg;
 
         xml_artist = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) artist);
         xml_title = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) title);
 
-	msg = g_string_new ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-	                    "<SOAP-ENV:Envelope SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
-        		    "xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" "
-        		    "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
-        		    "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
-        		    "xmlns:SOAP-ENC=\"http://schemas.xmlsoapL.org/soap/encoding/\" "
-        		    "xmlns:tns=\"urn:LyricWiki\">"
-        		    "<SOAP-ENV:Body>\n<tns:getSong xmlns:tns=\"urn:LyricWiki\">"
-	                    "<artist xsi:type=\"xsd:string\">");
-	g_string_append(msg, (const gchar *) xml_artist); 
-	g_string_append(msg, "</artist><song xsi:type=\"xsd:string\">");
-	g_string_append(msg, (const gchar *) xml_title);
-	g_string_append(msg, "</song></tns:getSong></SOAP-ENV:Body></SOAP-ENV:Envelope>\n");
+        msg = g_string_new ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                            "<SOAP-ENV:Envelope SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
+                            "xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+                            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+                            "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                            "xmlns:SOAP-ENC=\"http://schemas.xmlsoapL.org/soap/encoding/\" "
+                            "xmlns:tns=\"urn:LyricWiki\">"
+                            "<SOAP-ENV:Body>\n<tns:getSong xmlns:tns=\"urn:LyricWiki\">"
+                            "<artist xsi:type=\"xsd:string\">");
+        g_string_append(msg, (const gchar *) xml_artist); 
+        g_string_append(msg, "</artist><song xsi:type=\"xsd:string\">");
+        g_string_append(msg, (const gchar *) xml_title);
+        g_string_append(msg, "</song></tns:getSong></SOAP-ENV:Body></SOAP-ENV:Envelope>\n");
         xmlFree (xml_artist);
         xmlFree (xml_title);
 
@@ -267,7 +267,7 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                  headers,
                                  &lyrics_size,
                                  &lyrics_data);
-	curl_slist_free_all (headers);
+        curl_slist_free_all (headers);
         g_string_free (msg, FALSE);
 
         if (lyrics_size == 0)
@@ -279,7 +279,7 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
         }
 
         lyrics = ario_lyrics_lyricwiki_parse_xml_file (lyrics_data,
-                                                lyrics_size);
+                                                       lyrics_size);
 
         g_free (lyrics_data);
 

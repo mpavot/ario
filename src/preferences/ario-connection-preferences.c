@@ -225,19 +225,19 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
                 g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->name_entry),
                                                  G_CALLBACK (ario_connection_preferences_name_changed_cb),
                                                  connection_preferences);
-                
+
                 g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->host_entry),
                                                  G_CALLBACK (ario_connection_preferences_host_changed_cb),
                                                  connection_preferences);
-                
+
                 g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->port_spinbutton),
                                                  G_CALLBACK (ario_connection_preferences_port_changed_cb),
                                                  connection_preferences);
-                
+
                 g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->password_entry),
                                                  G_CALLBACK (ario_connection_preferences_password_changed_cb),
                                                  connection_preferences);
-                                
+
                 g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->musicdir_entry),
                                                  G_CALLBACK (ario_connection_preferences_musicdir_changed_cb),
                                                  connection_preferences);
