@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-29 10:38+0100\n"
+"POT-Creation-Date: 2008-03-29 11:21+0100\n"
 "PO-Revision-Date: 2008-03-10 21:45+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -1002,7 +1002,7 @@ msgstr ""
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1232
 msgid "Today %I:%M %p"
-msgstr ""
+msgstr "Aujourd'hui %I:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
@@ -1136,7 +1136,7 @@ msgid "Last.fm"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
-msgid "Submits song information to last.fm and plays last.fm radio streams"
+msgid "Submits song information to last.fm"
 msgstr ""
 
 #: ../plugins/filesystem/ario-filesystem.c:180

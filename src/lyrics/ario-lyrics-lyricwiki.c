@@ -306,8 +306,7 @@ ario_lyrics_lyricwiki_get_lyrics_candidates (ArioLyricsProvider *lyrics_provider
         candidate = (ArioLyricsCandidate *) g_malloc0 (sizeof (ArioLyricsCandidate));
         candidate->artist = g_strdup (lyrics->artist);
         candidate->title = g_strdup (lyrics->title);
-        // FIXME: We put the data in the hid field as we can' really get candidates for lyricwiki
-        candidate->hid = g_strdup (lyrics->lyrics);
+        candidate->data = g_strdup (lyrics->lyrics);
         candidate->lyrics_provider = lyrics_provider;
 
         *candidates = g_slist_append (*candidates, candidate);
@@ -325,7 +324,7 @@ ario_lyrics_lyricwiki_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_prov
         lyrics = (ArioLyrics *) g_malloc0 (sizeof (ArioLyrics));
         lyrics->artist = g_strdup (candidate->artist);
         lyrics->title = g_strdup (candidate->title);
-        lyrics->lyrics = g_strdup (candidate->hid);
+        lyrics->lyrics = g_strdup (candidate->data);
 
         ario_lyrics_prepend_infos (lyrics);
         ario_lyrics_save_lyrics (candidate->artist,

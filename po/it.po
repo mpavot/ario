@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-29 10:38+0100\n"
+"POT-Creation-Date: 2008-03-29 11:21+0100\n"
 "PO-Revision-Date: 2008-02-28 19:43+0000\n"
 "Last-Translator: HDS619 <thestreet@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1102,7 +1102,7 @@ msgid "Last.fm"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
-msgid "Submits song information to last.fm and plays last.fm radio streams"
+msgid "Submits song information to last.fm"
 msgstr ""
 
 #: ../plugins/filesystem/ario-filesystem.c:180

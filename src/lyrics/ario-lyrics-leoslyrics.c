@@ -435,7 +435,7 @@ ario_lyrics_leoslyrics_parse_first_xml_file_for_candidates (ArioLyricsProvider *
                                         if (hid) {
                                                 lyrics = (ArioLyricsCandidate *) g_malloc0 (sizeof (ArioLyricsCandidate));
                                                 lyrics->lyrics_provider = lyrics_provider;
-                                                lyrics->hid = g_strdup ((const gchar *) hid);
+                                                lyrics->data = g_strdup ((const gchar *) hid);
                                                 xmlFree (hid);
                                                 for (cur3 = cur2->xmlChildrenNode; cur3; cur3 = cur3->next) {
                                                         if ((cur3->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur3->name, (const xmlChar *) "title"))) {
@@ -521,7 +521,7 @@ ario_lyrics_leoslyrics_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_pro
         ArioLyrics *lyrics = NULL;
         gchar *lyrics_uri;
 
-        lyrics_uri = g_strdup_printf (LEOSLYRICS_SECOND_URI, candidate->hid);
+        lyrics_uri = g_strdup_printf (LEOSLYRICS_SECOND_URI, candidate->data);
 
         ario_util_download_file (lyrics_uri,
                                  NULL, 0, NULL,
