@@ -26,7 +26,8 @@
 #include "widgets/ario-lyrics-editor.h"
 #include "shell/ario-shell-lyricsselect.h"
 #include "ario-debug.h"
-#include "ario-lyrics.h"
+#include "lyrics/ario-lyrics.h"
+#include "lyrics/ario-lyrics-manager.h"
 #include "ario-util.h"
 
 static void ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass);
@@ -254,11 +255,9 @@ ario_lyrics_editor_search_cb (GtkButton *button,
                         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
                         data->artist = g_strdup (artist);
                         data->title = g_strdup (lyrics_editor->priv->data->title);
-                        data->hid = g_strdup (candidate->hid);
+                        data->candidate = candidate;
 
                         g_async_queue_push (lyrics_editor->priv->queue, data);
-
-                        ario_lyrics_candidates_free (candidate);
                 }
         }
         gtk_widget_destroy (lyricsselect);
@@ -271,7 +270,7 @@ ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
         if (data) {
                 g_free (data->artist);
                 g_free (data->title);
-                g_free (data->hid);
+                ario_lyrics_candidate_free (data->candidate);
                 g_free (data);
         }
 }
@@ -299,13 +298,14 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
 
                 gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Downloading lyrics..."), -1);
 
-                if (data->hid) {
-                        lyrics = ario_lyrics_get_lyrics_from_hid (data->artist,
-                                                                  data->title,
-                                                                  data->hid);
+                if (data->candidate) {
+                        lyrics = ario_lyrics_provider_get_lyrics_from_candidate (data->candidate->lyrics_provider,
+                                                                                 data->candidate);
                 } else {
-                        lyrics = ario_lyrics_get_lyrics (data->artist,
-                                                         data->title);
+                        lyrics = ario_lyrics_manager_get_lyrics (ario_lyrics_manager_get_instance (),
+                                                                 data->artist,
+                                                                 data->title,
+                                                                 NULL);
                 }
 
                 if (lyrics

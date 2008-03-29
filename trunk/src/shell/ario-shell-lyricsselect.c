@@ -22,6 +22,7 @@
 
 #include <glib/gi18n.h>
 #include "shell/ario-shell-lyricsselect.h"
+#include "lyrics/ario-lyrics-manager.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 
@@ -48,7 +49,7 @@ enum
 {
         ARTIST_COLUMN,
         TITLE_COLUMN,
-        HID_COLUMN,
+        CANDIDATE_COLUMN,
         N_COLUMN
 };
 
@@ -119,7 +120,7 @@ ario_shell_lyricsselect_init (ArioShellLyricsselect *ario_shell_lyricsselect)
 {
         ARIO_LOG_FUNCTION_START
         ario_shell_lyricsselect->priv = g_new0 (ArioShellLyricsselectPrivate, 1);
-        ario_shell_lyricsselect->priv->liststore = gtk_list_store_new (N_COLUMN, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+        ario_shell_lyricsselect->priv->liststore = gtk_list_store_new (N_COLUMN, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER);
         ario_shell_lyricsselect->priv->lyrics = NULL;
 }
 
@@ -136,7 +137,7 @@ ario_shell_lyricsselect_finalize (GObject *object)
 
         g_return_if_fail (ario_shell_lyricsselect->priv != NULL);
 
-        g_slist_foreach (ario_shell_lyricsselect->priv->lyrics, (GFunc) ario_lyrics_candidates_free, NULL);
+        g_slist_foreach (ario_shell_lyricsselect->priv->lyrics, (GFunc) ario_lyrics_candidate_free, NULL);
         g_slist_free (ario_shell_lyricsselect->priv->lyrics);
 
         g_free (ario_shell_lyricsselect->priv);
@@ -304,11 +305,13 @@ ario_shell_lyricsselect_search_cb (GtkWidget *widget,
         artist = gtk_editable_get_chars (GTK_EDITABLE (ario_shell_lyricsselect->priv->artist_entry), 0, -1);
         title = gtk_editable_get_chars (GTK_EDITABLE (ario_shell_lyricsselect->priv->title_entry), 0, -1);
 
-        g_slist_foreach (ario_shell_lyricsselect->priv->lyrics, (GFunc) ario_lyrics_candidates_free, NULL);
+        g_slist_foreach (ario_shell_lyricsselect->priv->lyrics, (GFunc) ario_lyrics_candidate_free, NULL);
         g_slist_free (ario_shell_lyricsselect->priv->lyrics);
         ario_shell_lyricsselect->priv->lyrics = NULL;
 
-        ario_shell_lyricsselect->priv->lyrics = ario_lyrics_get_lyrics_candidates (artist, title);
+        ario_lyrics_manager_get_lyrics_candidates (ario_lyrics_manager_get_instance(),
+                                                   artist, title,
+                                                   &ario_shell_lyricsselect->priv->lyrics);
         g_free (artist);
         g_free (title);
 
@@ -338,8 +341,8 @@ ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *ario_shell_lyricssel
                                     candidate->artist,
                                     TITLE_COLUMN, 
                                     candidate->title,
-                                    HID_COLUMN, 
-                                    candidate->hid, -1);
+                                    CANDIDATE_COLUMN, 
+                                    candidate, -1);
         }
 
         tree_path = gtk_tree_path_new_from_indices (0, -1);
@@ -370,11 +373,8 @@ ario_shell_lyricsselect_get_lyrics_candidate (ArioShellLyricsselect *ario_shell_
         gtk_tree_model_get_iter (tree_model,
                                  &iter,
                                  path);
-        candidate = (ArioLyricsCandidate *) g_malloc (sizeof (ArioLyricsCandidate));;
-        gtk_tree_model_get (tree_model, &iter, ARTIST_COLUMN, &candidate->artist, -1);
-        gtk_tree_model_get (tree_model, &iter, TITLE_COLUMN, &candidate->title, -1);
-        gtk_tree_model_get (tree_model, &iter, HID_COLUMN, &candidate->hid, -1);
+        gtk_tree_model_get (tree_model, &iter, CANDIDATE_COLUMN, &candidate, -1);
 
-        return candidate;
+        return ario_lyrics_candidate_copy (candidate);
 }
 

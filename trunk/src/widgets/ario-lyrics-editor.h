@@ -18,6 +18,7 @@
  */
 
 #include <gtk/gtkvbox.h>
+#include "lyrics/ario-lyrics-provider.h"
 
 #ifndef __ARIO_LYRICS_EDITOR_H
 #define __ARIO_LYRICS_EDITOR_H
@@ -49,7 +50,7 @@ typedef struct ArioLyricsEditorData
 {
         gchar *artist;
         gchar *title;
-        gchar *hid;
+        ArioLyricsCandidate *candidate;
         gboolean finalize;
 } ArioLyricsEditorData;
 

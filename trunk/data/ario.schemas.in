@@ -347,9 +347,9 @@
         <owner>ario</owner>
         <type>list</type>
         <list_type>string</list_type>
-        <default>[local,amazon]</default>
+        <default>[local,amazon,lastfm]</default>
         <locale name="C">
-	<short>Covers providers</short>
+	<short>Covers Sources</short>
         </locale>
       </schema>
 
@@ -359,9 +359,33 @@
         <owner>ario</owner>
         <type>list</type>
         <list_type>string</list_type>
-        <default>[local,amazon]</default>
+        <default>[local,amazon,lastfm]</default>
         <locale name="C">
-	<short>Active covers providers</short>
+	<short>Active covers sources</short>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/lyrics-providers</key>
+        <applyto>/apps/ario/lyrics-providers</applyto>
+        <owner>ario</owner>
+        <type>list</type>
+        <list_type>string</list_type>
+        <default>[lyricwiki,leoslyrics]</default>
+        <locale name="C">
+	<short>Lyrics Sources</short>
+        </locale>
+      </schema>
+
+      <schema>
+        <key>/schemas/apps/ario/active-lyrics-providers</key>
+        <applyto>/apps/ario/active-lyrics-providers</applyto>
+        <owner>ario</owner>
+        <type>list</type>
+        <list_type>string</list_type>
+        <default>[lyricwiki,leoslyrics]</default>
+        <locale name="C">
+	<short>Active lyrics sources</short>
         </locale>
       </schema>
 
