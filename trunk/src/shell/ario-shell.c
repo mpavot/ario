@@ -28,6 +28,7 @@
 #include "ario-mpd.h"
 #include "covers/ario-cover-handler.h"
 #include "covers/ario-cover-manager.h"
+#include "lyrics/ario-lyrics-manager.h"
 #include "widgets/ario-playlist.h"
 #include "widgets/ario-header.h"
 #include "widgets/ario-status-bar.h"
