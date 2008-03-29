@@ -272,9 +272,10 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                                     -1);
                 g_free (xml_data);
                 g_object_unref (G_OBJECT (pixbuf));
-
+#ifndef WIN32
                 while (gtk_events_pending ())
                         gtk_main_iteration ();
+#endif
         }
 
         g_slist_foreach (similar_artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);

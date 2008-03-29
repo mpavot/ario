@@ -519,6 +519,7 @@ ario_shell_shutdown (ArioShell *shell)
                 ario_sourcemanager_shutdown (ARIO_SOURCEMANAGER (shell->priv->sourcemanager));
 
                 ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
+                ario_lyrics_manager_shutdown (ario_lyrics_manager_get_instance ());
         }
 }
 
