@@ -26,8 +26,7 @@
 #include "ario-debug.h"
 #include "ario-util.h"
 
-static xmlDocPtr doc;
-static char *xml_filename;
+static GHashTable *hash;
 static GSList *notifications;
 static guint notification_counter = 0;
 
@@ -56,71 +55,18 @@ static char *
 ario_conf_get (const char *key)
 {
         ARIO_LOG_FUNCTION_START
-        xmlNodePtr cur;
-        xmlChar *xml_key;
-        xmlChar *xml_value;
-        gchar *ret = NULL;
-
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL)
-                return NULL;
-
-        for (cur = cur->children; cur; cur = cur->next) {
-                /* For each "option" entry */
-                if (!xmlStrcmp (cur->name, (const xmlChar *) "option")) {
-
-                        xml_key = xmlGetProp (cur, (const unsigned char *) "key");
-                        if (!xmlStrcmp (xml_key, (const xmlChar *) key)) {
-                                xml_value = xmlNodeGetContent (cur);
-                                ret = g_strdup ((char *) xml_value);
-                                xmlFree(xml_value);
-                                xmlFree(xml_key);
-                                break;
-                        }
-                        xmlFree(xml_key);
-                }
-        }
-
-        return ret;
+        return g_hash_table_lookup (hash, key);
 }
 
 static void
 ario_conf_set (const char *key,
-               const char *value)
+               char *value)
 {
         ARIO_LOG_FUNCTION_START
-        xmlNodePtr cur;
-        xmlChar *xml_key;
-        xmlChar *xml_value;
         GSList *tmp;
         ArioConfNotifyData *data;
 
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL)
-                return;
-
-        for (cur = cur->children; cur; cur = cur->next) {
-                /* For each "option" entry */
-                if (!xmlStrcmp (cur->name, (const xmlChar *) "option")) {
-
-                        xml_key = xmlGetProp (cur, (const unsigned char *) "key");
-                        if (!xmlStrcmp (xml_key, (const xmlChar *) key)) {
-                                xml_value = xmlEncodeEntitiesReentrant (doc, (const xmlChar *) value);
-                                xmlNodeSetContent (cur, xml_value);
-                                xmlFree (xml_value);
-                                xmlFree (xml_key);
-                                break;
-                        }
-                        xmlFree (xml_key);
-                }
-        }
-
-        if (!cur) {
-                /* We add a new "option" entry */
-                cur = xmlNewChild (xmlDocGetRootElement(doc), NULL, (const xmlChar *) "option", NULL);
-                xmlSetProp (cur, (const xmlChar *) "key", (const xmlChar *) key);
-                xmlNodeAddContent (cur, (const xmlChar *) value);
-        }
+        g_hash_table_replace (hash, g_strdup (key), value);
 
         /* Notifications */
         for (tmp = notifications; tmp; tmp = g_slist_next (tmp)) {
@@ -139,9 +85,9 @@ ario_conf_set_boolean (const char *key,
                        gboolean boolean_value)
 {
         if (boolean_value)
-                ario_conf_set (key, "1");
+                ario_conf_set (key, g_strdup ("1"));
         else
-                ario_conf_set (key, "0");
+                ario_conf_set (key, g_strdup ("0"));
 }
 
 gboolean
@@ -155,20 +101,15 @@ ario_conf_get_boolean (const char *key,
                 return default_value;
 
         ret = !strcmp (value, "1");
-        g_free (value);
 
         return ret;
 }
 
 void
 ario_conf_set_integer (const char *key,
-                            int int_value)
+                       int int_value)
 {
-        gchar *char_value = g_strdup_printf ("%d", int_value);
-
-        ario_conf_set (key, char_value);
-
-        g_free (char_value);
+        ario_conf_set (key, g_strdup_printf ("%d", int_value));
 }
 
 int
@@ -182,7 +123,6 @@ ario_conf_get_integer (const char *key,
                 return default_value;
 
         ret = atoi (value);
-        g_free (value);
 
         return ret;
 }
@@ -191,11 +131,7 @@ void
 ario_conf_set_float (const char *key,
                             gfloat float_value)
 {
-        gchar *char_value = g_strdup_printf ("%f", float_value);
-
-        ario_conf_set (key, char_value);
-
-        g_free (char_value);
+        ario_conf_set (key, g_strdup_printf ("%f", float_value));
 }
 
 gfloat
@@ -209,8 +145,6 @@ ario_conf_get_float (const char *key,
                 return default_value;
 
         ret = atof (value);
-        g_free (value);
-
         return ret;
 }
 
@@ -218,7 +152,7 @@ void
 ario_conf_set_string (const char *key,
                       const char *string_value)
 {
-        ario_conf_set (key, string_value);
+        ario_conf_set (key, g_strdup (string_value));
 }
 
 char *
@@ -230,12 +164,12 @@ ario_conf_get_string (const char *key,
         if (!value)
                 return g_strdup (default_value);
 
-        return value;
+        return g_strdup (value);
 }
 
 void
 ario_conf_set_string_slist (const char *key,
-                                const GSList *slist)
+                            const GSList *slist)
 {
         GString* value = NULL;
         const GSList *tmp;
@@ -253,7 +187,7 @@ ario_conf_set_string_slist (const char *key,
 
         ario_conf_set (key, value->str);
 
-        g_string_free (value, TRUE);
+        g_string_free (value, FALSE);
 }
 
 GSList *
@@ -272,9 +206,50 @@ ario_conf_get_string_slist (const char *key)
         for (i=0; values[i]!=NULL && g_utf8_collate (values[i], ""); ++i)
                 ret = g_slist_append (ret, g_strdup (values[i]));
 
-        g_strfreev (values);
+//        g_strfreev (values);
 
         return ret;
+}
+
+static void
+ario_conf_shutdown_foreach (gchar *key,
+                            gchar *value,
+                            xmlNodePtr root)
+{
+        ARIO_LOG_FUNCTION_START
+        xmlNodePtr cur;
+
+        /* We add a new "option" entry */
+        cur = xmlNewChild (root, NULL, (const xmlChar *) "option", NULL);
+        xmlSetProp (cur, (const xmlChar *) "key", (const xmlChar *) key);
+        xmlNodeAddContent (cur, (const xmlChar *) value);
+}
+
+static gboolean
+ario_conf_save (gpointer data)
+{
+        ARIO_LOG_FUNCTION_START
+        xmlNodePtr cur;
+        xmlDocPtr doc;
+        char *xml_filename;
+
+        doc = xmlNewDoc (XML_VERSION);
+        cur = xmlNewNode (NULL, (const xmlChar *) XML_ROOT_NAME);
+        xmlDocSetRootElement (doc, cur);
+
+        g_hash_table_foreach (hash,
+                              (GHFunc) ario_conf_shutdown_foreach,
+                              cur);
+
+        xml_filename = g_build_filename (ario_util_config_dir (), "options.xml", NULL);
+
+        /* We save the xml file */
+        xmlSaveFormatFile (xml_filename, doc, TRUE);
+
+        g_free (xml_filename);
+        xmlFreeDoc (doc);
+
+        return TRUE;
 }
 
 void
@@ -282,31 +257,46 @@ ario_conf_init (void)
 {
         ARIO_LOG_FUNCTION_START
         xmlNodePtr cur;
+        xmlDocPtr doc;
+        xmlChar *xml_key;
+        xmlChar *xml_value;
+        char *xml_filename;
 
         xml_filename = g_build_filename (ario_util_config_dir (), "options.xml", NULL);
 
         /* This option is necessary to save a well formated xml file */
         xmlKeepBlanksDefault (0);
 
-        if (ario_util_uri_exists (xml_filename)) {
-                doc = xmlParseFile (xml_filename);
-        } else {
-                doc = xmlNewDoc (XML_VERSION);
-                cur = xmlNewNode (NULL, (const xmlChar *) XML_ROOT_NAME);
-                xmlDocSetRootElement (doc, cur);
+        hash = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                      g_free, g_free);
+
+        g_return_if_fail (ario_util_uri_exists (xml_filename));
+
+        doc = xmlParseFile (xml_filename);
+        g_free (xml_filename);
+
+        cur = xmlDocGetRootElement(doc);
+        if (cur == NULL)
+                return;
+
+        for (cur = cur->children; cur; cur = cur->next) {
+                /* For each "option" entry */
+                if (!xmlStrcmp (cur->name, (const xmlChar *) "option")) {
+                        xml_key = xmlGetProp (cur, (const unsigned char *) "key");
+                        xml_value = xmlNodeGetContent (cur);
+                        g_hash_table_insert (hash, xml_key, xml_value);
+                }
         }
+
+        xmlFreeDoc (doc);
+
+        g_timeout_add (30*1000, (GSourceFunc) ario_conf_save, NULL);
 }
 
 void
 ario_conf_shutdown (void)
 {
-        ARIO_LOG_FUNCTION_START
-        /* We save the xml file */
-        xmlSaveFormatFile (xml_filename, doc, TRUE);
-
-        g_free (xml_filename);
-        xmlFreeDoc (doc);
-
+        ario_conf_save (NULL);
         g_slist_foreach (notifications, (GFunc) ario_conf_free_notify_data, NULL);
 }
 
