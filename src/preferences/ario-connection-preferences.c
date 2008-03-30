@@ -300,6 +300,10 @@ ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *
         ArioProfile *profile;
         GtkTreeModel *model = GTK_TREE_MODEL (connection_preferences->priv->profile_model);
 
+        g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->profile_selection),
+                                         G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
+                                         connection_preferences);
+
         gtk_list_store_clear (connection_preferences->priv->profile_model);
         for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
@@ -318,6 +322,10 @@ ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *
                 }
                 gtk_tree_model_iter_next (model, &iter);
         }
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->profile_selection),
+                                           G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
+                                           connection_preferences);
 }
 
 GtkWidget *
@@ -750,6 +758,8 @@ ario_connection_preferences_new_profile_cb (GtkWidget *widget,
         profile->current = TRUE;
         connection_preferences->priv->profiles = g_slist_append (connection_preferences->priv->profiles, profile);
         ario_connection_preferences_profile_update_profiles (connection_preferences);
+        ario_connection_preferences_profile_selection_update (connection_preferences);
+        ario_connection_preferences_sync_connection (connection_preferences);
 }
 
 void
@@ -770,6 +780,8 @@ ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
                         first_profile->current = TRUE;
                 }
                 ario_connection_preferences_profile_update_profiles (connection_preferences);
+                ario_connection_preferences_profile_selection_update (connection_preferences);
+                ario_connection_preferences_sync_connection (connection_preferences);
         }
 }
 
