@@ -270,25 +270,25 @@ ario_conf_init (void)
         hash = g_hash_table_new_full (g_str_hash, g_str_equal,
                                       g_free, g_free);
 
-        g_return_if_fail (ario_util_uri_exists (xml_filename));
+        if (ario_util_uri_exists (xml_filename)) {
+                doc = xmlParseFile (xml_filename);
+                g_free (xml_filename);
 
-        doc = xmlParseFile (xml_filename);
-        g_free (xml_filename);
+                cur = xmlDocGetRootElement(doc);
+                if (cur == NULL)
+                        return;
 
-        cur = xmlDocGetRootElement(doc);
-        if (cur == NULL)
-                return;
-
-        for (cur = cur->children; cur; cur = cur->next) {
-                /* For each "option" entry */
-                if (!xmlStrcmp (cur->name, (const xmlChar *) "option")) {
-                        xml_key = xmlGetProp (cur, (const unsigned char *) "key");
-                        xml_value = xmlNodeGetContent (cur);
-                        g_hash_table_insert (hash, xml_key, xml_value);
+                for (cur = cur->children; cur; cur = cur->next) {
+                        /* For each "option" entry */
+                        if (!xmlStrcmp (cur->name, (const xmlChar *) "option")) {
+                                xml_key = xmlGetProp (cur, (const unsigned char *) "key");
+                                xml_value = xmlNodeGetContent (cur);
+                                g_hash_table_insert (hash, xml_key, xml_value);
+                        }
                 }
-        }
 
-        xmlFreeDoc (doc);
+                xmlFreeDoc (doc);
+        }
 
         g_timeout_add (30*1000, (GSourceFunc) ario_conf_save, NULL);
 }
