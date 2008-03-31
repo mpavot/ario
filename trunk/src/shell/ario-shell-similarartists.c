@@ -196,6 +196,15 @@ ario_shell_similarartists_free_similarartist (ArioSimilarArtist *similar_artist)
         }
 }
 
+static gboolean
+ario_shell_similarartists_refresh (gpointer data)
+{
+        while (gtk_events_pending ())
+                gtk_main_iteration ();
+
+        return FALSE;
+}
+
 static void
 ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists)
 {
@@ -272,10 +281,8 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                                     -1);
                 g_free (xml_data);
                 g_object_unref (G_OBJECT (pixbuf));
-#ifndef WIN32
-                while (gtk_events_pending ())
-                        gtk_main_iteration ();
-#endif
+
+                g_idle_add (ario_shell_similarartists_refresh, NULL);
         }
 
         g_slist_foreach (similar_artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);

@@ -700,16 +700,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit69]
-FileName=src\lib\ario-xml-conf.c
-CompileCpp=0
-Folder=src/lib
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit70]
 FileName=src\lib\ario-conf.h
 CompileCpp=0
 Folder=src/lib
@@ -719,7 +709,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit71]
+[Unit70]
 FileName=src\widgets\ario-status-icon.c
 CompileCpp=0
 Folder=src/widgets
@@ -729,7 +719,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit72]
+[Unit71]
 FileName=src\widgets\ario-status-icon.h
 CompileCpp=0
 Folder=src/widgets
@@ -739,7 +729,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit73]
+[Unit72]
 FileName=src\widgets\ario-firstlaunch.h
 CompileCpp=0
 Folder=src/widgets
@@ -749,7 +739,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit74]
+[Unit73]
 FileName=src\widgets\ario-firstlaunch.c
 CompileCpp=0
 Folder=src/widgets
@@ -759,7 +749,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit75]
+[Unit74]
 FileName=src\covers\ario-cover-provider.h
 CompileCpp=0
 Folder=src/covers
@@ -769,7 +759,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit76]
+[Unit75]
 FileName=src\covers\ario-cover.c
 CompileCpp=0
 Folder=src/covers
@@ -779,7 +769,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit77]
+[Unit76]
 FileName=src\covers\ario-cover.h
 CompileCpp=0
 Folder=src/covers
@@ -789,7 +779,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit78]
+[Unit77]
 FileName=src\covers\ario-cover-amazon.c
 CompileCpp=0
 Folder=src/covers
@@ -799,8 +789,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit79]
+[Unit78]
 FileName=src\covers\ario-cover-amazon.h
+CompileCpp=0
+Folder=src/covers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit79]
+FileName=src\covers\ario-cover-handler.c
 CompileCpp=0
 Folder=src/covers
 Compile=1
@@ -838,16 +838,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit80]
-FileName=src\covers\ario-cover-handler.c
-CompileCpp=0
-Folder=src/covers
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit81]
 FileName=src\covers\ario-cover-handler.h
 CompileCpp=0
 Folder=src/covers
@@ -857,7 +847,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit82]
+[Unit81]
 FileName=src\covers\ario-cover-lastfm.c
 CompileCpp=0
 Folder=src/covers
@@ -867,7 +857,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit83]
+[Unit82]
 FileName=src\covers\ario-cover-lastfm.h
 CompileCpp=0
 Folder=src/covers
@@ -877,7 +867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit84]
+[Unit83]
 FileName=src\covers\ario-cover-local.c
 CompileCpp=0
 Folder=src/covers
@@ -887,7 +877,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit85]
+[Unit84]
 FileName=src\covers\ario-cover-local.h
 CompileCpp=0
 Folder=src/covers
@@ -897,7 +887,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit86]
+[Unit85]
 FileName=src\covers\ario-cover-manager.c
 CompileCpp=0
 Folder=src/covers
@@ -907,7 +897,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit87]
+[Unit86]
 FileName=src\covers\ario-cover-manager.h
 CompileCpp=0
 Folder=src/covers
@@ -917,7 +907,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit88]
+[Unit87]
 FileName=src\covers\ario-cover-provider.c
 CompileCpp=0
 Folder=src/covers
@@ -927,7 +917,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit89]
+[Unit88]
 FileName=src\lyrics\ario-lyrics-provider.h
 CompileCpp=0
 Folder=src/lyrics
@@ -937,7 +927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit90]
+[Unit89]
 FileName=src\lyrics\ario-lyrics.c
 CompileCpp=0
 Folder=src/lyrics
@@ -947,7 +937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit91]
+[Unit90]
 FileName=src\lyrics\ario-lyrics.h
 CompileCpp=0
 Folder=src/lyrics
@@ -957,7 +947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit92]
+[Unit91]
 FileName=src\lyrics\ario-lyrics-leoslyrics.c
 CompileCpp=0
 Folder=src/lyrics
@@ -967,7 +957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit93]
+[Unit92]
 FileName=src\lyrics\ario-lyrics-leoslyrics.h
 CompileCpp=0
 Folder=src/lyrics
@@ -977,7 +967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit94]
+[Unit93]
 FileName=src\lyrics\ario-lyrics-lyricwiki.c
 CompileCpp=0
 Folder=src/lyrics
@@ -987,7 +977,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit95]
+[Unit94]
 FileName=src\lyrics\ario-lyrics-lyricwiki.h
 CompileCpp=0
 Folder=src/lyrics
@@ -997,7 +987,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit96]
+[Unit95]
 FileName=src\lyrics\ario-lyrics-manager.c
 CompileCpp=0
 Folder=src/lyrics
@@ -1007,7 +997,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit97]
+[Unit96]
 FileName=src\lyrics\ario-lyrics-manager.h
 CompileCpp=0
 Folder=src/lyrics
@@ -1017,7 +1007,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit98]
+[Unit97]
 FileName=src\lyrics\ario-lyrics-provider.c
 CompileCpp=0
 Folder=src/lyrics
@@ -1027,7 +1017,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit99]
+[Unit98]
 FileName=src\preferences\ario-lyrics-preferences.c
 CompileCpp=0
 Folder=src/preferences
@@ -1037,7 +1027,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit100]
+[Unit99]
 FileName=src\preferences\ario-lyrics-preferences.h
 CompileCpp=0
 Folder=src/preferences
@@ -1047,7 +1037,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit101]
+[Unit100]
 FileName=src\preferences\ario-proxy-preferences.c
 CompileCpp=0
 Folder=src/preferences
@@ -1057,7 +1047,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit102]
+[Unit101]
 FileName=src\preferences\ario-proxy-preferences.h
 CompileCpp=0
 Folder=src/preferences
@@ -1067,7 +1057,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit103]
+[Unit102]
 FileName=src\widgets\ario-lyrics-editor.c
 CompileCpp=0
 Folder=src/widgets
@@ -1077,7 +1067,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit104]
+[Unit103]
 FileName=src\widgets\ario-lyrics-editor.h
 CompileCpp=0
 Folder=src/widgets
@@ -1087,8 +1077,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit106]
-FileName=src\shell\ario-shell-similarartists.c
+[Unit104]
+FileName=src\shell\ario-shell-similarartists.h
 CompileCpp=0
 Folder=src/shell
 Compile=1
@@ -1097,8 +1087,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit106]
+FileName=src\lib\ario-conf.c
+CompileCpp=0
+Folder=src/lib
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit105]
-FileName=src\shell\ario-shell-similarartists.h
+FileName=src\shell\ario-shell-similarartists.c
 CompileCpp=0
 Folder=src/shell
 Compile=1
