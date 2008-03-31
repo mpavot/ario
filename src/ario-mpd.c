@@ -597,7 +597,6 @@ ario_mpd_connect_thread (ArioMpd *mpd)
         gchar *hostname;
         int port;
         float timeout;
-        static GtkWidget *dialog = NULL;
 
         hostname = ario_conf_get_string (PREF_HOST, PREF_HOST_DEFAULT);
         port = ario_conf_get_integer (PREF_PORT, PREF_PORT_DEFAULT);
@@ -610,21 +609,11 @@ ario_mpd_connect_thread (ArioMpd *mpd)
                 port = 6600;
 
         if (!ario_mpd_connect_to (mpd, hostname, port, timeout)) {
-                if (!dialog) {
-                        dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, 
-                                                         GTK_MESSAGE_ERROR,
-                                                         GTK_BUTTONS_OK,
-                                                         _("Impossible to connect to mpd. Check the connection options."));
-                }
                 ario_mpd_disconnect (mpd);
-                if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_NONE)
-                        gtk_widget_hide (dialog);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
         }
 
         g_free (hostname);
         mpd->priv->connecting = FALSE;
-        g_thread_exit (NULL);
 
         return NULL;
 }
@@ -635,6 +624,7 @@ ario_mpd_connect (ArioMpd *mpd)
         ARIO_LOG_FUNCTION_START
         GtkWidget *win, *vbox,*label, *bar;
         GThread* thread;
+        GtkWidget *dialog;
 
         /* check if there is a connection */
         if (mpd->priv->connection || mpd->priv->connecting)
@@ -669,6 +659,16 @@ ario_mpd_connect (ArioMpd *mpd)
 
         g_thread_join (thread);
 
+        if (!ario_mpd_is_connected (mpd)) {
+                dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, 
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_OK,
+                                                 _("Impossible to connect to mpd. Check the connection options."));
+                if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_NONE)
+                        gtk_widget_destroy (dialog);
+                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
+        }
+                
         gtk_widget_hide (win);
         gtk_widget_destroy (win);
 
