@@ -188,10 +188,10 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
         ARIO_LOG_FUNCTION_START
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->showtabs_check), 
-                                      ario_conf_get_boolean (CONF_SHOW_TABS, TRUE));
+                                      ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (interface_preferences->priv->trayicon_combobox),
-                                  ario_conf_get_integer (CONF_TRAYICON_BEHAVIOR, 0));
+                                  ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT));
 }
 
 void
@@ -203,7 +203,7 @@ ario_interface_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combo
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (interface_preferences->priv->trayicon_combobox));
 
-        ario_conf_set_integer (CONF_TRAYICON_BEHAVIOR, 
+        ario_conf_set_integer (PREF_TRAYICON_BEHAVIOR, 
                                i);
 }
 
@@ -212,7 +212,7 @@ ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                                       ArioInterfacePreferences *interface_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_conf_set_boolean (CONF_SHOW_TABS,
+        ario_conf_set_boolean (PREF_SHOW_TABS,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->showtabs_check)));
 }
 

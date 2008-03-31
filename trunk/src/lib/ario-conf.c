@@ -27,6 +27,7 @@
 #include "ario-util.h"
 
 static GHashTable *hash;
+static gboolean modified = FALSE;
 static GSList *notifications;
 static guint notification_counter = 0;
 
@@ -67,14 +68,13 @@ ario_conf_set (const char *key,
         ArioConfNotifyData *data;
 
         g_hash_table_replace (hash, g_strdup (key), value);
+        modified = TRUE;
 
         /* Notifications */
         for (tmp = notifications; tmp; tmp = g_slist_next (tmp)) {
                 data = tmp->data;
                 if (!strcmp (data->key, key)) {
-                        data->notification_callback (NULL,
-                                                     data->notification_id,
-                                                     NULL,
+                        data->notification_callback (data->notification_id,
                                                      data->callback_data);
                 }
         }
@@ -191,12 +191,16 @@ ario_conf_set_string_slist (const char *key,
 }
 
 GSList *
-ario_conf_get_string_slist (const char *key)
+ario_conf_get_string_slist (const char *key,
+                            const char *string_value)
 {
-        gchar *value = ario_conf_get (key);
+        const gchar *value = ario_conf_get (key);
         gchar **values;
         GSList *ret = NULL;
         int i;
+
+        if (!value)
+                value = string_value;
 
         if (!value)
                 return NULL;
@@ -232,6 +236,10 @@ ario_conf_save (gpointer data)
         xmlNodePtr cur;
         xmlDocPtr doc;
         char *xml_filename;
+
+        if (!modified)
+                return TRUE;
+        modified = FALSE;
 
         doc = xmlNewDoc (XML_VERSION);
         cur = xmlNewNode (NULL, (const xmlChar *) XML_ROOT_NAME);

@@ -53,8 +53,11 @@
 
 #define EXTRA_URI_ENCODE_CHARS        "&+"
 
-#define CONF_AUDIOSCROBBLER_USERNAME    "/apps/ario/audio-scrobbler-username"
-#define CONF_AUDIOSCROBBLER_PASSWORD    "/apps/ario/audio-scrobbler-password"
+#define PREF_AUDIOSCROBBLER_USERNAME            "audio-scrobbler-username"
+#define PREF_AUDIOSCROBBLER_USERNAME_DEFAULT    NULL
+
+#define PREF_AUDIOSCROBBLER_PASSWORD            "audio-scrobbler-password"
+#define PREF_AUDIOSCROBBLER_PASSWORD_DEFAULT    NULL
 
 /* compatibility junk for libsoup 2.2.
  * not intended to obviate the need for #ifdefs in code, but
@@ -220,13 +223,9 @@ static void ario_audioscrobbler_submit_queue_cb (SoupMessage *msg, gpointer user
 #endif
 static void ario_audioscrobbler_import_settings (ArioAudioscrobbler *audioscrobbler);
 static void ario_audioscrobbler_preferences_sync (ArioAudioscrobbler *audioscrobbler);
-static void ario_audioscrobbler_conf_username_changed_cb (gpointer do_not_use1,
-                                                          guint cnxn_id,
-                                                          gpointer do_not_use2,
+static void ario_audioscrobbler_conf_username_changed_cb (guint cnxn_id,
                                                           ArioAudioscrobbler *audioscrobbler);
-static void ario_audioscrobbler_conf_password_changed_cb (gpointer do_not_use1,
-                                                          guint cnxn_id,
-                                                          gpointer do_not_use2,
+static void ario_audioscrobbler_conf_password_changed_cb (guint cnxn_id,
                                                           ArioAudioscrobbler *audioscrobbler);
 static void ario_audioscrobbler_song_changed_cb (ArioMpd *mpd,
                                                  ArioAudioscrobbler *audioscrobbler);
@@ -319,11 +318,11 @@ ario_audioscrobbler_init (ArioAudioscrobbler *audioscrobbler)
 
         /* conf notifications: */
         audioscrobbler->priv->notification_username_id =
-                ario_conf_notification_add (CONF_AUDIOSCROBBLER_USERNAME,
+                ario_conf_notification_add (PREF_AUDIOSCROBBLER_USERNAME,
                                             (ArioNotifyFunc) ario_audioscrobbler_conf_username_changed_cb,
                                             audioscrobbler);
         audioscrobbler->priv->notification_password_id =
-                ario_conf_notification_add (CONF_AUDIOSCROBBLER_PASSWORD,
+                ario_conf_notification_add (PREF_AUDIOSCROBBLER_PASSWORD,
                                             (ArioNotifyFunc) ario_audioscrobbler_conf_password_changed_cb,
                                             audioscrobbler);
 
@@ -474,14 +473,14 @@ ario_audioscrobbler_get_libsoup_uri ()
 {
         SoupUri *uri = NULL;
 
-        if (!ario_conf_get_boolean (CONF_USE_PROXY, FALSE))
+        if (!ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT))
                 return NULL;
 
         uri = g_new0 (SoupUri, 1);
         uri->protocol = SOUP_PROTOCOL_HTTP;
 
-        uri->host = ario_conf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
-        uri->port = ario_conf_get_integer (CONF_PROXY_PORT, 8080);
+        uri->host = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS);
+        uri->port = ario_conf_get_integer (PREF_PROXY_PORT, PREF_PROXY_PORT_DEFAULT);
 
         return uri;
 }
@@ -1353,8 +1352,8 @@ ario_audioscrobbler_import_settings (ArioAudioscrobbler *audioscrobbler)
         /* import conf settings. */
         g_free (audioscrobbler->priv->username);
         g_free (audioscrobbler->priv->password);
-        audioscrobbler->priv->username = ario_conf_get_string (CONF_AUDIOSCROBBLER_USERNAME, NULL);
-        audioscrobbler->priv->password = ario_conf_get_string (CONF_AUDIOSCROBBLER_PASSWORD, NULL);
+        audioscrobbler->priv->username = ario_conf_get_string (PREF_AUDIOSCROBBLER_USERNAME, PREF_AUDIOSCROBBLER_USERNAME_DEFAULT);
+        audioscrobbler->priv->password = ario_conf_get_string (PREF_AUDIOSCROBBLER_PASSWORD, PREF_AUDIOSCROBBLER_PASSWORD_DEFAULT);
 
         ario_audioscrobbler_add_timeout (audioscrobbler);
         audioscrobbler->priv->status = HANDSHAKING;
@@ -1500,9 +1499,7 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
 }
 
 static void
-ario_audioscrobbler_conf_username_changed_cb (gpointer do_not_use1,
-                                              guint cnxn_id,
-                                              gpointer do_not_use2,
+ario_audioscrobbler_conf_username_changed_cb (guint cnxn_id,
                                               ArioAudioscrobbler *audioscrobbler)
 {
 
@@ -1511,7 +1508,7 @@ ario_audioscrobbler_conf_username_changed_cb (gpointer do_not_use1,
         g_free (audioscrobbler->priv->username);
         audioscrobbler->priv->username = NULL;
 
-        username = ario_conf_get_string (CONF_AUDIOSCROBBLER_USERNAME, NULL);
+        username = ario_conf_get_string (PREF_AUDIOSCROBBLER_USERNAME, PREF_AUDIOSCROBBLER_USERNAME_DEFAULT);
         if (username != NULL) {
                 audioscrobbler->priv->username = g_strdup (username);
         }
@@ -1526,9 +1523,7 @@ ario_audioscrobbler_conf_username_changed_cb (gpointer do_not_use1,
 }
 
 static void
-ario_audioscrobbler_conf_password_changed_cb (gpointer do_not_use1,
-                                              guint cnxn_id,
-                                              gpointer do_not_use2,
+ario_audioscrobbler_conf_password_changed_cb (guint cnxn_id,
                                               ArioAudioscrobbler *audioscrobbler)
 {
         const gchar *password;
@@ -1536,7 +1531,7 @@ ario_audioscrobbler_conf_password_changed_cb (gpointer do_not_use1,
         g_free (audioscrobbler->priv->password);
         audioscrobbler->priv->password = NULL;
 
-        password = ario_conf_get_string (CONF_AUDIOSCROBBLER_PASSWORD, NULL);
+        password = ario_conf_get_string (PREF_AUDIOSCROBBLER_PASSWORD, PREF_AUDIOSCROBBLER_PASSWORD_DEFAULT);
         if (password != NULL) {
                 audioscrobbler->priv->password = g_strdup (password);
         }
@@ -1584,7 +1579,7 @@ void
 ario_audioscrobbler_username_entry_changed_cb (GtkEntry *entry,
                                                ArioAudioscrobbler *audioscrobbler)
 {
-        ario_conf_set_string (CONF_AUDIOSCROBBLER_USERNAME,
+        ario_conf_set_string (PREF_AUDIOSCROBBLER_USERNAME,
                               gtk_entry_get_text (entry));
 }
 
@@ -1599,7 +1594,7 @@ void
 ario_audioscrobbler_password_entry_changed_cb (GtkEntry *entry,
                                                ArioAudioscrobbler *audioscrobbler)
 {
-        ario_conf_set_string (CONF_AUDIOSCROBBLER_PASSWORD,
+        ario_conf_set_string (PREF_AUDIOSCROBBLER_PASSWORD,
                               gtk_entry_get_text (entry));
 }
 

@@ -271,7 +271,7 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                                                  NULL);
         gtk_tree_view_column_set_resizable (playlist->priv->track_column, TRUE);
         gtk_tree_view_column_set_sizing (playlist->priv->track_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->track_column, ario_conf_get_integer (CONF_TRACK_COLUMN_SIZE, 50));
+        gtk_tree_view_column_set_fixed_width (playlist->priv->track_column, ario_conf_get_integer (PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT));
         gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->track_column);
 
         /* Title column */
@@ -282,7 +282,7 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                                                  NULL);
         gtk_tree_view_column_set_resizable (playlist->priv->title_column, TRUE);
         gtk_tree_view_column_set_sizing (playlist->priv->title_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->title_column, ario_conf_get_integer (CONF_TITLE_COLUMN_SIZE, 200));
+        gtk_tree_view_column_set_fixed_width (playlist->priv->title_column, ario_conf_get_integer (PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT));
         gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->title_column);
 
         /* Artist column */
@@ -293,7 +293,7 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                                                   NULL);
         gtk_tree_view_column_set_resizable (playlist->priv->artist_column, TRUE);
         gtk_tree_view_column_set_sizing (playlist->priv->artist_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->artist_column, ario_conf_get_integer (CONF_ARTIST_COLUMN_SIZE, 200));
+        gtk_tree_view_column_set_fixed_width (playlist->priv->artist_column, ario_conf_get_integer (PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT));
         gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->artist_column);
 
         /* Album column */
@@ -304,7 +304,7 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                                                  NULL);
         gtk_tree_view_column_set_resizable (playlist->priv->album_column, TRUE);
         gtk_tree_view_column_set_sizing (playlist->priv->album_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->album_column, ario_conf_get_integer (CONF_ALBUM_COLUMN_SIZE, 200));
+        gtk_tree_view_column_set_fixed_width (playlist->priv->album_column, ario_conf_get_integer (PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT));
         gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->album_column);
 
         /* Duration column */
@@ -390,22 +390,22 @@ ario_playlist_shutdown (ArioPlaylist *playlist)
 
         width = gtk_tree_view_column_get_width (playlist->priv->track_column);
         if (width > 10)
-                ario_conf_set_integer (CONF_TRACK_COLUMN_SIZE,
+                ario_conf_set_integer (PREF_TRACK_COLUMN_SIZE,
                                        width);
 
         width = gtk_tree_view_column_get_width (playlist->priv->title_column);
         if (width > 10)
-                ario_conf_set_integer (CONF_TITLE_COLUMN_SIZE,
+                ario_conf_set_integer (PREF_TITLE_COLUMN_SIZE,
                                        width);
 
         width = gtk_tree_view_column_get_width (playlist->priv->artist_column);
         if (width > 10)
-                ario_conf_set_integer (CONF_ARTIST_COLUMN_SIZE,
+                ario_conf_set_integer (PREF_ARTIST_COLUMN_SIZE,
                                        width);
 
         width = gtk_tree_view_column_get_width (playlist->priv->album_column);
         if (width > 10)
-                ario_conf_set_integer (CONF_ALBUM_COLUMN_SIZE,
+                ario_conf_set_integer (PREF_ALBUM_COLUMN_SIZE,
                                        width);
 }
 

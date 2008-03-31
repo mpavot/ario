@@ -304,7 +304,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         storedplaylists->priv->paned = gtk_hpaned_new ();
         gtk_paned_pack1 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_storedplaylists, FALSE, FALSE);
 
-        pos = ario_conf_get_integer (CONF_PLAYLISTS_HPANED_SIZE, 250);
+        pos = ario_conf_get_integer (PREF_PLAYLISTS_HPANED_SIZE, PREF_PLAYLISTS_HPANED_SIZE_DEFAULT);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (storedplaylists->priv->paned),
                                         pos);
@@ -320,7 +320,7 @@ ario_storedplaylists_shutdown (ArioSource *source)
 
         pos = gtk_paned_get_position (GTK_PANED (storedplaylists->priv->paned));
         if (pos > 0)
-                ario_conf_set_integer (CONF_PLAYLISTS_HPANED_SIZE,
+                ario_conf_set_integer (PREF_PLAYLISTS_HPANED_SIZE,
                                        pos);
 }
 

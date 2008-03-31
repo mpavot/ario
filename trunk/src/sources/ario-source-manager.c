@@ -33,9 +33,7 @@ static void ario_sourcemanager_class_init (ArioSourceManagerClass *klass);
 static void ario_sourcemanager_init (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_finalize (GObject *object);
 static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
-static void ario_sourcemanager_showtabs_changed_cb (gpointer do_not_use1,
-                                                    guint notification_id,
-                                                    gpointer do_not_use2,
+static void ario_sourcemanager_showtabs_changed_cb (guint notification_id,
                                                     ArioSourceManager *sourcemanager);
 
 struct ArioSourceManagerPrivate
@@ -151,12 +149,12 @@ ario_sourcemanager_new (GtkUIManager *mgr,
 
         ario_sourcemanager_reorder (sourcemanager);
 
-        ario_conf_notification_add (CONF_SHOW_TABS,
+        ario_conf_notification_add (PREF_SHOW_TABS,
                                     (ArioNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
                                     sourcemanager);
 
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
-                                    ario_conf_get_boolean (CONF_SHOW_TABS, TRUE));
+                                    ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 
         return GTK_WIDGET (sourcemanager);
 }
@@ -174,11 +172,11 @@ ario_sourcemanager_shutdown (ArioSourceManager *sourcemanager)
 {
         GSList *ordered_sources = NULL;
 
-        ario_conf_set_integer (CONF_SOURCE,
+        ario_conf_set_integer (PREF_SOURCE,
                                gtk_notebook_get_current_page (GTK_NOTEBOOK (sourcemanager)));
 
         gtk_container_foreach (GTK_CONTAINER (sourcemanager), (GtkCallback) ario_sourcemanager_shutdown_foreach, &ordered_sources);
-        ario_conf_set_string_slist (CONF_SOURCE_LIST, ordered_sources);
+        ario_conf_set_string_slist (PREF_SOURCE_LIST, ordered_sources);
         g_slist_free (ordered_sources);
 }
 
@@ -190,7 +188,7 @@ ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
         ArioSource *source;
         GSList *ordered_tmp;
         GSList *sources_tmp;
-        GSList *ordered_sources = ario_conf_get_string_slist (CONF_SOURCE_LIST);
+        GSList *ordered_sources = ario_conf_get_string_slist (PREF_SOURCE_LIST, PREF_SOURCE_LIST_DEFAULT);
 
         for (ordered_tmp = ordered_sources; ordered_tmp; ordered_tmp = g_slist_next (ordered_tmp)) {
                 for (sources_tmp = sourcemanager->priv->sources; sources_tmp; sources_tmp = g_slist_next (sources_tmp)) {
@@ -217,20 +215,18 @@ ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 #ifdef MULTIPLE_VIEW
         gint page;
 
-        page = ario_conf_get_integer (CONF_SOURCE, ARIO_SOURCE_BROWSER);
+        page = ario_conf_get_integer (PREF_SOURCE, PREF_SOURCE_DEFAULT);
         gtk_notebook_set_current_page (GTK_NOTEBOOK (sourcemanager), page);
 #endif  /* MULTIPLE_VIEW */
 }
 
 static void
-ario_sourcemanager_showtabs_changed_cb (gpointer do_not_use1,
-                                        guint notification_id,
-                                        gpointer do_not_use2,
+ario_sourcemanager_showtabs_changed_cb (guint notification_id,
                                         ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
-                                    ario_conf_get_boolean (CONF_SHOW_TABS, TRUE));
+                            ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 }
 
 void

@@ -7,9 +7,6 @@
 /* Add support of eggtrayicon */
 /* #undef ENABLE_EGGTRAYICON */
 
-/* Add support of GConf */
-#undef ENABLE_GCONF
-
 /* always defined to indicate that i18n is enabled */
 #define ENABLE_NLS 1
 

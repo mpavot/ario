@@ -286,9 +286,9 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
         char *current_country;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check), 
-                                      !ario_conf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
+                                      !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
 
-        current_country = ario_conf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
+        current_country = ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT);
         for (i = 0; amazon_countries[i]; ++i) {
                 if (!strcmp (amazon_countries[i], current_country)) {
                         gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), i);
@@ -307,7 +307,7 @@ ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                    ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_conf_set_boolean (CONF_COVER_TREE_HIDDEN,
+        ario_conf_set_boolean (PREF_COVER_TREE_HIDDEN,
                                !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check)));
 }
 
@@ -320,7 +320,7 @@ ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country));
 
-        ario_conf_set_string (CONF_COVER_AMAZON_COUNTRY, 
+        ario_conf_set_string (PREF_COVER_AMAZON_COUNTRY, 
                               amazon_countries[i]);
 }
 

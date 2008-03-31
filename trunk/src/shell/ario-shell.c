@@ -436,7 +436,7 @@ ario_shell_construct (ArioShell *shell)
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
-        shell->priv->statusbar_hidden = ario_conf_get_boolean (CONF_STATUSBAR_HIDDEN, FALSE);
+        shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewStatusbar");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
@@ -484,7 +484,7 @@ ario_shell_construct (ArioShell *shell)
         gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
 
         /* First launch assistant */
-        if (!ario_conf_get_boolean (CONF_FIRST_TIME, FALSE)) {
+        if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {
                 firstlaunch = ario_firstlaunch_new ();
                 g_signal_connect_object (G_OBJECT (firstlaunch), "destroy",
                                          G_CALLBACK (ario_shell_firstlaunch_delete_cb),
@@ -504,16 +504,16 @@ ario_shell_shutdown (ArioShell *shell)
         int width, height;
 
         if (shell->priv->shown) {
-                ario_conf_set_integer (CONF_VPANED_POSITION,
+                ario_conf_set_integer (PREF_VPANED_POSITION,
                                        gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
 
                 gtk_window_get_size (GTK_WINDOW (shell->priv->window),
                                      &width,
                                      &height);
 
-                if (!ario_conf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE)) {
-                        ario_conf_set_integer (CONF_WINDOW_WIDTH, width);
-                        ario_conf_set_integer (CONF_WINDOW_HEIGHT, height);
+                if (!ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT)) {
+                        ario_conf_set_integer (PREF_WINDOW_WIDTH, width);
+                        ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
                 }
 
                 ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
@@ -537,7 +537,7 @@ ario_shell_show (ArioShell *shell)
                                  "song_changed", G_CALLBACK (ario_shell_mpd_song_changed_cb),
                                  shell, 0);
 
-        if (ario_conf_get_boolean (CONF_AUTOCONNECT, TRUE))
+        if (ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT))
                 ario_mpd_connect (shell->priv->mpd);
 
         ario_shell_sync_paned (shell);
@@ -748,7 +748,7 @@ ario_shell_sync_paned (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
         int pos;
 
-        pos = ario_conf_get_integer (CONF_VPANED_POSITION, 400);
+        pos = ario_conf_get_integer (PREF_VPANED_POSITION, PREF_VPANED_POSITION_DEFAULT);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
@@ -780,7 +780,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
         g_return_val_if_fail (widget != NULL, FALSE);
 
         if (event->type == GDK_WINDOW_STATE) {
-                ario_conf_set_boolean (CONF_WINDOW_MAXIMIZED,
+                ario_conf_set_boolean (PREF_WINDOW_MAXIMIZED,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
 
@@ -788,8 +788,8 @@ ario_shell_window_state_cb (GtkWidget *widget,
                                      &width,
                                      &height);
 
-                ario_conf_set_integer (CONF_WINDOW_WIDTH, width);
-                ario_conf_set_integer (CONF_WINDOW_HEIGHT, height);
+                ario_conf_set_integer (PREF_WINDOW_WIDTH, width);
+                ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
         }
 
         return FALSE;
@@ -799,9 +799,9 @@ static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        int width = ario_conf_get_integer (CONF_WINDOW_WIDTH, 600); 
-        int height = ario_conf_get_integer (CONF_WINDOW_HEIGHT, 600);
-        gboolean maximized = ario_conf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
+        int width = ario_conf_get_integer (PREF_WINDOW_WIDTH, PREF_WINDOW_WIDTH_DEFAULT); 
+        int height = ario_conf_get_integer (PREF_WINDOW_HEIGHT, PREF_WINDOW_HEIGHT_DEFAULT);
+        gboolean maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
         GdkGeometry hints;
 
         gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
@@ -866,7 +866,7 @@ ario_shell_view_statusbar_changed_cb (GtkAction *action,
                                       ArioShell *shell)
 {
         shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-        ario_conf_set_boolean (CONF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
+        ario_conf_set_boolean (PREF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
 
         ario_shell_sync_statusbar_visibility (shell);
 }

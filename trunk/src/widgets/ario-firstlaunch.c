@@ -156,8 +156,8 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
                                         &host,
                                         &port);
 
-        ario_conf_set_string (CONF_HOST, host);
-        ario_conf_set_integer (CONF_PORT, port);
+        ario_conf_set_string (PREF_HOST, host);
+        ario_conf_set_integer (PREF_PORT, port);
 
         profile = (ArioProfile *) g_malloc0 (sizeof (ArioProfile));
         profile->name = g_strdup (_("Default"));
@@ -170,7 +170,7 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
         ario_profiles_save (profiles);
 
         firstlaunch->priv->applied = TRUE;
-        ario_conf_set_boolean (CONF_FIRST_TIME, TRUE);
+        ario_conf_set_boolean (PREF_FIRST_TIME, TRUE);
         gtk_widget_destroy (GTK_WIDGET (firstlaunch));
 }
 
