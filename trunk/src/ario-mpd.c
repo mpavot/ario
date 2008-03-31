@@ -580,8 +580,11 @@ ario_mpd_connect_to (ArioMpd *mpd,
         mpd_sendStatsCommand (connection);
         stats = mpd_getStats (connection);
         mpd_finishCommand (connection);
-        if (stats == NULL)
+        if (stats == NULL) {
+                mpd_closeConnection (connection);
+                mpd->priv->connection = NULL;
                 return FALSE;
+        }
 
         mpd_freeStats(stats);
 
@@ -638,7 +641,7 @@ ario_mpd_connect (ArioMpd *mpd)
         win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
         gtk_window_set_modal (GTK_WINDOW (win), TRUE);
         vbox = gtk_vbox_new (FALSE, 0);
-        label = gtk_label_new (_("Connecting..."));
+        label = gtk_label_new (_("Connecting to MPD server..."));
         bar = gtk_progress_bar_new ();
 
         gtk_container_add (GTK_CONTAINER (win), vbox);

@@ -210,7 +210,7 @@ ario_conf_get_string_slist (const char *key,
         for (i=0; values[i]!=NULL && g_utf8_collate (values[i], ""); ++i)
                 ret = g_slist_append (ret, g_strdup (values[i]));
 
-//        g_strfreev (values);
+        g_strfreev (values);
 
         return ret;
 }
@@ -305,6 +305,7 @@ void
 ario_conf_shutdown (void)
 {
         ario_conf_save (NULL);
+        g_hash_table_remove_all (hash);
         g_slist_foreach (notifications, (GFunc) ario_conf_free_notify_data, NULL);
 }
 
