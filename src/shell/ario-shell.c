@@ -365,7 +365,6 @@ void
 ario_shell_construct (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        GtkWindow *win;
         GtkWidget *menubar;
         GtkWidget *separator;
         GtkWidget *vbox;
@@ -376,14 +375,12 @@ ario_shell_construct (ArioShell *shell)
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
         /* initialize UI */
-        win = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
-        gtk_window_set_title (win, "Ario");
+        shell->priv->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+        gtk_window_set_title (GTK_WINDOW (shell->priv->window), "Ario");
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
         gtk_window_set_default_icon (pixbuf);
 
-        shell->priv->window = GTK_WIDGET (win);
-
-        g_signal_connect_object (G_OBJECT (win), "delete_event",
+        g_signal_connect_object (G_OBJECT (shell->priv->window), "delete_event",
                                  G_CALLBACK (ario_shell_window_delete_cb),
                                  shell, 0);
 
@@ -422,7 +419,7 @@ ario_shell_construct (ArioShell *shell)
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
-                                                     win,
+                                                     GTK_WINDOW (shell->priv->window),
                                                      shell->priv->mpd,
                                                      shell->priv->cover_handler);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
@@ -430,7 +427,7 @@ ario_shell_construct (ArioShell *shell)
         /* initialize tray icon */
         shell->priv->status_icon = ario_status_icon_new (shell->priv->actiongroup,
                                                          shell->priv->ui_manager,
-                                                         win,
+                                                         shell->priv->window,
                                                          shell->priv->mpd);
 #endif
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
@@ -470,7 +467,10 @@ ario_shell_construct (ArioShell *shell)
                             shell->priv->status_bar,
                             FALSE, FALSE, 0);
 
-        gtk_container_add (GTK_CONTAINER (win), vbox);
+        ario_shell_sync_window_state (shell);
+        gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
+
+        gtk_container_add (GTK_CONTAINER (shell->priv->window), vbox);
 
         g_signal_connect_object (G_OBJECT (shell->priv->window), "show",
                                  G_CALLBACK (ario_shell_window_show_cb),
@@ -479,9 +479,6 @@ ario_shell_construct (ArioShell *shell)
         g_signal_connect_object (G_OBJECT (shell->priv->window), "hide",
                                  G_CALLBACK (ario_shell_window_hide_cb),
                                  shell, 0);
-
-        ario_shell_sync_window_state (shell);
-        gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
 
         /* First launch assistant */
         if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {

@@ -299,8 +299,8 @@ ario_audioscrobbler_class_init (ArioAudioscrobblerClass *klass)
 static void
 ario_audioscrobbler_init (ArioAudioscrobbler *audioscrobbler)
 {
-        ARIO_LOG_INFO ("Initialising Audioscrobbler");
-        ARIO_LOG_INFO ("Plugin ID: %s, Version %s (Protocol %s)",
+        ARIO_LOG_DBG ("Initialising Audioscrobbler");
+        ARIO_LOG_DBG ("Plugin ID: %s, Version %s (Protocol %s)",
                       CLIENT_ID, CLIENT_VERSION, SCROBBLER_VERSION);
 
         audioscrobbler->priv = ARIO_AUDIOSCROBBLER_GET_PRIVATE (audioscrobbler);
@@ -491,7 +491,7 @@ static void
 ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler)
 {
         if (!audioscrobbler->priv->timeout_id) {
-                ARIO_LOG_INFO ("Adding Audioscrobbler timer (15 seconds)");
+                ARIO_LOG_DBG ("Adding Audioscrobbler timer (15 seconds)");
                 audioscrobbler->priv->timeout_id = 
                         g_timeout_add (15000, (GSourceFunc) ario_audioscrobbler_timeout_cb,
                                        audioscrobbler);
@@ -593,7 +593,7 @@ maybe_add_current_song_to_queue (ArioAudioscrobbler *audioscrobbler)
         audioscrobbler->priv->current_elapsed = elapsed;
         ARIO_LOG_DBG ("elapsed=%d, cur_entry->length=%d, elapsed_delta=%d", elapsed, cur_entry->length, elapsed_delta);
         if ((elapsed >= cur_entry->length / 2 || elapsed >= 240) && elapsed_delta < 20) {
-                ARIO_LOG_INFO ("Adding currently playing song to queue");
+                ARIO_LOG_DBG ("Adding currently playing song to queue");
                 time (&cur_entry->play_time);
                 if (ario_audioscrobbler_add_to_queue (audioscrobbler, cur_entry)){
                         audioscrobbler->priv->currently_playing = NULL;
@@ -601,7 +601,7 @@ maybe_add_current_song_to_queue (ArioAudioscrobbler *audioscrobbler)
 
                 ario_audioscrobbler_preferences_sync (audioscrobbler);
         } else if (elapsed_delta > 20) {
-                ARIO_LOG_INFO ("Skipping detected; not submitting current song");
+                ARIO_LOG_DBG ("Skipping detected; not submitting current song");
                 /* not sure about this - what if I skip to somewhere towards
                  * the end, but then go back and listen to the whole song?
                  */
@@ -745,7 +745,7 @@ ario_audioscrobbler_parse_response (ArioAudioscrobbler *audioscrobbler, SoupMess
                                 ARIO_LOG_INFO ("BADAUTH");
                                 audioscrobbler->priv->status = BAD_PASSWORD;
                         } else if (g_str_has_prefix (breaks[i], "OK")) {
-                                ARIO_LOG_INFO ("OK");
+                                ARIO_LOG_DBG ("OK");
                         } else if (g_str_has_prefix (breaks[i], "INTERVAL ")) {
                                 audioscrobbler->priv->submit_interval = g_ascii_strtod(breaks[i] + 9, NULL);
                                 ARIO_LOG_DBG ("INTERVAL: %s", breaks[i] + 9);
@@ -926,30 +926,30 @@ ario_audioscrobbler_build_authentication_data (ArioAudioscrobbler *audioscrobble
          */
         if ((audioscrobbler->priv->username == NULL) 
             || (*audioscrobbler->priv->username == '\0')) {
-                ARIO_LOG_INFO ("No username set");
+                ARIO_LOG_DBG ("No username set");
                 return NULL;
         }
 
         if ((audioscrobbler->priv->password == NULL) 
             || (*audioscrobbler->priv->password == '\0')) {
-                ARIO_LOG_INFO ("No password set");
+                ARIO_LOG_DBG ("No password set");
                 return NULL;
         }
 
         if (*audioscrobbler->priv->md5_challenge == '\0') {
-                ARIO_LOG_INFO ("No md5 challenge");
+                ARIO_LOG_DBG ("No md5 challenge");
                 return NULL;
         }
 
         time(&now);
         if (now < audioscrobbler->priv->submit_next) {
-                ARIO_LOG_INFO ("Too soon (next submission in %ld seconds)",
+                ARIO_LOG_DBG ("Too soon (next submission in %ld seconds)",
                               audioscrobbler->priv->submit_next - now);
                 return NULL;
         }
 
         if (g_queue_is_empty (audioscrobbler->priv->queue)) {
-                ARIO_LOG_INFO ("No queued songs to submit");
+                ARIO_LOG_DBG ("No queued songs to submit");
                 return NULL;
         }
 
@@ -1020,7 +1020,7 @@ ario_audioscrobbler_submit_queue (ArioAudioscrobbler *audioscrobbler)
                 post_data = ario_audioscrobbler_build_post_data (audioscrobbler,
                                                                  auth_data);
                 g_free (auth_data);
-                ARIO_LOG_INFO ("Submitting queue to Audioscrobbler");
+                ARIO_LOG_DBG ("Submitting queue to Audioscrobbler");
                 ario_audioscrobbler_print_queue (audioscrobbler, TRUE);
 
                 ario_audioscrobbler_perform (audioscrobbler,
@@ -1304,7 +1304,7 @@ ario_audioscrobbler_submit_queue_cb (SoupMessage *msg, gpointer user_data)
         ario_audioscrobbler_parse_response (audioscrobbler, msg);
 
         if (audioscrobbler->priv->status == STATUS_OK) {
-                ARIO_LOG_INFO ("Queue submitted successfully");
+                ARIO_LOG_DBG ("Queue submitted successfully");
                 ario_audioscrobbler_free_queue_entries (audioscrobbler, &audioscrobbler->priv->submission);
                 audioscrobbler->priv->submission = g_queue_new ();
                 ario_audioscrobbler_save_queue (audioscrobbler);
