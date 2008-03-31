@@ -506,7 +506,7 @@ ario_status_icon_set_visibility (ArioStatusIcon *icon,
                         ario_status_icon_restore_main_window (icon);
                         gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
                 } else {
-                        icon->priv->maximized = ario_conf_get_boolean (CONF_WINDOW_MAXIMIZED, TRUE);
+                        icon->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
                         gtk_window_get_position (icon->priv->main_window,
                                                  &icon->priv->window_x,
                                                  &icon->priv->window_y);

@@ -10,28 +10,11 @@ libwikipedia_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 uixmldir = $(plugindir)
 uixml_DATA = wikipedia-ui.xml
 
-schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files = ario-wikipedia.schemas.in
-schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
-@INTLTOOL_SCHEMAS_RULE@
-
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	        if test -z "$(DESTDIR)" ; then \
-	                for p in $(schemas_DATA) ; do \
-	                        GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/plugins/wikipedia/$$p ; \
-	                done \
-	        fi
-else
-install-data-local:
-endif
-
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
         -DUI_PATH=\""$(uixmldir)/"\"\
         -DPLUGINDIR=\""$(plugindir)/"\"\
 	$(DEPS_CFLAGS)   				\
-	$(GCONF_CFLAGS)   				\
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src      			\
 	-I$(top_srcdir)/src/lib                        	\
@@ -59,10 +42,8 @@ plugin_DATA =	\
 
 EXTRA_DIST = $(plugin_in_files)         \
              $(plugin_DATA)             \
-             $(schemas_in_files)        \
              $(uixml_DATA)
 
-CLEANFILES = $(BUILT_SOURCES) \
-            $(schemas_DATA)
-DISTCLEANFILES = $(BUILT_SOURCES) \
-                 $(schemas_DATA)
+CLEANFILES = $(BUILT_SOURCES)
+
+DISTCLEANFILES = $(BUILT_SOURCES)

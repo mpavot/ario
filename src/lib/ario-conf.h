@@ -1,42 +1,28 @@
 /*
-   Heavily based on eel-gconf-extension
-   Copyright (C) 2000, 2001 Eazel, Inc.
+ *  Copyright (C) 2008 Marc Pavot <marc.pavot@gmail.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2, or (at your option)
+ *  any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ *
+ */
 
-   Modified by:
-   Copyright (C) 2008 Marc Pavot <marc.pavot@gmail.com>
-
-   The Gnome Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Library General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
-
-   The Gnome Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Library General Public License for more details.
-
-   You should have received a copy of the GNU Library General Public
-   License along with the Gnome Library; see the file COPYING.LIB.  If not,
-   write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
-   Boston, MA 02110-1301  USA.
-
-   Authors: Ramiro Estrugo <ramiro@eazel.com>
-*/
 
 #ifndef ARIO_CONF_H
 #define ARIO_CONF_H
 
-#include <config.h>
-
-#ifdef ENABLE_GCONF
-#include <gconf/gconf-client.h>
-typedef GConfClientNotifyFunc ArioNotifyFunc;
-#else
-typedef void    (*ArioNotifyFunc)               (gpointer do_not_use1,
-                                                 guint notification_id,
-                                                 gpointer do_not_use2,
+typedef void    (*ArioNotifyFunc)               (guint notification_id,
                                                  gpointer user_data);
-#endif
 
 void            ario_conf_set_boolean           (const char             *key,
                                                  gboolean                boolean_value);
@@ -54,7 +40,8 @@ char *          ario_conf_get_string            (const char             *key,
                                                  const char             *default_value);
 void            ario_conf_set_string            (const char             *key,
                                                  const char             *string_value);
-GSList *        ario_conf_get_string_slist      (const char             *key);
+GSList *        ario_conf_get_string_slist      (const char             *key,
+                                                 const char             *string_value);
 void            ario_conf_set_string_slist      (const char             *key,
                                                  const GSList           *string_slist_value);
 void            ario_conf_init                  (void);

@@ -32,10 +32,6 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 AM_GLIB_GNU_GETTEXT
 
-dnl Gconf
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
-
 dnl Debugging information
 AC_ARG_ENABLE(debug,
               AC_HELP_STRING([--enable-debug],
@@ -43,18 +39,6 @@ AC_ARG_ENABLE(debug,
 if test x"$enable_debug" = xyes; then
    AC_DEFINE(DEBUG, 1, [Add runtime debugging information (slower)])
 fi
-
-dnl GCONF
-AC_ARG_ENABLE(gconf,
-              AC_HELP_STRING([--disable-gconf],
-                             [Disable support of GConf]))
-if test x"$enable_gconf" != xno; then
-   AC_DEFINE(ENABLE_GCONF, 1, [Add support of GConf])
-   PKG_CHECK_MODULES(GCONF, [gconf-2.0])
-   AC_SUBST(GCONF_CFLAGS)
-   AC_SUBST(GCONF_LIBS)
-fi
-AM_CONDITIONAL(USE_GCONF, test x"$enable_gconf" != xno)
 
 dnl Search
 AC_ARG_ENABLE(search,
@@ -152,11 +136,6 @@ if test x${enable_debug} = xyes; then
         echo "Debug information is:                     ENABLED"
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
-fi
-if test x${enable_gconf} != xno; then
-        echo "GConf support is:                         ENABLED  (--disable-gconf)"
-else
-        echo "GConf support is:                         DISABLED"
 fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"

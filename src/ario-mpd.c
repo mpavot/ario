@@ -570,7 +570,7 @@ ario_mpd_connect_to (ArioMpd *mpd,
         if (!connection)
                 return FALSE;
 
-        password = ario_conf_get_string (CONF_PASSWORD, NULL);
+        password = ario_conf_get_string (PREF_PASSWORD, PREF_PASSWORD_DEFAULT);
         if (password) {
                 mpd_sendPasswordCommand (connection, password);
                 mpd_finishCommand (connection);
@@ -590,8 +590,8 @@ ario_mpd_connect_to (ArioMpd *mpd,
         return TRUE;
 }
 
-static void
-ario_mpd_connect_real (ArioMpd *mpd)
+static gpointer
+ario_mpd_connect_thread (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         gchar *hostname;
@@ -599,8 +599,8 @@ ario_mpd_connect_real (ArioMpd *mpd)
         float timeout;
         static GtkWidget *dialog = NULL;
 
-        hostname = ario_conf_get_string (CONF_HOST, "localhost");
-        port = ario_conf_get_integer (CONF_PORT, 6600);
+        hostname = ario_conf_get_string (PREF_HOST, PREF_HOST_DEFAULT);
+        port = ario_conf_get_integer (PREF_PORT, PREF_PORT_DEFAULT);
         timeout = 5.0;
 
         if (hostname == NULL)
@@ -624,38 +624,55 @@ ario_mpd_connect_real (ArioMpd *mpd)
 
         g_free (hostname);
         mpd->priv->connecting = FALSE;
+        g_thread_exit (NULL);
+
+        return NULL;
 }
 
 gboolean
 ario_mpd_connect (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        GtkWidget *win, *vbox,*label;
+        GtkWidget *win, *vbox,*label, *bar;
+        GThread* thread;
 
         /* check if there is a connection */
         if (mpd->priv->connection || mpd->priv->connecting)
                 return FALSE;
 
+        mpd->priv->connecting = TRUE;
+
+        thread = g_thread_create ((GThreadFunc) ario_mpd_connect_thread,
+                                  mpd, TRUE, NULL);
+
         win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        vbox = gtk_vbox_new (FALSE, 12);
-        label = gtk_label_new (_("Connecting to MPD server..."));
+        gtk_window_set_modal (GTK_WINDOW (win), TRUE);
+        vbox = gtk_vbox_new (FALSE, 0);
+        label = gtk_label_new (_("Connecting..."));
+        bar = gtk_progress_bar_new ();
 
         gtk_container_add (GTK_CONTAINER (win), vbox);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 12);
+        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
+        gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
 
         gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
         gtk_window_set_title (GTK_WINDOW (win), "Ario");
         gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
         gtk_widget_show_all (win);
 
-        while (gtk_events_pending ())
-                gtk_main_iteration ();
+        while (mpd->priv->connecting) {
+                gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
+                while (gtk_events_pending ())
+                        gtk_main_iteration ();
+                g_usleep (200000);
+        }
 
-        ario_mpd_connect_real (mpd);
+        g_thread_join (thread);
 
         gtk_widget_hide (win);
         gtk_widget_destroy (win);
-                return FALSE;
+
+        return FALSE;
 }
 
 void
@@ -1699,3 +1716,4 @@ ario_mpd_free_file_list (ArioMpdFileList *files)
                 g_free (files);
         }
 }
+

@@ -125,7 +125,7 @@ ario_plugins_engine_load_all (void)
         gchar **pdirs;
         int i;
 
-        active_plugins = ario_conf_get_string_slist (CONF_PLUGINS_LIST);
+        active_plugins = ario_conf_get_string_slist (PREF_PLUGINS_LIST, PREF_PLUGINS_LIST_DEFAULT);
 
         /* load user's plugins */
         home = g_get_home_dir ();
@@ -338,7 +338,7 @@ save_active_plugin_list ()
                 }
         }
 
-        ario_conf_set_string_slist (CONF_PLUGINS_LIST, active_plugins);
+        ario_conf_set_string_slist (PREF_PLUGINS_LIST, active_plugins);
         g_slist_free (active_plugins);
 
         ario_plugins_engine_active_plugins_changed ();
@@ -442,7 +442,7 @@ ario_plugins_engine_active_plugins_changed (void)
         gboolean to_activate;
         GSList *active_plugins;
 
-        active_plugins = ario_conf_get_string_slist (CONF_PLUGINS_LIST);
+        active_plugins = ario_conf_get_string_slist (PREF_PLUGINS_LIST, PREF_PLUGINS_LIST_DEFAULT);
 
         for (pl = plugin_list; pl; pl = pl->next) {
                 ArioPluginInfo *info = (ArioPluginInfo*)pl->data;

@@ -321,7 +321,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         filesystem->priv->paned = gtk_hpaned_new ();
         gtk_paned_pack1 (GTK_PANED (filesystem->priv->paned), scrolledwindow_filesystem, FALSE, FALSE);
 
-        pos = ario_conf_get_integer (CONF_FILSYSTEM_HPANED_SIZE, 250);
+        pos = ario_conf_get_integer (PREF_FILSYSTEM_HPANED_SIZE, PREF_FILSYSTEM_HPANED_SIZE_DEFAULT);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (filesystem->priv->paned),
                                         pos);
@@ -336,7 +336,7 @@ ario_filesystem_shutdown (ArioSource *source)
 
         pos = gtk_paned_get_position (GTK_PANED (filesystem->priv->paned));
         if (pos > 0)
-                ario_conf_set_integer (CONF_FILSYSTEM_HPANED_SIZE,
+                ario_conf_set_integer (PREF_FILSYSTEM_HPANED_SIZE,
                                        pos);
 }
 

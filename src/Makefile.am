@@ -31,6 +31,7 @@ ario_SOURCES = \
 	covers/ario-cover-manager.h\
 	covers/ario-cover-provider.c\
 	covers/ario-cover-provider.h\
+        lib/ario-conf.c\
 	lib/ario-conf.h\
 	lib/eggtrayicon.c\
 	lib/eggtrayicon.h\
@@ -119,12 +120,6 @@ ario_SOURCES = \
 	widgets/ario-volume.c\
 	widgets/ario-volume.h
 
-if USE_GCONF
-        ario_SOURCES += lib/ario-gconf.c
-else
-        ario_SOURCES += lib/ario-xml-conf.c
-endif
-
 if USE_EGGTRAYICON
         ario_SOURCES +=  widgets/ario-tray-icon.c\
 	                 widgets/ario-tray-icon.h
@@ -140,12 +135,10 @@ endif
 
 ario_LDADD = \
         $(DEPS_LIBS)\
-        $(GCONF_LIBS)\
         $(AVAHI_LIBS)
 
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
-                $(GCONF_CFLAGS) \
                 $(AVAHI_CFLAGS) \
                 -DLOCALE_DIR=\""$(pkgdatadir)/locale"\"\
                 -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\

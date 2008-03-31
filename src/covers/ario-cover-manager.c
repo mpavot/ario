@@ -159,8 +159,8 @@ ario_cover_manager_shutdown (ArioCoverManager *cover_manager)
         g_slist_foreach (cover_manager->priv->providers, (GFunc) ario_cover_manager_shutdown_foreach, &providers);
         g_slist_foreach (cover_manager->priv->providers, (GFunc) ario_cover_manager_shutdown_active_foreach, &active_providers);
 
-        ario_conf_set_string_slist (COVER_PROVIDERS_LIST, providers);
-        ario_conf_set_string_slist (COVER_ACTIVE_PROVIDERS_LIST, active_providers);
+        ario_conf_set_string_slist (PREF_COVER_PROVIDERS_LIST, providers);
+        ario_conf_set_string_slist (PREF_COVER_ACTIVE_PROVIDERS_LIST, active_providers);
         g_slist_free (providers);
         g_slist_free (active_providers);
 }
@@ -183,7 +183,7 @@ ario_cover_manager_update_providers (ArioCoverManager *cover_manager)
         GSList *providers = NULL;
         ArioCoverProvider *cover_provider;
 
-        conf_providers = ario_conf_get_string_slist (COVER_PROVIDERS_LIST);
+        conf_providers = ario_conf_get_string_slist (PREF_COVER_PROVIDERS_LIST, PREF_COVER_PROVIDERS_LIST_DEFAULT);
         for (conf_tmp = conf_providers; conf_tmp; conf_tmp = g_slist_next (conf_tmp)) {
                 found = g_slist_find_custom (cover_manager->priv->providers,
                                              conf_tmp->data,
@@ -195,7 +195,7 @@ ario_cover_manager_update_providers (ArioCoverManager *cover_manager)
         g_slist_foreach (conf_providers, (GFunc) g_free, NULL);
         g_slist_free (conf_providers);
 
-        conf_active_providers = ario_conf_get_string_slist (COVER_ACTIVE_PROVIDERS_LIST);
+        conf_active_providers = ario_conf_get_string_slist (PREF_COVER_ACTIVE_PROVIDERS_LIST, PREF_COVER_ACTIVE_PROVIDERS_LIST_DEFAULT);
         for (conf_tmp = conf_active_providers; conf_tmp; conf_tmp = g_slist_next (conf_tmp)) {
                 found = g_slist_find_custom (providers,
                                              conf_tmp->data,

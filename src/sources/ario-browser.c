@@ -92,9 +92,7 @@ static void ario_browser_cmd_get_album_cover (GtkAction *action,
                                               ArioBrowser *browser);
 static void ario_browser_cmd_remove_album_cover (GtkAction *action,
                                                  ArioBrowser *browser);
-static void ario_browser_covertree_visible_changed_cb (gpointer do_not_use1,
-                                                       guint notification_id,
-                                                       gpointer do_not_use3,
+static void ario_browser_covertree_visible_changed_cb (guint notification_id,
                                                        ArioBrowser *browser);
 
 struct ArioBrowserPrivate
@@ -384,7 +382,7 @@ ario_browser_init (ArioBrowser *browser)
         gtk_tree_view_append_column (GTK_TREE_VIEW (browser->priv->albums), 
                                      column);
         gtk_tree_view_column_set_visible (column,
-                                          !ario_conf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
+                                          !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         /* Model */
         browser->priv->albums_model = gtk_list_store_new (ALBUM_N_COLUMN,
                                                           G_TYPE_STRING,
@@ -429,7 +427,7 @@ ario_browser_init (ArioBrowser *browser)
                                  browser,
                                  0);
 
-        ario_conf_notification_add (CONF_COVER_TREE_HIDDEN,
+        ario_conf_notification_add (PREF_COVER_TREE_HIDDEN,
                                     (ArioNotifyFunc) ario_browser_covertree_visible_changed_cb,
                                     browser);
 
@@ -1485,13 +1483,11 @@ ario_browser_cmd_remove_album_cover (GtkAction *action,
 }
 
 static void
-ario_browser_covertree_visible_changed_cb (gpointer do_not_use1,
-                                           guint notification_id,
-                                           gpointer do_not_use3,
+ario_browser_covertree_visible_changed_cb (guint notification_id,
                                            ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
         gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (browser->priv->albums), 1),
-                                          !ario_conf_get_boolean (CONF_COVER_TREE_HIDDEN, FALSE));
+                                          !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         ario_browser_artists_selection_update (browser);
 }

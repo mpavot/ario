@@ -20,39 +20,98 @@
 #ifndef __ARIO_PREFERENCES_H
 #define __ARIO_PREFERENCES_H
 
-#define CONF_HOST                       "/apps/ario/host"
-#define CONF_PORT                       "/apps/ario/port"
-#define CONF_TIMEOUT                    "/apps/ario/timeout"
-#define CONF_AUTOCONNECT                "/apps/ario/autoconnect"
-#define CONF_PASSWORD                   "/apps/ario/password"
-#define CONF_COVER_TREE_HIDDEN          "/apps/ario/ario_cover_tree_hidden"
-#define CONF_COVER_AMAZON_COUNTRY       "/apps/ario/ario_cover_amazon_country"
-#define CONF_USE_PROXY                  "/apps/ario/use_proxy"
-#define CONF_PROXY_ADDRESS              "/apps/ario/proxy_address"
-#define CONF_PROXY_PORT                 "/apps/ario/proxy_port"
-#define CONF_SHOW_TABS                  "/apps/ario/show_tabs"
-#define CONF_TRAYICON_BEHAVIOR          "/apps/ario/trayicon_behavior"
-#define CONF_FIRST_TIME                 "/apps/ario/first_time_flag"
+#define PREF_HOST                               "host"
+#define PREF_HOST_DEFAULT                       "localhost"
 
-#define CONF_WINDOW_WIDTH               "/apps/ario/state/window_width"
-#define CONF_WINDOW_HEIGHT              "/apps/ario/state/window_height"
-#define CONF_WINDOW_MAXIMIZED           "/apps/ario/state/window_maximized"
-#define CONF_STATUSBAR_HIDDEN           "/apps/ario/state/statusbar_hidden"
-#define CONF_VPANED_POSITION            "/apps/ario/state/vpaned_position"
-#define CONF_PLAYLISTS_HPANED_SIZE      "/apps/ario/state/playlists_hpaned_position"
-#define CONF_FILSYSTEM_HPANED_SIZE      "/apps/ario/state/filesystem_hpaned_position"
-#define CONF_SOURCE                     "/apps/ario/state/source"
-#define CONF_TRACK_COLUMN_SIZE          "/apps/ario/state/track_column_size"
-#define CONF_TITLE_COLUMN_SIZE          "/apps/ario/state/title_column_size"
-#define CONF_ARTIST_COLUMN_SIZE         "/apps/ario/state/artist_column_size"
-#define CONF_ALBUM_COLUMN_SIZE          "/apps/ario/state/album_column_size"
-#define CONF_PLUGINS_LIST               "/apps/ario/plugins/active-plugins"
-#define CONF_SOURCE_LIST                "/apps/ario/state/sources-order"
-#define COVER_PROVIDERS_LIST            "/apps/ario/cover-providers"
-#define COVER_ACTIVE_PROVIDERS_LIST     "/apps/ario/active-cover-providers"
-#define LYRICS_PROVIDERS_LIST           "/apps/ario/lyrics-providers"
-#define LYRICS_ACTIVE_PROVIDERS_LIST    "/apps/ario/active-lyrics-providers"
-#define CONF_MUSIC_DIR                  "/apps/ario/music-dir"
+#define PREF_PORT                               "port"
+#define PREF_PORT_DEFAULT                       6600
+
+#define PREF_AUTOCONNECT                        "autoconnect"
+#define PREF_AUTOCONNECT_DEFAULT                TRUE
+
+#define PREF_PASSWORD                           "password"
+#define PREF_PASSWORD_DEFAULT                   NULL
+
+#define PREF_COVER_TREE_HIDDEN                  "ario_cover_tree_hidden"
+#define PREF_COVER_TREE_HIDDEN_DEFAULT          FALSE
+
+#define PREF_COVER_AMAZON_COUNTRY               "ario_cover_amazon_country"
+#define PREF_COVER_AMAZON_COUNTRY_DEFAULT       "com"
+
+#define PREF_USE_PROXY                          "use_proxy"
+#define PREF_USE_PROXY_DEFAULT                  FALSE
+
+#define PREF_PROXY_ADDRESS                      "proxy_address"
+#define PREF_PROXY_ADDRESS_DEFAULT              "192.168.0.1"
+
+#define PREF_PROXY_PORT                         "proxy_port"
+#define PREF_PROXY_PORT_DEFAULT                 8080
+
+#define PREF_SHOW_TABS                          "show_tabs"
+#define PREF_SHOW_TABS_DEFAULT                  TRUE
+
+#define PREF_TRAYICON_BEHAVIOR                  "trayicon_behavior"
+#define PREF_TRAYICON_BEHAVIOR_DEFAULT          0
+
+#define PREF_FIRST_TIME                         "first_time_flag"
+#define PREF_FIRST_TIME_DEFAULT                 FALSE
+
+#define PREF_WINDOW_WIDTH                       "window_width"
+#define PREF_WINDOW_WIDTH_DEFAULT               600
+
+#define PREF_WINDOW_HEIGHT                      "window_height"
+#define PREF_WINDOW_HEIGHT_DEFAULT              600
+
+#define PREF_WINDOW_MAXIMIZED                   "window_maximized"
+#define PREF_WINDOW_MAXIMIZED_DEFAULT           TRUE
+
+#define PREF_STATUSBAR_HIDDEN                   "statusbar_hidden"
+#define PREF_STATUSBAR_HIDDEN_DEFAULT           FALSE
+
+#define PREF_VPANED_POSITION                    "vpaned_position"
+#define PREF_VPANED_POSITION_DEFAULT            400
+
+#define PREF_PLAYLISTS_HPANED_SIZE              "playlists_hpaned_position"
+#define PREF_PLAYLISTS_HPANED_SIZE_DEFAULT      250
+
+#define PREF_FILSYSTEM_HPANED_SIZE              "filesystem_hpaned_position"
+#define PREF_FILSYSTEM_HPANED_SIZE_DEFAULT      250
+
+#define PREF_SOURCE                             "source"
+#define PREF_SOURCE_DEFAULT                     0
+
+#define PREF_TRACK_COLUMN_SIZE                  "track_column_size"
+#define PREF_TRACK_COLUMN_SIZE_DEFAULT          50
+
+#define PREF_TITLE_COLUMN_SIZE                  "title_column_size"
+#define PREF_TITLE_COLUMN_SIZE_DEFAULT          200
+
+#define PREF_ARTIST_COLUMN_SIZE                 "artist_column_size"
+#define PREF_ARTIST_COLUMN_SIZE_DEFAULT         200
+
+#define PREF_ALBUM_COLUMN_SIZE                  "album_column_size"
+#define PREF_ALBUM_COLUMN_SIZE_DEFAULT          200
+
+#define PREF_PLUGINS_LIST                       "active-plugins"
+#define PREF_PLUGINS_LIST_DEFAULT               "filesystem,radios,wikipedia"
+
+#define PREF_SOURCE_LIST                        "sources-order"
+#define PREF_SOURCE_LIST_DEFAULT                "library,search,radios,storedplaylists,filesystem"
+
+#define PREF_COVER_PROVIDERS_LIST               "cover-providers"
+#define PREF_COVER_PROVIDERS_LIST_DEFAULT       "local,amazon,lastfm"
+
+#define PREF_COVER_ACTIVE_PROVIDERS_LIST         "active-cover-providers"
+#define PREF_COVER_ACTIVE_PROVIDERS_LIST_DEFAULT "local,amazon,lastfm"
+
+#define PREF_LYRICS_PROVIDERS_LIST              "lyrics-providers"
+#define PREF_LYRICS_PROVIDERS_LIST_DEFAULT      "lyricwiki,leoslyrics"
+
+#define PREF_LYRICS_ACTIVE_PROVIDERS_LIST         "active-lyrics-providers"
+#define PREF_LYRICS_ACTIVE_PROVIDERS_LIST_DEFAULT "lyricwiki,leoslyrics"
+
+#define PREF_MUSIC_DIR                          "music-dir"
+#define PREF_MUSIC_DIR_DEFAULT                  NULL
 
 enum
 {

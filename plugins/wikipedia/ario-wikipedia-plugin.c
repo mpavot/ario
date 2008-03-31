@@ -38,7 +38,7 @@ static void ario_wikipedia_cmd_find_artist (GtkAction *action,
 
 #define ARIO_WIKIPEDIA_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_WIKIPEDIA_PLUGIN, ArioWikipediaPluginPrivate))
 
-#define CONF_WIKIPEDIA_LANGUAGE                "/apps/ario/plugins/wikipedia-language"
+#define CONF_WIKIPEDIA_LANGUAGE         "plugins/wikipedia-language"
 
 #ifdef WIN32
 #undef UI_PATH 

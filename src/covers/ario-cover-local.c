@@ -169,7 +169,7 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
 
         if (!file)
                 return FALSE;
-        musicdir = ario_conf_get_string (CONF_MUSIC_DIR, NULL);
+        musicdir = ario_conf_get_string (PREF_MUSIC_DIR, PREF_MUSIC_DIR_DEFAULT);
         if (musicdir && strlen (musicdir) > 1) {
                 for (i = 0; valid_cover_names[i]; i++) {
                         filename = g_build_filename (musicdir, file, valid_cover_names[i], NULL);

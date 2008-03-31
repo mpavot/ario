@@ -255,7 +255,7 @@ ario_cover_amazon_make_xml_uri (const char *artist,
         keywords = tmp;
 
         /* What is the amazon country choosen in the preferences? */
-        ext = ario_conf_get_string (CONF_COVER_AMAZON_COUNTRY, "com");
+        ext = ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT);
 
         /* The japanese amazon need a different extension */
         if (!strcmp (ext, "jp")) {

@@ -156,10 +156,10 @@ ario_proxy_preferences_sync (ArioProxyPreferences *proxy_preferences)
         int proxy_port;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (proxy_preferences->priv->proxy_check), 
-                                      ario_conf_get_boolean (CONF_USE_PROXY, FALSE));
+                                      ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT));
 
-        proxy_address = ario_conf_get_string (CONF_PROXY_ADDRESS, "192.168.0.1");
-        proxy_port = ario_conf_get_integer (CONF_PROXY_PORT, 8080);
+        proxy_address = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS_DEFAULT);
+        proxy_port = ario_conf_get_integer (PREF_PROXY_PORT, PREF_PROXY_PORT_DEFAULT);
 
         gtk_entry_set_text (GTK_ENTRY (proxy_preferences->priv->proxy_address_entry), proxy_address);
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (proxy_preferences->priv->proxy_port_spinbutton), (gdouble) proxy_port);
@@ -171,7 +171,7 @@ ario_proxy_preferences_proxy_address_changed_cb (GtkWidget *widget,
                                                  ArioProxyPreferences *proxy_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_conf_set_string (CONF_PROXY_ADDRESS,
+        ario_conf_set_string (PREF_PROXY_ADDRESS,
                               gtk_entry_get_text (GTK_ENTRY (proxy_preferences->priv->proxy_address_entry)));
 }
 
@@ -180,7 +180,7 @@ ario_proxy_preferences_proxy_port_changed_cb (GtkWidget *widget,
                                               ArioProxyPreferences *proxy_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_conf_set_integer (CONF_PROXY_PORT,
+        ario_conf_set_integer (PREF_PROXY_PORT,
                                (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (proxy_preferences->priv->proxy_port_spinbutton)));
 }
 
@@ -191,7 +191,7 @@ ario_proxy_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
         ARIO_LOG_FUNCTION_START
         gboolean active;
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (proxy_preferences->priv->proxy_check));
-        ario_conf_set_boolean (CONF_USE_PROXY,
+        ario_conf_set_boolean (PREF_USE_PROXY,
                                active);
 
         gtk_widget_set_sensitive (proxy_preferences->priv->proxy_address_entry, active);
