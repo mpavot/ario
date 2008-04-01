@@ -28,6 +28,7 @@
 #include "shell/ario-shell-coverdownloader.h"
 #include "shell/ario-shell-songinfos.h"
 #include "preferences/ario-preferences.h"
+#include "covers/ario-cover-handler.h"
 #include "ario-debug.h"
 
 #define DRAG_THRESHOLD 1
@@ -94,6 +95,8 @@ static void ario_browser_cmd_remove_album_cover (GtkAction *action,
                                                  ArioBrowser *browser);
 static void ario_browser_covertree_visible_changed_cb (guint notification_id,
                                                        ArioBrowser *browser);
+static void ario_browser_cover_changed_cb (ArioCoverHandler *cover_handler,
+                                           ArioBrowser *browser);
 
 struct ArioBrowserPrivate
 {        
@@ -498,6 +501,10 @@ ario_browser_init (ArioBrowser *browser)
         gtk_box_pack_start (GTK_BOX (browser), scrolledwindow_artists, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (browser), scrolledwindow_albums, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (browser), scrolledwindow_songs, TRUE, TRUE, 0);
+
+        g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
+                                 "cover_changed", G_CALLBACK (ario_browser_cover_changed_cb),
+                                 browser, 0);
 }
 
 static void
@@ -1305,6 +1312,16 @@ ario_browser_covers_update (GtkTreeModel *model,
 
 static void 
 ario_browser_get_covers_end (ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                (GtkTreeModelForeachFunc) ario_browser_covers_update,
+                                browser);
+}
+
+static void
+ario_browser_cover_changed_cb (ArioCoverHandler *cover_handler,
+                               ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
         gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
