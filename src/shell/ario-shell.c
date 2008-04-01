@@ -395,8 +395,7 @@ ario_shell_construct (ArioShell *shell)
 
         shell->priv->mpd = ario_mpd_new ();
         shell->priv->cover_handler = ario_cover_handler_new (shell->priv->mpd);
-        shell->priv->header = ario_header_new (shell->priv->mpd,
-                                               shell->priv->cover_handler);
+        shell->priv->header = ario_header_new (shell->priv->mpd);
         separator = gtk_hseparator_new ();
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
         shell->priv->sourcemanager = ario_sourcemanager_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
@@ -420,8 +419,7 @@ ario_shell_construct (ArioShell *shell)
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
                                                      GTK_WINDOW (shell->priv->window),
-                                                     shell->priv->mpd,
-                                                     shell->priv->cover_handler);
+                                                     shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 #else
         /* initialize tray icon */
