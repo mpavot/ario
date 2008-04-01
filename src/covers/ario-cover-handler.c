@@ -324,25 +324,32 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                 cover_handler->priv->pixbuf = NULL;
         }
 
-        cover_path = ario_cover_make_ario_cover_path (artist,
-                                                      album, SMALL_COVER);
+        switch (ario_mpd_get_current_state (cover_handler->priv->mpd)) {
+        case MPD_STATUS_STATE_PLAY:
+        case MPD_STATUS_STATE_PAUSE:
+                cover_path = ario_cover_make_ario_cover_path (artist,
+                                                              album, SMALL_COVER);
 
-        if (cover_path) {
-                cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
-                g_free (cover_path);
-                if (!cover_handler->priv->pixbuf && should_get) {
-                        data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
-                        data->artist = g_strdup (artist);
-                        data->album = g_strdup (album);
-                        g_async_queue_push (cover_handler->priv->queue, data);
+                if (cover_path) {
+                        cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
+                        g_free (cover_path);
+                        if (!cover_handler->priv->pixbuf && should_get) {
+                                data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
+                                data->artist = g_strdup (artist);
+                                data->album = g_strdup (album);
+                                g_async_queue_push (cover_handler->priv->queue, data);
 
-                        if (!cover_handler->priv->thread) {
-                                cover_handler->priv->thread = g_thread_create ((GThreadFunc) ario_cover_handler_get_covers,
-                                                                               cover_handler,
-                                                                               TRUE,
-                                                                               NULL);
+                                if (!cover_handler->priv->thread) {
+                                        cover_handler->priv->thread = g_thread_create ((GThreadFunc) ario_cover_handler_get_covers,
+                                                                                       cover_handler,
+                                                                                       TRUE,
+                                                                                       NULL);
+                                }
                         }
                 }
+                break;
+        default:
+                break;
         }
 }
 

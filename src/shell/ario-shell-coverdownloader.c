@@ -360,7 +360,6 @@ ario_shell_coverdownloader_progress_start (ArioShellCoverdownloader *ario_shell_
         gtk_widget_hide (ario_shell_coverdownloader->priv->close_button);
 
         /* We refresh the window */
-       // g_idle_add (ario_shell_coverdownloader_refresh, NULL);
         ario_shell_coverdownloader_refresh (NULL);
 
         return FALSE;
@@ -386,7 +385,7 @@ ario_shell_coverdownloader_progress_update (ArioShellCoverdownloader *ario_shell
         gtk_label_set_text (GTK_LABEL (ario_shell_coverdownloader->priv->progress_album_label), album);
 
         /* We refresh the window */
-        g_idle_add (ario_shell_coverdownloader_refresh, NULL);
+        g_idle_add ((GSourceFunc) ario_shell_coverdownloader_refresh, NULL);
 }
 
 static gboolean
@@ -471,7 +470,7 @@ ario_shell_coverdownloader_get_covers_from_albums_thread (ArioShellCoverdownload
 
         /* We show the window with the progress bar */
         if (ario_shell_coverdownloader->priv->operation == GET_COVERS)
-                g_idle_add (ario_shell_coverdownloader_progress_start, ario_shell_coverdownloader);
+                g_idle_add ((GSourceFunc) ario_shell_coverdownloader_progress_start, ario_shell_coverdownloader);
 
         ario_shell_coverdownloader->priv->nb_covers = g_slist_length (ario_shell_coverdownloader->priv->albums);
 
@@ -488,9 +487,9 @@ ario_shell_coverdownloader_get_covers_from_albums_thread (ArioShellCoverdownload
         }
         /* We change the window to show a close button and infos about the search */
         if (ario_shell_coverdownloader->priv->operation == GET_COVERS)
-                g_idle_add (ario_shell_coverdownloader_progress_end, ario_shell_coverdownloader);
+                g_idle_add ((GSourceFunc) ario_shell_coverdownloader_progress_end, ario_shell_coverdownloader);
         else
-                g_idle_add (gtk_widget_destroy, ario_shell_coverdownloader);
+                g_idle_add ((GSourceFunc) gtk_widget_destroy, ario_shell_coverdownloader);
 
         ario_cover_handler_force_reload();
 
