@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 01:52+0200\n"
-"PO-Revision-Date: 2008-03-10 21:45+0000\n"
+"POT-Creation-Date: 2008-04-01 20:49+0200\n"
+"PO-Revision-Date: 2008-03-29 19:00+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-03-10 22:12+0000\n"
+"X-Launchpad-Export-Date: 2008-04-01 05:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -286,14 +286,14 @@ msgstr ""
 msgid "Track :"
 msgstr ""
 
-#: ../src/ario-mpd.c:620
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Невозможно соединиться с mpd. Проверьте настройки соединения."
-
 #: ../src/ario-mpd.c:644
 #, fuzzy
 msgid "Connecting to MPD server..."
 msgstr "Соединение"
+
+#: ../src/ario-mpd.c:669
+msgid "Impossible to connect to mpd. Check the connection options."
+msgstr "Невозможно соединиться с mpd. Проверьте настройки соединения."
 
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1287
@@ -356,7 +356,7 @@ msgstr ""
 msgid "_Deactivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:745
+#: ../src/plugins/ario-plugin-manager.c:744
 msgid "Active plugins"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgstr "Библиотека"
 
 #: ../src/sources/ario-browser.c:311 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:203
-#: ../src/shell/ario-shell-similarartists.c:328
+#: ../src/shell/ario-shell-similarartists.c:335
 #: ../src/widgets/ario-playlist.c:290 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Исполнитель"
@@ -612,18 +612,22 @@ msgstr ""
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:634
+#: ../src/shell/ario-shell.c:631
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:635
+#: ../src/shell/ario-shell.c:632
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
-#: ../src/shell/ario-shell.c:907
+#: ../src/shell/ario-shell.c:904
 #, fuzzy
 msgid "Configure Plugins"
 msgstr "Настройка"
@@ -686,7 +690,7 @@ msgstr "Сервер"
 msgid "Interface"
 msgstr "Внешний вид"
 
-#: ../src/shell/ario-shell-similarartists.c:317
+#: ../src/shell/ario-shell-similarartists.c:324
 msgid "Image"
 msgstr ""
 
@@ -1052,6 +1056,53 @@ msgstr ""
 msgid "Wikipedia"
 msgstr ""
 
+#~ msgid "Amazon search"
+#~ msgstr "Amazon поиск"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Большая обложка (Медленнее)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Средняя обложка"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Маленькая обложка (Быстрее)"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Получить обложку с _Amazon"
+
+#, fuzzy
+#~ msgid "Show albums properties"
+#~ msgstr "Показать слова песен"
+
+#, fuzzy
+#~ msgid "Show songs properties"
+#~ msgstr "Показать слова песен"
+
+#, fuzzy
+#~ msgid "Covers sources"
+#~ msgstr "Обложки"
+
+#, fuzzy
+#~ msgid "Lyrics sources"
+#~ msgstr "Обложки"
+
+#, fuzzy
+#~ msgid "Password : "
+#~ msgstr "Пароль : "
+
+#, fuzzy
+#~ msgid "_Password:"
+#~ msgstr "Пароль :"
+
+#, fuzzy
+#~ msgid "Covers providers"
+#~ msgstr "Размер обложки"
+
+#, fuzzy
+#~ msgid "lyrics providers"
+#~ msgstr "Размер обложки"
+
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 для 'играть/пауза', 1 для 'играть следующую песню', 2 для 'ничего не "
@@ -1155,54 +1206,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Вы можете найти для Вашей обложки на amazon.com .fr .de .uk or .ca более "
 #~ "точные результаты"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Обложки"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "Обложки"
-
-#, fuzzy
-#~ msgid "Password : "
-#~ msgstr "Пароль :"
-
-#, fuzzy
-#~ msgid "Password:"
-#~ msgstr "Пароль :"
-
-#, fuzzy
-#~ msgid "_Password:"
-#~ msgstr "Пароль :"
-
-#, fuzzy
-#~ msgid "Covers providers"
-#~ msgstr "Размер обложки"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Размер обложки"
-
-#~ msgid "Amazon search"
-#~ msgstr "Amazon поиск"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Большая обложка (Медленнее)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Средняя обложка"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Маленькая обложка (Быстрее)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Получить обложку с _Amazon"
-
-#, fuzzy
-#~ msgid "Show albums properties"
-#~ msgstr "Показать слова песен"
-
-#, fuzzy
-#~ msgid "Show songs properties"
-#~ msgstr "Показать слова песен"

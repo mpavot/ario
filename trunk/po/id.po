@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 01:52+0200\n"
-"PO-Revision-Date: 2008-03-10 21:45+0000\n"
+"POT-Creation-Date: 2008-04-01 20:49+0200\n"
+"PO-Revision-Date: 2008-03-29 13:27+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-03-10 22:12+0000\n"
+"X-Launchpad-Export-Date: 2008-04-01 05:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -287,13 +287,13 @@ msgstr ""
 msgid "Track :"
 msgstr ""
 
-#: ../src/ario-mpd.c:620
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
-
 #: ../src/ario-mpd.c:644
 msgid "Connecting to MPD server..."
 msgstr ""
+
+#: ../src/ario-mpd.c:669
+msgid "Impossible to connect to mpd. Check the connection options."
+msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
 
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1287
@@ -355,7 +355,7 @@ msgstr ""
 msgid "_Deactivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:745
+#: ../src/plugins/ario-plugin-manager.c:744
 msgid "Active plugins"
 msgstr ""
 
@@ -464,7 +464,7 @@ msgstr ""
 
 #: ../src/sources/ario-browser.c:311 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:203
-#: ../src/shell/ario-shell-similarartists.c:328
+#: ../src/shell/ario-shell-similarartists.c:335
 #: ../src/widgets/ario-playlist.c:290 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr ""
@@ -608,11 +608,11 @@ msgstr ""
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:634
+#: ../src/shell/ario-shell.c:631
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:635
+#: ../src/shell/ario-shell.c:632
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -623,9 +623,14 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Nestanet https://launchpad.net/~nesta-101106\n"
+"  reza https://launchpad.net/~edja-kun\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Nestanet https://launchpad.net/~nesta-101106\n"
 "  reza https://launchpad.net/~edja-kun"
 
-#: ../src/shell/ario-shell.c:907
+#: ../src/shell/ario-shell.c:904
 msgid "Configure Plugins"
 msgstr ""
 
@@ -684,7 +689,7 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:317
+#: ../src/shell/ario-shell-similarartists.c:324
 msgid "Image"
 msgstr ""
 
@@ -1043,6 +1048,33 @@ msgstr ""
 msgid "Wikipedia"
 msgstr ""
 
+#~ msgid "Amazon search"
+#~ msgstr "Pencarian dengan Amazon"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Cover besar(lebih lambat)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Sampul sedang"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Sampul kecil"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Ambil sampul dari Amazon"
+
+#, fuzzy
+#~ msgid "Covers sources"
+#~ msgstr "Ukuran cover"
+
+#, fuzzy
+#~ msgid "Lyrics sources"
+#~ msgstr "lirik tak ditemukan"
+
+#, fuzzy
+#~ msgid "lyrics providers"
+#~ msgstr "Ukuran cover"
+
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 untuk 'mulai/jeda', 1 untuk memulai lagu selanjutnya, 2 untuk 'diam'."
@@ -1121,30 +1153,3 @@ msgstr ""
 
 #~ msgid "True if the initial assistant has already been run."
 #~ msgstr "Benar jika inisial asisten telah berjalan"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Ukuran cover"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "lirik tak ditemukan"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Ukuran cover"
-
-#~ msgid "Amazon search"
-#~ msgstr "Pencarian dengan Amazon"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Cover besar(lebih lambat)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Sampul sedang"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Sampul kecil"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Ambil sampul dari Amazon"

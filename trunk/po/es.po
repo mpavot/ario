@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 01:52+0200\n"
-"PO-Revision-Date: 2008-03-10 21:45+0000\n"
+"POT-Creation-Date: 2008-04-01 20:49+0200\n"
+"PO-Revision-Date: 2008-03-29 16:27+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-03-10 22:12+0000\n"
+"X-Launchpad-Export-Date: 2008-04-01 05:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -66,12 +66,12 @@ msgstr "Anfitrión :"
 
 #: ../data/glade/connection-prefs.glade.h:5
 msgid "Music directory :"
-msgstr ""
+msgstr "Directorio de musica :"
 
 #: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:884
 #: ../plugins/radios/ario-radio.c:1083
 msgid "Name :"
-msgstr ""
+msgstr "Nombre :"
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
@@ -141,7 +141,8 @@ msgstr "Buscar"
 #: ../data/glade/interface-prefs.glade.h:1
 #, fuzzy
 msgid "On middle button click on tray icon :"
-msgstr "Comportamiento del doble clic en la bandeja de iconos."
+msgstr ""
+"Comportamiendo de click en el boton central sobre el icono de la bandeja."
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Show tabs"
@@ -154,7 +155,7 @@ msgstr ""
 #: ../data/glade/interface-prefs.glade.h:4
 #, fuzzy
 msgid "Tray icon"
-msgstr "Bandeja de iconos"
+msgstr "Icono de la bandeja"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 #, fuzzy
@@ -184,7 +185,7 @@ msgstr "Tiempo de espera para conectase a mpd"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
-msgstr ""
+msgstr "Salida de audio"
 
 #: ../data/glade/server-prefs.glade.h:2
 msgid "Crossfade"
@@ -226,15 +227,15 @@ msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:2
 msgid "Number of albums :"
-msgstr ""
+msgstr "Numero de albums:"
 
 #: ../data/glade/stats-prefs.glade.h:3
 msgid "Number of artists :"
-msgstr ""
+msgstr "Numero de artistas :"
 
 #: ../data/glade/stats-prefs.glade.h:4
 msgid "Number of songs :"
-msgstr ""
+msgstr "Numero de canciones :"
 
 #: ../data/glade/stats-prefs.glade.h:5
 msgid "Play time :"
@@ -251,31 +252,31 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:3
 msgid "Comment :"
-msgstr ""
+msgstr "Comentario :"
 
 #: ../data/glade/song-infos.glade.h:4
 msgid "Composer :"
-msgstr ""
+msgstr "Compositor :"
 
 #: ../data/glade/song-infos.glade.h:5
 msgid "Date :"
-msgstr ""
+msgstr "Fecha :"
 
 #: ../data/glade/song-infos.glade.h:6
 msgid "Disc :"
-msgstr ""
+msgstr "Disco :"
 
 #: ../data/glade/song-infos.glade.h:7
 msgid "Filename :"
-msgstr ""
+msgstr "Nomre de archivo :"
 
 #: ../data/glade/song-infos.glade.h:8
 msgid "Genre :"
-msgstr ""
+msgstr "Genero :"
 
 #: ../data/glade/song-infos.glade.h:9
 msgid "Length :"
-msgstr ""
+msgstr "Duracion :"
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
@@ -283,20 +284,20 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:11
 msgid "Song"
-msgstr ""
+msgstr "Canción"
 
 #: ../data/glade/song-infos.glade.h:13
 msgid "Track :"
 msgstr "Pista :"
 
-#: ../src/ario-mpd.c:620
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
-
 #: ../src/ario-mpd.c:644
 #, fuzzy
 msgid "Connecting to MPD server..."
 msgstr "Conexión"
+
+#: ../src/ario-mpd.c:669
+msgid "Impossible to connect to mpd. Check the connection options."
+msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
 
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1287
@@ -336,7 +337,7 @@ msgstr ""
 #: ../src/preferences/ario-lyrics-preferences.c:145
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
-msgstr ""
+msgstr "Habilitado"
 
 #: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:177
 msgid "_About"
@@ -345,23 +346,23 @@ msgstr "_Acerca de"
 #: ../src/plugins/ario-plugin-manager.c:510
 #, fuzzy
 msgid "C_onfigure"
-msgstr "Configuración"
+msgstr "C_onfigurar"
 
 #: ../src/plugins/ario-plugin-manager.c:519
 msgid "A_ctivate"
-msgstr ""
+msgstr "A_ctivar"
 
 #: ../src/plugins/ario-plugin-manager.c:530
 msgid "Ac_tivate All"
-msgstr ""
+msgstr "Ac_tivar todos"
 
 #: ../src/plugins/ario-plugin-manager.c:535
 msgid "_Deactivate All"
-msgstr ""
+msgstr "_Desactivar todos"
 
-#: ../src/plugins/ario-plugin-manager.c:745
+#: ../src/plugins/ario-plugin-manager.c:744
 msgid "Active plugins"
-msgstr ""
+msgstr "Complementos activos"
 
 #: ../src/preferences/ario-connection-preferences.c:382
 msgid "Profile"
@@ -468,7 +469,7 @@ msgstr "Biblioteca"
 
 #: ../src/sources/ario-browser.c:311 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:203
-#: ../src/shell/ario-shell-similarartists.c:328
+#: ../src/shell/ario-shell-similarartists.c:335
 #: ../src/widgets/ario-playlist.c:290 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr "Artista"
@@ -498,7 +499,6 @@ msgid "Title"
 msgstr "Título"
 
 #: ../src/sources/ario-browser.c:1420
-#, fuzzy
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
@@ -556,6 +556,7 @@ msgstr "Lista de reproducción"
 #: ../src/sources/ario-storedplaylists.c:628
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
+"Esta seguro que quiere borrar todas las listas de reproducción seleccionadas?"
 
 #: ../src/shell/ario-shell.c:141
 msgid "_File"
@@ -595,11 +596,12 @@ msgstr "Prefere_ncias"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Change current album cover"
-msgstr ""
+msgstr "_Cambiar la cubierta de album actual"
 
 #: ../src/shell/ario-shell.c:168
+#, fuzzy
 msgid "Download album _covers"
-msgstr ""
+msgstr "Descargar cubiertas_album"
 
 #: ../src/shell/ario-shell.c:171
 msgid "Find similar artists"
@@ -607,7 +609,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:174
 msgid "Show _lyrics"
-msgstr ""
+msgstr "Mostrar _letras"
 
 #: ../src/shell/ario-shell.c:180
 msgid "_Translate this application..."
@@ -617,22 +619,28 @@ msgstr "_Traducir esta aplicación..."
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:634
+#: ../src/shell/ario-shell.c:631
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:635
+#: ../src/shell/ario-shell.c:632
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Paco Molinero https://launchpad.net/~franciscomol\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
+"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Paco Molinero https://launchpad.net/~franciscomol"
 
-#: ../src/shell/ario-shell.c:907
+#: ../src/shell/ario-shell.c:904
 #, fuzzy
 msgid "Configure Plugins"
-msgstr "Configuración"
+msgstr "Configurar extensiones"
 
 #: ../src/shell/ario-shell-coverdownloader.c:261
 msgid "Music Player Cover Download"
@@ -674,7 +682,7 @@ msgstr "Error guardando el archivo"
 #: ../src/shell/ario-shell-preferences.c:185
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
-msgstr ""
+msgstr "Letras"
 
 #: ../src/shell/ario-shell-lyricsselect.c:191
 msgid "Lyrics Download"
@@ -692,7 +700,7 @@ msgstr "Servidor"
 msgid "Interface"
 msgstr "Interfaz"
 
-#: ../src/shell/ario-shell-similarartists.c:317
+#: ../src/shell/ario-shell-similarartists.c:324
 msgid "Image"
 msgstr ""
 
@@ -700,17 +708,19 @@ msgstr ""
 #: ../src/shell/ario-shell-songinfos.c:263
 #: ../src/shell/ario-shell-songinfos.c:412
 msgid "Song Properties"
-msgstr ""
+msgstr "Propiedades de la canción"
 
 #: ../src/widgets/ario-firstlaunch.c:208
 msgid "The following configuration will be used:"
-msgstr ""
+msgstr "La siguiente configuracion sera usada:"
 
 #: ../src/widgets/ario-firstlaunch.c:273
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
+"Es la primera vez que usa Ario.\n"
+"El asistente le ayudara a configurarlo."
 
 #: ../src/widgets/ario-firstlaunch.c:278
 msgid "Welcome to Ario"
@@ -749,12 +759,14 @@ msgid " of "
 msgstr " de "
 
 #: ../src/widgets/ario-header.c:350
+#, fuzzy
 msgid "Toggle random on/off"
-msgstr ""
+msgstr "Cambiar aleatorio on/off"
 
 #: ../src/widgets/ario-header.c:361
+#, fuzzy
 msgid "Toggle repeat on/off"
-msgstr ""
+msgstr "Cambiar repetir on/off"
 
 #: ../src/widgets/ario-header.c:478
 msgid "Change the music volume"
@@ -781,9 +793,8 @@ msgid "_Save"
 msgstr "_Guardar"
 
 #: ../src/widgets/ario-playlist.c:129
-#, fuzzy
 msgid "_Go to playing song"
-msgstr "No se está reproduciendo nada"
+msgstr "_Ir la la cancion reproduciendose"
 
 #: ../src/widgets/ario-playlist.c:312
 msgid "Duration"
@@ -795,7 +806,6 @@ msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
 #: ../src/widgets/ario-playlist.c:1238
-#, fuzzy
 msgid "Playlist name :"
 msgstr "Nombre de lista de reprodución:"
 
@@ -992,7 +1002,6 @@ msgid "Multimedia Keys"
 msgstr ""
 
 #: ../plugins/radios/ario-radio.c:117
-#, fuzzy
 msgid "Add a _new radio"
 msgstr "Añadir una _nueva radio"
 
@@ -1034,12 +1043,12 @@ msgstr "Editar una radio web"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr ""
+msgstr "Escuchar radio por internet"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:52
 msgid "Find artist on Wikipedia"
-msgstr ""
+msgstr "Buscar artista en Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
 msgid "Wikipedia Plugin - Configuration"
@@ -1047,7 +1056,7 @@ msgstr ""
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
 msgid "Wikipedia language :"
-msgstr ""
+msgstr "Idioma de Wikipedia :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
@@ -1056,6 +1065,45 @@ msgstr ""
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr ""
+
+#~ msgid "Amazon search"
+#~ msgstr "Búsqueda en Amazon"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Carátulas grandes (más lento)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Carátula media"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Carátula pequeña (Rápido)"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Conseguir carátulas en _Amazon"
+
+#, fuzzy
+#~ msgid "Covers sources"
+#~ msgstr "Carátulas"
+
+#, fuzzy
+#~ msgid "Lyrics sources"
+#~ msgstr "Carátulas"
+
+#, fuzzy
+#~ msgid "Password : "
+#~ msgstr "Contraseña : "
+
+#, fuzzy
+#~ msgid "_Password:"
+#~ msgstr "Contraseña :"
+
+#, fuzzy
+#~ msgid "Covers providers"
+#~ msgstr "Tamaño de carátula"
+
+#, fuzzy
+#~ msgid "lyrics providers"
+#~ msgstr "Tamaño de carátula"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
@@ -1128,6 +1176,9 @@ msgstr ""
 #~ msgid "Main window width"
 #~ msgstr "Anchura de la ventana principal"
 
+#~ msgid "Ordered list of sources."
+#~ msgstr "List ordenada de las fuentes."
+
 #~ msgid "Port to connect to"
 #~ msgstr "Puerto a conectar"
 
@@ -1140,6 +1191,9 @@ msgstr ""
 
 #~ msgid "Position of playlists pane"
 #~ msgstr "Posición del panel de la lista de reproducción"
+
+#~ msgid "Sources order"
+#~ msgstr "Orden de las fuentes."
 
 #~ msgid "The amazon country to use to get the covers"
 #~ msgstr "País de amaxon a usar paara conseguir las carátulas"
@@ -1164,47 +1218,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Puede buscar su carátula en amazon.com .fr .de .uk or .ca para tener "
 #~ "resultados más ajustados"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Password : "
-#~ msgstr "Contraseña :"
-
-#, fuzzy
-#~ msgid "Password:"
-#~ msgstr "Contraseña :"
-
-#, fuzzy
-#~ msgid "_Password:"
-#~ msgstr "Contraseña :"
-
-#, fuzzy
-#~ msgid "Covers providers"
-#~ msgstr "Tamaño de carátula"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Tamaño de carátula"
-
-#~ msgid "Amazon search"
-#~ msgstr "Búsqueda en Amazon"
-
-#, fuzzy
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Carátulas grandes (más lento)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Carátula media"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Carátula pequeña (Rápido)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Conseguir carátulas en _Amazon"
