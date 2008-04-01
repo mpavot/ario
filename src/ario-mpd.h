@@ -162,7 +162,8 @@ unsigned long           ario_mpd_get_last_update                        (ArioMpd
 void                    ario_mpd_set_current_elapsed                    (ArioMpd *mpd,
                                                                          gint elapsed);
 void                    ario_mpd_set_current_volume                     (ArioMpd *mpd,
-                                                                         gint volume);GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
+                                                                         gint volume);
+GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
 void                    ario_mpd_set_current_random                     (ArioMpd *mpd,
                                                                          gboolean random);
 void                    ario_mpd_set_current_repeat                     (ArioMpd *mpd,
@@ -184,6 +185,8 @@ void                    ario_mpd_do_pause                               (ArioMpd
 void                    ario_mpd_do_stop                                (ArioMpd *mpd);
 
 void                    ario_mpd_free_album                             (ArioMpdAlbum *ario_mpd_album);
+
+ArioMpdAlbum *          ario_mpd_copy_album                             (ArioMpdAlbum *ario_mpd_album);
 
 void                    ario_mpd_clear                                  (ArioMpd *mpd);
 

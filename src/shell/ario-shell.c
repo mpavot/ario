@@ -719,10 +719,10 @@ ario_shell_cmd_covers (GtkAction *action,
 
         coverdownloader = ario_shell_coverdownloader_new (shell->priv->mpd);
 
-        ario_shell_coverdownloader_get_covers (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
-                                               GET_COVERS);
-
-        gtk_widget_destroy (coverdownloader);
+        if (coverdownloader) {
+                ario_shell_coverdownloader_get_covers (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
+                                                       GET_COVERS);
+        }
 }
 
 static void
