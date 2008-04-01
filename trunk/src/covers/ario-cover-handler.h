@@ -54,7 +54,9 @@ ArioCoverHandler * ario_cover_handler_new              (ArioMpd *mpd);
 
 void               ario_cover_handler_force_reload     (void);
 
-GdkPixbuf *        ario_cover_handler_get_cover        (ArioCoverHandler *cover_handler);
+ArioCoverHandler * ario_cover_handler_get_instance     (void);
+
+GdkPixbuf *        ario_cover_handler_get_cover        (void);
 
 G_END_DECLS
 

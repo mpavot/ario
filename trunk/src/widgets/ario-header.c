@@ -27,6 +27,7 @@
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
 #include "shell/ario-shell-coverselect.h"
+#include "covers/ario-cover-handler.h"
 
 static void ario_header_class_init (ArioHeaderClass *klass);
 static void ario_header_init (ArioHeader *header);
@@ -70,7 +71,6 @@ static void ario_header_do_repeat (ArioHeader *header);
 struct ArioHeaderPrivate
 {
         ArioMpd *mpd;
-        ArioCoverHandler *cover_handler;
 
         GtkTooltips *tooltips;
         GtkWidget *prev_button;
@@ -109,8 +109,7 @@ struct ArioHeaderPrivate
 enum
 {
         PROP_0,
-        PROP_MPD,
-        PROP_COVERHANDLER
+        PROP_MPD
 };
 
 static GObjectClass *parent_class = NULL;
@@ -165,13 +164,6 @@ ario_header_class_init (ArioHeaderClass *klass)
                                                               "ArioMpd",
                                                               "ArioMpd object",
                                                               TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_COVERHANDLER,
-                                         g_param_spec_object ("cover_handler",
-                                                              "ArioCoverHandler",
-                                                              "ArioCoverHandler object",
-                                                              TYPE_ARIO_COVER_HANDLER,
                                                               G_PARAM_READWRITE));
 }
 
@@ -370,6 +362,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_container_add (GTK_CONTAINER (alignment), hbox2);
         gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 0);
 
+        g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
+                                 "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
+                                 header, 0);
+
         return G_OBJECT (header);
 }
 
@@ -424,12 +420,6 @@ ario_header_set_property (GObject *object,
                                          "repeat_changed", G_CALLBACK (ario_header_repeat_changed_cb),
                                          header, 0);
                 break;
-        case PROP_COVERHANDLER:
-                header->priv->cover_handler = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (header->priv->cover_handler),
-                                         "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
-                                         header, 0);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -449,9 +439,6 @@ ario_header_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, header->priv->mpd);
                 break;
-        case PROP_COVERHANDLER:
-                g_value_set_object (value, header->priv->cover_handler);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -459,8 +446,7 @@ ario_header_get_property (GObject *object,
 }
 
 GtkWidget *
-ario_header_new (ArioMpd *mpd,
-                 ArioCoverHandler *cover_handler)
+ario_header_new (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioHeader *header;
@@ -468,7 +454,6 @@ ario_header_new (ArioMpd *mpd,
 
         header = ARIO_HEADER (g_object_new (TYPE_ARIO_HEADER,
                                             "mpd", mpd,
-                                            "cover_handler", cover_handler,
                                             NULL));
 
         /* Construct the volume button */
@@ -581,7 +566,7 @@ ario_header_change_cover (ArioHeader *header)
         switch (ario_mpd_get_current_state (header->priv->mpd)) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                cover = ario_cover_handler_get_cover (header->priv->cover_handler);
+                cover = ario_cover_handler_get_cover ();
                 if (cover) {
                         small_cover = gdk_pixbuf_scale_simple (cover,
                                                                header->priv->image_width,

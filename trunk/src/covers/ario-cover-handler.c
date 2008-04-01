@@ -22,7 +22,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "ario-cover-handler.h"
+#include "covers/ario-cover-handler.h"
+#include "covers/ario-cover-manager.h"
 #include "ario-debug.h"
 #include "ario-util.h"
 #include "ario-cover.h"
@@ -40,7 +41,8 @@ static void ario_cover_handler_get_property (GObject *object,
                                              guint prop_id,
                                              GValue *value,
                                              GParamSpec *pspec);
-static void ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler);
+static void ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
+                                            gboolean should_get);
 static void ario_cover_handler_album_changed_cb (ArioMpd *mpd,
                                                  ArioCoverHandler *cover_handler);
 static void ario_cover_handler_state_changed_cb (ArioMpd *mpd,
@@ -64,8 +66,18 @@ struct ArioCoverHandlerPrivate
 {
         ArioMpd *mpd;
 
+        GThread *thread;
+        GAsyncQueue *queue;
+
         GdkPixbuf *pixbuf;
 };
+
+typedef struct ArioCoverHandlerData
+{
+        gchar *artist;
+        gchar *album;
+        gchar *path;
+} ArioCoverHandlerData;
 
 static GObjectClass *parent_class = NULL;
 
@@ -136,6 +148,8 @@ ario_cover_handler_init (ArioCoverHandler *cover_handler)
         ARIO_LOG_FUNCTION_START
         cover_handler->priv = g_new0 (ArioCoverHandlerPrivate, 1);
         cover_handler->priv->pixbuf = NULL;
+        cover_handler->priv->thread = NULL;
+        cover_handler->priv->queue = g_async_queue_new ();
 }
 
 ArioCoverHandler *
@@ -167,6 +181,10 @@ ario_cover_handler_finalize (GObject *object)
         cover_handler = ARIO_COVER_HANDLER (object);
 
         g_return_if_fail (cover_handler->priv != NULL);
+
+        if (cover_handler->priv->thread)
+                g_thread_join (cover_handler->priv->thread);
+        g_async_queue_unref (cover_handler->priv->queue);
 
         if (cover_handler->priv->pixbuf) 
                 g_object_unref(cover_handler->priv->pixbuf);
@@ -218,25 +236,112 @@ ario_cover_handler_get_property (GObject *object,
         }
 }
 
+static gboolean
+ario_cover_handler_cover_changed (ArioCoverHandler *cover_handler)
+{
+        ARIO_LOG_FUNCTION_START
+
+        g_signal_emit (G_OBJECT (cover_handler), ario_cover_handler_signals[COVER_CHANGED], 0);
+
+        return FALSE;
+}
+
 static void
-ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler)
+ario_cover_handler_free_data (ArioCoverHandlerData *data)
+{
+        ARIO_LOG_FUNCTION_START
+        if (data) {
+                g_free (data->artist);
+                g_free (data->album);
+                g_free (data->path);
+                g_free (data);
+        }
+}
+
+static gpointer
+ario_cover_handler_get_covers (ArioCoverHandler *cover_handler)
+{
+        ARIO_LOG_FUNCTION_START
+        GArray *size;
+        GSList *covers;
+        gboolean ret;
+        ArioCoverHandlerData *data;
+
+        while ((data = (ArioCoverHandlerData *) g_async_queue_try_pop (cover_handler->priv->queue))) {
+                if (ario_cover_cover_exists (data->artist, data->album)) {
+                        ario_cover_handler_free_data (data);
+                        continue;
+                }
+
+                covers = NULL;
+                size = g_array_new (TRUE, TRUE, sizeof (int));
+
+                /* If a cover is found, it is loaded in covers(0) */
+                ret = ario_cover_manager_get_covers (ario_cover_manager_get_instance (),
+                                                     data->artist,
+                                                     data->album,
+                                                     data->path,
+                                                     &size,
+                                                     &covers,
+                                                     GET_FIRST_COVER);
+
+                /* If the cover is not too big and not too small (blank image), we save it */
+                if (ret && ario_cover_size_is_valid (g_array_index (size, int, 0))) {
+                        ret = ario_cover_save_cover (data->artist,
+                                                     data->album,
+                                                     g_slist_nth_data (covers, 0),
+                                                     g_array_index (size, int, 0),
+                                                     OVERWRITE_MODE_SKIP);
+
+                        if (ret) {
+                                ario_cover_handler_load_pixbuf (cover_handler, FALSE);
+                                g_idle_add ((GSourceFunc) ario_cover_handler_cover_changed, cover_handler);
+                        }
+                }
+                ario_cover_handler_free_data (data);
+
+                g_array_free (size, TRUE);
+                g_slist_foreach (covers, (GFunc) g_free, NULL);
+                g_slist_free (covers);
+        }
+        cover_handler->priv->thread = NULL;
+
+        return NULL;
+}
+
+static void
+ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
+                                gboolean should_get)
 {
         ARIO_LOG_FUNCTION_START
         gchar *cover_path;
+        ArioCoverHandlerData *data;
+        gchar *artist = ario_mpd_get_current_artist (cover_handler->priv->mpd);
+        gchar *album = ario_mpd_get_current_album (cover_handler->priv->mpd);
 
         if (cover_handler->priv->pixbuf) {
                 g_object_unref(cover_handler->priv->pixbuf);
                 cover_handler->priv->pixbuf = NULL;
         }
 
-        cover_path = ario_cover_make_ario_cover_path (ario_mpd_get_current_artist (cover_handler->priv->mpd),
-                                                      ario_mpd_get_current_album (cover_handler->priv->mpd), SMALL_COVER);
+        cover_path = ario_cover_make_ario_cover_path (artist,
+                                                      album, SMALL_COVER);
 
         if (cover_path) {
                 cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
                 g_free (cover_path);
-                /* TODO: Automatic download of cover */
-                if (!cover_handler->priv->pixbuf) {
+                if (!cover_handler->priv->pixbuf && should_get) {
+                        data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
+                        data->artist = g_strdup (artist);
+                        data->album = g_strdup (album);
+                        g_async_queue_push (cover_handler->priv->queue, data);
+
+                        if (!cover_handler->priv->thread) {
+                                cover_handler->priv->thread = g_thread_create ((GThreadFunc) ario_cover_handler_get_covers,
+                                                                               cover_handler,
+                                                                               TRUE,
+                                                                               NULL);
+                        }
                 }
         }
 }
@@ -246,7 +351,7 @@ ario_cover_handler_album_changed_cb (ArioMpd *mpd,
                                      ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
-        ario_cover_handler_load_pixbuf(cover_handler);
+        ario_cover_handler_load_pixbuf(cover_handler, TRUE);
         g_signal_emit (G_OBJECT (cover_handler), ario_cover_handler_signals[COVER_CHANGED], 0);
 }
 
@@ -255,7 +360,7 @@ ario_cover_handler_state_changed_cb (ArioMpd *mpd,
                                      ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
-        ario_cover_handler_load_pixbuf(cover_handler);
+        ario_cover_handler_load_pixbuf(cover_handler, TRUE);
         g_signal_emit (G_OBJECT (cover_handler), ario_cover_handler_signals[COVER_CHANGED], 0);
 }
 
@@ -263,13 +368,20 @@ void
 ario_cover_handler_force_reload (void)
 {
         ARIO_LOG_FUNCTION_START
-        ario_cover_handler_load_pixbuf (instance);
+        ario_cover_handler_load_pixbuf (instance, TRUE);
         g_signal_emit (G_OBJECT (instance), ario_cover_handler_signals[COVER_CHANGED], 0);
 }
 
-GdkPixbuf *
-ario_cover_handler_get_cover (ArioCoverHandler *cover_handler)
+ArioCoverHandler *
+ario_cover_handler_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START
-        return cover_handler->priv->pixbuf;
+        return instance;
+}
+
+GdkPixbuf *
+ario_cover_handler_get_cover (void)
+{
+        ARIO_LOG_FUNCTION_START
+        return instance->priv->pixbuf;
 }

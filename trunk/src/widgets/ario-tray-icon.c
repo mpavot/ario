@@ -33,6 +33,7 @@
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "covers/ario-cover-handler.h"
 
 #define TRAY_ICON_DEFAULT_TOOLTIP _("Not playing")
 #define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
@@ -117,7 +118,6 @@ struct ArioTrayIconPrivate
         gboolean visible;
 
         ArioMpd *mpd;
-        ArioCoverHandler *cover_handler;
 
         GtkWidget *image;
         GtkWidget *image_play;
@@ -151,8 +151,7 @@ enum
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP,
         PROP_WINDOW,
-        PROP_MPD,
-        PROP_COVERHANDLER
+        PROP_MPD
 };
 
 enum
@@ -229,13 +228,6 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
-                                         PROP_COVERHANDLER,
-                                         g_param_spec_object ("cover_handler",
-                                                              "ArioCoverHandler",
-                                                              "ArioCoverHandler object",
-                                                              TYPE_ARIO_COVER_HANDLER,
-                                                              G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
                                          PROP_ACTION_GROUP,
                                          g_param_spec_object ("action-group",
                                                               "GtkActionGroup",
@@ -290,6 +282,10 @@ ario_tray_icon_init (ArioTrayIcon *icon)
 
         gtk_container_add (GTK_CONTAINER (icon), icon->priv->ebox);
         gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
+
+        g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
+                                 "cover_changed", G_CALLBACK (ario_tray_icon_cover_changed_cb),
+                                 icon, 0);
 }
 
 static GObject *
@@ -369,12 +365,6 @@ ario_tray_icon_set_property (GObject *object,
                                          "elapsed_changed", G_CALLBACK (ario_tray_icon_time_changed_cb),
                                          tray, 0);
                 break;
-        case PROP_COVERHANDLER:
-                tray->priv->cover_handler = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (tray->priv->cover_handler),
-                                         "cover_changed", G_CALLBACK (ario_tray_icon_cover_changed_cb),
-                                         tray, 0);
-                break;
         case PROP_ACTION_GROUP:
                 tray->priv->actiongroup = g_value_get_object (value);
                 gtk_action_group_add_actions (tray->priv->actiongroup,
@@ -407,9 +397,6 @@ ario_tray_icon_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, tray->priv->mpd);
                 break;
-        case PROP_COVERHANDLER:
-                g_value_set_object (value, tray->priv->cover_handler);
-                break;
         case PROP_ACTION_GROUP:
                 g_value_set_object (value, tray->priv->actiongroup);
                 break;
@@ -423,8 +410,7 @@ ArioTrayIcon *
 ario_tray_icon_new (GtkActionGroup *group,
                     GtkUIManager *mgr,
                     GtkWindow *window,
-                    ArioMpd *mpd,
-                    ArioCoverHandler *cover_handler)
+                    ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         return g_object_new (TYPE_ARIO_TRAY_ICON,
@@ -433,7 +419,6 @@ ario_tray_icon_new (GtkActionGroup *group,
                              "ui-manager", mgr,
                              "window", window,
                              "mpd", mpd,
-                             "cover_handler", cover_handler,
                              NULL);
 }
 
@@ -692,7 +677,7 @@ ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon)
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 /* Icon */
-                cover = ario_cover_handler_get_cover(icon->priv->cover_handler);
+                cover = ario_cover_handler_get_cover();
                 if (cover) {
                         gtk_image_set_from_pixbuf (GTK_IMAGE (icon->priv->cover_image), cover);
                         gtk_widget_show (icon->priv->cover_image);
