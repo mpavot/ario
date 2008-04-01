@@ -1296,6 +1296,22 @@ ario_mpd_free_album (ArioMpdAlbum *ario_mpd_album)
         }
 }
 
+ArioMpdAlbum*
+ario_mpd_copy_album (ArioMpdAlbum *ario_mpd_album)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioMpdAlbum *ret = NULL;
+
+        if (ario_mpd_album) {
+                ret = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
+                ret->album = g_strdup (ario_mpd_album->album);
+                ret->artist = g_strdup (ario_mpd_album->artist);
+                ret->path = g_strdup (ario_mpd_album->path);
+        }
+
+        return ret;
+}
+
 void
 ario_mpd_set_current_elapsed (ArioMpd *mpd,
                               gint elapsed)

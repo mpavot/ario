@@ -1310,15 +1310,6 @@ ario_browser_covers_update (GtkTreeModel *model,
         return FALSE;
 }
 
-static void 
-ario_browser_get_covers_end (ArioBrowser *browser)
-{
-        ARIO_LOG_FUNCTION_START
-        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
-                                (GtkTreeModelForeachFunc) ario_browser_covers_update,
-                                browser);
-}
-
 static void
 ario_browser_cover_changed_cb (ArioCoverHandler *cover_handler,
                                ArioBrowser *browser)
@@ -1349,7 +1340,6 @@ ario_browser_cmd_albums_properties (GtkAction *action,
 
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (albums);
-        ario_browser_get_covers_end (browser);
 }
 
 static void
@@ -1399,19 +1389,17 @@ get_artist_cover (ArioBrowser *browser,
         GSList *albums = NULL;
 
         coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
+        if (coverdownloader) {
+                gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                        get_albums_foreach,
+                                        &albums);
+                ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
+                                                                   albums,
+                                                                   operation);
 
-        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
-                                get_albums_foreach,
-                                &albums);
-        ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
-                                                            albums,
-                                                            operation);
-
-        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-        g_slist_free (albums);
-
-        gtk_widget_destroy (coverdownloader);
-        ario_browser_get_covers_end (browser);
+                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_free (albums);
+        }
 }
 
 static void 
@@ -1452,21 +1440,17 @@ get_album_cover (ArioBrowser *browser,
         GSList *albums = NULL;
         GtkWidget *coverdownloader;
 
-        gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
-                                             get_selected_albums_foreach,
-                                             &albums);
-
         coverdownloader = ario_shell_coverdownloader_new (browser->priv->mpd);
-
-        ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
-                                                           albums,
-                                                           operation);
-        gtk_widget_destroy (coverdownloader);
-
-        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
-        g_slist_free (albums);
-
-        ario_browser_get_covers_end (browser);
+        if (coverdownloader) {
+                gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
+                                                     get_selected_albums_foreach,
+                                                     &albums);
+                ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
+                                                                   albums,
+                                                                   operation);
+                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_free (albums);
+        }
 }
 
 static void 
