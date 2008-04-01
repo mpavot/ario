@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 01:52+0200\n"
+"POT-Creation-Date: 2008-04-01 20:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -279,12 +279,12 @@ msgstr ""
 msgid "Track :"
 msgstr ""
 
-#: ../src/ario-mpd.c:620
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr ""
-
 #: ../src/ario-mpd.c:644
 msgid "Connecting to MPD server..."
+msgstr ""
+
+#: ../src/ario-mpd.c:669
+msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
 
 #. impossible time or broken locale settings
@@ -347,7 +347,7 @@ msgstr ""
 msgid "_Deactivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:745
+#: ../src/plugins/ario-plugin-manager.c:744
 msgid "Active plugins"
 msgstr ""
 
@@ -455,7 +455,7 @@ msgstr ""
 
 #: ../src/sources/ario-browser.c:311 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:203
-#: ../src/shell/ario-shell-similarartists.c:328
+#: ../src/shell/ario-shell-similarartists.c:335
 #: ../src/widgets/ario-playlist.c:290 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr ""
@@ -599,15 +599,15 @@ msgstr ""
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:634
+#: ../src/shell/ario-shell.c:631
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:635
+#: ../src/shell/ario-shell.c:632
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:907
+#: ../src/shell/ario-shell.c:904
 msgid "Configure Plugins"
 msgstr ""
 
@@ -666,7 +666,7 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:317
+#: ../src/shell/ario-shell-similarartists.c:324
 msgid "Image"
 msgstr ""
 

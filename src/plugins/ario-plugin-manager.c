@@ -569,7 +569,6 @@ show_tree_popup_menu (GtkTreeView *tree,
                                 event->button, event->time);
         } else {
                 gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
-                                //TODO : ario_utils_menu_position_under_tree_view, tree,
                                 NULL, tree,
                                 0, gtk_get_current_event_time ());
 
