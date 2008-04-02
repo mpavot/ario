@@ -216,9 +216,9 @@ ario_conf_get_string_slist (const char *key,
 }
 
 static void
-ario_conf_shutdown_foreach (gchar *key,
-                            gchar *value,
-                            xmlNodePtr root)
+ario_conf_save_foreach (gchar *key,
+                        gchar *value,
+                        xmlNodePtr root)
 {
         ARIO_LOG_FUNCTION_START
         xmlNodePtr cur;
@@ -246,7 +246,7 @@ ario_conf_save (gpointer data)
         xmlDocSetRootElement (doc, cur);
 
         g_hash_table_foreach (hash,
-                              (GHFunc) ario_conf_shutdown_foreach,
+                              (GHFunc) ario_conf_save_foreach,
                               cur);
 
         xml_filename = g_build_filename (ario_util_config_dir (), "options.xml", NULL);
