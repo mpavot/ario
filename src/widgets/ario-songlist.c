@@ -422,6 +422,9 @@ ario_songlist_button_press_cb (GtkWidget *widget,
                                ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
+        GdkModifierType mods;
+        int x, y;
+
         if (!GTK_WIDGET_HAS_FOCUS (widget))
                 gtk_widget_grab_focus (widget);
 
@@ -435,32 +438,12 @@ ario_songlist_button_press_cb (GtkWidget *widget,
                 ario_songlist_add_in_playlist (songlist);
 
         if (event->button == 1) {
-                GtkTreePath *path;
+                gdk_window_get_pointer (widget->window, &x, &y, &mods);
+                songlist->priv->drag_start_x = x;
+                songlist->priv->drag_start_y = y;
+                songlist->priv->pressed = TRUE;
 
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        gboolean selected;
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        selected = gtk_tree_selection_path_is_selected (selection, path);
-                        if (!selected) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-
-                        GdkModifierType mods;
-                        int x, y;
-
-                        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                        songlist->priv->drag_start_x = x;
-                        songlist->priv->drag_start_y = y;
-                        songlist->priv->pressed = TRUE;
-
-                        gtk_tree_path_free (path);
-                        if (selected)
-                                return TRUE;
-                        else
-                                return FALSE;
-                }
+                return TRUE;
         }
 
         if (event->button == 3) {

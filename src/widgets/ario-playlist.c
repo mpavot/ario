@@ -68,7 +68,7 @@ static void ario_playlist_cmd_songs_properties (GtkAction *action,
                                                 ArioPlaylist *playlist);
 static void ario_playlist_cmd_goto_playing_song (GtkAction *action,
                                                  ArioPlaylist *playlist);
-static gboolean ario_playlist_view_button_press_cb (GtkTreeView *treeview,
+static gboolean ario_playlist_view_button_press_cb (GtkWidget *widget,
                                                     GdkEventButton *event,
                                                     ArioPlaylist *playlist);
 static gboolean ario_playlist_view_key_press_cb (GtkWidget *widget,
@@ -1285,49 +1285,47 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_playlist_view_button_press_cb (GtkTreeView *treeview,
+ario_playlist_view_button_press_cb (GtkWidget *widget,
                                     GdkEventButton *event,
                                     ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
+        GdkModifierType mods;
+        int x, y;
+
+        if (!GTK_WIDGET_HAS_FOCUS (widget))
+                gtk_widget_grab_focus (widget);
+
         if (playlist->priv->dragging)
                 return FALSE;
 
         if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
                 return FALSE;
 
-        if (event->button == 1) {
+        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 GtkTreePath *path;
 
-                gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL);
+                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                 if (path) {
-                        gboolean selected;
-                        if (event->type == GDK_2BUTTON_PRESS)
-                                ario_playlist_activate_row (playlist, path);
-
-                        selected = gtk_tree_selection_path_is_selected (playlist->priv->selection, path);
-
-                        GdkModifierType mods;
-                        GtkWidget *widget = GTK_WIDGET (treeview);
-                        int x, y;
-
-                        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                        playlist->priv->drag_start_x = x;
-                        playlist->priv->drag_start_y = y;
-                        playlist->priv->pressed = TRUE;
-
+                        ario_playlist_activate_row (playlist, path);
                         gtk_tree_path_free (path);
-                        if (selected)
-                                return TRUE;
-                        else
-                                return FALSE;
                 }
+                
+        }
+
+        if (event->button == 1) {
+                gdk_window_get_pointer (widget->window, &x, &y, &mods);
+                playlist->priv->drag_start_x = x;
+                playlist->priv->drag_start_y = y;
+                playlist->priv->pressed = TRUE;
+
+                return TRUE;
         }
 
         if (event->button == 3) {
                 GtkTreePath *path;
 
-                gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL);
+                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                 if (path) {
                         if (!gtk_tree_selection_path_is_selected (playlist->priv->selection, path)) {
                                 gtk_tree_selection_unselect_all (playlist->priv->selection);
