@@ -35,11 +35,6 @@
 
 #define ARIO_RADIOS_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_RADIOS_PLUGIN, ArioRadiosPluginPrivate))
 
-#ifdef WIN32
-#undef UI_PATH 
-#define UI_PATH "plugins\\"
-#endif
-
 struct _ArioRadiosPluginPrivate
 {
         guint ui_merge_id;
@@ -69,6 +64,7 @@ impl_activate (ArioPlugin *plugin,
         ArioMpd *mpd;
         ArioRadiosPlugin *pi = ARIO_RADIOS_PLUGIN (plugin);
         ArioSourceManager *sourcemanager;
+        gchar *file;
 
         g_object_get (shell,
                       "ui-manager", &uimanager,
@@ -80,8 +76,13 @@ impl_activate (ArioPlugin *plugin,
                                            mpd,
                                            ARIO_PLAYLIST (ario_shell_get_playlist (shell)));
         g_return_if_fail (IS_ARIO_RADIO (pi->priv->source));
-        pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
-                                                                 UI_PATH "radios-ui.xml", NULL);
+
+        file = ario_plugin_find_file ("radios-ui.xml");
+        if (file) {
+                pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
+                                                                         file, NULL);
+                g_free (file);
+        }
 
         g_object_unref (uimanager);
         g_object_unref (actiongroup);

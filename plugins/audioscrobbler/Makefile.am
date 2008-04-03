@@ -12,7 +12,6 @@ libaudioscrobbler_la_LIBADD =  $(SOUP_LIBS)
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-        -DPLUGINDIR=\""$(plugindir)/"\"\
 	$(DEPS_CFLAGS)   				\
 	$(SOUP_CFLAGS)   				\
 	-I$(top_srcdir) 				\
@@ -45,8 +44,7 @@ plugin_DATA =	\
 
 EXTRA_DIST = $(plugin_in_files)         \
              $(plugin_DATA)             \
-	     $(glade_DATA)	        \
-             $(uixml_DATA)
+	     $(glade_DATA)
 
 CLEANFILES = $(BUILT_SOURCES)
 

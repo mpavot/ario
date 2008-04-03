@@ -40,12 +40,6 @@ static void ario_wikipedia_cmd_find_artist (GtkAction *action,
 
 #define CONF_WIKIPEDIA_LANGUAGE         "plugins/wikipedia-language"
 
-#ifdef WIN32
-#undef UI_PATH 
-#define UI_PATH "plugins\\"
-#define PLUGINDIR "plugins\\"
-#endif
-
 static GtkActionEntry ario_wikipedia_actions [] =
 {
 	{ "ToolWikipedia", GTK_STOCK_FIND, N_("Find artist on Wikipedia"), NULL,
@@ -103,10 +97,15 @@ impl_activate (ArioPlugin *plugin,
         GtkActionGroup *actiongroup;
 	ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
         static gboolean is_loaded = FALSE;
+        gchar *file;
 
 	g_object_get (shell, "ui-manager", &uimanager, NULL);
-        pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
-                                                                 UI_PATH "wikipedia-ui.xml", NULL);
+        file = ario_plugin_find_file ("wikipedia-ui.xml");
+        if (file) {
+                pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
+                                                                         file, NULL);
+                g_free (file);
+        }
 	g_object_unref (uimanager);
 
         if (!is_loaded) {
@@ -115,8 +114,11 @@ impl_activate (ArioPlugin *plugin,
                                               ario_wikipedia_actions,
                                               G_N_ELEMENTS (ario_wikipedia_actions), pi);
 	        g_object_unref (actiongroup);
-
-                ario_util_add_stock_icons ("wikipedia", PLUGINDIR "wikipedia.png");
+                file = ario_plugin_find_file ("wikipedia.png");
+                if (file) {
+                        ario_util_add_stock_icons ("wikipedia", file);
+                        g_free (file);
+                }
 
                 is_loaded = TRUE;
         }

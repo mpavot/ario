@@ -12,8 +12,6 @@ uixml_DATA = wikipedia-ui.xml
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-        -DUI_PATH=\""$(uixmldir)/"\"\
-        -DPLUGINDIR=\""$(plugindir)/"\"\
 	$(DEPS_CFLAGS)   				\
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src      			\

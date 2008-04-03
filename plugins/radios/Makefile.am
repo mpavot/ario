@@ -17,8 +17,6 @@ alldata_DATA = radios.xml.default
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-        -DUI_PATH=\""$(uixmldir)/"\"                    \
-        -DDATA_PATH=\""$(alldatadir)/"\"                \
 	$(DEPS_CFLAGS)   				\
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src      			\
