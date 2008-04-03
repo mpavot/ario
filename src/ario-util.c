@@ -458,15 +458,17 @@ char *
 ario_util_format_keyword (const char *keyword)
 {
         ARIO_LOG_FUNCTION_START
-        char *tmp;
-        int i;
+        gchar *tmp;
+        int i, j;
         int length;
         gchar *ret;
 
         /* List of modifications done on the keuword used for the search */
-        const gchar *to_replace[] = {"é", "è", "ê", "à", "ù", "ç", "ö", "#", "/", "?", "'", "-", "\"", "&", ":", "*", "(", ")", NULL};
-        const gchar *replace_to[] = {"e", "e", "e", "a", "u", "c", "o", " ", " ", " ", " ", " ", " ",  " ", " ", " ", " ", " ", NULL};
-        const gchar *to_remove[] = {"cd 1", "cd 2", "cd 3", "cd 4", "CD 5", "disc", "disk", "disque", NULL};
+        const gchar *to_remove[] = {"cd 1", "cd 2", "cd 3", "cd 4", "cd 5",
+                                    "cd1", "cd2", "cd3", "cd4", "cd5",
+                                    "CD 1", "CD 2", "CD 3", "CD 4", "CD 5",
+                                    "CD1", "CD2", "CD3", "CD4", "CD5",
+                                    "disc", "disk", "disque", NULL};
 
         /* Normalize keyword */
         ret = g_utf8_normalize (keyword, -1, G_NORMALIZE_ALL);
@@ -476,25 +478,26 @@ ario_util_format_keyword (const char *keyword)
         g_free (ret);
         ret = tmp;
 
-        /* We replace some special characters to make more accurate requests */
-        for (i = 0; to_replace[i]; ++i) {
-                if (replace_to[i])
-                        ario_util_string_replace (&ret, to_replace[i], replace_to[i]);
-        }
-
         /* We remove some useless words to make more accurate requests */
         for (i = 0; to_remove[i]; ++i) {
                 ario_util_string_replace (&ret, to_remove[i], " ");
         }
 
-        /* We escape the other special characters */
+        /* We escape the special characters */
         length = g_utf8_strlen (ret, -1);
-        for(i = 0; i < length; ++i)
-        {
-                if (!g_unichar_isalnum (ret[i])) {
-                        ret[i]=' ';
+        tmp = (char *) g_malloc0 (length);
+
+        j = 0;
+        for(i = 0; ret[i]; ++i) {
+                if (g_unichar_isalnum (ret[i]) ||
+                    (g_unichar_isspace(ret[i]) &&  j > 0 && !g_unichar_isspace(tmp[j-1]))) {
+                        tmp[j] = ret[i];
+                        ++j;
                 }
         }
+
+        g_free (ret);
+        ret = tmp;
 
         /* We escape spaces */
         ario_util_string_replace (&ret, " ", "%20");
