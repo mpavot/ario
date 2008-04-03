@@ -25,6 +25,7 @@
 #endif
 
 #include "plugins/ario-plugin.h"
+#include "ario-util.h"
 
 static void ario_plugin_class_init (ArioPluginClass *klass);
 static void ario_plugin_init (ArioPlugin *plugin);
@@ -124,4 +125,59 @@ ario_plugin_create_configure_dialog (ArioPlugin *plugin)
         g_return_val_if_fail (ARIO_IS_PLUGIN (plugin), NULL);
 
         return ARIO_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
+}
+
+static GSList *
+ario_get_plugin_paths (void)
+{
+	GSList *paths = NULL;
+	char  *path;
+
+	path = g_build_filename (ario_util_config_dir (), "plugins", NULL);
+	paths = g_slist_append (paths, path);
+
+
+	path = g_strdup (ARIO_PLUGIN_DIR);
+	paths = g_slist_append (paths, path);
+
+	return paths;
+}
+
+
+char *
+ario_plugin_find_file (const char *file)
+{
+	GSList *paths;
+	GSList *l;
+	char *ret = NULL;
+
+	paths = ario_get_plugin_paths ();
+
+	for (l = paths; l != NULL; l = l->next) {
+		if (ret == NULL) {
+			char *tmp;
+
+			tmp = g_build_filename (l->data, file, NULL);
+
+			if (g_file_test (tmp, G_FILE_TEST_EXISTS)) {
+				ret = tmp;
+				break;
+			}
+			g_free (tmp);
+		}
+	}
+
+	g_slist_foreach (paths, (GFunc)g_free, NULL);
+	g_slist_free (paths);
+
+	/* global data files */
+	if (ret == NULL) {
+                ARIO_LOG_ERROR ("File not found '%s'", file);
+                return NULL;
+        }
+
+        ARIO_LOG_INFO ("found '%s' when searching for file '%s'",
+		       ret, file);
+
+	return ret;
 }

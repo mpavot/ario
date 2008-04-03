@@ -25,15 +25,11 @@
 #include "ario-radio.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "plugins/ario-plugin.h"
 
 #define DRAG_THRESHOLD 1
 #define XML_ROOT_NAME (const unsigned char *)"ario-radios"
 #define XML_VERSION (const unsigned char *)"1.0"
-
-#ifdef WIN32
-#undef DATA_PATH 
-#define DATA_PATH "plugins\\"
-#endif
 
 typedef struct ArioInternetRadio
 {
@@ -438,6 +434,7 @@ static void
 ario_radio_create_xml_file (char *xml_filename)
 {
         gchar *radios_dir;
+        gchar *file;
 
         /* if the file exists, we do nothing */
         if (ario_util_uri_exists (xml_filename))
@@ -449,8 +446,11 @@ ario_radio_create_xml_file (char *xml_filename)
         if (!ario_util_uri_exists (radios_dir))
                 ario_util_mkdir (radios_dir);
 
-        ario_util_copy_file (DATA_PATH "radios.xml.default",
-                             xml_filename);
+        file = ario_plugin_find_file ("radios.xml.default");
+        if (file) {
+                ario_util_copy_file (file, xml_filename);
+                g_free (file);
+        }
 }
 
 static char*

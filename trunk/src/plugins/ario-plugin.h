@@ -92,6 +92,8 @@ gboolean        ario_plugin_is_configurable             (ArioPlugin *plugin);
 
 GtkWidget*      ario_plugin_create_configure_dialog     (ArioPlugin *plugin);
 
+char *          ario_plugin_find_file                   (const char *file);
+
 /*
  * Utility macro used to register plugins
  *

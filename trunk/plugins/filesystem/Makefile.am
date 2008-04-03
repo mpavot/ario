@@ -14,7 +14,6 @@ uixml_DATA = filesystem-ui.xml
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-        -DUI_PATH=\""$(uixmldir)/"\"\
 	$(DEPS_CFLAGS)   				\
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src      			\
