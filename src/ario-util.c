@@ -466,8 +466,6 @@ ario_util_format_keyword (const char *keyword)
         /* List of modifications done on the keuword used for the search */
         const gchar *to_remove[] = {"cd 1", "cd 2", "cd 3", "cd 4", "cd 5",
                                     "cd1", "cd2", "cd3", "cd4", "cd5",
-                                    "CD 1", "CD 2", "CD 3", "CD 4", "CD 5",
-                                    "CD1", "CD2", "CD3", "CD4", "CD5",
                                     "disc", "disk", "disque", NULL};
 
         /* Normalize keyword */

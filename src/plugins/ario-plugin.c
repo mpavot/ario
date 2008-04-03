@@ -176,8 +176,8 @@ ario_plugin_find_file (const char *file)
                 return NULL;
         }
 
-        ARIO_LOG_INFO ("found '%s' when searching for file '%s'",
-		       ret, file);
+        ARIO_LOG_DBG ("found '%s' when searching for file '%s'",
+		      ret, file);
 
 	return ret;
 }

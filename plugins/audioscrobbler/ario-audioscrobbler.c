@@ -1457,6 +1457,8 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
 {
         GladeXML *xml;
         GtkWidget *config_widget;
+        gchar *file;
+
         if (audioscrobbler->priv->preferences == NULL) {
                 audioscrobbler->priv->preferences = gtk_dialog_new_with_buttons (_("Audioscrobbler preferences"),
                                                                                  NULL,
@@ -1472,23 +1474,27 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
                                   G_CALLBACK (ario_audioscrobbler_preferences_close_cb),
                                   audioscrobbler);
 
-                xml = rb_glade_xml_new (PLUGINDIR "audioscrobbler-prefs.glade", "audioscrobbler_vbox", audioscrobbler);
+                file = ario_plugin_find_file ("audioscrobbler-prefs.glade");
+                if (file) {
+                        xml = rb_glade_xml_new (file, "audioscrobbler_vbox", audioscrobbler);
 
-                config_widget = glade_xml_get_widget (xml, "audioscrobbler_vbox");
-                audioscrobbler->priv->username_entry = glade_xml_get_widget (xml, "username_entry");
-                audioscrobbler->priv->username_label = glade_xml_get_widget (xml, "username_label");
-                audioscrobbler->priv->password_entry = glade_xml_get_widget (xml, "password_entry");
-                audioscrobbler->priv->password_label = glade_xml_get_widget (xml, "password_label");
-                audioscrobbler->priv->status_label = glade_xml_get_widget (xml, "status_label");
-                audioscrobbler->priv->queue_count_label = glade_xml_get_widget (xml, "queue_count_label");
-                audioscrobbler->priv->submit_count_label = glade_xml_get_widget (xml, "submit_count_label");
-                audioscrobbler->priv->submit_time_label = glade_xml_get_widget (xml, "submit_time_label");
+                        config_widget = glade_xml_get_widget (xml, "audioscrobbler_vbox");
+                        audioscrobbler->priv->username_entry = glade_xml_get_widget (xml, "username_entry");
+                        audioscrobbler->priv->username_label = glade_xml_get_widget (xml, "username_label");
+                        audioscrobbler->priv->password_entry = glade_xml_get_widget (xml, "password_entry");
+                        audioscrobbler->priv->password_label = glade_xml_get_widget (xml, "password_label");
+                        audioscrobbler->priv->status_label = glade_xml_get_widget (xml, "status_label");
+                        audioscrobbler->priv->queue_count_label = glade_xml_get_widget (xml, "queue_count_label");
+                        audioscrobbler->priv->submit_count_label = glade_xml_get_widget (xml, "submit_count_label");
+                        audioscrobbler->priv->submit_time_label = glade_xml_get_widget (xml, "submit_time_label");
 
-                rb_glade_boldify_label (xml, "audioscrobbler_label");
+                        rb_glade_boldify_label (xml, "audioscrobbler_label");
 
-                g_object_unref (G_OBJECT (xml));
+                        g_object_unref (G_OBJECT (xml));
 
-                gtk_container_add (GTK_CONTAINER (GTK_DIALOG (audioscrobbler->priv->preferences)->vbox), config_widget);
+                        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (audioscrobbler->priv->preferences)->vbox), config_widget);
+                        g_free (file);
+                }
         }
 
         ario_audioscrobbler_preferences_sync (audioscrobbler);
