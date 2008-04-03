@@ -667,7 +667,7 @@ ario_filesystem_button_press_cb (GtkWidget *widget,
                 filesystem->priv->drag_start_y = y;
                 filesystem->priv->pressed = TRUE;
 
-                return TRUE;
+                return FALSE;
         }
 
         if (event->button == 3) {
