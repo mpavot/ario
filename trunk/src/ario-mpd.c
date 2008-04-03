@@ -570,6 +570,12 @@ ario_mpd_connect_to (ArioMpd *mpd,
         if (!connection)
                 return FALSE;
 
+        if  (connection->error) {
+                ARIO_LOG_ERROR("Error nb: %d, Msg:%s", connection->errorCode, connection->errorStr);
+                mpd_closeConnection (connection);
+                return FALSE;
+        }
+
         password = ario_conf_get_string (PREF_PASSWORD, PREF_PASSWORD_DEFAULT);
         if (password) {
                 mpd_sendPasswordCommand (connection, password);
@@ -711,7 +717,7 @@ ario_mpd_check_errors (ArioMpd *mpd)
                 return;
 
         if  (mpd->priv->connection->error) {
-                ARIO_LOG_DBG("Error nb: %d, Msg:%s\n", mpd->priv->connection->errorCode, mpd->priv->connection->errorStr);
+                ARIO_LOG_ERROR("Error nb: %d, Msg:%s", mpd->priv->connection->errorCode, mpd->priv->connection->errorStr);
                 ario_mpd_disconnect(mpd);
         }
 }
