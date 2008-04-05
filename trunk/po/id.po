@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-01 20:49+0200\n"
+"POT-Creation-Date: 2008-04-05 14:06+0200\n"
 "PO-Revision-Date: 2008-03-29 13:27+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -67,8 +67,8 @@ msgstr ""
 msgid "Music directory :"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:884
-#: ../plugins/radios/ario-radio.c:1083
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:867
+#: ../plugins/radios/ario-radio.c:1066
 msgid "Name :"
 msgstr "Nama :"
 
@@ -287,11 +287,11 @@ msgstr ""
 msgid "Track :"
 msgstr ""
 
-#: ../src/ario-mpd.c:644
+#: ../src/ario-mpd.c:650
 msgid "Connecting to MPD server..."
 msgstr ""
 
-#: ../src/ario-mpd.c:669
+#: ../src/ario-mpd.c:675
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
 
@@ -406,7 +406,7 @@ msgstr ""
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:45
-#: ../src/widgets/ario-header.c:261
+#: ../src/widgets/ario-header.c:253
 msgid "Play next song"
 msgstr ""
 
@@ -431,74 +431,74 @@ msgstr ""
 msgid "Updating..."
 msgstr ""
 
-#: ../src/sources/ario-browser.c:127 ../src/sources/ario-browser.c:130
-#: ../src/sources/ario-browser.c:133 ../src/sources/ario-search.c:100
+#: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
+#: ../src/sources/ario-browser.c:136 ../src/sources/ario-search.c:100
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:103
 #: ../plugins/filesystem/ario-filesystem.c:111
-#: ../plugins/radios/ario-radio.c:114
+#: ../plugins/radios/ario-radio.c:110
 msgid "_Add to playlist"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:137 ../src/sources/ario-browser.c:140
+#: ../src/sources/ario-browser.c:140 ../src/sources/ario-browser.c:143
 #: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
 #: ../plugins/filesystem/ario-filesystem.c:114
-#: ../plugins/radios/ario-radio.c:123
+#: ../plugins/radios/ario-radio.c:119
 msgid "_Properties"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:144 ../src/sources/ario-browser.c:151
+#: ../src/sources/ario-browser.c:147 ../src/sources/ario-browser.c:154
 #, fuzzy
 msgid "Get the covers"
 msgstr "Hapus sampul"
 
-#: ../src/sources/ario-browser.c:147 ../src/sources/ario-browser.c:154
+#: ../src/sources/ario-browser.c:150 ../src/sources/ario-browser.c:157
 msgid "_Delete the covers"
 msgstr "Hapus sampul"
 
-#: ../src/sources/ario-browser.c:232
+#: ../src/sources/ario-browser.c:235
 msgid "Library"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:311 ../src/sources/ario-search.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:203
+#: ../src/sources/ario-browser.c:314 ../src/sources/ario-search.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:335
 #: ../src/widgets/ario-playlist.c:290 ../src/widgets/ario-songlist.c:270
 msgid "Artist"
 msgstr ""
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:365 ../src/sources/ario-search.c:44
+#: ../src/sources/ario-browser.c:368 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:301 ../src/widgets/ario-songlist.c:285
 msgid "Album"
 msgstr ""
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:375
+#: ../src/sources/ario-browser.c:378
 msgid "Cover"
 msgstr ""
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:442 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:445 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:268
 msgid "Track"
 msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:449 ../src/sources/ario-search.c:45
-#: ../src/shell/ario-shell-lyricsselect.c:215
+#: ../src/sources/ario-browser.c:452 ../src/sources/ario-search.c:45
+#: ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:279 ../src/widgets/ario-songlist.c:255
 msgid "Title"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1420
+#: ../src/sources/ario-browser.c:1408
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1475
+#: ../src/sources/ario-browser.c:1459
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -608,11 +608,11 @@ msgstr ""
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:631
+#: ../src/shell/ario-shell.c:629
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:632
+#: ../src/shell/ario-shell.c:630
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -630,20 +630,20 @@ msgstr ""
 "  Nestanet https://launchpad.net/~nesta-101106\n"
 "  reza https://launchpad.net/~edja-kun"
 
-#: ../src/shell/ario-shell.c:904
+#: ../src/shell/ario-shell.c:902
 msgid "Configure Plugins"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverdownloader.c:261
+#: ../src/shell/ario-shell-coverdownloader.c:275
 msgid "Music Player Cover Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverdownloader.c:379
+#: ../src/shell/ario-shell-coverdownloader.c:415
 msgid "Download Finished!"
 msgstr "Download selesai"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:382
+#: ../src/shell/ario-shell-coverdownloader.c:418
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -673,9 +673,14 @@ msgstr ""
 msgid "Lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell-lyricsselect.c:191
+#: ../src/shell/ario-shell-lyricsselect.c:196
 msgid "Lyrics Download"
 msgstr ""
+
+#: ../src/shell/ario-shell-lyricsselect.c:234
+#, fuzzy
+msgid "Source"
+msgstr "lirik tak ditemukan"
 
 #: ../src/shell/ario-shell-preferences.c:140
 msgid "Ario Preferences"
@@ -721,39 +726,39 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Persetujuan"
 
-#: ../src/widgets/ario-header.c:119 ../src/widgets/ario-tray-icon.c:38
+#: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:39
 #: ../src/widgets/ario-status-icon.c:33
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:219
+#: ../src/widgets/ario-header.c:211
 msgid "Play previous song"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:239
+#: ../src/widgets/ario-header.c:231
 msgid "Play/Pause the music"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:250
+#: ../src/widgets/ario-header.c:242
 msgid "Stop the music"
 msgstr ""
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:326 ../src/widgets/ario-tray-icon.c:729
+#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:714
 msgid " of "
 msgstr ""
 
-#: ../src/widgets/ario-header.c:350
+#: ../src/widgets/ario-header.c:342
 msgid "Toggle random on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:361
+#: ../src/widgets/ario-header.c:353
 msgid "Toggle repeat on/off"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:478
+#: ../src/widgets/ario-header.c:463
 msgid "Change the music volume"
 msgstr "ubah volume musik"
 
@@ -802,7 +807,7 @@ msgstr ""
 msgid "Songs"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.c:37 ../src/widgets/ario-status-icon.c:32
+#: ../src/widgets/ario-tray-icon.c:38 ../src/widgets/ario-status-icon.c:32
 msgid "Not playing"
 msgstr ""
 
@@ -914,7 +919,7 @@ msgstr ""
 msgid "Track submission failed too many times"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1461
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1463
 msgid "Audioscrobbler preferences"
 msgstr ""
 
@@ -983,43 +988,43 @@ msgstr ""
 msgid "Multimedia Keys"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:117
+#: ../plugins/radios/ario-radio.c:113
 msgid "Add a _new radio"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:120
+#: ../plugins/radios/ario-radio.c:116
 msgid "_Delete this radios"
 msgstr "hapus radio ini"
 
-#: ../plugins/radios/ario-radio.c:187
+#: ../plugins/radios/ario-radio.c:183
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:262
+#: ../plugins/radios/ario-radio.c:258
 msgid "Internet Radios"
 msgstr "Radio internet"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:874
+#: ../plugins/radios/ario-radio.c:857
 msgid "Add a WebRadio"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:885 ../plugins/radios/ario-radio.c:1084
+#: ../plugins/radios/ario-radio.c:868 ../plugins/radios/ario-radio.c:1067
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:939 ../plugins/radios/ario-radio.c:1139
+#: ../plugins/radios/ario-radio.c:922 ../plugins/radios/ario-radio.c:1122
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Parameter yang buruk. Anda harus menspesifikasikan nama dan URL untuk radio"
 
-#: ../plugins/radios/ario-radio.c:1001
+#: ../plugins/radios/ario-radio.c:984
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1073
+#: ../plugins/radios/ario-radio.c:1056
 msgid "Edit a WebRadio"
 msgstr ""
 
@@ -1027,16 +1032,16 @@ msgstr ""
 msgid "Listen to webradios"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:52
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:45
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:46
 msgid "Find artist on Wikipedia"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:175
 msgid "Wikipedia Plugin - Configuration"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:184
 msgid "Wikipedia language :"
 msgstr ""
 
