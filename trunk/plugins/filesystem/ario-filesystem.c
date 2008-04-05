@@ -457,6 +457,8 @@ ario_filesystem_new (GtkUIManager *mgr,
                 is_loaded = TRUE;
         }
 
+        filesystem->priv->connected = ario_mpd_is_connected (mpd);
+
         ario_filesystem_fill_filesystem (filesystem);
 
         return GTK_WIDGET (filesystem);
@@ -466,30 +468,24 @@ static void
 ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreeIter filesystem_iter, fake_child;
-        GSList *tmp;
-        ArioMpdFileList *files;
-        gchar *path;
+        GtkTreeIter iter, fake_child;
+        GtkTreePath *path;
 
         gtk_tree_store_clear (filesystem->priv->filesystem_model);
 
-        files = ario_mpd_list_files (filesystem->priv->mpd, "/", FALSE);
-        for (tmp = files->directories; tmp; tmp = g_slist_next (tmp)) {
-                path = tmp->data;
-                gtk_tree_store_append (filesystem->priv->filesystem_model, &filesystem_iter, NULL);
-                gtk_tree_store_set (filesystem->priv->filesystem_model, &filesystem_iter,
-                                    FILETREE_ICON_COLUMN, GTK_STOCK_DIRECTORY,
-                                    FILETREE_ICONSIZE_COLUMN, 1,
-                                    FILETREE_NAME_COLUMN, path,
-                                    FILETREE_DIR_COLUMN, path, -1);
-                gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &filesystem_iter);
-        }
-
-        ario_mpd_free_file_list (files);
+        gtk_tree_store_append (filesystem->priv->filesystem_model, &iter, NULL);
+        gtk_tree_store_set (filesystem->priv->filesystem_model, &iter,
+                            FILETREE_ICON_COLUMN, GTK_STOCK_HARDDISK,
+                            FILETREE_ICONSIZE_COLUMN, 1,
+                            FILETREE_NAME_COLUMN, _("Music"),
+                            FILETREE_DIR_COLUMN, "/", -1);
+        gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &iter);
 
         gtk_tree_selection_unselect_all (filesystem->priv->filesystem_selection);
-        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &filesystem_iter))
-                gtk_tree_selection_select_iter (filesystem->priv->filesystem_selection, &filesystem_iter);
+        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter)) {
+                gtk_tree_selection_select_iter (filesystem->priv->filesystem_selection, &iter);
+                ario_filesystem_cursor_moved_cb (GTK_TREE_VIEW (filesystem->priv->filesystem), filesystem);
+        }
 }
 
 static void
@@ -540,7 +536,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         GSList *tmp;
         ArioMpdFileList *files;
         ArioMpdSong *song;
-        gchar *path;
+        gchar *path, *display_path;
 
         if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
                                               &model,
@@ -560,10 +556,15 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         for (tmp = files->directories; tmp; tmp = g_slist_next (tmp)) {
                 path = tmp->data;
                 gtk_tree_store_append (filesystem->priv->filesystem_model, &child, &iter);
+                if (!strcmp (dir, "/")) {
+                        display_path = path;
+                } else {
+                        display_path = path + strlen (dir) + 1;
+                }
                 gtk_tree_store_set (filesystem->priv->filesystem_model, &child,
                                     FILETREE_ICON_COLUMN, GTK_STOCK_DIRECTORY,
                                     FILETREE_ICONSIZE_COLUMN, 1,
-                                    FILETREE_NAME_COLUMN, path + strlen (dir) + 1,
+                                    FILETREE_NAME_COLUMN, display_path,
                                     FILETREE_DIR_COLUMN, path, -1);
                 gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &child);
         }
@@ -641,6 +642,9 @@ ario_filesystem_button_press_cb (GtkWidget *widget,
                 gtk_widget_grab_focus (widget);
 
         if (filesystem->priv->dragging)
+                return FALSE;
+
+        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
                 return FALSE;
 
         if (event->button == 1) {
