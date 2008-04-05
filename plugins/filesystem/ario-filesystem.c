@@ -68,10 +68,6 @@ static void ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
                                                         GtkTreePath *path,
                                                         GtkTreeViewColumn *column,
                                                         ArioFilesystem *filesystem);
-static void ario_filesystem_filetree_row_expanded_cb (GtkTreeView *tree_view,
-                                                       GtkTreeIter *iter,
-                                                       GtkTreePath *path,
-                                                       ArioFilesystem *filesystem);
 static void ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                              ArioFilesystem *filesystem);
 static void ario_filesystem_fill_filesystem (ArioFilesystem *filesystem);
@@ -309,10 +305,6 @@ ario_filesystem_init (ArioFilesystem *filesystem)
                                  G_CALLBACK (ario_filesystem_filetree_row_activated_cb),
                                  filesystem, 0);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "test-expand-row",
-                                 G_CALLBACK (ario_filesystem_filetree_row_expanded_cb),
-                                 filesystem, 0);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "cursor-changed",
                                  G_CALLBACK (ario_filesystem_cursor_moved_cb),
                                  filesystem, 0);
@@ -532,16 +524,6 @@ ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
         } else {
                 gtk_tree_view_collapse_row (tree_view, path);
         }
-}
-
-static void ario_filesystem_filetree_row_expanded_cb (GtkTreeView *tree_view,
-                                                       GtkTreeIter *iter,
-                                                       GtkTreePath *path,
-                                                       ArioFilesystem *filesystem)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_filesystem_cursor_moved_cb (tree_view,
-                                         filesystem);
 }
 
 static void

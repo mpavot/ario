@@ -1042,8 +1042,10 @@ ario_browser_button_press_cb (GtkWidget *widget,
         if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
                 return FALSE;
 
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
+        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 ario_browser_add_in_playlist (browser);
+                return FALSE;
+        }
 
         if (event->button == 1) {
                 gdk_window_get_pointer (widget->window, &x, &y, &mods);

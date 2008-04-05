@@ -1291,7 +1291,7 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         GdkModifierType mods;
-        int x, y;
+        int x, y, bx, by;
 
         if (!GTK_WIDGET_HAS_FOCUS (widget))
                 gtk_widget_grab_focus (widget);
@@ -1309,17 +1309,26 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
                 if (path) {
                         ario_playlist_activate_row (playlist, path);
                         gtk_tree_path_free (path);
+
+                        return FALSE;
                 }
                 
         }
 
         if (event->button == 1) {
                 gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                playlist->priv->drag_start_x = x;
-                playlist->priv->drag_start_y = y;
-                playlist->priv->pressed = TRUE;
+                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
 
-                return TRUE;
+                if (bx >= 0 && by >= 0) {
+                        gdk_window_get_pointer (widget->window, &x, &y, &mods);
+                        playlist->priv->drag_start_x = x;
+                        playlist->priv->drag_start_y = y;
+                        playlist->priv->pressed = TRUE;
+
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
         }
 
         if (event->button == 3) {
@@ -1348,14 +1357,18 @@ ario_playlist_view_button_release_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         if (!playlist->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                GtkTreePath *path;
+                int bx, by;
+                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), event->x, event->y, &bx, &by);
+                if (bx >= 0 && by >= 0) {
+                        GtkTreePath *path;
 
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        gtk_tree_selection_unselect_all (selection);
-                        gtk_tree_selection_select_path (selection, path);
-                        gtk_tree_path_free (path);
+                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
+                        if (path) {
+                                GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+                                gtk_tree_selection_unselect_all (selection);
+                                gtk_tree_selection_select_path (selection, path);
+                                gtk_tree_path_free (path);
+                        }
                 }
         }
 
