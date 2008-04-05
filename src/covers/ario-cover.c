@@ -247,7 +247,7 @@ ario_cover_save_cover (const gchar *artist,
 
                 /* We save the normal and the small covers */
                 if (gdk_pixbuf_save (pixbuf, ario_cover_path, "jpeg", NULL, NULL) &&
-                    gdk_pixbuf_save (small_pixbuf, small_ario_cover_path, "jpeg", NULL, NULL)) {
+                    gdk_pixbuf_save (small_pixbuf, small_ario_cover_path, "jpeg", NULL, "quality", "95", NULL)) {
                         /* If we succeed in the 2 operations, we return OK */
                         ret = TRUE;
                 }
