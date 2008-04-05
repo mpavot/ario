@@ -365,27 +365,38 @@ ario_shell_coverdownloader_progress_start (ArioShellCoverdownloader *ario_shell_
         return FALSE;
 }
 
-static void
-ario_shell_coverdownloader_progress_update (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                            const gchar *artist,
-                                            const gchar *album)
+typedef struct
+{
+        ArioShellCoverdownloader *ario_shell_coverdownloader;
+        gchar *artist;
+        gchar *album;
+} ArioShellCoverdownloaderIdleData;
+
+static gboolean
+ario_shell_coverdownloader_progress_update (ArioShellCoverdownloaderIdleData *data)
 {
         ARIO_LOG_FUNCTION_START
         /* We have already searched for nb_covers_done covers */
-        gdouble nb_covers_done = (ario_shell_coverdownloader->priv->nb_covers_found 
-                                  + ario_shell_coverdownloader->priv->nb_covers_not_found 
-                                  + ario_shell_coverdownloader->priv->nb_covers_already_exist);
+        gdouble nb_covers_done = (data->ario_shell_coverdownloader->priv->nb_covers_found 
+                                  + data->ario_shell_coverdownloader->priv->nb_covers_not_found 
+                                  + data->ario_shell_coverdownloader->priv->nb_covers_already_exist);
 
         /* We update the progress bar */
-        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (ario_shell_coverdownloader->priv->progressbar), 
-                                       nb_covers_done / ario_shell_coverdownloader->priv->nb_covers);
+        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (data->ario_shell_coverdownloader->priv->progressbar), 
+                                       nb_covers_done / data->ario_shell_coverdownloader->priv->nb_covers);
 
         /* We update the artist and the album label */
-        gtk_label_set_text (GTK_LABEL (ario_shell_coverdownloader->priv->progress_artist_label), artist);
-        gtk_label_set_text (GTK_LABEL (ario_shell_coverdownloader->priv->progress_album_label), album);
+        gtk_label_set_text (GTK_LABEL (data->ario_shell_coverdownloader->priv->progress_artist_label), data->artist);
+        gtk_label_set_text (GTK_LABEL (data->ario_shell_coverdownloader->priv->progress_album_label), data->album);
 
         /* We refresh the window */
-        g_idle_add ((GSourceFunc) ario_shell_coverdownloader_refresh, NULL);
+        ario_shell_coverdownloader_refresh (NULL);
+
+        g_free (data->artist);
+        g_free (data->album);
+        g_free (data);
+
+        return FALSE;
 }
 
 static gboolean
@@ -459,6 +470,15 @@ ario_shell_coverdownloader_get_covers_from_artists (ArioShellCoverdownloader *ar
         g_slist_free (albums);
 }
 
+static gboolean
+ario_shell_coverdownloader_force_reload (gpointer data)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_cover_handler_force_reload();
+
+        return FALSE;
+}
+
 static gpointer
 ario_shell_coverdownloader_get_covers_from_albums_thread (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
@@ -491,7 +511,7 @@ ario_shell_coverdownloader_get_covers_from_albums_thread (ArioShellCoverdownload
         else
                 g_idle_add ((GSourceFunc) gtk_widget_destroy, ario_shell_coverdownloader);
 
-        ario_cover_handler_force_reload();
+        g_idle_add ((GSourceFunc) ario_shell_coverdownloader_force_reload, NULL);
 
         return NULL;
 }
@@ -529,6 +549,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
         const gchar *artist;
         const gchar *album;
         const gchar *path;
+        ArioShellCoverdownloaderIdleData *data;
 
         if (!mpd_album)
                 return;
@@ -543,7 +564,12 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
         switch (operation) {
         case GET_COVERS:
                 /* We update the progress bar */
-                ario_shell_coverdownloader_progress_update (ario_shell_coverdownloader, artist, album);
+                data = (ArioShellCoverdownloaderIdleData *) g_malloc0 (sizeof (ArioShellCoverdownloaderIdleData));
+
+                data->ario_shell_coverdownloader = ario_shell_coverdownloader;
+                data->artist = g_strdup (artist);
+                data->album = g_strdup (album);
+                g_idle_add ((GSourceFunc) ario_shell_coverdownloader_progress_update, data);
 
                 if (ario_cover_cover_exists (artist, album))
                         /* The cover already exists, we do nothing */
@@ -563,7 +589,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
         }
 }
 
-static void 
+static void
 ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_coverdownloader,
                                       const char *artist,
                                       const char *album,
