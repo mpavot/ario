@@ -31,6 +31,7 @@
 #include "preferences/ario-preferences.h"
 
 #define DRAG_THRESHOLD 1
+#define ROOT "/"
 
 static void ario_filesystem_class_init (ArioFilesystemClass *klass);
 static void ario_filesystem_init (ArioFilesystem *filesystem);
@@ -485,7 +486,7 @@ ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
                             FILETREE_ICON_COLUMN, GTK_STOCK_HARDDISK,
                             FILETREE_ICONSIZE_COLUMN, 1,
                             FILETREE_NAME_COLUMN, _("Music"),
-                            FILETREE_DIR_COLUMN, "/", -1);
+                            FILETREE_DIR_COLUMN, ROOT, -1);
         gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &iter);
 
         gtk_tree_selection_unselect_all (filesystem->priv->filesystem_selection);
@@ -536,8 +537,11 @@ ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
 {
         ARIO_LOG_FUNCTION_START
 
-        if (!gtk_tree_view_row_expanded (tree_view, path))
+        if (!gtk_tree_view_row_expanded (tree_view, path)) {
                 gtk_tree_view_expand_row (tree_view, path, FALSE);
+        } else {
+                gtk_tree_view_collapse_row (tree_view, path);
+        }
 }
 
 static void
@@ -555,11 +559,16 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         ArioMpdFileList *files;
         ArioMpdSong *song;
         gchar *path, *display_path;
+        GtkTreePath *treepath;
+        gboolean was_expanded;
 
         if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
                                               &model,
                                               &iter))
                 return;
+
+        treepath = gtk_tree_model_get_path (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter);
+        was_expanded = gtk_tree_view_row_expanded (tree_view, treepath);
 
         if (gtk_tree_model_iter_children (GTK_TREE_MODEL (filesystem->priv->filesystem_model),
                                           &child,
@@ -574,7 +583,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         for (tmp = files->directories; tmp; tmp = g_slist_next (tmp)) {
                 path = tmp->data;
                 gtk_tree_store_append (filesystem->priv->filesystem_model, &child, &iter);
-                if (!strcmp (dir, "/")) {
+                if (!strcmp (dir, ROOT)) {
                         display_path = path;
                 } else {
                         display_path = path + strlen (dir) + 1;
@@ -605,6 +614,10 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         gtk_tree_selection_unselect_all (selection);
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (liststore), &song_iter))
                 gtk_tree_selection_select_iter (selection, &song_iter);
+
+        if (was_expanded)
+                gtk_tree_view_expand_row (tree_view, treepath, FALSE);
+        gtk_tree_path_free (treepath);
 }
 
 static void
