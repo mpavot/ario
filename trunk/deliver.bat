@@ -16,13 +16,14 @@ mkdir delivery\data\glade
 copy data\glade\*.glade delivery\data\glade\
 
 mkdir delivery\plugins
+mkdir delivery\plugins\icons
 copy plugins\filesystem\libfilesystem.dll delivery\plugins
 copy plugins\filesystem\filesystem-ui.xml delivery\plugins
 copy plugins\filesystem\filesystem.ario-plugin.w32 delivery\plugins\filesystem.ario-plugin
 
 copy plugins\wikipedia\libwikipedia.dll delivery\plugins
 copy plugins\wikipedia\wikipedia-ui.xml delivery\plugins
-copy plugins\wikipedia\wikipedia.png delivery\plugins
+copy plugins\wikipedia\wikipedia.png delivery\plugins\icons
 copy plugins\wikipedia\wikipedia.ario-plugin.w32 delivery\plugins\wikipedia.ario-plugin
 
 copy plugins\radios\libradios.dll delivery\plugins
