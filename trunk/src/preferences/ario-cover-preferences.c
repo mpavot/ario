@@ -38,6 +38,8 @@ static void ario_cover_preferences_finalize (GObject *object);
 static void ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                                         ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_automatic_check_changed_cb (GtkCheckButton *butt,
+                                                                        ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
                                                                        ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_top_button_cb (GtkWidget *widget,
@@ -56,6 +58,7 @@ static void ario_cover_preferences_cover_toggled_cb (GtkCellRendererToggle *cell
 struct ArioCoverPreferencesPrivate
 {
         GtkWidget *covertree_check;
+        GtkWidget *automatic_check;
         GtkWidget *amazon_country;
 
         GtkWidget *covers_treeview;
@@ -152,6 +155,8 @@ ario_cover_preferences_new (void)
 
         cover_preferences->priv->covertree_check =
                 glade_xml_get_widget (xml, "covertree_checkbutton");
+        cover_preferences->priv->automatic_check =
+                glade_xml_get_widget (xml, "automatic_checkbutton");
         cover_preferences->priv->amazon_country =
                 glade_xml_get_widget (xml, "amazon_country_combobox");
         cover_preferences->priv->covers_treeview = 
@@ -288,6 +293,9 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check), 
                                       !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check), 
+                                      ario_conf_get_boolean (PREF_AUTOMATIC_GET_COVER, PREF_AUTOMATIC_GET_COVER_DEFAULT));
+
         current_country = ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT);
         for (i = 0; amazon_countries[i]; ++i) {
                 if (!strcmp (amazon_countries[i], current_country)) {
@@ -309,6 +317,15 @@ ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
         ARIO_LOG_FUNCTION_START
         ario_conf_set_boolean (PREF_COVER_TREE_HIDDEN,
                                !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check)));
+}
+
+void
+ario_cover_preferences_automatic_check_changed_cb (GtkCheckButton *butt,
+                                                   ArioCoverPreferences *cover_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_AUTOMATIC_GET_COVER,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check)));
 }
 
 void

@@ -35,6 +35,9 @@
 #define PREF_COVER_TREE_HIDDEN                  "ario_cover_tree_hidden"
 #define PREF_COVER_TREE_HIDDEN_DEFAULT          FALSE
 
+#define PREF_AUTOMATIC_GET_COVER                "automatic_get_cover"
+#define PREF_AUTOMATIC_GET_COVER_DEFAULT        TRUE
+
 #define PREF_COVER_AMAZON_COUNTRY               "ario_cover_amazon_country"
 #define PREF_COVER_AMAZON_COUNTRY_DEFAULT       "com"
 

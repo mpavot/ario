@@ -40,6 +40,20 @@
                       </packing>
                     </child>
                     <child>
+                      <widget class="GtkCheckButton" id="automatic_checkbutton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="label" translatable="yes">Automatically download the album cover of the playing song</property>
+                        <property name="response_id">0</property>
+                        <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="ario_cover_preferences_automatic_check_changed_cb"/>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
                       <widget class="GtkHBox" id="hbox13">
                         <property name="visible">True</property>
                         <child>
@@ -65,7 +79,7 @@
                         </child>
                       </widget>
                       <packing>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </widget>
