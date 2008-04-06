@@ -161,15 +161,17 @@ ario_shell_coverdownloader_finalize (GObject *object)
 
         g_return_if_fail (ario_shell_coverdownloader->priv != NULL);
 
+        if (ario_shell_coverdownloader->priv->thread)
+                g_thread_join (ario_shell_coverdownloader->priv->thread);
+
         /* We free the list */
         g_slist_foreach (ario_shell_coverdownloader->priv->albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (ario_shell_coverdownloader->priv->albums);
 
-        if (ario_shell_coverdownloader->priv->thread)
-                g_thread_join (ario_shell_coverdownloader->priv->thread);
-        is_instantiated = FALSE; 
-
         g_free (ario_shell_coverdownloader->priv);
+
+        is_instantiated = FALSE;
+
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
@@ -438,9 +440,14 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
                                        ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
+        GSList * artists = ario_mpd_get_artists (ario_shell_coverdownloader->priv->mpd);
+
         ario_shell_coverdownloader_get_covers_from_artists (ario_shell_coverdownloader,
-                                                            ario_mpd_get_artists(ario_shell_coverdownloader->priv->mpd),
+                                                            artists,
                                                             operation);
+
+        g_slist_foreach (artists, (GFunc) g_free, NULL);
+        g_slist_free (artists);
 }
 
 void
