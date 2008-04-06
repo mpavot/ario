@@ -735,7 +735,6 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                 g_object_unref (G_OBJECT (cover));
         }
 
-
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (albums);
 }

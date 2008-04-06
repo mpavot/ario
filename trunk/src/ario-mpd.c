@@ -571,7 +571,8 @@ ario_mpd_connect_to (ArioMpd *mpd,
                 return FALSE;
 
         if  (connection->error) {
-                ARIO_LOG_ERROR("Error nb: %d, Msg:%s", connection->errorCode, connection->errorStr);
+                ARIO_LOG_ERROR("%s", connection->errorStr);
+                mpd_clearError (connection);
                 mpd_closeConnection (connection);
                 return FALSE;
         }
@@ -717,7 +718,8 @@ ario_mpd_check_errors (ArioMpd *mpd)
                 return;
 
         if  (mpd->priv->connection->error) {
-                ARIO_LOG_ERROR("Error nb: %d, Msg:%s", mpd->priv->connection->errorCode, mpd->priv->connection->errorStr);
+                ARIO_LOG_ERROR("%s", mpd->priv->connection->errorStr);
+                mpd_clearError (mpd->priv->connection);
                 ario_mpd_disconnect(mpd);
         }
 }
