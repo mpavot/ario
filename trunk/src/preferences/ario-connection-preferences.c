@@ -59,6 +59,8 @@ G_MODULE_EXPORT void ario_connection_preferences_musicdir_changed_cb (GtkWidget 
                                                                       ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_autodetect_cb (GtkWidget *widget,
                                                                 ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_open_cb (GtkWidget *widget,
+                                                          ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_new_profile_cb (GtkWidget *widget,
                                                                  ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
@@ -88,7 +90,6 @@ struct ArioConnectionPreferencesPrivate
         GtkWidget *host_entry;
         GtkWidget *port_spinbutton;
         GtkWidget *password_entry;
-        GtkWidget *musicdir_label;
         GtkWidget *musicdir_entry;
         GtkWidget *autoconnect_checkbutton;
         GtkWidget *autodetect_button;
@@ -171,28 +172,6 @@ ario_connection_preferences_init (ArioConnectionPreferences *connection_preferen
         connection_preferences->priv->current_profile = NULL;
 }
 
-static gboolean
-ario_connection_preferences_is_localhost (gchar *host)
-{
-        ARIO_LOG_FUNCTION_START
-        return (host && (!strcmp (host, "localhost") || !strcmp (host, "127.0.0.1")));
-}
-
-static void
-ario_connection_preferences_update_musicdir_visibility (ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        if (ario_connection_preferences_is_localhost (connection_preferences->priv->current_profile->host)) {
-                ario_conf_set_string (PREF_MUSIC_DIR, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry)));
-                gtk_widget_show (connection_preferences->priv->musicdir_entry);
-                gtk_widget_show (connection_preferences->priv->musicdir_label);
-        } else {
-                ario_conf_set_string (PREF_MUSIC_DIR, "");
-                gtk_widget_hide (connection_preferences->priv->musicdir_entry);
-                gtk_widget_hide (connection_preferences->priv->musicdir_label);
-        }
-}
-
 static void
 ario_connection_preferences_profile_selection_update (ArioConnectionPreferences *connection_preferences)
 {
@@ -254,8 +233,6 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
                                        (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton)));
                 ario_conf_set_string (PREF_PASSWORD, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->password_entry)));
                 ario_conf_set_string (PREF_MUSIC_DIR, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry)));
-
-                ario_connection_preferences_update_musicdir_visibility (connection_preferences);
 
                 g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->name_entry),
                                                    G_CALLBACK (ario_connection_preferences_name_changed_cb),
@@ -357,8 +334,6 @@ ario_connection_preferences_new (ArioMpd *mpd)
                 glade_xml_get_widget (xml, "port_spinbutton");
         connection_preferences->priv->password_entry = 
                 glade_xml_get_widget (xml, "password_entry");
-        connection_preferences->priv->musicdir_label = 
-                glade_xml_get_widget (xml, "musicdir_label");
         connection_preferences->priv->musicdir_entry = 
                 glade_xml_get_widget (xml, "musicdir_entry");
         connection_preferences->priv->autoconnect_checkbutton = 
@@ -515,8 +490,6 @@ ario_connection_preferences_host_changed_cb (GtkWidget *widget,
                                       gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
                 g_free (connection_preferences->priv->current_profile->host);
                 connection_preferences->priv->current_profile->host = g_strdup (gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
-
-                ario_connection_preferences_update_musicdir_visibility (connection_preferences);
         }
 }
 
@@ -735,6 +708,33 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
         g_object_unref (avahi);
         gtk_widget_destroy (dialog);
 #endif
+}
+
+void
+ario_connection_preferences_open_cb (GtkWidget *widget,
+                                     ArioConnectionPreferences *connection_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *dialog;
+
+        dialog = gtk_file_chooser_dialog_new (NULL,
+				              NULL,
+				              GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+				              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+				              NULL);
+
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
+                char *filename;
+
+                filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+                if (filename) {
+                        gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry), filename);
+                        g_free (filename);
+                }
+        }
+
+        gtk_widget_destroy (dialog);
 }
 
 void

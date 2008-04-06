@@ -329,19 +329,27 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                                              ArioShellCoverselect *ario_shell_coverselect)
 {
         ARIO_LOG_FUNCTION_START
-        GtkWidget *fileselection;
+        GtkWidget *dialog;
 
-        fileselection = gtk_file_selection_new (_("Select a file"));
-        gtk_window_set_modal (GTK_WINDOW (fileselection), TRUE);
+        dialog = gtk_file_chooser_dialog_new (NULL,
+				              NULL,
+				              GTK_FILE_CHOOSER_ACTION_OPEN,
+				              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+				              NULL);
 
-        gtk_file_selection_set_filename (GTK_FILE_SELECTION (fileselection),
-                                         g_get_home_dir ());
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
+                char *filename;
 
-        if (gtk_dialog_run (GTK_DIALOG (fileselection)) == GTK_RESPONSE_OK)
-                gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->local_file_entry), 
-                                    gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselection)));
+                filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+                if (filename) {
+                        gtk_entry_set_text (GTK_ENTRY (ario_shell_coverselect->priv->local_file_entry), 
+                                            filename);
+                        g_free (filename);
+                }
+        }
 
-        gtk_widget_destroy (fileselection);
+        gtk_widget_destroy (dialog);
 }
 
 static void
