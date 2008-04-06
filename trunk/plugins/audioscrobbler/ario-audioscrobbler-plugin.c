@@ -104,23 +104,12 @@ impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
         ArioAudioscrobblerPlugin *asplugin = ARIO_AUDIOSCROBBLER_PLUGIN (plugin);
-        static gboolean is_loaded = FALSE;
-        gchar *file;
 
         g_object_get (shell, "mpd", &asplugin->mpd, NULL);
         asplugin->audioscrobbler = ario_audioscrobbler_new (asplugin->mpd);
 
         ario_mpd_use_count_inc (asplugin->mpd);
         g_object_unref (asplugin->mpd);
-
-        if (!is_loaded) {
-                file = ario_plugin_find_file ("audioscrobbler.png");
-                if (file) {
-                        ario_util_add_stock_icons ("audioscrobbler", file);
-                        is_loaded = TRUE;
-                        g_free (file);
-                }
-        }
 }
 
 static void

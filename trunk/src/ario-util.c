@@ -493,6 +493,8 @@ ario_util_format_keyword (const char *keyword)
                         ++j;
                 }
         }
+        tmp = g_realloc(tmp, j+1);
+        tmp[j] = '\0';
 
         g_free (ret);
         ret = tmp;

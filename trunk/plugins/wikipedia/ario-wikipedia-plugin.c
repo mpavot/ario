@@ -114,11 +114,6 @@ impl_activate (ArioPlugin *plugin,
                                               ario_wikipedia_actions,
                                               G_N_ELEMENTS (ario_wikipedia_actions), pi);
 	        g_object_unref (actiongroup);
-                file = ario_plugin_find_file ("wikipedia.png");
-                if (file) {
-                        ario_util_add_stock_icons ("wikipedia", file);
-                        g_free (file);
-                }
 
                 is_loaded = TRUE;
         }

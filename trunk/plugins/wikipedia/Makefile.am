@@ -35,11 +35,14 @@ BUILT_SOURCES =	\
 
 plugin_DATA =	\
 	$(BUILT_SOURCES)						\
-	$(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)	\
-	wikipedia.png
+	$(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
+
+icondir = $(plugindir)/icons
+icon_DATA = wikipedia.png
 
 EXTRA_DIST = $(plugin_in_files)         \
              $(plugin_DATA)             \
+             $(icon_DATA)               \
              $(uixml_DATA)
 
 CLEANFILES = $(BUILT_SOURCES)
