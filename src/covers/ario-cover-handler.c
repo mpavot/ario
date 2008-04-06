@@ -333,7 +333,9 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                 if (cover_path) {
                         cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
                         g_free (cover_path);
-                        if (!cover_handler->priv->pixbuf && should_get) {
+                        if (!cover_handler->priv->pixbuf
+                            && should_get
+                            && ario_conf_get_boolean (PREF_AUTOMATIC_GET_COVER, PREF_AUTOMATIC_GET_COVER_DEFAULT)) {
                                 data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
                                 data->artist = g_strdup (artist);
                                 data->album = g_strdup (album);
