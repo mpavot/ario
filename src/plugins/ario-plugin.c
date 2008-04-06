@@ -127,8 +127,8 @@ ario_plugin_create_configure_dialog (ArioPlugin *plugin)
         return ARIO_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
 }
 
-static GSList *
-ario_get_plugin_paths (void)
+GSList *
+ario_plugin_get_plugin_paths (void)
 {
 	GSList *paths = NULL;
 	char  *path;
@@ -151,7 +151,7 @@ ario_plugin_find_file (const char *file)
 	GSList *l;
 	char *ret = NULL;
 
-	paths = ario_get_plugin_paths ();
+	paths = ario_plugin_get_plugin_paths ();
 
 	for (l = paths; l != NULL; l = l->next) {
 		if (ret == NULL) {
@@ -167,7 +167,7 @@ ario_plugin_find_file (const char *file)
 		}
 	}
 
-	g_slist_foreach (paths, (GFunc)g_free, NULL);
+	g_slist_foreach (paths, (GFunc) g_free, NULL);
 	g_slist_free (paths);
 
 	/* global data files */
