@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-05 14:06+0200\n"
+"POT-Creation-Date: 2008-04-06 23:54+0200\n"
 "PO-Revision-Date: 2008-03-30 14:10+0000\n"
 "Last-Translator: Oliver Laub <oliver.laub@web.de>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -26,20 +26,24 @@ msgid "Client apllication to mpd"
 msgstr "Client apllication to mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr ""
+
+#: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:244
 #: ../src/shell/ario-shell-preferences.c:180
 msgid "Covers"
 msgstr "Covers"
 
-#: ../data/glade/cover-prefs.glade.h:2
+#: ../data/glade/cover-prefs.glade.h:3
 msgid "Covers Sources"
 msgstr "Covers Sources"
 
-#: ../data/glade/cover-prefs.glade.h:3
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Show the covers in the albums list"
 msgstr "Show the covers in the albums list"
 
-#: ../data/glade/cover-prefs.glade.h:4
+#: ../data/glade/cover-prefs.glade.h:5
 msgid "Use Amazon."
 msgstr "Use Amazon."
 
@@ -67,8 +71,8 @@ msgstr "Host :"
 msgid "Music directory :"
 msgstr "Music directory :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:867
-#: ../plugins/radios/ario-radio.c:1066
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:869
+#: ../plugins/radios/ario-radio.c:1068
 msgid "Name :"
 msgstr "Name :"
 
@@ -283,11 +287,11 @@ msgstr "Song"
 msgid "Track :"
 msgstr "Track :"
 
-#: ../src/ario-mpd.c:650
+#: ../src/ario-mpd.c:651
 msgid "Connecting to MPD server..."
 msgstr "Connecting to MPD server..."
 
-#: ../src/ario-mpd.c:675
+#: ../src/ario-mpd.c:676
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible to connect to mpd. Check the connection options."
 
@@ -325,7 +329,7 @@ msgid "Plugin"
 msgstr "Plug-in"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:189
+#: ../src/preferences/ario-cover-preferences.c:194
 #: ../src/preferences/ario-lyrics-preferences.c:145
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
@@ -355,15 +359,15 @@ msgstr "_Deactivate All"
 msgid "Active plugins"
 msgstr "Active plugins"
 
-#: ../src/preferences/ario-connection-preferences.c:382
+#: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
 msgstr "Profile"
 
-#: ../src/preferences/ario-connection-preferences.c:631
+#: ../src/preferences/ario-connection-preferences.c:604
 msgid "Server autodetection"
 msgstr "Server autodetection"
 
-#: ../src/preferences/ario-connection-preferences.c:642
+#: ../src/preferences/ario-connection-preferences.c:615
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -373,25 +377,25 @@ msgstr ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 
-#: ../src/preferences/ario-connection-preferences.c:652
-#: ../src/preferences/ario-cover-preferences.c:200
+#: ../src/preferences/ario-connection-preferences.c:625
+#: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
 msgstr "Name"
 
-#: ../src/preferences/ario-connection-preferences.c:660
+#: ../src/preferences/ario-connection-preferences.c:633
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
 msgstr "Host"
 
-#: ../src/preferences/ario-connection-preferences.c:668
+#: ../src/preferences/ario-connection-preferences.c:641
 #: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:730
+#: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
 msgstr "You must select a server."
 
@@ -434,8 +438,8 @@ msgstr "Updating..."
 #: ../src/sources/ario-browser.c:136 ../src/sources/ario-search.c:100
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
-#: ../plugins/filesystem/ario-filesystem.c:103
-#: ../plugins/filesystem/ario-filesystem.c:111
+#: ../plugins/filesystem/ario-filesystem.c:104
+#: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:110
 msgid "_Add to playlist"
 msgstr "_Add to playlist"
@@ -443,7 +447,7 @@ msgstr "_Add to playlist"
 #: ../src/sources/ario-browser.c:140 ../src/sources/ario-browser.c:143
 #: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
-#: ../plugins/filesystem/ario-filesystem.c:114
+#: ../plugins/filesystem/ario-filesystem.c:115
 #: ../plugins/radios/ario-radio.c:119
 msgid "_Properties"
 msgstr "_Properties"
@@ -491,13 +495,13 @@ msgstr "Track"
 msgid "Title"
 msgstr "Title"
 
-#: ../src/sources/ario-browser.c:1408
+#: ../src/sources/ario-browser.c:1409
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 
-#: ../src/sources/ario-browser.c:1459
+#: ../src/sources/ario-browser.c:1460
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -626,16 +630,16 @@ msgstr ""
 msgid "Configure Plugins"
 msgstr "Configure Plugins"
 
-#: ../src/shell/ario-shell-coverdownloader.c:275
+#: ../src/shell/ario-shell-coverdownloader.c:277
 msgid "Music Player Cover Download"
 msgstr "Music Player Cover Download"
 
-#: ../src/shell/ario-shell-coverdownloader.c:415
+#: ../src/shell/ario-shell-coverdownloader.c:419
 msgid "Download Finished!"
 msgstr "Download Finished!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:418
+#: ../src/shell/ario-shell-coverdownloader.c:422
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -650,15 +654,11 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Cover Download"
 
-#: ../src/shell/ario-shell-coverselect.c:334
-msgid "Select a file"
-msgstr "Select a file"
-
-#: ../src/shell/ario-shell-coverselect.c:496
+#: ../src/shell/ario-shell-coverselect.c:504
 msgid "Error reading file"
 msgstr "Error reading file"
 
-#: ../src/shell/ario-shell-coverselect.c:519
+#: ../src/shell/ario-shell-coverselect.c:527
 msgid "Error saving file"
 msgstr "Error saving file"
 
@@ -965,9 +965,13 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Submits song information to last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:180
+#: ../plugins/filesystem/ario-filesystem.c:181
 msgid "File System"
 msgstr "File System"
+
+#: ../plugins/filesystem/ario-filesystem.c:488
+msgid "Music"
+msgstr ""
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
@@ -1003,24 +1007,24 @@ msgid "Internet Radios"
 msgstr "Internet Radios"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:857
+#: ../plugins/radios/ario-radio.c:859
 msgid "Add a WebRadio"
 msgstr "Add a WebRadio"
 
-#: ../plugins/radios/ario-radio.c:868 ../plugins/radios/ario-radio.c:1067
+#: ../plugins/radios/ario-radio.c:870 ../plugins/radios/ario-radio.c:1069
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:922 ../plugins/radios/ario-radio.c:1122
+#: ../plugins/radios/ario-radio.c:924 ../plugins/radios/ario-radio.c:1124
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Bad parameters. You must specify a name and a URL for the radio."
 
-#: ../plugins/radios/ario-radio.c:984
+#: ../plugins/radios/ario-radio.c:986
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Are you sure you want to delete all the selected radios?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1056
+#: ../plugins/radios/ario-radio.c:1058
 msgid "Edit a WebRadio"
 msgstr "Edit a WebRadio"
 
@@ -1033,11 +1037,11 @@ msgstr "Listen to webradios"
 msgid "Find artist on Wikipedia"
 msgstr "Find artist on Wikipedia"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:175
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:170
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipedia Plugin - Configuration"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:184
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:179
 msgid "Wikipedia language :"
 msgstr "Wikipedia language :"
 
@@ -1048,6 +1052,9 @@ msgstr "A plugin to search current artist on wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Select a file"
+#~ msgstr "Select a file"
 
 #, fuzzy
 #~ msgid "Password:"

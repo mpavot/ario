@@ -380,49 +380,23 @@ ario_util_string_replace (char **string,
                           const char *old,
                           const char *new)
 {
-        ARIO_LOG_FUNCTION_START
-        int offset = 0;
-        int left = strlen (*string);
-        int oldlen = strlen (old);
-        int newlen = strlen (new);
-        int diff = newlen - oldlen;
+        gchar **strsplit;
+        GString *str;
+        int i;
 
-        while (left >= oldlen) {
-                if (strncmp (offset + *string, old, oldlen) != 0) {
-                        --left;
-                        ++offset;
-                        continue;
-                }
-                if (diff == 0) {
-                        memcpy (offset + *string,
-                                new,
-                                newlen);
-                        offset += newlen;
-                        left -= oldlen;
-                } else if (diff > 0) {
-                        *string = g_realloc(*string,
-                                            strlen(*string) + diff + 1);
-                        memmove (offset + *string + newlen,
-                                 offset + *string +oldlen,
-                                 left);
+        strsplit = g_strsplit (*string, old, 0);
 
-                        memcpy (offset + *string,
-                                new,
-                                newlen);
-                        offset += newlen;
-                        left -= oldlen;
-                } else { // (diff < 0)
-                        memmove (offset + *string + newlen,
-                                 offset + *string + oldlen,
-                                 left);
+        str = g_string_new (strsplit[0]);
 
-                        memcpy (offset + *string,
-                                new,
-                                newlen);
-                        offset += newlen;
-                        left -= oldlen;
-                }
+        for (i = 1; strsplit[i] != NULL && g_utf8_collate (strsplit[i], ""); ++i) {
+                g_string_append(str, new);
+                g_string_append(str, strsplit[i]);
         }
+        g_strfreev (strsplit);
+
+        g_free (*string);
+        *string = str->str;
+        g_string_free (str, FALSE);
 }
 
 void
@@ -432,7 +406,7 @@ ario_util_load_uri (const char *uri)
 #ifdef WIN32
         ShellExecute (GetDesktopWindow(), "open", uri, NULL, NULL, SW_SHOW);
 #else
-        gchar *command = g_strdup_printf("x-www-browser %s", uri);
+        gchar *command = g_strdup_printf ("x-www-browser %s", uri);
         g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
         g_free (command);
 #endif                
@@ -488,12 +462,12 @@ ario_util_format_keyword (const char *keyword)
         j = 0;
         for(i = 0; ret[i]; ++i) {
                 if (g_unichar_isalnum (ret[i]) ||
-                    (g_unichar_isspace(ret[i]) &&  j > 0 && !g_unichar_isspace(tmp[j-1]))) {
+                    (g_unichar_isspace (ret[i]) &&  j > 0 && !g_unichar_isspace (tmp[j-1]))) {
                         tmp[j] = ret[i];
                         ++j;
                 }
         }
-        tmp = g_realloc(tmp, j+1);
+        tmp = g_realloc (tmp, j+1);
         tmp[j] = '\0';
 
         g_free (ret);

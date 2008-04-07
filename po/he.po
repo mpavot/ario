@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-05 14:06+0200\n"
+"POT-Creation-Date: 2008-04-06 23:54+0200\n"
 "PO-Revision-Date: 2008-04-04 22:09+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -26,20 +26,24 @@ msgid "Client apllication to mpd"
 msgstr "תוכנת לקוח ל-mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr ""
+
+#: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:244
 #: ../src/shell/ario-shell-preferences.c:180
 msgid "Covers"
 msgstr "עטיפות"
 
-#: ../data/glade/cover-prefs.glade.h:2
+#: ../data/glade/cover-prefs.glade.h:3
 msgid "Covers Sources"
 msgstr "מקור העטיפות"
 
-#: ../data/glade/cover-prefs.glade.h:3
+#: ../data/glade/cover-prefs.glade.h:4
 msgid "Show the covers in the albums list"
 msgstr "הצג את העטיפות ברשימת האלבומים"
 
-#: ../data/glade/cover-prefs.glade.h:4
+#: ../data/glade/cover-prefs.glade.h:5
 msgid "Use Amazon."
 msgstr "השתמש באמאזון."
 
@@ -67,8 +71,8 @@ msgstr "מארח :"
 msgid "Music directory :"
 msgstr "תיקיית מוסיקה :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:867
-#: ../plugins/radios/ario-radio.c:1066
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:869
+#: ../plugins/radios/ario-radio.c:1068
 msgid "Name :"
 msgstr "שם :"
 
@@ -283,11 +287,11 @@ msgstr "שיר"
 msgid "Track :"
 msgstr "רצועה :"
 
-#: ../src/ario-mpd.c:650
+#: ../src/ario-mpd.c:651
 msgid "Connecting to MPD server..."
 msgstr "מתחבר לשרת MPD..."
 
-#: ../src/ario-mpd.c:675
+#: ../src/ario-mpd.c:676
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "לא ניתן להתחבר ל-mpd. בדוק את אפשרויות החיבור"
 
@@ -325,7 +329,7 @@ msgid "Plugin"
 msgstr "תוסף"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:189
+#: ../src/preferences/ario-cover-preferences.c:194
 #: ../src/preferences/ario-lyrics-preferences.c:145
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
@@ -355,40 +359,40 @@ msgstr "הפסק ה_כל"
 msgid "Active plugins"
 msgstr "תוספים פעילים"
 
-#: ../src/preferences/ario-connection-preferences.c:382
+#: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
 msgstr "פרופיל"
 
-#: ../src/preferences/ario-connection-preferences.c:631
+#: ../src/preferences/ario-connection-preferences.c:604
 msgid "Server autodetection"
 msgstr "זיהוי השרת אוטומטית"
 
-#: ../src/preferences/ario-connection-preferences.c:642
+#: ../src/preferences/ario-connection-preferences.c:615
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:652
-#: ../src/preferences/ario-cover-preferences.c:200
+#: ../src/preferences/ario-connection-preferences.c:625
+#: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
 msgstr "שם"
 
-#: ../src/preferences/ario-connection-preferences.c:660
+#: ../src/preferences/ario-connection-preferences.c:633
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
 msgstr "מארח"
 
-#: ../src/preferences/ario-connection-preferences.c:668
+#: ../src/preferences/ario-connection-preferences.c:641
 #: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
 msgstr "פותחה"
 
-#: ../src/preferences/ario-connection-preferences.c:730
+#: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
 msgstr "עליך לבחור שרת."
 
@@ -431,8 +435,8 @@ msgstr "מעדכן..."
 #: ../src/sources/ario-browser.c:136 ../src/sources/ario-search.c:100
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:112
-#: ../plugins/filesystem/ario-filesystem.c:103
-#: ../plugins/filesystem/ario-filesystem.c:111
+#: ../plugins/filesystem/ario-filesystem.c:104
+#: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:110
 msgid "_Add to playlist"
 msgstr "הוסף ל_רשימת ההשמעה"
@@ -440,7 +444,7 @@ msgstr "הוסף ל_רשימת ההשמעה"
 #: ../src/sources/ario-browser.c:140 ../src/sources/ario-browser.c:143
 #: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:126
-#: ../plugins/filesystem/ario-filesystem.c:114
+#: ../plugins/filesystem/ario-filesystem.c:115
 #: ../plugins/radios/ario-radio.c:119
 msgid "_Properties"
 msgstr "_מאפיינים"
@@ -488,12 +492,12 @@ msgstr "רצועה"
 msgid "Title"
 msgstr "כותרת"
 
-#: ../src/sources/ario-browser.c:1408
+#: ../src/sources/ario-browser.c:1409
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל העטיפות של האמנים הנבחרים?"
 
-#: ../src/sources/ario-browser.c:1459
+#: ../src/sources/ario-browser.c:1460
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל העטיפות של האלבומים הנבחרים?"
@@ -617,16 +621,16 @@ msgstr ""
 msgid "Configure Plugins"
 msgstr "הגדרות תוספים"
 
-#: ../src/shell/ario-shell-coverdownloader.c:275
+#: ../src/shell/ario-shell-coverdownloader.c:277
 msgid "Music Player Cover Download"
 msgstr "הורדת עטיפה לנגן המוסיקה"
 
-#: ../src/shell/ario-shell-coverdownloader.c:415
+#: ../src/shell/ario-shell-coverdownloader.c:419
 msgid "Download Finished!"
 msgstr "ההורדה הושלמה!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:418
+#: ../src/shell/ario-shell-coverdownloader.c:422
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -641,15 +645,11 @@ msgstr ""
 msgid "Cover Download"
 msgstr "הורדת עטיפה"
 
-#: ../src/shell/ario-shell-coverselect.c:334
-msgid "Select a file"
-msgstr "בחר קובץ"
-
-#: ../src/shell/ario-shell-coverselect.c:496
+#: ../src/shell/ario-shell-coverselect.c:504
 msgid "Error reading file"
 msgstr "שגיאה בקריאת הקובץ"
 
-#: ../src/shell/ario-shell-coverselect.c:519
+#: ../src/shell/ario-shell-coverselect.c:527
 msgid "Error saving file"
 msgstr "שגיאה בשמירת הקובץ"
 
@@ -956,9 +956,13 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "שולח את נתוני השיר אל last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:180
+#: ../plugins/filesystem/ario-filesystem.c:181
 msgid "File System"
 msgstr "מערכת קבצים"
+
+#: ../plugins/filesystem/ario-filesystem.c:488
+msgid "Music"
+msgstr ""
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
@@ -994,24 +998,24 @@ msgid "Internet Radios"
 msgstr "תחנות רדיו אינטרנט"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:857
+#: ../plugins/radios/ario-radio.c:859
 msgid "Add a WebRadio"
 msgstr "הוסף רדיו-רשת"
 
-#: ../plugins/radios/ario-radio.c:868 ../plugins/radios/ario-radio.c:1067
+#: ../plugins/radios/ario-radio.c:870 ../plugins/radios/ario-radio.c:1069
 msgid "URL :"
 msgstr "כתובת :"
 
-#: ../plugins/radios/ario-radio.c:922 ../plugins/radios/ario-radio.c:1122
+#: ../plugins/radios/ario-radio.c:924 ../plugins/radios/ario-radio.c:1124
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "משתנים שגויים. עליך לציין את שמה וכתובתה של תחנת הרדיו."
 
-#: ../plugins/radios/ario-radio.c:984
+#: ../plugins/radios/ario-radio.c:986
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "האם אתה בטוח שברצונך למחוק את התחנות הנבחרות?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1056
+#: ../plugins/radios/ario-radio.c:1058
 msgid "Edit a WebRadio"
 msgstr "ערוך רדיו-רשת"
 
@@ -1024,11 +1028,11 @@ msgstr "האזן לרדיו ברשת"
 msgid "Find artist on Wikipedia"
 msgstr "חפש אמן בויקיפדיה"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:175
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:170
 msgid "Wikipedia Plugin - Configuration"
 msgstr "תוסף ויקיפדיה - הגדרות"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:184
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:179
 msgid "Wikipedia language :"
 msgstr "שפת הויקיפדיה :"
 
@@ -1039,3 +1043,6 @@ msgstr "תוסף לחיפוש האמן הנוכחי בויקיפדיה"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "ויקיפדיה"
+
+#~ msgid "Select a file"
+#~ msgstr "בחר קובץ"
