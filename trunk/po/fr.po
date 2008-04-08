@@ -1,16 +1,14 @@
 # French translation of Ario.
-# Copyright (C) 2007 THE Ario'S COPYRIGHT HOLDER
+# Copyright (C) 2007 Marc Pavot <marc.pavot@gmail.com>
 # This file is distributed under the same license as the Ario package.
-# marc <>, 2007.
-# , fuzzy
-# marc <>, 2008.
+# Marc Pavot <marc.pavot@gmail.com>, 2007.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Ario 0.3\n"
+"Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-06 23:54+0200\n"
+"POT-Creation-Date: 2008-04-08 20:17+0200\n"
 "PO-Revision-Date: 2008-04-06 23:57+0200\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
@@ -118,17 +116,21 @@ msgstr ""
 "vous ne voyez pas votre serveur MPD, vous devriez vérifier que zeroconf est "
 "activé sur votre serveur MPD ou utiliser la configuration manuelle."
 
-#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1
+msgid "..."
+msgstr ""
+
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
 msgstr "Album :"
 
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
+#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Artiste :"
 
-#: ../data/glade/cover-progress.glade.h:3
+#: ../data/glade/cover-progress.glade.h:4
 msgid "Downloading cover"
 msgstr "Télécharger les pochettes"
 

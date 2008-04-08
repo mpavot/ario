@@ -49,10 +49,10 @@ main (int argc, char *argv[])
         gtk_set_locale ();
         gtk_init (&argc, &argv);
 
+        ario_conf_init ();
         ario_util_init_stock_icons ();
         curl_global_init(0);
 
-        ario_conf_init ();
         shell = ario_shell_new ();
         ario_shell_construct (shell);
         ario_plugins_engine_init (shell);
@@ -60,11 +60,11 @@ main (int argc, char *argv[])
         gtk_main ();
 
         ario_shell_shutdown (shell);
-        ario_conf_shutdown ();
 
         g_object_unref (G_OBJECT (shell));
 
         ario_plugins_engine_shutdown ();
+        ario_conf_shutdown ();
 
         xmlCleanupParser ();
 

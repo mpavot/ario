@@ -1,9 +1,9 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,0.4)
+m4_define(ario_version,1.0)
 
 PACKAGE=Ario
-VERSION=0.4
+VERSION=1.0
 
 AC_INIT(ario,ario_version)
 AM_CONFIG_HEADER(config.h)

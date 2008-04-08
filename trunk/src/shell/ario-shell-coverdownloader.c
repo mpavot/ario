@@ -428,7 +428,6 @@ ario_shell_coverdownloader_progress_end (ArioShellCoverdownloader *ario_shell_co
                             label_text);
         g_free (label_text);
 
-        // TODO: gtk_container_remove?
         gtk_widget_destroy (ario_shell_coverdownloader->priv->progress_hbox);
         gtk_widget_destroy (ario_shell_coverdownloader->priv->progress_artist_label);
 
