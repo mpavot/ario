@@ -568,7 +568,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                                                     TRACK_COLUMN, track,
                                                     TITLE_COLUMN, title,
                                                     ARTIST_COLUMN, song->artist,
-                                                    ALBUM_COLUMN, song->album,
+                                                    ALBUM_COLUMN, song->album ? song->album : ARIO_MPD_UNKNOWN,
                                                     DURATION_COLUMN, time,
                                                     ID_COLUMN, song->id,
                                                     PATH_COLUMN, song->file,
@@ -587,7 +587,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                                             TRACK_COLUMN, track,
                                             TITLE_COLUMN, title,
                                             ARTIST_COLUMN, song->artist,
-                                            ALBUM_COLUMN, song->album,
+                                            ALBUM_COLUMN, song->album ? song->album : ARIO_MPD_UNKNOWN,
                                             DURATION_COLUMN, time,
                                             ID_COLUMN, song->id,
                                             PATH_COLUMN, song->file,
@@ -1291,6 +1291,7 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         GdkModifierType mods;
+        GtkTreePath *path;
         int x, y, bx, by;
 
         if (!GTK_WIDGET_HAS_FOCUS (widget))
@@ -1320,10 +1321,19 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
                 gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
 
                 if (bx >= 0 && by >= 0) {
-                        gdk_window_get_pointer (widget->window, &x, &y, &mods);
                         playlist->priv->drag_start_x = x;
                         playlist->priv->drag_start_y = y;
                         playlist->priv->pressed = TRUE;
+
+                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
+                        if (path) {
+                                GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+                                if (!gtk_tree_selection_path_is_selected (selection, path)) {
+                                        gtk_tree_selection_unselect_all (selection);
+                                        gtk_tree_selection_select_path (selection, path);
+                                }
+                                gtk_tree_path_free (path);
+                        }
 
                         return TRUE;
                 } else {
@@ -1332,8 +1342,6 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
         }
 
         if (event->button == 3) {
-                GtkTreePath *path;
-
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                 if (path) {
                         if (!gtk_tree_selection_path_is_selected (playlist->priv->selection, path)) {
