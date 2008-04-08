@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-06 23:54+0200\n"
+"POT-Creation-Date: 2008-04-08 20:17+0200\n"
 "PO-Revision-Date: 2008-03-29 13:27+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -118,17 +118,21 @@ msgstr ""
 "seharusnya mengecek bahwa zerocnf diaktifkan pada konfigurasi MPD atau "
 "menggunakan konfigurasi manual"
 
-#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1
+msgid "..."
+msgstr ""
+
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
 msgstr "Album :"
 
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
+#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Artis :"
 
-#: ../data/glade/cover-progress.glade.h:3
+#: ../data/glade/cover-progress.glade.h:4
 #, fuzzy
 msgid "Downloading cover"
 msgstr "Donwload sampul album"

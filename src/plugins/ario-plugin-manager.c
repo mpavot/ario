@@ -109,6 +109,7 @@ about_button_cb (GtkWidget* button,
                  ArioPluginManager* pm)
 {
         ArioPluginInfo *info;
+        GdkPixbuf *pb = NULL;
 
         info = plugin_manager_get_selected_plugin (pm);
 
@@ -119,13 +120,20 @@ about_button_cb (GtkWidget* button,
                 gtk_widget_destroy (pm->priv->about);
 
         pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-                                        "name", ario_plugin_info_get_name (info),
+                                        "program-name", ario_plugin_info_get_name (info),
                                         "copyright", ario_plugin_info_get_copyright (info),
                                         "authors", ario_plugin_info_get_authors (info),
                                         "comments", ario_plugin_info_get_description (info),
                                         "website", ario_plugin_info_get_website (info),
-                                        "logo-icon-name", ario_plugin_info_get_icon_name (info),
+                                        "logo", pb,
                                         NULL);
+
+        pb = gtk_widget_render_icon (pm->priv->about, ario_plugin_info_get_icon_name (info),
+                                     -1, NULL);
+        if (pb) {
+                gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG (pm->priv->about), pb);
+                g_object_unref (pb);
+        }
 
         gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about),
                                             TRUE);
