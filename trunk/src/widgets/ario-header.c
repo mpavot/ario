@@ -45,12 +45,12 @@ static void ario_header_get_property (GObject *object,
 static gboolean ario_header_image_press_cb (GtkWidget *widget,
                                             GdkEventButton *event,
                                             ArioHeader *header);
-static gboolean slider_press_callback (GtkWidget *widget,
-                                       GdkEventButton *event,
-                                       ArioHeader *header);
-static gboolean slider_release_callback (GtkWidget *widget,
-                                         GdkEventButton *event,
-                                         ArioHeader *header);
+static gboolean ario_header_slider_press_cb (GtkWidget *widget,
+                                             GdkEventButton *event,
+                                             ArioHeader *header);
+static gboolean ario_header_slider_release_cb (GtkWidget *widget,
+                                               GdkEventButton *event,
+                                               ArioHeader *header);
 static void ario_header_song_changed_cb (ArioMpd *mpd,
                                          ArioHeader *header);
 static void ario_header_album_changed_cb (ArioMpd *mpd,
@@ -302,11 +302,11 @@ ario_header_constructor (GType type, guint n_construct_properties,
 
         g_signal_connect_object (G_OBJECT (header->priv->scale),
                                  "button_press_event",
-                                 G_CALLBACK (slider_press_callback),
+                                 G_CALLBACK (ario_header_slider_press_cb),
                                  header, 0);
         g_signal_connect_object (G_OBJECT (header->priv->scale),
                                  "button_release_event",
-                                 G_CALLBACK (slider_release_callback),
+                                 G_CALLBACK (ario_header_slider_release_cb),
                                  header, 0);
 
         gtk_scale_set_draw_value (GTK_SCALE (header->priv->scale), FALSE);
@@ -742,9 +742,9 @@ ario_header_image_press_cb (GtkWidget *widget,
 }
 
 static gboolean
-slider_press_callback (GtkWidget *widget,
-                       GdkEventButton *event,
-                       ArioHeader *header)
+ario_header_slider_press_cb (GtkWidget *widget,
+                             GdkEventButton *event,
+                             ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
         header->priv->slider_dragging = TRUE;
@@ -752,9 +752,9 @@ slider_press_callback (GtkWidget *widget,
 }
 
 static gboolean
-slider_release_callback (GtkWidget *widget,
-                         GdkEventButton *event,
-                         ArioHeader *header)
+ario_header_slider_release_cb (GtkWidget *widget,
+                               GdkEventButton *event,
+                               ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
         header->priv->slider_dragging = FALSE;
