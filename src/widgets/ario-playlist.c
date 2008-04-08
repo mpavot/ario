@@ -1293,6 +1293,7 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
         GdkModifierType mods;
         GtkTreePath *path;
         int x, y, bx, by;
+        gboolean selected;
 
         if (!GTK_WIDGET_HAS_FOCUS (widget))
                 gtk_widget_grab_focus (widget);
@@ -1327,12 +1328,10 @@ ario_playlist_view_button_press_cb (GtkWidget *widget,
 
                         gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                         if (path) {
-                                GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                                if (!gtk_tree_selection_path_is_selected (selection, path)) {
-                                        gtk_tree_selection_unselect_all (selection);
-                                        gtk_tree_selection_select_path (selection, path);
-                                }
+                                selected = gtk_tree_selection_path_is_selected (playlist->priv->selection, path);
                                 gtk_tree_path_free (path);
+
+                                return selected;
                         }
 
                         return TRUE;

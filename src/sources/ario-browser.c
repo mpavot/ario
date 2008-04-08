@@ -1030,7 +1030,9 @@ ario_browser_button_press_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         GdkModifierType mods;
+        GtkTreePath *path;
         int x, y;
+        gboolean selected;
 
         if (!GTK_WIDGET_HAS_FOCUS (widget))
                 gtk_widget_grab_focus (widget);
@@ -1051,6 +1053,14 @@ ario_browser_button_press_cb (GtkWidget *widget,
                 browser->priv->drag_start_x = x;
                 browser->priv->drag_start_y = y;
                 browser->priv->pressed = TRUE;
+
+                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
+                if (path) {
+                        selected = gtk_tree_selection_path_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget)), path);
+                        gtk_tree_path_free (path);
+
+                        return selected;
+                }
 
                 return TRUE;
         }
@@ -1086,8 +1096,12 @@ ario_browser_button_release_cb (GtkWidget *widget,
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                 if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        gtk_tree_selection_unselect_all (selection);
-                        gtk_tree_selection_select_path (selection, path);
+
+                        if (gtk_tree_selection_path_is_selected (selection, path)
+                            && (gtk_tree_selection_count_selected_rows (selection) != 1)) {
+                                gtk_tree_selection_unselect_all (selection);
+                                gtk_tree_selection_select_path (selection, path);
+                        }
                         gtk_tree_path_free (path);
                 }
         }
