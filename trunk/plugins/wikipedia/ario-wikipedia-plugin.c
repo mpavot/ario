@@ -35,7 +35,10 @@
 
 static void ario_wikipedia_cmd_find_artist (GtkAction *action,
                                             ArioWikipediaPlugin *plugin);
-
+static void ario_wikipedia_plugin_sync_mpd (ArioWikipediaPlugin *plugin,
+                                            ArioMpd *mpd);
+static void ario_wikipedia_plugin_mpd_state_changed_cb (ArioMpd *mpd,
+                                                        ArioWikipediaPlugin *plugin);
 #define ARIO_WIKIPEDIA_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_WIKIPEDIA_PLUGIN, ArioWikipediaPluginPrivate))
 
 #define CONF_WIKIPEDIA_LANGUAGE         "plugins/wikipedia-language"
@@ -51,6 +54,7 @@ struct _ArioWikipediaPluginPrivate
 {
 	guint ui_merge_id;
         ArioShell *shell;
+        GtkActionGroup *actiongroup;
 };
 
 static const char *wikipedia_languages[] = {
@@ -94,10 +98,10 @@ impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
 	GtkUIManager *uimanager;
-        GtkActionGroup *actiongroup;
 	ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
         static gboolean is_loaded = FALSE;
         gchar *file;
+        ArioMpd *mpd;
 
 	g_object_get (shell, "ui-manager", &uimanager, NULL);
         file = ario_plugin_find_file ("wikipedia-ui.xml");
@@ -109,14 +113,21 @@ impl_activate (ArioPlugin *plugin,
 	g_object_unref (uimanager);
 
         if (!is_loaded) {
-	        g_object_get (shell, "action-group", &actiongroup, NULL);
-                gtk_action_group_add_actions (actiongroup,
+	        g_object_get (shell, "action-group", &pi->priv->actiongroup, NULL);
+                gtk_action_group_add_actions (pi->priv->actiongroup,
                                               ario_wikipedia_actions,
                                               G_N_ELEMENTS (ario_wikipedia_actions), pi);
-	        g_object_unref (actiongroup);
+	        g_object_unref (pi->priv->actiongroup);
 
                 is_loaded = TRUE;
         }
+
+	g_object_get (shell, "mpd", &mpd, NULL);
+        g_signal_connect_object (G_OBJECT (mpd),
+                                 "state_changed", G_CALLBACK (ario_wikipedia_plugin_mpd_state_changed_cb),
+                                 pi, 0);
+        ario_wikipedia_plugin_sync_mpd (pi, mpd);
+        g_object_unref (mpd);
 
         pi->priv->shell = shell;
 }
@@ -271,3 +282,30 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
                 g_free (uri);
         }
 }
+
+static void
+ario_wikipedia_plugin_sync_mpd (ArioWikipediaPlugin *plugin,
+                                ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        gboolean is_playing;
+        GtkAction *action;
+
+        is_playing = (ario_mpd_is_connected (mpd)
+                      && ((ario_mpd_get_current_state (mpd) == MPD_STATUS_STATE_PLAY)
+                           || (ario_mpd_get_current_state (mpd) == MPD_STATUS_STATE_PAUSE)));
+
+        action = gtk_action_group_get_action (plugin->priv->actiongroup,
+                                              "ToolWikipedia");
+        gtk_action_set_sensitive (action, is_playing);
+}
+
+static void
+ario_wikipedia_plugin_mpd_state_changed_cb (ArioMpd *mpd,
+                                            ArioWikipediaPlugin *plugin)
+{
+        ARIO_LOG_FUNCTION_START
+
+        ario_wikipedia_plugin_sync_mpd (plugin, mpd);
+}
+
