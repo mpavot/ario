@@ -425,7 +425,7 @@ ario_shell_construct (ArioShell *shell)
         /* initialize tray icon */
         shell->priv->status_icon = ario_status_icon_new (shell->priv->actiongroup,
                                                          shell->priv->ui_manager,
-                                                         shell->priv->window,
+                                                         GTK_WINDOW (shell->priv->window),
                                                          shell->priv->mpd);
 #endif
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
