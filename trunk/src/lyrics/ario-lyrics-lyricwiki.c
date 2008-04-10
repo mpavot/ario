@@ -238,15 +238,18 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
         xmlChar *xml_title;
         GString *msg;
 
+        if (!artist && !title)
+                return NULL;
+
         if (artist)
                 xml_artist = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) artist);
         else
-                xml_artist = (xmlChar *) g_strdup (ARIO_MPD_UNKNOWN);
+                xml_artist = NULL;
 
         if (title)
                 xml_title = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) title);
         else
-                xml_title = (xmlChar *) g_strdup (ARIO_MPD_UNKNOWN);
+                xml_title = NULL;
 
         msg = g_string_new ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                             "<SOAP-ENV:Envelope SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
@@ -255,12 +258,19 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
                             "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                             "xmlns:SOAP-ENC=\"http://schemas.xmlsoapL.org/soap/encoding/\" "
                             "xmlns:tns=\"urn:LyricWiki\">"
-                            "<SOAP-ENV:Body>\n<tns:getSong xmlns:tns=\"urn:LyricWiki\">"
-                            "<artist xsi:type=\"xsd:string\">");
-        g_string_append(msg, (const gchar *) xml_artist); 
-        g_string_append(msg, "</artist><song xsi:type=\"xsd:string\">");
-        g_string_append(msg, (const gchar *) xml_title);
-        g_string_append(msg, "</song></tns:getSong></SOAP-ENV:Body></SOAP-ENV:Envelope>\n");
+                            "<SOAP-ENV:Body>\n<tns:getSong xmlns:tns=\"urn:LyricWiki\">");
+        if (xml_artist) {
+                g_string_append (msg, "<artist xsi:type=\"xsd:string\">");
+                g_string_append (msg, (const gchar *) xml_artist); 
+                g_string_append (msg, "</artist>");
+        }
+        if (xml_title) {
+                g_string_append (msg, "<song xsi:type=\"xsd:string\">");
+                g_string_append (msg, (const gchar *) xml_title);
+                g_string_append (msg, "</song>");
+        }
+        g_string_append (msg, "</tns:getSong></SOAP-ENV:Body></SOAP-ENV:Envelope>\n");
+
         xmlFree (xml_artist);
         xmlFree (xml_title);
 
