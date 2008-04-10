@@ -238,8 +238,15 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
         xmlChar *xml_title;
         GString *msg;
 
-        xml_artist = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) artist);
-        xml_title = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) title);
+        if (artist)
+                xml_artist = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) artist);
+        else
+                xml_artist = (xmlChar *) g_strdup (ARIO_MPD_UNKNOWN);
+
+        if (title)
+                xml_title = xmlEncodeEntitiesReentrant (NULL, (const xmlChar *) title);
+        else
+                xml_title = (xmlChar *) g_strdup (ARIO_MPD_UNKNOWN);
 
         msg = g_string_new ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                             "<SOAP-ENV:Envelope SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
