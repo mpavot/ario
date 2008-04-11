@@ -146,21 +146,21 @@ ario_avahi_init (ArioAvahi *avahi)
         avahi->priv->glib_poll = avahi_glib_poll_new (NULL, G_PRIORITY_DEFAULT);
         avahi->priv->poll_api = avahi_glib_poll_get (avahi->priv->glib_poll);
         if (!avahi->priv->glib_poll) {
-                ARIO_LOG_ERROR ("Failed to create simple poll object.\n");
+                ARIO_LOG_ERROR ("Failed to create simple poll object.");
                 return;
         }
 
         /* Allocate a new client */
         avahi->priv->client = avahi_client_new (avahi->priv->poll_api, 0, ario_avahi_client_callback, avahi, &error);
         if (!avahi->priv->client) {
-                ARIO_LOG_ERROR ("Failed to create client: %s\n", avahi_strerror (error));
+                ARIO_LOG_ERROR ("Failed to create client: %s", avahi_strerror (error));
                 return;
         }
 
         avahi->priv->browser = avahi_service_browser_new (avahi->priv->client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC,
                                                           SERVICE_TYPE, DOMAIN, 0, ario_avahi_browse_callback, avahi);
         if (!avahi->priv->browser) {
-                ARIO_LOG_ERROR ("Failed to create service browser for domain %s: %s\n", DOMAIN,
+                ARIO_LOG_ERROR ("Failed to create service browser for domain %s: %s", DOMAIN,
                                 avahi_strerror (avahi_client_errno (avahi->priv->client)));
                 return;
         }
@@ -184,8 +184,10 @@ ario_avahi_finalize (GObject *object)
         ARIO_LOG_FUNCTION_START
         ArioAvahi *avahi = ARIO_AVAHI (object);
 
-        avahi_client_free (avahi->priv->client);
-        avahi_glib_poll_free (avahi->priv->glib_poll);
+        if (avahi->priv->client)
+                avahi_client_free (avahi->priv->client);
+        if (avahi->priv->glib_poll)
+                avahi_glib_poll_free (avahi->priv->glib_poll);
         g_slist_foreach (avahi->priv->hosts, (GFunc) ario_avahi_free_hosts, NULL);
         g_slist_free (avahi->priv->hosts);
         g_free (avahi->priv);
@@ -226,7 +228,7 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
 
         switch (event) {
         case AVAHI_RESOLVER_FAILURE:
-                ARIO_LOG_ERROR ("(Resolver) Failed to resolve service '%s' of type '%s' in domain '%s': %s\n",
+                ARIO_LOG_ERROR ("(Resolver) Failed to resolve service '%s' of type '%s' in domain '%s': %s",
                                 name, type, domain, avahi_strerror(avahi_client_errno (avahi_service_resolver_get_client (r))));
                 break;
 
@@ -283,11 +285,11 @@ static void ario_avahi_browse_callback (AvahiServiceBrowser *b,
 
         switch (event) {
         case AVAHI_BROWSER_FAILURE:
-                ARIO_LOG_ERROR ("(Browser) %s\n", avahi_strerror(avahi_client_errno(avahi_service_browser_get_client(b))));
+                ARIO_LOG_ERROR ("(Browser) %s", avahi_strerror(avahi_client_errno(avahi_service_browser_get_client(b))));
                 return;
 
         case AVAHI_BROWSER_NEW:
-                ARIO_LOG_DBG ("(Browser) NEW: service '%s' of type '%s' in domain '%s'\n", name, type, domain);
+                ARIO_LOG_DBG ("(Browser) NEW: service '%s' of type '%s' in domain '%s'", name, type, domain);
 
                 /* We ignore the returned resolver object. In the callback
                    function we free it. If the server is terminated before
@@ -295,17 +297,17 @@ static void ario_avahi_browse_callback (AvahiServiceBrowser *b,
                    the resolver for us. */
 
                 if (!(avahi_service_resolver_new (avahi->priv->client, interface, protocol, name, type, domain, AVAHI_PROTO_UNSPEC, 0, ario_avahi_resolve_callback, avahi)))
-                        ARIO_LOG_ERROR ("Failed to resolve service '%s': %s\n", name, avahi_strerror (avahi_client_errno (avahi->priv->client)));
+                        ARIO_LOG_ERROR ("Failed to resolve service '%s': %s", name, avahi_strerror (avahi_client_errno (avahi->priv->client)));
                 break;
 
         case AVAHI_BROWSER_REMOVE:
-                ARIO_LOG_DBG ("(Browser) REMOVE: service '%s' of type '%s' in domain '%s'\n", name, type, domain);
+                ARIO_LOG_DBG ("(Browser) REMOVE: service '%s' of type '%s' in domain '%s'", name, type, domain);
                 ario_avahi_remove_host (avahi, name);
                 break;
 
         case AVAHI_BROWSER_ALL_FOR_NOW:
         case AVAHI_BROWSER_CACHE_EXHAUSTED:
-                ARIO_LOG_DBG ("(Browser) %s\n", event == AVAHI_BROWSER_CACHE_EXHAUSTED ? "CACHE_EXHAUSTED" : "ALL_FOR_NOW");
+                ARIO_LOG_DBG ("(Browser) %s", event == AVAHI_BROWSER_CACHE_EXHAUSTED ? "CACHE_EXHAUSTED" : "ALL_FOR_NOW");
                 break;
         }
 }
@@ -320,7 +322,7 @@ static void ario_avahi_client_callback (AvahiClient *c,
         /* Called whenever the client or server state changes */
 
         if (state == AVAHI_CLIENT_FAILURE) {
-                ARIO_LOG_ERROR ("Server connection failure: %s\n", avahi_strerror (avahi_client_errno (c)));
+                ARIO_LOG_ERROR ("Server connection failure: %s", avahi_strerror (avahi_client_errno (c)));
         }
 }
 
