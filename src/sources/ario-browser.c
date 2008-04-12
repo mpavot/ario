@@ -696,7 +696,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
         GSList *albums = NULL, *temp;
         ArioMpdAlbum *ario_mpd_album;
         GtkTreeIter album_iter;
-        gchar *ario_cover_path;
+        gchar *cover_path;
         GdkPixbuf *cover;
 
         g_return_if_fail (IS_ARIO_BROWSER (browser));
@@ -712,11 +712,11 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
         for (temp = albums; temp; temp = g_slist_next (temp)) {
                 ario_mpd_album = temp->data;
 
-                ario_cover_path = ario_cover_make_ario_cover_path (ario_mpd_album->artist, ario_mpd_album->album, SMALL_COVER);
+                cover_path = ario_cover_make_ario_cover_path (ario_mpd_album->artist, ario_mpd_album->album, SMALL_COVER);
 
                 /* The small cover exists, we show it */
-                cover = gdk_pixbuf_new_from_file_at_size (ario_cover_path, COVER_SIZE, COVER_SIZE, NULL);
-                g_free (ario_cover_path);
+                cover = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
+                g_free (cover_path);
 
                 if (!GDK_IS_PIXBUF (cover)) {
                         /* There is no cover, we show a transparent picture */
@@ -1277,18 +1277,18 @@ ario_browser_covers_update (GtkTreeModel *model,
         ArioBrowser *browser = ARIO_BROWSER (userdata);
         gchar* artist;
         gchar *album;
-        gchar *ario_cover_path;
+        gchar *cover_path;
         GdkPixbuf *cover;
 
         g_return_val_if_fail (IS_ARIO_BROWSER (browser), FALSE);
 
         gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &artist, ALBUM_ALBUM_COLUMN, &album, -1);
 
-        ario_cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
+        cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
 
         /* The small cover exists, we show it */
-        cover = gdk_pixbuf_new_from_file_at_size (ario_cover_path, COVER_SIZE, COVER_SIZE, NULL);
-        g_free (ario_cover_path);
+        cover = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
+        g_free (cover_path);
 
         if (!GDK_IS_PIXBUF (cover)) {
                 /* There is no cover, we show a transparent picture */

@@ -319,6 +319,11 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
         gchar *artist = ario_mpd_get_current_artist (cover_handler->priv->mpd);
         gchar *album = ario_mpd_get_current_album (cover_handler->priv->mpd);
 
+        if (!artist)
+                artist = ARIO_MPD_UNKNOWN;
+        if (!album)
+                album = ARIO_MPD_UNKNOWN;
+
         if (cover_handler->priv->pixbuf) {
                 g_object_unref(cover_handler->priv->pixbuf);
                 cover_handler->priv->pixbuf = NULL;
@@ -329,7 +334,6 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
         case MPD_STATUS_STATE_PAUSE:
                 cover_path = ario_cover_make_ario_cover_path (artist,
                                                               album, SMALL_COVER);
-
                 if (cover_path) {
                         cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
                         g_free (cover_path);

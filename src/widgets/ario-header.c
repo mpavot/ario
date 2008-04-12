@@ -617,6 +617,21 @@ ario_header_state_changed_cb (ArioMpd *mpd,
                               ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
+
+        ario_header_change_song_label (header);
+        ario_header_change_artist_album_label (header);
+        ario_header_change_total_time (header);
+
+        gtk_container_remove (GTK_CONTAINER (header->priv->play_pause_button),
+                              gtk_bin_get_child (GTK_BIN (header->priv->play_pause_button)));
+
+        if (ario_mpd_is_paused (mpd))
+                gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button),
+                                   header->priv->play_image);
+        else
+                gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button),
+                                   header->priv->pause_image);
+
         if (!ario_mpd_is_connected (mpd)) {
                 gtk_widget_set_sensitive (header->priv->prev_button, FALSE);
                 gtk_widget_set_sensitive (header->priv->play_pause_button, FALSE);
@@ -644,20 +659,6 @@ ario_header_state_changed_cb (ArioMpd *mpd,
 
                 gtk_widget_set_sensitive (header->priv->volume_button, TRUE);
         }
-
-        ario_header_change_song_label (header);
-        ario_header_change_artist_album_label (header);
-        ario_header_change_total_time (header);
-
-        gtk_container_remove (GTK_CONTAINER (header->priv->play_pause_button),
-                              gtk_bin_get_child (GTK_BIN (header->priv->play_pause_button)));
-
-        if (ario_mpd_is_paused (mpd))
-                gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button),
-                                   header->priv->play_image);
-        else
-                gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button),
-                                   header->priv->pause_image);
 }
 
 static void
