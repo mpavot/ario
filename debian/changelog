@@ -1,6 +1,7 @@
 ario (0.4-1) unstable; urgency=low
 
   * New upstream release
+  * Use libcurl4-gnutls-dev instead of libcurl3-dev to avoid licensing problem with OpenSSL.
 
  -- Marc Pavot <marc.pavot@gmail.com>  Fri, 15 Feb 2008 22:06:53 +0100
 

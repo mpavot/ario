@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-08 20:17+0200\n"
-"PO-Revision-Date: 2008-04-03 16:30+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"POT-Creation-Date: 2008-04-13 18:06+0200\n"
+"PO-Revision-Date: 2008-04-08 07:34+0000\n"
+"Last-Translator: Szenográdi Norbert Péter <sevoir75@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-04-05 11:40+0000\n"
+"X-Launchpad-Export-Date: 2008-04-13 15:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -71,8 +71,8 @@ msgstr "Hoszt :"
 msgid "Music directory :"
 msgstr "Zene könyvtár :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:869
-#: ../plugins/radios/ario-radio.c:1068
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:883
+#: ../plugins/radios/ario-radio.c:1082
 msgid "Name :"
 msgstr "Név :"
 
@@ -114,21 +114,17 @@ msgid ""
 "is activated in your MPD configuration or use the manual configuration."
 msgstr ""
 
-#: ../data/glade/cover-progress.glade.h:1
-msgid "..."
-msgstr ""
-
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
 msgstr "Album :"
 
-#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:2
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Előadó :"
 
-#: ../data/glade/cover-progress.glade.h:4
+#: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
 msgstr "Borító letöltése"
 
@@ -146,7 +142,7 @@ msgstr "Közéső gomb ikonja a tálcán :"
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Show tabs"
-msgstr "Elválasztók mutatása"
+msgstr "Elválasztók megjelenítése"
 
 #: ../data/glade/interface-prefs.glade.h:3
 msgid "Tabs"
@@ -338,27 +334,27 @@ msgstr "Bővítmény"
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:177
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
 msgid "_About"
 msgstr "_Névjegy"
 
-#: ../src/plugins/ario-plugin-manager.c:510
+#: ../src/plugins/ario-plugin-manager.c:518
 msgid "C_onfigure"
 msgstr "_Beállítás"
 
-#: ../src/plugins/ario-plugin-manager.c:519
+#: ../src/plugins/ario-plugin-manager.c:527
 msgid "A_ctivate"
 msgstr "_Aktiválás"
 
-#: ../src/plugins/ario-plugin-manager.c:530
+#: ../src/plugins/ario-plugin-manager.c:538
 msgid "Ac_tivate All"
 msgstr "Összes a_ktiválása"
 
-#: ../src/plugins/ario-plugin-manager.c:535
+#: ../src/plugins/ario-plugin-manager.c:543
 msgid "_Deactivate All"
 msgstr "Összes l_etiltása"
 
-#: ../src/plugins/ario-plugin-manager.c:744
+#: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
 msgstr "Aktív bővítmények"
 
@@ -495,13 +491,13 @@ msgstr "Szám"
 msgid "Title"
 msgstr "Cím"
 
-#: ../src/sources/ario-browser.c:1409
+#: ../src/sources/ario-browser.c:1423
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Biztos benne, hogy eltávolítja az összes borítót a kiválasztott előadótól?"
 
-#: ../src/sources/ario-browser.c:1460
+#: ../src/sources/ario-browser.c:1474
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -620,6 +616,10 @@ msgstr "GTK kliens MPD -hez"
 #: ../src/shell/ario-shell.c:630
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
+"\n"
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Szenográdi Norbert Péter https://launchpad.net/~sevoir"
@@ -1005,24 +1005,24 @@ msgid "Internet Radios"
 msgstr "Internetrádiók"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:859
+#: ../plugins/radios/ario-radio.c:873
 msgid "Add a WebRadio"
 msgstr "Webrádió hozzáadása"
 
-#: ../plugins/radios/ario-radio.c:870 ../plugins/radios/ario-radio.c:1069
+#: ../plugins/radios/ario-radio.c:884 ../plugins/radios/ario-radio.c:1083
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:924 ../plugins/radios/ario-radio.c:1124
+#: ../plugins/radios/ario-radio.c:938 ../plugins/radios/ario-radio.c:1138
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Rossz paraméterek. Meg kell adnia egy nevet és egy URL-t a rádióhoz."
 
-#: ../plugins/radios/ario-radio.c:986
+#: ../plugins/radios/ario-radio.c:1000
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Biztos benne, hogy törli az összes kiválasztott rádiót?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1058
+#: ../plugins/radios/ario-radio.c:1072
 msgid "Edit a WebRadio"
 msgstr "Webrádió szerkesztése"
 
@@ -1030,16 +1030,16 @@ msgstr "Webrádió szerkesztése"
 msgid "Listen to webradios"
 msgstr "Webrádiók hallgatása"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:45
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:46
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
 msgstr "Előadó keresése a Wikipédiában"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:170
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipédia bővítmény - beállítás"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:179
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
 msgstr "Wikipédia nyelve :"
 

@@ -1,33 +1,31 @@
 # German translation for ario
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the ario package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# Oliver Laub <oliver.laub@web.de>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-08 20:17+0200\n"
-"PO-Revision-Date: 2008-03-30 00:35+0000\n"
+"POT-Creation-Date: 2008-04-13 18:06+0200\n"
+"PO-Revision-Date: 2008-04-13 18:06+0200\n"
 "Last-Translator: Oliver Laub <oliver.laub@web.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-04-01 05:56+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Ario Musik Spieler"
+msgstr "Ario-Musik-Spieler"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client apllication to mpd"
-msgstr "Client Anwendung für mpd"
+msgstr "Client-Anwendung für MPD"
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "Automatisches Herunterladen des Covers während des Abspielens"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:244
@@ -71,8 +69,8 @@ msgstr "Host :"
 msgid "Music directory :"
 msgstr "Musikverzeichnis :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:869
-#: ../plugins/radios/ario-radio.c:1068
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:883
+#: ../plugins/radios/ario-radio.c:1082
 msgid "Name :"
 msgstr "Name :"
 
@@ -114,25 +112,21 @@ msgid ""
 "is activated in your MPD configuration or use the manual configuration."
 msgstr ""
 "Sie müssen einen zu verbindenden MPD Server angeben. Falls Sie den MPD "
-"Server aufgrund der automatischen Ermittlung nicht sehen solten, überprüfen "
+"Server aufgrund der automatischen Ermittlung nicht sehen sollten, überprüfen "
 "Sie ob zeroconf in Ihrer MPD Konfiguration aktiviert ist oder versuchen Sie "
-"die manuelle Konfiguration."
+"eine manuelle Konfiguration."
 
-#: ../data/glade/cover-progress.glade.h:1
-msgid "..."
-msgstr ""
-
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
 msgstr "Album :"
 
-#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:2
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Künstler :"
 
-#: ../data/glade/cover-progress.glade.h:4
+#: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
 msgstr "Cover wird heruntergeladen"
 
@@ -158,11 +152,11 @@ msgstr "Reiter"
 
 #: ../data/glade/interface-prefs.glade.h:4
 msgid "Tray icon"
-msgstr "Reitersymbol"
+msgstr "Schubladensymbol"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 msgid "Lyrics Sources"
-msgstr "Liedtexte-Quellen"
+msgstr "Liedtext-Quellen"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 msgid "Title :"
@@ -187,7 +181,7 @@ msgstr "Benutzung eines Proxies"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
-msgstr "Audio Ausgänge"
+msgstr "Audio-Ausgänge"
 
 #: ../data/glade/server-prefs.glade.h:2
 msgid "Crossfade"
@@ -307,7 +301,7 @@ msgstr "Unbekannt"
 
 #: ../src/ario-util.c:74
 msgid "seconds"
-msgstr "sekunden"
+msgstr "Sekunden"
 
 #: ../src/ario-util.c:77
 msgid "minutes"
@@ -340,29 +334,29 @@ msgstr "Erweiterung"
 msgid "Enabled"
 msgstr "aktiviert"
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:177
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
 msgid "_About"
 msgstr "_Über"
 
-#: ../src/plugins/ario-plugin-manager.c:510
+#: ../src/plugins/ario-plugin-manager.c:518
 msgid "C_onfigure"
 msgstr "K_onfigurieren"
 
-#: ../src/plugins/ario-plugin-manager.c:519
+#: ../src/plugins/ario-plugin-manager.c:527
 msgid "A_ctivate"
 msgstr "A_ktivieren"
 
-#: ../src/plugins/ario-plugin-manager.c:530
+#: ../src/plugins/ario-plugin-manager.c:538
 msgid "Ac_tivate All"
-msgstr "Alle _aktivieren"
+msgstr "Alle ak_tivieren"
 
-#: ../src/plugins/ario-plugin-manager.c:535
+#: ../src/plugins/ario-plugin-manager.c:543
 msgid "_Deactivate All"
 msgstr "Alle _deaktivieren"
 
-#: ../src/plugins/ario-plugin-manager.c:744
+#: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
-msgstr "Aktive Plugins"
+msgstr "Aktive Erweiterungen"
 
 #: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
@@ -379,8 +373,8 @@ msgid ""
 "manual configuration."
 msgstr ""
 "Falls Sie den MPD Server aufgrund der automatischen Ermittlung nicht sehen "
-"solten, überprüfen Sie ob zeroconf in Ihrer MPD Konfiguration aktiviert ist "
-"oder versuchen Sie die manuelle Konfiguration."
+"sollten, überprüfen Sie ob zeroconf in Ihrer MPD Konfiguration aktiviert ist "
+"oder versuchen Sie eine manuelle Konfiguration."
 
 #: ../src/preferences/ario-connection-preferences.c:625
 #: ../src/preferences/ario-cover-preferences.c:205
@@ -437,7 +431,7 @@ msgstr "Nicht verbunden"
 #: ../src/preferences/ario-server-preferences.c:406
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
-msgstr "Aktualisieren …"
+msgstr "Aktualisiere ..."
 
 #: ../src/sources/ario-browser.c:130 ../src/sources/ario-browser.c:133
 #: ../src/sources/ario-browser.c:136 ../src/sources/ario-search.c:100
@@ -447,7 +441,7 @@ msgstr "Aktualisieren …"
 #: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:110
 msgid "_Add to playlist"
-msgstr "Zur Wiedergabeliste hinzufügen"
+msgstr "Zur Wiederg_abeliste hinzufügen"
 
 #: ../src/sources/ario-browser.c:140 ../src/sources/ario-browser.c:143
 #: ../src/sources/ario-search.c:103 ../src/sources/ario-storedplaylists.c:115
@@ -500,14 +494,14 @@ msgstr "Stück"
 msgid "Title"
 msgstr "Titel"
 
-#: ../src/sources/ario-browser.c:1409
+#: ../src/sources/ario-browser.c:1423
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Sind Sie sicher, daß Sie alle Cover des ausgewählten Künstlers entfernen "
 "möchten?"
 
-#: ../src/sources/ario-browser.c:1460
+#: ../src/sources/ario-browser.c:1474
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -633,6 +627,12 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Oliver Laub https://launchpad.net/~oliver-laub\n"
+"  tnc https://launchpad.net/~ahs-tnc\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Oliver Laub https://launchpad.net/~oliver-laub\n"
+"  matsahm https://launchpad.net/~mathias-sahm\n"
 "  tnc https://launchpad.net/~ahs-tnc"
 
 #: ../src/shell/ario-shell.c:902
@@ -682,9 +682,8 @@ msgid "Lyrics Download"
 msgstr "Liedtext herunterladen"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
-#, fuzzy
 msgid "Source"
-msgstr "Quellenbestellung"
+msgstr "Quelle"
 
 #: ../src/shell/ario-shell-preferences.c:140
 msgid "Ario Preferences"
@@ -722,7 +721,7 @@ msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:278
 msgid "Welcome to Ario"
-msgstr "Willkommen zu Ario"
+msgstr "Willkommen bei Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:341
 msgid "Configuration"
@@ -790,7 +789,7 @@ msgstr "_Speichern"
 
 #: ../src/widgets/ario-playlist.c:129
 msgid "_Go to playing song"
-msgstr "Zum laufenden Lied _gehen"
+msgstr "Zum laufenden Lied _springen"
 
 #: ../src/widgets/ario-playlist.c:312
 msgid "Duration"
@@ -831,11 +830,11 @@ msgstr "_Stopp"
 
 #: ../src/widgets/ario-tray-icon.c:138 ../src/widgets/ario-status-icon.c:103
 msgid "_Next"
-msgstr "_Nächstes"
+msgstr "_Weiter"
 
 #: ../src/widgets/ario-tray-icon.c:141 ../src/widgets/ario-status-icon.c:106
 msgid "P_revious"
-msgstr "_Vorheriger"
+msgstr "_Zurück"
 
 #: ../src/widgets/ario-status-icon.c:402
 #, c-format
@@ -924,7 +923,7 @@ msgstr "Warteliste ist zu lang"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1411
 msgid "Track submission failed too many times"
-msgstr "Fehler beim Übertragen trat zu oft auf"
+msgstr "Übermittlung der Titel ist zu oft gescheitert"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1463
 msgid "Audioscrobbler preferences"
@@ -980,23 +979,23 @@ msgstr "Dateisystem"
 
 #: ../plugins/filesystem/ario-filesystem.c:488
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr "Ein Dateisystem Browser"
+msgstr "Ein Dateisystem-Browser"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr "Dateisystem Browser"
+msgstr "Dateisystem-Browser"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr "Hinzufügen von Multimedia Keys"
+msgstr "Hinzufügen der Multimediatasten-Unterstützung"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr "Multimedia Tasten"
+msgstr "Multimediatasten"
 
 #: ../plugins/radios/ario-radio.c:113
 msgid "Add a _new radio"
@@ -1009,102 +1008,60 @@ msgstr "_Löschen des Radiosenders"
 #: ../plugins/radios/ario-radio.c:183
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr "Internet Radiosender"
+msgstr "Internet-Radiosender"
 
 #: ../plugins/radios/ario-radio.c:258
 msgid "Internet Radios"
-msgstr "Internet Radiosender"
+msgstr "Internet-Radiosender"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:859
+#: ../plugins/radios/ario-radio.c:873
 msgid "Add a WebRadio"
-msgstr "Hinzufügen eines Internet Radiosenders"
+msgstr "Hinzufügen eines Internet-Radiosenders"
 
-#: ../plugins/radios/ario-radio.c:870 ../plugins/radios/ario-radio.c:1069
+#: ../plugins/radios/ario-radio.c:884 ../plugins/radios/ario-radio.c:1083
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:924 ../plugins/radios/ario-radio.c:1124
+#: ../plugins/radios/ario-radio.c:938 ../plugins/radios/ario-radio.c:1138
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Falsche Parameter. Sie müssen den Namen und die URL des Radiosenders angeben."
 
-#: ../plugins/radios/ario-radio.c:986
+#: ../plugins/radios/ario-radio.c:1000
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 "Sind Sie sicher, daß Sie alle ausgewählten Radiosender löschen möchten?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1058
+#: ../plugins/radios/ario-radio.c:1072
 msgid "Edit a WebRadio"
-msgstr "Änderung eines Internet Radiosenders"
+msgstr "Änderung eines Internet-Radiosenders"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr "Webradio hören"
+msgstr "Internet-Radio hören"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:45
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:46
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
 msgstr "Finden des Künsters auf Wikipedia"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:170
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipedia Erweiterung - Konfiguration"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:179
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
 msgstr "Wikipedia Sprache :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr "Eine Erweiterung um den aktuellen Künsters auf Wikipedia zu finden"
+msgstr "Eine Erweiterung um den aktuellen Künstler auf Wikipedia zu finden"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
-
-#~ msgid "Select a file"
-#~ msgstr "Datei auswählen"
-
-#~ msgid "Amazon search"
-#~ msgstr "Suche auf Amazon"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Große Cover (langsamer)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Mittelgroße Cover"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Kleine Cover (schneller)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Herunterladen der Cover von _Amazon"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Cover"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "Cover"
-
-#, fuzzy
-#~ msgid "Password : "
-#~ msgstr "Passwort : "
-
-#, fuzzy
-#~ msgid "_Password:"
-#~ msgstr "Passwort :"
-
-#, fuzzy
-#~ msgid "Covers providers"
-#~ msgstr "Größe des Covers"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Größe des Covers"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
@@ -1113,12 +1070,6 @@ msgstr "Wikipedia"
 
 #~ msgid "0 for the library, 1 for the radios, etc..."
 #~ msgstr "0 für die Bibliothek. 1 für die Radiosender, etc..."
-
-#~ msgid "Active covers sources"
-#~ msgstr "Aktive Cover-Quellen"
-
-#~ msgid "Active lyrics sources"
-#~ msgstr "Aktive Liedtexte-Quellen"
 
 #~ msgid "Define if Ario must autoconnect to mpd or not"
 #~ msgstr "Darf  Ario automatisch neu verbinden?"
@@ -1135,9 +1086,6 @@ msgstr "Wikipedia"
 #~ msgid "Define the behavior of a double click on the tray icon."
 #~ msgstr ""
 #~ "Wie soll sich Ario bei einem Doppelklick auf das Tray- Icon verhalten?"
-
-#~ msgid "Define the path to the music"
-#~ msgstr "Definieren Sie den Musikpfad"
 
 #~ msgid "Define the port of the proxy"
 #~ msgstr "Wie lautet der Proxy Port?"
@@ -1166,18 +1114,6 @@ msgstr "Wikipedia"
 #~ msgid "If true, the main window is maximized."
 #~ msgstr "Wenn true, dann wird das Hauptfenster maximiert."
 
-#~ msgid "If true, the statusbar is hidden."
-#~ msgstr "Falls wahr dann ist die Statusleiste versteckt."
-
-#~ msgid ""
-#~ "List of active plugins. It contains the \"Location\" of the active "
-#~ "plugins. See the .ario-plugin file for obtaining the \"Location\" of a "
-#~ "given plugin."
-#~ msgstr ""
-#~ "Liste der aktiven Erweiterungen. Es beinhaltet den \"Ort\" der aktiven "
-#~ "Erweiterungen. Schauen Sie die Datei .ario-plugin an, um einen bestimmten "
-#~ "\"Ort\" einer Erweiterung zu ermitteln."
-
 #~ msgid "Main window height"
 #~ msgstr "Höhe des Hauptfensters"
 
@@ -1187,23 +1123,14 @@ msgstr "Wikipedia"
 #~ msgid "Main window width"
 #~ msgstr "Breite des Hauptfensters"
 
-#~ msgid "Ordered list of sources."
-#~ msgstr "Bestellte Liste der Quellen."
-
 #~ msgid "Port to connect to"
 #~ msgstr "Zu verbindender Port"
-
-#~ msgid "Position of filesystem pane"
-#~ msgstr "Position des Dateifensters"
 
 #~ msgid "Position of main window pane"
 #~ msgstr "Position des Hauptfensters"
 
 #~ msgid "Position of playlists pane"
 #~ msgstr "Position des Wiedergabelistenfensters"
-
-#~ msgid "Statusbar visibility"
-#~ msgstr "Sichtbarkeit der Statusleiste"
 
 #~ msgid "The amazon country to use to get the covers"
 #~ msgstr "Das Amazon-Land das genutzt werden soll, um die Cover zu erhalten"
@@ -1227,11 +1154,83 @@ msgstr "Wikipedia"
 #~ "Sie können auf amazon.com .fr .de .uk oder .ca suchen, um genauere "
 #~ "Resultate zu erhalten"
 
+#~ msgid "Amazon search"
+#~ msgstr "Suche auf Amazon"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Große Cover (langsamer)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Mittelgroße Cover"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Kleine Cover (schneller)"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Herunterladen der Cover von _Amazon"
+
+#~ msgid "Select a file"
+#~ msgstr "Datei auswählen"
+
+#~ msgid "If true, the statusbar is hidden."
+#~ msgstr "Falls wahr dann ist die Statusleiste versteckt."
+
+#~ msgid ""
+#~ "List of active plugins. It contains the \"Location\" of the active "
+#~ "plugins. See the .ario-plugin file for obtaining the \"Location\" of a "
+#~ "given plugin."
+#~ msgstr ""
+#~ "Liste der aktiven Erweiterungen. Es beinhaltet den \"Ort\" der aktiven "
+#~ "Erweiterungen. Schauen Sie die Datei .ario-plugin an, um einen bestimmten "
+#~ "\"Ort\" einer Erweiterung zu ermitteln."
+
+#~ msgid "Ordered list of sources."
+#~ msgstr "Bestellte Liste der Quellen."
+
+#~ msgid "Position of filesystem pane"
+#~ msgstr "Position des Dateifensters"
+
+#~ msgid "Statusbar visibility"
+#~ msgstr "Sichtbarkeit der Statusleiste"
+
+#~ msgid "Define the path to the music"
+#~ msgstr "Definieren Sie den Musikpfad"
+
+#~ msgid "Wikipedia language"
+#~ msgstr "Wikipedia Sprache"
+
+#~ msgid "Active covers sources"
+#~ msgstr "Aktive Cover-Quellen"
+
+#~ msgid "Active lyrics sources"
+#~ msgstr "Aktive Liedtexte-Quellen"
+
 #~ msgid "Audioscrobbler password"
 #~ msgstr "Audioscrobbler Passwort"
 
 #~ msgid "Audioscrobbler username"
 #~ msgstr "Audioscrobbler Benutzername"
 
-#~ msgid "Wikipedia language"
-#~ msgstr "Wikipedia Sprache"
+#, fuzzy
+#~ msgid "Covers sources"
+#~ msgstr "Cover"
+
+#, fuzzy
+#~ msgid "Lyrics sources"
+#~ msgstr "Cover"
+
+#, fuzzy
+#~ msgid "Password : "
+#~ msgstr "Passwort : "
+
+#, fuzzy
+#~ msgid "_Password:"
+#~ msgstr "Passwort :"
+
+#, fuzzy
+#~ msgid "Covers providers"
+#~ msgstr "Größe des Covers"
+
+#, fuzzy
+#~ msgid "lyrics providers"
+#~ msgstr "Größe des Covers"
