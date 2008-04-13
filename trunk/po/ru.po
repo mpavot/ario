@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-08 20:17+0200\n"
+"POT-Creation-Date: 2008-04-13 18:06+0200\n"
 "PO-Revision-Date: 2008-03-29 19:00+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -72,8 +72,8 @@ msgstr "Хост :"
 msgid "Music directory :"
 msgstr ""
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:869
-#: ../plugins/radios/ario-radio.c:1068
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:883
+#: ../plugins/radios/ario-radio.c:1082
 msgid "Name :"
 msgstr "Название :"
 
@@ -118,21 +118,17 @@ msgstr ""
 "Ваш MPD-сервер, воспользуйтесь автоматической настройкой, проверьте активно "
 "ли zeroconf на Вашей конфигурации MPD или используйте ручную настройку."
 
-#: ../data/glade/cover-progress.glade.h:1
-msgid "..."
-msgstr ""
-
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
 msgstr "Альбом :"
 
-#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:2
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Исполнитель :"
 
-#: ../data/glade/cover-progress.glade.h:4
+#: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
 msgstr "Закачка обложки"
 
@@ -343,28 +339,28 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:177
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
 msgid "_About"
 msgstr "_О программе"
 
-#: ../src/plugins/ario-plugin-manager.c:510
+#: ../src/plugins/ario-plugin-manager.c:518
 #, fuzzy
 msgid "C_onfigure"
 msgstr "Настройка"
 
-#: ../src/plugins/ario-plugin-manager.c:519
+#: ../src/plugins/ario-plugin-manager.c:527
 msgid "A_ctivate"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:530
+#: ../src/plugins/ario-plugin-manager.c:538
 msgid "Ac_tivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:535
+#: ../src/plugins/ario-plugin-manager.c:543
 msgid "_Deactivate All"
 msgstr ""
 
-#: ../src/plugins/ario-plugin-manager.c:744
+#: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
 msgstr ""
 
@@ -505,12 +501,12 @@ msgstr "Дорожка"
 msgid "Title"
 msgstr "Заголовок"
 
-#: ../src/sources/ario-browser.c:1409
+#: ../src/sources/ario-browser.c:1423
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr "Вы действительно хотите удалить все обложки выбранных исполнителей?"
 
-#: ../src/sources/ario-browser.c:1460
+#: ../src/sources/ario-browser.c:1474
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr "Вы действительно хотите удалить все обложки выбранных альбомов?"
@@ -1023,24 +1019,24 @@ msgid "Internet Radios"
 msgstr "Интернет-Радио"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:859
+#: ../plugins/radios/ario-radio.c:873
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
 
-#: ../plugins/radios/ario-radio.c:870 ../plugins/radios/ario-radio.c:1069
+#: ../plugins/radios/ario-radio.c:884 ../plugins/radios/ario-radio.c:1083
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:924 ../plugins/radios/ario-radio.c:1124
+#: ../plugins/radios/ario-radio.c:938 ../plugins/radios/ario-radio.c:1138
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Неверные параметры. Вы должны обязательно указать имя и URL радио."
 
-#: ../plugins/radios/ario-radio.c:986
+#: ../plugins/radios/ario-radio.c:1000
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr ""
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1058
+#: ../plugins/radios/ario-radio.c:1072
 msgid "Edit a WebRadio"
 msgstr "Редактировать ВебРадио"
 
@@ -1048,16 +1044,16 @@ msgstr "Редактировать ВебРадио"
 msgid "Listen to webradios"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:45
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:46
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:170
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
 msgstr ""
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:179
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
 msgstr ""
 

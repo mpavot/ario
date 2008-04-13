@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-08 20:17+0200\n"
-"PO-Revision-Date: 2008-03-30 14:10+0000\n"
+"POT-Creation-Date: 2008-04-13 18:06+0200\n"
+"PO-Revision-Date: 2008-04-13 07:16+0000\n"
 "Last-Translator: Oliver Laub <oliver.laub@web.de>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-04-01 05:56+0000\n"
+"X-Launchpad-Export-Date: 2008-04-13 15:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -27,7 +27,7 @@ msgstr "Client apllication to mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "Automatically download the album cover of the playing song"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:244
@@ -71,8 +71,8 @@ msgstr "Host :"
 msgid "Music directory :"
 msgstr "Music directory :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:869
-#: ../plugins/radios/ario-radio.c:1068
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:883
+#: ../plugins/radios/ario-radio.c:1082
 msgid "Name :"
 msgstr "Name :"
 
@@ -117,21 +117,17 @@ msgstr ""
 "server thanks to the automatic configuration, you should check that zeroconf "
 "is activated in your MPD configuration or use the manual configuration."
 
-#: ../data/glade/cover-progress.glade.h:1
-msgid "..."
-msgstr ""
-
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:1
+#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
 msgstr "Album :"
 
-#: ../data/glade/cover-progress.glade.h:3 ../data/glade/cover-select.glade.h:2
+#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
 msgstr "Artist :"
 
-#: ../data/glade/cover-progress.glade.h:4
+#: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
 msgstr "Downloading cover"
 
@@ -339,27 +335,27 @@ msgstr "Plug-in"
 msgid "Enabled"
 msgstr "Enabled"
 
-#: ../src/plugins/ario-plugin-manager.c:502 ../src/shell/ario-shell.c:177
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
 msgid "_About"
 msgstr "_About"
 
-#: ../src/plugins/ario-plugin-manager.c:510
+#: ../src/plugins/ario-plugin-manager.c:518
 msgid "C_onfigure"
 msgstr "C_onfigure"
 
-#: ../src/plugins/ario-plugin-manager.c:519
+#: ../src/plugins/ario-plugin-manager.c:527
 msgid "A_ctivate"
 msgstr "A_ctivate"
 
-#: ../src/plugins/ario-plugin-manager.c:530
+#: ../src/plugins/ario-plugin-manager.c:538
 msgid "Ac_tivate All"
 msgstr "Ac_tivate All"
 
-#: ../src/plugins/ario-plugin-manager.c:535
+#: ../src/plugins/ario-plugin-manager.c:543
 msgid "_Deactivate All"
 msgstr "_Deactivate All"
 
-#: ../src/plugins/ario-plugin-manager.c:744
+#: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
 msgstr "Active plugins"
 
@@ -499,13 +495,13 @@ msgstr "Track"
 msgid "Title"
 msgstr "Title"
 
-#: ../src/sources/ario-browser.c:1409
+#: ../src/sources/ario-browser.c:1423
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 
-#: ../src/sources/ario-browser.c:1460
+#: ../src/sources/ario-browser.c:1474
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -625,6 +621,10 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  AndrewB https://launchpad.net/~andrew-alex-barber\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
+"  Oliver Laub https://launchpad.net/~oliver-laub\n"
 "\n"
 "Launchpad Contributions:\n"
 "  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
@@ -975,7 +975,7 @@ msgstr "File System"
 
 #: ../plugins/filesystem/ario-filesystem.c:488
 msgid "Music"
-msgstr ""
+msgstr "Music"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
@@ -1011,24 +1011,24 @@ msgid "Internet Radios"
 msgstr "Internet Radios"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:859
+#: ../plugins/radios/ario-radio.c:873
 msgid "Add a WebRadio"
 msgstr "Add a WebRadio"
 
-#: ../plugins/radios/ario-radio.c:870 ../plugins/radios/ario-radio.c:1069
+#: ../plugins/radios/ario-radio.c:884 ../plugins/radios/ario-radio.c:1083
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:924 ../plugins/radios/ario-radio.c:1124
+#: ../plugins/radios/ario-radio.c:938 ../plugins/radios/ario-radio.c:1138
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Bad parameters. You must specify a name and a URL for the radio."
 
-#: ../plugins/radios/ario-radio.c:986
+#: ../plugins/radios/ario-radio.c:1000
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Are you sure you want to delete all the selected radios?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1058
+#: ../plugins/radios/ario-radio.c:1072
 msgid "Edit a WebRadio"
 msgstr "Edit a WebRadio"
 
@@ -1036,16 +1036,16 @@ msgstr "Edit a WebRadio"
 msgid "Listen to webradios"
 msgstr "Listen to webradios"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:45
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:46
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
 msgstr "Find artist on Wikipedia"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:170
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipedia Plugin - Configuration"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:179
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
 msgstr "Wikipedia language :"
 
@@ -1057,63 +1057,11 @@ msgstr "A plugin to search current artist on wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Select a file"
-#~ msgstr "Select a file"
-
-#, fuzzy
-#~ msgid "Password:"
-#~ msgstr "Password :"
-
-#~ msgid "Amazon search"
-#~ msgstr "Amazon search"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Large cover (Slower)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Medium cover"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Small cover (Faster)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Get the covers from _Amazon"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Covers"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "Covers"
-
-#, fuzzy
-#~ msgid "Password : "
-#~ msgstr "Password : "
-
-#, fuzzy
-#~ msgid "_Password:"
-#~ msgstr "Password :"
-
-#, fuzzy
-#~ msgid "Covers providers"
-#~ msgstr "Cover size"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Cover size"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 
 #~ msgid "0 for the library, 1 for the radios, etc..."
 #~ msgstr "0 for the library, 1 for the radios, etc..."
-
-#~ msgid "Active covers sources"
-#~ msgstr "Active covers sources"
-
-#~ msgid "Active lyrics sources"
-#~ msgstr "Active lyrics sources"
 
 #~ msgid "Define if Ario must autoconnect to mpd or not"
 #~ msgstr "Define if Ario must autoconnect to mpd or not"
@@ -1129,9 +1077,6 @@ msgstr "Wikipedia"
 
 #~ msgid "Define the behavior of a double click on the tray icon."
 #~ msgstr "Define the behavior of a double click on the tray icon."
-
-#~ msgid "Define the path to the music"
-#~ msgstr "Define the path to the music"
 
 #~ msgid "Define the port of the proxy"
 #~ msgstr "Define the port of the proxy"
@@ -1160,18 +1105,6 @@ msgstr "Wikipedia"
 #~ msgid "If true, the main window is maximized."
 #~ msgstr "If true, the main window is maximized."
 
-#~ msgid "If true, the statusbar is hidden."
-#~ msgstr "If true, the statusbar is hidden."
-
-#~ msgid ""
-#~ "List of active plugins. It contains the \"Location\" of the active "
-#~ "plugins. See the .ario-plugin file for obtaining the \"Location\" of a "
-#~ "given plugin."
-#~ msgstr ""
-#~ "List of active plugins. It contains the \"Location\" of the active "
-#~ "plugins. See the .ario-plugin file for obtaining the \"Location\" of a "
-#~ "given plugin."
-
 #~ msgid "Main window height"
 #~ msgstr "Main window height"
 
@@ -1181,23 +1114,14 @@ msgstr "Wikipedia"
 #~ msgid "Main window width"
 #~ msgstr "Main window width"
 
-#~ msgid "Ordered list of sources."
-#~ msgstr "Ordered list of sources."
-
 #~ msgid "Port to connect to"
 #~ msgstr "Port to connect to"
-
-#~ msgid "Position of filesystem pane"
-#~ msgstr "Position of filesystem pane"
 
 #~ msgid "Position of main window pane"
 #~ msgstr "Position of main window pane"
 
 #~ msgid "Position of playlists pane"
 #~ msgstr "Position of playlists pane"
-
-#~ msgid "Statusbar visibility"
-#~ msgstr "Statusbar visability"
 
 #~ msgid "The amazon country to use to get the covers"
 #~ msgstr "The amazon country to use to get the covers"
@@ -1221,11 +1145,87 @@ msgstr "Wikipedia"
 #~ "You can search for your cover on amazon.com .fr .de .uk or .ca to have "
 #~ "more accurate results"
 
+#, fuzzy
+#~ msgid "Password:"
+#~ msgstr "Password :"
+
+#~ msgid "Amazon search"
+#~ msgstr "Amazon search"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Large cover (Slower)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Medium cover"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Small cover (Faster)"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Get the covers from _Amazon"
+
+#~ msgid "Select a file"
+#~ msgstr "Select a file"
+
+#~ msgid "If true, the statusbar is hidden."
+#~ msgstr "If true, the statusbar is hidden."
+
+#~ msgid ""
+#~ "List of active plugins. It contains the \"Location\" of the active "
+#~ "plugins. See the .ario-plugin file for obtaining the \"Location\" of a "
+#~ "given plugin."
+#~ msgstr ""
+#~ "List of active plugins. It contains the \"Location\" of the active "
+#~ "plugins. See the .ario-plugin file for obtaining the \"Location\" of a "
+#~ "given plugin."
+
+#~ msgid "Ordered list of sources."
+#~ msgstr "Ordered list of sources."
+
+#~ msgid "Position of filesystem pane"
+#~ msgstr "Position of filesystem pane"
+
+#~ msgid "Statusbar visibility"
+#~ msgstr "Statusbar visability"
+
+#~ msgid "Define the path to the music"
+#~ msgstr "Define the path to the music"
+
+#~ msgid "Wikipedia language"
+#~ msgstr "Wikipedia language"
+
+#~ msgid "Active covers sources"
+#~ msgstr "Active covers sources"
+
+#~ msgid "Active lyrics sources"
+#~ msgstr "Active lyrics sources"
+
 #~ msgid "Audioscrobbler password"
 #~ msgstr "Audioscrobbler password"
 
 #~ msgid "Audioscrobbler username"
 #~ msgstr "Audioscrobbler username"
 
-#~ msgid "Wikipedia language"
-#~ msgstr "Wikipedia language"
+#, fuzzy
+#~ msgid "Covers sources"
+#~ msgstr "Covers"
+
+#, fuzzy
+#~ msgid "Lyrics sources"
+#~ msgstr "Covers"
+
+#, fuzzy
+#~ msgid "Password : "
+#~ msgstr "Password : "
+
+#, fuzzy
+#~ msgid "_Password:"
+#~ msgstr "Password :"
+
+#, fuzzy
+#~ msgid "Covers providers"
+#~ msgstr "Cover size"
+
+#, fuzzy
+#~ msgid "lyrics providers"
+#~ msgstr "Cover size"

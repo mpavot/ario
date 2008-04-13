@@ -7,19 +7,33 @@ Upstream Author: Marc Pavot <marc.pavot@gmail.com>
 
 Copyright:
 For ario:
-        Copyright (C) 2005-2007 Marc Pavot <marc.pavot@gmail.com>
-For eel-gconf-extensions:
-        Copyright (C) 2000, 2001 Eazel, Inc.
+        Copyright (C) 2005-2008 Marc Pavot <marc.pavot@gmail.com>
 For rb-glade-helpers:
         Copyright (C) 2002 Jorn Baayen
 For libmpdclient:
         c)2003-2006 by Warren Dukes (warren.dukes@gmail.com)
 For eggtrayicon:
         Copyright (C) 2002 Anders Carlsson <andersca@gnu.org>
+For md5:
+        Copyright (C) 1999, 2002 Aladdin Enterprises
+For audioscrobbler plugin:
+        Copyright (C) 2005 Alex Revo <xiphoiadappendix@gmail.com>
+                           Ruben Vermeersch <ruben@Lambda1.be>
+        Adapted to Ario:
+        Copyright (C) 2008 Marc Pavot <marc.pavot@gmail.com>
+For mmkeys plugin:
+        Copyright (C) 2002, 2003 Jorn Baayen <jorn@nl.linux.org>
+        Copyright (C) 2002,2003 Colin Walters <walters@debian.org>
+        Copyright (C) 2007  James Livingston  <doclivingston@gmail.com>
+        Copyright (C) 2007  Jonathan Matthew  <jonathan@kaolin.wh9.net>
+        Adapted to Ario:
+        Copyright (C) 2008 Marc Pavot <marc.pavot@gmail.com>
+For sexy-tooltip:
+        Copyright (C) 2006 Christian Hammond.
 
 License:
 
-For eggtrayicon and eel-gconf-extensions:
+For eggtrayicon
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Lesser General Public
    License as published by the Free Software Foundation; either
@@ -39,20 +53,20 @@ On Debian systems, the complete text of the GNU Lesser General
 Public License can be found in `/usr/share/common-licenses/LGPL'.
 
 
-For ario and rb-glade-helpers:
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
- 
-    This package is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
- 
-    You should have received a copy of the GNU General Public License
-    along with this package; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+For ario, rb-glade-helpers, audioscrobbler plugin, mmkeys plugin and sexy-tooltip:
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
@@ -73,6 +87,23 @@ For libmpdclient:
    - Neither the name of the Music Player Daemon nor the names of its
    contributors may be used to endorse or promote products derived from
    this software without specific prior written permission.
+
+For md5:
+   This software is provided 'as-is', without any express or implied
+   warranty.  In no event will the authors be held liable for any damages
+   arising from the use of this software.
+
+   Permission is granted to anyone to use this software for any purpose,
+   including commercial applications, and to alter it and redistribute it
+   freely, subject to the following restrictions:
+
+   1. The origin of this software must not be misrepresented; you must not
+      claim that you wrote the original software. If you use this software
+      in a product, an acknowledgment in the product documentation would be
+      appreciated but is not required.
+   2. Altered source versions must be plainly marked as such, and must not be
+      misrepresented as being the original software.
+   3. This notice may not be removed or altered from any source distribution.
 
 
 The Debian packaging is (C) 2007, marc <marc.pavot@gmail.com> and
