@@ -296,7 +296,7 @@ static void ario_avahi_browse_callback (AvahiServiceBrowser *b,
                    the callback function is called the server will free
                    the resolver for us. */
 
-                if (!(avahi_service_resolver_new (avahi->priv->client, interface, protocol, name, type, domain, AVAHI_PROTO_UNSPEC, 0, ario_avahi_resolve_callback, avahi)))
+                if (!(avahi_service_resolver_new (avahi->priv->client, interface, protocol, name, type, domain, protocol, 0, ario_avahi_resolve_callback, avahi)))
                         ARIO_LOG_ERROR ("Failed to resolve service '%s': %s", name, avahi_strerror (avahi_client_errno (avahi->priv->client)));
                 break;
 
