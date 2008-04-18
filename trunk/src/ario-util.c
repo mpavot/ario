@@ -29,6 +29,7 @@
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
+#include <gcrypt.h>
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -479,3 +480,24 @@ ario_util_format_keyword (const char *keyword)
         return ret;
 }
 
+gchar *
+ario_util_md5 (const char *string)
+{
+        ARIO_LOG_FUNCTION_START
+        guchar md5pword[16];
+        gchar md5_response[33];
+        int j;
+
+        memset (md5_response, 0, sizeof (md5_response));
+
+        gcry_md_hash_buffer (GCRY_MD_MD5, md5pword, string, strlen (string));
+
+        for (j = 0; j < 16; j++) {
+                char a[3];
+                sprintf (a, "%02x", md5pword[j]);
+                md5_response[2*j] = a[0];
+                md5_response[2*j+1] = a[1];
+        }
+
+        return (g_strdup (md5_response));
+}

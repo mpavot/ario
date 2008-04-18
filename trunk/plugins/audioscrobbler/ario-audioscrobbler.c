@@ -37,7 +37,6 @@
 #include "ario-util.h"
 #include "lib/rb-glade-helpers.h"
 #include "preferences/ario-preferences.h"
-#include "lib/md5.h"
 #include "ario-plugin.h"
 
 #define CLIENT_ID "ari"
@@ -205,7 +204,6 @@ static void ario_audioscrobbler_dispose (GObject *object);
 static void ario_audioscrobbler_finalize (GObject *object);
 static void ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler);
 static gboolean ario_audioscrobbler_timeout_cb (ArioAudioscrobbler *audioscrobbler);
-static gchar *mkmd5 (char *string);
 static void ario_audioscrobbler_parse_response (ArioAudioscrobbler *audioscrobbler, SoupMessage *msg);
 
 static void ario_audioscrobbler_do_handshake (ArioAudioscrobbler *audioscrobbler);
@@ -632,32 +630,6 @@ ario_audioscrobbler_timeout_cb (ArioAudioscrobbler *audioscrobbler)
         return TRUE;
 }
 
-/* Audioscrobbler functions: */
-static gchar *
-mkmd5 (char *string)
-{
-        md5_state_t md5state;
-        guchar md5pword[16];
-        gchar md5_response[33];
-
-        int j = 0;
-
-        memset (md5_response, 0, sizeof (md5_response));
-
-        md5_init (&md5state);
-        md5_append (&md5state, (unsigned char*)string, strlen (string));
-        md5_finish (&md5state, md5pword);
-
-        for (j = 0; j < 16; j++) {
-                char a[3];
-                sprintf (a, "%02x", md5pword[j]);
-                md5_response[2*j] = a[0];
-                md5_response[2*j+1] = a[1];
-        }
-
-        return (g_strdup (md5_response));
-}
-
 static void
 ario_audioscrobbler_parse_response (ArioAudioscrobbler *audioscrobbler, SoupMessage *msg)
 {
@@ -953,11 +925,11 @@ ario_audioscrobbler_build_authentication_data (ArioAudioscrobbler *audioscrobble
                 return NULL;
         }
 
-        md5_password = mkmd5 (audioscrobbler->priv->password);
+        md5_password = ario_util_md5 (audioscrobbler->priv->password);
         md5_temp = g_strconcat (md5_password,
                                 audioscrobbler->priv->md5_challenge,
                                 NULL);
-        md5_response = mkmd5 (md5_temp);
+        md5_response = ario_util_md5 (md5_temp);
 
         username = soup_uri_encode (audioscrobbler->priv->username, 
                                     EXTRA_URI_ENCODE_CHARS);
