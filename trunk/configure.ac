@@ -21,7 +21,8 @@ PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.12
                          libglade-2.0
                          gmodule-2.0
                          gthread-2.0
-                         libcurl])
+                         libcurl
+                         gnutls])
 
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
