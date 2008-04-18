@@ -61,3 +61,5 @@ int                     ario_util_min                        (const int a,
 int                     ario_util_max                        (const int a,
                                                               const int b) G_GNUC_CONST;
 char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;
+
+gchar *                 ario_util_md5                        (const char *string) G_GNUC_MALLOC;
