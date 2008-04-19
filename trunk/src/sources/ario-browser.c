@@ -80,6 +80,12 @@ static void ario_browser_cmd_add_albums (GtkAction *action,
                                          ArioBrowser *browser);
 static void ario_browser_cmd_add_songs (GtkAction *action,
                                         ArioBrowser *browser);
+static void ario_browser_cmd_add_play_artists (GtkAction *action,
+                                               ArioBrowser *browser);
+static void ario_browser_cmd_add_play_albums (GtkAction *action,
+                                              ArioBrowser *browser);
+static void ario_browser_cmd_add_play_songs (GtkAction *action,
+                                             ArioBrowser *browser);
 static void ario_browser_cmd_albums_properties (GtkAction *action,
                                                 ArioBrowser *browser);
 static void ario_browser_cmd_songs_properties (GtkAction *action,
@@ -136,6 +142,16 @@ static GtkActionEntry ario_browser_actions [] =
         { "BrowserAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_add_songs) },
+
+        { "BrowserAddPlayArtists", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_browser_cmd_add_play_artists) },
+        { "BrowserAddPlayAlbums", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_browser_cmd_add_play_albums) },
+        { "BrowserAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_browser_cmd_add_play_songs) },
 
         { "BrowserAlbumsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
@@ -1199,7 +1215,8 @@ get_albums_foreach (GtkTreeModel *model,
 }
 
 static void
-ario_browser_add_artists (ArioBrowser *browser)
+ario_browser_add_artists (ArioBrowser *browser,
+                          gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL;
@@ -1207,22 +1224,15 @@ ario_browser_add_artists (ArioBrowser *browser)
         gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
                                 get_albums_foreach,
                                 &albums);
-        ario_playlist_append_albums (browser->priv->playlist, albums);
+        ario_playlist_append_albums (browser->priv->playlist, albums, play);
 
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (albums);
 }
 
 static void
-ario_browser_cmd_add_artists (GtkAction *action,
-                              ArioBrowser *browser)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_browser_add_artists (browser);
-}
-
-static void
-ario_browser_add_albums (ArioBrowser *browser)
+ario_browser_add_albums (ArioBrowser *browser,
+                         gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
@@ -1230,22 +1240,15 @@ ario_browser_add_albums (ArioBrowser *browser)
         gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->songs_model),
                                 get_songs_foreach,
                                 &songs);
-        ario_playlist_append_songs (browser->priv->playlist, songs);
+        ario_playlist_append_songs (browser->priv->playlist, songs, play);
 
         g_slist_foreach (songs, (GFunc) g_free, NULL);
         g_slist_free (songs);
 }
 
 static void
-ario_browser_cmd_add_albums (GtkAction *action,
-                             ArioBrowser *browser)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_browser_add_albums (browser);
-}
-
-static void
-ario_browser_add_songs (ArioBrowser *browser)
+ario_browser_add_songs (ArioBrowser *browser,
+                        gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
@@ -1253,10 +1256,26 @@ ario_browser_add_songs (ArioBrowser *browser)
         gtk_tree_selection_selected_foreach (browser->priv->songs_selection,
                                              get_selected_songs_foreach,
                                              &songs);
-        ario_playlist_append_songs (browser->priv->playlist, songs);
+        ario_playlist_append_songs (browser->priv->playlist, songs, play);
 
         g_slist_foreach (songs, (GFunc) g_free, NULL);
         g_slist_free (songs);
+}
+
+static void
+ario_browser_cmd_add_artists (GtkAction *action,
+                              ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_add_artists (browser, FALSE);
+}
+
+static void
+ario_browser_cmd_add_albums (GtkAction *action,
+                             ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_add_albums (browser, FALSE);
 }
 
 static void
@@ -1264,7 +1283,31 @@ ario_browser_cmd_add_songs (GtkAction *action,
                             ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        ario_browser_add_songs (browser);
+        ario_browser_add_songs (browser, FALSE);
+}
+
+static void
+ario_browser_cmd_add_play_artists (GtkAction *action,
+                                   ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_add_artists (browser, TRUE);
+}
+
+static void
+ario_browser_cmd_add_play_albums (GtkAction *action,
+                                  ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_add_albums (browser, TRUE);
+}
+
+static void
+ario_browser_cmd_add_play_songs (GtkAction *action,
+                                 ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_browser_add_songs (browser, TRUE);
 }
 
 static gboolean
@@ -1369,13 +1412,13 @@ ario_browser_add_in_playlist (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
         if (GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (browser->priv->artists)))
-                ario_browser_add_artists (browser);
+                ario_browser_add_artists (browser, FALSE);
 
         if (GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (browser->priv->albums)))
-                ario_browser_add_albums (browser);
+                ario_browser_add_albums (browser, FALSE);
 
         if (GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (browser->priv->songs)))
-                ario_browser_add_songs (browser);
+                ario_browser_add_songs (browser, FALSE);
 }
 
 static void

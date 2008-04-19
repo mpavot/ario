@@ -826,9 +826,9 @@ ario_mpd_get_songs (ArioMpd *mpd,
         if (!mpd->priv->connection)
                 return NULL;
 
-        is_album_unknown = !g_utf8_collate (album, ARIO_MPD_UNKNOWN);
+        is_album_unknown = album && !g_utf8_collate (album, ARIO_MPD_UNKNOWN);
 
-        if (is_album_unknown)
+        if (!album || is_album_unknown)
                 mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ARTIST, artist);
         else
                 mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ALBUM, album);
@@ -836,7 +836,7 @@ ario_mpd_get_songs (ArioMpd *mpd,
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 if (!g_utf8_collate (entity->info.song->artist, artist)) {
                         if (entity->info.song)
-                                if (!is_album_unknown || !entity->info.song->album) {
+                                if (!is_album_unknown || !entity->info.song->album || !album) {
                                         songs = g_slist_append (songs, entity->info.song);
                                         entity->info.song = NULL;
                                 }

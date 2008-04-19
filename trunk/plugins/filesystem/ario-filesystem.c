@@ -51,6 +51,8 @@ static void ario_filesystem_filesystem_changed_cb (ArioMpd *mpd,
                                                    ArioFilesystem *filesystem);
 static void ario_filesystem_cmd_add_filesystem (GtkAction *action,
                                                 ArioFilesystem *filesystem);
+static void ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
+                                                     ArioFilesystem *filesystem);
 static void ario_filesystem_popup_menu (ArioFilesystem *filesystem);
 static gboolean ario_filesystem_button_press_cb (GtkWidget *widget,
                                                  GdkEventButton *event,
@@ -103,7 +105,10 @@ static GtkActionEntry ario_filesystem_actions [] =
 {
         { "FilesystemAddDir", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
-                G_CALLBACK (ario_filesystem_cmd_add_filesystem) }
+                G_CALLBACK (ario_filesystem_cmd_add_filesystem) },
+        { "FilesystemAddPlayDir", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_filesystem_cmd_add_play_filesystem) }
 };
 static guint ario_filesystem_n_actions = G_N_ELEMENTS (ario_filesystem_actions);
 
@@ -112,6 +117,9 @@ static GtkActionEntry ario_filesystem_songs_actions [] =
         { "FilesystemAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
+        { "FilesystemAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
         { "FilesystemSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
@@ -621,10 +629,12 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
 }
 
 static void
-ario_filesystem_add_filetree (ArioFilesystem *filesystem)
+ario_filesystem_add_filetree (ArioFilesystem *filesystem,
+                              gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *dir;	GtkTreeIter iter;
+        gchar *dir;
+        GtkTreeIter iter;
         GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
 
         if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
@@ -637,7 +647,7 @@ ario_filesystem_add_filetree (ArioFilesystem *filesystem)
 
         g_return_if_fail (dir);
 
-        ario_playlist_append_dir (filesystem->priv->playlist, dir);
+        ario_playlist_append_dir (filesystem->priv->playlist, dir, play);
         g_free (dir);
 }
 
@@ -646,7 +656,15 @@ ario_filesystem_cmd_add_filesystem (GtkAction *action,
                                     ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
-        ario_filesystem_add_filetree (filesystem);
+        ario_filesystem_add_filetree (filesystem, FALSE);
+}
+
+static void
+ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
+                                         ArioFilesystem *filesystem)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_filesystem_add_filetree (filesystem, TRUE);
 }
 
 static void

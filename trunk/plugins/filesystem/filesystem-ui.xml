@@ -1,11 +1,13 @@
 <ui>
         <popup name="FilesystemPopup">
                 <menuitem name="FilesystemAddDir" action="FilesystemAddDir"/>
+                <menuitem name="FilesystemAddPlayDir" action="FilesystemAddPlayDir"/>
                 <placeholder name="FilesystemPopupPluginPlaceholder" />
         </popup>
 
         <popup name="FilesystemSongsPopup">
                 <menuitem name="FilesystemAddSongs" action="FilesystemAddSongs"/>
+                <menuitem name="FilesystemAddPlaySongs" action="FilesystemAddPlaySongs"/>
                 <placeholder name="FilesystemSongsPopupPluginPlaceholder" />
                 <menuitem name="FilesystemSongsProperties" action="FilesystemSongsProperties"/>
         </popup>
