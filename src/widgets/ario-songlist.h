@@ -68,7 +68,10 @@ GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *s
 
 void                    ario_songlist_cmd_add_songlists         (GtkAction *action,
                                                                  ArioSonglist *songlist);
-                                             
+
+void                    ario_songlist_cmd_add_play_songlists    (GtkAction *action,
+                                                                 ArioSonglist *songlist);
+
 void                    ario_songlist_cmd_songs_properties      (GtkAction *action,
                                                                  ArioSonglist *songlist);
                                                 

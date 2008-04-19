@@ -39,7 +39,8 @@ static void ario_songlist_get_property (GObject *object,
                                         guint prop_id,
                                         GValue *value,
                                         GParamSpec *pspec);
-static void ario_songlist_add_in_playlist (ArioSonglist *songlist);
+static void ario_songlist_add_in_playlist (ArioSonglist *songlist,
+                                           gboolean play);
 static void ario_songlist_popup_menu (ArioSonglist *songlist);
 static gboolean ario_songlist_button_press_cb (GtkWidget *widget,
                                                GdkEventButton *event,
@@ -354,7 +355,8 @@ songlists_foreach (GtkTreeModel *model,
 }
 
 static void
-ario_songlist_add_in_playlist (ArioSonglist *songlist)
+ario_songlist_add_in_playlist (ArioSonglist *songlist,
+                               gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songlists = NULL;
@@ -362,7 +364,7 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist)
         gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
                                              songlists_foreach,
                                              &songlists);
-        ario_playlist_append_songs (songlist->priv->playlist, songlists);
+        ario_playlist_append_songs (songlist->priv->playlist, songlists, play);
 
         g_slist_foreach (songlists, (GFunc) g_free, NULL);
         g_slist_free (songlists);
@@ -373,7 +375,15 @@ ario_songlist_cmd_add_songlists (GtkAction *action,
                                  ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
-        ario_songlist_add_in_playlist (songlist);
+        ario_songlist_add_in_playlist (songlist, FALSE);
+}
+
+void
+ario_songlist_cmd_add_play_songlists (GtkAction *action,
+                                      ArioSonglist *songlist)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_songlist_add_in_playlist (songlist, TRUE);
 }
 
 void
@@ -437,7 +447,7 @@ ario_songlist_button_press_cb (GtkWidget *widget,
                 return FALSE;
 
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                ario_songlist_add_in_playlist (songlist);
+                ario_songlist_add_in_playlist (songlist, FALSE);
                 return FALSE;
         }
 

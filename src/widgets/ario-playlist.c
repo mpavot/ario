@@ -156,9 +156,7 @@ enum
 
 static const GtkTargetEntry targets  [] = {
         { "text/internal-list", 0, 10},
-#if 0 // Deactivated
         { "text/artists-list", 0, 20 },
-#endif
         { "text/albums-list", 0, 30 },
         { "text/songs-list", 0, 40 },
         { "text/radios-list", 0, 40 },
@@ -546,8 +544,8 @@ ario_playlist_changed_cb (ArioMpd *mpd,
 
         old_length = playlist->priv->playlist_length;
 
-        songs = ario_mpd_get_playlist_changes(playlist->priv->mpd,
-                                              playlist->priv->playlist_id);
+        songs = ario_mpd_get_playlist_changes (playlist->priv->mpd,
+                                               playlist->priv->playlist_id);
         
         for (temp = songs; temp; temp = g_slist_next (temp)) {
                 song = temp->data;
@@ -733,7 +731,8 @@ ario_playlist_move_rows (ArioPlaylist *playlist,
 static void
 ario_playlist_add_songs (ArioPlaylist *playlist,
                          GSList *songs,
-                         gint x, gint y)
+                         gint x, gint y,
+                         gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *temp_songs;
@@ -743,7 +742,7 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
         GtkTreeViewDropPosition pos;
         gboolean do_not_move = FALSE;
 
-        end = playlist->priv->playlist_length - 1;
+        end = playlist->priv->playlist_length;
 
         if (x < 0 || y < 0) {
                 do_not_move = TRUE;
@@ -768,16 +767,31 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
                 ++offset;
                 /* move it in the right place */
                 if (!do_not_move)
-                        ario_mpd_queue_move (playlist->priv->mpd, end + offset, drop + offset);
+                        ario_mpd_queue_move (playlist->priv->mpd, end + offset - 1, drop + offset);
         }
 
         ario_mpd_queue_commit (playlist->priv->mpd);
+
+        if (play) {
+                GSList *pl_songs = NULL;
+                ArioMpdSong *song;
+
+                pl_songs = ario_mpd_get_playlist_changes (playlist->priv->mpd, -1);
+
+                if ((song = g_slist_nth_data (pl_songs, end))) {
+                        ario_mpd_do_play_id (playlist->priv->mpd, song->id);
+                }
+
+                g_slist_foreach (pl_songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_free (pl_songs);
+        }
 }
 
 static void
 ario_playlist_add_albums (ArioPlaylist *playlist,
                           GSList *albums,
-                          gint x, gint y)
+                          gint x, gint y,
+                          gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *filenames = NULL, *songs = NULL, *temp_albums, *temp_songs;
@@ -802,16 +816,18 @@ ario_playlist_add_albums (ArioPlaylist *playlist,
 
         ario_playlist_add_songs (playlist,
                                  filenames,
-                                 x, y);
+                                 x, y,
+                                 play);
 
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
 }
-#if 0 // Deactivated
+
 static void
 ario_playlist_add_artists (ArioPlaylist *playlist,
                            GSList *artists,
-                           gint x, gint y)
+                           gint x, gint y,
+                           gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL, *filenames = NULL, *songs = NULL, *temp_artists, *temp_albums, *temp_songs;
@@ -841,16 +857,18 @@ ario_playlist_add_artists (ArioPlaylist *playlist,
 
         ario_playlist_add_songs (playlist,
                                  filenames,
-                                 x, y);
+                                 x, y,
+                                 play);
 
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
 }
-#endif
+
 static void
 ario_playlist_add_dir (ArioPlaylist *playlist,
                        const gchar *dir,
-                       gint x, gint y)
+                       gint x, gint y,
+                       gboolean play)
 {
         GSList *tmp;
         ArioMpdFileList *files;
@@ -863,7 +881,7 @@ ario_playlist_add_dir (ArioPlaylist *playlist,
                 char_songs = g_slist_append (char_songs, song->file);
         }
 
-        ario_playlist_add_songs (playlist, char_songs, x, y);
+        ario_playlist_add_songs (playlist, char_songs, x, y, play);
         g_slist_free (char_songs);
 	ario_mpd_free_file_list (files);
 }
@@ -886,7 +904,7 @@ ario_playlist_drop_radios (ArioPlaylist *playlist,
 
         ario_playlist_add_songs (playlist,
                                  radio_urls,
-                                 x, y);
+                                 x, y, FALSE);
 
         g_strfreev (radios);
         g_slist_free (radio_urls);
@@ -910,7 +928,7 @@ ario_playlist_drop_songs (ArioPlaylist *playlist,
 
         ario_playlist_add_songs (playlist,
                                  filenames,
-                                 x, y);
+                                 x, y, FALSE);
 
         g_strfreev (songs);
         g_slist_free (filenames);
@@ -939,14 +957,14 @@ ario_playlist_drop_albums (ArioPlaylist *playlist,
 
         ario_playlist_add_albums (playlist,
                                   albums_list,
-                                  x, y);
+                                  x, y, FALSE);
 
         g_strfreev (artists_albums);
 
         g_slist_foreach (albums_list, (GFunc) g_free, NULL);
         g_slist_free (albums_list);
 }
-#if 0 // Deactivated
+
 static void
 ario_playlist_drop_artists (ArioPlaylist *playlist,
                             int x, int y,
@@ -965,12 +983,12 @@ ario_playlist_drop_artists (ArioPlaylist *playlist,
 
         ario_playlist_add_artists (playlist,
                                    artists_list,
-                                   x, y);
+                                   x, y, FALSE);
 
         g_strfreev (artists);
         g_slist_free (artists_list);
 }
-#endif
+
 static void
 ario_playlist_drop_dir (ArioPlaylist *playlist,
                         int x, int y,
@@ -981,21 +999,23 @@ ario_playlist_drop_dir (ArioPlaylist *playlist,
 
         ario_playlist_add_dir (playlist,
                                dir,
-                               x, y);
+                               x, y, FALSE);
 }
 
 void
 ario_playlist_append_songs (ArioPlaylist *playlist,
-                            GSList *songs)
+                            GSList *songs,
+                            gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        ario_playlist_add_songs (playlist, songs, -1, -1);
+        ario_playlist_add_songs (playlist, songs, -1, -1, play);
 }
 
 
 void
 ario_playlist_append_mpd_songs (ArioPlaylist *playlist,
-                                GSList *songs)
+                                GSList *songs,
+                                gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *tmp;
@@ -1007,32 +1027,35 @@ ario_playlist_append_mpd_songs (ArioPlaylist *playlist,
                 char_songs = g_slist_append (char_songs, song->file);
         }
 
-        ario_playlist_add_songs (playlist, char_songs, -1, -1);
+        ario_playlist_add_songs (playlist, char_songs, -1, -1, play);
         g_slist_free (char_songs);
 }
 
 void
 ario_playlist_append_albums (ArioPlaylist *playlist,
-                             GSList *albums)
+                             GSList *albums,
+                             gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        ario_playlist_add_albums (playlist, albums, -1, -1);
+        ario_playlist_add_albums (playlist, albums, -1, -1, play);
 }
-#if 0 // Deactivated
+
 void
 ario_playlist_append_artists (ArioPlaylist *playlist,
-                              GSList *artists)
+                              GSList *artists,
+                              gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        ario_playlist_add_artists (playlist, artists, -1, -1);
+        ario_playlist_add_artists (playlist, artists, -1, -1, play);
 }
-#endif
+
 void
 ario_playlist_append_dir (ArioPlaylist *playlist,
-                          gchar *dir)
+                          gchar *dir,
+                          gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        ario_playlist_add_dir (playlist, dir, -1, -1);
+        ario_playlist_add_dir (playlist, dir, -1, -1, play);
 }
 
 static void
@@ -1051,10 +1074,8 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
 
         if (data->type == gdk_atom_intern ("text/internal-list", TRUE))
                 ario_playlist_move_rows (playlist, x, y);
-#if 0 // Deactivated
         else if (data->type == gdk_atom_intern ("text/artists-list", TRUE))
                 ario_playlist_drop_artists (playlist, x, y, data);
-#endif
         else if (data->type == gdk_atom_intern ("text/albums-list", TRUE))
                 ario_playlist_drop_albums (playlist, x, y, data);
         else if (data->type == gdk_atom_intern ("text/songs-list", TRUE))

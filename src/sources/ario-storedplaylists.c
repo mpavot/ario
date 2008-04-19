@@ -51,6 +51,8 @@ static void ario_storedplaylists_storedplaylists_changed_cb (ArioMpd *mpd,
                                                              ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
                                                           ArioStoredplaylists *storedplaylists);
+static void ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
+                                                               ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
                                                              ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_popup_menu (ArioStoredplaylists *storedplaylists);
@@ -101,6 +103,9 @@ static GtkActionEntry ario_storedplaylists_actions [] =
         { "StoredplaylistsAddPlaylists", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_add_storedplaylists) },
+        { "StoredplaylistsAddPlayPlaylists", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_storedplaylists_cmd_add_play_storedplaylists) },
         { "StoredplaylistsDelete", GTK_STOCK_DELETE, N_("_Delete"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_delete_storedplaylists) }
@@ -112,6 +117,9 @@ static GtkActionEntry ario_storedplaylists_songs_actions [] =
         { "StoredplaylistsAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
+        { "StoredplaylistsAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
         { "StoredplaylistsSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
@@ -581,7 +589,8 @@ storedplaylists_foreach (GtkTreeModel *model,
 }
 
 static void
-ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
+                                    gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *playlists = NULL;
@@ -594,7 +603,7 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists)
 
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, tmp->data);
-                ario_playlist_append_mpd_songs (storedplaylists->priv->playlist, songs);
+                ario_playlist_append_mpd_songs (storedplaylists->priv->playlist, songs, play);
 
                 g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                 g_slist_free (songs);
@@ -609,7 +618,15 @@ ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
                                               ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START
-        ario_storedplaylists_add_playlists (storedplaylists);
+        ario_storedplaylists_add_playlists (storedplaylists, FALSE);
+}
+
+static void
+ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
+                                                   ArioStoredplaylists *storedplaylists)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_storedplaylists_add_playlists (storedplaylists, TRUE);
 }
 
 static void
@@ -676,7 +693,7 @@ ario_storedplaylists_button_press_cb (GtkWidget *widget,
                 return FALSE;
 
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                ario_storedplaylists_add_playlists (storedplaylists);
+                ario_storedplaylists_add_playlists (storedplaylists, FALSE);
                 return FALSE;
         }
 

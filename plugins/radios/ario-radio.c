@@ -50,9 +50,12 @@ static void ario_radio_get_property (GObject *object,
                                      GParamSpec *pspec);
 static void ario_radio_state_changed_cb (ArioMpd *mpd,
                                          ArioRadio *radio);
-static void ario_radio_add_in_playlist (ArioRadio *radio);
+static void ario_radio_add_in_playlist (ArioRadio *radio,
+                                        gboolean play);
 static void ario_radio_cmd_add_radios (GtkAction *action,
                                        ArioRadio *radio);
+static void ario_radio_cmd_add_play_radios (GtkAction *action,
+                                            ArioRadio *radio);
 static void ario_radio_cmd_new_radio (GtkAction *action,
                                       ArioRadio *radio);
 static void ario_radio_cmd_delete_radios (GtkAction *action,
@@ -110,6 +113,9 @@ static GtkActionEntry ario_radio_actions [] =
         { "RadioAddRadios", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_add_radios) },
+        { "RadioAddPlayRadios", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_radio_cmd_add_play_radios) },
         { "RadioNewRadio", GTK_STOCK_ADD, N_("Add a _new radio"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_new_radio) },
@@ -636,7 +642,8 @@ radios_foreach2 (GtkTreeModel *model,
 }
 
 static void
-ario_radio_add_in_playlist (ArioRadio *radio)
+ario_radio_add_in_playlist (ArioRadio *radio,
+                            gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *radios = NULL;
@@ -644,7 +651,7 @@ ario_radio_add_in_playlist (ArioRadio *radio)
         gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
                                              radios_foreach,
                                              &radios);
-        ario_playlist_append_songs (radio->priv->playlist, radios);
+        ario_playlist_append_songs (radio->priv->playlist, radios, play);
 
         g_slist_foreach (radios, (GFunc) g_free, NULL);
         g_slist_free (radios);
@@ -655,7 +662,15 @@ ario_radio_cmd_add_radios (GtkAction *action,
                            ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        ario_radio_add_in_playlist (radio);
+        ario_radio_add_in_playlist (radio, FALSE);
+}
+
+static void
+ario_radio_cmd_add_play_radios (GtkAction *action,
+                                ArioRadio *radio)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_radio_add_in_playlist (radio, TRUE);
 }
 
 static void
@@ -695,7 +710,7 @@ ario_radio_button_press_cb (GtkWidget *widget,
                 return FALSE;
 
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                ario_radio_add_in_playlist (radio);
+                ario_radio_add_in_playlist (radio, FALSE);
                 return FALSE;
         }
 

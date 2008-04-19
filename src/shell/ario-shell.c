@@ -732,7 +732,7 @@ ario_shell_cmd_similar_artists (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *similarartists;
 
-        similarartists = ario_shell_similarartists_new (shell->priv->mpd);
+        similarartists = ario_shell_similarartists_new (shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
         if (similarartists)
                 gtk_widget_show_all (similarartists);
 }

@@ -36,9 +36,13 @@ static gboolean ario_shell_similarartists_window_delete_cb (GtkWidget *window,
                                                     GdkEventAny *event,
                                                     ArioShellSimilarartists *shell_similarartists);
 G_MODULE_EXPORT void ario_shell_similarartists_close_cb (GtkButton *button,
-                                        ArioShellSimilarartists *shell_similarartists);
+                                                         ArioShellSimilarartists *shell_similarartists);
 G_MODULE_EXPORT void ario_shell_similarartists_lastfm_cb (GtkButton *button,
-                                        ArioShellSimilarartists *shell_similarartists);
+                                                          ArioShellSimilarartists *shell_similarartists);
+G_MODULE_EXPORT void ario_shell_similarartists_add_cb (GtkButton *button,
+                                                       ArioShellSimilarartists *shell_similarartists);
+G_MODULE_EXPORT void ario_shell_similarartists_addall_cb (GtkButton *button,
+                                                          ArioShellSimilarartists *shell_similarartists);
 
 #define LASTFM_URI "http://ws.audioscrobbler.com/1.0/artist/%s/similar.xml"
 #define MAX_ARTISTS 10
@@ -47,6 +51,7 @@ G_MODULE_EXPORT void ario_shell_similarartists_lastfm_cb (GtkButton *button,
 struct ArioShellSimilarartistsPrivate
 {      
         GtkListStore *liststore;
+        ArioPlaylist *playlist;
         GThread *thread;
 
         GtkTreeSelection *selection;
@@ -67,6 +72,8 @@ enum
 {
         IMAGE_COLUMN,
         ARTIST_COLUMN,
+        SONGS_COLUMN,
+        IMAGEURL_COLUMN,
         URL_COLUMN,
         N_COLUMN
 };
@@ -205,8 +212,86 @@ ario_shell_similarartists_refresh (gpointer data)
         return FALSE;
 }
 
+static gboolean
+ario_shell_similarartists_get_images_foreach (GtkTreeModel *model,
+                                              GtkTreePath *path,
+                                              GtkTreeIter *iter,
+                                              ArioShellSimilarartists *shell_similarartists)
+{
+        ARIO_LOG_FUNCTION_START
+        int size;
+        char *data;
+        GdkPixbufLoader *loader;
+        GdkPixbuf *pixbuf, *tmp_pixbuf;
+        int width, height;
+        gchar *image_url;
+
+        gtk_tree_model_get (model,
+                            iter,
+                            IMAGEURL_COLUMN, &image_url,
+                            -1);
+
+        ario_util_download_file (image_url,
+                                 NULL, 0, NULL,
+                                 &size,
+                                 &data);
+        g_free (image_url);
+
+        if (size == 0 || !data)
+                return FALSE;
+        loader = gdk_pixbuf_loader_new ();
+        gdk_pixbuf_loader_write (loader,
+                                 (const guchar *) data,
+                                 size,
+                                 NULL);
+        gdk_pixbuf_loader_close (loader, NULL);
+
+        pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
+        if (!pixbuf)
+                return FALSE;
+
+        width = gdk_pixbuf_get_width (pixbuf);
+        height = gdk_pixbuf_get_height (pixbuf);
+
+        if (width > height) {
+                tmp_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
+                                                      IMAGE_SIZE,
+                                                      height * IMAGE_SIZE / width,
+                                                      GDK_INTERP_BILINEAR);
+        } else {
+                tmp_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
+                                                      width * IMAGE_SIZE / height,
+                                                      IMAGE_SIZE,
+                                                      GDK_INTERP_BILINEAR);
+        }
+        g_object_unref (G_OBJECT (pixbuf));
+        pixbuf = tmp_pixbuf;
+
+        gtk_list_store_set (shell_similarartists->priv->liststore, iter,
+                            IMAGE_COLUMN, pixbuf,
+                            -1);
+        g_object_unref (G_OBJECT (pixbuf));
+
+        g_idle_add (ario_shell_similarartists_refresh, NULL);
+
+        return FALSE;
+}
+
+static gpointer
+ario_shell_similarartists_get_images (ArioShellSimilarartists *shell_similarartists)
+{
+        ARIO_LOG_FUNCTION_START
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (shell_similarartists->priv->liststore),
+                                (GtkTreeModelForeachFunc) ario_shell_similarartists_get_images_foreach,
+                                shell_similarartists);
+
+        return NULL;
+}
+
 static void
-ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists)
+ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists,
+                                       ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         char *xml_uri;
@@ -217,9 +302,8 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         GtkTreeIter iter;
         char *keyword;
         int i = 0;
-        GdkPixbufLoader *loader;
-        GdkPixbuf *pixbuf, *tmp_pixbuf;
-        int width, height;
+        gchar *songs_txt;
+        GSList *songs = NULL;
 
         keyword = ario_util_format_keyword (shell_similarartists->priv->artist);
         xml_uri = g_strdup_printf (LASTFM_URI, keyword);
@@ -243,54 +327,36 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                         break;
                 similar_artist = tmp->data;
 
-                ario_util_download_file ((const gchar *) similar_artist->image,
-                                         NULL, 0, NULL,
-                                         &xml_size,
-                                         &xml_data);
-
-                loader = gdk_pixbuf_loader_new ();
-                gdk_pixbuf_loader_write (loader,
-                                     (const guchar *) xml_data,
-                                     xml_size,
-                                     NULL);
-                gdk_pixbuf_loader_close (loader, NULL);
-
-                pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
-                width = gdk_pixbuf_get_width (pixbuf);
-                height = gdk_pixbuf_get_height (pixbuf);
-
-                if (width > height) {
-                        tmp_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
-                                                              IMAGE_SIZE,
-                                                              height * IMAGE_SIZE / width,
-                                                              GDK_INTERP_BILINEAR);
-                } else {
-                        tmp_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
-                                                              width * IMAGE_SIZE / height,
-                                                              IMAGE_SIZE,
-                                                              GDK_INTERP_BILINEAR);
-                }
-                g_object_unref (G_OBJECT (pixbuf));
-                pixbuf = tmp_pixbuf;
+                songs = ario_mpd_get_songs (mpd, (gchar *) similar_artist->name, NULL);
+                if (songs)
+                        songs_txt = g_strdup_printf (_("%d songs"), g_slist_length (songs));
+                else
+                        songs_txt = g_strdup ("");
+                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_free (songs);
 
                 gtk_list_store_append (shell_similarartists->priv->liststore, &iter);
                 gtk_list_store_set (shell_similarartists->priv->liststore, &iter,
-                                    IMAGE_COLUMN, pixbuf,
                                     ARTIST_COLUMN, similar_artist->name,
+                                    SONGS_COLUMN, songs_txt,
+                                    IMAGEURL_COLUMN, similar_artist->image,
                                     URL_COLUMN, similar_artist->url,
                                     -1);
-                g_free (xml_data);
-                g_object_unref (G_OBJECT (pixbuf));
-
-                g_idle_add (ario_shell_similarartists_refresh, NULL);
+                g_free (songs_txt);
         }
 
         g_slist_foreach (similar_artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);
         g_slist_free (similar_artists);
+
+        shell_similarartists->priv->thread = g_thread_create ((GThreadFunc) ario_shell_similarartists_get_images,
+                                                               shell_similarartists,
+                                                               TRUE,
+                                                               NULL);
 }
 
 GtkWidget *
-ario_shell_similarartists_new (ArioMpd *mpd)
+ario_shell_similarartists_new (ArioMpd *mpd,
+                               ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellSimilarartists *shell_similarartists;
@@ -309,6 +375,7 @@ ario_shell_similarartists_new (ArioMpd *mpd)
 
         g_return_val_if_fail (shell_similarartists->priv != NULL, NULL);
         shell_similarartists->priv->closed = FALSE;
+        shell_similarartists->priv->playlist = playlist;
 
         xml = rb_glade_xml_new (GLADE_PATH "similar-artists.glade",
                                 "vbox",
@@ -317,6 +384,8 @@ ario_shell_similarartists_new (ArioMpd *mpd)
 
         shell_similarartists->priv->liststore = gtk_list_store_new (N_COLUMN,
                                                                     GDK_TYPE_PIXBUF,
+                                                                    G_TYPE_STRING,
+                                                                    G_TYPE_STRING,
                                                                     G_TYPE_STRING,
                                                                     G_TYPE_STRING);
 
@@ -338,6 +407,13 @@ ario_shell_similarartists_new (ArioMpd *mpd)
                                                            NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (_("Songs"),
+                                                           renderer,
+                                                           "text", SONGS_COLUMN,
+                                                           NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (shell_similarartists->priv->liststore));
         shell_similarartists->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -356,10 +432,7 @@ ario_shell_similarartists_new (ArioMpd *mpd)
                 gtk_main_iteration ();
 
         shell_similarartists->priv->artist = artist;
-        shell_similarartists->priv->thread = g_thread_create ((GThreadFunc) ario_shell_similarartists_get_artists,
-                                                               shell_similarartists,
-                                                               TRUE,
-                                                               NULL);
+        ario_shell_similarartists_get_artists (shell_similarartists, mpd);
         g_object_unref (G_OBJECT (xml));
 
         return GTK_WIDGET (shell_similarartists);
@@ -428,4 +501,65 @@ ario_shell_similarartists_lastfm_cb (GtkButton *button,
                 ario_util_load_uri (url);
                 g_free (url);
         }
+}
+
+void
+ario_shell_similarartists_add_cb (GtkButton *button,
+                                  ArioShellSimilarartists *shell_similarartists)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeModel *treemodel;
+        GtkTreeIter iter;
+        GSList *artists = NULL;
+        gchar *artist;
+
+        if (gtk_tree_selection_get_selected (shell_similarartists->priv->selection,
+                                             &treemodel,
+                                             &iter)) {
+                gtk_tree_model_get (treemodel, &iter,
+                                    ARTIST_COLUMN, &artist, -1);
+
+                artists = g_slist_append (artists, artist);
+
+                ario_playlist_append_artists (shell_similarartists->priv->playlist, artists, FALSE);
+
+                g_slist_foreach (artists, (GFunc) g_free, NULL);
+                g_slist_free (artists);
+        }
+}
+
+static gboolean
+ario_shell_similarartists_addall_foreach (GtkTreeModel *model,
+                                          GtkTreePath *path,
+                                          GtkTreeIter *iter,
+                                          GSList **artists)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *artist;
+
+        gtk_tree_model_get (model,
+                            iter,
+                            ARTIST_COLUMN, &artist,
+                            -1);
+
+        *artists = g_slist_append (*artists, artist);
+
+        return FALSE;
+}
+
+void
+ario_shell_similarartists_addall_cb (GtkButton *button,
+                                     ArioShellSimilarartists *shell_similarartists)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *artists = NULL;
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (shell_similarartists->priv->liststore),
+                                (GtkTreeModelForeachFunc) ario_shell_similarartists_addall_foreach,
+                                &artists);
+
+        ario_playlist_append_artists (shell_similarartists->priv->playlist, artists, FALSE);
+
+        g_slist_foreach (artists, (GFunc) g_free, NULL);
+        g_slist_free (artists);
 }

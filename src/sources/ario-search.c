@@ -100,6 +100,9 @@ static GtkActionEntry ario_search_actions [] =
         { "SearchAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
+        { "SearchAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+                NULL,
+                G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
         { "SearchSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
