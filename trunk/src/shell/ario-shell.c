@@ -357,7 +357,15 @@ ario_shell_window_delete_cb (GtkWidget *win,
                              ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        gtk_main_quit ();
+        if (ario_conf_get_boolean (PREF_HIDE_ON_CLOSE, PREF_HIDE_ON_CLOSE_DEFAULT)) {
+#ifdef ENABLE_EGGTRAYICON
+                ario_tray_icon_set_visibility (shell->priv->tray_icon, VISIBILITY_TOGGLE);
+#else
+                ario_status_icon_set_visibility (shell->priv->status_icon, VISIBILITY_TOGGLE);
+#endif
+        } else {
+                gtk_main_quit ();
+        }
         return TRUE;
 };
 

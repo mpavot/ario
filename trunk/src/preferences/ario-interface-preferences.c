@@ -39,6 +39,8 @@ G_MODULE_EXPORT void ario_interface_preferences_trayicon_behavior_changed_cb (Gt
                                                                               ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                                                            ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
+                                                                              ArioInterfacePreferences *interface_preferences);
 
 static const char *trayicon_behavior[] = {
         N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE
@@ -50,6 +52,7 @@ static const char *trayicon_behavior[] = {
 struct ArioInterfacePreferencesPrivate
 {
         GtkWidget *showtabs_check;
+        GtkWidget *hideonclose_check;
         GtkWidget *trayicon_combobox;
 };
 
@@ -124,12 +127,15 @@ ario_interface_preferences_new (void)
 
         interface_preferences->priv->showtabs_check =
                 glade_xml_get_widget (xml, "showtabs_checkbutton");
+        interface_preferences->priv->hideonclose_check =
+                glade_xml_get_widget (xml, "hideonclose_checkbutton");
         interface_preferences->priv->trayicon_combobox = 
                 glade_xml_get_widget (xml, "trayicon_combobox");
         tray_frame = 
                 glade_xml_get_widget (xml, "tray_frame");
         rb_glade_boldify_label (xml, "tabs_label");
         rb_glade_boldify_label (xml, "trayicon_label");
+        rb_glade_boldify_label (xml, "window_label");
 
 #ifndef ENABLE_EGGTRAYICON
         gtk_widget_hide (tray_frame);
@@ -187,8 +193,11 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
 {
         ARIO_LOG_FUNCTION_START
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->showtabs_check), 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->showtabs_check),
                                       ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->hideonclose_check),
+                                      ario_conf_get_boolean (PREF_HIDE_ON_CLOSE, PREF_HIDE_ON_CLOSE_DEFAULT));
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (interface_preferences->priv->trayicon_combobox),
                                   ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT));
@@ -216,4 +225,12 @@ ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->showtabs_check)));
 }
 
+void
+ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
+                                                         ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_HIDE_ON_CLOSE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->hideonclose_check)));
+}
 
