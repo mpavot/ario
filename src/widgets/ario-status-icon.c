@@ -45,7 +45,6 @@ static void ario_status_icon_get_property (GObject *object,
                                          guint prop_id,
                                          GValue *value,
                                          GParamSpec *pspec);
-static void ario_status_icon_set_visibility (ArioStatusIcon *status, int state);
 static void ario_status_icon_sync_tooltip (ArioStatusIcon *icon);
 static void ario_status_icon_sync_icon (ArioStatusIcon *icon);
 static void ario_status_icon_sync_popup (ArioStatusIcon *icon);
@@ -117,13 +116,6 @@ enum
         PROP_WINDOW,
         PROP_ACTION_GROUP,
         PROP_MPD
-};
-
-enum
-{
-        VISIBILITY_HIDDEN,
-        VISIBILITY_VISIBLE,
-        VISIBILITY_TOGGLE
 };
 
 static GObjectClass *parent_class = NULL;
@@ -487,7 +479,7 @@ ario_status_icon_restore_main_window (ArioStatusIcon *icon)
                 gtk_window_maximize (GTK_WINDOW (icon->priv->main_window));
 }
 
-static void
+void
 ario_status_icon_set_visibility (ArioStatusIcon *icon,
                                int state)
 {

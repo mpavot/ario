@@ -51,12 +51,22 @@ typedef struct
         EggTrayIconClass parent_class;
 } ArioTrayIconClass;
 
+enum
+{
+        VISIBILITY_HIDDEN,
+        VISIBILITY_VISIBLE,
+        VISIBILITY_TOGGLE
+};
+
 GType                   ario_tray_icon_get_type         (void) G_GNUC_CONST;
 
 ArioTrayIcon *          ario_tray_icon_new              (GtkActionGroup *group,
                                                          GtkUIManager *mgr,
                                                          GtkWindow *window,
                                                          ArioMpd *mpd);
+
+void                    ario_tray_icon_set_visibility   (ArioTrayIcon *tray,
+                                                         int state);
 
 G_END_DECLS
 

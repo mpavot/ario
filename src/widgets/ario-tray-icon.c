@@ -62,7 +62,6 @@ static void ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
                                                      GtkAllocation *allocation,
                                                      GtkWidget *tooltip);
 static void ario_tray_icon_construct_tooltip (ArioTrayIcon *icon);
-static void ario_tray_icon_set_visibility (ArioTrayIcon *tray, int state);
 static gboolean ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                                                       ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon);
@@ -152,13 +151,6 @@ enum
         PROP_ACTION_GROUP,
         PROP_WINDOW,
         PROP_MPD
-};
-
-enum
-{
-        VISIBILITY_HIDDEN,
-        VISIBILITY_VISIBLE,
-        VISIBILITY_TOGGLE
 };
 
 static GObjectClass *parent_class = NULL;
@@ -838,7 +830,7 @@ ario_tray_icon_restore_main_window (ArioTrayIcon *icon)
                 gtk_window_maximize (GTK_WINDOW (icon->priv->main_window));
 }
 
-static void
+void
 ario_tray_icon_set_visibility (ArioTrayIcon *icon,
                                int state)
 {

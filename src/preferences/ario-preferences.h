@@ -116,6 +116,9 @@
 #define PREF_MUSIC_DIR                          "music-dir"
 #define PREF_MUSIC_DIR_DEFAULT                  NULL
 
+#define PREF_HIDE_ON_CLOSE                      "hide-on-close"
+#define PREF_HIDE_ON_CLOSE_DEFAULT              FALSE
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,
