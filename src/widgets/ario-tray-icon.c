@@ -63,8 +63,8 @@ static void ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
                                                      GtkWidget *tooltip);
 static void ario_tray_icon_construct_tooltip (ArioTrayIcon *icon);
 static void ario_tray_icon_set_visibility (ArioTrayIcon *tray, int state);
-static void ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
-                                                  ArioTrayIcon *icon);
+static gboolean ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
+                                                      ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon);
@@ -548,7 +548,7 @@ ario_tray_icon_middle_click (ArioTrayIcon *icon)
         }
 }
 
-static void
+static gboolean
 ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                                       ArioTrayIcon *icon)
 {
@@ -557,7 +557,7 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
 
         /* filter out double, triple clicks */
         if (event->type != GDK_BUTTON_PRESS)
-                return;
+                return FALSE;
 
         switch (event->button) {
         case 1:
@@ -579,6 +579,8 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
         default:
                 break;
         }
+
+        return TRUE;
 }
 
 static gboolean
