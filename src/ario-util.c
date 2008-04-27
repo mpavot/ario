@@ -40,15 +40,19 @@ char *
 ario_util_format_time (const int time)
 {
         ARIO_LOG_FUNCTION_START
-        int sec, min;
+        int sec, min, hours;
 
         if (time < 0)
                 return g_strdup_printf (_("n/a"));
 
-        min = (int)(time / 60);
+        hours = (int)(time / 3600);
+        min = (int)((time % 3600) / 60) ;
         sec = (time % 60);
 
-        return g_strdup_printf ("%02i:%02i", min, sec);
+        if (hours > 0)
+                return g_strdup_printf ("%d:%02i:%02i", hours, min, sec);
+        else
+                return g_strdup_printf ("%02i:%02i", min, sec);
 }
 
 char *
