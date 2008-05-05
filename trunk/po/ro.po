@@ -1,4 +1,4 @@
-# Spanish translation for ario
+# Romanian translation for ario
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the ario package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-05 21:41+0200\n"
-"PO-Revision-Date: 2008-04-06 23:26+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2008-04-12 18:35+0000\n"
+"Last-Translator: Bisericaru Sebastian <Twetty_smecheru@yahoo.com>\n"
+"Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,95 +18,114 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
+#, fuzzy
 msgid "Ario music player"
-msgstr "Reproductor de música Ario."
+msgstr "Playerul de muzica"
 
 #: ../data/ario.desktop.in.in.h:2
+#, fuzzy
 msgid "Client apllication to mpd"
-msgstr "Aplicación cliente de mpd"
+msgstr "Aplicația client la mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
+#, fuzzy
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "Descarcă automat coperta albumului melodei care rulează"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:246
 #: ../src/shell/ario-shell-preferences.c:180
+#, fuzzy
 msgid "Covers"
-msgstr "Carátulas"
+msgstr "Coperte"
 
 #: ../data/glade/cover-prefs.glade.h:3
 #, fuzzy
 msgid "Covers Sources"
-msgstr "Carátulas"
+msgstr "Sursele copertelor"
 
 #: ../data/glade/cover-prefs.glade.h:4
+#, fuzzy
 msgid "Show the covers in the albums list"
-msgstr "Mostrar las carátulas en la lista de álbumes"
+msgstr "Arată copertele în lista cu albume"
 
 #: ../data/glade/cover-prefs.glade.h:5
+#, fuzzy
 msgid "Use Amazon."
-msgstr "usar Amazon."
+msgstr "Utilizați Amazon."
 
 #: ../data/glade/connection-prefs.glade.h:1
+#, fuzzy
 msgid "Auto detect"
-msgstr "Auto detección"
+msgstr "Detectează automat"
 
 #: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:170
+#, fuzzy
 msgid "Connection"
-msgstr "Conexión"
+msgstr "Conexiune"
 
 #: ../data/glade/connection-prefs.glade.h:3
 #: ../src/widgets/ario-firstlaunch.c:163
+#, fuzzy
 msgid "Default"
-msgstr "Predeterminado"
+msgstr "Implicit"
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:209
+#, fuzzy
 msgid "Host :"
-msgstr "Anfitrión :"
+msgstr "Gazdă:"
 
 #: ../data/glade/connection-prefs.glade.h:5
+#, fuzzy
 msgid "Music directory :"
-msgstr "Directorio de musica :"
+msgstr "Directorul cu muzică:"
 
 #: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:898
 #: ../plugins/radios/ario-radio.c:1097
+#, fuzzy
 msgid "Name :"
-msgstr "Nombre :"
+msgstr "Nume:"
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+#, fuzzy
 msgid "Password :"
-msgstr "Contraseña :"
+msgstr "Parolă:"
 
 #: ../data/glade/connection-prefs.glade.h:8
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:211
+#, fuzzy
 msgid "Port :"
-msgstr "Puerto :"
+msgstr "Port:"
 
 #: ../data/glade/connection-prefs.glade.h:9
+#, fuzzy
 msgid "_Autoconnect on startup"
-msgstr "Conectar _automáticamente en el arranque"
+msgstr "_Autoconectare la pornire"
 
 #: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:150
+#, fuzzy
 msgid "_Connect"
-msgstr "_Conectar"
+msgstr "_Conectare"
 
 #: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:153
+#, fuzzy
 msgid "_Disconnect"
-msgstr "_Desconectar"
+msgstr "_Deconectează"
 
 #: ../data/glade/connection-assistant.glade.h:1
+#, fuzzy
 msgid "Automatic configuration"
-msgstr "Configuración automática"
+msgstr "Configurare automată"
 
 #: ../data/glade/connection-assistant.glade.h:3
+#, fuzzy
 msgid "Manual configuration"
-msgstr "Configuración manual"
+msgstr "Configurare manuală"
 
 #: ../data/glade/connection-assistant.glade.h:5
 #, fuzzy
@@ -115,32 +134,36 @@ msgid ""
 "server thanks to the automatic configuration, you should check that zeroconf "
 "is activated in your MPD configuration or use the manual configuration."
 msgstr ""
-"Necesita especificar un servidor MPD para conectarse. Si no ve su servidor "
-"MPD gracias a la configuración automática, debe comprobar que la "
-"configuración inicial esta activa en su configuración MPD o utilizar la "
-"configuración manual."
+"Trebuie să specificați un server MPD la care să vă conectați. Dacă nu vedeți "
+"serverul MPD datorită configurației automate, trebuie să vă asigurați că "
+"zeroconf este activat în configurația MPD sau folosiți configurația manuală."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
+#, fuzzy
 msgid "Album :"
-msgstr "Álbum :"
+msgstr "Album:"
 
 #: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
+#, fuzzy
 msgid "Artist :"
-msgstr "Artista :"
+msgstr "Artist:"
 
 #: ../data/glade/cover-progress.glade.h:3
+#, fuzzy
 msgid "Downloading cover"
-msgstr "Descargar carátula"
+msgstr "Descărcare copertă în curs"
 
 #: ../data/glade/cover-select.glade.h:3
+#, fuzzy
 msgid "Local search"
-msgstr "Búsqueda local"
+msgstr "Căutare locală"
 
 #: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:163
+#, fuzzy
 msgid "Search"
-msgstr "Buscar"
+msgstr "Căutare"
 
 #: ../data/glade/interface-prefs.glade.h:1
 msgid "Hide on close"
@@ -149,21 +172,22 @@ msgstr ""
 #: ../data/glade/interface-prefs.glade.h:2
 #, fuzzy
 msgid "On middle button click on tray icon :"
-msgstr ""
-"Comportamiendo de click en el boton central sobre el icono de la bandeja."
+msgstr "Dați clic cu butonul din mijloc pe pictograma din zona de notificare:"
 
 #: ../data/glade/interface-prefs.glade.h:3
+#, fuzzy
 msgid "Show tabs"
-msgstr "Mostrar pestañas"
+msgstr "Arată tab-urile"
 
 #: ../data/glade/interface-prefs.glade.h:4
+#, fuzzy
 msgid "Tabs"
-msgstr ""
+msgstr "Tab-uri"
 
 #: ../data/glade/interface-prefs.glade.h:5
 #, fuzzy
 msgid "Tray icon"
-msgstr "Icono de la bandeja"
+msgstr "Pictogramă de notificare"
 
 #: ../data/glade/interface-prefs.glade.h:6
 msgid "Window"
@@ -172,275 +196,334 @@ msgstr ""
 #: ../data/glade/lyrics-prefs.glade.h:1
 #, fuzzy
 msgid "Lyrics Sources"
-msgstr "Carátulas"
+msgstr "Sursele de versuri"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
+#, fuzzy
 msgid "Title :"
-msgstr "Título :"
+msgstr "Titlu :"
 
 #: ../data/glade/proxy-prefs.glade.h:1
 #: ../src/shell/ario-shell-preferences.c:195
+#, fuzzy
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../data/glade/proxy-prefs.glade.h:2
+#, fuzzy
 msgid "Proxy Address :"
-msgstr "Dirección del proxy :"
+msgstr "Adresă proxy :"
 
 #: ../data/glade/proxy-prefs.glade.h:3
+#, fuzzy
 msgid "Proxy Port :"
-msgstr "Puerto del proxy :"
+msgstr "Port proxy :"
 
 #: ../data/glade/proxy-prefs.glade.h:4
+#, fuzzy
 msgid "Use a proxy"
-msgstr "Tiempo de espera para conectase a mpd"
+msgstr "Folosește un proxy"
 
 #: ../data/glade/server-prefs.glade.h:1
+#, fuzzy
 msgid "Audio outputs"
-msgstr "Salida de audio"
+msgstr "Ieșiri audio"
 
 #: ../data/glade/server-prefs.glade.h:2
+#, fuzzy
 msgid "Crossfade"
-msgstr ""
+msgstr "Intercalare"
 
 #: ../data/glade/server-prefs.glade.h:3
+#, fuzzy
 msgid "Database"
-msgstr "Base de datos"
+msgstr "Bază de date"
 
 #: ../data/glade/server-prefs.glade.h:4
+#, fuzzy
 msgid "Last updated:"
-msgstr "Última actualización:"
+msgstr "Ultima actualizare:"
 
 #: ../data/glade/server-prefs.glade.h:5
+#, fuzzy
 msgid "_Update"
-msgstr "_Actualizar"
+msgstr "_Actualizare"
 
 #: ../data/glade/server-prefs.glade.h:6
+#, fuzzy
 msgid "enable crossfade"
-msgstr ""
+msgstr "activare intercalare"
 
 #: ../data/glade/server-prefs.glade.h:7
+#, fuzzy
 msgid "fade time (s):"
-msgstr "Tiempo de desvanecimiento:"
+msgstr "şterge timpul (s):"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
 #: ../src/ario-util.c:47 ../src/ario-util.c:69
-#, c-format
+#, fuzzy, c-format
 msgid "n/a"
-msgstr "n/d"
+msgstr "n/a"
 
 #: ../data/glade/similar-artists.glade.h:1
 #, fuzzy
 msgid "Add all to playlist"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Adaugă la lista de redare"
 
 #: ../data/glade/similar-artists.glade.h:2
 #, fuzzy
 msgid "Add to playlist"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Adaugă la lista de redare"
 
 #: ../data/glade/similar-artists.glade.h:3
+#, fuzzy
 msgid "Find on Last.fm"
-msgstr ""
+msgstr "Găseşte in Ultimul.fm"
 
 #: ../data/glade/stats-prefs.glade.h:1
+#, fuzzy
 msgid "Database play time :"
-msgstr ""
+msgstr "Timpul de redare a bazei de date"
 
 #: ../data/glade/stats-prefs.glade.h:2
+#, fuzzy
 msgid "Number of albums :"
-msgstr "Numero de albums:"
+msgstr "Numărul albumelor :"
 
 #: ../data/glade/stats-prefs.glade.h:3
+#, fuzzy
 msgid "Number of artists :"
-msgstr "Numero de artistas :"
+msgstr "Numărul artiştilor :"
 
 #: ../data/glade/stats-prefs.glade.h:4
+#, fuzzy
 msgid "Number of songs :"
-msgstr "Numero de canciones :"
+msgstr "Numărul melodiilor :"
 
 #: ../data/glade/stats-prefs.glade.h:5
+#, fuzzy
 msgid "Play time :"
-msgstr ""
+msgstr "Timpul de redare :"
 
 #: ../data/glade/stats-prefs.glade.h:6
 #: ../src/shell/ario-shell-preferences.c:200
+#, fuzzy
 msgid "Statistics"
-msgstr ""
+msgstr "Statistici"
 
 #: ../data/glade/stats-prefs.glade.h:7
+#, fuzzy
 msgid "Uptime :"
-msgstr ""
+msgstr "Timp de la pornire :"
 
 #: ../data/glade/song-infos.glade.h:3
+#, fuzzy
 msgid "Comment :"
-msgstr "Comentario :"
+msgstr "Comentariu :"
 
 #: ../data/glade/song-infos.glade.h:4
+#, fuzzy
 msgid "Composer :"
-msgstr "Compositor :"
+msgstr "Compozitor :"
 
 #: ../data/glade/song-infos.glade.h:5
+#, fuzzy
 msgid "Date :"
-msgstr "Fecha :"
+msgstr "Data :"
 
 #: ../data/glade/song-infos.glade.h:6
+#, fuzzy
 msgid "Disc :"
-msgstr "Disco :"
+msgstr "Disc :"
 
 #: ../data/glade/song-infos.glade.h:7
+#, fuzzy
 msgid "Filename :"
-msgstr "Nomre de archivo :"
+msgstr "Numele fişierului :"
 
 #: ../data/glade/song-infos.glade.h:8
+#, fuzzy
 msgid "Genre :"
-msgstr "Genero :"
+msgstr "Gen :"
 
 #: ../data/glade/song-infos.glade.h:9
+#, fuzzy
 msgid "Length :"
-msgstr "Duracion :"
+msgstr "Lungime :"
 
 #: ../data/glade/song-infos.glade.h:10
+#, fuzzy
 msgid "Performer :"
-msgstr ""
+msgstr "Interpret :"
 
 #: ../data/glade/song-infos.glade.h:11
+#, fuzzy
 msgid "Song"
-msgstr "Canción"
+msgstr "Melodie"
 
 #: ../data/glade/song-infos.glade.h:13
+#, fuzzy
 msgid "Track :"
-msgstr "Pista :"
+msgstr "Piesă :"
 
 #: ../src/ario-mpd.c:651
 #, fuzzy
 msgid "Connecting to MPD server..."
-msgstr "Conexión"
+msgstr "Se conectează la srverul MPD..."
 
 #: ../src/ario-mpd.c:676
+#, fuzzy
 msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
+msgstr "Conectare la mpd imposibilă. Verificaţi opţiunile de conectare."
 
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1259
+#, fuzzy
 msgid "Unknown"
-msgstr "Desconocido"
+msgstr "Necunoscut"
 
 #: ../src/ario-util.c:80
+#, fuzzy
 msgid "seconds"
-msgstr "segundos"
+msgstr "secunde"
 
 #: ../src/ario-util.c:83
+#, fuzzy
 msgid "minutes"
-msgstr "minutos"
+msgstr "minute"
 
 #: ../src/ario-util.c:91
+#, fuzzy
 msgid "hours"
-msgstr "horas"
+msgstr "ore"
 
 #: ../src/ario-util.c:99
+#, fuzzy
 msgid "days"
-msgstr "días"
+msgstr "zile"
 
 #: ../src/covers/ario-cover.c:159
+#, fuzzy
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "La carátula ya existe. ¿Desea reemplazarla?"
+msgstr "Coperta există deja. Doriţi să o înlocuiţi?"
 
 #: ../src/covers/ario-cover-local.c:95
+#, fuzzy
 msgid "Music Directory"
-msgstr ""
+msgstr "Directorul de muzică"
 
 #: ../src/plugins/ario-plugin-manager.c:45
+#, fuzzy
 msgid "Plugin"
-msgstr ""
+msgstr "Modul"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:194
 #: ../src/preferences/ario-lyrics-preferences.c:145
 #: ../src/preferences/ario-server-preferences.c:205
+#, fuzzy
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr "Activat"
 
 #: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
+#, fuzzy
 msgid "_About"
-msgstr "_Acerca de"
+msgstr "_Despre"
 
 #: ../src/plugins/ario-plugin-manager.c:518
 #, fuzzy
 msgid "C_onfigure"
-msgstr "C_onfigurar"
+msgstr "C_onfigurează"
 
 #: ../src/plugins/ario-plugin-manager.c:527
+#, fuzzy
 msgid "A_ctivate"
-msgstr "A_ctivar"
+msgstr "A_ctivează"
 
 #: ../src/plugins/ario-plugin-manager.c:538
+#, fuzzy
 msgid "Ac_tivate All"
-msgstr "Ac_tivar todos"
+msgstr "Ac_tivare toate"
 
 #: ../src/plugins/ario-plugin-manager.c:543
+#, fuzzy
 msgid "_Deactivate All"
-msgstr "_Desactivar todos"
+msgstr "_Dezactivare totate"
 
 #: ../src/plugins/ario-plugin-manager.c:752
+#, fuzzy
 msgid "Active plugins"
-msgstr "Complementos activos"
+msgstr "Module active"
 
 #: ../src/preferences/ario-connection-preferences.c:357
+#, fuzzy
 msgid "Profile"
-msgstr "Perfil"
+msgstr "Profil"
 
 #: ../src/preferences/ario-connection-preferences.c:604
+#, fuzzy
 msgid "Server autodetection"
-msgstr "detección automática de servidor"
+msgstr "Autodetectare server"
 
 #: ../src/preferences/ario-connection-preferences.c:615
+#, fuzzy
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
+"Dacă nu vedeţi serverul MPD datorită detectării automate, ar trebui să vă "
+"asiguraţi că zeroconf este activat in configuraţiile MPD-ului sau utilizaţi "
+"configuraţia manuală."
 
 #: ../src/preferences/ario-connection-preferences.c:625
 #: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
+#, fuzzy
 msgid "Name"
-msgstr "Nombre"
+msgstr "Nume"
 
 #: ../src/preferences/ario-connection-preferences.c:633
 #: ../src/widgets/ario-firstlaunch.c:315
+#, fuzzy
 msgid "Host"
-msgstr "Anfitrión"
+msgstr "Gazda"
 
 #: ../src/preferences/ario-connection-preferences.c:641
 #: ../src/widgets/ario-firstlaunch.c:323
+#, fuzzy
 msgid "Port"
-msgstr "Puerto"
+msgstr "Port"
 
 #: ../src/preferences/ario-connection-preferences.c:703
+#, fuzzy
 msgid "You must select a server."
-msgstr "Debe seleccionar un servidor"
+msgstr "Trebuie să selectaţi un server."
 
 #: ../src/preferences/ario-connection-preferences.c:750
+#, fuzzy
 msgid "New Profile"
-msgstr "Nuevo perfil"
+msgstr "Profil nou"
 
 #: ../src/preferences/ario-interface-preferences.c:46
+#, fuzzy
 msgid "Play/Pause"
-msgstr "Reproducir/Pausa"
+msgstr "Redare/Pauză"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:47
 #: ../src/widgets/ario-header.c:253
+#, fuzzy
 msgid "Play next song"
-msgstr "Reproducir la canción siguiente"
+msgstr "Redă următoarea melodie"
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-interface-preferences.c:48
+#, fuzzy
 msgid "Do nothing"
-msgstr "No hacer nada"
+msgstr "Nu fă nimic"
 
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
@@ -449,14 +532,16 @@ msgstr "No hacer nada"
 #: ../src/preferences/ario-stats-preferences.c:270
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
+#, fuzzy
 msgid "Not connected"
-msgstr "No conectado"
+msgstr "Neconectat"
 
 #: ../src/preferences/ario-server-preferences.c:318
 #: ../src/preferences/ario-server-preferences.c:406
 #: ../src/widgets/ario-status-bar.c:211
+#, fuzzy
 msgid "Updating..."
-msgstr "Actualizando…"
+msgstr "În curs de actualizare..."
 
 #: ../src/sources/ario-browser.c:142 ../src/sources/ario-browser.c:145
 #: ../src/sources/ario-browser.c:148 ../src/sources/ario-search.c:100
@@ -465,8 +550,9 @@ msgstr "Actualizando…"
 #: ../plugins/filesystem/ario-filesystem.c:106
 #: ../plugins/filesystem/ario-filesystem.c:117
 #: ../plugins/radios/ario-radio.c:113
+#, fuzzy
 msgid "_Add to playlist"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Adaugă la lista de redare"
 
 #: ../src/sources/ario-browser.c:152 ../src/sources/ario-browser.c:155
 #: ../src/sources/ario-browser.c:158 ../src/sources/ario-search.c:103
@@ -477,73 +563,79 @@ msgstr "_Añadir a la lista de reproducción"
 #: ../plugins/radios/ario-radio.c:116
 #, fuzzy
 msgid "Add and _play"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Adaugă la lista de redare"
 
 #: ../src/sources/ario-browser.c:162 ../src/sources/ario-browser.c:165
 #: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
 #: ../src/widgets/ario-playlist.c:126
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
+#, fuzzy
 msgid "_Properties"
-msgstr "_Propiedades"
+msgstr "_Proprietăţi"
 
 #: ../src/sources/ario-browser.c:169 ../src/sources/ario-browser.c:176
 #, fuzzy
 msgid "Get the covers"
-msgstr "_Borrar las carátulas"
+msgstr "Ia coperţile"
 
 #: ../src/sources/ario-browser.c:172 ../src/sources/ario-browser.c:179
+#, fuzzy
 msgid "_Delete the covers"
-msgstr "_Borrar las carátulas"
+msgstr "_Şterge coperţile"
 
 #: ../src/sources/ario-browser.c:257
+#, fuzzy
 msgid "Library"
-msgstr "Biblioteca"
+msgstr "Colecţie"
 
 #: ../src/sources/ario-browser.c:336 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:404
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:271
+#, fuzzy
 msgid "Artist"
-msgstr "Artista"
+msgstr "Artist"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:393 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:286
+#, fuzzy
 msgid "Album"
-msgstr "Álbum"
+msgstr "Album"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-browser.c:403
+#, fuzzy
 msgid "Cover"
-msgstr "Carátula"
+msgstr "Coperta"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:473 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
+#, fuzzy
 msgid "Track"
-msgstr "Pista"
+msgstr "Piesă"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:480 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:256
+#, fuzzy
 msgid "Title"
-msgstr "Título"
+msgstr "Titlu"
 
 #: ../src/sources/ario-browser.c:1478
+#, fuzzy
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
-msgstr ""
-"¿Estás seguro de que quieres eliminar todas las carátulas de los artistas "
-"seleccionados?"
+msgstr "Sigur vreţi să îdepărtaţi toate copertele artiştilor selectaţi?"
 
 #: ../src/sources/ario-browser.c:1529
+#, fuzzy
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
-msgstr ""
-"¿Estás seguro de que quieres eliminar todas las carátulas de los álbumes "
-"seleccionados?"
+msgstr "Sigur vreţi să îdepărtaţi toate copertele albumeor selectate?"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
@@ -554,424 +646,485 @@ msgstr ""
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
 #: ../src/sources/ario-search.c:54
+#, fuzzy
 msgid "Filename"
-msgstr "Nombre de archivo"
+msgstr "Numele fişierului"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/sources/ario-search.c:55
+#, fuzzy
 msgid "Any"
-msgstr "Cualquiera"
+msgstr "Oricare"
 
 #: ../src/sources/ario-search.c:250
+#, fuzzy
 msgid "Add a search criteria"
-msgstr "Añadir un criterio de búsqueda"
+msgstr "Adăugaţi un criteriu de căutare"
 
 #: ../src/sources/ario-search.c:257
+#, fuzzy
 msgid "Search songs in the library"
-msgstr "Buscar canciones en la biblioteca"
+msgstr "Caută melodii in bibliotecă"
 
 #: ../src/sources/ario-search.c:460
+#, fuzzy
 msgid "Remove a search criteria"
-msgstr "Eliminar un criterio de búsqueda"
+msgstr "Îndepărtează un criteriu de căutare"
 
 #: ../src/sources/ario-storedplaylists.c:109
+#, fuzzy
 msgid "_Delete"
-msgstr "_Eliminar"
+msgstr "_Şterge"
 
 #: ../src/sources/ario-storedplaylists.c:186
+#, fuzzy
 msgid "Playlists"
-msgstr "Lista de reproducción"
+msgstr "Liste de redare"
 
 #: ../src/sources/ario-storedplaylists.c:264
+#, fuzzy
 msgid "Playlist"
-msgstr "Lista de reproducción"
+msgstr "Listă redare"
 
 #: ../src/sources/ario-storedplaylists.c:645
+#, fuzzy
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr ""
-"Esta seguro que quiere borrar todas las listas de reproducción seleccionadas?"
+msgstr "Sigur vreţi să ştergeţi toate listele de redare selectate?"
 
 #: ../src/shell/ario-shell.c:141
+#, fuzzy
 msgid "_File"
-msgstr "_Fichero"
+msgstr "_Fişier"
 
 #: ../src/shell/ario-shell.c:142
+#, fuzzy
 msgid "_Edit"
-msgstr "_Editar"
+msgstr "Editează"
 
 #: ../src/shell/ario-shell.c:143
+#, fuzzy
 msgid "_View"
-msgstr "_Vista"
+msgstr "_Vizualizare"
 
 #: ../src/shell/ario-shell.c:144
+#, fuzzy
 msgid "_Tool"
-msgstr "Herramien_ta"
+msgstr "_Unealtă"
 
 #: ../src/shell/ario-shell.c:145
+#, fuzzy
 msgid "_Help"
-msgstr "A_yuda"
+msgstr "_Ajutor"
 
 #: ../src/shell/ario-shell.c:147
+#, fuzzy
 msgid "_Save Playlist"
-msgstr "Guardar li_sta de reproducción"
+msgstr "_Salvează lista de redare"
 
 #: ../src/shell/ario-shell.c:156
+#, fuzzy
 msgid "_Quit"
-msgstr "_Salir"
+msgstr "_Ieşire"
 
 #: ../src/shell/ario-shell.c:159
+#, fuzzy
 msgid "Plu_gins"
-msgstr ""
+msgstr "Mo_dule"
 
 #: ../src/shell/ario-shell.c:162
+#, fuzzy
 msgid "Prefere_nces"
-msgstr "Prefere_ncias"
+msgstr "Preferi_nţe"
 
 #: ../src/shell/ario-shell.c:165
+#, fuzzy
 msgid "_Change current album cover"
-msgstr "_Cambiar la cubierta de album actual"
+msgstr "_Schimbă coperta albumului curent"
 
 #: ../src/shell/ario-shell.c:168
 #, fuzzy
 msgid "Download album _covers"
-msgstr "Descargar cubiertas_album"
+msgstr "Descarcă coperte de albume"
 
 #: ../src/shell/ario-shell.c:171
+#, fuzzy
 msgid "Find similar artists"
-msgstr ""
+msgstr "Găseşte artişti similari"
 
 #: ../src/shell/ario-shell.c:174
+#, fuzzy
 msgid "Show _lyrics"
-msgstr "Mostrar _letras"
+msgstr "Arată _versurile"
 
 #: ../src/shell/ario-shell.c:180
+#, fuzzy
 msgid "_Translate this application..."
-msgstr "_Traducir esta aplicación..."
+msgstr "_Tradu această aplicaţie"
 
 #: ../src/shell/ario-shell.c:188
+#, fuzzy
 msgid "S_tatusbar"
-msgstr ""
+msgstr "Bară de s_tare"
 
 #: ../src/shell/ario-shell.c:637
+#, fuzzy
 msgid "GTK client for MPD"
-msgstr "Cliente GTK para MPD"
+msgstr "Client GTK pentru MPD"
 
 #: ../src/shell/ario-shell.c:638
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol"
+"  Bisericaru Sebastian https://launchpad.net/~tweety\n"
+"  Ionuț Jula https://launchpad.net/~ionutjula"
 
 #: ../src/shell/ario-shell.c:910
 #, fuzzy
 msgid "Configure Plugins"
-msgstr "Configurar extensiones"
+msgstr "Configurează modulele"
 
 #: ../src/shell/ario-shell-coverdownloader.c:277
+#, fuzzy
 msgid "Music Player Cover Download"
-msgstr "Descargar el reproductor de música de carátulas"
+msgstr "Descarcă coperte pentru player-ul de muzică"
 
 #: ../src/shell/ario-shell-coverdownloader.c:419
+#, fuzzy
 msgid "Download Finished!"
-msgstr "Bajada terminada"
+msgstr "Descărcare Terminată!"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:422
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%i covers found\n"
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
-"%i carátulas encontradas\n"
-"%i carátulas no encontradas\n"
-"%i carátulas ya existen"
+"%i coperte găsite\n"
+"%i coperte nu au fost găsite\n"
+"%i coperte există deja"
 
 #: ../src/shell/ario-shell-coverselect.c:234
+#, fuzzy
 msgid "Cover Download"
-msgstr "Descargar carátula"
+msgstr "Descarcă coperte"
 
 #: ../src/shell/ario-shell-coverselect.c:518
+#, fuzzy
 msgid "Error reading file"
-msgstr "Error al leer el archivo"
+msgstr "Eroare la citirea fişierului"
 
 #: ../src/shell/ario-shell-coverselect.c:541
+#, fuzzy
 msgid "Error saving file"
-msgstr "Error guardando el archivo"
+msgstr "Eroare la salvarea fişierului"
 
 #: ../src/shell/ario-shell-lyrics.c:53
 #: ../src/shell/ario-shell-preferences.c:185
 #: ../src/shell/ario-shell-songinfos.c:268
+#, fuzzy
 msgid "Lyrics"
-msgstr "Letras"
+msgstr "Versuri"
 
 #: ../src/shell/ario-shell-lyricsselect.c:196
+#, fuzzy
 msgid "Lyrics Download"
-msgstr "Descarga de letras"
+msgstr "Descarcă Versuri"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
 #, fuzzy
 msgid "Source"
-msgstr "Orden de las fuentes."
+msgstr "Sursă"
 
 #: ../src/shell/ario-shell-preferences.c:140
+#, fuzzy
 msgid "Ario Preferences"
-msgstr "Preferencias Ario"
+msgstr "Preferinţe Ario"
 
 #: ../src/shell/ario-shell-preferences.c:175
+#, fuzzy
 msgid "Server"
-msgstr "Servidor"
+msgstr "Server"
 
 #: ../src/shell/ario-shell-preferences.c:190
+#, fuzzy
 msgid "Interface"
-msgstr "Interfaz"
+msgstr "Interfaţă"
 
 #: ../src/shell/ario-shell-similarartists.c:332
 #, fuzzy, c-format
 msgid "%d songs"
-msgstr "Canciones"
+msgstr "Melodii"
 
 #: ../src/shell/ario-shell-similarartists.c:393
+#, fuzzy
 msgid "Image"
-msgstr ""
+msgstr "Imagine"
 
 #: ../src/shell/ario-shell-similarartists.c:411
 #: ../src/widgets/ario-status-bar.c:207
+#, fuzzy
 msgid "Songs"
-msgstr "Canciones"
+msgstr "Melodii"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
 #: ../src/shell/ario-shell-songinfos.c:412
+#, fuzzy
 msgid "Song Properties"
-msgstr "Propiedades de la canción"
+msgstr "Proprietăţile melodiei"
 
 #: ../src/widgets/ario-firstlaunch.c:208
+#, fuzzy
 msgid "The following configuration will be used:"
-msgstr "La siguiente configuracion sera usada:"
+msgstr "Va fi folosită următoarea configuraţie:"
 
 #: ../src/widgets/ario-firstlaunch.c:273
+#, fuzzy
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
-"Es la primera vez que usa Ario.\n"
-"El asistente le ayudara a configurarlo."
+"Este prima dată când porniţi Ario.\n"
+"Acest asistent vă va ajuta să îl configuraţi."
 
 #: ../src/widgets/ario-firstlaunch.c:278
+#, fuzzy
 msgid "Welcome to Ario"
-msgstr "Bienvenido a Ario"
+msgstr "Bine aţi venit la Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:341
+#, fuzzy
 msgid "Configuration"
-msgstr "Configuración"
+msgstr "Configurare"
 
 #: ../src/widgets/ario-firstlaunch.c:353
+#, fuzzy
 msgid "Confirmation"
-msgstr "Confirmación"
+msgstr "Confirmare"
 
 #: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:39
 #: ../src/widgets/ario-status-icon.c:33
-#, c-format
+#, fuzzy, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr "<i>desde</i> %s <i>por</i> %s"
+msgstr "<i>de la</i> %s <i>la</i> %s"
 
 #: ../src/widgets/ario-header.c:211
+#, fuzzy
 msgid "Play previous song"
-msgstr "Reproducir la canción anterior"
+msgstr "Redă melodia precedentă"
 
 #: ../src/widgets/ario-header.c:231
+#, fuzzy
 msgid "Play/Pause the music"
-msgstr "Reproducir/Pausar la música"
+msgstr "Redă/Pauză muzică"
 
 #: ../src/widgets/ario-header.c:242
+#, fuzzy
 msgid "Stop the music"
-msgstr "Parar la música"
+msgstr "Opreşte muzica"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
+#, fuzzy
 msgid " of "
-msgstr " de "
+msgstr " din "
 
 #: ../src/widgets/ario-header.c:342
 #, fuzzy
 msgid "Toggle random on/off"
-msgstr "Cambiar aleatorio on/off"
+msgstr "Comută întâmplător pornit/oprit"
 
 #: ../src/widgets/ario-header.c:353
 #, fuzzy
 msgid "Toggle repeat on/off"
-msgstr "Cambiar repetir on/off"
+msgstr "Comută repetă pornit/oprit"
 
 #: ../src/widgets/ario-header.c:463
+#, fuzzy
 msgid "Change the music volume"
-msgstr "Cambiar el volumen de la música"
+msgstr "Schimbă volumul muzicii"
 
 #: ../src/widgets/ario-lyrics-editor.c:299
+#, fuzzy
 msgid "Downloading lyrics..."
-msgstr "Descargando letras..."
+msgstr "Se descarcă versurile..."
 
 #: ../src/widgets/ario-lyrics-editor.c:316
+#, fuzzy
 msgid "Lyrics not found"
-msgstr "Letras no encontradas"
+msgstr "Versurile nu au fost găsite"
 
 #: ../src/widgets/ario-playlist.c:117
+#, fuzzy
 msgid "_Clear"
-msgstr "_Limpiar"
+msgstr "_Eliberează"
 
 #: ../src/widgets/ario-playlist.c:120
+#, fuzzy
 msgid "_Remove"
-msgstr "_Eliminar"
+msgstr "_Elimină"
 
 #: ../src/widgets/ario-playlist.c:123
+#, fuzzy
 msgid "_Save"
-msgstr "_Guardar"
+msgstr "_Salvează"
 
 #: ../src/widgets/ario-playlist.c:129
+#, fuzzy
 msgid "_Go to playing song"
-msgstr "_Ir la la cancion reproduciendose"
+msgstr "_Du-te la melodia curentă"
 
 #: ../src/widgets/ario-playlist.c:310
+#, fuzzy
 msgid "Duration"
-msgstr "Duración"
+msgstr "Durată"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1249
+#, fuzzy
 msgid "Save playlist"
-msgstr "Guardar lista de reproducción"
+msgstr "Salvează lista de piese"
 
 #: ../src/widgets/ario-playlist.c:1259
+#, fuzzy
 msgid "Playlist name :"
-msgstr "Nombre de lista de reprodución:"
+msgstr "Numele listei de redare :"
 
 #: ../src/widgets/ario-playlist.c:1284
+#, fuzzy
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
+msgstr "Lista de redare există deja. Vreţi să o suprascrieţi?"
 
 #: ../src/widgets/ario-tray-icon.c:38 ../src/widgets/ario-status-icon.c:32
+#, fuzzy
 msgid "Not playing"
-msgstr "No se está reproduciendo nada"
+msgstr "Redare oprită"
 
 #: ../src/widgets/ario-tray-icon.c:128 ../src/widgets/ario-status-icon.c:93
 msgid "_Play"
-msgstr "_Reproducir"
+msgstr "_Redă"
 
 #: ../src/widgets/ario-tray-icon.c:131 ../src/widgets/ario-status-icon.c:96
+#, fuzzy
 msgid "_Pause"
-msgstr "_Pausar"
+msgstr "_Pauză"
 
 #: ../src/widgets/ario-tray-icon.c:134 ../src/widgets/ario-status-icon.c:99
+#, fuzzy
 msgid "_Stop"
-msgstr "_Detener"
+msgstr "_Stop"
 
 #: ../src/widgets/ario-tray-icon.c:137 ../src/widgets/ario-status-icon.c:102
+#, fuzzy
 msgid "_Next"
-msgstr "_Siguiente"
+msgstr "_Înainte"
 
 #: ../src/widgets/ario-tray-icon.c:140 ../src/widgets/ario-status-icon.c:105
+#, fuzzy
 msgid "P_revious"
-msgstr "_Anterior"
+msgstr "P_recedenta"
 
 #: ../src/widgets/ario-status-icon.c:394
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Artist: %s\n"
 "Album: %s\n"
 "Title: %s"
 msgstr ""
-"Artista: %s\n"
-"Album: %s\n"
-"Título: %s"
+"Artist: %s\n"
+"Ablum: %s\n"
+"Titlu: %s"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1203
+#, fuzzy
 msgid "Today %I:%M %p"
-msgstr ""
+msgstr "Astăzi %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1216
+#, fuzzy
 msgid "Yesterday %I:%M %p"
-msgstr ""
+msgstr "Ieri %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1232
+#, fuzzy
 msgid "%a %I:%M %p"
-msgstr ""
+msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1244
+#, fuzzy
 msgid "%b %d %I:%M %p"
-msgstr ""
+msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1249
+#, fuzzy
 msgid "%b %d %Y"
-msgstr ""
+msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1333
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 #, fuzzy
 msgid "Never"
-msgstr "Servidor"
+msgstr "Niciodată"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
+#, fuzzy
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1359
+#, fuzzy
 msgid "Logging in"
-msgstr ""
+msgstr "Autentificare"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
+#, fuzzy
 msgid "Request failed"
-msgstr ""
+msgstr "Cerere nereuşită"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1365
+#, fuzzy
 msgid "Incorrect username"
-msgstr ""
+msgstr "Nume de utilizator incorect"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1368
+#, fuzzy
 msgid "Incorrect password"
-msgstr ""
+msgstr "Parolă incorectă"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1371
+#, fuzzy
 msgid "Handshake failed"
-msgstr ""
+msgstr "Iniţiere eşuată"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1374
+#, fuzzy
 msgid "Client update required"
-msgstr ""
+msgstr "Actualizare client necesară"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1377
 msgid "Track submission failed"
 msgstr ""
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1380
+#, fuzzy
 msgid "Queue is too long"
-msgstr ""
+msgstr "Lista este prea lungă"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1383
 msgid "Track submission failed too many times"
@@ -980,19 +1133,22 @@ msgstr ""
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1435
 #, fuzzy
 msgid "Audioscrobbler preferences"
-msgstr "Preferencias Ario"
+msgstr "Preferinţe Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
+#, fuzzy
 msgid "Check Last.fm server status at"
-msgstr ""
+msgstr "Verifică starea serverului Last.fm la"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
+#, fuzzy
 msgid "Disabled"
-msgstr ""
+msgstr "Dezactivat"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
+#, fuzzy
 msgid "Find out about Last.fm at "
-msgstr ""
+msgstr "Află despre Last.fm la "
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
 msgid "Last submission time:"
@@ -1001,270 +1157,142 @@ msgstr ""
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
 #, fuzzy
 msgid "Last.fm Profile"
-msgstr "Perfil"
+msgstr "Profil Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
+#, fuzzy
 msgid "Queued tracks:"
-msgstr ""
+msgstr "Piese în aşteptare:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
+#, fuzzy
 msgid "Status:"
-msgstr ""
+msgstr "Stare:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
 msgid "Tracks submitted:"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
+#, fuzzy
 msgid "Username :"
-msgstr ""
+msgstr "Nume utilizator:"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
+#, fuzzy
 msgid "Last.fm"
-msgstr ""
+msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
+#, fuzzy
 msgid "Submits song information to last.fm"
-msgstr ""
+msgstr "Trimite informaţia melodiei la last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:189
+#, fuzzy
 msgid "File System"
-msgstr ""
+msgstr "Sistem de fișiere"
 
 #: ../plugins/filesystem/ario-filesystem.c:496
+#, fuzzy
 msgid "Music"
-msgstr ""
+msgstr "Muzică"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
+#, fuzzy
 msgid "A File System Browser"
-msgstr ""
+msgstr "Un Navigator de Sistem de Fişiere"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
+#, fuzzy
 msgid "File System Browser"
-msgstr ""
+msgstr "Navigator de Sistem de Fişiere"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
+#, fuzzy
 msgid "Add multimedia keys support"
-msgstr ""
+msgstr "Adaugă asistenţa tastelor multimedia"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
+#, fuzzy
 msgid "Multimedia Keys"
-msgstr ""
+msgstr "Taste Multimedia"
 
 #: ../plugins/radios/ario-radio.c:119
+#, fuzzy
 msgid "Add a _new radio"
-msgstr "Añadir una _nueva radio"
+msgstr "Adaugă un _nou radio"
 
 #: ../plugins/radios/ario-radio.c:122
+#, fuzzy
 msgid "_Delete this radios"
-msgstr "_Borrar estas radios"
+msgstr "_Şterge aceste radiouri"
 
 #: ../plugins/radios/ario-radio.c:189
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
+#, fuzzy
 msgid "Web Radios"
-msgstr "Radios web"
+msgstr "Radiouri de pe Web"
 
 #: ../plugins/radios/ario-radio.c:264
+#, fuzzy
 msgid "Internet Radios"
-msgstr "Radios en Internet"
+msgstr "Radiouri de pe Internet"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:888
+#, fuzzy
 msgid "Add a WebRadio"
-msgstr "Añadir una radio web"
+msgstr "Adaugă un Radio de pe Web"
 
 #: ../plugins/radios/ario-radio.c:899 ../plugins/radios/ario-radio.c:1098
+#, fuzzy
 msgid "URL :"
 msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:953 ../plugins/radios/ario-radio.c:1153
+#, fuzzy
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
-"Parámetros incorrectos. Debe especificar el nombre y la URL de la radio."
+"Parametrii incorecţi. Trebuie să specificaţi un nume şi un URL pentru radio."
 
 #: ../plugins/radios/ario-radio.c:1015
+#, fuzzy
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr "¿Estás seguro de que quieres eliminar todos los radios seleccionados?"
+msgstr "Sigur vreţi să ştergeţi toate radiourile selectate?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1087
+#, fuzzy
 msgid "Edit a WebRadio"
-msgstr "Editar una radio web"
+msgstr "Editare Radio de pe Web"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
+#, fuzzy
 msgid "Listen to webradios"
-msgstr "Escuchar radio por internet"
+msgstr "Ascultă radiouri de pe web"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
+#, fuzzy
 msgid "Find artist on Wikipedia"
-msgstr "Buscar artista en Wikipedia"
+msgstr "Găseşte artişti pe Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
+#, fuzzy
 msgid "Wikipedia Plugin - Configuration"
-msgstr ""
+msgstr "Wikipedia Modul - Configuraţie"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
+#, fuzzy
 msgid "Wikipedia language :"
-msgstr "Idioma de Wikipedia :"
+msgstr "limbă Wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr ""
+msgstr "Un modul să caute artistul curent pe wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
+#, fuzzy
 msgid "Wikipedia"
-msgstr ""
-
-#~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
-#~ msgstr ""
-#~ "0 para 'reproducir/pausa', 1 para 'reproducir siguiente canción', 2 para "
-#~ "'hacer nada'."
-
-#~ msgid "0 for the library, 1 for the radios, etc..."
-#~ msgstr "0 para la biblioteca, 1 para las radios, etc..."
-
-#~ msgid "Define if Ario must autoconnect to mpd or not"
-#~ msgstr "Definir si Ario debe conectarse automáticamente  a mpd o no"
-
-#~ msgid "Define if Ario must use a proxy for remote connections"
-#~ msgstr "Definir si Ario debe usar proxu para conexiones remotas"
-
-#~ msgid "Define if the view tabs are shown."
-#~ msgstr "Definir si se muestran las pestañas"
-
-#~ msgid "Define the address of the proxy"
-#~ msgstr "Definir la dirección del proxy"
-
-#~ msgid "Define the behavior of a double click on the tray icon."
-#~ msgstr "Definir el comportamiento del doble clic en la bandeja de iconos."
-
-#~ msgid "Define the port of the proxy"
-#~ msgstr "Definir el puerto del proxy"
-
-#~ msgid "Define the size of the album column."
-#~ msgstr "Definir el tamaño de la columna de álbum."
-
-#~ msgid "Define the size of the artist column."
-#~ msgstr "Definir el tamaño de la columna de artista."
-
-#~ msgid "Define the size of the title column."
-#~ msgstr "Definir el tamaño de la columna de título"
-
-#~ msgid "Define the size of the track column."
-#~ msgstr "Definir el tamaño de la columna de pista"
-
-#~ msgid "Define the source used in Ario"
-#~ msgstr "Definir la fuente usada en Ario"
-
-#~ msgid "Hide the covers in the albums treeview"
-#~ msgstr "Ocultar las carátulas en la vista de árbol de los álbumes"
-
-#~ msgid "Host to connect to"
-#~ msgstr "Anfitrión donde conectar"
-
-#~ msgid "If true, the main window is maximized."
-#~ msgstr "Si es cierto, la ventana principal se maximiza"
-
-#~ msgid "Main window height"
-#~ msgstr "Altura de la ventana principal"
-
-#~ msgid "Main window maximization state"
-#~ msgstr "Estado de maximización de la ventana principal"
-
-#~ msgid "Main window width"
-#~ msgstr "Anchura de la ventana principal"
-
-#~ msgid "Port to connect to"
-#~ msgstr "Puerto a conectar"
-
-#~ msgid "Position of main window pane"
-#~ msgstr "Posición del panel de la ventana principal"
-
-#~ msgid "Position of playlists pane"
-#~ msgstr "Posición del panel de la lista de reproducción"
-
-#~ msgid "The amazon country to use to get the covers"
-#~ msgstr "País de amaxon a usar paara conseguir las carátulas"
-
-#~ msgid "The password to connect to mpd"
-#~ msgstr "Contraseña para conectarse a mpd"
-
-#~ msgid "The timeout for the connection to mpd"
-#~ msgstr "Tiempo de espera para conectase a mpd"
-
-#~ msgid "True if the initial assistant has already been run."
-#~ msgstr "Verdadero si el asistente inicial ya está corriendo."
-
-#~ msgid "When enabled, ario hide the covers in the albums treeview"
-#~ msgstr ""
-#~ "Cuando se activa, ario oculta las carátulas en la vista de árbol de los "
-#~ "álbumes"
-
-#~ msgid ""
-#~ "You can search for your cover on amazon.com .fr .de .uk or .ca to have "
-#~ "more accurate results"
-#~ msgstr ""
-#~ "Puede buscar su carátula en amazon.com .fr .de .uk or .ca para tener "
-#~ "resultados más ajustados"
-
-#~ msgid "Amazon search"
-#~ msgstr "Búsqueda en Amazon"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Carátulas grandes (más lento)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Carátula media"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Carátula pequeña (Rápido)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Conseguir carátulas en _Amazon"
-
-#~ msgid "Select a file"
-#~ msgstr "Seleccione un archivo"
-
-#~ msgid "Ordered list of sources."
-#~ msgstr "List ordenada de las fuentes."
-
-#, fuzzy
-#~ msgid "Position of filesystem pane"
-#~ msgstr "Posición del panel de la lista de reproducción"
-
-#, fuzzy
-#~ msgid "Define the path to the music"
-#~ msgstr "Definir el puerto del proxy"
-
-#, fuzzy
-#~ msgid "Active covers sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Active lyrics sources"
-#~ msgstr "Tamaño de carátula"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Password : "
-#~ msgstr "Contraseña : "
-
-#, fuzzy
-#~ msgid "_Password:"
-#~ msgstr "Contraseña :"
-
-#, fuzzy
-#~ msgid "Covers providers"
-#~ msgstr "Tamaño de carátula"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Tamaño de carátula"
+msgstr "Wikipedia"

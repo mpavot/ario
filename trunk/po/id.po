@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-19 10:40+0200\n"
-"PO-Revision-Date: 2008-03-29 13:27+0000\n"
+"POT-Creation-Date: 2008-05-05 21:41+0200\n"
+"PO-Revision-Date: 2008-04-06 23:10+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-04-01 05:56+0000\n"
+"X-Launchpad-Export-Date: 2008-05-05 19:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -30,7 +30,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:244
+#: ../src/shell/ario-shell-coverselect.c:246
 #: ../src/shell/ario-shell-preferences.c:180
 msgid "Covers"
 msgstr ""
@@ -142,20 +142,28 @@ msgid "Search"
 msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:1
+msgid "Hide on close"
+msgstr ""
+
+#: ../data/glade/interface-prefs.glade.h:2
 #, fuzzy
 msgid "On middle button click on tray icon :"
 msgstr "Definisikan perilaku dari klik ganda pada tray icon"
 
-#: ../data/glade/interface-prefs.glade.h:2
+#: ../data/glade/interface-prefs.glade.h:3
 msgid "Show tabs"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:3
+#: ../data/glade/interface-prefs.glade.h:4
 msgid "Tabs"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:4
+#: ../data/glade/interface-prefs.glade.h:5
 msgid "Tray icon"
+msgstr ""
+
+#: ../data/glade/interface-prefs.glade.h:6
+msgid "Window"
 msgstr ""
 
 #: ../data/glade/lyrics-prefs.glade.h:1
@@ -213,7 +221,7 @@ msgid "fade time (s):"
 msgstr "waktu pudar"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
-#: ../src/ario-util.c:46 ../src/ario-util.c:64
+#: ../src/ario-util.c:47 ../src/ario-util.c:69
 #, c-format
 msgid "n/a"
 msgstr ""
@@ -312,19 +320,19 @@ msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
 msgid "Unknown"
 msgstr ""
 
-#: ../src/ario-util.c:75
+#: ../src/ario-util.c:80
 msgid "seconds"
 msgstr ""
 
-#: ../src/ario-util.c:78
+#: ../src/ario-util.c:83
 msgid "minutes"
 msgstr ""
 
-#: ../src/ario-util.c:86
+#: ../src/ario-util.c:91
 msgid "hours"
 msgstr ""
 
-#: ../src/ario-util.c:94
+#: ../src/ario-util.c:99
 msgid "days"
 msgstr ""
 
@@ -412,18 +420,18 @@ msgstr ""
 msgid "New Profile"
 msgstr ""
 
-#: ../src/preferences/ario-interface-preferences.c:44
+#: ../src/preferences/ario-interface-preferences.c:46
 msgid "Play/Pause"
 msgstr ""
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:45
+#: ../src/preferences/ario-interface-preferences.c:47
 #: ../src/widgets/ario-header.c:253
 msgid "Play next song"
 msgstr ""
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:46
+#: ../src/preferences/ario-interface-preferences.c:48
 msgid "Do nothing"
 msgstr ""
 
@@ -443,8 +451,8 @@ msgstr ""
 msgid "Updating..."
 msgstr ""
 
-#: ../src/sources/ario-browser.c:136 ../src/sources/ario-browser.c:139
-#: ../src/sources/ario-browser.c:142 ../src/sources/ario-search.c:100
+#: ../src/sources/ario-browser.c:142 ../src/sources/ario-browser.c:145
+#: ../src/sources/ario-browser.c:148 ../src/sources/ario-search.c:100
 #: ../src/sources/ario-storedplaylists.c:103
 #: ../src/sources/ario-storedplaylists.c:117
 #: ../plugins/filesystem/ario-filesystem.c:106
@@ -453,8 +461,8 @@ msgstr ""
 msgid "_Add to playlist"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:149
-#: ../src/sources/ario-browser.c:152 ../src/sources/ario-search.c:103
+#: ../src/sources/ario-browser.c:152 ../src/sources/ario-browser.c:155
+#: ../src/sources/ario-browser.c:158 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../src/sources/ario-storedplaylists.c:120
 #: ../plugins/filesystem/ario-filesystem.c:109
@@ -463,7 +471,7 @@ msgstr ""
 msgid "Add and _play"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:156 ../src/sources/ario-browser.c:159
+#: ../src/sources/ario-browser.c:162 ../src/sources/ario-browser.c:165
 #: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
 #: ../src/widgets/ario-playlist.c:126
 #: ../plugins/filesystem/ario-filesystem.c:123
@@ -471,20 +479,20 @@ msgstr ""
 msgid "_Properties"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:163 ../src/sources/ario-browser.c:170
+#: ../src/sources/ario-browser.c:169 ../src/sources/ario-browser.c:176
 #, fuzzy
 msgid "Get the covers"
 msgstr "Hapus sampul"
 
-#: ../src/sources/ario-browser.c:166 ../src/sources/ario-browser.c:173
+#: ../src/sources/ario-browser.c:172 ../src/sources/ario-browser.c:179
 msgid "_Delete the covers"
 msgstr "Hapus sampul"
 
-#: ../src/sources/ario-browser.c:251
+#: ../src/sources/ario-browser.c:257
 msgid "Library"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:330 ../src/sources/ario-search.c:43
+#: ../src/sources/ario-browser.c:336 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:404
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:271
@@ -492,35 +500,35 @@ msgid "Artist"
 msgstr ""
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:384 ../src/sources/ario-search.c:44
+#: ../src/sources/ario-browser.c:393 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:286
 msgid "Album"
 msgstr ""
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:394
+#: ../src/sources/ario-browser.c:403
 msgid "Cover"
 msgstr ""
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:461 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:473 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
 msgid "Track"
 msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:468 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:480 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:256
 msgid "Title"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1466
+#: ../src/sources/ario-browser.c:1478
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:1517
+#: ../src/sources/ario-browser.c:1529
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -630,11 +638,11 @@ msgstr ""
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:629
+#: ../src/shell/ario-shell.c:637
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:630
+#: ../src/shell/ario-shell.c:638
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -650,9 +658,14 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Nestanet https://launchpad.net/~nesta-101106\n"
+"  reza https://launchpad.net/~edja-kun\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Nestanet https://launchpad.net/~nesta-101106\n"
 "  reza https://launchpad.net/~edja-kun"
 
-#: ../src/shell/ario-shell.c:902
+#: ../src/shell/ario-shell.c:910
 msgid "Configure Plugins"
 msgstr ""
 
@@ -673,15 +686,15 @@ msgid ""
 "%i covers already exist"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:232
+#: ../src/shell/ario-shell-coverselect.c:234
 msgid "Cover Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:504
+#: ../src/shell/ario-shell-coverselect.c:518
 msgid "Error reading file"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:527
+#: ../src/shell/ario-shell-coverselect.c:541
 msgid "Error saving file"
 msgstr ""
 
@@ -774,7 +787,7 @@ msgstr ""
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:714
+#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
 msgstr ""
 
@@ -835,29 +848,29 @@ msgstr ""
 msgid "Not playing"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.c:129 ../src/widgets/ario-status-icon.c:94
+#: ../src/widgets/ario-tray-icon.c:128 ../src/widgets/ario-status-icon.c:93
 #, fuzzy
 msgid "_Play"
 msgstr "_Main"
 
-#: ../src/widgets/ario-tray-icon.c:132 ../src/widgets/ario-status-icon.c:97
+#: ../src/widgets/ario-tray-icon.c:131 ../src/widgets/ario-status-icon.c:96
 #, fuzzy
 msgid "_Pause"
 msgstr "_Berhenti"
 
-#: ../src/widgets/ario-tray-icon.c:135 ../src/widgets/ario-status-icon.c:100
+#: ../src/widgets/ario-tray-icon.c:134 ../src/widgets/ario-status-icon.c:99
 msgid "_Stop"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.c:138 ../src/widgets/ario-status-icon.c:103
+#: ../src/widgets/ario-tray-icon.c:137 ../src/widgets/ario-status-icon.c:102
 msgid "_Next"
 msgstr "Selanjutnya"
 
-#: ../src/widgets/ario-tray-icon.c:141 ../src/widgets/ario-status-icon.c:106
+#: ../src/widgets/ario-tray-icon.c:140 ../src/widgets/ario-status-icon.c:105
 msgid "P_revious"
 msgstr ""
 
-#: ../src/widgets/ario-status-icon.c:402
+#: ../src/widgets/ario-status-icon.c:394
 #, c-format
 msgid ""
 "Artist: %s\n"
@@ -1081,43 +1094,12 @@ msgstr ""
 msgid "Wikipedia"
 msgstr ""
 
-#~ msgid "Amazon search"
-#~ msgstr "Pencarian dengan Amazon"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Cover besar(lebih lambat)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Sampul sedang"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Sampul kecil"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Ambil sampul dari Amazon"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Ukuran cover"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "lirik tak ditemukan"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Ukuran cover"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 untuk 'mulai/jeda', 1 untuk memulai lagu selanjutnya, 2 untuk 'diam'."
 
 #~ msgid "0 for the library, 1 for the radios, etc..."
 #~ msgstr "0 utuk  pustaka, 1 untuk radio, dll"
-
-#, fuzzy
-#~ msgid "Active lyrics sources"
-#~ msgstr "Ukuran cover"
 
 #~ msgid "Define if Ario must autoconnect to mpd or not"
 #~ msgstr "tegaskan jika Ario harus terhubung otomatis ke mpd atau tidak"
@@ -1132,10 +1114,6 @@ msgstr ""
 
 #~ msgid "Define the behavior of a double click on the tray icon."
 #~ msgstr "Definisikan perilaku dari klik ganda pada tray icon"
-
-#, fuzzy
-#~ msgid "Define the path to the music"
-#~ msgstr "Definisikan port pada proxy"
 
 #~ msgid "Define the port of the proxy"
 #~ msgstr "Definisikan port pada proxy"
@@ -1168,10 +1146,6 @@ msgstr ""
 #~ msgid "Port to connect to"
 #~ msgstr "Port sambungan ke"
 
-#, fuzzy
-#~ msgid "Position of filesystem pane"
-#~ msgstr "Posisi panel playlist"
-
 #~ msgid "Position of main window pane"
 #~ msgstr "Posisi dari panel jendela utama"
 
@@ -1186,3 +1160,42 @@ msgstr ""
 
 #~ msgid "True if the initial assistant has already been run."
 #~ msgstr "Benar jika inisial asisten telah berjalan"
+
+#~ msgid "Amazon search"
+#~ msgstr "Pencarian dengan Amazon"
+
+#~ msgid "Large cover (Slower)"
+#~ msgstr "Cover besar(lebih lambat)"
+
+#~ msgid "Medium cover"
+#~ msgstr "Sampul sedang"
+
+#~ msgid "Small cover (Faster)"
+#~ msgstr "Sampul kecil"
+
+#~ msgid "Get the covers from _Amazon"
+#~ msgstr "Ambil sampul dari Amazon"
+
+#, fuzzy
+#~ msgid "Position of filesystem pane"
+#~ msgstr "Posisi panel playlist"
+
+#, fuzzy
+#~ msgid "Define the path to the music"
+#~ msgstr "Definisikan port pada proxy"
+
+#, fuzzy
+#~ msgid "Active lyrics sources"
+#~ msgstr "Ukuran cover"
+
+#, fuzzy
+#~ msgid "Covers sources"
+#~ msgstr "Ukuran cover"
+
+#, fuzzy
+#~ msgid "Lyrics sources"
+#~ msgstr "lirik tak ditemukan"
+
+#, fuzzy
+#~ msgid "lyrics providers"
+#~ msgstr "Ukuran cover"
