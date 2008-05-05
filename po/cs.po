@@ -1,4 +1,4 @@
-# Spanish translation for ario
+# Czech translation for ario
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the ario package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-05 21:41+0200\n"
-"PO-Revision-Date: 2008-04-06 23:26+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2008-05-04 14:06+0000\n"
+"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
+"Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,164 +19,154 @@ msgstr ""
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Reproductor de música Ario."
+msgstr "Ario hudební přehrávač"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client apllication to mpd"
-msgstr "Aplicación cliente de mpd"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "Automaticky stáhnout obrázek právě hrajícího alba"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:246
 #: ../src/shell/ario-shell-preferences.c:180
 msgid "Covers"
-msgstr "Carátulas"
+msgstr "Obrázky alb"
 
 #: ../data/glade/cover-prefs.glade.h:3
-#, fuzzy
 msgid "Covers Sources"
-msgstr "Carátulas"
+msgstr "Zdroje obrázků pro alba"
 
 #: ../data/glade/cover-prefs.glade.h:4
 msgid "Show the covers in the albums list"
-msgstr "Mostrar las carátulas en la lista de álbumes"
+msgstr "Zobrazit obrázky alb v seznamu alb"
 
 #: ../data/glade/cover-prefs.glade.h:5
 msgid "Use Amazon."
-msgstr "usar Amazon."
+msgstr "Použít Amazon"
 
 #: ../data/glade/connection-prefs.glade.h:1
 msgid "Auto detect"
-msgstr "Auto detección"
+msgstr "Automatická detekce"
 
 #: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:170
 msgid "Connection"
-msgstr "Conexión"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:3
 #: ../src/widgets/ario-firstlaunch.c:163
 msgid "Default"
-msgstr "Predeterminado"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:209
 msgid "Host :"
-msgstr "Anfitrión :"
+msgstr "Host :"
 
 #: ../data/glade/connection-prefs.glade.h:5
 msgid "Music directory :"
-msgstr "Directorio de musica :"
+msgstr "Adresář hudby :"
 
 #: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:898
 #: ../plugins/radios/ario-radio.c:1097
 msgid "Name :"
-msgstr "Nombre :"
+msgstr "Název :"
 
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
 msgid "Password :"
-msgstr "Contraseña :"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:8
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:211
 msgid "Port :"
-msgstr "Puerto :"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:9
 msgid "_Autoconnect on startup"
-msgstr "Conectar _automáticamente en el arranque"
+msgstr "_Automaticky připojit při startu"
 
 #: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:150
 msgid "_Connect"
-msgstr "_Conectar"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:153
 msgid "_Disconnect"
-msgstr "_Desconectar"
+msgstr ""
 
 #: ../data/glade/connection-assistant.glade.h:1
 msgid "Automatic configuration"
-msgstr "Configuración automática"
+msgstr ""
 
 #: ../data/glade/connection-assistant.glade.h:3
 msgid "Manual configuration"
-msgstr "Configuración manual"
+msgstr "Ruční konfigurace"
 
 #: ../data/glade/connection-assistant.glade.h:5
-#, fuzzy
 msgid ""
 "You need to specify an MPD server to connect to. If you don't see your MPD "
 "server thanks to the automatic configuration, you should check that zeroconf "
 "is activated in your MPD configuration or use the manual configuration."
 msgstr ""
-"Necesita especificar un servidor MPD para conectarse. Si no ve su servidor "
-"MPD gracias a la configuración automática, debe comprobar que la "
-"configuración inicial esta activa en su configuración MPD o utilizar la "
-"configuración manual."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 msgid "Album :"
-msgstr "Álbum :"
+msgstr "Album :"
 
 #: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 msgid "Artist :"
-msgstr "Artista :"
+msgstr "Interpret :"
 
 #: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
-msgstr "Descargar carátula"
+msgstr "Stahování obrázku alba"
 
 #: ../data/glade/cover-select.glade.h:3
 msgid "Local search"
-msgstr "Búsqueda local"
+msgstr "Lokální vyhledávání"
 
 #: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:163
 msgid "Search"
-msgstr "Buscar"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:1
 msgid "Hide on close"
 msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:2
-#, fuzzy
 msgid "On middle button click on tray icon :"
-msgstr ""
-"Comportamiendo de click en el boton central sobre el icono de la bandeja."
+msgstr "Kliknutím středním tlačítkem na ikonu v hlavním panelu :"
 
 #: ../data/glade/interface-prefs.glade.h:3
 msgid "Show tabs"
-msgstr "Mostrar pestañas"
+msgstr "Zobrazit záložky"
 
 #: ../data/glade/interface-prefs.glade.h:4
 msgid "Tabs"
 msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:5
-#, fuzzy
 msgid "Tray icon"
-msgstr "Icono de la bandeja"
+msgstr "Ikona v panelu na ploše"
 
 #: ../data/glade/interface-prefs.glade.h:6
 msgid "Window"
 msgstr ""
 
 #: ../data/glade/lyrics-prefs.glade.h:1
-#, fuzzy
 msgid "Lyrics Sources"
-msgstr "Carátulas"
+msgstr "Zdroje textů k písním"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 msgid "Title :"
-msgstr "Título :"
+msgstr "Titul:"
 
 #: ../data/glade/proxy-prefs.glade.h:1
 #: ../src/shell/ario-shell-preferences.c:195
@@ -185,83 +175,83 @@ msgstr ""
 
 #: ../data/glade/proxy-prefs.glade.h:2
 msgid "Proxy Address :"
-msgstr "Dirección del proxy :"
+msgstr "Adresa proxy :"
 
 #: ../data/glade/proxy-prefs.glade.h:3
 msgid "Proxy Port :"
-msgstr "Puerto del proxy :"
+msgstr "Proxy port :"
 
 #: ../data/glade/proxy-prefs.glade.h:4
 msgid "Use a proxy"
-msgstr "Tiempo de espera para conectase a mpd"
+msgstr "Použít proxy"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
-msgstr "Salida de audio"
+msgstr "Audio výstupy"
 
 #: ../data/glade/server-prefs.glade.h:2
 msgid "Crossfade"
-msgstr ""
+msgstr "Prolínání"
 
 #: ../data/glade/server-prefs.glade.h:3
 msgid "Database"
-msgstr "Base de datos"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:4
 msgid "Last updated:"
-msgstr "Última actualización:"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:5
 msgid "_Update"
-msgstr "_Actualizar"
+msgstr "_Aktualizace"
 
 #: ../data/glade/server-prefs.glade.h:6
 msgid "enable crossfade"
-msgstr ""
+msgstr "Zapnout prolínání"
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "fade time (s):"
-msgstr "Tiempo de desvanecimiento:"
+msgstr "čas prolínání"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
 #: ../src/ario-util.c:47 ../src/ario-util.c:69
 #, c-format
 msgid "n/a"
-msgstr "n/d"
+msgstr ""
 
 #: ../data/glade/similar-artists.glade.h:1
 #, fuzzy
 msgid "Add all to playlist"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Přidat do playlistu"
 
 #: ../data/glade/similar-artists.glade.h:2
 #, fuzzy
 msgid "Add to playlist"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Přidat do playlistu"
 
 #: ../data/glade/similar-artists.glade.h:3
 msgid "Find on Last.fm"
-msgstr ""
+msgstr "Najdi na Last.fm"
 
 #: ../data/glade/stats-prefs.glade.h:1
 msgid "Database play time :"
-msgstr ""
+msgstr "Celkový čas databáze :"
 
 #: ../data/glade/stats-prefs.glade.h:2
 msgid "Number of albums :"
-msgstr "Numero de albums:"
+msgstr "Počet alb :"
 
 #: ../data/glade/stats-prefs.glade.h:3
 msgid "Number of artists :"
-msgstr "Numero de artistas :"
+msgstr "Počet interpretů :"
 
 #: ../data/glade/stats-prefs.glade.h:4
 msgid "Number of songs :"
-msgstr "Numero de canciones :"
+msgstr "Počet skladeb :"
 
 #: ../data/glade/stats-prefs.glade.h:5
 msgid "Play time :"
-msgstr ""
+msgstr "Doba hraní :"
 
 #: ../data/glade/stats-prefs.glade.h:6
 #: ../src/shell/ario-shell-preferences.c:200
@@ -274,81 +264,80 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:3
 msgid "Comment :"
-msgstr "Comentario :"
+msgstr "Komentář :"
 
 #: ../data/glade/song-infos.glade.h:4
 msgid "Composer :"
-msgstr "Compositor :"
+msgstr "Skladatel :"
 
 #: ../data/glade/song-infos.glade.h:5
 msgid "Date :"
-msgstr "Fecha :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:6
 msgid "Disc :"
-msgstr "Disco :"
+msgstr "Disk :"
 
 #: ../data/glade/song-infos.glade.h:7
 msgid "Filename :"
-msgstr "Nomre de archivo :"
+msgstr "Název souboru :"
 
 #: ../data/glade/song-infos.glade.h:8
 msgid "Genre :"
-msgstr "Genero :"
+msgstr "Žánr :"
 
 #: ../data/glade/song-infos.glade.h:9
 msgid "Length :"
-msgstr "Duracion :"
+msgstr "Délka :"
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
-msgstr ""
+msgstr "Umělec :"
 
 #: ../data/glade/song-infos.glade.h:11
 msgid "Song"
-msgstr "Canción"
+msgstr "Skladba :"
 
 #: ../data/glade/song-infos.glade.h:13
 msgid "Track :"
-msgstr "Pista :"
+msgstr "Stopa :"
 
 #: ../src/ario-mpd.c:651
-#, fuzzy
 msgid "Connecting to MPD server..."
-msgstr "Conexión"
+msgstr "Připojuji k MPD serveru . . ."
 
 #: ../src/ario-mpd.c:676
 msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
+msgstr "Nemohu se připojit k MPD. Ověřte vlastnosti připojení."
 
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1259
 msgid "Unknown"
-msgstr "Desconocido"
+msgstr "Neznámá"
 
 #: ../src/ario-util.c:80
 msgid "seconds"
-msgstr "segundos"
+msgstr ""
 
 #: ../src/ario-util.c:83
 msgid "minutes"
-msgstr "minutos"
+msgstr ""
 
 #: ../src/ario-util.c:91
 msgid "hours"
-msgstr "horas"
+msgstr "hodin"
 
 #: ../src/ario-util.c:99
 msgid "days"
-msgstr "días"
+msgstr ""
 
 #: ../src/covers/ario-cover.c:159
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "La carátula ya existe. ¿Desea reemplazarla?"
+msgstr "Obrázek alba již existuje. Chcete ho přepsat?"
 
 #: ../src/covers/ario-cover-local.c:95
 msgid "Music Directory"
-msgstr ""
+msgstr "Adresář hudby"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -359,40 +348,39 @@ msgstr ""
 #: ../src/preferences/ario-lyrics-preferences.c:145
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
 msgid "_About"
-msgstr "_Acerca de"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:518
-#, fuzzy
 msgid "C_onfigure"
-msgstr "C_onfigurar"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:527
 msgid "A_ctivate"
-msgstr "A_ctivar"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:538
 msgid "Ac_tivate All"
-msgstr "Ac_tivar todos"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:543
 msgid "_Deactivate All"
-msgstr "_Desactivar todos"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
-msgstr "Complementos activos"
+msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
-msgstr "Perfil"
+msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:604
 msgid "Server autodetection"
-msgstr "detección automática de servidor"
+msgstr "Automatická detekce serveru"
 
 #: ../src/preferences/ario-connection-preferences.c:615
 msgid ""
@@ -407,40 +395,40 @@ msgstr ""
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:633
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
-msgstr "Anfitrión"
+msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:641
 #: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
-msgstr "Puerto"
+msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
-msgstr "Debe seleccionar un servidor"
+msgstr "Musíte vybrat server."
 
 #: ../src/preferences/ario-connection-preferences.c:750
 msgid "New Profile"
-msgstr "Nuevo perfil"
+msgstr ""
 
 #: ../src/preferences/ario-interface-preferences.c:46
 msgid "Play/Pause"
-msgstr "Reproducir/Pausa"
+msgstr ""
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:47
 #: ../src/widgets/ario-header.c:253
 msgid "Play next song"
-msgstr "Reproducir la canción siguiente"
+msgstr ""
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-interface-preferences.c:48
 msgid "Do nothing"
-msgstr "No hacer nada"
+msgstr ""
 
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
@@ -450,13 +438,13 @@ msgstr "No hacer nada"
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
 msgid "Not connected"
-msgstr "No conectado"
+msgstr ""
 
 #: ../src/preferences/ario-server-preferences.c:318
 #: ../src/preferences/ario-server-preferences.c:406
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
-msgstr "Actualizando…"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:142 ../src/sources/ario-browser.c:145
 #: ../src/sources/ario-browser.c:148 ../src/sources/ario-search.c:100
@@ -466,7 +454,7 @@ msgstr "Actualizando…"
 #: ../plugins/filesystem/ario-filesystem.c:117
 #: ../plugins/radios/ario-radio.c:113
 msgid "_Add to playlist"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Přidat do playlistu"
 
 #: ../src/sources/ario-browser.c:152 ../src/sources/ario-browser.c:155
 #: ../src/sources/ario-browser.c:158 ../src/sources/ario-search.c:103
@@ -477,7 +465,7 @@ msgstr "_Añadir a la lista de reproducción"
 #: ../plugins/radios/ario-radio.c:116
 #, fuzzy
 msgid "Add and _play"
-msgstr "_Añadir a la lista de reproducción"
+msgstr "_Přidat do playlistu"
 
 #: ../src/sources/ario-browser.c:162 ../src/sources/ario-browser.c:165
 #: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
@@ -485,65 +473,60 @@ msgstr "_Añadir a la lista de reproducción"
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
-msgstr "_Propiedades"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:169 ../src/sources/ario-browser.c:176
-#, fuzzy
 msgid "Get the covers"
-msgstr "_Borrar las carátulas"
+msgstr "Získat obrázky alb"
 
 #: ../src/sources/ario-browser.c:172 ../src/sources/ario-browser.c:179
 msgid "_Delete the covers"
-msgstr "_Borrar las carátulas"
+msgstr "_Smazat obrázky alb"
 
 #: ../src/sources/ario-browser.c:257
 msgid "Library"
-msgstr "Biblioteca"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:336 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:404
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:271
 msgid "Artist"
-msgstr "Artista"
+msgstr ""
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../src/sources/ario-browser.c:393 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:286
 msgid "Album"
-msgstr "Álbum"
+msgstr ""
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-browser.c:403
 msgid "Cover"
-msgstr "Carátula"
+msgstr ""
 
 #. MPD_TAG_ITEM_TITLE
 #: ../src/sources/ario-browser.c:473 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
 msgid "Track"
-msgstr "Pista"
+msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../src/sources/ario-browser.c:480 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:256
 msgid "Title"
-msgstr "Título"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:1478
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
-msgstr ""
-"¿Estás seguro de que quieres eliminar todas las carátulas de los artistas "
-"seleccionados?"
+msgstr "Opravdu chcete smazat všechny obaly alb vybraného umělce?"
 
 #: ../src/sources/ario-browser.c:1529
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
-msgstr ""
-"¿Estás seguro de que quieres eliminar todas las carátulas de los álbumes "
-"seleccionados?"
+msgstr "Opravdu chcete smazat všechny obaly vybraných alb?"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
@@ -555,69 +538,68 @@ msgstr ""
 #. MPD_TAG_ITEM_DISC
 #: ../src/sources/ario-search.c:54
 msgid "Filename"
-msgstr "Nombre de archivo"
+msgstr ""
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/sources/ario-search.c:55
 msgid "Any"
-msgstr "Cualquiera"
+msgstr ""
 
 #: ../src/sources/ario-search.c:250
 msgid "Add a search criteria"
-msgstr "Añadir un criterio de búsqueda"
+msgstr "Přidat kritéria vyhledávání"
 
 #: ../src/sources/ario-search.c:257
 msgid "Search songs in the library"
-msgstr "Buscar canciones en la biblioteca"
+msgstr "Vyhledat skladby v knihovně"
 
 #: ../src/sources/ario-search.c:460
 msgid "Remove a search criteria"
-msgstr "Eliminar un criterio de búsqueda"
+msgstr "Smazat vyhledávaná kritéria"
 
 #: ../src/sources/ario-storedplaylists.c:109
 msgid "_Delete"
-msgstr "_Eliminar"
+msgstr ""
 
 #: ../src/sources/ario-storedplaylists.c:186
 msgid "Playlists"
-msgstr "Lista de reproducción"
+msgstr ""
 
 #: ../src/sources/ario-storedplaylists.c:264
 msgid "Playlist"
-msgstr "Lista de reproducción"
+msgstr ""
 
 #: ../src/sources/ario-storedplaylists.c:645
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr ""
-"Esta seguro que quiere borrar todas las listas de reproducción seleccionadas?"
+msgstr "Opravdu chcete odstranit všechny zvolené seznamy skladeb ?"
 
 #: ../src/shell/ario-shell.c:141
 msgid "_File"
-msgstr "_Fichero"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:142
 msgid "_Edit"
-msgstr "_Editar"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:143
 msgid "_View"
-msgstr "_Vista"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:144
 msgid "_Tool"
-msgstr "Herramien_ta"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:145
 msgid "_Help"
-msgstr "A_yuda"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:147
 msgid "_Save Playlist"
-msgstr "Guardar li_sta de reproducción"
+msgstr "_Uložit seznam skladeb"
 
 #: ../src/shell/ario-shell.c:156
 msgid "_Quit"
-msgstr "_Salir"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "Plu_gins"
@@ -625,28 +607,27 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:162
 msgid "Prefere_nces"
-msgstr "Prefere_ncias"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Change current album cover"
-msgstr "_Cambiar la cubierta de album actual"
+msgstr "_Změnit aktuální obal alba"
 
 #: ../src/shell/ario-shell.c:168
-#, fuzzy
 msgid "Download album _covers"
-msgstr "Descargar cubiertas_album"
+msgstr "Stáhnout _obaly alb"
 
 #: ../src/shell/ario-shell.c:171
 msgid "Find similar artists"
-msgstr ""
+msgstr "Najít podobné autory"
 
 #: ../src/shell/ario-shell.c:174
 msgid "Show _lyrics"
-msgstr "Mostrar _letras"
+msgstr "Ukázat _texty skladeb"
 
 #: ../src/shell/ario-shell.c:180
 msgid "_Translate this application..."
-msgstr "_Traducir esta aplicación..."
+msgstr "_Přeložit tuto aplikaci..."
 
 #: ../src/shell/ario-shell.c:188
 msgid "S_tatusbar"
@@ -654,40 +635,25 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:637
 msgid "GTK client for MPD"
-msgstr "Cliente GTK para MPD"
+msgstr "GTK klient pro MPD"
 
 #: ../src/shell/ario-shell.c:638
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol"
+"  Konki https://launchpad.net/~pavel-konkol"
 
 #: ../src/shell/ario-shell.c:910
-#, fuzzy
 msgid "Configure Plugins"
-msgstr "Configurar extensiones"
+msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:277
 msgid "Music Player Cover Download"
-msgstr "Descargar el reproductor de música de carátulas"
+msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:419
 msgid "Download Finished!"
-msgstr "Bajada terminada"
+msgstr "Stahování dokončeno!"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:422
@@ -697,53 +663,49 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
-"%i carátulas encontradas\n"
-"%i carátulas no encontradas\n"
-"%i carátulas ya existen"
 
 #: ../src/shell/ario-shell-coverselect.c:234
 msgid "Cover Download"
-msgstr "Descargar carátula"
+msgstr "Stažení obalu alba"
 
 #: ../src/shell/ario-shell-coverselect.c:518
 msgid "Error reading file"
-msgstr "Error al leer el archivo"
+msgstr "Chyba při čtení souboru"
 
 #: ../src/shell/ario-shell-coverselect.c:541
 msgid "Error saving file"
-msgstr "Error guardando el archivo"
+msgstr ""
 
 #: ../src/shell/ario-shell-lyrics.c:53
 #: ../src/shell/ario-shell-preferences.c:185
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
-msgstr "Letras"
+msgstr ""
 
 #: ../src/shell/ario-shell-lyricsselect.c:196
 msgid "Lyrics Download"
-msgstr "Descarga de letras"
+msgstr "Stažení textů skladeb"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
-#, fuzzy
 msgid "Source"
-msgstr "Orden de las fuentes."
+msgstr ""
 
 #: ../src/shell/ario-shell-preferences.c:140
 msgid "Ario Preferences"
-msgstr "Preferencias Ario"
+msgstr "Vlastnosti Aria"
 
 #: ../src/shell/ario-shell-preferences.c:175
 msgid "Server"
-msgstr "Servidor"
+msgstr ""
 
 #: ../src/shell/ario-shell-preferences.c:190
 msgid "Interface"
-msgstr "Interfaz"
+msgstr ""
 
 #: ../src/shell/ario-shell-similarartists.c:332
-#, fuzzy, c-format
+#, c-format
 msgid "%d songs"
-msgstr "Canciones"
+msgstr ""
 
 #: ../src/shell/ario-shell-similarartists.c:393
 msgid "Image"
@@ -752,140 +714,138 @@ msgstr ""
 #: ../src/shell/ario-shell-similarartists.c:411
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
-msgstr "Canciones"
+msgstr ""
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
 #: ../src/shell/ario-shell-songinfos.c:412
 msgid "Song Properties"
-msgstr "Propiedades de la canción"
+msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:208
 msgid "The following configuration will be used:"
-msgstr "La siguiente configuracion sera usada:"
+msgstr "Následující konfigurace bude použita:"
 
 #: ../src/widgets/ario-firstlaunch.c:273
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
-"Es la primera vez que usa Ario.\n"
-"El asistente le ayudara a configurarlo."
+"Toto je poprvé, co spouštíte Ario\n"
+"Tento asistent vám pomůže s konfigurací"
 
 #: ../src/widgets/ario-firstlaunch.c:278
 msgid "Welcome to Ario"
-msgstr "Bienvenido a Ario"
+msgstr "Vítejte v Ariu"
 
 #: ../src/widgets/ario-firstlaunch.c:341
 msgid "Configuration"
-msgstr "Configuración"
+msgstr "Konfigurace"
 
 #: ../src/widgets/ario-firstlaunch.c:353
 msgid "Confirmation"
-msgstr "Confirmación"
+msgstr ""
 
 #: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:39
 #: ../src/widgets/ario-status-icon.c:33
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr "<i>desde</i> %s <i>por</i> %s"
+msgstr "<i>z</i> %s <i>od</i> %s"
 
 #: ../src/widgets/ario-header.c:211
 msgid "Play previous song"
-msgstr "Reproducir la canción anterior"
+msgstr ""
 
 #: ../src/widgets/ario-header.c:231
 msgid "Play/Pause the music"
-msgstr "Reproducir/Pausar la música"
+msgstr "Přehrát/Zastavit hudbu"
 
 #: ../src/widgets/ario-header.c:242
 msgid "Stop the music"
-msgstr "Parar la música"
+msgstr "Zastavit hudbu"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
-msgstr " de "
+msgstr ""
 
 #: ../src/widgets/ario-header.c:342
-#, fuzzy
 msgid "Toggle random on/off"
-msgstr "Cambiar aleatorio on/off"
+msgstr "vlastní přepínač on/off"
 
 #: ../src/widgets/ario-header.c:353
-#, fuzzy
 msgid "Toggle repeat on/off"
-msgstr "Cambiar repetir on/off"
+msgstr "Přepínač opakování on/off"
 
 #: ../src/widgets/ario-header.c:463
 msgid "Change the music volume"
-msgstr "Cambiar el volumen de la música"
+msgstr ""
 
 #: ../src/widgets/ario-lyrics-editor.c:299
 msgid "Downloading lyrics..."
-msgstr "Descargando letras..."
+msgstr "Stahuji texty ..."
 
 #: ../src/widgets/ario-lyrics-editor.c:316
 msgid "Lyrics not found"
-msgstr "Letras no encontradas"
+msgstr "Texty nejsou dostupné"
 
 #: ../src/widgets/ario-playlist.c:117
 msgid "_Clear"
-msgstr "_Limpiar"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:120
 msgid "_Remove"
-msgstr "_Eliminar"
+msgstr "_Smazat"
 
 #: ../src/widgets/ario-playlist.c:123
 msgid "_Save"
-msgstr "_Guardar"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:129
 msgid "_Go to playing song"
-msgstr "_Ir la la cancion reproduciendose"
+msgstr "_ Jít na přehrávanou skladbu"
 
 #: ../src/widgets/ario-playlist.c:310
 msgid "Duration"
-msgstr "Duración"
+msgstr ""
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1249
 msgid "Save playlist"
-msgstr "Guardar lista de reproducción"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:1259
 msgid "Playlist name :"
-msgstr "Nombre de lista de reprodución:"
+msgstr "Název seznamu stop :"
 
 #: ../src/widgets/ario-playlist.c:1284
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
+msgstr "Seznam stop již existuje. Chcete ho přepsat ?"
 
 #: ../src/widgets/ario-tray-icon.c:38 ../src/widgets/ario-status-icon.c:32
 msgid "Not playing"
-msgstr "No se está reproduciendo nada"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:128 ../src/widgets/ario-status-icon.c:93
 msgid "_Play"
-msgstr "_Reproducir"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:131 ../src/widgets/ario-status-icon.c:96
 msgid "_Pause"
-msgstr "_Pausar"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:134 ../src/widgets/ario-status-icon.c:99
 msgid "_Stop"
-msgstr "_Detener"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:137 ../src/widgets/ario-status-icon.c:102
 msgid "_Next"
-msgstr "_Siguiente"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:140 ../src/widgets/ario-status-icon.c:105
 msgid "P_revious"
-msgstr "_Anterior"
+msgstr ""
 
 #: ../src/widgets/ario-status-icon.c:394
 #, c-format
@@ -894,9 +854,6 @@ msgid ""
 "Album: %s\n"
 "Title: %s"
 msgstr ""
-"Artista: %s\n"
-"Album: %s\n"
-"Título: %s"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1203
@@ -933,9 +890,8 @@ msgstr ""
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1333
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
-#, fuzzy
 msgid "Never"
-msgstr "Servidor"
+msgstr ""
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
 msgid "OK"
@@ -978,9 +934,8 @@ msgid "Track submission failed too many times"
 msgstr ""
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1435
-#, fuzzy
 msgid "Audioscrobbler preferences"
-msgstr "Preferencias Ario"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
 msgid "Check Last.fm server status at"
@@ -999,9 +954,8 @@ msgid "Last submission time:"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
-#, fuzzy
 msgid "Last.fm Profile"
-msgstr "Perfil"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
@@ -1025,7 +979,7 @@ msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr ""
+msgstr "Zaslat informace o skladbě na last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:189
 msgid "File System"
@@ -1037,76 +991,75 @@ msgstr ""
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr ""
+msgstr "Prohlížeč souborů"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr ""
+msgstr "Prohlížeč systému souborů"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr ""
+msgstr "Přidat podporu multimediálních kláves"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr ""
+msgstr "Multimediální klávesy"
 
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add a _new radio"
-msgstr "Añadir una _nueva radio"
+msgstr "Přidat _nové rádio"
 
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Delete this radios"
-msgstr "_Borrar estas radios"
+msgstr "_ Smazat tato rádia"
 
 #: ../plugins/radios/ario-radio.c:189
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr "Radios web"
+msgstr "Webová rádia"
 
 #: ../plugins/radios/ario-radio.c:264
 msgid "Internet Radios"
-msgstr "Radios en Internet"
+msgstr "Internetová rádia"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:888
 msgid "Add a WebRadio"
-msgstr "Añadir una radio web"
+msgstr "Přidat Webové rádio"
 
 #: ../plugins/radios/ario-radio.c:899 ../plugins/radios/ario-radio.c:1098
 msgid "URL :"
-msgstr "URL :"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:953 ../plugins/radios/ario-radio.c:1153
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr ""
-"Parámetros incorrectos. Debe especificar el nombre y la URL de la radio."
+msgstr "Špatné parametry. Musíte zadat jméno a URL pro rádio."
 
 #: ../plugins/radios/ario-radio.c:1015
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr "¿Estás seguro de que quieres eliminar todos los radios seleccionados?"
+msgstr "Opravdu chcete smazat všechna vybraná rádia?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1087
 msgid "Edit a WebRadio"
-msgstr "Editar una radio web"
+msgstr "Upravit webové rádio"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr "Escuchar radio por internet"
+msgstr "Poslechnout webrádia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
-msgstr "Buscar artista en Wikipedia"
+msgstr "Najít umělce na Wikipedii"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
-msgstr ""
+msgstr "Zásuvný modul Wikipedie - Konfigurace"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
-msgstr "Idioma de Wikipedia :"
+msgstr "Jazyk Wikipedie :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
@@ -1115,156 +1068,3 @@ msgstr ""
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr ""
-
-#~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
-#~ msgstr ""
-#~ "0 para 'reproducir/pausa', 1 para 'reproducir siguiente canción', 2 para "
-#~ "'hacer nada'."
-
-#~ msgid "0 for the library, 1 for the radios, etc..."
-#~ msgstr "0 para la biblioteca, 1 para las radios, etc..."
-
-#~ msgid "Define if Ario must autoconnect to mpd or not"
-#~ msgstr "Definir si Ario debe conectarse automáticamente  a mpd o no"
-
-#~ msgid "Define if Ario must use a proxy for remote connections"
-#~ msgstr "Definir si Ario debe usar proxu para conexiones remotas"
-
-#~ msgid "Define if the view tabs are shown."
-#~ msgstr "Definir si se muestran las pestañas"
-
-#~ msgid "Define the address of the proxy"
-#~ msgstr "Definir la dirección del proxy"
-
-#~ msgid "Define the behavior of a double click on the tray icon."
-#~ msgstr "Definir el comportamiento del doble clic en la bandeja de iconos."
-
-#~ msgid "Define the port of the proxy"
-#~ msgstr "Definir el puerto del proxy"
-
-#~ msgid "Define the size of the album column."
-#~ msgstr "Definir el tamaño de la columna de álbum."
-
-#~ msgid "Define the size of the artist column."
-#~ msgstr "Definir el tamaño de la columna de artista."
-
-#~ msgid "Define the size of the title column."
-#~ msgstr "Definir el tamaño de la columna de título"
-
-#~ msgid "Define the size of the track column."
-#~ msgstr "Definir el tamaño de la columna de pista"
-
-#~ msgid "Define the source used in Ario"
-#~ msgstr "Definir la fuente usada en Ario"
-
-#~ msgid "Hide the covers in the albums treeview"
-#~ msgstr "Ocultar las carátulas en la vista de árbol de los álbumes"
-
-#~ msgid "Host to connect to"
-#~ msgstr "Anfitrión donde conectar"
-
-#~ msgid "If true, the main window is maximized."
-#~ msgstr "Si es cierto, la ventana principal se maximiza"
-
-#~ msgid "Main window height"
-#~ msgstr "Altura de la ventana principal"
-
-#~ msgid "Main window maximization state"
-#~ msgstr "Estado de maximización de la ventana principal"
-
-#~ msgid "Main window width"
-#~ msgstr "Anchura de la ventana principal"
-
-#~ msgid "Port to connect to"
-#~ msgstr "Puerto a conectar"
-
-#~ msgid "Position of main window pane"
-#~ msgstr "Posición del panel de la ventana principal"
-
-#~ msgid "Position of playlists pane"
-#~ msgstr "Posición del panel de la lista de reproducción"
-
-#~ msgid "The amazon country to use to get the covers"
-#~ msgstr "País de amaxon a usar paara conseguir las carátulas"
-
-#~ msgid "The password to connect to mpd"
-#~ msgstr "Contraseña para conectarse a mpd"
-
-#~ msgid "The timeout for the connection to mpd"
-#~ msgstr "Tiempo de espera para conectase a mpd"
-
-#~ msgid "True if the initial assistant has already been run."
-#~ msgstr "Verdadero si el asistente inicial ya está corriendo."
-
-#~ msgid "When enabled, ario hide the covers in the albums treeview"
-#~ msgstr ""
-#~ "Cuando se activa, ario oculta las carátulas en la vista de árbol de los "
-#~ "álbumes"
-
-#~ msgid ""
-#~ "You can search for your cover on amazon.com .fr .de .uk or .ca to have "
-#~ "more accurate results"
-#~ msgstr ""
-#~ "Puede buscar su carátula en amazon.com .fr .de .uk or .ca para tener "
-#~ "resultados más ajustados"
-
-#~ msgid "Amazon search"
-#~ msgstr "Búsqueda en Amazon"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Carátulas grandes (más lento)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Carátula media"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Carátula pequeña (Rápido)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Conseguir carátulas en _Amazon"
-
-#~ msgid "Select a file"
-#~ msgstr "Seleccione un archivo"
-
-#~ msgid "Ordered list of sources."
-#~ msgstr "List ordenada de las fuentes."
-
-#, fuzzy
-#~ msgid "Position of filesystem pane"
-#~ msgstr "Posición del panel de la lista de reproducción"
-
-#, fuzzy
-#~ msgid "Define the path to the music"
-#~ msgstr "Definir el puerto del proxy"
-
-#, fuzzy
-#~ msgid "Active covers sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Active lyrics sources"
-#~ msgstr "Tamaño de carátula"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "Carátulas"
-
-#, fuzzy
-#~ msgid "Password : "
-#~ msgstr "Contraseña : "
-
-#, fuzzy
-#~ msgid "_Password:"
-#~ msgstr "Contraseña :"
-
-#, fuzzy
-#~ msgid "Covers providers"
-#~ msgstr "Tamaño de carátula"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Tamaño de carátula"
