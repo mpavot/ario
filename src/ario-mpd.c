@@ -376,7 +376,8 @@ ario_mpd_finalize (GObject *object)
         mpd = ARIO_MPD (object);
         g_return_if_fail (mpd->priv != NULL);
 
-        ario_mpd_disconnect (mpd);
+        if (mpd->priv->connection)
+                mpd_closeConnection (mpd->priv->connection);
 
         if (mpd->priv->ario_mpd_song)
                 ario_mpd_free_song (mpd->priv->ario_mpd_song);
