@@ -695,6 +695,8 @@ ario_mpd_disconnect (ArioMpd *mpd)
 
         mpd_closeConnection (mpd->priv->connection);
         mpd->priv->connection = NULL;
+
+        ario_mpd_update_status (mpd);
 }
 
 void
