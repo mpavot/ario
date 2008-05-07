@@ -18,6 +18,9 @@
  */
 
 #include "ario-mpd.h"
+#include "glib/gslist.h"
+#include "gdk/gdkpixbuf.h"
+
 struct curl_slist;
 
 char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
@@ -63,3 +66,5 @@ int                     ario_util_max                        (const int a,
 char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;
 
 gchar *                 ario_util_md5                        (const char *string) G_GNUC_MALLOC;
+
+GdkPixbuf *             ario_util_get_dnd_pixbuf             (GSList *albums) G_GNUC_MALLOC;

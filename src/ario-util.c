@@ -28,6 +28,7 @@
 #include "lib/ario-conf.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "covers/ario-cover.h"
 #include "preferences/ario-preferences.h"
 #include <gcrypt.h>
 #ifdef WIN32
@@ -507,4 +508,67 @@ ario_util_md5 (const char *string)
         }
 
         return (g_strdup (md5_response));
+}
+
+#define DRAG_SIZE 70
+#define MAX_COVERS_IN_DRAG 3
+#define DRAG_COVER_STEP 0.15
+
+GdkPixbuf *
+ario_util_get_dnd_pixbuf (GSList *albums)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *tmp;
+        GSList *covers = NULL;
+        gchar *cover_path;
+        ArioMpdAlbum *ario_mpd_album;
+        int len = 0;
+        GdkPixbuf *pixbuf, *cover;
+        int i = 0;
+        gdouble scale;
+
+        if (!albums)
+                return NULL;
+
+        for (tmp = albums; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
+                ario_mpd_album = tmp->data;
+
+                cover_path = ario_cover_make_ario_cover_path (ario_mpd_album->artist, ario_mpd_album->album, SMALL_COVER);
+                if (ario_util_uri_exists (cover_path)) {
+                        covers = g_slist_append (covers, cover_path);
+                        ++len;
+                }
+        }
+
+        if (len == 0) {
+                pixbuf = NULL;
+        } else if (len == 1) {
+                pixbuf = gdk_pixbuf_new_from_file_at_size (covers->data, DRAG_SIZE, DRAG_SIZE, NULL);
+        } else {
+                scale = (1 - DRAG_COVER_STEP*(len-1));
+
+                pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, DRAG_SIZE, DRAG_SIZE);
+                gdk_pixbuf_fill (pixbuf, 0);
+
+                for (tmp = covers; tmp; tmp = g_slist_next (tmp)) {
+                        cover = gdk_pixbuf_new_from_file_at_size (tmp->data, (int) (scale*DRAG_SIZE), (int) (scale*DRAG_SIZE), NULL);
+                        if (!cover)
+                                continue;
+
+                        gdk_pixbuf_composite (cover, pixbuf,
+                                              (int) (i*DRAG_COVER_STEP*DRAG_SIZE), (int) (i*DRAG_COVER_STEP*DRAG_SIZE),
+                                              (int) (scale*DRAG_SIZE), (int) (scale*DRAG_SIZE),
+                                              (int) (i*DRAG_COVER_STEP*DRAG_SIZE), (int) (i*DRAG_COVER_STEP*DRAG_SIZE),
+                                              1.0, 1.0,
+                                              GDK_INTERP_HYPER,
+                                              255);
+                        g_object_unref (cover);
+                        ++i;
+                }
+        }
+
+        g_slist_foreach (covers, (GFunc) g_free, NULL);
+        g_slist_free (covers);
+
+        return pixbuf;
 }
