@@ -103,6 +103,12 @@ static void ario_browser_covertree_visible_changed_cb (guint notification_id,
                                                        ArioBrowser *browser);
 static void ario_browser_cover_changed_cb (ArioCoverHandler *cover_handler,
                                            ArioBrowser *browser);
+static void ario_browser_artists_drag_begin_cb (GtkWidget *widget,
+                                                GdkDragContext *context,
+                                                ArioBrowser *browser);
+static void ario_browser_albums_drag_begin_cb (GtkWidget *widget,
+                                               GdkDragContext *context,
+                                               ArioBrowser *browser);
 
 struct ArioBrowserPrivate
 {        
@@ -356,6 +362,9 @@ ario_browser_init (ArioBrowser *browser)
         g_signal_connect (GTK_TREE_VIEW (browser->priv->artists),
                           "drag_data_get", 
                           G_CALLBACK (ario_browser_artists_drag_data_get_cb), browser);
+        g_signal_connect (GTK_TREE_VIEW (browser->priv->artists),
+                          "drag_begin", 
+                          G_CALLBACK (ario_browser_artists_drag_begin_cb), browser);
         g_signal_connect_object (G_OBJECT (browser->priv->artists),
                                  "button_press_event",
                                  G_CALLBACK (ario_browser_button_press_cb),
@@ -430,6 +439,9 @@ ario_browser_init (ArioBrowser *browser)
         g_signal_connect (GTK_TREE_VIEW (browser->priv->albums),
                           "drag_data_get", 
                           G_CALLBACK (ario_browser_albums_drag_data_get_cb), browser);
+        g_signal_connect (GTK_TREE_VIEW (browser->priv->albums),
+                          "drag_begin", 
+                          G_CALLBACK (ario_browser_albums_drag_begin_cb), browser);
         g_signal_connect_object (G_OBJECT (browser->priv->albums),
                                  "button_press_event",
                                  G_CALLBACK (ario_browser_button_press_cb),
@@ -899,9 +911,9 @@ ario_browser_albums_drag_foreach (GtkTreeModel *model,
 }
 
 static void
-ario_browser_artists_drag_data_get_cb (GtkWidget * widget,
-                                       GdkDragContext * context,
-                                       GtkSelectionData * selection_data,
+ario_browser_artists_drag_data_get_cb (GtkWidget *widget,
+                                       GdkDragContext *context,
+                                       GtkSelectionData *selection_data,
                                        guint info, guint time, gpointer data)
 {
         ARIO_LOG_FUNCTION_START
@@ -958,9 +970,9 @@ ario_browser_songs_drag_foreach (GtkTreeModel *model,
 }
 
 static void
-ario_browser_albums_drag_data_get_cb (GtkWidget * widget,
-                                      GdkDragContext * context,
-                                      GtkSelectionData * selection_data,
+ario_browser_albums_drag_data_get_cb (GtkWidget *widget,
+                                      GdkDragContext *context,
+                                      GtkSelectionData *selection_data,
                                       guint info, guint time, gpointer data)
 {
         ARIO_LOG_FUNCTION_START
@@ -985,9 +997,9 @@ ario_browser_albums_drag_data_get_cb (GtkWidget * widget,
 }
 
 static void
-ario_browser_songs_drag_data_get_cb (GtkWidget * widget,
-                                     GdkDragContext * context,
-                                     GtkSelectionData * selection_data,
+ario_browser_songs_drag_data_get_cb (GtkWidget *widget,
+                                     GdkDragContext *context,
+                                     GtkSelectionData *selection_data,
                                      guint info, guint time, gpointer data)
 {
         ARIO_LOG_FUNCTION_START
@@ -1533,3 +1545,48 @@ ario_browser_covertree_visible_changed_cb (guint notification_id,
                                           !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         ario_browser_artists_selection_update (browser);
 }
+
+static
+void ario_browser_artists_drag_begin_cb (GtkWidget *widget,
+                                         GdkDragContext *context,
+                                         ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *albums = NULL;
+        GdkPixbuf *pixbuf;
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (browser->priv->albums_model),
+                                get_albums_foreach,
+                                &albums);
+
+        pixbuf = ario_util_get_dnd_pixbuf (albums);
+        if (pixbuf) {
+                gtk_drag_source_set_icon_pixbuf (widget, pixbuf);
+                g_object_unref (pixbuf);
+        } else {
+                gtk_drag_source_set_icon_stock (widget, GTK_STOCK_DND);
+        }
+}
+
+static
+void ario_browser_albums_drag_begin_cb (GtkWidget *widget,
+                                        GdkDragContext *context,
+                                        ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *albums = NULL;
+        GdkPixbuf *pixbuf;
+
+        gtk_tree_selection_selected_foreach (browser->priv->albums_selection,
+                                             get_selected_albums_foreach,
+                                                     &albums);
+
+        pixbuf = ario_util_get_dnd_pixbuf (albums);
+        if (pixbuf) {
+                gtk_drag_source_set_icon_pixbuf (widget, pixbuf);
+                g_object_unref (pixbuf);
+        } else {
+                gtk_drag_source_set_icon_stock (widget, GTK_STOCK_DND);
+        }
+}
+
