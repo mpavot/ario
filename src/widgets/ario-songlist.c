@@ -446,16 +446,16 @@ ario_songlist_button_press_cb (GtkWidget *widget,
         if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
                 return FALSE;
 
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                ario_songlist_add_in_playlist (songlist, FALSE);
-                return FALSE;
-        }
-
         if (event->button == 1) {
                 gdk_window_get_pointer (widget->window, &x, &y, &mods);
                 gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
 
                 if (bx >= 0 && by >= 0) {
+                        if (event->type == GDK_2BUTTON_PRESS) {
+                                ario_songlist_add_in_playlist (songlist, FALSE);
+                                return FALSE;
+                        }
+
                         songlist->priv->drag_start_x = x;
                         songlist->priv->drag_start_y = y;
                         songlist->priv->pressed = TRUE;
