@@ -1,13 +1,12 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,1.0-svn-$Revision$)
+m4_define(ario_version,1.0-svn)
 
 PACKAGE=Ario
-VERSION=1.0-svn-$Revision$
 
 AC_INIT(ario,ario_version)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE($PACKAGE,$VERSION)
+AM_INIT_AUTOMAKE($PACKAGE,ario_version)
 
 AC_PROG_CC
 AC_PROG_INSTALL

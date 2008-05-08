@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-05 21:41+0200\n"
+"POT-Creation-Date: 2008-05-08 17:33+0200\n"
 "PO-Revision-Date: 2008-04-29 19:35+0000\n"
 "Last-Translator: Christian Siegert <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -305,11 +305,11 @@ msgstr "Song"
 msgid "Track :"
 msgstr "Track :"
 
-#: ../src/ario-mpd.c:651
+#: ../src/ario-mpd.c:652
 msgid "Connecting to MPD server..."
 msgstr "Connecting to MPD server..."
 
-#: ../src/ario-mpd.c:676
+#: ../src/ario-mpd.c:677
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Impossible to connect to mpd. Check the connection options."
 
@@ -489,11 +489,11 @@ msgstr "Get the covers"
 msgid "_Delete the covers"
 msgstr "_Delete the covers"
 
-#: ../src/sources/ario-browser.c:257
+#: ../src/sources/ario-browser.c:258
 msgid "Library"
 msgstr "Library"
 
-#: ../src/sources/ario-browser.c:336 ../src/sources/ario-search.c:43
+#: ../src/sources/ario-browser.c:337 ../src/sources/ario-search.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:404
 #: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:271
@@ -501,36 +501,36 @@ msgid "Artist"
 msgstr "Artist"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:393 ../src/sources/ario-search.c:44
+#: ../src/sources/ario-browser.c:394 ../src/sources/ario-search.c:44
 #: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:286
 msgid "Album"
 msgstr "Album"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:403
+#: ../src/sources/ario-browser.c:404
 msgid "Cover"
 msgstr "Cover"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:473 ../src/sources/ario-search.c:46
+#: ../src/sources/ario-browser.c:475 ../src/sources/ario-search.c:46
 #: ../src/widgets/ario-playlist.c:266
 msgid "Track"
 msgstr "Track"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:480 ../src/sources/ario-search.c:45
+#: ../src/sources/ario-browser.c:482 ../src/sources/ario-search.c:45
 #: ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:256
 msgid "Title"
 msgstr "Title"
 
-#: ../src/sources/ario-browser.c:1478
+#: ../src/sources/ario-browser.c:1490
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 
-#: ../src/sources/ario-browser.c:1529
+#: ../src/sources/ario-browser.c:1541
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
