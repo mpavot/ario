@@ -705,7 +705,7 @@ ario_shell_cmd_cover_select (GtkAction *action,
 
         mpd_album.artist = ario_mpd_get_current_artist (shell->priv->mpd);
         mpd_album.album = ario_mpd_get_current_album (shell->priv->mpd);
-        mpd_album.path = (ario_mpd_get_current_song (shell->priv->mpd))->file;
+        mpd_album.path = g_path_get_dirname ((ario_mpd_get_current_song (shell->priv->mpd))->file);
 
         if (!mpd_album.album)
                 mpd_album.album = ARIO_MPD_UNKNOWN;
@@ -716,6 +716,7 @@ ario_shell_cmd_cover_select (GtkAction *action,
         coverselect = ario_shell_coverselect_new (&mpd_album);
         gtk_dialog_run (GTK_DIALOG (coverselect));
         gtk_widget_destroy (coverselect);
+        g_free (mpd_album.path);
 }
 
 static void
