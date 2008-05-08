@@ -1091,6 +1091,16 @@ ario_mpd_get_current_album (ArioMpd *mpd)
                 return NULL;
 }
 
+char *
+ario_mpd_get_current_song_path (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        if (mpd->priv->ario_mpd_song)
+                return mpd->priv->ario_mpd_song->file;
+        else
+                return NULL;
+}
+
 int
 ario_mpd_get_current_song_id (ArioMpd *mpd)
 {

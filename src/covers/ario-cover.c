@@ -112,7 +112,7 @@ ario_cover_size_is_valid (int size)
 {
         ARIO_LOG_FUNCTION_START
         /* return true if the cover isn't too big or too small (blank amazon image) */
-        return (size < 1024 * 1024 && size > 900);
+        return (size < 1024 * 1024 * 10 && size > 900);
 }
 
 void

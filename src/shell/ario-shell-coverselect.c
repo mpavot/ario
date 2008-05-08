@@ -32,6 +32,7 @@
 #include "preferences/ario-preferences.h"
 
 #define CURRENT_COVER_SIZE 130
+#define MAX_COVER_SIZE 300
 
 static void ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass);
 static void ario_shell_coverselect_init (ArioShellCoverselect *ario_shell_coverselect);
@@ -427,9 +428,10 @@ ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect
         GtkTreeIter iter;
         int i = 0;
         GSList *temp;
-        GdkPixbuf *pixbuf;
+        GdkPixbuf *pixbuf, *tmp_pixbuf;
         GtkTreePath *tree_path;
         GdkPixbufLoader *loader;
+        int height, width;
 
         gtk_list_store_clear (ario_shell_coverselect->priv->liststore);
 
@@ -445,6 +447,17 @@ ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect
                                              NULL)) {
                         gdk_pixbuf_loader_close (loader, NULL);
                         pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
+
+                        height = gdk_pixbuf_get_height (pixbuf);
+                        width = gdk_pixbuf_get_width (pixbuf);
+                        if (height > MAX_COVER_SIZE || width > MAX_COVER_SIZE) {
+                                tmp_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
+                                                                      MAX_COVER_SIZE,
+                                                                      height * MAX_COVER_SIZE / width,
+                                                                      GDK_INTERP_BILINEAR);
+                                g_object_unref (G_OBJECT (pixbuf));
+                                pixbuf = tmp_pixbuf;
+                        }
 
                         gtk_list_store_append(ario_shell_coverselect->priv->liststore, 
                                               &iter);
