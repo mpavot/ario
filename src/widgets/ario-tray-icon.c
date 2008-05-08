@@ -125,10 +125,10 @@ struct ArioTrayIconPrivate
 
 static GtkActionEntry ario_tray_icon_actions [] =
 {
-        { "ControlPlay", GTK_STOCK_MEDIA_PLAY, N_("_Play"), "<control>space",
+        { "ControlPlay", GTK_STOCK_MEDIA_PLAY, N_("_Play"), "<control>Up",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_play) },
-        { "ControlPause", GTK_STOCK_MEDIA_PAUSE, N_("_Pause"), "<control>space",
+        { "ControlPause", GTK_STOCK_MEDIA_PAUSE, N_("_Pause"), "<control>Down",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_pause) },
         { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), NULL,
