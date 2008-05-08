@@ -726,7 +726,7 @@ ario_header_image_press_cb (GtkWidget *widget,
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 mpd_album.artist = ario_mpd_get_current_artist (header->priv->mpd);
                 mpd_album.album = ario_mpd_get_current_album (header->priv->mpd);
-                mpd_album.path = (ario_mpd_get_current_song (header->priv->mpd))->file;
+                mpd_album.path = g_path_get_dirname ((ario_mpd_get_current_song (header->priv->mpd))->file);
 
                 if (!mpd_album.album)
                         mpd_album.album = ARIO_MPD_UNKNOWN;
@@ -737,6 +737,7 @@ ario_header_image_press_cb (GtkWidget *widget,
                 coverselect = ario_shell_coverselect_new (&mpd_album);
                 gtk_dialog_run (GTK_DIALOG (coverselect));
                 gtk_widget_destroy (coverselect);
+                g_free (mpd_album.path);
         }
 
         return FALSE;
