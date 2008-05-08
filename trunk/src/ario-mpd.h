@@ -134,6 +134,8 @@ char *                  ario_mpd_get_current_artist                     (ArioMpd
 
 char *                  ario_mpd_get_current_album                      (ArioMpd *mpd);
 
+char *                  ario_mpd_get_current_song_path                  (ArioMpd *mpd);
+
 int                     ario_mpd_get_current_song_id                    (ArioMpd *mpd);
 
 int                     ario_mpd_get_current_state                      (ArioMpd *mpd);
