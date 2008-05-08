@@ -194,6 +194,7 @@ enum
 enum
 {
         ALBUM_ALBUM_COLUMN,
+        ALBUM_TEXT_COLUMN,
         ALBUM_ARTIST_COLUMN,
         ALBUM_COVER_COLUMN,
         ALBUM_PATH_COLUMN,
@@ -392,7 +393,7 @@ ario_browser_init (ArioBrowser *browser)
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Album"),
                                                            renderer,
-                                                           "text", ALBUM_ALBUM_COLUMN,
+                                                           "text", ALBUM_TEXT_COLUMN,
                                                            NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_expand (column, TRUE);
@@ -413,6 +414,7 @@ ario_browser_init (ArioBrowser *browser)
                                           !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         /* Model */
         browser->priv->albums_model = gtk_list_store_new (ALBUM_N_COLUMN,
+                                                          G_TYPE_STRING,
                                                           G_TYPE_STRING,
                                                           G_TYPE_STRING,
                                                           GDK_TYPE_PIXBUF,
@@ -725,6 +727,8 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
         ArioMpdAlbum *ario_mpd_album;
         GtkTreeIter album_iter;
         gchar *cover_path;
+        gchar *album;
+        gchar *album_date;
         GdkPixbuf *cover;
 
         g_return_if_fail (IS_ARIO_BROWSER (browser));
@@ -739,6 +743,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
 
         for (temp = albums; temp; temp = g_slist_next (temp)) {
                 ario_mpd_album = temp->data;
+                album_date = NULL;
 
                 cover_path = ario_cover_make_ario_cover_path (ario_mpd_album->artist, ario_mpd_album->album, SMALL_COVER);
 
@@ -752,15 +757,23 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                         gdk_pixbuf_fill (cover, 0);
                 }
 
-                gtk_list_store_append (browser->priv->albums_model, &album_iter);
+                if (ario_mpd_album->date) {
+                        album_date = g_strdup_printf ("%s (%s)", ario_mpd_album->album, ario_mpd_album->date);
+                        album = album_date;
+                } else {
+                        album = ario_mpd_album->album;
+                }
 
+                gtk_list_store_append (browser->priv->albums_model, &album_iter);
                 gtk_list_store_set (browser->priv->albums_model, &album_iter,
                                     ALBUM_ALBUM_COLUMN, ario_mpd_album->album,
+                                    ALBUM_TEXT_COLUMN, album,
                                     ALBUM_ARTIST_COLUMN, ario_mpd_album->artist,
                                     ALBUM_COVER_COLUMN, cover,
                                     ALBUM_PATH_COLUMN, ario_mpd_album->path,
                                     -1);
                 g_object_unref (G_OBJECT (cover));
+                g_free (album_date);
         }
 
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
@@ -1204,7 +1217,7 @@ get_selected_albums_foreach (GtkTreeModel *model,
 
         ArioMpdAlbum *ario_mpd_album;
 
-        ario_mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
+        ario_mpd_album = (ArioMpdAlbum *) g_malloc0 (sizeof (ArioMpdAlbum));
         gtk_tree_model_get (model, iter,
                             ALBUM_ARTIST_COLUMN, &ario_mpd_album->artist,
                             ALBUM_ALBUM_COLUMN, &ario_mpd_album->album,
@@ -1352,7 +1365,6 @@ ario_browser_covers_update (GtkTreeModel *model,
         }
 
         gtk_list_store_set (browser->priv->albums_model, iter,
-                            ALBUM_ARTIST_COLUMN, artist, ALBUM_ALBUM_COLUMN, album,
                             ALBUM_COVER_COLUMN, cover,
                             -1);
 

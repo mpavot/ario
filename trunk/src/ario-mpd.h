@@ -48,6 +48,7 @@ typedef struct ArioMpdAlbum
         gchar *artist;
         gchar *album;
         gchar *path;
+        gchar *date;
 } ArioMpdAlbum;
 
 typedef struct ArioMpdFileList

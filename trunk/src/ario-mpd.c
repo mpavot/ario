@@ -805,6 +805,13 @@ ario_mpd_get_albums (ArioMpd *mpd,
                         ario_mpd_album->path = NULL;
                 }
 
+                if (entity->info.song->date) {
+                        ario_mpd_album->date = entity->info.song->date;
+                        entity->info.song->date = NULL;
+                } else {
+                        ario_mpd_album->date = NULL;
+                }
+
                 prev_album = ario_mpd_album->album;
                 albums = g_slist_append (albums, ario_mpd_album);
 
@@ -1303,6 +1310,7 @@ ario_mpd_free_album (ArioMpdAlbum *ario_mpd_album)
                 g_free (ario_mpd_album->album);
                 g_free (ario_mpd_album->artist);
                 g_free (ario_mpd_album->path);
+                g_free (ario_mpd_album->date);
                 g_free (ario_mpd_album);
         }
 }
@@ -1318,6 +1326,7 @@ ario_mpd_copy_album (ArioMpdAlbum *ario_mpd_album)
                 ret->album = g_strdup (ario_mpd_album->album);
                 ret->artist = g_strdup (ario_mpd_album->artist);
                 ret->path = g_strdup (ario_mpd_album->path);
+                ret->date = g_strdup (ario_mpd_album->date);
         }
 
         return ret;
