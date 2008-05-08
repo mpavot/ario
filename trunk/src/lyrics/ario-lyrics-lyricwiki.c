@@ -160,6 +160,7 @@ ario_lyrics_lyricwiki_parse_xml_file (gchar *xmldata,
         xmlChar *xml_title = NULL;
         xmlChar *xml_artist = NULL;
         ArioLyrics *lyrics = NULL;
+        gchar *tmp;
 
         doc = xmlParseMemory (xmldata, size);
         if (doc == NULL ) {
@@ -201,7 +202,12 @@ ario_lyrics_lyricwiki_parse_xml_file (gchar *xmldata,
                 if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "lyrics"))) {
                         xml_lyrics = xmlNodeGetContent (cur);
                         if (xml_lyrics) {
-                                lyrics->lyrics = g_strdup ((const gchar *) xml_lyrics);
+                                if (doc->encoding) {
+                                        tmp = g_convert ((const gchar *) xml_lyrics, -1, (const gchar *) doc->encoding, "UTF8", NULL, NULL, NULL);
+                                        lyrics->lyrics = g_locale_from_utf8 (tmp, -1, NULL, NULL, NULL);
+                                        g_free (tmp);
+                                } else
+                                        lyrics->lyrics = g_strdup ((const gchar *) xml_lyrics);
                                 xmlFree (xml_lyrics);
                         }
                 } else if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "song"))) {
@@ -297,7 +303,6 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
 
         lyrics = ario_lyrics_lyricwiki_parse_xml_file (lyrics_data,
                                                        lyrics_size);
-
         g_free (lyrics_data);
 
         return lyrics;
