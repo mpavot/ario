@@ -232,21 +232,22 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                                 name, type, domain, avahi_strerror(avahi_client_errno (avahi_service_resolver_get_client (r))));
                 break;
 
-        case AVAHI_RESOLVER_FOUND: {
-                                           char a[AVAHI_ADDRESS_STR_MAX];
-                                           ArioHost *host;
+        case AVAHI_RESOLVER_FOUND:
+                {
+                        char a[AVAHI_ADDRESS_STR_MAX];
+                        ArioHost *host;
 
-                                           avahi_address_snprint(a, sizeof(a), address);
+                        avahi_address_snprint(a, sizeof(a), address);
 
-                                           host = (ArioHost *) g_malloc (sizeof (ArioHost));
-                                           host->name = g_strdup (name);
-                                           host->host = g_strdup (a);
-                                           host->port = port;
+                        host = (ArioHost *) g_malloc (sizeof (ArioHost));
+                        host->name = g_strdup (name);
+                        host->host = g_strdup (a);
+                        host->port = port;
 
-                                           avahi->priv->hosts = g_slist_append (avahi->priv->hosts, host);
+                        avahi->priv->hosts = g_slist_append (avahi->priv->hosts, host);
 
-                                           g_signal_emit (G_OBJECT (avahi), ario_avahi_signals[HOSTS_CHANGED], 0);
-                                   }
+                        g_signal_emit (G_OBJECT (avahi), ario_avahi_signals[HOSTS_CHANGED], 0);
+                }
         }
 
         avahi_service_resolver_free (r);
@@ -295,7 +296,6 @@ static void ario_avahi_browse_callback (AvahiServiceBrowser *b,
                    function we free it. If the server is terminated before
                    the callback function is called the server will free
                    the resolver for us. */
-
                 if (!(avahi_service_resolver_new (avahi->priv->client, interface, protocol, name, type, domain, protocol, 0, ario_avahi_resolve_callback, avahi)))
                         ARIO_LOG_ERROR ("Failed to resolve service '%s': %s", name, avahi_strerror (avahi_client_errno (avahi->priv->client)));
                 break;
