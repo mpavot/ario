@@ -119,12 +119,22 @@
 #define PREF_HIDE_ON_CLOSE                      "hide-on-close"
 #define PREF_HIDE_ON_CLOSE_DEFAULT              FALSE
 
+#define PREF_ALBUM_SORT                         "album-sort"
+#define PREF_ALBUM_SORT_DEFAULT                 SORT_ALPHABETICALLY
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,
         TRAY_ICON_NEXT_SONG,
         TRAY_ICON_DO_NOTHING,
         TRAY_ICON_N_BEHAVIOR
+};
+
+enum
+{
+        SORT_ALPHABETICALLY,
+        SORT_YEAR,
+        SORT_N_BEHAVIOR
 };
 
 #endif /* __ARIO_PREFERENCES_H */

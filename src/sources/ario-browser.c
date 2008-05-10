@@ -101,6 +101,8 @@ static void ario_browser_cmd_remove_album_cover (GtkAction *action,
                                                  ArioBrowser *browser);
 static void ario_browser_covertree_visible_changed_cb (guint notification_id,
                                                        ArioBrowser *browser);
+static void ario_browser_album_sort_changed_cb (guint notification_id,
+                                                ArioBrowser *browser);
 static void ario_browser_cover_changed_cb (ArioCoverHandler *cover_handler,
                                            ArioBrowser *browser);
 static void ario_browser_artists_drag_begin_cb (GtkWidget *widget,
@@ -135,6 +137,8 @@ struct ArioBrowserPrivate
         ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
+
+        int album_sort;
 };
 
 static GtkActionEntry ario_browser_actions [] =
@@ -195,6 +199,7 @@ enum
 {
         ALBUM_ALBUM_COLUMN,
         ALBUM_TEXT_COLUMN,
+        ALBUM_YEAR_COLUMN,
         ALBUM_ARTIST_COLUMN,
         ALBUM_COVER_COLUMN,
         ALBUM_PATH_COLUMN,
@@ -312,6 +317,47 @@ ario_browser_class_init (ArioBrowserClass *klass)
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
+static gint
+ario_browser_albums_sort_func (GtkTreeModel *model,
+                               GtkTreeIter *a,
+                               GtkTreeIter *b,
+                               ArioBrowser *browser)
+{
+        char *ayear;
+        char *byear;
+        char *aalbum;
+        char *balbum;
+        int ret;
+
+        gtk_tree_model_get (model, a, ALBUM_YEAR_COLUMN, &ayear, ALBUM_ALBUM_COLUMN, &aalbum, -1);
+        gtk_tree_model_get (model, b, ALBUM_YEAR_COLUMN, &byear, ALBUM_ALBUM_COLUMN, &balbum, -1);
+
+        if (browser->priv->album_sort == SORT_YEAR) {
+                if (ayear && !byear)
+                        ret = -1;
+
+                if (byear && !ayear)
+                        ret = 1;
+
+                if (ayear && byear) {
+                        ret = g_utf8_collate (ayear, byear);
+                        if (ret == 0)
+                                ret = g_utf8_collate (aalbum, balbum);
+                } else {
+                        ret = g_utf8_collate (aalbum, balbum);
+                }
+        } else {
+                        ret = g_utf8_collate (aalbum, balbum);
+        }
+
+        g_free (ayear);
+        g_free (byear);
+        g_free (aalbum);
+        g_free (balbum);
+
+        return ret;
+}
+
 static void
 ario_browser_init (ArioBrowser *browser)
 {
@@ -417,10 +463,16 @@ ario_browser_init (ArioBrowser *browser)
                                                           G_TYPE_STRING,
                                                           G_TYPE_STRING,
                                                           G_TYPE_STRING,
+                                                          G_TYPE_STRING,
                                                           GDK_TYPE_PIXBUF,
                                                           G_TYPE_STRING);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (browser->priv->albums_model),
-                                              0, GTK_SORT_ASCENDING);
+                                              ALBUM_TEXT_COLUMN, GTK_SORT_ASCENDING);
+        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (browser->priv->albums_model),
+                                         ALBUM_TEXT_COLUMN,
+                                         (GtkTreeIterCompareFunc) ario_browser_albums_sort_func,
+                                         browser,
+                                         NULL);
         gtk_tree_view_set_model (GTK_TREE_VIEW (browser->priv->albums),
                                  GTK_TREE_MODEL (browser->priv->albums_model));
         browser->priv->albums_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (browser->priv->albums));
@@ -464,6 +516,10 @@ ario_browser_init (ArioBrowser *browser)
                                     (ArioNotifyFunc) ario_browser_covertree_visible_changed_cb,
                                     browser);
 
+        browser->priv->album_sort = ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT);
+        ario_conf_notification_add (PREF_ALBUM_SORT,
+                                    (ArioNotifyFunc) ario_browser_album_sort_changed_cb,
+                                    browser);
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (scrolledwindow_songs);
@@ -768,6 +824,7 @@ ario_browser_artists_selection_foreach (GtkTreeModel *model,
                 gtk_list_store_set (browser->priv->albums_model, &album_iter,
                                     ALBUM_ALBUM_COLUMN, ario_mpd_album->album,
                                     ALBUM_TEXT_COLUMN, album,
+                                    ALBUM_YEAR_COLUMN, ario_mpd_album->date,
                                     ALBUM_ARTIST_COLUMN, ario_mpd_album->artist,
                                     ALBUM_COVER_COLUMN, cover,
                                     ALBUM_PATH_COLUMN, ario_mpd_album->path,
@@ -1556,6 +1613,21 @@ ario_browser_covertree_visible_changed_cb (guint notification_id,
         gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (browser->priv->albums), 1),
                                           !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         ario_browser_artists_selection_update (browser);
+}
+
+static void
+ario_browser_album_sort_changed_cb (guint notification_id,
+                                    ArioBrowser *browser)
+{
+        browser->priv->album_sort = ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT);
+        gtk_tree_sortable_sort_column_changed (GTK_TREE_SORTABLE (browser->priv->albums_model));
+
+        // FIXME: Is there a better way to force the reorder of rows?
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (browser->priv->albums_model),
+                                              ALBUM_YEAR_COLUMN, GTK_SORT_ASCENDING);
+
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (browser->priv->albums_model),
+                                              ALBUM_TEXT_COLUMN, GTK_SORT_ASCENDING);
 }
 
 static
