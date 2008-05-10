@@ -25,6 +25,7 @@
 
 #include "config.h"
 #include <string.h>
+#include <stdlib.h>
 #include <time.h>
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -445,23 +446,21 @@ ario_audioscrobbler_get_property (GObject *object,
 }
 
 #if defined(HAVE_LIBSOUP_2_4)
-SoupURI *
-ario_audioscrobbler_get_libsoup_uri (RBProxyConfig *config)
+static SoupURI *
+ario_audioscrobbler_get_libsoup_uri ()
 {
         SoupURI *uri = NULL;
+        gchar *host;
 
-        if (!config->enabled)
+        if (!ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT))
                 return NULL;
 
         uri = soup_uri_new (NULL);
         soup_uri_set_scheme (uri, SOUP_URI_SCHEME_HTTP);
-        soup_uri_set_host (uri, config->host);
-        soup_uri_set_port (uri, config->port);
-
-        if (config->auth_enabled) {
-                soup_uri_set_user (uri, config->username);
-                soup_uri_set_password (uri, config->password);
-        }
+        host = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS);
+        soup_uri_set_host (uri, host);
+        g_free (host);
+        soup_uri_set_port (uri, ario_conf_get_integer (PREF_PROXY_PORT, PREF_PROXY_PORT_DEFAULT));
 
         return uri;
 }
