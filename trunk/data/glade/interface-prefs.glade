@@ -38,14 +38,43 @@
                         <property name="fill">False</property>
                       </packing>
                     </child>
+                    <child>
+                      <widget class="GtkHBox" id="hbox3">
+                        <property name="visible">True</property>
+                        <child>
+                          <widget class="GtkLabel" id="sort_label">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Sort albums: </property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkComboBox" id="sort_combobox">
+                            <property name="visible">True</property>
+                            <signal name="changed" handler="ario_interface_preferences_sort_changed_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </widget>
                 </child>
               </widget>
             </child>
             <child>
-              <widget class="GtkLabel" id="tabs_label">
+              <widget class="GtkLabel" id="interface_label">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Tabs</property>
+                <property name="label" translatable="yes">Interface</property>
               </widget>
               <packing>
                 <property name="type">label_item</property>
