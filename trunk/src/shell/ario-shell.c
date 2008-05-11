@@ -871,6 +871,10 @@ ario_shell_sync_mpd (ArioShell *shell)
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ToolSimilarArtist");
         gtk_action_set_sensitive (action, is_playing);
+
+        action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                              "ToolAddSimilar");
+        gtk_action_set_sensitive (action, is_playing);
 }
 
 static void
