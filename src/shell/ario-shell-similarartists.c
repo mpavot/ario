@@ -289,23 +289,17 @@ ario_shell_similarartists_get_images (ArioShellSimilarartists *shell_similararti
         return NULL;
 }
 
-static void
-ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists,
-                                       ArioMpd *mpd)
+static GSList *
+ario_shell_similarartists_get_similar_artists (const gchar *artist)
 {
         ARIO_LOG_FUNCTION_START
+        char *keyword;
         char *xml_uri;
         int xml_size;
         char *xml_data;
-        GSList *similar_artists, *tmp;
-        ArioSimilarArtist *similar_artist;
-        GtkTreeIter iter;
-        char *keyword;
-        int i = 0;
-        gchar *songs_txt;
-        GSList *songs = NULL;
+        GSList *similar_artists;
 
-        keyword = ario_util_format_keyword (shell_similarartists->priv->artist);
+        keyword = ario_util_format_keyword (artist);
         xml_uri = g_strdup_printf (LASTFM_URI, keyword);
         g_free (keyword);
 
@@ -315,12 +309,29 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                                  &xml_data);
         g_free (xml_uri);
         if (xml_size == 0) {
-                return;
+                return NULL;
         }
 
         similar_artists = ario_shell_similarartists_parse_xml_file (xml_data,
                                                                     xml_size);
         g_free (xml_data);
+
+        return similar_artists;
+}
+
+static void
+ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists,
+                                       ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *similar_artists, *tmp;
+        ArioSimilarArtist *similar_artist;
+        GtkTreeIter iter;
+        int i = 0;
+        gchar *songs_txt;
+        GSList *songs = NULL;
+
+        similar_artists = ario_shell_similarartists_get_similar_artists (shell_similarartists->priv->artist);
 
         for (tmp = similar_artists; tmp; tmp = g_slist_next (tmp)) {
                 if (++i > MAX_ARTISTS || shell_similarartists->priv->closed)
@@ -561,5 +572,28 @@ ario_shell_similarartists_addall_cb (GtkButton *button,
         ario_playlist_append_artists (shell_similarartists->priv->playlist, artists, FALSE);
 
         g_slist_foreach (artists, (GFunc) g_free, NULL);
+        g_slist_free (artists);
+}
+
+void
+ario_shell_similarartists_add_similar_to_playlist (ArioMpd *mpd,
+                                                   ArioPlaylist *playlist,
+                                                   const gchar *artist)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioSimilarArtist *similar_artist;
+        GSList *artists = NULL, *similar_artists, *tmp;
+
+        similar_artists = ario_shell_similarartists_get_similar_artists (artist);
+        for (tmp = similar_artists; tmp; tmp = g_slist_next (tmp)) {
+                similar_artist = tmp->data;
+
+                artists = g_slist_append (artists, similar_artist->name);
+        }
+
+        ario_playlist_append_artists (playlist, artists, FALSE);
+
+        g_slist_foreach (similar_artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);
+        g_slist_free (similar_artists);
         g_slist_free (artists);
 }

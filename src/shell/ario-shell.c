@@ -80,6 +80,8 @@ static void ario_shell_cmd_covers (GtkAction *action,
                                    ArioShell *shell);
 static void ario_shell_cmd_similar_artists (GtkAction *action,
                                             ArioShell *shell);
+static void ario_shell_cmd_add_similar (GtkAction *action,
+                                        ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
                                   ArioShell *shell);
 static void ario_shell_cmd_translate (GtkAction *action,
@@ -171,6 +173,9 @@ static GtkActionEntry ario_shell_actions [] =
         { "ToolSimilarArtist", GTK_STOCK_INDEX, N_("Find similar artists"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_similar_artists) },
+        { "ToolAddSimilar", GTK_STOCK_ADD, N_("Add similar songs to playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_shell_cmd_add_similar) },
         { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
@@ -744,6 +749,17 @@ ario_shell_cmd_similar_artists (GtkAction *action,
         similarartists = ario_shell_similarartists_new (shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
         if (similarartists)
                 gtk_widget_show_all (similarartists);
+}
+
+static void
+ario_shell_cmd_add_similar (GtkAction *action,
+                            ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+
+        ario_shell_similarartists_add_similar_to_playlist (shell->priv->mpd,
+                                                           ARIO_PLAYLIST (shell->priv->playlist),
+                                                           ario_mpd_get_current_artist (shell->priv->mpd));
 }
 
 static void
