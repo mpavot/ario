@@ -29,6 +29,7 @@
                         <menuitem name="ToolCoverSelectMenu" action="ToolCoverSelect"/>
                         <menuitem name="ToolCoverMenu" action="ToolCover"/>
                         <menuitem name="ToolSimilarArtistMenu" action="ToolSimilarArtist"/>
+                        <menuitem name="ToolAddSimilarMenu" action="ToolAddSimilar"/>
                         <placeholder name="ToolMenuPluginPlaceholder" />
                 </menu>
 
