@@ -260,6 +260,7 @@ ario_radio_init (ArioRadio *radio)
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_radios), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_radios), GTK_SHADOW_IN);
         radio->priv->radios = gtk_tree_view_new ();
+        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (radio->priv->radios), TRUE);
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Internet Radios"),
                                                            renderer,
