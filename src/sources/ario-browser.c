@@ -379,6 +379,7 @@ ario_browser_init (ArioBrowser *browser)
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_artists), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_artists), GTK_SHADOW_IN);
         browser->priv->artists = gtk_tree_view_new ();
+        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (browser->priv->artists), TRUE);
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Artist"),
                                                            renderer,
@@ -520,6 +521,7 @@ ario_browser_init (ArioBrowser *browser)
         ario_conf_notification_add (PREF_ALBUM_SORT,
                                     (ArioNotifyFunc) ario_browser_album_sort_changed_cb,
                                     browser);
+
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (scrolledwindow_songs);

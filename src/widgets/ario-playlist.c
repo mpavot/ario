@@ -250,6 +250,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
         playlist->priv->tree = gtk_tree_view_new ();
+	gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (playlist->priv->tree), TRUE);
 
         /* Pixbuf column */
         renderer = gtk_cell_renderer_pixbuf_new ();
@@ -312,6 +313,7 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                            "text", DURATION_COLUMN,
                                                            NULL);
         gtk_tree_view_column_set_resizable (column, TRUE);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
 
         playlist->priv->model = gtk_list_store_new (N_COLUMN,
