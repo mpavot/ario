@@ -347,7 +347,7 @@ ario_browser_albums_sort_func (GtkTreeModel *model,
                         ret = g_utf8_collate (aalbum, balbum);
                 }
         } else {
-                        ret = g_utf8_collate (aalbum, balbum);
+                ret = g_utf8_collate (aalbum, balbum);
         }
 
         g_free (ayear);
@@ -580,8 +580,6 @@ ario_browser_init (ArioBrowser *browser)
                                  browser,
                                  0);
 
-        gtk_tree_selection_set_mode (browser->priv->songs_selection,
-                                     GTK_SELECTION_MULTIPLE);
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (browser), TRUE);
         gtk_box_set_spacing (GTK_BOX (browser), 4);
