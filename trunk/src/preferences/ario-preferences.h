@@ -169,6 +169,9 @@
 #define PREF_ALBUM_SORT                         "album-sort"
 #define PREF_ALBUM_SORT_DEFAULT                 SORT_ALPHABETICALLY
 
+#define PREF_PLAYLIST_AUTOSCROLL                "playlist_autoscroll"
+#define PREF_PLAYLIST_AUTOSCROLL_DEFAULT        FALSE
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

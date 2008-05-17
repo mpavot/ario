@@ -188,114 +188,17 @@
                 <property name="visible">True</property>
                 <property name="left_padding">12</property>
                 <child>
-                  <widget class="GtkTable" id="table1">
+                  <widget class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
-                    <property name="border_width">12</property>
-                    <property name="n_rows">5</property>
-                    <property name="n_columns">2</property>
                     <child>
-                      <widget class="GtkCheckButton" id="track_checkbutton">
+                      <widget class="GtkCheckButton" id="autoscroll_checkbutton">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Track</property>
+                        <property name="label" translatable="yes">Go to current song when a new song is played</property>
                         <property name="response_id">0</property>
                         <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_track_toogled_cb"/>
+                        <signal name="toggled" handler="ario_interface_preferences_autoscroll_toogled_cb"/>
                       </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="title_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Title</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_title_toogled_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="artist_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Artist</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_artist_toogled_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">3</property>
-                        <property name="bottom_attach">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="file_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">File</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_file_toogled_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">3</property>
-                        <property name="bottom_attach">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="duration_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Duration</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_duration_toogled_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="album_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Album</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_album_toogled_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">4</property>
-                        <property name="bottom_attach">5</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkCheckButton" id="genre_checkbutton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Genre</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_genre_toogled_cb"/>
-                      </widget>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
                     </child>
                     <child>
                       <widget class="GtkLabel" id="label2">
@@ -304,24 +207,132 @@
                         <property name="label" translatable="yes">Show rows:</property>
                       </widget>
                       <packing>
-                        <property name="right_attach">2</property>
-                        <property name="x_options">GTK_FILL</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkCheckButton" id="date_checkbutton">
+                      <widget class="GtkTable" id="table1">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Date</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="ario_interface_preferences_date_toogled_cb"/>
+                        <property name="border_width">12</property>
+                        <property name="n_rows">4</property>
+                        <property name="n_columns">2</property>
+                        <child>
+                          <widget class="GtkCheckButton" id="track_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Track</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_track_toogled_cb"/>
+                          </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="title_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Title</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_title_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="artist_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Artist</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_artist_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="file_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">File</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_file_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="duration_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Duration</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_duration_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="album_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Album</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_album_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="genre_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Genre</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_genre_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkCheckButton" id="date_checkbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="label" translatable="yes">Date</property>
+                            <property name="response_id">0</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="ario_interface_preferences_date_toogled_cb"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                          </packing>
+                        </child>
                       </widget>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">4</property>
-                        <property name="bottom_attach">5</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </widget>

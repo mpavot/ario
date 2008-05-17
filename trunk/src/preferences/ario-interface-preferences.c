@@ -59,6 +59,8 @@ G_MODULE_EXPORT void ario_interface_preferences_file_toogled_cb (GtkCheckButton 
                                                                  ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_date_toogled_cb (GtkCheckButton *butt,
                                                                  ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
+                                                                       ArioInterfacePreferences *interface_preferences);
 
 static const char *trayicon_behavior[] = {
         N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE
@@ -88,6 +90,7 @@ struct ArioInterfacePreferencesPrivate
         GtkWidget *duration_checkbutton;
         GtkWidget *file_checkbutton;
         GtkWidget *date_checkbutton;
+        GtkWidget *autoscroll_checkbutton;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -183,6 +186,8 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "file_checkbutton");
         interface_preferences->priv->date_checkbutton = 
                 glade_xml_get_widget (xml, "date_checkbutton");
+        interface_preferences->priv->autoscroll_checkbutton = 
+                glade_xml_get_widget (xml, "autoscroll_checkbutton");
 
         tray_frame = 
                 glade_xml_get_widget (xml, "tray_frame");
@@ -297,6 +302,9 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->date_checkbutton),
                                       ario_conf_get_boolean (PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->autoscroll_checkbutton),
+                                      ario_conf_get_boolean (PREF_PLAYLIST_AUTOSCROLL, PREF_PLAYLIST_AUTOSCROLL_DEFAULT));
 }
 
 void
@@ -412,6 +420,15 @@ ario_interface_preferences_date_toogled_cb (GtkCheckButton *butt,
 {
         ARIO_LOG_FUNCTION_START
         ario_conf_set_boolean (PREF_DATE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
+                                                  ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_PLAYLIST_AUTOSCROLL,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
 }
 
