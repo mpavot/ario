@@ -83,17 +83,64 @@
 #define PREF_SOURCE                             "source"
 #define PREF_SOURCE_DEFAULT                     0
 
+#define PREF_PIXBUF_COLUMN_ORDER                "pixbuf_column_order"
+#define PREF_PIXBUF_COLUMN_ORDER_DEFAULT        1
+
 #define PREF_TRACK_COLUMN_SIZE                  "track_column_size"
 #define PREF_TRACK_COLUMN_SIZE_DEFAULT          50
+#define PREF_TRACK_COLUMN_VISIBLE               "track_column_visible"
+#define PREF_TRACK_COLUMN_VISIBLE_DEFAULT       TRUE
+#define PREF_TRACK_COLUMN_ORDER                 "track_column_order"
+#define PREF_TRACK_COLUMN_ORDER_DEFAULT         2
 
 #define PREF_TITLE_COLUMN_SIZE                  "title_column_size"
 #define PREF_TITLE_COLUMN_SIZE_DEFAULT          200
+#define PREF_TITLE_COLUMN_VISIBLE               "title_column_visible"
+#define PREF_TITLE_COLUMN_VISIBLE_DEFAULT       TRUE
+#define PREF_TITLE_COLUMN_ORDER                 "title_column_order"
+#define PREF_TITLE_COLUMN_ORDER_DEFAULT         3
 
 #define PREF_ARTIST_COLUMN_SIZE                 "artist_column_size"
 #define PREF_ARTIST_COLUMN_SIZE_DEFAULT         200
+#define PREF_ARTIST_COLUMN_VISIBLE              "artist_column_visible"
+#define PREF_ARTIST_COLUMN_VISIBLE_DEFAULT      TRUE
+#define PREF_ARTIST_COLUMN_ORDER                "artist_column_order"
+#define PREF_ARTIST_COLUMN_ORDER_DEFAULT        4
 
 #define PREF_ALBUM_COLUMN_SIZE                  "album_column_size"
 #define PREF_ALBUM_COLUMN_SIZE_DEFAULT          200
+#define PREF_ALBUM_COLUMN_VISIBLE               "album_column_visible"
+#define PREF_ALBUM_COLUMN_VISIBLE_DEFAULT       TRUE
+#define PREF_ALBUM_COLUMN_ORDER                 "album_column_order"
+#define PREF_ALBUM_COLUMN_ORDER_DEFAULT         5
+
+#define PREF_DURATION_COLUMN_SIZE               "duration_column_size"
+#define PREF_DURATION_COLUMN_SIZE_DEFAULT       50
+#define PREF_DURATION_COLUMN_VISIBLE            "duration_column_visible"
+#define PREF_DURATION_COLUMN_VISIBLE_DEFAULT    TRUE
+#define PREF_DURATION_COLUMN_ORDER              "duration_column_order"
+#define PREF_DURATION_COLUMN_ORDER_DEFAULT      6
+
+#define PREF_FILE_COLUMN_SIZE                   "file_column_size"
+#define PREF_FILE_COLUMN_SIZE_DEFAULT           200
+#define PREF_FILE_COLUMN_VISIBLE                "file_column_visible"
+#define PREF_FILE_COLUMN_VISIBLE_DEFAULT        FALSE
+#define PREF_FILE_COLUMN_ORDER                  "file_column_order"
+#define PREF_FILE_COLUMN_ORDER_DEFAULT          7
+
+#define PREF_GENRE_COLUMN_SIZE                  "genre_column_size"
+#define PREF_GENRE_COLUMN_SIZE_DEFAULT          200
+#define PREF_GENRE_COLUMN_VISIBLE               "genre_column_visible"
+#define PREF_GENRE_COLUMN_VISIBLE_DEFAULT       FALSE
+#define PREF_GENRE_COLUMN_ORDER                 "genre_column_order"
+#define PREF_GENRE_COLUMN_ORDER_DEFAULT         8
+
+#define PREF_DATE_COLUMN_SIZE                   "date_column_size"
+#define PREF_DATE_COLUMN_SIZE_DEFAULT           70
+#define PREF_DATE_COLUMN_VISIBLE                "date_column_visible"
+#define PREF_DATE_COLUMN_VISIBLE_DEFAULT        FALSE
+#define PREF_DATE_COLUMN_ORDER                  "date_column_order"
+#define PREF_DATE_COLUMN_ORDER_DEFAULT          9
 
 #define PREF_PLUGINS_LIST                       "active-plugins"
 #define PREF_PLUGINS_LIST_DEFAULT               "filesystem,radios,wikipedia"

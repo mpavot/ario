@@ -82,17 +82,28 @@ static gboolean ario_playlist_view_motion_notify (GtkWidget *widget,
                                                   ArioPlaylist *playlist);
 static void ario_playlist_activate_row (ArioPlaylist *playlist,
                                         GtkTreePath *path);
+static void ario_playlist_track_column_visible_changed_cb (guint notification_id,
+                                                           ArioPlaylist *playlist);
+static void ario_playlist_title_column_visible_changed_cb (guint notification_id,
+                                                           ArioPlaylist *playlist);
+static void ario_playlist_artist_column_visible_changed_cb (guint notification_id,
+                                                            ArioPlaylist *playlist);
+static void ario_playlist_album_column_visible_changed_cb (guint notification_id,
+                                                           ArioPlaylist *playlist);
+static void ario_playlist_duration_column_visible_changed_cb (guint notification_id,
+                                                              ArioPlaylist *playlist);
+static void ario_playlist_file_column_visible_changed_cb (guint notification_id,
+                                                          ArioPlaylist *playlist);
+static void ario_playlist_genre_column_visible_changed_cb (guint notification_id,
+                                                           ArioPlaylist *playlist);
+static void ario_playlist_date_column_visible_changed_cb (guint notification_id,
+                                                          ArioPlaylist *playlist);
 
 struct ArioPlaylistPrivate
 {        
         GtkWidget *tree;
         GtkListStore *model;
         GtkTreeSelection *selection;
-
-        GtkTreeViewColumn *track_column;
-        GtkTreeViewColumn *title_column;
-        GtkTreeViewColumn *artist_column;
-        GtkTreeViewColumn *album_column;
 
         ArioMpd *mpd;
 
@@ -149,10 +160,14 @@ enum
         ARTIST_COLUMN,
         ALBUM_COLUMN,
         DURATION_COLUMN,
+        FILE_COLUMN,
+        GENRE_COLUMN,
+        DATE_COLUMN,
         ID_COLUMN,
-        PATH_COLUMN,
         N_COLUMN
 };
+
+static GtkTreeViewColumn* all_columns[N_COLUMN];
 
 static const GtkTargetEntry targets  [] = {
         { "text/internal-list", 0, 10},
@@ -233,89 +248,189 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
 }
 
 static void
-ario_playlist_init (ArioPlaylist *playlist)
+ario_playlist_append_column (ArioPlaylist *playlist,
+                             const gchar *title,
+                             const int columnnb,
+                             const int size,
+                             const int order,
+                             const gboolean is_visible,
+                             const gboolean is_pixbuf,
+                             const int is_resizable)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
+
+        if (is_pixbuf) {
+                renderer = gtk_cell_renderer_pixbuf_new ();
+                column = gtk_tree_view_column_new_with_attributes (title,
+                                                                   renderer,
+                                                                   "pixbuf", columnnb,
+                                                                   NULL);
+        } else {
+                renderer = gtk_cell_renderer_text_new ();
+                column = gtk_tree_view_column_new_with_attributes (title,
+                                                                   renderer,
+                                                                   "text", columnnb,
+                                                                   NULL);
+        }
+        gtk_tree_view_column_set_resizable (column, is_resizable);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, size);
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_visible (column, is_visible);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        all_columns[columnnb] = column;
+}
+
+static void
+ario_playlist_reorder_columns (ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeViewColumn *orders[N_COLUMN];
+        GtkTreeViewColumn *current, *prev = NULL;
+        int i;
+
+        for (i = 0; i < N_COLUMN; ++i)
+                orders[i] = NULL;
+
+        orders[ario_conf_get_integer (PREF_PIXBUF_COLUMN_ORDER, PREF_PIXBUF_COLUMN_ORDER_DEFAULT)] = all_columns[PIXBUF_COLUMN];
+        orders[ario_conf_get_integer (PREF_TRACK_COLUMN_ORDER, PREF_TRACK_COLUMN_ORDER_DEFAULT)] = all_columns[TRACK_COLUMN];
+        orders[ario_conf_get_integer (PREF_TITLE_COLUMN_ORDER, PREF_TITLE_COLUMN_ORDER_DEFAULT)] = all_columns[TITLE_COLUMN];
+        orders[ario_conf_get_integer (PREF_ARTIST_COLUMN_ORDER, PREF_ARTIST_COLUMN_ORDER_DEFAULT)] = all_columns[ARTIST_COLUMN];
+        orders[ario_conf_get_integer (PREF_ALBUM_COLUMN_ORDER, PREF_ALBUM_COLUMN_ORDER_DEFAULT)] = all_columns[ALBUM_COLUMN];
+        orders[ario_conf_get_integer (PREF_DURATION_COLUMN_ORDER, PREF_DURATION_COLUMN_ORDER_DEFAULT)] = all_columns[DURATION_COLUMN];
+        orders[ario_conf_get_integer (PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT)] = all_columns[FILE_COLUMN];
+        orders[ario_conf_get_integer (PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT)] = all_columns[GENRE_COLUMN];
+        orders[ario_conf_get_integer (PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT)] = all_columns[DATE_COLUMN];
+
+        for (i = 0; i < N_COLUMN; ++i) {
+                current = orders[i];
+                if (current)
+                        gtk_tree_view_move_column_after (GTK_TREE_VIEW (playlist->priv->tree), current, prev);
+                prev = current;
+        }
+}
+
+static void
+ario_playlist_init (ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
         GtkWidget *scrolledwindow;
+        int i;
 
         playlist->priv = g_new0 (ArioPlaylistPrivate, 1);
         playlist->priv->playlist_id = -1;
         playlist->priv->playlist_length = 0;
         playlist->priv->play_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "play.png", NULL);
+        for (i = 0; i < N_COLUMN; ++i)
+                all_columns[i] = NULL;
 
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
 
         playlist->priv->tree = gtk_tree_view_new ();
-	gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (playlist->priv->tree), TRUE);
+        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (playlist->priv->tree), TRUE);
 
         /* Pixbuf column */
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        column = gtk_tree_view_column_new_with_attributes (" ",
-                                                           renderer,
-                                                           "pixbuf", PIXBUF_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 30);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        ario_playlist_append_column (playlist, " ",
+                                     PIXBUF_COLUMN,
+                                     30,
+                                     ario_conf_get_integer (PREF_PIXBUF_COLUMN_ORDER, PREF_PIXBUF_COLUMN_ORDER_DEFAULT),
+                                     TRUE,
+                                     TRUE, FALSE);
 
         /* Track column */
-        renderer = gtk_cell_renderer_text_new ();
-        playlist->priv->track_column = gtk_tree_view_column_new_with_attributes (_("Track"),
-                                                                                 renderer,
-                                                                                 "text", TRACK_COLUMN,
-                                                                                 NULL);
-        gtk_tree_view_column_set_resizable (playlist->priv->track_column, TRUE);
-        gtk_tree_view_column_set_sizing (playlist->priv->track_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->track_column, ario_conf_get_integer (PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT));
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->track_column);
+        ario_playlist_append_column (playlist, _("Track"),
+                                     TRACK_COLUMN,
+                                     ario_conf_get_integer (PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_TRACK_COLUMN_ORDER, PREF_TRACK_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_TRACK_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_track_column_visible_changed_cb,
+                                    playlist);
 
         /* Title column */
-        renderer = gtk_cell_renderer_text_new ();
-        playlist->priv->title_column = gtk_tree_view_column_new_with_attributes (_("Title"),
-                                                                                 renderer,
-                                                                                 "text", TITLE_COLUMN,
-                                                                                 NULL);
-        gtk_tree_view_column_set_resizable (playlist->priv->title_column, TRUE);
-        gtk_tree_view_column_set_sizing (playlist->priv->title_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->title_column, ario_conf_get_integer (PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT));
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->title_column);
+        ario_playlist_append_column (playlist, _("Title"),
+                                     TITLE_COLUMN,
+                                     ario_conf_get_integer (PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_TITLE_COLUMN_ORDER, PREF_TITLE_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_TITLE_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_title_column_visible_changed_cb,
+                                    playlist);
 
         /* Artist column */
-        renderer = gtk_cell_renderer_text_new ();
-        playlist->priv->artist_column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                                                  renderer,
-                                                                                  "text", ARTIST_COLUMN,
-                                                                                  NULL);
-        gtk_tree_view_column_set_resizable (playlist->priv->artist_column, TRUE);
-        gtk_tree_view_column_set_sizing (playlist->priv->artist_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->artist_column, ario_conf_get_integer (PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT));
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->artist_column);
+        ario_playlist_append_column (playlist, _("Artist"),
+                                     ARTIST_COLUMN,
+                                     ario_conf_get_integer (PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_ARTIST_COLUMN_ORDER, PREF_ARTIST_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_ARTIST_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_artist_column_visible_changed_cb,
+                                    playlist);
 
         /* Album column */
-        renderer = gtk_cell_renderer_text_new ();
-        playlist->priv->album_column = gtk_tree_view_column_new_with_attributes (_("Album"),
-                                                                                 renderer,
-                                                                                 "text", ALBUM_COLUMN,
-                                                                                 NULL);
-        gtk_tree_view_column_set_resizable (playlist->priv->album_column, TRUE);
-        gtk_tree_view_column_set_sizing (playlist->priv->album_column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (playlist->priv->album_column, ario_conf_get_integer (PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT));
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), playlist->priv->album_column);
+        ario_playlist_append_column (playlist, _("Album"),
+                                     ALBUM_COLUMN,
+                                     ario_conf_get_integer (PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_ALBUM_COLUMN_ORDER, PREF_ALBUM_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_ALBUM_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_album_column_visible_changed_cb,
+                                    playlist);
 
         /* Duration column */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Duration"),
-                                                           renderer,
-                                                           "text", DURATION_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_resizable (column, TRUE);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (playlist->priv->tree), column);
+        ario_playlist_append_column (playlist, _("Duration"),
+                                     DURATION_COLUMN,
+                                     ario_conf_get_integer (PREF_DURATION_COLUMN_SIZE, PREF_DURATION_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_DURATION_COLUMN_ORDER, PREF_DURATION_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_DURATION_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_duration_column_visible_changed_cb,
+                                    playlist);
 
+        /* File column */
+        ario_playlist_append_column (playlist, _("File"),
+                                     FILE_COLUMN,
+                                     ario_conf_get_integer (PREF_FILE_COLUMN_SIZE, PREF_FILE_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_FILE_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_file_column_visible_changed_cb,
+                                    playlist);
+
+        /* Genre column */
+        ario_playlist_append_column (playlist, _("Genre"),
+                                     GENRE_COLUMN,
+                                     ario_conf_get_integer (PREF_GENRE_COLUMN_SIZE, PREF_GENRE_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_GENRE_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_genre_column_visible_changed_cb,
+                                    playlist);
+
+        /* Date column */
+        ario_playlist_append_column (playlist, _("Date"),
+                                     DATE_COLUMN,
+                                     ario_conf_get_integer (PREF_DATE_COLUMN_SIZE, PREF_DATE_COLUMN_SIZE_DEFAULT),
+                                     ario_conf_get_integer (PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT),
+                                     ario_conf_get_boolean (PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT),
+                                     FALSE, TRUE);
+        ario_conf_notification_add (PREF_DATE_COLUMN_VISIBLE,
+                                    (ArioNotifyFunc) ario_playlist_date_column_visible_changed_cb,
+                                    playlist);
+
+        ario_playlist_reorder_columns (playlist);
+        /* Model */
         playlist->priv->model = gtk_list_store_new (N_COLUMN,
                                                     GDK_TYPE_PIXBUF,
                                                     G_TYPE_STRING,
@@ -323,8 +438,10 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
-                                                    G_TYPE_INT,
-                                                    G_TYPE_STRING);
+                                                    G_TYPE_STRING,
+                                                    G_TYPE_STRING,
+                                                    G_TYPE_STRING,
+                                                    G_TYPE_INT);
 
         gtk_tree_view_set_model (GTK_TREE_VIEW (playlist->priv->tree),
                                  GTK_TREE_MODEL (playlist->priv->model));
@@ -332,6 +449,8 @@ ario_playlist_init (ArioPlaylist *playlist)
                                        TRUE);
         gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (playlist->priv->tree),
                                       TRUE);
+        gtk_tree_view_set_search_column (GTK_TREE_VIEW (playlist->priv->tree),
+                                         TITLE_COLUMN);
         playlist->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (playlist->priv->tree));
         gtk_tree_selection_set_mode (playlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
@@ -387,26 +506,71 @@ ario_playlist_shutdown (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
         int width;
+        int orders[N_COLUMN];
+        GtkTreeViewColumn *column;
+        int i, j = 1;
 
-        width = gtk_tree_view_column_get_width (playlist->priv->track_column);
+        GList *columns, *tmp;
+        columns = gtk_tree_view_get_columns (GTK_TREE_VIEW (playlist->priv->tree));
+        for (tmp = columns; tmp; tmp = g_list_next (tmp)) {
+                column = tmp->data;
+                for (i = 0; i < N_COLUMN; ++i) {
+                        if (all_columns[i] == column)
+                                orders[i] = j;
+                }
+                ++j;
+        }
+        g_list_free (columns);
+
+        ario_conf_set_integer (PREF_PIXBUF_COLUMN_ORDER, orders[PIXBUF_COLUMN]);
+
+        width = gtk_tree_view_column_get_width (all_columns[TRACK_COLUMN]);
         if (width > 10)
                 ario_conf_set_integer (PREF_TRACK_COLUMN_SIZE,
                                        width);
+        ario_conf_set_integer (PREF_TRACK_COLUMN_ORDER, orders[TRACK_COLUMN]);
 
-        width = gtk_tree_view_column_get_width (playlist->priv->title_column);
+        width = gtk_tree_view_column_get_width (all_columns[TITLE_COLUMN]);
         if (width > 10)
                 ario_conf_set_integer (PREF_TITLE_COLUMN_SIZE,
                                        width);
+        ario_conf_set_integer (PREF_TITLE_COLUMN_ORDER, orders[TITLE_COLUMN]);
 
-        width = gtk_tree_view_column_get_width (playlist->priv->artist_column);
+        width = gtk_tree_view_column_get_width (all_columns[ARTIST_COLUMN]);
         if (width > 10)
                 ario_conf_set_integer (PREF_ARTIST_COLUMN_SIZE,
                                        width);
+        ario_conf_set_integer (PREF_ARTIST_COLUMN_ORDER, orders[ARTIST_COLUMN]);
 
-        width = gtk_tree_view_column_get_width (playlist->priv->album_column);
+        width = gtk_tree_view_column_get_width (all_columns[ALBUM_COLUMN]);
         if (width > 10)
                 ario_conf_set_integer (PREF_ALBUM_COLUMN_SIZE,
                                        width);
+        ario_conf_set_integer (PREF_ALBUM_COLUMN_ORDER, orders[ALBUM_COLUMN]);
+
+        width = gtk_tree_view_column_get_width (all_columns[DURATION_COLUMN]);
+        if (width > 10)
+                ario_conf_set_integer (PREF_DURATION_COLUMN_SIZE,
+                                       width);
+        ario_conf_set_integer (PREF_DURATION_COLUMN_ORDER, orders[DURATION_COLUMN]);
+
+        width = gtk_tree_view_column_get_width (all_columns[FILE_COLUMN]);
+        if (width > 10)
+                ario_conf_set_integer (PREF_FILE_COLUMN_SIZE,
+                                       width);
+        ario_conf_set_integer (PREF_FILE_COLUMN_ORDER, orders[FILE_COLUMN]);
+
+        width = gtk_tree_view_column_get_width (all_columns[GENRE_COLUMN]);
+        if (width > 10)
+                ario_conf_set_integer (PREF_GENRE_COLUMN_SIZE,
+                                       width);
+        ario_conf_set_integer (PREF_GENRE_COLUMN_ORDER, orders[GENRE_COLUMN]);
+
+        width = gtk_tree_view_column_get_width (all_columns[DATE_COLUMN]);
+        if (width > 10)
+                ario_conf_set_integer (PREF_DATE_COLUMN_SIZE,
+                                       width);
+        ario_conf_set_integer (PREF_DATE_COLUMN_ORDER, orders[DATE_COLUMN]);
 }
 
 static void
@@ -570,8 +734,10 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                                                     ARTIST_COLUMN, song->artist,
                                                     ALBUM_COLUMN, song->album ? song->album : ARIO_MPD_UNKNOWN,
                                                     DURATION_COLUMN, time,
+                                                    FILE_COLUMN, song->file,
+                                                    GENRE_COLUMN, song->genre,
+                                                    DATE_COLUMN, song->date,
                                                     ID_COLUMN, song->id,
-                                                    PATH_COLUMN, song->file,
                                                     -1);
                                 g_free (title);
                                 g_free (time);
@@ -589,8 +755,10 @@ ario_playlist_changed_cb (ArioMpd *mpd,
                                             ARTIST_COLUMN, song->artist,
                                             ALBUM_COLUMN, song->album ? song->album : ARIO_MPD_UNKNOWN,
                                             DURATION_COLUMN, time,
+                                            FILE_COLUMN, song->file,
+                                            GENRE_COLUMN, song->genre,
+                                            DATE_COLUMN, song->date,
                                             ID_COLUMN, song->id,
-                                            PATH_COLUMN, song->file,
                                             -1);
                         g_free (title);
                         g_free (time);
@@ -885,7 +1053,7 @@ ario_playlist_add_dir (ArioPlaylist *playlist,
 
         ario_playlist_add_songs (playlist, char_songs, x, y, play);
         g_slist_free (char_songs);
-	ario_mpd_free_file_list (files);
+        ario_mpd_free_file_list (files);
 }
 
 static void
@@ -1120,25 +1288,6 @@ ario_playlist_popup_menu (ArioPlaylist *playlist)
         gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
                         gtk_get_current_event_time ());
 }
-static gboolean
-ario_playlist_model_foreach (GtkTreeModel *model,
-                             GtkTreePath *path,
-                             GtkTreeIter *iter,
-                             ArioPlaylist *playlist)
-{
-        int song_id;
-
-        gtk_tree_model_get (model, iter, ID_COLUMN, &song_id, -1);
-
-        if (song_id == ario_mpd_get_current_song_id (playlist->priv->mpd)) {
-                gtk_tree_view_set_cursor (GTK_TREE_VIEW (playlist->priv->tree),
-                                          path,
-                                          NULL, FALSE);
-                return TRUE;
-        }
-
-        return FALSE;
-}
 
 static void
 ario_playlist_cmd_clear (GtkAction *action,
@@ -1196,7 +1345,7 @@ ario_playlist_selection_properties_foreach (GtkTreeModel *model,
         GSList **paths = (GSList **) userdata;
         gchar *val = NULL;
 
-        gtk_tree_model_get (model, iter, PATH_COLUMN, &val, -1);
+        gtk_tree_model_get (model, iter, FILE_COLUMN, &val, -1);
 
         *paths = g_slist_append (*paths, val);
 }
@@ -1223,6 +1372,26 @@ ario_playlist_cmd_songs_properties (GtkAction *action,
                                               songs);
         if (songinfos)
                 gtk_widget_show_all (songinfos);
+}
+
+static gboolean
+ario_playlist_model_foreach (GtkTreeModel *model,
+                             GtkTreePath *path,
+                             GtkTreeIter *iter,
+                             ArioPlaylist *playlist)
+{
+        int song_id;
+
+        gtk_tree_model_get (model, iter, ID_COLUMN, &song_id, -1);
+
+        if (song_id == ario_mpd_get_current_song_id (playlist->priv->mpd)) {
+                gtk_tree_view_set_cursor (GTK_TREE_VIEW (playlist->priv->tree),
+                                          path,
+                                          NULL, FALSE);
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 static void
@@ -1432,3 +1601,76 @@ ario_playlist_view_motion_notify (GtkWidget *widget,
 
         return FALSE;
 }
+
+static void
+ario_playlist_track_column_visible_changed_cb (guint notification_id,
+                                               ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[TRACK_COLUMN],
+                                          ario_conf_get_boolean (PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_title_column_visible_changed_cb (guint notification_id,
+                                               ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[TITLE_COLUMN],
+                                          ario_conf_get_boolean (PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_artist_column_visible_changed_cb (guint notification_id,
+                                                ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[ARTIST_COLUMN],
+                                          ario_conf_get_boolean (PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_album_column_visible_changed_cb (guint notification_id,
+                                               ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[ALBUM_COLUMN],
+                                          ario_conf_get_boolean (PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_duration_column_visible_changed_cb (guint notification_id,
+                                                  ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[DURATION_COLUMN],
+                                          ario_conf_get_boolean (PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_file_column_visible_changed_cb (guint notification_id,
+                                              ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[FILE_COLUMN],
+                                          ario_conf_get_boolean (PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_genre_column_visible_changed_cb (guint notification_id,
+                                               ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[GENRE_COLUMN],
+                                          ario_conf_get_boolean (PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT));
+}
+
+static void
+ario_playlist_date_column_visible_changed_cb (guint notification_id,
+                                              ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_tree_view_column_set_visible (all_columns[DATE_COLUMN],
+                                          ario_conf_get_boolean (PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT));
+}
+

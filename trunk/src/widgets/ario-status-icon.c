@@ -391,9 +391,12 @@ ario_status_icon_sync_tooltip (ArioStatusIcon *icon)
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 title = ario_util_format_title(ario_mpd_get_current_song (icon->priv->mpd));
-                tooltip = g_strdup_printf (_("Artist: %s\nAlbum: %s\nTitle: %s"), 
+                tooltip = g_strdup_printf ("%s: %s\n%s: %s\n%s: %s",
+                                            _("Artist"),
                                             ario_mpd_get_current_artist (icon->priv->mpd) ? ario_mpd_get_current_artist (icon->priv->mpd) : ARIO_MPD_UNKNOWN,
+                                             _("Album"),
                                             ario_mpd_get_current_album (icon->priv->mpd) ? ario_mpd_get_current_album (icon->priv->mpd) : ARIO_MPD_UNKNOWN,
+                                            _("Title"),
                                             title);
                 g_free (title);
                 break;
