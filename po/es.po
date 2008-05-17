@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-08 17:33+0200\n"
+"POT-Creation-Date: 2008-05-16 23:43+0200\n"
 "PO-Revision-Date: 2008-04-06 23:26+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:246
+#: ../src/shell/ario-shell-coverselect.c:247
 #: ../src/shell/ario-shell-preferences.c:180
 msgid "Covers"
 msgstr "Carátulas"
@@ -72,8 +72,8 @@ msgstr "Anfitrión :"
 msgid "Music directory :"
 msgstr "Directorio de musica :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:898
-#: ../plugins/radios/ario-radio.c:1097
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:899
+#: ../plugins/radios/ario-radio.c:1098
 msgid "Name :"
 msgstr "Nombre :"
 
@@ -92,11 +92,11 @@ msgstr "Puerto :"
 msgid "_Autoconnect on startup"
 msgstr "Conectar _automáticamente en el arranque"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:150
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:152
 msgid "_Connect"
 msgstr "_Conectar"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:153
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:155
 msgid "_Disconnect"
 msgstr "_Desconectar"
 
@@ -142,32 +142,99 @@ msgstr "Búsqueda local"
 msgid "Search"
 msgstr "Buscar"
 
-#: ../data/glade/interface-prefs.glade.h:1
-msgid "Hide on close"
+#. MPD_TAG_ITEM_ARTIST
+#. Album column
+#: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
+#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:378
+#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
+msgid "Album"
+msgstr "Álbum"
+
+#. Artist column
+#: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
+#: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
+#: ../src/shell/ario-shell-similarartists.c:415
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
+#: ../src/widgets/ario-status-icon.c:395
+msgid "Artist"
+msgstr "Artista"
+
+#. Date column
+#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:422
+#, fuzzy
+msgid "Date"
+msgstr "Fecha :"
+
+#. Duration column
+#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:389
+msgid "Duration"
+msgstr "Duración"
+
+#. File column
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:400
+#, fuzzy
+msgid "File"
+msgstr "_Fichero"
+
+#. Genre column
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:411
+#, fuzzy
+msgid "Genre"
+msgstr "Genero :"
+
+#: ../data/glade/interface-prefs.glade.h:7
+msgid "Hide window when close button is pressed"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:2
+#: ../data/glade/interface-prefs.glade.h:8
+#: ../src/shell/ario-shell-preferences.c:190
+msgid "Interface"
+msgstr "Interfaz"
+
+#: ../data/glade/interface-prefs.glade.h:9
 #, fuzzy
 msgid "On middle button click on tray icon :"
 msgstr ""
 "Comportamiendo de click en el boton central sobre el icono de la bandeja."
 
-#: ../data/glade/interface-prefs.glade.h:3
+#: ../data/glade/interface-prefs.glade.h:10
+#: ../src/sources/ario-storedplaylists.c:264
+msgid "Playlist"
+msgstr "Lista de reproducción"
+
+#: ../data/glade/interface-prefs.glade.h:11
+#, fuzzy
+msgid "Show rows:"
+msgstr "Mostrar _letras"
+
+#: ../data/glade/interface-prefs.glade.h:12
 msgid "Show tabs"
 msgstr "Mostrar pestañas"
 
-#: ../data/glade/interface-prefs.glade.h:4
-msgid "Tabs"
+#: ../data/glade/interface-prefs.glade.h:13
+msgid "Sort albums: "
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:5
+#. MPD_TAG_ITEM_ALBUM
+#. Title column
+#: ../data/glade/interface-prefs.glade.h:14 ../src/sources/ario-browser.c:540
+#: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
+#: ../src/widgets/ario-playlist.c:356 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-status-icon.c:399
+msgid "Title"
+msgstr "Título"
+
+#. MPD_TAG_ITEM_TITLE
+#. Track column
+#: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:533
+#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:345
+msgid "Track"
+msgstr "Pista"
+
+#: ../data/glade/interface-prefs.glade.h:16
 #, fuzzy
 msgid "Tray icon"
 msgstr "Icono de la bandeja"
-
-#: ../data/glade/interface-prefs.glade.h:6
-msgid "Window"
-msgstr ""
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 #, fuzzy
@@ -322,7 +389,7 @@ msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
 
 #. impossible time or broken locale settings
-#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1259
+#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1258
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -361,7 +428,7 @@ msgstr ""
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:177
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:182
 msgid "_About"
 msgstr "_Acerca de"
 
@@ -427,20 +494,29 @@ msgstr "Debe seleccionar un servidor"
 msgid "New Profile"
 msgstr "Nuevo perfil"
 
-#: ../src/preferences/ario-interface-preferences.c:46
+#: ../src/preferences/ario-interface-preferences.c:64
 msgid "Play/Pause"
 msgstr "Reproducir/Pausa"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:47
+#: ../src/preferences/ario-interface-preferences.c:65
 #: ../src/widgets/ario-header.c:253
 msgid "Play next song"
 msgstr "Reproducir la canción siguiente"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:48
+#: ../src/preferences/ario-interface-preferences.c:66
 msgid "Do nothing"
 msgstr "No hacer nada"
+
+#: ../src/preferences/ario-interface-preferences.c:71
+msgid "Alphabetically"
+msgstr ""
+
+#. SORT_ALPHABETICALLY
+#: ../src/preferences/ario-interface-preferences.c:72
+msgid "By year"
+msgstr ""
 
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
@@ -458,8 +534,8 @@ msgstr "No conectado"
 msgid "Updating..."
 msgstr "Actualizando…"
 
-#: ../src/sources/ario-browser.c:142 ../src/sources/ario-browser.c:145
-#: ../src/sources/ario-browser.c:148 ../src/sources/ario-search.c:100
+#: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:149
+#: ../src/sources/ario-browser.c:152 ../src/sources/ario-search.c:100
 #: ../src/sources/ario-storedplaylists.c:103
 #: ../src/sources/ario-storedplaylists.c:117
 #: ../plugins/filesystem/ario-filesystem.c:106
@@ -468,8 +544,8 @@ msgstr "Actualizando…"
 msgid "_Add to playlist"
 msgstr "_Añadir a la lista de reproducción"
 
-#: ../src/sources/ario-browser.c:152 ../src/sources/ario-browser.c:155
-#: ../src/sources/ario-browser.c:158 ../src/sources/ario-search.c:103
+#: ../src/sources/ario-browser.c:156 ../src/sources/ario-browser.c:159
+#: ../src/sources/ario-browser.c:162 ../src/sources/ario-search.c:103
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../src/sources/ario-storedplaylists.c:120
 #: ../plugins/filesystem/ario-filesystem.c:109
@@ -479,66 +555,40 @@ msgstr "_Añadir a la lista de reproducción"
 msgid "Add and _play"
 msgstr "_Añadir a la lista de reproducción"
 
-#: ../src/sources/ario-browser.c:162 ../src/sources/ario-browser.c:165
+#: ../src/sources/ario-browser.c:166 ../src/sources/ario-browser.c:169
 #: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
-#: ../src/widgets/ario-playlist.c:126
+#: ../src/widgets/ario-playlist.c:137
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
 msgstr "_Propiedades"
 
-#: ../src/sources/ario-browser.c:169 ../src/sources/ario-browser.c:176
+#: ../src/sources/ario-browser.c:173 ../src/sources/ario-browser.c:180
 #, fuzzy
 msgid "Get the covers"
 msgstr "_Borrar las carátulas"
 
-#: ../src/sources/ario-browser.c:172 ../src/sources/ario-browser.c:179
+#: ../src/sources/ario-browser.c:176 ../src/sources/ario-browser.c:183
 msgid "_Delete the covers"
 msgstr "_Borrar las carátulas"
 
-#: ../src/sources/ario-browser.c:258
+#: ../src/sources/ario-browser.c:263
 msgid "Library"
 msgstr "Biblioteca"
 
-#: ../src/sources/ario-browser.c:337 ../src/sources/ario-search.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:404
-#: ../src/widgets/ario-playlist.c:288 ../src/widgets/ario-songlist.c:271
-msgid "Artist"
-msgstr "Artista"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../src/sources/ario-browser.c:394 ../src/sources/ario-search.c:44
-#: ../src/widgets/ario-playlist.c:299 ../src/widgets/ario-songlist.c:286
-msgid "Album"
-msgstr "Álbum"
-
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:404
+#: ../src/sources/ario-browser.c:451
 msgid "Cover"
 msgstr "Carátula"
 
-#. MPD_TAG_ITEM_TITLE
-#: ../src/sources/ario-browser.c:475 ../src/sources/ario-search.c:46
-#: ../src/widgets/ario-playlist.c:266
-msgid "Track"
-msgstr "Pista"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../src/sources/ario-browser.c:482 ../src/sources/ario-search.c:45
-#: ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:277 ../src/widgets/ario-songlist.c:256
-msgid "Title"
-msgstr "Título"
-
-#: ../src/sources/ario-browser.c:1490
+#: ../src/sources/ario-browser.c:1549
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr ""
 "¿Estás seguro de que quieres eliminar todas las carátulas de los artistas "
 "seleccionados?"
 
-#: ../src/sources/ario-browser.c:1541
+#: ../src/sources/ario-browser.c:1600
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr ""
@@ -582,81 +632,82 @@ msgstr "_Eliminar"
 msgid "Playlists"
 msgstr "Lista de reproducción"
 
-#: ../src/sources/ario-storedplaylists.c:264
-msgid "Playlist"
-msgstr "Lista de reproducción"
-
 #: ../src/sources/ario-storedplaylists.c:645
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 "Esta seguro que quiere borrar todas las listas de reproducción seleccionadas?"
 
-#: ../src/shell/ario-shell.c:141
+#: ../src/shell/ario-shell.c:143
 msgid "_File"
 msgstr "_Fichero"
 
-#: ../src/shell/ario-shell.c:142
+#: ../src/shell/ario-shell.c:144
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../src/shell/ario-shell.c:143
+#: ../src/shell/ario-shell.c:145
 msgid "_View"
 msgstr "_Vista"
 
-#: ../src/shell/ario-shell.c:144
+#: ../src/shell/ario-shell.c:146
 msgid "_Tool"
 msgstr "Herramien_ta"
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:147
 msgid "_Help"
 msgstr "A_yuda"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:149
 msgid "_Save Playlist"
 msgstr "Guardar li_sta de reproducción"
 
-#: ../src/shell/ario-shell.c:156
+#: ../src/shell/ario-shell.c:158
 msgid "_Quit"
 msgstr "_Salir"
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:161
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:164
 msgid "Prefere_nces"
 msgstr "Prefere_ncias"
 
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:167
 msgid "_Change current album cover"
 msgstr "_Cambiar la cubierta de album actual"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:170
 #, fuzzy
 msgid "Download album _covers"
 msgstr "Descargar cubiertas_album"
 
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:173
 msgid "Find similar artists"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:176
+#, fuzzy
+msgid "Add similar songs to playlist"
+msgstr "_Añadir a la lista de reproducción"
+
+#: ../src/shell/ario-shell.c:179
 msgid "Show _lyrics"
 msgstr "Mostrar _letras"
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:185
 msgid "_Translate this application..."
 msgstr "_Traducir esta aplicación..."
 
-#: ../src/shell/ario-shell.c:188
+#: ../src/shell/ario-shell.c:193
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:637
+#: ../src/shell/ario-shell.c:642
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:638
+#: ../src/shell/ario-shell.c:643
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -676,7 +727,7 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Paco Molinero https://launchpad.net/~franciscomol"
 
-#: ../src/shell/ario-shell.c:910
+#: ../src/shell/ario-shell.c:931
 #, fuzzy
 msgid "Configure Plugins"
 msgstr "Configurar extensiones"
@@ -701,15 +752,15 @@ msgstr ""
 "%i carátulas no encontradas\n"
 "%i carátulas ya existen"
 
-#: ../src/shell/ario-shell-coverselect.c:234
+#: ../src/shell/ario-shell-coverselect.c:235
 msgid "Cover Download"
 msgstr "Descargar carátula"
 
-#: ../src/shell/ario-shell-coverselect.c:518
+#: ../src/shell/ario-shell-coverselect.c:531
 msgid "Error reading file"
 msgstr "Error al leer el archivo"
 
-#: ../src/shell/ario-shell-coverselect.c:541
+#: ../src/shell/ario-shell-coverselect.c:554
 msgid "Error saving file"
 msgstr "Error guardando el archivo"
 
@@ -736,20 +787,16 @@ msgstr "Preferencias Ario"
 msgid "Server"
 msgstr "Servidor"
 
-#: ../src/shell/ario-shell-preferences.c:190
-msgid "Interface"
-msgstr "Interfaz"
-
-#: ../src/shell/ario-shell-similarartists.c:332
+#: ../src/shell/ario-shell-similarartists.c:343
 #, fuzzy, c-format
 msgid "%d songs"
 msgstr "Canciones"
 
-#: ../src/shell/ario-shell-similarartists.c:393
+#: ../src/shell/ario-shell-similarartists.c:404
 msgid "Image"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:411
+#: ../src/shell/ario-shell-similarartists.c:422
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Canciones"
@@ -830,36 +877,32 @@ msgstr "Descargando letras..."
 msgid "Lyrics not found"
 msgstr "Letras no encontradas"
 
-#: ../src/widgets/ario-playlist.c:117
+#: ../src/widgets/ario-playlist.c:128
 msgid "_Clear"
 msgstr "_Limpiar"
 
-#: ../src/widgets/ario-playlist.c:120
+#: ../src/widgets/ario-playlist.c:131
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: ../src/widgets/ario-playlist.c:123
+#: ../src/widgets/ario-playlist.c:134
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/widgets/ario-playlist.c:129
+#: ../src/widgets/ario-playlist.c:140
 msgid "_Go to playing song"
 msgstr "_Ir la la cancion reproduciendose"
 
-#: ../src/widgets/ario-playlist.c:310
-msgid "Duration"
-msgstr "Duración"
-
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1249
+#: ../src/widgets/ario-playlist.c:1419
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: ../src/widgets/ario-playlist.c:1259
+#: ../src/widgets/ario-playlist.c:1429
 msgid "Playlist name :"
 msgstr "Nombre de lista de reprodución:"
 
-#: ../src/widgets/ario-playlist.c:1284
+#: ../src/widgets/ario-playlist.c:1454
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
 
@@ -887,97 +930,86 @@ msgstr "_Siguiente"
 msgid "P_revious"
 msgstr "_Anterior"
 
-#: ../src/widgets/ario-status-icon.c:394
-#, c-format
-msgid ""
-"Artist: %s\n"
-"Album: %s\n"
-"Title: %s"
-msgstr ""
-"Artista: %s\n"
-"Album: %s\n"
-"Título: %s"
-
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1203
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1202
 msgid "Today %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1216
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1215
 msgid "Yesterday %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1232
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1231
 msgid "%a %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1244
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1243
 msgid "%b %d %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1249
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1248
 msgid "%b %d %Y"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1333
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 #, fuzzy
 msgid "Never"
 msgstr "Servidor"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1355
 msgid "OK"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1359
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1358
 msgid "Logging in"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1361
 msgid "Request failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1365
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1364
 msgid "Incorrect username"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1368
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1367
 msgid "Incorrect password"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1371
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1370
 msgid "Handshake failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1374
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1373
 msgid "Client update required"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1377
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Track submission failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1380
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1379
 msgid "Queue is too long"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1383
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1382
 msgid "Track submission failed too many times"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1435
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1434
 #, fuzzy
 msgid "Audioscrobbler preferences"
 msgstr "Preferencias Ario"
@@ -1031,7 +1063,7 @@ msgstr ""
 msgid "File System"
 msgstr ""
 
-#: ../plugins/filesystem/ario-filesystem.c:496
+#: ../plugins/filesystem/ario-filesystem.c:497
 msgid "Music"
 msgstr ""
 
@@ -1064,30 +1096,30 @@ msgstr "_Borrar estas radios"
 msgid "Web Radios"
 msgstr "Radios web"
 
-#: ../plugins/radios/ario-radio.c:264
+#: ../plugins/radios/ario-radio.c:265
 msgid "Internet Radios"
 msgstr "Radios en Internet"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:888
+#: ../plugins/radios/ario-radio.c:889
 msgid "Add a WebRadio"
 msgstr "Añadir una radio web"
 
-#: ../plugins/radios/ario-radio.c:899 ../plugins/radios/ario-radio.c:1098
+#: ../plugins/radios/ario-radio.c:900 ../plugins/radios/ario-radio.c:1099
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:953 ../plugins/radios/ario-radio.c:1153
+#: ../plugins/radios/ario-radio.c:954 ../plugins/radios/ario-radio.c:1154
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Parámetros incorrectos. Debe especificar el nombre y la URL de la radio."
 
-#: ../plugins/radios/ario-radio.c:1015
+#: ../plugins/radios/ario-radio.c:1016
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "¿Estás seguro de que quieres eliminar todos los radios seleccionados?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1087
+#: ../plugins/radios/ario-radio.c:1088
 msgid "Edit a WebRadio"
 msgstr "Editar una radio web"
 
@@ -1115,6 +1147,15 @@ msgstr ""
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr ""
+
+#~ msgid ""
+#~ "Artist: %s\n"
+#~ "Album: %s\n"
+#~ "Title: %s"
+#~ msgstr ""
+#~ "Artista: %s\n"
+#~ "Album: %s\n"
+#~ "Título: %s"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""

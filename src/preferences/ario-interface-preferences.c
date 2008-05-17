@@ -43,6 +43,22 @@ G_MODULE_EXPORT void ario_interface_preferences_showtabs_check_changed_cb (GtkCh
                                                                            ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
                                                                               ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_track_toogled_cb (GtkCheckButton *butt,
+                                                                  ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_title_toogled_cb (GtkCheckButton *butt,
+                                                                  ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_artist_toogled_cb (GtkCheckButton *butt,
+                                                                   ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_album_toogled_cb (GtkCheckButton *butt,
+                                                                  ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_genre_toogled_cb (GtkCheckButton *butt,
+                                                                  ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_duration_toogled_cb (GtkCheckButton *butt,
+                                                                     ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_file_toogled_cb (GtkCheckButton *butt,
+                                                                 ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_date_toogled_cb (GtkCheckButton *butt,
+                                                                 ArioInterfacePreferences *interface_preferences);
 
 static const char *trayicon_behavior[] = {
         N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE
@@ -63,6 +79,15 @@ struct ArioInterfacePreferencesPrivate
         GtkWidget *hideonclose_check;
         GtkWidget *trayicon_combobox;
         GtkWidget *sort_combobox;
+
+        GtkWidget *track_checkbutton;
+        GtkWidget *title_checkbutton;
+        GtkWidget *artist_checkbutton;
+        GtkWidget *album_checkbutton;
+        GtkWidget *genre_checkbutton;
+        GtkWidget *duration_checkbutton;
+        GtkWidget *file_checkbutton;
+        GtkWidget *date_checkbutton;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -142,11 +167,28 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "trayicon_combobox");
         interface_preferences->priv->sort_combobox = 
                 glade_xml_get_widget (xml, "sort_combobox");
+        interface_preferences->priv->track_checkbutton = 
+                glade_xml_get_widget (xml, "track_checkbutton");
+        interface_preferences->priv->title_checkbutton = 
+                glade_xml_get_widget (xml, "title_checkbutton");
+        interface_preferences->priv->artist_checkbutton = 
+                glade_xml_get_widget (xml, "artist_checkbutton");
+        interface_preferences->priv->album_checkbutton = 
+                glade_xml_get_widget (xml, "album_checkbutton");
+        interface_preferences->priv->genre_checkbutton = 
+                glade_xml_get_widget (xml, "genre_checkbutton");
+        interface_preferences->priv->duration_checkbutton = 
+                glade_xml_get_widget (xml, "duration_checkbutton");
+        interface_preferences->priv->file_checkbutton = 
+                glade_xml_get_widget (xml, "file_checkbutton");
+        interface_preferences->priv->date_checkbutton = 
+                glade_xml_get_widget (xml, "date_checkbutton");
+
         tray_frame = 
                 glade_xml_get_widget (xml, "tray_frame");
         rb_glade_boldify_label (xml, "interface_label");
         rb_glade_boldify_label (xml, "trayicon_label");
-        rb_glade_boldify_label (xml, "window_label");
+        rb_glade_boldify_label (xml, "playlist_label");
 
 #ifndef ENABLE_EGGTRAYICON
         gtk_widget_hide (tray_frame);
@@ -231,6 +273,30 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (interface_preferences->priv->sort_combobox),
                                   ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->track_checkbutton),
+                                      ario_conf_get_boolean (PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->title_checkbutton),
+                                      ario_conf_get_boolean (PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->artist_checkbutton),
+                                      ario_conf_get_boolean (PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->album_checkbutton),
+                                      ario_conf_get_boolean (PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->genre_checkbutton),
+                                      ario_conf_get_boolean (PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->duration_checkbutton),
+                                      ario_conf_get_boolean (PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->file_checkbutton),
+                                      ario_conf_get_boolean (PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->date_checkbutton),
+                                      ario_conf_get_boolean (PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT));
 }
 
 void
@@ -275,5 +341,77 @@ ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
         ARIO_LOG_FUNCTION_START
         ario_conf_set_boolean (PREF_HIDE_ON_CLOSE,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->hideonclose_check)));
+}
+
+void
+ario_interface_preferences_track_toogled_cb (GtkCheckButton *butt,
+                                             ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_TRACK_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_title_toogled_cb (GtkCheckButton *butt,
+                                             ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_TITLE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_artist_toogled_cb (GtkCheckButton *butt,
+                                              ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_ARTIST_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_album_toogled_cb (GtkCheckButton *butt,
+                                             ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_ALBUM_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_genre_toogled_cb (GtkCheckButton *butt,
+                                             ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_GENRE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_duration_toogled_cb (GtkCheckButton *butt,
+                                                ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_DURATION_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_file_toogled_cb (GtkCheckButton *butt,
+                                            ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_FILE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_interface_preferences_date_toogled_cb (GtkCheckButton *butt,
+                                            ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_DATE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
 }
 
