@@ -19,9 +19,14 @@
                 </menu>
 
                 <menu name="ViewMenu" action="View">
+                        <menuitem name="ViewUpperPartMenu" action="ViewUpperPart"/>
+                        <menuitem name="ViewPlaylistMenu" action="ViewPlaylist"/>
+                        <separator/>
+                        <placeholder name="ViewMenuSourcesPlaceholder" />
+                        <separator/>
                         <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
                         <separator/>
-                        <menuitem name="LyricsMenu" action="ViewLyrics"/> 
+                        <menuitem name="LyricsMenu" action="ViewLyrics"/>
                         <placeholder name="ViewMenuPluginPlaceholder" />
                 </menu>
 

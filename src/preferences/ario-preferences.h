@@ -71,6 +71,12 @@
 #define PREF_STATUSBAR_HIDDEN                   "statusbar_hidden"
 #define PREF_STATUSBAR_HIDDEN_DEFAULT           FALSE
 
+#define PREF_UPPERPART_HIDDEN                   "upperpart_hidden"
+#define PREF_UPPERPART_HIDDEN_DEFAULT           FALSE
+
+#define PREF_PLAYLIST_HIDDEN                    "playlist_hidden"
+#define PREF_PLAYLIST_HIDDEN_DEFAULT            FALSE
+
 #define PREF_VPANED_POSITION                    "vpaned_position"
 #define PREF_VPANED_POSITION_DEFAULT            400
 
