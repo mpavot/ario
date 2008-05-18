@@ -414,9 +414,6 @@ ario_playlist_init (ArioPlaylist *playlist)
                           G_CALLBACK (ario_playlist_drag_data_get_cb),
                           playlist);
 
-        gtk_box_set_homogeneous (GTK_BOX (playlist), TRUE);
-        gtk_box_set_spacing (GTK_BOX (playlist), 4);
-
         gtk_box_pack_start (GTK_BOX (playlist), scrolledwindow, TRUE, TRUE, 0);
 }
 
