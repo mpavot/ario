@@ -220,7 +220,7 @@ ario_playlist_get_type (void)
                         (GInstanceInitFunc) ario_playlist_init
                 };
 
-                type = g_type_register_static (GTK_TYPE_HBOX,
+                type = g_type_register_static (GTK_TYPE_SCROLLED_WINDOW,
                                                "ArioPlaylist",
                                                &our_info, 0);
         }
@@ -330,7 +330,6 @@ static void
 ario_playlist_init (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        GtkWidget *scrolledwindow;
         int i;
 
         playlist->priv = g_new0 (ArioPlaylistPrivate, 1);
@@ -338,9 +337,10 @@ ario_playlist_init (ArioPlaylist *playlist)
         playlist->priv->playlist_length = 0;
         playlist->priv->play_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "play.png", NULL);
 
-        scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (playlist), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (playlist), GTK_SHADOW_IN);
+        gtk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (playlist), NULL);
+        gtk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (playlist), NULL);
 
         playlist->priv->tree = gtk_tree_view_new ();
         gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (playlist->priv->tree), TRUE);
@@ -373,7 +373,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         playlist->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (playlist->priv->tree));
         gtk_tree_selection_set_mode (playlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
-        gtk_container_add (GTK_CONTAINER (scrolledwindow), playlist->priv->tree);
+        gtk_container_add (GTK_CONTAINER (playlist), playlist->priv->tree);
         gtk_drag_source_set (playlist->priv->tree,
                              GDK_BUTTON1_MASK,
                              internal_targets,
@@ -413,8 +413,6 @@ ario_playlist_init (ArioPlaylist *playlist)
                           "drag_data_get", 
                           G_CALLBACK (ario_playlist_drag_data_get_cb),
                           playlist);
-
-        gtk_box_pack_start (GTK_BOX (playlist), scrolledwindow, TRUE, TRUE, 0);
 }
 
 void
