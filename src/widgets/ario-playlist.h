@@ -20,7 +20,7 @@
 #ifndef __ARIO_PLAYLIST_H
 #define __ARIO_PLAYLIST_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtkscrolledwindow.h>
 #include "ario-mpd.h"
 
 G_BEGIN_DECLS
@@ -36,14 +36,14 @@ typedef struct ArioPlaylistPrivate ArioPlaylistPrivate;
 
 typedef struct
 {
-        GtkHBox parent;
+        GtkScrolledWindow parent;
 
         ArioPlaylistPrivate *priv;
 } ArioPlaylist;
 
 typedef struct
 {
-        GtkHBoxClass parent;
+        GtkScrolledWindowClass parent;
 } ArioPlaylistClass;
 
 GType           ario_playlist_get_type          (void) G_GNUC_CONST;

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Ario
 _GenericName=Ario music player
-_Comment=Client apllication to mpd
+_Comment=Client application to mpd
 Exec=ario
 Icon=ario.png
 Terminal=false

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-16 23:43+0200\n"
-"PO-Revision-Date: 2008-04-06 22:30+0000\n"
+"POT-Creation-Date: 2008-05-18 23:01+0200\n"
+"PO-Revision-Date: 2008-05-05 20:37+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-05-05 19:44+0000\n"
+"X-Launchpad-Export-Date: 2008-05-18 20:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -22,7 +22,7 @@ msgid "Ario music player"
 msgstr "נגן המוסיקה Ario"
 
 #: ../data/ario.desktop.in.in.h:2
-msgid "Client apllication to mpd"
+msgid "Client application to mpd"
 msgstr "תוכנת לקוח ל-mpd"
 
 #: ../data/glade/cover-prefs.glade.h:1
@@ -91,11 +91,11 @@ msgstr "פותחה :"
 msgid "_Autoconnect on startup"
 msgstr "ה_תחבר אוטומטית בהפעלה"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:152
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:160
 msgid "_Connect"
 msgstr "_התחבר"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:163
 msgid "_Disconnect"
 msgstr "הת_נתק"
 
@@ -140,94 +140,90 @@ msgid "Search"
 msgstr "חפש"
 
 #. MPD_TAG_ITEM_ARTIST
-#. Album column
 #: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:378
+#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:180
 #: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
 msgid "Album"
 msgstr "אלבום"
 
-#. Artist column
 #: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
 #: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:415
-#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
+#: ../src/widgets/ario-playlist.c:179 ../src/widgets/ario-songlist.c:271
 #: ../src/widgets/ario-status-icon.c:395
 msgid "Artist"
 msgstr "אמן"
 
-#. Date column
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:422
+#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:184
 #, fuzzy
 msgid "Date"
 msgstr "תאריך :"
 
-#. Duration column
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:389
+#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:181
 msgid "Duration"
 msgstr "משך"
 
-#. File column
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:400
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:182
 #, fuzzy
 msgid "File"
 msgstr "_קובץ"
 
-#. Genre column
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:411
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:183
 #, fuzzy
 msgid "Genre"
 msgstr "סגנון :"
 
 #: ../data/glade/interface-prefs.glade.h:7
-msgid "Hide window when close button is pressed"
+msgid "Go to current song when a new song is played"
 msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:8
+msgid "Hide window when close button is pressed"
+msgstr ""
+
+#: ../data/glade/interface-prefs.glade.h:9
 #: ../src/shell/ario-shell-preferences.c:190
 msgid "Interface"
 msgstr "מנשק"
 
-#: ../data/glade/interface-prefs.glade.h:9
+#: ../data/glade/interface-prefs.glade.h:10
 msgid "On middle button click on tray icon :"
 msgstr "עם לחיצת הלחצן האמצעי על הסמל בסרגל :"
 
-#: ../data/glade/interface-prefs.glade.h:10
-#: ../src/sources/ario-storedplaylists.c:264
+#: ../data/glade/interface-prefs.glade.h:11
+#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:207
 msgid "Playlist"
 msgstr "רשימת השמעה"
 
-#: ../data/glade/interface-prefs.glade.h:11
+#: ../data/glade/interface-prefs.glade.h:12
 #, fuzzy
 msgid "Show rows:"
 msgstr "הצ_ג את מילות השירים"
 
-#: ../data/glade/interface-prefs.glade.h:12
+#: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
 msgstr "הצג לשוניות"
 
-#: ../data/glade/interface-prefs.glade.h:13
+#: ../data/glade/interface-prefs.glade.h:14
 #, fuzzy
 msgid "Sort albums: "
 msgstr "מצב:‏"
 
 #. MPD_TAG_ITEM_ALBUM
-#. Title column
-#: ../data/glade/interface-prefs.glade.h:14 ../src/sources/ario-browser.c:540
+#: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
 #: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:356 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-playlist.c:178 ../src/widgets/ario-songlist.c:256
 #: ../src/widgets/ario-status-icon.c:399
 msgid "Title"
 msgstr "כותרת"
 
 #. MPD_TAG_ITEM_TITLE
-#. Track column
-#: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:345
+#: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
+#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:177
 msgid "Track"
 msgstr "רצועה"
 
-#: ../data/glade/interface-prefs.glade.h:16
+#: ../data/glade/interface-prefs.glade.h:17
 msgid "Tray icon"
 msgstr "סמל בסרגל"
 
@@ -421,7 +417,7 @@ msgstr "תוסף"
 msgid "Enabled"
 msgstr "מופעל"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:182
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:190
 msgid "_About"
 msgstr "_אודות"
 
@@ -486,27 +482,27 @@ msgstr "עליך לבחור שרת."
 msgid "New Profile"
 msgstr "פרופיל חדש"
 
-#: ../src/preferences/ario-interface-preferences.c:64
+#: ../src/preferences/ario-interface-preferences.c:66
 msgid "Play/Pause"
 msgstr "נגן/השהה"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:65
+#: ../src/preferences/ario-interface-preferences.c:67
 #: ../src/widgets/ario-header.c:253
 msgid "Play next song"
 msgstr "השמע את השיר הבא"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:66
+#: ../src/preferences/ario-interface-preferences.c:68
 msgid "Do nothing"
 msgstr "אל תעשה כלום"
 
-#: ../src/preferences/ario-interface-preferences.c:71
+#: ../src/preferences/ario-interface-preferences.c:73
 msgid "Alphabetically"
 msgstr ""
 
 #. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-interface-preferences.c:72
+#: ../src/preferences/ario-interface-preferences.c:74
 msgid "By year"
 msgstr ""
 
@@ -549,7 +545,7 @@ msgstr "הוסף ל_רשימת ההשמעה"
 
 #: ../src/sources/ario-browser.c:166 ../src/sources/ario-browser.c:169
 #: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
-#: ../src/widgets/ario-playlist.c:137
+#: ../src/widgets/ario-playlist.c:125
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
@@ -572,12 +568,12 @@ msgstr "ספרייה"
 msgid "Cover"
 msgstr "עטיפה"
 
-#: ../src/sources/ario-browser.c:1549
+#: ../src/sources/ario-browser.c:1545
 msgid ""
 "Are you sure that you want to remove all the covers of the selected artists?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל העטיפות של האמנים הנבחרים?"
 
-#: ../src/sources/ario-browser.c:1600
+#: ../src/sources/ario-browser.c:1596
 msgid ""
 "Are you sure that you want to remove all the covers of the selected albums?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל העטיפות של האלבומים הנבחרים?"
@@ -623,85 +619,86 @@ msgstr "רשימות השמעה"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "האם אתה בטוח שברצונך למחוק את כל רשימות ההשמעה הנבחרות?"
 
-#: ../src/shell/ario-shell.c:143
+#: ../src/shell/ario-shell.c:151
 msgid "_File"
 msgstr "_קובץ"
 
-#: ../src/shell/ario-shell.c:144
+#: ../src/shell/ario-shell.c:152
 msgid "_Edit"
 msgstr "ע_ריכה"
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:153
 msgid "_View"
 msgstr "_תצוגה"
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:154
 msgid "_Tool"
 msgstr "_כלי"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:155
 msgid "_Help"
 msgstr "_עזרה"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:157
 msgid "_Save Playlist"
 msgstr "_שמור רשימת השמעה"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:166
 msgid "_Quit"
 msgstr "_יציאה"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:169
 msgid "Plu_gins"
 msgstr "תו_ספים"
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:172
 msgid "Prefere_nces"
 msgstr "ה_עדפות"
 
-#: ../src/shell/ario-shell.c:167
+#: ../src/shell/ario-shell.c:175
 msgid "_Change current album cover"
 msgstr "ש_נה את עטיפת האלבום הנוכחי"
 
-#: ../src/shell/ario-shell.c:170
+#: ../src/shell/ario-shell.c:178
 msgid "Download album _covers"
 msgstr "הו_רד עטיפות אלבומים"
 
-#: ../src/shell/ario-shell.c:173
+#: ../src/shell/ario-shell.c:181
 msgid "Find similar artists"
 msgstr "חפש אמנים דומים"
 
-#: ../src/shell/ario-shell.c:176
+#: ../src/shell/ario-shell.c:184
 #, fuzzy
 msgid "Add similar songs to playlist"
 msgstr "הוסף ל_רשימת ההשמעה"
 
-#: ../src/shell/ario-shell.c:179
+#: ../src/shell/ario-shell.c:187
 msgid "Show _lyrics"
 msgstr "הצ_ג את מילות השירים"
 
-#: ../src/shell/ario-shell.c:185
+#: ../src/shell/ario-shell.c:193
 msgid "_Translate this application..."
 msgstr "_תרגם תוכנה זו..."
 
-#: ../src/shell/ario-shell.c:193
+#: ../src/shell/ario-shell.c:201
 msgid "S_tatusbar"
 msgstr "_שורת המצב"
 
-#: ../src/shell/ario-shell.c:642
+#: ../src/shell/ario-shell.c:204
+msgid "Upper part"
+msgstr ""
+
+#: ../src/shell/ario-shell.c:672
 msgid "GTK client for MPD"
 msgstr "לקוח MPD עבור GTK"
 
-#: ../src/shell/ario-shell.c:643
+#: ../src/shell/ario-shell.c:673
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
-#: ../src/shell/ario-shell.c:931
+#: ../src/shell/ario-shell.c:1008
 msgid "Configure Plugins"
 msgstr "הגדרות תוספים"
 
@@ -761,9 +758,9 @@ msgid "Server"
 msgstr "שרת"
 
 #: ../src/shell/ario-shell-similarartists.c:343
-#, fuzzy, c-format
+#, c-format
 msgid "%d songs"
-msgstr "שירים"
+msgstr ""
 
 #: ../src/shell/ario-shell-similarartists.c:404
 msgid "Image"
@@ -848,32 +845,32 @@ msgstr "מוריד את מילות השיר..."
 msgid "Lyrics not found"
 msgstr "לא נמצאו מילות השיר"
 
-#: ../src/widgets/ario-playlist.c:128
+#: ../src/widgets/ario-playlist.c:116
 msgid "_Clear"
 msgstr "_נקה"
 
-#: ../src/widgets/ario-playlist.c:131
+#: ../src/widgets/ario-playlist.c:119
 msgid "_Remove"
 msgstr "ה_סר"
 
-#: ../src/widgets/ario-playlist.c:134
+#: ../src/widgets/ario-playlist.c:122
 msgid "_Save"
 msgstr "שמו_ר"
 
-#: ../src/widgets/ario-playlist.c:140
+#: ../src/widgets/ario-playlist.c:128
 msgid "_Go to playing song"
 msgstr "ע_בור לשיר המתנגן"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1419
+#: ../src/widgets/ario-playlist.c:1278
 msgid "Save playlist"
 msgstr "שמור את רשימת ההשמעה"
 
-#: ../src/widgets/ario-playlist.c:1429
+#: ../src/widgets/ario-playlist.c:1288
 msgid "Playlist name :"
 msgstr "שם רשימת ההשמעה :"
 
-#: ../src/widgets/ario-playlist.c:1454
+#: ../src/widgets/ario-playlist.c:1313
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "רשימת ההשמעה כבר קיימת. האם ברצונך לשכתב עליה?"
 
@@ -1115,6 +1112,9 @@ msgstr "תוסף לחיפוש האמן הנוכחי בויקיפדיה"
 msgid "Wikipedia"
 msgstr "ויקיפדיה"
 
+#~ msgid "Select a file"
+#~ msgstr "בחר קובץ"
+
 #~ msgid "Tabs"
 #~ msgstr "לשוניות"
 
@@ -1126,6 +1126,3 @@ msgstr "ויקיפדיה"
 #~ "אמן: %s\n"
 #~ "אלבום: %s\n"
 #~ "כותרת: %s"
-
-#~ msgid "Select a file"
-#~ msgstr "בחר קובץ"
