@@ -1164,8 +1164,6 @@ ario_browser_button_press_cb (GtkWidget *widget,
         }
 
         if (event->button == 3) {
-                GtkTreePath *path;
-
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                 if (path) {
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));

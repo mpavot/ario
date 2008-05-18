@@ -464,7 +464,7 @@ name_search_cb (GtkTreeModel *model,
 }
 
 static void
-enable_plugin_menu_cb (GtkMenu *menu,
+enable_plugin_menu_cb (GtkCheckMenuItem *checkmenuitem,
                        ArioPluginManager *pm)
 {
         GtkTreeModel *model;

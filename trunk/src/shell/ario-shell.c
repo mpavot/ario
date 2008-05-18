@@ -104,7 +104,13 @@ static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                               ArioShell *shell);
 static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
                                                   ArioShell *shell);
+static void ario_shell_view_upperpart_changed_cb (GtkAction *action,
+                                                  ArioShell *shell);
+static void ario_shell_view_playlist_changed_cb (GtkAction *action,
+                                                 ArioShell *shell);
 static void ario_shell_sync_statusbar_visibility (ArioShell *shell);
+static void ario_shell_sync_upperpart_visibility (ArioShell *shell);
+static void ario_shell_sync_playlist_visibility (ArioShell *shell);
 
 struct ArioShellPrivate
 {
@@ -126,6 +132,8 @@ struct ArioShellPrivate
         ArioStatusIcon *status_icon;
 #endif
         gboolean statusbar_hidden;
+        gboolean upperpart_hidden;
+        gboolean playlist_hidden;
         gboolean connected;
         gboolean shown;
 };
@@ -192,7 +200,13 @@ static GtkToggleActionEntry ario_shell_toggle [] =
 {
         { "ViewStatusbar", NULL, N_("S_tatusbar"), NULL,
                 NULL,
-                G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE }
+                G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE },
+        { "ViewUpperPart", NULL, N_("Upper part"), NULL,
+                NULL,
+                G_CALLBACK (ario_shell_view_upperpart_changed_cb), TRUE },
+        { "ViewPlaylist", NULL, N_("Playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_shell_view_playlist_changed_cb), TRUE }
 };
 static guint ario_shell_n_toggle = G_N_ELEMENTS (ario_shell_toggle);
 
@@ -400,8 +414,23 @@ ario_shell_construct (ArioShell *shell)
         shell->priv->ui_manager = gtk_ui_manager_new ();
         shell->priv->actiongroup = gtk_action_group_new ("MainActions");
 
+        gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
+                                         UI_PATH "ario-ui.xml", NULL);
+        gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
+                                    gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
+
         gtk_action_group_set_translation_domain (shell->priv->actiongroup,
                                                  GETTEXT_PACKAGE);
+        gtk_action_group_add_actions (shell->priv->actiongroup,
+                                      ario_shell_actions,
+                                      ario_shell_n_actions, shell);
+
+        gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
+                                             ario_shell_toggle,
+                                             ario_shell_n_toggle,
+                                             shell);
+        gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
+                                            shell->priv->actiongroup, 0);
 
         /* initialize shell services */
         vbox = gtk_vbox_new (FALSE, 0);
@@ -413,20 +442,6 @@ ario_shell_construct (ArioShell *shell)
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
         shell->priv->sourcemanager = ario_sourcemanager_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
 
-        gtk_action_group_add_actions (shell->priv->actiongroup,
-                                      ario_shell_actions,
-                                      ario_shell_n_actions, shell);
-
-        gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
-                                             ario_shell_toggle,
-                                             ario_shell_n_toggle,
-                                             shell);
-        gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
-                                            shell->priv->actiongroup, 0);
-        gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
-                                         UI_PATH "ario-ui.xml", NULL);
-        gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
-                                    gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
 #ifdef ENABLE_EGGTRAYICON
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
@@ -441,7 +456,6 @@ ario_shell_construct (ArioShell *shell)
                                                          GTK_WINDOW (shell->priv->window),
                                                          shell->priv->mpd);
 #endif
-        menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
@@ -449,6 +463,20 @@ ario_shell_construct (ArioShell *shell)
                                               "ViewStatusbar");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       !shell->priv->statusbar_hidden);
+
+        shell->priv->upperpart_hidden = ario_conf_get_boolean (PREF_UPPERPART_HIDDEN, PREF_UPPERPART_HIDDEN_DEFAULT);
+        action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                              "ViewUpperPart");
+        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+                                      !shell->priv->upperpart_hidden);
+
+        shell->priv->playlist_hidden = ario_conf_get_boolean (PREF_PLAYLIST_HIDDEN, PREF_PLAYLIST_HIDDEN_DEFAULT);
+        action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                              "ViewPlaylist");
+        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+                                      !shell->priv->playlist_hidden);
+
+        menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
 
         gtk_paned_pack1 (GTK_PANED (shell->priv->vpaned),
                          shell->priv->sourcemanager,
@@ -503,6 +531,8 @@ ario_shell_construct (ArioShell *shell)
         }
 
         ario_shell_sync_statusbar_visibility (shell);
+        ario_shell_sync_upperpart_visibility (shell);
+        ario_shell_sync_playlist_visibility (shell);
 }
 
 void
@@ -889,6 +919,7 @@ static void
 ario_shell_view_statusbar_changed_cb (GtkAction *action,
                                       ArioShell *shell)
 {
+        ARIO_LOG_FUNCTION_START
         shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
 
@@ -896,12 +927,55 @@ ario_shell_view_statusbar_changed_cb (GtkAction *action,
 }
 
 static void
+ario_shell_view_upperpart_changed_cb (GtkAction *action,
+                                      ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        shell->priv->upperpart_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+        ario_conf_set_boolean (PREF_UPPERPART_HIDDEN, shell->priv->upperpart_hidden);
+
+        ario_shell_sync_upperpart_visibility (shell);
+}
+
+static void
+ario_shell_view_playlist_changed_cb (GtkAction *action,
+                                     ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        shell->priv->playlist_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+        ario_conf_set_boolean (PREF_PLAYLIST_HIDDEN, shell->priv->playlist_hidden);
+
+        ario_shell_sync_playlist_visibility (shell);
+}
+
+static void
 ario_shell_sync_statusbar_visibility (ArioShell *shell)
 {
+        ARIO_LOG_FUNCTION_START
         if (shell->priv->statusbar_hidden)
                 gtk_widget_hide (GTK_WIDGET (shell->priv->status_bar));
         else
                 gtk_widget_show (GTK_WIDGET (shell->priv->status_bar));
+}
+
+static void
+ario_shell_sync_upperpart_visibility (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        if (shell->priv->upperpart_hidden)
+                gtk_widget_hide (GTK_WIDGET (shell->priv->sourcemanager));
+        else
+                gtk_widget_show (GTK_WIDGET (shell->priv->sourcemanager));
+}
+
+static void
+ario_shell_sync_playlist_visibility (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        if (shell->priv->playlist_hidden)
+                gtk_widget_hide (GTK_WIDGET (shell->priv->playlist));
+        else
+                gtk_widget_show (GTK_WIDGET (shell->priv->playlist));
 }
 
 static gboolean
@@ -909,6 +983,7 @@ ario_shell_plugins_window_delete_cb (GtkWidget *window,
                                      GdkEventAny *event,
                                      gpointer data)
 {
+        ARIO_LOG_FUNCTION_START
         gtk_widget_destroy (GTK_WIDGET (window));
         return TRUE;
 }
@@ -918,6 +993,7 @@ ario_shell_plugins_response_cb (GtkDialog *dialog,
                                 int response_id,
                                 gpointer data)
 {
+        ARIO_LOG_FUNCTION_START
         gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
@@ -925,6 +1001,7 @@ static void
 ario_shell_cmd_plugins (GtkAction *action,
                         ArioShell *shell)
 {
+        ARIO_LOG_FUNCTION_START
         GtkWidget *window;
         GtkWidget *manager;
 
