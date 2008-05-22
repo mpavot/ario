@@ -30,3 +30,11 @@ copy plugins\radios\libradios.dll delivery\plugins
 copy plugins\radios\radios-ui.xml delivery\plugins
 copy plugins\radios\radios.xml.default delivery\plugins
 copy plugins\radios\radios.ario-plugin.w32 delivery\plugins\radios.ario-plugin
+
+mkdir delivery\po
+
+for %%a in (po\*.mo) do (
+	mkdir delivery\po\%%~na
+	mkdir delivery\po\%%~na\LC_MESSAGES
+	copy %%a delivery\po\%%~na\LC_MESSAGES\Ario.mo
+)
