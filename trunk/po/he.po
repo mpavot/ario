@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-18 23:01+0200\n"
+"POT-Creation-Date: 2008-05-31 23:00+0200\n"
 "PO-Revision-Date: 2008-05-05 20:37+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -488,7 +488,7 @@ msgstr "נגן/השהה"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:253
+#: ../src/widgets/ario-header.c:252
 msgid "Play next song"
 msgstr "השמע את השיר הבא"
 
@@ -698,7 +698,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
-#: ../src/shell/ario-shell.c:1008
+#: ../src/shell/ario-shell.c:1009
 msgid "Configure Plugins"
 msgstr "הגדרות תוספים"
 
@@ -811,29 +811,29 @@ msgstr "<i>מאת</i> %s <i>על ידי</i> %s"
 msgid "Play previous song"
 msgstr "נגן את השיר הקודם"
 
-#: ../src/widgets/ario-header.c:231
+#: ../src/widgets/ario-header.c:230
 msgid "Play/Pause the music"
 msgstr "נגן/השהה את המוסיקה"
 
-#: ../src/widgets/ario-header.c:242
+#: ../src/widgets/ario-header.c:241
 msgid "Stop the music"
 msgstr "עצור את המוסיקה"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
 msgstr " מתוך "
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:341
 msgid "Toggle random on/off"
 msgstr "הפעל/בטל בחירה אקראית"
 
-#: ../src/widgets/ario-header.c:353
+#: ../src/widgets/ario-header.c:352
 msgid "Toggle repeat on/off"
 msgstr "הפעל/בטל חזרה"
 
-#: ../src/widgets/ario-header.c:463
+#: ../src/widgets/ario-header.c:462
 msgid "Change the music volume"
 msgstr "שנה את עוצמת המוסיקה"
 

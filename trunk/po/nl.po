@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-18 23:01+0200\n"
+"POT-Creation-Date: 2008-05-31 23:00+0200\n"
 "PO-Revision-Date: 2008-05-05 20:37+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -490,7 +490,7 @@ msgstr "Afspelen/Pauzeren"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:253
+#: ../src/widgets/ario-header.c:252
 msgid "Play next song"
 msgstr "Volgende nummer afspelen"
 
@@ -708,7 +708,7 @@ msgstr ""
 "  Robert Wubs https://launchpad.net/~wubsieonline\n"
 "  dvdmeer https://launchpad.net/~dennis-dvdmeer"
 
-#: ../src/shell/ario-shell.c:1008
+#: ../src/shell/ario-shell.c:1009
 msgid "Configure Plugins"
 msgstr "Plugins Instellen"
 
@@ -820,29 +820,29 @@ msgstr "<i>van</i> %s <i>door</i> %s"
 msgid "Play previous song"
 msgstr "Vorige nummer afspelen"
 
-#: ../src/widgets/ario-header.c:231
+#: ../src/widgets/ario-header.c:230
 msgid "Play/Pause the music"
 msgstr "Speel/Pauzeer de muziek"
 
-#: ../src/widgets/ario-header.c:242
+#: ../src/widgets/ario-header.c:241
 msgid "Stop the music"
 msgstr "Stop de muziek"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
 msgstr " van "
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:341
 msgid "Toggle random on/off"
 msgstr "Willekeurige volgorde in-/uitschakelen"
 
-#: ../src/widgets/ario-header.c:353
+#: ../src/widgets/ario-header.c:352
 msgid "Toggle repeat on/off"
 msgstr "Herhalen in-/uitschakelen"
 
-#: ../src/widgets/ario-header.c:463
+#: ../src/widgets/ario-header.c:462
 msgid "Change the music volume"
 msgstr "Volume aanpassen"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-18 23:01+0200\n"
+"POT-Creation-Date: 2008-05-31 23:00+0200\n"
 "PO-Revision-Date: 2008-05-05 20:37+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -494,7 +494,7 @@ msgstr "Seinn/Sos"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:253
+#: ../src/widgets/ario-header.c:252
 msgid "Play next song"
 msgstr "Seinn an chéad amhrán eile"
 
@@ -711,7 +711,7 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Seanan https://launchpad.net/~seananoc-gmail"
 
-#: ../src/shell/ario-shell.c:1008
+#: ../src/shell/ario-shell.c:1009
 msgid "Configure Plugins"
 msgstr "Cumraigh na mBreiseáin"
 
@@ -823,29 +823,29 @@ msgstr "<i>ó</i> %s <i>le</i> %s"
 msgid "Play previous song"
 msgstr "Seinn an t-amhrán roimhe"
 
-#: ../src/widgets/ario-header.c:231
+#: ../src/widgets/ario-header.c:230
 msgid "Play/Pause the music"
 msgstr "Seinn/Moilligh an ceol"
 
-#: ../src/widgets/ario-header.c:242
+#: ../src/widgets/ario-header.c:241
 msgid "Stop the music"
 msgstr "Stad an ceol"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
 msgstr " de "
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:341
 msgid "Toggle random on/off"
 msgstr "Scag ar siúl/as fánach"
 
-#: ../src/widgets/ario-header.c:353
+#: ../src/widgets/ario-header.c:352
 msgid "Toggle repeat on/off"
 msgstr "Scag ar siúl/as athuair"
 
-#: ../src/widgets/ario-header.c:463
+#: ../src/widgets/ario-header.c:462
 msgid "Change the music volume"
 msgstr "Athraigh airde an ceoil"
 

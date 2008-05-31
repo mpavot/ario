@@ -157,7 +157,6 @@ enum
 
 struct ArioPlaylistColumn {
         const int columnnb;
-        const gchar *title;
         const gchar *pref_size;
         const int default_size;
 
@@ -172,16 +171,16 @@ struct ArioPlaylistColumn {
         GtkTreeViewColumn *column;
 };
 
-static ArioPlaylistColumn new_all_columns []  = {
-	{ PIXBUF_COLUMN, " ", NULL, 20, PREF_PIXBUF_COLUMN_ORDER, PREF_PIXBUF_COLUMN_ORDER_DEFAULT, NULL, TRUE, TRUE, FALSE },
-	{ TRACK_COLUMN, N_("Track"), PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT, PREF_TRACK_COLUMN_ORDER, PREF_TRACK_COLUMN_ORDER_DEFAULT, PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ TITLE_COLUMN, N_("Title"), PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT, PREF_TITLE_COLUMN_ORDER, PREF_TITLE_COLUMN_ORDER_DEFAULT, PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ ARTIST_COLUMN, N_("Artist"), PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT, PREF_ARTIST_COLUMN_ORDER, PREF_ARTIST_COLUMN_ORDER_DEFAULT, PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ ALBUM_COLUMN, N_("Album"), PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT, PREF_ALBUM_COLUMN_ORDER, PREF_ALBUM_COLUMN_ORDER_DEFAULT, PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ DURATION_COLUMN, N_("Duration"), PREF_DURATION_COLUMN_SIZE, PREF_DURATION_COLUMN_SIZE_DEFAULT, PREF_DURATION_COLUMN_ORDER, PREF_DURATION_COLUMN_ORDER_DEFAULT, PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ FILE_COLUMN, N_("File"), PREF_FILE_COLUMN_SIZE, PREF_FILE_COLUMN_SIZE_DEFAULT, PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT, PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ GENRE_COLUMN, N_("Genre"), PREF_GENRE_COLUMN_SIZE, PREF_GENRE_COLUMN_SIZE_DEFAULT, PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT, PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ DATE_COLUMN, N_("Date"), PREF_DATE_COLUMN_SIZE, PREF_DATE_COLUMN_SIZE_DEFAULT, PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT, PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+static ArioPlaylistColumn all_columns []  = {
+	{ PIXBUF_COLUMN, NULL, 20, PREF_PIXBUF_COLUMN_ORDER, PREF_PIXBUF_COLUMN_ORDER_DEFAULT, NULL, TRUE, TRUE, FALSE },
+	{ TRACK_COLUMN, PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT, PREF_TRACK_COLUMN_ORDER, PREF_TRACK_COLUMN_ORDER_DEFAULT, PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ TITLE_COLUMN, PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT, PREF_TITLE_COLUMN_ORDER, PREF_TITLE_COLUMN_ORDER_DEFAULT, PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ ARTIST_COLUMN, PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT, PREF_ARTIST_COLUMN_ORDER, PREF_ARTIST_COLUMN_ORDER_DEFAULT, PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ ALBUM_COLUMN, PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT, PREF_ALBUM_COLUMN_ORDER, PREF_ALBUM_COLUMN_ORDER_DEFAULT, PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ DURATION_COLUMN, PREF_DURATION_COLUMN_SIZE, PREF_DURATION_COLUMN_SIZE_DEFAULT, PREF_DURATION_COLUMN_ORDER, PREF_DURATION_COLUMN_ORDER_DEFAULT, PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ FILE_COLUMN, PREF_FILE_COLUMN_SIZE, PREF_FILE_COLUMN_SIZE_DEFAULT, PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT, PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ GENRE_COLUMN, PREF_GENRE_COLUMN_SIZE, PREF_GENRE_COLUMN_SIZE_DEFAULT, PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT, PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ DATE_COLUMN, PREF_DATE_COLUMN_SIZE, PREF_DATE_COLUMN_SIZE_DEFAULT, PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT, PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
 	{ -1 }
 };
 
@@ -265,7 +264,8 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
 
 static void
 ario_playlist_append_column (ArioPlaylist *playlist,
-                             ArioPlaylistColumn *ario_column)
+                             ArioPlaylistColumn *ario_column,
+                             const gchar *column_name)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeViewColumn *column;
@@ -273,13 +273,13 @@ ario_playlist_append_column (ArioPlaylist *playlist,
 
         if (ario_column->is_pixbuf) {
                 renderer = gtk_cell_renderer_pixbuf_new ();
-                column = gtk_tree_view_column_new_with_attributes (ario_column->title,
+                column = gtk_tree_view_column_new_with_attributes (column_name,
                                                                    renderer,
                                                                    "pixbuf", ario_column->columnnb,
                                                                    NULL);
         } else {
                 renderer = gtk_cell_renderer_text_new ();
-                column = gtk_tree_view_column_new_with_attributes (ario_column->title,
+                column = gtk_tree_view_column_new_with_attributes (column_name,
                                                                    renderer,
                                                                    "text", ario_column->columnnb,
                                                                    NULL);
@@ -315,8 +315,8 @@ ario_playlist_reorder_columns (ArioPlaylist *playlist)
         for (i = 0; i < N_COLUMN; ++i)
                 orders[i] = NULL;
 
-        for (i = 0; new_all_columns[i].columnnb != -1; ++i)
-                orders[ario_conf_get_integer (new_all_columns[i].pref_order, new_all_columns[i].default_order)] = new_all_columns[i].column;
+        for (i = 0; all_columns[i].columnnb != -1; ++i)
+                orders[ario_conf_get_integer (all_columns[i].pref_order, all_columns[i].default_order)] = all_columns[i].column;
 
         for (i = 0; i < N_COLUMN; ++i) {
                 current = orders[i];
@@ -331,6 +331,7 @@ ario_playlist_init (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
         int i;
+        const gchar *column_names []  = { " ", _("Track"), _("Title"), _("Artist"), _("Album"), _("Duration"), _("File"), _("Genre"), _("Date") };
 
         playlist->priv = g_new0 (ArioPlaylistPrivate, 1);
         playlist->priv->playlist_id = -1;
@@ -345,8 +346,8 @@ ario_playlist_init (ArioPlaylist *playlist)
         playlist->priv->tree = gtk_tree_view_new ();
         gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (playlist->priv->tree), TRUE);
 
-        for (i = 0; new_all_columns[i].columnnb != -1; ++i)
-                ario_playlist_append_column (playlist, &new_all_columns[i]);
+        for (i = 0; all_columns[i].columnnb != -1; ++i)
+                ario_playlist_append_column (playlist, &all_columns[i], column_names[i]);
 
         ario_playlist_reorder_columns (playlist);
         /* Model */
@@ -429,19 +430,19 @@ ario_playlist_shutdown (ArioPlaylist *playlist)
         for (tmp = columns; tmp; tmp = g_list_next (tmp)) {
                 column = tmp->data;
                 for (i = 0; i < N_COLUMN; ++i) {
-                        if (new_all_columns[i].column == column)
+                        if (all_columns[i].column == column)
                                 orders[i] = j;
                 }
                 ++j;
         }
         g_list_free (columns);
 
-        for (i = 0; new_all_columns[i].columnnb != -1; ++i) {
-                width = gtk_tree_view_column_get_width (new_all_columns[i].column);
-                if (width > 10 && new_all_columns[i].pref_size)
-                        ario_conf_set_integer (new_all_columns[i].pref_size,
+        for (i = 0; all_columns[i].columnnb != -1; ++i) {
+                width = gtk_tree_view_column_get_width (all_columns[i].column);
+                if (width > 10 && all_columns[i].pref_size)
+                        ario_conf_set_integer (all_columns[i].pref_size,
                                                width);
-                ario_conf_set_integer (new_all_columns[i].pref_order, orders[new_all_columns[i].columnnb]);
+                ario_conf_set_integer (all_columns[i].pref_order, orders[all_columns[i].columnnb]);
         }
 }
 

@@ -103,8 +103,6 @@ gboolean                ario_mpd_connect                                (ArioMpd
 
 void                    ario_mpd_disconnect                             (ArioMpd *mpd);
 
-mpd_Connection *        ario_mpd_get_connection                         (ArioMpd *mpd);
-
 gboolean                ario_mpd_is_connected                           (ArioMpd *mpd);
 
 gboolean                ario_mpd_update_status                          (ArioMpd *mpd);

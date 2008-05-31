@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-18 23:01+0200\n"
+"POT-Creation-Date: 2008-05-31 23:00+0200\n"
 "PO-Revision-Date: 2008-05-11 14:44+0000\n"
 "Last-Translator: Wit Wilinski <madman@linux.bydg.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -500,7 +500,7 @@ msgstr "Odtwórz/Pauzuj"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:253
+#: ../src/widgets/ario-header.c:252
 msgid "Play next song"
 msgstr "Odtwarzaj następny utwór"
 
@@ -713,7 +713,7 @@ msgstr ""
 "  Piotr Wicijowski https://launchpad.net/~piwsko\n"
 "  Wit Wilinski https://launchpad.net/~wit-wilinski"
 
-#: ../src/shell/ario-shell.c:1008
+#: ../src/shell/ario-shell.c:1009
 msgid "Configure Plugins"
 msgstr "Konfiguruj wtyczki"
 
@@ -827,29 +827,29 @@ msgstr "<i>z albumu</i> %s <i>w wykonaniu</i> %s"
 msgid "Play previous song"
 msgstr "Odtwórz poprzedni utwór"
 
-#: ../src/widgets/ario-header.c:231
+#: ../src/widgets/ario-header.c:230
 msgid "Play/Pause the music"
 msgstr "Odtwarzaj/pauzuj muzykę"
 
-#: ../src/widgets/ario-header.c:242
+#: ../src/widgets/ario-header.c:241
 msgid "Stop the music"
 msgstr "Zatrzymaj muzykę"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
 msgstr " z "
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:341
 msgid "Toggle random on/off"
 msgstr "Włącz/wyłącz losowe odtwarzanie"
 
-#: ../src/widgets/ario-header.c:353
+#: ../src/widgets/ario-header.c:352
 msgid "Toggle repeat on/off"
 msgstr "Włącz/wyłącz powtarzanie"
 
-#: ../src/widgets/ario-header.c:463
+#: ../src/widgets/ario-header.c:462
 msgid "Change the music volume"
 msgstr "Zmiana głośności"
 

@@ -210,7 +210,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                               GTK_WIDGET (header->priv->prev_button), 
                               _("Play previous song"), NULL);
 
-
         /* Button images */
         header->priv->play_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PLAY,
                                                              GTK_ICON_SIZE_LARGE_TOOLBAR);
