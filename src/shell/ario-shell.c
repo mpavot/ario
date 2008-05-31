@@ -829,7 +829,8 @@ ario_shell_window_state_cb (GtkWidget *widget,
         int width, height;
         g_return_val_if_fail (widget != NULL, FALSE);
 
-        if (event->type == GDK_WINDOW_STATE) {
+        if ((event->type == GDK_WINDOW_STATE)
+            && !(event->window_state.new_window_state & GDK_WINDOW_STATE_WITHDRAWN)) {
                 ario_conf_set_boolean (PREF_WINDOW_MAXIMIZED,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
