@@ -22,6 +22,8 @@
 #include <config.h>
 #include <string.h>
 #include <glib/gi18n.h>
+#include <netdb.h>
+#include <ifaddrs.h>
 #include <avahi-client/client.h>
 #include <avahi-client/lookup.h>
 #include <avahi-glib/glib-watch.h>
@@ -206,6 +208,54 @@ ario_avahi_new (void)
         return avahi;
 }
 
+static GSList *
+ario_avahi_get_local_addr ()
+{
+        char ip[200];
+        socklen_t salen;
+        struct ifaddrs *ifa = NULL, *ifp = NULL;
+        GSList *addrs = NULL;
+
+        if (getifaddrs (&ifp) < 0) {
+                return NULL;
+        }
+
+        for (ifa = ifp; ifa; ifa = ifa->ifa_next) {
+                if(!ifa->ifa_addr)
+                        continue;
+
+                if (ifa->ifa_addr->sa_family == AF_INET)
+                        salen = sizeof (struct sockaddr_in);
+                else if (ifa->ifa_addr->sa_family == AF_INET6)
+                        salen = sizeof (struct sockaddr_in6);
+                else
+                        continue;
+
+                if (getnameinfo (ifa->ifa_addr, salen, ip, sizeof (ip), NULL, 0, NI_NUMERICHOST) < 0) {
+                        continue;
+                }
+                addrs = g_slist_append (addrs, g_strdup (ip));
+        }
+
+        freeifaddrs (ifp);
+
+        return addrs;
+}
+
+static gboolean
+ario_avahi_is_local_addr (const gchar *addr)
+{
+        static GSList *addrs = NULL;
+
+        if (!addrs)
+                addrs = ario_avahi_get_local_addr ();
+
+        if (!addrs)
+                return FALSE;
+
+        return (g_slist_find_custom (addrs, addr, (GCompareFunc) strcmp) != NULL);
+}
+
 static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                                          AVAHI_GCC_UNUSED AvahiIfIndex interface,
                                          AVAHI_GCC_UNUSED AvahiProtocol protocol,
@@ -241,7 +291,10 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
 
                         host = (ArioHost *) g_malloc (sizeof (ArioHost));
                         host->name = g_strdup (name);
-                        host->host = g_strdup (a);
+                        if (ario_avahi_is_local_addr (a))
+                                host->host = g_strdup ("localhost");                                
+                        else
+                                host->host = g_strdup (a);
                         host->port = port;
 
                         avahi->priv->hosts = g_slist_append (avahi->priv->hosts, host);
