@@ -931,13 +931,6 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
         return songs;
 }
 
-mpd_Connection *
-ario_mpd_get_connection (ArioMpd *mpd)
-{
-        ARIO_LOG_FUNCTION_START
-        return mpd->priv->connection;
-}
-
 void
 ario_mpd_set_default (ArioMpd *mpd)
 {

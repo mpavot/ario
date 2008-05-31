@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-18 23:01+0200\n"
+"POT-Creation-Date: 2008-05-31 23:00+0200\n"
 "PO-Revision-Date: 2008-05-18 16:53+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -485,7 +485,7 @@ msgstr ""
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:253
+#: ../src/widgets/ario-header.c:252
 msgid "Play next song"
 msgstr ""
 
@@ -696,7 +696,7 @@ msgstr ""
 "  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
 "  Konki https://launchpad.net/~pavel-konkol"
 
-#: ../src/shell/ario-shell.c:1008
+#: ../src/shell/ario-shell.c:1009
 msgid "Configure Plugins"
 msgstr ""
 
@@ -805,29 +805,29 @@ msgstr "<i>z</i> %s <i>od</i> %s"
 msgid "Play previous song"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:231
+#: ../src/widgets/ario-header.c:230
 msgid "Play/Pause the music"
 msgstr "Přehrát/Zastavit hudbu"
 
-#: ../src/widgets/ario-header.c:242
+#: ../src/widgets/ario-header.c:241
 msgid "Stop the music"
 msgstr "Zastavit hudbu"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:318 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
 msgid " of "
 msgstr ""
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:341
 msgid "Toggle random on/off"
 msgstr "vlastní přepínač on/off"
 
-#: ../src/widgets/ario-header.c:353
+#: ../src/widgets/ario-header.c:352
 msgid "Toggle repeat on/off"
 msgstr "Přepínač opakování on/off"
 
-#: ../src/widgets/ario-header.c:463
+#: ../src/widgets/ario-header.c:462
 msgid "Change the music volume"
 msgstr ""
 

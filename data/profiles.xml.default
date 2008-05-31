@@ -1,6 +1,4 @@
 <?xml version="1.0"?>
 <ario-profiles>
-  <profile host="localhost" port="6600">Default</profile>
-  <profile host="192.168.0.1" port="6600" current="true">Desktop</profile>
-  <profile host="localhost" port="6600" password="abcde">Laptop</profile>
+  <profile host="localhost" port="6600" current="true">Default</profile>
 </ario-profiles>
