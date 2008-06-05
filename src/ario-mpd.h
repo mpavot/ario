@@ -191,8 +191,6 @@ ArioMpdAlbum *          ario_mpd_copy_album                             (ArioMpd
 
 void                    ario_mpd_clear                                  (ArioMpd *mpd);
 
-void                    ario_mpd_remove                                 (ArioMpd *mpd,
-                                                                         GArray *songs);
 void                    ario_mpd_queue_add                              (ArioMpd *mpd,
                                                                          char* path);
 void                    ario_mpd_queue_delete_id                        (ArioMpd *mpd,
