@@ -245,6 +245,7 @@ ario_shell_similarartists_get_images_foreach (GtkTreeModel *model,
                                  size,
                                  NULL);
         gdk_pixbuf_loader_close (loader, NULL);
+        g_free (data);
 
         pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
         if (!pixbuf)
