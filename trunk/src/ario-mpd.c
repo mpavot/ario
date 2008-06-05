@@ -756,6 +756,22 @@ ario_mpd_get_artists (ArioMpd *mpd)
         return artists;
 }
 
+static gboolean
+ario_mpd_album_is_present (const GSList *albums,
+                           const char *album)
+{
+        const GSList *tmp;
+        ArioMpdAlbum *mpd_album;
+
+        for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
+                mpd_album = tmp->data;
+                if (!g_utf8_collate (album, mpd_album->album)) {
+                        return TRUE;
+                }
+        }
+        return FALSE;
+}
+                     
 GSList *
 ario_mpd_get_albums (ArioMpd *mpd,
                      const char *artist)
@@ -763,7 +779,6 @@ ario_mpd_get_albums (ArioMpd *mpd,
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL;
         mpd_InfoEntity *entity = NULL;
-        gchar *prev_album = "";
         ArioMpdAlbum *ario_mpd_album;
 
         /* check if there is a connection */
@@ -773,12 +788,12 @@ ario_mpd_get_albums (ArioMpd *mpd,
         mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ARTIST, artist);
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 if (!entity->info.song->album) {
-                        if (!g_utf8_collate (prev_album, ARIO_MPD_UNKNOWN)) {
+                        if (ario_mpd_album_is_present (albums, ARIO_MPD_UNKNOWN)) {
                                 mpd_freeInfoEntity (entity);
                                 continue;
                         }
                 } else {
-                        if (!g_utf8_collate (entity->info.song->album, prev_album)) {
+                        if (ario_mpd_album_is_present (albums, entity->info.song->album)) {
                                 mpd_freeInfoEntity (entity);
                                 continue;
                         }
@@ -812,7 +827,6 @@ ario_mpd_get_albums (ArioMpd *mpd,
                         ario_mpd_album->date = NULL;
                 }
 
-                prev_album = ario_mpd_album->album;
                 albums = g_slist_append (albums, ario_mpd_album);
 
                 mpd_freeInfoEntity (entity);
@@ -1412,27 +1426,6 @@ ario_mpd_clear (ArioMpd *mpd)
         mpd_sendClearCommand (mpd->priv->connection);
         mpd_finishCommand (mpd->priv->connection);
         ario_mpd_update_status (mpd);
-}
-
-void
-ario_mpd_remove (ArioMpd *mpd,
-                 GArray *song)
-{
-        ARIO_LOG_FUNCTION_START
-        guint i;
-
-        /* check if there is a connection */
-        if (!mpd->priv->connection)
-                return;
-
-        mpd_sendCommandListBegin (mpd->priv->connection);
-
-        for (i=0; i<song->len; ++i)
-                if ((g_array_index (song, int, i) - i) >= 0)
-                        mpd_sendDeleteCommand (mpd->priv->connection, g_array_index (song, int, i) - i);
-
-        mpd_sendCommandListEnd (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
 }
 
 void
