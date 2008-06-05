@@ -540,6 +540,8 @@ ario_util_get_dnd_pixbuf (GSList *albums)
                 if (ario_util_uri_exists (cover_path)) {
                         covers = g_slist_append (covers, cover_path);
                         ++len;
+                } else {
+                        g_free (cover_path);
                 }
         }
 

@@ -1648,6 +1648,8 @@ void ario_browser_artists_drag_begin_cb (GtkWidget *widget,
         } else {
                 gtk_drag_source_set_icon_stock (widget, GTK_STOCK_DND);
         }
+        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_free (albums);
 }
 
 static
