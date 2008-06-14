@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-31 23:00+0200\n"
-"PO-Revision-Date: 2008-05-18 13:02+0000\n"
+"POT-Creation-Date: 2008-06-14 11:10+0200\n"
+"PO-Revision-Date: 2008-06-02 12:35+0000\n"
 "Last-Translator: Dmitry  DeXPeriX  Hrabrov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-05-18 20:56+0000\n"
+"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -141,45 +141,42 @@ msgstr "Поиск"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:180
+#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:334
 #: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
 msgid "Album"
 msgstr "Альбом"
 
 #: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
 #: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:415
-#: ../src/widgets/ario-playlist.c:179 ../src/widgets/ario-songlist.c:271
+#: ../src/shell/ario-shell-similarartists.c:416
+#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:271
 #: ../src/widgets/ario-status-icon.c:395
 msgid "Artist"
 msgstr "Исполнитель"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:184
-#, fuzzy
+#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:334
 msgid "Date"
-msgstr "Дата :"
+msgstr "Дата"
 
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:181
+#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:334
 msgid "Duration"
 msgstr "Продолжительность"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:182
-#, fuzzy
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:334
 msgid "File"
 msgstr "_Файл"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:183
-#, fuzzy
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:334
 msgid "Genre"
-msgstr "Жанр :"
+msgstr "Жанр"
 
 #: ../data/glade/interface-prefs.glade.h:7
 msgid "Go to current song when a new song is played"
-msgstr ""
+msgstr "Переводить курсор на играющую песню"
 
 #: ../data/glade/interface-prefs.glade.h:8
 msgid "Hide window when close button is pressed"
-msgstr ""
+msgstr "Прятать окно при нажатии на \"крестик\""
 
 #: ../data/glade/interface-prefs.glade.h:9
 #: ../src/shell/ario-shell-preferences.c:190
@@ -193,33 +190,31 @@ msgstr "Средний клик по иконке в трее :"
 #: ../data/glade/interface-prefs.glade.h:11
 #: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:207
 msgid "Playlist"
-msgstr "Плейлист"
+msgstr "Список композиций"
 
 #: ../data/glade/interface-prefs.glade.h:12
-#, fuzzy
 msgid "Show rows:"
-msgstr "Показать _слова песен"
+msgstr "Показать столбцы:"
 
 #: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
 msgstr "Показать вкладки"
 
 #: ../data/glade/interface-prefs.glade.h:14
-#, fuzzy
 msgid "Sort albums: "
-msgstr "Статус:"
+msgstr "Сортировать альбомы: "
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
 #: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:178 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:256
 #: ../src/widgets/ario-status-icon.c:399
 msgid "Title"
 msgstr "Заголовок"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:177
+#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:334
 msgid "Track"
 msgstr "Дорожка"
 
@@ -281,7 +276,7 @@ msgid "fade time (s):"
 msgstr "время затухания (s):"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #, c-format
 msgid "n/a"
 msgstr "недоступно"
@@ -380,19 +375,19 @@ msgstr "Невозможно соединиться с mpd. Проверьте �
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "секунд"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "минут"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "часов"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "дней"
 
@@ -500,12 +495,12 @@ msgstr "Ничего не делать"
 
 #: ../src/preferences/ario-interface-preferences.c:73
 msgid "Alphabetically"
-msgstr ""
+msgstr "По алфавиту"
 
 #. SORT_ALPHABETICALLY
 #: ../src/preferences/ario-interface-preferences.c:74
 msgid "By year"
-msgstr ""
+msgstr "По годам"
 
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
@@ -668,9 +663,8 @@ msgid "Find similar artists"
 msgstr "Найти похожих артистов"
 
 #: ../src/shell/ario-shell.c:184
-#, fuzzy
 msgid "Add similar songs to playlist"
-msgstr "Добавить всё в плейлист"
+msgstr "Добавить похожие песни в плейлист"
 
 #: ../src/shell/ario-shell.c:187
 msgid "Show _lyrics"
@@ -686,7 +680,7 @@ msgstr "_Строка состояния"
 
 #: ../src/shell/ario-shell.c:204
 msgid "Upper part"
-msgstr ""
+msgstr "Верхняя часть"
 
 #: ../src/shell/ario-shell.c:672
 msgid "GTK client for MPD"
@@ -698,6 +692,12 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Nick https://launchpad.net/~homolibere\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
 #: ../src/shell/ario-shell.c:1009
@@ -758,16 +758,16 @@ msgstr "Ario Настройки"
 msgid "Server"
 msgstr "Сервер"
 
-#: ../src/shell/ario-shell-similarartists.c:343
+#: ../src/shell/ario-shell-similarartists.c:344
 #, c-format
 msgid "%d songs"
 msgstr "%d композиций"
 
-#: ../src/shell/ario-shell-similarartists.c:404
+#: ../src/shell/ario-shell-similarartists.c:405
 msgid "Image"
 msgstr "Рисунок"
 
-#: ../src/shell/ario-shell-similarartists.c:422
+#: ../src/shell/ario-shell-similarartists.c:423
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Композиций"
@@ -863,15 +863,15 @@ msgid "_Go to playing song"
 msgstr "Воспроизвести песню"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1278
+#: ../src/widgets/ario-playlist.c:1279
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: ../src/widgets/ario-playlist.c:1288
+#: ../src/widgets/ario-playlist.c:1289
 msgid "Playlist name :"
 msgstr "Название плейлиста :"
 
-#: ../src/widgets/ario-playlist.c:1313
+#: ../src/widgets/ario-playlist.c:1314
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
@@ -1216,6 +1216,15 @@ msgstr "Википедия"
 #~ msgid "Get the covers from _Amazon"
 #~ msgstr "Получить обложку с _Amazon"
 
+#~ msgid ""
+#~ "Artist: %s\n"
+#~ "Album: %s\n"
+#~ "Title: %s"
+#~ msgstr ""
+#~ "Исполнитель: %s\n"
+#~ "Альбом: %s\n"
+#~ "Название: %s"
+
 #~ msgid "Select a file"
 #~ msgstr "Выбрать файл"
 
@@ -1226,6 +1235,9 @@ msgstr "Википедия"
 #, fuzzy
 #~ msgid "Show songs properties"
 #~ msgstr "Показать слова песен"
+
+#~ msgid "Tabs"
+#~ msgstr "Вкладки"
 
 #, fuzzy
 #~ msgid "Position of filesystem pane"
@@ -1270,17 +1282,5 @@ msgstr "Википедия"
 #~ msgid "Hide on close"
 #~ msgstr "Свернуть при закрытии"
 
-#~ msgid "Tabs"
-#~ msgstr "Вкладки"
-
 #~ msgid "Window"
 #~ msgstr "Окно"
-
-#~ msgid ""
-#~ "Artist: %s\n"
-#~ "Album: %s\n"
-#~ "Title: %s"
-#~ msgstr ""
-#~ "Исполнитель: %s\n"
-#~ "Альбом: %s\n"
-#~ "Название: %s"

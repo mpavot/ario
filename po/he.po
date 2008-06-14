@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-31 23:00+0200\n"
-"PO-Revision-Date: 2008-05-05 20:37+0000\n"
+"POT-Creation-Date: 2008-06-14 11:10+0200\n"
+"PO-Revision-Date: 2008-05-18 21:38+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-05-18 20:56+0000\n"
+"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -141,34 +141,34 @@ msgstr "חפש"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:180
+#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:334
 #: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
 msgid "Album"
 msgstr "אלבום"
 
 #: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
 #: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:415
-#: ../src/widgets/ario-playlist.c:179 ../src/widgets/ario-songlist.c:271
+#: ../src/shell/ario-shell-similarartists.c:416
+#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:271
 #: ../src/widgets/ario-status-icon.c:395
 msgid "Artist"
 msgstr "אמן"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:184
+#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:334
 #, fuzzy
 msgid "Date"
 msgstr "תאריך :"
 
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:181
+#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:334
 msgid "Duration"
 msgstr "משך"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:182
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:334
 #, fuzzy
 msgid "File"
 msgstr "_קובץ"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:183
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:334
 #, fuzzy
 msgid "Genre"
 msgstr "סגנון :"
@@ -207,19 +207,19 @@ msgstr "הצג לשוניות"
 #: ../data/glade/interface-prefs.glade.h:14
 #, fuzzy
 msgid "Sort albums: "
-msgstr "מצב:‏"
+msgstr "מצב:‏ "
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
 #: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:178 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:256
 #: ../src/widgets/ario-status-icon.c:399
 msgid "Title"
 msgstr "כותרת"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:177
+#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:334
 msgid "Track"
 msgstr "רצועה"
 
@@ -281,7 +281,7 @@ msgid "fade time (s):"
 msgstr "זמן העמעום (ש'):"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #, c-format
 msgid "n/a"
 msgstr "לא זמין"
@@ -382,19 +382,19 @@ msgstr "לא ניתן להתחבר ל-mpd. בדוק את אפשרויות החי
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "שניות"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "דקות"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "שעות"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "ימים"
 
@@ -696,6 +696,9 @@ msgstr "לקוח MPD עבור GTK"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Yaron https://launchpad.net/~sh-yaron\n"
+"\n"
+"Launchpad Contributions:\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
 #: ../src/shell/ario-shell.c:1009
@@ -757,16 +760,16 @@ msgstr "העדפות Ario"
 msgid "Server"
 msgstr "שרת"
 
-#: ../src/shell/ario-shell-similarartists.c:343
+#: ../src/shell/ario-shell-similarartists.c:344
 #, c-format
 msgid "%d songs"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:404
+#: ../src/shell/ario-shell-similarartists.c:405
 msgid "Image"
 msgstr "תמונה"
 
-#: ../src/shell/ario-shell-similarartists.c:422
+#: ../src/shell/ario-shell-similarartists.c:423
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "שירים"
@@ -862,15 +865,15 @@ msgid "_Go to playing song"
 msgstr "ע_בור לשיר המתנגן"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1278
+#: ../src/widgets/ario-playlist.c:1279
 msgid "Save playlist"
 msgstr "שמור את רשימת ההשמעה"
 
-#: ../src/widgets/ario-playlist.c:1288
+#: ../src/widgets/ario-playlist.c:1289
 msgid "Playlist name :"
 msgstr "שם רשימת ההשמעה :"
 
-#: ../src/widgets/ario-playlist.c:1313
+#: ../src/widgets/ario-playlist.c:1314
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "רשימת ההשמעה כבר קיימת. האם ברצונך לשכתב עליה?"
 
@@ -1112,12 +1115,6 @@ msgstr "תוסף לחיפוש האמן הנוכחי בויקיפדיה"
 msgid "Wikipedia"
 msgstr "ויקיפדיה"
 
-#~ msgid "Select a file"
-#~ msgstr "בחר קובץ"
-
-#~ msgid "Tabs"
-#~ msgstr "לשוניות"
-
 #~ msgid ""
 #~ "Artist: %s\n"
 #~ "Album: %s\n"
@@ -1126,3 +1123,9 @@ msgstr "ויקיפדיה"
 #~ "אמן: %s\n"
 #~ "אלבום: %s\n"
 #~ "כותרת: %s"
+
+#~ msgid "Select a file"
+#~ msgstr "בחר קובץ"
+
+#~ msgid "Tabs"
+#~ msgstr "לשוניות"
