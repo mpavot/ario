@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-31 23:00+0200\n"
-"PO-Revision-Date: 2008-05-05 20:38+0000\n"
+"POT-Creation-Date: 2008-06-14 11:10+0200\n"
+"PO-Revision-Date: 2008-05-18 21:39+0000\n"
 "Last-Translator: el_libre <el.libre@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-05-18 20:56+0000\n"
+"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -138,34 +138,34 @@ msgstr "Cerca"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:180
+#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:334
 #: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
 msgid "Album"
 msgstr "Àlbum"
 
 #: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
 #: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:415
-#: ../src/widgets/ario-playlist.c:179 ../src/widgets/ario-songlist.c:271
+#: ../src/shell/ario-shell-similarartists.c:416
+#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:271
 #: ../src/widgets/ario-status-icon.c:395
 msgid "Artist"
 msgstr "Artista"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:184
+#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:334
 #, fuzzy
 msgid "Date"
 msgstr "Base de dades"
 
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:181
+#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:334
 msgid "Duration"
 msgstr "Duració"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:182
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:334
 #, fuzzy
 msgid "File"
 msgstr "_Arxiu"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:183
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:334
 msgid "Genre"
 msgstr ""
 
@@ -202,19 +202,19 @@ msgstr ""
 #: ../data/glade/interface-prefs.glade.h:14
 #, fuzzy
 msgid "Sort albums: "
-msgstr "Barra d'_estat"
+msgstr "Barra d'_estat "
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
 #: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:178 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:256
 #: ../src/widgets/ario-status-icon.c:399
 msgid "Title"
 msgstr "Títol"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:177
+#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:334
 msgid "Track"
 msgstr "Pista"
 
@@ -278,7 +278,7 @@ msgid "fade time (s):"
 msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #, c-format
 msgid "n/a"
 msgstr "n/a"
@@ -380,19 +380,19 @@ msgstr ""
 msgid "Unknown"
 msgstr "Desconegut/da"
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "segons"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "minuts"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "hores"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "dies"
 
@@ -694,6 +694,10 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  borgg https://launchpad.net/~guillem-gilabert\n"
+"  el_libre https://launchpad.net/~el-libre\n"
+"\n"
+"Launchpad Contributions:\n"
+"  borgg https://launchpad.net/~guillem-gilabert\n"
 "  el_libre https://launchpad.net/~el-libre"
 
 #: ../src/shell/ario-shell.c:1009
@@ -752,16 +756,16 @@ msgstr ""
 msgid "Server"
 msgstr "Servidor"
 
-#: ../src/shell/ario-shell-similarartists.c:343
+#: ../src/shell/ario-shell-similarartists.c:344
 #, c-format
 msgid "%d songs"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:404
+#: ../src/shell/ario-shell-similarartists.c:405
 msgid "Image"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:422
+#: ../src/shell/ario-shell-similarartists.c:423
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Cançons"
@@ -855,15 +859,15 @@ msgid "_Go to playing song"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1278
+#: ../src/widgets/ario-playlist.c:1279
 msgid "Save playlist"
 msgstr "Desa la llista de reproducció"
 
-#: ../src/widgets/ario-playlist.c:1288
+#: ../src/widgets/ario-playlist.c:1289
 msgid "Playlist name :"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1313
+#: ../src/widgets/ario-playlist.c:1314
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
@@ -1147,6 +1151,9 @@ msgstr "Viquipèdia"
 #~ msgid "Select a file"
 #~ msgstr "_Selecciona-ho tot"
 
+#~ msgid "Tabs"
+#~ msgstr "Tabuladors"
+
 #, fuzzy
 #~ msgid "Active lyrics sources"
 #~ msgstr "Lletra"
@@ -1166,6 +1173,3 @@ msgstr "Viquipèdia"
 #, fuzzy
 #~ msgid "_Password:"
 #~ msgstr "Contrasenya :"
-
-#~ msgid "Tabs"
-#~ msgstr "Tabuladors"
