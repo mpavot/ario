@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,1.0-svn)
+m4_define(ario_version,1.1)
 
 PACKAGE=Ario
 
