@@ -421,6 +421,11 @@ ario_shell_construct (ArioShell *shell)
 
         gtk_action_group_set_translation_domain (shell->priv->actiongroup,
                                                  GETTEXT_PACKAGE);
+#ifdef WIN32
+        gtk_action_group_set_translate_func (shell->priv->actiongroup,
+                                             (GtkTranslateFunc) gettext,
+                                             NULL, NULL);
+#endif
         gtk_action_group_add_actions (shell->priv->actiongroup,
                                       ario_shell_actions,
                                       ario_shell_n_actions, shell);
