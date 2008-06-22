@@ -51,7 +51,7 @@ static void ario_tray_icon_get_property (GObject *object,
                                          guint prop_id,
                                          GValue *value,
                                          GParamSpec *pspec);
-static void ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon);
+static gboolean ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon);
 static void ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
                                                   GdkEvent *event,
                                                   GtkWidget *widget);
@@ -121,6 +121,8 @@ struct ArioTrayIconPrivate
         GtkWidget *image;
         GtkWidget *image_play;
         GtkWidget *image_pause;
+
+        guint timeout_id;
 };
 
 static GtkActionEntry ario_tray_icon_actions [] =
@@ -414,7 +416,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                              NULL);
 }
 
-static void
+static gboolean
 ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
 {
         if (icon->priv->tooltips_pointer_above) {
@@ -425,6 +427,9 @@ ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
         } else {
                 gtk_widget_hide (icon->priv->tooltip);
         }
+        icon->priv->timeout_id = 0;
+
+        return FALSE;
 }
 
 static void
@@ -433,8 +438,13 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
                                       GtkWidget *widget)
 {
         icon->priv->tooltips_pointer_above = TRUE;
-        ario_tray_icon_update_tooltip_visibility (icon);
         ario_mpd_use_count_inc (icon->priv->mpd);
+
+        if (icon->priv->timeout_id)
+                g_source_remove (icon->priv->timeout_id);
+        icon->priv->timeout_id = g_timeout_add (500,
+                                               (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
+                                               icon);
 }
 
 static void
@@ -446,6 +456,9 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
                 ario_mpd_use_count_dec (icon->priv->mpd);
                 icon->priv->tooltips_pointer_above = FALSE;
         }
+
+        if (icon->priv->timeout_id)
+                g_source_remove (icon->priv->timeout_id);
         ario_tray_icon_update_tooltip_visibility (icon);
 }
 
