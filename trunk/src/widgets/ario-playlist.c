@@ -1329,10 +1329,38 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
                                  ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
+        GList *paths;
+        GtkTreePath *path = NULL;
+        GtkTreeModel *model = GTK_TREE_MODEL (playlist->priv->model);
+
         if (event->keyval == GDK_Delete)
                 ario_playlist_remove (playlist);
 
-        return FALSE;        
+        ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
+
+        /* get the iter from the path */
+        if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path)) {
+                gint id;
+                /* get the song id */
+                gtk_tree_model_get (GTK_TREE_MODEL (playlist->priv->model), &iter, ID_COLUMN, &id, -1);
+                ario_mpd_do_play_id (playlist->priv->mpd, id);
+        }
+        
+        if (event->keyval == GDK_Return) {
+                paths = gtk_tree_selection_get_selected_rows (playlist->priv->selection, &model);
+                if (paths)
+                        path = paths->data;
+                if (path)
+                        ario_playlist_activate_row (playlist, path);
+
+                g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
+                g_list_free (paths);
+
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 static gboolean
