@@ -1,3 +1,9 @@
+ario (1.1-1) unstable; urgency=low
+
+  * New upstream release (Closes: #480361)
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Sat, 14 Jun 2008 12:05:05 +0200
+
 ario (1.0-1) unstable; urgency=low
 
   * New upstream release (Closes: #468165, #467328, #469330)
