@@ -9,7 +9,18 @@
   <radio url="http://213.205.96.91:9923">Le Mouv</radio>
   <radio url="http://213.205.96.91:9903">FIP</radio>
   <radio url="http://s6.streaming.novanet.fr:80/tsfjazz">TSF Jazz</radio>
-  <radio url="http://broadcast.infomaniak.net:80/ouifm-high.mp3">OUI FM</radio>
-  <radio url="http://www.smgradio.com/core/audio/ogg/live.pls?service=vcbb">Virgin Radio Classic Rock</radio>
   <radio url="http://audio-ogg.ibiblio.org:8000/wcpe.ogg">WCPE, Wake Forest, NC</radio>
+  <radio url="http://mp3.live.tv-radio.com/champagne/all/champagne-128k.mp3">Champagne FM</radio>
+  <radio url="http://213.186.39.130:8000/live64">Contact</radio>
+  <radio url="http://streaming.radio.funradio.fr:80/fun-1-44-128">Fun Radio</radio>
+  <radio url="http://mp3.live.tv-radio.com/kissfm/all/kissfm-128k.mp3">Kiss FM</radio>
+  <radio url="http://broadcast.infomaniak.net/ouifm-high.mp3">Oui FM</radio>
+  <radio url="http://campus.abeille.com:8000/campus.ogg">Radio Campus Clermont-Ferrand</radio>
+  <radio url="http://broadcast.infomaniak.net:80/radionova-high.mp3">Radio Nova</radio>
+  <radio url="http://mp3.live.tv-radio.com/scooplyon/all/scooplyon-128k.mp3">Radio Scoop</radio>
+  <radio url="http://broadcast.infomaniak.ch/rsr-la1ere-high.mp3">RSR - la premi&#xE8;re</radio>
+  <radio url="http://broadcast.infomaniak.ch/rsr-espace2-high.mp3">RSR - Espace 2</radio>
+  <radio url="http://broadcast.infomaniak.ch/rsr-couleur3-high.mp3">RSR - Couleur 3</radio>
+  <radio url="http://broadcast.infomaniak.ch/rsr-optionmusique-high.mp3">RSR - Option Musique</radio>
+  <radio url="http://streaming.radio.funradio.fr/rtl2-1-44-96">RTL2</radio>
 </ario-radios>
