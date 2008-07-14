@@ -76,6 +76,8 @@ ario_SOURCES = \
 	preferences/ario-server-preferences.h\
         preferences/ario-stats-preferences.c\
         preferences/ario-stats-preferences.h\
+	preferences/ario-trayicon-preferences.c\
+	preferences/ario-trayicon-preferences.h\
 	preferences/ario-preferences.h\
 	sources/ario-browser.c\
 	sources/ario-browser.h\

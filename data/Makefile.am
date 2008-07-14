@@ -22,6 +22,7 @@ glade_DATA = glade/connection-prefs.glade	\
 	     glade/cover-prefs.glade		\
 	     glade/proxy-prefs.glade		\
 	     glade/interface-prefs.glade	\
+	     glade/trayicon-prefs.glade	        \
 	     glade/server-prefs.glade		\
 	     glade/cover-progress.glade         \
 	     glade/lyrics-select.glade          \

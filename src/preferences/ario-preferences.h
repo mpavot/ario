@@ -178,6 +178,12 @@
 #define PREF_PLAYLIST_AUTOSCROLL                "playlist_autoscroll"
 #define PREF_PLAYLIST_AUTOSCROLL_DEFAULT        FALSE
 
+#define PREF_HAVE_NOTIFICATION                  "notification"
+#define PREF_HAVE_NOTIFICATION_DEFAULT          FALSE
+
+#define PREF_NOTIFICATION_TIME                  "notification-time"
+#define PREF_NOTIFICATION_TIME_DEFAULT          5
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

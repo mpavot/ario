@@ -30,6 +30,7 @@
 #include "preferences/ario-interface-preferences.h"
 #include "preferences/ario-proxy-preferences.h"
 #include "preferences/ario-server-preferences.h"
+#include "preferences/ario-trayicon-preferences.h"
 #include "preferences/ario-stats-preferences.h"
 #include "ario-debug.h"
 
@@ -188,6 +189,11 @@ ario_shell_preferences_new (ArioMpd *mpd)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Interface")));
+
+        widget = ario_trayicon_preferences_new ();
+        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
+                                  widget,
+                                  gtk_label_new (_("Tray icon")));
 
         widget = ario_proxy_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
