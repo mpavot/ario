@@ -401,10 +401,11 @@ ario_mpd_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioMpd *mpd = ARIO_MPD (object);
+        int song_id;
 
         switch (prop_id) {
         case PROP_SONGID:
-                mpd->priv->song_id = g_value_get_int (value);
+                song_id = g_value_get_int (value);
 
                 /* check if there is a connection */
                 if (mpd->priv->connection) {
@@ -457,7 +458,9 @@ ario_mpd_set_property (GObject *object,
                         }
                 }
 
-                mpd->priv->signals_to_emit |= SONG_CHANGED_FLAG;
+                if (mpd->priv->song_id != song_id)
+                        mpd->priv->signals_to_emit |= SONG_CHANGED_FLAG;
+                mpd->priv->song_id = song_id;
                 break;
         case PROP_STATE:
                 mpd->priv->state = g_value_get_int (value);

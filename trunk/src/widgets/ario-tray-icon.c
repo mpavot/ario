@@ -92,6 +92,8 @@ static void ario_tray_icon_cmd_next (GtkAction *action,
                                      ArioTrayIcon *icon);
 static void ario_tray_icon_cmd_previous (GtkAction *action,
                                          ArioTrayIcon *icon);
+static void ario_tray_icon_notification_changed_cb (guint notification_id,
+                                                    ArioTrayIcon *icon);
 
 struct ArioTrayIconPrivate
 {
@@ -123,6 +125,11 @@ struct ArioTrayIconPrivate
         GtkWidget *image_pause;
 
         guint timeout_id;
+        guint notification_id;
+
+        gboolean notified;
+        gboolean has_notification;
+        gboolean shown;
 };
 
 static GtkActionEntry ario_tray_icon_actions [] =
@@ -298,6 +305,7 @@ ario_tray_icon_constructor (GType type, guint n_construct_properties,
                                                           construct_properties));
 
         ario_tray_icon_set_visibility (tray, VISIBILITY_VISIBLE);
+
         return G_OBJECT (tray);
 }
 
@@ -407,27 +415,40 @@ ario_tray_icon_new (GtkActionGroup *group,
                     ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        return g_object_new (TYPE_ARIO_TRAY_ICON,
-                             "action-group", group,
-                             "title", "Ario",
-                             "ui-manager", mgr,
-                             "window", window,
-                             "mpd", mpd,
-                             NULL);
+
+        ArioTrayIcon *icon = g_object_new (TYPE_ARIO_TRAY_ICON,
+                                           "action-group", group,
+                                           "title", "Ario",
+                                           "ui-manager", mgr,
+                                           "window", window,
+                                           "mpd", mpd,
+                                           NULL);
+
+        ario_conf_notification_add (PREF_HAVE_NOTIFICATION,
+                                    (ArioNotifyFunc) ario_tray_icon_notification_changed_cb,
+                                    icon);
+        ario_tray_icon_notification_changed_cb (0, icon);
+
+        return icon;
 }
 
 static gboolean
 ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
 {
-        if (icon->priv->tooltips_pointer_above) {
+        if (icon->priv->tooltips_pointer_above || icon->priv->notified) {
+                icon->priv->shown = TRUE;
+                ario_tray_icon_sync_tooltip_time (icon);
                 sexy_tooltip_position_to_widget (SEXY_TOOLTIP (icon->priv->tooltip),
                                                  icon->priv->ebox);
                 gtk_widget_show (icon->priv->tooltip);
-                ario_tray_icon_sync_tooltip_time (icon);
         } else {
+                icon->priv->shown = FALSE;
                 gtk_widget_hide (icon->priv->tooltip);
         }
+
+        icon->priv->notified = FALSE;
         icon->priv->timeout_id = 0;
+        icon->priv->notification_id = 0;
 
         return FALSE;
 }
@@ -478,7 +499,6 @@ ario_tray_icon_construct_tooltip (ArioTrayIcon *icon)
         gint size;
         PangoFontDescription *font_desc;
 
-        icon->priv->tooltips_pointer_above = FALSE;
         icon->priv->tooltip = sexy_tooltip_new ();
 
         g_signal_connect_object (icon->priv->tooltip, "size-allocate",
@@ -708,7 +728,7 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
         gchar *total_char;
         gchar *time;
 
-        if (!icon->priv->tooltips_pointer_above)
+        if (!icon->priv->shown)
                 return;
 
         switch (ario_mpd_get_current_state (icon->priv->mpd)) {
@@ -717,10 +737,14 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
                 elapsed = ario_mpd_get_current_elapsed (icon->priv->mpd);
                 elapsed_char = ario_util_format_time (elapsed);
                 total = ario_mpd_get_current_total_time (icon->priv->mpd);
-                total_char = ario_util_format_time (total);
-                time = g_strdup_printf ("%s%s%s", elapsed_char, _(" of "), total_char);
+                if (total) {
+                        total_char = ario_util_format_time (total);
+                        time = g_strdup_printf ("%s%s%s", elapsed_char, _(" of "), total_char);
+                        g_free (total_char);
+                } else {
+                        time = g_strdup_printf ("%s", elapsed_char);
+                }
                 g_free (elapsed_char);
-                g_free (total_char);
                 gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), time);
                 g_free (time);
                 if (total > 0)
@@ -781,6 +805,18 @@ ario_tray_icon_song_changed_cb (ArioMpd *mpd,
         ARIO_LOG_FUNCTION_START
         ario_tray_icon_sync_tooltip_song (icon);
         ario_tray_icon_sync_tooltip_time (icon);
+
+        if (icon->priv->has_notification) {
+                icon->priv->notified = TRUE;
+                ario_tray_icon_update_tooltip_visibility (icon);
+
+                if (icon->priv->notification_id)
+                        g_source_remove (icon->priv->notification_id);
+
+                icon->priv->notification_id = g_timeout_add (ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000,
+                                                             (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
+                                                              icon);
+        }
 }
 
 static void
@@ -916,3 +952,20 @@ ario_tray_icon_cmd_previous (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_prev (icon->priv->mpd);
 }
+
+static void
+ario_tray_icon_notification_changed_cb (guint notification_id,
+                                        ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        gboolean new = ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT);
+
+        if (icon->priv->has_notification && !new)
+                ario_mpd_use_count_dec (icon->priv->mpd);
+
+        if (!icon->priv->has_notification && new)
+                ario_mpd_use_count_inc (icon->priv->mpd);
+
+        icon->priv->has_notification = new;
+}
+
