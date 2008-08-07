@@ -189,12 +189,12 @@ ario_shell_preferences_new (ArioMpd *mpd)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Interface")));
-
+#ifdef ENABLE_EGGTRAYICON
         widget = ario_trayicon_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Tray icon")));
-
+#endif
         widget = ario_proxy_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
