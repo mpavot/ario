@@ -586,13 +586,20 @@ ario_shell_show (ArioShell *shell)
         ario_shell_sync_paned (shell);
         ario_shell_sync_mpd (shell);
 
-        gtk_widget_show_all (GTK_WIDGET (shell->priv->window));
+        gtk_widget_show_all (shell->priv->window);
 
         g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
                                  shell, 0);
 
         shell->priv->shown = TRUE;
+}
+
+void
+ario_shell_present (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+        gtk_window_present (GTK_WINDOW (shell->priv->window));
 }
 
 static void

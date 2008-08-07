@@ -41,6 +41,8 @@ G_MODULE_EXPORT void ario_interface_preferences_showtabs_check_changed_cb (GtkCh
                                                                            ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
                                                                               ArioInterfacePreferences *interface_preferences);
+G_MODULE_EXPORT void ario_interface_preferences_oneinstance_check_changed_cb (GtkCheckButton *butt,
+                                                                              ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_track_toogled_cb (GtkCheckButton *butt,
                                                                   ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_title_toogled_cb (GtkCheckButton *butt,
@@ -70,6 +72,7 @@ struct ArioInterfacePreferencesPrivate
 {
         GtkWidget *showtabs_check;
         GtkWidget *hideonclose_check;
+        GtkWidget *oneinstance_check;
         GtkWidget *sort_combobox;
 
         GtkWidget *track_checkbutton;
@@ -155,6 +158,8 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "showtabs_checkbutton");
         interface_preferences->priv->hideonclose_check =
                 glade_xml_get_widget (xml, "hideonclose_checkbutton");
+        interface_preferences->priv->oneinstance_check =
+                glade_xml_get_widget (xml, "instance_checkbutton");
         interface_preferences->priv->sort_combobox = 
                 glade_xml_get_widget (xml, "sort_combobox");
         interface_preferences->priv->track_checkbutton = 
@@ -235,6 +240,9 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->hideonclose_check),
                                       ario_conf_get_boolean (PREF_HIDE_ON_CLOSE, PREF_HIDE_ON_CLOSE_DEFAULT));
 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->oneinstance_check),
+                                      ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT));
+
         gtk_combo_box_set_active (GTK_COMBO_BOX (interface_preferences->priv->sort_combobox),
                                   ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT));
 
@@ -295,6 +303,15 @@ ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
         ARIO_LOG_FUNCTION_START
         ario_conf_set_boolean (PREF_HIDE_ON_CLOSE,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->hideonclose_check)));
+}
+
+void
+ario_interface_preferences_oneinstance_check_changed_cb (GtkCheckButton *butt,
+                                                         ArioInterfacePreferences *interface_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_ONE_INSTANCE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->oneinstance_check)));
 }
 
 void

@@ -54,6 +54,8 @@ void            ario_shell_construct            (ArioShell *shell);
 
 void            ario_shell_shutdown             (ArioShell *shell);
 
+void            ario_shell_present              (ArioShell *shell);
+
 GtkWidget *     ario_shell_get_playlist         (ArioShell *shell);
 
 GtkWidget *     ario_shell_get_sourcemanager    (ArioShell *shell);
