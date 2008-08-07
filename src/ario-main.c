@@ -25,17 +25,58 @@
 #include <curl/curl.h>
 #include <libxml/parser.h>
 #include "lib/ario-conf.h"
+#include "preferences/ario-preferences.h"
 #include "shell/ario-shell.h"
 #include "plugins/ario-plugins-engine.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+
+#ifdef WIN32
+#include <windows.h>
+#else
+#include "lib/bacon-message-connection.h"
+#endif
+
+static ArioShell *shell;
+
+#ifndef WIN32
+static void
+ario_main_on_message_received (const char *message,
+                               gpointer data)
+{
+        ario_shell_present (shell);
+}
+#endif
 
 int
 main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START
 
-        ArioShell *shell;
+        ario_conf_init ();
+
+#ifdef WIN32
+        HANDLE hMutex;
+        hMutex = CreateMutex (NULL, FALSE, "ArioMain");
+        if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)
+            && (GetLastError() == ERROR_ALREADY_EXISTS)) {
+                ARIO_LOG_INFO ("Ario is already running\n");
+                return 0;
+        }
+#else
+        BaconMessageConnection *bacon_connection = bacon_message_connection_new ("ario");
+        if (bacon_connection) {
+            if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)
+                 && !bacon_message_connection_get_is_server (bacon_connection)) {
+                ARIO_LOG_INFO ("Ario is already running\n");
+                bacon_message_connection_send (bacon_connection, "PRESENT");
+                return 0;
+            }
+            bacon_message_connection_set_callback (bacon_connection,
+                                                   ario_main_on_message_received,
+                                                   NULL);
+        }
+#endif
 
 #ifdef ENABLE_NLS
         setlocale (LC_ALL, "");
@@ -49,9 +90,8 @@ main (int argc, char *argv[])
         gtk_set_locale ();
         gtk_init (&argc, &argv);
 
-        ario_conf_init ();
         ario_util_init_stock_icons ();
-        curl_global_init(0);
+        curl_global_init (CURL_GLOBAL_WIN32);
 
         shell = ario_shell_new ();
         ario_shell_construct (shell);

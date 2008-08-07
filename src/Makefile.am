@@ -33,6 +33,8 @@ ario_SOURCES = \
 	covers/ario-cover-provider.h\
         lib/ario-conf.c\
 	lib/ario-conf.h\
+	lib/bacon-message-connection.c\
+	lib/bacon-message-connection.h\
 	lib/eggtrayicon.c\
 	lib/eggtrayicon.h\
 	lib/libmpdclient.c\

@@ -184,6 +184,9 @@
 #define PREF_NOTIFICATION_TIME                  "notification-time"
 #define PREF_NOTIFICATION_TIME_DEFAULT          5
 
+#define PREF_ONE_INSTANCE                       "one-instance"
+#define PREF_ONE_INSTANCE_DEFAULT               TRUE
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,
