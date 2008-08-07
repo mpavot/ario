@@ -33,7 +33,7 @@ copy plugins\radios\radios.ario-plugin.w32 delivery\plugins\radios.ario-plugin
 
 mkdir delivery\po
 
-for %%a in (po\*.mo) do (
+for %%a in (po\*.gmo) do (
 	mkdir delivery\po\%%~na
 	mkdir delivery\po\%%~na\LC_MESSAGES
 	copy %%a delivery\po\%%~na\LC_MESSAGES\Ario.mo
