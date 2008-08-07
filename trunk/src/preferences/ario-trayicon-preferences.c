@@ -114,7 +114,6 @@ ario_trayicon_preferences_new (void)
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
-        GtkWidget *tray_frame;
         int i;
 
         trayicon_preferences = g_object_new (TYPE_ARIO_TRAYICON_PREFERENCES, NULL);
@@ -132,14 +131,8 @@ ario_trayicon_preferences_new (void)
         trayicon_preferences->priv->notificationtime_spinbutton = 
                 glade_xml_get_widget (xml, "notificationtime_spinbutton");
 
-        tray_frame = 
-                glade_xml_get_widget (xml, "tray_frame");
         rb_glade_boldify_label (xml, "trayicon_label");
         rb_glade_boldify_label (xml, "notification_label");
-
-#ifndef ENABLE_EGGTRAYICON
-        gtk_widget_hide (tray_frame);
-#endif
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
         for (i = 0; i < TRAY_ICON_N_BEHAVIOR; ++i) {
