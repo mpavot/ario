@@ -50,6 +50,13 @@ static void ario_playlist_song_changed_cb (ArioMpd *mpd,
                                            ArioPlaylist *playlist);
 static void ario_playlist_state_changed_cb (ArioMpd *mpd,
                                             ArioPlaylist *playlist);
+static void ario_playlist_sort_changed_cb (GtkTreeSortable *treesortable,
+                                           ArioPlaylist *playlist);
+static void ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
+                                             GtkTreePath *path,
+                                             GtkTreeIter *iter,
+                                             gpointer arg3,
+                                             ArioPlaylist *playlist);
 static void ario_playlist_drag_leave_cb (GtkWidget *widget,
                                          GdkDragContext *context,
                                          gint x,
@@ -168,19 +175,20 @@ struct ArioPlaylistColumn {
 
         const gboolean is_pixbuf;
         const gboolean is_resizable;
+        const gboolean is_sortable;
         GtkTreeViewColumn *column;
 };
 
 static ArioPlaylistColumn all_columns []  = {
-	{ PIXBUF_COLUMN, NULL, 20, PREF_PIXBUF_COLUMN_ORDER, PREF_PIXBUF_COLUMN_ORDER_DEFAULT, NULL, TRUE, TRUE, FALSE },
-	{ TRACK_COLUMN, PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT, PREF_TRACK_COLUMN_ORDER, PREF_TRACK_COLUMN_ORDER_DEFAULT, PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ TITLE_COLUMN, PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT, PREF_TITLE_COLUMN_ORDER, PREF_TITLE_COLUMN_ORDER_DEFAULT, PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ ARTIST_COLUMN, PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT, PREF_ARTIST_COLUMN_ORDER, PREF_ARTIST_COLUMN_ORDER_DEFAULT, PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ ALBUM_COLUMN, PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT, PREF_ALBUM_COLUMN_ORDER, PREF_ALBUM_COLUMN_ORDER_DEFAULT, PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ DURATION_COLUMN, PREF_DURATION_COLUMN_SIZE, PREF_DURATION_COLUMN_SIZE_DEFAULT, PREF_DURATION_COLUMN_ORDER, PREF_DURATION_COLUMN_ORDER_DEFAULT, PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ FILE_COLUMN, PREF_FILE_COLUMN_SIZE, PREF_FILE_COLUMN_SIZE_DEFAULT, PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT, PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ GENRE_COLUMN, PREF_GENRE_COLUMN_SIZE, PREF_GENRE_COLUMN_SIZE_DEFAULT, PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT, PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
-	{ DATE_COLUMN, PREF_DATE_COLUMN_SIZE, PREF_DATE_COLUMN_SIZE_DEFAULT, PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT, PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE },
+	{ PIXBUF_COLUMN, NULL, 20, PREF_PIXBUF_COLUMN_ORDER, PREF_PIXBUF_COLUMN_ORDER_DEFAULT, NULL, TRUE, TRUE, FALSE, FALSE },
+	{ TRACK_COLUMN, PREF_TRACK_COLUMN_SIZE, PREF_TRACK_COLUMN_SIZE_DEFAULT, PREF_TRACK_COLUMN_ORDER, PREF_TRACK_COLUMN_ORDER_DEFAULT, PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ TITLE_COLUMN, PREF_TITLE_COLUMN_SIZE, PREF_TITLE_COLUMN_SIZE_DEFAULT, PREF_TITLE_COLUMN_ORDER, PREF_TITLE_COLUMN_ORDER_DEFAULT, PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ ARTIST_COLUMN, PREF_ARTIST_COLUMN_SIZE, PREF_ARTIST_COLUMN_SIZE_DEFAULT, PREF_ARTIST_COLUMN_ORDER, PREF_ARTIST_COLUMN_ORDER_DEFAULT, PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ ALBUM_COLUMN, PREF_ALBUM_COLUMN_SIZE, PREF_ALBUM_COLUMN_SIZE_DEFAULT, PREF_ALBUM_COLUMN_ORDER, PREF_ALBUM_COLUMN_ORDER_DEFAULT, PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ DURATION_COLUMN, PREF_DURATION_COLUMN_SIZE, PREF_DURATION_COLUMN_SIZE_DEFAULT, PREF_DURATION_COLUMN_ORDER, PREF_DURATION_COLUMN_ORDER_DEFAULT, PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ FILE_COLUMN, PREF_FILE_COLUMN_SIZE, PREF_FILE_COLUMN_SIZE_DEFAULT, PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT, PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ GENRE_COLUMN, PREF_GENRE_COLUMN_SIZE, PREF_GENRE_COLUMN_SIZE_DEFAULT, PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT, PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
+	{ DATE_COLUMN, PREF_DATE_COLUMN_SIZE, PREF_DATE_COLUMN_SIZE_DEFAULT, PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT, PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE },
 	{ -1 }
 };
 
@@ -286,6 +294,12 @@ ario_playlist_append_column (ArioPlaylist *playlist,
         }
         gtk_tree_view_column_set_resizable (column, ario_column->is_resizable);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
+
+        if (ario_column->is_sortable) {
+                gtk_tree_view_column_set_sort_indicator (column, TRUE);
+                gtk_tree_view_column_set_sort_column_id (column, ario_column->columnnb);
+        }
+
         if (ario_column->pref_size)
                 gtk_tree_view_column_set_fixed_width (column, ario_conf_get_integer (ario_column->pref_size, ario_column->default_size));
         else
@@ -324,6 +338,15 @@ ario_playlist_reorder_columns (ArioPlaylist *playlist)
                         gtk_tree_view_move_column_after (GTK_TREE_VIEW (playlist->priv->tree), current, prev);
                 prev = current;
         }
+}
+
+static gint
+ario_playlist_no_sort (GtkTreeModel *model,
+                       GtkTreeIter *a,
+                       GtkTreeIter *b,
+                       gpointer user_data)
+{
+        return 0;
 }
 
 static void
@@ -365,12 +388,23 @@ ario_playlist_init (ArioPlaylist *playlist)
 
         gtk_tree_view_set_model (GTK_TREE_VIEW (playlist->priv->tree),
                                  GTK_TREE_MODEL (playlist->priv->model));
+
         gtk_tree_view_set_reorderable (GTK_TREE_VIEW (playlist->priv->tree),
                                        TRUE);
+        gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (playlist->priv->model),
+                                                ario_playlist_no_sort,
+                                                NULL, NULL);
         gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (playlist->priv->tree),
                                       TRUE);
         gtk_tree_view_set_search_column (GTK_TREE_VIEW (playlist->priv->tree),
                                          TITLE_COLUMN);
+
+        g_signal_connect_object (G_OBJECT (playlist->priv->model),
+                                 "sort-column-changed",
+                                 G_CALLBACK (ario_playlist_sort_changed_cb),
+                                 playlist,
+                                 0);
+
         playlist->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (playlist->priv->tree));
         gtk_tree_selection_set_mode (playlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
@@ -660,6 +694,85 @@ ario_playlist_state_changed_cb (ArioMpd *mpd,
         ario_playlist_sync_song (playlist);
 }
 
+static void
+ario_playlist_sort_changed_cb (GtkTreeSortable *treesortable,
+                               ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+
+        g_signal_connect_object (G_OBJECT (playlist->priv->model),
+                                 "rows-reordered",
+                                 G_CALLBACK (ario_playlist_rows_reordered_cb),
+                                 playlist,
+                                 0);
+}
+
+typedef struct ArioPlaylistReorderData {
+        GSList *paths;
+        GSList *ids;
+} ArioPlaylistReorderData;
+
+static gboolean
+ario_playlist_rows_reordered_foreach (GtkTreeModel *model,
+                                      GtkTreePath *p,
+                                      GtkTreeIter *iter,
+                                      ArioPlaylistReorderData *data)
+{
+        gchar *path;
+        gint *id;
+
+        id = g_malloc (sizeof (gint));
+        gtk_tree_model_get (model, iter, FILE_COLUMN, &path, ID_COLUMN, id, -1);
+
+        data->paths = g_slist_append (data->paths, path);
+        data->ids = g_slist_append (data->ids, id);
+
+        return FALSE;
+}
+
+static void
+ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
+                                 GtkTreePath *path,
+                                 GtkTreeIter *iter,
+                                 gpointer arg3,
+                                 ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+
+        ArioPlaylistReorderData data;
+        data.paths = NULL;
+        data.ids = NULL;
+        GSList *tmp;
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (playlist->priv->model),
+                                (GtkTreeModelForeachFunc) ario_playlist_rows_reordered_foreach,
+                                &data);
+
+        for (tmp = data.ids; tmp; tmp = g_slist_next (tmp)) {
+                ario_mpd_queue_delete_id (playlist->priv->mpd, *((gint *)tmp->data));
+        }
+
+        for (tmp = data.paths; tmp; tmp = g_slist_next (tmp)) {
+                ario_mpd_queue_add (playlist->priv->mpd, tmp->data);
+        }
+        ario_mpd_queue_commit (playlist->priv->mpd);
+
+        g_slist_foreach (data.ids, (GFunc) g_free, NULL);
+        g_slist_free (data.ids);
+
+        g_slist_foreach (data.paths, (GFunc) g_free, NULL);
+        g_slist_free (data.paths);
+
+        g_signal_handlers_disconnect_by_func (G_OBJECT (playlist->priv->model),
+                                              G_CALLBACK (ario_playlist_rows_reordered_cb),
+                                              playlist);
+
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (playlist->priv->model),
+                                              GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+                                                                 GTK_SORT_ASCENDING);
+
+}
+
 GtkWidget *
 ario_playlist_new (GtkUIManager *mgr,
                    GtkActionGroup *group,
@@ -685,10 +798,10 @@ ario_playlist_activate_row (ArioPlaylist *playlist,
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
+        gint id;
 
         /* get the iter from the path */
         if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path)) {
-                gint id;
                 /* get the song id */
                 gtk_tree_model_get (GTK_TREE_MODEL (playlist->priv->model), &iter, ID_COLUMN, &id, -1);
                 ario_mpd_do_play_id (playlist->priv->mpd, id);
