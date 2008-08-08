@@ -257,8 +257,8 @@ ario_songlist_new (GtkUIManager *mgr,
                                                            renderer,
                                                            "text", SONGS_TITLE_COLUMN,
                                                            NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
+        gtk_tree_view_column_set_sizing (column,GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 200);
         gtk_tree_view_column_set_resizable (column, TRUE);
         if (is_sortable) {
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
@@ -272,8 +272,8 @@ ario_songlist_new (GtkUIManager *mgr,
                                                            renderer,
                                                            "text", SONGS_ARTIST_COLUMN,
                                                            NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
+        gtk_tree_view_column_set_sizing (column,GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 200);
         gtk_tree_view_column_set_resizable (column, TRUE);
         if (is_sortable) {
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
@@ -287,8 +287,8 @@ ario_songlist_new (GtkUIManager *mgr,
                                                            renderer,
                                                            "text", SONGS_ALBUM_COLUMN,
                                                            NULL);
-        gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width(column, 200);
+        gtk_tree_view_column_set_sizing (column,GTK_TREE_VIEW_COLUMN_FIXED);
+        gtk_tree_view_column_set_fixed_width (column, 200);
         gtk_tree_view_column_set_resizable (column, TRUE);
         if (is_sortable) {
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
