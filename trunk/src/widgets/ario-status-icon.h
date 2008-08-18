@@ -46,22 +46,12 @@ typedef struct
         GtkStatusIconClass parent_class;
 } ArioStatusIconClass;
 
-enum
-{
-        VISIBILITY_HIDDEN,
-        VISIBILITY_VISIBLE,
-        VISIBILITY_TOGGLE
-};
-
 GType                   ario_status_icon_get_type       (void) G_GNUC_CONST;
 
 ArioStatusIcon *        ario_status_icon_new            (GtkActionGroup *group,
                                                          GtkUIManager *mgr,
-                                                         GtkWindow *window,
+                                                         ArioShell *shell,
                                                          ArioMpd *mpd);
-
-void                    ario_status_icon_set_visibility (ArioStatusIcon *status,
-                                                         int state);
 
 G_END_DECLS
 

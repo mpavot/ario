@@ -59,7 +59,8 @@ static void ario_shell_get_property (GObject *object,
                                      guint prop_id,
                                      GValue *value,
                                      GParamSpec *pspec);
-static void ario_shell_show (ArioShell *shell);
+static void ario_shell_show (ArioShell *shell,
+                             gboolean minimized);
 static void ario_shell_cmd_quit (GtkAction *action,
                                  ArioShell *shell);
 static void ario_shell_cmd_save (GtkAction *action,
@@ -136,6 +137,13 @@ struct ArioShellPrivate
         gboolean playlist_hidden;
         gboolean connected;
         gboolean shown;
+
+        gboolean maximized;
+        int window_x;
+        int window_y;
+        int window_w;
+        int window_h;
+        gboolean visible;
 };
 
 enum
@@ -283,6 +291,12 @@ ario_shell_init (ArioShell *shell)
         shell->priv = g_new0 (ArioShellPrivate, 1);
         shell->priv->connected = FALSE;
         shell->priv->shown = FALSE;
+
+        shell->priv->window_x = -1;
+        shell->priv->window_y = -1;
+        shell->priv->window_w = -1;
+        shell->priv->window_h = -1;
+        shell->priv->visible = TRUE;
 }
 
 static void
@@ -377,11 +391,7 @@ ario_shell_window_delete_cb (GtkWidget *win,
 {
         ARIO_LOG_FUNCTION_START
         if (ario_conf_get_boolean (PREF_HIDE_ON_CLOSE, PREF_HIDE_ON_CLOSE_DEFAULT)) {
-#ifdef ENABLE_EGGTRAYICON
-                ario_tray_icon_set_visibility (shell->priv->tray_icon, VISIBILITY_TOGGLE);
-#else
-                ario_status_icon_set_visibility (shell->priv->status_icon, VISIBILITY_TOGGLE);
-#endif
+                ario_shell_set_visibility (shell, VISIBILITY_TOGGLE);
         } else {
                 gtk_main_quit ();
         }
@@ -389,7 +399,8 @@ ario_shell_window_delete_cb (GtkWidget *win,
 };
 
 void
-ario_shell_construct (ArioShell *shell)
+ario_shell_construct (ArioShell *shell,
+                      gboolean minimized)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *menubar;
@@ -451,14 +462,14 @@ ario_shell_construct (ArioShell *shell)
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
-                                                     GTK_WINDOW (shell->priv->window),
+                                                     shell,
                                                      shell->priv->mpd);
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
 #else
         /* initialize tray icon */
         shell->priv->status_icon = ario_status_icon_new (shell->priv->actiongroup,
                                                          shell->priv->ui_manager,
-                                                         GTK_WINDOW (shell->priv->window),
+                                                         shell,
                                                          shell->priv->mpd);
 #endif
         shell->priv->vpaned = gtk_vpaned_new ();
@@ -532,7 +543,7 @@ ario_shell_construct (ArioShell *shell)
                                          shell, 0);
                 gtk_widget_show_all (GTK_WIDGET (firstlaunch));
         } else {
-                 ario_shell_show (shell);
+                 ario_shell_show (shell, minimized);
         }
 
         ario_shell_sync_statusbar_visibility (shell);
@@ -568,7 +579,8 @@ ario_shell_shutdown (ArioShell *shell)
 }
 
 static void
-ario_shell_show (ArioShell *shell)
+ario_shell_show (ArioShell *shell,
+                 gboolean minimized)
 {
         ARIO_LOG_FUNCTION_START
 
@@ -586,13 +598,16 @@ ario_shell_show (ArioShell *shell)
         ario_shell_sync_paned (shell);
         ario_shell_sync_mpd (shell);
 
-        gtk_widget_show_all (shell->priv->window);
-
+        if (minimized) {
+                ario_shell_set_visibility (shell, VISIBILITY_HIDDEN);
+        } else {
+                gtk_widget_show_all (shell->priv->window);
+                shell->priv->shown = TRUE;
+        }
         g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
                                  G_CALLBACK (ario_shell_window_state_cb),
                                  shell, 0);
 
-        shell->priv->shown = TRUE;
 }
 
 void
@@ -600,6 +615,66 @@ ario_shell_present (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
         gtk_window_present (GTK_WINDOW (shell->priv->window));
+}
+
+void
+ario_shell_restore_main_window (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+
+        if (!shell->priv->shown) {
+                gtk_widget_show_all (shell->priv->window);
+                shell->priv->shown = TRUE;
+        }
+        if ((shell->priv->window_x >= 0 && shell->priv->window_y >= 0) || (shell->priv->window_h >= 0 && shell->priv->window_w >=0 )) {
+                gtk_widget_realize (shell->priv->window);
+                gdk_flush ();
+
+                if (shell->priv->window_x >= 0 && shell->priv->window_y >= 0) {
+                        gtk_window_move (GTK_WINDOW (shell->priv->window),
+                                         shell->priv->window_x,
+                                         shell->priv->window_y);
+                }
+                if (shell->priv->window_w >= 0 && shell->priv->window_y >=0) {
+                        gtk_window_resize (GTK_WINDOW (shell->priv->window),
+                                           shell->priv->window_w,
+                                           shell->priv->window_h);
+                }
+        }
+
+        if (shell->priv->maximized)
+                gtk_window_maximize (GTK_WINDOW (shell->priv->window));
+}
+
+void
+ario_shell_set_visibility (ArioShell *shell,
+                           ArioVisibility state)
+{
+        ARIO_LOG_FUNCTION_START
+        switch (state)
+        {
+        case VISIBILITY_HIDDEN:
+        case VISIBILITY_VISIBLE:
+                if (shell->priv->visible != state)
+                        ario_shell_set_visibility (shell, VISIBILITY_TOGGLE);
+                break;
+        case VISIBILITY_TOGGLE:
+                shell->priv->visible = !shell->priv->visible;
+
+                if (shell->priv->visible == TRUE) {
+                        ario_shell_restore_main_window (shell);
+                        gtk_widget_show (shell->priv->window);
+                } else {
+                        shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
+                        gtk_window_get_position (GTK_WINDOW (shell->priv->window),
+                                                 &shell->priv->window_x,
+                                                 &shell->priv->window_y);
+                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                                             &shell->priv->window_w,
+                                             &shell->priv->window_h);
+                        gtk_widget_hide (shell->priv->window);
+                }
+        }
 }
 
 static void
@@ -862,10 +937,10 @@ static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
+        GdkGeometry hints;
         int width = ario_conf_get_integer (PREF_WINDOW_WIDTH, PREF_WINDOW_WIDTH_DEFAULT); 
         int height = ario_conf_get_integer (PREF_WINDOW_HEIGHT, PREF_WINDOW_HEIGHT_DEFAULT);
         gboolean maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
-        GdkGeometry hints;
 
         gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
                                      width, height);
@@ -925,7 +1000,7 @@ ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                   ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        ario_shell_show (shell);
+        ario_shell_show (shell, FALSE);
 }
 
 static void

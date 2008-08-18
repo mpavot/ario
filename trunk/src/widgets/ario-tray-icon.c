@@ -30,6 +30,7 @@
 #include "lib/ario-conf.h"
 #include "lib/libsexy/sexy-tooltip.h"
 #include "widgets/ario-tray-icon.h"
+#include "shell/ario-shell.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -39,7 +40,7 @@
 #define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
 
 static void ario_tray_icon_class_init (ArioTrayIconClass *klass);
-static void ario_tray_icon_init (ArioTrayIcon *ario_shell_player);
+static void ario_tray_icon_init (ArioTrayIcon *icon);
 static GObject *ario_tray_icon_constructor (GType type, guint n_construct_properties,
                                             GObjectConstructParam *construct_properties);
 static void ario_tray_icon_finalize (GObject *object);
@@ -108,17 +109,10 @@ struct ArioTrayIconPrivate
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 
-        GtkWindow *main_window;
         GtkWidget *ebox;
 
-        gboolean maximized;
-        int window_x;
-        int window_y;
-        int window_w;
-        int window_h;
-        gboolean visible;
-
         ArioMpd *mpd;
+        ArioShell *shell;
 
         GtkWidget *image;
         GtkWidget *image_play;
@@ -158,7 +152,7 @@ enum
         PROP_0,
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP,
-        PROP_WINDOW,
+        PROP_SHELL,
         PROP_MPD
 };
 
@@ -208,11 +202,11 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
         object_class->get_property = ario_tray_icon_get_property;
 
         g_object_class_install_property (object_class,
-                                         PROP_WINDOW,
-                                         g_param_spec_object ("window",
-                                                              "GtkWindow",
-                                                              "main GtkWindo",
-                                                              GTK_TYPE_WINDOW,
+                                         PROP_SHELL,
+                                         g_param_spec_object ("shell",
+                                                              "ArioShell",
+                                                              "shell",
+                                                              TYPE_ARIO_SHELL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -275,12 +269,6 @@ ario_tray_icon_init (ArioTrayIcon *icon)
 
         gtk_container_add (GTK_CONTAINER (icon->priv->ebox), icon->priv->image);
 
-        icon->priv->window_x = -1;
-        icon->priv->window_y = -1;
-        icon->priv->window_w = -1;
-        icon->priv->window_h = -1;
-        icon->priv->visible = TRUE;
-
         gtk_container_add (GTK_CONTAINER (icon), icon->priv->ebox);
         gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
 
@@ -303,9 +291,6 @@ ario_tray_icon_constructor (GType type, guint n_construct_properties,
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         tray = ARIO_TRAY_ICON (parent_class->constructor (type, n_construct_properties,
                                                           construct_properties));
-
-        ario_tray_icon_set_visibility (tray, VISIBILITY_VISIBLE);
-
         return G_OBJECT (tray);
 }
 
@@ -343,8 +328,8 @@ ario_tray_icon_set_property (GObject *object,
 
         switch (prop_id)
         {
-        case PROP_WINDOW:
-                tray->priv->main_window = g_value_get_object (value);
+        case PROP_SHELL:
+                tray->priv->shell = g_value_get_object (value);
                 break;
         case PROP_UI_MANAGER:
                 tray->priv->ui_manager = g_value_get_object (value);
@@ -390,8 +375,8 @@ ario_tray_icon_get_property (GObject *object,
 
         switch (prop_id)
         {
-        case PROP_WINDOW:
-                g_value_set_object (value, tray->priv->main_window);
+        case PROP_SHELL:
+                g_value_set_object (value, tray->priv->shell);
                 break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, tray->priv->ui_manager);
@@ -411,7 +396,7 @@ ario_tray_icon_get_property (GObject *object,
 ArioTrayIcon *
 ario_tray_icon_new (GtkActionGroup *group,
                     GtkUIManager *mgr,
-                    GtkWindow *window,
+                    ArioShell *shell,
                     ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
@@ -420,7 +405,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                                            "action-group", group,
                                            "title", "Ario",
                                            "ui-manager", mgr,
-                                           "window", window,
+                                           "shell", shell,
                                            "mpd", mpd,
                                            NULL);
 
@@ -586,7 +571,7 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
 
         switch (event->button) {
         case 1:
-                ario_tray_icon_set_visibility (icon, VISIBILITY_TOGGLE);
+                ario_shell_set_visibility (icon->priv->shell, VISIBILITY_TOGGLE);
                 break;
 
         case 2:
@@ -853,61 +838,6 @@ ario_tray_icon_cover_changed_cb (ArioCoverHandler *cover_handler,
 {
         ARIO_LOG_FUNCTION_START
         ario_tray_icon_sync_tooltip_cover (icon);
-}
-
-static void
-ario_tray_icon_restore_main_window (ArioTrayIcon *icon)
-{
-        ARIO_LOG_FUNCTION_START
-        if ((icon->priv->window_x >= 0 && icon->priv->window_y >= 0) || (icon->priv->window_h >= 0 && icon->priv->window_w >=0 )) {
-                gtk_widget_realize (GTK_WIDGET (icon->priv->main_window));
-                gdk_flush ();
-
-                if (icon->priv->window_x >= 0 && icon->priv->window_y >= 0) {
-                        gtk_window_move (icon->priv->main_window,
-                                         icon->priv->window_x,
-                                         icon->priv->window_y);
-                }
-                if (icon->priv->window_w >= 0 && icon->priv->window_y >=0) {
-                        gtk_window_resize (icon->priv->main_window,
-                                           icon->priv->window_w,
-                                           icon->priv->window_h);
-                }
-        }
-
-        if (icon->priv->maximized)
-                gtk_window_maximize (GTK_WINDOW (icon->priv->main_window));
-}
-
-void
-ario_tray_icon_set_visibility (ArioTrayIcon *icon,
-                               int state)
-{
-        ARIO_LOG_FUNCTION_START
-        switch (state)
-        {
-        case VISIBILITY_HIDDEN:
-        case VISIBILITY_VISIBLE:
-                if (icon->priv->visible != state)
-                        ario_tray_icon_set_visibility (icon, VISIBILITY_TOGGLE);
-                break;
-        case VISIBILITY_TOGGLE:
-                icon->priv->visible = !icon->priv->visible;
-
-                if (icon->priv->visible == TRUE) {
-                        ario_tray_icon_restore_main_window (icon);
-                        gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
-                } else {
-                        icon->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
-                        gtk_window_get_position (icon->priv->main_window,
-                                                 &icon->priv->window_x,
-                                                 &icon->priv->window_y);
-                        gtk_window_get_size (icon->priv->main_window,
-                                             &icon->priv->window_w,
-                                             &icon->priv->window_h);
-                        gtk_widget_hide (GTK_WIDGET (icon->priv->main_window));
-                }
-        }
 }
 
 static void

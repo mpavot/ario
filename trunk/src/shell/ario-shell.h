@@ -46,15 +46,26 @@ typedef struct
         GObjectClass parent_class;
 } ArioShellClass;
 
+typedef enum
+{
+        VISIBILITY_HIDDEN,
+        VISIBILITY_VISIBLE,
+        VISIBILITY_TOGGLE
+}ArioVisibility;
+
 GType           ario_shell_get_type             (void) G_GNUC_CONST;
 
 ArioShell *     ario_shell_new                  (void);
 
-void            ario_shell_construct            (ArioShell *shell);
-
+void            ario_shell_construct            (ArioShell *shell,
+                                                 gboolean minimized);
 void            ario_shell_shutdown             (ArioShell *shell);
 
 void            ario_shell_present              (ArioShell *shell);
+
+void            ario_shell_set_visibility       (ArioShell *shell,
+                                                 ArioVisibility state);
+void            ario_shell_restore_main_window  (ArioShell *shell);
 
 GtkWidget *     ario_shell_get_playlist         (ArioShell *shell);
 

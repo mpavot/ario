@@ -27,6 +27,7 @@
 #include <gtk/gtkuimanager.h>
 #include "lib/eggtrayicon.h"
 #include "ario-mpd.h"
+#include "shell/ario-shell.h"
 
 G_BEGIN_DECLS
 
@@ -51,23 +52,12 @@ typedef struct
         EggTrayIconClass parent_class;
 } ArioTrayIconClass;
 
-enum
-{
-        VISIBILITY_HIDDEN,
-        VISIBILITY_VISIBLE,
-        VISIBILITY_TOGGLE
-};
-
 GType                   ario_tray_icon_get_type         (void) G_GNUC_CONST;
 
 ArioTrayIcon *          ario_tray_icon_new              (GtkActionGroup *group,
                                                          GtkUIManager *mgr,
-                                                         GtkWindow *window,
+                                                         ArioShell *shell,
                                                          ArioMpd *mpd);
-
-void                    ario_tray_icon_set_visibility   (ArioTrayIcon *tray,
-                                                         int state);
-
 G_END_DECLS
 
 #endif /* __ARIO_TRAY_ICON_H */
