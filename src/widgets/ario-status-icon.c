@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "widgets/ario-status-icon.h"
+#include "shell/ario-shell.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -73,17 +74,10 @@ struct ArioStatusIconPrivate
 {
         gboolean tooltips_pointer_above;
 
-        GtkWindow *main_window;
+        ArioShell *shell;
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
-
-        gboolean maximized;
-        int window_x;
-        int window_y;
-        int window_w;
-        int window_h;
-        gboolean visible;
 
         ArioMpd *mpd;
 };
@@ -113,7 +107,7 @@ enum
 {
         PROP_0,
         PROP_UI_MANAGER,
-        PROP_WINDOW,
+        PROP_SHELL,
         PROP_ACTION_GROUP,
         PROP_MPD
 };
@@ -164,11 +158,11 @@ ario_status_icon_class_init (ArioStatusIconClass *klass)
         object_class->get_property = ario_status_icon_get_property;
 
         g_object_class_install_property (object_class,
-                                         PROP_WINDOW,
-                                         g_param_spec_object ("window",
-                                                              "GtkWindow",
-                                                              "main GtkWindo",
-                                                              GTK_TYPE_WINDOW,
+                                         PROP_SHELL,
+                                         g_param_spec_object ("shell",
+                                                              "ArioShell",
+                                                              "shell",
+                                                              TYPE_ARIO_SHELL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -212,12 +206,6 @@ ario_status_icon_init (ArioStatusIcon *icon)
                                  "popup-menu",
                                  G_CALLBACK (ario_status_icon_popup_cb),
                                  icon, 0);
-
-        icon->priv->window_x = -1;
-        icon->priv->window_y = -1;
-        icon->priv->window_w = -1;
-        icon->priv->window_h = -1;
-        icon->priv->visible = TRUE;
 }
 
 static GObject *
@@ -234,8 +222,6 @@ ario_status_icon_constructor (GType type, guint n_construct_properties,
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         status = ARIO_STATUS_ICON (parent_class->constructor (type, n_construct_properties,
                                                           construct_properties));
-
-        ario_status_icon_set_visibility (status, VISIBILITY_VISIBLE);
 
         return G_OBJECT (status);
 }
@@ -272,8 +258,8 @@ ario_status_icon_set_property (GObject *object,
 
         switch (prop_id)
         {
-        case PROP_WINDOW:
-                status->priv->main_window = g_value_get_object (value);
+        case PROP_SHELL:
+                status->priv->shell = g_value_get_object (value);
                 break;
         case PROP_UI_MANAGER:
                 status->priv->ui_manager = g_value_get_object (value);
@@ -313,8 +299,8 @@ ario_status_icon_get_property (GObject *object,
 
         switch (prop_id)
         {
-        case PROP_WINDOW:
-                g_value_set_object (value, status->priv->main_window);
+        case PROP_SHELL:
+                g_value_set_object (value, status->priv->shell);
                 break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, status->priv->ui_manager);
@@ -334,7 +320,7 @@ ario_status_icon_get_property (GObject *object,
 ArioStatusIcon *
 ario_status_icon_new (GtkActionGroup *group,
                       GtkUIManager *mgr,
-                      GtkWindow *window,
+                      ArioShell *shell,
                       ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
@@ -342,7 +328,7 @@ ario_status_icon_new (GtkActionGroup *group,
         icon = g_object_new (TYPE_ARIO_STATUS_ICON,
                              "action-group", group,
                              "ui-manager", mgr,
-                             "window", window,
+                             "shell", shell,
                              "mpd", mpd,
                              NULL);
 
@@ -358,7 +344,7 @@ ario_status_icon_activate_cb (GtkStatusIcon *status_icon,
 {
         ARIO_LOG_FUNCTION_START
 
-        ario_status_icon_set_visibility (icon, VISIBILITY_TOGGLE);
+        ario_shell_set_visibility (icon->priv->shell, VISIBILITY_TOGGLE);
 }
 
 static void
@@ -456,61 +442,6 @@ ario_status_icon_state_changed_cb (ArioMpd *mpd,
         ario_status_icon_sync_tooltip (icon);
         ario_status_icon_sync_icon (icon);
         ario_status_icon_sync_popup (icon);
-}
-
-static void
-ario_status_icon_restore_main_window (ArioStatusIcon *icon)
-{
-        ARIO_LOG_FUNCTION_START
-        if ((icon->priv->window_x >= 0 && icon->priv->window_y >= 0) || (icon->priv->window_h >= 0 && icon->priv->window_w >=0 )) {
-                gtk_widget_realize (GTK_WIDGET (icon->priv->main_window));
-                gdk_flush ();
-
-                if (icon->priv->window_x >= 0 && icon->priv->window_y >= 0) {
-                        gtk_window_move (icon->priv->main_window,
-                                         icon->priv->window_x,
-                                         icon->priv->window_y);
-                }
-                if (icon->priv->window_w >= 0 && icon->priv->window_y >=0) {
-                        gtk_window_resize (icon->priv->main_window,
-                                           icon->priv->window_w,
-                                           icon->priv->window_h);
-                }
-        }
-
-        if (icon->priv->maximized)
-                gtk_window_maximize (GTK_WINDOW (icon->priv->main_window));
-}
-
-void
-ario_status_icon_set_visibility (ArioStatusIcon *icon,
-                               int state)
-{
-        ARIO_LOG_FUNCTION_START
-        switch (state)
-        {
-        case VISIBILITY_HIDDEN:
-        case VISIBILITY_VISIBLE:
-                if (icon->priv->visible != state)
-                        ario_status_icon_set_visibility (icon, VISIBILITY_TOGGLE);
-                break;
-        case VISIBILITY_TOGGLE:
-                icon->priv->visible = !icon->priv->visible;
-
-                if (icon->priv->visible == TRUE) {
-                        ario_status_icon_restore_main_window (icon);
-                        gtk_widget_show (GTK_WIDGET (icon->priv->main_window));
-                } else {
-                        icon->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
-                        gtk_window_get_position (icon->priv->main_window,
-                                                 &icon->priv->window_x,
-                                                 &icon->priv->window_y);
-                        gtk_window_get_size (icon->priv->main_window,
-                                             &icon->priv->window_w,
-                                             &icon->priv->window_h);
-                        gtk_widget_hide (GTK_WIDGET (icon->priv->main_window));
-                }
-        }
 }
 
 static void

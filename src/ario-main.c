@@ -24,6 +24,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <curl/curl.h>
 #include <libxml/parser.h>
+#include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell.h"
@@ -38,6 +39,7 @@
 #endif
 
 static ArioShell *shell;
+static gboolean minimized = FALSE;
 
 #ifndef WIN32
 static void
@@ -52,6 +54,19 @@ int
 main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START
+
+	GOptionContext *context;
+	static const GOptionEntry options []  = {
+		{ "minimized",           'm', 0, G_OPTION_ARG_NONE,         &minimized,           N_("Start minimized window"), NULL },
+		{ NULL }
+	};
+
+	context = g_option_context_new (NULL);
+	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+	g_option_context_add_group (context, gtk_get_option_group (TRUE));
+
+	g_option_context_parse (context, &argc, &argv, NULL);
+	g_option_context_free (context);
 
         ario_conf_init ();
 
@@ -94,7 +109,7 @@ main (int argc, char *argv[])
         curl_global_init (CURL_GLOBAL_WIN32);
 
         shell = ario_shell_new ();
-        ario_shell_construct (shell);
+        ario_shell_construct (shell, minimized);
         ario_plugins_engine_init (shell);
 
         gtk_main ();
