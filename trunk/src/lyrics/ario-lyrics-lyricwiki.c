@@ -160,7 +160,6 @@ ario_lyrics_lyricwiki_parse_xml_file (gchar *xmldata,
         xmlChar *xml_title = NULL;
         xmlChar *xml_artist = NULL;
         ArioLyrics *lyrics = NULL;
-        gchar *tmp;
 
         doc = xmlParseMemory (xmldata, size);
         if (doc == NULL ) {
@@ -202,24 +201,19 @@ ario_lyrics_lyricwiki_parse_xml_file (gchar *xmldata,
                 if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "lyrics"))) {
                         xml_lyrics = xmlNodeGetContent (cur);
                         if (xml_lyrics) {
-                                if (doc->encoding) {
-                                        tmp = g_convert ((const gchar *) xml_lyrics, -1, (const gchar *) doc->encoding, "UTF8", NULL, NULL, NULL);
-                                        lyrics->lyrics = g_locale_from_utf8 (tmp, -1, NULL, NULL, NULL);
-                                        g_free (tmp);
-                                } else
-                                        lyrics->lyrics = g_strdup ((const gchar *) xml_lyrics);
+                                lyrics->lyrics = ario_util_convert_from_iso8859 ((const gchar *) xml_lyrics);
                                 xmlFree (xml_lyrics);
                         }
                 } else if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "song"))) {
                         xml_title = xmlNodeGetContent (cur);
                         if (xml_title) {
-                                lyrics->title = g_strdup ((const gchar *) xml_title);
+                                lyrics->title = ario_util_convert_from_iso8859 ((const gchar *) xml_title);
                                 xmlFree (xml_title);
                         }
                 } else if ((cur->type == XML_ELEMENT_NODE) && (xmlStrEqual (cur->name, (const xmlChar *) "artist"))) {
                         xml_artist = xmlNodeGetContent (cur);
                         if (xml_artist) {
-                                lyrics->artist = g_strdup ((const gchar *) xml_artist);
+                                lyrics->artist = ario_util_convert_from_iso8859 ((const gchar *) xml_artist);
                                 xmlFree (xml_artist);
                         }
                 }

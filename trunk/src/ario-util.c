@@ -577,3 +577,17 @@ ario_util_get_dnd_pixbuf (GSList *albums)
 
         return pixbuf;
 }
+
+gchar *
+ario_util_convert_from_iso8859 (const char *string)
+{
+        ARIO_LOG_FUNCTION_START
+        char *ret, *tmp;
+
+        tmp = g_convert (string, -1, (const gchar *) "ISO-8859-1", "UTF8", NULL, NULL, NULL);
+        ret = g_locale_from_utf8 (tmp, -1, NULL, NULL, NULL);
+        g_free (tmp);
+
+        return ret;
+}
+

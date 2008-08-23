@@ -68,3 +68,5 @@ char *                  ario_util_format_keyword             (const char *keywor
 gchar *                 ario_util_md5                        (const char *string) G_GNUC_MALLOC;
 
 GdkPixbuf *             ario_util_get_dnd_pixbuf             (GSList *albums) G_GNUC_MALLOC;
+
+gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
