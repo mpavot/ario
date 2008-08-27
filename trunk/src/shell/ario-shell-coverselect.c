@@ -175,6 +175,47 @@ ario_shell_coverselect_finalize (GObject *object)
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+static void
+ario_shell_coverselect_drag_leave_cb (GtkWidget *widget,
+                                      GdkDragContext *context,
+                                      gint x,
+                                      gint y,
+                                      GtkSelectionData *data,
+                                      guint info,
+                                      guint time,
+                                      ArioShellCoverselect *shell_coverselect)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *url;
+        gchar *contents;
+        gsize length;
+
+        if (info == 1) {
+                printf ("image  DND : TODO\n");
+        } else if (info == 2) {
+                data->data[data->length - 2] = 0;
+                url = g_strdup ((gchar *) data->data + 7);
+                if (ario_util_uri_exists (url)) {
+                        if (g_file_get_contents (url,
+                                                 &contents,
+                                                 &length,
+                                                 NULL)) {
+                                 ario_cover_save_cover (shell_coverselect->priv->file_artist,
+                                                        shell_coverselect->priv->file_album,
+                                                        contents, length,
+                                                        OVERWRITE_MODE_REPLACE);
+                                g_free (contents);
+                                ario_cover_handler_force_reload ();
+                                ario_shell_coverselect_set_current_cover (shell_coverselect);
+                        }
+                }
+                g_free (url);
+        }
+
+        /* finish the drag */
+        gtk_drag_finish (context, TRUE, FALSE, time);
+}
+
 static GObject *
 ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                                     GObjectConstructParam *construct_properties)
@@ -185,6 +226,9 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         GObjectClass *parent_class;
         GladeXML *xml = NULL;
         GtkWidget *vbox;
+        GtkTargetList *targets;
+        GtkTargetEntry *target_entry;
+        gint n_elem;
 
         GtkTreeViewColumn *column;
         GtkCellRenderer *cell_renderer;
@@ -268,6 +312,20 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->local_open_button), 
                           "clicked", G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
                           ario_shell_coverselect);
+
+        targets = gtk_target_list_new (NULL, 0);
+        gtk_target_list_add_image_targets (targets, 1, TRUE);
+        gtk_target_list_add_uri_targets (targets, 2);
+        target_entry = gtk_target_table_new_from_list (targets, &n_elem);
+
+        gtk_drag_dest_set (ario_shell_coverselect->priv->current_cover,
+                           GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_DROP,
+                           target_entry, n_elem,
+                           GDK_ACTION_COPY);
+
+        g_signal_connect_object (G_OBJECT (ario_shell_coverselect->priv->current_cover), "drag_data_received",
+                                 G_CALLBACK (ario_shell_coverselect_drag_leave_cb),
+                                 ario_shell_coverselect, 0);
 
         return G_OBJECT (ario_shell_coverselect);
 }

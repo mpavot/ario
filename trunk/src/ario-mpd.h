@@ -165,6 +165,7 @@ void                    ario_mpd_set_current_elapsed                    (ArioMpd
 void                    ario_mpd_set_current_volume                     (ArioMpd *mpd,
                                                                          gint volume);
 GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
+
 void                    ario_mpd_set_current_random                     (ArioMpd *mpd,
                                                                          gboolean random);
 void                    ario_mpd_set_current_repeat                     (ArioMpd *mpd,

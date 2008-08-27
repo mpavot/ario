@@ -26,6 +26,8 @@
 #include "ario-util.h"
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
+#include "covers/ario-cover.h"
+#include "covers/ario-cover-handler.h"
 #include "shell/ario-shell-coverselect.h"
 #include "covers/ario-cover-handler.h"
 
@@ -174,6 +176,46 @@ ario_header_init (ArioHeader *header)
         header->priv = g_new0 (ArioHeaderPrivate, 1);
 }
 
+static void
+ario_header_drag_leave_cb (GtkWidget *widget,
+                           GdkDragContext *context,
+                           gint x,
+                           gint y,
+                           GtkSelectionData *data,
+                           guint info,
+                           guint time,
+                           ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *url;
+        gchar *contents;
+        gsize length;
+
+        if (info == 1) {
+                printf ("image  DND : TODO\n");
+        } else if (info == 2) {
+                data->data[data->length - 2] = 0;
+                url = g_strdup ((gchar *) data->data + 7);
+                if (ario_util_uri_exists (url)) {
+                        if (g_file_get_contents (url,
+                                                 &contents,
+                                                 &length,
+                                                 NULL)) {
+                                 ario_cover_save_cover (ario_mpd_get_current_artist (header->priv->mpd),
+                                                        ario_mpd_get_current_album (header->priv->mpd),
+                                                        contents, length,
+                                                        OVERWRITE_MODE_REPLACE);
+                                g_free (contents);
+                                ario_cover_handler_force_reload ();
+                        }
+                }
+                g_free (url);
+        }
+
+        /* finish the drag */
+        gtk_drag_finish (context, TRUE, FALSE, time);
+}
+
 static GObject *
 ario_header_constructor (GType type, guint n_construct_properties,
                          GObjectConstructParam *construct_properties)
@@ -183,7 +225,9 @@ ario_header_constructor (GType type, guint n_construct_properties,
         ArioHeaderClass *klass;
         GObjectClass *parent_class;
         GtkWidget *event_box;
-
+        GtkTargetList *targets;
+        GtkTargetEntry *target_entry;
+        gint n_elem;
         GtkWidget *image, *hbox, *hbox2, *vbox, *alignment;
 
         klass = ARIO_HEADER_CLASS (g_type_class_peek (TYPE_ARIO_HEADER));
@@ -275,6 +319,19 @@ ario_header_constructor (GType type, guint n_construct_properties,
         g_signal_connect_object (G_OBJECT (event_box),
                                  "button_press_event",
                                  G_CALLBACK (ario_header_image_press_cb),
+                                 header, 0);
+        targets = gtk_target_list_new (NULL, 0);
+        gtk_target_list_add_image_targets (targets, 1, TRUE);
+        gtk_target_list_add_uri_targets (targets, 2);
+        target_entry = gtk_target_table_new_from_list (targets, &n_elem);
+
+        gtk_drag_dest_set (event_box,
+                           GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_DROP,
+                           target_entry, n_elem,
+                           GDK_ACTION_COPY);
+
+        g_signal_connect_object (G_OBJECT (event_box), "drag_data_received",
+                                 G_CALLBACK (ario_header_drag_leave_cb),
                                  header, 0);
 
         /* Construct the Song/Artist/Album display */
@@ -508,7 +565,7 @@ ario_header_change_song_label (ArioHeader *header)
         switch (ario_mpd_get_current_state (header->priv->mpd)) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                title = ario_util_format_title(ario_mpd_get_current_song (header->priv->mpd));
+                title = ario_util_format_title (ario_mpd_get_current_song (header->priv->mpd));
 
                 tmp = SONG_MARKUP (title);
                 g_free (title);
