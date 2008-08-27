@@ -464,7 +464,10 @@ ario_shell_construct (ArioShell *shell,
                                                      shell->priv->ui_manager,
                                                      shell,
                                                      shell->priv->mpd);
+
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
+        if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
+                gtk_widget_hide (GTK_WIDGET (shell->priv->tray_icon));
 #else
         /* initialize tray icon */
         shell->priv->status_icon = ario_status_icon_new (shell->priv->actiongroup,
