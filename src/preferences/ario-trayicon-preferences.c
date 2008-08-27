@@ -39,6 +39,8 @@ G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_behavior_changed_cb (Gtk
                                                                               ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_notification_check_changed_cb (GtkCheckButton *butt,
                                                                            ArioTrayiconPreferences *trayicon_preferences);
+G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_check_changed_cb (GtkCheckButton *butt,
+                                                                          ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_notificationtime_changed_cb (GtkWidget *widget,
                                                                             ArioTrayiconPreferences *trayicon_preferences);
 
@@ -52,6 +54,7 @@ static const char *trayicon_behavior[] = {
 struct ArioTrayiconPreferencesPrivate
 {
         GtkWidget *notification_check;
+        GtkWidget *trayicon_check;
         GtkWidget *trayicon_combobox;
         GtkWidget *notificationtime_spinbutton;
 };
@@ -128,6 +131,8 @@ ario_trayicon_preferences_new (void)
                 glade_xml_get_widget (xml, "trayicon_combobox");
         trayicon_preferences->priv->notification_check =
                 glade_xml_get_widget (xml, "notification_checkbutton");
+        trayicon_preferences->priv->trayicon_check =
+                glade_xml_get_widget (xml, "trayicon_checkbutton");
         trayicon_preferences->priv->notificationtime_spinbutton = 
                 glade_xml_get_widget (xml, "notificationtime_spinbutton");
 
@@ -188,6 +193,8 @@ ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_prefe
                                   ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->notification_check),
                                       ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->trayicon_check),
+                                      ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT));
 
         gtk_widget_set_sensitive (trayicon_preferences->priv->notificationtime_spinbutton, ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT));
 
@@ -215,6 +222,15 @@ ario_trayicon_preferences_notification_check_changed_cb (GtkCheckButton *butt,
         ario_conf_set_boolean (PREF_HAVE_NOTIFICATION,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->notification_check)));
         gtk_widget_set_sensitive (trayicon_preferences->priv->notificationtime_spinbutton, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->notification_check)));
+}
+
+void
+ario_trayicon_preferences_trayicon_check_changed_cb (GtkCheckButton *butt,
+                                                     ArioTrayiconPreferences *trayicon_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_TRAY_ICON,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->trayicon_check)));
 }
 
 void

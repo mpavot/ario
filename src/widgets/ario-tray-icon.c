@@ -95,6 +95,8 @@ static void ario_tray_icon_cmd_previous (GtkAction *action,
                                          ArioTrayIcon *icon);
 static void ario_tray_icon_notification_changed_cb (guint notification_id,
                                                     ArioTrayIcon *icon);
+static void ario_tray_icon_changed_cb (guint notification_id,
+                                       ArioTrayIcon *icon);
 
 struct ArioTrayIconPrivate
 {
@@ -411,6 +413,9 @@ ario_tray_icon_new (GtkActionGroup *group,
 
         ario_conf_notification_add (PREF_HAVE_NOTIFICATION,
                                     (ArioNotifyFunc) ario_tray_icon_notification_changed_cb,
+                                    icon);
+        ario_conf_notification_add (PREF_TRAY_ICON,
+                                    (ArioNotifyFunc) ario_tray_icon_changed_cb,
                                     icon);
         ario_tray_icon_notification_changed_cb (0, icon);
 
@@ -897,5 +902,16 @@ ario_tray_icon_notification_changed_cb (guint notification_id,
                 ario_mpd_use_count_inc (icon->priv->mpd);
 
         icon->priv->has_notification = new;
+}
+
+static void
+ario_tray_icon_changed_cb (guint notification_id,
+                           ArioTrayIcon *icon)
+{
+        ARIO_LOG_FUNCTION_START
+        if (ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
+                gtk_widget_show_all (GTK_WIDGET (icon));
+        else
+                gtk_widget_hide (GTK_WIDGET (icon));
 }
 

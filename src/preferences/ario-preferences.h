@@ -187,6 +187,9 @@
 #define PREF_ONE_INSTANCE                       "one-instance"
 #define PREF_ONE_INSTANCE_DEFAULT               TRUE
 
+#define PREF_TRAY_ICON                          "tray-icon"
+#define PREF_TRAY_ICON_DEFAULT                  TRUE
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,
