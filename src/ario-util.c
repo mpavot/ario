@@ -281,6 +281,7 @@ ario_util_copy_file (const char *src_uri,
                              contents,
                              length,
                              NULL);
+        g_free (contents);
 }
 
 typedef struct _download_struct{
