@@ -335,11 +335,9 @@ ario_browser_albums_sort_func (GtkTreeModel *model,
         if (browser->priv->album_sort == SORT_YEAR) {
                 if (ayear && !byear)
                         ret = -1;
-
-                if (byear && !ayear)
+                else if (byear && !ayear)
                         ret = 1;
-
-                if (ayear && byear) {
+                else if (ayear && byear) {
                         ret = g_utf8_collate (ayear, byear);
                         if (ret == 0)
                                 ret = g_utf8_collate (aalbum, balbum);
