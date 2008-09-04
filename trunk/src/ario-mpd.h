@@ -57,15 +57,18 @@ typedef struct ArioMpdFileList
         GSList *songs;
 } ArioMpdFileList;
 
-typedef struct ArioMpdSearchCriteria
-{
-        gint type;
-        const gchar *value;
-} ArioMpdSearchCriteria;
-
 typedef mpd_Song ArioMpdSong;
+typedef mpd_TagItems ArioMpdTag;
 typedef mpd_OutputEntity ArioMpdOutput;
 typedef mpd_Stats ArioMpdStats;
+
+typedef struct
+{
+        ArioMpdTag tag;
+        gchar *value;
+} ArioMpdAtomicCriteria;
+
+typedef GSList ArioMpdCriteria; /* A criteria is a list of atomic criterias */
 
 #define ario_mpd_free_song mpd_freeSong
 #define ario_mpd_free_output mpd_freeOutputElement
@@ -109,13 +112,16 @@ gboolean                ario_mpd_update_status                          (ArioMpd
 
 void                    ario_mpd_update_db                              (ArioMpd *mpd);
 
+GSList *                ario_mpd_list_tags                              (ArioMpd *mpd,
+                                                                         const ArioMpdTag tag,
+                                                                         const ArioMpdCriteria *criteria);
 GSList *                ario_mpd_get_artists                            (ArioMpd *mpd);
 
 GSList *                ario_mpd_get_albums                             (ArioMpd *mpd,
-                                                                         const char *artist);
+                                                                         const ArioMpdCriteria *criteria);
 GSList *                ario_mpd_get_songs                              (ArioMpd *mpd,
-                                                                         const char *artist,
-                                                                         const char *album);
+                                                                         const ArioMpdCriteria *criteria,
+                                                                         const gboolean exact);
 GSList *                ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
                                                                          char *playlist);
 GSList *                ario_mpd_get_playlists                          (ArioMpd *mpd);
@@ -203,8 +209,6 @@ void                    ario_mpd_queue_move                             (ArioMpd
                                                                          int new_pos);
 void                    ario_mpd_queue_commit                           (ArioMpd *mpd);
 
-GSList*                 ario_mpd_search                                 (ArioMpd *mpd,
-                                                                         GSList *search_criterias);
 // returns 0 if OK, 1 if playlist already exists
 int                     ario_mpd_save_playlist                          (ArioMpd *mpd,
                                                                          const char *name);
@@ -228,6 +232,13 @@ ArioMpdFileList*        ario_mpd_list_files                             (ArioMpd
                                                                          const char *path,
                                                                          gboolean recursive);
 void                    ario_mpd_free_file_list                         (ArioMpdFileList *files);
+
+ArioMpdCriteria *       ario_mpd_criteria_copy                          (ArioMpdCriteria *criteria);
+
+void                    ario_mpd_criteria_free                          (ArioMpdCriteria *criteria);
+
+gchar **                ario_mpd_get_items_names                        (void);
+
 G_END_DECLS
 
 #endif /* __ARIO_MPD_H */

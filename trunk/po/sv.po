@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-14 11:10+0200\n"
+"POT-Creation-Date: 2008-09-04 20:00+0200\n"
 "PO-Revision-Date: 2008-05-27 08:41+0000\n"
 "Last-Translator: Per Söderkvist <per.soderkvist@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -26,14 +26,27 @@ msgstr "Musikspelaren Ario"
 msgid "Client application to mpd"
 msgstr ""
 
+#: ../data/glade/browser-prefs.glade.h:1
+#, fuzzy
+msgid "Library Options"
+msgstr "Bibliotek"
+
+#: ../data/glade/browser-prefs.glade.h:2
+msgid "Library Organisation"
+msgstr ""
+
+#: ../data/glade/browser-prefs.glade.h:3
+msgid "Sort albums: "
+msgstr "Sortera album: "
+
 #: ../data/glade/cover-prefs.glade.h:1
 #, fuzzy
 msgid "Automatically download the album cover of the playing song"
 msgstr "Ladda automatiskt ner albumgrafik till den uppspelade låten"
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:247
-#: ../src/shell/ario-shell-preferences.c:180
+#: ../src/shell/ario-shell-coverselect.c:291
+#: ../src/shell/ario-shell-preferences.c:187
 #, fuzzy
 msgid "Covers"
 msgstr "Albumgrafik"
@@ -57,7 +70,7 @@ msgid "Auto detect"
 msgstr "Upptäck automatiskt"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:170
+#: ../src/shell/ario-shell-preferences.c:172
 msgid "Connection"
 msgstr "Anslutning"
 
@@ -97,11 +110,11 @@ msgstr "Port:"
 msgid "_Autoconnect on startup"
 msgstr "Anslut automatisk vid uppstart"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:160
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:168
 msgid "_Connect"
 msgstr "_Anslut"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:163
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:171
 msgid "_Disconnect"
 msgstr "_Koppla från"
 
@@ -138,62 +151,67 @@ msgstr "Laddar ner omslag"
 msgid "Local search"
 msgstr "Lokal sökning"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:163
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:146
 msgid "Search"
 msgstr "Sök"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:334
-#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
+#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:151
+#: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:367
+#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:383
 msgid "Album"
 msgstr "Album"
 
-#: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
-#: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:416
-#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:271
-#: ../src/widgets/ario-status-icon.c:395
+#: ../data/glade/interface-prefs.glade.h:2
+msgid "Allow only one instance of Ario"
+msgstr ""
+
+#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:150
+#: ../src/shell/ario-shell-lyricsselect.c:208
+#: ../src/shell/ario-shell-similarartists.c:423
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
+#: ../src/widgets/ario-status-icon.c:381
 msgid "Artist"
 msgstr "Artist"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:334
+#. MPD_TAG_ITEM_GENRE
+#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
+#: ../src/widgets/ario-playlist.c:367
 msgid "Date"
 msgstr "Datum"
 
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:367
 msgid "Duration"
 msgstr "Längd"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "File"
 msgstr "Fil"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:334
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
+#: ../src/widgets/ario-playlist.c:367
 msgid "Genre"
 msgstr "Genre"
 
-#: ../data/glade/interface-prefs.glade.h:7
+#: ../data/glade/interface-prefs.glade.h:8
 #, fuzzy
 msgid "Go to current song when a new song is played"
 msgstr "Visa aktuell låt när en ny låt spelas upp"
 
-#: ../data/glade/interface-prefs.glade.h:8
+#: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:9
-#: ../src/shell/ario-shell-preferences.c:190
+#: ../data/glade/interface-prefs.glade.h:10
+#: ../src/shell/ario-shell-preferences.c:197
 msgid "Interface"
 msgstr "Gränssnitt"
 
-#: ../data/glade/interface-prefs.glade.h:10
-msgid "On middle button click on tray icon :"
-msgstr ""
-
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:207
+#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:215
 msgid "Playlist"
 msgstr "Spellista"
 
@@ -205,27 +223,19 @@ msgstr "Visa rader:"
 msgid "Show tabs"
 msgstr "Visa flikar"
 
-#: ../data/glade/interface-prefs.glade.h:14
-msgid "Sort albums: "
-msgstr "Sortera album: "
-
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
-#: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:256
-#: ../src/widgets/ario-status-icon.c:399
+#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:152
+#: ../src/sources/ario-tree.c:497 ../src/shell/ario-shell-lyricsselect.c:221
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-status-icon.c:385
 msgid "Title"
 msgstr "Titel"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:153
+#: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:367
 msgid "Track"
 msgstr "Spår"
-
-#: ../data/glade/interface-prefs.glade.h:17
-msgid "Tray icon"
-msgstr ""
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 msgid "Lyrics Sources"
@@ -236,7 +246,7 @@ msgid "Title :"
 msgstr "Titel:"
 
 #: ../data/glade/proxy-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:195
+#: ../src/shell/ario-shell-preferences.c:207
 #, fuzzy
 msgid "Proxy"
 msgstr "Proxyserver"
@@ -326,7 +336,7 @@ msgid "Play time :"
 msgstr "Speltid:"
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:200
+#: ../src/shell/ario-shell-preferences.c:212
 msgid "Statistics"
 msgstr "Statistik"
 
@@ -375,11 +385,60 @@ msgstr "Låt"
 msgid "Track :"
 msgstr "Spår:"
 
-#: ../src/ario-mpd.c:652
+#: ../data/glade/trayicon-prefs.glade.h:1
+#, fuzzy
+msgid "Notification"
+msgstr "Bekräftelse"
+
+#: ../data/glade/trayicon-prefs.glade.h:2
+msgid "Notification on song change"
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:3
+msgid "Notification time: "
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:4
+msgid "On middle button click on tray icon :"
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:5
+#: ../src/shell/ario-shell-preferences.c:202
+msgid "Tray icon"
+msgstr ""
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr ""
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/ario-mpd.c:157
+#, fuzzy
+msgid "Composer"
+msgstr "Kompositör:"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/ario-mpd.c:158
+msgid "Performer"
+msgstr ""
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/ario-mpd.c:161
+msgid "Filename"
+msgstr "Filnamn"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/ario-mpd.c:162
+msgid "Any"
+msgstr "Valfri"
+
+#: ../src/ario-mpd.c:672
 msgid "Connecting to MPD server..."
 msgstr "Ansluter till MPD-server..."
 
-#: ../src/ario-mpd.c:677
+#: ../src/ario-mpd.c:697
 #, fuzzy
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
@@ -427,7 +486,7 @@ msgstr "Insticksmodul"
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:190
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:198
 msgid "_About"
 msgstr "_Om"
 
@@ -450,6 +509,16 @@ msgstr "A_vaktivera alla"
 #: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
 msgstr "Aktiva insticksmoduler"
+
+#: ../src/preferences/ario-browser-preferences.c:48
+msgid "Alphabetically"
+msgstr "Alfabetiskt"
+
+#. SORT_ALPHABETICALLY
+#: ../src/preferences/ario-browser-preferences.c:49
+#, fuzzy
+msgid "By year"
+msgstr "Efter år"
 
 #: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
@@ -496,31 +565,6 @@ msgstr "Du måste välja en server."
 msgid "New Profile"
 msgstr "Ny profil"
 
-#: ../src/preferences/ario-interface-preferences.c:66
-msgid "Play/Pause"
-msgstr "Spela/Paus"
-
-#. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:252
-msgid "Play next song"
-msgstr "Spela nästa låt"
-
-#. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:68
-msgid "Do nothing"
-msgstr "Gör ingenting"
-
-#: ../src/preferences/ario-interface-preferences.c:73
-msgid "Alphabetically"
-msgstr "Alfabetiskt"
-
-#. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-interface-preferences.c:74
-#, fuzzy
-msgid "By year"
-msgstr "Efter år"
-
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
 #: ../src/preferences/ario-stats-preferences.c:268
@@ -537,8 +581,22 @@ msgstr "Ej ansluten"
 msgid "Updating..."
 msgstr "Uppdaterar..."
 
-#: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:149
-#: ../src/sources/ario-browser.c:152 ../src/sources/ario-search.c:100
+#: ../src/preferences/ario-trayicon-preferences.c:48
+msgid "Play/Pause"
+msgstr "Spela/Paus"
+
+#. TRAY_ICON_PLAY_PAUSE
+#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/widgets/ario-header.c:296
+msgid "Play next song"
+msgstr "Spela nästa låt"
+
+#. TRAY_ICON_NEXT_SONG
+#: ../src/preferences/ario-trayicon-preferences.c:50
+msgid "Do nothing"
+msgstr "Gör ingenting"
+
+#: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:83
 #: ../src/sources/ario-storedplaylists.c:103
 #: ../src/sources/ario-storedplaylists.c:117
 #: ../plugins/filesystem/ario-filesystem.c:106
@@ -548,8 +606,7 @@ msgstr "Uppdaterar..."
 msgid "_Add to playlist"
 msgstr "_Lägg till spellista"
 
-#: ../src/sources/ario-browser.c:156 ../src/sources/ario-browser.c:159
-#: ../src/sources/ario-browser.c:162 ../src/sources/ario-search.c:103
+#: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:86
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../src/sources/ario-storedplaylists.c:120
 #: ../plugins/filesystem/ario-filesystem.c:109
@@ -559,74 +616,38 @@ msgstr "_Lägg till spellista"
 msgid "Add and _play"
 msgstr "Lägg till och _spela upp"
 
-#: ../src/sources/ario-browser.c:166 ../src/sources/ario-browser.c:169
-#: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
-#: ../src/widgets/ario-playlist.c:125
+#: ../src/sources/ario-browser.c:89
+#, fuzzy
+msgid "Get the covers"
+msgstr "Hämta albumgrafiken"
+
+#: ../src/sources/ario-browser.c:92
+#, fuzzy
+msgid "_Delete the covers"
+msgstr "_Ta bort albumgrafiken"
+
+#: ../src/sources/ario-browser.c:95 ../src/sources/ario-browser.c:98
+#: ../src/sources/ario-search.c:89 ../src/sources/ario-storedplaylists.c:123
+#: ../src/widgets/ario-playlist.c:133
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:173 ../src/sources/ario-browser.c:180
-#, fuzzy
-msgid "Get the covers"
-msgstr "Hämta albumgrafiken"
-
-#: ../src/sources/ario-browser.c:176 ../src/sources/ario-browser.c:183
-#, fuzzy
-msgid "_Delete the covers"
-msgstr "_Ta bort albumgrafiken"
-
-#: ../src/sources/ario-browser.c:263
+#: ../src/sources/ario-browser.c:151 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
 msgstr "Bibliotek"
 
-#. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:451
-msgid "Cover"
-msgstr "Omslag"
-
-#: ../src/sources/ario-browser.c:1545
-#, fuzzy
-msgid ""
-"Are you sure that you want to remove all the covers of the selected artists?"
-msgstr ""
-"Är du säker på att du vill ta bort all albumgrafik till de valda artisterna?"
-
-#: ../src/sources/ario-browser.c:1596
-#, fuzzy
-msgid ""
-"Are you sure that you want to remove all the covers of the selected albums?"
-msgstr ""
-"Är du säker på att du vill ta bort all albumgrafik till de valda albumen?"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#. MPD_TAG_ITEM_GENRE
-#. MPD_TAG_ITEM_DATE
-#. MPD_TAG_ITEM_COMPOSER
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/sources/ario-search.c:54
-msgid "Filename"
-msgstr "Filnamn"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/sources/ario-search.c:55
-msgid "Any"
-msgstr "Valfri"
-
-#: ../src/sources/ario-search.c:250
+#: ../src/sources/ario-search.c:233
 #, fuzzy
 msgid "Add a search criteria"
 msgstr "Lägg till sökkriterium"
 
-#: ../src/sources/ario-search.c:257
+#: ../src/sources/ario-search.c:240
 msgid "Search songs in the library"
 msgstr "Sök låtar i biblioteket"
 
-#: ../src/sources/ario-search.c:460
+#: ../src/sources/ario-search.c:443
 #, fuzzy
 msgid "Remove a search criteria"
 msgstr "Ta bort sökkriterium"
@@ -643,88 +664,99 @@ msgstr "Spellistor"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Är du säker på att du vill ta bort de valda spellistorna?"
 
-#: ../src/shell/ario-shell.c:151
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-tree.c:438
+msgid "Cover"
+msgstr "Omslag"
+
+#: ../src/sources/ario-tree.c:1245
+#, fuzzy
+msgid "Are you sure that you want to remove all the selected covers?"
+msgstr ""
+"Är du säker på att du vill ta bort all albumgrafik till de valda artisterna?"
+
+#: ../src/shell/ario-shell.c:159
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:160
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:161
 msgid "_View"
 msgstr "_Visa"
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:162
 msgid "_Tool"
 msgstr "V_erktyg"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:163
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:165
 msgid "_Save Playlist"
 msgstr "_Spara spellista"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:174
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:177
 #, fuzzy
 msgid "Plu_gins"
 msgstr "Insticks_moduler"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:180
 msgid "Prefere_nces"
 msgstr "Inställ_ningar"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:183
 msgid "_Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:186
 #, fuzzy
 msgid "Download album _covers"
 msgstr "Ladda ner album_grafik"
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:189
 msgid "Find similar artists"
 msgstr "Hitta liknande artister"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:192
 msgid "Add similar songs to playlist"
 msgstr "Lägg till liknande låtar till spellista"
 
-#: ../src/shell/ario-shell.c:187
+#: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
 msgstr "Visa _låttext"
 
-#: ../src/shell/ario-shell.c:193
+#: ../src/shell/ario-shell.c:201
 #, fuzzy
 msgid "_Translate this application..."
 msgstr "_Översätt detta program..."
 
-#: ../src/shell/ario-shell.c:201
+#: ../src/shell/ario-shell.c:209
 msgid "S_tatusbar"
 msgstr "S_tatusrad"
 
-#: ../src/shell/ario-shell.c:204
+#: ../src/shell/ario-shell.c:212
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:672
+#: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
 msgstr "GTK-klient för MPD"
 
-#: ../src/shell/ario-shell.c:673
+#: ../src/shell/ario-shell.c:763
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Per Söderkvist https://launchpad.net/~sodper"
 
-#: ../src/shell/ario-shell.c:1009
+#: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
 msgstr "Konfigurera insticksmoduler"
 
@@ -746,20 +778,20 @@ msgid ""
 "%i covers already exist"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:235
+#: ../src/shell/ario-shell-coverselect.c:279
 msgid "Cover Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:531
+#: ../src/shell/ario-shell-coverselect.c:591
 msgid "Error reading file"
 msgstr "Fel vid inläsning av fil"
 
-#: ../src/shell/ario-shell-coverselect.c:554
+#: ../src/shell/ario-shell-coverselect.c:614
 msgid "Error saving file"
 msgstr "Fel vid skrivning till fil"
 
 #: ../src/shell/ario-shell-lyrics.c:53
-#: ../src/shell/ario-shell-preferences.c:185
+#: ../src/shell/ario-shell-preferences.c:192
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
 msgstr "Låttext"
@@ -772,25 +804,25 @@ msgstr ""
 msgid "Source"
 msgstr "Källa"
 
-#: ../src/shell/ario-shell-preferences.c:140
+#: ../src/shell/ario-shell-preferences.c:142
 #, fuzzy
 msgid "Ario Preferences"
 msgstr "Inställningar för Ario"
 
-#: ../src/shell/ario-shell-preferences.c:175
+#: ../src/shell/ario-shell-preferences.c:177
 msgid "Server"
 msgstr "Server"
 
-#: ../src/shell/ario-shell-similarartists.c:344
+#: ../src/shell/ario-shell-similarartists.c:350
 #, c-format
 msgid "%d songs"
 msgstr "%d låtar"
 
-#: ../src/shell/ario-shell-similarartists.c:405
+#: ../src/shell/ario-shell-similarartists.c:412
 msgid "Image"
 msgstr "Bild"
 
-#: ../src/shell/ario-shell-similarartists.c:423
+#: ../src/shell/ario-shell-similarartists.c:430
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Låtar"
@@ -827,40 +859,40 @@ msgstr "Inställningar"
 msgid "Confirmation"
 msgstr "Bekräftelse"
 
-#: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:39
-#: ../src/widgets/ario-status-icon.c:33
+#: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.c:40
+#: ../src/widgets/ario-status-icon.c:34
 #, fuzzy, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>från</i> %s <i>av</i> %s"
 
-#: ../src/widgets/ario-header.c:211
+#: ../src/widgets/ario-header.c:255
 msgid "Play previous song"
 msgstr "Spela föregående låt"
 
-#: ../src/widgets/ario-header.c:230
+#: ../src/widgets/ario-header.c:274
 msgid "Play/Pause the music"
 msgstr "Spela upp/Gör paus i musiken"
 
-#: ../src/widgets/ario-header.c:241
+#: ../src/widgets/ario-header.c:285
 #, fuzzy
 msgid "Stop the music"
 msgstr "Stoppa musiken"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
 msgid " of "
 msgstr " av "
 
-#: ../src/widgets/ario-header.c:341
+#: ../src/widgets/ario-header.c:400
 msgid "Toggle random on/off"
 msgstr "Växla blandning av/på"
 
-#: ../src/widgets/ario-header.c:352
+#: ../src/widgets/ario-header.c:411
 msgid "Toggle repeat on/off"
 msgstr "Växla repetering av/på"
 
-#: ../src/widgets/ario-header.c:462
+#: ../src/widgets/ario-header.c:521
 msgid "Change the music volume"
 msgstr "Ändra ljudvolym"
 
@@ -872,58 +904,58 @@ msgstr "Laddar ner låttexter..."
 msgid "Lyrics not found"
 msgstr "Låttexter ej funna"
 
-#: ../src/widgets/ario-playlist.c:116
+#: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
 msgstr "_Töm"
 
-#: ../src/widgets/ario-playlist.c:119
+#: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
 msgstr "Ta _bort"
 
-#: ../src/widgets/ario-playlist.c:122
+#: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
 msgstr "_Spara"
 
-#: ../src/widgets/ario-playlist.c:128
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1279
+#: ../src/widgets/ario-playlist.c:1362
 msgid "Save playlist"
 msgstr "Spara spellista"
 
-#: ../src/widgets/ario-playlist.c:1289
+#: ../src/widgets/ario-playlist.c:1372
 #, fuzzy
 msgid "Playlist name :"
 msgstr "Spellistans namn:"
 
-#: ../src/widgets/ario-playlist.c:1314
+#: ../src/widgets/ario-playlist.c:1397
 #, fuzzy
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Spellistan finns redan. Vill du ersätta den?"
 
-#: ../src/widgets/ario-tray-icon.c:38 ../src/widgets/ario-status-icon.c:32
+#: ../src/widgets/ario-tray-icon.c:39 ../src/widgets/ario-status-icon.c:33
 msgid "Not playing"
 msgstr "Spelar inte"
 
-#: ../src/widgets/ario-tray-icon.c:128 ../src/widgets/ario-status-icon.c:93
+#: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:87
 msgid "_Play"
 msgstr "_Spela"
 
-#: ../src/widgets/ario-tray-icon.c:131 ../src/widgets/ario-status-icon.c:96
+#: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:90
 msgid "_Pause"
 msgstr "_Paus"
 
-#: ../src/widgets/ario-tray-icon.c:134 ../src/widgets/ario-status-icon.c:99
+#: ../src/widgets/ario-tray-icon.c:139 ../src/widgets/ario-status-icon.c:93
 msgid "_Stop"
 msgstr "_Stopp"
 
-#: ../src/widgets/ario-tray-icon.c:137 ../src/widgets/ario-status-icon.c:102
+#: ../src/widgets/ario-tray-icon.c:142 ../src/widgets/ario-status-icon.c:96
 msgid "_Next"
 msgstr "_Nästa"
 
-#: ../src/widgets/ario-tray-icon.c:140 ../src/widgets/ario-status-icon.c:105
+#: ../src/widgets/ario-tray-icon.c:145 ../src/widgets/ario-status-icon.c:99
 msgid "P_revious"
 msgstr "_Föregående"
 
@@ -1141,3 +1173,14 @@ msgstr ""
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Orientation"
+#~ msgstr "Längd"
+
+#, fuzzy
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr ""
+#~ "Är du säker på att du vill ta bort all albumgrafik till de valda albumen?"

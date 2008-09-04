@@ -145,6 +145,23 @@ enum
 
 static GObjectClass *parent_class = NULL;
 
+char * ArioMpdItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
+{
+        N_("Artist"),    // MPD_TAG_ITEM_ARTIST
+        N_("Album"),     // MPD_TAG_ITEM_ALBUM
+        N_("Title"),     // MPD_TAG_ITEM_TITLE
+        N_("Track"),     // MPD_TAG_ITEM_TRACK
+        NULL,            // MPD_TAG_ITEM_NAME
+        N_("Genre"),     // MPD_TAG_ITEM_GENRE
+        N_("Date"),      // MPD_TAG_ITEM_DATE
+        N_("Composer"),  // MPD_TAG_ITEM_COMPOSER
+        N_("Performer"), // MPD_TAG_ITEM_PERFORMER
+        NULL,            // MPD_TAG_ITEM_COMMENT
+        NULL,            // MPD_TAG_ITEM_DISC
+        N_("Filename"),  // MPD_TAG_ITEM_FILENAME
+        N_("Any")        // MPD_TAG_ITEM_ANY
+};
+
 GType
 ario_mpd_get_type (void)
 {
@@ -739,6 +756,31 @@ ario_mpd_is_connected (ArioMpd *mpd)
 }
 
 GSList *
+ario_mpd_list_tags (ArioMpd *mpd,
+                    const ArioMpdTag tag,
+                    const ArioMpdCriteria *criteria)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *value;
+        const GSList *tmp;
+        GSList *values = NULL;
+        ArioMpdAtomicCriteria *atomic_criteria;
+
+        mpd_startFieldSearch (mpd->priv->connection, tag);
+        for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
+                atomic_criteria = tmp->data;
+                mpd_addConstraintSearch (mpd->priv->connection, atomic_criteria->tag, atomic_criteria->value);
+        }
+        mpd_commitSearch (mpd->priv->connection);
+
+        while ((value = mpd_getNextTag (mpd->priv->connection, tag))) {
+                values = g_slist_append (values, value);
+        }
+
+        return values;
+}
+
+GSList *
 ario_mpd_get_artists (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
@@ -777,19 +819,38 @@ ario_mpd_album_is_present (const GSList *albums,
                      
 GSList *
 ario_mpd_get_albums (ArioMpd *mpd,
-                     const char *artist)
+                     const ArioMpdCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL;
+        const GSList *tmp;
         mpd_InfoEntity *entity = NULL;
-        ArioMpdAlbum *ario_mpd_album;
+        ArioMpdAlbum *mpd_album;
+        ArioMpdAtomicCriteria *atomic_criteria;
 
         /* check if there is a connection */
         if (!mpd->priv->connection)
                 return NULL;
 
-        mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ARTIST, artist);
+        if (!criteria) {
+                mpd_sendListallInfoCommand(mpd->priv->connection, "/");
+        } else {
+                mpd_startSearch (mpd->priv->connection, TRUE);
+                for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
+                        atomic_criteria = tmp->data;
+                        mpd_addConstraintSearch (mpd->priv->connection,
+                                                 atomic_criteria->tag,
+                                                 atomic_criteria->value);
+                }
+                mpd_commitSearch (mpd->priv->connection);
+        }
+
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
+                if (entity->type != MPD_INFO_ENTITY_TYPE_SONG) {
+                        mpd_freeInfoEntity (entity);
+                        continue;
+                }
+
                 if (!entity->info.song->album) {
                         if (ario_mpd_album_is_present (albums, ARIO_MPD_UNKNOWN)) {
                                 mpd_freeInfoEntity (entity);
@@ -802,35 +863,35 @@ ario_mpd_get_albums (ArioMpd *mpd,
                         }
                 }
 
-                ario_mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
+                mpd_album = (ArioMpdAlbum *) g_malloc (sizeof (ArioMpdAlbum));
                 if (entity->info.song->album) {
-                        ario_mpd_album->album = entity->info.song->album;
+                        mpd_album->album = entity->info.song->album;
                         entity->info.song->album = NULL;
                 } else {
-                        ario_mpd_album->album = g_strdup (ARIO_MPD_UNKNOWN);
+                        mpd_album->album = g_strdup (ARIO_MPD_UNKNOWN);
                 }
 
                 if (entity->info.song->artist) {
-                        ario_mpd_album->artist = entity->info.song->artist;
+                        mpd_album->artist = entity->info.song->artist;
                         entity->info.song->artist = NULL;
                 } else {
-                        ario_mpd_album->artist = g_strdup (ARIO_MPD_UNKNOWN);
+                        mpd_album->artist = g_strdup (ARIO_MPD_UNKNOWN);
                 }
 
                 if (entity->info.song->file) {
-                        ario_mpd_album->path = g_path_get_dirname (entity->info.song->file);
+                        mpd_album->path = g_path_get_dirname (entity->info.song->file);
                 } else {
-                        ario_mpd_album->path = NULL;
+                        mpd_album->path = NULL;
                 }
 
                 if (entity->info.song->date) {
-                        ario_mpd_album->date = entity->info.song->date;
+                        mpd_album->date = entity->info.song->date;
                         entity->info.song->date = NULL;
                 } else {
-                        ario_mpd_album->date = NULL;
+                        mpd_album->date = NULL;
                 }
 
-                albums = g_slist_append (albums, ario_mpd_album);
+                albums = g_slist_append (albums, mpd_album);
 
                 mpd_freeInfoEntity (entity);
         }
@@ -841,32 +902,44 @@ ario_mpd_get_albums (ArioMpd *mpd,
 
 GSList *
 ario_mpd_get_songs (ArioMpd *mpd,
-                    const char *artist, 
-                    const char *album)
+                    const ArioMpdCriteria *criteria,
+                    const gboolean exact)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
         mpd_InfoEntity *entity = NULL;
-        gboolean is_album_unknown;
+        const GSList *tmp;
+        gboolean is_album_unknown = FALSE;
+        ArioMpdAtomicCriteria *atomic_criteria;
 
         /* check if there is a connection */
         if (!mpd->priv->connection)
                 return NULL;
 
-        is_album_unknown = album && !g_utf8_collate (album, ARIO_MPD_UNKNOWN);
+        for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
+                atomic_criteria = tmp->data;
+                if (atomic_criteria->tag == MPD_TAG_ITEM_ALBUM
+                    && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
+                        is_album_unknown = TRUE;
+        }
 
-        if (!album || is_album_unknown)
-                mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ARTIST, artist);
-        else
-                mpd_sendFindCommand (mpd->priv->connection, MPD_TABLE_ALBUM, album);
+        mpd_startSearch (mpd->priv->connection, exact);
+        for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
+                atomic_criteria = tmp->data;
+                if (atomic_criteria->tag != MPD_TAG_ITEM_ALBUM
+                    || g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
+                        mpd_addConstraintSearch (mpd->priv->connection,
+                                                 atomic_criteria->tag,
+                                                 atomic_criteria->value);
+        }
+        mpd_commitSearch (mpd->priv->connection);
 
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
-                if (!g_utf8_collate (entity->info.song->artist, artist)) {
-                        if (entity->info.song)
-                                if (!is_album_unknown || !entity->info.song->album || !album) {
-                                        songs = g_slist_append (songs, entity->info.song);
-                                        entity->info.song = NULL;
-                                }
+                if (entity->type == MPD_INFO_ENTITY_TYPE_SONG && entity->info.song) {
+                        if (!is_album_unknown || !entity->info.song->album) {
+                                songs = g_slist_append (songs, entity->info.song);
+                                entity->info.song = NULL;
+                        }
                 }
                 mpd_freeInfoEntity (entity);
         }
@@ -1523,40 +1596,6 @@ ario_mpd_queue_commit (ArioMpd *mpd)
         mpd->priv->queue = NULL;
 }
 
-
-GSList*
-ario_mpd_search (ArioMpd *mpd,
-                 GSList *search_criterias)
-{
-        ARIO_LOG_FUNCTION_START
-        mpd_InfoEntity *ent = NULL;
-        GSList *tmp;
-        ArioMpdSearchCriteria *search_criteria;
-        GSList *songs = NULL;
-
-        if (!mpd->priv->connection)
-                return NULL;
-
-        mpd_startSearch(mpd->priv->connection, FALSE);
-
-        for (tmp = search_criterias; tmp; tmp = g_slist_next (tmp)) {
-                search_criteria = tmp->data;
-                mpd_addConstraintSearch(mpd->priv->connection,
-                                        search_criteria->type,
-                                        search_criteria->value);
-        }
-        mpd_commitSearch(mpd->priv->connection);
-
-        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
-                songs = g_slist_append (songs, ent->info.song);
-                ent->info.song = NULL;
-                mpd_freeInfoEntity(ent);
-        }
-        mpd_finishCommand (mpd->priv->connection);
-
-        return songs;
-}
-
 int
 ario_mpd_save_playlist (ArioMpd *mpd,
                         const char *name)
@@ -1753,5 +1792,47 @@ ario_mpd_free_file_list (ArioMpdFileList *files)
                 g_slist_free (files->songs);
                 g_free (files);
         }
+}
+
+void
+ario_mpd_criteria_free (ArioMpdCriteria *criteria)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *tmp;
+        ArioMpdAtomicCriteria *atomic_criteria;
+
+        for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
+                atomic_criteria = tmp->data;
+                g_free (atomic_criteria->value);
+                g_free (atomic_criteria);
+        }
+        g_slist_free (criteria);
+}
+
+ArioMpdCriteria *
+ario_mpd_criteria_copy (ArioMpdCriteria *criteria)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioMpdCriteria *ret = NULL;
+        GSList *tmp;
+        ArioMpdAtomicCriteria *atomic_criteria;
+        ArioMpdAtomicCriteria *new_atomic_criteria;
+
+        for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
+                atomic_criteria = tmp->data;
+                if (criteria) {
+                        new_atomic_criteria = (ArioMpdAtomicCriteria *) g_malloc0 (sizeof (ArioMpdAtomicCriteria));
+                        new_atomic_criteria->tag = atomic_criteria->tag;
+                        new_atomic_criteria->value = g_strdup (atomic_criteria->value);
+                        ret = g_slist_append (ret, new_atomic_criteria);
+                }
+        }
+        return ret;
+}
+
+gchar **
+ario_mpd_get_items_names (void)
+{
+        return ArioMpdItemNames;
 }
 

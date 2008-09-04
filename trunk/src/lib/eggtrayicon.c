@@ -141,8 +141,8 @@ egg_tray_icon_class_init (EggTrayIconClass *klass)
         g_object_class_install_property (gobject_class,
                                          PROP_ORIENTATION,
                                          g_param_spec_enum ("orientation",
-                                                            _("Orientation"),
-                                                            _("The orientation of the tray."),
+                                                            "Orientation",
+                                                            "The orientation of the tray.",
                                                             GTK_TYPE_ORIENTATION,
                                                             GTK_ORIENTATION_HORIZONTAL,
                                                             G_PARAM_READABLE));
@@ -515,7 +515,7 @@ egg_tray_icon_send_message (EggTrayIcon *icon,
         g_return_val_if_fail (message_markup != NULL, 0);
 
 #ifdef HAVE_NOTIFY
-        egg_tray_icon_notify (icon, timeout, _("Notification"), NULL, message_markup);
+        egg_tray_icon_notify (icon, timeout, "Notification", NULL, message_markup);
 #endif
 
         return 1;

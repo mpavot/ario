@@ -2,6 +2,7 @@
 
 # Source files
 data/ario.desktop.in.in
+data/glade/browser-prefs.glade
 data/glade/cover-prefs.glade
 data/glade/connection-prefs.glade
 data/glade/connection-assistant.glade
@@ -16,6 +17,7 @@ data/glade/server-prefs.glade
 data/glade/similar-artists.glade
 data/glade/stats-prefs.glade
 data/glade/song-infos.glade
+data/glade/trayicon-prefs.glade
 src/ario-avahi.c
 src/ario-avahi.h
 src/ario-debug.h
@@ -69,6 +71,7 @@ src/plugins/ario-plugin-manager.c
 src/plugins/ario-plugin-manager.h
 src/plugins/ario-plugins-engine.c
 src/plugins/ario-plugins-engine.h
+src/preferences/ario-browser-preferences.c
 src/preferences/ario-connection-preferences.c
 src/preferences/ario-connection-preferences.h
 src/preferences/ario-cover-preferences.c
@@ -83,6 +86,7 @@ src/preferences/ario-server-preferences.c
 src/preferences/ario-server-preferences.h
 src/preferences/ario-stats-preferences.c
 src/preferences/ario-stats-preferences.h
+src/preferences/ario-trayicon-preferences.c
 src/preferences/ario-preferences.h
 src/sources/ario-browser.c
 src/sources/ario-browser.h
@@ -92,6 +96,7 @@ src/sources/ario-source.c
 src/sources/ario-source.h
 src/sources/ario-storedplaylists.c
 src/sources/ario-storedplaylists.h
+src/sources/ario-tree.c
 src/shell/ario-shell.c
 src/shell/ario-shell.h
 src/shell/ario-shell-coverdownloader.c

@@ -25,6 +25,8 @@
 #include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
+#define MAX_TREE_NB 5
+
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_BROWSER         (ario_browser_get_type ())

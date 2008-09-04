@@ -21,6 +21,8 @@
 #include "glib/gslist.h"
 #include "gdk/gdkpixbuf.h"
 
+#define MAX_COVERS_IN_DRAG 3
+
 struct curl_slist;
 
 char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
@@ -67,6 +69,9 @@ char *                  ario_util_format_keyword             (const char *keywor
 
 gchar *                 ario_util_md5                        (const char *string) G_GNUC_MALLOC;
 
-GdkPixbuf *             ario_util_get_dnd_pixbuf             (GSList *albums) G_GNUC_MALLOC;
+GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albums) G_GNUC_MALLOC;
+
+GdkPixbuf *             ario_util_get_dnd_pixbuf             (ArioMpd *mpd,
+                                                              const GSList *criterias) G_GNUC_MALLOC;
 
 gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;

@@ -20,7 +20,7 @@
 #ifndef __ARIO_PLAYLIST_H
 #define __ARIO_PLAYLIST_H
 
-#include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtk.h>
 #include "ario-mpd.h"
 
 G_BEGIN_DECLS
@@ -54,13 +54,13 @@ GtkWidget *     ario_playlist_new               (GtkUIManager *mgr,
 
 void            ario_playlist_append_artists    (ArioPlaylist *playlist, GSList *artists, gboolean play);
 
-void            ario_playlist_append_albums     (ArioPlaylist *playlist, GSList *albums, gboolean play);
-
 void            ario_playlist_append_songs      (ArioPlaylist *playlist, GSList *songs, gboolean play);
 
 void            ario_playlist_append_mpd_songs  (ArioPlaylist *playlist, GSList *songs, gboolean play);
 
 void            ario_playlist_append_dir        (ArioPlaylist *playlist, gchar *dir, gboolean play);
+
+void            ario_playlist_append_criterias  (ArioPlaylist *playlist, GSList *criterias, gboolean play);
 
 void            ario_playlist_cmd_save          (GtkAction *action,
                                                  ArioPlaylist *playlist);

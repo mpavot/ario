@@ -35,8 +35,6 @@ static void ario_interface_preferences_class_init (ArioInterfacePreferencesClass
 static void ario_interface_preferences_init (ArioInterfacePreferences *interface_preferences);
 static void ario_interface_preferences_finalize (GObject *object);
 static void ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_preferences);
-G_MODULE_EXPORT void ario_interface_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
-                                                                 ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                                                            ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
@@ -62,18 +60,11 @@ G_MODULE_EXPORT void ario_interface_preferences_date_toogled_cb (GtkCheckButton 
 G_MODULE_EXPORT void ario_interface_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
                                                                        ArioInterfacePreferences *interface_preferences);
 
-static const char *sort_behavior[] = {
-        N_("Alphabetically"),   // SORT_ALPHABETICALLY
-        N_("By year"),          // SORT_YEAR
-        NULL
-};
-
 struct ArioInterfacePreferencesPrivate
 {
         GtkWidget *showtabs_check;
         GtkWidget *hideonclose_check;
         GtkWidget *oneinstance_check;
-        GtkWidget *sort_combobox;
 
         GtkWidget *track_checkbutton;
         GtkWidget *title_checkbutton;
@@ -141,10 +132,6 @@ ario_interface_preferences_new (void)
         ARIO_LOG_FUNCTION_START
         ArioInterfacePreferences *interface_preferences;
         GladeXML *xml;
-        GtkListStore *list_store;
-        GtkCellRenderer *renderer;
-        GtkTreeIter iter;
-        int i;
 
         interface_preferences = g_object_new (TYPE_ARIO_INTERFACE_PREFERENCES, NULL);
 
@@ -160,8 +147,6 @@ ario_interface_preferences_new (void)
                 glade_xml_get_widget (xml, "hideonclose_checkbutton");
         interface_preferences->priv->oneinstance_check =
                 glade_xml_get_widget (xml, "instance_checkbutton");
-        interface_preferences->priv->sort_combobox = 
-                glade_xml_get_widget (xml, "sort_combobox");
         interface_preferences->priv->track_checkbutton = 
                 glade_xml_get_widget (xml, "track_checkbutton");
         interface_preferences->priv->title_checkbutton = 
@@ -183,24 +168,6 @@ ario_interface_preferences_new (void)
 
         rb_glade_boldify_label (xml, "interface_label");
         rb_glade_boldify_label (xml, "playlist_label");
-
-        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
-        for (i = 0; i < SORT_N_BEHAVIOR; ++i) {
-                gtk_list_store_append (list_store, &iter);
-                gtk_list_store_set (list_store, &iter,
-                                    0, gettext (sort_behavior[i]),
-                                    1, i,
-                                    -1);
-        }
-        gtk_combo_box_set_model (GTK_COMBO_BOX (interface_preferences->priv->sort_combobox),
-                                 GTK_TREE_MODEL (list_store));
-        g_object_unref (list_store);
-
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (interface_preferences->priv->sort_combobox));
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (interface_preferences->priv->sort_combobox), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (interface_preferences->priv->sort_combobox), renderer,
-                                        "text", 0, NULL);
 
         ario_interface_preferences_sync_interface (interface_preferences);
 
@@ -243,9 +210,6 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->oneinstance_check),
                                       ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT));
 
-        gtk_combo_box_set_active (GTK_COMBO_BOX (interface_preferences->priv->sort_combobox),
-                                  ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT));
-
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->track_checkbutton),
                                       ario_conf_get_boolean (PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT));
 
@@ -272,19 +236,6 @@ ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_p
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (interface_preferences->priv->autoscroll_checkbutton),
                                       ario_conf_get_boolean (PREF_PLAYLIST_AUTOSCROLL, PREF_PLAYLIST_AUTOSCROLL_DEFAULT));
-}
-
-void
-ario_interface_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
-                                            ArioInterfacePreferences *interface_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        int i;
-
-        i = gtk_combo_box_get_active (GTK_COMBO_BOX (interface_preferences->priv->sort_combobox));
-
-        ario_conf_set_integer (PREF_ALBUM_SORT, 
-                               i);
 }
 
 void
