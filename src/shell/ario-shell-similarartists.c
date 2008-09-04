@@ -331,15 +331,21 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         int i = 0;
         gchar *songs_txt;
         GSList *songs = NULL;
+        ArioMpdAtomicCriteria atomic_criteria;
+        ArioMpdCriteria *criteria = NULL;
 
         similar_artists = ario_shell_similarartists_get_similar_artists (shell_similarartists->priv->artist);
+
+        atomic_criteria.tag = MPD_TAG_ITEM_ARTIST;
+        criteria = g_slist_append (criteria, &atomic_criteria);
 
         for (tmp = similar_artists; tmp; tmp = g_slist_next (tmp)) {
                 if (++i > MAX_ARTISTS || shell_similarartists->priv->closed)
                         break;
                 similar_artist = tmp->data;
+                atomic_criteria.value = (gchar *) similar_artist->name;
 
-                songs = ario_mpd_get_songs (mpd, (gchar *) similar_artist->name, NULL);
+                songs = ario_mpd_get_songs (mpd, criteria, TRUE);
                 if (songs)
                         songs_txt = g_strdup_printf (_("%d songs"), g_slist_length (songs));
                 else
@@ -364,6 +370,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                                                                shell_similarartists,
                                                                TRUE,
                                                                NULL);
+        g_slist_free (criteria);
 }
 
 GtkWidget *
@@ -498,7 +505,7 @@ ario_shell_similarartists_close_cb (GtkButton *button,
 
 void
 ario_shell_similarartists_lastfm_cb (GtkButton *button,
-                            ArioShellSimilarartists *shell_similarartists)
+                                     ArioShellSimilarartists *shell_similarartists)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeModel *treemodel;

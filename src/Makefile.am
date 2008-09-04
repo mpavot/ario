@@ -64,6 +64,8 @@ ario_SOURCES = \
 	plugins/ario-plugin-manager.h\
 	plugins/ario-plugins-engine.c\
 	plugins/ario-plugins-engine.h\
+	preferences/ario-browser-preferences.c\
+	preferences/ario-browser-preferences.h\
 	preferences/ario-connection-preferences.c\
 	preferences/ario-connection-preferences.h\
 	preferences/ario-cover-preferences.c\
@@ -83,6 +85,8 @@ ario_SOURCES = \
 	preferences/ario-preferences.h\
 	sources/ario-browser.c\
 	sources/ario-browser.h\
+	sources/ario-tree.c\
+	sources/ario-tree.h\
 	sources/ario-search.c\
 	sources/ario-search.h\
 	sources/ario-source.c\

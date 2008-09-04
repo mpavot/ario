@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-14 11:10+0200\n"
+"POT-Creation-Date: 2008-09-04 20:00+0200\n"
 "PO-Revision-Date: 2008-05-18 21:38+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -25,14 +25,28 @@ msgstr "Seinnteoir ceoil Ario"
 msgid "Client application to mpd"
 msgstr "Feidhmoideas cliaint do mpd"
 
+#: ../data/glade/browser-prefs.glade.h:1
+#, fuzzy
+msgid "Library Options"
+msgstr "Leabharlann"
+
+#: ../data/glade/browser-prefs.glade.h:2
+msgid "Library Organisation"
+msgstr ""
+
+#: ../data/glade/browser-prefs.glade.h:3
+#, fuzzy
+msgid "Sort albums: "
+msgstr "Treo: "
+
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
 msgstr ""
 "Íosluchtaigh go huathoibríoch clúdach an albaim den t-amhrán atá ag seinm"
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:247
-#: ../src/shell/ario-shell-preferences.c:180
+#: ../src/shell/ario-shell-coverselect.c:291
+#: ../src/shell/ario-shell-preferences.c:187
 msgid "Covers"
 msgstr "Clúdaithe"
 
@@ -53,7 +67,7 @@ msgid "Auto detect"
 msgstr "Uathaimsigh"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:170
+#: ../src/shell/ario-shell-preferences.c:172
 msgid "Connection"
 msgstr "Nasc"
 
@@ -92,11 +106,11 @@ msgstr "Port:"
 msgid "_Autoconnect on startup"
 msgstr "_Uathnasc ag tosú"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:160
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:168
 msgid "_Connect"
 msgstr "_Nasc"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:163
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:171
 msgid "_Disconnect"
 msgstr "_Dínasc"
 
@@ -137,63 +151,68 @@ msgstr "Ag íosluchtú an clúdach"
 msgid "Local search"
 msgstr "Cuardach loganta"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:163
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:146
 msgid "Search"
 msgstr "Cuardach"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:334
-#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
+#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:151
+#: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:367
+#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:383
 msgid "Album"
 msgstr "Albam"
 
-#: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
-#: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:416
-#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:271
-#: ../src/widgets/ario-status-icon.c:395
+#: ../data/glade/interface-prefs.glade.h:2
+msgid "Allow only one instance of Ario"
+msgstr ""
+
+#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:150
+#: ../src/shell/ario-shell-lyricsselect.c:208
+#: ../src/shell/ario-shell-similarartists.c:423
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
+#: ../src/widgets/ario-status-icon.c:381
 msgid "Artist"
 msgstr "Ealaíontóir"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:334
+#. MPD_TAG_ITEM_GENRE
+#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
+#: ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "Date"
 msgstr "Dáta:"
 
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:367
 msgid "Duration"
 msgstr "Aga"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "File"
 msgstr "_Comhad"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:334
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
+#: ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "Genre"
 msgstr "Aicme :"
 
-#: ../data/glade/interface-prefs.glade.h:7
+#: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:8
+#: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:9
-#: ../src/shell/ario-shell-preferences.c:190
+#: ../data/glade/interface-prefs.glade.h:10
+#: ../src/shell/ario-shell-preferences.c:197
 msgid "Interface"
 msgstr "Comhéadan"
 
-#: ../data/glade/interface-prefs.glade.h:10
-msgid "On middle button click on tray icon :"
-msgstr "Ar an lár-cnaipe brúigh ar deilbhín an trádaire :"
-
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:207
+#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:215
 msgid "Playlist"
 msgstr "Seinmréim"
 
@@ -206,28 +225,19 @@ msgstr "Teaspáin na _liricí"
 msgid "Show tabs"
 msgstr "Taispeáin cluaisíní"
 
-#: ../data/glade/interface-prefs.glade.h:14
-#, fuzzy
-msgid "Sort albums: "
-msgstr "Treo: "
-
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
-#: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:256
-#: ../src/widgets/ario-status-icon.c:399
+#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:152
+#: ../src/sources/ario-tree.c:497 ../src/shell/ario-shell-lyricsselect.c:221
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-status-icon.c:385
 msgid "Title"
 msgstr "Teideal"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:153
+#: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:367
 msgid "Track"
 msgstr "Rian"
-
-#: ../data/glade/interface-prefs.glade.h:17
-msgid "Tray icon"
-msgstr "Déilbhín an trádaire"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 msgid "Lyrics Sources"
@@ -238,7 +248,7 @@ msgid "Title :"
 msgstr "Teideal :"
 
 #: ../data/glade/proxy-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:195
+#: ../src/shell/ario-shell-preferences.c:207
 msgid "Proxy"
 msgstr "Seachfhreastalaí"
 
@@ -323,7 +333,7 @@ msgid "Play time :"
 msgstr "Am seinnte :"
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:200
+#: ../src/shell/ario-shell-preferences.c:212
 msgid "Statistics"
 msgstr "Staidreamh"
 
@@ -371,11 +381,61 @@ msgstr "Amhrán"
 msgid "Track :"
 msgstr "Rian :"
 
-#: ../src/ario-mpd.c:652
+#: ../data/glade/trayicon-prefs.glade.h:1
+#, fuzzy
+msgid "Notification"
+msgstr "Deimhniúchán"
+
+#: ../data/glade/trayicon-prefs.glade.h:2
+msgid "Notification on song change"
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:3
+msgid "Notification time: "
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:4
+msgid "On middle button click on tray icon :"
+msgstr "Ar an lár-cnaipe brúigh ar deilbhín an trádaire :"
+
+#: ../data/glade/trayicon-prefs.glade.h:5
+#: ../src/shell/ario-shell-preferences.c:202
+msgid "Tray icon"
+msgstr "Déilbhín an trádaire"
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr ""
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/ario-mpd.c:157
+#, fuzzy
+msgid "Composer"
+msgstr "Cumadóir :"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/ario-mpd.c:158
+#, fuzzy
+msgid "Performer"
+msgstr "Taibhseoir :"
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/ario-mpd.c:161
+msgid "Filename"
+msgstr "Ainm comhaid"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/ario-mpd.c:162
+msgid "Any"
+msgstr "Ceann ar bith"
+
+#: ../src/ario-mpd.c:672
 msgid "Connecting to MPD server..."
 msgstr "Ag nasc le freastalaí MPD..."
 
-#: ../src/ario-mpd.c:677
+#: ../src/ario-mpd.c:697
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Níorbh fhéidir nasc le mpd. Dearbhaigh na nasc roghanna."
 
@@ -420,7 +480,7 @@ msgstr "Breiseán"
 msgid "Enabled"
 msgstr "Cumasaithe"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:190
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:198
 msgid "_About"
 msgstr "_Maidir Le"
 
@@ -443,6 +503,15 @@ msgstr "_Díghníomhachtaigh Uile"
 #: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
 msgstr "Breiseáin gníomhacha"
+
+#: ../src/preferences/ario-browser-preferences.c:48
+msgid "Alphabetically"
+msgstr ""
+
+#. SORT_ALPHABETICALLY
+#: ../src/preferences/ario-browser-preferences.c:49
+msgid "By year"
+msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
@@ -488,30 +557,6 @@ msgstr "Caithfear freastalaí a roghnú."
 msgid "New Profile"
 msgstr "Beathaisnéisín Nua"
 
-#: ../src/preferences/ario-interface-preferences.c:66
-msgid "Play/Pause"
-msgstr "Seinn/Sos"
-
-#. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:252
-msgid "Play next song"
-msgstr "Seinn an chéad amhrán eile"
-
-#. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:68
-msgid "Do nothing"
-msgstr "Ná déan faic"
-
-#: ../src/preferences/ario-interface-preferences.c:73
-msgid "Alphabetically"
-msgstr ""
-
-#. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-interface-preferences.c:74
-msgid "By year"
-msgstr ""
-
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
 #: ../src/preferences/ario-stats-preferences.c:268
@@ -528,8 +573,22 @@ msgstr "Gan nasc"
 msgid "Updating..."
 msgstr "Á Nuashonrú..."
 
-#: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:149
-#: ../src/sources/ario-browser.c:152 ../src/sources/ario-search.c:100
+#: ../src/preferences/ario-trayicon-preferences.c:48
+msgid "Play/Pause"
+msgstr "Seinn/Sos"
+
+#. TRAY_ICON_PLAY_PAUSE
+#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/widgets/ario-header.c:296
+msgid "Play next song"
+msgstr "Seinn an chéad amhrán eile"
+
+#. TRAY_ICON_NEXT_SONG
+#: ../src/preferences/ario-trayicon-preferences.c:50
+msgid "Do nothing"
+msgstr "Ná déan faic"
+
+#: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:83
 #: ../src/sources/ario-storedplaylists.c:103
 #: ../src/sources/ario-storedplaylists.c:117
 #: ../plugins/filesystem/ario-filesystem.c:106
@@ -538,8 +597,7 @@ msgstr "Á Nuashonrú..."
 msgid "_Add to playlist"
 msgstr "_Cuir leis an seinmréim"
 
-#: ../src/sources/ario-browser.c:156 ../src/sources/ario-browser.c:159
-#: ../src/sources/ario-browser.c:162 ../src/sources/ario-search.c:103
+#: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:86
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../src/sources/ario-storedplaylists.c:120
 #: ../plugins/filesystem/ario-filesystem.c:109
@@ -549,71 +607,35 @@ msgstr "_Cuir leis an seinmréim"
 msgid "Add and _play"
 msgstr "_Cuir leis an seinmréim"
 
-#: ../src/sources/ario-browser.c:166 ../src/sources/ario-browser.c:169
-#: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
-#: ../src/widgets/ario-playlist.c:125
+#: ../src/sources/ario-browser.c:89
+msgid "Get the covers"
+msgstr "Faigh na clúdaithe"
+
+#: ../src/sources/ario-browser.c:92
+msgid "_Delete the covers"
+msgstr "_Scrios na clúdaithe"
+
+#: ../src/sources/ario-browser.c:95 ../src/sources/ario-browser.c:98
+#: ../src/sources/ario-search.c:89 ../src/sources/ario-storedplaylists.c:123
+#: ../src/widgets/ario-playlist.c:133
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
 msgstr "_Airíonna"
 
-#: ../src/sources/ario-browser.c:173 ../src/sources/ario-browser.c:180
-msgid "Get the covers"
-msgstr "Faigh na clúdaithe"
-
-#: ../src/sources/ario-browser.c:176 ../src/sources/ario-browser.c:183
-msgid "_Delete the covers"
-msgstr "_Scrios na clúdaithe"
-
-#: ../src/sources/ario-browser.c:263
+#: ../src/sources/ario-browser.c:151 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
 msgstr "Leabharlann"
 
-#. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:451
-msgid "Cover"
-msgstr "Clúdach"
-
-#: ../src/sources/ario-browser.c:1545
-msgid ""
-"Are you sure that you want to remove all the covers of the selected artists?"
-msgstr ""
-"An bhfuil tú cinnte go dteastaíonn uait na clúdaithe uile de na "
-"healaíontóirí roghnaithe a bhaint?"
-
-#: ../src/sources/ario-browser.c:1596
-msgid ""
-"Are you sure that you want to remove all the covers of the selected albums?"
-msgstr ""
-"An bhfuil tú cinnte go dteastaíonn uait na clúdaithe uile de na halbaim "
-"roghnaithe a bhaint?"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#. MPD_TAG_ITEM_GENRE
-#. MPD_TAG_ITEM_DATE
-#. MPD_TAG_ITEM_COMPOSER
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/sources/ario-search.c:54
-msgid "Filename"
-msgstr "Ainm comhaid"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/sources/ario-search.c:55
-msgid "Any"
-msgstr "Ceann ar bith"
-
-#: ../src/sources/ario-search.c:250
+#: ../src/sources/ario-search.c:233
 msgid "Add a search criteria"
 msgstr "Cuir slat tomhais cuardaigh leis"
 
-#: ../src/sources/ario-search.c:257
+#: ../src/sources/ario-search.c:240
 msgid "Search songs in the library"
 msgstr "Cuardaigh amhráin sa leabharlann"
 
-#: ../src/sources/ario-search.c:460
+#: ../src/sources/ario-search.c:443
 msgid "Remove a search criteria"
 msgstr "Bain slat tomhais cuardaigh"
 
@@ -631,80 +653,92 @@ msgstr ""
 "An bhfuil tú cinnte go dteastaíonn  uait na seinmréimeanna roghnaithe a "
 "scrios?"
 
-#: ../src/shell/ario-shell.c:151
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-tree.c:438
+msgid "Cover"
+msgstr "Clúdach"
+
+#: ../src/sources/ario-tree.c:1245
+#, fuzzy
+msgid "Are you sure that you want to remove all the selected covers?"
+msgstr ""
+"An bhfuil tú cinnte go dteastaíonn uait na clúdaithe uile de na "
+"healaíontóirí roghnaithe a bhaint?"
+
+#: ../src/shell/ario-shell.c:159
 msgid "_File"
 msgstr "_Comhad"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:160
 msgid "_Edit"
 msgstr "_Eagar"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:161
 msgid "_View"
 msgstr "_Amharc"
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:162
 msgid "_Tool"
 msgstr "_Uirlis"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:163
 msgid "_Help"
 msgstr "_Cabhair"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:165
 msgid "_Save Playlist"
 msgstr "_Cuir an Seinmréim i dTaisce"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:174
 msgid "_Quit"
 msgstr "_Scoir"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:177
 msgid "Plu_gins"
 msgstr "Breis_eáin"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:180
 msgid "Prefere_nces"
 msgstr "Sain_roghanna"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:183
 msgid "_Change current album cover"
 msgstr "_Athraigh an clúdach albaim reatha"
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:186
 msgid "Download album _covers"
 msgstr "Íosluchtaigh _clúdaigh albaim"
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:189
 msgid "Find similar artists"
 msgstr "Aimsigh ealaíontóirí cosúil leo"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:192
 #, fuzzy
 msgid "Add similar songs to playlist"
 msgstr "_Cuir leis an seinmréim"
 
-#: ../src/shell/ario-shell.c:187
+#: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
 msgstr "Teaspáin na _liricí"
 
-#: ../src/shell/ario-shell.c:193
+#: ../src/shell/ario-shell.c:201
 msgid "_Translate this application..."
 msgstr "_Aistrigh an fheidhmoideas seo..."
 
-#: ../src/shell/ario-shell.c:201
+#: ../src/shell/ario-shell.c:209
 msgid "S_tatusbar"
 msgstr "Barra s_tádas"
 
-#: ../src/shell/ario-shell.c:204
+#: ../src/shell/ario-shell.c:212
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:672
+#: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
 msgstr "Cliaint GTK do MPD"
 
-#: ../src/shell/ario-shell.c:673
+#: ../src/shell/ario-shell.c:763
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -715,7 +749,7 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Seanan https://launchpad.net/~seananoc-gmail"
 
-#: ../src/shell/ario-shell.c:1009
+#: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
 msgstr "Cumraigh na mBreiseáin"
 
@@ -739,20 +773,20 @@ msgstr ""
 "%i clúdaithe nár aimsíodh\n"
 "%i clúdaithe atá ann cheana"
 
-#: ../src/shell/ario-shell-coverselect.c:235
+#: ../src/shell/ario-shell-coverselect.c:279
 msgid "Cover Download"
 msgstr "Íosluchtú an Chlúdaigh"
 
-#: ../src/shell/ario-shell-coverselect.c:531
+#: ../src/shell/ario-shell-coverselect.c:591
 msgid "Error reading file"
 msgstr "Tharla bótún ag léamh an comhad"
 
-#: ../src/shell/ario-shell-coverselect.c:554
+#: ../src/shell/ario-shell-coverselect.c:614
 msgid "Error saving file"
 msgstr "Tharla botún ag cuir an comhad i dtaisce"
 
 #: ../src/shell/ario-shell-lyrics.c:53
-#: ../src/shell/ario-shell-preferences.c:185
+#: ../src/shell/ario-shell-preferences.c:192
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
 msgstr "Liricí"
@@ -765,24 +799,24 @@ msgstr "Íosluchtú na Liricí"
 msgid "Source"
 msgstr "Foinse"
 
-#: ../src/shell/ario-shell-preferences.c:140
+#: ../src/shell/ario-shell-preferences.c:142
 msgid "Ario Preferences"
 msgstr "Sainroghanna Ario"
 
-#: ../src/shell/ario-shell-preferences.c:175
+#: ../src/shell/ario-shell-preferences.c:177
 msgid "Server"
 msgstr "Freastalaí"
 
-#: ../src/shell/ario-shell-similarartists.c:344
+#: ../src/shell/ario-shell-similarartists.c:350
 #, c-format
 msgid "%d songs"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:405
+#: ../src/shell/ario-shell-similarartists.c:412
 msgid "Image"
 msgstr "Íomhá"
 
-#: ../src/shell/ario-shell-similarartists.c:423
+#: ../src/shell/ario-shell-similarartists.c:430
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Amhráin"
@@ -817,39 +851,39 @@ msgstr "Cumraíocht"
 msgid "Confirmation"
 msgstr "Deimhniúchán"
 
-#: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:39
-#: ../src/widgets/ario-status-icon.c:33
+#: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.c:40
+#: ../src/widgets/ario-status-icon.c:34
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>ó</i> %s <i>le</i> %s"
 
-#: ../src/widgets/ario-header.c:211
+#: ../src/widgets/ario-header.c:255
 msgid "Play previous song"
 msgstr "Seinn an t-amhrán roimhe"
 
-#: ../src/widgets/ario-header.c:230
+#: ../src/widgets/ario-header.c:274
 msgid "Play/Pause the music"
 msgstr "Seinn/Moilligh an ceol"
 
-#: ../src/widgets/ario-header.c:241
+#: ../src/widgets/ario-header.c:285
 msgid "Stop the music"
 msgstr "Stad an ceol"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
 msgid " of "
 msgstr " de "
 
-#: ../src/widgets/ario-header.c:341
+#: ../src/widgets/ario-header.c:400
 msgid "Toggle random on/off"
 msgstr "Scag ar siúl/as fánach"
 
-#: ../src/widgets/ario-header.c:352
+#: ../src/widgets/ario-header.c:411
 msgid "Toggle repeat on/off"
 msgstr "Scag ar siúl/as athuair"
 
-#: ../src/widgets/ario-header.c:462
+#: ../src/widgets/ario-header.c:521
 msgid "Change the music volume"
 msgstr "Athraigh airde an ceoil"
 
@@ -861,56 +895,56 @@ msgstr "Ag íosluchtú na liricí..."
 msgid "Lyrics not found"
 msgstr "Níor aimsíodh na liricí"
 
-#: ../src/widgets/ario-playlist.c:116
+#: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
 msgstr "_Glan"
 
-#: ../src/widgets/ario-playlist.c:119
+#: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
 msgstr "_Bain"
 
-#: ../src/widgets/ario-playlist.c:122
+#: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
 msgstr "_Cuir i dtaisce"
 
-#: ../src/widgets/ario-playlist.c:128
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
 msgstr "_Téigh chuig an t-amhrán atá ag seinm"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1279
+#: ../src/widgets/ario-playlist.c:1362
 msgid "Save playlist"
 msgstr "Cuir an seinmréim i dtaisce"
 
-#: ../src/widgets/ario-playlist.c:1289
+#: ../src/widgets/ario-playlist.c:1372
 msgid "Playlist name :"
 msgstr "Ainm na seinmréime :"
 
-#: ../src/widgets/ario-playlist.c:1314
+#: ../src/widgets/ario-playlist.c:1397
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Tá an seinmréim sin ann cheana? An dteastaíonn uait é a fhorscríobh?"
 
-#: ../src/widgets/ario-tray-icon.c:38 ../src/widgets/ario-status-icon.c:32
+#: ../src/widgets/ario-tray-icon.c:39 ../src/widgets/ario-status-icon.c:33
 msgid "Not playing"
 msgstr "Níl sé ag seinm"
 
-#: ../src/widgets/ario-tray-icon.c:128 ../src/widgets/ario-status-icon.c:93
+#: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:87
 msgid "_Play"
 msgstr "_Seinn"
 
-#: ../src/widgets/ario-tray-icon.c:131 ../src/widgets/ario-status-icon.c:96
+#: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:90
 msgid "_Pause"
 msgstr "_Moilligh"
 
-#: ../src/widgets/ario-tray-icon.c:134 ../src/widgets/ario-status-icon.c:99
+#: ../src/widgets/ario-tray-icon.c:139 ../src/widgets/ario-status-icon.c:93
 msgid "_Stop"
 msgstr "_Stad"
 
-#: ../src/widgets/ario-tray-icon.c:137 ../src/widgets/ario-status-icon.c:102
+#: ../src/widgets/ario-tray-icon.c:142 ../src/widgets/ario-status-icon.c:96
 msgid "_Next"
 msgstr "_Ar Aghaidh"
 
-#: ../src/widgets/ario-tray-icon.c:140 ../src/widgets/ario-status-icon.c:105
+#: ../src/widgets/ario-tray-icon.c:145 ../src/widgets/ario-status-icon.c:99
 msgid "P_revious"
 msgstr "_Roimhe"
 
@@ -1128,6 +1162,17 @@ msgstr "Breiseáin chun an t-ealaíontóir reatha a chuardach ar vicipéid"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Vicipéid"
+
+#, fuzzy
+#~ msgid "Orientation"
+#~ msgstr "Aga"
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr ""
+#~ "An bhfuil tú cinnte go dteastaíonn uait na clúdaithe uile de na halbaim "
+#~ "roghnaithe a bhaint?"
 
 #~ msgid ""
 #~ "Artist: %s\n"

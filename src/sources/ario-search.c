@@ -38,23 +38,6 @@ typedef struct ArioSearchConstraint
         GtkWidget *minus_button;
 } ArioSearchConstraint;
 
-char * ArioSearchItemKeys[MPD_TAG_NUM_OF_ITEM_TYPES] =
-{
-        N_("Artist"),    // MPD_TAG_ITEM_ARTIST
-        N_("Album"),     // MPD_TAG_ITEM_ALBUM
-        N_("Title"),     // MPD_TAG_ITEM_TITLE
-        N_("Track"),     // MPD_TAG_ITEM_TRACK
-        NULL,            // MPD_TAG_ITEM_NAME
-        NULL,            // MPD_TAG_ITEM_GENRE
-        NULL,            // MPD_TAG_ITEM_DATE
-        NULL,            // MPD_TAG_ITEM_COMPOSER
-        NULL,            // MPD_TAG_ITEM_PERFORMER
-        NULL,            // MPD_TAG_ITEM_COMMENT
-        NULL,            // MPD_TAG_ITEM_DISC
-        N_("Filename"),  // MPD_TAG_ITEM_FILENAME
-        N_("Any")        // MPD_TAG_ITEM_ANY
-};
-
 static void ario_search_class_init (ArioSearchClass *klass);
 static void ario_search_init (ArioSearch *search);
 static void ario_search_finalize (GObject *object);
@@ -275,10 +258,10 @@ ario_search_init (ArioSearch *search)
         search->priv->list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 
         for (i = 0; i < MPD_TAG_NUM_OF_ITEM_TYPES; ++i) {
-                if (ArioSearchItemKeys[i]) {
+                if (ario_mpd_get_items_names ()[i]) {
                         gtk_list_store_append (search->priv->list_store, &iter);
                         gtk_list_store_set (search->priv->list_store, &iter,
-                                            0, gettext (ArioSearchItemKeys[i]),
+                                            0, gettext (ario_mpd_get_items_names ()[i]),
                                             1, i,
                                             -1);
                 }
@@ -550,38 +533,38 @@ ario_search_do_search (GtkButton *button,
 {
         ARIO_LOG_FUNCTION_START
         ArioSearchConstraint *search_constraint;
-        ArioMpdSearchCriteria *search_criteria;
-        GSList *search_criterias = NULL;
+        ArioMpdAtomicCriteria *atomic_criteria;
+        GSList *criteria = NULL;
         GSList *tmp;
         GSList *songs;
         ArioMpdSong *song;
         GtkTreeIter iter;
         gchar *title;
         GValue *value;
-        GtkListStore *liststore = ario_songlist_get_liststore (ARIO_SONGLIST (search->priv->searchs));
+        GtkListStore *liststore;
 
         for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
                 search_constraint = tmp->data;
 
-                search_criteria = (ArioMpdSearchCriteria *) g_malloc (sizeof (ArioMpdSearchCriteria));
+                atomic_criteria = (ArioMpdAtomicCriteria *) g_malloc (sizeof (ArioMpdAtomicCriteria));
                 gtk_combo_box_get_active_iter (GTK_COMBO_BOX (search_constraint->combo_box), &iter);
                 value = (GValue*)g_malloc(sizeof(GValue));
                 value->g_type = 0;
                 gtk_tree_model_get_value (GTK_TREE_MODEL (search->priv->list_store),
                                           &iter,
                                           1, value);
-                search_criteria->type = g_value_get_int(value);
+                atomic_criteria->tag = g_value_get_int (value);
                 g_free (value);
-                search_criteria->value = gtk_entry_get_text (GTK_ENTRY (search_constraint->entry));
-                search_criterias = g_slist_append (search_criterias, search_criteria);
+                atomic_criteria->value = (gchar *) gtk_entry_get_text (GTK_ENTRY (search_constraint->entry));
+                criteria = g_slist_append (criteria, atomic_criteria);
         }
 
-        songs = ario_mpd_search (search->priv->mpd, search_criterias);
-        g_slist_foreach (search_criterias, (GFunc) g_free, NULL);
-        g_slist_free (search_criterias);
+        songs = ario_mpd_get_songs (search->priv->mpd, criteria, FALSE);
+        g_slist_foreach (criteria, (GFunc) g_free, NULL);
+        g_slist_free (criteria);
 
+        liststore = ario_songlist_get_liststore (ARIO_SONGLIST (search->priv->searchs));
         gtk_list_store_clear (liststore);
-
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
 

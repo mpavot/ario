@@ -24,6 +24,7 @@
 #include <time.h>
 #include <glib/gi18n.h>
 #include "shell/ario-shell-preferences.h"
+#include "preferences/ario-browser-preferences.h"
 #include "preferences/ario-connection-preferences.h"
 #include "preferences/ario-cover-preferences.h"
 #include "preferences/ario-lyrics-preferences.h"
@@ -174,6 +175,11 @@ ario_shell_preferences_new (ArioMpd *mpd)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Server")));
+
+        widget = ario_browser_preferences_new ();
+        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
+                                  widget,
+                                  gtk_label_new (_("Library")));
 
         widget = ario_cover_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),

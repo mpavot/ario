@@ -324,11 +324,13 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_target_list_add_image_targets (targets, 1, TRUE);
         gtk_target_list_add_uri_targets (targets, 2);
         target_entry = gtk_target_table_new_from_list (targets, &n_elem);
+        gtk_target_list_unref (targets);
 
         gtk_drag_dest_set (event_box,
                            GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_DROP,
                            target_entry, n_elem,
                            GDK_ACTION_COPY);
+        gtk_target_table_free (target_entry, n_elem);
 
         g_signal_connect_object (G_OBJECT (event_box), "drag_data_received",
                                  G_CALLBACK (ario_header_drag_leave_cb),

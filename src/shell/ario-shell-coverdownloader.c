@@ -439,39 +439,12 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
                                        ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        GSList * artists = ario_mpd_get_artists (ario_shell_coverdownloader->priv->mpd);
+        GSList *albums = ario_mpd_get_albums (ario_shell_coverdownloader->priv->mpd, NULL);
 
-        ario_shell_coverdownloader_get_covers_from_artists (ario_shell_coverdownloader,
-                                                            artists,
-                                                            operation);
+        ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader,
+                                                           albums,
+                                                           operation);
 
-        g_slist_foreach (artists, (GFunc) g_free, NULL);
-        g_slist_free (artists);
-}
-
-void
-ario_shell_coverdownloader_get_covers_from_artists (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                    GSList *artists,
-                                                    ArioShellCoverdownloaderOperation operation)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList *albums = NULL, *tmp_albums = NULL, *tmp;
-
-        if (!artists)
-                return;
-
-        for (tmp = artists; tmp; tmp = tmp->next) {
-                /* We make a query for each selected artist */
-                tmp_albums = ario_mpd_get_albums (ario_shell_coverdownloader->priv->mpd, (gchar *) tmp->data);
-
-                /* We add the result of the query to a list */
-                albums = g_slist_concat (albums, tmp_albums);
-        }
-
-        /* We search for all the covers of the entry in the list */
-        ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader, albums, operation);
-
-        /* We free the list */
         g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (albums);
 }

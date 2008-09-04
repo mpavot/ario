@@ -190,6 +190,9 @@
 #define PREF_TRAY_ICON                          "tray-icon"
 #define PREF_TRAY_ICON_DEFAULT                  TRUE
 
+#define PREF_BROWSER_TREES                      "browser-trees"
+#define PREF_BROWSER_TREES_DEFAULT              "0,1,2"
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

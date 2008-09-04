@@ -29,7 +29,7 @@
 static GHashTable *hash;
 static gboolean modified = FALSE;
 static GSList *notifications;
-static guint notification_counter = 0;
+static guint notification_counter = 1;
 
 typedef struct
 {

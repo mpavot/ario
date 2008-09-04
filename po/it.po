@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-14 11:10+0200\n"
+"POT-Creation-Date: 2008-09-04 20:00+0200\n"
 "PO-Revision-Date: 2008-05-23 22:02+0000\n"
 "Last-Translator: Daniele de Virgilio <erunamo@email.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -25,6 +25,20 @@ msgstr "Ario riproduttore musicale"
 msgid "Client application to mpd"
 msgstr "Applicazione client a mpd"
 
+#: ../data/glade/browser-prefs.glade.h:1
+#, fuzzy
+msgid "Library Options"
+msgstr "Libreria"
+
+#: ../data/glade/browser-prefs.glade.h:2
+msgid "Library Organisation"
+msgstr ""
+
+#: ../data/glade/browser-prefs.glade.h:3
+#, fuzzy
+msgid "Sort albums: "
+msgstr "Stato: "
+
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
 msgstr ""
@@ -32,8 +46,8 @@ msgstr ""
 "esecuzione"
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:247
-#: ../src/shell/ario-shell-preferences.c:180
+#: ../src/shell/ario-shell-coverselect.c:291
+#: ../src/shell/ario-shell-preferences.c:187
 msgid "Covers"
 msgstr "Copertine"
 
@@ -55,7 +69,7 @@ msgid "Auto detect"
 msgstr "Rileva automaticamente"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:170
+#: ../src/shell/ario-shell-preferences.c:172
 msgid "Connection"
 msgstr "Connessione"
 
@@ -94,11 +108,11 @@ msgstr "Porta:"
 msgid "_Autoconnect on startup"
 msgstr "_Connetti automaticamente all'avvio"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:160
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:168
 msgid "_Connect"
 msgstr "_Connetti"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:163
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:171
 msgid "_Disconnect"
 msgstr "_Disconnetti"
 
@@ -139,64 +153,68 @@ msgstr "Sto scaricando la copertina"
 msgid "Local search"
 msgstr "Ricerca locale"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:163
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:146
 msgid "Search"
 msgstr "Cerca"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/sources/ario-browser.c:441
-#: ../src/sources/ario-search.c:44 ../src/widgets/ario-playlist.c:334
-#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:397
+#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:151
+#: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:367
+#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:383
 msgid "Album"
 msgstr "Album"
 
-#: ../data/glade/interface-prefs.glade.h:2 ../src/sources/ario-browser.c:384
-#: ../src/sources/ario-search.c:43 ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:416
-#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:271
-#: ../src/widgets/ario-status-icon.c:395
+#: ../data/glade/interface-prefs.glade.h:2
+msgid "Allow only one instance of Ario"
+msgstr ""
+
+#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:150
+#: ../src/shell/ario-shell-lyricsselect.c:208
+#: ../src/shell/ario-shell-similarartists.c:423
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
+#: ../src/widgets/ario-status-icon.c:381
 msgid "Artist"
 msgstr "Artista"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/widgets/ario-playlist.c:334
+#. MPD_TAG_ITEM_GENRE
+#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
+#: ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "Date"
 msgstr "Data:"
 
-#: ../data/glade/interface-prefs.glade.h:4 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:367
 msgid "Duration"
 msgstr "Durata"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "File"
 msgstr "_File"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:334
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
+#: ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "Genre"
 msgstr "Genere:"
 
-#: ../data/glade/interface-prefs.glade.h:7
+#: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:8
+#: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
 msgstr "Nascondi la finestra quando viene premuto il tasto di chiusura"
 
-#: ../data/glade/interface-prefs.glade.h:9
-#: ../src/shell/ario-shell-preferences.c:190
+#: ../data/glade/interface-prefs.glade.h:10
+#: ../src/shell/ario-shell-preferences.c:197
 msgid "Interface"
 msgstr "Interfaccia"
 
-#: ../data/glade/interface-prefs.glade.h:10
-msgid "On middle button click on tray icon :"
-msgstr ""
-"Tramite click con il pulsante centrale del mouse sulla icona nella tray:"
-
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:207
+#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:215
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -209,28 +227,19 @@ msgstr "Mostra testo della canzone (_L)"
 msgid "Show tabs"
 msgstr "Mostra linguette"
 
-#: ../data/glade/interface-prefs.glade.h:14
-#, fuzzy
-msgid "Sort albums: "
-msgstr "Stato: "
-
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:15 ../src/sources/ario-browser.c:540
-#: ../src/sources/ario-search.c:45 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:334 ../src/widgets/ario-songlist.c:256
-#: ../src/widgets/ario-status-icon.c:399
+#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:152
+#: ../src/sources/ario-tree.c:497 ../src/shell/ario-shell-lyricsselect.c:221
+#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-status-icon.c:385
 msgid "Title"
 msgstr "Titolo"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:16 ../src/sources/ario-browser.c:533
-#: ../src/sources/ario-search.c:46 ../src/widgets/ario-playlist.c:334
+#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:153
+#: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:367
 msgid "Track"
 msgstr "Traccia"
-
-#: ../data/glade/interface-prefs.glade.h:17
-msgid "Tray icon"
-msgstr "Icona sulla traybar"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 #, fuzzy
@@ -242,7 +251,7 @@ msgid "Title :"
 msgstr "Titolo:"
 
 #: ../data/glade/proxy-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:195
+#: ../src/shell/ario-shell-preferences.c:207
 msgid "Proxy"
 msgstr "Proxy"
 
@@ -327,7 +336,7 @@ msgid "Play time :"
 msgstr "Tempo di riproduzione:"
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:200
+#: ../src/shell/ario-shell-preferences.c:212
 msgid "Statistics"
 msgstr "Statistiche"
 
@@ -375,11 +384,62 @@ msgstr "Canzone"
 msgid "Track :"
 msgstr "Traccia:"
 
-#: ../src/ario-mpd.c:652
+#: ../data/glade/trayicon-prefs.glade.h:1
+#, fuzzy
+msgid "Notification"
+msgstr "Conferma"
+
+#: ../data/glade/trayicon-prefs.glade.h:2
+msgid "Notification on song change"
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:3
+msgid "Notification time: "
+msgstr ""
+
+#: ../data/glade/trayicon-prefs.glade.h:4
+msgid "On middle button click on tray icon :"
+msgstr ""
+"Tramite click con il pulsante centrale del mouse sulla icona nella tray:"
+
+#: ../data/glade/trayicon-prefs.glade.h:5
+#: ../src/shell/ario-shell-preferences.c:202
+msgid "Tray icon"
+msgstr "Icona sulla traybar"
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr ""
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/ario-mpd.c:157
+#, fuzzy
+msgid "Composer"
+msgstr "Compositore:"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/ario-mpd.c:158
+#, fuzzy
+msgid "Performer"
+msgstr "Esecutore:"
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/ario-mpd.c:161
+msgid "Filename"
+msgstr "Nome del file"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/ario-mpd.c:162
+msgid "Any"
+msgstr "Qualsiasi"
+
+#: ../src/ario-mpd.c:672
 msgid "Connecting to MPD server..."
 msgstr "Connessione al server MPD..."
 
-#: ../src/ario-mpd.c:677
+#: ../src/ario-mpd.c:697
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr ""
 "Impossibile connettersi al MPD. Controllare le opzioni della connessione."
@@ -424,7 +484,7 @@ msgstr "Plugin"
 msgid "Enabled"
 msgstr "Attivato"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:190
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:198
 msgid "_About"
 msgstr "Inform_azioni"
 
@@ -447,6 +507,15 @@ msgstr "_Disattiva tutti"
 #: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
 msgstr "Plugin attivi"
+
+#: ../src/preferences/ario-browser-preferences.c:48
+msgid "Alphabetically"
+msgstr "Ordine Alfabetico"
+
+#. SORT_ALPHABETICALLY
+#: ../src/preferences/ario-browser-preferences.c:49
+msgid "By year"
+msgstr "Per anno"
 
 #: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
@@ -492,30 +561,6 @@ msgstr "Devi selezionare un server."
 msgid "New Profile"
 msgstr "Nuovo Profilo"
 
-#: ../src/preferences/ario-interface-preferences.c:66
-msgid "Play/Pause"
-msgstr "Riproduci/Pausa"
-
-#. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-interface-preferences.c:67
-#: ../src/widgets/ario-header.c:252
-msgid "Play next song"
-msgstr "Riproduci il brano successivo"
-
-#. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-interface-preferences.c:68
-msgid "Do nothing"
-msgstr "Non fare nulla"
-
-#: ../src/preferences/ario-interface-preferences.c:73
-msgid "Alphabetically"
-msgstr "Ordine Alfabetico"
-
-#. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-interface-preferences.c:74
-msgid "By year"
-msgstr "Per anno"
-
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
 #: ../src/preferences/ario-stats-preferences.c:268
@@ -532,8 +577,22 @@ msgstr "Non connesso"
 msgid "Updating..."
 msgstr "Aggiornamento..."
 
-#: ../src/sources/ario-browser.c:146 ../src/sources/ario-browser.c:149
-#: ../src/sources/ario-browser.c:152 ../src/sources/ario-search.c:100
+#: ../src/preferences/ario-trayicon-preferences.c:48
+msgid "Play/Pause"
+msgstr "Riproduci/Pausa"
+
+#. TRAY_ICON_PLAY_PAUSE
+#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/widgets/ario-header.c:296
+msgid "Play next song"
+msgstr "Riproduci il brano successivo"
+
+#. TRAY_ICON_NEXT_SONG
+#: ../src/preferences/ario-trayicon-preferences.c:50
+msgid "Do nothing"
+msgstr "Non fare nulla"
+
+#: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:83
 #: ../src/sources/ario-storedplaylists.c:103
 #: ../src/sources/ario-storedplaylists.c:117
 #: ../plugins/filesystem/ario-filesystem.c:106
@@ -542,8 +601,7 @@ msgstr "Aggiornamento..."
 msgid "_Add to playlist"
 msgstr "_Aggiungi alla playlist"
 
-#: ../src/sources/ario-browser.c:156 ../src/sources/ario-browser.c:159
-#: ../src/sources/ario-browser.c:162 ../src/sources/ario-search.c:103
+#: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:86
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../src/sources/ario-storedplaylists.c:120
 #: ../plugins/filesystem/ario-filesystem.c:109
@@ -553,69 +611,35 @@ msgstr "_Aggiungi alla playlist"
 msgid "Add and _play"
 msgstr "_Aggiungi alla playlist"
 
-#: ../src/sources/ario-browser.c:166 ../src/sources/ario-browser.c:169
-#: ../src/sources/ario-search.c:106 ../src/sources/ario-storedplaylists.c:123
-#: ../src/widgets/ario-playlist.c:125
+#: ../src/sources/ario-browser.c:89
+msgid "Get the covers"
+msgstr "Ottieni le copertine"
+
+#: ../src/sources/ario-browser.c:92
+msgid "_Delete the covers"
+msgstr "Cancella le copertine (_D)"
+
+#: ../src/sources/ario-browser.c:95 ../src/sources/ario-browser.c:98
+#: ../src/sources/ario-search.c:89 ../src/sources/ario-storedplaylists.c:123
+#: ../src/widgets/ario-playlist.c:133
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
 msgstr "_Proprietà"
 
-#: ../src/sources/ario-browser.c:173 ../src/sources/ario-browser.c:180
-msgid "Get the covers"
-msgstr "Ottieni le copertine"
-
-#: ../src/sources/ario-browser.c:176 ../src/sources/ario-browser.c:183
-msgid "_Delete the covers"
-msgstr "Cancella le copertine (_D)"
-
-#: ../src/sources/ario-browser.c:263
+#: ../src/sources/ario-browser.c:151 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
 msgstr "Libreria"
 
-#. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-browser.c:451
-msgid "Cover"
-msgstr "Copertina"
-
-#: ../src/sources/ario-browser.c:1545
-msgid ""
-"Are you sure that you want to remove all the covers of the selected artists?"
-msgstr ""
-"Sei sicuro di voler rimuovere tutte le copertine dell'artista selezionato?"
-
-#: ../src/sources/ario-browser.c:1596
-msgid ""
-"Are you sure that you want to remove all the covers of the selected albums?"
-msgstr ""
-"Sei sicuro di voler rimuovere tutte le copertine dell'album selezionato?"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#. MPD_TAG_ITEM_GENRE
-#. MPD_TAG_ITEM_DATE
-#. MPD_TAG_ITEM_COMPOSER
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/sources/ario-search.c:54
-msgid "Filename"
-msgstr "Nome del file"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/sources/ario-search.c:55
-msgid "Any"
-msgstr "Qualsiasi"
-
-#: ../src/sources/ario-search.c:250
+#: ../src/sources/ario-search.c:233
 msgid "Add a search criteria"
 msgstr "Aggiungi un criterio di ricerca"
 
-#: ../src/sources/ario-search.c:257
+#: ../src/sources/ario-search.c:240
 msgid "Search songs in the library"
 msgstr "Cerca canzoni nella libreria"
 
-#: ../src/sources/ario-search.c:460
+#: ../src/sources/ario-search.c:443
 msgid "Remove a search criteria"
 msgstr "Rimuovi un criterio di ricerca"
 
@@ -631,80 +655,91 @@ msgstr "Playlist"
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Sei sicuro di voler cancellare tutte le playlist selezionate?"
 
-#: ../src/shell/ario-shell.c:151
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-tree.c:438
+msgid "Cover"
+msgstr "Copertina"
+
+#: ../src/sources/ario-tree.c:1245
+#, fuzzy
+msgid "Are you sure that you want to remove all the selected covers?"
+msgstr ""
+"Sei sicuro di voler rimuovere tutte le copertine dell'artista selezionato?"
+
+#: ../src/shell/ario-shell.c:159
 msgid "_File"
 msgstr "_File"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:160
 msgid "_Edit"
 msgstr "Modifica (_E)"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:161
 msgid "_View"
 msgstr "_Visualizza"
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:162
 msgid "_Tool"
 msgstr "S_trumento"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:163
 msgid "_Help"
 msgstr "Aiuto (_H)"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:165
 msgid "_Save Playlist"
 msgstr "_Salva Playlist"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:174
 msgid "_Quit"
 msgstr "Esci (_Q)"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:177
 msgid "Plu_gins"
 msgstr "Plu_gin"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:180
 msgid "Prefere_nces"
 msgstr "Prefere_nze"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:183
 msgid "_Change current album cover"
 msgstr "_Cambia la copertina dell'album"
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:186
 msgid "Download album _covers"
 msgstr "Scarica le _copertine dell'album"
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:189
 msgid "Find similar artists"
 msgstr "Trova artisti simili"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:192
 #, fuzzy
 msgid "Add similar songs to playlist"
 msgstr "_Aggiungi alla playlist"
 
-#: ../src/shell/ario-shell.c:187
+#: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
 msgstr "Mostra testo della canzone (_L)"
 
-#: ../src/shell/ario-shell.c:193
+#: ../src/shell/ario-shell.c:201
 msgid "_Translate this application..."
 msgstr "_Traduci questa applicazione..."
 
-#: ../src/shell/ario-shell.c:201
+#: ../src/shell/ario-shell.c:209
 msgid "S_tatusbar"
 msgstr "Barra di s_tato"
 
-#: ../src/shell/ario-shell.c:204
+#: ../src/shell/ario-shell.c:212
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:672
+#: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
 msgstr "GTK client per MPD"
 
-#: ../src/shell/ario-shell.c:673
+#: ../src/shell/ario-shell.c:763
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -722,7 +757,7 @@ msgstr ""
 "  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
 "  Nicola Piovesan https://launchpad.net/~piovesannicola"
 
-#: ../src/shell/ario-shell.c:1009
+#: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
 msgstr "Configura i plugin"
 
@@ -746,20 +781,20 @@ msgstr ""
 "%i copertine non trovate\n"
 "%i copertine gia' esistenti"
 
-#: ../src/shell/ario-shell-coverselect.c:235
+#: ../src/shell/ario-shell-coverselect.c:279
 msgid "Cover Download"
 msgstr "Download Copertine"
 
-#: ../src/shell/ario-shell-coverselect.c:531
+#: ../src/shell/ario-shell-coverselect.c:591
 msgid "Error reading file"
 msgstr "Errore nella lettura del file"
 
-#: ../src/shell/ario-shell-coverselect.c:554
+#: ../src/shell/ario-shell-coverselect.c:614
 msgid "Error saving file"
 msgstr "Si è verificato un errore salvando il file"
 
 #: ../src/shell/ario-shell-lyrics.c:53
-#: ../src/shell/ario-shell-preferences.c:185
+#: ../src/shell/ario-shell-preferences.c:192
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
 msgstr "Testi"
@@ -773,24 +808,24 @@ msgstr "Download testi delle canzoni"
 msgid "Source"
 msgstr "Ordine sorgenti"
 
-#: ../src/shell/ario-shell-preferences.c:140
+#: ../src/shell/ario-shell-preferences.c:142
 msgid "Ario Preferences"
 msgstr "Ario Preferenze"
 
-#: ../src/shell/ario-shell-preferences.c:175
+#: ../src/shell/ario-shell-preferences.c:177
 msgid "Server"
 msgstr "Server"
 
-#: ../src/shell/ario-shell-similarartists.c:344
+#: ../src/shell/ario-shell-similarartists.c:350
 #, c-format
 msgid "%d songs"
 msgstr "%d canzoni"
 
-#: ../src/shell/ario-shell-similarartists.c:405
+#: ../src/shell/ario-shell-similarartists.c:412
 msgid "Image"
 msgstr "Immagine"
 
-#: ../src/shell/ario-shell-similarartists.c:423
+#: ../src/shell/ario-shell-similarartists.c:430
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Canzoni"
@@ -825,39 +860,39 @@ msgstr "Configurazione"
 msgid "Confirmation"
 msgstr "Conferma"
 
-#: ../src/widgets/ario-header.c:118 ../src/widgets/ario-tray-icon.c:39
-#: ../src/widgets/ario-status-icon.c:33
+#: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.c:40
+#: ../src/widgets/ario-status-icon.c:34
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>da</i> %s <i>di</i> %s"
 
-#: ../src/widgets/ario-header.c:211
+#: ../src/widgets/ario-header.c:255
 msgid "Play previous song"
 msgstr "Riproduci il brano precedente"
 
-#: ../src/widgets/ario-header.c:230
+#: ../src/widgets/ario-header.c:274
 msgid "Play/Pause the music"
 msgstr "Riproduce/Interrompe la musica"
 
-#: ../src/widgets/ario-header.c:241
+#: ../src/widgets/ario-header.c:285
 msgid "Stop the music"
 msgstr "Ferma la musica"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:317 ../src/widgets/ario-tray-icon.c:708
+#: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
 msgid " of "
 msgstr " di "
 
-#: ../src/widgets/ario-header.c:341
+#: ../src/widgets/ario-header.c:400
 msgid "Toggle random on/off"
 msgstr "Imposta Random on/off"
 
-#: ../src/widgets/ario-header.c:352
+#: ../src/widgets/ario-header.c:411
 msgid "Toggle repeat on/off"
 msgstr "Imposta Ripeti on/off"
 
-#: ../src/widgets/ario-header.c:462
+#: ../src/widgets/ario-header.c:521
 msgid "Change the music volume"
 msgstr "Cambia il volume della musica"
 
@@ -869,56 +904,56 @@ msgstr "Sto scaricando il testo della canzone..."
 msgid "Lyrics not found"
 msgstr "Non è stato trovato il testo della canzone"
 
-#: ../src/widgets/ario-playlist.c:116
+#: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
 msgstr "_Cancella"
 
-#: ../src/widgets/ario-playlist.c:119
+#: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
 msgstr "_Rimuovi"
 
-#: ../src/widgets/ario-playlist.c:122
+#: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
 msgstr "_Salva"
 
-#: ../src/widgets/ario-playlist.c:128
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
 msgstr "Vai alla canzone in esecuzione (_G)"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1279
+#: ../src/widgets/ario-playlist.c:1362
 msgid "Save playlist"
 msgstr "Salva playlist"
 
-#: ../src/widgets/ario-playlist.c:1289
+#: ../src/widgets/ario-playlist.c:1372
 msgid "Playlist name :"
 msgstr "Nome playlist:"
 
-#: ../src/widgets/ario-playlist.c:1314
+#: ../src/widgets/ario-playlist.c:1397
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La playlist esiste gia'. Vuoi sovrascriverla?"
 
-#: ../src/widgets/ario-tray-icon.c:38 ../src/widgets/ario-status-icon.c:32
+#: ../src/widgets/ario-tray-icon.c:39 ../src/widgets/ario-status-icon.c:33
 msgid "Not playing"
 msgstr "Interrotto"
 
-#: ../src/widgets/ario-tray-icon.c:128 ../src/widgets/ario-status-icon.c:93
+#: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:87
 msgid "_Play"
 msgstr "Riproduci (_P)"
 
-#: ../src/widgets/ario-tray-icon.c:131 ../src/widgets/ario-status-icon.c:96
+#: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:90
 msgid "_Pause"
 msgstr "_Pausa"
 
-#: ../src/widgets/ario-tray-icon.c:134 ../src/widgets/ario-status-icon.c:99
+#: ../src/widgets/ario-tray-icon.c:139 ../src/widgets/ario-status-icon.c:93
 msgid "_Stop"
 msgstr "_Stop"
 
-#: ../src/widgets/ario-tray-icon.c:137 ../src/widgets/ario-status-icon.c:102
+#: ../src/widgets/ario-tray-icon.c:142 ../src/widgets/ario-status-icon.c:96
 msgid "_Next"
 msgstr "Successivo(_N)"
 
-#: ../src/widgets/ario-tray-icon.c:140 ../src/widgets/ario-status-icon.c:105
+#: ../src/widgets/ario-tray-icon.c:145 ../src/widgets/ario-status-icon.c:99
 msgid "P_revious"
 msgstr "P_recedente"
 
@@ -1136,6 +1171,16 @@ msgstr "Un plugin per cercare l'artista in ascolto su wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#, fuzzy
+#~ msgid "Orientation"
+#~ msgstr "Durata"
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr ""
+#~ "Sei sicuro di voler rimuovere tutte le copertine dell'album selezionato?"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
