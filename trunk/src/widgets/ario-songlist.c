@@ -48,7 +48,7 @@ static gboolean ario_songlist_button_press_cb (GtkWidget *widget,
 static gboolean ario_songlist_button_release_cb (GtkWidget *widget,
                                                  GdkEventButton *event,
                                                  ArioSonglist *songlist);
-static gboolean ario_songlist_motion_notify_cb (GtkWidget *widget, 
+static gboolean ario_songlist_motion_notify_cb (GtkWidget *widget,
                                                 GdkEventMotion *event,
                                                 ArioSonglist *songlist);
 static void ario_songlist_songlists_selection_drag_foreach (GtkTreeModel *model,
@@ -61,7 +61,7 @@ static void ario_songlist_drag_data_get_cb (GtkWidget * widget,
                                             GtkSelectionData * selection_data,
                                             guint info, guint time, gpointer data);
 struct ArioSonglistPrivate
-{        
+{
         GtkListStore *songlists_model;
         GtkTreeSelection *songlists_selection;
 
@@ -74,7 +74,7 @@ struct ArioSonglistPrivate
 
         ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
-        
+
         gchar *popup;
 };
 
@@ -206,7 +206,7 @@ ario_songlist_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_songlist_get_property (GObject *object,
                             guint prop_id,
                             GValue *value,
@@ -242,7 +242,7 @@ ario_songlist_new (GtkUIManager *mgr,
         ArioSonglist *songlist;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
-        
+
         songlist = g_object_new (TYPE_ARIO_SONGLIST,
                                  "ui-manager", mgr,
                                  "mpd", mpd,
@@ -315,7 +315,7 @@ ario_songlist_new (GtkUIManager *mgr,
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (songlist),
-                          "drag_data_get", 
+                          "drag_data_get",
                           G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
 
         g_signal_connect_object (G_OBJECT (songlist),
@@ -387,6 +387,15 @@ ario_songlist_cmd_add_play_songlists (GtkAction *action,
 }
 
 void
+ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
+                                            ArioSonglist *songlist)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_clear (songlist->priv->mpd);
+        ario_songlist_add_in_playlist (songlist, TRUE);
+}
+
+void
 ario_songlist_cmd_songs_properties (GtkAction *action,
                                     ArioSonglist *songlist)
 {
@@ -417,11 +426,11 @@ ario_songlist_popup_menu (ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *menu;
-        
+
         if (songlist->priv->popup) {
                 menu = gtk_ui_manager_get_widget (songlist->priv->ui_manager, songlist->priv->popup);
 
-                gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
+                gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                                 gtk_get_current_event_time ());
         }
 }
@@ -520,7 +529,7 @@ ario_songlist_button_release_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_songlist_motion_notify_cb (GtkWidget *widget, 
+ario_songlist_motion_notify_cb (GtkWidget *widget,
                                 GdkEventMotion *event,
                                 ArioSonglist *songlist)
 {

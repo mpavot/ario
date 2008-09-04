@@ -14,7 +14,7 @@
 
                 <menu name="EditMenu" action="Edit">
                         <menuitem name="EditPluginsMenu" action="EditPlugins"/>
-                        <menuitem name="EditPreferencesMenu" action="EditPreferences"/> 
+                        <menuitem name="EditPreferencesMenu" action="EditPreferences"/>
                         <placeholder name="EditMenuPluginPlaceholder" />
                 </menu>
 
@@ -73,6 +73,7 @@
         <popup name="BrowserPopup">
                 <menuitem name="BrowserAdd" action="BrowserAdd"/>
                 <menuitem name="BrowserAddPlay" action="BrowserAddPlay"/>
+                <menuitem name="BrowserClearAddPlay" action="BrowserClearAddPlay"/>
                 <separator/>
                 <menuitem name="BrowserGetCover" action="BrowserGetCover"/>
                 <menuitem name="BrowserRemoveCover" action="BrowserRemoveCover"/>
@@ -82,6 +83,7 @@
         <popup name="BrowserAlbumsPopupSingle">
                 <menuitem name="BrowserAdd" action="BrowserAdd"/>
                 <menuitem name="BrowserAddPlay" action="BrowserAddPlay"/>
+                <menuitem name="BrowserClearAddPlay" action="BrowserClearAddPlay"/>
                 <separator/>
                 <menuitem name="BrowserGetCover" action="BrowserGetCover"/>
                 <menuitem name="BrowserRemoveCover" action="BrowserRemoveCover"/>
@@ -93,6 +95,7 @@
         <popup name="BrowserSongsPopup">
                 <menuitem name="BrowserAdd" action="BrowserAdd"/>
                 <menuitem name="BrowserAddPlay" action="BrowserAddPlay"/>
+                <menuitem name="BrowserClearAddPlay" action="BrowserClearAddPlay"/>
                 <placeholder name="BrowserPopupPluginPlaceholder" />
                 <menuitem name="BrowserSongsProperties" action="BrowserSongsProperties"/>
         </popup>
@@ -100,6 +103,7 @@
         <popup name="SearchPopup">
                 <menuitem name="SearchAddSongs" action="SearchAddSongs"/>
                 <menuitem name="SearchAddPlaySongs" action="SearchAddPlaySongs"/>
+                <menuitem name="SearchClearAddPlaySongs" action="SearchClearAddPlaySongs"/>
                 <placeholder name="SearchPopupPluginPlaceholder" />
                 <menuitem name="SearchSongsProperties" action="SearchSongsProperties"/>
         </popup>
@@ -107,6 +111,7 @@
         <popup name="StoredplaylistsPopup">
                 <menuitem name="StoredplaylistsAddPlaylists" action="StoredplaylistsAddPlaylists"/>
                 <menuitem name="StoredplaylistsAddPlayPlaylists" action="StoredplaylistsAddPlayPlaylists"/>
+                <menuitem name="StoredplaylistsClearAddPlayPlaylists" action="StoredplaylistsClearAddPlayPlaylists"/>
                 <menuitem name="StoredplaylistsDelete" action="StoredplaylistsDelete"/>
                 <placeholder name="StoredplaylistsPopupPluginPlaceholder" />
         </popup>
@@ -114,6 +119,7 @@
         <popup name="StoredplaylistsSongsPopup">
                 <menuitem name="StoredplaylistsAddSongs" action="StoredplaylistsAddSongs"/>
                 <menuitem name="StoredplaylistsAddPlaySongs" action="StoredplaylistsAddPlaySongs"/>
+                <menuitem name="StoredplaylistsClearAddPlaySongs" action="StoredplaylistsClearAddPlaySongs"/>
                 <placeholder name="StoredplaylistsSongsPopupPluginPlaceholder" />
                 <menuitem name="StoredplaylistsSongsProperties" action="StoredplaylistsSongsProperties"/>
         </popup>

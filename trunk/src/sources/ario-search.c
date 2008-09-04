@@ -58,7 +58,7 @@ static void ario_search_do_minus (GtkButton *button,
 static void ario_search_do_search (GtkButton *button,
                                    ArioSearch *search);
 struct ArioSearchPrivate
-{        
+{
         GtkWidget *searchs;
 
         GtkTooltips *tooltips;
@@ -86,6 +86,9 @@ static GtkActionEntry ario_search_actions [] =
         { "SearchAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
+        { "SearchClearAddPlaySongs", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
         { "SearchSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
@@ -228,15 +231,15 @@ ario_search_init (ArioSearch *search)
         gtk_container_add (GTK_CONTAINER (search->priv->plus_button), image);
         g_signal_connect (G_OBJECT (search->priv->plus_button),
                           "clicked", G_CALLBACK (ario_search_do_plus), search);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips), 
-                              GTK_WIDGET (search->priv->plus_button), 
+        gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips),
+                              GTK_WIDGET (search->priv->plus_button),
                               _("Add a search criteria"), NULL);
         /* Search button */
         search->priv->search_button = gtk_button_new_from_stock (GTK_STOCK_FIND);
         g_signal_connect (G_OBJECT (search->priv->search_button),
                           "clicked", G_CALLBACK (ario_search_do_search), search);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips), 
-                              GTK_WIDGET (search->priv->search_button), 
+        gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips),
+                              GTK_WIDGET (search->priv->search_button),
                               _("Search songs in the library"), NULL);
 
         gtk_box_pack_start (GTK_BOX (hbox),
@@ -325,7 +328,7 @@ ario_search_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_search_get_property (GObject *object,
                           guint prop_id,
                           GValue *value,
@@ -407,7 +410,7 @@ ario_search_state_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_search_entry_grab_focus (GtkEntry *entry, 
+ario_search_entry_grab_focus (GtkEntry *entry,
                               ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
@@ -438,8 +441,8 @@ ario_search_do_plus (GtkButton *button,
 
         g_signal_connect (G_OBJECT (search_constraint->minus_button),
                           "clicked", G_CALLBACK (ario_search_do_minus), search);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips), 
-                              GTK_WIDGET (search_constraint->minus_button), 
+        gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips),
+                              GTK_WIDGET (search_constraint->minus_button),
                               _("Remove a search criteria"), NULL);
 
         renderer = gtk_cell_renderer_text_new ();
@@ -508,7 +511,7 @@ ario_search_do_minus (GtkButton *button,
                         break;
         }
         if (!tmp)
-                return;        
+                return;
 
         gtk_widget_destroy (search_constraint->combo_box);
         gtk_widget_destroy (search_constraint->entry);

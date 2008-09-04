@@ -74,7 +74,10 @@ void                    ario_songlist_cmd_add_play_songlists    (GtkAction *acti
 
 void                    ario_songlist_cmd_songs_properties      (GtkAction *action,
                                                                  ArioSonglist *songlist);
-                                                
+
+void                    ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
+                                                                    ArioSonglist *songlist);
+
 G_END_DECLS
 
 #endif /* __ARIO_SONGLIST_H */
