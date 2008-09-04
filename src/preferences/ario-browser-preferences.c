@@ -37,7 +37,7 @@ static void ario_browser_preferences_init (ArioBrowserPreferences *browser_prefe
 static void ario_browser_preferences_finalize (GObject *object);
 static void ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferences);
 G_MODULE_EXPORT void ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
-                                                                 ArioBrowserPreferences *browser_preferences);
+                                                               ArioBrowserPreferences *browser_preferences);
 G_MODULE_EXPORT void ario_browser_preferences_treesnb_changed_cb (GtkWidget *widget,
                                                                   ArioBrowserPreferences *browser_preferences);
 static void ario_browser_preferences_tree_combobox_changed_cb (GtkComboBox *widget,
@@ -82,8 +82,8 @@ ario_browser_preferences_get_type (void)
                 };
 
                 ario_browser_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                          "ArioBrowserPreferences",
-                                                                          &our_info, 0);
+                                                                        "ArioBrowserPreferences",
+                                                                        &our_info, 0);
         }
 
         return ario_browser_preferences_type;
@@ -217,9 +217,9 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
                         if (ario_mpd_get_items_names ()[j]) {
                                 gtk_list_store_append (list_store, &iter);
                                 gtk_list_store_set (list_store, &iter,
-                                                0, gettext (ario_mpd_get_items_names ()[j]),
-                                                1, j,
-                                                -1);
+                                                    0, gettext (ario_mpd_get_items_names ()[j]),
+                                                    1, j,
+                                                    -1);
                         }
                 }
                 gtk_combo_box_set_model (GTK_COMBO_BOX (tree_combobox),

@@ -22,6 +22,7 @@
 
 #include <gtk/gtkuimanager.h>
 #include "ario-mpd.h"
+#include "shell/ario-shell.h"
 
 G_BEGIN_DECLS
 

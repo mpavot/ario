@@ -244,7 +244,7 @@ ario_sourcemanager_showtabs_changed_cb (guint notification_id,
 {
         ARIO_LOG_FUNCTION_START
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
-                            ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
+                                    ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 }
 
 static void
@@ -363,7 +363,7 @@ ario_sourcemanager_remove (ArioSourceManager *sourcemanager,
                 if (data->source == source) {
                         sourcemanager->priv->sources = g_slist_remove (sourcemanager->priv->sources, data);
                         gtk_ui_manager_remove_ui (sourcemanager->priv->ui_manager, data->ui_merge_id);
-                        
+
                         gtk_action_group_remove_action (group,
                                                         gtk_action_group_get_action (group, ario_source_get_id (source)));
                         g_free (data);
