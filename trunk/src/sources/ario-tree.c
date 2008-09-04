@@ -1184,7 +1184,7 @@ ario_tree_get_criterias (ArioTree *tree)
 
 void
 ario_tree_cmd_add (ArioTree *tree,
-                   gboolean play)
+                   const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         GSList *criterias = NULL;

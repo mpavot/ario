@@ -45,16 +45,16 @@ static gboolean ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
                                                              GdkEventAny *event,
                                                              ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                          const char *artist,
-                                                          const char *album,
-                                                          const char *path);
+                                                  const char *artist,
+                                                  const char *album,
+                                                  const char *path);
 static void ario_shell_coverdownloader_close_cb (GtkButton *button,
                                                  ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_cancel_cb (GtkButton *button,
                                                   ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                             ArioMpdAlbum *mpd_album,
-                                                             ArioShellCoverdownloaderOperation operation);
+                                                             const ArioMpdAlbum *mpd_album,
+                                                             const ArioShellCoverdownloaderOperation operation);
 enum
 {
         PROP_0,
@@ -436,7 +436,7 @@ ario_shell_coverdownloader_progress_end (ArioShellCoverdownloader *ario_shell_co
 
 void
 ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                       ArioShellCoverdownloaderOperation operation)
+                                       const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = ario_mpd_get_albums (ario_shell_coverdownloader->priv->mpd, NULL);
@@ -497,11 +497,11 @@ ario_shell_coverdownloader_get_covers_from_albums_thread (ArioShellCoverdownload
 
 void
 ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                   GSList *albums,
-                                                   ArioShellCoverdownloaderOperation operation)
+                                                   const GSList *albums,
+                                                   const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *tmp;
+        const GSList *tmp;
 
         if (!albums)
                 return;
@@ -521,8 +521,8 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
 
 static void
 ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                 ArioMpdAlbum *mpd_album,
-                                                 ArioShellCoverdownloaderOperation operation)
+                                                 const ArioMpdAlbum *mpd_album,
+                                                 const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *artist;

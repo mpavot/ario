@@ -57,7 +57,7 @@ typedef enum
 typedef struct ArioMpdQueueAction {
         ArioMpdActionType type;
         union {
-                char *path;             // For ARIO_MPD_ACTION_ADD
+                const char *path;             // For ARIO_MPD_ACTION_ADD
                 int id;                 // For ARIO_MPD_ACTION_DELETE_ID
                 int pos;                // For ARIO_MPD_ACTION_DELETE_POS
                 struct {                // For ARIO_MPD_ACTION_MOVE
@@ -1409,7 +1409,7 @@ ario_mpd_free_album (ArioMpdAlbum *ario_mpd_album)
 }
 
 ArioMpdAlbum*
-ario_mpd_copy_album (ArioMpdAlbum *ario_mpd_album)
+ario_mpd_copy_album (const ArioMpdAlbum *ario_mpd_album)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdAlbum *ret = NULL;
@@ -1427,7 +1427,7 @@ ario_mpd_copy_album (ArioMpdAlbum *ario_mpd_album)
 
 void
 ario_mpd_set_current_elapsed (ArioMpd *mpd,
-                              gint elapsed)
+                              const gint elapsed)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
@@ -1440,7 +1440,7 @@ ario_mpd_set_current_elapsed (ArioMpd *mpd,
 
 void
 ario_mpd_set_current_volume (ArioMpd *mpd,
-                             gint volume)
+                             const gint volume)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
@@ -1454,7 +1454,7 @@ ario_mpd_set_current_volume (ArioMpd *mpd,
 
 void
 ario_mpd_set_current_random (ArioMpd *mpd,
-                             gboolean random)
+                             const gboolean random)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
@@ -1467,7 +1467,7 @@ ario_mpd_set_current_random (ArioMpd *mpd,
 
 void
 ario_mpd_set_current_repeat (ArioMpd *mpd,
-                             gboolean repeat)
+                             const gboolean repeat)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
@@ -1480,7 +1480,7 @@ ario_mpd_set_current_repeat (ArioMpd *mpd,
 
 void
 ario_mpd_set_crossfadetime (ArioMpd *mpd,
-                            int crossfadetime)
+                            const int crossfadetime)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
@@ -1506,7 +1506,7 @@ ario_mpd_clear (ArioMpd *mpd)
 
 void
 ario_mpd_queue_add (ArioMpd *mpd,
-                    char* path)
+                    const char *path)
 {
         ARIO_LOG_FUNCTION_START
 
@@ -1519,7 +1519,7 @@ ario_mpd_queue_add (ArioMpd *mpd,
 
 void
 ario_mpd_queue_delete_id (ArioMpd *mpd,
-                          int id)
+                          const int id)
 {
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_DELETE_ID;
@@ -1530,7 +1530,7 @@ ario_mpd_queue_delete_id (ArioMpd *mpd,
 
 void
 ario_mpd_queue_delete_pos (ArioMpd *mpd,
-                           int pos)
+                           const int pos)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
@@ -1542,8 +1542,8 @@ ario_mpd_queue_delete_pos (ArioMpd *mpd,
 
 void
 ario_mpd_queue_move (ArioMpd *mpd,
-                     int old_pos,
-                     int new_pos)
+                     const int old_pos,
+                     const int new_pos)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
@@ -1810,11 +1810,11 @@ ario_mpd_criteria_free (ArioMpdCriteria *criteria)
 }
 
 ArioMpdCriteria *
-ario_mpd_criteria_copy (ArioMpdCriteria *criteria)
+ario_mpd_criteria_copy (const ArioMpdCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdCriteria *ret = NULL;
-        GSList *tmp;
+        const GSList *tmp;
         ArioMpdAtomicCriteria *atomic_criteria;
         ArioMpdAtomicCriteria *new_atomic_criteria;
 

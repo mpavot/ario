@@ -48,7 +48,7 @@ void                    ario_lyrics_free                        (ArioLyrics *lyr
 
 void                    ario_lyrics_candidate_free              (ArioLyricsCandidate *candidate);
 
-ArioLyricsCandidate *   ario_lyrics_candidate_copy              (ArioLyricsCandidate *candidate);
+ArioLyricsCandidate *   ario_lyrics_candidate_copy              (const ArioLyricsCandidate *candidate);
 
 gboolean                ario_lyrics_save_lyrics                 (const gchar *artist,
                                                                  const gchar *title,

@@ -68,7 +68,7 @@ void                    ario_tree_add_criteria          (ArioTree *tree,
 GSList*                 ario_tree_get_criterias         (ArioTree *tree);
 
 void                    ario_tree_cmd_add               (ArioTree *tree,
-                                                         gboolean play);
+                                                         const gboolean play);
 void                    ario_tree_cmd_get_cover         (ArioTree *tree);
 
 void                    ario_tree_cmd_remove_cover      (ArioTree *tree);

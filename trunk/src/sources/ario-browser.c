@@ -427,7 +427,7 @@ ario_browser_tree_selection_changed_cb (ArioTree *tree,
         
         for (tmp = browser->priv->trees; tmp; tmp = g_slist_next (tmp)) {
                 if (tmp->data == tree && g_list_next (tmp)) {
-                        next_tree = g_list_next (tmp)->data;
+                        next_tree = g_slist_next (tmp)->data;
                 }
         }
         g_return_if_fail (next_tree);
