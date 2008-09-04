@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-05-23 22:02+0000\n"
-"Last-Translator: Daniele de Virgilio <erunamo@email.it>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-07-04 12:50+0000\n"
+"Last-Translator: StanD_AlOnE <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -35,9 +35,8 @@ msgid "Library Organisation"
 msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:3
-#, fuzzy
 msgid "Sort albums: "
-msgstr "Stato: "
+msgstr "Ordina albums: "
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -52,7 +51,6 @@ msgid "Covers"
 msgstr "Copertine"
 
 #: ../data/glade/cover-prefs.glade.h:3
-#, fuzzy
 msgid "Covers Sources"
 msgstr "Sorgenti copertine"
 
@@ -179,7 +177,6 @@ msgstr "Artista"
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
 #: ../src/widgets/ario-playlist.c:367
-#, fuzzy
 msgid "Date"
 msgstr "Data:"
 
@@ -188,21 +185,19 @@ msgid "Duration"
 msgstr "Durata"
 
 #: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:367
-#, fuzzy
 msgid "File"
-msgstr "_File"
+msgstr "FIle"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
 #: ../src/widgets/ario-playlist.c:367
-#, fuzzy
 msgid "Genre"
-msgstr "Genere:"
+msgstr "Genere"
 
 #: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
-msgstr ""
+msgstr "Vai alla canzone corrente quando un brano nuovo viene giocato"
 
 #: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
@@ -219,9 +214,8 @@ msgid "Playlist"
 msgstr "Playlist"
 
 #: ../data/glade/interface-prefs.glade.h:12
-#, fuzzy
 msgid "Show rows:"
-msgstr "Mostra testo della canzone (_L)"
+msgstr "Visualizza righe"
 
 #: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
@@ -242,7 +236,6 @@ msgid "Track"
 msgstr "Traccia"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
-#, fuzzy
 msgid "Lyrics Sources"
 msgstr "Sorgenti testi"
 
@@ -302,14 +295,12 @@ msgid "n/a"
 msgstr "n/d"
 
 #: ../data/glade/similar-artists.glade.h:1
-#, fuzzy
 msgid "Add all to playlist"
-msgstr "_Aggiungi alla playlist"
+msgstr "Aggiungi tutti nella playlist"
 
 #: ../data/glade/similar-artists.glade.h:2
-#, fuzzy
 msgid "Add to playlist"
-msgstr "_Aggiungi alla playlist"
+msgstr "Aggiungi alla playlist"
 
 #: ../data/glade/similar-artists.glade.h:3
 msgid "Find on Last.fm"
@@ -607,9 +598,8 @@ msgstr "_Aggiungi alla playlist"
 #: ../plugins/filesystem/ario-filesystem.c:109
 #: ../plugins/filesystem/ario-filesystem.c:120
 #: ../plugins/radios/ario-radio.c:116
-#, fuzzy
 msgid "Add and _play"
-msgstr "_Aggiungi alla playlist"
+msgstr "Aggungi e _gioca"
 
 #: ../src/sources/ario-browser.c:89
 msgid "Get the covers"
@@ -715,9 +705,8 @@ msgid "Find similar artists"
 msgstr "Trova artisti simili"
 
 #: ../src/shell/ario-shell.c:192
-#, fuzzy
 msgid "Add similar songs to playlist"
-msgstr "_Aggiungi alla playlist"
+msgstr "Aggiungi canzoni simili nella playlist"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
@@ -733,7 +722,7 @@ msgstr "Barra di s_tato"
 
 #: ../src/shell/ario-shell.c:212
 msgid "Upper part"
-msgstr ""
+msgstr "Parte superiore"
 
 #: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
@@ -755,7 +744,16 @@ msgstr ""
 "  HdS619 https://launchpad.net/~hds619\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola"
+"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
+"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
+"  HdS619 https://launchpad.net/~hds619\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
+"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
+"  StanD_AlOnE https://launchpad.net/~jacxs-lj"
 
 #: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
@@ -804,9 +802,8 @@ msgid "Lyrics Download"
 msgstr "Download testi delle canzoni"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
-#, fuzzy
 msgid "Source"
-msgstr "Ordine sorgenti"
+msgstr "Sorgente"
 
 #: ../src/shell/ario-shell-preferences.c:142
 msgid "Ario Preferences"
@@ -1172,16 +1169,6 @@ msgstr "Un plugin per cercare l'artista in ascolto su wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Durata"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr ""
-#~ "Sei sicuro di voler rimuovere tutte le copertine dell'album selezionato?"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 per 'riproduci/pausa', 1 per 'riproduci la prossima canzone', 2 per "
@@ -1337,3 +1324,9 @@ msgstr "Wikipedia"
 
 #~ msgid "Window"
 #~ msgstr "Finestra"
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr ""
+#~ "Sei sicuro di voler rimuovere tutte le copertine dell'album selezionato?"

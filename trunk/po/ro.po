@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-05-18 21:36+0000\n"
-"Last-Translator: Bisericaru Sebastian <Twetty_smecheru@yahoo.com>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-08-25 09:45+0000\n"
+"Last-Translator: Harabulă Adrian <opensoft@live.no>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -503,7 +503,7 @@ msgstr "Module active"
 
 #: ../src/preferences/ario-browser-preferences.c:48
 msgid "Alphabetically"
-msgstr ""
+msgstr "Alfabetic"
 
 #. SORT_ALPHABETICALLY
 #: ../src/preferences/ario-browser-preferences.c:49
@@ -740,6 +740,11 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Bisericaru Sebastian https://launchpad.net/~tweety\n"
+"  Ionuț Jula https://launchpad.net/~ionutjula\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Bisericaru Sebastian https://launchpad.net/~tweety\n"
+"  Harabulă Adrian https://launchpad.net/~opensoft\n"
 "  Ionuț Jula https://launchpad.net/~ionutjula"
 
 #: ../src/shell/ario-shell.c:1099
@@ -1009,7 +1014,7 @@ msgstr "Actualizare client necesară"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Track submission failed"
-msgstr ""
+msgstr "Trimiterea piesei a eşuat"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1379
 msgid "Queue is too long"
@@ -1017,7 +1022,7 @@ msgstr "Lista este prea lungă"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1382
 msgid "Track submission failed too many times"
-msgstr ""
+msgstr "Trimiterea piesei a eşuat de prea multe ori"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1434
 msgid "Audioscrobbler preferences"
@@ -1037,7 +1042,7 @@ msgstr "Află despre Last.fm la "
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
 msgid "Last submission time:"
-msgstr ""
+msgstr "Data ultimei trimiteri:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
 msgid "Last.fm Profile"
@@ -1053,7 +1058,7 @@ msgstr "Stare:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
 msgid "Tracks submitted:"
-msgstr ""
+msgstr "Piese trimise:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
 msgid "Username :"
@@ -1156,15 +1161,6 @@ msgstr "Un modul să caute artistul curent pe wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Durată"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "Sigur vreţi să îdepărtaţi toate copertele albumeor selectate?"
-
 #~ msgid ""
 #~ "Artist: %s\n"
 #~ "Album: %s\n"
@@ -1176,3 +1172,8 @@ msgstr "Wikipedia"
 
 #~ msgid "Tabs"
 #~ msgstr "Tab-uri"
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr "Sigur vreţi să îdepărtaţi toate copertele albumeor selectate?"

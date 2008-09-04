@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-05-18 22:19+0000\n"
-"Last-Translator: Christian Siegert <Unknown>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-07-16 19:15+0000\n"
+"Last-Translator: Dion Timmermann <mail@dion-timmermann.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -212,7 +212,6 @@ msgid "Playlist"
 msgstr "Wiedergabeliste"
 
 #: ../data/glade/interface-prefs.glade.h:12
-#, fuzzy
 msgid "Show rows:"
 msgstr "Zeige Zeilen:"
 
@@ -709,7 +708,7 @@ msgstr "Ähnliche Künstler finden"
 #: ../src/shell/ario-shell.c:192
 #, fuzzy
 msgid "Add similar songs to playlist"
-msgstr "Füge ähnliche Lieder zur Wiedergabeliste hinzu"
+msgstr "Ähnliche Lieder zur Wiedergabelist hinzufügen"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
@@ -724,7 +723,6 @@ msgid "S_tatusbar"
 msgstr "S_tatusleiste"
 
 #: ../src/shell/ario-shell.c:212
-#, fuzzy
 msgid "Upper part"
 msgstr "Oberer Teil"
 
@@ -745,6 +743,15 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Christian Siegert https://launchpad.net/~christian-siegert\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Oliver Laub https://launchpad.net/~oliver-laub\n"
+"  Vinzenz Vietzke https://launchpad.net/~v1nz\n"
+"  matsahm https://launchpad.net/~mathias-sahm\n"
+"  tnc https://launchpad.net/~ahs-tnc\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Christian Siegert https://launchpad.net/~christian-siegert\n"
+"  Dion Timmermann https://launchpad.net/~mail-dion-timmermann\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Oliver Laub https://launchpad.net/~oliver-laub\n"
 "  Vinzenz Vietzke https://launchpad.net/~v1nz\n"
@@ -898,8 +905,9 @@ msgid "Lyrics not found"
 msgstr "Liedtext nicht gefunden"
 
 #: ../src/widgets/ario-playlist.c:124
+#, fuzzy
 msgid "_Clear"
-msgstr "_Löschen"
+msgstr "_Leeren"
 
 #: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
@@ -1166,17 +1174,6 @@ msgstr "Plugin zum Finden des aktuellen Künstlers bei Wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Laufzeit"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr ""
-#~ "Sind Sie sicher, dass Sie alle Cover der ausgewählten Alben entfernen "
-#~ "möchten?"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 für 'Abspielen/Pause', 1 für 'Spiele nächsten Titel', 2 für 'Mache "
@@ -1366,3 +1363,10 @@ msgstr "Wikipedia"
 
 #~ msgid "Window"
 #~ msgstr "Fenster"
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr ""
+#~ "Sind Sie sicher, dass Sie alle Cover der ausgewählten Alben entfernen "
+#~ "möchten?"

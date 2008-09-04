@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-05-27 08:41+0000\n"
-"Last-Translator: Per Söderkvist <per.soderkvist@gmail.com>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-07-01 12:37+0000\n"
+"Last-Translator: Magnus Malmsten <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -87,7 +87,7 @@ msgstr "Värd:"
 
 #: ../data/glade/connection-prefs.glade.h:5
 msgid "Music directory :"
-msgstr ""
+msgstr "Musikkatalog :"
 
 #: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:899
 #: ../plugins/radios/ario-radio.c:1098
@@ -203,7 +203,7 @@ msgstr "Visa aktuell låt när en ny låt spelas upp"
 
 #: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
-msgstr ""
+msgstr "Dölj fönster när stäng knapp trycks ned"
 
 #: ../data/glade/interface-prefs.glade.h:10
 #: ../src/shell/ario-shell-preferences.c:197
@@ -291,7 +291,7 @@ msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "fade time (s):"
-msgstr ""
+msgstr "toningstid (s)"
 
 #: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
 #: ../src/ario-util.c:48 ../src/ario-util.c:70
@@ -342,7 +342,7 @@ msgstr "Statistik"
 
 #: ../data/glade/stats-prefs.glade.h:7
 msgid "Uptime :"
-msgstr ""
+msgstr "Uptid :"
 
 #: ../data/glade/song-infos.glade.h:3
 msgid "Comment :"
@@ -375,7 +375,7 @@ msgstr "Speltid:"
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
-msgstr ""
+msgstr "Uppträdande :"
 
 #: ../data/glade/song-infos.glade.h:11
 msgid "Song"
@@ -419,8 +419,9 @@ msgstr "Kompositör:"
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/ario-mpd.c:158
+#, fuzzy
 msgid "Performer"
-msgstr ""
+msgstr "Uppträdande :"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
@@ -473,7 +474,7 @@ msgstr "Omslaget finns redan. Vill du ersätta det?"
 
 #: ../src/covers/ario-cover-local.c:95
 msgid "Music Directory"
-msgstr ""
+msgstr "Musikkatalog"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -632,7 +633,7 @@ msgstr "_Ta bort albumgrafiken"
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
-msgstr ""
+msgstr "_Egenskaper"
 
 #: ../src/sources/ario-browser.c:151 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
@@ -744,7 +745,7 @@ msgstr "S_tatusrad"
 
 #: ../src/shell/ario-shell.c:212
 msgid "Upper part"
-msgstr ""
+msgstr "Övre del"
 
 #: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
@@ -754,6 +755,10 @@ msgstr "GTK-klient för MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Per Söderkvist https://launchpad.net/~sodper\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Magnus Malmsten https://launchpad.net/~magnus-malmsten\n"
 "  Per Söderkvist https://launchpad.net/~sodper"
 
 #: ../src/shell/ario-shell.c:1099
@@ -777,10 +782,13 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
+"%i skivomslag hittades\n"
+"%i skivomslag hittades inte\n"
+"%i skivomslag finns redan"
 
 #: ../src/shell/ario-shell-coverselect.c:279
 msgid "Cover Download"
-msgstr ""
+msgstr "Ladda ner skivomslag"
 
 #: ../src/shell/ario-shell-coverselect.c:591
 msgid "Error reading file"
@@ -798,7 +806,7 @@ msgstr "Låttext"
 
 #: ../src/shell/ario-shell-lyricsselect.c:196
 msgid "Lyrics Download"
-msgstr ""
+msgstr "Ladda ner sångtext"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
 msgid "Source"
@@ -918,7 +926,7 @@ msgstr "_Spara"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
-msgstr ""
+msgstr "_Gå till spela sång"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1362
@@ -990,7 +998,7 @@ msgstr ""
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1248
 msgid "%b %d %Y"
-msgstr ""
+msgstr "%d %b %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
@@ -1072,7 +1080,7 @@ msgstr "Status:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
 msgid "Tracks submitted:"
-msgstr ""
+msgstr "Inlämnade spår:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
 msgid "Username :"
@@ -1084,7 +1092,7 @@ msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr ""
+msgstr "Överlämna sång information till last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:189
 msgid "File System"
@@ -1096,7 +1104,7 @@ msgstr "Musik"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr ""
+msgstr "En bläddrare för filsystem"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
@@ -1104,79 +1112,75 @@ msgstr ""
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr ""
+msgstr "Lägg till stöd för multimedia tangenter"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr ""
+msgstr "Multimedia tangenter"
 
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add a _new radio"
-msgstr ""
+msgstr "Lägg till en _ny radio"
 
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Delete this radios"
-msgstr ""
+msgstr "_Radera denna radio"
 
 #: ../plugins/radios/ario-radio.c:189
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr ""
+msgstr "Webbradion"
 
 #: ../plugins/radios/ario-radio.c:265
 msgid "Internet Radios"
-msgstr ""
+msgstr "Internet radion"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:889
 msgid "Add a WebRadio"
-msgstr ""
+msgstr "Lägg till en webbradio"
 
 #: ../plugins/radios/ario-radio.c:900 ../plugins/radios/ario-radio.c:1099
 msgid "URL :"
-msgstr ""
+msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:954 ../plugins/radios/ario-radio.c:1154
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr ""
+msgstr "Fel parameter. Du måste ange ett namn och en URL för radion."
 
 #: ../plugins/radios/ario-radio.c:1016
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr ""
+msgstr "Är du säker på att du vill radera alla valda radion?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1088
 msgid "Edit a WebRadio"
-msgstr ""
+msgstr "Redigera en webbradio"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr ""
+msgstr "Lyssna på en webbradio"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
-msgstr ""
+msgstr "Sök en artist på Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
-msgstr ""
+msgstr "Wikipedia tillägg - inställningar"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
-msgstr ""
+msgstr "Wikipedia språk :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr ""
+msgstr "Ett tillägg för att söka artister på wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Längd"
+msgstr "Wikipedia"
 
 #, fuzzy
 #~ msgid ""

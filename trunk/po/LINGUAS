@@ -2,17 +2,21 @@
 #
 # please keep this list sorted alphabetically
 #
+ar
 ca
 cs
+da
 de
 en_GB
 es
+fi
 fr
 ga
 he
 hu
 id
 it
+nb
 nl
 pl
 pt
@@ -20,3 +24,6 @@ pt_BR
 ro
 ru
 sv
+th
+tr
+zh_CN

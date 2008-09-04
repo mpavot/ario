@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-06-02 12:35+0000\n"
-"Last-Translator: Dmitry  DeXPeriX  Hrabrov <Unknown>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-06-14 09:55+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -734,6 +734,12 @@ msgstr ""
 "  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Nick https://launchpad.net/~homolibere\n"
+"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Nick https://launchpad.net/~homolibere\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
 #: ../src/shell/ario-shell.c:1099
@@ -1149,15 +1155,6 @@ msgstr "Плагин для поиска текущего артиста на wi
 msgid "Wikipedia"
 msgstr "Википедия"
 
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Продолжительность"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "Вы действительно хотите удалить все обложки выбранных альбомов?"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 для 'играть/пауза', 1 для 'играть следующую песню', 2 для 'ничего не "
@@ -1329,3 +1326,8 @@ msgstr "Википедия"
 
 #~ msgid "Window"
 #~ msgstr "Окно"
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr "Вы действительно хотите удалить все обложки выбранных альбомов?"
