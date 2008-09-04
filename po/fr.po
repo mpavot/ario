@@ -10,13 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-06-14 11:12+0200\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-09-04 18:03+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -37,7 +39,7 @@ msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
-msgstr "Trier les albums:"
+msgstr "Trier les albums: "
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -200,7 +202,7 @@ msgstr "Aller à la chanson en cours quand une nouvelle chanson est jouée"
 
 #: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
-msgstr "Cacher la fenêtre lorsque l'on appuye sur le bouton quitter"
+msgstr "Cacher la fenêtre lorsque la fenêtre est fermée"
 
 #: ../data/glade/interface-prefs.glade.h:10
 #: ../src/shell/ario-shell-preferences.c:197
@@ -236,7 +238,7 @@ msgstr "Piste"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 msgid "Lyrics Sources"
-msgstr "Sources de paroles"
+msgstr "Sources des paroles"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 msgid "Title :"
@@ -735,7 +737,14 @@ msgstr ""
 "  Isildur37 https://launchpad.net/~tiifal\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Olotiar https://launchpad.net/~floriandenis"
+"  Olotiar https://launchpad.net/~floriandenis\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Isildur37 https://launchpad.net/~tiifal\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
+"  Olotiar https://launchpad.net/~floriandenis\n"
+"  dommy9111 https://launchpad.net/~bossboss9111"
 
 #: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
@@ -1004,7 +1013,7 @@ msgstr "Mise à jour du client requise"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Track submission failed"
-msgstr "La soumission du morceau a échoué"
+msgstr "La soumission de la piste a échoué"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1379
 msgid "Queue is too long"
@@ -1052,7 +1061,7 @@ msgstr "Morceaux soumis:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
 msgid "Username :"
-msgstr "Utilisateur:"
+msgstr "Nom d'utilisateur :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1150,10 +1159,6 @@ msgstr "Un plugin pour chercher l'artiste en cours sur Wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipédia"
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Durée"
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

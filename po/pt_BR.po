@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-06-08 17:14+0000\n"
-"Last-Translator: Wesley Soares <Unknown>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-08-08 00:42+0000\n"
+"Last-Translator: Tydor <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -135,10 +135,10 @@ msgid ""
 "server thanks to the automatic configuration, you should check that zeroconf "
 "is activated in your MPD configuration or use the manual configuration."
 msgstr ""
-"Você precisa especificar um servidor MPD para conectar. Se, graças a "
-"configuração automática, você não consegue ver seu servidor MPD, você deve "
-"verificar se o zeroconf está ativado em sua configuração MPD - ou então use "
-"a configuração manual."
+"Você precisa especificar um servidor MPD para se conectar. Se graças a "
+"configuração automática você não consegue ver seu servidor MPD, você deve "
+"verificar se o zeroconf está ativado em sua configuração MPD, ou então use a "
+"configuração manual."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -186,7 +186,7 @@ msgstr "Artista"
 #: ../src/widgets/ario-playlist.c:367
 #, fuzzy
 msgid "Date"
-msgstr "Banco de dados"
+msgstr "Data"
 
 #: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:367
 msgid "Duration"
@@ -221,7 +221,7 @@ msgstr "Interface"
 #: ../data/glade/interface-prefs.glade.h:11
 #: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:215
 msgid "Playlist"
-msgstr "Lista de Reprodução"
+msgstr "Lista de reprodução"
 
 #: ../data/glade/interface-prefs.glade.h:12
 #, fuzzy
@@ -391,8 +391,9 @@ msgid "Track :"
 msgstr "Faixa :"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
+#, fuzzy
 msgid "Notification"
-msgstr ""
+msgstr "Confirmação"
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
@@ -411,7 +412,7 @@ msgstr "Ao clique do botão do meio na área de notificação"
 #: ../src/shell/ario-shell-preferences.c:202
 #, fuzzy
 msgid "Tray icon"
-msgstr "Tray icon"
+msgstr "àrea de notificação"
 
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
@@ -448,7 +449,7 @@ msgstr "Conectando ao servidor MPD ..."
 
 #: ../src/ario-mpd.c:697
 msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Impossível de conectar ao mpd. Verifique as opções de conexão."
+msgstr "Impossível se conectar ao mpd. Verifique as opções de conexão."
 
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1258
@@ -532,7 +533,6 @@ msgid "Server autodetection"
 msgstr "Auto-detecção do servidor"
 
 #: ../src/preferences/ario-connection-preferences.c:615
-#, fuzzy
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -553,7 +553,7 @@ msgstr "Nome"
 #: ../src/preferences/ario-connection-preferences.c:633
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
-msgstr "Computador"
+msgstr "servidor"
 
 #: ../src/preferences/ario-connection-preferences.c:641
 #: ../src/widgets/ario-firstlaunch.c:323
@@ -714,39 +714,39 @@ msgstr "Preferê_ncias"
 
 #: ../src/shell/ario-shell.c:183
 msgid "_Change current album cover"
-msgstr ""
+msgstr "_Mudar a capa atual do album"
 
 #: ../src/shell/ario-shell.c:186
 msgid "Download album _covers"
-msgstr ""
+msgstr "Baixar capas de album"
 
 #: ../src/shell/ario-shell.c:189
 msgid "Find similar artists"
-msgstr ""
+msgstr "Procurar artistas similares"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Add similar songs to playlist"
-msgstr ""
+msgstr "Adicionar músicas similares à lista de execução"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
-msgstr ""
+msgstr "Mostrar _letras"
 
 #: ../src/shell/ario-shell.c:201
 msgid "_Translate this application..."
-msgstr ""
+msgstr "_Traduza esta aplicação"
 
 #: ../src/shell/ario-shell.c:209
 msgid "S_tatusbar"
-msgstr ""
+msgstr "Barra de _Status"
 
 #: ../src/shell/ario-shell.c:212
 msgid "Upper part"
-msgstr ""
+msgstr "Parte de cima"
 
 #: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
-msgstr ""
+msgstr "Cliente GTK para MPD"
 
 #: ../src/shell/ario-shell.c:763
 msgid "translator-credits"
@@ -757,419 +757,431 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Wesley Soares https://launchpad.net/~wesley.soares\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Marcos https://launchpad.net/~marcosfsimon\n"
+"  Rafael Porto Rodrigues https://launchpad.net/~rafporto\n"
+"  Tydor https://launchpad.net/~eduardo-tydor\n"
 "  Wesley Soares https://launchpad.net/~wesley.soares"
 
 #: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
-msgstr ""
+msgstr "Configurar Plugins"
 
 #: ../src/shell/ario-shell-coverdownloader.c:277
 msgid "Music Player Cover Download"
-msgstr ""
+msgstr "Baixador de Capas do Tocador de Musica"
 
 #: ../src/shell/ario-shell-coverdownloader.c:419
 msgid "Download Finished!"
-msgstr ""
+msgstr "Download finalizado!"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:422
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%i covers found\n"
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
+"%i capas encontradas\n"
+"%i capas não encontradas\n"
+"%i capas já existentes"
 
 #: ../src/shell/ario-shell-coverselect.c:279
 msgid "Cover Download"
-msgstr ""
+msgstr "Download de Capa"
 
 #: ../src/shell/ario-shell-coverselect.c:591
 msgid "Error reading file"
-msgstr ""
+msgstr "Erro ao ler arquivo"
 
 #: ../src/shell/ario-shell-coverselect.c:614
 msgid "Error saving file"
-msgstr ""
+msgstr "Erro ao salvar o arquivo"
 
 #: ../src/shell/ario-shell-lyrics.c:53
 #: ../src/shell/ario-shell-preferences.c:192
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
-msgstr ""
+msgstr "Letras"
 
 #: ../src/shell/ario-shell-lyricsselect.c:196
 msgid "Lyrics Download"
-msgstr ""
+msgstr "Download de letras"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
 msgid "Source"
-msgstr ""
+msgstr "Fonte"
 
 #: ../src/shell/ario-shell-preferences.c:142
 msgid "Ario Preferences"
-msgstr ""
+msgstr "Preferncias do Ario"
 
 #: ../src/shell/ario-shell-preferences.c:177
 msgid "Server"
-msgstr ""
+msgstr "Servidor"
 
 #: ../src/shell/ario-shell-similarartists.c:350
 #, c-format
 msgid "%d songs"
-msgstr ""
+msgstr "%d músicas"
 
 #: ../src/shell/ario-shell-similarartists.c:412
 msgid "Image"
-msgstr ""
+msgstr "Imagem"
 
 #: ../src/shell/ario-shell-similarartists.c:430
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
-msgstr ""
+msgstr "Músicas"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
 #: ../src/shell/ario-shell-songinfos.c:412
 msgid "Song Properties"
-msgstr ""
+msgstr "Propriedades da Música"
 
 #: ../src/widgets/ario-firstlaunch.c:208
 msgid "The following configuration will be used:"
-msgstr ""
+msgstr "A seguinte configuração será utilizada:"
 
 #: ../src/widgets/ario-firstlaunch.c:273
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
+"Esta é a primeira vez que você usa o Ario.\n"
+"Este assistente o ajudará a configurá-lo."
 
 #: ../src/widgets/ario-firstlaunch.c:278
 msgid "Welcome to Ario"
-msgstr ""
+msgstr "Bem vindo ao Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:341
 msgid "Configuration"
-msgstr ""
+msgstr "Configuração"
 
 #: ../src/widgets/ario-firstlaunch.c:353
 msgid "Confirmation"
-msgstr ""
+msgstr "Confirmação"
 
 #: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.c:40
 #: ../src/widgets/ario-status-icon.c:34
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr ""
+msgstr "<i>de</i> %s <i>por</i> %s"
 
 #: ../src/widgets/ario-header.c:255
 msgid "Play previous song"
-msgstr ""
+msgstr "Tocar música anterior"
 
 #: ../src/widgets/ario-header.c:274
 msgid "Play/Pause the music"
-msgstr ""
+msgstr "Tocar/Pausar a música"
 
 #: ../src/widgets/ario-header.c:285
 msgid "Stop the music"
-msgstr ""
+msgstr "Parar a musica"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
 msgid " of "
-msgstr ""
+msgstr " de "
 
 #: ../src/widgets/ario-header.c:400
 msgid "Toggle random on/off"
-msgstr ""
+msgstr "Ligar/Desligar modo aleatório"
 
 #: ../src/widgets/ario-header.c:411
 msgid "Toggle repeat on/off"
-msgstr ""
+msgstr "Ligar/Desligar repetiçao"
 
 #: ../src/widgets/ario-header.c:521
 msgid "Change the music volume"
-msgstr ""
+msgstr "Alterar o volume"
 
 #: ../src/widgets/ario-lyrics-editor.c:299
 msgid "Downloading lyrics..."
-msgstr ""
+msgstr "Baixando letras..."
 
 #: ../src/widgets/ario-lyrics-editor.c:316
 msgid "Lyrics not found"
-msgstr ""
+msgstr "Letras não encontradas"
 
 #: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
-msgstr ""
+msgstr "_Limpar"
 
 #: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
-msgstr ""
+msgstr "_Remover"
 
 #: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
-msgstr ""
+msgstr "_Salvar"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
-msgstr ""
+msgstr "_Vá para a canção em execução"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1362
 msgid "Save playlist"
-msgstr ""
+msgstr "Salvar lista de execução"
 
 #: ../src/widgets/ario-playlist.c:1372
 msgid "Playlist name :"
-msgstr ""
+msgstr "Nome da lista de execução :"
 
 #: ../src/widgets/ario-playlist.c:1397
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr ""
+msgstr "A lista de execução já existe. Deeja sobreescrevê-la?"
 
 #: ../src/widgets/ario-tray-icon.c:39 ../src/widgets/ario-status-icon.c:33
 msgid "Not playing"
-msgstr ""
+msgstr "Parado"
 
 #: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:87
 msgid "_Play"
-msgstr ""
+msgstr "_Tocar"
 
 #: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:90
 msgid "_Pause"
-msgstr ""
+msgstr "_Pausar"
 
 #: ../src/widgets/ario-tray-icon.c:139 ../src/widgets/ario-status-icon.c:93
 msgid "_Stop"
-msgstr ""
+msgstr "_Parar"
 
 #: ../src/widgets/ario-tray-icon.c:142 ../src/widgets/ario-status-icon.c:96
 msgid "_Next"
-msgstr ""
+msgstr "_Próxima"
 
 #: ../src/widgets/ario-tray-icon.c:145 ../src/widgets/ario-status-icon.c:99
 msgid "P_revious"
-msgstr ""
+msgstr "A_nterior"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1202
 msgid "Today %I:%M %p"
-msgstr ""
+msgstr "Hoje %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1215
 msgid "Yesterday %I:%M %p"
-msgstr ""
+msgstr "Ontem %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1231
 msgid "%a %I:%M %p"
-msgstr ""
+msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1243
 msgid "%b %d %I:%M %p"
-msgstr ""
+msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1248
 msgid "%b %d %Y"
-msgstr ""
+msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1355
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1358
 msgid "Logging in"
-msgstr ""
+msgstr "Logando"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1361
 msgid "Request failed"
-msgstr ""
+msgstr "Requisição falhou"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1364
 msgid "Incorrect username"
-msgstr ""
+msgstr "Nome de usuário incorreto"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1367
 msgid "Incorrect password"
-msgstr ""
+msgstr "Senha incorreta"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1370
 msgid "Handshake failed"
-msgstr ""
+msgstr "Falha no protocolo de cumprimento (handshake)"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1373
 msgid "Client update required"
-msgstr ""
+msgstr "Atualização de cliente requerida"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Track submission failed"
-msgstr ""
+msgstr "Envio da faixa falhou"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1379
 msgid "Queue is too long"
-msgstr ""
+msgstr "A fila é muito grande"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1382
 msgid "Track submission failed too many times"
-msgstr ""
+msgstr "O envio da música falhou muitas vezes"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1434
 msgid "Audioscrobbler preferences"
-msgstr ""
+msgstr "Preferências do Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
 msgid "Check Last.fm server status at"
-msgstr ""
+msgstr "Verifique o status do servidor Last.fm em"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
 msgid "Disabled"
-msgstr ""
+msgstr "Desabilitado"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
 msgid "Find out about Last.fm at "
-msgstr ""
+msgstr "Se informe sobre o Last.fm em "
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
 msgid "Last submission time:"
-msgstr ""
+msgstr "Último envio em:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
 msgid "Last.fm Profile"
-msgstr ""
+msgstr "Perfil no Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
-msgstr ""
+msgstr "Faixas na fila:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
 msgid "Tracks submitted:"
-msgstr ""
+msgstr "Faixas enviadas:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
 msgid "Username :"
-msgstr ""
+msgstr "Nome de usuário :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
-msgstr ""
+msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr ""
+msgstr "Submeta informações de música para last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:189
 msgid "File System"
-msgstr ""
+msgstr "Arquivo: %s"
 
 #: ../plugins/filesystem/ario-filesystem.c:497
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr ""
+msgstr "Um Navegador de Sistema de Arquivo"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr ""
+msgstr "Navegador de Sistema de Arquivo"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr ""
+msgstr "Acrescentar suporte de chave de multimidia"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr ""
+msgstr "Chave de Multimidia"
 
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add a _new radio"
-msgstr ""
+msgstr "Acrescente uma nova rádio"
 
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Delete this radios"
-msgstr ""
+msgstr "_Apague esta rádio"
 
 #: ../plugins/radios/ario-radio.c:189
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr ""
+msgstr "Rádios da Web"
 
 #: ../plugins/radios/ario-radio.c:265
 msgid "Internet Radios"
-msgstr ""
+msgstr "Rádios da Internet"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:889
 msgid "Add a WebRadio"
-msgstr ""
+msgstr "Acrescente uma WebRadio"
 
 #: ../plugins/radios/ario-radio.c:900 ../plugins/radios/ario-radio.c:1099
 msgid "URL :"
-msgstr ""
+msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:954 ../plugins/radios/ario-radio.c:1154
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
+"Parâmetros incorretos. Você deve informar um nome e uma URL para rádio."
 
 #: ../plugins/radios/ario-radio.c:1016
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr ""
+msgstr "Você tem certeza que deseja apagar as rádios selecionadas?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1088
 msgid "Edit a WebRadio"
-msgstr ""
+msgstr "Edite uma WebRadio"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr ""
+msgstr "Ouça as webradios"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
-msgstr ""
+msgstr "Encontrar artista na Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
-msgstr ""
+msgstr "Plugin da Wikipedia - Configuração"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
-msgstr ""
+msgstr "Idioma da Wikipedia :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr ""
+msgstr "Um plugin para encontrar o artista atual na Wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr ""
+msgstr "Wikipédia"
 
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Duração"
+#~ msgid "Tabs"
+#~ msgstr "Abas"
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "
@@ -1177,6 +1189,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Você tem certeza que deseja remover todas as capas dos álbuns "
 #~ "selecionados?"
-
-#~ msgid "Tabs"
-#~ msgstr "Abas"

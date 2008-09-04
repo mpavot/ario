@@ -7,27 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:00+0200\n"
-"PO-Revision-Date: 2008-05-18 21:37+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"PO-Revision-Date: 2008-08-31 12:19+0000\n"
+"Last-Translator: Muhammad Zulfikar <muhzulfikar@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-06-14 08:52+0000\n"
+"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr ""
+msgstr "pemutar lagu Ario"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
 msgstr "Aplikasi klien pada mpd"
 
 #: ../data/glade/browser-prefs.glade.h:1
+#, fuzzy
 msgid "Library Options"
-msgstr ""
+msgstr "Pustaka"
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
@@ -39,25 +40,25 @@ msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "mendownload secara otomatis sampul album dari lagu yang sedang diputar"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:291
 #: ../src/shell/ario-shell-preferences.c:187
 msgid "Covers"
-msgstr ""
+msgstr "sampul"
 
 #: ../data/glade/cover-prefs.glade.h:3
 msgid "Covers Sources"
-msgstr ""
+msgstr "sumber sampul"
 
 #: ../data/glade/cover-prefs.glade.h:4
 msgid "Show the covers in the albums list"
-msgstr ""
+msgstr "tunjukkan sampul pada daftar album"
 
 #: ../data/glade/cover-prefs.glade.h:5
 msgid "Use Amazon."
-msgstr ""
+msgstr "menggunakan amazon"
 
 #: ../data/glade/connection-prefs.glade.h:1
 msgid "Auto detect"
@@ -66,22 +67,22 @@ msgstr "Deteksi otomatis"
 #: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:172
 msgid "Connection"
-msgstr ""
+msgstr "Sambungan"
 
 #: ../data/glade/connection-prefs.glade.h:3
 #: ../src/widgets/ario-firstlaunch.c:163
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
 #: ../src/widgets/ario-firstlaunch.c:209
 msgid "Host :"
-msgstr ""
+msgstr "tuan rumah"
 
 #: ../data/glade/connection-prefs.glade.h:5
 msgid "Music directory :"
-msgstr ""
+msgstr "Direktori Musik:"
 
 #: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:899
 #: ../plugins/radios/ario-radio.c:1098
@@ -91,29 +92,29 @@ msgstr "Nama :"
 #: ../data/glade/connection-prefs.glade.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
 msgid "Password :"
-msgstr ""
+msgstr "Kata sandi :"
 
 #: ../data/glade/connection-prefs.glade.h:8
 #: ../data/glade/connection-assistant.glade.h:4
 #: ../src/widgets/ario-firstlaunch.c:211
 msgid "Port :"
-msgstr ""
+msgstr "Port :"
 
 #: ../data/glade/connection-prefs.glade.h:9
 msgid "_Autoconnect on startup"
-msgstr ""
+msgstr "Sambung otomatis ketika mulai"
 
 #: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:168
 msgid "_Connect"
-msgstr ""
+msgstr "_Sambungkan"
 
 #: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:171
 msgid "_Disconnect"
-msgstr ""
+msgstr "_Putuskan-koneksi"
 
 #: ../data/glade/connection-assistant.glade.h:1
 msgid "Automatic configuration"
-msgstr ""
+msgstr "Konfigurasi otomatis"
 
 #: ../data/glade/connection-assistant.glade.h:3
 msgid "Manual configuration"
@@ -151,14 +152,14 @@ msgstr "Pencarian lokal"
 
 #: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:146
 msgid "Search"
-msgstr ""
+msgstr "Cari"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:151
 #: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:367
 #: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:383
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Allow only one instance of Ario"
@@ -170,28 +171,28 @@ msgstr ""
 #: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
 #: ../src/widgets/ario-status-icon.c:381
 msgid "Artist"
-msgstr ""
+msgstr "Artis"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
 #: ../src/widgets/ario-playlist.c:367
 msgid "Date"
-msgstr ""
+msgstr "Tanggal"
 
 #: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:367
 msgid "Duration"
-msgstr ""
+msgstr "Durasi"
 
 #: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:367
 msgid "File"
-msgstr ""
+msgstr "Berkas"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
 #: ../src/widgets/ario-playlist.c:367
 msgid "Genre"
-msgstr ""
+msgstr "Aliran"
 
 #: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
@@ -209,11 +210,11 @@ msgstr ""
 #: ../data/glade/interface-prefs.glade.h:11
 #: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:215
 msgid "Playlist"
-msgstr ""
+msgstr "Daftar lagu"
 
 #: ../data/glade/interface-prefs.glade.h:12
 msgid "Show rows:"
-msgstr ""
+msgstr "Tampilkan baris:"
 
 #: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
@@ -225,18 +226,18 @@ msgstr ""
 #: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:256
 #: ../src/widgets/ario-status-icon.c:385
 msgid "Title"
-msgstr ""
+msgstr "Judul"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:153
 #: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:367
 msgid "Track"
-msgstr ""
+msgstr "Trek"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 #, fuzzy
 msgid "Lyrics Sources"
-msgstr "lirik tak ditemukan"
+msgstr "Sumber lirik"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 msgid "Title :"
@@ -245,11 +246,11 @@ msgstr "Judul :"
 #: ../data/glade/proxy-prefs.glade.h:1
 #: ../src/shell/ario-shell-preferences.c:207
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ../data/glade/proxy-prefs.glade.h:2
 msgid "Proxy Address :"
-msgstr ""
+msgstr "Alamat Proxy :"
 
 #: ../data/glade/proxy-prefs.glade.h:3
 msgid "Proxy Port :"
@@ -257,7 +258,7 @@ msgstr ""
 
 #: ../data/glade/proxy-prefs.glade.h:4
 msgid "Use a proxy"
-msgstr "gunakan sebuah proxy"
+msgstr "Menggunakan proxy"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
@@ -269,19 +270,19 @@ msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:3
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: ../data/glade/server-prefs.glade.h:4
 msgid "Last updated:"
-msgstr ""
+msgstr "Pembaruan terakhir"
 
 #: ../data/glade/server-prefs.glade.h:5
 msgid "_Update"
-msgstr ""
+msgstr "_Pembaruan"
 
 #: ../data/glade/server-prefs.glade.h:6
 msgid "enable crossfade"
-msgstr ""
+msgstr "aktifkan menghilang silang"
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "fade time (s):"
@@ -291,23 +292,23 @@ msgstr "waktu pudar"
 #: ../src/ario-util.c:48 ../src/ario-util.c:70
 #, c-format
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 #: ../data/glade/similar-artists.glade.h:1
 msgid "Add all to playlist"
-msgstr ""
+msgstr "tambahkan semua ke daftar main"
 
 #: ../data/glade/similar-artists.glade.h:2
 msgid "Add to playlist"
-msgstr ""
+msgstr "tambahkan ke daftar main"
 
 #: ../data/glade/similar-artists.glade.h:3
 msgid "Find on Last.fm"
-msgstr ""
+msgstr "Cari di Last.fm"
 
 #: ../data/glade/stats-prefs.glade.h:1
 msgid "Database play time :"
-msgstr ""
+msgstr "database waktu putar lagu"
 
 #: ../data/glade/stats-prefs.glade.h:2
 msgid "Number of albums :"
@@ -323,12 +324,12 @@ msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:5
 msgid "Play time :"
-msgstr ""
+msgstr "Waktu memutar :"
 
 #: ../data/glade/stats-prefs.glade.h:6
 #: ../src/shell/ario-shell-preferences.c:212
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 #: ../data/glade/stats-prefs.glade.h:7
 msgid "Uptime :"
@@ -336,7 +337,7 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:3
 msgid "Comment :"
-msgstr ""
+msgstr "Komentar"
 
 #: ../data/glade/song-infos.glade.h:4
 msgid "Composer :"
@@ -344,7 +345,7 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:5
 msgid "Date :"
-msgstr ""
+msgstr "Tanggal"
 
 #: ../data/glade/song-infos.glade.h:6
 msgid "Disc :"
@@ -352,15 +353,15 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:7
 msgid "Filename :"
-msgstr ""
+msgstr "Nama berkas :"
 
 #: ../data/glade/song-infos.glade.h:8
 msgid "Genre :"
-msgstr ""
+msgstr "Aliran :"
 
 #: ../data/glade/song-infos.glade.h:9
 msgid "Length :"
-msgstr ""
+msgstr "Panjang :"
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
@@ -368,16 +369,16 @@ msgstr ""
 
 #: ../data/glade/song-infos.glade.h:11
 msgid "Song"
-msgstr ""
+msgstr "Lagu"
 
 #: ../data/glade/song-infos.glade.h:13
 msgid "Track :"
-msgstr ""
+msgstr "Trek"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
 #, fuzzy
 msgid "Notification"
-msgstr "Persetujuan"
+msgstr "Konfirmasi"
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
@@ -403,8 +404,9 @@ msgstr ""
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/ario-mpd.c:157
+#, fuzzy
 msgid "Composer"
-msgstr ""
+msgstr "Sampul"
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/ario-mpd.c:158
@@ -416,16 +418,16 @@ msgstr ""
 #. MPD_TAG_ITEM_DISC
 #: ../src/ario-mpd.c:161
 msgid "Filename"
-msgstr ""
+msgstr "Nama berkas"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/ario-mpd.c:162
 msgid "Any"
-msgstr ""
+msgstr "Apapun"
 
 #: ../src/ario-mpd.c:672
 msgid "Connecting to MPD server..."
-msgstr ""
+msgstr "Menghubungkan ke server MPD"
 
 #: ../src/ario-mpd.c:697
 msgid "Impossible to connect to mpd. Check the connection options."
@@ -434,23 +436,23 @@ msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
 #. impossible time or broken locale settings
 #: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1258
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak diketahui"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
-msgstr ""
+msgstr "detik"
 
 #: ../src/ario-util.c:84
 msgid "minutes"
-msgstr ""
+msgstr "menit"
 
 #: ../src/ario-util.c:92
 msgid "hours"
-msgstr ""
+msgstr "jam"
 
 #: ../src/ario-util.c:100
 msgid "days"
-msgstr ""
+msgstr "hari"
 
 #: ../src/covers/ario-cover.c:159
 msgid "The cover already exists. Do you want to replace it?"
@@ -458,46 +460,46 @@ msgstr "Sampul telah ada. Ingin menggantinya?"
 
 #: ../src/covers/ario-cover-local.c:95
 msgid "Music Directory"
-msgstr ""
+msgstr "Direktori musik :"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:194
 #: ../src/preferences/ario-lyrics-preferences.c:145
 #: ../src/preferences/ario-server-preferences.c:205
 msgid "Enabled"
-msgstr ""
+msgstr "Diaktifkan"
 
 #: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:198
 msgid "_About"
-msgstr ""
+msgstr "_Tentang"
 
 #: ../src/plugins/ario-plugin-manager.c:518
 msgid "C_onfigure"
-msgstr ""
+msgstr "K_onfigurasi"
 
 #: ../src/plugins/ario-plugin-manager.c:527
 msgid "A_ctivate"
-msgstr ""
+msgstr "A_ktivasi"
 
 #: ../src/plugins/ario-plugin-manager.c:538
 msgid "Ac_tivate All"
-msgstr ""
+msgstr "Ak_tivasi Semua"
 
 #: ../src/plugins/ario-plugin-manager.c:543
 msgid "_Deactivate All"
-msgstr ""
+msgstr "_Matikan Semua"
 
 #: ../src/plugins/ario-plugin-manager.c:752
 msgid "Active plugins"
-msgstr ""
+msgstr "Plugin aktif"
 
 #: ../src/preferences/ario-browser-preferences.c:48
 msgid "Alphabetically"
-msgstr ""
+msgstr "Secara Abjad"
 
 #. SORT_ALPHABETICALLY
 #: ../src/preferences/ario-browser-preferences.c:49
@@ -506,7 +508,7 @@ msgstr ""
 
 #: ../src/preferences/ario-connection-preferences.c:357
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: ../src/preferences/ario-connection-preferences.c:604
 msgid "Server autodetection"
@@ -525,25 +527,25 @@ msgstr ""
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: ../src/preferences/ario-connection-preferences.c:633
 #: ../src/widgets/ario-firstlaunch.c:315
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 #: ../src/preferences/ario-connection-preferences.c:641
 #: ../src/widgets/ario-firstlaunch.c:323
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
-msgstr ""
+msgstr "Anda harus memilih server"
 
 #: ../src/preferences/ario-connection-preferences.c:750
 msgid "New Profile"
-msgstr ""
+msgstr "Profil Baru"
 
 #: ../src/preferences/ario-server-preferences.c:313
 #: ../src/preferences/ario-stats-preferences.c:267
@@ -553,29 +555,28 @@ msgstr ""
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
 msgid "Not connected"
-msgstr ""
+msgstr "Tidak tersambung"
 
 #: ../src/preferences/ario-server-preferences.c:318
 #: ../src/preferences/ario-server-preferences.c:406
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
-msgstr ""
+msgstr "Memperbarui..."
 
 #: ../src/preferences/ario-trayicon-preferences.c:48
-#, fuzzy
 msgid "Play/Pause"
-msgstr "_Berhenti"
+msgstr "Mainkan/Jeda"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
 #: ../src/widgets/ario-header.c:296
 msgid "Play next song"
-msgstr ""
+msgstr "Putar lagu berikutnya"
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-trayicon-preferences.c:50
 msgid "Do nothing"
-msgstr ""
+msgstr "Tak ada yang dilakukan"
 
 #: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:83
 #: ../src/sources/ario-storedplaylists.c:103
@@ -593,7 +594,7 @@ msgstr ""
 #: ../plugins/filesystem/ario-filesystem.c:120
 #: ../plugins/radios/ario-radio.c:116
 msgid "Add and _play"
-msgstr ""
+msgstr "Tambah dan _mainkan"
 
 #: ../src/sources/ario-browser.c:89
 #, fuzzy
@@ -610,15 +611,15 @@ msgstr "Hapus sampul"
 #: ../plugins/filesystem/ario-filesystem.c:123
 #: ../plugins/radios/ario-radio.c:125
 msgid "_Properties"
-msgstr ""
+msgstr "_Properti"
 
 #: ../src/sources/ario-browser.c:151 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
-msgstr ""
+msgstr "Pustaka"
 
 #: ../src/sources/ario-search.c:233
 msgid "Add a search criteria"
-msgstr ""
+msgstr "Tambah kriteria pencarian"
 
 #: ../src/sources/ario-search.c:240
 msgid "Search songs in the library"
@@ -626,15 +627,15 @@ msgstr ""
 
 #: ../src/sources/ario-search.c:443
 msgid "Remove a search criteria"
-msgstr ""
+msgstr "Hapus kriteria pencarian"
 
 #: ../src/sources/ario-storedplaylists.c:109
 msgid "_Delete"
-msgstr ""
+msgstr "_Hapus"
 
 #: ../src/sources/ario-storedplaylists.c:186
 msgid "Playlists"
-msgstr ""
+msgstr "Daftar Lagu"
 
 #: ../src/sources/ario-storedplaylists.c:645
 msgid "Are you sure that you want to delete all the selected playlists?"
@@ -643,7 +644,7 @@ msgstr "Apakah anda yakin ingin menghapus semua daftar main?"
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-tree.c:438
 msgid "Cover"
-msgstr ""
+msgstr "Sampul"
 
 #: ../src/sources/ario-tree.c:1245
 #, fuzzy
@@ -652,15 +653,15 @@ msgstr "Apakah anda yakin ingin menghapus semua daftar main?"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_File"
-msgstr ""
+msgstr "_Berkas"
 
 #: ../src/shell/ario-shell.c:160
 msgid "_Edit"
-msgstr ""
+msgstr "_Sunting"
 
 #: ../src/shell/ario-shell.c:161
 msgid "_View"
-msgstr ""
+msgstr "_Tampilan"
 
 #: ../src/shell/ario-shell.c:162
 msgid "_Tool"
@@ -668,7 +669,7 @@ msgstr "perkakas"
 
 #: ../src/shell/ario-shell.c:163
 msgid "_Help"
-msgstr ""
+msgstr "_Bantuan"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Save Playlist"
@@ -676,15 +677,15 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:174
 msgid "_Quit"
-msgstr ""
+msgstr "_Keluar"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Plu_gins"
-msgstr ""
+msgstr "Plu_gin"
 
 #: ../src/shell/ario-shell.c:180
 msgid "Prefere_nces"
-msgstr ""
+msgstr "Pe_ngaturan"
 
 #: ../src/shell/ario-shell.c:183
 msgid "_Change current album cover"
@@ -692,11 +693,11 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:186
 msgid "Download album _covers"
-msgstr "Donwload sampul album"
+msgstr "Unduh sampul album"
 
 #: ../src/shell/ario-shell.c:189
 msgid "Find similar artists"
-msgstr ""
+msgstr "Cari artis yang sama"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Add similar songs to playlist"
@@ -704,23 +705,23 @@ msgstr ""
 
 #: ../src/shell/ario-shell.c:195
 msgid "Show _lyrics"
-msgstr ""
+msgstr "Tampilkan _lirik"
 
 #: ../src/shell/ario-shell.c:201
 msgid "_Translate this application..."
-msgstr ""
+msgstr "_Terjemahkan aplikasi ini..."
 
 #: ../src/shell/ario-shell.c:209
 msgid "S_tatusbar"
-msgstr ""
+msgstr "Panel S_tatus"
 
 #: ../src/shell/ario-shell.c:212
 msgid "Upper part"
-msgstr ""
+msgstr "Bagian paling atas"
 
 #: ../src/shell/ario-shell.c:762
 msgid "GTK client for MPD"
-msgstr ""
+msgstr "Klien GTK untuk MPD"
 
 #: ../src/shell/ario-shell.c:763
 msgid "translator-credits"
@@ -733,11 +734,18 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Nestanet https://launchpad.net/~nesta-101106\n"
+"  reza https://launchpad.net/~edja-kun\n"
+"\n"
+"Launchpad Contributions:\n"
+"  GeeDcuteGal https://launchpad.net/~gerydcutegal\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Muhammad Zulfikar https://launchpad.net/~zulfikars\n"
+"  Nestanet https://launchpad.net/~nesta-101106\n"
 "  reza https://launchpad.net/~edja-kun"
 
 #: ../src/shell/ario-shell.c:1099
 msgid "Configure Plugins"
-msgstr ""
+msgstr "Mengkonfigurasi Plugin"
 
 #: ../src/shell/ario-shell-coverdownloader.c:277
 msgid "Music Player Cover Download"
@@ -745,7 +753,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell-coverdownloader.c:419
 msgid "Download Finished!"
-msgstr "Download selesai"
+msgstr "Pengunduhan selesai"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:422
@@ -755,61 +763,64 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
+"%i sampul ditemukan\n"
+"%i sampul not tidak ditemukan\n"
+"%i sampul sudah ada"
 
 #: ../src/shell/ario-shell-coverselect.c:279
 msgid "Cover Download"
-msgstr ""
+msgstr "Mengunduh sampul"
 
 #: ../src/shell/ario-shell-coverselect.c:591
 msgid "Error reading file"
-msgstr ""
+msgstr "Kesalahan membaca berkas"
 
 #: ../src/shell/ario-shell-coverselect.c:614
 msgid "Error saving file"
-msgstr ""
+msgstr "Kesalahan menyimpan berkas"
 
 #: ../src/shell/ario-shell-lyrics.c:53
 #: ../src/shell/ario-shell-preferences.c:192
 #: ../src/shell/ario-shell-songinfos.c:268
 msgid "Lyrics"
-msgstr ""
+msgstr "Lirik"
 
 #: ../src/shell/ario-shell-lyricsselect.c:196
 msgid "Lyrics Download"
-msgstr ""
+msgstr "Mengunduh lirik"
 
 #: ../src/shell/ario-shell-lyricsselect.c:234
 #, fuzzy
 msgid "Source"
-msgstr "lirik tak ditemukan"
+msgstr "Sumber"
 
 #: ../src/shell/ario-shell-preferences.c:142
 msgid "Ario Preferences"
-msgstr ""
+msgstr "Pengaturan Ario"
 
 #: ../src/shell/ario-shell-preferences.c:177
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: ../src/shell/ario-shell-similarartists.c:350
 #, c-format
 msgid "%d songs"
-msgstr ""
+msgstr "%d Lagu"
 
 #: ../src/shell/ario-shell-similarartists.c:412
 msgid "Image"
-msgstr ""
+msgstr "Gambar"
 
 #: ../src/shell/ario-shell-similarartists.c:430
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
-msgstr ""
+msgstr "Lagu"
 
 #: ../src/shell/ario-shell-songinfos.c:171
 #: ../src/shell/ario-shell-songinfos.c:263
 #: ../src/shell/ario-shell-songinfos.c:412
 msgid "Song Properties"
-msgstr ""
+msgstr "Keterangan Lagu"
 
 #: ../src/widgets/ario-firstlaunch.c:208
 msgid "The following configuration will be used:"
@@ -823,15 +834,15 @@ msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:278
 msgid "Welcome to Ario"
-msgstr ""
+msgstr "Selamat Datang di Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:341
 msgid "Configuration"
-msgstr ""
+msgstr "Konfigurasi"
 
 #: ../src/widgets/ario-firstlaunch.c:353
 msgid "Confirmation"
-msgstr "Persetujuan"
+msgstr "Konfirmasi"
 
 #: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.c:40
 #: ../src/widgets/ario-status-icon.c:34
@@ -841,7 +852,7 @@ msgstr ""
 
 #: ../src/widgets/ario-header.c:255
 msgid "Play previous song"
-msgstr ""
+msgstr "Putar lagu sebelumnya"
 
 #: ../src/widgets/ario-header.c:274
 msgid "Play/Pause the music"
@@ -855,7 +866,7 @@ msgstr ""
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
 msgid " of "
-msgstr ""
+msgstr " dari "
 
 #: ../src/widgets/ario-header.c:400
 msgid "Toggle random on/off"
@@ -879,15 +890,15 @@ msgstr "lirik tak ditemukan"
 
 #: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
-msgstr ""
+msgstr "_Bersih"
 
 #: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
-msgstr ""
+msgstr "_Hapus"
 
 #: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
-msgstr ""
+msgstr "_Simpan"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
@@ -896,11 +907,11 @@ msgstr ""
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1362
 msgid "Save playlist"
-msgstr ""
+msgstr "Simpan daftar lagu"
 
 #: ../src/widgets/ario-playlist.c:1372
 msgid "Playlist name :"
-msgstr ""
+msgstr "Nama daftar lagu"
 
 #: ../src/widgets/ario-playlist.c:1397
 msgid "Playlist already exists. Do you want to ovewrite it?"
@@ -908,21 +919,21 @@ msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:39 ../src/widgets/ario-status-icon.c:33
 msgid "Not playing"
-msgstr ""
+msgstr "Sedang berhenti"
 
 #: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:87
 #, fuzzy
 msgid "_Play"
-msgstr "_Main"
+msgstr "_Putar"
 
 #: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:90
 #, fuzzy
 msgid "_Pause"
-msgstr "_Berhenti"
+msgstr "_Jeda"
 
 #: ../src/widgets/ario-tray-icon.c:139 ../src/widgets/ario-status-icon.c:93
 msgid "_Stop"
-msgstr ""
+msgstr "_Berhenti"
 
 #: ../src/widgets/ario-tray-icon.c:142 ../src/widgets/ario-status-icon.c:96
 msgid "_Next"
@@ -930,26 +941,26 @@ msgstr "Selanjutnya"
 
 #: ../src/widgets/ario-tray-icon.c:145 ../src/widgets/ario-status-icon.c:99
 msgid "P_revious"
-msgstr ""
+msgstr "M_undur"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1202
 msgid "Today %I:%M %p"
-msgstr ""
+msgstr "Hari ini %H:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1215
 msgid "Yesterday %I:%M %p"
-msgstr ""
+msgstr "Kemarin %H:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1231
 msgid "%a %I:%M %p"
-msgstr ""
+msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
@@ -963,32 +974,32 @@ msgstr ""
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1248
 msgid "%b %d %Y"
-msgstr ""
+msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
-msgstr ""
+msgstr "Jangan Pernah"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1355
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1358
 msgid "Logging in"
-msgstr ""
+msgstr "Login masuk"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1361
 msgid "Request failed"
-msgstr ""
+msgstr "Permohonan gagal"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1364
 msgid "Incorrect username"
-msgstr ""
+msgstr "Nama Pengguna Tidak Cocok"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1367
 msgid "Incorrect password"
-msgstr ""
+msgstr "Kata sandi salah"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1370
 msgid "Handshake failed"
@@ -996,7 +1007,7 @@ msgstr ""
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1373
 msgid "Client update required"
-msgstr ""
+msgstr "Pembaharuan Klient Gagal"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Track submission failed"
@@ -1004,7 +1015,7 @@ msgstr ""
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1379
 msgid "Queue is too long"
-msgstr ""
+msgstr "Antrian terlalu panjang"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1382
 msgid "Track submission failed too many times"
@@ -1016,35 +1027,35 @@ msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
 msgid "Check Last.fm server status at"
-msgstr ""
+msgstr "Periksa status server Terakhir.fm pada"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
 msgid "Disabled"
-msgstr ""
+msgstr "Tidak aktif"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
 msgid "Find out about Last.fm at "
-msgstr ""
+msgstr "Cari tahu tentang Last.fm pada "
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
 msgid "Last submission time:"
-msgstr ""
+msgstr "Waktu pendaftaran terakhir:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
 msgid "Last.fm Profile"
-msgstr ""
+msgstr "Profil Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
-msgstr ""
+msgstr "Antrian Trek:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
 msgid "Status:"
-msgstr ""
+msgstr "Kondisi:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
 msgid "Tracks submitted:"
-msgstr ""
+msgstr "Trek dikirimkan:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
 #, fuzzy
@@ -1053,7 +1064,7 @@ msgstr "Nama :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
-msgstr ""
+msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
@@ -1061,11 +1072,11 @@ msgstr ""
 
 #: ../plugins/filesystem/ario-filesystem.c:189
 msgid "File System"
-msgstr ""
+msgstr "Sistem Berkas"
 
 #: ../plugins/filesystem/ario-filesystem.c:497
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
@@ -1116,7 +1127,7 @@ msgstr ""
 
 #: ../plugins/radios/ario-radio.c:1016
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr ""
+msgstr "Apakah kamu yakin untuk menghapus semua radio terpilih?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1088
@@ -1130,7 +1141,7 @@ msgstr ""
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:48
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 msgid "Find artist on Wikipedia"
-msgstr ""
+msgstr "Cari artis di Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia Plugin - Configuration"
@@ -1138,7 +1149,7 @@ msgstr ""
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:190
 msgid "Wikipedia language :"
-msgstr ""
+msgstr "Bahasa wikipedia :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
@@ -1146,7 +1157,7 @@ msgstr ""
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr ""
+msgstr "Wikipedia"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
