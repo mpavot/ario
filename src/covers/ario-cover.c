@@ -36,7 +36,7 @@ static void ario_cover_create_ario_cover_dir (void);
 gchar *
 ario_cover_make_ario_cover_path (const gchar *artist,
                                  const gchar *album,
-                                 ArioCoverHomeCoversSize ario_cover_size)
+                                 const ArioCoverHomeCoversSize ario_cover_size)
 {
         ARIO_LOG_FUNCTION_START
         char *ario_cover_path, *tmp;
@@ -108,7 +108,7 @@ ario_cover_create_ario_cover_dir (void)
 }
 
 gboolean
-ario_cover_size_is_valid (int size)
+ario_cover_size_is_valid (const int size)
 {
         ARIO_LOG_FUNCTION_START
         /* return true if the cover isn't too big or too small (blank amazon image) */
@@ -142,7 +142,7 @@ ario_cover_remove_cover (const gchar *artist,
 static gboolean
 ario_cover_can_overwrite_cover (const gchar *artist,
                                 const gchar *album,
-                                ArioCoverOverwriteMode overwrite_mode)
+                                const ArioCoverOverwriteMode overwrite_mode)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *dialog;
@@ -184,9 +184,9 @@ ario_cover_can_overwrite_cover (const gchar *artist,
 gboolean
 ario_cover_save_cover (const gchar *artist,
                        const gchar *album,
-                       char *data,
-                       int size,
-                       ArioCoverOverwriteMode overwrite_mode)
+                       const gchar *data,
+                       const int size,
+                       const ArioCoverOverwriteMode overwrite_mode)
 {
         ARIO_LOG_FUNCTION_START
         gboolean ret;

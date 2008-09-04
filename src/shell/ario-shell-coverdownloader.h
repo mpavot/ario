@@ -58,10 +58,10 @@ GType           ario_shell_coverdownloader_get_type                     (void) G
 GtkWidget *     ario_shell_coverdownloader_new                          (ArioMpd *mpd);
 
 void            ario_shell_coverdownloader_get_covers                   (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                                         ArioShellCoverdownloaderOperation operation);
+                                                                         const ArioShellCoverdownloaderOperation operation);
 void            ario_shell_coverdownloader_get_covers_from_albums       (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                                         GSList *albums,
-                                                                         ArioShellCoverdownloaderOperation operation);
+                                                                         const GSList *albums,
+                                                                         const ArioShellCoverdownloaderOperation operation);
 
 G_END_DECLS
 

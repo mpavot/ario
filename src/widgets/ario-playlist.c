@@ -60,8 +60,7 @@ static void ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                                              ArioPlaylist *playlist);
 static void ario_playlist_drag_leave_cb (GtkWidget *widget,
                                          GdkDragContext *context,
-                                         gint x,
-                                         gint y,
+                                         gint x, gint y,
                                          GtkSelectionData *data,
                                          guint info,
                                          guint time,
@@ -820,7 +819,7 @@ ario_playlist_activate_row (ArioPlaylist *playlist,
 
 static void
 ario_playlist_move_rows (ArioPlaylist *playlist,
-                         int x, int y)
+                         const int x, const int y)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreePath *path = NULL;
@@ -883,12 +882,12 @@ ario_playlist_move_rows (ArioPlaylist *playlist,
 
 static void
 ario_playlist_add_songs (ArioPlaylist *playlist,
-                         GSList *songs,
-                         gint x, gint y,
-                         gboolean play)
+                         const GSList *songs,
+                         const gint x, const gint y,
+                         const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *tmp_songs;
+        const GSList *tmp_songs;
         gint *indice;
         int end, offset = 0, drop = 0;
         GtkTreePath *path = NULL;
@@ -942,8 +941,8 @@ ario_playlist_add_songs (ArioPlaylist *playlist,
 static void
 ario_playlist_add_dir (ArioPlaylist *playlist,
                        const gchar *dir,
-                       gint x, gint y,
-                       gboolean play)
+                       const gint x, const gint y,
+                       const gboolean play)
 {
         GSList *tmp;
         ArioMpdFileList *files;
@@ -963,13 +962,14 @@ ario_playlist_add_dir (ArioPlaylist *playlist,
 
 static void
 ario_playlist_add_criterias (ArioPlaylist *playlist,
-                             GSList *criterias,
-                             gint x, gint y,
-                             gboolean play)
+                             const GSList *criterias,
+                             const gint x, const gint y,
+                             const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *filenames = NULL, *songs = NULL, *tmp_criteria, *tmp_songs;
-        ArioMpdCriteria *criteria;
+        GSList *filenames = NULL, *songs = NULL;
+        const GSList *tmp_criteria, *tmp_songs;
+        const ArioMpdCriteria *criteria;
         ArioMpdSong *mpd_song;
 
         /* For each criteria :*/
@@ -999,8 +999,8 @@ ario_playlist_add_criterias (ArioPlaylist *playlist,
 
 static void
 ario_playlist_drop_radios (ArioPlaylist *playlist,
-                           int x, int y,
-                           GtkSelectionData *data)
+                           const int x, const int y,
+                           const GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START
         gchar **radios;
@@ -1023,8 +1023,8 @@ ario_playlist_drop_radios (ArioPlaylist *playlist,
 
 static void
 ario_playlist_drop_songs (ArioPlaylist *playlist,
-                          int x, int y,
-                          GtkSelectionData *data)
+                          const int x, const int y,
+                          const GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START
         gchar **songs;
@@ -1047,8 +1047,8 @@ ario_playlist_drop_songs (ArioPlaylist *playlist,
 
 static void
 ario_playlist_drop_dir (ArioPlaylist *playlist,
-                        int x, int y,
-                        GtkSelectionData *data)
+                        const int x, const int y,
+                        const GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *dir = (const gchar *) data->data;
@@ -1060,8 +1060,8 @@ ario_playlist_drop_dir (ArioPlaylist *playlist,
 
 static void
 ario_playlist_drop_criterias (ArioPlaylist *playlist,
-                              int x, int y,
-                              GtkSelectionData *data)
+                              const int x, const int y,
+                              const GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START
         gchar **criterias_str;
@@ -1100,8 +1100,8 @@ ario_playlist_drop_criterias (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_songs (ArioPlaylist *playlist,
-                            GSList *songs,
-                            gboolean play)
+                            const GSList *songs,
+                            const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_songs (playlist, songs, -1, -1, play);
@@ -1110,11 +1110,11 @@ ario_playlist_append_songs (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_mpd_songs (ArioPlaylist *playlist,
-                                GSList *songs,
-                                gboolean play)
+                                const GSList *songs,
+                                const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *tmp;
+        const GSList *tmp;
         GSList *char_songs = NULL;
         ArioMpdSong *song;
 
@@ -1129,14 +1129,14 @@ ario_playlist_append_mpd_songs (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_artists (ArioPlaylist *playlist,
-                              GSList *artists,
-                              gboolean play)
+                              const GSList *artists,
+                              const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdAtomicCriteria *atomic_criteria;
         ArioMpdCriteria *criteria;
         GSList *criterias = NULL;
-        GSList *tmp;
+        const GSList *tmp;
 
         for (tmp = artists; tmp; tmp = g_slist_next (tmp)) {
                 criteria = NULL;
@@ -1156,8 +1156,8 @@ ario_playlist_append_artists (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_dir (ArioPlaylist *playlist,
-                          gchar *dir,
-                          gboolean play)
+                          const gchar *dir,
+                          const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_dir (playlist, dir, -1, -1, play);
@@ -1165,8 +1165,8 @@ ario_playlist_append_dir (ArioPlaylist *playlist,
 
 void
 ario_playlist_append_criterias (ArioPlaylist *playlist,
-                                GSList *criterias,
-                                gboolean play)
+                                const GSList *criterias,
+                                const gboolean play)
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_add_criterias (playlist, criterias, -1, -1, play);
@@ -1175,8 +1175,7 @@ ario_playlist_append_criterias (ArioPlaylist *playlist,
 static void
 ario_playlist_drag_leave_cb (GtkWidget *widget,
                              GdkDragContext *context,
-                             gint x,
-                             gint y,
+                             gint x, gint y,
                              GtkSelectionData *data,
                              guint info,
                              guint time,

@@ -135,7 +135,7 @@ ario_lyrics_candidate_free (ArioLyricsCandidate *candidate)
 }
 
 ArioLyricsCandidate *
-ario_lyrics_candidate_copy (ArioLyricsCandidate *candidate)
+ario_lyrics_candidate_copy (const ArioLyricsCandidate *candidate)
 {
         ArioLyricsCandidate *ret;
 

@@ -40,18 +40,18 @@ typedef enum
 
 gboolean                     ario_cover_save_cover           (const gchar *artist,
                                                               const gchar *album,
-                                                              char *data,
-                                                              int size,
-                                                              ArioCoverOverwriteMode overwrite_mode);
+                                                              const gchar *data,
+                                                              const int size,
+                                                              const ArioCoverOverwriteMode overwrite_mode);
 void                         ario_cover_remove_cover         (const gchar *artist,
                                                               const gchar *album);
-gboolean                     ario_cover_size_is_valid        (int size);
+gboolean                     ario_cover_size_is_valid        (const int size);
 
 gboolean                     ario_cover_cover_exists         (const gchar *artist,
                                                               const gchar *album);
 gchar*                       ario_cover_make_ario_cover_path (const gchar *artist,
                                                               const gchar *album,
-                                                              ArioCoverHomeCoversSize ario_cover_size);
+                                                              const ArioCoverHomeCoversSize ario_cover_size);
 
 G_END_DECLS
 
