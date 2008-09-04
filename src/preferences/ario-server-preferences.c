@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include "preferences/ario-server-preferences.h"
 #include "preferences/ario-preferences.h"
+#include "lib/ario-conf.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 
@@ -49,6 +50,10 @@ G_MODULE_EXPORT void ario_server_preferences_crossfade_changed_cb (GtkWidget *wi
                                                                    ArioServerPreferences *server_preferences);
 G_MODULE_EXPORT void ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
                                                                  ArioServerPreferences *server_preferences);
+G_MODULE_EXPORT void ario_server_preferences_update_changed_cb (GtkWidget *widget,
+                                                                ArioServerPreferences *server_preferences);
+G_MODULE_EXPORT void ario_server_preferences_stopexit_changed_cb (GtkWidget *widget,
+                                                                  ArioServerPreferences *server_preferences);
 
 
 enum
@@ -67,6 +72,9 @@ struct ArioServerPreferencesPrivate
         GtkWidget *updatedb_button;
         GtkWidget *outputs_treeview;
         GtkListStore *outputs_model;
+
+        GtkWidget *update_checkbutton;
+        GtkWidget *stopexit_checkbutton;
 
         gboolean sync_mpd;
 };
@@ -190,6 +198,10 @@ ario_server_preferences_new (ArioMpd *mpd)
                 glade_xml_get_widget (xml, "updatedb_button");
         server_preferences->priv->outputs_treeview = 
                 glade_xml_get_widget (xml, "outputs_treeview");
+        server_preferences->priv->update_checkbutton = 
+                glade_xml_get_widget (xml, "update_checkbutton");
+        server_preferences->priv->stopexit_checkbutton = 
+                glade_xml_get_widget (xml, "stopexit_checkbutton");
 
         rb_glade_boldify_label (xml, "crossfade_frame_label");
         rb_glade_boldify_label (xml, "database_frame_label");
@@ -349,6 +361,12 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         g_slist_free (outputs);
 
         server_preferences->priv->sync_mpd = FALSE;
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->update_checkbutton),
+                                      ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->stopexit_checkbutton),
+                                      ario_conf_get_boolean (PREF_STOP_EXIT, PREF_STOP_EXIT_DEFAULT));
 }
 
 static void
@@ -406,3 +424,22 @@ ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), _("Updating..."));
         ario_mpd_update_db (server_preferences->priv->mpd);
 }
+
+void
+ario_server_preferences_update_changed_cb (GtkWidget *widget,
+                                           ArioServerPreferences *server_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_UPDATE_STARTUP,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+}
+
+void
+ario_server_preferences_stopexit_changed_cb (GtkWidget *widget,
+                                             ArioServerPreferences *server_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_STOP_EXIT,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+}
+

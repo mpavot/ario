@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-04 20:20+0200\n"
+"POT-Creation-Date: 2008-09-05 00:06+0200\n"
 "PO-Revision-Date: 2008-08-17 16:50+0000\n"
 "Last-Translator: James Nealon <unknown.whisperer@gmail.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -85,8 +85,8 @@ msgstr "Host :"
 msgid "Music directory :"
 msgstr "Music directory :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:899
-#: ../plugins/radios/ario-radio.c:1098
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:913
+#: ../plugins/radios/ario-radio.c:1112
 msgid "Name :"
 msgstr "Name :"
 
@@ -149,13 +149,13 @@ msgstr "Downloading cover"
 msgid "Local search"
 msgstr "Local search"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:146
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:149
 msgid "Search"
 msgstr "Search"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:151
-#: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:367
+#: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:366
 #: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:383
 msgid "Album"
 msgstr "Album"
@@ -167,23 +167,23 @@ msgstr ""
 #: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:150
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:423
-#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:271
+#: ../src/widgets/ario-playlist.c:366 ../src/widgets/ario-songlist.c:271
 #: ../src/widgets/ario-status-icon.c:381
 msgid "Artist"
 msgstr "Artist"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
-#: ../src/widgets/ario-playlist.c:367
+#: ../src/widgets/ario-playlist.c:366
 #, fuzzy
 msgid "Date"
 msgstr "Date :"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:367
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:366
 msgid "Duration"
 msgstr "Duration"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:367
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:366
 #, fuzzy
 msgid "File"
 msgstr "_File"
@@ -191,7 +191,7 @@ msgstr "_File"
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
-#: ../src/widgets/ario-playlist.c:367
+#: ../src/widgets/ario-playlist.c:366
 #, fuzzy
 msgid "Genre"
 msgstr "Genre :"
@@ -210,7 +210,7 @@ msgid "Interface"
 msgstr "Interface"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:215
+#: ../src/sources/ario-storedplaylists.c:272 ../src/shell/ario-shell.c:215
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -226,14 +226,14 @@ msgstr "Show tabs"
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:152
 #: ../src/sources/ario-tree.c:497 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:367 ../src/widgets/ario-songlist.c:256
+#: ../src/widgets/ario-playlist.c:366 ../src/widgets/ario-songlist.c:256
 #: ../src/widgets/ario-status-icon.c:385
 msgid "Title"
 msgstr "Title"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:153
-#: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:367
+#: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:366
 msgid "Track"
 msgstr "Track"
 
@@ -279,18 +279,28 @@ msgid "Last updated:"
 msgstr "Last updated:"
 
 #: ../data/glade/server-prefs.glade.h:5
+#, fuzzy
+msgid "Stop music on exit"
+msgstr "Stop the music"
+
+#: ../data/glade/server-prefs.glade.h:6
+#, fuzzy
+msgid "Update on startup"
+msgstr "_Autoconnect on startup"
+
+#: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
 msgstr "_Update"
 
-#: ../data/glade/server-prefs.glade.h:6
+#: ../data/glade/server-prefs.glade.h:8
 msgid "enable crossfade"
 msgstr "enable crossfade"
 
-#: ../data/glade/server-prefs.glade.h:7
+#: ../data/glade/server-prefs.glade.h:9
 msgid "fade time (s):"
 msgstr "fade time (s):"
 
-#: ../data/glade/server-prefs.glade.h:8 ../data/glade/song-infos.glade.h:14
+#: ../data/glade/server-prefs.glade.h:10 ../data/glade/song-infos.glade.h:14
 #: ../src/ario-util.c:48 ../src/ario-util.c:70
 #, c-format
 msgid "n/a"
@@ -473,7 +483,7 @@ msgstr "Plug-in"
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:194
 #: ../src/preferences/ario-lyrics-preferences.c:145
-#: ../src/preferences/ario-server-preferences.c:205
+#: ../src/preferences/ario-server-preferences.c:217
 msgid "Enabled"
 msgstr "Enabled"
 
@@ -531,7 +541,7 @@ msgstr ""
 #: ../src/preferences/ario-connection-preferences.c:625
 #: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
-#: ../src/preferences/ario-server-preferences.c:216
+#: ../src/preferences/ario-server-preferences.c:228
 #: ../src/widgets/ario-firstlaunch.c:307
 msgid "Name"
 msgstr "Name"
@@ -554,7 +564,7 @@ msgstr "You must select a server."
 msgid "New Profile"
 msgstr "New Profile"
 
-#: ../src/preferences/ario-server-preferences.c:313
+#: ../src/preferences/ario-server-preferences.c:325
 #: ../src/preferences/ario-stats-preferences.c:267
 #: ../src/preferences/ario-stats-preferences.c:268
 #: ../src/preferences/ario-stats-preferences.c:269
@@ -564,8 +574,8 @@ msgstr "New Profile"
 msgid "Not connected"
 msgstr "Not connected"
 
-#: ../src/preferences/ario-server-preferences.c:318
-#: ../src/preferences/ario-server-preferences.c:406
+#: ../src/preferences/ario-server-preferences.c:330
+#: ../src/preferences/ario-server-preferences.c:424
 #: ../src/widgets/ario-status-bar.c:211
 msgid "Updating..."
 msgstr "Updating..."
@@ -585,66 +595,76 @@ msgstr "Play next song"
 msgid "Do nothing"
 msgstr "Do nothing"
 
-#: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:83
-#: ../src/sources/ario-storedplaylists.c:103
-#: ../src/sources/ario-storedplaylists.c:117
-#: ../plugins/filesystem/ario-filesystem.c:106
-#: ../plugins/filesystem/ario-filesystem.c:117
-#: ../plugins/radios/ario-radio.c:113
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:83
+#: ../src/sources/ario-storedplaylists.c:105
+#: ../src/sources/ario-storedplaylists.c:122
+#: ../plugins/filesystem/ario-filesystem.c:108
+#: ../plugins/filesystem/ario-filesystem.c:122
+#: ../plugins/radios/ario-radio.c:115
 msgid "_Add to playlist"
 msgstr "_Add to playlist"
 
-#: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:86
-#: ../src/sources/ario-storedplaylists.c:106
-#: ../src/sources/ario-storedplaylists.c:120
-#: ../plugins/filesystem/ario-filesystem.c:109
-#: ../plugins/filesystem/ario-filesystem.c:120
-#: ../plugins/radios/ario-radio.c:116
+#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:86
+#: ../src/sources/ario-storedplaylists.c:108
+#: ../src/sources/ario-storedplaylists.c:125
+#: ../plugins/filesystem/ario-filesystem.c:111
+#: ../plugins/filesystem/ario-filesystem.c:125
+#: ../plugins/radios/ario-radio.c:118
 #, fuzzy
 msgid "Add and _play"
 msgstr "_Add to playlist"
 
-#: ../src/sources/ario-browser.c:89
+#: ../src/sources/ario-browser.c:91 ../src/sources/ario-search.c:89
+#: ../src/sources/ario-storedplaylists.c:111
+#: ../src/sources/ario-storedplaylists.c:128
+#: ../plugins/filesystem/ario-filesystem.c:114
+#: ../plugins/filesystem/ario-filesystem.c:128
+#: ../plugins/radios/ario-radio.c:121
+#, fuzzy
+msgid "_Replace in playlist"
+msgstr "Save playlist"
+
+#: ../src/sources/ario-browser.c:94
 msgid "Get the covers"
 msgstr "Get the covers"
 
-#: ../src/sources/ario-browser.c:92
+#: ../src/sources/ario-browser.c:97
 msgid "_Delete the covers"
 msgstr "_Delete the covers"
 
-#: ../src/sources/ario-browser.c:95 ../src/sources/ario-browser.c:98
-#: ../src/sources/ario-search.c:89 ../src/sources/ario-storedplaylists.c:123
-#: ../src/widgets/ario-playlist.c:133
-#: ../plugins/filesystem/ario-filesystem.c:123
-#: ../plugins/radios/ario-radio.c:125
+#: ../src/sources/ario-browser.c:100 ../src/sources/ario-browser.c:103
+#: ../src/sources/ario-search.c:92 ../src/sources/ario-storedplaylists.c:131
+#: ../src/widgets/ario-playlist.c:132
+#: ../plugins/filesystem/ario-filesystem.c:131
+#: ../plugins/radios/ario-radio.c:130
 msgid "_Properties"
 msgstr "_Properties"
 
-#: ../src/sources/ario-browser.c:151 ../src/shell/ario-shell-preferences.c:182
+#: ../src/sources/ario-browser.c:156 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
 msgstr "Library"
 
-#: ../src/sources/ario-search.c:233
+#: ../src/sources/ario-search.c:236
 msgid "Add a search criteria"
 msgstr "Add a search criteria"
 
-#: ../src/sources/ario-search.c:240
+#: ../src/sources/ario-search.c:243
 msgid "Search songs in the library"
 msgstr "Search songs in the library"
 
-#: ../src/sources/ario-search.c:443
+#: ../src/sources/ario-search.c:446
 msgid "Remove a search criteria"
 msgstr "Remove a search criteria"
 
-#: ../src/sources/ario-storedplaylists.c:109
+#: ../src/sources/ario-storedplaylists.c:114
 msgid "_Delete"
 msgstr "_Delete"
 
-#: ../src/sources/ario-storedplaylists.c:186
+#: ../src/sources/ario-storedplaylists.c:194
 msgid "Playlists"
 msgstr "Playlists"
 
-#: ../src/sources/ario-storedplaylists.c:645
+#: ../src/sources/ario-storedplaylists.c:668
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Are you sure that you want to delete all the selected playlists?"
 
@@ -728,11 +748,11 @@ msgstr "S_tatusbar"
 msgid "Upper part"
 msgstr "Upper part"
 
-#: ../src/shell/ario-shell.c:762
+#: ../src/shell/ario-shell.c:774
 msgid "GTK client for MPD"
 msgstr "GTK client for MPD"
 
-#: ../src/shell/ario-shell.c:763
+#: ../src/shell/ario-shell.c:775
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -755,7 +775,7 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Oliver Laub https://launchpad.net/~oliver-laub"
 
-#: ../src/shell/ario-shell.c:1099
+#: ../src/shell/ario-shell.c:1111
 msgid "Configure Plugins"
 msgstr "Configure Plugins"
 
@@ -901,32 +921,32 @@ msgstr "Downloading lyrics..."
 msgid "Lyrics not found"
 msgstr "Lyrics not found"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:123
 msgid "_Clear"
 msgstr "_Clear"
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:126
 msgid "_Remove"
 msgstr "_Remove"
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:129
 msgid "_Save"
 msgstr "_Save"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:135
 msgid "_Go to playing song"
 msgstr "_Go to playing song"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1362
+#: ../src/widgets/ario-playlist.c:1361
 msgid "Save playlist"
 msgstr "Save playlist"
 
-#: ../src/widgets/ario-playlist.c:1372
+#: ../src/widgets/ario-playlist.c:1371
 msgid "Playlist name :"
 msgstr "Playlist name :"
 
-#: ../src/widgets/ario-playlist.c:1397
+#: ../src/widgets/ario-playlist.c:1396
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Playlist already exists. Do you want to ovewrite it?"
 
@@ -1080,11 +1100,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Submits song information to last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:189
+#: ../plugins/filesystem/ario-filesystem.c:197
 msgid "File System"
 msgstr "File System"
 
-#: ../plugins/filesystem/ario-filesystem.c:497
+#: ../plugins/filesystem/ario-filesystem.c:505
 msgid "Music"
 msgstr "Music"
 
@@ -1104,42 +1124,42 @@ msgstr "Add multimedia keys support"
 msgid "Multimedia Keys"
 msgstr "Multimedia Keys"
 
-#: ../plugins/radios/ario-radio.c:119
+#: ../plugins/radios/ario-radio.c:124
 msgid "Add a _new radio"
 msgstr "Add a _new radio"
 
-#: ../plugins/radios/ario-radio.c:122
+#: ../plugins/radios/ario-radio.c:127
 msgid "_Delete this radios"
 msgstr "_Delete this radios"
 
-#: ../plugins/radios/ario-radio.c:189
+#: ../plugins/radios/ario-radio.c:194
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Web Radios"
 
-#: ../plugins/radios/ario-radio.c:265
+#: ../plugins/radios/ario-radio.c:270
 msgid "Internet Radios"
 msgstr "Internet Radios"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:889
+#: ../plugins/radios/ario-radio.c:903
 msgid "Add a WebRadio"
 msgstr "Add a WebRadio"
 
-#: ../plugins/radios/ario-radio.c:900 ../plugins/radios/ario-radio.c:1099
+#: ../plugins/radios/ario-radio.c:914 ../plugins/radios/ario-radio.c:1113
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:954 ../plugins/radios/ario-radio.c:1154
+#: ../plugins/radios/ario-radio.c:968 ../plugins/radios/ario-radio.c:1168
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Bad parameters. You must specify a name and a URL for the radio."
 
-#: ../plugins/radios/ario-radio.c:1016
+#: ../plugins/radios/ario-radio.c:1030
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Are you sure you want to delete all the selected radios?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1088
+#: ../plugins/radios/ario-radio.c:1102
 msgid "Edit a WebRadio"
 msgstr "Edit a WebRadio"
 
