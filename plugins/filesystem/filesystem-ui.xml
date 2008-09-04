@@ -2,12 +2,14 @@
         <popup name="FilesystemPopup">
                 <menuitem name="FilesystemAddDir" action="FilesystemAddDir"/>
                 <menuitem name="FilesystemAddPlayDir" action="FilesystemAddPlayDir"/>
+                <menuitem name="FilesystemClearAddPlayDir" action="FilesystemClearAddPlayDir"/>
                 <placeholder name="FilesystemPopupPluginPlaceholder" />
         </popup>
 
         <popup name="FilesystemSongsPopup">
                 <menuitem name="FilesystemAddSongs" action="FilesystemAddSongs"/>
                 <menuitem name="FilesystemAddPlaySongs" action="FilesystemAddPlaySongs"/>
+                <menuitem name="FilesystemClearAddPlaySongs" action="FilesystemClearAddPlaySongs"/>
                 <placeholder name="FilesystemSongsPopupPluginPlaceholder" />
                 <menuitem name="FilesystemSongsProperties" action="FilesystemSongsProperties"/>
         </popup>

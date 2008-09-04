@@ -56,6 +56,8 @@ static void ario_radio_cmd_add_radios (GtkAction *action,
                                        ArioRadio *radio);
 static void ario_radio_cmd_add_play_radios (GtkAction *action,
                                             ArioRadio *radio);
+static void ario_radio_cmd_clear_add_play_radios (GtkAction *action,
+                                            ArioRadio *radio);
 static void ario_radio_cmd_new_radio (GtkAction *action,
                                       ArioRadio *radio);
 static void ario_radio_cmd_delete_radios (GtkAction *action,
@@ -69,7 +71,7 @@ static gboolean ario_radio_button_press_cb (GtkWidget *widget,
 static gboolean ario_radio_button_release_cb (GtkWidget *widget,
                                               GdkEventButton *event,
                                               ArioRadio *radio);
-static gboolean ario_radio_motion_notify (GtkWidget *widget, 
+static gboolean ario_radio_motion_notify (GtkWidget *widget,
                                           GdkEventMotion *event,
                                           ArioRadio *radio);
 
@@ -88,7 +90,7 @@ static char* ario_radio_get_xml_filename (void);
 static void ario_radio_fill_radios (ArioRadio *radio);
 
 struct ArioRadioPrivate
-{        
+{
         GtkWidget *radios;
         GtkListStore *radios_model;
         GtkTreeSelection *radios_selection;
@@ -116,6 +118,9 @@ static GtkActionEntry ario_radio_actions [] =
         { "RadioAddPlayRadios", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_add_play_radios) },
+        { "RadioClearAddPlayRadios", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_radio_cmd_clear_add_play_radios) },
         { "RadioNewRadio", GTK_STOCK_ADD, N_("Add a _new radio"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_new_radio) },
@@ -287,7 +292,7 @@ ario_radio_init (ArioRadio *radio)
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (radio->priv->radios),
-                          "drag_data_get", 
+                          "drag_data_get",
                           G_CALLBACK (ario_radio_drag_data_get_cb), radio);
 
         g_signal_connect_object (G_OBJECT (radio->priv->radios),
@@ -375,7 +380,7 @@ ario_radio_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_radio_get_property (GObject *object,
                          guint prop_id,
                          GValue *value,
@@ -675,6 +680,15 @@ ario_radio_cmd_add_play_radios (GtkAction *action,
 }
 
 static void
+ario_radio_cmd_clear_add_play_radios (GtkAction *action,
+                                      ArioRadio *radio)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_clear (radio->priv->mpd);
+        ario_radio_add_in_playlist (radio, TRUE);
+}
+
+static void
 ario_radio_popup_menu (ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
@@ -686,7 +700,7 @@ ario_radio_popup_menu (ArioRadio *radio)
                 menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupMultiple");
         }
 
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
+        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                         gtk_get_current_event_time ());
 }
 
@@ -780,7 +794,7 @@ ario_radio_button_release_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_radio_motion_notify (GtkWidget *widget, 
+ario_radio_motion_notify (GtkWidget *widget,
                           GdkEventMotion *event,
                           ArioRadio *radio)
 {
@@ -882,7 +896,7 @@ ario_radio_cmd_new_radio (GtkAction *action,
         GtkWidget *table;
         GtkWidget *label1, *label2;
         GtkWidget *entry1, *entry2;
-        gint retval = GTK_RESPONSE_CANCEL;        
+        gint retval = GTK_RESPONSE_CANCEL;
         ArioInternetRadio internet_radio;
 
         /* Create the widgets */
@@ -930,7 +944,7 @@ ario_radio_cmd_new_radio (GtkAction *action,
         gtk_table_set_col_spacing (GTK_TABLE(table),
                                    0, 4);
 
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
+        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
                            table);
         gtk_widget_show_all (dialog);
 
@@ -943,7 +957,7 @@ ario_radio_cmd_new_radio (GtkAction *action,
         internet_radio.name = (char *) gtk_entry_get_text(GTK_ENTRY(entry1));
         internet_radio.url = (char *) gtk_entry_get_text(GTK_ENTRY(entry2));
 
-        if (!internet_radio.name 
+        if (!internet_radio.name
             || !internet_radio.url
             || !strcmp(internet_radio.name, "")
             || !strcmp(internet_radio.url, "")) {
@@ -1130,7 +1144,7 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
         gtk_table_set_col_spacing (GTK_TABLE(table),
                                    0, 4);
 
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
+        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
                            table);
         gtk_widget_show_all (dialog);
 
@@ -1143,7 +1157,7 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
         new_internet_radio.name = (char *) gtk_entry_get_text(GTK_ENTRY(entry1));
         new_internet_radio.url = (char *) gtk_entry_get_text(GTK_ENTRY(entry2));
 
-        if (!new_internet_radio.name 
+        if (!new_internet_radio.name
             || !new_internet_radio.url
             || !strcmp(new_internet_radio.name, "")
             || !strcmp(new_internet_radio.url, "")) {

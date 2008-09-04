@@ -53,6 +53,8 @@ static void ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
                                                           ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
                                                                ArioStoredplaylists *storedplaylists);
+static void ario_storedplaylists_cmd_clear_add_play_storedplaylists (GtkAction *action,
+                                                                     ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
                                                              ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_popup_menu (ArioStoredplaylists *storedplaylists);
@@ -62,7 +64,7 @@ static gboolean ario_storedplaylists_button_press_cb (GtkWidget *widget,
 static gboolean ario_storedplaylists_button_release_cb (GtkWidget *widget,
                                                         GdkEventButton *event,
                                                         ArioStoredplaylists *storedplaylists);
-static gboolean ario_storedplaylists_motion_notify (GtkWidget *widget, 
+static gboolean ario_storedplaylists_motion_notify (GtkWidget *widget,
                                                     GdkEventMotion *event,
                                                     ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_playlists_selection_drag_foreach (GtkTreeModel *model,
@@ -77,7 +79,7 @@ static void ario_storedplaylists_playlists_selection_changed_cb (GtkTreeSelectio
                                                                  ArioStoredplaylists *storedplaylists);
 
 struct ArioStoredplaylistsPrivate
-{        
+{
         GtkWidget *storedplaylists;
         GtkListStore *storedplaylists_model;
         GtkTreeSelection *storedplaylists_selection;
@@ -106,6 +108,9 @@ static GtkActionEntry ario_storedplaylists_actions [] =
         { "StoredplaylistsAddPlayPlaylists", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_add_play_storedplaylists) },
+        { "StoredplaylistsClearAddPlayPlaylists", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_storedplaylists_cmd_clear_add_play_storedplaylists) },
         { "StoredplaylistsDelete", GTK_STOCK_DELETE, N_("_Delete"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_delete_storedplaylists) }
@@ -120,6 +125,9 @@ static GtkActionEntry ario_storedplaylists_songs_actions [] =
         { "StoredplaylistsAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
+        { "StoredplaylistsClearAddPlaySongs", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
         { "StoredplaylistsSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
@@ -286,7 +294,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (storedplaylists->priv->storedplaylists),
-                          "drag_data_get", 
+                          "drag_data_get",
                           G_CALLBACK (ario_storedplaylists_playlists_drag_data_get_cb), storedplaylists);
         g_signal_connect_object (G_OBJECT (storedplaylists->priv->storedplaylists),
                                  "button_press_event",
@@ -386,7 +394,7 @@ ario_storedplaylists_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_storedplaylists_get_property (GObject *object,
                                    guint prop_id,
                                    GValue *value,
@@ -431,7 +439,7 @@ ario_storedplaylists_new (GtkUIManager *mgr,
                                         "playlist", playlist,
                                         NULL);
 
-        g_return_val_if_fail (storedplaylists->priv != NULL, NULL);   
+        g_return_val_if_fail (storedplaylists->priv != NULL, NULL);
 
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
@@ -614,6 +622,13 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
 }
 
 static void
+ario_storedplaylists_clear_add_play_playlists (ArioStoredplaylists *storedplaylists)
+{
+        ario_mpd_clear(storedplaylists->priv->mpd);
+        ario_storedplaylists_add_playlists(storedplaylists, TRUE);
+}
+
+static void
 ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
                                               ArioStoredplaylists *storedplaylists)
 {
@@ -627,6 +642,14 @@ ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_storedplaylists_add_playlists (storedplaylists, TRUE);
+}
+
+static void
+ario_storedplaylists_cmd_clear_add_play_storedplaylists (GtkAction *action,
+                                                         ArioStoredplaylists *storedplaylists)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_storedplaylists_clear_add_play_playlists (storedplaylists);
 }
 
 static void
@@ -668,7 +691,7 @@ ario_storedplaylists_popup_menu (ArioStoredplaylists *storedplaylists)
         GtkWidget *menu;
 
         menu = gtk_ui_manager_get_widget (storedplaylists->priv->ui_manager, "/StoredplaylistsPopup");
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
+        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                         gtk_get_current_event_time ());
 }
 
@@ -762,7 +785,7 @@ ario_storedplaylists_button_release_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_storedplaylists_motion_notify (GtkWidget *widget, 
+ario_storedplaylists_motion_notify (GtkWidget *widget,
                                     GdkEventMotion *event,
                                     ArioStoredplaylists *storedplaylists)
 {

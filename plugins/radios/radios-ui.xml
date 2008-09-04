@@ -2,6 +2,7 @@
         <popup name="RadioPopupSingle">
                 <menuitem name="RadioAddRadios" action="RadioAddRadios"/>
                 <menuitem name="RadioAddPlayRadios" action="RadioAddPlayRadios"/>
+                <menuitem name="RadioClearAddPlayRadios" action="RadioClearAddPlayRadios"/>
                 <separator/>
                 <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
                 <menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>
@@ -13,6 +14,7 @@
         <popup name="RadioPopupMultiple">
                 <menuitem name="RadioAddRadios" action="RadioAddRadios"/>
                 <menuitem name="RadioAddPlayRadios" action="RadioAddPlayRadios"/>
+                <menuitem name="RadioClearAddPlayRadios" action="RadioClearAddPlayRadios"/>
                 <separator/>
                 <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
                 <menuitem name="RadioDeleteRadios" action="RadioDeleteRadios"/>

@@ -53,6 +53,8 @@ static void ario_filesystem_cmd_add_filesystem (GtkAction *action,
                                                 ArioFilesystem *filesystem);
 static void ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
                                                      ArioFilesystem *filesystem);
+static void ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
+                                                           ArioFilesystem *filesystem);
 static void ario_filesystem_popup_menu (ArioFilesystem *filesystem);
 static gboolean ario_filesystem_button_press_cb (GtkWidget *widget,
                                                  GdkEventButton *event,
@@ -60,7 +62,7 @@ static gboolean ario_filesystem_button_press_cb (GtkWidget *widget,
 static gboolean ario_filesystem_button_release_cb (GtkWidget *widget,
                                                    GdkEventButton *event,
                                                    ArioFilesystem *filesystem);
-static gboolean ario_filesystem_motion_notify (GtkWidget *widget, 
+static gboolean ario_filesystem_motion_notify (GtkWidget *widget,
                                                GdkEventMotion *event,
                                                ArioFilesystem *filesystem);
 static void ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
@@ -108,7 +110,10 @@ static GtkActionEntry ario_filesystem_actions [] =
                 G_CALLBACK (ario_filesystem_cmd_add_filesystem) },
         { "FilesystemAddPlayDir", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
-                G_CALLBACK (ario_filesystem_cmd_add_play_filesystem) }
+                G_CALLBACK (ario_filesystem_cmd_add_play_filesystem) },
+        { "FilesystemClearAddPlayDir", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_filesystem_cmd_clear_add_play_filesystem) }
 };
 static guint ario_filesystem_n_actions = G_N_ELEMENTS (ario_filesystem_actions);
 
@@ -120,6 +125,9 @@ static GtkActionEntry ario_filesystem_songs_actions [] =
         { "FilesystemAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
+        { "FilesystemClearAddPlaySongs", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
         { "FilesystemSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
@@ -297,7 +305,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
                              GDK_ACTION_COPY);
 
         g_signal_connect (GTK_TREE_VIEW (filesystem->priv->filesystem),
-                          "drag_data_get", 
+                          "drag_data_get",
                           G_CALLBACK (ario_filesystem_filetree_drag_data_get_cb), filesystem);
         g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
                                  "button_press_event",
@@ -403,7 +411,7 @@ ario_filesystem_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_filesystem_get_property (GObject *object,
                               guint prop_id,
                               GValue *value,
@@ -449,7 +457,7 @@ ario_filesystem_new (GtkUIManager *mgr,
                                    "playlist", playlist,
                                    NULL);
 
-        g_return_val_if_fail (filesystem->priv != NULL, NULL);   
+        g_return_val_if_fail (filesystem->priv != NULL, NULL);
 
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
@@ -669,13 +677,22 @@ ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
 }
 
 static void
+ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
+                                               ArioFilesystem *filesystem)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_mpd_clear (filesystem->priv->mpd);
+        ario_filesystem_add_filetree (filesystem, TRUE);
+}
+
+static void
 ario_filesystem_popup_menu (ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *menu;
 
         menu = gtk_ui_manager_get_widget (filesystem->priv->ui_manager, "/FilesystemPopup");
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
+        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                         gtk_get_current_event_time ());
 }
 
@@ -750,7 +767,7 @@ ario_filesystem_button_release_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_filesystem_motion_notify (GtkWidget *widget, 
+ario_filesystem_motion_notify (GtkWidget *widget,
                                GdkEventMotion *event,
                                ArioFilesystem *filesystem)
 {

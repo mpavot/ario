@@ -55,6 +55,8 @@ static void ario_browser_cmd_add (GtkAction *action,
                                   ArioBrowser *browser);
 static void ario_browser_cmd_add_play (GtkAction *action,
                                        ArioBrowser *browser);
+static void ario_browser_cmd_clear_add_play (GtkAction *action,
+                                             ArioBrowser *browser);
 static void ario_browser_cmd_get_cover (GtkAction *action,
                                         ArioBrowser *browser);
 static void ario_browser_cmd_remove_cover (GtkAction *action,
@@ -86,6 +88,9 @@ static GtkActionEntry ario_browser_actions [] =
         { "BrowserAddPlay", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_add_play) },
+        { "BrowserClearAddPlay", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_browser_cmd_clear_add_play) },
         { "BrowserGetCover", GTK_STOCK_CDROM, N_("Get the covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_get_cover) },
@@ -465,6 +470,17 @@ ario_browser_cmd_add_play (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         if (browser->priv->popup_tree)
                 ario_tree_cmd_add (browser->priv->popup_tree, TRUE);
+}
+
+static void
+ario_browser_cmd_clear_add_play (GtkAction *action,
+                                 ArioBrowser *browser)
+{
+        ARIO_LOG_FUNCTION_START
+        if (browser->priv->popup_tree) {
+                ario_mpd_clear (browser->priv->mpd);
+                ario_tree_cmd_add (browser->priv->popup_tree, TRUE);
+        }
 }
 
 static void
