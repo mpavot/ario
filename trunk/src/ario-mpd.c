@@ -766,6 +766,10 @@ ario_mpd_list_tags (ArioMpd *mpd,
         GSList *values = NULL;
         ArioMpdAtomicCriteria *atomic_criteria;
 
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return NULL;
+
         mpd_startFieldSearch (mpd->priv->connection, tag);
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                 atomic_criteria = tmp->data;

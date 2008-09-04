@@ -193,6 +193,12 @@
 #define PREF_BROWSER_TREES                      "browser-trees"
 #define PREF_BROWSER_TREES_DEFAULT              "0,1,2"
 
+#define PREF_UPDATE_STARTUP                     "update-startup"
+#define PREF_UPDATE_STARTUP_DEFAULT              FALSE
+
+#define PREF_STOP_EXIT                          "stop-exit"
+#define PREF_STOP_EXIT_DEFAULT                  FALSE
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

@@ -384,6 +384,16 @@ ario_shell_new (void)
         return s;
 }
 
+static void
+ario_shell_quit (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START
+
+        if (ario_conf_get_boolean (PREF_STOP_EXIT, PREF_STOP_EXIT_DEFAULT))
+                ario_mpd_do_stop (shell->priv->mpd);
+        gtk_main_quit ();
+}
+
 static gboolean
 ario_shell_window_delete_cb (GtkWidget *win,
                              GdkEventAny *event,
@@ -393,7 +403,7 @@ ario_shell_window_delete_cb (GtkWidget *win,
         if (ario_conf_get_boolean (PREF_HIDE_ON_CLOSE, PREF_HIDE_ON_CLOSE_DEFAULT)) {
                 ario_shell_set_visibility (shell, VISIBILITY_TOGGLE);
         } else {
-                gtk_main_quit ();
+                ario_shell_quit (shell);
         }
         return TRUE;
 };
@@ -611,6 +621,8 @@ ario_shell_show (ArioShell *shell,
                                  G_CALLBACK (ario_shell_window_state_cb),
                                  shell, 0);
 
+        if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
+                ario_mpd_update_db (shell->priv->mpd);
 }
 
 void
@@ -685,7 +697,7 @@ ario_shell_cmd_quit (GtkAction *action,
                      ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        gtk_main_quit ();
+        ario_shell_quit (shell);
 }
 
 static void
