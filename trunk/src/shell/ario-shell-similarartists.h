@@ -19,7 +19,6 @@
 
 #include <gtk/gtkwindow.h>
 #include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
 
 #ifndef __ARIO_SHELL_SIMILARARTISTS_H
 #define __ARIO_SHELL_SIMILARARTISTS_H
@@ -49,11 +48,9 @@ typedef struct
 
 GType              ario_shell_similarartists_get_type         (void) G_GNUC_CONST;
 
-GtkWidget *        ario_shell_similarartists_new              (ArioMpd *mpd,
-                                                               ArioPlaylist *playlist);
+GtkWidget *        ario_shell_similarartists_new              (ArioMpd *mpd);
 
 void               ario_shell_similarartists_add_similar_to_playlist    (ArioMpd *mpd,
-                                                                         ArioPlaylist *playlist,
                                                                          const gchar *artist);
 
 G_END_DECLS

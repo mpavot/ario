@@ -1,5 +1,6 @@
 SUBDIRS = \
         filesystem\
+        information\
         radios\
         wikipedia
 

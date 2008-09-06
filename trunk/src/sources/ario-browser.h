@@ -22,7 +22,6 @@
 
 #include <gtk/gtkhbox.h>
 #include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
 #define MAX_TREE_NB 5
@@ -54,8 +53,7 @@ GType                   ario_browser_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_browser_new        (GtkUIManager *mgr,
                                                  GtkActionGroup *group,
-                                                 ArioMpd *mpd,
-                                                 ArioPlaylist *playlist);
+                                                 ArioMpd *mpd);
 
 G_END_DECLS
 

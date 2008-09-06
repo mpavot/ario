@@ -23,7 +23,6 @@
 #include <gtk/gtktreeview.h>
 #include <config.h>
 #include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
 
 G_BEGIN_DECLS
 
@@ -61,7 +60,6 @@ GType                   ario_songlist_get_type                  (void) G_GNUC_CO
 
 GtkWidget*              ario_songlist_new                       (GtkUIManager *mgr,
                                                                  ArioMpd *mpd,
-                                                                 ArioPlaylist *playlist,
                                                                  gchar *popup,
                                                                  gboolean is_sortable);
 GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *songlist);

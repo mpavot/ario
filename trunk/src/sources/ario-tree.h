@@ -22,7 +22,6 @@
 
 #include <gtk/gtkhbox.h>
 #include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
 G_BEGIN_DECLS
@@ -56,7 +55,6 @@ GType                   ario_tree_get_type              (void) G_GNUC_CONST;
 
 GtkWidget*              ario_tree_new                   (GtkUIManager *mgr,
                                                          ArioMpd *mpd,
-                                                         ArioPlaylist *playlist,
                                                          ArioMpdTag tag,
                                                          gboolean is_first);
 void                    ario_tree_fill                  (ArioTree *tree);

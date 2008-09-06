@@ -22,7 +22,6 @@
 
 #include <gtk/gtknotebook.h>
 #include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
 G_BEGIN_DECLS
@@ -62,8 +61,7 @@ GType                   ario_sourcemanager_get_type     (void) G_GNUC_CONST;
 
 GtkWidget*              ario_sourcemanager_new          (GtkUIManager *mgr,
                                                          GtkActionGroup *group,
-                                                         ArioMpd *mpd,
-                                                         ArioPlaylist *playlist);
+                                                         ArioMpd *mpd);
 
 void                    ario_sourcemanager_append       (ArioSourceManager *sourcemanager,
                                                          ArioSource *source);

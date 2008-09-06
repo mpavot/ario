@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 #include "sources/ario-browser.h"
 #include "sources/ario-tree.h"
+#include "widgets/ario-playlist.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -73,7 +74,6 @@ struct ArioBrowserPrivate
         gboolean connected;
 
         ArioMpd *mpd;
-        ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 
@@ -110,7 +110,6 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_PLAYLIST,
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP
 };
@@ -188,13 +187,6 @@ ario_browser_class_init (ArioBrowserClass *klass)
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
-                                         PROP_PLAYLIST,
-                                         g_param_spec_object ("playlist",
-                                                              "playlist",
-                                                              "playlist",
-                                                              TYPE_ARIO_PLAYLIST,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
                                                               "GtkUIManager",
@@ -261,9 +253,6 @@ ario_browser_set_property (GObject *object,
                                          "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
                                          browser, 0);
                 break;
-        case PROP_PLAYLIST:
-                browser->priv->playlist = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 browser->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -292,9 +281,6 @@ ario_browser_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, browser->priv->mpd);
                 break;
-        case PROP_PLAYLIST:
-                g_value_set_object (value, browser->priv->playlist);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, browser->priv->ui_manager);
                 break;
@@ -310,8 +296,7 @@ ario_browser_get_property (GObject *object,
 GtkWidget *
 ario_browser_new (GtkUIManager *mgr,
                   GtkActionGroup *group,
-                  ArioMpd *mpd,
-                  ArioPlaylist *playlist)
+                  ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser;
@@ -320,7 +305,6 @@ ario_browser_new (GtkUIManager *mgr,
                                               "ui-manager", mgr,
                                               "action-group", group,
                                               "mpd", mpd,
-                                              "playlist", playlist,
                                               NULL));
 
         g_return_val_if_fail (browser->priv != NULL, NULL);
@@ -363,7 +347,6 @@ ario_browser_reload_trees (ArioBrowser *browser)
         for (i = 0; splited_conf[i]; ++i) {
                 tree = ario_tree_new (browser->priv->ui_manager,
                                       browser->priv->mpd,
-                                      browser->priv->playlist,
                                       atoi (splited_conf[i]),
                                       is_first);
                 browser->priv->trees = g_slist_append (browser->priv->trees, tree);

@@ -63,8 +63,6 @@ static void ario_shell_show (ArioShell *shell,
                              gboolean minimized);
 static void ario_shell_cmd_quit (GtkAction *action,
                                  ArioShell *shell);
-static void ario_shell_cmd_save (GtkAction *action,
-                                 ArioShell *shell);
 static void ario_shell_cmd_connect (GtkAction *action,
                                     ArioShell *shell);
 static void ario_shell_cmd_disconnect (GtkAction *action,
@@ -162,9 +160,6 @@ static GtkActionEntry ario_shell_actions [] =
         { "Tool", NULL, N_("_Tool") },
         { "Help", NULL, N_("_Help") },
 
-        { "FileSave", GTK_STOCK_SAVE, N_("_Save Playlist"), "<control>S",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_save) },
         { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>C",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_connect) },
@@ -466,7 +461,7 @@ ario_shell_construct (ArioShell *shell,
         shell->priv->header = ario_header_new (shell->priv->mpd);
         separator = gtk_hseparator_new ();
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
-        shell->priv->sourcemanager = ario_sourcemanager_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
+        shell->priv->sourcemanager = ario_sourcemanager_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
 
 #ifdef ENABLE_EGGTRAYICON
         /* initialize tray icon */
@@ -556,7 +551,7 @@ ario_shell_construct (ArioShell *shell,
                                          shell, 0);
                 gtk_widget_show_all (GTK_WIDGET (firstlaunch));
         } else {
-                 ario_shell_show (shell, minimized);
+                ario_shell_show (shell, minimized);
         }
 
         ario_shell_sync_statusbar_visibility (shell);
@@ -583,7 +578,7 @@ ario_shell_shutdown (ArioShell *shell)
                         ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
                 }
 
-                ario_playlist_shutdown (ARIO_PLAYLIST (shell->priv->playlist));
+                ario_playlist_shutdown ();
                 ario_sourcemanager_shutdown (ARIO_SOURCEMANAGER (shell->priv->sourcemanager));
 
                 ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
@@ -698,14 +693,6 @@ ario_shell_cmd_quit (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_shell_quit (shell);
-}
-
-static void
-ario_shell_cmd_save (GtkAction *action,
-                     ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_playlist_cmd_save (action, ARIO_PLAYLIST (shell->priv->playlist));
 }
 
 static void
@@ -878,7 +865,7 @@ ario_shell_cmd_similar_artists (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *similarartists;
 
-        similarartists = ario_shell_similarartists_new (shell->priv->mpd, ARIO_PLAYLIST (shell->priv->playlist));
+        similarartists = ario_shell_similarartists_new (shell->priv->mpd);
         if (similarartists)
                 gtk_widget_show_all (similarartists);
 }
@@ -890,7 +877,6 @@ ario_shell_cmd_add_similar (GtkAction *action,
         ARIO_LOG_FUNCTION_START
 
         ario_shell_similarartists_add_similar_to_playlist (shell->priv->mpd,
-                                                           ARIO_PLAYLIST (shell->priv->playlist),
                                                            ario_mpd_get_current_artist (shell->priv->mpd));
 }
 
@@ -991,7 +977,7 @@ ario_shell_sync_mpd (ArioShell *shell)
 
         is_playing = ((shell->priv->connected)
                       && ((ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PLAY)
-                           || (ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PAUSE)));
+                          || (ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PAUSE)));
 
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewLyrics");
@@ -1135,12 +1121,6 @@ ario_shell_cmd_plugins (GtkAction *action,
         gtk_window_set_default_size (GTK_WINDOW (window), 300, 350);
 
         gtk_window_present (GTK_WINDOW (window));
-}
-
-GtkWidget *
-ario_shell_get_playlist (ArioShell *shell)
-{
-        return shell->priv->playlist;
 }
 
 GtkWidget *

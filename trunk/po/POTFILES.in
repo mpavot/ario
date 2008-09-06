@@ -141,6 +141,12 @@ plugins/filesystem/ario-filesystem.h
 plugins/filesystem/ario-filesystem-plugin.c
 plugins/filesystem/ario-filesystem-plugin.h
 plugins/filesystem/filesystem.ario-plugin.desktop.in
+plugins/information/ario-information.c
+plugins/information/ario-information.h
+plugins/information/ario-information-plugin.c
+plugins/information/ario-information-plugin.h
+plugins/information/information.ario-plugin.desktop.in
+plugins/information/information.glade
 plugins/mmkeys/ario-mmkeys-plugin.c
 plugins/mmkeys/ario-mmkeys-plugin.h
 plugins/mmkeys/mmkeys.ario-plugin.desktop.in
