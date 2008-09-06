@@ -23,7 +23,6 @@
 #include <gtk/gtkhbox.h>
 #include <config.h>
 #include "ario-mpd.h"
-#include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
 #ifdef ENABLE_SEARCH
@@ -55,8 +54,7 @@ GType                   ario_search_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_search_new        (GtkUIManager *mgr,
                                                 GtkActionGroup *group,
-                                                ArioMpd *mpd,
-                                                ArioPlaylist *playlist);
+                                                ArioMpd *mpd);
 
 G_END_DECLS
 

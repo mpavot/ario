@@ -28,6 +28,7 @@
 #include "shell/ario-shell-coverdownloader.h"
 #include "shell/ario-shell-songinfos.h"
 #include "preferences/ario-preferences.h"
+#include "widgets/ario-playlist.h"
 #include "covers/ario-cover-handler.h"
 #include "ario-debug.h"
 
@@ -100,7 +101,6 @@ struct ArioTreePrivate
         gint drag_start_y;
 
         ArioMpd *mpd;
-        ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
 
         int album_sort;
@@ -131,7 +131,6 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_PLAYLIST,
         PROP_UI_MANAGER
 };
 
@@ -227,13 +226,6 @@ ario_tree_class_init (ArioTreeClass *klass)
                                                               "mpd",
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_PLAYLIST,
-                                         g_param_spec_object ("playlist",
-                                                              "playlist",
-                                                              "playlist",
-                                                              TYPE_ARIO_PLAYLIST,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -349,9 +341,6 @@ ario_tree_set_property (GObject *object,
         case PROP_MPD:
                 tree->priv->mpd = g_value_get_object (value);
                 break;
-        case PROP_PLAYLIST:
-                tree->priv->playlist = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 tree->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -373,9 +362,6 @@ ario_tree_get_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 g_value_set_object (value, tree->priv->mpd);
-                break;
-        case PROP_PLAYLIST:
-                g_value_set_object (value, tree->priv->playlist);
                 break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, tree->priv->ui_manager);
@@ -403,7 +389,6 @@ ario_tree_is_song_tree (ArioTree *tree)
 GtkWidget *
 ario_tree_new (GtkUIManager *mgr,
                ArioMpd *mpd,
-               ArioPlaylist *playlist,
                ArioMpdTag tag,
                gboolean is_first)
 {
@@ -415,7 +400,6 @@ ario_tree_new (GtkUIManager *mgr,
         tree = ARIO_TREE (g_object_new (TYPE_ARIO_TREE,
                                         "ui-manager", mgr,
                                         "mpd", mpd,
-                                        "playlist", playlist,
                                         NULL));
 
         g_return_val_if_fail (tree->priv != NULL, NULL);
@@ -546,11 +530,11 @@ ario_tree_new (GtkUIManager *mgr,
                                      GDK_ACTION_COPY);
         }
 
-        g_signal_connect (GTK_TREE_VIEW (tree->priv->tree),
+        g_signal_connect (tree->priv->tree,
                           "drag_data_get", 
                           G_CALLBACK (ario_tree_drag_data_get_cb), tree);
 
-        g_signal_connect (GTK_TREE_VIEW (tree->priv->tree),
+        g_signal_connect (tree->priv->tree,
                           "drag_begin", 
                           G_CALLBACK (ario_tree_drag_begin_cb), tree);
 
@@ -1191,7 +1175,7 @@ ario_tree_cmd_add (ArioTree *tree,
 
         criterias = ario_tree_get_criterias (tree);
 
-        ario_playlist_append_criterias (tree->priv->playlist, criterias, play);
+        ario_playlist_append_criterias (criterias, play);
 
         g_slist_foreach (criterias, (GFunc) ario_mpd_criteria_free, NULL);
         g_slist_free (criterias);

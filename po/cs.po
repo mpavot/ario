@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-05 00:06+0200\n"
+"POT-Creation-Date: 2008-09-07 00:17+0200\n"
 "PO-Revision-Date: 2008-06-18 06:50+0000\n"
 "Last-Translator: Jaroslav Lichtblau <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -84,8 +84,8 @@ msgstr "Host :"
 msgid "Music directory :"
 msgstr "Adresář hudby :"
 
-#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:913
-#: ../plugins/radios/ario-radio.c:1112
+#: ../data/glade/connection-prefs.glade.h:6 ../plugins/radios/ario-radio.c:896
+#: ../plugins/radios/ario-radio.c:1095
 msgid "Name :"
 msgstr "Název :"
 
@@ -104,11 +104,11 @@ msgstr "Port :"
 msgid "_Autoconnect on startup"
 msgstr "_Automaticky připojit při startu"
 
-#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:168
+#: ../data/glade/connection-prefs.glade.h:10 ../src/shell/ario-shell.c:163
 msgid "_Connect"
 msgstr "_Připojit"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:171
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:166
 msgid "_Disconnect"
 msgstr "O_dpojit"
 
@@ -148,14 +148,14 @@ msgstr "Stahování obrázku alba"
 msgid "Local search"
 msgstr "Lokální vyhledávání"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:149
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:148
 msgid "Search"
 msgstr "Vyhledávání"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:151
-#: ../src/sources/ario-tree.c:451 ../src/widgets/ario-playlist.c:366
-#: ../src/widgets/ario-songlist.c:286 ../src/widgets/ario-status-icon.c:383
+#: ../src/sources/ario-tree.c:435 ../src/widgets/ario-playlist.c:368
+#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-status-icon.c:383
 msgid "Album"
 msgstr "Album"
 
@@ -165,30 +165,30 @@ msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:150
 #: ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:423
-#: ../src/widgets/ario-playlist.c:366 ../src/widgets/ario-songlist.c:271
+#: ../src/shell/ario-shell-similarartists.c:421
+#: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:255
 #: ../src/widgets/ario-status-icon.c:381
 msgid "Artist"
 msgstr "Interpret"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:156
-#: ../src/widgets/ario-playlist.c:366
+#: ../src/widgets/ario-playlist.c:368
 msgid "Date"
 msgstr "Datum"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:366
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:368
 msgid "Duration"
 msgstr "Délka"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:366
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:368
 msgid "File"
 msgstr "Soubor"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:155
-#: ../src/widgets/ario-playlist.c:366
+#: ../src/widgets/ario-playlist.c:368
 msgid "Genre"
 msgstr "Žánr"
 
@@ -206,7 +206,7 @@ msgid "Interface"
 msgstr "Uživatelské prostředí"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:272 ../src/shell/ario-shell.c:215
+#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:210
 msgid "Playlist"
 msgstr "Seznam skladeb"
 
@@ -220,15 +220,15 @@ msgstr "Zobrazit záložky"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:152
-#: ../src/sources/ario-tree.c:497 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:366 ../src/widgets/ario-songlist.c:256
+#: ../src/sources/ario-tree.c:481 ../src/shell/ario-shell-lyricsselect.c:221
+#: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:240
 #: ../src/widgets/ario-status-icon.c:385
 msgid "Title"
 msgstr "Název"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:153
-#: ../src/sources/ario-tree.c:490 ../src/widgets/ario-playlist.c:366
+#: ../src/sources/ario-tree.c:474 ../src/widgets/ario-playlist.c:368
 msgid "Track"
 msgstr "Stopa"
 
@@ -480,7 +480,7 @@ msgstr "Zásuvný modul"
 msgid "Enabled"
 msgstr "Povoleno"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:198
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:193
 msgid "_About"
 msgstr "O _aplikaci"
 
@@ -591,27 +591,27 @@ msgstr "Nedělat nic"
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:83
 #: ../src/sources/ario-storedplaylists.c:105
 #: ../src/sources/ario-storedplaylists.c:122
-#: ../plugins/filesystem/ario-filesystem.c:108
-#: ../plugins/filesystem/ario-filesystem.c:122
-#: ../plugins/radios/ario-radio.c:115
+#: ../plugins/filesystem/ario-filesystem.c:107
+#: ../plugins/filesystem/ario-filesystem.c:121
+#: ../plugins/radios/ario-radio.c:114
 msgid "_Add to playlist"
 msgstr "_Přidat do playlistu"
 
 #: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:86
 #: ../src/sources/ario-storedplaylists.c:108
 #: ../src/sources/ario-storedplaylists.c:125
-#: ../plugins/filesystem/ario-filesystem.c:111
-#: ../plugins/filesystem/ario-filesystem.c:125
-#: ../plugins/radios/ario-radio.c:118
+#: ../plugins/filesystem/ario-filesystem.c:110
+#: ../plugins/filesystem/ario-filesystem.c:124
+#: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
 msgstr "Přidat a _přehrát"
 
 #: ../src/sources/ario-browser.c:91 ../src/sources/ario-search.c:89
 #: ../src/sources/ario-storedplaylists.c:111
 #: ../src/sources/ario-storedplaylists.c:128
-#: ../plugins/filesystem/ario-filesystem.c:114
-#: ../plugins/filesystem/ario-filesystem.c:128
-#: ../plugins/radios/ario-radio.c:121
+#: ../plugins/filesystem/ario-filesystem.c:113
+#: ../plugins/filesystem/ario-filesystem.c:127
+#: ../plugins/radios/ario-radio.c:120
 #, fuzzy
 msgid "_Replace in playlist"
 msgstr "Uložit seznam skladeb"
@@ -626,25 +626,25 @@ msgstr "_Smazat obrázky alb"
 
 #: ../src/sources/ario-browser.c:100 ../src/sources/ario-browser.c:103
 #: ../src/sources/ario-search.c:92 ../src/sources/ario-storedplaylists.c:131
-#: ../src/widgets/ario-playlist.c:132
-#: ../plugins/filesystem/ario-filesystem.c:131
-#: ../plugins/radios/ario-radio.c:130
+#: ../src/widgets/ario-playlist.c:135
+#: ../plugins/filesystem/ario-filesystem.c:130
+#: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
 msgstr "Vlast_nosti"
 
-#: ../src/sources/ario-browser.c:156 ../src/shell/ario-shell-preferences.c:182
+#: ../src/sources/ario-browser.c:155 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
 msgstr "Knihovna"
 
-#: ../src/sources/ario-search.c:236
+#: ../src/sources/ario-search.c:228
 msgid "Add a search criteria"
 msgstr "Přidat kritéria vyhledávání"
 
-#: ../src/sources/ario-search.c:243
+#: ../src/sources/ario-search.c:235
 msgid "Search songs in the library"
 msgstr "Vyhledat skladby v knihovně"
 
-#: ../src/sources/ario-search.c:446
+#: ../src/sources/ario-search.c:429
 msgid "Remove a search criteria"
 msgstr "Smazat vyhledávaná kritéria"
 
@@ -652,97 +652,93 @@ msgstr "Smazat vyhledávaná kritéria"
 msgid "_Delete"
 msgstr "_Smazat"
 
-#: ../src/sources/ario-storedplaylists.c:194
+#: ../src/sources/ario-storedplaylists.c:193
 msgid "Playlists"
 msgstr "Seznamy skladeb"
 
-#: ../src/sources/ario-storedplaylists.c:668
+#: ../src/sources/ario-storedplaylists.c:651
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Opravdu chcete odstranit všechny zvolené seznamy skladeb ?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:438
+#: ../src/sources/ario-tree.c:422
 msgid "Cover"
 msgstr "Obal"
 
-#: ../src/sources/ario-tree.c:1245
+#: ../src/sources/ario-tree.c:1229
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Opravdu chcete smazat všechny obaly alb vybraného umělce?"
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:157
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:158
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:159
 msgid "_View"
 msgstr "_Zobrazení"
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:160
 msgid "_Tool"
 msgstr "_Nástroj"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:161
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../src/shell/ario-shell.c:165
-msgid "_Save Playlist"
-msgstr "_Uložit seznam skladeb"
-
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:169
 msgid "_Quit"
 msgstr "_Ukončit"
 
-#: ../src/shell/ario-shell.c:177
+#: ../src/shell/ario-shell.c:172
 msgid "Plu_gins"
 msgstr "Zásuvné mo_duly"
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:175
 msgid "Prefere_nces"
 msgstr "Vlast_nosti"
 
-#: ../src/shell/ario-shell.c:183
+#: ../src/shell/ario-shell.c:178
 msgid "_Change current album cover"
 msgstr "_Změnit aktuální obal alba"
 
-#: ../src/shell/ario-shell.c:186
+#: ../src/shell/ario-shell.c:181
 msgid "Download album _covers"
 msgstr "Stáhnout _obaly alb"
 
-#: ../src/shell/ario-shell.c:189
+#: ../src/shell/ario-shell.c:184
 msgid "Find similar artists"
 msgstr "Najít podobné autory"
 
-#: ../src/shell/ario-shell.c:192
+#: ../src/shell/ario-shell.c:187
 msgid "Add similar songs to playlist"
 msgstr "Přidat podobné skladby do playlistu"
 
-#: ../src/shell/ario-shell.c:195
+#: ../src/shell/ario-shell.c:190
 msgid "Show _lyrics"
 msgstr "Ukázat _texty skladeb"
 
-#: ../src/shell/ario-shell.c:201
+#: ../src/shell/ario-shell.c:196
 msgid "_Translate this application..."
 msgstr "_Přeložit tuto aplikaci..."
 
-#: ../src/shell/ario-shell.c:209
+#: ../src/shell/ario-shell.c:204
 msgid "S_tatusbar"
 msgstr "S_tavový řádek"
 
-#: ../src/shell/ario-shell.c:212
+#: ../src/shell/ario-shell.c:207
 msgid "Upper part"
 msgstr "Horní část"
 
-#: ../src/shell/ario-shell.c:774
+#: ../src/shell/ario-shell.c:761
 msgid "GTK client for MPD"
 msgstr "GTK klient pro MPD"
 
-#: ../src/shell/ario-shell.c:775
+#: ../src/shell/ario-shell.c:762
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -757,7 +753,7 @@ msgstr ""
 "  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
 "  Konki https://launchpad.net/~pavel-konkol"
 
-#: ../src/shell/ario-shell.c:1111
+#: ../src/shell/ario-shell.c:1097
 msgid "Configure Plugins"
 msgstr "Konfigurovat zásuvné moduly"
 
@@ -820,11 +816,11 @@ msgstr "Server"
 msgid "%d songs"
 msgstr "%d skladeb"
 
-#: ../src/shell/ario-shell-similarartists.c:412
+#: ../src/shell/ario-shell-similarartists.c:410
 msgid "Image"
 msgstr "Obrázek"
 
-#: ../src/shell/ario-shell-similarartists.c:430
+#: ../src/shell/ario-shell-similarartists.c:428
 #: ../src/widgets/ario-status-bar.c:207
 msgid "Songs"
 msgstr "Skladby"
@@ -903,32 +899,32 @@ msgstr "Stahuji texty ..."
 msgid "Lyrics not found"
 msgstr "Texty nejsou dostupné"
 
-#: ../src/widgets/ario-playlist.c:123
+#: ../src/widgets/ario-playlist.c:126
 msgid "_Clear"
 msgstr "_Vyprázdnit"
 
-#: ../src/widgets/ario-playlist.c:126
+#: ../src/widgets/ario-playlist.c:129
 msgid "_Remove"
 msgstr "_Smazat"
 
-#: ../src/widgets/ario-playlist.c:129
+#: ../src/widgets/ario-playlist.c:132
 msgid "_Save"
 msgstr "_Uložit"
 
-#: ../src/widgets/ario-playlist.c:135
+#: ../src/widgets/ario-playlist.c:138
 msgid "_Go to playing song"
 msgstr "_ Jít na přehrávanou skladbu"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1361
+#: ../src/widgets/ario-playlist.c:1338
 msgid "Save playlist"
 msgstr "Uložit seznam skladeb"
 
-#: ../src/widgets/ario-playlist.c:1371
+#: ../src/widgets/ario-playlist.c:1348
 msgid "Playlist name :"
 msgstr "Název seznamu stop :"
 
-#: ../src/widgets/ario-playlist.c:1396
+#: ../src/widgets/ario-playlist.c:1373
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Seznam stop již existuje. Chcete ho přepsat ?"
 
@@ -1082,11 +1078,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Zaslat informace o skladbě na last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:197
+#: ../plugins/filesystem/ario-filesystem.c:195
 msgid "File System"
 msgstr "Souborový systém"
 
-#: ../plugins/filesystem/ario-filesystem.c:505
+#: ../plugins/filesystem/ario-filesystem.c:487
 msgid "Music"
 msgstr "Hudba"
 
@@ -1106,42 +1102,42 @@ msgstr "Přidat podporu multimediálních kláves"
 msgid "Multimedia Keys"
 msgstr "Multimediální klávesy"
 
-#: ../plugins/radios/ario-radio.c:124
+#: ../plugins/radios/ario-radio.c:123
 msgid "Add a _new radio"
 msgstr "Přidat _nové rádio"
 
-#: ../plugins/radios/ario-radio.c:127
+#: ../plugins/radios/ario-radio.c:126
 msgid "_Delete this radios"
 msgstr "_ Smazat tato rádia"
 
-#: ../plugins/radios/ario-radio.c:194
+#: ../plugins/radios/ario-radio.c:192
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Webová rádia"
 
-#: ../plugins/radios/ario-radio.c:270
+#: ../plugins/radios/ario-radio.c:261
 msgid "Internet Radios"
 msgstr "Internetová rádia"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:903
+#: ../plugins/radios/ario-radio.c:886
 msgid "Add a WebRadio"
 msgstr "Přidat Webové rádio"
 
-#: ../plugins/radios/ario-radio.c:914 ../plugins/radios/ario-radio.c:1113
+#: ../plugins/radios/ario-radio.c:897 ../plugins/radios/ario-radio.c:1096
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:968 ../plugins/radios/ario-radio.c:1168
+#: ../plugins/radios/ario-radio.c:951 ../plugins/radios/ario-radio.c:1151
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Špatné parametry. Musíte zadat jméno a URL pro rádio."
 
-#: ../plugins/radios/ario-radio.c:1030
+#: ../plugins/radios/ario-radio.c:1013
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Opravdu chcete smazat všechna vybraná rádia?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1102
+#: ../plugins/radios/ario-radio.c:1085
 msgid "Edit a WebRadio"
 msgstr "Upravit webové rádio"
 
@@ -1169,6 +1165,9 @@ msgstr "Zásuvný modul pro vyhledání aktuálního umělce na wikipedii"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "_Save Playlist"
+#~ msgstr "_Uložit seznam skladeb"
 
 #~ msgid "Hide on close"
 #~ msgstr "Skrýt při zavření"

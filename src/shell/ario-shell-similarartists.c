@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include "shell/ario-shell-similarartists.h"
 #include "lib/rb-glade-helpers.h"
+#include "widgets/ario-playlist.h"
 #include "ario-debug.h"
 #include "ario-util.h"
 
@@ -51,7 +52,6 @@ G_MODULE_EXPORT void ario_shell_similarartists_addall_cb (GtkButton *button,
 struct ArioShellSimilarartistsPrivate
 {      
         GtkListStore *liststore;
-        ArioPlaylist *playlist;
         GThread *thread;
 
         GtkTreeSelection *selection;
@@ -374,8 +374,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
 }
 
 GtkWidget *
-ario_shell_similarartists_new (ArioMpd *mpd,
-                               ArioPlaylist *playlist)
+ario_shell_similarartists_new (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellSimilarartists *shell_similarartists;
@@ -394,7 +393,6 @@ ario_shell_similarartists_new (ArioMpd *mpd,
 
         g_return_val_if_fail (shell_similarartists->priv != NULL, NULL);
         shell_similarartists->priv->closed = FALSE;
-        shell_similarartists->priv->playlist = playlist;
 
         xml = rb_glade_xml_new (GLADE_PATH "similar-artists.glade",
                                 "vbox",
@@ -540,7 +538,7 @@ ario_shell_similarartists_add_cb (GtkButton *button,
 
                 artists = g_slist_append (artists, artist);
 
-                ario_playlist_append_artists (shell_similarartists->priv->playlist, artists, FALSE);
+                ario_playlist_append_artists (artists, FALSE);
 
                 g_slist_foreach (artists, (GFunc) g_free, NULL);
                 g_slist_free (artists);
@@ -577,7 +575,7 @@ ario_shell_similarartists_addall_cb (GtkButton *button,
                                 (GtkTreeModelForeachFunc) ario_shell_similarartists_addall_foreach,
                                 &artists);
 
-        ario_playlist_append_artists (shell_similarartists->priv->playlist, artists, FALSE);
+        ario_playlist_append_artists (artists, FALSE);
 
         g_slist_foreach (artists, (GFunc) g_free, NULL);
         g_slist_free (artists);
@@ -585,7 +583,6 @@ ario_shell_similarartists_addall_cb (GtkButton *button,
 
 void
 ario_shell_similarartists_add_similar_to_playlist (ArioMpd *mpd,
-                                                   ArioPlaylist *playlist,
                                                    const gchar *artist)
 {
         ARIO_LOG_FUNCTION_START
@@ -599,7 +596,7 @@ ario_shell_similarartists_add_similar_to_playlist (ArioMpd *mpd,
                 artists = g_slist_append (artists, similar_artist->name);
         }
 
-        ario_playlist_append_artists (playlist, artists, FALSE);
+        ario_playlist_append_artists (artists, FALSE);
 
         g_slist_foreach (similar_artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);
         g_slist_free (similar_artists);

@@ -53,8 +53,7 @@ GType                   ario_filesystem_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_filesystem_new        (GtkUIManager *mgr,
                                                     GtkActionGroup *group,
-                                                    ArioMpd *mpd,
-                                                    ArioPlaylist *playlist);
+                                                    ArioMpd *mpd);
 G_END_DECLS
 
 #endif /* __ARIO_FILESYSTEM_H */

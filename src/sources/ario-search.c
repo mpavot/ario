@@ -23,6 +23,7 @@
 #include <glib/gi18n.h>
 #include "lib/libmpdclient.h"
 #include "widgets/ario-songlist.h"
+#include "widgets/ario-playlist.h"
 #include "sources/ario-search.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
@@ -70,7 +71,6 @@ struct ArioSearchPrivate
         gboolean connected;
 
         ArioMpd *mpd;
-        ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 
@@ -99,7 +99,6 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_PLAYLIST,
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP
 };
@@ -179,13 +178,6 @@ ario_search_class_init (ArioSearchClass *klass)
                                                               "mpd",
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_PLAYLIST,
-                                         g_param_spec_object ("playlist",
-                                                              "playlist",
-                                                              "playlist",
-                                                              TYPE_ARIO_PLAYLIST,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -313,9 +305,6 @@ ario_search_set_property (GObject *object,
                                          "state_changed", G_CALLBACK (ario_search_state_changed_cb),
                                          search, 0);
                 break;
-        case PROP_PLAYLIST:
-                search->priv->playlist = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 search->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -341,9 +330,6 @@ ario_search_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, search->priv->mpd);
                 break;
-        case PROP_PLAYLIST:
-                g_value_set_object (value, search->priv->playlist);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, search->priv->ui_manager);
                 break;
@@ -359,8 +345,7 @@ ario_search_get_property (GObject *object,
 GtkWidget *
 ario_search_new (GtkUIManager *mgr,
                  GtkActionGroup *group,
-                 ArioMpd *mpd,
-                 ArioPlaylist *playlist)
+                 ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioSearch *search;
@@ -370,7 +355,6 @@ ario_search_new (GtkUIManager *mgr,
                                "ui-manager", mgr,
                                "action-group", group,
                                "mpd", mpd,
-                               "playlist", playlist,
                                NULL);
 
         g_return_val_if_fail (search->priv != NULL, NULL);
@@ -382,7 +366,6 @@ ario_search_new (GtkUIManager *mgr,
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_SHADOW_IN);
         search->priv->searchs = ario_songlist_new (mgr,
                                                    mpd,
-                                                   playlist,
                                                    "/SearchPopup",
                                                    TRUE);
 

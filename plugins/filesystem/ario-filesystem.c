@@ -98,7 +98,6 @@ struct ArioFilesystemPrivate
         gint drag_start_y;
 
         ArioMpd *mpd;
-        ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
 };
@@ -138,7 +137,6 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_PLAYLIST,
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP
 };
@@ -228,13 +226,6 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
                                                               "mpd",
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_PLAYLIST,
-                                         g_param_spec_object ("playlist",
-                                                              "playlist",
-                                                              "playlist",
-                                                              TYPE_ARIO_PLAYLIST,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -396,9 +387,6 @@ ario_filesystem_set_property (GObject *object,
                                          "updatingdb_changed", G_CALLBACK (ario_filesystem_filesystem_changed_cb),
                                          filesystem, 0);
                 break;
-        case PROP_PLAYLIST:
-                filesystem->priv->playlist = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 filesystem->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -424,9 +412,6 @@ ario_filesystem_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, filesystem->priv->mpd);
                 break;
-        case PROP_PLAYLIST:
-                g_value_set_object (value, filesystem->priv->playlist);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, filesystem->priv->ui_manager);
                 break;
@@ -442,8 +427,7 @@ ario_filesystem_get_property (GObject *object,
 GtkWidget *
 ario_filesystem_new (GtkUIManager *mgr,
                      GtkActionGroup *group,
-                     ArioMpd *mpd,
-                     ArioPlaylist *playlist)
+                     ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;
@@ -454,7 +438,6 @@ ario_filesystem_new (GtkUIManager *mgr,
                                    "ui-manager", mgr,
                                    "action-group", group,
                                    "mpd", mpd,
-                                   "playlist", playlist,
                                    NULL);
 
         g_return_val_if_fail (filesystem->priv != NULL, NULL);
@@ -466,7 +449,6 @@ ario_filesystem_new (GtkUIManager *mgr,
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_SHADOW_IN);
         filesystem->priv->songs = ario_songlist_new (mgr,
                                                      mpd,
-                                                     playlist,
                                                      "/FilesystemSongsPopup",
                                                      FALSE);
         gtk_paned_pack2 (GTK_PANED (filesystem->priv->paned), scrolledwindow_songs, TRUE, FALSE);
@@ -656,7 +638,7 @@ ario_filesystem_add_filetree (ArioFilesystem *filesystem,
 
         g_return_if_fail (dir);
 
-        ario_playlist_append_dir (filesystem->priv->playlist, dir, play);
+        ario_playlist_append_dir (dir, play);
         g_free (dir);
 }
 

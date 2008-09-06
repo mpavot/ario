@@ -311,7 +311,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         /* Construct the cover display */
         event_box = gtk_event_box_new ();
         header->priv->image = gtk_image_new ();
-        gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &header->priv->image_width, &header->priv->image_height);
+        gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &header->priv->image_width, &header->priv->image_height);
         header->priv->image_width += 18;
         header->priv->image_height += 18;
         gtk_container_add (GTK_CONTAINER (event_box), header->priv->image);

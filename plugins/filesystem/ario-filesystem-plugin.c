@@ -71,8 +71,7 @@ impl_activate (ArioPlugin *plugin,
 
         pi->priv->source = ario_filesystem_new (uimanager,
                                                 actiongroup,
-                                                mpd,
-                                                ARIO_PLAYLIST (ario_shell_get_playlist (shell)));
+                                                mpd);
         g_return_if_fail (IS_ARIO_FILESYSTEM (pi->priv->source));
 
         file = ario_plugin_find_file ("filesystem-ui.xml");

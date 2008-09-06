@@ -53,8 +53,7 @@ GType                   ario_radio_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_radio_new        (GtkUIManager *mgr,
                                                GtkActionGroup *group,
-                                               ArioMpd *mpd,
-                                               ArioPlaylist *playlist);
+                                               ArioMpd *mpd);
 
 G_END_DECLS
 

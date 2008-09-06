@@ -27,6 +27,7 @@
 #include "sources/ario-search.h"
 #include "sources/ario-storedplaylists.h"
 #include "preferences/ario-preferences.h"
+#include "widgets/ario-playlist.h"
 #include "ario-debug.h"
 
 static void ario_sourcemanager_class_init (ArioSourceManagerClass *klass);
@@ -121,8 +122,7 @@ ario_sourcemanager_finalize (GObject *object)
 GtkWidget *
 ario_sourcemanager_new (GtkUIManager *mgr,
                         GtkActionGroup *grp,
-                        ArioMpd *mpd,
-                        ArioPlaylist *playlist)
+                        ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioSourceManager *sourcemanager;
@@ -137,24 +137,21 @@ ario_sourcemanager_new (GtkUIManager *mgr,
 
         source = ario_browser_new (mgr,
                                    grp,
-                                   mpd,
-                                   playlist);
+                                   mpd);
         ario_sourcemanager_append (sourcemanager,
                                    ARIO_SOURCE (source));
 
 #ifdef ENABLE_SEARCH
         source = ario_search_new (mgr,
                                   grp,
-                                  mpd,
-                                  playlist);
+                                  mpd);
         ario_sourcemanager_append (sourcemanager,
                                    ARIO_SOURCE (source));
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         source = ario_storedplaylists_new (mgr,
                                            grp,
-                                           mpd,
-                                           playlist);
+                                           mpd);
         ario_sourcemanager_append (sourcemanager,
                                    ARIO_SOURCE (source));
 #endif  /* ENABLE_STOREDPLAYLISTS */

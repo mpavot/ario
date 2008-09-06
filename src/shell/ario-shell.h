@@ -67,8 +67,6 @@ void            ario_shell_set_visibility       (ArioShell *shell,
                                                  ArioVisibility state);
 void            ario_shell_restore_main_window  (ArioShell *shell);
 
-GtkWidget *     ario_shell_get_playlist         (ArioShell *shell);
-
 GtkWidget *     ario_shell_get_sourcemanager    (ArioShell *shell);
 
 G_END_DECLS

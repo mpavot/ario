@@ -22,6 +22,7 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "widgets/ario-songlist.h"
+#include "widgets/ario-playlist.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
@@ -72,7 +73,6 @@ struct ArioSonglistPrivate
 
         ArioMpd *mpd;
 
-        ArioPlaylist *playlist;
         GtkUIManager *ui_manager;
 
         gchar *popup;
@@ -82,7 +82,6 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_PLAYLIST,
         PROP_UI_MANAGER
 };
 
@@ -140,13 +139,6 @@ ario_songlist_class_init (ArioSonglistClass *klass)
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
-                                         PROP_PLAYLIST,
-                                         g_param_spec_object ("playlist",
-                                                              "playlist",
-                                                              "playlist",
-                                                              TYPE_ARIO_PLAYLIST,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
                                                               "GtkUIManager",
@@ -194,9 +186,6 @@ ario_songlist_set_property (GObject *object,
         case PROP_MPD:
                 songlist->priv->mpd = g_value_get_object (value);
                 break;
-        case PROP_PLAYLIST:
-                songlist->priv->playlist = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 songlist->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -219,9 +208,6 @@ ario_songlist_get_property (GObject *object,
         case PROP_MPD:
                 g_value_set_object (value, songlist->priv->mpd);
                 break;
-        case PROP_PLAYLIST:
-                g_value_set_object (value, songlist->priv->playlist);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, songlist->priv->ui_manager);
                 break;
@@ -234,7 +220,6 @@ ario_songlist_get_property (GObject *object,
 GtkWidget *
 ario_songlist_new (GtkUIManager *mgr,
                    ArioMpd *mpd,
-                   ArioPlaylist *playlist,
                    gchar *popup,
                    gboolean is_sortable)
 {
@@ -246,7 +231,6 @@ ario_songlist_new (GtkUIManager *mgr,
         songlist = g_object_new (TYPE_ARIO_SONGLIST,
                                  "ui-manager", mgr,
                                  "mpd", mpd,
-                                 "playlist", playlist,
                                  NULL);
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
@@ -364,7 +348,7 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist,
         gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
                                              songlists_foreach,
                                              &songlists);
-        ario_playlist_append_songs (songlist->priv->playlist, songlists, play);
+        ario_playlist_append_songs (songlists, play);
 
         g_slist_foreach (songlists, (GFunc) g_free, NULL);
         g_slist_free (songlists);
