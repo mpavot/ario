@@ -200,10 +200,10 @@ ario_shell_coverselect_drag_leave_cb (GtkWidget *widget,
                                                  &contents,
                                                  &length,
                                                  NULL)) {
-                                 ario_cover_save_cover (shell_coverselect->priv->file_artist,
-                                                        shell_coverselect->priv->file_album,
-                                                        contents, length,
-                                                        OVERWRITE_MODE_REPLACE);
+                                ario_cover_save_cover (shell_coverselect->priv->file_artist,
+                                                       shell_coverselect->priv->file_album,
+                                                       contents, length,
+                                                       OVERWRITE_MODE_REPLACE);
                                 g_free (contents);
                                 ario_cover_handler_force_reload ();
                                 ario_shell_coverselect_set_current_cover (shell_coverselect);
@@ -397,11 +397,11 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
         gchar *path;
 
         dialog = gtk_file_chooser_dialog_new (NULL,
-				              NULL,
-				              GTK_FILE_CHOOSER_ACTION_OPEN,
-				              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-				              NULL);
+                                              NULL,
+                                              GTK_FILE_CHOOSER_ACTION_OPEN,
+                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                              NULL);
         musicdir = ario_conf_get_string (PREF_MUSIC_DIR, PREF_MUSIC_DIR_DEFAULT);
         if (musicdir) {
                 path = g_build_filename (musicdir, ario_shell_coverselect->priv->path, NULL);

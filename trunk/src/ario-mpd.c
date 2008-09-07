@@ -441,12 +441,12 @@ ario_mpd_set_property (GObject *object,
                         state_changed = (!old_song || !new_song);
                         if (!state_changed) {
                                 artist_changed = ( (old_song->artist && !new_song->artist)
-                                                || (!old_song->artist && new_song->artist)
-                                                || (old_song->artist && new_song->artist && g_utf8_collate (old_song->artist, new_song->artist)) );
+                                                   || (!old_song->artist && new_song->artist)
+                                                   || (old_song->artist && new_song->artist && g_utf8_collate (old_song->artist, new_song->artist)) );
                                 if (!artist_changed) {
                                         album_changed = ( (old_song->album && !new_song->album)
-                                                        || (!old_song->album && new_song->album)
-                                                        || (old_song->album && new_song->album && g_utf8_collate (old_song->album, new_song->album)) );
+                                                          || (!old_song->album && new_song->album)
+                                                          || (old_song->album && new_song->album && g_utf8_collate (old_song->album, new_song->album)) );
                                 }
                         }
 
@@ -699,7 +699,7 @@ ario_mpd_connect (ArioMpd *mpd)
                         gtk_widget_destroy (dialog);
                 g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
         }
-                
+
         gtk_widget_hide (win);
         gtk_widget_destroy (win);
 
@@ -820,7 +820,7 @@ ario_mpd_album_is_present (const GSList *albums,
         }
         return FALSE;
 }
-                     
+
 GSList *
 ario_mpd_get_albums (ArioMpd *mpd,
                      const ArioMpdCriteria *criteria)
@@ -1726,7 +1726,7 @@ ario_mpd_get_songs_info (ArioMpd *mpd,
         GSList *temp;
         GList *songs = NULL;
         mpd_InfoEntity *ent;
-        
+
         /* check if there is a connection */
         if (!mpd->priv->connection)
                 return NULL;
@@ -1736,16 +1736,16 @@ ario_mpd_get_songs_info (ArioMpd *mpd,
 
                 mpd_sendListallInfoCommand (mpd->priv->connection, path);
 
-	        ent = mpd_getNextInfoEntity (mpd->priv->connection);
+                ent = mpd_getNextInfoEntity (mpd->priv->connection);
 
-	        mpd_finishCommand (mpd->priv->connection);
+                mpd_finishCommand (mpd->priv->connection);
                 if (!ent)
                         continue;
 
-	        songs = g_list_append (songs, ent->info.song);
-	        ent->info.song = NULL;
+                songs = g_list_append (songs, ent->info.song);
+                ent->info.song = NULL;
 
-	        mpd_freeInfoEntity (ent);
+                mpd_freeInfoEntity (ent);
                 ario_mpd_check_errors (mpd);
         }
 
@@ -1771,10 +1771,10 @@ ario_mpd_list_files (ArioMpd *mpd,
                 mpd_sendLsInfoCommand (mpd->priv->connection, path);
 
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
-	        if (entity->type == MPD_INFO_ENTITY_TYPE_DIRECTORY) {
+                if (entity->type == MPD_INFO_ENTITY_TYPE_DIRECTORY) {
                         files->directories = g_slist_append (files->directories, entity->info.directory->path);
                         entity->info.directory->path = NULL;
-	        } else if (entity->type == MPD_INFO_ENTITY_TYPE_SONG) {
+                } else if (entity->type == MPD_INFO_ENTITY_TYPE_SONG) {
                         files->songs = g_slist_append (files->songs, entity->info.song);
                         entity->info.song = NULL;
                 }

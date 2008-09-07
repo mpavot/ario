@@ -1301,7 +1301,7 @@ ario_audioscrobbler_submit_queue_cb (SoupMessage *msg, gpointer user_data)
 
                 if (audioscrobbler->priv->failures >= 3) {
                         ARIO_LOG_INFO ("Queue submission has failed %d times; caching tracks locally",
-                                      audioscrobbler->priv->failures);
+                                       audioscrobbler->priv->failures);
                         g_free (audioscrobbler->priv->status_msg);
 
                         audioscrobbler->priv->handshake = FALSE;

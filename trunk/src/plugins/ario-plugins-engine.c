@@ -121,20 +121,20 @@ static void
 ario_plugins_engine_load_all (void)
 {
         GSList *active_plugins;
-	GSList *paths;
-	GSList *l;
+        GSList *paths;
+        GSList *l;
 
         active_plugins = ario_conf_get_string_slist (PREF_PLUGINS_LIST, PREF_PLUGINS_LIST_DEFAULT);
 
-	paths = ario_plugin_get_plugin_paths ();
+        paths = ario_plugin_get_plugin_paths ();
 
-	for (l = paths; l != NULL; l = l->next) {
+        for (l = paths; l != NULL; l = l->next) {
                 if (g_file_test (l->data, G_FILE_TEST_IS_DIR))
                         ario_plugins_engine_load_dir (l->data, active_plugins);
-	}
+        }
 
-	g_slist_foreach (paths, (GFunc) g_free, NULL);
-	g_slist_free (paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
 
         g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
         g_slist_free (active_plugins);
@@ -174,21 +174,21 @@ ario_plugins_engine_load_icons_dir (const gchar        *dir)
 static void
 ario_plugins_engine_load_icons_all (void)
 {
-	GSList *paths;
-	GSList *l;
+        GSList *paths;
+        GSList *l;
         gchar *tmp;
 
-	paths = ario_plugin_get_plugin_paths ();
+        paths = ario_plugin_get_plugin_paths ();
 
-	for (l = paths; l != NULL; l = l->next) {
+        for (l = paths; l != NULL; l = l->next) {
                 tmp = g_build_filename (l->data, "icons", NULL);
                 if (g_file_test (tmp, G_FILE_TEST_IS_DIR))
                         ario_plugins_engine_load_icons_dir (tmp);
                 g_free (tmp);
-	}
+        }
 
-	g_slist_foreach (paths, (GFunc) g_free, NULL);
-	g_slist_free (paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
 }
 
 static gboolean

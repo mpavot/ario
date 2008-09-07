@@ -36,16 +36,16 @@
 static void ario_status_icon_class_init (ArioStatusIconClass *klass);
 static void ario_status_icon_init (ArioStatusIcon *ario_shell_player);
 static GObject *ario_status_icon_constructor (GType type, guint n_construct_properties,
-                                            GObjectConstructParam *construct_properties);
+                                              GObjectConstructParam *construct_properties);
 static void ario_status_icon_finalize (GObject *object);
 static void ario_status_icon_set_property (GObject *object,
-                                         guint prop_id,
-                                         const GValue *value,
-                                         GParamSpec *pspec);
+                                           guint prop_id,
+                                           const GValue *value,
+                                           GParamSpec *pspec);
 static void ario_status_icon_get_property (GObject *object,
-                                         guint prop_id,
-                                         GValue *value,
-                                         GParamSpec *pspec);
+                                           guint prop_id,
+                                           GValue *value,
+                                           GParamSpec *pspec);
 static void ario_status_icon_sync_tooltip (ArioStatusIcon *icon);
 static void ario_status_icon_sync_icon (ArioStatusIcon *icon);
 static void ario_status_icon_sync_popup (ArioStatusIcon *icon);
@@ -56,19 +56,19 @@ static void ario_status_icon_popup_cb (GtkStatusIcon *status_icon,
                                        guint activate_time,
                                        ArioStatusIcon *icon);
 static void ario_status_icon_song_changed_cb (ArioMpd *mpd,
-                                            ArioStatusIcon *icon);
+                                              ArioStatusIcon *icon);
 static void ario_status_icon_state_changed_cb (ArioMpd *mpd,
-                                             ArioStatusIcon *icon);
+                                               ArioStatusIcon *icon);
 static void ario_status_icon_cmd_play (GtkAction *action,
-                                     ArioStatusIcon *icon);
+                                       ArioStatusIcon *icon);
 static void ario_status_icon_cmd_pause (GtkAction *action,
-                                      ArioStatusIcon *icon);
+                                        ArioStatusIcon *icon);
 static void ario_status_icon_cmd_stop (GtkAction *action,
-                                     ArioStatusIcon *icon);
+                                       ArioStatusIcon *icon);
 static void ario_status_icon_cmd_next (GtkAction *action,
-                                     ArioStatusIcon *icon);
+                                       ArioStatusIcon *icon);
 static void ario_status_icon_cmd_previous (GtkAction *action,
-                                         ArioStatusIcon *icon);
+                                           ArioStatusIcon *icon);
 
 struct ArioStatusIconPrivate
 {
@@ -136,8 +136,8 @@ ario_status_icon_get_type (void)
                 };
 
                 ario_status_icon_type = g_type_register_static (GTK_TYPE_STATUS_ICON,
-                                                              "ArioStatusIcon",
-                                                              &our_info, 0);
+                                                                "ArioStatusIcon",
+                                                                &our_info, 0);
         }
 
         return ario_status_icon_type;
@@ -221,7 +221,7 @@ ario_status_icon_constructor (GType type, guint n_construct_properties,
 
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         status = ARIO_STATUS_ICON (parent_class->constructor (type, n_construct_properties,
-                                                          construct_properties));
+                                                              construct_properties));
 
         return G_OBJECT (status);
 }
@@ -249,9 +249,9 @@ ario_status_icon_finalize (GObject *object)
 
 static void
 ario_status_icon_set_property (GObject *object,
-                             guint prop_id,
-                             const GValue *value,
-                             GParamSpec *pspec)
+                               guint prop_id,
+                               const GValue *value,
+                               GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioStatusIcon *status = ARIO_STATUS_ICON (object);
@@ -378,12 +378,12 @@ ario_status_icon_sync_tooltip (ArioStatusIcon *icon)
         case MPD_STATUS_STATE_PAUSE:
                 title = ario_util_format_title(ario_mpd_get_current_song (icon->priv->mpd));
                 tooltip = g_strdup_printf ("%s: %s\n%s: %s\n%s: %s",
-                                            _("Artist"),
-                                            ario_mpd_get_current_artist (icon->priv->mpd) ? ario_mpd_get_current_artist (icon->priv->mpd) : ARIO_MPD_UNKNOWN,
-                                             _("Album"),
-                                            ario_mpd_get_current_album (icon->priv->mpd) ? ario_mpd_get_current_album (icon->priv->mpd) : ARIO_MPD_UNKNOWN,
-                                            _("Title"),
-                                            title);
+                                           _("Artist"),
+                                           ario_mpd_get_current_artist (icon->priv->mpd) ? ario_mpd_get_current_artist (icon->priv->mpd) : ARIO_MPD_UNKNOWN,
+                                           _("Album"),
+                                           ario_mpd_get_current_album (icon->priv->mpd) ? ario_mpd_get_current_album (icon->priv->mpd) : ARIO_MPD_UNKNOWN,
+                                           _("Title"),
+                                           title);
                 g_free (title);
                 break;
         default:
@@ -428,7 +428,7 @@ ario_status_icon_sync_popup (ArioStatusIcon *icon)
 
 static void
 ario_status_icon_song_changed_cb (ArioMpd *mpd,
-                                ArioStatusIcon *icon)
+                                  ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_status_icon_sync_tooltip (icon);
@@ -436,7 +436,7 @@ ario_status_icon_song_changed_cb (ArioMpd *mpd,
 
 static void
 ario_status_icon_state_changed_cb (ArioMpd *mpd,
-                                 ArioStatusIcon *icon)
+                                   ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_status_icon_sync_tooltip (icon);
@@ -446,7 +446,7 @@ ario_status_icon_state_changed_cb (ArioMpd *mpd,
 
 static void
 ario_status_icon_cmd_play (GtkAction *action,
-                         ArioStatusIcon *icon)
+                           ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_play (icon->priv->mpd);
@@ -454,7 +454,7 @@ ario_status_icon_cmd_play (GtkAction *action,
 
 static void
 ario_status_icon_cmd_pause (GtkAction *action,
-                          ArioStatusIcon *icon)
+                            ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_pause (icon->priv->mpd);
@@ -462,7 +462,7 @@ ario_status_icon_cmd_pause (GtkAction *action,
 
 static void
 ario_status_icon_cmd_stop (GtkAction *action,
-                        ArioStatusIcon *icon)
+                           ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_stop (icon->priv->mpd);
@@ -470,7 +470,7 @@ ario_status_icon_cmd_stop (GtkAction *action,
 
 static void
 ario_status_icon_cmd_next (GtkAction *action,
-                         ArioStatusIcon *icon)
+                           ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_next (icon->priv->mpd);
@@ -478,7 +478,7 @@ ario_status_icon_cmd_next (GtkAction *action,
 
 static void
 ario_status_icon_cmd_previous (GtkAction *action,
-                             ArioStatusIcon *icon)
+                               ArioStatusIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_prev (icon->priv->mpd);

@@ -55,18 +55,18 @@ main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START
 
-	GOptionContext *context;
-	static const GOptionEntry options []  = {
-		{ "minimized",           'm', 0, G_OPTION_ARG_NONE,         &minimized,           N_("Start minimized window"), NULL },
-		{ NULL }
-	};
+        GOptionContext *context;
+        static const GOptionEntry options []  = {
+                { "minimized",           'm', 0, G_OPTION_ARG_NONE,         &minimized,           N_("Start minimized window"), NULL },
+                { NULL }
+        };
 
-	context = g_option_context_new (NULL);
-	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
-	g_option_context_add_group (context, gtk_get_option_group (TRUE));
+        context = g_option_context_new (NULL);
+        g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+        g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
-	g_option_context_parse (context, &argc, &argv, NULL);
-	g_option_context_free (context);
+        g_option_context_parse (context, &argc, &argv, NULL);
+        g_option_context_free (context);
 
         ario_conf_init ();
 
@@ -81,15 +81,15 @@ main (int argc, char *argv[])
 #else
         BaconMessageConnection *bacon_connection = bacon_message_connection_new ("ario");
         if (bacon_connection) {
-            if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)
-                 && !bacon_message_connection_get_is_server (bacon_connection)) {
-                ARIO_LOG_INFO ("Ario is already running\n");
-                bacon_message_connection_send (bacon_connection, "PRESENT");
-                return 0;
-            }
-            bacon_message_connection_set_callback (bacon_connection,
-                                                   ario_main_on_message_received,
-                                                   NULL);
+                if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)
+                    && !bacon_message_connection_get_is_server (bacon_connection)) {
+                        ARIO_LOG_INFO ("Ario is already running\n");
+                        bacon_message_connection_send (bacon_connection, "PRESENT");
+                        return 0;
+                }
+                bacon_message_connection_set_callback (bacon_connection,
+                                                       ario_main_on_message_received,
+                                                       NULL);
         }
 #endif
 

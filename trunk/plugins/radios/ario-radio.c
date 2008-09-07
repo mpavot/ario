@@ -57,7 +57,7 @@ static void ario_radio_cmd_add_radios (GtkAction *action,
 static void ario_radio_cmd_add_play_radios (GtkAction *action,
                                             ArioRadio *radio);
 static void ario_radio_cmd_clear_add_play_radios (GtkAction *action,
-                                            ArioRadio *radio);
+                                                  ArioRadio *radio);
 static void ario_radio_cmd_new_radio (GtkAction *action,
                                       ArioRadio *radio);
 static void ario_radio_cmd_delete_radios (GtkAction *action,

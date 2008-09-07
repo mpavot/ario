@@ -66,13 +66,13 @@ static gboolean ario_filesystem_motion_notify (GtkWidget *widget,
                                                GdkEventMotion *event,
                                                ArioFilesystem *filesystem);
 static void ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
-                                                        GdkDragContext * context,
-                                                        GtkSelectionData * selection_data,
-                                                        guint info, guint time, gpointer data);
+                                                       GdkDragContext * context,
+                                                       GtkSelectionData * selection_data,
+                                                       guint info, guint time, gpointer data);
 static void ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
-                                                        GtkTreePath *path,
-                                                        GtkTreeViewColumn *column,
-                                                        ArioFilesystem *filesystem);
+                                                       GtkTreePath *path,
+                                                       GtkTreeViewColumn *column,
+                                                       ArioFilesystem *filesystem);
 static gboolean ario_filesystem_filetree_row_expanded_cb (GtkTreeView *tree_view,
                                                           GtkTreeIter *iter,
                                                           GtkTreePath *path,
@@ -530,9 +530,9 @@ ario_filesystem_filetree_row_expanded_cb (GtkTreeView *tree_view,
 
 static void
 ario_filesystem_filetree_row_activated_cb (GtkTreeView *tree_view,
-                                            GtkTreePath *path,
-                                            GtkTreeViewColumn *column,
-                                            ArioFilesystem *filesystem)
+                                           GtkTreePath *path,
+                                           GtkTreeViewColumn *column,
+                                           ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
 
@@ -775,9 +775,9 @@ ario_filesystem_motion_notify (GtkWidget *widget,
 
 static void
 ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
-                                            GdkDragContext * context,
-                                            GtkSelectionData * selection_data,
-                                            guint info, guint time, gpointer data)
+                                           GdkDragContext * context,
+                                           GtkSelectionData * selection_data,
+                                           guint info, guint time, gpointer data)
 {
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;

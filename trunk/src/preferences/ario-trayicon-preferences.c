@@ -36,9 +36,9 @@ static void ario_trayicon_preferences_init (ArioTrayiconPreferences *trayicon_pr
 static void ario_trayicon_preferences_finalize (GObject *object);
 static void ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
-                                                                              ArioTrayiconPreferences *trayicon_preferences);
+                                                                             ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_notification_check_changed_cb (GtkCheckButton *butt,
-                                                                           ArioTrayiconPreferences *trayicon_preferences);
+                                                                              ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_check_changed_cb (GtkCheckButton *butt,
                                                                           ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_notificationtime_changed_cb (GtkWidget *widget,
@@ -83,8 +83,8 @@ ario_trayicon_preferences_get_type (void)
                 };
 
                 ario_trayicon_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                          "ArioTrayiconPreferences",
-                                                                          &our_info, 0);
+                                                                         "ArioTrayiconPreferences",
+                                                                         &our_info, 0);
         }
 
         return ario_trayicon_preferences_type;
@@ -203,7 +203,7 @@ ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_prefe
 
 void
 ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
-                                                         ArioTrayiconPreferences *trayicon_preferences)
+                                                        ArioTrayiconPreferences *trayicon_preferences)
 {
         ARIO_LOG_FUNCTION_START
         int i;

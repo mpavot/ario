@@ -34,8 +34,8 @@ static void ario_shell_similarartists_class_init (ArioShellSimilarartistsClass *
 static void ario_shell_similarartists_init (ArioShellSimilarartists *shell_similarartists);
 static void ario_shell_similarartists_finalize (GObject *object);
 static gboolean ario_shell_similarartists_window_delete_cb (GtkWidget *window,
-                                                    GdkEventAny *event,
-                                                    ArioShellSimilarartists *shell_similarartists);
+                                                            GdkEventAny *event,
+                                                            ArioShellSimilarartists *shell_similarartists);
 G_MODULE_EXPORT void ario_shell_similarartists_close_cb (GtkButton *button,
                                                          ArioShellSimilarartists *shell_similarartists);
 G_MODULE_EXPORT void ario_shell_similarartists_lastfm_cb (GtkButton *button,
@@ -102,8 +102,8 @@ ario_shell_similarartists_get_type (void)
                 };
 
                 ario_shell_similarartists_type = g_type_register_static (GTK_TYPE_WINDOW,
-                                                                 "ArioShellSimilarartists",
-                                                                 &our_info, 0);
+                                                                         "ArioShellSimilarartists",
+                                                                         &our_info, 0);
         }
 
         return ario_shell_similarartists_type;
@@ -367,9 +367,9 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         g_slist_free (similar_artists);
 
         shell_similarartists->priv->thread = g_thread_create ((GThreadFunc) ario_shell_similarartists_get_images,
-                                                               shell_similarartists,
-                                                               TRUE,
-                                                               NULL);
+                                                              shell_similarartists,
+                                                              TRUE,
+                                                              NULL);
         g_slist_free (criteria);
 }
 
@@ -474,8 +474,8 @@ ario_shell_similarartists_finalize (GObject *object)
 
 static gboolean
 ario_shell_similarartists_window_delete_cb (GtkWidget *window,
-                                    GdkEventAny *event,
-                                    ArioShellSimilarartists *shell_similarartists)
+                                            GdkEventAny *event,
+                                            ArioShellSimilarartists *shell_similarartists)
 {
         ARIO_LOG_FUNCTION_START
         shell_similarartists->priv->closed = TRUE;
@@ -490,7 +490,7 @@ ario_shell_similarartists_window_delete_cb (GtkWidget *window,
 
 void
 ario_shell_similarartists_close_cb (GtkButton *button,
-                            ArioShellSimilarartists *shell_similarartists)
+                                    ArioShellSimilarartists *shell_similarartists)
 {
         ARIO_LOG_FUNCTION_START
         shell_similarartists->priv->closed = TRUE;

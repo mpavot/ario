@@ -45,14 +45,14 @@ static void ario_wikipedia_plugin_mpd_state_changed_cb (ArioMpd *mpd,
 
 static GtkActionEntry ario_wikipedia_actions [] =
 {
-	{ "ToolWikipedia", GTK_STOCK_FIND, N_("Find artist on Wikipedia"), NULL,
-	  N_("Find artist on Wikipedia"),
-	  G_CALLBACK (ario_wikipedia_cmd_find_artist) }
+        { "ToolWikipedia", GTK_STOCK_FIND, N_("Find artist on Wikipedia"), NULL,
+                N_("Find artist on Wikipedia"),
+                G_CALLBACK (ario_wikipedia_cmd_find_artist) }
 };
 
 struct _ArioWikipediaPluginPrivate
 {
-	guint ui_merge_id;
+        guint ui_merge_id;
         ArioShell *shell;
         GtkActionGroup *actiongroup;
 };
@@ -97,32 +97,32 @@ static void
 impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
-	GtkUIManager *uimanager;
-	ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
+        GtkUIManager *uimanager;
+        ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
         static gboolean is_loaded = FALSE;
         gchar *file;
         ArioMpd *mpd;
 
-	g_object_get (shell, "ui-manager", &uimanager, NULL);
+        g_object_get (shell, "ui-manager", &uimanager, NULL);
         file = ario_plugin_find_file ("wikipedia-ui.xml");
         if (file) {
                 pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
                                                                          file, NULL);
                 g_free (file);
         }
-	g_object_unref (uimanager);
+        g_object_unref (uimanager);
 
         if (!is_loaded) {
-	        g_object_get (shell, "action-group", &pi->priv->actiongroup, NULL);
+                g_object_get (shell, "action-group", &pi->priv->actiongroup, NULL);
                 gtk_action_group_add_actions (pi->priv->actiongroup,
                                               ario_wikipedia_actions,
                                               G_N_ELEMENTS (ario_wikipedia_actions), pi);
-	        g_object_unref (pi->priv->actiongroup);
+                g_object_unref (pi->priv->actiongroup);
 
                 is_loaded = TRUE;
         }
 
-	g_object_get (shell, "mpd", &mpd, NULL);
+        g_object_get (shell, "mpd", &mpd, NULL);
         g_signal_connect_object (G_OBJECT (mpd),
                                  "state_changed", G_CALLBACK (ario_wikipedia_plugin_mpd_state_changed_cb),
                                  pi, 0);
@@ -136,19 +136,19 @@ static void
 impl_deactivate (ArioPlugin *plugin,
                  ArioShell *shell)
 {
-	GtkUIManager *uimanager;
+        GtkUIManager *uimanager;
 
-	ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
+        ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
 
-	g_object_get (shell, "ui-manager", &uimanager, NULL);
-	gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
-	g_object_unref (uimanager);
+        g_object_get (shell, "ui-manager", &uimanager, NULL);
+        gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
+        g_object_unref (uimanager);
 }
 
 static void
 configure_dialog_response_cb (GtkWidget *widget,
-			      gint response,
-			      GtkWidget *dialog)
+                              gint response,
+                              GtkWidget *dialog)
 {
         gtk_widget_destroy (dialog);
 }
@@ -168,10 +168,10 @@ combobox_changed_cb (GtkComboBox *widget,
 static GtkWidget *
 impl_create_configure_dialog (ArioPlugin *plugin)
 {
-	GtkWidget *dialog;
-	GtkWidget *hbox;
-	GtkWidget *label;
-	GtkWidget *combobox;
+        GtkWidget *dialog;
+        GtkWidget *hbox;
+        GtkWidget *label;
+        GtkWidget *combobox;
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
@@ -179,11 +179,11 @@ impl_create_configure_dialog (ArioPlugin *plugin)
         char *current_language;
 
         dialog = gtk_dialog_new_with_buttons (_("Wikipedia Plugin - Configuration"),
-					      NULL,
-					      GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_CLOSE,
-					      GTK_RESPONSE_CLOSE,
-					      NULL);
+                                              NULL,
+                                              GTK_DIALOG_DESTROY_WITH_PARENT,
+                                              GTK_STOCK_CLOSE,
+                                              GTK_RESPONSE_CLOSE,
+                                              NULL);
 
         hbox = gtk_hbox_new (FALSE, 6);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
@@ -218,23 +218,23 @@ impl_create_configure_dialog (ArioPlugin *plugin)
         }
         g_free (current_language);
 
-	gtk_box_pack_start_defaults (GTK_BOX (hbox),
-				     label);
-	gtk_box_pack_start_defaults (GTK_BOX (hbox),
-				     combobox);
+        gtk_box_pack_start_defaults (GTK_BOX (hbox),
+                                     label);
+        gtk_box_pack_start_defaults (GTK_BOX (hbox),
+                                     combobox);
 
-	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dialog)->vbox),
-				     hbox);
+        gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+                                     hbox);
 
-	g_signal_connect (combobox,
-			  "changed",
-			  G_CALLBACK (combobox_changed_cb),
-			  NULL);
+        g_signal_connect (combobox,
+                          "changed",
+                          G_CALLBACK (combobox_changed_cb),
+                          NULL);
 
-	g_signal_connect (dialog,
-			  "response",
-			  G_CALLBACK (configure_dialog_response_cb),
-			  dialog);
+        g_signal_connect (dialog,
+                          "response",
+                          G_CALLBACK (configure_dialog_response_cb),
+                          dialog);
 
         gtk_widget_show_all (dialog);
 
@@ -267,13 +267,13 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 
         g_return_if_fail (ARIO_IS_WIKIPEDIA_PLUGIN (plugin));
 
-	g_object_get (plugin->priv->shell, "mpd", &mpd, NULL);
+        g_object_get (plugin->priv->shell, "mpd", &mpd, NULL);
         artist = g_strdup (ario_mpd_get_current_artist (mpd));
         g_object_unref (mpd);
         if (artist) {
                 ario_util_string_replace (&artist, " ", "_");
                 ario_util_string_replace (&artist, "/", "_");
-                
+
                 language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
                 uri = g_strdup_printf ("http://%s.wikipedia.org/wiki/%s", language, artist);
                 g_free (language);
@@ -293,7 +293,7 @@ ario_wikipedia_plugin_sync_mpd (ArioWikipediaPlugin *plugin,
 
         is_playing = (ario_mpd_is_connected (mpd)
                       && ((ario_mpd_get_current_state (mpd) == MPD_STATUS_STATE_PLAY)
-                           || (ario_mpd_get_current_state (mpd) == MPD_STATUS_STATE_PAUSE)));
+                          || (ario_mpd_get_current_state (mpd) == MPD_STATUS_STATE_PAUSE)));
 
         action = gtk_action_group_get_action (plugin->priv->actiongroup,
                                               "ToolWikipedia");

@@ -201,10 +201,10 @@ ario_header_drag_leave_cb (GtkWidget *widget,
                                                  &contents,
                                                  &length,
                                                  NULL)) {
-                                 ario_cover_save_cover (ario_mpd_get_current_artist (header->priv->mpd),
-                                                        ario_mpd_get_current_album (header->priv->mpd),
-                                                        contents, length,
-                                                        OVERWRITE_MODE_REPLACE);
+                                ario_cover_save_cover (ario_mpd_get_current_artist (header->priv->mpd),
+                                                       ario_mpd_get_current_album (header->priv->mpd),
+                                                       contents, length,
+                                                       OVERWRITE_MODE_REPLACE);
                                 g_free (contents);
                                 ario_cover_handler_force_reload ();
                         }
