@@ -188,7 +188,7 @@ ario_util_add_stock_icons (const char *stock_id,
                                        NULL);
         set = gtk_icon_set_new_from_pixbuf (pb);
         gtk_icon_factory_add (factory, stock_id, set);
-        g_object_unref (G_OBJECT (pb));
+        g_object_unref (pb);
 }
 
 void
