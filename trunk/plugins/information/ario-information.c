@@ -270,6 +270,13 @@ ario_information_finalize (GObject *object)
         information = ARIO_INFORMATION (object);
 
         g_return_if_fail (information->priv != NULL);
+
+        if (information->priv->albums) {
+                g_slist_foreach (information->priv->albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_free (information->priv->albums);
+                information->priv->albums = NULL;
+        }
+
         g_free (information->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -353,6 +360,11 @@ ario_information_new (GtkUIManager *mgr,
                                     NULL);
 
         g_return_val_if_fail (information->priv != NULL, NULL);
+
+        information->priv->connected = ario_mpd_is_connected (mpd);
+        ario_information_fill_song (information);
+        ario_information_fill_cover (information);
+        ario_information_fill_album (information);
 
         return GTK_WIDGET (information);
 }
