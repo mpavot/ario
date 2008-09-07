@@ -35,33 +35,33 @@ static void ario_information_class_init (ArioInformationClass *klass);
 static void ario_information_init (ArioInformation *information);
 static void ario_information_finalize (GObject *object);
 static void ario_information_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec);
+                                           guint prop_id,
+                                           const GValue *value,
+                                           GParamSpec *pspec);
 static void ario_information_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec);
+                                           guint prop_id,
+                                           GValue *value,
+                                           GParamSpec *pspec);
 static void ario_information_fill_song (ArioInformation *information);
 static void ario_information_fill_cover (ArioInformation *information);
 static void ario_information_album_foreach (GtkWidget *widget,
-                                GtkContainer *container);
+                                            GtkContainer *container);
 static void ario_information_fill_album (ArioInformation *information);
 static void ario_information_state_changed_cb (ArioMpd *mpd,
-                             ArioInformation *information);
+                                               ArioInformation *information);
 static void ario_information_song_changed_cb (ArioMpd *mpd,
-                             ArioInformation *information);
+                                              ArioInformation *information);
 static void ario_information_cover_changed_cb (ArioCoverHandler *cover_handler,
-                                  ArioInformation *information);
+                                               ArioInformation *information);
 static void ario_information_album_changed_cb (ArioMpd *mpd,
-                             ArioInformation *information);
+                                               ArioInformation *information);
 static void ario_information_cover_drag_data_get_cb (GtkWidget *widget,
-                            GdkDragContext *context,
-                            GtkSelectionData *selection_data,
-                            guint info, guint time, ArioMpdAlbum *album);
+                                                     GdkDragContext *context,
+                                                     GtkSelectionData *selection_data,
+                                                     guint info, guint time, ArioMpdAlbum *album);
 static gboolean ario_information_cover_button_press_cb (GtkWidget *widget,
-                           GdkEventButton *event,
-                           ArioMpdAlbum *album);
+                                                        GdkEventButton *event,
+                                                        ArioMpdAlbum *album);
 
 struct ArioInformationPrivate
 {
@@ -186,7 +186,9 @@ ario_information_class_init (ArioInformationClass *klass)
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
-static void ario_information_changed_cb (GtkWidget *vbox, GtkStyle *style,  GtkWidget *vp)
+static void ario_information_style_set_cb (GtkWidget *vbox,
+                                           GtkStyle *style,
+                                           GtkWidget *vp)
 {
         gtk_widget_modify_bg (vp, GTK_STATE_NORMAL, &(GTK_WIDGET(vbox)->style->light[GTK_STATE_NORMAL]));
 }
@@ -208,15 +210,18 @@ ario_information_init (ArioInformation *information)
 
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_NONE);
 
         vp = gtk_viewport_new (gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (scrolledwindow)),
-                        gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow)));
+                               gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow)));
 
         xml = rb_glade_xml_new (file, "vbox", information);
 
         vbox = glade_xml_get_widget (xml, "vbox");
-        g_signal_connect (G_OBJECT (vbox), "style-set", G_CALLBACK (ario_information_changed_cb), vp);
+        g_signal_connect (G_OBJECT (vbox),
+                          "style-set",
+                          G_CALLBACK (ario_information_style_set_cb),
+                          vp);
 
         information->priv->artist_label = glade_xml_get_widget (xml, "artist_label");
         information->priv->album_label = glade_xml_get_widget (xml, "album_label");
@@ -272,9 +277,9 @@ ario_information_finalize (GObject *object)
 
 static void
 ario_information_set_property (GObject *object,
-                         guint prop_id,
-                         const GValue *value,
-                         GParamSpec *pspec)
+                               guint prop_id,
+                               const GValue *value,
+                               GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioInformation *information = ARIO_INFORMATION (object);
@@ -310,9 +315,9 @@ ario_information_set_property (GObject *object,
 
 static void
 ario_information_get_property (GObject *object,
-                         guint prop_id,
-                         GValue *value,
-                         GParamSpec *pspec)
+                               guint prop_id,
+                               GValue *value,
+                               GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START
         ArioInformation *information = ARIO_INFORMATION (object);
@@ -335,17 +340,17 @@ ario_information_get_property (GObject *object,
 
 GtkWidget *
 ario_information_new (GtkUIManager *mgr,
-                GtkActionGroup *group,
-                ArioMpd *mpd)
+                      GtkActionGroup *group,
+                      ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
         ArioInformation *information;
 
         information = g_object_new (TYPE_ARIO_INFORMATION,
-                              "ui-manager", mgr,
-                              "action-group", group,
-                              "mpd", mpd,
-                              NULL);
+                                    "ui-manager", mgr,
+                                    "action-group", group,
+                                    "mpd", mpd,
+                                    NULL);
 
         g_return_val_if_fail (information->priv != NULL, NULL);
 
@@ -455,7 +460,7 @@ ario_information_fill_album (ArioInformation *information)
         for (tmp = information->priv->albums; tmp && nb < 8; tmp = g_slist_next (tmp)) {
                 album = tmp->data;
                 if ((!album->album && !song->album)
-                     || (album->album && song->album && !strcmp (album->album, song->album)))
+                    || (album->album && song->album && !strcmp (album->album, song->album)))
                         continue;
 
                 cover_path = ario_cover_make_ario_cover_path (album->artist, album->album, SMALL_COVER);
@@ -495,7 +500,7 @@ ario_information_fill_album (ArioInformation *information)
 
 static void
 ario_information_state_changed_cb (ArioMpd *mpd,
-                             ArioInformation *information)
+                                   ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
         information->priv->connected = ario_mpd_is_connected (mpd);
@@ -506,7 +511,7 @@ ario_information_state_changed_cb (ArioMpd *mpd,
 
 static void
 ario_information_song_changed_cb (ArioMpd *mpd,
-                             ArioInformation *information)
+                                  ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
         ario_information_fill_song (information);
@@ -522,7 +527,7 @@ ario_information_cover_changed_cb (ArioCoverHandler *cover_handler,
 
 static void
 ario_information_album_changed_cb (ArioMpd *mpd,
-                             ArioInformation *information)
+                                   ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
         ario_information_fill_album (information);
@@ -530,9 +535,9 @@ ario_information_album_changed_cb (ArioMpd *mpd,
 
 static void
 ario_information_cover_drag_data_get_cb (GtkWidget *widget,
-                            GdkDragContext *context,
-                            GtkSelectionData *selection_data,
-                            guint info, guint time, ArioMpdAlbum *album)
+                                         GdkDragContext *context,
+                                         GtkSelectionData *selection_data,
+                                         guint info, guint time, ArioMpdAlbum *album)
 {
         ARIO_LOG_FUNCTION_START
         gchar *str;
@@ -546,8 +551,8 @@ ario_information_cover_drag_data_get_cb (GtkWidget *widget,
 
 static gboolean
 ario_information_cover_button_press_cb (GtkWidget *widget,
-                           GdkEventButton *event,
-                           ArioMpdAlbum *album)
+                                        GdkEventButton *event,
+                                        ArioMpdAlbum *album)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdAtomicCriteria atomic_criteria1;

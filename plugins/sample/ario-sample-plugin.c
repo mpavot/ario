@@ -51,9 +51,9 @@ ario_sample_plugin_init (ArioSamplePlugin *plugin)
 static void
 ario_sample_plugin_finalize (GObject *object)
 {
-/*
-        ArioSamplePlugin *plugin = ARIO_SAMPLE_PLUGIN (object);
-*/
+        /*
+           ArioSamplePlugin *plugin = ARIO_SAMPLE_PLUGIN (object);
+           */
         printf ("ArioSamplePlugin finalising\n");
 
         G_OBJECT_CLASS (ario_sample_plugin_parent_class)->finalize (object);
@@ -83,6 +83,6 @@ ario_sample_plugin_class_init (ArioSamplePluginClass *klass)
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-        
+
         g_type_class_add_private (object_class, sizeof (ArioSamplePluginPrivate));
 }

@@ -454,8 +454,8 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
         if (icon->priv->timeout_id)
                 g_source_remove (icon->priv->timeout_id);
         icon->priv->timeout_id = g_timeout_add (500,
-                                               (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
-                                               icon);
+                                                (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
+                                                icon);
 }
 
 static void
@@ -805,7 +805,7 @@ ario_tray_icon_song_changed_cb (ArioMpd *mpd,
 
                 icon->priv->notification_id = g_timeout_add (ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000,
                                                              (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
-                                                              icon);
+                                                             icon);
         }
 }
 
@@ -865,7 +865,7 @@ ario_tray_icon_cmd_pause (GtkAction *action,
 
 static void
 ario_tray_icon_cmd_stop (GtkAction *action,
-                        ArioTrayIcon *icon)
+                         ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_stop (icon->priv->mpd);

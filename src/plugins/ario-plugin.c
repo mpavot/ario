@@ -130,54 +130,54 @@ ario_plugin_create_configure_dialog (ArioPlugin *plugin)
 GSList *
 ario_plugin_get_plugin_paths (void)
 {
-	GSList *paths = NULL;
-	char  *path;
+        GSList *paths = NULL;
+        char  *path;
 
-	path = g_build_filename (ario_util_config_dir (), "plugins", NULL);
-	paths = g_slist_append (paths, path);
+        path = g_build_filename (ario_util_config_dir (), "plugins", NULL);
+        paths = g_slist_append (paths, path);
 
 
-	path = g_strdup (ARIO_PLUGIN_DIR);
-	paths = g_slist_append (paths, path);
+        path = g_strdup (ARIO_PLUGIN_DIR);
+        paths = g_slist_append (paths, path);
 
-	return paths;
+        return paths;
 }
 
 
 char *
 ario_plugin_find_file (const char *file)
 {
-	GSList *paths;
-	GSList *l;
-	char *ret = NULL;
+        GSList *paths;
+        GSList *l;
+        char *ret = NULL;
 
-	paths = ario_plugin_get_plugin_paths ();
+        paths = ario_plugin_get_plugin_paths ();
 
-	for (l = paths; l != NULL; l = l->next) {
-		if (ret == NULL) {
-			char *tmp;
+        for (l = paths; l != NULL; l = l->next) {
+                if (ret == NULL) {
+                        char *tmp;
 
-			tmp = g_build_filename (l->data, file, NULL);
+                        tmp = g_build_filename (l->data, file, NULL);
 
-			if (g_file_test (tmp, G_FILE_TEST_EXISTS)) {
-				ret = tmp;
-				break;
-			}
-			g_free (tmp);
-		}
-	}
+                        if (g_file_test (tmp, G_FILE_TEST_EXISTS)) {
+                                ret = tmp;
+                                break;
+                        }
+                        g_free (tmp);
+                }
+        }
 
-	g_slist_foreach (paths, (GFunc) g_free, NULL);
-	g_slist_free (paths);
+        g_slist_foreach (paths, (GFunc) g_free, NULL);
+        g_slist_free (paths);
 
-	/* global data files */
-	if (ret == NULL) {
+        /* global data files */
+        if (ret == NULL) {
                 ARIO_LOG_ERROR ("File not found '%s'", file);
                 return NULL;
         }
 
         ARIO_LOG_DBG ("found '%s' when searching for file '%s'",
-		      ret, file);
+                      ret, file);
 
-	return ret;
+        return ret;
 }

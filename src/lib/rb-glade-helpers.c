@@ -36,7 +36,7 @@ rb_glade_xml_new (const char *file,
         GladeXML *xml;
 
         xml = glade_xml_new (file, root, NULL);
-        
+
         if (!g_module_supported())
                 g_warning("g_module not supported");
 
@@ -88,9 +88,9 @@ glade_signal_connect_func (const gchar *cb_name, GObject *obj,
                 {
                         /* no conn_obj; use standard connect */
                         gpointer data = NULL;
-                        
+
                         data = user_data;
-                        
+
                         if (conn_after)
                         {
                                 g_signal_connect_after
@@ -114,35 +114,35 @@ glade_signal_connect_func (const gchar *cb_name, GObject *obj,
 void
 rb_glade_boldify_label (GladeXML *xml, const char *name)
 {
-	GtkWidget *widget;
+        GtkWidget *widget;
 
-	widget = glade_xml_get_widget (xml, name);
+        widget = glade_xml_get_widget (xml, name);
 
-	if (widget == NULL) {
-		g_warning ("widget '%s' not found", name);
-		return;
-	}
+        if (widget == NULL) {
+                g_warning ("widget '%s' not found", name);
+                return;
+        }
 
-	/* this way is probably better, but for some reason doesn't work with
-	 * labels with mnemonics.*/
+        /* this way is probably better, but for some reason doesn't work with
+         * labels with mnemonics.*/
 
-	static PangoAttrList *pattrlist = NULL;
+        static PangoAttrList *pattrlist = NULL;
 
-	if (pattrlist == NULL) {
-		PangoAttribute *attr;
+        if (pattrlist == NULL) {
+                PangoAttribute *attr;
 
-		pattrlist = pango_attr_list_new ();
-		attr = pango_attr_weight_new (PANGO_WEIGHT_BOLD);
-		attr->start_index = 0;
-		attr->end_index = G_MAXINT;
-		pango_attr_list_insert (pattrlist, attr);
-	}
-	gtk_label_set_attributes (GTK_LABEL (widget), pattrlist);
+                pattrlist = pango_attr_list_new ();
+                attr = pango_attr_weight_new (PANGO_WEIGHT_BOLD);
+                attr->start_index = 0;
+                attr->end_index = G_MAXINT;
+                pango_attr_list_insert (pattrlist, attr);
+        }
+        gtk_label_set_attributes (GTK_LABEL (widget), pattrlist);
 
         /*
-	gchar *str_final;
-	str_final = g_strdup_printf ("<b>%s</b>", gtk_label_get_label (GTK_LABEL (widget)));
-	gtk_label_set_markup_with_mnemonic (GTK_LABEL (widget), str_final);
-	g_free (str_final);
-	*/
+           gchar *str_final;
+           str_final = g_strdup_printf ("<b>%s</b>", gtk_label_get_label (GTK_LABEL (widget)));
+           gtk_label_set_markup_with_mnemonic (GTK_LABEL (widget), str_final);
+           g_free (str_final);
+           */
 }

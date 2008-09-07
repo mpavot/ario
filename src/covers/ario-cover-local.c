@@ -45,13 +45,13 @@ struct ArioCoverLocalPrivate
 };
 
 static const char *valid_cover_names[] = {
-	"folder.png",
-	".folder.png",
-	"cover.png",
-	"folder.jpg",
-	".folder.jpg",
-	"cover.jpg",
-	NULL
+        "folder.png",
+        ".folder.png",
+        "cover.png",
+        "folder.jpg",
+        ".folder.jpg",
+        "cover.jpg",
+        NULL
 };
 
 static GObjectClass *parent_class = NULL;
@@ -142,7 +142,7 @@ ario_cover_local_new (void)
         ArioCoverLocal *local;
 
         local = g_object_new (TYPE_ARIO_COVER_LOCAL,
-                               NULL);
+                              NULL);
 
         g_return_val_if_fail (local->priv != NULL, NULL);
 

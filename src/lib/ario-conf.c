@@ -129,7 +129,7 @@ ario_conf_get_integer (const char *key,
 
 void
 ario_conf_set_float (const char *key,
-                            gfloat float_value)
+                     gfloat float_value)
 {
         ario_conf_set (key, g_strdup_printf ("%f", float_value));
 }

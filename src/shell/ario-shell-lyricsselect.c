@@ -184,7 +184,7 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
                 glade_xml_get_widget (xml, "search_button");
         ario_shell_lyricsselect->priv->treeview =
                 glade_xml_get_widget (xml, "treeview");
-                
+
         rb_glade_boldify_label (xml, "static_artist_label");
         rb_glade_boldify_label (xml, "static_title_label");
 
