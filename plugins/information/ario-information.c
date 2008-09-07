@@ -193,6 +193,15 @@ static void ario_information_style_set_cb (GtkWidget *vbox,
         gtk_widget_modify_bg (vp, GTK_STATE_NORMAL, &(GTK_WIDGET(vbox)->style->light[GTK_STATE_NORMAL]));
 }
 
+static gboolean
+ario_information_button_press_cb (GtkWidget *widget,
+                                  GdkEventButton *event,
+                                  ArioInformation *information)
+{
+        ARIO_LOG_FUNCTION_START
+        return TRUE;
+}
+
 static void
 ario_information_init (ArioInformation *information)
 {
@@ -249,6 +258,12 @@ ario_information_init (ArioInformation *information)
 
         gtk_container_add (GTK_CONTAINER (vp), vbox);
         gtk_container_add (GTK_CONTAINER (scrolledwindow), vp);
+
+        g_signal_connect_object (G_OBJECT (scrolledwindow),
+                                 "button_press_event",
+                                 G_CALLBACK (ario_information_button_press_cb),
+                                 information,
+                                 0);
 
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (information), TRUE);
