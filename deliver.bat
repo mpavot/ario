@@ -31,6 +31,10 @@ copy plugins\radios\radios-ui.xml delivery\plugins
 copy plugins\radios\radios.xml.default delivery\plugins
 copy plugins\radios\radios.ario-plugin.w32 delivery\plugins\radios.ario-plugin
 
+copy plugins\information\libinformation.dll delivery\plugins
+copy plugins\information\information.glade delivery\plugins
+copy plugins\information\information.ario-plugin.w32 delivery\plugins\information.ario-plugin
+
 mkdir delivery\po
 
 for %%a in (po\*.gmo) do (
