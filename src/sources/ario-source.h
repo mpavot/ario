@@ -59,6 +59,10 @@ typedef struct
         gchar*          (*get_icon)                     (ArioSource *source);
 
         void            (*shutdown)                     (ArioSource *source);
+
+        void            (*select)                       (ArioSource *source);
+
+        void            (*unselect)                     (ArioSource *source);
 } ArioSourceClass;
 
 /*
@@ -73,6 +77,10 @@ gchar*          ario_source_get_name            (ArioSource *source);
 gchar*          ario_source_get_icon            (ArioSource *source);
 
 void            ario_source_shutdown            (ArioSource *source);
+
+void            ario_source_select              (ArioSource *source);
+
+void            ario_source_unselect            (ArioSource *source);
 
 G_END_DECLS
 
