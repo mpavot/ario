@@ -39,11 +39,17 @@ static void ario_sourcemanager_showtabs_changed_cb (guint notification_id,
 static gboolean ario_sourcemanager_button_press_cb (GtkWidget *widget,
                                                     GdkEventButton *event,
                                                     ArioSourceManager *sourcemanager);
+static gboolean ario_sourcemanager_switch_page_cb (GtkNotebook *notebook,
+                                                   GtkNotebookPage *notebook_page,
+                                                   gint page,
+                                                   ArioSourceManager *sourcemanager);
 
 struct ArioSourceManagerPrivate
 {
         GSList *sources;
         GtkUIManager *ui_manager;
+
+        ArioSource *source;
 };
 
 static GtkActionGroup *group;
@@ -168,6 +174,12 @@ ario_sourcemanager_new (GtkUIManager *mgr,
         g_signal_connect_object (G_OBJECT (sourcemanager),
                                  "button_press_event",
                                  G_CALLBACK (ario_sourcemanager_button_press_cb),
+                                 sourcemanager,
+                                 0);
+
+        g_signal_connect_object (G_OBJECT (sourcemanager),
+                                 "switch-page",
+                                 G_CALLBACK (ario_sourcemanager_switch_page_cb),
                                  sourcemanager,
                                  0);
 
@@ -354,6 +366,8 @@ ario_sourcemanager_remove (ArioSourceManager *sourcemanager,
 
         ario_source_shutdown (source);
 
+        if (sourcemanager->priv->source == source)
+                sourcemanager->priv->source = NULL;
 
         for (tmp = sourcemanager->priv->sources; tmp; tmp = g_slist_next (tmp)) {
                 data = tmp->data;
@@ -402,6 +416,28 @@ ario_sourcemanager_button_press_cb (GtkWidget *widget,
                 gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, 
                                 gtk_get_current_event_time ());
         }
+
+        return FALSE;
+}
+
+static gboolean
+ario_sourcemanager_switch_page_cb (GtkNotebook *notebook,
+                                   GtkNotebookPage *notebook_page,
+                                   gint page,
+                                   ArioSourceManager *sourcemanager)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioSource *new_source;
+
+        if (sourcemanager->priv->source) {
+                ario_source_unselect (sourcemanager->priv->source);
+        }
+
+        new_source = ARIO_SOURCE (gtk_notebook_get_nth_page (notebook, page));
+        if (new_source)
+                ario_source_select (new_source);
+
+        sourcemanager->priv->source = new_source;
 
         return FALSE;
 }

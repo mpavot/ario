@@ -69,6 +69,8 @@ ario_source_class_init (ArioSourceClass *klass)
         klass->get_id = dummy_char;
 
         klass->shutdown = dummy;
+        klass->select = dummy;
+        klass->unselect = dummy;
 }
 
 static void
@@ -107,4 +109,20 @@ ario_source_shutdown (ArioSource *source)
         g_return_if_fail (ARIO_IS_SOURCE (source));
 
         ARIO_SOURCE_GET_CLASS (source)->shutdown (source);
+}
+
+void
+ario_source_select (ArioSource *source)
+{
+        g_return_if_fail (ARIO_IS_SOURCE (source));
+
+        ARIO_SOURCE_GET_CLASS (source)->select (source);
+}
+
+void
+ario_source_unselect (ArioSource *source)
+{
+        g_return_if_fail (ARIO_IS_SOURCE (source));
+
+        ARIO_SOURCE_GET_CLASS (source)->unselect (source);
 }

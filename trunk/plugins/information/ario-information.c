@@ -84,6 +84,8 @@ struct ArioInformationPrivate
         GtkWidget *albums_const_label;
 
         GSList *albums;
+
+        gboolean selected;
 };
 
 static const GtkTargetEntry criterias_targets  [] = {
@@ -146,6 +148,26 @@ ario_information_get_icon (ArioSource *source)
 }
 
 static void
+ario_information_select (ArioSource *source)
+{
+        ArioInformation *information = ARIO_INFORMATION (source);
+
+        information->priv->selected = TRUE;
+
+        ario_information_fill_song (information);
+        ario_information_fill_cover (information);
+        ario_information_fill_album (information);
+}
+
+static void
+ario_information_unselect (ArioSource *source)
+{
+        ArioInformation *information = ARIO_INFORMATION (source);
+
+        information->priv->selected = FALSE;
+}
+
+static void
 ario_information_class_init (ArioInformationClass *klass)
 {
         ARIO_LOG_FUNCTION_START
@@ -162,6 +184,8 @@ ario_information_class_init (ArioInformationClass *klass)
         source_class->get_id = ario_information_get_id;
         source_class->get_name = ario_information_get_name;
         source_class->get_icon = ario_information_get_icon;
+        source_class->select = ario_information_select;
+        source_class->unselect = ario_information_unselect;
 
         g_object_class_install_property (object_class,
                                          PROP_MPD,
@@ -264,10 +288,6 @@ ario_information_init (ArioInformation *information)
                                  G_CALLBACK (ario_information_button_press_cb),
                                  information,
                                  0);
-
-        /* Hbox properties */
-        gtk_box_set_homogeneous (GTK_BOX (information), TRUE);
-        gtk_box_set_spacing (GTK_BOX (information), 4);
 
         gtk_widget_show_all (scrolledwindow);
         gtk_box_pack_start (GTK_BOX (information), scrolledwindow, TRUE, TRUE, 0);
@@ -377,9 +397,9 @@ ario_information_new (GtkUIManager *mgr,
         g_return_val_if_fail (information->priv != NULL, NULL);
 
         information->priv->connected = ario_mpd_is_connected (mpd);
-        ario_information_fill_song (information);
-        ario_information_fill_cover (information);
-        ario_information_fill_album (information);
+
+        ario_information_select (ARIO_SOURCE (information));
+        ario_information_unselect (ARIO_SOURCE (information));
 
         return GTK_WIDGET (information);
 }
@@ -392,6 +412,9 @@ ario_information_fill_song (ArioInformation *information)
         gchar *length;
         ArioLyrics *lyrics;
         int state;
+
+        if (!information->priv->selected)
+                return;
 
         state = ario_mpd_get_current_state (information->priv->mpd);
         song = ario_mpd_get_current_song (information->priv->mpd);
@@ -432,6 +455,9 @@ ario_information_fill_cover (ArioInformation *information)
         ARIO_LOG_FUNCTION_START
         GdkPixbuf *cover;
 
+        if (!information->priv->selected)
+                return;
+
         cover = ario_cover_handler_get_large_cover ();
         gtk_image_set_from_pixbuf (GTK_IMAGE (information->priv->cover_image), cover);
 }
@@ -459,6 +485,9 @@ ario_information_fill_album (ArioInformation *information)
         int nb = 0;
         GtkWidget *event_box;
 
+        if (!information->priv->selected)
+                return;
+
         gtk_container_foreach (GTK_CONTAINER (information->priv->albums_hbox), (GtkCallback) ario_information_album_foreach, information->priv->albums_hbox);
 
         if (information->priv->albums) {
@@ -473,7 +502,7 @@ ario_information_fill_album (ArioInformation *information)
 
         if (!information->priv->connected
             || !song
-            || (state != MPD_STATUS_STATE_PLAY && state != MPD_STATUS_STATE_PAUSE)) {                
+            || (state != MPD_STATUS_STATE_PLAY && state != MPD_STATUS_STATE_PAUSE)) {
                 return;
         }
 
@@ -505,7 +534,7 @@ ario_information_fill_album (ArioInformation *information)
                         gtk_drag_source_set_icon_pixbuf (event_box, pixbuf);
 
                         g_signal_connect (event_box,
-                                          "drag_data_get", 
+                                          "drag_data_get",
                                           G_CALLBACK (ario_information_cover_drag_data_get_cb), album);
 
                         g_signal_connect (event_box,
