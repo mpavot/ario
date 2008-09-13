@@ -98,6 +98,7 @@ struct ArioMpdPrivate
         guint timeout_id;
 
         gboolean connecting;
+        gboolean support_empty_tags;
 };
 
 enum
@@ -644,6 +645,7 @@ ario_mpd_connect_thread (ArioMpd *mpd)
         }
 
         g_free (hostname);
+        mpd->priv->support_empty_tags = FALSE;
         mpd->priv->connecting = FALSE;
 
         return NULL;
@@ -773,12 +775,21 @@ ario_mpd_list_tags (ArioMpd *mpd,
         mpd_startFieldSearch (mpd->priv->connection, tag);
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                 atomic_criteria = tmp->data;
-                mpd_addConstraintSearch (mpd->priv->connection, atomic_criteria->tag, atomic_criteria->value);
+                if (mpd->priv->support_empty_tags
+                    && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
+                        mpd_addConstraintSearch (mpd->priv->connection, atomic_criteria->tag, "");
+                else
+                        mpd_addConstraintSearch (mpd->priv->connection, atomic_criteria->tag, atomic_criteria->value);
         }
         mpd_commitSearch (mpd->priv->connection);
 
         while ((value = mpd_getNextTag (mpd->priv->connection, tag))) {
-                values = g_slist_append (values, value);
+                if (*value)
+                        values = g_slist_append (values, value);
+                else {
+                        values = g_slist_append (values, g_strdup (ARIO_MPD_UNKNOWN));
+                        mpd->priv->support_empty_tags = TRUE;
+                }
         }
 
         return values;
@@ -842,9 +853,16 @@ ario_mpd_get_albums (ArioMpd *mpd,
                 mpd_startSearch (mpd->priv->connection, TRUE);
                 for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                         atomic_criteria = tmp->data;
-                        mpd_addConstraintSearch (mpd->priv->connection,
-                                                 atomic_criteria->tag,
-                                                 atomic_criteria->value);
+
+                        if (mpd->priv->support_empty_tags
+                            && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
+                                mpd_addConstraintSearch (mpd->priv->connection,
+                                                         atomic_criteria->tag,
+                                                         "");
+                        else
+                                mpd_addConstraintSearch (mpd->priv->connection,
+                                                         atomic_criteria->tag,
+                                                         atomic_criteria->value);
                 }
                 mpd_commitSearch (mpd->priv->connection);
         }
@@ -930,7 +948,12 @@ ario_mpd_get_songs (ArioMpd *mpd,
         mpd_startSearch (mpd->priv->connection, exact);
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                 atomic_criteria = tmp->data;
-                if (atomic_criteria->tag != MPD_TAG_ITEM_ALBUM
+                if (mpd->priv->support_empty_tags
+                    && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
+                        mpd_addConstraintSearch (mpd->priv->connection,
+                                                 atomic_criteria->tag,
+                                                 "");
+                else if (atomic_criteria->tag != MPD_TAG_ITEM_ALBUM
                     || g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
                         mpd_addConstraintSearch (mpd->priv->connection,
                                                  atomic_criteria->tag,
@@ -940,7 +963,7 @@ ario_mpd_get_songs (ArioMpd *mpd,
 
         while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
                 if (entity->type == MPD_INFO_ENTITY_TYPE_SONG && entity->info.song) {
-                        if (!is_album_unknown || !entity->info.song->album) {
+                        if (mpd->priv->support_empty_tags || !is_album_unknown || !entity->info.song->album) {
                                 songs = g_slist_append (songs, entity->info.song);
                                 entity->info.song = NULL;
                         }
