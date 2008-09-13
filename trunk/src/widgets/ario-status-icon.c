@@ -266,18 +266,18 @@ ario_status_icon_set_property (GObject *object,
                 break;
         case PROP_MPD:
                 status->priv->mpd = g_value_get_object (value);
-                g_signal_connect (status->priv->mpd,
-                                  "song_changed",
-                                  G_CALLBACK (ario_status_icon_song_changed_cb),
-                                  status);
-                g_signal_connect (status->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_status_icon_state_changed_cb),
-                                  status);
-                g_signal_connect (status->priv->mpd,
-                                  "playlist_changed",
-                                  G_CALLBACK (ario_status_icon_state_changed_cb),
-                                  status);
+                g_signal_connect_object (status->priv->mpd,
+                                         "song_changed",
+                                         G_CALLBACK (ario_status_icon_song_changed_cb),
+                                         status, 0);
+                g_signal_connect_object (status->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_status_icon_state_changed_cb),
+                                         status, 0);
+                g_signal_connect_object (status->priv->mpd,
+                                         "playlist_changed",
+                                         G_CALLBACK (ario_status_icon_state_changed_cb),
+                                         status, 0);
                 break;
         case PROP_ACTION_GROUP:
                 status->priv->actiongroup = g_value_get_object (value);

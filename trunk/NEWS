@@ -1,1 +1,19 @@
-
+[ 1994706 ] tray tooltip showing timeout
+[ 2016602 ] Play on enterUpdate debian files
+Update radios list
+[ 1897794 ] Notifications options 
+[ 2017480 ] Only one instance
+Add the possibility to reorder the columns in playlist
+[ 2057561 ] ario start minimized
+Debian Bug #495687 : ario_mpd_connect_to : problems getting a response from "localhost" on port 6600 : Connection refused
+Fix another encoding problem with lyric wiki
+[ 2069383 ] Drag and drop images for album art
+[ 2076890 ] Please make system tray support optional
+[ 2071774 ] notification icon background / Debian Bug#495757
+Improve ordering by date
+Add the possibility to organise configure the panes in the library tab
+Update translations
+New translations: ar, th, da, tr, fi, nb, zh_CN
+[ 2017479 ] Set playlist option, thanks to a patch from Dion Timmermann
+[ 2088157 ] Update MPD library on startup and stop MPD on close
+New plugin: Song Information

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-13 17:43+0200\n"
+"POT-Creation-Date: 2008-09-14 00:44+0200\n"
 "PO-Revision-Date: 2008-06-14 09:55+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -88,8 +88,8 @@ msgstr ""
 msgid "Music directory :"
 msgstr "Музыкальная директория :"
 
-#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:896
-#: ../plugins/radios/ario-radio.c:1095
+#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:894
+#: ../plugins/radios/ario-radio.c:1093
 msgid "Name :"
 msgstr "Название :"
 
@@ -161,7 +161,7 @@ msgstr "Поиск"
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:152
 #: ../src/sources/ario-tree.c:435 ../src/widgets/ario-playlist.c:368
-#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-status-icon.c:383
+#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-status-icon.c:386
 msgid "Album"
 msgstr "Альбом"
 
@@ -173,7 +173,7 @@ msgstr ""
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:421
 #: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:255
-#: ../src/widgets/ario-status-icon.c:381
+#: ../src/widgets/ario-status-icon.c:384
 msgid "Artist"
 msgstr "Исполнитель"
 
@@ -228,7 +228,7 @@ msgstr "Показать вкладки"
 #: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:153
 #: ../src/sources/ario-tree.c:481 ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:240
-#: ../src/widgets/ario-status-icon.c:385
+#: ../src/widgets/ario-status-icon.c:388
 msgid "Title"
 msgstr "Заголовок"
 
@@ -544,41 +544,41 @@ msgstr ""
 #: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
 #: ../src/preferences/ario-server-preferences.c:228
-#: ../src/widgets/ario-firstlaunch.c:307
+#: ../src/widgets/ario-firstlaunch.c:309
 msgid "Name"
 msgstr "Название"
 
 #: ../src/preferences/ario-connection-preferences.c:691
-#: ../src/widgets/ario-firstlaunch.c:315
+#: ../src/widgets/ario-firstlaunch.c:317
 msgid "Host"
 msgstr "Хост"
 
 #: ../src/preferences/ario-connection-preferences.c:699
-#: ../src/widgets/ario-firstlaunch.c:323
+#: ../src/widgets/ario-firstlaunch.c:325
 msgid "Port"
 msgstr "Порт"
 
-#: ../src/preferences/ario-connection-preferences.c:761
+#: ../src/preferences/ario-connection-preferences.c:762
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/preferences/ario-connection-preferences.c:808
+#: ../src/preferences/ario-connection-preferences.c:809
 msgid "New Profile"
 msgstr "Новый профиль"
 
-#: ../src/preferences/ario-server-preferences.c:325
-#: ../src/preferences/ario-stats-preferences.c:267
+#: ../src/preferences/ario-server-preferences.c:327
 #: ../src/preferences/ario-stats-preferences.c:268
 #: ../src/preferences/ario-stats-preferences.c:269
 #: ../src/preferences/ario-stats-preferences.c:270
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
+#: ../src/preferences/ario-stats-preferences.c:273
 msgid "Not connected"
 msgstr "Не подключен"
 
-#: ../src/preferences/ario-server-preferences.c:330
-#: ../src/preferences/ario-server-preferences.c:424
-#: ../src/widgets/ario-status-bar.c:211
+#: ../src/preferences/ario-server-preferences.c:332
+#: ../src/preferences/ario-server-preferences.c:426
+#: ../src/widgets/ario-status-bar.c:213
 msgid "Updating..."
 msgstr "Обновление..."
 
@@ -588,7 +588,7 @@ msgstr "Играть/Пауза"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:296
+#: ../src/widgets/ario-header.c:304
 msgid "Play next song"
 msgstr "Играть следующую песню"
 
@@ -645,15 +645,15 @@ msgstr "_Свойства"
 msgid "Library"
 msgstr "Библиотека"
 
-#: ../src/sources/ario-search.c:228
+#: ../src/sources/ario-search.c:230
 msgid "Add a search criteria"
 msgstr "Добавить критерии поиска"
 
-#: ../src/sources/ario-search.c:235
+#: ../src/sources/ario-search.c:239
 msgid "Search songs in the library"
 msgstr "Искать песню в библиотеке"
 
-#: ../src/sources/ario-search.c:429
+#: ../src/sources/ario-search.c:435
 msgid "Remove a search criteria"
 msgstr "Удалить критерии поиска"
 
@@ -665,7 +665,7 @@ msgstr "_Удалить"
 msgid "Playlists"
 msgstr "Плейлисты"
 
-#: ../src/sources/ario-storedplaylists.c:651
+#: ../src/sources/ario-storedplaylists.c:648
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Вы действительно хотите удалить все выбранные плейлисты?"
 
@@ -674,7 +674,7 @@ msgstr "Вы действительно хотите удалить все вы�
 msgid "Cover"
 msgstr "Обложка"
 
-#: ../src/sources/ario-tree.c:1229
+#: ../src/sources/ario-tree.c:1226
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Вы действительно хотите удалить все обложки выбранных исполнителей?"
@@ -743,11 +743,11 @@ msgstr "_Строка состояния"
 msgid "Upper part"
 msgstr "Верхняя часть"
 
-#: ../src/shell/ario-shell.c:761
+#: ../src/shell/ario-shell.c:768
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:762
+#: ../src/shell/ario-shell.c:769
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -767,7 +767,7 @@ msgstr ""
 "  Nick https://launchpad.net/~homolibere\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
-#: ../src/shell/ario-shell.c:1097
+#: ../src/shell/ario-shell.c:1104
 msgid "Configure Plugins"
 msgstr "Настроить расширения"
 
@@ -795,11 +795,11 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Загрузить обложку"
 
-#: ../src/shell/ario-shell-coverselect.c:591
+#: ../src/shell/ario-shell-coverselect.c:594
 msgid "Error reading file"
 msgstr "Ошибка чтения файла"
 
-#: ../src/shell/ario-shell-coverselect.c:614
+#: ../src/shell/ario-shell-coverselect.c:617
 msgid "Error saving file"
 msgstr "Ошибка записи файла"
 
@@ -835,7 +835,7 @@ msgid "Image"
 msgstr "Рисунок"
 
 #: ../src/shell/ario-shell-similarartists.c:428
-#: ../src/widgets/ario-status-bar.c:207
+#: ../src/widgets/ario-status-bar.c:209
 msgid "Songs"
 msgstr "Композиций"
 
@@ -861,11 +861,11 @@ msgstr ""
 msgid "Welcome to Ario"
 msgstr "Добро пожаловать в Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:341
+#: ../src/widgets/ario-firstlaunch.c:343
 msgid "Configuration"
 msgstr "Настройка"
 
-#: ../src/widgets/ario-firstlaunch.c:353
+#: ../src/widgets/ario-firstlaunch.c:355
 msgid "Confirmation"
 msgstr "Подтверждение"
 
@@ -875,33 +875,33 @@ msgstr "Подтверждение"
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>от</i> %s %s"
 
-#: ../src/widgets/ario-header.c:255
+#: ../src/widgets/ario-header.c:257
 msgid "Play previous song"
 msgstr "Воспроизводить предыдущую песню"
 
-#: ../src/widgets/ario-header.c:274
+#: ../src/widgets/ario-header.c:278
 msgid "Play/Pause the music"
 msgstr "Играть/Пауза музыки"
 
-#: ../src/widgets/ario-header.c:285
+#: ../src/widgets/ario-header.c:291
 msgid "Stop the music"
 msgstr "Остановить музыку"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
+#: ../src/widgets/ario-header.c:385 ../src/widgets/ario-tray-icon.c:738
 msgid " of "
 msgstr " из "
 
-#: ../src/widgets/ario-header.c:400
+#: ../src/widgets/ario-header.c:411
 msgid "Toggle random on/off"
 msgstr "Произвольное проигрывание включить/отключит"
 
-#: ../src/widgets/ario-header.c:411
+#: ../src/widgets/ario-header.c:424
 msgid "Toggle repeat on/off"
 msgstr "Повтор проигрывания включить/выключить"
 
-#: ../src/widgets/ario-header.c:521
+#: ../src/widgets/ario-header.c:534
 msgid "Change the music volume"
 msgstr "Изменение громкости воспроизведения"
 
@@ -930,15 +930,15 @@ msgid "_Go to playing song"
 msgstr "Воспроизвести песню"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1338
+#: ../src/widgets/ario-playlist.c:1336
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: ../src/widgets/ario-playlist.c:1348
+#: ../src/widgets/ario-playlist.c:1346
 msgid "Playlist name :"
 msgstr "Название плейлиста :"
 
-#: ../src/widgets/ario-playlist.c:1373
+#: ../src/widgets/ario-playlist.c:1371
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
@@ -1096,7 +1096,7 @@ msgstr "Отослать информацию о песне на last.fm"
 msgid "File System"
 msgstr "Файловая система"
 
-#: ../plugins/filesystem/ario-filesystem.c:487
+#: ../plugins/filesystem/ario-filesystem.c:486
 msgid "Music"
 msgstr "Музыка"
 
@@ -1109,14 +1109,18 @@ msgid "File System Browser"
 msgstr "Браузер системных файлов"
 
 #: ../plugins/information/ario-information.c:141
-#: ../plugins/information/information.ario-plugin.desktop.in.h:2
 #, fuzzy
-msgid "Song Information"
+msgid "Information"
 msgstr "Подтверждение"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
 msgstr ""
+
+#: ../plugins/information/information.ario-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Song Information"
+msgstr "Подтверждение"
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
@@ -1153,24 +1157,24 @@ msgid "Internet Radios"
 msgstr "Интернет-Радио"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:886
+#: ../plugins/radios/ario-radio.c:884
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
 
-#: ../plugins/radios/ario-radio.c:897 ../plugins/radios/ario-radio.c:1096
+#: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1094
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:951 ../plugins/radios/ario-radio.c:1151
+#: ../plugins/radios/ario-radio.c:949 ../plugins/radios/ario-radio.c:1149
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Неверные параметры. Вы должны обязательно указать имя и URL радио."
 
-#: ../plugins/radios/ario-radio.c:1013
+#: ../plugins/radios/ario-radio.c:1011
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Вы уверены, что хотите удалить все выбранные радио-станции?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1085
+#: ../plugins/radios/ario-radio.c:1083
 msgid "Edit a WebRadio"
 msgstr "Редактировать ВебРадио"
 
@@ -1183,11 +1187,11 @@ msgstr "Слушать веб-радио"
 msgid "Find artist on Wikipedia"
 msgstr "Найти артиста на Wikipedia"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:183
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:184
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipedia плагин - Настройка"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:192
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:193
 msgid "Wikipedia language :"
 msgstr "Язык Wikipedia :"
 

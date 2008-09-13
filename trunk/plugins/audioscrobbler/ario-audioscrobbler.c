@@ -418,10 +418,10 @@ ario_audioscrobbler_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 audioscrobbler->priv->mpd = g_value_get_object (value);
-                g_signal_connect (audioscrobbler->priv->mpd,
-                                  "song-changed",
-                                  G_CALLBACK (ario_audioscrobbler_song_changed_cb),
-                                  audioscrobbler);
+                g_signal_connect_object (audioscrobbler->priv->mpd,
+                                         "song-changed",
+                                         G_CALLBACK (ario_audioscrobbler_song_changed_cb),
+                                         audioscrobbler, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

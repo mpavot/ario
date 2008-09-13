@@ -456,9 +456,9 @@ ario_tree_new (GtkUIManager *mgr,
                                                  tree,
                                                  NULL);
 
-                g_signal_connect (ario_cover_handler_get_instance (),
-                                  "cover_changed", G_CALLBACK (ario_tree_cover_changed_cb),
-                                  tree);
+                g_signal_connect_object (ario_cover_handler_get_instance (),
+                                         "cover_changed", G_CALLBACK (ario_tree_cover_changed_cb),
+                                         tree, 0);
 
                 tree->priv->covertree_notif = ario_conf_notification_add (PREF_COVER_TREE_HIDDEN,
                                                                           (ArioNotifyFunc) ario_tree_covertree_visible_changed_cb,

@@ -361,12 +361,12 @@ ario_storedplaylists_set_property (GObject *object,
                 storedplaylists->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the storedplaylists with mpd */
-                g_signal_connect (storedplaylists->priv->mpd,
-                                  "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
-                                  storedplaylists);
-                g_signal_connect (storedplaylists->priv->mpd,
-                                  "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
-                                  storedplaylists);
+                g_signal_connect_object (storedplaylists->priv->mpd,
+                                         "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
+                                         storedplaylists, 0);
+                g_signal_connect_object (storedplaylists->priv->mpd,
+                                         "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
+                                         storedplaylists, 0);
                 break;
         case PROP_UI_MANAGER:
                 storedplaylists->priv->ui_manager = g_value_get_object (value);

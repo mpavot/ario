@@ -283,10 +283,10 @@ ario_information_init (ArioInformation *information)
         gtk_container_add (GTK_CONTAINER (vp), vbox);
         gtk_container_add (GTK_CONTAINER (scrolledwindow), vp);
 
-        g_signal_connect (scrolledwindow,
-                          "button_press_event",
-                          G_CALLBACK (ario_information_button_press_cb),
-                          information);
+        g_signal_connect_object (scrolledwindow,
+                                 "button_press_event",
+                                 G_CALLBACK (ario_information_button_press_cb),
+                                 information, 0);
 
         gtk_widget_show_all (scrolledwindow);
         gtk_box_pack_start (GTK_BOX (information), scrolledwindow, TRUE, TRUE, 0);
@@ -330,18 +330,18 @@ ario_information_set_property (GObject *object,
                 information->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the information with mpd */
-                g_signal_connect (information->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_information_state_changed_cb),
-                                  information);
-                g_signal_connect (information->priv->mpd,
-                                  "song_changed",
-                                  G_CALLBACK (ario_information_song_changed_cb),
-                                  information);
-                g_signal_connect (information->priv->mpd,
-                                  "album_changed",
-                                  G_CALLBACK (ario_information_album_changed_cb),
-                                  information);
+                g_signal_connect_object (information->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_information_state_changed_cb),
+                                         information, 0);
+                g_signal_connect_object (information->priv->mpd,
+                                         "song_changed",
+                                         G_CALLBACK (ario_information_song_changed_cb),
+                                         information, 0);
+                g_signal_connect_object (information->priv->mpd,
+                                         "album_changed",
+                                         G_CALLBACK (ario_information_album_changed_cb),
+                                         information, 0);
 
                 information->priv->connected = ario_mpd_is_connected (information->priv->mpd);
                 break;

@@ -517,18 +517,18 @@ ario_playlist_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 playlist->priv->mpd = g_value_get_object (value);
-                g_signal_connect (playlist->priv->mpd,
-                                  "playlist_changed",
-                                  G_CALLBACK (ario_playlist_changed_cb),
-                                  playlist);
-                g_signal_connect (playlist->priv->mpd,
-                                  "song_changed",
-                                  G_CALLBACK (ario_playlist_song_changed_cb),
-                                  playlist);
-                g_signal_connect (playlist->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_playlist_state_changed_cb),
-                                  playlist);
+                g_signal_connect_object (playlist->priv->mpd,
+                                         "playlist_changed",
+                                         G_CALLBACK (ario_playlist_changed_cb),
+                                         playlist, 0);
+                g_signal_connect_object (playlist->priv->mpd,
+                                         "song_changed",
+                                         G_CALLBACK (ario_playlist_song_changed_cb),
+                                         playlist, 0);
+                g_signal_connect_object (playlist->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_playlist_state_changed_cb),
+                                         playlist, 0);
                 break;
         case PROP_UI_MANAGER:
                 playlist->priv->ui_manager = g_value_get_object (value);

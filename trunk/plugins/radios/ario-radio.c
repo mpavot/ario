@@ -341,10 +341,10 @@ ario_radio_set_property (GObject *object,
                 radio->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the radio with mpd */
-                g_signal_connect (radio->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_radio_state_changed_cb),
-                                  radio);
+                g_signal_connect_object (radio->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_radio_state_changed_cb),
+                                         radio, 0);
 
                 radio->priv->connected = ario_mpd_is_connected (radio->priv->mpd);
                 break;

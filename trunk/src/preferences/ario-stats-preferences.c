@@ -203,10 +203,10 @@ ario_stats_preferences_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 stats_preferences->priv->mpd = g_value_get_object (value);
-                g_signal_connect (stats_preferences->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_stats_preferences_stats_changed_cb),
-                                  stats_preferences);
+                g_signal_connect_object (stats_preferences->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_stats_preferences_stats_changed_cb),
+                                         stats_preferences, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

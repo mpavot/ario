@@ -125,10 +125,10 @@ impl_activate (ArioPlugin *plugin,
         }
 
         g_object_get (shell, "mpd", &mpd, NULL);
-        g_signal_connect (mpd,
-                          "state_changed",
-                          G_CALLBACK (ario_wikipedia_plugin_mpd_state_changed_cb),
-                          pi);
+        g_signal_connect_object (mpd,
+                                 "state_changed",
+                                 G_CALLBACK (ario_wikipedia_plugin_mpd_state_changed_cb),
+                                 pi, 0);
         ario_wikipedia_plugin_sync_mpd (pi, mpd);
         g_object_unref (mpd);
 
