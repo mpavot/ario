@@ -246,11 +246,11 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
         gtk_tree_view_set_model (GTK_TREE_VIEW (ario_shell_lyricsselect->priv->treeview),
                                  GTK_TREE_MODEL (ario_shell_lyricsselect->priv->liststore));
 
-        g_signal_connect_object  (G_OBJECT (ario_shell_lyricsselect),
-                                  "delete_event",
-                                  G_CALLBACK (ario_shell_lyricsselect_window_delete_cb),
-                                  ario_shell_lyricsselect, 0);                  
-        g_signal_connect (G_OBJECT (ario_shell_lyricsselect->priv->search_button),
+        g_signal_connect (ario_shell_lyricsselect,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_lyricsselect_window_delete_cb),
+                          ario_shell_lyricsselect);                  
+        g_signal_connect (ario_shell_lyricsselect->priv->search_button,
                           "clicked", G_CALLBACK (ario_shell_lyricsselect_search_cb),
                           ario_shell_lyricsselect);
 

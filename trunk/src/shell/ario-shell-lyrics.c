@@ -125,10 +125,10 @@ ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
         ARIO_LOG_FUNCTION_START
         shell_lyrics->priv = g_new0 (ArioShellLyricsPrivate, 1);
 
-        g_signal_connect_object (G_OBJECT (shell_lyrics),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_lyrics_window_delete_cb),
-                                 shell_lyrics, 0);
+        g_signal_connect(shell_lyrics,
+                         "delete_event",
+                         G_CALLBACK (ario_shell_lyrics_window_delete_cb),
+                         shell_lyrics);
 
         gtk_window_set_title (GTK_WINDOW (shell_lyrics), BASE_TITLE);
         gtk_window_set_resizable (GTK_WINDOW (shell_lyrics), FALSE);
@@ -173,10 +173,10 @@ ario_shell_lyrics_new (ArioMpd *mpd)
         gtk_window_set_default_size (GTK_WINDOW (shell_lyrics), 350, 500);
         gtk_window_set_position (GTK_WINDOW (shell_lyrics), GTK_WIN_POS_CENTER);
 
-        g_signal_connect_object (G_OBJECT (close_button),
-                                 "clicked",
-                                 G_CALLBACK (ario_shell_lyrics_close_cb),
-                                 shell_lyrics, 0);
+        g_signal_connect (close_button,
+                          "clicked",
+                          G_CALLBACK (ario_shell_lyrics_close_cb),
+                          shell_lyrics);
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
         ario_mpd_use_count_inc (shell_lyrics->priv->mpd);
@@ -216,12 +216,14 @@ ario_shell_lyrics_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 shell_lyrics->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (shell_lyrics->priv->mpd),
-                                         "song_changed", G_CALLBACK (ario_shell_lyrics_song_changed_cb),
-                                         shell_lyrics, 0);
-                g_signal_connect_object (G_OBJECT (shell_lyrics->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_shell_lyrics_state_changed_cb),
-                                         shell_lyrics, 0);
+                g_signal_connect (shell_lyrics->priv->mpd,
+                                  "song_changed",
+                                  G_CALLBACK (ario_shell_lyrics_song_changed_cb),
+                                  shell_lyrics);
+                g_signal_connect (shell_lyrics->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_shell_lyrics_state_changed_cb),
+                                  shell_lyrics);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

@@ -248,8 +248,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
 
         header->priv->prev_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->prev_button), image);
-        g_signal_connect_swapped (G_OBJECT (header->priv->prev_button),
-                                  "clicked", G_CALLBACK (ario_header_do_previous), header);
+        g_signal_connect_swapped (header->priv->prev_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_do_previous),
+                                  header);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
                               GTK_WIDGET (header->priv->prev_button), 
                               _("Play previous song"), NULL);
@@ -267,8 +269,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
 
         gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button), header->priv->pause_image);
 
-        g_signal_connect_swapped (G_OBJECT (header->priv->play_pause_button),
-                                  "clicked", G_CALLBACK (ario_header_playpause), header);
+        g_signal_connect_swapped (header->priv->play_pause_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_playpause),
+                                  header);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
                               GTK_WIDGET (header->priv->play_pause_button), 
                               _("Play/Pause the music"), NULL);
@@ -278,8 +282,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->stop_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->stop_button), image);
-        g_signal_connect_swapped (G_OBJECT (header->priv->stop_button),
-                                  "clicked", G_CALLBACK (ario_header_stop), header);
+        g_signal_connect_swapped (header->priv->stop_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_stop),
+                                  header);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
                               GTK_WIDGET (header->priv->stop_button), 
                               _("Stop the music"), NULL);
@@ -289,8 +295,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->next_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->next_button), image);
-        g_signal_connect_swapped (G_OBJECT (header->priv->next_button),
-                                  "clicked", G_CALLBACK (ario_header_do_next), header);
+        g_signal_connect_swapped (header->priv->next_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_do_next),
+                                  header);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
                               GTK_WIDGET (header->priv->next_button), 
                               _("Play next song"), NULL);
@@ -333,7 +341,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_target_table_free (target_entry, n_elem);
 
         g_signal_connect (event_box,
-			  "drag_data_received",
+                          "drag_data_received",
                           G_CALLBACK (ario_header_drag_leave_cb),
                           header);
 
@@ -394,8 +402,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->random_button = gtk_toggle_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->random_button), image);
-        g_signal_connect_swapped (G_OBJECT (header->priv->random_button),
-                                  "clicked", G_CALLBACK (ario_header_do_random), header);
+        g_signal_connect_swapped (header->priv->random_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_do_random),
+                                  header);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
                               GTK_WIDGET (header->priv->random_button), 
                               _("Toggle random on/off"), NULL);
@@ -405,8 +415,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->repeat_button = gtk_toggle_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->repeat_button), image);
-        g_signal_connect_swapped (G_OBJECT (header->priv->repeat_button),
-                                  "clicked", G_CALLBACK (ario_header_do_repeat), header);
+        g_signal_connect_swapped (header->priv->repeat_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_do_repeat),
+                                  header);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
                               GTK_WIDGET (header->priv->repeat_button), 
                               _("Toggle repeat on/off"), NULL);
@@ -748,13 +760,14 @@ ario_header_random_changed_cb (ArioMpd *mpd,
         gboolean random;
 
         random = ario_mpd_get_current_random (mpd);
-        g_signal_handlers_disconnect_by_func (G_OBJECT (header->priv->random_button),
-                                              G_CALLBACK (ario_header_do_random),
-                                              header);
+        g_signal_handlers_block_by_func (G_OBJECT (header->priv->random_button),
+                                         G_CALLBACK (ario_header_do_random),
+                                         header);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (header->priv->random_button),
                                       random);
-        g_signal_connect_swapped (G_OBJECT (header->priv->random_button),
-                                  "clicked", G_CALLBACK (ario_header_do_random), header);
+        g_signal_handlers_unblock_by_func (G_OBJECT (header->priv->random_button),
+                                           G_CALLBACK (ario_header_do_random),
+                                           header);
 }
 
 static void
@@ -765,13 +778,14 @@ ario_header_repeat_changed_cb (ArioMpd *mpd,
         gboolean repeat;
 
         repeat = ario_mpd_get_current_repeat (mpd);
-        g_signal_handlers_disconnect_by_func (G_OBJECT (header->priv->repeat_button),
-                                              G_CALLBACK (ario_header_do_repeat),
-                                              header);
+        g_signal_handlers_block_by_func (G_OBJECT (header->priv->repeat_button),
+                                         G_CALLBACK (ario_header_do_repeat),
+                                         header);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (header->priv->repeat_button),
                                       repeat);
-        g_signal_connect_swapped (G_OBJECT (header->priv->repeat_button),
-                                  "clicked", G_CALLBACK (ario_header_do_repeat), header);
+        g_signal_handlers_unblock_by_func (G_OBJECT (header->priv->repeat_button),
+                                           G_CALLBACK (ario_header_do_repeat),
+                                           header);
 }
 
 static gboolean

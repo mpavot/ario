@@ -409,15 +409,15 @@ ario_connection_preferences_new (ArioMpd *mpd)
 
         ario_connection_preferences_sync_connection (connection_preferences);
 
-        g_signal_connect_object (G_OBJECT (connection_preferences->priv->profile_selection),
-                                 "changed",
-                                 G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
-                                 connection_preferences, 0);
+        g_signal_connect (connection_preferences->priv->profile_selection,
+                          "changed",
+                          G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
+                          connection_preferences);
         ario_connection_preferences_profile_selection_update (connection_preferences);
 
         gtk_box_pack_start (GTK_BOX (connection_preferences), glade_xml_get_widget (xml, "vbox"), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (xml);
 
         return GTK_WIDGET (connection_preferences);
 }
@@ -716,9 +716,10 @@ ario_connection_preferences_autodetect_cb (GtkWidget *widget,
         gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
         gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
 
-        g_signal_connect_object (G_OBJECT (avahi),
-                                 "hosts_changed", G_CALLBACK (ario_connection_preferences_autohosts_changed_cb),
-                                 connection_preferences, 0);
+        g_signal_connect (avahi,
+                          "hosts_changed",
+                          G_CALLBACK (ario_connection_preferences_autohosts_changed_cb),
+                          connection_preferences);
 
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 

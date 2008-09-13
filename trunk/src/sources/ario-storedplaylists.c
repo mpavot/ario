@@ -293,9 +293,9 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                           G_CALLBACK (ario_storedplaylists_button_press_cb),
                           storedplaylists);
         g_signal_connect (storedplaylists->priv->storedplaylists,
-			  "button_release_event",
-			  G_CALLBACK (ario_storedplaylists_button_release_cb),
-			  storedplaylists);
+                          "button_release_event",
+                          G_CALLBACK (ario_storedplaylists_button_release_cb),
+                          storedplaylists);
         g_signal_connect (storedplaylists->priv->storedplaylists,
                           "motion_notify_event",
                           G_CALLBACK (ario_storedplaylists_motion_notify),

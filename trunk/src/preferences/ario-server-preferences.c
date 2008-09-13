@@ -271,12 +271,14 @@ ario_server_preferences_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 server_preferences->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (server_preferences->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_server_preferences_server_changed_cb),
-                                         server_preferences, 0);
-                g_signal_connect_object (G_OBJECT (server_preferences->priv->mpd),
-                                         "updatingdb_changed", G_CALLBACK (ario_server_preferences_server_changed_cb),
-                                         server_preferences, 0);
+                g_signal_connect (server_preferences->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_server_preferences_server_changed_cb),
+                                  server_preferences);
+                g_signal_connect (server_preferences->priv->mpd,
+                                  "updatingdb_changed",
+                                  G_CALLBACK (ario_server_preferences_server_changed_cb),
+                                  server_preferences);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

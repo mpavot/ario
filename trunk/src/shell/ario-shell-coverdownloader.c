@@ -280,20 +280,20 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
         gtk_window_set_position (GTK_WINDOW (ario_shell_coverdownloader),
                                  GTK_WIN_POS_CENTER);
 
-        g_signal_connect_object (G_OBJECT (ario_shell_coverdownloader->priv->cancel_button),
-                                 "clicked",
-                                 G_CALLBACK (ario_shell_coverdownloader_cancel_cb),
-                                 ario_shell_coverdownloader, 0);
+        g_signal_connect (ario_shell_coverdownloader->priv->cancel_button,
+                          "clicked",
+                          G_CALLBACK (ario_shell_coverdownloader_cancel_cb),
+                          ario_shell_coverdownloader);
 
-        g_signal_connect_object (G_OBJECT (ario_shell_coverdownloader->priv->close_button),
-                                 "clicked",
-                                 G_CALLBACK (ario_shell_coverdownloader_close_cb),
-                                 ario_shell_coverdownloader, 0);
+        g_signal_connect (ario_shell_coverdownloader->priv->close_button,
+                          "clicked",
+                          G_CALLBACK (ario_shell_coverdownloader_close_cb),
+                          ario_shell_coverdownloader);
 
-        g_signal_connect_object (G_OBJECT (ario_shell_coverdownloader),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_coverdownloader_window_delete_cb),
-                                 ario_shell_coverdownloader, 0);
+        g_signal_connect (ario_shell_coverdownloader,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_coverdownloader_window_delete_cb),
+                          ario_shell_coverdownloader);
 
         return G_OBJECT (ario_shell_coverdownloader);
 }

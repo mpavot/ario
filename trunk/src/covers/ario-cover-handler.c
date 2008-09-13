@@ -207,12 +207,14 @@ ario_cover_handler_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 cover_handler->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (cover_handler->priv->mpd),
-                                         "album_changed", G_CALLBACK (ario_cover_handler_album_changed_cb),
-                                         cover_handler, 0);
-                g_signal_connect_object (G_OBJECT (cover_handler->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_cover_handler_state_changed_cb),
-                                         cover_handler, 0);
+                g_signal_connect (cover_handler->priv->mpd,
+                                  "album_changed",
+                                  G_CALLBACK (ario_cover_handler_album_changed_cb),
+                                  cover_handler);
+                g_signal_connect (cover_handler->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_cover_handler_state_changed_cb),
+                                  cover_handler);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

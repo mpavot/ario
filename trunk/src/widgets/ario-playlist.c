@@ -448,9 +448,9 @@ ario_playlist_init (ArioPlaylist *playlist)
                                  playlist);
 
         g_signal_connect (playlist->priv->tree,
-			  "drag_data_received",
-			  G_CALLBACK (ario_playlist_drag_leave_cb),
-			  playlist);
+                          "drag_data_received",
+                          G_CALLBACK (ario_playlist_drag_leave_cb),
+                          playlist);
 
         g_signal_connect (playlist->priv->tree,
                           "drag_data_get", 
@@ -499,7 +499,7 @@ ario_playlist_finalize (GObject *object)
         playlist = ARIO_PLAYLIST (object);
 
         g_return_if_fail (playlist->priv != NULL);
-        g_object_unref (G_OBJECT (playlist->priv->play_pixbuf));
+        g_object_unref (playlist->priv->play_pixbuf);
         g_free (playlist->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -519,16 +519,16 @@ ario_playlist_set_property (GObject *object,
                 playlist->priv->mpd = g_value_get_object (value);
                 g_signal_connect (playlist->priv->mpd,
                                   "playlist_changed",
-				  G_CALLBACK (ario_playlist_changed_cb),
+                                  G_CALLBACK (ario_playlist_changed_cb),
                                   playlist);
                 g_signal_connect (playlist->priv->mpd,
                                   "song_changed",
-				  G_CALLBACK (ario_playlist_song_changed_cb),
-				  playlist);
+                                  G_CALLBACK (ario_playlist_song_changed_cb),
+                                  playlist);
                 g_signal_connect (playlist->priv->mpd,
-				  "state_changed",
-				  G_CALLBACK (ario_playlist_state_changed_cb),
-				  playlist);
+                                  "state_changed",
+                                  G_CALLBACK (ario_playlist_state_changed_cb),
+                                  playlist);
                 break;
         case PROP_UI_MANAGER:
                 playlist->priv->ui_manager = g_value_get_object (value);
@@ -711,11 +711,10 @@ ario_playlist_sort_changed_cb (GtkTreeSortable *treesortable,
 {
         ARIO_LOG_FUNCTION_START
 
-        g_signal_connect_object (G_OBJECT (playlist->priv->model),
-                                 "rows-reordered",
-                                 G_CALLBACK (ario_playlist_rows_reordered_cb),
-                                 playlist,
-                                 0);
+        g_signal_connect (playlist->priv->model,
+                          "rows-reordered",
+                          G_CALLBACK (ario_playlist_rows_reordered_cb),
+                          playlist);
 }
 
 typedef struct ArioPlaylistReorderData {

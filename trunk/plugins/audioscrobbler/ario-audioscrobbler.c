@@ -80,19 +80,19 @@
 #include <libsoup/soup-server-message.h>
 
 
-typedef SoupUri				SoupURI;
-typedef SoupMessageCallbackFn		SoupSessionCallback;
-typedef SoupServerContext		SoupClientContext;
+typedef SoupUri                                SoupURI;
+typedef SoupMessageCallbackFn                SoupSessionCallback;
+typedef SoupServerContext                SoupClientContext;
 
-#define SOUP_MEMORY_TAKE		SOUP_BUFFER_SYSTEM_OWNED
-#define SOUP_MEMORY_TEMPORARY		SOUP_BUFFER_USER_OWNED
+#define SOUP_MEMORY_TAKE                SOUP_BUFFER_SYSTEM_OWNED
+#define SOUP_MEMORY_TEMPORARY                SOUP_BUFFER_USER_OWNED
 
-#define soup_message_headers_append	soup_message_add_header
-#define soup_message_headers_get	soup_message_get_header
+#define soup_message_headers_append        soup_message_add_header
+#define soup_message_headers_get        soup_message_get_header
 
-#define soup_client_context_get_host	soup_server_context_get_client_host
+#define soup_client_context_get_host        soup_server_context_get_client_host
 
-#endif	/* HAVE_LIBSOUP_2_2 */
+#endif        /* HAVE_LIBSOUP_2_2 */
 
 typedef struct
 {
@@ -418,10 +418,10 @@ ario_audioscrobbler_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 audioscrobbler->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (audioscrobbler->priv->mpd),
-                                         "song-changed",
-                                         G_CALLBACK (ario_audioscrobbler_song_changed_cb),
-                                         audioscrobbler, 0);
+                g_signal_connect (audioscrobbler->priv->mpd,
+                                  "song-changed",
+                                  G_CALLBACK (ario_audioscrobbler_song_changed_cb),
+                                  audioscrobbler);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -1438,11 +1438,11 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
                                                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
                                                                                  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
                                                                                  NULL);
-                g_signal_connect (G_OBJECT (audioscrobbler->priv->preferences),
+                g_signal_connect (audioscrobbler->priv->preferences,
                                   "response",
                                   G_CALLBACK (ario_audioscrobbler_preferences_response_cb),
                                   audioscrobbler);
-                g_signal_connect (G_OBJECT (audioscrobbler->priv->preferences),
+                g_signal_connect (audioscrobbler->priv->preferences,
                                   "close",
                                   G_CALLBACK (ario_audioscrobbler_preferences_close_cb),
                                   audioscrobbler);
@@ -1463,7 +1463,7 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
 
                         rb_glade_boldify_label (xml, "audioscrobbler_label");
 
-                        g_object_unref (G_OBJECT (xml));
+                        g_object_unref (xml);
 
                         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (audioscrobbler->priv->preferences)->vbox), config_widget);
                         g_free (file);

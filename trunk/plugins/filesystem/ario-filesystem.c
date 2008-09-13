@@ -298,33 +298,30 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         g_signal_connect (GTK_TREE_VIEW (filesystem->priv->filesystem),
                           "drag_data_get",
                           G_CALLBACK (ario_filesystem_filetree_drag_data_get_cb), filesystem);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_filesystem_button_press_cb),
-                                 filesystem,
-                                 0);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_filesystem_button_release_cb),
-                                 filesystem,
-                                 0);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_filesystem_motion_notify),
-                                 filesystem,
-                                 0);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "row-activated",
-                                 G_CALLBACK (ario_filesystem_filetree_row_activated_cb),
-                                 filesystem, 0);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "test-expand-row",
-                                 G_CALLBACK (ario_filesystem_filetree_row_expanded_cb),
-                                 filesystem, 0);
-        g_signal_connect_object (G_OBJECT (filesystem->priv->filesystem),
-                                 "cursor-changed",
-                                 G_CALLBACK (ario_filesystem_cursor_moved_cb),
-                                 filesystem, 0);
+        g_signal_connect (filesystem->priv->filesystem,
+                          "button_press_event",
+                          G_CALLBACK (ario_filesystem_button_press_cb),
+                          filesystem);
+        g_signal_connect (filesystem->priv->filesystem,
+                          "button_release_event",
+                          G_CALLBACK (ario_filesystem_button_release_cb),
+                          filesystem);
+        g_signal_connect (filesystem->priv->filesystem,
+                          "motion_notify_event",
+                          G_CALLBACK (ario_filesystem_motion_notify),
+                          filesystem);
+        g_signal_connect (filesystem->priv->filesystem,
+                          "row-activated",
+                          G_CALLBACK (ario_filesystem_filetree_row_activated_cb),
+                          filesystem);
+        g_signal_connect (filesystem->priv->filesystem,
+                          "test-expand-row",
+                          G_CALLBACK (ario_filesystem_filetree_row_expanded_cb),
+                          filesystem);
+        g_signal_connect (filesystem->priv->filesystem,
+                          "cursor-changed",
+                          G_CALLBACK (ario_filesystem_cursor_moved_cb),
+                          filesystem);
 
         /* Hpaned properties */
         filesystem->priv->paned = gtk_hpaned_new ();
@@ -380,12 +377,14 @@ ario_filesystem_set_property (GObject *object,
                 filesystem->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the filesystem with mpd */
-                g_signal_connect_object (G_OBJECT (filesystem->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_filesystem_state_changed_cb),
-                                         filesystem, 0);
-                g_signal_connect_object (G_OBJECT (filesystem->priv->mpd),
-                                         "updatingdb_changed", G_CALLBACK (ario_filesystem_filesystem_changed_cb),
-                                         filesystem, 0);
+                g_signal_connect (filesystem->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_filesystem_state_changed_cb),
+                                  filesystem);
+                g_signal_connect (filesystem->priv->mpd,
+                                  "updatingdb_changed",
+                                  G_CALLBACK (ario_filesystem_filesystem_changed_cb),
+                                  filesystem);
                 break;
         case PROP_UI_MANAGER:
                 filesystem->priv->ui_manager = g_value_get_object (value);
