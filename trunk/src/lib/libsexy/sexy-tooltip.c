@@ -25,11 +25,6 @@
 #include <gtk/gtk.h>
 #include <lib/libsexy/sexy-tooltip.h>
 
-struct _SexyTooltipPriv
-{
-        int dummy;
-};
-
 static void sexy_tooltip_class_init(SexyTooltipClass *klass);
 static void sexy_tooltip_init(SexyTooltip *tooltip);
 static void sexy_tooltip_finalize(GObject *obj);
@@ -60,7 +55,6 @@ static void
 sexy_tooltip_init(SexyTooltip *tooltip)
 {
         GtkWindow *window;
-        tooltip->priv = g_new0(SexyTooltipPriv, 1);
 
         window = GTK_WINDOW(tooltip);
 
@@ -75,13 +69,8 @@ sexy_tooltip_init(SexyTooltip *tooltip)
 static void
 sexy_tooltip_finalize(GObject *obj)
 {
-        SexyTooltip *tooltip;
-
         g_return_if_fail(obj != NULL);
         g_return_if_fail(SEXY_IS_TOOLTIP(obj));
-
-        tooltip = SEXY_TOOLTIP(obj);
-        g_free(tooltip->priv);
 
         if (G_OBJECT_CLASS(parent_class)->finalize)
                 G_OBJECT_CLASS(parent_class)->finalize(obj);
@@ -92,7 +81,11 @@ sexy_tooltip_button_press_event(GtkWidget *widget, GdkEventButton *event)
 {
         if (GTK_WIDGET_CLASS(parent_class)->button_press_event)
                 GTK_WIDGET_CLASS(parent_class)->button_press_event(widget, event);
-        gtk_widget_destroy(widget);
+
+        /* Changed for Ario
+         * gtk_widget_destroy(widget);
+         */
+        gtk_widget_hide(widget);
         return TRUE;
 }
 
@@ -167,7 +160,6 @@ sexy_tooltip_position_to_widget(SexyTooltip *tooltip, GtkWidget *widget)
         GdkRectangle rect;
 
         screen = gtk_widget_get_screen(widget);
-
         // FIX (cf gnome bug #350107)
         gdk_window_get_origin(widget->window, &x, &y);
         //gdk_window_get_root_origin(widget->window, &x, &y);
