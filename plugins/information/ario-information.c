@@ -154,9 +154,9 @@ ario_information_select (ArioSource *source)
 
         information->priv->selected = TRUE;
 
-        ario_information_fill_song (information);
-        ario_information_fill_cover (information);
-        ario_information_fill_album (information);
+	ario_information_fill_song (information);
+	ario_information_fill_cover (information);
+	ario_information_fill_album (information);
 }
 
 static void
@@ -238,8 +238,7 @@ ario_information_init (ArioInformation *information)
         information->priv = g_new0 (ArioInformationPrivate, 1);
 
         file = ario_plugin_find_file ("information.glade");
-        if (!file)
-                return;
+	g_return_if_fail (file);
 
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -488,7 +487,9 @@ ario_information_fill_album (ArioInformation *information)
         if (!information->priv->selected)
                 return;
 
-        gtk_container_foreach (GTK_CONTAINER (information->priv->albums_hbox), (GtkCallback) ario_information_album_foreach, information->priv->albums_hbox);
+        gtk_container_foreach (GTK_CONTAINER (information->priv->albums_hbox),
+			       (GtkCallback) ario_information_album_foreach,
+			       information->priv->albums_hbox);
 
         if (information->priv->albums) {
                 g_slist_foreach (information->priv->albums, (GFunc) ario_mpd_free_album, NULL);
