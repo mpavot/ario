@@ -31,6 +31,7 @@ typedef struct
         int port;
         gchar *password;
         gchar *musicdir;
+        gboolean local;
         gboolean current;
 } ArioProfile;
 

@@ -41,7 +41,9 @@ static void ario_wikipedia_plugin_mpd_state_changed_cb (ArioMpd *mpd,
                                                         ArioWikipediaPlugin *plugin);
 #define ARIO_WIKIPEDIA_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_WIKIPEDIA_PLUGIN, ArioWikipediaPluginPrivate))
 
+/* Wikipedia language */
 #define CONF_WIKIPEDIA_LANGUAGE         "plugins/wikipedia-language"
+#define CONF_WIKIPEDIA_LANGUAGE_DEFAULT "en"
 
 static GtkActionEntry ario_wikipedia_actions [] =
 {
@@ -208,7 +210,7 @@ impl_create_configure_dialog (ArioPlugin *plugin)
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
                                         "text", 0, NULL);
 
-        current_language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
+        current_language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, CONF_WIKIPEDIA_LANGUAGE_DEFAULT);
         for (i = 0; wikipedia_languages[2*i]; ++i) {
                 if (!strcmp (wikipedia_languages[2*i+1], current_language)) {
                         gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), i);
@@ -274,7 +276,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
                 ario_util_string_replace (&artist, " ", "_");
                 ario_util_string_replace (&artist, "/", "_");
 
-                language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, "en");
+                language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, CONF_WIKIPEDIA_LANGUAGE_DEFAULT);
                 uri = g_strdup_printf ("http://%s.wikipedia.org/wiki/%s", language, artist);
                 g_free (language);
                 g_free (artist);

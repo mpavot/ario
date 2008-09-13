@@ -89,6 +89,7 @@ ario_profiles_read (void)
         xmlChar *xml_port;
         xmlChar *xml_password;
         xmlChar *xml_musicdir;
+        xmlChar *xml_local;
         xmlChar *xml_current;
 
         xml_filename = ario_profiles_get_xml_filename();
@@ -143,6 +144,14 @@ ario_profiles_read (void)
                         if (xml_musicdir) {
                                 profile->musicdir = g_strdup ((char *) xml_musicdir);
                                 xmlFree(xml_musicdir);
+                        }
+
+                        xml_local = xmlGetProp (cur, (const unsigned char *)"local");
+                        if (xml_local) {
+                                profile->local = TRUE;
+                                xmlFree(xml_local);
+                        } else {
+                                profile->local = FALSE;
                         }
 
                         xml_current = xmlGetProp (cur, (const unsigned char *)"current");
@@ -209,6 +218,9 @@ ario_profiles_save (GSList* profiles)
                 }
                 if (profile->musicdir) {
                         xmlSetProp (cur2, (const xmlChar *)"musicdir", (const xmlChar *) profile->musicdir);
+                }
+                if (profile->local) {
+                        xmlSetProp (cur2, (const xmlChar *)"local", (const xmlChar *) "true");
                 }
                 if (profile->current) {
                         xmlSetProp (cur2, (const xmlChar *)"current", (const xmlChar *) "true");
