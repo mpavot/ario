@@ -358,9 +358,9 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         g_object_unref (pixbuf);
 #ifdef ENABLE_AVAHI
         firstlaunch->priv->avahi = ario_avahi_new ();
-        g_signal_connect_object (G_OBJECT (firstlaunch->priv->avahi),
-                                 "hosts_changed", G_CALLBACK (ario_firstlaunch_hosts_changed_cb),
-                                 firstlaunch, 0);
+        g_signal_connect (firstlaunch->priv->avahi,
+                          "hosts_changed", G_CALLBACK (ario_firstlaunch_hosts_changed_cb),
+                          firstlaunch);
 #endif
         g_signal_connect (G_OBJECT (firstlaunch), "cancel",
                           G_CALLBACK (ario_firstlaunch_cancel_cb), firstlaunch);
@@ -370,7 +370,10 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_window_set_position (GTK_WINDOW (firstlaunch), GTK_WIN_POS_CENTER);
         gtk_window_set_default_size (GTK_WINDOW (firstlaunch), 400, 450);
 
-        g_signal_connect_object (G_OBJECT (firstlaunch), "prepare", G_CALLBACK (ario_firstlaunch_page_prepare_cb), firstlaunch, 0);
+        g_signal_connect (firstlaunch,
+			  "prepare",
+			  G_CALLBACK (ario_firstlaunch_page_prepare_cb),
+			  firstlaunch);
 }
 
 static void

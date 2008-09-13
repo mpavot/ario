@@ -301,9 +301,9 @@ ario_search_set_property (GObject *object,
                 search->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the search with mpd */
-                g_signal_connect_object (G_OBJECT (search->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_search_state_changed_cb),
-                                         search, 0);
+                g_signal_connect (search->priv->mpd,
+                                  "state_changed", G_CALLBACK (ario_search_state_changed_cb),
+                                  search);
                 break;
         case PROP_UI_MANAGER:
                 search->priv->ui_manager = g_value_get_object (value);
@@ -473,10 +473,10 @@ ario_search_do_plus (GtkButton *button,
                 search_constraint = search->priv->search_constraints->data;
                 gtk_widget_set_sensitive (search_constraint->minus_button, TRUE);
         }
-        g_signal_connect_object (G_OBJECT (search_constraint->entry),
-                                 "grab-focus",
-                                 G_CALLBACK (ario_search_entry_grab_focus),
-                                 search, 0);
+        g_signal_connect (search_constraint->entry,
+                          "grab-focus",
+                           G_CALLBACK (ario_search_entry_grab_focus),
+                           search);
 }
 
 static void

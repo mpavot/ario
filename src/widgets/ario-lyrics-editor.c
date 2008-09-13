@@ -153,20 +153,20 @@ ario_lyrics_editor_new (void)
                             hbox,
                             FALSE, FALSE, 0);
 
-        g_signal_connect_object (G_OBJECT (lyrics_editor->priv->textbuffer),
-                                 "changed",
-                                 G_CALLBACK (ario_lyrics_editor_textbuffer_changed_cb),
-                                 lyrics_editor, 0);
+        g_signal_connect (lyrics_editor->priv->textbuffer,
+                          "changed",
+                          G_CALLBACK (ario_lyrics_editor_textbuffer_changed_cb),
+                          lyrics_editor);
 
-        g_signal_connect_object (G_OBJECT (lyrics_editor->priv->save_button),
-                                 "clicked",
-                                 G_CALLBACK (ario_lyrics_editor_save_cb),
-                                 lyrics_editor, 0);
+        g_signal_connect (lyrics_editor->priv->save_button,
+                          "clicked",
+                          G_CALLBACK (ario_lyrics_editor_save_cb),
+                          lyrics_editor);
 
-        g_signal_connect_object (G_OBJECT (lyrics_editor->priv->search_button),
-                                 "clicked",
-                                 G_CALLBACK (ario_lyrics_editor_search_cb),
-                                 lyrics_editor, 0);
+        g_signal_connect (lyrics_editor->priv->search_button,
+                          "clicked",
+                          G_CALLBACK (ario_lyrics_editor_search_cb),
+                          lyrics_editor);
         g_object_ref (lyrics_editor->priv->textbuffer);
         g_object_ref (lyrics_editor->priv->textview);
         lyrics_editor->priv->queue = g_async_queue_new ();

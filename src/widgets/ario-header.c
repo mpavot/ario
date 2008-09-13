@@ -316,10 +316,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->image_height += 18;
         gtk_container_add (GTK_CONTAINER (event_box), header->priv->image);
         gtk_box_pack_start (GTK_BOX (header), event_box, FALSE, TRUE, 0);
-        g_signal_connect_object (G_OBJECT (event_box),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_header_image_press_cb),
-                                 header, 0);
+        g_signal_connect (event_box,
+                          "button_press_event",
+                          G_CALLBACK (ario_header_image_press_cb),
+                          header);
         targets = gtk_target_list_new (NULL, 0);
         gtk_target_list_add_image_targets (targets, 1, TRUE);
         gtk_target_list_add_uri_targets (targets, 2);
@@ -332,9 +332,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
                            GDK_ACTION_COPY);
         gtk_target_table_free (target_entry, n_elem);
 
-        g_signal_connect_object (G_OBJECT (event_box), "drag_data_received",
-                                 G_CALLBACK (ario_header_drag_leave_cb),
-                                 header, 0);
+        g_signal_connect (event_box,
+			  "drag_data_received",
+                          G_CALLBACK (ario_header_drag_leave_cb),
+                          header);
 
         /* Construct the Song/Artist/Album display */
         header->priv->song = gtk_label_new ("");
@@ -358,14 +359,14 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 10.0, 1.0, 10.0, 0.0));
         header->priv->scale = gtk_hscale_new (header->priv->adjustment);
 
-        g_signal_connect_object (G_OBJECT (header->priv->scale),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_header_slider_press_cb),
-                                 header, 0);
-        g_signal_connect_object (G_OBJECT (header->priv->scale),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_header_slider_release_cb),
-                                 header, 0);
+        g_signal_connect (header->priv->scale,
+                          "button_press_event",
+                          G_CALLBACK (ario_header_slider_press_cb),
+                          header);
+        g_signal_connect (header->priv->scale,
+                          "button_release_event",
+                          G_CALLBACK (ario_header_slider_release_cb),
+                          header);
 
         gtk_scale_set_draw_value (GTK_SCALE (header->priv->scale), FALSE);
         gtk_widget_set_size_request (header->priv->scale, 150, -1);
@@ -420,9 +421,9 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_container_add (GTK_CONTAINER (alignment), hbox2);
         gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 0);
 
-        g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
-                                 "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
-                                 header, 0);
+        g_signal_connect (ario_cover_handler_get_instance (),
+                          "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
+                          header);
 
         return G_OBJECT (header);
 }
@@ -459,24 +460,24 @@ ario_header_set_property (GObject *object,
                 header->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the header with mpd */
-                g_signal_connect_object (G_OBJECT (header->priv->mpd),
-                                         "song_changed", G_CALLBACK (ario_header_song_changed_cb),
-                                         header, 0);
-                g_signal_connect_object (G_OBJECT (header->priv->mpd),
-                                         "album_changed", G_CALLBACK (ario_header_album_changed_cb),
-                                         header, 0);
-                g_signal_connect_object (G_OBJECT (header->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_header_state_changed_cb),
-                                         header, 0);
-                g_signal_connect_object (G_OBJECT (header->priv->mpd),
-                                         "elapsed_changed", G_CALLBACK (ario_header_elapsed_changed_cb),
-                                         header, 0);
-                g_signal_connect_object (G_OBJECT (header->priv->mpd),
-                                         "random_changed", G_CALLBACK (ario_header_random_changed_cb),
-                                         header, 0);
-                g_signal_connect_object (G_OBJECT (header->priv->mpd),
-                                         "repeat_changed", G_CALLBACK (ario_header_repeat_changed_cb),
-                                         header, 0);
+                g_signal_connect (header->priv->mpd,
+                                  "song_changed", G_CALLBACK (ario_header_song_changed_cb),
+                                  header);
+                g_signal_connect (header->priv->mpd,
+                                  "album_changed", G_CALLBACK (ario_header_album_changed_cb),
+                                  header);
+                g_signal_connect (header->priv->mpd,
+                                  "state_changed", G_CALLBACK (ario_header_state_changed_cb),
+                                  header);
+                g_signal_connect (header->priv->mpd,
+                                  "elapsed_changed", G_CALLBACK (ario_header_elapsed_changed_cb),
+                                  header);
+                g_signal_connect (header->priv->mpd,
+                                  "random_changed", G_CALLBACK (ario_header_random_changed_cb),
+                                  header);
+                g_signal_connect (header->priv->mpd,
+                                  "repeat_changed", G_CALLBACK (ario_header_repeat_changed_cb),
+                                  header);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

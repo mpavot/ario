@@ -288,25 +288,22 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         g_signal_connect (GTK_TREE_VIEW (storedplaylists->priv->storedplaylists),
                           "drag_data_get",
                           G_CALLBACK (ario_storedplaylists_playlists_drag_data_get_cb), storedplaylists);
-        g_signal_connect_object (G_OBJECT (storedplaylists->priv->storedplaylists),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_storedplaylists_button_press_cb),
-                                 storedplaylists,
-                                 0);
-        g_signal_connect_object (G_OBJECT (storedplaylists->priv->storedplaylists),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_storedplaylists_button_release_cb),
-                                 storedplaylists,
-                                 0);
-        g_signal_connect_object (G_OBJECT (storedplaylists->priv->storedplaylists),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_storedplaylists_motion_notify),
-                                 storedplaylists,
-                                 0);
-        g_signal_connect_object (G_OBJECT (storedplaylists->priv->storedplaylists_selection),
-                                 "changed",
-                                 G_CALLBACK (ario_storedplaylists_playlists_selection_changed_cb),
-                                 storedplaylists, 0);
+        g_signal_connect (storedplaylists->priv->storedplaylists,
+                          "button_press_event",
+                          G_CALLBACK (ario_storedplaylists_button_press_cb),
+                          storedplaylists);
+        g_signal_connect (storedplaylists->priv->storedplaylists,
+			  "button_release_event",
+			  G_CALLBACK (ario_storedplaylists_button_release_cb),
+			  storedplaylists);
+        g_signal_connect (storedplaylists->priv->storedplaylists,
+                          "motion_notify_event",
+                          G_CALLBACK (ario_storedplaylists_motion_notify),
+                          storedplaylists);
+        g_signal_connect (storedplaylists->priv->storedplaylists_selection,
+                          "changed",
+                          G_CALLBACK (ario_storedplaylists_playlists_selection_changed_cb),
+                          storedplaylists);
 
         /* Hpaned properties */
         storedplaylists->priv->paned = gtk_hpaned_new ();
@@ -364,12 +361,12 @@ ario_storedplaylists_set_property (GObject *object,
                 storedplaylists->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the storedplaylists with mpd */
-                g_signal_connect_object (G_OBJECT (storedplaylists->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
-                                         storedplaylists, 0);
-                g_signal_connect_object (G_OBJECT (storedplaylists->priv->mpd),
-                                         "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
-                                         storedplaylists, 0);
+                g_signal_connect (storedplaylists->priv->mpd,
+                                  "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
+                                  storedplaylists);
+                g_signal_connect (storedplaylists->priv->mpd,
+                                  "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
+                                  storedplaylists);
                 break;
         case PROP_UI_MANAGER:
                 storedplaylists->priv->ui_manager = g_value_get_object (value);
