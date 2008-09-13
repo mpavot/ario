@@ -433,9 +433,9 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_container_add (GTK_CONTAINER (alignment), hbox2);
         gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 0);
 
-        g_signal_connect (ario_cover_handler_get_instance (),
-                          "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
-                          header);
+        g_signal_connect_object (ario_cover_handler_get_instance (),
+                                 "cover_changed", G_CALLBACK (ario_header_cover_changed_cb),
+                                 header, 0);
 
         return G_OBJECT (header);
 }
@@ -472,24 +472,24 @@ ario_header_set_property (GObject *object,
                 header->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the header with mpd */
-                g_signal_connect (header->priv->mpd,
-                                  "song_changed", G_CALLBACK (ario_header_song_changed_cb),
-                                  header);
-                g_signal_connect (header->priv->mpd,
-                                  "album_changed", G_CALLBACK (ario_header_album_changed_cb),
-                                  header);
-                g_signal_connect (header->priv->mpd,
-                                  "state_changed", G_CALLBACK (ario_header_state_changed_cb),
-                                  header);
-                g_signal_connect (header->priv->mpd,
-                                  "elapsed_changed", G_CALLBACK (ario_header_elapsed_changed_cb),
-                                  header);
-                g_signal_connect (header->priv->mpd,
-                                  "random_changed", G_CALLBACK (ario_header_random_changed_cb),
-                                  header);
-                g_signal_connect (header->priv->mpd,
-                                  "repeat_changed", G_CALLBACK (ario_header_repeat_changed_cb),
-                                  header);
+                g_signal_connect_object (header->priv->mpd,
+                                         "song_changed", G_CALLBACK (ario_header_song_changed_cb),
+                                         header, 0);
+                g_signal_connect_object (header->priv->mpd,
+                                         "album_changed", G_CALLBACK (ario_header_album_changed_cb),
+                                         header, 0);
+                g_signal_connect_object (header->priv->mpd,
+                                         "state_changed", G_CALLBACK (ario_header_state_changed_cb),
+                                         header, 0);
+                g_signal_connect_object (header->priv->mpd,
+                                         "elapsed_changed", G_CALLBACK (ario_header_elapsed_changed_cb),
+                                         header, 0);
+                g_signal_connect_object (header->priv->mpd,
+                                         "random_changed", G_CALLBACK (ario_header_random_changed_cb),
+                                         header, 0);
+                g_signal_connect_object (header->priv->mpd,
+                                         "repeat_changed", G_CALLBACK (ario_header_repeat_changed_cb),
+                                         header, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

@@ -377,14 +377,14 @@ ario_filesystem_set_property (GObject *object,
                 filesystem->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the filesystem with mpd */
-                g_signal_connect (filesystem->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_filesystem_state_changed_cb),
-                                  filesystem);
-                g_signal_connect (filesystem->priv->mpd,
-                                  "updatingdb_changed",
-                                  G_CALLBACK (ario_filesystem_filesystem_changed_cb),
-                                  filesystem);
+                g_signal_connect_object (filesystem->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_filesystem_state_changed_cb),
+                                         filesystem, 0);
+                g_signal_connect_object (filesystem->priv->mpd,
+                                         "updatingdb_changed",
+                                         G_CALLBACK (ario_filesystem_filesystem_changed_cb),
+                                         filesystem, 0);
                 break;
         case PROP_UI_MANAGER:
                 filesystem->priv->ui_manager = g_value_get_object (value);

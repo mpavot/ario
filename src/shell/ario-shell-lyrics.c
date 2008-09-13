@@ -216,14 +216,14 @@ ario_shell_lyrics_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 shell_lyrics->priv->mpd = g_value_get_object (value);
-                g_signal_connect (shell_lyrics->priv->mpd,
-                                  "song_changed",
-                                  G_CALLBACK (ario_shell_lyrics_song_changed_cb),
-                                  shell_lyrics);
-                g_signal_connect (shell_lyrics->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_shell_lyrics_state_changed_cb),
-                                  shell_lyrics);
+                g_signal_connect_object (shell_lyrics->priv->mpd,
+                                         "song_changed",
+                                         G_CALLBACK (ario_shell_lyrics_song_changed_cb),
+                                         shell_lyrics, 0);
+                g_signal_connect_object (shell_lyrics->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_shell_lyrics_state_changed_cb),
+                                         shell_lyrics, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

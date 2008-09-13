@@ -319,10 +319,10 @@ ario_volume_new (ArioMpd *mpd)
 
         volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, "mpd", mpd, NULL));
 
-        g_signal_connect (mpd,
-                          "volume_changed",
-                          G_CALLBACK (ario_volume_changed_cb),
-                          volume);
+        g_signal_connect_object (mpd,
+                                 "volume_changed",
+                                 G_CALLBACK (ario_volume_changed_cb),
+                                 volume, 0);
 
         g_return_val_if_fail (volume->priv != NULL, NULL);
 

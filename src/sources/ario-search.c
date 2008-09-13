@@ -305,9 +305,9 @@ ario_search_set_property (GObject *object,
                 search->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the search with mpd */
-                g_signal_connect (search->priv->mpd,
-                                  "state_changed", G_CALLBACK (ario_search_state_changed_cb),
-                                  search);
+                g_signal_connect_object (search->priv->mpd,
+                                         "state_changed", G_CALLBACK (ario_search_state_changed_cb),
+                                         search, 0);
                 break;
         case PROP_UI_MANAGER:
                 search->priv->ui_manager = g_value_get_object (value);

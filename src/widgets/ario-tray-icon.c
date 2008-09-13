@@ -274,10 +274,10 @@ ario_tray_icon_init (ArioTrayIcon *icon)
         gtk_container_add (GTK_CONTAINER (icon), icon->priv->ebox);
         gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
 
-        g_signal_connect (ario_cover_handler_get_instance (),
-                          "cover_changed",
-                          G_CALLBACK (ario_tray_icon_cover_changed_cb),
-                          icon);
+        g_signal_connect_object (ario_cover_handler_get_instance (),
+                                 "cover_changed",
+                                 G_CALLBACK (ario_tray_icon_cover_changed_cb),
+                                 icon, 0);
 }
 
 static GObject *
@@ -339,26 +339,26 @@ ario_tray_icon_set_property (GObject *object,
                 break;
         case PROP_MPD:
                 tray->priv->mpd = g_value_get_object (value);
-                g_signal_connect (tray->priv->mpd,
-                                  "song_changed",
-                                  G_CALLBACK (ario_tray_icon_song_changed_cb),
-                                  tray);
-                g_signal_connect (tray->priv->mpd,
-                                  "album_changed",
-                                  G_CALLBACK (ario_tray_icon_album_changed_cb),
-                                  tray);
-                g_signal_connect (tray->priv->mpd,
-                                  "state_changed",
-                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
-                                  tray);
-                g_signal_connect (tray->priv->mpd,
-                                  "playlist_changed",
-                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
-                                  tray);
-                g_signal_connect (tray->priv->mpd,
-                                  "elapsed_changed",
-                                  G_CALLBACK (ario_tray_icon_time_changed_cb),
-                                  tray);
+                g_signal_connect_object (tray->priv->mpd,
+                                         "song_changed",
+                                         G_CALLBACK (ario_tray_icon_song_changed_cb),
+                                         tray, 0);
+                g_signal_connect_object (tray->priv->mpd,
+                                         "album_changed",
+                                         G_CALLBACK (ario_tray_icon_album_changed_cb),
+                                         tray, 0);
+                g_signal_connect_object (tray->priv->mpd,
+                                         "state_changed",
+                                         G_CALLBACK (ario_tray_icon_state_changed_cb),
+                                         tray, 0);
+                g_signal_connect_object (tray->priv->mpd,
+                                         "playlist_changed",
+                                         G_CALLBACK (ario_tray_icon_state_changed_cb),
+                                         tray, 0);
+                g_signal_connect_object (tray->priv->mpd,
+                                         "elapsed_changed",
+                                         G_CALLBACK (ario_tray_icon_time_changed_cb),
+                                         tray, 0);
                 break;
         case PROP_ACTION_GROUP:
                 tray->priv->actiongroup = g_value_get_object (value);

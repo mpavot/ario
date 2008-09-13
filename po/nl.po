@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-13 17:43+0200\n"
+"POT-Creation-Date: 2008-09-14 00:44+0200\n"
 "PO-Revision-Date: 2008-06-14 09:54+0000\n"
 "Last-Translator: stani <spe.stani.be@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -88,8 +88,8 @@ msgstr ""
 msgid "Music directory :"
 msgstr "Muziekmap :"
 
-#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:896
-#: ../plugins/radios/ario-radio.c:1095
+#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:894
+#: ../plugins/radios/ario-radio.c:1093
 msgid "Name :"
 msgstr "Naam :"
 
@@ -161,7 +161,7 @@ msgstr "Zoeken"
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:152
 #: ../src/sources/ario-tree.c:435 ../src/widgets/ario-playlist.c:368
-#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-status-icon.c:383
+#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-status-icon.c:386
 msgid "Album"
 msgstr "Album"
 
@@ -173,7 +173,7 @@ msgstr ""
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:421
 #: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:255
-#: ../src/widgets/ario-status-icon.c:381
+#: ../src/widgets/ario-status-icon.c:384
 msgid "Artist"
 msgstr "Artiest"
 
@@ -228,7 +228,7 @@ msgstr "Tabbladen tonen"
 #: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:153
 #: ../src/sources/ario-tree.c:481 ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:240
-#: ../src/widgets/ario-status-icon.c:385
+#: ../src/widgets/ario-status-icon.c:388
 msgid "Title"
 msgstr "Titel"
 
@@ -544,41 +544,41 @@ msgstr ""
 #: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
 #: ../src/preferences/ario-server-preferences.c:228
-#: ../src/widgets/ario-firstlaunch.c:307
+#: ../src/widgets/ario-firstlaunch.c:309
 msgid "Name"
 msgstr "Naam"
 
 #: ../src/preferences/ario-connection-preferences.c:691
-#: ../src/widgets/ario-firstlaunch.c:315
+#: ../src/widgets/ario-firstlaunch.c:317
 msgid "Host"
 msgstr "Host"
 
 #: ../src/preferences/ario-connection-preferences.c:699
-#: ../src/widgets/ario-firstlaunch.c:323
+#: ../src/widgets/ario-firstlaunch.c:325
 msgid "Port"
 msgstr "Poort"
 
-#: ../src/preferences/ario-connection-preferences.c:761
+#: ../src/preferences/ario-connection-preferences.c:762
 msgid "You must select a server."
 msgstr "U moet een server selecteren"
 
-#: ../src/preferences/ario-connection-preferences.c:808
+#: ../src/preferences/ario-connection-preferences.c:809
 msgid "New Profile"
 msgstr "Nieuw Profiel"
 
-#: ../src/preferences/ario-server-preferences.c:325
-#: ../src/preferences/ario-stats-preferences.c:267
+#: ../src/preferences/ario-server-preferences.c:327
 #: ../src/preferences/ario-stats-preferences.c:268
 #: ../src/preferences/ario-stats-preferences.c:269
 #: ../src/preferences/ario-stats-preferences.c:270
 #: ../src/preferences/ario-stats-preferences.c:271
 #: ../src/preferences/ario-stats-preferences.c:272
+#: ../src/preferences/ario-stats-preferences.c:273
 msgid "Not connected"
 msgstr "Niet verbonden"
 
-#: ../src/preferences/ario-server-preferences.c:330
-#: ../src/preferences/ario-server-preferences.c:424
-#: ../src/widgets/ario-status-bar.c:211
+#: ../src/preferences/ario-server-preferences.c:332
+#: ../src/preferences/ario-server-preferences.c:426
+#: ../src/widgets/ario-status-bar.c:213
 msgid "Updating..."
 msgstr "Bezig met bijwerken..."
 
@@ -588,7 +588,7 @@ msgstr "Afspelen/Pauzeren"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:296
+#: ../src/widgets/ario-header.c:304
 msgid "Play next song"
 msgstr "Volgende nummer afspelen"
 
@@ -645,15 +645,15 @@ msgstr "_Eigenschappen"
 msgid "Library"
 msgstr "Bibliotheek"
 
-#: ../src/sources/ario-search.c:228
+#: ../src/sources/ario-search.c:230
 msgid "Add a search criteria"
 msgstr "Een zoekcriterium toevoegen"
 
-#: ../src/sources/ario-search.c:235
+#: ../src/sources/ario-search.c:239
 msgid "Search songs in the library"
 msgstr "Liedjes zoeken in de bibliotheek"
 
-#: ../src/sources/ario-search.c:429
+#: ../src/sources/ario-search.c:435
 msgid "Remove a search criteria"
 msgstr "Een zoekcriterium verwijderen"
 
@@ -665,7 +665,7 @@ msgstr "_Verwijderen"
 msgid "Playlists"
 msgstr "Afspeellijsten"
 
-#: ../src/sources/ario-storedplaylists.c:651
+#: ../src/sources/ario-storedplaylists.c:648
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Weet u zeker dat u de geselecteerde afspeellijsten wilt verwijderen?"
 
@@ -674,7 +674,7 @@ msgstr "Weet u zeker dat u de geselecteerde afspeellijsten wilt verwijderen?"
 msgid "Cover"
 msgstr "Albumhoes"
 
-#: ../src/sources/ario-tree.c:1229
+#: ../src/sources/ario-tree.c:1226
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr ""
@@ -745,11 +745,11 @@ msgstr "S_tatusbalk"
 msgid "Upper part"
 msgstr "Bovenste deel"
 
-#: ../src/shell/ario-shell.c:761
+#: ../src/shell/ario-shell.c:768
 msgid "GTK client for MPD"
 msgstr "GTK-cliënt voor MPD"
 
-#: ../src/shell/ario-shell.c:762
+#: ../src/shell/ario-shell.c:769
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -775,7 +775,7 @@ msgstr ""
 "  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
 "  stani https://launchpad.net/~stani"
 
-#: ../src/shell/ario-shell.c:1097
+#: ../src/shell/ario-shell.c:1104
 msgid "Configure Plugins"
 msgstr "Plugins Instellen"
 
@@ -803,11 +803,11 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Albumhoezen Downloaden"
 
-#: ../src/shell/ario-shell-coverselect.c:591
+#: ../src/shell/ario-shell-coverselect.c:594
 msgid "Error reading file"
 msgstr "Fout bij het lezen van bestand"
 
-#: ../src/shell/ario-shell-coverselect.c:614
+#: ../src/shell/ario-shell-coverselect.c:617
 msgid "Error saving file"
 msgstr "Fout bij het bewaren van bestand"
 
@@ -843,7 +843,7 @@ msgid "Image"
 msgstr "Afbeelding"
 
 #: ../src/shell/ario-shell-similarartists.c:428
-#: ../src/widgets/ario-status-bar.c:207
+#: ../src/widgets/ario-status-bar.c:209
 msgid "Songs"
 msgstr "Liedjes"
 
@@ -869,11 +869,11 @@ msgstr ""
 msgid "Welcome to Ario"
 msgstr "Welkom bij Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:341
+#: ../src/widgets/ario-firstlaunch.c:343
 msgid "Configuration"
 msgstr "Instellingen"
 
-#: ../src/widgets/ario-firstlaunch.c:353
+#: ../src/widgets/ario-firstlaunch.c:355
 msgid "Confirmation"
 msgstr "Bevestiging"
 
@@ -883,33 +883,33 @@ msgstr "Bevestiging"
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>van</i> %s <i>door</i> %s"
 
-#: ../src/widgets/ario-header.c:255
+#: ../src/widgets/ario-header.c:257
 msgid "Play previous song"
 msgstr "Vorige nummer afspelen"
 
-#: ../src/widgets/ario-header.c:274
+#: ../src/widgets/ario-header.c:278
 msgid "Play/Pause the music"
 msgstr "De muziek afspelen/pauzeren"
 
-#: ../src/widgets/ario-header.c:285
+#: ../src/widgets/ario-header.c:291
 msgid "Stop the music"
 msgstr "De muziek stoppen"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:376 ../src/widgets/ario-tray-icon.c:732
+#: ../src/widgets/ario-header.c:385 ../src/widgets/ario-tray-icon.c:738
 msgid " of "
 msgstr " van "
 
-#: ../src/widgets/ario-header.c:400
+#: ../src/widgets/ario-header.c:411
 msgid "Toggle random on/off"
 msgstr "Willekeurige volgorde in-/uitschakelen"
 
-#: ../src/widgets/ario-header.c:411
+#: ../src/widgets/ario-header.c:424
 msgid "Toggle repeat on/off"
 msgstr "Herhalen in-/uitschakelen"
 
-#: ../src/widgets/ario-header.c:521
+#: ../src/widgets/ario-header.c:534
 msgid "Change the music volume"
 msgstr "Volume aanpassen"
 
@@ -938,15 +938,15 @@ msgid "_Go to playing song"
 msgstr "Naar het afspelende liedje _gaan"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1338
+#: ../src/widgets/ario-playlist.c:1336
 msgid "Save playlist"
 msgstr "Afspeellijst opslaan"
 
-#: ../src/widgets/ario-playlist.c:1348
+#: ../src/widgets/ario-playlist.c:1346
 msgid "Playlist name :"
 msgstr "Afspeellijstnaam :"
 
-#: ../src/widgets/ario-playlist.c:1373
+#: ../src/widgets/ario-playlist.c:1371
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Afspeellijst bestaat al. Wilt u hem vervangen?"
 
@@ -1104,7 +1104,7 @@ msgstr "Informatie opsturen over nummers naar last.fm"
 msgid "File System"
 msgstr "Bestandsysteem"
 
-#: ../plugins/filesystem/ario-filesystem.c:487
+#: ../plugins/filesystem/ario-filesystem.c:486
 msgid "Music"
 msgstr "Muziek"
 
@@ -1117,14 +1117,18 @@ msgid "File System Browser"
 msgstr "Bestandsysteem Verkenner"
 
 #: ../plugins/information/ario-information.c:141
-#: ../plugins/information/information.ario-plugin.desktop.in.h:2
 #, fuzzy
-msgid "Song Information"
+msgid "Information"
 msgstr "Bevestiging"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
 msgstr ""
+
+#: ../plugins/information/information.ario-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Song Information"
+msgstr "Bevestiging"
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
@@ -1161,25 +1165,25 @@ msgid "Internet Radios"
 msgstr "Internetradio"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:886
+#: ../plugins/radios/ario-radio.c:884
 msgid "Add a WebRadio"
 msgstr "Radiostation Toevoegen"
 
-#: ../plugins/radios/ario-radio.c:897 ../plugins/radios/ario-radio.c:1096
+#: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1094
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:951 ../plugins/radios/ario-radio.c:1151
+#: ../plugins/radios/ario-radio.c:949 ../plugins/radios/ario-radio.c:1149
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Onvolledige invoer. Je moet een naam en URL invullen voor het radiostation."
 
-#: ../plugins/radios/ario-radio.c:1013
+#: ../plugins/radios/ario-radio.c:1011
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Weet u zeker dat u de geselecteerde radiostations wilt verwijderen?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1085
+#: ../plugins/radios/ario-radio.c:1083
 msgid "Edit a WebRadio"
 msgstr "Een radiostation bewerken"
 
@@ -1192,11 +1196,11 @@ msgstr "Naar internetradios luisteren"
 msgid "Find artist on Wikipedia"
 msgstr "Artiest zoeken op Wikipedia"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:183
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:184
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipedia Plugin - Instellingen"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:192
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:193
 msgid "Wikipedia language :"
 msgstr "Wikipediataal :"
 
