@@ -177,11 +177,10 @@ ario_sourcemanager_new (GtkUIManager *mgr,
                                  sourcemanager,
                                  0);
 
-        g_signal_connect_object (G_OBJECT (sourcemanager),
-                                 "switch-page",
-                                 G_CALLBACK (ario_sourcemanager_switch_page_cb),
-                                 sourcemanager,
-                                 0);
+        g_signal_connect_after (sourcemanager,
+                                "switch-page",
+                                G_CALLBACK (ario_sourcemanager_switch_page_cb),
+                                sourcemanager);
 
         return GTK_WIDGET (sourcemanager);
 }
