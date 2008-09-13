@@ -171,11 +171,10 @@ ario_sourcemanager_new (GtkUIManager *mgr,
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
                                     ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 
-        g_signal_connect_object (G_OBJECT (sourcemanager),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_sourcemanager_button_press_cb),
-                                 sourcemanager,
-                                 0);
+        g_signal_connect (sourcemanager,
+                          "button_press_event",
+                          G_CALLBACK (ario_sourcemanager_button_press_cb),
+                          sourcemanager);
 
         g_signal_connect_after (sourcemanager,
                                 "switch-page",

@@ -456,9 +456,9 @@ ario_tree_new (GtkUIManager *mgr,
                                                  tree,
                                                  NULL);
 
-                g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
-                                         "cover_changed", G_CALLBACK (ario_tree_cover_changed_cb),
-                                         tree, 0);
+                g_signal_connect (ario_cover_handler_get_instance (),
+				  "cover_changed", G_CALLBACK (ario_tree_cover_changed_cb),
+				  tree);
 
                 tree->priv->covertree_notif = ario_conf_notification_add (PREF_COVER_TREE_HIDDEN,
                                                                           (ArioNotifyFunc) ario_tree_covertree_visible_changed_cb,
@@ -509,10 +509,10 @@ ario_tree_new (GtkUIManager *mgr,
         tree->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree->priv->tree));
         gtk_tree_selection_set_mode (tree->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
-        g_signal_connect_object (G_OBJECT (tree->priv->selection),
-                                 "changed",
-                                 G_CALLBACK (ario_tree_selection_changed_cb),
-                                 tree, 0);
+        g_signal_connect (tree->priv->selection,
+                          "changed",
+                          G_CALLBACK (ario_tree_selection_changed_cb),
+                          tree);
 
         gtk_container_add (GTK_CONTAINER (tree), tree->priv->tree);
 
@@ -538,21 +538,18 @@ ario_tree_new (GtkUIManager *mgr,
                           "drag_begin", 
                           G_CALLBACK (ario_tree_drag_begin_cb), tree);
 
-        g_signal_connect_object (G_OBJECT (tree->priv->tree),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_tree_button_press_cb),
-                                 tree,
-                                 0);
-        g_signal_connect_object (G_OBJECT (tree->priv->tree),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_tree_button_release_cb),
-                                 tree,
-                                 0);
-        g_signal_connect_object (G_OBJECT (tree->priv->tree),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_tree_motion_notify),
-                                 tree,
-                                 0);
+        g_signal_connect (tree->priv->tree,
+                          "button_press_event",
+                          G_CALLBACK (ario_tree_button_press_cb),
+                          tree);
+        g_signal_connect (tree->priv->tree,
+                          "button_release_event",
+                          G_CALLBACK (ario_tree_button_release_cb),
+                          tree);
+        g_signal_connect (tree->priv->tree,
+                          "motion_notify_event",
+                          G_CALLBACK (ario_tree_motion_notify),
+                          tree);
 
         return GTK_WIDGET (tree);
 }

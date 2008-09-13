@@ -245,13 +245,13 @@ ario_browser_set_property (GObject *object,
                 browser->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the browser with mpd */
-                g_signal_connect_object (G_OBJECT (browser->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_browser_state_changed_cb),
-                                         browser, 0);
+                g_signal_connect (browser->priv->mpd,
+                                  "state_changed", G_CALLBACK (ario_browser_state_changed_cb),
+                                  browser);
 
-                g_signal_connect_object (G_OBJECT (browser->priv->mpd),
-                                         "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
-                                         browser, 0);
+                g_signal_connect (browser->priv->mpd,
+                                  "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
+                                  browser);
                 break;
         case PROP_UI_MANAGER:
                 browser->priv->ui_manager = g_value_get_object (value);

@@ -411,11 +411,10 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_tree_view_set_search_column (GTK_TREE_VIEW (playlist->priv->tree),
                                          TITLE_COLUMN);
 
-        g_signal_connect_object (G_OBJECT (playlist->priv->model),
-                                 "sort-column-changed",
-                                 G_CALLBACK (ario_playlist_sort_changed_cb),
-                                 playlist,
-                                 0);
+        g_signal_connect (playlist->priv->model,
+                          "sort-column-changed",
+                          G_CALLBACK (ario_playlist_sort_changed_cb),
+                          playlist);
 
         playlist->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (playlist->priv->tree));
         gtk_tree_selection_set_mode (playlist->priv->selection,
@@ -431,32 +430,29 @@ ario_playlist_init (ArioPlaylist *playlist)
                                               targets, G_N_ELEMENTS (targets),
                                               GDK_ACTION_MOVE);
 
-        g_signal_connect_object (G_OBJECT (playlist->priv->tree),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_playlist_view_button_press_cb),
-                                 playlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (playlist->priv->tree),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_playlist_view_button_release_cb),
-                                 playlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (playlist->priv->tree),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_playlist_view_motion_notify),
-                                 playlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (playlist->priv->tree),
+        g_signal_connect (playlist->priv->tree,
+                          "button_press_event",
+                          G_CALLBACK (ario_playlist_view_button_press_cb),
+                          playlist);
+        g_signal_connect (playlist->priv->tree,
+                          "button_release_event",
+                          G_CALLBACK (ario_playlist_view_button_release_cb),
+                          playlist);
+        g_signal_connect (playlist->priv->tree,
+                          "motion_notify_event",
+                          G_CALLBACK (ario_playlist_view_motion_notify),
+                          playlist);
+        g_signal_connect (playlist->priv->tree,
                                  "key_press_event",
                                  G_CALLBACK (ario_playlist_view_key_press_cb),
-                                 playlist,
-                                 0);
+                                 playlist);
 
-        g_signal_connect_object (G_OBJECT (playlist->priv->tree), "drag_data_received",
-                                 G_CALLBACK (ario_playlist_drag_leave_cb),
-                                 playlist, 0);
+        g_signal_connect (playlist->priv->tree,
+			  "drag_data_received",
+			  G_CALLBACK (ario_playlist_drag_leave_cb),
+			  playlist);
 
-        g_signal_connect (GTK_TREE_VIEW (playlist->priv->tree),
+        g_signal_connect (playlist->priv->tree,
                           "drag_data_get", 
                           G_CALLBACK (ario_playlist_drag_data_get_cb),
                           playlist);
@@ -521,15 +517,18 @@ ario_playlist_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 playlist->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (playlist->priv->mpd),
-                                         "playlist_changed", G_CALLBACK (ario_playlist_changed_cb),
-                                         playlist, 0);
-                g_signal_connect_object (G_OBJECT (playlist->priv->mpd),
-                                         "song_changed", G_CALLBACK (ario_playlist_song_changed_cb),
-                                         playlist, 0);
-                g_signal_connect_object (G_OBJECT (playlist->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_playlist_state_changed_cb),
-                                         playlist, 0);
+                g_signal_connect (playlist->priv->mpd,
+                                  "playlist_changed",
+				  G_CALLBACK (ario_playlist_changed_cb),
+                                  playlist);
+                g_signal_connect (playlist->priv->mpd,
+                                  "song_changed",
+				  G_CALLBACK (ario_playlist_song_changed_cb),
+				  playlist);
+                g_signal_connect (playlist->priv->mpd,
+				  "state_changed",
+				  G_CALLBACK (ario_playlist_state_changed_cb),
+				  playlist);
                 break;
         case PROP_UI_MANAGER:
                 playlist->priv->ui_manager = g_value_get_object (value);
