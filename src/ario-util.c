@@ -418,7 +418,7 @@ ario_util_load_uri (const char *uri)
         ShellExecute (GetDesktopWindow(), "open", uri, NULL, NULL, SW_SHOW);
 #else
         gchar *command = g_strdup_printf ("x-www-browser %s", uri);
-        g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
+        g_spawn_command_line_async (command, NULL);
         g_free (command);
 #endif                
 }
