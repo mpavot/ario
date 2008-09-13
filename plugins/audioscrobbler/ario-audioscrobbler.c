@@ -53,9 +53,11 @@
 
 #define EXTRA_URI_ENCODE_CHARS        "&+"
 
+/* Audioscrobbler username */
 #define PREF_AUDIOSCROBBLER_USERNAME            "audio-scrobbler-username"
 #define PREF_AUDIOSCROBBLER_USERNAME_DEFAULT    NULL
 
+/* Audioscrobbler password */
 #define PREF_AUDIOSCROBBLER_PASSWORD            "audio-scrobbler-password"
 #define PREF_AUDIOSCROBBLER_PASSWORD_DEFAULT    NULL
 
