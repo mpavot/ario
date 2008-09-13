@@ -126,10 +126,10 @@ ario_shell_similarartists_init (ArioShellSimilarartists *shell_similarartists)
         ARIO_LOG_FUNCTION_START
         shell_similarartists->priv = g_new0 (ArioShellSimilarartistsPrivate, 1);
 
-        g_signal_connect_object (G_OBJECT (shell_similarartists),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_similarartists_window_delete_cb),
-                                 shell_similarartists, 0);
+        g_signal_connect (shell_similarartists,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_similarartists_window_delete_cb),
+                          shell_similarartists);
 
         gtk_window_set_title (GTK_WINDOW (shell_similarartists), "Ario");
         gtk_window_set_resizable (GTK_WINDOW (shell_similarartists), TRUE);

@@ -142,14 +142,14 @@ ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos)
         ARIO_LOG_FUNCTION_START
         shell_songinfos->priv = g_new0 (ArioShellSonginfosPrivate, 1);
 
-        g_signal_connect_object (G_OBJECT (shell_songinfos),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_songinfos_window_delete_cb),
-                                 shell_songinfos, 0);
-        g_signal_connect_object (G_OBJECT (shell_songinfos),
-                                 "response",
-                                 G_CALLBACK (ario_shell_songinfos_response_cb),
-                                 shell_songinfos, 0);
+        g_signal_connect (shell_songinfos,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_songinfos_window_delete_cb),
+                          shell_songinfos);
+        g_signal_connect (shell_songinfos,
+                          "response",
+                          G_CALLBACK (ario_shell_songinfos_response_cb),
+                          shell_songinfos);
 
         shell_songinfos->priv->previous_button = gtk_button_new_from_stock (GTK_STOCK_GO_BACK);
         gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),

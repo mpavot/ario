@@ -243,22 +243,22 @@ ario_tray_icon_init (ArioTrayIcon *icon)
         ario_tray_icon_construct_tooltip (icon);
 
         icon->priv->ebox = gtk_event_box_new ();
-        g_signal_connect_object (G_OBJECT (icon->priv->ebox),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_tray_icon_button_press_event_cb),
-                                 icon, 0);
-        g_signal_connect_object (G_OBJECT (icon->priv->ebox),
-                                 "scroll_event",
-                                 G_CALLBACK (ario_tray_icon_scroll_cb),
-                                 icon, 0);
-        g_signal_connect_object (G_OBJECT (icon->priv->ebox),
-                                 "enter-notify-event",
-                                 G_CALLBACK (ario_tray_icon_enter_notify_event_cb),
-                                 icon, G_CONNECT_SWAPPED);
-        g_signal_connect_object (G_OBJECT (icon->priv->ebox),
-                                 "leave-notify-event",
-                                 G_CALLBACK (ario_tray_icon_leave_notify_event_cb),
-                                 icon, G_CONNECT_SWAPPED);
+        g_signal_connect (icon->priv->ebox,
+                          "button_press_event",
+                          G_CALLBACK (ario_tray_icon_button_press_event_cb),
+                          icon);
+        g_signal_connect (icon->priv->ebox,
+                          "scroll_event",
+                          G_CALLBACK (ario_tray_icon_scroll_cb),
+                          icon);
+        g_signal_connect_swapped (icon->priv->ebox,
+                                  "enter-notify-event",
+                                  G_CALLBACK (ario_tray_icon_enter_notify_event_cb),
+                                  icon);
+        g_signal_connect_swapped (icon->priv->ebox,
+                                  "leave-notify-event",
+                                  G_CALLBACK (ario_tray_icon_leave_notify_event_cb),
+                                  icon);
         icon->priv->image = gtk_image_new_from_stock ("ario",
                                                       GTK_ICON_SIZE_SMALL_TOOLBAR);
         g_object_ref (icon->priv->image);
@@ -274,9 +274,10 @@ ario_tray_icon_init (ArioTrayIcon *icon)
         gtk_container_add (GTK_CONTAINER (icon), icon->priv->ebox);
         gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
 
-        g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
-                                 "cover_changed", G_CALLBACK (ario_tray_icon_cover_changed_cb),
-                                 icon, 0);
+        g_signal_connect (ario_cover_handler_get_instance (),
+                          "cover_changed",
+                          G_CALLBACK (ario_tray_icon_cover_changed_cb),
+                          icon);
 }
 
 static GObject *
@@ -338,21 +339,26 @@ ario_tray_icon_set_property (GObject *object,
                 break;
         case PROP_MPD:
                 tray->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (tray->priv->mpd),
-                                         "song_changed", G_CALLBACK (ario_tray_icon_song_changed_cb),
-                                         tray, 0);
-                g_signal_connect_object (G_OBJECT (tray->priv->mpd),
-                                         "album_changed", G_CALLBACK (ario_tray_icon_album_changed_cb),
-                                         tray, 0);
-                g_signal_connect_object (G_OBJECT (tray->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_tray_icon_state_changed_cb),
-                                         tray, 0);
-                g_signal_connect_object (G_OBJECT (tray->priv->mpd),
-                                         "playlist_changed", G_CALLBACK (ario_tray_icon_state_changed_cb),
-                                         tray, 0);
-                g_signal_connect_object (G_OBJECT (tray->priv->mpd),
-                                         "elapsed_changed", G_CALLBACK (ario_tray_icon_time_changed_cb),
-                                         tray, 0);
+                g_signal_connect (tray->priv->mpd,
+                                  "song_changed",
+                                  G_CALLBACK (ario_tray_icon_song_changed_cb),
+                                  tray);
+                g_signal_connect (tray->priv->mpd,
+                                  "album_changed",
+                                  G_CALLBACK (ario_tray_icon_album_changed_cb),
+                                  tray);
+                g_signal_connect (tray->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
+                                  tray);
+                g_signal_connect (tray->priv->mpd,
+                                  "playlist_changed",
+                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
+                                  tray);
+                g_signal_connect (tray->priv->mpd,
+                                  "elapsed_changed",
+                                  G_CALLBACK (ario_tray_icon_time_changed_cb),
+                                  tray);
                 break;
         case PROP_ACTION_GROUP:
                 tray->priv->actiongroup = g_value_get_object (value);

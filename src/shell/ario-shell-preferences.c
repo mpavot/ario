@@ -123,14 +123,14 @@ ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
         ARIO_LOG_FUNCTION_START
         shell_preferences->priv = g_new0 (ArioShellPreferencesPrivate, 1);
 
-        g_signal_connect_object (G_OBJECT (shell_preferences),
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_preferences_window_delete_cb),
-                                 shell_preferences, 0);
-        g_signal_connect_object (G_OBJECT (shell_preferences),
-                                 "response",
-                                 G_CALLBACK (ario_shell_preferences_response_cb),
-                                 shell_preferences, 0);
+        g_signal_connect (shell_preferences,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_preferences_window_delete_cb),
+                          shell_preferences);
+        g_signal_connect (shell_preferences,
+                          "response",
+                          G_CALLBACK (ario_shell_preferences_response_cb),
+                          shell_preferences);
 
         gtk_dialog_add_button (GTK_DIALOG (shell_preferences),
                                GTK_STOCK_CLOSE,

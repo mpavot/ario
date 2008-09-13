@@ -221,15 +221,19 @@ ario_search_init (ArioSearch *search)
 
         search->priv->plus_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (search->priv->plus_button), image);
-        g_signal_connect (G_OBJECT (search->priv->plus_button),
-                          "clicked", G_CALLBACK (ario_search_do_plus), search);
+        g_signal_connect (search->priv->plus_button,
+                          "clicked",
+                          G_CALLBACK (ario_search_do_plus),
+                          search);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips),
                               GTK_WIDGET (search->priv->plus_button),
                               _("Add a search criteria"), NULL);
         /* Search button */
         search->priv->search_button = gtk_button_new_from_stock (GTK_STOCK_FIND);
-        g_signal_connect (G_OBJECT (search->priv->search_button),
-                          "clicked", G_CALLBACK (ario_search_do_search), search);
+        g_signal_connect (search->priv->search_button,
+                          "clicked",
+                          G_CALLBACK (ario_search_do_search),
+                          search);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips),
                               GTK_WIDGET (search->priv->search_button),
                               _("Search songs in the library"), NULL);
@@ -422,8 +426,10 @@ ario_search_do_plus (GtkButton *button,
         search_constraint->minus_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (search_constraint->minus_button), image);
 
-        g_signal_connect (G_OBJECT (search_constraint->minus_button),
-                          "clicked", G_CALLBACK (ario_search_do_minus), search);
+        g_signal_connect (search_constraint->minus_button,
+                          "clicked",
+                          G_CALLBACK (ario_search_do_minus),
+                          search);
         gtk_tooltips_set_tip (GTK_TOOLTIPS (search->priv->tooltips),
                               GTK_WIDGET (search_constraint->minus_button),
                               _("Remove a search criteria"), NULL);

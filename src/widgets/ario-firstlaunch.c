@@ -300,8 +300,10 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (firstlaunch->priv->manual_radiobutton), TRUE);
         gtk_widget_set_sensitive (firstlaunch->priv->automatic_radiobutton, FALSE);
 #endif
-        g_signal_connect (G_OBJECT (firstlaunch->priv->automatic_radiobutton), "toggled",
-                          G_CALLBACK (ario_firstlaunch_radiobutton_toogled_cb), firstlaunch);
+        g_signal_connect (firstlaunch->priv->automatic_radiobutton,
+                          "toggled",
+                          G_CALLBACK (ario_firstlaunch_radiobutton_toogled_cb),
+                          firstlaunch);
 
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Name"),
@@ -337,7 +339,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_tree_selection_set_mode (firstlaunch->priv->hosts_selection,
                                      GTK_SELECTION_BROWSE);
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (xml);
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Configuration"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_CONTENT);
         gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
@@ -362,18 +364,22 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
                           "hosts_changed", G_CALLBACK (ario_firstlaunch_hosts_changed_cb),
                           firstlaunch);
 #endif
-        g_signal_connect (G_OBJECT (firstlaunch), "cancel",
-                          G_CALLBACK (ario_firstlaunch_cancel_cb), firstlaunch);
-        g_signal_connect (G_OBJECT (firstlaunch), "close",
-                          G_CALLBACK (ario_firstlaunch_apply_cb),firstlaunch);
+        g_signal_connect (firstlaunch,
+                          "cancel",
+                          G_CALLBACK (ario_firstlaunch_cancel_cb),
+                          firstlaunch);
+        g_signal_connect (firstlaunch,
+                          "close",
+                          G_CALLBACK (ario_firstlaunch_apply_cb),
+                          firstlaunch);
 
         gtk_window_set_position (GTK_WINDOW (firstlaunch), GTK_WIN_POS_CENTER);
         gtk_window_set_default_size (GTK_WINDOW (firstlaunch), 400, 450);
 
         g_signal_connect (firstlaunch,
-			  "prepare",
-			  G_CALLBACK (ario_firstlaunch_page_prepare_cb),
-			  firstlaunch);
+                          "prepare",
+                          G_CALLBACK (ario_firstlaunch_page_prepare_cb),
+                          firstlaunch);
 }
 
 static void

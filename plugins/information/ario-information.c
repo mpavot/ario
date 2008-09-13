@@ -138,7 +138,7 @@ ario_information_get_id (ArioSource *source)
 static gchar *
 ario_information_get_name (ArioSource *source)
 {
-        return _("Song Information");
+        return _("Information");
 }
 
 static gchar *
@@ -154,9 +154,9 @@ ario_information_select (ArioSource *source)
 
         information->priv->selected = TRUE;
 
-	ario_information_fill_song (information);
-	ario_information_fill_cover (information);
-	ario_information_fill_album (information);
+        ario_information_fill_song (information);
+        ario_information_fill_cover (information);
+        ario_information_fill_album (information);
 }
 
 static void
@@ -238,7 +238,7 @@ ario_information_init (ArioInformation *information)
         information->priv = g_new0 (ArioInformationPrivate, 1);
 
         file = ario_plugin_find_file ("information.glade");
-	g_return_if_fail (file);
+        g_return_if_fail (file);
 
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -250,7 +250,7 @@ ario_information_init (ArioInformation *information)
         xml = rb_glade_xml_new (file, "vbox", information);
 
         vbox = glade_xml_get_widget (xml, "vbox");
-        g_signal_connect (G_OBJECT (vbox),
+        g_signal_connect (vbox,
                           "style-set",
                           G_CALLBACK (ario_information_style_set_cb),
                           vp);
@@ -275,18 +275,18 @@ ario_information_init (ArioInformation *information)
         rb_glade_boldify_label (xml, "albums_const_label");
         rb_glade_boldify_label (xml, "lyrics_const_label");
 
-        g_signal_connect_object (G_OBJECT (ario_cover_handler_get_instance ()),
-                                 "cover_changed", G_CALLBACK (ario_information_cover_changed_cb),
-                                 information, 0);
+        g_signal_connect (ario_cover_handler_get_instance (),
+                          "cover_changed",
+                          G_CALLBACK (ario_information_cover_changed_cb),
+                          information);
 
         gtk_container_add (GTK_CONTAINER (vp), vbox);
         gtk_container_add (GTK_CONTAINER (scrolledwindow), vp);
 
-        g_signal_connect_object (G_OBJECT (scrolledwindow),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_information_button_press_cb),
-                                 information,
-                                 0);
+        g_signal_connect (scrolledwindow,
+                          "button_press_event",
+                          G_CALLBACK (ario_information_button_press_cb),
+                          information);
 
         gtk_widget_show_all (scrolledwindow);
         gtk_box_pack_start (GTK_BOX (information), scrolledwindow, TRUE, TRUE, 0);
@@ -330,15 +330,18 @@ ario_information_set_property (GObject *object,
                 information->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the information with mpd */
-                g_signal_connect_object (G_OBJECT (information->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_information_state_changed_cb),
-                                         information, 0);
-                g_signal_connect_object (G_OBJECT (information->priv->mpd),
-                                         "song_changed", G_CALLBACK (ario_information_song_changed_cb),
-                                         information, 0);
-                g_signal_connect_object (G_OBJECT (information->priv->mpd),
-                                         "album_changed", G_CALLBACK (ario_information_album_changed_cb),
-                                         information, 0);
+                g_signal_connect (information->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_information_state_changed_cb),
+                                  information);
+                g_signal_connect (information->priv->mpd,
+                                  "song_changed",
+                                  G_CALLBACK (ario_information_song_changed_cb),
+                                  information);
+                g_signal_connect (information->priv->mpd,
+                                  "album_changed",
+                                  G_CALLBACK (ario_information_album_changed_cb),
+                                  information);
 
                 information->priv->connected = ario_mpd_is_connected (information->priv->mpd);
                 break;
@@ -488,8 +491,8 @@ ario_information_fill_album (ArioInformation *information)
                 return;
 
         gtk_container_foreach (GTK_CONTAINER (information->priv->albums_hbox),
-			       (GtkCallback) ario_information_album_foreach,
-			       information->priv->albums_hbox);
+                               (GtkCallback) ario_information_album_foreach,
+                               information->priv->albums_hbox);
 
         if (information->priv->albums) {
                 g_slist_foreach (information->priv->albums, (GFunc) ario_mpd_free_album, NULL);

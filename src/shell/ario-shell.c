@@ -423,9 +423,10 @@ ario_shell_construct (ArioShell *shell,
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
         gtk_window_set_default_icon (pixbuf);
 
-        g_signal_connect_object (G_OBJECT (shell->priv->window), "delete_event",
-                                 G_CALLBACK (ario_shell_window_delete_cb),
-                                 shell, 0);
+        g_signal_connect (shell->priv->window,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_window_delete_cb),
+                          shell);
 
         shell->priv->ui_manager = gtk_ui_manager_new ();
         shell->priv->actiongroup = gtk_action_group_new ("MainActions");
@@ -535,20 +536,23 @@ ario_shell_construct (ArioShell *shell,
 
         gtk_container_add (GTK_CONTAINER (shell->priv->window), vbox);
 
-        g_signal_connect_object (G_OBJECT (shell->priv->window), "show",
-                                 G_CALLBACK (ario_shell_window_show_cb),
-                                 shell, 0);
+        g_signal_connect (shell->priv->window,
+                          "show",
+                          G_CALLBACK (ario_shell_window_show_cb),
+                          shell);
 
-        g_signal_connect_object (G_OBJECT (shell->priv->window), "hide",
-                                 G_CALLBACK (ario_shell_window_hide_cb),
-                                 shell, 0);
+        g_signal_connect (shell->priv->window,
+                          "hide",
+                          G_CALLBACK (ario_shell_window_hide_cb),
+                          shell);
 
         /* First launch assistant */
         if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {
                 firstlaunch = ario_firstlaunch_new ();
-                g_signal_connect_object (G_OBJECT (firstlaunch), "destroy",
-                                         G_CALLBACK (ario_shell_firstlaunch_delete_cb),
-                                         shell, 0);
+                g_signal_connect (firstlaunch,
+                                  "destroy",
+                                  G_CALLBACK (ario_shell_firstlaunch_delete_cb),
+                                  shell);
                 gtk_widget_show_all (GTK_WIDGET (firstlaunch));
         } else {
                 ario_shell_show (shell, minimized);
@@ -592,13 +596,15 @@ ario_shell_show (ArioShell *shell,
 {
         ARIO_LOG_FUNCTION_START
 
-        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
-                                 "state_changed", G_CALLBACK (ario_shell_mpd_state_changed_cb),
-                                 shell, 0);
+        g_signal_connect (shell->priv->mpd,
+                          "state_changed",
+                          G_CALLBACK (ario_shell_mpd_state_changed_cb),
+                          shell);
 
-        g_signal_connect_object (G_OBJECT (shell->priv->mpd),
-                                 "song_changed", G_CALLBACK (ario_shell_mpd_song_changed_cb),
-                                 shell, 0);
+        g_signal_connect (shell->priv->mpd,
+                          "song_changed",
+                          G_CALLBACK (ario_shell_mpd_song_changed_cb),
+                          shell);
 
         if (ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT))
                 ario_mpd_connect (shell->priv->mpd);
@@ -612,9 +618,10 @@ ario_shell_show (ArioShell *shell,
                 gtk_widget_show_all (shell->priv->window);
                 shell->priv->shown = TRUE;
         }
-        g_signal_connect_object (G_OBJECT (shell->priv->window), "window-state-event",
-                                 G_CALLBACK (ario_shell_window_state_cb),
-                                 shell, 0);
+        g_signal_connect (shell->priv->window,
+                          "window-state-event",
+                          G_CALLBACK (ario_shell_window_state_cb),
+                          shell);
 
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
                 ario_mpd_update_db (shell->priv->mpd);
@@ -1104,14 +1111,14 @@ ario_shell_cmd_plugins (GtkAction *action,
         gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (window)->vbox), 2);
         gtk_dialog_set_has_separator (GTK_DIALOG (window), FALSE);
 
-        g_signal_connect_object (G_OBJECT (window),
+        g_signal_connect (window,
                                  "delete_event",
                                  G_CALLBACK (ario_shell_plugins_window_delete_cb),
-                                 NULL, 0);
-        g_signal_connect_object (G_OBJECT (window),
-                                 "response",
-                                 G_CALLBACK (ario_shell_plugins_response_cb),
-                                 NULL, 0);
+                                 NULL);
+        g_signal_connect (window,
+                          "response",
+                          G_CALLBACK (ario_shell_plugins_response_cb),
+                          NULL);
 
         manager = ario_plugin_manager_new ();
         gtk_widget_show_all (GTK_WIDGET (manager));

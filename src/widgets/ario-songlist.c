@@ -302,21 +302,18 @@ ario_songlist_new (GtkUIManager *mgr,
                           "drag_data_get",
                           G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
 
-        g_signal_connect_object (G_OBJECT (songlist),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_songlist_button_press_cb),
-                                 songlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (songlist),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_songlist_button_release_cb),
-                                 songlist,
-                                 0);
-        g_signal_connect_object (G_OBJECT (songlist),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_songlist_motion_notify_cb),
-                                 songlist,
-                                 0);
+        g_signal_connect (songlist,
+                          "button_press_event",
+                          G_CALLBACK (ario_songlist_button_press_cb),
+                          songlist);
+        g_signal_connect (songlist,
+                          "button_release_event",
+                          G_CALLBACK (ario_songlist_button_release_cb),
+                          songlist);
+        g_signal_connect (songlist,
+                          "motion_notify_event",
+                          G_CALLBACK (ario_songlist_motion_notify_cb),
+                          songlist);
 
         songlist->priv->popup = g_strdup (popup);
 

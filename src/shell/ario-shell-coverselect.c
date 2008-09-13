@@ -298,19 +298,21 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         gtk_tree_view_set_model (GTK_TREE_VIEW (ario_shell_coverselect->priv->listview),
                                  GTK_TREE_MODEL (ario_shell_coverselect->priv->liststore));
 
-        g_signal_connect_object  (G_OBJECT (ario_shell_coverselect),
-                                  "delete_event",
-                                  G_CALLBACK (ario_shell_coverselect_window_delete_cb),
-                                  ario_shell_coverselect, 0);
-        g_signal_connect_object (G_OBJECT (ario_shell_coverselect),
-                                 "response",
-                                 G_CALLBACK (ario_shell_coverselect_response_cb),
-                                 ario_shell_coverselect, 0);                                         
-        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->get_covers_button),
-                          "clicked", G_CALLBACK (ario_shell_coverselect_get_covers_cb),
+        g_signal_connect (ario_shell_coverselect,
+                          "delete_event",
+                          G_CALLBACK (ario_shell_coverselect_window_delete_cb),
                           ario_shell_coverselect);
-        g_signal_connect (G_OBJECT (ario_shell_coverselect->priv->local_open_button), 
-                          "clicked", G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
+        g_signal_connect (ario_shell_coverselect,
+                          "response",
+                          G_CALLBACK (ario_shell_coverselect_response_cb),
+                          ario_shell_coverselect);
+        g_signal_connect (ario_shell_coverselect->priv->get_covers_button,
+                          "clicked",
+                          G_CALLBACK (ario_shell_coverselect_get_covers_cb),
+                          ario_shell_coverselect);
+        g_signal_connect (ario_shell_coverselect->priv->local_open_button, 
+                          "clicked",
+                          G_CALLBACK (ario_shell_coverselect_local_open_button_cb),
                           ario_shell_coverselect);
 
         targets = gtk_target_list_new (NULL, 0);
@@ -325,9 +327,10 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                            GDK_ACTION_COPY);
         gtk_target_table_free (target_entry, n_elem);
 
-        g_signal_connect_object (G_OBJECT (ario_shell_coverselect->priv->current_cover), "drag_data_received",
-                                 G_CALLBACK (ario_shell_coverselect_drag_leave_cb),
-                                 ario_shell_coverselect, 0);
+        g_signal_connect (ario_shell_coverselect->priv->current_cover,
+                          "drag_data_received",
+                          G_CALLBACK (ario_shell_coverselect_drag_leave_cb),
+                          ario_shell_coverselect);
 
         return G_OBJECT (ario_shell_coverselect);
 }

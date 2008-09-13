@@ -286,21 +286,18 @@ ario_radio_init (ArioRadio *radio)
                           "drag_data_get",
                           G_CALLBACK (ario_radio_drag_data_get_cb), radio);
 
-        g_signal_connect_object (G_OBJECT (radio->priv->radios),
-                                 "button_press_event",
-                                 G_CALLBACK (ario_radio_button_press_cb),
-                                 radio,
-                                 0);
-        g_signal_connect_object (G_OBJECT (radio->priv->radios),
-                                 "button_release_event",
-                                 G_CALLBACK (ario_radio_button_release_cb),
-                                 radio,
-                                 0);
-        g_signal_connect_object (G_OBJECT (radio->priv->radios),
-                                 "motion_notify_event",
-                                 G_CALLBACK (ario_radio_motion_notify),
-                                 radio,
-                                 0);
+        g_signal_connect (radio->priv->radios,
+                          "button_press_event",
+                          G_CALLBACK (ario_radio_button_press_cb),
+                          radio);
+        g_signal_connect (radio->priv->radios,
+                          "button_release_event",
+                          G_CALLBACK (ario_radio_button_release_cb),
+                          radio);
+        g_signal_connect (radio->priv->radios,
+                          "motion_notify_event",
+                          G_CALLBACK (ario_radio_motion_notify),
+                          radio);
 
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (radio), TRUE);
@@ -344,9 +341,10 @@ ario_radio_set_property (GObject *object,
                 radio->priv->mpd = g_value_get_object (value);
 
                 /* Signals to synchronize the radio with mpd */
-                g_signal_connect_object (G_OBJECT (radio->priv->mpd),
-                                         "state_changed", G_CALLBACK (ario_radio_state_changed_cb),
-                                         radio, 0);
+                g_signal_connect (radio->priv->mpd,
+                                  "state_changed",
+                                  G_CALLBACK (ario_radio_state_changed_cb),
+                                  radio);
 
                 radio->priv->connected = ario_mpd_is_connected (radio->priv->mpd);
                 break;

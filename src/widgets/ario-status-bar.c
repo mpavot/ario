@@ -141,12 +141,14 @@ ario_status_bar_set_property (GObject *object,
         {
         case PROP_MPD:
                 status_bar->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (G_OBJECT (status_bar->priv->mpd),
-                                         "playlist_changed", G_CALLBACK (ario_status_bar_playlist_changed_cb),
-                                         status_bar, 0);
-                g_signal_connect_object (G_OBJECT (status_bar->priv->mpd),
-                                         "updatingdb_changed", G_CALLBACK (ario_status_bar_playlist_changed_cb),
-                                         status_bar, 0);
+                g_signal_connect (status_bar->priv->mpd,
+                                  "playlist_changed",
+                                  G_CALLBACK (ario_status_bar_playlist_changed_cb),
+                                  status_bar);
+                g_signal_connect (status_bar->priv->mpd,
+                                  "updatingdb_changed",
+                                  G_CALLBACK (ario_status_bar_playlist_changed_cb),
+                                  status_bar);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
