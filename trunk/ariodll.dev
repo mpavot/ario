@@ -1,7 +1,7 @@
 [Project]
 FileName=ariodll.dev
 Name=ariodll
-UnitCount=110
+UnitCount=120
 Type=3
 Ver=1
 ObjFiles=
@@ -20,7 +20,7 @@ ObjectOutput=
 OverrideOutput=1
 OverrideOutputName=ario.dll
 HostApplication=
-Folders=src,src/covers,src/lib,src/lyrics,src/plugins,src/preferences,src/shell,src/sources,src/widgets
+Folders=src,src/covers,src/lib,src/lib/libsexy,src/lyrics,src/notification,src/plugins,src/preferences,src/shell,src/sources,src/widgets
 CommandLine=
 UseCustomMakefile=0
 CustomMakefile=
@@ -710,26 +710,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit70]
-FileName=src\widgets\ario-status-icon.c
-CompileCpp=0
-Folder=src/widgets
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit71]
-FileName=src\widgets\ario-status-icon.h
-CompileCpp=0
-Folder=src/widgets
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit72]
 FileName=src\widgets\ario-firstlaunch.h
 CompileCpp=0
 Folder=src/widgets
@@ -739,7 +719,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit73]
+[Unit71]
 FileName=src\widgets\ario-firstlaunch.c
 CompileCpp=0
 Folder=src/widgets
@@ -749,7 +729,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit74]
+[Unit72]
 FileName=src\covers\ario-cover-provider.h
 CompileCpp=0
 Folder=src/covers
@@ -759,7 +739,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit75]
+[Unit73]
 FileName=src\covers\ario-cover.c
 CompileCpp=0
 Folder=src/covers
@@ -769,7 +749,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit76]
+[Unit74]
 FileName=src\covers\ario-cover.h
 CompileCpp=0
 Folder=src/covers
@@ -779,7 +759,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit77]
+[Unit75]
 FileName=src\covers\ario-cover-amazon.c
 CompileCpp=0
 Folder=src/covers
@@ -789,7 +769,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit78]
+[Unit76]
 FileName=src\covers\ario-cover-amazon.h
 CompileCpp=0
 Folder=src/covers
@@ -799,8 +779,28 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit79]
+[Unit77]
 FileName=src\covers\ario-cover-handler.c
+CompileCpp=0
+Folder=src/covers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit78]
+FileName=src\covers\ario-cover-handler.h
+CompileCpp=0
+Folder=src/covers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit79]
+FileName=src\covers\ario-cover-lastfm.c
 CompileCpp=0
 Folder=src/covers
 Compile=1
@@ -838,26 +838,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit80]
-FileName=src\covers\ario-cover-handler.h
-CompileCpp=0
-Folder=src/covers
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit81]
-FileName=src\covers\ario-cover-lastfm.c
-CompileCpp=0
-Folder=src/covers
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit82]
 FileName=src\covers\ario-cover-lastfm.h
 CompileCpp=0
 Folder=src/covers
@@ -867,7 +847,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit83]
+[Unit81]
 FileName=src\covers\ario-cover-local.c
 CompileCpp=0
 Folder=src/covers
@@ -877,7 +857,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit84]
+[Unit82]
 FileName=src\covers\ario-cover-local.h
 CompileCpp=0
 Folder=src/covers
@@ -887,7 +867,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit85]
+[Unit83]
 FileName=src\covers\ario-cover-manager.c
 CompileCpp=0
 Folder=src/covers
@@ -897,7 +877,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit86]
+[Unit84]
 FileName=src\covers\ario-cover-manager.h
 CompileCpp=0
 Folder=src/covers
@@ -907,7 +887,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit87]
+[Unit85]
 FileName=src\covers\ario-cover-provider.c
 CompileCpp=0
 Folder=src/covers
@@ -917,7 +897,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit88]
+[Unit86]
 FileName=src\lyrics\ario-lyrics-provider.h
 CompileCpp=0
 Folder=src/lyrics
@@ -927,7 +907,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit89]
+[Unit87]
 FileName=src\lyrics\ario-lyrics.c
 CompileCpp=0
 Folder=src/lyrics
@@ -937,7 +917,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit90]
+[Unit88]
 FileName=src\lyrics\ario-lyrics.h
 CompileCpp=0
 Folder=src/lyrics
@@ -947,7 +927,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit91]
+[Unit89]
 FileName=src\lyrics\ario-lyrics-leoslyrics.c
 CompileCpp=0
 Folder=src/lyrics
@@ -957,7 +937,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit92]
+[Unit90]
 FileName=src\lyrics\ario-lyrics-leoslyrics.h
 CompileCpp=0
 Folder=src/lyrics
@@ -967,7 +947,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit93]
+[Unit91]
 FileName=src\lyrics\ario-lyrics-lyricwiki.c
 CompileCpp=0
 Folder=src/lyrics
@@ -977,7 +957,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit94]
+[Unit92]
 FileName=src\lyrics\ario-lyrics-lyricwiki.h
 CompileCpp=0
 Folder=src/lyrics
@@ -987,7 +967,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit95]
+[Unit93]
 FileName=src\lyrics\ario-lyrics-manager.c
 CompileCpp=0
 Folder=src/lyrics
@@ -997,7 +977,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit96]
+[Unit94]
 FileName=src\lyrics\ario-lyrics-manager.h
 CompileCpp=0
 Folder=src/lyrics
@@ -1007,7 +987,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit97]
+[Unit95]
 FileName=src\lyrics\ario-lyrics-provider.c
 CompileCpp=0
 Folder=src/lyrics
@@ -1017,7 +997,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit98]
+[Unit96]
 FileName=src\preferences\ario-lyrics-preferences.c
 CompileCpp=0
 Folder=src/preferences
@@ -1027,7 +1007,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit99]
+[Unit97]
 FileName=src\preferences\ario-lyrics-preferences.h
 CompileCpp=0
 Folder=src/preferences
@@ -1037,7 +1017,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit100]
+[Unit98]
 FileName=src\preferences\ario-proxy-preferences.c
 CompileCpp=0
 Folder=src/preferences
@@ -1047,7 +1027,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit101]
+[Unit99]
 FileName=src\preferences\ario-proxy-preferences.h
 CompileCpp=0
 Folder=src/preferences
@@ -1057,7 +1037,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit102]
+[Unit100]
 FileName=src\widgets\ario-lyrics-editor.c
 CompileCpp=0
 Folder=src/widgets
@@ -1067,7 +1047,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit103]
+[Unit101]
 FileName=src\widgets\ario-lyrics-editor.h
 CompileCpp=0
 Folder=src/widgets
@@ -1077,7 +1057,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit104]
+[Unit102]
 FileName=src\shell\ario-shell-similarartists.h
 CompileCpp=0
 Folder=src/shell
@@ -1087,17 +1067,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit106]
-FileName=src\lib\ario-conf.c
-CompileCpp=0
-Folder=src/lib
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit105]
+[Unit103]
 FileName=src\shell\ario-shell-similarartists.c
 CompileCpp=0
 Folder=src/shell
@@ -1107,17 +1077,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit107]
-FileName=src\sources\ario-tree.c
+[Unit104]
+FileName=src\lib\ario-conf.c
 CompileCpp=0
-Folder=src/sources
+Folder=src/lib
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit108]
+[Unit106]
 FileName=src\sources\ario-tree.h
 CompileCpp=0
 Folder=src/sources
@@ -1127,7 +1097,17 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit109]
+[Unit105]
+FileName=src\sources\ario-tree.c
+CompileCpp=0
+Folder=src/sources
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit107]
 FileName=src\preferences\ario-browser-preferences.c
 CompileCpp=0
 Folder=src/preferences
@@ -1137,8 +1117,128 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit110]
+[Unit108]
 FileName=src\preferences\ario-browser-preferences.h
+CompileCpp=0
+Folder=src/preferences
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit109]
+FileName=src\lib\libsexy\sexy-tooltip.h
+CompileCpp=0
+Folder=src/lib/libsexy
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit110]
+FileName=src\lib\libsexy\sexy-tooltip.c
+CompileCpp=0
+Folder=src/lib/libsexy
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit111]
+FileName=src\notification\ario-notifier-tooltip.h
+CompileCpp=0
+Folder=src/notification
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit112]
+FileName=src\notification\ario-notification-manager.c
+CompileCpp=0
+Folder=src/notification
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit113]
+FileName=src\notification\ario-notification-manager.h
+CompileCpp=0
+Folder=src/notification
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit114]
+FileName=src\notification\ario-notifier.c
+CompileCpp=0
+Folder=src/notification
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit115]
+FileName=src\notification\ario-notifier.h
+CompileCpp=0
+Folder=src/notification
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit116]
+FileName=src\notification\ario-notifier-tooltip.c
+CompileCpp=0
+Folder=src/notification
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit117]
+FileName=src\widgets\ario-tray-icon.h
+CompileCpp=0
+Folder=src/widgets
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit118]
+FileName=src\widgets\ario-tray-icon.c
+CompileCpp=0
+Folder=src/widgets
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit119]
+FileName=src\preferences\ario-trayicon-preferences.h
+CompileCpp=0
+Folder=src/preferences
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit120]
+FileName=src\preferences\ario-trayicon-preferences.c
 CompileCpp=0
 Folder=src/preferences
 Compile=1

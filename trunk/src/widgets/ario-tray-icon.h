@@ -25,7 +25,11 @@
 #define __ARIO_TRAY_ICON_H
 
 #include <gtk/gtkuimanager.h>
+#ifdef ENABLE_EGGTRAYICON
 #include "lib/eggtrayicon.h"
+#else
+#include <gtk/gtkstatusicon.h>
+#endif
 #include "ario-mpd.h"
 #include "shell/ario-shell.h"
 
@@ -45,14 +49,21 @@ typedef struct ArioTrayIconPrivate ArioTrayIconPrivate;
 
 typedef struct
 {
+#ifdef ENABLE_EGGTRAYICON
         EggTrayIcon parent;
-
+#else
+        GtkStatusIcon parent;
+#endif
         ArioTrayIconPrivate *priv;
 } ArioTrayIcon;
 
 typedef struct
 {
+#ifdef ENABLE_EGGTRAYICON
         EggTrayIconClass parent_class;
+#else
+        GtkStatusIconClass parent_class;
+#endif
 } ArioTrayIconClass;
 
 GType                   ario_tray_icon_get_type         (void) G_GNUC_CONST;

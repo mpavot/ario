@@ -417,12 +417,21 @@ ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
 #else
                 GdkRectangle rect;
                 GdkScreen *screen;
+#ifdef WIN32
+                screen = gdk_screen_get_default ();
+                rect.x = gdk_screen_get_width (screen);
+                rect.y = gdk_screen_get_height (screen);
+                rect.width = 40;
+                rect.height = 20;
+#else
                 gtk_status_icon_get_geometry (GTK_STATUS_ICON (icon),
                                               &screen,
                                               &rect,
                                               NULL);
+#endif
 
-                sexy_tooltip_position_to_rect (SEXY_TOOLTIP (icon->priv->tooltip), &rect, screen);
+                sexy_tooltip_position_to_rect (SEXY_TOOLTIP (icon->priv->tooltip), &rect,
+                                               screen);
 #endif
                 gtk_widget_show (icon->priv->tooltip);
         } else {
@@ -605,6 +614,7 @@ ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
         sexy_tooltip_position_to_widget (SEXY_TOOLTIP (icon->priv->tooltip),
                                          icon->priv->ebox);
 #else
+/*
         GdkRectangle rect;
         GdkScreen *screen;
         gtk_status_icon_get_geometry (GTK_STATUS_ICON (icon),
@@ -613,6 +623,7 @@ ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
                                       NULL);
 
         sexy_tooltip_position_to_rect (SEXY_TOOLTIP (icon->priv->tooltip), &rect, screen);
+*/
 #endif
 }
 
