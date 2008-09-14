@@ -32,9 +32,6 @@
 #include "sources/ario-tree.h"
 #include "ario-debug.h"
 
-static void ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass);
-static void ario_browser_preferences_init (ArioBrowserPreferences *browser_preferences);
-static void ario_browser_preferences_finalize (GObject *object);
 static void ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferences);
 G_MODULE_EXPORT void ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
                                                                ArioBrowserPreferences *browser_preferences);
@@ -58,53 +55,21 @@ struct ArioBrowserPreferencesPrivate
         GSList *tree_comboboxs;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_browser_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_browser_preferences_type = 0;
-
-        if (ario_browser_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioBrowserPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_browser_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioBrowserPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_browser_preferences_init
-                };
-
-                ario_browser_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                        "ArioBrowserPreferences",
-                                                                        &our_info, 0);
-        }
-
-        return ario_browser_preferences_type;
-}
+#define ARIO_BROWSER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER_PREFERENCES, ArioBrowserPreferencesPrivate))
+G_DEFINE_TYPE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_browser_preferences_finalize;
+	g_type_class_add_private (klass, sizeof (ArioBrowserPreferencesPrivate));
 }
 
 static void
 ario_browser_preferences_init (ArioBrowserPreferences *browser_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        browser_preferences->priv = g_new0 (ArioBrowserPreferencesPrivate, 1);
+        browser_preferences->priv = ARIO_BROWSER_PREFERENCES_GET_PRIVATE (browser_preferences);
 }
 
 GtkWidget *
@@ -161,24 +126,6 @@ ario_browser_preferences_new (void)
         g_object_unref (G_OBJECT (xml));
 
         return GTK_WIDGET (browser_preferences);
-}
-
-static void
-ario_browser_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioBrowserPreferences *browser_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_BROWSER_PREFERENCES (object));
-
-        browser_preferences = ARIO_BROWSER_PREFERENCES (object);
-
-        g_return_if_fail (browser_preferences->priv != NULL);
-
-        g_free (browser_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

@@ -29,8 +29,6 @@
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-static void ario_browser_class_init (ArioBrowserClass *klass);
-static void ario_browser_init (ArioBrowser *browser);
 static void ario_browser_finalize (GObject *object);
 static void ario_browser_set_property (GObject *object,
                                        guint prop_id,
@@ -114,34 +112,8 @@ enum
         PROP_ACTION_GROUP
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_browser_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioBrowserClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_browser_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioBrowser),
-                        0,
-                        (GInstanceInitFunc) ario_browser_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_SOURCE,
-                                               "ArioBrowser",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_BROWSER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER, ArioBrowserPrivate))
+G_DEFINE_TYPE (ArioBrowser, ario_browser, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_browser_get_id (ArioSource *source)
@@ -167,8 +139,6 @@ ario_browser_class_init (ArioBrowserClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_browser_finalize;
 
@@ -200,6 +170,8 @@ ario_browser_class_init (ArioBrowserClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_type_class_add_private (klass, sizeof (ArioBrowserPrivate));
 }
 
 static void
@@ -207,7 +179,7 @@ ario_browser_init (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
 
-        browser->priv = g_new0 (ArioBrowserPrivate, 1);
+        browser->priv = ARIO_BROWSER_GET_PRIVATE (browser);
 
         browser->priv->connected = FALSE;
         browser->priv->trees = NULL;
@@ -226,9 +198,8 @@ ario_browser_finalize (GObject *object)
 
         g_return_if_fail (browser->priv != NULL);
         g_slist_free (browser->priv->trees);
-        g_free (browser->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_browser_parent_class)->finalize (object);
 }
 
 static void

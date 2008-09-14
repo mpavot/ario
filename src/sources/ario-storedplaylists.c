@@ -34,9 +34,6 @@
 
 #define DRAG_THRESHOLD 1
 
-static void ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass);
-static void ario_storedplaylists_init (ArioStoredplaylists *storedplaylists);
-static void ario_storedplaylists_finalize (GObject *object);
 static void ario_storedplaylists_shutdown (ArioSource *source);
 static void ario_storedplaylists_set_property (GObject *object,
                                                guint prop_id,
@@ -152,34 +149,8 @@ static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_storedplaylists_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioStoredplaylistsClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_storedplaylists_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioStoredplaylists),
-                        0,
-                        (GInstanceInitFunc) ario_storedplaylists_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_SOURCE,
-                                               "ArioStoredplaylists",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_STOREDPLAYLISTS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STOREDPLAYLISTS, ArioStoredplaylistsPrivate))
+G_DEFINE_TYPE (ArioStoredplaylists, ario_storedplaylists, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_storedplaylists_get_id (ArioSource *source)
@@ -205,10 +176,6 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_storedplaylists_finalize;
 
         object_class->set_property = ario_storedplaylists_set_property;
         object_class->get_property = ario_storedplaylists_get_property;
@@ -239,6 +206,8 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
 }
 
 static void
@@ -250,7 +219,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         int pos;
         GtkWidget *scrolledwindow_storedplaylists;
 
-        storedplaylists->priv = g_new0 (ArioStoredplaylistsPrivate, 1);
+        storedplaylists->priv = ARIO_STOREDPLAYLISTS_GET_PRIVATE (storedplaylists);
 
         storedplaylists->priv->connected = FALSE;
 
@@ -327,24 +296,6 @@ ario_storedplaylists_shutdown (ArioSource *source)
         if (pos > 0)
                 ario_conf_set_integer (PREF_PLAYLISTS_HPANED_SIZE,
                                        pos);
-}
-
-static void
-ario_storedplaylists_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioStoredplaylists *storedplaylists;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_STOREDPLAYLISTS (object));
-
-        storedplaylists = ARIO_STOREDPLAYLISTS (object);
-
-        g_return_if_fail (storedplaylists->priv != NULL);
-
-        g_free (storedplaylists->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

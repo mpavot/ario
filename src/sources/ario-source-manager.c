@@ -30,9 +30,6 @@
 #include "widgets/ario-playlist.h"
 #include "ario-debug.h"
 
-static void ario_sourcemanager_class_init (ArioSourceManagerClass *klass);
-static void ario_sourcemanager_init (ArioSourceManager *sourcemanager);
-static void ario_sourcemanager_finalize (GObject *object);
 static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
 static void ario_sourcemanager_showtabs_changed_cb (guint notification_id,
                                                     ArioSourceManager *sourcemanager);
@@ -60,44 +57,14 @@ typedef struct ArioSourceData
         guint ui_merge_id;
 } ArioSourceData;
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_sourcemanager_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioSourceManagerClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_sourcemanager_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioSourceManager),
-                        0,
-                        (GInstanceInitFunc) ario_sourcemanager_init
-                };
-
-                type = g_type_register_static (GTK_TYPE_NOTEBOOK,
-                                               "ArioSourceManager",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_SOURCEMANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SOURCEMANAGER, ArioSourceManagerPrivate))
+G_DEFINE_TYPE (ArioSourceManager, ario_sourcemanager, GTK_TYPE_NOTEBOOK)
 
 static void
 ario_sourcemanager_class_init (ArioSourceManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_sourcemanager_finalize;
+	g_type_class_add_private (klass, sizeof (ArioSourceManagerPrivate));
 }
 
 static void
@@ -105,24 +72,7 @@ ario_sourcemanager_init (ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START
 
-        sourcemanager->priv = g_new0 (ArioSourceManagerPrivate, 1);
-}
-
-static void
-ario_sourcemanager_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioSourceManager *sourcemanager;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_SOURCEMANAGER (object));
-
-        sourcemanager = ARIO_SOURCEMANAGER (object);
-
-        g_return_if_fail (sourcemanager->priv != NULL);
-        g_free (sourcemanager->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        sourcemanager->priv = ARIO_SOURCEMANAGER_GET_PRIVATE (sourcemanager);
 }
 
 GtkWidget *
