@@ -53,6 +53,12 @@ ario_SOURCES = \
         lyrics/ario-lyrics-provider.h\
         lyrics/ario-lyrics.c\
         lyrics/ario-lyrics.h\
+	notification/ario-notification-manager.c\
+	notification/ario-notification-manager.h\
+	notification/ario-notifier.c\
+	notification/ario-notifier.h\
+	notification/ario-notifier-tooltip.c\
+	notification/ario-notifier-tooltip.h\
 	plugins/ario-module.c\
 	plugins/ario-module.h\
 	plugins/ario-plugin.c\

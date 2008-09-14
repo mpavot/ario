@@ -36,11 +36,6 @@
 #include "ario-debug.h"
 #include "covers/ario-cover-handler.h"
 
-#define TRAY_ICON_DEFAULT_TOOLTIP _("Not playing")
-#define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
-
-static GObject *ario_tray_icon_constructor (GType type, guint n_construct_properties,
-                                            GObjectConstructParam *construct_properties);
 static void ario_tray_icon_finalize (GObject *object);
 static void ario_tray_icon_set_property (GObject *object,
                                          guint prop_id,
@@ -132,6 +127,8 @@ struct ArioTrayIconPrivate
         gboolean shown;
 };
 
+static ArioTrayIcon *instance = NULL;
+
 static GtkActionEntry ario_tray_icon_actions [] =
 {
         { "ControlPlay", GTK_STOCK_MEDIA_PLAY, N_("_Play"), "<control>Up",
@@ -176,7 +173,6 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_tray_icon_finalize;
-        object_class->constructor = ario_tray_icon_constructor;
 
         object_class->set_property = ario_tray_icon_set_property;
         object_class->get_property = ario_tray_icon_get_property;
@@ -210,7 +206,7 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
-	g_type_class_add_private (klass, sizeof (ArioTrayIconPrivate));
+        g_type_class_add_private (klass, sizeof (ArioTrayIconPrivate));
 }
 
 static void
@@ -270,23 +266,6 @@ ario_tray_icon_init (ArioTrayIcon *icon)
                                  "cover_changed",
                                  G_CALLBACK (ario_tray_icon_cover_changed_cb),
                                  icon, 0);
-}
-
-static GObject *
-ario_tray_icon_constructor (GType type, guint n_construct_properties,
-                            GObjectConstructParam *construct_properties)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioTrayIcon *tray;
-        ArioTrayIconClass *klass;
-        GObjectClass *parent_class;  
-
-        klass = ARIO_TRAY_ICON_CLASS (g_type_class_peek (TYPE_ARIO_TRAY_ICON));
-
-        parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
-        tray = ARIO_TRAY_ICON (parent_class->constructor (type, n_construct_properties,
-                                                          construct_properties));
-        return G_OBJECT (tray);
 }
 
 static void
@@ -392,6 +371,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                                            "shell", shell,
                                            "mpd", mpd,
                                            NULL);
+        instance = icon;
 
         /* TODO : Not very efficient */
         ario_mpd_use_count_inc (icon->priv->mpd);
@@ -764,7 +744,7 @@ ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon)
                 if (!artist)
                         artist = ARIO_MPD_UNKNOWN;
 
-                secondary = FROM_MARKUP (album, artist);
+                secondary = TRAY_ICON_FROM_MARKUP (album, artist);
                 gtk_label_set_markup (GTK_LABEL (icon->priv->tooltip_secondary),
                                       secondary);
                 gtk_widget_show (icon->priv->tooltip_secondary);
@@ -907,18 +887,21 @@ ario_tray_icon_song_changed_cb (ArioMpd *mpd,
 #ifndef ENABLE_EGGTRAYICON
         ario_tray_icon_sync_tooltip (icon);
 #endif
+}
 
-        if (ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT)) {
-                icon->priv->notified = TRUE;
-                ario_tray_icon_update_tooltip_visibility (icon);
+void
+ario_tray_icon_notify (void)
+{
+        ARIO_LOG_FUNCTION_START
+        instance->priv->notified = TRUE;
+        ario_tray_icon_update_tooltip_visibility (instance);
 
-                if (icon->priv->notification_id)
-                        g_source_remove (icon->priv->notification_id);
+        if (instance->priv->notification_id)
+                g_source_remove (instance->priv->notification_id);
 
-                icon->priv->notification_id = g_timeout_add (ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000,
-                                                             (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
-                                                             icon);
-        }
+        instance->priv->notification_id = g_timeout_add (ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000,
+                                                         (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
+                                                         instance);
 }
 
 static void
@@ -1002,5 +985,12 @@ ario_tray_icon_cmd_previous (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_mpd_do_prev (icon->priv->mpd);
+}
+
+ArioTrayIcon *
+ario_tray_icon_get_instance (void)
+{
+        ARIO_LOG_FUNCTION_START
+        return instance;
 }
 

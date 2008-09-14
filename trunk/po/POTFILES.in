@@ -60,6 +60,12 @@ src/lyrics/ario-lyrics-provider.c
 src/lyrics/ario-lyrics-provider.h
 src/lyrics/ario-lyrics.c
 src/lyrics/ario-lyrics.h
+src/notification/ario-notification-manager.c
+src/notification/ario-notification-manager.h
+src/notification/ario-notifier.c
+src/notification/ario-notifier.h
+src/notification/ario-notifier-tooltip.c
+src/notification/ario-notifier-tooltip.h
 src/plugins/ario-module.c
 src/plugins/ario-module.h
 src/plugins/ario-plugin.c
@@ -127,8 +133,6 @@ src/widgets/ario-status-bar.c
 src/widgets/ario-status-bar.h
 src/widgets/ario-tray-icon.c
 src/widgets/ario-tray-icon.h
-src/widgets/ario-status-icon.c
-src/widgets/ario-status-icon.h
 src/widgets/ario-volume.c
 src/widgets/ario-volume.h
 plugins/audioscrobbler/ario-audioscrobbler.c
@@ -147,6 +151,11 @@ plugins/information/ario-information-plugin.c
 plugins/information/ario-information-plugin.h
 plugins/information/information.ario-plugin.desktop.in
 plugins/information/information.glade
+plugins/libnotify/libnotify.ario-plugin.desktop.in
+plugins/libnotify/ario-libnotify-plugin.c
+plugins/libnotify/ario-libnotify-plugin.h
+plugins/libnotify/ario-notifier-libnotify.c
+plugins/libnotify/ario-notifier-libnotify.h
 plugins/mmkeys/ario-mmkeys-plugin.c
 plugins/mmkeys/ario-mmkeys-plugin.h
 plugins/mmkeys/mmkeys.ario-plugin.desktop.in

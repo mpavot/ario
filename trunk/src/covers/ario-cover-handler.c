@@ -69,6 +69,8 @@ struct ArioCoverHandlerPrivate
         GThread *thread;
         GAsyncQueue *queue;
 
+        gchar *cover_path;
+
         GdkPixbuf *pixbuf;
         GdkPixbuf *large_pixbuf;
 };
@@ -191,6 +193,9 @@ ario_cover_handler_finalize (GObject *object)
 
         if (cover_handler->priv->large_pixbuf) 
                 g_object_unref(cover_handler->priv->large_pixbuf);
+
+        g_free (cover_handler->priv->cover_path);
+        g_free (cover_handler->priv);
 
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -319,7 +324,7 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                 gboolean should_get)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *cover_path, *large_cover_path;
+        gchar *large_cover_path;
         ArioCoverHandlerData *data;
         gchar *artist = ario_mpd_get_current_artist (cover_handler->priv->mpd);
         gchar *album = ario_mpd_get_current_album (cover_handler->priv->mpd);
@@ -339,17 +344,23 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                 cover_handler->priv->large_pixbuf = NULL;
         }
 
+        if (cover_handler->priv->cover_path) {
+                g_free (cover_handler->priv->cover_path);
+                cover_handler->priv->cover_path = NULL;
+        }
+
         switch (ario_mpd_get_current_state (cover_handler->priv->mpd)) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                cover_path = ario_cover_make_ario_cover_path (artist,
-                                                              album, SMALL_COVER);
-                large_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                                    album, NORMAL_COVER);
-                if (cover_path && large_cover_path) {
-                        cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
+                cover_handler->priv->cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
+                large_cover_path = ario_cover_make_ario_cover_path (artist, album, NORMAL_COVER);
+                if (cover_handler->priv->cover_path && large_cover_path) {
+                        cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_handler->priv->cover_path, COVER_SIZE, COVER_SIZE, NULL);
                         cover_handler->priv->large_pixbuf = gdk_pixbuf_new_from_file_at_size (large_cover_path, 2*COVER_SIZE, 2*COVER_SIZE, NULL);
-                        g_free (cover_path);
+                        if (!cover_handler->priv->cover_path) {
+                                g_free (cover_handler->priv->cover_path);
+                                cover_handler->priv->cover_path = NULL;
+                        }
                         g_free (large_cover_path);
                         if (!cover_handler->priv->pixbuf
                             && should_get
@@ -419,4 +430,11 @@ ario_cover_handler_get_large_cover (void)
 {
         ARIO_LOG_FUNCTION_START
         return instance->priv->large_pixbuf;
+}
+
+gchar *
+ario_cover_handler_get_cover_path (void)
+{
+        ARIO_LOG_FUNCTION_START
+        return instance->priv->cover_path;
 }

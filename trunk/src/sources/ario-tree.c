@@ -224,7 +224,7 @@ ario_tree_class_init (ArioTreeClass *klass)
                               G_TYPE_NONE,
                               0);
 
-	g_type_class_add_private (klass, sizeof (ArioTreePrivate));
+        g_type_class_add_private (klass, sizeof (ArioTreePrivate));
 }
 
 static gint

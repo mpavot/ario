@@ -171,7 +171,7 @@ ario_browser_class_init (ArioBrowserClass *klass)
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
-	g_type_class_add_private (klass, sizeof (ArioBrowserPrivate));
+        g_type_class_add_private (klass, sizeof (ArioBrowserPrivate));
 }
 
 static void

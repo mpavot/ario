@@ -62,7 +62,7 @@ static void
 ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-	g_type_class_add_private (klass, sizeof (ArioBrowserPreferencesPrivate));
+        g_type_class_add_private (klass, sizeof (ArioBrowserPreferencesPrivate));
 }
 
 static void

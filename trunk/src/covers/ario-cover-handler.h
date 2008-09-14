@@ -58,6 +58,8 @@ ArioCoverHandler * ario_cover_handler_get_instance     (void);
 
 GdkPixbuf *        ario_cover_handler_get_cover        (void);
 
+gchar *            ario_cover_handler_get_cover_path   (void);
+
 GdkPixbuf *        ario_cover_handler_get_large_cover  (void);
 
 G_END_DECLS

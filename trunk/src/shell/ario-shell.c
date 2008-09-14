@@ -32,6 +32,7 @@
 #include "widgets/ario-playlist.h"
 #include "widgets/ario-header.h"
 #include "widgets/ario-status-bar.h"
+#include "notification/ario-notification-manager.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell-preferences.h"
 #include "shell/ario-shell-lyrics.h"
@@ -113,6 +114,7 @@ struct ArioShellPrivate
 
         ArioMpd *mpd;
         ArioCoverHandler *cover_handler;
+        ArioNotificationManager *notification_manager;
         GtkWidget *header;
         GtkWidget *vpaned;
         GtkWidget *sourcemanager;
@@ -298,6 +300,7 @@ ario_shell_finalize (GObject *object)
 
         gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
+        g_object_unref (shell->priv->notification_manager);
         g_object_unref (shell->priv->mpd);
 #ifdef ENABLE_EGGTRAYICON
         gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));;
@@ -451,7 +454,7 @@ ario_shell_construct (ArioShell *shell,
         /* initialize shell services */
         vbox = gtk_vbox_new (FALSE, 0);
 
-        shell->priv->mpd = ario_mpd_new ();
+        shell->priv->mpd = ario_mpd_get_instance ();
         shell->priv->cover_handler = ario_cover_handler_new (shell->priv->mpd);
         shell->priv->header = ario_header_new (shell->priv->mpd);
         separator = gtk_hseparator_new ();
@@ -468,7 +471,7 @@ ario_shell_construct (ArioShell *shell,
         if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
                 gtk_widget_hide (GTK_WIDGET (shell->priv->tray_icon));
 #endif
-
+        shell->priv->notification_manager = ario_notification_manager_get_instance ();
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);

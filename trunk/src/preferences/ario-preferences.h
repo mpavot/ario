@@ -228,6 +228,10 @@
 #define PREF_HAVE_NOTIFICATION                  "notification"
 #define PREF_HAVE_NOTIFICATION_DEFAULT          FALSE
 
+/* The notifier id */
+#define PREF_NOTIFIER                           "notifier"
+#define PREF_NOTIFIER_DEFAULT                   "tooltip"
+
 /* The duration of the notification (in seconds) */
 #define PREF_NOTIFICATION_TIME                  "notification-time"
 #define PREF_NOTIFICATION_TIME_DEFAULT          5
