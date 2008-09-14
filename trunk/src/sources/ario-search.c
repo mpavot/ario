@@ -39,8 +39,6 @@ typedef struct ArioSearchConstraint
         GtkWidget *minus_button;
 } ArioSearchConstraint;
 
-static void ario_search_class_init (ArioSearchClass *klass);
-static void ario_search_init (ArioSearch *search);
 static void ario_search_finalize (GObject *object);
 static void ario_search_set_property (GObject *object,
                                       guint prop_id,
@@ -107,34 +105,8 @@ static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_search_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioSearchClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_search_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioSearch),
-                        0,
-                        (GInstanceInitFunc) ario_search_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_SOURCE,
-                                               "ArioSearch",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_SEARCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SEARCH, ArioSearchPrivate))
+G_DEFINE_TYPE (ArioSearch, ario_search, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_search_get_id (ArioSource *source)
@@ -160,8 +132,6 @@ ario_search_class_init (ArioSearchClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_search_finalize;
 
@@ -193,6 +163,7 @@ ario_search_class_init (ArioSearchClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	g_type_class_add_private (klass, sizeof (ArioSearchPrivate));
 }
 
 static void
@@ -204,7 +175,7 @@ ario_search_init (ArioSearch *search)
         GtkWidget *image;
         int i;
 
-        search->priv = g_new0 (ArioSearchPrivate, 1);
+        search->priv = ARIO_SEARCH_GET_PRIVATE (search);
 
         search->priv->connected = FALSE;
 
@@ -286,9 +257,8 @@ ario_search_finalize (GObject *object)
 
         g_return_if_fail (search->priv != NULL);
         g_object_unref (search->priv->list_store);
-        g_free (search->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_search_parent_class)->finalize (object);
 }
 
 static void

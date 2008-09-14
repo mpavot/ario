@@ -34,8 +34,6 @@
 
 #define DRAG_THRESHOLD 1
 
-static void ario_tree_class_init (ArioTreeClass *klass);
-static void ario_tree_init (ArioTree *tree);
 static void ario_tree_finalize (GObject *object);
 static void ario_tree_set_property (GObject *object,
                                     guint prop_id,
@@ -178,42 +176,14 @@ static const GtkTargetEntry criterias_targets  [] = {
         { "text/criterias-list", 0, 0 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_tree_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioTreeClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_tree_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioTree),
-                        0,
-                        (GInstanceInitFunc) ario_tree_init
-                };
-
-                type = g_type_register_static (GTK_TYPE_SCROLLED_WINDOW,
-                                               "ArioTree",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_TREE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TREE, ArioTreePrivate))
+G_DEFINE_TYPE (ArioTree, ario_tree, GTK_TYPE_SCROLLED_WINDOW)
 
 static void
 ario_tree_class_init (ArioTreeClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_tree_finalize;
 
@@ -253,6 +223,8 @@ ario_tree_class_init (ArioTreeClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
+
+	g_type_class_add_private (klass, sizeof (ArioTreePrivate));
 }
 
 static gint
@@ -298,7 +270,7 @@ static void
 ario_tree_init (ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START
-        tree->priv = g_new0 (ArioTreePrivate, 1);
+        tree->priv = ARIO_TREE_GET_PRIVATE (tree);
         tree->priv->connected = FALSE;
 }
 
@@ -323,9 +295,7 @@ ario_tree_finalize (GObject *object)
         g_slist_foreach (tree->priv->criterias, (GFunc) ario_mpd_criteria_free, NULL);
         g_slist_free (tree->priv->criterias);
 
-        g_free (tree->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_tree_parent_class)->finalize (object);
 }
 
 static void

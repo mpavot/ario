@@ -33,8 +33,6 @@
 #include "ario-debug.h"
 #include "ario-profiles.h"
 
-static void ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass);
-static void ario_connection_preferences_init (ArioConnectionPreferences *connection_preferences);
 static void ario_connection_preferences_finalize (GObject *object);
 static void ario_connection_preferences_set_property (GObject *object,
                                                       guint prop_id,
@@ -115,44 +113,14 @@ enum
         N_COLUMN
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_connection_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_connection_preferences_type = 0;
-
-        if (ario_connection_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioConnectionPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_connection_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioConnectionPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_connection_preferences_init
-                };
-
-                ario_connection_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                           "ArioConnectionPreferences",
-                                                                           &our_info, 0);
-        }
-
-        return ario_connection_preferences_type;
-}
+#define ARIO_CONNECTION_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_PREFERENCES, ArioConnectionPreferencesPrivate))
+G_DEFINE_TYPE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_connection_preferences_finalize;
         object_class->set_property = ario_connection_preferences_set_property;
@@ -165,13 +133,14 @@ ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
+	g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
 }
 
 static void
 ario_connection_preferences_init (ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        connection_preferences->priv = g_new0 (ArioConnectionPreferencesPrivate, 1);
+        connection_preferences->priv = ARIO_CONNECTION_PREFERENCES_GET_PRIVATE (connection_preferences);
 
         connection_preferences->priv->loading = FALSE;
         connection_preferences->priv->current_profile = NULL;
@@ -293,7 +262,6 @@ ario_connection_preferences_profile_selection_changed_cb (GtkTreeSelection * sel
                 ario_connection_preferences_sync_connection (connection_preferences);
         }
 }
-
 
 static void
 ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *connection_preferences)
@@ -439,9 +407,7 @@ ario_connection_preferences_finalize (GObject *object)
         g_slist_foreach (connection_preferences->priv->profiles, (GFunc) ario_profiles_free, NULL);
         g_slist_free (connection_preferences->priv->profiles);
 
-        g_free (connection_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_connection_preferences_parent_class)->finalize (object);
 }
 
 static void
