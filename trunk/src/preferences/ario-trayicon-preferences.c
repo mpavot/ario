@@ -159,6 +159,12 @@ ario_trayicon_preferences_new (void)
 
         ario_trayicon_preferences_sync_trayicon (trayicon_preferences);
 
+#ifndef ENABLE_EGGTRAYICON
+        GtkWidget *tray_frame = glade_xml_get_widget (xml, "tray_frame");
+        gtk_widget_hide (tray_frame);
+        gtk_widget_set_no_show_all (tray_frame, TRUE);
+#endif
+
         gtk_box_pack_start (GTK_BOX (trayicon_preferences), glade_xml_get_widget (xml, "trayicon_vbox"), TRUE, TRUE, 0);
 
         g_object_unref (G_OBJECT (xml));

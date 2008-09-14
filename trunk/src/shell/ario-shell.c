@@ -42,11 +42,7 @@
 #include "ario-util.h"
 #include "plugins/ario-plugin-manager.h"
 #include "widgets/ario-firstlaunch.h"
-#ifdef ENABLE_EGGTRAYICON
 #include "widgets/ario-tray-icon.h"
-#else
-#include "widgets/ario-status-icon.h"
-#endif
 
 static void ario_shell_class_init (ArioShellClass *klass);
 static void ario_shell_init (ArioShell *shell);
@@ -125,11 +121,9 @@ struct ArioShellPrivate
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
-#ifdef ENABLE_EGGTRAYICON
+
         ArioTrayIcon *tray_icon;
-#else
-        ArioStatusIcon *status_icon;
-#endif
+
         gboolean statusbar_hidden;
         gboolean upperpart_hidden;
         gboolean playlist_hidden;
@@ -308,7 +302,7 @@ ario_shell_finalize (GObject *object)
 #ifdef ENABLE_EGGTRAYICON
         gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));;
 #else
-        g_object_unref (G_OBJECT (shell->priv->status_icon));
+        g_object_unref (G_OBJECT (shell->priv->tray_icon));
 #endif
 
         g_object_unref (shell->priv->ui_manager);
@@ -464,23 +458,17 @@ ario_shell_construct (ArioShell *shell,
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
         shell->priv->sourcemanager = ario_sourcemanager_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
 
-#ifdef ENABLE_EGGTRAYICON
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
                                                      shell,
                                                      shell->priv->mpd);
-
+#ifdef ENABLE_EGGTRAYICON
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
         if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
                 gtk_widget_hide (GTK_WIDGET (shell->priv->tray_icon));
-#else
-        /* initialize tray icon */
-        shell->priv->status_icon = ario_status_icon_new (shell->priv->actiongroup,
-                                                         shell->priv->ui_manager,
-                                                         shell,
-                                                         shell->priv->mpd);
 #endif
+
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
