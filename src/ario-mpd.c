@@ -563,17 +563,16 @@ ario_mpd_get_property (GObject *object,
 }
 
 ArioMpd *
-ario_mpd_new (void)
+ario_mpd_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpd *mpd;
+        static ArioMpd *mpd = NULL;
 
-        mpd = g_object_new (TYPE_ARIO_MPD,
-                            NULL);
-
-        g_return_val_if_fail (mpd->priv != NULL, NULL);
-
-        return ARIO_MPD (mpd);
+        if (!mpd) {
+                mpd = g_object_new (TYPE_ARIO_MPD, NULL);
+                g_return_val_if_fail (mpd->priv != NULL, NULL);
+        }
+        return mpd;
 }
 
 static gboolean

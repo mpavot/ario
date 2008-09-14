@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-14 00:44+0200\n"
+"POT-Creation-Date: 2008-09-14 22:37+0200\n"
 "PO-Revision-Date: 2008-06-14 09:55+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -108,11 +108,11 @@ msgstr "Порт :"
 msgid "_Autoconnect on startup"
 msgstr "Автосоединение при запуске"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:163
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:159
 msgid "_Connect"
 msgstr "_Соединить"
 
-#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:166
+#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:162
 msgid "_Disconnect"
 msgstr "_Отключить"
 
@@ -154,14 +154,14 @@ msgstr "Закачка обложки"
 msgid "Local search"
 msgstr "Местный поиск"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:148
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:120
 msgid "Search"
 msgstr "Поиск"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:152
-#: ../src/sources/ario-tree.c:435 ../src/widgets/ario-playlist.c:368
-#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-status-icon.c:386
+#: ../src/sources/ario-tree.c:405 ../src/widgets/ario-playlist.c:368
+#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-tray-icon.c:688
 msgid "Album"
 msgstr "Альбом"
 
@@ -173,7 +173,7 @@ msgstr ""
 #: ../src/shell/ario-shell-lyricsselect.c:208
 #: ../src/shell/ario-shell-similarartists.c:421
 #: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:255
-#: ../src/widgets/ario-status-icon.c:384
+#: ../src/widgets/ario-tray-icon.c:686
 msgid "Artist"
 msgstr "Исполнитель"
 
@@ -212,7 +212,7 @@ msgid "Interface"
 msgstr "Внешний вид"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:264 ../src/shell/ario-shell.c:210
+#: ../src/sources/ario-storedplaylists.c:233 ../src/shell/ario-shell.c:206
 msgid "Playlist"
 msgstr "Список композиций"
 
@@ -226,15 +226,15 @@ msgstr "Показать вкладки"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:153
-#: ../src/sources/ario-tree.c:481 ../src/shell/ario-shell-lyricsselect.c:221
+#: ../src/sources/ario-tree.c:451 ../src/shell/ario-shell-lyricsselect.c:221
 #: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:240
-#: ../src/widgets/ario-status-icon.c:388
+#: ../src/widgets/ario-tray-icon.c:690
 msgid "Title"
 msgstr "Заголовок"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:154
-#: ../src/sources/ario-tree.c:474 ../src/widgets/ario-playlist.c:368
+#: ../src/sources/ario-tree.c:444 ../src/widgets/ario-playlist.c:368
 msgid "Track"
 msgstr "Дорожка"
 
@@ -441,11 +441,11 @@ msgstr "Имя файла"
 msgid "Any"
 msgstr "Любой"
 
-#: ../src/ario-mpd.c:674
+#: ../src/ario-mpd.c:673
 msgid "Connecting to MPD server..."
 msgstr "Соединение с MPD"
 
-#: ../src/ario-mpd.c:699
+#: ../src/ario-mpd.c:698
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "Невозможно соединиться с mpd. Проверьте настройки соединения."
 
@@ -489,7 +489,7 @@ msgstr "Плагин"
 msgid "Enabled"
 msgstr "Включено"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:193
+#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:189
 msgid "_About"
 msgstr "_О программе"
 
@@ -513,24 +513,24 @@ msgstr "В_ыключить всё"
 msgid "Active plugins"
 msgstr "Активные расширения"
 
-#: ../src/preferences/ario-browser-preferences.c:48
+#: ../src/preferences/ario-browser-preferences.c:45
 msgid "Alphabetically"
 msgstr "По алфавиту"
 
 #. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-browser-preferences.c:49
+#: ../src/preferences/ario-browser-preferences.c:46
 msgid "By year"
 msgstr "По годам"
 
-#: ../src/preferences/ario-connection-preferences.c:394
+#: ../src/preferences/ario-connection-preferences.c:362
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/preferences/ario-connection-preferences.c:662
+#: ../src/preferences/ario-connection-preferences.c:628
 msgid "Server autodetection"
 msgstr "Сервер автоопределения"
 
-#: ../src/preferences/ario-connection-preferences.c:673
+#: ../src/preferences/ario-connection-preferences.c:639
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -540,7 +540,7 @@ msgstr ""
 "проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
 "ручную настройку."
 
-#: ../src/preferences/ario-connection-preferences.c:683
+#: ../src/preferences/ario-connection-preferences.c:649
 #: ../src/preferences/ario-cover-preferences.c:205
 #: ../src/preferences/ario-lyrics-preferences.c:156
 #: ../src/preferences/ario-server-preferences.c:228
@@ -548,21 +548,21 @@ msgstr ""
 msgid "Name"
 msgstr "Название"
 
-#: ../src/preferences/ario-connection-preferences.c:691
+#: ../src/preferences/ario-connection-preferences.c:657
 #: ../src/widgets/ario-firstlaunch.c:317
 msgid "Host"
 msgstr "Хост"
 
-#: ../src/preferences/ario-connection-preferences.c:699
+#: ../src/preferences/ario-connection-preferences.c:665
 #: ../src/widgets/ario-firstlaunch.c:325
 msgid "Port"
 msgstr "Порт"
 
-#: ../src/preferences/ario-connection-preferences.c:762
+#: ../src/preferences/ario-connection-preferences.c:728
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/preferences/ario-connection-preferences.c:809
+#: ../src/preferences/ario-connection-preferences.c:775
 msgid "New Profile"
 msgstr "Новый профиль"
 
@@ -582,42 +582,42 @@ msgstr "Не подключен"
 msgid "Updating..."
 msgstr "Обновление..."
 
-#: ../src/preferences/ario-trayicon-preferences.c:48
+#: ../src/preferences/ario-trayicon-preferences.c:51
 msgid "Play/Pause"
 msgstr "Играть/Пауза"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/preferences/ario-trayicon-preferences.c:52
 #: ../src/widgets/ario-header.c:304
 msgid "Play next song"
 msgstr "Играть следующую песню"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-trayicon-preferences.c:50
+#: ../src/preferences/ario-trayicon-preferences.c:53
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:83
-#: ../src/sources/ario-storedplaylists.c:105
-#: ../src/sources/ario-storedplaylists.c:122
+#: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-storedplaylists.c:102
+#: ../src/sources/ario-storedplaylists.c:119
 #: ../plugins/filesystem/ario-filesystem.c:107
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:114
 msgid "_Add to playlist"
 msgstr "_Добавить в плейлист"
 
-#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:86
-#: ../src/sources/ario-storedplaylists.c:108
-#: ../src/sources/ario-storedplaylists.c:125
+#: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-storedplaylists.c:105
+#: ../src/sources/ario-storedplaylists.c:122
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
 msgstr "_Добавить в плейлист и играть"
 
-#: ../src/sources/ario-browser.c:91 ../src/sources/ario-search.c:89
-#: ../src/sources/ario-storedplaylists.c:111
-#: ../src/sources/ario-storedplaylists.c:128
+#: ../src/sources/ario-browser.c:89 ../src/sources/ario-search.c:87
+#: ../src/sources/ario-storedplaylists.c:108
+#: ../src/sources/ario-storedplaylists.c:125
 #: ../plugins/filesystem/ario-filesystem.c:113
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:120
@@ -625,129 +625,129 @@ msgstr "_Добавить в плейлист и играть"
 msgid "_Replace in playlist"
 msgstr "Сохранить плейлист"
 
-#: ../src/sources/ario-browser.c:94
+#: ../src/sources/ario-browser.c:92
 msgid "Get the covers"
 msgstr "Получить обложки"
 
-#: ../src/sources/ario-browser.c:97
+#: ../src/sources/ario-browser.c:95
 msgid "_Delete the covers"
 msgstr "_Удалить обложки"
 
-#: ../src/sources/ario-browser.c:100 ../src/sources/ario-browser.c:103
-#: ../src/sources/ario-search.c:92 ../src/sources/ario-storedplaylists.c:131
+#: ../src/sources/ario-browser.c:98 ../src/sources/ario-browser.c:101
+#: ../src/sources/ario-search.c:90 ../src/sources/ario-storedplaylists.c:128
 #: ../src/widgets/ario-playlist.c:135
 #: ../plugins/filesystem/ario-filesystem.c:130
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../src/sources/ario-browser.c:155 ../src/shell/ario-shell-preferences.c:182
+#: ../src/sources/ario-browser.c:127 ../src/shell/ario-shell-preferences.c:182
 msgid "Library"
 msgstr "Библиотека"
 
-#: ../src/sources/ario-search.c:230
+#: ../src/sources/ario-search.c:201
 msgid "Add a search criteria"
 msgstr "Добавить критерии поиска"
 
-#: ../src/sources/ario-search.c:239
+#: ../src/sources/ario-search.c:210
 msgid "Search songs in the library"
 msgstr "Искать песню в библиотеке"
 
-#: ../src/sources/ario-search.c:435
+#: ../src/sources/ario-search.c:405
 msgid "Remove a search criteria"
 msgstr "Удалить критерии поиска"
 
-#: ../src/sources/ario-storedplaylists.c:114
+#: ../src/sources/ario-storedplaylists.c:111
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: ../src/sources/ario-storedplaylists.c:193
+#: ../src/sources/ario-storedplaylists.c:164
 msgid "Playlists"
 msgstr "Плейлисты"
 
-#: ../src/sources/ario-storedplaylists.c:648
+#: ../src/sources/ario-storedplaylists.c:599
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Вы действительно хотите удалить все выбранные плейлисты?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:422
+#: ../src/sources/ario-tree.c:392
 msgid "Cover"
 msgstr "Обложка"
 
-#: ../src/sources/ario-tree.c:1226
+#: ../src/sources/ario-tree.c:1196
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Вы действительно хотите удалить все обложки выбранных исполнителей?"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:153
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:154
 msgid "_Edit"
 msgstr "_Редактировать"
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:155
 msgid "_View"
 msgstr "_Вид"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:156
 msgid "_Tool"
 msgstr "_Инструменты"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:157
 msgid "_Help"
 msgstr "_Помощь"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:165
 msgid "_Quit"
 msgstr "_Выход"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:168
 msgid "Plu_gins"
 msgstr "Мод_ули"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:171
 msgid "Prefere_nces"
 msgstr "_Параметры"
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:174
 msgid "_Change current album cover"
 msgstr "Изменить текущую обложку"
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:177
 msgid "Download album _covers"
 msgstr "Скачать альбомные _обложки"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:180
 msgid "Find similar artists"
 msgstr "Найти похожих артистов"
 
-#: ../src/shell/ario-shell.c:187
+#: ../src/shell/ario-shell.c:183
 msgid "Add similar songs to playlist"
 msgstr "Добавить похожие песни в плейлист"
 
-#: ../src/shell/ario-shell.c:190
+#: ../src/shell/ario-shell.c:186
 msgid "Show _lyrics"
 msgstr "Показать _слова песен"
 
-#: ../src/shell/ario-shell.c:196
+#: ../src/shell/ario-shell.c:192
 msgid "_Translate this application..."
 msgstr "Перевести это приложение"
 
-#: ../src/shell/ario-shell.c:204
+#: ../src/shell/ario-shell.c:200
 msgid "S_tatusbar"
 msgstr "_Строка состояния"
 
-#: ../src/shell/ario-shell.c:207
+#: ../src/shell/ario-shell.c:203
 msgid "Upper part"
 msgstr "Верхняя часть"
 
-#: ../src/shell/ario-shell.c:768
+#: ../src/shell/ario-shell.c:759
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:769
+#: ../src/shell/ario-shell.c:760
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -767,7 +767,7 @@ msgstr ""
 "  Nick https://launchpad.net/~homolibere\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
-#: ../src/shell/ario-shell.c:1104
+#: ../src/shell/ario-shell.c:1095
 msgid "Configure Plugins"
 msgstr "Настроить расширения"
 
@@ -869,8 +869,7 @@ msgstr "Настройка"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.c:40
-#: ../src/widgets/ario-status-icon.c:34
+#: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>от</i> %s %s"
@@ -889,7 +888,7 @@ msgstr "Остановить музыку"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:385 ../src/widgets/ario-tray-icon.c:738
+#: ../src/widgets/ario-header.c:385 ../src/widgets/ario-tray-icon.c:807
 msgid " of "
 msgstr " из "
 
@@ -942,29 +941,29 @@ msgstr "Название плейлиста :"
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
-#: ../src/widgets/ario-tray-icon.c:39 ../src/widgets/ario-status-icon.c:33
-msgid "Not playing"
-msgstr "Не воспроизводится"
-
-#: ../src/widgets/ario-tray-icon.c:133 ../src/widgets/ario-status-icon.c:87
+#: ../src/widgets/ario-tray-icon.c:134
 msgid "_Play"
 msgstr "_Играть"
 
-#: ../src/widgets/ario-tray-icon.c:136 ../src/widgets/ario-status-icon.c:90
+#: ../src/widgets/ario-tray-icon.c:137
 msgid "_Pause"
 msgstr "_Пауза"
 
-#: ../src/widgets/ario-tray-icon.c:139 ../src/widgets/ario-status-icon.c:93
+#: ../src/widgets/ario-tray-icon.c:140
 msgid "_Stop"
 msgstr "_Остановить"
 
-#: ../src/widgets/ario-tray-icon.c:142 ../src/widgets/ario-status-icon.c:96
+#: ../src/widgets/ario-tray-icon.c:143
 msgid "_Next"
 msgstr "_Далее"
 
-#: ../src/widgets/ario-tray-icon.c:145 ../src/widgets/ario-status-icon.c:99
+#: ../src/widgets/ario-tray-icon.c:146
 msgid "P_revious"
 msgstr "П_ред."
+
+#: ../src/widgets/ario-tray-icon.h:41
+msgid "Not playing"
+msgstr "Не воспроизводится"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1204

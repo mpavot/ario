@@ -79,6 +79,16 @@ if test x"$enable_dbus" != xno; then
 fi
 AM_CONDITIONAL(USE_DBUS, test x"$enable_dbus" != xno)
 
+dnl Libnotify
+AC_ARG_ENABLE(notify,
+              AC_HELP_STRING([--disable-notify],
+                             [Disable support of libnotify]))
+if test x"$enable_notify" != xno; then
+   PKG_CHECK_MODULES(NOTIFY, [libnotify])
+
+fi
+AM_CONDITIONAL(USE_NOTIFY, test x"$enable_notify" != xno)
+
 dnl AUDIOSCROBBLER
 AC_ARG_ENABLE(audioscrobbler,
               AC_HELP_STRING([--disable-audioscrobbler],
@@ -124,6 +134,7 @@ plugins/Makefile
 plugins/audioscrobbler/Makefile
 plugins/filesystem/Makefile
 plugins/information/Makefile
+plugins/libnotify/Makefile
 plugins/mmkeys/Makefile
 plugins/radios/Makefile
 plugins/wikipedia/Makefile
@@ -152,6 +163,11 @@ if test x${enable_dbus} != xno; then
         echo "DBUS support is:                          ENABLED  (--disable-dbus)"
 else
         echo "DBUS support is:                          DISABLED"
+fi
+if test x${enable_notify} != xno; then
+        echo "Libnotify support is:                     ENABLED  (--disable-notify)"
+else
+        echo "Libnotify support is:                     DISABLED"
 fi
 if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"

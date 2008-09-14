@@ -38,6 +38,9 @@ G_BEGIN_DECLS
 #define IS_ARIO_TRAY_ICON_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_TRAY_ICON))
 #define ARIO_TRAY_ICON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_TRAY_ICON, ArioTrayIconClass))
 
+#define TRAY_ICON_DEFAULT_TOOLTIP _("Not playing")
+#define TRAY_ICON_FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
+
 typedef struct ArioTrayIconPrivate ArioTrayIconPrivate;
 
 typedef struct
@@ -58,6 +61,11 @@ ArioTrayIcon *          ario_tray_icon_new              (GtkActionGroup *group,
                                                          GtkUIManager *mgr,
                                                          ArioShell *shell,
                                                          ArioMpd *mpd);
+
+void                    ario_tray_icon_notify           (void);
+
+ArioTrayIcon *          ario_tray_icon_get_instance     (void);
+
 G_END_DECLS
 
 #endif /* __ARIO_TRAY_ICON_H */

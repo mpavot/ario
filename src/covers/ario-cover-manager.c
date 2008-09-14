@@ -131,7 +131,7 @@ ario_cover_manager_get_instance (void)
                 ario_cover_manager_update_providers (cover_manager);
         }
 
-        return ARIO_COVER_MANAGER (cover_manager);
+        return cover_manager;
 }
 
 static void

@@ -163,7 +163,7 @@ ario_search_class_init (ArioSearchClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-	g_type_class_add_private (klass, sizeof (ArioSearchPrivate));
+        g_type_class_add_private (klass, sizeof (ArioSearchPrivate));
 }
 
 static void

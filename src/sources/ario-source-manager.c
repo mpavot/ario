@@ -64,7 +64,7 @@ static void
 ario_sourcemanager_class_init (ArioSourceManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-	g_type_class_add_private (klass, sizeof (ArioSourceManagerPrivate));
+        g_type_class_add_private (klass, sizeof (ArioSourceManagerPrivate));
 }
 
 static void

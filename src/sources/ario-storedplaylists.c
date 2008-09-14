@@ -207,7 +207,7 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
-	g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
+        g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
 }
 
 static void

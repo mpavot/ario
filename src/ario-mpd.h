@@ -100,7 +100,7 @@ typedef struct
 
 GType                   ario_mpd_get_type                               (void) G_GNUC_CONST;
 
-ArioMpd *               ario_mpd_new                                    (void);
+ArioMpd *               ario_mpd_get_instance                           (void);
 
 gboolean                ario_mpd_connect                                (ArioMpd *mpd);
 

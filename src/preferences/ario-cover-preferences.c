@@ -304,7 +304,6 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
                 }
                 gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), 0);
         }
-
         g_free (current_country);
 
         ario_cover_preferences_sync_cover_providers (cover_preferences);

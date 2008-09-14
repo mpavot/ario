@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include "preferences/ario-trayicon-preferences.h"
 #include "preferences/ario-preferences.h"
+#include "notification/ario-notification-manager.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-avahi.h"
@@ -35,10 +36,12 @@ static void ario_trayicon_preferences_class_init (ArioTrayiconPreferencesClass *
 static void ario_trayicon_preferences_init (ArioTrayiconPreferences *trayicon_preferences);
 static void ario_trayicon_preferences_finalize (GObject *object);
 static void ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences);
-G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
+G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBox *combobox,
                                                                              ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_notification_check_changed_cb (GtkCheckButton *butt,
                                                                               ArioTrayiconPreferences *trayicon_preferences);
+G_MODULE_EXPORT void ario_trayicon_preferences_notification_combobox_changed_cb (GtkComboBox *combobox,
+                                                                                 ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_check_changed_cb (GtkCheckButton *butt,
                                                                           ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_notificationtime_changed_cb (GtkWidget *widget,
@@ -57,6 +60,7 @@ struct ArioTrayiconPreferencesPrivate
         GtkWidget *trayicon_check;
         GtkWidget *trayicon_combobox;
         GtkWidget *notificationtime_spinbutton;
+        GtkWidget *notification_combobox;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -118,6 +122,8 @@ ario_trayicon_preferences_new (void)
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
         int i;
+        GSList *notifiers;
+        ArioNotifier *notifier;
 
         trayicon_preferences = g_object_new (TYPE_ARIO_TRAYICON_PREFERENCES, NULL);
 
@@ -135,6 +141,8 @@ ario_trayicon_preferences_new (void)
                 glade_xml_get_widget (xml, "trayicon_checkbutton");
         trayicon_preferences->priv->notificationtime_spinbutton = 
                 glade_xml_get_widget (xml, "notificationtime_spinbutton");
+        trayicon_preferences->priv->notification_combobox = 
+                glade_xml_get_widget (xml, "notification_combobox");
 
         rb_glade_boldify_label (xml, "trayicon_label");
         rb_glade_boldify_label (xml, "notification_label");
@@ -155,6 +163,26 @@ ario_trayicon_preferences_new (void)
         gtk_cell_layout_clear (GTK_CELL_LAYOUT (trayicon_preferences->priv->trayicon_combobox));
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (trayicon_preferences->priv->trayicon_combobox), renderer, TRUE);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (trayicon_preferences->priv->trayicon_combobox), renderer,
+                                        "text", 0, NULL);
+
+        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+        notifiers = ario_notification_manager_get_notifiers (ario_notification_manager_get_instance ());
+        for (; notifiers; notifiers = g_slist_next (notifiers)) {
+                notifier = notifiers->data;
+                gtk_list_store_append (list_store, &iter);
+                gtk_list_store_set (list_store, &iter,
+                                    0, ario_notifier_get_name (notifier),
+                                    1, ario_notifier_get_id (notifier),
+                                    -1);
+        }
+        gtk_combo_box_set_model (GTK_COMBO_BOX (trayicon_preferences->priv->notification_combobox),
+                                 GTK_TREE_MODEL (list_store));
+        g_object_unref (list_store);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (trayicon_preferences->priv->notification_combobox));
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (trayicon_preferences->priv->notification_combobox), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (trayicon_preferences->priv->notification_combobox), renderer,
                                         "text", 0, NULL);
 
         ario_trayicon_preferences_sync_trayicon (trayicon_preferences);
@@ -194,6 +222,10 @@ static void
 ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences)
 {
         ARIO_LOG_FUNCTION_START
+        gchar *id;
+        int i = 0;
+        GSList *notifiers;
+        ArioNotifier *notifier;
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (trayicon_preferences->priv->trayicon_combobox),
                                   ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT));
@@ -203,12 +235,26 @@ ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_prefe
                                       ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT));
 
         gtk_widget_set_sensitive (trayicon_preferences->priv->notificationtime_spinbutton, ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT));
-
+        gtk_widget_set_sensitive (trayicon_preferences->priv->notification_combobox, ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT));
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (trayicon_preferences->priv->notificationtime_spinbutton), (gdouble) ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT));
+
+
+        id = ario_conf_get_string (PREF_NOTIFIER, PREF_NOTIFIER_DEFAULT);
+        notifiers = ario_notification_manager_get_notifiers (ario_notification_manager_get_instance ());
+        gtk_combo_box_set_active (GTK_COMBO_BOX (trayicon_preferences->priv->notification_combobox), 0);
+        for (; notifiers; notifiers = g_slist_next (notifiers)) {
+                notifier = notifiers->data;
+                if (!strcmp (ario_notifier_get_id (notifier), id)) {
+                        gtk_combo_box_set_active (GTK_COMBO_BOX (trayicon_preferences->priv->notification_combobox), i);
+                        break;
+                }
+                ++i;
+        }
+        g_free (id);
 }
 
 void
-ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBoxEntry *combobox,
+ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBox *combobox,
                                                         ArioTrayiconPreferences *trayicon_preferences)
 {
         ARIO_LOG_FUNCTION_START
@@ -228,6 +274,7 @@ ario_trayicon_preferences_notification_check_changed_cb (GtkCheckButton *butt,
         ario_conf_set_boolean (PREF_HAVE_NOTIFICATION,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->notification_check)));
         gtk_widget_set_sensitive (trayicon_preferences->priv->notificationtime_spinbutton, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->notification_check)));
+        gtk_widget_set_sensitive (trayicon_preferences->priv->notification_combobox, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (trayicon_preferences->priv->notification_check)));
 }
 
 void
@@ -246,3 +293,23 @@ ario_trayicon_preferences_notificationtime_changed_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         ario_conf_set_integer (PREF_NOTIFICATION_TIME, gtk_spin_button_get_value (GTK_SPIN_BUTTON (trayicon_preferences->priv->notificationtime_spinbutton)));
 }
+
+
+void
+ario_trayicon_preferences_notification_combobox_changed_cb (GtkComboBox *combobox,
+                                                            ArioTrayiconPreferences *trayicon_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
+        gchar *id;
+
+        gtk_combo_box_get_active_iter (combobox, &iter);
+
+        gtk_tree_model_get (gtk_combo_box_get_model (combobox), &iter,
+                            1, &id, -1);
+
+        ario_conf_set_string (PREF_NOTIFIER, id);
+
+        g_free (id);
+}
+

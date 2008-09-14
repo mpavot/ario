@@ -133,7 +133,7 @@ ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
-	g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
+        g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
 }
 
 static void
