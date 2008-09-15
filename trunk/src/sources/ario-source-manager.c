@@ -47,9 +47,10 @@ struct ArioSourceManagerPrivate
         GtkUIManager *ui_manager;
 
         ArioSource *source;
+        GtkActionGroup *group;
 };
 
-static GtkActionGroup *group;
+static ArioSourceManager *instance = NULL;
 
 typedef struct ArioSourceData
 {
@@ -76,62 +77,61 @@ ario_sourcemanager_init (ArioSourceManager *sourcemanager)
 }
 
 GtkWidget *
-ario_sourcemanager_new (GtkUIManager *mgr,
-                        GtkActionGroup *grp,
-                        ArioMpd *mpd)
+ario_sourcemanager_get_instance (GtkUIManager *mgr,
+                                 GtkActionGroup *group,
+                                 ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        ArioSourceManager *sourcemanager;
         GtkWidget *source;
 
-        sourcemanager = g_object_new (TYPE_ARIO_SOURCEMANAGER,
-                                      NULL);
-        g_return_val_if_fail (sourcemanager->priv != NULL, NULL);
+        if (instance)
+                return GTK_WIDGET (instance);
 
-        group = grp;
-        sourcemanager->priv->ui_manager = mgr;
+        instance = g_object_new (TYPE_ARIO_SOURCEMANAGER,
+                                      NULL);
+        g_return_val_if_fail (instance->priv != NULL, NULL);
+
+        instance->priv->ui_manager = mgr;
+        instance->priv->group = group;
 
         source = ario_browser_new (mgr,
-                                   grp,
+                                   group,
                                    mpd);
-        ario_sourcemanager_append (sourcemanager,
-                                   ARIO_SOURCE (source));
+        ario_sourcemanager_append (ARIO_SOURCE (source));
 
 #ifdef ENABLE_SEARCH
         source = ario_search_new (mgr,
-                                  grp,
+                                  group,
                                   mpd);
-        ario_sourcemanager_append (sourcemanager,
-                                   ARIO_SOURCE (source));
+        ario_sourcemanager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         source = ario_storedplaylists_new (mgr,
-                                           grp,
+                                           group,
                                            mpd);
-        ario_sourcemanager_append (sourcemanager,
-                                   ARIO_SOURCE (source));
+        ario_sourcemanager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
-        ario_sourcemanager_reorder (sourcemanager);
+        ario_sourcemanager_reorder ();
 
         ario_conf_notification_add (PREF_SHOW_TABS,
                                     (ArioNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
-                                    sourcemanager);
+                                    instance);
 
-        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
+        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (instance),
                                     ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 
-        g_signal_connect (sourcemanager,
+        g_signal_connect (instance,
                           "button_press_event",
                           G_CALLBACK (ario_sourcemanager_button_press_cb),
-                          sourcemanager);
+                          instance);
 
-        g_signal_connect_after (sourcemanager,
+        g_signal_connect_after (instance,
                                 "switch-page",
                                 G_CALLBACK (ario_sourcemanager_switch_page_cb),
-                                sourcemanager);
+                                instance);
 
-        return GTK_WIDGET (sourcemanager);
+        return GTK_WIDGET (instance);
 }
 
 static void
@@ -143,20 +143,20 @@ ario_sourcemanager_shutdown_foreach (ArioSource *source,
 }
 
 void
-ario_sourcemanager_shutdown (ArioSourceManager *sourcemanager)
+ario_sourcemanager_shutdown (void)
 {
         GSList *ordered_sources = NULL;
 
         ario_conf_set_integer (PREF_SOURCE,
-                               gtk_notebook_get_current_page (GTK_NOTEBOOK (sourcemanager)));
+                               gtk_notebook_get_current_page (GTK_NOTEBOOK (instance)));
 
-        gtk_container_foreach (GTK_CONTAINER (sourcemanager), (GtkCallback) ario_sourcemanager_shutdown_foreach, &ordered_sources);
+        gtk_container_foreach (GTK_CONTAINER (instance), (GtkCallback) ario_sourcemanager_shutdown_foreach, &ordered_sources);
         ario_conf_set_string_slist (PREF_SOURCE_LIST, ordered_sources);
         g_slist_free (ordered_sources);
 }
 
 void
-ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
+ario_sourcemanager_reorder (void)
 {
         ARIO_LOG_FUNCTION_START
         int i = 0;
@@ -166,10 +166,10 @@ ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
         GSList *ordered_sources = ario_conf_get_string_slist (PREF_SOURCE_LIST, PREF_SOURCE_LIST_DEFAULT);
 
         for (ordered_tmp = ordered_sources; ordered_tmp; ordered_tmp = g_slist_next (ordered_tmp)) {
-                for (sources_tmp = sourcemanager->priv->sources; sources_tmp; sources_tmp = g_slist_next (sources_tmp)) {
+                for (sources_tmp = instance->priv->sources; sources_tmp; sources_tmp = g_slist_next (sources_tmp)) {
                         data = sources_tmp->data;
                         if (!strcmp (ario_source_get_id (data->source), ordered_tmp->data)) {
-                                gtk_notebook_reorder_child (GTK_NOTEBOOK (sourcemanager),
+                                gtk_notebook_reorder_child (GTK_NOTEBOOK (instance),
                                                             GTK_WIDGET (data->source), i);
                                 break;
                         }
@@ -180,7 +180,7 @@ ario_sourcemanager_reorder (ArioSourceManager *sourcemanager)
         g_slist_foreach (ordered_sources, (GFunc) g_free, NULL);
         g_slist_free (ordered_sources);
 
-        ario_sourcemanager_sync (sourcemanager);
+        ario_sourcemanager_sync (instance);
 }
 
 static void
@@ -224,7 +224,7 @@ ario_sourcemanager_set_source_active (ArioSource *source,
                 gtk_widget_hide (GTK_WIDGET (source));
         }
 
-        action = gtk_action_group_get_action (group, ario_source_get_id (source));
+        action = gtk_action_group_get_action (instance->priv->group, ario_source_get_id (source));
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), active);
 }
 
@@ -245,8 +245,7 @@ ario_sourcemanager_menu_cb (GtkCheckMenuItem *checkmenuitem,
 }
 
 void
-ario_sourcemanager_append (ArioSourceManager *sourcemanager,
-                           ArioSource *source)
+ario_sourcemanager_append (ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *hbox;
@@ -262,11 +261,11 @@ ario_sourcemanager_append (ArioSourceManager *sourcemanager,
                             gtk_label_new (ario_source_get_name (source)),
                             TRUE, TRUE, 0);
         gtk_widget_show_all (hbox);
-        gtk_notebook_append_page (GTK_NOTEBOOK (sourcemanager),
+        gtk_notebook_append_page (GTK_NOTEBOOK (instance),
                                   GTK_WIDGET (source),
                                   hbox);
 
-        gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK (sourcemanager),
+        gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK (instance),
                                           GTK_WIDGET (source),
                                           TRUE);
 
@@ -278,8 +277,8 @@ ario_sourcemanager_append (ArioSourceManager *sourcemanager,
                 gtk_widget_hide (GTK_WIDGET (source));
         gtk_widget_set_no_show_all (GTK_WIDGET (source), TRUE);
 
-        ui_merge_id = gtk_ui_manager_new_merge_id (sourcemanager->priv->ui_manager);
-        gtk_ui_manager_add_ui (sourcemanager->priv->ui_manager,
+        ui_merge_id = gtk_ui_manager_new_merge_id (instance->priv->ui_manager);
+        gtk_ui_manager_add_ui (instance->priv->ui_manager,
                                ui_merge_id,
                                "/MenuBar/ViewMenu/ViewMenuSourcesPlaceholder",
                                ario_source_get_id (source),
@@ -293,7 +292,7 @@ ario_sourcemanager_append (ArioSourceManager *sourcemanager,
                         NULL, G_CALLBACK (ario_sourcemanager_menu_source_cb), ario_conf_get_boolean (conf_name, TRUE) }
         };
         g_free (conf_name);
-        gtk_action_group_add_toggle_actions (group,
+        gtk_action_group_add_toggle_actions (instance->priv->group,
                                              actions, 1,
                                              source);
 
@@ -301,12 +300,11 @@ ario_sourcemanager_append (ArioSourceManager *sourcemanager,
         data->source = source;
         data->ui_merge_id = ui_merge_id;
 
-        sourcemanager->priv->sources = g_slist_append (sourcemanager->priv->sources, data);
+        instance->priv->sources = g_slist_append (instance->priv->sources, data);
 }
 
 void
-ario_sourcemanager_remove (ArioSourceManager *sourcemanager,
-                           ArioSource *source)
+ario_sourcemanager_remove (ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START
         GSList *tmp;
@@ -314,22 +312,22 @@ ario_sourcemanager_remove (ArioSourceManager *sourcemanager,
 
         ario_source_shutdown (source);
 
-        if (sourcemanager->priv->source == source)
-                sourcemanager->priv->source = NULL;
+        if (instance->priv->source == source)
+                instance->priv->source = NULL;
 
-        for (tmp = sourcemanager->priv->sources; tmp; tmp = g_slist_next (tmp)) {
+        for (tmp = instance->priv->sources; tmp; tmp = g_slist_next (tmp)) {
                 data = tmp->data;
                 if (data->source == source) {
-                        sourcemanager->priv->sources = g_slist_remove (sourcemanager->priv->sources, data);
-                        gtk_ui_manager_remove_ui (sourcemanager->priv->ui_manager, data->ui_merge_id);
+                        instance->priv->sources = g_slist_remove (instance->priv->sources, data);
+                        gtk_ui_manager_remove_ui (instance->priv->ui_manager, data->ui_merge_id);
 
-                        gtk_action_group_remove_action (group,
-                                                        gtk_action_group_get_action (group, ario_source_get_id (source)));
+                        gtk_action_group_remove_action (instance->priv->group,
+                                                        gtk_action_group_get_action (instance->priv->group, ario_source_get_id (source)));
                         g_free (data);
                         break;
                 }
         }
-        gtk_container_remove (GTK_CONTAINER (sourcemanager), GTK_WIDGET (source));
+        gtk_container_remove (GTK_CONTAINER (instance), GTK_WIDGET (source));
 }
 
 static gboolean

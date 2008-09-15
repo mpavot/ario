@@ -104,7 +104,6 @@ struct ArioRadioPrivate
 
         ArioMpd *mpd;
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 
         xmlDocPtr doc;
 };
@@ -136,8 +135,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 enum
@@ -201,13 +199,6 @@ ario_radio_class_init (ArioRadioClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioRadioPrivate));
@@ -307,7 +298,6 @@ ario_radio_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio = ARIO_RADIO (object);
-        static gboolean is_loaded = FALSE;
 
         switch (prop_id) {
         case PROP_MPD:
@@ -323,15 +313,6 @@ ario_radio_set_property (GObject *object,
                 break;
         case PROP_UI_MANAGER:
                 radio->priv->ui_manager = g_value_get_object (value);
-                break;
-        case PROP_ACTION_GROUP:
-                radio->priv->actiongroup = g_value_get_object (value);
-                if (!is_loaded) {
-                        gtk_action_group_add_actions (radio->priv->actiongroup,
-                                                      ario_radio_actions,
-                                                      ario_radio_n_actions, radio);
-                        is_loaded = TRUE;
-                }
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -355,9 +336,6 @@ ario_radio_get_property (GObject *object,
         case PROP_UI_MANAGER:
                 g_value_set_object (value, radio->priv->ui_manager);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, radio->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -371,14 +349,21 @@ ario_radio_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio;
+        static gboolean is_loaded = FALSE;
 
         radio = g_object_new (TYPE_ARIO_RADIO,
                               "ui-manager", mgr,
-                              "action-group", group,
                               "mpd", mpd,
                               NULL);
 
         g_return_val_if_fail (radio->priv != NULL, NULL);
+
+        if (!is_loaded) {
+                gtk_action_group_add_actions (group,
+                                              ario_radio_actions,
+                                              ario_radio_n_actions, radio);
+                is_loaded = TRUE;
+        }
 
         ario_radio_fill_radios (radio);
 

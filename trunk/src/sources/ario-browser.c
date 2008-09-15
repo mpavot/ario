@@ -73,7 +73,6 @@ struct ArioBrowserPrivate
 
         ArioMpd *mpd;
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 
         ArioTree *popup_tree;
 };
@@ -108,8 +107,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 #define ARIO_BROWSER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER, ArioBrowserPrivate))
@@ -162,13 +160,6 @@ ario_browser_class_init (ArioBrowserClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioBrowserPrivate));
@@ -227,12 +218,6 @@ ario_browser_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 browser->priv->ui_manager = g_value_get_object (value);
                 break;
-        case PROP_ACTION_GROUP:
-                browser->priv->actiongroup = g_value_get_object (value);
-                gtk_action_group_add_actions (browser->priv->actiongroup,
-                                              ario_browser_actions,
-                                              ario_browser_n_actions, browser);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -255,9 +240,6 @@ ario_browser_get_property (GObject *object,
         case PROP_UI_MANAGER:
                 g_value_set_object (value, browser->priv->ui_manager);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, browser->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -274,11 +256,15 @@ ario_browser_new (GtkUIManager *mgr,
 
         browser = ARIO_BROWSER (g_object_new (TYPE_ARIO_BROWSER,
                                               "ui-manager", mgr,
-                                              "action-group", group,
                                               "mpd", mpd,
                                               NULL));
 
         g_return_val_if_fail (browser->priv != NULL, NULL);
+
+
+        gtk_action_group_add_actions (group,
+                                      ario_browser_actions,
+                                      ario_browser_n_actions, browser);
 
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (browser), TRUE);

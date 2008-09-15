@@ -67,7 +67,6 @@ struct ArioInformationPrivate
 
         ArioMpd *mpd;
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 
         GtkWidget *artist_label;
         GtkWidget *album_label;
@@ -94,8 +93,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 #define ARIO_INFORMATION_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_INFORMATION, ArioInformationPrivate))
@@ -170,13 +168,6 @@ ario_information_class_init (ArioInformationClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioInformationPrivate));
@@ -318,9 +309,6 @@ ario_information_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 information->priv->ui_manager = g_value_get_object (value);
                 break;
-        case PROP_ACTION_GROUP:
-                information->priv->actiongroup = g_value_get_object (value);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -343,9 +331,6 @@ ario_information_get_property (GObject *object,
         case PROP_UI_MANAGER:
                 g_value_set_object (value, information->priv->ui_manager);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, information->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -354,7 +339,6 @@ ario_information_get_property (GObject *object,
 
 GtkWidget *
 ario_information_new (GtkUIManager *mgr,
-                      GtkActionGroup *group,
                       ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
@@ -362,7 +346,6 @@ ario_information_new (GtkUIManager *mgr,
 
         information = g_object_new (TYPE_ARIO_INFORMATION,
                                     "ui-manager", mgr,
-                                    "action-group", group,
                                     "mpd", mpd,
                                     NULL);
 

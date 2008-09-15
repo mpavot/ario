@@ -55,7 +55,6 @@ impl_activate (ArioPlugin *plugin,
         GtkActionGroup *actiongroup;
         ArioMpd *mpd;
         ArioFilesystemPlugin *pi = ARIO_FILESYSTEM_PLUGIN (plugin);
-        ArioSourceManager *sourcemanager;
         gchar *file;
 
         g_object_get (shell,
@@ -79,10 +78,8 @@ impl_activate (ArioPlugin *plugin,
         g_object_unref (actiongroup);
         g_object_unref (mpd);
 
-        sourcemanager = ARIO_SOURCEMANAGER (ario_shell_get_sourcemanager (shell));
-        ario_sourcemanager_append (sourcemanager,
-                                   ARIO_SOURCE (pi->priv->source));
-        ario_sourcemanager_reorder (sourcemanager);
+        ario_sourcemanager_append (ARIO_SOURCE (pi->priv->source));
+        ario_sourcemanager_reorder ();
 }
 
 static void
@@ -97,8 +94,7 @@ impl_deactivate (ArioPlugin *plugin,
         gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
         g_object_unref (uimanager);
 
-        ario_sourcemanager_remove (ARIO_SOURCEMANAGER (ario_shell_get_sourcemanager (shell)),
-                                   ARIO_SOURCE (pi->priv->source));
+        ario_sourcemanager_remove (ARIO_SOURCE (pi->priv->source));
 }
 
 static void
