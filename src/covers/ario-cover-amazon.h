@@ -32,13 +32,9 @@ G_BEGIN_DECLS
 #define IS_ARIO_COVER_AMAZON_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_COVER_AMAZON))
 #define ARIO_COVER_AMAZON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_COVER_AMAZON, ArioCoverAmazonClass))
 
-typedef struct ArioCoverAmazonPrivate ArioCoverAmazonPrivate;
-
 typedef struct
 {
         ArioCoverProvider parent;
-
-        ArioCoverAmazonPrivate *priv;
 } ArioCoverAmazon;
 
 typedef struct

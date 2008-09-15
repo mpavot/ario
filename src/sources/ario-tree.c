@@ -1241,8 +1241,7 @@ ario_tree_cmd_songs_properties (ArioTree *tree)
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 
-        songinfos = ario_shell_songinfos_new (tree->priv->mpd,
-                                              songs);
+        songinfos = ario_shell_songinfos_new (songs);
         if (songinfos)
                 gtk_widget_show_all (songinfos);
 }

@@ -23,9 +23,6 @@
 #include <glib/gi18n.h>
 #include "ario-debug.h"
 
-static void ario_status_bar_class_init (ArioStatusBarClass *klass);
-static void ario_status_bar_init (ArioStatusBar *status_bar);
-static void ario_status_bar_finalize (GObject *object);
 static void ario_status_bar_set_property (GObject *object,
                                           guint prop_id,
                                           const GValue *value,
@@ -50,46 +47,14 @@ enum
         PROP_MPD
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_status_bar_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_status_bar_type = 0;
-
-        if (ario_status_bar_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioStatusBarClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_status_bar_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioStatusBar),
-                        0,
-                        (GInstanceInitFunc) ario_status_bar_init
-                };
-
-                ario_status_bar_type = g_type_register_static (GTK_TYPE_STATUSBAR,
-                                                               "ArioStatusBar",
-                                                               &our_info, 0);
-        }
-
-        return ario_status_bar_type;
-}
+#define ARIO_STATUS_BAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATUS_BAR, ArioStatusBarPrivate))
+G_DEFINE_TYPE (ArioStatusBar, ario_status_bar, GTK_TYPE_STATUSBAR)
 
 static void
 ario_status_bar_class_init (ArioStatusBarClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_status_bar_finalize;
 
         object_class->set_property = ario_status_bar_set_property;
         object_class->get_property = ario_status_bar_get_property;
@@ -101,31 +66,16 @@ ario_status_bar_class_init (ArioStatusBarClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
+
+        g_type_class_add_private (klass, sizeof (ArioStatusBarPrivate));
 }
 
 static void
 ario_status_bar_init (ArioStatusBar *status_bar)
 {
         ARIO_LOG_FUNCTION_START
-        status_bar->priv = g_new0 (ArioStatusBarPrivate, 1);
+        status_bar->priv = ARIO_STATUS_BAR_GET_PRIVATE (status_bar);
         status_bar->priv->ario_playlist_context_id = gtk_statusbar_get_context_id (GTK_STATUSBAR (status_bar), "PlaylistMsg");
-}
-
-static void
-ario_status_bar_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioStatusBar *status_bar;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_STATUS_BAR (object));
-
-        status_bar = ARIO_STATUS_BAR (object);
-
-        g_return_if_fail (status_bar->priv != NULL);
-        g_free (status_bar->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

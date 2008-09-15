@@ -28,8 +28,6 @@
 
 #define CURRENT_LYRICS_SIZE 130
 
-static void ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klass);
-static void ario_shell_lyricsselect_init (ArioShellLyricsselect *ario_shell_lyricsselect);
 static void ario_shell_lyricsselect_finalize (GObject *object);
 static GObject * ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
                                                       GObjectConstructParam *construct_properties);
@@ -73,36 +71,8 @@ struct ArioShellLyricsselectPrivate
         GSList *lyrics;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_shell_lyricsselect_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_lyricsselect_type = 0;
-
-        if (ario_shell_lyricsselect_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellLyricsselectClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_lyricsselect_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellLyricsselect),
-                        0,
-                        (GInstanceInitFunc) ario_shell_lyricsselect_init
-                };
-
-                ario_shell_lyricsselect_type = g_type_register_static (GTK_TYPE_DIALOG,
-                                                                       "ArioShellLyricsselect",
-                                                                       &our_info, 0);
-        }
-
-        return ario_shell_lyricsselect_type;
-}
+#define ARIO_SHELL_LYRICSSELECT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_LYRICSSELECT, ArioShellLyricsselectPrivate))
+G_DEFINE_TYPE (ArioShellLyricsselect, ario_shell_lyricsselect, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klass)
@@ -110,23 +80,23 @@ ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->finalize = ario_shell_lyricsselect_finalize;
         object_class->constructor = ario_shell_lyricsselect_constructor;
+
+        g_type_class_add_private (klass, sizeof (ArioShellLyricsselectPrivate));
 }
 
 static void
-ario_shell_lyricsselect_init (ArioShellLyricsselect *ario_shell_lyricsselect)
+ario_shell_lyricsselect_init (ArioShellLyricsselect *shell_lyricsselect)
 {
         ARIO_LOG_FUNCTION_START
-        ario_shell_lyricsselect->priv = g_new0 (ArioShellLyricsselectPrivate, 1);
-        ario_shell_lyricsselect->priv->liststore = gtk_list_store_new (N_COLUMN,
-                                                                       G_TYPE_STRING,
-                                                                       G_TYPE_STRING,
-                                                                       G_TYPE_STRING,
-                                                                       G_TYPE_POINTER);
-        ario_shell_lyricsselect->priv->lyrics = NULL;
+        shell_lyricsselect->priv = ARIO_SHELL_LYRICSSELECT_GET_PRIVATE (shell_lyricsselect);
+        shell_lyricsselect->priv->liststore = gtk_list_store_new (N_COLUMN,
+                                                                  G_TYPE_STRING,
+                                                                  G_TYPE_STRING,
+                                                                  G_TYPE_STRING,
+                                                                  G_TYPE_POINTER);
+        shell_lyricsselect->priv->lyrics = NULL;
 }
 
 static void
@@ -145,9 +115,7 @@ ario_shell_lyricsselect_finalize (GObject *object)
         g_slist_foreach (ario_shell_lyricsselect->priv->lyrics, (GFunc) ario_lyrics_candidate_free, NULL);
         g_slist_free (ario_shell_lyricsselect->priv->lyrics);
 
-        g_free (ario_shell_lyricsselect->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_shell_lyricsselect_parent_class)->finalize (object);
 }
 
 static GObject *

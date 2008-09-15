@@ -21,34 +21,7 @@
 #include "lyrics/ario-lyrics-provider.h"
 #include "ario-debug.h"
 
-static void ario_lyrics_provider_class_init (ArioLyricsProviderClass *klass);
-static void ario_lyrics_provider_init (ArioLyricsProvider *lyrics_provider);
-
-GType
-ario_lyrics_provider_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioLyricsProviderClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_lyrics_provider_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioLyricsProvider),
-                        0,
-                        (GInstanceInitFunc) ario_lyrics_provider_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioLyricsProvider",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioLyricsProvider, ario_lyrics_provider, G_TYPE_OBJECT)
 
 static ArioLyrics *
 dummy_lyrics (ArioLyricsProvider *lyrics_provider,

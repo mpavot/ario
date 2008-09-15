@@ -28,8 +28,6 @@
 #include "ario-debug.h"
 #include "lib/libmpdclient.h"
 
-static void ario_volume_class_init (ArioVolumeClass *klass);
-static void ario_volume_init (ArioVolume *link);
 static void ario_volume_set_property (GObject *object,
                                       guint prop_id,
                                       const GValue *value,
@@ -38,7 +36,6 @@ static void ario_volume_get_property (GObject *object,
                                       guint prop_id,
                                       GValue *value,
                                       GParamSpec *pspec);
-static void ario_volume_finalize (GObject *object);
 static void ario_volume_sync_volume (ArioVolume *volume);
 static void clicked_cb (GtkButton *button, ArioVolume *volume);
 static gboolean scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume);
@@ -80,36 +77,8 @@ enum
         PROP_MPD
 };
 
-static GtkEventBoxClass *parent_class = NULL;
-
-GType
-ario_volume_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_volume_type = 0;
-
-        if (ario_volume_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioVolumeClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_volume_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioVolume),
-                        0,
-                        (GInstanceInitFunc) ario_volume_init
-                };
-
-                ario_volume_type = g_type_register_static (GTK_TYPE_EVENT_BOX,
-                                                           "ArioVolume",
-                                                           &our_info, 0);
-        }
-
-        return ario_volume_type;
-}
+#define ARIO_VOLUME_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_VOLUME, ArioVolumePrivate))
+G_DEFINE_TYPE (ArioVolume, ario_volume, GTK_TYPE_EVENT_BOX)
 
 static void
 ario_volume_class_init (ArioVolumeClass *klass)
@@ -117,11 +86,8 @@ ario_volume_class_init (ArioVolumeClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->set_property = ario_volume_set_property;
         object_class->get_property = ario_volume_get_property;
-        object_class->finalize = ario_volume_finalize;
 
         g_object_class_install_property (object_class,
                                          PROP_MPD,
@@ -130,6 +96,8 @@ ario_volume_class_init (ArioVolumeClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
+
+        g_type_class_add_private (klass, sizeof (ArioVolumePrivate));
 }
 
 static void
@@ -142,7 +110,7 @@ ario_volume_init (ArioVolume *volume)
         GtkWidget *event;
         GtkWidget *box;
 
-        volume->priv = g_new0 (ArioVolumePrivate, 1);
+        volume->priv = ARIO_VOLUME_GET_PRIVATE (volume);
 
         volume->priv->button = gtk_button_new ();
 
@@ -283,24 +251,6 @@ ario_volume_get_property (GObject *object,
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
         }
-}
-
-static void
-ario_volume_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioVolume *volume;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_VOLUME (object));
-
-        volume = ARIO_VOLUME (object);
-
-        g_return_if_fail (volume->priv != NULL);
-
-        g_free (volume->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

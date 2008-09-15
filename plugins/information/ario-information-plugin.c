@@ -48,12 +48,6 @@ ario_information_plugin_init (ArioInformationPlugin *plugin)
 }
 
 static void
-ario_information_plugin_finalize (GObject *object)
-{
-        G_OBJECT_CLASS (ario_information_plugin_parent_class)->finalize (object);
-}
-
-static void
 impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
@@ -96,8 +90,6 @@ ario_information_plugin_class_init (ArioInformationPluginClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
-
-        object_class->finalize = ario_information_plugin_finalize;
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;

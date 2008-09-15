@@ -28,9 +28,6 @@
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-static void ario_cover_local_class_init (ArioCoverLocalClass *klass);
-static void ario_cover_local_init (ArioCoverLocal *cover_local);
-static void ario_cover_local_finalize (GObject *object);
 gboolean ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                                       const char *artist,
                                       const char *album,
@@ -38,11 +35,6 @@ gboolean ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                                       GArray **file_size,
                                       GSList **file_contents,
                                       ArioCoverProviderOperation operation);
-
-struct ArioCoverLocalPrivate
-{
-        gboolean dummy;
-};
 
 static const char *valid_cover_names[] = {
         "folder.png",
@@ -54,34 +46,7 @@ static const char *valid_cover_names[] = {
         NULL
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_cover_local_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioCoverLocalClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_cover_local_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioCoverLocal),
-                        0,
-                        (GInstanceInitFunc) ario_cover_local_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_COVER_PROVIDER,
-                                               "ArioCoverLocal",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioCoverLocal, ario_cover_local, ARIO_TYPE_COVER_PROVIDER)
 
 static gchar *
 ario_cover_local_get_id (ArioCoverProvider *cover_provider)
@@ -99,12 +64,7 @@ static void
 ario_cover_local_class_init (ArioCoverLocalClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioCoverProviderClass *cover_provider_class = ARIO_COVER_PROVIDER_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_cover_local_finalize;
 
         cover_provider_class->get_id = ario_cover_local_get_id;
         cover_provider_class->get_name = ario_cover_local_get_name;
@@ -115,24 +75,6 @@ static void
 ario_cover_local_init (ArioCoverLocal *cover_local)
 {
         ARIO_LOG_FUNCTION_START
-        cover_local->priv = g_new0 (ArioCoverLocalPrivate, 1);
-}
-
-static void
-ario_cover_local_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioCoverLocal *cover_local;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_COVER_LOCAL (object));
-
-        cover_local = ARIO_COVER_LOCAL (object);
-
-        g_return_if_fail (cover_local->priv != NULL);
-        g_free (cover_local->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioCoverProvider*
@@ -143,8 +85,6 @@ ario_cover_local_new (void)
 
         local = g_object_new (TYPE_ARIO_COVER_LOCAL,
                               NULL);
-
-        g_return_val_if_fail (local->priv != NULL, NULL);
 
         return ARIO_COVER_PROVIDER (local);
 }

@@ -30,9 +30,6 @@
 #include "ario-debug.h"
 #include "ario-util.h"
 
-static void ario_shell_similarartists_class_init (ArioShellSimilarartistsClass *klass);
-static void ario_shell_similarartists_init (ArioShellSimilarartists *shell_similarartists);
-static void ario_shell_similarartists_finalize (GObject *object);
 static gboolean ario_shell_similarartists_window_delete_cb (GtkWidget *window,
                                                             GdkEventAny *event,
                                                             ArioShellSimilarartists *shell_similarartists);
@@ -78,53 +75,21 @@ enum
         N_COLUMN
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_shell_similarartists_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_similarartists_type = 0;
-
-        if (ario_shell_similarartists_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellSimilarartistsClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_similarartists_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellSimilarartists),
-                        0,
-                        (GInstanceInitFunc) ario_shell_similarartists_init
-                };
-
-                ario_shell_similarartists_type = g_type_register_static (GTK_TYPE_WINDOW,
-                                                                         "ArioShellSimilarartists",
-                                                                         &our_info, 0);
-        }
-
-        return ario_shell_similarartists_type;
-}
+#define ARIO_SHELL_SIMILARARTISTS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_SIMILARARTISTS, ArioShellSimilarartistsPrivate))
+G_DEFINE_TYPE (ArioShellSimilarartists, ario_shell_similarartists, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_similarartists_class_init (ArioShellSimilarartistsClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_shell_similarartists_finalize;
+        g_type_class_add_private (klass, sizeof (ArioShellSimilarartistsPrivate));
 }
 
 static void
 ario_shell_similarartists_init (ArioShellSimilarartists *shell_similarartists)
 {
         ARIO_LOG_FUNCTION_START
-        shell_similarartists->priv = g_new0 (ArioShellSimilarartistsPrivate, 1);
+        shell_similarartists->priv = ARIO_SHELL_SIMILARARTISTS_GET_PRIVATE (shell_similarartists);
 
         g_signal_connect (shell_similarartists,
                           "delete_event",
@@ -453,23 +418,6 @@ ario_shell_similarartists_new (ArioMpd *mpd)
         g_object_unref (G_OBJECT (xml));
 
         return GTK_WIDGET (shell_similarartists);
-}
-
-static void
-ario_shell_similarartists_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellSimilarartists *shell_similarartists;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_SHELL_SIMILARARTISTS (object));
-
-        shell_similarartists = ARIO_SHELL_SIMILARARTISTS (object);
-
-        g_return_if_fail (shell_similarartists->priv != NULL);
-        g_free (shell_similarartists->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static gboolean

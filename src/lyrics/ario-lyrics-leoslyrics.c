@@ -34,9 +34,6 @@
 #define LEOSLYRICS_FIRST_URI "http://api.leoslyrics.com/api_search.php?auth=Ario&artist=%s&songtitle=%s"
 #define LEOSLYRICS_SECOND_URI "http://api.leoslyrics.com/api_lyrics.php?auth=Ario&hid=%s"
 
-static void ario_lyrics_leoslyrics_class_init (ArioLyricsLeoslyricsClass *klass);
-static void ario_lyrics_leoslyrics_init (ArioLyricsLeoslyrics *lyrics_leoslyrics);
-static void ario_lyrics_leoslyrics_finalize (GObject *object);
 static ArioLyrics* ario_lyrics_leoslyrics_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                                       const char *artist,
                                                       const char *song,
@@ -48,39 +45,7 @@ static void ario_lyrics_leoslyrics_get_lyrics_candidates (ArioLyricsProvider *ly
 static ArioLyrics * ario_lyrics_leoslyrics_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_provider,
                                                                       const ArioLyricsCandidate *candidate);
 
-struct ArioLyricsLeoslyricsPrivate
-{
-        gboolean dummy;
-};
-
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_lyrics_leoslyrics_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioLyricsLeoslyricsClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_lyrics_leoslyrics_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioLyricsLeoslyrics),
-                        0,
-                        (GInstanceInitFunc) ario_lyrics_leoslyrics_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_LYRICS_PROVIDER,
-                                               "ArioLyricsLeoslyrics",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioLyricsLeoslyrics, ario_lyrics_leoslyrics, ARIO_TYPE_LYRICS_PROVIDER)
 
 static gchar *
 ario_lyrics_leoslyrics_get_id (ArioLyricsProvider *lyrics_provider)
@@ -98,12 +63,7 @@ static void
 ario_lyrics_leoslyrics_class_init (ArioLyricsLeoslyricsClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioLyricsProviderClass *lyrics_provider_class = ARIO_LYRICS_PROVIDER_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_lyrics_leoslyrics_finalize;
 
         lyrics_provider_class->get_id = ario_lyrics_leoslyrics_get_id;
         lyrics_provider_class->get_name = ario_lyrics_leoslyrics_get_name;
@@ -116,24 +76,6 @@ static void
 ario_lyrics_leoslyrics_init (ArioLyricsLeoslyrics *lyrics_leoslyrics)
 {
         ARIO_LOG_FUNCTION_START
-        lyrics_leoslyrics->priv = g_new0 (ArioLyricsLeoslyricsPrivate, 1);
-}
-
-static void
-ario_lyrics_leoslyrics_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioLyricsLeoslyrics *lyrics_leoslyrics;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_LYRICS_LEOSLYRICS (object));
-
-        lyrics_leoslyrics = ARIO_LYRICS_LEOSLYRICS (object);
-
-        g_return_if_fail (lyrics_leoslyrics->priv != NULL);
-        g_free (lyrics_leoslyrics->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioLyricsProvider*
@@ -144,8 +86,6 @@ ario_lyrics_leoslyrics_new (void)
 
         leoslyrics = g_object_new (TYPE_ARIO_LYRICS_LEOSLYRICS,
                                    NULL);
-
-        g_return_val_if_fail (leoslyrics->priv != NULL, NULL);
 
         return ARIO_LYRICS_PROVIDER (leoslyrics);
 }

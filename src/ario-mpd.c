@@ -31,8 +31,6 @@
 #define NORMAL_TIMEOUT 500
 #define LAZY_TIMEOUT 12000
 
-static void ario_mpd_class_init (ArioMpdClass *klass);
-static void ario_mpd_init (ArioMpd *mpd);
 static void ario_mpd_finalize (GObject *object);
 static void ario_mpd_set_default (ArioMpd *mpd);
 void ario_mpd_check_errors (ArioMpd *mpd);
@@ -144,8 +142,6 @@ enum
         STOREDPLAYLISTS_CHANGED_FLAG = 2 << STOREDPLAYLISTS_CHANGED
 };
 
-static GObjectClass *parent_class = NULL;
-
 char * ArioMpdItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
 {
         N_("Artist"),    // MPD_TAG_ITEM_ARTIST
@@ -163,40 +159,14 @@ char * ArioMpdItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
         N_("Any")        // MPD_TAG_ITEM_ANY
 };
 
-GType
-ario_mpd_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioMpdClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_mpd_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioMpd),
-                        0,
-                        (GInstanceInitFunc) ario_mpd_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioMpd",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
+G_DEFINE_TYPE (ArioMpd, ario_mpd, G_TYPE_OBJECT)
 
 static void
 ario_mpd_class_init (ArioMpdClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_mpd_finalize;
 
@@ -366,13 +336,14 @@ ario_mpd_class_init (ArioMpdClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
+        g_type_class_add_private (klass, sizeof (ArioMpdPrivate));
 }
 
 static void
 ario_mpd_init (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START
-        mpd->priv = g_new0 (ArioMpdPrivate, 1);
+        mpd->priv = ARIO_MPD_GET_PRIVATE (mpd);
 
         mpd->priv->song_id = -1;
         mpd->priv->playlist_id = -1;
@@ -406,9 +377,7 @@ ario_mpd_finalize (GObject *object)
         if (mpd->priv->stats)
                 mpd_freeStats (mpd->priv->stats);
 
-        g_free (mpd->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_mpd_parent_class)->finalize (object);
 }
 
 static void

@@ -45,8 +45,6 @@
 #include "widgets/ario-firstlaunch.h"
 #include "widgets/ario-tray-icon.h"
 
-static void ario_shell_class_init (ArioShellClass *klass);
-static void ario_shell_init (ArioShell *shell);
 static void ario_shell_finalize (GObject *object);
 static void ario_shell_set_property (GObject *object,
                                      guint prop_id,
@@ -209,44 +207,14 @@ static GtkToggleActionEntry ario_shell_toggle [] =
 };
 static guint ario_shell_n_toggle = G_N_ELEMENTS (ario_shell_toggle);
 
-static GObjectClass *parent_class;
-
-GType
-ario_shell_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (type == 0)
-        { 
-                static GTypeInfo info =
-                {
-                        sizeof (ArioShellClass),
-                        NULL, 
-                        NULL,
-                        (GClassInitFunc) ario_shell_class_init, 
-                        NULL,
-                        NULL, 
-                        sizeof (ArioShell),
-                        0,
-                        (GInstanceInitFunc) ario_shell_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioShell",
-                                               &info, 0);
-        }
-
-        return type;
-}
+#define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL, ArioShellPrivate))
+G_DEFINE_TYPE (ArioShell, ario_shell, G_TYPE_OBJECT)
 
 static void
 ario_shell_class_init (ArioShellClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = (GObjectClass *) klass;
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->set_property = ario_shell_set_property;
         object_class->get_property = ario_shell_get_property;
@@ -273,13 +241,15 @@ ario_shell_class_init (ArioShellClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (ArioShellPrivate));
 }
 
 static void
 ario_shell_init (ArioShell *shell) 
 {
         ARIO_LOG_FUNCTION_START
-        shell->priv = g_new0 (ArioShellPrivate, 1);
+        shell->priv = ARIO_SHELL_GET_PRIVATE (shell);
         shell->priv->connected = FALSE;
         shell->priv->shown = FALSE;
 
@@ -310,9 +280,8 @@ ario_shell_finalize (GObject *object)
 
         g_object_unref (shell->priv->ui_manager);
         g_object_unref (shell->priv->actiongroup);
-        g_free (shell->priv);
 
-        parent_class->finalize (G_OBJECT (shell));
+        G_OBJECT_CLASS (ario_shell_parent_class)->finalize (object);
 }
 
 static void

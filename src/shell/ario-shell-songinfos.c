@@ -32,17 +32,7 @@
 #define ARIO_PREVIOUS 1
 #define ARIO_NEXT 2
 
-static void ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass);
-static void ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos);
 static void ario_shell_songinfos_finalize (GObject *object);
-static void ario_shell_songinfos_set_property (GObject *object,
-                                               guint prop_id,
-                                               const GValue *value,
-                                               GParamSpec *pspec);
-static void ario_shell_songinfos_get_property (GObject *object,
-                                               guint prop_id,
-                                               GValue *value,
-                                               GParamSpec *pspec);
 static gboolean ario_shell_songinfos_window_delete_cb (GtkWidget *window,
                                                        GdkEventAny *event,
                                                        ArioShellSonginfos *shell_songinfos);
@@ -51,17 +41,9 @@ static void ario_shell_songinfos_response_cb (GtkDialog *dialog,
                                               ArioShellSonginfos *shell_songinfos);
 static void ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos);
 
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
-
 struct ArioShellSonginfosPrivate
 {
         GtkWidget *notebook;
-
-        ArioMpd *mpd;
 
         GList *songs;
 
@@ -84,36 +66,8 @@ struct ArioShellSonginfosPrivate
         GtkWidget *next_button;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_shell_songinfos_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_songinfos_type = 0;
-
-        if (ario_shell_songinfos_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellSonginfosClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_songinfos_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellSonginfos),
-                        0,
-                        (GInstanceInitFunc) ario_shell_songinfos_init
-                };
-
-                ario_shell_songinfos_type = g_type_register_static (GTK_TYPE_DIALOG,
-                                                                    "ArioShellSonginfos",
-                                                                    &our_info, 0);
-        }
-
-        return ario_shell_songinfos_type;
-}
+#define ARIO_SHELL_SONGINFOS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_SONGINFOS, ArioShellSonginfosPrivate))
+G_DEFINE_TYPE (ArioShellSonginfos, ario_shell_songinfos, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
@@ -121,26 +75,16 @@ ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->finalize = ario_shell_songinfos_finalize;
-        object_class->set_property = ario_shell_songinfos_set_property;
-        object_class->get_property = ario_shell_songinfos_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
+        
+        g_type_class_add_private (klass, sizeof (ArioShellSonginfosPrivate));
 }
 
 static void
 ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START
-        shell_songinfos->priv = g_new0 (ArioShellSonginfosPrivate, 1);
+        shell_songinfos->priv = ARIO_SHELL_SONGINFOS_GET_PRIVATE (shell_songinfos);
 
         g_signal_connect (shell_songinfos,
                           "delete_event",
@@ -184,17 +128,14 @@ ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos)
 }
 
 GtkWidget *
-ario_shell_songinfos_new (ArioMpd *mpd,
-                          GList *songs)
+ario_shell_songinfos_new (GList *songs)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellSonginfos *shell_songinfos;
         GtkWidget *widget;
         GladeXML *xml;
 
-        shell_songinfos = g_object_new (TYPE_ARIO_SHELL_SONGINFOS,
-                                        "mpd", mpd,
-                                        NULL);
+        shell_songinfos = g_object_new (TYPE_ARIO_SHELL_SONGINFOS, NULL);
 
         g_return_val_if_fail (shell_songinfos->priv != NULL, NULL);
 
@@ -290,47 +231,7 @@ ario_shell_songinfos_finalize (GObject *object)
         g_list_foreach (shell_songinfos->priv->songs, (GFunc) ario_mpd_free_song, NULL);
         g_list_free (shell_songinfos->priv->songs);
 
-        g_free (shell_songinfos->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static void
-ario_shell_songinfos_set_property (GObject *object,
-                                   guint prop_id,
-                                   const GValue *value,
-                                   GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellSonginfos *shell_songinfos = ARIO_SHELL_SONGINFOS (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                shell_songinfos->priv->mpd = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_shell_songinfos_get_property (GObject *object,
-                                   guint prop_id,
-                                   GValue *value,
-                                   GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellSonginfos *shell_songinfos = ARIO_SHELL_SONGINFOS (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, shell_songinfos->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
+        G_OBJECT_CLASS (ario_shell_songinfos_parent_class)->finalize (object);
 }
 
 static gboolean

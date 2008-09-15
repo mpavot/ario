@@ -46,37 +46,7 @@ struct _ArioModule
 
 typedef GType (*ArioModuleRegisterFunc) (GTypeModule *);
 
-static void ario_module_init (ArioModule *action);
-static void ario_module_class_init (ArioModuleClass *class);
-
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_module_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0)) {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (ArioModuleClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) ario_module_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,
-                        sizeof (ArioModule),
-                        0, /* n_preallocs */
-                        (GInstanceInitFunc) ario_module_init,
-                };
-
-                type = g_type_register_static (G_TYPE_TYPE_MODULE,
-                                               "ArioModule",
-                                               &type_info, 0);
-        }
-
-        return type;
-}
+G_DEFINE_TYPE (ArioModule, ario_module, G_TYPE_TYPE_MODULE)
 
 static gboolean
 ario_module_load (GTypeModule *gmodule)
@@ -170,7 +140,7 @@ ario_module_finalize (GObject *object)
 
         g_free (module->path);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_module_parent_class)->finalize (object);
 }
 
 static void
@@ -178,8 +148,6 @@ ario_module_class_init (ArioModuleClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
         GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (class);
-
-        parent_class = (GObjectClass *) g_type_class_peek_parent (class);
 
         object_class->finalize = ario_module_finalize;
 

@@ -45,8 +45,6 @@ enum
 #define PLUGIN_MANAGER_NAME_TITLE _("Plugin")
 #define PLUGIN_MANAGER_ACTIVE_TITLE _("Enabled")
 
-#define ARIO_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_PLUGIN_MANAGER, ArioPluginManagerPrivate))
-
 struct _ArioPluginManagerPrivate
 {
         GtkWidget* tree;
@@ -59,45 +57,17 @@ struct _ArioPluginManagerPrivate
         GtkWidget* popup_menu;
 };
 
-static void ario_plugin_manager_class_init (ArioPluginManagerClass *klass);
-static void ario_plugin_manager_init (ArioPluginManager *pm);
 static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm); 
 static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
 static void ario_plugin_manager_finalize (GObject *object);
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_plugin_manager_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPluginManagerClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_plugin_manager_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPluginManager),
-                        0,
-                        (GInstanceInitFunc) ario_plugin_manager_init
-                };
-
-                type = g_type_register_static (GTK_TYPE_VBOX,
-                                               "ArioPluginManager",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_PLUGIN_MANAGER, ArioPluginManagerPrivate))
+G_DEFINE_TYPE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_VBOX)
 
 static void 
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_plugin_manager_finalize;
 
@@ -814,7 +784,7 @@ ario_plugin_manager_finalize (GObject *object)
         if (pm->priv->popup_menu)
                 gtk_widget_destroy (pm->priv->popup_menu);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_plugin_manager_parent_class)->finalize (object);
 }
 
 GtkWidget *ario_plugin_manager_new (void)

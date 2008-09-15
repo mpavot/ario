@@ -33,9 +33,6 @@
 #define DRAG_THRESHOLD 1
 #define ROOT "/"
 
-static void ario_filesystem_class_init (ArioFilesystemClass *klass);
-static void ario_filesystem_init (ArioFilesystem *filesystem);
-static void ario_filesystem_finalize (GObject *object);
 static void ario_filesystem_shutdown (ArioSource *source);
 static void ario_filesystem_set_property (GObject *object,
                                           guint prop_id,
@@ -154,34 +151,8 @@ static const GtkTargetEntry dirs_targets  [] = {
         { "text/directory", 0, 0 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_filesystem_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioFilesystemClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_filesystem_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioFilesystem),
-                        0,
-                        (GInstanceInitFunc) ario_filesystem_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_SOURCE,
-                                               "ArioFilesystem",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_FILESYSTEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_FILESYSTEM, ArioFilesystemPrivate))
+G_DEFINE_TYPE (ArioFilesystem, ario_filesystem, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_filesystem_get_id (ArioSource *source)
@@ -207,10 +178,6 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_filesystem_finalize;
 
         object_class->set_property = ario_filesystem_set_property;
         object_class->get_property = ario_filesystem_get_property;
@@ -241,6 +208,8 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (ArioFilesystemPrivate));
 }
 
 static void
@@ -252,7 +221,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         int pos;
         GtkWidget *scrolledwindow_filesystem;
 
-        filesystem->priv = g_new0 (ArioFilesystemPrivate, 1);
+        filesystem->priv = ARIO_FILESYSTEM_GET_PRIVATE (filesystem);
 
         filesystem->priv->connected = FALSE;
 
@@ -344,23 +313,6 @@ ario_filesystem_shutdown (ArioSource *source)
         if (pos > 0)
                 ario_conf_set_integer (PREF_FILSYSTEM_HPANED_SIZE,
                                        pos);
-}
-
-static void
-ario_filesystem_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioFilesystem *filesystem;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_FILESYSTEM (object));
-        filesystem = ARIO_FILESYSTEM (object);
-
-        g_return_if_fail (filesystem->priv != NULL);
-
-        g_free (filesystem->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

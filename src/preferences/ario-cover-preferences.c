@@ -32,9 +32,6 @@
 #include "ario-avahi.h"
 #include "ario-debug.h"
 
-static void ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass);
-static void ario_cover_preferences_init (ArioCoverPreferences *cover_preferences);
-static void ario_cover_preferences_finalize (GObject *object);
 static void ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                                         ArioCoverPreferences *cover_preferences);
@@ -84,53 +81,21 @@ static const char *amazon_countries[] = {
         NULL
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_cover_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_cover_preferences_type = 0;
-
-        if (ario_cover_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioCoverPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_cover_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioCoverPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_cover_preferences_init
-                };
-
-                ario_cover_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                      "ArioCoverPreferences",
-                                                                      &our_info, 0);
-        }
-
-        return ario_cover_preferences_type;
-}
+#define ARIO_COVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_PREFERENCES, ArioCoverPreferencesPrivate))
+G_DEFINE_TYPE (ArioCoverPreferences, ario_cover_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_cover_preferences_finalize;
+        g_type_class_add_private (klass, sizeof (ArioCoverPreferencesPrivate));
 }
 
 static void
 ario_cover_preferences_init (ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        cover_preferences->priv = g_new0 (ArioCoverPreferencesPrivate, 1);
+        cover_preferences->priv = ARIO_COVER_PREFERENCES_GET_PRIVATE (cover_preferences);
 }
 
 GtkWidget *
@@ -219,24 +184,6 @@ ario_cover_preferences_new (void)
 
         g_object_unref (G_OBJECT (xml));
         return GTK_WIDGET (cover_preferences);
-}
-
-static void
-ario_cover_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioCoverPreferences *cover_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_COVER_PREFERENCES (object));
-
-        cover_preferences = ARIO_COVER_PREFERENCES (object);
-
-        g_return_if_fail (cover_preferences->priv != NULL);
-
-        g_free (cover_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

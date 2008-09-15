@@ -34,8 +34,6 @@
 #define CURRENT_COVER_SIZE 130
 #define MAX_COVER_SIZE 300
 
-static void ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass);
-static void ario_shell_coverselect_init (ArioShellCoverselect *ario_shell_coverselect);
 static void ario_shell_coverselect_finalize (GObject *object);
 static GObject * ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                                                      GObjectConstructParam *construct_properties);
@@ -101,36 +99,8 @@ struct ArioShellCoverselectPrivate
         GSList *file_contents;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_shell_coverselect_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_coverselect_type = 0;
-
-        if (ario_shell_coverselect_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellCoverselectClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_coverselect_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellCoverselect),
-                        0,
-                        (GInstanceInitFunc) ario_shell_coverselect_init
-                };
-
-                ario_shell_coverselect_type = g_type_register_static (GTK_TYPE_DIALOG,
-                                                                      "ArioShellCoverselect",
-                                                                      &our_info, 0);
-        }
-
-        return ario_shell_coverselect_type;
-}
+#define ARIO_SHELL_COVERSELECT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_COVERSELECT, ArioShellCoverselectPrivate))
+G_DEFINE_TYPE (ArioShellCoverselect, ario_shell_coverselect, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
@@ -138,19 +108,18 @@ ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->finalize = ario_shell_coverselect_finalize;
         object_class->constructor = ario_shell_coverselect_constructor;
+        g_type_class_add_private (klass, sizeof (ArioShellCoverselectPrivate));
 }
 
 static void
-ario_shell_coverselect_init (ArioShellCoverselect *ario_shell_coverselect)
+ario_shell_coverselect_init (ArioShellCoverselect *shell_coverselect)
 {
         ARIO_LOG_FUNCTION_START
-        ario_shell_coverselect->priv = g_new0 (ArioShellCoverselectPrivate, 1);
-        ario_shell_coverselect->priv->liststore = gtk_list_store_new (1, GDK_TYPE_PIXBUF);
-        ario_shell_coverselect->priv->file_contents = NULL;
+        shell_coverselect->priv = ARIO_SHELL_COVERSELECT_GET_PRIVATE (shell_coverselect);
+        shell_coverselect->priv->liststore = gtk_list_store_new (1, GDK_TYPE_PIXBUF);
+        shell_coverselect->priv->file_contents = NULL;
 }
 
 static void
@@ -170,9 +139,8 @@ ario_shell_coverselect_finalize (GObject *object)
                 g_array_free (ario_shell_coverselect->priv->file_size, TRUE);
         g_slist_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
         g_slist_free (ario_shell_coverselect->priv->file_contents);
-        g_free (ario_shell_coverselect->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_shell_coverselect_parent_class)->finalize (object);
 }
 
 static void

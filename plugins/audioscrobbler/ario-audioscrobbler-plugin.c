@@ -65,7 +65,6 @@ GType ario_audioscrobbler_plugin_get_type (void) G_GNUC_CONST;
 
 
 static void ario_audioscrobbler_plugin_init (ArioAudioscrobblerPlugin *plugin);
-static void ario_audioscrobbler_plugin_finalize (GObject *object);
 static void impl_activate (ArioPlugin *plugin, ArioShell *shell);
 static void impl_deactivate (ArioPlugin *plugin, ArioShell *shell);
 static GtkWidget* impl_create_configure_dialog (ArioPlugin *plugin);
@@ -78,8 +77,6 @@ ario_audioscrobbler_plugin_class_init (ArioAudioscrobblerPluginClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
 
-        object_class->finalize = ario_audioscrobbler_plugin_finalize;
-
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
         plugin_class->create_configure_dialog = impl_create_configure_dialog;
@@ -89,14 +86,6 @@ static void
 ario_audioscrobbler_plugin_init (ArioAudioscrobblerPlugin *plugin)
 {
         ARIO_LOG_DBG ("ArioAudioscrobblerPlugin initialising");
-}
-
-static void
-ario_audioscrobbler_plugin_finalize (GObject *object)
-{
-        ARIO_LOG_DBG ("ArioAudioscrobblerPlugin finalising");
-
-        G_OBJECT_CLASS (ario_audioscrobbler_plugin_parent_class)->finalize (object);
 }
 
 static void

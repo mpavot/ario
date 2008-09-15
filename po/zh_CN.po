@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-14 22:37+0200\n"
+"POT-Creation-Date: 2008-09-15 22:19+0200\n"
 "PO-Revision-Date: 2008-09-13 13:57+0000\n"
 "Last-Translator: Aron Xu <Unknown>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -43,8 +43,8 @@ msgid "Automatically download the album cover of the playing song"
 msgstr "自动下载正在播放歌曲的专辑封面"
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:291
-#: ../src/shell/ario-shell-preferences.c:187
+#: ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:124
 msgid "Covers"
 msgstr "封面"
 
@@ -65,18 +65,18 @@ msgid "Auto detect"
 msgstr "自动检测"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#: ../src/shell/ario-shell-preferences.c:172
+#: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
 msgstr "连接"
 
 #: ../data/glade/connection-prefs.glade.h:3
-#: ../src/widgets/ario-firstlaunch.c:163
+#: ../src/widgets/ario-firstlaunch.c:132
 msgid "Default"
 msgstr "默认值"
 
 #: ../data/glade/connection-prefs.glade.h:4
 #: ../data/glade/connection-assistant.glade.h:2
-#: ../src/widgets/ario-firstlaunch.c:209
+#: ../src/widgets/ario-firstlaunch.c:178
 msgid "Host :"
 msgstr "主机："
 
@@ -88,8 +88,8 @@ msgstr ""
 msgid "Music directory :"
 msgstr "音乐目录："
 
-#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:894
-#: ../plugins/radios/ario-radio.c:1093
+#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:867
+#: ../plugins/radios/ario-radio.c:1066
 msgid "Name :"
 msgstr "名称："
 
@@ -100,7 +100,7 @@ msgstr "密码："
 
 #: ../data/glade/connection-prefs.glade.h:9
 #: ../data/glade/connection-assistant.glade.h:4
-#: ../src/widgets/ario-firstlaunch.c:211
+#: ../src/widgets/ario-firstlaunch.c:180
 msgid "Port :"
 msgstr "端口："
 
@@ -108,11 +108,11 @@ msgstr "端口："
 msgid "_Autoconnect on startup"
 msgstr "启动时自动连接(_A)"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:159
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:157
 msgid "_Connect"
 msgstr "连接(_C)"
 
-#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:162
+#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:160
 msgid "_Disconnect"
 msgstr "断开连接(_D)"
 
@@ -158,9 +158,9 @@ msgid "Search"
 msgstr "搜索"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:152
-#: ../src/sources/ario-tree.c:405 ../src/widgets/ario-playlist.c:368
-#: ../src/widgets/ario-songlist.c:270 ../src/widgets/ario-tray-icon.c:688
+#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:148
+#: ../src/sources/ario-tree.c:405 ../src/widgets/ario-playlist.c:340
+#: ../src/widgets/ario-songlist.c:241 ../src/widgets/ario-tray-icon.c:699
 msgid "Album"
 msgstr "专辑"
 
@@ -168,32 +168,32 @@ msgstr "专辑"
 msgid "Allow only one instance of Ario"
 msgstr "只允许运行一个 Ario 实例"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:151
-#: ../src/shell/ario-shell-lyricsselect.c:208
-#: ../src/shell/ario-shell-similarartists.c:421
-#: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:255
-#: ../src/widgets/ario-tray-icon.c:686
+#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:147
+#: ../src/shell/ario-shell-lyricsselect.c:176
+#: ../src/shell/ario-shell-similarartists.c:386
+#: ../src/widgets/ario-playlist.c:340 ../src/widgets/ario-songlist.c:226
+#: ../src/widgets/ario-tray-icon.c:697
 msgid "Artist"
 msgstr "艺术家"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:157
-#: ../src/widgets/ario-playlist.c:368
+#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:153
+#: ../src/widgets/ario-playlist.c:340
 msgid "Date"
 msgstr "日期"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:368
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:340
 msgid "Duration"
 msgstr "长度"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:368
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:340
 msgid "File"
 msgstr "文件"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:156
-#: ../src/widgets/ario-playlist.c:368
+#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:152
+#: ../src/widgets/ario-playlist.c:340
 msgid "Genre"
 msgstr "流派"
 
@@ -206,12 +206,12 @@ msgid "Hide window when close button is pressed"
 msgstr "当关闭按被钮按下时隐藏窗口"
 
 #: ../data/glade/interface-prefs.glade.h:10
-#: ../src/shell/ario-shell-preferences.c:197
+#: ../src/shell/ario-shell-preferences.c:134
 msgid "Interface"
 msgstr "界面"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:233 ../src/shell/ario-shell.c:206
+#: ../src/sources/ario-storedplaylists.c:233 ../src/shell/ario-shell.c:204
 msgid "Playlist"
 msgstr "播放列表"
 
@@ -224,16 +224,16 @@ msgid "Show tabs"
 msgstr "显示记录"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:153
-#: ../src/sources/ario-tree.c:451 ../src/shell/ario-shell-lyricsselect.c:221
-#: ../src/widgets/ario-playlist.c:368 ../src/widgets/ario-songlist.c:240
-#: ../src/widgets/ario-tray-icon.c:690
+#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:149
+#: ../src/sources/ario-tree.c:451 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../src/widgets/ario-playlist.c:340 ../src/widgets/ario-songlist.c:211
+#: ../src/widgets/ario-tray-icon.c:701
 msgid "Title"
 msgstr "标题"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:154
-#: ../src/sources/ario-tree.c:444 ../src/widgets/ario-playlist.c:368
+#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:150
+#: ../src/sources/ario-tree.c:444 ../src/widgets/ario-playlist.c:340
 msgid "Track"
 msgstr "曲目"
 
@@ -247,7 +247,7 @@ msgid "Title :"
 msgstr "标题："
 
 #: ../data/glade/proxy-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:207
+#: ../src/shell/ario-shell-preferences.c:144
 msgid "Proxy"
 msgstr "代理"
 
@@ -339,7 +339,7 @@ msgid "Play time :"
 msgstr "播放时间："
 
 #: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:212
+#: ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
 msgstr "统计信息"
 
@@ -405,7 +405,7 @@ msgid "On middle button click on tray icon :"
 msgstr "中键点击托盘图标时："
 
 #: ../data/glade/trayicon-prefs.glade.h:5
-#: ../src/shell/ario-shell-preferences.c:202
+#: ../src/shell/ario-shell-preferences.c:139
 msgid "Tray icon"
 msgstr "托盘图标"
 
@@ -414,32 +414,32 @@ msgid "Start minimized window"
 msgstr "启动时最小化"
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/ario-mpd.c:158
+#: ../src/ario-mpd.c:154
 msgid "Composer"
 msgstr "作曲家"
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/ario-mpd.c:159
+#: ../src/ario-mpd.c:155
 msgid "Performer"
 msgstr "表演者"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/ario-mpd.c:162
+#: ../src/ario-mpd.c:158
 msgid "Filename"
 msgstr "文件名"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/ario-mpd.c:163
+#: ../src/ario-mpd.c:159
 msgid "Any"
 msgstr "任意"
 
-#: ../src/ario-mpd.c:673
+#: ../src/ario-mpd.c:642
 msgid "Connecting to MPD server..."
 msgstr "正在连接到 MPD 服务器…"
 
-#: ../src/ario-mpd.c:698
+#: ../src/ario-mpd.c:667
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "无法连接到 mpd,清检查连接选项。"
 
@@ -468,7 +468,7 @@ msgstr "天"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "封面已存在，是否覆盖？"
 
-#: ../src/covers/ario-cover-local.c:95
+#: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "音乐目录"
 
@@ -477,33 +477,33 @@ msgid "Plugin"
 msgstr "插件"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:194
-#: ../src/preferences/ario-lyrics-preferences.c:145
-#: ../src/preferences/ario-server-preferences.c:217
+#: ../src/preferences/ario-cover-preferences.c:159
+#: ../src/preferences/ario-lyrics-preferences.c:110
+#: ../src/preferences/ario-server-preferences.c:184
 msgid "Enabled"
 msgstr "已启用"
 
-#: ../src/plugins/ario-plugin-manager.c:510 ../src/shell/ario-shell.c:189
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:187
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../src/plugins/ario-plugin-manager.c:518
+#: ../src/plugins/ario-plugin-manager.c:488
 msgid "C_onfigure"
 msgstr "配置(_O)"
 
-#: ../src/plugins/ario-plugin-manager.c:527
+#: ../src/plugins/ario-plugin-manager.c:497
 msgid "A_ctivate"
 msgstr "激活(_C)"
 
-#: ../src/plugins/ario-plugin-manager.c:538
+#: ../src/plugins/ario-plugin-manager.c:508
 msgid "Ac_tivate All"
 msgstr "全部激活(_T)"
 
-#: ../src/plugins/ario-plugin-manager.c:543
+#: ../src/plugins/ario-plugin-manager.c:513
 msgid "_Deactivate All"
 msgstr "全部禁用(_D)"
 
-#: ../src/plugins/ario-plugin-manager.c:752
+#: ../src/plugins/ario-plugin-manager.c:722
 msgid "Active plugins"
 msgstr "活动插件"
 
@@ -534,20 +534,20 @@ msgstr ""
 "者使用手工配置。"
 
 #: ../src/preferences/ario-connection-preferences.c:649
-#: ../src/preferences/ario-cover-preferences.c:205
-#: ../src/preferences/ario-lyrics-preferences.c:156
-#: ../src/preferences/ario-server-preferences.c:228
-#: ../src/widgets/ario-firstlaunch.c:309
+#: ../src/preferences/ario-cover-preferences.c:170
+#: ../src/preferences/ario-lyrics-preferences.c:121
+#: ../src/preferences/ario-server-preferences.c:195
+#: ../src/widgets/ario-firstlaunch.c:278
 msgid "Name"
 msgstr "名称"
 
 #: ../src/preferences/ario-connection-preferences.c:657
-#: ../src/widgets/ario-firstlaunch.c:317
+#: ../src/widgets/ario-firstlaunch.c:286
 msgid "Host"
 msgstr "主机"
 
 #: ../src/preferences/ario-connection-preferences.c:665
-#: ../src/widgets/ario-firstlaunch.c:325
+#: ../src/widgets/ario-firstlaunch.c:294
 msgid "Port"
 msgstr "端口"
 
@@ -559,42 +559,42 @@ msgstr "必须选择一个服务器"
 msgid "New Profile"
 msgstr "新建配置"
 
-#: ../src/preferences/ario-server-preferences.c:327
-#: ../src/preferences/ario-stats-preferences.c:268
-#: ../src/preferences/ario-stats-preferences.c:269
-#: ../src/preferences/ario-stats-preferences.c:270
-#: ../src/preferences/ario-stats-preferences.c:271
-#: ../src/preferences/ario-stats-preferences.c:272
-#: ../src/preferences/ario-stats-preferences.c:273
+#: ../src/preferences/ario-server-preferences.c:276
+#: ../src/preferences/ario-stats-preferences.c:217
+#: ../src/preferences/ario-stats-preferences.c:218
+#: ../src/preferences/ario-stats-preferences.c:219
+#: ../src/preferences/ario-stats-preferences.c:220
+#: ../src/preferences/ario-stats-preferences.c:221
+#: ../src/preferences/ario-stats-preferences.c:222
 msgid "Not connected"
 msgstr "未连接"
 
-#: ../src/preferences/ario-server-preferences.c:332
-#: ../src/preferences/ario-server-preferences.c:426
-#: ../src/widgets/ario-status-bar.c:213
+#: ../src/preferences/ario-server-preferences.c:281
+#: ../src/preferences/ario-server-preferences.c:375
+#: ../src/widgets/ario-status-bar.c:163
 msgid "Updating..."
 msgstr "正在更新..."
 
-#: ../src/preferences/ario-trayicon-preferences.c:51
+#: ../src/preferences/ario-trayicon-preferences.c:48
 msgid "Play/Pause"
 msgstr "播放 / 暂停"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-trayicon-preferences.c:52
-#: ../src/widgets/ario-header.c:304
+#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/widgets/ario-header.c:273
 msgid "Play next song"
 msgstr "播放下一首歌"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-trayicon-preferences.c:53
+#: ../src/preferences/ario-trayicon-preferences.c:50
 msgid "Do nothing"
 msgstr "什么也不做"
 
 #: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:81
 #: ../src/sources/ario-storedplaylists.c:102
 #: ../src/sources/ario-storedplaylists.c:119
-#: ../plugins/filesystem/ario-filesystem.c:107
-#: ../plugins/filesystem/ario-filesystem.c:121
+#: ../plugins/filesystem/ario-filesystem.c:104
+#: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:114
 msgid "_Add to playlist"
 msgstr "添加到播放列表(_A)"
@@ -602,8 +602,8 @@ msgstr "添加到播放列表(_A)"
 #: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:105
 #: ../src/sources/ario-storedplaylists.c:122
-#: ../plugins/filesystem/ario-filesystem.c:110
-#: ../plugins/filesystem/ario-filesystem.c:124
+#: ../plugins/filesystem/ario-filesystem.c:107
+#: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
 msgstr "添加并播放(_p)"
@@ -611,8 +611,8 @@ msgstr "添加并播放(_p)"
 #: ../src/sources/ario-browser.c:89 ../src/sources/ario-search.c:87
 #: ../src/sources/ario-storedplaylists.c:108
 #: ../src/sources/ario-storedplaylists.c:125
-#: ../plugins/filesystem/ario-filesystem.c:113
-#: ../plugins/filesystem/ario-filesystem.c:127
+#: ../plugins/filesystem/ario-filesystem.c:110
+#: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
 msgid "_Replace in playlist"
 msgstr "从播放列表中移除(_R)"
@@ -627,13 +627,13 @@ msgstr "删除封面(_D)"
 
 #: ../src/sources/ario-browser.c:98 ../src/sources/ario-browser.c:101
 #: ../src/sources/ario-search.c:90 ../src/sources/ario-storedplaylists.c:128
-#: ../src/widgets/ario-playlist.c:135
-#: ../plugins/filesystem/ario-filesystem.c:130
+#: ../src/widgets/ario-playlist.c:133
+#: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../src/sources/ario-browser.c:127 ../src/shell/ario-shell-preferences.c:182
+#: ../src/sources/ario-browser.c:127 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "媒体库"
 
@@ -670,75 +670,75 @@ msgstr "封面"
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "是否确认删除选中艺术家的所有封面？"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:151
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:152
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:153
 msgid "_View"
 msgstr "视图(_V)"
 
-#: ../src/shell/ario-shell.c:156
+#: ../src/shell/ario-shell.c:154
 msgid "_Tool"
 msgstr "工具(_T)"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:155
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:163
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:166
 msgid "Plu_gins"
 msgstr "插件(_g)"
 
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:169
 msgid "Prefere_nces"
 msgstr "首选项(_n)"
 
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:172
 msgid "_Change current album cover"
 msgstr "更改当前专辑的封面(_C)"
 
-#: ../src/shell/ario-shell.c:177
+#: ../src/shell/ario-shell.c:175
 msgid "Download album _covers"
 msgstr "下载所有专辑封面(_c)"
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:178
 msgid "Find similar artists"
 msgstr "查找相似的艺术家"
 
-#: ../src/shell/ario-shell.c:183
+#: ../src/shell/ario-shell.c:181
 msgid "Add similar songs to playlist"
 msgstr "添加相似的歌曲到播放列表"
 
-#: ../src/shell/ario-shell.c:186
+#: ../src/shell/ario-shell.c:184
 msgid "Show _lyrics"
 msgstr "显示歌词(_l)"
 
-#: ../src/shell/ario-shell.c:192
+#: ../src/shell/ario-shell.c:190
 msgid "_Translate this application..."
 msgstr "翻译此程序(_T)…"
 
-#: ../src/shell/ario-shell.c:200
+#: ../src/shell/ario-shell.c:198
 msgid "S_tatusbar"
 msgstr "状态栏(_t)"
 
-#: ../src/shell/ario-shell.c:203
+#: ../src/shell/ario-shell.c:201
 msgid "Upper part"
 msgstr "上部分"
 
-#: ../src/shell/ario-shell.c:759
+#: ../src/shell/ario-shell.c:728
 msgid "GTK client for MPD"
 msgstr "MPD 的 GTK 客户端"
 
-#: ../src/shell/ario-shell.c:760
+#: ../src/shell/ario-shell.c:729
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -759,20 +759,20 @@ msgstr ""
 "  inkview https://launchpad.net/~inkview\n"
 "  rainofchaos https://launchpad.net/~rainofchaos"
 
-#: ../src/shell/ario-shell.c:1095
+#: ../src/shell/ario-shell.c:1064
 msgid "Configure Plugins"
 msgstr "配置插件"
 
-#: ../src/shell/ario-shell-coverdownloader.c:277
+#: ../src/shell/ario-shell-coverdownloader.c:246
 msgid "Music Player Cover Download"
 msgstr "音乐播放器封面下载"
 
-#: ../src/shell/ario-shell-coverdownloader.c:419
+#: ../src/shell/ario-shell-coverdownloader.c:388
 msgid "Download Finished!"
 msgstr "下载完毕！"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:422
+#: ../src/shell/ario-shell-coverdownloader.c:391
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -783,65 +783,65 @@ msgstr ""
 "%i 个封面未找到\n"
 "%i 个封面已存在"
 
-#: ../src/shell/ario-shell-coverselect.c:279
+#: ../src/shell/ario-shell-coverselect.c:247
 msgid "Cover Download"
 msgstr "封面下载"
 
-#: ../src/shell/ario-shell-coverselect.c:594
+#: ../src/shell/ario-shell-coverselect.c:562
 msgid "Error reading file"
 msgstr "读文件出错"
 
-#: ../src/shell/ario-shell-coverselect.c:617
+#: ../src/shell/ario-shell-coverselect.c:585
 msgid "Error saving file"
 msgstr "保存文件时出错"
 
-#: ../src/shell/ario-shell-lyrics.c:53
-#: ../src/shell/ario-shell-preferences.c:192
-#: ../src/shell/ario-shell-songinfos.c:268
+#: ../src/shell/ario-shell-lyrics.c:51
+#: ../src/shell/ario-shell-preferences.c:129
+#: ../src/shell/ario-shell-songinfos.c:209
 msgid "Lyrics"
 msgstr "歌词"
 
-#: ../src/shell/ario-shell-lyricsselect.c:196
+#: ../src/shell/ario-shell-lyricsselect.c:164
 msgid "Lyrics Download"
 msgstr "歌词下载"
 
-#: ../src/shell/ario-shell-lyricsselect.c:234
+#: ../src/shell/ario-shell-lyricsselect.c:202
 msgid "Source"
 msgstr "来源"
 
-#: ../src/shell/ario-shell-preferences.c:142
+#: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
 msgstr "Ario首选项"
 
-#: ../src/shell/ario-shell-preferences.c:177
+#: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
 msgstr "服务器"
 
-#: ../src/shell/ario-shell-similarartists.c:350
+#: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
 msgid "%d songs"
 msgstr "%d 首歌"
 
-#: ../src/shell/ario-shell-similarartists.c:410
+#: ../src/shell/ario-shell-similarartists.c:375
 msgid "Image"
 msgstr "图像"
 
-#: ../src/shell/ario-shell-similarartists.c:428
-#: ../src/widgets/ario-status-bar.c:209
+#: ../src/shell/ario-shell-similarartists.c:393
+#: ../src/widgets/ario-status-bar.c:159
 msgid "Songs"
 msgstr "歌曲"
 
-#: ../src/shell/ario-shell-songinfos.c:171
-#: ../src/shell/ario-shell-songinfos.c:263
-#: ../src/shell/ario-shell-songinfos.c:412
+#: ../src/shell/ario-shell-songinfos.c:115
+#: ../src/shell/ario-shell-songinfos.c:204
+#: ../src/shell/ario-shell-songinfos.c:313
 msgid "Song Properties"
 msgstr "歌曲属性"
 
-#: ../src/widgets/ario-firstlaunch.c:208
+#: ../src/widgets/ario-firstlaunch.c:177
 msgid "The following configuration will be used:"
 msgstr "以下配置将会被使用："
 
-#: ../src/widgets/ario-firstlaunch.c:273
+#: ../src/widgets/ario-firstlaunch.c:242
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -849,87 +849,87 @@ msgstr ""
 "这是你第一次启动 Ario。\n"
 "这个助手将会帮助你配置它。"
 
-#: ../src/widgets/ario-firstlaunch.c:278
+#: ../src/widgets/ario-firstlaunch.c:247
 msgid "Welcome to Ario"
 msgstr "欢迎使用 Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:343
+#: ../src/widgets/ario-firstlaunch.c:312
 msgid "Configuration"
 msgstr "配置"
 
-#: ../src/widgets/ario-firstlaunch.c:355
+#: ../src/widgets/ario-firstlaunch.c:324
 msgid "Confirmation"
 msgstr "确认"
 
-#: ../src/widgets/ario-header.c:120 ../src/widgets/ario-tray-icon.h:42
+#: ../src/widgets/ario-header.c:71 ../src/widgets/ario-tray-icon.h:46
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>从</i> %s <i>由</i> %s"
 
-#: ../src/widgets/ario-header.c:257
+#: ../src/widgets/ario-header.c:226
 msgid "Play previous song"
 msgstr "播放上一首歌"
 
-#: ../src/widgets/ario-header.c:278
+#: ../src/widgets/ario-header.c:247
 msgid "Play/Pause the music"
 msgstr "播放／暂停音乐"
 
-#: ../src/widgets/ario-header.c:291
+#: ../src/widgets/ario-header.c:260
 msgid "Stop the music"
 msgstr "停止音乐"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:385 ../src/widgets/ario-tray-icon.c:807
+#: ../src/widgets/ario-header.c:354 ../src/widgets/ario-tray-icon.c:818
 msgid " of "
 msgstr " 共 "
 
-#: ../src/widgets/ario-header.c:411
+#: ../src/widgets/ario-header.c:380
 msgid "Toggle random on/off"
 msgstr "开启/关闭随机播放"
 
-#: ../src/widgets/ario-header.c:424
+#: ../src/widgets/ario-header.c:393
 msgid "Toggle repeat on/off"
 msgstr "开启/关闭重复播放"
 
-#: ../src/widgets/ario-header.c:534
+#: ../src/widgets/ario-header.c:485
 msgid "Change the music volume"
 msgstr "更改音量"
 
-#: ../src/widgets/ario-lyrics-editor.c:299
+#: ../src/widgets/ario-lyrics-editor.c:266
 msgid "Downloading lyrics..."
 msgstr "正在下载歌词…"
 
-#: ../src/widgets/ario-lyrics-editor.c:316
+#: ../src/widgets/ario-lyrics-editor.c:283
 msgid "Lyrics not found"
 msgstr "歌词未找到"
 
-#: ../src/widgets/ario-playlist.c:126
+#: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
 msgstr "清除(_C)"
 
-#: ../src/widgets/ario-playlist.c:129
+#: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
 msgstr "移除(_R)"
 
-#: ../src/widgets/ario-playlist.c:132
+#: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: ../src/widgets/ario-playlist.c:138
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
 msgstr "转到正在播放(_G)"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1336
+#: ../src/widgets/ario-playlist.c:1306
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: ../src/widgets/ario-playlist.c:1346
+#: ../src/widgets/ario-playlist.c:1316
 msgid "Playlist name :"
 msgstr "播放列表名称："
 
-#: ../src/widgets/ario-playlist.c:1371
+#: ../src/widgets/ario-playlist.c:1341
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "播放列表已存在。是否覆盖？"
 
@@ -953,7 +953,7 @@ msgstr "下一首(_N)"
 msgid "P_revious"
 msgstr "上一首(_r)"
 
-#: ../src/widgets/ario-tray-icon.h:41
+#: ../src/widgets/ario-tray-icon.h:45
 msgid "Not playing"
 msgstr "未播放"
 
@@ -1083,11 +1083,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "将歌曲信息提交至 last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:195
+#: ../plugins/filesystem/ario-filesystem.c:166
 msgid "File System"
 msgstr "文件系统"
 
-#: ../plugins/filesystem/ario-filesystem.c:486
+#: ../plugins/filesystem/ario-filesystem.c:438
 msgid "Music"
 msgstr "音乐"
 
@@ -1099,7 +1099,7 @@ msgstr "一个文件浏览器"
 msgid "File System Browser"
 msgstr "文件浏览器"
 
-#: ../plugins/information/ario-information.c:141
+#: ../plugins/information/ario-information.c:113
 #, fuzzy
 msgid "Information"
 msgstr "确认"
@@ -1122,6 +1122,15 @@ msgstr ""
 msgid "Lyrics:"
 msgstr "歌词"
 
+#: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Add libnotify support"
+msgstr "添加多媒体键支持"
+
+#: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
+msgid "Libnotify"
+msgstr ""
+
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
 msgstr "添加多媒体键支持"
@@ -1138,34 +1147,34 @@ msgstr "添加新的广播频道"
 msgid "_Delete this radios"
 msgstr "删除这个广播频道"
 
-#: ../plugins/radios/ario-radio.c:192
+#: ../plugins/radios/ario-radio.c:166
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Web 广播"
 
-#: ../plugins/radios/ario-radio.c:261
+#: ../plugins/radios/ario-radio.c:235
 msgid "Internet Radios"
 msgstr "Internet 广播"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:884
+#: ../plugins/radios/ario-radio.c:857
 msgid "Add a WebRadio"
 msgstr "添加一个 Web 广播"
 
-#: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1094
+#: ../plugins/radios/ario-radio.c:868 ../plugins/radios/ario-radio.c:1067
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:949 ../plugins/radios/ario-radio.c:1149
+#: ../plugins/radios/ario-radio.c:922 ../plugins/radios/ario-radio.c:1122
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "参数错误。必须指定电台的名称和 URL。"
 
-#: ../plugins/radios/ario-radio.c:1011
+#: ../plugins/radios/ario-radio.c:984
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "确定删除所有选中的广播频道？"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1083
+#: ../plugins/radios/ario-radio.c:1056
 msgid "Edit a WebRadio"
 msgstr "编辑一个 Web 广播"
 
@@ -1178,11 +1187,11 @@ msgstr "收听 Web 广播"
 msgid "Find artist on Wikipedia"
 msgstr "在维基百科（Wikipedia）上查找艺术家"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:184
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:178
 msgid "Wikipedia Plugin - Configuration"
 msgstr "维基百科（Wikipedia）插件配置"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:193
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:187
 msgid "Wikipedia language :"
 msgstr "维基百科（Wikipedia）语言："
 

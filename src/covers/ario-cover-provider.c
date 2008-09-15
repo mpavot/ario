@@ -21,34 +21,7 @@
 #include "covers/ario-cover-provider.h"
 #include "ario-debug.h"
 
-static void ario_cover_provider_class_init (ArioCoverProviderClass *klass);
-static void ario_cover_provider_init (ArioCoverProvider *cover_provider);
-
-GType
-ario_cover_provider_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioCoverProviderClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_cover_provider_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioCoverProvider),
-                        0,
-                        (GInstanceInitFunc) ario_cover_provider_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioCoverProvider",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioCoverProvider, ario_cover_provider, G_TYPE_OBJECT)
 
 static gboolean
 dummy_boolean (ArioCoverProvider *cover_provider,

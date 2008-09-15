@@ -35,93 +35,32 @@
 #include "preferences/ario-stats-preferences.h"
 #include "ario-debug.h"
 
-static void ario_shell_preferences_class_init (ArioShellPreferencesClass *klass);
-static void ario_shell_preferences_init (ArioShellPreferences *shell_preferences);
-static void ario_shell_preferences_finalize (GObject *object);
-static void ario_shell_preferences_set_property (GObject *object,
-                                                 guint prop_id,
-                                                 const GValue *value,
-                                                 GParamSpec *pspec);
-static void ario_shell_preferences_get_property (GObject *object,
-                                                 guint prop_id,
-                                                 GValue *value,
-                                                 GParamSpec *pspec);
 static gboolean ario_shell_preferences_window_delete_cb (GtkWidget *window,
                                                          GdkEventAny *event,
                                                          ArioShellPreferences *shell_preferences);
 static void ario_shell_preferences_response_cb (GtkDialog *dialog,
                                                 int response_id,
                                                 ArioShellPreferences *shell_preferences);
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
-
 struct ArioShellPreferencesPrivate
 {
         GtkWidget *notebook;
-
-        ArioMpd *mpd;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_shell_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_preferences_type = 0;
-
-        if (ario_shell_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_shell_preferences_init
-                };
-
-                ario_shell_preferences_type = g_type_register_static (GTK_TYPE_DIALOG,
-                                                                      "ArioShellPreferences",
-                                                                      &our_info, 0);
-        }
-
-        return ario_shell_preferences_type;
-}
+#define ARIO_SHELL_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_PREFERENCES, ArioShellPreferencesPrivate))
+G_DEFINE_TYPE (ArioShellPreferences, ario_shell_preferences, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_preferences_class_init (ArioShellPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_shell_preferences_finalize;
-        object_class->set_property = ario_shell_preferences_set_property;
-        object_class->get_property = ario_shell_preferences_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
+        g_type_class_add_private (klass, sizeof (ArioShellPreferencesPrivate));
 }
 
 static void
 ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        shell_preferences->priv = g_new0 (ArioShellPreferencesPrivate, 1);
+        shell_preferences->priv = ARIO_SHELL_PREFERENCES_GET_PRIVATE (shell_preferences);
 
         g_signal_connect (shell_preferences,
                           "delete_event",
@@ -160,9 +99,7 @@ ario_shell_preferences_new (ArioMpd *mpd)
         ArioShellPreferences *shell_preferences;
         GtkWidget *widget;
 
-        shell_preferences = g_object_new (TYPE_ARIO_SHELL_PREFERENCES,
-                                          "mpd", mpd,
-                                          NULL);
+        shell_preferences = g_object_new (TYPE_ARIO_SHELL_PREFERENCES, NULL);
 
         g_return_val_if_fail (shell_preferences->priv != NULL, NULL);
 
@@ -212,62 +149,6 @@ ario_shell_preferences_new (ArioMpd *mpd)
                                   gtk_label_new (_("Statistics")));
 
         return GTK_WIDGET (shell_preferences);
-}
-
-static void
-ario_shell_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellPreferences *shell_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_SHELL_PREFERENCES (object));
-
-        shell_preferences = ARIO_SHELL_PREFERENCES (object);
-
-        g_return_if_fail (shell_preferences->priv != NULL);
-
-        g_free (shell_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static void
-ario_shell_preferences_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellPreferences *shell_preferences = ARIO_SHELL_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                shell_preferences->priv->mpd = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_shell_preferences_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellPreferences *shell_preferences = ARIO_SHELL_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, shell_preferences->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
 }
 
 static gboolean

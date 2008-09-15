@@ -28,9 +28,6 @@
 #include "ario-debug.h"
 #include "ario-util.h"
 
-static void ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass);
-static void ario_stats_preferences_init (ArioStatsPreferences *stats_preferences);
-static void ario_stats_preferences_finalize (GObject *object);
 static void ario_stats_preferences_set_property (GObject *object,
                                                  guint prop_id,
                                                  const GValue *value,
@@ -61,36 +58,8 @@ struct ArioStatsPreferencesPrivate
         GtkWidget *dbplay_time_label;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_stats_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_stats_preferences_type = 0;
-
-        if (ario_stats_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioStatsPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_stats_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioStatsPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_stats_preferences_init
-                };
-
-                ario_stats_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                      "ArioStatsPreferences",
-                                                                      &our_info, 0);
-        }
-
-        return ario_stats_preferences_type;
-}
+#define ARIO_STATS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATS_PREFERENCES, ArioStatsPreferencesPrivate))
+G_DEFINE_TYPE (ArioStatsPreferences, ario_stats_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
@@ -98,9 +67,6 @@ ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_stats_preferences_finalize;
         object_class->set_property = ario_stats_preferences_set_property;
         object_class->get_property = ario_stats_preferences_get_property;
 
@@ -111,13 +77,14 @@ ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
+        g_type_class_add_private (klass, sizeof (ArioStatsPreferencesPrivate));
 }
 
 static void
 ario_stats_preferences_init (ArioStatsPreferences *stats_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        stats_preferences->priv = g_new0 (ArioStatsPreferencesPrivate, 1);
+        stats_preferences->priv = ARIO_STATS_PREFERENCES_GET_PRIVATE (stats_preferences);
 }
 
 GtkWidget *
@@ -171,24 +138,6 @@ ario_stats_preferences_new (ArioMpd *mpd)
         g_object_unref (G_OBJECT (xml));
 
         return GTK_WIDGET (stats_preferences);
-}
-
-static void
-ario_stats_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioStatsPreferences *stats_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_STATS_PREFERENCES (object));
-
-        stats_preferences = ARIO_STATS_PREFERENCES (object);
-
-        g_return_if_fail (stats_preferences->priv != NULL);
-
-        g_free (stats_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

@@ -30,9 +30,6 @@
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 
-static void ario_proxy_preferences_class_init (ArioProxyPreferencesClass *klass);
-static void ario_proxy_preferences_init (ArioProxyPreferences *proxy_preferences);
-static void ario_proxy_preferences_finalize (GObject *object);
 static void ario_proxy_preferences_sync (ArioProxyPreferences *proxy_preferences);
 G_MODULE_EXPORT void ario_proxy_preferences_proxy_address_changed_cb (GtkWidget *widget,
                                                                       ArioProxyPreferences *proxy_preferences);
@@ -49,53 +46,21 @@ struct ArioProxyPreferencesPrivate
         GtkWidget *proxy_port_spinbutton;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_proxy_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_proxy_preferences_type = 0;
-
-        if (ario_proxy_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioProxyPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_proxy_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioProxyPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_proxy_preferences_init
-                };
-
-                ario_proxy_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                      "ArioProxyPreferences",
-                                                                      &our_info, 0);
-        }
-
-        return ario_proxy_preferences_type;
-}
+#define ARIO_PROXY_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PROXY_PREFERENCES, ArioProxyPreferencesPrivate))
+G_DEFINE_TYPE (ArioProxyPreferences, ario_proxy_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_proxy_preferences_class_init (ArioProxyPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_proxy_preferences_finalize;
+        g_type_class_add_private (klass, sizeof (ArioProxyPreferencesPrivate));
 }
 
 static void
 ario_proxy_preferences_init (ArioProxyPreferences *proxy_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        proxy_preferences->priv = g_new0 (ArioProxyPreferencesPrivate, 1);
+        proxy_preferences->priv = ARIO_PROXY_PREFERENCES_GET_PRIVATE (proxy_preferences);
 }
 
 GtkWidget *
@@ -128,24 +93,6 @@ ario_proxy_preferences_new (void)
 
         g_object_unref (G_OBJECT (xml));
         return GTK_WIDGET (proxy_preferences);
-}
-
-static void
-ario_proxy_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioProxyPreferences *proxy_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_PROXY_PREFERENCES (object));
-
-        proxy_preferences = ARIO_PROXY_PREFERENCES (object);
-
-        g_return_if_fail (proxy_preferences->priv != NULL);
-
-        g_free (proxy_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void
