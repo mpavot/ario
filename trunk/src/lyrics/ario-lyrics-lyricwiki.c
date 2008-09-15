@@ -33,9 +33,6 @@
 
 #define LYRICWIKI_URI "http://lyricwiki.org/server.php"
 
-static void ario_lyrics_lyricwiki_class_init (ArioLyricsLyricwikiClass *klass);
-static void ario_lyrics_lyricwiki_init (ArioLyricsLyricwiki *lyrics_lyricwiki);
-static void ario_lyrics_lyricwiki_finalize (GObject *object);
 ArioLyrics* ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                               const char *artist,
                                               const char *song,
@@ -47,39 +44,7 @@ static void ario_lyrics_lyricwiki_get_lyrics_candidates (ArioLyricsProvider *lyr
 static ArioLyrics * ario_lyrics_lyricwiki_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_provider,
                                                                      const ArioLyricsCandidate *candidate);
 
-struct ArioLyricsLyricwikiPrivate
-{
-        gboolean dummy;
-};
-
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_lyrics_lyricwiki_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioLyricsLyricwikiClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_lyrics_lyricwiki_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioLyricsLyricwiki),
-                        0,
-                        (GInstanceInitFunc) ario_lyrics_lyricwiki_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_LYRICS_PROVIDER,
-                                               "ArioLyricsLyricwiki",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioLyricsLyricwiki, ario_lyrics_lyricwiki, ARIO_TYPE_LYRICS_PROVIDER)
 
 static gchar *
 ario_lyrics_lyricwiki_get_id (ArioLyricsProvider *lyrics_provider)
@@ -97,12 +62,7 @@ static void
 ario_lyrics_lyricwiki_class_init (ArioLyricsLyricwikiClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioLyricsProviderClass *lyrics_provider_class = ARIO_LYRICS_PROVIDER_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_lyrics_lyricwiki_finalize;
 
         lyrics_provider_class->get_id = ario_lyrics_lyricwiki_get_id;
         lyrics_provider_class->get_name = ario_lyrics_lyricwiki_get_name;
@@ -115,24 +75,6 @@ static void
 ario_lyrics_lyricwiki_init (ArioLyricsLyricwiki *lyrics_lyricwiki)
 {
         ARIO_LOG_FUNCTION_START
-        lyrics_lyricwiki->priv = g_new0 (ArioLyricsLyricwikiPrivate, 1);
-}
-
-static void
-ario_lyrics_lyricwiki_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioLyricsLyricwiki *lyrics_lyricwiki;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_LYRICS_LYRICWIKI (object));
-
-        lyrics_lyricwiki = ARIO_LYRICS_LYRICWIKI (object);
-
-        g_return_if_fail (lyrics_lyricwiki->priv != NULL);
-        g_free (lyrics_lyricwiki->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioLyricsProvider*
@@ -143,8 +85,6 @@ ario_lyrics_lyricwiki_new (void)
 
         lyricwiki = g_object_new (TYPE_ARIO_LYRICS_LYRICWIKI,
                                   NULL);
-
-        g_return_val_if_fail (lyricwiki->priv != NULL, NULL);
 
         return ARIO_LYRICS_PROVIDER (lyricwiki);
 }

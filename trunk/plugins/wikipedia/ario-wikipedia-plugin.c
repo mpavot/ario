@@ -90,12 +90,6 @@ ario_wikipedia_plugin_init (ArioWikipediaPlugin *plugin)
 }
 
 static void
-ario_wikipedia_plugin_finalize (GObject *object)
-{
-        G_OBJECT_CLASS (ario_wikipedia_plugin_parent_class)->finalize (object);
-}
-
-static void
 impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
@@ -249,8 +243,6 @@ ario_wikipedia_plugin_class_init (ArioWikipediaPluginClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
-
-        object_class->finalize = ario_wikipedia_plugin_finalize;
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;

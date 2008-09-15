@@ -37,9 +37,6 @@
 #define COVER_MEDIUM "MediumImage"
 #define COVER_LARGE "LargeImage"
 
-static void ario_cover_amazon_class_init (ArioCoverAmazonClass *klass);
-static void ario_cover_amazon_init (ArioCoverAmazon *cover_amazon);
-static void ario_cover_amazon_finalize (GObject *object);
 static char* ario_cover_amazon_make_xml_uri (const char *artist, 
                                              const char *album);
 static GSList* ario_cover_amazon_parse_xml_file (char *xmldata,
@@ -54,39 +51,7 @@ gboolean ario_cover_amazon_get_covers (ArioCoverProvider *cover_provider,
                                        GSList **file_contents,
                                        ArioCoverProviderOperation operation);
 
-struct ArioCoverAmazonPrivate
-{
-        gboolean dummy;
-};
-
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_cover_amazon_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioCoverAmazonClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_cover_amazon_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioCoverAmazon),
-                        0,
-                        (GInstanceInitFunc) ario_cover_amazon_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_COVER_PROVIDER,
-                                               "ArioCoverAmazon",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioCoverAmazon, ario_cover_amazon, ARIO_TYPE_COVER_PROVIDER)
 
 static gchar *
 ario_cover_amazon_get_id (ArioCoverProvider *cover_provider)
@@ -104,12 +69,7 @@ static void
 ario_cover_amazon_class_init (ArioCoverAmazonClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioCoverProviderClass *cover_provider_class = ARIO_COVER_PROVIDER_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_cover_amazon_finalize;
 
         cover_provider_class->get_id = ario_cover_amazon_get_id;
         cover_provider_class->get_name = ario_cover_amazon_get_name;
@@ -120,24 +80,6 @@ static void
 ario_cover_amazon_init (ArioCoverAmazon *cover_amazon)
 {
         ARIO_LOG_FUNCTION_START
-        cover_amazon->priv = g_new0 (ArioCoverAmazonPrivate, 1);
-}
-
-static void
-ario_cover_amazon_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioCoverAmazon *cover_amazon;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_COVER_AMAZON (object));
-
-        cover_amazon = ARIO_COVER_AMAZON (object);
-
-        g_return_if_fail (cover_amazon->priv != NULL);
-        g_free (cover_amazon->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioCoverProvider*
@@ -148,8 +90,6 @@ ario_cover_amazon_new (void)
 
         amazon = g_object_new (TYPE_ARIO_COVER_AMAZON,
                                NULL);
-
-        g_return_val_if_fail (amazon->priv != NULL, NULL);
 
         return ARIO_COVER_PROVIDER (amazon);
 }

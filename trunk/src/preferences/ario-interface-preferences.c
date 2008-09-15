@@ -31,9 +31,6 @@
 #include "ario-avahi.h"
 #include "ario-debug.h"
 
-static void ario_interface_preferences_class_init (ArioInterfacePreferencesClass *klass);
-static void ario_interface_preferences_init (ArioInterfacePreferences *interface_preferences);
-static void ario_interface_preferences_finalize (GObject *object);
 static void ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_preferences);
 G_MODULE_EXPORT void ario_interface_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                                                            ArioInterfacePreferences *interface_preferences);
@@ -77,53 +74,21 @@ struct ArioInterfacePreferencesPrivate
         GtkWidget *autoscroll_checkbutton;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_interface_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_interface_preferences_type = 0;
-
-        if (ario_interface_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioInterfacePreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_interface_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioInterfacePreferences),
-                        0,
-                        (GInstanceInitFunc) ario_interface_preferences_init
-                };
-
-                ario_interface_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                          "ArioInterfacePreferences",
-                                                                          &our_info, 0);
-        }
-
-        return ario_interface_preferences_type;
-}
+#define ARIO_INTERFACE_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_INTERFACE_PREFERENCES, ArioInterfacePreferencesPrivate))
+G_DEFINE_TYPE (ArioInterfacePreferences, ario_interface_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_interface_preferences_class_init (ArioInterfacePreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_interface_preferences_finalize;
+        g_type_class_add_private (klass, sizeof (ArioInterfacePreferencesPrivate));
 }
 
 static void
 ario_interface_preferences_init (ArioInterfacePreferences *interface_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        interface_preferences->priv = g_new0 (ArioInterfacePreferencesPrivate, 1);
+        interface_preferences->priv = ARIO_INTERFACE_PREFERENCES_GET_PRIVATE (interface_preferences);
 }
 
 GtkWidget *
@@ -176,24 +141,6 @@ ario_interface_preferences_new (void)
         g_object_unref (G_OBJECT (xml));
 
         return GTK_WIDGET (interface_preferences);
-}
-
-static void
-ario_interface_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioInterfacePreferences *interface_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_INTERFACE_PREFERENCES (object));
-
-        interface_preferences = ARIO_INTERFACE_PREFERENCES (object);
-
-        g_return_if_fail (interface_preferences->priv != NULL);
-
-        g_free (interface_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

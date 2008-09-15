@@ -32,9 +32,6 @@
 #include "ario-avahi.h"
 #include "ario-debug.h"
 
-static void ario_lyrics_preferences_class_init (ArioLyricsPreferencesClass *klass);
-static void ario_lyrics_preferences_init (ArioLyricsPreferences *lyrics_preferences);
-static void ario_lyrics_preferences_finalize (GObject *object);
 static void ario_lyrics_preferences_sync_lyrics_providers (ArioLyricsPreferences *lyrics_preferences);
 G_MODULE_EXPORT void ario_lyrics_preferences_top_button_cb (GtkWidget *widget,
                                                             ArioLyricsPreferences *lyrics_preferences);
@@ -64,53 +61,21 @@ enum
         N_COLUMN
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_lyrics_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_lyrics_preferences_type = 0;
-
-        if (ario_lyrics_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioLyricsPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_lyrics_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioLyricsPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_lyrics_preferences_init
-                };
-
-                ario_lyrics_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                       "ArioLyricsPreferences",
-                                                                       &our_info, 0);
-        }
-
-        return ario_lyrics_preferences_type;
-}
+#define ARIO_LYRICS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_PREFERENCES, ArioLyricsPreferencesPrivate))
+G_DEFINE_TYPE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_lyrics_preferences_class_init (ArioLyricsPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_lyrics_preferences_finalize;
+        g_type_class_add_private (klass, sizeof (ArioLyricsPreferencesPrivate));
 }
 
 static void
 ario_lyrics_preferences_init (ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        lyrics_preferences->priv = g_new0 (ArioLyricsPreferencesPrivate, 1);
+        lyrics_preferences->priv = ARIO_LYRICS_PREFERENCES_GET_PRIVATE (lyrics_preferences);
 }
 
 GtkWidget *
@@ -170,24 +135,6 @@ ario_lyrics_preferences_new (void)
 
         g_object_unref (G_OBJECT (xml));
         return GTK_WIDGET (lyrics_preferences);
-}
-
-static void
-ario_lyrics_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioLyricsPreferences *lyrics_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_LYRICS_PREFERENCES (object));
-
-        lyrics_preferences = ARIO_LYRICS_PREFERENCES (object);
-
-        g_return_if_fail (lyrics_preferences->priv != NULL);
-
-        g_free (lyrics_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

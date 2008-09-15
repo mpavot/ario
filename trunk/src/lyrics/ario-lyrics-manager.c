@@ -29,53 +29,19 @@
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-static void ario_lyrics_manager_class_init (ArioLyricsManagerClass *klass);
-static void ario_lyrics_manager_init (ArioLyricsManager *lyrics_manager);
-static void ario_lyrics_manager_finalize (GObject *object);
-
 struct ArioLyricsManagerPrivate
 {
         GSList *providers;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_lyrics_manager_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioLyricsManagerClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_lyrics_manager_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioLyricsManager),
-                        0,
-                        (GInstanceInitFunc) ario_lyrics_manager_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioLyricsManager",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_LYRICS_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_MANAGER, ArioLyricsManagerPrivate))
+G_DEFINE_TYPE (ArioLyricsManager, ario_lyrics_manager, G_TYPE_OBJECT)
 
 static void
 ario_lyrics_manager_class_init (ArioLyricsManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_lyrics_manager_finalize;
+        g_type_class_add_private (klass, sizeof (ArioLyricsManagerPrivate));
 }
 
 static void
@@ -83,24 +49,7 @@ ario_lyrics_manager_init (ArioLyricsManager *lyrics_manager)
 {
         ARIO_LOG_FUNCTION_START
 
-        lyrics_manager->priv = g_new0 (ArioLyricsManagerPrivate, 1);
-}
-
-static void
-ario_lyrics_manager_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioLyricsManager *lyrics_manager;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_LYRICS_MANAGER (object));
-
-        lyrics_manager = ARIO_LYRICS_MANAGER (object);
-
-        g_return_if_fail (lyrics_manager->priv != NULL);
-        g_free (lyrics_manager->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        lyrics_manager->priv = ARIO_LYRICS_MANAGER_GET_PRIVATE (lyrics_manager);
 }
 
 ArioLyricsManager *

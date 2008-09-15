@@ -32,13 +32,9 @@ G_BEGIN_DECLS
 #define IS_ARIO_COVER_LOCAL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_COVER_LOCAL))
 #define ARIO_COVER_LOCAL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_COVER_LOCAL, ArioCoverLocalClass))
 
-typedef struct ArioCoverLocalPrivate ArioCoverLocalPrivate;
-
 typedef struct
 {
         ArioCoverProvider parent;
-
-        ArioCoverLocalPrivate *priv;
 } ArioCoverLocal;
 
 typedef struct

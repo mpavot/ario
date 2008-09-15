@@ -31,11 +31,8 @@
 #include "shell/ario-shell-coverselect.h"
 #include "covers/ario-cover-handler.h"
 
-static void ario_header_class_init (ArioHeaderClass *klass);
-static void ario_header_init (ArioHeader *header);
 static GObject *ario_header_constructor (GType type, guint n_construct_properties,
                                          GObjectConstructParam *construct_properties);
-static void ario_header_finalize (GObject *object);
 static void ario_header_set_property (GObject *object,
                                       guint prop_id,
                                       const GValue *value,
@@ -69,6 +66,9 @@ static void ario_header_repeat_changed_cb (ArioMpd *mpd,
                                            ArioHeader *header);
 static void ario_header_do_random (ArioHeader *header);
 static void ario_header_do_repeat (ArioHeader *header);
+
+#define SONG_MARKUP(xSONG) g_markup_printf_escaped ("<big><b>%s</b></big>", xSONG);
+#define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
 
 struct ArioHeaderPrivate
 {
@@ -114,38 +114,8 @@ enum
         PROP_MPD
 };
 
-static GObjectClass *parent_class = NULL;
-
-#define SONG_MARKUP(xSONG) g_markup_printf_escaped ("<big><b>%s</b></big>", xSONG);
-#define FROM_MARKUP(xALBUM, xARTIST) g_markup_printf_escaped (_("<i>from</i> %s <i>by</i> %s"), xALBUM, xARTIST);
-
-GType
-ario_header_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_header_type = 0;
-
-        if (ario_header_type == 0) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioHeaderClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_header_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioHeader),
-                        0,
-                        (GInstanceInitFunc) ario_header_init
-                };
-
-                ario_header_type = g_type_register_static (GTK_TYPE_HBOX,
-                                                           "ArioHeader",
-                                                           &our_info, 0);
-        }
-
-        return ario_header_type;
-}
+#define ARIO_HEADER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_HEADER, ArioHeaderPrivate))
+G_DEFINE_TYPE (ArioHeader, ario_header, GTK_TYPE_HBOX)
 
 static void
 ario_header_class_init (ArioHeaderClass *klass)
@@ -153,9 +123,6 @@ ario_header_class_init (ArioHeaderClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_header_finalize;
         object_class->set_property = ario_header_set_property;
         object_class->get_property = ario_header_get_property;
         object_class->constructor = ario_header_constructor;
@@ -167,13 +134,15 @@ ario_header_class_init (ArioHeaderClass *klass)
                                                               "ArioMpd object",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
+
+        g_type_class_add_private (klass, sizeof (ArioHeaderPrivate));
 }
 
 static void
 ario_header_init (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
-        header->priv = g_new0 (ArioHeaderPrivate, 1);
+        header->priv = ARIO_HEADER_GET_PRIVATE (header);
 }
 
 static void
@@ -438,24 +407,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                  header, 0);
 
         return G_OBJECT (header);
-}
-
-static void
-ario_header_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioHeader *header;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_HEADER (object));
-
-        header = ARIO_HEADER (object);
-
-        g_return_if_fail (header->priv != NULL);
-
-        g_free (header->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

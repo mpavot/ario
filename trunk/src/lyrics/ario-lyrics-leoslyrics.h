@@ -32,13 +32,9 @@ G_BEGIN_DECLS
 #define IS_ARIO_LYRICS_LEOSLYRICS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_LYRICS_LEOSLYRICS))
 #define ARIO_LYRICS_LEOSLYRICS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_LYRICS_LEOSLYRICS, ArioLyricsLeoslyricsClass))
 
-typedef struct ArioLyricsLeoslyricsPrivate ArioLyricsLeoslyricsPrivate;
-
 typedef struct
 {
         ArioLyricsProvider parent;
-
-        ArioLyricsLeoslyricsPrivate *priv;
 } ArioLyricsLeoslyrics;
 
 typedef struct

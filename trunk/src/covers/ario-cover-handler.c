@@ -30,8 +30,6 @@
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 
-static void ario_cover_handler_class_init (ArioCoverHandlerClass *klass);
-static void ario_cover_handler_init (ArioCoverHandler *cover_handler);
 static void ario_cover_handler_finalize (GObject *object);
 static void ario_cover_handler_set_property (GObject *object,
                                              guint prop_id,
@@ -82,46 +80,16 @@ typedef struct ArioCoverHandlerData
         gchar *path;
 } ArioCoverHandlerData;
 
-static GObjectClass *parent_class = NULL;
+#define ARIO_COVER_HANDLER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_HANDLER, ArioCoverHandlerPrivate))
+G_DEFINE_TYPE (ArioCoverHandler, ario_cover_handler, G_TYPE_OBJECT)
 
 static ArioCoverHandler *instance = NULL;
-
-GType
-ario_cover_handler_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_cover_handler_type = 0;
-
-        if (ario_cover_handler_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioCoverHandlerClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_cover_handler_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioCoverHandler),
-                        0,
-                        (GInstanceInitFunc) ario_cover_handler_init
-                };
-
-                ario_cover_handler_type = g_type_register_static (G_TYPE_OBJECT,
-                                                                  "ArioCoverHandler",
-                                                                  &our_info, 0);
-        }
-
-        return ario_cover_handler_type;
-}
 
 static void
 ario_cover_handler_class_init (ArioCoverHandlerClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_cover_handler_finalize;
         object_class->set_property = ario_cover_handler_set_property;
@@ -143,13 +111,14 @@ ario_cover_handler_class_init (ArioCoverHandlerClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
+        g_type_class_add_private (klass, sizeof (ArioCoverHandlerPrivate));
 }
 
 static void
 ario_cover_handler_init (ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
-        cover_handler->priv = g_new0 (ArioCoverHandlerPrivate, 1);
+        cover_handler->priv = ARIO_COVER_HANDLER_GET_PRIVATE (cover_handler);
         cover_handler->priv->thread = NULL;
         cover_handler->priv->queue = g_async_queue_new ();
 }
@@ -195,9 +164,8 @@ ario_cover_handler_finalize (GObject *object)
                 g_object_unref(cover_handler->priv->large_pixbuf);
 
         g_free (cover_handler->priv->cover_path);
-        g_free (cover_handler->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_cover_handler_parent_class)->finalize (object);
 }
 
 static void

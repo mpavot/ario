@@ -27,34 +27,7 @@
 #include "plugins/ario-plugin.h"
 #include "ario-util.h"
 
-static void ario_plugin_class_init (ArioPluginClass *klass);
-static void ario_plugin_init (ArioPlugin *plugin);
-
-GType
-ario_plugin_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPluginClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_plugin_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPlugin),
-                        0,
-                        (GInstanceInitFunc) ario_plugin_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioPlugin",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioPlugin, ario_plugin, G_TYPE_OBJECT)
 
 static void
 dummy (ArioPlugin *plugin, ArioShell *shell)

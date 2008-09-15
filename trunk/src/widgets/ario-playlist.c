@@ -34,8 +34,6 @@
 
 typedef struct ArioPlaylistColumn ArioPlaylistColumn;
 
-static void ario_playlist_class_init (ArioPlaylistClass *klass);
-static void ario_playlist_init (ArioPlaylist *playlist);
 static void ario_playlist_finalize (GObject *object);
 static void ario_playlist_set_property (GObject *object,
                                         guint prop_id,
@@ -207,42 +205,14 @@ static const GtkTargetEntry internal_targets  [] = {
         { "text/internal-list", 0, 10 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_playlist_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPlaylistClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_playlist_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPlaylist),
-                        0,
-                        (GInstanceInitFunc) ario_playlist_init
-                };
-
-                type = g_type_register_static (GTK_TYPE_SCROLLED_WINDOW,
-                                               "ArioPlaylist",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_PLAYLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST, ArioPlaylistPrivate))
+G_DEFINE_TYPE (ArioPlaylist, ario_playlist, GTK_TYPE_SCROLLED_WINDOW)
 
 static void
 ario_playlist_class_init (ArioPlaylistClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_playlist_finalize;
 
@@ -270,6 +240,8 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (ArioPlaylistPrivate));
 }
 
 static void
@@ -368,7 +340,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         const gchar *column_names []  = { " ", _("Track"), _("Title"), _("Artist"), _("Album"), _("Duration"), _("File"), _("Genre"), _("Date") };
 
         instance = playlist;
-        playlist->priv = g_new0 (ArioPlaylistPrivate, 1);
+        playlist->priv = ARIO_PLAYLIST_GET_PRIVATE (playlist);
         playlist->priv->playlist_id = -1;
         playlist->priv->playlist_length = 0;
         playlist->priv->play_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "play.png", NULL);
@@ -500,9 +472,8 @@ ario_playlist_finalize (GObject *object)
 
         g_return_if_fail (playlist->priv != NULL);
         g_object_unref (playlist->priv->play_pixbuf);
-        g_free (playlist->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_playlist_parent_class)->finalize (object);
 }
 
 static void
@@ -1284,8 +1255,7 @@ ario_playlist_cmd_songs_properties (GtkAction *action,
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 
-        songinfos = ario_shell_songinfos_new (playlist->priv->mpd,
-                                              songs);
+        songinfos = ario_shell_songinfos_new (songs);
         if (songinfos)
                 gtk_widget_show_all (songinfos);
 }

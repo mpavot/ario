@@ -37,9 +37,6 @@
 #define COVER_MEDIUM "medium"
 #define COVER_LARGE "large"
 
-static void ario_cover_lastfm_class_init (ArioCoverLastfmClass *klass);
-static void ario_cover_lastfm_init (ArioCoverLastfm *cover_lastfm);
-static void ario_cover_lastfm_finalize (GObject *object);
 static char* ario_cover_lastfm_make_xml_uri (const char *artist, 
                                              const char *album);
 static GSList* ario_cover_lastfm_parse_xml_file (char *xmldata,
@@ -54,39 +51,7 @@ gboolean ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
                                        GSList **file_contents,
                                        ArioCoverProviderOperation operation);
 
-struct ArioCoverLastfmPrivate
-{
-        gboolean dummy;
-};
-
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_cover_lastfm_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioCoverLastfmClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_cover_lastfm_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioCoverLastfm),
-                        0,
-                        (GInstanceInitFunc) ario_cover_lastfm_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_COVER_PROVIDER,
-                                               "ArioCoverLastfm",
-                                               &our_info, 0);
-        }
-        return type;
-}
+G_DEFINE_TYPE (ArioCoverLastfm, ario_cover_lastfm, ARIO_TYPE_COVER_PROVIDER)
 
 static gchar *
 ario_cover_lastfm_get_id (ArioCoverProvider *cover_provider)
@@ -104,12 +69,7 @@ static void
 ario_cover_lastfm_class_init (ArioCoverLastfmClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioCoverProviderClass *cover_provider_class = ARIO_COVER_PROVIDER_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_cover_lastfm_finalize;
 
         cover_provider_class->get_id = ario_cover_lastfm_get_id;
         cover_provider_class->get_name = ario_cover_lastfm_get_name;
@@ -120,24 +80,6 @@ static void
 ario_cover_lastfm_init (ArioCoverLastfm *cover_lastfm)
 {
         ARIO_LOG_FUNCTION_START
-        cover_lastfm->priv = g_new0 (ArioCoverLastfmPrivate, 1);
-}
-
-static void
-ario_cover_lastfm_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioCoverLastfm *cover_lastfm;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_COVER_LASTFM (object));
-
-        cover_lastfm = ARIO_COVER_LASTFM (object);
-
-        g_return_if_fail (cover_lastfm->priv != NULL);
-        g_free (cover_lastfm->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioCoverProvider*
@@ -148,8 +90,6 @@ ario_cover_lastfm_new (void)
 
         lastfm = g_object_new (TYPE_ARIO_COVER_LASTFM,
                                NULL);
-
-        g_return_val_if_fail (lastfm->priv != NULL, NULL);
 
         return ARIO_COVER_PROVIDER (lastfm);
 }

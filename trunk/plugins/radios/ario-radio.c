@@ -151,34 +151,8 @@ static const GtkTargetEntry radios_targets  [] = {
         { "text/radios-list", 0, 0 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_radio_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioRadioClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_radio_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioRadio),
-                        0,
-                        (GInstanceInitFunc) ario_radio_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_SOURCE,
-                                               "ArioRadio",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_RADIO_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_RADIO, ArioRadioPrivate))
+G_DEFINE_TYPE (ArioRadio, ario_radio, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_radio_get_id (ArioSource *source)
@@ -204,8 +178,6 @@ ario_radio_class_init (ArioRadioClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_radio_finalize;
 
@@ -237,6 +209,8 @@ ario_radio_class_init (ArioRadioClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (ArioRadioPrivate));
 }
 
 static void
@@ -248,7 +222,7 @@ ario_radio_init (ArioRadio *radio)
 
         GtkWidget *scrolledwindow_radios;
 
-        radio->priv = g_new0 (ArioRadioPrivate, 1);
+        radio->priv = ARIO_RADIO_GET_PRIVATE (radio);
 
         /* Radios list */
         scrolledwindow_radios = gtk_scrolled_window_new (NULL, NULL);
@@ -321,9 +295,8 @@ ario_radio_finalize (GObject *object)
         if (radio->priv->doc)
                 xmlFreeDoc (radio->priv->doc);
         radio->priv->doc = NULL;
-        g_free (radio->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_radio_parent_class)->finalize (object);
 }
 
 static void

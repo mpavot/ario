@@ -28,8 +28,6 @@
 #include "widgets/ario-lyrics-editor.h"
 #include "ario-util.h"
 
-static void ario_shell_lyrics_class_init (ArioShellLyricsClass *klass);
-static void ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_finalize (GObject *object);
 static void ario_shell_lyrics_set_property (GObject *object,
                                             guint prop_id,
@@ -61,50 +59,19 @@ enum
 struct ArioShellLyricsPrivate
 {      
         GtkWidget *lyrics_editor;
-
         ArioMpd *mpd;
 };
 
 static gboolean is_instantiated = FALSE;
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_shell_lyrics_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_lyrics_type = 0;
-
-        if (ario_shell_lyrics_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellLyricsClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_lyrics_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellLyrics),
-                        0,
-                        (GInstanceInitFunc) ario_shell_lyrics_init
-                };
-
-                ario_shell_lyrics_type = g_type_register_static (GTK_TYPE_WINDOW,
-                                                                 "ArioShellLyrics",
-                                                                 &our_info, 0);
-        }
-
-        return ario_shell_lyrics_type;
-}
+#define ARIO_SHELL_LYRICS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_LYRICS, ArioShellLyricsPrivate))
+G_DEFINE_TYPE (ArioShellLyrics, ario_shell_lyrics, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_shell_lyrics_finalize;
         object_class->set_property = ario_shell_lyrics_set_property;
@@ -117,13 +84,15 @@ ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE));
+
+        g_type_class_add_private (klass, sizeof (ArioShellLyricsPrivate));
 }
 
 static void
 ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START
-        shell_lyrics->priv = g_new0 (ArioShellLyricsPrivate, 1);
+        shell_lyrics->priv = ARIO_SHELL_LYRICS_GET_PRIVATE (shell_lyrics);
 
         g_signal_connect(shell_lyrics,
                          "delete_event",
@@ -197,11 +166,10 @@ ario_shell_lyrics_finalize (GObject *object)
 
         g_return_if_fail (shell_lyrics->priv != NULL);
         ario_mpd_use_count_dec (shell_lyrics->priv->mpd);
-        g_free (shell_lyrics->priv);
 
         is_instantiated = FALSE;
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_shell_lyrics_parent_class)->finalize (object);
 }
 
 static void

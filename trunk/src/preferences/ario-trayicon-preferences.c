@@ -32,9 +32,6 @@
 #include "ario-avahi.h"
 #include "ario-debug.h"
 
-static void ario_trayicon_preferences_class_init (ArioTrayiconPreferencesClass *klass);
-static void ario_trayicon_preferences_init (ArioTrayiconPreferences *trayicon_preferences);
-static void ario_trayicon_preferences_finalize (GObject *object);
 static void ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences);
 G_MODULE_EXPORT void ario_trayicon_preferences_trayicon_behavior_changed_cb (GtkComboBox *combobox,
                                                                              ArioTrayiconPreferences *trayicon_preferences);
@@ -63,53 +60,21 @@ struct ArioTrayiconPreferencesPrivate
         GtkWidget *notification_combobox;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_trayicon_preferences_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_trayicon_preferences_type = 0;
-
-        if (ario_trayicon_preferences_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioTrayiconPreferencesClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_trayicon_preferences_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioTrayiconPreferences),
-                        0,
-                        (GInstanceInitFunc) ario_trayicon_preferences_init
-                };
-
-                ario_trayicon_preferences_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                         "ArioTrayiconPreferences",
-                                                                         &our_info, 0);
-        }
-
-        return ario_trayicon_preferences_type;
-}
+#define ARIO_TRAYICON_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TRAYICON_PREFERENCES, ArioTrayiconPreferencesPrivate))
+G_DEFINE_TYPE (ArioTrayiconPreferences, ario_trayicon_preferences, GTK_TYPE_VBOX)
 
 static void
 ario_trayicon_preferences_class_init (ArioTrayiconPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_trayicon_preferences_finalize;
+        g_type_class_add_private (klass, sizeof (ArioTrayiconPreferencesPrivate));
 }
 
 static void
 ario_trayicon_preferences_init (ArioTrayiconPreferences *trayicon_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        trayicon_preferences->priv = g_new0 (ArioTrayiconPreferencesPrivate, 1);
+        trayicon_preferences->priv = ARIO_TRAYICON_PREFERENCES_GET_PRIVATE (trayicon_preferences);
 }
 
 GtkWidget *
@@ -201,24 +166,6 @@ ario_trayicon_preferences_new (void)
 }
 
 static void
-ario_trayicon_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioTrayiconPreferences *trayicon_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_TRAYICON_PREFERENCES (object));
-
-        trayicon_preferences = ARIO_TRAYICON_PREFERENCES (object);
-
-        g_return_if_fail (trayicon_preferences->priv != NULL);
-
-        g_free (trayicon_preferences->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static void
 ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences)
 {
         ARIO_LOG_FUNCTION_START
@@ -292,9 +239,7 @@ ario_trayicon_preferences_notificationtime_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         ario_conf_set_integer (PREF_NOTIFICATION_TIME, gtk_spin_button_get_value (GTK_SPIN_BUTTON (trayicon_preferences->priv->notificationtime_spinbutton)));
-}
-
-
+}
 void
 ario_trayicon_preferences_notification_combobox_changed_cb (GtkComboBox *combobox,
                                                             ArioTrayiconPreferences *trayicon_preferences)

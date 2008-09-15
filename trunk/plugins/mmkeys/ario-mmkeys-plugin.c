@@ -56,12 +56,6 @@ ario_mmkeys_plugin_init (ArioMmkeysPlugin *plugin)
 }
 
 static void
-ario_mmkeys_plugin_finalize (GObject *object)
-{
-        G_OBJECT_CLASS (ario_mmkeys_plugin_parent_class)->finalize (object);
-}
-
-static void
 media_player_key_pressed (DBusGProxy *proxy,
                           const gchar *application,
                           const gchar *key,
@@ -177,8 +171,6 @@ ario_mmkeys_plugin_class_init (ArioMmkeysPluginClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
-
-        object_class->finalize = ario_mmkeys_plugin_finalize;
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;

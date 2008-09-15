@@ -31,8 +31,6 @@
 #include "lyrics/ario-lyrics.h"
 #include "covers/ario-cover.h"
 
-static void ario_information_class_init (ArioInformationClass *klass);
-static void ario_information_init (ArioInformation *information);
 static void ario_information_finalize (GObject *object);
 static void ario_information_set_property (GObject *object,
                                            guint prop_id,
@@ -100,34 +98,8 @@ enum
         PROP_ACTION_GROUP
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_information_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioInformationClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_information_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioInformation),
-                        0,
-                        (GInstanceInitFunc) ario_information_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_SOURCE,
-                                               "ArioInformation",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_INFORMATION_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_INFORMATION, ArioInformationPrivate))
+G_DEFINE_TYPE (ArioInformation, ario_information, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_information_get_id (ArioSource *source)
@@ -174,8 +146,6 @@ ario_information_class_init (ArioInformationClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->finalize = ario_information_finalize;
 
         object_class->set_property = ario_information_set_property;
@@ -208,6 +178,8 @@ ario_information_class_init (ArioInformationClass *klass)
                                                               "GtkActionGroup object",
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (ArioInformationPrivate));
 }
 
 static void ario_information_style_set_cb (GtkWidget *vbox,
@@ -235,7 +207,7 @@ ario_information_init (ArioInformation *information)
         GladeXML *xml;
         gchar *file;
 
-        information->priv = g_new0 (ArioInformationPrivate, 1);
+        information->priv = ARIO_INFORMATION_GET_PRIVATE (information);
 
         file = ario_plugin_find_file ("information.glade");
         g_return_if_fail (file);
@@ -311,9 +283,7 @@ ario_information_finalize (GObject *object)
                 information->priv->albums = NULL;
         }
 
-        g_free (information->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_information_parent_class)->finalize (object);
 }
 
 static void

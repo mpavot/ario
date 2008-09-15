@@ -37,8 +37,6 @@
 #define SERVICE_TYPE "_mpd._tcp"
 #define DOMAIN "local"
 
-static void ario_avahi_class_init (ArioAvahiClass *klass);
-static void ario_avahi_init (ArioAvahi *avahi);
 static void ario_avahi_finalize (GObject *object);
 static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                                          AVAHI_GCC_UNUSED AvahiIfIndex interface,
@@ -83,44 +81,14 @@ enum
 };
 static guint ario_avahi_signals[LAST_SIGNAL] = { 0 };
 
-static GObjectClass *parent_class;
-
-GType
-ario_avahi_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (type == 0)
-        { 
-                static GTypeInfo info =
-                {
-                        sizeof (ArioAvahiClass),
-                        NULL, 
-                        NULL,
-                        (GClassInitFunc) ario_avahi_class_init, 
-                        NULL,
-                        NULL, 
-                        sizeof (ArioAvahi),
-                        0,
-                        (GInstanceInitFunc) ario_avahi_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioAvahi",
-                                               &info, 0);
-        }
-
-        return type;
-}
+#define ARIO_AVAHI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_AVAHI, ArioAvahiPrivate))
+G_DEFINE_TYPE (ArioAvahi, ario_avahi, G_TYPE_OBJECT)
 
 static void
 ario_avahi_class_init (ArioAvahiClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = (GObjectClass *) klass;
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_avahi_finalize;
 
@@ -133,6 +101,8 @@ ario_avahi_class_init (ArioAvahiClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
+
+        g_type_class_add_private (klass, sizeof (ArioAvahiPrivate));
 }
 
 static void
@@ -141,7 +111,7 @@ ario_avahi_init (ArioAvahi *avahi)
         ARIO_LOG_FUNCTION_START
         int error;
 
-        avahi->priv = g_new0 (ArioAvahiPrivate, 1);
+        avahi->priv = ARIO_AVAHI_GET_PRIVATE (avahi);
         avahi->priv->hosts = NULL;
 
         /* Allocate main loop object */
@@ -192,9 +162,8 @@ ario_avahi_finalize (GObject *object)
                 avahi_glib_poll_free (avahi->priv->glib_poll);
         g_slist_foreach (avahi->priv->hosts, (GFunc) ario_avahi_free_hosts, NULL);
         g_slist_free (avahi->priv->hosts);
-        g_free (avahi->priv);
 
-        parent_class->finalize (G_OBJECT (avahi));
+        G_OBJECT_CLASS (ario_avahi_parent_class)->finalize (object);
 }
 
 ArioAvahi *

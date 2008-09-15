@@ -33,8 +33,6 @@
 #include "ario-avahi.h"
 #endif
 
-static void ario_firstlaunch_class_init (ArioFirstlaunchClass *klass);
-static void ario_firstlaunch_init (ArioFirstlaunch *firstlaunch);
 static void ario_firstlaunch_finalize (GObject *object);
 
 struct ArioFirstlaunchPrivate
@@ -63,36 +61,8 @@ enum
         N_COLUMN
 };
 
-static GObjectClass *parent_class;
-
-GType
-ario_firstlaunch_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (type == 0)
-        { 
-                static GTypeInfo info =
-                {
-                        sizeof (ArioFirstlaunchClass),
-                        NULL, 
-                        NULL,
-                        (GClassInitFunc) ario_firstlaunch_class_init, 
-                        NULL,
-                        NULL, 
-                        sizeof (ArioFirstlaunch),
-                        0,
-                        (GInstanceInitFunc) ario_firstlaunch_init
-                };
-
-                type = g_type_register_static (GTK_TYPE_ASSISTANT,
-                                               "ArioFirstlaunch",
-                                               &info, 0);
-        }
-
-        return type;
-}
+#define ARIO_FIRSTLAUNCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_FIRSTLAUNCH, ArioFirstlaunchPrivate))
+G_DEFINE_TYPE (ArioFirstlaunch, ario_firstlaunch, GTK_TYPE_ASSISTANT)
 
 static void
 ario_firstlaunch_class_init (ArioFirstlaunchClass *klass)
@@ -100,9 +70,8 @@ ario_firstlaunch_class_init (ArioFirstlaunchClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = (GObjectClass *) klass;
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->finalize = ario_firstlaunch_finalize;
+        g_type_class_add_private (klass, sizeof (ArioFirstlaunchPrivate));
 }
 
 static void
@@ -262,7 +231,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         GtkCellRenderer *renderer;
         GladeXML *xml;
 
-        firstlaunch->priv = g_new0 (ArioFirstlaunchPrivate, 1);
+        firstlaunch->priv = ARIO_FIRSTLAUNCH_GET_PRIVATE (firstlaunch);
         firstlaunch->priv->applied = FALSE;
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
 
@@ -390,9 +359,7 @@ ario_firstlaunch_finalize (GObject *object)
 #ifdef ENABLE_AVAHI
         g_object_unref (firstlaunch->priv->avahi);
 #endif
-        g_free (firstlaunch->priv);
-
-        parent_class->finalize (G_OBJECT (firstlaunch));
+        G_OBJECT_CLASS (ario_firstlaunch_parent_class)->finalize (object);
 }
 
 ArioFirstlaunch *

@@ -28,8 +28,6 @@
 #include "ario-debug.h"
 #include "covers/ario-cover-handler.h"
 
-static void ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass);
-static void ario_shell_coverdownloader_init (ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_finalize (GObject *object);
 static void ario_shell_coverdownloader_set_property (GObject *object,
                                                      guint prop_id,
@@ -86,44 +84,16 @@ struct ArioShellCoverdownloaderPrivate
         GThread *thread;
 };
 
-static GObjectClass *parent_class = NULL;
-
 static gboolean is_instantiated = FALSE;
 
-GType
-ario_shell_coverdownloader_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_shell_coverdownloader_type = 0;
-        if (ario_shell_coverdownloader_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioShellCoverdownloaderClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_shell_coverdownloader_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioShellCoverdownloader),
-                        0,
-                        (GInstanceInitFunc) ario_shell_coverdownloader_init
-                };
-
-                ario_shell_coverdownloader_type = g_type_register_static (GTK_TYPE_WINDOW,
-                                                                          "ArioShellCoverdownloader",
-                                                                          &our_info, 0);
-        }
-        return ario_shell_coverdownloader_type;
-}
+#define ARIO_SHELL_COVERDOWNLOADER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_COVERDOWNLOADER, ArioShellCoverdownloaderPrivate))
+G_DEFINE_TYPE (ArioShellCoverdownloader, ario_shell_coverdownloader, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_shell_coverdownloader_finalize;
         object_class->constructor = ario_shell_coverdownloader_constructor;
@@ -138,13 +108,14 @@ ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
                                                               "mpd",
                                                               TYPE_ARIO_MPD,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+        g_type_class_add_private (klass, sizeof (ArioShellCoverdownloaderPrivate));
 }
 
 static void
 ario_shell_coverdownloader_init (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
         ARIO_LOG_FUNCTION_START
-        ario_shell_coverdownloader->priv = g_new0 (ArioShellCoverdownloaderPrivate, 1);
+        ario_shell_coverdownloader->priv = ARIO_SHELL_COVERDOWNLOADER_GET_PRIVATE (ario_shell_coverdownloader);
         ario_shell_coverdownloader->priv->cancelled = FALSE;
 }
 
@@ -168,11 +139,9 @@ ario_shell_coverdownloader_finalize (GObject *object)
         g_slist_foreach (ario_shell_coverdownloader->priv->albums, (GFunc) ario_mpd_free_album, NULL);
         g_slist_free (ario_shell_coverdownloader->priv->albums);
 
-        g_free (ario_shell_coverdownloader->priv);
-
         is_instantiated = FALSE;
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_shell_coverdownloader_parent_class)->finalize (object);
 }
 
 static void

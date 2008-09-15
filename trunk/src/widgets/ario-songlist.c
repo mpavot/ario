@@ -29,8 +29,6 @@
 
 #define DRAG_THRESHOLD 1
 
-static void ario_songlist_class_init (ArioSonglistClass *klass);
-static void ario_songlist_init (ArioSonglist *songlist);
 static void ario_songlist_finalize (GObject *object);
 static void ario_songlist_set_property (GObject *object,
                                         guint prop_id,
@@ -89,42 +87,14 @@ static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_songlist_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioSonglistClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_songlist_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioSonglist),
-                        0,
-                        (GInstanceInitFunc) ario_songlist_init
-                };
-
-                type = g_type_register_static (GTK_TYPE_TREE_VIEW,
-                                               "ArioSonglist",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_SONGLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SONGLIST, ArioSonglistPrivate))
+G_DEFINE_TYPE (ArioSonglist, ario_songlist, GTK_TYPE_TREE_VIEW)
 
 static void
 ario_songlist_class_init (ArioSonglistClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        parent_class = g_type_class_peek_parent (klass);
 
         object_class->finalize = ario_songlist_finalize;
 
@@ -145,6 +115,8 @@ ario_songlist_class_init (ArioSonglistClass *klass)
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (ArioSonglistPrivate));
 }
 
 static void
@@ -152,7 +124,7 @@ ario_songlist_init (ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
 
-        songlist->priv = g_new0 (ArioSonglistPrivate, 1);
+        songlist->priv = ARIO_SONGLIST_GET_PRIVATE (songlist);
 }
 
 static void
@@ -168,9 +140,8 @@ ario_songlist_finalize (GObject *object)
 
         g_return_if_fail (songlist->priv != NULL);
         g_free (songlist->priv->popup);
-        g_free (songlist->priv);
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_songlist_parent_class)->finalize (object);
 }
 
 static void
@@ -395,8 +366,7 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
         g_slist_free (paths);
 
         if (songs) {
-                songinfos = ario_shell_songinfos_new (songlist->priv->mpd,
-                                                      songs);
+                songinfos = ario_shell_songinfos_new (songs);
                 if (songinfos)
                         gtk_widget_show_all (songinfos);
         }

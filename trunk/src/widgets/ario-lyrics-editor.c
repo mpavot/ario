@@ -30,8 +30,6 @@
 #include "lyrics/ario-lyrics-manager.h"
 #include "ario-util.h"
 
-static void ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass);
-static void ario_lyrics_editor_init (ArioLyricsEditor *lyrics_editor);
 static void ario_lyrics_editor_finalize (GObject *object);
 static void ario_lyrics_editor_save_cb (GtkButton *button,
                                         ArioLyricsEditor *lyrics_editor);
@@ -55,36 +53,8 @@ struct ArioLyricsEditorPrivate
         ArioLyricsEditorData *data;
 };
 
-static GObjectClass *parent_class = NULL;
-
-GType
-ario_lyrics_editor_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START
-        static GType ario_lyrics_editor_type = 0;
-
-        if (ario_lyrics_editor_type == 0)
-        {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioLyricsEditorClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_lyrics_editor_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioLyricsEditor),
-                        0,
-                        (GInstanceInitFunc) ario_lyrics_editor_init
-                };
-
-                ario_lyrics_editor_type = g_type_register_static (GTK_TYPE_VBOX,
-                                                                  "ArioLyricsEditor",
-                                                                  &our_info, 0);
-        }
-
-        return ario_lyrics_editor_type;
-}
+#define ARIO_LYRICS_EDITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_EDITOR, ArioLyricsEditorPrivate))
+G_DEFINE_TYPE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_VBOX)
 
 static void
 ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
@@ -92,16 +62,15 @@ ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        parent_class = g_type_class_peek_parent (klass);
-
         object_class->finalize = ario_lyrics_editor_finalize;
+        g_type_class_add_private (klass, sizeof (ArioLyricsEditorPrivate));
 }
 
 static void
 ario_lyrics_editor_init (ArioLyricsEditor *lyrics_editor)
 {
         ARIO_LOG_FUNCTION_START
-        lyrics_editor->priv = g_new0 (ArioLyricsEditorPrivate, 1);
+        lyrics_editor->priv = ARIO_LYRICS_EDITOR_GET_PRIVATE (lyrics_editor);
 }
 
 GtkWidget *
@@ -207,9 +176,7 @@ ario_lyrics_editor_finalize (GObject *object)
                 lyrics_editor->priv->data = NULL;
         }
 
-        g_free (lyrics_editor->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (ario_lyrics_editor_parent_class)->finalize (object);
 }
 
 static void
