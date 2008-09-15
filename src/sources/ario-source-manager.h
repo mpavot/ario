@@ -59,16 +59,14 @@ typedef struct
 
 GType                   ario_sourcemanager_get_type     (void) G_GNUC_CONST;
 
-GtkWidget*              ario_sourcemanager_new          (GtkUIManager *mgr,
+GtkWidget*              ario_sourcemanager_get_instance (GtkUIManager *mgr,
                                                          GtkActionGroup *group,
                                                          ArioMpd *mpd);
 
-void                    ario_sourcemanager_append       (ArioSourceManager *sourcemanager,
-                                                         ArioSource *source);
-void                    ario_sourcemanager_remove       (ArioSourceManager *sourcemanager,
-                                                         ArioSource *source);
-void                    ario_sourcemanager_reorder      (ArioSourceManager *sourcemanager);
-void                    ario_sourcemanager_shutdown     (ArioSourceManager *sourcemanager);
+void                    ario_sourcemanager_append       (ArioSource *source);
+void                    ario_sourcemanager_remove       (ArioSource *source);
+void                    ario_sourcemanager_reorder      (void);
+void                    ario_sourcemanager_shutdown     (void);
 
 G_END_DECLS
 

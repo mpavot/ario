@@ -94,7 +94,6 @@ struct ArioStoredplaylistsPrivate
 
         ArioMpd *mpd;
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 };
 
 static GtkActionEntry ario_storedplaylists_actions [] =
@@ -135,8 +134,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 enum
@@ -198,13 +196,6 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
@@ -322,9 +313,6 @@ ario_storedplaylists_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 storedplaylists->priv->ui_manager = g_value_get_object (value);
                 break;
-        case PROP_ACTION_GROUP:
-                storedplaylists->priv->actiongroup = g_value_get_object (value);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -347,9 +335,6 @@ ario_storedplaylists_get_property (GObject *object,
         case PROP_UI_MANAGER:
                 g_value_set_object (value, storedplaylists->priv->ui_manager);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, storedplaylists->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -367,7 +352,6 @@ ario_storedplaylists_new (GtkUIManager *mgr,
 
         storedplaylists = g_object_new (TYPE_ARIO_STOREDPLAYLISTS,
                                         "ui-manager", mgr,
-                                        "action-group", group,
                                         "mpd", mpd,
                                         NULL);
 
@@ -386,10 +370,10 @@ ario_storedplaylists_new (GtkUIManager *mgr,
 
         gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), storedplaylists->priv->songs);
 
-        gtk_action_group_add_actions (storedplaylists->priv->actiongroup,
+        gtk_action_group_add_actions (group,
                                       ario_storedplaylists_actions,
                                       ario_storedplaylists_n_actions, storedplaylists);
-        gtk_action_group_add_actions (storedplaylists->priv->actiongroup,
+        gtk_action_group_add_actions (group,
                                       ario_storedplaylists_songs_actions,
                                       ario_storedplaylists_n_songs_actions, storedplaylists->priv->songs);
 

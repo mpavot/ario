@@ -70,7 +70,6 @@ struct ArioSearchPrivate
 
         ArioMpd *mpd;
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 
         GSList *search_constraints;
         GtkListStore *list_store;
@@ -97,8 +96,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 static const GtkTargetEntry songs_targets  [] = {
@@ -155,13 +153,6 @@ ario_search_class_init (ArioSearchClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_type_class_add_private (klass, sizeof (ArioSearchPrivate));
 }
@@ -282,9 +273,6 @@ ario_search_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 search->priv->ui_manager = g_value_get_object (value);
                 break;
-        case PROP_ACTION_GROUP:
-                search->priv->actiongroup = g_value_get_object (value);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -307,9 +295,6 @@ ario_search_get_property (GObject *object,
         case PROP_UI_MANAGER:
                 g_value_set_object (value, search->priv->ui_manager);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, search->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -327,7 +312,6 @@ ario_search_new (GtkUIManager *mgr,
 
         search = g_object_new (TYPE_ARIO_SEARCH,
                                "ui-manager", mgr,
-                               "action-group", group,
                                "mpd", mpd,
                                NULL);
 
@@ -348,7 +332,7 @@ ario_search_new (GtkUIManager *mgr,
                             scrolledwindow_searchs,
                             TRUE, TRUE, 0);
 
-        gtk_action_group_add_actions (search->priv->actiongroup,
+        gtk_action_group_add_actions (group,
                                       ario_search_actions,
                                       ario_search_n_actions, search->priv->searchs);
 

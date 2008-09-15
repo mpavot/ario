@@ -114,7 +114,6 @@ struct ArioPlaylistPrivate
         gint drag_start_y;
 
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 
         int indice;
 };
@@ -144,8 +143,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 enum
@@ -232,13 +230,6 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioPlaylistPrivate));
@@ -504,13 +495,6 @@ ario_playlist_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 playlist->priv->ui_manager = g_value_get_object (value);
                 break;
-                break;
-        case PROP_ACTION_GROUP:
-                playlist->priv->actiongroup = g_value_get_object (value);
-                gtk_action_group_add_actions (playlist->priv->actiongroup,
-                                              ario_playlist_actions,
-                                              ario_playlist_n_actions, playlist);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -532,9 +516,6 @@ ario_playlist_get_property (GObject *object,
                 break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, playlist->priv->ui_manager);
-                break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, playlist->priv->actiongroup);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -765,11 +746,14 @@ ario_playlist_new (GtkUIManager *mgr,
 
         instance = g_object_new (TYPE_ARIO_PLAYLIST,
                                  "ui-manager", mgr,
-                                 "action-group", group,
                                  "mpd", mpd,
                                  NULL);
 
         g_return_val_if_fail (instance->priv != NULL, NULL);
+
+        gtk_action_group_add_actions (group,
+                                      ario_playlist_actions,
+                                      ario_playlist_n_actions, instance);
 
         return GTK_WIDGET (instance);
 }

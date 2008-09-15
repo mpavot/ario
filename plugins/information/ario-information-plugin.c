@@ -52,28 +52,21 @@ impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
         GtkUIManager *uimanager;
-        GtkActionGroup *actiongroup;
         ArioMpd *mpd;
         ArioInformationPlugin *pi = ARIO_INFORMATION_PLUGIN (plugin);
-        ArioSourceManager *sourcemanager;
         g_object_get (shell,
                       "ui-manager", &uimanager,
-                      "action-group", &actiongroup,
                       "mpd", &mpd, NULL);
 
         pi->priv->source = ario_information_new (uimanager,
-                                                 actiongroup,
                                                  mpd);
         g_return_if_fail (IS_ARIO_INFORMATION (pi->priv->source));
 
         g_object_unref (uimanager);
-        g_object_unref (actiongroup);
         g_object_unref (mpd);
 
-        sourcemanager = ARIO_SOURCEMANAGER (ario_shell_get_sourcemanager (shell));
-        ario_sourcemanager_append (sourcemanager,
-                                   ARIO_SOURCE (pi->priv->source));
-        ario_sourcemanager_reorder (sourcemanager);
+        ario_sourcemanager_append (ARIO_SOURCE (pi->priv->source));
+        ario_sourcemanager_reorder ();
 }
 
 static void
@@ -81,8 +74,7 @@ impl_deactivate (ArioPlugin *plugin,
                  ArioShell *shell)
 {
         ArioInformationPlugin *pi = ARIO_INFORMATION_PLUGIN (plugin);
-        ario_sourcemanager_remove (ARIO_SOURCEMANAGER (ario_shell_get_sourcemanager (shell)),
-                                   ARIO_SOURCE (pi->priv->source));
+        ario_sourcemanager_remove (ARIO_SOURCE (pi->priv->source));
 }
 
 static void

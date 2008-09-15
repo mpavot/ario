@@ -96,7 +96,6 @@ struct ArioFilesystemPrivate
 
         ArioMpd *mpd;
         GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
 };
 
 static GtkActionEntry ario_filesystem_actions [] =
@@ -134,8 +133,7 @@ enum
 {
         PROP_0,
         PROP_MPD,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
+        PROP_UI_MANAGER
 };
 
 enum
@@ -200,13 +198,6 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
                                                               "GtkUIManager",
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioFilesystemPrivate));
@@ -341,9 +332,6 @@ ario_filesystem_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 filesystem->priv->ui_manager = g_value_get_object (value);
                 break;
-        case PROP_ACTION_GROUP:
-                filesystem->priv->actiongroup = g_value_get_object (value);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -366,9 +354,6 @@ ario_filesystem_get_property (GObject *object,
         case PROP_UI_MANAGER:
                 g_value_set_object (value, filesystem->priv->ui_manager);
                 break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, filesystem->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -387,7 +372,6 @@ ario_filesystem_new (GtkUIManager *mgr,
 
         filesystem = g_object_new (TYPE_ARIO_FILESYSTEM,
                                    "ui-manager", mgr,
-                                   "action-group", group,
                                    "mpd", mpd,
                                    NULL);
 
@@ -407,10 +391,10 @@ ario_filesystem_new (GtkUIManager *mgr,
         gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), filesystem->priv->songs);
 
         if (!is_loaded) {
-                gtk_action_group_add_actions (filesystem->priv->actiongroup,
+                gtk_action_group_add_actions (group,
                                               ario_filesystem_actions,
                                               ario_filesystem_n_actions, filesystem);
-                gtk_action_group_add_actions (filesystem->priv->actiongroup,
+                gtk_action_group_add_actions (group,
                                               ario_filesystem_songs_actions,
                                               ario_filesystem_n_songs_actions, filesystem->priv->songs);
                 is_loaded = TRUE;
