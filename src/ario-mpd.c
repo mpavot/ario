@@ -713,7 +713,9 @@ ario_mpd_check_errors (ArioMpd *mpd)
         if  (mpd->priv->connection->error) {
                 ARIO_LOG_ERROR("%s", mpd->priv->connection->errorStr);
                 mpd_clearError (mpd->priv->connection);
-                ario_mpd_disconnect(mpd);
+                ario_mpd_disconnect (mpd);
+                /* Try to reconnect */
+                ario_mpd_connect (mpd);
         }
 }
 
