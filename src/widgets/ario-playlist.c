@@ -814,16 +814,16 @@ ario_playlist_move_rows (const int x, const int y)
         /* get drop location */
         gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (instance->priv->tree), x, y, &path, &drop_pos);
 
-        /* adjust position acording to drop after */
         if (path == NULL) {
                 pos = instance->priv->playlist_length;
         } else {
-                /* grab drop localtion */
                 indice = gtk_tree_path_get_indices (path);
                 pos = indice[0];
 
-                /* adjust position acording to drop after or for, also take last song in account */
-                if (drop_pos == GTK_TREE_VIEW_DROP_AFTER && pos < instance->priv->playlist_length - 1)
+                /* adjust position acording to drop after */
+                if ((drop_pos == GTK_TREE_VIEW_DROP_AFTER
+                     || drop_pos == GTK_TREE_VIEW_DROP_INTO_OR_AFTER)
+                    && pos < instance->priv->playlist_length - 1)
                         ++pos;
 
                 gtk_tree_path_free (path);
@@ -886,6 +886,11 @@ ario_playlist_add_songs (const GSList *songs,
                         /* grab drop localtion */
                         indice = gtk_tree_path_get_indices (path);
                         drop = indice[0];
+                        /* adjust position */
+                        if ((pos == GTK_TREE_VIEW_DROP_BEFORE
+                            || pos == GTK_TREE_VIEW_DROP_INTO_OR_BEFORE)
+                            && drop > 0)
+                                --drop;
                         gtk_tree_path_free (path);
                 } else {
                         move = FALSE;
