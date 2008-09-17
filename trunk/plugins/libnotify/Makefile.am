@@ -9,8 +9,6 @@ libnotify_la_SOURCES = \
 
 libnotify_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
-libnotify_la_LIBADD =  $(NOTIFY_LIBS)
-
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	$(DEPS_CFLAGS)   				\

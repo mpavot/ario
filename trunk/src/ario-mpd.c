@@ -998,7 +998,7 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
-        mpd_InfoEntity *entity = NULL;
+        mpd_InfoEntity *entity;
 
         /* check if there is a connection */
         if (!mpd->priv->connection)
@@ -1016,6 +1016,32 @@ ario_mpd_get_playlist_changes (ArioMpd *mpd,
         mpd_finishCommand (mpd->priv->connection);
 
         return songs;
+}
+
+ArioMpdSong *
+ario_mpd_get_playlist_info (ArioMpd *mpd,
+                            int song_pos)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioMpdSong *song = NULL;
+        mpd_InfoEntity *entity;
+
+        /* check if there is a connection */
+        if (!mpd->priv->connection)
+                return NULL;
+
+        mpd_sendPlaylistInfoCommand (mpd->priv->connection, song_pos);
+
+        entity = mpd_getNextInfoEntity (mpd->priv->connection);
+        mpd_finishCommand (mpd->priv->connection);
+
+        if (entity) {
+                song = entity->info.song;
+                entity->info.song = NULL;
+                mpd_freeInfoEntity (entity);
+        }
+
+        return song;
 }
 
 void

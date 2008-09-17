@@ -128,6 +128,8 @@ GSList *                ario_mpd_get_playlists                          (ArioMpd
 
 GSList *                ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
                                                                          int playlist_id);
+ArioMpdSong *           ario_mpd_get_playlist_info                      (ArioMpd *mpd,
+                                                                         int song_pos);
 char *                  ario_mpd_get_current_title                      (ArioMpd *mpd);
 
 char *                  ario_mpd_get_current_name                       (ArioMpd *mpd);
