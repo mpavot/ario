@@ -146,7 +146,7 @@ enum
         PROP_ACTION_GROUP
 };
 
-static GtkActionEntry ario_shell_actions [] =
+static GtkActionEntry shell_actions [] =
 {
         { "File", NULL, N_("_File") },
         { "Edit", NULL, N_("_Edit") },
@@ -191,9 +191,8 @@ static GtkActionEntry ario_shell_actions [] =
                 NULL,
                 G_CALLBACK (ario_shell_cmd_translate) },
 };
-static guint ario_shell_n_actions = G_N_ELEMENTS (ario_shell_actions);
 
-static GtkToggleActionEntry ario_shell_toggle [] =
+static GtkToggleActionEntry shell_toggle [] =
 {
         { "ViewStatusbar", NULL, N_("S_tatusbar"), NULL,
                 NULL,
@@ -205,7 +204,6 @@ static GtkToggleActionEntry ario_shell_toggle [] =
                 NULL,
                 G_CALLBACK (ario_shell_view_playlist_changed_cb), TRUE }
 };
-static guint ario_shell_n_toggle = G_N_ELEMENTS (ario_shell_toggle);
 
 #define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL, ArioShellPrivate))
 G_DEFINE_TYPE (ArioShell, ario_shell, G_TYPE_OBJECT)
@@ -338,11 +336,11 @@ ArioShell *
 ario_shell_new (void)
 {
         ARIO_LOG_FUNCTION_START
-        ArioShell *s;
+        ArioShell *shell;
 
-        s = g_object_new (TYPE_ARIO_SHELL, NULL);
+        shell = g_object_new (TYPE_ARIO_SHELL, NULL);
 
-        return s;
+        return g_object_new (TYPE_ARIO_SHELL, NULL);
 }
 
 static void
@@ -410,12 +408,11 @@ ario_shell_construct (ArioShell *shell,
                                              NULL, NULL);
 #endif
         gtk_action_group_add_actions (shell->priv->actiongroup,
-                                      ario_shell_actions,
-                                      ario_shell_n_actions, shell);
+                                      shell_actions, G_N_ELEMENTS (shell_actions),
+                                      shell);
 
         gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
-                                             ario_shell_toggle,
-                                             ario_shell_n_toggle,
+                                             shell_toggle, G_N_ELEMENTS (shell_toggle),
                                              shell);
         gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
                                             shell->priv->actiongroup, 0);

@@ -36,7 +36,7 @@
 #include <gcrypt.h>
 #endif
 
-static char *config_dir = NULL;
+#define MAX_COVERS_IN_DRAG 3
 
 char *
 ario_util_format_time (const int time)
@@ -111,16 +111,21 @@ gchar *
 ario_util_format_track (const gchar *track)
 {
         ARIO_LOG_FUNCTION_START
-        gchar **splited_track;
+        gchar *slash, *tmp;
         gchar *res;
 
         if (!track)
                 return NULL;
 
         /* Some tracks are x/y, we only want to display x */
-        splited_track = g_strsplit (track, "/", 0);
-        res = g_strdup_printf ("%02i", atoi (splited_track[0]));
-        g_strfreev (splited_track);
+        slash = g_strrstr (track, "/"); 
+        if (slash) {
+                tmp = g_strndup (track, slash - track);
+                res = g_strdup_printf ("%02i", atoi (tmp));
+                g_free (tmp);
+        } else {
+                res = g_strdup_printf ("%02i", atoi (track));
+        }
         return res;
 }
 
@@ -128,45 +133,35 @@ gchar *
 ario_util_format_title (const ArioMpdSong *mpd_song)
 {
         ARIO_LOG_FUNCTION_START
-        gchar **splited_titles;
-        gchar **splited_title;
-        gchar **next_splited_title;
-        gchar **splited_filenames;
-        gchar *res;
+        gchar *dot;
+        gchar *slash;
+        gchar *res = NULL;
 
         if (!mpd_song)
-                return g_strdup (ARIO_MPD_UNKNOWN);
+                res = g_strdup (ARIO_MPD_UNKNOWN);
         if (mpd_song->title) {
-                return g_strdup(mpd_song->title);
+                res = g_strdup (mpd_song->title);
         } else if (mpd_song->name) {
-                return g_strdup(mpd_song->name);
+                res = g_strdup (mpd_song->name);
         } else {
                 /* Original format is : "path/to/filename.extension" or http://path/to/address:port
                  * We only want to display filename or http address */
                 if (!g_ascii_strncasecmp (mpd_song->file, "http://", 7)) {
-                        return g_strdup (mpd_song->file);
+                        res = g_strdup (mpd_song->file);
                 } else {
-                        splited_titles = g_strsplit (mpd_song->file, "/", -1);
-
-                        splited_title = splited_titles;
-                        next_splited_title = splited_title + 1;
-                        while  (*next_splited_title) {
-                                splited_title = next_splited_title;
-                                next_splited_title = splited_title + 1;
-                        }
-
-                        if (*splited_title) {
-                                splited_filenames = g_strsplit (*splited_title, ".", 2);
-                                res = g_strdup (*splited_filenames);
-                                g_strfreev (splited_filenames);
+                        slash = g_strrstr (mpd_song->file, "/"); 
+                        if (slash) {
+                                dot = g_strrstr (slash+1, ".");
+                                if (dot)
+                                        res = g_strndup (slash+1, dot - slash - 1);
+                                else
+                                        res = g_strdup (slash+1);
                         } else {
-                                res = g_strdup (ARIO_MPD_UNKNOWN);
+                                res = g_strdup (mpd_song->file);
                         }
-
-                        g_strfreev (splited_titles);
-                        return res;
                 }
         }
+        return res;
 }
 
 static GtkIconFactory *factory = NULL;
@@ -217,21 +212,13 @@ ario_util_has_stock_icons (const char *stock_id)
         return (gtk_icon_factory_lookup_default (stock_id) != NULL);
 }
 
-gint
-ario_util_abs (const gint a)
-{
-        ARIO_LOG_FUNCTION_START
-        if (a > 0)
-                return a;
-        else
-                return -a;
-}
-
 const char *
 ario_util_config_dir (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (config_dir == NULL) {
+        static char *config_dir = NULL;
+
+        if (!config_dir) {
                 config_dir = g_build_filename (g_get_user_config_dir (),
                                                "ario",
                                                NULL);
@@ -421,22 +408,6 @@ ario_util_load_uri (const char *uri)
         g_spawn_command_line_async (command, NULL);
         g_free (command);
 #endif                
-}
-
-int
-ario_util_min (const int a,
-               const int b)
-{
-        ARIO_LOG_FUNCTION_START
-        return (a > b ? b : a);
-}
-
-int
-ario_util_max (const int a,
-               const int b)
-{
-        ARIO_LOG_FUNCTION_START
-        return (a > b ? a : b);
 }
 
 char *
@@ -646,5 +617,26 @@ ario_util_convert_from_iso8859 (const char *string)
         g_free (tmp);
 
         return ret;
+}
+
+/* Inline methods */
+inline gint
+ario_util_abs (const gint a)
+{
+        return (a > 0 ? a : -a);
+}
+                
+inline gint
+ario_util_min (const gint a,
+               const gint b)
+{
+        return (a > b ? b : a);
+}
+
+inline gint
+ario_util_max (const gint a,
+               const gint b)
+{
+        return (a > b ? a : b);
 }
 
