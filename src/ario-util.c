@@ -619,24 +619,3 @@ ario_util_convert_from_iso8859 (const char *string)
         return ret;
 }
 
-/* Inline methods */
-inline gint
-ario_util_abs (const gint a)
-{
-        return (a > 0 ? a : -a);
-}
-                
-inline gint
-ario_util_min (const gint a,
-               const gint b)
-{
-        return (a > b ? b : a);
-}
-
-inline gint
-ario_util_max (const gint a,
-               const gint b)
-{
-        return (a > b ? a : b);
-}
-

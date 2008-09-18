@@ -39,8 +39,6 @@ void                    ario_util_init_stock_icons           (void);
 
 gboolean                ario_util_has_stock_icons            (const char *stock_id);
 
-gint                    ario_util_abs                        (const gint a) G_GNUC_CONST;
-
 const char*             ario_util_config_dir                 (void);
 
 gboolean                ario_util_uri_exists                 (const char *uri);
@@ -61,10 +59,7 @@ void                    ario_util_string_replace             (char **string,
                                                               const char *old,
                                                               const char *new);
 void                    ario_util_load_uri                   (const char *uri);
-int                     ario_util_min                        (const int a,
-                                                              const int b) G_GNUC_CONST;
-int                     ario_util_max                        (const int a,
-                                                              const int b) G_GNUC_CONST;
+
 char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;
 
 gchar *                 ario_util_md5                        (const char *string) G_GNUC_MALLOC;
@@ -75,3 +70,26 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf             (ArioMpd *mpd,
                                                               const GSList *criterias) G_GNUC_MALLOC;
 
 gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
+
+
+/* Inline methods */
+static inline gint
+ario_util_abs (const gint a)
+{
+        return (a > 0 ? a : -a);
+}
+                
+static inline gint
+ario_util_min (const gint a,
+               const gint b)
+{
+        return (a > b ? b : a);
+}
+
+static inline gint
+ario_util_max (const gint a,
+               const gint b)
+{
+        return (a > b ? a : b);
+}
+
