@@ -227,6 +227,11 @@ ario_volume_set_property (GObject *object,
         switch (prop_id) {
         case PROP_MPD:
                 volume->priv->mpd = g_value_get_object (value);
+
+                g_signal_connect_object (volume->priv->mpd,
+                                         "volume_changed",
+                                         G_CALLBACK (ario_volume_changed_cb),
+                                         volume, 0);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -268,11 +273,6 @@ ario_volume_new (ArioMpd *mpd)
         ArioVolume *volume;
 
         volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, "mpd", mpd, NULL));
-
-        g_signal_connect_object (mpd,
-                                 "volume_changed",
-                                 G_CALLBACK (ario_volume_changed_cb),
-                                 volume, 0);
 
         g_return_val_if_fail (volume->priv != NULL, NULL);
 

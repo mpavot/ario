@@ -393,10 +393,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
                               _("Toggle repeat on/off"), NULL);
 
         /* Buttons Container */
-        hbox = gtk_hbox_new (FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), header->priv->random_button, FALSE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), header->priv->repeat_button, FALSE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox2), hbox, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox2), header->priv->random_button, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox2), header->priv->repeat_button, FALSE, TRUE, 0);
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
 
         gtk_container_add (GTK_CONTAINER (alignment), hbox2);
