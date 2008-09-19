@@ -96,6 +96,7 @@ struct ArioFilesystemPrivate
         gint drag_start_y;
 
         GtkUIManager *ui_manager;
+        GtkActionGroup *actiongroup;
 };
 
 static GtkActionEntry ario_filesystem_actions [] =
@@ -127,7 +128,7 @@ static GtkActionEntry ario_filesystem_songs_actions [] =
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
-static guint ario_filesystem_n_songs_actions = G_N_ELEMENTS (ario_filesystem_songs_actions);
+static guint ario_filesystem_songs_n_actions = G_N_ELEMENTS (ario_filesystem_songs_actions);
 
 enum
 {
@@ -291,11 +292,21 @@ ario_filesystem_shutdown (ArioSource *source)
 {
         ArioFilesystem *filesystem = ARIO_FILESYSTEM (source);
         int pos;
+        int i;
 
         pos = gtk_paned_get_position (GTK_PANED (filesystem->priv->paned));
         if (pos > 0)
                 ario_conf_set_integer (PREF_FILSYSTEM_HPANED_SIZE,
                                        pos);
+
+        for (i = 0; i < ario_filesystem_n_actions; ++i) {
+                gtk_action_group_remove_action (filesystem->priv->actiongroup,
+                                                gtk_action_group_get_action (filesystem->priv->actiongroup, ario_filesystem_actions[i].name));
+        }
+        for (i = 0; i < ario_filesystem_songs_n_actions; ++i) {
+                gtk_action_group_remove_action (filesystem->priv->actiongroup,
+                                                gtk_action_group_get_action (filesystem->priv->actiongroup, ario_filesystem_songs_actions[i].name));
+        }
 }
 
 static void
@@ -343,7 +354,6 @@ ario_filesystem_new (GtkUIManager *mgr,
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;
         GtkWidget *scrolledwindow_songs;
-        static gboolean is_loaded = FALSE;
         ArioMpd *mpd = ario_mpd_get_instance ();
 
         filesystem = g_object_new (TYPE_ARIO_FILESYSTEM,
@@ -351,6 +361,7 @@ ario_filesystem_new (GtkUIManager *mgr,
                                    NULL);
 
         g_return_val_if_fail (filesystem->priv != NULL, NULL);
+        filesystem->priv->actiongroup = group;
 
         /* Signals to synchronize the filesystem with mpd */
         g_signal_connect_object (mpd,
@@ -374,15 +385,12 @@ ario_filesystem_new (GtkUIManager *mgr,
 
         gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), filesystem->priv->songs);
 
-        if (!is_loaded) {
-                gtk_action_group_add_actions (group,
-                                              ario_filesystem_actions,
-                                              ario_filesystem_n_actions, filesystem);
-                gtk_action_group_add_actions (group,
-                                              ario_filesystem_songs_actions,
-                                              ario_filesystem_n_songs_actions, filesystem->priv->songs);
-                is_loaded = TRUE;
-        }
+        gtk_action_group_add_actions (group,
+                                      ario_filesystem_actions,
+                                      ario_filesystem_n_actions, filesystem);
+        gtk_action_group_add_actions (group,
+                                      ario_filesystem_songs_actions,
+                                      ario_filesystem_songs_n_actions, filesystem->priv->songs);
 
         filesystem->priv->connected = ario_mpd_is_connected ();
 
