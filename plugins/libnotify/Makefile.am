@@ -1,13 +1,15 @@
 plugindir = $(PLUGINDIR)
-plugin_LTLIBRARIES = libnotify.la
+plugin_LTLIBRARIES = liblibnotify.la
 
-libnotify_la_SOURCES = \
+liblibnotify_la_SOURCES = \
 	ario-libnotify-plugin.c \
         ario-libnotify-plugin.h \
         ario-notifier-libnotify.c \
         ario-notifier-libnotify.h
 
-libnotify_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+liblibnotify_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+
+liblibnotify_la_LIBADD =  $(NOTIFY_LIBS) 
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\

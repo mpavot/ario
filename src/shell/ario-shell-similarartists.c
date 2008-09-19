@@ -29,6 +29,7 @@
 #include "widgets/ario-playlist.h"
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "ario-mpd.h"
 
 static gboolean ario_shell_similarartists_window_delete_cb (GtkWidget *window,
                                                             GdkEventAny *event,
@@ -286,8 +287,7 @@ ario_shell_similarartists_get_similar_artists (const gchar *artist)
 }
 
 static void
-ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists,
-                                       ArioMpd *mpd)
+ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarartists)
 {
         ARIO_LOG_FUNCTION_START
         GSList *similar_artists, *tmp;
@@ -310,7 +310,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                 similar_artist = tmp->data;
                 atomic_criteria.value = (gchar *) similar_artist->name;
 
-                songs = ario_mpd_get_songs (mpd, criteria, TRUE);
+                songs = ario_mpd_get_songs (criteria, TRUE);
                 if (songs)
                         songs_txt = g_strdup_printf (_("%d songs"), g_slist_length (songs));
                 else
@@ -339,7 +339,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
 }
 
 GtkWidget *
-ario_shell_similarartists_new (ArioMpd *mpd)
+ario_shell_similarartists_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellSimilarartists *shell_similarartists;
@@ -349,7 +349,7 @@ ario_shell_similarartists_new (ArioMpd *mpd)
         GtkCellRenderer *renderer;
         gchar *artist;
 
-        artist = ario_mpd_get_current_artist (mpd);
+        artist = ario_mpd_get_current_artist ();
 
         if (!artist)
                 return NULL;
@@ -414,7 +414,7 @@ ario_shell_similarartists_new (ArioMpd *mpd)
                 gtk_main_iteration ();
 
         shell_similarartists->priv->artist = artist;
-        ario_shell_similarartists_get_artists (shell_similarartists, mpd);
+        ario_shell_similarartists_get_artists (shell_similarartists);
         g_object_unref (G_OBJECT (xml));
 
         return GTK_WIDGET (shell_similarartists);
@@ -530,8 +530,7 @@ ario_shell_similarartists_addall_cb (GtkButton *button,
 }
 
 void
-ario_shell_similarartists_add_similar_to_playlist (ArioMpd *mpd,
-                                                   const gchar *artist)
+ario_shell_similarartists_add_similar_to_playlist (const gchar *artist)
 {
         ARIO_LOG_FUNCTION_START
         ArioSimilarArtist *similar_artist;

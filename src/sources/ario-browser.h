@@ -21,7 +21,6 @@
 #define __ARIO_BROWSER_H
 
 #include <gtk/gtkhbox.h>
-#include "ario-mpd.h"
 #include "sources/ario-source.h"
 
 #define MAX_TREE_NB 5
@@ -52,8 +51,7 @@ typedef struct
 GType                   ario_browser_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_browser_new        (GtkUIManager *mgr,
-                                                 GtkActionGroup *group,
-                                                 ArioMpd *mpd);
+                                                 GtkActionGroup *group);
 
 G_END_DECLS
 

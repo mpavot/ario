@@ -26,31 +26,18 @@
 #include "covers/ario-cover-manager.h"
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "ario-mpd.h"
 #include "ario-cover.h"
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 
 static void ario_cover_handler_finalize (GObject *object);
-static void ario_cover_handler_set_property (GObject *object,
-                                             guint prop_id,
-                                             const GValue *value,
-                                             GParamSpec *pspec);
-static void ario_cover_handler_get_property (GObject *object,
-                                             guint prop_id,
-                                             GValue *value,
-                                             GParamSpec *pspec);
 static void ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                             gboolean should_get);
 static void ario_cover_handler_album_changed_cb (ArioMpd *mpd,
                                                  ArioCoverHandler *cover_handler);
 static void ario_cover_handler_state_changed_cb (ArioMpd *mpd,
                                                  ArioCoverHandler *cover_handler);
-
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
 
 enum
 {
@@ -62,8 +49,6 @@ static guint ario_cover_handler_signals[LAST_SIGNAL] = { 0 };
 
 struct ArioCoverHandlerPrivate
 {
-        ArioMpd *mpd;
-
         GThread *thread;
         GAsyncQueue *queue;
 
@@ -92,16 +77,7 @@ ario_cover_handler_class_init (ArioCoverHandlerClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_cover_handler_finalize;
-        object_class->set_property = ario_cover_handler_set_property;
-        object_class->get_property = ario_cover_handler_get_property;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
         ario_cover_handler_signals[COVER_CHANGED] =
                 g_signal_new ("cover_changed",
                               G_OBJECT_CLASS_TYPE (object_class),
@@ -124,18 +100,27 @@ ario_cover_handler_init (ArioCoverHandler *cover_handler)
 }
 
 ArioCoverHandler *
-ario_cover_handler_new (ArioMpd *mpd)
+ario_cover_handler_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioCoverHandler *cover_handler;
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         cover_handler = g_object_new (TYPE_ARIO_COVER_HANDLER,
-                                      "mpd", mpd,
                                       NULL);
 
         g_return_val_if_fail (cover_handler->priv != NULL, NULL);
 
         instance = cover_handler;
+
+        g_signal_connect_object (mpd,
+                                 "album_changed",
+                                 G_CALLBACK (ario_cover_handler_album_changed_cb),
+                                 cover_handler, 0);
+        g_signal_connect_object (mpd,
+                                 "state_changed",
+                                 G_CALLBACK (ario_cover_handler_state_changed_cb),
+                                 cover_handler, 0);
 
         return cover_handler;
 }
@@ -166,52 +151,6 @@ ario_cover_handler_finalize (GObject *object)
         g_free (cover_handler->priv->cover_path);
 
         G_OBJECT_CLASS (ario_cover_handler_parent_class)->finalize (object);
-}
-
-static void
-ario_cover_handler_set_property (GObject *object,
-                                 guint prop_id,
-                                 const GValue *value,
-                                 GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioCoverHandler *cover_handler = ARIO_COVER_HANDLER (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                cover_handler->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (cover_handler->priv->mpd,
-                                         "album_changed",
-                                         G_CALLBACK (ario_cover_handler_album_changed_cb),
-                                         cover_handler, 0);
-                g_signal_connect_object (cover_handler->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_cover_handler_state_changed_cb),
-                                         cover_handler, 0);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_cover_handler_get_property (GObject *object,
-                                 guint prop_id,
-                                 GValue *value,
-                                 GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioCoverHandler *cover_handler = ARIO_COVER_HANDLER (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, cover_handler->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
 }
 
 static gboolean
@@ -294,8 +233,8 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
         ARIO_LOG_FUNCTION_START
         gchar *large_cover_path;
         ArioCoverHandlerData *data;
-        gchar *artist = ario_mpd_get_current_artist (cover_handler->priv->mpd);
-        gchar *album = ario_mpd_get_current_album (cover_handler->priv->mpd);
+        gchar *artist = ario_mpd_get_current_artist ();
+        gchar *album = ario_mpd_get_current_album ();
 
         if (!artist)
                 artist = ARIO_MPD_UNKNOWN;
@@ -317,7 +256,7 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                 cover_handler->priv->cover_path = NULL;
         }
 
-        switch (ario_mpd_get_current_state (cover_handler->priv->mpd)) {
+        switch (ario_mpd_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 cover_handler->priv->cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
@@ -336,7 +275,7 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                 data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
                                 data->artist = g_strdup (artist);
                                 data->album = g_strdup (album);
-                                data->path = g_path_get_dirname (ario_mpd_get_current_song_path (cover_handler->priv->mpd));
+                                data->path = g_path_get_dirname (ario_mpd_get_current_song_path ());
                                 g_async_queue_push (cover_handler->priv->queue, data);
 
                                 if (!cover_handler->priv->thread) {

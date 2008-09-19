@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 #include <glib.h>
 
 #include <gmodule.h>
-#include "ario-mpd.h"
 #include "plugins/ario-plugin.h"
 
 #define ARIO_TYPE_AUDIOSCROBBLER                (ario_audioscrobbler_get_type ())
@@ -56,12 +55,12 @@ typedef struct
 } ArioAudioscrobblerClass;
 
 
-GType                   ario_audioscrobbler_get_type (void) G_GNUC_CONST;
+GType                   ario_audioscrobbler_get_type            (void) G_GNUC_CONST;
 
-ArioAudioscrobbler*     ario_audioscrobbler_new (ArioMpd *mpd);
+ArioAudioscrobbler*     ario_audioscrobbler_new                 (void);
 
-GtkWidget *             ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
-                                                               ArioPlugin *plugin);
+GtkWidget *             ario_audioscrobbler_get_config_widget   (ArioAudioscrobbler *audioscrobbler,
+                                                                 ArioPlugin *plugin);
 
 G_END_DECLS
 

@@ -33,7 +33,7 @@
 
 static void ario_mpd_finalize (GObject *object);
 static void ario_mpd_set_default (ArioMpd *mpd);
-void ario_mpd_check_errors (ArioMpd *mpd);
+void ario_mpd_check_errors (void);
 static void ario_mpd_set_property (GObject *object,
                                    guint prop_id,
                                    const GValue *value,
@@ -42,7 +42,7 @@ static void ario_mpd_get_property (GObject *object,
                                    guint prop_id,
                                    GValue *value,
                                    GParamSpec *pspec);
-void ario_mpd_launch_timeout (ArioMpd *mpd);
+void ario_mpd_launch_timeout (void);
 
 typedef enum
 {
@@ -161,6 +161,8 @@ char * ArioMpdItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
 
 #define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
 G_DEFINE_TYPE (ArioMpd, ario_mpd, G_TYPE_OBJECT)
+
+static ArioMpd *instance = NULL;
 
 static void
 ario_mpd_class_init (ArioMpdClass *klass)
@@ -535,13 +537,11 @@ ArioMpd *
 ario_mpd_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START
-        static ArioMpd *mpd = NULL;
-
-        if (!mpd) {
-                mpd = g_object_new (TYPE_ARIO_MPD, NULL);
-                g_return_val_if_fail (mpd->priv != NULL, NULL);
+        if (!instance) {
+                instance = g_object_new (TYPE_ARIO_MPD, NULL);
+                g_return_val_if_fail (instance->priv != NULL, NULL);
         }
-        return mpd;
+        return instance;
 }
 
 static gboolean
@@ -609,7 +609,7 @@ ario_mpd_connect_thread (ArioMpd *mpd)
                 port = 6600;
 
         if (!ario_mpd_connect_to (mpd, hostname, port, timeout)) {
-                ario_mpd_disconnect (mpd);
+                ario_mpd_disconnect ();
         }
 
         g_free (hostname);
@@ -620,7 +620,7 @@ ario_mpd_connect_thread (ArioMpd *mpd)
 }
 
 gboolean
-ario_mpd_connect (ArioMpd *mpd)
+ario_mpd_connect (void)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *win, *vbox,*label, *bar;
@@ -628,13 +628,13 @@ ario_mpd_connect (ArioMpd *mpd)
         GtkWidget *dialog;
 
         /* check if there is a connection */
-        if (mpd->priv->connection || mpd->priv->connecting)
+        if (instance->priv->connection || instance->priv->connecting)
                 return FALSE;
 
-        mpd->priv->connecting = TRUE;
+        instance->priv->connecting = TRUE;
 
         thread = g_thread_create ((GThreadFunc) ario_mpd_connect_thread,
-                                  mpd, TRUE, NULL);
+                                  instance, TRUE, NULL);
 
         win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
         gtk_window_set_modal (GTK_WINDOW (win), TRUE);
@@ -651,7 +651,7 @@ ario_mpd_connect (ArioMpd *mpd)
         gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
         gtk_widget_show_all (win);
 
-        while (mpd->priv->connecting) {
+        while (instance->priv->connecting) {
                 gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
                 while (gtk_events_pending ())
                         gtk_main_iteration ();
@@ -660,14 +660,14 @@ ario_mpd_connect (ArioMpd *mpd)
 
         g_thread_join (thread);
 
-        if (!ario_mpd_is_connected (mpd)) {
+        if (!ario_mpd_is_connected ()) {
                 dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, 
                                                  GTK_MESSAGE_ERROR,
                                                  GTK_BUTTONS_OK,
                                                  _("Impossible to connect to mpd. Check the connection options."));
                 if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_NONE)
                         gtk_widget_destroy (dialog);
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[STATE_CHANGED], 0);
         }
 
         gtk_widget_hide (win);
@@ -677,59 +677,58 @@ ario_mpd_connect (ArioMpd *mpd)
 }
 
 void
-ario_mpd_disconnect (ArioMpd *mpd)
+ario_mpd_disconnect (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_closeConnection (mpd->priv->connection);
-        mpd->priv->connection = NULL;
+        mpd_closeConnection (instance->priv->connection);
+        instance->priv->connection = NULL;
 
-        ario_mpd_update_status (mpd);
+        ario_mpd_update_status ();
 }
 
 void
-ario_mpd_update_db (ArioMpd *mpd)
+ario_mpd_update_db (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendUpdateCommand (mpd->priv->connection, "");
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendUpdateCommand (instance->priv->connection, "");
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_check_errors (ArioMpd *mpd)
+ario_mpd_check_errors (void)
 {
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        if  (mpd->priv->connection->error) {
-                ARIO_LOG_ERROR("%s", mpd->priv->connection->errorStr);
-                mpd_clearError (mpd->priv->connection);
-                ario_mpd_disconnect (mpd);
+        if  (instance->priv->connection->error) {
+                ARIO_LOG_ERROR("%s", instance->priv->connection->errorStr);
+                mpd_clearError (instance->priv->connection);
+                ario_mpd_disconnect ();
                 /* Try to reconnect */
-                ario_mpd_connect (mpd);
+                ario_mpd_connect ();
         }
 }
 
 gboolean
-ario_mpd_is_connected (ArioMpd *mpd)
+ario_mpd_is_connected (void)
 {
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START
-        return (mpd->priv->connection != NULL);
+        return (instance->priv->connection != NULL);
 }
 
 GSList *
-ario_mpd_list_tags (ArioMpd *mpd,
-                    const ArioMpdTag tag,
+ario_mpd_list_tags (const ArioMpdTag tag,
                     const ArioMpdCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
@@ -739,26 +738,26 @@ ario_mpd_list_tags (ArioMpd *mpd,
         ArioMpdAtomicCriteria *atomic_criteria;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_startFieldSearch (mpd->priv->connection, tag);
+        mpd_startFieldSearch (instance->priv->connection, tag);
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                 atomic_criteria = tmp->data;
-                if (mpd->priv->support_empty_tags
+                if (instance->priv->support_empty_tags
                     && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
-                        mpd_addConstraintSearch (mpd->priv->connection, atomic_criteria->tag, "");
+                        mpd_addConstraintSearch (instance->priv->connection, atomic_criteria->tag, "");
                 else
-                        mpd_addConstraintSearch (mpd->priv->connection, atomic_criteria->tag, atomic_criteria->value);
+                        mpd_addConstraintSearch (instance->priv->connection, atomic_criteria->tag, atomic_criteria->value);
         }
-        mpd_commitSearch (mpd->priv->connection);
+        mpd_commitSearch (instance->priv->connection);
 
-        while ((value = mpd_getNextTag (mpd->priv->connection, tag))) {
+        while ((value = mpd_getNextTag (instance->priv->connection, tag))) {
                 if (*value)
                         values = g_slist_append (values, value);
                 else {
                         values = g_slist_append (values, g_strdup (ARIO_MPD_UNKNOWN));
-                        mpd->priv->support_empty_tags = TRUE;
+                        instance->priv->support_empty_tags = TRUE;
                 }
         }
 
@@ -766,22 +765,22 @@ ario_mpd_list_tags (ArioMpd *mpd,
 }
 
 GSList *
-ario_mpd_get_artists (ArioMpd *mpd)
+ario_mpd_get_artists (void)
 {
         ARIO_LOG_FUNCTION_START
         GSList *artists = NULL;
         gchar *artist_char;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_sendListCommand (mpd->priv->connection, MPD_TABLE_ARTIST, NULL);
+        mpd_sendListCommand (instance->priv->connection, MPD_TABLE_ARTIST, NULL);
 
-        while ((artist_char = mpd_getNextArtist (mpd->priv->connection)))
+        while ((artist_char = mpd_getNextArtist (instance->priv->connection)))
                 artists = g_slist_append (artists, artist_char);
 
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return artists;
 }
@@ -803,8 +802,7 @@ ario_mpd_album_is_present (const GSList *albums,
 }
 
 GSList *
-ario_mpd_get_albums (ArioMpd *mpd,
-                     const ArioMpdCriteria *criteria)
+ario_mpd_get_albums (const ArioMpdCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
         GSList *albums = NULL;
@@ -814,30 +812,30 @@ ario_mpd_get_albums (ArioMpd *mpd,
         ArioMpdAtomicCriteria *atomic_criteria;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
         if (!criteria) {
-                mpd_sendListallInfoCommand(mpd->priv->connection, "/");
+                mpd_sendListallInfoCommand(instance->priv->connection, "/");
         } else {
-                mpd_startSearch (mpd->priv->connection, TRUE);
+                mpd_startSearch (instance->priv->connection, TRUE);
                 for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                         atomic_criteria = tmp->data;
 
-                        if (mpd->priv->support_empty_tags
+                        if (instance->priv->support_empty_tags
                             && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
-                                mpd_addConstraintSearch (mpd->priv->connection,
+                                mpd_addConstraintSearch (instance->priv->connection,
                                                          atomic_criteria->tag,
                                                          "");
                         else
-                                mpd_addConstraintSearch (mpd->priv->connection,
+                                mpd_addConstraintSearch (instance->priv->connection,
                                                          atomic_criteria->tag,
                                                          atomic_criteria->value);
                 }
-                mpd_commitSearch (mpd->priv->connection);
+                mpd_commitSearch (instance->priv->connection);
         }
 
-        while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
+        while ((entity = mpd_getNextInfoEntity (instance->priv->connection))) {
                 if (entity->type != MPD_INFO_ENTITY_TYPE_SONG) {
                         mpd_freeInfoEntity (entity);
                         continue;
@@ -887,14 +885,13 @@ ario_mpd_get_albums (ArioMpd *mpd,
 
                 mpd_freeInfoEntity (entity);
         }
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return albums;
 }
 
 GSList *
-ario_mpd_get_songs (ArioMpd *mpd,
-                    const ArioMpdCriteria *criteria,
+ario_mpd_get_songs (const ArioMpdCriteria *criteria,
                     const gboolean exact)
 {
         ARIO_LOG_FUNCTION_START
@@ -905,7 +902,7 @@ ario_mpd_get_songs (ArioMpd *mpd,
         ArioMpdAtomicCriteria *atomic_criteria;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
@@ -915,125 +912,122 @@ ario_mpd_get_songs (ArioMpd *mpd,
                         is_album_unknown = TRUE;
         }
 
-        mpd_startSearch (mpd->priv->connection, exact);
+        mpd_startSearch (instance->priv->connection, exact);
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                 atomic_criteria = tmp->data;
-                if (mpd->priv->support_empty_tags
+                if (instance->priv->support_empty_tags
                     && !g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
-                        mpd_addConstraintSearch (mpd->priv->connection,
+                        mpd_addConstraintSearch (instance->priv->connection,
                                                  atomic_criteria->tag,
                                                  "");
                 else if (atomic_criteria->tag != MPD_TAG_ITEM_ALBUM
                     || g_utf8_collate (atomic_criteria->value, ARIO_MPD_UNKNOWN))
-                        mpd_addConstraintSearch (mpd->priv->connection,
+                        mpd_addConstraintSearch (instance->priv->connection,
                                                  atomic_criteria->tag,
                                                  atomic_criteria->value);
         }
-        mpd_commitSearch (mpd->priv->connection);
+        mpd_commitSearch (instance->priv->connection);
 
-        while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
+        while ((entity = mpd_getNextInfoEntity (instance->priv->connection))) {
                 if (entity->type == MPD_INFO_ENTITY_TYPE_SONG && entity->info.song) {
-                        if (mpd->priv->support_empty_tags || !is_album_unknown || !entity->info.song->album) {
+                        if (instance->priv->support_empty_tags || !is_album_unknown || !entity->info.song->album) {
                                 songs = g_slist_append (songs, entity->info.song);
                                 entity->info.song = NULL;
                         }
                 }
                 mpd_freeInfoEntity (entity);
         }
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return songs;
 }
 
 GSList *
-ario_mpd_get_songs_from_playlist (ArioMpd *mpd,
-                                  char *playlist)
+ario_mpd_get_songs_from_playlist (char *playlist)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
         mpd_InfoEntity *ent = NULL;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_sendListPlaylistInfoCommand(mpd->priv->connection, playlist);
-        while ((ent = mpd_getNextInfoEntity(mpd->priv->connection))) {
+        mpd_sendListPlaylistInfoCommand (instance->priv->connection, playlist);
+        while ((ent = mpd_getNextInfoEntity (instance->priv->connection))) {
                 songs = g_slist_append (songs, ent->info.song);
                 ent->info.song = NULL;
-                mpd_freeInfoEntity(ent);
+                mpd_freeInfoEntity (ent);
         }
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return songs;
 }
 
 GSList *
-ario_mpd_get_playlists (ArioMpd *mpd)
+ario_mpd_get_playlists (void)
 {
         ARIO_LOG_FUNCTION_START
         GSList *playlists = NULL;
         mpd_InfoEntity *ent = NULL;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_sendLsInfoCommand(mpd->priv->connection, "/");
+        mpd_sendLsInfoCommand(instance->priv->connection, "/");
 
-        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
+        while ((ent = mpd_getNextInfoEntity (instance->priv->connection))) {
                 if (ent->type == MPD_INFO_ENTITY_TYPE_PLAYLISTFILE) {
                         playlists = g_slist_append (playlists, g_strdup (ent->info.playlistFile->path));
                 }
                 mpd_freeInfoEntity (ent);
         }
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return playlists;
 }
 
 GSList *
-ario_mpd_get_playlist_changes (ArioMpd *mpd,
-                               int playlist_id)
+ario_mpd_get_playlist_changes (int playlist_id)
 {
         ARIO_LOG_FUNCTION_START
         GSList *songs = NULL;
         mpd_InfoEntity *entity;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_sendPlChangesCommand (mpd->priv->connection, playlist_id);
+        mpd_sendPlChangesCommand (instance->priv->connection, playlist_id);
 
-        while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
+        while ((entity = mpd_getNextInfoEntity (instance->priv->connection))) {
                 if (entity->info.song) {
                         songs = g_slist_append (songs, entity->info.song);
                         entity->info.song = NULL;
                 }
                 mpd_freeInfoEntity (entity);
         }
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return songs;
 }
 
 ArioMpdSong *
-ario_mpd_get_playlist_info (ArioMpd *mpd,
-                            int song_pos)
+ario_mpd_get_playlist_info (int song_pos)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdSong *song = NULL;
         mpd_InfoEntity *entity;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_sendPlaylistInfoCommand (mpd->priv->connection, song_pos);
+        mpd_sendPlaylistInfoCommand (instance->priv->connection, song_pos);
 
-        entity = mpd_getNextInfoEntity (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
+        entity = mpd_getNextInfoEntity (instance->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         if (entity) {
                 song = entity->info.song;
@@ -1074,348 +1068,347 @@ ario_mpd_set_default (ArioMpd *mpd)
 }
 
 gboolean
-ario_mpd_update_status (ArioMpd *mpd)
+ario_mpd_update_status (void)
 {
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START
 
-        if (mpd->priv->is_updating)
+        if (instance->priv->is_updating)
                 return TRUE;
-        mpd->priv->is_updating = TRUE;
-        mpd->priv->signals_to_emit = 0;
+        instance->priv->is_updating = TRUE;
+        instance->priv->signals_to_emit = 0;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection) {
-                ario_mpd_set_default (mpd);
+        if (!instance->priv->connection) {
+                ario_mpd_set_default (instance);
         } else {
-                if (mpd->priv->status)
-                        mpd_freeStatus (mpd->priv->status);
-                mpd_sendStatusCommand (mpd->priv->connection);
-                mpd->priv->status = mpd_getStatus (mpd->priv->connection);
+                if (instance->priv->status)
+                        mpd_freeStatus (instance->priv->status);
+                mpd_sendStatusCommand (instance->priv->connection);
+                instance->priv->status = mpd_getStatus (instance->priv->connection);
 
-                ario_mpd_check_errors(mpd);
+                ario_mpd_check_errors ();
 
-                if (mpd->priv->status) {
-                        if (mpd->priv->song_id != mpd->priv->status->songid)
-                                g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
+                if (instance->priv->status) {
+                        if (instance->priv->song_id != instance->priv->status->songid)
+                                g_object_set (G_OBJECT (instance), "song_id", instance->priv->status->songid, NULL);
 
-                        if (mpd->priv->state != mpd->priv->status->state)
-                                g_object_set (G_OBJECT (mpd), "state", mpd->priv->status->state, NULL);
+                        if (instance->priv->state != instance->priv->status->state)
+                                g_object_set (G_OBJECT (instance), "state", instance->priv->status->state, NULL);
 
-                        if (mpd->priv->volume != mpd->priv->status->volume)
-                                g_object_set (G_OBJECT (mpd), "volume", mpd->priv->status->volume, NULL);
+                        if (instance->priv->volume != instance->priv->status->volume)
+                                g_object_set (G_OBJECT (instance), "volume", instance->priv->status->volume, NULL);
 
-                        if (mpd->priv->elapsed != mpd->priv->status->elapsedTime)
-                                g_object_set (G_OBJECT (mpd), "elapsed", mpd->priv->status->elapsedTime, NULL);
+                        if (instance->priv->elapsed != instance->priv->status->elapsedTime)
+                                g_object_set (G_OBJECT (instance), "elapsed", instance->priv->status->elapsedTime, NULL);
 
-                        if (mpd->priv->playlist_id != (int) mpd->priv->status->playlist) {
-                                g_object_set (G_OBJECT (mpd), "song_id", mpd->priv->status->songid, NULL);
-                                g_object_set (G_OBJECT (mpd), "playlist_id", mpd->priv->status->playlist, NULL);
+                        if (instance->priv->playlist_id != (int) instance->priv->status->playlist) {
+                                g_object_set (G_OBJECT (instance), "song_id", instance->priv->status->songid, NULL);
+                                g_object_set (G_OBJECT (instance), "playlist_id", instance->priv->status->playlist, NULL);
                         }
 
-                        if (mpd->priv->random != (gboolean) mpd->priv->status->random)
-                                g_object_set (G_OBJECT (mpd), "random", mpd->priv->status->random, NULL);
+                        if (instance->priv->random != (gboolean) instance->priv->status->random)
+                                g_object_set (G_OBJECT (instance), "random", instance->priv->status->random, NULL);
 
-                        if (mpd->priv->repeat != (gboolean) mpd->priv->status->repeat)
-                                g_object_set (G_OBJECT (mpd), "repeat", mpd->priv->status->repeat, NULL);
+                        if (instance->priv->repeat != (gboolean) instance->priv->status->repeat)
+                                g_object_set (G_OBJECT (instance), "repeat", instance->priv->status->repeat, NULL);
 
-                        if (mpd->priv->updatingdb != mpd->priv->status->updatingDb)
-                                g_object_set (G_OBJECT (mpd), "updatingdb", mpd->priv->status->updatingDb, NULL);
+                        if (instance->priv->updatingdb != instance->priv->status->updatingDb)
+                                g_object_set (G_OBJECT (instance), "updatingdb", instance->priv->status->updatingDb, NULL);
                 }
         }
 
-        if (mpd->priv->signals_to_emit & SONG_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[SONG_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & ALBUM_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[ALBUM_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & STATE_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STATE_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & VOLUME_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[VOLUME_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & ELAPSED_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[ELAPSED_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & PLAYLIST_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[PLAYLIST_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & RANDOM_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[RANDOM_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & REPEAT_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[REPEAT_CHANGED], 0);
-        if (mpd->priv->signals_to_emit & UPDATINGDB_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[UPDATINGDB_CHANGED], 0);
+        if (instance->priv->signals_to_emit & SONG_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[SONG_CHANGED], 0);
+        if (instance->priv->signals_to_emit & ALBUM_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[ALBUM_CHANGED], 0);
+        if (instance->priv->signals_to_emit & STATE_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[STATE_CHANGED], 0);
+        if (instance->priv->signals_to_emit & VOLUME_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[VOLUME_CHANGED], 0);
+        if (instance->priv->signals_to_emit & ELAPSED_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[ELAPSED_CHANGED], 0);
+        if (instance->priv->signals_to_emit & PLAYLIST_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[PLAYLIST_CHANGED], 0);
+        if (instance->priv->signals_to_emit & RANDOM_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[RANDOM_CHANGED], 0);
+        if (instance->priv->signals_to_emit & REPEAT_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[REPEAT_CHANGED], 0);
+        if (instance->priv->signals_to_emit & UPDATINGDB_CHANGED_FLAG)
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[UPDATINGDB_CHANGED], 0);
 
-        mpd->priv->is_updating = FALSE;
+        instance->priv->is_updating = FALSE;
         return TRUE;
 }
 
 char *
-ario_mpd_get_current_title (ArioMpd *mpd)
+ario_mpd_get_current_title (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->ario_mpd_song)
-                return mpd->priv->ario_mpd_song->title;
+        if (instance->priv->ario_mpd_song)
+                return instance->priv->ario_mpd_song->title;
         else
                 return NULL;
 }
 
 char *
-ario_mpd_get_current_name (ArioMpd *mpd)
+ario_mpd_get_current_name (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->ario_mpd_song)
-                return mpd->priv->ario_mpd_song->name;
+        if (instance->priv->ario_mpd_song)
+                return instance->priv->ario_mpd_song->name;
         else
                 return NULL;
 }
 
 ArioMpdSong *
-ario_mpd_get_current_song (ArioMpd *mpd)
+ario_mpd_get_current_song (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->ario_mpd_song)
-                return mpd->priv->ario_mpd_song;
+        if (instance->priv->ario_mpd_song)
+                return instance->priv->ario_mpd_song;
         else
                 return NULL;
 }
 
 char *
-ario_mpd_get_current_artist (ArioMpd *mpd)
+ario_mpd_get_current_artist (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->ario_mpd_song)
-                return mpd->priv->ario_mpd_song->artist;
+        if (instance->priv->ario_mpd_song)
+                return instance->priv->ario_mpd_song->artist;
         else
                 return NULL;
 }
 
 char *
-ario_mpd_get_current_album (ArioMpd *mpd)
+ario_mpd_get_current_album (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->ario_mpd_song)
-                return mpd->priv->ario_mpd_song->album;
+        if (instance->priv->ario_mpd_song)
+                return instance->priv->ario_mpd_song->album;
         else
                 return NULL;
 }
 
 char *
-ario_mpd_get_current_song_path (ArioMpd *mpd)
+ario_mpd_get_current_song_path (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->ario_mpd_song)
-                return mpd->priv->ario_mpd_song->file;
+        if (instance->priv->ario_mpd_song)
+                return instance->priv->ario_mpd_song->file;
         else
                 return NULL;
 }
 
 int
-ario_mpd_get_current_song_id (ArioMpd *mpd)
+ario_mpd_get_current_song_id (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->song_id;
+        return instance->priv->song_id;
 }
 
 int
-ario_mpd_get_current_state (ArioMpd *mpd)
+ario_mpd_get_current_state (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->state;
+        return instance->priv->state;
 }
 
 int
-ario_mpd_get_current_elapsed (ArioMpd *mpd)
+ario_mpd_get_current_elapsed (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->elapsed;
+        return instance->priv->elapsed;
 }
 
 int
-ario_mpd_get_current_volume (ArioMpd *mpd)
+ario_mpd_get_current_volume (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->volume;
+        return instance->priv->volume;
 }
 
 int
-ario_mpd_get_current_total_time (ArioMpd *mpd)
+ario_mpd_get_current_total_time (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->total_time;
+        return instance->priv->total_time;
 }
 
 int
-ario_mpd_get_current_playlist_id (ArioMpd *mpd)
+ario_mpd_get_current_playlist_id (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->playlist_id;
+        return instance->priv->playlist_id;
 }
 
 int
-ario_mpd_get_current_playlist_length (ArioMpd *mpd)
+ario_mpd_get_current_playlist_length (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->playlist_length;
+        return instance->priv->playlist_length;
 }
 
 int
-ario_mpd_get_current_playlist_total_time (ArioMpd *mpd)
+ario_mpd_get_current_playlist_total_time (void)
 {
         ARIO_LOG_FUNCTION_START
         int total_time = 0;
         ArioMpdSong *song;
         mpd_InfoEntity *ent = NULL;
 
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return 0;
 
         // We go to MPD server for each call to this function but it is not a problem as it is
         // called only once for each playlist change (by status bar). I may change this implementation
         // if this function is called more than once for performance reasons.
-        mpd_sendPlaylistInfoCommand(mpd->priv->connection, -1);
-        while ((ent = mpd_getNextInfoEntity (mpd->priv->connection))) {
+        mpd_sendPlaylistInfoCommand(instance->priv->connection, -1);
+        while ((ent = mpd_getNextInfoEntity (instance->priv->connection))) {
                 song = ent->info.song;
                 if (song->time != MPD_SONG_NO_TIME)
                         total_time = total_time + song->time;
                 mpd_freeInfoEntity(ent);
         }
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return total_time;
 }
 
 int
-ario_mpd_get_crossfadetime (ArioMpd *mpd)
+ario_mpd_get_crossfadetime (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->status)
-                return mpd->priv->status->crossfade;
+        if (instance->priv->status)
+                return instance->priv->status->crossfade;
         else
                 return 0;
 }
 
 gboolean
-ario_mpd_get_current_random (ArioMpd *mpd)
+ario_mpd_get_current_random (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->random;
+        return instance->priv->random;
 }
 
 gboolean
-ario_mpd_get_current_repeat (ArioMpd *mpd)
+ario_mpd_get_current_repeat (void)
 {
         ARIO_LOG_FUNCTION_START
-        return mpd->priv->repeat;
+        return instance->priv->repeat;
 }
 
 gboolean
-ario_mpd_get_updating (ArioMpd *mpd)
+ario_mpd_get_updating (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->status)
-                return mpd->priv->updatingdb;
+        if (instance->priv->status)
+                return instance->priv->updatingdb;
         else
                 return FALSE;
 }
 
 unsigned long
-ario_mpd_get_last_update (ArioMpd *mpd)
+ario_mpd_get_last_update (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return 0;
 
-        if (mpd->priv->stats)
-                mpd_freeStats (mpd->priv->stats);
-        mpd_sendStatsCommand (mpd->priv->connection);
-        mpd->priv->stats = mpd_getStats (mpd->priv->connection);
+        if (instance->priv->stats)
+                mpd_freeStats (instance->priv->stats);
+        mpd_sendStatsCommand (instance->priv->connection);
+        instance->priv->stats = mpd_getStats (instance->priv->connection);
 
-        ario_mpd_check_errors(mpd);
+        ario_mpd_check_errors ();
 
-        if (mpd->priv->stats)
-                return mpd->priv->stats->dbUpdateTime;
+        if (instance->priv->stats)
+                return instance->priv->stats->dbUpdateTime;
         else
                 return 0;
 }
 
 gboolean
-ario_mpd_is_paused (ArioMpd *mpd)
+ario_mpd_is_paused (void)
 {
         ARIO_LOG_FUNCTION_START
-        return (mpd->priv->state == MPD_STATUS_STATE_PAUSE) || (mpd->priv->state == MPD_STATUS_STATE_STOP);
+        return (instance->priv->state == MPD_STATUS_STATE_PAUSE) || (instance->priv->state == MPD_STATUS_STATE_STOP);
 }
 
 void
-ario_mpd_do_next (ArioMpd *mpd)
+ario_mpd_do_next (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendNextCommand (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendNextCommand (instance->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_do_prev (ArioMpd *mpd)
+ario_mpd_do_prev (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendPrevCommand (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendPrevCommand (instance->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_do_play (ArioMpd *mpd)
+ario_mpd_do_play (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendPlayCommand (mpd->priv->connection, -1);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendPlayCommand (instance->priv->connection, -1);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_do_play_id (ArioMpd *mpd,
-                     gint id)
+ario_mpd_do_play_id (gint id)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
         /* send mpd the play command */
-        mpd_sendPlayIdCommand (mpd->priv->connection, id);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendPlayIdCommand (instance->priv->connection, id);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_do_pause (ArioMpd *mpd)
+ario_mpd_do_pause (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendPauseCommand (mpd->priv->connection, TRUE);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendPauseCommand (instance->priv->connection, TRUE);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_do_stop (ArioMpd *mpd)
+ario_mpd_do_stop (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendStopCommand (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendStopCommand (instance->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
@@ -1449,87 +1442,81 @@ ario_mpd_copy_album (const ArioMpdAlbum *ario_mpd_album)
 }
 
 void
-ario_mpd_set_current_elapsed (ArioMpd *mpd,
-                              const gint elapsed)
+ario_mpd_set_current_elapsed (const gint elapsed)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendSeekCommand (mpd->priv->connection, mpd->priv->status->song, elapsed);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendSeekCommand (instance->priv->connection, instance->priv->status->song, elapsed);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_set_current_volume (ArioMpd *mpd,
-                             const gint volume)
+ario_mpd_set_current_volume (const gint volume)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendSetvolCommand (mpd->priv->connection, volume);
-        mpd_finishCommand (mpd->priv->connection);
-        ario_mpd_update_status (mpd);
+        mpd_sendSetvolCommand (instance->priv->connection, volume);
+        mpd_finishCommand (instance->priv->connection);
+        ario_mpd_update_status ();
 }
 
 void
-ario_mpd_set_current_random (ArioMpd *mpd,
-                             const gboolean random)
+ario_mpd_set_current_random (const gboolean random)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendRandomCommand (mpd->priv->connection, random);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendRandomCommand (instance->priv->connection, random);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_set_current_repeat (ArioMpd *mpd,
-                             const gboolean repeat)
+ario_mpd_set_current_repeat (const gboolean repeat)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendRepeatCommand (mpd->priv->connection, repeat);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendRepeatCommand (instance->priv->connection, repeat);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 void
-ario_mpd_set_crossfadetime (ArioMpd *mpd,
-                            const int crossfadetime)
+ario_mpd_set_crossfadetime (const int crossfadetime)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendCrossfadeCommand (mpd->priv->connection, crossfadetime);        
-        mpd_finishCommand (mpd->priv->connection);          
+        mpd_sendCrossfadeCommand (instance->priv->connection, crossfadetime);        
+        mpd_finishCommand (instance->priv->connection);          
 }
 
 void
-ario_mpd_clear (ArioMpd *mpd)
+ario_mpd_clear (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendClearCommand (mpd->priv->connection);
-        mpd_finishCommand (mpd->priv->connection);
-        ario_mpd_update_status (mpd);
+        mpd_sendClearCommand (instance->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
+        ario_mpd_update_status ();
 }
 
 void
-ario_mpd_queue_add (ArioMpd *mpd,
-                    const char *path)
+ario_mpd_queue_add (const char *path)
 {
         ARIO_LOG_FUNCTION_START
 
@@ -1537,35 +1524,32 @@ ario_mpd_queue_add (ArioMpd *mpd,
         queue_action->type = ARIO_MPD_ACTION_ADD;
         queue_action->path = path;
 
-        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
+        instance->priv->queue = g_slist_append (instance->priv->queue, queue_action);
 }
 
 void
-ario_mpd_queue_delete_id (ArioMpd *mpd,
-                          const int id)
+ario_mpd_queue_delete_id (const int id)
 {
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_DELETE_ID;
         queue_action->id = id;
 
-        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
+        instance->priv->queue = g_slist_append (instance->priv->queue, queue_action);
 }
 
 void
-ario_mpd_queue_delete_pos (ArioMpd *mpd,
-                           const int pos)
+ario_mpd_queue_delete_pos (const int pos)
 {
         ARIO_LOG_FUNCTION_START
         ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) g_malloc (sizeof (ArioMpdQueueAction));
         queue_action->type = ARIO_MPD_ACTION_DELETE_POS;
         queue_action->pos = pos;
 
-        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
+        instance->priv->queue = g_slist_append (instance->priv->queue, queue_action);
 }
 
 void
-ario_mpd_queue_move (ArioMpd *mpd,
-                     const int old_pos,
+ario_mpd_queue_move (const int old_pos,
                      const int new_pos)
 {
         ARIO_LOG_FUNCTION_START
@@ -1574,171 +1558,167 @@ ario_mpd_queue_move (ArioMpd *mpd,
         queue_action->old_pos = old_pos;
         queue_action->new_pos = new_pos;
 
-        mpd->priv->queue = g_slist_append (mpd->priv->queue, queue_action);
+        instance->priv->queue = g_slist_append (instance->priv->queue, queue_action);
 }
 
 
 void
-ario_mpd_queue_commit (ArioMpd *mpd)
+ario_mpd_queue_commit (void)
 {
         ARIO_LOG_FUNCTION_START
         GSList *temp;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return;
 
-        mpd_sendCommandListBegin(mpd->priv->connection);
+        mpd_sendCommandListBegin(instance->priv->connection);
 
-        for (temp = mpd->priv->queue; temp; temp = g_slist_next (temp)) {
+        for (temp = instance->priv->queue; temp; temp = g_slist_next (temp)) {
                 ArioMpdQueueAction *queue_action = (ArioMpdQueueAction *) temp->data;
                 if(queue_action->type == ARIO_MPD_ACTION_ADD) {
                         if(queue_action->path) {
-                                mpd_sendAddCommand(mpd->priv->connection, queue_action->path);
+                                mpd_sendAddCommand(instance->priv->connection, queue_action->path);
                         }
                 } else if (queue_action->type == ARIO_MPD_ACTION_DELETE_ID) {
                         if(queue_action->id >= 0) {
-                                mpd_sendDeleteIdCommand(mpd->priv->connection, queue_action->id);
+                                mpd_sendDeleteIdCommand(instance->priv->connection, queue_action->id);
                         }
                 } else if (queue_action->type == ARIO_MPD_ACTION_DELETE_POS) {                                                                                      
                         if(queue_action->id >= 0) {
-                                mpd_sendDeleteCommand(mpd->priv->connection, queue_action->pos);
+                                mpd_sendDeleteCommand(instance->priv->connection, queue_action->pos);
                         }
                 } else if (queue_action->type == ARIO_MPD_ACTION_MOVE) {
                         if(queue_action->id >= 0) {
-                                mpd_sendMoveCommand(mpd->priv->connection, queue_action->old_pos, queue_action->new_pos);
+                                mpd_sendMoveCommand(instance->priv->connection, queue_action->old_pos, queue_action->new_pos);
                         }
                 }
         }
-        mpd_sendCommandListEnd(mpd->priv->connection);
-        mpd_finishCommand(mpd->priv->connection);
-        ario_mpd_update_status (mpd);
+        mpd_sendCommandListEnd(instance->priv->connection);
+        mpd_finishCommand(instance->priv->connection);
+        ario_mpd_update_status ();
 
-        g_slist_foreach(mpd->priv->queue, (GFunc) g_free, NULL);
-        g_slist_free (mpd->priv->queue);
-        mpd->priv->queue = NULL;
+        g_slist_foreach(instance->priv->queue, (GFunc) g_free, NULL);
+        g_slist_free (instance->priv->queue);
+        instance->priv->queue = NULL;
 }
 
 int
-ario_mpd_save_playlist (ArioMpd *mpd,
-                        const char *name)
+ario_mpd_save_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START
-        mpd_sendSaveCommand (mpd->priv->connection, name);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendSaveCommand (instance->priv->connection, name);
+        mpd_finishCommand (instance->priv->connection);
 
-        if (mpd->priv->connection->error == MPD_ERROR_ACK && mpd->priv->connection->errorCode == MPD_ACK_ERROR_EXIST)
+        if (instance->priv->connection->error == MPD_ERROR_ACK && instance->priv->connection->errorCode == MPD_ACK_ERROR_EXIST)
                 return 1;
 
-        g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
+        g_signal_emit (G_OBJECT (instance), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
 
         return 0;
 }
 
 void
-ario_mpd_delete_playlist (ArioMpd *mpd,
-                          const char *name)
+ario_mpd_delete_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START
-        mpd_sendRmCommand (mpd->priv->connection, name);
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_sendRmCommand (instance->priv->connection, name);
+        mpd_finishCommand (instance->priv->connection);
 
-        g_signal_emit (G_OBJECT (mpd), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
+        g_signal_emit (G_OBJECT (instance), ario_mpd_signals[STOREDPLAYLISTS_CHANGED], 0);
 }
 
 void
-ario_mpd_use_count_inc (ArioMpd *mpd)
+ario_mpd_use_count_inc (void)
 {
         ARIO_LOG_FUNCTION_START
-        ++mpd->priv->use_count;
-        if (mpd->priv->use_count == 1) {
-                if (mpd->priv->timeout_id)
-                        g_source_remove (mpd->priv->timeout_id);
-                ario_mpd_update_status (mpd);
-                ario_mpd_launch_timeout (mpd);
+        ++instance->priv->use_count;
+        if (instance->priv->use_count == 1) {
+                if (instance->priv->timeout_id)
+                        g_source_remove (instance->priv->timeout_id);
+                ario_mpd_update_status ();
+                ario_mpd_launch_timeout ();
         }
 }
 
 void
-ario_mpd_use_count_dec (ArioMpd *mpd)
+ario_mpd_use_count_dec (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (mpd->priv->use_count > 0)
-                --mpd->priv->use_count;
-        if (mpd->priv->use_count == 0) {
-                if (mpd->priv->timeout_id)
-                        g_source_remove (mpd->priv->timeout_id);
-                ario_mpd_launch_timeout (mpd);
+        if (instance->priv->use_count > 0)
+                --instance->priv->use_count;
+        if (instance->priv->use_count == 0) {
+                if (instance->priv->timeout_id)
+                        g_source_remove (instance->priv->timeout_id);
+                ario_mpd_launch_timeout ();
         }
 }
 
 void
-ario_mpd_launch_timeout (ArioMpd *mpd)
+ario_mpd_launch_timeout (void)
 {
         ARIO_LOG_FUNCTION_START
-        mpd->priv->timeout_id = g_timeout_add ((mpd->priv->use_count) ? NORMAL_TIMEOUT : LAZY_TIMEOUT,
+        instance->priv->timeout_id = g_timeout_add ((instance->priv->use_count) ? NORMAL_TIMEOUT : LAZY_TIMEOUT,
                                                (GSourceFunc) ario_mpd_update_status,
-                                               mpd);
+                                               NULL);
 }
 
 GSList *
-ario_mpd_get_outputs (ArioMpd *mpd)
+ario_mpd_get_outputs (void)
 {
         ARIO_LOG_FUNCTION_START
         GSList *outputs = NULL;
         mpd_OutputEntity *output_ent;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        mpd_sendOutputsCommand (mpd->priv->connection);
+        mpd_sendOutputsCommand (instance->priv->connection);
 
-        while ((output_ent = mpd_getNextOutput (mpd->priv->connection)))
+        while ((output_ent = mpd_getNextOutput (instance->priv->connection)))
                 outputs = g_slist_append (outputs, output_ent);
 
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 
         return outputs;
 }
 
 void
-ario_mpd_enable_output (ArioMpd *mpd,
-                        int id,
+ario_mpd_enable_output (int id,
                         gboolean enabled)
 {
         ARIO_LOG_FUNCTION_START
 
         if (enabled) {
-                mpd_sendEnableOutputCommand(mpd->priv->connection, id);
+                mpd_sendEnableOutputCommand(instance->priv->connection, id);
         } else {
-                mpd_sendDisableOutputCommand(mpd->priv->connection, id);
+                mpd_sendDisableOutputCommand(instance->priv->connection, id);
         }
 
-        mpd_finishCommand (mpd->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
 }
 
 ArioMpdStats *
-ario_mpd_get_stats (ArioMpd *mpd)
+ario_mpd_get_stats (void)
 {
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
-        if (mpd->priv->stats)
-                mpd_freeStats (mpd->priv->stats);
-        mpd_sendStatsCommand (mpd->priv->connection);
-        mpd->priv->stats = mpd_getStats (mpd->priv->connection);
+        if (instance->priv->stats)
+                mpd_freeStats (instance->priv->stats);
+        mpd_sendStatsCommand (instance->priv->connection);
+        instance->priv->stats = mpd_getStats (instance->priv->connection);
 
-        ario_mpd_check_errors (mpd);
+        ario_mpd_check_errors ();
 
-        return mpd->priv->stats;
+        return instance->priv->stats;
 }
 
 GList *
-ario_mpd_get_songs_info (ArioMpd *mpd,
-                         GSList *paths)
+ario_mpd_get_songs_info (GSList *paths)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *path = NULL;
@@ -1747,17 +1727,17 @@ ario_mpd_get_songs_info (ArioMpd *mpd,
         mpd_InfoEntity *ent;
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return NULL;
 
         for (temp = paths; temp; temp = g_slist_next (temp)) {
                 path = temp->data;
 
-                mpd_sendListallInfoCommand (mpd->priv->connection, path);
+                mpd_sendListallInfoCommand (instance->priv->connection, path);
 
-                ent = mpd_getNextInfoEntity (mpd->priv->connection);
+                ent = mpd_getNextInfoEntity (instance->priv->connection);
 
-                mpd_finishCommand (mpd->priv->connection);
+                mpd_finishCommand (instance->priv->connection);
                 if (!ent)
                         continue;
 
@@ -1765,15 +1745,14 @@ ario_mpd_get_songs_info (ArioMpd *mpd,
                 ent->info.song = NULL;
 
                 mpd_freeInfoEntity (ent);
-                ario_mpd_check_errors (mpd);
+                ario_mpd_check_errors ();
         }
 
         return songs;
 }
 
 ArioMpdFileList *
-ario_mpd_list_files (ArioMpd *mpd,
-                     const char *path,
+ario_mpd_list_files (const char *path,
                      gboolean recursive)
 {
         ARIO_LOG_FUNCTION_START
@@ -1781,15 +1760,15 @@ ario_mpd_list_files (ArioMpd *mpd,
         ArioMpdFileList *files = (ArioMpdFileList *) g_malloc0 (sizeof (ArioMpdFileList));
 
         /* check if there is a connection */
-        if (!mpd->priv->connection)
+        if (!instance->priv->connection)
                 return files;
 
         if (recursive)
-                mpd_sendListallCommand (mpd->priv->connection, path);
+                mpd_sendListallCommand (instance->priv->connection, path);
         else
-                mpd_sendLsInfoCommand (mpd->priv->connection, path);
+                mpd_sendLsInfoCommand (instance->priv->connection, path);
 
-        while ((entity = mpd_getNextInfoEntity (mpd->priv->connection))) {
+        while ((entity = mpd_getNextInfoEntity (instance->priv->connection))) {
                 if (entity->type == MPD_INFO_ENTITY_TYPE_DIRECTORY) {
                         files->directories = g_slist_append (files->directories, entity->info.directory->path);
                         entity->info.directory->path = NULL;

@@ -39,6 +39,7 @@
 #include "lib/rb-glade-helpers.h"
 #include "preferences/ario-preferences.h"
 #include "ario-plugin.h"
+#include "ario-mpd.h"
 
 #define CLIENT_ID "ari"
 #define CLIENT_VERSION "0.1"
@@ -115,8 +116,6 @@ typedef struct
 
 struct _ArioAudioscrobblerPrivate
 {
-        ArioMpd *mpd;
-
         /* Widgets for the prefs pane */
         GtkWidget *preferences;
         GtkWidget *username_entry;
@@ -195,14 +194,6 @@ static void ario_audioscrobbler_print_queue (ArioAudioscrobbler *audioscrobbler,
 static void ario_audioscrobbler_free_queue_entries (ArioAudioscrobbler *audioscrobbler, GQueue **queue);
 static void ario_audioscrobbler_class_init (ArioAudioscrobblerClass *klass);
 static void ario_audioscrobbler_init (ArioAudioscrobbler *audioscrobbler);
-static void ario_audioscrobbler_get_property (GObject *object,
-                                              guint prop_id,
-                                              GValue *value,
-                                              GParamSpec *pspec);
-static void ario_audioscrobbler_set_property (GObject *object,
-                                              guint prop_id,
-                                              const GValue *value,
-                                              GParamSpec *pspec);
 static void ario_audioscrobbler_dispose (GObject *object);
 static void ario_audioscrobbler_finalize (GObject *object);
 static void ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler);
@@ -241,11 +232,6 @@ G_MODULE_EXPORT void ario_audioscrobbler_password_entry_activate_cb (GtkEntry *e
 G_MODULE_EXPORT void ario_audioscrobbler_enabled_check_changed_cb (GtkCheckButton *button,
                                                                    ArioAudioscrobbler *audioscrobbler);
 
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
 
 G_DEFINE_TYPE (ArioAudioscrobbler, ario_audioscrobbler, G_TYPE_OBJECT)
 
@@ -282,17 +268,6 @@ ario_audioscrobbler_class_init (ArioAudioscrobblerClass *klass)
         object_class->constructor = ario_audioscrobbler_constructor;
         object_class->dispose = ario_audioscrobbler_dispose;
         object_class->finalize = ario_audioscrobbler_finalize;
-
-        object_class->set_property = ario_audioscrobbler_set_property;
-        object_class->get_property = ario_audioscrobbler_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "ArioMpd",
-                                                              "ArioMpd object",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         g_type_class_add_private (klass, sizeof (ArioAudioscrobblerPrivate));
 }
@@ -362,7 +337,6 @@ ario_audioscrobbler_dispose (GObject *object)
                 audioscrobbler->priv->soup_session = NULL;
         }
 
-        audioscrobbler->priv->mpd = NULL;
         G_OBJECT_CLASS (ario_audioscrobbler_parent_class)->dispose (object);
 }
 
@@ -400,51 +374,16 @@ ario_audioscrobbler_finalize (GObject *object)
 }
 
 ArioAudioscrobbler*
-ario_audioscrobbler_new (ArioMpd *mpd)
+ario_audioscrobbler_new (void)
 {
-        return g_object_new (ARIO_TYPE_AUDIOSCROBBLER,
-                             "mpd", mpd,
-                             NULL);
-}
+        ArioAudioscrobbler *audioscrobbler;
+        audioscrobbler = g_object_new (ARIO_TYPE_AUDIOSCROBBLER, NULL);
 
-static void
-ario_audioscrobbler_set_property (GObject *object,
-                                  guint prop_id,
-                                  const GValue *value,
-                                  GParamSpec *pspec)
-{
-        ArioAudioscrobbler *audioscrobbler = ARIO_AUDIOSCROBBLER (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                audioscrobbler->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (audioscrobbler->priv->mpd,
-                                         "song-changed",
-                                         G_CALLBACK (ario_audioscrobbler_song_changed_cb),
-                                         audioscrobbler, 0);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_audioscrobbler_get_property (GObject *object,
-                                  guint prop_id,
-                                  GValue *value,
-                                  GParamSpec *pspec)
-{
-        ArioAudioscrobbler *audioscrobbler = ARIO_AUDIOSCROBBLER (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, audioscrobbler->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
+        g_signal_connect_object (ario_mpd_get_instance (),
+                                 "song-changed",
+                                 G_CALLBACK (ario_audioscrobbler_song_changed_cb),
+                                 audioscrobbler, 0);
+        return audioscrobbler;
 }
 
 #if defined(HAVE_LIBSOUP_2_4)
@@ -586,7 +525,7 @@ maybe_add_current_song_to_queue (ArioAudioscrobbler *audioscrobbler)
                 return;
         }
 
-        elapsed = ario_mpd_get_current_elapsed (audioscrobbler->priv->mpd);
+        elapsed = ario_mpd_get_current_elapsed ();
 
         int elapsed_delta = elapsed - audioscrobbler->priv->current_elapsed;
         audioscrobbler->priv->current_elapsed = elapsed;
@@ -1528,7 +1467,7 @@ ario_audioscrobbler_song_changed_cb (ArioMpd *mpd,
 {
         ArioMpdSong *song;
 
-        song = ario_mpd_get_current_song (mpd);
+        song = ario_mpd_get_current_song ();
 
         if (audioscrobbler->priv->currently_playing != NULL) {
                 audioscrobbler_entry_free (audioscrobbler->priv->currently_playing);
@@ -1540,7 +1479,7 @@ ario_audioscrobbler_song_changed_cb (ArioMpd *mpd,
                 return;
         }
 
-        audioscrobbler->priv->current_elapsed = ario_mpd_get_current_elapsed (mpd);
+        audioscrobbler->priv->current_elapsed = ario_mpd_get_current_elapsed ();
 
         if (ario_audioscrobbler_is_queueable (song) && (audioscrobbler->priv->current_elapsed < 15)) {
                 AudioscrobblerEntry *as_entry;

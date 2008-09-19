@@ -21,7 +21,6 @@
 #define __ARIO_PLAYLIST_H
 
 #include <gtk/gtk.h>
-#include "ario-mpd.h"
 
 G_BEGIN_DECLS
 
@@ -49,8 +48,7 @@ typedef struct
 GType           ario_playlist_get_type          (void) G_GNUC_CONST;
 
 GtkWidget *     ario_playlist_new               (GtkUIManager *mgr,
-                                                 GtkActionGroup *group,
-                                                 ArioMpd *mpd);
+                                                 GtkActionGroup *group);
 
 void            ario_playlist_append_artists    (const GSList *artists,
                                                  const gboolean play);

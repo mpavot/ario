@@ -52,18 +52,15 @@ impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
         GtkUIManager *uimanager;
-        ArioMpd *mpd;
         ArioInformationPlugin *pi = ARIO_INFORMATION_PLUGIN (plugin);
         g_object_get (shell,
                       "ui-manager", &uimanager,
-                      "mpd", &mpd, NULL);
+                      NULL);
 
-        pi->priv->source = ario_information_new (uimanager,
-                                                 mpd);
+        pi->priv->source = ario_information_new (uimanager);
         g_return_if_fail (IS_ARIO_INFORMATION (pi->priv->source));
 
         g_object_unref (uimanager);
-        g_object_unref (mpd);
 
         ario_sourcemanager_append (ARIO_SOURCE (pi->priv->source));
         ario_sourcemanager_reorder ();

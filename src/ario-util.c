@@ -563,8 +563,7 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
 }
 
 GdkPixbuf *
-ario_util_get_dnd_pixbuf (ArioMpd *mpd,
-                          const GSList *criterias)
+ario_util_get_dnd_pixbuf (const GSList *criterias)
 {
         ARIO_LOG_FUNCTION_START
         const GSList *tmp;
@@ -582,7 +581,7 @@ ario_util_get_dnd_pixbuf (ArioMpd *mpd,
         for (tmp = criterias; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
                 criteria = tmp->data;
 
-                albums = ario_mpd_get_albums (mpd, criteria);
+                albums = ario_mpd_get_albums (criteria);
 
                 for (album_tmp = albums; album_tmp && len < MAX_COVERS_IN_DRAG; album_tmp = g_slist_next (album_tmp)) {
                         mpd_album = album_tmp->data;

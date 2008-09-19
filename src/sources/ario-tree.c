@@ -98,7 +98,6 @@ struct ArioTreePrivate
         gint drag_start_x;
         gint drag_start_y;
 
-        ArioMpd *mpd;
         GtkUIManager *ui_manager;
 
         int album_sort;
@@ -128,7 +127,6 @@ typedef struct
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -190,13 +188,6 @@ ario_tree_class_init (ArioTreeClass *klass)
         object_class->set_property = ario_tree_set_property;
         object_class->get_property = ario_tree_get_property;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -308,9 +299,6 @@ ario_tree_set_property (GObject *object,
         ArioTree *tree = ARIO_TREE (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                tree->priv->mpd = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 tree->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -330,9 +318,6 @@ ario_tree_get_property (GObject *object,
         ArioTree *tree = ARIO_TREE (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, tree->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, tree->priv->ui_manager);
                 break;
@@ -358,7 +343,6 @@ ario_tree_is_song_tree (ArioTree *tree)
 
 GtkWidget *
 ario_tree_new (GtkUIManager *mgr,
-               ArioMpd *mpd,
                ArioMpdTag tag,
                gboolean is_first)
 {
@@ -369,7 +353,6 @@ ario_tree_new (GtkUIManager *mgr,
 
         tree = ARIO_TREE (g_object_new (TYPE_ARIO_TREE,
                                         "ui-manager", mgr,
-                                        "mpd", mpd,
                                         NULL));
 
         g_return_val_if_fail (tree->priv != NULL, NULL);
@@ -836,7 +819,7 @@ void ario_tree_drag_begin_cb (GtkWidget *widget,
                 g_slist_free (albums);
         } else {
                 criterias = ario_tree_get_criterias (tree);
-                pixbuf = ario_util_get_dnd_pixbuf (tree->priv->mpd, criterias);
+                pixbuf = ario_util_get_dnd_pixbuf (criterias);
                 g_slist_foreach (criterias, (GFunc) ario_mpd_criteria_free, NULL);
                 g_slist_free (criterias);
         }
@@ -942,7 +925,7 @@ ario_tree_fill_albums (ArioTree *tree)
         GSList *albums, *tmp;
 
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
-                albums = ario_mpd_get_albums (tree->priv->mpd, tmp->data);
+                albums = ario_mpd_get_albums (tmp->data);
                 ario_tree_add_next_albums (tree, albums, tmp->data);
                 g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
                 g_slist_free (albums);
@@ -985,7 +968,7 @@ ario_tree_fill_songs (ArioTree *tree)
         GSList *songs, *tmp;
 
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
-                songs = ario_mpd_get_songs (tree->priv->mpd, tmp->data, TRUE);
+                songs = ario_mpd_get_songs (tmp->data, TRUE);
                 ario_tree_add_next_songs (tree, songs, tmp->data);
                 g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
                 g_slist_free (songs);
@@ -1036,14 +1019,14 @@ ario_tree_fill (ArioTree *tree)
                 ario_tree_fill_songs (tree);
         } else {
                 if (tree->priv->is_first) {
-                        tags = ario_mpd_list_tags (tree->priv->mpd, tree->priv->tag, NULL);
+                        tags = ario_mpd_list_tags (tree->priv->tag, NULL);
                         ario_tree_add_tags (tree, NULL, tags);
                         g_slist_foreach (tags, (GFunc) g_free, NULL);
                         g_slist_free (tags);
                 } else {
                         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
                                 criteria = tmp->data;
-                                tags = ario_mpd_list_tags (tree->priv->mpd, tree->priv->tag, criteria);
+                                tags = ario_mpd_list_tags (tree->priv->tag, criteria);
                                 ario_tree_add_tags (tree, criteria, tags);
                                 g_slist_foreach (tags, (GFunc) g_free, NULL);
                                 g_slist_free (tags);
@@ -1159,10 +1142,10 @@ get_cover (ArioTree *tree,
 
         criterias = ario_tree_get_criterias (tree);
 
-        coverdownloader = ario_shell_coverdownloader_new (tree->priv->mpd);
+        coverdownloader = ario_shell_coverdownloader_new ();
         if (coverdownloader) {
                 for (tmp = criterias; tmp; tmp = g_slist_next (tmp)) {
-                        albums = g_slist_concat (albums, ario_mpd_get_albums (tree->priv->mpd, tmp->data));
+                        albums = g_slist_concat (albums, ario_mpd_get_albums (tmp->data));
                 }
                 ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
                                                                    albums,
@@ -1236,8 +1219,7 @@ ario_tree_cmd_songs_properties (ArioTree *tree)
                                              get_selected_songs_foreach,
                                              &paths);
 
-        songs = ario_mpd_get_songs_info (tree->priv->mpd,
-                                         paths);
+        songs = ario_mpd_get_songs_info (paths);
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 

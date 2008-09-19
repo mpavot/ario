@@ -22,8 +22,6 @@
 #ifndef __ARIO_SHELL_COVERDOWNLOADER_H
 #define __ARIO_SHELL_COVERDOWNLOADER_H
 
-#include "ario-mpd.h"
-
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_SHELL_COVERDOWNLOADER         (ario_shell_coverdownloader_get_type ())
@@ -55,7 +53,7 @@ typedef enum
 
 GType           ario_shell_coverdownloader_get_type                     (void) G_GNUC_CONST;
 
-GtkWidget *     ario_shell_coverdownloader_new                          (ArioMpd *mpd);
+GtkWidget *     ario_shell_coverdownloader_new                          (void);
 
 void            ario_shell_coverdownloader_get_covers                   (ArioShellCoverdownloader *ario_shell_coverdownloader,
                                                                          const ArioShellCoverdownloaderOperation operation);

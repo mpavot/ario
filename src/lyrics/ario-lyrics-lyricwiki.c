@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "lyrics/ario-lyrics-lyricwiki.h"
-#include "ario-mpd.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"

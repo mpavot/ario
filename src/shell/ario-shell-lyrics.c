@@ -29,14 +29,6 @@
 #include "ario-util.h"
 
 static void ario_shell_lyrics_finalize (GObject *object);
-static void ario_shell_lyrics_set_property (GObject *object,
-                                            guint prop_id,
-                                            const GValue *value,
-                                            GParamSpec *pspec);
-static void ario_shell_lyrics_get_property (GObject *object,
-                                            guint prop_id,
-                                            GValue *value,
-                                            GParamSpec *pspec);
 static gboolean ario_shell_lyrics_window_delete_cb (GtkWidget *window,
                                                     GdkEventAny *event,
                                                     ArioShellLyrics *shell_lyrics);
@@ -50,16 +42,9 @@ static void ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
 
 #define BASE_TITLE _("Lyrics")
 
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
-
 struct ArioShellLyricsPrivate
 {      
         GtkWidget *lyrics_editor;
-        ArioMpd *mpd;
 };
 
 static gboolean is_instantiated = FALSE;
@@ -74,16 +59,6 @@ ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_lyrics_finalize;
-        object_class->set_property = ario_shell_lyrics_set_property;
-        object_class->get_property = ario_shell_lyrics_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
 
         g_type_class_add_private (klass, sizeof (ArioShellLyricsPrivate));
 }
@@ -106,13 +81,14 @@ ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
 }
 
 GtkWidget *
-ario_shell_lyrics_new (ArioMpd *mpd)
+ario_shell_lyrics_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellLyrics *shell_lyrics;
         GtkWidget *close_button;
         GList *childs_list;
         GtkWidget *hbox;
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         if (is_instantiated)
                 return NULL;
@@ -120,10 +96,18 @@ ario_shell_lyrics_new (ArioMpd *mpd)
                 is_instantiated = TRUE;
 
         shell_lyrics = g_object_new (TYPE_ARIO_SHELL_LYRICS,
-                                     "mpd", mpd,
                                      NULL);
 
         g_return_val_if_fail (shell_lyrics->priv != NULL, NULL);
+
+        g_signal_connect_object (mpd,
+                                 "song_changed",
+                                 G_CALLBACK (ario_shell_lyrics_song_changed_cb),
+                                 shell_lyrics, 0);
+        g_signal_connect_object (mpd,
+                                 "state_changed",
+                                 G_CALLBACK (ario_shell_lyrics_state_changed_cb),
+                                 shell_lyrics, 0);
 
         close_button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
         shell_lyrics->priv->lyrics_editor = ario_lyrics_editor_new ();
@@ -148,7 +132,7 @@ ario_shell_lyrics_new (ArioMpd *mpd)
                           shell_lyrics);
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
-        ario_mpd_use_count_inc (shell_lyrics->priv->mpd);
+        ario_mpd_use_count_inc ();
 
         return GTK_WIDGET (shell_lyrics);
 }
@@ -165,57 +149,11 @@ ario_shell_lyrics_finalize (GObject *object)
         shell_lyrics = ARIO_SHELL_LYRICS (object);
 
         g_return_if_fail (shell_lyrics->priv != NULL);
-        ario_mpd_use_count_dec (shell_lyrics->priv->mpd);
+        ario_mpd_use_count_dec ();
 
         is_instantiated = FALSE;
 
         G_OBJECT_CLASS (ario_shell_lyrics_parent_class)->finalize (object);
-}
-
-static void
-ario_shell_lyrics_set_property (GObject *object,
-                                guint prop_id,
-                                const GValue *value,
-                                GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellLyrics *shell_lyrics = ARIO_SHELL_LYRICS (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                shell_lyrics->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (shell_lyrics->priv->mpd,
-                                         "song_changed",
-                                         G_CALLBACK (ario_shell_lyrics_song_changed_cb),
-                                         shell_lyrics, 0);
-                g_signal_connect_object (shell_lyrics->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_shell_lyrics_state_changed_cb),
-                                         shell_lyrics, 0);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_shell_lyrics_get_property (GObject *object,
-                                guint prop_id,
-                                GValue *value,
-                                GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellLyrics *shell_lyrics = ARIO_SHELL_LYRICS (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, shell_lyrics->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
 }
 
 static gboolean
@@ -248,15 +186,15 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
 
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
 
-        if (!ario_mpd_is_connected (shell_lyrics->priv->mpd)
-            || ario_mpd_get_current_state (shell_lyrics->priv->mpd) == MPD_STATUS_STATE_STOP
-            || ario_mpd_get_current_state (shell_lyrics->priv->mpd) == MPD_STATUS_STATE_UNKNOWN) {
+        if (!ario_mpd_is_connected ()
+            || ario_mpd_get_current_state () == MPD_STATUS_STATE_STOP
+            || ario_mpd_get_current_state () == MPD_STATUS_STATE_UNKNOWN) {
                 data->artist = NULL;
                 data->title = NULL;
                 window_title = g_strdup (BASE_TITLE);
         } else {
-                data->artist = g_strdup (ario_mpd_get_current_artist (shell_lyrics->priv->mpd));
-                data->title = ario_util_format_title (ario_mpd_get_current_song (shell_lyrics->priv->mpd));
+                data->artist = g_strdup (ario_mpd_get_current_artist ());
+                data->title = ario_util_format_title (ario_mpd_get_current_song ());
                 window_title = g_strdup_printf ("%s - %s", BASE_TITLE, data->title);
         }
 

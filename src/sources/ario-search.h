@@ -22,7 +22,6 @@
 
 #include <gtk/gtkhbox.h>
 #include <config.h>
-#include "ario-mpd.h"
 #include "sources/ario-source.h"
 
 #ifdef ENABLE_SEARCH
@@ -53,8 +52,7 @@ typedef struct
 GType                   ario_search_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_search_new        (GtkUIManager *mgr,
-                                                GtkActionGroup *group,
-                                                ArioMpd *mpd);
+                                                GtkActionGroup *group);
 
 G_END_DECLS
 

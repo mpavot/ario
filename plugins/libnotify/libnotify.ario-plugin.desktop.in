@@ -1,5 +1,5 @@
 [Ario Plugin]
-Module=libnotify
+Module=liblibnotify
 IAge=1
 _Name=Libnotify
 _Description=Add libnotify support

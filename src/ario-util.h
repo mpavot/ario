@@ -66,8 +66,7 @@ gchar *                 ario_util_md5                        (const char *string
 
 GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albums) G_GNUC_MALLOC;
 
-GdkPixbuf *             ario_util_get_dnd_pixbuf             (ArioMpd *mpd,
-                                                              const GSList *criterias) G_GNUC_MALLOC;
+GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *criterias) G_GNUC_MALLOC;
 
 gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
 

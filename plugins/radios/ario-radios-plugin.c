@@ -55,18 +55,16 @@ impl_activate (ArioPlugin *plugin,
 {
         GtkUIManager *uimanager;
         GtkActionGroup *actiongroup;
-        ArioMpd *mpd;
         ArioRadiosPlugin *pi = ARIO_RADIOS_PLUGIN (plugin);
         gchar *file;
 
         g_object_get (shell,
                       "ui-manager", &uimanager,
                       "action-group", &actiongroup,
-                      "mpd", &mpd, NULL);
+                      NULL);
 
         pi->priv->source = ario_radio_new (uimanager,
-                                           actiongroup,
-                                           mpd);
+                                           actiongroup);
         g_return_if_fail (IS_ARIO_RADIO (pi->priv->source));
 
         file = ario_plugin_find_file ("radios-ui.xml");
@@ -78,7 +76,6 @@ impl_activate (ArioPlugin *plugin,
 
         g_object_unref (uimanager);
         g_object_unref (actiongroup);
-        g_object_unref (mpd);
 
         ario_sourcemanager_append (ARIO_SOURCE (pi->priv->source));
         ario_sourcemanager_reorder ();

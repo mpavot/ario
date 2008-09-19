@@ -21,7 +21,6 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include "notification/ario-notifier-tooltip.h"
-#include "ario-mpd.h"
 #include "widgets/ario-tray-icon.h"
 #include "ario-debug.h"
 

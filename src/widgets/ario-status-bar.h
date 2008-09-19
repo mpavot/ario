@@ -19,7 +19,6 @@
  */
 
 #include <gtk/gtk.h>
-#include "ario-mpd.h"
 
 #ifndef __ARIO_STATUS_BAR_H
 #define __ARIO_STATUS_BAR_H
@@ -49,7 +48,7 @@ typedef struct
 
 GType           ario_status_bar_get_type        (void) G_GNUC_CONST;
 
-GtkWidget *     ario_status_bar_new             (ArioMpd *mpd);
+GtkWidget *     ario_status_bar_new             (void);
 
 G_END_DECLS
 

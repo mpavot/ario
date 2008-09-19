@@ -101,8 +101,6 @@ struct ArioPlaylistPrivate
         GtkListStore *model;
         GtkTreeSelection *selection;
 
-        ArioMpd *mpd;
-
         int playlist_id;
         int playlist_length;
 
@@ -140,7 +138,6 @@ static guint ario_playlist_n_actions = G_N_ELEMENTS (ario_playlist_actions);
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -215,13 +212,6 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
         object_class->set_property = ario_playlist_set_property;
         object_class->get_property = ario_playlist_get_property;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -475,21 +465,6 @@ ario_playlist_set_property (GObject *object,
         ArioPlaylist *playlist = ARIO_PLAYLIST (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                playlist->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (playlist->priv->mpd,
-                                         "playlist_changed",
-                                         G_CALLBACK (ario_playlist_changed_cb),
-                                         playlist, 0);
-                g_signal_connect_object (playlist->priv->mpd,
-                                         "song_changed",
-                                         G_CALLBACK (ario_playlist_song_changed_cb),
-                                         playlist, 0);
-                g_signal_connect_object (playlist->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_playlist_state_changed_cb),
-                                         playlist, 0);
-                break;
         case PROP_UI_MANAGER:
                 playlist->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -509,9 +484,6 @@ ario_playlist_get_property (GObject *object,
         ArioPlaylist *playlist = ARIO_PLAYLIST (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, playlist->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, playlist->priv->ui_manager);
                 break;
@@ -550,12 +522,12 @@ ario_playlist_sync_song (void)
         int new_song_id;
         int state;
 
-        state = ario_mpd_get_current_state (instance->priv->mpd);
+        state = ario_mpd_get_current_state ();
 
         if (state == MPD_STATUS_STATE_UNKNOWN || state == MPD_STATUS_STATE_STOP)
                 new_song_id = -1;
         else
-                new_song_id = ario_mpd_get_current_song_id (instance->priv->mpd);
+                new_song_id = ario_mpd_get_current_song_id ();
 
         gtk_tree_model_foreach (GTK_TREE_MODEL (instance->priv->model),
                                 (GtkTreeModelForeachFunc) ario_playlist_sync_song_foreach,
@@ -581,7 +553,7 @@ ario_playlist_changed_cb (ArioMpd *mpd,
         int state;
 
 
-        if (!ario_mpd_is_connected (playlist->priv->mpd)) {
+        if (!ario_mpd_is_connected ()) {
                 playlist->priv->playlist_length = 0;
                 playlist->priv->playlist_id = -1;
                 gtk_list_store_clear (playlist->priv->model);
@@ -590,14 +562,13 @@ ario_playlist_changed_cb (ArioMpd *mpd,
 
         old_length = playlist->priv->playlist_length;
 
-        songs = ario_mpd_get_playlist_changes (playlist->priv->mpd,
-                                               playlist->priv->playlist_id);
+        songs = ario_mpd_get_playlist_changes (playlist->priv->playlist_id);
 
-        state = ario_mpd_get_current_state (instance->priv->mpd);
+        state = ario_mpd_get_current_state ();
         if (state == MPD_STATUS_STATE_UNKNOWN || state == MPD_STATUS_STATE_STOP)
                 song_id = -1;
         else
-                song_id = ario_mpd_get_current_song_id (instance->priv->mpd);
+                song_id = ario_mpd_get_current_song_id ();
 
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
@@ -643,8 +614,8 @@ ario_playlist_changed_cb (ArioMpd *mpd,
         g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
         g_slist_free (songs);
 
-        playlist->priv->playlist_length = ario_mpd_get_current_playlist_length (playlist->priv->mpd);
-        playlist->priv->playlist_id = ario_mpd_get_current_playlist_id (playlist->priv->mpd);
+        playlist->priv->playlist_length = ario_mpd_get_current_playlist_length ();
+        playlist->priv->playlist_id = ario_mpd_get_current_playlist_id ();
 
         while (playlist->priv->playlist_length < old_length) {
 
@@ -736,13 +707,13 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                                 &data);
 
         for (tmp = data.ids; tmp; tmp = g_slist_next (tmp)) {
-                ario_mpd_queue_delete_id (playlist->priv->mpd, *((gint *)tmp->data));
+                ario_mpd_queue_delete_id (*((gint *)tmp->data));
         }
 
         for (tmp = data.paths; tmp; tmp = g_slist_next (tmp)) {
-                ario_mpd_queue_add (playlist->priv->mpd, tmp->data);
+                ario_mpd_queue_add (tmp->data);
         }
-        ario_mpd_queue_commit (playlist->priv->mpd);
+        ario_mpd_queue_commit ();
 
         g_slist_foreach (data.ids, (GFunc) g_free, NULL);
         g_slist_free (data.ids);
@@ -762,19 +733,31 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
 
 GtkWidget *
 ario_playlist_new (GtkUIManager *mgr,
-                   GtkActionGroup *group,
-                   ArioMpd *mpd)
+                   GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         g_return_val_if_fail (instance == NULL, NULL);
 
         instance = g_object_new (TYPE_ARIO_PLAYLIST,
                                  "ui-manager", mgr,
-                                 "mpd", mpd,
                                  NULL);
 
         g_return_val_if_fail (instance->priv != NULL, NULL);
+
+        g_signal_connect_object (mpd,
+                                 "playlist_changed",
+                                 G_CALLBACK (ario_playlist_changed_cb),
+                                 instance, 0);
+        g_signal_connect_object (mpd,
+                                 "song_changed",
+                                 G_CALLBACK (ario_playlist_song_changed_cb),
+                                 instance, 0);
+        g_signal_connect_object (mpd,
+                                 "state_changed",
+                                 G_CALLBACK (ario_playlist_state_changed_cb),
+                                 instance, 0);
 
         gtk_action_group_add_actions (group,
                                       ario_playlist_actions,
@@ -783,7 +766,7 @@ ario_playlist_new (GtkUIManager *mgr,
         return GTK_WIDGET (instance);
 }
 
-static void
+        static void
 ario_playlist_activate_row (GtkTreePath *path)
 {
         ARIO_LOG_FUNCTION_START
@@ -794,7 +777,7 @@ ario_playlist_activate_row (GtkTreePath *path)
         if (gtk_tree_model_get_iter (GTK_TREE_MODEL (instance->priv->model), &iter, path)) {
                 /* get the song id */
                 gtk_tree_model_get (GTK_TREE_MODEL (instance->priv->model), &iter, ID_COLUMN, &id, -1);
-                ario_mpd_do_play_id (instance->priv->mpd, id);
+                ario_mpd_do_play_id (id);
         }
 }
 
@@ -844,7 +827,7 @@ ario_playlist_move_rows (const int x, const int y)
                 if (pos > indice[0])
                         --pos;
 
-                ario_mpd_queue_move (instance->priv->mpd, indice[0] + offset, pos);
+                ario_mpd_queue_move (indice[0] + offset, pos);
 
                 if (pos < indice[0])
                         ++offset;
@@ -857,7 +840,7 @@ ario_playlist_move_rows (const int x, const int y)
         g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (list);
 
-        ario_mpd_queue_commit(instance->priv->mpd);
+        ario_mpd_queue_commit ();
 }
 
 static void
@@ -900,19 +883,19 @@ ario_playlist_add_songs (const GSList *songs,
         /* For each filename :*/
         for (tmp_songs = songs; tmp_songs; tmp_songs = g_slist_next (tmp_songs)) {
                 /* Add it in the playlist*/
-                ario_mpd_queue_add (instance->priv->mpd, tmp_songs->data);
+                ario_mpd_queue_add (tmp_songs->data);
                 ++offset;
                 /* move it in the right place */
                 if (move)
-                        ario_mpd_queue_move (instance->priv->mpd, end + offset - 1, drop + offset);
+                        ario_mpd_queue_move (end + offset - 1, drop + offset);
         }
 
-        ario_mpd_queue_commit (instance->priv->mpd);
+        ario_mpd_queue_commit ();
 
         if (play) {
-                song = ario_mpd_get_playlist_info (instance->priv->mpd, end);
+                song = ario_mpd_get_playlist_info (end);
                 if (song) {
-                        ario_mpd_do_play_id (instance->priv->mpd, song->id);
+                        ario_mpd_do_play_id (song->id);
                         ario_mpd_free_song (song);
                 }
         }
@@ -928,7 +911,7 @@ ario_playlist_add_dir (const gchar *dir,
         ArioMpdSong *song;
         GSList *char_songs = NULL;
 
-        files = ario_mpd_list_files (instance->priv->mpd, dir, TRUE);
+        files = ario_mpd_list_files (dir, TRUE);
         for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
                 char_songs = g_slist_append (char_songs, song->file);
@@ -953,7 +936,7 @@ ario_playlist_add_criterias (const GSList *criterias,
         /* For each criteria :*/
         for (tmp_criteria = criterias; tmp_criteria; tmp_criteria = g_slist_next (tmp_criteria)) {
                 criteria = tmp_criteria->data;
-                songs = ario_mpd_get_songs (instance->priv->mpd, criteria, TRUE);
+                songs = ario_mpd_get_songs (criteria, TRUE);
 
                 /* For each song */
                 for (tmp_songs = songs; tmp_songs; tmp_songs = g_slist_next (tmp_songs)) {
@@ -1170,7 +1153,7 @@ ario_playlist_cmd_clear (GtkAction *action,
                          ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_clear (playlist->priv->mpd);
+        ario_mpd_clear ();
 }
 
 static void
@@ -1183,7 +1166,7 @@ ario_playlist_selection_remove_foreach (GtkTreeModel *model,
         gint *indice;
 
         indice = gtk_tree_path_get_indices (path);
-        ario_mpd_queue_delete_pos (instance->priv->mpd, indice[0] - *deleted);
+        ario_mpd_queue_delete_pos (indice[0] - *deleted);
         ++(*deleted);
 }
 
@@ -1197,7 +1180,7 @@ ario_playlist_remove (void)
                                              (GtkTreeSelectionForeachFunc) ario_playlist_selection_remove_foreach,
                                              &deleted);
 
-        ario_mpd_queue_commit (instance->priv->mpd);
+        ario_mpd_queue_commit ();
 
         gtk_tree_selection_unselect_all (instance->priv->selection);
 }
@@ -1238,8 +1221,7 @@ ario_playlist_cmd_songs_properties (GtkAction *action,
                                              ario_playlist_selection_properties_foreach,
                                              &paths);
 
-        songs = ario_mpd_get_songs_info (playlist->priv->mpd,
-                                         paths);
+        songs = ario_mpd_get_songs_info (paths);
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 
@@ -1258,7 +1240,7 @@ ario_playlist_model_foreach (GtkTreeModel *model,
 
         gtk_tree_model_get (model, iter, ID_COLUMN, &song_id, -1);
 
-        if (song_id == ario_mpd_get_current_song_id (playlist->priv->mpd)) {
+        if (song_id == ario_mpd_get_current_song_id ()) {
                 gtk_tree_view_set_cursor (GTK_TREE_VIEW (playlist->priv->tree),
                                           path,
                                           NULL, FALSE);
@@ -1321,7 +1303,7 @@ ario_playlist_cmd_save (GtkAction *action,
         name = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
         gtk_widget_destroy (dialog);
 
-        if (ario_mpd_save_playlist (playlist->priv->mpd, name)) {
+        if (ario_mpd_save_playlist (name)) {
                 dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_MODAL,
                                                  GTK_MESSAGE_QUESTION,
@@ -1331,8 +1313,8 @@ ario_playlist_cmd_save (GtkAction *action,
                 retval = gtk_dialog_run (GTK_DIALOG (dialog));
                 gtk_widget_destroy (dialog);
                 if (retval == GTK_RESPONSE_YES) {
-                        ario_mpd_delete_playlist(playlist->priv->mpd, name);
-                        ario_mpd_save_playlist (playlist->priv->mpd, name);
+                        ario_mpd_delete_playlist (name);
+                        ario_mpd_save_playlist (name);
                 }
         }
         g_free (name);

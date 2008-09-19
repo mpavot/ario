@@ -53,18 +53,16 @@ impl_activate (ArioPlugin *plugin,
 {
         GtkUIManager *uimanager;
         GtkActionGroup *actiongroup;
-        ArioMpd *mpd;
         ArioFilesystemPlugin *pi = ARIO_FILESYSTEM_PLUGIN (plugin);
         gchar *file;
 
         g_object_get (shell,
                       "ui-manager", &uimanager,
                       "action-group", &actiongroup,
-                      "mpd", &mpd, NULL);
+                      NULL);
 
         pi->priv->source = ario_filesystem_new (uimanager,
-                                                actiongroup,
-                                                mpd);
+                                                actiongroup);
         g_return_if_fail (IS_ARIO_FILESYSTEM (pi->priv->source));
 
         file = ario_plugin_find_file ("filesystem-ui.xml");
@@ -76,7 +74,6 @@ impl_activate (ArioPlugin *plugin,
 
         g_object_unref (uimanager);
         g_object_unref (actiongroup);
-        g_object_unref (mpd);
 
         ario_sourcemanager_append (ARIO_SOURCE (pi->priv->source));
         ario_sourcemanager_reorder ();

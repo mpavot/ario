@@ -29,15 +29,8 @@
 #include "lib/ario-conf.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
+#include "ario-mpd.h"
 
-static void ario_server_preferences_set_property (GObject *object,
-                                                  guint prop_id,
-                                                  const GValue *value,
-                                                  GParamSpec *pspec);
-static void ario_server_preferences_get_property (GObject *object,
-                                                  guint prop_id,
-                                                  GValue *value,
-                                                  GParamSpec *pspec);
 static void ario_server_preferences_sync_server (ArioServerPreferences *server_preferences);
 static void ario_server_preferences_server_changed_cb(ArioMpd *mpd,
                                                       ArioServerPreferences *server_preferences);
@@ -53,16 +46,8 @@ G_MODULE_EXPORT void ario_server_preferences_stopexit_changed_cb (GtkWidget *wid
                                                                   ArioServerPreferences *server_preferences);
 
 
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
-
 struct ArioServerPreferencesPrivate
 {
-        ArioMpd *mpd;
-
         GtkWidget *crossfade_checkbutton;
         GtkWidget *crossfadetime_spinbutton;
         GtkWidget *updatedb_label;
@@ -91,18 +76,6 @@ static void
 ario_server_preferences_class_init (ArioServerPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        object_class->set_property = ario_server_preferences_set_property;
-        object_class->get_property = ario_server_preferences_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
         g_type_class_add_private (klass, sizeof (ArioServerPreferencesPrivate));
 }
 
@@ -128,8 +101,7 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
         if (gtk_tree_model_get_iter (model, &iter, path)) {
                 gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id, -1);
                 state = !state;
-                ario_mpd_enable_output (server_preferences->priv->mpd,
-                                        id,
+                ario_mpd_enable_output (id,
                                         state);
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, ENABLED_COLUMN, state, -1);
         }
@@ -137,19 +109,28 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
 }
 
 GtkWidget *
-ario_server_preferences_new (ArioMpd *mpd)
+ario_server_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioServerPreferences *server_preferences;
         GladeXML *xml;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         server_preferences = g_object_new (TYPE_ARIO_SERVER_PREFERENCES,
-                                           "mpd", mpd,
                                            NULL);
 
         g_return_val_if_fail (server_preferences->priv != NULL, NULL);
+
+        g_signal_connect_object (mpd,
+                                 "state_changed",
+                                 G_CALLBACK (ario_server_preferences_server_changed_cb),
+                                 server_preferences, 0);
+        g_signal_connect_object (mpd,
+                                 "updatingdb_changed",
+                                 G_CALLBACK (ario_server_preferences_server_changed_cb),
+                                 server_preferences, 0);
 
         xml = rb_glade_xml_new (GLADE_PATH "server-prefs.glade",
                                 "vbox",
@@ -209,52 +190,6 @@ ario_server_preferences_new (ArioMpd *mpd)
 }
 
 static void
-ario_server_preferences_set_property (GObject *object,
-                                      guint prop_id,
-                                      const GValue *value,
-                                      GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioServerPreferences *server_preferences = ARIO_SERVER_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                server_preferences->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (server_preferences->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_server_preferences_server_changed_cb),
-                                         server_preferences, 0);
-                g_signal_connect_object (server_preferences->priv->mpd,
-                                         "updatingdb_changed",
-                                         G_CALLBACK (ario_server_preferences_server_changed_cb),
-                                         server_preferences, 0);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_server_preferences_get_property (GObject *object,
-                                      guint prop_id,
-                                      GValue *value,
-                                      GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioServerPreferences *server_preferences = ARIO_SERVER_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, server_preferences->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
 ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START
@@ -268,19 +203,19 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         ArioMpdOutput *output;
         GSList *outputs;
 
-        state = ario_mpd_get_current_state (server_preferences->priv->mpd);
-        updating = ario_mpd_get_updating (server_preferences->priv->mpd);
+        state = ario_mpd_get_current_state ();
+        updating = ario_mpd_get_updating ();
 
         if (state == MPD_STATUS_STATE_UNKNOWN) {
                 crossfadetime = 0;
                 last_update_char = _("Not connected");
         } else {
-                crossfadetime = ario_mpd_get_crossfadetime (server_preferences->priv->mpd);
+                crossfadetime = ario_mpd_get_crossfadetime ();
 
                 if (updating) {
                         last_update_char = _("Updating...");
                 } else {
-                        last_update = (long) ario_mpd_get_last_update (server_preferences->priv->mpd);
+                        last_update = (long) ario_mpd_get_last_update ();
                         last_update_char = ctime (&last_update);
                         /* Remove the new line */
                         if (last_update_char && strlen(last_update_char))
@@ -297,7 +232,7 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, (!updating && state != MPD_STATUS_STATE_UNKNOWN));
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), last_update_char);
 
-        outputs = ario_mpd_get_outputs (server_preferences->priv->mpd);
+        outputs = ario_mpd_get_outputs ();
         gtk_list_store_clear (server_preferences->priv->outputs_model);
         for (tmp = outputs; tmp; tmp = g_slist_next (tmp)) {
                 output = (ArioMpdOutput *) tmp->data;
@@ -336,8 +271,7 @@ ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
         int crossfadetime;
         if (!server_preferences->priv->sync_mpd) {
                 crossfadetime = gtk_spin_button_get_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton));
-                ario_mpd_set_crossfadetime (server_preferences->priv->mpd,
-                                            crossfadetime);
+                ario_mpd_set_crossfadetime (crossfadetime);
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton), (crossfadetime != 0));
                 gtk_widget_set_sensitive (server_preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0));
         }
@@ -352,13 +286,11 @@ ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
         if (!server_preferences->priv->sync_mpd) {
                 is_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton));
                 if (is_active) {
-                        ario_mpd_set_crossfadetime (server_preferences->priv->mpd,
-                                                    1);
+                        ario_mpd_set_crossfadetime (1);
                         gtk_spin_button_set_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton),
                                                    1);
                 } else {
-                        ario_mpd_set_crossfadetime (server_preferences->priv->mpd,
-                                                    0);
+                        ario_mpd_set_crossfadetime (0);
                         gtk_spin_button_set_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton),
                                                    0);
                 }
@@ -373,7 +305,7 @@ ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, FALSE);
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), _("Updating..."));
-        ario_mpd_update_db (server_preferences->priv->mpd);
+        ario_mpd_update_db ();
 }
 
 void

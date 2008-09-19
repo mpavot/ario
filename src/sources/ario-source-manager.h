@@ -21,7 +21,6 @@
 #define __ARIO_SOURCEMANAGER_H
 
 #include <gtk/gtknotebook.h>
-#include "ario-mpd.h"
 #include "sources/ario-source.h"
 
 G_BEGIN_DECLS
@@ -60,8 +59,7 @@ typedef struct
 GType                   ario_sourcemanager_get_type     (void) G_GNUC_CONST;
 
 GtkWidget*              ario_sourcemanager_get_instance (GtkUIManager *mgr,
-                                                         GtkActionGroup *group,
-                                                         ArioMpd *mpd);
+                                                         GtkActionGroup *group);
 
 void                    ario_sourcemanager_append       (ArioSource *source);
 void                    ario_sourcemanager_remove       (ArioSource *source);

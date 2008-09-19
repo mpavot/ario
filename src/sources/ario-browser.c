@@ -71,7 +71,6 @@ struct ArioBrowserPrivate
 
         gboolean connected;
 
-        ArioMpd *mpd;
         GtkUIManager *ui_manager;
 
         ArioTree *popup_tree;
@@ -106,7 +105,6 @@ static guint ario_browser_n_actions = G_N_ELEMENTS (ario_browser_actions);
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -147,13 +145,6 @@ ario_browser_class_init (ArioBrowserClass *klass)
         source_class->get_name = ario_browser_get_name;
         source_class->get_icon = ario_browser_get_icon;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -203,18 +194,6 @@ ario_browser_set_property (GObject *object,
         ArioBrowser *browser = ARIO_BROWSER (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                browser->priv->mpd = g_value_get_object (value);
-
-                /* Signals to synchronize the browser with mpd */
-                g_signal_connect_object (browser->priv->mpd,
-                                         "state_changed", G_CALLBACK (ario_browser_state_changed_cb),
-                                         browser, 0);
-
-                g_signal_connect_object (browser->priv->mpd,
-                                         "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
-                                         browser, 0);
-                break;
         case PROP_UI_MANAGER:
                 browser->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -234,9 +213,6 @@ ario_browser_get_property (GObject *object,
         ArioBrowser *browser = ARIO_BROWSER (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, browser->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, browser->priv->ui_manager);
                 break;
@@ -248,19 +224,26 @@ ario_browser_get_property (GObject *object,
 
 GtkWidget *
 ario_browser_new (GtkUIManager *mgr,
-                  GtkActionGroup *group,
-                  ArioMpd *mpd)
+                  GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser;
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         browser = ARIO_BROWSER (g_object_new (TYPE_ARIO_BROWSER,
                                               "ui-manager", mgr,
-                                              "mpd", mpd,
                                               NULL));
 
         g_return_val_if_fail (browser->priv != NULL, NULL);
 
+        /* Signals to synchronize the browser with mpd */
+        g_signal_connect_object (mpd,
+                                 "state_changed", G_CALLBACK (ario_browser_state_changed_cb),
+                                 browser, 0);
+
+        g_signal_connect_object (mpd,
+                                 "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
+                                 browser, 0);
 
         gtk_action_group_add_actions (group,
                                       ario_browser_actions,
@@ -303,7 +286,6 @@ ario_browser_reload_trees (ArioBrowser *browser)
         g_free (conf);
         for (i = 0; splited_conf[i]; ++i) {
                 tree = ario_tree_new (browser->priv->ui_manager,
-                                      browser->priv->mpd,
                                       atoi (splited_conf[i]),
                                       is_first);
                 browser->priv->trees = g_slist_append (browser->priv->trees, tree);
@@ -338,10 +320,10 @@ ario_browser_state_changed_cb (ArioMpd *mpd,
                                ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        if (browser->priv->connected != ario_mpd_is_connected (mpd))
+        if (browser->priv->connected != ario_mpd_is_connected ())
                 ario_browser_fill_first (browser);
 
-        browser->priv->connected = ario_mpd_is_connected (mpd);
+        browser->priv->connected = ario_mpd_is_connected ();
 }
 
 static void
@@ -349,7 +331,7 @@ ario_browser_dbtime_changed_cb (ArioMpd *mpd,
                                 ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        if (!ario_mpd_get_updating (browser->priv->mpd))
+        if (!ario_mpd_get_updating ())
                 ario_browser_fill_first (browser);
 }
 
@@ -418,7 +400,7 @@ ario_browser_cmd_clear_add_play (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         if (browser->priv->popup_tree) {
-                ario_mpd_clear (browser->priv->mpd);
+                ario_mpd_clear ();
                 ario_tree_cmd_add (browser->priv->popup_tree, TRUE);
         }
 }

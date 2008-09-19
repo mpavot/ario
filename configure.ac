@@ -84,7 +84,7 @@ AC_ARG_ENABLE(notify,
               AC_HELP_STRING([--disable-notify],
                              [Disable support of libnotify]))
 if test x"$enable_notify" != xno; then
-   PKG_CHECK_MODULES(NOTIFY, [libnotify])
+   PKG_CHECK_MODULES(NOTIFY, libnotify)
 
 fi
 AM_CONDITIONAL(USE_NOTIFY, test x"$enable_notify" != xno)

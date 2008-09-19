@@ -26,16 +26,8 @@
 #include <glib/gi18n.h>
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
-#include "lib/libmpdclient.h"
+#include "ario-mpd.h"
 
-static void ario_volume_set_property (GObject *object,
-                                      guint prop_id,
-                                      const GValue *value,
-                                      GParamSpec *pspec);
-static void ario_volume_get_property (GObject *object,
-                                      guint prop_id,
-                                      GValue *value,
-                                      GParamSpec *pspec);
 static void ario_volume_sync_volume (ArioVolume *volume);
 static void clicked_cb (GtkButton *button, ArioVolume *volume);
 static gboolean scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume);
@@ -67,14 +59,6 @@ struct ArioVolumePrivate
         GtkWidget *zero_image;
 
         guint notify_id;
-
-        ArioMpd *mpd;
-};
-
-enum
-{
-        PROP_0,
-        PROP_MPD
 };
 
 #define ARIO_VOLUME_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_VOLUME, ArioVolumePrivate))
@@ -84,19 +68,6 @@ static void
 ario_volume_class_init (ArioVolumeClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        object_class->set_property = ario_volume_set_property;
-        object_class->get_property = ario_volume_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
-
         g_type_class_add_private (klass, sizeof (ArioVolumePrivate));
 }
 
@@ -216,49 +187,6 @@ ario_volume_init (ArioVolume *volume)
 }
 
 static void
-ario_volume_set_property (GObject *object,
-                          guint prop_id,
-                          const GValue *value,
-                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioVolume *volume = ARIO_VOLUME (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                volume->priv->mpd = g_value_get_object (value);
-
-                g_signal_connect_object (volume->priv->mpd,
-                                         "volume_changed",
-                                         G_CALLBACK (ario_volume_changed_cb),
-                                         volume, 0);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_volume_get_property (GObject *object,
-                          guint prop_id,
-                          GValue *value,
-                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioVolume *volume = ARIO_VOLUME (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, volume->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
 ario_volume_changed_cb (ArioMpd *mpd,
                         ArioVolume *volume)
 {
@@ -267,15 +195,19 @@ ario_volume_changed_cb (ArioMpd *mpd,
 }
 
 ArioVolume *
-ario_volume_new (ArioMpd *mpd)
+ario_volume_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioVolume *volume;
 
-        volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, "mpd", mpd, NULL));
+        volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, NULL));
 
         g_return_val_if_fail (volume->priv != NULL, NULL);
 
+        g_signal_connect_object (ario_mpd_get_instance (),
+                                 "volume_changed",
+                                 G_CALLBACK (ario_volume_changed_cb),
+                                 volume, 0);
         return volume;
 }
 
@@ -286,7 +218,7 @@ ario_volume_sync_volume (ArioVolume *volume)
         gint vol;
         GtkWidget *image;
 
-        vol = ario_mpd_get_current_volume (volume->priv->mpd);
+        vol = ario_mpd_get_current_volume ();
 
         if (vol == -1)
                 return;
@@ -401,7 +333,7 @@ static gboolean
 scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume)
 {
         ARIO_LOG_FUNCTION_START
-        gint vol = ario_mpd_get_current_volume (volume->priv->mpd);
+        gint vol = ario_mpd_get_current_volume ();
 
         switch (event->scroll.direction) {
         case GDK_SCROLL_UP:
@@ -419,7 +351,7 @@ scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume)
                 break;
         }
 
-        ario_mpd_set_current_volume (volume->priv->mpd, vol);
+        ario_mpd_set_current_volume (vol);
 
         return FALSE;
 }
@@ -479,5 +411,5 @@ mixer_value_changed_cb (GtkAdjustment *adj, ArioVolume *volume)
         ARIO_LOG_FUNCTION_START
         gint vol = (gint) gtk_adjustment_get_value (volume->priv->adj);
 
-        ario_mpd_set_current_volume (volume->priv->mpd, vol);
+        ario_mpd_set_current_volume (vol);
 }

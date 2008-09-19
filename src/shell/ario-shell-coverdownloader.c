@@ -23,20 +23,13 @@
 #include <glib/gi18n.h>
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-manager.h"
+#include "covers/ario-cover-handler.h"
 #include "shell/ario-shell-coverdownloader.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
-#include "covers/ario-cover-handler.h"
+#include "ario-mpd.h"
 
 static void ario_shell_coverdownloader_finalize (GObject *object);
-static void ario_shell_coverdownloader_set_property (GObject *object,
-                                                     guint prop_id,
-                                                     const GValue *value,
-                                                     GParamSpec *pspec);
-static void ario_shell_coverdownloader_get_property (GObject *object,
-                                                     guint prop_id,
-                                                     GValue *value,
-                                                     GParamSpec *pspec);
 static GObject * ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties,
                                                          GObjectConstructParam *construct_properties);
 static gboolean ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
@@ -53,11 +46,6 @@ static void ario_shell_coverdownloader_cancel_cb (GtkButton *button,
 static void ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
                                                              const ArioMpdAlbum *mpd_album,
                                                              const ArioShellCoverdownloaderOperation operation);
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
 
 struct ArioShellCoverdownloaderPrivate
 {
@@ -75,8 +63,6 @@ struct ArioShellCoverdownloaderPrivate
         GtkWidget *progressbar;
         GtkWidget *cancel_button;
         GtkWidget *close_button;
-
-        ArioMpd *mpd;
 
         GSList *albums;
         ArioShellCoverdownloaderOperation operation;
@@ -98,16 +84,6 @@ ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
         object_class->finalize = ario_shell_coverdownloader_finalize;
         object_class->constructor = ario_shell_coverdownloader_constructor;
 
-        object_class->set_property = ario_shell_coverdownloader_set_property;
-        object_class->get_property = ario_shell_coverdownloader_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_type_class_add_private (klass, sizeof (ArioShellCoverdownloaderPrivate));
 }
 
@@ -144,48 +120,8 @@ ario_shell_coverdownloader_finalize (GObject *object)
         G_OBJECT_CLASS (ario_shell_coverdownloader_parent_class)->finalize (object);
 }
 
-static void
-ario_shell_coverdownloader_set_property (GObject *object,
-                                         guint prop_id,
-                                         const GValue *value,
-                                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellCoverdownloader *ario_shell_coverdownloader = ARIO_SHELL_COVERDOWNLOADER (object);
-
-        switch (prop_id)
-        {
-        case PROP_MPD:
-                ario_shell_coverdownloader->priv->mpd = g_value_get_object (value);
-                break;        
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_shell_coverdownloader_get_property (GObject *object,
-                                         guint prop_id,
-                                         GValue *value,
-                                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioShellCoverdownloader *ario_shell_coverdownloader = ARIO_SHELL_COVERDOWNLOADER (object);
-
-        switch (prop_id)
-        {
-        case PROP_MPD:
-                g_value_set_object (value, ario_shell_coverdownloader->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_shell_coverdownloader_new (ArioMpd *mpd)
+ario_shell_coverdownloader_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellCoverdownloader *ario_shell_coverdownloader;
@@ -196,7 +132,6 @@ ario_shell_coverdownloader_new (ArioMpd *mpd)
                 is_instantiated = TRUE;
 
         ario_shell_coverdownloader = g_object_new (TYPE_ARIO_SHELL_COVERDOWNLOADER,
-                                                   "mpd", mpd,
                                                    NULL);
 
         g_return_val_if_fail (ario_shell_coverdownloader->priv != NULL, NULL);
@@ -408,7 +343,7 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
                                        const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *albums = ario_mpd_get_albums (ario_shell_coverdownloader->priv->mpd, NULL);
+        GSList *albums = ario_mpd_get_albums (NULL);
 
         ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader,
                                                            albums,

@@ -93,7 +93,7 @@ ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
 }
 
 GtkWidget *
-ario_shell_preferences_new (ArioMpd *mpd)
+ario_shell_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellPreferences *shell_preferences;
@@ -103,12 +103,12 @@ ario_shell_preferences_new (ArioMpd *mpd)
 
         g_return_val_if_fail (shell_preferences->priv != NULL, NULL);
 
-        widget = ario_connection_preferences_new (mpd);
+        widget = ario_connection_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Connection")));
 
-        widget = ario_server_preferences_new (mpd);
+        widget = ario_server_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Server")));
@@ -143,7 +143,7 @@ ario_shell_preferences_new (ArioMpd *mpd)
                                   widget,
                                   gtk_label_new (_("Proxy")));
 
-        widget = ario_stats_preferences_new (mpd);
+        widget = ario_stats_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Statistics")));
