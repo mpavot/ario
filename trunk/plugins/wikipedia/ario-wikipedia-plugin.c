@@ -94,7 +94,6 @@ impl_activate (ArioPlugin *plugin,
 {
         GtkUIManager *uimanager;
         ArioWikipediaPlugin *pi = ARIO_WIKIPEDIA_PLUGIN (plugin);
-        static gboolean is_loaded = FALSE;
         gchar *file;
 
         g_object_get (shell, "ui-manager", &uimanager, NULL);
@@ -106,15 +105,12 @@ impl_activate (ArioPlugin *plugin,
         }
         g_object_unref (uimanager);
 
-        if (!is_loaded) {
-                g_object_get (shell, "action-group", &pi->priv->actiongroup, NULL);
-                gtk_action_group_add_actions (pi->priv->actiongroup,
-                                              ario_wikipedia_actions,
-                                              G_N_ELEMENTS (ario_wikipedia_actions), pi);
-                g_object_unref (pi->priv->actiongroup);
+        g_object_get (shell, "action-group", &pi->priv->actiongroup, NULL);
+        gtk_action_group_add_actions (pi->priv->actiongroup,
+                                      ario_wikipedia_actions,
+                                      G_N_ELEMENTS (ario_wikipedia_actions), pi);
+        g_object_unref (pi->priv->actiongroup);
 
-                is_loaded = TRUE;
-        }
 
         g_signal_connect_object (ario_mpd_get_instance (),
                                  "state_changed",
@@ -136,6 +132,9 @@ impl_deactivate (ArioPlugin *plugin,
         g_object_get (shell, "ui-manager", &uimanager, NULL);
         gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
         g_object_unref (uimanager);
+
+        gtk_action_group_remove_action (pi->priv->actiongroup,
+                                        gtk_action_group_get_action (pi->priv->actiongroup, "ToolWikipedia"));
 }
 
 static void

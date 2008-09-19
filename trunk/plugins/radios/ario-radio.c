@@ -104,6 +104,7 @@ struct ArioRadioPrivate
         gint drag_start_y;
 
         GtkUIManager *ui_manager;
+        GtkActionGroup *actiongroup;
 
         xmlDocPtr doc;
 };
@@ -268,6 +269,7 @@ ario_radio_finalize (GObject *object)
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio;
+        int i;
 
         g_return_if_fail (object != NULL);
         g_return_if_fail (IS_ARIO_RADIO (object));
@@ -278,6 +280,11 @@ ario_radio_finalize (GObject *object)
         if (radio->priv->doc)
                 xmlFreeDoc (radio->priv->doc);
         radio->priv->doc = NULL;
+
+        for (i = 0; i < ario_radio_n_actions; ++i) {
+                gtk_action_group_remove_action (radio->priv->actiongroup,
+                                                gtk_action_group_get_action (radio->priv->actiongroup, ario_radio_actions[i].name));
+        }
 
         G_OBJECT_CLASS (ario_radio_parent_class)->finalize (object);
 }
@@ -326,26 +333,24 @@ ario_radio_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio;
-        static gboolean is_loaded = FALSE;
 
         radio = g_object_new (TYPE_ARIO_RADIO,
                               "ui-manager", mgr,
                               NULL);
 
         g_return_val_if_fail (radio->priv != NULL, NULL);
+        radio->priv->actiongroup = group;
 
         /* Signals to synchronize the radio with mpd */
         g_signal_connect_object (ario_mpd_get_instance (),
                                  "state_changed",
                                  G_CALLBACK (ario_radio_state_changed_cb),
                                  radio, 0);
+        radio->priv->connected = ario_mpd_is_connected ();
 
-        if (!is_loaded) {
-                gtk_action_group_add_actions (group,
-                                              ario_radio_actions,
-                                              ario_radio_n_actions, radio);
-                is_loaded = TRUE;
-        }
+        gtk_action_group_add_actions (group,
+                                      ario_radio_actions,
+                                      ario_radio_n_actions, radio);
 
         ario_radio_fill_radios (radio);
 
@@ -492,6 +497,7 @@ ario_radio_fill_radios (ArioRadio *radio)
         GList* paths;
         GtkTreePath *path;
         GtkTreeModel *models = GTK_TREE_MODEL (radio->priv->radios_model);
+        ArioInternetRadio *internet_radio;
 
         paths = gtk_tree_selection_get_selected_rows (radio->priv->radios_selection, &models);
 
@@ -503,7 +509,7 @@ ario_radio_fill_radios (ArioRadio *radio)
         radios = ario_radio_get_radios (radio);
 
         for (temp = radios; temp; temp = g_slist_next (temp)) {
-                ArioInternetRadio *internet_radio = (ArioInternetRadio *) temp->data;
+                internet_radio = (ArioInternetRadio *) temp->data;
                 ario_radio_append_radio (radio, internet_radio);
         }
         g_slist_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
