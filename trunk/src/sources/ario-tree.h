@@ -54,7 +54,6 @@ typedef struct
 GType                   ario_tree_get_type              (void) G_GNUC_CONST;
 
 GtkWidget*              ario_tree_new                   (GtkUIManager *mgr,
-                                                         ArioMpd *mpd,
                                                          ArioMpdTag tag,
                                                          gboolean is_first);
 void                    ario_tree_fill                  (ArioTree *tree);

@@ -35,6 +35,7 @@
 #include "plugins/ario-plugin.h"
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "ario-mpd.h"
 #include "shell/ario-shell.h"
 
 
@@ -50,7 +51,7 @@ typedef struct
         ArioPlugin parent;
         ArioAudioscrobbler *audioscrobbler;
 
-        ArioMpd *mpd;
+        gboolean activated;
 } ArioAudioscrobblerPlugin;
 
 typedef struct
@@ -74,7 +75,6 @@ ARIO_PLUGIN_REGISTER_TYPE(ArioAudioscrobblerPlugin, ario_audioscrobbler_plugin)
 static void
 ario_audioscrobbler_plugin_class_init (ArioAudioscrobblerPluginClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
 
         plugin_class->activate = impl_activate;
@@ -94,11 +94,10 @@ impl_activate (ArioPlugin *plugin,
 {
         ArioAudioscrobblerPlugin *asplugin = ARIO_AUDIOSCROBBLER_PLUGIN (plugin);
 
-        g_object_get (shell, "mpd", &asplugin->mpd, NULL);
-        asplugin->audioscrobbler = ario_audioscrobbler_new (asplugin->mpd);
+        asplugin->audioscrobbler = ario_audioscrobbler_new ();
 
-        ario_mpd_use_count_inc (asplugin->mpd);
-        g_object_unref (asplugin->mpd);
+        ario_mpd_use_count_inc ();
+        asplugin->activated = TRUE;
 }
 
 static void
@@ -109,9 +108,9 @@ impl_deactivate (ArioPlugin *plugin,
 
         g_object_unref (asplugin->audioscrobbler);
 
-        if (asplugin->mpd) {
-                ario_mpd_use_count_dec (asplugin->mpd);
-                asplugin->mpd = NULL;
+        if (asplugin->activated) {
+                ario_mpd_use_count_dec ();
+                asplugin->activated = FALSE;
         }
 }
 

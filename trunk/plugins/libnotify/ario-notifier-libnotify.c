@@ -33,7 +33,6 @@
 struct ArioNotifierLibnotifyPrivate
 {
         NotifyNotification *notification;
-        ArioMpd *mpd;
 };
 
 #define ARIO_NOTIFIER_LIBNOTIFY_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_NOTIFIER_LIBNOTIFY, ArioNotifierLibnotifyPrivate))
@@ -74,17 +73,17 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
         gchar *album;
         gchar *secondary;
 
-        switch (ario_mpd_get_current_state (notifier_libnotify->priv->mpd)) {
+        switch (ario_mpd_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 /* Title */
-                title = ario_util_format_title (ario_mpd_get_current_song (notifier_libnotify->priv->mpd));
+                title = ario_util_format_title (ario_mpd_get_current_song ());
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "summary", title);
                 g_free (title);
 
                 /* Artist - Album */
-                artist = ario_mpd_get_current_artist (notifier_libnotify->priv->mpd);
-                album = ario_mpd_get_current_album (notifier_libnotify->priv->mpd);
+                artist = ario_mpd_get_current_artist ();
+                album = ario_mpd_get_current_album ();
 
                 if (!album)
                         album = ARIO_MPD_UNKNOWN;
@@ -126,7 +125,6 @@ ario_notifier_libnotify_init (ArioNotifierLibnotify *notifier_libnotify)
         ARIO_LOG_FUNCTION_START
         notifier_libnotify->priv = ARIO_NOTIFIER_LIBNOTIFY_GET_PRIVATE (notifier_libnotify);
 
-        notifier_libnotify->priv->mpd = ario_mpd_get_instance ();
         notifier_libnotify->priv->notification = notify_notification_new ("Ario",  NULL, NULL, NULL);
 #ifdef ENABLE_EGGTRAYICON
         notify_notification_attach_to_widget (notifier_libnotify->priv->notification, GTK_WIDGET (ario_tray_icon_get_instance ()));

@@ -23,7 +23,6 @@
 #include "lib/ario-conf.h"
 #include "covers/ario-cover-local.h"
 #include "covers/ario-cover.h"
-#include "ario-mpd.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"

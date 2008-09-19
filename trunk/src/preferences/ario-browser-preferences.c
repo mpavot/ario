@@ -141,6 +141,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
         int a, b;
+        gchar **items;
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (browser_preferences->priv->sort_combobox),
                                   ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT));
@@ -155,16 +156,17 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
         splited_conf = g_strsplit (conf, ",", MAX_TREE_NB);
         g_free (conf);
+        items = ario_mpd_get_items_names ();
         for (i = 0; splited_conf[i]; ++i) {
                 tree_combobox = gtk_combo_box_new ();
                 browser_preferences->priv->tree_comboboxs = g_slist_append (browser_preferences->priv->tree_comboboxs, tree_combobox);
 
                 list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
                 for (j = 0; j < MPD_TAG_NUM_OF_ITEM_TYPES - 1; ++j) {
-                        if (ario_mpd_get_items_names ()[j]) {
+                        if (items[j]) {
                                 gtk_list_store_append (list_store, &iter);
                                 gtk_list_store_set (list_store, &iter,
-                                                    0, gettext (ario_mpd_get_items_names ()[j]),
+                                                    0, gettext (items[j]),
                                                     1, j,
                                                     -1);
                         }
@@ -182,7 +184,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
                 a = atoi (splited_conf[i]);
                 b = 0;
                 for (j = 0; j < MPD_TAG_NUM_OF_ITEM_TYPES - 1 && j < a; ++j) {
-                        if (ario_mpd_get_items_names ()[j])
+                        if (items[j])
                                 ++b;                        
                 }
                 gtk_combo_box_set_active (GTK_COMBO_BOX (tree_combobox), b);

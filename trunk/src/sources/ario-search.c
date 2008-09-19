@@ -21,13 +21,13 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "lib/libmpdclient.h"
 #include "widgets/ario-songlist.h"
 #include "widgets/ario-playlist.h"
 #include "sources/ario-search.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "ario-mpd.h"
 
 #ifdef ENABLE_SEARCH
 
@@ -67,8 +67,6 @@ struct ArioSearchPrivate
         GtkWidget *search_button;
 
         gboolean connected;
-
-        ArioMpd *mpd;
         GtkUIManager *ui_manager;
 
         GSList *search_constraints;
@@ -95,7 +93,6 @@ static guint ario_search_n_actions = G_N_ELEMENTS (ario_search_actions);
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -141,13 +138,6 @@ ario_search_class_init (ArioSearchClass *klass)
         source_class->get_icon = ario_search_get_icon;
 
         g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
                                                               "GtkUIManager",
@@ -164,6 +154,7 @@ ario_search_init (ArioSearch *search)
         GtkWidget *hbox;
         GtkTreeIter iter;
         GtkWidget *image;
+        gchar **items;
         int i;
 
         search->priv = ARIO_SEARCH_GET_PRIVATE (search);
@@ -218,11 +209,12 @@ ario_search_init (ArioSearch *search)
 
         search->priv->list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 
+        items = ario_mpd_get_items_names ();
         for (i = 0; i < MPD_TAG_NUM_OF_ITEM_TYPES; ++i) {
-                if (ario_mpd_get_items_names ()[i]) {
+                if (items[i]) {
                         gtk_list_store_append (search->priv->list_store, &iter);
                         gtk_list_store_set (search->priv->list_store, &iter,
-                                            0, gettext (ario_mpd_get_items_names ()[i]),
+                                            0, gettext (items[i]),
                                             1, i,
                                             -1);
                 }
@@ -262,14 +254,6 @@ ario_search_set_property (GObject *object,
         ArioSearch *search = ARIO_SEARCH (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                search->priv->mpd = g_value_get_object (value);
-
-                /* Signals to synchronize the search with mpd */
-                g_signal_connect_object (search->priv->mpd,
-                                         "state_changed", G_CALLBACK (ario_search_state_changed_cb),
-                                         search, 0);
-                break;
         case PROP_UI_MANAGER:
                 search->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -289,9 +273,6 @@ ario_search_get_property (GObject *object,
         ArioSearch *search = ARIO_SEARCH (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, search->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, search->priv->ui_manager);
                 break;
@@ -303,8 +284,7 @@ ario_search_get_property (GObject *object,
 
 GtkWidget *
 ario_search_new (GtkUIManager *mgr,
-                 GtkActionGroup *group,
-                 ArioMpd *mpd)
+                 GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START
         ArioSearch *search;
@@ -312,10 +292,14 @@ ario_search_new (GtkUIManager *mgr,
 
         search = g_object_new (TYPE_ARIO_SEARCH,
                                "ui-manager", mgr,
-                               "mpd", mpd,
                                NULL);
 
         g_return_val_if_fail (search->priv != NULL, NULL);
+
+        /* Signals to synchronize the search with mpd */
+        g_signal_connect_object (ario_mpd_get_instance (),
+                                 "state_changed", G_CALLBACK (ario_search_state_changed_cb),
+                                 search, 0);
 
         /* Searchs list */
         scrolledwindow_searchs = gtk_scrolled_window_new (NULL, NULL);
@@ -323,7 +307,6 @@ ario_search_new (GtkUIManager *mgr,
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_SHADOW_IN);
         search->priv->searchs = ario_songlist_new (mgr,
-                                                   mpd,
                                                    "/SearchPopup",
                                                    TRUE);
 
@@ -344,8 +327,8 @@ ario_search_state_changed_cb (ArioMpd *mpd,
                               ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
-        if (search->priv->connected != ario_mpd_is_connected (mpd)) {
-                search->priv->connected = ario_mpd_is_connected (mpd);
+        if (search->priv->connected != ario_mpd_is_connected ()) {
+                search->priv->connected = ario_mpd_is_connected ();
                 /* ario_search_set_active (search->priv->connected); */
         }
 }
@@ -505,7 +488,7 @@ ario_search_do_search (GtkButton *button,
                 criteria = g_slist_append (criteria, atomic_criteria);
         }
 
-        songs = ario_mpd_get_songs (search->priv->mpd, criteria, FALSE);
+        songs = ario_mpd_get_songs (criteria, FALSE);
         g_slist_foreach (criteria, (GFunc) g_free, NULL);
         g_slist_free (criteria);
 

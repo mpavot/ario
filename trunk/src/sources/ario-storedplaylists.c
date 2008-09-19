@@ -27,6 +27,7 @@
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "ario-mpd.h"
 #include "preferences/ario-preferences.h"
 #include "widgets/ario-playlist.h"
 
@@ -92,7 +93,6 @@ struct ArioStoredplaylistsPrivate
         gint drag_start_x;
         gint drag_start_y;
 
-        ArioMpd *mpd;
         GtkUIManager *ui_manager;
 };
 
@@ -133,7 +133,6 @@ static guint ario_storedplaylists_n_songs_actions = G_N_ELEMENTS (ario_storedpla
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -183,13 +182,6 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
         source_class->get_icon = ario_storedplaylists_get_icon;
         source_class->shutdown = ario_storedplaylists_shutdown;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -299,17 +291,6 @@ ario_storedplaylists_set_property (GObject *object,
         ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                storedplaylists->priv->mpd = g_value_get_object (value);
-
-                /* Signals to synchronize the storedplaylists with mpd */
-                g_signal_connect_object (storedplaylists->priv->mpd,
-                                         "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
-                                         storedplaylists, 0);
-                g_signal_connect_object (storedplaylists->priv->mpd,
-                                         "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
-                                         storedplaylists, 0);
-                break;
         case PROP_UI_MANAGER:
                 storedplaylists->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -329,9 +310,6 @@ ario_storedplaylists_get_property (GObject *object,
         ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, storedplaylists->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, storedplaylists->priv->ui_manager);
                 break;
@@ -343,19 +321,26 @@ ario_storedplaylists_get_property (GObject *object,
 
 GtkWidget *
 ario_storedplaylists_new (GtkUIManager *mgr,
-                          GtkActionGroup *group,
-                          ArioMpd *mpd)
+                          GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START
         ArioStoredplaylists *storedplaylists;
         GtkWidget *scrolledwindow_songs;
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         storedplaylists = g_object_new (TYPE_ARIO_STOREDPLAYLISTS,
                                         "ui-manager", mgr,
-                                        "mpd", mpd,
                                         NULL);
 
         g_return_val_if_fail (storedplaylists->priv != NULL, NULL);
+
+        /* Signals to synchronize the storedplaylists with mpd */
+        g_signal_connect_object (mpd,
+                                 "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
+                                 storedplaylists, 0);
+        g_signal_connect_object (mpd,
+                                 "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
+                                 storedplaylists, 0);
 
         /* Songs list */
         scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
@@ -363,7 +348,6 @@ ario_storedplaylists_new (GtkUIManager *mgr,
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_SHADOW_IN);
         storedplaylists->priv->songs = ario_songlist_new (mgr,
-                                                          mpd,
                                                           "/StoredplaylistsSongsPopup",
                                                           FALSE);
         gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_songs, TRUE, FALSE);
@@ -393,7 +377,7 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
         if (!storedplaylists->priv->connected)
                 return;
 
-        playlists = ario_mpd_get_playlists (storedplaylists->priv->mpd);
+        playlists = ario_mpd_get_playlists ();
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 gtk_list_store_append (storedplaylists->priv->storedplaylists_model, &storedplaylists_iter);
                 gtk_list_store_set (storedplaylists->priv->storedplaylists_model, &storedplaylists_iter, 0,
@@ -430,7 +414,7 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
         if (!playlist)
                 return;
 
-        songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, playlist);
+        songs = ario_mpd_get_songs_from_playlist (playlist);
         g_free (playlist);
 
         for (temp = songs; temp; temp = g_slist_next (temp)) {
@@ -483,8 +467,8 @@ ario_storedplaylists_state_changed_cb (ArioMpd *mpd,
                                        ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START
-        if (storedplaylists->priv->connected != ario_mpd_is_connected (mpd)) {
-                storedplaylists->priv->connected = ario_mpd_is_connected (mpd);
+        if (storedplaylists->priv->connected != ario_mpd_is_connected ()) {
+                storedplaylists->priv->connected = ario_mpd_is_connected ();
                 ario_storedplaylists_fill_storedplaylists (storedplaylists);
         }
 }
@@ -525,7 +509,7 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
                                              &playlists);
 
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
-                songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, tmp->data);
+                songs = ario_mpd_get_songs_from_playlist (tmp->data);
                 ario_playlist_append_mpd_songs (songs, play);
 
                 g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
@@ -539,8 +523,8 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
 static void
 ario_storedplaylists_clear_add_play_playlists (ArioStoredplaylists *storedplaylists)
 {
-        ario_mpd_clear(storedplaylists->priv->mpd);
-        ario_storedplaylists_add_playlists(storedplaylists, TRUE);
+        ario_mpd_clear ();
+        ario_storedplaylists_add_playlists (storedplaylists, TRUE);
 }
 
 static void
@@ -592,7 +576,7 @@ ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
                                              &playlists);
 
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
-                ario_mpd_delete_playlist (storedplaylists->priv->mpd, tmp->data);
+                ario_mpd_delete_playlist (tmp->data);
         }
 
         g_slist_foreach (playlists, (GFunc) g_free, NULL);
@@ -766,7 +750,7 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
 
         str_playlists = g_string_new("");
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
-                songs = ario_mpd_get_songs_from_playlist (storedplaylists->priv->mpd, tmp->data);
+                songs = ario_mpd_get_songs_from_playlist (tmp->data);
 
                 for (tmp2 = songs; tmp2; tmp2 = g_slist_next (tmp2)) {
                         song = tmp2->data;

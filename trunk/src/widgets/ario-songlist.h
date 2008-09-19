@@ -22,7 +22,6 @@
 
 #include <gtk/gtktreeview.h>
 #include <config.h>
-#include "ario-mpd.h"
 
 G_BEGIN_DECLS
 
@@ -59,7 +58,6 @@ enum
 GType                   ario_songlist_get_type                  (void) G_GNUC_CONST;
 
 GtkWidget*              ario_songlist_new                       (GtkUIManager *mgr,
-                                                                 ArioMpd *mpd,
                                                                  gchar *popup,
                                                                  gboolean is_sortable);
 GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *songlist);

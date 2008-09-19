@@ -18,7 +18,6 @@
  */
 
 #include <gtk/gtkdialog.h>
-#include "ario-mpd.h"
 
 #ifndef __ARIO_COVER_HANDLER_H
 #define __ARIO_COVER_HANDLER_H
@@ -50,7 +49,7 @@ typedef struct
 
 GType              ario_cover_handler_get_type         (void) G_GNUC_CONST;
 
-ArioCoverHandler * ario_cover_handler_new              (ArioMpd *mpd);
+ArioCoverHandler * ario_cover_handler_new              (void);
 
 void               ario_cover_handler_force_reload     (void);
 

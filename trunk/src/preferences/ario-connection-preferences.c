@@ -32,16 +32,9 @@
 #endif
 #include "ario-debug.h"
 #include "ario-profiles.h"
+#include "ario-mpd.h"
 
 static void ario_connection_preferences_finalize (GObject *object);
-static void ario_connection_preferences_set_property (GObject *object,
-                                                      guint prop_id,
-                                                      const GValue *value,
-                                                      GParamSpec *pspec);
-static void ario_connection_preferences_get_property (GObject *object,
-                                                      guint prop_id,
-                                                      GValue *value,
-                                                      GParamSpec *pspec);
 static void ario_connection_preferences_sync_connection (ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_name_changed_cb (GtkWidget *widget,
                                                                   ArioConnectionPreferences *connection_preferences);
@@ -70,16 +63,9 @@ G_MODULE_EXPORT void ario_connection_preferences_connect_cb (GtkWidget *widget,
 G_MODULE_EXPORT void ario_connection_preferences_disconnect_cb (GtkWidget *widget,
                                                                 ArioConnectionPreferences *connection_preferences);
 
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
 
 struct ArioConnectionPreferencesPrivate
 {
-        ArioMpd *mpd;
-
         GtkWidget *profile_treeview;
         GtkListStore *profile_model;
         GtkTreeSelection *profile_selection;
@@ -123,16 +109,7 @@ ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_connection_preferences_finalize;
-        object_class->set_property = ario_connection_preferences_set_property;
-        object_class->get_property = ario_connection_preferences_get_property;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
         g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
 }
 
@@ -257,8 +234,8 @@ ario_connection_preferences_profile_selection_changed_cb (GtkTreeSelection * sel
 {
         ARIO_LOG_FUNCTION_START
         if (ario_connection_preferences_profile_selection_update (connection_preferences)) {
-                ario_mpd_disconnect (connection_preferences->priv->mpd);
-                ario_mpd_connect (connection_preferences->priv->mpd);
+                ario_mpd_disconnect ();
+                ario_mpd_connect ();
                 ario_connection_preferences_sync_connection (connection_preferences);
         }
 }
@@ -301,7 +278,7 @@ ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *
 }
 
 GtkWidget *
-ario_connection_preferences_new (ArioMpd *mpd)
+ario_connection_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         GladeXML *xml;
@@ -310,7 +287,6 @@ ario_connection_preferences_new (ArioMpd *mpd)
         GtkCellRenderer *renderer;
 
         connection_preferences = g_object_new (TYPE_ARIO_CONNECTION_PREFERENCES,
-                                               "mpd", mpd,
                                                NULL);
 
         g_return_val_if_fail (connection_preferences->priv != NULL, NULL);
@@ -411,44 +387,6 @@ ario_connection_preferences_finalize (GObject *object)
 }
 
 static void
-ario_connection_preferences_set_property (GObject *object,
-                                          guint prop_id,
-                                          const GValue *value,
-                                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioConnectionPreferences *connection_preferences = ARIO_CONNECTION_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                connection_preferences->priv->mpd = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_connection_preferences_get_property (GObject *object,
-                                          guint prop_id,
-                                          GValue *value,
-                                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioConnectionPreferences *connection_preferences = ARIO_CONNECTION_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, connection_preferences->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
 ario_connection_preferences_sync_connection (ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
@@ -458,7 +396,7 @@ ario_connection_preferences_sync_connection (ArioConnectionPreferences *connecti
 
         autoconnect = ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT);
 
-        if (ario_mpd_is_connected (connection_preferences->priv->mpd)) {
+        if (ario_mpd_is_connected ()) {
                 gtk_widget_set_sensitive (connection_preferences->priv->connect_button, FALSE);
                 gtk_widget_set_sensitive (connection_preferences->priv->disconnect_button, TRUE);
         } else {
@@ -815,7 +753,7 @@ ario_connection_preferences_connect_cb (GtkWidget *widget,
                                         ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_connect (connection_preferences->priv->mpd);
+        ario_mpd_connect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }
 
@@ -824,6 +762,6 @@ ario_connection_preferences_disconnect_cb (GtkWidget *widget,
                                            ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_disconnect (connection_preferences->priv->mpd);
+        ario_mpd_disconnect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }

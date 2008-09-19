@@ -25,6 +25,7 @@
 #include "ario-radio.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "ario-mpd.h"
 #include "plugins/ario-plugin.h"
 
 #define DRAG_THRESHOLD 1
@@ -102,7 +103,6 @@ struct ArioRadioPrivate
         gint drag_start_x;
         gint drag_start_y;
 
-        ArioMpd *mpd;
         GtkUIManager *ui_manager;
 
         xmlDocPtr doc;
@@ -134,7 +134,6 @@ static guint ario_radio_n_actions = G_N_ELEMENTS (ario_radio_actions);
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -186,13 +185,6 @@ ario_radio_class_init (ArioRadioClass *klass)
         source_class->get_name = ario_radio_get_name;
         source_class->get_icon = ario_radio_get_icon;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -300,17 +292,6 @@ ario_radio_set_property (GObject *object,
         ArioRadio *radio = ARIO_RADIO (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                radio->priv->mpd = g_value_get_object (value);
-
-                /* Signals to synchronize the radio with mpd */
-                g_signal_connect_object (radio->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_radio_state_changed_cb),
-                                         radio, 0);
-
-                radio->priv->connected = ario_mpd_is_connected (radio->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 radio->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -330,9 +311,6 @@ ario_radio_get_property (GObject *object,
         ArioRadio *radio = ARIO_RADIO (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, radio->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, radio->priv->ui_manager);
                 break;
@@ -344,8 +322,7 @@ ario_radio_get_property (GObject *object,
 
 GtkWidget *
 ario_radio_new (GtkUIManager *mgr,
-                GtkActionGroup *group,
-                ArioMpd *mpd)
+                GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START
         ArioRadio *radio;
@@ -353,10 +330,15 @@ ario_radio_new (GtkUIManager *mgr,
 
         radio = g_object_new (TYPE_ARIO_RADIO,
                               "ui-manager", mgr,
-                              "mpd", mpd,
                               NULL);
 
         g_return_val_if_fail (radio->priv != NULL, NULL);
+
+        /* Signals to synchronize the radio with mpd */
+        g_signal_connect_object (ario_mpd_get_instance (),
+                                 "state_changed",
+                                 G_CALLBACK (ario_radio_state_changed_cb),
+                                 radio, 0);
 
         if (!is_loaded) {
                 gtk_action_group_add_actions (group,
@@ -549,8 +531,8 @@ ario_radio_state_changed_cb (ArioMpd *mpd,
 {
         ARIO_LOG_FUNCTION_START
 
-        if (radio->priv->connected != ario_mpd_is_connected (mpd)) {
-                radio->priv->connected = ario_mpd_is_connected (mpd);
+        if (radio->priv->connected != ario_mpd_is_connected ()) {
+                radio->priv->connected = ario_mpd_is_connected ();
                 ario_radio_fill_radios (radio);
         }
 }
@@ -623,7 +605,7 @@ ario_radio_cmd_clear_add_play_radios (GtkAction *action,
                                       ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_clear (radio->priv->mpd);
+        ario_mpd_clear ();
         ario_radio_add_in_playlist (radio, TRUE);
 }
 

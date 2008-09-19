@@ -30,7 +30,6 @@
 #else
 #include <gtk/gtkstatusicon.h>
 #endif
-#include "ario-mpd.h"
 #include "shell/ario-shell.h"
 
 G_BEGIN_DECLS
@@ -70,8 +69,7 @@ GType                   ario_tray_icon_get_type         (void) G_GNUC_CONST;
 
 ArioTrayIcon *          ario_tray_icon_new              (GtkActionGroup *group,
                                                          GtkUIManager *mgr,
-                                                         ArioShell *shell,
-                                                         ArioMpd *mpd);
+                                                         ArioShell *shell);
 
 void                    ario_tray_icon_notify           (void);
 

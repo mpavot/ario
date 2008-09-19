@@ -22,7 +22,6 @@
 
 #include <gtk/gtkhpaned.h>
 #include <config.h>
-#include "ario-mpd.h"
 #include "sources/ario-source.h"
 
 #ifdef ENABLE_STOREDPLAYLISTS
@@ -53,8 +52,7 @@ typedef struct
 GType                   ario_storedplaylists_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_storedplaylists_new        (GtkUIManager *mgr,
-                                                         GtkActionGroup *group,
-                                                         ArioMpd *mpd);
+                                                         GtkActionGroup *group);
 G_END_DECLS
 
 #endif  /* ENABLE_STOREDPLAYLISTS */

@@ -110,7 +110,6 @@ struct ArioShellPrivate
 {
         GtkWidget *window;
 
-        ArioMpd *mpd;
         ArioCoverHandler *cover_handler;
         ArioNotificationManager *notification_manager;
         GtkWidget *header;
@@ -141,7 +140,6 @@ struct ArioShellPrivate
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER,
         PROP_ACTION_GROUP
 };
@@ -219,13 +217,6 @@ ario_shell_class_init (ArioShellClass *klass)
         object_class->finalize = ario_shell_finalize;
 
         g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
                                                               "GtkUIManager",
@@ -269,7 +260,7 @@ ario_shell_finalize (GObject *object)
         gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->notification_manager);
-        g_object_unref (shell->priv->mpd);
+        g_object_unref (ario_mpd_get_instance ());
 #ifdef ENABLE_EGGTRAYICON
         gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));;
 #else
@@ -292,9 +283,6 @@ ario_shell_set_property (GObject *object,
         ArioShell *shell = ARIO_SHELL (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                shell->priv->mpd = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 shell->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -317,9 +305,6 @@ ario_shell_get_property (GObject *object,
         ArioShell *shell = ARIO_SHELL (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, shell->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, shell->priv->ui_manager);
                 break;
@@ -349,7 +334,7 @@ ario_shell_quit (ArioShell *shell)
         ARIO_LOG_FUNCTION_START
 
         if (ario_conf_get_boolean (PREF_STOP_EXIT, PREF_STOP_EXIT_DEFAULT))
-                ario_mpd_do_stop (shell->priv->mpd);
+                ario_mpd_do_stop ();
         gtk_main_quit ();
 }
 
@@ -420,18 +405,17 @@ ario_shell_construct (ArioShell *shell,
         /* initialize shell services */
         vbox = gtk_vbox_new (FALSE, 0);
 
-        shell->priv->mpd = ario_mpd_get_instance ();
-        shell->priv->cover_handler = ario_cover_handler_new (shell->priv->mpd);
-        shell->priv->header = ario_header_new (shell->priv->mpd);
+        ario_mpd_get_instance ();
+        shell->priv->cover_handler = ario_cover_handler_new ();
+        shell->priv->header = ario_header_new ();
         separator = gtk_hseparator_new ();
-        shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
-        shell->priv->sourcemanager = ario_sourcemanager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup, shell->priv->mpd);
+        shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);
+        shell->priv->sourcemanager = ario_sourcemanager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
 
         /* initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
-                                                     shell,
-                                                     shell->priv->mpd);
+                                                     shell);
 #ifdef ENABLE_EGGTRAYICON
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
         if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
@@ -439,7 +423,7 @@ ario_shell_construct (ArioShell *shell,
 #endif
         shell->priv->notification_manager = ario_notification_manager_get_instance ();
         shell->priv->vpaned = gtk_vpaned_new ();
-        shell->priv->status_bar = ario_status_bar_new (shell->priv->mpd);
+        shell->priv->status_bar = ario_status_bar_new ();
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewStatusbar");
@@ -552,19 +536,20 @@ ario_shell_show (ArioShell *shell,
                  gboolean minimized)
 {
         ARIO_LOG_FUNCTION_START
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
-        g_signal_connect (shell->priv->mpd,
+        g_signal_connect (mpd,
                           "state_changed",
                           G_CALLBACK (ario_shell_mpd_state_changed_cb),
                           shell);
 
-        g_signal_connect (shell->priv->mpd,
+        g_signal_connect (mpd,
                           "song_changed",
                           G_CALLBACK (ario_shell_mpd_song_changed_cb),
                           shell);
 
         if (ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT))
-                ario_mpd_connect (shell->priv->mpd);
+                ario_mpd_connect ();
 
         ario_shell_sync_paned (shell);
         ario_shell_sync_mpd (shell);
@@ -581,7 +566,7 @@ ario_shell_show (ArioShell *shell,
                           shell);
 
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
-                ario_mpd_update_db (shell->priv->mpd);
+                ario_mpd_update_db ();
 }
 
 void
@@ -664,7 +649,7 @@ ario_shell_cmd_connect (GtkAction *action,
                         ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_connect (shell->priv->mpd);
+        ario_mpd_connect ();
 }
 
 static void
@@ -672,7 +657,7 @@ ario_shell_cmd_disconnect (GtkAction *action,
                            ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_disconnect (shell->priv->mpd);
+        ario_mpd_disconnect ();
 }
 
 static void
@@ -682,7 +667,7 @@ ario_shell_cmd_preferences (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *prefs;
 
-        prefs = ario_shell_preferences_new (shell->priv->mpd);
+        prefs = ario_shell_preferences_new ();
 
         gtk_window_set_transient_for (GTK_WINDOW (prefs),
                                       GTK_WINDOW (shell->priv->window));
@@ -697,7 +682,7 @@ ario_shell_cmd_lyrics (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *lyrics;
 
-        lyrics = ario_shell_lyrics_new (shell->priv->mpd);
+        lyrics = ario_shell_lyrics_new ();
         if (lyrics)
                 gtk_widget_show_all (lyrics);
 }
@@ -748,10 +733,10 @@ ario_shell_mpd_song_set_title (ArioShell *shell)
         gchar *window_title;
         gchar *tmp;
 
-        switch (ario_mpd_get_current_state (shell->priv->mpd)) {
+        switch (ario_mpd_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                tmp = ario_util_format_title (ario_mpd_get_current_song (shell->priv->mpd));
+                tmp = ario_util_format_title (ario_mpd_get_current_song ());
                 window_title = g_strdup_printf ("Ario - %s", tmp);
                 g_free (tmp);
                 break;
@@ -777,7 +762,7 @@ ario_shell_mpd_state_changed_cb (ArioMpd *mpd,
                                  ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        shell->priv->connected = ario_mpd_is_connected (mpd);
+        shell->priv->connected = ario_mpd_is_connected ();
 
         ario_shell_sync_mpd (shell);
         ario_shell_mpd_song_set_title (shell);
@@ -791,9 +776,9 @@ ario_shell_cmd_cover_select (GtkAction *action,
         GtkWidget *coverselect;
         ArioMpdAlbum mpd_album;
 
-        mpd_album.artist = ario_mpd_get_current_artist (shell->priv->mpd);
-        mpd_album.album = ario_mpd_get_current_album (shell->priv->mpd);
-        mpd_album.path = g_path_get_dirname ((ario_mpd_get_current_song (shell->priv->mpd))->file);
+        mpd_album.artist = ario_mpd_get_current_artist ();
+        mpd_album.album = ario_mpd_get_current_album ();
+        mpd_album.path = g_path_get_dirname ((ario_mpd_get_current_song ())->file);
 
         if (!mpd_album.album)
                 mpd_album.album = ARIO_MPD_UNKNOWN;
@@ -814,7 +799,7 @@ ario_shell_cmd_covers (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *coverdownloader;
 
-        coverdownloader = ario_shell_coverdownloader_new (shell->priv->mpd);
+        coverdownloader = ario_shell_coverdownloader_new ();
 
         if (coverdownloader) {
                 ario_shell_coverdownloader_get_covers (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
@@ -829,7 +814,7 @@ ario_shell_cmd_similar_artists (GtkAction *action,
         ARIO_LOG_FUNCTION_START
         GtkWidget *similarartists;
 
-        similarartists = ario_shell_similarartists_new (shell->priv->mpd);
+        similarartists = ario_shell_similarartists_new ();
         if (similarartists)
                 gtk_widget_show_all (similarartists);
 }
@@ -840,8 +825,7 @@ ario_shell_cmd_add_similar (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
 
-        ario_shell_similarartists_add_similar_to_playlist (shell->priv->mpd,
-                                                           ario_mpd_get_current_artist (shell->priv->mpd));
+        ario_shell_similarartists_add_similar_to_playlist (ario_mpd_get_current_artist ());
 }
 
 static void
@@ -861,7 +845,7 @@ ario_shell_window_show_cb (GtkWidget *widget,
                            ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_use_count_inc (shell->priv->mpd);
+        ario_mpd_use_count_inc ();
 }
 
 static void
@@ -869,7 +853,7 @@ ario_shell_window_hide_cb (GtkWidget *widget,
                            ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_use_count_dec (shell->priv->mpd);
+        ario_mpd_use_count_dec ();
 }
 
 static gboolean
@@ -940,8 +924,8 @@ ario_shell_sync_mpd (ArioShell *shell)
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
 
         is_playing = ((shell->priv->connected)
-                      && ((ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PLAY)
-                          || (ario_mpd_get_current_state (shell->priv->mpd) == MPD_STATUS_STATE_PAUSE)));
+                      && ((ario_mpd_get_current_state () == MPD_STATUS_STATE_PLAY)
+                          || (ario_mpd_get_current_state () == MPD_STATUS_STATE_PAUSE)));
 
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewLyrics");

@@ -22,7 +22,6 @@
 
 #include <gtk/gtkhbox.h>
 #include <config.h>
-#include "ario-mpd.h"
 #include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"
 
@@ -52,8 +51,7 @@ typedef struct
 GType                   ario_radio_get_type   (void) G_GNUC_CONST;
 
 GtkWidget*              ario_radio_new        (GtkUIManager *mgr,
-                                               GtkActionGroup *group,
-                                               ArioMpd *mpd);
+                                               GtkActionGroup *group);
 
 G_END_DECLS
 

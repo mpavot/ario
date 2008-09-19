@@ -102,136 +102,115 @@ GType                   ario_mpd_get_type                               (void) G
 
 ArioMpd *               ario_mpd_get_instance                           (void);
 
-gboolean                ario_mpd_connect                                (ArioMpd *mpd);
+gboolean                ario_mpd_connect                                (void);
 
-void                    ario_mpd_disconnect                             (ArioMpd *mpd);
+void                    ario_mpd_disconnect                             (void);
 
-gboolean                ario_mpd_is_connected                           (ArioMpd *mpd);
+gboolean                ario_mpd_is_connected                           (void);
 
-gboolean                ario_mpd_update_status                          (ArioMpd *mpd);
+gboolean                ario_mpd_update_status                          (void);
 
-void                    ario_mpd_update_db                              (ArioMpd *mpd);
+void                    ario_mpd_update_db                              (void);
 
-GSList *                ario_mpd_list_tags                              (ArioMpd *mpd,
-                                                                         const ArioMpdTag tag,
+GSList *                ario_mpd_list_tags                              (const ArioMpdTag tag,
                                                                          const ArioMpdCriteria *criteria);
-GSList *                ario_mpd_get_artists                            (ArioMpd *mpd);
+GSList *                ario_mpd_get_artists                            (void);
 
-GSList *                ario_mpd_get_albums                             (ArioMpd *mpd,
-                                                                         const ArioMpdCriteria *criteria);
-GSList *                ario_mpd_get_songs                              (ArioMpd *mpd,
-                                                                         const ArioMpdCriteria *criteria,
+GSList *                ario_mpd_get_albums                             (const ArioMpdCriteria *criteria);
+GSList *                ario_mpd_get_songs                              (const ArioMpdCriteria *criteria,
                                                                          const gboolean exact);
-GSList *                ario_mpd_get_songs_from_playlist                (ArioMpd *mpd,
-                                                                         char *playlist);
-GSList *                ario_mpd_get_playlists                          (ArioMpd *mpd);
+GSList *                ario_mpd_get_songs_from_playlist                (char *playlist);
+GSList *                ario_mpd_get_playlists                          (void);
 
-GSList *                ario_mpd_get_playlist_changes                   (ArioMpd *mpd,
-                                                                         int playlist_id);
-ArioMpdSong *           ario_mpd_get_playlist_info                      (ArioMpd *mpd,
-                                                                         int song_pos);
-char *                  ario_mpd_get_current_title                      (ArioMpd *mpd);
+GSList *                ario_mpd_get_playlist_changes                   (int playlist_id);
+ArioMpdSong *           ario_mpd_get_playlist_info                      (int song_pos);
+char *                  ario_mpd_get_current_title                      (void);
 
-char *                  ario_mpd_get_current_name                       (ArioMpd *mpd);
+char *                  ario_mpd_get_current_name                       (void);
 
-ArioMpdSong *           ario_mpd_get_current_song                       (ArioMpd *mpd);
+ArioMpdSong *           ario_mpd_get_current_song                       (void);
 
-char *                  ario_mpd_get_current_artist                     (ArioMpd *mpd);
+char *                  ario_mpd_get_current_artist                     (void);
 
-char *                  ario_mpd_get_current_album                      (ArioMpd *mpd);
+char *                  ario_mpd_get_current_album                      (void);
 
-char *                  ario_mpd_get_current_song_path                  (ArioMpd *mpd);
+char *                  ario_mpd_get_current_song_path                  (void);
 
-int                     ario_mpd_get_current_song_id                    (ArioMpd *mpd);
+int                     ario_mpd_get_current_song_id                    (void);
 
-int                     ario_mpd_get_current_state                      (ArioMpd *mpd);
+int                     ario_mpd_get_current_state                      (void);
 
-int                     ario_mpd_get_current_elapsed                    (ArioMpd *mpd);
+int                     ario_mpd_get_current_elapsed                    (void);
 
-int                     ario_mpd_get_current_volume                     (ArioMpd *mpd);
+int                     ario_mpd_get_current_volume                     (void);
 
-int                     ario_mpd_get_current_total_time                 (ArioMpd *mpd);
+int                     ario_mpd_get_current_total_time                 (void);
 
-int                     ario_mpd_get_current_playlist_id                (ArioMpd *mpd);
+int                     ario_mpd_get_current_playlist_id                (void);
 
-int                     ario_mpd_get_current_playlist_length            (ArioMpd *mpd);
+int                     ario_mpd_get_current_playlist_length            (void);
 
-int                     ario_mpd_get_current_playlist_total_time        (ArioMpd *mpd);
+int                     ario_mpd_get_current_playlist_total_time        (void);
 
-int                     ario_mpd_get_crossfadetime                      (ArioMpd *mpd);
+int                     ario_mpd_get_crossfadetime                      (void);
 
-gboolean                ario_mpd_get_current_random                     (ArioMpd *mpd);
+gboolean                ario_mpd_get_current_random                     (void);
 
-gboolean                ario_mpd_get_current_repeat                     (ArioMpd *mpd);
+gboolean                ario_mpd_get_current_repeat                     (void);
 
-gboolean                ario_mpd_get_updating                           (ArioMpd *mpd);
+gboolean                ario_mpd_get_updating                           (void);
 
-unsigned long           ario_mpd_get_last_update                        (ArioMpd *mpd);
+unsigned long           ario_mpd_get_last_update                        (void);
 
-void                    ario_mpd_set_current_elapsed                    (ArioMpd *mpd,
-                                                                         const gint elapsed);
-void                    ario_mpd_set_current_volume                     (ArioMpd *mpd,
-                                                                         const gint volume);
-GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
+void                    ario_mpd_set_current_elapsed                    (const gint elapsed);
+void                    ario_mpd_set_current_volume                     (const gint volume);
+GSList *                ario_mpd_get_outputs                            (void);
 
-void                    ario_mpd_set_current_random                     (ArioMpd *mpd,
-                                                                         const gboolean random);
-void                    ario_mpd_set_current_repeat                     (ArioMpd *mpd,
-                                                                         const gboolean repeat);
-void                    ario_mpd_set_crossfadetime                      (ArioMpd *mpd,
-                                                                         const int crossfadetime);
-gboolean                ario_mpd_is_paused                              (ArioMpd *mpd);
+void                    ario_mpd_set_current_random                     (const gboolean random);
+void                    ario_mpd_set_current_repeat                     (const gboolean repeat);
+void                    ario_mpd_set_crossfadetime                      (const int crossfadetime);
+gboolean                ario_mpd_is_paused                              (void);
 
-void                    ario_mpd_do_next                                (ArioMpd *mpd);
+void                    ario_mpd_do_next                                (void);
 
-void                    ario_mpd_do_prev                                (ArioMpd *mpd);
+void                    ario_mpd_do_prev                                (void);
 
-void                    ario_mpd_do_play                                (ArioMpd *mpd);
+void                    ario_mpd_do_play                                (void);
 
-void                    ario_mpd_do_play_id                             (ArioMpd *mpd,
-                                                                         gint id);
-void                    ario_mpd_do_pause                               (ArioMpd *mpd);
+void                    ario_mpd_do_play_id                             (gint id);
+void                    ario_mpd_do_pause                               (void);
 
-void                    ario_mpd_do_stop                                (ArioMpd *mpd);
+void                    ario_mpd_do_stop                                (void);
 
 void                    ario_mpd_free_album                             (ArioMpdAlbum *ario_mpd_album);
 
 ArioMpdAlbum *          ario_mpd_copy_album                             (const ArioMpdAlbum *ario_mpd_album);
 
-void                    ario_mpd_clear                                  (ArioMpd *mpd);
+void                    ario_mpd_clear                                  (void);
 
-void                    ario_mpd_queue_add                              (ArioMpd *mpd,
-                                                                         const char *path);
-void                    ario_mpd_queue_delete_id                        (ArioMpd *mpd,
-                                                                         const int id);
-void                    ario_mpd_queue_delete_pos                       (ArioMpd *mpd,
-                                                                         const int pos);
-void                    ario_mpd_queue_move                             (ArioMpd *mpd,
-                                                                         const int old_pos,
+void                    ario_mpd_queue_add                              (const char *path);
+void                    ario_mpd_queue_delete_id                        (const int id);
+void                    ario_mpd_queue_delete_pos                       (const int pos);
+void                    ario_mpd_queue_move                             (const int old_pos,
                                                                          const int new_pos);
-void                    ario_mpd_queue_commit                           (ArioMpd *mpd);
+void                    ario_mpd_queue_commit                           (void);
 
 // returns 0 if OK, 1 if playlist already exists
-int                     ario_mpd_save_playlist                          (ArioMpd *mpd,
-                                                                         const char *name);
-void                    ario_mpd_delete_playlist                        (ArioMpd *mpd,
-                                                                         const char *name);
-void                    ario_mpd_use_count_inc                          (ArioMpd *mpd);
+int                     ario_mpd_save_playlist                          (const char *name);
+void                    ario_mpd_delete_playlist                        (const char *name);
+void                    ario_mpd_use_count_inc                          (void);
 
-void                    ario_mpd_use_count_dec                          (ArioMpd *mpd);
+void                    ario_mpd_use_count_dec                          (void);
 
-GSList *                ario_mpd_get_outputs                            (ArioMpd *mpd);
+GSList *                ario_mpd_get_outputs                            (void);
 
-void                    ario_mpd_enable_output                          (ArioMpd *mpd,
-                                                                         const int id,
+void                    ario_mpd_enable_output                          (const int id,
                                                                          const gboolean enabled);
-ArioMpdStats *          ario_mpd_get_stats                              (ArioMpd *mpd);
+ArioMpdStats *          ario_mpd_get_stats                              (void);
 
-GList *                 ario_mpd_get_songs_info                         (ArioMpd *mpd,
-                                                                         GSList *paths);
+GList *                 ario_mpd_get_songs_info                         (GSList *paths);
 
-ArioMpdFileList*        ario_mpd_list_files                             (ArioMpd *mpd,
-                                                                         const char *path,
+ArioMpdFileList*        ario_mpd_list_files                             (const char *path,
                                                                          const gboolean recursive);
 void                    ario_mpd_free_file_list                         (ArioMpdFileList *files);
 

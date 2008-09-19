@@ -21,7 +21,6 @@
 #define __ARIO_VOLUME_H
 
 #include <gtk/gtkbutton.h>
-#include "ario-mpd.h"
 
 G_BEGIN_DECLS
 
@@ -48,7 +47,7 @@ typedef struct
 
 GType           ario_volume_get_type    (void) G_GNUC_CONST;
 
-ArioVolume *    ario_volume_new         (ArioMpd *mpd);
+ArioVolume *    ario_volume_new         (void);
 
 G_END_DECLS
 

@@ -78,8 +78,7 @@ ario_sourcemanager_init (ArioSourceManager *sourcemanager)
 
 GtkWidget *
 ario_sourcemanager_get_instance (GtkUIManager *mgr,
-                                 GtkActionGroup *group,
-                                 ArioMpd *mpd)
+                                 GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *source;
@@ -95,20 +94,17 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
         instance->priv->group = group;
 
         source = ario_browser_new (mgr,
-                                   group,
-                                   mpd);
+                                   group);
         ario_sourcemanager_append (ARIO_SOURCE (source));
 
 #ifdef ENABLE_SEARCH
         source = ario_search_new (mgr,
-                                  group,
-                                  mpd);
+                                  group);
         ario_sourcemanager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         source = ario_storedplaylists_new (mgr,
-                                           group,
-                                           mpd);
+                                           group);
         ario_sourcemanager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_STOREDPLAYLISTS */
 

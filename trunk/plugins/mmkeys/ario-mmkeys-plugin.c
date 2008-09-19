@@ -44,7 +44,6 @@
 struct _ArioMmkeysPluginPrivate
 {
         DBusGProxy *proxy;
-        ArioMpd *mpd;
 };
 
 ARIO_PLUGIN_REGISTER_TYPE(ArioMmkeysPlugin, ario_mmkeys_plugin)
@@ -69,16 +68,16 @@ media_player_key_pressed (DBusGProxy *proxy,
 
         if (strcmp (key, "Play") == 0 ||
             strcmp (key, "Pause") == 0) {
-                if (ario_mpd_is_paused (plugin->priv->mpd))
-                        ario_mpd_do_play (plugin->priv->mpd);
+                if (ario_mpd_is_paused ())
+                        ario_mpd_do_play ();
                 else
-                        ario_mpd_do_pause (plugin->priv->mpd);
+                        ario_mpd_do_pause ();
         } else if (strcmp (key, "Stop") == 0) {
-                ario_mpd_do_stop (plugin->priv->mpd);
+                ario_mpd_do_stop ();
         } else if (strcmp (key, "Previous") == 0) {
-                ario_mpd_do_prev (plugin->priv->mpd);
+                ario_mpd_do_prev ();
         } else if (strcmp (key, "Next") == 0) {
-                ario_mpd_do_next (plugin->priv->mpd);
+                ario_mpd_do_next ();
         }
 }
 
@@ -90,11 +89,6 @@ impl_activate (ArioPlugin *pl,
         ArioMmkeysPlugin *plugin = ARIO_MMKEYS_PLUGIN (pl);
 
         ARIO_LOG_DBG ("activating media player keys plugin");
-
-        g_object_get (shell,
-                      "mpd", &plugin->priv->mpd,
-                      NULL);
-        g_object_unref (plugin->priv->mpd);
 
         bus = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
         if (bus) {

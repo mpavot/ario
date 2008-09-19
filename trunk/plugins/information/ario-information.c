@@ -30,6 +30,7 @@
 #include "lib/rb-glade-helpers.h"
 #include "lyrics/ario-lyrics.h"
 #include "covers/ario-cover.h"
+#include "ario-mpd.h"
 
 static void ario_information_finalize (GObject *object);
 static void ario_information_set_property (GObject *object,
@@ -65,7 +66,6 @@ struct ArioInformationPrivate
 {
         gboolean connected;
 
-        ArioMpd *mpd;
         GtkUIManager *ui_manager;
 
         GtkWidget *artist_label;
@@ -92,7 +92,6 @@ static const GtkTargetEntry criterias_targets  [] = {
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -155,13 +154,6 @@ ario_information_class_init (ArioInformationClass *klass)
         source_class->select = ario_information_select;
         source_class->unselect = ario_information_unselect;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -287,25 +279,6 @@ ario_information_set_property (GObject *object,
         ArioInformation *information = ARIO_INFORMATION (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                information->priv->mpd = g_value_get_object (value);
-
-                /* Signals to synchronize the information with mpd */
-                g_signal_connect_object (information->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_information_state_changed_cb),
-                                         information, 0);
-                g_signal_connect_object (information->priv->mpd,
-                                         "song_changed",
-                                         G_CALLBACK (ario_information_song_changed_cb),
-                                         information, 0);
-                g_signal_connect_object (information->priv->mpd,
-                                         "album_changed",
-                                         G_CALLBACK (ario_information_album_changed_cb),
-                                         information, 0);
-
-                information->priv->connected = ario_mpd_is_connected (information->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 information->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -325,9 +298,6 @@ ario_information_get_property (GObject *object,
         ArioInformation *information = ARIO_INFORMATION (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, information->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, information->priv->ui_manager);
                 break;
@@ -338,20 +308,33 @@ ario_information_get_property (GObject *object,
 }
 
 GtkWidget *
-ario_information_new (GtkUIManager *mgr,
-                      ArioMpd *mpd)
+ario_information_new (GtkUIManager *mgr)
 {
         ARIO_LOG_FUNCTION_START
         ArioInformation *information;
+        ArioMpd *mpd = ario_mpd_get_instance ();
 
         information = g_object_new (TYPE_ARIO_INFORMATION,
                                     "ui-manager", mgr,
-                                    "mpd", mpd,
                                     NULL);
 
         g_return_val_if_fail (information->priv != NULL, NULL);
 
-        information->priv->connected = ario_mpd_is_connected (mpd);
+        /* Signals to synchronize the information with mpd */
+        g_signal_connect_object (mpd,
+                                 "state_changed",
+                                 G_CALLBACK (ario_information_state_changed_cb),
+                                 information, 0);
+        g_signal_connect_object (mpd,
+                                 "song_changed",
+                                 G_CALLBACK (ario_information_song_changed_cb),
+                                 information, 0);
+        g_signal_connect_object (mpd,
+                                 "album_changed",
+                                 G_CALLBACK (ario_information_album_changed_cb),
+                                 information, 0);
+
+        information->priv->connected = ario_mpd_is_connected ();
 
         ario_information_select (ARIO_SOURCE (information));
         ario_information_unselect (ARIO_SOURCE (information));
@@ -371,8 +354,8 @@ ario_information_fill_song (ArioInformation *information)
         if (!information->priv->selected)
                 return;
 
-        state = ario_mpd_get_current_state (information->priv->mpd);
-        song = ario_mpd_get_current_song (information->priv->mpd);
+        state = ario_mpd_get_current_state ();
+        song = ario_mpd_get_current_song ();
 
         if (!information->priv->connected
             || !song
@@ -454,8 +437,8 @@ ario_information_fill_album (ArioInformation *information)
         }
         gtk_widget_hide (information->priv->albums_const_label);
 
-        state = ario_mpd_get_current_state (information->priv->mpd);
-        song = ario_mpd_get_current_song (information->priv->mpd);
+        state = ario_mpd_get_current_state ();
+        song = ario_mpd_get_current_song ();
 
         if (!information->priv->connected
             || !song
@@ -467,7 +450,7 @@ ario_information_fill_album (ArioInformation *information)
         atomic_criteria.tag = MPD_TAG_ITEM_ARTIST;
         atomic_criteria.value = song->artist;
 
-        information->priv->albums = ario_mpd_get_albums (information->priv->mpd, criteria);
+        information->priv->albums = ario_mpd_get_albums (criteria);
         g_slist_free (criteria);
 
         for (tmp = information->priv->albums; tmp && nb < 8; tmp = g_slist_next (tmp)) {
@@ -516,7 +499,7 @@ ario_information_state_changed_cb (ArioMpd *mpd,
                                    ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
-        information->priv->connected = ario_mpd_is_connected (mpd);
+        information->priv->connected = ario_mpd_is_connected ();
         ario_information_fill_song (information);
         ario_information_fill_cover (information);
         ario_information_fill_album (information);

@@ -18,7 +18,6 @@
  */
 
 #include <gtk/gtkdialog.h>
-#include "ario-mpd.h"
 
 #ifndef __ARIO_SHELL_PREFERENCES_H
 #define __ARIO_SHELL_PREFERENCES_H
@@ -48,7 +47,7 @@ typedef struct
 
 GType              ario_shell_preferences_get_type         (void) G_GNUC_CONST;
 
-GtkWidget *        ario_shell_preferences_new              (ArioMpd *mpd);
+GtkWidget *        ario_shell_preferences_new              (void);
 
 G_END_DECLS
 

@@ -69,8 +69,6 @@ struct ArioSonglistPrivate
         gint drag_start_x;
         gint drag_start_y;
 
-        ArioMpd *mpd;
-
         GtkUIManager *ui_manager;
 
         gchar *popup;
@@ -79,7 +77,6 @@ struct ArioSonglistPrivate
 enum
 {
         PROP_0,
-        PROP_MPD,
         PROP_UI_MANAGER
 };
 
@@ -101,13 +98,6 @@ ario_songlist_class_init (ArioSonglistClass *klass)
         object_class->set_property = ario_songlist_set_property;
         object_class->get_property = ario_songlist_get_property;
 
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -154,9 +144,6 @@ ario_songlist_set_property (GObject *object,
         ArioSonglist *songlist = ARIO_SONGLIST (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                songlist->priv->mpd = g_value_get_object (value);
-                break;
         case PROP_UI_MANAGER:
                 songlist->priv->ui_manager = g_value_get_object (value);
                 break;
@@ -176,9 +163,6 @@ ario_songlist_get_property (GObject *object,
         ArioSonglist *songlist = ARIO_SONGLIST (object);
 
         switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, songlist->priv->mpd);
-                break;
         case PROP_UI_MANAGER:
                 g_value_set_object (value, songlist->priv->ui_manager);
                 break;
@@ -190,7 +174,6 @@ ario_songlist_get_property (GObject *object,
 
 GtkWidget *
 ario_songlist_new (GtkUIManager *mgr,
-                   ArioMpd *mpd,
                    gchar *popup,
                    gboolean is_sortable)
 {
@@ -201,7 +184,6 @@ ario_songlist_new (GtkUIManager *mgr,
 
         songlist = g_object_new (TYPE_ARIO_SONGLIST,
                                  "ui-manager", mgr,
-                                 "mpd", mpd,
                                  NULL);
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
@@ -343,7 +325,7 @@ ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
                                             ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_clear (songlist->priv->mpd);
+        ario_mpd_clear ();
         ario_songlist_add_in_playlist (songlist, TRUE);
 }
 
@@ -360,8 +342,7 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
                                              songlists_foreach,
                                              &paths);
 
-        songs = ario_mpd_get_songs_info (songlist->priv->mpd,
-                                         paths);
+        songs = ario_mpd_get_songs_info (paths);
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 

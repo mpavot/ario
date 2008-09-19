@@ -22,7 +22,6 @@
 
 #include <gtk/gtkhbox.h>
 #include <config.h>
-#include "ario-mpd.h"
 #include "sources/ario-source.h"
 
 G_BEGIN_DECLS
@@ -50,8 +49,7 @@ typedef struct
 
 GType                   ario_information_get_type   (void) G_GNUC_CONST;
 
-GtkWidget*              ario_information_new        (GtkUIManager *mgr,
-                                                     ArioMpd *mpd);
+GtkWidget*              ario_information_new        (GtkUIManager *mgr);
 
 G_END_DECLS
 

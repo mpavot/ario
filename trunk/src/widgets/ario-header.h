@@ -21,7 +21,6 @@
 #define __ARIO_HEADER_H
 
 #include <gtk/gtkhbox.h>
-#include "ario-mpd.h"
 
 G_BEGIN_DECLS
 
@@ -48,7 +47,7 @@ typedef struct
 
 GType           ario_header_get_type                 (void) G_GNUC_CONST;
 
-GtkWidget *     ario_header_new                      (ArioMpd *mpd);
+GtkWidget *     ario_header_new                      (void);
 
 void            ario_header_do_next                  (ArioHeader *header);
 

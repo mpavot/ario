@@ -27,29 +27,14 @@
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "ario-mpd.h"
 
-static void ario_stats_preferences_set_property (GObject *object,
-                                                 guint prop_id,
-                                                 const GValue *value,
-                                                 GParamSpec *pspec);
-static void ario_stats_preferences_get_property (GObject *object,
-                                                 guint prop_id,
-                                                 GValue *value,
-                                                 GParamSpec *pspec);
 static void ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences);
 static void ario_stats_preferences_stats_changed_cb (ArioMpd *mpd,
                                                      ArioStatsPreferences *stats_preferences);
 
-enum
-{
-        PROP_0,
-        PROP_MPD
-};
-
 struct ArioStatsPreferencesPrivate
 {
-        ArioMpd *mpd;
-
         GtkWidget *nbartists_label;
         GtkWidget *nbalbums_label;
         GtkWidget *nbsongs_label;
@@ -65,18 +50,6 @@ static void
 ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        object_class->set_property = ario_stats_preferences_set_property;
-        object_class->get_property = ario_stats_preferences_get_property;
-
-        g_object_class_install_property (object_class,
-                                         PROP_MPD,
-                                         g_param_spec_object ("mpd",
-                                                              "mpd",
-                                                              "mpd",
-                                                              TYPE_ARIO_MPD,
-                                                              G_PARAM_READWRITE));
         g_type_class_add_private (klass, sizeof (ArioStatsPreferencesPrivate));
 }
 
@@ -88,17 +61,21 @@ ario_stats_preferences_init (ArioStatsPreferences *stats_preferences)
 }
 
 GtkWidget *
-ario_stats_preferences_new (ArioMpd *mpd)
+ario_stats_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         GladeXML *xml;
         ArioStatsPreferences *stats_preferences;
 
         stats_preferences = g_object_new (TYPE_ARIO_STATS_PREFERENCES,
-                                          "mpd", mpd,
                                           NULL);
 
         g_return_val_if_fail (stats_preferences->priv != NULL, NULL);
+
+        g_signal_connect_object (ario_mpd_get_instance (),
+                                 "state_changed",
+                                 G_CALLBACK (ario_stats_preferences_stats_changed_cb),
+                                 stats_preferences, 0);
 
         xml = rb_glade_xml_new (GLADE_PATH "stats-prefs.glade",
                                 "vbox",
@@ -141,52 +118,10 @@ ario_stats_preferences_new (ArioMpd *mpd)
 }
 
 static void
-ario_stats_preferences_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioStatsPreferences *stats_preferences = ARIO_STATS_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                stats_preferences->priv->mpd = g_value_get_object (value);
-                g_signal_connect_object (stats_preferences->priv->mpd,
-                                         "state_changed",
-                                         G_CALLBACK (ario_stats_preferences_stats_changed_cb),
-                                         stats_preferences, 0);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void 
-ario_stats_preferences_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioStatsPreferences *stats_preferences = ARIO_STATS_PREFERENCES (object);
-
-        switch (prop_id) {
-        case PROP_MPD:
-                g_value_set_object (value, stats_preferences->priv->mpd);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
 ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdStats *stats = ario_mpd_get_stats (stats_preferences->priv->mpd);
+        ArioMpdStats *stats = ario_mpd_get_stats ();
         gchar *tmp;
 
         if (stats) {
