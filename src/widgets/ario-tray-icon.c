@@ -84,6 +84,7 @@ static void ario_tray_icon_album_changed_cb (ArioMpd *mpd,
 static void ario_tray_icon_state_changed_cb (ArioMpd *mpd,
                                              ArioTrayIcon *icon);
 static void ario_tray_icon_time_changed_cb (ArioMpd *mpd,
+                                            int elapsed,
                                             ArioTrayIcon *icon);
 static void ario_tray_icon_cover_changed_cb (ArioCoverHandler *cover_handler,
                                              ArioTrayIcon *icon);
@@ -925,6 +926,7 @@ ario_tray_icon_state_changed_cb (ArioMpd *mpd,
 
 static void
 ario_tray_icon_time_changed_cb (ArioMpd *mpd,
+                                int elapsed,
                                 ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START

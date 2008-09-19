@@ -275,9 +275,10 @@ ario_mpd_class_init (ArioMpdClass *klass)
                               G_SIGNAL_RUN_LAST,
                               G_STRUCT_OFFSET (ArioMpdClass, volume_changed),
                               NULL, NULL,
-                              g_cclosure_marshal_VOID__VOID,
+                              g_cclosure_marshal_VOID__INT,
                               G_TYPE_NONE,
-                              0);
+                              1,
+                              G_TYPE_INT);
 
         ario_mpd_signals[ELAPSED_CHANGED] =
                 g_signal_new ("elapsed_changed",
@@ -285,9 +286,10 @@ ario_mpd_class_init (ArioMpdClass *klass)
                               G_SIGNAL_RUN_LAST,
                               G_STRUCT_OFFSET (ArioMpdClass, elapsed_changed),
                               NULL, NULL,
-                              g_cclosure_marshal_VOID__VOID,
+                              g_cclosure_marshal_VOID__INT,
                               G_TYPE_NONE,
-                              0);
+                              1,
+                              G_TYPE_INT);
 
         ario_mpd_signals[PLAYLIST_CHANGED] =
                 g_signal_new ("playlist_changed",
@@ -1125,9 +1127,9 @@ ario_mpd_update_status (void)
         if (instance->priv->signals_to_emit & STATE_CHANGED_FLAG)
                 g_signal_emit (G_OBJECT (instance), ario_mpd_signals[STATE_CHANGED], 0);
         if (instance->priv->signals_to_emit & VOLUME_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[VOLUME_CHANGED], 0);
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[VOLUME_CHANGED], 0, instance->priv->volume);
         if (instance->priv->signals_to_emit & ELAPSED_CHANGED_FLAG)
-                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[ELAPSED_CHANGED], 0);
+                g_signal_emit (G_OBJECT (instance), ario_mpd_signals[ELAPSED_CHANGED], 0, instance->priv->elapsed);
         if (instance->priv->signals_to_emit & PLAYLIST_CHANGED_FLAG)
                 g_signal_emit (G_OBJECT (instance), ario_mpd_signals[PLAYLIST_CHANGED], 0);
         if (instance->priv->signals_to_emit & RANDOM_CHANGED_FLAG)

@@ -28,7 +28,6 @@
 #include "ario-debug.h"
 #include "ario-mpd.h"
 
-static void ario_volume_sync_volume (ArioVolume *volume);
 static void clicked_cb (GtkButton *button, ArioVolume *volume);
 static gboolean scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume);
 static gboolean scale_button_release_event_cb (GtkWidget *widget,
@@ -40,6 +39,7 @@ static gboolean scale_key_press_event_cb (GtkWidget *widget, GdkEventKey *event,
 static void mixer_value_changed_cb (GtkAdjustment *adj,
                                     ArioVolume *volume);
 static void ario_volume_changed_cb (ArioMpd *mpd,
+                                    int vol,
                                     ArioVolume *volume);
 
 #define ARIO_VOLUME_MAX 100
@@ -188,37 +188,11 @@ ario_volume_init (ArioVolume *volume)
 
 static void
 ario_volume_changed_cb (ArioMpd *mpd,
+                        int vol,
                         ArioVolume *volume)
 {
         ARIO_LOG_FUNCTION_START
-        ario_volume_sync_volume (volume);
-}
-
-ArioVolume *
-ario_volume_new (void)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioVolume *volume;
-
-        volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, NULL));
-
-        g_return_val_if_fail (volume->priv != NULL, NULL);
-
-        g_signal_connect_object (ario_mpd_get_instance (),
-                                 "volume_changed",
-                                 G_CALLBACK (ario_volume_changed_cb),
-                                 volume, 0);
-        return volume;
-}
-
-static void
-ario_volume_sync_volume (ArioVolume *volume)
-{
-        ARIO_LOG_FUNCTION_START
-        gint vol;
         GtkWidget *image;
-
-        vol = ario_mpd_get_current_volume ();
 
         if (vol == -1)
                 return;
@@ -239,6 +213,23 @@ ario_volume_sync_volume (ArioVolume *volume)
         gtk_container_add (GTK_CONTAINER (volume->priv->button), image);
 
         gtk_adjustment_set_value (volume->priv->adj, (gdouble) vol);
+}
+
+ArioVolume *
+ario_volume_new (void)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioVolume *volume;
+
+        volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, NULL));
+
+        g_return_val_if_fail (volume->priv != NULL, NULL);
+
+        g_signal_connect_object (ario_mpd_get_instance (),
+                                 "volume_changed",
+                                 G_CALLBACK (ario_volume_changed_cb),
+                                 volume, 0);
+        return volume;
 }
 
 static void
