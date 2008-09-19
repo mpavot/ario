@@ -51,6 +51,7 @@ static void ario_header_state_changed_cb (ArioMpd *mpd,
 static void ario_header_cover_changed_cb (ArioCoverHandler *cover_handler,
                                           ArioHeader *header);
 static void ario_header_elapsed_changed_cb (ArioMpd *mpd,
+                                            int elapsed,
                                             ArioHeader *header);
 static void ario_header_random_changed_cb (ArioMpd *mpd,
                                            ArioHeader *header);
@@ -619,16 +620,14 @@ ario_header_state_changed_cb (ArioMpd *mpd,
 
 static void
 ario_header_elapsed_changed_cb (ArioMpd *mpd,
+                                int elapsed,
                                 ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
-        int elapsed;
         char *tmp;
 
         if (header->priv->slider_dragging)
                 return;
-
-        elapsed = ario_mpd_get_current_elapsed ();
 
         tmp = ario_util_format_time (elapsed);
         gtk_label_set_text (GTK_LABEL (header->priv->elapsed), tmp);
