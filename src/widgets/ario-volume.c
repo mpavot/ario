@@ -47,18 +47,16 @@ static void ario_volume_changed_cb (ArioMpd *mpd,
 struct ArioVolumePrivate
 {
         GtkWidget *button;
-
         GtkWidget *window;
 
-        GtkWidget *scale;
         GtkAdjustment *adj;
 
         GtkWidget *max_image;
         GtkWidget *medium_image;
         GtkWidget *min_image;
         GtkWidget *zero_image;
-
-        guint notify_id;
+        
+        gboolean loading;
 };
 
 #define ARIO_VOLUME_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_VOLUME, ArioVolumePrivate))
@@ -80,7 +78,8 @@ ario_volume_init (ArioVolume *volume)
         GtkWidget *pluslabel, *minuslabel;
         GtkWidget *event;
         GtkWidget *box;
-
+        GtkWidget *scale;
+        
         volume->priv = ARIO_VOLUME_GET_PRIVATE (volume);
 
         volume->priv->button = gtk_button_new ();
@@ -140,9 +139,9 @@ ario_volume_init (ArioVolume *volume)
                                 G_CALLBACK (scale_button_event_cb), volume);
 
         box = gtk_vbox_new (FALSE, 0);
-        volume->priv->scale = gtk_vscale_new (volume->priv->adj);
-        gtk_range_set_inverted (GTK_RANGE (volume->priv->scale), TRUE);
-        gtk_widget_set_size_request (volume->priv->scale, -1, 100);
+        scale = gtk_vscale_new (volume->priv->adj);
+        gtk_range_set_inverted (GTK_RANGE (scale), TRUE);
+        gtk_widget_set_size_request (scale, -1, 100);
 
         g_signal_connect (volume->priv->window,
                           "scroll_event",
@@ -156,19 +155,19 @@ ario_volume_init (ArioVolume *volume)
 
         /* button event on the scale widget are not catched by its parent window
          ** so we must connect to this widget as well */
-        g_signal_connect (volume->priv->scale,
+        g_signal_connect (scale,
                           "button-release-event",
                           (GCallback) scale_button_release_event_cb,
                           volume);
 
-        g_signal_connect (volume->priv->scale,
+        g_signal_connect (scale,
                           "key-press-event",
                           (GCallback) scale_key_press_event_cb,
                           volume);
 
-        gtk_scale_set_draw_value (GTK_SCALE (volume->priv->scale), FALSE);
+        gtk_scale_set_draw_value (GTK_SCALE (scale), FALSE);
 
-        gtk_range_set_update_policy (GTK_RANGE (volume->priv->scale),
+        gtk_range_set_update_policy (GTK_RANGE (scale),
                                      GTK_UPDATE_CONTINUOUS);
 
         gtk_container_add (GTK_CONTAINER (volume->priv->window), frame);
@@ -180,7 +179,7 @@ ario_volume_init (ArioVolume *volume)
 
         gtk_box_pack_start (GTK_BOX (box), pluslabel, FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (box), minuslabel, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (box), volume->priv->scale, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (box), scale, TRUE, TRUE, 0);
 
         gtk_container_add (GTK_CONTAINER (event), box);
         gtk_container_add (GTK_CONTAINER (inner_frame), event);
@@ -212,7 +211,9 @@ ario_volume_changed_cb (ArioMpd *mpd,
         gtk_widget_show (image);
         gtk_container_add (GTK_CONTAINER (volume->priv->button), image);
 
+        volume->priv->loading = TRUE;
         gtk_adjustment_set_value (volume->priv->adj, (gdouble) vol);
+        volume->priv->loading = FALSE;
 }
 
 ArioVolume *
@@ -400,7 +401,9 @@ static void
 mixer_value_changed_cb (GtkAdjustment *adj, ArioVolume *volume)
 {
         ARIO_LOG_FUNCTION_START
-        gint vol = (gint) gtk_adjustment_get_value (volume->priv->adj);
-
-        ario_mpd_set_current_volume (vol);
+        
+        if (!volume->priv->loading) {
+                gint vol = (gint) gtk_adjustment_get_value (volume->priv->adj);
+                ario_mpd_set_current_volume (vol);
+        }
 }
