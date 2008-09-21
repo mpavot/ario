@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-15 22:19+0200\n"
+"POT-Creation-Date: 2008-09-20 18:59+0200\n"
 "PO-Revision-Date: 2008-08-14 14:14+0000\n"
 "Last-Translator: Päivi Pasi <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -93,8 +93,8 @@ msgstr ""
 msgid "Music directory :"
 msgstr "Musiikkihakemisto :"
 
-#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:867
-#: ../plugins/radios/ario-radio.c:1066
+#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:840
+#: ../plugins/radios/ario-radio.c:1039
 msgid "Name :"
 msgstr "Nimi :"
 
@@ -114,11 +114,11 @@ msgstr "Portti :"
 msgid "_Autoconnect on startup"
 msgstr "_Yhdistä automaattisesti käynnistyksen yhteydessä"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:157
+#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:155
 msgid "_Connect"
 msgstr "_Yhdistä"
 
-#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:160
+#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:158
 msgid "_Disconnect"
 msgstr "_Katkaise yhteys"
 
@@ -166,14 +166,14 @@ msgstr "Ladataan kansikuvaa"
 msgid "Local search"
 msgstr "Paikallinen haku"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:120
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:115
 msgid "Search"
 msgstr "Hae"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:148
-#: ../src/sources/ario-tree.c:405 ../src/widgets/ario-playlist.c:340
-#: ../src/widgets/ario-songlist.c:241 ../src/widgets/ario-tray-icon.c:699
+#: ../src/sources/ario-tree.c:388 ../src/widgets/ario-playlist.c:319
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:684
 #, fuzzy
 msgid "Album"
 msgstr "Levy"
@@ -185,30 +185,30 @@ msgstr ""
 #: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:147
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
-#: ../src/widgets/ario-playlist.c:340 ../src/widgets/ario-songlist.c:226
-#: ../src/widgets/ario-tray-icon.c:697
+#: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:682
 #, fuzzy
 msgid "Artist"
 msgstr "Esittäjä"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:153
-#: ../src/widgets/ario-playlist.c:340
+#: ../src/widgets/ario-playlist.c:319
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:340
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:319
 msgid "Duration"
 msgstr "Kesto"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:340
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:319
 msgid "File"
 msgstr "Tiedosto"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:152
-#: ../src/widgets/ario-playlist.c:340
+#: ../src/widgets/ario-playlist.c:319
 msgid "Genre"
 msgstr "Tyylilaji"
 
@@ -228,7 +228,7 @@ msgid "Interface"
 msgstr "Käyttöliitymä"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:233 ../src/shell/ario-shell.c:204
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:201
 msgid "Playlist"
 msgstr "Soittolista"
 
@@ -244,16 +244,16 @@ msgstr "Näytä välilehdet"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:149
-#: ../src/sources/ario-tree.c:451 ../src/shell/ario-shell-lyricsselect.c:189
-#: ../src/widgets/ario-playlist.c:340 ../src/widgets/ario-songlist.c:211
-#: ../src/widgets/ario-tray-icon.c:701
+#: ../src/sources/ario-tree.c:434 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:686
 #, fuzzy
 msgid "Title"
 msgstr "Nimi"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:150
-#: ../src/sources/ario-tree.c:444 ../src/widgets/ario-playlist.c:340
+#: ../src/sources/ario-tree.c:427 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Kappale"
 
@@ -474,18 +474,18 @@ msgstr "Tiedoston nimi"
 msgid "Any"
 msgstr "Mikä tahansa"
 
-#: ../src/ario-mpd.c:642
+#: ../src/ario-mpd.c:644
 #, fuzzy
 msgid "Connecting to MPD server..."
 msgstr "Yhdistetään MPD-palvelimeen"
 
-#: ../src/ario-mpd.c:667
+#: ../src/ario-mpd.c:669
 #, fuzzy
 msgid "Impossible to connect to mpd. Check the connection options."
 msgstr "MPD-yhteyden muodostaminen ei onnistunut. Tarkista yhteysvalinnat."
 
 #. impossible time or broken locale settings
-#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1260
+#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
 msgid "Unknown"
 msgstr "Tuntematon"
 
@@ -506,11 +506,11 @@ msgstr "tuntia"
 msgid "days"
 msgstr "päivää"
 
-#: ../src/covers/ario-cover.c:159
+#: ../src/covers/ario-cover.c:158
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Kansikuva on jo olemassa. Haluatko korvata sen?"
 
-#: ../src/covers/ario-cover-local.c:60
+#: ../src/covers/ario-cover-local.c:59
 #, fuzzy
 msgid "Music Directory"
 msgstr "Musiikkihakemisto"
@@ -522,11 +522,11 @@ msgstr "Liitännäinen"
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:159
 #: ../src/preferences/ario-lyrics-preferences.c:110
-#: ../src/preferences/ario-server-preferences.c:184
+#: ../src/preferences/ario-server-preferences.c:165
 msgid "Enabled"
 msgstr "Käytössä"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:187
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:185
 msgid "_About"
 msgstr "_Tietoa"
 
@@ -562,63 +562,63 @@ msgstr "Aakkosjärjestyksessä"
 msgid "By year"
 msgstr "Vuoden mukaan"
 
-#: ../src/preferences/ario-connection-preferences.c:362
+#: ../src/preferences/ario-connection-preferences.c:338
 msgid "Profile"
 msgstr "Profiili"
 
-#: ../src/preferences/ario-connection-preferences.c:628
+#: ../src/preferences/ario-connection-preferences.c:566
 #, fuzzy
 msgid "Server autodetection"
 msgstr "Etsi palvelin automaattisesti"
 
-#: ../src/preferences/ario-connection-preferences.c:639
+#: ../src/preferences/ario-connection-preferences.c:577
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:649
+#: ../src/preferences/ario-connection-preferences.c:587
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
-#: ../src/preferences/ario-server-preferences.c:195
+#: ../src/preferences/ario-server-preferences.c:176
 #: ../src/widgets/ario-firstlaunch.c:278
 msgid "Name"
 msgstr "Nimi"
 
-#: ../src/preferences/ario-connection-preferences.c:657
+#: ../src/preferences/ario-connection-preferences.c:595
 #: ../src/widgets/ario-firstlaunch.c:286
 #, fuzzy
 msgid "Host"
 msgstr "Palvelin"
 
-#: ../src/preferences/ario-connection-preferences.c:665
+#: ../src/preferences/ario-connection-preferences.c:603
 #: ../src/widgets/ario-firstlaunch.c:294
 msgid "Port"
 msgstr "Portti"
 
-#: ../src/preferences/ario-connection-preferences.c:728
+#: ../src/preferences/ario-connection-preferences.c:666
 #, fuzzy
 msgid "You must select a server."
 msgstr "Palvelimen valinta on pakollista."
 
-#: ../src/preferences/ario-connection-preferences.c:775
+#: ../src/preferences/ario-connection-preferences.c:713
 msgid "New Profile"
 msgstr "Uusi profiili"
 
-#: ../src/preferences/ario-server-preferences.c:276
-#: ../src/preferences/ario-stats-preferences.c:217
-#: ../src/preferences/ario-stats-preferences.c:218
-#: ../src/preferences/ario-stats-preferences.c:219
-#: ../src/preferences/ario-stats-preferences.c:220
-#: ../src/preferences/ario-stats-preferences.c:221
-#: ../src/preferences/ario-stats-preferences.c:222
+#: ../src/preferences/ario-server-preferences.c:211
+#: ../src/preferences/ario-stats-preferences.c:152
+#: ../src/preferences/ario-stats-preferences.c:153
+#: ../src/preferences/ario-stats-preferences.c:154
+#: ../src/preferences/ario-stats-preferences.c:155
+#: ../src/preferences/ario-stats-preferences.c:156
+#: ../src/preferences/ario-stats-preferences.c:157
 msgid "Not connected"
 msgstr "Ei yhteyttä"
 
-#: ../src/preferences/ario-server-preferences.c:281
-#: ../src/preferences/ario-server-preferences.c:375
-#: ../src/widgets/ario-status-bar.c:163
+#: ../src/preferences/ario-server-preferences.c:216
+#: ../src/preferences/ario-server-preferences.c:307
+#: ../src/widgets/ario-status-bar.c:95
 msgid "Updating..."
 msgstr "Päivitetään..."
 
@@ -629,7 +629,7 @@ msgstr "Soita/tauko"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:273
+#: ../src/widgets/ario-header.c:245
 msgid "Play next song"
 msgstr "Soita seuraava kappale"
 
@@ -638,9 +638,9 @@ msgstr "Soita seuraava kappale"
 msgid "Do nothing"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:83 ../src/sources/ario-search.c:81
-#: ../src/sources/ario-storedplaylists.c:102
-#: ../src/sources/ario-storedplaylists.c:119
+#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:78
+#: ../src/sources/ario-storedplaylists.c:101
+#: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:114
@@ -648,18 +648,18 @@ msgstr ""
 msgid "_Add to playlist"
 msgstr "_Lisää soittolistalle"
 
-#: ../src/sources/ario-browser.c:86 ../src/sources/ario-search.c:84
-#: ../src/sources/ario-storedplaylists.c:105
-#: ../src/sources/ario-storedplaylists.c:122
+#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-storedplaylists.c:104
+#: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:89 ../src/sources/ario-search.c:87
-#: ../src/sources/ario-storedplaylists.c:108
-#: ../src/sources/ario-storedplaylists.c:125
+#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-storedplaylists.c:107
+#: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
@@ -667,159 +667,159 @@ msgstr ""
 msgid "_Replace in playlist"
 msgstr "Tallenna soittolista"
 
-#: ../src/sources/ario-browser.c:92
+#: ../src/sources/ario-browser.c:90
 #, fuzzy
 msgid "Get the covers"
 msgstr "Hae kannet"
 
-#: ../src/sources/ario-browser.c:95
+#: ../src/sources/ario-browser.c:93
 #, fuzzy
 msgid "_Delete the covers"
 msgstr "_Poista kannet"
 
-#: ../src/sources/ario-browser.c:98 ../src/sources/ario-browser.c:101
-#: ../src/sources/ario-search.c:90 ../src/sources/ario-storedplaylists.c:128
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
+#: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
+#: ../src/widgets/ario-playlist.c:128
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 #, fuzzy
 msgid "_Properties"
 msgstr "_Ominaisuudet"
 
-#: ../src/sources/ario-browser.c:127 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Kokoelma"
 
-#: ../src/sources/ario-search.c:201
+#: ../src/sources/ario-search.c:183
 #, fuzzy
 msgid "Add a search criteria"
 msgstr "Lisää hakukriteeri"
 
-#: ../src/sources/ario-search.c:210
+#: ../src/sources/ario-search.c:192
 #, fuzzy
 msgid "Search songs in the library"
 msgstr "Etsi kappaleita kokoelmasta"
 
-#: ../src/sources/ario-search.c:405
+#: ../src/sources/ario-search.c:372
 #, fuzzy
 msgid "Remove a search criteria"
 msgstr "Poista hakukriteeri"
 
-#: ../src/sources/ario-storedplaylists.c:111
+#: ../src/sources/ario-storedplaylists.c:110
 msgid "_Delete"
 msgstr ""
 
-#: ../src/sources/ario-storedplaylists.c:164
+#: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
 msgstr "Soittolistat"
 
-#: ../src/sources/ario-storedplaylists.c:599
+#: ../src/sources/ario-storedplaylists.c:567
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Poistetaanko kaikki valitut soittolistat?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:392
+#: ../src/sources/ario-tree.c:375
 msgid "Cover"
 msgstr "Kansikuva"
 
-#: ../src/sources/ario-tree.c:1196
+#: ../src/sources/ario-tree.c:1179
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Poistetaanko valittujen artistien kaikki kannet?"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:149
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:150
 #, fuzzy
 msgid "_Edit"
 msgstr "_Muokkaa"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:151
 #, fuzzy
 msgid "_View"
 msgstr "_Näytä"
 
-#: ../src/shell/ario-shell.c:154
+#: ../src/shell/ario-shell.c:152
 #, fuzzy
 msgid "_Tool"
 msgstr "_Työkalu"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:153
 msgid "_Help"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:161
 msgid "_Quit"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:164
 msgid "Plu_gins"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:167
 msgid "Prefere_nces"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:170
 msgid "_Change current album cover"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:173
 msgid "Download album _covers"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:176
 msgid "Find similar artists"
 msgstr "Etsi vastaavia artisteja"
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:179
 msgid "Add similar songs to playlist"
 msgstr "Lisää vastaavia kappaleita soittolistalle"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:182
 msgid "Show _lyrics"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:190
+#: ../src/shell/ario-shell.c:188
 msgid "_Translate this application..."
 msgstr ""
 
-#: ../src/shell/ario-shell.c:198
+#: ../src/shell/ario-shell.c:195
 msgid "S_tatusbar"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:201
+#: ../src/shell/ario-shell.c:198
 #, fuzzy
 msgid "Upper part"
 msgstr "Yläosa"
 
-#: ../src/shell/ario-shell.c:728
+#: ../src/shell/ario-shell.c:710
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:729
+#: ../src/shell/ario-shell.c:711
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Päivi Pasi https://launchpad.net/~pap26"
 
-#: ../src/shell/ario-shell.c:1064
+#: ../src/shell/ario-shell.c:1045
 msgid "Configure Plugins"
 msgstr "Määrittele liitännäisiä"
 
-#: ../src/shell/ario-shell-coverdownloader.c:246
+#: ../src/shell/ario-shell-coverdownloader.c:181
 msgid "Music Player Cover Download"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverdownloader.c:388
+#: ../src/shell/ario-shell-coverdownloader.c:323
 #, fuzzy
 msgid "Download Finished!"
 msgstr "Lataus on päättynyt!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:391
+#: ../src/shell/ario-shell-coverdownloader.c:326
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -839,7 +839,7 @@ msgstr "Virhe luettaessa tiedostoa"
 msgid "Error saving file"
 msgstr "Virhe tallennettaessa tiedostoa"
 
-#: ../src/shell/ario-shell-lyrics.c:51
+#: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:129
 #: ../src/shell/ario-shell-songinfos.c:209
 msgid "Lyrics"
@@ -873,7 +873,7 @@ msgid "Image"
 msgstr "Kuva"
 
 #: ../src/shell/ario-shell-similarartists.c:393
-#: ../src/widgets/ario-status-bar.c:159
+#: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr ""
 
@@ -910,42 +910,42 @@ msgstr "Asetukset"
 msgid "Confirmation"
 msgstr "Vahvistus"
 
-#: ../src/widgets/ario-header.c:71 ../src/widgets/ario-tray-icon.h:46
+#: ../src/widgets/ario-header.c:64 ../src/widgets/ario-tray-icon.h:45
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr ""
 
-#: ../src/widgets/ario-header.c:226
+#: ../src/widgets/ario-header.c:198
 msgid "Play previous song"
 msgstr "Soita edellinen kappale"
 
-#: ../src/widgets/ario-header.c:247
+#: ../src/widgets/ario-header.c:219
 #, fuzzy
 msgid "Play/Pause the music"
 msgstr "Aloita/keskeytä musiikin kuuntelu"
 
-#: ../src/widgets/ario-header.c:260
+#: ../src/widgets/ario-header.c:232
 #, fuzzy
 msgid "Stop the music"
 msgstr "Lopeta musiikin kuuntelu"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:354 ../src/widgets/ario-tray-icon.c:818
+#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:803
 msgid " of "
 msgstr " / "
 
-#: ../src/widgets/ario-header.c:380
+#: ../src/widgets/ario-header.c:322
 #, fuzzy
 msgid "Toggle random on/off"
 msgstr "Laita satunnaissoitto päälle/pois päältä"
 
-#: ../src/widgets/ario-header.c:393
+#: ../src/widgets/ario-header.c:335
 #, fuzzy
 msgid "Toggle repeat on/off"
 msgstr "Laita toisto päälle/pois päältä"
 
-#: ../src/widgets/ario-header.c:485
+#: ../src/widgets/ario-header.c:341
 msgid "Change the music volume"
 msgstr "Muuta äänenvoimakkuutta"
 
@@ -957,32 +957,32 @@ msgstr "Ladataan sanoituksia..."
 msgid "Lyrics not found"
 msgstr "Sanoituksia ei löytynyt"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:119
 msgid "_Clear"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:122
 msgid "_Remove"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:125
 msgid "_Save"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:131
 msgid "_Go to playing song"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1306
+#: ../src/widgets/ario-playlist.c:1276
 msgid "Save playlist"
 msgstr "Tallenna soittolista"
 
-#: ../src/widgets/ario-playlist.c:1316
+#: ../src/widgets/ario-playlist.c:1286
 msgid "Playlist name :"
 msgstr "Soittolistan nimi :"
 
-#: ../src/widgets/ario-playlist.c:1341
+#: ../src/widgets/ario-playlist.c:1311
 #, fuzzy
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Soittolista on jo olemassa. Korvataanko soittolista uudella?"
@@ -1007,89 +1007,89 @@ msgstr ""
 msgid "P_revious"
 msgstr ""
 
-#: ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-tray-icon.h:44
 msgid "Not playing"
 msgstr "Soitto pysäytetty"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1204
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
 msgid "Today %I:%M %p"
 msgstr "Tänään %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1217
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
 msgid "Yesterday %I:%M %p"
 msgstr "Eilen %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1233
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1245
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1250
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1334
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "Ei koskaan"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1357
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1360
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
 msgid "Logging in"
 msgstr "Kirjaudutaan sisään"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1363
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
 msgid "Request failed"
 msgstr "Pyyntö epäonnistui"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1366
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "Incorrect username"
 msgstr "Virheellinen käyttäjätunnus"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1369
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Incorrect password"
 msgstr "Virheellinen salasana"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1372
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Handshake failed"
 msgstr "Kättely epäonnistui"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Client update required"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1378
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Track submission failed"
 msgstr "Kappaletietojen lähetys epäonnistui"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1381
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Queue is too long"
 msgstr "Jono on liian pitkä"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Track submission failed too many times"
 msgstr "Kappaletietojen lähetys epäonnistui liian monta kertaa"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1436
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
 msgid "Audioscrobbler preferences"
 msgstr "Audioscrobblerin asetukset"
 
@@ -1138,11 +1138,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Lähettää kappaletiedot last.fm -palveluun."
 
-#: ../plugins/filesystem/ario-filesystem.c:166
+#: ../plugins/filesystem/ario-filesystem.c:164
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
-#: ../plugins/filesystem/ario-filesystem.c:438
+#: ../plugins/filesystem/ario-filesystem.c:414
 msgid "Music"
 msgstr "Musiikki"
 
@@ -1154,7 +1154,7 @@ msgstr ""
 msgid "File System Browser"
 msgstr ""
 
-#: ../plugins/information/ario-information.c:113
+#: ../plugins/information/ario-information.c:110
 #, fuzzy
 msgid "Information"
 msgstr "Vahvistus"
@@ -1201,35 +1201,35 @@ msgstr ""
 msgid "_Delete this radios"
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:166
+#: ../plugins/radios/ario-radio.c:164
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Verkkoradiot"
 
-#: ../plugins/radios/ario-radio.c:235
+#: ../plugins/radios/ario-radio.c:219
 msgid "Internet Radios"
 msgstr "Internet-radiot"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:857
+#: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr "Lisää verkkoradio"
 
-#: ../plugins/radios/ario-radio.c:868 ../plugins/radios/ario-radio.c:1067
+#: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:922 ../plugins/radios/ario-radio.c:1122
+#: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1095
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 
-#: ../plugins/radios/ario-radio.c:984
+#: ../plugins/radios/ario-radio.c:957
 #, fuzzy
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Poistetaanko kaikki valitut radiot?"
 
 #. Create the widgets
-#: ../plugins/radios/ario-radio.c:1056
+#: ../plugins/radios/ario-radio.c:1029
 msgid "Edit a WebRadio"
 msgstr "Muokkaa verkkoradiota"
 
@@ -1237,17 +1237,17 @@ msgstr "Muokkaa verkkoradiota"
 msgid "Listen to webradios"
 msgstr "Kuuntele verkkoradioita"
 
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:50
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:51
 msgid "Find artist on Wikipedia"
 msgstr "Hae artistia Wikipediasta"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:178
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
 #, fuzzy
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Wikipedia-liitännäisen asetukset"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:187
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
 msgid "Wikipedia language :"
 msgstr "Wikipedia-kieli :"
 
