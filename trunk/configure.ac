@@ -32,6 +32,8 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 AM_GLIB_GNU_GETTEXT
 
+AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
+
 dnl Debugging information
 AC_ARG_ENABLE(debug,
               AC_HELP_STRING([--enable-debug],
@@ -39,6 +41,69 @@ AC_ARG_ENABLE(debug,
 if test x"$enable_debug" = xyes; then
    AC_DEFINE(DEBUG, 1, [Add runtime debugging information (slower)])
 fi
+
+dnl ================================================================
+dnl Python plugins
+dnl ================================================================
+AC_ARG_ENABLE(python,
+              AC_HELP_STRING([--disable-python],
+                             [Disable python plugins support]))
+if test x"$enable_python" != xno; then
+   AC_DEFINE(ENABLE_PYTHON, 1, [Enable python plugins support])
+fi
+
+if test "x$enable_python" != "xno"; then
+	AM_PATH_PYTHON([2.3],[],[no])
+	if test "x$PYTHON" = "x:"; then
+		enable_python=no
+	fi
+fi
+
+if test "x$enable_python" != "xno"; then
+	PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
+	PY_EXEC_PREFIX=`$PYTHON -c 'import sys ; print sys.exec_prefix'`
+	PYTHON_LIBS="-lpython$PYTHON_VERSION"
+	PYTHON_LIB_LOC="-L$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config"
+	PYTHON_CFLAGS="-I$PY_PREFIX/include/python$PYTHON_VERSION"
+	PYTHON_MAKEFILE="$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config/Makefile"
+	PYTHON_LOCALMODLIBS=`sed -n -e 's/^LOCALMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+	PYTHON_BASEMODLIBS=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+	PYTHON_OTHER_LIBS=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+	PYTHON_EXTRA_LIBS="$PYTHON_LOCALMODLIBS $PYTHON_BASEMODLIBS $PYTHON_OTHER_LIBS"
+	AC_SUBST([PYTHON_LIBS])
+	AC_SUBST([PYTHON_LIB_LOC])
+	AC_SUBST([PYTHON_CFLAGS])
+	AC_SUBST([PYTHON_EXTRA_LIBS])
+fi
+
+if test "x$enable_python" != "xno"; then
+	PKG_CHECK_MODULES([PYGTK], [pygobject-2.0 >= 2.11.5
+                                    pygtk-2.0 >= 2.8.0])
+
+	AC_SUBST([PYGTK_CFLAGS])
+	AC_SUBST([PYGTK_LIBS])
+fi
+
+if test "x$enable_python" != "xno"; then
+	AC_MSG_CHECKING([for pygtk defs])
+	PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
+	AC_MSG_RESULT([$PYGTK_DEFSDIR])
+
+	AC_MSG_CHECKING([for pygtk codegen])
+	PYGTK_CODEGEN="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/codegen.py"
+	AC_MSG_RESULT([$PYGTK_CODEGEN])
+
+	AC_MSG_CHECKING([for pygtk h2def])
+	PYGTK_H2DEF="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/h2def.py"
+	AC_MSG_RESULT([$PYGTK_H2DEF])
+
+	AC_SUBST([PYGTK_DEFSDIR])
+	AC_SUBST([PYGTK_CODEGEN])
+	AC_SUBST([PYGTK_H2DEF])
+fi
+AM_CONDITIONAL(ENABLE_PYTHON, test x"$enable_python" != xno)
+
+
 
 dnl Search
 AC_ARG_ENABLE(search,
@@ -128,6 +193,8 @@ AC_SUBST(PLUGINDIR)
 
 AC_OUTPUT([
 Makefile
+bindings/Makefile
+bindings/python/Makefile
 src/Makefile
 data/Makefile
 plugins/Makefile
@@ -138,6 +205,7 @@ plugins/libnotify/Makefile
 plugins/mmkeys/Makefile
 plugins/radios/Makefile
 plugins/wikipedia/Makefile
+plugins/sample-python/Makefile
 po/Makefile.in
 data/ario.desktop.in
 ])
@@ -148,6 +216,11 @@ if test x${enable_debug} = xyes; then
         echo "Debug information is:                     ENABLED"
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
+fi
+if test x${enable_python} != xno; then
+        echo "Python plugins support is:                ENABLED  (--disable-python)"
+else
+        echo "Python plugins support is:                DISABLED"
 fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"

@@ -15,3 +15,4 @@ endif
 if USE_AUDIOSCROBBLER
         SUBDIRS += audioscrobbler
 endif
+

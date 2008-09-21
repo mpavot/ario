@@ -240,8 +240,7 @@ load_plugin_module (ArioPluginInfo *info)
                                               (info->module_name[0] != '\0'),
                                               FALSE);
 
-                        info->module = G_TYPE_MODULE (
-                                                      ario_python_module_new (dir, info->module_name));
+                        info->module = G_TYPE_MODULE (ario_python_module_new (dir, info->module_name));
 
                         g_free (dir);
                         break;

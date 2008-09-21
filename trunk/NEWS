@@ -17,3 +17,10 @@ New translations: ar, th, da, tr, fi, nb, zh_CN
 [ 2017479 ] Set playlist option, thanks to a patch from Dion Timmermann
 [ 2088157 ] Update MPD library on startup and stop MPD on close
 New plugin: Song Information
+Improve performances and memory usage
+Fix drag and drop pisitions in playlist
+Auto reconnect on error.
+[ 2110096 ] Track change notification with libnotify
+Add song change notification on windows
+Support of empty/unknown tags if MPD is patched as described here: http://musicpd.org/mantis/view.php?id=464
+

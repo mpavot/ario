@@ -818,7 +818,7 @@ ario_mpd_get_albums (const ArioMpdCriteria *criteria)
                 return NULL;
 
         if (!criteria) {
-                mpd_sendListallInfoCommand(instance->priv->connection, "/");
+                mpd_sendListallInfoCommand (instance->priv->connection, "/");
         } else {
                 mpd_startSearch (instance->priv->connection, TRUE);
                 for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
