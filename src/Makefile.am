@@ -1,5 +1,7 @@
 bin_PROGRAMS = ario
 
+noinst_LTLIBRARIES = libario.la
+
 INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 	   -Wmain -Wmissing-braces -Wparentheses -Wsequence-point \
 	   -Wreturn-type -Wswitch -Wtrigraphs -Wunused-function \
@@ -8,9 +10,17 @@ INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 	   -Wnested-externs -Wpointer-arith \
 	   -Wcast-align -Wall
 
-ario_SOURCES = \
+ario_SOURCES = ario-main.c
+ario_LDADD = libario.la $(DEPS_LIBS)
+
+libario_la_LIBADD = \
+        $(DEPS_LIBS)\
+        $(AVAHI_LIBS)
+
+libario_la_SOURCES = \
+	ario-enum-types.c\
+	ario-enum-types.h\
 	ario-debug.h\
-	ario-main.c\
 	ario-mpd.c\
 	ario-mpd.h\
 	ario-profiles.c\
@@ -139,9 +149,32 @@ if USE_AVAHI
 	                ario-avahi.h
 endif
 
-ario_LDADD = \
-        $(DEPS_LIBS)\
-        $(AVAHI_LIBS)
+if ENABLE_PYTHON
+        ario_SOURCES += plugins/ario-python-module.c\
+                        plugins/ario-python-module.h\
+                        plugins/ario-python-plugin.c\
+                        plugins/ario-python-plugin.h
+
+        INCLUDES += \
+	        $(NO_STRICT_ALIASING_CFLAGS)	\
+	        $(PYGTK_CFLAGS)			\
+	        $(PYTHON_CFLAGS)		\
+	        $(AM_CFLAGS)
+
+        libario_la_LIBADD += \
+	        $(top_builddir)/bindings/python/ario.la
+endif
+
+INST_H_FILES =
+	plugins/ario-plugin.h \
+	ario-mpd.h \
+	shell/ario-shell.h
+
+ario-enum-types.h: ario-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.h.template $(INST_H_FILES)) > $@
+	
+ario-enum-types.c: ario-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.c.template $(INST_H_FILES)) > $@
 
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
