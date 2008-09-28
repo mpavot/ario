@@ -1,0 +1,535 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object Plugin
+  (in-module "Ario")
+  (parent "GObject")
+  (c-name "ArioPlugin")
+  (gtype-id "ARIO_TYPE_PLUGIN")
+)
+
+;; Enumerations and flags ...
+
+(define-enum Visibility
+  (in-module "Ario")
+  (c-name "ArioVisibility")
+  (gtype-id "ARIO_TYPE_VISIBILITY")
+  (values
+    '("hidden" "VISIBILITY_HIDDEN")
+    '("visible" "VISIBILITY_VISIBLE")
+    '("toggle" "VISIBILITY_TOGGLE")
+  )
+)
+
+
+;; From ario-mpd.h
+
+(define-function ario_mpd_get_type
+  (c-name "ario_mpd_get_type")
+  (return-type "GType")
+)
+
+(define-function ario_mpd_get_instance
+  (c-name "ario_mpd_get_instance")
+  (return-type "ArioMpd*")
+)
+
+(define-function ario_mpd_connect
+  (c-name "ario_mpd_connect")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_disconnect
+  (c-name "ario_mpd_disconnect")
+  (return-type "none")
+)
+
+(define-function ario_mpd_is_connected
+  (c-name "ario_mpd_is_connected")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_update_status
+  (c-name "ario_mpd_update_status")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_update_db
+  (c-name "ario_mpd_update_db")
+  (return-type "none")
+)
+
+(define-function ario_mpd_list_tags
+  (c-name "ario_mpd_list_tags")
+  (return-type "GSList*")
+  (parameters
+    '("const-ArioMpdTag" "tag")
+    '("const-ArioMpdCriteria*" "criteria")
+  )
+)
+
+(define-function ario_mpd_get_artists
+  (c-name "ario_mpd_get_artists")
+  (return-type "GSList*")
+)
+
+(define-function ario_mpd_get_albums
+  (c-name "ario_mpd_get_albums")
+  (return-type "GSList*")
+  (parameters
+    '("const-ArioMpdCriteria*" "criteria")
+  )
+)
+
+(define-function ario_mpd_get_songs
+  (c-name "ario_mpd_get_songs")
+  (return-type "GSList*")
+  (parameters
+    '("const-ArioMpdCriteria*" "criteria")
+    '("const-gboolean" "exact")
+  )
+)
+
+(define-function ario_mpd_get_songs_from_playlist
+  (c-name "ario_mpd_get_songs_from_playlist")
+  (return-type "GSList*")
+  (parameters
+    '("char*" "playlist")
+  )
+)
+
+(define-function ario_mpd_get_playlists
+  (c-name "ario_mpd_get_playlists")
+  (return-type "GSList*")
+)
+
+(define-function ario_mpd_get_playlist_changes
+  (c-name "ario_mpd_get_playlist_changes")
+  (return-type "GSList*")
+  (parameters
+    '("int" "playlist_id")
+  )
+)
+
+(define-function ario_mpd_get_playlist_info
+  (c-name "ario_mpd_get_playlist_info")
+  (return-type "ArioMpdSong*")
+  (parameters
+    '("int" "song_pos")
+  )
+)
+
+(define-function ario_mpd_get_current_title
+  (c-name "ario_mpd_get_current_title")
+  (return-type "char*")
+)
+
+(define-function ario_mpd_get_current_name
+  (c-name "ario_mpd_get_current_name")
+  (return-type "char*")
+)
+
+(define-function ario_mpd_get_current_song
+  (c-name "ario_mpd_get_current_song")
+  (return-type "ArioMpdSong*")
+)
+
+(define-function ario_mpd_get_current_artist
+  (c-name "ario_mpd_get_current_artist")
+  (return-type "char*")
+)
+
+(define-function ario_mpd_get_current_album
+  (c-name "ario_mpd_get_current_album")
+  (return-type "char*")
+)
+
+(define-function ario_mpd_get_current_song_path
+  (c-name "ario_mpd_get_current_song_path")
+  (return-type "char*")
+)
+
+(define-function ario_mpd_get_current_song_id
+  (c-name "ario_mpd_get_current_song_id")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_state
+  (c-name "ario_mpd_get_current_state")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_elapsed
+  (c-name "ario_mpd_get_current_elapsed")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_volume
+  (c-name "ario_mpd_get_current_volume")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_total_time
+  (c-name "ario_mpd_get_current_total_time")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_playlist_id
+  (c-name "ario_mpd_get_current_playlist_id")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_playlist_length
+  (c-name "ario_mpd_get_current_playlist_length")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_playlist_total_time
+  (c-name "ario_mpd_get_current_playlist_total_time")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_crossfadetime
+  (c-name "ario_mpd_get_crossfadetime")
+  (return-type "int")
+)
+
+(define-function ario_mpd_get_current_random
+  (c-name "ario_mpd_get_current_random")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_get_current_repeat
+  (c-name "ario_mpd_get_current_repeat")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_get_updating
+  (c-name "ario_mpd_get_updating")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_set_current_elapsed
+  (c-name "ario_mpd_set_current_elapsed")
+  (return-type "none")
+  (parameters
+    '("const-gint" "elapsed")
+  )
+)
+
+(define-function ario_mpd_set_current_volume
+  (c-name "ario_mpd_set_current_volume")
+  (return-type "none")
+  (parameters
+    '("const-gint" "volume")
+  )
+)
+
+(define-function ario_mpd_get_outputs
+  (c-name "ario_mpd_get_outputs")
+  (return-type "GSList*")
+)
+
+(define-function ario_mpd_set_current_random
+  (c-name "ario_mpd_set_current_random")
+  (return-type "none")
+  (parameters
+    '("const-gboolean" "random")
+  )
+)
+
+(define-function ario_mpd_set_current_repeat
+  (c-name "ario_mpd_set_current_repeat")
+  (return-type "none")
+  (parameters
+    '("const-gboolean" "repeat")
+  )
+)
+
+(define-function ario_mpd_set_crossfadetime
+  (c-name "ario_mpd_set_crossfadetime")
+  (return-type "none")
+  (parameters
+    '("const-int" "crossfadetime")
+  )
+)
+
+(define-function ario_mpd_is_paused
+  (c-name "ario_mpd_is_paused")
+  (return-type "gboolean")
+)
+
+(define-function ario_mpd_do_next
+  (c-name "ario_mpd_do_next")
+  (return-type "none")
+)
+
+(define-function ario_mpd_do_prev
+  (c-name "ario_mpd_do_prev")
+  (return-type "none")
+)
+
+(define-function ario_mpd_do_play
+  (c-name "ario_mpd_do_play")
+  (return-type "none")
+)
+
+(define-function ario_mpd_do_play_id
+  (c-name "ario_mpd_do_play_id")
+  (return-type "none")
+  (parameters
+    '("gint" "id")
+  )
+)
+
+(define-function ario_mpd_do_pause
+  (c-name "ario_mpd_do_pause")
+  (return-type "none")
+)
+
+(define-function ario_mpd_do_stop
+  (c-name "ario_mpd_do_stop")
+  (return-type "none")
+)
+
+(define-function ario_mpd_free_album
+  (c-name "ario_mpd_free_album")
+  (return-type "none")
+  (parameters
+    '("ArioMpdAlbum*" "ario_mpd_album")
+  )
+)
+
+(define-function ario_mpd_copy_album
+  (c-name "ario_mpd_copy_album")
+  (return-type "ArioMpdAlbum*")
+  (parameters
+    '("const-ArioMpdAlbum*" "ario_mpd_album")
+  )
+)
+
+(define-function ario_mpd_clear
+  (c-name "ario_mpd_clear")
+  (return-type "none")
+)
+
+(define-function ario_mpd_queue_add
+  (c-name "ario_mpd_queue_add")
+  (return-type "none")
+  (parameters
+    '("const-char*" "path")
+  )
+)
+
+(define-function ario_mpd_queue_delete_id
+  (c-name "ario_mpd_queue_delete_id")
+  (return-type "none")
+  (parameters
+    '("const-int" "id")
+  )
+)
+
+(define-function ario_mpd_queue_delete_pos
+  (c-name "ario_mpd_queue_delete_pos")
+  (return-type "none")
+  (parameters
+    '("const-int" "pos")
+  )
+)
+
+(define-function ario_mpd_queue_move
+  (c-name "ario_mpd_queue_move")
+  (return-type "none")
+  (parameters
+    '("const-int" "old_pos")
+    '("const-int" "new_pos")
+  )
+)
+
+(define-function ario_mpd_queue_commit
+  (c-name "ario_mpd_queue_commit")
+  (return-type "none")
+)
+
+(define-function ario_mpd_delete_playlist
+  (c-name "ario_mpd_delete_playlist")
+  (return-type "none")
+  (parameters
+    '("const-char*" "name")
+  )
+)
+
+(define-function ario_mpd_use_count_inc
+  (c-name "ario_mpd_use_count_inc")
+  (return-type "none")
+)
+
+(define-function ario_mpd_use_count_dec
+  (c-name "ario_mpd_use_count_dec")
+  (return-type "none")
+)
+
+(define-function ario_mpd_get_outputs
+  (c-name "ario_mpd_get_outputs")
+  (return-type "GSList*")
+)
+
+(define-function ario_mpd_enable_output
+  (c-name "ario_mpd_enable_output")
+  (return-type "none")
+  (parameters
+    '("const-int" "id")
+    '("const-gboolean" "enabled")
+  )
+)
+
+(define-function ario_mpd_get_stats
+  (c-name "ario_mpd_get_stats")
+  (return-type "ArioMpdStats*")
+)
+
+(define-function ario_mpd_get_songs_info
+  (c-name "ario_mpd_get_songs_info")
+  (return-type "GList*")
+  (parameters
+    '("GSList*" "paths")
+  )
+)
+
+(define-function ario_mpd_list_files
+  (c-name "ario_mpd_list_files")
+  (return-type "ArioMpdFileList*")
+  (parameters
+    '("const-char*" "path")
+    '("const-gboolean" "recursive")
+  )
+)
+
+(define-function ario_mpd_free_file_list
+  (c-name "ario_mpd_free_file_list")
+  (return-type "none")
+  (parameters
+    '("ArioMpdFileList*" "files")
+  )
+)
+
+(define-method copy
+  (of-object "ArioMpdCriteria")
+  (c-name "ario_mpd_criteria_copy")
+  (return-type "ArioMpdCriteria*")
+)
+
+(define-method free
+  (of-object "ArioMpdCriteria")
+  (c-name "ario_mpd_criteria_free")
+  (return-type "none")
+)
+
+(define-function ario_mpd_get_items_names
+  (c-name "ario_mpd_get_items_names")
+  (return-type "gchar**")
+)
+
+
+
+;; From ario-plugin.h
+
+(define-function ario_plugin_get_type
+  (c-name "ario_plugin_get_type")
+  (return-type "GType")
+)
+
+(define-method activate
+  (of-object "ArioPlugin")
+  (c-name "ario_plugin_activate")
+  (return-type "none")
+  (parameters
+    '("ArioShell*" "shell")
+  )
+)
+
+(define-method deactivate
+  (of-object "ArioPlugin")
+  (c-name "ario_plugin_deactivate")
+  (return-type "none")
+  (parameters
+    '("ArioShell*" "shell")
+  )
+)
+
+(define-method is_configurable
+  (of-object "ArioPlugin")
+  (c-name "ario_plugin_is_configurable")
+  (return-type "gboolean")
+)
+
+(define-method create_configure_dialog
+  (of-object "ArioPlugin")
+  (c-name "ario_plugin_create_configure_dialog")
+  (return-type "GtkWidget*")
+)
+
+(define-function ario_plugin_get_plugin_paths
+  (c-name "ario_plugin_get_plugin_paths")
+  (return-type "GSList*")
+)
+
+(define-function ario_plugin_find_file
+  (c-name "ario_plugin_find_file")
+  (return-type "char*")
+  (parameters
+    '("const-char*" "file")
+  )
+)
+
+
+
+;; From ario-shell.h
+
+(define-function ario_shell_get_type
+  (c-name "ario_shell_get_type")
+  (return-type "GType")
+)
+
+(define-function ario_shell_new
+  (c-name "ario_shell_new")
+  (is-constructor-of "ArioShell")
+  (return-type "ArioShell*")
+)
+
+(define-method construct
+  (of-object "ArioShell")
+  (c-name "ario_shell_construct")
+  (return-type "none")
+  (parameters
+    '("gboolean" "minimized")
+  )
+)
+
+(define-method shutdown
+  (of-object "ArioShell")
+  (c-name "ario_shell_shutdown")
+  (return-type "none")
+)
+
+(define-method present
+  (of-object "ArioShell")
+  (c-name "ario_shell_present")
+  (return-type "none")
+)
+
+(define-method set_visibility
+  (of-object "ArioShell")
+  (c-name "ario_shell_set_visibility")
+  (return-type "none")
+  (parameters
+    '("ArioVisibility" "state")
+  )
+)
+
+(define-method restore_main_window
+  (of-object "ArioShell")
+  (c-name "ario_shell_restore_main_window")
+  (return-type "none")
+)
+
+

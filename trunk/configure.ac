@@ -46,20 +46,20 @@ dnl ================================================================
 dnl Python plugins
 dnl ================================================================
 AC_ARG_ENABLE(python,
-              AC_HELP_STRING([--disable-python],
-                             [Disable python plugins support]))
-if test x"$enable_python" != xno; then
+              AC_HELP_STRING([--enable-python],
+                             [Enable python plugins support]))
+if test x"$enable_python" = xyes; then
    AC_DEFINE(ENABLE_PYTHON, 1, [Enable python plugins support])
 fi
 
-if test "x$enable_python" != "xno"; then
+if test "x$enable_python" = "xyes"; then
 	AM_PATH_PYTHON([2.3],[],[no])
 	if test "x$PYTHON" = "x:"; then
 		enable_python=no
 	fi
 fi
 
-if test "x$enable_python" != "xno"; then
+if test "x$enable_python" = "xyes"; then
 	PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
 	PY_EXEC_PREFIX=`$PYTHON -c 'import sys ; print sys.exec_prefix'`
 	PYTHON_LIBS="-lpython$PYTHON_VERSION"
@@ -76,7 +76,7 @@ if test "x$enable_python" != "xno"; then
 	AC_SUBST([PYTHON_EXTRA_LIBS])
 fi
 
-if test "x$enable_python" != "xno"; then
+if test "x$enable_python" = "xyes"; then
 	PKG_CHECK_MODULES([PYGTK], [pygobject-2.0 >= 2.11.5
                                     pygtk-2.0 >= 2.8.0])
 
@@ -84,7 +84,7 @@ if test "x$enable_python" != "xno"; then
 	AC_SUBST([PYGTK_LIBS])
 fi
 
-if test "x$enable_python" != "xno"; then
+if test "x$enable_python" = "xyes"; then
 	AC_MSG_CHECKING([for pygtk defs])
 	PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
 	AC_MSG_RESULT([$PYGTK_DEFSDIR])
@@ -101,7 +101,7 @@ if test "x$enable_python" != "xno"; then
 	AC_SUBST([PYGTK_CODEGEN])
 	AC_SUBST([PYGTK_H2DEF])
 fi
-AM_CONDITIONAL(ENABLE_PYTHON, test x"$enable_python" != xno)
+AM_CONDITIONAL(ENABLE_PYTHON, test x"$enable_python" = xyes)
 
 
 
@@ -217,10 +217,10 @@ if test x${enable_debug} = xyes; then
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
 fi
-if test x${enable_python} != xno; then
-        echo "Python plugins support is:                ENABLED  (--disable-python)"
+if test x${enable_python} = xyes; then
+        echo "Python plugins support is:                ENABLED"
 else
-        echo "Python plugins support is:                DISABLED"
+        echo "Python plugins support is:                DISABLED  (--enable-python)"
 fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"

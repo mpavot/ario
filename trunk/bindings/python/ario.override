@@ -1,0 +1,20 @@
+%%
+headers
+#define NO_IMPORT_PYGOBJECT
+#include "pygobject.h"
+#include <pygtk/pygtk.h>
+
+#include "ario-plugin.h"
+#include "ario-mpd.h"
+#include "shell/ario-shell.h"
+#include "ario-enum-types.h"
+
+void pyario_register_classes (PyObject *d); 
+void pyario_add_constants (PyObject *module, const gchar *strip_prefix);
+%%
+modulename ario 
+%%
+import gtk.Widget as PyGtkWidget_Type
+import gobject.GObject as PyGObject_Type
+import gtk.VBox as PyGtkVBox_Type
+%%
