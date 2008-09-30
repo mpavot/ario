@@ -8,7 +8,8 @@ INCLUDES = -Wcomment -Wformat -Wnonnull -Wimplicit-int -Wimplicit \
 	   -Wunused-label -Wunused-value \
 	   -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes \
 	   -Wnested-externs -Wpointer-arith \
-	   -Wcast-align -Wall
+	   -Wcast-align -Wall \
+	   -Wuninitialized
 
 ario_SOURCES = ario-main.c
 ario_LDADD = libario.la $(DEPS_LIBS)
