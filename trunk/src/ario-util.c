@@ -137,9 +137,9 @@ ario_util_format_title (const ArioMpdSong *mpd_song)
         gchar *slash;
         gchar *res = NULL;
 
-        if (!mpd_song)
+        if (!mpd_song) {
                 res = g_strdup (ARIO_MPD_UNKNOWN);
-        if (mpd_song->title) {
+        } else if (mpd_song->title) {
                 res = g_strdup (mpd_song->title);
         } else if (mpd_song->name) {
                 res = g_strdup (mpd_song->name);
