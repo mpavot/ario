@@ -21,7 +21,7 @@
 #ifndef __ARIO_SHELL_COVERSELECT_H
 #define __ARIO_SHELL_COVERSELECT_H
 
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 G_BEGIN_DECLS
 
@@ -48,7 +48,7 @@ typedef struct
 
 GType           ario_shell_coverselect_get_type (void) G_GNUC_CONST;
 
-GtkWidget *     ario_shell_coverselect_new      (ArioMpdAlbum *mpd_album);
+GtkWidget *     ario_shell_coverselect_new      (ArioServerAlbum *server_album);
 
 G_END_DECLS
 

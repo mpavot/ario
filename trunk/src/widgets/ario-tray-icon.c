@@ -77,13 +77,13 @@ static void ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_icon (ArioTrayIcon *icon);
 static void ario_tray_icon_sync_popup (ArioTrayIcon *icon);
-static void ario_tray_icon_song_changed_cb (ArioMpd *mpd,
+static void ario_tray_icon_song_changed_cb (ArioServer *server,
                                             ArioTrayIcon *icon);
-static void ario_tray_icon_album_changed_cb (ArioMpd *mpd,
+static void ario_tray_icon_album_changed_cb (ArioServer *server,
                                              ArioTrayIcon *icon);
-static void ario_tray_icon_state_changed_cb (ArioMpd *mpd,
+static void ario_tray_icon_state_changed_cb (ArioServer *server,
                                              ArioTrayIcon *icon);
-static void ario_tray_icon_time_changed_cb (ArioMpd *mpd,
+static void ario_tray_icon_time_changed_cb (ArioServer *server,
                                             int elapsed,
                                             ArioTrayIcon *icon);
 static void ario_tray_icon_cover_changed_cb (ArioCoverHandler *cover_handler,
@@ -274,7 +274,7 @@ ario_tray_icon_finalize (GObject *object)
         g_return_if_fail (tray->priv != NULL);
 
         /* TODO : Not very efficient */
-        ario_mpd_use_count_dec ();
+        ario_server_use_count_dec ();
 
         gtk_object_destroy (GTK_OBJECT (tray->priv->tooltip));
 #ifdef ENABLE_EGGTRAYICON
@@ -346,7 +346,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                     ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         ArioTrayIcon *icon = g_object_new (TYPE_ARIO_TRAY_ICON,
                                            "action-group", group,
@@ -359,25 +359,25 @@ ario_tray_icon_new (GtkActionGroup *group,
         instance = icon;
 
         /* TODO : Not very efficient */
-        ario_mpd_use_count_inc ();
+        ario_server_use_count_inc ();
 
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "song_changed",
                                  G_CALLBACK (ario_tray_icon_song_changed_cb),
                                  icon, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "album_changed",
                                  G_CALLBACK (ario_tray_icon_album_changed_cb),
                                  icon, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
                                  icon, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "playlist_changed",
                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
                                  icon, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "elapsed_changed",
                                  G_CALLBACK (ario_tray_icon_time_changed_cb),
                                  icon, 0);
@@ -437,7 +437,7 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
                                       GtkWidget *widget)
 {
         icon->priv->tooltips_pointer_above = TRUE;
-        ario_mpd_use_count_inc ();
+        ario_server_use_count_inc ();
 
         if (icon->priv->timeout_id)
                 g_source_remove (icon->priv->timeout_id);
@@ -452,7 +452,7 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
                                       GtkWidget *widget)
 {
         if (icon->priv->tooltips_pointer_above) {
-                ario_mpd_use_count_dec ();
+                ario_server_use_count_dec ();
                 icon->priv->tooltips_pointer_above = FALSE;
         }
 
@@ -471,14 +471,14 @@ ario_tray_icon_middle_click (ArioTrayIcon *icon)
 
         switch (trayicon_behavior) {
         case TRAY_ICON_PLAY_PAUSE:
-                if (ario_mpd_is_paused ())
-                        ario_mpd_do_play ();
+                if (ario_server_is_paused ())
+                        ario_server_do_play ();
                 else
-                        ario_mpd_do_pause ();
+                        ario_server_do_pause ();
                 break;
 
         case TRAY_ICON_NEXT_SONG:
-                ario_mpd_do_next ();
+                ario_server_do_next ();
                 break;
 
         case TRAY_ICON_DO_NOTHING:
@@ -527,7 +527,7 @@ ario_tray_icon_scroll_cb (GtkWidget *widget, GdkEvent *event,
                           ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        gint vol = ario_mpd_get_current_volume ();
+        gint vol = ario_server_get_current_volume ();
 
         switch (event->scroll.direction) {
         case GDK_SCROLL_UP:
@@ -545,7 +545,7 @@ ario_tray_icon_scroll_cb (GtkWidget *widget, GdkEvent *event,
                 break;
         }
 
-        ario_mpd_set_current_volume (vol);
+        ario_server_set_current_volume (vol);
 
         return FALSE;
 }
@@ -674,15 +674,15 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
         gchar *tooltip;
         gchar *title;
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                title = ario_util_format_title(ario_mpd_get_current_song ());
+                title = ario_util_format_title(ario_server_get_current_song ());
                 tooltip = g_strdup_printf ("%s: %s\n%s: %s\n%s: %s",
                                            _("Artist"),
-                                           ario_mpd_get_current_artist () ? ario_mpd_get_current_artist () : ARIO_MPD_UNKNOWN,
+                                           ario_server_get_current_artist () ? ario_server_get_current_artist () : ARIO_SERVER_UNKNOWN,
                                            _("Album"),
-                                           ario_mpd_get_current_album () ? ario_mpd_get_current_album () : ARIO_MPD_UNKNOWN,
+                                           ario_server_get_current_album () ? ario_server_get_current_album () : ARIO_SERVER_UNKNOWN,
                                            _("Title"),
                                            title);
                 g_free (title);
@@ -703,11 +703,11 @@ ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon)
         ARIO_LOG_FUNCTION_START
         gchar *title;
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 /* Title */
-                title = ario_util_format_title (ario_mpd_get_current_song ());
+                title = ario_util_format_title (ario_server_get_current_song ());
                 gtk_label_set_text (GTK_LABEL (icon->priv->tooltip_primary),
                                     title);
                 g_free (title);
@@ -728,17 +728,17 @@ ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon)
         gchar *album;
         gchar *secondary;
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 /* Artist - Album */
-                artist = ario_mpd_get_current_artist ();
-                album = ario_mpd_get_current_album ();
+                artist = ario_server_get_current_artist ();
+                album = ario_server_get_current_album ();
 
                 if (!album)
-                        album = ARIO_MPD_UNKNOWN;
+                        album = ARIO_SERVER_UNKNOWN;
                 if (!artist)
-                        artist = ARIO_MPD_UNKNOWN;
+                        artist = ARIO_SERVER_UNKNOWN;
 
                 secondary = TRAY_ICON_FROM_MARKUP (album, artist);
                 gtk_label_set_markup (GTK_LABEL (icon->priv->tooltip_secondary),
@@ -761,7 +761,7 @@ ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon)
         ARIO_LOG_FUNCTION_START
         GdkPixbuf *cover;
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 /* Icon */
@@ -792,12 +792,12 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
         if (!icon->priv->shown)
                 return;
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                elapsed = ario_mpd_get_current_elapsed ();
+                elapsed = ario_server_get_current_elapsed ();
                 elapsed_char = ario_util_format_time (elapsed);
-                total = ario_mpd_get_current_total_time ();
+                total = ario_server_get_current_total_time ();
                 if (total) {
                         total_char = ario_util_format_time (total);
                         time = g_strdup_printf ("%s%s%s", elapsed_char, _(" of "), total_char);
@@ -833,7 +833,7 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
         gtk_container_remove (GTK_CONTAINER (icon->priv->ebox),
                               GTK_WIDGET (gtk_container_get_children (GTK_CONTAINER (icon->priv->ebox))->data));
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
                 gtk_container_add (GTK_CONTAINER (icon->priv->ebox), icon->priv->image_play);
                 break;
@@ -846,7 +846,7 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
         }
         gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
 #else
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
                 gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-play");
                 break;
@@ -864,7 +864,7 @@ static void
 ario_tray_icon_sync_popup (ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        int state = ario_mpd_get_current_state ();
+        int state = ario_server_get_current_state ();
 
         gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPlay"),
                                 state != MPD_STATUS_STATE_PLAY);
@@ -873,7 +873,7 @@ ario_tray_icon_sync_popup (ArioTrayIcon *icon)
 }
 
 static void
-ario_tray_icon_song_changed_cb (ArioMpd *mpd,
+ario_tray_icon_song_changed_cb (ArioServer *server,
                                 ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
@@ -901,7 +901,7 @@ ario_tray_icon_notify (void)
 }
 
 static void
-ario_tray_icon_album_changed_cb (ArioMpd *mpd,
+ario_tray_icon_album_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
@@ -909,7 +909,7 @@ ario_tray_icon_album_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_tray_icon_state_changed_cb (ArioMpd *mpd,
+ario_tray_icon_state_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
@@ -925,7 +925,7 @@ ario_tray_icon_state_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_tray_icon_time_changed_cb (ArioMpd *mpd,
+ario_tray_icon_time_changed_cb (ArioServer *server,
                                 int elapsed,
                                 ArioTrayIcon *icon)
 {
@@ -946,8 +946,8 @@ ario_tray_icon_cmd_play (GtkAction *action,
                          ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_do_play ();
-        ario_mpd_update_status ();
+        ario_server_do_play ();
+        ario_server_update_status ();
 }
 
 static void
@@ -955,8 +955,8 @@ ario_tray_icon_cmd_pause (GtkAction *action,
                           ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_do_pause ();
-        ario_mpd_update_status ();
+        ario_server_do_pause ();
+        ario_server_update_status ();
 }
 
 static void
@@ -964,8 +964,8 @@ ario_tray_icon_cmd_stop (GtkAction *action,
                          ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_do_stop ();
-        ario_mpd_update_status ();
+        ario_server_do_stop ();
+        ario_server_update_status ();
 }
 
 static void
@@ -973,7 +973,7 @@ ario_tray_icon_cmd_next (GtkAction *action,
                          ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_do_next ();
+        ario_server_do_next ();
 }
 
 static void
@@ -981,7 +981,7 @@ ario_tray_icon_cmd_previous (GtkAction *action,
                              ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_do_prev ();
+        ario_server_do_prev ();
 }
 
 ArioTrayIcon *

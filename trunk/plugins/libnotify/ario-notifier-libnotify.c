@@ -21,7 +21,7 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include "ario-notifier-libnotify.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "ario-util.h"
 #include "widgets/ario-tray-icon.h"
 #include <libnotify/notify.h>
@@ -73,22 +73,22 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
         gchar *album;
         gchar *secondary;
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 /* Title */
-                title = ario_util_format_title (ario_mpd_get_current_song ());
+                title = ario_util_format_title (ario_server_get_current_song ());
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "summary", title);
                 g_free (title);
 
                 /* Artist - Album */
-                artist = ario_mpd_get_current_artist ();
-                album = ario_mpd_get_current_album ();
+                artist = ario_server_get_current_artist ();
+                album = ario_server_get_current_album ();
 
                 if (!album)
-                        album = ARIO_MPD_UNKNOWN;
+                        album = ARIO_SERVER_UNKNOWN;
                 if (!artist)
-                        artist = ARIO_MPD_UNKNOWN;
+                        artist = ARIO_SERVER_UNKNOWN;
 
                 secondary = TRAY_ICON_FROM_MARKUP (album, artist);
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "body", secondary);

@@ -42,6 +42,20 @@ if test x"$enable_debug" = xyes; then
    AC_DEFINE(DEBUG, 1, [Add runtime debugging information (slower)])
 fi
 
+dnl XMMS2 support
+AC_ARG_ENABLE(xmms2,
+              AC_HELP_STRING([--enable-xmms2],
+                             [Add support of XMMS2 (VERY EXPERIMENTAL)]))
+if test x"$enable_xmms2" = xyes; then
+   AC_DEFINE(ENABLE_XMMS2, 1, [Add support of XMMS2 (VERY EXPERIMENTAL)])
+   PKG_CHECK_MODULES(XMMS2,
+                     xmms2-client
+		     xmms2-client-glib)
+   AC_SUBST(XMMS2_CFLAGS)
+   AC_SUBST(XMMS2_LIBS)
+fi
+AM_CONDITIONAL(USE_XMMS2, test x${enable_xmms2} = xyes)
+
 dnl ================================================================
 dnl Python plugins
 dnl ================================================================
@@ -216,6 +230,11 @@ if test x${enable_debug} = xyes; then
         echo "Debug information is:                     ENABLED"
 else
         echo "Debug information is:                     DISABLED (--enable-debug)"
+fi
+if test x${enable_xmms2} = xyes; then
+        echo "XMMS2 support (VERY EXPERIMENTAL) is:     ENABLED"
+else
+        echo "XMMS2 support (VERY EXPERIMENTAL) is:     DISABLED (--enable-xmms2)"
 fi
 if test x${enable_python} = xyes; then
         echo "Python plugins support is:                ENABLED"

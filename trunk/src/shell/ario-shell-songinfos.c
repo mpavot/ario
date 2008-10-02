@@ -228,7 +228,7 @@ ario_shell_songinfos_finalize (GObject *object)
         g_return_if_fail (shell_songinfos->priv != NULL);
 
         shell_songinfos->priv->songs = g_list_first (shell_songinfos->priv->songs);
-        g_list_foreach (shell_songinfos->priv->songs, (GFunc) ario_mpd_free_song, NULL);
+        g_list_foreach (shell_songinfos->priv->songs, (GFunc) ario_server_free_song, NULL);
         g_list_free (shell_songinfos->priv->songs);
 
         G_OBJECT_CLASS (ario_shell_songinfos_parent_class)->finalize (object);
@@ -276,7 +276,7 @@ static void
 ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdSong *song;
+        ArioServerSong *song;
         gchar *length;
         gchar *window_title;
         ArioLyricsEditorData *data;

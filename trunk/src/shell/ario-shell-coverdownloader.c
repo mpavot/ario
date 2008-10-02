@@ -27,7 +27,7 @@
 #include "shell/ario-shell-coverdownloader.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static void ario_shell_coverdownloader_finalize (GObject *object);
 static GObject * ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties,
@@ -44,7 +44,7 @@ static void ario_shell_coverdownloader_close_cb (GtkButton *button,
 static void ario_shell_coverdownloader_cancel_cb (GtkButton *button,
                                                   ArioShellCoverdownloader *ario_shell_coverdownloader);
 static void ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                             const ArioMpdAlbum *mpd_album,
+                                                             const ArioServerAlbum *server_album,
                                                              const ArioShellCoverdownloaderOperation operation);
 
 struct ArioShellCoverdownloaderPrivate
@@ -112,7 +112,7 @@ ario_shell_coverdownloader_finalize (GObject *object)
                 g_thread_join (ario_shell_coverdownloader->priv->thread);
 
         /* We free the list */
-        g_slist_foreach (ario_shell_coverdownloader->priv->albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_foreach (ario_shell_coverdownloader->priv->albums, (GFunc) ario_server_free_album, NULL);
         g_slist_free (ario_shell_coverdownloader->priv->albums);
 
         is_instantiated = FALSE;
@@ -343,13 +343,13 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
                                        const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *albums = ario_mpd_get_albums (NULL);
+        GSList *albums = ario_server_get_albums (NULL);
 
         ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader,
                                                            albums,
                                                            operation);
 
-        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
         g_slist_free (albums);
 }
 
@@ -412,7 +412,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
 
         ario_shell_coverdownloader->priv->albums = NULL;
         for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
-                ario_shell_coverdownloader->priv->albums = g_slist_append (ario_shell_coverdownloader->priv->albums, ario_mpd_copy_album (tmp->data));
+                ario_shell_coverdownloader->priv->albums = g_slist_append (ario_shell_coverdownloader->priv->albums, ario_server_copy_album (tmp->data));
         }
 
         ario_shell_coverdownloader->priv->operation = operation;
@@ -425,7 +425,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
 
 static void
 ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_shell_coverdownloader,
-                                                 const ArioMpdAlbum *mpd_album,
+                                                 const ArioServerAlbum *server_album,
                                                  const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START
@@ -434,12 +434,12 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
         const gchar *path;
         ArioShellCoverdownloaderIdleData *data;
 
-        if (!mpd_album)
+        if (!server_album)
                 return;
 
-        artist = mpd_album->artist;
-        album = mpd_album->album;
-        path = mpd_album->path;
+        artist = server_album->artist;
+        album = server_album->album;
+        path = server_album->path;
 
         if (!album || !artist)
                 return;

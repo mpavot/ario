@@ -17,7 +17,7 @@
  *
  */
 
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "glib/gslist.h"
 #include "gdk/gdkpixbuf.h"
 
@@ -31,7 +31,7 @@ char*                   ario_util_format_total_time          (const int time) G_
 
 gchar*                  ario_util_format_track               (const gchar *track) G_GNUC_MALLOC;
 
-gchar*                  ario_util_format_title               (const ArioMpdSong *mpd_song) G_GNUC_MALLOC;
+gchar*                  ario_util_format_title               (const ArioServerSong *server_song) G_GNUC_MALLOC;
 
 void                    ario_util_add_stock_icons            (const char *stock_id,
                                                               const char *filename);

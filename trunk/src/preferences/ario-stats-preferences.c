@@ -27,10 +27,10 @@
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 #include "ario-util.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static void ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences);
-static void ario_stats_preferences_stats_changed_cb (ArioMpd *mpd,
+static void ario_stats_preferences_stats_changed_cb (ArioServer *server,
                                                      ArioStatsPreferences *stats_preferences);
 
 struct ArioStatsPreferencesPrivate
@@ -72,7 +72,7 @@ ario_stats_preferences_new (void)
 
         g_return_val_if_fail (stats_preferences->priv != NULL, NULL);
 
-        g_signal_connect_object (ario_mpd_get_instance (),
+        g_signal_connect_object (ario_server_get_instance (),
                                  "state_changed",
                                  G_CALLBACK (ario_stats_preferences_stats_changed_cb),
                                  stats_preferences, 0);
@@ -121,7 +121,7 @@ static void
 ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdStats *stats = ario_mpd_get_stats ();
+        ArioServerStats *stats = ario_server_get_stats ();
         gchar *tmp;
 
         if (stats) {
@@ -159,7 +159,7 @@ ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences)
 }
 
 static void
-ario_stats_preferences_stats_changed_cb (ArioMpd *mpd,
+ario_stats_preferences_stats_changed_cb (ArioServer *server,
                                          ArioStatsPreferences *stats_preferences)
 {
         ARIO_LOG_FUNCTION_START

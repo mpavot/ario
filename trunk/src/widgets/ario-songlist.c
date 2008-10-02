@@ -325,7 +325,7 @@ ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
                                             ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_clear ();
+        ario_server_clear ();
         ario_songlist_add_in_playlist (songlist, TRUE);
 }
 
@@ -342,7 +342,7 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
                                              songlists_foreach,
                                              &paths);
 
-        songs = ario_mpd_get_songs_info (paths);
+        songs = ario_server_get_songs_info (paths);
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 

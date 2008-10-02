@@ -26,7 +26,7 @@
 #include "lib/ario-conf.h"
 #include "covers/ario-cover-lastfm.h"
 #include "covers/ario-cover.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -167,10 +167,10 @@ ario_cover_lastfm_make_xml_uri (const char *artist,
                 return NULL;
 
         /* If the artist in unknown, we don't search for a cover */
-        if (!strcmp (artist, ARIO_MPD_UNKNOWN))
+        if (!strcmp (artist, ARIO_SERVER_UNKNOWN))
                 return NULL;
 
-        if (!strcmp (album, ARIO_MPD_UNKNOWN))
+        if (!strcmp (album, ARIO_SERVER_UNKNOWN))
                 return NULL;
 
         formated_artist = ario_util_format_keyword (artist);

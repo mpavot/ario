@@ -28,15 +28,15 @@
 #define PREF_PORT                               "port"
 #define PREF_PORT_DEFAULT                       6600
 
-/* The password to connect to mpd */
+/* The password to connect to server */
 #define PREF_PASSWORD                           "password"
 #define PREF_PASSWORD_DEFAULT                   NULL
 
-/* True if Ario is on the same computer as MPD */
+/* True if Ario is on the same computer as SERVER */
 #define PREF_LOCAL                              "local"
 #define PREF_LOCAL_DEFAULT                      FALSE
 
-/* Define if Ario must autoconnect to mpd or not */
+/* Define if Ario must autoconnect to server or not */
 #define PREF_AUTOCONNECT                        "autoconnect"
 #define PREF_AUTOCONNECT_DEFAULT                TRUE
 
@@ -248,7 +248,7 @@
 #define PREF_BROWSER_TREES                      "browser-trees"
 #define PREF_BROWSER_TREES_DEFAULT              "0,1,2"
 
-/* If true, Ario asks to MPD to update the database when it is started */
+/* If true, Ario asks to SERVER to update the database when it is started */
 #define PREF_UPDATE_STARTUP                     "update-startup"
 #define PREF_UPDATE_STARTUP_DEFAULT              FALSE
 

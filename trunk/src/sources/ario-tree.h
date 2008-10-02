@@ -21,7 +21,7 @@
 #define __ARIO_TREE_H
 
 #include <gtk/gtkhbox.h>
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "sources/ario-source.h"
 
 G_BEGIN_DECLS
@@ -54,14 +54,14 @@ typedef struct
 GType                   ario_tree_get_type              (void) G_GNUC_CONST;
 
 GtkWidget*              ario_tree_new                   (GtkUIManager *mgr,
-                                                         ArioMpdTag tag,
+                                                         ArioServerTag tag,
                                                          gboolean is_first);
 void                    ario_tree_fill                  (ArioTree *tree);
 
 void                    ario_tree_clear_criterias       (ArioTree *tree);
 
 void                    ario_tree_add_criteria          (ArioTree *tree,
-                                                         ArioMpdCriteria *criteria);
+                                                         ArioServerCriteria *criteria);
 GSList*                 ario_tree_get_criterias         (ArioTree *tree);
 
 void                    ario_tree_cmd_add               (ArioTree *tree,

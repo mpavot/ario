@@ -20,11 +20,11 @@
 
 #include "widgets/ario-status-bar.h"
 #include <glib/gi18n.h>
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 
-static void ario_status_bar_playlist_changed_cb (ArioMpd *mpd,
+static void ario_status_bar_playlist_changed_cb (ArioServer *server,
                                                  ArioStatusBar *status_bar);
 
 struct ArioStatusBarPrivate
@@ -55,18 +55,18 @@ ario_status_bar_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioStatusBar *status_bar;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         status_bar = g_object_new (TYPE_ARIO_STATUS_BAR,
                                    NULL);
 
         g_return_val_if_fail (status_bar->priv != NULL, NULL);
 
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "playlist_changed",
                                  G_CALLBACK (ario_status_bar_playlist_changed_cb),
                                  status_bar, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "updatingdb_changed",
                                  G_CALLBACK (ario_status_bar_playlist_changed_cb),
                                  status_bar, 0);
@@ -74,7 +74,7 @@ ario_status_bar_new (void)
 }
 
 static void
-ario_status_bar_playlist_changed_cb (ArioMpd *mpd,
+ario_status_bar_playlist_changed_cb (ArioServer *server,
                                      ArioStatusBar *status_bar)
 {
         ARIO_LOG_FUNCTION_START
@@ -83,15 +83,15 @@ ario_status_bar_playlist_changed_cb (ArioMpd *mpd,
         int ario_playlist_length;
         int ario_playlist_total_time;
 
-        ario_playlist_length = ario_mpd_get_current_playlist_length ();
+        ario_playlist_length = ario_server_get_current_playlist_length ();
 
-        ario_playlist_total_time = ario_mpd_get_current_playlist_total_time ();
+        ario_playlist_total_time = ario_server_get_current_playlist_total_time ();
         formated_total_time = ario_util_format_total_time (ario_playlist_total_time);
 
         msg = g_strdup_printf ("%d %s - %s", ario_playlist_length, _("Songs"), formated_total_time);
         g_free (formated_total_time);
 
-        if (ario_mpd_get_updating ()) {
+        if (ario_server_get_updating ()) {
                 tmp = g_strdup_printf ("%s - %s", msg, _("Updating..."));
                 g_free (msg);
                 msg = tmp;

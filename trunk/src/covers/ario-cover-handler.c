@@ -26,7 +26,7 @@
 #include "covers/ario-cover-manager.h"
 #include "ario-debug.h"
 #include "ario-util.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "ario-cover.h"
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
@@ -34,9 +34,9 @@
 static void ario_cover_handler_finalize (GObject *object);
 static void ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                             gboolean should_get);
-static void ario_cover_handler_album_changed_cb (ArioMpd *mpd,
+static void ario_cover_handler_album_changed_cb (ArioServer *server,
                                                  ArioCoverHandler *cover_handler);
-static void ario_cover_handler_state_changed_cb (ArioMpd *mpd,
+static void ario_cover_handler_state_changed_cb (ArioServer *server,
                                                  ArioCoverHandler *cover_handler);
 
 enum
@@ -104,7 +104,7 @@ ario_cover_handler_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioCoverHandler *cover_handler;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         cover_handler = g_object_new (TYPE_ARIO_COVER_HANDLER,
                                       NULL);
@@ -113,11 +113,11 @@ ario_cover_handler_new (void)
 
         instance = cover_handler;
 
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "album_changed",
                                  G_CALLBACK (ario_cover_handler_album_changed_cb),
                                  cover_handler, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_cover_handler_state_changed_cb),
                                  cover_handler, 0);
@@ -233,13 +233,13 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
         ARIO_LOG_FUNCTION_START
         gchar *large_cover_path;
         ArioCoverHandlerData *data;
-        gchar *artist = ario_mpd_get_current_artist ();
-        gchar *album = ario_mpd_get_current_album ();
+        gchar *artist = ario_server_get_current_artist ();
+        gchar *album = ario_server_get_current_album ();
 
         if (!artist)
-                artist = ARIO_MPD_UNKNOWN;
+                artist = ARIO_SERVER_UNKNOWN;
         if (!album)
-                album = ARIO_MPD_UNKNOWN;
+                album = ARIO_SERVER_UNKNOWN;
 
         if (cover_handler->priv->pixbuf) {
                 g_object_unref(cover_handler->priv->pixbuf);
@@ -256,7 +256,7 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                 cover_handler->priv->cover_path = NULL;
         }
 
-        switch (ario_mpd_get_current_state ()) {
+        switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 cover_handler->priv->cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
@@ -275,7 +275,7 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                 data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
                                 data->artist = g_strdup (artist);
                                 data->album = g_strdup (album);
-                                data->path = g_path_get_dirname (ario_mpd_get_current_song_path ());
+                                data->path = g_path_get_dirname (ario_server_get_current_song_path ());
                                 g_async_queue_push (cover_handler->priv->queue, data);
 
                                 if (!cover_handler->priv->thread) {
@@ -293,7 +293,7 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
 }
 
 static void
-ario_cover_handler_album_changed_cb (ArioMpd *mpd,
+ario_cover_handler_album_changed_cb (ArioServer *server,
                                      ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START
@@ -302,7 +302,7 @@ ario_cover_handler_album_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_cover_handler_state_changed_cb (ArioMpd *mpd,
+ario_cover_handler_state_changed_cb (ArioServer *server,
                                      ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START

@@ -29,7 +29,7 @@
 #include "widgets/ario-playlist.h"
 #include "ario-debug.h"
 #include "ario-util.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static gboolean ario_shell_similarartists_window_delete_cb (GtkWidget *window,
                                                             GdkEventAny *event,
@@ -296,8 +296,8 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         int i = 0;
         gchar *songs_txt;
         GSList *songs = NULL;
-        ArioMpdAtomicCriteria atomic_criteria;
-        ArioMpdCriteria *criteria = NULL;
+        ArioServerAtomicCriteria atomic_criteria;
+        ArioServerCriteria *criteria = NULL;
 
         similar_artists = ario_shell_similarartists_get_similar_artists (shell_similarartists->priv->artist);
 
@@ -310,12 +310,12 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
                 similar_artist = tmp->data;
                 atomic_criteria.value = (gchar *) similar_artist->name;
 
-                songs = ario_mpd_get_songs (criteria, TRUE);
+                songs = ario_server_get_songs (criteria, TRUE);
                 if (songs)
                         songs_txt = g_strdup_printf (_("%d songs"), g_slist_length (songs));
                 else
                         songs_txt = g_strdup ("");
-                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
                 g_slist_free (songs);
 
                 gtk_list_store_append (shell_similarartists->priv->liststore, &iter);
@@ -349,7 +349,7 @@ ario_shell_similarartists_new (void)
         GtkCellRenderer *renderer;
         gchar *artist;
 
-        artist = ario_mpd_get_current_artist ();
+        artist = ario_server_get_current_artist ();
 
         if (!artist)
                 return NULL;

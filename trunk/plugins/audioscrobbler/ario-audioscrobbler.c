@@ -39,7 +39,7 @@
 #include "lib/rb-glade-helpers.h"
 #include "preferences/ario-preferences.h"
 #include "ario-plugin.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 #define CLIENT_ID "ari"
 #define CLIENT_VERSION "0.1"
@@ -219,7 +219,7 @@ static void ario_audioscrobbler_conf_username_changed_cb (guint cnxn_id,
                                                           ArioAudioscrobbler *audioscrobbler);
 static void ario_audioscrobbler_conf_password_changed_cb (guint cnxn_id,
                                                           ArioAudioscrobbler *audioscrobbler);
-static void ario_audioscrobbler_song_changed_cb (ArioMpd *mpd,
+static void ario_audioscrobbler_song_changed_cb (ArioServer *server,
                                                  ArioAudioscrobbler *audioscrobbler);
 G_MODULE_EXPORT void ario_audioscrobbler_username_entry_changed_cb (GtkEntry *entry,
                                                                     ArioAudioscrobbler *audioscrobbler);
@@ -379,7 +379,7 @@ ario_audioscrobbler_new (void)
         ArioAudioscrobbler *audioscrobbler;
         audioscrobbler = g_object_new (ARIO_TYPE_AUDIOSCROBBLER, NULL);
 
-        g_signal_connect_object (ario_mpd_get_instance (),
+        g_signal_connect_object (ario_server_get_instance (),
                                  "song-changed",
                                  G_CALLBACK (ario_audioscrobbler_song_changed_cb),
                                  audioscrobbler, 0);
@@ -437,7 +437,7 @@ ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler)
 }
 
 static gboolean
-ario_audioscrobbler_is_queueable (ArioMpdSong *song)
+ario_audioscrobbler_is_queueable (ArioServerSong *song)
 {
         const char *title;
         const char *artist;
@@ -472,7 +472,7 @@ ario_audioscrobbler_is_queueable (ArioMpdSong *song)
 }
 
 static AudioscrobblerEntry *
-ario_audioscrobbler_create_entry (ArioMpdSong *song)
+ario_audioscrobbler_create_entry (ArioServerSong *song)
 {
         AudioscrobblerEntry *as_entry = g_new0 (AudioscrobblerEntry, 1);
 
@@ -525,7 +525,7 @@ maybe_add_current_song_to_queue (ArioAudioscrobbler *audioscrobbler)
                 return;
         }
 
-        elapsed = ario_mpd_get_current_elapsed ();
+        elapsed = ario_server_get_current_elapsed ();
 
         int elapsed_delta = elapsed - audioscrobbler->priv->current_elapsed;
         audioscrobbler->priv->current_elapsed = elapsed;
@@ -1462,12 +1462,12 @@ ario_audioscrobbler_conf_password_changed_cb (guint cnxn_id,
 }
 
 static void
-ario_audioscrobbler_song_changed_cb (ArioMpd *mpd,
+ario_audioscrobbler_song_changed_cb (ArioServer *server,
                                      ArioAudioscrobbler *audioscrobbler)
 {
-        ArioMpdSong *song;
+        ArioServerSong *song;
 
-        song = ario_mpd_get_current_song ();
+        song = ario_server_get_current_song ();
 
         if (audioscrobbler->priv->currently_playing != NULL) {
                 audioscrobbler_entry_free (audioscrobbler->priv->currently_playing);
@@ -1479,7 +1479,7 @@ ario_audioscrobbler_song_changed_cb (ArioMpd *mpd,
                 return;
         }
 
-        audioscrobbler->priv->current_elapsed = ario_mpd_get_current_elapsed ();
+        audioscrobbler->priv->current_elapsed = ario_server_get_current_elapsed ();
 
         if (ario_audioscrobbler_is_queueable (song) && (audioscrobbler->priv->current_elapsed < 15)) {
                 AudioscrobblerEntry *as_entry;

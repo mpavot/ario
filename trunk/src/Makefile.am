@@ -16,14 +16,13 @@ ario_LDADD = libario.la $(DEPS_LIBS)
 
 libario_la_LIBADD = \
         $(DEPS_LIBS)\
-        $(AVAHI_LIBS)
+        $(AVAHI_LIBS)\
+        $(XMMS2_LIBS)
 
 libario_la_SOURCES = \
 	ario-enum-types.c\
 	ario-enum-types.h\
 	ario-debug.h\
-	ario-mpd.c\
-	ario-mpd.h\
 	ario-profiles.c\
 	ario-profiles.h\
 	ario-util.c\
@@ -100,6 +99,10 @@ libario_la_SOURCES = \
 	preferences/ario-trayicon-preferences.c\
 	preferences/ario-trayicon-preferences.h\
 	preferences/ario-preferences.h\
+	servers/ario-mpd.c\
+	servers/ario-mpd.h\
+	servers/ario-server.c\
+	servers/ario-server.h\
 	sources/ario-browser.c\
 	sources/ario-browser.h\
 	sources/ario-tree.c\
@@ -150,6 +153,11 @@ if USE_AVAHI
 	                ario-avahi.h
 endif
 
+if USE_XMMS2
+        ario_SOURCES += servers/ario-xmms.c\
+                	servers/ario-xmms.h
+endif
+
 if ENABLE_PYTHON
         ario_SOURCES += plugins/ario-python-module.c\
                         plugins/ario-python-module.h\
@@ -168,7 +176,7 @@ endif
 
 INST_H_FILES =
 	plugins/ario-plugin.h \
-	ario-mpd.h \
+	servers/ario-mpd.h \
 	shell/ario-shell.h
 
 ario-enum-types.h: ario-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
@@ -180,6 +188,7 @@ ario-enum-types.c: ario-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
                 $(AVAHI_CFLAGS) \
+                $(XMMS2_CFLAGS) \
                 -DLOCALE_DIR=\""$(pkgdatadir)/locale"\"\
                 -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\
                 -DDATA_PATH=\""$(pkgdatadir)/ario/data/"\"\

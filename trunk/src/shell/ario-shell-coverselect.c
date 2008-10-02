@@ -304,7 +304,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
 }
 
 GtkWidget *
-ario_shell_coverselect_new (ArioMpdAlbum *mpd_album)
+ario_shell_coverselect_new (ArioServerAlbum *server_album)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellCoverselect *ario_shell_coverselect;
@@ -312,9 +312,9 @@ ario_shell_coverselect_new (ArioMpdAlbum *mpd_album)
         ario_shell_coverselect = g_object_new (TYPE_ARIO_SHELL_COVERSELECT,
                                                NULL);
 
-        ario_shell_coverselect->priv->file_artist = mpd_album->artist;
-        ario_shell_coverselect->priv->file_album = mpd_album->album;
-        ario_shell_coverselect->priv->path = mpd_album->path;
+        ario_shell_coverselect->priv->file_artist = server_album->artist;
+        ario_shell_coverselect->priv->file_album = server_album->album;
+        ario_shell_coverselect->priv->path = server_album->path;
 
         ario_shell_coverselect_set_current_cover (ario_shell_coverselect);
 

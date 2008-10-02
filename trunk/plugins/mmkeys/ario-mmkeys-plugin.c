@@ -37,7 +37,7 @@
 
 #include <ario-debug.h>
 #include <ario-shell.h>
-#include <ario-mpd.h>
+#include <servers/ario-server.h>
 
 #define ARIO_MMKEYS_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_MMKEYS_PLUGIN, ArioMmkeysPluginPrivate))
 
@@ -68,16 +68,16 @@ media_player_key_pressed (DBusGProxy *proxy,
 
         if (strcmp (key, "Play") == 0 ||
             strcmp (key, "Pause") == 0) {
-                if (ario_mpd_is_paused ())
-                        ario_mpd_do_play ();
+                if (ario_server_is_paused ())
+                        ario_server_do_play ();
                 else
-                        ario_mpd_do_pause ();
+                        ario_server_do_pause ();
         } else if (strcmp (key, "Stop") == 0) {
-                ario_mpd_do_stop ();
+                ario_server_do_stop ();
         } else if (strcmp (key, "Previous") == 0) {
-                ario_mpd_do_prev ();
+                ario_server_do_prev ();
         } else if (strcmp (key, "Next") == 0) {
-                ario_mpd_do_next ();
+                ario_server_do_next ();
         }
 }
 

@@ -102,10 +102,10 @@ struct ArioTreePrivate
 
         int album_sort;
 
-        ArioMpdTag tag;
+        ArioServerTag tag;
         gboolean is_first;
 
-        /* List of ArioMpdCriteria */
+        /* List of ArioServerCriteria */
         GSList *criterias;
 
         guint covertree_notif;
@@ -115,13 +115,13 @@ struct ArioTreePrivate
 typedef struct
 {
         GSList **criterias;
-        ArioMpdTag tag;
-} ArioMpdCriteriaData;
+        ArioServerTag tag;
+} ArioServerCriteriaData;
 
 typedef struct
 {
         GString *string;
-        ArioMpdTag tag;
+        ArioServerTag tag;
 } ArioTreeStringData;
 
 enum
@@ -283,7 +283,7 @@ ario_tree_finalize (GObject *object)
         if (tree->priv->sort_notif)
                 ario_conf_notification_remove (tree->priv->sort_notif);
         gtk_list_store_clear (tree->priv->model);
-        g_slist_foreach (tree->priv->criterias, (GFunc) ario_mpd_criteria_free, NULL);
+        g_slist_foreach (tree->priv->criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (tree->priv->criterias);
 
         G_OBJECT_CLASS (ario_tree_parent_class)->finalize (object);
@@ -343,7 +343,7 @@ ario_tree_is_song_tree (ArioTree *tree)
 
 GtkWidget *
 ario_tree_new (GtkUIManager *mgr,
-               ArioMpdTag tag,
+               ArioServerTag tag,
                gboolean is_first)
 {
         ARIO_LOG_FUNCTION_START
@@ -445,7 +445,7 @@ ario_tree_new (GtkUIManager *mgr,
                                                         G_TYPE_STRING);
         } else {
                 renderer = gtk_cell_renderer_text_new ();
-                column = gtk_tree_view_column_new_with_attributes (ario_mpd_get_items_names ()[tree->priv->tag],
+                column = gtk_tree_view_column_new_with_attributes (ario_server_get_items_names ()[tree->priv->tag],
                                                                    renderer,
                                                                    "text", 0,
                                                                    NULL);
@@ -663,15 +663,15 @@ get_selected_albums_foreach (GtkTreeModel *model,
         ARIO_LOG_FUNCTION_START
         GSList **albums = (GSList **) userdata;
 
-        ArioMpdAlbum *mpd_album;
+        ArioServerAlbum *server_album;
 
-        mpd_album = (ArioMpdAlbum *) g_malloc0 (sizeof (ArioMpdAlbum));
+        server_album = (ArioServerAlbum *) g_malloc0 (sizeof (ArioServerAlbum));
         gtk_tree_model_get (model, iter,
-                            ALBUM_VALUE_COLUMN, &mpd_album->album,
-                            ALBUM_ARTIST_COLUMN, &mpd_album->artist,
-                            ALBUM_PATH_COLUMN, &mpd_album->path, -1);
+                            ALBUM_VALUE_COLUMN, &server_album->album,
+                            ALBUM_ARTIST_COLUMN, &server_album->artist,
+                            ALBUM_PATH_COLUMN, &server_album->path, -1);
 
-        *albums = g_slist_append (*albums, mpd_album);
+        *albums = g_slist_append (*albums, server_album);
 }
 
 static gboolean
@@ -734,8 +734,8 @@ ario_tree_selection_drag_foreach (GtkTreeModel *model,
         ArioTreeStringData *data = (ArioTreeStringData *) userdata;
         gchar *val, *buf;
         g_return_if_fail (data != NULL);
-        ArioMpdCriteria *criteria, *tmp;
-        ArioMpdAtomicCriteria *atomic_criteria;
+        ArioServerCriteria *criteria, *tmp;
+        ArioServerAtomicCriteria *atomic_criteria;
 
         if (data->tag == MPD_TAG_ITEM_TITLE) {
                 gtk_tree_model_get (model, iter, SONG_FILENAME_COLUMN, &val, -1);
@@ -765,7 +765,6 @@ ario_tree_selection_drag_foreach (GtkTreeModel *model,
                 g_string_append (data->string, "\n");
                 g_free (buf);
                 g_string_append (data->string, val);
-                g_string_append (data->string, "\n");
 
                 g_free (val);
         }
@@ -815,12 +814,12 @@ void ario_tree_drag_begin_cb (GtkWidget *widget,
                                                      get_selected_albums_foreach,
                                                      &albums);
                 pixbuf = ario_util_get_dnd_pixbuf_from_albums (albums);
-                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (albums);
         } else {
                 criterias = ario_tree_get_criterias (tree);
                 pixbuf = ario_util_get_dnd_pixbuf (criterias);
-                g_slist_foreach (criterias, (GFunc) ario_mpd_criteria_free, NULL);
+                g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
                 g_slist_free (criterias);
         }
 
@@ -869,11 +868,11 @@ ario_tree_selection_changed_cb (GtkTreeSelection *selection,
 static void
 ario_tree_add_next_albums (ArioTree *tree,
                            const GSList *albums,
-                           ArioMpdCriteria *criteria)
+                           ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
         const GSList *tmp;
-        ArioMpdAlbum *mpd_album;
+        ArioServerAlbum *server_album;
         GtkTreeIter album_iter;
         gchar *cover_path;
         gchar *album;
@@ -881,10 +880,10 @@ ario_tree_add_next_albums (ArioTree *tree,
         GdkPixbuf *cover;
 
         for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
-                mpd_album = tmp->data;
+                server_album = tmp->data;
                 album_date = NULL;
 
-                cover_path = ario_cover_make_ario_cover_path (mpd_album->artist, mpd_album->album, SMALL_COVER);
+                cover_path = ario_cover_make_ario_cover_path (server_album->artist, server_album->album, SMALL_COVER);
 
                 /* The small cover exists, we show it */
                 cover = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
@@ -896,22 +895,22 @@ ario_tree_add_next_albums (ArioTree *tree,
                         gdk_pixbuf_fill (cover, 0);
                 }
 
-                if (mpd_album->date) {
-                        album_date = g_strdup_printf ("%s (%s)", mpd_album->album, mpd_album->date);
+                if (server_album->date) {
+                        album_date = g_strdup_printf ("%s (%s)", server_album->album, server_album->date);
                         album = album_date;
                 } else {
-                        album = mpd_album->album;
+                        album = server_album->album;
                 }
 
                 gtk_list_store_append (tree->priv->model, &album_iter);
                 gtk_list_store_set (tree->priv->model, &album_iter,
-                                    ALBUM_VALUE_COLUMN, mpd_album->album,
+                                    ALBUM_VALUE_COLUMN, server_album->album,
                                     ALBUM_CRITERIA_COLUMN, criteria,
-                                    ALBUM_ARTIST_COLUMN, mpd_album->artist,
+                                    ALBUM_ARTIST_COLUMN, server_album->artist,
                                     ALBUM_TEXT_COLUMN, album,
-                                    ALBUM_YEAR_COLUMN, mpd_album->date,
+                                    ALBUM_YEAR_COLUMN, server_album->date,
                                     ALBUM_COVER_COLUMN, cover,
-                                    ALBUM_PATH_COLUMN, mpd_album->path,
+                                    ALBUM_PATH_COLUMN, server_album->path,
                                     -1);
                 g_object_unref (G_OBJECT (cover));
                 g_free (album_date);
@@ -925,9 +924,9 @@ ario_tree_fill_albums (ArioTree *tree)
         GSList *albums, *tmp;
 
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
-                albums = ario_mpd_get_albums (tmp->data);
+                albums = ario_server_get_albums (tmp->data);
                 ario_tree_add_next_albums (tree, albums, tmp->data);
-                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (albums);
         }
 }
@@ -935,11 +934,11 @@ ario_tree_fill_albums (ArioTree *tree)
 static void
 ario_tree_add_next_songs (ArioTree *tree,
                           const GSList *songs,
-                          ArioMpdCriteria *criteria)
+                          ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
         const GSList *tmp;
-        ArioMpdSong *song;
+        ArioServerSong *song;
         GtkTreeIter iter;
         gchar *track;
         gchar *title;
@@ -968,16 +967,16 @@ ario_tree_fill_songs (ArioTree *tree)
         GSList *songs, *tmp;
 
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
-                songs = ario_mpd_get_songs (tmp->data, TRUE);
+                songs = ario_server_get_songs (tmp->data, TRUE);
                 ario_tree_add_next_songs (tree, songs, tmp->data);
-                g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+                g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
                 g_slist_free (songs);
         }
 }
 
 static void
 ario_tree_add_tags (ArioTree *tree,
-                    ArioMpdCriteria *criteria,
+                    ArioServerCriteria *criteria,
                     GSList *tags)
 {
         ARIO_LOG_FUNCTION_START
@@ -1002,7 +1001,7 @@ ario_tree_fill (ArioTree *tree)
         GList *paths = NULL;
         GtkTreePath *path;
         GtkTreeModel *model = GTK_TREE_MODEL (tree->priv->model);
-        ArioMpdCriteria *criteria;
+        ArioServerCriteria *criteria;
 
         g_signal_handlers_block_by_func (G_OBJECT (tree->priv->selection),
                                          G_CALLBACK (ario_tree_selection_changed_cb),
@@ -1019,14 +1018,14 @@ ario_tree_fill (ArioTree *tree)
                 ario_tree_fill_songs (tree);
         } else {
                 if (tree->priv->is_first) {
-                        tags = ario_mpd_list_tags (tree->priv->tag, NULL);
+                        tags = ario_server_list_tags (tree->priv->tag, NULL);
                         ario_tree_add_tags (tree, NULL, tags);
                         g_slist_foreach (tags, (GFunc) g_free, NULL);
                         g_slist_free (tags);
                 } else {
                         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
                                 criteria = tmp->data;
-                                tags = ario_mpd_list_tags (tree->priv->tag, criteria);
+                                tags = ario_server_list_tags (tree->priv->tag, criteria);
                                 ario_tree_add_tags (tree, criteria, tags);
                                 g_slist_foreach (tags, (GFunc) g_free, NULL);
                                 g_slist_free (tags);
@@ -1060,14 +1059,14 @@ ario_tree_clear_criterias (ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START
 
-        g_slist_foreach (tree->priv->criterias, (GFunc) ario_mpd_criteria_free, NULL);
+        g_slist_foreach (tree->priv->criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (tree->priv->criterias);
         tree->priv->criterias = NULL;
 }
 
 void
 ario_tree_add_criteria (ArioTree *tree,
-                        ArioMpdCriteria *criteria)
+                        ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
         tree->priv->criterias = g_slist_append (tree->priv->criterias, criteria);
@@ -1077,21 +1076,21 @@ static void
 ario_tree_selection_foreach (GtkTreeModel *model,
                              GtkTreePath *path,
                              GtkTreeIter *iter,
-                             ArioMpdCriteriaData *data)
+                             ArioServerCriteriaData *data)
 {
         ARIO_LOG_FUNCTION_START
         gchar *value;
-        ArioMpdCriteria *criteria;
-        ArioMpdCriteria *ret;
-        ArioMpdAtomicCriteria *atomic_criteria;
+        ArioServerCriteria *criteria;
+        ArioServerCriteria *ret;
+        ArioServerAtomicCriteria *atomic_criteria;
 
         gtk_tree_model_get (model, iter,
                             VALUE_COLUMN, &value,
                             CRITERIA_COLUMN, &criteria,
                             -1);
 
-        ret = ario_mpd_criteria_copy (criteria);
-        atomic_criteria = (ArioMpdAtomicCriteria *) g_malloc0 (sizeof (ArioMpdAtomicCriteria));
+        ret = ario_server_criteria_copy (criteria);
+        atomic_criteria = (ArioServerAtomicCriteria *) g_malloc0 (sizeof (ArioServerAtomicCriteria));
         atomic_criteria->tag = data->tag;
         atomic_criteria->value = value;
         ret = g_slist_append (ret, atomic_criteria);
@@ -1103,7 +1102,7 @@ GSList *
 ario_tree_get_criterias (ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdCriteriaData data;
+        ArioServerCriteriaData data;
         GSList *criterias = NULL;
 
         data.criterias = &criterias;
@@ -1127,7 +1126,7 @@ ario_tree_cmd_add (ArioTree *tree,
 
         ario_playlist_append_criterias (criterias, play);
 
-        g_slist_foreach (criterias, (GFunc) ario_mpd_criteria_free, NULL);
+        g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);
 }
 
@@ -1145,16 +1144,16 @@ get_cover (ArioTree *tree,
         coverdownloader = ario_shell_coverdownloader_new ();
         if (coverdownloader) {
                 for (tmp = criterias; tmp; tmp = g_slist_next (tmp)) {
-                        albums = g_slist_concat (albums, ario_mpd_get_albums (tmp->data));
+                        albums = g_slist_concat (albums, ario_server_get_albums (tmp->data));
                 }
                 ario_shell_coverdownloader_get_covers_from_albums (ARIO_SHELL_COVERDOWNLOADER (coverdownloader),
                                                                    albums,
                                                                    operation);
 
-                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (albums);
         }
-        g_slist_foreach (criterias, (GFunc) ario_mpd_criteria_free, NULL);
+        g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);
 }
 
@@ -1192,18 +1191,18 @@ ario_tree_cmd_albums_properties (ArioTree *tree)
         ARIO_LOG_FUNCTION_START
         GtkWidget *coverselect;
         GSList *albums = NULL;
-        ArioMpdAlbum *ario_mpd_album;
+        ArioServerAlbum *ario_server_album;
 
         gtk_tree_selection_selected_foreach (tree->priv->selection,
                                              get_selected_albums_foreach,
                                              &albums);
 
-        ario_mpd_album = albums->data;
-        coverselect = ario_shell_coverselect_new (ario_mpd_album);
+        ario_server_album = albums->data;
+        coverselect = ario_shell_coverselect_new (ario_server_album);
         gtk_dialog_run (GTK_DIALOG (coverselect));
         gtk_widget_destroy (coverselect);
 
-        g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+        g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
         g_slist_free (albums);
 }
 
@@ -1219,7 +1218,7 @@ ario_tree_cmd_songs_properties (ArioTree *tree)
                                              get_selected_songs_foreach,
                                              &paths);
 
-        songs = ario_mpd_get_songs_info (paths);
+        songs = ario_server_get_songs_info (paths);
         g_slist_foreach (paths, (GFunc) g_free, NULL);
         g_slist_free (paths);
 

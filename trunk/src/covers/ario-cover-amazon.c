@@ -26,7 +26,7 @@
 #include "lib/ario-conf.h"
 #include "covers/ario-cover-amazon.h"
 #include "covers/ario-cover.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -181,11 +181,11 @@ ario_cover_amazon_make_xml_uri (const char *artist,
                 return NULL;
 
         /* If the artist in unknown, we don't search for a cover */
-        if (!strcmp (artist, ARIO_MPD_UNKNOWN))
+        if (!strcmp (artist, ARIO_SERVER_UNKNOWN))
                 return NULL;
 
         /* If the album is unknown, we only use the artist to search for the cover */
-        if (!strcmp (album, ARIO_MPD_UNKNOWN))
+        if (!strcmp (album, ARIO_SERVER_UNKNOWN))
                 keywords = g_strdup (artist);
         else
                 keywords = g_strdup_printf ("%s %s", artist, album);
