@@ -26,7 +26,7 @@
 #include <glib/gi18n.h>
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static void clicked_cb (GtkButton *button, ArioVolume *volume);
 static gboolean scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume);
@@ -38,7 +38,7 @@ static gboolean scale_key_press_event_cb (GtkWidget *widget, GdkEventKey *event,
                                           ArioVolume *volume);
 static void mixer_value_changed_cb (GtkAdjustment *adj,
                                     ArioVolume *volume);
-static void ario_volume_changed_cb (ArioMpd *mpd,
+static void ario_volume_changed_cb (ArioServer *server,
                                     int vol,
                                     ArioVolume *volume);
 
@@ -186,7 +186,7 @@ ario_volume_init (ArioVolume *volume)
 }
 
 static void
-ario_volume_changed_cb (ArioMpd *mpd,
+ario_volume_changed_cb (ArioServer *server,
                         int vol,
                         ArioVolume *volume)
 {
@@ -226,7 +226,7 @@ ario_volume_new (void)
 
         g_return_val_if_fail (volume->priv != NULL, NULL);
 
-        g_signal_connect_object (ario_mpd_get_instance (),
+        g_signal_connect_object (ario_server_get_instance (),
                                  "volume_changed",
                                  G_CALLBACK (ario_volume_changed_cb),
                                  volume, 0);
@@ -325,7 +325,7 @@ static gboolean
 scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume)
 {
         ARIO_LOG_FUNCTION_START
-        gint vol = ario_mpd_get_current_volume ();
+        gint vol = ario_server_get_current_volume ();
 
         switch (event->scroll.direction) {
         case GDK_SCROLL_UP:
@@ -343,7 +343,7 @@ scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume)
                 break;
         }
 
-        ario_mpd_set_current_volume (vol);
+        ario_server_set_current_volume (vol);
 
         return FALSE;
 }
@@ -404,6 +404,6 @@ mixer_value_changed_cb (GtkAdjustment *adj, ArioVolume *volume)
         
         if (!volume->priv->loading) {
                 gint vol = (gint) gtk_adjustment_get_value (volume->priv->adj);
-                ario_mpd_set_current_volume (vol);
+                ario_server_set_current_volume (vol);
         }
 }

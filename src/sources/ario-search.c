@@ -27,7 +27,7 @@
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 #ifdef ENABLE_SEARCH
 
@@ -48,7 +48,7 @@ static void ario_search_get_property (GObject *object,
                                       guint prop_id,
                                       GValue *value,
                                       GParamSpec *pspec);
-static void ario_search_state_changed_cb (ArioMpd *mpd,
+static void ario_search_state_changed_cb (ArioServer *server,
                                           ArioSearch *search);
 static void ario_search_do_plus (GtkButton *button,
                                  ArioSearch *search);
@@ -209,7 +209,7 @@ ario_search_init (ArioSearch *search)
 
         search->priv->list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
 
-        items = ario_mpd_get_items_names ();
+        items = ario_server_get_items_names ();
         for (i = 0; i < MPD_TAG_NUM_OF_ITEM_TYPES; ++i) {
                 if (items[i]) {
                         gtk_list_store_append (search->priv->list_store, &iter);
@@ -296,8 +296,8 @@ ario_search_new (GtkUIManager *mgr,
 
         g_return_val_if_fail (search->priv != NULL, NULL);
 
-        /* Signals to synchronize the search with mpd */
-        g_signal_connect_object (ario_mpd_get_instance (),
+        /* Signals to synchronize the search with server */
+        g_signal_connect_object (ario_server_get_instance (),
                                  "state_changed", G_CALLBACK (ario_search_state_changed_cb),
                                  search, 0);
 
@@ -323,12 +323,12 @@ ario_search_new (GtkUIManager *mgr,
 }
 
 static void
-ario_search_state_changed_cb (ArioMpd *mpd,
+ario_search_state_changed_cb (ArioServer *server,
                               ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
-        if (search->priv->connected != ario_mpd_is_connected ()) {
-                search->priv->connected = ario_mpd_is_connected ();
+        if (search->priv->connected != ario_server_is_connected ()) {
+                search->priv->connected = ario_server_is_connected ();
                 /* ario_search_set_active (search->priv->connected); */
         }
 }
@@ -462,11 +462,11 @@ ario_search_do_search (GtkButton *button,
 {
         ARIO_LOG_FUNCTION_START
         ArioSearchConstraint *search_constraint;
-        ArioMpdAtomicCriteria *atomic_criteria;
+        ArioServerAtomicCriteria *atomic_criteria;
         GSList *criteria = NULL;
         GSList *tmp;
         GSList *songs;
-        ArioMpdSong *song;
+        ArioServerSong *song;
         GtkTreeIter iter;
         gchar *title;
         GValue *value;
@@ -475,7 +475,7 @@ ario_search_do_search (GtkButton *button,
         for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
                 search_constraint = tmp->data;
 
-                atomic_criteria = (ArioMpdAtomicCriteria *) g_malloc (sizeof (ArioMpdAtomicCriteria));
+                atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
                 gtk_combo_box_get_active_iter (GTK_COMBO_BOX (search_constraint->combo_box), &iter);
                 value = (GValue*)g_malloc(sizeof(GValue));
                 value->g_type = 0;
@@ -488,7 +488,7 @@ ario_search_do_search (GtkButton *button,
                 criteria = g_slist_append (criteria, atomic_criteria);
         }
 
-        songs = ario_mpd_get_songs (criteria, FALSE);
+        songs = ario_server_get_songs (criteria, FALSE);
         g_slist_foreach (criteria, (GFunc) g_free, NULL);
         g_slist_free (criteria);
 
@@ -507,7 +507,7 @@ ario_search_do_search (GtkButton *button,
                                     -1);
                 g_free (title);
         }
-        g_slist_foreach (songs, (GFunc) ario_mpd_free_song, NULL);
+        g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
         g_slist_free (songs);
 }
 #endif  /* ENABLE_SEARCH */

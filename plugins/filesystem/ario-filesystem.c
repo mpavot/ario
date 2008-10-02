@@ -28,7 +28,7 @@
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "preferences/ario-preferences.h"
 
 #define DRAG_THRESHOLD 1
@@ -43,9 +43,9 @@ static void ario_filesystem_get_property (GObject *object,
                                           guint prop_id,
                                           GValue *value,
                                           GParamSpec *pspec);
-static void ario_filesystem_state_changed_cb (ArioMpd *mpd,
+static void ario_filesystem_state_changed_cb (ArioServer *server,
                                               ArioFilesystem *filesystem);
-static void ario_filesystem_filesystem_changed_cb (ArioMpd *mpd,
+static void ario_filesystem_filesystem_changed_cb (ArioServer *server,
                                                    ArioFilesystem *filesystem);
 static void ario_filesystem_cmd_add_filesystem (GtkAction *action,
                                                 ArioFilesystem *filesystem);
@@ -354,7 +354,7 @@ ario_filesystem_new (GtkUIManager *mgr,
         ARIO_LOG_FUNCTION_START
         ArioFilesystem *filesystem;
         GtkWidget *scrolledwindow_songs;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         filesystem = g_object_new (TYPE_ARIO_FILESYSTEM,
                                    "ui-manager", mgr,
@@ -363,12 +363,12 @@ ario_filesystem_new (GtkUIManager *mgr,
         g_return_val_if_fail (filesystem->priv != NULL, NULL);
         filesystem->priv->actiongroup = group;
 
-        /* Signals to synchronize the filesystem with mpd */
-        g_signal_connect_object (mpd,
+        /* Signals to synchronize the filesystem with server */
+        g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_filesystem_state_changed_cb),
                                  filesystem, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "updatingdb_changed",
                                  G_CALLBACK (ario_filesystem_filesystem_changed_cb),
                                  filesystem, 0);
@@ -392,7 +392,7 @@ ario_filesystem_new (GtkUIManager *mgr,
                                       ario_filesystem_songs_actions,
                                       ario_filesystem_songs_n_actions, filesystem->priv->songs);
 
-        filesystem->priv->connected = ario_mpd_is_connected ();
+        filesystem->priv->connected = ario_server_is_connected ();
 
         ario_filesystem_fill_filesystem (filesystem);
 
@@ -423,18 +423,18 @@ ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
 }
 
 static void
-ario_filesystem_state_changed_cb (ArioMpd *mpd,
+ario_filesystem_state_changed_cb (ArioServer *server,
                                   ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
-        if (filesystem->priv->connected != ario_mpd_is_connected ()) {
-                filesystem->priv->connected = ario_mpd_is_connected ();
+        if (filesystem->priv->connected != ario_server_is_connected ()) {
+                filesystem->priv->connected = ario_server_is_connected ();
                 ario_filesystem_fill_filesystem (filesystem);
         }
 }
 
 static void
-ario_filesystem_filesystem_changed_cb (ArioMpd *mpd,
+ario_filesystem_filesystem_changed_cb (ArioServer *server,
                                        ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
@@ -482,8 +482,8 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         gchar *dir;
         gchar *title;
         GSList *tmp;
-        ArioMpdFileList *files;
-        ArioMpdSong *song;
+        ArioServerFileList *files;
+        ArioServerSong *song;
         gchar *path, *display_path;
         GtkTreePath *treepath;
         gboolean was_expanded;
@@ -505,7 +505,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter, FILETREE_DIR_COLUMN, &dir, -1);
         g_return_if_fail (dir);
 
-        files = ario_mpd_list_files (dir, FALSE);
+        files = ario_server_list_files (dir, FALSE);
         for (tmp = files->directories; tmp; tmp = g_slist_next (tmp)) {
                 path = tmp->data;
                 gtk_tree_store_append (filesystem->priv->filesystem_model, &child, &iter);
@@ -534,7 +534,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                     -1);
                 g_free (title);
         }
-        ario_mpd_free_file_list (files);
+        ario_server_free_file_list (files);
         g_free (dir);
 
         gtk_tree_selection_unselect_all (selection);
@@ -590,7 +590,7 @@ ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
                                                ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_clear ();
+        ario_server_clear ();
         ario_filesystem_add_filetree (filesystem, TRUE);
 }
 

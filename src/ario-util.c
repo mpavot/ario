@@ -130,26 +130,26 @@ ario_util_format_track (const gchar *track)
 }
 
 gchar *
-ario_util_format_title (const ArioMpdSong *mpd_song)
+ario_util_format_title (const ArioServerSong *server_song)
 {
         ARIO_LOG_FUNCTION_START
         gchar *dot;
         gchar *slash;
         gchar *res = NULL;
 
-        if (!mpd_song) {
-                res = g_strdup (ARIO_MPD_UNKNOWN);
-        } else if (mpd_song->title) {
-                res = g_strdup (mpd_song->title);
-        } else if (mpd_song->name) {
-                res = g_strdup (mpd_song->name);
+        if (!server_song) {
+                res = g_strdup (ARIO_SERVER_UNKNOWN);
+        } else if (server_song->title) {
+                res = g_strdup (server_song->title);
+        } else if (server_song->name) {
+                res = g_strdup (server_song->name);
         } else {
                 /* Original format is : "path/to/filename.extension" or http://path/to/address:port
                  * We only want to display filename or http address */
-                if (!g_ascii_strncasecmp (mpd_song->file, "http://", 7)) {
-                        res = g_strdup (mpd_song->file);
+                if (!g_ascii_strncasecmp (server_song->file, "http://", 7)) {
+                        res = g_strdup (server_song->file);
                 } else {
-                        slash = g_strrstr (mpd_song->file, "/"); 
+                        slash = g_strrstr (server_song->file, "/"); 
                         if (slash) {
                                 dot = g_strrstr (slash+1, ".");
                                 if (dot)
@@ -157,7 +157,7 @@ ario_util_format_title (const ArioMpdSong *mpd_song)
                                 else
                                         res = g_strdup (slash+1);
                         } else {
-                                res = g_strdup (mpd_song->file);
+                                res = g_strdup (server_song->file);
                         }
                 }
         }
@@ -535,7 +535,7 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
         const GSList *tmp;
         GSList *covers = NULL;
         gchar *cover_path;
-        ArioMpdAlbum *ario_mpd_album;
+        ArioServerAlbum *ario_server_album;
         int len = 0;
         GdkPixbuf *pixbuf;
 
@@ -543,9 +543,9 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
                 return NULL;
 
         for (tmp = albums; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
-                ario_mpd_album = tmp->data;
+                ario_server_album = tmp->data;
 
-                cover_path = ario_cover_make_ario_cover_path (ario_mpd_album->artist, ario_mpd_album->album, SMALL_COVER);
+                cover_path = ario_cover_make_ario_cover_path (ario_server_album->artist, ario_server_album->album, SMALL_COVER);
                 if (ario_util_uri_exists (cover_path)) {
                         covers = g_slist_append (covers, cover_path);
                         ++len;
@@ -567,9 +567,9 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
 {
         ARIO_LOG_FUNCTION_START
         const GSList *tmp;
-        ArioMpdAlbum *mpd_album;
+        ArioServerAlbum *server_album;
         int len = 0;
-        ArioMpdCriteria *criteria;
+        ArioServerCriteria *criteria;
         GSList *albums, *album_tmp;
         GdkPixbuf *pixbuf;
         gchar *cover_path;
@@ -581,11 +581,11 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
         for (tmp = criterias; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
                 criteria = tmp->data;
 
-                albums = ario_mpd_get_albums (criteria);
+                albums = ario_server_get_albums (criteria);
 
                 for (album_tmp = albums; album_tmp && len < MAX_COVERS_IN_DRAG; album_tmp = g_slist_next (album_tmp)) {
-                        mpd_album = album_tmp->data;
-                        cover_path = ario_cover_make_ario_cover_path (mpd_album->artist, mpd_album->album, SMALL_COVER);
+                        server_album = album_tmp->data;
+                        cover_path = ario_cover_make_ario_cover_path (server_album->artist, server_album->album, SMALL_COVER);
                         if (ario_util_uri_exists (cover_path)) {
                                 covers = g_slist_append (covers, cover_path);
                                 ++len;
@@ -593,7 +593,7 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
                                 g_free (cover_path);
                         }
                 }
-                g_slist_foreach (albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (albums);
         }
 

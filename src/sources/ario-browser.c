@@ -41,9 +41,9 @@ static void ario_browser_get_property (GObject *object,
 static void ario_browser_reload_trees (ArioBrowser *browser);
 static void ario_browser_trees_changed_cb (guint notification_id,
                                            ArioBrowser *browser);
-static void ario_browser_state_changed_cb (ArioMpd *mpd,
+static void ario_browser_state_changed_cb (ArioServer *server,
                                            ArioBrowser *browser);
-static void ario_browser_dbtime_changed_cb (ArioMpd *mpd,
+static void ario_browser_dbtime_changed_cb (ArioServer *server,
                                             ArioBrowser *browser);
 static void ario_browser_fill_first (ArioBrowser *browser);
 static void ario_browser_tree_selection_changed_cb (ArioTree *tree,
@@ -228,7 +228,7 @@ ario_browser_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START
         ArioBrowser *browser;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         browser = ARIO_BROWSER (g_object_new (TYPE_ARIO_BROWSER,
                                               "ui-manager", mgr,
@@ -236,12 +236,12 @@ ario_browser_new (GtkUIManager *mgr,
 
         g_return_val_if_fail (browser->priv != NULL, NULL);
 
-        /* Signals to synchronize the browser with mpd */
-        g_signal_connect_object (mpd,
+        /* Signals to synchronize the browser with server */
+        g_signal_connect_object (server,
                                  "state_changed", G_CALLBACK (ario_browser_state_changed_cb),
                                  browser, 0);
 
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
                                  browser, 0);
 
@@ -316,22 +316,22 @@ ario_browser_trees_changed_cb (guint notification_id,
 }
 
 static void
-ario_browser_state_changed_cb (ArioMpd *mpd,
+ario_browser_state_changed_cb (ArioServer *server,
                                ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        if (browser->priv->connected != ario_mpd_is_connected ())
+        if (browser->priv->connected != ario_server_is_connected ())
                 ario_browser_fill_first (browser);
 
-        browser->priv->connected = ario_mpd_is_connected ();
+        browser->priv->connected = ario_server_is_connected ();
 }
 
 static void
-ario_browser_dbtime_changed_cb (ArioMpd *mpd,
+ario_browser_dbtime_changed_cb (ArioServer *server,
                                 ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        if (!ario_mpd_get_updating ())
+        if (!ario_server_get_updating ())
                 ario_browser_fill_first (browser);
 }
 
@@ -400,7 +400,7 @@ ario_browser_cmd_clear_add_play (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         if (browser->priv->popup_tree) {
-                ario_mpd_clear ();
+                ario_server_clear ();
                 ario_tree_cmd_add (browser->priv->popup_tree, TRUE);
         }
 }

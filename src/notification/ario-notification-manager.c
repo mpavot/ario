@@ -22,13 +22,13 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "notification/ario-notification-manager.h"
 #include "notification/ario-notifier-tooltip.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-static void ario_notification_manager_song_changed_cb (ArioMpd *mpd,
+static void ario_notification_manager_song_changed_cb (ArioServer *server,
                                                        ArioNotificationManager *notification_manager);
 
 struct ArioNotificationManagerPrivate
@@ -59,7 +59,7 @@ ario_notification_manager_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START
         static ArioNotificationManager *notification_manager = NULL;
-        ArioMpd *mpd;
+        ArioServer *server;
 
         if (!notification_manager) {
                 ArioNotifier *notifier;
@@ -72,13 +72,13 @@ ario_notification_manager_get_instance (void)
                 ario_notification_manager_add_notifier (notification_manager,
                                                         ARIO_NOTIFIER (notifier));
 
-                mpd = ario_mpd_get_instance ();
-                g_signal_connect_object (mpd,
+                server = ario_server_get_instance ();
+                g_signal_connect_object (server,
                                          "song_changed",
                                          G_CALLBACK (ario_notification_manager_song_changed_cb),
                                          notification_manager, G_CONNECT_AFTER);
 
-                g_signal_connect_object (mpd,
+                g_signal_connect_object (server,
                                          "state_changed",
                                          G_CALLBACK (ario_notification_manager_song_changed_cb),
                                          notification_manager, G_CONNECT_AFTER);
@@ -135,7 +135,7 @@ ario_notification_manager_remove_notifier (ArioNotificationManager *notification
 }
 
 static void
-ario_notification_manager_song_changed_cb (ArioMpd *mpd,
+ario_notification_manager_song_changed_cb (ArioServer *server,
                                            ArioNotificationManager *notification_manager)
 {
         ARIO_LOG_FUNCTION_START

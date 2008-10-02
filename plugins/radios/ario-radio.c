@@ -25,7 +25,7 @@
 #include "ario-radio.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "plugins/ario-plugin.h"
 
 #define DRAG_THRESHOLD 1
@@ -49,7 +49,7 @@ static void ario_radio_get_property (GObject *object,
                                      guint prop_id,
                                      GValue *value,
                                      GParamSpec *pspec);
-static void ario_radio_state_changed_cb (ArioMpd *mpd,
+static void ario_radio_state_changed_cb (ArioServer *server,
                                          ArioRadio *radio);
 static void ario_radio_add_in_playlist (ArioRadio *radio,
                                         gboolean play);
@@ -341,12 +341,12 @@ ario_radio_new (GtkUIManager *mgr,
         g_return_val_if_fail (radio->priv != NULL, NULL);
         radio->priv->actiongroup = group;
 
-        /* Signals to synchronize the radio with mpd */
-        g_signal_connect_object (ario_mpd_get_instance (),
+        /* Signals to synchronize the radio with server */
+        g_signal_connect_object (ario_server_get_instance (),
                                  "state_changed",
                                  G_CALLBACK (ario_radio_state_changed_cb),
                                  radio, 0);
-        radio->priv->connected = ario_mpd_is_connected ();
+        radio->priv->connected = ario_server_is_connected ();
 
         gtk_action_group_add_actions (group,
                                       ario_radio_actions,
@@ -532,13 +532,13 @@ ario_radio_fill_radios (ArioRadio *radio)
 }
 
 static void
-ario_radio_state_changed_cb (ArioMpd *mpd,
+ario_radio_state_changed_cb (ArioServer *server,
                              ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
 
-        if (radio->priv->connected != ario_mpd_is_connected ()) {
-                radio->priv->connected = ario_mpd_is_connected ();
+        if (radio->priv->connected != ario_server_is_connected ()) {
+                radio->priv->connected = ario_server_is_connected ();
                 ario_radio_fill_radios (radio);
         }
 }
@@ -611,7 +611,7 @@ ario_radio_cmd_clear_add_play_radios (GtkAction *action,
                                       ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_clear ();
+        ario_server_clear ();
         ario_radio_add_in_playlist (radio, TRUE);
 }
 

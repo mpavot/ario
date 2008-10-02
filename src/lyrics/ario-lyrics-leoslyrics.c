@@ -26,7 +26,7 @@
 #include "lib/ario-conf.h"
 #include "lyrics/ario-lyrics-leoslyrics.h"
 #include "lyrics/ario-lyrics.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
@@ -106,7 +106,7 @@ ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
                 return NULL;
 
         /* If the song in unknown, we don't search for a lyrics */
-        if (!strcmp (song, ARIO_MPD_UNKNOWN))
+        if (!strcmp (song, ARIO_SERVER_UNKNOWN))
                 return NULL;
 
         conv_artist = g_strdup (artist);
@@ -143,7 +143,7 @@ ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
         ario_util_string_replace (&conv_song, " ", "%20");
 
         /* We make the xml uri with all the parameters */
-        if (strcmp (artist, ARIO_MPD_UNKNOWN))
+        if (strcmp (artist, ARIO_SERVER_UNKNOWN))
                 xml_uri = g_strdup_printf (LEOSLYRICS_FIRST_URI, conv_artist, conv_song);
         else
                 xml_uri = g_strdup_printf (LEOSLYRICS_FIRST_URI, "", conv_song);

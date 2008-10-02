@@ -30,7 +30,7 @@
 #include "lib/rb-glade-helpers.h"
 #include "lyrics/ario-lyrics.h"
 #include "covers/ario-cover.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static void ario_information_finalize (GObject *object);
 static void ario_information_set_property (GObject *object,
@@ -46,21 +46,21 @@ static void ario_information_fill_cover (ArioInformation *information);
 static void ario_information_album_foreach (GtkWidget *widget,
                                             GtkContainer *container);
 static void ario_information_fill_album (ArioInformation *information);
-static void ario_information_state_changed_cb (ArioMpd *mpd,
+static void ario_information_state_changed_cb (ArioServer *server,
                                                ArioInformation *information);
-static void ario_information_song_changed_cb (ArioMpd *mpd,
+static void ario_information_song_changed_cb (ArioServer *server,
                                               ArioInformation *information);
 static void ario_information_cover_changed_cb (ArioCoverHandler *cover_handler,
                                                ArioInformation *information);
-static void ario_information_album_changed_cb (ArioMpd *mpd,
+static void ario_information_album_changed_cb (ArioServer *server,
                                                ArioInformation *information);
 static void ario_information_cover_drag_data_get_cb (GtkWidget *widget,
                                                      GdkDragContext *context,
                                                      GtkSelectionData *selection_data,
-                                                     guint info, guint time, ArioMpdAlbum *album);
+                                                     guint info, guint time, ArioServerAlbum *album);
 static gboolean ario_information_cover_button_press_cb (GtkWidget *widget,
                                                         GdkEventButton *event,
-                                                        ArioMpdAlbum *album);
+                                                        ArioServerAlbum *album);
 
 struct ArioInformationPrivate
 {
@@ -261,7 +261,7 @@ ario_information_finalize (GObject *object)
         g_return_if_fail (information->priv != NULL);
 
         if (information->priv->albums) {
-                g_slist_foreach (information->priv->albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_foreach (information->priv->albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (information->priv->albums);
                 information->priv->albums = NULL;
         }
@@ -312,7 +312,7 @@ ario_information_new (GtkUIManager *mgr)
 {
         ARIO_LOG_FUNCTION_START
         ArioInformation *information;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         information = g_object_new (TYPE_ARIO_INFORMATION,
                                     "ui-manager", mgr,
@@ -320,21 +320,21 @@ ario_information_new (GtkUIManager *mgr)
 
         g_return_val_if_fail (information->priv != NULL, NULL);
 
-        /* Signals to synchronize the information with mpd */
-        g_signal_connect_object (mpd,
+        /* Signals to synchronize the information with server */
+        g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_information_state_changed_cb),
                                  information, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "song_changed",
                                  G_CALLBACK (ario_information_song_changed_cb),
                                  information, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "album_changed",
                                  G_CALLBACK (ario_information_album_changed_cb),
                                  information, 0);
 
-        information->priv->connected = ario_mpd_is_connected ();
+        information->priv->connected = ario_server_is_connected ();
 
         ario_information_select (ARIO_SOURCE (information));
         ario_information_unselect (ARIO_SOURCE (information));
@@ -346,7 +346,7 @@ static void
 ario_information_fill_song (ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdSong *song;
+        ArioServerSong *song;
         gchar *length;
         ArioLyrics *lyrics;
         int state;
@@ -354,8 +354,8 @@ ario_information_fill_song (ArioInformation *information)
         if (!information->priv->selected)
                 return;
 
-        state = ario_mpd_get_current_state ();
-        song = ario_mpd_get_current_song ();
+        state = ario_server_get_current_state ();
+        song = ario_server_get_current_song ();
 
         if (!information->priv->connected
             || !song
@@ -411,12 +411,12 @@ static void
 ario_information_fill_album (ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdSong *song;
+        ArioServerSong *song;
         int state;
-        ArioMpdAtomicCriteria atomic_criteria;
-        ArioMpdCriteria *criteria = NULL;
+        ArioServerAtomicCriteria atomic_criteria;
+        ArioServerCriteria *criteria = NULL;
         GSList *tmp;
-        ArioMpdAlbum *album;
+        ArioServerAlbum *album;
         gchar *cover_path;
         GdkPixbuf *pixbuf;
         GtkWidget *image;
@@ -431,14 +431,14 @@ ario_information_fill_album (ArioInformation *information)
                                information->priv->albums_hbox);
 
         if (information->priv->albums) {
-                g_slist_foreach (information->priv->albums, (GFunc) ario_mpd_free_album, NULL);
+                g_slist_foreach (information->priv->albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (information->priv->albums);
                 information->priv->albums = NULL;
         }
         gtk_widget_hide (information->priv->albums_const_label);
 
-        state = ario_mpd_get_current_state ();
-        song = ario_mpd_get_current_song ();
+        state = ario_server_get_current_state ();
+        song = ario_server_get_current_song ();
 
         if (!information->priv->connected
             || !song
@@ -450,7 +450,7 @@ ario_information_fill_album (ArioInformation *information)
         atomic_criteria.tag = MPD_TAG_ITEM_ARTIST;
         atomic_criteria.value = song->artist;
 
-        information->priv->albums = ario_mpd_get_albums (criteria);
+        information->priv->albums = ario_server_get_albums (criteria);
         g_slist_free (criteria);
 
         for (tmp = information->priv->albums; tmp && nb < 8; tmp = g_slist_next (tmp)) {
@@ -495,18 +495,18 @@ ario_information_fill_album (ArioInformation *information)
 }
 
 static void
-ario_information_state_changed_cb (ArioMpd *mpd,
+ario_information_state_changed_cb (ArioServer *server,
                                    ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
-        information->priv->connected = ario_mpd_is_connected ();
+        information->priv->connected = ario_server_is_connected ();
         ario_information_fill_song (information);
         ario_information_fill_cover (information);
         ario_information_fill_album (information);
 }
 
 static void
-ario_information_song_changed_cb (ArioMpd *mpd,
+ario_information_song_changed_cb (ArioServer *server,
                                   ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
@@ -522,7 +522,7 @@ ario_information_cover_changed_cb (ArioCoverHandler *cover_handler,
 }
 
 static void
-ario_information_album_changed_cb (ArioMpd *mpd,
+ario_information_album_changed_cb (ArioServer *server,
                                    ArioInformation *information)
 {
         ARIO_LOG_FUNCTION_START
@@ -533,7 +533,7 @@ static void
 ario_information_cover_drag_data_get_cb (GtkWidget *widget,
                                          GdkDragContext *context,
                                          GtkSelectionData *selection_data,
-                                         guint info, guint time, ArioMpdAlbum *album)
+                                         guint info, guint time, ArioServerAlbum *album)
 {
         ARIO_LOG_FUNCTION_START
         gchar *str;
@@ -548,12 +548,12 @@ ario_information_cover_drag_data_get_cb (GtkWidget *widget,
 static gboolean
 ario_information_cover_button_press_cb (GtkWidget *widget,
                                         GdkEventButton *event,
-                                        ArioMpdAlbum *album)
+                                        ArioServerAlbum *album)
 {
         ARIO_LOG_FUNCTION_START
-        ArioMpdAtomicCriteria atomic_criteria1;
-        ArioMpdAtomicCriteria atomic_criteria2;
-        ArioMpdCriteria *criteria = NULL;
+        ArioServerAtomicCriteria atomic_criteria1;
+        ArioServerAtomicCriteria atomic_criteria2;
+        ArioServerCriteria *criteria = NULL;
         GSList *criterias = NULL;
 
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {

@@ -29,10 +29,10 @@
 #include "lib/ario-conf.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static void ario_server_preferences_sync_server (ArioServerPreferences *server_preferences);
-static void ario_server_preferences_server_changed_cb(ArioMpd *mpd,
+static void ario_server_preferences_server_changed_cb(ArioServer *server,
                                                       ArioServerPreferences *server_preferences);
 G_MODULE_EXPORT void ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
                                                                        ArioServerPreferences *server_preferences);
@@ -58,7 +58,7 @@ struct ArioServerPreferencesPrivate
         GtkWidget *update_checkbutton;
         GtkWidget *stopexit_checkbutton;
 
-        gboolean sync_mpd;
+        gboolean sync_server;
 };
 
 enum
@@ -101,7 +101,7 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
         if (gtk_tree_model_get_iter (model, &iter, path)) {
                 gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id, -1);
                 state = !state;
-                ario_mpd_enable_output (id,
+                ario_server_enable_output (id,
                                         state);
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, ENABLED_COLUMN, state, -1);
         }
@@ -116,18 +116,18 @@ ario_server_preferences_new (void)
         GladeXML *xml;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         server_preferences = g_object_new (TYPE_ARIO_SERVER_PREFERENCES,
                                            NULL);
 
         g_return_val_if_fail (server_preferences->priv != NULL, NULL);
 
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_server_preferences_server_changed_cb),
                                  server_preferences, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "updatingdb_changed",
                                  G_CALLBACK (ario_server_preferences_server_changed_cb),
                                  server_preferences, 0);
@@ -200,22 +200,22 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         gchar *last_update_char;
         GtkTreeIter iter;
         GSList *tmp;
-        ArioMpdOutput *output;
+        ArioServerOutput *output;
         GSList *outputs;
 
-        state = ario_mpd_get_current_state ();
-        updating = ario_mpd_get_updating ();
+        state = ario_server_get_current_state ();
+        updating = ario_server_get_updating ();
 
         if (state == MPD_STATUS_STATE_UNKNOWN) {
                 crossfadetime = 0;
                 last_update_char = _("Not connected");
         } else {
-                crossfadetime = ario_mpd_get_crossfadetime ();
+                crossfadetime = ario_server_get_crossfadetime ();
 
                 if (updating) {
                         last_update_char = _("Updating...");
                 } else {
-                        last_update = (long) ario_mpd_get_last_update ();
+                        last_update = (long) ario_server_get_last_update ();
                         last_update_char = ctime (&last_update);
                         /* Remove the new line */
                         if (last_update_char && strlen(last_update_char))
@@ -223,7 +223,7 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
                 }
         }
 
-        server_preferences->priv->sync_mpd = TRUE;
+        server_preferences->priv->sync_server = TRUE;
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton), (crossfadetime != 0) && (state != MPD_STATUS_STATE_UNKNOWN));
         gtk_widget_set_sensitive (server_preferences->priv->crossfade_checkbutton, state != MPD_STATUS_STATE_UNKNOWN);
         gtk_widget_set_sensitive (server_preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0) && (state != MPD_STATUS_STATE_UNKNOWN));
@@ -232,10 +232,10 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, (!updating && state != MPD_STATUS_STATE_UNKNOWN));
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), last_update_char);
 
-        outputs = ario_mpd_get_outputs ();
+        outputs = ario_server_get_outputs ();
         gtk_list_store_clear (server_preferences->priv->outputs_model);
         for (tmp = outputs; tmp; tmp = g_slist_next (tmp)) {
-                output = (ArioMpdOutput *) tmp->data;
+                output = (ArioServerOutput *) tmp->data;
                 gtk_list_store_append (server_preferences->priv->outputs_model, &iter);
                 gtk_list_store_set (server_preferences->priv->outputs_model, &iter,
                                     ENABLED_COLUMN, output->enabled,
@@ -243,10 +243,10 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
                                     ID_COLUMN, output->id,
                                     -1);
         }
-        g_slist_foreach (outputs, (GFunc) ario_mpd_free_output, NULL);
+        g_slist_foreach (outputs, (GFunc) ario_server_free_output, NULL);
         g_slist_free (outputs);
 
-        server_preferences->priv->sync_mpd = FALSE;
+        server_preferences->priv->sync_server = FALSE;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->update_checkbutton),
                                       ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT));
@@ -256,7 +256,7 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
 }
 
 static void
-ario_server_preferences_server_changed_cb (ArioMpd *mpd,
+ario_server_preferences_server_changed_cb (ArioServer *server,
                                            ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START
@@ -269,9 +269,9 @@ ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         int crossfadetime;
-        if (!server_preferences->priv->sync_mpd) {
+        if (!server_preferences->priv->sync_server) {
                 crossfadetime = gtk_spin_button_get_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton));
-                ario_mpd_set_crossfadetime (crossfadetime);
+                ario_server_set_crossfadetime (crossfadetime);
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton), (crossfadetime != 0));
                 gtk_widget_set_sensitive (server_preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0));
         }
@@ -283,14 +283,14 @@ ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         gboolean is_active;
-        if (!server_preferences->priv->sync_mpd) {
+        if (!server_preferences->priv->sync_server) {
                 is_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton));
                 if (is_active) {
-                        ario_mpd_set_crossfadetime (1);
+                        ario_server_set_crossfadetime (1);
                         gtk_spin_button_set_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton),
                                                    1);
                 } else {
-                        ario_mpd_set_crossfadetime (0);
+                        ario_server_set_crossfadetime (0);
                         gtk_spin_button_set_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton),
                                                    0);
                 }
@@ -305,7 +305,7 @@ ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, FALSE);
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), _("Updating..."));
-        ario_mpd_update_db ();
+        ario_server_update_db ();
 }
 
 void

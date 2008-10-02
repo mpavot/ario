@@ -27,7 +27,7 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#include <ario-mpd.h>
+#include <servers/ario-server.h>
 #include <ario-debug.h>
 #include <ario-shell.h>
 #include <ario-util.h>
@@ -35,8 +35,8 @@
 
 static void ario_wikipedia_cmd_find_artist (GtkAction *action,
                                             ArioWikipediaPlugin *plugin);
-static void ario_wikipedia_plugin_sync_mpd (ArioWikipediaPlugin *plugin);
-static void ario_wikipedia_plugin_mpd_state_changed_cb (ArioMpd *mpd,
+static void ario_wikipedia_plugin_sync_server (ArioWikipediaPlugin *plugin);
+static void ario_wikipedia_plugin_server_state_changed_cb (ArioServer *server,
                                                         ArioWikipediaPlugin *plugin);
 #define ARIO_WIKIPEDIA_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_WIKIPEDIA_PLUGIN, ArioWikipediaPluginPrivate))
 
@@ -112,11 +112,11 @@ impl_activate (ArioPlugin *plugin,
         g_object_unref (pi->priv->actiongroup);
 
 
-        g_signal_connect_object (ario_mpd_get_instance (),
+        g_signal_connect_object (ario_server_get_instance (),
                                  "state_changed",
-                                 G_CALLBACK (ario_wikipedia_plugin_mpd_state_changed_cb),
+                                 G_CALLBACK (ario_wikipedia_plugin_server_state_changed_cb),
                                  pi, 0);
-        ario_wikipedia_plugin_sync_mpd (pi);
+        ario_wikipedia_plugin_sync_server (pi);
 
         pi->priv->shell = shell;
 }
@@ -256,7 +256,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 
         g_return_if_fail (ARIO_IS_WIKIPEDIA_PLUGIN (plugin));
 
-        artist = g_strdup (ario_mpd_get_current_artist ());
+        artist = g_strdup (ario_server_get_current_artist ());
         if (artist) {
                 ario_util_string_replace (&artist, " ", "_");
                 ario_util_string_replace (&artist, "/", "_");
@@ -271,15 +271,15 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 }
 
 static void
-ario_wikipedia_plugin_sync_mpd (ArioWikipediaPlugin *plugin)
+ario_wikipedia_plugin_sync_server (ArioWikipediaPlugin *plugin)
 {
         ARIO_LOG_FUNCTION_START
         gboolean is_playing;
         GtkAction *action;
 
-        is_playing = (ario_mpd_is_connected ()
-                      && ((ario_mpd_get_current_state () == MPD_STATUS_STATE_PLAY)
-                          || (ario_mpd_get_current_state () == MPD_STATUS_STATE_PAUSE)));
+        is_playing = (ario_server_is_connected ()
+                      && ((ario_server_get_current_state () == MPD_STATUS_STATE_PLAY)
+                          || (ario_server_get_current_state () == MPD_STATUS_STATE_PAUSE)));
 
         action = gtk_action_group_get_action (plugin->priv->actiongroup,
                                               "ToolWikipedia");
@@ -287,11 +287,11 @@ ario_wikipedia_plugin_sync_mpd (ArioWikipediaPlugin *plugin)
 }
 
 static void
-ario_wikipedia_plugin_mpd_state_changed_cb (ArioMpd *mpd,
+ario_wikipedia_plugin_server_state_changed_cb (ArioServer *server,
                                             ArioWikipediaPlugin *plugin)
 {
         ARIO_LOG_FUNCTION_START
 
-        ario_wikipedia_plugin_sync_mpd (plugin);
+        ario_wikipedia_plugin_sync_server (plugin);
 }
 

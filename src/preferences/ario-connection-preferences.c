@@ -32,7 +32,7 @@
 #endif
 #include "ario-debug.h"
 #include "ario-profiles.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 
 static void ario_connection_preferences_finalize (GObject *object);
 static void ario_connection_preferences_sync_connection (ArioConnectionPreferences *connection_preferences);
@@ -234,8 +234,8 @@ ario_connection_preferences_profile_selection_changed_cb (GtkTreeSelection * sel
 {
         ARIO_LOG_FUNCTION_START
         if (ario_connection_preferences_profile_selection_update (connection_preferences)) {
-                ario_mpd_disconnect ();
-                ario_mpd_connect ();
+                ario_server_disconnect ();
+                ario_server_connect ();
                 ario_connection_preferences_sync_connection (connection_preferences);
         }
 }
@@ -396,7 +396,7 @@ ario_connection_preferences_sync_connection (ArioConnectionPreferences *connecti
 
         autoconnect = ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT);
 
-        if (ario_mpd_is_connected ()) {
+        if (ario_server_is_connected ()) {
                 gtk_widget_set_sensitive (connection_preferences->priv->connect_button, FALSE);
                 gtk_widget_set_sensitive (connection_preferences->priv->disconnect_button, TRUE);
         } else {
@@ -753,7 +753,7 @@ ario_connection_preferences_connect_cb (GtkWidget *widget,
                                         ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_connect ();
+        ario_server_connect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }
 
@@ -762,6 +762,6 @@ ario_connection_preferences_disconnect_cb (GtkWidget *widget,
                                            ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        ario_mpd_disconnect ();
+        ario_server_disconnect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }

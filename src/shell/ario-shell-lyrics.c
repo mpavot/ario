@@ -35,9 +35,9 @@ static gboolean ario_shell_lyrics_window_delete_cb (GtkWidget *window,
 static void ario_shell_lyrics_close_cb (GtkButton *button,
                                         ArioShellLyrics *shell_lyrics);
 static void ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics);
-static void ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
+static void ario_shell_lyrics_song_changed_cb (ArioServer *server,
                                                ArioShellLyrics *shell_lyrics);
-static void ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
+static void ario_shell_lyrics_state_changed_cb (ArioServer *server,
                                                 ArioShellLyrics *shell_lyrics);
 
 #define BASE_TITLE _("Lyrics")
@@ -88,7 +88,7 @@ ario_shell_lyrics_new (void)
         GtkWidget *close_button;
         GList *childs_list;
         GtkWidget *hbox;
-        ArioMpd *mpd = ario_mpd_get_instance ();
+        ArioServer *server = ario_server_get_instance ();
 
         if (is_instantiated)
                 return NULL;
@@ -100,11 +100,11 @@ ario_shell_lyrics_new (void)
 
         g_return_val_if_fail (shell_lyrics->priv != NULL, NULL);
 
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "song_changed",
                                  G_CALLBACK (ario_shell_lyrics_song_changed_cb),
                                  shell_lyrics, 0);
-        g_signal_connect_object (mpd,
+        g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_shell_lyrics_state_changed_cb),
                                  shell_lyrics, 0);
@@ -132,7 +132,7 @@ ario_shell_lyrics_new (void)
                           shell_lyrics);
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
-        ario_mpd_use_count_inc ();
+        ario_server_use_count_inc ();
 
         return GTK_WIDGET (shell_lyrics);
 }
@@ -149,7 +149,7 @@ ario_shell_lyrics_finalize (GObject *object)
         shell_lyrics = ARIO_SHELL_LYRICS (object);
 
         g_return_if_fail (shell_lyrics->priv != NULL);
-        ario_mpd_use_count_dec ();
+        ario_server_use_count_dec ();
 
         is_instantiated = FALSE;
 
@@ -186,15 +186,15 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
 
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
 
-        if (!ario_mpd_is_connected ()
-            || ario_mpd_get_current_state () == MPD_STATUS_STATE_STOP
-            || ario_mpd_get_current_state () == MPD_STATUS_STATE_UNKNOWN) {
+        if (!ario_server_is_connected ()
+            || ario_server_get_current_state () == MPD_STATUS_STATE_STOP
+            || ario_server_get_current_state () == MPD_STATUS_STATE_UNKNOWN) {
                 data->artist = NULL;
                 data->title = NULL;
                 window_title = g_strdup (BASE_TITLE);
         } else {
-                data->artist = g_strdup (ario_mpd_get_current_artist ());
-                data->title = ario_util_format_title (ario_mpd_get_current_song ());
+                data->artist = g_strdup (ario_server_get_current_artist ());
+                data->title = ario_util_format_title (ario_server_get_current_song ());
                 window_title = g_strdup_printf ("%s - %s", BASE_TITLE, data->title);
         }
 
@@ -204,7 +204,7 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
 }
 
 static void
-ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
+ario_shell_lyrics_song_changed_cb (ArioServer *server,
                                    ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START
@@ -212,7 +212,7 @@ ario_shell_lyrics_song_changed_cb (ArioMpd *mpd,
 }
 
 static void
-ario_shell_lyrics_state_changed_cb (ArioMpd *mpd,
+ario_shell_lyrics_state_changed_cb (ArioServer *server,
                                     ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START

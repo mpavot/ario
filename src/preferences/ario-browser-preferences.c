@@ -156,7 +156,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
         splited_conf = g_strsplit (conf, ",", MAX_TREE_NB);
         g_free (conf);
-        items = ario_mpd_get_items_names ();
+        items = ario_server_get_items_names ();
         for (i = 0; splited_conf[i]; ++i) {
                 tree_combobox = gtk_combo_box_new ();
                 browser_preferences->priv->tree_comboboxs = g_slist_append (browser_preferences->priv->tree_comboboxs, tree_combobox);

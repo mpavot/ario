@@ -35,7 +35,7 @@
 #include "plugins/ario-plugin.h"
 #include "ario-debug.h"
 #include "ario-util.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "shell/ario-shell.h"
 
 
@@ -96,7 +96,7 @@ impl_activate (ArioPlugin *plugin,
 
         asplugin->audioscrobbler = ario_audioscrobbler_new ();
 
-        ario_mpd_use_count_inc ();
+        ario_server_use_count_inc ();
         asplugin->activated = TRUE;
 }
 
@@ -109,7 +109,7 @@ impl_deactivate (ArioPlugin *plugin,
         g_object_unref (asplugin->audioscrobbler);
 
         if (asplugin->activated) {
-                ario_mpd_use_count_dec ();
+                ario_server_use_count_dec ();
                 asplugin->activated = FALSE;
         }
 }
