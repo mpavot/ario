@@ -149,13 +149,13 @@ libario_la_SOURCES = \
 	widgets/ario-volume.h
 
 if USE_AVAHI
-        ario_SOURCES += ario-avahi.c\
-	                ario-avahi.h
+        libario_la_SOURCES += ario-avahi.c\
+	                      ario-avahi.h
 endif
 
 if USE_XMMS2
-        ario_SOURCES += servers/ario-xmms.c\
-                	servers/ario-xmms.h
+        libario_la_SOURCES += servers/ario-xmms.c\
+                	      servers/ario-xmms.h
 endif
 
 if ENABLE_PYTHON
@@ -172,18 +172,18 @@ if ENABLE_PYTHON
 
         libario_la_LIBADD += \
 	        $(top_builddir)/bindings/python/ario.la
-endif
 
-INST_H_FILES =
-	plugins/ario-plugin.h \
-	servers/ario-mpd.h \
-	shell/ario-shell.h
+        INST_H_FILES = \
+	        plugins/ario-plugin.h \
+	        servers/ario-server.h \
+	        shell/ario-shell.h
 
-ario-enum-types.h: ario-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	(cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.h.template $(INST_H_FILES)) > $@
+        ario-enum-types.h: ario-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	        (cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.h.template $(INST_H_FILES)) > $@
 	
-ario-enum-types.c: ario-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	(cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.c.template $(INST_H_FILES)) > $@
+        ario-enum-types.c: ario-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	        (cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.c.template $(INST_H_FILES)) > $@
+endif
 
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \

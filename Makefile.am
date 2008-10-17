@@ -1,10 +1,14 @@
 AUTOMAKE_OPTIONS = foreign 1.6
 
-SUBDIRS = bindings\
-          data\
-          plugins\
-          po\
-	  src
+if ENABLE_PYTHON
+        SUBDIRS = bindings
+else
+        SUBDIRS =
+endif
+SUBDIRS += data\
+           plugins\
+           po\
+           src
 
 EXTRA_DIST = 			\
 	intltool-extract.in 	\
