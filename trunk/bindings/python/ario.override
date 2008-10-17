@@ -5,7 +5,7 @@ headers
 #include <pygtk/pygtk.h>
 
 #include "ario-plugin.h"
-#include "ario-mpd.h"
+#include "servers/ario-server.h"
 #include "shell/ario-shell.h"
 #include "ario-enum-types.h"
 

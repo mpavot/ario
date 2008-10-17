@@ -8,7 +8,7 @@ class SamplePython(ario.Plugin):
 
 	def activate(self, shell):
 		print "activating sample python plugin"
-                print ario.ario_mpd_get_current_artist()
+                print ario.ario_server_get_current_artist()
 	
 	def deactivate(self, shell):
 		print "deactivating sample python plugin"

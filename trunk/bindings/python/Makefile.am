@@ -39,7 +39,7 @@ ario.c: ario.defs ario.override $(top_builddir)/src/ario-enum-types.h
 
 BINDING_ARIO_HEADERS_SRCDIR_IN = \
 	src/plugins/ario-plugin.h \
-	src/ario-mpd.h \
+	src/servers/ario-server.h \
         src/shell/ario-shell.h
 
 BINDING_HEADERS_BUILDDIR_IN = 
