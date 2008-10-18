@@ -304,8 +304,7 @@ playback_current_id_not_idle (xmmsc_result_t *res)
                 return FALSE;
         }
 
-        if (instance->parent.song_id != id)
-                g_object_set (G_OBJECT (instance), "song_id", id, NULL);
+        g_object_set (G_OBJECT (instance), "song_id", id, NULL);
 
         if (instance->parent.signals_to_emit & SERVER_SONG_CHANGED_FLAG)
                 g_signal_emit_by_name (G_OBJECT (instance), "song_changed");
@@ -792,10 +791,17 @@ ario_xmms_get_current_song_on_server (void)
         ARIO_LOG_FUNCTION_START
         ArioServerSong *song = NULL;
         xmmsc_result_t *result;
+        uint pos = 0;
 
         result = xmmsc_medialib_get_info (instance->priv->connection, instance->parent.song_id);
         ario_xmms_result_wait (result);
         song = ario_xmms_get_song_from_res (result);
+        xmmsc_result_unref (result);
+
+        result = xmmsc_playlist_current_pos (instance->priv->connection, NULL);
+        ario_xmms_result_wait (result);
+        xmmsc_result_get_dict_entry_uint (result, "position", &pos);
+        song->pos = (int) pos;
         xmmsc_result_unref (result);
 
         return song;

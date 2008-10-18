@@ -423,18 +423,15 @@ ario_server_set_property (GObject *object,
 {
         ARIO_LOG_FUNCTION_START
         ArioServer *server = ARIO_SERVER (object);
-        int song_id;
 
         switch (prop_id) {
         case PROP_SONGID:
-                song_id = g_value_get_int (value);
-                if (server->song_id != song_id)
-                        server->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
-                server->song_id = song_id;
+                server->song_id = g_value_get_int (value);
+                server->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
 
                 /* check if there is a connection */
                 if (ario_server_is_connected ()) {
-                        ArioServerSong *new_song = NULL;
+                        ArioServerSong *new_song;
                         ArioServerSong *old_song = server->server_song;
                         gboolean state_changed;
                         gboolean artist_changed = FALSE;
