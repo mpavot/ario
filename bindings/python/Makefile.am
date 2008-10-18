@@ -28,7 +28,7 @@ ario_la_CFLAGS = \
 	$(AM_CFLAGS)
 
 $(top_srcdir)/src/ario-enum-types.h:
-	cd $(top_srcdir)/src && $(MAKE) ario-enum-types.h
+	cd $(top_srcdir)/src && $(MAKE) regenerate-enum-types
 
 ario.c: ario.defs ario.override $(top_builddir)/src/ario-enum-types.h
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
@@ -49,7 +49,7 @@ BINDING_ARIO_HEADERS_SRCDIR	:= $(addprefix $(top_srcdir)/,$(BINDING_ARIO_HEADERS
 BINDING_HEADERS_BUILDDIR	:= $(addprefix $(top_builddir)/,$(BINDING_HEADERS_BUILDDIR_IN))
 
 regenerate-python-binding:
-	$(PYGTK_H2DEF) $(sort $(BINDING_ARIO_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > ario.defs.new
+	$(PYGTK_H2DEF) $(sort $(BINDING_ARIO_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > ario.defs
 
 BUILT_SOURCES = \
 	ario.c

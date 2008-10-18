@@ -32,6 +32,8 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 AM_GLIB_GNU_GETTEXT
 
+AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
+
 dnl Debugging information
 AC_ARG_ENABLE(debug,
               AC_HELP_STRING([--enable-debug],
@@ -86,13 +88,6 @@ if test "x$enable_python" = "xyes"; then
 	AC_SUBST([PYTHON_LIB_LOC])
 	AC_SUBST([PYTHON_CFLAGS])
 	AC_SUBST([PYTHON_EXTRA_LIBS])
-
-
-        AC_ARG_VAR([GLIB_MKENUMS], [path to glib-mkenums])
-        AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums], [no])
-        if test "$GLIB_MKENUMS" = "no"; then
-          AC_MSG_ERROR([glib-mkenum is required])
-        fi
 
 	PKG_CHECK_MODULES([PYGTK], [pygobject-2.0 >= 2.11.5
                                     pygtk-2.0 >= 2.8.0])

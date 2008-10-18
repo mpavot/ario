@@ -172,18 +172,16 @@ if ENABLE_PYTHON
 
         libario_la_LIBADD += \
 	        $(top_builddir)/bindings/python/ario.la
-
-        INST_H_FILES = \
-	        plugins/ario-plugin.h \
-	        servers/ario-server.h \
-	        shell/ario-shell.h
-
-        ario-enum-types.h: ario-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	        (cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.h.template $(INST_H_FILES)) > $@
-	
-        ario-enum-types.c: ario-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	        (cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.c.template $(INST_H_FILES)) > $@
 endif
+
+INST_H_FILES = \
+        plugins/ario-plugin.h \
+        servers/ario-server.h \
+        shell/ario-shell.h
+
+regenerate-enum-types:
+	        (cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.h.template $(INST_H_FILES)) > ario-enum-types.h
+	        (cd $(srcdir) && $(GLIB_MKENUMS) --template ario-enum-types.c.template $(INST_H_FILES)) > ario-enum-types.c
 
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
