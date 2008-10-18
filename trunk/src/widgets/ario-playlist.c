@@ -497,13 +497,20 @@ static gboolean
 ario_playlist_sync_song_foreach (GtkTreeModel *model,
                                  GtkTreePath *path,
                                  GtkTreeIter *iter,
-                                 int *new_song_id)
+                                 int *pos)
 {
         ARIO_LOG_FUNCTION_START
-        int song_id;
+        ArioServerSong *song;
+        int state;
 
-        gtk_tree_model_get (model, iter, ID_COLUMN, &song_id, -1);
-        if (song_id == *new_song_id)
+        state = ario_server_get_current_state ();
+        song = ario_server_get_current_song  ();
+        if (!song)
+                return TRUE;
+
+        if (state != MPD_STATUS_STATE_UNKNOWN
+            && state != MPD_STATUS_STATE_STOP
+            && song->pos == *pos)
                 gtk_list_store_set (GTK_LIST_STORE (model), iter,
                                     PIXBUF_COLUMN, instance->priv->play_pixbuf,
                                     -1);
@@ -512,6 +519,8 @@ ario_playlist_sync_song_foreach (GtkTreeModel *model,
                                     PIXBUF_COLUMN, NULL,
                                     -1);
 
+        ++*pos;
+
         return FALSE;
 }
 
@@ -519,19 +528,11 @@ static void
 ario_playlist_sync_song (void)
 {
         ARIO_LOG_FUNCTION_START
-        int new_song_id;
-        int state;
-
-        state = ario_server_get_current_state ();
-
-        if (state == MPD_STATUS_STATE_UNKNOWN || state == MPD_STATUS_STATE_STOP)
-                new_song_id = -1;
-        else
-                new_song_id = ario_server_get_current_song_id ();
+        int pos = 0;
 
         gtk_tree_model_foreach (GTK_TREE_MODEL (instance->priv->model),
                                 (GtkTreeModelForeachFunc) ario_playlist_sync_song_foreach,
-                                &new_song_id);
+                                &pos);
 }
 
 static void

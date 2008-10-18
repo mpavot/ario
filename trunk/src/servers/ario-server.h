@@ -247,7 +247,7 @@ typedef struct
 
 GType                   ario_server_get_type                               (void) G_GNUC_CONST;
 
-ArioServer *               ario_server_get_instance                           (void);
+ArioServer *            ario_server_get_instance                           (void);
 
 void                    ario_server_set_instance_type                      (ArioServerType type);
 gboolean                ario_server_connect                                (void);
@@ -274,9 +274,9 @@ char *                  ario_server_get_current_title                      (void
 
 char *                  ario_server_get_current_name                       (void);
 
-ArioServerSong *        ario_server_get_current_song_on_server                  (void);
+ArioServerSong *        ario_server_get_current_song_on_server             (void);
 
-ArioServerSong *           ario_server_get_current_song                       (void);
+ArioServerSong *        ario_server_get_current_song                       (void);
 
 char *                  ario_server_get_current_artist                     (void);
 
@@ -325,14 +325,14 @@ void                    ario_server_do_prev                                (void
 
 void                    ario_server_do_play                                (void);
 
-void                    ario_server_do_play_pos                             (gint id);
+void                    ario_server_do_play_pos                            (gint id);
 void                    ario_server_do_pause                               (void);
 
 void                    ario_server_do_stop                                (void);
 
 void                    ario_server_free_album                             (ArioServerAlbum *server_album);
 
-ArioServerAlbum *          ario_server_copy_album                             (const ArioServerAlbum *server_album);
+ArioServerAlbum *       ario_server_copy_album                             (const ArioServerAlbum *server_album);
 
 void                    ario_server_clear                                  (void);
 
@@ -355,22 +355,22 @@ void                    ario_server_use_count_dec                          (void
 GSList *                ario_server_get_outputs                            (void);
 
 void                    ario_server_enable_output                          (const int id,
-                                                                         const gboolean enabled);
-ArioServerStats *          ario_server_get_stats                              (void);
+                                                                            const gboolean enabled);
+ArioServerStats *       ario_server_get_stats                              (void);
 
 GList *                 ario_server_get_songs_info                         (GSList *paths);
 
-ArioServerFileList*        ario_server_list_files                             (const char *path,
-                                                                         const gboolean recursive);
+ArioServerFileList*     ario_server_list_files                             (const char *path,
+                                                                            const gboolean recursive);
 void                    ario_server_free_file_list                         (ArioServerFileList *files);
 
-ArioServerCriteria *       ario_server_criteria_copy                          (const ArioServerCriteria *criteria);
+ArioServerCriteria *    ario_server_criteria_copy                          (const ArioServerCriteria *criteria);
 
 void                    ario_server_criteria_free                          (ArioServerCriteria *criteria);
 
 gchar **                ario_server_get_items_names                        (void);
 
-void                    ario_server_set_default                         (ArioServer *server);
+void                    ario_server_set_default                            (ArioServer *server);
 
 G_END_DECLS
 
