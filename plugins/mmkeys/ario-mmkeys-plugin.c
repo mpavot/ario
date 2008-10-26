@@ -96,9 +96,12 @@ impl_activate (ArioPlugin *pl,
 
                 plugin->priv->proxy = dbus_g_proxy_new_for_name (bus,
                                                                  "org.gnome.SettingsDaemon",
-                                                                 "/org/gnome/SettingsDaemon",
-                                                                 "org.gnome.SettingsDaemon");
-                if (plugin->priv->proxy) {
+                                                                 "/org/gnome/SettingsDaemon/MediaKeys",
+                                                                 "org.gnome.SettingsDaemon.MediaKeys");
+                if (!plugin->priv->proxy) {
+                        g_warning ("Unable to grab media player keys: %s", error->message);
+                        g_error_free (error);
+                } else {
                         dbus_g_proxy_call (plugin->priv->proxy,
                                            "GrabMediaPlayerKeys", &error,
                                            G_TYPE_STRING, "Ario",
@@ -125,7 +128,7 @@ impl_activate (ArioPlugin *pl,
                                 /* settings daemon dbus service doesn't exist.
                                  * just silently fail.
                                  */
-                                g_warning ("org.gnome.SettingsDaemon dbus service not found");
+                                g_warning ("org.gnome.SettingsDaemon dbus service not found: %s", error->message);
                                 g_error_free (error);
                         } else {
                                 g_warning ("Unable to grab media player keys: %s", error->message);
