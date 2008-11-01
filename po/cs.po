@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-20 18:59+0200\n"
-"PO-Revision-Date: 2008-06-18 06:50+0000\n"
-"Last-Translator: Jaroslav Lichtblau <Unknown>\n"
+"POT-Creation-Date: 2008-11-01 15:41+0100\n"
+"PO-Revision-Date: 2008-10-04 16:05+0000\n"
+"Last-Translator: Václav Lešek <vaclav.lesek@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
+"X-Launchpad-Export-Date: 2008-11-01 14:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -26,13 +26,12 @@ msgid "Client application to mpd"
 msgstr "Klientská aplikace k mpd"
 
 #: ../data/glade/browser-prefs.glade.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "Knihovna"
+msgstr "Volby knihovny"
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
-msgstr ""
+msgstr "Uspořádání knihovny"
 
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
@@ -81,12 +80,13 @@ msgid "Host :"
 msgstr "Host :"
 
 #: ../data/glade/connection-prefs.glade.h:5
-msgid "MPD is on the same computer as Ario"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:6
 msgid "Music directory :"
 msgstr "Adresář hudby :"
+
+#: ../data/glade/connection-prefs.glade.h:6
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD je na stejném počítači jako Ario"
 
 #: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:840
 #: ../plugins/radios/ario-radio.c:1039
@@ -105,14 +105,23 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/glade/connection-prefs.glade.h:10
+#, fuzzy
+msgid "Server type : "
+msgstr "Server"
+
+#: ../data/glade/connection-prefs.glade.h:11
+msgid "XMMS 2 (Experimental)"
+msgstr ""
+
+#: ../data/glade/connection-prefs.glade.h:12
 msgid "_Autoconnect on startup"
 msgstr "_Automaticky připojit při startu"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:155
 msgid "_Connect"
 msgstr "_Připojit"
 
-#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:14 ../src/shell/ario-shell.c:158
 msgid "_Disconnect"
 msgstr "O_dpojit"
 
@@ -159,17 +168,17 @@ msgid "Search"
 msgstr "Vyhledávání"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:148
-#: ../src/sources/ario-tree.c:388 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:43
+#: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:684
 msgid "Album"
 msgstr "Album"
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Allow only one instance of Ario"
-msgstr ""
+msgstr "Povolit pouze jednu instanci Aria"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:147
+#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:42
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
@@ -178,7 +187,7 @@ msgid "Artist"
 msgstr "Interpret"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:153
+#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:319
 msgid "Date"
 msgstr "Datum"
@@ -193,7 +202,7 @@ msgstr "Soubor"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:152
+#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:47
 #: ../src/widgets/ario-playlist.c:319
 msgid "Genre"
 msgstr "Žánr"
@@ -225,16 +234,16 @@ msgid "Show tabs"
 msgstr "Zobrazit záložky"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:149
-#: ../src/sources/ario-tree.c:434 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:686
 msgid "Title"
 msgstr "Název"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:150
-#: ../src/sources/ario-tree.c:427 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Stopa"
 
@@ -281,14 +290,12 @@ msgid "Last updated:"
 msgstr "Naposledy aktualizováno:"
 
 #: ../data/glade/server-prefs.glade.h:5
-#, fuzzy
 msgid "Stop music on exit"
-msgstr "Zastavit hudbu"
+msgstr "Zastavit hudbu při ukončení"
 
 #: ../data/glade/server-prefs.glade.h:6
-#, fuzzy
 msgid "Update on startup"
-msgstr "_Automaticky připojit při startu"
+msgstr "Aktualizovat při startu"
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
@@ -392,17 +399,16 @@ msgid "Track :"
 msgstr "Stopa :"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
-#, fuzzy
 msgid "Notification"
-msgstr "Potvrzení"
+msgstr "Oznámení"
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
-msgstr ""
+msgstr "Oznámení při změně skladby"
 
 #: ../data/glade/trayicon-prefs.glade.h:3
 msgid "Notification time: "
-msgstr ""
+msgstr "Doba zobrazení oznámení "
 
 #: ../data/glade/trayicon-prefs.glade.h:4
 msgid "On middle button click on tray icon :"
@@ -415,44 +421,7 @@ msgstr "Ikona v panelu na ploše"
 
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
-msgstr ""
-
-#. MPD_TAG_ITEM_DATE
-#: ../src/ario-mpd.c:154
-#, fuzzy
-msgid "Composer"
-msgstr "Skladatel :"
-
-#. MPD_TAG_ITEM_COMPOSER
-#: ../src/ario-mpd.c:155
-#, fuzzy
-msgid "Performer"
-msgstr "Umělec :"
-
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/ario-mpd.c:158
-msgid "Filename"
-msgstr "Název souboru"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/ario-mpd.c:159
-msgid "Any"
-msgstr "Libovolné"
-
-#: ../src/ario-mpd.c:644
-msgid "Connecting to MPD server..."
-msgstr "Připojuji k MPD serveru . . ."
-
-#: ../src/ario-mpd.c:669
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "Nemohu se připojit k MPD. Ověřte vlastnosti připojení."
-
-#. impossible time or broken locale settings
-#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
-msgid "Unknown"
-msgstr "Neznámá"
+msgstr "Spusť minimalizované okno"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
@@ -522,15 +491,15 @@ msgstr "Podle abecedy"
 msgid "By year"
 msgstr "Podle roku"
 
-#: ../src/preferences/ario-connection-preferences.c:338
+#: ../src/preferences/ario-connection-preferences.c:358
 msgid "Profile"
 msgstr "Profil"
 
-#: ../src/preferences/ario-connection-preferences.c:566
+#: ../src/preferences/ario-connection-preferences.c:603
 msgid "Server autodetection"
 msgstr "Automatická detekce serveru"
 
-#: ../src/preferences/ario-connection-preferences.c:577
+#: ../src/preferences/ario-connection-preferences.c:614
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -540,7 +509,7 @@ msgstr ""
 "zda je aktivovaná základní konfigurace ve vašem MPD nebo můžete použít "
 "manuální konfiguraci."
 
-#: ../src/preferences/ario-connection-preferences.c:587
+#: ../src/preferences/ario-connection-preferences.c:624
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
@@ -548,21 +517,21 @@ msgstr ""
 msgid "Name"
 msgstr "Jméno"
 
-#: ../src/preferences/ario-connection-preferences.c:595
+#: ../src/preferences/ario-connection-preferences.c:632
 #: ../src/widgets/ario-firstlaunch.c:286
 msgid "Host"
 msgstr "Hostitel"
 
-#: ../src/preferences/ario-connection-preferences.c:603
+#: ../src/preferences/ario-connection-preferences.c:640
 #: ../src/widgets/ario-firstlaunch.c:294
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:666
+#: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
 msgstr "Musíte vybrat server."
 
-#: ../src/preferences/ario-connection-preferences.c:713
+#: ../src/preferences/ario-connection-preferences.c:750
 msgid "New Profile"
 msgstr "Nový profil"
 
@@ -597,7 +566,45 @@ msgstr "Přehrát následující skladbu"
 msgid "Do nothing"
 msgstr "Nedělat nic"
 
-#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:78
+#: ../src/servers/ario-mpd.c:299
+#, fuzzy
+msgid "Connecting to server..."
+msgstr "Připojuji k MPD serveru . . ."
+
+#: ../src/servers/ario-mpd.c:324
+#, fuzzy
+msgid "Impossible to connect to server. Check the connection options."
+msgstr "Nemohu se připojit k MPD. Ověřte vlastnosti připojení."
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/servers/ario-server.c:49
+msgid "Composer"
+msgstr "Skladatel"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/servers/ario-server.c:50
+msgid "Performer"
+msgstr "Umělec"
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/servers/ario-server.c:53
+msgid "Filename"
+msgstr "Název souboru"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/servers/ario-server.c:54
+msgid "Any"
+msgstr "Libovolné"
+
+#. impossible time or broken locale settings
+#: ../src/servers/ario-server.h:28
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+msgid "Unknown"
+msgstr "Neznámá"
+
+#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
@@ -606,7 +613,7 @@ msgstr "Nedělat nic"
 msgid "_Add to playlist"
 msgstr "_Přidat do playlistu"
 
-#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
 #: ../src/sources/ario-storedplaylists.c:104
 #: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
@@ -615,25 +622,24 @@ msgstr "_Přidat do playlistu"
 msgid "Add and _play"
 msgstr "Přidat a _přehrát"
 
-#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:107
 #: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
-#, fuzzy
 msgid "_Replace in playlist"
-msgstr "Uložit seznam skladeb"
+msgstr "_Nahradit v seznamu skladeb"
 
-#: ../src/sources/ario-browser.c:90
+#: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
 msgstr "Získat obrázky alb"
 
-#: ../src/sources/ario-browser.c:93
+#: ../src/sources/ario-browser.c:91
 msgid "_Delete the covers"
 msgstr "_Smazat obrázky alb"
 
-#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
+#: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
 #: ../src/widgets/ario-playlist.c:128
 #: ../plugins/filesystem/ario-filesystem.c:127
@@ -641,7 +647,7 @@ msgstr "_Smazat obrázky alb"
 msgid "_Properties"
 msgstr "Vlast_nosti"
 
-#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Knihovna"
 
@@ -653,7 +659,7 @@ msgstr "Přidat kritéria vyhledávání"
 msgid "Search songs in the library"
 msgstr "Vyhledat skladby v knihovně"
 
-#: ../src/sources/ario-search.c:372
+#: ../src/sources/ario-search.c:369
 msgid "Remove a search criteria"
 msgstr "Smazat vyhledávaná kritéria"
 
@@ -665,19 +671,18 @@ msgstr "_Smazat"
 msgid "Playlists"
 msgstr "Seznamy skladeb"
 
-#: ../src/sources/ario-storedplaylists.c:567
+#: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Opravdu chcete odstranit všechny zvolené seznamy skladeb ?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:375
+#: ../src/sources/ario-tree.c:372
 msgid "Cover"
 msgstr "Obal"
 
-#: ../src/sources/ario-tree.c:1179
-#, fuzzy
+#: ../src/sources/ario-tree.c:1175
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr "Opravdu chcete smazat všechny obaly alb vybraného umělce?"
+msgstr "Opravdu si přejete odstranit všechny vybrané obrázky alb?"
 
 #: ../src/shell/ario-shell.c:149
 msgid "_File"
@@ -760,7 +765,13 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol"
+"  Konki https://launchpad.net/~pavel-konkol\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
+"  Konki https://launchpad.net/~pavel-konkol\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Václav Lešek https://launchpad.net/~vaclav-lesek"
 
 #: ../src/shell/ario-shell.c:1045
 msgid "Configure Plugins"
@@ -924,15 +935,15 @@ msgid "_Go to playing song"
 msgstr "_ Jít na přehrávanou skladbu"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1276
+#: ../src/widgets/ario-playlist.c:1262
 msgid "Save playlist"
 msgstr "Uložit seznam skladeb"
 
-#: ../src/widgets/ario-playlist.c:1286
+#: ../src/widgets/ario-playlist.c:1272
 msgid "Playlist name :"
 msgstr "Název seznamu stop :"
 
-#: ../src/widgets/ario-playlist.c:1311
+#: ../src/widgets/ario-playlist.c:1297
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Seznam stop již existuje. Chcete ho přepsat ?"
 
@@ -1103,36 +1114,32 @@ msgid "File System Browser"
 msgstr "Prohlížeč systému souborů"
 
 #: ../plugins/information/ario-information.c:110
-#, fuzzy
 msgid "Information"
-msgstr "Potvrzení"
+msgstr "Informace"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr ""
+msgstr "Zobrazit různé informace o hrající skladbě"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Song Information"
-msgstr "Potvrzení"
+msgstr "Informace o skladbě"
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
-msgstr ""
+msgstr "Alba od tohoto umělce:"
 
 #: ../plugins/information/information.glade.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "Text skladby"
+msgstr "Texty písní:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Add libnotify support"
-msgstr "Přidat podporu multimediálních kláves"
+msgstr "Přidat podporu libnotify"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
-msgstr ""
+msgstr "Libnotify"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
@@ -1206,13 +1213,13 @@ msgstr "Zásuvný modul pro vyhledání aktuálního umělce na wikipedii"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr "Opravdu chcete smazat všechny obaly vybraných alb?"
+
 #~ msgid "_Save Playlist"
 #~ msgstr "_Uložit seznam skladeb"
 
 #~ msgid "Hide on close"
 #~ msgstr "Skrýt při zavření"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "Opravdu chcete smazat všechny obaly vybraných alb?"

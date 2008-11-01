@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-20 18:59+0200\n"
+"POT-Creation-Date: 2008-11-01 15:41+0100\n"
 "PO-Revision-Date: 2008-07-20 10:31+0000\n"
 "Last-Translator: Furkan KARA <kingofthepixels@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -81,12 +81,12 @@ msgid "Host :"
 msgstr "Yer sağlayıcı (host):"
 
 #: ../data/glade/connection-prefs.glade.h:5
-msgid "MPD is on the same computer as Ario"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:6
 msgid "Music directory :"
 msgstr "Müzik dizini:"
+
+#: ../data/glade/connection-prefs.glade.h:6
+msgid "Music server is on the same computer as Ario"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:840
 #: ../plugins/radios/ario-radio.c:1039
@@ -105,14 +105,22 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/glade/connection-prefs.glade.h:10
+msgid "Server type : "
+msgstr ""
+
+#: ../data/glade/connection-prefs.glade.h:11
+msgid "XMMS 2 (Experimental)"
+msgstr ""
+
+#: ../data/glade/connection-prefs.glade.h:12
 msgid "_Autoconnect on startup"
 msgstr "_Başlangıçta otomatik bağlan"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:155
 msgid "_Connect"
 msgstr "_Bağlan"
 
-#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:14 ../src/shell/ario-shell.c:158
 msgid "_Disconnect"
 msgstr "_Bağlantıyı Kes"
 
@@ -156,8 +164,8 @@ msgid "Search"
 msgstr "Ara"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:148
-#: ../src/sources/ario-tree.c:388 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:43
+#: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:684
 msgid "Album"
 msgstr "Albüm"
@@ -166,7 +174,7 @@ msgstr "Albüm"
 msgid "Allow only one instance of Ario"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:147
+#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:42
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
@@ -175,7 +183,7 @@ msgid "Artist"
 msgstr "Sanatçı"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:153
+#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:319
 msgid "Date"
 msgstr "Tarih"
@@ -190,7 +198,7 @@ msgstr "Dosya"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:152
+#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:47
 #: ../src/widgets/ario-playlist.c:319
 msgid "Genre"
 msgstr "Tarz"
@@ -222,16 +230,16 @@ msgid "Show tabs"
 msgstr "Sekmeleri göster"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:149
-#: ../src/sources/ario-tree.c:434 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:686
 msgid "Title"
 msgstr "Başlık"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:150
-#: ../src/sources/ario-tree.c:427 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Parça"
 
@@ -412,43 +420,6 @@ msgstr "Sistem tepsisi ikonu"
 msgid "Start minimized window"
 msgstr ""
 
-#. MPD_TAG_ITEM_DATE
-#: ../src/ario-mpd.c:154
-#, fuzzy
-msgid "Composer"
-msgstr "Besteleyen :"
-
-#. MPD_TAG_ITEM_COMPOSER
-#: ../src/ario-mpd.c:155
-#, fuzzy
-msgid "Performer"
-msgstr "Sanatçı :"
-
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/ario-mpd.c:158
-msgid "Filename"
-msgstr "Dosya ismi"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/ario-mpd.c:159
-msgid "Any"
-msgstr "Herhangi Birisi"
-
-#: ../src/ario-mpd.c:644
-msgid "Connecting to MPD server..."
-msgstr "MPD sunucusuna bağlanılıyor..."
-
-#: ../src/ario-mpd.c:669
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr "MPD'ye bağlantı imkasnız. Lütfen bağlantı ayarlarınızı kontrol ediniz."
-
-#. impossible time or broken locale settings
-#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
-msgid "Unknown"
-msgstr "Bilinmeyen"
-
 #: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "saniye"
@@ -517,22 +488,22 @@ msgstr "Alfabetik olarak"
 msgid "By year"
 msgstr "Yıl olarak"
 
-#: ../src/preferences/ario-connection-preferences.c:338
+#: ../src/preferences/ario-connection-preferences.c:358
 msgid "Profile"
 msgstr "Profil"
 
-#: ../src/preferences/ario-connection-preferences.c:566
+#: ../src/preferences/ario-connection-preferences.c:603
 msgid "Server autodetection"
 msgstr "Otomatik sunucu saptaması"
 
-#: ../src/preferences/ario-connection-preferences.c:577
+#: ../src/preferences/ario-connection-preferences.c:614
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/preferences/ario-connection-preferences.c:587
+#: ../src/preferences/ario-connection-preferences.c:624
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
@@ -540,21 +511,21 @@ msgstr ""
 msgid "Name"
 msgstr "İsim"
 
-#: ../src/preferences/ario-connection-preferences.c:595
+#: ../src/preferences/ario-connection-preferences.c:632
 #: ../src/widgets/ario-firstlaunch.c:286
 msgid "Host"
 msgstr "Sunucu"
 
-#: ../src/preferences/ario-connection-preferences.c:603
+#: ../src/preferences/ario-connection-preferences.c:640
 #: ../src/widgets/ario-firstlaunch.c:294
 msgid "Port"
 msgstr "Bağlantı noktası"
 
-#: ../src/preferences/ario-connection-preferences.c:666
+#: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
 msgstr "Bir sunucu seçmelisiniz."
 
-#: ../src/preferences/ario-connection-preferences.c:713
+#: ../src/preferences/ario-connection-preferences.c:750
 msgid "New Profile"
 msgstr "Yeni Profil"
 
@@ -589,7 +560,47 @@ msgstr "Sonraki şarkıyı çal"
 msgid "Do nothing"
 msgstr "Hiçbir şey yapma"
 
-#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:78
+#: ../src/servers/ario-mpd.c:299
+#, fuzzy
+msgid "Connecting to server..."
+msgstr "MPD sunucusuna bağlanılıyor..."
+
+#: ../src/servers/ario-mpd.c:324
+#, fuzzy
+msgid "Impossible to connect to server. Check the connection options."
+msgstr "MPD'ye bağlantı imkasnız. Lütfen bağlantı ayarlarınızı kontrol ediniz."
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/servers/ario-server.c:49
+#, fuzzy
+msgid "Composer"
+msgstr "Besteleyen :"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/servers/ario-server.c:50
+#, fuzzy
+msgid "Performer"
+msgstr "Sanatçı :"
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/servers/ario-server.c:53
+msgid "Filename"
+msgstr "Dosya ismi"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/servers/ario-server.c:54
+msgid "Any"
+msgstr "Herhangi Birisi"
+
+#. impossible time or broken locale settings
+#: ../src/servers/ario-server.h:28
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
@@ -598,7 +609,7 @@ msgstr "Hiçbir şey yapma"
 msgid "_Add to playlist"
 msgstr "_Çalma listesine ekle"
 
-#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
 #: ../src/sources/ario-storedplaylists.c:104
 #: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
@@ -607,7 +618,7 @@ msgstr "_Çalma listesine ekle"
 msgid "Add and _play"
 msgstr "Ekle ve _oynat"
 
-#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:107
 #: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
@@ -617,15 +628,15 @@ msgstr "Ekle ve _oynat"
 msgid "_Replace in playlist"
 msgstr "_Çalma Listesini kaydet"
 
-#: ../src/sources/ario-browser.c:90
+#: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
 msgstr "Albüm kapaklarını al"
 
-#: ../src/sources/ario-browser.c:93
+#: ../src/sources/ario-browser.c:91
 msgid "_Delete the covers"
 msgstr "_Albüm kapaklarını sil"
 
-#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
+#: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
 #: ../src/widgets/ario-playlist.c:128
 #: ../plugins/filesystem/ario-filesystem.c:127
@@ -633,7 +644,7 @@ msgstr "_Albüm kapaklarını sil"
 msgid "_Properties"
 msgstr "_Özellikler"
 
-#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Kütüphane"
 
@@ -645,7 +656,7 @@ msgstr ""
 msgid "Search songs in the library"
 msgstr "Şarkıyı kütüphanede ara"
 
-#: ../src/sources/ario-search.c:372
+#: ../src/sources/ario-search.c:369
 msgid "Remove a search criteria"
 msgstr ""
 
@@ -657,16 +668,16 @@ msgstr "_Sil"
 msgid "Playlists"
 msgstr "Çalma Listeleri"
 
-#: ../src/sources/ario-storedplaylists.c:567
+#: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Seçilen tüm çalma listerlini silmek istediğinze emin misiniz?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:375
+#: ../src/sources/ario-tree.c:372
 msgid "Cover"
 msgstr "Albüm Kapağı"
 
-#: ../src/sources/ario-tree.c:1179
+#: ../src/sources/ario-tree.c:1175
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Seçilen tüm çalma listerlini silmek istediğinze emin misiniz?"
@@ -905,15 +916,15 @@ msgid "_Go to playing song"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1276
+#: ../src/widgets/ario-playlist.c:1262
 msgid "Save playlist"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1286
+#: ../src/widgets/ario-playlist.c:1272
 msgid "Playlist name :"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1311
+#: ../src/widgets/ario-playlist.c:1297
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
