@@ -34,8 +34,6 @@ G_BEGIN_DECLS
 #define IS_ARIO_SERVER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_SERVER))
 #define ARIO_SERVER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_SERVER, ArioServerClass))
 
-typedef struct ArioServerPrivate ArioServerPrivate;
-
 typedef struct ArioServerAlbum
 {
         gchar *artist;
@@ -83,7 +81,7 @@ typedef enum
 typedef struct ArioServerQueueAction {
         ArioServerActionType type;
         union {
-                const char *path;             // For ARIO_SERVER_ACTION_ADD
+                const char *path;       // For ARIO_SERVER_ACTION_ADD
                 int id;                 // For ARIO_SERVER_ACTION_DELETE_ID
                 int pos;                // For ARIO_SERVER_ACTION_DELETE_POS
                 struct {                // For ARIO_SERVER_ACTION_MOVE
@@ -97,6 +95,7 @@ enum
 {
         SERVER_SONG_CHANGED,
         SERVER_ALBUM_CHANGED,
+        SERVER_CONNECTIVITY_CHANGED,
         SERVER_STATE_CHANGED,
         SERVER_VOLUME_CHANGED,
         SERVER_ELAPSED_CHANGED,
@@ -112,6 +111,7 @@ enum
 {
         SERVER_SONG_CHANGED_FLAG = 2 << SERVER_SONG_CHANGED,
         SERVER_ALBUM_CHANGED_FLAG = 2 << SERVER_ALBUM_CHANGED,
+        SERVER_CONNECTIVITY_CHANGED_FLAG = 2 << SERVER_CONNECTIVITY_CHANGED,
         SERVER_STATE_CHANGED_FLAG = 2 << SERVER_STATE_CHANGED,
         SERVER_VOLUME_CHANGED_FLAG = 2 << SERVER_VOLUME_CHANGED,
         SERVER_ELAPSED_CHANGED_FLAG = 2 << SERVER_ELAPSED_CHANGED,
@@ -125,108 +125,18 @@ enum
 typedef struct
 {
         GObject parent;
-
-        ArioServerPrivate *priv;
-
-        int song_id;
-        int state;
-        int volume;
-        int elapsed;
-
-        ArioServerSong *server_song;
-        int playlist_id;
-        int playlist_length;
-
-        gboolean random;
-        gboolean repeat;
-
-        int updatingdb;
-        int crossfade;
-
-        GSList *queue;
-
-        gboolean connecting;
-
-        int signals_to_emit;
 } ArioServer;
 
 typedef struct
 {
         GObjectClass parent;
 
-        /* Virtual public methods */
-        gpointer          (*connect)                     (void);
-
-        void              (*disconnect)                  (void);
-
-        gboolean          (*is_connected)                (void);
-
-        /* TODO: Remove ? */
-        gboolean            (*update_status)             (void);
-
-        void                (*update_db)                (void);
-
-        GSList *            (*list_tags)               (const ArioServerTag tag,
-                                                        const ArioServerCriteria *criteria);
-
-        GSList *            (*get_albums)               (const ArioServerCriteria *criteria);
-
-        GSList *            (*get_songs)               (const ArioServerCriteria *criteria,
-                                                                const gboolean exact);
-        GSList *            (*get_songs_from_playlist)                (char *playlist);
-
-        GSList *            (*get_playlists)                          (void);
-
-        GSList *            (*get_playlist_changes)                   (int playlist_id);
-
-        ArioServerSong *    (*get_current_song_on_server)               (void);
-
-        int                 (*get_current_playlist_total_time) (void);
-
-        unsigned long       (*get_last_update)                        (void);
-
-        void                (*do_next)                                (void);
-
-        void                (*do_prev)                                (void);
-
-        void                (*do_play)                                (void);
-
-        void                (*do_play_pos)                             (gint id);
-        void                (*do_pause)                               (void);
-
-        void                (*do_stop)                                (void);
-        void                (*set_current_elapsed)                    (const gint elapsed);
-        void                (*set_current_volume)                     (const gint volume);
-        void                (*set_current_random)                     (const gboolean random);
-        void                (*set_current_repeat)                     (const gboolean repeat);
-        void                (*set_crossfadetime)                      (const int crossfadetime);
-        void                (*clear)                                  (void);
-
-        void                (*queue_commit)                           (void);
-
-        void                (*insert_at)                              (const GSList *songs,
-                                                                       const gint pos);
-        int                 (*save_playlist)                          (const char *name);
-        void                (*delete_playlist)                        (const char *name);
-        void                (*use_count_inc)                          (void);
-
-        void                (*use_count_dec)                          (void);
-
-        GSList *            (*get_outputs)                            (void);
-
-        void                (*enable_output)                          (const int id,
-                                                                                 const gboolean enabled);
-        ArioServerStats *      (*get_stats)                              (void);
-
-        GList *             (*get_songs_info)                         (GSList *paths);
-
-        ArioServerFileList*    (*list_files)                             (const char *path,
-                                                                         const gboolean recursive);
-
         /* Signals */
         void (*song_changed)            (ArioServer *server);
 
         void (*album_changed)           (ArioServer *server);
+
+        void (*connectivity_changed)            (ArioServer *server);
 
         void (*state_changed)           (ArioServer *server);
 
@@ -249,10 +159,11 @@ GType                   ario_server_get_type                               (void
 
 ArioServer *            ario_server_get_instance                           (void);
 
-void                    ario_server_set_instance_type                      (ArioServerType type);
 gboolean                ario_server_connect                                (void);
 
 void                    ario_server_disconnect                             (void);
+
+void                    ario_server_reconnect                              (void);
 
 gboolean                ario_server_is_connected                           (void);
 

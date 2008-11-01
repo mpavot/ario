@@ -28,6 +28,10 @@
 #define PREF_PORT                               "port"
 #define PREF_PORT_DEFAULT                       6600
 
+/* Server Type (0 = MPD, 1 = XMMS) */
+#define PREF_SERVER_TYPE                        "server_type"
+#define PREF_SERVER_TYPE_DEFAULT                0
+
 /* The password to connect to server */
 #define PREF_PASSWORD                           "password"
 #define PREF_PASSWORD_DEFAULT                   NULL

@@ -36,7 +36,7 @@ static gboolean ario_mpd_connect_to (ArioMpd *mpd,
                                      gchar *hostname,
                                      int port,
                                      float timeout);
-static gpointer ario_mpd_connect (void);
+static void ario_mpd_connect (void);
 static void ario_mpd_disconnect (void);
 static void ario_mpd_update_db (void);
 static void ario_mpd_check_errors (void);
@@ -98,16 +98,17 @@ struct ArioMpdPrivate
 };
 
 #define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
-G_DEFINE_TYPE (ArioMpd, ario_mpd, TYPE_ARIO_SERVER)
+G_DEFINE_TYPE (ArioMpd, ario_mpd, TYPE_ARIO_SERVER_INTERFACE)
 
 static ArioMpd *instance = NULL;
+static ArioServer *server_instance = NULL;
 
 static void
 ario_mpd_class_init (ArioMpdClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        ArioServerClass *server_class = ARIO_SERVER_CLASS (klass);
+        ArioServerInterfaceClass *server_class = ARIO_SERVER_INTERFACE_CLASS (klass);
 
         object_class->finalize = ario_mpd_finalize;
 
@@ -183,18 +184,22 @@ ario_mpd_finalize (GObject *object)
         if (mpd->priv->stats)
                 mpd_freeStats (mpd->priv->stats);
 
+        if (mpd->priv->timeout_id)
+                g_source_remove (mpd->priv->timeout_id);
+
         instance = NULL;
 
         G_OBJECT_CLASS (ario_mpd_parent_class)->finalize (object);
 }
 
 ArioMpd *
-ario_mpd_get_instance (void)
+ario_mpd_get_instance (ArioServer *server)
 {
         ARIO_LOG_FUNCTION_START
         if (!instance) {
                 instance = g_object_new (TYPE_ARIO_MPD, NULL);
                 g_return_val_if_fail (instance->priv != NULL, NULL);
+                server_instance = server;
         }
         return instance;
 }
@@ -246,12 +251,15 @@ ario_mpd_connect_to (ArioMpd *mpd,
 }
 
 static gpointer
-ario_mpd_connect (void)
+ario_mpd_connect_thread (ArioServer *server)
 {
         ARIO_LOG_FUNCTION_START
         gchar *hostname;
         int port;
         float timeout;
+
+        /* TODO: Remove */
+        ario_mpd_use_count_inc ();
 
         hostname = ario_conf_get_string (PREF_HOST, PREF_HOST_DEFAULT);
         port = ario_conf_get_integer (PREF_PORT, PREF_PORT_DEFAULT);
@@ -272,6 +280,55 @@ ario_mpd_connect (void)
         instance->parent.connecting = FALSE;
 
         return NULL;
+}
+
+static void
+ario_mpd_connect (void)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkWidget *win, *vbox,*label, *bar;
+        GThread* thread;
+        GtkWidget *dialog;
+
+        thread = g_thread_create ((GThreadFunc) ario_mpd_connect_thread,
+                                  instance, TRUE, NULL);
+
+        win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+        gtk_window_set_modal (GTK_WINDOW (win), TRUE);
+        vbox = gtk_vbox_new (FALSE, 0);
+        label = gtk_label_new (_("Connecting to server..."));
+        bar = gtk_progress_bar_new ();
+
+        gtk_container_add (GTK_CONTAINER (win), vbox);
+        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
+        gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
+
+        gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
+        gtk_window_set_title (GTK_WINDOW (win), "Ario");
+        gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
+        gtk_widget_show_all (win);
+
+        while (instance->parent.connecting) {
+                gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
+                while (gtk_events_pending ())
+                        gtk_main_iteration ();
+                g_usleep (200000);
+        }
+
+        g_thread_join (thread);
+
+        if (!ario_server_is_connected ()) {
+                dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, 
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_OK,
+                                                 _("Impossible to connect to server. Check the connection options."));
+                if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_NONE)
+                        gtk_widget_destroy (dialog);
+                g_signal_emit_by_name (G_OBJECT (server_instance), "state_changed");
+        }
+
+        gtk_widget_hide (win);
+        gtk_widget_destroy (win);
 }
 
 static void
@@ -599,11 +656,10 @@ ario_mpd_update_status (void)
         if (instance->priv->is_updating)
                 return TRUE;
         instance->priv->is_updating = TRUE;
-        instance->parent.signals_to_emit = 0;
 
         /* check if there is a connection */
         if (!instance->priv->connection) {
-                ario_server_set_default (ARIO_SERVER (instance));
+                ario_server_interface_set_default (ARIO_SERVER_INTERFACE (instance));
         } else {
                 if (instance->priv->status)
                         mpd_freeStatus (instance->priv->status);
@@ -643,25 +699,7 @@ ario_mpd_update_status (void)
                         instance->parent.crossfade = instance->priv->status->crossfade;
                 }
         }
-
-        if (instance->parent.signals_to_emit & SERVER_SONG_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "song_changed");
-        if (instance->parent.signals_to_emit & SERVER_ALBUM_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "album_changed");
-        if (instance->parent.signals_to_emit & SERVER_STATE_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "state_changed");
-        if (instance->parent.signals_to_emit & SERVER_VOLUME_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "volume_changed", instance->parent.volume);
-        if (instance->parent.signals_to_emit & SERVER_ELAPSED_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "elapsed_changed", instance->parent.elapsed);
-        if (instance->parent.signals_to_emit & SERVER_PLAYLIST_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "playlist_changed");
-        if (instance->parent.signals_to_emit & SERVER_RANDOM_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "random_changed");
-        if (instance->parent.signals_to_emit & SERVER_REPEAT_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "repeat_changed");
-        if (instance->parent.signals_to_emit & SERVER_UPDATINGDB_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "updatingdb_changed");
+        ario_server_interface_emit (ARIO_SERVER_INTERFACE (instance), server_instance);
 
         instance->priv->is_updating = FALSE;
         return TRUE;

@@ -163,7 +163,7 @@
                           <widget class="GtkSpinButton" id="notificationtime_spinbutton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="adjustment">5 1 100 1 10 10</property>
+                            <property name="adjustment">5 1 100 1 10 0</property>
                             <signal name="value_changed" handler="ario_trayicon_preferences_notificationtime_changed_cb"/>
                           </widget>
                           <packing>

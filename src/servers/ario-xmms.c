@@ -38,7 +38,7 @@ static gboolean ario_xmms_connect_to (ArioXmms *xmms,
                                       gchar *hostname,
                                       int port,
                                       float timeout);
-static gpointer ario_xmms_connect (void);
+static void ario_xmms_connect (void);
 static void ario_xmms_disconnect (void);
 static void ario_xmms_update_db (void);
 static gboolean ario_xmms_is_connected (void);
@@ -82,6 +82,9 @@ struct ArioXmmsPrivate
 {
         xmmsc_connection_t *connection;
         int total_time;
+
+        GSList *results;
+        xmmsc_result_t *res;
 };
 
 char * ArioXmmsPattern[MPD_TAG_NUM_OF_ITEM_TYPES] =
@@ -102,9 +105,10 @@ char * ArioXmmsPattern[MPD_TAG_NUM_OF_ITEM_TYPES] =
 };
 
 #define ARIO_XMMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_XMMS, ArioXmmsPrivate))
-G_DEFINE_TYPE (ArioXmms, ario_xmms, TYPE_ARIO_SERVER)
+G_DEFINE_TYPE (ArioXmms, ario_xmms, TYPE_ARIO_SERVER_INTERFACE)
 
 static ArioXmms *instance = NULL;
+static ArioServer *server_instance = NULL;
 /*
 static void
 abcde (const void *key, xmmsc_result_value_type_t type, const void *value, void *user_data)
@@ -117,7 +121,7 @@ ario_xmms_class_init (ArioXmmsClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        ArioServerClass *server_class = ARIO_SERVER_CLASS (klass);
+        ArioServerInterfaceClass *server_class = ARIO_SERVER_INTERFACE_CLASS (klass);
 
         object_class->finalize = ario_xmms_finalize;
 
@@ -217,48 +221,60 @@ ario_xmms_get_song_from_res (xmmsc_result_t *result)
 
         return song;
 }
-
+/*
 static void
 wait_cb (xmmsc_result_t *res,
          gboolean *wait)
 {
         *wait = FALSE;
+        xmmsc_result_unref (res);
 }
-
+*/
 static void
 ario_xmms_result_wait (xmmsc_result_t *result)
 {
         ARIO_LOG_FUNCTION_START
+/*
+        static gboolean block = FALSE;
+
+        while (block)
+                gtk_main_iteration ();
+
+        block = TRUE;
         gboolean wait = TRUE;
         xmmsc_result_notifier_set (result, (xmmsc_result_notifier_t) wait_cb, &wait);
 
         while (wait)
                 gtk_main_iteration ();
+        block = FALSE;
+*/
+        xmmsc_result_wait (result);
 }
 
 ArioXmms *
-ario_xmms_get_instance (void)
+ario_xmms_get_instance (ArioServer *server)
 {
         ARIO_LOG_FUNCTION_START
         if (!instance) {
                 instance = g_object_new (TYPE_ARIO_XMMS, NULL);
                 g_return_val_if_fail (instance->priv != NULL, NULL);
+                server_instance = server;
         }
         return instance;
 }
 
 static gboolean
-playlist_not_idle (xmmsc_result_t *res)
+playlist_not_idle (xmmsc_result_t *not_used)
 {
-        g_signal_emit_by_name (G_OBJECT (instance), "playlist_changed");
+        g_signal_emit_by_name (G_OBJECT (server_instance), "playlist_changed");
         return FALSE;
 }
 
 static void
-playlist_not (xmmsc_result_t *res,
+playlist_not (xmmsc_result_t *not_used,
               ArioXmms *xmms)
 {
-        g_idle_add ((GSourceFunc) playlist_not_idle, res);
+        g_idle_add ((GSourceFunc) playlist_not_idle, NULL);
 }
 
 static gboolean
@@ -278,7 +294,7 @@ playback_status_not_idle (xmmsc_result_t *res)
         /* horrible hack: mpd state = xmms state + 1*/
         ++state;
         g_object_set (G_OBJECT (instance), "state", state, NULL);
-        g_signal_emit_by_name (G_OBJECT (instance), "state_changed");
+        g_signal_emit_by_name (G_OBJECT (server_instance), "state_changed");
 
         return FALSE;
 }
@@ -307,10 +323,10 @@ playback_current_id_not_idle (xmmsc_result_t *res)
         g_object_set (G_OBJECT (instance), "song_id", id, NULL);
 
         if (instance->parent.signals_to_emit & SERVER_SONG_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "song_changed");
+                g_signal_emit_by_name (G_OBJECT (server_instance), "song_changed");
 
         if (instance->parent.signals_to_emit & SERVER_ALBUM_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "album_changed");
+                g_signal_emit_by_name (G_OBJECT (server_instance), "album_changed");
 
         return FALSE;
 }
@@ -323,7 +339,7 @@ playback_current_id_not (xmmsc_result_t *res,
 }
 
 static gboolean
-playback_volume_changed_not_idle (xmmsc_result_t *result)
+playback_volume_changed_not_idle (xmmsc_result_t *not_used)
 {
         guint volume;
         xmmsc_result_t *res;
@@ -333,6 +349,7 @@ playback_volume_changed_not_idle (xmmsc_result_t *result)
 
         if (!xmmsc_result_get_dict_entry_uint (res, "left", &volume)) {
                 ARIO_LOG_ERROR ("Result didn't contain right type!");
+                xmmsc_result_unref (res);
                 return FALSE;
         }
         xmmsc_result_unref (res);
@@ -340,16 +357,16 @@ playback_volume_changed_not_idle (xmmsc_result_t *result)
                 g_object_set (G_OBJECT (instance), "volume", volume, NULL);
 
         if (instance->parent.signals_to_emit & SERVER_VOLUME_CHANGED_FLAG)
-                g_signal_emit_by_name (G_OBJECT (instance), "volume_changed", volume);
+                g_signal_emit_by_name (G_OBJECT (server_instance), "volume_changed", volume);
 
         return FALSE;
 }
 
 static void
-playback_volume_changed_not (xmmsc_result_t *res,
+playback_volume_changed_not (xmmsc_result_t *not_used,
                              ArioXmms *xmms)
 {
-        g_idle_add ((GSourceFunc) playback_volume_changed_not_idle, res);
+        g_idle_add ((GSourceFunc) playback_volume_changed_not_idle, NULL);
 }
 
 static void
@@ -369,14 +386,17 @@ playback_playtime_not (xmmsc_result_t *res,
         }
 
         /* TODO: Delay this restart (1 second?) */
-        res2 = xmmsc_result_restart (res);
-        xmmsc_result_unref (res2);
+        if (instance && instance->priv->connection) {
+                res2 = xmmsc_result_restart (res);
+                xmmsc_result_unref (res2);
+                instance->priv->res = res2;
+        }
         xmmsc_result_unref (res);
 
         playtime = playtime / 1000;
         if (xmms->parent.elapsed != playtime) {
                 g_object_set (G_OBJECT (instance), "elapsed", playtime, NULL);
-                g_signal_emit_by_name (G_OBJECT (xmms), "elapsed_changed", playtime);
+                g_signal_emit_by_name (G_OBJECT (server_instance), "elapsed_changed", playtime);
         }
 }
 
@@ -386,19 +406,23 @@ ario_xmms_sync (ArioXmms *xmms)
         ARIO_LOG_FUNCTION_START
         xmmsc_result_t *res;
 
+        /* Sync playlist */
         playlist_not (NULL, xmms);
+
+        /* Sync Playback status */
         res = xmmsc_playback_status (xmms->priv->connection);
         ario_xmms_result_wait (res);
         playback_status_not (res, xmms);
-        xmmsc_result_unref (res);
+        instance->priv->results = g_slist_append (instance->priv->results, res);
 
+        /* Sync Playback song */
         res = xmmsc_playback_current_id (xmms->priv->connection);
         ario_xmms_result_wait (res);
         playback_current_id_not (res, xmms);
-        xmmsc_result_unref (res);
+        instance->priv->results = g_slist_append (instance->priv->results, res);
 
+        /* Sync Volume */
         playback_volume_changed_not (NULL, xmms);
-
 
         /*
            res = xmmsc_configval_list (xmms->priv->connection);
@@ -406,6 +430,23 @@ ario_xmms_sync (ArioXmms *xmms)
            xmmsc_result_dict_foreach (res, abcde, NULL);
            xmmsc_result_unref (res);
            */
+}
+
+static void 
+disconnect_not (ArioXmms *xmms)
+{
+        ARIO_LOG_FUNCTION_START
+        /* TODO */
+}
+
+#define ARIO_XMMS_CALLBACK_SET(conn,meth,callback,udata) \
+	ARIO_XMMS_CALLBACK_SET_FULL(conn,meth,callback,udata,NULL);
+
+#define ARIO_XMMS_CALLBACK_SET_FULL(conn,meth,callback,udata,free_func) {\
+	xmmsc_result_t *res = meth (conn); \
+	xmmsc_result_notifier_set_full (res, callback, udata, free_func);\
+	xmmsc_result_unref (res);\
+        instance->priv->results = g_slist_append (instance->priv->results, res);\
 }
 
 static gboolean
@@ -416,43 +457,48 @@ ario_xmms_connect_to (ArioXmms *xmms,
 {
         ARIO_LOG_FUNCTION_START
         xmmsc_connection_t *connection;
-        const gchar *xmms_path;
+        gchar *xmms_path;
+        xmmsc_result_t *res;
 
         connection = xmmsc_init ("ario");
 
         if (!connection)
                 return FALSE;
 
-        xmms_path = g_getenv ("XMMS_PATH");
+        xmms_path = g_strdup_printf ("tcp://%s:%d", hostname, port);
 
-        if (!xmms_path)
+        if (!xmmsc_connect (connection, xmms_path)) {
+                ARIO_LOG_ERROR ("Error connecting to %s", xmms_path);
+                g_free (xmms_path);
                 return FALSE;
-
-        if (!xmmsc_connect (connection, xmms_path))
-                return FALSE;
+        }
+        g_free (xmms_path);
 
         xmms->priv->connection = connection;
 
-        XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playlist_changed, 
+        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playlist_changed,
                            (xmmsc_result_notifier_t) playlist_not, xmms);
-        XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_status, 
+        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_status,
                            (xmmsc_result_notifier_t) playback_status_not, xmms);
-        XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_current_id, 
+        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_current_id,
                            (xmmsc_result_notifier_t) playback_current_id_not, xmms);
-        XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_volume_changed, 
+        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_volume_changed,
                            (xmmsc_result_notifier_t) playback_volume_changed_not, xmms);
-        XMMS_CALLBACK_SET (connection, xmmsc_signal_playback_playtime, 
-                           (xmmsc_result_notifier_t) playback_playtime_not, xmms);
+	res = xmmsc_signal_playback_playtime (connection);
+	xmmsc_result_notifier_set_full (res, (xmmsc_result_notifier_t) playback_playtime_not, xmms, NULL);
+	xmmsc_result_unref (res);
+        instance->priv->res = res;
 
-        /* TODO: Disconnect callback */
+        /* Disconnect callback */
+        xmmsc_disconnect_callback_set (connection, (xmmsc_disconnect_func_t) disconnect_not, xmms);
+
         xmmsc_mainloop_gmain_init (connection);
 
         ario_xmms_sync (xmms);
-
         return TRUE;
 }
 
-static gpointer
+static void
 ario_xmms_connect (void)
 {
         ARIO_LOG_FUNCTION_START
@@ -476,20 +522,33 @@ ario_xmms_connect (void)
 
         g_free (hostname);
         instance->parent.connecting = FALSE;
-
-        return NULL;
 }
 
 static void
 ario_xmms_disconnect (void)
 {
         ARIO_LOG_FUNCTION_START
+        GSList *tmp;
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
+        for (tmp = instance->priv->results; tmp; tmp = g_slist_next (tmp)) {
+                xmmsc_result_unref (tmp->data);
+        }
+        g_slist_free (instance->priv->results);
+        instance->priv->results = NULL;
+
+        if (instance->priv->res) {
+                xmmsc_result_unref (instance->priv->res);
+                instance->priv->res = NULL;
+        }
+
         xmmsc_unref (instance->priv->connection);
         instance->priv->connection = NULL;
+
+        ario_server_interface_set_default (ARIO_SERVER_INTERFACE (instance));
+        ario_server_interface_emit (ARIO_SERVER_INTERFACE (instance), server_instance);
 }
 
 static void
@@ -960,7 +1019,7 @@ ario_xmms_clear (void)
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_playlist_clear (instance->priv->connection, NULL);
+        xmmsc_result_unref (xmmsc_playlist_clear (instance->priv->connection, NULL));
 }
 /*
    static gchar

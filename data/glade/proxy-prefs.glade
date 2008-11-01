@@ -45,18 +45,24 @@
                         <property name="n_rows">2</property>
                         <property name="n_columns">2</property>
                         <child>
-                          <widget class="GtkSpinButton" id="proxy_port_spinbutton">
+                          <widget class="GtkLabel" id="proxy_address_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="adjustment">8080 0 10000 1 10 10</property>
-                            <signal name="value_changed" handler="ario_proxy_preferences_proxy_port_changed_cb"/>
+                            <property name="label" translatable="yes">Proxy Address :</property>
                           </widget>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
+                            <property name="x_options">GTK_FILL</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="proxy_port_label">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Proxy Port :</property>
+                            <property name="width_chars">2</property>
+                          </widget>
+                          <packing>
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
+                            <property name="x_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -73,24 +79,18 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="proxy_port_label">
+                          <widget class="GtkSpinButton" id="proxy_port_spinbutton">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Proxy Port :</property>
-                            <property name="width_chars">2</property>
+                            <property name="can_focus">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="adjustment">8080 0 10000 1 10 0</property>
+                            <signal name="value_changed" handler="ario_proxy_preferences_proxy_port_changed_cb"/>
                           </widget>
                           <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="proxy_address_label">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Proxy Address :</property>
-                          </widget>
-                          <packing>
-                            <property name="x_options">GTK_FILL</property>
                           </packing>
                         </child>
                       </widget>

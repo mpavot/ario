@@ -545,12 +545,11 @@ ario_playlist_changed_cb (ArioServer *server,
         gchar *time, *track;
         gchar *title;
         GSList *songs, *tmp;
-        ArioServerSong *song;
+        ArioServerSong *song, *current_song;
         gboolean need_set;
         gboolean need_sync = FALSE;
         GtkTreePath *path;
         GdkPixbuf *pixbuf;
-        int song_id;
         int state;
 
 
@@ -567,9 +566,9 @@ ario_playlist_changed_cb (ArioServer *server,
 
         state = ario_server_get_current_state ();
         if (state == MPD_STATUS_STATE_UNKNOWN || state == MPD_STATUS_STATE_STOP)
-                song_id = -1;
+                current_song = NULL;
         else
-                song_id = ario_server_get_current_song_id ();
+                current_song = ario_server_get_current_song ();
 
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
@@ -590,7 +589,7 @@ ario_playlist_changed_cb (ArioServer *server,
                         time = ario_util_format_time (song->time);
                         track = ario_util_format_track (song->track);
                         title = ario_util_format_title (song);
-                        if (song_id == song->id)
+                        if (current_song && (song->pos == current_song->pos))
                                 pixbuf = instance->priv->play_pixbuf;
                         else
                                 pixbuf = NULL;
