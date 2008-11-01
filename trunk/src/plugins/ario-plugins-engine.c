@@ -71,7 +71,7 @@ ario_plugins_engine_load_dir (const gchar        *dir,
 
         d = g_dir_open (dir, 0, &error);
         if (!d) {
-                g_warning (error->message);
+                g_warning ("%s", error->message);
                 g_error_free (error);
                 return;
         }
@@ -153,7 +153,7 @@ ario_plugins_engine_load_icons_dir (const gchar        *dir)
 
         d = g_dir_open (dir, 0, &error);
         if (!d) {
-                g_warning (error->message);
+                g_warning ("%s", error->message);
                 g_error_free (error);
                 return;
         }
