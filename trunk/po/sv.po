@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-20 18:59+0200\n"
+"POT-Creation-Date: 2008-11-01 15:41+0100\n"
 "PO-Revision-Date: 2008-07-01 12:37+0000\n"
 "Last-Translator: Magnus Malmsten <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -86,12 +86,12 @@ msgid "Host :"
 msgstr "Värd:"
 
 #: ../data/glade/connection-prefs.glade.h:5
-msgid "MPD is on the same computer as Ario"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:6
 msgid "Music directory :"
 msgstr "Musikkatalog :"
+
+#: ../data/glade/connection-prefs.glade.h:6
+msgid "Music server is on the same computer as Ario"
+msgstr ""
 
 #: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:840
 #: ../plugins/radios/ario-radio.c:1039
@@ -111,14 +111,23 @@ msgstr "Port:"
 
 #: ../data/glade/connection-prefs.glade.h:10
 #, fuzzy
+msgid "Server type : "
+msgstr "Server"
+
+#: ../data/glade/connection-prefs.glade.h:11
+msgid "XMMS 2 (Experimental)"
+msgstr ""
+
+#: ../data/glade/connection-prefs.glade.h:12
+#, fuzzy
 msgid "_Autoconnect on startup"
 msgstr "Anslut automatisk vid uppstart"
 
-#: ../data/glade/connection-prefs.glade.h:11 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:155
 msgid "_Connect"
 msgstr "_Anslut"
 
-#: ../data/glade/connection-prefs.glade.h:12 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:14 ../src/shell/ario-shell.c:158
 msgid "_Disconnect"
 msgstr "_Koppla från"
 
@@ -162,8 +171,8 @@ msgid "Search"
 msgstr "Sök"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/ario-mpd.c:148
-#: ../src/sources/ario-tree.c:388 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:43
+#: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:684
 msgid "Album"
 msgstr "Album"
@@ -172,7 +181,7 @@ msgstr "Album"
 msgid "Allow only one instance of Ario"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/ario-mpd.c:147
+#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:42
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
@@ -181,7 +190,7 @@ msgid "Artist"
 msgstr "Artist"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/ario-mpd.c:153
+#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:319
 msgid "Date"
 msgstr "Datum"
@@ -197,7 +206,7 @@ msgstr "Fil"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/ario-mpd.c:152
+#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:47
 #: ../src/widgets/ario-playlist.c:319
 msgid "Genre"
 msgstr "Genre"
@@ -230,16 +239,16 @@ msgid "Show tabs"
 msgstr "Visa flikar"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/ario-mpd.c:149
-#: ../src/sources/ario-tree.c:434 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:686
 msgid "Title"
 msgstr "Titel"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/ario-mpd.c:150
-#: ../src/sources/ario-tree.c:427 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Spår"
 
@@ -430,46 +439,6 @@ msgstr ""
 msgid "Start minimized window"
 msgstr ""
 
-#. MPD_TAG_ITEM_DATE
-#: ../src/ario-mpd.c:154
-#, fuzzy
-msgid "Composer"
-msgstr "Kompositör:"
-
-#. MPD_TAG_ITEM_COMPOSER
-#: ../src/ario-mpd.c:155
-#, fuzzy
-msgid "Performer"
-msgstr "Uppträdande :"
-
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/ario-mpd.c:158
-msgid "Filename"
-msgstr "Filnamn"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/ario-mpd.c:159
-msgid "Any"
-msgstr "Valfri"
-
-#: ../src/ario-mpd.c:644
-msgid "Connecting to MPD server..."
-msgstr "Ansluter till MPD-server..."
-
-#: ../src/ario-mpd.c:669
-#, fuzzy
-msgid "Impossible to connect to mpd. Check the connection options."
-msgstr ""
-"Det gick ej att ansluta till MPD-servern. Kontrollera inställningarna för "
-"anslutningen."
-
-#. impossible time or broken locale settings
-#: ../src/ario-mpd.h:28 ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
-msgid "Unknown"
-msgstr "Okänd"
-
 #: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "sekunder"
@@ -540,15 +509,15 @@ msgstr "Alfabetiskt"
 msgid "By year"
 msgstr "Efter år"
 
-#: ../src/preferences/ario-connection-preferences.c:338
+#: ../src/preferences/ario-connection-preferences.c:358
 msgid "Profile"
 msgstr "Profil"
 
-#: ../src/preferences/ario-connection-preferences.c:566
+#: ../src/preferences/ario-connection-preferences.c:603
 msgid "Server autodetection"
 msgstr "Automatisk upptäckning av server"
 
-#: ../src/preferences/ario-connection-preferences.c:577
+#: ../src/preferences/ario-connection-preferences.c:614
 #, fuzzy
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
@@ -559,7 +528,7 @@ msgstr ""
 "server, kontrollera att zeroconf är aktiverat i MPD-inställningarna eller "
 "använd manuell inställning."
 
-#: ../src/preferences/ario-connection-preferences.c:587
+#: ../src/preferences/ario-connection-preferences.c:624
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
@@ -567,21 +536,21 @@ msgstr ""
 msgid "Name"
 msgstr "Namn"
 
-#: ../src/preferences/ario-connection-preferences.c:595
+#: ../src/preferences/ario-connection-preferences.c:632
 #: ../src/widgets/ario-firstlaunch.c:286
 msgid "Host"
 msgstr "Värd"
 
-#: ../src/preferences/ario-connection-preferences.c:603
+#: ../src/preferences/ario-connection-preferences.c:640
 #: ../src/widgets/ario-firstlaunch.c:294
 msgid "Port"
 msgstr "Port"
 
-#: ../src/preferences/ario-connection-preferences.c:666
+#: ../src/preferences/ario-connection-preferences.c:703
 msgid "You must select a server."
 msgstr "Du måste välja en server."
 
-#: ../src/preferences/ario-connection-preferences.c:713
+#: ../src/preferences/ario-connection-preferences.c:750
 msgid "New Profile"
 msgstr "Ny profil"
 
@@ -616,7 +585,49 @@ msgstr "Spela nästa låt"
 msgid "Do nothing"
 msgstr "Gör ingenting"
 
-#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:78
+#: ../src/servers/ario-mpd.c:299
+#, fuzzy
+msgid "Connecting to server..."
+msgstr "Ansluter till MPD-server..."
+
+#: ../src/servers/ario-mpd.c:324
+#, fuzzy
+msgid "Impossible to connect to server. Check the connection options."
+msgstr ""
+"Det gick ej att ansluta till MPD-servern. Kontrollera inställningarna för "
+"anslutningen."
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/servers/ario-server.c:49
+#, fuzzy
+msgid "Composer"
+msgstr "Kompositör:"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/servers/ario-server.c:50
+#, fuzzy
+msgid "Performer"
+msgstr "Uppträdande :"
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/servers/ario-server.c:53
+msgid "Filename"
+msgstr "Filnamn"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/servers/ario-server.c:54
+msgid "Any"
+msgstr "Valfri"
+
+#. impossible time or broken locale settings
+#: ../src/servers/ario-server.h:28
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+msgid "Unknown"
+msgstr "Okänd"
+
+#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
@@ -626,7 +637,7 @@ msgstr "Gör ingenting"
 msgid "_Add to playlist"
 msgstr "_Lägg till spellista"
 
-#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
 #: ../src/sources/ario-storedplaylists.c:104
 #: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
@@ -636,7 +647,7 @@ msgstr "_Lägg till spellista"
 msgid "Add and _play"
 msgstr "Lägg till och _spela upp"
 
-#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:107
 #: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
@@ -646,17 +657,17 @@ msgstr "Lägg till och _spela upp"
 msgid "_Replace in playlist"
 msgstr "Spara spellista"
 
-#: ../src/sources/ario-browser.c:90
+#: ../src/sources/ario-browser.c:88
 #, fuzzy
 msgid "Get the covers"
 msgstr "Hämta albumgrafiken"
 
-#: ../src/sources/ario-browser.c:93
+#: ../src/sources/ario-browser.c:91
 #, fuzzy
 msgid "_Delete the covers"
 msgstr "_Ta bort albumgrafiken"
 
-#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
+#: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
 #: ../src/widgets/ario-playlist.c:128
 #: ../plugins/filesystem/ario-filesystem.c:127
@@ -664,7 +675,7 @@ msgstr "_Ta bort albumgrafiken"
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Bibliotek"
 
@@ -677,7 +688,7 @@ msgstr "Lägg till sökkriterium"
 msgid "Search songs in the library"
 msgstr "Sök låtar i biblioteket"
 
-#: ../src/sources/ario-search.c:372
+#: ../src/sources/ario-search.c:369
 #, fuzzy
 msgid "Remove a search criteria"
 msgstr "Ta bort sökkriterium"
@@ -690,16 +701,16 @@ msgstr "_Ta bort"
 msgid "Playlists"
 msgstr "Spellistor"
 
-#: ../src/sources/ario-storedplaylists.c:567
+#: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Är du säker på att du vill ta bort de valda spellistorna?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:375
+#: ../src/sources/ario-tree.c:372
 msgid "Cover"
 msgstr "Omslag"
 
-#: ../src/sources/ario-tree.c:1179
+#: ../src/sources/ario-tree.c:1175
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr ""
@@ -953,16 +964,16 @@ msgid "_Go to playing song"
 msgstr "_Gå till spela sång"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1276
+#: ../src/widgets/ario-playlist.c:1262
 msgid "Save playlist"
 msgstr "Spara spellista"
 
-#: ../src/widgets/ario-playlist.c:1286
+#: ../src/widgets/ario-playlist.c:1272
 #, fuzzy
 msgid "Playlist name :"
 msgstr "Spellistans namn:"
 
-#: ../src/widgets/ario-playlist.c:1311
+#: ../src/widgets/ario-playlist.c:1297
 #, fuzzy
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Spellistan finns redan. Vill du ersätta den?"

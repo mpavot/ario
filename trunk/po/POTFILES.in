@@ -22,8 +22,6 @@ src/ario-avahi.c
 src/ario-avahi.h
 src/ario-debug.h
 src/ario-main.c
-src/ario-mpd.c
-src/ario-mpd.h
 src/ario-profiles.c
 src/ario-profiles.h
 src/ario-util.c
@@ -94,6 +92,14 @@ src/preferences/ario-stats-preferences.c
 src/preferences/ario-stats-preferences.h
 src/preferences/ario-trayicon-preferences.c
 src/preferences/ario-preferences.h
+src/servers/ario-mpd.c
+src/servers/ario-mpd.h
+src/servers/ario-server.c
+src/servers/ario-server.h
+src/servers/ario-server-interface.c
+src/servers/ario-server-interface.h
+src/servers/ario-xmms.c
+src/servers/ario-xmms.h
 src/sources/ario-browser.c
 src/sources/ario-browser.h
 src/sources/ario-search.c
