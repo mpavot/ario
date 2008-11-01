@@ -72,6 +72,10 @@
 #define PREF_SHOW_TABS                          "show_tabs"
 #define PREF_SHOW_TABS_DEFAULT                  TRUE
 
+/* define default step for volume adjustment with mouse wheel over volume button and tray icon */
+#define PREF_VOL_ADJUST_STEP                    "volume_adjust_step"
+#define PREF_VOL_ADJUST_STEP_DEFAULT            5
+
 /* Define the behavior of a double click on the tray icon (0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing') */
 #define PREF_TRAYICON_BEHAVIOR                  "trayicon_behavior"
 #define PREF_TRAYICON_BEHAVIOR_DEFAULT          0

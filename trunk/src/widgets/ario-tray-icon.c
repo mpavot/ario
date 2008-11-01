@@ -526,17 +526,21 @@ static gboolean
 ario_tray_icon_scroll_cb (GtkWidget *widget, GdkEvent *event,
                           ArioTrayIcon *icon)
 {
+        int volume_adjust_step;
+
+        volume_adjust_step = ario_conf_get_integer (PREF_VOL_ADJUST_STEP, PREF_VOL_ADJUST_STEP_DEFAULT);
+
         ARIO_LOG_FUNCTION_START
         gint vol = ario_server_get_current_volume ();
 
         switch (event->scroll.direction) {
         case GDK_SCROLL_UP:
-                vol += 10;
+                vol += volume_adjust_step;
                 if (vol > 100)
                         vol = 100;
                 break;
         case GDK_SCROLL_DOWN:
-                vol -= 10;
+                vol -= volume_adjust_step;
                 if (vol < 0)
                         vol = 0;
                 break;
