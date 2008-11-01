@@ -48,8 +48,8 @@ static void ario_search_get_property (GObject *object,
                                       guint prop_id,
                                       GValue *value,
                                       GParamSpec *pspec);
-static void ario_search_state_changed_cb (ArioServer *server,
-                                          ArioSearch *search);
+static void ario_search_connectivity_changed_cb (ArioServer *server,
+                                                 ArioSearch *search);
 static void ario_search_do_plus (GtkButton *button,
                                  ArioSearch *search);
 static void ario_search_do_minus (GtkButton *button,
@@ -298,7 +298,7 @@ ario_search_new (GtkUIManager *mgr,
 
         /* Signals to synchronize the search with server */
         g_signal_connect_object (ario_server_get_instance (),
-                                 "state_changed", G_CALLBACK (ario_search_state_changed_cb),
+                                 "state_changed", G_CALLBACK (ario_search_connectivity_changed_cb),
                                  search, 0);
 
         /* Searchs list */
@@ -323,14 +323,11 @@ ario_search_new (GtkUIManager *mgr,
 }
 
 static void
-ario_search_state_changed_cb (ArioServer *server,
-                              ArioSearch *search)
+ario_search_connectivity_changed_cb (ArioServer *server,
+                                     ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START
-        if (search->priv->connected != ario_server_is_connected ()) {
-                search->priv->connected = ario_server_is_connected ();
-                /* ario_search_set_active (search->priv->connected); */
-        }
+        search->priv->connected = ario_server_is_connected ();
 }
 
 static void

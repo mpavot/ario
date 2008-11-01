@@ -91,6 +91,7 @@ ario_profiles_read (void)
         xmlChar *xml_musicdir;
         xmlChar *xml_local;
         xmlChar *xml_current;
+        xmlChar *xml_type;
 
         xml_filename = ario_profiles_get_xml_filename();
 
@@ -162,6 +163,16 @@ ario_profiles_read (void)
                                 profile->current = FALSE;
                         }
 
+                        xml_type = xmlGetProp (cur, (const unsigned char *)"type");
+                        if (xml_type) {
+                                profile->type = atoi ((char *) xml_type);
+                                if (profile->type != ArioServerMpd && profile->type != ArioServerXmms)
+                                        profile->type = ArioServerMpd;
+                                xmlFree(xml_type);
+                        } else {
+                                profile->type = ArioServerMpd;
+                        }
+
                         profiles = g_slist_append (profiles, profile);
                 }
         }
@@ -180,6 +191,7 @@ ario_profiles_save (GSList* profiles)
         ArioProfile *profile;
         GSList *tmp;
         gchar *port_char;
+        gchar *type_char;
 
         xml_filename = ario_profiles_get_xml_filename();
 
@@ -207,6 +219,7 @@ ario_profiles_save (GSList* profiles)
         for (tmp = profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
                 port_char = g_strdup_printf ("%d",  profile->port);
+                type_char = g_strdup_printf ("%d",  profile->type);
 
                 /* We add a new "profiles" entry */
                 cur2 = xmlNewChild (cur, NULL, (const xmlChar *)"profile", NULL);
@@ -225,7 +238,9 @@ ario_profiles_save (GSList* profiles)
                 if (profile->current) {
                         xmlSetProp (cur2, (const xmlChar *)"current", (const xmlChar *) "true");
                 }
+                xmlSetProp (cur2, (const xmlChar *)"type", (const xmlChar *) type_char);
                 g_free (port_char);
+                g_free (type_char);
         }
 
         /* We save the xml file */

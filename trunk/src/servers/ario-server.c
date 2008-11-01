@@ -35,35 +35,6 @@
 #define NORMAL_TIMEOUT 500
 #define LAZY_TIMEOUT 12000
 
-static void ario_server_finalize (GObject *object);
-static void ario_server_set_property (GObject *object,
-                                      guint prop_id,
-                                      const GValue *value,
-                                      GParamSpec *pspec);
-static void ario_server_get_property (GObject *object,
-                                      guint prop_id,
-                                      GValue *value,
-                                      GParamSpec *pspec);
-
-struct ArioServerPrivate
-{
-        /* TODO: Remove */
-        gboolean dummy;
-};
-
-enum
-{
-        PROP_0,
-        PROP_SONGID,
-        PROP_STATE,
-        PROP_VOLUME,
-        PROP_ELAPSED,
-        PROP_PLAYLISTID,
-        PROP_RANDOM,
-        PROP_UPDATINGDB,
-        PROP_REPEAT
-};
-
 static guint ario_server_signals[SERVER_LAST_SIGNAL] = { 0 };
 
 char * ArioServerItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
@@ -83,204 +54,16 @@ char * ArioServerItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
         N_("Any")        // MPD_TAG_ITEM_ANY
 };
 
-#define ARIO_SERVER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SERVER, ArioServerPrivate))
 G_DEFINE_TYPE (ArioServer, ario_server, G_TYPE_OBJECT)
 
 static ArioServer *instance = NULL;
-#ifdef ENABLE_XMMS2
-static ArioServerType instance_type = ArioServerXmms;
-#else
-static ArioServerType instance_type = ArioServerMpd;
-#endif
-static void
-dummy_void_void (void)
-{
-}
-
-static void
-dummy_void_int (const int a)
-{
-}
-
-static void
-dummy_void_int_int (const int a,
-                    const int b)
-{
-}
-
-static void
-dummy_void_pointer (const gpointer *a)
-{
-}
-
-static void
-dummy_void_pointer_int (const gpointer *a,
-                        const int b)
-{
-}
-
-static int
-dummy_int_void (void)
-{
-        return 0;
-}
-
-static int
-dummy_int_pointer (const gpointer *a)
-{
-        return 0;
-}
-
-static unsigned long
-dummy_ulong_void (void)
-{
-        return 0;
-}
-
-static gpointer
-dummy_pointer_void (void)
-{
-        return NULL;
-}
-
-static gpointer
-dummy_pointer_pointer (const gpointer *a)
-{
-        return NULL;
-}
-
-static gpointer
-dummy_pointer_pointer_int (const gpointer *a,
-                           const int b)
-{
-        return NULL;
-}
-
-static gpointer
-dummy_pointer_tag_pointer (const ArioServerTag a,
-                           const gpointer *b)
-{
-        return NULL;
-}
-
-static  gpointer
-dummy_pointer_int  (int playlist_id)
-{
-        return NULL;
-}
+static ArioServerInterface *interface = NULL;
 
 static void
 ario_server_class_init (ArioServerClass *klass)
 {
         ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        object_class->finalize = ario_server_finalize;
-
-        object_class->set_property = ario_server_set_property;
-        object_class->get_property = ario_server_get_property;
-
-        klass->connect = dummy_pointer_void;
-        klass->disconnect = dummy_void_void;
-        klass->is_connected = dummy_int_void;
-        klass->update_status = dummy_int_void;
-        klass->update_db = dummy_void_void;
-        klass->list_tags = (GSList* (*) (const ArioServerTag, const ArioServerCriteria *)) dummy_pointer_tag_pointer;
-        klass->get_albums = (GSList* (*) (const ArioServerCriteria *)) dummy_pointer_pointer;
-        klass->get_songs = (GSList* (*) (const ArioServerCriteria *, const gboolean)) dummy_pointer_pointer_int;
-        klass->get_songs_from_playlist = (GSList* (*) (char *)) dummy_pointer_pointer;
-        klass->get_playlists = (GSList* (*) (void)) dummy_pointer_void;
-        klass->get_playlist_changes = (GSList* (*) (int))dummy_pointer_int;
-        klass->get_current_song_on_server = (ArioServerSong* (*) (void)) dummy_pointer_void;
-        klass->get_current_playlist_total_time = dummy_int_void;
-        klass->get_last_update = dummy_ulong_void;
-        klass->do_next = dummy_void_void;
-        klass->do_prev = dummy_void_void;
-        klass->do_play = dummy_void_void;
-        klass->do_play_pos = dummy_void_int;
-        klass->do_pause = dummy_void_void;
-        klass->do_stop = dummy_void_void;
-        klass->set_current_elapsed = dummy_void_int;
-        klass->set_current_volume = dummy_void_int;
-        klass->set_current_random = dummy_void_int;
-        klass->set_current_repeat = dummy_void_int;
-        klass->set_crossfadetime = dummy_void_int;
-        klass->clear = dummy_void_void;
-        klass->queue_commit = dummy_void_void;
-        klass->insert_at = (void (*) (const GSList *, const gint)) dummy_void_pointer_int;
-        klass->save_playlist = (int (*) (const char *)) dummy_int_pointer;
-        klass->delete_playlist = (void (*) (const char *)) dummy_void_pointer;
-        klass->use_count_inc = dummy_void_void;
-        klass->use_count_dec = dummy_void_void;
-        klass->get_outputs = (GSList* (*) (void)) dummy_pointer_void;
-        klass->enable_output = dummy_void_int_int;
-        klass->get_stats = (ArioServerStats* (*) (void)) dummy_pointer_void;
-        klass->get_songs_info = (GList* (*) (GSList *)) dummy_pointer_pointer;
-        klass->list_files = (ArioServerFileList* (*) (const char *, const int)) dummy_pointer_pointer_int;
-
-        g_object_class_install_property (object_class,
-                                         PROP_SONGID,
-                                         g_param_spec_int ("song_id",
-                                                           "song_id",
-                                                           "song_id",
-                                                           0, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_STATE,
-                                         g_param_spec_int ("state",
-                                                           "state",
-                                                           "state",
-                                                           0, 3, 0,
-                                                           G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_VOLUME,
-                                         g_param_spec_int ("volume",
-                                                           "volume",
-                                                           "volume",
-                                                           -1, 100, 0,
-                                                           G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_ELAPSED,
-                                         g_param_spec_int ("elapsed",
-                                                           "elapsed",
-                                                           "elapsed",
-                                                           0, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_PLAYLISTID,
-                                         g_param_spec_int ("playlist_id",
-                                                           "playlist_id",
-                                                           "playlist_id",
-                                                           -1, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_RANDOM,
-                                         g_param_spec_boolean ("random",
-                                                               "random",
-                                                               "random",
-                                                               FALSE,
-                                                               G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_REPEAT,
-                                         g_param_spec_boolean ("repeat",
-                                                               "repeat",
-                                                               "repeat",
-                                                               FALSE,
-                                                               G_PARAM_READWRITE));
-
-        g_object_class_install_property (object_class,
-                                         PROP_UPDATINGDB,
-                                         g_param_spec_int ("updatingdb",
-                                                           "updatingdb",
-                                                           "updatingdb",
-                                                           -1, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
 
         ario_server_signals[SERVER_SONG_CHANGED] =
                 g_signal_new ("song_changed",
@@ -297,6 +80,16 @@ ario_server_class_init (ArioServerClass *klass)
                               G_OBJECT_CLASS_TYPE (object_class),
                               G_SIGNAL_RUN_LAST,
                               G_STRUCT_OFFSET (ArioServerClass, album_changed),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
+
+        ario_server_signals[SERVER_CONNECTIVITY_CHANGED] =
+                g_signal_new ("connectivity_changed",
+                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (ArioServerClass, connectivity_changed),
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
@@ -383,180 +176,41 @@ ario_server_class_init (ArioServerClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
-        g_type_class_add_private (klass, sizeof (ArioServerPrivate));
 }
 
 static void
 ario_server_init (ArioServer *server)
 {
         ARIO_LOG_FUNCTION_START
-        server->priv = ARIO_SERVER_GET_PRIVATE (server);
-
-        server->song_id = -1;
-        server->playlist_id = -1;
-        server->volume = -1;
 }
 
 static void
-ario_server_finalize (GObject *object)
+ario_server_reset_interface (void)
 {
         ARIO_LOG_FUNCTION_START
-        ArioServer *server;
+        static ArioServerType interface_type = -1;
+        ArioServerType new_interface_type;
 
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_SERVER (object));
+        new_interface_type = ario_conf_get_integer (PREF_SERVER_TYPE, PREF_SERVER_TYPE_DEFAULT);
 
-        server = ARIO_SERVER (object);
-        g_return_if_fail (server->priv != NULL);
+        if (new_interface_type == interface_type)
+                return;
 
-        if (server->server_song)
-                ario_server_free_song (server->server_song);
+        interface_type = new_interface_type;
 
-        G_OBJECT_CLASS (ario_server_parent_class)->finalize (object);
-}
-
-static void
-ario_server_set_property (GObject *object,
-                          guint prop_id,
-                          const GValue *value,
-                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioServer *server = ARIO_SERVER (object);
-
-        switch (prop_id) {
-        case PROP_SONGID:
-                server->song_id = g_value_get_int (value);
-                server->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
-
-                /* check if there is a connection */
-                if (ario_server_is_connected ()) {
-                        ArioServerSong *new_song;
-                        ArioServerSong *old_song = server->server_song;
-                        gboolean state_changed;
-                        gboolean artist_changed = FALSE;
-                        gboolean album_changed = FALSE;
-
-                        new_song = ario_server_get_current_song_on_server ();
-                        state_changed = (!old_song || !new_song);
-                        if (!state_changed) {
-                                artist_changed = ( (old_song->artist && !new_song->artist)
-                                                   || (!old_song->artist && new_song->artist)
-                                                   || (old_song->artist && new_song->artist && g_utf8_collate (old_song->artist, new_song->artist)) );
-                                if (!artist_changed) {
-                                        album_changed = ( (old_song->album && !new_song->album)
-                                                          || (!old_song->album && new_song->album)
-                                                          || (old_song->album && new_song->album && g_utf8_collate (old_song->album, new_song->album)) );
-                                }
-                        }
-
-                        if (state_changed || artist_changed || album_changed)
-                                server->signals_to_emit |= SERVER_ALBUM_CHANGED_FLAG;
-
-                        if (server->server_song)
-                                ario_server_free_song (server->server_song);
-
-                        if (new_song) {
-                                server->server_song = new_song;
-                        } else {
-                                server->server_song = NULL;
-                        }
-                } else {
-                        if (server->server_song) {
-                                ario_server_free_song (server->server_song);
-                                server->server_song = NULL;
-                        }
-                }
-                break;
-        case PROP_STATE:
-                server->state = g_value_get_int (value);
-                server->signals_to_emit |= SERVER_STATE_CHANGED_FLAG;
-                break;
-        case PROP_VOLUME:
-                server->volume = g_value_get_int (value);
-                server->signals_to_emit |= SERVER_VOLUME_CHANGED_FLAG;
-                break;
-        case PROP_ELAPSED:
-                server->elapsed = g_value_get_int (value);
-                server->signals_to_emit |= SERVER_ELAPSED_CHANGED_FLAG;
-                break;
-        case PROP_PLAYLISTID:
-                server->playlist_id = g_value_get_int (value);
-                if (!ario_server_is_connected ())
-                        server->playlist_length = 0;
-                server->signals_to_emit |= SERVER_PLAYLIST_CHANGED_FLAG;
-                break;
-        case PROP_RANDOM:
-                server->random = g_value_get_boolean (value);
-                server->signals_to_emit |= SERVER_RANDOM_CHANGED_FLAG;
-                break;
-        case PROP_REPEAT:
-                server->repeat = g_value_get_boolean (value);
-                server->signals_to_emit |= SERVER_REPEAT_CHANGED_FLAG;
-                break;
-        case PROP_UPDATINGDB:
-                server->updatingdb = g_value_get_int (value);
-                server->signals_to_emit |= SERVER_UPDATINGDB_CHANGED_FLAG;
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
+        if (interface) {
+                ario_server_disconnect ();
+                g_object_unref (interface);
         }
-}
-
-static void 
-ario_server_get_property (GObject *object,
-                          guint prop_id,
-                          GValue *value,
-                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioServer *server = ARIO_SERVER (object);
-
-        switch (prop_id) {
-        case PROP_SONGID:
-                g_value_set_int (value, server->song_id);
-                break;
-        case PROP_STATE:
-                g_value_set_int (value, server->state);
-                break;
-        case PROP_VOLUME:
-                g_value_set_int (value, server->volume);
-                break;
-        case PROP_ELAPSED:
-                g_value_set_int (value, server->elapsed);
-                break;
-        case PROP_PLAYLISTID:
-                g_value_set_int (value, server->playlist_id);
-                break;
-        case PROP_RANDOM:
-                g_value_set_boolean (value, server->random);
-                break;
-        case PROP_REPEAT:
-                g_value_set_boolean (value, server->repeat);
-                break;
-        case PROP_UPDATINGDB:
-                g_value_set_int (value, server->updatingdb);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_server_create_instance (void)
-{
-        ARIO_LOG_FUNCTION_START
-
-        if (instance_type == ArioServerMpd) {
-                instance = ARIO_SERVER (ario_mpd_get_instance ());
+        if (interface_type == ArioServerMpd) {
+                interface = ARIO_SERVER_INTERFACE (ario_mpd_get_instance (instance));
 #ifdef ENABLE_XMMS2
-        } else if (instance_type == ArioServerXmms) {
-                instance = ARIO_SERVER (ario_xmms_get_instance ());
+        } else if (interface_type == ArioServerXmms) {
+                interface = ARIO_SERVER_INTERFACE (ario_xmms_get_instance (instance));
 #endif
         } else {
-                ARIO_LOG_ERROR ("Unknown server type: %d", instance_type);
+                ARIO_LOG_ERROR ("Unknown server type: %d", interface_type);
+                interface = ARIO_SERVER_INTERFACE (ario_mpd_get_instance (instance));
         }
 }
 
@@ -565,81 +219,29 @@ ario_server_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START
         if (!instance) {
-                ario_server_create_instance ();
+                instance = g_object_new (TYPE_ARIO_SERVER, NULL);
         }
+        if (!interface) {
+                ario_server_reset_interface ();
+        }
+
         return instance;
-}
-
-void
-ario_server_set_instance_type (ArioServerType type)
-{
-        if (type != instance_type) {
-                instance_type = type;
-                ario_server_create_instance ();
-        }
-}
-
-static gpointer
-ario_server_connect_thread (ArioServer *server)
-{
-        ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (server)->connect ();
 }
 
 gboolean
 ario_server_connect (void)
 {
         ARIO_LOG_FUNCTION_START
-        GtkWidget *win, *vbox,*label, *bar;
-        GThread* thread;
-        GtkWidget *dialog;
+
+        ario_server_reset_interface ();
 
         /* check if there is a connection */
-        if (ario_server_is_connected () || instance->connecting)
+        if (ario_server_is_connected () || interface->connecting)
                 return FALSE;
 
-        instance->connecting = TRUE;
-
-        thread = g_thread_create ((GThreadFunc) ario_server_connect_thread,
-                                  instance, TRUE, NULL);
-
-        win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_modal (GTK_WINDOW (win), TRUE);
-        vbox = gtk_vbox_new (FALSE, 0);
-        label = gtk_label_new (_("Connecting to server..."));
-        bar = gtk_progress_bar_new ();
-
-        gtk_container_add (GTK_CONTAINER (win), vbox);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
-        gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
-
-        gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
-        gtk_window_set_title (GTK_WINDOW (win), "Ario");
-        gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
-        gtk_widget_show_all (win);
-
-        while (instance->connecting) {
-                gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
-                while (gtk_events_pending ())
-                        gtk_main_iteration ();
-                g_usleep (200000);
-        }
-
-        g_thread_join (thread);
-
-        if (!ario_server_is_connected ()) {
-                dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, 
-                                                 GTK_MESSAGE_ERROR,
-                                                 GTK_BUTTONS_OK,
-                                                 _("Impossible to connect to server. Check the connection options."));
-                if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_NONE)
-                        gtk_widget_destroy (dialog);
-                g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STATE_CHANGED], 0);
-        }
-
-        gtk_widget_hide (win);
-        gtk_widget_destroy (win);
-
+        interface->connecting = TRUE;
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->connect ();
+        g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_CONNECTIVITY_CHANGED], 0);
         return FALSE;
 }
 
@@ -647,14 +249,24 @@ void
 ario_server_disconnect (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->disconnect ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->disconnect ();
+        g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_CONNECTIVITY_CHANGED], 0);
+}
+
+void
+ario_server_reconnect (void)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_server_disconnect ();
+        ario_server_connect ();
+        g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_CONNECTIVITY_CHANGED], 0);
 }
 
 void
 ario_server_update_db (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->update_db ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_db ();
 }
 
 gboolean
@@ -663,7 +275,7 @@ ario_server_is_connected (void)
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START
 
-        return ARIO_SERVER_GET_CLASS (instance)->is_connected ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->is_connected ();
 }
 
 GSList *
@@ -671,14 +283,14 @@ ario_server_list_tags (const ArioServerTag tag,
                        const ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->list_tags (tag, criteria);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->list_tags (tag, criteria);
 }
 
 GSList *
 ario_server_get_albums (const ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_albums (criteria);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_albums (criteria);
 }
 
 GSList *
@@ -686,71 +298,42 @@ ario_server_get_songs (const ArioServerCriteria *criteria,
                        const gboolean exact)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_songs (criteria, exact);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_songs (criteria, exact);
 }
 
 GSList *
 ario_server_get_songs_from_playlist (char *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_songs_from_playlist (playlist);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_songs_from_playlist (playlist);
 }
 
 GSList *
 ario_server_get_playlists (void)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_playlists ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_playlists ();
 }
 
 GSList *
 ario_server_get_playlist_changes (int playlist_id)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_playlist_changes (playlist_id);
-}
-
-void
-ario_server_set_default (ArioServer *server)
-{
-        ARIO_LOG_FUNCTION_START
-        if (server->song_id != 0)
-                g_object_set (G_OBJECT (server), "song_id", 0, NULL);
-
-        if (server->state != MPD_STATUS_STATE_UNKNOWN)
-                g_object_set (G_OBJECT (server), "state", MPD_STATUS_STATE_UNKNOWN, NULL);
-
-        if (server->volume != MPD_STATUS_NO_VOLUME)
-                g_object_set (G_OBJECT (server), "volume", MPD_STATUS_NO_VOLUME, NULL);
-
-        if (server->elapsed != 0)
-                g_object_set (G_OBJECT (server), "elapsed", 0, NULL);
-
-        if (server->playlist_id != -1)
-                g_object_set (G_OBJECT (server), "playlist_id", -1, NULL);
-
-        if (server->random != FALSE)
-                g_object_set (G_OBJECT (server), "random", FALSE, NULL);
-
-        if (server->repeat != FALSE)
-                g_object_set (G_OBJECT (server), "repeat", FALSE, NULL);
-
-        if (server->updatingdb != 0)
-                g_object_set (G_OBJECT (server), "updatingdb", 0, NULL);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_playlist_changes (playlist_id);
 }
 
 gboolean
 ario_server_update_status (void)
 {
-        return ARIO_SERVER_GET_CLASS (instance)->update_status ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_status ();
 }
 
 char *
 ario_server_get_current_title (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song->title;
+        if (interface->server_song)
+                return interface->server_song->title;
         else
                 return NULL;
 }
@@ -759,8 +342,8 @@ char *
 ario_server_get_current_name (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song->name;
+        if (interface->server_song)
+                return interface->server_song->name;
         else
                 return NULL;
 }
@@ -769,15 +352,15 @@ ArioServerSong *
 ario_server_get_current_song_on_server (void)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_current_song_on_server ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_current_song_on_server ();
 }
 
 ArioServerSong *
 ario_server_get_current_song (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song;
+        if (interface->server_song)
+                return interface->server_song;
         else
                 return NULL;
 }
@@ -786,8 +369,8 @@ char *
 ario_server_get_current_artist (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song->artist;
+        if (interface->server_song)
+                return interface->server_song->artist;
         else
                 return NULL;
 }
@@ -796,8 +379,8 @@ char *
 ario_server_get_current_album (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song->album;
+        if (interface->server_song)
+                return interface->server_song->album;
         else
                 return NULL;
 }
@@ -806,8 +389,8 @@ char *
 ario_server_get_current_song_path (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song->file;
+        if (interface->server_song)
+                return interface->server_song->file;
         else
                 return NULL;
 }
@@ -816,36 +399,36 @@ int
 ario_server_get_current_song_id (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->song_id;
+        return interface->song_id;
 }
 
 int
 ario_server_get_current_state (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->state;
+        return interface->state;
 }
 
 int
 ario_server_get_current_elapsed (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->elapsed;
+        return interface->elapsed;
 }
 
 int
 ario_server_get_current_volume (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->volume;
+        return interface->volume;
 }
 
 int
 ario_server_get_current_total_time (void)
 {
         ARIO_LOG_FUNCTION_START
-        if (instance->server_song)
-                return instance->server_song->time;
+        if (interface->server_song)
+                return interface->server_song->time;
         else
                 return 0;
 }
@@ -854,21 +437,21 @@ int
 ario_server_get_current_playlist_id (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->playlist_id;
+        return interface->playlist_id;
 }
 
 int
 ario_server_get_current_playlist_length (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->playlist_length;
+        return interface->playlist_length;
 }
 
 int
 ario_server_get_current_playlist_total_time (void)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_current_playlist_total_time ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_current_playlist_total_time ();
 }
 
 int
@@ -876,7 +459,7 @@ ario_server_get_crossfadetime (void)
 {
         ARIO_LOG_FUNCTION_START
         if (ario_server_is_connected ())
-                return instance->crossfade;
+                return interface->crossfade;
         else
                 return 0;
 }
@@ -885,76 +468,76 @@ gboolean
 ario_server_get_current_random (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->random;
+        return interface->random;
 }
 
 gboolean
 ario_server_get_current_repeat (void)
 {
         ARIO_LOG_FUNCTION_START
-        return instance->repeat;
+        return interface->repeat;
 }
 
 gboolean
 ario_server_get_updating (void)
 {
         ARIO_LOG_FUNCTION_START
-        return ario_server_is_connected () && instance->updatingdb;
+        return ario_server_is_connected () && interface->updatingdb;
 }
 
 unsigned long
 ario_server_get_last_update (void)
 {
-        return ARIO_SERVER_GET_CLASS (instance)->get_last_update ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_last_update ();
 }
 
 gboolean
 ario_server_is_paused (void)
 {
         ARIO_LOG_FUNCTION_START
-        return (instance->state == MPD_STATUS_STATE_PAUSE) || (instance->state == MPD_STATUS_STATE_STOP);
+        return (interface->state == MPD_STATUS_STATE_PAUSE) || (interface->state == MPD_STATUS_STATE_STOP);
 }
 
 void
 ario_server_do_next (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->do_next ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_next ();
 }
 
 void
 ario_server_do_prev (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->do_prev ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_prev ();
 }
 
 void
 ario_server_do_play (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->do_play ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_play ();
 }
 
 void
 ario_server_do_play_pos (gint id)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->do_play_pos (id);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_play_pos (id);
 }
 
 void
 ario_server_do_pause (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->do_pause ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_pause ();
 }
 
 void
 ario_server_do_stop (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->do_stop ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_stop ();
 }
 
 void
@@ -991,42 +574,42 @@ void
 ario_server_set_current_elapsed (const gint elapsed)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->set_current_elapsed (elapsed);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_elapsed (elapsed);
 }
 
 void
 ario_server_set_current_volume (const gint volume)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->set_current_volume (volume);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_volume (volume);
 }
 
 void
 ario_server_set_current_random (const gboolean random)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->set_current_random (random);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_random (random);
 }
 
 void
 ario_server_set_current_repeat (const gboolean repeat)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->set_current_repeat (repeat);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_repeat (repeat);
 }
 
 void
 ario_server_set_crossfadetime (const int crossfadetime)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->set_crossfadetime (crossfadetime);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_crossfadetime (crossfadetime);
 }
 
 void
 ario_server_clear (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->clear ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->clear ();
 }
 
 void
@@ -1038,7 +621,7 @@ ario_server_queue_add (const char *path)
         queue_action->type = ARIO_SERVER_ACTION_ADD;
         queue_action->path = path;
 
-        instance->queue = g_slist_append (instance->queue, queue_action);
+        interface->queue = g_slist_append (interface->queue, queue_action);
 }
 
 void
@@ -1048,7 +631,7 @@ ario_server_queue_delete_id (const int id)
         queue_action->type = ARIO_SERVER_ACTION_DELETE_ID;
         queue_action->id = id;
 
-        instance->queue = g_slist_append (instance->queue, queue_action);
+        interface->queue = g_slist_append (interface->queue, queue_action);
 }
 
 void
@@ -1059,7 +642,7 @@ ario_server_queue_delete_pos (const int pos)
         queue_action->type = ARIO_SERVER_ACTION_DELETE_POS;
         queue_action->pos = pos;
 
-        instance->queue = g_slist_append (instance->queue, queue_action);
+        interface->queue = g_slist_append (interface->queue, queue_action);
 }
 
 void
@@ -1072,7 +655,7 @@ ario_server_queue_move (const int old_pos,
         queue_action->old_pos = old_pos;
         queue_action->new_pos = new_pos;
 
-        instance->queue = g_slist_append (instance->queue, queue_action);
+        interface->queue = g_slist_append (interface->queue, queue_action);
 }
 
 
@@ -1080,7 +663,7 @@ void
 ario_server_queue_commit (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->queue_commit ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->queue_commit ();
 }
 
 void
@@ -1088,14 +671,14 @@ ario_server_insert_at (const GSList *songs,
                        const gint pos)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->insert_at (songs, pos);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->insert_at (songs, pos);
 }
 
 int
 ario_server_save_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START
-        int ret = ARIO_SERVER_GET_CLASS (instance)->save_playlist (name);
+        int ret = ARIO_SERVER_INTERFACE_GET_CLASS (interface)->save_playlist (name);
 
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
 
@@ -1106,7 +689,7 @@ void
 ario_server_delete_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->delete_playlist (name);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->delete_playlist (name);
 
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
 }
@@ -1115,21 +698,21 @@ void
 ario_server_use_count_inc (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->use_count_inc ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->use_count_inc ();
 }
 
 void
 ario_server_use_count_dec (void)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->use_count_dec ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->use_count_dec ();
 }
 
 GSList *
 ario_server_get_outputs (void)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_outputs ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_outputs ();
 }
 
 void
@@ -1137,21 +720,21 @@ ario_server_enable_output (int id,
                            gboolean enabled)
 {
         ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_GET_CLASS (instance)->enable_output (id, enabled);
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->enable_output (id, enabled);
 }
 
 ArioServerStats *
 ario_server_get_stats (void)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_stats ();
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_stats ();
 }
 
 GList *
 ario_server_get_songs_info (GSList *paths)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->get_songs_info (paths);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_songs_info (paths);
 }
 
 ArioServerFileList *
@@ -1159,7 +742,7 @@ ario_server_list_files (const char *path,
                         gboolean recursive)
 {
         ARIO_LOG_FUNCTION_START
-        return ARIO_SERVER_GET_CLASS (instance)->list_files (path, recursive);
+        return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->list_files (path, recursive);
 }
 
 void

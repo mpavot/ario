@@ -42,6 +42,8 @@ G_MODULE_EXPORT void ario_connection_preferences_host_changed_cb (GtkWidget *wid
                                                                   ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_port_changed_cb (GtkWidget *widget,
                                                                   ArioConnectionPreferences *connection_preferences);
+G_MODULE_EXPORT void ario_connection_preferences_type_changed_cb (GtkToggleAction *toggleaction,
+                                                                  ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
                                                                          ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_password_changed_cb (GtkWidget *widget,
@@ -84,6 +86,8 @@ struct ArioConnectionPreferencesPrivate
         GtkWidget *autodetect_button;
         GtkWidget *disconnect_button;
         GtkWidget *connect_button;
+        GtkWidget *mpd_radiobutton;
+        GtkWidget *xmms_radiobutton;
         GtkListStore *autodetect_model;
         GtkTreeSelection *autodetect_selection;
 
@@ -168,6 +172,10 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
                                                  G_CALLBACK (ario_connection_preferences_port_changed_cb),
                                                  connection_preferences);
 
+                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->mpd_radiobutton),
+                                                 G_CALLBACK (ario_connection_preferences_type_changed_cb),
+                                                 connection_preferences);
+
                 g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->password_entry),
                                                  G_CALLBACK (ario_connection_preferences_password_changed_cb),
                                                  connection_preferences);
@@ -183,6 +191,10 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->name_entry), profile->name);
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->host_entry), profile->host);
                 gtk_spin_button_set_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton), (gdouble) profile->port);
+                if (profile->type == ArioServerXmms)
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->xmms_radiobutton), TRUE);
+                else
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->mpd_radiobutton), TRUE);
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->password_entry), profile->password ? profile->password : "");
                 gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry), profile->musicdir ? profile->musicdir : "");
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->local_checkbutton), profile->local);
@@ -197,6 +209,7 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
 
                 ario_conf_set_string (PREF_HOST, profile->host);
                 ario_conf_set_integer (PREF_PORT, profile->port);
+                ario_conf_set_integer (PREF_SERVER_TYPE, profile->type);
                 ario_conf_set_string (PREF_PASSWORD, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->password_entry)));
                 ario_conf_set_string (PREF_MUSIC_DIR, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry)));
                 ario_conf_set_boolean (PREF_LOCAL, profile->local);
@@ -211,6 +224,10 @@ ario_connection_preferences_profile_selection_update (ArioConnectionPreferences 
 
                 g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->port_spinbutton),
                                                    G_CALLBACK (ario_connection_preferences_port_changed_cb),
+                                                   connection_preferences);
+
+                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->mpd_radiobutton),
+                                                   G_CALLBACK (ario_connection_preferences_type_changed_cb),
                                                    connection_preferences);
 
                 g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->password_entry),
@@ -234,8 +251,7 @@ ario_connection_preferences_profile_selection_changed_cb (GtkTreeSelection * sel
 {
         ARIO_LOG_FUNCTION_START
         if (ario_connection_preferences_profile_selection_update (connection_preferences)) {
-                ario_server_disconnect ();
-                ario_server_connect ();
+                ario_server_reconnect ();
                 ario_connection_preferences_sync_connection (connection_preferences);
         }
 }
@@ -321,6 +337,10 @@ ario_connection_preferences_new (void)
                 glade_xml_get_widget (xml, "disconnect_button");
         connection_preferences->priv->connect_button = 
                 glade_xml_get_widget (xml, "connect_button");
+        connection_preferences->priv->mpd_radiobutton = 
+                glade_xml_get_widget (xml, "mpd_radiobutton");
+        connection_preferences->priv->xmms_radiobutton = 
+                glade_xml_get_widget (xml, "xmms_radiobutton");
 
         rb_glade_boldify_label (xml, "connection_label");
 
@@ -349,6 +369,10 @@ ario_connection_preferences_new (void)
 
 #ifndef ENABLE_AVAHI
         gtk_widget_hide (connection_preferences->priv->autodetect_button);
+#endif
+
+#ifndef ENABLE_XMMS2
+        gtk_widget_set_sensitive (glade_xml_get_widget (xml, "servertype_hbox"), FALSE);
 #endif
 
         ario_connection_preferences_sync_connection (connection_preferences);
@@ -443,6 +467,19 @@ ario_connection_preferences_port_changed_cb (GtkWidget *widget,
                 ario_conf_set_integer (PREF_PORT,
                                        (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton)));
                 connection_preferences->priv->current_profile->port = (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton));
+        }
+}
+
+void ario_connection_preferences_type_changed_cb (GtkToggleAction *toggleaction,
+                                                  ArioConnectionPreferences *connection_preferences)
+
+{
+        ARIO_LOG_FUNCTION_START
+        if (!connection_preferences->priv->loading) {
+                ArioServerType type;
+                type = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->xmms_radiobutton)) ? ArioServerXmms : ArioServerMpd;
+                ario_conf_set_integer (PREF_SERVER_TYPE, type);
+                connection_preferences->priv->current_profile->type = type;
         }
 }
 
@@ -713,6 +750,7 @@ ario_connection_preferences_new_profile_cb (GtkWidget *widget,
         profile->name = g_strdup (_("New Profile"));
         profile->host = g_strdup ("localhost");
         profile->port = 6600;
+        profile->type = ArioServerMpd;
 
         for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
                 tmp_profile = (ArioProfile *) tmp->data;

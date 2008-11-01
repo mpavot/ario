@@ -20,7 +20,7 @@
 #ifndef __ARIO_MPD_H
 #define __ARIO_MPD_H
 
-#include "ario-server.h"
+#include "ario-server-interface.h"
 
 G_BEGIN_DECLS
 
@@ -35,19 +35,19 @@ typedef struct ArioMpdPrivate ArioMpdPrivate;
 
 typedef struct
 {
-        ArioServer parent;
+        ArioServerInterface parent;
 
         ArioMpdPrivate *priv;
 } ArioMpd;
 
 typedef struct
 {
-        ArioServerClass parent;
+        ArioServerInterfaceClass parent;
 } ArioMpdClass;
 
 GType                   ario_mpd_get_type                               (void) G_GNUC_CONST;
 
-ArioMpd *               ario_mpd_get_instance                           (void);
+ArioMpd *               ario_mpd_get_instance                           (ArioServer *server);
 
 G_END_DECLS
 

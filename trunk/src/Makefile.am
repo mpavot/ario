@@ -103,6 +103,8 @@ libario_la_SOURCES = \
 	servers/ario-mpd.h\
 	servers/ario-server.c\
 	servers/ario-server.h\
+	servers/ario-server-interface.c\
+	servers/ario-server-interface.h\
 	sources/ario-browser.c\
 	sources/ario-browser.h\
 	sources/ario-tree.c\

@@ -20,7 +20,7 @@
 #ifndef __ARIO_XMMS_H
 #define __ARIO_XMMS_H
 
-#include "ario-server.h"
+#include "ario-server-interface.h"
 
 G_BEGIN_DECLS
 
@@ -35,19 +35,19 @@ typedef struct ArioXmmsPrivate ArioXmmsPrivate;
 
 typedef struct
 {
-        ArioServer parent;
+        ArioServerInterface parent;
 
         ArioXmmsPrivate *priv;
 } ArioXmms;
 
 typedef struct
 {
-        ArioServerClass parent;
+        ArioServerInterfaceClass parent;
 } ArioXmmsClass;
 
 GType                   ario_xmms_get_type                               (void) G_GNUC_CONST;
 
-ArioXmms *               ario_xmms_get_instance                           (void);
+ArioXmms *              ario_xmms_get_instance                           (ArioServer *server);
 
 G_END_DECLS
 

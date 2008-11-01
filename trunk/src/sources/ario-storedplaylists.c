@@ -44,8 +44,8 @@ static void ario_storedplaylists_get_property (GObject *object,
                                                guint prop_id,
                                                GValue *value,
                                                GParamSpec *pspec);
-static void ario_storedplaylists_state_changed_cb (ArioServer *server,
-                                                   ArioStoredplaylists *storedplaylists);
+static void ario_storedplaylists_connectivity_changed_cb (ArioServer *server,
+                                                          ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_storedplaylists_changed_cb (ArioServer *server,
                                                              ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
@@ -336,7 +336,7 @@ ario_storedplaylists_new (GtkUIManager *mgr,
 
         /* Signals to synchronize the storedplaylists with server */
         g_signal_connect_object (server,
-                                 "state_changed", G_CALLBACK (ario_storedplaylists_state_changed_cb),
+                                 "state_changed", G_CALLBACK (ario_storedplaylists_connectivity_changed_cb),
                                  storedplaylists, 0);
         g_signal_connect_object (server,
                                  "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
@@ -463,14 +463,12 @@ ario_storedplaylists_playlists_selection_changed_cb (GtkTreeSelection *selection
 }
 
 static void
-ario_storedplaylists_state_changed_cb (ArioServer *server,
-                                       ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_connectivity_changed_cb (ArioServer *server,
+                                              ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START
-        if (storedplaylists->priv->connected != ario_server_is_connected ()) {
-                storedplaylists->priv->connected = ario_server_is_connected ();
-                ario_storedplaylists_fill_storedplaylists (storedplaylists);
-        }
+        storedplaylists->priv->connected = ario_server_is_connected ();
+        ario_storedplaylists_fill_storedplaylists (storedplaylists);
 }
 
 static void

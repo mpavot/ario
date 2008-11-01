@@ -41,8 +41,8 @@ static void ario_browser_get_property (GObject *object,
 static void ario_browser_reload_trees (ArioBrowser *browser);
 static void ario_browser_trees_changed_cb (guint notification_id,
                                            ArioBrowser *browser);
-static void ario_browser_state_changed_cb (ArioServer *server,
-                                           ArioBrowser *browser);
+static void ario_browser_connectivity_changed_cb (ArioServer *server,
+                                                  ArioBrowser *browser);
 static void ario_browser_dbtime_changed_cb (ArioServer *server,
                                             ArioBrowser *browser);
 static void ario_browser_fill_first (ArioBrowser *browser);
@@ -68,8 +68,6 @@ static void ario_browser_cmd_songs_properties (GtkAction *action,
 struct ArioBrowserPrivate
 {
         GSList *trees;
-
-        gboolean connected;
 
         GtkUIManager *ui_manager;
 
@@ -163,7 +161,6 @@ ario_browser_init (ArioBrowser *browser)
 
         browser->priv = ARIO_BROWSER_GET_PRIVATE (browser);
 
-        browser->priv->connected = FALSE;
         browser->priv->trees = NULL;
 }
 
@@ -238,7 +235,7 @@ ario_browser_new (GtkUIManager *mgr,
 
         /* Signals to synchronize the browser with server */
         g_signal_connect_object (server,
-                                 "state_changed", G_CALLBACK (ario_browser_state_changed_cb),
+                                 "connectivity_changed", G_CALLBACK (ario_browser_connectivity_changed_cb),
                                  browser, 0);
 
         g_signal_connect_object (server,
@@ -316,14 +313,11 @@ ario_browser_trees_changed_cb (guint notification_id,
 }
 
 static void
-ario_browser_state_changed_cb (ArioServer *server,
-                               ArioBrowser *browser)
+ario_browser_connectivity_changed_cb (ArioServer *server,
+                                      ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START
-        if (browser->priv->connected != ario_server_is_connected ())
-                ario_browser_fill_first (browser);
-
-        browser->priv->connected = ario_server_is_connected ();
+        ario_browser_fill_first (browser);
 }
 
 static void

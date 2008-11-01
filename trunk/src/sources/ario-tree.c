@@ -91,8 +91,6 @@ struct ArioTreePrivate
         GtkListStore *model;
         GtkTreeSelection *selection;
 
-        gboolean connected;
-
         gboolean dragging;
         gboolean pressed;
         gint drag_start_x;
@@ -262,7 +260,6 @@ ario_tree_init (ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START
         tree->priv = ARIO_TREE_GET_PRIVATE (tree);
-        tree->priv->connected = FALSE;
 }
 
 static void
