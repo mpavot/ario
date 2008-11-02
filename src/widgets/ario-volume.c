@@ -27,6 +27,7 @@
 #include "widgets/ario-volume.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "lib/ario-conf.h"
 #include "servers/ario-server.h"
 
 static void clicked_cb (GtkButton *button, ArioVolume *volume);

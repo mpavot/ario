@@ -76,10 +76,10 @@ ario_profiles_free (ArioProfile* profile)
 }
 
 GSList*
-ario_profiles_read (void)
+ario_profiles_get (void)
 {
         ARIO_LOG_FUNCTION_START
-        GSList* profiles = NULL;
+        static GSList *profiles = NULL;
         ArioProfile *profile;
         xmlDocPtr doc;
         xmlNodePtr cur;
@@ -92,6 +92,9 @@ ario_profiles_read (void)
         xmlChar *xml_local;
         xmlChar *xml_current;
         xmlChar *xml_type;
+
+        if (profiles)
+                return profiles;
 
         xml_filename = ario_profiles_get_xml_filename();
 

@@ -20,11 +20,10 @@
 #include <glib.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "lib/ario-conf.h"
 #include "covers/ario-cover-local.h"
 #include "covers/ario-cover.h"
 #include "ario-util.h"
-#include "preferences/ario-preferences.h"
+#include "ario-profiles.h"
 #include "ario-debug.h"
 
 gboolean ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
@@ -108,7 +107,7 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
 
         if (!file)
                 return FALSE;
-        musicdir = ario_conf_get_string (PREF_MUSIC_DIR, PREF_MUSIC_DIR_DEFAULT);
+        musicdir = ario_profiles_get_current (ario_profiles_get ())->musicdir;
         if (musicdir && strlen (musicdir) > 1) {
                 for (i = 0; valid_cover_names[i]; i++) {
                         filename = g_build_filename (musicdir, file, valid_cover_names[i], NULL);
@@ -132,7 +131,6 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                         g_free (filename);
                 }
         }
-        g_free (musicdir);
 
         return ret;
 }

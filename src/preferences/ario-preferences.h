@@ -20,26 +20,6 @@
 #ifndef __ARIO_PREFERENCES_H
 #define __ARIO_PREFERENCES_H
 
-/* Host to connect to */
-#define PREF_HOST                               "host"
-#define PREF_HOST_DEFAULT                       "localhost"
-
-/* Port to connect to */
-#define PREF_PORT                               "port"
-#define PREF_PORT_DEFAULT                       6600
-
-/* Server Type (0 = MPD, 1 = XMMS) */
-#define PREF_SERVER_TYPE                        "server_type"
-#define PREF_SERVER_TYPE_DEFAULT                0
-
-/* The password to connect to server */
-#define PREF_PASSWORD                           "password"
-#define PREF_PASSWORD_DEFAULT                   NULL
-
-/* True if Ario is on the same computer as SERVER */
-#define PREF_LOCAL                              "local"
-#define PREF_LOCAL_DEFAULT                      FALSE
-
 /* Define if Ario must autoconnect to server or not */
 #define PREF_AUTOCONNECT                        "autoconnect"
 #define PREF_AUTOCONNECT_DEFAULT                TRUE
@@ -215,10 +195,6 @@
 /* List of active lyrics providers */
 #define PREF_LYRICS_ACTIVE_PROVIDERS_LIST         "active-lyrics-providers"
 #define PREF_LYRICS_ACTIVE_PROVIDERS_LIST_DEFAULT "lyricwiki,leoslyrics"
-
-/* Define the path to the music */
-#define PREF_MUSIC_DIR                          "music-dir"
-#define PREF_MUSIC_DIR_DEFAULT                  NULL
 
 /* If true, Ario windows is hidden when closed */
 #define PREF_HIDE_ON_CLOSE                      "hide-on-close"

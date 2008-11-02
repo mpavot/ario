@@ -24,7 +24,8 @@
 #include <limits.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "ario-mpd.h"
+#include "servers/ario-mpd.h"
+#include "ario-profiles.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
@@ -227,11 +228,10 @@ ario_mpd_connect_to (ArioMpd *mpd,
                 return FALSE;
         }
 
-        password = ario_conf_get_string (PREF_PASSWORD, PREF_PASSWORD_DEFAULT);
+        password = ario_profiles_get_current (ario_profiles_get ())->password;
         if (password) {
                 mpd_sendPasswordCommand (connection, password);
                 mpd_finishCommand (connection);
-                g_free (password);
         }
 
         mpd_sendStatsCommand (connection);
@@ -257,16 +257,18 @@ ario_mpd_connect_thread (ArioServer *server)
         gchar *hostname;
         int port;
         float timeout;
+        ArioProfile *profile;
 
         /* TODO: Remove */
         ario_mpd_use_count_inc ();
 
-        hostname = ario_conf_get_string (PREF_HOST, PREF_HOST_DEFAULT);
-        port = ario_conf_get_integer (PREF_PORT, PREF_PORT_DEFAULT);
+        profile = ario_profiles_get_current (ario_profiles_get ());
+        hostname = profile->host;
+        port = profile->port;
         timeout = 5.0;
 
         if (hostname == NULL)
-                hostname = g_strdup ("localhost");
+                hostname = "localhost";
 
         if (port == 0)
                 port = 6600;
@@ -275,7 +277,6 @@ ario_mpd_connect_thread (ArioServer *server)
                 ario_mpd_disconnect ();
         }
 
-        g_free (hostname);
         instance->priv->support_empty_tags = FALSE;
         instance->parent.connecting = FALSE;
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-01 15:41+0100\n"
+"POT-Creation-Date: 2008-11-02 14:57+0100\n"
 "PO-Revision-Date: 2008-07-01 12:37+0000\n"
 "Last-Translator: Magnus Malmsten <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -45,7 +45,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr "Ladda automatiskt ner albumgrafik till den uppspelade låten"
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-coverselect.c:260
 #: ../src/shell/ario-shell-preferences.c:124
 #, fuzzy
 msgid "Covers"
@@ -66,85 +66,33 @@ msgid "Use Amazon."
 msgstr "Använd Amazon"
 
 #: ../data/glade/connection-prefs.glade.h:1
-msgid "Auto detect"
-msgstr "Upptäck automatiskt"
-
-#: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
 msgstr "Anslutning"
 
-#: ../data/glade/connection-prefs.glade.h:3
-#: ../src/widgets/ario-firstlaunch.c:132
-msgid "Default"
-msgstr "Standard"
-
-#: ../data/glade/connection-prefs.glade.h:4
-#: ../data/glade/connection-assistant.glade.h:2
-#: ../src/widgets/ario-firstlaunch.c:178
-msgid "Host :"
-msgstr "Värd:"
-
-#: ../data/glade/connection-prefs.glade.h:5
-msgid "Music directory :"
-msgstr "Musikkatalog :"
-
-#: ../data/glade/connection-prefs.glade.h:6
-msgid "Music server is on the same computer as Ario"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:840
-#: ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Namn:"
-
-#: ../data/glade/connection-prefs.glade.h:8
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Lösenord:"
-
-#: ../data/glade/connection-prefs.glade.h:9
-#: ../data/glade/connection-assistant.glade.h:4
-#: ../src/widgets/ario-firstlaunch.c:180
-msgid "Port :"
-msgstr "Port:"
-
-#: ../data/glade/connection-prefs.glade.h:10
-#, fuzzy
-msgid "Server type : "
-msgstr "Server"
-
-#: ../data/glade/connection-prefs.glade.h:11
-msgid "XMMS 2 (Experimental)"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:12
+#: ../data/glade/connection-prefs.glade.h:2
 #, fuzzy
 msgid "_Autoconnect on startup"
 msgstr "Anslut automatisk vid uppstart"
 
-#: ../data/glade/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:155
 msgid "_Connect"
 msgstr "_Anslut"
 
-#: ../data/glade/connection-prefs.glade.h:14 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:158
 msgid "_Disconnect"
 msgstr "_Koppla från"
 
 #: ../data/glade/connection-assistant.glade.h:1
-msgid "Automatic configuration"
-msgstr "Automatisk konfiguration"
-
-#: ../data/glade/connection-assistant.glade.h:3
-msgid "Manual configuration"
-msgstr "Manuell inställning"
-
-#: ../data/glade/connection-assistant.glade.h:5
+#, fuzzy
 msgid ""
-"You need to specify an MPD server to connect to. If you don't see your MPD "
-"server thanks to the automatic configuration, you should check that zeroconf "
-"is activated in your MPD configuration or use the manual configuration."
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
 msgstr ""
+"Om du inte kan se din MPD-server med hjälp av automatisk upptäckning av "
+"server, kontrollera att zeroconf är aktiverat i MPD-inställningarna eller "
+"använd manuell inställning."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -171,9 +119,9 @@ msgid "Search"
 msgstr "Sök"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:43
+#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
 #: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:684
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:688
 msgid "Album"
 msgstr "Album"
 
@@ -181,16 +129,16 @@ msgstr "Album"
 msgid "Allow only one instance of Ario"
 msgstr ""
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:42
+#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:682
+#: ../src/widgets/ario-tray-icon.c:686
 msgid "Artist"
 msgstr "Artist"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:48
+#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
 #: ../src/widgets/ario-playlist.c:319
 msgid "Date"
 msgstr "Datum"
@@ -206,7 +154,7 @@ msgstr "Fil"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:47
+#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:319
 msgid "Genre"
 msgstr "Genre"
@@ -239,15 +187,15 @@ msgid "Show tabs"
 msgstr "Visa flikar"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:44
+#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
 #: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:686
+#: ../src/widgets/ario-tray-icon.c:690
 msgid "Title"
 msgstr "Titel"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:45
+#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Spår"
@@ -460,7 +408,7 @@ msgstr "dagar"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Omslaget finns redan. Vill du ersätta det?"
 
-#: ../src/covers/ario-cover-local.c:59
+#: ../src/covers/ario-cover-local.c:58
 msgid "Music Directory"
 msgstr "Musikkatalog"
 
@@ -509,50 +457,11 @@ msgstr "Alfabetiskt"
 msgid "By year"
 msgstr "Efter år"
 
-#: ../src/preferences/ario-connection-preferences.c:358
-msgid "Profile"
-msgstr "Profil"
-
-#: ../src/preferences/ario-connection-preferences.c:603
-msgid "Server autodetection"
-msgstr "Automatisk upptäckning av server"
-
-#: ../src/preferences/ario-connection-preferences.c:614
-#, fuzzy
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Om du inte kan se din MPD-server med hjälp av automatisk upptäckning av "
-"server, kontrollera att zeroconf är aktiverat i MPD-inställningarna eller "
-"använd manuell inställning."
-
-#: ../src/preferences/ario-connection-preferences.c:624
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
-#: ../src/widgets/ario-firstlaunch.c:278
 msgid "Name"
 msgstr "Namn"
-
-#: ../src/preferences/ario-connection-preferences.c:632
-#: ../src/widgets/ario-firstlaunch.c:286
-msgid "Host"
-msgstr "Värd"
-
-#: ../src/preferences/ario-connection-preferences.c:640
-#: ../src/widgets/ario-firstlaunch.c:294
-msgid "Port"
-msgstr "Port"
-
-#: ../src/preferences/ario-connection-preferences.c:703
-msgid "You must select a server."
-msgstr "Du måste välja en server."
-
-#: ../src/preferences/ario-connection-preferences.c:750
-msgid "New Profile"
-msgstr "Ny profil"
 
 #: ../src/preferences/ario-server-preferences.c:211
 #: ../src/preferences/ario-stats-preferences.c:152
@@ -585,12 +494,12 @@ msgstr "Spela nästa låt"
 msgid "Do nothing"
 msgstr "Gör ingenting"
 
-#: ../src/servers/ario-mpd.c:299
+#: ../src/servers/ario-mpd.c:300
 #, fuzzy
 msgid "Connecting to server..."
 msgstr "Ansluter till MPD-server..."
 
-#: ../src/servers/ario-mpd.c:324
+#: ../src/servers/ario-mpd.c:325
 #, fuzzy
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
@@ -598,13 +507,13 @@ msgstr ""
 "anslutningen."
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:49
+#: ../src/servers/ario-server.c:50
 #, fuzzy
 msgid "Composer"
 msgstr "Kompositör:"
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 #, fuzzy
 msgid "Performer"
 msgstr "Uppträdande :"
@@ -612,12 +521,12 @@ msgstr "Uppträdande :"
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:53
+#: ../src/servers/ario-server.c:54
 msgid "Filename"
 msgstr "Filnamn"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Any"
 msgstr "Valfri"
 
@@ -822,7 +731,7 @@ msgstr ""
 "%i skivomslag hittades inte\n"
 "%i skivomslag finns redan"
 
-#: ../src/shell/ario-shell-coverselect.c:247
+#: ../src/shell/ario-shell-coverselect.c:248
 msgid "Cover Download"
 msgstr "Ladda ner skivomslag"
 
@@ -877,12 +786,20 @@ msgstr "Låtar"
 msgid "Song Properties"
 msgstr "Låtegenskaper"
 
-#: ../src/widgets/ario-firstlaunch.c:177
+#: ../src/widgets/ario-firstlaunch.c:78
 #, fuzzy
 msgid "The following configuration will be used:"
 msgstr "Följande inställningar kommer användas"
 
-#: ../src/widgets/ario-firstlaunch.c:242
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Värd:"
+
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port:"
+
+#: ../src/widgets/ario-firstlaunch.c:102
 #, fuzzy
 msgid ""
 "It is the first time you launch Ario.\n"
@@ -891,15 +808,15 @@ msgstr ""
 "Detta är första gången du startar Ario.\n"
 "Assistenten kommer hjälpa att dig med inställningarna."
 
-#: ../src/widgets/ario-firstlaunch.c:247
+#: ../src/widgets/ario-firstlaunch.c:107
 msgid "Welcome to Ario"
 msgstr "Välkommen till Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:312
+#: ../src/widgets/ario-firstlaunch.c:126
 msgid "Configuration"
 msgstr "Inställningar"
 
-#: ../src/widgets/ario-firstlaunch.c:324
+#: ../src/widgets/ario-firstlaunch.c:138
 msgid "Confirmation"
 msgstr "Bekräftelse"
 
@@ -923,7 +840,7 @@ msgstr "Stoppa musiken"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:803
+#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:807
 msgid " of "
 msgstr " av "
 
@@ -1105,6 +1022,10 @@ msgstr "Tid för senaste inrapportering:"
 msgid "Last.fm Profile"
 msgstr "Last.fm-profil"
 
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Lösenord:"
+
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Spår i kö:"
@@ -1207,6 +1128,10 @@ msgstr "Internet radion"
 msgid "Add a WebRadio"
 msgstr "Lägg till en webbradio"
 
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Namn:"
+
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1248,6 +1173,43 @@ msgstr "Ett tillägg för att söka artister på wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Auto detect"
+#~ msgstr "Upptäck automatiskt"
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#~ msgid "Music directory :"
+#~ msgstr "Musikkatalog :"
+
+#, fuzzy
+#~ msgid "Server type : "
+#~ msgstr "Server"
+
+#~ msgid "Automatic configuration"
+#~ msgstr "Automatisk konfiguration"
+
+#~ msgid "Manual configuration"
+#~ msgstr "Manuell inställning"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Server autodetection"
+#~ msgstr "Automatisk upptäckning av server"
+
+#~ msgid "Host"
+#~ msgstr "Värd"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "You must select a server."
+#~ msgstr "Du måste välja en server."
+
+#~ msgid "New Profile"
+#~ msgstr "Ny profil"
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Spara spellista"

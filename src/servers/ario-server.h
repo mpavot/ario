@@ -136,7 +136,7 @@ typedef struct
 
         void (*album_changed)           (ArioServer *server);
 
-        void (*connectivity_changed)            (ArioServer *server);
+        void (*connectivity_changed)    (ArioServer *server);
 
         void (*state_changed)           (ArioServer *server);
 

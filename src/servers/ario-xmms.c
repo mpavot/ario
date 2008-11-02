@@ -27,6 +27,7 @@
 #include "servers/ario-xmms.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "ario-profiles.h"
 #include <xmmsclient/xmmsclient.h>
 #include <xmmsclient/xmmsclient-glib.h>
 
@@ -505,13 +506,15 @@ ario_xmms_connect (void)
         gchar *hostname;
         int port;
         float timeout;
+        ArioProfile *profile;
 
-        hostname = ario_conf_get_string (PREF_HOST, PREF_HOST_DEFAULT);
-        port = ario_conf_get_integer (PREF_PORT, PREF_PORT_DEFAULT);
+        profile = ario_profiles_get_current (ario_profiles_get ());
+        hostname = profile->host;
+        port = profile->port;
         timeout = 5.0;
 
         if (hostname == NULL)
-                hostname = g_strdup ("localhost");
+                hostname = "localhost";
 
         if (port == 0)
                 port = 6600;
@@ -520,7 +523,6 @@ ario_xmms_connect (void)
                 ario_xmms_disconnect ();
         }
 
-        g_free (hostname);
         instance->parent.connecting = FALSE;
 }
 
