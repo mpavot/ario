@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-01 15:41+0100\n"
+"POT-Creation-Date: 2008-11-02 14:57+0100\n"
 "PO-Revision-Date: 2008-10-22 14:18+0000\n"
 "Last-Translator: Alexei Klimenko <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -42,7 +42,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr "Автоматически скачать обложку альбома играющей песни"
 
 #: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-coverselect.c:260
 #: ../src/shell/ario-shell-preferences.c:124
 msgid "Covers"
 msgstr "Обложки"
@@ -60,83 +60,28 @@ msgid "Use Amazon."
 msgstr "Использовать Amazon."
 
 #: ../data/glade/connection-prefs.glade.h:1
-msgid "Auto detect"
-msgstr "Автоопределение"
-
-#: ../data/glade/connection-prefs.glade.h:2
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
 msgstr "Соединение"
 
-#: ../data/glade/connection-prefs.glade.h:3
-#: ../src/widgets/ario-firstlaunch.c:132
-msgid "Default"
-msgstr "По умолчанию"
-
-#: ../data/glade/connection-prefs.glade.h:4
-#: ../data/glade/connection-assistant.glade.h:2
-#: ../src/widgets/ario-firstlaunch.c:178
-msgid "Host :"
-msgstr "Хост :"
-
-#: ../data/glade/connection-prefs.glade.h:5
-msgid "Music directory :"
-msgstr "Музыкальная директория :"
-
-#: ../data/glade/connection-prefs.glade.h:6
-msgid "Music server is on the same computer as Ario"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:7 ../plugins/radios/ario-radio.c:840
-#: ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Название :"
-
-#: ../data/glade/connection-prefs.glade.h:8
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Пароль :"
-
-#: ../data/glade/connection-prefs.glade.h:9
-#: ../data/glade/connection-assistant.glade.h:4
-#: ../src/widgets/ario-firstlaunch.c:180
-msgid "Port :"
-msgstr "Порт :"
-
-#: ../data/glade/connection-prefs.glade.h:10
-#, fuzzy
-msgid "Server type : "
-msgstr "Сервер"
-
-#: ../data/glade/connection-prefs.glade.h:11
-msgid "XMMS 2 (Experimental)"
-msgstr ""
-
-#: ../data/glade/connection-prefs.glade.h:12
+#: ../data/glade/connection-prefs.glade.h:2
 msgid "_Autoconnect on startup"
 msgstr "Автосоединение при запуске"
 
-#: ../data/glade/connection-prefs.glade.h:13 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:155
 msgid "_Connect"
 msgstr "_Соединить"
 
-#: ../data/glade/connection-prefs.glade.h:14 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:158
 msgid "_Disconnect"
 msgstr "_Отключить"
 
 #: ../data/glade/connection-assistant.glade.h:1
-msgid "Automatic configuration"
-msgstr "Автоматическая настройка"
-
-#: ../data/glade/connection-assistant.glade.h:3
-msgid "Manual configuration"
-msgstr "Ручная настройка"
-
-#: ../data/glade/connection-assistant.glade.h:5
+#, fuzzy
 msgid ""
-"You need to specify an MPD server to connect to. If you don't see your MPD "
-"server thanks to the automatic configuration, you should check that zeroconf "
-"is activated in your MPD configuration or use the manual configuration."
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
 msgstr ""
 "Вам нужно точно определить MPD-сервер для соединения. Если Вы не знаете Ваш "
 "MPD-сервер, воспользуйтесь автоматической настройкой, проверьте активно ли "
@@ -167,9 +112,9 @@ msgid "Search"
 msgstr "Поиск"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:43
+#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
 #: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:684
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:688
 msgid "Album"
 msgstr "Альбом"
 
@@ -177,16 +122,16 @@ msgstr "Альбом"
 msgid "Allow only one instance of Ario"
 msgstr "Позволять только один экземпляр Ario"
 
-#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:42
+#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:682
+#: ../src/widgets/ario-tray-icon.c:686
 msgid "Artist"
 msgstr "Исполнитель"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:48
+#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
 #: ../src/widgets/ario-playlist.c:319
 msgid "Date"
 msgstr "Дата"
@@ -201,7 +146,7 @@ msgstr "_Файл"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:47
+#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:319
 msgid "Genre"
 msgstr "Жанр"
@@ -233,15 +178,15 @@ msgid "Show tabs"
 msgstr "Показать вкладки"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:44
+#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
 #: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:686
+#: ../src/widgets/ario-tray-icon.c:690
 msgid "Title"
 msgstr "Заголовок"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:45
+#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Дорожка"
@@ -442,7 +387,7 @@ msgstr "дней"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Обложка уже существует. Вы точно хотите заменить?"
 
-#: ../src/covers/ario-cover-local.c:59
+#: ../src/covers/ario-cover-local.c:58
 msgid "Music Directory"
 msgstr "Музыкальная директория"
 
@@ -490,49 +435,11 @@ msgstr "По алфавиту"
 msgid "By year"
 msgstr "По годам"
 
-#: ../src/preferences/ario-connection-preferences.c:358
-msgid "Profile"
-msgstr "Профиль"
-
-#: ../src/preferences/ario-connection-preferences.c:603
-msgid "Server autodetection"
-msgstr "Сервер автоопределения"
-
-#: ../src/preferences/ario-connection-preferences.c:614
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Если Вы не знаете Ваш MPD-сервер, используйте автоматическое определение, "
-"проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
-"ручную настройку."
-
-#: ../src/preferences/ario-connection-preferences.c:624
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
-#: ../src/widgets/ario-firstlaunch.c:278
 msgid "Name"
 msgstr "Название"
-
-#: ../src/preferences/ario-connection-preferences.c:632
-#: ../src/widgets/ario-firstlaunch.c:286
-msgid "Host"
-msgstr "Хост"
-
-#: ../src/preferences/ario-connection-preferences.c:640
-#: ../src/widgets/ario-firstlaunch.c:294
-msgid "Port"
-msgstr "Порт"
-
-#: ../src/preferences/ario-connection-preferences.c:703
-msgid "You must select a server."
-msgstr "Вы должны обязательно выбрать сервер."
-
-#: ../src/preferences/ario-connection-preferences.c:750
-msgid "New Profile"
-msgstr "Новый профиль"
 
 #: ../src/preferences/ario-server-preferences.c:211
 #: ../src/preferences/ario-stats-preferences.c:152
@@ -565,35 +472,35 @@ msgstr "Играть следующую песню"
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
-#: ../src/servers/ario-mpd.c:299
+#: ../src/servers/ario-mpd.c:300
 #, fuzzy
 msgid "Connecting to server..."
 msgstr "Соединение с MPD"
 
-#: ../src/servers/ario-mpd.c:324
+#: ../src/servers/ario-mpd.c:325
 #, fuzzy
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Невозможно соединиться с mpd. Проверьте настройки соединения."
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:49
+#: ../src/servers/ario-server.c:50
 msgid "Composer"
 msgstr "Композитор"
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 msgid "Performer"
 msgstr "Исполнитель"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:53
+#: ../src/servers/ario-server.c:54
 msgid "Filename"
 msgstr "Имя файла"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Any"
 msgstr "Любой"
 
@@ -802,7 +709,7 @@ msgstr ""
 "%i обложек не найдено\n"
 "%i обложек уже существует"
 
-#: ../src/shell/ario-shell-coverselect.c:247
+#: ../src/shell/ario-shell-coverselect.c:248
 msgid "Cover Download"
 msgstr "Загрузить обложку"
 
@@ -856,11 +763,19 @@ msgstr "Композиций"
 msgid "Song Properties"
 msgstr "Свойства композиции"
 
-#: ../src/widgets/ario-firstlaunch.c:177
+#: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Следующая конфигурация будет использована:"
 
-#: ../src/widgets/ario-firstlaunch.c:242
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Хост :"
+
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Порт :"
+
+#: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -868,15 +783,15 @@ msgstr ""
 "Это Ваш первый запуск Ario.\n"
 "Этот ассистент поможет Вам настроить проигрыватель."
 
-#: ../src/widgets/ario-firstlaunch.c:247
+#: ../src/widgets/ario-firstlaunch.c:107
 msgid "Welcome to Ario"
 msgstr "Добро пожаловать в Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:312
+#: ../src/widgets/ario-firstlaunch.c:126
 msgid "Configuration"
 msgstr "Настройка"
 
-#: ../src/widgets/ario-firstlaunch.c:324
+#: ../src/widgets/ario-firstlaunch.c:138
 msgid "Confirmation"
 msgstr "Подтверждение"
 
@@ -899,7 +814,7 @@ msgstr "Остановить музыку"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:803
+#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:807
 msgid " of "
 msgstr " из "
 
@@ -1078,6 +993,10 @@ msgstr "Последняя отправка данных:"
 msgid "Last.fm Profile"
 msgstr "Профиль пользователя Last.fm"
 
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Пароль :"
+
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "В очереди:"
@@ -1176,6 +1095,10 @@ msgstr "Интернет-Радио"
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
 
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Название :"
+
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1217,6 +1140,52 @@ msgstr "Плагин для поиска текущего артиста на wi
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Википедия"
+
+#~ msgid "Auto detect"
+#~ msgstr "Автоопределение"
+
+#~ msgid "Default"
+#~ msgstr "По умолчанию"
+
+#~ msgid "Music directory :"
+#~ msgstr "Музыкальная директория :"
+
+#, fuzzy
+#~ msgid "Server type : "
+#~ msgstr "Сервер"
+
+#~ msgid "Automatic configuration"
+#~ msgstr "Автоматическая настройка"
+
+#~ msgid "Manual configuration"
+#~ msgstr "Ручная настройка"
+
+#~ msgid "Profile"
+#~ msgstr "Профиль"
+
+#~ msgid "Server autodetection"
+#~ msgstr "Сервер автоопределения"
+
+#~ msgid ""
+#~ "If you don't see your MPD server thanks to the automatic detection, you "
+#~ "should check that zeroconf is activated in your MPD configuration or use "
+#~ "the manual configuration."
+#~ msgstr ""
+#~ "Если Вы не знаете Ваш MPD-сервер, используйте автоматическое определение, "
+#~ "проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
+#~ "ручную настройку."
+
+#~ msgid "Host"
+#~ msgstr "Хост"
+
+#~ msgid "Port"
+#~ msgstr "Порт"
+
+#~ msgid "You must select a server."
+#~ msgstr "Вы должны обязательно выбрать сервер."
+
+#~ msgid "New Profile"
+#~ msgstr "Новый профиль"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""

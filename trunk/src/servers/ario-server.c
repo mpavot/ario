@@ -31,6 +31,7 @@
 #endif
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "ario-profiles.h"
 
 #define NORMAL_TIMEOUT 500
 #define LAZY_TIMEOUT 12000
@@ -191,7 +192,7 @@ ario_server_reset_interface (void)
         static ArioServerType interface_type = -1;
         ArioServerType new_interface_type;
 
-        new_interface_type = ario_conf_get_integer (PREF_SERVER_TYPE, PREF_SERVER_TYPE_DEFAULT);
+        new_interface_type = ario_profiles_get_current (ario_profiles_get ())->type;
 
         if (new_interface_type == interface_type)
                 return;

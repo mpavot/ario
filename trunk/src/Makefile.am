@@ -133,6 +133,8 @@ libario_la_SOURCES = \
 	shell/ario-shell-songinfos.h\
 	shell/ario-shell-similarartists.c\
 	shell/ario-shell-similarartists.h\
+	widgets/ario-connection-widget.c\
+	widgets/ario-connection-widget.h\
 	widgets/ario-firstlaunch.c\
 	widgets/ario-firstlaunch.h\
 	widgets/ario-header.c\

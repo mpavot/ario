@@ -37,7 +37,7 @@ typedef struct
         ArioServerType type;
 } ArioProfile;
 
-GSList*                  ario_profiles_read              (void);
+GSList*                 ario_profiles_get               (void);
 
 void                    ario_profiles_save              (GSList* profiles);
 

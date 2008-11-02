@@ -27,80 +27,26 @@
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/ario-conf.h"
-#ifdef ENABLE_AVAHI
-#include "ario-avahi.h"
-#endif
 #include "ario-debug.h"
 #include "ario-profiles.h"
 #include "servers/ario-server.h"
+#include "widgets/ario-connection-widget.h"
 
-static void ario_connection_preferences_finalize (GObject *object);
 static void ario_connection_preferences_sync_connection (ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_name_changed_cb (GtkWidget *widget,
-                                                                  ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_host_changed_cb (GtkWidget *widget,
-                                                                  ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_port_changed_cb (GtkWidget *widget,
-                                                                  ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_type_changed_cb (GtkToggleAction *toggleaction,
-                                                                  ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
                                                                          ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_password_changed_cb (GtkWidget *widget,
-                                                                      ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_local_changed_cb (GtkWidget *widget,
-                                                                   ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_musicdir_changed_cb (GtkWidget *widget,
-                                                                      ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_autodetect_cb (GtkWidget *widget,
-                                                                ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_open_cb (GtkWidget *widget,
-                                                          ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_new_profile_cb (GtkWidget *widget,
-                                                                 ArioConnectionPreferences *connection_preferences);
-G_MODULE_EXPORT void ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
-                                                                    ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_connect_cb (GtkWidget *widget,
                                                              ArioConnectionPreferences *connection_preferences);
 G_MODULE_EXPORT void ario_connection_preferences_disconnect_cb (GtkWidget *widget,
                                                                 ArioConnectionPreferences *connection_preferences);
 
-
 struct ArioConnectionPreferencesPrivate
 {
-        GtkWidget *profile_treeview;
-        GtkListStore *profile_model;
-        GtkTreeSelection *profile_selection;
-        GSList *profiles;
-        ArioProfile *current_profile;
-
-        GtkWidget *name_entry;
-        GtkWidget *host_entry;
-        GtkWidget *port_spinbutton;
-        GtkWidget *password_entry;
-        GtkWidget *local_checkbutton;
-        GtkWidget *musicdir_entry;
-        GtkWidget *musicdir_hbox;
-        GtkWidget *musicdir_label;
         GtkWidget *autoconnect_checkbutton;
-        GtkWidget *autodetect_button;
         GtkWidget *disconnect_button;
         GtkWidget *connect_button;
-        GtkWidget *mpd_radiobutton;
-        GtkWidget *xmms_radiobutton;
-        GtkListStore *autodetect_model;
-        GtkTreeSelection *autodetect_selection;
 
         gboolean loading;
-};
-
-
-enum
-{
-        NAME_COLUMN,
-        HOST_COLUMN,
-        PORT_COLUMN,
-        N_COLUMN
 };
 
 #define ARIO_CONNECTION_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_PREFERENCES, ArioConnectionPreferencesPrivate))
@@ -110,10 +56,6 @@ static void
 ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-        object_class->finalize = ario_connection_preferences_finalize;
-
         g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
 }
 
@@ -124,173 +66,15 @@ ario_connection_preferences_init (ArioConnectionPreferences *connection_preferen
         connection_preferences->priv = ARIO_CONNECTION_PREFERENCES_GET_PRIVATE (connection_preferences);
 
         connection_preferences->priv->loading = FALSE;
-        connection_preferences->priv->current_profile = NULL;
-}
-
-/* Return TRUE if the profile has changed */
-static gboolean
-ario_connection_preferences_profile_selection_update (ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioProfile *profile = NULL;
-        GList *paths;
-        gint *indices;
-        GtkTreeModel *model = GTK_TREE_MODEL (connection_preferences->priv->profile_model);
-        GSList *tmp = connection_preferences->priv->profiles;
-        int i;
-
-        paths = gtk_tree_selection_get_selected_rows (connection_preferences->priv->profile_selection,
-                                                      &model);
-
-        if (!paths)
-                return FALSE;
-
-        indices = gtk_tree_path_get_indices ((GtkTreePath *) paths->data);
-        for (i = 0; i < indices[0] && tmp; ++i) {
-                tmp = g_slist_next (tmp);
-        }
-        g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
-        g_list_free (paths);
-
-        if (tmp) {
-                profile = (ArioProfile *) tmp->data;
-                if (connection_preferences->priv->current_profile == profile)
-                        return FALSE;
-
-                connection_preferences->priv->current_profile = profile;
-                ario_profiles_set_current (connection_preferences->priv->profiles, profile);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->name_entry),
-                                                 G_CALLBACK (ario_connection_preferences_name_changed_cb),
-                                                 connection_preferences);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->host_entry),
-                                                 G_CALLBACK (ario_connection_preferences_host_changed_cb),
-                                                 connection_preferences);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->port_spinbutton),
-                                                 G_CALLBACK (ario_connection_preferences_port_changed_cb),
-                                                 connection_preferences);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->mpd_radiobutton),
-                                                 G_CALLBACK (ario_connection_preferences_type_changed_cb),
-                                                 connection_preferences);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->password_entry),
-                                                 G_CALLBACK (ario_connection_preferences_password_changed_cb),
-                                                 connection_preferences);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->musicdir_entry),
-                                                 G_CALLBACK (ario_connection_preferences_musicdir_changed_cb),
-                                                 connection_preferences);
-
-                g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->local_checkbutton),
-                                                 G_CALLBACK (ario_connection_preferences_local_changed_cb),
-                                                 connection_preferences);
-
-                gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->name_entry), profile->name);
-                gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->host_entry), profile->host);
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton), (gdouble) profile->port);
-                if (profile->type == ArioServerXmms)
-                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->xmms_radiobutton), TRUE);
-                else
-                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->mpd_radiobutton), TRUE);
-                gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->password_entry), profile->password ? profile->password : "");
-                gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry), profile->musicdir ? profile->musicdir : "");
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->local_checkbutton), profile->local);
-
-                if (profile->local) {
-                        gtk_widget_show (connection_preferences->priv->musicdir_hbox);
-                        gtk_widget_show (connection_preferences->priv->musicdir_label);
-                } else {
-                        gtk_widget_hide (connection_preferences->priv->musicdir_hbox);
-                        gtk_widget_hide (connection_preferences->priv->musicdir_label);
-                }
-
-                ario_conf_set_string (PREF_HOST, profile->host);
-                ario_conf_set_integer (PREF_PORT, profile->port);
-                ario_conf_set_integer (PREF_SERVER_TYPE, profile->type);
-                ario_conf_set_string (PREF_PASSWORD, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->password_entry)));
-                ario_conf_set_string (PREF_MUSIC_DIR, gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry)));
-                ario_conf_set_boolean (PREF_LOCAL, profile->local);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->name_entry),
-                                                   G_CALLBACK (ario_connection_preferences_name_changed_cb),
-                                                   connection_preferences);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->host_entry),
-                                                   G_CALLBACK (ario_connection_preferences_host_changed_cb),
-                                                   connection_preferences);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->port_spinbutton),
-                                                   G_CALLBACK (ario_connection_preferences_port_changed_cb),
-                                                   connection_preferences);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->mpd_radiobutton),
-                                                   G_CALLBACK (ario_connection_preferences_type_changed_cb),
-                                                   connection_preferences);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->password_entry),
-                                                   G_CALLBACK (ario_connection_preferences_password_changed_cb),
-                                                   connection_preferences);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->musicdir_entry),
-                                                   G_CALLBACK (ario_connection_preferences_musicdir_changed_cb),
-                                                   connection_preferences);
-
-                g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->local_checkbutton),
-                                                   G_CALLBACK (ario_connection_preferences_local_changed_cb),
-                                                   connection_preferences);
-        }
-        return TRUE;
 }
 
 static void
-ario_connection_preferences_profile_selection_changed_cb (GtkTreeSelection * selection,
-                                                          ArioConnectionPreferences *connection_preferences)
+ario_connection_preferences_profile_changed_cb (ArioConnectionWidget *connection_widget,
+                                                ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        if (ario_connection_preferences_profile_selection_update (connection_preferences)) {
-                ario_server_reconnect ();
-                ario_connection_preferences_sync_connection (connection_preferences);
-        }
-}
-
-static void
-ario_connection_preferences_profile_update_profiles (ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        GSList *tmp;
-        GtkTreeIter iter;
-        ArioProfile *profile;
-        GtkTreeModel *model = GTK_TREE_MODEL (connection_preferences->priv->profile_model);
-
-        g_signal_handlers_block_by_func (G_OBJECT (connection_preferences->priv->profile_selection),
-                                         G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
-                                         connection_preferences);
-
-        gtk_list_store_clear (connection_preferences->priv->profile_model);
-        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
-                profile = (ArioProfile *) tmp->data;
-                gtk_list_store_append (connection_preferences->priv->profile_model, &iter);
-                gtk_list_store_set (connection_preferences->priv->profile_model, &iter,
-                                    0, profile->name,
-                                    -1);
-        }
-
-        gtk_tree_model_get_iter_first (model, &iter);
-        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
-                profile = (ArioProfile *) tmp->data;
-                if (profile->current) {
-                        gtk_tree_selection_select_iter (connection_preferences->priv->profile_selection, &iter);
-                        break;
-                }
-                gtk_tree_model_iter_next (model, &iter);
-        }
-
-        g_signal_handlers_unblock_by_func (G_OBJECT (connection_preferences->priv->profile_selection),
-                                           G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
-                                           connection_preferences);
+        ario_server_reconnect ();
+        ario_connection_preferences_sync_connection (connection_preferences);
 }
 
 GtkWidget *
@@ -299,8 +83,7 @@ ario_connection_preferences_new (void)
         ARIO_LOG_FUNCTION_START
         GladeXML *xml;
         ArioConnectionPreferences *connection_preferences;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
+        GtkWidget *alignment, *connection_widget;
 
         connection_preferences = g_object_new (TYPE_ARIO_CONNECTION_PREFERENCES,
                                                NULL);
@@ -311,103 +94,31 @@ ario_connection_preferences_new (void)
                                 "vbox",
                                 connection_preferences);
 
-        connection_preferences->priv->profile_treeview = 
-                glade_xml_get_widget (xml, "profile_treeview");
-        connection_preferences->priv->name_entry = 
-                glade_xml_get_widget (xml, "name_entry");
-        connection_preferences->priv->host_entry = 
-                glade_xml_get_widget (xml, "host_entry");
-        connection_preferences->priv->port_spinbutton = 
-                glade_xml_get_widget (xml, "port_spinbutton");
-        connection_preferences->priv->password_entry = 
-                glade_xml_get_widget (xml, "password_entry");
-        connection_preferences->priv->local_checkbutton = 
-                glade_xml_get_widget (xml, "local_checkbutton");
-        connection_preferences->priv->musicdir_entry = 
-                glade_xml_get_widget (xml, "musicdir_entry");
-        connection_preferences->priv->musicdir_hbox = 
-                glade_xml_get_widget (xml, "musicdir_hbox");
-        connection_preferences->priv->musicdir_label = 
-                glade_xml_get_widget (xml, "musicdir_label");
+        alignment = 
+                glade_xml_get_widget (xml, "alignment");
         connection_preferences->priv->autoconnect_checkbutton = 
                 glade_xml_get_widget (xml, "autoconnect_checkbutton");
-        connection_preferences->priv->autodetect_button = 
-                glade_xml_get_widget (xml, "autodetect_button");
         connection_preferences->priv->disconnect_button = 
                 glade_xml_get_widget (xml, "disconnect_button");
         connection_preferences->priv->connect_button = 
                 glade_xml_get_widget (xml, "connect_button");
-        connection_preferences->priv->mpd_radiobutton = 
-                glade_xml_get_widget (xml, "mpd_radiobutton");
-        connection_preferences->priv->xmms_radiobutton = 
-                glade_xml_get_widget (xml, "xmms_radiobutton");
 
         rb_glade_boldify_label (xml, "connection_label");
 
-        gtk_widget_show_all (connection_preferences->priv->musicdir_hbox);
-        gtk_widget_hide (connection_preferences->priv->musicdir_hbox);
-        gtk_widget_set_no_show_all (connection_preferences->priv->musicdir_hbox, TRUE);
-
-        connection_preferences->priv->profile_model = gtk_list_store_new (1, G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (connection_preferences->priv->profile_treeview),
-                                 GTK_TREE_MODEL (connection_preferences->priv->profile_model));
-        connection_preferences->priv->profile_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (connection_preferences->priv->profile_treeview));
-        gtk_tree_selection_set_mode (connection_preferences->priv->profile_selection,
-                                     GTK_SELECTION_BROWSE);
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Profile"),
-                                                           renderer,
-                                                           "text", 0,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 120);
-        gtk_tree_view_column_set_expand (column, TRUE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (connection_preferences->priv->profile_treeview), column);
-
-        connection_preferences->priv->profiles = ario_profiles_read ();
-        ario_connection_preferences_profile_update_profiles (connection_preferences);
-
-#ifndef ENABLE_AVAHI
-        gtk_widget_hide (connection_preferences->priv->autodetect_button);
-#endif
-
-#ifndef ENABLE_XMMS2
-        gtk_widget_set_sensitive (glade_xml_get_widget (xml, "servertype_hbox"), FALSE);
-#endif
+        connection_widget = ario_connection_widget_new ();
+        gtk_container_add (GTK_CONTAINER (alignment), connection_widget);
+        g_signal_connect (connection_widget,
+                          "profile_changed",
+                          G_CALLBACK (ario_connection_preferences_profile_changed_cb),
+                          connection_preferences);
 
         ario_connection_preferences_sync_connection (connection_preferences);
-
-        g_signal_connect (connection_preferences->priv->profile_selection,
-                          "changed",
-                          G_CALLBACK (ario_connection_preferences_profile_selection_changed_cb),
-                          connection_preferences);
-        ario_connection_preferences_profile_selection_update (connection_preferences);
 
         gtk_box_pack_start (GTK_BOX (connection_preferences), glade_xml_get_widget (xml, "vbox"), TRUE, TRUE, 0);
 
         g_object_unref (xml);
 
         return GTK_WIDGET (connection_preferences);
-}
-
-static void
-ario_connection_preferences_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioConnectionPreferences *connection_preferences;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_CONNECTION_PREFERENCES (object));
-
-        connection_preferences = ARIO_CONNECTION_PREFERENCES (object);
-
-        g_return_if_fail (connection_preferences->priv != NULL);
-
-        ario_profiles_save (connection_preferences->priv->profiles);
-        g_slist_foreach (connection_preferences->priv->profiles, (GFunc) ario_profiles_free, NULL);
-        g_slist_free (connection_preferences->priv->profiles);
-
-        G_OBJECT_CLASS (ario_connection_preferences_parent_class)->finalize (object);
 }
 
 static void
@@ -434,56 +145,6 @@ ario_connection_preferences_sync_connection (ArioConnectionPreferences *connecti
 }
 
 void
-ario_connection_preferences_name_changed_cb (GtkWidget *widget,
-                                             ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        if (!connection_preferences->priv->loading) {
-                g_free (connection_preferences->priv->current_profile->name);
-                connection_preferences->priv->current_profile->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->name_entry)));
-                ario_connection_preferences_profile_update_profiles (connection_preferences);
-        }
-}
-
-void
-ario_connection_preferences_host_changed_cb (GtkWidget *widget,
-                                             ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        if (!connection_preferences->priv->loading) {
-                ario_conf_set_string (PREF_HOST,
-                                      gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
-                g_free (connection_preferences->priv->current_profile->host);
-                connection_preferences->priv->current_profile->host = g_strdup (gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->host_entry)));
-        }
-}
-
-void
-ario_connection_preferences_port_changed_cb (GtkWidget *widget,
-                                             ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        if (!connection_preferences->priv->loading) {
-                ario_conf_set_integer (PREF_PORT,
-                                       (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton)));
-                connection_preferences->priv->current_profile->port = (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_preferences->priv->port_spinbutton));
-        }
-}
-
-void ario_connection_preferences_type_changed_cb (GtkToggleAction *toggleaction,
-                                                  ArioConnectionPreferences *connection_preferences)
-
-{
-        ARIO_LOG_FUNCTION_START
-        if (!connection_preferences->priv->loading) {
-                ArioServerType type;
-                type = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->xmms_radiobutton)) ? ArioServerXmms : ArioServerMpd;
-                ario_conf_set_integer (PREF_SERVER_TYPE, type);
-                connection_preferences->priv->current_profile->type = type;
-        }
-}
-
-void
 ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
                                                     ArioConnectionPreferences *connection_preferences)
 {
@@ -491,299 +152,6 @@ ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
         if (!connection_preferences->priv->loading)
                 ario_conf_set_boolean (PREF_AUTOCONNECT,
                                        gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->autoconnect_checkbutton)));
-}
-
-void
-ario_connection_preferences_password_changed_cb (GtkWidget *widget,
-                                                 ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        const gchar *password;
-        if (!connection_preferences->priv->loading) {
-                password = gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->password_entry));
-                ario_conf_set_string (PREF_PASSWORD, password);
-                g_free (connection_preferences->priv->current_profile->password);
-                if (password && strcmp(password, "")) {
-                        connection_preferences->priv->current_profile->password = g_strdup (password);
-                } else {
-                        connection_preferences->priv->current_profile->password = NULL;         
-                }
-        }
-}
-
-void
-ario_connection_preferences_musicdir_changed_cb (GtkWidget *widget,
-                                                 ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        const gchar *musicdir;
-        if (!connection_preferences->priv->loading) {
-                musicdir = gtk_entry_get_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry));
-                ario_conf_set_string (PREF_MUSIC_DIR, musicdir);
-                g_free (connection_preferences->priv->current_profile->musicdir);
-                if (musicdir && strcmp(musicdir, "")) {
-                        connection_preferences->priv->current_profile->musicdir = g_strdup (musicdir);
-                } else {
-                        connection_preferences->priv->current_profile->musicdir = NULL;         
-                }
-        }
-}
-
-void
-ario_connection_preferences_local_changed_cb (GtkWidget *widget,
-                                              ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        gboolean local;
-        if (!connection_preferences->priv->loading) {
-                local = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->local_checkbutton));
-                ario_conf_set_boolean (PREF_LOCAL, local);
-                connection_preferences->priv->current_profile->local = local;
-                if (local) {
-                        gtk_widget_show (connection_preferences->priv->musicdir_hbox);
-                        gtk_widget_show (connection_preferences->priv->musicdir_label);
-                } else {
-                        gtk_widget_hide (connection_preferences->priv->musicdir_hbox);
-                        gtk_widget_hide (connection_preferences->priv->musicdir_label);
-                }
-        }
-}
-
-#ifdef ENABLE_AVAHI
-static void
-ario_connection_preferences_autohosts_changed_cb (ArioAvahi *avahi,
-                                                  ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        GtkTreeIter iter;
-        GSList *hosts;
-        gtk_list_store_clear (connection_preferences->priv->autodetect_model);
-
-        for (hosts = ario_avahi_get_hosts (avahi); hosts; hosts = g_slist_next (hosts)) {
-                ArioHost *host = hosts->data;
-                char *tmp;
-                gtk_list_store_append (connection_preferences->priv->autodetect_model, &iter);
-                tmp = g_strdup_printf ("%d", host->port);
-                gtk_list_store_set (connection_preferences->priv->autodetect_model, &iter,
-                                    NAME_COLUMN, host->name,
-                                    HOST_COLUMN, host->host,
-                                    PORT_COLUMN, tmp,
-                                    -1);
-                g_free (tmp);
-        }
-
-        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (connection_preferences->priv->autodetect_model), &iter))
-                gtk_tree_selection_select_iter (connection_preferences->priv->autodetect_selection, &iter);
-}
-#endif
-void
-ario_connection_preferences_autodetect_cb (GtkWidget *widget,
-                                           ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-#ifdef ENABLE_AVAHI
-        ArioAvahi *avahi;
-        GtkWidget *dialog, *error_dialog;
-        GtkWidget *vbox;
-        GtkWidget *label;
-        GtkWidget *scrolledwindow;
-        GtkWidget *treeview;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
-        GtkTreeModel *treemodel;
-        GtkTreeIter iter;
-        gchar *tmp;
-        gchar *host;
-        int port;
-
-        gint retval = GTK_RESPONSE_CANCEL;
-
-        avahi = ario_avahi_new ();
-
-        dialog = gtk_dialog_new_with_buttons (_("Server autodetection"),
-                                              NULL,
-                                              GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              GTK_STOCK_CANCEL,
-                                              GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OK,
-                                              GTK_RESPONSE_OK,
-                                              NULL);
-        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
-                                         GTK_RESPONSE_CANCEL);
-        vbox = gtk_vbox_new (FALSE, 12);
-        label = gtk_label_new (_("If you don't see your MPD server thanks to the automatic detection, you should check that zeroconf is activated in your MPD configuration or use the manual configuration."));
-        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-
-        scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
-        treeview = gtk_tree_view_new ();
-
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Name"),
-                                                           renderer,
-                                                           "text", NAME_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 150);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Host"),
-                                                           renderer,
-                                                           "text", HOST_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 150);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Port"),
-                                                           renderer,
-                                                           "text", PORT_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 50);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-        connection_preferences->priv->autodetect_model = gtk_list_store_new (N_COLUMN,
-                                                                             G_TYPE_STRING,
-                                                                             G_TYPE_STRING,
-                                                                             G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
-                                 GTK_TREE_MODEL (connection_preferences->priv->autodetect_model));
-        connection_preferences->priv->autodetect_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-        gtk_tree_selection_set_mode (connection_preferences->priv->autodetect_selection,
-                                     GTK_SELECTION_BROWSE);
-
-        gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
-        gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
-
-        g_signal_connect (avahi,
-                          "hosts_changed",
-                          G_CALLBACK (ario_connection_preferences_autohosts_changed_cb),
-                          connection_preferences);
-
-        gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 
-                           vbox);
-        gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 280);
-        gtk_widget_show_all (dialog);
-
-        retval = gtk_dialog_run (GTK_DIALOG(dialog));
-        if (retval != GTK_RESPONSE_OK) {
-                gtk_widget_destroy (dialog);
-                g_object_unref (avahi);
-                return;
-        }
-
-        treemodel = GTK_TREE_MODEL (connection_preferences->priv->autodetect_model);
-        if (gtk_tree_selection_get_selected (connection_preferences->priv->autodetect_selection,
-                                             &treemodel,
-                                             &iter)) {
-                gtk_tree_model_get (treemodel, &iter,
-                                    HOST_COLUMN, &host,
-                                    PORT_COLUMN, &tmp, -1);
-                port = atoi (tmp);
-                g_free (tmp);
-
-                g_free (connection_preferences->priv->current_profile->host);
-                connection_preferences->priv->current_profile->host = g_strdup (host);
-                g_free (host);
-                connection_preferences->priv->current_profile->port = port;
-                g_free (connection_preferences->priv->current_profile->password);
-                connection_preferences->priv->current_profile->password = NULL;
-                g_free (connection_preferences->priv->current_profile->musicdir);
-                connection_preferences->priv->current_profile->musicdir = NULL;
-
-                ario_connection_preferences_profile_selection_update (connection_preferences);
-        } else {
-                error_dialog = gtk_message_dialog_new(NULL,
-                                                      GTK_DIALOG_MODAL,
-                                                      GTK_MESSAGE_ERROR,
-                                                      GTK_BUTTONS_OK,
-                                                      _("You must select a server."));
-                gtk_dialog_run(GTK_DIALOG(error_dialog));
-                gtk_widget_destroy(error_dialog);
-        }
-
-        g_object_unref (avahi);
-        gtk_widget_destroy (dialog);
-#endif
-}
-
-void
-ario_connection_preferences_open_cb (GtkWidget *widget,
-                                     ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        GtkWidget *dialog;
-
-        dialog = gtk_file_chooser_dialog_new (NULL,
-                                              NULL,
-                                              GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                              NULL);
-
-        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
-                char *filename;
-
-                filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-                if (filename) {
-                        gtk_entry_set_text (GTK_ENTRY (connection_preferences->priv->musicdir_entry), filename);
-                        g_free (filename);
-                }
-        }
-
-        gtk_widget_destroy (dialog);
-}
-
-void
-ario_connection_preferences_new_profile_cb (GtkWidget *widget,
-                                            ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioProfile *profile;
-        ArioProfile *tmp_profile;
-        GSList *tmp;
-
-        profile = (ArioProfile *) g_malloc0 (sizeof (ArioProfile));
-        profile->name = g_strdup (_("New Profile"));
-        profile->host = g_strdup ("localhost");
-        profile->port = 6600;
-        profile->type = ArioServerMpd;
-
-        for (tmp = connection_preferences->priv->profiles; tmp; tmp = g_slist_next (tmp)) {
-                tmp_profile = (ArioProfile *) tmp->data;
-                tmp_profile->current = FALSE;
-        }
-        profile->current = TRUE;
-        connection_preferences->priv->profiles = g_slist_append (connection_preferences->priv->profiles, profile);
-        ario_connection_preferences_profile_update_profiles (connection_preferences);
-        ario_connection_preferences_profile_selection_update (connection_preferences);
-        ario_connection_preferences_sync_connection (connection_preferences);
-}
-
-void
-ario_connection_preferences_delete_profile_cb (GtkWidget *widget,
-                                               ArioConnectionPreferences *connection_preferences)
-{
-        ARIO_LOG_FUNCTION_START
-        ArioProfile *first_profile;
-
-        if (g_slist_length (connection_preferences->priv->profiles) < 2)
-                return;
-
-        if (connection_preferences->priv->current_profile) {
-                connection_preferences->priv->profiles = g_slist_remove (connection_preferences->priv->profiles, connection_preferences->priv->current_profile);
-                ario_profiles_free (connection_preferences->priv->current_profile);
-                if (connection_preferences->priv->profiles) {
-                        first_profile = (ArioProfile *) connection_preferences->priv->profiles->data;
-                        first_profile->current = TRUE;
-                }
-                ario_connection_preferences_profile_update_profiles (connection_preferences);
-                ario_connection_preferences_profile_selection_update (connection_preferences);
-                ario_connection_preferences_sync_connection (connection_preferences);
-        }
 }
 
 void

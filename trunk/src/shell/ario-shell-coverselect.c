@@ -29,6 +29,7 @@
 #include "lib/rb-glade-helpers.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "ario-profiles.h"
 #include "preferences/ario-preferences.h"
 
 #define CURRENT_COVER_SIZE 130
@@ -373,7 +374,7 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                               GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
                                               NULL);
-        musicdir = ario_conf_get_string (PREF_MUSIC_DIR, PREF_MUSIC_DIR_DEFAULT);
+        musicdir = ario_profiles_get_current (ario_profiles_get ())->musicdir;
         if (musicdir) {
                 path = g_build_filename (musicdir, ario_shell_coverselect->priv->path, NULL);
 
@@ -381,7 +382,6 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                         gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), path);
 
                 g_free (path);
-                g_free (musicdir);
         }
 
         if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {

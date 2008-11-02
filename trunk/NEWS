@@ -1,5 +1,12 @@
+Reduce volume adjustement step (patch from Simon Sehier)
+Apply patch from Stanislav Shramko to fix mmkeys plug-in
+Add experimental support of XMMS2
+Add support of python plugins
+Improve W32 compilation
+Launch web pages asynchronously
+Add 'local' option if MPD is on the same computer as Ario
 [ 1994706 ] tray tooltip showing timeout
-[ 2016602 ] Play on enterUpdate debian files
+[ 2016602 ] Play on enter
 Update radios list
 [ 1897794 ] Notifications options 
 [ 2017480 ] Only one instance
@@ -13,7 +20,7 @@ Fix another encoding problem with lyric wiki
 Improve ordering by date
 Add the possibility to organise configure the panes in the library tab
 Update translations
-New translations: ar, th, da, tr, fi, nb, zh_CN
+New translations: ar, th, da, tr, fi, nb, zh_CN, nds
 [ 2017479 ] Set playlist option, thanks to a patch from Dion Timmermann
 [ 2088157 ] Update MPD library on startup and stop MPD on close
 New plugin: Song Information
