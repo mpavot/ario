@@ -203,6 +203,7 @@ ario_information_init (ArioInformation *information)
                                gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow)));
 
         xml = rb_glade_xml_new (file, "vbox", information);
+        g_free (file);
 
         vbox = glade_xml_get_widget (xml, "vbox");
         g_signal_connect (vbox,
