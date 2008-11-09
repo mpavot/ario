@@ -239,7 +239,7 @@ ario_trayicon_preferences_notificationtime_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START
         ario_conf_set_integer (PREF_NOTIFICATION_TIME, gtk_spin_button_get_value (GTK_SPIN_BUTTON (trayicon_preferences->priv->notificationtime_spinbutton)));
-}
+}
 void
 ario_trayicon_preferences_notification_combobox_changed_cb (GtkComboBox *combobox,
                                                             ArioTrayiconPreferences *trayicon_preferences)
