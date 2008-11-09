@@ -33,6 +33,7 @@
 #include "ario-debug.h"
 
 #define DRAG_THRESHOLD 1
+#define LIMIT_FOR_IDLE 800
 
 static void ario_tree_finalize (GObject *object);
 static void ario_tree_set_property (GObject *object,
@@ -971,21 +972,74 @@ ario_tree_fill_songs (ArioTree *tree)
         }
 }
 
+typedef struct ArioTreeAddData
+{
+        ArioTree *tree;
+        ArioServerCriteria *criteria;
+        GSList *tags;
+        GSList *tmp;
+}ArioTreeAddData;
+
+static gboolean
+ario_tree_add_tags_idle (ArioTreeAddData *data)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
+
+        if (!data->tmp) {
+                g_slist_foreach (data->tags, (GFunc) g_free, NULL);
+                g_slist_free (data->tags);
+                ario_server_criteria_free (data->criteria);
+                g_free (data);
+                return FALSE;
+        }
+
+        gtk_list_store_append (data->tree->priv->model, &iter);
+        gtk_list_store_set (data->tree->priv->model, &iter,
+                            VALUE_COLUMN, data->tmp->data,
+                            CRITERIA_COLUMN, data->criteria,
+                            -1);
+
+        if (data->tmp == data->tags) {
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (data->tree->priv->model), &iter))
+                        gtk_tree_selection_select_iter (data->tree->priv->selection, &iter);
+        }
+
+        data->tmp = g_slist_next (data->tmp);
+
+        return TRUE;
+}
+
 static void
 ario_tree_add_tags (ArioTree *tree,
                     ArioServerCriteria *criteria,
                     GSList *tags)
 {
         ARIO_LOG_FUNCTION_START
+        ArioTreeAddData *data;
         GSList *tmp;
         GtkTreeIter iter;
 
-        for (tmp = tags; tmp; tmp = g_slist_next (tmp)) {
-                gtk_list_store_append (tree->priv->model, &iter);
-                gtk_list_store_set (tree->priv->model, &iter,
-                                    VALUE_COLUMN, tmp->data,
-                                    CRITERIA_COLUMN, criteria,
-                                    -1);
+        if (tree->priv->is_first && g_slist_length (tags) > LIMIT_FOR_IDLE) {
+                /* Asynchronous */
+                data = (ArioTreeAddData *) g_malloc0 (sizeof (ArioTreeAddData));
+                data->tree = tree;
+                data->criteria = ario_server_criteria_copy (criteria);
+                data->tags = tags;
+                data->tmp = tags;
+
+                g_idle_add ((GSourceFunc) ario_tree_add_tags_idle, data);
+        } else {
+                /* Synchronous */
+                for (tmp = tags; tmp; tmp = g_slist_next (tmp)) {
+                        gtk_list_store_append (tree->priv->model, &iter);
+                        gtk_list_store_set (tree->priv->model, &iter,
+                                            VALUE_COLUMN, tmp->data,
+                                            CRITERIA_COLUMN, criteria,
+                                            -1);
+                }
+                g_slist_foreach (tags, (GFunc) g_free, NULL);
+                g_slist_free (tags);
         }
 }
 
@@ -1017,15 +1071,11 @@ ario_tree_fill (ArioTree *tree)
                 if (tree->priv->is_first) {
                         tags = ario_server_list_tags (tree->priv->tag, NULL);
                         ario_tree_add_tags (tree, NULL, tags);
-                        g_slist_foreach (tags, (GFunc) g_free, NULL);
-                        g_slist_free (tags);
                 } else {
                         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
                                 criteria = tmp->data;
                                 tags = ario_server_list_tags (tree->priv->tag, criteria);
                                 ario_tree_add_tags (tree, criteria, tags);
-                                g_slist_foreach (tags, (GFunc) g_free, NULL);
-                                g_slist_free (tags);
                         }
                 }
         }
