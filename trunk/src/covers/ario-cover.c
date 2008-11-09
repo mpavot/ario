@@ -193,6 +193,7 @@ ario_cover_save_cover (const gchar *artist,
         GdkPixbufLoader *loader;
         GdkPixbuf *pixbuf, *small_pixbuf;
         int width, height;
+        gchar *path_fse, *small_path_fse;
 
         if (!artist || !album || !data)
                 return FALSE;
@@ -244,12 +245,20 @@ ario_cover_save_cover (const gchar *artist,
                                                                 GDK_INTERP_BILINEAR);
                 }
 
+                path_fse = g_filename_from_utf8 (ario_cover_path, -1, NULL, NULL, NULL);
+                small_path_fse = g_filename_from_utf8 (small_ario_cover_path, -1, NULL, NULL, NULL);
+
                 /* We save the normal and the small covers */
-                if (gdk_pixbuf_save (pixbuf, ario_cover_path, "jpeg", NULL, NULL) &&
+                if (path_fse && small_path_fse &&
+                    gdk_pixbuf_save (pixbuf, ario_cover_path, "jpeg", NULL, NULL) &&
                     gdk_pixbuf_save (small_pixbuf, small_ario_cover_path, "jpeg", NULL, "quality", "95", NULL)) {
                         /* If we succeed in the 2 operations, we return OK */
                         ret = TRUE;
                 }
+
+                g_free (small_path_fse);
+                g_free (path_fse);
+
                 g_object_unref (G_OBJECT (pixbuf));
                 g_object_unref (G_OBJECT (small_pixbuf));
         }

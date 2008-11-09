@@ -23,6 +23,7 @@
  *
  */
 
+#define _XOPEN_SOURCE
 #include "config.h"
 #include <string.h>
 #include <stdlib.h>
@@ -1649,7 +1650,7 @@ ario_audioscrobbler_load_queue (ArioAudioscrobbler *audioscrobbler)
         pathname = g_build_filename (ario_util_config_dir (), "audioscrobbler.queue", NULL);
         ARIO_LOG_DBG ("Loading Audioscrobbler queue from \"%s\"", pathname);
 
-        result = g_file_get_contents (pathname, &data, &size, NULL);
+        result = ario_file_get_contents (pathname, &data, &size, NULL);
         g_free (pathname);
 
         /* do stuff */
@@ -1725,9 +1726,9 @@ ario_audioscrobbler_save_queue (ArioAudioscrobbler *audioscrobbler)
                 string = g_string_append (string, str);
         }
 
-        ret = g_file_set_contents (pathname,
-                                   string->str, -1,
-                                   NULL);
+        ret = ario_file_set_contents (pathname,
+                                      string->str, -1,
+                                      NULL);
         g_string_free (string, TRUE);
 
         g_free (pathname);

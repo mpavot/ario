@@ -129,7 +129,7 @@ ario_plugins_engine_load_all (void)
         paths = ario_plugin_get_plugin_paths ();
 
         for (l = paths; l != NULL; l = l->next) {
-                if (g_file_test (l->data, G_FILE_TEST_IS_DIR))
+                if (ario_file_test (l->data, G_FILE_TEST_IS_DIR))
                         ario_plugins_engine_load_dir (l->data, active_plugins);
         }
 
@@ -182,7 +182,7 @@ ario_plugins_engine_load_icons_all (void)
 
         for (l = paths; l != NULL; l = l->next) {
                 tmp = g_build_filename (l->data, "icons", NULL);
-                if (g_file_test (tmp, G_FILE_TEST_IS_DIR))
+                if (ario_file_test (tmp, G_FILE_TEST_IS_DIR))
                         ario_plugins_engine_load_icons_dir (tmp);
                 g_free (tmp);
         }

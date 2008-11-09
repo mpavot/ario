@@ -188,6 +188,9 @@ ario_lyrics_editor_save_cb (GtkButton *button,
         GtkTextIter end;
         gchar *lyrics;
 
+        if (!lyrics_editor->priv->data)
+                return;
+
         gtk_text_buffer_get_bounds (lyrics_editor->priv->textbuffer,
                                     &start, &end);
 
@@ -211,6 +214,9 @@ ario_lyrics_editor_search_cb (GtkButton *button,
         ArioLyricsCandidate *candidate;
         ArioLyricsEditorData *data;
         char *artist;
+
+        if (!lyrics_editor->priv->data)
+                return;
 
         artist = lyrics_editor->priv->data->artist;
 

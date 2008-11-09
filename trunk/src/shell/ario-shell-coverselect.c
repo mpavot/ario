@@ -165,10 +165,10 @@ ario_shell_coverselect_drag_leave_cb (GtkWidget *widget,
                 data->data[data->length - 2] = 0;
                 url = g_strdup ((gchar *) data->data + 7);
                 if (ario_util_uri_exists (url)) {
-                        if (g_file_get_contents (url,
-                                                 &contents,
-                                                 &length,
-                                                 NULL)) {
+                        if (ario_file_get_contents (url,
+                                                    &contents,
+                                                    &length,
+                                                    NULL)) {
                                 ario_cover_save_cover (shell_coverselect->priv->file_artist,
                                                        shell_coverselect->priv->file_album,
                                                        contents, length,
@@ -550,10 +550,10 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
                         return;
 
 
-                ret = g_file_get_contents (local_file,
-                                           &data,
-                                           &size,
-                                           NULL);
+                ret = ario_file_get_contents (local_file,
+                                              &data,
+                                              &size,
+                                              NULL);
                 if (!ret) {
                         dialog = gtk_message_dialog_new(NULL,
                                                         GTK_DIALOG_MODAL,

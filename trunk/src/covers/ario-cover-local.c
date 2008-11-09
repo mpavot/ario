@@ -38,9 +38,11 @@ static const char *valid_cover_names[] = {
         "folder.png",
         ".folder.png",
         "cover.png",
+        "front.png",
         "folder.jpg",
         ".folder.jpg",
         "cover.jpg",
+        "front.jpg",
         NULL
 };
 
@@ -112,10 +114,10 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                 for (i = 0; valid_cover_names[i]; i++) {
                         filename = g_build_filename (musicdir, file, valid_cover_names[i], NULL);
                         if (ario_util_uri_exists (filename)) {
-                                ret2 = g_file_get_contents (filename,
-                                                            &data,
-                                                            &size,
-                                                            NULL);
+                                ret2 = ario_file_get_contents (filename,
+                                                               &data,
+                                                               &size,
+                                                               NULL);
                                 if (ret2 && ario_cover_size_is_valid (size)) {
                                         /* If the cover is not too big and not too small (blank image), we append it to file_contents */
                                         g_array_append_val (*file_size, size);
