@@ -412,6 +412,7 @@ ario_mpd_list_tags (const ArioServerTag tag,
                 if (*value)
                         values = g_slist_append (values, value);
                 else {
+                        g_free (value);
                         values = g_slist_append (values, g_strdup (ARIO_SERVER_UNKNOWN));
                         instance->priv->support_empty_tags = TRUE;
                 }
