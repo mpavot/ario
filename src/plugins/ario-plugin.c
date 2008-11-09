@@ -132,7 +132,7 @@ ario_plugin_find_file (const char *file)
 
                         tmp = g_build_filename (l->data, file, NULL);
 
-                        if (g_file_test (tmp, G_FILE_TEST_EXISTS)) {
+                        if (ario_file_test (tmp, G_FILE_TEST_EXISTS)) {
                                 ret = tmp;
                                 break;
                         }

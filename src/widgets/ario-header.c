@@ -141,10 +141,10 @@ ario_header_drag_leave_cb (GtkWidget *widget,
                 data->data[data->length - 2] = 0;
                 url = g_strdup ((gchar *) data->data + 7);
                 if (ario_util_uri_exists (url)) {
-                        if (g_file_get_contents (url,
-                                                 &contents,
-                                                 &length,
-                                                 NULL)) {
+                        if (ario_file_get_contents (url,
+                                                    &contents,
+                                                    &length,
+                                                    NULL)) {
                                 ario_cover_save_cover (ario_server_get_current_artist (),
                                                        ario_server_get_current_album (),
                                                        contents, length,

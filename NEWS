@@ -1,33 +1,35 @@
-Reduce volume adjustement step (patch from Simon Sehier)
-Apply patch from Stanislav Shramko to fix mmkeys plug-in
+New features:
 Add experimental support of XMMS2
 Add support of python plugins
-Improve W32 compilation
-Launch web pages asynchronously
 Add 'local' option if MPD is on the same computer as Ario
-[ 1994706 ] tray tooltip showing timeout
+[ 1994706 ] Add a timout before tray tooltip showing
 [ 2016602 ] Play on enter
-Update radios list
+[ 2017480 ] Authorize Only one instance of Ario
 [ 1897794 ] Notifications options 
-[ 2017480 ] Only one instance
+[ 2069383 ] Drag and drop images for album art
+[ 2057561 ] Add --minimized option
+[ 2088157 ] New options to update MPD library on startup and stop MPD on close
+[ 2017479 ] "Replace in playlist" command
+[ 2110096 ] Track change notification with libnotify
+New plugin: Song Information
 Add the possibility to reorder the columns in playlist
-[ 2057561 ] ario start minimized
+Add the possibility to organise configure the panes in the library tab
+Support of empty/unknown tags (Require git version of MPD)
+New translations: ar, th, da, tr, fi, nb, zh_CN, nds
+
+Bug fixes and improvements:
+Reduce volume adjustement step (patch from Simon Sehier)
+Fix mmkeys plug-in (patch from Stanislav Shramko)
+Launch web pages asynchronously
+Update radios list
+[ 2071774 ] Fix notification icon background / Debian Bug#495757
 Debian Bug #495687 : ario_mpd_connect_to : problems getting a response from "localhost" on port 6600 : Connection refused
 Fix another encoding problem with lyric wiki
-[ 2069383 ] Drag and drop images for album art
-[ 2076890 ] Please make system tray support optional
-[ 2071774 ] notification icon background / Debian Bug#495757
-Improve ordering by date
-Add the possibility to organise configure the panes in the library tab
-Update translations
-New translations: ar, th, da, tr, fi, nb, zh_CN, nds
-[ 2017479 ] Set playlist option, thanks to a patch from Dion Timmermann
-[ 2088157 ] Update MPD library on startup and stop MPD on close
-New plugin: Song Information
 Improve performances and memory usage
-Fix drag and drop pisitions in playlist
-Auto reconnect on error.
-[ 2110096 ] Track change notification with libnotify
-Add song change notification on windows
-Support of empty/unknown tags if MPD is patched as described here: http://musicpd.org/mantis/view.php?id=464
+Fix drag and drop positions in playlist
+Auto reconnect to MPD on error.
 
+
+Windows:
+Improve W32 compilation
+Add song change notification on windows

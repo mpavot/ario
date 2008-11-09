@@ -70,6 +70,16 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *crit
 
 gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
 
+gboolean                ario_file_get_contents               (const gchar *filename,
+                                                              gchar **contents,
+                                                              gsize *length,
+                                                              GError **error);
+gboolean                ario_file_set_contents               (const gchar *filename,
+                                                              gchar *contents,
+                                                              gsize length,
+                                                              GError **error);
+gboolean                ario_file_test                       (const gchar *filename,
+                                                              GFileTest test);
 
 /* Inline methods */
 static inline gint

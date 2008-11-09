@@ -99,8 +99,8 @@ ario_lyrics_get_local_lyrics (const gchar *artist,
 
         ario_lyrics_path = ario_lyrics_make_lyrics_path (artist, title);
 
-        if (g_file_get_contents (ario_lyrics_path,
-                                 &read_data, NULL, NULL)) {
+        if (ario_file_get_contents (ario_lyrics_path,
+                                    &read_data, NULL, NULL)) {
                 lyrics = (ArioLyrics *) g_malloc0 (sizeof (ArioLyrics));
                 lyrics->lyrics = read_data;
                 lyrics->artist = g_strdup (artist);
@@ -166,9 +166,9 @@ ario_lyrics_save_lyrics (const gchar *artist,
         /* The path for the lyrics */
         ario_lyrics_path = ario_lyrics_make_lyrics_path (artist, title);
 
-        ret = g_file_set_contents (ario_lyrics_path,
-                                   lyrics, -1,
-                                   NULL);
+        ret = ario_file_set_contents (ario_lyrics_path,
+                                      lyrics, -1,
+                                      NULL);
 
         g_free (ario_lyrics_path);
 

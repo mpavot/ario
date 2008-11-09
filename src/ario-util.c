@@ -222,7 +222,7 @@ ario_util_config_dir (void)
                 config_dir = g_build_filename (g_get_user_config_dir (),
                                                "ario",
                                                NULL);
-                if (!g_file_test (config_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
+                if (!ario_file_test (config_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
                         ario_util_mkdir (config_dir);
         }
 
@@ -234,20 +234,32 @@ ario_util_uri_exists (const char *uri)
 {        
         g_return_val_if_fail (uri != NULL, FALSE);
 
-        return g_file_test(uri, G_FILE_TEST_EXISTS);
+        return ario_file_test(uri, G_FILE_TEST_EXISTS);
 }
 
 
 void
 ario_util_unlink_uri (const char *uri)
 {
-        g_unlink (uri);
+        gchar *uri_fse = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+        if (!uri_fse)
+                return;
+
+        g_unlink (uri_fse);
+
+        g_free (uri_fse);
 }
 
 void
 ario_util_mkdir (const char *uri)
 {
-        g_mkdir_with_parents (uri, 0750);
+        gchar *uri_fse = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+        if (!uri_fse)
+                return;
+
+        g_mkdir_with_parents (uri_fse, 0750);
+
+        g_free (uri_fse);
 }
 
 void
@@ -257,17 +269,17 @@ ario_util_copy_file (const char *src_uri,
         gchar *contents;
         gsize length;
 
-        if (! g_file_get_contents (src_uri,
-                                   &contents,
-                                   &length,
-                                   NULL)) {
+        if (! ario_file_get_contents (src_uri,
+                                      &contents,
+                                      &length,
+                                      NULL)) {
                 return;
         }
 
-        g_file_set_contents (dest_uri,
-                             contents,
-                             length,
-                             NULL);
+        ario_file_set_contents (dest_uri,
+                                contents,
+                                length,
+                                NULL);
         g_free (contents);
 }
 
@@ -332,7 +344,7 @@ ario_util_download_file (const char *uri,
         /* set callback data */
         curl_easy_setopt (curl, CURLOPT_WRITEDATA, &download_data);
         /* set callback function */
-        curl_easy_setopt (curl, CURLOPT_WRITEFUNCTION, ario_util_write_data);
+        curl_easy_setopt (curl, CURLOPT_WRITEFUNCTION, (curl_write_callback)ario_util_write_data);
         /* set timeout */
         curl_easy_setopt (curl, CURLOPT_CONNECTTIMEOUT, 5);
         /* set redirect */
@@ -618,3 +630,53 @@ ario_util_convert_from_iso8859 (const char *string)
         return ret;
 }
 
+gboolean ario_file_get_contents (const gchar *filename, gchar **contents,
+                                 gsize *length, GError **error)
+{
+        gboolean ret;
+        gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
+
+        if (!filename_fse) {
+                if (error)
+                        *error = g_error_new (G_FILE_ERROR, G_FILE_ERROR_NOENT,
+                                              "File `%s' not found", filename);
+                return FALSE;
+        }
+
+        ret = g_file_get_contents (filename_fse, contents, length, error);
+
+        g_free (filename_fse);
+        return ret;
+}
+
+gboolean ario_file_set_contents (const gchar *filename, gchar *contents,
+                                 gsize length, GError **error)
+{
+        gboolean ret;
+        gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
+
+        if (!filename_fse) {
+                if (error)
+                        *error = g_error_new (G_FILE_ERROR, G_FILE_ERROR_FAILED,
+                                              "Could not write to file `%s'", filename);
+                return FALSE;
+        }
+
+        ret = g_file_set_contents (filename_fse, contents, length, error);
+
+        g_free (filename_fse);
+        return ret;
+}
+
+gboolean ario_file_test (const gchar *filename, GFileTest test)
+{
+        gboolean ret;
+        gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
+        if (!filename_fse)
+                return FALSE;
+
+        ret = g_file_test (filename_fse, test);
+
+        g_free (filename_fse);
+        return ret;
+}
