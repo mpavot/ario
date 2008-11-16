@@ -505,11 +505,10 @@ ario_playlist_sync_song_foreach (GtkTreeModel *model,
 
         state = ario_server_get_current_state ();
         song = ario_server_get_current_song  ();
-        if (!song)
-                return TRUE;
 
         if (state != MPD_STATUS_STATE_UNKNOWN
             && state != MPD_STATUS_STATE_STOP
+            && song
             && song->pos == *pos)
                 gtk_list_store_set (GTK_LIST_STORE (model), iter,
                                     PIXBUF_COLUMN, instance->priv->play_pixbuf,
