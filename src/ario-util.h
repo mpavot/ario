@@ -75,7 +75,7 @@ gboolean                ario_file_get_contents               (const gchar *filen
                                                               gsize *length,
                                                               GError **error);
 gboolean                ario_file_set_contents               (const gchar *filename,
-                                                              gchar *contents,
+                                                              const gchar *contents,
                                                               gsize length,
                                                               GError **error);
 gboolean                ario_file_test                       (const gchar *filename,
