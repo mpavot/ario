@@ -649,7 +649,7 @@ gboolean ario_file_get_contents (const gchar *filename, gchar **contents,
         return ret;
 }
 
-gboolean ario_file_set_contents (const gchar *filename, gchar *contents,
+gboolean ario_file_set_contents (const gchar *filename, const gchar *contents,
                                  gsize length, GError **error)
 {
         gboolean ret;
