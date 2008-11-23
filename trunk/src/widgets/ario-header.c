@@ -205,6 +205,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->pause_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PAUSE,
                                                               GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (header->priv->pause_image);
+        gtk_widget_show (header->priv->pause_image);
 
         header->priv->play_pause_button = gtk_button_new ();
 
