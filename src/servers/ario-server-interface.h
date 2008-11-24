@@ -115,9 +115,6 @@ typedef struct
                                                                        const gint pos);
         int                 (*save_playlist)                          (const char *name);
         void                (*delete_playlist)                        (const char *name);
-        void                (*use_count_inc)                          (void);
-
-        void                (*use_count_dec)                          (void);
 
         GSList *            (*get_outputs)                            (void);
 

@@ -50,8 +50,6 @@ typedef struct
 {
         ArioPlugin parent;
         ArioAudioscrobbler *audioscrobbler;
-
-        gboolean activated;
 } ArioAudioscrobblerPlugin;
 
 typedef struct
@@ -95,9 +93,6 @@ impl_activate (ArioPlugin *plugin,
         ArioAudioscrobblerPlugin *asplugin = ARIO_AUDIOSCROBBLER_PLUGIN (plugin);
 
         asplugin->audioscrobbler = ario_audioscrobbler_new ();
-
-        ario_server_use_count_inc ();
-        asplugin->activated = TRUE;
 }
 
 static void
@@ -107,11 +102,6 @@ impl_deactivate (ArioPlugin *plugin,
         ArioAudioscrobblerPlugin *asplugin = ARIO_AUDIOSCROBBLER_PLUGIN (plugin);
 
         g_object_unref (asplugin->audioscrobbler);
-
-        if (asplugin->activated) {
-                ario_server_use_count_dec ();
-                asplugin->activated = FALSE;
-        }
 }
 
 static GtkWidget*

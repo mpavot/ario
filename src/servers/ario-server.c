@@ -695,20 +695,6 @@ ario_server_delete_playlist (const char *name)
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
 }
 
-void
-ario_server_use_count_inc (void)
-{
-        ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->use_count_inc ();
-}
-
-void
-ario_server_use_count_dec (void)
-{
-        ARIO_LOG_FUNCTION_START
-        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->use_count_dec ();
-}
-
 GSList *
 ario_server_get_outputs (void)
 {
@@ -751,9 +737,9 @@ ario_server_free_file_list (ArioServerFileList *files)
 {
         ARIO_LOG_FUNCTION_START
         if (files) {
-                g_slist_foreach(files->directories, (GFunc) g_free, NULL);
+                g_slist_foreach (files->directories, (GFunc) g_free, NULL);
                 g_slist_free (files->directories);
-                g_slist_foreach(files->songs, (GFunc) ario_server_free_song, NULL);
+                g_slist_foreach (files->songs, (GFunc) ario_server_free_song, NULL);
                 g_slist_free (files->songs);
                 g_free (files);
         }

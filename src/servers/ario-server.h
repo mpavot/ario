@@ -21,6 +21,7 @@
 #define __ARIO_SERVER_H
 
 #include <glib-object.h>
+#define MPD_GLIB 1
 #include "lib/libmpdclient.h"
 
 G_BEGIN_DECLS
@@ -259,9 +260,6 @@ void                    ario_server_insert_at                              (cons
 // returns 0 if OK, 1 if playlist already exists
 int                     ario_server_save_playlist                          (const char *name);
 void                    ario_server_delete_playlist                        (const char *name);
-void                    ario_server_use_count_inc                          (void);
-
-void                    ario_server_use_count_dec                          (void);
 
 GSList *                ario_server_get_outputs                            (void);
 

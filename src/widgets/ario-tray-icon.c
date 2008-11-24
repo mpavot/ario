@@ -273,9 +273,6 @@ ario_tray_icon_finalize (GObject *object)
 
         g_return_if_fail (tray->priv != NULL);
 
-        /* TODO : Not very efficient */
-        ario_server_use_count_dec ();
-
         gtk_object_destroy (GTK_OBJECT (tray->priv->tooltip));
 #ifdef ENABLE_EGGTRAYICON
         g_object_unref (tray->priv->image);
@@ -358,9 +355,6 @@ ario_tray_icon_new (GtkActionGroup *group,
                                            NULL);
         instance = icon;
 
-        /* TODO : Not very efficient */
-        ario_server_use_count_inc ();
-
         g_signal_connect_object (server,
                                  "song_changed",
                                  G_CALLBACK (ario_tray_icon_song_changed_cb),
@@ -437,7 +431,6 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
                                       GtkWidget *widget)
 {
         icon->priv->tooltips_pointer_above = TRUE;
-        ario_server_use_count_inc ();
 
         if (icon->priv->timeout_id)
                 g_source_remove (icon->priv->timeout_id);
@@ -451,10 +444,8 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
                                       GdkEvent *event,
                                       GtkWidget *widget)
 {
-        if (icon->priv->tooltips_pointer_above) {
-                ario_server_use_count_dec ();
+        if (icon->priv->tooltips_pointer_above)
                 icon->priv->tooltips_pointer_above = FALSE;
-        }
 
         if (icon->priv->timeout_id)
                 g_source_remove (icon->priv->timeout_id);

@@ -84,10 +84,6 @@ static void ario_shell_server_state_changed_cb (ArioServer *server,
                                              ArioShell *shell);
 static void ario_shell_server_song_changed_cb (ArioServer *server,
                                             ArioShell *shell);
-static void ario_shell_window_show_cb (GtkWidget *widget,
-                                       ArioShell *shell);
-static void ario_shell_window_hide_cb (GtkWidget *widget,
-                                       ArioShell *shell);
 static gboolean ario_shell_window_state_cb (GtkWidget *widget,
                                             GdkEvent *event,
                                             ArioShell *shell);
@@ -477,16 +473,6 @@ ario_shell_construct (ArioShell *shell,
 
         gtk_container_add (GTK_CONTAINER (shell->priv->window), vbox);
 
-        g_signal_connect (shell->priv->window,
-                          "show",
-                          G_CALLBACK (ario_shell_window_show_cb),
-                          shell);
-
-        g_signal_connect (shell->priv->window,
-                          "hide",
-                          G_CALLBACK (ario_shell_window_hide_cb),
-                          shell);
-
         /* First launch assistant */
         if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {
                 firstlaunch = ario_firstlaunch_new ();
@@ -838,22 +824,6 @@ ario_shell_sync_paned (ArioShell *shell)
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
                                         pos);
-}
-
-static void
-ario_shell_window_show_cb (GtkWidget *widget,
-                           ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_server_use_count_inc ();
-}
-
-static void
-ario_shell_window_hide_cb (GtkWidget *widget,
-                           ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START
-        ario_server_use_count_dec ();
 }
 
 static gboolean

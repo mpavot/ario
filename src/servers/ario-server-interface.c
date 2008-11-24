@@ -171,8 +171,6 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         klass->insert_at = (void (*) (const GSList *, const gint)) dummy_void_pointer_int;
         klass->save_playlist = (int (*) (const char *)) dummy_int_pointer;
         klass->delete_playlist = (void (*) (const char *)) dummy_void_pointer;
-        klass->use_count_inc = dummy_void_void;
-        klass->use_count_dec = dummy_void_void;
         klass->get_outputs = (GSList* (*) (void)) dummy_pointer_void;
         klass->enable_output = dummy_void_int_int;
         klass->get_stats = (ArioServerStats* (*) (void)) dummy_pointer_void;

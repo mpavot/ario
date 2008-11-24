@@ -132,7 +132,6 @@ ario_shell_lyrics_new (void)
                           shell_lyrics);
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
-        ario_server_use_count_inc ();
 
         return GTK_WIDGET (shell_lyrics);
 }
@@ -149,7 +148,6 @@ ario_shell_lyrics_finalize (GObject *object)
         shell_lyrics = ARIO_SHELL_LYRICS (object);
 
         g_return_if_fail (shell_lyrics->priv != NULL);
-        ario_server_use_count_dec ();
 
         is_instantiated = FALSE;
 

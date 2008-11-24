@@ -121,6 +121,14 @@ if test x"$enable_search" != xno; then
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
+dnl MPD idle mode
+AC_ARG_ENABLE(mpdidle,
+              AC_HELP_STRING([--enable-mpdidle],
+                             [Use MPD idle mode (reduce CPU and network usage but still experimental]))
+if test x"$enable_mpdidle" = xyes; then
+   AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduce CPU and network usage but still experimental])
+fi
+
 dnl Stored Playlists
 AC_ARG_ENABLE(playlists,
               AC_HELP_STRING([--disable-playlists],
@@ -263,4 +271,9 @@ if test x${enable_audioscrobbler} != xno; then
         echo "Audioscrobbler support is:                ENABLED  (--disable-audioscrobbler)"
 else
         echo "Audioscrobbler support is:                DISABLED"
+fi
+if test x${enable_mpdidle} = xyes; then
+        echo "MPD 'idle' mode support is:               ENABLED"
+else
+        echo "MPD 'idle' mode support is:               DISABLED (--enable-mpdidle)"
 fi
