@@ -196,5 +196,6 @@ AM_CPPFLAGS = \
                 -DDATA_PATH=\""$(pkgdatadir)/ario/data/"\"\
                 -DUI_PATH=\""$(pkgdatadir)/ario/ui/"\"\
         	-DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
-                -DGLADE_PATH=\""$(pkgdatadir)/ario/glade/"\"
+                -DGLADE_PATH=\""$(pkgdatadir)/ario/glade/"\"\
+                -DMPD_GLIB
 
