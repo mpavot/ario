@@ -322,7 +322,7 @@ ario_mpd_connect_to (ArioMpd *mpd,
         if (instance->priv->support_idle) {
                 mpd_glibInit (instance->priv->connection);
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
-                ario_mpd_update_status ();
+                g_idle_add ((GSourceFunc) ario_mpd_update_status, NULL);
                 ario_mpd_launch_idle_timeout ();
         } else {
                 ario_mpd_launch_timeout ();
@@ -760,7 +760,7 @@ ario_mpd_update_status (void)
         //ARIO_LOG_FUNCTION_START
 
         if (instance->priv->is_updating)
-                return TRUE;
+                return !instance->priv->support_idle;
         instance->priv->is_updating = TRUE;
 
         /* check if there is a connection */
@@ -811,10 +811,11 @@ ario_mpd_update_status (void)
 
         instance->priv->is_updating = FALSE;
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle
+            && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
-        return TRUE;
+        return !instance->priv->support_idle;
 }
 
 static ArioServerSong *
