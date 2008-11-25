@@ -2064,8 +2064,13 @@ static void mpd_glibStartIdle(mpd_Connection *connection)
 {
 	static GIOChannel* iochan = NULL;
 
-        if (!iochan)
+        if (!iochan) {
+#ifdef WIN32
+	        iochan = g_io_channel_win32_new_socket (connection->sock);
+#else
 	        iochan = g_io_channel_unix_new (connection->sock);
+#endif
+	}
 
         connection->source_id = g_io_add_watch (iochan,
 					        G_IO_IN | G_IO_ERR | G_IO_HUP,

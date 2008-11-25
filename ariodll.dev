@@ -1,7 +1,7 @@
 [Project]
 FileName=ariodll.dev
 Name=ariodll
-UnitCount=124
+UnitCount=126
 Type=3
 Ver=1
 ObjFiles=
@@ -10,7 +10,7 @@ Libs=
 PrivateResource=ariodll_private.rc
 ResourceIncludes=
 MakeIncludes=
-Compiler=-mms-bitfields _@@_
+Compiler=-mms-bitfields _@@_-DMPD_GLIB_@@_
 CppCompiler=
 Linker=--export-all-symbols_@@_-lglib-2.0_@@_-lpangocairo-1.0_@@_-lpangowin32-1.0_@@_-latk-1.0_@@_-lgdk_pixbuf-2.0_@@_-llibintl_@@_-lgdk-win32-2.0_@@_-lpango-1.0_@@_-lgmodule-2.0_@@_-lgobject-2.0_@@_-lgthread-2.0_@@_-lgtk-win32-2.0_@@_-lcairo_@@_-llibxml2_@@_-lzlib_@@_-llibcurl_@@_-llibgettextsrc_@@_-lWs2_32_@@_-lglade-2.0_@@_
 IsCpp=0
@@ -1278,9 +1278,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit125]
-FileName=src\servers\ario-server-interface.h
+FileName=src\widgets\ario-connection-widget.c
 CompileCpp=0
-Folder=src/servers
+Folder=src/widgets
 Compile=1
 Link=1
 Priority=1000
@@ -1291,6 +1291,16 @@ BuildCmd=
 FileName=src\servers\ario-mpd.c
 CompileCpp=0
 Folder=src/servers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit126]
+FileName=src\widgets\ario-connection-widget.h
+CompileCpp=0
+Folder=src/widgets
 Compile=1
 Link=1
 Priority=1000
