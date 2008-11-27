@@ -1993,7 +1993,13 @@ static void mpd_readChanges(mpd_Connection *connection)
 	unsigned flags = 0;
 	mpd_ReturnElement *re;
 
-	if (!connection->returnElement) mpd_getNextReturnElement(connection);
+	if (!connection->returnElement)
+                mpd_getNextReturnElement(connection);
+
+        if (connection->error == MPD_ERROR_CONNCLOSED) {
+		connection->notify_cb (connection, IDLE_DISCONNECT, connection->userdata);
+                return;
+        }
 
 	while (connection->returnElement) {
 		re = connection->returnElement;
@@ -2048,7 +2054,7 @@ static gboolean mpd_glibReadCb (GIOChannel *iochan, GIOCondition cond, gpointer 
 		return FALSE;
 	}
 
-	if ((cond & G_IO_IN)) {
+	if (cond & G_IO_IN) {
 	     connection->idle = 0;
 	     if (connection->source_id) {
 		     g_source_remove (connection->source_id);
@@ -2073,9 +2079,9 @@ static void mpd_glibStartIdle(mpd_Connection *connection)
 	}
 
         connection->source_id = g_io_add_watch (iochan,
-					        G_IO_IN | G_IO_ERR | G_IO_HUP,
-					        mpd_glibReadCb,
-					        connection);
+						G_IO_IN | G_IO_ERR | G_IO_HUP,
+						mpd_glibReadCb,
+						connection);
 }
 
 static void mpd_glibStopIdle(mpd_Connection *connection)
