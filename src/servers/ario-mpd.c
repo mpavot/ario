@@ -272,8 +272,12 @@ ario_mpd_idle_cb (mpd_Connection *connection,
         if (flags & IDLE_STORED_PLAYLIST)
                 g_signal_emit_by_name (G_OBJECT (server_instance), "storedplaylists_changed");
 
+        if (flags & IDLE_DISCONNECT)
+                ario_mpd_check_errors ();
+
         /* Restart idle */
-        mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
+        if (instance->priv->connection)
+                mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
 static gboolean
@@ -444,6 +448,13 @@ ario_mpd_update_db (void)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
+static gboolean
+ario_mpd_try_reconnect (gpointer data)
+{
+        ario_server_connect ();
+        return FALSE;
+}
+
 static void
 ario_mpd_check_errors (void)
 {
@@ -455,9 +466,10 @@ ario_mpd_check_errors (void)
         if  (instance->priv->connection->error) {
                 ARIO_LOG_ERROR("%s", instance->priv->connection->errorStr);
                 mpd_clearError (instance->priv->connection);
-                ario_mpd_disconnect ();
+                ario_server_disconnect ();
+
                 /* Try to reconnect */
-                ario_server_connect ();
+                g_timeout_add (500, ario_mpd_try_reconnect, NULL);
         }
 }
 

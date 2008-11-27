@@ -260,7 +260,6 @@ ario_server_reconnect (void)
         ARIO_LOG_FUNCTION_START
         ario_server_disconnect ();
         ario_server_connect ();
-        g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_CONNECTIVITY_CHANGED], 0);
 }
 
 void
