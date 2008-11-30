@@ -1,7 +1,5 @@
 New features:
-Add experimental support of XMMS2
 Add support of python plugins
-Add 'local' option if MPD is on the same computer as Ario
 [ 1994706 ] Add a timout before tray tooltip showing
 [ 2016602 ] Play on enter
 [ 2017480 ] Authorize Only one instance of Ario
@@ -13,8 +11,10 @@ Add 'local' option if MPD is on the same computer as Ario
 [ 2110096 ] Track change notification with libnotify
 New plugin: Song Information
 Add the possibility to reorder the columns in playlist
-Add the possibility to organise configure the panes in the library tab
-Support of empty/unknown tags (Require git version of MPD)
+Add the possibility to configure the different trees in the library tab
+Support of empty/unknown tags (Require MPD 0.14)
+Experimental support of XMMS2
+Experimental support of 'idle' MPD command to reduce CPU and bandwith consumption. (Require MPD 0.14)
 New translations: ar, th, da, tr, fi, nb, zh_CN, nds
 
 Bug fixes and improvements:
@@ -22,13 +22,15 @@ Reduce volume adjustement step (patch from Simon Sehier)
 Fix mmkeys plug-in (patch from Stanislav Shramko)
 Launch web pages asynchronously
 Update radios list
-[ 2071774 ] Fix notification icon background / Debian Bug#495757
+[ 2071774 ] / Debian Bug #495757 Fix notification icon background
 Debian Bug #495687 : ario_mpd_connect_to : problems getting a response from "localhost" on port 6600 : Connection refused
-Fix another encoding problem with lyric wiki
-Improve performances and memory usage
+Fix text encoding problem with lyric wiki
 Fix drag and drop positions in playlist
 Auto reconnect to MPD on error.
-
+Fix problem with files on non UTF8 systems (patch from Заболотный Андрей)
+Rewrite first launch assistant
+Asynchronous fill of long artists/albums/songs lists
+Improve performances and memory usage
 
 Windows:
 Improve W32 compilation
