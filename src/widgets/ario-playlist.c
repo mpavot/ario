@@ -797,7 +797,7 @@ ario_playlist_move_rows (const int x, const int y)
                 /* adjust position acording to drop after */
                 if ((drop_pos == GTK_TREE_VIEW_DROP_AFTER
                      || drop_pos == GTK_TREE_VIEW_DROP_INTO_OR_AFTER)
-                    && pos < instance->priv->playlist_length - 1)
+                    && pos < instance->priv->playlist_length)
                         ++pos;
 
                 gtk_tree_path_free (path);
