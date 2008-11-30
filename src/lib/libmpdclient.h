@@ -536,7 +536,7 @@ void mpd_sendPrevCommand(mpd_Connection * connection);
 
 void mpd_sendMoveCommand(mpd_Connection * connection, int from, int to);
 
-void mpd_sendMoveIdCommand(mpd_Connection * connection, int from, int to);
+void mpd_sendMoveIdCommand(mpd_Connection * connection, int id, int to);
 
 void mpd_sendSwapCommand(mpd_Connection * connection, int song1, int song2);
 

@@ -76,7 +76,8 @@ typedef enum
         ARIO_SERVER_ACTION_ADD,
         ARIO_SERVER_ACTION_DELETE_ID,
         ARIO_SERVER_ACTION_DELETE_POS,
-        ARIO_SERVER_ACTION_MOVE
+        ARIO_SERVER_ACTION_MOVE,
+        ARIO_SERVER_ACTION_MOVEID
 }ArioServerActionType;
 
 typedef struct ArioServerQueueAction {
@@ -85,7 +86,7 @@ typedef struct ArioServerQueueAction {
                 const char *path;       // For ARIO_SERVER_ACTION_ADD
                 int id;                 // For ARIO_SERVER_ACTION_DELETE_ID
                 int pos;                // For ARIO_SERVER_ACTION_DELETE_POS
-                struct {                // For ARIO_SERVER_ACTION_MOVE
+                struct {                // For ARIO_SERVER_ACTION_MOVE and ARIO_SERVER_ACTION_MOVEID
                         int old_pos;
                         int new_pos;
                 };
@@ -253,6 +254,8 @@ void                    ario_server_queue_delete_id                        (cons
 void                    ario_server_queue_delete_pos                       (const int pos);
 void                    ario_server_queue_move                             (const int old_pos,
                                                                             const int new_pos);
+void                    ario_server_queue_moveid                           (const int id,
+                                                                            const int pos);
 void                    ario_server_queue_commit                           (void);
 
 void                    ario_server_insert_at                              (const GSList *songs,

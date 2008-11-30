@@ -657,32 +657,24 @@ ario_playlist_sort_changed_cb (GtkTreeSortable *treesortable,
                                ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-
         g_signal_connect (playlist->priv->model,
                           "rows-reordered",
                           G_CALLBACK (ario_playlist_rows_reordered_cb),
                           playlist);
 }
 
-typedef struct ArioPlaylistReorderData {
-        GSList *paths;
-        GSList *ids;
-} ArioPlaylistReorderData;
-
 static gboolean
 ario_playlist_rows_reordered_foreach (GtkTreeModel *model,
                                       GtkTreePath *p,
                                       GtkTreeIter *iter,
-                                      ArioPlaylistReorderData *data)
+                                      GSList **ids)
 {
-        gchar *path;
         gint *id;
 
         id = g_malloc (sizeof (gint));
-        gtk_tree_model_get (model, iter, FILE_COLUMN, &path, ID_COLUMN, id, -1);
+        gtk_tree_model_get (model, iter, ID_COLUMN, id, -1);
 
-        data->paths = g_slist_append (data->paths, path);
-        data->ids = g_slist_append (data->ids, id);
+        *ids = g_slist_append (*ids, id);
 
         return FALSE;
 }
@@ -695,39 +687,26 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                                  ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-
-        ArioPlaylistReorderData data;
-        data.paths = NULL;
-        data.ids = NULL;
-        GSList *tmp;
-
-        gtk_tree_model_foreach (GTK_TREE_MODEL (playlist->priv->model),
-                                (GtkTreeModelForeachFunc) ario_playlist_rows_reordered_foreach,
-                                &data);
-
-        for (tmp = data.ids; tmp; tmp = g_slist_next (tmp)) {
-                ario_server_queue_delete_id (*((gint *)tmp->data));
-        }
-
-        for (tmp = data.paths; tmp; tmp = g_slist_next (tmp)) {
-                ario_server_queue_add (tmp->data);
-        }
-        ario_server_queue_commit ();
-
-        g_slist_foreach (data.ids, (GFunc) g_free, NULL);
-        g_slist_free (data.ids);
-
-        g_slist_foreach (data.paths, (GFunc) g_free, NULL);
-        g_slist_free (data.paths);
+        GSList *tmp, *ids = NULL;
+        int i = 0;
 
         g_signal_handlers_disconnect_by_func (G_OBJECT (playlist->priv->model),
                                               G_CALLBACK (ario_playlist_rows_reordered_cb),
                                               playlist);
 
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (playlist->priv->model),
-                                              GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
-                                              GTK_SORT_ASCENDING);
+        gtk_tree_model_foreach (GTK_TREE_MODEL (playlist->priv->model),
+                                (GtkTreeModelForeachFunc) ario_playlist_rows_reordered_foreach,
+                                &ids);
 
+        for (tmp = ids; tmp; tmp = g_slist_next (tmp)) {
+                ario_server_queue_moveid (*((gint *)tmp->data), i);
+                ++i;
+        }
+
+        ario_server_queue_commit ();
+
+        g_slist_foreach (ids, (GFunc) g_free, NULL);
+        g_slist_free (ids);
 }
 
 GtkWidget *
