@@ -658,6 +658,18 @@ ario_server_queue_move (const int old_pos,
         interface->queue = g_slist_append (interface->queue, queue_action);
 }
 
+void
+ario_server_queue_moveid (const int id,
+                          const int pos)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioServerQueueAction *queue_action = (ArioServerQueueAction *) g_malloc (sizeof (ArioServerQueueAction));
+        queue_action->type = ARIO_SERVER_ACTION_MOVEID;
+        queue_action->old_pos = id;
+        queue_action->new_pos = pos;
+
+        interface->queue = g_slist_append (interface->queue, queue_action);
+}
 
 void
 ario_server_queue_commit (void)

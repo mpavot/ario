@@ -1105,21 +1105,25 @@ ario_mpd_queue_commit (void)
 
         for (temp = instance->parent.queue; temp; temp = g_slist_next (temp)) {
                 queue_action = (ArioServerQueueAction *) temp->data;
-                if(queue_action->type == ARIO_SERVER_ACTION_ADD) {
-                        if(queue_action->path) {
+                if (queue_action->type == ARIO_SERVER_ACTION_ADD) {
+                        if (queue_action->path) {
                                 mpd_sendAddCommand(instance->priv->connection, queue_action->path);
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_DELETE_ID) {
-                        if(queue_action->id >= 0) {
+                        if (queue_action->id >= 0) {
                                 mpd_sendDeleteIdCommand(instance->priv->connection, queue_action->id);
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_DELETE_POS) {
-                        if(queue_action->pos >= 0) {
+                        if (queue_action->pos >= 0) {
                                 mpd_sendDeleteCommand(instance->priv->connection, queue_action->pos);
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_MOVE) {
-                        if(queue_action->id >= 0) {
+                        if (queue_action->id >= 0) {
                                 mpd_sendMoveCommand(instance->priv->connection, queue_action->old_pos, queue_action->new_pos);
+                        }
+                } else if (queue_action->type == ARIO_SERVER_ACTION_MOVEID) {
+                        if (queue_action->id >= 0) {
+                                mpd_sendMoveIdCommand(instance->priv->connection, queue_action->old_pos, queue_action->new_pos);
                         }
                 }
         }

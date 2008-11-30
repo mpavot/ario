@@ -1103,6 +1103,8 @@ ario_xmms_queue_commit (void)
                         if (queue_action->id >= 0) {
                                 xmmsc_result_unref (xmmsc_playlist_move_entry (instance->priv->connection, NULL, queue_action->old_pos, queue_action->new_pos));
                         }
+                } else if (queue_action->type == ARIO_SERVER_ACTION_MOVEID) {
+                                /* TODO */
                 }
 
         }
