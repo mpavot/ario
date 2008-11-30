@@ -2041,6 +2041,7 @@ void mpd_stopIdle(mpd_Connection *connection)
 	connection->notify_cb = NULL;
 	connection->doneProcessing = 1;
 	mpd_executeCommand(connection, "noidle\n");
+	connection->doneProcessing = 0;
 	mpd_readChanges(connection);
 }
 
