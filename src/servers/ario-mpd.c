@@ -323,7 +323,7 @@ ario_mpd_connect_to (ArioMpd *mpd,
 
         ario_mpd_check_idle (mpd);
 
-        if (instance->priv->support_idle) {
+        if (instance->priv->support_idle && instance->priv->connection) {
                 mpd_glibInit (instance->priv->connection);
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
                 g_idle_add ((GSourceFunc) ario_mpd_update_status, NULL);
@@ -444,7 +444,7 @@ ario_mpd_update_db (void)
         mpd_sendUpdateCommand (instance->priv->connection, "");
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -516,7 +516,7 @@ ario_mpd_list_tags (const ArioServerTag tag,
                 }
         }
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return values;
@@ -624,7 +624,7 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
         }
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return albums;
@@ -679,7 +679,7 @@ ario_mpd_get_songs (const ArioServerCriteria *criteria,
         }
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return songs;
@@ -704,7 +704,7 @@ ario_mpd_get_songs_from_playlist (char *playlist)
         }
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return songs;
@@ -731,7 +731,7 @@ ario_mpd_get_playlists (void)
         }
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return playlists;
@@ -759,7 +759,7 @@ ario_mpd_get_playlist_changes (int playlist_id)
         }
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return songs;
@@ -846,7 +846,7 @@ ario_mpd_get_current_song_on_server (void)
                 mpd_freeInfoEntity (ent);
         }
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return song;
@@ -877,7 +877,7 @@ ario_mpd_get_current_playlist_total_time (void)
         }
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return total_time;
@@ -898,7 +898,7 @@ ario_mpd_get_last_update (void)
 
         ario_mpd_check_errors ();
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         if (instance->priv->stats)
@@ -918,7 +918,7 @@ ario_mpd_do_next (void)
         mpd_sendNextCommand (instance->priv->connection);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -933,7 +933,7 @@ ario_mpd_do_prev (void)
         mpd_sendPrevCommand (instance->priv->connection);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -948,7 +948,7 @@ ario_mpd_do_play (void)
         mpd_sendPlayCommand (instance->priv->connection, -1);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -964,7 +964,7 @@ ario_mpd_do_play_pos (gint id)
         mpd_sendPlayCommand (instance->priv->connection, id);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -979,7 +979,7 @@ ario_mpd_do_pause (void)
         mpd_sendPauseCommand (instance->priv->connection, TRUE);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -994,7 +994,7 @@ ario_mpd_do_stop (void)
         mpd_sendStopCommand (instance->priv->connection);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1009,7 +1009,7 @@ ario_mpd_set_current_elapsed (const gint elapsed)
         mpd_sendSeekCommand (instance->priv->connection, instance->priv->status->song, elapsed);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1025,7 +1025,7 @@ ario_mpd_set_current_volume (const gint volume)
         mpd_finishCommand (instance->priv->connection);
         ario_mpd_update_status ();
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1040,7 +1040,7 @@ ario_mpd_set_current_random (const gboolean random)
         mpd_sendRandomCommand (instance->priv->connection, random);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1055,7 +1055,7 @@ ario_mpd_set_current_repeat (const gboolean repeat)
         mpd_sendRepeatCommand (instance->priv->connection, repeat);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1070,7 +1070,7 @@ ario_mpd_set_crossfadetime (const int crossfadetime)
         mpd_sendCrossfadeCommand (instance->priv->connection, crossfadetime);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1086,7 +1086,7 @@ ario_mpd_clear (void)
         mpd_finishCommand (instance->priv->connection);
         ario_mpd_update_status ();
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1131,7 +1131,7 @@ ario_mpd_queue_commit (void)
         g_slist_free (instance->parent.queue);
         instance->parent.queue = NULL;
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1164,7 +1164,7 @@ ario_mpd_save_playlist (const char *name)
         mpd_sendSaveCommand (instance->priv->connection, name);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         if (instance->priv->connection->error == MPD_ERROR_ACK && instance->priv->connection->errorCode == MPD_ACK_ERROR_EXIST)
@@ -1179,7 +1179,7 @@ ario_mpd_delete_playlist (const char *name)
         mpd_sendRmCommand (instance->priv->connection, name);
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1201,7 +1201,7 @@ ario_mpd_get_outputs (void)
 
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return outputs;
@@ -1221,7 +1221,7 @@ ario_mpd_enable_output (int id,
 
         mpd_finishCommand (instance->priv->connection);
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 }
 
@@ -1240,7 +1240,7 @@ ario_mpd_get_stats (void)
 
         ario_mpd_check_errors ();
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return instance->priv->stats;
@@ -1277,7 +1277,7 @@ ario_mpd_get_songs_info (GSList *paths)
                 ario_mpd_check_errors ();
         }
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return songs;
@@ -1312,7 +1312,7 @@ ario_mpd_list_files (const char *path,
                 mpd_freeInfoEntity(entity);
         }
 
-        if (instance->priv->support_idle)
+        if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
 
         return files;
