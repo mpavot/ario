@@ -40,7 +40,7 @@ plugin_DATA = $(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
 
 EXTRA_DIST = $(plugin_in_files)\
              $(uixml_DATA)\
-             $(all_DATA)
+             $(alldata_DATA)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

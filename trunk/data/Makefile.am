@@ -50,3 +50,5 @@ EXTRA_DIST = 				\
 	$(glade_DATA)	\
 	$(alldata_DATA)	\
 	$(ui_DATA)
+
+CLEANFILES = $(desktop_DATA)

@@ -2,17 +2,20 @@ AC_PREREQ(2.59)
 
 m4_define(ario_version,1.2svn)
 
-PACKAGE=Ario
-
-AC_INIT(ario,ario_version)
+AC_INIT([Ario], [ario_version], [marc.pavot@gmail.com], [ario])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE($PACKAGE,ario_version)
+AM_INIT_AUTOMAKE
 
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_STDC_HEADERS
 AM_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.35.0])
+
+AM_PATH_LIBGCRYPT([1.4.0], [have_libgcrypt="yes"], [have_libgcrypt="no"])
+if test "${have_libgcrypt}" != "yes"; then
+	AC_MSG_ERROR([Missing dependency: libgcrypt])
+fi
 
 PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.12
                          glib-2.0 >= 2.4
@@ -220,7 +223,6 @@ plugins/libnotify/Makefile
 plugins/mmkeys/Makefile
 plugins/radios/Makefile
 plugins/wikipedia/Makefile
-plugins/sample-python/Makefile
 po/Makefile.in
 data/ario.desktop.in
 ])
