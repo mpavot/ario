@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-02 14:57+0100\n"
+"POT-Creation-Date: 2008-12-08 20:25+0100\n"
 "PO-Revision-Date: 2008-06-14 09:53+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -70,11 +70,11 @@ msgstr "חיבור"
 msgid "_Autoconnect on startup"
 msgstr "ה_תחבר אוטומטית בהפעלה"
 
-#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
 msgid "_Connect"
 msgstr "_התחבר"
 
-#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:154
 msgid "_Disconnect"
 msgstr "הת_נתק"
 
@@ -115,8 +115,8 @@ msgstr "חפש"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:688
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:319
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "אלבום"
 
@@ -128,7 +128,7 @@ msgstr ""
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:686
+#: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "אמן"
 
@@ -170,7 +170,7 @@ msgid "Interface"
 msgstr "מנשק"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:201
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:197
 msgid "Playlist"
 msgstr "רשימת השמעה"
 
@@ -185,15 +185,15 @@ msgstr "הצג לשוניות"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:690
+#: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "כותרת"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "רצועה"
 
@@ -398,7 +398,7 @@ msgstr "ימים"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "העטיפה כבר קיימת. האם ברצונך להחליפה?"
 
-#: ../src/covers/ario-cover-local.c:58
+#: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "ספריית המוסיקה"
 
@@ -413,7 +413,7 @@ msgstr "תוסף"
 msgid "Enabled"
 msgstr "מופעל"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:185
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
 msgid "_About"
 msgstr "_אודות"
 
@@ -474,7 +474,7 @@ msgstr "נגן/השהה"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:245
+#: ../src/widgets/ario-header.c:246
 msgid "Play next song"
 msgstr "השמע את השיר הבא"
 
@@ -483,12 +483,12 @@ msgstr "השמע את השיר הבא"
 msgid "Do nothing"
 msgstr "אל תעשה כלום"
 
-#: ../src/servers/ario-mpd.c:300
+#: ../src/servers/ario-mpd.c:382
 #, fuzzy
 msgid "Connecting to server..."
 msgstr "מתחבר לשרת MPD..."
 
-#: ../src/servers/ario-mpd.c:325
+#: ../src/servers/ario-mpd.c:407
 #, fuzzy
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "לא ניתן להתחבר ל-mpd. בדוק את אפשרויות החיבור"
@@ -518,8 +518,8 @@ msgid "Any"
 msgstr "כלשהו"
 
 #. impossible time or broken locale settings
-#: ../src/servers/ario-server.h:28
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../src/servers/ario-server.h:29
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -597,85 +597,85 @@ msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "האם אתה בטוח שברצונך למחוק את כל רשימות ההשמעה הנבחרות?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:372
+#: ../src/sources/ario-tree.c:373
 msgid "Cover"
 msgstr "עטיפה"
 
-#: ../src/sources/ario-tree.c:1175
+#: ../src/sources/ario-tree.c:1225
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "האם אתה בטוח שברצונך להסיר את כל העטיפות של האמנים הנבחרים?"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:145
 msgid "_File"
 msgstr "_קובץ"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:146
 msgid "_Edit"
 msgstr "ע_ריכה"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:147
 msgid "_View"
 msgstr "_תצוגה"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:148
 msgid "_Tool"
 msgstr "_כלי"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:149
 msgid "_Help"
 msgstr "_עזרה"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:157
 msgid "_Quit"
 msgstr "_יציאה"
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:160
 msgid "Plu_gins"
 msgstr "תו_ספים"
 
-#: ../src/shell/ario-shell.c:167
+#: ../src/shell/ario-shell.c:163
 msgid "Prefere_nces"
 msgstr "ה_עדפות"
 
-#: ../src/shell/ario-shell.c:170
+#: ../src/shell/ario-shell.c:166
 msgid "_Change current album cover"
 msgstr "ש_נה את עטיפת האלבום הנוכחי"
 
-#: ../src/shell/ario-shell.c:173
+#: ../src/shell/ario-shell.c:169
 msgid "Download album _covers"
 msgstr "הו_רד עטיפות אלבומים"
 
-#: ../src/shell/ario-shell.c:176
+#: ../src/shell/ario-shell.c:172
 msgid "Find similar artists"
 msgstr "חפש אמנים דומים"
 
-#: ../src/shell/ario-shell.c:179
+#: ../src/shell/ario-shell.c:175
 #, fuzzy
 msgid "Add similar songs to playlist"
 msgstr "הוסף ל_רשימת ההשמעה"
 
-#: ../src/shell/ario-shell.c:182
+#: ../src/shell/ario-shell.c:178
 msgid "Show _lyrics"
 msgstr "הצ_ג את מילות השירים"
 
-#: ../src/shell/ario-shell.c:188
+#: ../src/shell/ario-shell.c:184
 msgid "_Translate this application..."
 msgstr "_תרגם תוכנה זו..."
 
-#: ../src/shell/ario-shell.c:195
+#: ../src/shell/ario-shell.c:191
 msgid "S_tatusbar"
 msgstr "_שורת המצב"
 
-#: ../src/shell/ario-shell.c:198
+#: ../src/shell/ario-shell.c:194
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:710
+#: ../src/shell/ario-shell.c:696
 msgid "GTK client for MPD"
 msgstr "לקוח MPD עבור GTK"
 
-#: ../src/shell/ario-shell.c:711
+#: ../src/shell/ario-shell.c:697
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -687,7 +687,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
-#: ../src/shell/ario-shell.c:1045
+#: ../src/shell/ario-shell.c:1015
 msgid "Configure Plugins"
 msgstr "הגדרות תוספים"
 
@@ -807,37 +807,37 @@ msgstr "<i>מאת</i> %s <i>על ידי</i> %s"
 msgid "Play previous song"
 msgstr "נגן את השיר הקודם"
 
-#: ../src/widgets/ario-header.c:219
+#: ../src/widgets/ario-header.c:220
 msgid "Play/Pause the music"
 msgstr "נגן/השהה את המוסיקה"
 
-#: ../src/widgets/ario-header.c:232
+#: ../src/widgets/ario-header.c:233
 msgid "Stop the music"
 msgstr "עצור את המוסיקה"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:807
+#: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
 msgstr " מתוך "
 
-#: ../src/widgets/ario-header.c:322
+#: ../src/widgets/ario-header.c:323
 msgid "Toggle random on/off"
 msgstr "הפעל/בטל בחירה אקראית"
 
-#: ../src/widgets/ario-header.c:335
+#: ../src/widgets/ario-header.c:336
 msgid "Toggle repeat on/off"
 msgstr "הפעל/בטל חזרה"
 
-#: ../src/widgets/ario-header.c:341
+#: ../src/widgets/ario-header.c:342
 msgid "Change the music volume"
 msgstr "שנה את עוצמת המוסיקה"
 
-#: ../src/widgets/ario-lyrics-editor.c:266
+#: ../src/widgets/ario-lyrics-editor.c:272
 msgid "Downloading lyrics..."
 msgstr "מוריד את מילות השיר..."
 
-#: ../src/widgets/ario-lyrics-editor.c:283
+#: ../src/widgets/ario-lyrics-editor.c:289
 msgid "Lyrics not found"
 msgstr "לא נמצאו מילות השיר"
 
@@ -858,15 +858,15 @@ msgid "_Go to playing song"
 msgstr "ע_בור לשיר המתנגן"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1262
+#: ../src/widgets/ario-playlist.c:1240
 msgid "Save playlist"
 msgstr "שמור את רשימת ההשמעה"
 
-#: ../src/widgets/ario-playlist.c:1272
+#: ../src/widgets/ario-playlist.c:1250
 msgid "Playlist name :"
 msgstr "שם רשימת ההשמעה :"
 
-#: ../src/widgets/ario-playlist.c:1297
+#: ../src/widgets/ario-playlist.c:1275
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "רשימת ההשמעה כבר קיימת. האם ברצונך לשכתב עליה?"
 
@@ -895,84 +895,84 @@ msgid "Not playing"
 msgstr "לא מנגן"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
 msgid "Today %I:%M %p"
 msgstr "היום %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
 msgid "Yesterday %I:%M %p"
 msgstr "אתמול %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
 msgid "%b %d %I:%M %p"
 msgstr "%d ב%b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1190
 msgid "%b %d %Y"
 msgstr "%d ב%b %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "אף פעם"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
 msgid "OK"
 msgstr "אישור"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
 msgid "Logging in"
 msgstr "מתחבר"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
 msgid "Request failed"
 msgstr "הבקשה נכשלה"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
 msgid "Incorrect username"
 msgstr "שם משתמש שגוי"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
 msgid "Incorrect password"
 msgstr "סיסמה שגויה"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
 msgid "Handshake failed"
 msgstr "לחיצת היד נכשלה"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
 msgid "Client update required"
 msgstr "נדרש עדכון הלקוח"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
 msgid "Track submission failed"
 msgstr "שליחת הרצועה נכשלה"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
 msgid "Queue is too long"
 msgstr "התור ארוך מדי"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
 msgid "Track submission failed too many times"
 msgstr "שליחת הרצועה נכשלה יותר מדי פעמים"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Audioscrobbler preferences"
 msgstr "העדפות Audioscrobbler"
 
