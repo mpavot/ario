@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-02 14:57+0100\n"
+"POT-Creation-Date: 2008-12-08 20:25+0100\n"
 "PO-Revision-Date: 2008-09-19 13:01+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -68,11 +68,11 @@ msgstr "Kapcsolat"
 msgid "_Autoconnect on startup"
 msgstr "_Kapcsolódás indításkor"
 
-#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
 msgid "_Connect"
 msgstr "Kap_csolódás"
 
-#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:154
 msgid "_Disconnect"
 msgstr "_Kapcsolat bontása"
 
@@ -114,8 +114,8 @@ msgstr "Keresés"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:688
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:319
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Album"
 
@@ -127,7 +127,7 @@ msgstr "Csak egy példány engedélyezése az Ario-ból"
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:686
+#: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Előadó"
 
@@ -166,7 +166,7 @@ msgid "Interface"
 msgstr "Kezelőfelület"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:201
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:197
 msgid "Playlist"
 msgstr "Lejátszólista"
 
@@ -180,15 +180,15 @@ msgstr "Fülek megjelenítése"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:690
+#: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Cím"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Szám"
 
@@ -388,7 +388,7 @@ msgstr "nap"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Ez a borító már létezik. Felülírja?"
 
-#: ../src/covers/ario-cover-local.c:58
+#: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "Zene könyvtár"
 
@@ -403,7 +403,7 @@ msgstr "Bővítmény"
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:185
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
 msgid "_About"
 msgstr "_Névjegy"
 
@@ -464,7 +464,7 @@ msgstr "Lejátszás/szünet"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:245
+#: ../src/widgets/ario-header.c:246
 msgid "Play next song"
 msgstr "Következő dal lejátszása"
 
@@ -473,12 +473,12 @@ msgstr "Következő dal lejátszása"
 msgid "Do nothing"
 msgstr "Ne tegyen semmit"
 
-#: ../src/servers/ario-mpd.c:300
+#: ../src/servers/ario-mpd.c:382
 #, fuzzy
 msgid "Connecting to server..."
 msgstr "Kapcsolódás az MPD kiszolgálóhoz...."
 
-#: ../src/servers/ario-mpd.c:325
+#: ../src/servers/ario-mpd.c:407
 #, fuzzy
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
@@ -508,8 +508,8 @@ msgid "Any"
 msgstr "Bármely"
 
 #. impossible time or broken locale settings
-#: ../src/servers/ario-server.h:28
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../src/servers/ario-server.h:29
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -586,83 +586,83 @@ msgstr ""
 "Biztos benne, hogy eltávolítja az összes kiválasztott lejátszási listát?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:372
+#: ../src/sources/ario-tree.c:373
 msgid "Cover"
 msgstr "Borító"
 
-#: ../src/sources/ario-tree.c:1175
+#: ../src/sources/ario-tree.c:1225
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:145
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:146
 msgid "_Edit"
 msgstr "Sz_erkesztés"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:147
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:148
 msgid "_Tool"
 msgstr "_Eszköz"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:149
 msgid "_Help"
 msgstr "Segí_tség"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:157
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:160
 msgid "Plu_gins"
 msgstr "Bő_vítmények"
 
-#: ../src/shell/ario-shell.c:167
+#: ../src/shell/ario-shell.c:163
 msgid "Prefere_nces"
 msgstr "_Beállítások"
 
-#: ../src/shell/ario-shell.c:170
+#: ../src/shell/ario-shell.c:166
 msgid "_Change current album cover"
 msgstr "Jelenlegi albumborító _változtatása"
 
-#: ../src/shell/ario-shell.c:173
+#: ../src/shell/ario-shell.c:169
 msgid "Download album _covers"
 msgstr "Albumborítok _letöltése"
 
-#: ../src/shell/ario-shell.c:176
+#: ../src/shell/ario-shell.c:172
 msgid "Find similar artists"
 msgstr "Hasonló előadók keresése"
 
-#: ../src/shell/ario-shell.c:179
+#: ../src/shell/ario-shell.c:175
 msgid "Add similar songs to playlist"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:182
+#: ../src/shell/ario-shell.c:178
 msgid "Show _lyrics"
 msgstr "Dalszövegek _mutatása"
 
-#: ../src/shell/ario-shell.c:188
+#: ../src/shell/ario-shell.c:184
 msgid "_Translate this application..."
 msgstr "Alkalmazás _fordítása"
 
-#: ../src/shell/ario-shell.c:195
+#: ../src/shell/ario-shell.c:191
 msgid "S_tatusbar"
 msgstr "Á_llapotsor"
 
-#: ../src/shell/ario-shell.c:198
+#: ../src/shell/ario-shell.c:194
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:710
+#: ../src/shell/ario-shell.c:696
 msgid "GTK client for MPD"
 msgstr "GTK kliens MPD -hez"
 
-#: ../src/shell/ario-shell.c:711
+#: ../src/shell/ario-shell.c:697
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -692,7 +692,7 @@ msgstr ""
 "  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
 "  Zoltan Hoppar https://launchpad.net/~hopparz-gmail"
 
-#: ../src/shell/ario-shell.c:1045
+#: ../src/shell/ario-shell.c:1015
 msgid "Configure Plugins"
 msgstr "Bővítmények beállítása"
 
@@ -811,37 +811,37 @@ msgstr "<i>from</i> %s <i>by</i> %s"
 msgid "Play previous song"
 msgstr "Előző dal lejátszása"
 
-#: ../src/widgets/ario-header.c:219
+#: ../src/widgets/ario-header.c:220
 msgid "Play/Pause the music"
 msgstr "Zene lejátszása/szüneteltetése"
 
-#: ../src/widgets/ario-header.c:232
+#: ../src/widgets/ario-header.c:233
 msgid "Stop the music"
 msgstr "Zene leállítása"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:807
+#: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
 msgstr " / "
 
-#: ../src/widgets/ario-header.c:322
+#: ../src/widgets/ario-header.c:323
 msgid "Toggle random on/off"
 msgstr "Véletlen lejátszás be/ki"
 
-#: ../src/widgets/ario-header.c:335
+#: ../src/widgets/ario-header.c:336
 msgid "Toggle repeat on/off"
 msgstr "Ismétés be/ki"
 
-#: ../src/widgets/ario-header.c:341
+#: ../src/widgets/ario-header.c:342
 msgid "Change the music volume"
 msgstr "Hangerő módosítása"
 
-#: ../src/widgets/ario-lyrics-editor.c:266
+#: ../src/widgets/ario-lyrics-editor.c:272
 msgid "Downloading lyrics..."
 msgstr "Dalszövegek letöltése..."
 
-#: ../src/widgets/ario-lyrics-editor.c:283
+#: ../src/widgets/ario-lyrics-editor.c:289
 msgid "Lyrics not found"
 msgstr "Dalszöveg nem található"
 
@@ -862,15 +862,15 @@ msgid "_Go to playing song"
 msgstr "Tovább a szám _lejátszásához"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1262
+#: ../src/widgets/ario-playlist.c:1240
 msgid "Save playlist"
 msgstr "Lejátszólista mentése"
 
-#: ../src/widgets/ario-playlist.c:1272
+#: ../src/widgets/ario-playlist.c:1250
 msgid "Playlist name :"
 msgstr "Lejátszási lista neve :"
 
-#: ../src/widgets/ario-playlist.c:1297
+#: ../src/widgets/ario-playlist.c:1275
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lejátszási lista létezik. Felül akarja írni?"
 
@@ -899,84 +899,84 @@ msgid "Not playing"
 msgstr "Lejátszás áll"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
 msgid "Today %I:%M %p"
 msgstr "Ma %l.%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
 msgid "Yesterday %I:%M %p"
 msgstr "Tegnap %l.%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
 msgid "%a %I:%M %p"
 msgstr "%a %l.%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
 msgid "%b %d %I:%M %p"
 msgstr "%b %e %l.%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1190
 msgid "%b %d %Y"
 msgstr "%Y %b. %d"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "Soha"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
 msgid "Logging in"
 msgstr "Bejelentkezés"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
 msgid "Request failed"
 msgstr "A kérés meghiúsult"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
 msgid "Incorrect username"
 msgstr "Helytelen felhasználói név"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
 msgid "Incorrect password"
 msgstr "Hibás jelszó"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
 msgid "Handshake failed"
 msgstr "A kézfogás meghiúsult"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
 msgid "Client update required"
 msgstr "Az ügyfél frissítése szükséges"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
 msgid "Track submission failed"
 msgstr "A szám beküldése meghiúsult"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
 msgid "Queue is too long"
 msgstr "A sor túl hosszú"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
 msgid "Track submission failed too many times"
 msgstr "A számbeküldés túl sokszor hiúsult meg"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler beállításai"
 

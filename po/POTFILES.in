@@ -3,6 +3,7 @@
 # Source files
 data/ario.desktop.in.in
 data/glade/browser-prefs.glade
+data/glade/connection-widget.glade
 data/glade/cover-prefs.glade
 data/glade/connection-prefs.glade
 data/glade/connection-assistant.glade
@@ -125,6 +126,7 @@ src/shell/ario-shell-similarartists.c
 src/shell/ario-shell-similarartists.h
 src/shell/ario-shell-songinfos.c
 src/shell/ario-shell-songinfos.h
+src/widgets/ario-connection-widget.c
 src/widgets/ario-firstlaunch.c
 src/widgets/ario-firstlaunch.h
 src/widgets/ario-header.c

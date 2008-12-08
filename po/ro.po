@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-02 14:57+0100\n"
+"POT-Creation-Date: 2008-12-08 20:25+0100\n"
 "PO-Revision-Date: 2008-08-25 09:45+0000\n"
 "Last-Translator: Harabulă Adrian <opensoft@live.no>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -70,11 +70,11 @@ msgstr "Conexiune"
 msgid "_Autoconnect on startup"
 msgstr "_Autoconectare la pornire"
 
-#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:155
+#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
 msgid "_Connect"
 msgstr "_Conectare"
 
-#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:158
+#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:154
 msgid "_Disconnect"
 msgstr "_Deconectează"
 
@@ -115,8 +115,8 @@ msgstr "Căutare"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:385 ../src/widgets/ario-playlist.c:319
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:688
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:319
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Album"
 
@@ -128,7 +128,7 @@ msgstr ""
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:686
+#: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Artist"
 
@@ -170,7 +170,7 @@ msgid "Interface"
 msgstr "Interfaţă"
 
 #: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:201
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:197
 msgid "Playlist"
 msgstr "Listă redare"
 
@@ -185,15 +185,15 @@ msgstr "Arată tab-urile"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:431 ../src/shell/ario-shell-lyricsselect.c:189
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
 #: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:690
+#: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Titlu"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:424 ../src/widgets/ario-playlist.c:319
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:319
 msgid "Track"
 msgstr "Piesă"
 
@@ -398,7 +398,7 @@ msgstr "zile"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Coperta există deja. Doriţi să o înlocuiţi?"
 
-#: ../src/covers/ario-cover-local.c:58
+#: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "Directorul de muzică"
 
@@ -413,7 +413,7 @@ msgstr "Modul"
 msgid "Enabled"
 msgstr "Activat"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:185
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
 msgid "_About"
 msgstr "_Despre"
 
@@ -474,7 +474,7 @@ msgstr "Redare/Pauză"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:245
+#: ../src/widgets/ario-header.c:246
 msgid "Play next song"
 msgstr "Redă următoarea melodie"
 
@@ -483,12 +483,12 @@ msgstr "Redă următoarea melodie"
 msgid "Do nothing"
 msgstr "Nu fă nimic"
 
-#: ../src/servers/ario-mpd.c:300
+#: ../src/servers/ario-mpd.c:382
 #, fuzzy
 msgid "Connecting to server..."
 msgstr "Se conectează la srverul MPD..."
 
-#: ../src/servers/ario-mpd.c:325
+#: ../src/servers/ario-mpd.c:407
 #, fuzzy
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Conectare la mpd imposibilă. Verificaţi opţiunile de conectare."
@@ -518,8 +518,8 @@ msgid "Any"
 msgstr "Oricare"
 
 #. impossible time or broken locale settings
-#: ../src/servers/ario-server.h:28
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../src/servers/ario-server.h:29
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -597,85 +597,85 @@ msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Sigur vreţi să ştergeţi toate listele de redare selectate?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:372
+#: ../src/sources/ario-tree.c:373
 msgid "Cover"
 msgstr "Coperta"
 
-#: ../src/sources/ario-tree.c:1175
+#: ../src/sources/ario-tree.c:1225
 #, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Sigur vreţi să îdepărtaţi toate copertele artiştilor selectaţi?"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:145
 msgid "_File"
 msgstr "_Fişier"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:146
 msgid "_Edit"
 msgstr "Editează"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:147
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:148
 msgid "_Tool"
 msgstr "_Unealtă"
 
-#: ../src/shell/ario-shell.c:153
+#: ../src/shell/ario-shell.c:149
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../src/shell/ario-shell.c:161
+#: ../src/shell/ario-shell.c:157
 msgid "_Quit"
 msgstr "_Ieşire"
 
-#: ../src/shell/ario-shell.c:164
+#: ../src/shell/ario-shell.c:160
 msgid "Plu_gins"
 msgstr "Mo_dule"
 
-#: ../src/shell/ario-shell.c:167
+#: ../src/shell/ario-shell.c:163
 msgid "Prefere_nces"
 msgstr "Preferi_nţe"
 
-#: ../src/shell/ario-shell.c:170
+#: ../src/shell/ario-shell.c:166
 msgid "_Change current album cover"
 msgstr "_Schimbă coperta albumului curent"
 
-#: ../src/shell/ario-shell.c:173
+#: ../src/shell/ario-shell.c:169
 msgid "Download album _covers"
 msgstr "Descarcă coperte de albume"
 
-#: ../src/shell/ario-shell.c:176
+#: ../src/shell/ario-shell.c:172
 msgid "Find similar artists"
 msgstr "Găseşte artişti similari"
 
-#: ../src/shell/ario-shell.c:179
+#: ../src/shell/ario-shell.c:175
 #, fuzzy
 msgid "Add similar songs to playlist"
 msgstr "_Adaugă la lista de redare"
 
-#: ../src/shell/ario-shell.c:182
+#: ../src/shell/ario-shell.c:178
 msgid "Show _lyrics"
 msgstr "Arată _versurile"
 
-#: ../src/shell/ario-shell.c:188
+#: ../src/shell/ario-shell.c:184
 msgid "_Translate this application..."
 msgstr "_Tradu această aplicaţie"
 
-#: ../src/shell/ario-shell.c:195
+#: ../src/shell/ario-shell.c:191
 msgid "S_tatusbar"
 msgstr "Bară de s_tare"
 
-#: ../src/shell/ario-shell.c:198
+#: ../src/shell/ario-shell.c:194
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:710
+#: ../src/shell/ario-shell.c:696
 msgid "GTK client for MPD"
 msgstr "Client GTK pentru MPD"
 
-#: ../src/shell/ario-shell.c:711
+#: ../src/shell/ario-shell.c:697
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -691,7 +691,7 @@ msgstr ""
 "  Harabulă Adrian https://launchpad.net/~opensoft\n"
 "  Ionuț Jula https://launchpad.net/~ionutjula"
 
-#: ../src/shell/ario-shell.c:1045
+#: ../src/shell/ario-shell.c:1015
 msgid "Configure Plugins"
 msgstr "Configurează modulele"
 
@@ -810,37 +810,37 @@ msgstr "<i>de la</i> %s <i>la</i> %s"
 msgid "Play previous song"
 msgstr "Redă melodia precedentă"
 
-#: ../src/widgets/ario-header.c:219
+#: ../src/widgets/ario-header.c:220
 msgid "Play/Pause the music"
 msgstr "Redă/Pauză muzică"
 
-#: ../src/widgets/ario-header.c:232
+#: ../src/widgets/ario-header.c:233
 msgid "Stop the music"
 msgstr "Opreşte muzica"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:308 ../src/widgets/ario-tray-icon.c:807
+#: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
 msgstr " din "
 
-#: ../src/widgets/ario-header.c:322
+#: ../src/widgets/ario-header.c:323
 msgid "Toggle random on/off"
 msgstr "Comută întâmplător pornit/oprit"
 
-#: ../src/widgets/ario-header.c:335
+#: ../src/widgets/ario-header.c:336
 msgid "Toggle repeat on/off"
 msgstr "Comută repetă pornit/oprit"
 
-#: ../src/widgets/ario-header.c:341
+#: ../src/widgets/ario-header.c:342
 msgid "Change the music volume"
 msgstr "Schimbă volumul muzicii"
 
-#: ../src/widgets/ario-lyrics-editor.c:266
+#: ../src/widgets/ario-lyrics-editor.c:272
 msgid "Downloading lyrics..."
 msgstr "Se descarcă versurile..."
 
-#: ../src/widgets/ario-lyrics-editor.c:283
+#: ../src/widgets/ario-lyrics-editor.c:289
 msgid "Lyrics not found"
 msgstr "Versurile nu au fost găsite"
 
@@ -861,15 +861,15 @@ msgid "_Go to playing song"
 msgstr "_Du-te la melodia curentă"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1262
+#: ../src/widgets/ario-playlist.c:1240
 msgid "Save playlist"
 msgstr "Salvează lista de piese"
 
-#: ../src/widgets/ario-playlist.c:1272
+#: ../src/widgets/ario-playlist.c:1250
 msgid "Playlist name :"
 msgstr "Numele listei de redare :"
 
-#: ../src/widgets/ario-playlist.c:1297
+#: ../src/widgets/ario-playlist.c:1275
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lista de redare există deja. Vreţi să o suprascrieţi?"
 
@@ -898,84 +898,84 @@ msgid "Not playing"
 msgstr "Redare oprită"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
 msgid "Today %I:%M %p"
 msgstr "Astăzi %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
 msgid "Yesterday %I:%M %p"
 msgstr "Ieri %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1190
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "Niciodată"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
 msgid "Logging in"
 msgstr "Autentificare"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
 msgid "Request failed"
 msgstr "Cerere nereuşită"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
 msgid "Incorrect username"
 msgstr "Nume de utilizator incorect"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
 msgid "Incorrect password"
 msgstr "Parolă incorectă"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
 msgid "Handshake failed"
 msgstr "Iniţiere eşuată"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
 msgid "Client update required"
 msgstr "Actualizare client necesară"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
 msgid "Track submission failed"
 msgstr "Trimiterea piesei a eşuat"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
 msgid "Queue is too long"
 msgstr "Lista este prea lungă"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
 msgid "Track submission failed too many times"
 msgstr "Trimiterea piesei a eşuat de prea multe ori"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Audioscrobbler preferences"
 msgstr "Preferinţe Audioscrobbler"
 
