@@ -679,7 +679,7 @@ ario_shell_cmd_about (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         const char *authors[] = {
-#include "AUTHORS"
+#include "AUTHORS.tab"
                 "",
                 NULL
         };

@@ -1,3 +1,4 @@
+BUILT_SOURCES = 
 bin_PROGRAMS = ario
 
 noinst_LTLIBRARIES = libario.la
@@ -17,7 +18,8 @@ ario_LDADD = libario.la $(DEPS_LIBS)
 libario_la_LIBADD = \
         $(DEPS_LIBS)\
         $(AVAHI_LIBS)\
-        $(XMMS2_LIBS)
+        $(XMMS2_LIBS)\
+        $(LIBGCRYPT_LIBS)
 
 libario_la_SOURCES = \
 	ario-enum-types.c\
@@ -190,6 +192,7 @@ regenerate-enum-types:
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
                 $(AVAHI_CFLAGS) \
+		$(LIBGCRYPT_CFLAGS) \
                 $(XMMS2_CFLAGS) \
                 -DLOCALE_DIR=\""$(pkgdatadir)/locale"\"\
                 -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\
@@ -199,3 +202,10 @@ AM_CPPFLAGS = \
                 -DGLADE_PATH=\""$(pkgdatadir)/ario/glade/"\"\
                 -DMPD_GLIB
 
+AUTHORS.tab : $(top_srcdir)/AUTHORS
+	sed -e 's/^/"/' -e 's/$$/",/' < $(top_srcdir)/AUTHORS > $@.tmp
+	mv $@.tmp $@
+
+BUILT_SOURCES += AUTHORS.tab
+
+CLEANFILES = $(BUILT_SOURCES)
