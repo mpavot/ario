@@ -278,6 +278,7 @@ ario_server_interface_set_property (GObject *object,
         ARIO_LOG_FUNCTION_START
         ArioServerInterface *server_interface = ARIO_SERVER_INTERFACE (object);
         int song_id;
+	gboolean song_changed = FALSE;
 
         switch (prop_id) {
         case PROP_SONGID:
@@ -285,6 +286,7 @@ ario_server_interface_set_property (GObject *object,
                 if (server_interface->song_id != song_id) {
                         server_interface->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
                         server_interface->song_id = song_id;
+			song_changed = TRUE;
                 }
 
                 /* check if there is a connection */
@@ -306,10 +308,18 @@ ario_server_interface_set_property (GObject *object,
                                                           || (!old_song->album && new_song->album)
                                                           || (old_song->album && new_song->album && g_utf8_collate (old_song->album, new_song->album)) );
                                 }
+				if (!song_changed) {
+					song_changed = ( (old_song->name && !new_song->name)
+                                                          || (!old_song->name && new_song->name)
+                                                          || (old_song->name && new_song->name && g_utf8_collate (old_song->name, new_song->name)) );
+				}
                         }
 
                         if (state_changed || artist_changed || album_changed)
                                 server_interface->signals_to_emit |= SERVER_ALBUM_CHANGED_FLAG;
+
+                        if (song_changed)
+                                server_interface->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
 
                         if (server_interface->server_song)
                                 ario_server_free_song (server_interface->server_song);

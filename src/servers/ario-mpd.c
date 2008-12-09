@@ -789,7 +789,8 @@ ario_mpd_update_status (void)
                 ario_mpd_check_errors ();
 
                 if (instance->priv->status) {
-                        if (instance->parent.song_id != instance->priv->status->songid)
+                        if (instance->parent.song_id != instance->priv->status->songid
+			    || instance->parent.playlist_id != (int) instance->priv->status->playlist)
                                 g_object_set (G_OBJECT (instance), "song_id", instance->priv->status->songid, NULL);
 
                         if (instance->parent.state != instance->priv->status->state)
@@ -804,9 +805,7 @@ ario_mpd_update_status (void)
                         }
 
                         if (instance->parent.playlist_id != (int) instance->priv->status->playlist) {
-                                g_object_set (G_OBJECT (instance), "song_id", instance->priv->status->songid, NULL);
                                 g_object_set (G_OBJECT (instance), "playlist_id", instance->priv->status->playlist, NULL);
-
                                 instance->parent.playlist_length = instance->priv->status->playlistLength;
                         }
 
