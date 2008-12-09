@@ -194,12 +194,12 @@ AM_CPPFLAGS = \
                 $(AVAHI_CFLAGS) \
 		$(LIBGCRYPT_CFLAGS) \
                 $(XMMS2_CFLAGS) \
-                -DLOCALE_DIR=\""$(pkgdatadir)/locale"\"\
-                -DPIXMAP_PATH=\""$(pkgdatadir)/ario/art/"\"\
-                -DDATA_PATH=\""$(pkgdatadir)/ario/data/"\"\
-                -DUI_PATH=\""$(pkgdatadir)/ario/ui/"\"\
+                -DLOCALE_DIR=\""$(datadir)/locale"\"\
+                -DPIXMAP_PATH=\""$(pkgdatadir)/art/"\"\
+                -DDATA_PATH=\""$(pkgdatadir)/data/"\"\
+                -DUI_PATH=\""$(pkgdatadir)/ui/"\"\
         	-DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
-                -DGLADE_PATH=\""$(pkgdatadir)/ario/glade/"\"\
+                -DGLADE_PATH=\""$(pkgdatadir)/glade/"\"\
                 -DMPD_GLIB
 
 AUTHORS.tab : $(top_srcdir)/AUTHORS

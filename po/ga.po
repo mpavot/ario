@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-06-14 09:52+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -38,6 +38,51 @@ msgstr ""
 #, fuzzy
 msgid "Sort albums: "
 msgstr "Treo: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Uathaimsigh"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Réamhshocrú"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Óstach:"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Comhadlann ceoil:"
+
+#: ../data/glade/connection-widget.glade.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr ""
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Ainm:"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Focal Faire :"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port:"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Freastalaí"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -452,6 +497,7 @@ msgstr ""
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Ainm"
 
@@ -775,17 +821,43 @@ msgstr "Amhráin"
 msgid "Song Properties"
 msgstr "Airíonna Amhráin"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Beathaisnéisín"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Uathaimsiú an freastalaí"
+
+#: ../src/widgets/ario-connection-widget.c:542
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Mura fheiceann tú do fhreastalaí MPD de bharr an chumraíocht uathoibríoch, "
+"ba chóir dearbhú go bhfuil zeroconf cumasaithe i sa chumraíocht MPD agat nó "
+"bain feidhm as an chumraíocht de lámh."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Óstríomhaire"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Caithfear freastalaí a roghnú."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Beathaisnéisín Nua"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Bainfear feidhm as an chumraíocht a leanas:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Óstach:"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port:"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -1005,10 +1077,6 @@ msgstr "Am an t-iarratas deiridh:"
 msgid "Last.fm Profile"
 msgstr "Beathaisnéisín Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Focal Faire :"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Rianta sa scuaine:"
@@ -1111,10 +1179,6 @@ msgstr "Craolacháin Idirlín"
 msgid "Add a WebRadio"
 msgstr "Cuir Craolachán Gréasáin Leis"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Ainm:"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1158,51 +1222,11 @@ msgstr "Breiseáin chun an t-ealaíontóir reatha a chuardach ar vicipéid"
 msgid "Wikipedia"
 msgstr "Vicipéid"
 
-#~ msgid "Auto detect"
-#~ msgstr "Uathaimsigh"
-
-#~ msgid "Default"
-#~ msgstr "Réamhshocrú"
-
-#~ msgid "Music directory :"
-#~ msgstr "Comhadlann ceoil:"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Freastalaí"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Uathchumraíocht"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Cumraíocht de lámh"
-
-#~ msgid "Profile"
-#~ msgstr "Beathaisnéisín"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Uathaimsiú an freastalaí"
-
-#~ msgid ""
-#~ "If you don't see your MPD server thanks to the automatic detection, you "
-#~ "should check that zeroconf is activated in your MPD configuration or use "
-#~ "the manual configuration."
-#~ msgstr ""
-#~ "Mura fheiceann tú do fhreastalaí MPD de bharr an chumraíocht "
-#~ "uathoibríoch, ba chóir dearbhú go bhfuil zeroconf cumasaithe i sa "
-#~ "chumraíocht MPD agat nó bain feidhm as an chumraíocht de lámh."
-
-#~ msgid "Host"
-#~ msgstr "Óstríomhaire"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Caithfear freastalaí a roghnú."
-
-#~ msgid "New Profile"
-#~ msgstr "Beathaisnéisín Nua"
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Cuir an Seinmréim i dTaisce"

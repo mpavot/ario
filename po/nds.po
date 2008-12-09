@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-09-26 09:24+0000\n"
 "Last-Translator: bastianneumann <Unknown>\n"
 "Language-Team: German, Low <nds@li.org>\n"
@@ -36,6 +36,52 @@ msgstr "Bibliothek Organisatschoon"
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
 msgstr "Alben sorteren: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Van süllmst weerkennen"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Standard"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Host :"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Musik Verteeknis"
+
+#: ../data/glade/connection-widget.glade.h:5
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD is op de seelbe coomputer wie Ario"
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Nohm:"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Passwoort:"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Server"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -439,6 +485,7 @@ msgstr "Na Jahr"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Naam"
 
@@ -743,17 +790,45 @@ msgstr "Leeder"
 msgid "Song Properties"
 msgstr "Leed Eegenschaften"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profeel"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Server van süllmst erkennen"
+
+#: ../src/widgets/ario-connection-widget.c:542
+#, fuzzy
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Se moeten de MPD Server för de Verbinnung angäven. Wenn de dien MPD Server "
+"nüx kieken kannst, bedanke dien van süllmst Konfiguratschoon. Do soolltest "
+"unersöken op de zeroconf in diene MPD Konfiguratschoon is in gang set oder "
+"de süllmst moken."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Reekner"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "De mokst nen server utkieken."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Nieg Profil"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "De foolgende Konfeeguration wirste benutzen:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Host :"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port :"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -971,10 +1046,6 @@ msgstr "Lesde tossag tied:"
 msgid "Last.fm Profile"
 msgstr "Last.fm Profil"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Passwoort:"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Slangsteehend tracks:"
@@ -1073,10 +1144,6 @@ msgstr "Innernet Radios"
 msgid "Add a WebRadio"
 msgstr "Pack en WebRadio"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Nohm:"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1120,43 +1187,8 @@ msgstr "En plugin för de Seeke dat Makers op Wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Van süllmst weerkennen"
-
-#~ msgid "Default"
-#~ msgstr "Standard"
-
-#~ msgid "Music directory :"
-#~ msgstr "Musik Verteeknis"
-
-#, fuzzy
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "MPD is op de seelbe coomputer wie Ario"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Server"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Van süllmst konfigueren"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Süllmst konfigueren"
-
-#~ msgid "Profile"
-#~ msgstr "Profeel"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Server van süllmst erkennen"
-
-#~ msgid "Host"
-#~ msgstr "Reekner"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "De mokst nen server utkieken."
-
-#~ msgid "New Profile"
-#~ msgstr "Nieg Profil"

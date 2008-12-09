@@ -10,8 +10,19 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_STDC_HEADERS
 AM_PROG_LIBTOOL
-AC_PROG_INTLTOOL([0.35.0])
 
+dnl ================================================================
+dnl i18n
+dnl ================================================================
+IT_PROG_INTLTOOL(0.35.5)
+GETTEXT_PACKAGE=ario
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
+AM_GLIB_GNU_GETTEXT
+
+dnl ================================================================
+dnl Dependencies
+dnl ================================================================
 AM_PATH_LIBGCRYPT([1.4.0], [have_libgcrypt="yes"], [have_libgcrypt="no"])
 if test "${have_libgcrypt}" != "yes"; then
 	AC_MSG_ERROR([Missing dependency: libgcrypt])
@@ -29,15 +40,11 @@ PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.12
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
 
-dnl i18n
-GETTEXT_PACKAGE=Ario
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
-AM_GLIB_GNU_GETTEXT
-
 AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
+dnl ================================================================
 dnl Debugging information
+dnl ================================================================
 AC_ARG_ENABLE(debug,
               AC_HELP_STRING([--enable-debug],
                              [Add runtime debugging information (slower)]))
@@ -45,7 +52,9 @@ if test x"$enable_debug" = xyes; then
    AC_DEFINE(DEBUG, 1, [Add runtime debugging information (slower)])
 fi
 
+dnl ================================================================
 dnl XMMS2 support
+dnl ================================================================
 AC_ARG_ENABLE(xmms2,
               AC_HELP_STRING([--enable-xmms2],
                              [Add support of XMMS2 (VERY EXPERIMENTAL)]))
@@ -115,7 +124,9 @@ if test "x$enable_python" = "xyes"; then
 fi
 AM_CONDITIONAL(ENABLE_PYTHON, test x"$enable_python" = xyes)
 
+dnl ================================================================
 dnl Search
+dnl ================================================================
 AC_ARG_ENABLE(search,
               AC_HELP_STRING([--disable-search],
                              [Disable support of search view]))
@@ -124,7 +135,9 @@ if test x"$enable_search" != xno; then
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
+dnl ================================================================
 dnl MPD idle mode
+dnl ================================================================
 AC_ARG_ENABLE(mpdidle,
               AC_HELP_STRING([--enable-mpdidle],
                              [Use MPD idle mode (reduce CPU and network usage but still experimental]))
@@ -132,7 +145,9 @@ if test x"$enable_mpdidle" = xyes; then
    AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduce CPU and network usage but still experimental])
 fi
 
+dnl ================================================================
 dnl Stored Playlists
+dnl ================================================================
 AC_ARG_ENABLE(playlists,
               AC_HELP_STRING([--disable-playlists],
                              [Disable support of playlists]))
@@ -141,7 +156,9 @@ if test x"$enable_playlists" != xno; then
    AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
+dnl ================================================================
 dnl Eggtrayicon
+dnl ================================================================
 AC_ARG_ENABLE(eggtrayicon,
               AC_HELP_STRING([--disable-eggtrayicon],
                              [Disable support of eggtrayicon]))
@@ -150,7 +167,9 @@ if test x"$enable_eggtrayicon" != xno; then
 fi
 AM_CONDITIONAL(USE_EGGTRAYICON, test x"$enable_eggtrayicon" != xno)
 
+dnl ================================================================
 dnl DBUS
+dnl ================================================================
 AC_ARG_ENABLE(dbus,
               AC_HELP_STRING([--disable-dbus],
                              [Disable support of dbus]))
@@ -162,7 +181,9 @@ if test x"$enable_dbus" != xno; then
 fi
 AM_CONDITIONAL(USE_DBUS, test x"$enable_dbus" != xno)
 
+dnl ================================================================
 dnl Libnotify
+dnl ================================================================
 AC_ARG_ENABLE(notify,
               AC_HELP_STRING([--disable-notify],
                              [Disable support of libnotify]))
@@ -172,7 +193,9 @@ if test x"$enable_notify" != xno; then
 fi
 AM_CONDITIONAL(USE_NOTIFY, test x"$enable_notify" != xno)
 
+dnl ================================================================
 dnl AUDIOSCROBBLER
+dnl ================================================================
 AC_ARG_ENABLE(audioscrobbler,
               AC_HELP_STRING([--disable-audioscrobbler],
                              [Disable support of audioscrobbler]))
@@ -193,7 +216,9 @@ if test x"$enable_audioscrobbler" != xno; then
 fi
 AM_CONDITIONAL(USE_AUDIOSCROBBLER, test x"$enable_audioscrobbler" != xno)
 
+dnl ================================================================
 dnl Avahi
+dnl ================================================================
 AC_ARG_ENABLE(avahi,
               AC_HELP_STRING([--disable-avahi],
                              [Disable support of avahi]))

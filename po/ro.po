@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-08-25 09:45+0000\n"
 "Last-Translator: Harabulă Adrian <opensoft@live.no>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -38,6 +38,51 @@ msgstr ""
 #, fuzzy
 msgid "Sort albums: "
 msgstr "Stare: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Detectează automat"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Implicit"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Gazdă:"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Directorul cu muzică:"
+
+#: ../data/glade/connection-widget.glade.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr ""
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Nume:"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Parolă:"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port:"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Server"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -449,6 +494,7 @@ msgstr ""
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Nume"
 
@@ -769,17 +815,43 @@ msgstr "Melodii"
 msgid "Song Properties"
 msgstr "Proprietăţile melodiei"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Autodetectare server"
+
+#: ../src/widgets/ario-connection-widget.c:542
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Dacă nu vedeţi serverul MPD datorită detectării automate, ar trebui să vă "
+"asiguraţi că zeroconf este activat in configuraţiile MPD-ului sau utilizaţi "
+"configuraţia manuală."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Gazda"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Trebuie să selectaţi un server."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Profil nou"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Va fi folosită următoarea configuraţie:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Gazdă:"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port:"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -999,10 +1071,6 @@ msgstr "Data ultimei trimiteri:"
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Parolă:"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Piese în aşteptare:"
@@ -1105,10 +1173,6 @@ msgstr "Radiouri de pe Internet"
 msgid "Add a WebRadio"
 msgstr "Adaugă un Radio de pe Web"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Nume:"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1152,51 +1216,11 @@ msgstr "Un modul să caute artistul curent pe wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Detectează automat"
-
-#~ msgid "Default"
-#~ msgstr "Implicit"
-
-#~ msgid "Music directory :"
-#~ msgstr "Directorul cu muzică:"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Server"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Configurare automată"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Configurare manuală"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Autodetectare server"
-
-#~ msgid ""
-#~ "If you don't see your MPD server thanks to the automatic detection, you "
-#~ "should check that zeroconf is activated in your MPD configuration or use "
-#~ "the manual configuration."
-#~ msgstr ""
-#~ "Dacă nu vedeţi serverul MPD datorită detectării automate, ar trebui să vă "
-#~ "asiguraţi că zeroconf este activat in configuraţiile MPD-ului sau "
-#~ "utilizaţi configuraţia manuală."
-
-#~ msgid "Host"
-#~ msgstr "Gazda"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Trebuie să selectaţi un server."
-
-#~ msgid "New Profile"
-#~ msgstr "Profil nou"
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Salvează lista de redare"

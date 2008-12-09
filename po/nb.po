@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-10-09 19:56+0000\n"
 "Last-Translator: Steve Pedersen <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -36,6 +36,52 @@ msgstr "Organisasjon av Bibliotek"
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
 msgstr "Sortér album: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Autooppdag"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Forvalg"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Vert :"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Musikk mappe :"
+
+#: ../data/glade/connection-widget.glade.h:5
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD er på samme datamaskinen som Ario"
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Navn :"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Passord :"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Tjener"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -439,6 +485,7 @@ msgstr "Etter år"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Navn"
 
@@ -749,17 +796,43 @@ msgstr "Sanger"
 msgid "Song Properties"
 msgstr "Egenskaper for sang"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Autooppdagelse av tjener"
+
+#: ../src/widgets/ario-connection-widget.c:542
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Hvis du ikke ser din MPD tjener takket være automatisk konfigurasjon, bør du "
+"enten sjekke at zeroconf er aktivert i din MPD konfigurasjon, eller bruke "
+"den manuelle konfigurasjonen."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Vert"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Du må velge en tjener."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Ny profil"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Følgende konfigurasjon vil bli brukt:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Vert :"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port :"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -979,10 +1052,6 @@ msgstr "Tid for siste innsending:"
 msgid "Last.fm Profile"
 msgstr "Last.fm Profil"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Passord :"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Kølagte spor:"
@@ -1081,10 +1150,6 @@ msgstr "Nettradioer"
 msgid "Add a WebRadio"
 msgstr "Legg til WebRadio"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Navn :"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1127,55 +1192,11 @@ msgstr "Programtillegg for å søke etter aktuell artist på Wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Autooppdag"
-
-#~ msgid "Default"
-#~ msgstr "Forvalg"
-
-#~ msgid "Music directory :"
-#~ msgstr "Musikk mappe :"
-
-#, fuzzy
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "MPD er på samme datamaskinen som Ario"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Tjener"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatisk konfigurasjon"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Manuell konfigurasjon"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Autooppdagelse av tjener"
-
-#~ msgid ""
-#~ "If you don't see your MPD server thanks to the automatic detection, you "
-#~ "should check that zeroconf is activated in your MPD configuration or use "
-#~ "the manual configuration."
-#~ msgstr ""
-#~ "Hvis du ikke ser din MPD tjener takket være automatisk konfigurasjon, bør "
-#~ "du enten sjekke at zeroconf er aktivert i din MPD konfigurasjon, eller "
-#~ "bruke den manuelle konfigurasjonen."
-
-#~ msgid "Host"
-#~ msgstr "Vert"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Du må velge en tjener."
-
-#~ msgid "New Profile"
-#~ msgstr "Ny profil"
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Lagre Spilleliste"
