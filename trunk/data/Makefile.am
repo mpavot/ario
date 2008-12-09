@@ -3,7 +3,7 @@ desktop_in_files = ario.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-artdir = $(pkgdatadir)/ario/art
+artdir = $(pkgdatadir)/art
 art_DATA = ario.png		\
 	   ario-play.png	\
 	   ario-pause.png	\
@@ -16,7 +16,7 @@ art_DATA = ario.png		\
 	   volume-max.png	\
 	   volume-min.png
 
-gladedir = $(pkgdatadir)/ario/glade
+gladedir = $(pkgdatadir)/glade
 glade_DATA = glade/browser-prefs.glade	        \
              glade/connection-prefs.glade	\
              glade/connection-assistant.glade	\
@@ -37,10 +37,10 @@ glade_DATA = glade/browser-prefs.glade	        \
 appicon_DATA = ario.png
 appicondir = $(datadir)/icons/hicolor/48x48/apps
 
-uidir = $(pkgdatadir)/ario/ui
+uidir = $(pkgdatadir)/ui
 ui_DATA = ario-ui.xml
 
-alldatadir = $(pkgdatadir)/ario/data
+alldatadir = $(pkgdatadir)/data
 alldata_DATA = profiles.xml.default 
 
 EXTRA_DIST = 				\

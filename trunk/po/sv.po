@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-07-01 12:37+0000\n"
 "Last-Translator: Magnus Malmsten <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -38,6 +38,51 @@ msgstr ""
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
 msgstr "Sortera album: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Upptäck automatiskt"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Standard"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Värd:"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Musikkatalog :"
+
+#: ../data/glade/connection-widget.glade.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr ""
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Namn:"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Lösenord:"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port:"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Server"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 #, fuzzy
@@ -460,6 +505,7 @@ msgstr "Efter år"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Namn"
 
@@ -786,18 +832,45 @@ msgstr "Låtar"
 msgid "Song Properties"
 msgstr "Låtegenskaper"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Automatisk upptäckning av server"
+
+#: ../src/widgets/ario-connection-widget.c:542
+#, fuzzy
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Om du inte kan se din MPD-server med hjälp av automatisk upptäckning av "
+"server, kontrollera att zeroconf är aktiverat i MPD-inställningarna eller "
+"använd manuell inställning."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Värd"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Du måste välja en server."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Ny profil"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 #, fuzzy
 msgid "The following configuration will be used:"
 msgstr "Följande inställningar kommer användas"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Värd:"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port:"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 #, fuzzy
@@ -1022,10 +1095,6 @@ msgstr "Tid för senaste inrapportering:"
 msgid "Last.fm Profile"
 msgstr "Last.fm-profil"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Lösenord:"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Spår i kö:"
@@ -1128,10 +1197,6 @@ msgstr "Internet radion"
 msgid "Add a WebRadio"
 msgstr "Lägg till en webbradio"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Namn:"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1174,42 +1239,11 @@ msgstr "Ett tillägg för att söka artister på wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Upptäck automatiskt"
-
-#~ msgid "Default"
-#~ msgstr "Standard"
-
-#~ msgid "Music directory :"
-#~ msgstr "Musikkatalog :"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Server"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatisk konfiguration"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Manuell inställning"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Automatisk upptäckning av server"
-
-#~ msgid "Host"
-#~ msgstr "Värd"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Du måste välja en server."
-
-#~ msgid "New Profile"
-#~ msgstr "Ny profil"
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Spara spellista"

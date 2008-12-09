@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-09-19 13:01+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -35,6 +35,52 @@ msgstr "Gyűjtemény rendezése"
 
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
+msgstr ""
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Automatikus felismerés"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Hoszt :"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Zene könyvtár :"
+
+#: ../data/glade/connection-widget.glade.h:5
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD ugyanazon a gépen van mint maga az Ario"
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Név :"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Jelszó :"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Szerver"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
 msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
@@ -439,6 +485,7 @@ msgstr "Év szerint"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Név"
 
@@ -770,17 +817,45 @@ msgstr "Dalok"
 msgid "Song Properties"
 msgstr "Dal tulajdonságai"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Kiszolgáló automatikus felismerése"
+
+#: ../src/widgets/ario-connection-widget.c:542
+#, fuzzy
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
+"automatikus konfiguráció következtében nem látja az MPD szervert, "
+"ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
+"használja a kézi beállítást."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Hoszt"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Ki kell választania a kiszolgálót."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Új profil"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "A következő beállítások lesznek használva:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Hoszt :"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port :"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -1000,10 +1075,6 @@ msgstr "Utolsó beküldés időpontja:"
 msgid "Last.fm Profile"
 msgstr "Last.fm profil"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Jelszó :"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Sorba állított számok:"
@@ -1102,10 +1173,6 @@ msgstr "Internetrádiók"
 msgid "Add a WebRadio"
 msgstr "Webrádió hozzáadása"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Név :"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1148,46 +1215,11 @@ msgstr "Bővítmény a jelenlegi előadó kereséséhez a wikipédián."
 msgid "Wikipedia"
 msgstr "Wikipédia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Automatikus felismerés"
-
-#~ msgid "Default"
-#~ msgstr "Alapértelmezett"
-
-#~ msgid "Music directory :"
-#~ msgstr "Zene könyvtár :"
-
-#, fuzzy
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "MPD ugyanazon a gépen van mint maga az Ario"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Szerver"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatikus beállítás"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Kézi beállítás"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Kiszolgáló automatikus felismerése"
-
-#~ msgid "Host"
-#~ msgstr "Hoszt"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Ki kell választania a kiszolgálót."
-
-#~ msgid "New Profile"
-#~ msgstr "Új profil"
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

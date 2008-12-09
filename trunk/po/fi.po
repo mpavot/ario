@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario_ario-fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-10-20 16:58+0000\n"
 "Last-Translator: Ari Takalo <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -38,6 +38,52 @@ msgstr "Kokoelman järjestäminen"
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
 msgstr "Järjestele albumit: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Automaattitunnistus"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Oletus"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Verkkoasema :"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Musiikkihakemisto :"
+
+#: ../data/glade/connection-widget.glade.h:5
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD on samalla tietokoneella Arion kanssa"
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Nimi :"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Salasana :"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Portti :"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Palvelin"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -440,6 +486,7 @@ msgstr "Vuoden mukaan"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Nimi"
 
@@ -751,17 +798,43 @@ msgstr "Kappaleet"
 msgid "Song Properties"
 msgstr "Kappaleen ominaisuudet"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profiili"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Palvelimen automaattinen tunnistus"
+
+#: ../src/widgets/ario-connection-widget.c:542
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Mikäli et näe automaattisesta tunnistuksesta huolimatta MPD palvelinta, "
+"kannattaa sinun tarkistaa, että zeroconf on aktivoitu MPD kokoonpanossasi, "
+"tai käytä manuaalista konfigurointia."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Isäntä"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Portti"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Sinun täytyy valita palvelin."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Uusi profiili"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Seuraavia asetuksia käytetään:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Verkkoasema :"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Portti :"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -981,10 +1054,6 @@ msgstr "Viimeisimmän päivityksen aika:"
 msgid "Last.fm Profile"
 msgstr "Last.fm -profiili"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Salasana :"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Jonoon laitetut kappaleet:"
@@ -1083,10 +1152,6 @@ msgstr "Internet-radiot"
 msgid "Add a WebRadio"
 msgstr "Lisää verkkoradio"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Nimi :"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1129,52 +1194,8 @@ msgstr "Liitännäinen kyseisen artistin hakemiseen wikipediasta"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Automaattitunnistus"
-
-#~ msgid "Default"
-#~ msgstr "Oletus"
-
-#~ msgid "Music directory :"
-#~ msgstr "Musiikkihakemisto :"
-
-#, fuzzy
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "MPD on samalla tietokoneella Arion kanssa"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Palvelin"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automaattinen asetusten tekeminen"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Asetusten muokkaus"
-
-#~ msgid "Profile"
-#~ msgstr "Profiili"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Palvelimen automaattinen tunnistus"
-
-#~ msgid ""
-#~ "If you don't see your MPD server thanks to the automatic detection, you "
-#~ "should check that zeroconf is activated in your MPD configuration or use "
-#~ "the manual configuration."
-#~ msgstr ""
-#~ "Mikäli et näe automaattisesta tunnistuksesta huolimatta MPD palvelinta, "
-#~ "kannattaa sinun tarkistaa, että zeroconf on aktivoitu MPD "
-#~ "kokoonpanossasi, tai käytä manuaalista konfigurointia."
-
-#~ msgid "Host"
-#~ msgstr "Isäntä"
-
-#~ msgid "Port"
-#~ msgstr "Portti"
-
-#~ msgid "You must select a server."
-#~ msgstr "Sinun täytyy valita palvelin."
-
-#~ msgid "New Profile"
-#~ msgstr "Uusi profiili"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-10-10 04:06+0000\n"
 "Last-Translator: Michał Trzebiatowski <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -36,6 +36,52 @@ msgstr "Organizacja biblioteki"
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
 msgstr "Sortuj albumy: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Automatyczne wykrywanie"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Domyślny"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Host :"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Katalog z muzyką :"
+
+#: ../data/glade/connection-widget.glade.h:5
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD jest na tym samym komputerze co ARIO"
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Nazwa :"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Hasło :"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Serwer"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -440,6 +486,7 @@ msgstr "Po roku"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Nazwa"
 
@@ -763,17 +810,43 @@ msgstr "Utwory"
 msgid "Song Properties"
 msgstr "Właściwości utworu"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Automatyczne wykrywanie serwera"
+
+#: ../src/widgets/ario-connection-widget.c:542
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Jeśli nie znalazłeś swojego serwera MPD przy pomocy automatycznej "
+"konfiguracji, sprawdź, czy zeroconf jest aktywny w ustawieniach twojego MPD, "
+"albo użyj ręcznej konfiguracji."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Host"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Musisz wybrać serwer."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Nowy profil"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Użyte zostaną następujące ustawienia:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Host :"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port :"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -993,10 +1066,6 @@ msgstr ""
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Hasło :"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Ścieżki w kolejce:"
@@ -1095,10 +1164,6 @@ msgstr "Internetowe stacje radiowe"
 msgid "Add a WebRadio"
 msgstr "Dodaj stację radiową"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Nazwa :"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1141,55 +1206,11 @@ msgstr "Wtyczka umożliwiająca wyszukiwanie artystów na Wikipedii"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Automatyczne wykrywanie"
-
-#~ msgid "Default"
-#~ msgstr "Domyślny"
-
-#~ msgid "Music directory :"
-#~ msgstr "Katalog z muzyką :"
-
-#, fuzzy
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "MPD jest na tym samym komputerze co ARIO"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Serwer"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatyczna konfiguracja"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Ręczna konfiguracja"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Automatyczne wykrywanie serwera"
-
-#~ msgid ""
-#~ "If you don't see your MPD server thanks to the automatic detection, you "
-#~ "should check that zeroconf is activated in your MPD configuration or use "
-#~ "the manual configuration."
-#~ msgstr ""
-#~ "Jeśli nie znalazłeś swojego serwera MPD przy pomocy automatycznej "
-#~ "konfiguracji, sprawdź, czy zeroconf jest aktywny w ustawieniach twojego "
-#~ "MPD, albo użyj ręcznej konfiguracji."
-
-#~ msgid "Host"
-#~ msgstr "Host"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Musisz wybrać serwer."
-
-#~ msgid "New Profile"
-#~ msgstr "Nowy profil"
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-08 20:25+0100\n"
+"POT-Creation-Date: 2008-12-09 19:43+0100\n"
 "PO-Revision-Date: 2008-10-04 16:05+0000\n"
 "Last-Translator: Václav Lešek <vaclav.lesek@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -36,6 +36,52 @@ msgstr "Uspořádání knihovny"
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
 msgstr "Třídit alba: "
+
+#: ../data/glade/connection-widget.glade.h:1
+msgid "Auto detect"
+msgstr "Automatická detekce"
+
+#: ../data/glade/connection-widget.glade.h:2
+msgid "Default"
+msgstr "Výchozí"
+
+#: ../data/glade/connection-widget.glade.h:3
+#: ../src/widgets/ario-firstlaunch.c:79
+msgid "Host :"
+msgstr "Host :"
+
+#: ../data/glade/connection-widget.glade.h:4
+msgid "Music directory :"
+msgstr "Adresář hudby :"
+
+#: ../data/glade/connection-widget.glade.h:5
+#, fuzzy
+msgid "Music server is on the same computer as Ario"
+msgstr "MPD je na stejném počítači jako Ario"
+
+#: ../data/glade/connection-widget.glade.h:6
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Název :"
+
+#: ../data/glade/connection-widget.glade.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
+msgid "Password :"
+msgstr "Heslo :"
+
+#: ../data/glade/connection-widget.glade.h:8
+#: ../src/widgets/ario-firstlaunch.c:81
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/glade/connection-widget.glade.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Server"
+
+#: ../data/glade/connection-widget.glade.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -438,6 +484,7 @@ msgstr "Podle roku"
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
+#: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
 msgstr "Jméno"
 
@@ -757,17 +804,43 @@ msgstr "Skladby"
 msgid "Song Properties"
 msgstr "Vlastnosti skladby"
 
+#: ../src/widgets/ario-connection-widget.c:345
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/widgets/ario-connection-widget.c:531
+msgid "Server autodetection"
+msgstr "Automatická detekce serveru"
+
+#: ../src/widgets/ario-connection-widget.c:542
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Pokud nevidíte svůj MPD server, poděkujte automatické detekci, můžete ověřit "
+"zda je aktivovaná základní konfigurace ve vašem MPD nebo můžete použít "
+"manuální konfiguraci."
+
+#: ../src/widgets/ario-connection-widget.c:560
+msgid "Host"
+msgstr "Hostitel"
+
+#: ../src/widgets/ario-connection-widget.c:568
+msgid "Port"
+msgstr "Port"
+
+#: ../src/widgets/ario-connection-widget.c:631
+msgid "You must select a server."
+msgstr "Musíte vybrat server."
+
+#: ../src/widgets/ario-connection-widget.c:678
+msgid "New Profile"
+msgstr "Nový profil"
+
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
 msgstr "Následující konfigurace bude použita:"
-
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Host :"
-
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Port :"
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
@@ -987,10 +1060,6 @@ msgstr "Poslední čas odeslání:"
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Heslo :"
-
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
 msgstr "Stopy ve frontě:"
@@ -1089,10 +1158,6 @@ msgstr "Internetová rádia"
 msgid "Add a WebRadio"
 msgstr "Přidat Webové rádio"
 
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Název :"
-
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
 msgstr "URL :"
@@ -1135,55 +1200,11 @@ msgstr "Zásuvný modul pro vyhledání aktuálního umělce na wikipedii"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Auto detect"
-#~ msgstr "Automatická detekce"
-
-#~ msgid "Default"
-#~ msgstr "Výchozí"
-
-#~ msgid "Music directory :"
-#~ msgstr "Adresář hudby :"
-
-#, fuzzy
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "MPD je na stejném počítači jako Ario"
-
-#, fuzzy
-#~ msgid "Server type : "
-#~ msgstr "Server"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatická konfigurace"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Ruční konfigurace"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Server autodetection"
-#~ msgstr "Automatická detekce serveru"
-
-#~ msgid ""
-#~ "If you don't see your MPD server thanks to the automatic detection, you "
-#~ "should check that zeroconf is activated in your MPD configuration or use "
-#~ "the manual configuration."
-#~ msgstr ""
-#~ "Pokud nevidíte svůj MPD server, poděkujte automatické detekci, můžete "
-#~ "ověřit zda je aktivovaná základní konfigurace ve vašem MPD nebo můžete "
-#~ "použít manuální konfiguraci."
-
-#~ msgid "Host"
-#~ msgstr "Hostitel"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "You must select a server."
-#~ msgstr "Musíte vybrat server."
-
-#~ msgid "New Profile"
-#~ msgstr "Nový profil"
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "
