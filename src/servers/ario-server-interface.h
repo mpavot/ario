@@ -108,6 +108,7 @@ typedef struct
         void                (*set_current_repeat)                     (const gboolean repeat);
         void                (*set_crossfadetime)                      (const int crossfadetime);
         void                (*clear)                                  (void);
+        void                (*shuffle)                                (void);
 
         void                (*queue_commit)                           (void);
 

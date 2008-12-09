@@ -69,6 +69,8 @@ static void ario_playlist_drag_data_get_cb (GtkWidget * widget,
                                             guint info, guint time, gpointer data);
 static void ario_playlist_cmd_clear (GtkAction *action,
                                      ArioPlaylist *playlist);
+static void ario_playlist_cmd_shuffle (GtkAction *action,
+                                       ArioPlaylist *playlist);
 static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
 static void ario_playlist_cmd_songs_properties (GtkAction *action,
@@ -119,6 +121,9 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistClear", GTK_STOCK_CLEAR, N_("_Clear"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_clear) },
+        { "PlaylistShuffle", GTK_STOCK_REFRESH, N_("Shuffle"), NULL,
+                NULL,
+                G_CALLBACK (ario_playlist_cmd_shuffle) },
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_remove) },
@@ -1118,6 +1123,14 @@ ario_playlist_cmd_clear (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_server_clear ();
+}
+
+static void
+ario_playlist_cmd_shuffle (GtkAction *action,
+                           ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_server_shuffle ();
 }
 
 static void

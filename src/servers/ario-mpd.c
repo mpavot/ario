@@ -69,6 +69,7 @@ static void ario_mpd_set_current_random (const gboolean random);
 static void ario_mpd_set_current_repeat (const gboolean repeat);
 static void ario_mpd_set_crossfadetime (const int crossfadetime);
 static void ario_mpd_clear (void);
+static void ario_mpd_shuffle (void);
 static void ario_mpd_queue_commit (void);
 static void ario_mpd_insert_at (const GSList *songs,
                                 const gint pos);
@@ -141,6 +142,7 @@ ario_mpd_class_init (ArioMpdClass *klass)
         server_class->set_current_repeat = ario_mpd_set_current_repeat;
         server_class->set_crossfadetime = ario_mpd_set_crossfadetime;
         server_class->clear = ario_mpd_clear;
+        server_class->shuffle = ario_mpd_shuffle;
         server_class->queue_commit = ario_mpd_queue_commit;
         server_class->insert_at = ario_mpd_insert_at;
         server_class->save_playlist = ario_mpd_save_playlist;
@@ -1083,6 +1085,23 @@ ario_mpd_clear (void)
                 return;
 
         mpd_sendClearCommand (instance->priv->connection);
+        mpd_finishCommand (instance->priv->connection);
+        ario_mpd_update_status ();
+
+        if (instance->priv->support_idle && instance->priv->connection)
+                mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
+}
+
+static void
+ario_mpd_shuffle (void)
+{
+        ARIO_LOG_FUNCTION_START
+        /* check if there is a connection */
+        if (!instance->priv->connection)
+                return;
+
+        mpd_sendShuffleCommand (instance->priv->connection);
+
         mpd_finishCommand (instance->priv->connection);
         ario_mpd_update_status ();
 
