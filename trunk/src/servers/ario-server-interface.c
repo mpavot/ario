@@ -167,6 +167,7 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         klass->set_current_repeat = dummy_void_int;
         klass->set_crossfadetime = dummy_void_int;
         klass->clear = dummy_void_void;
+        klass->shuffle = dummy_void_void;
         klass->queue_commit = dummy_void_void;
         klass->insert_at = (void (*) (const GSList *, const gint)) dummy_void_pointer_int;
         klass->save_playlist = (int (*) (const char *)) dummy_int_pointer;

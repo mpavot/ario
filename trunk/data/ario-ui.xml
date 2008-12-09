@@ -62,6 +62,7 @@
         <popup name="PlaylistPopup">
                 <menuitem name="PlaylistClear" action="PlaylistClear"/>
                 <menuitem name="PlaylistRemove" action="PlaylistRemove"/>
+                <menuitem name="PlaylistShuffle" action="PlaylistShuffle"/>
                 <separator/>
                 <menuitem name="PlaylistSave" action="PlaylistSave"/>
                 <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>

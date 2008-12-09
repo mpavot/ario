@@ -248,6 +248,7 @@ void                    ario_server_free_album                             (Ario
 ArioServerAlbum *       ario_server_copy_album                             (const ArioServerAlbum *server_album);
 
 void                    ario_server_clear                                  (void);
+void                    ario_server_shuffle                                (void);
 
 void                    ario_server_queue_add                              (const char *path);
 void                    ario_server_queue_delete_id                        (const int id);

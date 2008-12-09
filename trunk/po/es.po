@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 19:43+0100\n"
+"POT-Creation-Date: 2008-12-09 23:01+0100\n"
 "PO-Revision-Date: 2008-10-10 19:51+0000\n"
 "Last-Translator: Jesús Gómez Fernández <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -160,7 +160,7 @@ msgstr "Buscar"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:319
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:324
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Álbum"
@@ -172,29 +172,29 @@ msgstr "Permitir sólo una instancia de Ario"
 #: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
-#: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-playlist.c:324 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Artista"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:319
+#: ../src/widgets/ario-playlist.c:324
 msgid "Date"
 msgstr "Fecha"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:324
 msgid "Duration"
 msgstr "Duración"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:319
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:324
 msgid "File"
 msgstr "Archivo"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:319
+#: ../src/widgets/ario-playlist.c:324
 msgid "Genre"
 msgstr "Género"
 
@@ -227,14 +227,14 @@ msgstr "Mostrar pestañas"
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
-#: ../src/widgets/ario-playlist.c:319 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:324 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Título"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:319
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:324
 msgid "Track"
 msgstr "Pista"
 
@@ -520,12 +520,12 @@ msgstr "Reproducir la canción siguiente"
 msgid "Do nothing"
 msgstr "No hacer nada"
 
-#: ../src/servers/ario-mpd.c:382
+#: ../src/servers/ario-mpd.c:384
 #, fuzzy
 msgid "Connecting to server..."
 msgstr "Conectando al servidor MDP..."
 
-#: ../src/servers/ario-mpd.c:407
+#: ../src/servers/ario-mpd.c:409
 #, fuzzy
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
@@ -595,7 +595,7 @@ msgstr "_Borrar las carátulas"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:128
+#: ../src/widgets/ario-playlist.c:133
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -933,32 +933,36 @@ msgstr "Descargando letras..."
 msgid "Lyrics not found"
 msgstr "Letras no encontradas"
 
-#: ../src/widgets/ario-playlist.c:119
+#: ../src/widgets/ario-playlist.c:121
 msgid "_Clear"
 msgstr "_Limpiar"
 
-#: ../src/widgets/ario-playlist.c:122
+#: ../src/widgets/ario-playlist.c:124
+msgid "Shuffle"
+msgstr ""
+
+#: ../src/widgets/ario-playlist.c:127
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: ../src/widgets/ario-playlist.c:125
+#: ../src/widgets/ario-playlist.c:130
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/widgets/ario-playlist.c:131
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Go to playing song"
 msgstr "_Ir la la cancion reproduciendose"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1240
+#: ../src/widgets/ario-playlist.c:1253
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: ../src/widgets/ario-playlist.c:1250
+#: ../src/widgets/ario-playlist.c:1263
 msgid "Playlist name :"
 msgstr "Nombre de lista de reprodución:"
 
-#: ../src/widgets/ario-playlist.c:1275
+#: ../src/widgets/ario-playlist.c:1288
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
 

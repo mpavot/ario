@@ -66,6 +66,7 @@ static void ario_xmms_set_current_random (const gboolean random);
 static void ario_xmms_set_current_repeat (const gboolean repeat);
 static void ario_xmms_set_crossfadetime (const int crossfadetime);
 static void ario_xmms_clear (void);
+static void ario_xmms_shuffle (void);
 static void ario_xmms_queue_commit (void);
 static void ario_xmms_insert_at (const GSList *songs,
                                  const gint pos);
@@ -151,6 +152,7 @@ ario_xmms_class_init (ArioXmmsClass *klass)
         server_class->set_current_repeat = ario_xmms_set_current_repeat;
         server_class->set_crossfadetime = ario_xmms_set_crossfadetime;
         server_class->clear = ario_xmms_clear;
+        server_class->shuffle = ario_xmms_shuffle;
         server_class->queue_commit = ario_xmms_queue_commit;
         server_class->insert_at = ario_xmms_insert_at;
         server_class->save_playlist = ario_xmms_save_playlist;
@@ -441,12 +443,12 @@ disconnect_not (ArioXmms *xmms)
 }
 
 #define ARIO_XMMS_CALLBACK_SET(conn,meth,callback,udata) \
-	ARIO_XMMS_CALLBACK_SET_FULL(conn,meth,callback,udata,NULL);
+        ARIO_XMMS_CALLBACK_SET_FULL(conn,meth,callback,udata,NULL);
 
 #define ARIO_XMMS_CALLBACK_SET_FULL(conn,meth,callback,udata,free_func) {\
-	xmmsc_result_t *res = meth (conn); \
-	xmmsc_result_notifier_set_full (res, callback, udata, free_func);\
-	xmmsc_result_unref (res);\
+        xmmsc_result_t *res = meth (conn); \
+        xmmsc_result_notifier_set_full (res, callback, udata, free_func);\
+        xmmsc_result_unref (res);\
         instance->priv->results = g_slist_append (instance->priv->results, res);\
 }
 
@@ -485,9 +487,9 @@ ario_xmms_connect_to (ArioXmms *xmms,
                            (xmmsc_result_notifier_t) playback_current_id_not, xmms);
         ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_volume_changed,
                            (xmmsc_result_notifier_t) playback_volume_changed_not, xmms);
-	res = xmmsc_signal_playback_playtime (connection);
-	xmmsc_result_notifier_set_full (res, (xmmsc_result_notifier_t) playback_playtime_not, xmms, NULL);
-	xmmsc_result_unref (res);
+        res = xmmsc_signal_playback_playtime (connection);
+        xmmsc_result_notifier_set_full (res, (xmmsc_result_notifier_t) playback_playtime_not, xmms, NULL);
+        xmmsc_result_unref (res);
         instance->priv->res = res;
 
         /* Disconnect callback */
@@ -1023,50 +1025,18 @@ ario_xmms_clear (void)
 
         xmmsc_result_unref (xmmsc_playlist_clear (instance->priv->connection, NULL));
 }
-/*
-   static gchar
-   hex2char (gchar first_digit,
-   gchar second_digit)
-   {
-   ARIO_LOG_FUNCTION_START
-   gchar result = 0;
 
-   if (first_digit >= '0' && first_digit <= '9')
-   result = (first_digit - '0') * 16;
-   else if (first_digit >= 'a' && first_digit <= 'f')
-   result = (first_digit - 'a' + 10) * 16;
-   if (second_digit >= '0' && second_digit <= '9')
-   result += second_digit - '0';
-   else if (second_digit >= 'a' && second_digit <= 'f')
-   result += second_digit - 'a' + 10;
-   return result;
-   }
+void
+ario_xmms_shuffle (void)
+{
+        ARIO_LOG_FUNCTION_START
+        /* check if there is a connection */
+        if (!instance->priv->connection)
+                return;
 
-   static gchar *
-   decode_string (const gchar *string)
-   {
-   ARIO_LOG_FUNCTION_START
-   int i, j;
-   gchar *result = g_malloc ((g_utf8_strlen (string, -1) + 1) * sizeof (gchar));
+        ARIO_LOG_ERROR ("Not yet implemented for XMMS");
+}
 
-   for (i = 0, j = 0; i < g_utf8_strlen (string, -1); i++) {
-   if (string[i] == '%') {
-   result[j] = hex2char(string[i+1], string[i+2]);
-   i+=2;
-   j++; 
-   } else if (string[i] == '+') {
-   result[j] = ' ';
-   j++;
-   } else {
-   result[j] = string[i];
-   j++;
-   }
-   }
-   result[j] = '\0';
-   return result;
-   }
-   */
-static void
 ario_xmms_queue_commit (void)
 {
         ARIO_LOG_FUNCTION_START

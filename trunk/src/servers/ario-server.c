@@ -613,6 +613,13 @@ ario_server_clear (void)
 }
 
 void
+ario_server_shuffle (void)
+{
+        ARIO_LOG_FUNCTION_START
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->shuffle ();
+}
+
+void
 ario_server_queue_add (const char *path)
 {
         ARIO_LOG_FUNCTION_START
