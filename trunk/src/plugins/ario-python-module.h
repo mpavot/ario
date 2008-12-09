@@ -28,43 +28,43 @@
 
 G_BEGIN_DECLS
 
-#define ARIO_TYPE_PYTHON_MODULE		(ario_python_module_get_type ())
-#define ARIO_PYTHON_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), ARIO_TYPE_PYTHON_MODULE, ArioPythonModule))
-#define ARIO_PYTHON_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), ARIO_TYPE_PYTHON_MODULE, ArioPythonModuleClass))
-#define ARIO_IS_PYTHON_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), ARIO_TYPE_PYTHON_MODULE))
-#define ARIO_IS_PYTHON_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), ARIO_TYPE_PYTHON_MODULE))
-#define ARIO_PYTHON_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), ARIO_TYPE_PYTHON_MODULE, ArioPythonModuleClass))
+#define ARIO_TYPE_PYTHON_MODULE                 (ario_python_module_get_type ())
+#define ARIO_PYTHON_MODULE(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), ARIO_TYPE_PYTHON_MODULE, ArioPythonModule))
+#define ARIO_PYTHON_MODULE_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), ARIO_TYPE_PYTHON_MODULE, ArioPythonModuleClass))
+#define ARIO_IS_PYTHON_MODULE(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), ARIO_TYPE_PYTHON_MODULE))
+#define ARIO_IS_PYTHON_MODULE_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((obj), ARIO_TYPE_PYTHON_MODULE))
+#define ARIO_PYTHON_MODULE_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS((obj), ARIO_TYPE_PYTHON_MODULE, ArioPythonModuleClass))
 
-typedef struct _ArioPythonModule		ArioPythonModule;
-typedef struct _ArioPythonModuleClass 		ArioPythonModuleClass;
-typedef struct _ArioPythonModulePrivate	ArioPythonModulePrivate;
+typedef struct _ArioPythonModule ArioPythonModule;
+typedef struct _ArioPythonModuleClass ArioPythonModuleClass;
+typedef struct _ArioPythonModulePrivate ArioPythonModulePrivate;
 
 struct _ArioPythonModuleClass
 {
-	GTypeModuleClass parent_class;
+        GTypeModuleClass parent_class;
 };
 
 struct _ArioPythonModule
 {
-	GTypeModule parent_instance;
+        GTypeModule parent_instance;
 };
 
-GType			 ario_python_module_get_type		(void);
+GType                   ario_python_module_get_type     (void);
 
-ArioPythonModule	*ario_python_module_new		(const gchar* path,
-								 const gchar *module);
+ArioPythonModule        *ario_python_module_new         (const gchar* path,
+                                                         const gchar *module);
 
-GObject			*ario_python_module_new_object		(ArioPythonModule *module);
+GObject                 *ario_python_module_new_object  (ArioPythonModule *module);
 
 
 /* --- Python utils --- */
 
 /* Must be called before loading python modules */
-gboolean		ario_python_init			(void);
+gboolean                ario_python_init                (void);
 
-void			ario_python_shutdown			(void);
+void                    ario_python_shutdown            (void);
 
-void			ario_python_garbage_collect		(void);
+void                    ario_python_garbage_collect     (void);
 
 G_END_DECLS
 

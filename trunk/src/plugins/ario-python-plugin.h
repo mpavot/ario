@@ -29,19 +29,19 @@
 
 G_BEGIN_DECLS
 
-typedef struct _ArioPythonObject		ArioPythonObject;
-typedef struct _ArioPythonObjectClass	ArioPythonObjectClass;
+typedef struct _ArioPythonObject ArioPythonObject;
+typedef struct _ArioPythonObjectClass ArioPythonObjectClass;
 
 struct _ArioPythonObject
 {
-	ArioPlugin parent_slot;
-	PyObject *instance;
+        ArioPlugin parent_slot;
+        PyObject *instance;
 };
 
 struct _ArioPythonObjectClass
 {
-	ArioPluginClass parent_slot;
-	PyObject *type;
+        ArioPluginClass parent_slot;
+        PyObject *type;
 };
 
 GType ario_python_object_get_type (GTypeModule *module, PyObject *type);
