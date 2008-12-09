@@ -103,6 +103,8 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
                 break;
         }
 
+        notify_notification_set_timeout (notifier_libnotify->priv->notification,
+                                         ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000);
         notify_notification_show (notifier_libnotify->priv->notification, NULL);
 }
 
