@@ -73,6 +73,8 @@ static void ario_playlist_cmd_shuffle (GtkAction *action,
                                        ArioPlaylist *playlist);
 static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
+static void ario_playlist_cmd_crop (GtkAction *action,
+				    ArioPlaylist *playlist);
 static void ario_playlist_cmd_songs_properties (GtkAction *action,
                                                 ArioPlaylist *playlist);
 static void ario_playlist_cmd_goto_playing_song (GtkAction *action,
@@ -124,6 +126,9 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistShuffle", GTK_STOCK_REFRESH, N_("Shuffle"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_shuffle) },
+        { "PlaylistCrop", GTK_STOCK_CUT, N_("Crop"), NULL,
+                NULL,
+                G_CALLBACK (ario_playlist_cmd_crop) },
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_remove) },
@@ -1168,6 +1173,53 @@ ario_playlist_cmd_remove (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         ario_playlist_remove ();
+}
+
+typedef struct ArioPlaylistCropData
+{
+        guint kept;
+	guint deleted;
+} ArioPlaylistCropData;
+
+static void
+ario_playlist_selection_crop_foreach (GtkTreeModel *model,
+				      GtkTreePath *path,
+				      GtkTreeIter *iter,
+				      ArioPlaylistCropData *data)
+{
+        ARIO_LOG_FUNCTION_START
+        gint *indice;
+
+        indice = gtk_tree_path_get_indices (path);
+	while (data->deleted + data->kept < indice[0]) {
+		ario_server_queue_delete_pos (data->kept);
+		++data->deleted;
+	}
+	++data->kept;
+}
+
+static void
+ario_playlist_cmd_crop (GtkAction *action,
+			ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+	ArioPlaylistCropData data;
+
+	data.kept = 0;
+	data.deleted = 0;
+
+        gtk_tree_selection_selected_foreach (instance->priv->selection,
+                                             (GtkTreeSelectionForeachFunc) ario_playlist_selection_crop_foreach,
+                                             &data);
+
+	while (data.deleted + data.kept < instance->priv->playlist_length) {
+		ario_server_queue_delete_pos (data.kept);
+		++data.deleted;
+	}
+
+        ario_server_queue_commit ();
+
+        gtk_tree_selection_unselect_all (instance->priv->selection);
 }
 
 static void
