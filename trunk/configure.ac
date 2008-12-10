@@ -143,8 +143,8 @@ AC_ARG_ENABLE(mpdidle,
                              [Use MPD idle mode (reduce CPU and network usage but still experimental)]))
 if test x"$enable_mpdidle" = xyes; then
    AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduce CPU and network usage but still experimental)])
-   AC_DEFINE(MPD_GLIB, 1, [Use libmpdclient glib integration])
 fi
+AM_CONDITIONAL(MPD_GLIB, test x"$enable_mpdidle" = xyes)
 
 dnl ================================================================
 dnl Stored Playlists
