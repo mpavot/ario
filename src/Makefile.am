@@ -199,8 +199,7 @@ AM_CPPFLAGS = \
                 -DDATA_PATH=\""$(pkgdatadir)/data/"\"\
                 -DUI_PATH=\""$(pkgdatadir)/ui/"\"\
         	-DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
-                -DGLADE_PATH=\""$(pkgdatadir)/glade/"\"\
-                -DMPD_GLIB
+                -DGLADE_PATH=\""$(pkgdatadir)/glade/"\"
 
 AUTHORS.tab : $(top_srcdir)/AUTHORS
 	sed -e 's/^/"/' -e 's/$$/",/' < $(top_srcdir)/AUTHORS > $@.tmp
