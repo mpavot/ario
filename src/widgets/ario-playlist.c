@@ -74,7 +74,7 @@ static void ario_playlist_cmd_shuffle (GtkAction *action,
 static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
 static void ario_playlist_cmd_crop (GtkAction *action,
-				    ArioPlaylist *playlist);
+                                    ArioPlaylist *playlist);
 static void ario_playlist_cmd_songs_properties (GtkAction *action,
                                                 ArioPlaylist *playlist);
 static void ario_playlist_cmd_goto_playing_song (GtkAction *action,
@@ -107,7 +107,7 @@ struct ArioPlaylistPrivate
 
         int playlist_id;
         int playlist_length;
-	gboolean ignore;
+        gboolean ignore;
 
         GdkPixbuf *play_pixbuf;
 
@@ -124,10 +124,10 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistClear", GTK_STOCK_CLEAR, N_("_Clear"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_clear) },
-        { "PlaylistShuffle", GTK_STOCK_REFRESH, N_("Shuffle"), NULL,
+        { "PlaylistShuffle", GTK_STOCK_REFRESH, N_("_Shuffle"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_shuffle) },
-        { "PlaylistCrop", GTK_STOCK_CUT, N_("Crop"), NULL,
+        { "PlaylistCrop", GTK_STOCK_CUT, N_("Cr_op"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_crop) },
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
@@ -562,11 +562,11 @@ ario_playlist_changed_cb (ArioServer *server,
         GdkPixbuf *pixbuf;
         int state;
 
-	if (playlist->priv->ignore) {
-		playlist->priv->ignore = FALSE;
-		playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
-		return;
-	}
+        if (playlist->priv->ignore) {
+                playlist->priv->ignore = FALSE;
+                playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
+                return;
+        }
 
         if (!ario_server_is_connected ()) {
                 playlist->priv->playlist_length = 0;
@@ -719,22 +719,22 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                 ++i;
         }
 
-	playlist->priv->ignore = TRUE;
+        playlist->priv->ignore = TRUE;
         ario_server_queue_commit ();
 
         g_slist_foreach (ids, (GFunc) g_free, NULL);
         g_slist_free (ids);
 
 
-	g_signal_handlers_block_by_func (playlist->priv->model,
-					 G_CALLBACK (ario_playlist_sort_changed_cb),
-					 playlist);
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (playlist->priv->model),
-					      GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
-					      GTK_SORT_ASCENDING);
-	g_signal_handlers_unblock_by_func (playlist->priv->model,
-					   G_CALLBACK (ario_playlist_sort_changed_cb),
-					   playlist);
+        g_signal_handlers_block_by_func (playlist->priv->model,
+                                         G_CALLBACK (ario_playlist_sort_changed_cb),
+                                         playlist);
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (playlist->priv->model),
+                                              GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+                                              GTK_SORT_ASCENDING);
+        g_signal_handlers_unblock_by_func (playlist->priv->model,
+                                           G_CALLBACK (ario_playlist_sort_changed_cb),
+                                           playlist);
 }
 
 GtkWidget *
@@ -1196,44 +1196,44 @@ ario_playlist_cmd_remove (GtkAction *action,
 typedef struct ArioPlaylistCropData
 {
         guint kept;
-	guint deleted;
+        guint deleted;
 } ArioPlaylistCropData;
 
 static void
 ario_playlist_selection_crop_foreach (GtkTreeModel *model,
-				      GtkTreePath *path,
-				      GtkTreeIter *iter,
-				      ArioPlaylistCropData *data)
+                                      GtkTreePath *path,
+                                      GtkTreeIter *iter,
+                                      ArioPlaylistCropData *data)
 {
         ARIO_LOG_FUNCTION_START
         gint *indice;
 
         indice = gtk_tree_path_get_indices (path);
-	while (data->deleted + data->kept < indice[0]) {
-		ario_server_queue_delete_pos (data->kept);
-		++data->deleted;
-	}
-	++data->kept;
+        while (data->deleted + data->kept < indice[0]) {
+                ario_server_queue_delete_pos (data->kept);
+                ++data->deleted;
+        }
+        ++data->kept;
 }
 
 static void
 ario_playlist_cmd_crop (GtkAction *action,
-			ArioPlaylist *playlist)
+                        ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-	ArioPlaylistCropData data;
+        ArioPlaylistCropData data;
 
-	data.kept = 0;
-	data.deleted = 0;
+        data.kept = 0;
+        data.deleted = 0;
 
         gtk_tree_selection_selected_foreach (instance->priv->selection,
                                              (GtkTreeSelectionForeachFunc) ario_playlist_selection_crop_foreach,
                                              &data);
 
-	while (data.deleted + data.kept < instance->priv->playlist_length) {
-		ario_server_queue_delete_pos (data.kept);
-		++data.deleted;
-	}
+        while (data.deleted + data.kept < instance->priv->playlist_length) {
+                ario_server_queue_delete_pos (data.kept);
+                ++data.deleted;
+        }
 
         ario_server_queue_commit ();
 

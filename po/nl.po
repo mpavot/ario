@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 23:01+0100\n"
+"POT-Creation-Date: 2008-12-11 00:01+0100\n"
 "PO-Revision-Date: 2008-09-28 14:31+0000\n"
 "Last-Translator: domkop <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -158,7 +158,7 @@ msgstr "Zoeken"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:324
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:330
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Album"
@@ -170,29 +170,29 @@ msgstr "Enkel een instantie van Ario toestaan"
 #: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:176
 #: ../src/shell/ario-shell-similarartists.c:386
-#: ../src/widgets/ario-playlist.c:324 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Artiest"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:324
+#: ../src/widgets/ario-playlist.c:330
 msgid "Date"
 msgstr "Datum"
 
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:324
+#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:330
 msgid "Duration"
 msgstr "Afspeelduur"
 
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:324
+#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:330
 msgid "File"
 msgstr "Bestand"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:324
+#: ../src/widgets/ario-playlist.c:330
 msgid "Genre"
 msgstr "Genre"
 
@@ -225,14 +225,14 @@ msgstr "Tabbladen tonen"
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
-#: ../src/widgets/ario-playlist.c:324 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Titel"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:324
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:330
 msgid "Track"
 msgstr "Nummer"
 
@@ -594,7 +594,7 @@ msgstr "Albumhoezen verwijderen"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/widgets/ario-playlist.c:139
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -918,36 +918,41 @@ msgstr "Bezig met downloaden van liedjestekst..."
 msgid "Lyrics not found"
 msgstr "Liedjestekst niet gevonden"
 
-#: ../src/widgets/ario-playlist.c:121
+#: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
 msgstr "_Leegmaken"
 
-#: ../src/widgets/ario-playlist.c:124
-msgid "Shuffle"
+#: ../src/widgets/ario-playlist.c:127
+msgid "_Shuffle"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:130
+#, fuzzy
+msgid "Cr_op"
+msgstr "_Stoppen"
+
+#: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
 msgstr "_Verwijderen"
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Save"
 msgstr "_Opslaan"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:142
 msgid "_Go to playing song"
 msgstr "Naar het afspelende liedje _gaan"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1253
+#: ../src/widgets/ario-playlist.c:1323
 msgid "Save playlist"
 msgstr "Afspeellijst opslaan"
 
-#: ../src/widgets/ario-playlist.c:1263
+#: ../src/widgets/ario-playlist.c:1333
 msgid "Playlist name :"
 msgstr "Afspeellijstnaam :"
 
-#: ../src/widgets/ario-playlist.c:1288
+#: ../src/widgets/ario-playlist.c:1358
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Afspeellijst bestaat al. Wilt u hem vervangen?"
 

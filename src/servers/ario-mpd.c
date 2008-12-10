@@ -790,7 +790,7 @@ ario_mpd_update_status (void)
 
                 if (instance->priv->status) {
                         if (instance->parent.song_id != instance->priv->status->songid
-			    || instance->parent.playlist_id != (int) instance->priv->status->playlist)
+                            || instance->parent.playlist_id != (int) instance->priv->status->playlist)
                                 g_object_set (G_OBJECT (instance), "song_id", instance->priv->status->songid, NULL);
 
                         if (instance->parent.state != instance->priv->status->state)
