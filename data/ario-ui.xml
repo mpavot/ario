@@ -60,12 +60,13 @@
         </popup>
 
         <popup name="PlaylistPopup">
-                <menuitem name="PlaylistClear" action="PlaylistClear"/>
                 <menuitem name="PlaylistRemove" action="PlaylistRemove"/>
-                <menuitem name="PlaylistShuffle" action="PlaylistShuffle"/>
+                <menuitem name="PlaylistCrop" action="PlaylistCrop"/>
+                <menuitem name="PlaylistClear" action="PlaylistClear"/>
                 <separator/>
-                <menuitem name="PlaylistSave" action="PlaylistSave"/>
                 <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>
+                <menuitem name="PlaylistShuffle" action="PlaylistShuffle"/>
+                <menuitem name="PlaylistSave" action="PlaylistSave"/>
                 <placeholder name="PlaylistPopupPluginPlaceholder" />
                 <separator/>
                 <menuitem name="PlaylistSongProperties" action="PlaylistSongProperties"/>
