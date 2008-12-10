@@ -107,6 +107,7 @@ struct ArioPlaylistPrivate
 
         int playlist_id;
         int playlist_length;
+	gboolean ignore;
 
         GdkPixbuf *play_pixbuf;
 
@@ -561,6 +562,11 @@ ario_playlist_changed_cb (ArioServer *server,
         GdkPixbuf *pixbuf;
         int state;
 
+	if (playlist->priv->ignore) {
+		playlist->priv->ignore = FALSE;
+		playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
+		return;
+	}
 
         if (!ario_server_is_connected ()) {
                 playlist->priv->playlist_length = 0;
@@ -713,10 +719,22 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                 ++i;
         }
 
+	playlist->priv->ignore = TRUE;
         ario_server_queue_commit ();
 
         g_slist_foreach (ids, (GFunc) g_free, NULL);
         g_slist_free (ids);
+
+
+	g_signal_handlers_block_by_func (playlist->priv->model,
+					 G_CALLBACK (ario_playlist_sort_changed_cb),
+					 playlist);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (playlist->priv->model),
+					      GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+					      GTK_SORT_ASCENDING);
+	g_signal_handlers_unblock_by_func (playlist->priv->model,
+					   G_CALLBACK (ario_playlist_sort_changed_cb),
+					   playlist);
 }
 
 GtkWidget *
