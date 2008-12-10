@@ -140,9 +140,10 @@ dnl MPD idle mode
 dnl ================================================================
 AC_ARG_ENABLE(mpdidle,
               AC_HELP_STRING([--enable-mpdidle],
-                             [Use MPD idle mode (reduce CPU and network usage but still experimental]))
+                             [Use MPD idle mode (reduce CPU and network usage but still experimental)]))
 if test x"$enable_mpdidle" = xyes; then
-   AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduce CPU and network usage but still experimental])
+   AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduce CPU and network usage but still experimental)])
+   AC_DEFINE(MPD_GLIB, 1, [Use libmpdclient glib integration])
 fi
 
 dnl ================================================================
@@ -267,7 +268,7 @@ fi
 if test x${enable_python} = xyes; then
         echo "Python plugins support is:                ENABLED"
 else
-        echo "Python plugins support is:                DISABLED  (--enable-python)"
+        echo "Python plugins support is:                DISABLED (--enable-python)"
 fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"
