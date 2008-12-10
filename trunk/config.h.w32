@@ -4,8 +4,6 @@
 /* Add runtime debugging information (slower) */
 /* #undef DEBUG */
 
-/* Add support of eggtrayicon */
-/* #undef ENABLE_EGGTRAYICON */
 
 /* always defined to indicate that i18n is enabled */
 #define ENABLE_NLS 1
@@ -17,7 +15,7 @@
 #define ENABLE_STOREDPLAYLISTS 1
 
 /* Gettext package */
-#define GETTEXT_PACKAGE "Ario"
+#define GETTEXT_PACKAGE "ario"
 
 /* Define to 1 if you have the `bind_textdomain_codeset' function. */
 #define HAVE_BIND_TEXTDOMAIN_CODESET 1
@@ -64,32 +62,36 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
 
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#define LT_OBJDIR ".libs/"
+
 /* Radio or search or playlists */
 #define MULTIPLE_VIEW 1
 
 /* Name of package */
-#define PACKAGE ""
+#define PACKAGE "ario"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT ""
+#define PACKAGE_BUGREPORT "marc.pavot@gmail.com"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "ario"
+#define PACKAGE_NAME "Ario"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "ario 1.1"
+#define PACKAGE_STRING "Ario 1.2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "ario"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.1"
+#define PACKAGE_VERSION "1.2"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION ""
+#define VERSION "1.2"
 
 #define GLADE_PATH "data\\glade\\"
 #define DATA_PATH "data\\"

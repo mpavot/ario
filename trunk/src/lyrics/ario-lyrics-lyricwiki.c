@@ -224,7 +224,7 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                  &lyrics_size,
                                  &lyrics_data);
         curl_slist_free_all (headers);
-        g_string_free (msg, FALSE);
+        g_string_free (msg, TRUE);
 
         if (lyrics_size == 0)
                 return NULL;
