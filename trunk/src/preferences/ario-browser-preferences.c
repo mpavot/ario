@@ -213,9 +213,8 @@ ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
                                i);
 }
 
-void
-ario_browser_preferences_treesnb_changed_cb (GtkWidget *widget,
-                                             ArioBrowserPreferences *browser_preferences)
+static gboolean
+ario_browser_preferences_treesnb_changed_idle (ArioBrowserPreferences *browser_preferences)
 {
         ARIO_LOG_FUNCTION_START
         gchar **splited_conf;
@@ -246,6 +245,16 @@ ario_browser_preferences_treesnb_changed_cb (GtkWidget *widget,
         }
         g_strfreev (splited_conf);
         g_free (conf);
+
+        return FALSE;
+}
+
+void
+ario_browser_preferences_treesnb_changed_cb (GtkWidget *widget,
+                                             ArioBrowserPreferences *browser_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        g_idle_add ((GSourceFunc) ario_browser_preferences_treesnb_changed_idle, browser_preferences);
 }
 
 static void
