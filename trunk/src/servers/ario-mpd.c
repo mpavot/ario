@@ -326,10 +326,12 @@ ario_mpd_connect_to (ArioMpd *mpd,
         ario_mpd_check_idle (mpd);
 
         if (instance->priv->support_idle && instance->priv->connection) {
+#ifdef ENABLE_MPDIDLE
                 mpd_glibInit (instance->priv->connection);
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
                 g_idle_add ((GSourceFunc) ario_mpd_update_status, NULL);
                 ario_mpd_launch_idle_timeout ();
+#endif
         } else {
                 ario_mpd_launch_timeout ();
         }
