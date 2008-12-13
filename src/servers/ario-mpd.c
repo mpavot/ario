@@ -233,6 +233,7 @@ ario_mpd_launch_timeout (void)
                                                     NULL);
 }
 
+#ifdef ENABLE_MPDIDLE
 static gboolean
 ario_mpd_update_elapsed (gpointer data)
 {
@@ -255,6 +256,7 @@ ario_mpd_launch_idle_timeout (void)
                                                     (GSourceFunc) ario_mpd_update_elapsed,
                                                     NULL);
 }
+#endif
 
 static void
 ario_mpd_idle_cb (mpd_Connection *connection,
@@ -842,12 +844,12 @@ ario_mpd_get_current_song_on_server (void)
 
         mpd_sendCurrentSongCommand (instance->priv->connection);
         ent = mpd_getNextInfoEntity (instance->priv->connection);
-        mpd_finishCommand (instance->priv->connection);
         if (ent) {
                 song = ent->info.song;
                 ent->info.song = NULL;
                 mpd_freeInfoEntity (ent);
         }
+        mpd_finishCommand (instance->priv->connection);
 
         if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
