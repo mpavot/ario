@@ -220,7 +220,7 @@ ario_server_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START
         if (!instance) {
-                instance = g_object_new (TYPE_ARIO_SERVER, NULL);
+                instance = g_object_new (ARIO_TYPE_SERVER, NULL);
         }
         if (!interface) {
                 ario_server_reset_interface ();

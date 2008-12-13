@@ -7,6 +7,20 @@
   (gtype-id "ARIO_TYPE_PLUGIN")
 )
 
+(define-object Server
+  (in-module "Ario")
+  (parent "GObject")
+  (c-name "ArioServer")
+  (gtype-id "ARIO_TYPE_SERVER")
+)
+
+(define-object Shell
+  (in-module "Ario")
+  (parent "GObject")
+  (c-name "ArioShell")
+  (gtype-id "ARIO_TYPE_SHELL")
+)
+
 ;; Enumerations and flags ...
 
 (define-enum ServerType
@@ -28,6 +42,7 @@
     '("delete-id" "ARIO_SERVER_ACTION_DELETE_ID")
     '("delete-pos" "ARIO_SERVER_ACTION_DELETE_POS")
     '("move" "ARIO_SERVER_ACTION_MOVE")
+    '("moveid" "ARIO_SERVER_ACTION_MOVEID")
   )
 )
 
@@ -97,14 +112,6 @@
 
 ;; From ario-server.h
 
-(define-function long
-  (c-name "long")
-  (return-type "unsigned")
-  (parameters
-    '("*" "get_last_update")
-  )
-)
-
 (define-function ario_server_get_type
   (c-name "ario_server_get_type")
   (return-type "GType")
@@ -115,14 +122,6 @@
   (return-type "ArioServer*")
 )
 
-(define-function ario_server_set_instance_type
-  (c-name "ario_server_set_instance_type")
-  (return-type "none")
-  (parameters
-    '("ArioServerType" "type")
-  )
-)
-
 (define-function ario_server_connect
   (c-name "ario_server_connect")
   (return-type "gboolean")
@@ -130,6 +129,16 @@
 
 (define-function ario_server_disconnect
   (c-name "ario_server_disconnect")
+  (return-type "none")
+)
+
+(define-function ario_server_reconnect
+  (c-name "ario_server_reconnect")
+  (return-type "none")
+)
+
+(define-function ario_server_shutdown
+  (c-name "ario_server_shutdown")
   (return-type "none")
 )
 
@@ -394,6 +403,11 @@
   (return-type "none")
 )
 
+(define-function ario_server_shuffle
+  (c-name "ario_server_shuffle")
+  (return-type "none")
+)
+
 (define-function ario_server_queue_add
   (c-name "ario_server_queue_add")
   (return-type "none")
@@ -427,6 +441,15 @@
   )
 )
 
+(define-function ario_server_queue_moveid
+  (c-name "ario_server_queue_moveid")
+  (return-type "none")
+  (parameters
+    '("const-int" "id")
+    '("const-int" "pos")
+  )
+)
+
 (define-function ario_server_queue_commit
   (c-name "ario_server_queue_commit")
   (return-type "none")
@@ -447,16 +470,6 @@
   (parameters
     '("const-char*" "name")
   )
-)
-
-(define-function ario_server_use_count_inc
-  (c-name "ario_server_use_count_inc")
-  (return-type "none")
-)
-
-(define-function ario_server_use_count_dec
-  (c-name "ario_server_use_count_dec")
-  (return-type "none")
 )
 
 (define-function ario_server_get_outputs
@@ -518,12 +531,6 @@
 (define-function ario_server_get_items_names
   (c-name "ario_server_get_items_names")
   (return-type "gchar**")
-)
-
-(define-method set_default
-  (of-object "ArioServer")
-  (c-name "ario_server_set_default")
-  (return-type "none")
 )
 
 

@@ -181,7 +181,7 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
                                          g_param_spec_object ("shell",
                                                               "ArioShell",
                                                               "shell",
-                                                              TYPE_ARIO_SHELL,
+                                                              ARIO_TYPE_SHELL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,

@@ -199,7 +199,7 @@ static GtkToggleActionEntry shell_toggle [] =
                 G_CALLBACK (ario_shell_view_playlist_changed_cb), TRUE }
 };
 
-#define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL, ArioShellPrivate))
+#define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SHELL, ArioShellPrivate))
 G_DEFINE_TYPE (ArioShell, ario_shell, G_TYPE_OBJECT)
 
 static void
@@ -319,9 +319,9 @@ ario_shell_new (void)
         ARIO_LOG_FUNCTION_START
         ArioShell *shell;
 
-        shell = g_object_new (TYPE_ARIO_SHELL, NULL);
+        shell = g_object_new (ARIO_TYPE_SHELL, NULL);
 
-        return g_object_new (TYPE_ARIO_SHELL, NULL);
+        return g_object_new (ARIO_TYPE_SHELL, NULL);
 }
 
 static void

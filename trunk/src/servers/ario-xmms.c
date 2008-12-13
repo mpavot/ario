@@ -1037,6 +1037,7 @@ ario_xmms_shuffle (void)
         ARIO_LOG_ERROR ("Not yet implemented for XMMS");
 }
 
+static void
 ario_xmms_queue_commit (void)
 {
         ARIO_LOG_FUNCTION_START
