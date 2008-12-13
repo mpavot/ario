@@ -136,7 +136,7 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
         }
 
         for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
-                if (!xmlStrcmp (cur->name, (const xmlChar *) "medium")){
+                if (!xmlStrcmp (cur->name, (const xmlChar *) cover_size)){
                         /* A possible cover uri has been found, we add it to the list*/
                         key = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
                         ario_cover_uris = g_slist_append (ario_cover_uris, key);
@@ -230,7 +230,7 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
         ario_cover_uris = ario_cover_lastfm_parse_xml_file (xml_data,
                                                             xml_size,
                                                             operation,
-                                                            COVER_MEDIUM);
+                                                            COVER_LARGE);
 
         g_free (xml_data);
 
