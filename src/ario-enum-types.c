@@ -49,6 +49,9 @@ ario_server_action_type_get_type (void)
 			{ ARIO_SERVER_ACTION_MOVE,
 			  "ARIO_SERVER_ACTION_MOVE",
 			  "move" },
+			{ ARIO_SERVER_ACTION_MOVEID,
+			  "ARIO_SERVER_ACTION_MOVEID",
+			  "moveid" },
 			{ 0, NULL, NULL }
 		};
 		the_type = g_enum_register_static (

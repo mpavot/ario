@@ -28,12 +28,12 @@ G_BEGIN_DECLS
 
 #define ARIO_SERVER_UNKNOWN     _("Unknown")
 
-#define TYPE_ARIO_SERVER         (ario_server_get_type ())
-#define ARIO_SERVER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_SERVER, ArioServer))
-#define ARIO_SERVER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), TYPE_ARIO_SERVER, ArioServerClass))
-#define IS_ARIO_SERVER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), TYPE_ARIO_SERVER))
-#define IS_ARIO_SERVER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_SERVER))
-#define ARIO_SERVER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_SERVER, ArioServerClass))
+#define ARIO_TYPE_SERVER         (ario_server_get_type ())
+#define ARIO_SERVER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), ARIO_TYPE_SERVER, ArioServer))
+#define ARIO_SERVER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), ARIO_TYPE_SERVER, ArioServerClass))
+#define IS_ARIO_SERVER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), ARIO_TYPE_SERVER))
+#define IS_ARIO_SERVER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), ARIO_TYPE_SERVER))
+#define ARIO_SERVER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), ARIO_TYPE_SERVER, ArioServerClass))
 
 typedef struct ArioServerAlbum
 {
@@ -284,8 +284,6 @@ ArioServerCriteria *    ario_server_criteria_copy                          (cons
 void                    ario_server_criteria_free                          (ArioServerCriteria *criteria);
 
 gchar **                ario_server_get_items_names                        (void);
-
-void                    ario_server_set_default                            (ArioServer *server);
 
 G_END_DECLS
 

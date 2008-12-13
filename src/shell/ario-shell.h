@@ -25,12 +25,12 @@
 
 G_BEGIN_DECLS
 
-#define TYPE_ARIO_SHELL         (ario_shell_get_type ())
-#define ARIO_SHELL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_SHELL, ArioShell))
-#define ARIO_SHELL_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), TYPE_ARIO_SHELL, ArioShellClass))
-#define IS_ARIO_SHELL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), TYPE_ARIO_SHELL))
-#define IS_ARIO_SHELL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_SHELL))
-#define ARIO_SHELL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_SHELL, ArioShellClass))
+#define ARIO_TYPE_SHELL         (ario_shell_get_type ())
+#define ARIO_SHELL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), ARIO_TYPE_SHELL, ArioShell))
+#define ARIO_SHELL_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), ARIO_TYPE_SHELL, ArioShellClass))
+#define IS_ARIO_SHELL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), ARIO_TYPE_SHELL))
+#define IS_ARIO_SHELL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), ARIO_TYPE_SHELL))
+#define ARIO_SHELL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), ARIO_TYPE_SHELL, ArioShellClass))
 
 typedef struct ArioShellPrivate ArioShellPrivate;
 
