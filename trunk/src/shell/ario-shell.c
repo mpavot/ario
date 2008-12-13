@@ -514,6 +514,8 @@ ario_shell_shutdown (ArioShell *shell)
 
                 ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
                 ario_lyrics_manager_shutdown (ario_lyrics_manager_get_instance ());
+
+                ario_server_shutdown ();
         }
 }
 
@@ -537,7 +539,6 @@ ario_shell_show (ArioShell *shell,
         if (ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT))
                 ario_server_connect ();
 
-        ario_shell_sync_paned (shell);
         ario_shell_sync_server (shell);
 
         if (minimized) {
@@ -550,6 +551,8 @@ ario_shell_show (ArioShell *shell,
                           "window-state-event",
                           G_CALLBACK (ario_shell_window_state_cb),
                           shell);
+
+        ario_shell_sync_paned (shell);
 
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
                 ario_server_update_db ();

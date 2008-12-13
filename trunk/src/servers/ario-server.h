@@ -167,6 +167,8 @@ void                    ario_server_disconnect                             (void
 
 void                    ario_server_reconnect                              (void);
 
+void                    ario_server_shutdown                               (void);
+
 gboolean                ario_server_is_connected                           (void);
 
 gboolean                ario_server_update_status                          (void);
