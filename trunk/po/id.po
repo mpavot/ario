@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-08-31 12:19+0000\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-11-01 19:39+0000\n"
 "Last-Translator: Muhammad Zulfikar <muhzulfikar@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -26,9 +26,8 @@ msgid "Client application to mpd"
 msgstr "Aplikasi klien pada mpd"
 
 #: ../data/glade/browser-prefs.glade.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "Pustaka"
+msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
@@ -75,9 +74,8 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Server"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -123,16 +121,11 @@ msgid "_Disconnect"
 msgstr "_Putuskan-koneksi"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Anda harus menspesifikasikan server MPD untuk lkoneksi. Jika and tidak "
-"melihat server MPD berterima kasihlah pada konfigurasi otomatis, Anda "
-"seharusnya mengecek bahwa zerocnf diaktifkan pada konfigurasi MPD atau "
-"menggunakan konfigurasi manual"
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -147,9 +140,8 @@ msgid "Artist :"
 msgstr "Artis :"
 
 #: ../data/glade/cover-progress.glade.h:3
-#, fuzzy
 msgid "Downloading cover"
-msgstr "Donwload sampul album"
+msgstr ""
 
 #: ../data/glade/cover-select.glade.h:3
 msgid "Local search"
@@ -240,9 +232,8 @@ msgid "Track"
 msgstr "Trek"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
-#, fuzzy
 msgid "Lyrics Sources"
-msgstr "Sumber lirik"
+msgstr ""
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 #: ../plugins/information/information.glade.h:6
@@ -287,9 +278,8 @@ msgid "Stop music on exit"
 msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:6
-#, fuzzy
 msgid "Update on startup"
-msgstr "Sambung otomatis ketika mulai"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
@@ -393,9 +383,8 @@ msgid "Track :"
 msgstr "Trek"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
-#, fuzzy
 msgid "Notification"
-msgstr "Konfirmasi"
+msgstr ""
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
@@ -406,9 +395,8 @@ msgid "Notification time: "
 msgstr ""
 
 #: ../data/glade/trayicon-prefs.glade.h:4
-#, fuzzy
 msgid "On middle button click on tray icon :"
-msgstr "Definisikan perilaku dari klik ganda pada tray icon"
+msgstr ""
 
 #: ../data/glade/trayicon-prefs.glade.h:5
 #: ../src/shell/ario-shell-preferences.c:139
@@ -525,21 +513,18 @@ msgstr "Putar lagu berikutnya"
 msgid "Do nothing"
 msgstr "Tak ada yang dilakukan"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Menghubungkan ke server MPD"
+msgstr ""
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "Mustahil untuk berkoneksi pada mpd. Cek opsi pada koneksi"
+msgstr ""
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
-#, fuzzy
 msgid "Composer"
-msgstr "Sampul"
+msgstr ""
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/servers/ario-server.c:51
@@ -588,14 +573,12 @@ msgstr "Tambah dan _mainkan"
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
-#, fuzzy
 msgid "_Replace in playlist"
-msgstr "Simpan daftar lagu"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:88
-#, fuzzy
 msgid "Get the covers"
-msgstr "Hapus sampul"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:91
 msgid "_Delete the covers"
@@ -643,9 +626,8 @@ msgid "Cover"
 msgstr "Sampul"
 
 #: ../src/sources/ario-tree.c:1225
-#, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr "Apakah anda yakin ingin menghapus semua daftar main?"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:145
 msgid "_File"
@@ -711,11 +693,11 @@ msgstr "Panel S_tatus"
 msgid "Upper part"
 msgstr "Bagian paling atas"
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "Klien GTK untuk MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -733,9 +715,16 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Muhammad Zulfikar https://launchpad.net/~zulfikars\n"
 "  Nestanet https://launchpad.net/~nesta-101106\n"
+"  reza https://launchpad.net/~edja-kun\n"
+"\n"
+"Launchpad Contributions:\n"
+"  LOnely Luna https://launchpad.net/~gerydcutegal\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Muhammad Zulfikar https://launchpad.net/~zulfikars\n"
+"  Nestanet https://launchpad.net/~nesta-101106\n"
 "  reza https://launchpad.net/~edja-kun"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Mengkonfigurasi Plugin"
 
@@ -782,9 +771,8 @@ msgid "Lyrics Download"
 msgstr "Mengunduh lirik"
 
 #: ../src/shell/ario-shell-lyricsselect.c:202
-#, fuzzy
 msgid "Source"
-msgstr "Sumber"
+msgstr ""
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
@@ -823,16 +811,11 @@ msgid "Server autodetection"
 msgstr "Deteksi otomatis server"
 
 #: ../src/widgets/ario-connection-widget.c:542
-#, fuzzy
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Anda harus menspesifikasikan server MPD untuk lkoneksi. Jika and tidak "
-"melihat server MPD berterima kasihlah pada konfigurasi otomatis, Anda "
-"seharusnya mengecek bahwa zerocnf diaktifkan pada konfigurasi MPD atau "
-"menggunakan konfigurasi manual"
 
 #: ../src/widgets/ario-connection-widget.c:560
 msgid "Host"
@@ -924,9 +907,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Berhenti"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -954,14 +936,12 @@ msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:134
-#, fuzzy
 msgid "_Play"
-msgstr "_Putar"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:137
-#, fuzzy
 msgid "_Pause"
-msgstr "_Jeda"
+msgstr ""
 
 #: ../src/widgets/ario-tray-icon.c:140
 msgid "_Stop"
@@ -1094,9 +1074,8 @@ msgid "Tracks submitted:"
 msgstr "Trek dikirimkan:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
-#, fuzzy
 msgid "Username :"
-msgstr "Nama :"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1123,27 +1102,24 @@ msgid "File System Browser"
 msgstr ""
 
 #: ../plugins/information/ario-information.c:110
-#, fuzzy
 msgid "Information"
-msgstr "Konfirmasi"
+msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
 msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Song Information"
-msgstr "Konfirmasi"
+msgstr ""
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
 msgstr ""
 
 #: ../plugins/information/information.glade.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "Lirik"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -1226,12 +1202,6 @@ msgstr ""
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Automatic configuration"
-#~ msgstr "Konfigurasi otomatis"
-
-#~ msgid "Manual configuration"
-#~ msgstr "Konfigurasi manual"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 untuk 'mulai/jeda', 1 untuk memulai lagu selanjutnya, 2 untuk 'diam'."
@@ -1261,10 +1231,6 @@ msgstr "Wikipedia"
 
 #~ msgid "Define the size of the artist column."
 #~ msgstr "tegaskan ukuran kolom artis"
-
-#, fuzzy
-#~ msgid "Hide the covers in the albums treeview"
-#~ msgstr "sembunyikan sampul dari bagan album"
 
 #~ msgid "Host to connect to"
 #~ msgstr "host sambungan ke"
@@ -1299,6 +1265,23 @@ msgstr "Wikipedia"
 #~ msgid "True if the initial assistant has already been run."
 #~ msgstr "Benar jika inisial asisten telah berjalan"
 
+#~ msgid "Automatic configuration"
+#~ msgstr "Konfigurasi otomatis"
+
+#~ msgid "Manual configuration"
+#~ msgstr "Konfigurasi manual"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Anda harus menspesifikasikan server MPD untuk lkoneksi. Jika and tidak "
+#~ "melihat server MPD berterima kasihlah pada konfigurasi otomatis, Anda "
+#~ "seharusnya mengecek bahwa zerocnf diaktifkan pada konfigurasi MPD atau "
+#~ "menggunakan konfigurasi manual"
+
 #~ msgid "Amazon search"
 #~ msgstr "Pencarian dengan Amazon"
 
@@ -1313,27 +1296,3 @@ msgstr "Wikipedia"
 
 #~ msgid "Get the covers from _Amazon"
 #~ msgstr "Ambil sampul dari Amazon"
-
-#, fuzzy
-#~ msgid "Position of filesystem pane"
-#~ msgstr "Posisi panel playlist"
-
-#, fuzzy
-#~ msgid "Define the path to the music"
-#~ msgstr "Definisikan port pada proxy"
-
-#, fuzzy
-#~ msgid "Active lyrics sources"
-#~ msgstr "Ukuran cover"
-
-#, fuzzy
-#~ msgid "Covers sources"
-#~ msgstr "Ukuran cover"
-
-#, fuzzy
-#~ msgid "Lyrics sources"
-#~ msgstr "lirik tak ditemukan"
-
-#, fuzzy
-#~ msgid "lyrics providers"
-#~ msgstr "Ukuran cover"

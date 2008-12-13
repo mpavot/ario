@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-09-19 13:01+0000\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-11-01 20:36+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-01 14:36+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -55,9 +55,8 @@ msgid "Music directory :"
 msgstr "Zene könyvtár :"
 
 #: ../data/glade/connection-widget.glade.h:5
-#, fuzzy
 msgid "Music server is on the same computer as Ario"
-msgstr "MPD ugyanazon a gépen van mint maga az Ario"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:6
 #: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
@@ -75,9 +74,8 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Szerver"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -123,16 +121,11 @@ msgid "_Disconnect"
 msgstr "_Kapcsolat bontása"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
-"automatikus konfiguráció következtében nem látja az MPD szervert, "
-"ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
-"használja a kézi beállítást."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -520,17 +513,13 @@ msgstr "Következő dal lejátszása"
 msgid "Do nothing"
 msgstr "Ne tegyen semmit"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Kapcsolódás az MPD kiszolgálóhoz...."
+msgstr ""
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
-"Nem sikerült kapcsolódni az mpd-hez. Ellenőrizze a csatlakozási "
-"beállításokat."
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
@@ -705,11 +694,11 @@ msgstr "Á_llapotsor"
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "GTK kliens MPD -hez"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -737,9 +726,17 @@ msgstr ""
 "  Mice Teeth https://launchpad.net/~micecrosoft\n"
 "  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
 "  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
+"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Mice Teeth https://launchpad.net/~micecrosoft\n"
+"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
+"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
 "  Zoltan Hoppar https://launchpad.net/~hopparz-gmail"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Bővítmények beállítása"
 
@@ -826,16 +823,11 @@ msgid "Server autodetection"
 msgstr "Kiszolgáló automatikus felismerése"
 
 #: ../src/widgets/ario-connection-widget.c:542
-#, fuzzy
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
-"automatikus konfiguráció következtében nem látja az MPD szervert, "
-"ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
-"használja a kézi beállítást."
 
 #: ../src/widgets/ario-connection-widget.c:560
 msgid "Host"
@@ -929,9 +921,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Leállítás"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -1229,6 +1220,17 @@ msgstr "Wikipédia"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Kézi beállítás"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
+#~ "automatikus konfiguráció következtében nem látja az MPD szervert, "
+#~ "ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
+#~ "használja a kézi beállítást."
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

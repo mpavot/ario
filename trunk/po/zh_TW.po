@@ -1,4 +1,4 @@
-# Turkish translation for ario
+# Traditional Chinese translation for ario
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the ario package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-13 13:12+0100\n"
-"PO-Revision-Date: 2008-11-01 20:36+0000\n"
-"Last-Translator: Furkan KARA <kingofthepixels@gmail.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2008-12-09 14:25+0000\n"
+"Last-Translator: Palatis <palatis@gmail.com>\n"
+"Language-Team: Traditional Chinese <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,40 +19,40 @@ msgstr ""
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Ario müzik çalar"
+msgstr "Ario 音樂撥放器"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
-msgstr "mpd için kullanıcı uygulaması"
+msgstr "mpd 用戶端"
 
 #: ../data/glade/browser-prefs.glade.h:1
 msgid "Library Options"
-msgstr "Kitaplık Seçenekleri"
+msgstr "收藏選項"
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
-msgstr "Kitaplık Organizasyonu"
+msgstr "組織收藏"
 
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
-msgstr "Albümlere göre sırala: "
+msgstr "排序專輯： "
 
 #: ../data/glade/connection-widget.glade.h:1
 msgid "Auto detect"
-msgstr "Otomatik sapta"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:2
 msgid "Default"
-msgstr "Varsayılan"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:3
 #: ../src/widgets/ario-firstlaunch.c:79
 msgid "Host :"
-msgstr "Yer sağlayıcı (host):"
+msgstr "主機："
 
 #: ../data/glade/connection-widget.glade.h:4
 msgid "Music directory :"
-msgstr "Müzik dizini:"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:5
 msgid "Music server is on the same computer as Ario"
@@ -61,17 +61,17 @@ msgstr ""
 #: ../data/glade/connection-widget.glade.h:6
 #: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
 msgid "Name :"
-msgstr "İsim :"
+msgstr "名稱："
 
 #: ../data/glade/connection-widget.glade.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
 msgid "Password :"
-msgstr "Parola:"
+msgstr "密碼："
 
 #: ../data/glade/connection-widget.glade.h:8
 #: ../src/widgets/ario-firstlaunch.c:81
 msgid "Port :"
-msgstr "Port :"
+msgstr "埠號："
 
 #: ../data/glade/connection-widget.glade.h:9
 msgid "Server type : "
@@ -83,42 +83,42 @@ msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr "Çalan şarkının albüm kapağını otomatik olarak indir"
+msgstr "在播放時自動下載專輯封面"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:260
 #: ../src/shell/ario-shell-preferences.c:124
 msgid "Covers"
-msgstr "Albüm Kapakları"
+msgstr "專輯封面"
 
 #: ../data/glade/cover-prefs.glade.h:3
 msgid "Covers Sources"
-msgstr "Kapak Kaynakları"
+msgstr "專輯封面來源"
 
 #: ../data/glade/cover-prefs.glade.h:4
 msgid "Show the covers in the albums list"
-msgstr "Albüm listesinde kapakları göster"
+msgstr "在專輯清單中顯示封面"
 
 #: ../data/glade/cover-prefs.glade.h:5
 msgid "Use Amazon."
-msgstr "Amazon'u kullan."
+msgstr "使用 Amazon。"
 
 #: ../data/glade/connection-prefs.glade.h:1
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
-msgstr "Bağlantı"
+msgstr "連線"
 
 #: ../data/glade/connection-prefs.glade.h:2
 msgid "_Autoconnect on startup"
-msgstr "_Başlangıçta otomatik bağlan"
+msgstr "啟動時自動連線(_A)"
 
 #: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
 msgid "_Connect"
-msgstr "_Bağlan"
+msgstr "連線(_C)"
 
 #: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:154
 msgid "_Disconnect"
-msgstr "_Bağlantıyı Kes"
+msgstr "斷線(_D)"
 
 #: ../data/glade/connection-assistant.glade.h:1
 msgid ""
@@ -126,41 +126,43 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
+"您必須告訴我要連去哪個伺服器。若自動偵測的清單中沒有您的伺服器，請檢查伺服器"
+"上的 Zeroconf 與 Avahi 是否啟動，或是手動設定伺服器。"
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
 #: ../plugins/information/information.glade.h:1
 msgid "Album :"
-msgstr "Albüm :"
+msgstr "專輯："
 
 #: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 #: ../plugins/information/information.glade.h:3
 msgid "Artist :"
-msgstr "Sanatçı :"
+msgstr "演出者："
 
 #: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
-msgstr "Albüm kapağı indirme"
+msgstr "下載專輯封面"
 
 #: ../data/glade/cover-select.glade.h:3
 msgid "Local search"
-msgstr "Yerel arama"
+msgstr "本地搜尋"
 
 #: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:115
 msgid "Search"
-msgstr "Ara"
+msgstr "搜尋"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
 #: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:330
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
-msgstr "Albüm"
+msgstr "專輯"
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Allow only one instance of Ario"
-msgstr ""
+msgstr "不允許開啟多個 Ario"
 
 #: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:176
@@ -168,54 +170,54 @@ msgstr ""
 #: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
-msgstr "Sanatçı"
+msgstr "演出者"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
 #: ../src/widgets/ario-playlist.c:330
 msgid "Date"
-msgstr "Tarih"
+msgstr "日期"
 
 #: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:330
 msgid "Duration"
-msgstr "Süre"
+msgstr "經過時間"
 
 #: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:330
 msgid "File"
-msgstr "Dosya"
+msgstr "檔案"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:330
 msgid "Genre"
-msgstr "Tarz"
+msgstr "風格"
 
 #: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
-msgstr "Yeni bir şarkı çalındığında çalan şarkıya git"
+msgstr "撥放時跳至該曲目"
 
 #: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
-msgstr "Kapat tuşuna basıldığında pencereyi gizle"
+msgstr "按下關閉按鈕時隱藏視窗"
 
 #: ../data/glade/interface-prefs.glade.h:10
 #: ../src/shell/ario-shell-preferences.c:134
 msgid "Interface"
-msgstr "Arayüz"
+msgstr "界面"
 
 #: ../data/glade/interface-prefs.glade.h:11
 #: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:197
 msgid "Playlist"
-msgstr "Çalma Listesi"
+msgstr "播放清單"
 
 #: ../data/glade/interface-prefs.glade.h:12
 msgid "Show rows:"
-msgstr "Satırları göster:"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
-msgstr "Sekmeleri göster"
+msgstr "顯示標籤"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
@@ -223,264 +225,264 @@ msgstr "Sekmeleri göster"
 #: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
-msgstr "Başlık"
+msgstr "標題"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:330
 msgid "Track"
-msgstr "Parça"
+msgstr "音軌"
 
 #: ../data/glade/lyrics-prefs.glade.h:1
 msgid "Lyrics Sources"
-msgstr "Şarkı sözü kaynakları"
+msgstr "歌詞來源"
 
 #: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
 #: ../plugins/information/information.glade.h:6
 msgid "Title :"
-msgstr "Başlık :"
+msgstr "標題："
 
 #: ../data/glade/proxy-prefs.glade.h:1
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Proxy"
-msgstr "Vekil Sunucu (proxy)"
+msgstr "代理伺服器"
 
 #: ../data/glade/proxy-prefs.glade.h:2
 msgid "Proxy Address :"
-msgstr "Vekil Sunucu (proxy) adresi :"
+msgstr "代理伺服器位置："
 
 #: ../data/glade/proxy-prefs.glade.h:3
 msgid "Proxy Port :"
-msgstr "Vekil Sunucu (proxy) portu :"
+msgstr "代理伺服器埠號："
 
 #: ../data/glade/proxy-prefs.glade.h:4
 msgid "Use a proxy"
-msgstr "Bir Vekil sunucu (proxy) kullan"
+msgstr "使用代理伺服器"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
-msgstr "Ses çıkışları"
+msgstr "音源輸出"
 
 #: ../data/glade/server-prefs.glade.h:2
 msgid "Crossfade"
-msgstr ""
+msgstr "淡出淡入"
 
 #: ../data/glade/server-prefs.glade.h:3
 msgid "Database"
-msgstr "Veritabanı"
+msgstr "資料庫"
 
 #: ../data/glade/server-prefs.glade.h:4
 msgid "Last updated:"
-msgstr "Son güncelleme:"
+msgstr "最後更新："
 
 #: ../data/glade/server-prefs.glade.h:5
 msgid "Stop music on exit"
-msgstr ""
+msgstr "離開時停止播放"
 
 #: ../data/glade/server-prefs.glade.h:6
 msgid "Update on startup"
-msgstr ""
+msgstr "啟動時更新"
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
-msgstr "_Güncelle"
+msgstr "更新(_U)"
 
 #: ../data/glade/server-prefs.glade.h:8
 msgid "enable crossfade"
-msgstr "ses geçişini (crossfade) etkinleştir"
+msgstr "啟用音效淡出淡入"
 
 #: ../data/glade/server-prefs.glade.h:9
 msgid "fade time (s):"
-msgstr "geçiş (fade) zamanı:"
+msgstr "淡出時間（秒）："
 
 #: ../data/glade/server-prefs.glade.h:10 ../data/glade/song-infos.glade.h:14
 #: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.glade.h:7
 #, c-format
 msgid "n/a"
-msgstr ""
+msgstr "無"
 
 #: ../data/glade/similar-artists.glade.h:1
 msgid "Add all to playlist"
-msgstr "Hepsini çalma listesine ekle"
+msgstr "全部加入播放清單"
 
 #: ../data/glade/similar-artists.glade.h:2
 msgid "Add to playlist"
-msgstr "Çalma listesine ekle"
+msgstr "加入播放清單"
 
 #: ../data/glade/similar-artists.glade.h:3
 msgid "Find on Last.fm"
-msgstr "Son.fm'de bul"
+msgstr "在 Last.fm 上尋找"
 
 #: ../data/glade/stats-prefs.glade.h:1
 msgid "Database play time :"
-msgstr "Veri tabanı oynatma süresi:"
+msgstr ""
 
 #: ../data/glade/stats-prefs.glade.h:2
 msgid "Number of albums :"
-msgstr "Albüm sayısı:"
+msgstr "專輯數量："
 
 #: ../data/glade/stats-prefs.glade.h:3
 msgid "Number of artists :"
-msgstr "Sanatçı sayısı:"
+msgstr "演出者數量："
 
 #: ../data/glade/stats-prefs.glade.h:4
 msgid "Number of songs :"
-msgstr "Şarkı sayısı:"
+msgstr "歌曲數量："
 
 #: ../data/glade/stats-prefs.glade.h:5
 msgid "Play time :"
-msgstr "Oynatma süresi:"
+msgstr "撥放時間："
 
 #: ../data/glade/stats-prefs.glade.h:6
 #: ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
-msgstr "İstatistikler"
+msgstr "統計資料"
 
 #: ../data/glade/stats-prefs.glade.h:7
 msgid "Uptime :"
-msgstr ""
+msgstr "啟動時間："
 
 #: ../data/glade/song-infos.glade.h:3
 msgid "Comment :"
-msgstr "Yorum :"
+msgstr "註解："
 
 #: ../data/glade/song-infos.glade.h:4
 msgid "Composer :"
-msgstr "Besteleyen :"
+msgstr "作曲者："
 
 #: ../data/glade/song-infos.glade.h:5
 msgid "Date :"
-msgstr "Zaman :"
+msgstr "日期："
 
 #: ../data/glade/song-infos.glade.h:6
 msgid "Disc :"
-msgstr "Disk :"
+msgstr ""
 
 #: ../data/glade/song-infos.glade.h:7
 msgid "Filename :"
-msgstr "Dosya Adı:"
+msgstr "檔案名稱："
 
 #: ../data/glade/song-infos.glade.h:8
 msgid "Genre :"
-msgstr "Tarz :"
+msgstr "風格："
 
 #: ../data/glade/song-infos.glade.h:9
 #: ../plugins/information/information.glade.h:4
 msgid "Length :"
-msgstr "Uzunluk :"
+msgstr "長度："
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
-msgstr "Sanatçı :"
+msgstr "表演者："
 
 #: ../data/glade/song-infos.glade.h:11
 msgid "Song"
-msgstr "Şarkı"
+msgstr "歌曲"
 
 #: ../data/glade/song-infos.glade.h:13
 msgid "Track :"
-msgstr "Parça :"
+msgstr "音軌："
 
 #: ../data/glade/trayicon-prefs.glade.h:1
 msgid "Notification"
-msgstr ""
+msgstr "通知"
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
-msgstr ""
+msgstr "於歌曲更換時通知"
 
 #: ../data/glade/trayicon-prefs.glade.h:3
 msgid "Notification time: "
-msgstr ""
+msgstr "通知視窗顯示時間： "
 
 #: ../data/glade/trayicon-prefs.glade.h:4
 msgid "On middle button click on tray icon :"
-msgstr "sistem tepsisindeyken orta fare tuşu ile tıkla :"
+msgstr "中鍵於小圖示按下時："
 
 #: ../data/glade/trayicon-prefs.glade.h:5
 #: ../src/shell/ario-shell-preferences.c:139
 msgid "Tray icon"
-msgstr "Sistem tepsisi ikonu"
+msgstr "小圖示"
 
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
-msgstr ""
+msgstr "啟動時最小化"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
-msgstr "saniye"
+msgstr "秒"
 
 #: ../src/ario-util.c:84
 msgid "minutes"
-msgstr "dakika"
+msgstr "分"
 
 #: ../src/ario-util.c:92
 msgid "hours"
-msgstr "saat"
+msgstr "時"
 
 #: ../src/ario-util.c:100
 msgid "days"
-msgstr "gün"
+msgstr "日"
 
 #: ../src/covers/ario-cover.c:158
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "Bu albüm kapağı zaten var. Yeniden yerleştirmek ister misin?"
+msgstr "專輯封面已經存在，您是否想取代它？"
 
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
-msgstr "Müzik Dizini"
+msgstr "音樂目錄"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "Eklenti"
+msgstr "外掛模組"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:159
 #: ../src/preferences/ario-lyrics-preferences.c:110
 #: ../src/preferences/ario-server-preferences.c:165
 msgid "Enabled"
-msgstr "Etkin"
+msgstr "啟用"
 
 #: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
 msgid "_About"
-msgstr "_Hakkında"
+msgstr "關於(_A)"
 
 #: ../src/plugins/ario-plugin-manager.c:488
 msgid "C_onfigure"
-msgstr "Y_apılandır"
+msgstr "設定(_o)"
 
 #: ../src/plugins/ario-plugin-manager.c:497
 msgid "A_ctivate"
-msgstr "E_tkinleştir"
+msgstr "啟用(_C)"
 
 #: ../src/plugins/ario-plugin-manager.c:508
 msgid "Ac_tivate All"
-msgstr "Hepsini E_tkinleştir"
+msgstr "全部啟用(_t)"
 
 #: ../src/plugins/ario-plugin-manager.c:513
 msgid "_Deactivate All"
-msgstr "Hepsini _Etkinsizleştir"
+msgstr "全部停用(_D)"
 
 #: ../src/plugins/ario-plugin-manager.c:722
 msgid "Active plugins"
-msgstr "Etkin eklentiler"
+msgstr "使用中的外掛程式"
 
 #: ../src/preferences/ario-browser-preferences.c:45
 msgid "Alphabetically"
-msgstr "Alfabetik olarak"
+msgstr "依照字母"
 
 #. SORT_ALPHABETICALLY
 #: ../src/preferences/ario-browser-preferences.c:46
 msgid "By year"
-msgstr "Yıl olarak"
+msgstr "依照年份"
 
 #: ../src/preferences/ario-cover-preferences.c:170
 #: ../src/preferences/ario-lyrics-preferences.c:121
 #: ../src/preferences/ario-server-preferences.c:176
 #: ../src/widgets/ario-connection-widget.c:552
 msgid "Name"
-msgstr "İsim"
+msgstr "名稱"
 
 #: ../src/preferences/ario-server-preferences.c:211
 #: ../src/preferences/ario-stats-preferences.c:152
@@ -490,64 +492,64 @@ msgstr "İsim"
 #: ../src/preferences/ario-stats-preferences.c:156
 #: ../src/preferences/ario-stats-preferences.c:157
 msgid "Not connected"
-msgstr "Bağlı değil"
+msgstr "沒有連線"
 
 #: ../src/preferences/ario-server-preferences.c:216
 #: ../src/preferences/ario-server-preferences.c:307
 #: ../src/widgets/ario-status-bar.c:95
 msgid "Updating..."
-msgstr "Güncelleniyor..."
+msgstr "正在更新..."
 
 #: ../src/preferences/ario-trayicon-preferences.c:48
 msgid "Play/Pause"
-msgstr "Oynat/Durakla"
+msgstr "播放/暫停"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
 #: ../src/widgets/ario-header.c:246
 msgid "Play next song"
-msgstr "Sonraki şarkıyı çal"
+msgstr "播下一首樂曲"
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-trayicon-preferences.c:50
 msgid "Do nothing"
-msgstr "Hiçbir şey yapma"
+msgstr "不做任何事"
 
 #: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr ""
+msgstr "正在連線至伺服器..."
 
 #: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr ""
+msgstr "不可能連接到伺服器，請檢查連接設定。"
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
 msgid "Composer"
-msgstr ""
+msgstr "作曲家"
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/servers/ario-server.c:51
 msgid "Performer"
-msgstr ""
+msgstr "表演者"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
 #: ../src/servers/ario-server.c:54
 msgid "Filename"
-msgstr "Dosya ismi"
+msgstr "檔案名稱"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/servers/ario-server.c:55
 msgid "Any"
-msgstr "Herhangi Birisi"
+msgstr "任何"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "未知的"
 
 #: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
 #: ../src/sources/ario-storedplaylists.c:101
@@ -556,7 +558,7 @@ msgstr "Bilinmeyen"
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:114
 msgid "_Add to playlist"
-msgstr "_Çalma listesine ekle"
+msgstr "加入播放清單(_A)"
 
 #: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
 #: ../src/sources/ario-storedplaylists.c:104
@@ -565,7 +567,7 @@ msgstr "_Çalma listesine ekle"
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
-msgstr "Ekle ve _oynat"
+msgstr "加入並播放(_p)"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:107
@@ -574,15 +576,15 @@ msgstr "Ekle ve _oynat"
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
 msgid "_Replace in playlist"
-msgstr ""
+msgstr "取代播放清單中的項目(_R)"
 
 #: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
-msgstr "Albüm kapaklarını al"
+msgstr "下載專輯封面"
 
 #: ../src/sources/ario-browser.c:91
 msgid "_Delete the covers"
-msgstr "_Albüm kapaklarını sil"
+msgstr "刪除專輯封面(_D)"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
@@ -590,134 +592,131 @@ msgstr "_Albüm kapaklarını sil"
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
-msgstr "_Özellikler"
+msgstr "屬性(_P)"
 
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
-msgstr "Kütüphane"
+msgstr "收藏庫"
 
 #: ../src/sources/ario-search.c:183
 msgid "Add a search criteria"
-msgstr ""
+msgstr "加入搜尋條件"
 
 #: ../src/sources/ario-search.c:192
 msgid "Search songs in the library"
-msgstr "Şarkıyı kütüphanede ara"
+msgstr "在收藏中尋找歌曲"
 
 #: ../src/sources/ario-search.c:369
 msgid "Remove a search criteria"
-msgstr ""
+msgstr "移除搜尋條件"
 
 #: ../src/sources/ario-storedplaylists.c:110
 msgid "_Delete"
-msgstr "_Sil"
+msgstr "刪除(_D)"
 
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
-msgstr "Çalma Listeleri"
+msgstr "播放清單"
 
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr "Seçilen tüm çalma listerlini silmek istediğinze emin misiniz?"
+msgstr "您確定要刪除所有選擇的播放清單？"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-tree.c:373
 msgid "Cover"
-msgstr "Albüm Kapağı"
+msgstr "專輯封面"
 
 #: ../src/sources/ario-tree.c:1225
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr ""
+msgstr "您確定要刪除所有選擇的專輯封面？"
 
 #: ../src/shell/ario-shell.c:145
 msgid "_File"
-msgstr "_Dosya"
+msgstr "檔案(_F)"
 
 #: ../src/shell/ario-shell.c:146
 msgid "_Edit"
-msgstr "_Düzenle"
+msgstr "編輯(_E)"
 
 #: ../src/shell/ario-shell.c:147
 msgid "_View"
-msgstr "_Görünüm"
+msgstr "檢視(_V)"
 
 #: ../src/shell/ario-shell.c:148
 msgid "_Tool"
-msgstr "_Araç"
+msgstr "工具(_T)"
 
 #: ../src/shell/ario-shell.c:149
 msgid "_Help"
-msgstr "_Yardım"
+msgstr "說明(_H)"
 
 #: ../src/shell/ario-shell.c:157
 msgid "_Quit"
-msgstr "_Çık"
+msgstr "結束程式(_Q)"
 
 #: ../src/shell/ario-shell.c:160
 msgid "Plu_gins"
-msgstr "E_klentiler"
+msgstr "外掛模組(_g)"
 
 #: ../src/shell/ario-shell.c:163
 msgid "Prefere_nces"
-msgstr "Terci_hler"
+msgstr "偏好設定(_n)"
 
 #: ../src/shell/ario-shell.c:166
 msgid "_Change current album cover"
-msgstr "_Geçerli albüm kapağını değiştir"
+msgstr "更換目前的專輯封面(_C)"
 
 #: ../src/shell/ario-shell.c:169
 msgid "Download album _covers"
-msgstr "Albüm _Kapaklarını indir"
+msgstr "下載專輯封面(_c)"
 
 #: ../src/shell/ario-shell.c:172
 msgid "Find similar artists"
-msgstr "Benzer sanatçıları bul"
+msgstr "尋找類似的演出者"
 
 #: ../src/shell/ario-shell.c:175
 msgid "Add similar songs to playlist"
-msgstr "Benzer şarkıları çalma listesine ekle"
+msgstr "將類似歌曲加入播放清單"
 
 #: ../src/shell/ario-shell.c:178
 msgid "Show _lyrics"
-msgstr "_Şarkı sözlerini göster"
+msgstr "顯示歌詞(_l)"
 
 #: ../src/shell/ario-shell.c:184
 msgid "_Translate this application..."
-msgstr "_Bu uygulamayı tercüme et."
+msgstr "翻譯這個軟體(_T)..."
 
 #: ../src/shell/ario-shell.c:191
 msgid "S_tatusbar"
-msgstr "_Durum çubuğu"
+msgstr "狀態列(_T)"
 
 #: ../src/shell/ario-shell.c:194
 msgid "Upper part"
-msgstr "Üst tarafı"
+msgstr "上半部"
 
 #: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
-msgstr "MPD için GTK alıcısı"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Furkan KARA https://launchpad.net/~frkn\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Enes Albay https://launchpad.net/~albayenes\n"
-"  Furkan KARA https://launchpad.net/~frkn"
+"  Palatis https://launchpad.net/~palatis\n"
+"  Yuren Ju https://launchpad.net/~yurenju"
 
 #: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
-msgstr "Eklentileri Yapılandır"
+msgstr "設定外掛模組"
 
 #: ../src/shell/ario-shell-coverdownloader.c:181
 msgid "Music Player Cover Download"
-msgstr "Oynatıcı İçin Kabuk İndir"
+msgstr "Ario 專輯封面下載器"
 
 #: ../src/shell/ario-shell-coverdownloader.c:323
 msgid "Download Finished!"
-msgstr "İndirme Tamamlandı!"
+msgstr "下載完成！"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:326
@@ -727,71 +726,71 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
-"%i kabuk bulundu\n"
-"%i kabuk bulunamadı\n"
-"%i kabuk zaten var"
+"找到了 %i 個專輯封面\n"
+"沒找到 %i 個專輯封面\n"
+"%i 個專輯已經有封面"
 
 #: ../src/shell/ario-shell-coverselect.c:248
 msgid "Cover Download"
-msgstr "Kabuk İndir"
+msgstr "下載專輯封面"
 
 #: ../src/shell/ario-shell-coverselect.c:562
 msgid "Error reading file"
-msgstr "Dosya okumada hata"
+msgstr "讀取檔案時發生錯誤"
 
 #: ../src/shell/ario-shell-coverselect.c:585
 msgid "Error saving file"
-msgstr "Dosya kaydetmede hata"
+msgstr "儲存檔案錯誤"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:129
 #: ../src/shell/ario-shell-songinfos.c:209
 msgid "Lyrics"
-msgstr "Şarkı sözleri"
+msgstr "歌詞"
 
 #: ../src/shell/ario-shell-lyricsselect.c:164
 msgid "Lyrics Download"
-msgstr "Şarkı Sözleri İndir"
+msgstr "歌詞下載"
 
 #: ../src/shell/ario-shell-lyricsselect.c:202
 msgid "Source"
-msgstr "Kaynak"
+msgstr "來源"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
-msgstr "Ario Tercihler"
+msgstr "Ario 偏好設定"
 
 #: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
-msgstr ""
+msgstr "伺服器"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
 msgid "%d songs"
-msgstr ""
+msgstr "%d 首歌曲"
 
 #: ../src/shell/ario-shell-similarartists.c:375
 msgid "Image"
-msgstr ""
+msgstr "圖片"
 
 #: ../src/shell/ario-shell-similarartists.c:393
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
-msgstr ""
+msgstr "曲目"
 
 #: ../src/shell/ario-shell-songinfos.c:115
 #: ../src/shell/ario-shell-songinfos.c:204
 #: ../src/shell/ario-shell-songinfos.c:313
 msgid "Song Properties"
-msgstr ""
+msgstr "歌曲屬性"
 
 #: ../src/widgets/ario-connection-widget.c:345
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:531
 msgid "Server autodetection"
-msgstr "Otomatik sunucu saptaması"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:542
 msgid ""
@@ -802,88 +801,90 @@ msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:560
 msgid "Host"
-msgstr "Sunucu"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:568
 msgid "Port"
-msgstr "Bağlantı noktası"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:631
 msgid "You must select a server."
-msgstr "Bir sunucu seçmelisiniz."
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:678
 msgid "New Profile"
-msgstr "Yeni Profil"
+msgstr ""
 
 #: ../src/widgets/ario-firstlaunch.c:78
 msgid "The following configuration will be used:"
-msgstr ""
+msgstr "將使用下列設定："
 
 #: ../src/widgets/ario-firstlaunch.c:102
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
+"這是您初次啟動 Ario。\n"
+"這個精靈將帶領您設定它。"
 
 #: ../src/widgets/ario-firstlaunch.c:107
 msgid "Welcome to Ario"
-msgstr ""
+msgstr "歡迎來到 Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:126
 msgid "Configuration"
-msgstr ""
+msgstr "設定"
 
 #: ../src/widgets/ario-firstlaunch.c:138
 msgid "Confirmation"
-msgstr ""
+msgstr "確認"
 
 #: ../src/widgets/ario-header.c:64 ../src/widgets/ario-tray-icon.h:45
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr ""
+msgstr "<i>來自</i> %s <i>由</i> %s 演出"
 
 #: ../src/widgets/ario-header.c:198
 msgid "Play previous song"
-msgstr ""
+msgstr "播上一首樂曲"
 
 #: ../src/widgets/ario-header.c:220
 msgid "Play/Pause the music"
-msgstr ""
+msgstr "播放/暫停音樂"
 
 #: ../src/widgets/ario-header.c:233
 msgid "Stop the music"
-msgstr ""
+msgstr "停止播放音樂"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
-msgstr ""
+msgstr " 的 "
 
 #: ../src/widgets/ario-header.c:323
 msgid "Toggle random on/off"
-msgstr ""
+msgstr "開關隨機播放"
 
 #: ../src/widgets/ario-header.c:336
 msgid "Toggle repeat on/off"
-msgstr ""
+msgstr "開關重複播放"
 
 #: ../src/widgets/ario-header.c:342
 msgid "Change the music volume"
-msgstr ""
+msgstr "改變音量"
 
 #: ../src/widgets/ario-lyrics-editor.c:272
 msgid "Downloading lyrics..."
-msgstr ""
+msgstr "歌詞下載中..."
 
 #: ../src/widgets/ario-lyrics-editor.c:289
 msgid "Lyrics not found"
-msgstr ""
+msgstr "沒有找到歌詞"
 
 #: ../src/widgets/ario-playlist.c:124
 msgid "_Clear"
-msgstr ""
+msgstr "清除(_C)"
 
 #: ../src/widgets/ario-playlist.c:127
 msgid "_Shuffle"
@@ -895,64 +896,64 @@ msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
-msgstr ""
+msgstr "移除(_R)"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Save"
-msgstr ""
+msgstr "儲存(_S)"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Go to playing song"
-msgstr ""
+msgstr "移至正在播放的歌曲(_G)"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1323
 msgid "Save playlist"
-msgstr ""
+msgstr "儲存播放清單"
 
 #: ../src/widgets/ario-playlist.c:1333
 msgid "Playlist name :"
-msgstr ""
+msgstr "播放清單名稱："
 
 #: ../src/widgets/ario-playlist.c:1358
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr ""
+msgstr "播放清單已經存在，是否覆蓋？"
 
 #: ../src/widgets/ario-tray-icon.c:134
 msgid "_Play"
-msgstr ""
+msgstr "播放(_P)"
 
 #: ../src/widgets/ario-tray-icon.c:137
 msgid "_Pause"
-msgstr ""
+msgstr "暫停(_P)"
 
 #: ../src/widgets/ario-tray-icon.c:140
 msgid "_Stop"
-msgstr ""
+msgstr "停止(_S)"
 
 #: ../src/widgets/ario-tray-icon.c:143
 msgid "_Next"
-msgstr ""
+msgstr "下一首(_N)"
 
 #: ../src/widgets/ario-tray-icon.c:146
 msgid "P_revious"
-msgstr ""
+msgstr "上一首(_R)"
 
 #: ../src/widgets/ario-tray-icon.h:44
 msgid "Not playing"
-msgstr ""
+msgstr "沒有播放樂曲"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
 msgid "Today %I:%M %p"
-msgstr ""
+msgstr "今天%p %I:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
 msgid "Yesterday %I:%M %p"
-msgstr ""
+msgstr "昨天%p %I:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
@@ -978,135 +979,135 @@ msgstr ""
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
-msgstr ""
+msgstr "永不"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
 msgid "OK"
-msgstr ""
+msgstr "確定"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
 msgid "Logging in"
-msgstr ""
+msgstr "登入中"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
 msgid "Request failed"
-msgstr ""
+msgstr "要求失敗"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
 msgid "Incorrect username"
-msgstr ""
+msgstr "帳號錯誤"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
 msgid "Incorrect password"
-msgstr ""
+msgstr "密碼錯誤"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
 msgid "Handshake failed"
-msgstr ""
+msgstr "連線失敗"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
 msgid "Client update required"
-msgstr ""
+msgstr "用戶端需要更新"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
 msgid "Track submission failed"
-msgstr ""
+msgstr "提交樂曲失敗"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
 msgid "Queue is too long"
-msgstr ""
+msgstr "佇列太長"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
 msgid "Track submission failed too many times"
-msgstr ""
+msgstr "提交樂曲失敗次數太多"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
 msgid "Audioscrobbler preferences"
-msgstr ""
+msgstr "Audioscrobbler 偏好設定"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
 msgid "Check Last.fm server status at"
-msgstr ""
+msgstr "檢查 Last.fm 伺服器狀態:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
 msgid "Disabled"
-msgstr ""
+msgstr "停用"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
 msgid "Find out about Last.fm at "
-msgstr ""
+msgstr "獲取有關 Last.fm 的資訊： "
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
 msgid "Last submission time:"
-msgstr ""
+msgstr "最後提交時間："
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
 msgid "Last.fm Profile"
-msgstr ""
+msgstr "Last.fm 設定組合"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
 msgid "Queued tracks:"
-msgstr ""
+msgstr "佇列中的樂曲："
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
 msgid "Status:"
-msgstr ""
+msgstr "狀態："
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
 msgid "Tracks submitted:"
-msgstr ""
+msgstr "已提交的樂曲："
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
 msgid "Username :"
-msgstr ""
+msgstr "使用者名稱："
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
-msgstr ""
+msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr ""
+msgstr "將歌曲資訊傳送至 Last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:164
 msgid "File System"
-msgstr ""
+msgstr "檔案系統"
 
 #: ../plugins/filesystem/ario-filesystem.c:414
 msgid "Music"
-msgstr ""
+msgstr "音樂"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr ""
+msgstr "檔案系統瀏覽器"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr ""
+msgstr "檔案系統瀏覽器"
 
 #: ../plugins/information/ario-information.c:110
 msgid "Information"
-msgstr ""
+msgstr "資訊"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr ""
+msgstr "顯示播放中歌曲的細目資訊"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr ""
+msgstr "歌曲資訊"
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
-msgstr ""
+msgstr "演出者的專輯："
 
 #: ../plugins/information/information.glade.h:5
 msgid "Lyrics:"
-msgstr ""
+msgstr "歌詞："
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
-msgstr ""
+msgstr "加入 libnotify 支援"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
@@ -1114,81 +1115,72 @@ msgstr ""
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr ""
+msgstr "加入多媒體按鍵支援"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr ""
+msgstr "多媒體按鍵"
 
 #: ../plugins/radios/ario-radio.c:123
 msgid "Add a _new radio"
-msgstr ""
+msgstr "加入新電台(_n)"
 
 #: ../plugins/radios/ario-radio.c:126
 msgid "_Delete this radios"
-msgstr ""
+msgstr "移除此電台(_D)"
 
 #: ../plugins/radios/ario-radio.c:164
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr ""
+msgstr "網路電台"
 
 #: ../plugins/radios/ario-radio.c:219
 msgid "Internet Radios"
-msgstr ""
+msgstr "網際網路電台"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
-msgstr ""
+msgstr "加入網路電台"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
-msgstr ""
+msgstr "URL："
 
 #: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1095
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr ""
+msgstr "無效的參數，請設定電台的名稱與 URL。"
 
 #: ../plugins/radios/ario-radio.c:957
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr ""
+msgstr "您確定要刪除所有選取的電台？"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1029
 msgid "Edit a WebRadio"
-msgstr ""
+msgstr "編輯網路電台"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr ""
+msgstr "聆聽網路電台"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:50
 msgid "Find artist on Wikipedia"
-msgstr ""
+msgstr "在維基百科尋找這位演出者"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
 msgid "Wikipedia Plugin - Configuration"
-msgstr ""
+msgstr "維基百科外掛模組 - 設定"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
 msgid "Wikipedia language :"
-msgstr ""
+msgstr "維基百科語言："
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr ""
+msgstr "一個在維基百科尋找目前演出者的插件"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr ""
-
-#~ msgid "Automatic configuration"
-#~ msgstr "Otomatik ayarlama"
-
-#~ msgid "Manual configuration"
-#~ msgstr "Elle ayarlama"
-
-#~ msgid "_Save Playlist"
-#~ msgstr "_Çalma Listesini kaydet"
+msgstr "維基百科"
