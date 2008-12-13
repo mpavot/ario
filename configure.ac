@@ -40,6 +40,9 @@ PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.12
 AC_SUBST(DEPS_CFLAGS)
 AC_SUBST(DEPS_LIBS)
 
+AC_SUBST(CFLAGS)
+AC_SUBST(LDFLAGS)
+
 AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
 dnl ================================================================
