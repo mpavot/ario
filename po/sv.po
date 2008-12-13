@@ -7,33 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-07-01 12:37+0000\n"
-"Last-Translator: Magnus Malmsten <Unknown>\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-12-09 15:40+0000\n"
+"Last-Translator: Dostojevskji <darkangel_nr1@hotmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
-#, fuzzy
 msgid "Ario music player"
-msgstr "Musikspelaren Ario"
+msgstr "Ario musikspelare"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
-msgstr ""
+msgstr "Klientprogram för mpd"
 
 #: ../data/glade/browser-prefs.glade.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "Bibliotek"
+msgstr "Biblioteksinställningar"
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
-msgstr ""
+msgstr "Biblioteksorganisation"
 
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
@@ -76,35 +74,30 @@ msgid "Port :"
 msgstr "Port:"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Server"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
 msgstr ""
 
 #: ../data/glade/cover-prefs.glade.h:1
-#, fuzzy
 msgid "Automatically download the album cover of the playing song"
-msgstr "Ladda automatiskt ner albumgrafik till den uppspelade låten"
+msgstr "Automatiskt ladda ner albumbilden för den sång som spelas"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:260
 #: ../src/shell/ario-shell-preferences.c:124
-#, fuzzy
 msgid "Covers"
-msgstr "Albumgrafik"
+msgstr "Omslagsbilder"
 
 #: ../data/glade/cover-prefs.glade.h:3
-#, fuzzy
 msgid "Covers Sources"
-msgstr "Källor för albumgrafik"
+msgstr "Omslagskällor"
 
 #: ../data/glade/cover-prefs.glade.h:4
-#, fuzzy
 msgid "Show the covers in the albums list"
-msgstr "Visa omslag i albumlistan"
+msgstr "Visa omslagsbilderna i albumlistan"
 
 #: ../data/glade/cover-prefs.glade.h:5
 msgid "Use Amazon."
@@ -116,9 +109,8 @@ msgid "Connection"
 msgstr "Anslutning"
 
 #: ../data/glade/connection-prefs.glade.h:2
-#, fuzzy
 msgid "_Autoconnect on startup"
-msgstr "Anslut automatisk vid uppstart"
+msgstr "_Anslut automatiskt vid uppstart"
 
 #: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
 msgid "_Connect"
@@ -129,15 +121,15 @@ msgid "_Disconnect"
 msgstr "_Koppla från"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Om du inte kan se din MPD-server med hjälp av automatisk upptäckning av "
-"server, kontrollera att zeroconf är aktiverat i MPD-inställningarna eller "
-"använd manuell inställning."
+"Du måste ange vilken server som programmet ska ansluta till. Om inte "
+"autodetekteringen visar din server, försäkra dig om att din server har "
+"aktiverat sitt stöd för zeroconf/avahi. Om inget annat så kan du ställa in "
+"server manellt."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -172,7 +164,7 @@ msgstr "Album"
 
 #: ../data/glade/interface-prefs.glade.h:2
 msgid "Allow only one instance of Ario"
-msgstr ""
+msgstr "Tillåt endast en instans av Ario åt gången"
 
 #: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
 #: ../src/shell/ario-shell-lyricsselect.c:176
@@ -193,9 +185,8 @@ msgid "Duration"
 msgstr "Längd"
 
 #: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:330
-#, fuzzy
 msgid "File"
-msgstr "Fil"
+msgstr "Arkiv"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
@@ -205,9 +196,8 @@ msgid "Genre"
 msgstr "Genre"
 
 #: ../data/glade/interface-prefs.glade.h:8
-#, fuzzy
 msgid "Go to current song when a new song is played"
-msgstr "Visa aktuell låt när en ny låt spelas upp"
+msgstr "Gå till aktib sång,, när den spelas upp"
 
 #: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
@@ -256,19 +246,16 @@ msgstr "Titel:"
 
 #: ../data/glade/proxy-prefs.glade.h:1
 #: ../src/shell/ario-shell-preferences.c:144
-#, fuzzy
 msgid "Proxy"
 msgstr "Proxyserver"
 
 #: ../data/glade/proxy-prefs.glade.h:2
-#, fuzzy
 msgid "Proxy Address :"
-msgstr "Proxyserver-adress"
+msgstr "Proxyadress:"
 
 #: ../data/glade/proxy-prefs.glade.h:3
-#, fuzzy
 msgid "Proxy Port :"
-msgstr "Proxyserver-port"
+msgstr "Proxyyport:"
 
 #: ../data/glade/proxy-prefs.glade.h:4
 msgid "Use a proxy"
@@ -291,14 +278,12 @@ msgid "Last updated:"
 msgstr "Senast uppdaterad:"
 
 #: ../data/glade/server-prefs.glade.h:5
-#, fuzzy
 msgid "Stop music on exit"
-msgstr "Stoppa musiken"
+msgstr "Sluta splea musiken vid avslut"
 
 #: ../data/glade/server-prefs.glade.h:6
-#, fuzzy
 msgid "Update on startup"
-msgstr "Anslut automatisk vid uppstart"
+msgstr "Uppdatera vid start"
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
@@ -320,22 +305,18 @@ msgid "n/a"
 msgstr "Inte tillgänglig"
 
 #: ../data/glade/similar-artists.glade.h:1
-#, fuzzy
 msgid "Add all to playlist"
 msgstr "Lägg till alla till spellista"
 
 #: ../data/glade/similar-artists.glade.h:2
-#, fuzzy
 msgid "Add to playlist"
-msgstr "Lägg till spellista"
+msgstr "Lägg till i spellista"
 
 #: ../data/glade/similar-artists.glade.h:3
-#, fuzzy
 msgid "Find on Last.fm"
-msgstr "Hitta på Last.fm"
+msgstr "Sök efter på Last.fm"
 
 #: ../data/glade/stats-prefs.glade.h:1
-#, fuzzy
 msgid "Database play time :"
 msgstr "Databasens speltid:"
 
@@ -390,9 +371,8 @@ msgstr "Genre:"
 
 #: ../data/glade/song-infos.glade.h:9
 #: ../plugins/information/information.glade.h:4
-#, fuzzy
 msgid "Length :"
-msgstr "Speltid:"
+msgstr "Längd:"
 
 #: ../data/glade/song-infos.glade.h:10
 msgid "Performer :"
@@ -407,17 +387,16 @@ msgid "Track :"
 msgstr "Spår:"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
-#, fuzzy
 msgid "Notification"
-msgstr "Bekräftelse"
+msgstr "Avisering"
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
-msgstr ""
+msgstr "Avisering vid byte av låt"
 
 #: ../data/glade/trayicon-prefs.glade.h:3
 msgid "Notification time: "
-msgstr ""
+msgstr "Aviseringstid: "
 
 #: ../data/glade/trayicon-prefs.glade.h:4
 msgid "On middle button click on tray icon :"
@@ -430,7 +409,7 @@ msgstr ""
 
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
-msgstr ""
+msgstr "Starta minimerat fönster"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
@@ -449,9 +428,8 @@ msgid "days"
 msgstr "dagar"
 
 #: ../src/covers/ario-cover.c:158
-#, fuzzy
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "Omslaget finns redan. Vill du ersätta det?"
+msgstr "Omslagsbilden finns redan. Vill du ersätta den?"
 
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
@@ -498,7 +476,6 @@ msgstr "Alfabetiskt"
 
 #. SORT_ALPHABETICALLY
 #: ../src/preferences/ario-browser-preferences.c:46
-#, fuzzy
 msgid "By year"
 msgstr "Efter år"
 
@@ -540,29 +517,24 @@ msgstr "Spela nästa låt"
 msgid "Do nothing"
 msgstr "Gör ingenting"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Ansluter till MPD-server..."
+msgstr "Ansluter till server..."
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
-"Det gick ej att ansluta till MPD-servern. Kontrollera inställningarna för "
-"anslutningen."
+"Det gick inte att ansluta till servern. Kontrollera anslutningsalternativen."
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
-#, fuzzy
 msgid "Composer"
-msgstr "Kompositör:"
+msgstr "Tonsättare"
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/servers/ario-server.c:51
-#, fuzzy
 msgid "Performer"
-msgstr "Uppträdande :"
+msgstr "Artist"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
@@ -588,9 +560,8 @@ msgstr "Okänd"
 #: ../plugins/filesystem/ario-filesystem.c:104
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:114
-#, fuzzy
 msgid "_Add to playlist"
-msgstr "_Lägg till spellista"
+msgstr "_Lägg till i spellistan"
 
 #: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
 #: ../src/sources/ario-storedplaylists.c:104
@@ -598,7 +569,6 @@ msgstr "_Lägg till spellista"
 #: ../plugins/filesystem/ario-filesystem.c:107
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
-#, fuzzy
 msgid "Add and _play"
 msgstr "Lägg till och _spela upp"
 
@@ -608,19 +578,16 @@ msgstr "Lägg till och _spela upp"
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
-#, fuzzy
 msgid "_Replace in playlist"
-msgstr "Spara spellista"
+msgstr "_Ersätt i spellistan"
 
 #: ../src/sources/ario-browser.c:88
-#, fuzzy
 msgid "Get the covers"
-msgstr "Hämta albumgrafiken"
+msgstr "Hämta omslagsbilderna"
 
 #: ../src/sources/ario-browser.c:91
-#, fuzzy
 msgid "_Delete the covers"
-msgstr "_Ta bort albumgrafiken"
+msgstr "_Radera omslagsbilderna"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
@@ -635,18 +602,16 @@ msgid "Library"
 msgstr "Bibliotek"
 
 #: ../src/sources/ario-search.c:183
-#, fuzzy
 msgid "Add a search criteria"
-msgstr "Lägg till sökkriterium"
+msgstr "Lägg till ett sökkriterium"
 
 #: ../src/sources/ario-search.c:192
 msgid "Search songs in the library"
 msgstr "Sök låtar i biblioteket"
 
 #: ../src/sources/ario-search.c:369
-#, fuzzy
 msgid "Remove a search criteria"
-msgstr "Ta bort sökkriterium"
+msgstr "Ta bort ett sökkriterium"
 
 #: ../src/sources/ario-storedplaylists.c:110
 msgid "_Delete"
@@ -666,10 +631,8 @@ msgid "Cover"
 msgstr "Omslag"
 
 #: ../src/sources/ario-tree.c:1225
-#, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr ""
-"Är du säker på att du vill ta bort all albumgrafik till de valda artisterna?"
+msgstr "Är du säker på att du vill ta bort alla markerade omslag?"
 
 #: ../src/shell/ario-shell.c:145
 msgid "_File"
@@ -696,7 +659,6 @@ msgid "_Quit"
 msgstr "_Avsluta"
 
 #: ../src/shell/ario-shell.c:160
-#, fuzzy
 msgid "Plu_gins"
 msgstr "Insticks_moduler"
 
@@ -706,12 +668,11 @@ msgstr "Inställ_ningar"
 
 #: ../src/shell/ario-shell.c:166
 msgid "_Change current album cover"
-msgstr ""
+msgstr "Ändra _omslagsbild"
 
 #: ../src/shell/ario-shell.c:169
-#, fuzzy
 msgid "Download album _covers"
-msgstr "Ladda ner album_grafik"
+msgstr "Ladda _ned omslagsbilld"
 
 #: ../src/shell/ario-shell.c:172
 msgid "Find similar artists"
@@ -726,9 +687,8 @@ msgid "Show _lyrics"
 msgstr "Visa _låttext"
 
 #: ../src/shell/ario-shell.c:184
-#, fuzzy
 msgid "_Translate this application..."
-msgstr "_Översätt detta program..."
+msgstr "Hjälp till och _översätt detta program"
 
 #: ../src/shell/ario-shell.c:191
 msgid "S_tatusbar"
@@ -738,11 +698,11 @@ msgstr "S_tatusrad"
 msgid "Upper part"
 msgstr "Övre del"
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "GTK-klient för MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -750,20 +710,27 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Magnus Malmsten https://launchpad.net/~magnus-malmsten\n"
+"  Per Söderkvist https://launchpad.net/~sodper\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Dostojevskji https://launchpad.net/~darkangel-nr1\n"
+"  Magnus Malmsten https://launchpad.net/~magnus-malmsten\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Mattias Ohlsson https://launchpad.net/~mattias-oh\n"
+"  Monia Elvin https://launchpad.net/~moniaelvin\n"
 "  Per Söderkvist https://launchpad.net/~sodper"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Konfigurera insticksmoduler"
 
 #: ../src/shell/ario-shell-coverdownloader.c:181
 msgid "Music Player Cover Download"
-msgstr ""
+msgstr "Musikspelarens omslagsbildsnedladdare"
 
 #: ../src/shell/ario-shell-coverdownloader.c:323
-#, fuzzy
 msgid "Download Finished!"
-msgstr "Nedladdningen är färdig!"
+msgstr "Nedladdning klar!"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:326
@@ -804,9 +771,8 @@ msgid "Source"
 msgstr "Källa"
 
 #: ../src/shell/ario-shell-preferences.c:81
-#, fuzzy
 msgid "Ario Preferences"
-msgstr "Inställningar för Ario"
+msgstr "Arios inställningar"
 
 #: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
@@ -841,15 +807,11 @@ msgid "Server autodetection"
 msgstr "Automatisk upptäckning av server"
 
 #: ../src/widgets/ario-connection-widget.c:542
-#, fuzzy
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Om du inte kan se din MPD-server med hjälp av automatisk upptäckning av "
-"server, kontrollera att zeroconf är aktiverat i MPD-inställningarna eller "
-"använd manuell inställning."
 
 #: ../src/widgets/ario-connection-widget.c:560
 msgid "Host"
@@ -868,18 +830,17 @@ msgid "New Profile"
 msgstr "Ny profil"
 
 #: ../src/widgets/ario-firstlaunch.c:78
-#, fuzzy
 msgid "The following configuration will be used:"
-msgstr "Följande inställningar kommer användas"
+msgstr "Följande inställningar kommer att användas:"
 
 #: ../src/widgets/ario-firstlaunch.c:102
-#, fuzzy
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
-"Detta är första gången du startar Ario.\n"
-"Assistenten kommer hjälpa att dig med inställningarna."
+"Det verkar vara första gången som du kör Ario.\n"
+"Hjälpassistenten kommer att guida dig igenom\n"
+"några inställningar som behöver göras."
 
 #: ../src/widgets/ario-firstlaunch.c:107
 msgid "Welcome to Ario"
@@ -894,7 +855,7 @@ msgid "Confirmation"
 msgstr "Bekräftelse"
 
 #: ../src/widgets/ario-header.c:64 ../src/widgets/ario-tray-icon.h:45
-#, fuzzy, c-format
+#, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>från</i> %s <i>av</i> %s"
 
@@ -907,9 +868,8 @@ msgid "Play/Pause the music"
 msgstr "Spela upp/Gör paus i musiken"
 
 #: ../src/widgets/ario-header.c:233
-#, fuzzy
 msgid "Stop the music"
-msgstr "Stoppa musiken"
+msgstr "Sluta spela"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
@@ -946,9 +906,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Stopp"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -968,14 +927,12 @@ msgid "Save playlist"
 msgstr "Spara spellista"
 
 #: ../src/widgets/ario-playlist.c:1333
-#, fuzzy
 msgid "Playlist name :"
-msgstr "Spellistans namn:"
+msgstr "Spellistenamn:"
 
 #: ../src/widgets/ario-playlist.c:1358
-#, fuzzy
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr "Spellistan finns redan. Vill du ersätta den?"
+msgstr "Spellistan finns redan, vill du skriva över den?"
 
 #: ../src/widgets/ario-tray-icon.c:134
 msgid "_Play"
@@ -1004,28 +961,28 @@ msgstr "Spelar inte"
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
 msgid "Today %I:%M %p"
-msgstr ""
+msgstr "Idag %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
 msgid "Yesterday %I:%M %p"
-msgstr ""
+msgstr "Igår %I:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
 msgid "%a %I:%M %p"
-msgstr ""
+msgstr "%a %I:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
 msgid "%b %d %I:%M %p"
-msgstr ""
+msgstr "%b %d %H.%M"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
@@ -1072,9 +1029,8 @@ msgid "Track submission failed"
 msgstr "Inrapportering av spår misslyckades"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
-#, fuzzy
 msgid "Queue is too long"
-msgstr "Listan är för lång"
+msgstr "Kön är för lång"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
 msgid "Track submission failed too many times"
@@ -1142,35 +1098,31 @@ msgstr "En bläddrare för filsystem"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr ""
+msgstr "Filsystensutforskaren"
 
 #: ../plugins/information/ario-information.c:110
-#, fuzzy
 msgid "Information"
-msgstr "Bekräftelse"
+msgstr "Information"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr ""
+msgstr "Visar blandad information om den nuvarande låten."
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Song Information"
-msgstr "Bekräftelse"
+msgstr "Låtinformation"
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
-msgstr ""
+msgstr "Album av den här artisten:"
 
 #: ../plugins/information/information.glade.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "Låttext"
+msgstr "Låttext:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Add libnotify support"
-msgstr "Lägg till stöd för multimedia tangenter"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
@@ -1256,10 +1208,3 @@ msgstr "Wikipedia"
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Spara spellista"
-
-#, fuzzy
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr ""
-#~ "Är du säker på att du vill ta bort all albumgrafik till de valda albumen?"

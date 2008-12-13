@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-08-25 09:45+0000\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-11-01 20:29+0000\n"
 "Last-Translator: Harabulă Adrian <opensoft@live.no>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -26,18 +26,16 @@ msgid "Client application to mpd"
 msgstr "Aplicația client la mpd"
 
 #: ../data/glade/browser-prefs.glade.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "Colecţie"
+msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
 msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:3
-#, fuzzy
 msgid "Sort albums: "
-msgstr "Stare: "
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:1
 msgid "Auto detect"
@@ -76,9 +74,8 @@ msgid "Port :"
 msgstr "Port:"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Server"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -124,15 +121,11 @@ msgid "_Disconnect"
 msgstr "_Deconectează"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Trebuie să specificați un server MPD la care să vă conectați. Dacă nu vedeți "
-"serverul MPD datorită configurației automate, trebuie să vă asigurați că "
-"zeroconf este activat în configurația MPD sau folosiți configurația manuală."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -180,26 +173,23 @@ msgstr "Artist"
 #. MPD_TAG_ITEM_GENRE
 #: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
 #: ../src/widgets/ario-playlist.c:330
-#, fuzzy
 msgid "Date"
-msgstr "Data :"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:330
 msgid "Duration"
 msgstr "Durată"
 
 #: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:330
-#, fuzzy
 msgid "File"
-msgstr "_Fişier"
+msgstr ""
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
 #: ../src/widgets/ario-playlist.c:330
-#, fuzzy
 msgid "Genre"
-msgstr "Gen :"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
@@ -220,9 +210,8 @@ msgid "Playlist"
 msgstr "Listă redare"
 
 #: ../data/glade/interface-prefs.glade.h:12
-#, fuzzy
 msgid "Show rows:"
-msgstr "Arată _versurile"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
@@ -285,14 +274,12 @@ msgid "Last updated:"
 msgstr "Ultima actualizare:"
 
 #: ../data/glade/server-prefs.glade.h:5
-#, fuzzy
 msgid "Stop music on exit"
-msgstr "Opreşte muzica"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:6
-#, fuzzy
 msgid "Update on startup"
-msgstr "_Autoconectare la pornire"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
@@ -314,14 +301,12 @@ msgid "n/a"
 msgstr "n/a"
 
 #: ../data/glade/similar-artists.glade.h:1
-#, fuzzy
 msgid "Add all to playlist"
-msgstr "_Adaugă la lista de redare"
+msgstr ""
 
 #: ../data/glade/similar-artists.glade.h:2
-#, fuzzy
 msgid "Add to playlist"
-msgstr "_Adaugă la lista de redare"
+msgstr ""
 
 #: ../data/glade/similar-artists.glade.h:3
 msgid "Find on Last.fm"
@@ -398,9 +383,8 @@ msgid "Track :"
 msgstr "Piesă :"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
-#, fuzzy
 msgid "Notification"
-msgstr "Confirmare"
+msgstr ""
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
@@ -529,27 +513,23 @@ msgstr "Redă următoarea melodie"
 msgid "Do nothing"
 msgstr "Nu fă nimic"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Se conectează la srverul MPD..."
+msgstr ""
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "Conectare la mpd imposibilă. Verificaţi opţiunile de conectare."
+msgstr ""
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
-#, fuzzy
 msgid "Composer"
-msgstr "Compozitor :"
+msgstr ""
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/servers/ario-server.c:51
-#, fuzzy
 msgid "Performer"
-msgstr "Interpret :"
+msgstr ""
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
@@ -584,9 +564,8 @@ msgstr "_Adaugă la lista de redare"
 #: ../plugins/filesystem/ario-filesystem.c:107
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
-#, fuzzy
 msgid "Add and _play"
-msgstr "_Adaugă la lista de redare"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:107
@@ -594,9 +573,8 @@ msgstr "_Adaugă la lista de redare"
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
-#, fuzzy
 msgid "_Replace in playlist"
-msgstr "Salvează lista de piese"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
@@ -648,9 +626,8 @@ msgid "Cover"
 msgstr "Coperta"
 
 #: ../src/sources/ario-tree.c:1225
-#, fuzzy
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr "Sigur vreţi să îdepărtaţi toate copertele artiştilor selectaţi?"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:145
 msgid "_File"
@@ -697,9 +674,8 @@ msgid "Find similar artists"
 msgstr "Găseşte artişti similari"
 
 #: ../src/shell/ario-shell.c:175
-#, fuzzy
 msgid "Add similar songs to playlist"
-msgstr "_Adaugă la lista de redare"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:178
 msgid "Show _lyrics"
@@ -717,11 +693,11 @@ msgstr "Bară de s_tare"
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "Client GTK pentru MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -735,9 +711,14 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Bisericaru Sebastian https://launchpad.net/~tweety\n"
 "  Harabulă Adrian https://launchpad.net/~opensoft\n"
+"  Ionuț Jula https://launchpad.net/~ionutjula\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Bisericaru Sebastian https://launchpad.net/~tweety\n"
+"  Harabulă Adrian https://launchpad.net/~opensoft\n"
 "  Ionuț Jula https://launchpad.net/~ionutjula"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Configurează modulele"
 
@@ -925,9 +906,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Stop"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -1121,32 +1101,28 @@ msgid "File System Browser"
 msgstr "Navigator de Sistem de Fişiere"
 
 #: ../plugins/information/ario-information.c:110
-#, fuzzy
 msgid "Information"
-msgstr "Confirmare"
+msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
 msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Song Information"
-msgstr "Confirmare"
+msgstr ""
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
 msgstr ""
 
 #: ../plugins/information/information.glade.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "Versuri"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Add libnotify support"
-msgstr "Adaugă asistenţa tastelor multimedia"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
@@ -1231,6 +1207,22 @@ msgstr "Wikipedia"
 #~ msgid "Manual configuration"
 #~ msgstr "Configurare manuală"
 
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Trebuie să specificați un server MPD la care să vă conectați. Dacă nu "
+#~ "vedeți serverul MPD datorită configurației automate, trebuie să vă "
+#~ "asigurați că zeroconf este activat în configurația MPD sau folosiți "
+#~ "configurația manuală."
+
+#~ msgid ""
+#~ "Are you sure that you want to remove all the covers of the selected "
+#~ "albums?"
+#~ msgstr "Sigur vreţi să îdepărtaţi toate copertele albumeor selectate?"
+
 #~ msgid "_Save Playlist"
 #~ msgstr "_Salvează lista de redare"
 
@@ -1245,8 +1237,3 @@ msgstr "Wikipedia"
 
 #~ msgid "Tabs"
 #~ msgstr "Tab-uri"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "Sigur vreţi să îdepărtaţi toate copertele albumeor selectate?"

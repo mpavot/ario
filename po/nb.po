@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-10-09 19:56+0000\n"
-"Last-Translator: Steve Pedersen <Unknown>\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-11-29 11:53+0000\n"
+"Last-Translator: Lars Kyllingstad <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-01 14:36+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Ario musikk spiller"
+msgstr "Ario musikkspiller"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
@@ -55,9 +55,8 @@ msgid "Music directory :"
 msgstr "Musikk mappe :"
 
 #: ../data/glade/connection-widget.glade.h:5
-#, fuzzy
 msgid "Music server is on the same computer as Ario"
-msgstr "MPD er på samme datamaskinen som Ario"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:6
 #: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
@@ -75,9 +74,8 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Tjener"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -123,16 +121,11 @@ msgid "_Disconnect"
 msgstr "_Koble fra"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Du trenger å spesifisere en MPD tjener for å koble til. Hvis du ikke ser din "
-"MPD tjener takket være automatisk konfigurasjon, bør du enten sjekke at "
-"zeroconf er aktivert i din MPD konfigurasjon, eller bruke den manuelle "
-"konfigurasjonen."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -520,15 +513,13 @@ msgstr "Spill neste sang"
 msgid "Do nothing"
 msgstr "Ikke gjør noe"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Kobler til MPD tjeneren..."
+msgstr ""
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "Kan ikke koble til MPD tjeneren. Sjekk tilkoblingsinnstillingene."
+msgstr "Kan ikke koble til tjeneren. Sjekk innstillinger for tilkobling."
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
@@ -702,11 +693,11 @@ msgstr "S_tatuslinje"
 msgid "Upper part"
 msgstr "Øvre del"
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "GTK klient for MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -716,9 +707,16 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Akselsen Rune https://launchpad.net/~runeakselsen\n"
 "  Steve Pedersen https://launchpad.net/~stevep86\n"
+"  Thor Marius K. Høgås https://launchpad.net/~nitrolinken\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Lars Kyllingstad https://launchpad.net/~public-kyllingen\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Rune C. Akselsen https://launchpad.net/~runeakselsen\n"
+"  Steve Pedersen https://launchpad.net/~stevep86\n"
 "  Thor Marius K. Høgås https://launchpad.net/~nitrolinken"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Konfigurer Programtillegg"
 
@@ -906,9 +904,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Stopp"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -1206,6 +1203,17 @@ msgstr "Wikipedia"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Manuell konfigurasjon"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Du trenger å spesifisere en MPD tjener for å koble til. Hvis du ikke ser "
+#~ "din MPD tjener takket være automatisk konfigurasjon, bør du enten sjekke "
+#~ "at zeroconf er aktivert i din MPD konfigurasjon, eller bruke den manuelle "
+#~ "konfigurasjonen."
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Lagre Spilleliste"

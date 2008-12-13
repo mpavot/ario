@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-10-10 19:51+0000\n"
-"Last-Translator: Jesús Gómez Fernández <Unknown>\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-12-08 11:10+0000\n"
+"Last-Translator: Javier García Díaz <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-01 14:36+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -27,11 +27,11 @@ msgstr "Aplicación cliente de mpd"
 
 #: ../data/glade/browser-prefs.glade.h:1
 msgid "Library Options"
-msgstr "Opciones De Biblioteca"
+msgstr "Opciones de biblioteca"
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
-msgstr "Organización de Librería"
+msgstr "Organización de biblioteca"
 
 #: ../data/glade/browser-prefs.glade.h:3
 msgid "Sort albums: "
@@ -52,12 +52,11 @@ msgstr "Host :"
 
 #: ../data/glade/connection-widget.glade.h:4
 msgid "Music directory :"
-msgstr "Directorio de musica :"
+msgstr "Directorio de música :"
 
 #: ../data/glade/connection-widget.glade.h:5
-#, fuzzy
 msgid "Music server is on the same computer as Ario"
-msgstr "MPD está en el mismo equipo que Ario"
+msgstr "El servidor de música está en el mismo equipo que Ario"
 
 #: ../data/glade/connection-widget.glade.h:6
 #: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
@@ -67,7 +66,7 @@ msgstr "Nombre :"
 #: ../data/glade/connection-widget.glade.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
 msgid "Password :"
-msgstr "Contraseña :"
+msgstr "Contraseña:"
 
 #: ../data/glade/connection-widget.glade.h:8
 #: ../src/widgets/ario-firstlaunch.c:81
@@ -75,17 +74,16 @@ msgid "Port :"
 msgstr "Puerto :"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Servidor"
+msgstr "Tipo de servidor : "
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr ""
+msgstr "XMMS 2 (Experimental)"
 
 #: ../data/glade/cover-prefs.glade.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr "Descargar automáticamente la carátula de la canción que suena"
+msgstr "Descargar automáticamente la carátula de la canción en reproducción"
 
 #: ../data/glade/cover-prefs.glade.h:2
 #: ../src/shell/ario-shell-coverselect.c:260
@@ -123,16 +121,14 @@ msgid "_Disconnect"
 msgstr "_Desconectar"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Necesita especificar un servidor MPD para conectarse. Si no ve su servidor "
-"MPD gracias a la configuración automática, debe comprobar que la "
-"configuración inicial esta activa en su configuración MPD o utilizar la "
-"configuración manual."
+"Necesita especificar un servidor al que conectarte. Si no ve el servidor con "
+"la autodetección, debería comprobar que zeroconf/avahi esté activado en su "
+"servidor o usar la configuración manual."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -144,7 +140,7 @@ msgstr "Álbum :"
 #: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
 #: ../plugins/information/information.glade.h:3
 msgid "Artist :"
-msgstr "Artista :"
+msgstr "Intérprete:"
 
 #: ../data/glade/cover-progress.glade.h:3
 msgid "Downloading cover"
@@ -200,11 +196,11 @@ msgstr "Género"
 
 #: ../data/glade/interface-prefs.glade.h:8
 msgid "Go to current song when a new song is played"
-msgstr "Ir a la canción cuando una suene una nueva canción"
+msgstr "Ir a la canción actual cuando una suene una nueva canción"
 
 #: ../data/glade/interface-prefs.glade.h:9
 msgid "Hide window when close button is pressed"
-msgstr "Ocultar la ventana cuando el botón de cerrar es pulsado"
+msgstr "Ocultar la ventana cuando se pulsa el botón de cerrar"
 
 #: ../data/glade/interface-prefs.glade.h:10
 #: ../src/shell/ario-shell-preferences.c:134
@@ -218,7 +214,7 @@ msgstr "Lista de reproducción"
 
 #: ../data/glade/interface-prefs.glade.h:12
 msgid "Show rows:"
-msgstr "Mostrar letras"
+msgstr "Mostrar filas:"
 
 #: ../data/glade/interface-prefs.glade.h:13
 msgid "Show tabs"
@@ -262,7 +258,7 @@ msgstr "Puerto del proxy :"
 
 #: ../data/glade/proxy-prefs.glade.h:4
 msgid "Use a proxy"
-msgstr "Tiempo de espera para conectase a mpd"
+msgstr "Usar un proxy"
 
 #: ../data/glade/server-prefs.glade.h:1
 msgid "Audio outputs"
@@ -325,7 +321,7 @@ msgstr "Base de datos del tiempo de reproducción :"
 
 #: ../data/glade/stats-prefs.glade.h:2
 msgid "Number of albums :"
-msgstr "Numero de albums:"
+msgstr "Numero de álbumes:"
 
 #: ../data/glade/stats-prefs.glade.h:3
 msgid "Number of artists :"
@@ -370,7 +366,7 @@ msgstr "Nomre de archivo :"
 
 #: ../data/glade/song-infos.glade.h:8
 msgid "Genre :"
-msgstr "Genero :"
+msgstr "Género"
 
 #: ../data/glade/song-infos.glade.h:9
 #: ../plugins/information/information.glade.h:4
@@ -399,11 +395,11 @@ msgstr "Notificación al cambio de canción"
 
 #: ../data/glade/trayicon-prefs.glade.h:3
 msgid "Notification time: "
-msgstr "Tiempo de Notificación: "
+msgstr "Tiempo de notificación: "
 
 #: ../data/glade/trayicon-prefs.glade.h:4
 msgid "On middle button click on tray icon :"
-msgstr "el boton central hace click en el icono de la bandeja"
+msgstr "Pulsar en el icono de la bandeja con el botón central:"
 
 #: ../data/glade/trayicon-prefs.glade.h:5
 #: ../src/shell/ario-shell-preferences.c:139
@@ -436,18 +432,18 @@ msgstr "La carátula ya existe. ¿Desea reemplazarla?"
 
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
-msgstr "Directorio de Música"
+msgstr "Directorio de música"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "Plugin"
+msgstr "Complemento"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:159
 #: ../src/preferences/ario-lyrics-preferences.c:110
 #: ../src/preferences/ario-server-preferences.c:165
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr "Activado"
 
 #: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
 msgid "_About"
@@ -520,15 +516,13 @@ msgstr "Reproducir la canción siguiente"
 msgid "Do nothing"
 msgstr "No hacer nada"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Conectando al servidor MDP..."
+msgstr "Conectándose al servidor..."
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "Imposible conectar a mpd. Comprueba las opciones de conexion."
+msgstr "Imposible conectar al servidor, Compruebe las opciones de conexión."
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
@@ -574,7 +568,7 @@ msgstr "_Añadir a la lista de reproducción"
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
-msgstr "Añadir y_tocar"
+msgstr "Añadir y re_producir"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
 #: ../src/sources/ario-storedplaylists.c:107
@@ -677,11 +671,11 @@ msgstr "_Cambiar la cubierta de album actual"
 
 #: ../src/shell/ario-shell.c:169
 msgid "Download album _covers"
-msgstr "Descargar caratulas_album"
+msgstr "Descargar carátulas del _album"
 
 #: ../src/shell/ario-shell.c:172
 msgid "Find similar artists"
-msgstr "Encontrar Artistas Similares"
+msgstr "Encontrar artistas similares"
 
 #: ../src/shell/ario-shell.c:175
 msgid "Add similar songs to playlist"
@@ -703,11 +697,11 @@ msgstr "Barra de _estado"
 msgid "Upper part"
 msgstr "Parte de arriba"
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -752,9 +746,27 @@ msgstr ""
 "  Paco Molinero https://launchpad.net/~franciscomol\n"
 "  Skiros https://launchpad.net/~magoskiros\n"
 "  kike4avila https://launchpad.net/~kike4avila\n"
-"  reykiem https://launchpad.net/~ravvsmvl"
+"  reykiem https://launchpad.net/~ravvsmvl\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Alejandro Rochette https://launchpad.net/~alexroc\n"
+"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
+"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
+"  DiegoJ https://launchpad.net/~diegojromerolopez\n"
+"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
+"  Emilio López https://launchpad.net/~turl\n"
+"  Fidelinho https://launchpad.net/~fidel-vales\n"
+"  Gabriel Ruiz https://launchpad.net/~anakron\n"
+"  Javier García Díaz https://launchpad.net/~shortname\n"
+"  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
+"  José Luis Flores Pineda https://launchpad.net/~peker\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
+"  Paco Molinero https://launchpad.net/~franciscomol\n"
+"  Skiros https://launchpad.net/~magoskiros\n"
+"  kike4avila https://launchpad.net/~kike4avila"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Configurar extensiones"
 
@@ -838,7 +850,7 @@ msgstr "Perfil"
 
 #: ../src/widgets/ario-connection-widget.c:531
 msgid "Server autodetection"
-msgstr "detección automática de servidor"
+msgstr "Detección automática de servidor"
 
 #: ../src/widgets/ario-connection-widget.c:542
 msgid ""
@@ -846,8 +858,8 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Si no ves tu servidor de MPD gracias a la detección automática, deberías "
-"comprobar que zeroconf está activado en tu configuración MPD o usar el "
+"Si no ve su servidor de MPD gracias a la detección automática, debería "
+"comprobar que zeroconf está activado en su configuración MPD o usar el "
 "manual de configuración."
 
 #: ../src/widgets/ario-connection-widget.c:560
@@ -942,9 +954,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Detener"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -1238,12 +1249,6 @@ msgstr "Un plugin para buscar el artista actual en la wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Automatic configuration"
-#~ msgstr "Configuración automática"
-
-#~ msgid "Manual configuration"
-#~ msgstr "Configuración manual"
-
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
 #~ "0 para 'reproducir/pausa', 1 para 'reproducir siguiente canción', 2 para "
@@ -1335,6 +1340,23 @@ msgstr "Wikipedia"
 #~ msgstr ""
 #~ "Puede buscar su carátula en amazon.com .fr .de .uk or .ca para tener "
 #~ "resultados más ajustados"
+
+#~ msgid "Automatic configuration"
+#~ msgstr "Configuración automática"
+
+#~ msgid "Manual configuration"
+#~ msgstr "Configuración manual"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Necesita especificar un servidor MPD para conectarse. Si no ve su "
+#~ "servidor MPD gracias a la configuración automática, debe comprobar que la "
+#~ "configuración inicial esta activa en su configuración MPD o utilizar la "
+#~ "configuración manual."
 
 #~ msgid "Amazon search"
 #~ msgstr "Búsqueda en Amazon"

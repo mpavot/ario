@@ -1,21 +1,23 @@
 # French translation of Ario.
 # Copyright (C) 2007 THE Ario'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Ario package.
+# marc <>, 2007.
+# , fuzzy
 # marc <>, 2008.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ario 1.2svn\n"
+"Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-10-01 12:23+0000\n"
-"Last-Translator: Nicochto <Unknown>\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-12-11 08:30+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-01 14:36+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -76,7 +78,7 @@ msgstr "Port :"
 
 #: ../data/glade/connection-widget.glade.h:9
 msgid "Server type : "
-msgstr "Type de serveur"
+msgstr "Type de serveur "
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -123,15 +125,15 @@ msgid "_Disconnect"
 msgstr "_Déconnecter"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Vous devez spécifier un serveur MPD auquel vous pouvez vous connecter. Si "
-"vous ne voyez pas votre serveur MPD, vous devriez vérifier que zeroconf est "
-"activé sur votre serveur MPD ou utiliser la configuration manuelle."
+"Vous devez spécifier un serveur auquel vous pouvez vous connecter. Si vous "
+"ne voyez pas votre serveur à l'aide de l'autodétection, vous devriez "
+"vérifier que zeroconf/avahi est activé sur votre serveur ou utiliser la "
+"configuration manuelle."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -519,11 +521,11 @@ msgstr "Jouer la chanson suivante"
 msgid "Do nothing"
 msgstr "Ne rien faire"
 
-#: ../src/servers/ario-mpd.c:384
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
 msgstr "En cours de connexion au serveur..."
 
-#: ../src/servers/ario-mpd.c:409
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 "Impossible de se connecter au server. Vérifiez vos options de connexion."
@@ -700,11 +702,11 @@ msgstr "Barre d'é_tat"
 msgid "Upper part"
 msgstr "Partie supérieure"
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "Client GTK pour MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -730,9 +732,17 @@ msgstr ""
 "  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
 "  Nicochto https://launchpad.net/~nicochto\n"
 "  Olotiar https://launchpad.net/~floriandenis\n"
+"  dommy9111 https://launchpad.net/~bossboss9111\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Isildur37 https://launchpad.net/~tiifal\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
+"  Nicochto https://launchpad.net/~nicochto\n"
+"  Olotiar https://launchpad.net/~floriandenis\n"
 "  dommy9111 https://launchpad.net/~bossboss9111"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Configuration des greffons"
 
@@ -916,12 +926,11 @@ msgstr "_Vider"
 
 #: ../src/widgets/ario-playlist.c:127
 msgid "_Shuffle"
-msgstr ""
+msgstr "_Mélanger"
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "_Stop"
+msgstr "_Découper"
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"

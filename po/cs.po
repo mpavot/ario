@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-10-04 16:05+0000\n"
-"Last-Translator: Václav Lešek <vaclav.lesek@gmail.com>\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-11-02 21:22+0000\n"
+"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-11-01 14:36+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -55,9 +55,8 @@ msgid "Music directory :"
 msgstr "Adresář hudby :"
 
 #: ../data/glade/connection-widget.glade.h:5
-#, fuzzy
 msgid "Music server is on the same computer as Ario"
-msgstr "MPD je na stejném počítači jako Ario"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:6
 #: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
@@ -75,9 +74,8 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Server"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -123,15 +121,14 @@ msgid "_Disconnect"
 msgstr "O_dpojit"
 
 #: ../data/glade/connection-assistant.glade.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Potřebujete se připojit k specifickému MPD serveru. Pokud nevidíte svůj MPD "
-"server, poděkujte automatické konfiguraci, můžete zkontrolovat jestli je "
-"zeroconf aktivovaný na vaší MPD konfiguraci nebo použijte ruční konfiguraci."
+"Musíte specifikovat server ke kterému se chcete připojit. Pokud nevidíte "
+"svůj server, poděkujte autodetekci, můžete zkontrolovat zda je základní "
+"konfigurace aktivována nebo použijte ruční konfiguraci."
 
 #: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
 #: ../data/glade/song-infos.glade.h:1
@@ -519,15 +516,13 @@ msgstr "Přehrát následující skladbu"
 msgid "Do nothing"
 msgstr "Nedělat nic"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "Připojuji k MPD serveru . . ."
+msgstr "Připojování k serveru..."
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "Nemohu se připojit k MPD. Ověřte vlastnosti připojení."
+msgstr "Není možné se připojit k serveru. Zkontrolujte nastavení připojení."
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
@@ -701,11 +696,11 @@ msgstr "S_tavový řádek"
 msgid "Upper part"
 msgstr "Horní část"
 
-#: ../src/shell/ario-shell.c:696
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
 msgstr "GTK klient pro MPD"
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -724,9 +719,15 @@ msgstr ""
 "  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
 "  Konki https://launchpad.net/~pavel-konkol\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Václav Lešek https://launchpad.net/~vaclav-lesek\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
+"  Konki https://launchpad.net/~pavel-konkol\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Václav Lešek https://launchpad.net/~vaclav-lesek"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "Konfigurovat zásuvné moduly"
 
@@ -914,9 +915,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "Za_stavit"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -1214,6 +1214,17 @@ msgstr "Wikipedia"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Ruční konfigurace"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Potřebujete se připojit k specifickému MPD serveru. Pokud nevidíte svůj "
+#~ "MPD server, poděkujte automatické konfiguraci, můžete zkontrolovat jestli "
+#~ "je zeroconf aktivovaný na vaší MPD konfiguraci nebo použijte ruční "
+#~ "konfiguraci."
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

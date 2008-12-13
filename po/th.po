@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 00:01+0100\n"
-"PO-Revision-Date: 2008-07-11 04:07+0000\n"
-"Last-Translator: Tharawut Paripaiboon <Unknown>\n"
+"POT-Creation-Date: 2008-12-13 13:12+0100\n"
+"PO-Revision-Date: 2008-11-01 20:36+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-09-04 18:08+0000\n"
+"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -26,9 +26,8 @@ msgid "Client application to mpd"
 msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "ไลบรารี"
+msgstr ""
 
 #: ../data/glade/browser-prefs.glade.h:2
 msgid "Library Organisation"
@@ -75,9 +74,8 @@ msgid "Port :"
 msgstr "พอร์ต :"
 
 #: ../data/glade/connection-widget.glade.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "เซิร์ฟเวอร์"
+msgstr ""
 
 #: ../data/glade/connection-widget.glade.h:10
 msgid "XMMS 2 (Experimental)"
@@ -198,9 +196,8 @@ msgid "Go to current song when a new song is played"
 msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:9
-#, fuzzy
 msgid "Hide window when close button is pressed"
-msgstr "ซ่อนหน้าต่างเมื่อปุ่มปิดถูกกด"
+msgstr ""
 
 #: ../data/glade/interface-prefs.glade.h:10
 #: ../src/shell/ario-shell-preferences.c:134
@@ -277,14 +274,12 @@ msgid "Last updated:"
 msgstr "อัพเดทล่าสุด:"
 
 #: ../data/glade/server-prefs.glade.h:5
-#, fuzzy
 msgid "Stop music on exit"
-msgstr "หยุดเพลง"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:6
-#, fuzzy
 msgid "Update on startup"
-msgstr "เชื่อมต่ออัตโนมัติเมื่อเริ่ม"
+msgstr ""
 
 #: ../data/glade/server-prefs.glade.h:7
 msgid "_Update"
@@ -388,9 +383,8 @@ msgid "Track :"
 msgstr "แทร็ก :"
 
 #: ../data/glade/trayicon-prefs.glade.h:1
-#, fuzzy
 msgid "Notification"
-msgstr "การยืนยัน"
+msgstr ""
 
 #: ../data/glade/trayicon-prefs.glade.h:2
 msgid "Notification on song change"
@@ -406,9 +400,8 @@ msgstr ""
 
 #: ../data/glade/trayicon-prefs.glade.h:5
 #: ../src/shell/ario-shell-preferences.c:139
-#, fuzzy
 msgid "Tray icon"
-msgstr "ไอคอนถาดระบบ"
+msgstr ""
 
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
@@ -520,21 +513,18 @@ msgstr "เล่นเพลงถัดไป"
 msgid "Do nothing"
 msgstr "ไม่ทำอะไร"
 
-#: ../src/servers/ario-mpd.c:384
-#, fuzzy
+#: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr "กำลังเชื่อมต่อไปยังเซิร์ฟเวอร์ MPD"
+msgstr ""
 
-#: ../src/servers/ario-mpd.c:409
-#, fuzzy
+#: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "ไม่สามารถเชื่อมต่อไปยัง MPD ตรวจสอบตัวเลือกการเชื่อมต่อ"
+msgstr ""
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
-#, fuzzy
 msgid "Composer"
-msgstr "ปกซีดี"
+msgstr ""
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/servers/ario-server.c:51
@@ -583,9 +573,8 @@ msgstr "เพิ่มและเล่น"
 #: ../plugins/filesystem/ario-filesystem.c:110
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
-#, fuzzy
 msgid "_Replace in playlist"
-msgstr "บันทึกรายการเล่น"
+msgstr ""
 
 #: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
@@ -704,18 +693,21 @@ msgstr "แถบสถานะ"
 msgid "Upper part"
 msgstr "ส่วนบน"
 
-#: ../src/shell/ario-shell.c:696
-#, fuzzy
+#: ../src/shell/ario-shell.c:699
 msgid "GTK client for MPD"
-msgstr "ไคลเอ็นท์ GTK สำหรับ MPD"
+msgstr ""
 
-#: ../src/shell/ario-shell.c:697
+#: ../src/shell/ario-shell.c:700
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Tharawut Paripaiboon https://launchpad.net/~xcession\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Tharawut Paripaiboon https://launchpad.net/~xcession"
 
-#: ../src/shell/ario-shell.c:1015
+#: ../src/shell/ario-shell.c:1018
 msgid "Configure Plugins"
 msgstr "ตั้งค่าปลั๊กอิน"
 
@@ -895,9 +887,8 @@ msgid "_Shuffle"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:130
-#, fuzzy
 msgid "Cr_op"
-msgstr "หยุด"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Remove"
@@ -1091,27 +1082,24 @@ msgid "File System Browser"
 msgstr ""
 
 #: ../plugins/information/ario-information.c:110
-#, fuzzy
 msgid "Information"
-msgstr "การยืนยัน"
+msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
 msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Song Information"
-msgstr "การยืนยัน"
+msgstr ""
 
 #: ../plugins/information/information.glade.h:2
 msgid "Albums from this artist:"
 msgstr ""
 
 #: ../plugins/information/information.glade.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "เนื้อเพลง"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
