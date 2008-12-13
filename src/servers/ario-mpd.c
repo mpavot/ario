@@ -428,6 +428,7 @@ ario_mpd_disconnect (void)
         if (!instance->priv->connection)
                 return;
 
+        mpd_stopIdle (instance->priv->connection);
         mpd_closeConnection (instance->priv->connection);
         instance->priv->connection = NULL;
 
