@@ -111,7 +111,14 @@ _ario_plugin_info_new (const gchar *file)
         ArioPluginInfo *info;
         GKeyFile *plugin_file = NULL;
         gchar *str;
+	gchar *locale = NULL;
 
+#ifdef WIN32
+	gchar *tmp;
+	tmp = g_win32_getlocale ();
+	locale = g_ascii_strdown (tmp, -1);
+	g_free (tmp);
+#endif
         g_return_val_if_fail (file != NULL, NULL);
 
         ARIO_LOG_DBG ("Loading plugin: %s", file);
@@ -188,7 +195,7 @@ _ario_plugin_info_new (const gchar *file)
         str = g_key_file_get_locale_string (plugin_file,
                                             "Ario Plugin",
                                             "Name",
-                                            NULL, NULL);
+                                            locale, NULL);
         if (str) {
                 info->name = str;
         } else {
@@ -200,7 +207,7 @@ _ario_plugin_info_new (const gchar *file)
         str = g_key_file_get_locale_string (plugin_file,
                                             "Ario Plugin",
                                             "Description",
-                                            NULL, NULL);
+                                            locale, NULL);
         if (str) {
                 info->desc = str;
         } else {
@@ -255,6 +262,9 @@ _ario_plugin_info_new (const gchar *file)
         /* If we know nothing about the availability of the plugin,
            set it as available */
         info->available = TRUE;
+#ifdef WIN32
+	g_free (locale);
+#endif
 
         return info;
 
@@ -264,6 +274,9 @@ error:
         g_free (info->name);
         g_free (info);
         g_key_file_free (plugin_file);
+#ifdef WIN32
+	g_free (locale);
+#endif
 
         return NULL;
 }
