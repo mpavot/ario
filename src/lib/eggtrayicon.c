@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301  USA.
  */
 
+#include "eggtrayicon.h"
+
 #include <config.h>
 #include <string.h>
 #include <libintl.h>
-
-#include "eggtrayicon.h"
 
 #include <gdkconfig.h>
 #include <gtk/gtkimage.h>

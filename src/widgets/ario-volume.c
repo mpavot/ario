@@ -20,11 +20,12 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  */
+
+#include "widgets/ario-volume.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "widgets/ario-volume.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 #include "lib/ario-conf.h"

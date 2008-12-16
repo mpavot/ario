@@ -17,6 +17,7 @@
  *
  */
 
+#include "servers/ario-xmms.h"
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -24,7 +25,6 @@
 #include <limits.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "servers/ario-xmms.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 #include "ario-profiles.h"

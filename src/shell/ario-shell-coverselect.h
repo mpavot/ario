@@ -21,6 +21,8 @@
 #ifndef __ARIO_SHELL_COVERSELECT_H
 #define __ARIO_SHELL_COVERSELECT_H
 
+#include <glib.h>
+#include <gtk/gtkdialog.h>
 #include "servers/ario-server.h"
 
 G_BEGIN_DECLS

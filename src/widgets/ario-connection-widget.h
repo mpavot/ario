@@ -17,10 +17,10 @@
  *
  */
 
-#include <gtk/gtkvbox.h>
-
 #ifndef __ARIO_CONNECTION_WIDGET_H
 #define __ARIO_CONNECTION_WIDGET_H
+
+#include <gtk/gtkvbox.h>
 
 G_BEGIN_DECLS
 
@@ -42,7 +42,7 @@ typedef struct
 
 typedef struct
 {
-        GtkDialogClass parent_class;
+        GtkVBoxClass parent_class;
 
         /* Signals */
         void (*profile_changed)            (ArioConnectionWidget *connection_widget);

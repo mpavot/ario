@@ -17,13 +17,13 @@
  *
  */
 
+#include "shell/ario-shell.h"
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <config.h>
 #include <string.h>
 #include "lib/ario-conf.h"
 #include <glib/gi18n.h>
-#include "shell/ario-shell.h"
 #include "sources/ario-source-manager.h"
 #include "servers/ario-server.h"
 #include "covers/ario-cover-handler.h"

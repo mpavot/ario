@@ -20,9 +20,9 @@
  * Boston, MA 02110-1301  USA.
  */
 
+#include "ario-python-plugin.h"
 #include <config.h>
 
-#include "ario-python-plugin.h"
 #include "ario-plugin.h"
 #include "ario-debug.h"
 

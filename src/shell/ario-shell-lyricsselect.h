@@ -21,8 +21,11 @@
 #ifndef __ARIO_SHELL_LYRICSSELECT_H
 #define __ARIO_SHELL_LYRICSSELECT_H
 
-G_BEGIN_DECLS
+#include <glib.h>
+#include <gtk/gtkdialog.h>
 #include "lyrics/ario-lyrics.h"
+
+G_BEGIN_DECLS
 
 #define TYPE_ARIO_SHELL_LYRICSSELECT         (ario_shell_lyricsselect_get_type ())
 #define ARIO_SHELL_LYRICSSELECT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_SHELL_LYRICSSELECT, ArioShellLyricsselect))

@@ -17,12 +17,12 @@
  *
  */
 
+#include "servers/ario-server-interface.h"
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <glib/gi18n.h>
-#include "servers/ario-server-interface.h"
 #include "ario-debug.h"
 
 #define NORMAL_TIMEOUT 500

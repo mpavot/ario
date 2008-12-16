@@ -17,6 +17,7 @@
  *
  */
 
+#include "shell/ario-shell-coverdownloader.h"
 #include <gtk/gtk.h>
 #include <string.h>
 
@@ -24,7 +25,6 @@
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-manager.h"
 #include "covers/ario-cover-handler.h"
-#include "shell/ario-shell-coverdownloader.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 #include "servers/ario-server.h"

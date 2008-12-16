@@ -17,10 +17,10 @@
  *
  */
 
+#include "ario-notifier-libnotify.h"
 #include <glib.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "ario-notifier-libnotify.h"
 #include "servers/ario-server.h"
 #include "ario-util.h"
 #include "widgets/ario-tray-icon.h"

@@ -17,12 +17,12 @@
  *
  */
 
+#include "ario-profiles.h"
 #include <string.h>
 #include <config.h>
 #include <stdlib.h>
 #include <libxml/parser.h>
 #include <glib/gi18n.h>
-#include "ario-profiles.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 

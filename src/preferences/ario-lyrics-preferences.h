@@ -17,10 +17,11 @@
  *
  */
 
-#include <gtk/gtkvbox.h>
-
 #ifndef __ARIO_LYRICS_PREFERENCES_H
 #define __ARIO_LYRICS_PREFERENCES_H
+
+#include <glib.h>
+#include <gtk/gtkvbox.h>
 
 G_BEGIN_DECLS
 
@@ -42,7 +43,7 @@ typedef struct
 
 typedef struct
 {
-        GtkDialogClass parent_class;
+        GtkVBoxClass parent_class;
 } ArioLyricsPreferencesClass;
 
 GType              ario_lyrics_preferences_get_type         (void) G_GNUC_CONST;

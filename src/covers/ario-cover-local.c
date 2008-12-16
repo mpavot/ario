@@ -17,10 +17,10 @@
  *
  */
 
+#include "covers/ario-cover-local.h"
 #include <glib.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "covers/ario-cover-local.h"
 #include "covers/ario-cover.h"
 #include "ario-util.h"
 #include "ario-profiles.h"

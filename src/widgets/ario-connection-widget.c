@@ -17,13 +17,13 @@
  *
  */
 
+#include "widgets/ario-connection-widget.h"
 #include <config.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "widgets/ario-connection-widget.h"
 #include "lib/rb-glade-helpers.h"
 #ifdef ENABLE_AVAHI
 #include "ario-avahi.h"

@@ -17,13 +17,13 @@
  *
  */
 
+#include "shell/ario-shell-songinfos.h"
 #include <config.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "shell/ario-shell-songinfos.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 #include "ario-util.h"

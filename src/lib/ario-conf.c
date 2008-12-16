@@ -17,12 +17,12 @@
  *
  */
 
+#include "lib/ario-conf.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <libxml/parser.h>
 
-#include "lib/ario-conf.h"
 #include "ario-debug.h"
 #include "ario-util.h"
 

@@ -17,12 +17,12 @@
  *
  */
 
+#include "lyrics/ario-lyrics-manager.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "lyrics/ario-lyrics-manager.h"
 #include "lyrics/ario-lyrics-leoslyrics.h"
 #include "lyrics/ario-lyrics-lyricwiki.h"
 #include "lyrics/ario-lyrics.h"

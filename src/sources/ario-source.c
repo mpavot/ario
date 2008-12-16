@@ -17,8 +17,8 @@
  *
  */
 
-#include <config.h>
 #include "sources/ario-source.h"
+#include <config.h>
 
 G_DEFINE_TYPE (ArioSource, ario_source, GTK_TYPE_HBOX)
 

@@ -17,12 +17,12 @@
  *
  */
 
+#include "sources/ario-storedplaylists.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "sources/ario-storedplaylists.h"
 #include "widgets/ario-songlist.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"

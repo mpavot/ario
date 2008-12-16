@@ -17,13 +17,13 @@
  *
  */
 
+#include "preferences/ario-stats-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "preferences/ario-stats-preferences.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"
 #include "ario-util.h"

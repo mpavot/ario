@@ -17,13 +17,13 @@
  *
  */
 
+#include "ario-lyrics.h"
 #include <glib.h>
 #include <gtk/gtkdialog.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "ario-lyrics.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"

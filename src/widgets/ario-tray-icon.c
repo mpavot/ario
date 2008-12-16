@@ -21,6 +21,7 @@
  *
  */
 
+#include "widgets/ario-tray-icon.h"
 #include <gtk/gtk.h>
 #include <config.h>
 #include <unistd.h>
@@ -29,7 +30,6 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "lib/libsexy/sexy-tooltip.h"
-#include "widgets/ario-tray-icon.h"
 #include "shell/ario-shell.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"

@@ -17,13 +17,13 @@
  *
  */
 
+#include "ario-sample-plugin.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <string.h> /* For strlen */
-
-#include "ario-sample-plugin.h"
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>

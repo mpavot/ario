@@ -17,13 +17,13 @@
  *
  */
 
+#include "widgets/ario-playlist.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "widgets/ario-playlist.h"
 #include "servers/ario-server.h"
 #include "ario-util.h"
 #include "ario-debug.h"

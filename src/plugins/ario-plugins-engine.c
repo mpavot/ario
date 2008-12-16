@@ -20,6 +20,7 @@
  * Boston, MA 02110-1301  USA.
  */
 
+#include "plugins/ario-plugins-engine.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -28,7 +29,6 @@
 
 #include <glib/gi18n.h>
 
-#include "plugins/ario-plugins-engine.h"
 #include "plugins/ario-plugin-info-priv.h"
 #include "plugins/ario-plugin.h"
 #include "ario-debug.h"

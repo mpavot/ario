@@ -17,12 +17,12 @@
  *
  */
 
+#include "ario-radio.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
 #include <libxml/parser.h>
-#include "ario-radio.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "servers/ario-server.h"

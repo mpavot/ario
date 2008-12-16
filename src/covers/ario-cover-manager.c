@@ -17,12 +17,12 @@
  *
  */
 
+#include "covers/ario-cover-manager.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "covers/ario-cover-manager.h"
 #include "covers/ario-cover-amazon.h"
 #include "covers/ario-cover-lastfm.h"
 #include "covers/ario-cover-local.h"

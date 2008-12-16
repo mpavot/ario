@@ -20,6 +20,9 @@
 #ifndef __ARIO_AVAHI_H
 #define __ARIO_AVAHI_H
 
+#include <glib.h>
+#include <glib-object.h>
+
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_AVAHI         (ario_avahi_get_type ())

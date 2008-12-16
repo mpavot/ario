@@ -24,13 +24,13 @@
  *
  */
 
+#include "ario-mmkeys-plugin.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <string.h> /* For strlen */
 #include <dbus/dbus-glib.h>
-#include "ario-mmkeys-plugin.h"
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>

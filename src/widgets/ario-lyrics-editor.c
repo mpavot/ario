@@ -17,13 +17,13 @@
  *
  */
 
+#include "widgets/ario-lyrics-editor.h"
 #include <config.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "widgets/ario-lyrics-editor.h"
 #include "shell/ario-shell-lyricsselect.h"
 #include "ario-debug.h"
 #include "lyrics/ario-lyrics.h"

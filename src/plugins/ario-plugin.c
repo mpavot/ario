@@ -20,11 +20,11 @@
  * Boston, MA 02110-1301  USA.
  */
 
+#include "plugins/ario-plugin.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include "plugins/ario-plugin.h"
 #include "ario-util.h"
 
 G_DEFINE_TYPE (ArioPlugin, ario_plugin, G_TYPE_OBJECT)

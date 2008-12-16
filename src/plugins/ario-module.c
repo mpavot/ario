@@ -20,9 +20,9 @@
  * Boston, MA 02110-1301  USA.
  */
 
+#include "plugins/ario-module.h"
 #include "config.h"
 
-#include "plugins/ario-module.h"
 #include "ario-debug.h"
 
 #include <gmodule.h>

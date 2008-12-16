@@ -17,11 +17,11 @@
  *
  */
 
+#include "sources/ario-tree.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include "lib/ario-conf.h"
 #include <glib/gi18n.h>
-#include "sources/ario-tree.h"
 #include "ario-util.h"
 #include "covers/ario-cover.h"
 #include "shell/ario-shell-coverselect.h"

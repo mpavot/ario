@@ -17,11 +17,11 @@
  *
  */
 
+#include "ario-information.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "ario-information.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "plugins/ario-plugin.h"

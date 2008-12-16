@@ -17,6 +17,7 @@
  *
  */
 
+#include "preferences/ario-trayicon-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
@@ -24,7 +25,6 @@
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "preferences/ario-trayicon-preferences.h"
 #include "preferences/ario-preferences.h"
 #include "notification/ario-notification-manager.h"
 #include "lib/rb-glade-helpers.h"
