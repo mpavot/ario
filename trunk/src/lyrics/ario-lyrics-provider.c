@@ -17,8 +17,8 @@
  *
  */
 
-#include <config.h>
 #include "lyrics/ario-lyrics-provider.h"
+#include <config.h>
 #include "ario-debug.h"
 
 G_DEFINE_TYPE (ArioLyricsProvider, ario_lyrics_provider, G_TYPE_OBJECT)

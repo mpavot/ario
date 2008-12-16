@@ -17,12 +17,12 @@
  *
  */
 
+#include "shell/ario-shell-coverselect.h"
 #include <gtk/gtk.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "shell/ario-shell-coverselect.h"
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-manager.h"
 #include "covers/ario-cover-handler.h"

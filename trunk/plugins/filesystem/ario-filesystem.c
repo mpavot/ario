@@ -17,13 +17,13 @@
  *
  */
 
+#include "ario-filesystem.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <libxml/parser.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "ario-filesystem.h"
 #include "widgets/ario-songlist.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"

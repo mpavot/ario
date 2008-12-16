@@ -20,6 +20,8 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
  */
 
+#include "ario-audioscrobbler.h"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -31,7 +33,6 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include "ario-audioscrobbler.h"
 #include "plugins/ario-plugin.h"
 #include "ario-debug.h"
 #include "ario-util.h"

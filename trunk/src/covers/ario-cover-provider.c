@@ -17,8 +17,8 @@
  *
  */
 
-#include <config.h>
 #include "covers/ario-cover-provider.h"
+#include <config.h>
 #include "ario-debug.h"
 
 G_DEFINE_TYPE (ArioCoverProvider, ario_cover_provider, G_TYPE_OBJECT)

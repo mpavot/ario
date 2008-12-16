@@ -17,11 +17,11 @@
  *
  */
 
+#include "shell/ario-shell-lyricsselect.h"
 #include <gtk/gtk.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include "shell/ario-shell-lyricsselect.h"
 #include "lyrics/ario-lyrics-manager.h"
 #include "lib/rb-glade-helpers.h"
 #include "ario-debug.h"

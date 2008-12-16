@@ -17,6 +17,7 @@
  *
  */
 
+#include "covers/ario-cover.h"
 #include <glib.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtkmessagedialog.h>
@@ -25,7 +26,6 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "covers/ario-cover.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"

@@ -17,6 +17,7 @@
  *
  */
 
+#include "servers/ario-server.h"
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -25,7 +26,6 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "servers/ario-mpd.h"
-#include "servers/ario-server.h"
 #ifdef ENABLE_XMMS2
 #include "servers/ario-xmms.h"
 #endif

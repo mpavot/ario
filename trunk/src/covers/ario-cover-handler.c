@@ -17,12 +17,12 @@
  *
  */
 
+#include "covers/ario-cover-handler.h"
 #include <config.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "covers/ario-cover-handler.h"
 #include "covers/ario-cover-manager.h"
 #include "ario-debug.h"
 #include "ario-util.h"

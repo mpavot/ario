@@ -18,10 +18,9 @@
  */
 
 
+#include "ario-libnotify-plugin.h"
 #include <config.h>
 #include <string.h> /* For strlen */
-
-#include "ario-libnotify-plugin.h"
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>

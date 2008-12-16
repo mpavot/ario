@@ -17,13 +17,13 @@
  *
  */
 
+#include "ario-wikipedia-plugin.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <string.h> /* For strlen */
 
-#include "ario-wikipedia-plugin.h"
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 

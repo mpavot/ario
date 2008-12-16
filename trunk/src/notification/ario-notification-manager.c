@@ -17,13 +17,13 @@
  *
  */
 
+#include "notification/ario-notification-manager.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "servers/ario-server.h"
-#include "notification/ario-notification-manager.h"
 #include "notification/ario-notifier-tooltip.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"

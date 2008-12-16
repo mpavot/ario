@@ -24,13 +24,14 @@
 #ifndef __ARIO_TRAY_ICON_H
 #define __ARIO_TRAY_ICON_H
 
+#include <config.h>
+#include "shell/ario-shell.h"
 #include <gtk/gtkuimanager.h>
 #ifdef ENABLE_EGGTRAYICON
 #include "lib/eggtrayicon.h"
 #else
 #include <gtk/gtkstatusicon.h>
 #endif
-#include "shell/ario-shell.h"
 
 G_BEGIN_DECLS
 

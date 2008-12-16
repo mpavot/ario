@@ -17,12 +17,12 @@
  *
  */
 
+#include "sources/ario-browser.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
 #include "lib/ario-conf.h"
 #include <glib/gi18n.h>
-#include "sources/ario-browser.h"
 #include "sources/ario-tree.h"
 #include "widgets/ario-playlist.h"
 #include "ario-util.h"

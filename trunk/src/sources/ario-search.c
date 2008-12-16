@@ -17,13 +17,13 @@
  *
  */
 
+#include "sources/ario-search.h"
 #include <gtk/gtk.h>
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
 #include "widgets/ario-songlist.h"
 #include "widgets/ario-playlist.h"
-#include "sources/ario-search.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"

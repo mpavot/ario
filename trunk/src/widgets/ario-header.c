@@ -17,12 +17,12 @@
  *
  */
 
+#include "widgets/ario-header.h"
 #include <gtk/gtk.h>
 #include <config.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include "widgets/ario-header.h"
 #include "ario-util.h"
 #include "widgets/ario-volume.h"
 #include "ario-debug.h"
