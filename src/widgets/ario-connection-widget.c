@@ -34,27 +34,27 @@
 
 static void ario_connection_widget_finalize (GObject *object);
 G_MODULE_EXPORT void ario_connection_widget_name_changed_cb (GtkWidget *widget,
-                                                                  ArioConnectionWidget *connection_widget);
+                                                             ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_host_changed_cb (GtkWidget *widget,
-                                                                  ArioConnectionWidget *connection_widget);
+                                                             ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_port_changed_cb (GtkWidget *widget,
-                                                                  ArioConnectionWidget *connection_widget);
+                                                             ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
-                                                                  ArioConnectionWidget *connection_widget);
+                                                             ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_password_changed_cb (GtkWidget *widget,
-                                                                      ArioConnectionWidget *connection_widget);
-G_MODULE_EXPORT void ario_connection_widget_local_changed_cb (GtkWidget *widget,
-                                                                   ArioConnectionWidget *connection_widget);
-G_MODULE_EXPORT void ario_connection_widget_musicdir_changed_cb (GtkWidget *widget,
-                                                                      ArioConnectionWidget *connection_widget);
-G_MODULE_EXPORT void ario_connection_widget_autodetect_cb (GtkWidget *widget,
-                                                                ArioConnectionWidget *connection_widget);
-G_MODULE_EXPORT void ario_connection_widget_open_cb (GtkWidget *widget,
-                                                          ArioConnectionWidget *connection_widget);
-G_MODULE_EXPORT void ario_connection_widget_new_profile_cb (GtkWidget *widget,
                                                                  ArioConnectionWidget *connection_widget);
+G_MODULE_EXPORT void ario_connection_widget_local_changed_cb (GtkWidget *widget,
+                                                              ArioConnectionWidget *connection_widget);
+G_MODULE_EXPORT void ario_connection_widget_musicdir_changed_cb (GtkWidget *widget,
+                                                                 ArioConnectionWidget *connection_widget);
+G_MODULE_EXPORT void ario_connection_widget_autodetect_cb (GtkWidget *widget,
+                                                           ArioConnectionWidget *connection_widget);
+G_MODULE_EXPORT void ario_connection_widget_open_cb (GtkWidget *widget,
+                                                     ArioConnectionWidget *connection_widget);
+G_MODULE_EXPORT void ario_connection_widget_new_profile_cb (GtkWidget *widget,
+                                                            ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_delete_profile_cb (GtkWidget *widget,
-                                                                    ArioConnectionWidget *connection_widget);
+                                                               ArioConnectionWidget *connection_widget);
 
 enum
 {
@@ -243,7 +243,7 @@ ario_connection_widget_profile_selection_update (ArioConnectionWidget *connectio
 
 static void
 ario_connection_widget_profile_selection_changed_cb (GtkTreeSelection * selection,
-                                                          ArioConnectionWidget *connection_widget)
+                                                     ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         if (ario_connection_widget_profile_selection_update (connection_widget, FALSE)) {
@@ -298,7 +298,7 @@ ario_connection_widget_new (void)
         GtkCellRenderer *renderer;
 
         connection_widget = g_object_new (TYPE_ARIO_CONNECTION_WIDGET,
-                                               NULL);
+                                          NULL);
 
         g_return_val_if_fail (connection_widget->priv != NULL, NULL);
 
@@ -395,7 +395,7 @@ ario_connection_widget_finalize (GObject *object)
 
 void
 ario_connection_widget_name_changed_cb (GtkWidget *widget,
-                                             ArioConnectionWidget *connection_widget)
+                                        ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         g_free (connection_widget->priv->current_profile->name);
@@ -405,7 +405,7 @@ ario_connection_widget_name_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_host_changed_cb (GtkWidget *widget,
-                                             ArioConnectionWidget *connection_widget)
+                                        ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         g_free (connection_widget->priv->current_profile->host);
@@ -414,14 +414,14 @@ ario_connection_widget_host_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_port_changed_cb (GtkWidget *widget,
-                                             ArioConnectionWidget *connection_widget)
+                                        ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         connection_widget->priv->current_profile->port = (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_widget->priv->port_spinbutton));
 }
 
 void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
-                                                  ArioConnectionWidget *connection_widget)
+                                             ArioConnectionWidget *connection_widget)
 
 {
         ARIO_LOG_FUNCTION_START
@@ -432,7 +432,7 @@ void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
 
 void
 ario_connection_widget_password_changed_cb (GtkWidget *widget,
-                                                 ArioConnectionWidget *connection_widget)
+                                            ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *password;
@@ -447,7 +447,7 @@ ario_connection_widget_password_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_musicdir_changed_cb (GtkWidget *widget,
-                                                 ArioConnectionWidget *connection_widget)
+                                            ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         const gchar *musicdir;
@@ -462,7 +462,7 @@ ario_connection_widget_musicdir_changed_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_local_changed_cb (GtkWidget *widget,
-                                              ArioConnectionWidget *connection_widget)
+                                         ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         gboolean local;
@@ -480,7 +480,7 @@ ario_connection_widget_local_changed_cb (GtkWidget *widget,
 #ifdef ENABLE_AVAHI
 static void
 ario_connection_widget_autohosts_changed_cb (ArioAvahi *avahi,
-                                                  ArioConnectionWidget *connection_widget)
+                                             ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         GtkTreeIter iter;
@@ -506,7 +506,7 @@ ario_connection_widget_autohosts_changed_cb (ArioAvahi *avahi,
 #endif
 void
 ario_connection_widget_autodetect_cb (GtkWidget *widget,
-                                           ArioConnectionWidget *connection_widget)
+                                      ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
 #ifdef ENABLE_AVAHI
@@ -573,9 +573,9 @@ ario_connection_widget_autodetect_cb (GtkWidget *widget,
         gtk_tree_view_column_set_fixed_width (column, 50);
         gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
         connection_widget->priv->autodetect_model = gtk_list_store_new (N_COLUMN,
-                                                                             G_TYPE_STRING,
-                                                                             G_TYPE_STRING,
-                                                                             G_TYPE_STRING);
+                                                                        G_TYPE_STRING,
+                                                                        G_TYPE_STRING,
+                                                                        G_TYPE_STRING);
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (connection_widget->priv->autodetect_model));
         connection_widget->priv->autodetect_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -640,7 +640,7 @@ ario_connection_widget_autodetect_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_open_cb (GtkWidget *widget,
-                                     ArioConnectionWidget *connection_widget)
+                                ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         GtkWidget *dialog;
@@ -667,7 +667,7 @@ ario_connection_widget_open_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_new_profile_cb (GtkWidget *widget,
-                                            ArioConnectionWidget *connection_widget)
+                                       ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         ArioProfile *profile;
@@ -693,7 +693,7 @@ ario_connection_widget_new_profile_cb (GtkWidget *widget,
 
 void
 ario_connection_widget_delete_profile_cb (GtkWidget *widget,
-                                               ArioConnectionWidget *connection_widget)
+                                          ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START
         ArioProfile *first_profile;
