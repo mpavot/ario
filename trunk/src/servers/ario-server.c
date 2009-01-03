@@ -266,7 +266,6 @@ void
 ario_server_shutdown (void)
 {
         ARIO_LOG_FUNCTION_START
-        ario_server_disconnect ();
         g_object_unref (interface);
 }
 
