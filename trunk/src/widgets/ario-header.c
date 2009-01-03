@@ -67,7 +67,6 @@ static void ario_header_do_repeat (ArioHeader *header);
 
 struct ArioHeaderPrivate
 {
-        GtkTooltips *tooltips;
         GtkWidget *prev_button;
         GtkWidget *play_pause_button;
         GtkWidget *random_button;
@@ -182,9 +181,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header = ARIO_HEADER (parent_class->constructor (type, n_construct_properties,
                                                          construct_properties));
 
-        header->priv->tooltips = gtk_tooltips_new ();
-        gtk_tooltips_enable (header->priv->tooltips);
-
         /* Construct previous button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PREVIOUS,
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
@@ -195,9 +191,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_previous),
                                   header);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->prev_button), 
-                              _("Play previous song"), NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->prev_button), 
+                                     _("Play previous song"));
 
         /* Construct button images */
         header->priv->play_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PLAY,
@@ -217,9 +212,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_playpause),
                                   header);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->play_pause_button), 
-                              _("Play/Pause the music"), NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->play_pause_button), 
+                                     _("Play/Pause the music"));
 
         /* Construct stop button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_STOP,
@@ -230,9 +224,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_stop),
                                   header);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->stop_button), 
-                              _("Stop the music"), NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->stop_button), 
+                                     _("Stop the music"));
 
         /* Construct next button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_NEXT,
@@ -243,9 +236,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_next),
                                   header);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->next_button), 
-                              _("Play next song"), NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->next_button), 
+                                     _("Play next song"));
 
         /* Construct cover display */
         cover_event_box = gtk_event_box_new ();
@@ -324,9 +316,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_random),
                                   header);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->random_button), 
-                              _("Toggle random on/off"), NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->random_button), 
+                                     _("Toggle random on/off"));
 
         /* Construct repeat button */
         image = gtk_image_new_from_stock ("repeat",
@@ -337,16 +328,13 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_repeat),
                                   header);
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              GTK_WIDGET (header->priv->repeat_button), 
-                              _("Toggle repeat on/off"), NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->repeat_button), 
+                                     _("Toggle repeat on/off"));
 
         /* Construct volume button */
         header->priv->volume_button = GTK_WIDGET (ario_volume_new ());
-        gtk_tooltips_set_tip (GTK_TOOLTIPS (header->priv->tooltips), 
-                              header->priv->volume_button,
-                              _("Change the music volume"), NULL);
-
+        gtk_widget_set_tooltip_text (header->priv->volume_button,
+                                     _("Change the music volume"));
 
         /* Add everything in header Hbox */
         gtk_box_set_spacing (GTK_BOX (header), 12);
