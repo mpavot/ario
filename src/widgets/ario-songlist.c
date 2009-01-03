@@ -335,21 +335,19 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         GSList *paths = NULL;
-        GList *songs;
         GtkWidget *songinfos;
 
         gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
                                              songlists_foreach,
                                              &paths);
 
-        songs = ario_server_get_songs_info (paths);
-        g_slist_foreach (paths, (GFunc) g_free, NULL);
-        g_slist_free (paths);
-
-        if (songs) {
-                songinfos = ario_shell_songinfos_new (songs);
+        if (paths) {
+                songinfos = ario_shell_songinfos_new (paths);
                 if (songinfos)
                         gtk_widget_show_all (songinfos);
+
+                g_slist_foreach (paths, (GFunc) g_free, NULL);
+                g_slist_free (paths);
         }
 }
 

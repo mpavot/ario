@@ -1261,20 +1261,20 @@ ario_playlist_cmd_songs_properties (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
         GSList *paths = NULL;
-        GList *songs;
         GtkWidget *songinfos;
 
         gtk_tree_selection_selected_foreach (playlist->priv->selection,
                                              ario_playlist_selection_properties_foreach,
                                              &paths);
 
-        songs = ario_server_get_songs_info (paths);
-        g_slist_foreach (paths, (GFunc) g_free, NULL);
-        g_slist_free (paths);
+        if (paths) {
+                songinfos = ario_shell_songinfos_new (paths);
+                if (songinfos)
+                        gtk_widget_show_all (songinfos);
 
-        songinfos = ario_shell_songinfos_new (songs);
-        if (songinfos)
-                gtk_widget_show_all (songinfos);
+                g_slist_foreach (paths, (GFunc) g_free, NULL);
+                g_slist_free (paths);
+        }
 }
 
 static gboolean

@@ -18,6 +18,7 @@ ario_LDADD = libario.la $(DEPS_LIBS)
 libario_la_LIBADD = \
         $(DEPS_LIBS)\
         $(AVAHI_LIBS)\
+        $(TAGLIB_LIBS)\
         $(XMMS2_LIBS)\
         $(LIBGCRYPT_LIBS)
 
@@ -192,6 +193,7 @@ regenerate-enum-types:
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
                 $(AVAHI_CFLAGS) \
+                $(TAGLIB_CFLAGS) \
 		$(LIBGCRYPT_CFLAGS) \
                 $(XMMS2_CFLAGS) \
                 -DLOCALE_DIR=\""$(datadir)/locale"\"\
