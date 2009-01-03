@@ -37,6 +37,8 @@
 #define ARIO_NEXT 998
 #define ARIO_SAVE 999
 
+#define VALUE(b) b ? b : "n/a"
+
 static void ario_shell_songinfos_finalize (GObject *object);
 static gboolean ario_shell_songinfos_window_delete_cb (GtkWidget *window,
                                                        GdkEventAny *event,
@@ -452,12 +454,12 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
                 gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->genre_entry), song->genre ? song->genre : "");
                 gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->comment_entry), song->comment ? song->comment : "");
                 length = ario_util_format_time (song->time);
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->length_label), length ? length : "");
+                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->length_label), VALUE (length));
                 g_free (length);
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->file_label), song->file ? song->file : "");
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->composer_label), song->composer ? song->composer : "");
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->performer_label), song->performer ? song->performer : "");
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->disc_label), song->disc ? song->disc : "");
+                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->file_label), VALUE (song->file));
+                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->composer_label), VALUE (song->composer));
+                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->performer_label), VALUE (song->performer));
+                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->disc_label), VALUE (song->disc));
                 if (shell_songinfos->priv->save_button)
                         gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), FALSE);
         }
