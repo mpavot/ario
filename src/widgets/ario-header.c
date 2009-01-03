@@ -42,6 +42,8 @@ static gboolean ario_header_slider_press_cb (GtkWidget *widget,
 static gboolean ario_header_slider_release_cb (GtkWidget *widget,
                                                GdkEventButton *event,
                                                ArioHeader *header);
+static void ario_header_slider_value_changed_cb (GtkWidget *widget,
+                                                 ArioHeader *header);
 static void ario_header_song_changed_cb (ArioServer *server,
                                          ArioHeader *header);
 static void ario_header_album_changed_cb (ArioServer *server,
@@ -298,6 +300,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
         g_signal_connect (header->priv->scale,
                           "button_release_event",
                           G_CALLBACK (ario_header_slider_release_cb),
+                          header);
+        g_signal_connect (header->priv->scale,
+                          "value-changed",
+                          G_CALLBACK (ario_header_slider_value_changed_cb),
                           header);
 
         gtk_scale_set_draw_value (GTK_SCALE (header->priv->scale), FALSE);
@@ -720,6 +726,21 @@ ario_header_slider_release_cb (GtkWidget *widget,
         header->priv->slider_dragging = FALSE;
         ario_server_set_current_elapsed ((int) gtk_range_get_value (GTK_RANGE (header->priv->scale)));
         return FALSE;
+}
+
+static void ario_header_slider_value_changed_cb (GtkWidget *widget,
+                                                 ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START
+        gchar *tmp;
+        int elapsed;
+
+        if (header->priv->slider_dragging) {
+                elapsed = (int) gtk_range_get_value (GTK_RANGE (header->priv->scale));
+                tmp = ario_util_format_time (elapsed);
+                gtk_label_set_text (GTK_LABEL (header->priv->elapsed), tmp);
+                g_free (tmp);
+        }
 }
 
 void
