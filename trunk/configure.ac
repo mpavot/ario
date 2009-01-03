@@ -235,6 +235,19 @@ if test x"$enable_avahi" != xno; then
 fi
 AM_CONDITIONAL(USE_AVAHI, test x"$enable_avahi" != xno)
 
+dnl ================================================================
+dnl Taglib
+dnl ================================================================
+AC_ARG_ENABLE(taglib,
+              AC_HELP_STRING([--disable-taglib],
+                             [Disable support of Taglib]))
+if test x"$enable_taglib" != xno; then
+   AC_DEFINE(ENABLE_TAGLIB, 1, [Add support of taglib])
+   PKG_CHECK_MODULES(TAGLIB, [taglib_c])
+   AC_SUBST(TAGLIB_CFLAGS)
+   AC_SUBST(TAGLIB_LIBS)
+fi
+
 PLUGINDIR='${libdir}/ario/plugins'
 AC_SUBST(PLUGINDIR)
 
@@ -307,4 +320,9 @@ if test x${enable_mpdidle} = xyes; then
         echo "MPD 'idle' mode support is:               ENABLED"
 else
         echo "MPD 'idle' mode support is:               DISABLED (--enable-mpdidle)"
+fi
+if test x${enable_taglib} != xno; then
+        echo "Taglib support is:                        ENABLED  (--disable-taglib)"
+else
+        echo "Taglib support is:                        DISABLED"
 fi
