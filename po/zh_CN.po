@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-13 13:12+0100\n"
-"PO-Revision-Date: 2008-12-02 17:54+0000\n"
-"Last-Translator: Tao Wei <Unknown>\n"
+"POT-Creation-Date: 2009-01-19 21:03+0100\n"
+"PO-Revision-Date: 2008-12-15 06:18+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
+"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -150,7 +150,7 @@ msgstr "下载封面"
 msgid "Local search"
 msgstr "本地搜索"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:115
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:113
 msgid "Search"
 msgstr "搜索"
 
@@ -507,7 +507,7 @@ msgstr "播放 / 暂停"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:246
+#: ../src/widgets/ario-header.c:240
 msgid "Play next song"
 msgstr "播放下一首歌"
 
@@ -548,11 +548,11 @@ msgstr "任意"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
 msgid "Unknown"
 msgstr "未知"
 
-#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
+#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:76
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
@@ -561,7 +561,7 @@ msgstr "未知"
 msgid "_Add to playlist"
 msgstr "添加到播放列表(_A)"
 
-#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:79
 #: ../src/sources/ario-storedplaylists.c:104
 #: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
@@ -570,7 +570,7 @@ msgstr "添加到播放列表(_A)"
 msgid "Add and _play"
 msgstr "添加并播放(_p)"
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:82
 #: ../src/sources/ario-storedplaylists.c:107
 #: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
@@ -588,7 +588,7 @@ msgid "_Delete the covers"
 msgstr "删除封面(_D)"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
-#: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
+#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
 #: ../src/widgets/ario-playlist.c:139
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
@@ -599,15 +599,15 @@ msgstr "属性(_P)"
 msgid "Library"
 msgstr "媒体库"
 
-#: ../src/sources/ario-search.c:183
+#: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
 msgstr "添加搜索条件"
 
-#: ../src/sources/ario-search.c:192
+#: ../src/sources/ario-search.c:186
 msgid "Search songs in the library"
 msgstr "在媒体库中搜索歌曲"
 
-#: ../src/sources/ario-search.c:369
+#: ../src/sources/ario-search.c:362
 msgid "Remove a search criteria"
 msgstr "移除搜索条件"
 
@@ -730,6 +730,16 @@ msgstr ""
 "  Xiaojun Deng https://launchpad.net/~hktang\n"
 "  inkview https://launchpad.net/~inkview\n"
 "  luojie-dune https://launchpad.net/~luojie-dune\n"
+"  rainofchaos https://launchpad.net/~rainofchaos\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Aron Xu https://launchpad.net/~cnfavor\n"
+"  Lechuan https://launchpad.net/~lechuan\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Tao Wei https://launchpad.net/~weitao1979\n"
+"  Xiaojun Deng https://launchpad.net/~hktang\n"
+"  inkview https://launchpad.net/~inkview\n"
+"  luojie-dune https://launchpad.net/~luojie-dune\n"
 "  rainofchaos https://launchpad.net/~rainofchaos"
 
 #: ../src/shell/ario-shell.c:1018
@@ -770,7 +780,7 @@ msgstr "保存文件时出错"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:129
-#: ../src/shell/ario-shell-songinfos.c:209
+#: ../src/shell/ario-shell-songinfos.c:249
 msgid "Lyrics"
 msgstr "歌词"
 
@@ -804,11 +814,16 @@ msgstr "图像"
 msgid "Songs"
 msgstr "歌曲"
 
-#: ../src/shell/ario-shell-songinfos.c:115
-#: ../src/shell/ario-shell-songinfos.c:204
-#: ../src/shell/ario-shell-songinfos.c:313
+#: ../src/shell/ario-shell-songinfos.c:227
+#: ../src/shell/ario-shell-songinfos.c:244
+#: ../src/shell/ario-shell-songinfos.c:475
 msgid "Song Properties"
 msgstr "歌曲属性"
+
+#: ../src/shell/ario-shell-songinfos.c:410
+#, fuzzy
+msgid "Error saving tags of file:"
+msgstr "保存文件时出错"
 
 #: ../src/widgets/ario-connection-widget.c:345
 msgid "Profile"
@@ -867,38 +882,38 @@ msgstr "配置"
 msgid "Confirmation"
 msgstr "确认"
 
-#: ../src/widgets/ario-header.c:64 ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>从</i> %s <i>由</i> %s"
 
-#: ../src/widgets/ario-header.c:198
+#: ../src/widgets/ario-header.c:195
 msgid "Play previous song"
 msgstr "播放上一首歌"
 
-#: ../src/widgets/ario-header.c:220
+#: ../src/widgets/ario-header.c:216
 msgid "Play/Pause the music"
 msgstr "播放／暂停音乐"
 
-#: ../src/widgets/ario-header.c:233
+#: ../src/widgets/ario-header.c:228
 msgid "Stop the music"
 msgstr "停止音乐"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
+#: ../src/widgets/ario-header.c:307 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
 msgstr " 共 "
 
-#: ../src/widgets/ario-header.c:323
+#: ../src/widgets/ario-header.c:320
 msgid "Toggle random on/off"
 msgstr "开启/关闭随机播放"
 
-#: ../src/widgets/ario-header.c:336
+#: ../src/widgets/ario-header.c:332
 msgid "Toggle repeat on/off"
 msgstr "开启/关闭重复播放"
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:337
 msgid "Change the music volume"
 msgstr "更改音量"
 
@@ -935,15 +950,15 @@ msgid "_Go to playing song"
 msgstr "转到正在播放(_G)"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1323
+#: ../src/widgets/ario-playlist.c:1326
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: ../src/widgets/ario-playlist.c:1333
+#: ../src/widgets/ario-playlist.c:1336
 msgid "Playlist name :"
 msgstr "播放列表名称："
 
-#: ../src/widgets/ario-playlist.c:1358
+#: ../src/widgets/ario-playlist.c:1361
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "播放列表已存在。是否覆盖？"
 
@@ -967,89 +982,89 @@ msgstr "下一首(_N)"
 msgid "P_revious"
 msgstr "上一首(_r)"
 
-#: ../src/widgets/ario-tray-icon.h:44
+#: ../src/widgets/ario-tray-icon.h:45
 msgid "Not playing"
 msgstr "未播放"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
 msgid "Today %I:%M %p"
 msgstr "今天 %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
 msgid "Yesterday %I:%M %p"
 msgstr "昨天 %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1190
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "从不"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
 msgid "OK"
 msgstr "确定"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
 msgid "Logging in"
 msgstr "登录"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
 msgid "Request failed"
 msgstr "请求失败"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "Incorrect username"
 msgstr "用户名不正确"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Incorrect password"
 msgstr "密码不正确"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Handshake failed"
 msgstr "握手失败"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Client update required"
 msgstr "需要更新客户端"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Track submission failed"
 msgstr "音轨提交失败"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Queue is too long"
 msgstr "队列太长"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Track submission failed too many times"
 msgstr "音轨提交失败的次数太多"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
 msgid "Audioscrobbler preferences"
 msgstr "同乐会首选项"
 

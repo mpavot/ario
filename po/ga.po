@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-13 13:12+0100\n"
-"PO-Revision-Date: 2008-11-01 21:14+0000\n"
+"POT-Creation-Date: 2009-01-19 21:03+0100\n"
+"PO-Revision-Date: 2008-12-15 06:23+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
+"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -148,7 +148,7 @@ msgstr "Ag íosluchtú an clúdach"
 msgid "Local search"
 msgstr "Cuardach loganta"
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:115
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:113
 msgid "Search"
 msgstr "Cuardach"
 
@@ -506,7 +506,7 @@ msgstr "Seinn/Sos"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:246
+#: ../src/widgets/ario-header.c:240
 msgid "Play next song"
 msgstr "Seinn an chéad amhrán eile"
 
@@ -547,11 +547,11 @@ msgstr "Ceann ar bith"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
 msgid "Unknown"
 msgstr "Anaithnid"
 
-#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
+#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:76
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
@@ -560,7 +560,7 @@ msgstr "Anaithnid"
 msgid "_Add to playlist"
 msgstr "_Cuir leis an seinmréim"
 
-#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:79
 #: ../src/sources/ario-storedplaylists.c:104
 #: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
@@ -569,7 +569,7 @@ msgstr "_Cuir leis an seinmréim"
 msgid "Add and _play"
 msgstr ""
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:82
 #: ../src/sources/ario-storedplaylists.c:107
 #: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
@@ -587,7 +587,7 @@ msgid "_Delete the covers"
 msgstr "_Scrios na clúdaithe"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
-#: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
+#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
 #: ../src/widgets/ario-playlist.c:139
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
@@ -598,15 +598,15 @@ msgstr "_Airíonna"
 msgid "Library"
 msgstr "Leabharlann"
 
-#: ../src/sources/ario-search.c:183
+#: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
 msgstr "Cuir slat tomhais cuardaigh leis"
 
-#: ../src/sources/ario-search.c:192
+#: ../src/sources/ario-search.c:186
 msgid "Search songs in the library"
 msgstr "Cuardaigh amhráin sa leabharlann"
 
-#: ../src/sources/ario-search.c:369
+#: ../src/sources/ario-search.c:362
 msgid "Remove a search criteria"
 msgstr "Bain slat tomhais cuardaigh"
 
@@ -718,6 +718,10 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Seanan https://launchpad.net/~seananoc-gmail\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Seanan https://launchpad.net/~seananoc-gmail"
 
 #: ../src/shell/ario-shell.c:1018
@@ -758,7 +762,7 @@ msgstr "Tharla botún ag cuir an comhad i dtaisce"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:129
-#: ../src/shell/ario-shell-songinfos.c:209
+#: ../src/shell/ario-shell-songinfos.c:249
 msgid "Lyrics"
 msgstr "Liricí"
 
@@ -792,11 +796,16 @@ msgstr "Íomhá"
 msgid "Songs"
 msgstr "Amhráin"
 
-#: ../src/shell/ario-shell-songinfos.c:115
-#: ../src/shell/ario-shell-songinfos.c:204
-#: ../src/shell/ario-shell-songinfos.c:313
+#: ../src/shell/ario-shell-songinfos.c:227
+#: ../src/shell/ario-shell-songinfos.c:244
+#: ../src/shell/ario-shell-songinfos.c:475
 msgid "Song Properties"
 msgstr "Airíonna Amhráin"
+
+#: ../src/shell/ario-shell-songinfos.c:410
+#, fuzzy
+msgid "Error saving tags of file:"
+msgstr "Tharla botún ag cuir an comhad i dtaisce"
 
 #: ../src/widgets/ario-connection-widget.c:345
 msgid "Profile"
@@ -856,38 +865,38 @@ msgstr "Cumraíocht"
 msgid "Confirmation"
 msgstr "Deimhniúchán"
 
-#: ../src/widgets/ario-header.c:64 ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>ó</i> %s <i>le</i> %s"
 
-#: ../src/widgets/ario-header.c:198
+#: ../src/widgets/ario-header.c:195
 msgid "Play previous song"
 msgstr "Seinn an t-amhrán roimhe"
 
-#: ../src/widgets/ario-header.c:220
+#: ../src/widgets/ario-header.c:216
 msgid "Play/Pause the music"
 msgstr "Seinn/Moilligh an ceol"
 
-#: ../src/widgets/ario-header.c:233
+#: ../src/widgets/ario-header.c:228
 msgid "Stop the music"
 msgstr "Stad an ceol"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
+#: ../src/widgets/ario-header.c:307 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
 msgstr " de "
 
-#: ../src/widgets/ario-header.c:323
+#: ../src/widgets/ario-header.c:320
 msgid "Toggle random on/off"
 msgstr "Scag ar siúl/as fánach"
 
-#: ../src/widgets/ario-header.c:336
+#: ../src/widgets/ario-header.c:332
 msgid "Toggle repeat on/off"
 msgstr "Scag ar siúl/as athuair"
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:337
 msgid "Change the music volume"
 msgstr "Athraigh airde an ceoil"
 
@@ -924,15 +933,15 @@ msgid "_Go to playing song"
 msgstr "_Téigh chuig an t-amhrán atá ag seinm"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1323
+#: ../src/widgets/ario-playlist.c:1326
 msgid "Save playlist"
 msgstr "Cuir an seinmréim i dtaisce"
 
-#: ../src/widgets/ario-playlist.c:1333
+#: ../src/widgets/ario-playlist.c:1336
 msgid "Playlist name :"
 msgstr "Ainm na seinmréime :"
 
-#: ../src/widgets/ario-playlist.c:1358
+#: ../src/widgets/ario-playlist.c:1361
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Tá an seinmréim sin ann cheana? An dteastaíonn uait é a fhorscríobh?"
 
@@ -956,89 +965,89 @@ msgstr "_Ar Aghaidh"
 msgid "P_revious"
 msgstr "_Roimhe"
 
-#: ../src/widgets/ario-tray-icon.h:44
+#: ../src/widgets/ario-tray-icon.h:45
 msgid "Not playing"
 msgstr "Níl sé ag seinm"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
 msgid "Today %I:%M %p"
 msgstr "Inniu %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
 msgid "Yesterday %I:%M %p"
 msgstr "Inné %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
 msgid "%b %d %I:%M %p"
 msgstr "%dú %b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1190
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "Riamh"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
 msgid "OK"
 msgstr "Tá go Maith"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
 msgid "Logging in"
 msgstr "Ag síniú isteach"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
 msgid "Request failed"
 msgstr "Theip ar an t-iarratas"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "Incorrect username"
 msgstr "Ainm úsáideora mícheart"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Incorrect password"
 msgstr "Focal faire mícheart"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Handshake failed"
 msgstr "Theip ar an gcumarsáid thionscantach"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Client update required"
 msgstr "Nuashonrú don cliaint de dhíth"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Track submission failed"
 msgstr "Theip ar an rian iarratais"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Queue is too long"
 msgstr "Tá an scuaine ró-fhada"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Track submission failed too many times"
 msgstr "Theip ar an rian iarratais in iomarca dreasanna"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
 msgid "Audioscrobbler preferences"
 msgstr "Sainroghanna Audioscrobbler"
 

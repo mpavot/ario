@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-13 13:12+0100\n"
-"PO-Revision-Date: 2008-11-01 20:36+0000\n"
+"POT-Creation-Date: 2009-01-19 21:03+0100\n"
+"PO-Revision-Date: 2008-12-15 03:43+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-12-13 12:02+0000\n"
+"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -147,7 +147,7 @@ msgstr "ดาวน์โหลดปกซีดี"
 msgid "Local search"
 msgstr ""
 
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:115
+#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:113
 msgid "Search"
 msgstr "ค้นหา"
 
@@ -504,7 +504,7 @@ msgstr "เล่น/หยุดชั่วคราว"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:49
-#: ../src/widgets/ario-header.c:246
+#: ../src/widgets/ario-header.c:240
 msgid "Play next song"
 msgstr "เล่นเพลงถัดไป"
 
@@ -545,11 +545,11 @@ msgstr ""
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1200
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
-#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:78
+#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:76
 #: ../src/sources/ario-storedplaylists.c:101
 #: ../src/sources/ario-storedplaylists.c:118
 #: ../plugins/filesystem/ario-filesystem.c:104
@@ -558,7 +558,7 @@ msgstr "ไม่รู้จัก"
 msgid "_Add to playlist"
 msgstr "เพิ่มในรายการเล่น"
 
-#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:81
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:79
 #: ../src/sources/ario-storedplaylists.c:104
 #: ../src/sources/ario-storedplaylists.c:121
 #: ../plugins/filesystem/ario-filesystem.c:107
@@ -567,7 +567,7 @@ msgstr "เพิ่มในรายการเล่น"
 msgid "Add and _play"
 msgstr "เพิ่มและเล่น"
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:84
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:82
 #: ../src/sources/ario-storedplaylists.c:107
 #: ../src/sources/ario-storedplaylists.c:124
 #: ../plugins/filesystem/ario-filesystem.c:110
@@ -585,7 +585,7 @@ msgid "_Delete the covers"
 msgstr "ลบปกซีดี"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
-#: ../src/sources/ario-search.c:87 ../src/sources/ario-storedplaylists.c:127
+#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
 #: ../src/widgets/ario-playlist.c:139
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
@@ -596,15 +596,15 @@ msgstr "คุณสมบัติ"
 msgid "Library"
 msgstr "ไลบรารี"
 
-#: ../src/sources/ario-search.c:183
+#: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
 msgstr ""
 
-#: ../src/sources/ario-search.c:192
+#: ../src/sources/ario-search.c:186
 msgid "Search songs in the library"
 msgstr ""
 
-#: ../src/sources/ario-search.c:369
+#: ../src/sources/ario-search.c:362
 msgid "Remove a search criteria"
 msgstr ""
 
@@ -705,6 +705,10 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Tharawut Paripaiboon https://launchpad.net/~xcession\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Tharawut Paripaiboon https://launchpad.net/~xcession"
 
 #: ../src/shell/ario-shell.c:1018
@@ -742,7 +746,7 @@ msgstr ""
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:129
-#: ../src/shell/ario-shell-songinfos.c:209
+#: ../src/shell/ario-shell-songinfos.c:249
 msgid "Lyrics"
 msgstr "เนื้อเพลง"
 
@@ -776,11 +780,15 @@ msgstr "รูปภาพ"
 msgid "Songs"
 msgstr "เพลง"
 
-#: ../src/shell/ario-shell-songinfos.c:115
-#: ../src/shell/ario-shell-songinfos.c:204
-#: ../src/shell/ario-shell-songinfos.c:313
+#: ../src/shell/ario-shell-songinfos.c:227
+#: ../src/shell/ario-shell-songinfos.c:244
+#: ../src/shell/ario-shell-songinfos.c:475
 msgid "Song Properties"
 msgstr "คุณสมบัติเพลง"
+
+#: ../src/shell/ario-shell-songinfos.c:410
+msgid "Error saving tags of file:"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:345
 msgid "Profile"
@@ -835,38 +843,38 @@ msgstr "การตั้งค่า"
 msgid "Confirmation"
 msgstr "การยืนยัน"
 
-#: ../src/widgets/ario-header.c:64 ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>จาก</i> %s <i>โดย</i> %s"
 
-#: ../src/widgets/ario-header.c:198
+#: ../src/widgets/ario-header.c:195
 msgid "Play previous song"
 msgstr "เล่นเพลงก่อนหน้า"
 
-#: ../src/widgets/ario-header.c:220
+#: ../src/widgets/ario-header.c:216
 msgid "Play/Pause the music"
 msgstr "เล่น/พัก เพลง"
 
-#: ../src/widgets/ario-header.c:233
+#: ../src/widgets/ario-header.c:228
 msgid "Stop the music"
 msgstr "หยุดเพลง"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:309 ../src/widgets/ario-tray-icon.c:798
+#: ../src/widgets/ario-header.c:307 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
 msgstr ""
 
-#: ../src/widgets/ario-header.c:323
+#: ../src/widgets/ario-header.c:320
 msgid "Toggle random on/off"
 msgstr "สลับการสุ่ม เปิด/ปิด"
 
-#: ../src/widgets/ario-header.c:336
+#: ../src/widgets/ario-header.c:332
 msgid "Toggle repeat on/off"
 msgstr "สลับการเล่นซ้ำ เปิด/ปิด"
 
-#: ../src/widgets/ario-header.c:342
+#: ../src/widgets/ario-header.c:337
 msgid "Change the music volume"
 msgstr "ปรับความดัง"
 
@@ -903,15 +911,15 @@ msgid "_Go to playing song"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1323
+#: ../src/widgets/ario-playlist.c:1326
 msgid "Save playlist"
 msgstr "บันทึกรายการเล่น"
 
-#: ../src/widgets/ario-playlist.c:1333
+#: ../src/widgets/ario-playlist.c:1336
 msgid "Playlist name :"
 msgstr "ชื่อรายการเล่น :"
 
-#: ../src/widgets/ario-playlist.c:1358
+#: ../src/widgets/ario-playlist.c:1361
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
@@ -935,89 +943,89 @@ msgstr "ถัดไป"
 msgid "P_revious"
 msgstr "ก่อนหน้า"
 
-#: ../src/widgets/ario-tray-icon.h:44
+#: ../src/widgets/ario-tray-icon.h:45
 msgid "Not playing"
 msgstr "ไม่ได้เล่น"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1144
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
 msgid "Today %I:%M %p"
 msgstr "วันนี้ %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1157
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
 msgid "Yesterday %I:%M %p"
 msgstr "เมื่อวาน %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1173
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1185
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1190
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1274
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "ไม่เคย"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1297
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
 msgid "OK"
 msgstr "ตกลง"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1300
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
 msgid "Logging in"
 msgstr "กำลังเข้าสู่ระบบ"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1303
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
 msgid "Request failed"
 msgstr "การร้องขอล้มเหลว"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1306
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "Incorrect username"
 msgstr "ชื่อผู้ใช้ไม่ถูกต้อง"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1309
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Incorrect password"
 msgstr "รหัสผ่านไม่ถูกต้อง"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1312
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Handshake failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1315
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Client update required"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1318
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Track submission failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1321
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Queue is too long"
 msgstr "คิวยาวเกินไป"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1324
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Track submission failed too many times"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1376
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
 msgid "Audioscrobbler preferences"
 msgstr ""
 
