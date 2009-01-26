@@ -6,7 +6,6 @@ include /usr/share/cdbs/1/class/gnome.mk
 
 # exclude plugins from shlibs generation
 DEB_DH_MAKESHLIBS_ARGS_ario += --exclude=debian/$(cdbs_curpkg)/usr/lib/ario/plugins
-DEB_DH_SHLIBDEPS_ARGS_ario += --exclude=debian/$(cdbs_curpkg)/usr/lib/ario/plugins
 
 DEB_INSTALL_MANPAGES_ario := debian/ario.1
 

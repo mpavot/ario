@@ -1,3 +1,25 @@
+ario (1.2.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Use libsoup2.4 instead of libsoup2.2
+  * Add dependency to packages needed by some plug-ins (dbus, libnotify1,
+    and libsoup2.4-1) (Closes: #512276)
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Mon, 19 Jan 2009 21:38:44 +0100
+
+ario (1.2-1) unstable; urgency=low
+
+  * New upstream release
+        - Patch libmpdclient to fix MPD connection problems (Closes: #495687)
+        - Fix eggtrayicon transparency issue (Closes: #495757)
+  * Additional dependency: libnotify
+  * Split package into two: ario and ario-common, the latter of which
+    contains architecture-independent files like translations, glade files
+    and pixmaps.
+  * Add lintian override file
+
+ -- Marc Pavot <marc.pavot@gmail.com>  Sat, 13 Dec 2008 15:08:20 +0100
+
 ario (1.1-1) unstable; urgency=low
 
   * New upstream release (Closes: #480361)
