@@ -1,4 +1,5 @@
 plugindir = $(PLUGINDIR)
+plugindatadir = $(PLUGIN_DATA_DIR)
 plugin_LTLIBRARIES = libaudioscrobbler.la
 
 libaudioscrobbler_la_SOURCES = \
@@ -27,7 +28,7 @@ INCLUDES = 						\
         -Wnested-externs -Wpointer-arith \
         -Wcast-align -Wall
 
-gladedir = $(plugindir)
+gladedir = $(plugindatadir)
 glade_DATA = audioscrobbler-prefs.glade
 
 plugin_in_files = audioscrobbler.ario-plugin.desktop.in
@@ -41,7 +42,7 @@ plugin_DATA =	\
 	$(BUILT_SOURCES)						\
 	$(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
 
-icondir = $(plugindir)/icons
+icondir = $(plugindatadir)/icons
 icon_DATA = audioscrobbler.png
 
 EXTRA_DIST = $(plugin_in_files)         \

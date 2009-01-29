@@ -1,4 +1,5 @@
 plugindir = $(PLUGINDIR)
+plugindatadir = $(PLUGIN_DATA_DIR)
 plugin_LTLIBRARIES = libsample.la
 
 libsample_la_SOURCES = \
