@@ -1288,6 +1288,11 @@ ario_playlist_model_foreach (GtkTreeModel *model,
         gtk_tree_model_get (model, iter, ID_COLUMN, &song_id, -1);
 
         if (song_id == ario_server_get_current_song_id ()) {
+                gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (playlist->priv->tree),
+                                              path,
+                                              NULL,
+                                              TRUE,
+                                              0.5, 0);
                 gtk_tree_view_set_cursor (GTK_TREE_VIEW (playlist->priv->tree),
                                           path,
                                           NULL, FALSE);
