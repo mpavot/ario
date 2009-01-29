@@ -94,6 +94,8 @@ GtkWidget*      ario_plugin_create_configure_dialog     (ArioPlugin *plugin);
 
 GSList *        ario_plugin_get_plugin_paths            (void);
 
+GSList *        ario_plugin_get_plugin_data_paths       (void);
+
 char *          ario_plugin_find_file                   (const char *file);
 
 /*

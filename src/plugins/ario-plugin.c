@@ -115,6 +115,20 @@ ario_plugin_get_plugin_paths (void)
         return paths;
 }
 
+GSList *
+ario_plugin_get_plugin_data_paths (void)
+{
+        GSList *paths = NULL;
+        char  *path;
+
+        path = g_build_filename (ario_util_config_dir (), "plugins", NULL);
+        paths = g_slist_append (paths, path);
+
+        path = g_strdup (ARIO_PLUGIN_DATA_DIR);
+        paths = g_slist_append (paths, path);
+
+        return paths;
+}
 
 char *
 ario_plugin_find_file (const char *file)
@@ -123,7 +137,7 @@ ario_plugin_find_file (const char *file)
         GSList *l;
         char *ret = NULL;
 
-        paths = ario_plugin_get_plugin_paths ();
+        paths = ario_plugin_get_plugin_data_paths ();
 
         for (l = paths; l != NULL; l = l->next) {
                 if (ret == NULL) {

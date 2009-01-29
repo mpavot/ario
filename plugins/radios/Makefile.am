@@ -1,4 +1,5 @@
 plugindir = $(PLUGINDIR)
+plugindatadir = $(PLUGIN_DATA_DIR)
 plugin_LTLIBRARIES = libradios.la
 
 libradios_la_SOURCES = \
@@ -9,10 +10,10 @@ libradios_la_SOURCES = \
 	
 libradios_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
-uixmldir = $(plugindir)
+uixmldir = $(plugindatadir)
 uixml_DATA = radios-ui.xml
 
-alldatadir = $(plugindir)
+alldatadir = $(plugindatadir)
 alldata_DATA = radios.xml.default
 
 INCLUDES = 						\

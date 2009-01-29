@@ -251,6 +251,9 @@ fi
 PLUGINDIR='${libdir}/ario/plugins'
 AC_SUBST(PLUGINDIR)
 
+PLUGIN_DATA_DIR='${pkgdatadir}/plugins'
+AC_SUBST(PLUGIN_DATA_DIR)
+
 AC_OUTPUT([
 Makefile
 bindings/Makefile

@@ -1,4 +1,5 @@
 plugindir = $(PLUGINDIR)
+plugindatadir = $(PLUGIN_DATA_DIR)
 plugin_LTLIBRARIES = libwikipedia.la
 
 libwikipedia_la_SOURCES = \
@@ -7,7 +8,7 @@ libwikipedia_la_SOURCES = \
 
 libwikipedia_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
-uixmldir = $(plugindir)
+uixmldir = $(plugindatadir)
 uixml_DATA = wikipedia-ui.xml
 
 INCLUDES = 						\
@@ -37,7 +38,7 @@ plugin_DATA =	\
 	$(BUILT_SOURCES)						\
 	$(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
 
-icondir = $(plugindir)/icons
+icondir = $(plugindatadir)/icons
 icon_DATA = wikipedia.png
 
 EXTRA_DIST = $(plugin_in_files)         \

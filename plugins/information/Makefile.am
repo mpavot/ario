@@ -1,4 +1,5 @@
 plugindir = $(PLUGINDIR)
+plugindatadir = $(PLUGIN_DATA_DIR)
 plugin_LTLIBRARIES = libinformation.la
 
 libinformation_la_SOURCES = \
@@ -26,7 +27,7 @@ INCLUDES = 						\
         -Wnested-externs -Wpointer-arith \
         -Wcast-align -Wall
 
-gladedir = $(plugindir)
+gladedir = $(plugindatadir)
 glade_DATA = information.glade
 
 plugin_in_files = information.ario-plugin.desktop.in

@@ -178,7 +178,7 @@ ario_plugins_engine_load_icons_all (void)
         GSList *l;
         gchar *tmp;
 
-        paths = ario_plugin_get_plugin_paths ();
+        paths = ario_plugin_get_plugin_data_paths ();
 
         for (l = paths; l != NULL; l = l->next) {
                 tmp = g_build_filename (l->data, "icons", NULL);
