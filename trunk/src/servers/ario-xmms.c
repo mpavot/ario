@@ -1,5 +1,6 @@
 /*
- *  Copyright (C) 2005 Marc Pavot <marc.pavot@gmail.com>
+ *  Copyright (C) 2008 Marc Pavot <marc.pavot@gmail.com>
+ *  Copyright (C) 2009 Samuel CUELLA <samuel.cuella@supinfo.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,12 +28,22 @@
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "ario-util.h"
 #include "ario-profiles.h"
 #include <xmmsclient/xmmsclient.h>
 #include <xmmsclient/xmmsclient-glib.h>
 
 #define NORMAL_TIMEOUT 500
 #define LAZY_TIMEOUT 12000
+
+#define GOODCHAR(a) ((((a) >= 'a') && ((a) <= 'z')) || \
+                     (((a) >= 'A') && ((a) <= 'Z')) || \
+                     (((a) >= '0') && ((a) <= '9')) || \
+                     ((a) == ':') || \
+                     ((a) == '/') || \
+                     ((a) == '-') || \
+                     ((a) == '.') || \
+                     ((a) == '_'))
 
 static void ario_xmms_finalize (GObject *object);
 static gboolean ario_xmms_connect_to (ArioXmms *xmms,
@@ -79,10 +90,13 @@ static ArioServerStats * ario_xmms_get_stats (void);
 static GList * ario_xmms_get_songs_info (GSList *paths);
 static ArioServerFileList * ario_xmms_list_files (const char *path,
                                                   gboolean recursive);
+static gboolean ario_xmms_is_usable_music_directory (const gchar *path);
 
 struct ArioXmmsPrivate
 {
         xmmsc_connection_t *connection;
+        xmmsc_connection_t *async_connection;
+
         int total_time;
 
         GSList *results;
@@ -102,8 +116,8 @@ char * ArioXmmsPattern[MPD_TAG_NUM_OF_ITEM_TYPES] =
         "performer", // MPD_TAG_ITEM_PERFORMER
         NULL,            // MPD_TAG_ITEM_COMMENT
         NULL,            // MPD_TAG_ITEM_DISC
-        "filename",  // MPD_TAG_ITEM_FILENAME
-        "any"        // MPD_TAG_ITEM_ANY
+        "url",  // MPD_TAG_ITEM_FILENAME
+        NULL        // MPD_TAG_ITEM_ANY
 };
 
 #define ARIO_XMMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_XMMS, ArioXmmsPrivate))
@@ -213,7 +227,11 @@ ario_xmms_get_song_from_res (xmmsc_result_t *result)
         xmmsc_result_get_dict_entry_string (result, "title", &tmp);
         song->title = g_strdup (tmp);
         xmmsc_result_get_dict_entry_string (result, "url", &tmp);
-        song->file = g_strdup (tmp);
+        if (tmp) {
+                song->file = g_strdup (xmmsc_result_decode_url (result, tmp));
+        } else {
+                song->file = NULL;
+        }
         xmmsc_result_get_dict_entry_string (result, "track", &tmp);
         song->track = g_strdup (tmp);
         xmmsc_result_get_dict_entry_int (result, "id", &song->id);
@@ -252,6 +270,9 @@ ario_xmms_result_wait (xmmsc_result_t *result)
         block = FALSE;
 */
         xmmsc_result_wait (result);
+        if (xmmsc_result_iserror (result)) {
+                ARIO_LOG_ERROR ("Transaction error : %s\n", xmmsc_result_get_error (result));
+        }
 }
 
 ArioXmms *
@@ -460,17 +481,20 @@ ario_xmms_connect_to (ArioXmms *xmms,
 {
         ARIO_LOG_FUNCTION_START
         xmmsc_connection_t *connection;
+        xmmsc_connection_t *async_connection;
+
         gchar *xmms_path;
         xmmsc_result_t *res;
 
         connection = xmmsc_init ("ario");
+        async_connection = xmmsc_init ("ario2");
 
-        if (!connection)
+        if (!connection || !async_connection)
                 return FALSE;
 
         xmms_path = g_strdup_printf ("tcp://%s:%d", hostname, port);
 
-        if (!xmmsc_connect (connection, xmms_path)) {
+        if (!xmmsc_connect (connection, xmms_path) || !xmmsc_connect (async_connection, xmms_path) ) {
                 ARIO_LOG_ERROR ("Error connecting to %s", xmms_path);
                 g_free (xmms_path);
                 return FALSE;
@@ -478,26 +502,31 @@ ario_xmms_connect_to (ArioXmms *xmms,
         g_free (xmms_path);
 
         xmms->priv->connection = connection;
+        xmms->priv->async_connection = async_connection;
 
-        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playlist_changed,
-                           (xmmsc_result_notifier_t) playlist_not, xmms);
-        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_status,
-                           (xmmsc_result_notifier_t) playback_status_not, xmms);
-        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_current_id,
-                           (xmmsc_result_notifier_t) playback_current_id_not, xmms);
-        ARIO_XMMS_CALLBACK_SET (connection, xmmsc_broadcast_playback_volume_changed,
-                           (xmmsc_result_notifier_t) playback_volume_changed_not, xmms);
-        res = xmmsc_signal_playback_playtime (connection);
+        ARIO_XMMS_CALLBACK_SET (async_connection, xmmsc_broadcast_playlist_changed,
+                                (xmmsc_result_notifier_t) playlist_not, xmms);
+
+        ARIO_XMMS_CALLBACK_SET (async_connection, xmmsc_broadcast_playback_status,
+                                (xmmsc_result_notifier_t) playback_status_not, xmms);
+
+        ARIO_XMMS_CALLBACK_SET (async_connection, xmmsc_broadcast_playback_current_id,
+                                (xmmsc_result_notifier_t) playback_current_id_not, xmms);
+
+        ARIO_XMMS_CALLBACK_SET (async_connection, xmmsc_broadcast_playback_volume_changed,
+                                (xmmsc_result_notifier_t) playback_volume_changed_not, xmms);
+
+        res = xmmsc_signal_playback_playtime (async_connection);
         xmmsc_result_notifier_set_full (res, (xmmsc_result_notifier_t) playback_playtime_not, xmms, NULL);
         xmmsc_result_unref (res);
         instance->priv->res = res;
 
         /* Disconnect callback */
-        xmmsc_disconnect_callback_set (connection, (xmmsc_disconnect_func_t) disconnect_not, xmms);
+        xmmsc_disconnect_callback_set (async_connection, (xmmsc_disconnect_func_t) disconnect_not, xmms);
 
-        xmmsc_mainloop_gmain_init (connection);
-
+        xmmsc_mainloop_gmain_init (async_connection);
         ario_xmms_sync (xmms);
+
         return TRUE;
 }
 
@@ -559,11 +588,14 @@ static void
 ario_xmms_update_db (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
-
-        xmmsc_result_unref (xmmsc_medialib_rehash (instance->priv->connection, 0));
+        res = xmmsc_medialib_rehash (instance->priv->connection, 0);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
 }
 
 static gboolean
@@ -721,9 +753,6 @@ ario_xmms_get_songs (const ArioServerCriteria *criteria,
         xmmsc_coll_t *coll;
         const char *properties[] = { "tracknr", "title", "url", NULL };
         const char *group_by[]   = { "tracknr", "title", NULL };
-        const char *title;
-        const char *url;
-        int tracknr;
         ArioServerSong *xmms_song;
         char *pattern = NULL, *pattern_tmp;
         const GSList *tmp;
@@ -764,16 +793,7 @@ ario_xmms_get_songs (const ArioServerCriteria *criteria,
                                      0, 0, properties, group_by);
         ario_xmms_result_wait (res);
         for (; xmmsc_result_list_valid (res); xmmsc_result_list_next (res)) {
-                xmms_song = (ArioServerSong *) g_malloc0 (sizeof (ArioServerSong));
-
-                xmmsc_result_get_dict_entry_string (res, "title", &title);
-                xmmsc_result_get_dict_entry_string (res, "url", &url);
-                xmmsc_result_get_dict_entry_int (res, "tracknr", &tracknr);
-
-                xmms_song->title = g_strdup (title);
-                xmms_song->track = g_strdup_printf ("%d", tracknr);
-                xmms_song->file = g_strdup (url);
-
+                xmms_song = ario_xmms_get_song_from_res (res);
                 songs = g_slist_append (songs, xmms_song);
         }
 
@@ -834,11 +854,32 @@ ario_xmms_get_playlists (void)
 
         for (; xmmsc_result_list_valid (res); xmmsc_result_list_next (res)) {
                 xmmsc_result_get_string (res, &playlist);
-                playlists = g_slist_append (playlists, g_strdup (playlist));
+                if (playlist && *playlist != '_')
+                        playlists = g_slist_append (playlists, g_strdup (playlist));
         }
         xmmsc_result_unref (res);
 
         return playlists;
+}
+
+static gboolean 
+ario_xmms_playlist_exists (const gchar *name)
+{
+        const gchar *playlist;
+        xmmsc_result_t *res;
+
+        res = xmmsc_playlist_list (instance->priv->connection);
+        ario_xmms_result_wait (res);
+
+        for (; xmmsc_result_list_valid (res); xmmsc_result_list_next (res)) {
+                xmmsc_result_get_string (res, &playlist);
+                if (playlist && !strcmp (name, playlist)) {
+                        xmmsc_result_unref (res);
+                        return TRUE;
+                }
+        }
+        xmmsc_result_unref (res);
+        return FALSE;
 }
 
 static GSList *
@@ -892,94 +933,138 @@ void
 ario_xmms_do_next (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playlist_set_next_rel (instance->priv->connection, 1));
-        xmmsc_result_unref (xmmsc_playback_tickle (instance->priv->connection));
+        res  = xmmsc_playlist_set_next_rel (instance->priv->connection, 1);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
+
+        res = xmmsc_playback_tickle (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_do_prev (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
 
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playlist_set_next_rel (instance->priv->connection, -1));
-        xmmsc_result_unref (xmmsc_playback_tickle (instance->priv->connection));
+        res = xmmsc_playlist_set_next_rel (instance->priv->connection, -1);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
+
+        res = xmmsc_playback_tickle (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
+
 }
 
 void
 ario_xmms_do_play (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playback_start (instance->priv->connection));
+        res = xmmsc_playback_start (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_do_play_pos (gint id)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
-
-        xmmsc_result_unref (xmmsc_playback_start (instance->priv->connection));
-        xmmsc_result_unref (xmmsc_playlist_set_next (instance->priv->connection, id));
-        xmmsc_result_unref (xmmsc_playback_tickle (instance->priv->connection));
+        res  = xmmsc_playback_start (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
+        res  = xmmsc_playlist_set_next (instance->priv->connection, id);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
+        res = xmmsc_playback_tickle (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_do_pause (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playback_pause (instance->priv->connection));
+        res = xmmsc_playback_pause (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_do_stop (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playback_stop (instance->priv->connection));
+        res = xmmsc_playback_stop (instance->priv->connection);
+        ario_xmms_result_wait (res);
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_set_current_elapsed (const gint elapsed)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playback_seek_ms (instance->priv->connection, elapsed * 1000));
+        res = xmmsc_playback_seek_ms (instance->priv->connection, elapsed * 1000);
+        ario_xmms_result_wait(res);
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_set_current_volume (const gint volume)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+        xmmsc_result_t *res2;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        xmmsc_result_unref (xmmsc_playback_volume_set (instance->priv->connection, "left", volume));
-        xmmsc_result_unref (xmmsc_playback_volume_set (instance->priv->connection, "right", volume));
+        res = xmmsc_playback_volume_set (instance->priv->connection, "left", volume);
+        res2 = xmmsc_playback_volume_set (instance->priv->connection, "right", volume);
+        ario_xmms_result_wait (res);
+        ario_xmms_result_wait (res2);
+        xmmsc_result_unref (res);
+        xmmsc_result_unref (res2);
 }
 
 void
@@ -996,12 +1081,21 @@ ario_xmms_set_current_random (const gboolean random)
 void
 ario_xmms_set_current_repeat (const gboolean repeat)
 {
+        xmmsc_result_t *res;
+
         ARIO_LOG_FUNCTION_START
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        ARIO_LOG_ERROR ("Not yet implemented for XMMS");
+        if (repeat)
+                res = xmmsc_configval_set (instance->priv->connection, "playlist.repeat_all", "1");
+        else
+                res = xmmsc_configval_set (instance->priv->connection, "playlist.repeat_all", "0");
+        ario_xmms_result_wait (res);
+        g_object_set (G_OBJECT (instance), "repeat", repeat, NULL);
+
+        xmmsc_result_unref (res);
 }
 
 void
@@ -1019,22 +1113,31 @@ void
 ario_xmms_clear (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
+        res = xmmsc_playlist_clear (instance->priv->connection, NULL);
+        ario_xmms_result_wait (res);
 
-        xmmsc_result_unref (xmmsc_playlist_clear (instance->priv->connection, NULL));
+        xmmsc_result_unref (res);
 }
 
 void
 ario_xmms_shuffle (void)
 {
         ARIO_LOG_FUNCTION_START
+        xmmsc_result_t *res;
+
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        ARIO_LOG_ERROR ("Not yet implemented for XMMS");
+        res = xmmsc_playlist_shuffle (instance->priv->connection, NULL);
+        ario_xmms_result_wait (res);
+
+        xmmsc_result_unref (res);
 }
 
 static void
@@ -1043,8 +1146,7 @@ ario_xmms_queue_commit (void)
         ARIO_LOG_FUNCTION_START
         GSList *tmp;
         ArioServerQueueAction *queue_action;
-        gchar *pattern = NULL, *tmp_pattern;
-        xmmsc_coll_t *coll;
+        xmmsc_result_t *res;
 
         /* check if there is a connection */
         if (!instance->priv->connection)
@@ -1054,13 +1156,9 @@ ario_xmms_queue_commit (void)
                 queue_action = (ArioServerQueueAction *) tmp->data;
                 if (queue_action->type == ARIO_SERVER_ACTION_ADD) {
                         if (queue_action->path) {
-                                if (!pattern) {
-                                        pattern = g_strdup_printf ("url:\"%s\"", queue_action->path);
-                                } else {
-                                        tmp_pattern = g_strdup_printf ("%s OR url:\"%s\"", pattern, queue_action->path);
-                                        g_free (pattern);
-                                        pattern = tmp_pattern;
-                                }
+                                res = xmmsc_playlist_add_url (instance->priv->connection, NULL, queue_action->path);
+                                ario_xmms_result_wait(res);
+                                xmmsc_result_unref (res);
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_DELETE_ID) {
                         if(queue_action->id >= 0) {
@@ -1068,29 +1166,52 @@ ario_xmms_queue_commit (void)
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_DELETE_POS) {
                         if(queue_action->pos >= 0) {
-                                xmmsc_result_unref (xmmsc_playlist_remove_entry (instance->priv->connection, NULL, queue_action->pos));
+                                res = xmmsc_playlist_remove_entry (instance->priv->connection, NULL, queue_action->pos);
+                                ario_xmms_result_wait(res);
+                                xmmsc_result_unref(res);
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_MOVE) {
                         if (queue_action->id >= 0) {
-                                xmmsc_result_unref (xmmsc_playlist_move_entry (instance->priv->connection, NULL, queue_action->old_pos, queue_action->new_pos));
+                                res = xmmsc_playlist_move_entry (instance->priv->connection, NULL, queue_action->old_pos, queue_action->new_pos);
+                                ario_xmms_result_wait(res);
+                                xmmsc_result_unref(res);
                         }
                 } else if (queue_action->type == ARIO_SERVER_ACTION_MOVEID) {
-                                /* TODO */
+                        /* TODO */
                 }
 
-        }
-
-        if (pattern) {
-                if (xmmsc_coll_parse (pattern, &coll)) {
-                        xmmsc_result_unref (xmmsc_playlist_add_collection (instance->priv->connection, NULL, coll, NULL));
-                        xmmsc_coll_unref (coll);
-                }
-                g_free (pattern);
         }
 
         g_slist_foreach (instance->parent.queue, (GFunc) g_free, NULL);
         g_slist_free (instance->parent.queue);
         instance->parent.queue = NULL;
+}
+
+static gchar *
+ario_xmms_encode_url (const char *url)
+{
+        static const char hex[16] = "0123456789abcdef";
+        int i = 0, j = 0;
+        gchar *rv = NULL;
+
+        if (url) {
+                rv = g_malloc0 (strlen (url) * 3 + 1);
+                if (rv) {
+                        for (i = 0, j = 0; url[i]; ++i) {
+                                unsigned char chr = url[i];
+                                if (GOODCHAR (chr)) {
+                                        rv[j++] = chr;
+                                } else if (chr == ' ') {
+                                        rv[j++] = '+';
+                                } else {
+                                        rv[j++] = '%';
+                                        rv[j++] = hex[((chr & 0xf0) >> 4)];
+                                        rv[j++] = hex[(chr & 0x0f)];
+                                }
+                        }
+                }
+        }
+        return rv;
 }
 
 static void
@@ -1101,6 +1222,8 @@ ario_xmms_insert_at (const GSList *songs,
         const GSList *tmp;
         gchar *pattern = NULL, *tmp_pattern;
         xmmsc_coll_t *coll;
+        xmmsc_result_t *res;
+        gchar *url;
 
         /* check if there is a connection */
         if (!instance->priv->connection)
@@ -1108,18 +1231,22 @@ ario_xmms_insert_at (const GSList *songs,
 
         /* For each filename :*/
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
+                url = ario_xmms_encode_url (tmp->data);
                 if (!pattern) {
-                        pattern = g_strdup_printf ("url:\"%s\"", (char*) tmp->data);
+                        pattern = g_strdup_printf ("url:\"%s\"", url);
                 } else {
-                        tmp_pattern = g_strdup_printf ("%s OR url:\"%s\"", pattern, (char *) tmp->data);
+                        tmp_pattern = g_strdup_printf ("%s OR url:\"%s\"", pattern, url);
                         g_free (pattern);
                         pattern = tmp_pattern;
                 }
+                g_free (url);
         }
 
         if (pattern) {
                 if (xmmsc_coll_parse (pattern, &coll)) {
-                        xmmsc_result_unref (xmmsc_playlist_insert_collection (instance->priv->connection, NULL, pos + 1, coll, NULL));
+                        res = xmmsc_playlist_insert_collection (instance->priv->connection, NULL, pos + 1, coll, NULL);
+                        ario_xmms_result_wait (res);
+                        xmmsc_result_unref (res);
                         xmmsc_coll_unref (coll);
                 }
                 g_free (pattern);
@@ -1130,17 +1257,44 @@ static int
 ario_xmms_save_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START
+        const char *tmp;
+        xmmsc_result_t *res;
+        xmmsc_coll_t *coll;
 
-        ARIO_LOG_ERROR ("Not yet implemented for XMMS");
+        if (!ario_xmms_playlist_exists (name)){
+                /* Retrieve the current (active) playlist name */
+                res = xmmsc_playlist_current_active (instance->priv->connection);
+                ario_xmms_result_wait (res);
+                if (xmmsc_result_get_string (res, &tmp)){
+                        xmmsc_result_unref (res);
 
-        return 0;
+                        /* Get this playlist as a collection */
+                        res = xmmsc_coll_get (instance->priv->connection, tmp, "Playlists");
+                        ario_xmms_result_wait (res);
+                        if (xmmsc_result_get_collection (res, &coll)) {
+                                res = xmmsc_playlist_create (instance->priv->connection, name);
+                                ario_xmms_result_wait (res);
+                                xmmsc_result_unref (res);
+
+                                res = xmmsc_playlist_add_idlist (instance->priv->connection, name, coll);
+                                ario_xmms_result_wait (res);
+                                xmmsc_result_unref (res);
+
+                                return 0;
+                        }
+                }
+        }
+        return 1;
 }
 
 static void
 ario_xmms_delete_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START
-        xmmsc_result_unref (xmmsc_playlist_remove (instance->priv->connection, name));
+        xmmsc_result_t *res;
+        res = xmmsc_playlist_remove (instance->priv->connection, name);
+        ario_xmms_result_wait(res);
+        xmmsc_result_unref(res);
 }
 
 static GSList *
@@ -1179,7 +1333,7 @@ static GList *
 ario_xmms_get_songs_info (GSList *paths)
 {
         ARIO_LOG_FUNCTION_START
-        const gchar *path = NULL;
+        gchar *path;
         GSList *temp;
         GList *songs = NULL;
         xmmsc_result_t *res;
@@ -1191,25 +1345,41 @@ ario_xmms_get_songs_info (GSList *paths)
                 return NULL;
 
         for (temp = paths; temp; temp = g_slist_next (temp)) {
-                path = temp->data;
-
+                path = ario_xmms_encode_url (temp->data);
                 res = xmmsc_medialib_get_id (instance->priv->connection, path);
                 ario_xmms_result_wait (res);
-
-                if (!xmmsc_result_get_uint(res, &id)) {
-                        ARIO_LOG_ERROR ("Broken result");
+                if (xmmsc_result_get_uint (res, &id) && id > 0) {
                         xmmsc_result_unref (res);
-                        continue;
+                        res = xmmsc_medialib_get_info (instance->priv->connection, id);
+                        ario_xmms_result_wait (res);
+
+                        song = ario_xmms_get_song_from_res (res);
+                        songs = g_list_append (songs, song);
+                } else {
+                        ARIO_LOG_ERROR ("Broken result or path not found");
                 }
                 xmmsc_result_unref (res);
-                res = xmmsc_medialib_get_info (instance->priv->connection, id);
-                ario_xmms_result_wait (res);
-
-                song = ario_xmms_get_song_from_res (res);
-                songs = g_list_append (songs, song);
+                g_free (path);
         }
 
         return songs;
+}
+
+/*
+ *ensure that the music directory is formatted as follow
+ *   /path/to/music/dir
+ *i.e an absolute path NOT ended by a slash.
+ */
+static gboolean
+ario_xmms_is_usable_music_directory (const gchar *path)
+{
+        if (path) {
+                if (g_path_is_absolute (path)
+                    && ario_file_test (path, G_FILE_TEST_IS_DIR)) {
+                        return TRUE;
+                }
+        }
+        return FALSE;
 }
 
 static ArioServerFileList *
@@ -1217,12 +1387,72 @@ ario_xmms_list_files (const char *path,
                       gboolean recursive)
 {
         ARIO_LOG_FUNCTION_START
-        ArioServerFileList *files = (ArioServerFileList *) g_malloc0 (sizeof (ArioServerFileList));
+        xmmsc_result_t *res;
+        gchar *url;
+        gint url_length;
+        const gchar *decode_url;
+        gchar *musicdir;
+        gchar *full_path;
+        ArioServerFileList *files;
+        GFile *file;
 
-        ARIO_LOG_ERROR ("Not yet implemented for XMMS");
-        /* TODO:
-         * pattern: url ~? in:?
-         * */
+        files = (ArioServerFileList *) g_malloc0 (sizeof (ArioServerFileList));
+
+        /* check if there is a connection */
+        if (!instance->priv->connection)
+                return files;
+
+        musicdir = ario_profiles_get_current (ario_profiles_get ())->musicdir;
+
+        if (!ario_xmms_is_usable_music_directory (musicdir))
+                return files;
+
+        file = g_file_new_for_path (musicdir);
+        url = g_file_get_uri (file);
+        url_length = strlen (url) + 1;
+
+        full_path = g_build_filename (url, path, NULL);
+        g_free (url);
+
+        res = xmmsc_xform_media_browse (instance->priv->connection, full_path);
+        g_free (full_path);
+        ario_xmms_result_wait (res);
+
+        for (;xmmsc_result_list_valid (res); xmmsc_result_list_next (res)) {
+                xmmsc_result_value_type_t type;
+                const gchar *r;
+                gint d;
+
+                type = xmmsc_result_get_dict_entry_type (res, "realpath");
+                if (type != XMMSC_RESULT_VALUE_TYPE_NONE) {
+                        xmmsc_result_get_dict_entry_string (res, "realpath", &r);
+                } else {
+                        xmmsc_result_get_dict_entry_string (res, "path", &r);
+                }
+                decode_url = xmmsc_result_decode_url (res, r);
+                xmmsc_result_get_dict_entry_int (res, "isdir", &d);
+                if (d) {
+                        files->directories = g_slist_append (files->directories, g_strdup (decode_url + url_length));
+                } else {
+                        uint32_t id;
+                        xmmsc_result_t *res2;
+                        xmmsc_result_t *res3;
+                        res2 = xmmsc_medialib_get_id (instance->priv->connection, r);
+                        ario_xmms_result_wait (res2);
+                        if (xmmsc_result_get_uint (res2, &id)) {
+                                if (id > 0) {
+                                        res3 = xmmsc_medialib_get_info (instance->priv->connection, id);
+                                        ario_xmms_result_wait (res3);
+                                        files->songs = g_slist_append (files->songs, ario_xmms_get_song_from_res (res3));
+                                        xmmsc_result_unref (res3);
+                                }
+                        } else {
+                                ARIO_LOG_ERROR ("Broken result");
+                        }
+                        xmmsc_result_unref (res2);
+                }
+        }
+        xmmsc_result_unref (res);
 
         return files;
 }
