@@ -1087,8 +1087,16 @@ ario_tree_fill (ArioTree *tree)
                         gtk_tree_selection_select_path (tree->priv->selection, path);
                 }
         } else {
-                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (tree->priv->model), &iter))
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (tree->priv->model), &iter)) {
                         gtk_tree_selection_select_iter (tree->priv->selection, &iter);
+                        path = gtk_tree_model_get_path (GTK_TREE_MODEL (tree->priv->model), &iter);
+                        gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (tree->priv->tree),
+                                                      path,
+                                                      NULL,
+                                                      TRUE,
+                                                      0, 0);
+                        gtk_tree_path_free (path);
+                }
         }
 
         g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
