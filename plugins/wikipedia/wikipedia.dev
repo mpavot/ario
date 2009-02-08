@@ -12,7 +12,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=-DBUILDING_DLL=1_@@_-mms-bitfields _@@_
 CppCompiler=-DBUILDING_DLL=1_@@_
-Linker=--no-export-all-symbols --add-stdcall-alias_@@_-lglib-2.0_@@_-lpangocairo-1.0_@@_-lpangowin32-1.0_@@_-latk-1.0_@@_-lgdk_pixbuf-2.0_@@_-lgdk-win32-2.0_@@_-lpango-1.0_@@_-lgmodule-2.0_@@_-lgobject-2.0_@@_-lgthread-2.0_@@_-lgtk-win32-2.0_@@_-lcairo_@@_-llibxml2_@@_-lzlib_@@_-llibcurl_@@_-llibgettextsrc_@@_-llibintl_@@_-lWs2_32_@@_-lglade-2.0_@@_-lario_@@_
+Linker=--no-export-all-symbols --add-stdcall-alias_@@_-lglib-2.0_@@_-lpangocairo-1.0_@@_-lpangowin32-1.0_@@_-latk-1.0_@@_-lgdk_pixbuf-2.0_@@_-lgdk-win32-2.0_@@_-lpango-1.0_@@_-lgmodule-2.0_@@_-lgobject-2.0_@@_-lgthread-2.0_@@_-lgtk-win32-2.0_@@_-lcairo_@@_-llibxml2_@@_-lzlib_@@_-llibcurl_@@_-llibgettextsrc_@@_-llibintl_@@_-lWs2_32_@@_-lario_@@_
 IsCpp=0
 Icon=
 ExeOutput=

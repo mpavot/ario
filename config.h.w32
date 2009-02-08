@@ -95,6 +95,7 @@
 
 #define DATA_PATH "data\\"
 #define PIXMAP_PATH "data\\"
-#define UI_PATH "data\\"
+#define UI_PATH "data\\ui\\"
 #define LOCALE_DIR "po\\"
 #define ARIO_PLUGIN_DIR "plugins\\"
+#define ARIO_PLUGIN_DATA_DIR "plugins\\"

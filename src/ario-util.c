@@ -30,10 +30,9 @@
 #include "ario-debug.h"
 #include "covers/ario-cover.h"
 #include "preferences/ario-preferences.h"
+#include <gcrypt.h>
 #ifdef WIN32
 #include <windows.h>
-#else
-#include <gcrypt.h>
 #endif
 
 #define MAX_COVERS_IN_DRAG 3
@@ -473,7 +472,6 @@ ario_util_format_keyword (const char *keyword)
         return ret;
 }
 
-#ifndef WIN32
 gchar *
 ario_util_md5 (const char *string)
 {
@@ -495,7 +493,6 @@ ario_util_md5 (const char *string)
 
         return (g_strdup (md5_response));
 }
-#endif
 
 #define DRAG_SIZE 70
 #define DRAG_COVER_STEP 0.15
