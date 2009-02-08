@@ -213,8 +213,7 @@ AM_CPPFLAGS = \
                 -DDATA_PATH=\""$(pkgdatadir)/data/"\"\
                 -DUI_PATH=\""$(pkgdatadir)/ui/"\"\
         	-DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
-        	-DARIO_PLUGIN_DATA_DIR=\"$(PLUGIN_DATA_DIR)\"\
-                -DGLADE_PATH=\""$(pkgdatadir)/glade/"\"
+        	-DARIO_PLUGIN_DATA_DIR=\"$(PLUGIN_DATA_DIR)\"
 if MPD_GLIB
 AM_CPPFLAGS += -DMPD_GLIB
 endif

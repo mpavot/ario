@@ -93,7 +93,6 @@
 /* Version number of package */
 #define VERSION "1.2"
 
-#define GLADE_PATH "data\\glade\\"
 #define DATA_PATH "data\\"
 #define PIXMAP_PATH "data\\"
 #define UI_PATH "data\\"

@@ -8,12 +8,12 @@ copy ario.exe delivery
 copy ario.dll delivery
 
 mkdir delivery\data
+mkdir delivery\data\ui
 copy data\*.png delivery\data
 copy data\profiles.xml.default delivery\data
-copy data\ario-ui.xml delivery\data\
+copy data\ario-ui.xml delivery\data\ui
 
-mkdir delivery\data\glade
-copy data\glade\*.glade delivery\data\glade\
+copy data\ui\*.ui delivery\data\ui\
 
 mkdir delivery\plugins
 mkdir delivery\plugins\icons
@@ -32,7 +32,7 @@ copy plugins\radios\radios.xml.default delivery\plugins
 copy plugins\radios\radios.ario-plugin.w32 delivery\plugins\radios.ario-plugin
 
 copy plugins\information\libinformation.dll delivery\plugins
-copy plugins\information\information.glade delivery\plugins
+copy plugins\information\information.ui delivery\plugins
 copy plugins\information\information.ario-plugin.w32 delivery\plugins\information.ario-plugin
 
 mkdir delivery\po
