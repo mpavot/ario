@@ -111,13 +111,13 @@ _ario_plugin_info_new (const gchar *file)
         ArioPluginInfo *info;
         GKeyFile *plugin_file = NULL;
         gchar *str;
-	gchar *locale = NULL;
+        gchar *locale = NULL;
 
 #ifdef WIN32
-	gchar *tmp;
-	tmp = g_win32_getlocale ();
-	locale = g_ascii_strdown (tmp, -1);
-	g_free (tmp);
+        gchar *tmp;
+        tmp = g_win32_getlocale ();
+        locale = g_ascii_strdown (tmp, -1);
+        g_free (tmp);
 #endif
         g_return_val_if_fail (file != NULL, NULL);
 
@@ -263,7 +263,7 @@ _ario_plugin_info_new (const gchar *file)
            set it as available */
         info->available = TRUE;
 #ifdef WIN32
-	g_free (locale);
+        g_free (locale);
 #endif
 
         return info;
@@ -275,7 +275,7 @@ error:
         g_free (info);
         g_key_file_free (plugin_file);
 #ifdef WIN32
-	g_free (locale);
+        g_free (locale);
 #endif
 
         return NULL;

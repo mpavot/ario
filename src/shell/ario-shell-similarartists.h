@@ -49,7 +49,8 @@ GType              ario_shell_similarartists_get_type         (void) G_GNUC_CONS
 
 GtkWidget *        ario_shell_similarartists_new              (void);
 
-void               ario_shell_similarartists_add_similar_to_playlist    (const gchar *artist);
+void               ario_shell_similarartists_add_similar_to_playlist    (const gchar *artist,
+                                                                         const int nb_entries);
 
 G_END_DECLS
 

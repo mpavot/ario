@@ -29,7 +29,6 @@
 #include "covers/ario-cover-manager.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/ario-conf.h"
-#include "ario-avahi.h"
 #include "ario-debug.h"
 
 static void ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences);

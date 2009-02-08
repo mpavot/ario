@@ -24,6 +24,7 @@ glade_DATA = glade/browser-prefs.glade	        \
 	     glade/cover-prefs.glade		\
 	     glade/proxy-prefs.glade		\
 	     glade/interface-prefs.glade	\
+	     glade/playlist-prefs.glade		\
 	     glade/trayicon-prefs.glade	        \
 	     glade/server-prefs.glade		\
 	     glade/cover-progress.glade         \

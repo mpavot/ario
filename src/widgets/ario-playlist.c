@@ -917,13 +917,16 @@ ario_playlist_add_dir (const gchar *dir,
 static void
 ario_playlist_add_criterias (const GSList *criterias,
                              const gint x, const gint y,
-                             const gboolean play)
+                             const gboolean play,
+                             const gint nb_entries)
 {
         ARIO_LOG_FUNCTION_START
-        GSList *filenames = NULL, *songs = NULL;
+        GSList *filenames = NULL, *tmp_filenames = NULL, *songs = NULL;
         const GSList *tmp_criteria, *tmp_songs;
         const ArioServerCriteria *criteria;
         ArioServerSong *server_song;
+        int nb_filenames, random, i = 0;
+        gchar *filename;
 
         /* For each criteria :*/
         for (tmp_criteria = criterias; tmp_criteria; tmp_criteria = g_slist_next (tmp_criteria)) {
@@ -941,12 +944,32 @@ ario_playlist_add_criterias (const GSList *criterias,
                 g_slist_free (songs);
         }
 
-        ario_playlist_add_songs (filenames,
+        if (nb_entries > 0 && filenames) {
+                nb_filenames = g_slist_length (filenames);
+                if (nb_filenames > nb_entries) {
+                        while (i < nb_entries) {
+                                random = rand () % nb_filenames;
+                                filename = g_slist_nth_data (filenames, random);
+                                if (!g_slist_find (tmp_filenames, filename)) {
+                                        tmp_filenames = g_slist_append (tmp_filenames, filename);
+                                        ++i;
+                                }
+                        }
+                } else {
+                        tmp_filenames = filenames;
+                }
+        } else {
+                tmp_filenames = filenames;
+        }
+
+        ario_playlist_add_songs (tmp_filenames,
                                  x, y,
                                  play);
 
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
+        if (filenames != tmp_filenames)
+                g_slist_free (tmp_filenames);
 }
 
 static void
@@ -1014,7 +1037,7 @@ ario_playlist_drop_criterias (const int x, const int y,
         g_strfreev (criterias_str);
 
         ario_playlist_add_criterias (criterias,
-                                     x, y, FALSE);
+                                     x, y, FALSE, -1);
 
         g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);
@@ -1049,7 +1072,8 @@ ario_playlist_append_server_songs (const GSList *songs,
 
 void
 ario_playlist_append_artists (const GSList *artists,
-                              const gboolean play)
+                              const gboolean play,
+                              const gint nb_entries)
 {
         ARIO_LOG_FUNCTION_START
         ArioServerAtomicCriteria *atomic_criteria;
@@ -1067,7 +1091,7 @@ ario_playlist_append_artists (const GSList *artists,
                 criterias = g_slist_append (criterias, criteria);
         }
 
-        ario_playlist_append_criterias (criterias, play);
+        ario_playlist_append_criterias (criterias, play, nb_entries);
 
         g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);
@@ -1083,10 +1107,11 @@ ario_playlist_append_dir (const gchar *dir,
 
 void
 ario_playlist_append_criterias (const GSList *criterias,
-                                const gboolean play)
+                                const gboolean play,
+                                const gint nb_entries)
 {
         ARIO_LOG_FUNCTION_START
-        ario_playlist_add_criterias (criterias, -1, -1, play);
+        ario_playlist_add_criterias (criterias, -1, -1, play, nb_entries);
 }
 
 static void

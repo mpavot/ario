@@ -33,6 +33,7 @@
 #include "widgets/ario-header.h"
 #include "widgets/ario-status-bar.h"
 #include "notification/ario-notification-manager.h"
+#include "playlist/ario-playlist-manager.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell-preferences.h"
 #include "shell/ario-shell-lyrics.h"
@@ -107,6 +108,7 @@ struct ArioShellPrivate
         GtkWidget *window;
 
         ArioCoverHandler *cover_handler;
+        ArioPlaylistManager *playlist_manager;
         ArioNotificationManager *notification_manager;
         GtkWidget *header;
         GtkWidget *vpaned;
@@ -255,6 +257,7 @@ ario_shell_finalize (GObject *object)
 
         gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
+        g_object_unref (shell->priv->playlist_manager);
         g_object_unref (shell->priv->notification_manager);
 #ifdef ENABLE_EGGTRAYICON
         gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));;
@@ -417,6 +420,7 @@ ario_shell_construct (ArioShell *shell,
         if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
                 gtk_widget_hide (GTK_WIDGET (shell->priv->tray_icon));
 #endif
+        shell->priv->playlist_manager = ario_playlist_manager_get_instance ();
         shell->priv->notification_manager = ario_notification_manager_get_instance ();
         shell->priv->vpaned = gtk_vpaned_new ();
         shell->priv->status_bar = ario_status_bar_new ();
@@ -814,7 +818,7 @@ ario_shell_cmd_add_similar (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START
 
-        ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist ());
+        ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (), -1);
 }
 
 static void

@@ -29,6 +29,7 @@
 #include "preferences/ario-cover-preferences.h"
 #include "preferences/ario-lyrics-preferences.h"
 #include "preferences/ario-interface-preferences.h"
+#include "preferences/ario-playlist-preferences.h"
 #include "preferences/ario-proxy-preferences.h"
 #include "preferences/ario-server-preferences.h"
 #include "preferences/ario-trayicon-preferences.h"
@@ -117,6 +118,11 @@ ario_shell_preferences_new (void)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Library")));
+
+        widget = ario_playlist_preferences_new ();
+        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
+                                  widget,
+                                  gtk_label_new (_("Playlist")));
 
         widget = ario_cover_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),

@@ -29,7 +29,6 @@
 #include "notification/ario-notification-manager.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/ario-conf.h"
-#include "ario-avahi.h"
 #include "ario-debug.h"
 
 static void ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences);

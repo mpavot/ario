@@ -1179,7 +1179,7 @@ ario_tree_cmd_add (ArioTree *tree,
 
         criterias = ario_tree_get_criterias (tree);
 
-        ario_playlist_append_criterias (criterias, play);
+        ario_playlist_append_criterias (criterias, play, -1);
 
         g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);

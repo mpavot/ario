@@ -28,7 +28,6 @@
 #include "preferences/ario-preferences.h"
 #include "lib/rb-glade-helpers.h"
 #include "lib/ario-conf.h"
-#include "ario-avahi.h"
 #include "ario-debug.h"
 
 static void ario_interface_preferences_sync_interface (ArioInterfacePreferences *interface_preferences);
