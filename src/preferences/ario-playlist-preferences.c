@@ -20,13 +20,12 @@
 #include "preferences/ario-playlist-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 #include "playlist/ario-playlist-manager.h"
@@ -64,7 +63,7 @@ ario_playlist_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioPlaylistPreferences *playlist_preferences;
-        GladeXML *xml;
+        GtkBuilder *builder;
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
@@ -75,16 +74,15 @@ ario_playlist_preferences_new (void)
 
         g_return_val_if_fail (playlist_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "playlist-prefs.glade",
-                                "playlist_vbox",
-                                playlist_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "playlist-prefs.ui",
+                                           playlist_preferences);
 
         playlist_preferences->priv->playlist_combobox = 
-                glade_xml_get_widget (xml, "playlist_combobox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "playlist_combobox"));
         playlist_preferences->priv->vbox = 
-                glade_xml_get_widget (xml, "vbox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
 
-        rb_glade_boldify_label (xml, "playlist_label");
+        gtk_builder_helpers_boldify_label (builder, "playlist_label");
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
         playlist_modes = ario_playlist_manager_get_modes (ario_playlist_manager_get_instance ());
@@ -108,9 +106,9 @@ ario_playlist_preferences_new (void)
 
         ario_playlist_preferences_sync_playlist (playlist_preferences);
 
-        gtk_box_pack_start (GTK_BOX (playlist_preferences), glade_xml_get_widget (xml, "playlist_vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (playlist_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "playlist_vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
 
         return GTK_WIDGET (playlist_preferences);
 }

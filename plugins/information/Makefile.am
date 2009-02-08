@@ -27,8 +27,8 @@ INCLUDES = 						\
         -Wnested-externs -Wpointer-arith \
         -Wcast-align -Wall
 
-gladedir = $(plugindatadir)
-glade_DATA = information.glade
+uidir = $(plugindatadir)
+ui_DATA = information.ui
 
 plugin_in_files = information.ario-plugin.desktop.in
 
@@ -37,7 +37,7 @@ plugin_in_files = information.ario-plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
 
 EXTRA_DIST = $(plugin_in_files)\
-	     $(glade_DATA)
+	     $(ui_DATA)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

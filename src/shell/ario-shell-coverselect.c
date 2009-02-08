@@ -26,7 +26,7 @@
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-manager.h"
 #include "covers/ario-cover-handler.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "ario-profiles.h"
@@ -193,7 +193,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         ArioShellCoverselect *ario_shell_coverselect;
         ArioShellCoverselectClass *klass;
         GObjectClass *parent_class;
-        GladeXML *xml = NULL;
+        GtkBuilder *builder;
         GtkWidget *vbox;
         GtkTargetList *targets;
         GtkTargetEntry *target_entry;
@@ -208,39 +208,38 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         ario_shell_coverselect = ARIO_SHELL_COVERSELECT (parent_class->constructor (type, n_construct_properties,
                                                                                     construct_properties));
 
-        xml = rb_glade_xml_new (GLADE_PATH "cover-select.glade", "vbox", NULL);
-        vbox = glade_xml_get_widget (xml, "vbox");
+        builder = gtk_builder_helpers_new (UI_PATH "cover-select.ui",
+                                           NULL);
+        vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
         ario_shell_coverselect->priv->artist_label =
-                glade_xml_get_widget (xml, "artist_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_label"));
         ario_shell_coverselect->priv->album_label =
-                glade_xml_get_widget (xml, "album_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_label"));
         ario_shell_coverselect->priv->notebook =
-                glade_xml_get_widget (xml, "notebook");
+                GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
         ario_shell_coverselect->priv->artist_entry =
-                glade_xml_get_widget (xml, "artist_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_entry"));
         ario_shell_coverselect->priv->album_entry =
-                glade_xml_get_widget (xml, "album_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_entry"));
         ario_shell_coverselect->priv->get_covers_button =
-                glade_xml_get_widget (xml, "search_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "search_button"));
         ario_shell_coverselect->priv->current_cover =
-                glade_xml_get_widget (xml, "current_cover");
+                GTK_WIDGET (gtk_builder_get_object (builder, "current_cover"));
         ario_shell_coverselect->priv->listview =
-                glade_xml_get_widget (xml, "listview");
+                GTK_WIDGET (gtk_builder_get_object (builder, "listview"));
         ario_shell_coverselect->priv->option_small =
-                glade_xml_get_widget (xml, "option_small");
+                GTK_WIDGET (gtk_builder_get_object (builder, "option_small"));
         ario_shell_coverselect->priv->option_medium =
-                glade_xml_get_widget (xml, "option_medium");
+                GTK_WIDGET (gtk_builder_get_object (builder, "option_medium"));
         ario_shell_coverselect->priv->option_large =
-                glade_xml_get_widget (xml, "option_large");
+                GTK_WIDGET (gtk_builder_get_object (builder, "option_large"));
         ario_shell_coverselect->priv->local_file_entry =
-                glade_xml_get_widget (xml, "local_file_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "local_file_entry"));
         ario_shell_coverselect->priv->local_open_button =
-                glade_xml_get_widget (xml, "local_open_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "local_open_button"));
 
-        rb_glade_boldify_label (xml, "static_artist_label");
-        rb_glade_boldify_label (xml, "static_album_label");
-
-        g_object_unref (G_OBJECT (xml));
+        gtk_builder_helpers_boldify_label (builder, "static_artist_label");
+        gtk_builder_helpers_boldify_label (builder, "static_album_label");
 
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (ario_shell_coverselect)->vbox), 
                            vbox);
@@ -300,6 +299,8 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                           "drag_data_received",
                           G_CALLBACK (ario_shell_coverselect_drag_leave_cb),
                           ario_shell_coverselect);
+
+        g_object_unref (builder);
 
         return G_OBJECT (ario_shell_coverselect);
 }

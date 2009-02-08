@@ -20,14 +20,13 @@
 #include "preferences/ario-cover-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
 #include "covers/ario-cover-manager.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 
@@ -101,7 +100,7 @@ GtkWidget *
 ario_cover_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
-        GladeXML *xml;
+        GtkBuilder *builder;
         ArioCoverPreferences *cover_preferences;
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
@@ -113,21 +112,20 @@ ario_cover_preferences_new (void)
 
         g_return_val_if_fail (cover_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "cover-prefs.glade",
-                                "covers_vbox",
-                                cover_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "cover-prefs.ui",
+                                           cover_preferences);
 
         cover_preferences->priv->covertree_check =
-                glade_xml_get_widget (xml, "covertree_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "covertree_checkbutton"));
         cover_preferences->priv->automatic_check =
-                glade_xml_get_widget (xml, "automatic_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "automatic_checkbutton"));
         cover_preferences->priv->amazon_country =
-                glade_xml_get_widget (xml, "amazon_country_combobox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "amazon_country_combobox"));
         cover_preferences->priv->covers_treeview = 
-                glade_xml_get_widget (xml, "covers_treeview");
+                GTK_WIDGET (gtk_builder_get_object (builder, "covers_treeview"));
 
-        rb_glade_boldify_label (xml, "cover_frame_label");
-        rb_glade_boldify_label (xml, "cover_sources_frame_label");
+        gtk_builder_helpers_boldify_label (builder, "cover_frame_label");
+        gtk_builder_helpers_boldify_label (builder, "cover_sources_frame_label");
 
         list_store = gtk_list_store_new (1, G_TYPE_STRING);
 
@@ -179,9 +177,9 @@ ario_cover_preferences_new (void)
 
         ario_cover_preferences_sync_cover (cover_preferences);
 
-        gtk_box_pack_start (GTK_BOX (cover_preferences), glade_xml_get_widget (xml, "covers_vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (cover_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "covers_vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
         return GTK_WIDGET (cover_preferences);
 }
 

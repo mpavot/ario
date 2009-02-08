@@ -24,7 +24,7 @@
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "ario-debug.h"
 #include "ario-util.h"
 #include "ario-profiles.h"
@@ -158,59 +158,56 @@ ario_shell_songinfos_new (GSList *paths)
         ARIO_LOG_FUNCTION_START
         ArioShellSonginfos *shell_songinfos;
         GtkWidget *widget;
-        GladeXML *xml;
+        GtkBuilder *builder;
         GList *tmp;
 
         shell_songinfos = g_object_new (TYPE_ARIO_SHELL_SONGINFOS, NULL);
 
         g_return_val_if_fail (shell_songinfos->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "song-infos.glade",
-                                "vbox",
-                                shell_songinfos);
+        builder = gtk_builder_helpers_new (UI_PATH "song-infos.ui",
+                                           shell_songinfos);
 
-        widget = glade_xml_get_widget (xml, "vbox");
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
 
         shell_songinfos->priv->title_entry =
-                glade_xml_get_widget (xml, "title_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "title_entry"));
         shell_songinfos->priv->artist_entry =
-                glade_xml_get_widget (xml, "artist_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_entry"));
         shell_songinfos->priv->album_entry =
-                glade_xml_get_widget (xml, "album_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_entry"));
         shell_songinfos->priv->track_entry =
-                glade_xml_get_widget (xml, "track_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "track_entry"));
         shell_songinfos->priv->length_label =
-                glade_xml_get_widget (xml, "length_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "length_label"));
         shell_songinfos->priv->date_entry =
-                glade_xml_get_widget (xml, "date_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "date_entry"));
         shell_songinfos->priv->file_label =
-                glade_xml_get_widget (xml, "file_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "file_label"));
         shell_songinfos->priv->genre_entry =
-                glade_xml_get_widget (xml, "genre_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "genre_entry"));
         shell_songinfos->priv->composer_label =
-                glade_xml_get_widget (xml, "composer_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "composer_label"));
         shell_songinfos->priv->performer_label =
-                glade_xml_get_widget (xml, "performer_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "performer_label"));
         shell_songinfos->priv->disc_label =
-                glade_xml_get_widget (xml, "disc_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "disc_label"));
         shell_songinfos->priv->comment_entry =
-                glade_xml_get_widget (xml, "comment_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "comment_entry"));
 
-        rb_glade_boldify_label (xml, "frame_label");
-        rb_glade_boldify_label (xml, "title_const_label");
-        rb_glade_boldify_label (xml, "artist_const_label");
-        rb_glade_boldify_label (xml, "album_const_label");
-        rb_glade_boldify_label (xml, "track_const_label");
-        rb_glade_boldify_label (xml, "length_const_label");
-        rb_glade_boldify_label (xml, "date_const_label");
-        rb_glade_boldify_label (xml, "file_const_label");
-        rb_glade_boldify_label (xml, "genre_const_label");
-        rb_glade_boldify_label (xml, "composer_const_label");
-        rb_glade_boldify_label (xml, "performer_const_label");
-        rb_glade_boldify_label (xml, "disc_const_label");
-        rb_glade_boldify_label (xml, "comment_const_label");
-
-        g_object_unref (G_OBJECT (xml));
+        gtk_builder_helpers_boldify_label (builder, "frame_label");
+        gtk_builder_helpers_boldify_label (builder, "title_const_label");
+        gtk_builder_helpers_boldify_label (builder, "artist_const_label");
+        gtk_builder_helpers_boldify_label (builder, "album_const_label");
+        gtk_builder_helpers_boldify_label (builder, "track_const_label");
+        gtk_builder_helpers_boldify_label (builder, "length_const_label");
+        gtk_builder_helpers_boldify_label (builder, "date_const_label");
+        gtk_builder_helpers_boldify_label (builder, "file_const_label");
+        gtk_builder_helpers_boldify_label (builder, "genre_const_label");
+        gtk_builder_helpers_boldify_label (builder, "composer_const_label");
+        gtk_builder_helpers_boldify_label (builder, "performer_const_label");
+        gtk_builder_helpers_boldify_label (builder, "disc_const_label");
+        gtk_builder_helpers_boldify_label (builder, "comment_const_label");
 
         gtk_widget_set_size_request(shell_songinfos->priv->artist_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->album_entry, 280, -1);
@@ -303,6 +300,8 @@ ario_shell_songinfos_new (GSList *paths)
                                          GTK_RESPONSE_CLOSE);
 
         ario_shell_songinfos_set_current_song (shell_songinfos);
+
+        g_object_unref (builder);
 
         return GTK_WIDGET (shell_songinfos);
 }

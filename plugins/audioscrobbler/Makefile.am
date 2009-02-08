@@ -28,8 +28,8 @@ INCLUDES = 						\
         -Wnested-externs -Wpointer-arith \
         -Wcast-align -Wall
 
-gladedir = $(plugindatadir)
-glade_DATA = audioscrobbler-prefs.glade
+uidir = $(plugindatadir)
+ui_DATA = audioscrobbler-prefs.ui
 
 plugin_in_files = audioscrobbler.ario-plugin.desktop.in
 
@@ -48,7 +48,7 @@ icon_DATA = audioscrobbler.png
 EXTRA_DIST = $(plugin_in_files)         \
              $(plugin_DATA)             \
              $(icon_DATA)               \
-	     $(glade_DATA)
+	     $(ui_DATA)
 
 CLEANFILES = $(BUILT_SOURCES)
 

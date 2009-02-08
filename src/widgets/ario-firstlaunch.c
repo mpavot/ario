@@ -23,8 +23,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
-#include <glade/glade.h>
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 #include "ario-profiles.h"
@@ -90,7 +89,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         ARIO_LOG_FUNCTION_START
         GdkPixbuf *pixbuf;
         GtkWidget *label, *vbox, *connection_vbox;
-        GladeXML *xml;
+        GtkBuilder *builder;
 
         firstlaunch->priv = ARIO_FIRSTLAUNCH_GET_PRIVATE (firstlaunch);
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
@@ -110,19 +109,18 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
 
         /* Page 2 */
-        xml = rb_glade_xml_new (GLADE_PATH "connection-assistant.glade",
-                                "vbox",
-                                firstlaunch);
+        builder = gtk_builder_helpers_new (UI_PATH "connection-assistant.ui",
+                                           firstlaunch);
 
-        vbox = glade_xml_get_widget (xml, "vbox");
-        connection_vbox = glade_xml_get_widget (xml, "connection_vbox");
+        vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
+        connection_vbox = GTK_WIDGET (gtk_builder_get_object (builder, "connection_vbox"));
 
         gtk_box_pack_start (GTK_BOX (connection_vbox),
                             ario_connection_widget_new (),
                             TRUE, TRUE, 0);
 
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
-        g_object_unref (xml);
+        g_object_unref (builder);
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Configuration"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_CONTENT);
         gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);

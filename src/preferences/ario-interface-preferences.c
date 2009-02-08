@@ -20,13 +20,12 @@
 #include "preferences/ario-interface-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 
@@ -95,49 +94,48 @@ ario_interface_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioInterfacePreferences *interface_preferences;
-        GladeXML *xml;
+        GtkBuilder *builder;
 
         interface_preferences = g_object_new (TYPE_ARIO_INTERFACE_PREFERENCES, NULL);
 
         g_return_val_if_fail (interface_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "interface-prefs.glade",
-                                "interface_vbox",
-                                interface_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "interface-prefs.ui",
+                                           interface_preferences);
 
         interface_preferences->priv->showtabs_check =
-                glade_xml_get_widget (xml, "showtabs_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "showtabs_checkbutton"));
         interface_preferences->priv->hideonclose_check =
-                glade_xml_get_widget (xml, "hideonclose_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "hideonclose_checkbutton"));
         interface_preferences->priv->oneinstance_check =
-                glade_xml_get_widget (xml, "instance_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "instance_checkbutton"));
         interface_preferences->priv->track_checkbutton = 
-                glade_xml_get_widget (xml, "track_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "track_checkbutton"));
         interface_preferences->priv->title_checkbutton = 
-                glade_xml_get_widget (xml, "title_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "title_checkbutton"));
         interface_preferences->priv->artist_checkbutton = 
-                glade_xml_get_widget (xml, "artist_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_checkbutton"));
         interface_preferences->priv->album_checkbutton = 
-                glade_xml_get_widget (xml, "album_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_checkbutton"));
         interface_preferences->priv->genre_checkbutton = 
-                glade_xml_get_widget (xml, "genre_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "genre_checkbutton"));
         interface_preferences->priv->duration_checkbutton = 
-                glade_xml_get_widget (xml, "duration_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "duration_checkbutton"));
         interface_preferences->priv->file_checkbutton = 
-                glade_xml_get_widget (xml, "file_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "file_checkbutton"));
         interface_preferences->priv->date_checkbutton = 
-                glade_xml_get_widget (xml, "date_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "date_checkbutton"));
         interface_preferences->priv->autoscroll_checkbutton = 
-                glade_xml_get_widget (xml, "autoscroll_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "autoscroll_checkbutton"));
 
-        rb_glade_boldify_label (xml, "interface_label");
-        rb_glade_boldify_label (xml, "playlist_label");
+        gtk_builder_helpers_boldify_label (builder, "interface_label");
+        gtk_builder_helpers_boldify_label (builder, "playlist_label");
 
         ario_interface_preferences_sync_interface (interface_preferences);
 
-        gtk_box_pack_start (GTK_BOX (interface_preferences), glade_xml_get_widget (xml, "interface_vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (interface_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "interface_vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
 
         return GTK_WIDGET (interface_preferences);
 }

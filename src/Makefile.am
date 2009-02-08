@@ -50,10 +50,10 @@ libario_la_SOURCES = \
 	lib/bacon-message-connection.h\
 	lib/eggtrayicon.c\
 	lib/eggtrayicon.h\
+	lib/gtk-builder-helpers.c\
+	lib/gtk-builder-helpers.h\
 	lib/libmpdclient.c\
 	lib/libmpdclient.h\
-	lib/rb-glade-helpers.c\
-	lib/rb-glade-helpers.h\
 	lib/libsexy/sexy-tooltip.c\
 	lib/libsexy/sexy-tooltip.h\
         lyrics/ario-lyrics-leoslyrics.c\

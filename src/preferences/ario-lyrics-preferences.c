@@ -20,14 +20,13 @@
 #include "preferences/ario-lyrics-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
 #include "lyrics/ario-lyrics-manager.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 
@@ -81,7 +80,7 @@ GtkWidget *
 ario_lyrics_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
-        GladeXML *xml;
+        GtkBuilder *builder;
         ArioLyricsPreferences *lyrics_preferences;
         GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
@@ -90,14 +89,13 @@ ario_lyrics_preferences_new (void)
 
         g_return_val_if_fail (lyrics_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "lyrics-prefs.glade",
-                                "lyrics_vbox",
-                                lyrics_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "lyrics-prefs.ui",
+                                           lyrics_preferences);
 
         lyrics_preferences->priv->lyrics_treeview = 
-                glade_xml_get_widget (xml, "lyrics_treeview");
+                GTK_WIDGET (gtk_builder_get_object (builder, "lyrics_treeview"));
 
-        rb_glade_boldify_label (xml, "lyrics_sources_frame_label");
+        gtk_builder_helpers_boldify_label (builder, "lyrics_sources_frame_label");
 
         lyrics_preferences->priv->lyrics_model = gtk_list_store_new (N_COLUMN,
                                                                      G_TYPE_BOOLEAN,
@@ -130,9 +128,9 @@ ario_lyrics_preferences_new (void)
 
         ario_lyrics_preferences_sync_lyrics_providers (lyrics_preferences);
 
-        gtk_box_pack_start (GTK_BOX (lyrics_preferences), glade_xml_get_widget (xml, "lyrics_vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (lyrics_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "lyrics_vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
         return GTK_WIDGET (lyrics_preferences);
 }
 

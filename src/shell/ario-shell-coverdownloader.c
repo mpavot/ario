@@ -25,7 +25,7 @@
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-manager.h"
 #include "covers/ario-cover-handler.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "ario-debug.h"
 #include "servers/ario-server.h"
 
@@ -147,7 +147,7 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
         ArioShellCoverdownloader *ario_shell_coverdownloader;
         ArioShellCoverdownloaderClass *klass;
         GObjectClass *parent_class;
-        GladeXML *xml = NULL;
+        GtkBuilder *builder;
         GtkWidget *vbox;
 
         klass = ARIO_SHELL_COVERDOWNLOADER_CLASS (g_type_class_peek (TYPE_ARIO_SHELL_COVERDOWNLOADER));
@@ -156,27 +156,25 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
         ario_shell_coverdownloader = ARIO_SHELL_COVERDOWNLOADER (parent_class->constructor (type, n_construct_properties,
                                                                                             construct_properties));
 
-        xml = rb_glade_xml_new (GLADE_PATH "cover-progress.glade", "vbox", NULL);
-        vbox =
-                glade_xml_get_widget (xml, "vbox");
+        builder = gtk_builder_helpers_new (UI_PATH "cover-progress.ui",
+                                           NULL);
+        vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
         ario_shell_coverdownloader->priv->progress_artist_label =
-                glade_xml_get_widget (xml, "artist_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_label"));
         ario_shell_coverdownloader->priv->progress_album_label =
-                glade_xml_get_widget (xml, "album_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_label"));
         ario_shell_coverdownloader->priv->progressbar =
-                glade_xml_get_widget (xml, "progressbar");
+                GTK_WIDGET (gtk_builder_get_object (builder, "progressbar"));
         ario_shell_coverdownloader->priv->progress_hbox =
-                glade_xml_get_widget (xml, "hbox2");
+                GTK_WIDGET (gtk_builder_get_object (builder, "hbox2"));
         ario_shell_coverdownloader->priv->progress_const_artist_label =
-                glade_xml_get_widget (xml, "const_artist_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "const_artist_label"));
         ario_shell_coverdownloader->priv->cancel_button =
-                glade_xml_get_widget (xml, "cancel_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "cancel_button"));
         ario_shell_coverdownloader->priv->close_button =
-                glade_xml_get_widget (xml, "close_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "close_button"));
 
-        rb_glade_boldify_label (xml, "operation_label");
-
-        g_object_unref (G_OBJECT (xml));
+        gtk_builder_helpers_boldify_label (builder, "operation_label");
 
         gtk_window_set_title (GTK_WINDOW (ario_shell_coverdownloader), _("Music Player Cover Download"));
         gtk_container_add (GTK_CONTAINER (ario_shell_coverdownloader), 
@@ -198,6 +196,8 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
                           "delete_event",
                           G_CALLBACK (ario_shell_coverdownloader_window_delete_cb),
                           ario_shell_coverdownloader);
+
+        g_object_unref (builder);
 
         return G_OBJECT (ario_shell_coverdownloader);
 }

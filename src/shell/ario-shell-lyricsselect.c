@@ -23,7 +23,7 @@
 
 #include <glib/gi18n.h>
 #include "lyrics/ario-lyrics-manager.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "ario-debug.h"
 
 #define CURRENT_LYRICS_SIZE 130
@@ -126,7 +126,7 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
         ArioShellLyricsselect *ario_shell_lyricsselect;
         ArioShellLyricsselectClass *klass;
         GObjectClass *parent_class;
-        GladeXML *xml = NULL;
+        GtkBuilder *builder;
         GtkWidget *vbox;
 
         GtkTreeViewColumn *column;
@@ -138,25 +138,24 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
         ario_shell_lyricsselect = ARIO_SHELL_LYRICSSELECT (parent_class->constructor (type, n_construct_properties,
                                                                                       construct_properties));
 
-        xml = rb_glade_xml_new (GLADE_PATH "lyrics-select.glade", "vbox", NULL);
-        vbox = glade_xml_get_widget (xml, "vbox");
+        builder = gtk_builder_helpers_new (UI_PATH "lyrics-select.ui",
+                                           NULL);
+        vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
         ario_shell_lyricsselect->priv->artist_label =
-                glade_xml_get_widget (xml, "artist_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_label"));
         ario_shell_lyricsselect->priv->title_label =
-                glade_xml_get_widget (xml, "title_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "title_label"));
         ario_shell_lyricsselect->priv->artist_entry =
-                glade_xml_get_widget (xml, "artist_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_entry"));
         ario_shell_lyricsselect->priv->title_entry =
-                glade_xml_get_widget (xml, "title_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "title_entry"));
         ario_shell_lyricsselect->priv->search_button =
-                glade_xml_get_widget (xml, "search_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "search_button"));
         ario_shell_lyricsselect->priv->treeview =
-                glade_xml_get_widget (xml, "treeview");
+                GTK_WIDGET (gtk_builder_get_object (builder, "treeview"));
 
-        rb_glade_boldify_label (xml, "static_artist_label");
-        rb_glade_boldify_label (xml, "static_title_label");
-
-        g_object_unref (G_OBJECT (xml));
+        gtk_builder_helpers_boldify_label (builder, "static_artist_label");
+        gtk_builder_helpers_boldify_label (builder, "static_title_label");
 
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (ario_shell_lyricsselect)->vbox), 
                            vbox);
@@ -221,6 +220,8 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
         g_signal_connect (ario_shell_lyricsselect->priv->search_button,
                           "clicked", G_CALLBACK (ario_shell_lyricsselect_search_cb),
                           ario_shell_lyricsselect);
+
+        g_object_unref (builder);
 
         return G_OBJECT (ario_shell_lyricsselect);
 }

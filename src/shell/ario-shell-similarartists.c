@@ -25,7 +25,7 @@
 #include <libxml/parser.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "widgets/ario-playlist.h"
 #include "ario-debug.h"
 #include "ario-util.h"
@@ -343,7 +343,7 @@ ario_shell_similarartists_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioShellSimilarartists *shell_similarartists;
-        GladeXML *xml;
+        GtkBuilder *builder;
         GtkWidget *treeview;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
@@ -359,10 +359,9 @@ ario_shell_similarartists_new (void)
         g_return_val_if_fail (shell_similarartists->priv != NULL, NULL);
         shell_similarartists->priv->closed = FALSE;
 
-        xml = rb_glade_xml_new (GLADE_PATH "similar-artists.glade",
-                                "vbox",
-                                shell_similarartists);
-        treeview = glade_xml_get_widget (xml, "treeview");
+        builder = gtk_builder_helpers_new (UI_PATH "similar-artists.ui",
+                                           shell_similarartists);
+        treeview = GTK_WIDGET (gtk_builder_get_object (builder, "treeview"));
 
         shell_similarartists->priv->liststore = gtk_list_store_new (N_COLUMN,
                                                                     GDK_TYPE_PIXBUF,
@@ -406,7 +405,7 @@ ario_shell_similarartists_new (void)
         gtk_window_set_default_size (GTK_WINDOW (shell_similarartists), 350, 500);
         gtk_window_set_position (GTK_WINDOW (shell_similarartists), GTK_WIN_POS_CENTER);
 
-        gtk_container_add (GTK_CONTAINER (shell_similarartists), glade_xml_get_widget (xml, "vbox"));
+        gtk_container_add (GTK_CONTAINER (shell_similarartists), GTK_WIDGET (gtk_builder_get_object (builder, "vbox")));
 
         gtk_widget_show_all (GTK_WIDGET (shell_similarartists));
 
@@ -415,7 +414,7 @@ ario_shell_similarartists_new (void)
 
         shell_similarartists->priv->artist = artist;
         ario_shell_similarartists_get_artists (shell_similarartists);
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
 
         return GTK_WIDGET (shell_similarartists);
 }
