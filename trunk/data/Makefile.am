@@ -16,30 +16,33 @@ art_DATA = ario.png		\
 	   volume-max.png	\
 	   volume-min.png
 
-gladedir = $(pkgdatadir)/glade
-glade_DATA = glade/browser-prefs.glade	        \
-             glade/connection-prefs.glade	\
-             glade/connection-assistant.glade	\
-             glade/connection-widget.glade	\
-	     glade/cover-prefs.glade		\
-	     glade/proxy-prefs.glade		\
-	     glade/interface-prefs.glade	\
-	     glade/playlist-prefs.glade		\
-	     glade/trayicon-prefs.glade	        \
-	     glade/server-prefs.glade		\
-	     glade/cover-progress.glade         \
-	     glade/lyrics-select.glade          \
-	     glade/lyrics-prefs.glade           \
-	     glade/cover-select.glade	        \
-	     glade/song-infos.glade	        \
-	     glade/similar-artists.glade        \
-	     glade/stats-prefs.glade
+uidir = $(pkgdatadir)/ui
+ui_DATA = 
 
 appicon_DATA = ario.png
 appicondir = $(datadir)/icons/hicolor/48x48/apps
 
 uidir = $(pkgdatadir)/ui
-ui_DATA = ario-ui.xml
+ui_DATA = ario-ui.xml \
+	     ui/browser-prefs.ui	\
+	     ui/connection-prefs.ui	\
+	     ui/connection-assistant.ui	\
+	     ui/connection-widget.ui	\
+	     ui/cover-prefs.ui		\
+	     ui/proxy-prefs.ui		\
+	     ui/interface-prefs.ui	\
+	     ui/playlist-prefs.ui	\
+	     ui/trayicon-prefs.ui	\
+	     ui/server-prefs.ui		\
+	     ui/cover-progress.ui       \
+	     ui/lyrics-select.ui        \
+	     ui/lyrics-prefs.ui         \
+	     ui/cover-select.ui	        \
+	     ui/song-infos.ui	        \
+	     ui/similar-artists.ui      \
+	     ui/stats-prefs.ui
+
+
 
 alldatadir = $(pkgdatadir)/data
 alldata_DATA = profiles.xml.default 
@@ -48,7 +51,7 @@ EXTRA_DIST = 				\
 	$(desktop_in_files)		\
 	$(art_DATA)	\
 	$(appicon_DATA)	\
-	$(glade_DATA)	\
+	$(ui_DATA)	\
 	$(alldata_DATA)	\
 	$(ui_DATA)
 

@@ -20,14 +20,13 @@
 #include "preferences/ario-server-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
 #include "lib/ario-conf.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "ario-debug.h"
 #include "servers/ario-server.h"
 
@@ -113,7 +112,7 @@ ario_server_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioServerPreferences *server_preferences;
-        GladeXML *xml;
+        GtkBuilder *builder;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
         ArioServer *server = ario_server_get_instance ();
@@ -132,28 +131,27 @@ ario_server_preferences_new (void)
                                  G_CALLBACK (ario_server_preferences_server_changed_cb),
                                  server_preferences, 0);
 
-        xml = rb_glade_xml_new (GLADE_PATH "server-prefs.glade",
-                                "vbox",
-                                server_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "server-prefs.ui",
+                                           server_preferences);
 
         server_preferences->priv->crossfade_checkbutton = 
-                glade_xml_get_widget (xml, "crossfade_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "crossfade_checkbutton"));
         server_preferences->priv->crossfadetime_spinbutton = 
-                glade_xml_get_widget (xml, "crossfadetime_spinbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "crossfadetime_spinbutton"));
         server_preferences->priv->updatedb_label = 
-                glade_xml_get_widget (xml, "updatedb_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "updatedb_label"));
         server_preferences->priv->updatedb_button = 
-                glade_xml_get_widget (xml, "updatedb_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "updatedb_button"));
         server_preferences->priv->outputs_treeview = 
-                glade_xml_get_widget (xml, "outputs_treeview");
+                GTK_WIDGET (gtk_builder_get_object (builder, "outputs_treeview"));
         server_preferences->priv->update_checkbutton = 
-                glade_xml_get_widget (xml, "update_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "update_checkbutton"));
         server_preferences->priv->stopexit_checkbutton = 
-                glade_xml_get_widget (xml, "stopexit_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "stopexit_checkbutton"));
 
-        rb_glade_boldify_label (xml, "crossfade_frame_label");
-        rb_glade_boldify_label (xml, "database_frame_label");
-        rb_glade_boldify_label (xml, "ouputs_frame_label");
+        gtk_builder_helpers_boldify_label (builder, "crossfade_frame_label");
+        gtk_builder_helpers_boldify_label (builder, "database_frame_label");
+        gtk_builder_helpers_boldify_label (builder, "ouputs_frame_label");
 
         server_preferences->priv->outputs_model = gtk_list_store_new (N_COLUMN,
                                                                       G_TYPE_BOOLEAN,
@@ -182,9 +180,9 @@ ario_server_preferences_new (void)
 
         ario_server_preferences_sync_server (server_preferences);
 
-        gtk_box_pack_start (GTK_BOX (server_preferences), glade_xml_get_widget (xml, "vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (server_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
 
         return GTK_WIDGET (server_preferences);
 }

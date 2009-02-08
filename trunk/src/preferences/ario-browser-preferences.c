@@ -20,13 +20,12 @@
 #include "preferences/ario-browser-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "sources/ario-browser.h"
 #include "sources/ario-tree.h"
@@ -77,7 +76,7 @@ ario_browser_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioBrowserPreferences *browser_preferences;
-        GladeXML *xml;
+        GtkBuilder *builder;
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
@@ -87,19 +86,18 @@ ario_browser_preferences_new (void)
 
         g_return_val_if_fail (browser_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "browser-prefs.glade",
-                                "browser_vbox",
-                                browser_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "browser-prefs.ui",
+                                           browser_preferences);
 
         browser_preferences->priv->sort_combobox = 
-                glade_xml_get_widget (xml, "sort_combobox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "sort_combobox"));
         browser_preferences->priv->hbox = 
-                glade_xml_get_widget (xml, "trees_hbox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "trees_hbox"));
         browser_preferences->priv->treesnb_spinbutton = 
-                glade_xml_get_widget (xml, "treesnb_spinbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "treesnb_spinbutton"));
 
-        rb_glade_boldify_label (xml, "options_label");
-        rb_glade_boldify_label (xml, "organisation_label");
+        gtk_builder_helpers_boldify_label (builder, "options_label");
+        gtk_builder_helpers_boldify_label (builder, "organisation_label");
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
         for (i = 0; i < SORT_N_BEHAVIOR; ++i) {
@@ -121,9 +119,9 @@ ario_browser_preferences_new (void)
 
         ario_browser_preferences_sync_browser (browser_preferences);
 
-        gtk_box_pack_start (GTK_BOX (browser_preferences), glade_xml_get_widget (xml, "browser_vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (browser_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "browser_vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
 
         return GTK_WIDGET (browser_preferences);
 }

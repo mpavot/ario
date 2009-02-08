@@ -31,7 +31,6 @@ fi
 PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.12
                          glib-2.0 >= 2.4
                          gobject-2.0 >= 2.4
-                         libglade-2.0
                          gmodule-2.0
                          gthread-2.0
                          libcurl

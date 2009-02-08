@@ -27,7 +27,7 @@
 #include "plugins/ario-plugin.h"
 #include "covers/ario-cover-handler.h"
 #include "widgets/ario-playlist.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lyrics/ario-lyrics.h"
 #include "covers/ario-cover.h"
 #include "servers/ario-server.h"
@@ -187,12 +187,12 @@ ario_information_init (ArioInformation *information)
         ARIO_LOG_FUNCTION_START
         GtkWidget *scrolledwindow;
         GtkWidget *vbox, *vp;
-        GladeXML *xml;
+        GtkBuilder *builder;
         gchar *file;
 
         information->priv = ARIO_INFORMATION_GET_PRIVATE (information);
 
-        file = ario_plugin_find_file ("information.glade");
+        file = ario_plugin_find_file ("information.ui");
         g_return_if_fail (file);
 
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
@@ -202,34 +202,34 @@ ario_information_init (ArioInformation *information)
         vp = gtk_viewport_new (gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (scrolledwindow)),
                                gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolledwindow)));
 
-        xml = rb_glade_xml_new (file, "vbox", information);
+        builder = gtk_builder_helpers_new (file, information);
         g_free (file);
 
-        vbox = glade_xml_get_widget (xml, "vbox");
+        vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
         g_signal_connect (vbox,
                           "style-set",
                           G_CALLBACK (ario_information_style_set_cb),
                           vp);
 
-        information->priv->artist_label = glade_xml_get_widget (xml, "artist_label");
-        information->priv->album_label = glade_xml_get_widget (xml, "album_label");
-        information->priv->title_label = glade_xml_get_widget (xml, "title_label");
-        information->priv->length_label = glade_xml_get_widget (xml, "length_label");
-        information->priv->lyrics_label = glade_xml_get_widget (xml, "lyrics_const_label");
-        information->priv->lyrics_textview = glade_xml_get_widget (xml, "lyrics_textview");
-        information->priv->cover_image = glade_xml_get_widget (xml, "cover_image");
-        information->priv->properties_hbox = glade_xml_get_widget (xml, "properties_hbox");
-        information->priv->albums_hbox = glade_xml_get_widget (xml, "albums_hbox");
-        information->priv->albums_const_label = glade_xml_get_widget (xml, "albums_const_label");
+        information->priv->artist_label = GTK_WIDGET (gtk_builder_get_object (builder, "artist_label"));
+        information->priv->album_label = GTK_WIDGET (gtk_builder_get_object (builder, "album_label"));
+        information->priv->title_label = GTK_WIDGET (gtk_builder_get_object (builder, "title_label"));
+        information->priv->length_label = GTK_WIDGET (gtk_builder_get_object (builder, "length_label"));
+        information->priv->lyrics_label = GTK_WIDGET (gtk_builder_get_object (builder, "lyrics_const_label"));
+        information->priv->lyrics_textview = GTK_WIDGET (gtk_builder_get_object (builder, "lyrics_textview"));
+        information->priv->cover_image = GTK_WIDGET (gtk_builder_get_object (builder, "cover_image"));
+        information->priv->properties_hbox = GTK_WIDGET (gtk_builder_get_object (builder, "properties_hbox"));
+        information->priv->albums_hbox = GTK_WIDGET (gtk_builder_get_object (builder, "albums_hbox"));
+        information->priv->albums_const_label = GTK_WIDGET (gtk_builder_get_object (builder, "albums_const_label"));
 
         information->priv->lyrics_textbuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (information->priv->lyrics_textview));
 
-        rb_glade_boldify_label (xml, "artist_const_label");
-        rb_glade_boldify_label (xml, "album_const_label");
-        rb_glade_boldify_label (xml, "title_const_label");
-        rb_glade_boldify_label (xml, "length_const_label");
-        rb_glade_boldify_label (xml, "albums_const_label");
-        rb_glade_boldify_label (xml, "lyrics_const_label");
+        gtk_builder_helpers_boldify_label (builder, "artist_const_label");
+        gtk_builder_helpers_boldify_label (builder, "album_const_label");
+        gtk_builder_helpers_boldify_label (builder, "title_const_label");
+        gtk_builder_helpers_boldify_label (builder, "length_const_label");
+        gtk_builder_helpers_boldify_label (builder, "albums_const_label");
+        gtk_builder_helpers_boldify_label (builder, "lyrics_const_label");
 
         g_signal_connect (ario_cover_handler_get_instance (),
                           "cover_changed",
@@ -246,6 +246,7 @@ ario_information_init (ArioInformation *information)
 
         gtk_widget_show_all (scrolledwindow);
         gtk_box_pack_start (GTK_BOX (information), scrolledwindow, TRUE, TRUE, 0);
+        g_object_unref (builder);
 }
 
 static void

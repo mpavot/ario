@@ -20,14 +20,13 @@
 #include "preferences/ario-trayicon-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
 #include "notification/ario-notification-manager.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 
@@ -81,7 +80,7 @@ ario_trayicon_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
         ArioTrayiconPreferences *trayicon_preferences;
-        GladeXML *xml;
+        GtkBuilder *builder;
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
@@ -93,23 +92,22 @@ ario_trayicon_preferences_new (void)
 
         g_return_val_if_fail (trayicon_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "trayicon-prefs.glade",
-                                "trayicon_vbox",
-                                trayicon_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "trayicon-prefs.ui",
+                                           trayicon_preferences);
 
         trayicon_preferences->priv->trayicon_combobox = 
-                glade_xml_get_widget (xml, "trayicon_combobox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "trayicon_combobox"));
         trayicon_preferences->priv->notification_check =
-                glade_xml_get_widget (xml, "notification_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "notification_checkbutton"));
         trayicon_preferences->priv->trayicon_check =
-                glade_xml_get_widget (xml, "trayicon_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "trayicon_checkbutton"));
         trayicon_preferences->priv->notificationtime_spinbutton = 
-                glade_xml_get_widget (xml, "notificationtime_spinbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "notificationtime_spinbutton"));
         trayicon_preferences->priv->notification_combobox = 
-                glade_xml_get_widget (xml, "notification_combobox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "notification_combobox"));
 
-        rb_glade_boldify_label (xml, "trayicon_label");
-        rb_glade_boldify_label (xml, "notification_label");
+        gtk_builder_helpers_boldify_label (builder, "trayicon_label");
+        gtk_builder_helpers_boldify_label (builder, "notification_label");
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
         for (i = 0; i < TRAY_ICON_N_BEHAVIOR; ++i) {
@@ -152,14 +150,14 @@ ario_trayicon_preferences_new (void)
         ario_trayicon_preferences_sync_trayicon (trayicon_preferences);
 
 #ifndef ENABLE_EGGTRAYICON
-        GtkWidget *tray_frame = glade_xml_get_widget (xml, "tray_frame");
+        GtkWidget *tray_frame = GTK_WIDGET (gtk_builder_get_object (builder, "tray_frame"));
         gtk_widget_hide (tray_frame);
         gtk_widget_set_no_show_all (tray_frame, TRUE);
 #endif
 
-        gtk_box_pack_start (GTK_BOX (trayicon_preferences), glade_xml_get_widget (xml, "trayicon_vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (trayicon_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "trayicon_vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (G_OBJECT (xml));
+        g_object_unref (builder);
 
         return GTK_WIDGET (trayicon_preferences);
 }

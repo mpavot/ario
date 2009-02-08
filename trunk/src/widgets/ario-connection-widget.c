@@ -24,7 +24,7 @@
 #include <string.h>
 #include <time.h>
 #include <glib/gi18n.h>
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #ifdef ENABLE_AVAHI
 #include "ario-avahi.h"
 #endif
@@ -292,7 +292,7 @@ GtkWidget *
 ario_connection_widget_new (void)
 {
         ARIO_LOG_FUNCTION_START
-        GladeXML *xml;
+        GtkBuilder *builder;
         ArioConnectionWidget *connection_widget;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
@@ -302,34 +302,33 @@ ario_connection_widget_new (void)
 
         g_return_val_if_fail (connection_widget->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "connection-widget.glade",
-                                "hbox",
-                                connection_widget);
+        builder = gtk_builder_helpers_new (UI_PATH "connection-widget.ui",
+                                           connection_widget);
 
         connection_widget->priv->profile_treeview = 
-                glade_xml_get_widget (xml, "profile_treeview");
+                GTK_WIDGET (gtk_builder_get_object (builder, "profile_treeview"));
         connection_widget->priv->name_entry = 
-                glade_xml_get_widget (xml, "name_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "name_entry"));
         connection_widget->priv->host_entry = 
-                glade_xml_get_widget (xml, "host_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "host_entry"));
         connection_widget->priv->port_spinbutton = 
-                glade_xml_get_widget (xml, "port_spinbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "port_spinbutton"));
         connection_widget->priv->password_entry = 
-                glade_xml_get_widget (xml, "password_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "password_entry"));
         connection_widget->priv->local_checkbutton = 
-                glade_xml_get_widget (xml, "local_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "local_checkbutton"));
         connection_widget->priv->musicdir_entry = 
-                glade_xml_get_widget (xml, "musicdir_entry");
+                GTK_WIDGET (gtk_builder_get_object (builder, "musicdir_entry"));
         connection_widget->priv->musicdir_hbox = 
-                glade_xml_get_widget (xml, "musicdir_hbox");
+                GTK_WIDGET (gtk_builder_get_object (builder, "musicdir_hbox"));
         connection_widget->priv->musicdir_label = 
-                glade_xml_get_widget (xml, "musicdir_label");
+                GTK_WIDGET (gtk_builder_get_object (builder, "musicdir_label"));
         connection_widget->priv->autodetect_button = 
-                glade_xml_get_widget (xml, "autodetect_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "autodetect_button"));
         connection_widget->priv->mpd_radiobutton = 
-                glade_xml_get_widget (xml, "mpd_radiobutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "mpd_radiobutton"));
         connection_widget->priv->xmms_radiobutton = 
-                glade_xml_get_widget (xml, "xmms_radiobutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "xmms_radiobutton"));
 
         gtk_widget_show_all (connection_widget->priv->musicdir_hbox);
         gtk_widget_hide (connection_widget->priv->musicdir_hbox);
@@ -359,7 +358,7 @@ ario_connection_widget_new (void)
 #endif
 
 #ifndef ENABLE_XMMS2
-        gtk_widget_set_sensitive (glade_xml_get_widget (xml, "servertype_hbox"), FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (builder, "servertype_hbox")), FALSE);
 #endif
 
         g_signal_connect (connection_widget->priv->profile_selection,
@@ -368,9 +367,9 @@ ario_connection_widget_new (void)
                           connection_widget);
         ario_connection_widget_profile_selection_update (connection_widget, FALSE);
 
-        gtk_box_pack_start (GTK_BOX (connection_widget), glade_xml_get_widget (xml, "hbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (connection_widget), GTK_WIDGET (gtk_builder_get_object (builder, "hbox")), TRUE, TRUE, 0);
 
-        g_object_unref (xml);
+        g_object_unref (builder);
 
         return GTK_WIDGET (connection_widget);
 }

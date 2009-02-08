@@ -22,6 +22,7 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "playlist/ario-playlist-dynamic.h"
+#include "shell/ario-shell-similarartists.h"
 #include "servers/ario-server.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"

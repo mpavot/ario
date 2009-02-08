@@ -25,7 +25,7 @@
 #include <time.h>
 #include <glib/gi18n.h>
 #include "preferences/ario-preferences.h"
-#include "lib/rb-glade-helpers.h"
+#include "lib/gtk-builder-helpers.h"
 #include "lib/ario-conf.h"
 #include "ario-debug.h"
 #include "ario-profiles.h"
@@ -81,7 +81,7 @@ GtkWidget *
 ario_connection_preferences_new (void)
 {
         ARIO_LOG_FUNCTION_START
-        GladeXML *xml;
+        GtkBuilder *builder;
         ArioConnectionPreferences *connection_preferences;
         GtkWidget *alignment, *connection_widget;
 
@@ -90,20 +90,19 @@ ario_connection_preferences_new (void)
 
         g_return_val_if_fail (connection_preferences->priv != NULL, NULL);
 
-        xml = rb_glade_xml_new (GLADE_PATH "connection-prefs.glade",
-                                "vbox",
-                                connection_preferences);
+        builder = gtk_builder_helpers_new (UI_PATH "connection-prefs.ui",
+                                           connection_preferences);
 
         alignment = 
-                glade_xml_get_widget (xml, "alignment");
+                GTK_WIDGET (gtk_builder_get_object (builder, "alignment"));
         connection_preferences->priv->autoconnect_checkbutton = 
-                glade_xml_get_widget (xml, "autoconnect_checkbutton");
+                GTK_WIDGET (gtk_builder_get_object (builder, "autoconnect_checkbutton"));
         connection_preferences->priv->disconnect_button = 
-                glade_xml_get_widget (xml, "disconnect_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "disconnect_button"));
         connection_preferences->priv->connect_button = 
-                glade_xml_get_widget (xml, "connect_button");
+                GTK_WIDGET (gtk_builder_get_object (builder, "connect_button"));
 
-        rb_glade_boldify_label (xml, "connection_label");
+        gtk_builder_helpers_boldify_label (builder, "connection_label");
 
         connection_widget = ario_connection_widget_new ();
         gtk_container_add (GTK_CONTAINER (alignment), connection_widget);
@@ -114,9 +113,9 @@ ario_connection_preferences_new (void)
 
         ario_connection_preferences_sync_connection (connection_preferences);
 
-        gtk_box_pack_start (GTK_BOX (connection_preferences), glade_xml_get_widget (xml, "vbox"), TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (connection_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "vbox")), TRUE, TRUE, 0);
 
-        g_object_unref (xml);
+        g_object_unref (builder);
 
         return GTK_WIDGET (connection_preferences);
 }
