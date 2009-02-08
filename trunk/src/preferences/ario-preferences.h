@@ -240,6 +240,10 @@
 #define PREF_STOP_EXIT                          "stop-exit"
 #define PREF_STOP_EXIT_DEFAULT                  FALSE
 
+/* Playlist Mode */
+#define PREF_PLAYLIST_MODE                     "playlist-mode"
+#define PREF_PLAYLIST_MODE_DEFAULT             "normal"
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

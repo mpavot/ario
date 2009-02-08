@@ -72,6 +72,16 @@ libario_la_SOURCES = \
 	notification/ario-notifier.h\
 	notification/ario-notifier-tooltip.c\
 	notification/ario-notifier-tooltip.h\
+	playlist/ario-playlist-manager.c\
+	playlist/ario-playlist-manager.h\
+	playlist/ario-playlist-mode.c\
+	playlist/ario-playlist-mode.h\
+	playlist/ario-playlist-normal.c\
+	playlist/ario-playlist-normal.h\
+	playlist/ario-playlist-queue.c\
+	playlist/ario-playlist-queue.h\
+	playlist/ario-playlist-dynamic.c\
+	playlist/ario-playlist-dynamic.h\
 	plugins/ario-module.c\
 	plugins/ario-module.h\
 	plugins/ario-plugin.c\
@@ -93,6 +103,8 @@ libario_la_SOURCES = \
 	preferences/ario-interface-preferences.h\
 	preferences/ario-lyrics-preferences.c\
 	preferences/ario-lyrics-preferences.h\
+	preferences/ario-playlist-preferences.c\
+	preferences/ario-playlist-preferences.h\
 	preferences/ario-proxy-preferences.c\
 	preferences/ario-proxy-preferences.h\
 	preferences/ario-server-preferences.c\
