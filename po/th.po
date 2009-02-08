@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-19 21:03+0100\n"
+"POT-Creation-Date: 2009-02-08 23:00+0100\n"
 "PO-Revision-Date: 2008-12-15 03:43+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -25,387 +25,14 @@ msgstr "โปรแกรมเล่นเพลง Ario"
 msgid "Client application to mpd"
 msgstr ""
 
-#: ../data/glade/browser-prefs.glade.h:1
-msgid "Library Options"
-msgstr ""
-
-#: ../data/glade/browser-prefs.glade.h:2
-msgid "Library Organisation"
-msgstr ""
-
-#: ../data/glade/browser-prefs.glade.h:3
-msgid "Sort albums: "
-msgstr "เรียงอัลบัม: "
-
-#: ../data/glade/connection-widget.glade.h:1
-msgid "Auto detect"
-msgstr ""
-
-#: ../data/glade/connection-widget.glade.h:2
-msgid "Default"
-msgstr "ค่าปริยาย"
-
-#: ../data/glade/connection-widget.glade.h:3
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "โฮสต์ :"
-
-#: ../data/glade/connection-widget.glade.h:4
-msgid "Music directory :"
-msgstr "ไดเรกทอรี่เพลง :"
-
-#: ../data/glade/connection-widget.glade.h:5
-msgid "Music server is on the same computer as Ario"
-msgstr ""
-
-#: ../data/glade/connection-widget.glade.h:6
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "ชื่อ :"
-
-#: ../data/glade/connection-widget.glade.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "รหัสผ่าน :"
-
-#: ../data/glade/connection-widget.glade.h:8
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "พอร์ต :"
-
-#: ../data/glade/connection-widget.glade.h:9
-msgid "Server type : "
-msgstr ""
-
-#: ../data/glade/connection-widget.glade.h:10
-msgid "XMMS 2 (Experimental)"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:1
-msgid "Automatically download the album cover of the playing song"
-msgstr ""
-
-#: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:260
-#: ../src/shell/ario-shell-preferences.c:124
-msgid "Covers"
-msgstr "ปกซีดี"
-
-#: ../data/glade/cover-prefs.glade.h:3
-msgid "Covers Sources"
-msgstr "แหล่งของปกซีดี"
-
-#: ../data/glade/cover-prefs.glade.h:4
-msgid "Show the covers in the albums list"
-msgstr "แสดงปกซีดีในรายการของอัลบัม"
-
-#: ../data/glade/cover-prefs.glade.h:5
-msgid "Use Amazon."
-msgstr "ใช้ Amazon"
-
-#: ../data/glade/connection-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:109
-msgid "Connection"
-msgstr "การเชื่อมต่อ"
-
-#: ../data/glade/connection-prefs.glade.h:2
-msgid "_Autoconnect on startup"
-msgstr "เชื่อมต่ออัตโนมัติเมื่อเริ่ม"
-
-#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
-msgid "_Connect"
-msgstr "เชื่อมต่อ"
-
-#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:154
-msgid "_Disconnect"
-msgstr "ยกเลิกการเชื่อมต่อ"
-
-#: ../data/glade/connection-assistant.glade.h:1
-msgid ""
-"You need to specify a server to connect to. If you don't see your server "
-"thanks to the autodetection, you should check that zeroconf/avahi is "
-"activated in your server or use the manual configuration."
-msgstr ""
-
-#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
-#: ../data/glade/song-infos.glade.h:1
-#: ../plugins/information/information.glade.h:1
-msgid "Album :"
-msgstr "อัลบัม :"
-
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
-#: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
-#: ../plugins/information/information.glade.h:3
-msgid "Artist :"
-msgstr "ศิลปิน :"
-
-#: ../data/glade/cover-progress.glade.h:3
-msgid "Downloading cover"
-msgstr "ดาวน์โหลดปกซีดี"
-
-#: ../data/glade/cover-select.glade.h:3
-msgid "Local search"
-msgstr ""
-
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "ค้นหา"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:330
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "อัลบัม"
-
-#: ../data/glade/interface-prefs.glade.h:2
-msgid "Allow only one instance of Ario"
-msgstr ""
-
-#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:176
-#: ../src/shell/ario-shell-similarartists.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "ศิลปิน"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr "วันที่"
-
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "ความยาว"
-
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:330
-msgid "File"
-msgstr "แฟ้ม"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr "ประเภท"
-
-#: ../data/glade/interface-prefs.glade.h:8
-msgid "Go to current song when a new song is played"
-msgstr ""
-
-#: ../data/glade/interface-prefs.glade.h:9
-msgid "Hide window when close button is pressed"
-msgstr ""
-
-#: ../data/glade/interface-prefs.glade.h:10
-#: ../src/shell/ario-shell-preferences.c:134
-msgid "Interface"
-msgstr "ส่วนติดต่อผู้ใช้"
-
-#: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:197
-msgid "Playlist"
-msgstr "รายการเล่น"
-
-#: ../data/glade/interface-prefs.glade.h:12
-msgid "Show rows:"
-msgstr "แสดงแถว:"
-
-#: ../data/glade/interface-prefs.glade.h:13
-msgid "Show tabs"
-msgstr "แสดงแท็ป:"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "ชื่อเพลง"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "แทร็ก"
-
-#: ../data/glade/lyrics-prefs.glade.h:1
-msgid "Lyrics Sources"
-msgstr "แหล่งเนื้อเพลง"
-
-#: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
-#: ../plugins/information/information.glade.h:6
-msgid "Title :"
-msgstr "ชื่อเพลง :"
-
-#: ../data/glade/proxy-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:144
-msgid "Proxy"
-msgstr "พร็อกซี่"
-
-#: ../data/glade/proxy-prefs.glade.h:2
-msgid "Proxy Address :"
-msgstr "ที่อยู่พร็อกซี่ :"
-
-#: ../data/glade/proxy-prefs.glade.h:3
-msgid "Proxy Port :"
-msgstr "พอร์ตพร็อกซี่ :"
-
-#: ../data/glade/proxy-prefs.glade.h:4
-msgid "Use a proxy"
-msgstr "ใช้พร็อกซี่"
-
-#: ../data/glade/server-prefs.glade.h:1
-msgid "Audio outputs"
-msgstr ""
-
-#: ../data/glade/server-prefs.glade.h:2
-msgid "Crossfade"
-msgstr ""
-
-#: ../data/glade/server-prefs.glade.h:3
-msgid "Database"
-msgstr "ฐานข้อมูล"
-
-#: ../data/glade/server-prefs.glade.h:4
-msgid "Last updated:"
-msgstr "อัพเดทล่าสุด:"
-
-#: ../data/glade/server-prefs.glade.h:5
-msgid "Stop music on exit"
-msgstr ""
-
-#: ../data/glade/server-prefs.glade.h:6
-msgid "Update on startup"
-msgstr ""
-
-#: ../data/glade/server-prefs.glade.h:7
-msgid "_Update"
-msgstr "อัพเดท"
-
-#: ../data/glade/server-prefs.glade.h:8
-msgid "enable crossfade"
-msgstr ""
-
-#: ../data/glade/server-prefs.glade.h:9
-msgid "fade time (s):"
-msgstr ""
-
-#: ../data/glade/server-prefs.glade.h:10 ../data/glade/song-infos.glade.h:14
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
-#: ../plugins/information/information.glade.h:7
-#, c-format
-msgid "n/a"
-msgstr "n/a"
-
-#: ../data/glade/similar-artists.glade.h:1
-msgid "Add all to playlist"
-msgstr "เพิ่มทั้งหมดในรายการเล่น"
-
-#: ../data/glade/similar-artists.glade.h:2
-msgid "Add to playlist"
-msgstr "เพิ่มในรายการเล่น"
-
-#: ../data/glade/similar-artists.glade.h:3
-msgid "Find on Last.fm"
-msgstr "ค้นหาบน Last.fm"
-
-#: ../data/glade/stats-prefs.glade.h:1
-msgid "Database play time :"
-msgstr ""
-
-#: ../data/glade/stats-prefs.glade.h:2
-msgid "Number of albums :"
-msgstr "จำนวนของอัลบัม :"
-
-#: ../data/glade/stats-prefs.glade.h:3
-msgid "Number of artists :"
-msgstr "จำนวนของศิลปิน :"
-
-#: ../data/glade/stats-prefs.glade.h:4
-msgid "Number of songs :"
-msgstr "จำนวนของเพลง :"
-
-#: ../data/glade/stats-prefs.glade.h:5
-msgid "Play time :"
-msgstr ""
-
-#: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:149
-msgid "Statistics"
-msgstr "สถิติ"
-
-#: ../data/glade/stats-prefs.glade.h:7
-msgid "Uptime :"
-msgstr ""
-
-#: ../data/glade/song-infos.glade.h:3
-msgid "Comment :"
-msgstr ""
-
-#: ../data/glade/song-infos.glade.h:4
-msgid "Composer :"
-msgstr ""
-
-#: ../data/glade/song-infos.glade.h:5
-msgid "Date :"
-msgstr "วันที่ :"
-
-#: ../data/glade/song-infos.glade.h:6
-msgid "Disc :"
-msgstr "แผ่น :"
-
-#: ../data/glade/song-infos.glade.h:7
-msgid "Filename :"
-msgstr "ชื่อแฟ้ม :"
-
-#: ../data/glade/song-infos.glade.h:8
-msgid "Genre :"
-msgstr "ประเภท :"
-
-#: ../data/glade/song-infos.glade.h:9
-#: ../plugins/information/information.glade.h:4
-msgid "Length :"
-msgstr "ความยาว :"
-
-#: ../data/glade/song-infos.glade.h:10
-msgid "Performer :"
-msgstr ""
-
-#: ../data/glade/song-infos.glade.h:11
-msgid "Song"
-msgstr "เพลง"
-
-#: ../data/glade/song-infos.glade.h:13
-msgid "Track :"
-msgstr "แทร็ก :"
-
-#: ../data/glade/trayicon-prefs.glade.h:1
-msgid "Notification"
-msgstr ""
-
-#: ../data/glade/trayicon-prefs.glade.h:2
-msgid "Notification on song change"
-msgstr ""
-
-#: ../data/glade/trayicon-prefs.glade.h:3
-msgid "Notification time: "
-msgstr ""
-
-#: ../data/glade/trayicon-prefs.glade.h:4
-msgid "On middle button click on tray icon :"
-msgstr ""
-
-#: ../data/glade/trayicon-prefs.glade.h:5
-#: ../src/shell/ario-shell-preferences.c:139
-msgid "Tray icon"
-msgstr ""
-
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
 msgstr ""
+
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#, c-format
+msgid "n/a"
+msgstr "n/a"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
@@ -436,13 +63,13 @@ msgid "Plugin"
 msgstr "ปลั๊กอิน"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:159
-#: ../src/preferences/ario-lyrics-preferences.c:110
-#: ../src/preferences/ario-server-preferences.c:165
+#: ../src/preferences/ario-cover-preferences.c:156
+#: ../src/preferences/ario-lyrics-preferences.c:107
+#: ../src/preferences/ario-server-preferences.c:163
 msgid "Enabled"
 msgstr "เปิดใช้"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:183
 msgid "_About"
 msgstr "เกี่ยวกับ"
 
@@ -466,50 +93,50 @@ msgstr "ปิดทั้งหมด"
 msgid "Active plugins"
 msgstr "ปลั๊กอินที่เปิดใช้"
 
-#: ../src/preferences/ario-browser-preferences.c:45
+#: ../src/preferences/ario-browser-preferences.c:44
 msgid "Alphabetically"
 msgstr "ตามลำดับอักษร"
 
 #. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-browser-preferences.c:46
+#: ../src/preferences/ario-browser-preferences.c:45
 msgid "By year"
 msgstr "ตามปี"
 
-#: ../src/preferences/ario-cover-preferences.c:170
-#: ../src/preferences/ario-lyrics-preferences.c:121
-#: ../src/preferences/ario-server-preferences.c:176
-#: ../src/widgets/ario-connection-widget.c:552
+#: ../src/preferences/ario-cover-preferences.c:167
+#: ../src/preferences/ario-lyrics-preferences.c:118
+#: ../src/preferences/ario-server-preferences.c:174
+#: ../src/widgets/ario-connection-widget.c:551
 msgid "Name"
 msgstr "ชื่อ"
 
-#: ../src/preferences/ario-server-preferences.c:211
+#: ../src/preferences/ario-server-preferences.c:209
+#: ../src/preferences/ario-stats-preferences.c:151
 #: ../src/preferences/ario-stats-preferences.c:152
 #: ../src/preferences/ario-stats-preferences.c:153
 #: ../src/preferences/ario-stats-preferences.c:154
 #: ../src/preferences/ario-stats-preferences.c:155
 #: ../src/preferences/ario-stats-preferences.c:156
-#: ../src/preferences/ario-stats-preferences.c:157
 msgid "Not connected"
 msgstr "ไม่ได้เชื่อมต่อ"
 
-#: ../src/preferences/ario-server-preferences.c:216
-#: ../src/preferences/ario-server-preferences.c:307
+#: ../src/preferences/ario-server-preferences.c:214
+#: ../src/preferences/ario-server-preferences.c:305
 #: ../src/widgets/ario-status-bar.c:95
 msgid "Updating..."
 msgstr "กำลังอัพเดท..."
 
-#: ../src/preferences/ario-trayicon-preferences.c:48
+#: ../src/preferences/ario-trayicon-preferences.c:46
 msgid "Play/Pause"
 msgstr "เล่น/หยุดชั่วคราว"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/preferences/ario-trayicon-preferences.c:47
 #: ../src/widgets/ario-header.c:240
 msgid "Play next song"
 msgstr "เล่นเพลงถัดไป"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-trayicon-preferences.c:50
+#: ../src/preferences/ario-trayicon-preferences.c:48
 msgid "Do nothing"
 msgstr "ไม่ทำอะไร"
 
@@ -520,6 +147,45 @@ msgstr ""
 #: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
+
+#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "ศิลปิน"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
+#: ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "อัลบัม"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
+#: ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "ชื่อเพลง"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
+#: ../src/widgets/ario-playlist.c:330
+msgid "Track"
+msgstr "แทร็ก"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
+msgid "Genre"
+msgstr "ประเภท"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
+msgid "Date"
+msgstr "วันที่"
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
@@ -592,9 +258,13 @@ msgstr "ลบปกซีดี"
 msgid "_Properties"
 msgstr "คุณสมบัติ"
 
-#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "ไลบรารี"
+
+#: ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "ค้นหา"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -616,6 +286,11 @@ msgstr "ลบ"
 msgid "Playlists"
 msgstr "รายการเล่น"
 
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "รายการเล่น"
+
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
@@ -625,79 +300,87 @@ msgstr ""
 msgid "Cover"
 msgstr "ปกซีดี"
 
-#: ../src/sources/ario-tree.c:1225
+#: ../src/sources/ario-tree.c:1233
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:147
 msgid "_File"
 msgstr "แฟ้ม"
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:148
 msgid "_Edit"
 msgstr "แก้ไข"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:149
 msgid "_View"
 msgstr "มุมมอง"
 
-#: ../src/shell/ario-shell.c:148
+#: ../src/shell/ario-shell.c:150
 msgid "_Tool"
 msgstr "เครื่องมือ"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "วิธีใช้"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "เชื่อมต่อ"
+
+#: ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "ยกเลิกการเชื่อมต่อ"
+
+#: ../src/shell/ario-shell.c:159
 msgid "_Quit"
 msgstr "ออก"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:162
 msgid "Plu_gins"
 msgstr "ปลั๊กอิน"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:165
 msgid "Prefere_nces"
 msgstr "ปรับแต่ง"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:168
 msgid "_Change current album cover"
 msgstr "เปลี่ยนปกซีดีปัจจุบัน"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:171
 msgid "Download album _covers"
 msgstr "ดาวน์โหลดปกซีดี"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:174
 msgid "Find similar artists"
 msgstr "ค้นหาศิลปินใกล้เคียง"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:177
 msgid "Add similar songs to playlist"
 msgstr "เพิ่มเพลงใกล้เคียงในรายการเล่น"
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:180
 msgid "Show _lyrics"
 msgstr "แสดงเนื้อเพลง"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:186
 msgid "_Translate this application..."
 msgstr "แปลโปรแกรมนี้..."
 
-#: ../src/shell/ario-shell.c:191
+#: ../src/shell/ario-shell.c:193
 msgid "S_tatusbar"
 msgstr "แถบสถานะ"
 
-#: ../src/shell/ario-shell.c:194
+#: ../src/shell/ario-shell.c:196
 msgid "Upper part"
 msgstr "ส่วนบน"
 
-#: ../src/shell/ario-shell.c:699
+#: ../src/shell/ario-shell.c:703
 msgid "GTK client for MPD"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:700
+#: ../src/shell/ario-shell.c:704
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -711,11 +394,11 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Tharawut Paripaiboon https://launchpad.net/~xcession"
 
-#: ../src/shell/ario-shell.c:1018
+#: ../src/shell/ario-shell.c:1022
 msgid "Configure Plugins"
 msgstr "ตั้งค่าปลั๊กอิน"
 
-#: ../src/shell/ario-shell-coverdownloader.c:181
+#: ../src/shell/ario-shell-coverdownloader.c:179
 msgid "Music Player Cover Download"
 msgstr ""
 
@@ -732,114 +415,147 @@ msgid ""
 "%i covers already exist"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:248
+#: ../src/shell/ario-shell-coverselect.c:247
 msgid "Cover Download"
 msgstr "ดาวน์โหลดปกซีดี"
 
-#: ../src/shell/ario-shell-coverselect.c:562
+#: ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "ปกซีดี"
+
+#: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr ""
 
-#: ../src/shell/ario-shell-coverselect.c:585
+#: ../src/shell/ario-shell-coverselect.c:586
 msgid "Error saving file"
 msgstr ""
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:129
-#: ../src/shell/ario-shell-songinfos.c:249
+#: ../src/shell/ario-shell-preferences.c:135
+#: ../src/shell/ario-shell-songinfos.c:246
 msgid "Lyrics"
 msgstr "เนื้อเพลง"
 
-#: ../src/shell/ario-shell-lyricsselect.c:164
+#: ../src/shell/ario-shell-lyricsselect.c:163
 msgid "Lyrics Download"
 msgstr "ดาวน์โหลดเนื้อเพลง"
 
-#: ../src/shell/ario-shell-lyricsselect.c:202
+#: ../src/shell/ario-shell-lyricsselect.c:201
 msgid "Source"
 msgstr "แหล่ง"
 
-#: ../src/shell/ario-shell-preferences.c:81
+#: ../src/shell/ario-shell-preferences.c:82
 msgid "Ario Preferences"
 msgstr "ปรับแต่ง Ario"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "การเชื่อมต่อ"
+
+#: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "เซิร์ฟเวอร์"
+
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "ส่วนติดต่อผู้ใช้"
+
+#: ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr ""
+
+#: ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "พร็อกซี่"
+
+#: ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "สถิติ"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
 msgid "%d songs"
 msgstr "%d เพลง"
 
-#: ../src/shell/ario-shell-similarartists.c:375
+#: ../src/shell/ario-shell-similarartists.c:374
 msgid "Image"
 msgstr "รูปภาพ"
 
-#: ../src/shell/ario-shell-similarartists.c:393
+#: ../src/shell/ario-shell-similarartists.c:392
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "เพลง"
 
-#: ../src/shell/ario-shell-songinfos.c:227
-#: ../src/shell/ario-shell-songinfos.c:244
-#: ../src/shell/ario-shell-songinfos.c:475
+#: ../src/shell/ario-shell-songinfos.c:224
+#: ../src/shell/ario-shell-songinfos.c:241
+#: ../src/shell/ario-shell-songinfos.c:474
 msgid "Song Properties"
 msgstr "คุณสมบัติเพลง"
 
-#: ../src/shell/ario-shell-songinfos.c:410
+#: ../src/shell/ario-shell-songinfos.c:409
 msgid "Error saving tags of file:"
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:345
+#: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
 msgstr "โปรไฟล์"
 
-#: ../src/widgets/ario-connection-widget.c:531
+#: ../src/widgets/ario-connection-widget.c:530
 msgid "Server autodetection"
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:542
+#: ../src/widgets/ario-connection-widget.c:541
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:560
+#: ../src/widgets/ario-connection-widget.c:559
 msgid "Host"
 msgstr "โฮสต์"
 
-#: ../src/widgets/ario-connection-widget.c:568
+#: ../src/widgets/ario-connection-widget.c:567
 msgid "Port"
 msgstr "พอร์ต"
 
-#: ../src/widgets/ario-connection-widget.c:631
+#: ../src/widgets/ario-connection-widget.c:630
 msgid "You must select a server."
 msgstr "คุณต้องเลือกเซิร์ฟเวอร์"
 
-#: ../src/widgets/ario-connection-widget.c:678
+#: ../src/widgets/ario-connection-widget.c:677
 msgid "New Profile"
 msgstr "โปรไฟล์ใหม่"
 
-#: ../src/widgets/ario-firstlaunch.c:78
+#: ../src/widgets/ario-firstlaunch.c:77
 msgid "The following configuration will be used:"
 msgstr "การตั้งค่าต่อไปนี้จะถูกนำไปใช้:"
 
-#: ../src/widgets/ario-firstlaunch.c:102
+#: ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "โฮสต์ :"
+
+#: ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "พอร์ต :"
+
+#: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
 
-#: ../src/widgets/ario-firstlaunch.c:107
+#: ../src/widgets/ario-firstlaunch.c:106
 msgid "Welcome to Ario"
 msgstr "ยินดีต้อนรับสู่ Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:126
+#: ../src/widgets/ario-firstlaunch.c:124
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: ../src/widgets/ario-firstlaunch.c:138
+#: ../src/widgets/ario-firstlaunch.c:136
 msgid "Confirmation"
 msgstr "การยืนยัน"
 
@@ -910,16 +626,24 @@ msgstr "บันทึก"
 msgid "_Go to playing song"
 msgstr ""
 
+#: ../src/widgets/ario-playlist.c:330
+msgid "Duration"
+msgstr "ความยาว"
+
+#: ../src/widgets/ario-playlist.c:330
+msgid "File"
+msgstr "แฟ้ม"
+
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1326
+#: ../src/widgets/ario-playlist.c:1353
 msgid "Save playlist"
 msgstr "บันทึกรายการเล่น"
 
-#: ../src/widgets/ario-playlist.c:1336
+#: ../src/widgets/ario-playlist.c:1363
 msgid "Playlist name :"
 msgstr "ชื่อรายการเล่น :"
 
-#: ../src/widgets/ario-playlist.c:1361
+#: ../src/widgets/ario-playlist.c:1388
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
@@ -981,7 +705,6 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "ไม่เคย"
 
@@ -1029,42 +752,6 @@ msgstr ""
 msgid "Audioscrobbler preferences"
 msgstr ""
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
-msgid "Check Last.fm server status at"
-msgstr "ตรวจสอบสถานะเซิร์ฟเวอร์ Last.fm ที่"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
-msgid "Disabled"
-msgstr "ไม่ใช้"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
-msgid "Find out about Last.fm at "
-msgstr "ดูรายละเอียดเพิ่มเติมของ Last.fm ที่ "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
-msgid "Last submission time:"
-msgstr ""
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
-msgid "Last.fm Profile"
-msgstr "โปรไฟล์ Last.fm"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
-msgid "Queued tracks:"
-msgstr "เพลงในคิว:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
-msgid "Status:"
-msgstr "สถานะ:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
-msgid "Tracks submitted:"
-msgstr ""
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
-msgid "Username :"
-msgstr "ชื่อผู้ใช้ :"
-
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
 msgstr "Last.fm"
@@ -1099,14 +786,6 @@ msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr ""
-
-#: ../plugins/information/information.glade.h:2
-msgid "Albums from this artist:"
-msgstr ""
-
-#: ../plugins/information/information.glade.h:5
-msgid "Lyrics:"
 msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
@@ -1146,6 +825,10 @@ msgstr "วิทยุบนอินเตอร์เนท"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr ""
+
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "ชื่อ :"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -1188,6 +871,129 @@ msgstr "ปลั๊กอินสำหรับค้นหาศิลปิ
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Sort albums: "
+#~ msgstr "เรียงอัลบัม: "
+
+#~ msgid "Default"
+#~ msgstr "ค่าปริยาย"
+
+#~ msgid "Music directory :"
+#~ msgstr "ไดเรกทอรี่เพลง :"
+
+#~ msgid "Password :"
+#~ msgstr "รหัสผ่าน :"
+
+#~ msgid "Covers Sources"
+#~ msgstr "แหล่งของปกซีดี"
+
+#~ msgid "Show the covers in the albums list"
+#~ msgstr "แสดงปกซีดีในรายการของอัลบัม"
+
+#~ msgid "Use Amazon."
+#~ msgstr "ใช้ Amazon"
+
+#~ msgid "_Autoconnect on startup"
+#~ msgstr "เชื่อมต่ออัตโนมัติเมื่อเริ่ม"
+
+#~ msgid "Album :"
+#~ msgstr "อัลบัม :"
+
+#~ msgid "Artist :"
+#~ msgstr "ศิลปิน :"
+
+#~ msgid "Downloading cover"
+#~ msgstr "ดาวน์โหลดปกซีดี"
+
+#~ msgid "Show rows:"
+#~ msgstr "แสดงแถว:"
+
+#~ msgid "Show tabs"
+#~ msgstr "แสดงแท็ป:"
+
+#~ msgid "Lyrics Sources"
+#~ msgstr "แหล่งเนื้อเพลง"
+
+#~ msgid "Title :"
+#~ msgstr "ชื่อเพลง :"
+
+#~ msgid "Proxy Address :"
+#~ msgstr "ที่อยู่พร็อกซี่ :"
+
+#~ msgid "Proxy Port :"
+#~ msgstr "พอร์ตพร็อกซี่ :"
+
+#~ msgid "Use a proxy"
+#~ msgstr "ใช้พร็อกซี่"
+
+#~ msgid "Database"
+#~ msgstr "ฐานข้อมูล"
+
+#~ msgid "Last updated:"
+#~ msgstr "อัพเดทล่าสุด:"
+
+#~ msgid "_Update"
+#~ msgstr "อัพเดท"
+
+#~ msgid "Add all to playlist"
+#~ msgstr "เพิ่มทั้งหมดในรายการเล่น"
+
+#~ msgid "Add to playlist"
+#~ msgstr "เพิ่มในรายการเล่น"
+
+#~ msgid "Find on Last.fm"
+#~ msgstr "ค้นหาบน Last.fm"
+
+#~ msgid "Number of albums :"
+#~ msgstr "จำนวนของอัลบัม :"
+
+#~ msgid "Number of artists :"
+#~ msgstr "จำนวนของศิลปิน :"
+
+#~ msgid "Number of songs :"
+#~ msgstr "จำนวนของเพลง :"
+
+#~ msgid "Date :"
+#~ msgstr "วันที่ :"
+
+#~ msgid "Disc :"
+#~ msgstr "แผ่น :"
+
+#~ msgid "Filename :"
+#~ msgstr "ชื่อแฟ้ม :"
+
+#~ msgid "Genre :"
+#~ msgstr "ประเภท :"
+
+#~ msgid "Length :"
+#~ msgstr "ความยาว :"
+
+#~ msgid "Song"
+#~ msgstr "เพลง"
+
+#~ msgid "Track :"
+#~ msgstr "แทร็ก :"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "ตรวจสอบสถานะเซิร์ฟเวอร์ Last.fm ที่"
+
+#~ msgid "Disabled"
+#~ msgstr "ไม่ใช้"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "ดูรายละเอียดเพิ่มเติมของ Last.fm ที่ "
+
+#~ msgid "Last.fm Profile"
+#~ msgstr "โปรไฟล์ Last.fm"
+
+#~ msgid "Queued tracks:"
+#~ msgstr "เพลงในคิว:"
+
+#~ msgid "Status:"
+#~ msgstr "สถานะ:"
+
+#~ msgid "Username :"
+#~ msgstr "ชื่อผู้ใช้ :"
 
 #~ msgid "Automatic configuration"
 #~ msgstr "ตั้วค่าอัตโนมัติ"

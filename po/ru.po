@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-19 21:03+0100\n"
+"POT-Creation-Date: 2009-02-08 23:00+0100\n"
 "PO-Revision-Date: 2008-12-18 12:13+0000\n"
 "Last-Translator: Dmitry  DeXPeriX  Hrabrov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -25,390 +25,14 @@ msgstr "Ario музыкальный проигрыватель"
 msgid "Client application to mpd"
 msgstr "Клиент-приложение для mpd"
 
-#: ../data/glade/browser-prefs.glade.h:1
-msgid "Library Options"
-msgstr "Опции библиотеки"
-
-#: ../data/glade/browser-prefs.glade.h:2
-msgid "Library Organisation"
-msgstr "Организация библиотеки"
-
-#: ../data/glade/browser-prefs.glade.h:3
-msgid "Sort albums: "
-msgstr "Сортировать альбомы: "
-
-#: ../data/glade/connection-widget.glade.h:1
-msgid "Auto detect"
-msgstr "Автоопределение"
-
-#: ../data/glade/connection-widget.glade.h:2
-msgid "Default"
-msgstr "По умолчанию"
-
-#: ../data/glade/connection-widget.glade.h:3
-#: ../src/widgets/ario-firstlaunch.c:79
-msgid "Host :"
-msgstr "Хост :"
-
-#: ../data/glade/connection-widget.glade.h:4
-msgid "Music directory :"
-msgstr "Музыкальная директория :"
-
-#: ../data/glade/connection-widget.glade.h:5
-msgid "Music server is on the same computer as Ario"
-msgstr "Музыкальный сервер на том же компьютере, что и Ario"
-
-#: ../data/glade/connection-widget.glade.h:6
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Название :"
-
-#: ../data/glade/connection-widget.glade.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:7
-msgid "Password :"
-msgstr "Пароль :"
-
-#: ../data/glade/connection-widget.glade.h:8
-#: ../src/widgets/ario-firstlaunch.c:81
-msgid "Port :"
-msgstr "Порт :"
-
-#: ../data/glade/connection-widget.glade.h:9
-msgid "Server type : "
-msgstr "Тип сервера : "
-
-#: ../data/glade/connection-widget.glade.h:10
-msgid "XMMS 2 (Experimental)"
-msgstr "XMMS 2 (Экспериментальное)"
-
-#: ../data/glade/cover-prefs.glade.h:1
-msgid "Automatically download the album cover of the playing song"
-msgstr "Автоматически скачать обложку альбома играющей песни"
-
-#: ../data/glade/cover-prefs.glade.h:2
-#: ../src/shell/ario-shell-coverselect.c:260
-#: ../src/shell/ario-shell-preferences.c:124
-msgid "Covers"
-msgstr "Обложки"
-
-#: ../data/glade/cover-prefs.glade.h:3
-msgid "Covers Sources"
-msgstr "Обложки"
-
-#: ../data/glade/cover-prefs.glade.h:4
-msgid "Show the covers in the albums list"
-msgstr "Показать обложки в списке альбомов"
-
-#: ../data/glade/cover-prefs.glade.h:5
-msgid "Use Amazon."
-msgstr "Использовать Amazon."
-
-#: ../data/glade/connection-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:109
-msgid "Connection"
-msgstr "Соединение"
-
-#: ../data/glade/connection-prefs.glade.h:2
-msgid "_Autoconnect on startup"
-msgstr "Автосоединение при запуске"
-
-#: ../data/glade/connection-prefs.glade.h:3 ../src/shell/ario-shell.c:151
-msgid "_Connect"
-msgstr "_Соединить"
-
-#: ../data/glade/connection-prefs.glade.h:4 ../src/shell/ario-shell.c:154
-msgid "_Disconnect"
-msgstr "_Отключить"
-
-#: ../data/glade/connection-assistant.glade.h:1
-msgid ""
-"You need to specify a server to connect to. If you don't see your server "
-"thanks to the autodetection, you should check that zeroconf/avahi is "
-"activated in your server or use the manual configuration."
-msgstr ""
-"Вы должны указать сервер для соединения. Если сервер не был определен "
-"автоматически, убедитесь что на нем активно zeroconf/avahi или используйте "
-"ручную настройку."
-
-#: ../data/glade/cover-progress.glade.h:1 ../data/glade/cover-select.glade.h:1
-#: ../data/glade/song-infos.glade.h:1
-#: ../plugins/information/information.glade.h:1
-msgid "Album :"
-msgstr "Альбом :"
-
-#: ../data/glade/cover-progress.glade.h:2 ../data/glade/cover-select.glade.h:2
-#: ../data/glade/lyrics-select.glade.h:1 ../data/glade/song-infos.glade.h:2
-#: ../plugins/information/information.glade.h:3
-msgid "Artist :"
-msgstr "Исполнитель :"
-
-#: ../data/glade/cover-progress.glade.h:3
-msgid "Downloading cover"
-msgstr "Закачка обложки"
-
-#: ../data/glade/cover-select.glade.h:3
-msgid "Local search"
-msgstr "Местный поиск"
-
-#: ../data/glade/cover-select.glade.h:4 ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "Поиск"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../data/glade/interface-prefs.glade.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:330
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "Альбом"
-
-#: ../data/glade/interface-prefs.glade.h:2
-msgid "Allow only one instance of Ario"
-msgstr "Позволять только один экземпляр Ario"
-
-#: ../data/glade/interface-prefs.glade.h:3 ../src/servers/ario-server.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:176
-#: ../src/shell/ario-shell-similarartists.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "Исполнитель"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../data/glade/interface-prefs.glade.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr "Дата"
-
-#: ../data/glade/interface-prefs.glade.h:5 ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "Продолжительность"
-
-#: ../data/glade/interface-prefs.glade.h:6 ../src/widgets/ario-playlist.c:330
-msgid "File"
-msgstr "_Файл"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../data/glade/interface-prefs.glade.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr "Жанр"
-
-#: ../data/glade/interface-prefs.glade.h:8
-msgid "Go to current song when a new song is played"
-msgstr "Переводить курсор на играющую песню"
-
-#: ../data/glade/interface-prefs.glade.h:9
-msgid "Hide window when close button is pressed"
-msgstr "Прятать окно при нажатии на \"крестик\""
-
-#: ../data/glade/interface-prefs.glade.h:10
-#: ../src/shell/ario-shell-preferences.c:134
-msgid "Interface"
-msgstr "Внешний вид"
-
-#: ../data/glade/interface-prefs.glade.h:11
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:197
-msgid "Playlist"
-msgstr "Список композиций"
-
-#: ../data/glade/interface-prefs.glade.h:12
-msgid "Show rows:"
-msgstr "Показать столбцы:"
-
-#: ../data/glade/interface-prefs.glade.h:13
-msgid "Show tabs"
-msgstr "Показать вкладки"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../data/glade/interface-prefs.glade.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:189
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "Заголовок"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../data/glade/interface-prefs.glade.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "Дорожка"
-
-#: ../data/glade/lyrics-prefs.glade.h:1
-msgid "Lyrics Sources"
-msgstr "Текст песни"
-
-#: ../data/glade/lyrics-select.glade.h:2 ../data/glade/song-infos.glade.h:12
-#: ../plugins/information/information.glade.h:6
-msgid "Title :"
-msgstr "Заголовок :"
-
-#: ../data/glade/proxy-prefs.glade.h:1
-#: ../src/shell/ario-shell-preferences.c:144
-msgid "Proxy"
-msgstr "Прокси"
-
-#: ../data/glade/proxy-prefs.glade.h:2
-msgid "Proxy Address :"
-msgstr "Адрес прокси :"
-
-#: ../data/glade/proxy-prefs.glade.h:3
-msgid "Proxy Port :"
-msgstr "Порт прокси :"
-
-#: ../data/glade/proxy-prefs.glade.h:4
-msgid "Use a proxy"
-msgstr "Использовать прокси"
-
-#: ../data/glade/server-prefs.glade.h:1
-msgid "Audio outputs"
-msgstr "Аудио выходы"
-
-#: ../data/glade/server-prefs.glade.h:2
-msgid "Crossfade"
-msgstr "Угасание"
-
-#: ../data/glade/server-prefs.glade.h:3
-msgid "Database"
-msgstr "База данных"
-
-#: ../data/glade/server-prefs.glade.h:4
-msgid "Last updated:"
-msgstr "Последнее обновление:"
-
-#: ../data/glade/server-prefs.glade.h:5
-msgid "Stop music on exit"
-msgstr "Прекратить проигрывание при выходе"
-
-#: ../data/glade/server-prefs.glade.h:6
-msgid "Update on startup"
-msgstr "Обновлять при загрузке"
-
-#: ../data/glade/server-prefs.glade.h:7
-msgid "_Update"
-msgstr "_Обновить"
-
-#: ../data/glade/server-prefs.glade.h:8
-msgid "enable crossfade"
-msgstr "включить угасание"
-
-#: ../data/glade/server-prefs.glade.h:9
-msgid "fade time (s):"
-msgstr "время затухания (s):"
-
-#: ../data/glade/server-prefs.glade.h:10 ../data/glade/song-infos.glade.h:14
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
-#: ../plugins/information/information.glade.h:7
-#, c-format
-msgid "n/a"
-msgstr "недоступно"
-
-#: ../data/glade/similar-artists.glade.h:1
-msgid "Add all to playlist"
-msgstr "Добавить всё в плейлист"
-
-#: ../data/glade/similar-artists.glade.h:2
-msgid "Add to playlist"
-msgstr "_Добавить в плейлист"
-
-#: ../data/glade/similar-artists.glade.h:3
-msgid "Find on Last.fm"
-msgstr "Найти на Last.fm"
-
-#: ../data/glade/stats-prefs.glade.h:1
-msgid "Database play time :"
-msgstr "База данных"
-
-#: ../data/glade/stats-prefs.glade.h:2
-msgid "Number of albums :"
-msgstr "Количество альбомов :"
-
-#: ../data/glade/stats-prefs.glade.h:3
-msgid "Number of artists :"
-msgstr "Количество артистов :"
-
-#: ../data/glade/stats-prefs.glade.h:4
-msgid "Number of songs :"
-msgstr "Кличество песен"
-
-#: ../data/glade/stats-prefs.glade.h:5
-msgid "Play time :"
-msgstr "Время проигрывания :"
-
-#: ../data/glade/stats-prefs.glade.h:6
-#: ../src/shell/ario-shell-preferences.c:149
-msgid "Statistics"
-msgstr "Статистика"
-
-#: ../data/glade/stats-prefs.glade.h:7
-msgid "Uptime :"
-msgstr "Аптайм"
-
-#: ../data/glade/song-infos.glade.h:3
-msgid "Comment :"
-msgstr "Кмментарий :"
-
-#: ../data/glade/song-infos.glade.h:4
-msgid "Composer :"
-msgstr "Композитор :"
-
-#: ../data/glade/song-infos.glade.h:5
-msgid "Date :"
-msgstr "Дата :"
-
-#: ../data/glade/song-infos.glade.h:6
-msgid "Disc :"
-msgstr "Диск :"
-
-#: ../data/glade/song-infos.glade.h:7
-msgid "Filename :"
-msgstr "Имя файла :"
-
-#: ../data/glade/song-infos.glade.h:8
-msgid "Genre :"
-msgstr "Жанр :"
-
-#: ../data/glade/song-infos.glade.h:9
-#: ../plugins/information/information.glade.h:4
-msgid "Length :"
-msgstr "Длина :"
-
-#: ../data/glade/song-infos.glade.h:10
-msgid "Performer :"
-msgstr "Исполнитель :"
-
-#: ../data/glade/song-infos.glade.h:11
-msgid "Song"
-msgstr "Песня"
-
-#: ../data/glade/song-infos.glade.h:13
-msgid "Track :"
-msgstr "Трек"
-
-#: ../data/glade/trayicon-prefs.glade.h:1
-msgid "Notification"
-msgstr "Уведомление"
-
-#: ../data/glade/trayicon-prefs.glade.h:2
-msgid "Notification on song change"
-msgstr "Уведомление при смене песни"
-
-#: ../data/glade/trayicon-prefs.glade.h:3
-msgid "Notification time: "
-msgstr "Время уведомления: "
-
-#: ../data/glade/trayicon-prefs.glade.h:4
-msgid "On middle button click on tray icon :"
-msgstr "Средний клик по иконке в трее :"
-
-#: ../data/glade/trayicon-prefs.glade.h:5
-#: ../src/shell/ario-shell-preferences.c:139
-msgid "Tray icon"
-msgstr "Иконка в трее"
-
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
 msgstr "Запускать минимизированным"
+
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#, c-format
+msgid "n/a"
+msgstr "недоступно"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
@@ -439,13 +63,13 @@ msgid "Plugin"
 msgstr "Плагин"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:159
-#: ../src/preferences/ario-lyrics-preferences.c:110
-#: ../src/preferences/ario-server-preferences.c:165
+#: ../src/preferences/ario-cover-preferences.c:156
+#: ../src/preferences/ario-lyrics-preferences.c:107
+#: ../src/preferences/ario-server-preferences.c:163
 msgid "Enabled"
 msgstr "Включено"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:181
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:183
 msgid "_About"
 msgstr "_О программе"
 
@@ -469,50 +93,50 @@ msgstr "В_ыключить всё"
 msgid "Active plugins"
 msgstr "Активные расширения"
 
-#: ../src/preferences/ario-browser-preferences.c:45
+#: ../src/preferences/ario-browser-preferences.c:44
 msgid "Alphabetically"
 msgstr "По алфавиту"
 
 #. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-browser-preferences.c:46
+#: ../src/preferences/ario-browser-preferences.c:45
 msgid "By year"
 msgstr "По годам"
 
-#: ../src/preferences/ario-cover-preferences.c:170
-#: ../src/preferences/ario-lyrics-preferences.c:121
-#: ../src/preferences/ario-server-preferences.c:176
-#: ../src/widgets/ario-connection-widget.c:552
+#: ../src/preferences/ario-cover-preferences.c:167
+#: ../src/preferences/ario-lyrics-preferences.c:118
+#: ../src/preferences/ario-server-preferences.c:174
+#: ../src/widgets/ario-connection-widget.c:551
 msgid "Name"
 msgstr "Название"
 
-#: ../src/preferences/ario-server-preferences.c:211
+#: ../src/preferences/ario-server-preferences.c:209
+#: ../src/preferences/ario-stats-preferences.c:151
 #: ../src/preferences/ario-stats-preferences.c:152
 #: ../src/preferences/ario-stats-preferences.c:153
 #: ../src/preferences/ario-stats-preferences.c:154
 #: ../src/preferences/ario-stats-preferences.c:155
 #: ../src/preferences/ario-stats-preferences.c:156
-#: ../src/preferences/ario-stats-preferences.c:157
 msgid "Not connected"
 msgstr "Не подключен"
 
-#: ../src/preferences/ario-server-preferences.c:216
-#: ../src/preferences/ario-server-preferences.c:307
+#: ../src/preferences/ario-server-preferences.c:214
+#: ../src/preferences/ario-server-preferences.c:305
 #: ../src/widgets/ario-status-bar.c:95
 msgid "Updating..."
 msgstr "Обновление..."
 
-#: ../src/preferences/ario-trayicon-preferences.c:48
+#: ../src/preferences/ario-trayicon-preferences.c:46
 msgid "Play/Pause"
 msgstr "Играть/Пауза"
 
 #. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-trayicon-preferences.c:49
+#: ../src/preferences/ario-trayicon-preferences.c:47
 #: ../src/widgets/ario-header.c:240
 msgid "Play next song"
 msgstr "Играть следующую песню"
 
 #. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-trayicon-preferences.c:50
+#: ../src/preferences/ario-trayicon-preferences.c:48
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
@@ -523,6 +147,45 @@ msgstr "Соединяемся с сервером..."
 #: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Невозможно соединиться с сервером. Проверте настройки соединения."
+
+#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "Исполнитель"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
+#: ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "Альбом"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
+#: ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "Заголовок"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
+#: ../src/widgets/ario-playlist.c:330
+msgid "Track"
+msgstr "Дорожка"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
+msgid "Genre"
+msgstr "Жанр"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
+msgid "Date"
+msgstr "Дата"
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
@@ -595,9 +258,13 @@ msgstr "_Удалить обложки"
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "Библиотека"
+
+#: ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "Поиск"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -619,6 +286,11 @@ msgstr "_Удалить"
 msgid "Playlists"
 msgstr "Плейлисты"
 
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "Список композиций"
+
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Вы действительно хотите удалить все выбранные плейлисты?"
@@ -628,79 +300,87 @@ msgstr "Вы действительно хотите удалить все вы�
 msgid "Cover"
 msgstr "Обложка"
 
-#: ../src/sources/ario-tree.c:1225
+#: ../src/sources/ario-tree.c:1233
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Вы уверены, что хотите удалить все выделенные обложки?"
 
-#: ../src/shell/ario-shell.c:145
+#: ../src/shell/ario-shell.c:147
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/shell/ario-shell.c:146
+#: ../src/shell/ario-shell.c:148
 msgid "_Edit"
 msgstr "_Редактировать"
 
-#: ../src/shell/ario-shell.c:147
+#: ../src/shell/ario-shell.c:149
 msgid "_View"
 msgstr "_Вид"
 
-#: ../src/shell/ario-shell.c:148
+#: ../src/shell/ario-shell.c:150
 msgid "_Tool"
 msgstr "_Инструменты"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "_Помощь"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "_Соединить"
+
+#: ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "_Отключить"
+
+#: ../src/shell/ario-shell.c:159
 msgid "_Quit"
 msgstr "_Выход"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:162
 msgid "Plu_gins"
 msgstr "Мод_ули"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:165
 msgid "Prefere_nces"
 msgstr "_Параметры"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:168
 msgid "_Change current album cover"
 msgstr "Изменить текущую обложку"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:171
 msgid "Download album _covers"
 msgstr "Скачать альбомные _обложки"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:174
 msgid "Find similar artists"
 msgstr "Найти похожих артистов"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:177
 msgid "Add similar songs to playlist"
 msgstr "Добавить похожие песни в плейлист"
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:180
 msgid "Show _lyrics"
 msgstr "Показать _слова песен"
 
-#: ../src/shell/ario-shell.c:184
+#: ../src/shell/ario-shell.c:186
 msgid "_Translate this application..."
 msgstr "Перевести это приложение"
 
-#: ../src/shell/ario-shell.c:191
+#: ../src/shell/ario-shell.c:193
 msgid "S_tatusbar"
 msgstr "_Строка состояния"
 
-#: ../src/shell/ario-shell.c:194
+#: ../src/shell/ario-shell.c:196
 msgid "Upper part"
 msgstr "Верхняя часть"
 
-#: ../src/shell/ario-shell.c:699
+#: ../src/shell/ario-shell.c:703
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:700
+#: ../src/shell/ario-shell.c:704
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -743,11 +423,11 @@ msgstr ""
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
 "  pronull https://launchpad.net/~dmitrievp"
 
-#: ../src/shell/ario-shell.c:1018
+#: ../src/shell/ario-shell.c:1022
 msgid "Configure Plugins"
 msgstr "Настроить расширения"
 
-#: ../src/shell/ario-shell-coverdownloader.c:181
+#: ../src/shell/ario-shell-coverdownloader.c:179
 msgid "Music Player Cover Download"
 msgstr "Загрузка обложки музыкального проигрывателя"
 
@@ -767,74 +447,99 @@ msgstr ""
 "%i обложек не найдено\n"
 "%i обложек уже существует"
 
-#: ../src/shell/ario-shell-coverselect.c:248
+#: ../src/shell/ario-shell-coverselect.c:247
 msgid "Cover Download"
 msgstr "Загрузить обложку"
 
-#: ../src/shell/ario-shell-coverselect.c:562
+#: ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "Обложки"
+
+#: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr "Ошибка чтения файла"
 
-#: ../src/shell/ario-shell-coverselect.c:585
+#: ../src/shell/ario-shell-coverselect.c:586
 msgid "Error saving file"
 msgstr "Ошибка записи файла"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:129
-#: ../src/shell/ario-shell-songinfos.c:249
+#: ../src/shell/ario-shell-preferences.c:135
+#: ../src/shell/ario-shell-songinfos.c:246
 msgid "Lyrics"
 msgstr "Тексты песен"
 
-#: ../src/shell/ario-shell-lyricsselect.c:164
+#: ../src/shell/ario-shell-lyricsselect.c:163
 msgid "Lyrics Download"
 msgstr "Загрузить тексты песен"
 
-#: ../src/shell/ario-shell-lyricsselect.c:202
+#: ../src/shell/ario-shell-lyricsselect.c:201
 msgid "Source"
 msgstr "Обложки"
 
-#: ../src/shell/ario-shell-preferences.c:81
+#: ../src/shell/ario-shell-preferences.c:82
 msgid "Ario Preferences"
 msgstr "Ario Настройки"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "Соединение"
+
+#: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "Сервер"
+
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "Внешний вид"
+
+#: ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr "Иконка в трее"
+
+#: ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "Прокси"
+
+#: ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "Статистика"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
 msgid "%d songs"
 msgstr "%d композиций"
 
-#: ../src/shell/ario-shell-similarartists.c:375
+#: ../src/shell/ario-shell-similarartists.c:374
 msgid "Image"
 msgstr "Рисунок"
 
-#: ../src/shell/ario-shell-similarartists.c:393
+#: ../src/shell/ario-shell-similarartists.c:392
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "Композиций"
 
-#: ../src/shell/ario-shell-songinfos.c:227
-#: ../src/shell/ario-shell-songinfos.c:244
-#: ../src/shell/ario-shell-songinfos.c:475
+#: ../src/shell/ario-shell-songinfos.c:224
+#: ../src/shell/ario-shell-songinfos.c:241
+#: ../src/shell/ario-shell-songinfos.c:474
 msgid "Song Properties"
 msgstr "Свойства композиции"
 
-#: ../src/shell/ario-shell-songinfos.c:410
+#: ../src/shell/ario-shell-songinfos.c:409
 #, fuzzy
 msgid "Error saving tags of file:"
 msgstr "Ошибка записи файла"
 
-#: ../src/widgets/ario-connection-widget.c:345
+#: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/widgets/ario-connection-widget.c:531
+#: ../src/widgets/ario-connection-widget.c:530
 msgid "Server autodetection"
 msgstr "Сервер автоопределения"
 
-#: ../src/widgets/ario-connection-widget.c:542
+#: ../src/widgets/ario-connection-widget.c:541
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -844,27 +549,35 @@ msgstr ""
 "проверьте активен ли zeroconf в Вашей MPD-конфигурации или используйте "
 "ручную настройку."
 
-#: ../src/widgets/ario-connection-widget.c:560
+#: ../src/widgets/ario-connection-widget.c:559
 msgid "Host"
 msgstr "Хост"
 
-#: ../src/widgets/ario-connection-widget.c:568
+#: ../src/widgets/ario-connection-widget.c:567
 msgid "Port"
 msgstr "Порт"
 
-#: ../src/widgets/ario-connection-widget.c:631
+#: ../src/widgets/ario-connection-widget.c:630
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/widgets/ario-connection-widget.c:678
+#: ../src/widgets/ario-connection-widget.c:677
 msgid "New Profile"
 msgstr "Новый профиль"
 
-#: ../src/widgets/ario-firstlaunch.c:78
+#: ../src/widgets/ario-firstlaunch.c:77
 msgid "The following configuration will be used:"
 msgstr "Следующая конфигурация будет использована:"
 
-#: ../src/widgets/ario-firstlaunch.c:102
+#: ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "Хост :"
+
+#: ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "Порт :"
+
+#: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -872,15 +585,15 @@ msgstr ""
 "Это Ваш первый запуск Ario.\n"
 "Этот ассистент поможет Вам настроить проигрыватель."
 
-#: ../src/widgets/ario-firstlaunch.c:107
+#: ../src/widgets/ario-firstlaunch.c:106
 msgid "Welcome to Ario"
 msgstr "Добро пожаловать в Ario"
 
-#: ../src/widgets/ario-firstlaunch.c:126
+#: ../src/widgets/ario-firstlaunch.c:124
 msgid "Configuration"
 msgstr "Настройка"
 
-#: ../src/widgets/ario-firstlaunch.c:138
+#: ../src/widgets/ario-firstlaunch.c:136
 msgid "Confirmation"
 msgstr "Подтверждение"
 
@@ -951,16 +664,24 @@ msgstr "_Сохранить"
 msgid "_Go to playing song"
 msgstr "Воспроизвести песню"
 
+#: ../src/widgets/ario-playlist.c:330
+msgid "Duration"
+msgstr "Продолжительность"
+
+#: ../src/widgets/ario-playlist.c:330
+msgid "File"
+msgstr "_Файл"
+
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1326
+#: ../src/widgets/ario-playlist.c:1353
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: ../src/widgets/ario-playlist.c:1336
+#: ../src/widgets/ario-playlist.c:1363
 msgid "Playlist name :"
 msgstr "Название плейлиста :"
 
-#: ../src/widgets/ario-playlist.c:1361
+#: ../src/widgets/ario-playlist.c:1388
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
@@ -1022,7 +743,6 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:6
 msgid "Never"
 msgstr "Никогда"
 
@@ -1070,42 +790,6 @@ msgstr "Слишком часто возникают ошибки при поп�
 msgid "Audioscrobbler preferences"
 msgstr "Настройки Audioscrobbler"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:1
-msgid "Check Last.fm server status at"
-msgstr "Проверка состояния сервера Last.fm на"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:2
-msgid "Disabled"
-msgstr "Выключено"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:3
-msgid "Find out about Last.fm at "
-msgstr "Узнайте больше о Last.fm на "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:4
-msgid "Last submission time:"
-msgstr "Последняя отправка данных:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:5
-msgid "Last.fm Profile"
-msgstr "Профиль пользователя Last.fm"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:8
-msgid "Queued tracks:"
-msgstr "В очереди:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:9
-msgid "Status:"
-msgstr "Статус:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:10
-msgid "Tracks submitted:"
-msgstr "Передано треков:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.glade.h:11
-msgid "Username :"
-msgstr "Имя пользователя :"
-
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
 msgstr "Last.fm"
@@ -1141,14 +825,6 @@ msgstr "Отобразить различную информацию о прои
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
 msgstr "Информация о песне"
-
-#: ../plugins/information/information.glade.h:2
-msgid "Albums from this artist:"
-msgstr "Альбомы этого артиста:"
-
-#: ../plugins/information/information.glade.h:5
-msgid "Lyrics:"
-msgstr "Слова:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -1187,6 +863,10 @@ msgstr "Интернет-Радио"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
+
+#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Название :"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -1229,6 +909,231 @@ msgstr "Плагин для поиска текущего артиста на wi
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Википедия"
+
+#~ msgid "Library Options"
+#~ msgstr "Опции библиотеки"
+
+#~ msgid "Library Organisation"
+#~ msgstr "Организация библиотеки"
+
+#~ msgid "Sort albums: "
+#~ msgstr "Сортировать альбомы: "
+
+#~ msgid "Auto detect"
+#~ msgstr "Автоопределение"
+
+#~ msgid "Default"
+#~ msgstr "По умолчанию"
+
+#~ msgid "Music directory :"
+#~ msgstr "Музыкальная директория :"
+
+#~ msgid "Music server is on the same computer as Ario"
+#~ msgstr "Музыкальный сервер на том же компьютере, что и Ario"
+
+#~ msgid "Password :"
+#~ msgstr "Пароль :"
+
+#~ msgid "Server type : "
+#~ msgstr "Тип сервера : "
+
+#~ msgid "XMMS 2 (Experimental)"
+#~ msgstr "XMMS 2 (Экспериментальное)"
+
+#~ msgid "Automatically download the album cover of the playing song"
+#~ msgstr "Автоматически скачать обложку альбома играющей песни"
+
+#~ msgid "Covers Sources"
+#~ msgstr "Обложки"
+
+#~ msgid "Show the covers in the albums list"
+#~ msgstr "Показать обложки в списке альбомов"
+
+#~ msgid "Use Amazon."
+#~ msgstr "Использовать Amazon."
+
+#~ msgid "_Autoconnect on startup"
+#~ msgstr "Автосоединение при запуске"
+
+#~ msgid ""
+#~ "You need to specify a server to connect to. If you don't see your server "
+#~ "thanks to the autodetection, you should check that zeroconf/avahi is "
+#~ "activated in your server or use the manual configuration."
+#~ msgstr ""
+#~ "Вы должны указать сервер для соединения. Если сервер не был определен "
+#~ "автоматически, убедитесь что на нем активно zeroconf/avahi или "
+#~ "используйте ручную настройку."
+
+#~ msgid "Album :"
+#~ msgstr "Альбом :"
+
+#~ msgid "Artist :"
+#~ msgstr "Исполнитель :"
+
+#~ msgid "Downloading cover"
+#~ msgstr "Закачка обложки"
+
+#~ msgid "Local search"
+#~ msgstr "Местный поиск"
+
+#~ msgid "Allow only one instance of Ario"
+#~ msgstr "Позволять только один экземпляр Ario"
+
+#~ msgid "Go to current song when a new song is played"
+#~ msgstr "Переводить курсор на играющую песню"
+
+#~ msgid "Hide window when close button is pressed"
+#~ msgstr "Прятать окно при нажатии на \"крестик\""
+
+#~ msgid "Show rows:"
+#~ msgstr "Показать столбцы:"
+
+#~ msgid "Show tabs"
+#~ msgstr "Показать вкладки"
+
+#~ msgid "Lyrics Sources"
+#~ msgstr "Текст песни"
+
+#~ msgid "Title :"
+#~ msgstr "Заголовок :"
+
+#~ msgid "Proxy Address :"
+#~ msgstr "Адрес прокси :"
+
+#~ msgid "Proxy Port :"
+#~ msgstr "Порт прокси :"
+
+#~ msgid "Use a proxy"
+#~ msgstr "Использовать прокси"
+
+#~ msgid "Audio outputs"
+#~ msgstr "Аудио выходы"
+
+#~ msgid "Crossfade"
+#~ msgstr "Угасание"
+
+#~ msgid "Database"
+#~ msgstr "База данных"
+
+#~ msgid "Last updated:"
+#~ msgstr "Последнее обновление:"
+
+#~ msgid "Stop music on exit"
+#~ msgstr "Прекратить проигрывание при выходе"
+
+#~ msgid "Update on startup"
+#~ msgstr "Обновлять при загрузке"
+
+#~ msgid "_Update"
+#~ msgstr "_Обновить"
+
+#~ msgid "enable crossfade"
+#~ msgstr "включить угасание"
+
+#~ msgid "fade time (s):"
+#~ msgstr "время затухания (s):"
+
+#~ msgid "Add all to playlist"
+#~ msgstr "Добавить всё в плейлист"
+
+#~ msgid "Add to playlist"
+#~ msgstr "_Добавить в плейлист"
+
+#~ msgid "Find on Last.fm"
+#~ msgstr "Найти на Last.fm"
+
+#~ msgid "Database play time :"
+#~ msgstr "База данных"
+
+#~ msgid "Number of albums :"
+#~ msgstr "Количество альбомов :"
+
+#~ msgid "Number of artists :"
+#~ msgstr "Количество артистов :"
+
+#~ msgid "Number of songs :"
+#~ msgstr "Кличество песен"
+
+#~ msgid "Play time :"
+#~ msgstr "Время проигрывания :"
+
+#~ msgid "Uptime :"
+#~ msgstr "Аптайм"
+
+#~ msgid "Comment :"
+#~ msgstr "Кмментарий :"
+
+#~ msgid "Composer :"
+#~ msgstr "Композитор :"
+
+#~ msgid "Date :"
+#~ msgstr "Дата :"
+
+#~ msgid "Disc :"
+#~ msgstr "Диск :"
+
+#~ msgid "Filename :"
+#~ msgstr "Имя файла :"
+
+#~ msgid "Genre :"
+#~ msgstr "Жанр :"
+
+#~ msgid "Length :"
+#~ msgstr "Длина :"
+
+#~ msgid "Performer :"
+#~ msgstr "Исполнитель :"
+
+#~ msgid "Song"
+#~ msgstr "Песня"
+
+#~ msgid "Track :"
+#~ msgstr "Трек"
+
+#~ msgid "Notification"
+#~ msgstr "Уведомление"
+
+#~ msgid "Notification on song change"
+#~ msgstr "Уведомление при смене песни"
+
+#~ msgid "Notification time: "
+#~ msgstr "Время уведомления: "
+
+#~ msgid "On middle button click on tray icon :"
+#~ msgstr "Средний клик по иконке в трее :"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Проверка состояния сервера Last.fm на"
+
+#~ msgid "Disabled"
+#~ msgstr "Выключено"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Узнайте больше о Last.fm на "
+
+#~ msgid "Last submission time:"
+#~ msgstr "Последняя отправка данных:"
+
+#~ msgid "Last.fm Profile"
+#~ msgstr "Профиль пользователя Last.fm"
+
+#~ msgid "Queued tracks:"
+#~ msgstr "В очереди:"
+
+#~ msgid "Status:"
+#~ msgstr "Статус:"
+
+#~ msgid "Tracks submitted:"
+#~ msgstr "Передано треков:"
+
+#~ msgid "Username :"
+#~ msgstr "Имя пользователя :"
+
+#~ msgid "Albums from this artist:"
+#~ msgstr "Альбомы этого артиста:"
+
+#~ msgid "Lyrics:"
+#~ msgstr "Слова:"
 
 #~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
 #~ msgstr ""
