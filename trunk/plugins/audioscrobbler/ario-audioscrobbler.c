@@ -102,6 +102,7 @@ typedef struct
         gchar *title;
         guint length;
         time_t play_time;
+        gchar *encoded_play_time;
 } AudioscrobblerEntry;
 
 typedef struct
@@ -1117,6 +1118,14 @@ eel_strdup_strftime (const char *format, struct tm *time_pieces)
         return result;
 }
 
+#ifdef _WIN32
+inline struct tm* localtime_r (const time_t *clock, struct tm *result) {
+       if (!clock || !result) return NULL;
+       memcpy(result,localtime(clock),sizeof(*result));
+       return result;
+}
+#endif 
+
 /* Based on evolution/mail/message-list.c:filter_date() */
 static char *
 ario_utf_friendly_time (time_t date)
@@ -1532,6 +1541,7 @@ audioscrobbler_entry_init (AudioscrobblerEntry *entry)
         entry->title = g_strdup ("");
         entry->length = 0;
         entry->play_time = 0;
+        entry->encoded_play_time = NULL;
 }
 
 static void
@@ -1540,6 +1550,7 @@ audioscrobbler_entry_free (AudioscrobblerEntry *entry)
         g_free (entry->artist);
         g_free (entry->album);
         g_free (entry->title);
+        g_free (entry->encoded_play_time);
 
         g_free (entry);
 }
@@ -1560,8 +1571,12 @@ audioscrobbler_entry_encode (AudioscrobblerEntry *entry)
                                           EXTRA_URI_ENCODE_CHARS);
 
         encoded->timestamp = g_new0 (gchar, 30);
-        strftime (encoded->timestamp, 30, SCROBBLER_DATE_FORMAT, 
-                  gmtime (&entry->play_time));
+        if (entry->encoded_play_time) {
+                encoded->timestamp = g_strndup (entry->encoded_play_time, 30);
+        } else {
+                strftime (encoded->timestamp, 30, SCROBBLER_DATE_FORMAT, 
+                                gmtime (&entry->play_time));
+        }
 
         encoded->length = entry->length;
 
@@ -1618,10 +1633,7 @@ ario_audioscrobbler_load_entry_from_string (const char *string)
                                 entry->length = atoi (breaks2[1]);
                         }
                         if (g_str_has_prefix (breaks2[0], "i")) {
-                                struct tm tm;
-                                strptime (breaks2[1], SCROBBLER_DATE_FORMAT, 
-                                          &tm);
-                                entry->play_time = mktime (&tm);
+                                entry->encoded_play_time = g_strdup (breaks2[1]);
                         }
                 }
 
@@ -1762,9 +1774,13 @@ ario_audioscrobbler_print_queue (ArioAudioscrobbler *audioscrobbler, gboolean su
                 ARIO_LOG_DBG ("      album: %s", entry->album);
                 ARIO_LOG_DBG ("      title: %s", entry->title);
                 ARIO_LOG_DBG ("     length: %d", entry->length);
-                strftime (timestamp, 30, SCROBBLER_DATE_FORMAT, 
-                          gmtime (&entry->play_time));
-                ARIO_LOG_DBG ("  timestamp: %s", timestamp);
+                if (entry->encoded_play_time) {
+                        ARIO_LOG_DBG ("  timestamp: %s", entry->encoded_play_time);
+                } else {
+                        strftime (timestamp, 30, SCROBBLER_DATE_FORMAT, 
+                                        gmtime (&entry->play_time));
+                        ARIO_LOG_DBG ("  timestamp: %s", timestamp);
+                }
         }
 }
 
