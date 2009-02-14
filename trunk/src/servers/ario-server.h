@@ -287,6 +287,29 @@ gchar **                ario_server_get_items_names                        (void
 
 const gchar*            ario_server_song_get_tag                           (const ArioServerSong *song,
                                                                             ArioServerTag tag);
+void                    ario_server_playlist_add_songs                     (const GSList *songs,
+                                                                            const gint pos,
+                                                                            const gboolean play);
+void                    ario_server_playlist_add_dir                       (const gchar *dir,
+                                                                            const gint pos,
+                                                                            const gboolean play);
+void                    ario_server_playlist_add_criterias                 (const GSList *criterias,
+                                                                            const gint pos,
+                                                                            const gboolean play,
+                                                                            const gint nb_entries);
+void                    ario_server_playlist_append_artists                (const GSList *artists,
+                                                                            const gboolean play,
+                                                                            const gint nb_entries);
+void                    ario_server_playlist_append_songs                  (const GSList *songs,
+                                                                            const gboolean play);
+void                    ario_server_playlist_append_server_songs           (const GSList *songs,
+                                                                            const gboolean play);
+void                    ario_server_playlist_append_dir                    (const gchar *dir,
+                                                                            const gboolean play);
+void                    ario_server_playlist_append_criterias              (const GSList *criterias,
+                                                                            const gboolean play,
+                                                                            const gint nb_entries);
+
 G_END_DECLS
 
 #endif /* __ARIO_SERVER_H */

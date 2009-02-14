@@ -508,7 +508,7 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
 
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 songs = ario_server_get_songs_from_playlist (tmp->data);
-                ario_playlist_append_server_songs (songs, play);
+                ario_server_playlist_append_server_songs (songs, play);
 
                 g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
                 g_slist_free (songs);

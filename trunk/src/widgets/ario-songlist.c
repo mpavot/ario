@@ -298,7 +298,7 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist,
         gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
                                              songlists_foreach,
                                              &songlists);
-        ario_playlist_append_songs (songlists, play);
+        ario_server_playlist_append_songs (songlists, play);
 
         g_slist_foreach (songlists, (GFunc) g_free, NULL);
         g_slist_free (songlists);

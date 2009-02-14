@@ -565,7 +565,7 @@ ario_filesystem_add_filetree (ArioFilesystem *filesystem,
 
         g_return_if_fail (dir);
 
-        ario_playlist_append_dir (dir, play);
+        ario_server_playlist_append_dir (dir, play);
         g_free (dir);
 }
 

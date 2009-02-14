@@ -569,7 +569,7 @@ ario_information_cover_button_press_cb (GtkWidget *widget,
 
                 criterias = g_slist_append (criterias, criteria);
 
-                ario_playlist_append_criterias (criterias, FALSE, -1);
+                ario_server_playlist_append_criterias (criterias, FALSE, -1);
 
                 g_slist_free (criteria);
                 g_slist_free (criterias);
