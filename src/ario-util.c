@@ -627,9 +627,11 @@ ario_util_convert_from_iso8859 (const char *string)
         return ret;
 }
 
-gboolean ario_file_get_contents (const gchar *filename, gchar **contents,
+gboolean
+ario_file_get_contents (const gchar *filename, gchar **contents,
                                  gsize *length, GError **error)
 {
+        ARIO_LOG_FUNCTION_START
         gboolean ret;
         gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
 
@@ -646,9 +648,11 @@ gboolean ario_file_get_contents (const gchar *filename, gchar **contents,
         return ret;
 }
 
-gboolean ario_file_set_contents (const gchar *filename, const gchar *contents,
+gboolean
+ario_file_set_contents (const gchar *filename, const gchar *contents,
                                  gsize length, GError **error)
 {
+        ARIO_LOG_FUNCTION_START
         gboolean ret;
         gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
 
@@ -665,8 +669,10 @@ gboolean ario_file_set_contents (const gchar *filename, const gchar *contents,
         return ret;
 }
 
-gboolean ario_file_test (const gchar *filename, GFileTest test)
+gboolean
+ario_file_test (const gchar *filename, GFileTest test)
 {
+        ARIO_LOG_FUNCTION_START
         gboolean ret;
         gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
         if (!filename_fse)
@@ -677,3 +683,34 @@ gboolean ario_file_test (const gchar *filename, GFileTest test)
         g_free (filename_fse);
         return ret;
 }
+
+const char *
+ario_util_stristr (const char *haystack,
+                   const char *needle)
+{
+        ARIO_LOG_FUNCTION_START
+        if (!*needle) {
+                return haystack;
+        }
+
+        for (; *haystack; ++haystack) {
+                if (toupper(*haystack) == toupper(*needle)) {
+                        /*
+                         * Matched starting char -- loop through remaining chars.
+                         */
+                        const char *h, *n;
+
+                        for (h = haystack, n = needle; *h && *n; ++h, ++n) {
+                                if (toupper(*h) != toupper(*n)) {
+                                        break;
+                                }
+                        }
+                        /* matched all of 'needle' to null termination */
+                        if (!*n) {
+                                return haystack; /* return the start of the match */
+                        }
+                }
+        }
+        return 0;
+}
+
