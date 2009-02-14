@@ -87,7 +87,7 @@ ario_util_abs (const gint a)
 {
         return (a > 0 ? a : -a);
 }
-                
+
 static inline gint
 ario_util_min (const gint a,
                const gint b)
@@ -102,3 +102,15 @@ ario_util_max (const gint a,
         return (a > b ? a : b);
 }
 
+static inline gint
+ario_util_strcmp (const gchar *a,
+                  const gchar* b)
+{
+        if (!a && !b)
+                return 0;
+        if (!a && b)
+                return 1;
+        if (a && !b)
+                return -1;
+        return g_utf8_collate (a, b);
+}

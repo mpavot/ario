@@ -65,6 +65,7 @@ void                    ario_sourcemanager_append       (ArioSource *source);
 void                    ario_sourcemanager_remove       (ArioSource *source);
 void                    ario_sourcemanager_reorder      (void);
 void                    ario_sourcemanager_shutdown     (void);
+void                    ario_sourcemanager_goto_playling_song (void);
 
 G_END_DECLS
 
