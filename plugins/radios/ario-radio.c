@@ -584,7 +584,7 @@ ario_radio_add_in_playlist (ArioRadio *radio,
         gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
                                              radios_foreach,
                                              &radios);
-        ario_playlist_append_songs (radios, play);
+        ario_server_playlist_append_songs (radios, play);
 
         g_slist_foreach (radios, (GFunc) g_free, NULL);
         g_slist_free (radios);
