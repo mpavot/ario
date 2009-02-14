@@ -81,6 +81,10 @@ gboolean                ario_file_set_contents               (const gchar *filen
 gboolean                ario_file_test                       (const gchar *filename,
                                                               GFileTest test);
 
+/* Case insensitive strstr */
+const char *            ario_util_stristr                    (const char *haystack,
+                                                              const char *needle);
+
 /* Inline methods */
 static inline gint
 ario_util_abs (const gint a)
