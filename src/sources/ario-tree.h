@@ -74,6 +74,9 @@ void                    ario_tree_cmd_albums_properties (ArioTree *tree);
 
 void                    ario_tree_cmd_songs_properties  (ArioTree *tree);
 
+void                    ario_tree_goto_playling_song    (ArioTree *tree,
+                                                         const ArioServerSong *song);
+
 G_END_DECLS
 
 #endif /* __ARIO_TREE_H */

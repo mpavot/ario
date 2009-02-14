@@ -812,3 +812,25 @@ ario_server_get_items_names (void)
         return ArioServerItemNames;
 }
 
+const gchar*
+ario_server_song_get_tag (const ArioServerSong *song,
+                          ArioServerTag tag)
+{
+        ARIO_LOG_FUNCTION_START
+        switch (tag) {
+        case MPD_TAG_ITEM_ARTIST: return song->artist;
+        case MPD_TAG_ITEM_ALBUM: return song->album;
+        case MPD_TAG_ITEM_TITLE: return song->title;
+        case MPD_TAG_ITEM_TRACK: return song->track;
+        case MPD_TAG_ITEM_NAME: return song->name;
+        case MPD_TAG_ITEM_GENRE: return song->genre;
+        case MPD_TAG_ITEM_DATE: return song->date;
+        case MPD_TAG_ITEM_COMPOSER: return song->composer;
+        case MPD_TAG_ITEM_PERFORMER: return song->performer;
+        case MPD_TAG_ITEM_COMMENT: return song->comment;
+        case MPD_TAG_ITEM_DISC: return song->disc;
+        case MPD_TAG_ITEM_FILENAME: return song->file;
+        default: return NULL;
+        }
+}
+

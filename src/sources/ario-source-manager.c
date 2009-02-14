@@ -87,7 +87,7 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
                 return GTK_WIDGET (instance);
 
         instance = g_object_new (TYPE_ARIO_SOURCEMANAGER,
-                                      NULL);
+                                 NULL);
         g_return_val_if_fail (instance->priv != NULL, NULL);
 
         instance->priv->ui_manager = mgr;
@@ -108,15 +108,6 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
         ario_sourcemanager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
-        ario_sourcemanager_reorder ();
-
-        ario_conf_notification_add (PREF_SHOW_TABS,
-                                    (ArioNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
-                                    instance);
-
-        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (instance),
-                                    ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
-
         g_signal_connect (instance,
                           "button_press_event",
                           G_CALLBACK (ario_sourcemanager_button_press_cb),
@@ -127,6 +118,15 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
                                 G_CALLBACK (ario_sourcemanager_switch_page_cb),
                                 instance);
 
+        ario_sourcemanager_reorder ();
+
+        ario_conf_notification_add (PREF_SHOW_TABS,
+                                    (ArioNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
+                                    instance);
+
+        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (instance),
+                                    ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
+
         return GTK_WIDGET (instance);
 }
 
@@ -134,6 +134,7 @@ static void
 ario_sourcemanager_shutdown_foreach (ArioSource *source,
                                      GSList **ordered_sources)
 {
+        ARIO_LOG_FUNCTION_START
         ario_source_shutdown (source);
         *ordered_sources = g_slist_append (*ordered_sources, ario_source_get_id (source));
 }
@@ -141,6 +142,7 @@ ario_sourcemanager_shutdown_foreach (ArioSource *source,
 void
 ario_sourcemanager_shutdown (void)
 {
+        ARIO_LOG_FUNCTION_START
         GSList *ordered_sources = NULL;
 
         ario_conf_set_integer (PREF_SOURCE,
@@ -149,6 +151,15 @@ ario_sourcemanager_shutdown (void)
         gtk_container_foreach (GTK_CONTAINER (instance), (GtkCallback) ario_sourcemanager_shutdown_foreach, &ordered_sources);
         ario_conf_set_string_slist (PREF_SOURCE_LIST, ordered_sources);
         g_slist_free (ordered_sources);
+}
+
+void
+ario_sourcemanager_goto_playling_song (void)
+{
+        ARIO_LOG_FUNCTION_START
+        if (instance->priv->source) {
+                ario_source_goto_playling_song (instance->priv->source);
+        }
 }
 
 void

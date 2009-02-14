@@ -127,6 +127,21 @@ ario_browser_get_icon (ArioSource *source)
         return GTK_STOCK_HOME;
 }
 
+static void ario_browser_goto_playling_song (ArioSource *source)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioBrowser *browser = ARIO_BROWSER (source);
+        GSList *tmp;
+        ArioServerSong *song = ario_server_get_current_song ();
+
+        if (!song)
+                return;
+
+        for (tmp = browser->priv->trees; tmp; tmp = g_slist_next (tmp)) {
+                ario_tree_goto_playling_song (ARIO_TREE (tmp->data), song);
+        }
+}
+
 static void
 ario_browser_class_init (ArioBrowserClass *klass)
 {
@@ -142,6 +157,7 @@ ario_browser_class_init (ArioBrowserClass *klass)
         source_class->get_id = ario_browser_get_id;
         source_class->get_name = ario_browser_get_name;
         source_class->get_icon = ario_browser_get_icon;
+        source_class->goto_playling_song = ario_browser_goto_playling_song;
 
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,

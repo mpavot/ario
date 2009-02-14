@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "servers/ario-server.h"
+#include "sources/ario-source-manager.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
@@ -1336,6 +1337,7 @@ ario_playlist_cmd_goto_playing_song (GtkAction *action,
         gtk_tree_model_foreach (GTK_TREE_MODEL (playlist->priv->model),
                                 (GtkTreeModelForeachFunc) ario_playlist_model_foreach,
                                 playlist);
+        ario_sourcemanager_goto_playling_song ();
 }
 
 void

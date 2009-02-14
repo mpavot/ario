@@ -285,6 +285,8 @@ void                    ario_server_criteria_free                          (Ario
 
 gchar **                ario_server_get_items_names                        (void);
 
+const gchar*            ario_server_song_get_tag                           (const ArioServerSong *song,
+                                                                            ArioServerTag tag);
 G_END_DECLS
 
 #endif /* __ARIO_SERVER_H */

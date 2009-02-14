@@ -1282,3 +1282,51 @@ ario_tree_cmd_songs_properties (ArioTree *tree)
         }
 }
 
+typedef struct
+{
+        const char *tag;
+        ArioTree *tree;
+} ArioTreeForeachData;
+
+static gboolean
+ario_tree_model_foreach (GtkTreeModel *model,
+                         GtkTreePath *path,
+                         GtkTreeIter *iter,
+                         ArioTreeForeachData *data)
+{
+        gchar *value;
+
+        gtk_tree_model_get (model, iter, VALUE_COLUMN, &value, -1);
+
+        if (ario_util_strcmp (data->tag, value) == 0) {
+                gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (data->tree->priv->tree),
+                                              path,
+                                              NULL,
+                                              TRUE,
+                                              0.5, 0);
+                gtk_tree_view_set_cursor (GTK_TREE_VIEW (data->tree->priv->tree),
+                                          path,
+                                          NULL, FALSE);
+                g_free (value);
+                return TRUE;
+        }
+        g_free (value);
+
+        return FALSE;
+}
+
+void
+ario_tree_goto_playling_song (ArioTree *tree,
+                              const ArioServerSong *song)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioTreeForeachData data;
+        data.tree = tree;
+        data.tag = ario_server_song_get_tag (song, tree->priv->tag);
+        if (!data.tag)
+                data.tag = ARIO_SERVER_UNKNOWN;
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (tree->priv->model),
+                                (GtkTreeModelForeachFunc) ario_tree_model_foreach,
+                                &data);
+}
