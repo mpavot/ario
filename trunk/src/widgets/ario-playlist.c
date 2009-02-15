@@ -1465,7 +1465,10 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
                 g_list_free (paths);
 
                 return TRUE;
-        } else if (event->string && event->length > 0 && event->keyval != GDK_Escape) {
+        } else if (event->string
+                   && event->length > 0
+                   && event->keyval != GDK_Escape
+                   && !(event->state & GDK_CONTROL_MASK)) {
                 if (!playlist->priv->in_search) {
                         gtk_widget_show (playlist->priv->search_hbox);
                         gtk_widget_grab_focus (playlist->priv->search_entry);
