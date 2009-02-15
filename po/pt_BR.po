@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 11:34+0100\n"
+"POT-Creation-Date: 2009-02-15 12:25+0100\n"
 "PO-Revision-Date: 2009-01-03 15:05+0000\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -84,7 +84,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr "Fazer download automático da capa do álbum do som em execução"
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
+#: ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
 msgstr "Capas"
 
@@ -101,7 +101,7 @@ msgid "Use Amazon."
 msgstr "Usar Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:110
+#: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
 msgstr "Conexão"
 
@@ -150,86 +150,37 @@ msgstr "Pesquisa local"
 msgid "Search"
 msgstr "Pesquisar"
 
-#. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "Álbum"
-
-#: ../data/ui/interface-prefs.ui.h:2
+#: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
 msgstr "É permitida apenas uma instância do Ario"
 
-#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "Artista"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
-msgid "Date"
-msgstr "Data"
-
-#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
-msgid "Duration"
-msgstr "Duração"
-
-#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
-msgid "File"
-msgstr "Arquivo"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
-msgid "Genre"
-msgstr "Gênero"
-
-#: ../data/ui/interface-prefs.ui.h:8
-msgid "Go to current song when a new song is played"
-msgstr "Ir para música atual quando uma outra é executada"
-
-#: ../data/ui/interface-prefs.ui.h:9
+#: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
 msgstr "Ocultar janela quando o botão fechar for pressionado"
 
-#: ../data/ui/interface-prefs.ui.h:10
-#: ../src/shell/ario-shell-preferences.c:140
+#: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
 msgstr "Interface"
 
-#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "Lista de reprodução"
+#: ../data/ui/others-prefs.ui.h:4
+msgid "Proxy"
+msgstr "Proxy"
 
-#: ../data/ui/interface-prefs.ui.h:12
-msgid "Show rows:"
-msgstr "Exibir linhas:"
+#: ../data/ui/others-prefs.ui.h:5
+msgid "Proxy Address :"
+msgstr "Endereço do proxy :"
 
-#: ../data/ui/interface-prefs.ui.h:13
+#: ../data/ui/others-prefs.ui.h:6
+msgid "Proxy Port :"
+msgstr "Porta do proxy :"
+
+#: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
 msgstr "Mostrar abas"
 
-#. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "Título"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
-msgid "Track"
-msgstr "Faixa"
+#: ../data/ui/others-prefs.ui.h:8
+msgid "Use a proxy"
+msgstr "Usar um proxy"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
@@ -240,26 +191,77 @@ msgstr "Fonte de Letras"
 msgid "Title :"
 msgstr "Título :"
 
-#: ../data/ui/playlist-prefs.ui.h:2
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "Álbum"
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "Artista"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr "Data"
+
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "Duração"
+
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr "Arquivo"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr "Gênero"
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Go to current song when a new song is played"
+msgstr "Ir para música atual quando uma outra é executada"
+
+#: ../data/ui/playlist-prefs.ui.h:8
+msgid "Mode"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:216
+#: ../src/shell/ario-shell.c:199 ../src/shell/ario-shell-preferences.c:124
+msgid "Playlist"
+msgstr "Lista de reprodução"
+
+#: ../data/ui/playlist-prefs.ui.h:10
 #, fuzzy
 msgid "Playlist mode:"
 msgstr "Nome da lista de execução :"
 
-#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "Proxy"
+#: ../data/ui/playlist-prefs.ui.h:11
+msgid "Show rows:"
+msgstr "Exibir linhas:"
 
-#: ../data/ui/proxy-prefs.ui.h:2
-msgid "Proxy Address :"
-msgstr "Endereço do proxy :"
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "Título"
 
-#: ../data/ui/proxy-prefs.ui.h:3
-msgid "Proxy Port :"
-msgstr "Porta do proxy :"
-
-#: ../data/ui/proxy-prefs.ui.h:4
-msgid "Use a proxy"
-msgstr "Usar um proxy"
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "Faixa"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
@@ -337,7 +339,7 @@ msgstr "Número de músicas :"
 msgid "Play time :"
 msgstr "Tempo de execução :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
 msgstr "Estatísticas"
 
@@ -385,7 +387,7 @@ msgstr "Música"
 msgid "Track :"
 msgstr "Faixa :"
 
-#: ../data/ui/trayicon-prefs.ui.h:1
+#: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
 msgstr "Notificação"
 
@@ -401,7 +403,7 @@ msgstr "Notificação de tempo: "
 msgid "On middle button click on tray icon :"
 msgstr "Clicar em botão para ir icone ao tray:"
 
-#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+#: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Tray icon"
 msgstr "Icone no Tray"
 
@@ -622,7 +624,7 @@ msgstr "_Apagar as capas"
 msgid "_Properties"
 msgstr "_Propriedades"
 
-#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Biblioteca"
 
@@ -812,7 +814,7 @@ msgid "Error saving file"
 msgstr "Erro ao salvar o arquivo"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:135
+#: ../src/shell/ario-shell-preferences.c:134
 #: ../src/shell/ario-shell-songinfos.c:246
 msgid "Lyrics"
 msgstr "Letras"
@@ -825,13 +827,17 @@ msgstr "Download de letras"
 msgid "Source"
 msgstr "Fonte"
 
-#: ../src/shell/ario-shell-preferences.c:82
+#: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
 msgstr "Preferncias do Ario"
 
-#: ../src/shell/ario-shell-preferences.c:115
+#: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
 msgstr "Servidor"
+
+#: ../src/shell/ario-shell-preferences.c:144
+msgid "Others"
+msgstr ""
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format

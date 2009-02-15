@@ -10,11 +10,10 @@ data/ario.desktop.in.in
 [type: gettext/glade]data/ui/cover-prefs.ui
 [type: gettext/glade]data/ui/cover-progress.ui
 [type: gettext/glade]data/ui/cover-select.ui
-[type: gettext/glade]data/ui/interface-prefs.ui
+[type: gettext/glade]data/ui/others-prefs.ui
 [type: gettext/glade]data/ui/lyrics-prefs.ui
 [type: gettext/glade]data/ui/lyrics-select.ui
 [type: gettext/glade]data/ui/playlist-prefs.ui
-[type: gettext/glade]data/ui/proxy-prefs.ui
 [type: gettext/glade]data/ui/server-prefs.ui
 [type: gettext/glade]data/ui/similar-artists.ui
 [type: gettext/glade]data/ui/stats-prefs.ui
@@ -87,12 +86,10 @@ src/preferences/ario-connection-preferences.c
 src/preferences/ario-connection-preferences.h
 src/preferences/ario-cover-preferences.c
 src/preferences/ario-cover-preferences.h
-src/preferences/ario-interface-preferences.c
-src/preferences/ario-interface-preferences.h
+src/preferences/ario-others-preferences.c
+src/preferences/ario-others-preferences.h
 src/preferences/ario-lyrics-preferences.c
 src/preferences/ario-lyrics-preferences.h
-src/preferences/ario-proxy-preferences.c
-src/preferences/ario-proxy-preferences.h
 src/preferences/ario-server-preferences.c
 src/preferences/ario-server-preferences.h
 src/preferences/ario-stats-preferences.c

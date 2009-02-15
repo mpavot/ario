@@ -12,11 +12,10 @@ data/glade/connection-widget.glade
 data/glade/cover-prefs.glade
 data/glade/cover-progress.glade
 data/glade/cover-select.glade
-data/glade/interface-prefs.glade
+data/glade/others-prefs.glade
 data/glade/lyrics-prefs.glade
 data/glade/lyrics-select.glade
 data/glade/playlist-prefs.glade
-data/glade/proxy-prefs.glade
 data/glade/server-prefs.glade
 data/glade/similar-artists.glade
 data/glade/song-infos.glade

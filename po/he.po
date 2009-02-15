@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 11:34+0100\n"
+"POT-Creation-Date: 2009-02-15 12:25+0100\n"
 "PO-Revision-Date: 2008-12-15 06:23+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -87,7 +87,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr ""
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
+#: ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
 msgstr "עטיפות"
 
@@ -104,7 +104,7 @@ msgid "Use Amazon."
 msgstr "השתמש באמאזון."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:110
+#: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
 msgstr "חיבור"
 
@@ -154,87 +154,37 @@ msgstr "חיפוש מקומי"
 msgid "Search"
 msgstr "חפש"
 
-#. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "אלבום"
-
-#: ../data/ui/interface-prefs.ui.h:2
+#: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
 msgstr ""
 
-#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "אמן"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
-msgid "Date"
-msgstr ""
-
-#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
-msgid "Duration"
-msgstr "משך"
-
-#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
-msgid "File"
-msgstr ""
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
-msgid "Genre"
-msgstr ""
-
-#: ../data/ui/interface-prefs.ui.h:8
-msgid "Go to current song when a new song is played"
-msgstr ""
-
-#: ../data/ui/interface-prefs.ui.h:9
+#: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
 msgstr ""
 
-#: ../data/ui/interface-prefs.ui.h:10
-#: ../src/shell/ario-shell-preferences.c:140
+#: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
 msgstr "מנשק"
 
-#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "רשימת השמעה"
+#: ../data/ui/others-prefs.ui.h:4
+msgid "Proxy"
+msgstr "מתווך"
 
-#: ../data/ui/interface-prefs.ui.h:12
-#, fuzzy
-msgid "Show rows:"
-msgstr "הצ_ג את מילות השירים"
+#: ../data/ui/others-prefs.ui.h:5
+msgid "Proxy Address :"
+msgstr "כתובת המתווך :"
 
-#: ../data/ui/interface-prefs.ui.h:13
+#: ../data/ui/others-prefs.ui.h:6
+msgid "Proxy Port :"
+msgstr "פותחת המתווך :"
+
+#: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
 msgstr "הצג לשוניות"
 
-#. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "כותרת"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
-msgid "Track"
-msgstr "רצועה"
+#: ../data/ui/others-prefs.ui.h:8
+msgid "Use a proxy"
+msgstr "השתמש במתווך"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
@@ -245,26 +195,78 @@ msgstr "מקורות מילות השירים"
 msgid "Title :"
 msgstr "כותרת :"
 
-#: ../data/ui/playlist-prefs.ui.h:2
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "אלבום"
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "אמן"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "משך"
+
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr ""
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Go to current song when a new song is played"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:8
+msgid "Mode"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:216
+#: ../src/shell/ario-shell.c:199 ../src/shell/ario-shell-preferences.c:124
+msgid "Playlist"
+msgstr "רשימת השמעה"
+
+#: ../data/ui/playlist-prefs.ui.h:10
 #, fuzzy
 msgid "Playlist mode:"
 msgstr "שם רשימת ההשמעה :"
 
-#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "מתווך"
+#: ../data/ui/playlist-prefs.ui.h:11
+#, fuzzy
+msgid "Show rows:"
+msgstr "הצ_ג את מילות השירים"
 
-#: ../data/ui/proxy-prefs.ui.h:2
-msgid "Proxy Address :"
-msgstr "כתובת המתווך :"
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "כותרת"
 
-#: ../data/ui/proxy-prefs.ui.h:3
-msgid "Proxy Port :"
-msgstr "פותחת המתווך :"
-
-#: ../data/ui/proxy-prefs.ui.h:4
-msgid "Use a proxy"
-msgstr "השתמש במתווך"
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "רצועה"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
@@ -346,7 +348,7 @@ msgstr "מספר השירים :"
 msgid "Play time :"
 msgstr "זמן הנגינה :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
 msgstr "סטטיסטיקה"
 
@@ -394,7 +396,7 @@ msgstr "שיר"
 msgid "Track :"
 msgstr "רצועה :"
 
-#: ../data/ui/trayicon-prefs.ui.h:1
+#: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
 #, fuzzy
 msgid "Notification"
 msgstr "אישור"
@@ -411,7 +413,7 @@ msgstr ""
 msgid "On middle button click on tray icon :"
 msgstr "עם לחיצת הלחצן האמצעי על הסמל בסרגל :"
 
-#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+#: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Tray icon"
 msgstr "סמל בסרגל"
 
@@ -631,7 +633,7 @@ msgstr "מ_חק את העטיפות"
 msgid "_Properties"
 msgstr "_מאפיינים"
 
-#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "ספרייה"
 
@@ -791,7 +793,7 @@ msgid "Error saving file"
 msgstr "שגיאה בשמירת הקובץ"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:135
+#: ../src/shell/ario-shell-preferences.c:134
 #: ../src/shell/ario-shell-songinfos.c:246
 msgid "Lyrics"
 msgstr "מילות השיר"
@@ -804,13 +806,17 @@ msgstr "הורדת מילות השיר"
 msgid "Source"
 msgstr ""
 
-#: ../src/shell/ario-shell-preferences.c:82
+#: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
 msgstr "העדפות Ario"
 
-#: ../src/shell/ario-shell-preferences.c:115
+#: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
 msgstr "שרת"
+
+#: ../src/shell/ario-shell-preferences.c:144
+msgid "Others"
+msgstr ""
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
