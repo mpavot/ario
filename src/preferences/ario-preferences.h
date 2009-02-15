@@ -244,6 +244,14 @@
 #define PREF_PLAYLIST_MODE                     "playlist-mode"
 #define PREF_PLAYLIST_MODE_DEFAULT             "normal"
 
+/* Number of songs added to the playlist in dynamic mode*/
+#define PREF_DYNAMIC_NBSONGS                   "dynamic-nbsongs"
+#define PREF_DYNAMIC_NBSONGS_DEFAULT           10
+
+/* Type of songs added to the playlist in dynamic mode*/
+#define PREF_DYNAMIC_TYPE                      "dynamic-type"
+#define PREF_DYNAMIC_TYPE_DEFAULT              0
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,

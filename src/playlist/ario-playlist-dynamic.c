@@ -32,7 +32,7 @@ static void ario_playlist_dynamic_class_init (ArioPlaylistDynamicClass *klass);
 static void ario_playlist_dynamic_init (ArioPlaylistDynamic *playlist_dynamic);
 static void ario_playlist_dynamic_finalize (GObject *object);
 static void ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
-                                            ArioPlaylist *playlist);
+                                             ArioPlaylist *playlist);
 static GtkWidget* ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode);
 
 struct ArioPlaylistDynamicPrivate
@@ -41,6 +41,20 @@ struct ArioPlaylistDynamicPrivate
 };
 
 static GObjectClass *parent_class = NULL;
+
+typedef enum
+{
+        SAME_ARTIST,
+        SAME_ALBUM,
+        SIMILAR_ARTISTS
+} ArioDynamicType;
+
+static const char *dynamic_type[] = {
+        N_("same artist"),
+        N_("same album"),
+        N_("similar artists"),
+        NULL
+};
 
 GType
 ario_playlist_dynamic_get_type (void)
@@ -129,7 +143,7 @@ ario_playlist_dynamic_new (void)
         ArioPlaylistDynamic *dynamic;
 
         dynamic = g_object_new (TYPE_ARIO_PLAYLIST_DYNAMIC,
-                               NULL);
+                                NULL);
 
         g_return_val_if_fail (dynamic->priv != NULL, NULL);
 
@@ -138,16 +152,149 @@ ario_playlist_dynamic_new (void)
 
 static void
 ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
-                                ArioPlaylist *playlist)
+                                 ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-        ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (),
-                                                           10);
+        GSList *artists = NULL;
+        ArioServerAtomicCriteria atomic_criteria1;
+        ArioServerAtomicCriteria atomic_criteria2;
+        ArioServerCriteria *criteria = NULL;
+        GSList *criterias = NULL;
+        int nbsongs = ario_conf_get_integer (PREF_DYNAMIC_NBSONGS, PREF_DYNAMIC_NBSONGS_DEFAULT);
+
+        switch (ario_conf_get_integer (PREF_DYNAMIC_TYPE, PREF_DYNAMIC_TYPE_DEFAULT)) {
+        case SAME_ARTIST:
+                artists = g_slist_append (artists, ario_server_get_current_artist ());
+                ario_server_playlist_append_artists (artists, FALSE, nbsongs);
+                g_slist_free (artists);
+                break;
+        case SAME_ALBUM:
+                atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                atomic_criteria1.value = ario_server_get_current_artist ();
+                atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                atomic_criteria2.value = ario_server_get_current_album ();
+
+                criteria = g_slist_append (criteria, &atomic_criteria1);
+                criteria = g_slist_append (criteria, &atomic_criteria2);
+
+                criterias = g_slist_append (criterias, criteria);
+
+                ario_server_playlist_append_criterias (criterias, FALSE, nbsongs);
+
+                g_slist_free (criteria);
+                g_slist_free (criterias);
+                break;
+        case SIMILAR_ARTISTS:
+                ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (),
+                                                                   nbsongs);
+                break;
+        }
+}
+
+static void
+ario_playlist_dynamic_type_combobox_changed_cb (GtkComboBox *combobox,
+                                                ArioPlaylistMode *playlist_mode)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreeIter iter;
+        int type;
+
+        gtk_combo_box_get_active_iter (combobox, &iter);
+        gtk_tree_model_get (gtk_combo_box_get_model (combobox),
+                            &iter,
+                            1, &type,
+                            -1);
+        ario_conf_set_integer (PREF_DYNAMIC_TYPE, type);
+}
+
+static void
+ario_playlist_dynamic_nbsongs_changed_cb (GtkWidget *widget,
+                                          ArioPlaylistMode *playlist_mode)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_integer (PREF_DYNAMIC_NBSONGS,
+                               (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 }
 
 static GtkWidget*
 ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode)
 {
-        /* TODO */
-        return NULL;
+        GtkWidget *hbox;
+        GtkWidget *spinbutton;
+        GtkWidget *combobox;
+        GtkAdjustment *adj;
+        GtkListStore *list_store;
+        GtkCellRenderer *renderer;
+        GtkTreeIter iter;
+        int i;
+
+        hbox = gtk_hbox_new (FALSE, 4);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_label_new ("Automatically add"),
+                            FALSE, FALSE,
+                            0);
+
+        adj = GTK_ADJUSTMENT (gtk_adjustment_new (10,
+                                                  0.0,
+                                                  1000.0,
+                                                  1.0,
+                                                  10.0,
+                                                  0.0));
+
+        spinbutton = gtk_spin_button_new (adj,
+                                          1.0, 0);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinbutton),
+                                   (double) ario_conf_get_integer (PREF_DYNAMIC_NBSONGS, PREF_DYNAMIC_NBSONGS_DEFAULT));
+
+        g_signal_connect (G_OBJECT (spinbutton),
+                          "value_changed",
+                          G_CALLBACK (ario_playlist_dynamic_nbsongs_changed_cb), playlist_mode);
+
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            spinbutton,
+                            FALSE, FALSE,
+                            0);
+
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_label_new ("songs of"),
+                            FALSE, FALSE,
+                            0);
+
+        combobox = gtk_combo_box_new ();
+
+        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+        for (i = 0; dynamic_type[i]; ++i) {
+                gtk_list_store_append (list_store, &iter);
+                gtk_list_store_set (list_store, &iter,
+                                    0, gettext (dynamic_type[i]),
+                                    1, i,
+                                    -1);
+        }
+        gtk_combo_box_set_model (GTK_COMBO_BOX (combobox),
+                                 GTK_TREE_MODEL (list_store));
+        g_object_unref (list_store);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (combobox));
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+                                        "text", 0, NULL);
+
+        gtk_combo_box_set_active (GTK_COMBO_BOX (combobox),
+                                  ario_conf_get_integer (PREF_DYNAMIC_TYPE, PREF_DYNAMIC_TYPE_DEFAULT));
+
+        g_signal_connect (G_OBJECT (combobox),
+                          "changed",
+                          G_CALLBACK (ario_playlist_dynamic_type_combobox_changed_cb), playlist_mode);
+
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            combobox,
+                            FALSE, FALSE,
+                            0);
+
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            gtk_label_new ("to playlist."),
+                            FALSE, FALSE,
+                            0);
+        return hbox;
 }
