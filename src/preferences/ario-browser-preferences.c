@@ -263,25 +263,23 @@ ario_browser_preferences_tree_combobox_changed_cb (GtkComboBox *widget,
         GSList *temp;
         GtkComboBox *combobox;
         gchar *conf = NULL, *tmp;
-        GValue *value;
+        int value;
         GtkTreeIter iter;
 
         for (temp = browser_preferences->priv->tree_comboboxs; temp; temp = g_slist_next (temp)) {
                 combobox = temp->data;
                 gtk_combo_box_get_active_iter (combobox, &iter);
-                value = (GValue*)g_malloc(sizeof(GValue));
-                value->g_type = 0;
-                gtk_tree_model_get_value (gtk_combo_box_get_model (combobox),
-                                          &iter,
-                                          1, value);
+                gtk_tree_model_get (gtk_combo_box_get_model (combobox),
+                                    &iter,
+                                    1, &value,
+                                    -1);
                 if (!conf) {
-                        conf = g_strdup_printf ("%d", g_value_get_int (value));
+                        conf = g_strdup_printf ("%d", value);
                 } else {
-                        tmp = g_strdup_printf ("%s,%d", conf, g_value_get_int (value));
+                        tmp = g_strdup_printf ("%s,%d", conf, value);
                         g_free (conf);
                         conf = tmp;
                 }
-                g_free (value);
         }
         ario_conf_set_string (PREF_BROWSER_TREES, conf);
         g_free (conf);

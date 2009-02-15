@@ -459,7 +459,6 @@ ario_search_do_search (GtkButton *button,
         ArioServerSong *song;
         GtkTreeIter iter;
         gchar *title;
-        GValue *value;
         GtkListStore *liststore;
 
         for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
@@ -467,13 +466,10 @@ ario_search_do_search (GtkButton *button,
 
                 atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
                 gtk_combo_box_get_active_iter (GTK_COMBO_BOX (search_constraint->combo_box), &iter);
-                value = (GValue*)g_malloc(sizeof(GValue));
-                value->g_type = 0;
-                gtk_tree_model_get_value (GTK_TREE_MODEL (search->priv->list_store),
-                                          &iter,
-                                          1, value);
-                atomic_criteria->tag = g_value_get_int (value);
-                g_free (value);
+                gtk_tree_model_get (GTK_TREE_MODEL (search->priv->list_store),
+                                    &iter,
+                                    1, &atomic_criteria->tag,
+                                    -1);
                 atomic_criteria->value = (gchar *) gtk_entry_get_text (GTK_ENTRY (search_constraint->entry));
                 criteria = g_slist_append (criteria, atomic_criteria);
         }
