@@ -363,13 +363,21 @@ ario_playlist_filter_func (GtkTreeModel *model,
 
         for (i = 0; cmp_str[i] && g_utf8_collate (cmp_str[i], "") && visible; ++i) {
                 filter = FALSE;
-                if (title && ario_util_stristr (title, cmp_str[i])) {
+                if (title
+                    && ario_conf_get_boolean (PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT)
+                    && ario_util_stristr (title, cmp_str[i])) {
                         filter = TRUE;
-                } else if (artist && ario_util_stristr (artist, cmp_str[i])) {
+                } else if (artist
+                           && ario_conf_get_boolean (PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT)
+                           && ario_util_stristr (artist, cmp_str[i])) {
                         filter = TRUE;
-                } else if (album && ario_util_stristr (album, cmp_str[i])) {
+                } else if (album
+                           && ario_conf_get_boolean (PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT)
+                           && ario_util_stristr (album, cmp_str[i])) {
                         filter = TRUE;
-                } else if (genre && ario_util_stristr (genre, cmp_str[i])) {
+                } else if (genre
+                           && ario_conf_get_boolean (PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT)
+                           && ario_util_stristr (genre, cmp_str[i])) {
                         filter = TRUE;
                 }
                 visible &= filter;
