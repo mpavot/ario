@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:00+0100\n"
+"POT-Creation-Date: 2009-02-15 11:34+0100\n"
 "PO-Revision-Date: 2008-12-28 13:39+0000\n"
 "Last-Translator: Cosmin Stremţan <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -25,28 +25,403 @@ msgstr "Playerul de muzică Ario"
 msgid "Client application to mpd"
 msgstr "Aplicația client la mpd"
 
-#: ../src/ario-main.c:60
-msgid "Start minimized window"
-msgstr "Pornește cu fereastra minimizată"
+#: ../data/ui/browser-prefs.ui.h:1
+msgid "Library Options"
+msgstr "Opțiuni Colecție"
 
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "Library Organisation"
+msgstr "Organizare Colecție"
+
+#: ../data/ui/browser-prefs.ui.h:3
+msgid "Sort albums: "
+msgstr "Sortează albume: "
+
+#: ../data/ui/connection-widget.ui.h:1
+msgid "Auto detect"
+msgstr "Detectează automat"
+
+#: ../data/ui/connection-widget.ui.h:2
+msgid "Default"
+msgstr "Implicit"
+
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "Gazdă:"
+
+#: ../data/ui/connection-widget.ui.h:4
+msgid "Music directory :"
+msgstr "Directorul cu muzică:"
+
+#: ../data/ui/connection-widget.ui.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr "Server-ul de muzică este pe același computer ca și Ario"
+
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
+#: ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Nume:"
+
+#: ../data/ui/connection-widget.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+msgid "Password :"
+msgstr "Parolă:"
+
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "Port:"
+
+#: ../data/ui/connection-widget.ui.h:9
+msgid "Server type : "
+msgstr "Tipul de server: "
+
+#: ../data/ui/connection-widget.ui.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr "XMMS 2 (Experimental)"
+
+#: ../data/ui/cover-prefs.ui.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr "Descarcă automat coperta albumului melodei care rulează"
+
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "Coperte"
+
+#: ../data/ui/cover-prefs.ui.h:3
+msgid "Covers Sources"
+msgstr "Sursele copertelor"
+
+#: ../data/ui/cover-prefs.ui.h:4
+msgid "Show the covers in the albums list"
+msgstr "Arată copertele în lista cu albume"
+
+#: ../data/ui/cover-prefs.ui.h:5
+msgid "Use Amazon."
+msgstr "Utilizați Amazon."
+
+#: ../data/ui/connection-prefs.ui.h:1
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "Conexiune"
+
+#: ../data/ui/connection-prefs.ui.h:2
+msgid "_Autoconnect on startup"
+msgstr "_Autoconectare la pornire"
+
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "_Conectare"
+
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "_Deconectează"
+
+#: ../data/ui/connection-assistant.ui.h:1
+msgid ""
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
+msgstr ""
+"Trebuie specificat la ce server se dorește conectarea. Dacă nu se găsește "
+"serverul specificat prin procedurile de autodetecție, trebuie verificat ca "
+"zeroconf/avahi să fie activ în server sau folosiți configurarea manuală."
+
+#: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
+#: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
+msgid "Album :"
+msgstr "Album:"
+
+#: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
+#: ../plugins/information/information.ui.h:3
+msgid "Artist :"
+msgstr "Artist:"
+
+#: ../data/ui/cover-progress.ui.h:3
+msgid "Downloading cover"
+msgstr "Descărcare copertă în curs"
+
+#: ../data/ui/cover-select.ui.h:3
+msgid "Local search"
+msgstr "Căutare locală"
+
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "Căutare"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "Album"
+
+#: ../data/ui/interface-prefs.ui.h:2
+msgid "Allow only one instance of Ario"
+msgstr "Permite o singură versiune de Ario"
+
+#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "Artist"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr "Dată"
+
+#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "Durată"
+
+#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr "Fişier"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr "Gen muzical"
+
+#: ../data/ui/interface-prefs.ui.h:8
+msgid "Go to current song when a new song is played"
+msgstr "Sari la cîntecul curent cînd un cantec nou este redat"
+
+#: ../data/ui/interface-prefs.ui.h:9
+msgid "Hide window when close button is pressed"
+msgstr "Ascunde fereastra cînd butonul de închidere este apăsat"
+
+#: ../data/ui/interface-prefs.ui.h:10
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "Interfaţă"
+
+#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "Listă redare"
+
+#: ../data/ui/interface-prefs.ui.h:12
+msgid "Show rows:"
+msgstr "Arată rîndurile"
+
+#: ../data/ui/interface-prefs.ui.h:13
+msgid "Show tabs"
+msgstr "Arată tab-urile"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "Titlu"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "Piesă"
+
+#: ../data/ui/lyrics-prefs.ui.h:1
+msgid "Lyrics Sources"
+msgstr "Sursele de versuri"
+
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
+#: ../plugins/information/information.ui.h:6
+msgid "Title :"
+msgstr "Titlu :"
+
+#: ../data/ui/playlist-prefs.ui.h:2
+#, fuzzy
+msgid "Playlist mode:"
+msgstr "Numele listei de redare :"
+
+#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "Proxy"
+
+#: ../data/ui/proxy-prefs.ui.h:2
+msgid "Proxy Address :"
+msgstr "Adresă proxy :"
+
+#: ../data/ui/proxy-prefs.ui.h:3
+msgid "Proxy Port :"
+msgstr "Port proxy :"
+
+#: ../data/ui/proxy-prefs.ui.h:4
+msgid "Use a proxy"
+msgstr "Folosește un proxy"
+
+#: ../data/ui/server-prefs.ui.h:1
+msgid "Audio outputs"
+msgstr "Ieșiri audio"
+
+#: ../data/ui/server-prefs.ui.h:2
+msgid "Crossfade"
+msgstr "Intercalare"
+
+#: ../data/ui/server-prefs.ui.h:3
+msgid "Database"
+msgstr "Bază de date"
+
+#: ../data/ui/server-prefs.ui.h:4
+msgid "Last updated:"
+msgstr "Ultima actualizare:"
+
+#: ../data/ui/server-prefs.ui.h:5
+msgid "Stop music on exit"
+msgstr "Oprește muzica le ieșire"
+
+#: ../data/ui/server-prefs.ui.h:6
+msgid "Update on startup"
+msgstr "Actualizează la pornire"
+
+#: ../data/ui/server-prefs.ui.h:7
+msgid "_Update"
+msgstr "_Actualizare"
+
+#: ../data/ui/server-prefs.ui.h:8
+msgid "enable crossfade"
+msgstr "activare intercalare"
+
+#: ../data/ui/server-prefs.ui.h:9
+msgid "fade time (s):"
+msgstr "şterge timpul (s):"
+
+#: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
+#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
-#: ../src/ario-util.c:81
+#: ../data/ui/similar-artists.ui.h:1
+msgid "Add all to playlist"
+msgstr "Adaugă totul la lista de redare"
+
+#: ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Adaugă la lista de redare"
+
+#: ../data/ui/similar-artists.ui.h:3
+msgid "Find on Last.fm"
+msgstr "Găseşte in Ultimul.fm"
+
+#: ../data/ui/stats-prefs.ui.h:1
+msgid "Database play time :"
+msgstr "Timpul de redare a bazei de date"
+
+#: ../data/ui/stats-prefs.ui.h:2
+msgid "Number of albums :"
+msgstr "Numărul albumelor :"
+
+#: ../data/ui/stats-prefs.ui.h:3
+#, fuzzy
+msgid "Number of artists :"
+msgstr "Numărul melodiilor :"
+
+#: ../data/ui/stats-prefs.ui.h:4
+msgid "Number of songs :"
+msgstr "Numărul melodiilor :"
+
+#: ../data/ui/stats-prefs.ui.h:5
+msgid "Play time :"
+msgstr "Timpul de redare :"
+
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "Statistici"
+
+#: ../data/ui/stats-prefs.ui.h:7
+msgid "Uptime :"
+msgstr "Timp de la pornire :"
+
+#: ../data/ui/song-infos.ui.h:3
+msgid "Comment :"
+msgstr "Comentariu :"
+
+#: ../data/ui/song-infos.ui.h:4
+msgid "Composer :"
+msgstr "Compozitor :"
+
+#: ../data/ui/song-infos.ui.h:5
+msgid "Date :"
+msgstr "Data :"
+
+#: ../data/ui/song-infos.ui.h:6
+msgid "Disc :"
+msgstr "Disc :"
+
+#: ../data/ui/song-infos.ui.h:7
+msgid "Filename :"
+msgstr "Numele fişierului :"
+
+#: ../data/ui/song-infos.ui.h:8
+msgid "Genre :"
+msgstr "Gen :"
+
+#: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
+msgid "Length :"
+msgstr "Lungime :"
+
+#: ../data/ui/song-infos.ui.h:10
+msgid "Performer :"
+msgstr "Interpret :"
+
+#: ../data/ui/song-infos.ui.h:11
+msgid "Song"
+msgstr "Melodie"
+
+#: ../data/ui/song-infos.ui.h:13
+msgid "Track :"
+msgstr "Piesă :"
+
+#: ../data/ui/trayicon-prefs.ui.h:1
+msgid "Notification"
+msgstr "Notificare"
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Notification on song change"
+msgstr "Notificare la schimbarea piesei"
+
+#: ../data/ui/trayicon-prefs.ui.h:3
+msgid "Notification time: "
+msgstr "Momentul notificării: "
+
+#: ../data/ui/trayicon-prefs.ui.h:4
+msgid "On middle button click on tray icon :"
+msgstr "Dați clic cu butonul din mijloc pe pictograma din zona de notificare:"
+
+#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr "Pictogramă de notificare"
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr "Pornește cu fereastra minimizată"
+
+#: ../src/ario-util.c:80
 msgid "seconds"
 msgstr "secunde"
 
-#: ../src/ario-util.c:84
+#: ../src/ario-util.c:83
 msgid "minutes"
 msgstr "minute"
 
-#: ../src/ario-util.c:92
+#: ../src/ario-util.c:91
 msgid "hours"
 msgstr "ore"
 
-#: ../src/ario-util.c:100
+#: ../src/ario-util.c:99
 msgid "days"
 msgstr "zile"
 
@@ -57,6 +432,33 @@ msgstr "Coperta există deja. Doriţi să o înlocuiţi?"
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "Directorul de muzică"
+
+#: ../src/playlist/ario-playlist-dynamic.c:53
+#, fuzzy
+msgid "same artist"
+msgstr "Numărul artiştilor :"
+
+#: ../src/playlist/ario-playlist-dynamic.c:54
+msgid "same album"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:55
+#, fuzzy
+msgid "similar artists"
+msgstr "Găseşte artişti similari"
+
+#: ../src/playlist/ario-playlist-dynamic.c:95
+#, fuzzy
+msgid "Dynamic Playlist"
+msgstr "Listă redare"
+
+#: ../src/playlist/ario-playlist-queue.c:79
+msgid "Queue Mode"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-normal.c:77
+msgid "Normal"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -148,45 +550,6 @@ msgstr "Se conectează la server..."
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Nu se poate conecta la server. Verifică opțiunile de conectare."
 
-#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "Artist"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
-#: ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "Album"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
-#: ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "Titlu"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
-#: ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "Piesă"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr "Gen muzical"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr "Dată"
-
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
 msgid "Composer"
@@ -211,7 +574,7 @@ msgstr "Oricare"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -252,7 +615,7 @@ msgstr "_Şterge coperţile"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:139
+#: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -261,10 +624,6 @@ msgstr "_Proprietăţi"
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "Colecţie"
-
-#: ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "Căutare"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -285,11 +644,6 @@ msgstr "_Şterge"
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
 msgstr "Liste de redare"
-
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "Listă redare"
 
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
@@ -323,14 +677,6 @@ msgstr "_Unealtă"
 #: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "_Ajutor"
-
-#: ../src/shell/ario-shell.c:153
-msgid "_Connect"
-msgstr "_Conectare"
-
-#: ../src/shell/ario-shell.c:156
-msgid "_Disconnect"
-msgstr "_Deconectează"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Quit"
@@ -435,11 +781,6 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Descarcă coperte"
 
-#: ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
-msgid "Covers"
-msgstr "Coperte"
-
 #: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr "Eroare la citirea fişierului"
@@ -466,29 +807,9 @@ msgstr "Sursă"
 msgid "Ario Preferences"
 msgstr "Preferinţe Ario"
 
-#: ../src/shell/ario-shell-preferences.c:110
-msgid "Connection"
-msgstr "Conexiune"
-
 #: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "Server"
-
-#: ../src/shell/ario-shell-preferences.c:140
-msgid "Interface"
-msgstr "Interfaţă"
-
-#: ../src/shell/ario-shell-preferences.c:145
-msgid "Tray icon"
-msgstr "Pictogramă de notificare"
-
-#: ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "Proxy"
-
-#: ../src/shell/ario-shell-preferences.c:155
-msgid "Statistics"
-msgstr "Statistici"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
@@ -553,14 +874,6 @@ msgstr "Profil nou"
 msgid "The following configuration will be used:"
 msgstr "Va fi folosită următoarea configuraţie:"
 
-#: ../src/widgets/ario-firstlaunch.c:78
-msgid "Host :"
-msgstr "Gazdă:"
-
-#: ../src/widgets/ario-firstlaunch.c:80
-msgid "Port :"
-msgstr "Port:"
-
 #: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
 "It is the first time you launch Ario.\n"
@@ -624,48 +937,45 @@ msgstr "Se descarcă versurile..."
 msgid "Lyrics not found"
 msgstr "Versurile nu au fost găsite"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Clear"
 msgstr "_Eliberează"
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
 msgstr "_Aleatoriu"
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
 msgstr "_Decupează"
 
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
 msgstr "_Elimină"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
 msgstr "_Salvează"
 
-#: ../src/widgets/ario-playlist.c:142
+#: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
 msgstr "_Du-te la melodia curentă"
 
-#: ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "Durată"
-
-#: ../src/widgets/ario-playlist.c:330
-msgid "File"
+#: ../src/widgets/ario-playlist.c:552
+#, fuzzy
+msgid "Filter:"
 msgstr "Fişier"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1353
+#: ../src/widgets/ario-playlist.c:1390
 msgid "Save playlist"
 msgstr "Salvează lista de piese"
 
-#: ../src/widgets/ario-playlist.c:1363
+#: ../src/widgets/ario-playlist.c:1400
 msgid "Playlist name :"
 msgstr "Numele listei de redare :"
 
-#: ../src/widgets/ario-playlist.c:1388
+#: ../src/widgets/ario-playlist.c:1425
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lista de redare există deja. Vreţi să o suprascrieţi?"
 
@@ -694,85 +1004,122 @@ msgid "Not playing"
 msgstr "Redare oprită"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
 msgid "Today %I:%M %p"
 msgstr "Astăzi %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
 msgid "Yesterday %I:%M %p"
 msgstr "Ieri %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
 msgstr "Niciodată"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Logging in"
 msgstr "Autentificare"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Request failed"
 msgstr "Cerere nereuşită"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Incorrect username"
 msgstr "Nume de utilizator incorect"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Incorrect password"
 msgstr "Parolă incorectă"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Handshake failed"
 msgstr "Iniţiere eşuată"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Client update required"
 msgstr "Actualizare client necesară"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
 msgid "Track submission failed"
 msgstr "Trimiterea piesei a eşuat"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
 msgid "Queue is too long"
 msgstr "Lista este prea lungă"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 msgid "Track submission failed too many times"
 msgstr "Trimiterea piesei a eşuat de prea multe ori"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
 msgid "Audioscrobbler preferences"
 msgstr "Preferinţe Audioscrobbler"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
+msgid "Check Last.fm server status at"
+msgstr "Verifică starea serverului Last.fm la"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
+msgid "Disabled"
+msgstr "Dezactivat"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
+msgid "Find out about Last.fm at "
+msgstr "Află despre Last.fm la "
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+msgid "Last submission time:"
+msgstr "Data ultimei trimiteri:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+msgid "Last.fm Profile"
+msgstr "Profil Last.fm"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+msgid "Queued tracks:"
+msgstr "Piese în aşteptare:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+msgid "Status:"
+msgstr "Stare:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+msgid "Tracks submitted:"
+msgstr "Piese trimise:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+msgid "Username :"
+msgstr "Nume utilizator:"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -809,6 +1156,14 @@ msgstr "Afișează diverse informații despre piesa curentă"
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
 msgstr "Informații despre cîntec"
+
+#: ../plugins/information/information.ui.h:2
+msgid "Albums from this artist:"
+msgstr "Albume ale artistului:"
+
+#: ../plugins/information/information.ui.h:5
+msgid "Lyrics:"
+msgstr "Versuri:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -847,10 +1202,6 @@ msgstr "Radiouri de pe Internet"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr "Adaugă un Radio de pe Web"
-
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Nume:"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -894,233 +1245,6 @@ msgstr "Un modul să caute artistul curent pe wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
-
-#~ msgid "Library Options"
-#~ msgstr "Opțiuni Colecție"
-
-#~ msgid "Library Organisation"
-#~ msgstr "Organizare Colecție"
-
-#~ msgid "Sort albums: "
-#~ msgstr "Sortează albume: "
-
-#~ msgid "Auto detect"
-#~ msgstr "Detectează automat"
-
-#~ msgid "Default"
-#~ msgstr "Implicit"
-
-#~ msgid "Music directory :"
-#~ msgstr "Directorul cu muzică:"
-
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "Server-ul de muzică este pe același computer ca și Ario"
-
-#~ msgid "Password :"
-#~ msgstr "Parolă:"
-
-#~ msgid "Server type : "
-#~ msgstr "Tipul de server: "
-
-#~ msgid "XMMS 2 (Experimental)"
-#~ msgstr "XMMS 2 (Experimental)"
-
-#~ msgid "Automatically download the album cover of the playing song"
-#~ msgstr "Descarcă automat coperta albumului melodei care rulează"
-
-#~ msgid "Covers Sources"
-#~ msgstr "Sursele copertelor"
-
-#~ msgid "Show the covers in the albums list"
-#~ msgstr "Arată copertele în lista cu albume"
-
-#~ msgid "Use Amazon."
-#~ msgstr "Utilizați Amazon."
-
-#~ msgid "_Autoconnect on startup"
-#~ msgstr "_Autoconectare la pornire"
-
-#~ msgid ""
-#~ "You need to specify a server to connect to. If you don't see your server "
-#~ "thanks to the autodetection, you should check that zeroconf/avahi is "
-#~ "activated in your server or use the manual configuration."
-#~ msgstr ""
-#~ "Trebuie specificat la ce server se dorește conectarea. Dacă nu se găsește "
-#~ "serverul specificat prin procedurile de autodetecție, trebuie verificat "
-#~ "ca zeroconf/avahi să fie activ în server sau folosiți configurarea "
-#~ "manuală."
-
-#~ msgid "Album :"
-#~ msgstr "Album:"
-
-#~ msgid "Artist :"
-#~ msgstr "Artist:"
-
-#~ msgid "Downloading cover"
-#~ msgstr "Descărcare copertă în curs"
-
-#~ msgid "Local search"
-#~ msgstr "Căutare locală"
-
-#~ msgid "Allow only one instance of Ario"
-#~ msgstr "Permite o singură versiune de Ario"
-
-#~ msgid "Go to current song when a new song is played"
-#~ msgstr "Sari la cîntecul curent cînd un cantec nou este redat"
-
-#~ msgid "Hide window when close button is pressed"
-#~ msgstr "Ascunde fereastra cînd butonul de închidere este apăsat"
-
-#~ msgid "Show rows:"
-#~ msgstr "Arată rîndurile"
-
-#~ msgid "Show tabs"
-#~ msgstr "Arată tab-urile"
-
-#~ msgid "Lyrics Sources"
-#~ msgstr "Sursele de versuri"
-
-#~ msgid "Title :"
-#~ msgstr "Titlu :"
-
-#~ msgid "Proxy Address :"
-#~ msgstr "Adresă proxy :"
-
-#~ msgid "Proxy Port :"
-#~ msgstr "Port proxy :"
-
-#~ msgid "Use a proxy"
-#~ msgstr "Folosește un proxy"
-
-#~ msgid "Audio outputs"
-#~ msgstr "Ieșiri audio"
-
-#~ msgid "Crossfade"
-#~ msgstr "Intercalare"
-
-#~ msgid "Database"
-#~ msgstr "Bază de date"
-
-#~ msgid "Last updated:"
-#~ msgstr "Ultima actualizare:"
-
-#~ msgid "Stop music on exit"
-#~ msgstr "Oprește muzica le ieșire"
-
-#~ msgid "Update on startup"
-#~ msgstr "Actualizează la pornire"
-
-#~ msgid "_Update"
-#~ msgstr "_Actualizare"
-
-#~ msgid "enable crossfade"
-#~ msgstr "activare intercalare"
-
-#~ msgid "fade time (s):"
-#~ msgstr "şterge timpul (s):"
-
-#~ msgid "Add all to playlist"
-#~ msgstr "Adaugă totul la lista de redare"
-
-#~ msgid "Add to playlist"
-#~ msgstr "Adaugă la lista de redare"
-
-#~ msgid "Find on Last.fm"
-#~ msgstr "Găseşte in Ultimul.fm"
-
-#~ msgid "Database play time :"
-#~ msgstr "Timpul de redare a bazei de date"
-
-#~ msgid "Number of albums :"
-#~ msgstr "Numărul albumelor :"
-
-#~ msgid "Number of artists :"
-#~ msgstr "Numărul artiştilor :"
-
-#~ msgid "Number of songs :"
-#~ msgstr "Numărul melodiilor :"
-
-#~ msgid "Play time :"
-#~ msgstr "Timpul de redare :"
-
-#~ msgid "Uptime :"
-#~ msgstr "Timp de la pornire :"
-
-#~ msgid "Comment :"
-#~ msgstr "Comentariu :"
-
-#~ msgid "Composer :"
-#~ msgstr "Compozitor :"
-
-#~ msgid "Date :"
-#~ msgstr "Data :"
-
-#~ msgid "Disc :"
-#~ msgstr "Disc :"
-
-#~ msgid "Filename :"
-#~ msgstr "Numele fişierului :"
-
-#~ msgid "Genre :"
-#~ msgstr "Gen :"
-
-#~ msgid "Length :"
-#~ msgstr "Lungime :"
-
-#~ msgid "Performer :"
-#~ msgstr "Interpret :"
-
-#~ msgid "Song"
-#~ msgstr "Melodie"
-
-#~ msgid "Track :"
-#~ msgstr "Piesă :"
-
-#~ msgid "Notification"
-#~ msgstr "Notificare"
-
-#~ msgid "Notification on song change"
-#~ msgstr "Notificare la schimbarea piesei"
-
-#~ msgid "Notification time: "
-#~ msgstr "Momentul notificării: "
-
-#~ msgid "On middle button click on tray icon :"
-#~ msgstr ""
-#~ "Dați clic cu butonul din mijloc pe pictograma din zona de notificare:"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "Verifică starea serverului Last.fm la"
-
-#~ msgid "Disabled"
-#~ msgstr "Dezactivat"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "Află despre Last.fm la "
-
-#~ msgid "Last submission time:"
-#~ msgstr "Data ultimei trimiteri:"
-
-#~ msgid "Last.fm Profile"
-#~ msgstr "Profil Last.fm"
-
-#~ msgid "Queued tracks:"
-#~ msgstr "Piese în aşteptare:"
-
-#~ msgid "Status:"
-#~ msgstr "Stare:"
-
-#~ msgid "Tracks submitted:"
-#~ msgstr "Piese trimise:"
-
-#~ msgid "Username :"
-#~ msgstr "Nume utilizator:"
-
-#~ msgid "Albums from this artist:"
-#~ msgstr "Albume ale artistului:"
-
-#~ msgid "Lyrics:"
-#~ msgstr "Versuri:"
 
 #~ msgid "Automatic configuration"
 #~ msgstr "Configurare automată"

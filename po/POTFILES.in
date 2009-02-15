@@ -2,24 +2,24 @@
 
 # Source files
 data/ario.desktop.in.in
-data/ui/browser-prefs.ui
-data/ui/connection-widget.ui
-data/ui/cover-prefs.ui
-data/ui/connection-prefs.ui
-data/ui/connection-assistant.ui
-data/ui/cover-prefs.ui
-data/ui/cover-progress.ui
-data/ui/cover-select.ui
-data/ui/interface-prefs.ui
-data/ui/lyrics-prefs.ui
-data/ui/lyrics-select.ui
-data/ui/playlist-prefs.ui
-data/ui/proxy-prefs.ui
-data/ui/server-prefs.ui
-data/ui/similar-artists.ui
-data/ui/stats-prefs.ui
-data/ui/song-infos.ui
-data/ui/trayicon-prefs.ui
+[type: gettext/glade]data/ui/browser-prefs.ui
+[type: gettext/glade]data/ui/connection-widget.ui
+[type: gettext/glade]data/ui/cover-prefs.ui
+[type: gettext/glade]data/ui/connection-prefs.ui
+[type: gettext/glade]data/ui/connection-assistant.ui
+[type: gettext/glade]data/ui/cover-prefs.ui
+[type: gettext/glade]data/ui/cover-progress.ui
+[type: gettext/glade]data/ui/cover-select.ui
+[type: gettext/glade]data/ui/interface-prefs.ui
+[type: gettext/glade]data/ui/lyrics-prefs.ui
+[type: gettext/glade]data/ui/lyrics-select.ui
+[type: gettext/glade]data/ui/playlist-prefs.ui
+[type: gettext/glade]data/ui/proxy-prefs.ui
+[type: gettext/glade]data/ui/server-prefs.ui
+[type: gettext/glade]data/ui/similar-artists.ui
+[type: gettext/glade]data/ui/stats-prefs.ui
+[type: gettext/glade]data/ui/song-infos.ui
+[type: gettext/glade]data/ui/trayicon-prefs.ui
 src/ario-avahi.c
 src/ario-avahi.h
 src/ario-debug.h
@@ -152,7 +152,7 @@ src/widgets/ario-volume.h
 plugins/audioscrobbler/ario-audioscrobbler.c
 plugins/audioscrobbler/ario-audioscrobbler.h
 plugins/audioscrobbler/ario-audioscrobbler-plugin.c
-plugins/audioscrobbler/audioscrobbler-prefs.ui
+[type: gettext/glade]plugins/audioscrobbler/audioscrobbler-prefs.ui
 plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in
 plugins/filesystem/ario-filesystem.c
 plugins/filesystem/ario-filesystem.h
@@ -164,7 +164,7 @@ plugins/information/ario-information.h
 plugins/information/ario-information-plugin.c
 plugins/information/ario-information-plugin.h
 plugins/information/information.ario-plugin.desktop.in
-plugins/information/information.ui
+[type: gettext/glade]plugins/information/information.ui
 plugins/libnotify/libnotify.ario-plugin.desktop.in
 plugins/libnotify/ario-libnotify-plugin.c
 plugins/libnotify/ario-libnotify-plugin.h

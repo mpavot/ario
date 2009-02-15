@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:00+0100\n"
+"POT-Creation-Date: 2009-02-15 11:34+0100\n"
 "PO-Revision-Date: 2008-12-15 03:43+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -25,28 +25,406 @@ msgstr "โปรแกรมเล่นเพลง Ario"
 msgid "Client application to mpd"
 msgstr ""
 
-#: ../src/ario-main.c:60
-msgid "Start minimized window"
+#: ../data/ui/browser-prefs.ui.h:1
+#, fuzzy
+msgid "Library Options"
+msgstr "ไลบรารี"
+
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "Library Organisation"
 msgstr ""
 
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#: ../data/ui/browser-prefs.ui.h:3
+msgid "Sort albums: "
+msgstr "เรียงอัลบัม: "
+
+#: ../data/ui/connection-widget.ui.h:1
+msgid "Auto detect"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:2
+msgid "Default"
+msgstr "ค่าปริยาย"
+
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "โฮสต์ :"
+
+#: ../data/ui/connection-widget.ui.h:4
+msgid "Music directory :"
+msgstr "ไดเรกทอรี่เพลง :"
+
+#: ../data/ui/connection-widget.ui.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
+#: ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "ชื่อ :"
+
+#: ../data/ui/connection-widget.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+msgid "Password :"
+msgstr "รหัสผ่าน :"
+
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "พอร์ต :"
+
+#: ../data/ui/connection-widget.ui.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "เซิร์ฟเวอร์"
+
+#: ../data/ui/connection-widget.ui.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
+
+#: ../data/ui/cover-prefs.ui.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr ""
+
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "ปกซีดี"
+
+#: ../data/ui/cover-prefs.ui.h:3
+msgid "Covers Sources"
+msgstr "แหล่งของปกซีดี"
+
+#: ../data/ui/cover-prefs.ui.h:4
+msgid "Show the covers in the albums list"
+msgstr "แสดงปกซีดีในรายการของอัลบัม"
+
+#: ../data/ui/cover-prefs.ui.h:5
+msgid "Use Amazon."
+msgstr "ใช้ Amazon"
+
+#: ../data/ui/connection-prefs.ui.h:1
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "การเชื่อมต่อ"
+
+#: ../data/ui/connection-prefs.ui.h:2
+msgid "_Autoconnect on startup"
+msgstr "เชื่อมต่ออัตโนมัติเมื่อเริ่ม"
+
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "เชื่อมต่อ"
+
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "ยกเลิกการเชื่อมต่อ"
+
+#: ../data/ui/connection-assistant.ui.h:1
+msgid ""
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
+msgstr ""
+
+#: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
+#: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
+msgid "Album :"
+msgstr "อัลบัม :"
+
+#: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
+#: ../plugins/information/information.ui.h:3
+msgid "Artist :"
+msgstr "ศิลปิน :"
+
+#: ../data/ui/cover-progress.ui.h:3
+msgid "Downloading cover"
+msgstr "ดาวน์โหลดปกซีดี"
+
+#: ../data/ui/cover-select.ui.h:3
+msgid "Local search"
+msgstr ""
+
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "ค้นหา"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "อัลบัม"
+
+#: ../data/ui/interface-prefs.ui.h:2
+msgid "Allow only one instance of Ario"
+msgstr ""
+
+#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "ศิลปิน"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr "วันที่"
+
+#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "ความยาว"
+
+#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr "แฟ้ม"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr "ประเภท"
+
+#: ../data/ui/interface-prefs.ui.h:8
+msgid "Go to current song when a new song is played"
+msgstr ""
+
+#: ../data/ui/interface-prefs.ui.h:9
+msgid "Hide window when close button is pressed"
+msgstr ""
+
+#: ../data/ui/interface-prefs.ui.h:10
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "ส่วนติดต่อผู้ใช้"
+
+#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "รายการเล่น"
+
+#: ../data/ui/interface-prefs.ui.h:12
+msgid "Show rows:"
+msgstr "แสดงแถว:"
+
+#: ../data/ui/interface-prefs.ui.h:13
+msgid "Show tabs"
+msgstr "แสดงแท็ป:"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "ชื่อเพลง"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "แทร็ก"
+
+#: ../data/ui/lyrics-prefs.ui.h:1
+msgid "Lyrics Sources"
+msgstr "แหล่งเนื้อเพลง"
+
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
+#: ../plugins/information/information.ui.h:6
+msgid "Title :"
+msgstr "ชื่อเพลง :"
+
+#: ../data/ui/playlist-prefs.ui.h:2
+#, fuzzy
+msgid "Playlist mode:"
+msgstr "ชื่อรายการเล่น :"
+
+#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "พร็อกซี่"
+
+#: ../data/ui/proxy-prefs.ui.h:2
+msgid "Proxy Address :"
+msgstr "ที่อยู่พร็อกซี่ :"
+
+#: ../data/ui/proxy-prefs.ui.h:3
+msgid "Proxy Port :"
+msgstr "พอร์ตพร็อกซี่ :"
+
+#: ../data/ui/proxy-prefs.ui.h:4
+msgid "Use a proxy"
+msgstr "ใช้พร็อกซี่"
+
+#: ../data/ui/server-prefs.ui.h:1
+msgid "Audio outputs"
+msgstr ""
+
+#: ../data/ui/server-prefs.ui.h:2
+msgid "Crossfade"
+msgstr ""
+
+#: ../data/ui/server-prefs.ui.h:3
+msgid "Database"
+msgstr "ฐานข้อมูล"
+
+#: ../data/ui/server-prefs.ui.h:4
+msgid "Last updated:"
+msgstr "อัพเดทล่าสุด:"
+
+#: ../data/ui/server-prefs.ui.h:5
+#, fuzzy
+msgid "Stop music on exit"
+msgstr "หยุดเพลง"
+
+#: ../data/ui/server-prefs.ui.h:6
+#, fuzzy
+msgid "Update on startup"
+msgstr "เชื่อมต่ออัตโนมัติเมื่อเริ่ม"
+
+#: ../data/ui/server-prefs.ui.h:7
+msgid "_Update"
+msgstr "อัพเดท"
+
+#: ../data/ui/server-prefs.ui.h:8
+msgid "enable crossfade"
+msgstr ""
+
+#: ../data/ui/server-prefs.ui.h:9
+msgid "fade time (s):"
+msgstr ""
+
+#: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
+#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
-#: ../src/ario-util.c:81
+#: ../data/ui/similar-artists.ui.h:1
+msgid "Add all to playlist"
+msgstr "เพิ่มทั้งหมดในรายการเล่น"
+
+#: ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "เพิ่มในรายการเล่น"
+
+#: ../data/ui/similar-artists.ui.h:3
+msgid "Find on Last.fm"
+msgstr "ค้นหาบน Last.fm"
+
+#: ../data/ui/stats-prefs.ui.h:1
+msgid "Database play time :"
+msgstr ""
+
+#: ../data/ui/stats-prefs.ui.h:2
+msgid "Number of albums :"
+msgstr "จำนวนของอัลบัม :"
+
+#: ../data/ui/stats-prefs.ui.h:3
+#, fuzzy
+msgid "Number of artists :"
+msgstr "จำนวนของเพลง :"
+
+#: ../data/ui/stats-prefs.ui.h:4
+msgid "Number of songs :"
+msgstr "จำนวนของเพลง :"
+
+#: ../data/ui/stats-prefs.ui.h:5
+#, fuzzy
+msgid "Play time :"
+msgstr "ชื่อรายการเล่น :"
+
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "สถิติ"
+
+#: ../data/ui/stats-prefs.ui.h:7
+msgid "Uptime :"
+msgstr ""
+
+#: ../data/ui/song-infos.ui.h:3
+msgid "Comment :"
+msgstr ""
+
+#: ../data/ui/song-infos.ui.h:4
+msgid "Composer :"
+msgstr ""
+
+#: ../data/ui/song-infos.ui.h:5
+msgid "Date :"
+msgstr "วันที่ :"
+
+#: ../data/ui/song-infos.ui.h:6
+msgid "Disc :"
+msgstr "แผ่น :"
+
+#: ../data/ui/song-infos.ui.h:7
+msgid "Filename :"
+msgstr "ชื่อแฟ้ม :"
+
+#: ../data/ui/song-infos.ui.h:8
+msgid "Genre :"
+msgstr "ประเภท :"
+
+#: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
+msgid "Length :"
+msgstr "ความยาว :"
+
+#: ../data/ui/song-infos.ui.h:10
+msgid "Performer :"
+msgstr ""
+
+#: ../data/ui/song-infos.ui.h:11
+msgid "Song"
+msgstr "เพลง"
+
+#: ../data/ui/song-infos.ui.h:13
+msgid "Track :"
+msgstr "แทร็ก :"
+
+#: ../data/ui/trayicon-prefs.ui.h:1
+#, fuzzy
+msgid "Notification"
+msgstr "การยืนยัน"
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Notification on song change"
+msgstr ""
+
+#: ../data/ui/trayicon-prefs.ui.h:3
+msgid "Notification time: "
+msgstr ""
+
+#: ../data/ui/trayicon-prefs.ui.h:4
+msgid "On middle button click on tray icon :"
+msgstr ""
+
+#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr ""
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr ""
+
+#: ../src/ario-util.c:80
 msgid "seconds"
 msgstr "วินาที"
 
-#: ../src/ario-util.c:84
+#: ../src/ario-util.c:83
 msgid "minutes"
 msgstr "นาที"
 
-#: ../src/ario-util.c:92
+#: ../src/ario-util.c:91
 msgid "hours"
 msgstr "ชั่วโมง"
 
-#: ../src/ario-util.c:100
+#: ../src/ario-util.c:99
 msgid "days"
 msgstr "วัน"
 
@@ -57,6 +435,33 @@ msgstr "ปกซีดีมีอยู่แล้ว ต้องการ�
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "ไดเรกทอรี่เพลง"
+
+#: ../src/playlist/ario-playlist-dynamic.c:53
+#, fuzzy
+msgid "same artist"
+msgstr "จำนวนของศิลปิน :"
+
+#: ../src/playlist/ario-playlist-dynamic.c:54
+msgid "same album"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:55
+#, fuzzy
+msgid "similar artists"
+msgstr "ค้นหาศิลปินใกล้เคียง"
+
+#: ../src/playlist/ario-playlist-dynamic.c:95
+#, fuzzy
+msgid "Dynamic Playlist"
+msgstr "รายการเล่น"
+
+#: ../src/playlist/ario-playlist-queue.c:79
+msgid "Queue Mode"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-normal.c:77
+msgid "Normal"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -148,45 +553,6 @@ msgstr ""
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 
-#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "ศิลปิน"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
-#: ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "อัลบัม"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
-#: ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "ชื่อเพลง"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
-#: ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "แทร็ก"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr "ประเภท"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr "วันที่"
-
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
 msgid "Composer"
@@ -211,7 +577,7 @@ msgstr ""
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
@@ -252,7 +618,7 @@ msgstr "ลบปกซีดี"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:139
+#: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -261,10 +627,6 @@ msgstr "คุณสมบัติ"
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "ไลบรารี"
-
-#: ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "ค้นหา"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -284,11 +646,6 @@ msgstr "ลบ"
 
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
-msgstr "รายการเล่น"
-
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
 msgstr "รายการเล่น"
 
 #: ../src/sources/ario-storedplaylists.c:565
@@ -323,14 +680,6 @@ msgstr "เครื่องมือ"
 #: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "วิธีใช้"
-
-#: ../src/shell/ario-shell.c:153
-msgid "_Connect"
-msgstr "เชื่อมต่อ"
-
-#: ../src/shell/ario-shell.c:156
-msgid "_Disconnect"
-msgstr "ยกเลิกการเชื่อมต่อ"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Quit"
@@ -419,11 +768,6 @@ msgstr ""
 msgid "Cover Download"
 msgstr "ดาวน์โหลดปกซีดี"
 
-#: ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
-msgid "Covers"
-msgstr "ปกซีดี"
-
 #: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr ""
@@ -450,29 +794,9 @@ msgstr "แหล่ง"
 msgid "Ario Preferences"
 msgstr "ปรับแต่ง Ario"
 
-#: ../src/shell/ario-shell-preferences.c:110
-msgid "Connection"
-msgstr "การเชื่อมต่อ"
-
 #: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "เซิร์ฟเวอร์"
-
-#: ../src/shell/ario-shell-preferences.c:140
-msgid "Interface"
-msgstr "ส่วนติดต่อผู้ใช้"
-
-#: ../src/shell/ario-shell-preferences.c:145
-msgid "Tray icon"
-msgstr ""
-
-#: ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "พร็อกซี่"
-
-#: ../src/shell/ario-shell-preferences.c:155
-msgid "Statistics"
-msgstr "สถิติ"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
@@ -532,14 +856,6 @@ msgstr "โปรไฟล์ใหม่"
 #: ../src/widgets/ario-firstlaunch.c:77
 msgid "The following configuration will be used:"
 msgstr "การตั้งค่าต่อไปนี้จะถูกนำไปใช้:"
-
-#: ../src/widgets/ario-firstlaunch.c:78
-msgid "Host :"
-msgstr "โฮสต์ :"
-
-#: ../src/widgets/ario-firstlaunch.c:80
-msgid "Port :"
-msgstr "พอร์ต :"
 
 #: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
@@ -602,48 +918,45 @@ msgstr "กำลังดาวน์โหลดเนื้อเพลง...
 msgid "Lyrics not found"
 msgstr "ไม่พบเนื้อเพลง"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Clear"
 msgstr "ล้าง"
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
 msgstr "ลบ"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
 msgstr "บันทึก"
 
-#: ../src/widgets/ario-playlist.c:142
+#: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "ความยาว"
-
-#: ../src/widgets/ario-playlist.c:330
-msgid "File"
+#: ../src/widgets/ario-playlist.c:552
+#, fuzzy
+msgid "Filter:"
 msgstr "แฟ้ม"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1353
+#: ../src/widgets/ario-playlist.c:1390
 msgid "Save playlist"
 msgstr "บันทึกรายการเล่น"
 
-#: ../src/widgets/ario-playlist.c:1363
+#: ../src/widgets/ario-playlist.c:1400
 msgid "Playlist name :"
 msgstr "ชื่อรายการเล่น :"
 
-#: ../src/widgets/ario-playlist.c:1388
+#: ../src/widgets/ario-playlist.c:1425
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
@@ -672,85 +985,122 @@ msgid "Not playing"
 msgstr "ไม่ได้เล่น"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
 msgid "Today %I:%M %p"
 msgstr "วันนี้ %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
 msgid "Yesterday %I:%M %p"
 msgstr "เมื่อวาน %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
 msgstr "ไม่เคย"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "OK"
 msgstr "ตกลง"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Logging in"
 msgstr "กำลังเข้าสู่ระบบ"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Request failed"
 msgstr "การร้องขอล้มเหลว"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Incorrect username"
 msgstr "ชื่อผู้ใช้ไม่ถูกต้อง"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Incorrect password"
 msgstr "รหัสผ่านไม่ถูกต้อง"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Handshake failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Client update required"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
 msgid "Track submission failed"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
 msgid "Queue is too long"
 msgstr "คิวยาวเกินไป"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 msgid "Track submission failed too many times"
 msgstr ""
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
 msgid "Audioscrobbler preferences"
 msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
+msgid "Check Last.fm server status at"
+msgstr "ตรวจสอบสถานะเซิร์ฟเวอร์ Last.fm ที่"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
+msgid "Disabled"
+msgstr "ไม่ใช้"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
+msgid "Find out about Last.fm at "
+msgstr "ดูรายละเอียดเพิ่มเติมของ Last.fm ที่ "
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+msgid "Last submission time:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+msgid "Last.fm Profile"
+msgstr "โปรไฟล์ Last.fm"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+msgid "Queued tracks:"
+msgstr "เพลงในคิว:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+msgid "Status:"
+msgstr "สถานะ:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+msgid "Tracks submitted:"
+msgstr ""
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+msgid "Username :"
+msgstr "ชื่อผู้ใช้ :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -787,6 +1137,15 @@ msgstr ""
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
 msgstr ""
+
+#: ../plugins/information/information.ui.h:2
+msgid "Albums from this artist:"
+msgstr ""
+
+#: ../plugins/information/information.ui.h:5
+#, fuzzy
+msgid "Lyrics:"
+msgstr "เนื้อเพลง"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -825,10 +1184,6 @@ msgstr "วิทยุบนอินเตอร์เนท"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr ""
-
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "ชื่อ :"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -871,129 +1226,6 @@ msgstr "ปลั๊กอินสำหรับค้นหาศิลปิ
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
-
-#~ msgid "Sort albums: "
-#~ msgstr "เรียงอัลบัม: "
-
-#~ msgid "Default"
-#~ msgstr "ค่าปริยาย"
-
-#~ msgid "Music directory :"
-#~ msgstr "ไดเรกทอรี่เพลง :"
-
-#~ msgid "Password :"
-#~ msgstr "รหัสผ่าน :"
-
-#~ msgid "Covers Sources"
-#~ msgstr "แหล่งของปกซีดี"
-
-#~ msgid "Show the covers in the albums list"
-#~ msgstr "แสดงปกซีดีในรายการของอัลบัม"
-
-#~ msgid "Use Amazon."
-#~ msgstr "ใช้ Amazon"
-
-#~ msgid "_Autoconnect on startup"
-#~ msgstr "เชื่อมต่ออัตโนมัติเมื่อเริ่ม"
-
-#~ msgid "Album :"
-#~ msgstr "อัลบัม :"
-
-#~ msgid "Artist :"
-#~ msgstr "ศิลปิน :"
-
-#~ msgid "Downloading cover"
-#~ msgstr "ดาวน์โหลดปกซีดี"
-
-#~ msgid "Show rows:"
-#~ msgstr "แสดงแถว:"
-
-#~ msgid "Show tabs"
-#~ msgstr "แสดงแท็ป:"
-
-#~ msgid "Lyrics Sources"
-#~ msgstr "แหล่งเนื้อเพลง"
-
-#~ msgid "Title :"
-#~ msgstr "ชื่อเพลง :"
-
-#~ msgid "Proxy Address :"
-#~ msgstr "ที่อยู่พร็อกซี่ :"
-
-#~ msgid "Proxy Port :"
-#~ msgstr "พอร์ตพร็อกซี่ :"
-
-#~ msgid "Use a proxy"
-#~ msgstr "ใช้พร็อกซี่"
-
-#~ msgid "Database"
-#~ msgstr "ฐานข้อมูล"
-
-#~ msgid "Last updated:"
-#~ msgstr "อัพเดทล่าสุด:"
-
-#~ msgid "_Update"
-#~ msgstr "อัพเดท"
-
-#~ msgid "Add all to playlist"
-#~ msgstr "เพิ่มทั้งหมดในรายการเล่น"
-
-#~ msgid "Add to playlist"
-#~ msgstr "เพิ่มในรายการเล่น"
-
-#~ msgid "Find on Last.fm"
-#~ msgstr "ค้นหาบน Last.fm"
-
-#~ msgid "Number of albums :"
-#~ msgstr "จำนวนของอัลบัม :"
-
-#~ msgid "Number of artists :"
-#~ msgstr "จำนวนของศิลปิน :"
-
-#~ msgid "Number of songs :"
-#~ msgstr "จำนวนของเพลง :"
-
-#~ msgid "Date :"
-#~ msgstr "วันที่ :"
-
-#~ msgid "Disc :"
-#~ msgstr "แผ่น :"
-
-#~ msgid "Filename :"
-#~ msgstr "ชื่อแฟ้ม :"
-
-#~ msgid "Genre :"
-#~ msgstr "ประเภท :"
-
-#~ msgid "Length :"
-#~ msgstr "ความยาว :"
-
-#~ msgid "Song"
-#~ msgstr "เพลง"
-
-#~ msgid "Track :"
-#~ msgstr "แทร็ก :"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "ตรวจสอบสถานะเซิร์ฟเวอร์ Last.fm ที่"
-
-#~ msgid "Disabled"
-#~ msgstr "ไม่ใช้"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "ดูรายละเอียดเพิ่มเติมของ Last.fm ที่ "
-
-#~ msgid "Last.fm Profile"
-#~ msgstr "โปรไฟล์ Last.fm"
-
-#~ msgid "Queued tracks:"
-#~ msgstr "เพลงในคิว:"
-
-#~ msgid "Status:"
-#~ msgstr "สถานะ:"
-
-#~ msgid "Username :"
-#~ msgstr "ชื่อผู้ใช้ :"
 
 #~ msgid "Automatic configuration"
 #~ msgstr "ตั้วค่าอัตโนมัติ"
