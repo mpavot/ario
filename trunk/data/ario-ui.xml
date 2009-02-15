@@ -13,6 +13,10 @@
                 </menu>
 
                 <menu name="EditMenu" action="Edit">
+                        <menuitem name="EditPlaylistRemove" action="PlaylistRemove"/>
+                        <menuitem name="EditPlaylistCrop" action="PlaylistCrop"/>
+                        <menuitem name="EditPlaylistClear" action="PlaylistClear"/>
+                        <separator/>
                         <menuitem name="EditPluginsMenu" action="EditPlugins"/>
                         <menuitem name="EditPreferencesMenu" action="EditPreferences"/>
                         <placeholder name="EditMenuPluginPlaceholder" />
