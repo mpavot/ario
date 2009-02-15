@@ -29,8 +29,8 @@ ui_DATA = ario-ui.xml \
 	     ui/connection-assistant.ui	\
 	     ui/connection-widget.ui	\
 	     ui/cover-prefs.ui		\
-	     ui/proxy-prefs.ui		\
 	     ui/interface-prefs.ui	\
+	     ui/others-prefs.ui	\
 	     ui/playlist-prefs.ui	\
 	     ui/trayicon-prefs.ui	\
 	     ui/server-prefs.ui		\

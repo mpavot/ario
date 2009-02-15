@@ -99,14 +99,12 @@ libario_la_SOURCES = \
 	preferences/ario-connection-preferences.h\
 	preferences/ario-cover-preferences.c\
 	preferences/ario-cover-preferences.h\
-	preferences/ario-interface-preferences.c\
-	preferences/ario-interface-preferences.h\
 	preferences/ario-lyrics-preferences.c\
 	preferences/ario-lyrics-preferences.h\
+	preferences/ario-others-preferences.c\
+	preferences/ario-others-preferences.h\
 	preferences/ario-playlist-preferences.c\
 	preferences/ario-playlist-preferences.h\
-	preferences/ario-proxy-preferences.c\
-	preferences/ario-proxy-preferences.h\
 	preferences/ario-server-preferences.c\
 	preferences/ario-server-preferences.h\
         preferences/ario-stats-preferences.c\
