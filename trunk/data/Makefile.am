@@ -29,18 +29,17 @@ ui_DATA = ario-ui.xml \
 	     ui/connection-assistant.ui	\
 	     ui/connection-widget.ui	\
 	     ui/cover-prefs.ui		\
-	     ui/interface-prefs.ui	\
-	     ui/others-prefs.ui	\
-	     ui/playlist-prefs.ui	\
-	     ui/trayicon-prefs.ui	\
-	     ui/server-prefs.ui		\
 	     ui/cover-progress.ui       \
+	     ui/cover-select.ui	        \
 	     ui/lyrics-select.ui        \
 	     ui/lyrics-prefs.ui         \
-	     ui/cover-select.ui	        \
-	     ui/song-infos.ui	        \
+	     ui/others-prefs.ui		\
+	     ui/playlist-prefs.ui	\
+	     ui/server-prefs.ui		\
 	     ui/similar-artists.ui      \
-	     ui/stats-prefs.ui
+	     ui/song-infos.ui	        \
+	     ui/stats-prefs.ui 		\
+	     ui/trayicon-prefs.ui
 
 
 

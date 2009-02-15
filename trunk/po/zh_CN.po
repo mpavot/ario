@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 11:34+0100\n"
+"POT-Creation-Date: 2009-02-15 12:25+0100\n"
 "PO-Revision-Date: 2008-12-15 06:18+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -86,7 +86,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr "自动下载正在播放歌曲的专辑封面"
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
+#: ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
 msgstr "封面"
 
@@ -103,7 +103,7 @@ msgid "Use Amazon."
 msgstr "使用 Amazon"
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:110
+#: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
 msgstr "连接"
 
@@ -151,86 +151,37 @@ msgstr "本地搜索"
 msgid "Search"
 msgstr "搜索"
 
-#. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "专辑"
-
-#: ../data/ui/interface-prefs.ui.h:2
+#: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
 msgstr "只允许运行一个 Ario 实例"
 
-#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
-#: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "艺术家"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
-msgid "Date"
-msgstr "日期"
-
-#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
-msgid "Duration"
-msgstr "长度"
-
-#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
-msgid "File"
-msgstr "文件"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
-msgid "Genre"
-msgstr "流派"
-
-#: ../data/ui/interface-prefs.ui.h:8
-msgid "Go to current song when a new song is played"
-msgstr "当一首新的歌曲被播放时转到当前歌曲"
-
-#: ../data/ui/interface-prefs.ui.h:9
+#: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
 msgstr "当关闭按被钮按下时隐藏窗口"
 
-#: ../data/ui/interface-prefs.ui.h:10
-#: ../src/shell/ario-shell-preferences.c:140
+#: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
 msgstr "界面"
 
-#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "播放列表"
+#: ../data/ui/others-prefs.ui.h:4
+msgid "Proxy"
+msgstr "代理"
 
-#: ../data/ui/interface-prefs.ui.h:12
-msgid "Show rows:"
-msgstr "显示行："
+#: ../data/ui/others-prefs.ui.h:5
+msgid "Proxy Address :"
+msgstr "代理服务器地址："
 
-#: ../data/ui/interface-prefs.ui.h:13
+#: ../data/ui/others-prefs.ui.h:6
+msgid "Proxy Port :"
+msgstr "代理端口："
+
+#: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
 msgstr "显示记录"
 
-#. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "标题"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
-msgid "Track"
-msgstr "曲目"
+#: ../data/ui/others-prefs.ui.h:8
+msgid "Use a proxy"
+msgstr "使用代理"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
@@ -241,26 +192,77 @@ msgstr "歌词来源"
 msgid "Title :"
 msgstr "标题："
 
-#: ../data/ui/playlist-prefs.ui.h:2
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "专辑"
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "艺术家"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr "日期"
+
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "长度"
+
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr "文件"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr "流派"
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Go to current song when a new song is played"
+msgstr "当一首新的歌曲被播放时转到当前歌曲"
+
+#: ../data/ui/playlist-prefs.ui.h:8
+msgid "Mode"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:216
+#: ../src/shell/ario-shell.c:199 ../src/shell/ario-shell-preferences.c:124
+msgid "Playlist"
+msgstr "播放列表"
+
+#: ../data/ui/playlist-prefs.ui.h:10
 #, fuzzy
 msgid "Playlist mode:"
 msgstr "播放列表名称："
 
-#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "代理"
+#: ../data/ui/playlist-prefs.ui.h:11
+msgid "Show rows:"
+msgstr "显示行："
 
-#: ../data/ui/proxy-prefs.ui.h:2
-msgid "Proxy Address :"
-msgstr "代理服务器地址："
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "标题"
 
-#: ../data/ui/proxy-prefs.ui.h:3
-msgid "Proxy Port :"
-msgstr "代理端口："
-
-#: ../data/ui/proxy-prefs.ui.h:4
-msgid "Use a proxy"
-msgstr "使用代理"
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "曲目"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
@@ -338,7 +340,7 @@ msgstr "歌曲数："
 msgid "Play time :"
 msgstr "播放时间："
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
 msgstr "统计信息"
 
@@ -386,7 +388,7 @@ msgstr "歌曲"
 msgid "Track :"
 msgstr "音轨："
 
-#: ../data/ui/trayicon-prefs.ui.h:1
+#: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
 msgstr "提示"
 
@@ -402,7 +404,7 @@ msgstr "提示时间： "
 msgid "On middle button click on tray icon :"
 msgstr "中键点击托盘图标时："
 
-#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+#: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Tray icon"
 msgstr "托盘图标"
 
@@ -622,7 +624,7 @@ msgstr "删除封面(_D)"
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
+#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "媒体库"
 
@@ -806,7 +808,7 @@ msgid "Error saving file"
 msgstr "保存文件时出错"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:135
+#: ../src/shell/ario-shell-preferences.c:134
 #: ../src/shell/ario-shell-songinfos.c:246
 msgid "Lyrics"
 msgstr "歌词"
@@ -819,13 +821,17 @@ msgstr "歌词下载"
 msgid "Source"
 msgstr "来源"
 
-#: ../src/shell/ario-shell-preferences.c:82
+#: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
 msgstr "Ario首选项"
 
-#: ../src/shell/ario-shell-preferences.c:115
+#: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
 msgstr "服务器"
+
+#: ../src/shell/ario-shell-preferences.c:144
+msgid "Others"
+msgstr ""
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
