@@ -31,11 +31,39 @@
 #include "playlist/ario-playlist-manager.h"
 
 static void ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_track_toogled_cb (GtkCheckButton *butt,
+                                                               ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_title_toogled_cb (GtkCheckButton *butt,
+                                                               ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_artist_toogled_cb (GtkCheckButton *butt,
+                                                                ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_album_toogled_cb (GtkCheckButton *butt,
+                                                               ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_genre_toogled_cb (GtkCheckButton *butt,
+                                                               ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_duration_toogled_cb (GtkCheckButton *butt,
+                                                                  ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_file_toogled_cb (GtkCheckButton *butt,
+                                                              ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
+                                                              ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
+                                                                    ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
                                                                              ArioPlaylistPreferences *playlist_preferences);
 
 struct ArioPlaylistPreferencesPrivate
 {
+        GtkWidget *track_checkbutton;
+        GtkWidget *title_checkbutton;
+        GtkWidget *artist_checkbutton;
+        GtkWidget *album_checkbutton;
+        GtkWidget *genre_checkbutton;
+        GtkWidget *duration_checkbutton;
+        GtkWidget *file_checkbutton;
+        GtkWidget *date_checkbutton;
+        GtkWidget *autoscroll_checkbutton;
+
         GtkWidget *playlist_combobox;
         GtkWidget *vbox;
         GtkWidget *config;
@@ -77,12 +105,31 @@ ario_playlist_preferences_new (void)
         builder = gtk_builder_helpers_new (UI_PATH "playlist-prefs.ui",
                                            playlist_preferences);
 
+        playlist_preferences->priv->track_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "track_checkbutton"));
+        playlist_preferences->priv->title_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "title_checkbutton"));
+        playlist_preferences->priv->artist_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "artist_checkbutton"));
+        playlist_preferences->priv->album_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_checkbutton"));
+        playlist_preferences->priv->genre_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "genre_checkbutton"));
+        playlist_preferences->priv->duration_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "duration_checkbutton"));
+        playlist_preferences->priv->file_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "file_checkbutton"));
+        playlist_preferences->priv->date_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "date_checkbutton"));
+        playlist_preferences->priv->autoscroll_checkbutton = 
+                GTK_WIDGET (gtk_builder_get_object (builder, "autoscroll_checkbutton"));
         playlist_preferences->priv->playlist_combobox = 
                 GTK_WIDGET (gtk_builder_get_object (builder, "playlist_combobox"));
         playlist_preferences->priv->vbox = 
                 GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
 
         gtk_builder_helpers_boldify_label (builder, "playlist_label");
+        gtk_builder_helpers_boldify_label (builder, "mode_label");
 
         list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
         playlist_modes = ario_playlist_manager_get_modes (ario_playlist_manager_get_instance ());
@@ -121,6 +168,33 @@ ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_prefe
         int i = 0;
         GSList *playlist_modes;
         ArioPlaylistMode *playlist_mode;
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->track_checkbutton),
+                                      ario_conf_get_boolean (PREF_TRACK_COLUMN_VISIBLE, PREF_TRACK_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->title_checkbutton),
+                                      ario_conf_get_boolean (PREF_TITLE_COLUMN_VISIBLE, PREF_TITLE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->artist_checkbutton),
+                                      ario_conf_get_boolean (PREF_ARTIST_COLUMN_VISIBLE, PREF_ARTIST_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->album_checkbutton),
+                                      ario_conf_get_boolean (PREF_ALBUM_COLUMN_VISIBLE, PREF_ALBUM_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->genre_checkbutton),
+                                      ario_conf_get_boolean (PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->duration_checkbutton),
+                                      ario_conf_get_boolean (PREF_DURATION_COLUMN_VISIBLE, PREF_DURATION_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->file_checkbutton),
+                                      ario_conf_get_boolean (PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->date_checkbutton),
+                                      ario_conf_get_boolean (PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->autoscroll_checkbutton),
+                                      ario_conf_get_boolean (PREF_PLAYLIST_AUTOSCROLL, PREF_PLAYLIST_AUTOSCROLL_DEFAULT));
 
         id = ario_conf_get_string (PREF_PLAYLIST_MODE, PREF_PLAYLIST_MODE_DEFAULT);
         playlist_modes = ario_playlist_manager_get_modes (ario_playlist_manager_get_instance ());
@@ -170,3 +244,86 @@ ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
         }
         g_free (id);
 }
+
+void
+ario_playlist_preferences_track_toogled_cb (GtkCheckButton *butt,
+                                          ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_TRACK_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_title_toogled_cb (GtkCheckButton *butt,
+                                          ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_TITLE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_artist_toogled_cb (GtkCheckButton *butt,
+                                           ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_ARTIST_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_album_toogled_cb (GtkCheckButton *butt,
+                                          ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_ALBUM_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_genre_toogled_cb (GtkCheckButton *butt,
+                                          ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_GENRE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_duration_toogled_cb (GtkCheckButton *butt,
+                                             ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_DURATION_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_file_toogled_cb (GtkCheckButton *butt,
+                                         ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_FILE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
+                                         ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_DATE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
+                                               ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_conf_set_boolean (PREF_PLAYLIST_AUTOSCROLL,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+

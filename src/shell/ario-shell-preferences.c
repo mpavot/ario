@@ -28,9 +28,8 @@
 #include "preferences/ario-connection-preferences.h"
 #include "preferences/ario-cover-preferences.h"
 #include "preferences/ario-lyrics-preferences.h"
-#include "preferences/ario-interface-preferences.h"
+#include "preferences/ario-others-preferences.h"
 #include "preferences/ario-playlist-preferences.h"
-#include "preferences/ario-proxy-preferences.h"
 #include "preferences/ario-server-preferences.h"
 #include "preferences/ario-trayicon-preferences.h"
 #include "preferences/ario-stats-preferences.h"
@@ -134,20 +133,15 @@ ario_shell_preferences_new (void)
                                   widget,
                                   gtk_label_new (_("Lyrics")));
 
-        widget = ario_interface_preferences_new ();
-        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
-                                  widget,
-                                  gtk_label_new (_("Interface")));
-
         widget = ario_trayicon_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
-                                  gtk_label_new (_("Tray icon")));
+                                  gtk_label_new (_("Notification")));
 
-        widget = ario_proxy_preferences_new ();
+        widget = ario_others_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
-                                  gtk_label_new (_("Proxy")));
+                                  gtk_label_new (_("Others")));
 
         widget = ario_stats_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
