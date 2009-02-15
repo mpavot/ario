@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:00+0100\n"
+"POT-Creation-Date: 2009-02-15 11:34+0100\n"
 "PO-Revision-Date: 2008-12-15 06:23+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -25,28 +25,412 @@ msgstr "Ario zenelejátszó"
 msgid "Client application to mpd"
 msgstr "Kliens alkalmazás az mpd-hez"
 
-#: ../src/ario-main.c:60
-msgid "Start minimized window"
-msgstr "MInimalizált állapotú ablak indítása"
+#: ../data/ui/browser-prefs.ui.h:1
+#, fuzzy
+msgid "Library Options"
+msgstr "Gyűjtemény rendezése"
 
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "Library Organisation"
+msgstr "Gyűjtemény rendezése"
+
+#: ../data/ui/browser-prefs.ui.h:3
+#, fuzzy
+msgid "Sort albums: "
+msgstr "Állapot:"
+
+#: ../data/ui/connection-widget.ui.h:1
+msgid "Auto detect"
+msgstr "Automatikus felismerés"
+
+#: ../data/ui/connection-widget.ui.h:2
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "Hoszt :"
+
+#: ../data/ui/connection-widget.ui.h:4
+msgid "Music directory :"
+msgstr "Zene könyvtár :"
+
+#: ../data/ui/connection-widget.ui.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
+#: ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Név :"
+
+#: ../data/ui/connection-widget.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+msgid "Password :"
+msgstr "Jelszó :"
+
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/ui/connection-widget.ui.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Szerver"
+
+#: ../data/ui/connection-widget.ui.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
+
+#: ../data/ui/cover-prefs.ui.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr "Automatikusan letölti az éppen hallgatott dal CD borítóját"
+
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "Borítók"
+
+#: ../data/ui/cover-prefs.ui.h:3
+msgid "Covers Sources"
+msgstr "Borító források"
+
+#: ../data/ui/cover-prefs.ui.h:4
+msgid "Show the covers in the albums list"
+msgstr "Borítók mutatása az album listában"
+
+#: ../data/ui/cover-prefs.ui.h:5
+msgid "Use Amazon."
+msgstr "Amazon használata."
+
+#: ../data/ui/connection-prefs.ui.h:1
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "Kapcsolat"
+
+#: ../data/ui/connection-prefs.ui.h:2
+msgid "_Autoconnect on startup"
+msgstr "_Kapcsolódás indításkor"
+
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "Kap_csolódás"
+
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "_Kapcsolat bontása"
+
+#: ../data/ui/connection-assistant.ui.h:1
+#, fuzzy
+msgid ""
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
+msgstr ""
+"Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
+"automatikus konfiguráció következtében nem látja az MPD szervert, "
+"ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
+"használja a kézi beállítást."
+
+#: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
+#: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
+msgid "Album :"
+msgstr "Album :"
+
+#: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
+#: ../plugins/information/information.ui.h:3
+msgid "Artist :"
+msgstr "Előadó :"
+
+#: ../data/ui/cover-progress.ui.h:3
+msgid "Downloading cover"
+msgstr "Borító letöltése"
+
+#: ../data/ui/cover-select.ui.h:3
+msgid "Local search"
+msgstr "Helyi keresés"
+
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "Keresés"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "Album"
+
+#: ../data/ui/interface-prefs.ui.h:2
+msgid "Allow only one instance of Ario"
+msgstr "Csak egy példány engedélyezése az Ario-ból"
+
+#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "Előadó"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr ""
+
+#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "Időtartam"
+
+#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr ""
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr ""
+
+#: ../data/ui/interface-prefs.ui.h:8
+msgid "Go to current song when a new song is played"
+msgstr "Ugrás a jelenlegi számra ha új szám kerül lejátszásra"
+
+#: ../data/ui/interface-prefs.ui.h:9
+msgid "Hide window when close button is pressed"
+msgstr "Ablak elrejtése ha a bezárás gombra kattint"
+
+#: ../data/ui/interface-prefs.ui.h:10
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "Kezelőfelület"
+
+#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "Lejátszólista"
+
+#: ../data/ui/interface-prefs.ui.h:12
+#, fuzzy
+msgid "Show rows:"
+msgstr "Dalszövegek _mutatása"
+
+#: ../data/ui/interface-prefs.ui.h:13
+msgid "Show tabs"
+msgstr "Fülek megjelenítése"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "Cím"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "Szám"
+
+#: ../data/ui/lyrics-prefs.ui.h:1
+msgid "Lyrics Sources"
+msgstr "Dalszöveg források"
+
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
+#: ../plugins/information/information.ui.h:6
+msgid "Title :"
+msgstr "Cím :"
+
+#: ../data/ui/playlist-prefs.ui.h:2
+#, fuzzy
+msgid "Playlist mode:"
+msgstr "Lejátszási lista neve :"
+
+#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "Proxy"
+
+#: ../data/ui/proxy-prefs.ui.h:2
+msgid "Proxy Address :"
+msgstr "Proxy cím :"
+
+#: ../data/ui/proxy-prefs.ui.h:3
+msgid "Proxy Port :"
+msgstr "Proxy port :"
+
+#: ../data/ui/proxy-prefs.ui.h:4
+msgid "Use a proxy"
+msgstr "Proxy használata"
+
+#: ../data/ui/server-prefs.ui.h:1
+msgid "Audio outputs"
+msgstr "Audio kimenetek"
+
+#: ../data/ui/server-prefs.ui.h:2
+msgid "Crossfade"
+msgstr "Átkeverés"
+
+#: ../data/ui/server-prefs.ui.h:3
+msgid "Database"
+msgstr "Adatbázis"
+
+#: ../data/ui/server-prefs.ui.h:4
+msgid "Last updated:"
+msgstr "Utolsó frissítés:"
+
+#: ../data/ui/server-prefs.ui.h:5
+msgid "Stop music on exit"
+msgstr "Zene leállítása kilépéskor"
+
+#: ../data/ui/server-prefs.ui.h:6
+msgid "Update on startup"
+msgstr "Frissítés induláskor"
+
+#: ../data/ui/server-prefs.ui.h:7
+msgid "_Update"
+msgstr "_Frissítés"
+
+#: ../data/ui/server-prefs.ui.h:8
+msgid "enable crossfade"
+msgstr "átkeverés engedélyezése"
+
+#: ../data/ui/server-prefs.ui.h:9
+msgid "fade time (s):"
+msgstr "átkeverési idő"
+
+#: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
+#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
-#: ../src/ario-util.c:81
+#: ../data/ui/similar-artists.ui.h:1
+#, fuzzy
+msgid "Add all to playlist"
+msgstr "_Hozzáadás a lejátszási listához"
+
+#: ../data/ui/similar-artists.ui.h:2
+#, fuzzy
+msgid "Add to playlist"
+msgstr "_Hozzáadás a lejátszási listához"
+
+#: ../data/ui/similar-artists.ui.h:3
+msgid "Find on Last.fm"
+msgstr "Keresés a Last.fm -en"
+
+#: ../data/ui/stats-prefs.ui.h:1
+msgid "Database play time :"
+msgstr "Adatbázis lejátszási időtartam :"
+
+#: ../data/ui/stats-prefs.ui.h:2
+msgid "Number of albums :"
+msgstr "Albumok száma :"
+
+#: ../data/ui/stats-prefs.ui.h:3
+#, fuzzy
+msgid "Number of artists :"
+msgstr "Dalok száma :"
+
+#: ../data/ui/stats-prefs.ui.h:4
+msgid "Number of songs :"
+msgstr "Dalok száma :"
+
+#: ../data/ui/stats-prefs.ui.h:5
+msgid "Play time :"
+msgstr "Lejátszási időtartam :"
+
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "Statisztikák"
+
+#: ../data/ui/stats-prefs.ui.h:7
+msgid "Uptime :"
+msgstr "Aktív futási idő:"
+
+#: ../data/ui/song-infos.ui.h:3
+msgid "Comment :"
+msgstr "Megjegyzés :"
+
+#: ../data/ui/song-infos.ui.h:4
+msgid "Composer :"
+msgstr "Szerző :"
+
+#: ../data/ui/song-infos.ui.h:5
+msgid "Date :"
+msgstr "Dátum :"
+
+#: ../data/ui/song-infos.ui.h:6
+msgid "Disc :"
+msgstr "Lemez :"
+
+#: ../data/ui/song-infos.ui.h:7
+msgid "Filename :"
+msgstr "Fájlnév :"
+
+#: ../data/ui/song-infos.ui.h:8
+msgid "Genre :"
+msgstr "Év :"
+
+#: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
+msgid "Length :"
+msgstr "Hossz:"
+
+#: ../data/ui/song-infos.ui.h:10
+msgid "Performer :"
+msgstr "Előadó :"
+
+#: ../data/ui/song-infos.ui.h:11
+msgid "Song"
+msgstr "Dal"
+
+#: ../data/ui/song-infos.ui.h:13
+msgid "Track :"
+msgstr "Szám :"
+
+#: ../data/ui/trayicon-prefs.ui.h:1
+#, fuzzy
+msgid "Notification"
+msgstr "Jelzési idő: "
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Notification on song change"
+msgstr "Jelzés szám váltásakor"
+
+#: ../data/ui/trayicon-prefs.ui.h:3
+msgid "Notification time: "
+msgstr "Jelzési idő: "
+
+#: ../data/ui/trayicon-prefs.ui.h:4
+msgid "On middle button click on tray icon :"
+msgstr "Közéső gomb ikonja a tálcán :"
+
+#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr "Tálcaikon"
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr "MInimalizált állapotú ablak indítása"
+
+#: ../src/ario-util.c:80
 msgid "seconds"
 msgstr "másodperc"
 
-#: ../src/ario-util.c:84
+#: ../src/ario-util.c:83
 msgid "minutes"
 msgstr "perc"
 
-#: ../src/ario-util.c:92
+#: ../src/ario-util.c:91
 msgid "hours"
 msgstr "óra"
 
-#: ../src/ario-util.c:100
+#: ../src/ario-util.c:99
 msgid "days"
 msgstr "nap"
 
@@ -57,6 +441,33 @@ msgstr "Ez a borító már létezik. Felülírja?"
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "Zene könyvtár"
+
+#: ../src/playlist/ario-playlist-dynamic.c:53
+#, fuzzy
+msgid "same artist"
+msgstr "Előadók száma :"
+
+#: ../src/playlist/ario-playlist-dynamic.c:54
+msgid "same album"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:55
+#, fuzzy
+msgid "similar artists"
+msgstr "Hasonló előadók keresése"
+
+#: ../src/playlist/ario-playlist-dynamic.c:95
+#, fuzzy
+msgid "Dynamic Playlist"
+msgstr "Lejátszólista"
+
+#: ../src/playlist/ario-playlist-queue.c:79
+msgid "Queue Mode"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-normal.c:77
+msgid "Normal"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -148,45 +559,6 @@ msgstr ""
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 
-#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "Előadó"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
-#: ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "Album"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
-#: ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "Cím"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
-#: ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "Szám"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr ""
-
-#. MPD_TAG_ITEM_GENRE
-#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr ""
-
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
 msgid "Composer"
@@ -211,7 +583,7 @@ msgstr "Bármely"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -252,7 +624,7 @@ msgstr "Borítók _törlése"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:139
+#: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -261,10 +633,6 @@ msgstr "_Tulajdonságok"
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "Gyűjtemény"
-
-#: ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "Keresés"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -285,11 +653,6 @@ msgstr "_Törlés"
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
 msgstr "Lejátszólisták"
-
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "Lejátszólista"
 
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
@@ -324,14 +687,6 @@ msgstr "_Eszköz"
 #: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "Segí_tség"
-
-#: ../src/shell/ario-shell.c:153
-msgid "_Connect"
-msgstr "Kap_csolódás"
-
-#: ../src/shell/ario-shell.c:156
-msgid "_Disconnect"
-msgstr "_Kapcsolat bontása"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Quit"
@@ -455,11 +810,6 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Borító letöltése"
 
-#: ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
-msgid "Covers"
-msgstr "Borítók"
-
 #: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr "Fájl olvasási hiba"
@@ -486,29 +836,9 @@ msgstr ""
 msgid "Ario Preferences"
 msgstr "Ario beállítások"
 
-#: ../src/shell/ario-shell-preferences.c:110
-msgid "Connection"
-msgstr "Kapcsolat"
-
 #: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "Szerver"
-
-#: ../src/shell/ario-shell-preferences.c:140
-msgid "Interface"
-msgstr "Kezelőfelület"
-
-#: ../src/shell/ario-shell-preferences.c:145
-msgid "Tray icon"
-msgstr "Tálcaikon"
-
-#: ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "Proxy"
-
-#: ../src/shell/ario-shell-preferences.c:155
-msgid "Statistics"
-msgstr "Statisztikák"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
@@ -569,14 +899,6 @@ msgstr "Új profil"
 #: ../src/widgets/ario-firstlaunch.c:77
 msgid "The following configuration will be used:"
 msgstr "A következő beállítások lesznek használva:"
-
-#: ../src/widgets/ario-firstlaunch.c:78
-msgid "Host :"
-msgstr "Hoszt :"
-
-#: ../src/widgets/ario-firstlaunch.c:80
-msgid "Port :"
-msgstr "Port :"
 
 #: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
@@ -641,48 +963,45 @@ msgstr "Dalszövegek letöltése..."
 msgid "Lyrics not found"
 msgstr "Dalszöveg nem található"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Clear"
 msgstr "_Törlés"
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
 msgstr "_Eltávolítás"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
 msgstr "_Mentés"
 
-#: ../src/widgets/ario-playlist.c:142
+#: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
 msgstr "Tovább a szám _lejátszásához"
 
-#: ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "Időtartam"
-
-#: ../src/widgets/ario-playlist.c:330
-msgid "File"
-msgstr ""
+#: ../src/widgets/ario-playlist.c:552
+#, fuzzy
+msgid "Filter:"
+msgstr "_Fájl"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1353
+#: ../src/widgets/ario-playlist.c:1390
 msgid "Save playlist"
 msgstr "Lejátszólista mentése"
 
-#: ../src/widgets/ario-playlist.c:1363
+#: ../src/widgets/ario-playlist.c:1400
 msgid "Playlist name :"
 msgstr "Lejátszási lista neve :"
 
-#: ../src/widgets/ario-playlist.c:1388
+#: ../src/widgets/ario-playlist.c:1425
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lejátszási lista létezik. Felül akarja írni?"
 
@@ -711,85 +1030,122 @@ msgid "Not playing"
 msgstr "Lejátszás áll"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
 msgid "Today %I:%M %p"
 msgstr "Ma %l.%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
 msgid "Yesterday %I:%M %p"
 msgstr "Tegnap %l.%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
 msgid "%a %I:%M %p"
 msgstr "%a %l.%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
 msgid "%b %d %I:%M %p"
 msgstr "%b %e %l.%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
 msgid "%b %d %Y"
 msgstr "%Y %b. %d"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
 msgstr "Soha"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Logging in"
 msgstr "Bejelentkezés"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Request failed"
 msgstr "A kérés meghiúsult"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Incorrect username"
 msgstr "Helytelen felhasználói név"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Incorrect password"
 msgstr "Hibás jelszó"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Handshake failed"
 msgstr "A kézfogás meghiúsult"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Client update required"
 msgstr "Az ügyfél frissítése szükséges"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
 msgid "Track submission failed"
 msgstr "A szám beküldése meghiúsult"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
 msgid "Queue is too long"
 msgstr "A sor túl hosszú"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 msgid "Track submission failed too many times"
 msgstr "A számbeküldés túl sokszor hiúsult meg"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
 msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler beállításai"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
+msgid "Check Last.fm server status at"
+msgstr "A Last.fm kiszolgáló állapotának ellenőrzése"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
+msgid "Disabled"
+msgstr "Kikapcsolva"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
+msgid "Find out about Last.fm at "
+msgstr "A Last.fm-ről a következő címen tudhat meg többet: "
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+msgid "Last submission time:"
+msgstr "Utolsó beküldés időpontja:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+msgid "Last.fm Profile"
+msgstr "Last.fm profil"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+msgid "Queued tracks:"
+msgstr "Sorba állított számok:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+msgid "Status:"
+msgstr "Állapot:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+msgid "Tracks submitted:"
+msgstr "Beküldött számok:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+msgid "Username :"
+msgstr "Felhasználói név:"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -826,6 +1182,15 @@ msgstr ""
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
 msgstr ""
+
+#: ../plugins/information/information.ui.h:2
+msgid "Albums from this artist:"
+msgstr ""
+
+#: ../plugins/information/information.ui.h:5
+#, fuzzy
+msgid "Lyrics:"
+msgstr "Dalszöveg"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -864,10 +1229,6 @@ msgstr "Internetrádiók"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr "Webrádió hozzáadása"
-
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Név :"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -911,205 +1272,11 @@ msgstr "Bővítmény a jelenlegi előadó kereséséhez a wikipédián."
 msgid "Wikipedia"
 msgstr "Wikipédia"
 
-#~ msgid "Library Organisation"
-#~ msgstr "Gyűjtemény rendezése"
-
-#~ msgid "Auto detect"
-#~ msgstr "Automatikus felismerés"
-
-#~ msgid "Default"
-#~ msgstr "Alapértelmezett"
-
-#~ msgid "Music directory :"
-#~ msgstr "Zene könyvtár :"
-
-#~ msgid "Password :"
-#~ msgstr "Jelszó :"
-
-#~ msgid "Automatically download the album cover of the playing song"
-#~ msgstr "Automatikusan letölti az éppen hallgatott dal CD borítóját"
-
-#~ msgid "Covers Sources"
-#~ msgstr "Borító források"
-
-#~ msgid "Show the covers in the albums list"
-#~ msgstr "Borítók mutatása az album listában"
-
-#~ msgid "Use Amazon."
-#~ msgstr "Amazon használata."
-
-#~ msgid "_Autoconnect on startup"
-#~ msgstr "_Kapcsolódás indításkor"
-
-#~ msgid "Album :"
-#~ msgstr "Album :"
-
-#~ msgid "Artist :"
-#~ msgstr "Előadó :"
-
-#~ msgid "Downloading cover"
-#~ msgstr "Borító letöltése"
-
-#~ msgid "Local search"
-#~ msgstr "Helyi keresés"
-
-#~ msgid "Allow only one instance of Ario"
-#~ msgstr "Csak egy példány engedélyezése az Ario-ból"
-
-#~ msgid "Go to current song when a new song is played"
-#~ msgstr "Ugrás a jelenlegi számra ha új szám kerül lejátszásra"
-
-#~ msgid "Hide window when close button is pressed"
-#~ msgstr "Ablak elrejtése ha a bezárás gombra kattint"
-
-#~ msgid "Show tabs"
-#~ msgstr "Fülek megjelenítése"
-
-#~ msgid "Lyrics Sources"
-#~ msgstr "Dalszöveg források"
-
-#~ msgid "Title :"
-#~ msgstr "Cím :"
-
-#~ msgid "Proxy Address :"
-#~ msgstr "Proxy cím :"
-
-#~ msgid "Proxy Port :"
-#~ msgstr "Proxy port :"
-
-#~ msgid "Use a proxy"
-#~ msgstr "Proxy használata"
-
-#~ msgid "Audio outputs"
-#~ msgstr "Audio kimenetek"
-
-#~ msgid "Crossfade"
-#~ msgstr "Átkeverés"
-
-#~ msgid "Database"
-#~ msgstr "Adatbázis"
-
-#~ msgid "Last updated:"
-#~ msgstr "Utolsó frissítés:"
-
-#~ msgid "Stop music on exit"
-#~ msgstr "Zene leállítása kilépéskor"
-
-#~ msgid "Update on startup"
-#~ msgstr "Frissítés induláskor"
-
-#~ msgid "_Update"
-#~ msgstr "_Frissítés"
-
-#~ msgid "enable crossfade"
-#~ msgstr "átkeverés engedélyezése"
-
-#~ msgid "fade time (s):"
-#~ msgstr "átkeverési idő"
-
-#~ msgid "Find on Last.fm"
-#~ msgstr "Keresés a Last.fm -en"
-
-#~ msgid "Database play time :"
-#~ msgstr "Adatbázis lejátszási időtartam :"
-
-#~ msgid "Number of albums :"
-#~ msgstr "Albumok száma :"
-
-#~ msgid "Number of artists :"
-#~ msgstr "Előadók száma :"
-
-#~ msgid "Number of songs :"
-#~ msgstr "Dalok száma :"
-
-#~ msgid "Play time :"
-#~ msgstr "Lejátszási időtartam :"
-
-#~ msgid "Uptime :"
-#~ msgstr "Aktív futási idő:"
-
-#~ msgid "Comment :"
-#~ msgstr "Megjegyzés :"
-
-#~ msgid "Composer :"
-#~ msgstr "Szerző :"
-
-#~ msgid "Date :"
-#~ msgstr "Dátum :"
-
-#~ msgid "Disc :"
-#~ msgstr "Lemez :"
-
-#~ msgid "Filename :"
-#~ msgstr "Fájlnév :"
-
-#~ msgid "Genre :"
-#~ msgstr "Év :"
-
-#~ msgid "Length :"
-#~ msgstr "Hossz:"
-
-#~ msgid "Performer :"
-#~ msgstr "Előadó :"
-
-#~ msgid "Song"
-#~ msgstr "Dal"
-
-#~ msgid "Track :"
-#~ msgstr "Szám :"
-
-#~ msgid "Notification on song change"
-#~ msgstr "Jelzés szám váltásakor"
-
-#~ msgid "Notification time: "
-#~ msgstr "Jelzési idő: "
-
-#~ msgid "On middle button click on tray icon :"
-#~ msgstr "Közéső gomb ikonja a tálcán :"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "A Last.fm kiszolgáló állapotának ellenőrzése"
-
-#~ msgid "Disabled"
-#~ msgstr "Kikapcsolva"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "A Last.fm-ről a következő címen tudhat meg többet: "
-
-#~ msgid "Last submission time:"
-#~ msgstr "Utolsó beküldés időpontja:"
-
-#~ msgid "Last.fm Profile"
-#~ msgstr "Last.fm profil"
-
-#~ msgid "Queued tracks:"
-#~ msgstr "Sorba állított számok:"
-
-#~ msgid "Status:"
-#~ msgstr "Állapot:"
-
-#~ msgid "Tracks submitted:"
-#~ msgstr "Beküldött számok:"
-
-#~ msgid "Username :"
-#~ msgstr "Felhasználói név:"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatikus beállítás"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Kézi beállítás"
-
-#~ msgid ""
-#~ "You need to specify an MPD server to connect to. If you don't see your "
-#~ "MPD server thanks to the automatic configuration, you should check that "
-#~ "zeroconf is activated in your MPD configuration or use the manual "
-#~ "configuration."
-#~ msgstr ""
-#~ "Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
-#~ "automatikus konfiguráció következtében nem látja az MPD szervert, "
-#~ "ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
-#~ "használja a kézi beállítást."
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

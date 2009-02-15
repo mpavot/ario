@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:00+0100\n"
+"POT-Creation-Date: 2009-02-15 11:34+0100\n"
 "PO-Revision-Date: 2008-12-15 06:19+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -25,28 +25,406 @@ msgstr "Ario musikkspiller"
 msgid "Client application to mpd"
 msgstr "Klientapplikasjon for MPD"
 
-#: ../src/ario-main.c:60
-msgid "Start minimized window"
-msgstr "Start minimert"
+#: ../data/ui/browser-prefs.ui.h:1
+msgid "Library Options"
+msgstr "Innstillinger for Bibliotek"
 
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "Library Organisation"
+msgstr "Organisasjon av Bibliotek"
+
+#: ../data/ui/browser-prefs.ui.h:3
+msgid "Sort albums: "
+msgstr "Sortér album: "
+
+#: ../data/ui/connection-widget.ui.h:1
+msgid "Auto detect"
+msgstr "Autooppdag"
+
+#: ../data/ui/connection-widget.ui.h:2
+msgid "Default"
+msgstr "Forvalg"
+
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "Vert :"
+
+#: ../data/ui/connection-widget.ui.h:4
+msgid "Music directory :"
+msgstr "Musikk mappe :"
+
+#: ../data/ui/connection-widget.ui.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
+#: ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Navn :"
+
+#: ../data/ui/connection-widget.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+msgid "Password :"
+msgstr "Passord :"
+
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/ui/connection-widget.ui.h:9
+#, fuzzy
+msgid "Server type : "
+msgstr "Tjener"
+
+#: ../data/ui/connection-widget.ui.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr ""
+
+#: ../data/ui/cover-prefs.ui.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr "Automatisk nedlasting av omslag for valgt sang"
+
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "Omslag"
+
+#: ../data/ui/cover-prefs.ui.h:3
+msgid "Covers Sources"
+msgstr "Omslagskilder"
+
+#: ../data/ui/cover-prefs.ui.h:4
+msgid "Show the covers in the albums list"
+msgstr "Vis omslag i albumlisten"
+
+#: ../data/ui/cover-prefs.ui.h:5
+msgid "Use Amazon."
+msgstr "Bruk Amazon."
+
+#: ../data/ui/connection-prefs.ui.h:1
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "Forbindelse"
+
+#: ../data/ui/connection-prefs.ui.h:2
+msgid "_Autoconnect on startup"
+msgstr "_Autotilkobling ved oppstart"
+
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "_Koble til"
+
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "_Koble fra"
+
+#: ../data/ui/connection-assistant.ui.h:1
+#, fuzzy
+msgid ""
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
+msgstr ""
+"Du trenger å spesifisere en MPD tjener for å koble til. Hvis du ikke ser din "
+"MPD tjener takket være automatisk konfigurasjon, bør du enten sjekke at "
+"zeroconf er aktivert i din MPD konfigurasjon, eller bruke den manuelle "
+"konfigurasjonen."
+
+#: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
+#: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
+msgid "Album :"
+msgstr "Omslag :"
+
+#: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
+#: ../plugins/information/information.ui.h:3
+msgid "Artist :"
+msgstr "Artist :"
+
+#: ../data/ui/cover-progress.ui.h:3
+msgid "Downloading cover"
+msgstr "Last ned omslag"
+
+#: ../data/ui/cover-select.ui.h:3
+msgid "Local search"
+msgstr "Lokalt søk"
+
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "Søk"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "Album"
+
+#: ../data/ui/interface-prefs.ui.h:2
+msgid "Allow only one instance of Ario"
+msgstr "Tillat bare én instanse av Ario"
+
+#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "Artist"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr "Dato"
+
+#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "Varighet"
+
+#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr "Fil"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr "Sjanger"
+
+#: ../data/ui/interface-prefs.ui.h:8
+msgid "Go to current song when a new song is played"
+msgstr "Gå til valgt sang når sangen er ferdig"
+
+#: ../data/ui/interface-prefs.ui.h:9
+msgid "Hide window when close button is pressed"
+msgstr "Lukk til systemkurven"
+
+#: ../data/ui/interface-prefs.ui.h:10
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "Grensesnitt"
+
+#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "Spilleliste"
+
+#: ../data/ui/interface-prefs.ui.h:12
+msgid "Show rows:"
+msgstr "Vis rader:"
+
+#: ../data/ui/interface-prefs.ui.h:13
+msgid "Show tabs"
+msgstr "Vis faner"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "Tittel"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "Spor"
+
+#: ../data/ui/lyrics-prefs.ui.h:1
+msgid "Lyrics Sources"
+msgstr "Kilder for sangtekster"
+
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
+#: ../plugins/information/information.ui.h:6
+msgid "Title :"
+msgstr "Tittel :"
+
+#: ../data/ui/playlist-prefs.ui.h:2
+#, fuzzy
+msgid "Playlist mode:"
+msgstr "Spillelistens navn :"
+
+#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "Mellomtjener"
+
+#: ../data/ui/proxy-prefs.ui.h:2
+msgid "Proxy Address :"
+msgstr "Adresse for Mellomtjener :"
+
+#: ../data/ui/proxy-prefs.ui.h:3
+msgid "Proxy Port :"
+msgstr "Port for Mellomtjener :"
+
+#: ../data/ui/proxy-prefs.ui.h:4
+msgid "Use a proxy"
+msgstr "Bruk Mellomtjener"
+
+#: ../data/ui/server-prefs.ui.h:1
+msgid "Audio outputs"
+msgstr "Lyd ut"
+
+#: ../data/ui/server-prefs.ui.h:2
+msgid "Crossfade"
+msgstr "Krysstoning"
+
+#: ../data/ui/server-prefs.ui.h:3
+msgid "Database"
+msgstr "Database"
+
+#: ../data/ui/server-prefs.ui.h:4
+msgid "Last updated:"
+msgstr "Sist oppdatert:"
+
+#: ../data/ui/server-prefs.ui.h:5
+msgid "Stop music on exit"
+msgstr "Stopp avspilling ved avslutt"
+
+#: ../data/ui/server-prefs.ui.h:6
+msgid "Update on startup"
+msgstr "Oppdater ved oppstart"
+
+#: ../data/ui/server-prefs.ui.h:7
+msgid "_Update"
+msgstr "_Oppdater"
+
+#: ../data/ui/server-prefs.ui.h:8
+msgid "enable crossfade"
+msgstr "aktiver krysstoning"
+
+#: ../data/ui/server-prefs.ui.h:9
+msgid "fade time (s):"
+msgstr "overgangs tid (s):"
+
+#: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
+#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
-#: ../src/ario-util.c:81
+#: ../data/ui/similar-artists.ui.h:1
+msgid "Add all to playlist"
+msgstr "Legg alle til spillelisten"
+
+#: ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Legg til spillelisten"
+
+#: ../data/ui/similar-artists.ui.h:3
+msgid "Find on Last.fm"
+msgstr "Finn på Last.fm"
+
+#: ../data/ui/stats-prefs.ui.h:1
+msgid "Database play time :"
+msgstr "Databasens avspillingstid :"
+
+#: ../data/ui/stats-prefs.ui.h:2
+msgid "Number of albums :"
+msgstr "Antall album :"
+
+#: ../data/ui/stats-prefs.ui.h:3
+#, fuzzy
+msgid "Number of artists :"
+msgstr "Antall sanger :"
+
+#: ../data/ui/stats-prefs.ui.h:4
+msgid "Number of songs :"
+msgstr "Antall sanger :"
+
+#: ../data/ui/stats-prefs.ui.h:5
+msgid "Play time :"
+msgstr "Spilletid :"
+
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "Statistikk"
+
+#: ../data/ui/stats-prefs.ui.h:7
+msgid "Uptime :"
+msgstr "Oppetid :"
+
+#: ../data/ui/song-infos.ui.h:3
+msgid "Comment :"
+msgstr "Kommentar :"
+
+#: ../data/ui/song-infos.ui.h:4
+msgid "Composer :"
+msgstr "Komponist :"
+
+#: ../data/ui/song-infos.ui.h:5
+msgid "Date :"
+msgstr "Dato :"
+
+#: ../data/ui/song-infos.ui.h:6
+msgid "Disc :"
+msgstr "Disk :"
+
+#: ../data/ui/song-infos.ui.h:7
+msgid "Filename :"
+msgstr "Filnavn :"
+
+#: ../data/ui/song-infos.ui.h:8
+msgid "Genre :"
+msgstr "Sjanger :"
+
+#: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
+msgid "Length :"
+msgstr "Lengde :"
+
+#: ../data/ui/song-infos.ui.h:10
+msgid "Performer :"
+msgstr "Fremfører :"
+
+#: ../data/ui/song-infos.ui.h:11
+msgid "Song"
+msgstr "Sang"
+
+#: ../data/ui/song-infos.ui.h:13
+msgid "Track :"
+msgstr "Spor :"
+
+#: ../data/ui/trayicon-prefs.ui.h:1
+msgid "Notification"
+msgstr "Beskjed"
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Notification on song change"
+msgstr "Vis beskjed ved bytte av sang"
+
+#: ../data/ui/trayicon-prefs.ui.h:3
+msgid "Notification time: "
+msgstr "Beskjedens visningstid: "
+
+#: ../data/ui/trayicon-prefs.ui.h:4
+msgid "On middle button click on tray icon :"
+msgstr "Ved klikk med midtre museknapp på ikon i systemkurv :"
+
+#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr "Ikon i systemkurv"
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr "Start minimert"
+
+#: ../src/ario-util.c:80
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../src/ario-util.c:84
+#: ../src/ario-util.c:83
 msgid "minutes"
 msgstr "minutter"
 
-#: ../src/ario-util.c:92
+#: ../src/ario-util.c:91
 msgid "hours"
 msgstr "timer"
 
-#: ../src/ario-util.c:100
+#: ../src/ario-util.c:99
 msgid "days"
 msgstr "dager"
 
@@ -57,6 +435,33 @@ msgstr "Omslaget finnes allerede. Vil du erstatte det?"
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "Musikk Mappe"
+
+#: ../src/playlist/ario-playlist-dynamic.c:53
+#, fuzzy
+msgid "same artist"
+msgstr "Antall artister :"
+
+#: ../src/playlist/ario-playlist-dynamic.c:54
+msgid "same album"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:55
+#, fuzzy
+msgid "similar artists"
+msgstr "Finn lignende artister"
+
+#: ../src/playlist/ario-playlist-dynamic.c:95
+#, fuzzy
+msgid "Dynamic Playlist"
+msgstr "Spilleliste"
+
+#: ../src/playlist/ario-playlist-queue.c:79
+msgid "Queue Mode"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-normal.c:77
+msgid "Normal"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -148,45 +553,6 @@ msgstr ""
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Kan ikke koble til tjeneren. Sjekk innstillinger for tilkobling."
 
-#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "Artist"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
-#: ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "Album"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
-#: ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "Tittel"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
-#: ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "Spor"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr "Sjanger"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr "Dato"
-
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
 msgid "Composer"
@@ -211,7 +577,7 @@ msgstr "Alt"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -252,7 +618,7 @@ msgstr "_Slett omslagene"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:139
+#: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -261,10 +627,6 @@ msgstr "_Egenskaper"
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "Bibliotek"
-
-#: ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "Søk"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -285,11 +647,6 @@ msgstr "_Slett"
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
 msgstr "Spillelister"
-
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "Spilleliste"
 
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
@@ -323,14 +680,6 @@ msgstr "_Verktøy"
 #: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "_Hjelp"
-
-#: ../src/shell/ario-shell.c:153
-msgid "_Connect"
-msgstr "_Koble til"
-
-#: ../src/shell/ario-shell.c:156
-msgid "_Disconnect"
-msgstr "_Koble fra"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Quit"
@@ -434,11 +783,6 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Nedlasting av Omslag"
 
-#: ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
-msgid "Covers"
-msgstr "Omslag"
-
 #: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr "Feil ved lesing av fil"
@@ -465,29 +809,9 @@ msgstr "Kilde"
 msgid "Ario Preferences"
 msgstr "Ario Innstillinger"
 
-#: ../src/shell/ario-shell-preferences.c:110
-msgid "Connection"
-msgstr "Forbindelse"
-
 #: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "Tjener"
-
-#: ../src/shell/ario-shell-preferences.c:140
-msgid "Interface"
-msgstr "Grensesnitt"
-
-#: ../src/shell/ario-shell-preferences.c:145
-msgid "Tray icon"
-msgstr "Ikon i systemkurv"
-
-#: ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "Mellomtjener"
-
-#: ../src/shell/ario-shell-preferences.c:155
-msgid "Statistics"
-msgstr "Statistikk"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
@@ -552,14 +876,6 @@ msgstr "Ny profil"
 msgid "The following configuration will be used:"
 msgstr "Følgende konfigurasjon vil bli brukt:"
 
-#: ../src/widgets/ario-firstlaunch.c:78
-msgid "Host :"
-msgstr "Vert :"
-
-#: ../src/widgets/ario-firstlaunch.c:80
-msgid "Port :"
-msgstr "Port :"
-
 #: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
 "It is the first time you launch Ario.\n"
@@ -623,48 +939,45 @@ msgstr "Laster ned sangtekster..."
 msgid "Lyrics not found"
 msgstr "Ingen sangtekster ble funnet"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Clear"
 msgstr "_Tøm"
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
 msgstr "Fje_rn"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
 msgstr "_Lagre"
 
-#: ../src/widgets/ario-playlist.c:142
+#: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
 msgstr "_Gå til spillende sang"
 
-#: ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "Varighet"
-
-#: ../src/widgets/ario-playlist.c:330
-msgid "File"
+#: ../src/widgets/ario-playlist.c:552
+#, fuzzy
+msgid "Filter:"
 msgstr "Fil"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1353
+#: ../src/widgets/ario-playlist.c:1390
 msgid "Save playlist"
 msgstr "Lagre spilleliste"
 
-#: ../src/widgets/ario-playlist.c:1363
+#: ../src/widgets/ario-playlist.c:1400
 msgid "Playlist name :"
 msgstr "Spillelistens navn :"
 
-#: ../src/widgets/ario-playlist.c:1388
+#: ../src/widgets/ario-playlist.c:1425
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Spillelisten finnes allerede. Vil du erstatte den?"
 
@@ -693,85 +1006,122 @@ msgid "Not playing"
 msgstr "Spiller ikke"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
 msgid "Today %I:%M %p"
 msgstr "I dag %H:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
 msgid "Yesterday %I:%M %p"
 msgstr "I går %H:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
 msgid "%a %I:%M %p"
 msgstr "%a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
 msgid "%b %d %I:%M %p"
 msgstr "%d %b %H:%M"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
 msgstr "Aldri"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Logging in"
 msgstr "Logger inn"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Request failed"
 msgstr "Forespørsel feilet"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Incorrect username"
 msgstr "Feil brukernavn"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Incorrect password"
 msgstr "Feil passord"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Handshake failed"
 msgstr "Håndtrykk feilet"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Client update required"
 msgstr "Klientoppdatering kreves"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
 msgid "Track submission failed"
 msgstr "Innsending av spor feilet"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
 msgid "Queue is too long"
 msgstr "Køen er for lang"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 msgid "Track submission failed too many times"
 msgstr "Innsending av spor har feilet for mange ganger"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
 msgid "Audioscrobbler preferences"
 msgstr "Brukervalg for Audioscrobbler"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
+msgid "Check Last.fm server status at"
+msgstr "Sjekk tjenerstatus for Last.fm på"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
+msgid "Disabled"
+msgstr "Deaktivert"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
+msgid "Find out about Last.fm at "
+msgstr "Finn ut mer om Last.fm på "
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+msgid "Last submission time:"
+msgstr "Tid for siste innsending:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+msgid "Last.fm Profile"
+msgstr "Last.fm Profil"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+msgid "Queued tracks:"
+msgstr "Kølagte spor:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+msgid "Status:"
+msgstr "Status:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+msgid "Tracks submitted:"
+msgstr "Innsendte spor:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+msgid "Username :"
+msgstr "Brukernavn :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -808,6 +1158,14 @@ msgstr "Vis diverse informasjon om sangen som spilles"
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
 msgstr "Sanginformasjon"
+
+#: ../plugins/information/information.ui.h:2
+msgid "Albums from this artist:"
+msgstr "Album fra denne artisten:"
+
+#: ../plugins/information/information.ui.h:5
+msgid "Lyrics:"
+msgstr "Sangtekster:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -846,10 +1204,6 @@ msgstr "Nettradioer"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr "Legg til WebRadio"
-
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Navn :"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -893,229 +1247,11 @@ msgstr "Programtillegg for å søke etter aktuell artist på Wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Library Options"
-#~ msgstr "Innstillinger for Bibliotek"
-
-#~ msgid "Library Organisation"
-#~ msgstr "Organisasjon av Bibliotek"
-
-#~ msgid "Sort albums: "
-#~ msgstr "Sortér album: "
-
-#~ msgid "Auto detect"
-#~ msgstr "Autooppdag"
-
-#~ msgid "Default"
-#~ msgstr "Forvalg"
-
-#~ msgid "Music directory :"
-#~ msgstr "Musikk mappe :"
-
-#~ msgid "Password :"
-#~ msgstr "Passord :"
-
-#~ msgid "Automatically download the album cover of the playing song"
-#~ msgstr "Automatisk nedlasting av omslag for valgt sang"
-
-#~ msgid "Covers Sources"
-#~ msgstr "Omslagskilder"
-
-#~ msgid "Show the covers in the albums list"
-#~ msgstr "Vis omslag i albumlisten"
-
-#~ msgid "Use Amazon."
-#~ msgstr "Bruk Amazon."
-
-#~ msgid "_Autoconnect on startup"
-#~ msgstr "_Autotilkobling ved oppstart"
-
-#~ msgid "Album :"
-#~ msgstr "Omslag :"
-
-#~ msgid "Artist :"
-#~ msgstr "Artist :"
-
-#~ msgid "Downloading cover"
-#~ msgstr "Last ned omslag"
-
-#~ msgid "Local search"
-#~ msgstr "Lokalt søk"
-
-#~ msgid "Allow only one instance of Ario"
-#~ msgstr "Tillat bare én instanse av Ario"
-
-#~ msgid "Go to current song when a new song is played"
-#~ msgstr "Gå til valgt sang når sangen er ferdig"
-
-#~ msgid "Hide window when close button is pressed"
-#~ msgstr "Lukk til systemkurven"
-
-#~ msgid "Show rows:"
-#~ msgstr "Vis rader:"
-
-#~ msgid "Show tabs"
-#~ msgstr "Vis faner"
-
-#~ msgid "Lyrics Sources"
-#~ msgstr "Kilder for sangtekster"
-
-#~ msgid "Title :"
-#~ msgstr "Tittel :"
-
-#~ msgid "Proxy Address :"
-#~ msgstr "Adresse for Mellomtjener :"
-
-#~ msgid "Proxy Port :"
-#~ msgstr "Port for Mellomtjener :"
-
-#~ msgid "Use a proxy"
-#~ msgstr "Bruk Mellomtjener"
-
-#~ msgid "Audio outputs"
-#~ msgstr "Lyd ut"
-
-#~ msgid "Crossfade"
-#~ msgstr "Krysstoning"
-
-#~ msgid "Database"
-#~ msgstr "Database"
-
-#~ msgid "Last updated:"
-#~ msgstr "Sist oppdatert:"
-
-#~ msgid "Stop music on exit"
-#~ msgstr "Stopp avspilling ved avslutt"
-
-#~ msgid "Update on startup"
-#~ msgstr "Oppdater ved oppstart"
-
-#~ msgid "_Update"
-#~ msgstr "_Oppdater"
-
-#~ msgid "enable crossfade"
-#~ msgstr "aktiver krysstoning"
-
-#~ msgid "fade time (s):"
-#~ msgstr "overgangs tid (s):"
-
-#~ msgid "Add all to playlist"
-#~ msgstr "Legg alle til spillelisten"
-
-#~ msgid "Add to playlist"
-#~ msgstr "Legg til spillelisten"
-
-#~ msgid "Find on Last.fm"
-#~ msgstr "Finn på Last.fm"
-
-#~ msgid "Database play time :"
-#~ msgstr "Databasens avspillingstid :"
-
-#~ msgid "Number of albums :"
-#~ msgstr "Antall album :"
-
-#~ msgid "Number of artists :"
-#~ msgstr "Antall artister :"
-
-#~ msgid "Number of songs :"
-#~ msgstr "Antall sanger :"
-
-#~ msgid "Play time :"
-#~ msgstr "Spilletid :"
-
-#~ msgid "Uptime :"
-#~ msgstr "Oppetid :"
-
-#~ msgid "Comment :"
-#~ msgstr "Kommentar :"
-
-#~ msgid "Composer :"
-#~ msgstr "Komponist :"
-
-#~ msgid "Date :"
-#~ msgstr "Dato :"
-
-#~ msgid "Disc :"
-#~ msgstr "Disk :"
-
-#~ msgid "Filename :"
-#~ msgstr "Filnavn :"
-
-#~ msgid "Genre :"
-#~ msgstr "Sjanger :"
-
-#~ msgid "Length :"
-#~ msgstr "Lengde :"
-
-#~ msgid "Performer :"
-#~ msgstr "Fremfører :"
-
-#~ msgid "Song"
-#~ msgstr "Sang"
-
-#~ msgid "Track :"
-#~ msgstr "Spor :"
-
-#~ msgid "Notification"
-#~ msgstr "Beskjed"
-
-#~ msgid "Notification on song change"
-#~ msgstr "Vis beskjed ved bytte av sang"
-
-#~ msgid "Notification time: "
-#~ msgstr "Beskjedens visningstid: "
-
-#~ msgid "On middle button click on tray icon :"
-#~ msgstr "Ved klikk med midtre museknapp på ikon i systemkurv :"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "Sjekk tjenerstatus for Last.fm på"
-
-#~ msgid "Disabled"
-#~ msgstr "Deaktivert"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "Finn ut mer om Last.fm på "
-
-#~ msgid "Last submission time:"
-#~ msgstr "Tid for siste innsending:"
-
-#~ msgid "Last.fm Profile"
-#~ msgstr "Last.fm Profil"
-
-#~ msgid "Queued tracks:"
-#~ msgstr "Kølagte spor:"
-
-#~ msgid "Status:"
-#~ msgstr "Status:"
-
-#~ msgid "Tracks submitted:"
-#~ msgstr "Innsendte spor:"
-
-#~ msgid "Username :"
-#~ msgstr "Brukernavn :"
-
-#~ msgid "Albums from this artist:"
-#~ msgstr "Album fra denne artisten:"
-
-#~ msgid "Lyrics:"
-#~ msgstr "Sangtekster:"
-
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatisk konfigurasjon"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Manuell konfigurasjon"
-
-#~ msgid ""
-#~ "You need to specify an MPD server to connect to. If you don't see your "
-#~ "MPD server thanks to the automatic configuration, you should check that "
-#~ "zeroconf is activated in your MPD configuration or use the manual "
-#~ "configuration."
-#~ msgstr ""
-#~ "Du trenger å spesifisere en MPD tjener for å koble til. Hvis du ikke ser "
-#~ "din MPD tjener takket være automatisk konfigurasjon, bør du enten sjekke "
-#~ "at zeroconf er aktivert i din MPD konfigurasjon, eller bruke den manuelle "
-#~ "konfigurasjonen."
 
 #~ msgid "_Save Playlist"
 #~ msgstr "_Lagre Spilleliste"

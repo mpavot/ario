@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-08 23:00+0100\n"
+"POT-Creation-Date: 2009-02-15 11:34+0100\n"
 "PO-Revision-Date: 2008-12-25 12:34+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -25,28 +25,403 @@ msgstr "Ario hudební přehrávač"
 msgid "Client application to mpd"
 msgstr "Klientská aplikace k mpd"
 
-#: ../src/ario-main.c:60
-msgid "Start minimized window"
-msgstr "Spusť minimalizované okno"
+#: ../data/ui/browser-prefs.ui.h:1
+msgid "Library Options"
+msgstr "Volby knihovny"
 
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "Library Organisation"
+msgstr "Uspořádání knihovny"
+
+#: ../data/ui/browser-prefs.ui.h:3
+msgid "Sort albums: "
+msgstr "Třídit alba: "
+
+#: ../data/ui/connection-widget.ui.h:1
+msgid "Auto detect"
+msgstr "Automatická detekce"
+
+#: ../data/ui/connection-widget.ui.h:2
+msgid "Default"
+msgstr "Výchozí"
+
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
+msgid "Host :"
+msgstr "Host :"
+
+#: ../data/ui/connection-widget.ui.h:4
+msgid "Music directory :"
+msgstr "Adresář hudby :"
+
+#: ../data/ui/connection-widget.ui.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr "Hudební server je na tom samém počítači jako Ario."
+
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
+#: ../plugins/radios/ario-radio.c:1039
+msgid "Name :"
+msgstr "Název :"
+
+#: ../data/ui/connection-widget.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+msgid "Password :"
+msgstr "Heslo :"
+
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/ui/connection-widget.ui.h:9
+msgid "Server type : "
+msgstr "Typ serveru : "
+
+#: ../data/ui/connection-widget.ui.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr "XMMS 2 (Zkušební)"
+
+#: ../data/ui/cover-prefs.ui.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr "Automaticky stáhnout obrázek právě hrajícího alba"
+
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
+#: ../src/shell/ario-shell-preferences.c:130
+msgid "Covers"
+msgstr "Obrázky alb"
+
+#: ../data/ui/cover-prefs.ui.h:3
+msgid "Covers Sources"
+msgstr "Zdroje obrázků pro alba"
+
+#: ../data/ui/cover-prefs.ui.h:4
+msgid "Show the covers in the albums list"
+msgstr "Zobrazit obrázky alb v seznamu alb"
+
+#: ../data/ui/cover-prefs.ui.h:5
+msgid "Use Amazon."
+msgstr "Použít Amazon"
+
+#: ../data/ui/connection-prefs.ui.h:1
+#: ../src/shell/ario-shell-preferences.c:110
+msgid "Connection"
+msgstr "Spojení"
+
+#: ../data/ui/connection-prefs.ui.h:2
+msgid "_Autoconnect on startup"
+msgstr "_Automaticky připojit při startu"
+
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
+msgid "_Connect"
+msgstr "_Připojit"
+
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
+msgid "_Disconnect"
+msgstr "O_dpojit"
+
+#: ../data/ui/connection-assistant.ui.h:1
+msgid ""
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
+msgstr ""
+"Musíte specifikovat server ke kterému se chcete připojit. Pokud nevidíte "
+"svůj server, poděkujte autodetekci, můžete zkontrolovat zda je základní "
+"konfigurace aktivována nebo použijte ruční konfiguraci."
+
+#: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
+#: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
+msgid "Album :"
+msgstr "Album :"
+
+#: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
+#: ../plugins/information/information.ui.h:3
+msgid "Artist :"
+msgstr "Interpret :"
+
+#: ../data/ui/cover-progress.ui.h:3
+msgid "Downloading cover"
+msgstr "Stahování obrázku alba"
+
+#: ../data/ui/cover-select.ui.h:3
+msgid "Local search"
+msgstr "Lokální vyhledávání"
+
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+msgid "Search"
+msgstr "Vyhledávání"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/interface-prefs.ui.h:1 ../src/servers/ario-server.c:44
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+msgid "Album"
+msgstr "Album"
+
+#: ../data/ui/interface-prefs.ui.h:2
+msgid "Allow only one instance of Ario"
+msgstr "Povolit pouze jednu instanci Aria"
+
+#: ../data/ui/interface-prefs.ui.h:3 ../src/servers/ario-server.c:43
+#: ../src/shell/ario-shell-lyricsselect.c:175
+#: ../src/shell/ario-shell-similarartists.c:385
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/widgets/ario-tray-icon.c:677
+msgid "Artist"
+msgstr "Interpret"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/interface-prefs.ui.h:4 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:434
+msgid "Date"
+msgstr "Datum"
+
+#: ../data/ui/interface-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+msgid "Duration"
+msgstr "Délka"
+
+#: ../data/ui/interface-prefs.ui.h:6 ../src/widgets/ario-playlist.c:434
+msgid "File"
+msgstr "Soubor"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/interface-prefs.ui.h:7 ../src/servers/ario-server.c:48
+#: ../src/widgets/ario-playlist.c:434
+msgid "Genre"
+msgstr "Žánr"
+
+#: ../data/ui/interface-prefs.ui.h:8
+msgid "Go to current song when a new song is played"
+msgstr "Jít na aktuální skladbu pokud se nová přehrává"
+
+#: ../data/ui/interface-prefs.ui.h:9
+msgid "Hide window when close button is pressed"
+msgstr "Skrýt okno pokud je stisknuto tlačítko zavření"
+
+#: ../data/ui/interface-prefs.ui.h:10
+#: ../src/shell/ario-shell-preferences.c:140
+msgid "Interface"
+msgstr "Uživatelské prostředí"
+
+#: ../data/ui/interface-prefs.ui.h:11 ../data/ui/playlist-prefs.ui.h:1
+#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
+#: ../src/shell/ario-shell-preferences.c:125
+msgid "Playlist"
+msgstr "Seznam skladeb"
+
+#: ../data/ui/interface-prefs.ui.h:12
+msgid "Show rows:"
+msgstr "Zobrazit sloupce"
+
+#: ../data/ui/interface-prefs.ui.h:13
+msgid "Show tabs"
+msgstr "Zobrazit záložky"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/interface-prefs.ui.h:14 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
+#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-tray-icon.c:681
+msgid "Title"
+msgstr "Název"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/interface-prefs.ui.h:15 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+msgid "Track"
+msgstr "Stopa"
+
+#: ../data/ui/lyrics-prefs.ui.h:1
+msgid "Lyrics Sources"
+msgstr "Zdroje textů k písním"
+
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
+#: ../plugins/information/information.ui.h:6
+msgid "Title :"
+msgstr "Titul:"
+
+#: ../data/ui/playlist-prefs.ui.h:2
+#, fuzzy
+msgid "Playlist mode:"
+msgstr "Název seznamu stop :"
+
+#: ../data/ui/proxy-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:150
+msgid "Proxy"
+msgstr "Proxy"
+
+#: ../data/ui/proxy-prefs.ui.h:2
+msgid "Proxy Address :"
+msgstr "Adresa proxy :"
+
+#: ../data/ui/proxy-prefs.ui.h:3
+msgid "Proxy Port :"
+msgstr "Proxy port :"
+
+#: ../data/ui/proxy-prefs.ui.h:4
+msgid "Use a proxy"
+msgstr "Použít proxy"
+
+#: ../data/ui/server-prefs.ui.h:1
+msgid "Audio outputs"
+msgstr "Audio výstupy"
+
+#: ../data/ui/server-prefs.ui.h:2
+msgid "Crossfade"
+msgstr "Prolínání"
+
+#: ../data/ui/server-prefs.ui.h:3
+msgid "Database"
+msgstr "Databáze"
+
+#: ../data/ui/server-prefs.ui.h:4
+msgid "Last updated:"
+msgstr "Naposledy aktualizováno:"
+
+#: ../data/ui/server-prefs.ui.h:5
+msgid "Stop music on exit"
+msgstr "Zastavit hudbu při ukončení"
+
+#: ../data/ui/server-prefs.ui.h:6
+msgid "Update on startup"
+msgstr "Aktualizovat při startu"
+
+#: ../data/ui/server-prefs.ui.h:7
+msgid "_Update"
+msgstr "_Aktualizace"
+
+#: ../data/ui/server-prefs.ui.h:8
+msgid "enable crossfade"
+msgstr "Zapnout prolínání"
+
+#: ../data/ui/server-prefs.ui.h:9
+msgid "fade time (s):"
+msgstr "čas prolínání"
+
+#: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
+#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
-#: ../src/ario-util.c:81
+#: ../data/ui/similar-artists.ui.h:1
+msgid "Add all to playlist"
+msgstr "Přidat vše do playlistu"
+
+#: ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Přidat do playlistu"
+
+#: ../data/ui/similar-artists.ui.h:3
+msgid "Find on Last.fm"
+msgstr "Najdi na Last.fm"
+
+#: ../data/ui/stats-prefs.ui.h:1
+msgid "Database play time :"
+msgstr "Celkový čas databáze :"
+
+#: ../data/ui/stats-prefs.ui.h:2
+msgid "Number of albums :"
+msgstr "Počet alb :"
+
+#: ../data/ui/stats-prefs.ui.h:3
+#, fuzzy
+msgid "Number of artists :"
+msgstr "Počet skladeb :"
+
+#: ../data/ui/stats-prefs.ui.h:4
+msgid "Number of songs :"
+msgstr "Počet skladeb :"
+
+#: ../data/ui/stats-prefs.ui.h:5
+msgid "Play time :"
+msgstr "Doba hraní :"
+
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:155
+msgid "Statistics"
+msgstr "Statistiky"
+
+#: ../data/ui/stats-prefs.ui.h:7
+msgid "Uptime :"
+msgstr "Scházející čas:"
+
+#: ../data/ui/song-infos.ui.h:3
+msgid "Comment :"
+msgstr "Komentář :"
+
+#: ../data/ui/song-infos.ui.h:4
+msgid "Composer :"
+msgstr "Skladatel :"
+
+#: ../data/ui/song-infos.ui.h:5
+msgid "Date :"
+msgstr "Datum:"
+
+#: ../data/ui/song-infos.ui.h:6
+msgid "Disc :"
+msgstr "Disk :"
+
+#: ../data/ui/song-infos.ui.h:7
+msgid "Filename :"
+msgstr "Název souboru :"
+
+#: ../data/ui/song-infos.ui.h:8
+msgid "Genre :"
+msgstr "Žánr :"
+
+#: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
+msgid "Length :"
+msgstr "Délka :"
+
+#: ../data/ui/song-infos.ui.h:10
+msgid "Performer :"
+msgstr "Umělec :"
+
+#: ../data/ui/song-infos.ui.h:11
+msgid "Song"
+msgstr "Skladba :"
+
+#: ../data/ui/song-infos.ui.h:13
+msgid "Track :"
+msgstr "Stopa :"
+
+#: ../data/ui/trayicon-prefs.ui.h:1
+msgid "Notification"
+msgstr "Oznámení"
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Notification on song change"
+msgstr "Oznámení při změně skladby"
+
+#: ../data/ui/trayicon-prefs.ui.h:3
+msgid "Notification time: "
+msgstr "Doba zobrazení oznámení "
+
+#: ../data/ui/trayicon-prefs.ui.h:4
+msgid "On middle button click on tray icon :"
+msgstr "Kliknutím středním tlačítkem na ikonu v hlavním panelu :"
+
+#: ../data/ui/trayicon-prefs.ui.h:5 ../src/shell/ario-shell-preferences.c:145
+msgid "Tray icon"
+msgstr "Ikona v panelu na ploše"
+
+#: ../src/ario-main.c:60
+msgid "Start minimized window"
+msgstr "Spusť minimalizované okno"
+
+#: ../src/ario-util.c:80
 msgid "seconds"
 msgstr "sekund"
 
-#: ../src/ario-util.c:84
+#: ../src/ario-util.c:83
 msgid "minutes"
 msgstr "minut"
 
-#: ../src/ario-util.c:92
+#: ../src/ario-util.c:91
 msgid "hours"
 msgstr "hodin"
 
-#: ../src/ario-util.c:100
+#: ../src/ario-util.c:99
 msgid "days"
 msgstr "dny/dní"
 
@@ -57,6 +432,33 @@ msgstr "Obrázek alba již existuje. Chcete ho přepsat?"
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
 msgstr "Adresář hudby"
+
+#: ../src/playlist/ario-playlist-dynamic.c:53
+#, fuzzy
+msgid "same artist"
+msgstr "Počet interpretů :"
+
+#: ../src/playlist/ario-playlist-dynamic.c:54
+msgid "same album"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:55
+#, fuzzy
+msgid "similar artists"
+msgstr "Najít podobné autory"
+
+#: ../src/playlist/ario-playlist-dynamic.c:95
+#, fuzzy
+msgid "Dynamic Playlist"
+msgstr "Seznam skladeb"
+
+#: ../src/playlist/ario-playlist-queue.c:79
+msgid "Queue Mode"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-normal.c:77
+msgid "Normal"
+msgstr ""
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -148,45 +550,6 @@ msgstr "Připojování k serveru..."
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Není možné se připojit k serveru. Zkontrolujte nastavení připojení."
 
-#: ../src/servers/ario-server.c:43 ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
-msgid "Artist"
-msgstr "Interpret"
-
-#. MPD_TAG_ITEM_ARTIST
-#: ../src/servers/ario-server.c:44 ../src/sources/ario-tree.c:386
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:223
-#: ../src/widgets/ario-tray-icon.c:679
-msgid "Album"
-msgstr "Album"
-
-#. MPD_TAG_ITEM_ALBUM
-#: ../src/servers/ario-server.c:45 ../src/sources/ario-tree.c:432
-#: ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:330 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
-msgid "Title"
-msgstr "Název"
-
-#. MPD_TAG_ITEM_TITLE
-#: ../src/servers/ario-server.c:46 ../src/sources/ario-tree.c:425
-#: ../src/widgets/ario-playlist.c:330
-msgid "Track"
-msgstr "Stopa"
-
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../src/servers/ario-server.c:48 ../src/widgets/ario-playlist.c:330
-msgid "Genre"
-msgstr "Žánr"
-
-#. MPD_TAG_ITEM_GENRE
-#: ../src/servers/ario-server.c:49 ../src/widgets/ario-playlist.c:330
-msgid "Date"
-msgstr "Datum"
-
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:50
 msgid "Composer"
@@ -211,7 +574,7 @@ msgstr "Libovolné"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1199
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "Unknown"
 msgstr "Neznámá"
 
@@ -252,7 +615,7 @@ msgstr "_Smazat obrázky alb"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
-#: ../src/widgets/ario-playlist.c:139
+#: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
@@ -261,10 +624,6 @@ msgstr "Vlast_nosti"
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:120
 msgid "Library"
 msgstr "Knihovna"
-
-#: ../src/sources/ario-search.c:113
-msgid "Search"
-msgstr "Vyhledávání"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
@@ -285,11 +644,6 @@ msgstr "_Smazat"
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
 msgstr "Seznamy skladeb"
-
-#: ../src/sources/ario-storedplaylists.c:216 ../src/shell/ario-shell.c:199
-#: ../src/shell/ario-shell-preferences.c:125
-msgid "Playlist"
-msgstr "Seznam skladeb"
 
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
@@ -323,14 +677,6 @@ msgstr "_Nástroj"
 #: ../src/shell/ario-shell.c:151
 msgid "_Help"
 msgstr "_Nápověda"
-
-#: ../src/shell/ario-shell.c:153
-msgid "_Connect"
-msgstr "_Připojit"
-
-#: ../src/shell/ario-shell.c:156
-msgid "_Disconnect"
-msgstr "O_dpojit"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Quit"
@@ -441,11 +787,6 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Stažení obalu alba"
 
-#: ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:130
-msgid "Covers"
-msgstr "Obrázky alb"
-
 #: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
 msgstr "Chyba při čtení souboru"
@@ -472,29 +813,9 @@ msgstr "Zdroj"
 msgid "Ario Preferences"
 msgstr "Vlastnosti Aria"
 
-#: ../src/shell/ario-shell-preferences.c:110
-msgid "Connection"
-msgstr "Spojení"
-
 #: ../src/shell/ario-shell-preferences.c:115
 msgid "Server"
 msgstr "Server"
-
-#: ../src/shell/ario-shell-preferences.c:140
-msgid "Interface"
-msgstr "Uživatelské prostředí"
-
-#: ../src/shell/ario-shell-preferences.c:145
-msgid "Tray icon"
-msgstr "Ikona v panelu na ploše"
-
-#: ../src/shell/ario-shell-preferences.c:150
-msgid "Proxy"
-msgstr "Proxy"
-
-#: ../src/shell/ario-shell-preferences.c:155
-msgid "Statistics"
-msgstr "Statistiky"
 
 #: ../src/shell/ario-shell-similarartists.c:315
 #, c-format
@@ -559,14 +880,6 @@ msgstr "Nový profil"
 msgid "The following configuration will be used:"
 msgstr "Následující konfigurace bude použita:"
 
-#: ../src/widgets/ario-firstlaunch.c:78
-msgid "Host :"
-msgstr "Host :"
-
-#: ../src/widgets/ario-firstlaunch.c:80
-msgid "Port :"
-msgstr "Port :"
-
 #: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
 "It is the first time you launch Ario.\n"
@@ -630,48 +943,45 @@ msgstr "Stahuji texty ..."
 msgid "Lyrics not found"
 msgstr "Texty nejsou dostupné"
 
-#: ../src/widgets/ario-playlist.c:124
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Clear"
 msgstr "_Vyprázdnit"
 
-#: ../src/widgets/ario-playlist.c:127
+#: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
 msgstr "_Promíchat"
 
-#: ../src/widgets/ario-playlist.c:130
+#: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
 msgstr "_Oříznout"
 
-#: ../src/widgets/ario-playlist.c:133
+#: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
 msgstr "_Smazat"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
 msgstr "_Uložit"
 
-#: ../src/widgets/ario-playlist.c:142
+#: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
 msgstr "_ Jít na přehrávanou skladbu"
 
-#: ../src/widgets/ario-playlist.c:330
-msgid "Duration"
-msgstr "Délka"
-
-#: ../src/widgets/ario-playlist.c:330
-msgid "File"
+#: ../src/widgets/ario-playlist.c:552
+#, fuzzy
+msgid "Filter:"
 msgstr "Soubor"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1353
+#: ../src/widgets/ario-playlist.c:1390
 msgid "Save playlist"
 msgstr "Uložit seznam skladeb"
 
-#: ../src/widgets/ario-playlist.c:1363
+#: ../src/widgets/ario-playlist.c:1400
 msgid "Playlist name :"
 msgstr "Název seznamu stop :"
 
-#: ../src/widgets/ario-playlist.c:1388
+#: ../src/widgets/ario-playlist.c:1425
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Seznam stop již existuje. Chcete ho přepsat ?"
 
@@ -700,85 +1010,122 @@ msgid "Not playing"
 msgstr "Nepřehrávám"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1143
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
 msgid "Today %I:%M %p"
 msgstr "Dnes %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1156
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
 msgid "Yesterday %I:%M %p"
 msgstr "Včera %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1172
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1184
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1189
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1273
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
 msgstr "Nikdy"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1296
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "OK"
 msgstr "OK"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1299
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Logging in"
 msgstr "Probíhá přihlášení"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1302
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Request failed"
 msgstr "Požadavek selhal"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Incorrect username"
 msgstr "Nesprávné uživatelské jméno"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Incorrect password"
 msgstr "Nesprávné heslo"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Handshake failed"
 msgstr "Komunikace selhala"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Client update required"
 msgstr "Vyžadována aktualizace klienta"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
 msgid "Track submission failed"
 msgstr "Odeslání stop selhalo"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
 msgid "Queue is too long"
 msgstr "Fronta je příliš dlouhá"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 msgid "Track submission failed too many times"
 msgstr "Odesílání skladeb selhalo příliš mnohokrát"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1375
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
 msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler nastavení"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
+msgid "Check Last.fm server status at"
+msgstr "Zkontrolovat stav Last.fm serveru na"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
+msgid "Disabled"
+msgstr "Zakázáno"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
+msgid "Find out about Last.fm at "
+msgstr "Zjistěte, co je Last.fm, na "
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+msgid "Last submission time:"
+msgstr "Poslední čas odeslání:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+msgid "Last.fm Profile"
+msgstr "Profil Last.fm"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+msgid "Queued tracks:"
+msgstr "Stopy ve frontě:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+msgid "Status:"
+msgstr "Stav:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+msgid "Tracks submitted:"
+msgstr "Odeslané stopy:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+msgid "Username :"
+msgstr "Uživatel:"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -815,6 +1162,14 @@ msgstr "Zobrazit různé informace o hrající skladbě"
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
 msgstr "Informace o skladbě"
+
+#: ../plugins/information/information.ui.h:2
+msgid "Albums from this artist:"
+msgstr "Alba od tohoto umělce:"
+
+#: ../plugins/information/information.ui.h:5
+msgid "Lyrics:"
+msgstr "Texty písní:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -853,10 +1208,6 @@ msgstr "Internetová rádia"
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
 msgstr "Přidat Webové rádio"
-
-#: ../plugins/radios/ario-radio.c:840 ../plugins/radios/ario-radio.c:1039
-msgid "Name :"
-msgstr "Název :"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
@@ -899,231 +1250,6 @@ msgstr "Zásuvný modul pro vyhledání aktuálního umělce na wikipedii"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
-
-#~ msgid "Library Options"
-#~ msgstr "Volby knihovny"
-
-#~ msgid "Library Organisation"
-#~ msgstr "Uspořádání knihovny"
-
-#~ msgid "Sort albums: "
-#~ msgstr "Třídit alba: "
-
-#~ msgid "Auto detect"
-#~ msgstr "Automatická detekce"
-
-#~ msgid "Default"
-#~ msgstr "Výchozí"
-
-#~ msgid "Music directory :"
-#~ msgstr "Adresář hudby :"
-
-#~ msgid "Music server is on the same computer as Ario"
-#~ msgstr "Hudební server je na tom samém počítači jako Ario."
-
-#~ msgid "Password :"
-#~ msgstr "Heslo :"
-
-#~ msgid "Server type : "
-#~ msgstr "Typ serveru : "
-
-#~ msgid "XMMS 2 (Experimental)"
-#~ msgstr "XMMS 2 (Zkušební)"
-
-#~ msgid "Automatically download the album cover of the playing song"
-#~ msgstr "Automaticky stáhnout obrázek právě hrajícího alba"
-
-#~ msgid "Covers Sources"
-#~ msgstr "Zdroje obrázků pro alba"
-
-#~ msgid "Show the covers in the albums list"
-#~ msgstr "Zobrazit obrázky alb v seznamu alb"
-
-#~ msgid "Use Amazon."
-#~ msgstr "Použít Amazon"
-
-#~ msgid "_Autoconnect on startup"
-#~ msgstr "_Automaticky připojit při startu"
-
-#~ msgid ""
-#~ "You need to specify a server to connect to. If you don't see your server "
-#~ "thanks to the autodetection, you should check that zeroconf/avahi is "
-#~ "activated in your server or use the manual configuration."
-#~ msgstr ""
-#~ "Musíte specifikovat server ke kterému se chcete připojit. Pokud nevidíte "
-#~ "svůj server, poděkujte autodetekci, můžete zkontrolovat zda je základní "
-#~ "konfigurace aktivována nebo použijte ruční konfiguraci."
-
-#~ msgid "Album :"
-#~ msgstr "Album :"
-
-#~ msgid "Artist :"
-#~ msgstr "Interpret :"
-
-#~ msgid "Downloading cover"
-#~ msgstr "Stahování obrázku alba"
-
-#~ msgid "Local search"
-#~ msgstr "Lokální vyhledávání"
-
-#~ msgid "Allow only one instance of Ario"
-#~ msgstr "Povolit pouze jednu instanci Aria"
-
-#~ msgid "Go to current song when a new song is played"
-#~ msgstr "Jít na aktuální skladbu pokud se nová přehrává"
-
-#~ msgid "Hide window when close button is pressed"
-#~ msgstr "Skrýt okno pokud je stisknuto tlačítko zavření"
-
-#~ msgid "Show rows:"
-#~ msgstr "Zobrazit sloupce"
-
-#~ msgid "Show tabs"
-#~ msgstr "Zobrazit záložky"
-
-#~ msgid "Lyrics Sources"
-#~ msgstr "Zdroje textů k písním"
-
-#~ msgid "Title :"
-#~ msgstr "Titul:"
-
-#~ msgid "Proxy Address :"
-#~ msgstr "Adresa proxy :"
-
-#~ msgid "Proxy Port :"
-#~ msgstr "Proxy port :"
-
-#~ msgid "Use a proxy"
-#~ msgstr "Použít proxy"
-
-#~ msgid "Audio outputs"
-#~ msgstr "Audio výstupy"
-
-#~ msgid "Crossfade"
-#~ msgstr "Prolínání"
-
-#~ msgid "Database"
-#~ msgstr "Databáze"
-
-#~ msgid "Last updated:"
-#~ msgstr "Naposledy aktualizováno:"
-
-#~ msgid "Stop music on exit"
-#~ msgstr "Zastavit hudbu při ukončení"
-
-#~ msgid "Update on startup"
-#~ msgstr "Aktualizovat při startu"
-
-#~ msgid "_Update"
-#~ msgstr "_Aktualizace"
-
-#~ msgid "enable crossfade"
-#~ msgstr "Zapnout prolínání"
-
-#~ msgid "fade time (s):"
-#~ msgstr "čas prolínání"
-
-#~ msgid "Add all to playlist"
-#~ msgstr "Přidat vše do playlistu"
-
-#~ msgid "Add to playlist"
-#~ msgstr "Přidat do playlistu"
-
-#~ msgid "Find on Last.fm"
-#~ msgstr "Najdi na Last.fm"
-
-#~ msgid "Database play time :"
-#~ msgstr "Celkový čas databáze :"
-
-#~ msgid "Number of albums :"
-#~ msgstr "Počet alb :"
-
-#~ msgid "Number of artists :"
-#~ msgstr "Počet interpretů :"
-
-#~ msgid "Number of songs :"
-#~ msgstr "Počet skladeb :"
-
-#~ msgid "Play time :"
-#~ msgstr "Doba hraní :"
-
-#~ msgid "Uptime :"
-#~ msgstr "Scházející čas:"
-
-#~ msgid "Comment :"
-#~ msgstr "Komentář :"
-
-#~ msgid "Composer :"
-#~ msgstr "Skladatel :"
-
-#~ msgid "Date :"
-#~ msgstr "Datum:"
-
-#~ msgid "Disc :"
-#~ msgstr "Disk :"
-
-#~ msgid "Filename :"
-#~ msgstr "Název souboru :"
-
-#~ msgid "Genre :"
-#~ msgstr "Žánr :"
-
-#~ msgid "Length :"
-#~ msgstr "Délka :"
-
-#~ msgid "Performer :"
-#~ msgstr "Umělec :"
-
-#~ msgid "Song"
-#~ msgstr "Skladba :"
-
-#~ msgid "Track :"
-#~ msgstr "Stopa :"
-
-#~ msgid "Notification"
-#~ msgstr "Oznámení"
-
-#~ msgid "Notification on song change"
-#~ msgstr "Oznámení při změně skladby"
-
-#~ msgid "Notification time: "
-#~ msgstr "Doba zobrazení oznámení "
-
-#~ msgid "On middle button click on tray icon :"
-#~ msgstr "Kliknutím středním tlačítkem na ikonu v hlavním panelu :"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "Zkontrolovat stav Last.fm serveru na"
-
-#~ msgid "Disabled"
-#~ msgstr "Zakázáno"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "Zjistěte, co je Last.fm, na "
-
-#~ msgid "Last submission time:"
-#~ msgstr "Poslední čas odeslání:"
-
-#~ msgid "Last.fm Profile"
-#~ msgstr "Profil Last.fm"
-
-#~ msgid "Queued tracks:"
-#~ msgstr "Stopy ve frontě:"
-
-#~ msgid "Status:"
-#~ msgstr "Stav:"
-
-#~ msgid "Tracks submitted:"
-#~ msgstr "Odeslané stopy:"
-
-#~ msgid "Username :"
-#~ msgstr "Uživatel:"
-
-#~ msgid "Albums from this artist:"
-#~ msgstr "Alba od tohoto umělce:"
-
-#~ msgid "Lyrics:"
-#~ msgstr "Texty písní:"
 
 #~ msgid "Automatic configuration"
 #~ msgstr "Automatická konfigurace"
