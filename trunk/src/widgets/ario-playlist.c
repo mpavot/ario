@@ -931,21 +931,36 @@ ario_playlist_new (GtkUIManager *mgr,
         return GTK_WIDGET (instance);
 }
 
+static int
+ario_playlist_get_indice (GtkTreePath *path)
+{
+        ARIO_LOG_FUNCTION_START
+        GtkTreePath *parent_path = NULL;
+        int *indices = NULL;
+        int indice = -1;
+
+        if (instance->priv->in_search) {
+                parent_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (instance->priv->filter), path);
+                if (parent_path)
+                        indices = gtk_tree_path_get_indices (parent_path);
+        } else {
+                indices = gtk_tree_path_get_indices (path);
+        }
+
+        if (indices)
+                indice = indices[0];
+
+        if (parent_path)
+                gtk_tree_path_free (parent_path);
+
+        return indice;
+}
+
 static void
 ario_playlist_activate_row (GtkTreePath *path)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreePath *parent_path;
-
-        if (instance->priv->in_search) {
-                parent_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (instance->priv->filter), path);
-                if (parent_path) {
-                        ario_server_do_play_pos (gtk_tree_path_get_indices (parent_path)[0]);
-                        gtk_tree_path_free (parent_path);
-                }
-        } else {
-                ario_server_do_play_pos (gtk_tree_path_get_indices (path)[0]);
-        }
+        ario_server_do_play_pos (ario_playlist_get_indice (path));
 }
 
 static void
@@ -1201,23 +1216,12 @@ ario_playlist_selection_remove_foreach (GtkTreeModel *model,
                                         guint *deleted)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreePath *parent_path = NULL;
-        gint *indice = NULL;
+        gint indice = ario_playlist_get_indice (path);
 
-        if (instance->priv->in_search) {
-                parent_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (instance->priv->filter), path);
-                if (parent_path) {
-                        indice = gtk_tree_path_get_indices (parent_path);
-                }
-        } else {
-                indice = gtk_tree_path_get_indices (path);
-        }
-        if (indice) {
-                ario_server_queue_delete_pos (indice[0] - *deleted);
+        if (indice >= 0) {
+                ario_server_queue_delete_pos (indice - *deleted);
                 ++(*deleted);
         }
-        if (parent_path)
-                gtk_tree_path_free (parent_path);
 }
 
 static void
@@ -1256,27 +1260,15 @@ ario_playlist_selection_crop_foreach (GtkTreeModel *model,
                                       ArioPlaylistCropData *data)
 {
         ARIO_LOG_FUNCTION_START
-        GtkTreePath *parent_path = NULL;
-        gint *indice = NULL;
+        gint indice = ario_playlist_get_indice (path);
 
-        if (instance->priv->in_search) {
-                parent_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (instance->priv->filter), path);
-                if (parent_path) {
-                        indice = gtk_tree_path_get_indices (parent_path);
-                }
-        } else {
-                indice = gtk_tree_path_get_indices (path);
-        }
-        if (indice) {
-                while (data->deleted + data->kept < indice[0]) {
+        if (indice >= 0) {
+                while (data->deleted + data->kept < indice) {
                         ario_server_queue_delete_pos (data->kept);
                         ++data->deleted;
                 }
                 ++data->kept;
         }
-
-        if (parent_path)
-                gtk_tree_path_free (parent_path);
 }
 
 static void
