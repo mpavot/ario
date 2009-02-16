@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "servers/ario-mpd.h"
+#include "ario-util.h"
 #ifdef ENABLE_XMMS2
 #include "servers/ario-xmms.h"
 #endif
@@ -893,8 +894,6 @@ ario_server_playlist_add_criterias (const GSList *criterias,
         const GSList *tmp_criteria, *tmp_songs;
         const ArioServerCriteria *criteria;
         ArioServerSong *server_song;
-        int nb_filenames, random, i = 0;
-        gchar *filename;
 
         /* For each criteria :*/
         for (tmp_criteria = criterias; tmp_criteria; tmp_criteria = g_slist_next (tmp_criteria)) {
@@ -913,31 +912,19 @@ ario_server_playlist_add_criterias (const GSList *criterias,
         }
 
         if (nb_entries > 0 && filenames) {
-                nb_filenames = g_slist_length (filenames);
-                if (nb_filenames > nb_entries) {
-                        while (i < nb_entries) {
-                                random = rand () % nb_filenames;
-                                filename = g_slist_nth_data (filenames, random);
-                                if (!g_slist_find (tmp_filenames, filename)) {
-                                        tmp_filenames = g_slist_append (tmp_filenames, filename);
-                                        ++i;
-                                }
-                        }
-                } else {
-                        tmp_filenames = filenames;
-                }
-        } else {
-                tmp_filenames = filenames;
+                tmp_filenames = ario_util_gslist_randomize (&filenames, nb_entries);
+                g_slist_foreach (filenames, (GFunc) g_free, NULL);
+                g_slist_free (filenames);
+
+                filenames = tmp_filenames;
         }
 
-        ario_server_playlist_add_songs (tmp_filenames,
+        ario_server_playlist_add_songs (filenames,
                                         pos,
                                         play);
 
         g_slist_foreach (filenames, (GFunc) g_free, NULL);
         g_slist_free (filenames);
-        if (filenames != tmp_filenames)
-                g_slist_free (tmp_filenames);
 }
 
 void

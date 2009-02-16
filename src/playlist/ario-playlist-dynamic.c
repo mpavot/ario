@@ -44,15 +44,19 @@ static GObjectClass *parent_class = NULL;
 
 typedef enum
 {
-        SAME_ARTIST,
-        SAME_ALBUM,
-        SIMILAR_ARTISTS
+        SONGS_FROM_SAME_ARTIST,
+        SONGS_FROM_SAME_ALBUM,
+        SONGS_FROM_SIMILAR_ARTISTS,
+        ALBUMS_FROM_SAME_ARTIST,
+        ALBUMS_FROM_SIMILAR_ARTISTS
 } ArioDynamicType;
 
 static const char *dynamic_type[] = {
-        N_("same artist"),
-        N_("same album"),
-        N_("similar artists"),
+        N_("songs of same artist"),
+        N_("songs of same album"),
+        N_("songs of similar artists"),
+        N_("albums of same artists"),
+        N_("albums of similar artists"),
         NULL
 };
 
@@ -156,19 +160,20 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
 {
         ARIO_LOG_FUNCTION_START
         GSList *artists = NULL;
+        GSList *albums = NULL, *tmp, *tmp_artist;
         ArioServerAtomicCriteria atomic_criteria1;
         ArioServerAtomicCriteria atomic_criteria2;
         ArioServerCriteria *criteria = NULL;
         GSList *criterias = NULL;
-        int nbsongs = ario_conf_get_integer (PREF_DYNAMIC_NBSONGS, PREF_DYNAMIC_NBSONGS_DEFAULT);
+        int nbitems = ario_conf_get_integer (PREF_DYNAMIC_NBITEMS, PREF_DYNAMIC_NBITEMS_DEFAULT);
 
         switch (ario_conf_get_integer (PREF_DYNAMIC_TYPE, PREF_DYNAMIC_TYPE_DEFAULT)) {
-        case SAME_ARTIST:
+        case SONGS_FROM_SAME_ARTIST:
                 artists = g_slist_append (artists, ario_server_get_current_artist ());
-                ario_server_playlist_append_artists (artists, FALSE, nbsongs);
+                ario_server_playlist_append_artists (artists, FALSE, nbitems);
                 g_slist_free (artists);
                 break;
-        case SAME_ALBUM:
+        case SONGS_FROM_SAME_ALBUM:
                 atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
                 atomic_criteria1.value = ario_server_get_current_artist ();
                 atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
@@ -179,14 +184,96 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
 
                 criterias = g_slist_append (criterias, criteria);
 
-                ario_server_playlist_append_criterias (criterias, FALSE, nbsongs);
+                ario_server_playlist_append_criterias (criterias, FALSE, nbitems);
 
                 g_slist_free (criteria);
                 g_slist_free (criterias);
                 break;
-        case SIMILAR_ARTISTS:
+        case SONGS_FROM_SIMILAR_ARTISTS:
                 ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (),
-                                                                   nbsongs);
+                                                                   nbitems);
+                break;
+        case ALBUMS_FROM_SAME_ARTIST:
+                atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                atomic_criteria1.value = ario_server_get_current_artist ();
+
+                criteria = g_slist_append (criteria, &atomic_criteria1);
+                albums = ario_server_get_albums (criteria);
+                g_slist_free (criteria);
+
+                tmp = ario_util_gslist_randomize (&albums, nbitems);
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
+                g_slist_free (albums);
+                albums = tmp;
+
+                for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
+                        ArioServerAlbum *album = tmp->data;
+
+                        atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                        atomic_criteria1.value = album->artist;
+                        atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                        atomic_criteria2.value = album->album;
+
+                        criteria = NULL;
+                        criteria = g_slist_append (criteria, &atomic_criteria1);
+                        criteria = g_slist_append (criteria, &atomic_criteria2);
+
+                        criterias = NULL;
+                        criterias = g_slist_append (criterias, criteria);
+
+                        ario_server_playlist_append_criterias (criterias, FALSE, -1);
+
+                        g_slist_free (criteria);
+                        g_slist_free (criterias);
+                }
+
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
+                g_slist_free (albums);
+                break;
+        case ALBUMS_FROM_SIMILAR_ARTISTS:
+                artists = ario_shell_similarartists_get_similar_artists (ario_server_get_current_artist ());
+                for (tmp_artist = artists; tmp_artist; tmp_artist = g_slist_next (tmp_artist)) {
+                        ArioSimilarArtist *artist = tmp_artist->data;
+                        atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                        atomic_criteria1.value = (gchar*) artist->name;
+
+                        criteria = NULL;
+                        criteria = g_slist_append (criteria, &atomic_criteria1);
+                        albums = g_slist_concat (albums, ario_server_get_albums (criteria));
+                        g_slist_free (criteria);
+                }
+                g_slist_foreach (artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);
+                g_slist_free (artists);
+
+                tmp = ario_util_gslist_randomize (&albums, nbitems);
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
+                g_slist_free (albums);
+                albums = tmp;
+
+                for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
+                        ArioServerAlbum *album = tmp->data;
+
+                        atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                        atomic_criteria1.value = album->artist;
+                        atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                        atomic_criteria2.value = album->album;
+
+                        criteria = NULL;
+                        criteria = g_slist_append (criteria, &atomic_criteria1);
+                        criteria = g_slist_append (criteria, &atomic_criteria2);
+
+                        criterias = NULL;
+                        criterias = g_slist_append (criterias, criteria);
+
+                        ario_server_playlist_append_criterias (criterias, FALSE, -1);
+
+                        g_slist_free (criteria);
+                        g_slist_free (criterias);
+                }
+                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
+                g_slist_free (albums);
+                break;
+        default:
                 break;
         }
 }
@@ -208,11 +295,11 @@ ario_playlist_dynamic_type_combobox_changed_cb (GtkComboBox *combobox,
 }
 
 static void
-ario_playlist_dynamic_nbsongs_changed_cb (GtkWidget *widget,
+ario_playlist_dynamic_nbitems_changed_cb (GtkWidget *widget,
                                           ArioPlaylistMode *playlist_mode)
 {
         ARIO_LOG_FUNCTION_START
-        ario_conf_set_integer (PREF_DYNAMIC_NBSONGS,
+        ario_conf_set_integer (PREF_DYNAMIC_NBITEMS,
                                (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 }
 
@@ -244,19 +331,14 @@ ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode)
         spinbutton = gtk_spin_button_new (adj,
                                           1.0, 0);
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinbutton),
-                                   (double) ario_conf_get_integer (PREF_DYNAMIC_NBSONGS, PREF_DYNAMIC_NBSONGS_DEFAULT));
+                                   (double) ario_conf_get_integer (PREF_DYNAMIC_NBITEMS, PREF_DYNAMIC_NBITEMS_DEFAULT));
 
         g_signal_connect (G_OBJECT (spinbutton),
                           "value_changed",
-                          G_CALLBACK (ario_playlist_dynamic_nbsongs_changed_cb), playlist_mode);
+                          G_CALLBACK (ario_playlist_dynamic_nbitems_changed_cb), playlist_mode);
 
         gtk_box_pack_start (GTK_BOX (hbox),
                             spinbutton,
-                            FALSE, FALSE,
-                            0);
-
-        gtk_box_pack_start (GTK_BOX (hbox),
-                            gtk_label_new ("songs of"),
                             FALSE, FALSE,
                             0);
 

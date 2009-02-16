@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include <curl/curl.h>
 #include <glib/gi18n.h>
@@ -629,7 +630,7 @@ ario_util_convert_from_iso8859 (const char *string)
 
 gboolean
 ario_file_get_contents (const gchar *filename, gchar **contents,
-                                 gsize *length, GError **error)
+                        gsize *length, GError **error)
 {
         ARIO_LOG_FUNCTION_START
         gboolean ret;
@@ -650,7 +651,7 @@ ario_file_get_contents (const gchar *filename, gchar **contents,
 
 gboolean
 ario_file_set_contents (const gchar *filename, const gchar *contents,
-                                 gsize length, GError **error)
+                        gsize length, GError **error)
 {
         ARIO_LOG_FUNCTION_START
         gboolean ret;
@@ -714,3 +715,24 @@ ario_util_stristr (const char *haystack,
         return 0;
 }
 
+GSList *
+ario_util_gslist_randomize (GSList **a,
+                            const int max)
+{
+        ARIO_LOG_FUNCTION_START
+        GSList *ret = NULL, *tmp;
+        int i = 0;
+        int len = g_slist_length (*a);
+
+        for (i = 0; i < max; ++i) {
+                if (len <= 0)
+                        break;
+
+                tmp = g_slist_nth (*a, rand()%len);
+                *a = g_slist_remove_link (*a, tmp);
+                ret = g_slist_concat (ret, tmp);
+                len--;
+        }
+
+        return ret;
+}
