@@ -441,6 +441,9 @@ ario_tree_new (GtkUIManager *mgr,
                                                         G_TYPE_POINTER,
                                                         G_TYPE_STRING,
                                                         G_TYPE_STRING);
+                gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (tree->priv->model),
+                                                      SONG_TRACK_COLUMN,
+                                                      GTK_SORT_ASCENDING);
         } else {
                 renderer = gtk_cell_renderer_text_new ();
                 column = gtk_tree_view_column_new_with_attributes (ario_server_get_items_names ()[tree->priv->tag],
