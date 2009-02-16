@@ -59,13 +59,6 @@ struct ArioShellSimilarartistsPrivate
         const gchar* artist;
 };
 
-typedef struct
-{
-        guchar *name;
-        guchar *image;
-        guchar *url;
-} ArioSimilarArtist;
-
 enum
 {
         IMAGE_COLUMN,
@@ -158,7 +151,8 @@ ario_shell_similarartists_parse_xml_file (char *xmldata,
 
         return similar_artists;
 }
-static void
+
+void
 ario_shell_similarartists_free_similarartist (ArioSimilarArtist *similar_artist)
 {
         if (similar_artist) {
@@ -256,7 +250,7 @@ ario_shell_similarartists_get_images (ArioShellSimilarartists *shell_similararti
         return NULL;
 }
 
-static GSList *
+GSList *
 ario_shell_similarartists_get_similar_artists (const gchar *artist)
 {
         ARIO_LOG_FUNCTION_START

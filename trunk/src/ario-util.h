@@ -85,6 +85,9 @@ gboolean                ario_file_test                       (const gchar *filen
 const char *            ario_util_stristr                    (const char *haystack,
                                                               const char *needle);
 
+GSList *                ario_util_gslist_randomize           (GSList **a,
+                                                              const int max);
+
 /* Inline methods */
 static inline gint
 ario_util_abs (const gint a)

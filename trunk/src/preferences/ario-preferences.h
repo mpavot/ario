@@ -245,8 +245,8 @@
 #define PREF_PLAYLIST_MODE_DEFAULT             "normal"
 
 /* Number of songs added to the playlist in dynamic mode*/
-#define PREF_DYNAMIC_NBSONGS                   "dynamic-nbsongs"
-#define PREF_DYNAMIC_NBSONGS_DEFAULT           10
+#define PREF_DYNAMIC_NBITEMS                   "dynamic-nbitems"
+#define PREF_DYNAMIC_NBITEMS_DEFAULT           10
 
 /* Type of songs added to the playlist in dynamic mode*/
 #define PREF_DYNAMIC_TYPE                      "dynamic-type"
