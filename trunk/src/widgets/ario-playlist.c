@@ -47,6 +47,8 @@ static void ario_playlist_get_property (GObject *object,
                                         GParamSpec *pspec);
 static void ario_playlist_changed_cb (ArioServer *server,
                                       ArioPlaylist *playlist);
+static void ario_playlist_connectivity_changed_cb (ArioServer *server,
+						   ArioPlaylist *playlist);
 static void ario_playlist_song_changed_cb (ArioServer *server,
                                            ArioPlaylist *playlist);
 static void ario_playlist_state_changed_cb (ArioServer *server,
@@ -816,6 +818,15 @@ ario_playlist_changed_cb (ArioServer *server,
 }
 
 static void
+ario_playlist_connectivity_changed_cb (ArioServer *server,
+				       ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+	if (!ario_server_is_connected ())
+		ario_playlist_changed_cb (server, playlist);
+}
+
+static void
 ario_playlist_song_changed_cb (ArioServer *server,
                                ArioPlaylist *playlist)
 {
@@ -932,7 +943,7 @@ ario_playlist_new (GtkUIManager *mgr,
                                  instance, 0);
         g_signal_connect_object (server,
                                  "connectivity_changed",
-                                 G_CALLBACK (ario_playlist_changed_cb),
+                                 G_CALLBACK (ario_playlist_connectivity_changed_cb),
                                  instance, 0);
 
         gtk_action_group_add_actions (group,
