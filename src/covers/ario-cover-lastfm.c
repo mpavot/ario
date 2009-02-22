@@ -148,7 +148,6 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
                 }
         }
 
-
         xmlFreeDoc (doc);
 
         return ario_cover_uris;

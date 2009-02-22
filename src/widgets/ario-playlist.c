@@ -930,6 +930,10 @@ ario_playlist_new (GtkUIManager *mgr,
                                  "state_changed",
                                  G_CALLBACK (ario_playlist_state_changed_cb),
                                  instance, 0);
+        g_signal_connect_object (server,
+                                 "connectivity_changed",
+                                 G_CALLBACK (ario_playlist_changed_cb),
+                                 instance, 0);
 
         gtk_action_group_add_actions (group,
                                       ario_playlist_actions,
