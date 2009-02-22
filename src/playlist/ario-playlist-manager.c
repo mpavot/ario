@@ -111,9 +111,10 @@ ario_playlist_manager_song_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START
         ArioPlaylistMode *mode;
         ArioServerSong *song = ario_server_get_current_song ();
+        gchar *id = ario_conf_get_string (PREF_PLAYLIST_MODE, PREF_PLAYLIST_MODE_DEFAULT);
 
-        mode = ario_playlist_manager_get_mode_from_id (ario_playlist_manager_get_instance (),
-                                                       ario_conf_get_string (PREF_PLAYLIST_MODE, PREF_PLAYLIST_MODE_DEFAULT));
+        mode = ario_playlist_manager_get_mode_from_id (ario_playlist_manager_get_instance (), id);
+        g_free (id);
 
         ario_playlist_mode_next_song (mode, playlist);
 
