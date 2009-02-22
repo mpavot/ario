@@ -194,12 +194,10 @@ static void
 ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START
-#ifdef MULTIPLE_VIEW
         gint page;
 
         page = ario_conf_get_integer (PREF_SOURCE, PREF_SOURCE_DEFAULT);
         gtk_notebook_set_current_page (GTK_NOTEBOOK (sourcemanager), page);
-#endif  /* MULTIPLE_VIEW */
 }
 
 static void
