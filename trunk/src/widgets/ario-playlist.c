@@ -799,15 +799,15 @@ ario_playlist_changed_cb (ArioServer *server,
 
         playlist->priv->playlist_length = ario_server_get_current_playlist_length ();
 
-        while (playlist->priv->playlist_length < old_length) {
+        if (playlist->priv->playlist_length < old_length) {
                 path = gtk_tree_path_new ();
-                gtk_tree_path_append_index (path, old_length - 1);
+                gtk_tree_path_append_index (path, playlist->priv->playlist_length);
 
-                if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path))
-                        gtk_list_store_remove (playlist->priv->model, &iter);
+                if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path)) {
+			while (gtk_list_store_remove (playlist->priv->model, &iter)) { }
+		}
 
                 gtk_tree_path_free (path);
-                --old_length;
                 need_sync = TRUE;
         }
 
