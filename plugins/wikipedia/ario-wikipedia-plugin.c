@@ -37,7 +37,7 @@ static void ario_wikipedia_cmd_find_artist (GtkAction *action,
                                             ArioWikipediaPlugin *plugin);
 static void ario_wikipedia_plugin_sync_server (ArioWikipediaPlugin *plugin);
 static void ario_wikipedia_plugin_server_state_changed_cb (ArioServer *server,
-                                                        ArioWikipediaPlugin *plugin);
+                                                           ArioWikipediaPlugin *plugin);
 #define ARIO_WIKIPEDIA_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_WIKIPEDIA_PLUGIN, ArioWikipediaPluginPrivate))
 
 /* Wikipedia language */
@@ -46,7 +46,7 @@ static void ario_wikipedia_plugin_server_state_changed_cb (ArioServer *server,
 
 static GtkActionEntry ario_wikipedia_actions [] =
 {
-        { "ToolWikipedia", GTK_STOCK_FIND, N_("Find artist on Wikipedia"), NULL,
+        { "ToolWikipedia", "wikipedia.png", N_("Find artist on Wikipedia"), NULL,
                 N_("Find artist on Wikipedia"),
                 G_CALLBACK (ario_wikipedia_cmd_find_artist) }
 };
@@ -110,7 +110,6 @@ impl_activate (ArioPlugin *plugin,
                                       ario_wikipedia_actions,
                                       G_N_ELEMENTS (ario_wikipedia_actions), pi);
         g_object_unref (pi->priv->actiongroup);
-
 
         g_signal_connect_object (ario_server_get_instance (),
                                  "state_changed",
@@ -288,7 +287,7 @@ ario_wikipedia_plugin_sync_server (ArioWikipediaPlugin *plugin)
 
 static void
 ario_wikipedia_plugin_server_state_changed_cb (ArioServer *server,
-                                            ArioWikipediaPlugin *plugin)
+                                               ArioWikipediaPlugin *plugin)
 {
         ARIO_LOG_FUNCTION_START
 
