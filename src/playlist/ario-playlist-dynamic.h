@@ -32,13 +32,9 @@ G_BEGIN_DECLS
 #define IS_ARIO_PLAYLIST_DYNAMIC_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_PLAYLIST_DYNAMIC))
 #define ARIO_PLAYLIST_DYNAMIC_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_PLAYLIST_DYNAMIC, ArioPlaylistDynamicClass))
 
-typedef struct ArioPlaylistDynamicPrivate ArioPlaylistDynamicPrivate;
-
 typedef struct
 {
         ArioPlaylistMode parent;
-
-        ArioPlaylistDynamicPrivate *priv;
 } ArioPlaylistDynamic;
 
 typedef struct

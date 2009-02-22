@@ -35,11 +35,6 @@ static void ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                                              ArioPlaylist *playlist);
 static GtkWidget* ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode);
 
-struct ArioPlaylistDynamicPrivate
-{
-        gboolean dummy;
-};
-
 static GObjectClass *parent_class = NULL;
 
 typedef enum
@@ -120,7 +115,6 @@ static void
 ario_playlist_dynamic_init (ArioPlaylistDynamic *playlist_dynamic)
 {
         ARIO_LOG_FUNCTION_START
-        playlist_dynamic->priv = g_new0 (ArioPlaylistDynamicPrivate, 1);
 }
 
 static void
@@ -134,9 +128,6 @@ ario_playlist_dynamic_finalize (GObject *object)
 
         playlist_dynamic = ARIO_PLAYLIST_DYNAMIC (object);
 
-        g_return_if_fail (playlist_dynamic->priv != NULL);
-        g_free (playlist_dynamic->priv);
-
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
@@ -148,8 +139,6 @@ ario_playlist_dynamic_new (void)
 
         dynamic = g_object_new (TYPE_ARIO_PLAYLIST_DYNAMIC,
                                 NULL);
-
-        g_return_val_if_fail (dynamic->priv != NULL, NULL);
 
         return ARIO_PLAYLIST_MODE (dynamic);
 }

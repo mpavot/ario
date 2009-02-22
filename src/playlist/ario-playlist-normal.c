@@ -31,11 +31,6 @@ static void ario_playlist_normal_class_init (ArioPlaylistNormalClass *klass);
 static void ario_playlist_normal_init (ArioPlaylistNormal *playlist_normal);
 static void ario_playlist_normal_finalize (GObject *object);
 
-struct ArioPlaylistNormalPrivate
-{
-        gboolean dummy;
-};
-
 static GObjectClass *parent_class = NULL;
 
 GType
@@ -96,7 +91,6 @@ static void
 ario_playlist_normal_init (ArioPlaylistNormal *playlist_normal)
 {
         ARIO_LOG_FUNCTION_START
-        playlist_normal->priv = g_new0 (ArioPlaylistNormalPrivate, 1);
 }
 
 static void
@@ -110,9 +104,6 @@ ario_playlist_normal_finalize (GObject *object)
 
         playlist_normal = ARIO_PLAYLIST_NORMAL (object);
 
-        g_return_if_fail (playlist_normal->priv != NULL);
-        g_free (playlist_normal->priv);
-
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
@@ -124,8 +115,6 @@ ario_playlist_normal_new (void)
 
         normal = g_object_new (TYPE_ARIO_PLAYLIST_NORMAL,
                                NULL);
-
-        g_return_val_if_fail (normal->priv != NULL, NULL);
 
         return ARIO_PLAYLIST_MODE (normal);
 }
