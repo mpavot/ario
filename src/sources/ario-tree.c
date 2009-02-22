@@ -148,11 +148,9 @@ enum
 {
         ALBUM_VALUE_COLUMN,
         ALBUM_CRITERIA_COLUMN,
-        ALBUM_ARTIST_COLUMN,
         ALBUM_TEXT_COLUMN,
-        ALBUM_YEAR_COLUMN,
+        ALBUM_ALBUM_COLUMN,
         ALBUM_COVER_COLUMN,
-        ALBUM_PATH_COLUMN,
         ALBUM_N_COLUMN
 };
 
@@ -223,35 +221,32 @@ ario_tree_albums_sort_func (GtkTreeModel *model,
                             GtkTreeIter *b,
                             ArioTree *tree)
 {
-        char *ayear;
-        char *byear;
-        char *aalbum;
-        char *balbum;
+        ArioServerAlbum *aalbum;
+        ArioServerAlbum *balbum;
         int ret;
 
-        gtk_tree_model_get (model, a, ALBUM_YEAR_COLUMN, &ayear, ALBUM_VALUE_COLUMN, &aalbum, -1);
-        gtk_tree_model_get (model, b, ALBUM_YEAR_COLUMN, &byear, ALBUM_VALUE_COLUMN, &balbum, -1);
+        gtk_tree_model_get (model, a,
+                            ALBUM_ALBUM_COLUMN, &aalbum,
+                            -1);
+        gtk_tree_model_get (model, b,
+                            ALBUM_ALBUM_COLUMN, &balbum,
+                            -1);
 
         if (tree->priv->album_sort == SORT_YEAR) {
-                if (ayear && !byear)
+                if (aalbum->date && !balbum->date)
                         ret = -1;
-                else if (byear && !ayear)
+                else if (balbum->date && !aalbum->date)
                         ret = 1;
-                else if (ayear && byear) {
-                        ret = g_utf8_collate (ayear, byear);
+                else if (aalbum->date && balbum->date) {
+                        ret = g_utf8_collate (aalbum->date, balbum->date);
                         if (ret == 0)
-                                ret = g_utf8_collate (aalbum, balbum);
+                                ret = g_utf8_collate (aalbum->album, balbum->album);
                 } else {
-                        ret = g_utf8_collate (aalbum, balbum);
+                        ret = g_utf8_collate (aalbum->album, balbum->album);
                 }
         } else {
-                ret = g_utf8_collate (aalbum, balbum);
+                ret = g_utf8_collate (aalbum->album, balbum->album);
         }
-
-        g_free (ayear);
-        g_free (byear);
-        g_free (aalbum);
-        g_free (balbum);
 
         return ret;
 }
@@ -261,6 +256,37 @@ ario_tree_init (ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START
         tree->priv = ARIO_TREE_GET_PRIVATE (tree);
+}
+
+static gboolean
+ario_tree_is_album_tree (ArioTree *tree)
+{
+        ARIO_LOG_FUNCTION_START
+        return (tree->priv->tag == MPD_TAG_ITEM_ALBUM) && !tree->priv->is_first;
+}
+
+static gboolean
+ario_tree_is_song_tree (ArioTree *tree)
+{
+        ARIO_LOG_FUNCTION_START
+        return (tree->priv->tag == MPD_TAG_ITEM_TITLE) && !tree->priv->is_first;
+}
+
+static gboolean
+ario_tree_album_free (GtkTreeModel *model,
+                      GtkTreePath *path,
+                      GtkTreeIter *iter,
+                      gpointer userdata)
+{
+        ARIO_LOG_FUNCTION_START
+        ArioTree *tree = ARIO_TREE (userdata);
+        ArioServerAlbum *album;
+        g_return_val_if_fail (IS_ARIO_TREE (tree), FALSE);
+
+        gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &album, -1);
+
+        ario_server_free_album (album);
+        return FALSE;
 }
 
 static void
@@ -280,6 +306,13 @@ ario_tree_finalize (GObject *object)
 
         if (tree->priv->sort_notif)
                 ario_conf_notification_remove (tree->priv->sort_notif);
+
+        if (ario_tree_is_album_tree (tree)) {
+                gtk_tree_model_foreach (GTK_TREE_MODEL (tree->priv->model),
+                                        (GtkTreeModelForeachFunc) ario_tree_album_free,
+                                        tree);
+        }
+ 
         gtk_list_store_clear (tree->priv->model);
         g_slist_foreach (tree->priv->criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (tree->priv->criterias);
@@ -323,20 +356,6 @@ ario_tree_get_property (GObject *object,
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
         }
-}
-
-static gboolean
-ario_tree_is_album_tree (ArioTree *tree)
-{
-        ARIO_LOG_FUNCTION_START
-        return (tree->priv->tag == MPD_TAG_ITEM_ALBUM) && !tree->priv->is_first;
-}
-
-static gboolean
-ario_tree_is_song_tree (ArioTree *tree)
-{
-        ARIO_LOG_FUNCTION_START
-        return (tree->priv->tag == MPD_TAG_ITEM_TITLE) && !tree->priv->is_first;
 }
 
 GtkWidget *
@@ -395,10 +414,8 @@ ario_tree_new (GtkUIManager *mgr,
                                                         G_TYPE_STRING,
                                                         G_TYPE_POINTER,
                                                         G_TYPE_STRING,
-                                                        G_TYPE_STRING,
-                                                        G_TYPE_STRING,
-                                                        GDK_TYPE_PIXBUF,
-                                                        G_TYPE_STRING);
+                                                        G_TYPE_POINTER,
+                                                        GDK_TYPE_PIXBUF);
                 gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (tree->priv->model),
                                                       ALBUM_TEXT_COLUMN, GTK_SORT_ASCENDING);
                 gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (tree->priv->model),
@@ -666,11 +683,8 @@ get_selected_albums_foreach (GtkTreeModel *model,
 
         ArioServerAlbum *server_album;
 
-        server_album = (ArioServerAlbum *) g_malloc0 (sizeof (ArioServerAlbum));
         gtk_tree_model_get (model, iter,
-                            ALBUM_VALUE_COLUMN, &server_album->album,
-                            ALBUM_ARTIST_COLUMN, &server_album->artist,
-                            ALBUM_PATH_COLUMN, &server_album->path, -1);
+                            ALBUM_ALBUM_COLUMN, &server_album, -1);
 
         *albums = g_slist_append (*albums, server_album);
 }
@@ -683,16 +697,15 @@ ario_tree_covers_update (GtkTreeModel *model,
 {
         ARIO_LOG_FUNCTION_START
         ArioTree *tree = ARIO_TREE (userdata);
-        gchar* artist;
-        gchar *album;
+        ArioServerAlbum *album;
         gchar *cover_path;
         GdkPixbuf *cover;
 
         g_return_val_if_fail (IS_ARIO_TREE (tree), FALSE);
 
-        gtk_tree_model_get (model, iter, ALBUM_ARTIST_COLUMN, &artist, ALBUM_VALUE_COLUMN, &album, -1);
+        gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &album, -1);
 
-        cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
+        cover_path = ario_cover_make_ario_cover_path (album->artist, album->album, SMALL_COVER);
 
         /* The small cover exists, we show it */
         cover = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
@@ -708,8 +721,6 @@ ario_tree_covers_update (GtkTreeModel *model,
                             ALBUM_COVER_COLUMN, cover,
                             -1);
 
-        g_free (artist);
-        g_free (album);
         g_object_unref (G_OBJECT (cover));
 
         return FALSE;
@@ -815,7 +826,6 @@ void ario_tree_drag_begin_cb (GtkWidget *widget,
                                                      get_selected_albums_foreach,
                                                      &albums);
                 pixbuf = ario_util_get_dnd_pixbuf_from_albums (albums);
-                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (albums);
         } else {
                 criterias = ario_tree_get_criterias (tree);
@@ -848,14 +858,11 @@ ario_tree_album_sort_changed_cb (guint notification_id,
                                  ArioTree *tree)
 {
         tree->priv->album_sort = ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT);
-        gtk_tree_sortable_sort_column_changed (GTK_TREE_SORTABLE (tree->priv->model));
-
-        // FIXME: Is there a better way to force the reorder of rows?
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (tree->priv->model),
-                                              ALBUM_YEAR_COLUMN, GTK_SORT_ASCENDING);
-
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (tree->priv->model),
-                                              ALBUM_TEXT_COLUMN, GTK_SORT_ASCENDING);
+        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (tree->priv->model),
+                                         ALBUM_TEXT_COLUMN,
+                                         (GtkTreeIterCompareFunc) ario_tree_albums_sort_func,
+                                         tree,
+                                         NULL);
 }
 
 static void
@@ -907,11 +914,9 @@ ario_tree_add_next_albums (ArioTree *tree,
                 gtk_list_store_set (tree->priv->model, &album_iter,
                                     ALBUM_VALUE_COLUMN, server_album->album,
                                     ALBUM_CRITERIA_COLUMN, criteria,
-                                    ALBUM_ARTIST_COLUMN, server_album->artist,
                                     ALBUM_TEXT_COLUMN, album,
-                                    ALBUM_YEAR_COLUMN, server_album->date,
+                                    ALBUM_ALBUM_COLUMN, server_album,
                                     ALBUM_COVER_COLUMN, cover,
-                                    ALBUM_PATH_COLUMN, server_album->path,
                                     -1);
                 g_object_unref (G_OBJECT (cover));
                 g_free (album_date);
@@ -927,7 +932,6 @@ ario_tree_fill_albums (ArioTree *tree)
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
                 albums = ario_server_get_albums (tmp->data);
                 ario_tree_add_next_albums (tree, albums, tmp->data);
-                g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
                 g_slist_free (albums);
         }
 }
@@ -1064,13 +1068,17 @@ ario_tree_fill (ArioTree *tree)
         if (tree->priv->is_first)
                 paths = gtk_tree_selection_get_selected_rows (tree->priv->selection, &model);
 
-        gtk_list_store_clear (tree->priv->model);
-
         if (ario_tree_is_album_tree (tree)) {
+                gtk_tree_model_foreach (GTK_TREE_MODEL (tree->priv->model),
+                                        (GtkTreeModelForeachFunc) ario_tree_album_free,
+                                        tree);
+                gtk_list_store_clear (tree->priv->model);
                 ario_tree_fill_albums (tree);
         } else if (ario_tree_is_song_tree (tree)) {
+                gtk_list_store_clear (tree->priv->model);
                 ario_tree_fill_songs (tree);
         } else {
+                gtk_list_store_clear (tree->priv->model);
                 if (tree->priv->is_first) {
                         tags = ario_server_list_tags (tree->priv->tag, NULL);
                         ario_tree_add_tags (tree, NULL, tags);
@@ -1260,7 +1268,6 @@ ario_tree_cmd_albums_properties (ArioTree *tree)
         gtk_dialog_run (GTK_DIALOG (coverselect));
         gtk_widget_destroy (coverselect);
 
-        g_slist_foreach (albums, (GFunc) ario_server_free_album, NULL);
         g_slist_free (albums);
 }
 
