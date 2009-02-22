@@ -66,9 +66,6 @@
    */
 #define LT_OBJDIR ".libs/"
 
-/* Radio or search or playlists */
-#define MULTIPLE_VIEW 1
-
 /* Name of package */
 #define PACKAGE "ario"
 

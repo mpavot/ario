@@ -135,7 +135,6 @@ AC_ARG_ENABLE(search,
                              [Disable support of search view]))
 if test x"$enable_search" != xno; then
    AC_DEFINE(ENABLE_SEARCH, 1, [Add support of search view])
-   AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
 dnl ================================================================
@@ -157,7 +156,6 @@ AC_ARG_ENABLE(playlists,
                              [Disable support of playlists]))
 if test x"$enable_playlists" != xno; then
    AC_DEFINE(ENABLE_STOREDPLAYLISTS, 1, [Add support of playlists])
-   AC_DEFINE(MULTIPLE_VIEW, 1, [Radio or search or playlists])
 fi
 
 dnl ================================================================
