@@ -33,11 +33,6 @@ static void ario_playlist_queue_finalize (GObject *object);
 static void ario_playlist_queue_next_song (ArioPlaylistMode *playlist_mode,
                                            ArioPlaylist *playlist);
 
-struct ArioPlaylistQueuePrivate
-{
-        gboolean dummy;
-};
-
 static GObjectClass *parent_class = NULL;
 
 GType
@@ -99,7 +94,6 @@ static void
 ario_playlist_queue_init (ArioPlaylistQueue *playlist_queue)
 {
         ARIO_LOG_FUNCTION_START
-        playlist_queue->priv = g_new0 (ArioPlaylistQueuePrivate, 1);
 }
 
 static void
@@ -113,9 +107,6 @@ ario_playlist_queue_finalize (GObject *object)
 
         playlist_queue = ARIO_PLAYLIST_QUEUE (object);
 
-        g_return_if_fail (playlist_queue->priv != NULL);
-        g_free (playlist_queue->priv);
-
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
@@ -127,8 +118,6 @@ ario_playlist_queue_new (void)
 
         queue = g_object_new (TYPE_ARIO_PLAYLIST_QUEUE,
                               NULL);
-
-        g_return_val_if_fail (queue->priv != NULL, NULL);
 
         return ARIO_PLAYLIST_MODE (queue);
 }

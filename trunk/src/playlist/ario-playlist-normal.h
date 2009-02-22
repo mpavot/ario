@@ -32,13 +32,9 @@ G_BEGIN_DECLS
 #define IS_ARIO_PLAYLIST_NORMAL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_PLAYLIST_NORMAL))
 #define ARIO_PLAYLIST_NORMAL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_PLAYLIST_NORMAL, ArioPlaylistNormalClass))
 
-typedef struct ArioPlaylistNormalPrivate ArioPlaylistNormalPrivate;
-
 typedef struct
 {
         ArioPlaylistMode parent;
-
-        ArioPlaylistNormalPrivate *priv;
 } ArioPlaylistNormal;
 
 typedef struct
