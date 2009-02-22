@@ -16,6 +16,7 @@
                         <menuitem name="EditPlaylistRemove" action="PlaylistRemove"/>
                         <menuitem name="EditPlaylistCrop" action="PlaylistCrop"/>
                         <menuitem name="EditPlaylistClear" action="PlaylistClear"/>
+                        <menuitem name="EditPlaylistSearch" action="PlaylistSearch"/>
                         <separator/>
                         <menuitem name="EditPluginsMenu" action="EditPlugins"/>
                         <menuitem name="EditPreferencesMenu" action="EditPreferences"/>

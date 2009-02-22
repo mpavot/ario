@@ -83,6 +83,10 @@ static void ario_playlist_cmd_remove (GtkAction *action,
                                       ArioPlaylist *playlist);
 static void ario_playlist_cmd_crop (GtkAction *action,
                                     ArioPlaylist *playlist);
+static void ario_playlist_search (ArioPlaylist *playlist,
+                                  const char* text);
+static void ario_playlist_cmd_search (GtkAction *action,
+                                      ArioPlaylist *playlist);
 static void ario_playlist_cmd_songs_properties (GtkAction *action,
                                                 ArioPlaylist *playlist);
 static void ario_playlist_cmd_goto_playing_song (GtkAction *action,
@@ -144,6 +148,9 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistCrop", GTK_STOCK_CUT, N_("Cr_op"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_crop) },
+        { "PlaylistSearch", GTK_STOCK_FIND, N_("_Search in playlist"), NULL,
+                NULL,
+                G_CALLBACK (ario_playlist_cmd_search) },
         { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_remove) },
@@ -1318,6 +1325,32 @@ ario_playlist_cmd_crop (GtkAction *action,
 }
 
 static void
+ario_playlist_search (ArioPlaylist *playlist,
+                      const char* text)
+{
+        ARIO_LOG_FUNCTION_START
+        if (!playlist->priv->in_search) {
+                gtk_widget_show (playlist->priv->search_hbox);
+                gtk_widget_grab_focus (playlist->priv->search_entry);
+                gtk_entry_set_text (GTK_ENTRY (playlist->priv->search_entry), text);
+                gtk_editable_set_position (GTK_EDITABLE (playlist->priv->search_entry), -1);
+                gtk_tree_view_set_model (GTK_TREE_VIEW (playlist->priv->tree),
+                                         GTK_TREE_MODEL (playlist->priv->filter));
+                gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (playlist->priv->tree), FALSE);
+                playlist->priv->in_search = TRUE;
+        }
+}
+
+static void
+ario_playlist_cmd_search (GtkAction *action,
+                          ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START
+        ario_playlist_search (playlist, "");
+        gtk_tree_model_filter_refilter (playlist->priv->filter);
+}
+
+static void
 ario_playlist_selection_properties_foreach (GtkTreeModel *model,
                                             GtkTreePath *path,
                                             GtkTreeIter *iter,
@@ -1483,16 +1516,7 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
                    && event->length > 0
                    && event->keyval != GDK_Escape
                    && !(event->state & GDK_CONTROL_MASK)) {
-                if (!playlist->priv->in_search) {
-                        gtk_widget_show (playlist->priv->search_hbox);
-                        gtk_widget_grab_focus (playlist->priv->search_entry);
-                        gtk_entry_set_text (GTK_ENTRY (playlist->priv->search_entry), event->string);
-                        gtk_editable_set_position (GTK_EDITABLE (playlist->priv->search_entry), -1);
-                        gtk_tree_view_set_model (GTK_TREE_VIEW (playlist->priv->tree),
-                                                 GTK_TREE_MODEL (playlist->priv->filter));
-                        gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (playlist->priv->tree), FALSE);
-                        playlist->priv->in_search = TRUE;
-                }
+                ario_playlist_search (playlist, event->string);
         }
 
         return FALSE;
