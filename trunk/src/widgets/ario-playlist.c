@@ -743,6 +743,7 @@ ario_playlist_changed_cb (ArioServer *server,
         }
 
         songs = ario_server_get_playlist_changes (playlist->priv->playlist_id);
+        playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
 
         old_length = playlist->priv->playlist_length;
 
@@ -797,10 +798,8 @@ ario_playlist_changed_cb (ArioServer *server,
         g_slist_free (songs);
 
         playlist->priv->playlist_length = ario_server_get_current_playlist_length ();
-        playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
 
         while (playlist->priv->playlist_length < old_length) {
-
                 path = gtk_tree_path_new ();
                 gtk_tree_path_append_index (path, old_length - 1);
 
