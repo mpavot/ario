@@ -48,7 +48,7 @@ static void ario_playlist_get_property (GObject *object,
 static void ario_playlist_changed_cb (ArioServer *server,
                                       ArioPlaylist *playlist);
 static void ario_playlist_connectivity_changed_cb (ArioServer *server,
-						   ArioPlaylist *playlist);
+                                                   ArioPlaylist *playlist);
 static void ario_playlist_song_changed_cb (ArioServer *server,
                                            ArioPlaylist *playlist);
 static void ario_playlist_state_changed_cb (ArioServer *server,
@@ -806,8 +806,8 @@ ario_playlist_changed_cb (ArioServer *server,
                 gtk_tree_path_append_index (path, playlist->priv->playlist_length);
 
                 if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path)) {
-			while (gtk_list_store_remove (playlist->priv->model, &iter)) { }
-		}
+                        while (gtk_list_store_remove (playlist->priv->model, &iter)) { }
+                }
 
                 gtk_tree_path_free (path);
                 need_sync = TRUE;
@@ -819,11 +819,11 @@ ario_playlist_changed_cb (ArioServer *server,
 
 static void
 ario_playlist_connectivity_changed_cb (ArioServer *server,
-				       ArioPlaylist *playlist)
+                                       ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START
-	if (!ario_server_is_connected ())
-		ario_playlist_changed_cb (server, playlist);
+        if (!ario_server_is_connected ())
+                ario_playlist_changed_cb (server, playlist);
 }
 
 static void
