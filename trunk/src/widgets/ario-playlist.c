@@ -122,6 +122,7 @@ struct ArioPlaylistPrivate
         GtkWidget *search_hbox;
         GtkWidget *search_entry;
         gboolean in_search;
+        const gchar *search_text;
 
         int playlist_id;
         int playlist_length;
@@ -351,14 +352,13 @@ ario_playlist_filter_func (GtkTreeModel *model,
         ARIO_LOG_FUNCTION_START
         gchar *title, *artist, *album, *genre;
         gboolean visible = TRUE, filter;
-        const gchar *cmp = gtk_entry_get_text (GTK_ENTRY (playlist->priv->search_entry));
         int i;
         gchar **cmp_str;
 
-        if (!cmp || !g_utf8_collate (cmp, ""))
+        if (!playlist->priv->search_text || *playlist->priv->search_text == '\0')
                 return TRUE;
 
-        cmp_str = g_strsplit (cmp, " ", -1); 
+        cmp_str = g_strsplit (playlist->priv->search_text, " ", -1); 
 
         if (!cmp_str)
                 return TRUE;
@@ -420,8 +420,9 @@ ario_playlist_search_entry_changed (GtkEntry *entry,
 {
         ARIO_LOG_FUNCTION_START
         const gchar *cmp = gtk_entry_get_text (GTK_ENTRY (playlist->priv->search_entry));
+        playlist->priv->search_text = cmp;
 
-        if (!cmp || !g_utf8_collate (cmp, "")) {
+        if (!cmp || *cmp == '\0') {
                 ario_playlist_search_close (NULL, playlist);
                 gtk_widget_grab_focus (playlist->priv->tree);
         } else {
@@ -680,23 +681,25 @@ ario_playlist_get_property (GObject *object,
         }
 }
 
+typedef struct
+{
+        int pos;
+        ArioServerSong *song;
+        int state;
+} ArioSyncSongData;
+
 static gboolean
 ario_playlist_sync_song_foreach (GtkTreeModel *model,
                                  GtkTreePath *path,
                                  GtkTreeIter *iter,
-                                 int *pos)
+                                 ArioSyncSongData *data)
 {
         ARIO_LOG_FUNCTION_START
-        ArioServerSong *song;
-        int state;
 
-        state = ario_server_get_current_state ();
-        song = ario_server_get_current_song  ();
-
-        if (state != MPD_STATUS_STATE_UNKNOWN
-            && state != MPD_STATUS_STATE_STOP
-            && song
-            && song->pos == *pos)
+        if (data->state != MPD_STATUS_STATE_UNKNOWN
+            && data->state != MPD_STATUS_STATE_STOP
+            && data->song
+            && data->song->pos == data->pos)
                 gtk_list_store_set (GTK_LIST_STORE (model), iter,
                                     PIXBUF_COLUMN, instance->priv->play_pixbuf,
                                     -1);
@@ -705,7 +708,7 @@ ario_playlist_sync_song_foreach (GtkTreeModel *model,
                                     PIXBUF_COLUMN, NULL,
                                     -1);
 
-        ++*pos;
+        ++data->pos;
 
         return FALSE;
 }
@@ -714,11 +717,15 @@ static void
 ario_playlist_sync_song (void)
 {
         ARIO_LOG_FUNCTION_START
-        int pos = 0;
+        ArioSyncSongData data;
+
+        data.pos = 0;
+        data.state = ario_server_get_current_state ();
+        data.song = ario_server_get_current_song ();
 
         gtk_tree_model_foreach (GTK_TREE_MODEL (instance->priv->model),
                                 (GtkTreeModelForeachFunc) ario_playlist_sync_song_foreach,
-                                &pos);
+                                &data);
 }
 
 static void
