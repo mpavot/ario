@@ -392,7 +392,7 @@ static SoupURI *
 ario_audioscrobbler_get_libsoup_uri ()
 {
         SoupURI *uri = NULL;
-        gchar *host;
+        const gchar *host;
 
         if (!ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT))
                 return NULL;
@@ -401,7 +401,6 @@ ario_audioscrobbler_get_libsoup_uri ()
         soup_uri_set_scheme (uri, SOUP_URI_SCHEME_HTTP);
         host = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS);
         soup_uri_set_host (uri, host);
-        g_free (host);
         soup_uri_set_port (uri, ario_conf_get_integer (PREF_PROXY_PORT, PREF_PROXY_PORT_DEFAULT));
 
         return uri;
@@ -418,7 +417,7 @@ ario_audioscrobbler_get_libsoup_uri ()
         uri = g_new0 (SoupUri, 1);
         uri->protocol = SOUP_PROTOCOL_HTTP;
 
-        uri->host = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS);
+        uri->host = g_strdup (ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS));
         uri->port = ario_conf_get_integer (PREF_PROXY_PORT, PREF_PROXY_PORT_DEFAULT);
 
         return uri;
@@ -1273,8 +1272,8 @@ ario_audioscrobbler_import_settings (ArioAudioscrobbler *audioscrobbler)
         /* import conf settings. */
         g_free (audioscrobbler->priv->username);
         g_free (audioscrobbler->priv->password);
-        audioscrobbler->priv->username = ario_conf_get_string (PREF_AUDIOSCROBBLER_USERNAME, PREF_AUDIOSCROBBLER_USERNAME_DEFAULT);
-        audioscrobbler->priv->password = ario_conf_get_string (PREF_AUDIOSCROBBLER_PASSWORD, PREF_AUDIOSCROBBLER_PASSWORD_DEFAULT);
+        audioscrobbler->priv->username = g_strdup (ario_conf_get_string (PREF_AUDIOSCROBBLER_USERNAME, PREF_AUDIOSCROBBLER_USERNAME_DEFAULT));
+        audioscrobbler->priv->password = g_strdup (ario_conf_get_string (PREF_AUDIOSCROBBLER_PASSWORD, PREF_AUDIOSCROBBLER_PASSWORD_DEFAULT));
 
         ario_audioscrobbler_add_timeout (audioscrobbler);
         audioscrobbler->priv->status = HANDSHAKING;

@@ -284,7 +284,7 @@ ario_browser_reload_trees (ArioBrowser *browser)
         gboolean is_first = TRUE;
         int i;
         gchar **splited_conf;
-        gchar *conf;
+        const gchar *conf;
         GSList *tmp;
 
         /* Remove all trees */
@@ -296,7 +296,6 @@ ario_browser_reload_trees (ArioBrowser *browser)
 
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
         splited_conf = g_strsplit (conf, ",", MAX_TREE_NB);
-        g_free (conf);
         for (i = 0; splited_conf[i]; ++i) {
                 tree = ario_tree_new (browser->priv->ui_manager,
                                       atoi (splited_conf[i]),

@@ -133,7 +133,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
         GtkWidget *tree_combobox;
         int i, j;
         gchar **splited_conf;
-        gchar *conf;
+        const gchar *conf;
         GSList *tmp;
         GtkListStore *list_store;
         GtkCellRenderer *renderer;
@@ -153,7 +153,6 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
 
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
         splited_conf = g_strsplit (conf, ",", MAX_TREE_NB);
-        g_free (conf);
         items = ario_server_get_items_names ();
         for (i = 0; splited_conf[i]; ++i) {
                 tree_combobox = gtk_combo_box_new ();
@@ -216,7 +215,8 @@ ario_browser_preferences_treesnb_changed_idle (ArioBrowserPreferences *browser_p
 {
         ARIO_LOG_FUNCTION_START
         gchar **splited_conf;
-        gchar *conf, *new_conf, *tmp;
+        const gchar *conf;
+        gchar *new_conf, *tmp;
         int old_nb, new_nb, i;
 
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
@@ -242,7 +242,6 @@ ario_browser_preferences_treesnb_changed_idle (ArioBrowserPreferences *browser_p
                 ario_browser_preferences_sync_browser (browser_preferences);
         }
         g_strfreev (splited_conf);
-        g_free (conf);
 
         return FALSE;
 }

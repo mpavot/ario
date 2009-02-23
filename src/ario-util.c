@@ -326,7 +326,7 @@ ario_util_download_file (const char *uri,
         ARIO_LOG_FUNCTION_START
         ARIO_LOG_DBG ("Download:%s", uri);
         download_struct download_data;
-        gchar* address = NULL;
+        const gchar* address;
         int port;
 
         CURL* curl = curl_easy_init ();
@@ -378,7 +378,6 @@ ario_util_download_file (const char *uri,
         *size = download_data.size;
         *data = download_data.data;
 
-        g_free(address);
         curl_easy_cleanup (curl);
 }
 

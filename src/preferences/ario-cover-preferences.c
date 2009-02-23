@@ -232,7 +232,7 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START
         int i;
-        char *current_country;
+        const char *current_country;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check), 
                                       !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
@@ -248,7 +248,6 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
                 }
                 gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), 0);
         }
-        g_free (current_country);
 
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }

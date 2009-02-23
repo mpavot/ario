@@ -140,7 +140,7 @@ ario_notifier_libnotify_cover_changed_cb (ArioCoverHandler *cover_handler,
                                           ArioNotifierLibnotify *notifier_libnotify)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *id;
+        const gchar *id;
 
         id = ario_conf_get_string (PREF_NOTIFIER, PREF_NOTIFIER_DEFAULT);
         if (id &&
@@ -148,7 +148,6 @@ ario_notifier_libnotify_cover_changed_cb (ArioCoverHandler *cover_handler,
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "icon-name", ario_cover_handler_get_cover_path ());
                 notify_notification_show (notifier_libnotify->priv->notification, NULL);
         }
-        g_free (id);
 }
 
 ArioNotifier*

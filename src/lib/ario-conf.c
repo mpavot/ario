@@ -155,16 +155,16 @@ ario_conf_set_string (const char *key,
         ario_conf_set (key, g_strdup (string_value));
 }
 
-char *
+const char *
 ario_conf_get_string (const char *key,
                       const char *default_value)
 {
         gchar *value = ario_conf_get (key);
 
         if (!value)
-                return g_strdup (default_value);
+                return default_value;
 
-        return g_strdup (value);
+        return value;
 }
 
 void
@@ -208,9 +208,9 @@ ario_conf_get_string_slist (const char *key,
         values = g_strsplit ((const gchar *) value, ",", 0);
 
         for (i=0; values[i]!=NULL && g_utf8_collate (values[i], ""); ++i)
-                ret = g_slist_append (ret, g_strdup (values[i]));
+                ret = g_slist_append (ret, values[i]);
 
-        g_strfreev (values);
+        g_free (values);
 
         return ret;
 }
@@ -298,7 +298,7 @@ ario_conf_init (void)
                 xmlFreeDoc (doc);
         }
 
-        g_timeout_add (30*1000, (GSourceFunc) ario_conf_save, NULL);
+        g_timeout_add (5*1000, (GSourceFunc) ario_conf_save, NULL);
 }
 
 void

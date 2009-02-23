@@ -114,7 +114,7 @@ static void
 ario_others_preferences_sync_others (ArioOthersPreferences *others_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        char *proxy_address;
+        const char *proxy_address;
         int proxy_port;
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (others_preferences->priv->showtabs_check),
@@ -134,7 +134,6 @@ ario_others_preferences_sync_others (ArioOthersPreferences *others_preferences)
 
         gtk_entry_set_text (GTK_ENTRY (others_preferences->priv->proxy_address_entry), proxy_address);
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (others_preferences->priv->proxy_port_spinbutton), (gdouble) proxy_port);
-        g_free(proxy_address);
 }
 
 void

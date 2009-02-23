@@ -38,7 +38,7 @@ gfloat          ario_conf_get_float             (const char             *key,
                                                  const gfloat            default_value);
 void            ario_conf_set_float             (const char             *key,
                                                  gfloat                 float_value);
-char *          ario_conf_get_string            (const char             *key,
+const char *    ario_conf_get_string            (const char             *key,
                                                  const char             *default_value);
 void            ario_conf_set_string            (const char             *key,
                                                  const char             *string_value);

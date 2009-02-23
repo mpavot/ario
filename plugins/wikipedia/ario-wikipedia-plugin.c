@@ -167,7 +167,7 @@ impl_create_configure_dialog (ArioPlugin *plugin)
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
         int i;
-        char *current_language;
+        const char *current_language;
 
         dialog = gtk_dialog_new_with_buttons (_("Wikipedia Plugin - Configuration"),
                                               NULL,
@@ -207,7 +207,6 @@ impl_create_configure_dialog (ArioPlugin *plugin)
                 }
                 gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), 0);
         }
-        g_free (current_language);
 
         gtk_box_pack_start_defaults (GTK_BOX (hbox),
                                      label);
@@ -251,7 +250,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 {
         gchar *artist;
         gchar *uri;
-        gchar *language;
+        const gchar *language;
 
         g_return_if_fail (ARIO_IS_WIKIPEDIA_PLUGIN (plugin));
 
@@ -262,7 +261,6 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 
                 language = ario_conf_get_string (CONF_WIKIPEDIA_LANGUAGE, CONF_WIKIPEDIA_LANGUAGE_DEFAULT);
                 uri = g_strdup_printf ("http://%s.wikipedia.org/wiki/%s", language, artist);
-                g_free (language);
                 g_free (artist);
                 ario_util_load_uri (uri);
                 g_free (uri);

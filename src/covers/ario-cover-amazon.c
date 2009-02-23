@@ -171,7 +171,7 @@ ario_cover_amazon_make_xml_uri (const char *artist,
         ARIO_LOG_FUNCTION_START
         char *xml_uri;
         char *keywords;
-        char *ext;
+        const char *ext;
         char *tmp;
 
         /* This is the key used to send requests on the amazon WebServices */
@@ -199,12 +199,11 @@ ario_cover_amazon_make_xml_uri (const char *artist,
 
         /* The japanese amazon need a different extension */
         if (!strcmp (ext, "jp")) {
-                ext = g_strdup ("co.jp");
+                ext = "co.jp";
         }
 
         /* We make the xml uri with all the parameters */
         xml_uri = g_strdup_printf (AMAZON_URI, ext, mykey, keywords);
-        g_free (ext);
         g_free (keywords);
 
         return xml_uri;
