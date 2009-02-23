@@ -166,7 +166,7 @@ static void
 ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *id;
+        const gchar *id;
         int i = 0;
         GSList *notifiers;
         ArioNotifier *notifier;
@@ -194,7 +194,6 @@ ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_prefe
                 }
                 ++i;
         }
-        g_free (id);
 }
 
 void

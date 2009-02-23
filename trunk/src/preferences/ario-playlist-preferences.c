@@ -164,7 +164,7 @@ static void
 ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *id;
+        const gchar *id;
         int i = 0;
         GSList *playlist_modes;
         ArioPlaylistMode *playlist_mode;
@@ -207,7 +207,6 @@ ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_prefe
                 }
                 ++i;
         }
-        g_free (id);
 }
 
 void

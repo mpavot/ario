@@ -139,7 +139,7 @@ ario_notification_manager_song_changed_cb (ArioServer *server,
                                            ArioNotificationManager *notification_manager)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *id;
+        const gchar *id;
         ArioNotifier *notifier;
 
         if (ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT)) {
@@ -148,6 +148,5 @@ ario_notification_manager_song_changed_cb (ArioServer *server,
 
                 if (notifier)
                         ario_notifier_notify (notifier);
-                g_free (id);
         }
 }
