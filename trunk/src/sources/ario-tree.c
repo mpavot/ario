@@ -777,6 +777,7 @@ ario_tree_selection_drag_foreach (GtkTreeModel *model,
                 g_string_append (data->string, "\n");
                 g_free (buf);
                 g_string_append (data->string, val);
+                g_string_append (data->string, "\n");
 
                 g_free (val);
         }
