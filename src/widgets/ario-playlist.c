@@ -1142,7 +1142,7 @@ ario_playlist_drop_criterias (const int x, const int y,
 
         criterias_str = g_strsplit ((const gchar *) data->data, "\n", 0);
 
-        while (criterias_str[i]) {
+        while (criterias_str[i] && *criterias_str[i] != '\0') {
                 nb = atoi (criterias_str[i]);
                 criteria = NULL;
                 filenames = NULL;
