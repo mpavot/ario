@@ -67,6 +67,10 @@ ario_conf_set (const char *key,
         GSList *tmp;
         ArioConfNotifyData *data;
 
+        if (!strcmp (ario_conf_get (key), value)) {
+                g_free (value);
+                return;
+        }
         g_hash_table_replace (hash, g_strdup (key), value);
         modified = TRUE;
 
