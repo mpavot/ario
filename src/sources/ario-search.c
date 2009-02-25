@@ -491,7 +491,6 @@ ario_search_do_search (GtkButton *button,
                                     SONGS_ALBUM_COLUMN, song->album,
                                     SONGS_FILENAME_COLUMN, song->file,
                                     -1);
-                g_free (title);
         }
         g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
         g_slist_free (songs);

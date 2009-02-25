@@ -735,7 +735,8 @@ ario_playlist_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START
         gint old_length;
         GtkTreeIter iter;
-        gchar *time, *track;
+        gchar track[ARIO_MAX_TRACK_SIZE];
+        gchar time[ARIO_MAX_TIME_SIZE];
         gchar *title;
         GSList *songs, *tmp;
         ArioServerSong *song, *current_song;
@@ -785,8 +786,8 @@ ario_playlist_changed_cb (ArioServer *server,
                         need_set = TRUE;
                 }
                 if (need_set) {
-                        time = ario_util_format_time (song->time);
-                        track = ario_util_format_track (song->track);
+                        ario_util_format_time_buf (song->time, time, ARIO_MAX_TIME_SIZE);
+                        ario_util_format_track_buf (song->track, track, ARIO_MAX_TRACK_SIZE);
                         title = ario_util_format_title (song);
                         if (current_song && (song->pos == current_song->pos))
                                 pixbuf = instance->priv->play_pixbuf;
@@ -804,9 +805,6 @@ ario_playlist_changed_cb (ArioServer *server,
                                             DATE_COLUMN, song->date,
                                             ID_COLUMN, song->id,
                                             -1);
-                        g_free (title);
-                        g_free (time);
-                        g_free (track);
                 }
         }
 

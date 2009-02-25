@@ -57,6 +57,27 @@ ario_util_format_time (const int time)
                 return g_strdup_printf ("%02i:%02i", min, sec);
 }
 
+void
+ario_util_format_time_buf (const int time,
+                           char *buf,
+                           int buf_len)
+{
+        ARIO_LOG_FUNCTION_START
+        int sec, min, hours;
+
+        if (time < 0)
+                g_snprintf (buf, buf_len, _("n/a"));
+
+        hours = (int)(time / 3600);
+        min = (int)((time % 3600) / 60) ;
+        sec = (time % 60);
+
+        if (hours > 0)
+                g_snprintf (buf, buf_len, "%d:%02i:%02i", hours, min, sec);
+        else
+                g_snprintf (buf, buf_len, "%02i:%02i", min, sec);
+}
+
 char *
 ario_util_format_total_time (const int time)
 {
@@ -107,30 +128,32 @@ ario_util_format_total_time (const int time)
         return res;
 }
 
-gchar *
-ario_util_format_track (const gchar *track)
+void
+ario_util_format_track_buf (const gchar *track,
+                            char *buf,
+                            int buf_len)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *slash, *tmp;
-        gchar *res;
+        gchar *slash;
+        gchar tmp[INTLEN];
 
-        if (!track)
-                return NULL;
+        if (!track) {
+                *buf = '\0';
+                return;
+        }
 
         /* Some tracks are x/y, we only want to display x */
         slash = g_strrstr (track, "/"); 
         if (slash) {
-                tmp = g_strndup (track, slash - track);
-                res = g_strdup_printf ("%02i", atoi (tmp));
-                g_free (tmp);
+                g_snprintf (tmp, ario_util_min (INTLEN, slash - track + 1), "%s", track);
+                g_snprintf (buf, buf_len, "%02i", atoi (tmp));
         } else {
-                res = g_strdup_printf ("%02i", atoi (track));
+                g_snprintf (buf, buf_len, "%02i", atoi (track));
         }
-        return res;
 }
 
 gchar *
-ario_util_format_title (const ArioServerSong *server_song)
+ario_util_format_title (ArioServerSong *server_song)
 {
         ARIO_LOG_FUNCTION_START
         gchar *dot;
@@ -138,26 +161,27 @@ ario_util_format_title (const ArioServerSong *server_song)
         gchar *res = NULL;
 
         if (!server_song) {
-                res = g_strdup (ARIO_SERVER_UNKNOWN);
+                res = ARIO_SERVER_UNKNOWN;
         } else if (server_song->title) {
-                res = g_strdup (server_song->title);
+                res = server_song->title;
         } else if (server_song->name) {
-                res = g_strdup (server_song->name);
+                res = server_song->name;
         } else {
                 /* Original format is : "path/to/filename.extension" or http://path/to/address:port
                  * We only want to display filename or http address */
                 if (!g_ascii_strncasecmp (server_song->file, "http://", 7)) {
-                        res = g_strdup (server_song->file);
+                        res = server_song->file;
                 } else {
                         slash = g_strrstr (server_song->file, "/"); 
                         if (slash) {
                                 dot = g_strrstr (slash+1, ".");
                                 if (dot)
-                                        res = g_strndup (slash+1, dot - slash - 1);
+                                        server_song->title = g_strndup (slash+1, dot - slash - 1);
                                 else
-                                        res = g_strdup (slash+1);
+                                        server_song->title = g_strdup (slash+1);
+                                res = server_song->title;
                         } else {
-                                res = g_strdup (server_song->file);
+                                res = server_song->file;
                         }
                 }
         }

@@ -476,7 +476,6 @@ ario_header_change_song_label (ArioHeader *header)
                 title = ario_util_format_title (ario_server_get_current_song ());
 
                 tmp = SONG_MARKUP (title);
-                g_free (title);
                 gtk_label_set_markup (GTK_LABEL (header->priv->song), tmp);
                 g_free (tmp);
                 break;

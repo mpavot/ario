@@ -946,14 +946,14 @@ ario_tree_add_next_songs (ArioTree *tree,
         const GSList *tmp;
         ArioServerSong *song;
         GtkTreeIter iter;
-        gchar *track;
+        gchar track[ARIO_MAX_TRACK_SIZE];
         gchar *title;
 
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
                 gtk_list_store_append (tree->priv->model, &iter);
 
-                track = ario_util_format_track (song->track);
+                ario_util_format_track_buf (song->track, track, ARIO_MAX_TRACK_SIZE);
                 title = ario_util_format_title (song);
                 gtk_list_store_set (tree->priv->model, &iter,
                                     SONG_VALUE_COLUMN, title,
@@ -961,8 +961,6 @@ ario_tree_add_next_songs (ArioTree *tree,
                                     SONG_TRACK_COLUMN, track,
                                     SONG_FILENAME_COLUMN, song->file,
                                     -1);
-                g_free (title);
-                g_free (track);
         }
 }
 

@@ -79,7 +79,6 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
                 /* Title */
                 title = ario_util_format_title (ario_server_get_current_song ());
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "summary", title);
-                g_free (title);
 
                 /* Artist - Album */
                 artist = ario_server_get_current_artist ();
