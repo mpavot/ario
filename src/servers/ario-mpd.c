@@ -459,6 +459,7 @@ ario_mpd_update_db (void)
 static gboolean
 ario_mpd_try_reconnect (gpointer data)
 {
+        ARIO_LOG_FUNCTION_START
         ario_server_connect ();
         return FALSE;
 }
@@ -534,6 +535,7 @@ static gboolean
 ario_mpd_album_is_present (const GSList *albums,
                            const char *album)
 {
+        ARIO_LOG_FUNCTION_START
         const GSList *tmp;
         ArioServerAlbum *mpd_album;
 
@@ -614,7 +616,8 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
                 }
 
                 if (entity->info.song->file) {
-                        mpd_album->path = g_path_get_dirname (entity->info.song->file);
+                        mpd_album->path = entity->info.song->file;
+                        entity->info.song->file = NULL;
                 } else {
                         mpd_album->path = NULL;
                 }

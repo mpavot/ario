@@ -88,6 +88,7 @@ void
 ario_conf_set_boolean (const char *key,
                        gboolean boolean_value)
 {
+        ARIO_LOG_FUNCTION_START
         if (boolean_value)
                 ario_conf_set (key, g_strdup ("1"));
         else
@@ -98,6 +99,7 @@ gboolean
 ario_conf_get_boolean (const char *key,
                        const gboolean default_value)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *value = ario_conf_get (key);
         gboolean ret;
 
@@ -113,6 +115,7 @@ void
 ario_conf_set_integer (const char *key,
                        int int_value)
 {
+        ARIO_LOG_FUNCTION_START
         ario_conf_set (key, g_strdup_printf ("%d", int_value));
 }
 
@@ -120,6 +123,7 @@ int
 ario_conf_get_integer (const char *key,
                        const int default_value)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *value = ario_conf_get (key);
         int ret;
 
@@ -135,6 +139,7 @@ void
 ario_conf_set_float (const char *key,
                      gfloat float_value)
 {
+        ARIO_LOG_FUNCTION_START
         ario_conf_set (key, g_strdup_printf ("%f", float_value));
 }
 
@@ -142,6 +147,7 @@ gfloat
 ario_conf_get_float (const char *key,
                      const gfloat default_value)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *value = ario_conf_get (key);
         gfloat ret;
 
@@ -156,6 +162,7 @@ void
 ario_conf_set_string (const char *key,
                       const char *string_value)
 {
+        ARIO_LOG_FUNCTION_START
         ario_conf_set (key, g_strdup (string_value));
 }
 
@@ -163,6 +170,7 @@ const char *
 ario_conf_get_string (const char *key,
                       const char *default_value)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *value = ario_conf_get (key);
 
         if (!value)
@@ -175,6 +183,7 @@ void
 ario_conf_set_string_slist (const char *key,
                             const GSList *slist)
 {
+        ARIO_LOG_FUNCTION_START
         GString* value = NULL;
         const GSList *tmp;
         gboolean first = TRUE;
@@ -198,6 +207,7 @@ GSList *
 ario_conf_get_string_slist (const char *key,
                             const char *string_value)
 {
+        ARIO_LOG_FUNCTION_START
         const gchar *value = ario_conf_get (key);
         gchar **values;
         GSList *ret = NULL;
@@ -308,6 +318,7 @@ ario_conf_init (void)
 void
 ario_conf_shutdown (void)
 {
+        ARIO_LOG_FUNCTION_START
         ario_conf_save (NULL);
         g_hash_table_remove_all (hash);
         g_slist_foreach (notifications, (GFunc) ario_conf_free_notify_data, NULL);
@@ -318,6 +329,7 @@ ario_conf_notification_add (const char *key,
                             ArioNotifyFunc notification_callback,
                             gpointer callback_data)
 {
+        ARIO_LOG_FUNCTION_START
         ArioConfNotifyData *data = (ArioConfNotifyData *) g_malloc0 (sizeof (ArioConfNotifyData));
         ++notification_counter;
 
@@ -334,6 +346,7 @@ ario_conf_notification_add (const char *key,
 void
 ario_conf_notification_remove (guint notification_id)
 {
+        ARIO_LOG_FUNCTION_START
         GSList *tmp;
         ArioConfNotifyData *data;
 

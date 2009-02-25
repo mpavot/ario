@@ -265,6 +265,7 @@ ario_util_uri_exists (const char *uri)
 void
 ario_util_unlink_uri (const char *uri)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *uri_fse = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
         if (!uri_fse)
                 return;
@@ -277,6 +278,7 @@ ario_util_unlink_uri (const char *uri)
 void
 ario_util_mkdir (const char *uri)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *uri_fse = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
         if (!uri_fse)
                 return;
@@ -290,6 +292,7 @@ void
 ario_util_copy_file (const char *src_uri,
                      const char *dest_uri)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *contents;
         gsize length;
 
@@ -320,6 +323,7 @@ ario_util_write_data(void *buffer,
                      size_t nmemb,
                      download_struct *download_data)
 {
+        ARIO_LOG_FUNCTION_START
         if(!size || !nmemb)
                 return 0;
         if(download_data->data == NULL)
@@ -410,6 +414,7 @@ ario_util_string_replace (char **string,
                           const char *old,
                           const char *new)
 {
+        ARIO_LOG_FUNCTION_START
         gchar **strsplit;
         GString *str;
         int i;
