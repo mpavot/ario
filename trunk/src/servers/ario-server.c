@@ -867,6 +867,7 @@ ario_server_playlist_add_dir (const gchar *dir,
                               const gint pos,
                               const gboolean play)
 {
+        ARIO_LOG_FUNCTION_START
         GSList *tmp;
         ArioServerFileList *files;
         ArioServerSong *song;

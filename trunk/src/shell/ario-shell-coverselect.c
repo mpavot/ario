@@ -94,7 +94,7 @@ struct ArioShellCoverselectPrivate
 
         const gchar *file_artist;
         const gchar *file_album;
-        const gchar *path;
+        gchar *path;
 
         GArray *file_size;
         GSList *file_contents;
@@ -140,6 +140,7 @@ ario_shell_coverselect_finalize (GObject *object)
                 g_array_free (ario_shell_coverselect->priv->file_size, TRUE);
         g_slist_foreach (ario_shell_coverselect->priv->file_contents, (GFunc) g_free, NULL);
         g_slist_free (ario_shell_coverselect->priv->file_contents);
+        g_free (ario_shell_coverselect->priv->path);
 
         G_OBJECT_CLASS (ario_shell_coverselect_parent_class)->finalize (object);
 }
@@ -316,7 +317,7 @@ ario_shell_coverselect_new (ArioServerAlbum *server_album)
 
         ario_shell_coverselect->priv->file_artist = server_album->artist;
         ario_shell_coverselect->priv->file_album = server_album->album;
-        ario_shell_coverselect->priv->path = server_album->path;
+        ario_shell_coverselect->priv->path = g_path_get_dirname (server_album->path);
 
         ario_shell_coverselect_set_current_cover (ario_shell_coverselect);
 
