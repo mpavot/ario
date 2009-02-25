@@ -23,15 +23,24 @@
 
 #define MAX_COVERS_IN_DRAG 3
 
+#define INTLEN (sizeof(int) * CHAR_BIT + 1) / 3 + 1
+
+#define ARIO_MAX_TIME_SIZE 3*INTLEN+2
+#define ARIO_MAX_TRACK_SIZE INTLEN
+
 struct curl_slist;
 
 char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
+void                    ario_util_format_time_buf            (const int time,
+                                                              char *buf,
+                                                              int buf_len);
 char*                   ario_util_format_total_time          (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
-gchar*                  ario_util_format_track               (const gchar *track) G_GNUC_MALLOC;
-
-gchar*                  ario_util_format_title               (const ArioServerSong *server_song) G_GNUC_MALLOC;
+void                    ario_util_format_track_buf           (const gchar *track,
+                                                              char *buf,
+                                                              int buf_len);
+gchar*                  ario_util_format_title               (ArioServerSong *server_song);
 
 void                    ario_util_add_stock_icons            (const char *stock_id,
                                                               const char *filename);

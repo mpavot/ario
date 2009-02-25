@@ -680,7 +680,6 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
                                            ario_server_get_current_album () ? ario_server_get_current_album () : ARIO_SERVER_UNKNOWN,
                                            _("Title"),
                                            title);
-                g_free (title);
                 break;
         default:
                 tooltip = g_strdup (TRAY_ICON_DEFAULT_TOOLTIP);
@@ -705,7 +704,6 @@ ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon)
                 title = ario_util_format_title (ario_server_get_current_song ());
                 gtk_label_set_text (GTK_LABEL (icon->priv->tooltip_primary),
                                     title);
-                g_free (title);
                 break;
         default:
                 gtk_label_set_text (GTK_LABEL (icon->priv->tooltip_primary),

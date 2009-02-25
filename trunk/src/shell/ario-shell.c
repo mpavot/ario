@@ -731,7 +731,6 @@ ario_shell_server_song_set_title (ArioShell *shell)
         case MPD_STATUS_STATE_PAUSE:
                 tmp = ario_util_format_title (ario_server_get_current_song ());
                 window_title = g_strdup_printf ("Ario - %s", tmp);
-                g_free (tmp);
                 break;
         default:
                 window_title = g_strdup("Ario");

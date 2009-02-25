@@ -227,7 +227,7 @@ ario_lyrics_editor_search_cb (GtkButton *button,
                 if (candidate) {
                         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
                         data->artist = g_strdup (artist);
-                        data->title = g_strdup (lyrics_editor->priv->data->title);
+                        data->title = lyrics_editor->priv->data->title;
                         data->candidate = candidate;
 
                         g_async_queue_push (lyrics_editor->priv->queue, data);
@@ -242,7 +242,6 @@ ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
         ARIO_LOG_FUNCTION_START
         if (data) {
                 g_free (data->artist);
-                g_free (data->title);
                 ario_lyrics_candidate_free (data->candidate);
                 g_free (data);
         }

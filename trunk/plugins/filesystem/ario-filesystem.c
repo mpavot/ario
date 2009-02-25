@@ -532,7 +532,6 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
                                     SONGS_ALBUM_COLUMN, song->album,
                                     SONGS_FILENAME_COLUMN, song->file,
                                     -1);
-                g_free (title);
         }
         ario_server_free_file_list (files);
         g_free (dir);

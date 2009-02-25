@@ -428,7 +428,6 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
                                     SONGS_ALBUM_COLUMN, song->album,
                                     SONGS_FILENAME_COLUMN, song->file,
                                     -1);
-                g_free (title);
         }
 
         g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
