@@ -775,8 +775,7 @@ ario_playlist_changed_cb (ArioServer *server,
                 need_set = FALSE;
                 /* decide whether to update or to add */
                 if (song->pos < old_length) {
-                        path = gtk_tree_path_new ();
-                        gtk_tree_path_append_index (path, song->pos);
+                        path = gtk_tree_path_new_from_indices (song->pos, -1);
                         if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path)) {
                                 need_set = TRUE;
                         }
@@ -814,8 +813,7 @@ ario_playlist_changed_cb (ArioServer *server,
         playlist->priv->playlist_length = ario_server_get_current_playlist_length ();
 
         if (playlist->priv->playlist_length < old_length) {
-                path = gtk_tree_path_new ();
-                gtk_tree_path_append_index (path, playlist->priv->playlist_length);
+                path = gtk_tree_path_new_from_indices (playlist->priv->playlist_length, -1);
 
                 if (gtk_tree_model_get_iter (GTK_TREE_MODEL (playlist->priv->model), &iter, path)) {
                         while (gtk_list_store_remove (playlist->priv->model, &iter)) { }

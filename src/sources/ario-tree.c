@@ -744,7 +744,8 @@ ario_tree_selection_drag_foreach (GtkTreeModel *model,
 {
         ARIO_LOG_FUNCTION_START
         ArioTreeStringData *data = (ArioTreeStringData *) userdata;
-        gchar *val, *buf;
+        gchar *val;
+        gchar buf[INTLEN];
         g_return_if_fail (data != NULL);
         ArioServerCriteria *criteria, *tmp;
         ArioServerAtomicCriteria *atomic_criteria;
@@ -757,25 +758,22 @@ ario_tree_selection_drag_foreach (GtkTreeModel *model,
                 g_free (val);
         } else {
                 gtk_tree_model_get (model, iter, CRITERIA_COLUMN, &criteria, VALUE_COLUMN, &val, -1);
-                buf = g_strdup_printf ("%d", g_slist_length (criteria) + 1);
+                g_snprintf (buf, INTLEN, "%d", g_slist_length (criteria) + 1);
                 g_string_append (data->string, buf);
                 g_string_append (data->string, "\n");
-                g_free (buf);
 
                 for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                         atomic_criteria = tmp->data;
-                        buf = g_strdup_printf ("%d", atomic_criteria->tag);
+                        g_snprintf (buf, INTLEN, "%d", atomic_criteria->tag);
                         g_string_append (data->string, buf);
                         g_string_append (data->string, "\n");
-                        g_free (buf);
                         g_string_append (data->string, atomic_criteria->value);
                         g_string_append (data->string, "\n");
                 }
 
-                buf = g_strdup_printf ("%d", data->tag);
+                g_snprintf (buf, INTLEN, "%d", data->tag);
                 g_string_append (data->string, buf);
                 g_string_append (data->string, "\n");
-                g_free (buf);
                 g_string_append (data->string, val);
                 g_string_append (data->string, "\n");
 
