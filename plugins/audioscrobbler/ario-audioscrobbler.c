@@ -242,6 +242,7 @@ ario_audioscrobbler_constructor (GType type,
                                  guint n_construct_properties,
                                  GObjectConstructParam *construct_properties)
 {
+        ARIO_LOG_FUNCTION_START
         GObject *obj;
         ArioAudioscrobbler *audioscrobbler;
 
@@ -263,6 +264,7 @@ ario_audioscrobbler_constructor (GType type,
 static void
 ario_audioscrobbler_class_init (ArioAudioscrobblerClass *klass)
 {
+        ARIO_LOG_FUNCTION_START
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 
@@ -276,6 +278,7 @@ ario_audioscrobbler_class_init (ArioAudioscrobblerClass *klass)
 static void
 ario_audioscrobbler_init (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         ARIO_LOG_DBG ("Initialising Audioscrobbler");
         ARIO_LOG_DBG ("Plugin ID: %s, Version %s (Protocol %s)",
                       CLIENT_ID, CLIENT_VERSION, SCROBBLER_VERSION);
@@ -309,6 +312,7 @@ ario_audioscrobbler_init (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_audioscrobbler_dispose (GObject *object)
 {
+        ARIO_LOG_FUNCTION_START
         ArioAudioscrobbler *audioscrobbler;
 
         g_return_if_fail (object != NULL);
@@ -344,6 +348,7 @@ ario_audioscrobbler_dispose (GObject *object)
 static void
 ario_audioscrobbler_finalize (GObject *object)
 {
+        ARIO_LOG_FUNCTION_START
         ArioAudioscrobbler *audioscrobbler;
 
         ARIO_LOG_DBG ("Finalizing Audioscrobbler");
@@ -377,6 +382,7 @@ ario_audioscrobbler_finalize (GObject *object)
 ArioAudioscrobbler*
 ario_audioscrobbler_new (void)
 {
+        ARIO_LOG_FUNCTION_START
         ArioAudioscrobbler *audioscrobbler;
         audioscrobbler = g_object_new (ARIO_TYPE_AUDIOSCROBBLER, NULL);
 
@@ -391,6 +397,7 @@ ario_audioscrobbler_new (void)
 static SoupURI *
 ario_audioscrobbler_get_libsoup_uri ()
 {
+        ARIO_LOG_FUNCTION_START
         SoupURI *uri = NULL;
         const gchar *host;
 
@@ -409,6 +416,7 @@ ario_audioscrobbler_get_libsoup_uri ()
 static SoupUri *
 ario_audioscrobbler_get_libsoup_uri ()
 {
+        ARIO_LOG_FUNCTION_START
         SoupUri *uri = NULL;
 
         if (!ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT))
@@ -428,6 +436,7 @@ ario_audioscrobbler_get_libsoup_uri ()
 static void
 ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         if (!audioscrobbler->priv->timeout_id) {
                 ARIO_LOG_DBG ("Adding Audioscrobbler timer (15 seconds)");
                 audioscrobbler->priv->timeout_id = 
@@ -439,6 +448,7 @@ ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler)
 static gboolean
 ario_audioscrobbler_is_queueable (ArioServerSong *song)
 {
+        ARIO_LOG_FUNCTION_START
         const char *title;
         const char *artist;
         gulong duration;
@@ -474,6 +484,7 @@ ario_audioscrobbler_is_queueable (ArioServerSong *song)
 static AudioscrobblerEntry *
 ario_audioscrobbler_create_entry (ArioServerSong *song)
 {
+        ARIO_LOG_FUNCTION_START
         AudioscrobblerEntry *as_entry = g_new0 (AudioscrobblerEntry, 1);
 
         if (song->title) {
@@ -500,6 +511,7 @@ static gboolean
 ario_audioscrobbler_add_to_queue (ArioAudioscrobbler *audioscrobbler,
                                   AudioscrobblerEntry *entry)
 {        
+        ARIO_LOG_FUNCTION_START
         if (g_queue_get_length (audioscrobbler->priv->queue) < MAX_QUEUE_SIZE){
                 g_queue_push_tail (audioscrobbler->priv->queue, entry);
                 audioscrobbler->priv->queue_changed = TRUE;
@@ -517,6 +529,7 @@ ario_audioscrobbler_add_to_queue (ArioAudioscrobbler *audioscrobbler,
 static void
 maybe_add_current_song_to_queue (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         guint elapsed;
         AudioscrobblerEntry *cur_entry;
 
@@ -553,6 +566,7 @@ maybe_add_current_song_to_queue (ArioAudioscrobbler *audioscrobbler)
 static gboolean
 ario_audioscrobbler_timeout_cb (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         maybe_add_current_song_to_queue (audioscrobbler);
 
         /* do handshake if we need to */
@@ -573,6 +587,7 @@ ario_audioscrobbler_timeout_cb (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_audioscrobbler_parse_response (ArioAudioscrobbler *audioscrobbler, SoupMessage *msg)
 {
+        ARIO_LOG_FUNCTION_START
         gboolean successful;
         ARIO_LOG_DBG ("Parsing response, status=%d", msg->status_code);
 
@@ -681,6 +696,7 @@ ario_audioscrobbler_parse_response (ArioAudioscrobbler *audioscrobbler, SoupMess
 static gboolean
 idle_unref_cb (GObject *object)
 {
+        ARIO_LOG_FUNCTION_START
         g_object_unref (object);
         return FALSE;
 }
@@ -695,6 +711,7 @@ ario_audioscrobbler_perform (ArioAudioscrobbler *audioscrobbler,
                              char *post_data,
                              SoupSessionCallback response_handler)
 {
+        ARIO_LOG_FUNCTION_START
         SoupMessage *msg;
 
         msg = soup_message_new (post_data == NULL ? "GET" : "POST", url);
@@ -729,6 +746,7 @@ ario_audioscrobbler_perform (ArioAudioscrobbler *audioscrobbler,
 static gboolean
 ario_audioscrobbler_should_handshake (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         /* Perform handshake if necessary. Only perform handshake if
          *   - we have no current handshake; AND
          *   - we have waited the appropriate amount of time between
@@ -758,6 +776,7 @@ ario_audioscrobbler_should_handshake (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_audioscrobbler_do_handshake (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *username;
         gchar *url;
 
@@ -799,6 +818,7 @@ static void
 ario_audioscrobbler_do_handshake_cb (SoupMessage *msg, gpointer user_data)
 #endif
 {
+        ARIO_LOG_FUNCTION_START
         ArioAudioscrobbler *audioscrobbler = ARIO_AUDIOSCROBBLER(user_data);
 
         ARIO_LOG_DBG ("Handshake response");
@@ -824,6 +844,7 @@ ario_audioscrobbler_do_handshake_cb (SoupMessage *msg, gpointer user_data)
 static gchar *
 ario_audioscrobbler_build_authentication_data (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *md5_password;
         gchar *md5_temp;
         gchar *md5_response;
@@ -887,6 +908,7 @@ static gchar *
 ario_audioscrobbler_build_post_data (ArioAudioscrobbler *audioscrobbler,
                                      const gchar *authentication_data)
 {
+        ARIO_LOG_FUNCTION_START
         g_return_val_if_fail (!g_queue_is_empty (audioscrobbler->priv->queue),
                               NULL);
 
@@ -923,6 +945,7 @@ ario_audioscrobbler_build_post_data (ArioAudioscrobbler *audioscrobbler,
 static void
 ario_audioscrobbler_submit_queue (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         gchar *auth_data;
 
         auth_data = ario_audioscrobbler_build_authentication_data (audioscrobbler);
@@ -946,6 +969,7 @@ ario_audioscrobbler_submit_queue (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_g_queue_concat (GQueue *q1, GQueue *q2)
 {
+        ARIO_LOG_FUNCTION_START
         GList *elem;
 
         while (!g_queue_is_empty (q2)) {
@@ -985,6 +1009,7 @@ ario_g_queue_concat (GQueue *q1, GQueue *q2)
 static char *
 eel_strdup_strftime (const char *format, struct tm *time_pieces)
 {
+        ARIO_LOG_FUNCTION_START
         GString *string;
         const char *remainder, *percent;
         char code[4], buffer[512];
@@ -1118,10 +1143,12 @@ eel_strdup_strftime (const char *format, struct tm *time_pieces)
 }
 
 #ifdef _WIN32
-inline struct tm* localtime_r (const time_t *clock, struct tm *result) {
-       if (!clock || !result) return NULL;
-       memcpy(result,localtime(clock),sizeof(*result));
-       return result;
+inline struct tm* localtime_r (const time_t *clock, struct tm *result)
+{
+        ARIO_LOG_FUNCTION_START
+        if (!clock || !result) return NULL;
+        memcpy(result,localtime(clock),sizeof(*result));
+        return result;
 }
 #endif 
 
@@ -1129,6 +1156,7 @@ inline struct tm* localtime_r (const time_t *clock, struct tm *result) {
 static char *
 ario_utf_friendly_time (time_t date)
 {
+        ARIO_LOG_FUNCTION_START
         time_t nowdate;
         time_t yesdate;
         struct tm then, now, yesterday;
@@ -1218,6 +1246,7 @@ static void
 ario_audioscrobbler_submit_queue_cb (SoupMessage *msg, gpointer user_data)
 #endif
 {
+        ARIO_LOG_FUNCTION_START
         ArioAudioscrobbler *audioscrobbler = ARIO_AUDIOSCROBBLER (user_data);
 
         ARIO_LOG_DBG ("Submission response");
@@ -1269,6 +1298,7 @@ ario_audioscrobbler_submit_queue_cb (SoupMessage *msg, gpointer user_data)
 static void
 ario_audioscrobbler_import_settings (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         /* import conf settings. */
         g_free (audioscrobbler->priv->username);
         g_free (audioscrobbler->priv->password);
@@ -1284,6 +1314,7 @@ ario_audioscrobbler_import_settings (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_audioscrobbler_preferences_sync (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         const char *status;
         char *free_this = NULL;
         char *v;
@@ -1359,6 +1390,7 @@ ario_audioscrobbler_preferences_sync (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_audioscrobbler_preferences_response_cb (GtkWidget *dialog, gint response, ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         gtk_widget_destroy (audioscrobbler->priv->preferences);
         audioscrobbler->priv->preferences = NULL;
 }
@@ -1367,6 +1399,7 @@ ario_audioscrobbler_preferences_response_cb (GtkWidget *dialog, gint response, A
 static void
 ario_audioscrobbler_preferences_close_cb (GtkWidget *dialog, ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         gtk_widget_destroy (audioscrobbler->priv->preferences);
         audioscrobbler->priv->preferences = NULL;
 }
@@ -1375,6 +1408,7 @@ GtkWidget *
 ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
                                        ArioPlugin *plugin)
 {
+        ARIO_LOG_FUNCTION_START
         GtkBuilder *builder;
         GtkWidget *config_widget;
         gchar *file;
@@ -1428,7 +1462,7 @@ static void
 ario_audioscrobbler_conf_username_changed_cb (guint cnxn_id,
                                               ArioAudioscrobbler *audioscrobbler)
 {
-
+        ARIO_LOG_FUNCTION_START
         const gchar *username;
 
         g_free (audioscrobbler->priv->username);
@@ -1452,6 +1486,7 @@ static void
 ario_audioscrobbler_conf_password_changed_cb (guint cnxn_id,
                                               ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         const gchar *password;
 
         g_free (audioscrobbler->priv->password);
@@ -1473,6 +1508,7 @@ static void
 ario_audioscrobbler_song_changed_cb (ArioServer *server,
                                      ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         ArioServerSong *song;
 
         song = ario_server_get_current_song ();
@@ -1505,6 +1541,7 @@ void
 ario_audioscrobbler_username_entry_changed_cb (GtkEntry *entry,
                                                ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         ario_conf_set_string (PREF_AUDIOSCROBBLER_USERNAME,
                               gtk_entry_get_text (entry));
 }
@@ -1513,6 +1550,7 @@ void
 ario_audioscrobbler_username_entry_activate_cb (GtkEntry *entry,
                                                 ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         gtk_widget_grab_focus (audioscrobbler->priv->password_entry);
 }
 
@@ -1520,6 +1558,7 @@ void
 ario_audioscrobbler_password_entry_changed_cb (GtkEntry *entry,
                                                ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         ario_conf_set_string (PREF_AUDIOSCROBBLER_PASSWORD,
                               gtk_entry_get_text (entry));
 }
@@ -1528,6 +1567,7 @@ void
 ario_audioscrobbler_password_entry_activate_cb (GtkEntry *entry,
                                                 ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         /* ? */
 }
 
@@ -1535,6 +1575,7 @@ ario_audioscrobbler_password_entry_activate_cb (GtkEntry *entry,
 static void
 audioscrobbler_entry_init (AudioscrobblerEntry *entry)
 {
+        ARIO_LOG_FUNCTION_START
         entry->artist = g_strdup ("");
         entry->album = g_strdup ("");
         entry->title = g_strdup ("");
@@ -1546,6 +1587,7 @@ audioscrobbler_entry_init (AudioscrobblerEntry *entry)
 static void
 audioscrobbler_entry_free (AudioscrobblerEntry *entry)
 {
+        ARIO_LOG_FUNCTION_START
         g_free (entry->artist);
         g_free (entry->album);
         g_free (entry->title);
@@ -1557,7 +1599,7 @@ audioscrobbler_entry_free (AudioscrobblerEntry *entry)
 static AudioscrobblerEncodedEntry *
 audioscrobbler_entry_encode (AudioscrobblerEntry *entry)
 {
-
+        ARIO_LOG_FUNCTION_START
         AudioscrobblerEncodedEntry *encoded;
 
         encoded = g_new0 (AudioscrobblerEncodedEntry, 1);
@@ -1585,6 +1627,7 @@ audioscrobbler_entry_encode (AudioscrobblerEntry *entry)
 static 
 void audioscrobbler_encoded_entry_free (AudioscrobblerEncodedEntry *entry)
 {
+        ARIO_LOG_FUNCTION_START
         g_free (entry->artist);
         g_free (entry->album);
         g_free (entry->title);
@@ -1599,6 +1642,7 @@ void audioscrobbler_encoded_entry_free (AudioscrobblerEncodedEntry *entry)
 static AudioscrobblerEntry*
 ario_audioscrobbler_load_entry_from_string (const char *string)
 {
+        ARIO_LOG_FUNCTION_START
         AudioscrobblerEntry *entry;
         int i = 0;
         char **breaks;
@@ -1652,6 +1696,7 @@ ario_audioscrobbler_load_entry_from_string (const char *string)
 static gboolean
 ario_audioscrobbler_load_queue (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         char *pathname;
         gboolean result;
         char *data;
@@ -1697,6 +1742,7 @@ ario_audioscrobbler_load_queue (ArioAudioscrobbler *audioscrobbler)
 static char *
 ario_audioscrobbler_save_entry_to_string (AudioscrobblerEntry *entry)
 {
+        ARIO_LOG_FUNCTION_START
         char *result;
         AudioscrobblerEncodedEntry *encoded;
 
@@ -1714,6 +1760,7 @@ ario_audioscrobbler_save_entry_to_string (AudioscrobblerEntry *entry)
 static gboolean
 ario_audioscrobbler_save_queue (ArioAudioscrobbler *audioscrobbler)
 {
+        ARIO_LOG_FUNCTION_START
         char *pathname;
         gboolean ret;
         GString *string = g_string_new (NULL);
@@ -1751,6 +1798,7 @@ ario_audioscrobbler_save_queue (ArioAudioscrobbler *audioscrobbler)
 static void
 ario_audioscrobbler_print_queue (ArioAudioscrobbler *audioscrobbler, gboolean submission)
 {
+        ARIO_LOG_FUNCTION_START
         GList *l;
         AudioscrobblerEntry *entry;
 
@@ -1786,6 +1834,7 @@ ario_audioscrobbler_print_queue (ArioAudioscrobbler *audioscrobbler, gboolean su
 static void
 ario_audioscrobbler_free_queue_entries (ArioAudioscrobbler *audioscrobbler, GQueue **queue)
 {
+        ARIO_LOG_FUNCTION_START
         g_queue_foreach (*queue, (GFunc) audioscrobbler_entry_free, NULL);
         g_queue_free (*queue);
         *queue = NULL;
