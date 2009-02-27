@@ -19,13 +19,9 @@
 
 #include "ario-lyrics.h"
 #include <glib.h>
-#include <gtk/gtkdialog.h>
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n.h>
 #include "ario-util.h"
-#include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
 static void ario_lyrics_create_ario_lyrics_dir (void);
@@ -35,17 +31,12 @@ ario_lyrics_make_lyrics_path (const gchar *artist,
                               const gchar *title)
 {
         ARIO_LOG_FUNCTION_START
-        char *ario_lyrics_path, *tmp;
+        char *ario_lyrics_path;
         char *filename;
-        const char *to_strip = "#/";
 
         filename = g_strdup_printf ("%s-%s.txt", artist, title);
 
-        /* We replace some special characters with spaces. */
-        for (tmp = filename; *tmp != '\0'; ++tmp) {
-                if (strchr (to_strip, *tmp))
-                        *tmp = ' ';
-        }
+        ario_util_sanitize_filename (filename);
 
         /* The returned path is ~/.config/ario/lyrics/filename */
         ario_lyrics_path = g_build_filename (ario_util_config_dir (), "lyrics", filename, NULL);

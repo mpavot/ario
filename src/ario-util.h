@@ -79,6 +79,8 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *crit
 
 gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
 
+void                    ario_util_sanitize_filename          (char *filename);
+
 gboolean                ario_file_get_contents               (const gchar *filename,
                                                               gchar **contents,
                                                               gsize *length,
