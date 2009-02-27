@@ -419,16 +419,23 @@ ario_util_string_replace (char **string,
         GString *str;
         int i;
 
+        if (!g_strstr_len (*string, -1, old))
+            return;
+
         strsplit = g_strsplit (*string, old, 0);
 
-        if (!strsplit || !strsplit[0])
+        if (!strsplit)
+                
+        if (!strsplit[0]) {
+                g_strfreev (strsplit);
                 return;
+        }
 
         str = g_string_new (strsplit[0]);
 
         for (i = 1; strsplit[i] && g_utf8_collate (strsplit[i], ""); ++i) {
-                g_string_append(str, new);
-                g_string_append(str, strsplit[i]);
+                g_string_append (str, new);
+                g_string_append (str, strsplit[i]);
         }
         g_strfreev (strsplit);
 
@@ -654,6 +661,20 @@ ario_util_convert_from_iso8859 (const char *string)
         g_free (tmp);
 
         return ret;
+}
+
+void
+ario_util_sanitize_filename (char *filename)
+{
+        ARIO_LOG_FUNCTION_START
+        const char *to_strip = "#/*\"\\[]:;|=";
+        char *tmp;
+
+        /* We replace some special characters with spaces. */
+        for (tmp = filename; *tmp != '\0'; ++tmp) {
+                if (strchr (to_strip, *tmp))
+                        *tmp = ' ';
+        }
 }
 
 gboolean

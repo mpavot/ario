@@ -21,13 +21,9 @@
 #include <glib.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtkmessagedialog.h>
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include "lib/ario-conf.h"
 #include "ario-util.h"
-#include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
 static void ario_cover_create_ario_cover_dir (void);
@@ -38,9 +34,8 @@ ario_cover_make_ario_cover_path (const gchar *artist,
                                  const ArioCoverHomeCoversSize ario_cover_size)
 {
         ARIO_LOG_FUNCTION_START
-        char *ario_cover_path, *tmp;
+        char *ario_cover_path;
         char *filename;
-        const char *to_strip = "#/";
 
         if (!artist || !album)
                 return NULL;
@@ -52,11 +47,7 @@ ario_cover_make_ario_cover_path (const gchar *artist,
         else
                 filename = g_strdup_printf ("%s-%s.jpg", artist, album);
 
-        /* We replace some special characters with spaces. */
-        for (tmp = filename; *tmp != '\0'; ++tmp) {
-                if (strchr (to_strip, *tmp))
-                        *tmp = ' ';
-        }
+        ario_util_sanitize_filename (filename);
 
         /* The returned path is ~/.config/ario/covers/filename */
         ario_cover_path = g_build_filename (ario_util_config_dir (), "covers", filename, NULL);
