@@ -36,7 +36,7 @@ static GObjectClass *parent_class = NULL;
 GType
 ario_playlist_normal_get_type (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static GType type = 0;
 
         if (!type) {
@@ -75,7 +75,7 @@ ario_playlist_normal_get_name (ArioPlaylistMode *playlist_mode)
 static void
 ario_playlist_normal_class_init (ArioPlaylistNormalClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPlaylistModeClass *playlist_mode_class = ARIO_PLAYLIST_MODE_CLASS (klass);
 
@@ -90,13 +90,13 @@ ario_playlist_normal_class_init (ArioPlaylistNormalClass *klass)
 static void
 ario_playlist_normal_init (ArioPlaylistNormal *playlist_normal)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 static void
 ario_playlist_normal_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistNormal *playlist_normal;
 
         g_return_if_fail (object != NULL);
@@ -110,7 +110,7 @@ ario_playlist_normal_finalize (GObject *object)
 ArioPlaylistMode*
 ario_playlist_normal_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistNormal *normal;
 
         normal = g_object_new (TYPE_ARIO_PLAYLIST_NORMAL,

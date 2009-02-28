@@ -207,7 +207,7 @@ G_DEFINE_TYPE (ArioShell, ario_shell, G_TYPE_OBJECT)
 static void
 ario_shell_class_init (ArioShellClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = (GObjectClass *) klass;
 
         object_class->set_property = ario_shell_set_property;
@@ -235,7 +235,7 @@ ario_shell_class_init (ArioShellClass *klass)
 static void
 ario_shell_init (ArioShell *shell) 
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell->priv = ARIO_SHELL_GET_PRIVATE (shell);
         shell->priv->connected = FALSE;
         shell->priv->shown = FALSE;
@@ -250,7 +250,7 @@ ario_shell_init (ArioShell *shell)
 static void
 ario_shell_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShell *shell = ARIO_SHELL (object);
 
         gtk_widget_hide (shell->priv->window);
@@ -278,7 +278,7 @@ ario_shell_set_property (GObject *object,
                          const GValue *value,
                          GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShell *shell = ARIO_SHELL (object);
 
         switch (prop_id) {
@@ -300,7 +300,7 @@ ario_shell_get_property (GObject *object,
                          GValue *value,
                          GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShell *shell = ARIO_SHELL (object);
 
         switch (prop_id) {
@@ -319,7 +319,7 @@ ario_shell_get_property (GObject *object,
 ArioShell *
 ario_shell_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShell *shell;
 
         shell = g_object_new (ARIO_TYPE_SHELL, NULL);
@@ -330,7 +330,7 @@ ario_shell_new (void)
 static void
 ario_shell_quit (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         if (ario_conf_get_boolean (PREF_STOP_EXIT, PREF_STOP_EXIT_DEFAULT))
                 ario_server_do_stop ();
@@ -342,7 +342,7 @@ ario_shell_window_delete_cb (GtkWidget *win,
                              GdkEventAny *event,
                              ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (ario_conf_get_boolean (PREF_HIDE_ON_CLOSE, PREF_HIDE_ON_CLOSE_DEFAULT)) {
                 ario_shell_set_visibility (shell, VISIBILITY_TOGGLE);
         } else {
@@ -355,7 +355,7 @@ void
 ario_shell_construct (ArioShell *shell,
                       gboolean minimized)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *menubar;
         GtkWidget *separator;
         GtkWidget *vbox;
@@ -497,7 +497,7 @@ ario_shell_construct (ArioShell *shell,
 void
 ario_shell_shutdown (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int width, height;
 
         if (shell->priv->shown) {
@@ -527,7 +527,7 @@ static void
 ario_shell_show (ArioShell *shell,
                  gboolean minimized)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServer *server = ario_server_get_instance ();
 
         g_signal_connect (server,
@@ -565,14 +565,14 @@ ario_shell_show (ArioShell *shell,
 void
 ario_shell_present (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_window_present (GTK_WINDOW (shell->priv->window));
 }
 
 void
 ario_shell_restore_main_window (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         if (!shell->priv->shown) {
                 gtk_widget_show_all (shell->priv->window);
@@ -602,7 +602,7 @@ void
 ario_shell_set_visibility (ArioShell *shell,
                            ArioVisibility state)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         switch (state)
         {
         case VISIBILITY_HIDDEN:
@@ -633,7 +633,7 @@ static void
 ario_shell_cmd_quit (GtkAction *action,
                      ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_shell_quit (shell);
 }
 
@@ -641,7 +641,7 @@ static void
 ario_shell_cmd_connect (GtkAction *action,
                         ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_connect ();
 }
 
@@ -649,7 +649,7 @@ static void
 ario_shell_cmd_disconnect (GtkAction *action,
                            ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_disconnect ();
 }
 
@@ -657,7 +657,7 @@ static void
 ario_shell_cmd_preferences (GtkAction *action,
                             ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *prefs;
 
         prefs = ario_shell_preferences_new ();
@@ -672,7 +672,7 @@ static void
 ario_shell_cmd_lyrics (GtkAction *action,
                        ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *lyrics;
 
         lyrics = ario_shell_lyrics_new ();
@@ -684,7 +684,7 @@ static void
 ario_shell_cmd_about (GtkAction *action,
                       ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const char *authors[] = {
 #include "AUTHORS.tab"
                 "",
@@ -714,7 +714,7 @@ static void
 ario_shell_cmd_translate (GtkAction *action,
                           ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const gchar *uri = "https://translations.launchpad.net/ario/trunk/";
         ario_util_load_uri (uri);
 }
@@ -722,7 +722,7 @@ ario_shell_cmd_translate (GtkAction *action,
 static void
 ario_shell_server_song_set_title (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *window_title;
         gchar *tmp;
 
@@ -744,7 +744,7 @@ static void
 ario_shell_server_song_changed_cb (ArioServer *server,
                                 ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_shell_server_song_set_title (shell);
 }
 
@@ -752,7 +752,7 @@ static void
 ario_shell_server_state_changed_cb (ArioServer *server,
                                  ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell->priv->connected = ario_server_is_connected ();
 
         ario_shell_sync_server (shell);
@@ -763,7 +763,7 @@ static void
 ario_shell_cmd_cover_select (GtkAction *action,
                              ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *coverselect;
         ArioServerAlbum server_album;
 
@@ -787,7 +787,7 @@ static void
 ario_shell_cmd_covers (GtkAction *action,
                        ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *coverdownloader;
 
         coverdownloader = ario_shell_coverdownloader_new ();
@@ -802,7 +802,7 @@ static void
 ario_shell_cmd_similar_artists (GtkAction *action,
                                 ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *similarartists;
 
         similarartists = ario_shell_similarartists_new ();
@@ -814,7 +814,7 @@ static void
 ario_shell_cmd_add_similar (GtkAction *action,
                             ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (), -1);
 }
@@ -822,7 +822,7 @@ ario_shell_cmd_add_similar (GtkAction *action,
 static void
 ario_shell_sync_paned (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int pos;
 
         pos = ario_conf_get_integer (PREF_VPANED_POSITION, PREF_VPANED_POSITION_DEFAULT);
@@ -836,7 +836,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
                             GdkEvent *event,
                             ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int width, height;
         g_return_val_if_fail (widget != NULL, FALSE);
 
@@ -860,7 +860,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
 static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkGeometry hints;
         int width = ario_conf_get_integer (PREF_WINDOW_WIDTH, PREF_WINDOW_WIDTH_DEFAULT); 
         int height = ario_conf_get_integer (PREF_WINDOW_HEIGHT, PREF_WINDOW_HEIGHT_DEFAULT);
@@ -884,7 +884,7 @@ ario_shell_sync_window_state (ArioShell *shell)
 static void
 ario_shell_sync_server (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkAction *connect_action;
         GtkAction *disconnect_action;
         gboolean is_playing;
@@ -923,7 +923,7 @@ static void
 ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                   ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_shell_show (shell, FALSE);
 }
 
@@ -931,7 +931,7 @@ static void
 ario_shell_view_statusbar_changed_cb (GtkAction *action,
                                       ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
 
@@ -942,7 +942,7 @@ static void
 ario_shell_view_upperpart_changed_cb (GtkAction *action,
                                       ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell->priv->upperpart_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_UPPERPART_HIDDEN, shell->priv->upperpart_hidden);
 
@@ -953,7 +953,7 @@ static void
 ario_shell_view_playlist_changed_cb (GtkAction *action,
                                      ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell->priv->playlist_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_PLAYLIST_HIDDEN, shell->priv->playlist_hidden);
 
@@ -963,7 +963,7 @@ ario_shell_view_playlist_changed_cb (GtkAction *action,
 static void
 ario_shell_sync_statusbar_visibility (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (shell->priv->statusbar_hidden)
                 gtk_widget_hide (GTK_WIDGET (shell->priv->status_bar));
         else
@@ -973,7 +973,7 @@ ario_shell_sync_statusbar_visibility (ArioShell *shell)
 static void
 ario_shell_sync_upperpart_visibility (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (shell->priv->upperpart_hidden)
                 gtk_widget_hide (GTK_WIDGET (shell->priv->sourcemanager));
         else
@@ -983,7 +983,7 @@ ario_shell_sync_upperpart_visibility (ArioShell *shell)
 static void
 ario_shell_sync_playlist_visibility (ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (shell->priv->playlist_hidden)
                 gtk_widget_hide (GTK_WIDGET (shell->priv->playlist));
         else
@@ -995,7 +995,7 @@ ario_shell_plugins_window_delete_cb (GtkWidget *window,
                                      GdkEventAny *event,
                                      gpointer data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_destroy (GTK_WIDGET (window));
         return TRUE;
 }
@@ -1005,7 +1005,7 @@ ario_shell_plugins_response_cb (GtkDialog *dialog,
                                 int response_id,
                                 gpointer data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
@@ -1013,7 +1013,7 @@ static void
 ario_shell_cmd_plugins (GtkAction *action,
                         ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *window;
         GtkWidget *manager;
 

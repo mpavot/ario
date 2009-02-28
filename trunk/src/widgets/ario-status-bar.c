@@ -38,14 +38,14 @@ G_DEFINE_TYPE (ArioStatusBar, ario_status_bar, GTK_TYPE_STATUSBAR)
 static void
 ario_status_bar_class_init (ArioStatusBarClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioStatusBarPrivate));
 }
 
 static void
 ario_status_bar_init (ArioStatusBar *status_bar)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         status_bar->priv = ARIO_STATUS_BAR_GET_PRIVATE (status_bar);
         status_bar->priv->ario_playlist_context_id = gtk_statusbar_get_context_id (GTK_STATUSBAR (status_bar), "PlaylistMsg");
 }
@@ -53,7 +53,7 @@ ario_status_bar_init (ArioStatusBar *status_bar)
 GtkWidget *
 ario_status_bar_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioStatusBar *status_bar;
         ArioServer *server = ario_server_get_instance ();
 
@@ -77,7 +77,7 @@ static void
 ario_status_bar_playlist_changed_cb (ArioServer *server,
                                      ArioStatusBar *status_bar)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *msg, *tmp;
         gchar *formated_total_time;
         int ario_playlist_length;

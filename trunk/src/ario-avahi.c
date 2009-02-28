@@ -87,7 +87,7 @@ G_DEFINE_TYPE (ArioAvahi, ario_avahi, G_TYPE_OBJECT)
 static void
 ario_avahi_class_init (ArioAvahiClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = (GObjectClass *) klass;
 
         object_class->finalize = ario_avahi_finalize;
@@ -108,7 +108,7 @@ ario_avahi_class_init (ArioAvahiClass *klass)
 static void
 ario_avahi_init (ArioAvahi *avahi) 
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int error;
 
         avahi->priv = ARIO_AVAHI_GET_PRIVATE (avahi);
@@ -141,7 +141,7 @@ ario_avahi_init (ArioAvahi *avahi)
 static void
 ario_avahi_free_hosts (ArioHost *host)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         if (host) {
                 g_free (host->name);
@@ -153,7 +153,7 @@ ario_avahi_free_hosts (ArioHost *host)
 static void
 ario_avahi_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioAvahi *avahi = ARIO_AVAHI (object);
 
         if (avahi->priv->client)
@@ -169,7 +169,7 @@ ario_avahi_finalize (GObject *object)
 ArioAvahi *
 ario_avahi_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioAvahi *avahi;
 
         avahi = g_object_new (TYPE_ARIO_AVAHI, NULL);
@@ -239,7 +239,7 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                                          AvahiLookupResultFlags flags,
                                          AVAHI_GCC_UNUSED void *userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         assert(r);
         ArioAvahi *avahi = ARIO_AVAHI (userdata);
 
@@ -278,7 +278,7 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
 static void ario_avahi_remove_host (ArioAvahi *avahi,
                                     const gchar *name)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
 
         for (tmp = avahi->priv->hosts; tmp; tmp = g_slist_next (tmp)) {
@@ -300,7 +300,7 @@ static void ario_avahi_browse_callback (AvahiServiceBrowser *b,
                                         AVAHI_GCC_UNUSED AvahiLookupResultFlags flags,
                                         void *userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         assert(b);
         ArioAvahi *avahi = ARIO_AVAHI (userdata);
 
@@ -338,7 +338,7 @@ static void ario_avahi_client_callback (AvahiClient *c,
                                         AvahiClientState state,
                                         AVAHI_GCC_UNUSED void *userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         assert(c);
 
         /* Called whenever the client or server state changes */
@@ -351,7 +351,7 @@ static void ario_avahi_client_callback (AvahiClient *c,
 GSList *
 ario_avahi_get_hosts (ArioAvahi *avahi)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         return avahi->priv->hosts;
 }

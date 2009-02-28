@@ -65,7 +65,7 @@ ario_profiles_get_xml_filename (void)
 void
 ario_profiles_free (ArioProfile* profile)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (profile) {
                 g_free (profile->name);
                 g_free (profile->host);
@@ -78,7 +78,7 @@ ario_profiles_free (ArioProfile* profile)
 GSList*
 ario_profiles_get (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static GSList *profiles = NULL;
         ArioProfile *profile;
         xmlDocPtr doc;
@@ -187,7 +187,7 @@ ario_profiles_get (void)
 void
 ario_profiles_save (GSList* profiles)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur, cur2;
         char *xml_filename;
@@ -255,7 +255,7 @@ ario_profiles_save (GSList* profiles)
 ArioProfile*
 ario_profiles_get_current (GSList* profiles)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioProfile *profile;
 
@@ -271,7 +271,7 @@ void
 ario_profiles_set_current (GSList* profiles,
                            ArioProfile* profile)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioProfile *tmp_profile;
 

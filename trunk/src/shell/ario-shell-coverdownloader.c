@@ -78,7 +78,7 @@ G_DEFINE_TYPE (ArioShellCoverdownloader, ario_shell_coverdownloader, GTK_TYPE_WI
 static void
 ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_coverdownloader_finalize;
@@ -90,7 +90,7 @@ ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
 static void
 ario_shell_coverdownloader_init (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_shell_coverdownloader->priv = ARIO_SHELL_COVERDOWNLOADER_GET_PRIVATE (ario_shell_coverdownloader);
         ario_shell_coverdownloader->priv->cancelled = FALSE;
 }
@@ -98,7 +98,7 @@ ario_shell_coverdownloader_init (ArioShellCoverdownloader *ario_shell_coverdownl
 static void
 ario_shell_coverdownloader_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellCoverdownloader *ario_shell_coverdownloader;
 
         g_return_if_fail (object != NULL);
@@ -123,7 +123,7 @@ ario_shell_coverdownloader_finalize (GObject *object)
 GtkWidget *
 ario_shell_coverdownloader_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellCoverdownloader *ario_shell_coverdownloader;
 
         if (is_instantiated)
@@ -143,7 +143,7 @@ static GObject *
 ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties,
                                         GObjectConstructParam *construct_properties)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellCoverdownloader *ario_shell_coverdownloader;
         ArioShellCoverdownloaderClass *klass;
         GObjectClass *parent_class;
@@ -206,7 +206,7 @@ static void
 ario_shell_coverdownloader_close_cb (GtkButton *button,
                                      ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* Close button pressed : we close and destroy the window */
         ario_shell_coverdownloader->priv->cancelled = TRUE;
         gtk_widget_hide (GTK_WIDGET (ario_shell_coverdownloader));
@@ -217,7 +217,7 @@ static void
 ario_shell_coverdownloader_cancel_cb (GtkButton *button,
                                       ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* Cancel button pressed : we wait until the end of the current download and we stop the search */
         ario_shell_coverdownloader->priv->cancelled = TRUE;
 }
@@ -227,7 +227,7 @@ ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
                                              GdkEventAny *event,
                                              ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!ario_shell_coverdownloader->priv->cancelled) {
                 /* window destroyed for the first time : we wait until the end of the current download and we stop the search */
                 ario_shell_coverdownloader->priv->cancelled = TRUE;
@@ -252,7 +252,7 @@ ario_shell_coverdownloader_refresh (gpointer data)
 static gboolean 
 ario_shell_coverdownloader_progress_start (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_window_resize (GTK_WINDOW (ario_shell_coverdownloader), 350, 150);
 
         /*gtk_window_set_policy (GTK_WINDOW (ario_shell_coverdownloader), FALSE, TRUE, FALSE);*/
@@ -281,7 +281,7 @@ typedef struct
 static gboolean
 ario_shell_coverdownloader_progress_update (ArioShellCoverdownloaderIdleData *data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* We have already searched for nb_covers_done covers */
         gdouble nb_covers_done = (data->ario_shell_coverdownloader->priv->nb_covers_found 
                                   + data->ario_shell_coverdownloader->priv->nb_covers_not_found 
@@ -308,7 +308,7 @@ ario_shell_coverdownloader_progress_update (ArioShellCoverdownloaderIdleData *da
 static gboolean
 ario_shell_coverdownloader_progress_end (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *label_text;
 
         /* We only want the close button at the end, not the cancel button */
@@ -342,7 +342,7 @@ void
 ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_coverdownloader,
                                        const ArioShellCoverdownloaderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *albums = ario_server_get_albums (NULL);
 
         ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader,
@@ -356,7 +356,7 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
 static gboolean
 ario_shell_coverdownloader_force_reload (gpointer data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_cover_handler_force_reload();
 
         return FALSE;
@@ -365,7 +365,7 @@ ario_shell_coverdownloader_force_reload (gpointer data)
 static gpointer
 ario_shell_coverdownloader_get_covers_from_albums_thread (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
 
         if (!ario_shell_coverdownloader->priv->albums)
@@ -404,7 +404,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
                                                    const GSList *albums,
                                                    const ArioShellCoverdownloaderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
 
         if (!albums)
@@ -428,7 +428,7 @@ ario_shell_coverdownloader_get_cover_from_album (ArioShellCoverdownloader *ario_
                                                  const ArioServerAlbum *server_album,
                                                  const ArioShellCoverdownloaderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const gchar *artist;
         const gchar *album;
         const gchar *path;
@@ -478,7 +478,7 @@ ario_shell_coverdownloader_get_cover (ArioShellCoverdownloader *ario_shell_cover
                                       const char *album,
                                       const char *path)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GArray *size;
         GSList *data = NULL;
         gboolean ret;

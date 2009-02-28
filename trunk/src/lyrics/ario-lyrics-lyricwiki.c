@@ -60,7 +60,7 @@ ario_lyrics_lyricwiki_get_name (ArioLyricsProvider *lyrics_provider)
 static void
 ario_lyrics_lyricwiki_class_init (ArioLyricsLyricwikiClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsProviderClass *lyrics_provider_class = ARIO_LYRICS_PROVIDER_CLASS (klass);
 
         lyrics_provider_class->get_id = ario_lyrics_lyricwiki_get_id;
@@ -73,13 +73,13 @@ ario_lyrics_lyricwiki_class_init (ArioLyricsLyricwikiClass *klass)
 static void
 ario_lyrics_lyricwiki_init (ArioLyricsLyricwiki *lyrics_lyricwiki)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 ArioLyricsProvider*
 ario_lyrics_lyricwiki_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsLyricwiki *lyricwiki;
 
         lyricwiki = g_object_new (TYPE_ARIO_LYRICS_LYRICWIKI,
@@ -92,7 +92,7 @@ static ArioLyrics *
 ario_lyrics_lyricwiki_parse_xml_file (gchar *xmldata,
                                       int size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlChar *xml_lyrics = NULL;
@@ -169,7 +169,7 @@ ario_lyrics_lyricwiki_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                   const char *title,
                                   const char *file)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int lyrics_size;
         char *lyrics_data;
         ArioLyrics *lyrics = NULL;
@@ -247,7 +247,7 @@ ario_lyrics_lyricwiki_get_lyrics_candidates (ArioLyricsProvider *lyrics_provider
                                              const gchar *title,
                                              GSList **candidates)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyrics *lyrics;
         ArioLyricsCandidate *candidate;
 
@@ -273,7 +273,7 @@ static ArioLyrics *
 ario_lyrics_lyricwiki_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_provider,
                                                  const ArioLyricsCandidate *candidate)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyrics *lyrics;
 
         lyrics = (ArioLyrics *) g_malloc0 (sizeof (ArioLyrics));

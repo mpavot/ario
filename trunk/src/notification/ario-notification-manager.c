@@ -42,14 +42,14 @@ G_DEFINE_TYPE (ArioNotificationManager, ario_notification_manager, G_TYPE_OBJECT
 static void
 ario_notification_manager_class_init (ArioNotificationManagerClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioNotificationManagerPrivate));
 }
 
 static void
 ario_notification_manager_init (ArioNotificationManager *notification_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         notification_manager->priv = ARIO_NOTIFICATION_MANAGER_GET_PRIVATE (notification_manager);
 }
@@ -57,7 +57,7 @@ ario_notification_manager_init (ArioNotificationManager *notification_manager)
 ArioNotificationManager *
 ario_notification_manager_get_instance (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static ArioNotificationManager *notification_manager = NULL;
         ArioServer *server;
 
@@ -97,7 +97,7 @@ ario_notification_manager_compare_notifiers (ArioNotifier *notifier,
 GSList*
 ario_notification_manager_get_notifiers (ArioNotificationManager *notification_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return notification_manager->priv->notifiers;
 }
 
@@ -105,7 +105,7 @@ ArioNotifier*
 ario_notification_manager_get_notifier_from_id (ArioNotificationManager *notification_manager,
                                                 const gchar *id)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *found;
 
         found = g_slist_find_custom (notification_manager->priv->notifiers,
@@ -122,7 +122,7 @@ void
 ario_notification_manager_add_notifier (ArioNotificationManager *notification_manager,
                                         ArioNotifier *notifier)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         notification_manager->priv->notifiers = g_slist_append (notification_manager->priv->notifiers, notifier);
 }
 
@@ -130,7 +130,7 @@ void
 ario_notification_manager_remove_notifier (ArioNotificationManager *notification_manager,
                                            ArioNotifier *notifier)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         notification_manager->priv->notifiers = g_slist_remove (notification_manager->priv->notifiers, notifier);
 }
 
@@ -138,7 +138,7 @@ static void
 ario_notification_manager_song_changed_cb (ArioServer *server,
                                            ArioNotificationManager *notification_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const gchar *id;
         ArioNotifier *notifier;
 

@@ -126,7 +126,7 @@ ario_lyrics_provider_get_lyrics (ArioLyricsProvider *lyrics_provider,
 gboolean
 ario_lyrics_provider_is_active (ArioLyricsProvider *lyrics_provider)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return lyrics_provider->is_active;
 }
 
@@ -134,7 +134,7 @@ void
 ario_lyrics_provider_set_active (ArioLyricsProvider *lyrics_provider,
                                  gboolean is_active)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         lyrics_provider->is_active = is_active;
 }
 

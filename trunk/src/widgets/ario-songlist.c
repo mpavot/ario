@@ -90,7 +90,7 @@ G_DEFINE_TYPE (ArioSonglist, ario_songlist, GTK_TYPE_TREE_VIEW)
 static void
 ario_songlist_class_init (ArioSonglistClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_songlist_finalize;
@@ -112,7 +112,7 @@ ario_songlist_class_init (ArioSonglistClass *klass)
 static void
 ario_songlist_init (ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         songlist->priv = ARIO_SONGLIST_GET_PRIVATE (songlist);
 }
@@ -120,7 +120,7 @@ ario_songlist_init (ArioSonglist *songlist)
 static void
 ario_songlist_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSonglist *songlist;
 
         g_return_if_fail (object != NULL);
@@ -140,7 +140,7 @@ ario_songlist_set_property (GObject *object,
                             const GValue *value,
                             GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSonglist *songlist = ARIO_SONGLIST (object);
 
         switch (prop_id) {
@@ -159,7 +159,7 @@ ario_songlist_get_property (GObject *object,
                             GValue *value,
                             GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSonglist *songlist = ARIO_SONGLIST (object);
 
         switch (prop_id) {
@@ -177,7 +177,7 @@ ario_songlist_new (GtkUIManager *mgr,
                    gchar *popup,
                    gboolean is_sortable)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSonglist *songlist;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
@@ -279,7 +279,7 @@ songlists_foreach (GtkTreeModel *model,
                    GtkTreeIter *iter,
                    gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList **songlists = (GSList **) userdata;
         gchar *val = NULL;
 
@@ -292,7 +292,7 @@ static void
 ario_songlist_add_in_playlist (ArioSonglist *songlist,
                                gboolean play)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *songlists = NULL;
 
         gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
@@ -308,7 +308,7 @@ void
 ario_songlist_cmd_add_songlists (GtkAction *action,
                                  ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_songlist_add_in_playlist (songlist, FALSE);
 }
 
@@ -316,7 +316,7 @@ void
 ario_songlist_cmd_add_play_songlists (GtkAction *action,
                                       ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_songlist_add_in_playlist (songlist, TRUE);
 }
 
@@ -324,7 +324,7 @@ void
 ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
                                             ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_clear ();
         ario_songlist_add_in_playlist (songlist, TRUE);
 }
@@ -333,7 +333,7 @@ void
 ario_songlist_cmd_songs_properties (GtkAction *action,
                                     ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *paths = NULL;
         GtkWidget *songinfos;
 
@@ -354,7 +354,7 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
 static void
 ario_songlist_popup_menu (ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
         if (songlist->priv->popup) {
@@ -370,7 +370,7 @@ ario_songlist_button_press_cb (GtkWidget *widget,
                                GdkEventButton *event,
                                ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         GtkTreePath *path;
         int x, y, bx, by;
@@ -435,7 +435,7 @@ ario_songlist_button_release_cb (GtkWidget *widget,
                                  GdkEventButton *event,
                                  ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!songlist->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
                 int bx, by;
                 gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), event->x, event->y, &bx, &by);
@@ -464,7 +464,7 @@ ario_songlist_motion_notify_cb (GtkWidget *widget,
                                 ArioSonglist *songlist)
 {
         // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
+        // ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         int x, y;
         int dx, dy;
@@ -489,7 +489,7 @@ ario_songlist_songlists_selection_drag_foreach (GtkTreeModel *model,
                                                 GtkTreeIter *iter,
                                                 gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GString *songlists = (GString *) userdata;
         g_return_if_fail (songlists != NULL);
 
@@ -507,7 +507,7 @@ ario_songlist_drag_data_get_cb (GtkWidget * widget,
                                 GtkSelectionData * selection_data,
                                 guint info, guint time, gpointer data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSonglist *songlist;
         GString* songlists = NULL;
 
@@ -531,6 +531,6 @@ ario_songlist_drag_data_get_cb (GtkWidget * widget,
 GtkListStore *
 ario_songlist_get_liststore (ArioSonglist *songlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return songlist->priv->songlists_model;
 }

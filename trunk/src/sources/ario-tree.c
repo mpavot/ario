@@ -177,7 +177,7 @@ G_DEFINE_TYPE (ArioTree, ario_tree, GTK_TYPE_SCROLLED_WINDOW)
 static void
 ario_tree_class_init (ArioTreeClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_tree_finalize;
@@ -254,21 +254,21 @@ ario_tree_albums_sort_func (GtkTreeModel *model,
 static void
 ario_tree_init (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         tree->priv = ARIO_TREE_GET_PRIVATE (tree);
 }
 
 static gboolean
 ario_tree_is_album_tree (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return (tree->priv->tag == MPD_TAG_ITEM_ALBUM) && !tree->priv->is_first;
 }
 
 static gboolean
 ario_tree_is_song_tree (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return (tree->priv->tag == MPD_TAG_ITEM_TITLE) && !tree->priv->is_first;
 }
 
@@ -278,7 +278,7 @@ ario_tree_album_free (GtkTreeModel *model,
                       GtkTreeIter *iter,
                       gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree = ARIO_TREE (userdata);
         ArioServerAlbum *album;
         g_return_val_if_fail (IS_ARIO_TREE (tree), FALSE);
@@ -292,7 +292,7 @@ ario_tree_album_free (GtkTreeModel *model,
 static void
 ario_tree_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree;
 
         g_return_if_fail (object != NULL);
@@ -326,7 +326,7 @@ ario_tree_set_property (GObject *object,
                         const GValue *value,
                         GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree = ARIO_TREE (object);
 
         switch (prop_id) {
@@ -345,7 +345,7 @@ ario_tree_get_property (GObject *object,
                         GValue *value,
                         GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree = ARIO_TREE (object);
 
         switch (prop_id) {
@@ -363,7 +363,7 @@ ario_tree_new (GtkUIManager *mgr,
                ArioServerTag tag,
                gboolean is_first)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
@@ -528,7 +528,7 @@ ario_tree_new (GtkUIManager *mgr,
 static void
 ario_tree_popup_menu (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
         if ((tree->priv->tag == MPD_TAG_ITEM_ALBUM)
@@ -550,7 +550,7 @@ ario_tree_button_press_cb (GtkWidget *widget,
                            GdkEventButton *event,
                            ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         GtkTreePath *path;
         int x, y;
@@ -609,7 +609,7 @@ ario_tree_button_release_cb (GtkWidget *widget,
                              GdkEventButton *event,
                              ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!tree->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
                 GtkTreePath *path;
 
@@ -638,7 +638,7 @@ ario_tree_motion_notify (GtkWidget *widget,
                          ArioTree *tree)
 {
         // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
+        // ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         int x, y;
         int dx, dy;
@@ -663,7 +663,7 @@ get_selected_songs_foreach (GtkTreeModel *model,
                             GtkTreeIter *iter,
                             gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList **songs = (GSList **) userdata;
         gchar *val = NULL;
 
@@ -678,7 +678,7 @@ get_selected_albums_foreach (GtkTreeModel *model,
                              GtkTreeIter *iter,
                              gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList **albums = (GSList **) userdata;
 
         ArioServerAlbum *server_album;
@@ -695,7 +695,7 @@ ario_tree_covers_update (GtkTreeModel *model,
                          GtkTreeIter *iter,
                          gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree = ARIO_TREE (userdata);
         ArioServerAlbum *album;
         gchar *cover_path;
@@ -730,7 +730,7 @@ static void
 ario_tree_cover_changed_cb (ArioCoverHandler *cover_handler,
                             ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_tree_model_foreach (GTK_TREE_MODEL (tree->priv->model),
                                 (GtkTreeModelForeachFunc) ario_tree_covers_update,
                                 tree);
@@ -742,7 +742,7 @@ ario_tree_selection_drag_foreach (GtkTreeModel *model,
                                   GtkTreeIter *iter,
                                   gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTreeStringData *data = (ArioTreeStringData *) userdata;
         gchar *val;
         gchar buf[INTLEN];
@@ -787,7 +787,7 @@ ario_tree_drag_data_get_cb (GtkWidget *widget,
                             GtkSelectionData *selection_data,
                             guint info, guint time, gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTree *tree;
         GString* string = NULL;
         ArioTreeStringData data;
@@ -815,7 +815,7 @@ void ario_tree_drag_begin_cb (GtkWidget *widget,
                               GdkDragContext *context,
                               ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *albums = NULL;
         GSList *criterias = NULL;
         GdkPixbuf *pixbuf;
@@ -845,7 +845,7 @@ static void
 ario_tree_covertree_visible_changed_cb (guint notification_id,
                                         ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (tree->priv->tree), 0),
                                           !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         /* Update display */
@@ -868,7 +868,7 @@ static void
 ario_tree_selection_changed_cb (GtkTreeSelection *selection,
                                 ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_signal_emit (G_OBJECT (tree), ario_tree_signals[SELECTION_CHANGED], 0);
 }
 
@@ -877,7 +877,7 @@ ario_tree_add_next_albums (ArioTree *tree,
                            const GSList *albums,
                            ArioServerCriteria *criteria)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
         ArioServerAlbum *server_album;
         GtkTreeIter album_iter;
@@ -925,7 +925,7 @@ ario_tree_add_next_albums (ArioTree *tree,
 static void
 ario_tree_fill_albums (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *albums, *tmp;
 
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
@@ -940,7 +940,7 @@ ario_tree_add_next_songs (ArioTree *tree,
                           const GSList *songs,
                           ArioServerCriteria *criteria)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
         ArioServerSong *song;
         GtkTreeIter iter;
@@ -965,7 +965,7 @@ ario_tree_add_next_songs (ArioTree *tree,
 static void
 ario_tree_fill_songs (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *songs, *tmp;
 
         for (tmp = tree->priv->criterias; tmp; tmp = g_slist_next (tmp)) {
@@ -987,7 +987,7 @@ typedef struct ArioTreeAddData
 static gboolean
 ario_tree_add_tags_idle (ArioTreeAddData *data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
 
         if (!data->tmp) {
@@ -1019,7 +1019,7 @@ ario_tree_add_tags (ArioTree *tree,
                     ArioServerCriteria *criteria,
                     GSList *tags)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTreeAddData *data;
         GSList *tmp;
         GtkTreeIter iter;
@@ -1050,7 +1050,7 @@ ario_tree_add_tags (ArioTree *tree,
 void
 ario_tree_fill (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp, *tags;
         GtkTreeIter iter;
         GList *paths = NULL;
@@ -1120,7 +1120,7 @@ ario_tree_fill (ArioTree *tree)
 void
 ario_tree_clear_criterias (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         g_slist_foreach (tree->priv->criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (tree->priv->criterias);
@@ -1131,7 +1131,7 @@ void
 ario_tree_add_criteria (ArioTree *tree,
                         ArioServerCriteria *criteria)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         tree->priv->criterias = g_slist_append (tree->priv->criterias, criteria);
 }
 
@@ -1141,7 +1141,7 @@ ario_tree_selection_foreach (GtkTreeModel *model,
                              GtkTreeIter *iter,
                              ArioServerCriteriaData *data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *value;
         ArioServerCriteria *criteria;
         ArioServerCriteria *ret;
@@ -1164,7 +1164,7 @@ ario_tree_selection_foreach (GtkTreeModel *model,
 GSList *
 ario_tree_get_criterias (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerCriteriaData data;
         GSList *criterias = NULL;
 
@@ -1182,7 +1182,7 @@ void
 ario_tree_cmd_add (ArioTree *tree,
                    const gboolean play)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *criterias = NULL;
 
         criterias = ario_tree_get_criterias (tree);
@@ -1197,7 +1197,7 @@ static void
 get_cover (ArioTree *tree,
            const guint operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *criterias = NULL, *tmp;
         GtkWidget *coverdownloader;
         GSList *albums = NULL;
@@ -1223,14 +1223,14 @@ get_cover (ArioTree *tree,
 void 
 ario_tree_cmd_get_cover (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         get_cover (tree, GET_COVERS);
 }
 
 void 
 ario_tree_cmd_remove_cover (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
 
@@ -1251,7 +1251,7 @@ ario_tree_cmd_remove_cover (ArioTree *tree)
 void
 ario_tree_cmd_albums_properties (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *coverselect;
         GSList *albums = NULL;
         ArioServerAlbum *ario_server_album;
@@ -1271,7 +1271,7 @@ ario_tree_cmd_albums_properties (ArioTree *tree)
 void
 ario_tree_cmd_songs_properties (ArioTree *tree)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *paths = NULL;
         GtkWidget *songinfos;
 
@@ -1326,7 +1326,7 @@ void
 ario_tree_goto_playling_song (ArioTree *tree,
                               const ArioServerSong *song)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTreeForeachData data;
         data.tree = tree;
         data.tag = ario_server_song_get_tag (song, tree->priv->tag);

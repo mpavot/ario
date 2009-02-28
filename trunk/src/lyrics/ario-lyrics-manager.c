@@ -40,14 +40,14 @@ G_DEFINE_TYPE (ArioLyricsManager, ario_lyrics_manager, G_TYPE_OBJECT)
 static void
 ario_lyrics_manager_class_init (ArioLyricsManagerClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioLyricsManagerPrivate));
 }
 
 static void
 ario_lyrics_manager_init (ArioLyricsManager *lyrics_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         lyrics_manager->priv = ARIO_LYRICS_MANAGER_GET_PRIVATE (lyrics_manager);
 }
@@ -55,7 +55,7 @@ ario_lyrics_manager_init (ArioLyricsManager *lyrics_manager)
 ArioLyricsManager *
 ario_lyrics_manager_get_instance (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static ArioLyricsManager *lyrics_manager = NULL;
 
         if (!lyrics_manager) {
@@ -120,7 +120,7 @@ ario_lyrics_manager_compare_providers (ArioLyricsProvider *lyrics_provider,
 void
 ario_lyrics_manager_update_providers (ArioLyricsManager *lyrics_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *conf_tmp;
         GSList *conf_providers;
         GSList *conf_active_providers;
@@ -166,7 +166,7 @@ ario_lyrics_manager_update_providers (ArioLyricsManager *lyrics_manager)
 GSList*
 ario_lyrics_manager_get_providers (ArioLyricsManager *lyrics_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return lyrics_manager->priv->providers;
 }
 
@@ -174,7 +174,7 @@ void
 ario_lyrics_manager_set_providers (ArioLyricsManager *lyrics_manager,
                                    GSList *providers)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         lyrics_manager->priv->providers = providers;
 }
 
@@ -182,7 +182,7 @@ ArioLyricsProvider*
 ario_lyrics_manager_get_provider_from_id (ArioLyricsManager *lyrics_manager,
                                           const gchar *id)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *found;
 
         found = g_slist_find_custom (lyrics_manager->priv->providers,
@@ -197,7 +197,7 @@ void
 ario_lyrics_manager_add_provider (ArioLyricsManager *lyrics_manager,
                                   ArioLyricsProvider *lyrics_provider)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         lyrics_manager->priv->providers = g_slist_append (lyrics_manager->priv->providers, lyrics_provider);
 }
 
@@ -205,7 +205,7 @@ void
 ario_lyrics_manager_remove_provider (ArioLyricsManager *lyrics_manager,
                                      ArioLyricsProvider *lyrics_provider)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         lyrics_manager->priv->providers = g_slist_remove (lyrics_manager->priv->providers, lyrics_provider);
 }
 
@@ -215,7 +215,7 @@ ario_lyrics_manager_get_lyrics (ArioLyricsManager *lyrics_manager,
                                 const char *song,
                                 const char *file)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioLyricsProvider *lyrics_provider;
         ArioLyrics *lyrics = NULL;
@@ -255,7 +255,7 @@ ario_lyrics_manager_get_lyrics_candidates (ArioLyricsManager *lyrics_manager,
                                            const gchar *song,
                                            GSList **candidates)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioLyricsProvider *lyrics_provider;
 

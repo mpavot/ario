@@ -173,7 +173,7 @@ ario_radio_get_icon (ArioSource *source)
 static void
 ario_radio_class_init (ArioRadioClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
@@ -200,7 +200,7 @@ ario_radio_class_init (ArioRadioClass *klass)
 static void
 ario_radio_init (ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
 
@@ -267,7 +267,7 @@ ario_radio_init (ArioRadio *radio)
 static void
 ario_radio_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioRadio *radio;
         int i;
 
@@ -295,7 +295,7 @@ ario_radio_set_property (GObject *object,
                          const GValue *value,
                          GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioRadio *radio = ARIO_RADIO (object);
 
         switch (prop_id) {
@@ -314,7 +314,7 @@ ario_radio_get_property (GObject *object,
                          GValue *value,
                          GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioRadio *radio = ARIO_RADIO (object);
 
         switch (prop_id) {
@@ -331,7 +331,7 @@ GtkWidget *
 ario_radio_new (GtkUIManager *mgr,
                 GtkActionGroup *group)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioRadio *radio;
 
         radio = g_object_new (TYPE_ARIO_RADIO,
@@ -360,7 +360,7 @@ ario_radio_new (GtkUIManager *mgr,
 static void
 ario_radio_free_internet_radio (ArioInternetRadio *internet_radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (internet_radio) {
                 g_free (internet_radio->name);
                 g_free (internet_radio->url);
@@ -406,7 +406,7 @@ ario_radio_get_xml_filename (void)
 static gboolean
 ario_radio_fill_doc (ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_filename;
         xmlNodePtr cur;
 
@@ -442,7 +442,7 @@ ario_radio_fill_doc (ArioRadio *radio)
 static GSList*
 ario_radio_get_radios (ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList* radios = NULL;
         ArioInternetRadio *internet_radio;
         xmlNodePtr cur;
@@ -477,7 +477,7 @@ static void
 ario_radio_append_radio (ArioRadio *radio,
                          ArioInternetRadio *internet_radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter radio_iter;
 
         gtk_list_store_append (radio->priv->radios_model, &radio_iter);
@@ -490,7 +490,7 @@ ario_radio_append_radio (ArioRadio *radio,
 static void
 ario_radio_fill_radios (ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *radios;
         GSList *temp;
         GtkTreeIter radio_iter;
@@ -535,7 +535,7 @@ static void
 ario_radio_state_changed_cb (ArioServer *server,
                              ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         if (radio->priv->connected != ario_server_is_connected ()) {
                 radio->priv->connected = ario_server_is_connected ();
@@ -549,7 +549,7 @@ radios_foreach (GtkTreeModel *model,
                 GtkTreeIter *iter,
                 gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList **radios = (GSList **) userdata;
         gchar *val = NULL;
 
@@ -564,7 +564,7 @@ radios_foreach2 (GtkTreeModel *model,
                  GtkTreeIter *iter,
                  gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList **internet_radios = (GSList **) userdata;
         ArioInternetRadio *internet_radio = (ArioInternetRadio *) g_malloc (sizeof (ArioInternetRadio));
 
@@ -578,7 +578,7 @@ static void
 ario_radio_add_in_playlist (ArioRadio *radio,
                             gboolean play)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *radios = NULL;
 
         gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
@@ -594,7 +594,7 @@ static void
 ario_radio_cmd_add_radios (GtkAction *action,
                            ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_radio_add_in_playlist (radio, FALSE);
 }
 
@@ -602,7 +602,7 @@ static void
 ario_radio_cmd_add_play_radios (GtkAction *action,
                                 ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_radio_add_in_playlist (radio, TRUE);
 }
 
@@ -610,7 +610,7 @@ static void
 ario_radio_cmd_clear_add_play_radios (GtkAction *action,
                                       ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_clear ();
         ario_radio_add_in_playlist (radio, TRUE);
 }
@@ -618,7 +618,7 @@ ario_radio_cmd_clear_add_play_radios (GtkAction *action,
 static void
 ario_radio_popup_menu (ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
         if (gtk_tree_selection_count_selected_rows (radio->priv->radios_selection) == 1) {
@@ -636,7 +636,7 @@ ario_radio_button_press_cb (GtkWidget *widget,
                             GdkEventButton *event,
                             ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         GtkTreePath *path;
         int x, y;
@@ -697,7 +697,7 @@ ario_radio_button_release_cb (GtkWidget *widget,
                               GdkEventButton *event,
                               ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!radio->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
                 GtkTreePath *path;
 
@@ -726,7 +726,7 @@ ario_radio_motion_notify (GtkWidget *widget,
                           ArioRadio *radio)
 {
         // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START
+        // ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         int x, y;
         int dx, dy;
@@ -751,7 +751,7 @@ ario_radio_radios_selection_drag_foreach (GtkTreeModel *model,
                                           GtkTreeIter *iter,
                                           gpointer userdata)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GString *radios = (GString *) userdata;
         g_return_if_fail (radios != NULL);
 
@@ -769,7 +769,7 @@ ario_radio_drag_data_get_cb (GtkWidget * widget,
                              GtkSelectionData * selection_data,
                              guint info, guint time, gpointer data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioRadio *radio;
         GString* radios = NULL;
 
@@ -794,7 +794,7 @@ static void
 ario_radio_add_new_radio (ArioRadio *radio,
                           ArioInternetRadio *internet_radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlNodePtr cur, cur2;
 
         if (!ario_radio_fill_doc (radio))
@@ -817,7 +817,7 @@ static void
 ario_radio_cmd_new_radio (GtkAction *action,
                           ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         GtkWidget *dialog, *error_dialog;
         GtkWidget *table;
@@ -909,7 +909,7 @@ static void
 ario_radio_delete_radio (ArioInternetRadio *internet_radio,
                          ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlNodePtr cur, next_cur;
         xmlChar *xml_name;
         xmlChar *xml_url;
@@ -945,7 +945,7 @@ static void
 ario_radio_cmd_delete_radios (GtkAction *action,
                               ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *internet_radios = NULL;
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
@@ -975,9 +975,9 @@ ario_radio_modify_radio (ArioRadio *radio,
                          ArioInternetRadio *old_internet_radio,
                          ArioInternetRadio *new_internet_radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlNodePtr cur, next_cur;
         xmlChar *xml_name;
         xmlChar *xml_url;
@@ -1016,7 +1016,7 @@ static void
 ario_radio_edit_radio_properties (ArioRadio *radio,
                                   ArioInternetRadio *internet_radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         GtkWidget *dialog, *error_dialog;
         GtkWidget *table;
@@ -1110,7 +1110,7 @@ static void
 ario_radio_cmd_radio_properties (GtkAction *action,
                                  ArioRadio *radio)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GList* paths;
         GtkTreeIter iter;
         ArioInternetRadio *internet_radio;

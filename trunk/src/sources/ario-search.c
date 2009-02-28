@@ -122,7 +122,7 @@ ario_search_get_icon (ArioSource *source)
 static void
 ario_search_class_init (ArioSearchClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
@@ -148,7 +148,7 @@ ario_search_class_init (ArioSearchClass *klass)
 static void
 ario_search_init (ArioSearch *search)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *hbox;
         GtkTreeIter iter;
         GtkWidget *image;
@@ -224,7 +224,7 @@ ario_search_init (ArioSearch *search)
 static void
 ario_search_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSearch *search;
 
         g_return_if_fail (object != NULL);
@@ -244,7 +244,7 @@ ario_search_set_property (GObject *object,
                           const GValue *value,
                           GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSearch *search = ARIO_SEARCH (object);
 
         switch (prop_id) {
@@ -263,7 +263,7 @@ ario_search_get_property (GObject *object,
                           GValue *value,
                           GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSearch *search = ARIO_SEARCH (object);
 
         switch (prop_id) {
@@ -280,7 +280,7 @@ GtkWidget *
 ario_search_new (GtkUIManager *mgr,
                  GtkActionGroup *group)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSearch *search;
         GtkWidget *scrolledwindow_searchs;
 
@@ -320,7 +320,7 @@ static void
 ario_search_connectivity_changed_cb (ArioServer *server,
                                      ArioSearch *search)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         search->priv->connected = ario_server_is_connected ();
 }
 
@@ -328,7 +328,7 @@ static void
 ario_search_entry_grab_focus (GtkEntry *entry,
                               ArioSearch *search)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GTK_WIDGET_SET_FLAGS (search->priv->search_button, GTK_CAN_DEFAULT);
         gtk_widget_grab_default (search->priv->search_button);
 }
@@ -337,7 +337,7 @@ static void
 ario_search_do_plus (GtkButton *button,
                      ArioSearch *search)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkCellRenderer *renderer;
         GtkTreeIter iter, prev_iter;
         GtkWidget *image;
@@ -417,7 +417,7 @@ ario_search_do_minus (GtkButton *button,
                       ArioSearch *search)
 
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSearchConstraint *search_constraint;
         GSList *tmp;
 
@@ -450,7 +450,7 @@ static void
 ario_search_do_search (GtkButton *button,
                        ArioSearch *search)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSearchConstraint *search_constraint;
         ArioServerAtomicCriteria *atomic_criteria;
         GSList *criteria = NULL;

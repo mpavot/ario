@@ -47,7 +47,7 @@ ario_notifier_tooltip_notify (ArioNotifier *notifier)
 static void
 ario_notifier_tooltip_class_init (ArioNotifierTooltipClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioNotifierClass *notifier_class = ARIO_NOTIFIER_CLASS (klass);
 
         notifier_class->get_id = ario_notifier_tooltip_get_id;
@@ -58,13 +58,13 @@ ario_notifier_tooltip_class_init (ArioNotifierTooltipClass *klass)
 static void
 ario_notifier_tooltip_init (ArioNotifierTooltip *notifier_tooltip)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 ArioNotifier*
 ario_notifier_tooltip_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioNotifierTooltip *local;
 
         local = g_object_new (TYPE_ARIO_NOTIFIER_TOOLTIP, NULL);

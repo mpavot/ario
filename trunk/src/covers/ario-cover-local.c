@@ -63,7 +63,7 @@ ario_cover_local_get_name (ArioCoverProvider *cover_provider)
 static void
 ario_cover_local_class_init (ArioCoverLocalClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverProviderClass *cover_provider_class = ARIO_COVER_PROVIDER_CLASS (klass);
 
         cover_provider_class->get_id = ario_cover_local_get_id;
@@ -74,13 +74,13 @@ ario_cover_local_class_init (ArioCoverLocalClass *klass)
 static void
 ario_cover_local_init (ArioCoverLocal *cover_local)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 ArioCoverProvider*
 ario_cover_local_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverLocal *local;
 
         local = g_object_new (TYPE_ARIO_COVER_LOCAL,
@@ -98,7 +98,7 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                              GSList **file_contents,
                              ArioCoverProviderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *musicdir;
         gchar *filename;
         int i;

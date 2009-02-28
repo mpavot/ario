@@ -73,7 +73,7 @@ static ArioCoverHandler *instance = NULL;
 static void
 ario_cover_handler_class_init (ArioCoverHandlerClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_cover_handler_finalize;
@@ -93,7 +93,7 @@ ario_cover_handler_class_init (ArioCoverHandlerClass *klass)
 static void
 ario_cover_handler_init (ArioCoverHandler *cover_handler)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         cover_handler->priv = ARIO_COVER_HANDLER_GET_PRIVATE (cover_handler);
         cover_handler->priv->thread = NULL;
         cover_handler->priv->queue = g_async_queue_new ();
@@ -102,7 +102,7 @@ ario_cover_handler_init (ArioCoverHandler *cover_handler)
 ArioCoverHandler *
 ario_cover_handler_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverHandler *cover_handler;
         ArioServer *server = ario_server_get_instance ();
 
@@ -128,7 +128,7 @@ ario_cover_handler_new (void)
 static void
 ario_cover_handler_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverHandler *cover_handler;
 
         g_return_if_fail (object != NULL);
@@ -156,7 +156,7 @@ ario_cover_handler_finalize (GObject *object)
 static gboolean
 ario_cover_handler_cover_changed (ArioCoverHandler *cover_handler)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         g_signal_emit (G_OBJECT (cover_handler), ario_cover_handler_signals[COVER_CHANGED], 0);
 
@@ -166,7 +166,7 @@ ario_cover_handler_cover_changed (ArioCoverHandler *cover_handler)
 static void
 ario_cover_handler_free_data (ArioCoverHandlerData *data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (data) {
                 g_free (data->artist);
                 g_free (data->album);
@@ -178,7 +178,7 @@ ario_cover_handler_free_data (ArioCoverHandlerData *data)
 static gpointer
 ario_cover_handler_get_covers (ArioCoverHandler *cover_handler)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GArray *size;
         GSList *covers;
         gboolean ret;
@@ -230,7 +230,7 @@ static void
 ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                 gboolean should_get)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *large_cover_path;
         ArioCoverHandlerData *data;
         gchar *artist = ario_server_get_current_artist ();
@@ -296,7 +296,7 @@ static void
 ario_cover_handler_album_changed_cb (ArioServer *server,
                                      ArioCoverHandler *cover_handler)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_cover_handler_load_pixbuf(cover_handler, TRUE);
         g_signal_emit (G_OBJECT (cover_handler), ario_cover_handler_signals[COVER_CHANGED], 0);
 }
@@ -305,7 +305,7 @@ static void
 ario_cover_handler_state_changed_cb (ArioServer *server,
                                      ArioCoverHandler *cover_handler)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_cover_handler_load_pixbuf(cover_handler, TRUE);
         g_signal_emit (G_OBJECT (cover_handler), ario_cover_handler_signals[COVER_CHANGED], 0);
 }
@@ -313,7 +313,7 @@ ario_cover_handler_state_changed_cb (ArioServer *server,
 void
 ario_cover_handler_force_reload (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_cover_handler_load_pixbuf (instance, TRUE);
         g_signal_emit (G_OBJECT (instance), ario_cover_handler_signals[COVER_CHANGED], 0);
 }
@@ -321,27 +321,27 @@ ario_cover_handler_force_reload (void)
 ArioCoverHandler *
 ario_cover_handler_get_instance (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return instance;
 }
 
 GdkPixbuf *
 ario_cover_handler_get_cover (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return instance->priv->pixbuf;
 }
 
 GdkPixbuf *
 ario_cover_handler_get_large_cover (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return instance->priv->large_pixbuf;
 }
 
 gchar *
 ario_cover_handler_get_cover_path (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return instance->priv->cover_path;
 }

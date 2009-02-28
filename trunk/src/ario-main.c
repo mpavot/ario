@@ -53,7 +53,7 @@ ario_main_on_message_received (const char *message,
 int
 main (int argc, char *argv[])
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         GOptionContext *context;
         static const GOptionEntry options []  = {

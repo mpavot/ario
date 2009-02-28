@@ -270,7 +270,7 @@ ario_wikipedia_cmd_find_artist (GtkAction *action,
 static void
 ario_wikipedia_plugin_sync_server (ArioWikipediaPlugin *plugin)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean is_playing;
         GtkAction *action;
 
@@ -287,7 +287,7 @@ static void
 ario_wikipedia_plugin_server_state_changed_cb (ArioServer *server,
                                                ArioWikipediaPlugin *plugin)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ario_wikipedia_plugin_sync_server (plugin);
 }

@@ -65,21 +65,21 @@ G_DEFINE_TYPE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_VBOX)
 static void
 ario_lyrics_preferences_class_init (ArioLyricsPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioLyricsPreferencesPrivate));
 }
 
 static void
 ario_lyrics_preferences_init (ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         lyrics_preferences->priv = ARIO_LYRICS_PREFERENCES_GET_PRIVATE (lyrics_preferences);
 }
 
 GtkWidget *
 ario_lyrics_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioLyricsPreferences *lyrics_preferences;
         GtkCellRenderer *renderer;
@@ -137,7 +137,7 @@ ario_lyrics_preferences_new (void)
 static void
 ario_lyrics_preferences_sync_lyrics_providers (ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsProvider *lyrics_provider;
         GSList *providers;
         GSList *tmp;
@@ -182,7 +182,7 @@ void
 ario_lyrics_preferences_top_button_cb (GtkWidget *widget,
                                        ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -210,7 +210,7 @@ void
 ario_lyrics_preferences_up_button_cb (GtkWidget *widget,
                                       ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -241,7 +241,7 @@ void
 ario_lyrics_preferences_down_button_cb (GtkWidget *widget,
                                         ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -270,7 +270,7 @@ void
 ario_lyrics_preferences_bottom_button_cb (GtkWidget *widget,
                                           ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -299,7 +299,7 @@ ario_lyrics_preferences_lyrics_toggled_cb (GtkCellRendererToggle *cell,
                                            gchar *path_str,
                                            ArioLyricsPreferences *lyrics_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean state;
         gchar *id;
         GtkTreeIter iter;

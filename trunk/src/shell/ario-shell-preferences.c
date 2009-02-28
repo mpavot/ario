@@ -52,14 +52,14 @@ G_DEFINE_TYPE (ArioShellPreferences, ario_shell_preferences, GTK_TYPE_DIALOG)
 static void
 ario_shell_preferences_class_init (ArioShellPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioShellPreferencesPrivate));
 }
 
 static void
 ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell_preferences->priv = ARIO_SHELL_PREFERENCES_GET_PRIVATE (shell_preferences);
 
         g_signal_connect (shell_preferences,
@@ -95,7 +95,7 @@ ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
 GtkWidget *
 ario_shell_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellPreferences *shell_preferences;
         GtkWidget *widget;
 
@@ -156,7 +156,7 @@ ario_shell_preferences_window_delete_cb (GtkWidget *window,
                                          GdkEventAny *event,
                                          ArioShellPreferences *shell_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_hide (GTK_WIDGET (shell_preferences));
         gtk_widget_destroy (GTK_WIDGET (shell_preferences));
 
@@ -168,7 +168,7 @@ ario_shell_preferences_response_cb (GtkDialog *dialog,
                                     int response_id,
                                     ArioShellPreferences *shell_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (response_id == GTK_RESPONSE_CLOSE) {
                 gtk_widget_hide (GTK_WIDGET (shell_preferences));
                 gtk_widget_destroy (GTK_WIDGET (shell_preferences));

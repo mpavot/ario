@@ -40,14 +40,14 @@ G_DEFINE_TYPE (ArioCoverManager, ario_cover_manager, G_TYPE_OBJECT)
 static void
 ario_cover_manager_class_init (ArioCoverManagerClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioCoverManagerPrivate));
 }
 
 static void
 ario_cover_manager_init (ArioCoverManager *cover_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         cover_manager->priv = ARIO_COVER_MANAGER_GET_PRIVATE (cover_manager);
 }
@@ -55,7 +55,7 @@ ario_cover_manager_init (ArioCoverManager *cover_manager)
 ArioCoverManager *
 ario_cover_manager_get_instance (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static ArioCoverManager *cover_manager = NULL;
 
         if (!cover_manager) {
@@ -124,7 +124,7 @@ ario_cover_manager_compare_providers (ArioCoverProvider *cover_provider,
 void
 ario_cover_manager_update_providers (ArioCoverManager *cover_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *conf_tmp;
         GSList *conf_providers;
         GSList *conf_active_providers;
@@ -170,7 +170,7 @@ ario_cover_manager_update_providers (ArioCoverManager *cover_manager)
 GSList*
 ario_cover_manager_get_providers (ArioCoverManager *cover_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return cover_manager->priv->providers;
 }
 
@@ -178,7 +178,7 @@ void
 ario_cover_manager_set_providers (ArioCoverManager *cover_manager,
                                   GSList *providers)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         cover_manager->priv->providers = providers;
 }
 
@@ -186,7 +186,7 @@ ArioCoverProvider*
 ario_cover_manager_get_provider_from_id (ArioCoverManager *cover_manager,
                                          const gchar *id)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *found;
 
         found = g_slist_find_custom (cover_manager->priv->providers,
@@ -201,7 +201,7 @@ void
 ario_cover_manager_add_provider (ArioCoverManager *cover_manager,
                                  ArioCoverProvider *cover_provider)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         cover_manager->priv->providers = g_slist_append (cover_manager->priv->providers, cover_provider);
 }
 
@@ -209,7 +209,7 @@ void
 ario_cover_manager_remove_provider (ArioCoverManager *cover_manager,
                                     ArioCoverProvider *cover_provider)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         cover_manager->priv->providers = g_slist_remove (cover_manager->priv->providers, cover_provider);
 }
 
@@ -222,7 +222,7 @@ ario_cover_manager_get_covers (ArioCoverManager *cover_manager,
                                GSList **file_contents,
                                ArioCoverProviderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioCoverProvider *cover_provider;
         gboolean ret = FALSE;

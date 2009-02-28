@@ -59,7 +59,7 @@ G_DEFINE_TYPE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_VBOX)
 static void
 ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_lyrics_editor_finalize;
@@ -69,14 +69,14 @@ ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
 static void
 ario_lyrics_editor_init (ArioLyricsEditor *lyrics_editor)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         lyrics_editor->priv = ARIO_LYRICS_EDITOR_GET_PRIVATE (lyrics_editor);
 }
 
 GtkWidget *
 ario_lyrics_editor_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsEditor *lyrics_editor;
         GtkWidget *scrolledwindow;
         GtkWidget *separator;
@@ -150,7 +150,7 @@ ario_lyrics_editor_new (void)
 static void
 ario_lyrics_editor_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsEditor *lyrics_editor;
         ArioLyricsEditorData *data;
 
@@ -183,7 +183,7 @@ static void
 ario_lyrics_editor_save_cb (GtkButton *button,
                             ArioLyricsEditor *lyrics_editor)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTextIter start;
         GtkTextIter end;
         gchar *lyrics;
@@ -209,7 +209,7 @@ static void
 ario_lyrics_editor_search_cb (GtkButton *button,
                               ArioLyricsEditor *lyrics_editor)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *lyricsselect;
         ArioLyricsCandidate *candidate;
         ArioLyricsEditorData *data;
@@ -239,7 +239,7 @@ ario_lyrics_editor_search_cb (GtkButton *button,
 static void
 ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (data) {
                 g_free (data->artist);
                 ario_lyrics_candidate_free (data->candidate);
@@ -250,7 +250,7 @@ ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
 static void
 ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsEditorData *data;
         ArioLyrics *lyrics;
 
@@ -302,7 +302,7 @@ void
 ario_lyrics_editor_push (ArioLyricsEditor *lyrics_editor,
                          ArioLyricsEditorData *data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_async_queue_push (lyrics_editor->priv->queue, data);
 }
 
@@ -310,7 +310,7 @@ static void
 ario_lyrics_editor_textbuffer_changed_cb (GtkTextBuffer *textbuffer,
                                           ArioLyricsEditor *lyrics_editor)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_set_sensitive (lyrics_editor->priv->save_button, TRUE);
 }
 

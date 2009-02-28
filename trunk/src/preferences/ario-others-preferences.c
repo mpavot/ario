@@ -60,21 +60,21 @@ G_DEFINE_TYPE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_VBOX)
 static void
 ario_others_preferences_class_init (ArioOthersPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioOthersPreferencesPrivate));
 }
 
 static void
 ario_others_preferences_init (ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         others_preferences->priv = ARIO_OTHERS_PREFERENCES_GET_PRIVATE (others_preferences);
 }
 
 GtkWidget *
 ario_others_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioOthersPreferences *others_preferences;
         GtkBuilder *builder;
 
@@ -113,7 +113,7 @@ ario_others_preferences_new (void)
 static void
 ario_others_preferences_sync_others (ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const char *proxy_address;
         int proxy_port;
 
@@ -140,7 +140,7 @@ void
 ario_others_preferences_showtabs_check_changed_cb (GtkCheckButton *butt,
                                                    ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_SHOW_TABS,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (others_preferences->priv->showtabs_check)));
 }
@@ -149,7 +149,7 @@ void
 ario_others_preferences_hideonclose_check_changed_cb (GtkCheckButton *butt,
                                                       ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_HIDE_ON_CLOSE,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (others_preferences->priv->hideonclose_check)));
 }
@@ -158,7 +158,7 @@ void
 ario_others_preferences_oneinstance_check_changed_cb (GtkCheckButton *butt,
                                                       ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_ONE_INSTANCE,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (others_preferences->priv->oneinstance_check)));
 }
@@ -167,7 +167,7 @@ void
 ario_others_preferences_proxy_address_changed_cb (GtkWidget *widget,
                                                   ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_string (PREF_PROXY_ADDRESS,
                               gtk_entry_get_text (GTK_ENTRY (others_preferences->priv->proxy_address_entry)));
 }
@@ -176,7 +176,7 @@ void
 ario_others_preferences_proxy_port_changed_cb (GtkWidget *widget,
                                                ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_integer (PREF_PROXY_PORT,
                                (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (others_preferences->priv->proxy_port_spinbutton)));
 }
@@ -185,7 +185,7 @@ void
 ario_others_preferences_proxy_check_changed_cb (GtkCheckButton *butt,
                                                 ArioOthersPreferences *others_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean active;
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (others_preferences->priv->proxy_check));
         ario_conf_set_boolean (PREF_USE_PROXY,

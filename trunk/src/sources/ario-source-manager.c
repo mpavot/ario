@@ -64,14 +64,14 @@ G_DEFINE_TYPE (ArioSourceManager, ario_sourcemanager, GTK_TYPE_NOTEBOOK)
 static void
 ario_sourcemanager_class_init (ArioSourceManagerClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioSourceManagerPrivate));
 }
 
 static void
 ario_sourcemanager_init (ArioSourceManager *sourcemanager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         sourcemanager->priv = ARIO_SOURCEMANAGER_GET_PRIVATE (sourcemanager);
 }
@@ -80,7 +80,7 @@ GtkWidget *
 ario_sourcemanager_get_instance (GtkUIManager *mgr,
                                  GtkActionGroup *group)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *source;
 
         if (instance)
@@ -134,7 +134,7 @@ static void
 ario_sourcemanager_shutdown_foreach (ArioSource *source,
                                      GSList **ordered_sources)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_source_shutdown (source);
         *ordered_sources = g_slist_append (*ordered_sources, ario_source_get_id (source));
 }
@@ -142,7 +142,7 @@ ario_sourcemanager_shutdown_foreach (ArioSource *source,
 void
 ario_sourcemanager_shutdown (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *ordered_sources = NULL;
 
         ario_conf_set_integer (PREF_SOURCE,
@@ -156,7 +156,7 @@ ario_sourcemanager_shutdown (void)
 void
 ario_sourcemanager_goto_playling_song (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (instance->priv->source) {
                 ario_source_goto_playling_song (instance->priv->source);
         }
@@ -165,7 +165,7 @@ ario_sourcemanager_goto_playling_song (void)
 void
 ario_sourcemanager_reorder (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int i = 0;
         ArioSourceData *data;
         GSList *ordered_tmp;
@@ -193,7 +193,7 @@ ario_sourcemanager_reorder (void)
 static void
 ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gint page;
 
         page = ario_conf_get_integer (PREF_SOURCE, PREF_SOURCE_DEFAULT);
@@ -204,7 +204,7 @@ static void
 ario_sourcemanager_showtabs_changed_cb (guint notification_id,
                                         ArioSourceManager *sourcemanager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sourcemanager),
                                     ario_conf_get_boolean (PREF_SHOW_TABS, PREF_SHOW_TABS_DEFAULT));
 }
@@ -213,7 +213,7 @@ static void
 ario_sourcemanager_set_source_active (ArioSource *source,
                                       gboolean active)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *conf_name;
         GtkAction *action;
 
@@ -237,7 +237,7 @@ static void
 ario_sourcemanager_menu_source_cb (GtkToggleAction *action,
                                    ArioSource *source)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_sourcemanager_set_source_active (source, gtk_toggle_action_get_active (action));
 }
 
@@ -245,14 +245,14 @@ static void
 ario_sourcemanager_menu_cb (GtkCheckMenuItem *checkmenuitem,
                             ArioSource *source)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_sourcemanager_set_source_active (source, gtk_check_menu_item_get_active (checkmenuitem));
 }
 
 void
 ario_sourcemanager_append (ArioSource *source)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *hbox;
         gchar *conf_name;
         ArioSourceData *data;
@@ -311,7 +311,7 @@ ario_sourcemanager_append (ArioSource *source)
 void
 ario_sourcemanager_remove (ArioSource *source)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioSourceData *data;
 
@@ -340,7 +340,7 @@ ario_sourcemanager_button_press_cb (GtkWidget *widget,
                                     GdkEventButton *event,
                                     ArioSourceManager *sourcemanager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
         GtkWidget *item;
         GSList *tmp;
@@ -377,7 +377,7 @@ ario_sourcemanager_switch_page_cb (GtkNotebook *notebook,
                                    gint page,
                                    ArioSourceManager *sourcemanager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioSource *new_source;
 
         if (sourcemanager->priv->source) {

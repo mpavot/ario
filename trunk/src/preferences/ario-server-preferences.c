@@ -74,14 +74,14 @@ G_DEFINE_TYPE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_VBOX)
 static void
 ario_server_preferences_class_init (ArioServerPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioServerPreferencesPrivate));
 }
 
 static void
 ario_server_preferences_init (ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         server_preferences->priv = ARIO_SERVER_PREFERENCES_GET_PRIVATE (server_preferences);
 }
 
@@ -90,7 +90,7 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
                                            gchar *path_str,
                                            ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean state;
         gint id;
         GtkTreeIter iter;
@@ -110,7 +110,7 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
 GtkWidget *
 ario_server_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerPreferences *server_preferences;
         GtkBuilder *builder;
         GtkTreeViewColumn *column;
@@ -190,7 +190,7 @@ ario_server_preferences_new (void)
 static void
 ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int crossfadetime;
         int state;
         gboolean updating;
@@ -257,7 +257,7 @@ static void
 ario_server_preferences_server_changed_cb (ArioServer *server,
                                            ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_preferences_sync_server (server_preferences);
 }
 
@@ -265,7 +265,7 @@ void
 ario_server_preferences_crossfadetime_changed_cb (GtkWidget *widget,
                                                   ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int crossfadetime;
         if (!server_preferences->priv->sync_server) {
                 crossfadetime = gtk_spin_button_get_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton));
@@ -279,7 +279,7 @@ void
 ario_server_preferences_crossfade_changed_cb (GtkWidget *widget,
                                               ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean is_active;
         if (!server_preferences->priv->sync_server) {
                 is_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton));
@@ -300,7 +300,7 @@ void
 ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
                                             ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, FALSE);
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), _("Updating..."));
         ario_server_update_db ();
@@ -310,7 +310,7 @@ void
 ario_server_preferences_update_changed_cb (GtkWidget *widget,
                                            ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_UPDATE_STARTUP,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 }
@@ -319,7 +319,7 @@ void
 ario_server_preferences_stopexit_changed_cb (GtkWidget *widget,
                                              ArioServerPreferences *server_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_STOP_EXIT,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 }

@@ -106,7 +106,7 @@ G_DEFINE_TYPE (ArioShellCoverselect, ario_shell_coverselect, GTK_TYPE_DIALOG)
 static void
 ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_coverselect_finalize;
@@ -117,7 +117,7 @@ ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
 static void
 ario_shell_coverselect_init (ArioShellCoverselect *shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell_coverselect->priv = ARIO_SHELL_COVERSELECT_GET_PRIVATE (shell_coverselect);
         shell_coverselect->priv->liststore = gtk_list_store_new (1, GDK_TYPE_PIXBUF);
         shell_coverselect->priv->file_contents = NULL;
@@ -126,7 +126,7 @@ ario_shell_coverselect_init (ArioShellCoverselect *shell_coverselect)
 static void
 ario_shell_coverselect_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellCoverselect *ario_shell_coverselect;
 
         g_return_if_fail (object != NULL);
@@ -155,7 +155,7 @@ ario_shell_coverselect_drag_leave_cb (GtkWidget *widget,
                                       guint time,
                                       ArioShellCoverselect *shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *url;
         gchar *contents;
         gsize length;
@@ -190,7 +190,7 @@ static GObject *
 ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
                                     GObjectConstructParam *construct_properties)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellCoverselect *ario_shell_coverselect;
         ArioShellCoverselectClass *klass;
         GObjectClass *parent_class;
@@ -309,7 +309,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
 GtkWidget *
 ario_shell_coverselect_new (ArioServerAlbum *server_album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellCoverselect *ario_shell_coverselect;
 
         ario_shell_coverselect = g_object_new (TYPE_ARIO_SHELL_COVERSELECT,
@@ -341,7 +341,7 @@ ario_shell_coverselect_window_delete_cb (GtkWidget *window,
                                          GdkEventAny *event,
                                          ArioShellCoverselect *ario_shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_hide (GTK_WIDGET (ario_shell_coverselect));
         return FALSE;
 }
@@ -351,7 +351,7 @@ ario_shell_coverselect_response_cb (GtkDialog *dialog,
                                     int response_id,
                                     ArioShellCoverselect *ario_shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (response_id == GTK_RESPONSE_OK) {
                 ario_shell_coverselect_save_cover (ario_shell_coverselect);
                 gtk_widget_hide (GTK_WIDGET (ario_shell_coverselect));
@@ -365,7 +365,7 @@ static void
 ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                                              ArioShellCoverselect *ario_shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *dialog;
         gchar *musicdir;
         gchar *path;
@@ -404,7 +404,7 @@ static void
 ario_shell_coverselect_set_sensitive (ArioShellCoverselect *ario_shell_coverselect,
                                       gboolean sensitive)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_dialog_set_response_sensitive (GTK_DIALOG (ario_shell_coverselect),
                                            GTK_RESPONSE_CLOSE,
                                            sensitive);
@@ -421,7 +421,7 @@ static void
 ario_shell_coverselect_get_covers_cb (GtkWidget *widget,
                                       ArioShellCoverselect *ario_shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *artist;
         gchar *album;
         gboolean ret;
@@ -457,7 +457,7 @@ ario_shell_coverselect_get_covers_cb (GtkWidget *widget,
 static void 
 ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         int i = 0;
         GSList *temp;
@@ -513,7 +513,7 @@ ario_shell_coverselect_show_covers (ArioShellCoverselect *ario_shell_coverselect
 static void 
 ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
 {        
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *dialog;
 
         GtkTreeSelection *selection;
@@ -594,7 +594,7 @@ ario_shell_coverselect_save_cover (ArioShellCoverselect *ario_shell_coverselect)
 static void
 ario_shell_coverselect_set_current_cover (ArioShellCoverselect *ario_shell_coverselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkPixbuf *pixbuf;
         gchar *ario_cover_path;
 

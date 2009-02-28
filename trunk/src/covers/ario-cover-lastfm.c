@@ -68,7 +68,7 @@ ario_cover_lastfm_get_name (ArioCoverProvider *cover_provider)
 static void
 ario_cover_lastfm_class_init (ArioCoverLastfmClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverProviderClass *cover_provider_class = ARIO_COVER_PROVIDER_CLASS (klass);
 
         cover_provider_class->get_id = ario_cover_lastfm_get_id;
@@ -79,13 +79,13 @@ ario_cover_lastfm_class_init (ArioCoverLastfmClass *klass)
 static void
 ario_cover_lastfm_init (ArioCoverLastfm *cover_lastfm)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 ArioCoverProvider*
 ario_cover_lastfm_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverLastfm *lastfm;
 
         lastfm = g_object_new (TYPE_ARIO_COVER_LASTFM,
@@ -100,7 +100,7 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
                                   ArioCoverProviderOperation operation,
                                   const char *cover_size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlChar *key;
@@ -157,7 +157,7 @@ static char *
 ario_cover_lastfm_make_xml_uri (const char *artist,
                                 const char *album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         char *formated_artist;
         char *formated_album;
@@ -192,7 +192,7 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
                               GSList **file_contents,
                               ArioCoverProviderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         int xml_size;
         char *xml_data;

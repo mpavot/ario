@@ -41,7 +41,7 @@ G_DEFINE_TYPE (ArioFirstlaunch, ario_firstlaunch, GTK_TYPE_ASSISTANT)
 static void
 ario_firstlaunch_class_init (ArioFirstlaunchClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioFirstlaunchPrivate));
 }
 
@@ -49,7 +49,7 @@ static void
 ario_firstlaunch_cancel_cb (GtkWidget *widget,
                             ArioFirstlaunch *firstlaunch)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_main_quit ();
 }
 
@@ -57,7 +57,7 @@ static void
 ario_firstlaunch_apply_cb (GtkWidget *widget,
                            ArioFirstlaunch *firstlaunch)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_FIRST_TIME, TRUE);
         gtk_widget_destroy (GTK_WIDGET (firstlaunch));
 }
@@ -67,7 +67,7 @@ ario_firstlaunch_page_prepare_cb (GtkAssistant *assistant,
                                   GtkWidget    *page,
                                   ArioFirstlaunch *firstlaunch)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *text;
         ArioProfile *profile;
 
@@ -86,7 +86,7 @@ ario_firstlaunch_page_prepare_cb (GtkAssistant *assistant,
 static void
 ario_firstlaunch_init (ArioFirstlaunch *firstlaunch) 
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkPixbuf *pixbuf;
         GtkWidget *label, *vbox, *connection_vbox;
         GtkBuilder *builder;
@@ -161,7 +161,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 ArioFirstlaunch *
 ario_firstlaunch_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioFirstlaunch *firstlaunch;
 
         firstlaunch = g_object_new (TYPE_ARIO_FIRSTLAUNCH, NULL);

@@ -55,7 +55,7 @@ ario_notifier_libnotify_set_string_property (ArioNotifierLibnotify *notifier_lib
                                              const gchar *prop,
                                              const gchar *str)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GValue value = { 0, };
         g_value_init (&value, G_TYPE_STRING);
         g_value_set_string (&value, str);
@@ -66,7 +66,7 @@ ario_notifier_libnotify_set_string_property (ArioNotifierLibnotify *notifier_lib
 static void
 ario_notifier_libnotify_notify (ArioNotifier *notifier)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioNotifierLibnotify *notifier_libnotify = ARIO_NOTIFIER_LIBNOTIFY (notifier);
         gchar *title;
         gchar *artist;
@@ -110,7 +110,7 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
 static void
 ario_notifier_libnotify_class_init (ArioNotifierLibnotifyClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioNotifierClass *notifier_class = ARIO_NOTIFIER_CLASS (klass);
 
         notifier_class->get_id = ario_notifier_libnotify_get_id;
@@ -123,7 +123,7 @@ ario_notifier_libnotify_class_init (ArioNotifierLibnotifyClass *klass)
 static void
 ario_notifier_libnotify_init (ArioNotifierLibnotify *notifier_libnotify)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         notifier_libnotify->priv = ARIO_NOTIFIER_LIBNOTIFY_GET_PRIVATE (notifier_libnotify);
 
         notifier_libnotify->priv->notification = notify_notification_new ("Ario",  NULL, NULL, NULL);
@@ -138,7 +138,7 @@ static void
 ario_notifier_libnotify_cover_changed_cb (ArioCoverHandler *cover_handler,
                                           ArioNotifierLibnotify *notifier_libnotify)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const gchar *id;
 
         id = ario_conf_get_string (PREF_NOTIFIER, PREF_NOTIFIER_DEFAULT);
@@ -152,7 +152,7 @@ ario_notifier_libnotify_cover_changed_cb (ArioCoverHandler *cover_handler,
 ArioNotifier*
 ario_notifier_libnotify_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioNotifierLibnotify *libnotify;
 
         if (!notify_is_initted () && !notify_init ("ario"))
