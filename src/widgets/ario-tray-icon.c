@@ -680,15 +680,14 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
                                            ario_server_get_current_album () ? ario_server_get_current_album () : ARIO_SERVER_UNKNOWN,
                                            _("Title"),
                                            title);
+
+                gtk_status_icon_set_tooltip (GTK_STATUS_ICON (icon), tooltip);
+                g_free (tooltip);
                 break;
         default:
-                tooltip = g_strdup (TRAY_ICON_DEFAULT_TOOLTIP);
+                gtk_status_icon_set_tooltip (GTK_STATUS_ICON (icon), TRAY_ICON_DEFAULT_TOOLTIP);
                 break;
         }
-
-        gtk_status_icon_set_tooltip (GTK_STATUS_ICON (icon), tooltip);
-
-        g_free (tooltip);
 }
 #endif
 static void
@@ -778,8 +777,8 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
         ARIO_LOG_FUNCTION_START
         int elapsed;
         int total;
-        gchar *elapsed_char;
-        gchar *total_char;
+        gchar elapsed_char[ARIO_MAX_TIME_SIZE];
+        gchar total_char[ARIO_MAX_TIME_SIZE];
         gchar *time;
 
         if (!icon->priv->shown)
@@ -789,18 +788,16 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
                 elapsed = ario_server_get_current_elapsed ();
-                elapsed_char = ario_util_format_time (elapsed);
+                ario_util_format_time_buf (elapsed, elapsed_char, ARIO_MAX_TIME_SIZE);
                 total = ario_server_get_current_total_time ();
                 if (total) {
-                        total_char = ario_util_format_time (total);
+                        ario_util_format_time_buf (total, total_char, ARIO_MAX_TIME_SIZE);
                         time = g_strdup_printf ("%s%s%s", elapsed_char, _(" of "), total_char);
-                        g_free (total_char);
+                        gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), time);
+                        g_free (time);
                 } else {
-                        time = g_strdup_printf ("%s", elapsed_char);
+                        gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), elapsed_char);
                 }
-                g_free (elapsed_char);
-                gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), time);
-                g_free (time);
                 if (total > 0)
                         gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar),
                                                        (double) elapsed / (double) total);

@@ -51,7 +51,7 @@ gboolean                     ario_cover_size_is_valid        (const int size);
 
 gboolean                     ario_cover_cover_exists         (const gchar *artist,
                                                               const gchar *album);
-gchar*                       ario_cover_make_ario_cover_path (const gchar *artist,
+gchar*                       ario_cover_make_cover_path      (const gchar *artist,
                                                               const gchar *album,
                                                               const ArioCoverHomeCoversSize ario_cover_size);
 

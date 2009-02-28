@@ -259,8 +259,8 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                cover_handler->priv->cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
-                large_cover_path = ario_cover_make_ario_cover_path (artist, album, NORMAL_COVER);
+                cover_handler->priv->cover_path = ario_cover_make_cover_path (artist, album, SMALL_COVER);
+                large_cover_path = ario_cover_make_cover_path (artist, album, NORMAL_COVER);
                 if (cover_handler->priv->cover_path && large_cover_path) {
                         cover_handler->priv->pixbuf = gdk_pixbuf_new_from_file_at_size (cover_handler->priv->cover_path, COVER_SIZE, COVER_SIZE, NULL);
                         cover_handler->priv->large_pixbuf = gdk_pixbuf_new_from_file_at_size (large_cover_path, 2*COVER_SIZE, 2*COVER_SIZE, NULL);
