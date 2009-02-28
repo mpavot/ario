@@ -305,7 +305,6 @@ ario_server_interface_set_property (GObject *object,
                                         song_changed = ario_util_strcmp (old_song->name, new_song->name) != 0;
                         }
 
-                        printf ("artist_changed:%d, album_changed:%d, song_changed:%d\n", artist_changed, album_changed, song_changed);
                         if (state_changed || artist_changed || album_changed)
                                 server_interface->signals_to_emit |= SERVER_ALBUM_CHANGED_FLAG;
 
