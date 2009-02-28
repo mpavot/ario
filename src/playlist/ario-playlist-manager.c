@@ -44,7 +44,7 @@ static GObjectClass *parent_class = NULL;
 GType
 ario_playlist_manager_get_type (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static GType type = 0;
 
         if (!type) {
@@ -71,7 +71,7 @@ ario_playlist_manager_get_type (void)
 static void
 ario_playlist_manager_class_init (ArioPlaylistManagerClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
@@ -82,7 +82,7 @@ ario_playlist_manager_class_init (ArioPlaylistManagerClass *klass)
 static void
 ario_playlist_manager_init (ArioPlaylistManager *playlist_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         playlist_manager->priv = g_new0 (ArioPlaylistManagerPrivate, 1);
 }
@@ -90,7 +90,7 @@ ario_playlist_manager_init (ArioPlaylistManager *playlist_manager)
 static void
 ario_playlist_manager_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistManager *playlist_manager;
 
         g_return_if_fail (object != NULL);
@@ -108,7 +108,7 @@ static void
 ario_playlist_manager_song_changed_cb (ArioServer *server,
                                        ArioPlaylist *playlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistMode *mode;
         ArioServerSong *song = ario_server_get_current_song ();
         const gchar *id = ario_conf_get_string (PREF_PLAYLIST_MODE, PREF_PLAYLIST_MODE_DEFAULT);
@@ -127,7 +127,7 @@ ario_playlist_manager_song_changed_cb (ArioServer *server,
 ArioPlaylistManager *
 ario_playlist_manager_get_instance (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static ArioPlaylistManager *playlist_manager = NULL;
 
         if (!playlist_manager) {
@@ -161,7 +161,7 @@ ario_playlist_manager_get_instance (void)
 GSList*
 ario_playlist_manager_get_modes (ArioPlaylistManager *playlist_manager)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return playlist_manager->priv->modes;
 }
 
@@ -176,7 +176,7 @@ ArioPlaylistMode*
 ario_playlist_manager_get_mode_from_id (ArioPlaylistManager *playlist_manager,
                                         const gchar *id)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *found;
 
         if (!id)
@@ -196,7 +196,7 @@ void
 ario_playlist_manager_add_mode (ArioPlaylistManager *playlist_manager,
                                 ArioPlaylistMode *playlist_mode)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         playlist_manager->priv->modes = g_slist_append (playlist_manager->priv->modes, playlist_mode);
 }
 
@@ -204,6 +204,6 @@ void
 ario_playlist_manager_remove_mode (ArioPlaylistManager *playlist_manager,
                                    ArioPlaylistMode *playlist_mode)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         playlist_manager->priv->modes = g_slist_remove (playlist_manager->priv->modes, playlist_mode);
 }

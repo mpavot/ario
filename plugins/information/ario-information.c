@@ -139,7 +139,7 @@ ario_information_unselect (ArioSource *source)
 static void
 ario_information_class_init (ArioInformationClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
@@ -177,14 +177,14 @@ ario_information_button_press_cb (GtkWidget *widget,
                                   GdkEventButton *event,
                                   ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return TRUE;
 }
 
 static void
 ario_information_init (ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *scrolledwindow;
         GtkWidget *vbox, *vp;
         GtkBuilder *builder;
@@ -252,7 +252,7 @@ ario_information_init (ArioInformation *information)
 static void
 ario_information_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioInformation *information;
 
         g_return_if_fail (object != NULL);
@@ -277,7 +277,7 @@ ario_information_set_property (GObject *object,
                                const GValue *value,
                                GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioInformation *information = ARIO_INFORMATION (object);
 
         switch (prop_id) {
@@ -296,7 +296,7 @@ ario_information_get_property (GObject *object,
                                GValue *value,
                                GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioInformation *information = ARIO_INFORMATION (object);
 
         switch (prop_id) {
@@ -312,7 +312,7 @@ ario_information_get_property (GObject *object,
 GtkWidget *
 ario_information_new (GtkUIManager *mgr)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioInformation *information;
         ArioServer *server = ario_server_get_instance ();
 
@@ -347,7 +347,7 @@ ario_information_new (GtkUIManager *mgr)
 static void
 ario_information_fill_song (ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerSong *song;
         gchar *length;
         ArioLyrics *lyrics;
@@ -392,7 +392,7 @@ ario_information_fill_song (ArioInformation *information)
 static void
 ario_information_fill_cover (ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkPixbuf *cover;
 
         if (!information->priv->selected)
@@ -412,7 +412,7 @@ ario_information_album_foreach (GtkWidget *widget,
 static void
 ario_information_fill_album (ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerSong *song;
         int state;
         ArioServerAtomicCriteria atomic_criteria;
@@ -500,7 +500,7 @@ static void
 ario_information_state_changed_cb (ArioServer *server,
                                    ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         information->priv->connected = ario_server_is_connected ();
         ario_information_fill_song (information);
         ario_information_fill_cover (information);
@@ -511,7 +511,7 @@ static void
 ario_information_song_changed_cb (ArioServer *server,
                                   ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_information_fill_song (information);
 }
 
@@ -519,7 +519,7 @@ static void
 ario_information_cover_changed_cb (ArioCoverHandler *cover_handler,
                                    ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_information_fill_cover (information);
 }
 
@@ -527,7 +527,7 @@ static void
 ario_information_album_changed_cb (ArioServer *server,
                                    ArioInformation *information)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_information_fill_album (information);
 }
 
@@ -537,7 +537,7 @@ ario_information_cover_drag_data_get_cb (GtkWidget *widget,
                                          GtkSelectionData *selection_data,
                                          guint info, guint time, ArioServerAlbum *album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *str;
 
         str = g_strdup_printf ("2\n%d\n%s\n%d\n%s\n", MPD_TAG_ITEM_ARTIST, album->artist, MPD_TAG_ITEM_ALBUM, album->album);
@@ -552,7 +552,7 @@ ario_information_cover_button_press_cb (GtkWidget *widget,
                                         GdkEventButton *event,
                                         ArioServerAlbum *album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerAtomicCriteria atomic_criteria1;
         ArioServerAtomicCriteria atomic_criteria2;
         ArioServerCriteria *criteria = NULL;

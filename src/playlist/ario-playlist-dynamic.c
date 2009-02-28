@@ -58,7 +58,7 @@ static const char *dynamic_type[] = {
 GType
 ario_playlist_dynamic_get_type (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static GType type = 0;
 
         if (!type) {
@@ -97,7 +97,7 @@ ario_playlist_dynamic_get_name (ArioPlaylistMode *playlist_mode)
 static void
 ario_playlist_dynamic_class_init (ArioPlaylistDynamicClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPlaylistModeClass *playlist_mode_class = ARIO_PLAYLIST_MODE_CLASS (klass);
 
@@ -114,13 +114,13 @@ ario_playlist_dynamic_class_init (ArioPlaylistDynamicClass *klass)
 static void
 ario_playlist_dynamic_init (ArioPlaylistDynamic *playlist_dynamic)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 static void
 ario_playlist_dynamic_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistDynamic *playlist_dynamic;
 
         g_return_if_fail (object != NULL);
@@ -134,7 +134,7 @@ ario_playlist_dynamic_finalize (GObject *object)
 ArioPlaylistMode*
 ario_playlist_dynamic_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistDynamic *dynamic;
 
         dynamic = g_object_new (TYPE_ARIO_PLAYLIST_DYNAMIC,
@@ -147,7 +147,7 @@ static void
 ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                                  ArioPlaylist *playlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *artists = NULL;
         GSList *albums = NULL, *tmp, *tmp_artist;
         ArioServerAtomicCriteria atomic_criteria1;
@@ -271,7 +271,7 @@ static void
 ario_playlist_dynamic_type_combobox_changed_cb (GtkComboBox *combobox,
                                                 ArioPlaylistMode *playlist_mode)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         int type;
 
@@ -287,7 +287,7 @@ static void
 ario_playlist_dynamic_nbitems_changed_cb (GtkWidget *widget,
                                           ArioPlaylistMode *playlist_mode)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_integer (PREF_DYNAMIC_NBITEMS,
                                (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 }

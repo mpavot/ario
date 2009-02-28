@@ -30,7 +30,7 @@ gchar*
 ario_lyrics_make_lyrics_path (const gchar *artist,
                               const gchar *title)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *ario_lyrics_path;
         char *filename;
 
@@ -48,7 +48,7 @@ ario_lyrics_make_lyrics_path (const gchar *artist,
 static void
 ario_lyrics_create_ario_lyrics_dir (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *ario_lyrics_dir;
 
         ario_lyrics_dir = g_build_filename (ario_util_config_dir (), "lyrics", NULL);
@@ -63,7 +63,7 @@ void
 ario_lyrics_remove_lyrics (const gchar *artist,
                            const gchar *title)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *ario_lyrics_path;
 
         if (!ario_lyrics_lyrics_exists (artist, title))
@@ -80,7 +80,7 @@ ArioLyrics *
 ario_lyrics_get_local_lyrics (const gchar *artist,
                               const gchar *title)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyrics *lyrics = NULL;
         gchar *ario_lyrics_path;
         gchar *read_data;
@@ -144,7 +144,7 @@ ario_lyrics_save_lyrics (const gchar *artist,
                          const gchar *title,
                          const gchar *lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean ret;
         gchar *ario_lyrics_path;
 
@@ -170,7 +170,7 @@ gboolean
 ario_lyrics_lyrics_exists (const gchar *artist,
                            const gchar *title)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *ario_lyrics_path;
         gboolean result;
 

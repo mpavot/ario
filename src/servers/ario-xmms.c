@@ -135,7 +135,7 @@ printf ("%s\n", key);
 static void
 ario_xmms_class_init (ArioXmmsClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioServerInterfaceClass *server_class = ARIO_SERVER_INTERFACE_CLASS (klass);
 
@@ -183,14 +183,14 @@ ario_xmms_class_init (ArioXmmsClass *klass)
 static void
 ario_xmms_init (ArioXmms *xmms)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmms->priv = ARIO_XMMS_GET_PRIVATE (xmms);
 }
 
 static void
 ario_xmms_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioXmms *xmms;
 
         g_return_if_fail (object != NULL);
@@ -209,7 +209,7 @@ ario_xmms_finalize (GObject *object)
 static ArioServerSong *
 ario_xmms_get_song_from_res (xmmsc_result_t *result)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerSong *song;
         const gchar *tmp;
         int tracknr;
@@ -254,7 +254,7 @@ wait_cb (xmmsc_result_t *res,
 static void
 ario_xmms_result_wait (xmmsc_result_t *result)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 /*
         static gboolean block = FALSE;
 
@@ -278,7 +278,7 @@ ario_xmms_result_wait (xmmsc_result_t *result)
 ArioXmms *
 ario_xmms_get_instance (ArioServer *server)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!instance) {
                 instance = g_object_new (TYPE_ARIO_XMMS, NULL);
                 g_return_val_if_fail (instance->priv != NULL, NULL);
@@ -427,7 +427,7 @@ playback_playtime_not (xmmsc_result_t *res,
 static void
 ario_xmms_sync (ArioXmms *xmms)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* Sync playlist */
@@ -459,7 +459,7 @@ ario_xmms_sync (ArioXmms *xmms)
 static void 
 disconnect_not (ArioXmms *xmms)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* TODO */
 }
 
@@ -479,7 +479,7 @@ ario_xmms_connect_to (ArioXmms *xmms,
                       int port,
                       float timeout)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_connection_t *connection;
         xmmsc_connection_t *async_connection;
 
@@ -533,7 +533,7 @@ ario_xmms_connect_to (ArioXmms *xmms,
 static void
 ario_xmms_connect (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *hostname;
         int port;
         float timeout;
@@ -560,7 +560,7 @@ ario_xmms_connect (void)
 static void
 ario_xmms_disconnect (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         /* check if there is a connection */
         if (!instance->priv->connection)
@@ -587,7 +587,7 @@ ario_xmms_disconnect (void)
 static void
 ario_xmms_update_db (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -602,7 +602,7 @@ static gboolean
 ario_xmms_is_connected (void)
 {
         // desactivated to make the logs more readable
-        //ARIO_LOG_FUNCTION_START
+        //ARIO_LOG_FUNCTION_START;
         return (instance->priv->connection != NULL);
 }
 
@@ -610,7 +610,7 @@ static GSList *
 ario_xmms_list_tags (const ArioServerTag tag,
                      const ArioServerCriteria *criteria)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tags = NULL;
         xmmsc_result_t *res;
         xmmsc_coll_t *coll;
@@ -673,7 +673,7 @@ ario_xmms_list_tags (const ArioServerTag tag,
 static GSList *
 ario_xmms_get_albums (const ArioServerCriteria *criteria)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *albums = NULL;
         ArioServerAlbum *ario_xmms_album;
         xmmsc_result_t *res;
@@ -747,7 +747,7 @@ static GSList *
 ario_xmms_get_songs (const ArioServerCriteria *criteria,
                      const gboolean exact)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *songs = NULL;
         xmmsc_result_t *res;
         xmmsc_coll_t *coll;
@@ -807,7 +807,7 @@ ario_xmms_get_songs (const ArioServerCriteria *criteria,
 static GSList *
 ario_xmms_get_songs_from_playlist (char *playlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *songs = NULL;
         xmmsc_result_t *res;
         xmmsc_result_t *res2;
@@ -844,7 +844,7 @@ ario_xmms_get_songs_from_playlist (char *playlist)
 static GSList *
 ario_xmms_get_playlists (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *playlists = NULL;
         const gchar *playlist;
         xmmsc_result_t *res;
@@ -885,14 +885,14 @@ ario_xmms_playlist_exists (const gchar *name)
 static GSList *
 ario_xmms_get_playlist_changes (int playlist_id)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return ario_xmms_get_songs_from_playlist (NULL);
 }
 
 static ArioServerSong *
 ario_xmms_get_current_song_on_server (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerSong *song = NULL;
         xmmsc_result_t *result;
         uint pos = 0;
@@ -914,7 +914,7 @@ ario_xmms_get_current_song_on_server (void)
 static int
 ario_xmms_get_current_playlist_total_time (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         return instance->priv->total_time;
 }
@@ -922,7 +922,7 @@ ario_xmms_get_current_playlist_total_time (void)
 static unsigned long
 ario_xmms_get_last_update (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ARIO_LOG_ERROR ("Not yet implemented for XMMS");
 
@@ -932,7 +932,7 @@ ario_xmms_get_last_update (void)
 void
 ario_xmms_do_next (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -951,7 +951,7 @@ ario_xmms_do_next (void)
 void
 ario_xmms_do_prev (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -971,7 +971,7 @@ ario_xmms_do_prev (void)
 void
 ario_xmms_do_play (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -986,7 +986,7 @@ ario_xmms_do_play (void)
 void
 ario_xmms_do_play_pos (gint id)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -1006,7 +1006,7 @@ ario_xmms_do_play_pos (gint id)
 void
 ario_xmms_do_pause (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -1021,7 +1021,7 @@ ario_xmms_do_pause (void)
 void
 ario_xmms_do_stop (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -1036,7 +1036,7 @@ ario_xmms_do_stop (void)
 void
 ario_xmms_set_current_elapsed (const gint elapsed)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -1051,7 +1051,7 @@ ario_xmms_set_current_elapsed (const gint elapsed)
 void
 ario_xmms_set_current_volume (const gint volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
         xmmsc_result_t *res2;
 
@@ -1070,7 +1070,7 @@ ario_xmms_set_current_volume (const gint volume)
 void
 ario_xmms_set_current_random (const gboolean random)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
@@ -1083,7 +1083,7 @@ ario_xmms_set_current_repeat (const gboolean repeat)
 {
         xmmsc_result_t *res;
 
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
@@ -1101,7 +1101,7 @@ ario_xmms_set_current_repeat (const gboolean repeat)
 void
 ario_xmms_set_crossfadetime (const int crossfadetime)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
@@ -1112,7 +1112,7 @@ ario_xmms_set_crossfadetime (const int crossfadetime)
 void
 ario_xmms_clear (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -1127,7 +1127,7 @@ ario_xmms_clear (void)
 void
 ario_xmms_shuffle (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
 
         /* check if there is a connection */
@@ -1143,7 +1143,7 @@ ario_xmms_shuffle (void)
 static void
 ario_xmms_queue_commit (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         ArioServerQueueAction *queue_action;
         xmmsc_result_t *res;
@@ -1218,7 +1218,7 @@ static void
 ario_xmms_insert_at (const GSList *songs,
                      const gint pos)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
         gchar *pattern = NULL, *tmp_pattern;
         xmmsc_coll_t *coll;
@@ -1256,7 +1256,7 @@ ario_xmms_insert_at (const GSList *songs,
 static int
 ario_xmms_save_playlist (const char *name)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const char *tmp;
         xmmsc_result_t *res;
         xmmsc_coll_t *coll;
@@ -1290,7 +1290,7 @@ ario_xmms_save_playlist (const char *name)
 static void
 ario_xmms_delete_playlist (const char *name)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
         res = xmmsc_playlist_remove (instance->priv->connection, name);
         ario_xmms_result_wait(res);
@@ -1300,7 +1300,7 @@ ario_xmms_delete_playlist (const char *name)
 static GSList *
 ario_xmms_get_outputs (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ARIO_LOG_ERROR ("Not yet implemented for XMMS");
 
@@ -1311,7 +1311,7 @@ static void
 ario_xmms_enable_output (int id,
                          gboolean enabled)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ARIO_LOG_ERROR ("Not yet implemented for XMMS");
 }
@@ -1319,7 +1319,7 @@ ario_xmms_enable_output (int id,
 static ArioServerStats *
 ario_xmms_get_stats (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ARIO_LOG_ERROR ("Not yet implemented for XMMS");
 
@@ -1332,7 +1332,7 @@ ario_xmms_get_stats (void)
 static GList *
 ario_xmms_get_songs_info (GSList *paths)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *path;
         GSList *temp;
         GList *songs = NULL;
@@ -1386,7 +1386,7 @@ static ArioServerFileList *
 ario_xmms_list_files (const char *path,
                       gboolean recursive)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
         gchar *url;
         gint url_length;

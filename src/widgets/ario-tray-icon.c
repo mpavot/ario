@@ -168,7 +168,7 @@ G_DEFINE_TYPE (ArioTrayIcon, ario_tray_icon, GTK_TYPE_STATUS_ICON)
 static void
 ario_tray_icon_class_init (ArioTrayIconClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_tray_icon_finalize;
@@ -204,7 +204,7 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
 static void
 ario_tray_icon_init (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         icon->priv = ARIO_TRAY_ICON_GET_PRIVATE (icon);
 
@@ -263,7 +263,7 @@ ario_tray_icon_init (ArioTrayIcon *icon)
 static void
 ario_tray_icon_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTrayIcon *tray;
 
         g_return_if_fail (object != NULL);
@@ -288,7 +288,7 @@ ario_tray_icon_set_property (GObject *object,
                              const GValue *value,
                              GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTrayIcon *tray = ARIO_TRAY_ICON (object);
 
         switch (prop_id)
@@ -317,7 +317,7 @@ ario_tray_icon_get_property (GObject *object,
                              GValue *value,
                              GParamSpec *pspec)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioTrayIcon *tray = ARIO_TRAY_ICON (object);
 
         switch (prop_id)
@@ -342,7 +342,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                     GtkUIManager *mgr,
                     ArioShell *shell)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServer *server = ario_server_get_instance ();
 
         ArioTrayIcon *icon = g_object_new (TYPE_ARIO_TRAY_ICON,
@@ -455,7 +455,7 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
 static void
 ario_tray_icon_middle_click (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int trayicon_behavior;
 
         trayicon_behavior = ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT);
@@ -482,7 +482,7 @@ static gboolean
 ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                                       ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *popup;
 
         /* filter out double, triple clicks */
@@ -521,7 +521,7 @@ ario_tray_icon_scroll_cb (GtkWidget *widget, GdkEvent *event,
 
         volume_adjust_step = ario_conf_get_integer (PREF_VOL_ADJUST_STEP, PREF_VOL_ADJUST_STEP_DEFAULT);
 
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gint vol = ario_server_get_current_volume ();
 
         switch (event->scroll.direction) {
@@ -549,7 +549,7 @@ static void
 ario_tray_icon_changed_cb (guint notification_id,
                            ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
                 gtk_widget_show_all (GTK_WIDGET (icon));
         else
@@ -560,7 +560,7 @@ static void
 ario_tray_icon_activate_cb (GtkStatusIcon *tray_icon,
                             ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ario_shell_set_visibility (icon->priv->shell, VISIBILITY_TOGGLE);
 }
@@ -571,7 +571,7 @@ ario_tray_icon_popup_cb (GtkStatusIcon *tray_icon,
                          guint activate_time,
                          ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *popup;
 
         popup = gtk_ui_manager_get_widget (GTK_UI_MANAGER (icon->priv->ui_manager),
@@ -665,7 +665,7 @@ ario_tray_icon_construct_tooltip (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *tooltip;
         gchar *title;
 
@@ -693,7 +693,7 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *title;
 
         switch (ario_server_get_current_state ()) {
@@ -715,7 +715,7 @@ ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *artist;
         gchar *album;
         gchar *secondary;
@@ -750,7 +750,7 @@ ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkPixbuf *cover;
 
         switch (ario_server_get_current_state ()) {
@@ -774,7 +774,7 @@ ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int elapsed;
         int total;
         gchar elapsed_char[ARIO_MAX_TIME_SIZE];
@@ -818,7 +818,7 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_icon (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_EGGTRAYICON
         gtk_container_remove (GTK_CONTAINER (icon->priv->ebox),
                               GTK_WIDGET (gtk_container_get_children (GTK_CONTAINER (icon->priv->ebox))->data));
@@ -853,7 +853,7 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
 static void
 ario_tray_icon_sync_popup (ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int state = ario_server_get_current_state ();
 
         gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPlay"),
@@ -866,7 +866,7 @@ static void
 ario_tray_icon_song_changed_cb (ArioServer *server,
                                 ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_tray_icon_sync_tooltip_song (icon);
         ario_tray_icon_sync_tooltip_time (icon);
 
@@ -878,7 +878,7 @@ ario_tray_icon_song_changed_cb (ArioServer *server,
 void
 ario_tray_icon_notify (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         instance->priv->notified = TRUE;
         ario_tray_icon_update_tooltip_visibility (instance);
 
@@ -894,7 +894,7 @@ static void
 ario_tray_icon_album_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_tray_icon_sync_tooltip_album (icon);
 }
 
@@ -902,7 +902,7 @@ static void
 ario_tray_icon_state_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_tray_icon_sync_tooltip_song (icon);
         ario_tray_icon_sync_tooltip_album (icon);
         ario_tray_icon_sync_tooltip_time (icon);
@@ -919,7 +919,7 @@ ario_tray_icon_time_changed_cb (ArioServer *server,
                                 int elapsed,
                                 ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_tray_icon_sync_tooltip_time (icon);
 }
 
@@ -927,7 +927,7 @@ static void
 ario_tray_icon_cover_changed_cb (ArioCoverHandler *cover_handler,
                                  ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_tray_icon_sync_tooltip_cover (icon);
 }
 
@@ -935,7 +935,7 @@ static void
 ario_tray_icon_cmd_play (GtkAction *action,
                          ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_do_play ();
         ario_server_update_status ();
 }
@@ -944,7 +944,7 @@ static void
 ario_tray_icon_cmd_pause (GtkAction *action,
                           ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_do_pause ();
         ario_server_update_status ();
 }
@@ -953,7 +953,7 @@ static void
 ario_tray_icon_cmd_stop (GtkAction *action,
                          ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_do_stop ();
         ario_server_update_status ();
 }
@@ -962,7 +962,7 @@ static void
 ario_tray_icon_cmd_next (GtkAction *action,
                          ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_do_next ();
 }
 
@@ -970,14 +970,14 @@ static void
 ario_tray_icon_cmd_previous (GtkAction *action,
                              ArioTrayIcon *icon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_do_prev ();
 }
 
 ArioTrayIcon *
 ario_tray_icon_get_instance (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return instance;
 }
 

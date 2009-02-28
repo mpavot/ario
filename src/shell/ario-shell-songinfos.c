@@ -82,7 +82,7 @@ G_DEFINE_TYPE (ArioShellSonginfos, ario_shell_songinfos, GTK_TYPE_DIALOG)
 static void
 ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_songinfos_finalize;
@@ -93,14 +93,14 @@ ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
 static void
 ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell_songinfos->priv = ARIO_SHELL_SONGINFOS_GET_PRIVATE (shell_songinfos);
 }
 
 static gboolean
 ario_shell_songinfos_can_edit_tags ()
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_TAGLIB
         return (ario_profiles_get_current (ario_profiles_get ())->local
                         && ario_profiles_get_current (ario_profiles_get ())->musicdir);
@@ -112,7 +112,7 @@ ario_shell_songinfos_can_edit_tags ()
 static void
 ario_shell_songinfos_fill_tags (ArioServerSong *song)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_TAGLIB
         gchar *filename;
         TagLib_File *file;
@@ -155,7 +155,7 @@ ario_shell_songinfos_fill_tags (ArioServerSong *song)
 GtkWidget *
 ario_shell_songinfos_new (GSList *paths)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellSonginfos *shell_songinfos;
         GtkWidget *widget;
         GtkBuilder *builder;
@@ -309,7 +309,7 @@ ario_shell_songinfos_new (GSList *paths)
 static void
 ario_shell_songinfos_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellSonginfos *shell_songinfos;
 
         g_return_if_fail (object != NULL);
@@ -331,7 +331,7 @@ ario_shell_songinfos_window_delete_cb (GtkWidget *window,
                                        GdkEventAny *event,
                                        ArioShellSonginfos *shell_songinfos)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_hide (GTK_WIDGET (shell_songinfos));
         gtk_widget_destroy (GTK_WIDGET (shell_songinfos));
 
@@ -343,7 +343,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                                   int response_id,
                                   ArioShellSonginfos *shell_songinfos)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_TAGLIB 
         gchar *filename;
         TagLib_File *file;
@@ -434,7 +434,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
 static void
 ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerSong *song;
         gchar *length;
         gchar *window_title;
@@ -480,7 +480,7 @@ void
 ario_shell_songinfos_text_changed_cb (GtkWidget *widget,
                                       ArioShellSonginfos *shell_songinfos)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (shell_songinfos->priv->save_button)
                 gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), TRUE);
 }

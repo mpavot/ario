@@ -62,7 +62,7 @@ ario_lyrics_leoslyrics_get_name (ArioLyricsProvider *lyrics_provider)
 static void
 ario_lyrics_leoslyrics_class_init (ArioLyricsLeoslyricsClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsProviderClass *lyrics_provider_class = ARIO_LYRICS_PROVIDER_CLASS (klass);
 
         lyrics_provider_class->get_id = ario_lyrics_leoslyrics_get_id;
@@ -75,13 +75,13 @@ ario_lyrics_leoslyrics_class_init (ArioLyricsLeoslyricsClass *klass)
 static void
 ario_lyrics_leoslyrics_init (ArioLyricsLeoslyrics *lyrics_leoslyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 ArioLyricsProvider*
 ario_lyrics_leoslyrics_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsLeoslyrics *leoslyrics;
 
         leoslyrics = g_object_new (TYPE_ARIO_LYRICS_LEOSLYRICS,
@@ -94,7 +94,7 @@ static char *
 ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
                                            const gchar *song)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         int i;
         int length;
@@ -158,7 +158,7 @@ static gchar *
 ario_lyrics_leoslyrics_parse_first_xml_file (gchar *xmldata,
                                              int size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlNodePtr cur2;
@@ -206,7 +206,7 @@ static ArioLyrics *
 ario_lyrics_leoslyrics_parse_second_xml_file (gchar *xmldata,
                                               int size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlNodePtr cur2;
@@ -275,7 +275,7 @@ ario_lyrics_leoslyrics_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                    const char *song,
                                    const char *file)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         int xml_size;
         char *xml_data;
@@ -340,7 +340,7 @@ ario_lyrics_leoslyrics_parse_first_xml_file_for_candidates (ArioLyricsProvider *
                                                             int size,
                                                             GSList **candidates)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlNodePtr cur2;
@@ -415,7 +415,7 @@ ario_lyrics_leoslyrics_get_lyrics_candidates (ArioLyricsProvider *lyrics_provide
                                               const gchar *title,
                                               GSList **candidates)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         int xml_size;
         char *xml_data;
@@ -455,7 +455,7 @@ static ArioLyrics *
 ario_lyrics_leoslyrics_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_provider,
                                                   const ArioLyricsCandidate *candidate)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int lyrics_size;
         char *lyrics_data;
         ArioLyrics *lyrics = NULL;

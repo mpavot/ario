@@ -77,7 +77,7 @@ G_DEFINE_TYPE (ArioShellLyricsselect, ario_shell_lyricsselect, GTK_TYPE_DIALOG)
 static void
 ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_lyricsselect_finalize;
@@ -89,7 +89,7 @@ ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klass)
 static void
 ario_shell_lyricsselect_init (ArioShellLyricsselect *shell_lyricsselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell_lyricsselect->priv = ARIO_SHELL_LYRICSSELECT_GET_PRIVATE (shell_lyricsselect);
         shell_lyricsselect->priv->liststore = gtk_list_store_new (N_COLUMN,
                                                                   G_TYPE_STRING,
@@ -102,7 +102,7 @@ ario_shell_lyricsselect_init (ArioShellLyricsselect *shell_lyricsselect)
 static void
 ario_shell_lyricsselect_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellLyricsselect *ario_shell_lyricsselect;
 
         g_return_if_fail (object != NULL);
@@ -122,7 +122,7 @@ static GObject *
 ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
                                      GObjectConstructParam *construct_properties)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellLyricsselect *ario_shell_lyricsselect;
         ArioShellLyricsselectClass *klass;
         GObjectClass *parent_class;
@@ -230,7 +230,7 @@ GtkWidget *
 ario_shell_lyricsselect_new (const char *artist,
                              const char *title)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellLyricsselect *ario_shell_lyricsselect;
 
         ario_shell_lyricsselect = g_object_new (TYPE_ARIO_SHELL_LYRICSSELECT,
@@ -259,7 +259,7 @@ ario_shell_lyricsselect_window_delete_cb (GtkWidget *window,
                                           GdkEventAny *event,
                                           ArioShellLyricsselect *ario_shell_lyricsselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_hide (GTK_WIDGET (ario_shell_lyricsselect));
         return FALSE;
 }
@@ -268,7 +268,7 @@ static void
 ario_shell_lyricsselect_set_sensitive (ArioShellLyricsselect *ario_shell_lyricsselect,
                                        gboolean sensitive)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_dialog_set_response_sensitive (GTK_DIALOG (ario_shell_lyricsselect),
                                            GTK_RESPONSE_CLOSE,
                                            sensitive);
@@ -285,7 +285,7 @@ static void
 ario_shell_lyricsselect_search_cb (GtkWidget *widget,
                                    ArioShellLyricsselect *ario_shell_lyricsselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *artist;
         gchar *title;
 
@@ -312,7 +312,7 @@ ario_shell_lyricsselect_search_cb (GtkWidget *widget,
 static void 
 ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *ario_shell_lyricsselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GSList *tmp;
         GtkTreePath *tree_path;
@@ -344,7 +344,7 @@ ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *ario_shell_lyricssel
 ArioLyricsCandidate *
 ario_shell_lyricsselect_get_lyrics_candidate (ArioShellLyricsselect *ario_shell_lyricsselect)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GList* paths;
         GtkTreeIter iter;
         ArioLyricsCandidate *candidate;

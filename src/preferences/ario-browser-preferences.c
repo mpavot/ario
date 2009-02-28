@@ -60,21 +60,21 @@ G_DEFINE_TYPE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_VBOX)
 static void
 ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioBrowserPreferencesPrivate));
 }
 
 static void
 ario_browser_preferences_init (ArioBrowserPreferences *browser_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         browser_preferences->priv = ARIO_BROWSER_PREFERENCES_GET_PRIVATE (browser_preferences);
 }
 
 GtkWidget *
 ario_browser_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioBrowserPreferences *browser_preferences;
         GtkBuilder *builder;
         GtkListStore *list_store;
@@ -129,7 +129,7 @@ ario_browser_preferences_new (void)
 static void
 ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *tree_combobox;
         int i, j;
         gchar **splited_conf;
@@ -201,7 +201,7 @@ void
 ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
                                           ArioBrowserPreferences *browser_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int i;
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (browser_preferences->priv->sort_combobox));
@@ -213,7 +213,7 @@ ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
 static gboolean
 ario_browser_preferences_treesnb_changed_idle (ArioBrowserPreferences *browser_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar **splited_conf;
         const gchar *conf;
         gchar *new_conf, *tmp;
@@ -250,7 +250,7 @@ void
 ario_browser_preferences_treesnb_changed_cb (GtkWidget *widget,
                                              ArioBrowserPreferences *browser_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_idle_add ((GSourceFunc) ario_browser_preferences_treesnb_changed_idle, browser_preferences);
 }
 
@@ -258,7 +258,7 @@ static void
 ario_browser_preferences_tree_combobox_changed_cb (GtkComboBox *widget,
                                                    ArioBrowserPreferences *browser_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *temp;
         GtkComboBox *combobox;
         gchar *conf = NULL, *tmp;

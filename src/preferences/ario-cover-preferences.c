@@ -85,21 +85,21 @@ G_DEFINE_TYPE (ArioCoverPreferences, ario_cover_preferences, GTK_TYPE_VBOX)
 static void
 ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioCoverPreferencesPrivate));
 }
 
 static void
 ario_cover_preferences_init (ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         cover_preferences->priv = ARIO_COVER_PREFERENCES_GET_PRIVATE (cover_preferences);
 }
 
 GtkWidget *
 ario_cover_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioCoverPreferences *cover_preferences;
         GtkListStore *list_store;
@@ -186,7 +186,7 @@ ario_cover_preferences_new (void)
 static void
 ario_cover_preferences_sync_cover_providers (ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverProvider *cover_provider;
         GSList *providers;
         GSList *tmp;
@@ -230,7 +230,7 @@ ario_cover_preferences_sync_cover_providers (ArioCoverPreferences *cover_prefere
 static void
 ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int i;
         const char *current_country;
 
@@ -256,7 +256,7 @@ void
 ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                    ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_COVER_TREE_HIDDEN,
                                !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check)));
 }
@@ -265,7 +265,7 @@ void
 ario_cover_preferences_automatic_check_changed_cb (GtkCheckButton *butt,
                                                    ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_AUTOMATIC_GET_COVER,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check)));
 }
@@ -274,7 +274,7 @@ void
 ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
                                                   ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int i;
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country));
@@ -287,7 +287,7 @@ void
 ario_cover_preferences_top_button_cb (GtkWidget *widget,
                                       ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -315,7 +315,7 @@ void
 ario_cover_preferences_up_button_cb (GtkWidget *widget,
                                      ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -346,7 +346,7 @@ void
 ario_cover_preferences_down_button_cb (GtkWidget *widget,
                                        ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -375,7 +375,7 @@ void
 ario_cover_preferences_bottom_button_cb (GtkWidget *widget,
                                          ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GtkTreeModel *model;
         gchar *id;
@@ -404,7 +404,7 @@ ario_cover_preferences_cover_toggled_cb (GtkCellRendererToggle *cell,
                                          gchar *path_str,
                                          ArioCoverPreferences *cover_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean state;
         gchar *id;
         GtkTreeIter iter;

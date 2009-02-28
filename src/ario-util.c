@@ -41,7 +41,7 @@
 char *
 ario_util_format_time (const int time)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int sec, min, hours;
 
         if (time < 0)
@@ -62,7 +62,7 @@ ario_util_format_time_buf (const int time,
                            char *buf,
                            int buf_len)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         int sec, min, hours;
 
         if (time < 0)
@@ -81,7 +81,7 @@ ario_util_format_time_buf (const int time,
 char *
 ario_util_format_total_time (const int time)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *res;
         gchar *tmp;
         int temp_time;
@@ -127,7 +127,7 @@ ario_util_format_track_buf (const gchar *track,
                             char *buf,
                             int buf_len)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *slash;
         gchar tmp[INTLEN];
 
@@ -149,7 +149,7 @@ ario_util_format_track_buf (const gchar *track,
 gchar *
 ario_util_format_title (ArioServerSong *server_song)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *dot;
         gchar *slash;
         gchar *res = NULL;
@@ -188,7 +188,7 @@ void
 ario_util_add_stock_icons (const char *stock_id,
                            const char *filename)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         static int icon_size = 0;
         GdkPixbuf *pb;
@@ -207,7 +207,7 @@ ario_util_add_stock_icons (const char *stock_id,
 void
 ario_util_init_stock_icons (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         factory = gtk_icon_factory_new ();
 
@@ -233,7 +233,7 @@ ario_util_has_stock_icons (const char *stock_id)
 const char *
 ario_util_config_dir (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static char *config_dir = NULL;
 
         if (!config_dir) {
@@ -259,7 +259,7 @@ ario_util_uri_exists (const char *uri)
 void
 ario_util_unlink_uri (const char *uri)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *uri_fse = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
         if (!uri_fse)
                 return;
@@ -272,7 +272,7 @@ ario_util_unlink_uri (const char *uri)
 void
 ario_util_mkdir (const char *uri)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *uri_fse = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
         if (!uri_fse)
                 return;
@@ -286,7 +286,7 @@ void
 ario_util_copy_file (const char *src_uri,
                      const char *dest_uri)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *contents;
         gsize length;
 
@@ -317,7 +317,7 @@ ario_util_write_data(void *buffer,
                      size_t nmemb,
                      download_struct *download_data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if(!size || !nmemb)
                 return 0;
         if(download_data->data == NULL)
@@ -345,7 +345,7 @@ ario_util_download_file (const char *uri,
                          int* size,
                          char** data)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ARIO_LOG_DBG ("Download:%s", uri);
         download_struct download_data;
         const gchar* address;
@@ -408,7 +408,7 @@ ario_util_string_replace (char **string,
                           const char *old,
                           const char *new)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar **strsplit;
         GString *str;
         int i;
@@ -441,7 +441,7 @@ ario_util_string_replace (char **string,
 void
 ario_util_load_uri (const char *uri)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 #ifdef WIN32
         ShellExecute (GetDesktopWindow(), "open", uri, NULL, NULL, SW_SHOW);
 #else
@@ -454,7 +454,7 @@ ario_util_load_uri (const char *uri)
 char *
 ario_util_format_keyword (const char *keyword)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *tmp;
         int i, j;
         int length;
@@ -505,7 +505,7 @@ ario_util_format_keyword (const char *keyword)
 gchar *
 ario_util_md5 (const char *string)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         guchar md5pword[16];
         gchar md5_response[33];
         int j;
@@ -530,7 +530,7 @@ ario_util_md5 (const char *string)
 static GdkPixbuf *
 ario_util_get_dnd_pixbuf_from_cover_paths (GSList *covers)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *tmp;
         int len = g_slist_length (covers);
         GdkPixbuf *pixbuf, *cover;
@@ -570,7 +570,7 @@ ario_util_get_dnd_pixbuf_from_cover_paths (GSList *covers)
 GdkPixbuf *
 ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
         GSList *covers = NULL;
         gchar *cover_path;
@@ -604,7 +604,7 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
 GdkPixbuf *
 ario_util_get_dnd_pixbuf (const GSList *criterias)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
         ArioServerAlbum *server_album;
         int len = 0;
@@ -647,7 +647,7 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
 gchar *
 ario_util_convert_from_iso8859 (const char *string)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *ret, *tmp;
 
         tmp = g_convert (string, -1, (const gchar *) "ISO-8859-1", "UTF8", NULL, NULL, NULL);
@@ -660,7 +660,7 @@ ario_util_convert_from_iso8859 (const char *string)
 void
 ario_util_sanitize_filename (char *filename)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         const char *to_strip = "#/*\"\\[]:;|=";
         char *tmp;
 
@@ -675,7 +675,7 @@ gboolean
 ario_file_get_contents (const gchar *filename, gchar **contents,
                         gsize *length, GError **error)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean ret;
         gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
 
@@ -696,7 +696,7 @@ gboolean
 ario_file_set_contents (const gchar *filename, const gchar *contents,
                         gsize length, GError **error)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean ret;
         gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
 
@@ -716,7 +716,7 @@ ario_file_set_contents (const gchar *filename, const gchar *contents,
 gboolean
 ario_file_test (const gchar *filename, GFileTest test)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean ret;
         gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
         if (!filename_fse)
@@ -732,7 +732,7 @@ const char *
 ario_util_stristr (const char *haystack,
                    const char *needle)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!*needle) {
                 return haystack;
         }
@@ -762,7 +762,7 @@ GSList *
 ario_util_gslist_randomize (GSList **a,
                             const int max)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GSList *ret = NULL, *tmp;
         int i = 0;
         int len = g_slist_length (*a);

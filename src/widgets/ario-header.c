@@ -106,7 +106,7 @@ G_DEFINE_TYPE (ArioHeader, ario_header, GTK_TYPE_HBOX)
 static void
 ario_header_class_init (ArioHeaderClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->constructor = ario_header_constructor;
@@ -117,7 +117,7 @@ ario_header_class_init (ArioHeaderClass *klass)
 static void
 ario_header_init (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         header->priv = ARIO_HEADER_GET_PRIVATE (header);
 }
 
@@ -131,7 +131,7 @@ ario_header_drag_leave_cb (GtkWidget *widget,
                            guint time,
                            ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *url;
         gchar *contents;
         gsize length;
@@ -165,7 +165,7 @@ static GObject *
 ario_header_constructor (GType type, guint n_construct_properties,
                          GObjectConstructParam *construct_properties)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioHeader *header;
         ArioHeaderClass *klass;
         GObjectClass *parent_class;
@@ -394,7 +394,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
 GtkWidget *
 ario_header_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioHeader *header;
         ArioServer *server = ario_server_get_instance ();
 
@@ -429,7 +429,7 @@ ario_header_new (void)
 static void
 ario_header_change_total_time (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *tmp;
 
         if (!ario_server_is_connected ()) {
@@ -466,7 +466,7 @@ ario_header_change_total_time (ArioHeader *header)
 static void
 ario_header_change_song_label (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *title;
         char *tmp;
 
@@ -490,7 +490,7 @@ ario_header_change_song_label (ArioHeader *header)
 static void
 ario_header_change_artist_album_label (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *artist;
         char *album;
         char *tmp;
@@ -522,7 +522,7 @@ ario_header_change_artist_album_label (ArioHeader *header)
 static void
 ario_header_change_cover (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GdkPixbuf *cover;
         GdkPixbuf *small_cover = NULL;
 
@@ -554,7 +554,7 @@ static void
 ario_header_song_changed_cb (ArioServer *server,
                              ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_header_change_song_label (header);
         ario_header_change_total_time (header);
 }
@@ -563,7 +563,7 @@ static void
 ario_header_album_changed_cb (ArioServer *server,
                               ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_header_change_artist_album_label (header);
 }
 
@@ -571,7 +571,7 @@ static void
 ario_header_cover_changed_cb (ArioCoverHandler *cover_handler,
                               ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_header_change_cover (header);
 }
 
@@ -579,7 +579,7 @@ static void
 ario_header_state_changed_cb (ArioServer *server,
                               ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ario_header_change_song_label (header);
         ario_header_change_artist_album_label (header);
@@ -629,7 +629,7 @@ ario_header_elapsed_changed_cb (ArioServer *server,
                                 int elapsed,
                                 ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar time[ARIO_MAX_TIME_SIZE];
 
         if (header->priv->slider_dragging)
@@ -645,7 +645,7 @@ static void
 ario_header_random_changed_cb (ArioServer *server,
                                ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean random;
 
         random = ario_server_get_current_random ();
@@ -663,7 +663,7 @@ static void
 ario_header_repeat_changed_cb (ArioServer *server,
                                ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean repeat;
 
         repeat = ario_server_get_current_repeat ();
@@ -710,7 +710,7 @@ ario_header_slider_press_cb (GtkWidget *widget,
                              GdkEventButton *event,
                              ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         header->priv->slider_dragging = TRUE;
         return FALSE;
 }
@@ -720,7 +720,7 @@ ario_header_slider_release_cb (GtkWidget *widget,
                                GdkEventButton *event,
                                ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         header->priv->slider_dragging = FALSE;
         ario_server_set_current_elapsed ((int) gtk_range_get_value (GTK_RANGE (header->priv->scale)));
         return FALSE;
@@ -729,7 +729,7 @@ ario_header_slider_release_cb (GtkWidget *widget,
 static void ario_header_slider_value_changed_cb (GtkWidget *widget,
                                                  ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar time[ARIO_MAX_TIME_SIZE];
         int elapsed;
 
@@ -743,7 +743,7 @@ static void ario_header_slider_value_changed_cb (GtkWidget *widget,
 void
 ario_header_do_next (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
         ario_server_do_next ();
 }
@@ -751,7 +751,7 @@ ario_header_do_next (ArioHeader *header)
 void
 ario_header_do_previous (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
         ario_server_do_prev ();
 }
@@ -759,7 +759,7 @@ ario_header_do_previous (ArioHeader *header)
 void
 ario_header_playpause (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
         if (ario_server_is_paused ())
                 ario_server_do_play ();
@@ -770,7 +770,7 @@ ario_header_playpause (ArioHeader *header)
 void
 ario_header_stop (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
         ario_server_do_stop ();
 }
@@ -778,7 +778,7 @@ ario_header_stop (ArioHeader *header)
 static void
 ario_header_do_random (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
         ario_server_set_current_random (!ario_server_get_current_random ());
 }
@@ -786,7 +786,7 @@ ario_header_do_random (ArioHeader *header)
 static void
 ario_header_do_repeat (ArioHeader *header)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
         ario_server_set_current_repeat (!ario_server_get_current_repeat ());
 }

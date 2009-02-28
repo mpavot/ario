@@ -33,7 +33,7 @@ ario_cover_make_cover_path (const gchar *artist,
                             const gchar *album,
                             const ArioCoverHomeCoversSize ario_cover_size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *ario_cover_path;
         char *filename;
 
@@ -60,7 +60,7 @@ gboolean
 ario_cover_cover_exists (const gchar *artist,
                          const gchar *album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *ario_cover_path, *small_ario_cover_path;
         gboolean result;
 
@@ -86,7 +86,7 @@ ario_cover_cover_exists (const gchar *artist,
 void
 ario_cover_create_ario_cover_dir (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *ario_cover_dir;
 
         ario_cover_dir = g_build_filename (ario_util_config_dir (), "covers", NULL);
@@ -100,7 +100,7 @@ ario_cover_create_ario_cover_dir (void)
 gboolean
 ario_cover_size_is_valid (const int size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         /* return true if the cover isn't too big or too small (blank amazon image) */
         return (size < 1024 * 1024 * 10 && size > 900);
 }
@@ -109,7 +109,7 @@ void
 ario_cover_remove_cover (const gchar *artist,
                          const gchar *album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gchar *small_ario_cover_path;
         gchar *ario_cover_path;
 
@@ -134,7 +134,7 @@ ario_cover_can_overwrite_cover (const gchar *artist,
                                 const gchar *album,
                                 const ArioCoverOverwriteMode overwrite_mode)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *dialog;
         gint retval;
 
@@ -178,7 +178,7 @@ ario_cover_save_cover (const gchar *artist,
                        const int size,
                        const ArioCoverOverwriteMode overwrite_mode)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean ret;
         gchar *ario_cover_path, *small_ario_cover_path;
         GdkPixbufLoader *loader;

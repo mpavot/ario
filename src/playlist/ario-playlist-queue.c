@@ -38,7 +38,7 @@ static GObjectClass *parent_class = NULL;
 GType
 ario_playlist_queue_get_type (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         static GType type = 0;
 
         if (!type) {
@@ -77,7 +77,7 @@ ario_playlist_queue_get_name (ArioPlaylistMode *playlist_mode)
 static void
 ario_playlist_queue_class_init (ArioPlaylistQueueClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPlaylistModeClass *playlist_mode_class = ARIO_PLAYLIST_MODE_CLASS (klass);
 
@@ -93,13 +93,13 @@ ario_playlist_queue_class_init (ArioPlaylistQueueClass *klass)
 static void
 ario_playlist_queue_init (ArioPlaylistQueue *playlist_queue)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 static void
 ario_playlist_queue_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistQueue *playlist_queue;
 
         g_return_if_fail (object != NULL);
@@ -113,7 +113,7 @@ ario_playlist_queue_finalize (GObject *object)
 ArioPlaylistMode*
 ario_playlist_queue_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioPlaylistQueue *queue;
 
         queue = g_object_new (TYPE_ARIO_PLAYLIST_QUEUE,
@@ -126,7 +126,7 @@ static void
 ario_playlist_queue_next_song (ArioPlaylistMode *playlist_mode,
                                ArioPlaylist *playlist)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerSong *song = ario_server_get_current_song ();
         int i;
         int state = ario_server_get_current_state ();

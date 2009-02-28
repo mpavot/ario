@@ -93,7 +93,7 @@ ario_cover_provider_get_covers (ArioCoverProvider *cover_provider,
 gboolean
 ario_cover_provider_is_active (ArioCoverProvider *cover_provider)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return cover_provider->is_active;
 }
 
@@ -101,7 +101,7 @@ void
 ario_cover_provider_set_active (ArioCoverProvider *cover_provider,
                                 gboolean is_active)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         cover_provider->is_active = is_active;
 }
 

@@ -55,7 +55,7 @@ G_DEFINE_TYPE (ArioShellLyrics, ario_shell_lyrics, GTK_TYPE_WINDOW)
 static void
 ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_lyrics_finalize;
@@ -66,7 +66,7 @@ ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
 static void
 ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         shell_lyrics->priv = ARIO_SHELL_LYRICS_GET_PRIVATE (shell_lyrics);
 
         g_signal_connect(shell_lyrics,
@@ -83,7 +83,7 @@ ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
 GtkWidget *
 ario_shell_lyrics_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellLyrics *shell_lyrics;
         GtkWidget *close_button;
         GList *childs_list;
@@ -139,7 +139,7 @@ ario_shell_lyrics_new (void)
 static void
 ario_shell_lyrics_finalize (GObject *object)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioShellLyrics *shell_lyrics;
 
         g_return_if_fail (object != NULL);
@@ -159,7 +159,7 @@ ario_shell_lyrics_window_delete_cb (GtkWidget *window,
                                     GdkEventAny *event,
                                     ArioShellLyrics *shell_lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_hide (GTK_WIDGET (shell_lyrics));
         gtk_widget_destroy (GTK_WIDGET (shell_lyrics));
 
@@ -170,7 +170,7 @@ static void
 ario_shell_lyrics_close_cb (GtkButton *button,
                             ArioShellLyrics *shell_lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_widget_hide (GTK_WIDGET (shell_lyrics));
         gtk_widget_destroy (GTK_WIDGET (shell_lyrics));
 }
@@ -178,7 +178,7 @@ ario_shell_lyrics_close_cb (GtkButton *button,
 static void
 ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioLyricsEditorData *data;
         gchar *window_title;
 
@@ -205,7 +205,7 @@ static void
 ario_shell_lyrics_song_changed_cb (ArioServer *server,
                                    ArioShellLyrics *shell_lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_shell_lyrics_add_to_queue (shell_lyrics);
 }
 
@@ -213,7 +213,7 @@ static void
 ario_shell_lyrics_state_changed_cb (ArioServer *server,
                                     ArioShellLyrics *shell_lyrics)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 
         ario_shell_lyrics_add_to_queue (shell_lyrics);
 }

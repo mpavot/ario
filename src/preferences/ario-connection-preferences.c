@@ -55,14 +55,14 @@ G_DEFINE_TYPE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_
 static void
 ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
 }
 
 static void
 ario_connection_preferences_init (ArioConnectionPreferences *connection_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         connection_preferences->priv = ARIO_CONNECTION_PREFERENCES_GET_PRIVATE (connection_preferences);
 
         connection_preferences->priv->loading = FALSE;
@@ -72,7 +72,7 @@ static void
 ario_connection_preferences_profile_changed_cb (ArioConnectionWidget *connection_widget,
                                                 ArioConnectionPreferences *connection_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_reconnect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }
@@ -80,7 +80,7 @@ ario_connection_preferences_profile_changed_cb (ArioConnectionWidget *connection
 GtkWidget *
 ario_connection_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioConnectionPreferences *connection_preferences;
         GtkWidget *alignment, *connection_widget;
@@ -123,7 +123,7 @@ ario_connection_preferences_new (void)
 static void
 ario_connection_preferences_sync_connection (ArioConnectionPreferences *connection_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gboolean autoconnect;
 
         connection_preferences->priv->loading = TRUE;
@@ -147,7 +147,7 @@ void
 ario_connection_preferences_autoconnect_changed_cb (GtkWidget *widget,
                                                     ArioConnectionPreferences *connection_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         if (!connection_preferences->priv->loading)
                 ario_conf_set_boolean (PREF_AUTOCONNECT,
                                        gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (connection_preferences->priv->autoconnect_checkbutton)));
@@ -157,7 +157,7 @@ void
 ario_connection_preferences_connect_cb (GtkWidget *widget,
                                         ArioConnectionPreferences *connection_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_connect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }
@@ -166,7 +166,7 @@ void
 ario_connection_preferences_disconnect_cb (GtkWidget *widget,
                                            ArioConnectionPreferences *connection_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_server_disconnect ();
         ario_connection_preferences_sync_connection (connection_preferences);
 }

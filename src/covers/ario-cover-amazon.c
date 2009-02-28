@@ -68,7 +68,7 @@ ario_cover_amazon_get_name (ArioCoverProvider *cover_provider)
 static void
 ario_cover_amazon_class_init (ArioCoverAmazonClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverProviderClass *cover_provider_class = ARIO_COVER_PROVIDER_CLASS (klass);
 
         cover_provider_class->get_id = ario_cover_amazon_get_id;
@@ -79,13 +79,13 @@ ario_cover_amazon_class_init (ArioCoverAmazonClass *klass)
 static void
 ario_cover_amazon_init (ArioCoverAmazon *cover_amazon)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
 }
 
 ArioCoverProvider*
 ario_cover_amazon_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioCoverAmazon *amazon;
 
         amazon = g_object_new (TYPE_ARIO_COVER_AMAZON,
@@ -100,7 +100,7 @@ ario_cover_amazon_parse_xml_file (char *xmldata,
                                   ArioCoverProviderOperation operation,
                                   const char *cover_size)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlNodePtr cur2;
@@ -168,7 +168,7 @@ static char *
 ario_cover_amazon_make_xml_uri (const char *artist,
                                 const char *album)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         char *keywords;
         const char *ext;
@@ -218,7 +218,7 @@ ario_cover_amazon_get_covers (ArioCoverProvider *cover_provider,
                               GSList **file_contents,
                               ArioCoverProviderOperation operation)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         char *xml_uri;
         int xml_size;
         char *xml_data;

@@ -49,21 +49,21 @@ G_DEFINE_TYPE (ArioStatsPreferences, ario_stats_preferences, GTK_TYPE_VBOX)
 static void
 ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioStatsPreferencesPrivate));
 }
 
 static void
 ario_stats_preferences_init (ArioStatsPreferences *stats_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         stats_preferences->priv = ARIO_STATS_PREFERENCES_GET_PRIVATE (stats_preferences);
 }
 
 GtkWidget *
 ario_stats_preferences_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioStatsPreferences *stats_preferences;
 
@@ -119,7 +119,7 @@ ario_stats_preferences_new (void)
 static void
 ario_stats_preferences_sync_stats (ArioStatsPreferences *stats_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioServerStats *stats = ario_server_get_stats ();
         gchar *tmp;
 
@@ -161,6 +161,6 @@ static void
 ario_stats_preferences_stats_changed_cb (ArioServer *server,
                                          ArioStatsPreferences *stats_preferences)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_stats_preferences_sync_stats (stats_preferences);
 }

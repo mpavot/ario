@@ -68,14 +68,14 @@ G_DEFINE_TYPE (ArioVolume, ario_volume, GTK_TYPE_EVENT_BOX)
 static void
 ario_volume_class_init (ArioVolumeClass *klass)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         g_type_class_add_private (klass, sizeof (ArioVolumePrivate));
 }
 
 static void
 ario_volume_init (ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *frame;
         GtkWidget *inner_frame;
         GtkWidget *pluslabel, *minuslabel;
@@ -193,7 +193,7 @@ ario_volume_changed_cb (ArioServer *server,
                         int vol,
                         ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkWidget *image;
 
         if (vol == -1)
@@ -222,7 +222,7 @@ ario_volume_changed_cb (ArioServer *server,
 ArioVolume *
 ario_volume_new (void)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ArioVolume *volume;
 
         volume = ARIO_VOLUME (g_object_new (TYPE_ARIO_VOLUME, NULL));
@@ -240,7 +240,7 @@ static void
 clicked_cb (GtkButton *button,
             ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         GtkRequisition  req;
         GdkGrabStatus pointer, keyboard;
         gint x, y;
@@ -327,7 +327,7 @@ clicked_cb (GtkButton *button,
 static gboolean
 scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gint vol = ario_server_get_current_volume ();
 
         int volume_adjust_step;
@@ -359,7 +359,7 @@ scroll_cb (GtkWidget *widget, GdkEvent *event, ArioVolume *volume)
 static void
 ario_volume_popup_hide (ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         gtk_grab_remove (volume->priv->window);
         gdk_pointer_ungrab (GDK_CURRENT_TIME);
         gdk_keyboard_ungrab (GDK_CURRENT_TIME);
@@ -372,7 +372,7 @@ ario_volume_popup_hide (ArioVolume *volume)
 static gboolean
 scale_button_release_event_cb (GtkWidget *widget, GdkEventButton *event, ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         ario_volume_popup_hide (volume);
         return FALSE;
 }
@@ -380,14 +380,14 @@ scale_button_release_event_cb (GtkWidget *widget, GdkEventButton *event, ArioVol
 static gboolean
 scale_button_event_cb (GtkWidget *widget, GdkEventButton *event, ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         return TRUE;
 }
 
 static gboolean
 scale_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         switch (event->keyval) {
         case GDK_KP_Enter:
         case GDK_ISO_Enter:
@@ -407,7 +407,7 @@ scale_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, ArioVolume *vol
 static void
 mixer_value_changed_cb (GtkAdjustment *adj, ArioVolume *volume)
 {
-        ARIO_LOG_FUNCTION_START
+        ARIO_LOG_FUNCTION_START;
         
         if (!volume->priv->loading) {
                 gint vol = (gint) gtk_adjustment_get_value (volume->priv->adj);
