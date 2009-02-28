@@ -705,7 +705,7 @@ ario_tree_covers_update (GtkTreeModel *model,
 
         gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &album, -1);
 
-        cover_path = ario_cover_make_ario_cover_path (album->artist, album->album, SMALL_COVER);
+        cover_path = ario_cover_make_cover_path (album->artist, album->album, SMALL_COVER);
 
         /* The small cover exists, we show it */
         cover = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
@@ -890,7 +890,7 @@ ario_tree_add_next_albums (ArioTree *tree,
                 server_album = tmp->data;
                 album_date = NULL;
 
-                cover_path = ario_cover_make_ario_cover_path (server_album->artist, server_album->album, SMALL_COVER);
+                cover_path = ario_cover_make_cover_path (server_album->artist, server_album->album, SMALL_COVER);
 
                 /* The small cover exists, we show it */
                 cover = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);

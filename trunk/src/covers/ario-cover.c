@@ -29,9 +29,9 @@
 static void ario_cover_create_ario_cover_dir (void);
 
 gchar *
-ario_cover_make_ario_cover_path (const gchar *artist,
-                                 const gchar *album,
-                                 const ArioCoverHomeCoversSize ario_cover_size)
+ario_cover_make_cover_path (const gchar *artist,
+                            const gchar *album,
+                            const ArioCoverHomeCoversSize ario_cover_size)
 {
         ARIO_LOG_FUNCTION_START
         char *ario_cover_path;
@@ -65,14 +65,14 @@ ario_cover_cover_exists (const gchar *artist,
         gboolean result;
 
         /* The path for the normal cover */
-        ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                           album,
-                                                           NORMAL_COVER);
+        ario_cover_path = ario_cover_make_cover_path (artist,
+                                                      album,
+                                                      NORMAL_COVER);
 
         /* The path for the small cover */
-        small_ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                                 album,
-                                                                 SMALL_COVER);
+        small_ario_cover_path = ario_cover_make_cover_path (artist,
+                                                            album,
+                                                            SMALL_COVER);
 
         /* We consider that the cover exists only if the normal and small covers exist */
         result = (ario_util_uri_exists (ario_cover_path) && ario_util_uri_exists (small_ario_cover_path));
@@ -117,13 +117,13 @@ ario_cover_remove_cover (const gchar *artist,
                 return;
 
         /* Delete the small cover*/
-        small_ario_cover_path = ario_cover_make_ario_cover_path (artist, album, SMALL_COVER);
+        small_ario_cover_path = ario_cover_make_cover_path (artist, album, SMALL_COVER);
         if (ario_util_uri_exists (small_ario_cover_path))
                 ario_util_unlink_uri (small_ario_cover_path);
         g_free (small_ario_cover_path);
 
         /* Delete the normal cover*/
-        ario_cover_path = ario_cover_make_ario_cover_path (artist, album, NORMAL_COVER);
+        ario_cover_path = ario_cover_make_cover_path (artist, album, NORMAL_COVER);
         if (ario_util_uri_exists (ario_cover_path))
                 ario_util_unlink_uri (ario_cover_path);
         g_free (ario_cover_path);
@@ -197,14 +197,14 @@ ario_cover_save_cover (const gchar *artist,
                 return TRUE;
 
         /* The path for the normal cover */
-        ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                           album,
-                                                           NORMAL_COVER);
+        ario_cover_path = ario_cover_make_cover_path (artist,
+                                                      album,
+                                                      NORMAL_COVER);
 
         /* The path for the small cover */
-        small_ario_cover_path = ario_cover_make_ario_cover_path (artist,
-                                                                 album,
-                                                                 SMALL_COVER);
+        small_ario_cover_path = ario_cover_make_cover_path (artist,
+                                                            album,
+                                                            SMALL_COVER);
 
         loader = gdk_pixbuf_loader_new ();
 

@@ -461,7 +461,7 @@ ario_information_fill_album (ArioInformation *information)
                     || (album->album && song->album && !strcmp (album->album, song->album)))
                         continue;
 
-                cover_path = ario_cover_make_ario_cover_path (album->artist, album->album, SMALL_COVER);
+                cover_path = ario_cover_make_cover_path (album->artist, album->album, SMALL_COVER);
                 pixbuf = gdk_pixbuf_new_from_file_at_size (cover_path, COVER_SIZE, COVER_SIZE, NULL);
                 g_free (cover_path);
                 if (pixbuf) {

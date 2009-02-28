@@ -83,7 +83,7 @@ ario_util_format_total_time (const int time)
 {
         ARIO_LOG_FUNCTION_START
         gchar *res;
-        gchar *temp1, *temp2;
+        gchar *tmp;
         int temp_time;
         int sec, min, hours, days;
 
@@ -102,27 +102,21 @@ ario_util_format_total_time (const int time)
         res = g_strdup_printf ("%d %s", sec, _("seconds"));
 
         if (min != 0) {
-                temp1 = g_strdup_printf ("%d %s, ", min, _("minutes"));
-                temp2 = g_strconcat (temp1, res, NULL);
-                g_free (temp1);
+                tmp = g_strdup_printf ("%d %s, %s", min, _("minutes"), res);
                 g_free (res);
-                res = temp2;
+                res = tmp;
         }
 
         if (hours != 0) {
-                temp1 = g_strdup_printf ("%d %s, ", hours, _("hours"));
-                temp2 = g_strconcat (temp1, res, NULL);
-                g_free (temp1);
+                tmp = g_strdup_printf ("%d %s, %s", hours, _("hours"), res);
                 g_free (res);
-                res = temp2;
+                res = tmp;
         }
 
         if (days != 0) {
-                temp1 = g_strdup_printf ("%d %s, ", days, _("days"));
-                temp2 = g_strconcat (temp1, res, NULL);
-                g_free (temp1);
+                tmp = g_strdup_printf ("%d %s, %s", days, _("days"), res);
                 g_free (res);
-                res = temp2;
+                res = tmp;
         }
 
         return res;
@@ -590,7 +584,7 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
         for (tmp = albums; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
                 ario_server_album = tmp->data;
 
-                cover_path = ario_cover_make_ario_cover_path (ario_server_album->artist, ario_server_album->album, SMALL_COVER);
+                cover_path = ario_cover_make_cover_path (ario_server_album->artist, ario_server_album->album, SMALL_COVER);
                 if (ario_util_uri_exists (cover_path)) {
                         covers = g_slist_append (covers, cover_path);
                         ++len;
@@ -630,7 +624,7 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
 
                 for (album_tmp = albums; album_tmp && len < MAX_COVERS_IN_DRAG; album_tmp = g_slist_next (album_tmp)) {
                         server_album = album_tmp->data;
-                        cover_path = ario_cover_make_ario_cover_path (server_album->artist, server_album->album, SMALL_COVER);
+                        cover_path = ario_cover_make_cover_path (server_album->artist, server_album->album, SMALL_COVER);
                         if (ario_util_uri_exists (cover_path)) {
                                 covers = g_slist_append (covers, cover_path);
                                 ++len;

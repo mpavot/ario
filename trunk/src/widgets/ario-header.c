@@ -630,14 +630,13 @@ ario_header_elapsed_changed_cb (ArioServer *server,
                                 ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
-        char *tmp;
+        gchar time[ARIO_MAX_TIME_SIZE];
 
         if (header->priv->slider_dragging)
                 return;
 
-        tmp = ario_util_format_time (elapsed);
-        gtk_label_set_text (GTK_LABEL (header->priv->elapsed), tmp);
-        g_free (tmp);
+        ario_util_format_time_buf (elapsed, time, ARIO_MAX_TIME_SIZE);
+        gtk_label_set_text (GTK_LABEL (header->priv->elapsed), time);
 
         gtk_adjustment_set_value (header->priv->adjustment, (gdouble) elapsed);
 }
@@ -731,14 +730,13 @@ static void ario_header_slider_value_changed_cb (GtkWidget *widget,
                                                  ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START
-        gchar *tmp;
+        gchar time[ARIO_MAX_TIME_SIZE];
         int elapsed;
 
         if (header->priv->slider_dragging) {
                 elapsed = (int) gtk_range_get_value (GTK_RANGE (header->priv->scale));
-                tmp = ario_util_format_time (elapsed);
-                gtk_label_set_text (GTK_LABEL (header->priv->elapsed), tmp);
-                g_free (tmp);
+                ario_util_format_time_buf (elapsed, time, ARIO_MAX_TIME_SIZE);
+                gtk_label_set_text (GTK_LABEL (header->priv->elapsed), time);
         }
 }
 

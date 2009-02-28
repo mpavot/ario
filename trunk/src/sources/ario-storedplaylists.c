@@ -384,7 +384,7 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
                                     tmp->data, -1);
         }
 
-        g_slist_foreach(playlists, (GFunc) g_free, NULL);
+        g_slist_foreach (playlists, (GFunc) g_free, NULL);
         g_slist_free (playlists);
 
         gtk_tree_selection_unselect_all (storedplaylists->priv->storedplaylists_selection);

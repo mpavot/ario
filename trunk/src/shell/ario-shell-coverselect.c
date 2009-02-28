@@ -599,7 +599,7 @@ ario_shell_coverselect_set_current_cover (ArioShellCoverselect *ario_shell_cover
         gchar *ario_cover_path;
 
         if (ario_cover_cover_exists (ario_shell_coverselect->priv->file_artist, ario_shell_coverselect->priv->file_album)) {
-                ario_cover_path = ario_cover_make_ario_cover_path (ario_shell_coverselect->priv->file_artist,
+                ario_cover_path = ario_cover_make_cover_path (ario_shell_coverselect->priv->file_artist,
                                                                    ario_shell_coverselect->priv->file_album,
                                                                    NORMAL_COVER);
                 gtk_widget_show_all (ario_shell_coverselect->priv->current_cover);
