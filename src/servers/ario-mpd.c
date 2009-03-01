@@ -855,9 +855,6 @@ static int
 ario_mpd_get_current_playlist_total_time (void)
 {
         ARIO_LOG_FUNCTION_START;
-        int total_time = 0;
-        ArioServerSong *song;
-        mpd_InfoEntity *ent = NULL;
 
         if (!instance->priv->connection)
                 return 0;
