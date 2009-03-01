@@ -251,6 +251,11 @@
 		<Unit filename="plugins\wikipedia\ario-wikipedia-plugin.h">
 			<Option target="wikipedia" />
 		</Unit>
+		<Unit filename="ressources.rc">
+			<Option compilerVar="WINDRES" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="src\ario-debug.h">
 			<Option target="ariodll" />
 		</Unit>
