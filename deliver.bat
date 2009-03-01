@@ -1,44 +1,45 @@
 @echo off
 
-rmdir /s /q delivery
+rmdir /s /q bin\data
+rmdir /s /q bin\po
 
-mkdir delivery
+mkdir bin\data
+mkdir bin\data\ui
+copy data\*.png bin\data
+copy data\profiles.xml.default bin\data
+copy data\ario-ui.xml bin\data\ui
 
-copy ario.exe delivery
-copy ario.dll delivery
+copy data\ui\*.ui bin\data\ui\
 
-mkdir delivery\data
-mkdir delivery\data\ui
-copy data\*.png delivery\data
-copy data\profiles.xml.default delivery\data
-copy data\ario-ui.xml delivery\data\ui
+mkdir bin\plugins
+mkdir bin\plugins\icons
+copy plugins\filesystem\filesystem-ui.xml bin\plugins
+copy plugins\filesystem\filesystem.ario-plugin.w32 bin\plugins\filesystem.ario-plugin
 
-copy data\ui\*.ui delivery\data\ui\
+copy plugins\wikipedia\wikipedia-ui.xml bin\plugins
+copy plugins\wikipedia\wikipedia.png bin\plugins\icons
+copy plugins\wikipedia\wikipedia.ario-plugin.w32 bin\plugins\wikipedia.ario-plugin
 
-mkdir delivery\plugins
-mkdir delivery\plugins\icons
-copy plugins\filesystem\libfilesystem.dll delivery\plugins
-copy plugins\filesystem\filesystem-ui.xml delivery\plugins
-copy plugins\filesystem\filesystem.ario-plugin.w32 delivery\plugins\filesystem.ario-plugin
+copy plugins\radios\radios-ui.xml bin\plugins
+copy plugins\radios\radios.xml.default bin\plugins
+copy plugins\radios\radios.ario-plugin.w32 bin\plugins\radios.ario-plugin
 
-copy plugins\wikipedia\libwikipedia.dll delivery\plugins
-copy plugins\wikipedia\wikipedia-ui.xml delivery\plugins
-copy plugins\wikipedia\wikipedia.png delivery\plugins\icons
-copy plugins\wikipedia\wikipedia.ario-plugin.w32 delivery\plugins\wikipedia.ario-plugin
+copy plugins\information\information.ui bin\plugins
+copy plugins\information\information.ario-plugin.w32 bin\plugins\information.ario-plugin
 
-copy plugins\radios\libradios.dll delivery\plugins
-copy plugins\radios\radios-ui.xml delivery\plugins
-copy plugins\radios\radios.xml.default delivery\plugins
-copy plugins\radios\radios.ario-plugin.w32 delivery\plugins\radios.ario-plugin
+copy plugins\audioscrobbler\audioscrobbler-prefs.ui bin\plugins
+copy plugins\audioscrobbler\audioscrobbler.ario-plugin.w32 bin\plugins\audioscrobbler.ario-plugin
+copy plugins\audioscrobbler\audioscrobbler.png bin\plugins\icons
 
-copy plugins\information\libinformation.dll delivery\plugins
-copy plugins\information\information.ui delivery\plugins
-copy plugins\information\information.ario-plugin.w32 delivery\plugins\information.ario-plugin
-
-mkdir delivery\po
+mkdir bin\po
 
 for %%a in (po\*.gmo) do (
-	mkdir delivery\po\%%~na
-	mkdir delivery\po\%%~na\LC_MESSAGES
-	copy %%a delivery\po\%%~na\LC_MESSAGES\Ario.mo
+	mkdir bin\po\%%~na
+	mkdir bin\po\%%~na\LC_MESSAGES
+	copy %%a bin\po\%%~na\LC_MESSAGES\Ario.mo
 )
+
+copy ..\deps\libgcrypt-1.2.2\bin\libgcrypt-11.dll bin
+copy ..\deps\libgcrypt-1.2.2\bin\libgpg-error-0.dll bin
+copy ..\deps\glib-2.16.6-1\bin\libgio-2.0-0.dll bin
+copy ..\deps\libsoup-2.4-1\bin\libsoup-2.4-1.dll bin

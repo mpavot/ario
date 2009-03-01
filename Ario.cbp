@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ario" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="ariodll">
+				<Option output="bin\ario" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj\ariodll\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createStaticLib="1" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-export-all-symbols" />
+				</Linker>
+			</Target>
+			<Target title="Debug">
+				<Option output="bin\ario_debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="bin\libario.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\ario" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="bin\libario.a" />
+				</Linker>
+			</Target>
+			<Target title="audioscrobbler">
+				<Option output="bin\plugins\libaudioscrobbler" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\plugins\" />
+				<Option object_output="obj\audioscrobbler\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-DHAVE_LIBSOUP_2_4" />
+					<Add directory="..\deps\libsoup-2.4-1\" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+					<Add library="bin\libario.a" />
+					<Add library="..\deps\libsoup-2.4-1\bin\libsoup-2.4-1.a" />
+				</Linker>
+			</Target>
+			<Target title="filesystem">
+				<Option output="bin\plugins\libfilesystem" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\filesystem\" />
+				<Option object_output="obj\filesystem\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+					<Add library="bin\libario.a" />
+				</Linker>
+			</Target>
+			<Target title="information">
+				<Option output="bin\plugins\libinformation" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\information\" />
+				<Option object_output="obj\information\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+					<Add library="bin\libario.a" />
+				</Linker>
+			</Target>
+			<Target title="radios">
+				<Option output="bin\plugins\libradios" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\radios\" />
+				<Option object_output="obj\radios\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+					<Add library="bin\libario.a" />
+				</Linker>
+			</Target>
+			<Target title="wikipedia">
+				<Option output="bin\plugins\libwikipedia" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\wikipedia\" />
+				<Option object_output="obj\wikipedia\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+					<Add library="bin\libario.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="all" targets="ariodll;Debug;Release;audioscrobbler;filesystem;information;radios;wikipedia;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-mms-bitfields" />
+			<Add option="-DLIBXML_STATIC" />
+			<Add directory="." />
+			<Add directory="src" />
+			<Add directory="src\plugins" />
+			<Add directory="src\shell" />
+			<Add directory="src\sources" />
+			<Add directory="..\deps\atk-1.24.0-1\include\atk-1.0" />
+			<Add directory="..\deps\cairo-1.8.6-1\include\cairo" />
+			<Add directory="..\deps\curl-7.19.2\include" />
+			<Add directory="..\deps\gettext-0.14.4\include" />
+			<Add directory="..\deps\glib-2.16.6-1\include\glib-2.0" />
+			<Add directory="..\deps\glib-2.16.6-1\lib\glib-2.0\include" />
+			<Add directory="..\deps\gtk+-2.14.7-1\include\gtk-2.0" />
+			<Add directory="..\deps\gtk+-2.14.7-1\lib\gtk-2.0\include" />
+			<Add directory="..\deps\libxml2-2.7.3\include" />
+			<Add directory="..\deps\pango-1.22.4-1\include\pango-1.0" />
+			<Add directory="..\deps\libgcrypt-1.2.2\include" />
+		</Compiler>
+		<Linker>
+			<Add option="-DLIBXML_STATIC" />
+			<Add library="C:\Program Files\CodeBlocks\MinGW\lib\libws2_32.a" />
+			<Add library="..\deps\libxml2-2.7.3\win32\bin.mingw\libxml2.a" />
+			<Add library="..\deps\gettext-0.14.4\lib\libintl.dll.a" />
+			<Add library="..\deps\glib-2.16.6-1\lib\glib-2.0.lib" />
+			<Add library="..\deps\glib-2.16.6-1\lib\gmodule-2.0.lib" />
+			<Add library="..\deps\glib-2.16.6-1\lib\gobject-2.0.lib" />
+			<Add library="..\deps\glib-2.16.6-1\lib\gthread-2.0.lib" />
+			<Add library="..\deps\gtk+-2.14.7-1\lib\gtk-win32-2.0.lib" />
+			<Add library="..\deps\gtk+-2.14.7-1\lib\gdk-win32-2.0.lib" />
+			<Add library="..\deps\gtk+-2.14.7-1\lib\gdk_pixbuf-2.0.lib" />
+			<Add library="..\deps\libgcrypt-1.2.2\lib\libgcrypt.a" />
+			<Add library="..\deps\libgcrypt-1.2.2\lib\libgpg-error.a" />
+			<Add library="..\deps\pango-1.22.4-1\lib\pango-1.0.lib" />
+			<Add library="..\deps\curl-7.19.2\lib\libcurldll.a" />
+			<Add directory="..\deps\atk-1.24.0-1\lib" />
+			<Add directory="..\deps\cairo-1.8.6-1\lib" />
+			<Add directory="..\deps\curl-7.19.2\lib" />
+			<Add directory="..\deps\gettext-0.14.4\lib" />
+			<Add directory="..\deps\glib-2.16.6-1\include" />
+			<Add directory="..\deps\gtk+-2.14.7-1\lib" />
+			<Add directory="..\deps\libxml2-2.7.3\win32\bin.mingw" />
+			<Add directory="..\deps\pango-1.22.4-1\lib" />
+		</Linker>
+		<Unit filename="config.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="plugins\audioscrobbler\ario-audioscrobbler-plugin.c">
+			<Option compilerVar="CC" />
+			<Option target="audioscrobbler" />
+		</Unit>
+		<Unit filename="plugins\audioscrobbler\ario-audioscrobbler.c">
+			<Option compilerVar="CC" />
+			<Option target="audioscrobbler" />
+		</Unit>
+		<Unit filename="plugins\audioscrobbler\ario-audioscrobbler.h">
+			<Option target="audioscrobbler" />
+		</Unit>
+		<Unit filename="plugins\filesystem\ario-filesystem-plugin.c">
+			<Option compilerVar="CC" />
+			<Option target="filesystem" />
+		</Unit>
+		<Unit filename="plugins\filesystem\ario-filesystem-plugin.h">
+			<Option target="filesystem" />
+		</Unit>
+		<Unit filename="plugins\filesystem\ario-filesystem.c">
+			<Option compilerVar="CC" />
+			<Option target="filesystem" />
+		</Unit>
+		<Unit filename="plugins\filesystem\ario-filesystem.h">
+			<Option target="filesystem" />
+		</Unit>
+		<Unit filename="plugins\information\ario-information-plugin.c">
+			<Option compilerVar="CC" />
+			<Option target="information" />
+		</Unit>
+		<Unit filename="plugins\information\ario-information-plugin.h">
+			<Option target="information" />
+		</Unit>
+		<Unit filename="plugins\information\ario-information.c">
+			<Option compilerVar="CC" />
+			<Option target="information" />
+		</Unit>
+		<Unit filename="plugins\information\ario-information.h">
+			<Option target="information" />
+		</Unit>
+		<Unit filename="plugins\radios\ario-radio.c">
+			<Option compilerVar="CC" />
+			<Option target="radios" />
+		</Unit>
+		<Unit filename="plugins\radios\ario-radio.h">
+			<Option target="radios" />
+		</Unit>
+		<Unit filename="plugins\radios\ario-radios-plugin.c">
+			<Option compilerVar="CC" />
+			<Option target="radios" />
+		</Unit>
+		<Unit filename="plugins\radios\ario-radios-plugin.h">
+			<Option target="radios" />
+		</Unit>
+		<Unit filename="plugins\wikipedia\ario-wikipedia-plugin.c">
+			<Option compilerVar="CC" />
+			<Option target="wikipedia" />
+		</Unit>
+		<Unit filename="plugins\wikipedia\ario-wikipedia-plugin.h">
+			<Option target="wikipedia" />
+		</Unit>
+		<Unit filename="src\ario-debug.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\ario-enum-types.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\ario-main.c">
+			<Option compilerVar="CC" />
+			<Option target="Release" />
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="src\ario-profiles.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\ario-profiles.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\ario-util.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\ario-util.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-amazon.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-amazon.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-handler.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-handler.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-lastfm.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-lastfm.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-local.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-local.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-manager.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-manager.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-provider.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover-provider.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\covers\ario-cover.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\ario-conf.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\ario-conf.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\gtk-builder-helpers.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\gtk-builder-helpers.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\libmpdclient.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\libmpdclient.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\libsexy\sexy-tooltip.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lib\libsexy\sexy-tooltip.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-leoslyrics.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-leoslyrics.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-lyricwiki.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-lyricwiki.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-manager.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-manager.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-provider.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-provider.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\notification\ario-notification-manager.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\notification\ario-notification-manager.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\notification\ario-notifier-tooltip.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\notification\ario-notifier-tooltip.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\notification\ario-notifier.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\notification\ario-notifier.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-dynamic.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-dynamic.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-manager.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-manager.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-mode.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-mode.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-normal.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-normal.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-queue.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\playlist\ario-playlist-queue.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-module.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-module.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin-info-priv.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin-info.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin-info.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin-manager.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin-manager.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugin.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugins-engine.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\plugins\ario-plugins-engine.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-browser-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-browser-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-connection-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-connection-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-cover-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-cover-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-lyrics-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-lyrics-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-others-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-others-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-playlist-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-playlist-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-server-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-server-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-stats-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-stats-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-trayicon-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\preferences\ario-trayicon-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\servers\ario-mpd.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\servers\ario-mpd.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\servers\ario-server-interface.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\servers\ario-server-interface.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\servers\ario-server.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\servers\ario-server.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-coverdownloader.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-coverdownloader.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-coverselect.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-coverselect.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-lyrics.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-lyrics.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-lyricsselect.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-lyricsselect.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-preferences.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-preferences.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-similarartists.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-similarartists.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-songinfos.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell-songinfos.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\shell\ario-shell.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-browser.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-browser.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-search.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-search.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-source-manager.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-source-manager.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-source.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-source.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-storedplaylists.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-storedplaylists.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-tree.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-tree.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-connection-widget.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-connection-widget.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-firstlaunch.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-firstlaunch.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-header.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-header.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-lyrics-editor.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-lyrics-editor.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-playlist.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-playlist.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-songlist.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-songlist.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-status-bar.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-status-bar.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-tray-icon.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-tray-icon.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-volume.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-volume.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
