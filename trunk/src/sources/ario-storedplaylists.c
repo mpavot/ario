@@ -76,6 +76,7 @@ static void ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
                                                              guint info, guint time, gpointer data);
 static void ario_storedplaylists_playlists_selection_changed_cb (GtkTreeSelection *selection,
                                                                  ArioStoredplaylists *storedplaylists);
+static void ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists);
 
 struct ArioStoredplaylistsPrivate
 {
@@ -87,6 +88,7 @@ struct ArioStoredplaylistsPrivate
         GtkWidget *paned;
 
         gboolean connected;
+        gboolean empty;
 
         gboolean dragging;
         gboolean pressed;
@@ -168,6 +170,15 @@ ario_storedplaylists_get_icon (ArioSource *source)
 }
 
 static void
+ario_storedplaylists_select (ArioSource *source)
+{
+        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (source);
+
+        if (storedplaylists->priv->empty)
+                ario_storedplaylists_fill_storedplaylists (storedplaylists);
+}
+
+static void
 ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
@@ -181,6 +192,7 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
         source_class->get_name = ario_storedplaylists_get_name;
         source_class->get_icon = ario_storedplaylists_get_icon;
         source_class->shutdown = ario_storedplaylists_shutdown;
+        source_class->select = ario_storedplaylists_select;
 
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -205,6 +217,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         storedplaylists->priv = ARIO_STOREDPLAYLISTS_GET_PRIVATE (storedplaylists);
 
         storedplaylists->priv->connected = FALSE;
+        storedplaylists->priv->empty = TRUE;
 
         /* Storedplaylists list */
         scrolledwindow_storedplaylists = gtk_scrolled_window_new (NULL, NULL);
@@ -372,6 +385,8 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
         GSList *playlists;
         GSList *tmp;
 
+        storedplaylists->priv->empty = FALSE;
+
         gtk_list_store_clear (storedplaylists->priv->storedplaylists_model);
 
         if (!storedplaylists->priv->connected)
@@ -467,7 +482,8 @@ ario_storedplaylists_connectivity_changed_cb (ArioServer *server,
 {
         ARIO_LOG_FUNCTION_START;
         storedplaylists->priv->connected = ario_server_is_connected ();
-        ario_storedplaylists_fill_storedplaylists (storedplaylists);
+        if (!storedplaylists->priv->empty)
+                ario_storedplaylists_fill_storedplaylists (storedplaylists);
 }
 
 static void
