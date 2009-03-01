@@ -89,6 +89,7 @@ struct ArioFilesystemPrivate
         GtkWidget *songs;
 
         gboolean connected;
+        gboolean empty;
 
         gboolean dragging;
         gboolean pressed;
@@ -171,6 +172,15 @@ ario_filesystem_get_icon (ArioSource *source)
 }
 
 static void
+ario_filesystem_select (ArioSource *source)
+{
+        ArioFilesystem *filesystem = ARIO_FILESYSTEM (source);
+
+        if (filesystem->priv->empty)
+                ario_filesystem_fill_filesystem (filesystem);
+}
+
+static void
 ario_filesystem_class_init (ArioFilesystemClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
@@ -184,6 +194,7 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
         source_class->get_name = ario_filesystem_get_name;
         source_class->get_icon = ario_filesystem_get_icon;
         source_class->shutdown = ario_filesystem_shutdown;
+        source_class->select = ario_filesystem_select;
 
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
@@ -208,6 +219,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         filesystem->priv = ARIO_FILESYSTEM_GET_PRIVATE (filesystem);
 
         filesystem->priv->connected = FALSE;
+        filesystem->priv->empty = TRUE;
 
         /* Filesystem tree */
         scrolledwindow_filesystem = gtk_scrolled_window_new (NULL, NULL);
@@ -394,8 +406,6 @@ ario_filesystem_new (GtkUIManager *mgr,
 
         filesystem->priv->connected = ario_server_is_connected ();
 
-        ario_filesystem_fill_filesystem (filesystem);
-
         return GTK_WIDGET (filesystem);
 }
 
@@ -420,6 +430,7 @@ ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
                 gtk_tree_selection_select_iter (filesystem->priv->filesystem_selection, &iter);
                 ario_filesystem_cursor_moved_cb (GTK_TREE_VIEW (filesystem->priv->filesystem), filesystem);
         }
+        filesystem->priv->empty = FALSE;
 }
 
 static void
