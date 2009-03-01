@@ -28,6 +28,7 @@
 #include "ario-profiles.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "widgets/ario-playlist.h"
 #include "config.h"
 
 #define ONE_SECOND 1000
@@ -291,7 +292,6 @@ ario_mpd_connect_to (ArioMpd *mpd,
                      float timeout)
 {
         ARIO_LOG_FUNCTION_START;
-        mpd_Stats *stats;
         gchar *password;
         mpd_Connection *connection;
 
@@ -313,16 +313,6 @@ ario_mpd_connect_to (ArioMpd *mpd,
                 mpd_finishCommand (connection);
         }
 
-        mpd_sendStatsCommand (connection);
-        stats = mpd_getStats (connection);
-        mpd_finishCommand (connection);
-        if (stats == NULL) {
-                mpd_closeConnection (connection);
-                mpd->priv->connection = NULL;
-                return FALSE;
-        }
-
-        mpd_freeStats(stats);
         mpd->priv->connection = connection;
 
         ario_mpd_check_idle (mpd);
@@ -760,7 +750,6 @@ ario_mpd_get_playlist_changes (int playlist_id)
                 return NULL;
 
         mpd_sendPlChangesCommand (instance->priv->connection, playlist_id);
-
         while ((entity = mpd_getNextInfoEntity (instance->priv->connection))) {
                 if (entity->info.song) {
                         songs = g_slist_append (songs, entity->info.song);
@@ -873,24 +862,8 @@ ario_mpd_get_current_playlist_total_time (void)
         if (!instance->priv->connection)
                 return 0;
 
-        /*
-         * We go to MPD server for each call to this function but it is not a problem as it is
-         * called only once for each playlist change (by status bar). I may change this implementation
-         * if this function is called more than once for performance reasons.
-         */
-        mpd_sendPlaylistInfoCommand(instance->priv->connection, -1);
-        while ((ent = mpd_getNextInfoEntity (instance->priv->connection))) {
-                song = ent->info.song;
-                if (song->time != MPD_SONG_NO_TIME)
-                        total_time = total_time + song->time;
-                mpd_freeInfoEntity(ent);
-        }
-        mpd_finishCommand (instance->priv->connection);
-
-        if (instance->priv->support_idle && instance->priv->connection)
-                mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
-
-        return total_time;
+        /* Compute it from playlist widget (quite coslty but not often called) */
+        return ario_playlist_get_total_time ();
 }
 
 static unsigned long
