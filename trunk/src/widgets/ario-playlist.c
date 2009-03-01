@@ -187,6 +187,7 @@ enum
         GENRE_COLUMN,
         DATE_COLUMN,
         ID_COLUMN,
+        TIME_COLUMN,
         N_COLUMN
 };
 
@@ -482,6 +483,7 @@ ario_playlist_init (ArioPlaylist *playlist)
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
+                                                    G_TYPE_INT,
                                                     G_TYPE_INT);
 
         playlist->priv->filter = GTK_TREE_MODEL_FILTER (gtk_tree_model_filter_new (GTK_TREE_MODEL (playlist->priv->model), NULL));
@@ -802,6 +804,7 @@ ario_playlist_changed_cb (ArioServer *server,
                                             GENRE_COLUMN, song->genre,
                                             DATE_COLUMN, song->date,
                                             ID_COLUMN, song->id,
+                                            TIME_COLUMN, song->time,
                                             -1);
                 }
         }
@@ -1657,5 +1660,33 @@ ario_playlist_column_visible_changed_cb (guint notification_id,
         ARIO_LOG_FUNCTION_START;
         gtk_tree_view_column_set_visible (ario_column->column,
                                           ario_conf_get_integer (ario_column->pref_is_visible, ario_column->default_is_visible));
+}
+
+static gboolean
+ario_playlist_get_total_time_foreach (GtkTreeModel *model,
+                                      GtkTreePath *p,
+                                      GtkTreeIter *iter,
+                                      int *total_time)
+{
+        gint time;
+
+        gtk_tree_model_get (model, iter, TIME_COLUMN, &time, -1);
+
+        *total_time += time;
+
+        return FALSE;
+}
+
+gint
+ario_playlist_get_total_time (void)
+{
+        ARIO_LOG_FUNCTION_START;
+        int total_time = 0;
+
+        gtk_tree_model_foreach (GTK_TREE_MODEL (instance->priv->model),
+                                (GtkTreeModelForeachFunc) ario_playlist_get_total_time_foreach,
+                                &total_time);
+
+        return total_time;
 }
 

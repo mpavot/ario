@@ -50,6 +50,9 @@ GType           ario_playlist_get_type          (void) G_GNUC_CONST;
 GtkWidget *     ario_playlist_new               (GtkUIManager *mgr,
                                                  GtkActionGroup *group);
 void            ario_playlist_shutdown          (void);
+
+gint            ario_playlist_get_total_time    (void);
+
 G_END_DECLS
 
 #endif /* __ARIO_PLAYLIST_H */
