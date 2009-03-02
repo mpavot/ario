@@ -67,7 +67,7 @@ ario_conf_set (const char *key,
         GSList *tmp;
         ArioConfNotifyData *data;
 
-        if (!strcmp (ario_conf_get (key), value)) {
+        if (!ario_util_strcmp (ario_conf_get (key), value)) {
                 g_free (value);
                 return;
         }
