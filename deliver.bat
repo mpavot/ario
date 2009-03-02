@@ -43,3 +43,9 @@ copy ..\deps\libgcrypt-1.2.2\bin\libgcrypt-11.dll bin
 copy ..\deps\libgcrypt-1.2.2\bin\libgpg-error-0.dll bin
 copy ..\deps\glib-2.16.6-1\bin\libgio-2.0-0.dll bin
 copy ..\deps\libsoup-2.4-1\bin\libsoup-2.4-1.dll bin
+copy ..\deps\curl-7.19.2\bin\libcurl.dll bin
+copy ..\deps\curl-7.19.2\bin\libeay32.dll bin
+copy ..\deps\curl-7.19.2\bin\libidn-11.dll bin
+copy ..\deps\curl-7.19.2\bin\libssl32.dll bin
+copy ..\deps\gettext-0.14.4\bin\libintl3.dll bin
+copy ..\bin-deps\libiconv-1.9.2-1-bin\bin\libiconv2.dll bin
