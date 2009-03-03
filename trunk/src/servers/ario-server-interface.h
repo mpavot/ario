@@ -42,7 +42,7 @@ typedef struct
         int elapsed;
 
         ArioServerSong *server_song;
-        int playlist_id;
+        gint64 playlist_id;
         int playlist_length;
 
         gboolean random;
@@ -84,9 +84,9 @@ typedef struct
 
         GSList *            (*get_playlists)                          (void);
 
-        GSList *            (*get_playlist_changes)                   (int playlist_id);
+        GSList *            (*get_playlist_changes)                   (gint64 playlist_id);
 
-        ArioServerSong *    (*get_current_song_on_server)               (void);
+        ArioServerSong *    (*get_current_song_on_server)             (void);
 
         int                 (*get_current_playlist_total_time)        (void);
 
@@ -121,20 +121,20 @@ typedef struct
 
         void                (*enable_output)                          (const int id,
                                                                        const gboolean enabled);
-        ArioServerStats *      (*get_stats)                  (void);
+        ArioServerStats *      (*get_stats)                           (void);
 
         GList *             (*get_songs_info)                         (GSList *paths);
 
-        ArioServerFileList*    (*list_files)                 (const char *path,
+        ArioServerFileList*    (*list_files)                          (const char *path,
                                                                        const gboolean recursive);
 } ArioServerInterfaceClass;
 
-GType                   ario_server_interface_get_type                               (void) G_GNUC_CONST;
+GType                   ario_server_interface_get_type                (void) G_GNUC_CONST;
 
-void                    ario_server_interface_set_default                            (ArioServerInterface *server_interface);
+void                    ario_server_interface_set_default             (ArioServerInterface *server_interface);
 
-void                    ario_server_interface_emit                                   (ArioServerInterface *server_interface,
-                                                                                      ArioServer *server);
+void                    ario_server_interface_emit                    (ArioServerInterface *server_interface,
+                                                                       ArioServer *server);
 G_END_DECLS
 
 #endif /* __ARIO_SERVER_INTERFACE_H */

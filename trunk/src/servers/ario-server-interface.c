@@ -122,8 +122,8 @@ dummy_pointer_tag_pointer (const ArioServerTag a,
         return NULL;
 }
 
-static  gpointer
-dummy_pointer_int  (int playlist_id)
+static gpointer
+dummy_pointer_int (gint64 playlist_id)
 {
         return NULL;
 }
@@ -149,7 +149,7 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         klass->get_songs = (GSList* (*) (const ArioServerCriteria *, const gboolean)) dummy_pointer_pointer_int;
         klass->get_songs_from_playlist = (GSList* (*) (char *)) dummy_pointer_pointer;
         klass->get_playlists = (GSList* (*) (void)) dummy_pointer_void;
-        klass->get_playlist_changes = (GSList* (*) (int))dummy_pointer_int;
+        klass->get_playlist_changes = (GSList* (*) (gint64))dummy_pointer_int;
         klass->get_current_song_on_server = (ArioServerSong* (*) (void)) dummy_pointer_void;
         klass->get_current_playlist_total_time = dummy_int_void;
         klass->get_last_update = dummy_ulong_void;
@@ -210,11 +210,11 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
 
         g_object_class_install_property (object_class,
                                          PROP_PLAYLISTID,
-                                         g_param_spec_int ("playlist_id",
-                                                           "playlist_id",
-                                                           "playlist_id",
-                                                           -1, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
+                                         g_param_spec_int64 ("playlist_id",
+                                                             "playlist_id",
+                                                             "playlist_id",
+                                                             -1, G_MAXINT64, 0,
+                                                             G_PARAM_READWRITE));
 
         g_object_class_install_property (object_class,
                                          PROP_RANDOM,
@@ -339,7 +339,7 @@ ario_server_interface_set_property (GObject *object,
                 server_interface->signals_to_emit |= SERVER_ELAPSED_CHANGED_FLAG;
                 break;
         case PROP_PLAYLISTID:
-                server_interface->playlist_id = g_value_get_int (value);
+                server_interface->playlist_id = g_value_get_int64 (value);
                 if (!ario_server_is_connected ())
                         server_interface->playlist_length = 0;
                 server_interface->signals_to_emit |= SERVER_PLAYLIST_CHANGED_FLAG;
@@ -385,7 +385,7 @@ ario_server_interface_get_property (GObject *object,
                 g_value_set_int (value, server_interface->elapsed);
                 break;
         case PROP_PLAYLISTID:
-                g_value_set_int (value, server_interface->playlist_id);
+                g_value_set_int64 (value, server_interface->playlist_id);
                 break;
         case PROP_RANDOM:
                 g_value_set_boolean (value, server_interface->random);

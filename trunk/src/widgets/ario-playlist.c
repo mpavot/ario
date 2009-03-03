@@ -124,7 +124,7 @@ struct ArioPlaylistPrivate
         gboolean in_search;
         const gchar *search_text;
 
-        int playlist_id;
+        gint64 playlist_id;
         int playlist_length;
         gboolean ignore;
         gint pos;
