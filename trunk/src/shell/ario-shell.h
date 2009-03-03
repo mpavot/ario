@@ -65,7 +65,6 @@ void            ario_shell_present              (ArioShell *shell);
 
 void            ario_shell_set_visibility       (ArioShell *shell,
                                                  ArioVisibility state);
-void            ario_shell_restore_main_window  (ArioShell *shell);
 
 G_END_DECLS
 
