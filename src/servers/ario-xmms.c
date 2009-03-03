@@ -61,7 +61,7 @@ static GSList * ario_xmms_get_songs (const ArioServerCriteria *criteria,
                                      const gboolean exact);
 static GSList * ario_xmms_get_songs_from_playlist (char *playlist);
 static GSList * ario_xmms_get_playlists (void);
-static GSList * ario_xmms_get_playlist_changes (int playlist_id);
+static GSList * ario_xmms_get_playlist_changes (gint64 playlist_id);
 static ArioServerSong * ario_xmms_get_current_song_on_server (void);
 static int ario_xmms_get_current_playlist_total_time (void);
 static unsigned long ario_xmms_get_last_update (void);
@@ -883,7 +883,7 @@ ario_xmms_playlist_exists (const gchar *name)
 }
 
 static GSList *
-ario_xmms_get_playlist_changes (int playlist_id)
+ario_xmms_get_playlist_changes (gint64 playlist_id)
 {
         ARIO_LOG_FUNCTION_START;
         return ario_xmms_get_songs_from_playlist (NULL);

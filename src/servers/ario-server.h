@@ -183,7 +183,7 @@ GSList *                ario_server_get_songs                              (cons
 GSList *                ario_server_get_songs_from_playlist                (char *playlist);
 GSList *                ario_server_get_playlists                          (void);
 
-GSList *                ario_server_get_playlist_changes                   (int playlist_id);
+GSList *                ario_server_get_playlist_changes                   (gint64 playlist_id);
 
 char *                  ario_server_get_current_title                      (void);
 
@@ -209,7 +209,7 @@ int                     ario_server_get_current_volume                     (void
 
 int                     ario_server_get_current_total_time                 (void);
 
-int                     ario_server_get_current_playlist_id                (void);
+gint64                  ario_server_get_current_playlist_id                (void);
 
 int                     ario_server_get_current_playlist_length            (void);
 

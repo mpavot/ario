@@ -324,7 +324,7 @@ ario_server_get_playlists (void)
 }
 
 GSList *
-ario_server_get_playlist_changes (int playlist_id)
+ario_server_get_playlist_changes (gint64 playlist_id)
 {
         ARIO_LOG_FUNCTION_START;
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_playlist_changes (playlist_id);
@@ -441,7 +441,7 @@ ario_server_get_current_total_time (void)
                 return 0;
 }
 
-int
+gint64
 ario_server_get_current_playlist_id (void)
 {
         ARIO_LOG_FUNCTION_START;
