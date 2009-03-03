@@ -128,10 +128,6 @@ struct ArioShellPrivate
         gboolean shown;
 
         gboolean maximized;
-        int window_x;
-        int window_y;
-        int window_w;
-        int window_h;
         gboolean visible;
 };
 
@@ -240,10 +236,6 @@ ario_shell_init (ArioShell *shell)
         shell->priv->connected = FALSE;
         shell->priv->shown = FALSE;
 
-        shell->priv->window_x = -1;
-        shell->priv->window_y = -1;
-        shell->priv->window_w = -1;
-        shell->priv->window_h = -1;
         shell->priv->visible = TRUE;
 }
 
@@ -570,35 +562,6 @@ ario_shell_present (ArioShell *shell)
 }
 
 void
-ario_shell_restore_main_window (ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START;
-
-        if (!shell->priv->shown) {
-                gtk_widget_show_all (shell->priv->window);
-                shell->priv->shown = TRUE;
-        }
-        if ((shell->priv->window_x >= 0 && shell->priv->window_y >= 0) || (shell->priv->window_h >= 0 && shell->priv->window_w >=0 )) {
-                gtk_widget_realize (shell->priv->window);
-                gdk_flush ();
-
-                if (shell->priv->window_x >= 0 && shell->priv->window_y >= 0) {
-                        gtk_window_move (GTK_WINDOW (shell->priv->window),
-                                         shell->priv->window_x,
-                                         shell->priv->window_y);
-                }
-                if (shell->priv->window_w >= 0 && shell->priv->window_y >=0) {
-                        gtk_window_resize (GTK_WINDOW (shell->priv->window),
-                                           shell->priv->window_w,
-                                           shell->priv->window_h);
-                }
-        }
-
-        if (shell->priv->maximized)
-                gtk_window_maximize (GTK_WINDOW (shell->priv->window));
-}
-
-void
 ario_shell_set_visibility (ArioShell *shell,
                            ArioVisibility state)
 {
@@ -614,16 +577,8 @@ ario_shell_set_visibility (ArioShell *shell,
                 shell->priv->visible = !shell->priv->visible;
 
                 if (shell->priv->visible == TRUE) {
-                        ario_shell_restore_main_window (shell);
                         gtk_widget_show (shell->priv->window);
                 } else {
-                        shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
-                        gtk_window_get_position (GTK_WINDOW (shell->priv->window),
-                                                 &shell->priv->window_x,
-                                                 &shell->priv->window_y);
-                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
-                                             &shell->priv->window_w,
-                                             &shell->priv->window_h);
                         gtk_widget_hide (shell->priv->window);
                 }
         }
