@@ -242,6 +242,7 @@ ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
         ARIO_LOG_FUNCTION_START;
         if (data) {
                 g_free (data->artist);
+                g_free (data->title);
                 ario_lyrics_candidate_free (data->candidate);
                 g_free (data);
         }

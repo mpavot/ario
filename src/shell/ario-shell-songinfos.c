@@ -444,31 +444,32 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
                 return;
 
         song = shell_songinfos->priv->songs->data;
-        if (song) {
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->title_entry), song->title ? song->title : "");
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->artist_entry), song->artist ? song->artist : "");
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->album_entry), song->album ? song->album : "");
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->track_entry), song->track ? song->track : "");
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->date_entry), song->date ? song->date : "");
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->genre_entry), song->genre ? song->genre : "");
-                gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->comment_entry), song->comment ? song->comment : "");
-                length = ario_util_format_time (song->time);
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->length_label), VALUE (length));
-                g_free (length);
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->file_label), VALUE (song->file));
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->composer_label), VALUE (song->composer));
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->performer_label), VALUE (song->performer));
-                gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->disc_label), VALUE (song->disc));
-                if (shell_songinfos->priv->save_button)
-                        gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), FALSE);
-        }
+        if (!song)
+                return;
+
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->title_entry), song->title ? song->title : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->artist_entry), song->artist ? song->artist : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->album_entry), song->album ? song->album : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->track_entry), song->track ? song->track : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->date_entry), song->date ? song->date : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->genre_entry), song->genre ? song->genre : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->comment_entry), song->comment ? song->comment : "");
+        length = ario_util_format_time (song->time);
+        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->length_label), VALUE (length));
+        g_free (length);
+        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->file_label), VALUE (song->file));
+        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->composer_label), VALUE (song->composer));
+        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->performer_label), VALUE (song->performer));
+        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->disc_label), VALUE (song->disc));
+        if (shell_songinfos->priv->save_button)
+                gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), FALSE);
 
         gtk_widget_set_sensitive (shell_songinfos->priv->previous_button, g_list_previous (shell_songinfos->priv->songs) != NULL);
         gtk_widget_set_sensitive (shell_songinfos->priv->next_button, g_list_next (shell_songinfos->priv->songs) != NULL);
 
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
         data->artist = g_strdup (song->artist);
-        data->title = ario_util_format_title (song);
+        data->title = g_strdup (ario_util_format_title (song));
         ario_lyrics_editor_push (ARIO_LYRICS_EDITOR (shell_songinfos->priv->lyrics_editor), data);
 
         window_title = g_strdup_printf ("%s - %s", _("Song Properties"), data->title);

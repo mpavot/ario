@@ -192,7 +192,7 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
                 window_title = g_strdup (BASE_TITLE);
         } else {
                 data->artist = g_strdup (ario_server_get_current_artist ());
-                data->title = ario_util_format_title (ario_server_get_current_song ());
+                data->title = g_strdup (ario_util_format_title (ario_server_get_current_song ()));
                 window_title = g_strdup_printf ("%s - %s", BASE_TITLE, data->title);
         }
 
