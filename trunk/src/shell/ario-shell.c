@@ -496,11 +496,11 @@ ario_shell_shutdown (ArioShell *shell)
                 ario_conf_set_integer (PREF_VPANED_POSITION,
                                        gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
 
-                gtk_window_get_size (GTK_WINDOW (shell->priv->window),
-                                     &width,
-                                     &height);
-
                 if (!ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT)) {
+                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                                             &width,
+                                             &height);
+
                         ario_conf_set_integer (PREF_WINDOW_WIDTH, width);
                         ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
                 }
@@ -801,12 +801,14 @@ ario_shell_window_state_cb (GtkWidget *widget,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
 
-                gtk_window_get_size (GTK_WINDOW (shell->priv->window),
-                                     &width,
-                                     &height);
+                if (event->window_state.changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
+                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                                             &width,
+                                             &height);
 
-                ario_conf_set_integer (PREF_WINDOW_WIDTH, width);
-                ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
+                        ario_conf_set_integer (PREF_WINDOW_WIDTH, width);
+                        ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
+                }
         }
 
         return FALSE;
