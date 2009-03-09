@@ -256,6 +256,7 @@ enum
 {
         TRAY_ICON_PLAY_PAUSE,
         TRAY_ICON_NEXT_SONG,
+        TRAY_ICON_MUTE,
         TRAY_ICON_DO_NOTHING,
         TRAY_ICON_N_BEHAVIOR
 };
