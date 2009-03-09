@@ -45,6 +45,7 @@ G_MODULE_EXPORT void ario_trayicon_preferences_notificationtime_changed_cb (GtkW
 static const char *trayicon_behavior[] = {
         N_("Play/Pause"),       // TRAY_ICON_PLAY_PAUSE
         N_("Play next song"),   // TRAY_ICON_NEXT_SONG
+        N_("Mute"),             // TRAY_ICON_MUTE
         N_("Do nothing"),       // TRAY_ICON_DO_NOTHING
         NULL
 };

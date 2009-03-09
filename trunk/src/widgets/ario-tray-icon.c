@@ -125,6 +125,8 @@ struct ArioTrayIconPrivate
 
         gboolean notified;
         gboolean shown;
+
+        int volume;
 };
 
 static ArioTrayIcon *instance = NULL;
@@ -457,6 +459,7 @@ ario_tray_icon_middle_click (ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
         int trayicon_behavior;
+        int volume;
 
         trayicon_behavior = ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT);
 
@@ -470,6 +473,16 @@ ario_tray_icon_middle_click (ArioTrayIcon *icon)
 
         case TRAY_ICON_NEXT_SONG:
                 ario_server_do_next ();
+                break;
+
+        case TRAY_ICON_MUTE:
+                volume = ario_server_get_current_volume ();
+                if (volume > 0) {
+                        icon->priv->volume = volume;
+                        ario_server_set_current_volume (0);
+                } else {
+                        ario_server_set_current_volume (icon->priv->volume);
+                }
                 break;
 
         case TRAY_ICON_DO_NOTHING:
