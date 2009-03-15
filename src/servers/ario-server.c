@@ -274,6 +274,7 @@ void
 ario_server_update_db (void)
 {
         ARIO_LOG_FUNCTION_START;
+        interface->updatingdb = 1;
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_db ();
 }
 
