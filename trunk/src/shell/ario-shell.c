@@ -82,9 +82,9 @@ static void ario_shell_cmd_about (GtkAction *action,
 static void ario_shell_cmd_translate (GtkAction *action,
                                       ArioShell *shell);
 static void ario_shell_server_state_changed_cb (ArioServer *server,
-                                             ArioShell *shell);
+                                                ArioShell *shell);
 static void ario_shell_server_song_changed_cb (ArioServer *server,
-                                            ArioShell *shell);
+                                               ArioShell *shell);
 static gboolean ario_shell_window_state_cb (GtkWidget *widget,
                                             GdkEvent *event,
                                             ArioShell *shell);
@@ -129,6 +129,11 @@ struct ArioShellPrivate
 
         gboolean maximized;
         gboolean visible;
+
+        int window_x;
+        int window_y;
+        int window_w;
+        int window_h;
 };
 
 enum
@@ -229,7 +234,7 @@ ario_shell_class_init (ArioShellClass *klass)
 }
 
 static void
-ario_shell_init (ArioShell *shell) 
+ario_shell_init (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
         shell->priv = ARIO_SHELL_GET_PRIVATE (shell);
@@ -237,6 +242,11 @@ ario_shell_init (ArioShell *shell)
         shell->priv->shown = FALSE;
 
         shell->priv->visible = TRUE;
+
+        shell->priv->window_x = -1;
+        shell->priv->window_y = -1;
+        shell->priv->window_w = -1;
+        shell->priv->window_h = -1;
 }
 
 static void
@@ -286,7 +296,7 @@ ario_shell_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_shell_get_property (GObject *object,
                          guint prop_id,
                          GValue *value,
@@ -577,8 +587,29 @@ ario_shell_set_visibility (ArioShell *shell,
                 shell->priv->visible = !shell->priv->visible;
 
                 if (shell->priv->visible == TRUE) {
+                        if (shell->priv->window_x >= 0 && shell->priv->window_y >= 0) {
+                                gtk_window_move (GTK_WINDOW (shell->priv->window),
+                                                 shell->priv->window_x,
+                                                 shell->priv->window_y);
+                        }
+                        if (!shell->priv->maximized
+                            && (shell->priv->window_w >= 0 && shell->priv->window_y >=0)) {
+                                gtk_window_resize (GTK_WINDOW (shell->priv->window),
+                                                   shell->priv->window_w,
+                                                   shell->priv->window_h);
+                        }
+
+                        if (shell->priv->maximized)
+                                gtk_window_maximize (GTK_WINDOW (shell->priv->window));
                         gtk_widget_show (shell->priv->window);
                 } else {
+                        shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
+                        gtk_window_get_position (GTK_WINDOW (shell->priv->window),
+                                                 &shell->priv->window_x,
+                                                 &shell->priv->window_y);
+                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                                             &shell->priv->window_w,
+                                             &shell->priv->window_h);
                         gtk_widget_hide (shell->priv->window);
                 }
         }
@@ -697,7 +728,7 @@ ario_shell_server_song_set_title (ArioShell *shell)
 
 static void
 ario_shell_server_song_changed_cb (ArioServer *server,
-                                ArioShell *shell)
+                                   ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
         ario_shell_server_song_set_title (shell);
@@ -705,7 +736,7 @@ ario_shell_server_song_changed_cb (ArioServer *server,
 
 static void
 ario_shell_server_state_changed_cb (ArioServer *server,
-                                 ArioShell *shell)
+                                    ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
         shell->priv->connected = ario_server_is_connected ();
@@ -819,7 +850,7 @@ ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
         GdkGeometry hints;
-        int width = ario_conf_get_integer (PREF_WINDOW_WIDTH, PREF_WINDOW_WIDTH_DEFAULT); 
+        int width = ario_conf_get_integer (PREF_WINDOW_WIDTH, PREF_WINDOW_WIDTH_DEFAULT);
         int height = ario_conf_get_integer (PREF_WINDOW_HEIGHT, PREF_WINDOW_HEIGHT_DEFAULT);
         gboolean maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
 
@@ -985,9 +1016,9 @@ ario_shell_cmd_plugins (GtkAction *action,
         gtk_dialog_set_has_separator (GTK_DIALOG (window), FALSE);
 
         g_signal_connect (window,
-                                 "delete_event",
-                                 G_CALLBACK (ario_shell_plugins_window_delete_cb),
-                                 NULL);
+                          "delete_event",
+                          G_CALLBACK (ario_shell_plugins_window_delete_cb),
+                          NULL);
         g_signal_connect (window,
                           "response",
                           G_CALLBACK (ario_shell_plugins_response_cb),
