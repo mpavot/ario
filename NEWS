@@ -1,37 +1,38 @@
-New features:
-Add support of python plugins
-[ 1994706 ] Add a timout before tray tooltip showing
-[ 2016602 ] Play on enter
-[ 2017480 ] Authorize Only one instance of Ario
-[ 1897794 ] Notifications options 
-[ 2069383 ] Drag and drop images for album art
-[ 2057561 ] Add --minimized option
-[ 2088157 ] New options to update MPD library on startup and stop MPD on close
-[ 2017479 ] "Replace in playlist" command
-[ 2110096 ] Track change notification with libnotify
-New plugin: Song Information
-Add the possibility to reorder the columns in playlist
-Add the possibility to configure the different trees in the library tab
-Support of empty/unknown tags (Require MPD 0.14)
-Experimental support of XMMS2
-Experimental support of 'idle' MPD command to reduce CPU and bandwith consumption. (Require MPD 0.14)
-New translations: ar, th, da, tr, fi, nb, zh_CN, nds
+At revision 537
 
-Bug fixes and improvements:
-Reduce volume adjustement step (patch from Simon Sehier)
-Fix mmkeys plug-in (patch from Stanislav Shramko)
-Launch web pages asynchronously
-Update radios list
-[ 2071774 ] / Debian Bug #495757 Fix notification icon background
-Debian Bug #495687 : ario_mpd_connect_to : problems getting a response from "localhost" on port 6600 : Connection refused
-Fix text encoding problem with lyric wiki
-Fix drag and drop positions in playlist
-Auto reconnect to MPD on error.
-Fix problem with files on non UTF8 systems (patch from Заболотный Андрей)
-Rewrite first launch assistant
-Asynchronous fill of long artists/albums/songs lists
+New features:
+Support tags edition if Ario is on the same computer as MPD
+Update elapsed text field when slider is moved (patch from Samuel Cuella <samuel.cuella@supinfo.com>)
+Improve XMMS 2 support (based on a patch from Samuel Cuella)
+2544475: go to currently playing: focus at middle of playlist
+Put plugins data files in /usr/share/ario/plugins instead of /usr/lib/ario/plugins
+Improve resizing of song-info window
+Add different playlists modes:
+- Normal
+- Queue
+- Dynamic playlist
+[2490517] "DJ Playlist" Option
+[1945679] Dynamic playlist with last fm
+Goto playing song in library browser
+2483907 : Add search panel in Playlist
+New organisation for preferences
+2212482 Use without a right-button
+2603132 Sort by track number instead of title
+Use wikipedia icon for menu entry
+Improve tray icon minimization
+#2671689 : tray icon: mute sound option on middle button click
+
+Bug fixes and techniacal improvements:
+Audioscrobbler plug-in on W32.
+Set song total time to 0 when music stopped
+Empty playlist on deconnection
+Replace Glade by GtkBuilder
+Remove deprecated GtkTooltips
+Fix drag & drop of several artists/genres/...
 Improve performances and memory usage
+Remove forbidden caracters to filenames
+Update translations
+Add croatian translation
 
 Windows:
-Improve W32 compilation
-Add song change notification on windows
+Move W32 compilation to CodeBlocks
