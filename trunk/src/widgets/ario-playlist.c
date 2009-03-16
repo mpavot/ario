@@ -789,10 +789,12 @@ ario_playlist_changed_cb (ArioServer *server,
                         ario_util_format_time_buf (song->time, time, ARIO_MAX_TIME_SIZE);
                         ario_util_format_track_buf (song->track, track, ARIO_MAX_TRACK_SIZE);
                         title = ario_util_format_title (song);
-                        if (current_song && (song->pos == current_song->pos))
+                        if (current_song && (song->pos == current_song->pos)) {
                                 pixbuf = instance->priv->play_pixbuf;
-                        else
+				instance->priv->pos = song->pos;
+			} else {
                                 pixbuf = NULL;
+			}
                         gtk_list_store_set (playlist->priv->model, &iter,
                                             PIXBUF_COLUMN, pixbuf,
                                             TRACK_COLUMN, track,
