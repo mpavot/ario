@@ -168,7 +168,7 @@ ario_util_format_title (ArioServerSong *server_song)
                 } else {
                         slash = g_strrstr (server_song->file, "/"); 
                         if (slash) {
-                                dot = g_strrstr (slash+1, ".");
+                                dot = g_strrstr (slash + 1, ".");
                                 if (dot)
                                         server_song->title = g_strndup (slash+1, dot - slash - 1);
                                 else
@@ -252,7 +252,7 @@ ario_util_uri_exists (const char *uri)
 {        
         g_return_val_if_fail (uri != NULL, FALSE);
 
-        return ario_file_test(uri, G_FILE_TEST_EXISTS);
+        return ario_file_test (uri, G_FILE_TEST_EXISTS);
 }
 
 
@@ -374,6 +374,7 @@ ario_util_download_file (const char *uri,
         /* set NO SIGNAL */
         curl_easy_setopt (curl, CURLOPT_NOSIGNAL, TRUE);
 
+        /* Use a proxy if one is configured */
         if (ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT)) {
                 address = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS_DEFAULT);
                 port =  ario_conf_get_integer (PREF_PROXY_PORT, PREF_PROXY_PORT_DEFAULT);
@@ -385,16 +386,18 @@ ario_util_download_file (const char *uri,
                 }
         }
 
+        /* Handles data for POST requests */
         if (post_data) {
-                curl_easy_setopt(curl, CURLOPT_POST, TRUE); 
-                curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data);
-                curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, post_size);
+                curl_easy_setopt (curl, CURLOPT_POST, TRUE); 
+                curl_easy_setopt (curl, CURLOPT_POSTFIELDS, post_data);
+                curl_easy_setopt (curl, CURLOPT_POSTFIELDSIZE, post_size);
         }
 
         if (headers) {
-                curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+                curl_easy_setopt (curl, CURLOPT_HTTPHEADER, headers);
         }
 
+        /* Performs the request */
         curl_easy_perform (curl);
 
         *size = download_data.size;
@@ -414,11 +417,12 @@ ario_util_string_replace (char **string,
         int i;
 
         if (!g_strstr_len (*string, -1, old))
-            return;
+                return;
 
         strsplit = g_strsplit (*string, old, 0);
 
         if (!strsplit)
+                return;
                 
         if (!strsplit[0]) {
                 g_strfreev (strsplit);
