@@ -21,25 +21,36 @@
 #include "glib/gslist.h"
 #include "gdk/gdkpixbuf.h"
 
+/* Number of covers used to generate the drag & drop image */
 #define MAX_COVERS_IN_DRAG 3
 
+/* Maximum length of the string representing a int */
 #define INTLEN (sizeof(int) * CHAR_BIT + 1) / 3 + 1
 
+/* Maximum size of a time like 1:23:45 */
 #define ARIO_MAX_TIME_SIZE 3*INTLEN+2
+
+/* Maximum size of a track */
 #define ARIO_MAX_TRACK_SIZE INTLEN
 
 struct curl_slist;
 
+/* Format a track time to the form 1:23:45.
+ * Returns a newly allocated string */
 char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
+/* Format a track time to the form 1:23:45 in a buffer */
 void                    ario_util_format_time_buf            (const int time,
                                                               char *buf,
                                                               int buf_len);
+/* Format a time to the form : x days, y hours, z minutes, n secondes */
 char*                   ario_util_format_total_time          (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
+/* Format a track name to be displayed */
 void                    ario_util_format_track_buf           (const gchar *track,
                                                               char *buf,
                                                               int buf_len);
+/* Try to get the best title to display from an ArioServerSong */
 gchar*                  ario_util_format_title               (ArioServerSong *server_song);
 
 void                    ario_util_add_stock_icons            (const char *stock_id,

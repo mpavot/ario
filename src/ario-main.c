@@ -55,6 +55,7 @@ main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Parse options */
         GOptionContext *context;
         static const GOptionEntry options []  = {
                 { "minimized",           'm', 0, G_OPTION_ARG_NONE,         &minimized,           N_("Start minimized window"), NULL },
@@ -68,8 +69,10 @@ main (int argc, char *argv[])
         g_option_context_parse (context, &argc, &argv, NULL);
         g_option_context_free (context);
 
+        /* Initialisation of configurations engine */
         ario_conf_init ();
 
+        /* Check in an instance of Ario is already running */
 #ifdef WIN32
         HANDLE hMutex;
         hMutex = CreateMutex (NULL, FALSE, "ArioMain");
@@ -93,6 +96,7 @@ main (int argc, char *argv[])
         }
 #endif
 
+        /* Initialisation of translation */
 #ifdef ENABLE_NLS
         setlocale (LC_ALL, "");
         bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
@@ -100,27 +104,41 @@ main (int argc, char *argv[])
         textdomain (GETTEXT_PACKAGE);
 #endif
 
+        /* Initialisation of threads */
         if (!g_thread_supported ()) g_thread_init (NULL);
 
+        /* Initialisation of GTK */
         gtk_set_locale ();
         gtk_init (&argc, &argv);
 
+        /* Register Ario icons */
         ario_util_init_stock_icons ();
+
+        /* Initialisation of Curl */
         curl_global_init (CURL_GLOBAL_WIN32);
 
+        /* Creates Ario main window */
         shell = ario_shell_new ();
         ario_shell_construct (shell, minimized);
+
+        /* Initialisation of plugins engine */
         ario_plugins_engine_init (shell);
 
+        /* Starts GTK main loop */
         gtk_main ();
 
+        /* Shutdown main window */
         ario_shell_shutdown (shell);
 
         g_object_unref (G_OBJECT (shell));
 
+        /* Shutdown plugins engine */
         ario_plugins_engine_shutdown ();
+
+        /* Shutdown configurations engine */
         ario_conf_shutdown ();
 
+        /* Clean libxml stuff */
         xmlCleanupParser ();
 
         return 0;
