@@ -41,19 +41,20 @@ static guint ario_server_signals[SERVER_LAST_SIGNAL] = { 0 };
 
 char * ArioServerItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
 {
-        N_("Artist"),    // MPD_TAG_ITEM_ARTIST
-        N_("Album"),     // MPD_TAG_ITEM_ALBUM
-        N_("Title"),     // MPD_TAG_ITEM_TITLE
-        N_("Track"),     // MPD_TAG_ITEM_TRACK
-        NULL,            // MPD_TAG_ITEM_NAME
-        N_("Genre"),     // MPD_TAG_ITEM_GENRE
-        N_("Date"),      // MPD_TAG_ITEM_DATE
-        N_("Composer"),  // MPD_TAG_ITEM_COMPOSER
-        N_("Performer"), // MPD_TAG_ITEM_PERFORMER
-        NULL,            // MPD_TAG_ITEM_COMMENT
-        NULL,            // MPD_TAG_ITEM_DISC
-        N_("Filename"),  // MPD_TAG_ITEM_FILENAME
-        N_("Any")        // MPD_TAG_ITEM_ANY
+        N_("Artist"),           // MPD_TAG_ITEM_ARTIST
+        N_("Album"),            // MPD_TAG_ITEM_ALBUM
+        N_("Title"),            // MPD_TAG_ITEM_TITLE
+        N_("Track"),            // MPD_TAG_ITEM_TRACK
+        NULL,                   // MPD_TAG_ITEM_NAME
+        N_("Genre"),            // MPD_TAG_ITEM_GENRE
+        N_("Date"),             // MPD_TAG_ITEM_DATE
+        N_("Composer"),         // MPD_TAG_ITEM_COMPOSER
+        N_("Performer"),        // MPD_TAG_ITEM_PERFORMER
+        NULL,                   // MPD_TAG_ITEM_COMMENT
+        NULL,                   // MPD_TAG_ITEM_DISC
+        N_("Filename"),         // MPD_TAG_ITEM_FILENAME
+        N_("Album Artist"),     // MPD_TAG_ITEM_ALBUMARTIST
+        N_("Any")               // MPD_TAG_ITEM_ANY
 };
 
 G_DEFINE_TYPE (ArioServer, ario_server, G_TYPE_OBJECT)
@@ -822,6 +823,7 @@ ario_server_song_get_tag (const ArioServerSong *song,
         switch (tag) {
         case MPD_TAG_ITEM_ARTIST: return song->artist;
         case MPD_TAG_ITEM_ALBUM: return song->album;
+        case MPD_TAG_ITEM_ALBUMARTIST: return song->album_artist;
         case MPD_TAG_ITEM_TITLE: return song->title;
         case MPD_TAG_ITEM_TRACK: return song->track;
         case MPD_TAG_ITEM_NAME: return song->name;

@@ -109,15 +109,16 @@ char * ArioXmmsPattern[MPD_TAG_NUM_OF_ITEM_TYPES] =
         "album",     // MPD_TAG_ITEM_ALBUM
         "title",     // MPD_TAG_ITEM_TITLE
         "track",     // MPD_TAG_ITEM_TRACK
-        NULL,            // MPD_TAG_ITEM_NAME
+        NULL,        // MPD_TAG_ITEM_NAME
         "genre",     // MPD_TAG_ITEM_GENRE
         "date",      // MPD_TAG_ITEM_DATE
         "composer",  // MPD_TAG_ITEM_COMPOSER
         "performer", // MPD_TAG_ITEM_PERFORMER
-        NULL,            // MPD_TAG_ITEM_COMMENT
-        NULL,            // MPD_TAG_ITEM_DISC
-        "url",  // MPD_TAG_ITEM_FILENAME
-        NULL        // MPD_TAG_ITEM_ANY
+        NULL,        // MPD_TAG_ITEM_COMMENT
+        NULL,        // MPD_TAG_ITEM_DISC
+        "url",       // MPD_TAG_ITEM_FILENAME
+        NULL,        // MPD_TAG_ITEM_ALBUMARTIST
+        NULL         // MPD_TAG_ITEM_ANY
 };
 
 #define ARIO_XMMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_XMMS, ArioXmmsPrivate))

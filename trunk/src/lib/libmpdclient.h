@@ -93,6 +93,7 @@ typedef enum mpd_TagItems
 	MPD_TAG_ITEM_COMMENT,
 	MPD_TAG_ITEM_DISC,
 	MPD_TAG_ITEM_FILENAME,
+	MPD_TAG_ITEM_ALBUMARTIST,
 	MPD_TAG_ITEM_ANY,
 	MPD_TAG_NUM_OF_ITEM_TYPES
 } mpd_TagItems;
@@ -301,6 +302,8 @@ typedef struct _mpd_Song {
 	char * title;
 	/* album, maybe NULL if there is no tag */
 	char * album;
+	/* album artist, maybe NULL if there is no tag */
+	char * album_artist;
 	/* track, maybe NULL if there is no tag */
 	char * track;
 	/* name, maybe NULL if there is no tag; it's the name of the current

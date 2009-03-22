@@ -58,6 +58,7 @@ struct ArioShellSonginfosPrivate
         GtkWidget *title_entry;
         GtkWidget *artist_entry;
         GtkWidget *album_entry;
+        GtkWidget *album_artist_label;
         GtkWidget *track_entry;
         GtkWidget *date_entry;
         GtkWidget *genre_entry;
@@ -176,6 +177,8 @@ ario_shell_songinfos_new (GSList *paths)
                 GTK_WIDGET (gtk_builder_get_object (builder, "artist_entry"));
         shell_songinfos->priv->album_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "album_entry"));
+        shell_songinfos->priv->album_artist_label =
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_artist_label"));
         shell_songinfos->priv->track_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "track_entry"));
         shell_songinfos->priv->length_label =
@@ -199,6 +202,7 @@ ario_shell_songinfos_new (GSList *paths)
         gtk_builder_helpers_boldify_label (builder, "title_const_label");
         gtk_builder_helpers_boldify_label (builder, "artist_const_label");
         gtk_builder_helpers_boldify_label (builder, "album_const_label");
+        gtk_builder_helpers_boldify_label (builder, "album_artist_const_label");
         gtk_builder_helpers_boldify_label (builder, "track_const_label");
         gtk_builder_helpers_boldify_label (builder, "length_const_label");
         gtk_builder_helpers_boldify_label (builder, "date_const_label");
@@ -211,6 +215,7 @@ ario_shell_songinfos_new (GSList *paths)
 
         gtk_widget_set_size_request(shell_songinfos->priv->artist_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->album_entry, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->album_artist_label, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->track_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->length_label, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->date_entry, 280, -1);
@@ -457,6 +462,7 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         length = ario_util_format_time (song->time);
         gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->length_label), VALUE (length));
         g_free (length);
+        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->album_artist_label), VALUE (song->album_artist));
         gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->file_label), VALUE (song->file));
         gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->composer_label), VALUE (song->composer));
         gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->performer_label), VALUE (song->performer));
