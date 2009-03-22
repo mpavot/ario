@@ -71,10 +71,6 @@ static void ario_playlist_drag_data_get_cb (GtkWidget * widget,
                                             GdkDragContext * context,
                                             GtkSelectionData * selection_data,
                                             guint info, guint time, gpointer data);
-static void ario_playlist_drag_drop_cb (GtkWidget * widget,
-                                        gint x, gint y,
-                                        guint time,
-                                        ArioPlaylist *playlist);
 static void ario_playlist_cmd_clear (GtkAction *action,
                                      ArioPlaylist *playlist);
 static void ario_playlist_cmd_shuffle (GtkAction *action,
@@ -456,6 +452,7 @@ ario_playlist_init (ArioPlaylist *playlist)
 
         instance = playlist;
         playlist->priv = ARIO_PLAYLIST_GET_PRIVATE (playlist);
+        playlist->priv->in_search = FALSE;
         playlist->priv->playlist_id = -1;
         playlist->priv->pos = -1;
         playlist->priv->playlist_length = 0;
@@ -547,11 +544,6 @@ ario_playlist_init (ArioPlaylist *playlist)
         g_signal_connect (playlist->priv->tree,
                           "drag_data_get",
                           G_CALLBACK (ario_playlist_drag_data_get_cb),
-                          playlist);
-
-        g_signal_connect (playlist->priv->tree,
-                          "drag_drop",
-                          G_CALLBACK (ario_playlist_drag_drop_cb),
                           playlist);
 
         playlist->priv->search_hbox = gtk_hbox_new (FALSE, 6);
@@ -1178,16 +1170,18 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
 
-        if (data->type == gdk_atom_intern ("text/internal-list", TRUE))
-                ario_playlist_move_rows (x, y);
-        else if (data->type == gdk_atom_intern ("text/songs-list", TRUE))
-                ario_playlist_drop_songs (x, y, data);
-        else if (data->type == gdk_atom_intern ("text/radios-list", TRUE))
-                ario_playlist_drop_songs (x, y, data);
-        else if (data->type == gdk_atom_intern ("text/directory", TRUE))
-                ario_playlist_drop_dir (x, y, data);
-        else if (data->type == gdk_atom_intern ("text/criterias-list", TRUE))
-                ario_playlist_drop_criterias (x, y, data);
+        if (!instance->priv->in_search) {
+                if (data->type == gdk_atom_intern ("text/internal-list", TRUE))
+                        ario_playlist_move_rows (x, y);
+                else if (data->type == gdk_atom_intern ("text/songs-list", TRUE))
+                        ario_playlist_drop_songs (x, y, data);
+                else if (data->type == gdk_atom_intern ("text/radios-list", TRUE))
+                        ario_playlist_drop_songs (x, y, data);
+                else if (data->type == gdk_atom_intern ("text/directory", TRUE))
+                        ario_playlist_drop_dir (x, y, data);
+                else if (data->type == gdk_atom_intern ("text/criterias-list", TRUE))
+                        ario_playlist_drop_criterias (x, y, data);
+        }
 
         /* finish the drag */
         gtk_drag_finish (context, TRUE, FALSE, time);
@@ -1205,17 +1199,6 @@ ario_playlist_drag_data_get_cb (GtkWidget * widget,
 
         gtk_selection_data_set (selection_data, selection_data->target, 8,
                                 NULL, 0);
-}
-
-static void
-ario_playlist_drag_drop_cb (GtkWidget * widget,
-                            gint x, gint y,
-                            guint time,
-                            ArioPlaylist *playlist)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (instance->priv->in_search)
-                g_signal_stop_emission_by_name (widget, "drag_drop");
 }
 
 static void
