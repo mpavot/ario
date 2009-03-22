@@ -277,6 +277,7 @@ char * mpdTagItemKeys[MPD_TAG_NUM_OF_ITEM_TYPES] =
 	"Comment",
 	"Disc",
 	"Filename",
+	"AlbumArtist",
 	"Any"
 };
 
@@ -944,6 +945,7 @@ static void mpd_initSong(mpd_Song * song) {
 	song->file = NULL;
 	song->artist = NULL;
 	song->album = NULL;
+	song->album_artist = NULL;
 	song->track = NULL;
 	song->title = NULL;
 	song->name = NULL;
@@ -964,6 +966,7 @@ static void mpd_finishSong(mpd_Song * song) {
 	if(song->file) free(song->file);
 	if(song->artist) free(song->artist);
 	if(song->album) free(song->album);
+	if(song->album_artist) free(song->album_artist);
 	if(song->title) free(song->title);
 	if(song->track) free(song->track);
 	if(song->name) free(song->name);
@@ -994,6 +997,7 @@ mpd_Song * mpd_songDup(mpd_Song * song) {
 	if(song->file) ret->file = strdup(song->file);
 	if(song->artist) ret->artist = strdup(song->artist);
 	if(song->album) ret->album = strdup(song->album);
+	if(song->album_artist) ret->album_artist = strdup(song->album_artist);
 	if(song->title) ret->title = strdup(song->title);
 	if(song->track) ret->track = strdup(song->track);
 	if(song->name) ret->name = strdup(song->name);
@@ -1170,6 +1174,10 @@ mpd_InfoEntity * mpd_getNextInfoEntity(mpd_Connection * connection) {
 			else if(!entity->info.song->album &&
 					strcmp(re->name,"Album")==0) {
 				entity->info.song->album = strdup(re->value);
+			}
+			else if(!entity->info.song->album_artist &&
+					strcmp(re->name,"AlbumArtist")==0) {
+				entity->info.song->album_artist = strdup(re->value);
 			}
 			else if(!entity->info.song->title &&
 					strcmp(re->name,"Title")==0) {
