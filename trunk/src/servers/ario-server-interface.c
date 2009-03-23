@@ -418,7 +418,7 @@ ario_server_interface_set_default (ArioServerInterface *server_interface)
         if (server_interface->elapsed != 0)
                 g_object_set (G_OBJECT (server_interface), "elapsed", 0, NULL);
 
-        g_object_set (G_OBJECT (server_interface), "playlist_id", -1, NULL);
+        g_object_set (G_OBJECT (server_interface), "playlist_id", (gint64) -1, NULL);
 
         if (server_interface->random != FALSE)
                 g_object_set (G_OBJECT (server_interface), "random", FALSE, NULL);
