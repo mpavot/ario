@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 12:25+0100\n"
-"PO-Revision-Date: 2008-12-15 06:44+0000\n"
+"POT-Creation-Date: 2009-02-22 14:02+0100\n"
+"PO-Revision-Date: 2009-01-19 20:51+0000\n"
 "Last-Translator: el_libre XDDDDDDDDDDDDDDDDDDDDDDDDDDD <el.libre@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
+"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -26,9 +26,8 @@ msgid "Client application to mpd"
 msgstr "Aplicació client a mpd"
 
 #: ../data/ui/browser-prefs.ui.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "Biblioteca"
+msgstr ""
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "Library Organisation"
@@ -73,9 +72,8 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/ui/connection-widget.ui.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Servidor"
+msgstr ""
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
@@ -91,9 +89,8 @@ msgid "Covers"
 msgstr "Caràtules"
 
 #: ../data/ui/cover-prefs.ui.h:3
-#, fuzzy
 msgid "Covers Sources"
-msgstr "Caràtules"
+msgstr ""
 
 #: ../data/ui/cover-prefs.ui.h:4
 msgid "Show the covers in the albums list"
@@ -171,9 +168,8 @@ msgid "Proxy Address :"
 msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Proxy Port :"
-msgstr "Port :"
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
@@ -184,9 +180,8 @@ msgid "Use a proxy"
 msgstr ""
 
 #: ../data/ui/lyrics-prefs.ui.h:1
-#, fuzzy
 msgid "Lyrics Sources"
-msgstr "Lletra"
+msgstr ""
 
 #: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
 #: ../plugins/information/information.ui.h:6
@@ -194,38 +189,38 @@ msgid "Title :"
 msgstr "Tiítol :"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Àlbum"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
 #: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/shell/ario-shell-similarartists.c:379
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Artista"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:442
 msgid "Date"
 msgstr ""
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
 msgid "Duration"
 msgstr "Duració"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
 msgid "File"
 msgstr ""
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:442
 msgid "Genre"
 msgstr "Gènere"
 
@@ -243,25 +238,24 @@ msgid "Playlist"
 msgstr "Llista de reproducció"
 
 #: ../data/ui/playlist-prefs.ui.h:10
-#, fuzzy
 msgid "Playlist mode:"
-msgstr "Llista de reproducció"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Show rows:"
 msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Títol"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
 msgid "Track"
 msgstr "Pista"
 
@@ -302,26 +296,23 @@ msgid "fade time (s):"
 msgstr ""
 
 #: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
 #: ../data/ui/similar-artists.ui.h:1
-#, fuzzy
 msgid "Add all to playlist"
-msgstr "Desa la llista de reproducció"
+msgstr ""
 
 #: ../data/ui/similar-artists.ui.h:2
-#, fuzzy
 msgid "Add to playlist"
-msgstr "Desa la llista de reproducció"
+msgstr ""
 
 #: ../data/ui/similar-artists.ui.h:3
-#, fuzzy
 msgid "Find on Last.fm"
-msgstr "Informa't sobre Last.fm a "
+msgstr ""
 
 #: ../data/ui/stats-prefs.ui.h:1
 msgid "Database play time :"
@@ -360,23 +351,20 @@ msgid "Composer :"
 msgstr ""
 
 #: ../data/ui/song-infos.ui.h:5
-#, fuzzy
 msgid "Date :"
-msgstr "Nom:"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:6
 msgid "Disc :"
 msgstr ""
 
 #: ../data/ui/song-infos.ui.h:7
-#, fuzzy
 msgid "Filename :"
-msgstr "Nom de l'arxiu"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:8
-#, fuzzy
 msgid "Genre :"
-msgstr "Gènere"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
 msgid "Length :"
@@ -391,14 +379,12 @@ msgid "Song"
 msgstr "Cançó"
 
 #: ../data/ui/song-infos.ui.h:13
-#, fuzzy
 msgid "Track :"
-msgstr "Pista"
+msgstr ""
 
 #: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
-#, fuzzy
 msgid "Notification"
-msgstr "Confirmació"
+msgstr ""
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Notification on song change"
@@ -420,19 +406,19 @@ msgstr ""
 msgid "Start minimized window"
 msgstr ""
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "segons"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "minuts"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "hores"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "dies"
 
@@ -444,22 +430,29 @@ msgstr ""
 msgid "Music Directory"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:53
-msgid "same artist"
-msgstr ""
-
-#: ../src/playlist/ario-playlist-dynamic.c:54
-msgid "same album"
-msgstr ""
-
 #: ../src/playlist/ario-playlist-dynamic.c:55
-msgid "similar artists"
+msgid "songs of same artist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:95
-#, fuzzy
+#: ../src/playlist/ario-playlist-dynamic.c:56
+msgid "songs of same album"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:57
+msgid "songs of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:58
+msgid "albums of same artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:59
+msgid "albums of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:99
 msgid "Dynamic Playlist"
-msgstr "Llista de reproducció"
+msgstr ""
 
 #: ../src/playlist/ario-playlist-queue.c:79
 msgid "Queue Mode"
@@ -560,24 +553,24 @@ msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 msgid "Composer"
 msgstr ""
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:51
+#: ../src/servers/ario-server.c:52
 msgid "Performer"
 msgstr ""
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Filename"
 msgstr "Nom de l'arxiu"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:55
+#: ../src/servers/ario-server.c:56
 msgid "Any"
 msgstr "Qualsevol"
 
@@ -663,7 +656,7 @@ msgstr ""
 msgid "Cover"
 msgstr "Portada"
 
-#: ../src/sources/ario-tree.c:1233
+#: ../src/sources/ario-tree.c:1236
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr ""
 
@@ -759,6 +752,11 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  MrcredsAlex https://launchpad.net/~mrcredsalex\n"
 "  borgg https://launchpad.net/~guillem-gilabert\n"
+"  el_libre XDDDDDDDDDDDDDDDDDDDDDDDDDDD https://launchpad.net/~el-libre\n"
+"\n"
+"Launchpad Contributions:\n"
+"  MrcredsAlex https://launchpad.net/~mrcredsalex\n"
+"  borgg https://launchpad.net/~guillem-gilabert\n"
 "  el_libre XDDDDDDDDDDDDDDDDDDDDDDDDDDD https://launchpad.net/~el-libre"
 
 #: ../src/shell/ario-shell.c:1022
@@ -820,16 +818,16 @@ msgstr "Servidor"
 msgid "Others"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:315
+#: ../src/shell/ario-shell-similarartists.c:309
 #, c-format
 msgid "%d songs"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:374
+#: ../src/shell/ario-shell-similarartists.c:368
 msgid "Image"
 msgstr "Imatge"
 
-#: ../src/shell/ario-shell-similarartists.c:392
+#: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "Cançons"
@@ -841,9 +839,8 @@ msgid "Song Properties"
 msgstr "Propietats de la cançó"
 
 #: ../src/shell/ario-shell-songinfos.c:409
-#, fuzzy
 msgid "Error saving tags of file:"
-msgstr "Error en desar el fitxer"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
@@ -965,21 +962,20 @@ msgstr "_Desa"
 msgid "_Go to playing song"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:552
-#, fuzzy
+#: ../src/widgets/ario-playlist.c:560
 msgid "Filter:"
-msgstr "_Arxiu"
+msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1390
+#: ../src/widgets/ario-playlist.c:1401
 msgid "Save playlist"
 msgstr "Desa la llista de reproducció"
 
-#: ../src/widgets/ario-playlist.c:1400
+#: ../src/widgets/ario-playlist.c:1411
 msgid "Playlist name :"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1425
+#: ../src/widgets/ario-playlist.c:1436
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
@@ -1094,9 +1090,8 @@ msgid "Check Last.fm server status at"
 msgstr "Comprova l'estat de Last.fm a"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
-#, fuzzy
 msgid "Disabled"
-msgstr "Activat"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Find out about Last.fm at "
@@ -1107,27 +1102,24 @@ msgid "Last submission time:"
 msgstr "Data de l'últim enviament:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
-#, fuzzy
 msgid "Last.fm Profile"
-msgstr "Perfil"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Queued tracks:"
 msgstr "Cançons a la cua:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
-#, fuzzy
 msgid "Status:"
-msgstr "Barra d'_estat"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
 msgid "Tracks submitted:"
 msgstr "Peces enviades:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
-#, fuzzy
 msgid "Username :"
-msgstr "Nom:"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1170,9 +1162,8 @@ msgid "Albums from this artist:"
 msgstr ""
 
 #: ../plugins/information/information.ui.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "Lletra"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"

@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario_ario-fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 12:25+0100\n"
-"PO-Revision-Date: 2008-12-15 06:24+0000\n"
+"POT-Creation-Date: 2009-02-22 14:02+0100\n"
+"PO-Revision-Date: 2009-01-19 20:50+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
+"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -74,9 +74,8 @@ msgid "Port :"
 msgstr "Portti :"
 
 #: ../data/ui/connection-widget.ui.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Palvelin"
+msgstr ""
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
@@ -121,15 +120,11 @@ msgid "_Disconnect"
 msgstr "_Katkaise yhteys"
 
 #: ../data/ui/connection-assistant.ui.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Sinun täytyy määritellä MPD-palvelin yhteyden muodostamista varten. Jos MPD-"
-"palvelimen määrittely automaattisesti ei onnistu, tarkista, että zeroconf on "
-"valittuna MPD-asetuksissa tai määrittele sopivat asetukset."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -196,38 +191,38 @@ msgid "Title :"
 msgstr "Nimi :"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Albumi"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
 #: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/shell/ario-shell-similarartists.c:379
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Artisti"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:442
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
 msgid "Duration"
 msgstr "Kesto"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
 msgid "File"
 msgstr "Tiedosto"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:442
 msgid "Genre"
 msgstr "Tyylilaji"
 
@@ -245,25 +240,24 @@ msgid "Playlist"
 msgstr "Soittolista"
 
 #: ../data/ui/playlist-prefs.ui.h:10
-#, fuzzy
 msgid "Playlist mode:"
-msgstr "Soittolistan nimi :"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Show rows:"
 msgstr "Näytä rivit:"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Nimi"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
 msgid "Track"
 msgstr "Kappale"
 
@@ -296,16 +290,15 @@ msgid "_Update"
 msgstr "_Päivitä"
 
 #: ../data/ui/server-prefs.ui.h:8
-#, fuzzy
 msgid "enable crossfade"
-msgstr "Ristiinhäivytys"
+msgstr ""
 
 #: ../data/ui/server-prefs.ui.h:9
 msgid "fade time (s):"
 msgstr "häivytysaika"
 
 #: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
@@ -332,9 +325,8 @@ msgid "Number of albums :"
 msgstr "Albumien lukumäärä"
 
 #: ../data/ui/stats-prefs.ui.h:3
-#, fuzzy
 msgid "Number of artists :"
-msgstr "Kappaleiden määrä :"
+msgstr "Artistien määrä :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
@@ -416,19 +408,19 @@ msgstr ""
 msgid "Start minimized window"
 msgstr ""
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "sekunti;sekuntia"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "minuuttia"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "tuntia"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "päivää"
 
@@ -440,24 +432,29 @@ msgstr "Kansikuva on jo olemassa. Haluatko korvata sen?"
 msgid "Music Directory"
 msgstr "Musiikkihakemisto"
 
-#: ../src/playlist/ario-playlist-dynamic.c:53
-#, fuzzy
-msgid "same artist"
-msgstr "Artistien määrä :"
-
-#: ../src/playlist/ario-playlist-dynamic.c:54
-msgid "same album"
+#: ../src/playlist/ario-playlist-dynamic.c:55
+msgid "songs of same artist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:55
-#, fuzzy
-msgid "similar artists"
-msgstr "Etsi vastaavia artisteja"
+#: ../src/playlist/ario-playlist-dynamic.c:56
+msgid "songs of same album"
+msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:95
-#, fuzzy
+#: ../src/playlist/ario-playlist-dynamic.c:57
+msgid "songs of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:58
+msgid "albums of same artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:59
+msgid "albums of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:99
 msgid "Dynamic Playlist"
-msgstr "Soittolista"
+msgstr ""
 
 #: ../src/playlist/ario-playlist-queue.c:79
 msgid "Queue Mode"
@@ -558,24 +555,24 @@ msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 msgid "Composer"
 msgstr "Säveltäjä"
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:51
+#: ../src/servers/ario-server.c:52
 msgid "Performer"
 msgstr "Esittäjä"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Filename"
 msgstr "Tiedoston nimi"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:55
+#: ../src/servers/ario-server.c:56
 msgid "Any"
 msgstr "Mikä tahansa"
 
@@ -661,7 +658,7 @@ msgstr "Poistetaanko kaikki valitut soittolistat?"
 msgid "Cover"
 msgstr "Kansikuva"
 
-#: ../src/sources/ario-tree.c:1233
+#: ../src/sources/ario-tree.c:1236
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Oletko varma että haluat poistaa kaikki valitut kansikuvat?"
 
@@ -758,6 +755,13 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
 "  Miia Ranta https://launchpad.net/~myrtti\n"
+"  Päivi Pasi https://launchpad.net/~pap26\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Ari Takalo https://launchpad.net/~ajtaka\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
+"  Miia Ranta https://launchpad.net/~myrtti\n"
 "  Päivi Pasi https://launchpad.net/~pap26"
 
 #: ../src/shell/ario-shell.c:1022
@@ -822,16 +826,16 @@ msgstr "Palvelin"
 msgid "Others"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:315
+#: ../src/shell/ario-shell-similarartists.c:309
 #, c-format
 msgid "%d songs"
 msgstr "%d kappaletta"
 
-#: ../src/shell/ario-shell-similarartists.c:374
+#: ../src/shell/ario-shell-similarartists.c:368
 msgid "Image"
 msgstr "Kuva"
 
-#: ../src/shell/ario-shell-similarartists.c:392
+#: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "Kappaleet"
@@ -843,9 +847,8 @@ msgid "Song Properties"
 msgstr "Kappaleen ominaisuudet"
 
 #: ../src/shell/ario-shell-songinfos.c:409
-#, fuzzy
 msgid "Error saving tags of file:"
-msgstr "Virhe tallennettaessa tiedostoa"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
@@ -972,21 +975,20 @@ msgstr "_Tallenna"
 msgid "_Go to playing song"
 msgstr "_Siirry parhaillaan soitettavaan kappaleeseen"
 
-#: ../src/widgets/ario-playlist.c:552
-#, fuzzy
+#: ../src/widgets/ario-playlist.c:560
 msgid "Filter:"
-msgstr "Tiedosto"
+msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1390
+#: ../src/widgets/ario-playlist.c:1401
 msgid "Save playlist"
 msgstr "Tallenna soittolista"
 
-#: ../src/widgets/ario-playlist.c:1400
+#: ../src/widgets/ario-playlist.c:1411
 msgid "Playlist name :"
 msgstr "Soittolistan nimi :"
 
-#: ../src/widgets/ario-playlist.c:1425
+#: ../src/widgets/ario-playlist.c:1436
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Soittolista on jo olemassa. Haluatko korvata sen?"
 
@@ -1261,3 +1263,13 @@ msgstr "Wikipedia"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Asetusten muokkaus"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Sinun täytyy määritellä MPD-palvelin yhteyden muodostamista varten. Jos "
+#~ "MPD-palvelimen määrittely automaattisesti ei onnistu, tarkista, että "
+#~ "zeroconf on valittuna MPD-asetuksissa tai määrittele sopivat asetukset."

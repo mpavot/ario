@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 12:25+0100\n"
-"PO-Revision-Date: 2008-12-18 00:01+0000\n"
+"POT-Creation-Date: 2009-02-22 14:02+0100\n"
+"PO-Revision-Date: 2009-01-19 20:51+0000\n"
 "Last-Translator: AtomCell <shelhatem@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
+"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -189,38 +189,38 @@ msgid "Title :"
 msgstr "عنوان :"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "ألبوم"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
 #: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/shell/ario-shell-similarartists.c:379
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "فنّان"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:442
 msgid "Date"
 msgstr "تاريخ"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
 msgid "Duration"
 msgstr "المدّة"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
 msgid "File"
 msgstr "الملف"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:442
 msgid "Genre"
 msgstr "نوع"
 
@@ -238,26 +238,24 @@ msgid "Playlist"
 msgstr "قائمة التشغيل"
 
 #: ../data/ui/playlist-prefs.ui.h:10
-#, fuzzy
 msgid "Playlist mode:"
-msgstr "قائمة التشغيل"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:11
-#, fuzzy
 msgid "Show rows:"
-msgstr "إظهار ال_كلمات"
+msgstr ""
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "عنوان"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
 msgid "Track"
 msgstr "قطعة"
 
@@ -294,12 +292,11 @@ msgid "enable crossfade"
 msgstr ""
 
 #: ../data/ui/server-prefs.ui.h:9
-#, fuzzy
 msgid "fade time (s):"
-msgstr "مدّة العزف :"
+msgstr ""
 
 #: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
@@ -318,18 +315,16 @@ msgid "Find on Last.fm"
 msgstr "بحث على Last.fm"
 
 #: ../data/ui/stats-prefs.ui.h:1
-#, fuzzy
 msgid "Database play time :"
-msgstr "مدّة العزف :"
+msgstr ""
 
 #: ../data/ui/stats-prefs.ui.h:2
 msgid "Number of albums :"
 msgstr "عدد الألبومات :"
 
 #: ../data/ui/stats-prefs.ui.h:3
-#, fuzzy
 msgid "Number of artists :"
-msgstr "عدد الأغاني :"
+msgstr "عدد الفنّانين :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
@@ -344,18 +339,16 @@ msgid "Statistics"
 msgstr "الإحصائيات"
 
 #: ../data/ui/stats-prefs.ui.h:7
-#, fuzzy
 msgid "Uptime :"
-msgstr "مدّة العزف :"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:3
 msgid "Comment :"
 msgstr "تعليق :"
 
 #: ../data/ui/song-infos.ui.h:4
-#, fuzzy
 msgid "Composer :"
-msgstr "تعليق :"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:5
 msgid "Date :"
@@ -413,19 +406,19 @@ msgstr ""
 msgid "Start minimized window"
 msgstr ""
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "ثانية"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "دقيقة"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "ساعة"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "يوم"
 
@@ -437,24 +430,29 @@ msgstr ""
 msgid "Music Directory"
 msgstr "دليل الموسيقا"
 
-#: ../src/playlist/ario-playlist-dynamic.c:53
-#, fuzzy
-msgid "same artist"
-msgstr "عدد الفنّانين :"
-
-#: ../src/playlist/ario-playlist-dynamic.c:54
-msgid "same album"
+#: ../src/playlist/ario-playlist-dynamic.c:55
+msgid "songs of same artist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:55
-#, fuzzy
-msgid "similar artists"
-msgstr "بحث عن فنّانين مثلهم"
+#: ../src/playlist/ario-playlist-dynamic.c:56
+msgid "songs of same album"
+msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:95
-#, fuzzy
+#: ../src/playlist/ario-playlist-dynamic.c:57
+msgid "songs of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:58
+msgid "albums of same artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:59
+msgid "albums of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:99
 msgid "Dynamic Playlist"
-msgstr "قائمة التشغيل"
+msgstr ""
 
 #: ../src/playlist/ario-playlist-queue.c:79
 msgid "Queue Mode"
@@ -555,24 +553,24 @@ msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 msgid "Composer"
 msgstr ""
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:51
+#: ../src/servers/ario-server.c:52
 msgid "Performer"
 msgstr ""
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Filename"
 msgstr "اسم الملف"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:55
+#: ../src/servers/ario-server.c:56
 msgid "Any"
 msgstr "أيّ"
 
@@ -658,7 +656,7 @@ msgstr ""
 msgid "Cover"
 msgstr "غلاف"
 
-#: ../src/sources/ario-tree.c:1233
+#: ../src/sources/ario-tree.c:1236
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr ""
 
@@ -744,6 +742,12 @@ msgstr ""
 "  AtomCell https://launchpad.net/~shelhatem\n"
 "  MaXeR https://launchpad.net/~themaxer\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  صقر بن عبدالله https://launchpad.net/~agari\n"
+"\n"
+"Launchpad Contributions:\n"
+"  AtomCell https://launchpad.net/~shelhatem\n"
+"  MaXeR https://launchpad.net/~themaxer\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  صقر بن عبدالله https://launchpad.net/~agari"
 
 #: ../src/shell/ario-shell.c:1022
@@ -805,16 +809,16 @@ msgstr "الخادوم"
 msgid "Others"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:315
+#: ../src/shell/ario-shell-similarartists.c:309
 #, c-format
 msgid "%d songs"
 msgstr "%d أغنية"
 
-#: ../src/shell/ario-shell-similarartists.c:374
+#: ../src/shell/ario-shell-similarartists.c:368
 msgid "Image"
 msgstr "صورة"
 
-#: ../src/shell/ario-shell-similarartists.c:392
+#: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "أغاني"
@@ -826,9 +830,8 @@ msgid "Song Properties"
 msgstr ""
 
 #: ../src/shell/ario-shell-songinfos.c:409
-#, fuzzy
 msgid "Error saving tags of file:"
-msgstr "خطأ أثناء قراءة الملفّ"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
@@ -950,21 +953,20 @@ msgstr ""
 msgid "_Go to playing song"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:552
-#, fuzzy
+#: ../src/widgets/ario-playlist.c:560
 msgid "Filter:"
-msgstr "الملف"
+msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1390
+#: ../src/widgets/ario-playlist.c:1401
 msgid "Save playlist"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1400
+#: ../src/widgets/ario-playlist.c:1411
 msgid "Playlist name :"
 msgstr ""
 
-#: ../src/widgets/ario-playlist.c:1425
+#: ../src/widgets/ario-playlist.c:1436
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr ""
 
@@ -1079,41 +1081,36 @@ msgid "Check Last.fm server status at"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
-#, fuzzy
 msgid "Disabled"
-msgstr "مفعّل"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-#, fuzzy
 msgid "Find out about Last.fm at "
-msgstr "بحث على Last.fm"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Last submission time:"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
-#, fuzzy
 msgid "Last.fm Profile"
-msgstr "سيرة"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Queued tracks:"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
-#, fuzzy
 msgid "Status:"
-msgstr "شريط ال_حالة"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
 msgid "Tracks submitted:"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
-#, fuzzy
 msgid "Username :"
-msgstr "اسم الملف :"
+msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1156,9 +1153,8 @@ msgid "Albums from this artist:"
 msgstr ""
 
 #: ../plugins/information/information.ui.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "الكلمات"
+msgstr ""
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"

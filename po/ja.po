@@ -1,16 +1,16 @@
-# Hebrew translation for ario
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Japanese translation for ario
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the ario package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-22 14:02+0100\n"
-"PO-Revision-Date: 2009-01-19 20:45+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2009-03-06 06:18+0000\n"
+"Last-Translator: Masato HASHIMOTO <cabezon.hashimoto@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,103 +19,103 @@ msgstr ""
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "נגן המוסיקה Ario"
+msgstr "Ario ミュージックプレイヤ"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
-msgstr "תוכנת לקוח ל-mpd"
+msgstr "MPD クライアントアプリケーション"
 
 #: ../data/ui/browser-prefs.ui.h:1
 msgid "Library Options"
-msgstr ""
+msgstr "ライブラリオプション"
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "Library Organisation"
-msgstr ""
+msgstr "ライブラリ表示構成"
 
 #: ../data/ui/browser-prefs.ui.h:3
 msgid "Sort albums: "
-msgstr ""
+msgstr "アルバムの表示順: "
 
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
-msgstr "זהה אוטומטית"
+msgstr "自動検出"
 
 #: ../data/ui/connection-widget.ui.h:2
 msgid "Default"
-msgstr "ברירת מחדל"
+msgstr "デフォルト"
 
 #: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
 msgid "Host :"
-msgstr "מארח :"
+msgstr "ホスト :"
 
 #: ../data/ui/connection-widget.ui.h:4
 msgid "Music directory :"
-msgstr "תיקיית מוסיקה :"
+msgstr "音楽ディレクトリ :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr ""
+msgstr "音楽サーバは Ario と同じコンピュータで動作する"
 
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
 #: ../plugins/radios/ario-radio.c:1039
 msgid "Name :"
-msgstr "שם :"
+msgstr "名前 :"
 
 #: ../data/ui/connection-widget.ui.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Password :"
-msgstr "סיסמה :"
+msgstr "パスワード :"
 
 #: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
 msgid "Port :"
-msgstr "פותחה :"
+msgstr "ポート :"
 
 #: ../data/ui/connection-widget.ui.h:9
 msgid "Server type : "
-msgstr ""
+msgstr "サーバタイプ : "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr ""
+msgstr "XMMS 2 (試験用)"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "再生中の曲のアルバムカバーを自動的にダウンロードする"
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
 #: ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
-msgstr "עטיפות"
+msgstr "カバー"
 
 #: ../data/ui/cover-prefs.ui.h:3
 msgid "Covers Sources"
-msgstr "מקור העטיפות"
+msgstr "カバーのソース"
 
 #: ../data/ui/cover-prefs.ui.h:4
 msgid "Show the covers in the albums list"
-msgstr "הצג את העטיפות ברשימת האלבומים"
+msgstr "アルバムリストにカバーアートを表示する"
 
 #: ../data/ui/cover-prefs.ui.h:5
 msgid "Use Amazon."
-msgstr "השתמש באמאזון."
+msgstr "Amazon からのダウンロード: www.amazon(.co)."
 
 #: ../data/ui/connection-prefs.ui.h:1
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
-msgstr "חיבור"
+msgstr "接続"
 
 #: ../data/ui/connection-prefs.ui.h:2
 msgid "_Autoconnect on startup"
-msgstr "ה_תחבר אוטומטית בהפעלה"
+msgstr "起動時に自動接続する(_A)"
 
 #: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
 msgid "_Connect"
-msgstr "_התחבר"
+msgstr "接続(_C)"
 
 #: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
 msgid "_Disconnect"
-msgstr "הת_נתק"
+msgstr "切断(_D)"
 
 #: ../data/ui/connection-assistant.ui.h:1
 msgid ""
@@ -123,77 +123,80 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
+"接続するサーバを設定してください。自動検出でサーバが見つからない場合は、"
+"zeroconf または avahi がサーバで有効になっているかどうか確認してください。ま"
+"たは手動で設定してください。"
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
 msgid "Album :"
-msgstr "אלבום :"
+msgstr "アルバム :"
 
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
 #: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
 #: ../plugins/information/information.ui.h:3
 msgid "Artist :"
-msgstr "אמן :"
+msgstr "アーティスト :"
 
 #: ../data/ui/cover-progress.ui.h:3
 msgid "Downloading cover"
-msgstr "מוריד עטיפה"
+msgstr "カバーアートをダウンロードしています"
 
 #: ../data/ui/cover-select.ui.h:3
 msgid "Local search"
-msgstr "חיפוש מקומי"
+msgstr "ローカル検索"
 
 #: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
 msgid "Search"
-msgstr "חפש"
+msgstr "検索"
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
-msgstr ""
+msgstr "Ario のインスタンスは一つだけ許可する"
 
 #: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
-msgstr ""
+msgstr "「閉じる」ボタンが押されたときにウィンドウを隠す"
 
 #: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
-msgstr "מנשק"
+msgstr "インターフェイス"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Proxy"
-msgstr "מתווך"
+msgstr "プロキシ"
 
 #: ../data/ui/others-prefs.ui.h:5
 msgid "Proxy Address :"
-msgstr "כתובת המתווך :"
+msgstr "プロキシのアドレス :"
 
 #: ../data/ui/others-prefs.ui.h:6
 msgid "Proxy Port :"
-msgstr "פותחת המתווך :"
+msgstr "プロキシのポート :"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
-msgstr "הצג לשוניות"
+msgstr "タブを表示する"
 
 #: ../data/ui/others-prefs.ui.h:8
 msgid "Use a proxy"
-msgstr "השתמש במתווך"
+msgstr "プロキシを使用する"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
-msgstr "מקורות מילות השירים"
+msgstr "歌詞のソース"
 
 #: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
 #: ../plugins/information/information.ui.h:6
 msgid "Title :"
-msgstr "כותרת :"
+msgstr "タイトル :"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
 #: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
-msgstr "אלבום"
+msgstr "アルバム"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
 #: ../src/shell/ario-shell-lyricsselect.c:175
@@ -201,49 +204,49 @@ msgstr "אלבום"
 #: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
-msgstr "אמן"
+msgstr "アーティスト"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
 #: ../src/widgets/ario-playlist.c:442
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 #: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
 msgid "Duration"
-msgstr "משך"
+msgstr "時間"
 
 #: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
 #: ../src/widgets/ario-playlist.c:442
 msgid "Genre"
-msgstr ""
+msgstr "ジャンル"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Go to current song when a new song is played"
-msgstr ""
+msgstr "新しい曲が再生されたらその曲に移動する"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Mode"
-msgstr ""
+msgstr "モード"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:216
 #: ../src/shell/ario-shell.c:199 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
-msgstr "רשימת השמעה"
+msgstr "プレイリスト"
 
 #: ../data/ui/playlist-prefs.ui.h:10
 msgid "Playlist mode:"
-msgstr ""
+msgstr "プレイリストモード :"
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Show rows:"
-msgstr ""
+msgstr "表示するカラム:"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
@@ -251,267 +254,267 @@ msgstr ""
 #: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
-msgstr "כותרת"
+msgstr "タイトル"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
 #: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
 msgid "Track"
-msgstr "רצועה"
+msgstr "トラック"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
-msgstr "פלט קולי"
+msgstr "オーディオ出力"
 
 #: ../data/ui/server-prefs.ui.h:2
 msgid "Crossfade"
-msgstr "עמעום הדרגתי"
+msgstr "クロスフェード"
 
 #: ../data/ui/server-prefs.ui.h:3
 msgid "Database"
-msgstr "מסד נתונים"
+msgstr "データベース"
 
 #: ../data/ui/server-prefs.ui.h:4
 msgid "Last updated:"
-msgstr "עודכן לאחרונה:"
+msgstr "最終更新:"
 
 #: ../data/ui/server-prefs.ui.h:5
 msgid "Stop music on exit"
-msgstr ""
+msgstr "終了時に再生を停止する"
 
 #: ../data/ui/server-prefs.ui.h:6
 msgid "Update on startup"
-msgstr ""
+msgstr "起動時に更新する"
 
 #: ../data/ui/server-prefs.ui.h:7
 msgid "_Update"
-msgstr "_עדכן"
+msgstr "更新(_U)"
 
 #: ../data/ui/server-prefs.ui.h:8
 msgid "enable crossfade"
-msgstr "אפשר עמעום מדורג"
+msgstr "クロスフェードを有効にする"
 
 #: ../data/ui/server-prefs.ui.h:9
 msgid "fade time (s):"
-msgstr "זמן העמעום (ש'):"
+msgstr "フェード時間 (秒):"
 
 #: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
 #: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
-msgstr "לא זמין"
+msgstr "n/a"
 
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
-msgstr ""
+msgstr "全てプレイリストに追加"
 
 #: ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
-msgstr ""
+msgstr "プレイリストに追加"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
-msgstr "מצא ב-Last.fm"
+msgstr "Last.fm で検索"
 
 #: ../data/ui/stats-prefs.ui.h:1
 msgid "Database play time :"
-msgstr "זמן נגינת מסד הנתונים :"
+msgstr "データベース再生時間 :"
 
 #: ../data/ui/stats-prefs.ui.h:2
 msgid "Number of albums :"
-msgstr "מספר האלבומים :"
+msgstr "アルバム数 :"
 
 #: ../data/ui/stats-prefs.ui.h:3
 msgid "Number of artists :"
-msgstr "מספר האמנים :"
+msgstr "アーティスト数 :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
-msgstr "מספר השירים :"
+msgstr "曲数 :"
 
 #: ../data/ui/stats-prefs.ui.h:5
 msgid "Play time :"
-msgstr "זמן הנגינה :"
+msgstr "再生時間 :"
 
 #: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
-msgstr "סטטיסטיקה"
+msgstr "統計"
 
 #: ../data/ui/stats-prefs.ui.h:7
 msgid "Uptime :"
-msgstr "זמן הפעלה :"
+msgstr "動作時間 :"
 
 #: ../data/ui/song-infos.ui.h:3
 msgid "Comment :"
-msgstr "הערה :"
+msgstr "コメント :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Composer :"
-msgstr "מלחין :"
+msgstr "指揮 :"
 
 #: ../data/ui/song-infos.ui.h:5
 msgid "Date :"
-msgstr "תאריך :"
+msgstr "日付 :"
 
 #: ../data/ui/song-infos.ui.h:6
 msgid "Disc :"
-msgstr ""
+msgstr "ディスク :"
 
 #: ../data/ui/song-infos.ui.h:7
 msgid "Filename :"
-msgstr "שם הקובץ :"
+msgstr "ファイル名 :"
 
 #: ../data/ui/song-infos.ui.h:8
 msgid "Genre :"
-msgstr "סגנון :"
+msgstr "ジャンル :"
 
 #: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
 msgid "Length :"
-msgstr "משך :"
+msgstr "長さ :"
 
 #: ../data/ui/song-infos.ui.h:10
 msgid "Performer :"
-msgstr "מבצע :"
+msgstr "演奏 :"
 
 #: ../data/ui/song-infos.ui.h:11
 msgid "Song"
-msgstr "שיר"
+msgstr "楽曲"
 
 #: ../data/ui/song-infos.ui.h:13
 msgid "Track :"
-msgstr "רצועה :"
+msgstr "トラック :"
 
 #: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
-msgstr ""
+msgstr "通知"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Notification on song change"
-msgstr ""
+msgstr "曲の変更時に通知する"
 
 #: ../data/ui/trayicon-prefs.ui.h:3
 msgid "Notification time: "
-msgstr ""
+msgstr "通知時間: "
 
 #: ../data/ui/trayicon-prefs.ui.h:4
 msgid "On middle button click on tray icon :"
-msgstr "עם לחיצת הלחצן האמצעי על הסמל בסרגל :"
+msgstr "トレイアイコンを中央クリックしたとき :"
 
 #: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Tray icon"
-msgstr "סמל בסרגל"
+msgstr "トレイアイコン"
 
 #: ../src/ario-main.c:60
 msgid "Start minimized window"
-msgstr ""
+msgstr "最小化して起動する"
 
 #: ../src/ario-util.c:81
 msgid "seconds"
-msgstr "שניות"
+msgstr "秒"
 
 #: ../src/ario-util.c:84
 msgid "minutes"
-msgstr "דקות"
+msgstr "分"
 
 #: ../src/ario-util.c:92
 msgid "hours"
-msgstr "שעות"
+msgstr "時間"
 
 #: ../src/ario-util.c:100
 msgid "days"
-msgstr "ימים"
+msgstr "日"
 
 #: ../src/covers/ario-cover.c:158
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "העטיפה כבר קיימת. האם ברצונך להחליפה?"
+msgstr "カバーアートはすでに存在します。置き換えますか?"
 
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
-msgstr "ספריית המוסיקה"
+msgstr "音楽ディレクトリ"
 
 #: ../src/playlist/ario-playlist-dynamic.c:55
 msgid "songs of same artist"
-msgstr ""
+msgstr "同じアーティストの曲"
 
 #: ../src/playlist/ario-playlist-dynamic.c:56
 msgid "songs of same album"
-msgstr ""
+msgstr "同じアルバムの曲"
 
 #: ../src/playlist/ario-playlist-dynamic.c:57
 msgid "songs of similar artists"
-msgstr ""
+msgstr "同種のアーティストの曲"
 
 #: ../src/playlist/ario-playlist-dynamic.c:58
 msgid "albums of same artists"
-msgstr ""
+msgstr "同じアーティストのアルバム"
 
 #: ../src/playlist/ario-playlist-dynamic.c:59
 msgid "albums of similar artists"
-msgstr ""
+msgstr "同種のアーティストのアルバム"
 
 #: ../src/playlist/ario-playlist-dynamic.c:99
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "ダイナミックプレイリスト"
 
 #: ../src/playlist/ario-playlist-queue.c:79
 msgid "Queue Mode"
-msgstr ""
+msgstr "キューモード"
 
 #: ../src/playlist/ario-playlist-normal.c:77
 msgid "Normal"
-msgstr ""
+msgstr "通常"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "תוסף"
+msgstr "プラグイン"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 #: ../src/preferences/ario-cover-preferences.c:156
 #: ../src/preferences/ario-lyrics-preferences.c:107
 #: ../src/preferences/ario-server-preferences.c:163
 msgid "Enabled"
-msgstr "מופעל"
+msgstr "有効"
 
 #: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:183
 msgid "_About"
-msgstr "_אודות"
+msgstr "情報(_A)"
 
 #: ../src/plugins/ario-plugin-manager.c:488
 msgid "C_onfigure"
-msgstr "ה_גדר"
+msgstr "設定(_O)"
 
 #: ../src/plugins/ario-plugin-manager.c:497
 msgid "A_ctivate"
-msgstr "ה_פעל"
+msgstr "有効(_C)"
 
 #: ../src/plugins/ario-plugin-manager.c:508
 msgid "Ac_tivate All"
-msgstr "הפ_על הכל"
+msgstr "すべて有効(_T)"
 
 #: ../src/plugins/ario-plugin-manager.c:513
 msgid "_Deactivate All"
-msgstr "הפסק ה_כל"
+msgstr "すべて無効(_D)"
 
 #: ../src/plugins/ario-plugin-manager.c:722
 msgid "Active plugins"
-msgstr "תוספים פעילים"
+msgstr "有効なプラグイン"
 
 #: ../src/preferences/ario-browser-preferences.c:44
 msgid "Alphabetically"
-msgstr ""
+msgstr "アルファベット順"
 
 #. SORT_ALPHABETICALLY
 #: ../src/preferences/ario-browser-preferences.c:45
 msgid "By year"
-msgstr ""
+msgstr "年順"
 
 #: ../src/preferences/ario-cover-preferences.c:167
 #: ../src/preferences/ario-lyrics-preferences.c:118
 #: ../src/preferences/ario-server-preferences.c:174
 #: ../src/widgets/ario-connection-widget.c:551
 msgid "Name"
-msgstr "שם"
+msgstr "名前"
 
 #: ../src/preferences/ario-server-preferences.c:209
 #: ../src/preferences/ario-stats-preferences.c:151
@@ -521,64 +524,64 @@ msgstr "שם"
 #: ../src/preferences/ario-stats-preferences.c:155
 #: ../src/preferences/ario-stats-preferences.c:156
 msgid "Not connected"
-msgstr "לא מחובר"
+msgstr "接続していません"
 
 #: ../src/preferences/ario-server-preferences.c:214
 #: ../src/preferences/ario-server-preferences.c:305
 #: ../src/widgets/ario-status-bar.c:95
 msgid "Updating..."
-msgstr "מעדכן..."
+msgstr "更新しています..."
 
 #: ../src/preferences/ario-trayicon-preferences.c:46
 msgid "Play/Pause"
-msgstr "נגן/השהה"
+msgstr "再生/一時停止"
 
 #. TRAY_ICON_PLAY_PAUSE
 #: ../src/preferences/ario-trayicon-preferences.c:47
 #: ../src/widgets/ario-header.c:240
 msgid "Play next song"
-msgstr "השמע את השיר הבא"
+msgstr "次の曲を再生"
 
 #. TRAY_ICON_NEXT_SONG
 #: ../src/preferences/ario-trayicon-preferences.c:48
 msgid "Do nothing"
-msgstr "אל תעשה כלום"
+msgstr "なにもしない"
 
 #: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr ""
+msgstr "サーバに接続しています..."
 
 #: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
-msgstr ""
+msgstr "サーバに接続できませんでした。接続オプションをチェックしてください。"
 
 #. MPD_TAG_ITEM_DATE
 #: ../src/servers/ario-server.c:51
 msgid "Composer"
-msgstr ""
+msgstr "指揮"
 
 #. MPD_TAG_ITEM_COMPOSER
 #: ../src/servers/ario-server.c:52
 msgid "Performer"
-msgstr ""
+msgstr "演奏"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
 #: ../src/servers/ario-server.c:55
 msgid "Filename"
-msgstr "שם הקובץ"
+msgstr "ファイル名"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/servers/ario-server.c:56
 msgid "Any"
-msgstr "כלשהו"
+msgstr "すべて"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "Unknown"
-msgstr "לא ידוע"
+msgstr "不明"
 
 #: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:76
 #: ../src/sources/ario-storedplaylists.c:101
@@ -587,7 +590,7 @@ msgstr "לא ידוע"
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:114
 msgid "_Add to playlist"
-msgstr "הוסף ל_רשימת ההשמעה"
+msgstr "プレイリストへ追加(_A)"
 
 #: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:79
 #: ../src/sources/ario-storedplaylists.c:104
@@ -596,7 +599,7 @@ msgstr "הוסף ל_רשימת ההשמעה"
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
-msgstr ""
+msgstr "追加して再生(_P)"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:82
 #: ../src/sources/ario-storedplaylists.c:107
@@ -605,15 +608,15 @@ msgstr ""
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
 msgid "_Replace in playlist"
-msgstr ""
+msgstr "プレイリストを置換(_R)"
 
 #: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
-msgstr "השג את העטיפות"
+msgstr "カバーの取得"
 
 #: ../src/sources/ario-browser.c:91
 msgid "_Delete the covers"
-msgstr "מ_חק את העטיפות"
+msgstr "カバーの削除(_D)"
 
 #: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
 #: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
@@ -621,145 +624,130 @@ msgstr "מ_חק את העטיפות"
 #: ../plugins/filesystem/ario-filesystem.c:127
 #: ../plugins/radios/ario-radio.c:129
 msgid "_Properties"
-msgstr "_מאפיינים"
+msgstr "プロパティ(_P)"
 
 #: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
-msgstr "ספרייה"
+msgstr "ライブラリ"
 
 #: ../src/sources/ario-search.c:178
 msgid "Add a search criteria"
-msgstr "הוסף קריטריון לחיפוש"
+msgstr "検索基準を追加します"
 
 #: ../src/sources/ario-search.c:186
 msgid "Search songs in the library"
-msgstr "חפש שירים בספרייה"
+msgstr "ライブラリから曲を検索します"
 
 #: ../src/sources/ario-search.c:362
 msgid "Remove a search criteria"
-msgstr "הסר קריטריון מהחיפוש"
+msgstr "検索基準を削除します"
 
 #: ../src/sources/ario-storedplaylists.c:110
 msgid "_Delete"
-msgstr "מ_חק"
+msgstr "削除(_D)"
 
 #: ../src/sources/ario-storedplaylists.c:161
 msgid "Playlists"
-msgstr "רשימות השמעה"
+msgstr "プレイリスト"
 
 #: ../src/sources/ario-storedplaylists.c:565
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr "האם אתה בטוח שברצונך למחוק את כל רשימות ההשמעה הנבחרות?"
+msgstr "選択した全てのプレイリストを削除してもよろしいですか?"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-tree.c:373
 msgid "Cover"
-msgstr "עטיפה"
+msgstr "カバー"
 
 #: ../src/sources/ario-tree.c:1236
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr ""
+msgstr "選択したすべてのカバーアートを削除してもよろしいですか?"
 
 #: ../src/shell/ario-shell.c:147
 msgid "_File"
-msgstr "_קובץ"
+msgstr "ファイル(_F)"
 
 #: ../src/shell/ario-shell.c:148
 msgid "_Edit"
-msgstr "ע_ריכה"
+msgstr "編集(_E)"
 
 #: ../src/shell/ario-shell.c:149
 msgid "_View"
-msgstr "_תצוגה"
+msgstr "表示(_V)"
 
 #: ../src/shell/ario-shell.c:150
 msgid "_Tool"
-msgstr "_כלי"
+msgstr "ツール(_T)"
 
 #: ../src/shell/ario-shell.c:151
 msgid "_Help"
-msgstr "_עזרה"
+msgstr "ヘルプ(_H)"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Quit"
-msgstr "_יציאה"
+msgstr "終了(_Q)"
 
 #: ../src/shell/ario-shell.c:162
 msgid "Plu_gins"
-msgstr "תו_ספים"
+msgstr "プラグイン(_G)"
 
 #: ../src/shell/ario-shell.c:165
 msgid "Prefere_nces"
-msgstr "ה_עדפות"
+msgstr "設定(_N)"
 
 #: ../src/shell/ario-shell.c:168
 msgid "_Change current album cover"
-msgstr "ש_נה את עטיפת האלבום הנוכחי"
+msgstr "現在のアルバムカバーの変更(_C)"
 
 #: ../src/shell/ario-shell.c:171
 msgid "Download album _covers"
-msgstr "הו_רד עטיפות אלבומים"
+msgstr "アルバムカバーのダウンロード(_C)"
 
 #: ../src/shell/ario-shell.c:174
 msgid "Find similar artists"
-msgstr "חפש אמנים דומים"
+msgstr "同種のアーティストの検索"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Add similar songs to playlist"
-msgstr ""
+msgstr "同種の曲をプレイリストに追加"
 
 #: ../src/shell/ario-shell.c:180
 msgid "Show _lyrics"
-msgstr "הצ_ג את מילות השירים"
+msgstr "歌詞の表示(_L)"
 
 #: ../src/shell/ario-shell.c:186
 msgid "_Translate this application..."
-msgstr "_תרגם תוכנה זו..."
+msgstr "このアプリケーションを翻訳する(_T)..."
 
 #: ../src/shell/ario-shell.c:193
 msgid "S_tatusbar"
-msgstr "_שורת המצב"
+msgstr "ステータスバー(_T)"
 
 #: ../src/shell/ario-shell.c:196
 msgid "Upper part"
-msgstr ""
+msgstr "上のペイン"
 
 #: ../src/shell/ario-shell.c:703
 msgid "GTK client for MPD"
-msgstr "לקוח MPD עבור GTK"
+msgstr "MPD 用 GTK クライアント"
 
 #: ../src/shell/ario-shell.c:704
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron"
+"  Masato HASHIMOTO https://launchpad.net/~hashimo"
 
 #: ../src/shell/ario-shell.c:1022
 msgid "Configure Plugins"
-msgstr "הגדרות תוספים"
+msgstr "プラグインの設定"
 
 #: ../src/shell/ario-shell-coverdownloader.c:179
 msgid "Music Player Cover Download"
-msgstr "הורדת עטיפה לנגן המוסיקה"
+msgstr "Music Player Cover Download"
 
 #: ../src/shell/ario-shell-coverdownloader.c:323
 msgid "Download Finished!"
-msgstr "ההורדה הושלמה!"
+msgstr "ダウンロードが完了しました!"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:326
@@ -769,79 +757,79 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
-"נמצאו %i עטיפות\n"
-"%i עטיפות לא נמצאו\n"
-"%i עטיפות כבר קיימות"
+"%i 個のカバーアートが見つかりました\n"
+"%i 個のカバーアートが見つかりませんでした\n"
+"%i 個のカバーアートがすでに存在します"
 
 #: ../src/shell/ario-shell-coverselect.c:247
 msgid "Cover Download"
-msgstr "הורדת עטיפה"
+msgstr "カバーアートのダウンロード"
 
 #: ../src/shell/ario-shell-coverselect.c:563
 msgid "Error reading file"
-msgstr "שגיאה בקריאת הקובץ"
+msgstr "ファイルの読み込みエラーです"
 
 #: ../src/shell/ario-shell-coverselect.c:586
 msgid "Error saving file"
-msgstr "שגיאה בשמירת הקובץ"
+msgstr "ファイルの保存エラーです"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:134
 #: ../src/shell/ario-shell-songinfos.c:246
 msgid "Lyrics"
-msgstr "מילות השיר"
+msgstr "歌詞"
 
 #: ../src/shell/ario-shell-lyricsselect.c:163
 msgid "Lyrics Download"
-msgstr "הורדת מילות השיר"
+msgstr "歌詞のダウンロード"
 
 #: ../src/shell/ario-shell-lyricsselect.c:201
 msgid "Source"
-msgstr ""
+msgstr "ソース"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
-msgstr "העדפות Ario"
+msgstr "Ario の設定"
 
 #: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
-msgstr "שרת"
+msgstr "サーバ"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "その他"
 
 #: ../src/shell/ario-shell-similarartists.c:309
 #, c-format
 msgid "%d songs"
-msgstr ""
+msgstr "%d 曲"
 
 #: ../src/shell/ario-shell-similarartists.c:368
 msgid "Image"
-msgstr "תמונה"
+msgstr "画像"
 
 #: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
-msgstr "שירים"
+msgstr "曲"
 
 #: ../src/shell/ario-shell-songinfos.c:224
 #: ../src/shell/ario-shell-songinfos.c:241
 #: ../src/shell/ario-shell-songinfos.c:474
 msgid "Song Properties"
-msgstr "מאפייני השיר"
+msgstr "曲のプロパティ"
 
 #: ../src/shell/ario-shell-songinfos.c:409
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "ファイルのタグ保存エラー:"
 
 #: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
-msgstr "פרופיל"
+msgstr "プロファイル"
 
 #: ../src/widgets/ario-connection-widget.c:530
 msgid "Server autodetection"
-msgstr "זיהוי השרת אוטומטית"
+msgstr "サーバの自動検出"
 
 #: ../src/widgets/ario-connection-widget.c:541
 msgid ""
@@ -849,272 +837,274 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
+"自動検出で MPD サーバが見つからない場合は、MPD の設定で zeroconf が有効になっ"
+"ているかチェックしてください。または手動で設定してください。"
 
 #: ../src/widgets/ario-connection-widget.c:559
 msgid "Host"
-msgstr "מארח"
+msgstr "ホスト"
 
 #: ../src/widgets/ario-connection-widget.c:567
 msgid "Port"
-msgstr "פותחה"
+msgstr "ポート"
 
 #: ../src/widgets/ario-connection-widget.c:630
 msgid "You must select a server."
-msgstr "עליך לבחור שרת."
+msgstr "サーバを選択してください。"
 
 #: ../src/widgets/ario-connection-widget.c:677
 msgid "New Profile"
-msgstr "פרופיל חדש"
+msgstr "新しいプロファイル"
 
 #: ../src/widgets/ario-firstlaunch.c:77
 msgid "The following configuration will be used:"
-msgstr "יעשה שימוש בהגדרות הבאות:"
+msgstr "次の設定が使用されます:"
 
 #: ../src/widgets/ario-firstlaunch.c:101
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
-"זוהי הפעם הראשונה בה אתה מפעיל את Ario.\n"
-"מסייע זה יעזור לך להגדיר את התוכנה."
+"初めて Ario が起動されました。\n"
+"このアシスタントが設定のお手伝いをします。"
 
 #: ../src/widgets/ario-firstlaunch.c:106
 msgid "Welcome to Ario"
-msgstr "ברוכים הבאים ל-Ario"
+msgstr "ようこそ Ario へ"
 
 #: ../src/widgets/ario-firstlaunch.c:124
 msgid "Configuration"
-msgstr "הגדרות"
+msgstr "設定"
 
 #: ../src/widgets/ario-firstlaunch.c:136
 msgid "Confirmation"
-msgstr "אישור"
+msgstr "確認"
 
 #: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr "<i>מאת</i> %s <i>על ידי</i> %s"
+msgstr "<i>from</i> %s <i>by</i> %s"
 
 #: ../src/widgets/ario-header.c:195
 msgid "Play previous song"
-msgstr "נגן את השיר הקודם"
+msgstr "前の曲を再生"
 
 #: ../src/widgets/ario-header.c:216
 msgid "Play/Pause the music"
-msgstr "נגן/השהה את המוסיקה"
+msgstr "再生/一時停止"
 
 #: ../src/widgets/ario-header.c:228
 msgid "Stop the music"
-msgstr "עצור את המוסיקה"
+msgstr "停止"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:307 ../src/widgets/ario-tray-icon.c:798
 msgid " of "
-msgstr " מתוך "
+msgstr " of "
 
 #: ../src/widgets/ario-header.c:320
 msgid "Toggle random on/off"
-msgstr "הפעל/בטל בחירה אקראית"
+msgstr "ランダムモードのオン/オフ"
 
 #: ../src/widgets/ario-header.c:332
 msgid "Toggle repeat on/off"
-msgstr "הפעל/בטל חזרה"
+msgstr "繰り返しモードのオン/オフ"
 
 #: ../src/widgets/ario-header.c:337
 msgid "Change the music volume"
-msgstr "שנה את עוצמת המוסיקה"
+msgstr "ボリュームの調整"
 
 #: ../src/widgets/ario-lyrics-editor.c:272
 msgid "Downloading lyrics..."
-msgstr "מוריד את מילות השיר..."
+msgstr "歌詞をダウンロードしています..."
 
 #: ../src/widgets/ario-lyrics-editor.c:289
 msgid "Lyrics not found"
-msgstr "לא נמצאו מילות השיר"
+msgstr "歌詞が見つかりませんでした"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Clear"
-msgstr "_נקה"
+msgstr "クリア(_C)"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
-msgstr ""
+msgstr "シャッフル(_S)"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
-msgstr ""
+msgstr "切り抜き(_O)"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
-msgstr "ה_סר"
+msgstr "除去(_R)"
 
 #: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
-msgstr "שמו_ר"
+msgstr "保存(_S)"
 
 #: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
-msgstr "ע_בור לשיר המתנגן"
+msgstr "再生中の曲へ(_G)"
 
 #: ../src/widgets/ario-playlist.c:560
 msgid "Filter:"
-msgstr ""
+msgstr "フィルタ:"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1401
 msgid "Save playlist"
-msgstr "שמור את רשימת ההשמעה"
+msgstr "プレイリストの保存"
 
 #: ../src/widgets/ario-playlist.c:1411
 msgid "Playlist name :"
-msgstr "שם רשימת ההשמעה :"
+msgstr "プレイリスト名 :"
 
 #: ../src/widgets/ario-playlist.c:1436
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr "רשימת ההשמעה כבר קיימת. האם ברצונך לשכתב עליה?"
+msgstr "プレイリストはすでに存在します。上書きしますか?"
 
 #: ../src/widgets/ario-tray-icon.c:134
 msgid "_Play"
-msgstr "_נגן"
+msgstr "再生(_P)"
 
 #: ../src/widgets/ario-tray-icon.c:137
 msgid "_Pause"
-msgstr "ה_שהה"
+msgstr "一時停止(_P)"
 
 #: ../src/widgets/ario-tray-icon.c:140
 msgid "_Stop"
-msgstr "ע_צור"
+msgstr "停止(_S)"
 
 #: ../src/widgets/ario-tray-icon.c:143
 msgid "_Next"
-msgstr "ה_בא"
+msgstr "次(_N)"
 
 #: ../src/widgets/ario-tray-icon.c:146
 msgid "P_revious"
-msgstr "ה_קודם"
+msgstr "前(_R)"
 
 #: ../src/widgets/ario-tray-icon.h:45
 msgid "Not playing"
-msgstr "לא מנגן"
+msgstr "再生していません"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
 msgid "Today %I:%M %p"
-msgstr "היום %I:%M %p"
+msgstr "今日の %p %I:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
 msgid "Yesterday %I:%M %p"
-msgstr "אתמול %I:%M %p"
+msgstr "昨日の %p %I:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
 msgid "%a %I:%M %p"
-msgstr "%a %I:%M %p"
+msgstr "%a の %p %I:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
 msgid "%b %d %I:%M %p"
-msgstr "%d ב%b %I:%M %p"
+msgstr "%b %d %p %I:%M"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
 msgid "%b %d %Y"
-msgstr "%d ב%b %Y"
+msgstr "%Y %b %d"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
-msgstr "אף פעם"
+msgstr "なし"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
 msgid "OK"
-msgstr "אישור"
+msgstr "OK"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
 msgid "Logging in"
-msgstr "מתחבר"
+msgstr "ログイン中"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 msgid "Request failed"
-msgstr "הבקשה נכשלה"
+msgstr "要求は失敗しました"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
 msgid "Incorrect username"
-msgstr "שם משתמש שגוי"
+msgstr "ユーザ名が正しくありません"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
 msgid "Incorrect password"
-msgstr "סיסמה שגויה"
+msgstr "パスワードが正しくありません"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
 msgid "Handshake failed"
-msgstr "לחיצת היד נכשלה"
+msgstr "ハンドシェイクに失敗しました"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
 msgid "Client update required"
-msgstr "נדרש עדכון הלקוח"
+msgstr "クライアントのアップデートが要求されました"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
 msgid "Track submission failed"
-msgstr "שליחת הרצועה נכשלה"
+msgstr "トラックの送信に失敗しました"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
 msgid "Queue is too long"
-msgstr "התור ארוך מדי"
+msgstr "キューが長すぎます"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
 msgid "Track submission failed too many times"
-msgstr "שליחת הרצועה נכשלה יותר מדי פעמים"
+msgstr "トラックの送信に失敗しました。送りすぎです。"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
 msgid "Audioscrobbler preferences"
-msgstr "העדפות Audioscrobbler"
+msgstr "Audioscrobbler 設定"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
 msgid "Check Last.fm server status at"
-msgstr "בדוק את מצב שרת ה-Last.fm תחת"
+msgstr "Last.fm サーバの状態をチェックする:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
-msgstr "כבוי"
+msgstr "無効"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Find out about Last.fm at "
-msgstr "פרטים נוספים אודות last.fm תחת "
+msgstr "Last.fm について調べる: "
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Last submission time:"
-msgstr "זמן ההצבעה האחרון:"
+msgstr "最終送信:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Last.fm Profile"
-msgstr "פרופיל last.fm"
+msgstr "Last.fm プロファイル"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Queued tracks:"
-msgstr "רצועות בתור:"
+msgstr "送信待ちのトラック:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Status:"
-msgstr "מצב:‏"
+msgstr "状態:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
 msgid "Tracks submitted:"
-msgstr "רצועות שנשלחו:"
+msgstr "送信したトラック:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
 msgid "Username :"
-msgstr "שם משתמש :"
+msgstr "ユーザ名 :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1122,159 +1112,120 @@ msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr "שולח את נתוני השיר אל last.fm"
+msgstr "楽曲情報を Last.fm に送信します"
 
 #: ../plugins/filesystem/ario-filesystem.c:164
 msgid "File System"
-msgstr "מערכת קבצים"
+msgstr "ファイルシステム"
 
 #: ../plugins/filesystem/ario-filesystem.c:414
 msgid "Music"
-msgstr ""
+msgstr "Music"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr "הסייר במערכת הקבצים"
+msgstr "ファイルシステムのブラウザです"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr "סייר מערכת הקבצים"
+msgstr "ファイルシステムブラウザ"
 
 #: ../plugins/information/ario-information.c:110
 msgid "Information"
-msgstr ""
+msgstr "情報"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr ""
+msgstr "再生中の曲のいろいろな情報を表示します"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr ""
+msgstr "楽曲情報"
 
 #: ../plugins/information/information.ui.h:2
 msgid "Albums from this artist:"
-msgstr ""
+msgstr "このアーティストのアルバム:"
 
 #: ../plugins/information/information.ui.h:5
 msgid "Lyrics:"
-msgstr ""
+msgstr "歌詞:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
-msgstr ""
+msgstr "libnotify サポートを追加します"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
-msgstr ""
+msgstr "Libnotify"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr "הוסף תמיכה במקשי מולטימדיה"
+msgstr "マルチメディアキーサポートを追加します"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr "מקשי מולטימדיה"
+msgstr "マルチメディアキー"
 
 #: ../plugins/radios/ario-radio.c:123
 msgid "Add a _new radio"
-msgstr "הוסף תחנת _רדיו חדשה"
+msgstr "新しいラジオの追加(_N)"
 
 #: ../plugins/radios/ario-radio.c:126
 msgid "_Delete this radios"
-msgstr "_מחק תחנות אלו"
+msgstr "このラジオの削除(_D)"
 
 #: ../plugins/radios/ario-radio.c:164
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr "תחנות רדיו רשת"
+msgstr "ウェブラジオ"
 
 #: ../plugins/radios/ario-radio.c:219
 msgid "Internet Radios"
-msgstr "תחנות רדיו אינטרנט"
+msgstr "インターネットラジオ"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:830
 msgid "Add a WebRadio"
-msgstr "הוסף רדיו-רשת"
+msgstr "ウェブラジオの追加"
 
 #: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
 msgid "URL :"
-msgstr "כתובת :"
+msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1095
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr "משתנים שגויים. עליך לציין את שמה וכתובתה של תחנת הרדיו."
+msgstr "パラメタが正しくありません。ラジオの名前と URL を指定してください。"
 
 #: ../plugins/radios/ario-radio.c:957
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr "האם אתה בטוח שברצונך למחוק את התחנות הנבחרות?"
+msgstr "選択したラジオをすべて削除してよろしいですか?"
 
 #. Create the widgets
 #: ../plugins/radios/ario-radio.c:1029
 msgid "Edit a WebRadio"
-msgstr "ערוך רדיו-רשת"
+msgstr "ウェブラジオの編集"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr "האזן לרדיו ברשת"
+msgstr "ウェブラジオを聴きます"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:50
 msgid "Find artist on Wikipedia"
-msgstr "חפש אמן בויקיפדיה"
+msgstr "アーティストを Wikipedia で検索"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
 msgid "Wikipedia Plugin - Configuration"
-msgstr "תוסף ויקיפדיה - הגדרות"
+msgstr "Wikipedia プラグイン - 設定"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
 msgid "Wikipedia language :"
-msgstr "שפת הויקיפדיה :"
+msgstr "Wikipedia の言語 :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr "תוסף לחיפוש האמן הנוכחי בויקיפדיה"
+msgstr "現在のアーティストを Wikipedia で検索するプラグインです"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr "ויקיפדיה"
-
-#~ msgid "Automatic configuration"
-#~ msgstr "הגדרה אוטומטית"
-
-#~ msgid "Manual configuration"
-#~ msgstr "הגדרה ידנית"
-
-#~ msgid ""
-#~ "You need to specify an MPD server to connect to. If you don't see your "
-#~ "MPD server thanks to the automatic configuration, you should check that "
-#~ "zeroconf is activated in your MPD configuration or use the manual "
-#~ "configuration."
-#~ msgstr ""
-#~ "עליך לציין שרת MPD להתחברות. אם אינך רואה את שרת ה-MPD שלך תודות להגדרה "
-#~ "האוטומטית, עליך לוודא שהגדרת הרשת האלחוטית מופעלת בהגדרת ה-MPD או השתמש "
-#~ "בהגדרה ידנית."
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "האם אתה בטוח שברצונך להסיר את כל העטיפות של האלבומים הנבחרים?"
-
-#~ msgid "_Save Playlist"
-#~ msgstr "_שמור רשימת השמעה"
-
-#~ msgid ""
-#~ "Artist: %s\n"
-#~ "Album: %s\n"
-#~ "Title: %s"
-#~ msgstr ""
-#~ "אמן: %s\n"
-#~ "אלבום: %s\n"
-#~ "כותרת: %s"
-
-#~ msgid "Select a file"
-#~ msgstr "בחר קובץ"
-
-#~ msgid "Tabs"
-#~ msgstr "לשוניות"
+msgstr "Wikipedia"

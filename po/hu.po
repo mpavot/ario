@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 12:25+0100\n"
-"PO-Revision-Date: 2008-12-15 06:23+0000\n"
+"POT-Creation-Date: 2009-02-22 14:02+0100\n"
+"PO-Revision-Date: 2009-02-12 21:43+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
+"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -26,18 +26,16 @@ msgid "Client application to mpd"
 msgstr "Kliens alkalmazás az mpd-hez"
 
 #: ../data/ui/browser-prefs.ui.h:1
-#, fuzzy
 msgid "Library Options"
-msgstr "Gyűjtemény rendezése"
+msgstr "Gyűjtemény opciók"
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "Library Organisation"
 msgstr "Gyűjtemény rendezése"
 
 #: ../data/ui/browser-prefs.ui.h:3
-#, fuzzy
 msgid "Sort albums: "
-msgstr "Állapot:"
+msgstr "Albumok rendezése: "
 
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
@@ -57,7 +55,7 @@ msgstr "Zene könyvtár :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr ""
+msgstr "A zene kiszolgáló ugyanazon a gépen van, mint az Ario"
 
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
 #: ../plugins/radios/ario-radio.c:1039
@@ -74,13 +72,12 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/ui/connection-widget.ui.h:9
-#, fuzzy
 msgid "Server type : "
-msgstr "Szerver"
+msgstr "Szervertípus: "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr ""
+msgstr "XMMS 2 (Kísérleti állapotú)"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -121,16 +118,14 @@ msgid "_Disconnect"
 msgstr "_Kapcsolat bontása"
 
 #: ../data/ui/connection-assistant.ui.h:1
-#, fuzzy
 msgid ""
 "You need to specify a server to connect to. If you don't see your server "
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
-"automatikus konfiguráció következtében nem látja az MPD szervert, "
-"ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
-"használja a kézi beállítást."
+"Meg kell határozni egy szervert a kapcsolódáshoz. Ha nem látja a kiszolgálót "
+"az automatikus érzékelésnek köszönhetően, ellenőrizze, hogy a zeroconf/avahi "
+"aktív-e a kiszolgálón, vagy használjon kézi beállításokat."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -197,40 +192,40 @@ msgid "Title :"
 msgstr "Cím :"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Album"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
 #: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/shell/ario-shell-similarartists.c:379
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Előadó"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:442
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
 msgid "Duration"
 msgstr "Időtartam"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
 msgid "File"
-msgstr ""
+msgstr "Fájl"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:442
 msgid "Genre"
-msgstr ""
+msgstr "Műfaj"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Go to current song when a new song is played"
@@ -246,26 +241,24 @@ msgid "Playlist"
 msgstr "Lejátszólista"
 
 #: ../data/ui/playlist-prefs.ui.h:10
-#, fuzzy
 msgid "Playlist mode:"
-msgstr "Lejátszási lista neve :"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:11
-#, fuzzy
 msgid "Show rows:"
-msgstr "Dalszövegek _mutatása"
+msgstr "Sorok mutatása"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Cím"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
 msgid "Track"
 msgstr "Szám"
 
@@ -306,21 +299,19 @@ msgid "fade time (s):"
 msgstr "átkeverési idő"
 
 #: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "n/a"
 
 #: ../data/ui/similar-artists.ui.h:1
-#, fuzzy
 msgid "Add all to playlist"
-msgstr "_Hozzáadás a lejátszási listához"
+msgstr "Az összes hozzáadása lejátszólistához"
 
 #: ../data/ui/similar-artists.ui.h:2
-#, fuzzy
 msgid "Add to playlist"
-msgstr "_Hozzáadás a lejátszási listához"
+msgstr "Hozzáadás a lejátszólistához"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
@@ -335,9 +326,8 @@ msgid "Number of albums :"
 msgstr "Albumok száma :"
 
 #: ../data/ui/stats-prefs.ui.h:3
-#, fuzzy
 msgid "Number of artists :"
-msgstr "Dalok száma :"
+msgstr "Előadók száma :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
@@ -396,9 +386,8 @@ msgid "Track :"
 msgstr "Szám :"
 
 #: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
-#, fuzzy
 msgid "Notification"
-msgstr "Jelzési idő: "
+msgstr "Értesítés"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Notification on song change"
@@ -420,19 +409,19 @@ msgstr "Tálcaikon"
 msgid "Start minimized window"
 msgstr "MInimalizált állapotú ablak indítása"
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "másodperc"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "perc"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "óra"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "nap"
 
@@ -444,24 +433,29 @@ msgstr "Ez a borító már létezik. Felülírja?"
 msgid "Music Directory"
 msgstr "Zene könyvtár"
 
-#: ../src/playlist/ario-playlist-dynamic.c:53
-#, fuzzy
-msgid "same artist"
-msgstr "Előadók száma :"
-
-#: ../src/playlist/ario-playlist-dynamic.c:54
-msgid "same album"
+#: ../src/playlist/ario-playlist-dynamic.c:55
+msgid "songs of same artist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:55
-#, fuzzy
-msgid "similar artists"
-msgstr "Hasonló előadók keresése"
+#: ../src/playlist/ario-playlist-dynamic.c:56
+msgid "songs of same album"
+msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:95
-#, fuzzy
+#: ../src/playlist/ario-playlist-dynamic.c:57
+msgid "songs of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:58
+msgid "albums of same artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:59
+msgid "albums of similar artists"
+msgstr ""
+
+#: ../src/playlist/ario-playlist-dynamic.c:99
 msgid "Dynamic Playlist"
-msgstr "Lejátszólista"
+msgstr ""
 
 #: ../src/playlist/ario-playlist-queue.c:79
 msgid "Queue Mode"
@@ -555,31 +549,33 @@ msgstr "Ne tegyen semmit"
 
 #: ../src/servers/ario-mpd.c:388
 msgid "Connecting to server..."
-msgstr ""
+msgstr "Kapcsolódás a kiszolgálóhoz..."
 
 #: ../src/servers/ario-mpd.c:413
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
+"Kapcsolódás a kiszolgálóhoz nem lehetséges. Ellenőrizze a kapcsolódási "
+"opciókat."
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 msgid "Composer"
-msgstr ""
+msgstr "Szerző"
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:51
+#: ../src/servers/ario-server.c:52
 msgid "Performer"
-msgstr ""
+msgstr "Előadó"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Filename"
 msgstr "Fájlnév"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:55
+#: ../src/servers/ario-server.c:56
 msgid "Any"
 msgstr "Bármely"
 
@@ -605,7 +601,7 @@ msgstr "_Hozzáadás a lejátszási listához"
 #: ../plugins/filesystem/ario-filesystem.c:121
 #: ../plugins/radios/ario-radio.c:117
 msgid "Add and _play"
-msgstr ""
+msgstr "Hozzáadás és lejátszás"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:82
 #: ../src/sources/ario-storedplaylists.c:107
@@ -614,7 +610,7 @@ msgstr ""
 #: ../plugins/filesystem/ario-filesystem.c:124
 #: ../plugins/radios/ario-radio.c:120
 msgid "_Replace in playlist"
-msgstr ""
+msgstr "Lecse_rélés a lejátszólistában"
 
 #: ../src/sources/ario-browser.c:88
 msgid "Get the covers"
@@ -666,9 +662,9 @@ msgstr ""
 msgid "Cover"
 msgstr "Borító"
 
-#: ../src/sources/ario-tree.c:1233
+#: ../src/sources/ario-tree.c:1236
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr ""
+msgstr "Biztos benne, hogy eltávolítja az összes kiválasztott borítót?"
 
 #: ../src/shell/ario-shell.c:147
 msgid "_File"
@@ -716,7 +712,7 @@ msgstr "Hasonló előadók keresése"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Add similar songs to playlist"
-msgstr ""
+msgstr "Hasonló számok hozzáadása listához"
 
 #: ../src/shell/ario-shell.c:180
 msgid "Show _lyrics"
@@ -732,7 +728,7 @@ msgstr "Á_llapotsor"
 
 #: ../src/shell/ario-shell.c:196
 msgid "Upper part"
-msgstr ""
+msgstr "Felső rész"
 
 #: ../src/shell/ario-shell.c:703
 msgid "GTK client for MPD"
@@ -759,6 +755,14 @@ msgstr ""
 "  Mice Teeth https://launchpad.net/~micecrosoft\n"
 "  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
 "  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Mice Teeth https://launchpad.net/~micecrosoft\n"
+"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
+"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
+"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
 "\n"
 "Launchpad Contributions:\n"
 "  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
@@ -832,7 +836,7 @@ msgstr "Dalszöveg letöltése"
 
 #: ../src/shell/ario-shell-lyricsselect.c:201
 msgid "Source"
-msgstr ""
+msgstr "Forrás"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
@@ -846,16 +850,16 @@ msgstr "Szerver"
 msgid "Others"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:315
+#: ../src/shell/ario-shell-similarartists.c:309
 #, c-format
 msgid "%d songs"
-msgstr ""
+msgstr "%d számok"
 
-#: ../src/shell/ario-shell-similarartists.c:374
+#: ../src/shell/ario-shell-similarartists.c:368
 msgid "Image"
 msgstr "Kép"
 
-#: ../src/shell/ario-shell-similarartists.c:392
+#: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "Dalok"
@@ -867,9 +871,8 @@ msgid "Song Properties"
 msgstr "Dal tulajdonságai"
 
 #: ../src/shell/ario-shell-songinfos.c:409
-#, fuzzy
 msgid "Error saving tags of file:"
-msgstr "Hiba az állomány mentésekor"
+msgstr ""
 
 #: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
@@ -885,6 +888,9 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
+"Ha nem látja az MPD szerverét az automatikus érzékelésnek köszönhetően, "
+"ellenőrizze, hogy a zeroconf aktív az MPD konfigurációjában, vagy használja "
+"a kézi beállításokat."
 
 #: ../src/widgets/ario-connection-widget.c:559
 msgid "Host"
@@ -975,11 +981,11 @@ msgstr "_Törlés"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "_Shuffle"
-msgstr ""
+msgstr "Véletlen_szerű sorrend"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "Cr_op"
-msgstr ""
+msgstr "Kivágás"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -993,21 +999,20 @@ msgstr "_Mentés"
 msgid "_Go to playing song"
 msgstr "Tovább a szám _lejátszásához"
 
-#: ../src/widgets/ario-playlist.c:552
-#, fuzzy
+#: ../src/widgets/ario-playlist.c:560
 msgid "Filter:"
-msgstr "_Fájl"
+msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1390
+#: ../src/widgets/ario-playlist.c:1401
 msgid "Save playlist"
 msgstr "Lejátszólista mentése"
 
-#: ../src/widgets/ario-playlist.c:1400
+#: ../src/widgets/ario-playlist.c:1411
 msgid "Playlist name :"
 msgstr "Lejátszási lista neve :"
 
-#: ../src/widgets/ario-playlist.c:1425
+#: ../src/widgets/ario-playlist.c:1436
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lejátszási lista létezik. Felül akarja írni?"
 
@@ -1179,32 +1184,31 @@ msgstr "Fájlrendszer böngésző"
 
 #: ../plugins/information/ario-information.c:110
 msgid "Information"
-msgstr ""
+msgstr "Információ"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr ""
+msgstr "Különféle információk megjelenítése a lejátszott számról"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr ""
+msgstr "Zene információk"
 
 #: ../plugins/information/information.ui.h:2
 msgid "Albums from this artist:"
-msgstr ""
+msgstr "Albumok ettől az előadótól:"
 
 #: ../plugins/information/information.ui.h:5
-#, fuzzy
 msgid "Lyrics:"
-msgstr "Dalszöveg"
+msgstr "Szöveg:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
-msgstr ""
+msgstr "Libnotify támogatás hozzáadása"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
-msgstr ""
+msgstr "Libnotify"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
@@ -1283,6 +1287,17 @@ msgstr "Wikipédia"
 
 #~ msgid "Manual configuration"
 #~ msgstr "Kézi beállítás"
+
+#~ msgid ""
+#~ "You need to specify an MPD server to connect to. If you don't see your "
+#~ "MPD server thanks to the automatic configuration, you should check that "
+#~ "zeroconf is activated in your MPD configuration or use the manual "
+#~ "configuration."
+#~ msgstr ""
+#~ "Meg kell határoznia egy MPD szervert a kapcsolódáshoz. Amennyiben az "
+#~ "automatikus konfiguráció következtében nem látja az MPD szervert, "
+#~ "ellenőrizze, hogy a zeroconf aktiválva van-e az MPD konfigurációban, vagy "
+#~ "használja a kézi beállítást."
 
 #~ msgid ""
 #~ "Are you sure that you want to remove all the covers of the selected "

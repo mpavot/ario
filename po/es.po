@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 12:25+0100\n"
-"PO-Revision-Date: 2009-01-04 20:38+0000\n"
-"Last-Translator: David A Páez <Unknown>\n"
+"POT-Creation-Date: 2009-02-22 14:02+0100\n"
+"PO-Revision-Date: 2009-02-26 10:33+0000\n"
+"Last-Translator: Feder Sáiz <federsaiz@googlemail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-19 19:44+0000\n"
+"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -192,38 +192,38 @@ msgid "Title :"
 msgstr "Título :"
 
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:44
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
 #: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
 msgid "Album"
 msgstr "Álbum"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:43
+#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
 #: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:385
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:208
+#: ../src/shell/ario-shell-similarartists.c:379
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
 #: ../src/widgets/ario-tray-icon.c:677
 msgid "Artist"
 msgstr "Artista"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:442
 msgid "Date"
 msgstr "Fecha"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
 msgid "Duration"
 msgstr "Duración"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
 msgid "File"
 msgstr "Archivo"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:48
-#: ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:442
 msgid "Genre"
 msgstr "Género"
 
@@ -233,7 +233,7 @@ msgstr "Ir a la canción actual cuando una suene una nueva canción"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Mode"
-msgstr ""
+msgstr "Modo"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:216
 #: ../src/shell/ario-shell.c:199 ../src/shell/ario-shell-preferences.c:124
@@ -241,25 +241,24 @@ msgid "Playlist"
 msgstr "Lista de reproducción"
 
 #: ../data/ui/playlist-prefs.ui.h:10
-#, fuzzy
 msgid "Playlist mode:"
-msgstr "Nombre de lista de reprodución:"
+msgstr "Modo de lista de reproducción:"
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Show rows:"
 msgstr "Mostrar filas:"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:45
+#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:434 ../src/widgets/ario-songlist.c:193
+#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
 #: ../src/widgets/ario-tray-icon.c:681
 msgid "Title"
 msgstr "Título"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:434
+#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
 msgid "Track"
 msgstr "Pista"
 
@@ -300,7 +299,7 @@ msgid "fade time (s):"
 msgstr "Tiempo de desvanecimiento:"
 
 #: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
-#: ../src/ario-util.c:47 ../src/ario-util.c:69
+#: ../src/ario-util.c:48 ../src/ario-util.c:70
 #: ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
@@ -327,9 +326,8 @@ msgid "Number of albums :"
 msgstr "Numero de álbumes:"
 
 #: ../data/ui/stats-prefs.ui.h:3
-#, fuzzy
 msgid "Number of artists :"
-msgstr "Numero de canciones :"
+msgstr "Numero de artistas :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
@@ -411,19 +409,19 @@ msgstr "Icono de la bandeja"
 msgid "Start minimized window"
 msgstr "Iniciar ventana minimizada"
 
-#: ../src/ario-util.c:80
+#: ../src/ario-util.c:81
 msgid "seconds"
 msgstr "segundos"
 
-#: ../src/ario-util.c:83
+#: ../src/ario-util.c:84
 msgid "minutes"
 msgstr "minutos"
 
-#: ../src/ario-util.c:91
+#: ../src/ario-util.c:92
 msgid "hours"
 msgstr "horas"
 
-#: ../src/ario-util.c:99
+#: ../src/ario-util.c:100
 msgid "days"
 msgstr "días"
 
@@ -435,32 +433,37 @@ msgstr "La carátula ya existe. ¿Desea reemplazarla?"
 msgid "Music Directory"
 msgstr "Directorio de música"
 
-#: ../src/playlist/ario-playlist-dynamic.c:53
-#, fuzzy
-msgid "same artist"
-msgstr "Numero de artistas :"
-
-#: ../src/playlist/ario-playlist-dynamic.c:54
-msgid "same album"
-msgstr ""
-
 #: ../src/playlist/ario-playlist-dynamic.c:55
-#, fuzzy
-msgid "similar artists"
-msgstr "Encontrar artistas similares"
+msgid "songs of same artist"
+msgstr "canciones del mismo artista"
 
-#: ../src/playlist/ario-playlist-dynamic.c:95
-#, fuzzy
+#: ../src/playlist/ario-playlist-dynamic.c:56
+msgid "songs of same album"
+msgstr "canciones del mismo álbum"
+
+#: ../src/playlist/ario-playlist-dynamic.c:57
+msgid "songs of similar artists"
+msgstr "canciones de artistas similares"
+
+#: ../src/playlist/ario-playlist-dynamic.c:58
+msgid "albums of same artists"
+msgstr "álbumes de los mismos artistas"
+
+#: ../src/playlist/ario-playlist-dynamic.c:59
+msgid "albums of similar artists"
+msgstr "álbumes de los artistas similares"
+
+#: ../src/playlist/ario-playlist-dynamic.c:99
 msgid "Dynamic Playlist"
-msgstr "Lista de reproducción"
+msgstr "Lista de Reproducción Dinámics"
 
 #: ../src/playlist/ario-playlist-queue.c:79
 msgid "Queue Mode"
-msgstr ""
+msgstr "Modo de Cola"
 
 #: ../src/playlist/ario-playlist-normal.c:77
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -553,24 +556,24 @@ msgid "Impossible to connect to server. Check the connection options."
 msgstr "Imposible conectar al servidor, Compruebe las opciones de conexión."
 
 #. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:50
+#: ../src/servers/ario-server.c:51
 msgid "Composer"
 msgstr "Compositor"
 
 #. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:51
+#: ../src/servers/ario-server.c:52
 msgid "Performer"
 msgstr "Intérprete"
 
 #. MPD_TAG_ITEM_PERFORMER
 #. MPD_TAG_ITEM_COMMENT
 #. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:54
+#: ../src/servers/ario-server.c:55
 msgid "Filename"
 msgstr "Nombre de archivo"
 
 #. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:55
+#: ../src/servers/ario-server.c:56
 msgid "Any"
 msgstr "Cualquiera"
 
@@ -657,7 +660,7 @@ msgstr ""
 msgid "Cover"
 msgstr "Carátula"
 
-#: ../src/sources/ario-tree.c:1233
+#: ../src/sources/ario-tree.c:1236
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "¿Estás seguro de que desea eliminar todos los covers seleccionados?"
 
@@ -811,6 +814,26 @@ msgstr ""
 "  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
 "  Paco Molinero https://launchpad.net/~franciscomol\n"
 "  Skiros https://launchpad.net/~magoskiros\n"
+"  kike4avila https://launchpad.net/~kike4avila\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Alejandro Rochette https://launchpad.net/~alexroc\n"
+"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
+"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
+"  David A Páez https://launchpad.net/~orlsend\n"
+"  DiegoJ https://launchpad.net/~diegojromerolopez\n"
+"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
+"  Emilio https://launchpad.net/~turl\n"
+"  Feder Sáiz https://launchpad.net/~federsaiz\n"
+"  Fidelinho https://launchpad.net/~fidel-vales\n"
+"  Gabriel Ruiz https://launchpad.net/~anakron\n"
+"  Javier García Díaz https://launchpad.net/~shortname\n"
+"  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
+"  José Luis Flores Pineda https://launchpad.net/~peker\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
+"  Paco Molinero https://launchpad.net/~franciscomol\n"
+"  Skiros https://launchpad.net/~magoskiros\n"
 "  kike4avila https://launchpad.net/~kike4avila"
 
 #: ../src/shell/ario-shell.c:1022
@@ -873,18 +896,18 @@ msgstr "Servidor"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "Otros"
 
-#: ../src/shell/ario-shell-similarartists.c:315
+#: ../src/shell/ario-shell-similarartists.c:309
 #, c-format
 msgid "%d songs"
 msgstr "%d Canciones"
 
-#: ../src/shell/ario-shell-similarartists.c:374
+#: ../src/shell/ario-shell-similarartists.c:368
 msgid "Image"
 msgstr "Imagen"
 
-#: ../src/shell/ario-shell-similarartists.c:392
+#: ../src/shell/ario-shell-similarartists.c:386
 #: ../src/widgets/ario-status-bar.c:91
 msgid "Songs"
 msgstr "Canciones"
@@ -896,9 +919,8 @@ msgid "Song Properties"
 msgstr "Propiedades de la canción"
 
 #: ../src/shell/ario-shell-songinfos.c:409
-#, fuzzy
 msgid "Error saving tags of file:"
-msgstr "Error guardando el archivo"
+msgstr "Error guardando etiquetas del archivo:"
 
 #: ../src/widgets/ario-connection-widget.c:344
 msgid "Profile"
@@ -1025,21 +1047,20 @@ msgstr "_Guardar"
 msgid "_Go to playing song"
 msgstr "_Ir la la cancion reproduciendose"
 
-#: ../src/widgets/ario-playlist.c:552
-#, fuzzy
+#: ../src/widgets/ario-playlist.c:560
 msgid "Filter:"
-msgstr "Archivo"
+msgstr "Filtro:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1390
+#: ../src/widgets/ario-playlist.c:1401
 msgid "Save playlist"
 msgstr "Guardar lista de reproducción"
 
-#: ../src/widgets/ario-playlist.c:1400
+#: ../src/widgets/ario-playlist.c:1411
 msgid "Playlist name :"
 msgstr "Nombre de lista de reprodución:"
 
-#: ../src/widgets/ario-playlist.c:1425
+#: ../src/widgets/ario-playlist.c:1436
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "La lista de reproducción ya existe. ¿Desea sobrescribirla?"
 
