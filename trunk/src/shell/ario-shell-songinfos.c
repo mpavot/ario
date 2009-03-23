@@ -37,7 +37,7 @@
 #define ARIO_NEXT 998
 #define ARIO_SAVE 999
 
-#define VALUE(b) b ? b : "n/a"
+#define VALUE(b) b ? b : ""
 
 static void ario_shell_songinfos_finalize (GObject *object);
 static gboolean ario_shell_songinfos_window_delete_cb (GtkWidget *window,
@@ -58,17 +58,17 @@ struct ArioShellSonginfosPrivate
         GtkWidget *title_entry;
         GtkWidget *artist_entry;
         GtkWidget *album_entry;
-        GtkWidget *album_artist_label;
+        GtkWidget *album_artist_entry;
         GtkWidget *track_entry;
         GtkWidget *date_entry;
         GtkWidget *genre_entry;
         GtkWidget *comment_entry;
 
-        GtkWidget *file_label;
-        GtkWidget *length_label;
-        GtkWidget *composer_label;
-        GtkWidget *performer_label;
-        GtkWidget *disc_label;
+        GtkWidget *file_entry;
+        GtkWidget *length_entry;
+        GtkWidget *composer_entry;
+        GtkWidget *performer_entry;
+        GtkWidget *disc_entry;
 
         GtkWidget *lyrics_editor;
 
@@ -177,26 +177,33 @@ ario_shell_songinfos_new (GSList *paths)
                 GTK_WIDGET (gtk_builder_get_object (builder, "artist_entry"));
         shell_songinfos->priv->album_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "album_entry"));
-        shell_songinfos->priv->album_artist_label =
-                GTK_WIDGET (gtk_builder_get_object (builder, "album_artist_label"));
+        shell_songinfos->priv->album_artist_entry =
+                GTK_WIDGET (gtk_builder_get_object (builder, "album_artist_entry"));
         shell_songinfos->priv->track_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "track_entry"));
-        shell_songinfos->priv->length_label =
-                GTK_WIDGET (gtk_builder_get_object (builder, "length_label"));
+        shell_songinfos->priv->length_entry =
+                GTK_WIDGET (gtk_builder_get_object (builder, "length_entry"));
         shell_songinfos->priv->date_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "date_entry"));
-        shell_songinfos->priv->file_label =
-                GTK_WIDGET (gtk_builder_get_object (builder, "file_label"));
+        shell_songinfos->priv->file_entry =
+                GTK_WIDGET (gtk_builder_get_object (builder, "file_entry"));
         shell_songinfos->priv->genre_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "genre_entry"));
-        shell_songinfos->priv->composer_label =
-                GTK_WIDGET (gtk_builder_get_object (builder, "composer_label"));
-        shell_songinfos->priv->performer_label =
-                GTK_WIDGET (gtk_builder_get_object (builder, "performer_label"));
-        shell_songinfos->priv->disc_label =
-                GTK_WIDGET (gtk_builder_get_object (builder, "disc_label"));
+        shell_songinfos->priv->composer_entry =
+                GTK_WIDGET (gtk_builder_get_object (builder, "composer_entry"));
+        shell_songinfos->priv->performer_entry =
+                GTK_WIDGET (gtk_builder_get_object (builder, "performer_entry"));
+        shell_songinfos->priv->disc_entry =
+                GTK_WIDGET (gtk_builder_get_object (builder, "disc_entry"));
         shell_songinfos->priv->comment_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "comment_entry"));
+
+        gtk_widget_set_sensitive (shell_songinfos->priv->album_artist_entry, FALSE);
+        gtk_widget_set_sensitive (shell_songinfos->priv->length_entry, FALSE);
+        gtk_widget_set_sensitive (shell_songinfos->priv->file_entry, FALSE);
+        gtk_widget_set_sensitive (shell_songinfos->priv->composer_entry, FALSE);
+        gtk_widget_set_sensitive (shell_songinfos->priv->performer_entry, FALSE);
+        gtk_widget_set_sensitive (shell_songinfos->priv->disc_entry, FALSE);
 
         gtk_builder_helpers_boldify_label (builder, "frame_label");
         gtk_builder_helpers_boldify_label (builder, "title_const_label");
@@ -215,15 +222,15 @@ ario_shell_songinfos_new (GSList *paths)
 
         gtk_widget_set_size_request(shell_songinfos->priv->artist_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->album_entry, 280, -1);
-        gtk_widget_set_size_request(shell_songinfos->priv->album_artist_label, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->album_artist_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->track_entry, 280, -1);
-        gtk_widget_set_size_request(shell_songinfos->priv->length_label, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->length_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->date_entry, 280, -1);
-        gtk_widget_set_size_request(shell_songinfos->priv->file_label, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->file_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->genre_entry, 280, -1);
-        gtk_widget_set_size_request(shell_songinfos->priv->composer_label, 280, -1);
-        gtk_widget_set_size_request(shell_songinfos->priv->performer_label, 280, -1);
-        gtk_widget_set_size_request(shell_songinfos->priv->disc_label, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->composer_entry, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->performer_entry, 280, -1);
+        gtk_widget_set_size_request(shell_songinfos->priv->disc_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->comment_entry, 280, -1);
 
         gtk_window_set_title (GTK_WINDOW (shell_songinfos), _("Song Properties"));
@@ -444,6 +451,7 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         gchar *length;
         gchar *window_title;
         ArioLyricsEditorData *data;
+        gboolean can_edit = ario_shell_songinfos_can_edit_tags ();
 
         if (!shell_songinfos->priv->songs)
                 return;
@@ -452,21 +460,30 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         if (!song)
                 return;
 
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->title_entry), song->title ? song->title : "");
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->artist_entry), song->artist ? song->artist : "");
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->album_entry), song->album ? song->album : "");
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->track_entry), song->track ? song->track : "");
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->date_entry), song->date ? song->date : "");
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->genre_entry), song->genre ? song->genre : "");
-        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->comment_entry), song->comment ? song->comment : "");
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->title_entry), VALUE (song->title));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->artist_entry), VALUE (song->artist));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->album_entry), VALUE (song->album));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->album_artist_entry), VALUE (song->album_artist));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->track_entry), VALUE (song->track));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->date_entry), VALUE (song->date));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->genre_entry), VALUE (song->genre));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->comment_entry), VALUE (song->comment));
         length = ario_util_format_time (song->time);
-        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->length_label), VALUE (length));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->length_entry), VALUE (length));
         g_free (length);
-        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->album_artist_label), VALUE (song->album_artist));
-        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->file_label), VALUE (song->file));
-        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->composer_label), VALUE (song->composer));
-        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->performer_label), VALUE (song->performer));
-        gtk_label_set_text (GTK_LABEL (shell_songinfos->priv->disc_label), VALUE (song->disc));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->file_entry), VALUE (song->file));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->composer_entry), VALUE (song->composer));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->performer_entry), VALUE (song->performer));
+        gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->disc_entry), VALUE (song->disc));
+
+        gtk_widget_set_sensitive (shell_songinfos->priv->title_entry, can_edit);
+        gtk_widget_set_sensitive (shell_songinfos->priv->artist_entry, can_edit);
+        gtk_widget_set_sensitive (shell_songinfos->priv->album_entry, can_edit);
+        gtk_widget_set_sensitive (shell_songinfos->priv->track_entry, can_edit);
+        gtk_widget_set_sensitive (shell_songinfos->priv->date_entry, can_edit);
+        gtk_widget_set_sensitive (shell_songinfos->priv->genre_entry, can_edit);
+        gtk_widget_set_sensitive (shell_songinfos->priv->comment_entry, can_edit);
+
         if (shell_songinfos->priv->save_button)
                 gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), FALSE);
 
