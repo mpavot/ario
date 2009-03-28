@@ -312,7 +312,7 @@ ario_tree_finalize (GObject *object)
                                         (GtkTreeModelForeachFunc) ario_tree_album_free,
                                         tree);
         }
- 
+
         gtk_list_store_clear (tree->priv->model);
         g_slist_foreach (tree->priv->criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (tree->priv->criterias);
@@ -1184,13 +1184,28 @@ ario_tree_cmd_add (ArioTree *tree,
 {
         ARIO_LOG_FUNCTION_START;
         GSList *criterias = NULL;
+        GSList *songs = NULL;
 
-        criterias = ario_tree_get_criterias (tree);
+        if (ario_tree_is_song_tree (tree)) {
+                gtk_tree_selection_selected_foreach (tree->priv->selection,
+                                                     get_selected_songs_foreach,
+                                                     &songs);
 
-        ario_server_playlist_append_criterias (criterias, play, -1);
+                if (songs) {
+                        ario_server_playlist_append_songs (songs, play);
 
-        g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
-        g_slist_free (criterias);
+                        g_slist_foreach (songs, (GFunc) g_free, NULL);
+                        g_slist_free (songs);
+                }
+
+        } else {
+                criterias = ario_tree_get_criterias (tree);
+
+                ario_server_playlist_append_criterias (criterias, play, -1);
+
+                g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
+                g_slist_free (criterias);
+        }
 }
 
 static void
