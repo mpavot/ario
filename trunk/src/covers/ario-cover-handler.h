@@ -44,6 +44,7 @@ typedef struct
 {
         GtkWindowClass parent_class;
 
+        /* Signals */
         void (*cover_changed)            (ArioCoverHandler *cover_handler);
 } ArioCoverHandlerClass;
 

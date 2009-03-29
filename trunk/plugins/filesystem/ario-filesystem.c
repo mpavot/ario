@@ -25,13 +25,13 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "widgets/ario-songlist.h"
+#include "widgets/ario-dnd-tree.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
 #include "servers/ario-server.h"
 #include "preferences/ario-preferences.h"
 
-#define DRAG_THRESHOLD 1
 #define ROOT "/"
 
 static void ario_filesystem_shutdown (ArioSource *source);
@@ -53,16 +53,8 @@ static void ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
                                                      ArioFilesystem *filesystem);
 static void ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
                                                            ArioFilesystem *filesystem);
-static void ario_filesystem_popup_menu (ArioFilesystem *filesystem);
-static gboolean ario_filesystem_button_press_cb (GtkWidget *widget,
-                                                 GdkEventButton *event,
-                                                 ArioFilesystem *filesystem);
-static gboolean ario_filesystem_button_release_cb (GtkWidget *widget,
-                                                   GdkEventButton *event,
-                                                   ArioFilesystem *filesystem);
-static gboolean ario_filesystem_motion_notify (GtkWidget *widget,
-                                               GdkEventMotion *event,
-                                               ArioFilesystem *filesystem);
+static void ario_filesystem_popup_menu_cb (ArioDndTree* tree,
+                                           ArioFilesystem *filesystem);
 static void ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
                                                        GdkDragContext * context,
                                                        GtkSelectionData * selection_data,
@@ -81,20 +73,15 @@ static void ario_filesystem_fill_filesystem (ArioFilesystem *filesystem);
 
 struct ArioFilesystemPrivate
 {
-        GtkWidget *filesystem;
-        GtkWidget *paned;
-        GtkTreeStore *filesystem_model;
-        GtkTreeSelection *filesystem_selection;
+        GtkWidget *tree;
+        GtkTreeStore *model;
+        GtkTreeSelection *selection;
 
+        GtkWidget *paned;
         GtkWidget *songs;
 
         gboolean connected;
         gboolean empty;
-
-        gboolean dragging;
-        gboolean pressed;
-        gint drag_start_x;
-        gint drag_start_y;
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
@@ -226,8 +213,12 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         gtk_widget_show (scrolledwindow_filesystem);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_filesystem), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_filesystem), GTK_SHADOW_IN);
-        filesystem->priv->filesystem = gtk_tree_view_new ();
-        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (filesystem->priv->filesystem), TRUE);
+
+        filesystem->priv->tree = ario_dnd_tree_new (dirs_targets,
+                                                    G_N_ELEMENTS (dirs_targets),
+                                                    TRUE);
+
+        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (filesystem->priv->tree), TRUE);
 
         renderer = gtk_cell_renderer_pixbuf_new ();
         column = gtk_tree_view_column_new ();
@@ -239,51 +230,36 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         gtk_tree_view_column_set_attributes (column, renderer, "text", FILETREE_NAME_COLUMN, NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 50);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (filesystem->priv->filesystem), column);
-        filesystem->priv->filesystem_model = gtk_tree_store_new (FILETREE_N_COLUMN,
+        gtk_tree_view_append_column (GTK_TREE_VIEW (filesystem->priv->tree), column);
+        filesystem->priv->model = gtk_tree_store_new (FILETREE_N_COLUMN,
                                                                  G_TYPE_STRING,
                                                                  G_TYPE_UINT,
                                                                  G_TYPE_STRING,
                                                                  G_TYPE_STRING);
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (filesystem->priv->filesystem_model),
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (filesystem->priv->model),
                                               0, GTK_SORT_ASCENDING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (filesystem->priv->filesystem),
-                                 GTK_TREE_MODEL (filesystem->priv->filesystem_model));
-        filesystem->priv->filesystem_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (filesystem->priv->filesystem));
-        gtk_tree_selection_set_mode (filesystem->priv->filesystem_selection,
+        gtk_tree_view_set_model (GTK_TREE_VIEW (filesystem->priv->tree),
+                                 GTK_TREE_MODEL (filesystem->priv->model));
+        filesystem->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (filesystem->priv->tree));
+        gtk_tree_selection_set_mode (filesystem->priv->selection,
                                      GTK_SELECTION_BROWSE);
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_filesystem), filesystem->priv->filesystem);
+        gtk_container_add (GTK_CONTAINER (scrolledwindow_filesystem), filesystem->priv->tree);
 
-        gtk_drag_source_set (filesystem->priv->filesystem,
-                             GDK_BUTTON1_MASK,
-                             dirs_targets,
-                             G_N_ELEMENTS (dirs_targets),
-                             GDK_ACTION_COPY);
-
-        g_signal_connect (GTK_TREE_VIEW (filesystem->priv->filesystem),
+        g_signal_connect (GTK_TREE_VIEW (filesystem->priv->tree),
                           "drag_data_get",
                           G_CALLBACK (ario_filesystem_filetree_drag_data_get_cb), filesystem);
-        g_signal_connect (filesystem->priv->filesystem,
-                          "button_press_event",
-                          G_CALLBACK (ario_filesystem_button_press_cb),
-                          filesystem);
-        g_signal_connect (filesystem->priv->filesystem,
-                          "button_release_event",
-                          G_CALLBACK (ario_filesystem_button_release_cb),
-                          filesystem);
-        g_signal_connect (filesystem->priv->filesystem,
-                          "motion_notify_event",
-                          G_CALLBACK (ario_filesystem_motion_notify),
-                          filesystem);
-        g_signal_connect (filesystem->priv->filesystem,
+        g_signal_connect (GTK_TREE_VIEW (filesystem->priv->tree),
+                          "popup",
+                          G_CALLBACK (ario_filesystem_popup_menu_cb), filesystem);
+        g_signal_connect (filesystem->priv->tree,
                           "row-activated",
                           G_CALLBACK (ario_filesystem_filetree_row_activated_cb),
                           filesystem);
-        g_signal_connect (filesystem->priv->filesystem,
+        g_signal_connect (filesystem->priv->tree,
                           "test-expand-row",
                           G_CALLBACK (ario_filesystem_filetree_row_expanded_cb),
                           filesystem);
-        g_signal_connect (filesystem->priv->filesystem,
+        g_signal_connect (filesystem->priv->tree,
                           "cursor-changed",
                           G_CALLBACK (ario_filesystem_cursor_moved_cb),
                           filesystem);
@@ -408,20 +384,20 @@ ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter, fake_child;
 
-        gtk_tree_store_clear (filesystem->priv->filesystem_model);
+        gtk_tree_store_clear (filesystem->priv->model);
 
-        gtk_tree_store_append (filesystem->priv->filesystem_model, &iter, NULL);
-        gtk_tree_store_set (filesystem->priv->filesystem_model, &iter,
+        gtk_tree_store_append (filesystem->priv->model, &iter, NULL);
+        gtk_tree_store_set (filesystem->priv->model, &iter,
                             FILETREE_ICON_COLUMN, GTK_STOCK_HARDDISK,
                             FILETREE_ICONSIZE_COLUMN, 1,
                             FILETREE_NAME_COLUMN, _("Music"),
                             FILETREE_DIR_COLUMN, ROOT, -1);
-        gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &iter);
+        gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->model), &fake_child, &iter);
 
-        gtk_tree_selection_unselect_all (filesystem->priv->filesystem_selection);
-        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter)) {
-                gtk_tree_selection_select_iter (filesystem->priv->filesystem_selection, &iter);
-                ario_filesystem_cursor_moved_cb (GTK_TREE_VIEW (filesystem->priv->filesystem), filesystem);
+        gtk_tree_selection_unselect_all (filesystem->priv->selection);
+        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filesystem->priv->model), &iter)) {
+                gtk_tree_selection_select_iter (filesystem->priv->selection, &iter);
+                ario_filesystem_cursor_moved_cb (GTK_TREE_VIEW (filesystem->priv->tree), filesystem);
         }
         filesystem->priv->empty = FALSE;
 }
@@ -480,7 +456,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
 {
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter, child, fake_child, song_iter;
-        GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
+        GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->model);
         ArioSonglist *songlist = ARIO_SONGLIST (filesystem->priv->songs);
         GtkListStore *liststore = ario_songlist_get_liststore (songlist);
         GtkTreeSelection *selection = ario_songlist_get_selection (songlist);
@@ -493,38 +469,38 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         GtkTreePath *treepath;
         gboolean was_expanded;
 
-        if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
+        if (!gtk_tree_selection_get_selected (filesystem->priv->selection,
                                               &model,
                                               &iter))
                 return;
 
-        treepath = gtk_tree_model_get_path (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter);
+        treepath = gtk_tree_model_get_path (GTK_TREE_MODEL (filesystem->priv->model), &iter);
         was_expanded = gtk_tree_view_row_expanded (tree_view, treepath);
 
-        if (gtk_tree_model_iter_children (GTK_TREE_MODEL (filesystem->priv->filesystem_model),
+        if (gtk_tree_model_iter_children (GTK_TREE_MODEL (filesystem->priv->model),
                                           &child,
                                           &iter)) {
-                while (gtk_tree_store_remove (GTK_TREE_STORE (filesystem->priv->filesystem_model), &child)) { }
+                while (gtk_tree_store_remove (GTK_TREE_STORE (filesystem->priv->model), &child)) { }
         }
         gtk_list_store_clear (liststore);
-        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter, FILETREE_DIR_COLUMN, &dir, -1);
+        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->model), &iter, FILETREE_DIR_COLUMN, &dir, -1);
         g_return_if_fail (dir);
 
         files = ario_server_list_files (dir, FALSE);
         for (tmp = files->directories; tmp; tmp = g_slist_next (tmp)) {
                 path = tmp->data;
-                gtk_tree_store_append (filesystem->priv->filesystem_model, &child, &iter);
+                gtk_tree_store_append (filesystem->priv->model, &child, &iter);
                 if (!strcmp (dir, ROOT)) {
                         display_path = path;
                 } else {
                         display_path = path + strlen (dir) + 1;
                 }
-                gtk_tree_store_set (filesystem->priv->filesystem_model, &child,
+                gtk_tree_store_set (filesystem->priv->model, &child,
                                     FILETREE_ICON_COLUMN, GTK_STOCK_DIRECTORY,
                                     FILETREE_ICONSIZE_COLUMN, 1,
                                     FILETREE_NAME_COLUMN, display_path,
                                     FILETREE_DIR_COLUMN, path, -1);
-                gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->filesystem_model), &fake_child, &child);
+                gtk_tree_store_append(GTK_TREE_STORE (filesystem->priv->model), &fake_child, &child);
         }
         for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
@@ -557,14 +533,14 @@ ario_filesystem_add_filetree (ArioFilesystem *filesystem,
         ARIO_LOG_FUNCTION_START;
         gchar *dir;
         GtkTreeIter iter;
-        GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
+        GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->model);
 
-        if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
+        if (!gtk_tree_selection_get_selected (filesystem->priv->selection,
                                               &model,
                                               &iter))
                 return;
 
-        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter,
+        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->model), &iter,
                             FILETREE_DIR_COLUMN, &dir, -1);
 
         g_return_if_fail (dir);
@@ -599,7 +575,8 @@ ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
 }
 
 static void
-ario_filesystem_popup_menu (ArioFilesystem *filesystem)
+ario_filesystem_popup_menu_cb (ArioDndTree* tree,
+                               ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
@@ -607,101 +584,6 @@ ario_filesystem_popup_menu (ArioFilesystem *filesystem)
         menu = gtk_ui_manager_get_widget (filesystem->priv->ui_manager, "/FilesystemPopup");
         gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                         gtk_get_current_event_time ());
-}
-
-static gboolean
-ario_filesystem_button_press_cb (GtkWidget *widget,
-                                 GdkEventButton *event,
-                                 ArioFilesystem *filesystem)
-{
-        ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        int x, y;
-
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
-                gtk_widget_grab_focus (widget);
-
-        if (filesystem->priv->dragging)
-                return FALSE;
-
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
-                return FALSE;
-
-        if (event->button == 1) {
-                gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                filesystem->priv->drag_start_x = x;
-                filesystem->priv->drag_start_y = y;
-                filesystem->priv->pressed = TRUE;
-
-                return FALSE;
-        }
-
-        if (event->button == 3) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        if (!gtk_tree_selection_path_is_selected (selection, path)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        ario_filesystem_popup_menu (filesystem);
-                        gtk_tree_path_free (path);
-                        return FALSE;
-                }
-        }
-
-        return FALSE;
-}
-
-static gboolean
-ario_filesystem_button_release_cb (GtkWidget *widget,
-                                   GdkEventButton *event,
-                                   ArioFilesystem *filesystem)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (!filesystem->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        gtk_tree_selection_unselect_all (selection);
-                        gtk_tree_selection_select_path (selection, path);
-                        gtk_tree_path_free (path);
-                }
-        }
-
-        filesystem->priv->dragging = FALSE;
-        filesystem->priv->pressed = FALSE;
-
-        return FALSE;
-}
-
-static gboolean
-ario_filesystem_motion_notify (GtkWidget *widget,
-                               GdkEventMotion *event,
-                               ArioFilesystem *filesystem)
-{
-        // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        int x, y;
-        int dx, dy;
-
-        if ((filesystem->priv->dragging) || !(filesystem->priv->pressed))
-                return FALSE;
-
-        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-
-        dx = x - filesystem->priv->drag_start_x;
-        dy = y - filesystem->priv->drag_start_y;
-
-        if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
-                filesystem->priv->dragging = TRUE;
-
-        return FALSE;
 }
 
 static void
@@ -722,14 +604,14 @@ ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (widget != NULL);
         g_return_if_fail (selection_data != NULL);
 
-        model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
+        model = GTK_TREE_MODEL (filesystem->priv->model);
 
-        if (!gtk_tree_selection_get_selected (filesystem->priv->filesystem_selection,
+        if (!gtk_tree_selection_get_selected (filesystem->priv->selection,
                                               &model,
                                               &iter))
                 return;
 
-        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->filesystem_model), &iter,
+        gtk_tree_model_get (GTK_TREE_MODEL (filesystem->priv->model), &iter,
                             FILETREE_DIR_COLUMN, &dir, -1);
 
         gtk_selection_data_set (selection_data, selection_data->target, 8, dir,
