@@ -113,6 +113,8 @@ src/sources/ario-source.h
 src/sources/ario-storedplaylists.c
 src/sources/ario-storedplaylists.h
 src/sources/ario-tree.c
+src/sources/ario-tree-albums.c
+src/sources/ario-tree-songs.c
 src/shell/ario-shell.c
 src/shell/ario-shell.h
 src/shell/ario-shell-coverdownloader.c
