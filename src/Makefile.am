@@ -122,6 +122,10 @@ libario_la_SOURCES = \
 	sources/ario-browser.h\
 	sources/ario-tree.c\
 	sources/ario-tree.h\
+	sources/ario-tree-albums.c\
+	sources/ario-tree-albums.h\
+	sources/ario-tree-songs.c\
+	sources/ario-tree-songs.h\
 	sources/ario-search.c\
 	sources/ario-search.h\
 	sources/ario-source.c\

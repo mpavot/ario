@@ -40,15 +40,47 @@ typedef struct
         GtkScrolledWindow parent;
 
         ArioTreePrivate *priv;
+
+        GtkWidget *tree;
+        GtkListStore *model;
+        GtkTreeSelection *selection;
+
+        ArioServerTag tag;
+        gboolean is_first;
+
+        /* List of ArioServerCriteria */
+        GSList *criterias;
 } ArioTree;
+
+typedef struct
+{
+        GString *string;
+        ArioTree *tree;
+} ArioTreeStringData;
 
 typedef struct
 {
         GtkScrolledWindowClass parent;
 
-        void (*selection_changed) (ArioTree *tree);
+        /* Virtual methods */
+        void            (*build_tree)           (ArioTree *tree,
+                                                 GtkTreeView *treeview);
+        void            (*fill_tree)            (ArioTree *tree);
 
-        void (*menu_popup) (ArioTree *tree);
+        GdkPixbuf*      (*get_dnd_pixbuf)       (ArioTree *tree);
+
+        void            (*set_drag_source)      (ArioTree *tree);
+
+        void            (*append_drag_data)     (ArioTree *tree,
+                                                 GtkTreeModel *model,
+                                                 GtkTreeIter *iter,
+                                                 ArioTreeStringData *data);
+        void            (*add_to_playlist)      (ArioTree *tree,
+                                                 gboolean play);
+        /* Signals */
+        void            (*selection_changed)    (ArioTree *tree);
+
+        void            (*menu_popup)           (ArioTree *tree);
 } ArioTreeClass;
 
 GType                   ario_tree_get_type              (void) G_GNUC_CONST;
@@ -70,12 +102,11 @@ void                    ario_tree_cmd_get_cover         (ArioTree *tree);
 
 void                    ario_tree_cmd_remove_cover      (ArioTree *tree);
 
-void                    ario_tree_cmd_albums_properties (ArioTree *tree);
-
-void                    ario_tree_cmd_songs_properties  (ArioTree *tree);
-
 void                    ario_tree_goto_playling_song    (ArioTree *tree,
                                                          const ArioServerSong *song);
+void                    ario_tree_add_tags              (ArioTree *tree,
+                                                         ArioServerCriteria *criteria,
+                                                         GSList *tags);
 
 G_END_DECLS
 

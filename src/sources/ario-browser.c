@@ -24,6 +24,8 @@
 #include "lib/ario-conf.h"
 #include <glib/gi18n.h>
 #include "sources/ario-tree.h"
+#include "sources/ario-tree-albums.h"
+#include "sources/ario-tree-songs.h"
 #include "widgets/ario-playlist.h"
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
@@ -216,7 +218,7 @@ ario_browser_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_browser_get_property (GObject *object,
                            guint prop_id,
                            GValue *value,
@@ -286,6 +288,7 @@ ario_browser_reload_trees (ArioBrowser *browser)
         gchar **splited_conf;
         const gchar *conf;
         GSList *tmp;
+        gint tag;
 
         /* Remove all trees */
         for (tmp = browser->priv->trees; tmp; tmp = g_slist_next (tmp)) {
@@ -297,19 +300,20 @@ ario_browser_reload_trees (ArioBrowser *browser)
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
         splited_conf = g_strsplit (conf, ",", MAX_TREE_NB);
         for (i = 0; splited_conf[i]; ++i) {
+                tag = atoi (splited_conf[i]);
                 tree = ario_tree_new (browser->priv->ui_manager,
-                                      atoi (splited_conf[i]),
+                                      tag,
                                       is_first);
                 browser->priv->trees = g_slist_append (browser->priv->trees, tree);
                 is_first = FALSE;
 
                 if (splited_conf[i+1]) { /* No signal for the last tree */
                         g_signal_connect (tree,
-                                          "selection_changed", 
+                                          "selection_changed",
                                           G_CALLBACK (ario_browser_tree_selection_changed_cb), browser);
                 }
                 g_signal_connect (tree,
-                                  "menu_popup", 
+                                  "menu_popup",
                                   G_CALLBACK (ario_browser_menu_popup_cb), browser);
 
                 gtk_box_pack_start (GTK_BOX (browser), tree, TRUE, TRUE, 0);
@@ -438,7 +442,7 @@ ario_browser_cmd_albums_properties (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         if (browser->priv->popup_tree)
-                ario_tree_cmd_albums_properties (browser->priv->popup_tree);
+                ario_tree_albums_cmd_albums_properties (ARIO_TREE_ALBUMS (browser->priv->popup_tree));
 }
 
 static void
@@ -447,5 +451,5 @@ ario_browser_cmd_songs_properties (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         if (browser->priv->popup_tree)
-                ario_tree_cmd_songs_properties (browser->priv->popup_tree);
+                ario_tree_songs_cmd_songs_properties (ARIO_TREE_SONGS (browser->priv->popup_tree));
 }
