@@ -31,8 +31,7 @@
 #include "ario-debug.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell-songinfos.h"
-
-#define DRAG_THRESHOLD 1
+#include "widgets/ario-dnd-tree.h"
 
 typedef struct ArioPlaylistColumn ArioPlaylistColumn;
 
@@ -93,21 +92,17 @@ static void ario_playlist_cmd_goto_playing_song (GtkAction *action,
                                                  ArioPlaylist *playlist);
 static void ario_playlist_cmd_save (GtkAction *action,
                                     ArioPlaylist *playlist);
-static gboolean ario_playlist_view_button_press_cb (GtkWidget *widget,
-                                                    GdkEventButton *event,
-                                                    ArioPlaylist *playlist);
 static gboolean ario_playlist_view_key_press_cb (GtkWidget *widget,
                                                  GdkEventKey *event,
                                                  ArioPlaylist *playlist);
-static gboolean ario_playlist_view_button_release_cb (GtkWidget *widget,
-                                                      GdkEventButton *event,
-                                                      ArioPlaylist *playlist);
-static gboolean ario_playlist_view_motion_notify (GtkWidget *widget,
-                                                  GdkEventMotion *event,
-                                                  ArioPlaylist *playlist);
 static void ario_playlist_activate_row (GtkTreePath *path);
+static void ario_playlist_activate_selected ();
 static void ario_playlist_column_visible_changed_cb (guint notification_id,
                                                      ArioPlaylistColumn *ario_column);
+static void ario_playlist_popup_menu_cb (ArioDndTree* tree,
+                                         ArioPlaylist *playlist);
+static void ario_playlist_activate_cb (ArioDndTree* tree,
+                                       ArioPlaylist *playlist);
 
 static ArioPlaylist *instance = NULL;
 
@@ -130,11 +125,6 @@ struct ArioPlaylistPrivate
         gint pos;
 
         GdkPixbuf *play_pixbuf;
-
-        gboolean dragging;
-        gboolean pressed;
-        gint drag_start_x;
-        gint drag_start_y;
 
         GtkUIManager *ui_manager;
 };
@@ -360,7 +350,7 @@ ario_playlist_filter_func (GtkTreeModel *model,
         if (!playlist->priv->search_text || *playlist->priv->search_text == '\0')
                 return TRUE;
 
-        cmp_str = g_strsplit (playlist->priv->search_text, " ", -1); 
+        cmp_str = g_strsplit (playlist->priv->search_text, " ", -1);
 
         if (!cmp_str)
                 return TRUE;
@@ -472,7 +462,10 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_scrolled_window_set_policy (scrolled_window, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (scrolled_window, GTK_SHADOW_IN);
 
-        playlist->priv->tree = gtk_tree_view_new ();
+        playlist->priv->tree = ario_dnd_tree_new (internal_targets,
+                                                  G_N_ELEMENTS (internal_targets),
+                                                  FALSE);
+
         gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (playlist->priv->tree), TRUE);
 
         for (i = 0; all_columns[i].columnnb != -1; ++i)
@@ -501,8 +494,6 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_tree_view_set_model (GTK_TREE_VIEW (playlist->priv->tree),
                                  GTK_TREE_MODEL (playlist->priv->model));
 
-        gtk_tree_view_set_reorderable (GTK_TREE_VIEW (playlist->priv->tree),
-                                       TRUE);
         gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (playlist->priv->model),
                                                  ario_playlist_no_sort,
                                                  NULL, NULL);
@@ -519,28 +510,11 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_tree_selection_set_mode (playlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
         gtk_container_add (GTK_CONTAINER (scrolled_window), playlist->priv->tree);
-        gtk_drag_source_set (playlist->priv->tree,
-                             GDK_BUTTON1_MASK,
-                             internal_targets,
-                             G_N_ELEMENTS (internal_targets),
-                             GDK_ACTION_MOVE);
 
         gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (playlist->priv->tree),
                                               targets, G_N_ELEMENTS (targets),
                                               GDK_ACTION_MOVE);
 
-        g_signal_connect (playlist->priv->tree,
-                          "button_press_event",
-                          G_CALLBACK (ario_playlist_view_button_press_cb),
-                          playlist);
-        g_signal_connect (playlist->priv->tree,
-                          "button_release_event",
-                          G_CALLBACK (ario_playlist_view_button_release_cb),
-                          playlist);
-        g_signal_connect (playlist->priv->tree,
-                          "motion_notify_event",
-                          G_CALLBACK (ario_playlist_view_motion_notify),
-                          playlist);
         g_signal_connect (playlist->priv->tree,
                           "key_press_event",
                           G_CALLBACK (ario_playlist_view_key_press_cb),
@@ -555,6 +529,14 @@ ario_playlist_init (ArioPlaylist *playlist)
                           "drag_data_get",
                           G_CALLBACK (ario_playlist_drag_data_get_cb),
                           playlist);
+
+        g_signal_connect (GTK_TREE_VIEW (playlist->priv->tree),
+                          "popup",
+                          G_CALLBACK (ario_playlist_popup_menu_cb), playlist);
+
+        g_signal_connect (GTK_TREE_VIEW (playlist->priv->tree),
+                          "activate",
+                          G_CALLBACK (ario_playlist_activate_cb), playlist);
 
         playlist->priv->search_hbox = gtk_hbox_new (FALSE, 6);
 
@@ -793,10 +775,10 @@ ario_playlist_changed_cb (ArioServer *server,
                         title = ario_util_format_title (song);
                         if (current_song && (song->pos == current_song->pos)) {
                                 pixbuf = instance->priv->play_pixbuf;
-				instance->priv->pos = song->pos;
-			} else {
+                                instance->priv->pos = song->pos;
+                        } else {
                                 pixbuf = NULL;
-			}
+                        }
                         gtk_list_store_set (playlist->priv->model, &iter,
                                             PIXBUF_COLUMN, pixbuf,
                                             TRACK_COLUMN, track,
@@ -999,6 +981,24 @@ ario_playlist_activate_row (GtkTreePath *path)
 {
         ARIO_LOG_FUNCTION_START;
         ario_server_do_play_pos (ario_playlist_get_indice (path));
+}
+
+static void
+ario_playlist_activate_selected ()
+{
+        ARIO_LOG_FUNCTION_START;
+        GList *paths;
+        GtkTreePath *path = NULL;
+        GtkTreeModel *model = GTK_TREE_MODEL (instance->priv->model);
+
+        paths = gtk_tree_selection_get_selected_rows (instance->priv->selection, &model);
+        if (paths)
+                path = paths->data;
+        if (path)
+                ario_playlist_activate_row (path);
+
+        g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
+        g_list_free (paths);
 }
 
 static void
@@ -1223,7 +1223,8 @@ ario_playlist_drag_drop_cb (GtkWidget * widget,
 }
 
 static void
-ario_playlist_popup_menu (void)
+ario_playlist_popup_menu_cb (ArioDndTree* tree,
+                             ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
@@ -1231,6 +1232,14 @@ ario_playlist_popup_menu (void)
         menu = gtk_ui_manager_get_widget (instance->priv->ui_manager, "/PlaylistPopup");
         gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                         gtk_get_current_event_time ());
+}
+
+static void
+ario_playlist_activate_cb (ArioDndTree* tree,
+                           ArioPlaylist *playlist)
+{
+        ARIO_LOG_FUNCTION_START;
+        ario_playlist_activate_selected ();
 }
 
 static void
@@ -1511,22 +1520,11 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
                                  ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START;
-        GList *paths;
-        GtkTreePath *path = NULL;
-        GtkTreeModel *model = GTK_TREE_MODEL (playlist->priv->model);
 
         if (event->keyval == GDK_Delete) {
                 ario_playlist_remove ();
         } else if (event->keyval == GDK_Return) {
-                paths = gtk_tree_selection_get_selected_rows (playlist->priv->selection, &model);
-                if (paths)
-                        path = paths->data;
-                if (path)
-                        ario_playlist_activate_row (path);
-
-                g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
-                g_list_free (paths);
-
+                ario_playlist_activate_selected ();
                 return TRUE;
         } else if (event->string
                    && event->length > 0
@@ -1534,132 +1532,6 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
                    && !(event->state & GDK_CONTROL_MASK)) {
                 ario_playlist_search (playlist, event->string);
         }
-
-        return FALSE;
-}
-
-static gboolean
-ario_playlist_view_button_press_cb (GtkWidget *widget,
-                                    GdkEventButton *event,
-                                    ArioPlaylist *playlist)
-{
-        ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        GtkTreePath *path;
-        int x, y, bx, by;
-        gboolean selected;
-
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
-                gtk_widget_grab_focus (widget);
-
-        if (playlist->priv->dragging)
-                return FALSE;
-
-        if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
-                return FALSE;
-
-        if (event->button == 1) {
-                gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
-
-                if (bx >= 0 && by >= 0) {
-                        if (event->type == GDK_2BUTTON_PRESS) {
-                                GtkTreePath *path;
-
-                                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                                if (path) {
-                                        ario_playlist_activate_row (path);
-                                        gtk_tree_path_free (path);
-
-                                        return FALSE;
-                                }
-
-                        }
-
-                        playlist->priv->drag_start_x = x;
-                        playlist->priv->drag_start_y = y;
-                        playlist->priv->pressed = TRUE;
-
-                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                        if (path) {
-                                selected = gtk_tree_selection_path_is_selected (playlist->priv->selection, path);
-                                gtk_tree_path_free (path);
-
-                                return selected;
-                        }
-
-                        return TRUE;
-                } else {
-                        return FALSE;
-                }
-        }
-
-        if (event->button == 3) {
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        if (!gtk_tree_selection_path_is_selected (playlist->priv->selection, path)) {
-                                gtk_tree_selection_unselect_all (playlist->priv->selection);
-                                gtk_tree_selection_select_path (playlist->priv->selection, path);
-                        }
-                        ario_playlist_popup_menu ();
-                        gtk_tree_path_free (path);
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
-
-
-static gboolean
-ario_playlist_view_button_release_cb (GtkWidget *widget,
-                                      GdkEventButton *event,
-                                      ArioPlaylist *playlist)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (!playlist->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                int bx, by;
-                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), event->x, event->y, &bx, &by);
-                if (bx >= 0 && by >= 0) {
-                        GtkTreePath *path;
-
-                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                        if (path) {
-                                GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                                gtk_tree_path_free (path);
-                        }
-                }
-        }
-
-        playlist->priv->dragging = FALSE;
-        playlist->priv->pressed = FALSE;
-
-        return FALSE;
-}
-
-static gboolean
-ario_playlist_view_motion_notify (GtkWidget *widget,
-                                  GdkEventMotion *event,
-                                  ArioPlaylist *playlist)
-{
-        // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        int x, y;
-        int dx, dy;
-
-        if ((playlist->priv->dragging) || !(playlist->priv->pressed))
-                return FALSE;
-
-        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-
-        dx = x - playlist->priv->drag_start_x;
-        dy = y - playlist->priv->drag_start_y;
-
-        if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
-                playlist->priv->dragging = TRUE;
 
         return FALSE;
 }
