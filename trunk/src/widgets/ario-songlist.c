@@ -241,12 +241,6 @@ ario_songlist_new (GtkUIManager *mgr,
         gtk_tree_selection_set_mode (songlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
 
-        gtk_drag_source_set (GTK_WIDGET (songlist->priv->tree),
-                             GDK_BUTTON1_MASK,
-                             songs_targets,
-                             G_N_ELEMENTS (songs_targets),
-                             GDK_ACTION_COPY);
-
         g_signal_connect (songlist->priv->tree,
                           "drag_data_get",
                           G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
