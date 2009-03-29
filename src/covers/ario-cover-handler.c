@@ -44,7 +44,6 @@ enum
         COVER_CHANGED,
         LAST_SIGNAL
 };
-
 static guint ario_cover_handler_signals[LAST_SIGNAL] = { 0 };
 
 struct ArioCoverHandlerPrivate
@@ -142,10 +141,10 @@ ario_cover_handler_finalize (GObject *object)
                 g_thread_join (cover_handler->priv->thread);
         g_async_queue_unref (cover_handler->priv->queue);
 
-        if (cover_handler->priv->pixbuf) 
+        if (cover_handler->priv->pixbuf)
                 g_object_unref(cover_handler->priv->pixbuf);
 
-        if (cover_handler->priv->large_pixbuf) 
+        if (cover_handler->priv->large_pixbuf)
                 g_object_unref(cover_handler->priv->large_pixbuf);
 
         g_free (cover_handler->priv->cover_path);

@@ -69,8 +69,8 @@ typedef struct
 
         GdkPixbuf*      (*get_dnd_pixbuf)       (ArioTree *tree);
 
-        void            (*set_drag_source)      (ArioTree *tree);
-
+        void            (*get_drag_source)      (const GtkTargetEntry** targets,
+                                                 int* n_targets);
         void            (*append_drag_data)     (ArioTree *tree,
                                                  GtkTreeModel *model,
                                                  GtkTreeIter *iter,

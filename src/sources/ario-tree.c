@@ -29,8 +29,8 @@
 #include "shell/ario-shell-coverdownloader.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
+#include "widgets/ario-dnd-tree.h"
 
-#define DRAG_THRESHOLD 1
 #define LIMIT_FOR_IDLE 800
 
 static GObject *ario_tree_constructor (GType type, guint n_construct_properties,
@@ -46,16 +46,10 @@ static void ario_tree_get_property (GObject *object,
                                     GParamSpec *pspec);
 static void ario_tree_selection_changed_cb (GtkTreeSelection * selection,
                                             ArioTree *tree);
-static void ario_tree_popup_menu (ArioTree *tree);
-static gboolean ario_tree_button_press_cb (GtkWidget *widget,
-                                           GdkEventButton *event,
-                                           ArioTree *tree);
-static gboolean ario_tree_button_release_cb (GtkWidget *widget,
-                                             GdkEventButton *event,
-                                             ArioTree *tree);
-static gboolean ario_tree_motion_notify (GtkWidget *widget,
-                                         GdkEventMotion *event,
-                                         ArioTree *tree);
+static void ario_tree_popup_menu_cb (ArioDndTree* dnd_tree,
+                                     ArioTree *tree);
+static void ario_tree_activate_cb (ArioDndTree* dnd_tree,
+                                   ArioTree *tree);
 static void ario_tree_selection_drag_foreach (GtkTreeModel *model,
                                               GtkTreePath *path,
                                               GtkTreeIter *iter,
@@ -71,7 +65,8 @@ static void ario_tree_build_tree (ArioTree *tree,
                                   GtkTreeView *treeview);
 static void ario_tree_fill_tree (ArioTree *tree);
 static GdkPixbuf* ario_tree_get_dnd_pixbuf (ArioTree *tree);
-static void ario_tree_set_drag_source (ArioTree *tree);
+static void ario_tree_get_drag_source (const GtkTargetEntry** targets,
+                                       int* n_targets);
 static void ario_tree_append_drag_data (ArioTree *tree,
                                         GtkTreeModel *model,
                                         GtkTreeIter *iter,
@@ -81,11 +76,6 @@ static void ario_tree_add_to_playlist (ArioTree *tree,
 
 struct ArioTreePrivate
 {
-        gboolean dragging;
-        gboolean pressed;
-        gint drag_start_x;
-        gint drag_start_y;
-
         GtkUIManager *ui_manager;
 };
 
@@ -138,7 +128,7 @@ ario_tree_class_init (ArioTreeClass *klass)
         klass->build_tree = ario_tree_build_tree;
         klass->fill_tree = ario_tree_fill_tree;
         klass->get_dnd_pixbuf = ario_tree_get_dnd_pixbuf;
-        klass->set_drag_source = ario_tree_set_drag_source;
+        klass->get_drag_source = ario_tree_get_drag_source;
         klass->append_drag_data = ario_tree_append_drag_data;
         klass->add_to_playlist = ario_tree_add_to_playlist;
 
@@ -245,6 +235,8 @@ ario_tree_constructor (GType type, guint n_construct_properties,
         ArioTree *tree;
         ArioTreeClass *klass;
         GObjectClass *parent_class;
+        const GtkTargetEntry* targets;
+        int n_targets;
 
         klass = ARIO_TREE_CLASS (g_type_class_peek (TYPE_ARIO_TREE));
 
@@ -255,7 +247,10 @@ ario_tree_constructor (GType type, guint n_construct_properties,
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tree), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (tree), GTK_SHADOW_IN);
 
-        tree->tree = gtk_tree_view_new ();
+        ARIO_TREE_GET_CLASS (tree)->get_drag_source (&targets,
+                                                     &n_targets);
+
+        tree->tree = ario_dnd_tree_new (targets, n_targets, FALSE);
 
         ARIO_TREE_GET_CLASS (tree)->build_tree (tree, GTK_TREE_VIEW (tree->tree));
 
@@ -271,8 +266,6 @@ ario_tree_constructor (GType type, guint n_construct_properties,
 
         gtk_container_add (GTK_CONTAINER (tree), tree->tree);
 
-        ARIO_TREE_GET_CLASS (tree)->set_drag_source (tree);
-
         g_signal_connect (tree->tree,
                           "drag_data_get",
                           G_CALLBACK (ario_tree_drag_data_get_cb), tree);
@@ -281,31 +274,23 @@ ario_tree_constructor (GType type, guint n_construct_properties,
                           "drag_begin",
                           G_CALLBACK (ario_tree_drag_begin_cb), tree);
 
-        g_signal_connect (tree->tree,
-                          "button_press_event",
-                          G_CALLBACK (ario_tree_button_press_cb),
-                          tree);
-        g_signal_connect (tree->tree,
-                          "button_release_event",
-                          G_CALLBACK (ario_tree_button_release_cb),
-                          tree);
-        g_signal_connect (tree->tree,
-                          "motion_notify_event",
-                          G_CALLBACK (ario_tree_motion_notify),
-                          tree);
+        g_signal_connect (GTK_TREE_VIEW (tree->tree),
+                          "popup",
+                          G_CALLBACK (ario_tree_popup_menu_cb), tree);
+        g_signal_connect (GTK_TREE_VIEW (tree->tree),
+                          "activate",
+                          G_CALLBACK (ario_tree_activate_cb), tree);
 
         return G_OBJECT (tree);
 }
 
 static void
-ario_tree_set_drag_source (ArioTree *tree)
+ario_tree_get_drag_source (const GtkTargetEntry** targets,
+                           int* n_targets)
 {
-        ARIO_LOG_FUNCTION_START;
-        gtk_drag_source_set (tree->tree,
-                             GDK_BUTTON1_MASK,
-                             criterias_targets,
-                             G_N_ELEMENTS (criterias_targets),
-                             GDK_ACTION_COPY);
+        ARIO_LOG_FUNCTION_START
+                *targets = criterias_targets;
+        *n_targets = G_N_ELEMENTS (criterias_targets);
 }
 
 static void
@@ -360,7 +345,8 @@ ario_tree_new (GtkUIManager *mgr,
 }
 
 static void
-ario_tree_popup_menu (ArioTree *tree)
+ario_tree_popup_menu_cb (ArioDndTree* dnd_tree,
+                         ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
@@ -379,116 +365,12 @@ ario_tree_popup_menu (ArioTree *tree)
                         gtk_get_current_event_time ());
 }
 
-static gboolean
-ario_tree_button_press_cb (GtkWidget *widget,
-                           GdkEventButton *event,
-                           ArioTree *tree)
+static void
+ario_tree_activate_cb (ArioDndTree* dnd_tree,
+                       ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        GtkTreePath *path;
-        int x, y;
-        gboolean selected;
-
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
-                gtk_widget_grab_focus (widget);
-
-        if (tree->priv->dragging)
-                return FALSE;
-
-        if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
-                return FALSE;
-
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                ario_tree_cmd_add (tree, FALSE);
-                return FALSE;
-        }
-
-        if (event->button == 1) {
-                gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                tree->priv->drag_start_x = x;
-                tree->priv->drag_start_y = y;
-                tree->priv->pressed = TRUE;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        selected = gtk_tree_selection_path_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget)), path);
-                        gtk_tree_path_free (path);
-
-                        return selected;
-                }
-
-                return TRUE;
-        }
-
-        if (event->button == 3) {
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        if (!gtk_tree_selection_path_is_selected (selection, path)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        ario_tree_popup_menu (tree);
-                        gtk_tree_path_free (path);
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
-
-static gboolean
-ario_tree_button_release_cb (GtkWidget *widget,
-                             GdkEventButton *event,
-                             ArioTree *tree)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (!tree->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-
-                        if (gtk_tree_selection_path_is_selected (selection, path)
-                            && (gtk_tree_selection_count_selected_rows (selection) != 1)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        gtk_tree_path_free (path);
-                }
-        }
-
-        tree->priv->dragging = FALSE;
-        tree->priv->pressed = FALSE;
-
-        return FALSE;
-}
-
-static gboolean
-ario_tree_motion_notify (GtkWidget *widget,
-                         GdkEventMotion *event,
-                         ArioTree *tree)
-{
-        // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        int x, y;
-        int dx, dy;
-
-        if ((tree->priv->dragging) || !(tree->priv->pressed))
-                return FALSE;
-
-        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-
-        dx = x - tree->priv->drag_start_x;
-        dy = y - tree->priv->drag_start_y;
-
-        if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
-                tree->priv->dragging = TRUE;
-
-        return FALSE;
+        ario_tree_cmd_add (tree, FALSE);
 }
 
 static void

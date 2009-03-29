@@ -31,7 +31,8 @@
 static void ario_tree_songs_build_tree (ArioTree *parent_tree,
                                         GtkTreeView *treeview);
 static void ario_tree_songs_fill_tree (ArioTree *parent_tree);
-static void ario_tree_songs_set_drag_source (ArioTree *tree);
+static void ario_tree_songs_get_drag_source (const GtkTargetEntry** targets,
+                                             int* n_targets);
 static void ario_tree_songs_append_drag_data (ArioTree *tree,
                                               GtkTreeModel *model,
                                               GtkTreeIter *iter,
@@ -62,7 +63,7 @@ ario_tree_songs_class_init (ArioTreeSongsClass *klass)
 
         tree_class->build_tree = ario_tree_songs_build_tree;
         tree_class->fill_tree = ario_tree_songs_fill_tree;
-        tree_class->set_drag_source = ario_tree_songs_set_drag_source;
+        tree_class->get_drag_source = ario_tree_songs_get_drag_source;
         tree_class->append_drag_data = ario_tree_songs_append_drag_data;
         tree_class->add_to_playlist = ario_tree_songs_add_to_playlist;
 }
@@ -159,14 +160,12 @@ ario_tree_songs_fill_tree (ArioTree *parent_tree)
 }
 
 static void
-ario_tree_songs_set_drag_source (ArioTree *tree)
+ario_tree_songs_get_drag_source (const GtkTargetEntry** targets,
+                                 int* n_targets)
 {
         ARIO_LOG_FUNCTION_START;
-        gtk_drag_source_set (tree->tree,
-                             GDK_BUTTON1_MASK,
-                             songs_targets,
-                             G_N_ELEMENTS (songs_targets),
-                             GDK_ACTION_COPY);
+        *targets = songs_targets;
+        *n_targets = G_N_ELEMENTS (songs_targets);
 }
 
 static void

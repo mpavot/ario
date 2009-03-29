@@ -27,8 +27,8 @@
 #include "ario-debug.h"
 #include "servers/ario-server.h"
 #include "plugins/ario-plugin.h"
+#include "widgets/ario-dnd-tree.h"
 
-#define DRAG_THRESHOLD 1
 #define XML_ROOT_NAME (const unsigned char *)"ario-radios"
 #define XML_VERSION (const unsigned char *)"1.0"
 
@@ -65,17 +65,6 @@ static void ario_radio_cmd_delete_radios (GtkAction *action,
                                           ArioRadio *radio);
 static void ario_radio_cmd_radio_properties (GtkAction *action,
                                              ArioRadio *radio);
-static void ario_radio_popup_menu (ArioRadio *radio);
-static gboolean ario_radio_button_press_cb (GtkWidget *widget,
-                                            GdkEventButton *event,
-                                            ArioRadio *radio);
-static gboolean ario_radio_button_release_cb (GtkWidget *widget,
-                                              GdkEventButton *event,
-                                              ArioRadio *radio);
-static gboolean ario_radio_motion_notify (GtkWidget *widget,
-                                          GdkEventMotion *event,
-                                          ArioRadio *radio);
-
 static void ario_radio_radios_selection_drag_foreach (GtkTreeModel *model,
                                                       GtkTreePath *path,
                                                       GtkTreeIter *iter,
@@ -89,19 +78,18 @@ static void ario_radio_free_internet_radio (ArioInternetRadio *internet_radio);
 static void ario_radio_create_xml_file (char *xml_filename);
 static char* ario_radio_get_xml_filename (void);
 static void ario_radio_fill_radios (ArioRadio *radio);
+static void ario_radio_popup_menu_cb (ArioDndTree* tree,
+                                      ArioRadio *radio);
+static void ario_radio_activate_cb (ArioDndTree* tree,
+                                    ArioRadio *radio);
 
 struct ArioRadioPrivate
 {
-        GtkWidget *radios;
-        GtkListStore *radios_model;
-        GtkTreeSelection *radios_selection;
+        GtkWidget *tree;
+        GtkListStore *model;
+        GtkTreeSelection *selection;
 
         gboolean connected;
-
-        gboolean dragging;
-        gboolean pressed;
-        gint drag_start_x;
-        gint drag_start_y;
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
@@ -213,49 +201,40 @@ ario_radio_init (ArioRadio *radio)
         gtk_widget_show (scrolledwindow_radios);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_radios), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_radios), GTK_SHADOW_IN);
-        radio->priv->radios = gtk_tree_view_new ();
-        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (radio->priv->radios), TRUE);
+
+        radio->priv->tree = ario_dnd_tree_new (radios_targets,
+                                               G_N_ELEMENTS (radios_targets),
+                                               FALSE);
+
+        gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (radio->priv->tree), TRUE);
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Internet Radios"),
                                                            renderer,
                                                            "text", 0,
                                                            NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (radio->priv->radios), column);
-        radio->priv->radios_model = gtk_list_store_new (N_COLUMN,
-                                                        G_TYPE_STRING,
-                                                        G_TYPE_STRING);
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (radio->priv->radios_model),
+        gtk_tree_view_append_column (GTK_TREE_VIEW (radio->priv->tree), column);
+        radio->priv->model = gtk_list_store_new (N_COLUMN,
+                                                 G_TYPE_STRING,
+                                                 G_TYPE_STRING);
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (radio->priv->model),
                                               0, GTK_SORT_ASCENDING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (radio->priv->radios),
-                                 GTK_TREE_MODEL (radio->priv->radios_model));
-        radio->priv->radios_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (radio->priv->radios));
-        gtk_tree_selection_set_mode (radio->priv->radios_selection,
+        gtk_tree_view_set_model (GTK_TREE_VIEW (radio->priv->tree),
+                                 GTK_TREE_MODEL (radio->priv->model));
+        radio->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (radio->priv->tree));
+        gtk_tree_selection_set_mode (radio->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_radios), radio->priv->radios);
+        gtk_container_add (GTK_CONTAINER (scrolledwindow_radios), radio->priv->tree);
 
-        gtk_drag_source_set (radio->priv->radios,
-                             GDK_BUTTON1_MASK,
-                             radios_targets,
-                             G_N_ELEMENTS (radios_targets),
-                             GDK_ACTION_COPY);
-
-        g_signal_connect (GTK_TREE_VIEW (radio->priv->radios),
+        g_signal_connect (GTK_TREE_VIEW (radio->priv->tree),
                           "drag_data_get",
                           G_CALLBACK (ario_radio_drag_data_get_cb), radio);
-
-        g_signal_connect (radio->priv->radios,
-                          "button_press_event",
-                          G_CALLBACK (ario_radio_button_press_cb),
-                          radio);
-        g_signal_connect (radio->priv->radios,
-                          "button_release_event",
-                          G_CALLBACK (ario_radio_button_release_cb),
-                          radio);
-        g_signal_connect (radio->priv->radios,
-                          "motion_notify_event",
-                          G_CALLBACK (ario_radio_motion_notify),
-                          radio);
+        g_signal_connect (GTK_TREE_VIEW (radio->priv->tree),
+                          "popup",
+                          G_CALLBACK (ario_radio_popup_menu_cb), radio);
+        g_signal_connect (GTK_TREE_VIEW (radio->priv->tree),
+                          "activate",
+                          G_CALLBACK (ario_radio_activate_cb), radio);
 
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (radio), TRUE);
@@ -480,8 +459,8 @@ ario_radio_append_radio (ArioRadio *radio,
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter radio_iter;
 
-        gtk_list_store_append (radio->priv->radios_model, &radio_iter);
-        gtk_list_store_set (radio->priv->radios_model, &radio_iter,
+        gtk_list_store_append (radio->priv->model, &radio_iter);
+        gtk_list_store_set (radio->priv->model, &radio_iter,
                             RADIO_NAME_COLUMN, internet_radio->name,
                             RADIO_URL_COLUMN, internet_radio->url,
                             -1);
@@ -496,12 +475,12 @@ ario_radio_fill_radios (ArioRadio *radio)
         GtkTreeIter radio_iter;
         GList* paths;
         GtkTreePath *path;
-        GtkTreeModel *models = GTK_TREE_MODEL (radio->priv->radios_model);
+        GtkTreeModel *models = GTK_TREE_MODEL (radio->priv->model);
         ArioInternetRadio *internet_radio;
 
-        paths = gtk_tree_selection_get_selected_rows (radio->priv->radios_selection, &models);
+        paths = gtk_tree_selection_get_selected_rows (radio->priv->selection, &models);
 
-        gtk_list_store_clear (radio->priv->radios_model);
+        gtk_list_store_clear (radio->priv->model);
 
         if (!radio->priv->connected)
                 return;
@@ -515,16 +494,16 @@ ario_radio_fill_radios (ArioRadio *radio)
         g_slist_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
         g_slist_free (radios);
 
-        gtk_tree_selection_unselect_all (radio->priv->radios_selection);
+        gtk_tree_selection_unselect_all (radio->priv->selection);
 
         if (paths) {
                 path = paths->data;
                 if (path) {
-                        gtk_tree_selection_select_path (radio->priv->radios_selection, path);
+                        gtk_tree_selection_select_path (radio->priv->selection, path);
                 }
         } else {
-                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (radio->priv->radios_model), &radio_iter))
-                        gtk_tree_selection_select_iter (radio->priv->radios_selection, &radio_iter);
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (radio->priv->model), &radio_iter))
+                        gtk_tree_selection_select_iter (radio->priv->selection, &radio_iter);
         }
 
         g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
@@ -581,7 +560,7 @@ ario_radio_add_in_playlist (ArioRadio *radio,
         ARIO_LOG_FUNCTION_START;
         GSList *radios = NULL;
 
-        gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
+        gtk_tree_selection_selected_foreach (radio->priv->selection,
                                              radios_foreach,
                                              &radios);
         ario_server_playlist_append_songs (radios, play);
@@ -616,12 +595,13 @@ ario_radio_cmd_clear_add_play_radios (GtkAction *action,
 }
 
 static void
-ario_radio_popup_menu (ArioRadio *radio)
+ario_radio_popup_menu_cb (ArioDndTree* tree,
+                          ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
-        if (gtk_tree_selection_count_selected_rows (radio->priv->radios_selection) == 1) {
+        if (gtk_tree_selection_count_selected_rows (radio->priv->selection) == 1) {
                 menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupSingle");
         } else {
                 menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupMultiple");
@@ -631,118 +611,12 @@ ario_radio_popup_menu (ArioRadio *radio)
                         gtk_get_current_event_time ());
 }
 
-static gboolean
-ario_radio_button_press_cb (GtkWidget *widget,
-                            GdkEventButton *event,
-                            ArioRadio *radio)
+static void
+ario_radio_activate_cb (ArioDndTree* tree,
+                        ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        GtkTreePath *path;
-        int x, y;
-        gboolean selected;
-
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
-                gtk_widget_grab_focus (widget);
-
-        if (radio->priv->dragging)
-                return FALSE;
-
-        if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
-                return FALSE;
-
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                ario_radio_add_in_playlist (radio, FALSE);
-                return FALSE;
-        }
-
-        if (event->button == 1) {
-                gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                radio->priv->drag_start_x = x;
-                radio->priv->drag_start_y = y;
-                radio->priv->pressed = TRUE;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        selected = gtk_tree_selection_path_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget)), path);
-                        gtk_tree_path_free (path);
-
-                        return selected;
-                }
-
-                return TRUE;
-        }
-
-        if (event->button == 3) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        if (!gtk_tree_selection_path_is_selected (selection, path)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        ario_radio_popup_menu (radio);
-                        gtk_tree_path_free (path);
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
-
-static gboolean
-ario_radio_button_release_cb (GtkWidget *widget,
-                              GdkEventButton *event,
-                              ArioRadio *radio)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (!radio->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                GtkTreePath *path;
-
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-
-                        if (gtk_tree_selection_path_is_selected (selection, path)
-                            && (gtk_tree_selection_count_selected_rows (selection) != 1)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        gtk_tree_path_free (path);
-                }
-        }
-
-        radio->priv->dragging = FALSE;
-        radio->priv->pressed = FALSE;
-
-        return FALSE;
-}
-
-static gboolean
-ario_radio_motion_notify (GtkWidget *widget,
-                          GdkEventMotion *event,
-                          ArioRadio *radio)
-{
-        // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        int x, y;
-        int dx, dy;
-
-        if ((radio->priv->dragging) || !(radio->priv->pressed))
-                return FALSE;
-
-        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-
-        dx = x - radio->priv->drag_start_x;
-        dy = y - radio->priv->drag_start_y;
-
-        if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
-                radio->priv->dragging = TRUE;
-
-        return FALSE;
+        ario_radio_add_in_playlist (radio, FALSE);
 }
 
 static void
@@ -780,7 +654,7 @@ ario_radio_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (selection_data != NULL);
 
         radios = g_string_new("");
-        gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
+        gtk_tree_selection_selected_foreach (radio->priv->selection,
                                              ario_radio_radios_selection_drag_foreach,
                                              radios);
 
@@ -982,7 +856,7 @@ ario_radio_cmd_delete_radios (GtkAction *action,
         if (retval != GTK_RESPONSE_YES)
                 return;
 
-        gtk_tree_selection_selected_foreach (radio->priv->radios_selection,
+        gtk_tree_selection_selected_foreach (radio->priv->selection,
                                              radios_foreach2,
                                              &internet_radios);
 
@@ -1062,10 +936,10 @@ ario_radio_cmd_radio_properties (GtkAction *action,
         GList* paths;
         GtkTreeIter iter;
         ArioInternetRadio *internet_radio;
-        GtkTreeModel *tree_model = GTK_TREE_MODEL (radio->priv->radios_model);
+        GtkTreeModel *tree_model = GTK_TREE_MODEL (radio->priv->model);
         GtkTreePath *path;
 
-        paths = gtk_tree_selection_get_selected_rows (radio->priv->radios_selection,
+        paths = gtk_tree_selection_get_selected_rows (radio->priv->selection,
                                                       &tree_model);
 
         path = g_list_first(paths)->data;
