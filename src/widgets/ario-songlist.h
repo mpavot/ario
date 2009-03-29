@@ -21,6 +21,8 @@
 #define __ARIO_SONGLIST_H
 
 #include <glib.h>
+#include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtkliststore.h>
 #include <gtk/gtktreeview.h>
 #include <gtk/gtkuimanager.h>
 
@@ -37,14 +39,14 @@ typedef struct ArioSonglistPrivate ArioSonglistPrivate;
 
 typedef struct
 {
-        GtkTreeView parent;
+        GtkScrolledWindow parent;
 
         ArioSonglistPrivate *priv;
 } ArioSonglist;
 
 typedef struct
 {
-        GtkTreeViewClass parent;
+        GtkScrolledWindowClass parent;
 } ArioSonglistClass;
 
 enum
@@ -62,6 +64,8 @@ GtkWidget*              ario_songlist_new                       (GtkUIManager *m
                                                                  gchar *popup,
                                                                  gboolean is_sortable);
 GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *songlist);
+
+GtkTreeSelection*       ario_songlist_get_selection             (ArioSonglist *songlist);
 
 void                    ario_songlist_cmd_add_songlists         (GtkAction *action,
                                                                  ArioSonglist *songlist);

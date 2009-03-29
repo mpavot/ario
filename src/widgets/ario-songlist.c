@@ -61,8 +61,9 @@ static void ario_songlist_drag_data_get_cb (GtkWidget * widget,
                                             guint info, guint time, gpointer data);
 struct ArioSonglistPrivate
 {
-        GtkListStore *songlists_model;
-        GtkTreeSelection *songlists_selection;
+        GtkTreeView* tree;
+        GtkListStore *model;
+        GtkTreeSelection *selection;
 
         gboolean dragging;
         gboolean pressed;
@@ -85,7 +86,7 @@ static const GtkTargetEntry songs_targets  [] = {
 };
 
 #define ARIO_SONGLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SONGLIST, ArioSonglistPrivate))
-G_DEFINE_TYPE (ArioSonglist, ario_songlist, GTK_TYPE_TREE_VIEW)
+G_DEFINE_TYPE (ArioSonglist, ario_songlist, GTK_TYPE_SCROLLED_WINDOW)
 
 static void
 ario_songlist_class_init (ArioSonglistClass *klass)
@@ -188,6 +189,11 @@ ario_songlist_new (GtkUIManager *mgr,
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
 
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (songlist), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (songlist), GTK_SHADOW_IN);
+
+        songlist->priv->tree = GTK_TREE_VIEW (gtk_tree_view_new ());
+
         /* Titles */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Title"),
@@ -201,7 +207,7 @@ ario_songlist_new (GtkUIManager *mgr,
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
                 gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
         }
-        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
+        gtk_tree_view_append_column (songlist->priv->tree, column);
 
         /* Artists */
         renderer = gtk_cell_renderer_text_new ();
@@ -216,7 +222,7 @@ ario_songlist_new (GtkUIManager *mgr,
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
                 gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
         }
-        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
+        gtk_tree_view_append_column (songlist->priv->tree, column);
 
         /* Albums */
         renderer = gtk_cell_renderer_text_new ();
@@ -231,44 +237,46 @@ ario_songlist_new (GtkUIManager *mgr,
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
                 gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
         }
-        gtk_tree_view_append_column (GTK_TREE_VIEW (songlist), column);
+        gtk_tree_view_append_column (songlist->priv->tree, column);
 
-        songlist->priv->songlists_model = gtk_list_store_new (SONGS_N_COLUMN,
+        songlist->priv->model = gtk_list_store_new (SONGS_N_COLUMN,
                                                               G_TYPE_STRING,
                                                               G_TYPE_STRING,
                                                               G_TYPE_STRING,
                                                               G_TYPE_STRING);
 
-        gtk_tree_view_set_model (GTK_TREE_VIEW (songlist),
-                                 GTK_TREE_MODEL (songlist->priv->songlists_model));
-        songlist->priv->songlists_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (songlist));
-        gtk_tree_selection_set_mode (songlist->priv->songlists_selection,
+        gtk_tree_view_set_model (songlist->priv->tree,
+                                 GTK_TREE_MODEL (songlist->priv->model));
+        songlist->priv->selection = gtk_tree_view_get_selection (songlist->priv->tree);
+        gtk_tree_selection_set_mode (songlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
 
-        gtk_drag_source_set (GTK_WIDGET (songlist),
+        gtk_drag_source_set (GTK_WIDGET (songlist->priv->tree),
                              GDK_BUTTON1_MASK,
                              songs_targets,
                              G_N_ELEMENTS (songs_targets),
                              GDK_ACTION_COPY);
 
-        g_signal_connect (GTK_TREE_VIEW (songlist),
+        g_signal_connect (songlist->priv->tree,
                           "drag_data_get",
                           G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
 
-        g_signal_connect (songlist,
+        g_signal_connect (songlist->priv->tree,
                           "button_press_event",
                           G_CALLBACK (ario_songlist_button_press_cb),
                           songlist);
-        g_signal_connect (songlist,
+        g_signal_connect (songlist->priv->tree,
                           "button_release_event",
                           G_CALLBACK (ario_songlist_button_release_cb),
                           songlist);
-        g_signal_connect (songlist,
+        g_signal_connect (songlist->priv->tree,
                           "motion_notify_event",
                           G_CALLBACK (ario_songlist_motion_notify_cb),
                           songlist);
 
         songlist->priv->popup = g_strdup (popup);
+
+        gtk_container_add (GTK_CONTAINER (songlist), GTK_WIDGET (songlist->priv->tree));
 
         return GTK_WIDGET (songlist);
 }
@@ -295,7 +303,7 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist,
         ARIO_LOG_FUNCTION_START;
         GSList *songlists = NULL;
 
-        gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
+        gtk_tree_selection_selected_foreach (songlist->priv->selection,
                                              songlists_foreach,
                                              &songlists);
         ario_server_playlist_append_songs (songlists, play);
@@ -337,7 +345,7 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
         GSList *paths = NULL;
         GtkWidget *songinfos;
 
-        gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
+        gtk_tree_selection_selected_foreach (songlist->priv->selection,
                                              songlists_foreach,
                                              &paths);
 
@@ -518,7 +526,7 @@ ario_songlist_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (selection_data != NULL);
 
         songlists = g_string_new("");
-        gtk_tree_selection_selected_foreach (songlist->priv->songlists_selection,
+        gtk_tree_selection_selected_foreach (songlist->priv->selection,
                                              ario_songlist_songlists_selection_drag_foreach,
                                              songlists);
 
@@ -532,5 +540,12 @@ GtkListStore *
 ario_songlist_get_liststore (ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
-        return songlist->priv->songlists_model;
+        return songlist->priv->model;
+}
+
+GtkTreeSelection *
+ario_songlist_get_selection (ArioSonglist *songlist)
+{
+        ARIO_LOG_FUNCTION_START;
+        return songlist->priv->selection;
 }

@@ -338,7 +338,6 @@ ario_storedplaylists_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START;
         ArioStoredplaylists *storedplaylists;
-        GtkWidget *scrolledwindow_songs;
         ArioServer *server = ario_server_get_instance ();
 
         storedplaylists = g_object_new (TYPE_ARIO_STOREDPLAYLISTS,
@@ -356,16 +355,10 @@ ario_storedplaylists_new (GtkUIManager *mgr,
                                  storedplaylists, 0);
 
         /* Songs list */
-        scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
-        gtk_widget_show (scrolledwindow_songs);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_SHADOW_IN);
         storedplaylists->priv->songs = ario_songlist_new (mgr,
                                                           "/StoredplaylistsSongsPopup",
                                                           FALSE);
-        gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_songs, TRUE, FALSE);
-
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), storedplaylists->priv->songs);
+        gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), storedplaylists->priv->songs, TRUE, FALSE);
 
         gtk_action_group_add_actions (group,
                                       ario_storedplaylists_actions,
@@ -454,8 +447,9 @@ ario_storedplaylists_playlists_selection_update (ArioStoredplaylists *storedplay
 {
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter song_iter;
-        GtkListStore *liststore = ario_songlist_get_liststore (ARIO_SONGLIST (storedplaylists->priv->songs));
-        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (storedplaylists->priv->songs));
+        ArioSonglist *songlist = ARIO_SONGLIST (storedplaylists->priv->songs);
+        GtkListStore *liststore = ario_songlist_get_liststore (songlist);
+        GtkTreeSelection *selection = ario_songlist_get_selection (songlist);
 
         gtk_list_store_clear (liststore);
 

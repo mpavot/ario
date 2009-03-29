@@ -282,7 +282,6 @@ ario_search_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START;
         ArioSearch *search;
-        GtkWidget *scrolledwindow_searchs;
 
         search = g_object_new (TYPE_ARIO_SEARCH,
                                "ui-manager", mgr,
@@ -296,17 +295,12 @@ ario_search_new (GtkUIManager *mgr,
                                  search, 0);
 
         /* Searchs list */
-        scrolledwindow_searchs = gtk_scrolled_window_new (NULL, NULL);
-        gtk_widget_show (scrolledwindow_searchs);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_searchs), GTK_SHADOW_IN);
         search->priv->searchs = ario_songlist_new (mgr,
                                                    "/SearchPopup",
                                                    TRUE);
 
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_searchs), search->priv->searchs);
         gtk_box_pack_start (GTK_BOX (search),
-                            scrolledwindow_searchs,
+                            search->priv->searchs,
                             TRUE, TRUE, 0);
 
         gtk_action_group_add_actions (group,

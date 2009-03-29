@@ -365,7 +365,6 @@ ario_filesystem_new (GtkUIManager *mgr,
 {
         ARIO_LOG_FUNCTION_START;
         ArioFilesystem *filesystem;
-        GtkWidget *scrolledwindow_songs;
         ArioServer *server = ario_server_get_instance ();
 
         filesystem = g_object_new (TYPE_ARIO_FILESYSTEM,
@@ -386,16 +385,10 @@ ario_filesystem_new (GtkUIManager *mgr,
                                  filesystem, 0);
 
         /* Songs list */
-        scrolledwindow_songs = gtk_scrolled_window_new (NULL, NULL);
-        gtk_widget_show (scrolledwindow_songs);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_songs), GTK_SHADOW_IN);
         filesystem->priv->songs = ario_songlist_new (mgr,
                                                      "/FilesystemSongsPopup",
                                                      FALSE);
-        gtk_paned_pack2 (GTK_PANED (filesystem->priv->paned), scrolledwindow_songs, TRUE, FALSE);
-
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_songs), filesystem->priv->songs);
+        gtk_paned_pack2 (GTK_PANED (filesystem->priv->paned), filesystem->priv->songs, TRUE, FALSE);
 
         gtk_action_group_add_actions (group,
                                       ario_filesystem_actions,
@@ -488,8 +481,9 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter, child, fake_child, song_iter;
         GtkTreeModel *model = GTK_TREE_MODEL (filesystem->priv->filesystem_model);
-        GtkListStore *liststore = ario_songlist_get_liststore (ARIO_SONGLIST (filesystem->priv->songs));
-        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (filesystem->priv->songs));
+        ArioSonglist *songlist = ARIO_SONGLIST (filesystem->priv->songs);
+        GtkListStore *liststore = ario_songlist_get_liststore (songlist);
+        GtkTreeSelection *selection = ario_songlist_get_selection (songlist);
         gchar *dir;
         gchar *title;
         GSList *tmp;
