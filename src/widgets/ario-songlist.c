@@ -23,11 +23,10 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "widgets/ario-playlist.h"
+#include "widgets/ario-dnd-tree.h"
 #include "shell/ario-shell-songinfos.h"
 #include "ario-util.h"
 #include "ario-debug.h"
-
-#define DRAG_THRESHOLD 1
 
 static void ario_songlist_finalize (GObject *object);
 static void ario_songlist_set_property (GObject *object,
@@ -40,16 +39,10 @@ static void ario_songlist_get_property (GObject *object,
                                         GParamSpec *pspec);
 static void ario_songlist_add_in_playlist (ArioSonglist *songlist,
                                            gboolean play);
-static void ario_songlist_popup_menu (ArioSonglist *songlist);
-static gboolean ario_songlist_button_press_cb (GtkWidget *widget,
-                                               GdkEventButton *event,
-                                               ArioSonglist *songlist);
-static gboolean ario_songlist_button_release_cb (GtkWidget *widget,
-                                                 GdkEventButton *event,
-                                                 ArioSonglist *songlist);
-static gboolean ario_songlist_motion_notify_cb (GtkWidget *widget,
-                                                GdkEventMotion *event,
-                                                ArioSonglist *songlist);
+static void ario_songlist_popup_menu_cb (ArioDndTree* tree,
+                                         ArioSonglist *songlist);
+static void ario_songlist_activate_cb (ArioDndTree* tree,
+                                       ArioSonglist *songlist);
 static void ario_songlist_songlists_selection_drag_foreach (GtkTreeModel *model,
                                                             GtkTreePath *path,
                                                             GtkTreeIter *iter,
@@ -64,11 +57,6 @@ struct ArioSonglistPrivate
         GtkTreeView* tree;
         GtkListStore *model;
         GtkTreeSelection *selection;
-
-        gboolean dragging;
-        gboolean pressed;
-        gint drag_start_x;
-        gint drag_start_y;
 
         GtkUIManager *ui_manager;
 
@@ -192,7 +180,9 @@ ario_songlist_new (GtkUIManager *mgr,
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (songlist), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (songlist), GTK_SHADOW_IN);
 
-        songlist->priv->tree = GTK_TREE_VIEW (gtk_tree_view_new ());
+        songlist->priv->tree = GTK_TREE_VIEW (ario_dnd_tree_new (songs_targets,
+                                                                 G_N_ELEMENTS (songs_targets),
+                                                                 FALSE));
 
         /* Titles */
         renderer = gtk_cell_renderer_text_new ();
@@ -240,10 +230,10 @@ ario_songlist_new (GtkUIManager *mgr,
         gtk_tree_view_append_column (songlist->priv->tree, column);
 
         songlist->priv->model = gtk_list_store_new (SONGS_N_COLUMN,
-                                                              G_TYPE_STRING,
-                                                              G_TYPE_STRING,
-                                                              G_TYPE_STRING,
-                                                              G_TYPE_STRING);
+                                                    G_TYPE_STRING,
+                                                    G_TYPE_STRING,
+                                                    G_TYPE_STRING,
+                                                    G_TYPE_STRING);
 
         gtk_tree_view_set_model (songlist->priv->tree,
                                  GTK_TREE_MODEL (songlist->priv->model));
@@ -261,18 +251,12 @@ ario_songlist_new (GtkUIManager *mgr,
                           "drag_data_get",
                           G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
 
-        g_signal_connect (songlist->priv->tree,
-                          "button_press_event",
-                          G_CALLBACK (ario_songlist_button_press_cb),
-                          songlist);
-        g_signal_connect (songlist->priv->tree,
-                          "button_release_event",
-                          G_CALLBACK (ario_songlist_button_release_cb),
-                          songlist);
-        g_signal_connect (songlist->priv->tree,
-                          "motion_notify_event",
-                          G_CALLBACK (ario_songlist_motion_notify_cb),
-                          songlist);
+        g_signal_connect (GTK_TREE_VIEW (songlist->priv->tree),
+                          "popup",
+                          G_CALLBACK (ario_songlist_popup_menu_cb), songlist);
+        g_signal_connect (GTK_TREE_VIEW (songlist->priv->tree),
+                          "activate",
+                          G_CALLBACK (ario_songlist_activate_cb), songlist);
 
         songlist->priv->popup = g_strdup (popup);
 
@@ -360,7 +344,8 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
 }
 
 static void
-ario_songlist_popup_menu (ArioSonglist *songlist)
+ario_songlist_popup_menu_cb (ArioDndTree* tree,
+                             ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
@@ -373,122 +358,12 @@ ario_songlist_popup_menu (ArioSonglist *songlist)
         }
 }
 
-static gboolean
-ario_songlist_button_press_cb (GtkWidget *widget,
-                               GdkEventButton *event,
-                               ArioSonglist *songlist)
+static void
+ario_songlist_activate_cb (ArioDndTree* tree,
+                           ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        GtkTreePath *path;
-        int x, y, bx, by;
-        gboolean selected;
-
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
-                gtk_widget_grab_focus (widget);
-
-        if (songlist->priv->dragging)
-                return FALSE;
-
-        if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
-                return FALSE;
-
-        if (event->button == 1) {
-                gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
-
-                if (bx >= 0 && by >= 0) {
-                        if (event->type == GDK_2BUTTON_PRESS) {
-                                ario_songlist_add_in_playlist (songlist, FALSE);
-                                return FALSE;
-                        }
-
-                        songlist->priv->drag_start_x = x;
-                        songlist->priv->drag_start_y = y;
-                        songlist->priv->pressed = TRUE;
-
-                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                        if (path) {
-                                selected = gtk_tree_selection_path_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget)), path);
-                                gtk_tree_path_free (path);
-
-                                return selected;
-                        }
-
-                        return TRUE;
-                } else {
-                        return FALSE;
-                }
-        }
-
-        if (event->button == 3) {
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                        if (!gtk_tree_selection_path_is_selected (selection, path)) {
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                        }
-                        ario_songlist_popup_menu (songlist);
-                        gtk_tree_path_free (path);
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
-
-static gboolean
-ario_songlist_button_release_cb (GtkWidget *widget,
-                                 GdkEventButton *event,
-                                 ArioSonglist *songlist)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (!songlist->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                int bx, by;
-                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), event->x, event->y, &bx, &by);
-                if (bx >= 0 && by >= 0) {
-                        GtkTreePath *path;
-
-                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                        if (path) {
-                                GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-                                gtk_tree_selection_unselect_all (selection);
-                                gtk_tree_selection_select_path (selection, path);
-                                gtk_tree_path_free (path);
-                        }
-                }
-        }
-
-        songlist->priv->dragging = FALSE;
-        songlist->priv->pressed = FALSE;
-
-        return FALSE;
-}
-
-static gboolean
-ario_songlist_motion_notify_cb (GtkWidget *widget,
-                                GdkEventMotion *event,
-                                ArioSonglist *songlist)
-{
-        // desactivated to make the logs more readable
-        // ARIO_LOG_FUNCTION_START;
-        GdkModifierType mods;
-        int x, y;
-        int dx, dy;
-
-        if ((songlist->priv->dragging) || !(songlist->priv->pressed))
-                return FALSE;
-
-        gdk_window_get_pointer (widget->window, &x, &y, &mods);
-
-        dx = x - songlist->priv->drag_start_x;
-        dy = y - songlist->priv->drag_start_y;
-
-        if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
-                songlist->priv->dragging = TRUE;
-
-        return FALSE;
+        ario_songlist_add_in_playlist (songlist, FALSE);
 }
 
 static void

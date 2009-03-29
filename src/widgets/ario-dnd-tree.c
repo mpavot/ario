@@ -137,7 +137,7 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
         GdkModifierType mods;
         GtkTreePath *path;
-        int x, y;
+        int x, y, bx, by;
         gboolean selected;
 
         if (!GTK_WIDGET_HAS_FOCUS (widget))
@@ -156,19 +156,27 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
 
         if (event->button == 1) {
                 gdk_window_get_pointer (widget->window, &x, &y, &mods);
-                dnd_tree->priv->drag_start_x = x;
-                dnd_tree->priv->drag_start_y = y;
-                dnd_tree->priv->pressed = TRUE;
+                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
 
                 if (dnd_tree->priv->browse_mode)
                         return FALSE;
 
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        selected = gtk_tree_selection_path_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget)), path);
-                        gtk_tree_path_free (path);
+                if (bx >= 0 && by >= 0) {
+                        dnd_tree->priv->drag_start_x = x;
+                        dnd_tree->priv->drag_start_y = y;
+                        dnd_tree->priv->pressed = TRUE;
 
-                        return selected;
+                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
+                        if (path) {
+                                selected = gtk_tree_selection_path_is_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget)), path);
+                                gtk_tree_path_free (path);
+
+                                return selected;
+                        }
+
+                        return TRUE;
+                } else {
+                        return FALSE;
                 }
 
                 return TRUE;
@@ -198,18 +206,18 @@ ario_dnd_tree_button_release_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         if (!dnd_tree->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
-                GtkTreePath *path;
+                int bx, by;
+                gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), event->x, event->y, &bx, &by);
+                if (bx >= 0 && by >= 0) {
+                        GtkTreePath *path;
 
-                gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
-                if (path) {
-                        GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-
-                        if (gtk_tree_selection_path_is_selected (selection, path)
-                            && (gtk_tree_selection_count_selected_rows (selection) != 1)) {
+                        gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
+                        if (path) {
+                                GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                                 gtk_tree_selection_unselect_all (selection);
                                 gtk_tree_selection_select_path (selection, path);
+                                gtk_tree_path_free (path);
                         }
-                        gtk_tree_path_free (path);
                 }
         }
 
