@@ -492,7 +492,7 @@ ario_radio_fill_radios (ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *radios;
-        GSList *temp;
+        GSList *tmp;
         GtkTreeIter radio_iter;
         GList* paths;
         GtkTreePath *path;
@@ -508,8 +508,8 @@ ario_radio_fill_radios (ArioRadio *radio)
 
         radios = ario_radio_get_radios (radio);
 
-        for (temp = radios; temp; temp = g_slist_next (temp)) {
-                internet_radio = (ArioInternetRadio *) temp->data;
+        for (tmp = radios; tmp; tmp = g_slist_next (tmp)) {
+                internet_radio = (ArioInternetRadio *) tmp->data;
                 ario_radio_append_radio (radio, internet_radio);
         }
         g_slist_foreach (radios, (GFunc) ario_radio_free_internet_radio, NULL);
@@ -813,21 +813,19 @@ ario_radio_add_new_radio (ArioRadio *radio,
         ario_radio_append_radio (radio, internet_radio);
 }
 
-static void
-ario_radio_cmd_new_radio (GtkAction *action,
-                          ArioRadio *radio)
+static gboolean
+ario_radio_launch_dialog (const gchar *title,
+                          ArioInternetRadio *internet_radio,
+                          ArioInternetRadio *new_internet_radio)
 {
-        ARIO_LOG_FUNCTION_START;
-
         GtkWidget *dialog, *error_dialog;
         GtkWidget *table;
         GtkWidget *label1, *label2;
         GtkWidget *entry1, *entry2;
         gint retval = GTK_RESPONSE_CANCEL;
-        ArioInternetRadio internet_radio;
 
         /* Create the widgets */
-        dialog = gtk_dialog_new_with_buttons (_("Add a WebRadio"),
+        dialog = gtk_dialog_new_with_buttons (title,
                                               NULL,
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
                                               GTK_STOCK_CANCEL,
@@ -842,9 +840,13 @@ ario_radio_cmd_new_radio (GtkAction *action,
 
         entry1 = gtk_entry_new ();
         entry2 = gtk_entry_new ();
+
+        if (internet_radio) {
+                gtk_entry_set_text (GTK_ENTRY (entry1), internet_radio->name);
+                gtk_entry_set_text (GTK_ENTRY (entry2), internet_radio->url);
+        }
         gtk_entry_set_activates_default (GTK_ENTRY (entry1), TRUE);
         gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
-
         table = gtk_table_new (2, 2 , FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (table), 12);
 
@@ -878,16 +880,16 @@ ario_radio_cmd_new_radio (GtkAction *action,
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
         if (retval != GTK_RESPONSE_OK) {
                 gtk_widget_destroy (dialog);
-                return;
+                return FALSE;
         }
 
-        internet_radio.name = (char *) gtk_entry_get_text(GTK_ENTRY(entry1));
-        internet_radio.url = (char *) gtk_entry_get_text(GTK_ENTRY(entry2));
+        new_internet_radio->name = g_strdup (gtk_entry_get_text (GTK_ENTRY(entry1)));
+        new_internet_radio->url = g_strdup (gtk_entry_get_text (GTK_ENTRY(entry2)));
 
-        if (!internet_radio.name
-            || !internet_radio.url
-            || !strcmp(internet_radio.name, "")
-            || !strcmp(internet_radio.url, "")) {
+        if (!new_internet_radio->name
+            || !new_internet_radio->url
+            || !strcmp(new_internet_radio->name, "")
+            || !strcmp(new_internet_radio->url, "")) {
                 error_dialog = gtk_message_dialog_new(NULL,
                                                       GTK_DIALOG_MODAL,
                                                       GTK_MESSAGE_ERROR,
@@ -896,13 +898,32 @@ ario_radio_cmd_new_radio (GtkAction *action,
                 gtk_dialog_run(GTK_DIALOG(error_dialog));
                 gtk_widget_destroy(error_dialog);
                 gtk_widget_destroy(dialog);
-                return;
+                return FALSE;
         }
 
-        ario_radio_add_new_radio(radio,
-                                 &internet_radio);
-
         gtk_widget_destroy (dialog);
+
+        return TRUE;
+}
+
+static void
+ario_radio_cmd_new_radio (GtkAction *action,
+                          ArioRadio *radio)
+{
+        ARIO_LOG_FUNCTION_START;
+        ArioInternetRadio new_internet_radio;
+
+        new_internet_radio.name = NULL;
+        new_internet_radio.url = NULL;
+
+        if (ario_radio_launch_dialog (_("Add a WebRadio"),
+                                      NULL,
+                                      &new_internet_radio)) {
+                ario_radio_add_new_radio(radio,
+                                         &new_internet_radio);
+        }
+        g_free (new_internet_radio.name);
+        g_free (new_internet_radio.url);
 }
 
 static void
@@ -1017,93 +1038,20 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
                                   ArioInternetRadio *internet_radio)
 {
         ARIO_LOG_FUNCTION_START;
-
-        GtkWidget *dialog, *error_dialog;
-        GtkWidget *table;
-        GtkWidget *label1, *label2;
-        GtkWidget *entry1, *entry2;
-        gint retval = GTK_RESPONSE_CANCEL;
         ArioInternetRadio new_internet_radio;
 
-        /* Create the widgets */
-        dialog = gtk_dialog_new_with_buttons (_("Edit a WebRadio"),
-                                              NULL,
-                                              GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              GTK_STOCK_CANCEL,
-                                              GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OK,
-                                              GTK_RESPONSE_OK,
-                                              NULL);
-        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
-                                         GTK_RESPONSE_OK);
-        label1 = gtk_label_new (_("Name :"));
-        label2 = gtk_label_new (_("URL :"));
+        new_internet_radio.name = NULL;
+        new_internet_radio.url = NULL;
 
-        entry1 = gtk_entry_new ();
-        entry2 = gtk_entry_new ();
-        gtk_entry_set_text (GTK_ENTRY (entry1), internet_radio->name);
-        gtk_entry_set_text (GTK_ENTRY (entry2), internet_radio->url);
-        gtk_entry_set_activates_default (GTK_ENTRY (entry1), TRUE);
-        gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
-        table = gtk_table_new (2, 2 , FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
-
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   label1,
-                                   0, 1,
-                                   0, 1);
-
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   label2,
-                                   0, 1,
-                                   1, 2);
-
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   entry1,
-                                   1, 2,
-                                   0, 1);
-
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   entry2,
-                                   1, 2,
-                                   1, 2);
-
-        gtk_table_set_col_spacing (GTK_TABLE(table),
-                                   0, 4);
-
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
-                           table);
-        gtk_widget_show_all (dialog);
-
-        retval = gtk_dialog_run (GTK_DIALOG(dialog));
-        if (retval != GTK_RESPONSE_OK) {
-                gtk_widget_destroy (dialog);
-                return;
+        if (ario_radio_launch_dialog (_("Edit a WebRadio"),
+                                      internet_radio,
+                                      &new_internet_radio)) {
+                ario_radio_modify_radio (radio,
+                                         internet_radio,
+                                         &new_internet_radio);
         }
-
-        new_internet_radio.name = (char *) gtk_entry_get_text(GTK_ENTRY(entry1));
-        new_internet_radio.url = (char *) gtk_entry_get_text(GTK_ENTRY(entry2));
-
-        if (!new_internet_radio.name
-            || !new_internet_radio.url
-            || !strcmp(new_internet_radio.name, "")
-            || !strcmp(new_internet_radio.url, "")) {
-                error_dialog = gtk_message_dialog_new(NULL,
-                                                      GTK_DIALOG_MODAL,
-                                                      GTK_MESSAGE_ERROR,
-                                                      GTK_BUTTONS_OK,
-                                                      _("Bad parameters. You must specify a name and a URL for the radio."));
-                gtk_dialog_run(GTK_DIALOG(error_dialog));
-                gtk_widget_destroy(error_dialog);
-                gtk_widget_destroy(dialog);
-                return;
-        }
-
-        ario_radio_modify_radio(radio,
-                                internet_radio,
-                                &new_internet_radio);
-
-        gtk_widget_destroy (dialog);
+        g_free (new_internet_radio.name);
+        g_free (new_internet_radio.url);
 }
 
 static void
