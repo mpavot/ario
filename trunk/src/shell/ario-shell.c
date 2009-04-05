@@ -339,8 +339,11 @@ ario_shell_quit (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Stop music on exit if needed */
         if (ario_conf_get_boolean (PREF_STOP_EXIT, PREF_STOP_EXIT_DEFAULT))
                 ario_server_do_stop ();
+
+        /* Stop main loop */
         gtk_main_quit ();
 }
 
@@ -557,10 +560,13 @@ ario_shell_shutdown (ArioShell *shell)
         ARIO_LOG_FUNCTION_START;
         int width, height;
 
+        /* If the main window is visible, we save a few preferences */
         if (shell->priv->shown) {
+                /* Save vpaned position */
                 ario_conf_set_integer (PREF_VPANED_POSITION,
                                        gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
 
+                /* Save window size */
                 if (!ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT)) {
                         gtk_window_get_size (GTK_WINDOW (shell->priv->window),
                                              &width,
@@ -569,15 +575,22 @@ ario_shell_shutdown (ArioShell *shell)
                         ario_conf_set_integer (PREF_WINDOW_WIDTH, width);
                         ario_conf_set_integer (PREF_WINDOW_HEIGHT, height);
                 }
-
-                ario_playlist_shutdown ();
-                ario_sourcemanager_shutdown ();
-
-                ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
-                ario_lyrics_manager_shutdown (ario_lyrics_manager_get_instance ());
-
-                ario_server_shutdown ();
         }
+
+        /* Shutdown the playlist */
+        ario_playlist_shutdown ();
+
+        /* Shutdown the source manager */
+        ario_sourcemanager_shutdown ();
+
+        /* Shutdown the cover_manager */
+        ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
+
+        /* Shutdown the lyrics_manager */
+        ario_lyrics_manager_shutdown (ario_lyrics_manager_get_instance ());
+
+        /* Shutdown the server object */
+        ario_server_shutdown ();
 }
 
 static void
@@ -587,6 +600,7 @@ ario_shell_show (ArioShell *shell,
         ARIO_LOG_FUNCTION_START;
         ArioServer *server = ario_server_get_instance ();
 
+        /* Connect signals for server state changes */
         g_signal_connect (server,
                           "state_changed",
                           G_CALLBACK (ario_shell_server_state_changed_cb),
@@ -597,24 +611,31 @@ ario_shell_show (ArioShell *shell,
                           G_CALLBACK (ario_shell_server_song_changed_cb),
                           shell);
 
+        /* Autoconnect on startup if needed */
         if (ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT))
                 ario_server_connect ();
 
+        /* Synchonize the main window with server state */
         ario_shell_sync_server (shell);
 
+        /* Minimize window if needed */
         if (minimized) {
                 ario_shell_set_visibility (shell, VISIBILITY_HIDDEN);
         } else {
                 gtk_widget_show_all (shell->priv->window);
                 shell->priv->shown = TRUE;
         }
+
+        /* Connect signal for window state changes */
         g_signal_connect (shell->priv->window,
                           "window-state-event",
                           G_CALLBACK (ario_shell_window_state_cb),
                           shell);
 
+        /* Synchronize vpaned with preferences */
         ario_shell_sync_paned (shell);
 
+        /* Update server db on startup if needed */
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
                 ario_server_update_db ();
 }
@@ -642,6 +663,7 @@ ario_shell_set_visibility (ArioShell *shell,
                 shell->priv->visible = !shell->priv->visible;
 
                 if (shell->priv->visible == TRUE) {
+                        /* Restore window state, size and position */
                         if (shell->priv->window_x >= 0 && shell->priv->window_y >= 0) {
                                 gtk_window_move (GTK_WINDOW (shell->priv->window),
                                                  shell->priv->window_x,
@@ -658,6 +680,7 @@ ario_shell_set_visibility (ArioShell *shell,
                                 gtk_window_maximize (GTK_WINDOW (shell->priv->window));
                         gtk_widget_show (shell->priv->window);
                 } else {
+                        /* Save window state, size and position */
                         shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
                         gtk_window_get_position (GTK_WINDOW (shell->priv->window),
                                                  &shell->priv->window_x,
@@ -701,6 +724,7 @@ ario_shell_cmd_preferences (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *prefs;
 
+        /* Create preferences dialog window */
         prefs = ario_shell_preferences_new ();
 
         gtk_window_set_transient_for (GTK_WINDOW (prefs),
@@ -716,6 +740,7 @@ ario_shell_cmd_lyrics (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *lyrics;
 
+        /* Create lyrics dialog window */
         lyrics = ario_shell_lyrics_new ();
         if (lyrics)
                 gtk_widget_show_all (lyrics);
@@ -726,6 +751,8 @@ ario_shell_cmd_about (GtkAction *action,
                       ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
+
+        /* Create about dialog window */
         const char *authors[] = {
 #include "AUTHORS.tab"
                 "",
@@ -748,7 +775,7 @@ ario_shell_cmd_about (GtkAction *action,
                                "logo", logo_pixbuf,
                                NULL);
         if (logo_pixbuf)
-                g_object_unref(logo_pixbuf);
+                g_object_unref (logo_pixbuf);
 }
 
 static void
@@ -756,6 +783,7 @@ ario_shell_cmd_translate (GtkAction *action,
                           ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Load launchpad translation page */
         const gchar *uri = "https://translations.launchpad.net/ario/trunk/";
         ario_util_load_uri (uri);
 }
@@ -770,12 +798,14 @@ ario_shell_server_song_set_title (ArioShell *shell)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
+                /* Window title containing song name */
                 tmp = ario_util_format_title (ario_server_get_current_song ());
                 window_title = g_strdup_printf ("Ario - %s", tmp);
                 gtk_window_set_title (GTK_WINDOW (shell->priv->window), window_title);
                 g_free (window_title);
                 break;
         default:
+                /* Default window title */
                 gtk_window_set_title (GTK_WINDOW (shell->priv->window), "Ario");
                 break;
         }
@@ -786,6 +816,7 @@ ario_shell_server_song_changed_cb (ArioServer *server,
                                    ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Change window title on song change */
         ario_shell_server_song_set_title (shell);
 }
 
@@ -796,7 +827,10 @@ ario_shell_server_state_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START;
         shell->priv->connected = ario_server_is_connected ();
 
+        /* Synchronize main window with server state */
         ario_shell_sync_server (shell);
+
+        /* Change window title on song change */
         ario_shell_server_song_set_title (shell);
 }
 
@@ -808,6 +842,7 @@ ario_shell_cmd_cover_select (GtkAction *action,
         GtkWidget *coverselect;
         ArioServerAlbum server_album;
 
+        /* Launch cover selection dialog for current album */
         server_album.artist = ario_server_get_current_artist ();
         server_album.album = ario_server_get_current_album ();
         server_album.path = g_path_get_dirname ((ario_server_get_current_song ())->file);
@@ -831,6 +866,7 @@ ario_shell_cmd_covers (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *coverdownloader;
 
+        /* Launch cover art download dialog */
         coverdownloader = ario_shell_coverdownloader_new ();
 
         if (coverdownloader) {
@@ -846,6 +882,7 @@ ario_shell_cmd_similar_artists (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *similarartists;
 
+        /* Launch similar artist dialog */
         similarartists = ario_shell_similarartists_new ();
         if (similarartists)
                 gtk_widget_show_all (similarartists);
@@ -857,6 +894,7 @@ ario_shell_cmd_add_similar (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Add similar artists (from last.fm) to current playlist */
         ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (), -1);
 }
 
@@ -866,6 +904,7 @@ ario_shell_sync_paned (ArioShell *shell)
         ARIO_LOG_FUNCTION_START;
         int pos;
 
+        /* Set vpaned position */
         pos = ario_conf_get_integer (PREF_VPANED_POSITION, PREF_VPANED_POSITION_DEFAULT);
         if (pos > 0)
                 gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
@@ -883,11 +922,13 @@ ario_shell_window_state_cb (GtkWidget *widget,
 
         if ((event->type == GDK_WINDOW_STATE)
             && !(event->window_state.new_window_state & GDK_WINDOW_STATE_WITHDRAWN)) {
+                /* Save window maximization state */
                 ario_conf_set_boolean (PREF_WINDOW_MAXIMIZED,
                                        event->window_state.new_window_state &
                                        GDK_WINDOW_STATE_MAXIMIZED);
 
                 if (event->window_state.changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
+                        /* save previous window size on maximization */
                         gtk_window_get_size (GTK_WINDOW (shell->priv->window),
                                              &width,
                                              &height);
@@ -904,20 +945,17 @@ static void
 ario_shell_sync_window_state (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
-        GdkGeometry hints;
         int width = ario_conf_get_integer (PREF_WINDOW_WIDTH, PREF_WINDOW_WIDTH_DEFAULT);
         int height = ario_conf_get_integer (PREF_WINDOW_HEIGHT, PREF_WINDOW_HEIGHT_DEFAULT);
         gboolean maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
 
+        /* Set main window size */
         gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
                                      width, height);
         gtk_window_resize (GTK_WINDOW (shell->priv->window),
                            width, height);
-        gtk_window_set_geometry_hints (GTK_WINDOW (shell->priv->window),
-                                       NULL,
-                                       &hints,
-                                       0);
 
+        /* Maximize main window if needed */
         if (maximized)
                 gtk_window_maximize (GTK_WINDOW (shell->priv->window));
         else
