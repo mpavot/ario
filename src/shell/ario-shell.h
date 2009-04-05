@@ -20,10 +20,15 @@
 #ifndef __ARIO_SHELL_H
 #define __ARIO_SHELL_H
 
-#include <glib-object.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtkwindow.h>
 
 G_BEGIN_DECLS
+
+/**
+ * ArioShell represents the main window of Ario.
+ * It is also in charge of starting the different services at startup
+ * and of stoping them on exit
+ */
 
 #define ARIO_TYPE_SHELL         (ario_shell_get_type ())
 #define ARIO_SHELL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), ARIO_TYPE_SHELL, ArioShell))
@@ -36,14 +41,14 @@ typedef struct ArioShellPrivate ArioShellPrivate;
 
 typedef struct
 {
-        GObject parent;
+        GtkWindow parent;
 
         ArioShellPrivate *priv;
 } ArioShell;
 
 typedef struct
 {
-        GObjectClass parent_class;
+        GtkWindowClass parent_class;
 } ArioShellClass;
 
 /* Main Window visibility */

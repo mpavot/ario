@@ -107,8 +107,6 @@ static void ario_shell_sync_playlist_visibility (ArioShell *shell);
 
 struct ArioShellPrivate
 {
-        GtkWidget *window;
-
         ArioCoverHandler *cover_handler;
         ArioPlaylistManager *playlist_manager;
         ArioNotificationManager *notification_manager;
@@ -205,7 +203,7 @@ static GtkToggleActionEntry shell_toggle [] =
 };
 
 #define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SHELL, ArioShellPrivate))
-G_DEFINE_TYPE (ArioShell, ario_shell, G_TYPE_OBJECT)
+G_DEFINE_TYPE (ArioShell, ario_shell, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_class_init (ArioShellClass *klass)
@@ -260,9 +258,8 @@ ario_shell_finalize (GObject *object)
         ARIO_LOG_FUNCTION_START;
         ArioShell *shell = ARIO_SHELL (object);
 
-        gtk_widget_hide (shell->priv->window);
+        gtk_widget_hide (GTK_WIDGET(shell));
 
-        gtk_widget_destroy (shell->priv->window);
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->playlist_manager);
         g_object_unref (shell->priv->notification_manager);
@@ -375,17 +372,16 @@ ario_shell_construct (ArioShell *shell,
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
-        /* Create the main window */
-        shell->priv->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_title (GTK_WINDOW (shell->priv->window), "Ario");
-        gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
+        /* Set main window properties */
+        gtk_window_set_title (GTK_WINDOW (shell), "Ario");
+        gtk_window_set_position (GTK_WINDOW (shell), GTK_WIN_POS_CENTER);
 
         /* Create program icon */
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
         gtk_window_set_default_icon (pixbuf);
 
         /* Connect window destruction signal to exit program */
-        g_signal_connect (shell->priv->window,
+        g_signal_connect (shell,
                           "delete_event",
                           G_CALLBACK (ario_shell_window_delete_cb),
                           shell);
@@ -397,7 +393,7 @@ ario_shell_construct (ArioShell *shell,
 
         /* Create Action Group */
         shell->priv->actiongroup = gtk_action_group_new ("MainActions");
-        gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
+        gtk_window_add_accel_group (GTK_WINDOW (shell),
                                     gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
         gtk_action_group_set_translation_domain (shell->priv->actiongroup,
                                                  GETTEXT_PACKAGE);
@@ -530,7 +526,7 @@ ario_shell_construct (ArioShell *shell,
         ario_shell_sync_window_state (shell);
 
         /* Add vbox to main window */
-        gtk_container_add (GTK_CONTAINER (shell->priv->window), vbox);
+        gtk_container_add (GTK_CONTAINER (shell), vbox);
 
         /* First launch assistant */
         if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {
@@ -568,7 +564,7 @@ ario_shell_shutdown (ArioShell *shell)
 
                 /* Save window size */
                 if (!ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT)) {
-                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                        gtk_window_get_size (GTK_WINDOW (shell),
                                              &width,
                                              &height);
 
@@ -622,15 +618,16 @@ ario_shell_show (ArioShell *shell,
         if (minimized) {
                 ario_shell_set_visibility (shell, VISIBILITY_HIDDEN);
         } else {
-                gtk_widget_show_all (shell->priv->window);
+                gtk_widget_show_all (GTK_WIDGET(shell));
                 shell->priv->shown = TRUE;
         }
 
         /* Connect signal for window state changes */
-        g_signal_connect (shell->priv->window,
-                          "window-state-event",
-                          G_CALLBACK (ario_shell_window_state_cb),
-                          shell);
+        g_signal_connect_object (shell,
+                                 "window-state-event",
+                                 G_CALLBACK (ario_shell_window_state_cb),
+                                 shell,
+                                 G_CONNECT_AFTER);
 
         /* Synchronize vpaned with preferences */
         ario_shell_sync_paned (shell);
@@ -644,7 +641,7 @@ void
 ario_shell_present (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
-        gtk_window_present (GTK_WINDOW (shell->priv->window));
+        gtk_window_present (GTK_WINDOW (shell));
 }
 
 void
@@ -665,30 +662,30 @@ ario_shell_set_visibility (ArioShell *shell,
                 if (shell->priv->visible == TRUE) {
                         /* Restore window state, size and position */
                         if (shell->priv->window_x >= 0 && shell->priv->window_y >= 0) {
-                                gtk_window_move (GTK_WINDOW (shell->priv->window),
+                                gtk_window_move (GTK_WINDOW (shell),
                                                  shell->priv->window_x,
                                                  shell->priv->window_y);
                         }
                         if (!shell->priv->maximized
                             && (shell->priv->window_w >= 0 && shell->priv->window_y >=0)) {
-                                gtk_window_resize (GTK_WINDOW (shell->priv->window),
+                                gtk_window_resize (GTK_WINDOW (shell),
                                                    shell->priv->window_w,
                                                    shell->priv->window_h);
                         }
 
                         if (shell->priv->maximized)
-                                gtk_window_maximize (GTK_WINDOW (shell->priv->window));
-                        gtk_widget_show (shell->priv->window);
+                                gtk_window_maximize (GTK_WINDOW (shell));
+                        gtk_widget_show (GTK_WIDGET(shell));
                 } else {
                         /* Save window state, size and position */
                         shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
-                        gtk_window_get_position (GTK_WINDOW (shell->priv->window),
+                        gtk_window_get_position (GTK_WINDOW (shell),
                                                  &shell->priv->window_x,
                                                  &shell->priv->window_y);
-                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                        gtk_window_get_size (GTK_WINDOW (shell),
                                              &shell->priv->window_w,
                                              &shell->priv->window_h);
-                        gtk_widget_hide (shell->priv->window);
+                        gtk_widget_hide (GTK_WIDGET(shell));
                 }
         }
 }
@@ -728,7 +725,7 @@ ario_shell_cmd_preferences (GtkAction *action,
         prefs = ario_shell_preferences_new ();
 
         gtk_window_set_transient_for (GTK_WINDOW (prefs),
-                                      GTK_WINDOW (shell->priv->window));
+                                      GTK_WINDOW (shell));
 
         gtk_widget_show_all (prefs);
 }
@@ -763,7 +760,7 @@ ario_shell_cmd_about (GtkAction *action,
                 NULL
         };
         GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "logo.png", NULL);
-        gtk_show_about_dialog (GTK_WINDOW (shell->priv->window),
+        gtk_show_about_dialog (GTK_WINDOW (shell),
                                "name", "Ario",
                                "program-name", "Ario",
                                "version", PACKAGE_VERSION,
@@ -801,12 +798,12 @@ ario_shell_server_song_set_title (ArioShell *shell)
                 /* Window title containing song name */
                 tmp = ario_util_format_title (ario_server_get_current_song ());
                 window_title = g_strdup_printf ("Ario - %s", tmp);
-                gtk_window_set_title (GTK_WINDOW (shell->priv->window), window_title);
+                gtk_window_set_title (GTK_WINDOW (shell), window_title);
                 g_free (window_title);
                 break;
         default:
                 /* Default window title */
-                gtk_window_set_title (GTK_WINDOW (shell->priv->window), "Ario");
+                gtk_window_set_title (GTK_WINDOW (shell), "Ario");
                 break;
         }
 }
@@ -929,7 +926,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
 
                 if (event->window_state.changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
                         /* Save previous window size on maximization */
-                        gtk_window_get_size (GTK_WINDOW (shell->priv->window),
+                        gtk_window_get_size (GTK_WINDOW (shell),
                                              &width,
                                              &height);
 
@@ -950,16 +947,16 @@ ario_shell_sync_window_state (ArioShell *shell)
         gboolean maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
 
         /* Set main window size */
-        gtk_window_set_default_size (GTK_WINDOW (shell->priv->window),
+        gtk_window_set_default_size (GTK_WINDOW (shell),
                                      width, height);
-        gtk_window_resize (GTK_WINDOW (shell->priv->window),
+        gtk_window_resize (GTK_WINDOW (shell),
                            width, height);
 
         /* Maximize main window if needed */
         if (maximized)
-                gtk_window_maximize (GTK_WINDOW (shell->priv->window));
+                gtk_window_maximize (GTK_WINDOW (shell));
         else
-                gtk_window_unmaximize (GTK_WINDOW (shell->priv->window));
+                gtk_window_unmaximize (GTK_WINDOW (shell));
 }
 
 static void
@@ -1110,7 +1107,7 @@ ario_shell_cmd_plugins (GtkAction *action,
 
         /* Create plugins configuration dialog window */
         window = gtk_dialog_new_with_buttons (_("Configure Plugins"),
-                                              GTK_WINDOW (shell->priv->window),
+                                              GTK_WINDOW (shell),
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
                                               GTK_STOCK_CLOSE,
                                               GTK_RESPONSE_CLOSE,
