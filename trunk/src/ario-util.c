@@ -27,15 +27,17 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <glib/gi18n.h>
-#include "lib/ario-conf.h"
-#include "ario-debug.h"
-#include "covers/ario-cover.h"
-#include "preferences/ario-preferences.h"
 #include <gcrypt.h>
 #ifdef WIN32
 #include <windows.h>
 #endif
 
+#include "ario-debug.h"
+#include "covers/ario-cover.h"
+#include "lib/ario-conf.h"
+#include "preferences/ario-preferences.h"
+
+/* Maximum number of covers to put in drag and drop icon */
 #define MAX_COVERS_IN_DRAG 3
 
 char *
@@ -90,17 +92,22 @@ ario_util_format_total_time (const int time)
         if (time < 0)
                 return g_strdup_printf (_("n/a"));
 
+        /* Compute number of days */
         days = (int)(time / 86400);
         temp_time = (time % 86400);
 
+        /* Compute number of hours */
         hours = (int)(temp_time / 3600);
         temp_time = (temp_time % 3600);
 
+        /* Compute number of minutes */
         min = (int)(temp_time / 60);
+
+        /* Compute number of seconds */
         sec = (temp_time % 60);
 
+        /* Format result string */
         res = g_strdup_printf ("%d %s", sec, _("seconds"));
-
         if (min != 0) {
                 tmp = g_strdup_printf ("%d %s, %s", min, _("minutes"), res);
                 g_free (res);
@@ -137,7 +144,7 @@ ario_util_format_track_buf (const gchar *track,
         }
 
         /* Some tracks are x/y, we only want to display x */
-        slash = g_strrstr (track, "/"); 
+        slash = g_strrstr (track, "/");
         if (slash) {
                 g_snprintf (tmp, ario_util_min (INTLEN, slash - track + 1), "%s", track);
                 g_snprintf (buf, buf_len, "%02i", atoi (tmp));
@@ -166,7 +173,7 @@ ario_util_format_title (ArioServerSong *server_song)
                 if (!g_ascii_strncasecmp (server_song->file, "http://", 7)) {
                         res = server_song->file;
                 } else {
-                        slash = g_strrstr (server_song->file, "/"); 
+                        slash = g_strrstr (server_song->file, "/");
                         if (slash) {
                                 dot = g_strrstr (slash + 1, ".");
                                 if (dot)
@@ -249,7 +256,7 @@ ario_util_config_dir (void)
 
 gboolean
 ario_util_uri_exists (const char *uri)
-{        
+{
         g_return_val_if_fail (uri != NULL, FALSE);
 
         return ario_file_test (uri, G_FILE_TEST_EXISTS);
@@ -290,6 +297,7 @@ ario_util_copy_file (const char *src_uri,
         gchar *contents;
         gsize length;
 
+        /* Get file content */
         if (! ario_file_get_contents (src_uri,
                                       &contents,
                                       &length,
@@ -297,6 +305,7 @@ ario_util_copy_file (const char *src_uri,
                 return;
         }
 
+        /* Write file content */
         ario_file_set_contents (dest_uri,
                                 contents,
                                 length,
@@ -307,8 +316,9 @@ ario_util_copy_file (const char *src_uri,
 typedef struct _download_struct{
         char *data;
         int size;
-}download_struct;
+} download_struct;
 
+/* Limit downloaded file to 5MB */
 #define MAX_SIZE 5*1024*1024
 
 static size_t
@@ -318,22 +328,26 @@ ario_util_write_data(void *buffer,
                      download_struct *download_data)
 {
         ARIO_LOG_FUNCTION_START;
-        if(!size || !nmemb)
+
+        if (!size || !nmemb)
                 return 0;
-        if(download_data->data == NULL)
-        {
+
+        if (download_data->data == NULL)
                 download_data->size = 0;
-        }
-        download_data->data = g_realloc(download_data->data,(gulong)(size*nmemb+download_data->size)+1);
 
-        memset(&(download_data->data)[download_data->size], '\0', (size*nmemb)+1);
-        memcpy(&(download_data->data)[download_data->size], buffer, size*nmemb);
+        /* Increase buffer size if needed */
+        download_data->data = g_realloc (download_data->data,
+                                         (gulong)(size*nmemb+download_data->size) + 1);
 
+        /* Append received data to buffer */
+        memset (&(download_data->data)[download_data->size], '\0', (size*nmemb)+1);
+        memcpy (&(download_data->data)[download_data->size], buffer, size*nmemb);
+
+        /* Increase size */
         download_data->size += size*nmemb;
-        if(download_data->size >= MAX_SIZE)
-        {
+        if (download_data->size >= MAX_SIZE)
                 return 0;
-        }
+
         return size*nmemb;
 }
 
@@ -351,8 +365,9 @@ ario_util_download_file (const char *uri,
         const gchar* address;
         int port;
 
+        /* Initialize curl */
         CURL* curl = curl_easy_init ();
-        if(!curl)
+        if (!curl)
                 return;
 
         *size = 0;
@@ -388,7 +403,7 @@ ario_util_download_file (const char *uri,
 
         /* Handles data for POST requests */
         if (post_data) {
-                curl_easy_setopt (curl, CURLOPT_POST, TRUE); 
+                curl_easy_setopt (curl, CURLOPT_POST, TRUE);
                 curl_easy_setopt (curl, CURLOPT_POSTFIELDS, post_data);
                 curl_easy_setopt (curl, CURLOPT_POSTFIELDSIZE, post_size);
         }
@@ -416,21 +431,25 @@ ario_util_string_replace (char **string,
         GString *str;
         int i;
 
+        /* Check if old is present in string */
         if (!g_strstr_len (*string, -1, old))
                 return;
 
+        /* Split string around 'old' */
         strsplit = g_strsplit (*string, old, 0);
 
         if (!strsplit)
                 return;
-                
+
         if (!strsplit[0]) {
                 g_strfreev (strsplit);
                 return;
         }
 
+        /* Create a new string */
         str = g_string_new (strsplit[0]);
 
+        /* Append splited parts to the new string */
         for (i = 1; strsplit[i] && g_utf8_collate (strsplit[i], ""); ++i) {
                 g_string_append (str, new);
                 g_string_append (str, strsplit[i]);
@@ -452,7 +471,7 @@ ario_util_load_uri (const char *uri)
         gchar *command = g_strdup_printf ("x-www-browser %s", uri);
         g_spawn_command_line_async (command, NULL);
         g_free (command);
-#endif                
+#endif
 }
 
 char *
@@ -487,7 +506,7 @@ ario_util_format_keyword (const char *keyword)
         tmp = (char *) g_malloc0 (length);
 
         j = 0;
-        for(i = 0; ret[i]; ++i) {
+        for (i = 0; ret[i]; ++i) {
                 if (g_unichar_isalnum (ret[i]) ||
                     (g_unichar_isspace (ret[i]) &&  j > 0 && !g_unichar_isspace (tmp[j-1]))) {
                         tmp[j] = ret[i];
@@ -511,10 +530,8 @@ ario_util_md5 (const char *string)
 {
         ARIO_LOG_FUNCTION_START;
         guchar md5pword[16];
-        gchar md5_response[33];
+        gchar md5_response[33] = {0};
         int j;
-
-        memset (md5_response, 0, sizeof (md5_response));
 
         gcry_md_hash_buffer (GCRY_MD_MD5, md5pword, string, strlen (string));
 
@@ -542,16 +559,23 @@ ario_util_get_dnd_pixbuf_from_cover_paths (GSList *covers)
         gdouble scale;
 
         if (len == 0) {
+                /* No cover means no icon */
                 pixbuf = NULL;
         } else if (len == 1) {
+                /* Only one cover, the icon is made of this cover */
                 pixbuf = gdk_pixbuf_new_from_file_at_size (covers->data, DRAG_SIZE, DRAG_SIZE, NULL);
         } else {
+                /* Several covers */
+
+                /* Compute scale */
                 scale = (1 - DRAG_COVER_STEP*(len-1));
 
+                /* Create empyt pixbuf */
                 pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, DRAG_SIZE, DRAG_SIZE);
                 gdk_pixbuf_fill (pixbuf, 0);
 
                 for (tmp = covers; tmp; tmp = g_slist_next (tmp)) {
+                        /* Integrate cover in pixbuf */
                         cover = gdk_pixbuf_new_from_file_at_size (tmp->data, (int) (scale*DRAG_SIZE), (int) (scale*DRAG_SIZE), NULL);
                         if (!cover)
                                 continue;
@@ -585,6 +609,7 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
         if (!albums)
                 return NULL;
 
+        /* Get cover of each album */
         for (tmp = albums; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
                 ario_server_album = tmp->data;
 
@@ -597,6 +622,7 @@ ario_util_get_dnd_pixbuf_from_albums (const GSList *albums)
                 }
         }
 
+        /* Get the icon from covers */
         pixbuf = ario_util_get_dnd_pixbuf_from_cover_paths (covers);
 
         g_slist_foreach (covers, (GFunc) g_free, NULL);
@@ -621,11 +647,14 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
         if (!criterias)
                 return NULL;
 
+        /* Get covers from criterias */
         for (tmp = criterias; tmp && len < MAX_COVERS_IN_DRAG; tmp = g_slist_next (tmp)) {
                 criteria = tmp->data;
 
+                /* Get albums from criteria */
                 albums = ario_server_get_albums (criteria);
 
+                /* Get covers of albums */
                 for (album_tmp = albums; album_tmp && len < MAX_COVERS_IN_DRAG; album_tmp = g_slist_next (album_tmp)) {
                         server_album = album_tmp->data;
                         cover_path = ario_cover_make_cover_path (server_album->artist, server_album->album, SMALL_COVER);
@@ -640,6 +669,7 @@ ario_util_get_dnd_pixbuf (const GSList *criterias)
                 g_slist_free (albums);
         }
 
+        /* Get the icon from covers */
         pixbuf = ario_util_get_dnd_pixbuf_from_cover_paths (covers);
 
         g_slist_foreach (covers, (GFunc) g_free, NULL);
@@ -681,8 +711,10 @@ ario_file_get_contents (const gchar *filename, gchar **contents,
 {
         ARIO_LOG_FUNCTION_START;
         gboolean ret;
-        gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
+        gchar *filename_fse;
 
+        /* Convert filename to locale */
+        filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
         if (!filename_fse) {
                 if (error)
                         *error = g_error_new (G_FILE_ERROR, G_FILE_ERROR_NOENT,
@@ -690,9 +722,11 @@ ario_file_get_contents (const gchar *filename, gchar **contents,
                 return FALSE;
         }
 
+        /* Get file content */
         ret = g_file_get_contents (filename_fse, contents, length, error);
 
         g_free (filename_fse);
+
         return ret;
 }
 
@@ -702,8 +736,10 @@ ario_file_set_contents (const gchar *filename, const gchar *contents,
 {
         ARIO_LOG_FUNCTION_START;
         gboolean ret;
-        gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
+        gchar *filename_fse;
 
+        /* Convert filename to locale */
+        filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
         if (!filename_fse) {
                 if (error)
                         *error = g_error_new (G_FILE_ERROR, G_FILE_ERROR_FAILED,
@@ -711,9 +747,11 @@ ario_file_set_contents (const gchar *filename, const gchar *contents,
                 return FALSE;
         }
 
+        /* Set file content */
         ret = g_file_set_contents (filename_fse, contents, length, error);
 
         g_free (filename_fse);
+
         return ret;
 }
 
@@ -722,13 +760,18 @@ ario_file_test (const gchar *filename, GFileTest test)
 {
         ARIO_LOG_FUNCTION_START;
         gboolean ret;
-        gchar *filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
+        gchar *filename_fse;
+
+        /* Convert filename to locale */
+        filename_fse = g_filename_from_utf8 (filename, -1, NULL, NULL, NULL);
         if (!filename_fse)
                 return FALSE;
 
+        /* Test file */
         ret = g_file_test (filename_fse, test);
 
         g_free (filename_fse);
+
         return ret;
 }
 
@@ -737,9 +780,9 @@ ario_util_stristr (const char *haystack,
                    const char *needle)
 {
         ARIO_LOG_FUNCTION_START;
-        if (!*needle) {
+
+        if (!needle || !*needle)
                 return haystack;
-        }
 
         for (; *haystack; ++haystack) {
                 if (toupper(*haystack) == toupper(*needle)) {
@@ -755,7 +798,8 @@ ario_util_stristr (const char *haystack,
                         }
                         /* matched all of 'needle' to null termination */
                         if (!*n) {
-                                return haystack; /* return the start of the match */
+                                /* return the start of the match */
+                                return haystack;
                         }
                 }
         }
@@ -763,20 +807,25 @@ ario_util_stristr (const char *haystack,
 }
 
 GSList *
-ario_util_gslist_randomize (GSList **a,
+ario_util_gslist_randomize (GSList **list,
                             const int max)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *ret = NULL, *tmp;
         int i = 0;
-        int len = g_slist_length (*a);
+        int len = g_slist_length (*list);
 
         for (i = 0; i < max; ++i) {
                 if (len <= 0)
                         break;
 
-                tmp = g_slist_nth (*a, rand()%len);
-                *a = g_slist_remove_link (*a, tmp);
+                /* Get a random element in list */
+                tmp = g_slist_nth (*list, rand()%len);
+
+                /* Remove the element from list */
+                *list = g_slist_remove_link (*list, tmp);
+
+                /* Append the element to the new list */
                 ret = g_slist_concat (ret, tmp);
                 len--;
         }
