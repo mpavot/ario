@@ -38,6 +38,7 @@ gtk_builder_helpers_boldify_label (GtkBuilder *builder,
                                    const char *name)
 {
         GObject *object;
+        static PangoAttrList *pattrlist = NULL;
 
         object = gtk_builder_get_object (builder, name);
 
@@ -45,11 +46,6 @@ gtk_builder_helpers_boldify_label (GtkBuilder *builder,
                 g_warning ("object '%s' not found", name);
                 return;
         }
-
-        /* this way is probably better, but for some reason doesn't work with
-         * labels with mnemonics.*/
-
-        static PangoAttrList *pattrlist = NULL;
 
         if (pattrlist == NULL) {
                 PangoAttribute *attr;
@@ -61,11 +57,4 @@ gtk_builder_helpers_boldify_label (GtkBuilder *builder,
                 pango_attr_list_insert (pattrlist, attr);
         }
         gtk_label_set_attributes (GTK_LABEL (object), pattrlist);
-
-        /*
-           gchar *str_final;
-           str_final = g_strdup_printf ("<b>%s</b>", gtk_label_get_label (GTK_LABEL (object)));
-           gtk_label_set_markup_with_mnemonic (GTK_LABEL (object), str_final);
-           g_free (str_final);
-           */
 }
