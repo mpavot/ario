@@ -25,6 +25,10 @@
 
 G_BEGIN_DECLS
 
+/* ArioAvahi objects look on the network for MPD servers using avahi
+ * and can be used to retrieved the list of available MPD servers
+ */
+
 #define TYPE_ARIO_AVAHI         (ario_avahi_get_type ())
 #define ARIO_AVAHI(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_AVAHI, ArioAvahi))
 #define ARIO_AVAHI_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), TYPE_ARIO_AVAHI, ArioAvahiClass))
@@ -59,7 +63,7 @@ GType           ario_avahi_get_type     (void) G_GNUC_CONST;
 
 ArioAvahi *     ario_avahi_new          (void);
 
-GSList *         ario_avahi_get_hosts    (ArioAvahi *avahi);
+GSList *        ario_avahi_get_hosts    (ArioAvahi *avahi);
 
 G_END_DECLS
 

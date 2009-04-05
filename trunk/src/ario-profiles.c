@@ -32,7 +32,6 @@
 static void ario_profiles_create_xml_file (char *xml_filename);
 static char* ario_profiles_get_xml_filename (void);
 
-
 static void
 ario_profiles_create_xml_file (char *xml_filename)
 {
@@ -48,6 +47,7 @@ ario_profiles_create_xml_file (char *xml_filename)
         if (!ario_util_uri_exists (profiles_dir))
                 ario_util_mkdir (profiles_dir);
 
+        /* Copy the default file */
         ario_util_copy_file (DATA_PATH "profiles.xml.default",
                              xml_filename);
 }
@@ -104,6 +104,7 @@ ario_profiles_get (void)
         /* This option is necessary to save a well formated xml file */
         xmlKeepBlanksDefault (0);
 
+        /* Parse the XML file */
         doc = xmlParseFile (xml_filename);
         g_free (xml_filename);
         if (doc == NULL )
@@ -122,34 +123,40 @@ ario_profiles_get (void)
         }
 
         for (cur = cur->children; cur; cur = cur->next) {
-                /* For each "profiles" entry */
+                /* For each "profile" entry */
                 if (!xmlStrcmp (cur->name, (const xmlChar *)"profile")){
                         profile = (ArioProfile *) g_malloc0 (sizeof (ArioProfile));
 
+                        /* Get profile name */
                         xml_name = xmlNodeGetContent (cur);
                         profile->name = g_strdup ((char *) xml_name);
                         xmlFree(xml_name);
 
+                        /* Get host */
                         xml_host = xmlGetProp (cur, (const unsigned char *)"host");
                         profile->host = g_strdup ((char *) xml_host);
                         xmlFree(xml_host);
 
+                        /* Get port */
                         xml_port = xmlGetProp (cur, (const unsigned char *)"port");
                         profile->port = atoi ((char *) xml_port);
                         xmlFree(xml_port);
 
+                        /* Get password */
                         xml_password = xmlGetProp (cur, (const unsigned char *)"password");
                         if (xml_password) {
                                 profile->password = g_strdup ((char *) xml_password);
                                 xmlFree(xml_password);
                         }
 
+                        /* Get music directory */
                         xml_musicdir = xmlGetProp (cur, (const unsigned char *)"musicdir");
                         if (xml_musicdir) {
                                 profile->musicdir = g_strdup ((char *) xml_musicdir);
                                 xmlFree(xml_musicdir);
                         }
 
+                        /* Get 'local' boolean */
                         xml_local = xmlGetProp (cur, (const unsigned char *)"local");
                         if (xml_local) {
                                 profile->local = TRUE;
@@ -158,6 +165,7 @@ ario_profiles_get (void)
                                 profile->local = FALSE;
                         }
 
+                        /* Get 'current' boolean */
                         xml_current = xmlGetProp (cur, (const unsigned char *)"current");
                         if (xml_current) {
                                 profile->current = TRUE;
@@ -166,6 +174,7 @@ ario_profiles_get (void)
                                 profile->current = FALSE;
                         }
 
+                        /* Get server type */
                         xml_type = xmlGetProp (cur, (const unsigned char *)"type");
                         if (xml_type) {
                                 profile->type = atoi ((char *) xml_type);
@@ -176,6 +185,7 @@ ario_profiles_get (void)
                                 profile->type = ArioServerMpd;
                         }
 
+                        /* Append the profile to the list of profiles */
                         profiles = g_slist_append (profiles, profile);
                 }
         }

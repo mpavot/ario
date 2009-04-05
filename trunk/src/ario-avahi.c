@@ -90,8 +90,10 @@ ario_avahi_class_init (ArioAvahiClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = (GObjectClass *) klass;
 
+        /* Virtual methods */
         object_class->finalize = ario_avahi_finalize;
 
+        /* Signals */
         ario_avahi_signals[HOSTS_CHANGED] =
                 g_signal_new ("hosts_changed",
                               G_OBJECT_CLASS_TYPE (object_class),
@@ -102,11 +104,12 @@ ario_avahi_class_init (ArioAvahiClass *klass)
                               G_TYPE_NONE,
                               0);
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioAvahiPrivate));
 }
 
 static void
-ario_avahi_init (ArioAvahi *avahi) 
+ario_avahi_init (ArioAvahi *avahi)
 {
         ARIO_LOG_FUNCTION_START;
         int error;
@@ -129,6 +132,7 @@ ario_avahi_init (ArioAvahi *avahi)
                 return;
         }
 
+        /* Allocate a browser */
         avahi->priv->browser = avahi_service_browser_new (avahi->priv->client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC,
                                                           SERVICE_TYPE, DOMAIN, 0, ario_avahi_browse_callback, avahi);
         if (!avahi->priv->browser) {
@@ -177,6 +181,9 @@ ario_avahi_new (void)
         return avahi;
 }
 
+/**
+ * Returns a list of local IP address
+ */
 static GSList *
 ario_avahi_get_local_addr ()
 {
@@ -190,7 +197,7 @@ ario_avahi_get_local_addr ()
         }
 
         for (ifa = ifp; ifa; ifa = ifa->ifa_next) {
-                if(!ifa->ifa_addr)
+                if (!ifa->ifa_addr)
                         continue;
 
                 if (ifa->ifa_addr->sa_family == AF_INET)
@@ -203,6 +210,7 @@ ario_avahi_get_local_addr ()
                 if (getnameinfo (ifa->ifa_addr, salen, ip, sizeof (ip), NULL, 0, NI_NUMERICHOST) < 0) {
                         continue;
                 }
+                /* Add the address to the list */
                 addrs = g_slist_append (addrs, g_strdup (ip));
         }
 
@@ -240,11 +248,10 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                                          AVAHI_GCC_UNUSED void *userdata)
 {
         ARIO_LOG_FUNCTION_START;
-        assert(r);
+        g_return_if_fail (r);
         ArioAvahi *avahi = ARIO_AVAHI (userdata);
 
         /* Called whenever a service has been resolved successfully or timed out */
-
         switch (event) {
         case AVAHI_RESOLVER_FAILURE:
                 ARIO_LOG_ERROR ("(Resolver) Failed to resolve service '%s' of type '%s' in domain '%s': %s",
@@ -253,17 +260,18 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
 
         case AVAHI_RESOLVER_FOUND:
                 {
-                        char a[AVAHI_ADDRESS_STR_MAX];
+                        /* Create a new ArioHost with host info */
+                        char addr[AVAHI_ADDRESS_STR_MAX];
                         ArioHost *host;
 
-                        avahi_address_snprint(a, sizeof(a), address);
+                        avahi_address_snprint(addr, sizeof(addr), address);
 
                         host = (ArioHost *) g_malloc (sizeof (ArioHost));
                         host->name = g_strdup (name);
-                        if (ario_avahi_is_local_addr (a))
-                                host->host = g_strdup ("localhost");                                
+                        if (ario_avahi_is_local_addr (addr))
+                                host->host = g_strdup ("localhost");
                         else
-                                host->host = g_strdup (a);
+                                host->host = g_strdup (addr);
                         host->port = port;
 
                         avahi->priv->hosts = g_slist_append (avahi->priv->hosts, host);
@@ -301,7 +309,7 @@ static void ario_avahi_browse_callback (AvahiServiceBrowser *b,
                                         void *userdata)
 {
         ARIO_LOG_FUNCTION_START;
-        assert(b);
+        g_return_if_fail (b);
         ArioAvahi *avahi = ARIO_AVAHI (userdata);
 
         /* Called whenever a new services becomes available on the LAN or is removed from the LAN */
@@ -339,7 +347,7 @@ static void ario_avahi_client_callback (AvahiClient *c,
                                         AVAHI_GCC_UNUSED void *userdata)
 {
         ARIO_LOG_FUNCTION_START;
-        assert(c);
+        g_return_if_fail (c);
 
         /* Called whenever the client or server state changes */
 

@@ -23,17 +23,21 @@
 #include <config.h>
 #include <stdio.h>
 
+/* Macro used to log an error */
 #define ARIO_LOG_ERROR(x,args...) {printf("[ERROR](%s:%d) %s : " x "\n", __FILE__, __LINE__, __FUNCTION__, ##args);}
+
+/* Macro used to log an information */
 #define ARIO_LOG_INFO(x,args...) {printf("[info]" x "\n", ##args);}
 
 #ifdef DEBUG
+/* Macro used to log a debug information */
 #define ARIO_LOG_DBG(x,args...) {printf("[debug](%s:%d) %s : " x "\n", __FILE__, __LINE__, __FUNCTION__, ##args);}
+/* Macro used to log the start of a function */
 #define ARIO_LOG_FUNCTION_START      ARIO_LOG_DBG("Function start")
-#define ARIO_LOG_FUNCTION_END        ARIO_LOG_DBG("Function end")
 #else
+/* If DEBUG is not activated we don't log debug info */
 #define ARIO_LOG_DBG(x,args...)
 #define ARIO_LOG_FUNCTION_START
-#define ARIO_LOG_FUNCTION_END
 #endif
 
 #endif /* __ARIO_DEBUG_H */
