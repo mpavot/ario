@@ -129,7 +129,6 @@ main (int argc, char *argv[])
 
         /* Shutdown main window */
         ario_shell_shutdown (shell);
-
         g_object_unref (G_OBJECT (shell));
 
         /* Shutdown plugins engine */

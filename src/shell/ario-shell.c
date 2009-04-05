@@ -18,32 +18,34 @@
  */
 
 #include "shell/ario-shell.h"
+
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <config.h>
 #include <string.h>
-#include "lib/ario-conf.h"
 #include <glib/gi18n.h>
-#include "sources/ario-source-manager.h"
-#include "servers/ario-server.h"
-#include "covers/ario-cover-handler.h"
-#include "covers/ario-cover-manager.h"
-#include "lyrics/ario-lyrics-manager.h"
-#include "widgets/ario-playlist.h"
-#include "widgets/ario-header.h"
-#include "widgets/ario-status-bar.h"
-#include "notification/ario-notification-manager.h"
-#include "playlist/ario-playlist-manager.h"
-#include "preferences/ario-preferences.h"
-#include "shell/ario-shell-preferences.h"
-#include "shell/ario-shell-lyrics.h"
-#include "shell/ario-shell-similarartists.h"
-#include "shell/ario-shell-coverdownloader.h"
-#include "shell/ario-shell-coverselect.h"
+
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "covers/ario-cover-handler.h"
+#include "covers/ario-cover-manager.h"
+#include "lib/ario-conf.h"
+#include "lyrics/ario-lyrics-manager.h"
+#include "notification/ario-notification-manager.h"
+#include "playlist/ario-playlist-manager.h"
 #include "plugins/ario-plugin-manager.h"
+#include "preferences/ario-preferences.h"
+#include "servers/ario-server.h"
+#include "shell/ario-shell-coverdownloader.h"
+#include "shell/ario-shell-coverselect.h"
+#include "shell/ario-shell-lyrics.h"
+#include "shell/ario-shell-preferences.h"
+#include "shell/ario-shell-similarartists.h"
+#include "sources/ario-source-manager.h"
 #include "widgets/ario-firstlaunch.h"
+#include "widgets/ario-header.h"
+#include "widgets/ario-playlist.h"
+#include "widgets/ario-status-bar.h"
 #include "widgets/ario-tray-icon.h"
 
 static void ario_shell_finalize (GObject *object);
@@ -211,10 +213,12 @@ ario_shell_class_init (ArioShellClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = (GObjectClass *) klass;
 
+        /* Virtual methods */
         object_class->set_property = ario_shell_set_property;
         object_class->get_property = ario_shell_get_property;
         object_class->finalize = ario_shell_finalize;
 
+        /* Properties */
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -230,6 +234,7 @@ ario_shell_class_init (ArioShellClass *klass)
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioShellPrivate));
 }
 
@@ -326,7 +331,7 @@ ario_shell_new (void)
 
         shell = g_object_new (ARIO_TYPE_SHELL, NULL);
 
-        return g_object_new (ARIO_TYPE_SHELL, NULL);
+        return shell;
 }
 
 static void
@@ -367,85 +372,128 @@ ario_shell_construct (ArioShell *shell,
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
 
-        /* initialize UI */
+        /* Create the main window */
         shell->priv->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
         gtk_window_set_title (GTK_WINDOW (shell->priv->window), "Ario");
+        gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
+
+        /* Create program icon */
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
         gtk_window_set_default_icon (pixbuf);
 
+        /* Connect window destruction signal to exit program */
         g_signal_connect (shell->priv->window,
                           "delete_event",
                           G_CALLBACK (ario_shell_window_delete_cb),
                           shell);
 
+        /* Initialize UI */
         shell->priv->ui_manager = gtk_ui_manager_new ();
-        shell->priv->actiongroup = gtk_action_group_new ("MainActions");
-
         gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
                                          UI_PATH "ario-ui.xml", NULL);
+
+        /* Create Action Group */
+        shell->priv->actiongroup = gtk_action_group_new ("MainActions");
         gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window),
                                     gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
-
         gtk_action_group_set_translation_domain (shell->priv->actiongroup,
                                                  GETTEXT_PACKAGE);
+        gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
+                                            shell->priv->actiongroup, 0);
 #ifdef WIN32
+        /* This seems to be needed on win32 */
         gtk_action_group_set_translate_func (shell->priv->actiongroup,
                                              (GtkTranslateFunc) gettext,
                                              NULL, NULL);
 #endif
+        /* Main window actions */
         gtk_action_group_add_actions (shell->priv->actiongroup,
                                       shell_actions, G_N_ELEMENTS (shell_actions),
                                       shell);
-
         gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
                                              shell_toggle, G_N_ELEMENTS (shell_toggle),
                                              shell);
-        gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
-                                            shell->priv->actiongroup, 0);
 
-        /* initialize shell services */
-        vbox = gtk_vbox_new (FALSE, 0);
-
+        /* Initialize server object (MPD, XMMS, ....) */
         ario_server_get_instance ();
-        shell->priv->cover_handler = ario_cover_handler_new ();
-        shell->priv->header = ario_header_new ();
-        separator = gtk_hseparator_new ();
-        shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);
-        shell->priv->sourcemanager = ario_sourcemanager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
 
-        /* initialize tray icon */
+        /* Initialize cover art handler */
+        shell->priv->cover_handler = ario_cover_handler_new ();
+
+        /* Initialize tray icon */
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
                                                      shell);
+        /* Egg tray icon can be hidden*/
 #ifdef ENABLE_EGGTRAYICON
         gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
         if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
                 gtk_widget_hide (GTK_WIDGET (shell->priv->tray_icon));
 #endif
+        /* Initialize playlist manager */
         shell->priv->playlist_manager = ario_playlist_manager_get_instance ();
+
+        /* Initialize notification manager */
         shell->priv->notification_manager = ario_notification_manager_get_instance ();
+
+        /* Add widgets to main window.
+         * Structure is:
+         * vbox
+         * ---menubar
+         * ---header
+         * ---separator
+         * ---vpaned
+         * ------sourcemanager
+         * ------playlist
+         * ---status_bar
+         */
+
+        /* Create main vbox */
+        vbox = gtk_vbox_new (FALSE, 0);
+
+        /* Create header */
+        shell->priv->header = ario_header_new ();
+
+        /* Create separator */
+        separator = gtk_hseparator_new ();
+
+        /* Create playlist */
+        shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);
+
+        /* Create source manager */
+        shell->priv->sourcemanager = ario_sourcemanager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
+
+        /* Create vpaned (separation between upper part and plyalist) */
         shell->priv->vpaned = gtk_vpaned_new ();
+
+        /* Create status bar */
         shell->priv->status_bar = ario_status_bar_new ();
+
+        /* Synchronize status bar checkbox in menu with preferences */
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewStatusbar");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       !shell->priv->statusbar_hidden);
 
+        /* Synchronize upper part checkbox in menu with preferences */
         shell->priv->upperpart_hidden = ario_conf_get_boolean (PREF_UPPERPART_HIDDEN, PREF_UPPERPART_HIDDEN_DEFAULT);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewUpperPart");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       !shell->priv->upperpart_hidden);
 
+        /* Synchronize playlist checkbox in menu with preferences */
         shell->priv->playlist_hidden = ario_conf_get_boolean (PREF_PLAYLIST_HIDDEN, PREF_PLAYLIST_HIDDEN_DEFAULT);
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewPlaylist");
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       !shell->priv->playlist_hidden);
 
+        /* Create main window menu */
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
 
+        /* Add widgets to vpaned */
         gtk_paned_pack1 (GTK_PANED (shell->priv->vpaned),
                          shell->priv->sourcemanager,
                          FALSE, FALSE);
@@ -454,6 +502,7 @@ ario_shell_construct (ArioShell *shell,
                          shell->priv->playlist,
                          TRUE, FALSE);
 
+        /* Add widgets to vbox */
         gtk_box_pack_start (GTK_BOX (vbox),
                             menubar,
                             FALSE, FALSE, 0);
@@ -474,9 +523,10 @@ ario_shell_construct (ArioShell *shell,
                             shell->priv->status_bar,
                             FALSE, FALSE, 0);
 
+        /* Synchronize main window state with preferences */
         ario_shell_sync_window_state (shell);
-        gtk_window_set_position (GTK_WINDOW (shell->priv->window), GTK_WIN_POS_CENTER);
 
+        /* Add vbox to main window */
         gtk_container_add (GTK_CONTAINER (shell->priv->window), vbox);
 
         /* First launch assistant */
@@ -491,8 +541,13 @@ ario_shell_construct (ArioShell *shell,
                 ario_shell_show (shell, minimized);
         }
 
+        /* Synchronize status bar visibility with preferences */
         ario_shell_sync_statusbar_visibility (shell);
+
+        /* Synchronize upper part visibility with preferences */
         ario_shell_sync_upperpart_visibility (shell);
+
+        /* Synchronize playlist visibility with preferences */
         ario_shell_sync_playlist_visibility (shell);
 }
 

@@ -46,12 +46,13 @@ typedef struct
         GObjectClass parent_class;
 } ArioShellClass;
 
+/* Main Window visibility */
 typedef enum
 {
         VISIBILITY_HIDDEN,
         VISIBILITY_VISIBLE,
         VISIBILITY_TOGGLE
-}ArioVisibility;
+} ArioVisibility;
 
 GType           ario_shell_get_type             (void) G_GNUC_CONST;
 

@@ -313,7 +313,7 @@ ario_tray_icon_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_tray_icon_get_property (GObject *object,
                              guint prop_id,
                              GValue *value,
@@ -606,17 +606,6 @@ ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
 #ifdef ENABLE_EGGTRAYICON
         sexy_tooltip_position_to_widget (SEXY_TOOLTIP (icon->priv->tooltip),
                                          icon->priv->ebox);
-#else
-/*
-        GdkRectangle rect;
-        GdkScreen *screen;
-        gtk_status_icon_get_geometry (GTK_STATUS_ICON (icon),
-                                      &screen,
-                                      &rect,
-                                      NULL);
-
-        sexy_tooltip_position_to_rect (SEXY_TOOLTIP (icon->priv->tooltip), &rect, screen);
-*/
 #endif
 }
 
