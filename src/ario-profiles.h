@@ -25,6 +25,12 @@
 
 G_BEGIN_DECLS
 
+/* This file provides various functions that can be used get, modify and
+ * save the list of available profiles.
+ * ArioProfile struct represents a profile with all the information needed
+ * to connect to a server.
+ */
+
 typedef struct
 {
         gchar *name;
