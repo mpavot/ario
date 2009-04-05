@@ -928,7 +928,7 @@ ario_shell_window_state_cb (GtkWidget *widget,
                                        GDK_WINDOW_STATE_MAXIMIZED);
 
                 if (event->window_state.changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
-                        /* save previous window size on maximization */
+                        /* Save previous window size on maximization */
                         gtk_window_get_size (GTK_WINDOW (shell->priv->window),
                                              &width,
                                              &height);
@@ -971,30 +971,36 @@ ario_shell_sync_server (ArioShell *shell)
         gboolean is_playing;
         GtkAction *action;
 
+        /* Set connect entry visibility */
         connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                                       "FileConnect");
+        gtk_action_set_visible (connect_action, !shell->priv->connected);
+
+        /* Set disconnect entry visibility */
         disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                                          "FileDisconnect");
-
-        gtk_action_set_visible (connect_action, !shell->priv->connected);
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
 
         is_playing = ((shell->priv->connected)
                       && ((ario_server_get_current_state () == MPD_STATUS_STATE_PLAY)
                           || (ario_server_get_current_state () == MPD_STATUS_STATE_PAUSE)));
 
+        /* Set lyrics entry sensitivty */
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewLyrics");
         gtk_action_set_sensitive (action, is_playing);
 
+        /* Set cover selection entry sensitivty */
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ToolCoverSelect");
         gtk_action_set_sensitive (action, is_playing);
 
+        /* Set similar artists entry sensitivty */
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ToolSimilarArtist");
         gtk_action_set_sensitive (action, is_playing);
 
+        /* Set similar artists addition entry sensitivty */
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ToolAddSimilar");
         gtk_action_set_sensitive (action, is_playing);
@@ -1005,6 +1011,7 @@ ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                   ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Show main window when first launch assistant is deleted */
         ario_shell_show (shell, FALSE);
 }
 
@@ -1016,6 +1023,7 @@ ario_shell_view_statusbar_changed_cb (GtkAction *action,
         shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
 
+        /* Synchronize status bar visibility */
         ario_shell_sync_statusbar_visibility (shell);
 }
 
@@ -1027,6 +1035,7 @@ ario_shell_view_upperpart_changed_cb (GtkAction *action,
         shell->priv->upperpart_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_UPPERPART_HIDDEN, shell->priv->upperpart_hidden);
 
+        /* Synchronize upper part visibility */
         ario_shell_sync_upperpart_visibility (shell);
 }
 
@@ -1038,6 +1047,7 @@ ario_shell_view_playlist_changed_cb (GtkAction *action,
         shell->priv->playlist_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
         ario_conf_set_boolean (PREF_PLAYLIST_HIDDEN, shell->priv->playlist_hidden);
 
+        /* Synchronize playlist visibility */
         ario_shell_sync_playlist_visibility (shell);
 }
 
@@ -1098,6 +1108,7 @@ ario_shell_cmd_plugins (GtkAction *action,
         GtkWidget *window;
         GtkWidget *manager;
 
+        /* Create plugins configuration dialog window */
         window = gtk_dialog_new_with_buttons (_("Configure Plugins"),
                                               GTK_WINDOW (shell->priv->window),
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -1108,6 +1119,7 @@ ario_shell_cmd_plugins (GtkAction *action,
         gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (window)->vbox), 2);
         gtk_dialog_set_has_separator (GTK_DIALOG (window), FALSE);
 
+        /* Connect signals for window destruction */
         g_signal_connect (window,
                           "delete_event",
                           G_CALLBACK (ario_shell_plugins_window_delete_cb),
