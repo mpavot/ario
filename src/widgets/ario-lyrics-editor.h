@@ -34,6 +34,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioLyricsEditorPrivate ArioLyricsEditorPrivate;
 
+/*
+ * ArioLyricsEditor can be used to display the lyrics of a song,
+ * to edit them and to download new lyrics
+ */
 typedef struct
 {
         GtkVBox parent;
