@@ -24,13 +24,14 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <glib/gi18n.h>
-#include "lib/ario-conf.h"
-#include "servers/ario-server.h"
-#include "sources/ario-source-manager.h"
+
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
+#include "servers/ario-server.h"
 #include "shell/ario-shell-songinfos.h"
+#include "sources/ario-source-manager.h"
 #include "widgets/ario-dnd-tree.h"
 
 typedef struct ArioPlaylistColumn ArioPlaylistColumn;
@@ -211,6 +212,7 @@ static ArioPlaylistColumn all_columns []  = {
         { -1 }
 };
 
+/* Targets for drag & drop from other widgets */
 static const GtkTargetEntry targets  [] = {
         { "text/internal-list", 0, 10},
         { "text/songs-list", 0, 20 },
@@ -219,6 +221,7 @@ static const GtkTargetEntry targets  [] = {
         { "text/criterias-list", 0, 50 },
 };
 
+/* Targets for internal drag & drop */
 static const GtkTargetEntry internal_targets  [] = {
         { "text/internal-list", 0, 10 },
 };
@@ -232,11 +235,12 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Virtual methods */
         object_class->finalize = ario_playlist_finalize;
-
         object_class->set_property = ario_playlist_set_property;
         object_class->get_property = ario_playlist_get_property;
 
+        /* Properties */
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -245,6 +249,7 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
                                                               GTK_TYPE_UI_MANAGER,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioPlaylistPrivate));
 }
 
