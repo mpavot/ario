@@ -42,6 +42,8 @@ static void
 ario_firstlaunch_class_init (ArioFirstlaunchClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
+
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioFirstlaunchPrivate));
 }
 
@@ -50,6 +52,7 @@ ario_firstlaunch_cancel_cb (GtkWidget *widget,
                             ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Exit Ario if user click on cancel */
         gtk_main_quit ();
 }
 
@@ -58,6 +61,7 @@ ario_firstlaunch_apply_cb (GtkWidget *widget,
                            ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Remember that first launch assistant has already been launched */
         ario_conf_set_boolean (PREF_FIRST_TIME, TRUE);
         gtk_widget_destroy (GTK_WIDGET (firstlaunch));
 }
@@ -71,6 +75,7 @@ ario_firstlaunch_page_prepare_cb (GtkAssistant *assistant,
         gchar *text;
         ArioProfile *profile;
 
+        /* Create final page with current profile information */
         profile = ario_profiles_get_current (ario_profiles_get ());
 
         text = g_strdup_printf ("%s \n\n%s <b>%s</b>\n%s <b>%d</b>",
@@ -84,7 +89,7 @@ ario_firstlaunch_page_prepare_cb (GtkAssistant *assistant,
 }
 
 static void
-ario_firstlaunch_init (ArioFirstlaunch *firstlaunch) 
+ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START;
         GdkPixbuf *pixbuf;
@@ -94,7 +99,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         firstlaunch->priv = ARIO_FIRSTLAUNCH_GET_PRIVATE (firstlaunch);
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
 
-        /* Page 1 */
+        /* Page 1 - Presentation of first launch assistant */
         vbox = gtk_vbox_new (FALSE, 12);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 
@@ -108,7 +113,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
 
-        /* Page 2 */
+        /* Page 2 - Connection configuration */
         builder = gtk_builder_helpers_new (UI_PATH "connection-assistant.ui",
                                            firstlaunch);
 
@@ -126,7 +131,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
 
-        /* Page 3 */
+        /* Page 3 - Confirmation */
         firstlaunch->priv->final_label = gtk_label_new (NULL);
         gtk_label_set_line_wrap (GTK_LABEL (firstlaunch->priv->final_label), TRUE);
         vbox = gtk_vbox_new (FALSE, 12);
@@ -140,6 +145,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 
         g_object_unref (pixbuf);
 
+        /* Connect signals for actions on assistant */
         g_signal_connect (firstlaunch,
                           "cancel",
                           G_CALLBACK (ario_firstlaunch_cancel_cb),
@@ -149,6 +155,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
                           G_CALLBACK (ario_firstlaunch_apply_cb),
                           firstlaunch);
 
+        /* Window properties */
         gtk_window_set_position (GTK_WINDOW (firstlaunch), GTK_WIN_POS_CENTER);
         gtk_window_set_default_size (GTK_WINDOW (firstlaunch), 400, 450);
 

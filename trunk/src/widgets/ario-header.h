@@ -33,6 +33,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioHeaderPrivate ArioHeaderPrivate;
 
+/*
+ * ArioHeader is the widget displayed on the top of Ario window
+ * containing music control buttons, cover art, elapsed time,
+ * current song info, etc...
+ */
 typedef struct
 {
         GtkHBox parent;

@@ -21,17 +21,17 @@
 #include <gtk/gtk.h>
 #include <config.h>
 #include <string.h>
-
 #include <glib/gi18n.h>
+
 #include "ario-util.h"
-#include "widgets/ario-volume.h"
 #include "ario-debug.h"
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-handler.h"
-#include "shell/ario-shell-coverselect.h"
 #include "covers/ario-cover-handler.h"
+#include "shell/ario-shell-coverselect.h"
+#include "widgets/ario-volume.h"
 
-static GObject *ario_header_constructor (GType type, guint n_construct_properties,
+static GObject* ario_header_constructor (GType type, guint n_construct_properties,
                                          GObjectConstructParam *construct_properties);
 static gboolean ario_header_image_press_cb (GtkWidget *widget,
                                             GdkEventButton *event,
@@ -92,8 +92,6 @@ struct ArioHeaderPrivate
 
         GtkWidget *volume_button;
 
-        int total_time;
-
         gboolean slider_dragging;
 
         gint image_width;
@@ -109,8 +107,10 @@ ario_header_class_init (ArioHeaderClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Virtual methods */
         object_class->constructor = ario_header_constructor;
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioHeaderPrivate));
 }
 
@@ -137,11 +137,14 @@ ario_header_drag_leave_cb (GtkWidget *widget,
         gsize length;
 
         if (info == 1) {
-                printf ("image  DND : TODO\n");
+                /* Image dropped */
+                ARIO_LOG_INFO ("image  DND : TODO\n");
         } else if (info == 2) {
+                /* URL dropped */
                 data->data[data->length - 2] = 0;
                 url = g_strdup ((gchar *) data->data + 7);
                 if (ario_util_uri_exists (url)) {
+                        /* Get file content and save it as the cover */
                         if (ario_file_get_contents (url,
                                                     &contents,
                                                     &length,
@@ -191,7 +194,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_previous),
                                   header);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->prev_button), 
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->prev_button),
                                      _("Play previous song"));
 
         /* Construct button images */
@@ -212,7 +215,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_playpause),
                                   header);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->play_pause_button), 
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->play_pause_button),
                                      _("Play/Pause the music"));
 
         /* Construct stop button */
@@ -224,7 +227,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_stop),
                                   header);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->stop_button), 
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->stop_button),
                                      _("Stop the music"));
 
         /* Construct next button */
@@ -236,13 +239,15 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_next),
                                   header);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->next_button), 
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->next_button),
                                      _("Play next song"));
 
         /* Construct cover display */
         cover_event_box = gtk_event_box_new ();
         header->priv->image = gtk_image_new ();
-        gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &header->priv->image_width, &header->priv->image_height);
+        gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR,
+                              &header->priv->image_width,
+                              &header->priv->image_height);
         header->priv->image_width += 18;
         header->priv->image_height += 18;
         gtk_container_add (GTK_CONTAINER (cover_event_box), header->priv->image);
@@ -316,7 +321,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_random),
                                   header);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->random_button), 
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->random_button),
                                      _("Toggle random on/off"));
 
         /* Construct repeat button */
@@ -328,7 +333,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   "clicked",
                                   G_CALLBACK (ario_header_do_repeat),
                                   header);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->repeat_button), 
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->repeat_button),
                                      _("Toggle repeat on/off"));
 
         /* Construct volume button */
@@ -431,26 +436,29 @@ ario_header_change_total_time (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         char *tmp;
+        int total_time;
 
+        /* Get total song time from server */
         if (!ario_server_is_connected ()) {
-                header->priv->total_time = 0;
+                total_time = 0;
         } else {
                 switch (ario_server_get_current_state ()) {
                 case MPD_STATUS_STATE_PLAY:
                 case MPD_STATUS_STATE_PAUSE:
-                        header->priv->total_time = ario_server_get_current_total_time ();
+                        total_time = ario_server_get_current_total_time ();
                         break;
                 case MPD_STATUS_STATE_UNKNOWN:
                 case MPD_STATUS_STATE_STOP:
                 default:
-                        header->priv->total_time = 0;
+                        total_time = 0;
                         break;
                 }
 
         }
 
-        if (header->priv->total_time > 0) {
-                tmp = ario_util_format_time (header->priv->total_time);
+        /* Change label value with total time */
+        if (total_time > 0) {
+                tmp = ario_util_format_time (total_time);
                 gtk_label_set_text (GTK_LABEL (header->priv->total), tmp);
                 g_free (tmp);
                 gtk_widget_show (header->priv->total);
@@ -460,7 +468,8 @@ ario_header_change_total_time (ArioHeader *header)
                 gtk_widget_hide (header->priv->of);
         }
 
-        header->priv->adjustment->upper = header->priv->total_time;
+        /* Change slider higher value */
+        header->priv->adjustment->upper = total_time;
 }
 
 static void
@@ -473,6 +482,7 @@ ario_header_change_song_label (ArioHeader *header)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
+                /* Set the label with formated title from server */
                 title = ario_util_format_title (ario_server_get_current_song ());
 
                 tmp = SONG_MARKUP (title);
@@ -482,6 +492,7 @@ ario_header_change_song_label (ArioHeader *header)
         case MPD_STATUS_STATE_UNKNOWN:
         case MPD_STATUS_STATE_STOP:
         default:
+                /* Set default label value */
                 gtk_label_set_label (GTK_LABEL (header->priv->song), "");
                 break;
         }
@@ -498,6 +509,7 @@ ario_header_change_artist_album_label (ArioHeader *header)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
+                /* Set label value with server values */
                 artist = ario_server_get_current_artist ();
                 album = ario_server_get_current_album ();
 
@@ -514,6 +526,7 @@ ario_header_change_artist_album_label (ArioHeader *header)
         case MPD_STATUS_STATE_UNKNOWN:
         case MPD_STATUS_STATE_STOP:
         default:
+                /* Set default label value */
                 gtk_label_set_label (GTK_LABEL (header->priv->artist_album), "");
                 break;
         }
@@ -529,6 +542,7 @@ ario_header_change_cover (ArioHeader *header)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
+                /* Get cover from cover handler and display it */
                 cover = ario_cover_handler_get_cover ();
                 if (cover) {
                         small_cover = gdk_pixbuf_scale_simple (cover,
@@ -545,6 +559,7 @@ ario_header_change_cover (ArioHeader *header)
         case MPD_STATUS_STATE_UNKNOWN:
         case MPD_STATUS_STATE_STOP:
         default:
+                /* Set default cover (empty) */
                 gtk_image_set_from_pixbuf (GTK_IMAGE (header->priv->image), NULL);
                 break;
         }
@@ -555,7 +570,10 @@ ario_header_song_changed_cb (ArioServer *server,
                              ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize song label */
         ario_header_change_song_label (header);
+
+        /* Synchronize total time label */
         ario_header_change_total_time (header);
 }
 
@@ -564,6 +582,7 @@ ario_header_album_changed_cb (ArioServer *server,
                               ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize Artist-Album label */
         ario_header_change_artist_album_label (header);
 }
 
@@ -572,6 +591,7 @@ ario_header_cover_changed_cb (ArioCoverHandler *cover_handler,
                               ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize cover art */
         ario_header_change_cover (header);
 }
 
@@ -581,13 +601,20 @@ ario_header_state_changed_cb (ArioServer *server,
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Synchronize song label */
         ario_header_change_song_label (header);
+
+        /* Synchronize Artist-Album label */
         ario_header_change_artist_album_label (header);
+
+        /* Synchronize total time label */
         ario_header_change_total_time (header);
 
+        /* Remove icon from play/pause button */
         gtk_container_remove (GTK_CONTAINER (header->priv->play_pause_button),
                               gtk_bin_get_child (GTK_BIN (header->priv->play_pause_button)));
 
+        /* Set the appropriate icon in play/pause button */
         if (ario_server_is_paused ())
                 gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button),
                                    header->priv->play_image);
@@ -596,6 +623,7 @@ ario_header_state_changed_cb (ArioServer *server,
                                    header->priv->pause_image);
 
         if (!ario_server_is_connected ()) {
+                /* Set button insensitive if Ario is not connected to a server */
                 gtk_widget_set_sensitive (header->priv->prev_button, FALSE);
                 gtk_widget_set_sensitive (header->priv->play_pause_button, FALSE);
 
@@ -609,6 +637,7 @@ ario_header_state_changed_cb (ArioServer *server,
 
                 gtk_widget_set_sensitive (header->priv->volume_button, FALSE);
         } else {
+                /* Set button sensitive if Ario is connected to a server */
                 gtk_widget_set_sensitive (header->priv->prev_button, TRUE);
                 gtk_widget_set_sensitive (header->priv->play_pause_button, TRUE);
 
@@ -635,9 +664,11 @@ ario_header_elapsed_changed_cb (ArioServer *server,
         if (header->priv->slider_dragging)
                 return;
 
+        /* Update elapsed time label */
         ario_util_format_time_buf (elapsed, time, ARIO_MAX_TIME_SIZE);
         gtk_label_set_text (GTK_LABEL (header->priv->elapsed), time);
 
+        /* Update slider value */
         gtk_adjustment_set_value (header->priv->adjustment, (gdouble) elapsed);
 }
 
@@ -648,12 +679,19 @@ ario_header_random_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START;
         gboolean random;
 
+        /* Get random state on server */
         random = ario_server_get_current_random ();
+
+        /* Block random button signal */
         g_signal_handlers_block_by_func (G_OBJECT (header->priv->random_button),
                                          G_CALLBACK (ario_header_do_random),
                                          header);
+
+        /* Change button state depending on random value */
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (header->priv->random_button),
                                       random);
+
+        /* Unblock random button signal */
         g_signal_handlers_unblock_by_func (G_OBJECT (header->priv->random_button),
                                            G_CALLBACK (ario_header_do_random),
                                            header);
@@ -666,12 +704,19 @@ ario_header_repeat_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START;
         gboolean repeat;
 
+        /* Get repeat state on server */
         repeat = ario_server_get_current_repeat ();
+
+        /* Block repeat button signal */
         g_signal_handlers_block_by_func (G_OBJECT (header->priv->repeat_button),
                                          G_CALLBACK (ario_header_do_repeat),
                                          header);
+
+        /* Change button state depending on repeat value */
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (header->priv->repeat_button),
                                       repeat);
+
+        /* Unblock repeat button signal */
         g_signal_handlers_unblock_by_func (G_OBJECT (header->priv->repeat_button),
                                            G_CALLBACK (ario_header_do_repeat),
                                            header);
@@ -685,6 +730,7 @@ ario_header_image_press_cb (GtkWidget *widget,
         GtkWidget *coverselect;
         ArioServerAlbum server_album;
 
+        /* Double click on cover art launches the cover selection dialog */
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 server_album.artist = ario_server_get_current_artist ();
                 server_album.album = ario_server_get_current_album ();
@@ -722,6 +768,7 @@ ario_header_slider_release_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         header->priv->slider_dragging = FALSE;
+        /* Change elapsed time on server */
         ario_server_set_current_elapsed ((int) gtk_range_get_value (GTK_RANGE (header->priv->scale)));
         return FALSE;
 }
@@ -734,6 +781,7 @@ static void ario_header_slider_value_changed_cb (GtkWidget *widget,
         int elapsed;
 
         if (header->priv->slider_dragging) {
+                /* If user is dragging the slider, we update displayed value */
                 elapsed = (int) gtk_range_get_value (GTK_RANGE (header->priv->scale));
                 ario_util_format_time_buf (elapsed, time, ARIO_MAX_TIME_SIZE);
                 gtk_label_set_text (GTK_LABEL (header->priv->elapsed), time);
@@ -745,6 +793,7 @@ ario_header_do_next (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Change to next song */
         ario_server_do_next ();
 }
 
@@ -753,6 +802,7 @@ ario_header_do_previous (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Change to previous song */
         ario_server_do_prev ();
 }
 
@@ -761,6 +811,7 @@ ario_header_playpause (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Play/pause on server */
         if (ario_server_is_paused ())
                 ario_server_do_play ();
         else
@@ -772,6 +823,7 @@ ario_header_stop (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Stop music */
         ario_server_do_stop ();
 }
 
@@ -780,6 +832,7 @@ ario_header_do_random (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Change random on server */
         ario_server_set_current_random (!ario_server_get_current_random ());
 }
 
@@ -788,5 +841,6 @@ ario_header_do_repeat (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
         g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Change repeat on server */
         ario_server_set_current_repeat (!ario_server_get_current_repeat ());
 }
