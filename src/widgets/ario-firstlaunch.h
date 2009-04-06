@@ -33,6 +33,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioFirstlaunchPrivate ArioFirstlaunchPrivate;
 
+/*
+ * First launch assistant is used when a user launches Ario for the
+ * first time. This assistant is used to configure a few mandatory
+ * options like the creation of a profile
+ */
 typedef struct
 {
         GtkAssistant parent;

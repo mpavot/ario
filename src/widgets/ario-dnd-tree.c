@@ -63,6 +63,7 @@ ario_dnd_tree_class_init (ArioDndTreeClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Signals */
         ario_dnd_tree_signals[POPUP] =
                 g_signal_new ("popup",
                               G_OBJECT_CLASS_TYPE (object_class),
@@ -83,6 +84,7 @@ ario_dnd_tree_class_init (ArioDndTreeClass *klass)
                               G_TYPE_NONE,
                               0);
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioDndTreePrivate));
 }
 
@@ -104,6 +106,7 @@ ario_dnd_tree_new (const GtkTargetEntry* targets,
         dnd_tree = g_object_new (TYPE_ARIO_DND_TREE, NULL);
         g_return_val_if_fail (dnd_tree->priv, NULL);
 
+        /* Set the treeview as drag and drop source */
         gtk_drag_source_set (GTK_WIDGET (dnd_tree),
                              GDK_BUTTON1_MASK,
                              targets,
@@ -140,21 +143,26 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
         int x, y, bx, by;
         gboolean selected;
 
+        /* Grab focus if needed */
         if (!GTK_WIDGET_HAS_FOCUS (widget))
                 gtk_widget_grab_focus (widget);
 
+        /* Already in drag & drop we do nothing */
         if (dnd_tree->priv->dragging)
                 return FALSE;
 
         if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
                 return FALSE;
 
+        /* Double click: we emit the activate signal */
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 g_signal_emit (G_OBJECT (dnd_tree), ario_dnd_tree_signals[ACTIVATE], 0);
                 return FALSE;
         }
 
+        /* First button pressed */
         if (event->button == 1) {
+                /* Get real coordinates */
                 gdk_window_get_pointer (widget->window, &x, &y, &mods);
                 gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
 
@@ -182,14 +190,18 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
                 return TRUE;
         }
 
+        /* Third button pressed */
         if (event->button == 3) {
                 gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
                 if (path) {
+                        /* Select the clicked row */
                         GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
                         if (!gtk_tree_selection_path_is_selected (selection, path)) {
                                 gtk_tree_selection_unselect_all (selection);
                                 gtk_tree_selection_select_path (selection, path);
                         }
+
+                        /* Emit the popup signal */
                         g_signal_emit (G_OBJECT (dnd_tree), ario_dnd_tree_signals[POPUP], 0);
                         gtk_tree_path_free (path);
                         return TRUE;
@@ -206,9 +218,11 @@ ario_dnd_tree_button_release_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         if (!dnd_tree->priv->dragging && !(event->state & GDK_CONTROL_MASK) && !(event->state & GDK_SHIFT_MASK)) {
+                /* Get real coordinates */
                 int bx, by;
                 gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), event->x, event->y, &bx, &by);
                 if (bx >= 0 && by >= 0) {
+                        /* Select the clicked row */
                         GtkTreePath *path;
 
                         gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget), event->x, event->y, &path, NULL, NULL, NULL);
@@ -246,6 +260,7 @@ ario_dnd_tree_motion_notify (GtkWidget *widget,
         dx = x - dnd_tree->priv->drag_start_x;
         dy = y - dnd_tree->priv->drag_start_y;
 
+        /* Activate drag & drop if button pressed and mouse moved */
         if ((ario_util_abs (dx) > DRAG_THRESHOLD) || (ario_util_abs (dy) > DRAG_THRESHOLD))
                 dnd_tree->priv->dragging = TRUE;
 

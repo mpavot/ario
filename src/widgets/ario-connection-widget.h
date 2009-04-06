@@ -33,6 +33,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioConnectionWidgetPrivate ArioConnectionWidgetPrivate;
 
+/**
+ * ArioConnectionWidget is used to configure a conneciton.
+ * It presents the different profiles and can be used to configure
+ * them manually or using avahi autodetection
+ */
 typedef struct
 {
         GtkVBox parent;

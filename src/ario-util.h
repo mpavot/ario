@@ -281,7 +281,9 @@ const char *            ario_util_stristr                    (const char *haysta
  * Randomize a GSList
  *
  * @param The GSList to randomize. This list should not be used anymore after
- *        this function has been called.
+ *        this function has been called. Elements of the list should be freed if
+ *        needed and the list should be freed in addition to the one returned by
+ *        ario_util_gslist_randomize.
  * @param max The number of items to randomize in the list
  *
  * @return A pointer to the GSList to use instead of 'list'

@@ -34,6 +34,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioDndTreePrivate ArioDndTreePrivate;
 
+/*
+ * ArioDndTree is a GtkTreeView with enhanced drag and drop
+ * features.
+ */
 typedef struct
 {
         GtkTreeView parent;
