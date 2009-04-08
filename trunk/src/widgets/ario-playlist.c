@@ -96,7 +96,6 @@ static void ario_playlist_cmd_save (GtkAction *action,
 static gboolean ario_playlist_view_key_press_cb (GtkWidget *widget,
                                                  GdkEventKey *event,
                                                  ArioPlaylist *playlist);
-static void ario_playlist_activate_row (GtkTreePath *path);
 static void ario_playlist_activate_selected ();
 static void ario_playlist_column_visible_changed_cb (guint notification_id,
                                                      ArioPlaylistColumn *ario_column);
@@ -1049,6 +1048,7 @@ ario_playlist_get_indice (GtkTreePath *path)
         int *indices = NULL;
         int indice = -1;
 
+        /* Get indice from a path depending on if search is activated or not */
         if (instance->priv->in_search) {
                 parent_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (instance->priv->filter), path);
                 if (parent_path)
@@ -1067,13 +1067,6 @@ ario_playlist_get_indice (GtkTreePath *path)
 }
 
 static void
-ario_playlist_activate_row (GtkTreePath *path)
-{
-        ARIO_LOG_FUNCTION_START;
-        ario_server_do_play_pos (ario_playlist_get_indice (path));
-}
-
-static void
 ario_playlist_activate_selected ()
 {
         ARIO_LOG_FUNCTION_START;
@@ -1081,11 +1074,12 @@ ario_playlist_activate_selected ()
         GtkTreePath *path = NULL;
         GtkTreeModel *model = GTK_TREE_MODEL (instance->priv->model);
 
+        /* Start playing a song when a row is activated */
         paths = gtk_tree_selection_get_selected_rows (instance->priv->selection, &model);
         if (paths)
                 path = paths->data;
         if (path)
-                ario_playlist_activate_row (path);
+                ario_server_do_play_pos (ario_playlist_get_indice (path));
 
         g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (paths);
@@ -1104,7 +1098,7 @@ ario_playlist_move_rows (const int x, const int y)
         GtkTreePath *path_to_select;
         GtkTreeModel *model = GTK_TREE_MODEL (instance->priv->model);
 
-        /* get drop location */
+        /* Get drop location */
         gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (instance->priv->tree), x, y, &path, &drop_pos);
 
         if (path == NULL) {
@@ -1113,7 +1107,7 @@ ario_playlist_move_rows (const int x, const int y)
                 indice = gtk_tree_path_get_indices (path);
                 pos = indice[0];
 
-                /* adjust position acording to drop after */
+                /* Adjust position acording to drop after */
                 if ((drop_pos == GTK_TREE_VIEW_DROP_AFTER
                      || drop_pos == GTK_TREE_VIEW_DROP_INTO_OR_AFTER)
                     && pos < instance->priv->playlist_length)
@@ -1122,34 +1116,39 @@ ario_playlist_move_rows (const int x, const int y)
                 gtk_tree_path_free (path);
         }
 
-        /* move every dragged row */
+        /* Get all selected rows */
         list = gtk_tree_selection_get_selected_rows (instance->priv->selection, &model);
         if (!list)
                 return;
 
+        /* Unselect all rows */
         gtk_tree_selection_unselect_all (instance->priv->selection);
-        list = g_list_last (list);
-        do {
-                /* get start pos */
+
+        /* For each selected row (starting from the end) */
+        for (list = g_list_last (list); list; list = g_list_previous (list)) {
+                /* Get start pos */
                 indice = gtk_tree_path_get_indices ((GtkTreePath *) list->data);
 
-                /* compensate */
+                /* Compensate */
                 if (pos > indice[0])
                         --pos;
 
+                /* Move the song */
                 ario_server_queue_move (indice[0] + offset, pos);
 
+                /* Adjust offset to take the move into account */
                 if (pos < indice[0])
                         ++offset;
 
                 path_to_select = gtk_tree_path_new_from_indices (pos, -1);
                 gtk_tree_selection_select_path (instance->priv->selection, path_to_select);
                 gtk_tree_path_free (path_to_select);
-        } while ((list = g_list_previous (list)));
+        }
 
         g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (list);
 
+        /* Commit queue moves */
         ario_server_queue_commit ();
 }
 
