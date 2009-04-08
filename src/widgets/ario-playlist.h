@@ -33,6 +33,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioPlaylistPrivate ArioPlaylistPrivate;
 
+/*
+ * ArioPlaylist represents the current playlist of music server
+ * and allows users to modify the playlist content, change the
+ * current song,...
+ */
 typedef struct
 {
         GtkVBox parent;
