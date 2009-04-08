@@ -853,7 +853,7 @@ ario_playlist_changed_cb (ArioServer *server,
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
                 need_set = FALSE;
-                /* decide whether to update or to add */
+                /* Decide whether to update or to add */
                 if (song->pos < old_length) {
                         /* Update */
                         path = gtk_tree_path_new_from_indices (song->pos, -1);
@@ -922,6 +922,7 @@ ario_playlist_song_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START;
         ario_playlist_sync_song ();
 
+        /* Autoscroll in playlist on song chang if option is activated */
         if (ario_conf_get_boolean (PREF_PLAYLIST_AUTOSCROLL, PREF_PLAYLIST_AUTOSCROLL_DEFAULT))
                 ario_playlist_cmd_goto_playing_song (NULL, playlist);
 }
@@ -976,21 +977,25 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                                               G_CALLBACK (ario_playlist_rows_reordered_cb),
                                               playlist);
 
+        /* Get the list of songs ids in the playlist */
         gtk_tree_model_foreach (GTK_TREE_MODEL (playlist->priv->model),
                                 (GtkTreeModelForeachFunc) ario_playlist_rows_reordered_foreach,
                                 &ids);
 
+        /* Move songs on server according to the order in the playlist */
         for (tmp = ids; tmp; tmp = g_slist_next (tmp)) {
                 ario_server_queue_moveid (*((gint *)tmp->data), i);
                 ++i;
         }
 
+        /* Ignore next modifications sent by server */
         playlist->priv->ignore = TRUE;
+
+        /* Commit songs moves */
         ario_server_queue_commit ();
 
         g_slist_foreach (ids, (GFunc) g_free, NULL);
         g_slist_free (ids);
-
 
         g_signal_handlers_block_by_func (playlist->priv->model,
                                          G_CALLBACK (ario_playlist_sort_changed_cb),
@@ -1018,6 +1023,7 @@ ario_playlist_new (GtkUIManager *mgr,
 
         g_return_val_if_fail (instance->priv != NULL, NULL);
 
+        /* Connect signals to remain synchronized with music server */
         g_signal_connect_object (server,
                                  "playlist_changed",
                                  G_CALLBACK (ario_playlist_changed_cb),
@@ -1035,6 +1041,7 @@ ario_playlist_new (GtkUIManager *mgr,
                                  G_CALLBACK (ario_playlist_connectivity_changed_cb),
                                  instance, 0);
 
+        /* Add contextual menu actions */
         gtk_action_group_add_actions (group,
                                       ario_playlist_actions,
                                       ario_playlist_n_actions, instance);
