@@ -122,7 +122,6 @@ struct ArioPlaylistPrivate
 
         gint64 playlist_id;
         int playlist_length;
-        gboolean ignore;
         gint pos;
 
         GdkPixbuf *play_pixbuf;
@@ -821,13 +820,6 @@ ario_playlist_changed_cb (ArioServer *server,
         GtkTreePath *path;
         int state;
 
-        /* Ignore is set when we reoder the rows to avoid useless (and dangerous) operations */
-        if (playlist->priv->ignore) {
-                playlist->priv->ignore = FALSE;
-                playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
-                return;
-        }
-
         /* Clear the playlist if ario is not connected to the server */
         if (!ario_server_is_connected ()) {
                 playlist->priv->playlist_length = 0;
@@ -988,8 +980,8 @@ ario_playlist_rows_reordered_cb (GtkTreeModel *tree_model,
                 ++i;
         }
 
-        /* Ignore next modifications sent by server */
-        playlist->priv->ignore = TRUE;
+        /* Force a full synchronization of playlist in next update */
+        playlist->priv->playlist_id = -1;
 
         /* Commit songs moves */
         ario_server_queue_commit ();
