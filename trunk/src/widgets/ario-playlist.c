@@ -818,9 +818,7 @@ ario_playlist_changed_cb (ArioServer *server,
         GSList *songs, *tmp;
         ArioServerSong *song, *current_song;
         gboolean need_set;
-        gboolean need_sync = FALSE;
         GtkTreePath *path;
-        GdkPixbuf *pixbuf;
         int state;
 
         /* Ignore is set when we reoder the rows to avoid useless (and dangerous) operations */
@@ -873,14 +871,7 @@ ario_playlist_changed_cb (ArioServer *server,
                         ario_util_format_time_buf (song->time, time, ARIO_MAX_TIME_SIZE);
                         ario_util_format_track_buf (song->track, track, ARIO_MAX_TRACK_SIZE);
                         title = ario_util_format_title (song);
-                        if (current_song && (song->pos == current_song->pos)) {
-                                pixbuf = instance->priv->play_pixbuf;
-                                instance->priv->pos = song->pos;
-                        } else {
-                                pixbuf = NULL;
-                        }
                         gtk_list_store_set (playlist->priv->model, &iter,
-                                            PIXBUF_COLUMN, pixbuf,
                                             TRACK_COLUMN, track,
                                             TITLE_COLUMN, title,
                                             ARTIST_COLUMN, song->artist,
@@ -909,12 +900,10 @@ ario_playlist_changed_cb (ArioServer *server,
                 }
 
                 gtk_tree_path_free (path);
-                need_sync = TRUE;
         }
 
         /* Synchronize 'playing' pixbuf in playlist */
-        if (need_sync)
-                ario_playlist_sync_song ();
+        ario_playlist_sync_song ();
 }
 
 static void
