@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<!--Generated with glade3 3.4.5 on Sun Sep  7 00:01:47 2008 -->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkVBox" id="vbox">
     <property name="visible">True</property>
     <child>
@@ -13,7 +14,7 @@
             <child>
               <object class="GtkHBox" id="properties_hbox">
                 <property name="visible">True</property>
-                <property name="extension_events">GDK_EXTENSION_EVENTS_CURSOR</property>
+                <property name="extension_events">cursor</property>
                 <child>
                   <object class="GtkAlignment" id="alignment2">
                     <property name="visible">True</property>
@@ -28,6 +29,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -110,8 +112,8 @@
                         <property name="yalign">0.49000000953674316</property>
                         <property name="label" translatable="yes">n/a</property>
                         <property name="wrap">True</property>
-                        <property name="wrap_mode">PANGO_WRAP_WORD_CHAR</property>
-                        <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+                        <property name="wrap_mode">word-char</property>
+                        <property name="ellipsize">middle</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -152,6 +154,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -164,7 +167,7 @@
                     <property name="xalign">0</property>
                     <property name="yalign">0</property>
                     <property name="label" translatable="yes">Albums from this artist:</property>
-                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                    <property name="ellipsize">end</property>
                   </object>
                 </child>
               </object>
@@ -196,7 +199,7 @@
                     <property name="xalign">0</property>
                     <property name="yalign">0</property>
                     <property name="label" translatable="yes">Lyrics:</property>
-                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                    <property name="ellipsize">end</property>
                   </object>
                 </child>
               </object>
@@ -221,7 +224,9 @@
           </object>
         </child>
       </object>
+      <packing>
+        <property name="position">0</property>
+      </packing>
     </child>
   </object>
 </interface>
-
