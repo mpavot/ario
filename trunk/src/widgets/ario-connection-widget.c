@@ -546,99 +546,36 @@ ario_connection_widget_autodetect_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_AVAHI
+        GtkBuilder *builder;
         ArioAvahi *avahi;
         GtkWidget *dialog, *error_dialog;
-        GtkWidget *vbox;
-        GtkWidget *label;
-        GtkWidget *scrolledwindow;
         GtkWidget *treeview;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
         GtkTreeModel *treemodel;
         GtkTreeIter iter;
         gchar *tmp;
         gchar *host;
         int port;
+        gint retval;
 
-        gint retval = GTK_RESPONSE_CANCEL;
+        /* Create UI using GtkBuilder */
+        builder = gtk_builder_helpers_new (UI_PATH "connection-autodetect.ui", NULL);
+
+        /* Get pointers to the different widgets */
+        dialog =
+                GTK_WIDGET (gtk_builder_get_object (builder, "dialog"));
+        treeview =
+                GTK_WIDGET (gtk_builder_get_object (builder, "treeview"));
+        connection_widget->priv->autodetect_model =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "autodetect_model"));
+        g_object_unref (builder);
 
         /* Create avahi proxy */
         avahi = ario_avahi_new ();
 
-        /* Create hosts selection dialog */
-        dialog = gtk_dialog_new_with_buttons (_("Server autodetection"),
-                                              NULL,
-                                              GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              GTK_STOCK_CANCEL,
-                                              GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OK,
-                                              GTK_RESPONSE_OK,
-                                              NULL);
-        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
-                                         GTK_RESPONSE_CANCEL);
-
-        /* Main vbox */
-        vbox = gtk_vbox_new (FALSE, 12);
-
-        /* Description label */
-        label = gtk_label_new (_("If you don't see your MPD server thanks to the automatic detection, you should check that zeroconf is activated in your MPD configuration or use the manual configuration."));
-        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-
-        /* Scrolled window for treeview */
-        scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow), GTK_SHADOW_IN);
-
-        /* Create treeview */
-        treeview = gtk_tree_view_new ();
-
-        /* Create Name column */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Name"),
-                                                           renderer,
-                                                           "text", NAME_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 150);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-        /* Create Host column */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Host"),
-                                                           renderer,
-                                                           "text", HOST_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 150);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-        /* Create Port column */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Port"),
-                                                           renderer,
-                                                           "text", PORT_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 50);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-        /* Create model */
-        connection_widget->priv->autodetect_model = gtk_list_store_new (N_COLUMN,
-                                                                        G_TYPE_STRING,
-                                                                        G_TYPE_STRING,
-                                                                        G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
-                                 GTK_TREE_MODEL (connection_widget->priv->autodetect_model));
+        /* Get selection */
         connection_widget->priv->autodetect_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
         gtk_tree_selection_set_mode (connection_widget->priv->autodetect_selection,
                                      GTK_SELECTION_BROWSE);
-
-        /* Add treeview to scrolled window */
-        gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
-
-        /* Add scrolled window to vbox */
-        gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
 
         /* Connect signal called when avahi detects new hosts */
         g_signal_connect (avahi,
@@ -646,16 +583,12 @@ ario_connection_widget_autodetect_cb (GtkWidget *widget,
                           G_CALLBACK (ario_connection_widget_autohosts_changed_cb),
                           connection_widget);
 
-        /* Add vbox to dialog */
-        gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
-                           vbox);
-        gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 280);
-        gtk_widget_show_all (dialog);
-
         /* Run dialog */
+        gtk_widget_show_all (dialog);
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
-        if (retval != GTK_RESPONSE_OK) {
+
+        /* Stop here if pressed button is not OK */
+        if (retval != 1) {
                 gtk_widget_destroy (dialog);
                 g_object_unref (avahi);
                 return;

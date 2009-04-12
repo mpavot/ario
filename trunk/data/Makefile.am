@@ -25,6 +25,7 @@ appicondir = $(datadir)/icons/hicolor/48x48/apps
 uidir = $(pkgdatadir)/ui
 ui_DATA = ario-ui.xml \
 	     ui/browser-prefs.ui	\
+	     ui/connection-autodetect.ui	\
 	     ui/connection-prefs.ui	\
 	     ui/connection-assistant.ui	\
 	     ui/connection-widget.ui	\

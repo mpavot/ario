@@ -3,6 +3,7 @@
 # Source files
 data/ario.desktop.in.in
 [type: gettext/glade]data/ui/browser-prefs.ui
+[type: gettext/glade]data/ui/connection-autodetect.ui
 [type: gettext/glade]data/ui/connection-widget.ui
 [type: gettext/glade]data/ui/cover-prefs.ui
 [type: gettext/glade]data/ui/connection-prefs.ui
