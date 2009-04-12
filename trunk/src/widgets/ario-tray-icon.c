@@ -28,13 +28,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib/gi18n.h>
+
+#include "ario-debug.h"
+#include "ario-util.h"
+#include "covers/ario-cover-handler.h"
 #include "lib/ario-conf.h"
 #include "lib/libsexy/sexy-tooltip.h"
-#include "shell/ario-shell.h"
-#include "ario-util.h"
 #include "preferences/ario-preferences.h"
-#include "ario-debug.h"
-#include "covers/ario-cover-handler.h"
+#include "shell/ario-shell.h"
 
 static void ario_tray_icon_finalize (GObject *object);
 static void ario_tray_icon_set_property (GObject *object,

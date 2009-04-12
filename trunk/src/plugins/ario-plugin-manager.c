@@ -57,14 +57,14 @@ struct _ArioPluginManagerPrivate
         GtkWidget* popup_menu;
 };
 
-static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm); 
+static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm);
 static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
 static void ario_plugin_manager_finalize (GObject *object);
 
 #define ARIO_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_PLUGIN_MANAGER, ArioPluginManagerPrivate))
 G_DEFINE_TYPE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_VBOX)
 
-static void 
+static void
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -139,7 +139,7 @@ configure_button_cb (GtkWidget* button,
 
         ario_plugins_engine_configure_plugin (info, toplevel);
 
-        ARIO_LOG_DBG ("Done");        
+        ARIO_LOG_DBG ("Done");
 }
 
 static void
@@ -229,7 +229,7 @@ cursor_changed_cb (GtkTreeView *view,
         gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->about_button),
                                   info != NULL);
         gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
-                                  (info != NULL) && 
+                                  (info != NULL) &&
                                   ario_plugin_info_is_configurable (info));
 }
 
@@ -312,7 +312,7 @@ plugin_manager_set_active (ArioPluginManager *pm,
         if (active) {
                 /* activate the plugin */
                 if (!ario_plugins_engine_activate_plugin (info)) {
-                        ARIO_LOG_DBG ("Could not activate %s.\n", 
+                        ARIO_LOG_DBG ("Could not activate %s.\n",
                                       ario_plugin_info_get_name (info));
 
                         res = FALSE;
@@ -320,7 +320,7 @@ plugin_manager_set_active (ArioPluginManager *pm,
         } else {
                 /* deactivate the plugin */
                 if (!ario_plugins_engine_deactivate_plugin (info)) {
-                        ARIO_LOG_DBG ("Could not deactivate %s.\n", 
+                        ARIO_LOG_DBG ("Could not deactivate %s.\n",
                                       ario_plugin_info_get_name (info));
 
                         res = FALSE;
@@ -595,7 +595,7 @@ popup_menu_cb (GtkTreeView *tree,
         return TRUE;
 }
 
-static gint 
+static gint
 model_name_sort_func (GtkTreeModel *model,
                       GtkTreeIter  *iter1,
                       GtkTreeIter  *iter2,
@@ -704,7 +704,7 @@ plugin_manager_construct_tree (ArioPluginManager *pm)
         gtk_widget_show (pm->priv->tree);
 }
 
-static void 
+static void
 ario_plugin_manager_init (ArioPluginManager *pm)
 {
         GtkWidget *label;
@@ -735,7 +735,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (viewport),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (viewport), 
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (viewport),
                                              GTK_SHADOW_IN);
 
         gtk_container_add (GTK_CONTAINER (alignment), viewport);
@@ -772,7 +772,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
                 plugin_manager_populate_lists (pm);
         } else {
                 gtk_widget_set_sensitive (pm->priv->about_button, FALSE);
-                gtk_widget_set_sensitive (pm->priv->configure_button, FALSE);                
+                gtk_widget_set_sensitive (pm->priv->configure_button, FALSE);
         }
 }
 
@@ -787,7 +787,8 @@ ario_plugin_manager_finalize (GObject *object)
         G_OBJECT_CLASS (ario_plugin_manager_parent_class)->finalize (object);
 }
 
-GtkWidget *ario_plugin_manager_new (void)
+GtkWidget *
+ario_plugin_manager_new (void)
 {
         return g_object_new (ARIO_TYPE_PLUGIN_MANAGER,0);
 }

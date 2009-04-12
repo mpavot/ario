@@ -37,6 +37,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioSonglistPrivate ArioSonglistPrivate;
 
+/**
+ * ArioSonglist widget can be used to display a list of songs
+ * with drag and drop features, interactions with main Ario
+ * playlist...
+ */
 typedef struct
 {
         GtkScrolledWindow parent;

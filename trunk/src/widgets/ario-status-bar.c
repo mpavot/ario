@@ -29,7 +29,7 @@ static void ario_status_bar_playlist_changed_cb (ArioServer *server,
 
 struct ArioStatusBarPrivate
 {
-        guint ario_playlist_context_id;
+        guint playlist_context_id;
 };
 
 #define ARIO_STATUS_BAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATUS_BAR, ArioStatusBarPrivate))
@@ -39,6 +39,7 @@ static void
 ario_status_bar_class_init (ArioStatusBarClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioStatusBarPrivate));
 }
 
@@ -47,7 +48,7 @@ ario_status_bar_init (ArioStatusBar *status_bar)
 {
         ARIO_LOG_FUNCTION_START;
         status_bar->priv = ARIO_STATUS_BAR_GET_PRIVATE (status_bar);
-        status_bar->priv->ario_playlist_context_id = gtk_statusbar_get_context_id (GTK_STATUSBAR (status_bar), "PlaylistMsg");
+        status_bar->priv->playlist_context_id = gtk_statusbar_get_context_id (GTK_STATUSBAR (status_bar), "PlaylistMsg");
 }
 
 GtkWidget *
@@ -62,6 +63,7 @@ ario_status_bar_new (void)
 
         g_return_val_if_fail (status_bar->priv != NULL, NULL);
 
+        /* Connect signals for synchronisation with music server */
         g_signal_connect_object (server,
                                  "playlist_changed",
                                  G_CALLBACK (ario_status_bar_playlist_changed_cb),
@@ -80,25 +82,29 @@ ario_status_bar_playlist_changed_cb (ArioServer *server,
         ARIO_LOG_FUNCTION_START;
         gchar *msg, *tmp;
         gchar *formated_total_time;
-        int ario_playlist_length;
-        int ario_playlist_total_time;
+        int playlist_length;
+        int playlist_total_time;
 
-        ario_playlist_length = ario_server_get_current_playlist_length ();
+        /* Get number of items in playlist */
+        playlist_length = ario_server_get_current_playlist_length ();
 
-        ario_playlist_total_time = ario_server_get_current_playlist_total_time ();
-        formated_total_time = ario_util_format_total_time (ario_playlist_total_time);
+        /* Get formated playlist total time */
+        playlist_total_time = ario_server_get_current_playlist_total_time ();
+        formated_total_time = ario_util_format_total_time (playlist_total_time);
 
-        msg = g_strdup_printf ("%d %s - %s", ario_playlist_length, _("Songs"), formated_total_time);
+        /* Format status bar message */
+        msg = g_strdup_printf ("%d %s - %s", playlist_length, _("Songs"), formated_total_time);
         g_free (formated_total_time);
 
         if (ario_server_get_updating ()) {
                 tmp = g_strdup_printf ("%s - %s", msg, _("Updating..."));
                 g_free (msg);
                 msg = tmp;
-        }                
+        }
 
-        gtk_statusbar_pop (GTK_STATUSBAR(status_bar), status_bar->priv->ario_playlist_context_id);
-        gtk_statusbar_push (GTK_STATUSBAR (status_bar), status_bar->priv->ario_playlist_context_id, msg);
+        /* Change status bar message */
+        gtk_statusbar_pop (GTK_STATUSBAR(status_bar), status_bar->priv->playlist_context_id);
+        gtk_statusbar_push (GTK_STATUSBAR (status_bar), status_bar->priv->playlist_context_id, msg);
 
         g_free (msg);
 }

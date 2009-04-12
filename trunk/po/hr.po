@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-02-24 02:28+0000\n"
 "Last-Translator: Miro Glavic <glavicmiro@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -45,6 +45,20 @@ msgstr "Organizacija Knjiznice"
 msgid "Sort albums: "
 msgstr "Sortiraj albume: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Ako ne vidite svoj MPD server zahvaljujuci autodetekciji, trebate provjeriti "
+"da je zeroconf aktiviran u vasoj MPD konfiguraciji ili upotrijebite rucnu "
+"konfiguraciju."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Autodetekcija servera"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Automatska detekcija"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Naziv :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Lozinka :"
 
@@ -817,39 +831,11 @@ msgstr "Svojstva Pjesme"
 msgid "Error saving tags of file:"
 msgstr "Greška spremanja tagova datoteke:"
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Autodetekcija servera"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Ako ne vidite svoj MPD server zahvaljujuci autodetekciji, trebate provjeriti "
-"da je zeroconf aktiviran u vasoj MPD konfiguraciji ili upotrijebite rucnu "
-"konfiguraciju."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Ime"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Domacin"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Ulaz"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Morate odabrati server."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Novi Profil"
 
@@ -1030,7 +1016,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Nikad"
 
@@ -1079,38 +1065,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Postavke audioscrobblera"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Provjeri stanje Last.fm servera na"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Onemogucen"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Doznaj vise o Last.fm na "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Vrijeme zadnjeg podneska:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Redoslijed pjesama:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Status:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Predlozene pjesme:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Korisnicko ime :"
 
@@ -1236,6 +1214,21 @@ msgstr "Prikljucak za pretragu o trenutacnom izvodjacu na wikipediji"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedija"
+
+#~ msgid "Name"
+#~ msgstr "Ime"
+
+#~ msgid "Host"
+#~ msgstr "Domacin"
+
+#~ msgid "Port"
+#~ msgstr "Ulaz"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Provjeri stanje Last.fm servera na"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Doznaj vise o Last.fm na "
 
 #~ msgid "Source"
 #~ msgstr "Izvor"

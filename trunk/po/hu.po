@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-02-12 21:43+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -45,6 +45,20 @@ msgstr "Gyűjtemény rendezése"
 msgid "Sort albums: "
 msgstr "Albumok rendezése: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Ha nem látja az MPD szerverét az automatikus érzékelésnek köszönhetően, "
+"ellenőrizze, hogy a zeroconf aktív az MPD konfigurációjában, vagy használja "
+"a kézi beállításokat."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Kiszolgáló automatikus felismerése"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Automatikus felismerés"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Név :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Jelszó :"
 
@@ -858,39 +872,11 @@ msgstr "Dal tulajdonságai"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Kiszolgáló automatikus felismerése"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Ha nem látja az MPD szerverét az automatikus érzékelésnek köszönhetően, "
-"ellenőrizze, hogy a zeroconf aktív az MPD konfigurációjában, vagy használja "
-"a kézi beállításokat."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Név"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Hoszt"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Port"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Ki kell választania a kiszolgálót."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Új profil"
 
@@ -1071,7 +1057,7 @@ msgid "%b %d %Y"
 msgstr "%Y %b. %d"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Soha"
 
@@ -1120,38 +1106,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler beállításai"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "A Last.fm kiszolgáló állapotának ellenőrzése"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Kikapcsolva"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "A Last.fm-ről a következő címen tudhat meg többet: "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Utolsó beküldés időpontja:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Last.fm profil"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Sorba állított számok:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Állapot:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Beküldött számok:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Felhasználói név:"
 
@@ -1276,6 +1254,21 @@ msgstr "Bővítmény a jelenlegi előadó kereséséhez a wikipédián."
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipédia"
+
+#~ msgid "Name"
+#~ msgstr "Név"
+
+#~ msgid "Host"
+#~ msgstr "Hoszt"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "A Last.fm kiszolgáló állapotának ellenőrzése"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "A Last.fm-ről a következő címen tudhat meg többet: "
 
 #~ msgid "Source"
 #~ msgstr "Forrás"

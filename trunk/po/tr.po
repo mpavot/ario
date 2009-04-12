@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-03-06 01:06+0000\n"
 "Last-Translator: Yahuda <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -45,6 +45,20 @@ msgstr "Kitaplık Organizasyonu"
 msgid "Sort albums: "
 msgstr "Albümleri sırala: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Eğer MPD sunucusunu göremiyorsanız bunu otomatik saptamaya borçlusunuz, MPD "
+"yapılandırmanızda zeroconf'un etkinleştirilmiş olduğunu denetleyin ya da "
+"kişisel yapılandırmanızı kullanın."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Otomatik sunucu saptaması"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Otomatik sapta"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Ad :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Parola:"
 
@@ -822,39 +836,11 @@ msgstr "Şarkı Özellikleri"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Otomatik sunucu saptaması"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Eğer MPD sunucusunu göremiyorsanız bunu otomatik saptamaya borçlusunuz, MPD "
-"yapılandırmanızda zeroconf'un etkinleştirilmiş olduğunu denetleyin ya da "
-"kişisel yapılandırmanızı kullanın."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Ad"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Sunucu"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Kapı"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Bir sunucu seçmelisiniz."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Yeni Profil"
 
@@ -1035,7 +1021,7 @@ msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Asla"
 
@@ -1084,38 +1070,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler yeğlenenleri"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Last.fm sunucu durumunu denetle:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Etkisizleştirildi"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Last.fm hakkında bilgi almak için: "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Son gönderme zamanı:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Last.fm Profili"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Sıralanmış parçalar:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Durum:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Gönderilen parçalar:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Kullanıcı adı:"
 
@@ -1240,6 +1218,21 @@ msgstr "Mevcut sanatçıyı Vikipedi'de aramak için bir eklenti"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Vikipedi"
+
+#~ msgid "Name"
+#~ msgstr "Ad"
+
+#~ msgid "Host"
+#~ msgstr "Sunucu"
+
+#~ msgid "Port"
+#~ msgstr "Kapı"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Last.fm sunucu durumunu denetle:"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Last.fm hakkında bilgi almak için: "
 
 #~ msgid "Source"
 #~ msgstr "Kaynak"
