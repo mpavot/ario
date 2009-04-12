@@ -47,6 +47,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioTrayIconPrivate ArioTrayIconPrivate;
 
+/**
+ * ArioTrayIcon provides a tray icon depending on system and
+ * in user preferences. It provides nice tooltips and can provide
+ * song change notifications.
+ */
 typedef struct
 {
 #ifdef ENABLE_EGGTRAYICON

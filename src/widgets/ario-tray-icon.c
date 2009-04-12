@@ -132,6 +132,7 @@ struct ArioTrayIconPrivate
 
 static ArioTrayIcon *instance = NULL;
 
+/* Actions */
 static GtkActionEntry ario_tray_icon_actions [] =
 {
         { "ControlPlay", GTK_STOCK_MEDIA_PLAY, N_("_Play"), "<control>Up",
@@ -150,9 +151,9 @@ static GtkActionEntry ario_tray_icon_actions [] =
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_previous) },
 };
-
 static guint ario_tray_icon_n_actions = G_N_ELEMENTS (ario_tray_icon_actions);
 
+/* Object properties */
 enum
 {
         PROP_0,
@@ -174,11 +175,12 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Virtual methods */
         object_class->finalize = ario_tray_icon_finalize;
-
         object_class->set_property = ario_tray_icon_set_property;
         object_class->get_property = ario_tray_icon_get_property;
 
+        /* Object properties */
         g_object_class_install_property (object_class,
                                          PROP_SHELL,
                                          g_param_spec_object ("shell",
@@ -201,6 +203,7 @@ ario_tray_icon_class_init (ArioTrayIconClass *klass)
                                                               GTK_TYPE_ACTION_GROUP,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioTrayIconPrivate));
 }
 
@@ -214,7 +217,10 @@ ario_tray_icon_init (ArioTrayIcon *icon)
         ario_tray_icon_construct_tooltip (icon);
 
 #ifdef ENABLE_EGGTRAYICON
+        /* Create an event box */
         icon->priv->ebox = gtk_event_box_new ();
+
+        /* Connect signals for actions on event box */
         g_signal_connect (icon->priv->ebox,
                           "button_press_event",
                           G_CALLBACK (ario_tray_icon_button_press_event_cb),
@@ -231,23 +237,36 @@ ario_tray_icon_init (ArioTrayIcon *icon)
                                   "leave-notify-event",
                                   G_CALLBACK (ario_tray_icon_leave_notify_event_cb),
                                   icon);
+
+        /* Create default icon */
         icon->priv->image = gtk_image_new_from_stock ("ario",
                                                       GTK_ICON_SIZE_SMALL_TOOLBAR);
         g_object_ref (icon->priv->image);
+
+        /* Create play icon */
         icon->priv->image_play = gtk_image_new_from_stock ("ario-play",
                                                            GTK_ICON_SIZE_SMALL_TOOLBAR);
         g_object_ref (icon->priv->image_play);
+
+        /* Create pause icon */
         icon->priv->image_pause = gtk_image_new_from_stock ("ario-pause",
                                                             GTK_ICON_SIZE_SMALL_TOOLBAR);
         g_object_ref (icon->priv->image_pause);
 
+        /* Add icon to event box */
         gtk_container_add (GTK_CONTAINER (icon->priv->ebox), icon->priv->image);
 
+        /* Add event box to eggtray icon */
         gtk_container_add (GTK_CONTAINER (icon), icon->priv->ebox);
         gtk_widget_show_all (GTK_WIDGET (icon->priv->ebox));
 #else
+        /* Create a GtkStatusIcon as eggtrayicon is not available */
         gtk_status_icon_set_tooltip (GTK_STATUS_ICON (icon), TRAY_ICON_DEFAULT_TOOLTIP);
+
+        /* Set icon */
         gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario");
+
+        /* Connext signals for actions on icon */
         g_signal_connect (icon,
                           "activate",
                           G_CALLBACK (ario_tray_icon_activate_cb),
@@ -257,6 +276,7 @@ ario_tray_icon_init (ArioTrayIcon *icon)
                           G_CALLBACK (ario_tray_icon_popup_cb),
                           icon);
 #endif
+        /* Connect signal for current cover changes */
         g_signal_connect_object (ario_cover_handler_get_instance (),
                                  "cover_changed",
                                  G_CALLBACK (ario_tray_icon_cover_changed_cb),
@@ -358,6 +378,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                                            NULL);
         instance = icon;
 
+        /* Connect signals for synchonization with server */
         g_signal_connect_object (server,
                                  "song_changed",
                                  G_CALLBACK (ario_tray_icon_song_changed_cb),
@@ -391,6 +412,7 @@ static gboolean
 ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
 {
         if (icon->priv->tooltips_pointer_above || icon->priv->notified) {
+                /* Show tooltip */
                 icon->priv->shown = TRUE;
                 ario_tray_icon_sync_tooltip_time (icon);
 #ifdef ENABLE_EGGTRAYICON
@@ -417,6 +439,7 @@ ario_tray_icon_update_tooltip_visibility (ArioTrayIcon *icon)
 #endif
                 gtk_widget_show (icon->priv->tooltip);
         } else {
+                /* Hide tooltip */
                 icon->priv->shown = FALSE;
                 gtk_widget_hide (icon->priv->tooltip);
         }
@@ -435,6 +458,7 @@ ario_tray_icon_enter_notify_event_cb (ArioTrayIcon *icon,
 {
         icon->priv->tooltips_pointer_above = TRUE;
 
+        /* Reset timeout */
         if (icon->priv->timeout_id)
                 g_source_remove (icon->priv->timeout_id);
         icon->priv->timeout_id = g_timeout_add (500,
@@ -447,11 +471,13 @@ ario_tray_icon_leave_notify_event_cb (ArioTrayIcon *icon,
                                       GdkEvent *event,
                                       GtkWidget *widget)
 {
-        if (icon->priv->tooltips_pointer_above)
-                icon->priv->tooltips_pointer_above = FALSE;
+        icon->priv->tooltips_pointer_above = FALSE;
 
+        /* Remove timeout */
         if (icon->priv->timeout_id)
                 g_source_remove (icon->priv->timeout_id);
+
+        /* Update tooltip visibility */
         ario_tray_icon_update_tooltip_visibility (icon);
 }
 
@@ -462,10 +488,12 @@ ario_tray_icon_middle_click (ArioTrayIcon *icon)
         int trayicon_behavior;
         int volume;
 
+        /* Get user preference */
         trayicon_behavior = ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT);
 
         switch (trayicon_behavior) {
         case TRAY_ICON_PLAY_PAUSE:
+                /* Play/Pause */
                 if (ario_server_is_paused ())
                         ario_server_do_play ();
                 else
@@ -473,21 +501,25 @@ ario_tray_icon_middle_click (ArioTrayIcon *icon)
                 break;
 
         case TRAY_ICON_NEXT_SONG:
+                /* Go to next song */
                 ario_server_do_next ();
                 break;
 
         case TRAY_ICON_MUTE:
                 volume = ario_server_get_current_volume ();
                 if (volume > 0) {
+                        /* Mute */
                         icon->priv->volume = volume;
                         ario_server_set_current_volume (0);
                 } else {
+                        /* Restore volume */
                         ario_server_set_current_volume (icon->priv->volume);
                 }
                 break;
 
         case TRAY_ICON_DO_NOTHING:
         default:
+                /* Do nothing */
                 break;
         }
 }
@@ -499,20 +531,23 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *popup;
 
-        /* filter out double, triple clicks */
+        /* Filter out double, triple clicks */
         if (event->type != GDK_BUTTON_PRESS)
                 return FALSE;
 
         switch (event->button) {
         case 1:
+                /* First button shows/hides Ario */
                 ario_shell_set_visibility (icon->priv->shell, VISIBILITY_TOGGLE);
                 break;
 
         case 2:
+                /* Second button action is configurable */
                 ario_tray_icon_middle_click (icon);
                 break;
 
         case 3:
+                /* Third button shows popup menu */
                 popup = gtk_ui_manager_get_widget (GTK_UI_MANAGER (icon->priv->ui_manager),
                                                    "/TrayPopup");
                 gtk_menu_set_screen (GTK_MENU (popup), gtk_widget_get_screen (GTK_WIDGET (icon)));
@@ -531,29 +566,31 @@ static gboolean
 ario_tray_icon_scroll_cb (GtkWidget *widget, GdkEvent *event,
                           ArioTrayIcon *icon)
 {
+        ARIO_LOG_FUNCTION_START;
         int volume_adjust_step;
+        gint vol;
 
         volume_adjust_step = ario_conf_get_integer (PREF_VOL_ADJUST_STEP, PREF_VOL_ADJUST_STEP_DEFAULT);
-
-        ARIO_LOG_FUNCTION_START;
-        gint vol = ario_server_get_current_volume ();
+        vol = ario_server_get_current_volume ();
 
         switch (event->scroll.direction) {
         case GDK_SCROLL_UP:
+                /* Increment volume */
                 vol += volume_adjust_step;
                 if (vol > 100)
                         vol = 100;
                 break;
         case GDK_SCROLL_DOWN:
+                /* Decrement volume */
                 vol -= volume_adjust_step;
                 if (vol < 0)
                         vol = 0;
                 break;
-        case GDK_SCROLL_LEFT:
-        case GDK_SCROLL_RIGHT:
+        default:
                 break;
         }
 
+        /* Change volume on server */
         ario_server_set_current_volume (vol);
 
         return FALSE;
@@ -564,6 +601,7 @@ ario_tray_icon_changed_cb (guint notification_id,
                            ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize icon visibility with user preferences */
         if (ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
                 gtk_widget_show_all (GTK_WIDGET (icon));
         else
@@ -575,7 +613,7 @@ ario_tray_icon_activate_cb (GtkStatusIcon *tray_icon,
                             ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
-
+        /* Show/hide main window */
         ario_shell_set_visibility (icon->priv->shell, VISIBILITY_TOGGLE);
 }
 
@@ -588,6 +626,7 @@ ario_tray_icon_popup_cb (GtkStatusIcon *tray_icon,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *popup;
 
+        /* Show popup menu */
         popup = gtk_ui_manager_get_widget (GTK_UI_MANAGER (icon->priv->ui_manager),
                                            "/TrayPopup");
 
@@ -605,6 +644,7 @@ ario_tray_icon_tooltip_size_allocate_cb (ArioTrayIcon *icon,
                                          GtkWidget *tooltip)
 {
 #ifdef ENABLE_EGGTRAYICON
+        /* change tooltup position */
         sexy_tooltip_position_to_widget (SEXY_TOOLTIP (icon->priv->tooltip),
                                          icon->priv->ebox);
 #endif
@@ -617,13 +657,18 @@ ario_tray_icon_construct_tooltip (ArioTrayIcon *icon)
         gint size;
         PangoFontDescription *font_desc;
 
+        /* Create tooltip */
         icon->priv->tooltip = sexy_tooltip_new ();
 
+        /* Connect signal to adjust tooltip position */
         g_signal_connect_object (icon->priv->tooltip, "size-allocate",
                                  (GCallback) ario_tray_icon_tooltip_size_allocate_cb,
                                  icon, G_CONNECT_SWAPPED | G_CONNECT_AFTER);
 
+        /* Create primary label */
         icon->priv->tooltip_primary = gtk_label_new (TRAY_ICON_DEFAULT_TOOLTIP);
+
+        /* Set primary label style */
         gtk_widget_modify_font (icon->priv->tooltip_primary, NULL);
         size = pango_font_description_get_size (icon->priv->tooltip_primary->style->font_desc);
         font_desc = pango_font_description_new ();
@@ -636,32 +681,44 @@ ario_tray_icon_construct_tooltip (ArioTrayIcon *icon)
         gtk_misc_set_alignment  (GTK_MISC  (icon->priv->tooltip_primary),
                                  0.0, 0.0);
 
+        /* Create secondary label */
         icon->priv->tooltip_secondary = gtk_label_new (NULL);
         gtk_label_set_line_wrap (GTK_LABEL (icon->priv->tooltip_secondary),
                                  TRUE);
         gtk_misc_set_alignment  (GTK_MISC  (icon->priv->tooltip_secondary),
                                  0.0, 0.0);
+
+        /* Create cover art image */
         icon->priv->cover_image = gtk_image_new ();
         icon->priv->tooltip_image_box = gtk_vbox_new (FALSE, 0);
         gtk_box_pack_start (GTK_BOX (icon->priv->tooltip_image_box), icon->priv->cover_image,
                             TRUE, FALSE, 0);
 
+        /* Create main hbox */
         hbox = gtk_hbox_new (FALSE, 6);
+
+        /* Create vbox for labels */
         vbox = gtk_vbox_new (FALSE, 2);
+
+        /* Create progress bar */
         icon->priv->tooltip_progress_bar = gtk_progress_bar_new ();
 
+        /* Add widgets to vbox */
         gtk_box_pack_start (GTK_BOX (vbox), icon->priv->tooltip_primary,
                             FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (vbox), icon->priv->tooltip_secondary,
                             TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (vbox), icon->priv->tooltip_progress_bar,
                             TRUE, TRUE, 0);
+
+        /* Add widgets to hbox */
         gtk_box_pack_start (GTK_BOX (hbox), icon->priv->tooltip_image_box,
                             FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), vbox,
                             TRUE, TRUE, 0);
         gtk_widget_show_all (hbox);
 
+        /* Add hbox to tooltip */
         gtk_container_add (GTK_CONTAINER (icon->priv->tooltip), hbox);
 }
 #ifndef ENABLE_EGGTRAYICON
@@ -675,6 +732,7 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
+                /* Change tooltip with server information */
                 title = ario_util_format_title(ario_server_get_current_song ());
                 tooltip = g_strdup_printf ("%s: %s\n%s: %s\n%s: %s",
                                            _("Artist"),
@@ -688,6 +746,7 @@ ario_tray_icon_sync_tooltip (ArioTrayIcon *icon)
                 g_free (tooltip);
                 break;
         default:
+                /* Set default tooltip */
                 gtk_status_icon_set_tooltip (GTK_STATUS_ICON (icon), TRAY_ICON_DEFAULT_TOOLTIP);
                 break;
         }
@@ -702,12 +761,13 @@ ario_tray_icon_sync_tooltip_song (ArioTrayIcon *icon)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                /* Title */
+                /* Set title in primary label*/
                 title = ario_util_format_title (ario_server_get_current_song ());
                 gtk_label_set_text (GTK_LABEL (icon->priv->tooltip_primary),
                                     title);
                 break;
         default:
+                /* Set default primary label */
                 gtk_label_set_text (GTK_LABEL (icon->priv->tooltip_primary),
                                     TRAY_ICON_DEFAULT_TOOLTIP);
                 break;
@@ -726,7 +786,7 @@ ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                /* Artist - Album */
+                /* Set Artist - Album in secondary label */
                 artist = ario_server_get_current_artist ();
                 album = ario_server_get_current_album ();
 
@@ -742,8 +802,8 @@ ario_tray_icon_sync_tooltip_album (ArioTrayIcon *icon)
                 g_free(secondary);
                 break;
         default:
-                gtk_label_set_markup (GTK_LABEL (icon->priv->tooltip_secondary),
-                                      "");
+                /* Set default secondary label */
+                gtk_label_set_markup (GTK_LABEL (icon->priv->tooltip_secondary), "");
                 gtk_widget_hide (icon->priv->tooltip_secondary);
                 break;
         }
@@ -759,7 +819,7 @@ ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon)
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
-                /* Icon */
+                /* Set cover art */
                 cover = ario_cover_handler_get_cover();
                 if (cover) {
                         gtk_image_set_from_pixbuf (GTK_IMAGE (icon->priv->cover_image), cover);
@@ -769,6 +829,7 @@ ario_tray_icon_sync_tooltip_cover (ArioTrayIcon *icon)
                 }
                 break;
         default:
+                /* Hide cover art */
                 gtk_widget_hide (icon->priv->cover_image);
                 break;
         }
@@ -784,23 +845,30 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
         gchar total_char[ARIO_MAX_TIME_SIZE];
         gchar *time;
 
+        /* Do noting if the tooltip is not shown */
         if (!icon->priv->shown)
                 return;
 
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
         case MPD_STATUS_STATE_PAUSE:
+                /* Get formated elapsed time */
                 elapsed = ario_server_get_current_elapsed ();
                 ario_util_format_time_buf (elapsed, elapsed_char, ARIO_MAX_TIME_SIZE);
+
+                /* Get total time */
                 total = ario_server_get_current_total_time ();
                 if (total) {
+                        /* Total time is set, we format it and show it */
                         ario_util_format_time_buf (total, total_char, ARIO_MAX_TIME_SIZE);
                         time = g_strdup_printf ("%s%s%s", elapsed_char, _(" of "), total_char);
                         gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), time);
                         g_free (time);
                 } else {
+                        /* No total time: We only show elapsed time */
                         gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), elapsed_char);
                 }
+                /* Adjust progress bar */
                 if (total > 0)
                         gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar),
                                                        (double) elapsed / (double) total);
@@ -810,6 +878,7 @@ ario_tray_icon_sync_tooltip_time (ArioTrayIcon *icon)
                 gtk_widget_show (icon->priv->tooltip_progress_bar);
                 break;
         default:
+                /* Set default value for progress bar */
                 gtk_progress_bar_set_text (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar), NULL);
                 gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (icon->priv->tooltip_progress_bar),
                                                0);
@@ -823,17 +892,21 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_EGGTRAYICON
+        /* Remove current icon */
         gtk_container_remove (GTK_CONTAINER (icon->priv->ebox),
                               GTK_WIDGET (gtk_container_get_children (GTK_CONTAINER (icon->priv->ebox))->data));
 
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
+                /* Add 'play' icon */
                 gtk_container_add (GTK_CONTAINER (icon->priv->ebox), icon->priv->image_play);
                 break;
         case MPD_STATUS_STATE_PAUSE:
+                /* Add 'pause' icon */
                 gtk_container_add (GTK_CONTAINER (icon->priv->ebox), icon->priv->image_pause);
                 break;
         default:
+                /* Add default icon */
                 gtk_container_add (GTK_CONTAINER (icon->priv->ebox), icon->priv->image);
                 break;
         }
@@ -841,12 +914,15 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
 #else
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
+                /* Add 'play' icon */
                 gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-play");
                 break;
         case MPD_STATUS_STATE_PAUSE:
+                /* Add 'pause' icon */
                 gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-pause");
                 break;
         default:
+                /* Add default icon */
                 gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario");
                 break;
         }
@@ -859,8 +935,11 @@ ario_tray_icon_sync_popup (ArioTrayIcon *icon)
         ARIO_LOG_FUNCTION_START;
         int state = ario_server_get_current_state ();
 
+        /* Hide Play button in popup menu if already playing */
         gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPlay"),
                                 state != MPD_STATUS_STATE_PLAY);
+
+        /* Hide Pause button in popup menu if not playing */
         gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPause"),
                                 state == MPD_STATUS_STATE_PLAY);
 }
@@ -870,10 +949,14 @@ ario_tray_icon_song_changed_cb (ArioServer *server,
                                 ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchonize song info */
         ario_tray_icon_sync_tooltip_song (icon);
+
+        /* Synchonize time info */
         ario_tray_icon_sync_tooltip_time (icon);
 
 #ifndef ENABLE_EGGTRAYICON
+        /* Synchronize tooltip info */
         ario_tray_icon_sync_tooltip (icon);
 #endif
 }
@@ -882,12 +965,15 @@ void
 ario_tray_icon_notify (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Start notification */
         instance->priv->notified = TRUE;
         ario_tray_icon_update_tooltip_visibility (instance);
 
+        /* Remove previous timeout if needed */
         if (instance->priv->notification_id)
                 g_source_remove (instance->priv->notification_id);
 
+        /* Add a timeout to stop notification */
         instance->priv->notification_id = g_timeout_add (ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000,
                                                          (GSourceFunc) ario_tray_icon_update_tooltip_visibility,
                                                          instance);
@@ -898,6 +984,7 @@ ario_tray_icon_album_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize album info */
         ario_tray_icon_sync_tooltip_album (icon);
 }
 
@@ -906,13 +993,23 @@ ario_tray_icon_state_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize song info */
         ario_tray_icon_sync_tooltip_song (icon);
+
+        /* Synchronize album info */
         ario_tray_icon_sync_tooltip_album (icon);
+
+        /* Synchronize time info */
         ario_tray_icon_sync_tooltip_time (icon);
+
+        /* Synchronize icon */
         ario_tray_icon_sync_icon (icon);
+
+        /* Synchronize popup menu */
         ario_tray_icon_sync_popup (icon);
 
 #ifndef ENABLE_EGGTRAYICON
+        /* Synchronize tooltip info */
         ario_tray_icon_sync_tooltip (icon);
 #endif
 }
@@ -923,6 +1020,7 @@ ario_tray_icon_time_changed_cb (ArioServer *server,
                                 ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize time info */
         ario_tray_icon_sync_tooltip_time (icon);
 }
 
@@ -931,6 +1029,7 @@ ario_tray_icon_cover_changed_cb (ArioCoverHandler *cover_handler,
                                  ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize cover art */
         ario_tray_icon_sync_tooltip_cover (icon);
 }
 
@@ -939,6 +1038,7 @@ ario_tray_icon_cmd_play (GtkAction *action,
                          ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Send play command to server */
         ario_server_do_play ();
         ario_server_update_status ();
 }
@@ -948,6 +1048,7 @@ ario_tray_icon_cmd_pause (GtkAction *action,
                           ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Send pause command to server */
         ario_server_do_pause ();
         ario_server_update_status ();
 }
@@ -957,6 +1058,7 @@ ario_tray_icon_cmd_stop (GtkAction *action,
                          ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Send stop command to server */
         ario_server_do_stop ();
         ario_server_update_status ();
 }
@@ -966,6 +1068,7 @@ ario_tray_icon_cmd_next (GtkAction *action,
                          ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Send next song command to server */
         ario_server_do_next ();
 }
 
@@ -974,6 +1077,7 @@ ario_tray_icon_cmd_previous (GtkAction *action,
                              ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Send previsou song command to server */
         ario_server_do_prev ();
 }
 
