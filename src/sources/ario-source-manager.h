@@ -43,6 +43,11 @@ typedef enum
 
 typedef struct ArioSourceManagerPrivate ArioSourceManagerPrivate;
 
+/**
+ * ArioSourceManager is a widget used to display,
+ * reorder, activate, deactivate the different
+ * ArioSource
+ */
 typedef struct
 {
         GtkNotebook parent;

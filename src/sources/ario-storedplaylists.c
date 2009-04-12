@@ -22,15 +22,16 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "lib/ario-conf.h"
-#include "widgets/ario-songlist.h"
-#include "shell/ario-shell-songinfos.h"
-#include "ario-util.h"
+
 #include "ario-debug.h"
-#include "servers/ario-server.h"
+#include "ario-util.h"
+#include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
-#include "widgets/ario-playlist.h"
+#include "servers/ario-server.h"
+#include "shell/ario-shell-songinfos.h"
 #include "widgets/ario-dnd-tree.h"
+#include "widgets/ario-playlist.h"
+#include "widgets/ario-songlist.h"
 
 #ifdef ENABLE_STOREDPLAYLISTS
 
@@ -59,10 +60,6 @@ static void ario_storedplaylists_popup_menu_cb (ArioDndTree* tree,
                                                 ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_playlists_activate_cb (ArioDndTree* tree,
                                                         ArioStoredplaylists *storedplaylists);
-static void ario_storedplaylists_playlists_selection_drag_foreach (GtkTreeModel *model,
-                                                                   GtkTreePath *path,
-                                                                   GtkTreeIter *iter,
-                                                                   gpointer userdata);
 static void ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
                                                              GdkDragContext * context,
                                                              GtkSelectionData * selection_data,
@@ -73,7 +70,6 @@ static void ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *stor
 
 struct ArioStoredplaylistsPrivate
 {
-        GtkWidget *tree;
         GtkListStore *model;
         GtkTreeSelection *selection;
 
@@ -86,6 +82,7 @@ struct ArioStoredplaylistsPrivate
         GtkUIManager *ui_manager;
 };
 
+/* Actions on playlists list */
 static GtkActionEntry ario_storedplaylists_actions [] =
 {
         { "StoredplaylistsAddPlaylists", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
@@ -103,6 +100,7 @@ static GtkActionEntry ario_storedplaylists_actions [] =
 };
 static guint ario_storedplaylists_n_actions = G_N_ELEMENTS (ario_storedplaylists_actions);
 
+/* Actions on songs list */
 static GtkActionEntry ario_storedplaylists_songs_actions [] =
 {
         { "StoredplaylistsAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
@@ -120,6 +118,7 @@ static GtkActionEntry ario_storedplaylists_songs_actions [] =
 };
 static guint ario_storedplaylists_n_songs_actions = G_N_ELEMENTS (ario_storedplaylists_songs_actions);
 
+/* Object properties */
 enum
 {
         PROP_0,
@@ -132,6 +131,7 @@ enum
         PLAYLISTS_N_COLUMN
 };
 
+/* Drag and drop targets */
 static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
@@ -162,6 +162,7 @@ ario_storedplaylists_select (ArioSource *source)
 {
         ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (source);
 
+        /* Fill playlists list if it's empty */
         if (storedplaylists->priv->empty)
                 ario_storedplaylists_fill_storedplaylists (storedplaylists);
 }
@@ -173,15 +174,18 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
+        /* GObject virtual methods */
         object_class->set_property = ario_storedplaylists_set_property;
         object_class->get_property = ario_storedplaylists_get_property;
 
+        /* ArioSource virtual methods */
         source_class->get_id = ario_storedplaylists_get_id;
         source_class->get_name = ario_storedplaylists_get_name;
         source_class->get_icon = ario_storedplaylists_get_icon;
         source_class->shutdown = ario_storedplaylists_shutdown;
         source_class->select = ario_storedplaylists_select;
 
+        /* Object properties */
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -190,6 +194,7 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
                                                               GTK_TYPE_UI_MANAGER,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
 }
 
@@ -199,24 +204,27 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         ARIO_LOG_FUNCTION_START;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
-        int pos;
         GtkWidget *scrolledwindow_storedplaylists;
+        GtkWidget *tree;
+        int pos;
 
         storedplaylists->priv = ARIO_STOREDPLAYLISTS_GET_PRIVATE (storedplaylists);
 
         storedplaylists->priv->connected = FALSE;
         storedplaylists->priv->empty = TRUE;
 
-        /* Storedplaylists list */
+        /* Create scrolled window for playlists list */
         scrolledwindow_storedplaylists = gtk_scrolled_window_new (NULL, NULL);
         gtk_widget_show (scrolledwindow_storedplaylists);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow_storedplaylists), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow_storedplaylists), GTK_SHADOW_IN);
 
-        storedplaylists->priv->tree = ario_dnd_tree_new (songs_targets,
-                                                         G_N_ELEMENTS (songs_targets),
-                                                         FALSE);
+        /* Drag and drop tree for playlists list */
+        tree = ario_dnd_tree_new (songs_targets,
+                                  G_N_ELEMENTS (songs_targets),
+                                  FALSE);
 
+        /* Add column for playlists list */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Playlist"),
                                                            renderer,
@@ -224,25 +232,31 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                                                            NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_fixed_width (column, 50);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (storedplaylists->priv->tree), column);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+        /* Create model for playlists list */
         storedplaylists->priv->model = gtk_list_store_new (PLAYLISTS_N_COLUMN,
                                                            G_TYPE_STRING);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (storedplaylists->priv->model),
                                               0, GTK_SORT_ASCENDING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (storedplaylists->priv->tree),
+        gtk_tree_view_set_model (GTK_TREE_VIEW (tree),
                                  GTK_TREE_MODEL (storedplaylists->priv->model));
-        storedplaylists->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (storedplaylists->priv->tree));
+
+        /* Get selection for playlists list */
+        storedplaylists->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
         gtk_tree_selection_set_mode (storedplaylists->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
-        gtk_container_add (GTK_CONTAINER (scrolledwindow_storedplaylists), storedplaylists->priv->tree);
 
-        g_signal_connect (GTK_TREE_VIEW (storedplaylists->priv->tree),
+        gtk_container_add (GTK_CONTAINER (scrolledwindow_storedplaylists), tree);
+
+        /* Signals for actions on playlists list */
+        g_signal_connect (GTK_TREE_VIEW (tree),
                           "drag_data_get",
                           G_CALLBACK (ario_storedplaylists_playlists_drag_data_get_cb), storedplaylists);
-        g_signal_connect (GTK_TREE_VIEW (storedplaylists->priv->tree),
+        g_signal_connect (GTK_TREE_VIEW (tree),
                           "popup",
                           G_CALLBACK (ario_storedplaylists_popup_menu_cb), storedplaylists);
-        g_signal_connect (GTK_TREE_VIEW (storedplaylists->priv->tree),
+        g_signal_connect (GTK_TREE_VIEW (tree),
                           "activate",
                           G_CALLBACK (ario_storedplaylists_playlists_activate_cb), storedplaylists);
         g_signal_connect (storedplaylists->priv->selection,
@@ -268,6 +282,7 @@ ario_storedplaylists_shutdown (ArioSource *source)
         ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (source);
         int pos;
 
+        /* Save hpaned position */
         pos = gtk_paned_get_position (GTK_PANED (storedplaylists->priv->paned));
         if (pos > 0)
                 ario_conf_set_integer (PREF_PLAYLISTS_HPANED_SIZE,
@@ -334,12 +349,13 @@ ario_storedplaylists_new (GtkUIManager *mgr,
                                  "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
                                  storedplaylists, 0);
 
-        /* Songs list */
+        /* Create songs list */
         storedplaylists->priv->songs = ario_songlist_new (mgr,
                                                           "/StoredplaylistsSongsPopup",
                                                           FALSE);
         gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), storedplaylists->priv->songs, TRUE, FALSE);
 
+        /* Register actions */
         gtk_action_group_add_actions (group,
                                       ario_storedplaylists_actions,
                                       ario_storedplaylists_n_actions, storedplaylists);
@@ -360,13 +376,16 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
 
         storedplaylists->priv->empty = FALSE;
 
+        /* Empty playlists list */
         gtk_list_store_clear (storedplaylists->priv->model);
 
         if (!storedplaylists->priv->connected)
                 return;
 
+        /* Get playlists list on server */
         playlists = ario_server_get_playlists ();
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
+                /* Add playlist to list */
                 gtk_list_store_append (storedplaylists->priv->model, &storedplaylists_iter);
                 gtk_list_store_set (storedplaylists->priv->model, &storedplaylists_iter, 0,
                                     tmp->data, -1);
@@ -375,6 +394,7 @@ ario_storedplaylists_fill_storedplaylists (ArioStoredplaylists *storedplaylists)
         g_slist_foreach (playlists, (GFunc) g_free, NULL);
         g_slist_free (playlists);
 
+        /* Select first playlist */
         gtk_tree_selection_unselect_all (storedplaylists->priv->selection);
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (storedplaylists->priv->model), &storedplaylists_iter))
                 gtk_tree_selection_select_iter (storedplaylists->priv->selection, &storedplaylists_iter);
@@ -393,7 +413,7 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
         ArioServerSong *song;
         GtkTreeIter song_iter;
         gchar *title;
-        GtkListStore *liststore = ario_songlist_get_liststore (ARIO_SONGLIST (storedplaylists->priv->songs));
+        GtkListStore *liststore;
 
         g_return_if_fail (IS_ARIO_STOREDPLAYLISTS (storedplaylists));
 
@@ -402,10 +422,13 @@ ario_storedplaylists_playlists_selection_foreach (GtkTreeModel *model,
         if (!playlist)
                 return;
 
+        /* Get list of songs of selected playlist */
         songs = ario_server_get_songs_from_playlist (playlist);
         g_free (playlist);
 
+        liststore = ario_songlist_get_liststore (ARIO_SONGLIST (storedplaylists->priv->songs));
         for (temp = songs; temp; temp = g_slist_next (temp)) {
+                /* Append each song to the list */
                 song = temp->data;
                 gtk_list_store_append (liststore, &song_iter);
 
@@ -431,12 +454,15 @@ ario_storedplaylists_playlists_selection_update (ArioStoredplaylists *storedplay
         GtkListStore *liststore = ario_songlist_get_liststore (songlist);
         GtkTreeSelection *selection = ario_songlist_get_selection (songlist);
 
+        /* Empty songs list */
         gtk_list_store_clear (liststore);
 
+        /* Add songs of each selected playlist */
         gtk_tree_selection_selected_foreach (storedplaylists->priv->selection,
                                              ario_storedplaylists_playlists_selection_foreach,
                                              storedplaylists);
 
+        /* Select first song */
         gtk_tree_selection_unselect_all (selection);
         if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (liststore), &song_iter))
                 gtk_tree_selection_select_iter (selection, &song_iter);
@@ -456,6 +482,8 @@ ario_storedplaylists_connectivity_changed_cb (ArioServer *server,
 {
         ARIO_LOG_FUNCTION_START;
         storedplaylists->priv->connected = ario_server_is_connected ();
+
+        /* Fill playlists list */
         if (!storedplaylists->priv->empty)
                 ario_storedplaylists_fill_storedplaylists (storedplaylists);
 }
@@ -465,6 +493,7 @@ ario_storedplaylists_storedplaylists_changed_cb (ArioServer *server,
                                                  ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Fill playlists list */
         ario_storedplaylists_fill_storedplaylists (storedplaylists);
 }
 
@@ -478,6 +507,7 @@ storedplaylists_foreach (GtkTreeModel *model,
         GSList **storedplaylists = (GSList **) userdata;
         gchar *val = NULL;
 
+        /* Append playlist name to the list */
         gtk_tree_model_get (model, iter, PLAYLISTS_NAME_COLUMN, &val, -1);
         *storedplaylists = g_slist_append (*storedplaylists, val);
 }
@@ -491,12 +521,16 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
         GSList *songs = NULL;
         GSList *tmp;
 
+        /* Get a list of playlists names */
         gtk_tree_selection_selected_foreach (storedplaylists->priv->selection,
                                              storedplaylists_foreach,
                                              &playlists);
 
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
+                /* Get songs from playlist */
                 songs = ario_server_get_songs_from_playlist (tmp->data);
+
+                /* Append songs to main playlist */
                 ario_server_playlist_append_server_songs (songs, play);
 
                 g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
@@ -510,7 +544,10 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
 static void
 ario_storedplaylists_clear_add_play_playlists (ArioStoredplaylists *storedplaylists)
 {
+        /* Empty playlist */
         ario_server_clear ();
+
+        /* Add songs to playlist and play */
         ario_storedplaylists_add_playlists (storedplaylists, TRUE);
 }
 
@@ -519,6 +556,7 @@ ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
                                               ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Add songs to playlist */
         ario_storedplaylists_add_playlists (storedplaylists, FALSE);
 }
 
@@ -527,6 +565,7 @@ ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
                                                    ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Add songs to playlist and play */
         ario_storedplaylists_add_playlists (storedplaylists, TRUE);
 }
 
@@ -545,23 +584,28 @@ ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
-        GSList *playlists = NULL;        GSList *tmp;
+        GSList *playlists = NULL;
+        GSList *tmp;
 
+        /* Create confirmation dialog for playlist deletion */
         dialog = gtk_message_dialog_new (NULL,
                                          GTK_DIALOG_MODAL,
                                          GTK_MESSAGE_QUESTION,
                                          GTK_BUTTONS_YES_NO,
                                          _("Are you sure that you want to delete all the selected playlists?"));
 
+        /* Run dialog */
         retval = gtk_dialog_run (GTK_DIALOG(dialog));
         gtk_widget_destroy (dialog);
         if (retval != GTK_RESPONSE_YES)
                 return;
 
+        /* Get list of selected playlists */
         gtk_tree_selection_selected_foreach (storedplaylists->priv->selection,
                                              storedplaylists_foreach,
                                              &playlists);
 
+        /* Delete each selected playlist */
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 ario_server_delete_playlist (tmp->data);
         }
@@ -577,6 +621,7 @@ ario_storedplaylists_popup_menu_cb (ArioDndTree* tree,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
+        /* Show popup menu */
         menu = gtk_ui_manager_get_widget (storedplaylists->priv->ui_manager, "/StoredplaylistsPopup");
         gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
                         gtk_get_current_event_time ());
@@ -588,21 +633,6 @@ ario_storedplaylists_playlists_activate_cb (ArioDndTree* tree,
 {
         ARIO_LOG_FUNCTION_START;
         ario_storedplaylists_add_playlists (storedplaylists, FALSE);
-}
-
-static void
-ario_storedplaylists_playlists_selection_drag_foreach (GtkTreeModel *model,
-                                                       GtkTreePath *path,
-                                                       GtkTreeIter *iter,
-                                                       gpointer userdata)
-{
-        ARIO_LOG_FUNCTION_START;
-        GSList **playlists = (GSList **) userdata;
-        gchar *val = NULL;
-
-        gtk_tree_model_get (model, iter, PLAYLISTS_NAME_COLUMN, &val, -1);
-
-        *playlists = g_slist_append (*playlists, val);
 }
 
 static void
@@ -625,11 +655,12 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (widget != NULL);
         g_return_if_fail (selection_data != NULL);
 
-
+        /* Get list of selected playlists */
         gtk_tree_selection_selected_foreach (storedplaylists->priv->selection,
-                                             ario_storedplaylists_playlists_selection_drag_foreach,
+                                             storedplaylists_foreach,
                                              &playlists);
 
+        /* Get string of playlist names concatenation */
         str_playlists = g_string_new("");
         for (tmp = playlists; tmp; tmp = g_slist_next (tmp)) {
                 songs = ario_server_get_songs_from_playlist (tmp->data);
@@ -647,6 +678,7 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
         g_slist_foreach (playlists, (GFunc) g_free, NULL);
         g_slist_free (playlists);
 
+        /* Set drag data */
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) str_playlists->str,
                                 strlen (str_playlists->str) * sizeof(guchar));
 
