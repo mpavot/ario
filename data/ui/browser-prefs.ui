@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">5</property>
-    <property name="lower">1</property>
-    <property name="page_increment">10</property>
-    <property name="step_increment">1</property>
-    <property name="page_size">0</property>
     <property name="value">1</property>
+    <property name="lower">1</property>
+    <property name="upper">5</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
   </object>
   <object class="GtkVBox" id="browser_vbox">
     <property name="visible">True</property>
@@ -16,7 +16,7 @@
         <property name="visible">True</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
@@ -34,17 +34,19 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="adjustment">adjustment1</property>
-                        <signal handler="ario_browser_preferences_treesnb_changed_cb" name="value_changed"/>
+                        <signal name="value_changed" handler="ario_browser_preferences_treesnb_changed_cb"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -70,6 +72,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
+        <property name="position">0</property>
       </packing>
     </child>
     <child>
@@ -77,7 +80,7 @@
         <property name="visible">True</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment">
             <property name="visible">True</property>
@@ -98,12 +101,20 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkComboBox" id="sort_combobox">
                         <property name="visible">True</property>
-                        <signal handler="ario_browser_preferences_sort_changed_cb" name="changed"/>
+                        <property name="model">liststore</property>
+                        <signal name="changed" handler="ario_browser_preferences_sort_changed_cb"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="sort_renderer"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -112,6 +123,9 @@
                       </packing>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
             </child>
@@ -131,5 +145,18 @@
       </packing>
     </child>
   </object>
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name sort -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Alphabetically</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">By year</col>
+      </row>
+    </data>
+  </object>
 </interface>
-

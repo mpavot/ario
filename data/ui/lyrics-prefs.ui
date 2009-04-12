@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="lyrics_model">
+    <columns>
+      <!-- column-name enabled -->
+      <column type="gboolean"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkVBox" id="lyrics_vbox">
     <property name="visible">True</property>
     <child>
@@ -9,7 +20,7 @@
         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment2">
             <property name="visible">True</property>
@@ -26,18 +37,48 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="shadow_type">GTK_SHADOW_IN</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
                     <child>
                       <object class="GtkTreeView" id="lyrics_treeview">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="headers_clickable">True</property>
+                        <property name="model">lyrics_model</property>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                            <property name="sizing">fixed</property>
+                            <property name="fixed_width">80</property>
+                            <property name="title">Enabled</property>
+                            <child>
+                              <object class="GtkCellRendererToggle" id="cellrenderertoggle1">
+                                <signal name="toggled" handler="ario_lyrics_preferences_lyrics_toggled_cb"/>
+                              </object>
+                              <attributes>
+                                <attribute name="active">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                            <property name="sizing">fixed</property>
+                            <property name="title">Name</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkVBox" id="vbox1">
@@ -50,7 +91,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_lyrics_preferences_top_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_lyrics_preferences_top_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
@@ -62,6 +103,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
@@ -70,7 +112,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_lyrics_preferences_up_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_lyrics_preferences_up_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
@@ -89,7 +131,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_lyrics_preferences_down_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_lyrics_preferences_down_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image3">
                             <property name="visible">True</property>
@@ -108,7 +150,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_lyrics_preferences_bottom_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_lyrics_preferences_bottom_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image4">
                             <property name="visible">True</property>
@@ -143,8 +185,8 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
+        <property name="position">0</property>
       </packing>
     </child>
   </object>
 </interface>
-

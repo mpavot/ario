@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkVBox" id="playlist_vbox">
     <property name="visible">True</property>
     <child>
@@ -8,7 +9,7 @@
         <property name="visible">True</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
@@ -19,12 +20,16 @@
                 <property name="spacing">4</property>
                 <child>
                   <object class="GtkCheckButton" id="autoscroll_checkbutton">
+                    <property name="label" translatable="yes">Go to current song when a new song is played</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Go to current song when a new song is played</property>
+                    <property name="receives_default">False</property>
                     <property name="draw_indicator">True</property>
-                    <signal handler="ario_playlist_preferences_autoscroll_toogled_cb" name="toggled"/>
+                    <signal name="toggled" handler="ario_playlist_preferences_autoscroll_toogled_cb"/>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label2">
@@ -42,24 +47,23 @@
                     <property name="n_rows">3</property>
                     <property name="n_columns">3</property>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="GtkCheckButton" id="track_checkbutton">
+                        <property name="label" translatable="yes">Track</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Track</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_track_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_track_toogled_cb"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="title_checkbutton">
+                        <property name="label" translatable="yes">Title</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Title</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_title_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_title_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="top_attach">1</property>
@@ -68,11 +72,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="artist_checkbutton">
+                        <property name="label" translatable="yes">Artist</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Artist</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_artist_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_artist_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="top_attach">2</property>
@@ -81,11 +86,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="album_checkbutton">
+                        <property name="label" translatable="yes">Album</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Album</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_album_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_album_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -94,11 +100,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="date_checkbutton">
+                        <property name="label" translatable="yes">Date</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Date</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_date_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_date_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -107,11 +114,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="duration_checkbutton">
+                        <property name="label" translatable="yes">Duration</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Duration</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_duration_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_duration_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -122,11 +130,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="genre_checkbutton">
+                        <property name="label" translatable="yes">Genre</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Genre</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_genre_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_genre_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -137,11 +146,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="file_checkbutton">
+                        <property name="label" translatable="yes">File</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">File</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_playlist_preferences_file_toogled_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_playlist_preferences_file_toogled_cb"/>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -149,6 +159,9 @@
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>
@@ -169,6 +182,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
+        <property name="position">0</property>
       </packing>
     </child>
     <child>
@@ -177,7 +191,7 @@
         <property name="no_show_all">True</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment2">
             <property name="visible">True</property>
@@ -202,13 +216,21 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkComboBox" id="playlist_combobox">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_playlist_preferences_playlist_mode_changed_cb" name="changed"/>
+                        <property name="model">liststore</property>
+                        <signal name="changed" handler="ario_playlist_preferences_playlist_mode_changed_cb"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -217,6 +239,9 @@
                       </packing>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
               </object>
             </child>
@@ -236,5 +261,12 @@
       </packing>
     </child>
   </object>
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
 </interface>
-

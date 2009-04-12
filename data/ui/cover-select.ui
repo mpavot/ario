@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name bmp -->
+      <column type="GdkPixbuf"/>
+    </columns>
+  </object>
   <object class="GtkVBox" id="vbox">
     <property name="visible">True</property>
     <child>
@@ -21,6 +28,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -38,6 +46,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -52,6 +61,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -77,6 +87,7 @@
             <property name="expand">False</property>
             <property name="fill">False</property>
             <property name="padding">15</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
@@ -88,7 +99,7 @@
             <property name="expand">False</property>
             <property name="fill">False</property>
             <property name="padding">15</property>
-            <property name="pack_type">GTK_PACK_END</property>
+            <property name="pack_type">end</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -97,6 +108,7 @@
         <property name="expand">False</property>
         <property name="fill">False</property>
         <property name="padding">7</property>
+        <property name="position">0</property>
       </packing>
     </child>
     <child>
@@ -135,7 +147,7 @@
                       </object>
                       <packing>
                         <property name="x_options">GTK_FILL</property>
-                        <property name="y_options"/>
+                        <property name="y_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -148,7 +160,7 @@
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
                         <property name="x_options">GTK_FILL</property>
-                        <property name="y_options"/>
+                        <property name="y_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -160,7 +172,7 @@
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
-                        <property name="y_options"/>
+                        <property name="y_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -174,25 +186,27 @@
                         <property name="right_attach">2</property>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
-                        <property name="y_options"/>
+                        <property name="y_options"></property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkButton" id="search_button">
+                    <property name="label">gtk-find</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label">gtk-find</property>
+                    <property name="receives_default">False</property>
                     <property name="use_stock">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="pack_type">GTK_PACK_END</property>
+                    <property name="pack_type">end</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -201,19 +215,32 @@
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="padding">6</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
-                <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                <property name="shadow_type">GTK_SHADOW_IN</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="vscrollbar_policy">automatic</property>
+                <property name="shadow_type">in</property>
                 <child>
                   <object class="GtkTreeView" id="listview">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="model">liststore</property>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                        <property name="title">Covers</property>
+                        <child>
+                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                          <attributes>
+                            <attribute name="pixbuf">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -247,12 +274,16 @@
                     <property name="can_focus">True</property>
                     <property name="invisible_char">*</property>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkButton" id="local_open_button">
+                    <property name="label">gtk-open</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label">gtk-open</property>
+                    <property name="receives_default">False</property>
                     <property name="use_stock">True</property>
                   </object>
                   <packing>
@@ -265,6 +296,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
           </object>
@@ -290,4 +322,3 @@
     </child>
   </object>
 </interface>
-

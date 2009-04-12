@@ -43,7 +43,9 @@ G_MODULE_EXPORT void ario_server_preferences_update_changed_cb (GtkWidget *widge
                                                                 ArioServerPreferences *server_preferences);
 G_MODULE_EXPORT void ario_server_preferences_stopexit_changed_cb (GtkWidget *widget,
                                                                   ArioServerPreferences *server_preferences);
-
+G_MODULE_EXPORT void ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
+                                                                gchar *path_str,
+                                                                ArioServerPreferences *server_preferences);
 
 struct ArioServerPreferencesPrivate
 {
@@ -51,7 +53,6 @@ struct ArioServerPreferencesPrivate
         GtkWidget *crossfadetime_spinbutton;
         GtkWidget *updatedb_label;
         GtkWidget *updatedb_button;
-        GtkWidget *outputs_treeview;
         GtkListStore *outputs_model;
 
         GtkWidget *update_checkbutton;
@@ -85,7 +86,7 @@ ario_server_preferences_init (ArioServerPreferences *server_preferences)
         server_preferences->priv = ARIO_SERVER_PREFERENCES_GET_PRIVATE (server_preferences);
 }
 
-static void
+void
 ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
                                            gchar *path_str,
                                            ArioServerPreferences *server_preferences)
@@ -113,8 +114,6 @@ ario_server_preferences_new (void)
         ARIO_LOG_FUNCTION_START;
         ArioServerPreferences *server_preferences;
         GtkBuilder *builder;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
         ArioServer *server = ario_server_get_instance ();
 
         server_preferences = g_object_new (TYPE_ARIO_SERVER_PREFERENCES,
@@ -134,49 +133,24 @@ ario_server_preferences_new (void)
         builder = gtk_builder_helpers_new (UI_PATH "server-prefs.ui",
                                            server_preferences);
 
-        server_preferences->priv->crossfade_checkbutton = 
+        server_preferences->priv->crossfade_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "crossfade_checkbutton"));
-        server_preferences->priv->crossfadetime_spinbutton = 
+        server_preferences->priv->crossfadetime_spinbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "crossfadetime_spinbutton"));
-        server_preferences->priv->updatedb_label = 
+        server_preferences->priv->updatedb_label =
                 GTK_WIDGET (gtk_builder_get_object (builder, "updatedb_label"));
-        server_preferences->priv->updatedb_button = 
+        server_preferences->priv->updatedb_button =
                 GTK_WIDGET (gtk_builder_get_object (builder, "updatedb_button"));
-        server_preferences->priv->outputs_treeview = 
-                GTK_WIDGET (gtk_builder_get_object (builder, "outputs_treeview"));
-        server_preferences->priv->update_checkbutton = 
+        server_preferences->priv->update_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "update_checkbutton"));
-        server_preferences->priv->stopexit_checkbutton = 
+        server_preferences->priv->stopexit_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "stopexit_checkbutton"));
+        server_preferences->priv->outputs_model =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "outputs_model"));
 
         gtk_builder_helpers_boldify_label (builder, "crossfade_frame_label");
         gtk_builder_helpers_boldify_label (builder, "database_frame_label");
         gtk_builder_helpers_boldify_label (builder, "ouputs_frame_label");
-
-        server_preferences->priv->outputs_model = gtk_list_store_new (N_COLUMN,
-                                                                      G_TYPE_BOOLEAN,
-                                                                      G_TYPE_STRING,
-                                                                      G_TYPE_INT);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (server_preferences->priv->outputs_treeview),
-                                 GTK_TREE_MODEL (server_preferences->priv->outputs_model));
-        renderer = gtk_cell_renderer_toggle_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Enabled"),
-                                                           renderer,
-                                                           "active", ENABLED_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 80);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (server_preferences->priv->outputs_treeview), column);
-        g_signal_connect (GTK_OBJECT (renderer),
-                          "toggled",
-                          G_CALLBACK (ario_server_preferences_output_toggled_cb), server_preferences);
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Name"),
-                                                           renderer,
-                                                           "text", NAME_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (server_preferences->priv->outputs_treeview), column);
 
         ario_server_preferences_sync_server (server_preferences);
 

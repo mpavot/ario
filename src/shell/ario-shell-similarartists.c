@@ -48,14 +48,12 @@ G_MODULE_EXPORT void ario_shell_similarartists_addall_cb (GtkButton *button,
 #define IMAGE_SIZE 120
 
 struct ArioShellSimilarartistsPrivate
-{      
+{
+        GtkTreeSelection *selection;
         GtkListStore *liststore;
         GThread *thread;
 
-        GtkTreeSelection *selection;
-
         gboolean closed;
-
         const gchar* artist;
 };
 
@@ -339,8 +337,6 @@ ario_shell_similarartists_new (void)
         ArioShellSimilarartists *shell_similarartists;
         GtkBuilder *builder;
         GtkWidget *treeview;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
         gchar *artist;
 
         artist = ario_server_get_current_artist ();
@@ -356,41 +352,9 @@ ario_shell_similarartists_new (void)
         builder = gtk_builder_helpers_new (UI_PATH "similar-artists.ui",
                                            shell_similarartists);
         treeview = GTK_WIDGET (gtk_builder_get_object (builder, "treeview"));
+        shell_similarartists->priv->liststore =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "liststore"));
 
-        shell_similarartists->priv->liststore = gtk_list_store_new (N_COLUMN,
-                                                                    GDK_TYPE_PIXBUF,
-                                                                    G_TYPE_STRING,
-                                                                    G_TYPE_STRING,
-                                                                    G_TYPE_STRING,
-                                                                    G_TYPE_STRING);
-
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Image"), 
-                                                           renderer,
-                                                           "pixbuf", 
-                                                           IMAGE_COLUMN, NULL);
-
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, IMAGE_SIZE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Artist"),
-                                                           renderer,
-                                                           "text", ARTIST_COLUMN,
-                                                           NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Songs"),
-                                                           renderer,
-                                                           "text", SONGS_COLUMN,
-                                                           NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
-                                 GTK_TREE_MODEL (shell_similarartists->priv->liststore));
         shell_similarartists->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
         gtk_tree_selection_set_mode (shell_similarartists->priv->selection,
                                      GTK_SELECTION_BROWSE);

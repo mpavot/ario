@@ -35,7 +35,7 @@ G_MODULE_EXPORT void ario_cover_preferences_covertree_check_changed_cb (GtkCheck
                                                                         ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_automatic_check_changed_cb (GtkCheckButton *butt,
                                                                         ArioCoverPreferences *cover_preferences);
-G_MODULE_EXPORT void ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
+G_MODULE_EXPORT void ario_cover_preferences_amazon_country_changed_cb (GtkComboBox *combobox,
                                                                        ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_top_button_cb (GtkWidget *widget,
                                                            ArioCoverPreferences *cover_preferences);
@@ -45,9 +45,9 @@ G_MODULE_EXPORT void ario_cover_preferences_down_button_cb (GtkWidget *widget,
                                                             ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_bottom_button_cb (GtkWidget *widget,
                                                               ArioCoverPreferences *cover_preferences);
-static void ario_cover_preferences_cover_toggled_cb (GtkCellRendererToggle *cell,
-                                                     gchar *path_str,
-                                                     ArioCoverPreferences *cover_preferences);
+G_MODULE_EXPORT void ario_cover_preferences_cover_toggled_cb (GtkCellRendererToggle *cell,
+                                                              gchar *path_str,
+                                                              ArioCoverPreferences *cover_preferences);
 
 
 struct ArioCoverPreferencesPrivate
@@ -56,7 +56,6 @@ struct ArioCoverPreferencesPrivate
         GtkWidget *automatic_check;
         GtkWidget *amazon_country;
 
-        GtkWidget *covers_treeview;
         GtkListStore *covers_model;
         GtkTreeSelection *covers_selection;
 };
@@ -67,16 +66,6 @@ enum
         NAME_COLUMN,
         ID_COLUMN,
         N_COLUMN
-};
-
-static const char *amazon_countries[] = {
-        "com",
-        "fr",
-        "de",
-        "uk",
-        "ca",
-        "jp",
-        NULL
 };
 
 #define ARIO_COVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_PREFERENCES, ArioCoverPreferencesPrivate))
@@ -102,11 +91,7 @@ ario_cover_preferences_new (void)
         ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioCoverPreferences *cover_preferences;
-        GtkListStore *list_store;
-        GtkCellRenderer *renderer;
-        GtkTreeIter iter;
-        int i;
-        GtkTreeViewColumn *column;
+        GtkWidget *covers_treeview;
 
         cover_preferences = g_object_new (TYPE_ARIO_COVER_PREFERENCES, NULL);
 
@@ -121,57 +106,15 @@ ario_cover_preferences_new (void)
                 GTK_WIDGET (gtk_builder_get_object (builder, "automatic_checkbutton"));
         cover_preferences->priv->amazon_country =
                 GTK_WIDGET (gtk_builder_get_object (builder, "amazon_country_combobox"));
-        cover_preferences->priv->covers_treeview = 
+        cover_preferences->priv->covers_model =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "covers_model"));
+        covers_treeview =
                 GTK_WIDGET (gtk_builder_get_object (builder, "covers_treeview"));
 
         gtk_builder_helpers_boldify_label (builder, "cover_frame_label");
         gtk_builder_helpers_boldify_label (builder, "cover_sources_frame_label");
 
-        list_store = gtk_list_store_new (1, G_TYPE_STRING);
-
-        for (i = 0; amazon_countries[i]; ++i) {
-                gtk_list_store_append (list_store, &iter);
-                gtk_list_store_set (list_store, &iter,
-                                    0, amazon_countries[i],
-                                    -1);
-        }
-
-        gtk_combo_box_set_model (GTK_COMBO_BOX (cover_preferences->priv->amazon_country),
-                                 GTK_TREE_MODEL (list_store));
-        g_object_unref (list_store);
-
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (cover_preferences->priv->amazon_country));
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (cover_preferences->priv->amazon_country), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (cover_preferences->priv->amazon_country), renderer,
-                                        "text", 0, NULL);
-
-        cover_preferences->priv->covers_model = gtk_list_store_new (N_COLUMN,
-                                                                    G_TYPE_BOOLEAN,
-                                                                    G_TYPE_STRING,
-                                                                    G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (cover_preferences->priv->covers_treeview),
-                                 GTK_TREE_MODEL (cover_preferences->priv->covers_model));
-        renderer = gtk_cell_renderer_toggle_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Enabled"),
-                                                           renderer,
-                                                           "active", ENABLED_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 80);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (cover_preferences->priv->covers_treeview), column);
-        g_signal_connect (GTK_OBJECT (renderer),
-                          "toggled",
-                          G_CALLBACK (ario_cover_preferences_cover_toggled_cb), cover_preferences);
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Name"),
-                                                           renderer,
-                                                           "text", NAME_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (cover_preferences->priv->covers_treeview), column);
-
-        cover_preferences->priv->covers_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (cover_preferences->priv->covers_treeview));
+        cover_preferences->priv->covers_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (covers_treeview));
         gtk_tree_selection_set_mode (cover_preferences->priv->covers_selection,
                                      GTK_SELECTION_BROWSE);
 
@@ -227,27 +170,43 @@ ario_cover_preferences_sync_cover_providers (ArioCoverPreferences *cover_prefere
         }
 }
 
+static gboolean
+ario_cover_preferences_sync_cover_foreach (GtkTreeModel *model,
+                                           GtkTreePath *path,
+                                           GtkTreeIter *iter,
+                                           ArioCoverPreferences *cover_preferences)
+{
+        ARIO_LOG_FUNCTION_START;
+        gchar *country;
+
+        gtk_tree_model_get (model, iter,
+                            0, &country,
+                            -1);
+
+        if (!strcmp (country, ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT))) {
+                gtk_combo_box_set_active_iter (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), iter);
+                g_free (country);
+                return TRUE;
+        }
+        g_free (country);
+
+        return FALSE;
+}
+
 static void
 ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        int i;
-        const char *current_country;
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check), 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check),
                                       !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check), 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check),
                                       ario_conf_get_boolean (PREF_AUTOMATIC_GET_COVER, PREF_AUTOMATIC_GET_COVER_DEFAULT));
 
-        current_country = ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT);
-        for (i = 0; amazon_countries[i]; ++i) {
-                if (!strcmp (amazon_countries[i], current_country)) {
-                        gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), i);
-                        break;
-                }
-                gtk_combo_box_set_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), 0);
-        }
+        gtk_tree_model_foreach (gtk_combo_box_get_model (GTK_COMBO_BOX (cover_preferences->priv->amazon_country)),
+                                (GtkTreeModelForeachFunc) ario_cover_preferences_sync_cover_foreach,
+                                cover_preferences);
 
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }
@@ -271,16 +230,24 @@ ario_cover_preferences_automatic_check_changed_cb (GtkCheckButton *butt,
 }
 
 void
-ario_cover_preferences_amazon_country_changed_cb (GtkComboBoxEntry *combobox,
+ario_cover_preferences_amazon_country_changed_cb (GtkComboBox *combobox,
                                                   ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        int i;
+        GtkTreeModel *treemodel;
+        GtkTreeIter iter;
+        gchar *country;
 
-        i = gtk_combo_box_get_active (GTK_COMBO_BOX (cover_preferences->priv->amazon_country));
+        treemodel = gtk_combo_box_get_model (combobox);
+        gtk_combo_box_get_active_iter (combobox,
+                                       &iter);
+        gtk_tree_model_get (treemodel, &iter,
+                            0, &country,
+                            -1);
 
-        ario_conf_set_string (PREF_COVER_AMAZON_COUNTRY, 
-                              amazon_countries[i]);
+        ario_conf_set_string (PREF_COVER_AMAZON_COUNTRY,
+                              country);
+        g_free (country);
 }
 
 void
@@ -399,7 +366,7 @@ ario_cover_preferences_bottom_button_cb (GtkWidget *widget,
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }
 
-static void
+void
 ario_cover_preferences_cover_toggled_cb (GtkCellRendererToggle *cell,
                                          gchar *path_str,
                                          ArioCoverPreferences *cover_preferences)

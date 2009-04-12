@@ -40,12 +40,6 @@ static void ario_browser_preferences_tree_combobox_changed_cb (GtkComboBox *widg
                                                                ArioBrowserPreferences *browser_preferences);
 
 
-static const char *sort_behavior[] = {
-        N_("Alphabetically"),   // SORT_ALPHABETICALLY
-        N_("By year"),          // SORT_YEAR
-        NULL
-};
-
 struct ArioBrowserPreferencesPrivate
 {
         GtkWidget *sort_combobox;
@@ -77,10 +71,6 @@ ario_browser_preferences_new (void)
         ARIO_LOG_FUNCTION_START;
         ArioBrowserPreferences *browser_preferences;
         GtkBuilder *builder;
-        GtkListStore *list_store;
-        GtkCellRenderer *renderer;
-        GtkTreeIter iter;
-        int i;
 
         browser_preferences = g_object_new (TYPE_ARIO_BROWSER_PREFERENCES, NULL);
 
@@ -89,33 +79,15 @@ ario_browser_preferences_new (void)
         builder = gtk_builder_helpers_new (UI_PATH "browser-prefs.ui",
                                            browser_preferences);
 
-        browser_preferences->priv->sort_combobox = 
+        browser_preferences->priv->sort_combobox =
                 GTK_WIDGET (gtk_builder_get_object (builder, "sort_combobox"));
-        browser_preferences->priv->hbox = 
+        browser_preferences->priv->hbox =
                 GTK_WIDGET (gtk_builder_get_object (builder, "trees_hbox"));
-        browser_preferences->priv->treesnb_spinbutton = 
+        browser_preferences->priv->treesnb_spinbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "treesnb_spinbutton"));
 
         gtk_builder_helpers_boldify_label (builder, "options_label");
         gtk_builder_helpers_boldify_label (builder, "organisation_label");
-
-        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
-        for (i = 0; i < SORT_N_BEHAVIOR; ++i) {
-                gtk_list_store_append (list_store, &iter);
-                gtk_list_store_set (list_store, &iter,
-                                    0, gettext (sort_behavior[i]),
-                                    1, i,
-                                    -1);
-        }
-        gtk_combo_box_set_model (GTK_COMBO_BOX (browser_preferences->priv->sort_combobox),
-                                 GTK_TREE_MODEL (list_store));
-        g_object_unref (list_store);
-
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (browser_preferences->priv->sort_combobox));
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (browser_preferences->priv->sort_combobox), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (browser_preferences->priv->sort_combobox), renderer,
-                                        "text", 0, NULL);
 
         ario_browser_preferences_sync_browser (browser_preferences);
 
@@ -182,7 +154,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
                 b = 0;
                 for (j = 0; j < MPD_TAG_NUM_OF_ITEM_TYPES - 1 && j < a; ++j) {
                         if (items[j])
-                                ++b;                        
+                                ++b;
                 }
                 gtk_combo_box_set_active (GTK_COMBO_BOX (tree_combobox), b);
 
@@ -206,8 +178,7 @@ ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
 
         i = gtk_combo_box_get_active (GTK_COMBO_BOX (browser_preferences->priv->sort_combobox));
 
-        ario_conf_set_integer (PREF_ALBUM_SORT, 
-                               i);
+        ario_conf_set_integer (PREF_ALBUM_SORT, i);
 }
 
 static gboolean
