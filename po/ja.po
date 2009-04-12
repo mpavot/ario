@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-03-06 06:18+0000\n"
 "Last-Translator: Masato HASHIMOTO <cabezon.hashimoto@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -45,6 +45,19 @@ msgstr "ライブラリ表示構成"
 msgid "Sort albums: "
 msgstr "アルバムの表示順: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"自動検出で MPD サーバが見つからない場合は、MPD の設定で zeroconf が有効になっ"
+"ているかチェックしてください。または手動で設定してください。"
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "サーバの自動検出"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "自動検出"
@@ -70,7 +83,7 @@ msgid "Name :"
 msgstr "名前 :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "パスワード :"
 
@@ -807,38 +820,11 @@ msgstr "曲のプロパティ"
 msgid "Error saving tags of file:"
 msgstr "ファイルのタグ保存エラー:"
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "サーバの自動検出"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"自動検出で MPD サーバが見つからない場合は、MPD の設定で zeroconf が有効になっ"
-"ているかチェックしてください。または手動で設定してください。"
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "名前"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "ホスト"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "ポート"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "サーバを選択してください。"
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "新しいプロファイル"
 
@@ -1019,7 +1005,7 @@ msgid "%b %d %Y"
 msgstr "%Y %b %d"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "なし"
 
@@ -1068,38 +1054,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler 設定"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Last.fm サーバの状態をチェックする:"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "無効"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Last.fm について調べる: "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "最終送信:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Last.fm プロファイル"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "送信待ちのトラック:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "状態:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "送信したトラック:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "ユーザ名 :"
 
@@ -1224,6 +1202,21 @@ msgstr "現在のアーティストを Wikipedia で検索するプラグイン�
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Name"
+#~ msgstr "名前"
+
+#~ msgid "Host"
+#~ msgstr "ホスト"
+
+#~ msgid "Port"
+#~ msgstr "ポート"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Last.fm サーバの状態をチェックする:"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Last.fm について調べる: "
 
 #~ msgid "Source"
 #~ msgstr "ソース"

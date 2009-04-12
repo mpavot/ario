@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-03-13 08:56+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -45,6 +45,20 @@ msgstr "Uspořádání knihovny"
 msgid "Sort albums: "
 msgstr "Třídit alba: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Pokud nevidíte svůj MPD server, poděkujte automatické detekci, můžete ověřit "
+"zda je aktivovaná základní konfigurace ve vašem MPD nebo můžete použít "
+"manuální konfiguraci."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Automatická detekce serveru"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Automatická detekce"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Název :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Heslo :"
 
@@ -840,39 +854,11 @@ msgstr "Vlastnosti skladby"
 msgid "Error saving tags of file:"
 msgstr "Chyba při ukládání souboru:"
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Automatická detekce serveru"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Pokud nevidíte svůj MPD server, poděkujte automatické detekci, můžete ověřit "
-"zda je aktivovaná základní konfigurace ve vašem MPD nebo můžete použít "
-"manuální konfiguraci."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Jméno"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Hostitel"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Port"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Musíte vybrat server."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Nový profil"
 
@@ -1053,7 +1039,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Nikdy"
 
@@ -1102,38 +1088,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler nastavení"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Zkontrolovat stav Last.fm serveru na"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Zakázáno"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Zjistěte, co je Last.fm, na "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Poslední čas odeslání:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Stopy ve frontě:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Stav:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Odeslané stopy:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Uživatel:"
 
@@ -1258,6 +1236,21 @@ msgstr "Zásuvný modul pro vyhledání aktuálního umělce na wikipedii"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Name"
+#~ msgstr "Jméno"
+
+#~ msgid "Host"
+#~ msgstr "Hostitel"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Zkontrolovat stav Last.fm serveru na"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Zjistěte, co je Last.fm, na "
 
 #~ msgid "Source"
 #~ msgstr "Zdroj"

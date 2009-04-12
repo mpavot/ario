@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-01-19 20:51+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -45,6 +45,20 @@ msgstr ""
 msgid "Sort albums: "
 msgstr ""
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Mura fheiceann tú do fhreastalaí MPD de bharr an chumraíocht uathoibríoch, "
+"ba chóir dearbhú go bhfuil zeroconf cumasaithe i sa chumraíocht MPD agat nó "
+"bain feidhm as an chumraíocht de lámh."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Uathaimsiú an freastalaí"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Uathaimsigh"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Ainm:"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Focal Faire :"
 
@@ -829,39 +843,11 @@ msgstr "Airíonna Amhráin"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Uathaimsiú an freastalaí"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Mura fheiceann tú do fhreastalaí MPD de bharr an chumraíocht uathoibríoch, "
-"ba chóir dearbhú go bhfuil zeroconf cumasaithe i sa chumraíocht MPD agat nó "
-"bain feidhm as an chumraíocht de lámh."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Ainm"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Óstríomhaire"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Port"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Caithfear freastalaí a roghnú."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Beathaisnéisín Nua"
 
@@ -1042,7 +1028,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Riamh"
 
@@ -1091,38 +1077,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Sainroghanna Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Dearbhaigh treo freastalaí Last.fm ag"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Díchumasaithe"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Foghlaim faoi Last.fm ag "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Am an t-iarratas deiridh:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Beathaisnéisín Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Rianta sa scuaine:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Treo:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Rianta churtha isteach:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Ainm úsáideora :"
 
@@ -1248,6 +1226,21 @@ msgstr "Breiseáin chun an t-ealaíontóir reatha a chuardach ar vicipéid"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Vicipéid"
+
+#~ msgid "Name"
+#~ msgstr "Ainm"
+
+#~ msgid "Host"
+#~ msgstr "Óstríomhaire"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Dearbhaigh treo freastalaí Last.fm ag"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Foghlaim faoi Last.fm ag "
 
 #~ msgid "Source"
 #~ msgstr "Foinse"

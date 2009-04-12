@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-01-19 20:45+0000\n"
 "Last-Translator: Muhammad Zulfikar <muhzulfikar@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -45,6 +45,17 @@ msgstr ""
 msgid "Sort albums: "
 msgstr ""
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Deteksi otomatis server"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Deteksi otomatis"
@@ -70,7 +81,7 @@ msgid "Name :"
 msgstr "Nama :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Kata sandi :"
 
@@ -839,36 +850,11 @@ msgstr "Keterangan Lagu"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Deteksi otomatis server"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Nama"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Host"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Port"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Anda harus memilih server"
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Profil Baru"
 
@@ -1047,7 +1033,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Jangan Pernah"
 
@@ -1096,38 +1082,30 @@ msgid "Audioscrobbler preferences"
 msgstr ""
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Periksa status server Terakhir.fm pada"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Tidak aktif"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Cari tahu tentang Last.fm pada "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Waktu pendaftaran terakhir:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Antrian Trek:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Kondisi:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Trek dikirimkan:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr ""
 
@@ -1253,6 +1231,21 @@ msgstr ""
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Name"
+#~ msgstr "Nama"
+
+#~ msgid "Host"
+#~ msgstr "Host"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Periksa status server Terakhir.fm pada"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Cari tahu tentang Last.fm pada "
 
 #~ msgid "Image"
 #~ msgstr "Gambar"

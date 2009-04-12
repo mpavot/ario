@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-02-26 10:33+0000\n"
 "Last-Translator: Feder Sáiz <federsaiz@googlemail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -45,6 +45,20 @@ msgstr "Organización de biblioteca"
 msgid "Sort albums: "
 msgstr "Ordenar álbumes: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Si no ve su servidor de MPD gracias a la detección automática, debería "
+"comprobar que zeroconf está activado en su configuración MPD o usar el "
+"manual de configuración."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Detección automática de servidor"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Auto detección"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Nombre :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Contraseña:"
 
@@ -906,39 +920,11 @@ msgstr "Propiedades de la canción"
 msgid "Error saving tags of file:"
 msgstr "Error guardando etiquetas del archivo:"
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Detección automática de servidor"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Si no ve su servidor de MPD gracias a la detección automática, debería "
-"comprobar que zeroconf está activado en su configuración MPD o usar el "
-"manual de configuración."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Nombre"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Anfitrión"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Puerto"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Debe seleccionar un servidor"
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Nuevo perfil"
 
@@ -1119,7 +1105,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Nunca"
 
@@ -1168,38 +1154,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Preferencias de Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Comprobar el estado del servidor Last.fm en"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Infórmese acerca de de Last.fm en "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Hora del último envío:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Perfil de Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Pistas en la cola:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Estado:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Pistas enviadas:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Nombre de usuario:"
 
@@ -1325,6 +1303,21 @@ msgstr "Un plugin para buscar el artista actual en la wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Name"
+#~ msgstr "Nombre"
+
+#~ msgid "Host"
+#~ msgstr "Anfitrión"
+
+#~ msgid "Port"
+#~ msgstr "Puerto"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Comprobar el estado del servidor Last.fm en"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Infórmese acerca de de Last.fm en "
 
 #~ msgid "Source"
 #~ msgstr "Fuente"

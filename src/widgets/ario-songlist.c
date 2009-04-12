@@ -22,11 +22,12 @@
 #include <string.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include "widgets/ario-playlist.h"
-#include "widgets/ario-dnd-tree.h"
-#include "shell/ario-shell-songinfos.h"
+
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "shell/ario-shell-songinfos.h"
+#include "widgets/ario-dnd-tree.h"
+#include "widgets/ario-playlist.h"
 
 static void ario_songlist_finalize (GObject *object);
 static void ario_songlist_set_property (GObject *object,
@@ -63,12 +64,14 @@ struct ArioSonglistPrivate
         gchar *popup;
 };
 
+/* Properties */
 enum
 {
         PROP_0,
         PROP_UI_MANAGER
 };
 
+/* Drag and drop targets */
 static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
@@ -82,11 +85,12 @@ ario_songlist_class_init (ArioSonglistClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Virtual Methods */
         object_class->finalize = ario_songlist_finalize;
-
         object_class->set_property = ario_songlist_set_property;
         object_class->get_property = ario_songlist_get_property;
 
+        /* Object properties */
         g_object_class_install_property (object_class,
                                          PROP_UI_MANAGER,
                                          g_param_spec_object ("ui-manager",
@@ -95,6 +99,7 @@ ario_songlist_class_init (ArioSonglistClass *klass)
                                                               GTK_TYPE_UI_MANAGER,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioSonglistPrivate));
 }
 
@@ -177,14 +182,16 @@ ario_songlist_new (GtkUIManager *mgr,
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
 
+        /* Scrolled window properties */
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (songlist), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (songlist), GTK_SHADOW_IN);
 
+        /* Create treeview */
         songlist->priv->tree = GTK_TREE_VIEW (ario_dnd_tree_new (songs_targets,
                                                                  G_N_ELEMENTS (songs_targets),
                                                                  FALSE));
 
-        /* Titles */
+        /* Titles column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Title"),
                                                            renderer,
@@ -199,7 +206,7 @@ ario_songlist_new (GtkUIManager *mgr,
         }
         gtk_tree_view_append_column (songlist->priv->tree, column);
 
-        /* Artists */
+        /* Artists column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Artist"),
                                                            renderer,
@@ -214,7 +221,7 @@ ario_songlist_new (GtkUIManager *mgr,
         }
         gtk_tree_view_append_column (songlist->priv->tree, column);
 
-        /* Albums */
+        /* Albums column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Album"),
                                                            renderer,
@@ -229,22 +236,24 @@ ario_songlist_new (GtkUIManager *mgr,
         }
         gtk_tree_view_append_column (songlist->priv->tree, column);
 
+        /* Create model */
         songlist->priv->model = gtk_list_store_new (SONGS_N_COLUMN,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING);
-
         gtk_tree_view_set_model (songlist->priv->tree,
                                  GTK_TREE_MODEL (songlist->priv->model));
+
+        /* Get selection */
         songlist->priv->selection = gtk_tree_view_get_selection (songlist->priv->tree);
         gtk_tree_selection_set_mode (songlist->priv->selection,
                                      GTK_SELECTION_MULTIPLE);
 
+        /* Connect a few signals for interaction with tree view */
         g_signal_connect (songlist->priv->tree,
                           "drag_data_get",
                           G_CALLBACK (ario_songlist_drag_data_get_cb), songlist);
-
         g_signal_connect (GTK_TREE_VIEW (songlist->priv->tree),
                           "popup",
                           G_CALLBACK (ario_songlist_popup_menu_cb), songlist);
@@ -269,8 +278,8 @@ songlists_foreach (GtkTreeModel *model,
         GSList **songlists = (GSList **) userdata;
         gchar *val = NULL;
 
+        /* Append filename to the list */
         gtk_tree_model_get (model, iter, SONGS_FILENAME_COLUMN, &val, -1);
-
         *songlists = g_slist_append (*songlists, val);
 }
 
@@ -281,9 +290,12 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist,
         ARIO_LOG_FUNCTION_START;
         GSList *songlists = NULL;
 
+        /* List of selected songs */
         gtk_tree_selection_selected_foreach (songlist->priv->selection,
                                              songlists_foreach,
                                              &songlists);
+
+        /* Append songs to playlist */
         ario_server_playlist_append_songs (songlists, play);
 
         g_slist_foreach (songlists, (GFunc) g_free, NULL);
@@ -295,6 +307,7 @@ ario_songlist_cmd_add_songlists (GtkAction *action,
                                  ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Add songs to playlist */
         ario_songlist_add_in_playlist (songlist, FALSE);
 }
 
@@ -303,6 +316,7 @@ ario_songlist_cmd_add_play_songlists (GtkAction *action,
                                       ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Add songs to playlist and play */
         ario_songlist_add_in_playlist (songlist, TRUE);
 }
 
@@ -311,7 +325,10 @@ ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
                                             ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Cleat playlist */
         ario_server_clear ();
+
+        /* Add songs to playlist and play */
         ario_songlist_add_in_playlist (songlist, TRUE);
 }
 
@@ -323,11 +340,13 @@ ario_songlist_cmd_songs_properties (GtkAction *action,
         GSList *paths = NULL;
         GtkWidget *songinfos;
 
+        /* Get list of selected songs */
         gtk_tree_selection_selected_foreach (songlist->priv->selection,
                                              songlists_foreach,
                                              &paths);
 
         if (paths) {
+                /* Launch songinfos dialog for selected songs */
                 songinfos = ario_shell_songinfos_new (paths);
                 if (songinfos)
                         gtk_widget_show_all (songinfos);
@@ -344,6 +363,7 @@ ario_songlist_popup_menu_cb (ArioDndTree* tree,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
+        /* Show popup */
         if (songlist->priv->popup) {
                 menu = gtk_ui_manager_get_widget (songlist->priv->ui_manager, songlist->priv->popup);
 
@@ -357,6 +377,7 @@ ario_songlist_activate_cb (ArioDndTree* tree,
                            ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Add selected songs to playlist */
         ario_songlist_add_in_playlist (songlist, FALSE);
 }
 
@@ -368,10 +389,11 @@ ario_songlist_songlists_selection_drag_foreach (GtkTreeModel *model,
 {
         ARIO_LOG_FUNCTION_START;
         GString *songlists = (GString *) userdata;
-        g_return_if_fail (songlists != NULL);
-
         gchar* val = NULL;
 
+        g_return_if_fail (songlists != NULL);
+
+        /* Append filename to dnd string */
         gtk_tree_model_get (model, iter, SONGS_FILENAME_COLUMN, &val, -1);
         g_string_append (songlists, val);
         g_string_append (songlists, "\n");
@@ -394,11 +416,13 @@ ario_songlist_drag_data_get_cb (GtkWidget * widget,
         g_return_if_fail (widget != NULL);
         g_return_if_fail (selection_data != NULL);
 
+        /* Get dnd string with all selected songs */
         songlists = g_string_new("");
         gtk_tree_selection_selected_foreach (songlist->priv->selection,
                                              ario_songlist_songlists_selection_drag_foreach,
                                              songlists);
 
+        /* Set drag data */
         gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) songlists->str,
                                 strlen (songlists->str) * sizeof(guchar));
 

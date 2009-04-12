@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-01-19 20:51+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -46,6 +46,19 @@ msgstr "媒体库组织"
 msgid "Sort albums: "
 msgstr "搜索专辑： "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"如果你不知道 MPD 服务器的情况，请使用自动配置。你应该查看 zeroconf 是否启动或"
+"者使用手工配置。"
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "服务器自动检测"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "自动检测"
@@ -71,7 +84,7 @@ msgid "Name :"
 msgstr "名称："
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "密码："
 
@@ -853,38 +866,11 @@ msgstr "歌曲属性"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "服务器自动检测"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"如果你不知道 MPD 服务器的情况，请使用自动配置。你应该查看 zeroconf 是否启动或"
-"者使用手工配置。"
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "名称"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "主机"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "端口"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "必须选择一个服务器"
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "新建配置"
 
@@ -1065,7 +1051,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "从不"
 
@@ -1114,38 +1100,30 @@ msgid "Audioscrobbler preferences"
 msgstr "同乐会首选项"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "检查 Last.fm 服务器状态："
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "已禁用"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "关于 Last.fm 的更多信息请看 "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "上次提交时间："
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Last.fm 配置文件"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "队列中的音轨："
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "状态："
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "提交的音轨数："
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "用户名："
 
@@ -1270,6 +1248,21 @@ msgstr "在维基百科（Wikipedia）上收缩当前艺术家的插件"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "维基百科"
+
+#~ msgid "Name"
+#~ msgstr "名称"
+
+#~ msgid "Host"
+#~ msgstr "主机"
+
+#~ msgid "Port"
+#~ msgstr "端口"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "检查 Last.fm 服务器状态："
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "关于 Last.fm 的更多信息请看 "
 
 #~ msgid "Source"
 #~ msgstr "来源"

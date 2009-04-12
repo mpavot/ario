@@ -34,6 +34,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioStatusBarPrivate ArioStatusBarPrivate;
 
+/**
+ * ArioStatusBar is a GtkStatusbar that display information
+ * about music server state
+ */
 typedef struct
 {
         GtkStatusbar parent;

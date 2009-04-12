@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-01-19 20:45+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -45,6 +45,17 @@ msgstr ""
 msgid "Sort albums: "
 msgstr ""
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "זיהוי השרת אוטומטית"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "זהה אוטומטית"
@@ -70,7 +81,7 @@ msgid "Name :"
 msgstr "שם :"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "סיסמה :"
 
@@ -819,36 +830,11 @@ msgstr "מאפייני השיר"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "זיהוי השרת אוטומטית"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "שם"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "מארח"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "פותחה"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "עליך לבחור שרת."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "פרופיל חדש"
 
@@ -1029,7 +1015,7 @@ msgid "%b %d %Y"
 msgstr "%d ב%b %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "אף פעם"
 
@@ -1078,38 +1064,30 @@ msgid "Audioscrobbler preferences"
 msgstr "העדפות Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "בדוק את מצב שרת ה-Last.fm תחת"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "כבוי"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "פרטים נוספים אודות last.fm תחת "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "זמן ההצבעה האחרון:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "פרופיל last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "רצועות בתור:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "מצב:‏"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "רצועות שנשלחו:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "שם משתמש :"
 
@@ -1234,6 +1212,21 @@ msgstr "תוסף לחיפוש האמן הנוכחי בויקיפדיה"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "ויקיפדיה"
+
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#~ msgid "Host"
+#~ msgstr "מארח"
+
+#~ msgid "Port"
+#~ msgstr "פותחה"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "בדוק את מצב שרת ה-Last.fm תחת"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "פרטים נוספים אודות last.fm תחת "
 
 #~ msgid "Image"
 #~ msgstr "תמונה"

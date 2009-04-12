@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 11:28+0200\n"
+"POT-Creation-Date: 2009-04-12 13:25+0200\n"
 "PO-Revision-Date: 2009-03-01 07:20+0000\n"
 "Last-Translator: Manuel R. Ciosici <manuelciosici@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -45,6 +45,20 @@ msgstr "Organizare Colecție"
 msgid "Sort albums: "
 msgstr "Sortează albume: "
 
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Dacă nu vedeţi serverul MPD datorită detectării automate, ar trebui să vă "
+"asiguraţi că zeroconf este activat in configuraţiile MPD-ului sau utilizaţi "
+"configuraţia manuală."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Autodetectare server"
+
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
 msgstr "Detectează automat"
@@ -70,7 +84,7 @@ msgid "Name :"
 msgstr "Nume:"
 
 #: ../data/ui/connection-widget.ui.h:7
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
 msgstr "Parolă:"
 
@@ -835,39 +849,11 @@ msgstr "Proprietăţile melodiei"
 msgid "Error saving tags of file:"
 msgstr ""
 
-#. Create hosts selection dialog
-#: ../src/widgets/ario-connection-widget.c:569
-msgid "Server autodetection"
-msgstr "Autodetectare server"
-
-#. Description label
-#: ../src/widgets/ario-connection-widget.c:584
-msgid ""
-"If you don't see your MPD server thanks to the automatic detection, you "
-"should check that zeroconf is activated in your MPD configuration or use the "
-"manual configuration."
-msgstr ""
-"Dacă nu vedeţi serverul MPD datorită detectării automate, ar trebui să vă "
-"asiguraţi că zeroconf este activat in configuraţiile MPD-ului sau utilizaţi "
-"configuraţia manuală."
-
-#: ../src/widgets/ario-connection-widget.c:598
-msgid "Name"
-msgstr "Nume"
-
-#: ../src/widgets/ario-connection-widget.c:608
-msgid "Host"
-msgstr "Gazda"
-
-#: ../src/widgets/ario-connection-widget.c:618
-msgid "Port"
-msgstr "Port"
-
-#: ../src/widgets/ario-connection-widget.c:692
+#: ../src/widgets/ario-connection-widget.c:625
 msgid "You must select a server."
 msgstr "Trebuie să selectaţi un server."
 
-#: ../src/widgets/ario-connection-widget.c:742
+#: ../src/widgets/ario-connection-widget.c:675
 msgid "New Profile"
 msgstr "Profil nou"
 
@@ -1048,7 +1034,7 @@ msgid "%b %d %Y"
 msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
 msgstr "Niciodată"
 
@@ -1097,38 +1083,30 @@ msgid "Audioscrobbler preferences"
 msgstr "Preferinţe Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
-msgid "Check Last.fm server status at"
-msgstr "Verifică starea serverului Last.fm la"
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Disabled"
 msgstr "Dezactivat"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
-msgid "Find out about Last.fm at "
-msgstr "Află despre Last.fm la "
-
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
 msgstr "Data ultimei trimiteri:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
 msgstr "Profil Last.fm"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
 msgstr "Piese în aşteptare:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
 msgstr "Stare:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:10
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
 msgstr "Piese trimise:"
 
-#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:11
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 msgid "Username :"
 msgstr "Nume utilizator:"
 
@@ -1254,6 +1232,21 @@ msgstr "Un modul să caute artistul curent pe wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
+
+#~ msgid "Name"
+#~ msgstr "Nume"
+
+#~ msgid "Host"
+#~ msgstr "Gazda"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "Check Last.fm server status at"
+#~ msgstr "Verifică starea serverului Last.fm la"
+
+#~ msgid "Find out about Last.fm at "
+#~ msgstr "Află despre Last.fm la "
 
 #~ msgid "Source"
 #~ msgstr "Sursă"
