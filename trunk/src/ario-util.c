@@ -221,10 +221,6 @@ ario_util_init_stock_icons (void)
         ario_util_add_stock_icons ("ario", PIXMAP_PATH "ario.png");
         ario_util_add_stock_icons ("ario-play", PIXMAP_PATH "ario-play.png");
         ario_util_add_stock_icons ("ario-pause", PIXMAP_PATH "ario-pause.png");
-        ario_util_add_stock_icons ("volume-zero", PIXMAP_PATH "volume-zero.png");
-        ario_util_add_stock_icons ("volume-min", PIXMAP_PATH "volume-min.png");
-        ario_util_add_stock_icons ("volume-medium", PIXMAP_PATH "volume-medium.png");
-        ario_util_add_stock_icons ("volume-max", PIXMAP_PATH "volume-max.png");
         ario_util_add_stock_icons ("repeat", PIXMAP_PATH "repeat.png");
         ario_util_add_stock_icons ("random", PIXMAP_PATH "shuffle.png");
 

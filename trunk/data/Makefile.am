@@ -10,11 +10,7 @@ art_DATA = ario.png		\
 	   logo.png		\
 	   play.png		\
 	   shuffle.png		\
-	   volume-medium.png    \
-	   volume-zero.png	\
-	   repeat.png		\
-	   volume-max.png	\
-	   volume-min.png
+	   repeat.png
 
 uidir = $(pkgdatadir)/ui
 ui_DATA = 
