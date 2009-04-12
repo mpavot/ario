@@ -34,13 +34,13 @@ dummy_char (ArioSource *source)
         return NULL;
 }
 
-static void 
+static void
 ario_source_class_init (ArioSourceClass *klass)
 {
+        /* Default values for virtual methods */
         klass->get_name = dummy_char;
         klass->get_icon = dummy_char;
         klass->get_id = dummy_char;
-
         klass->shutdown = dummy;
         klass->select = dummy;
         klass->unselect = dummy;

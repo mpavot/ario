@@ -37,6 +37,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioStoredplaylistsPrivate ArioStoredplaylistsPrivate;
 
+/**
+ * ArioStoredplaylists is a ArioSource used to browse playlists
+ * saved on music server. It can interact with main playlist.
+ */
 typedef struct
 {
         ArioSource parent;

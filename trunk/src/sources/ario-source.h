@@ -35,10 +35,12 @@ G_BEGIN_DECLS
 #define ARIO_IS_SOURCE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), ARIO_TYPE_SOURCE))
 #define ARIO_SOURCE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), ARIO_TYPE_SOURCE, ArioSourceClass))
 
-/*
- * Main object structure
+/**
+ * ArioSource is an abstract class that represent an object that
+ * can be used to interact with playlist. All ArioSource objects
+ * are managed by ArioSourceManager
  */
-typedef struct _ArioSource 
+typedef struct _ArioSource
 {
         GtkHBox parent;
 } ArioSource;
@@ -46,7 +48,7 @@ typedef struct _ArioSource
 /*
  * Class definition
  */
-typedef struct 
+typedef struct
 {
         GtkHBoxClass parent_class;
 
