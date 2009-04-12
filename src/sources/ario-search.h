@@ -37,6 +37,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioSearchPrivate ArioSearchPrivate;
 
+/**
+ * ArioSearch is a ArioSource that enable user to search
+ * for songs in music library by defining several search
+ * criteria and to interact with playlist
+ */
 typedef struct
 {
         ArioSource parent;
