@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">100</property>
-    <property name="lower">1</property>
-    <property name="page_increment">10</property>
-    <property name="step_increment">1</property>
-    <property name="page_size">0</property>
     <property name="value">5</property>
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
   </object>
   <object class="GtkVBox" id="trayicon_vbox">
     <property name="visible">True</property>
@@ -17,7 +17,7 @@
         <property name="no_show_all">True</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment2">
             <property name="visible">True</property>
@@ -30,12 +30,16 @@
                 <property name="border_width">12</property>
                 <child>
                   <object class="GtkCheckButton" id="trayicon_checkbutton">
+                    <property name="label" translatable="yes">Tray icon</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Tray icon</property>
+                    <property name="receives_default">False</property>
                     <property name="draw_indicator">True</property>
-                    <signal handler="ario_trayicon_preferences_trayicon_check_changed_cb" name="toggled"/>
+                    <signal name="toggled" handler="ario_trayicon_preferences_trayicon_check_changed_cb"/>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkHBox" id="hbox1">
@@ -50,6 +54,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
@@ -65,11 +70,19 @@
                       <object class="GtkComboBox" id="trayicon_combobox">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_trayicon_preferences_trayicon_behavior_changed_cb" name="changed"/>
+                        <property name="model">trayicon_liststore</property>
+                        <signal name="changed" handler="ario_trayicon_preferences_trayicon_behavior_changed_cb"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
@@ -91,6 +104,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
+        <property name="position">0</property>
       </packing>
     </child>
     <child>
@@ -99,7 +113,7 @@
         <property name="no_show_all">True</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
@@ -116,14 +130,21 @@
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <child>
                       <object class="GtkCheckButton" id="notification_checkbutton">
+                        <property name="label" translatable="yes">Notification on song change</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Notification on song change</property>
+                        <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal handler="ario_trayicon_preferences_notification_check_changed_cb" name="toggled"/>
+                        <signal name="toggled" handler="ario_trayicon_preferences_notification_check_changed_cb"/>
                       </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkHBox" id="hbox5">
@@ -131,11 +152,19 @@
                     <child>
                       <object class="GtkComboBox" id="notification_combobox">
                         <property name="visible">True</property>
-                        <signal handler="ario_trayicon_preferences_notification_combobox_changed_cb" name="changed"/>
+                        <property name="model">notification_liststore</property>
+                        <signal name="changed" handler="ario_trayicon_preferences_notification_combobox_changed_cb"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
@@ -155,6 +184,7 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
@@ -162,7 +192,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="adjustment">adjustment1</property>
-                        <signal handler="ario_trayicon_preferences_notificationtime_changed_cb" name="value_changed"/>
+                        <signal name="value_changed" handler="ario_trayicon_preferences_notificationtime_changed_cb"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -195,5 +225,32 @@
       </packing>
     </child>
   </object>
+  <object class="GtkListStore" id="trayicon_liststore">
+    <columns>
+      <!-- column-name behavior -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Play/Pause</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Play next song</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mute</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Do nothing</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="notification_liststore">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
 </interface>
-

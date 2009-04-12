@@ -1,6 +1,21 @@
 <?xml version="1.0"?>
-<!--Generated with glade3 3.4.0 on Sat Apr 19 10:48:27 2008 -->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name image -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name artist -->
+      <column type="gchararray"/>
+      <!-- column-name songs -->
+      <column type="gchararray"/>
+      <!-- column-name imageurl -->
+      <column type="gchararray"/>
+      <!-- column-name url -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkVBox" id="vbox">
     <property name="visible">True</property>
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -9,18 +24,56 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-        <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
-        <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="hscrollbar_policy">never</property>
+        <property name="vscrollbar_policy">automatic</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkTreeView" id="treeview">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="headers_clickable">True</property>
+            <property name="model">liststore</property>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                <property name="sizing">fixed</property>
+                <property name="fixed_width">120</property>
+                <property name="title">Image</property>
+                <child>
+                  <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                  <attributes>
+                    <attribute name="pixbuf">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                <property name="title">Artist</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                  <attributes>
+                    <attribute name="text">1</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                <property name="title">Songs</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                  <attributes>
+                    <attribute name="text">2</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
       </object>
+      <packing>
+        <property name="position">0</property>
+      </packing>
     </child>
     <child>
       <object class="GtkHSeparator" id="hseparator">
@@ -43,7 +96,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <signal handler="ario_shell_similarartists_lastfm_cb" name="clicked"/>
+            <signal name="clicked" handler="ario_shell_similarartists_lastfm_cb"/>
             <child>
               <object class="GtkHBox" id="hbox1">
                 <property name="visible">True</property>
@@ -54,6 +107,9 @@
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="stock">gtk-find</property>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label1">
@@ -68,6 +124,9 @@
               </object>
             </child>
           </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
         </child>
         <child>
           <object class="GtkButton" id="add_button">
@@ -75,7 +134,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <signal handler="ario_shell_similarartists_add_cb" name="clicked"/>
+            <signal name="clicked" handler="ario_shell_similarartists_add_cb"/>
             <child>
               <object class="GtkHBox" id="hbox6">
                 <property name="visible">True</property>
@@ -86,6 +145,9 @@
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="stock">gtk-add</property>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label6">
@@ -110,7 +172,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <signal handler="ario_shell_similarartists_addall_cb" name="clicked"/>
+            <signal name="clicked" handler="ario_shell_similarartists_addall_cb"/>
             <child>
               <object class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
@@ -121,6 +183,9 @@
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="stock">gtk-add</property>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label2">
@@ -160,18 +225,21 @@
       <object class="GtkHButtonBox" id="hbuttonbox1">
         <property name="visible">True</property>
         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-        <property name="layout_style">GTK_BUTTONBOX_END</property>
+        <property name="layout_style">end</property>
         <child>
           <object class="GtkButton" id="close_button">
+            <property name="label">gtk-close</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="border_width">3</property>
-            <property name="label">gtk-close</property>
             <property name="use_stock">True</property>
-            <signal handler="ario_shell_similarartists_close_cb" name="clicked"/>
+            <signal name="clicked" handler="ario_shell_similarartists_close_cb"/>
           </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
         </child>
       </object>
       <packing>
@@ -182,4 +250,3 @@
     </child>
   </object>
 </interface>
-

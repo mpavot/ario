@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-22 14:02+0100\n"
+"POT-Creation-Date: 2009-04-12 11:28+0200\n"
 "PO-Revision-Date: 2009-03-06 01:06+0000\n"
 "Last-Translator: Yahuda <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -26,14 +26,22 @@ msgid "Client application to mpd"
 msgstr "mpd için istemci uygulaması"
 
 #: ../data/ui/browser-prefs.ui.h:1
+msgid "Alphabetically"
+msgstr "Alfabetik olarak"
+
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "By year"
+msgstr "Yıla göre"
+
+#: ../data/ui/browser-prefs.ui.h:3
 msgid "Library Options"
 msgstr "Kitaplık Seçenekleri"
 
-#: ../data/ui/browser-prefs.ui.h:2
+#: ../data/ui/browser-prefs.ui.h:4
 msgid "Library Organisation"
 msgstr "Kitaplık Organizasyonu"
 
-#: ../data/ui/browser-prefs.ui.h:3
+#: ../data/ui/browser-prefs.ui.h:5
 msgid "Sort albums: "
 msgstr "Albümleri sırala: "
 
@@ -45,7 +53,7 @@ msgstr "Otomatik sapta"
 msgid "Default"
 msgstr "Varsayılan"
 
-#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:78
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
 msgid "Host :"
 msgstr "Yer sağlayıcı :"
 
@@ -57,8 +65,7 @@ msgstr "Müzik dizini:"
 msgid "Music server is on the same computer as Ario"
 msgstr "Müzik sunucusu Ario ile aynı bilgisayarda"
 
-#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:840
-#: ../plugins/radios/ario-radio.c:1039
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:712
 msgid "Name :"
 msgstr "Ad :"
 
@@ -67,7 +74,7 @@ msgstr "Ad :"
 msgid "Password :"
 msgstr "Parola:"
 
-#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:80
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:85
 msgid "Port :"
 msgstr "Kapı :"
 
@@ -83,8 +90,7 @@ msgstr "XMMS 2 (Deneysel)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Çalan şarkının albüm kapağını otomatik olarak indir"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-coverselect.c:259
-#: ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
 msgstr "Albüm Kapakları"
 
@@ -109,11 +115,11 @@ msgstr "Bağlantı"
 msgid "_Autoconnect on startup"
 msgstr "_Başlangıçta otomatik bağlan"
 
-#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:153
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:154
 msgid "_Connect"
 msgstr "_Bağlan"
 
-#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:156
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:157
 msgid "_Disconnect"
 msgstr "_Bağlantıyı Kes"
 
@@ -133,7 +139,7 @@ msgid "Album :"
 msgstr "Albüm :"
 
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
-#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
 #: ../plugins/information/information.ui.h:3
 msgid "Artist :"
 msgstr "Sanatçı :"
@@ -186,44 +192,42 @@ msgstr "Bir Vekil sunucu kullan"
 msgid "Lyrics Sources"
 msgstr "Şarkı sözü kaynakları"
 
-#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:12
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:13
 #: ../plugins/information/information.ui.h:6
 msgid "Title :"
 msgstr "Başlık :"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree.c:386 ../src/widgets/ario-playlist.c:442
-#: ../src/widgets/ario-songlist.c:223 ../src/widgets/ario-tray-icon.c:679
+#: ../src/sources/ario-tree-albums.c:196 ../src/widgets/ario-playlist.c:508
+#: ../src/widgets/ario-songlist.c:219 ../src/widgets/ario-tray-icon.c:681
 msgid "Album"
 msgstr "Albüm"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
-#: ../src/shell/ario-shell-lyricsselect.c:175
-#: ../src/shell/ario-shell-similarartists.c:379
-#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:208
-#: ../src/widgets/ario-tray-icon.c:677
+#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:204
+#: ../src/widgets/ario-tray-icon.c:679
 msgid "Artist"
 msgstr "Sanatçı"
 
 #. MPD_TAG_ITEM_GENRE
 #: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
-#: ../src/widgets/ario-playlist.c:442
+#: ../src/widgets/ario-playlist.c:508
 msgid "Date"
 msgstr "Tarih"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:442
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:508
 msgid "Duration"
 msgstr "Süre"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:442
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:508
 msgid "File"
 msgstr "Dosya"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:442
+#: ../src/widgets/ario-playlist.c:508
 msgid "Genre"
 msgstr "Tarz"
 
@@ -235,8 +239,8 @@ msgstr "Yeni bir şarkı çalındığında çalan şarkıya git"
 msgid "Mode"
 msgstr ""
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:216
-#: ../src/shell/ario-shell.c:199 ../src/shell/ario-shell-preferences.c:124
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:221
+#: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
@@ -250,15 +254,14 @@ msgstr "Satırları göster:"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree.c:432 ../src/shell/ario-shell-lyricsselect.c:188
-#: ../src/widgets/ario-playlist.c:442 ../src/widgets/ario-songlist.c:193
-#: ../src/widgets/ario-tray-icon.c:681
+#: ../src/sources/ario-tree-songs.c:98 ../src/widgets/ario-playlist.c:508
+#: ../src/widgets/ario-songlist.c:189 ../src/widgets/ario-tray-icon.c:683
 msgid "Title"
 msgstr "Başlık"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
-#: ../src/sources/ario-tree.c:425 ../src/widgets/ario-playlist.c:442
+#: ../src/sources/ario-tree-songs.c:91 ../src/widgets/ario-playlist.c:508
 msgid "Track"
 msgstr "Parça"
 
@@ -298,9 +301,8 @@ msgstr "çapraz geçişi etkinleştir"
 msgid "fade time (s):"
 msgstr "geçiş zamanı (sn):"
 
-#: ../data/ui/server-prefs.ui.h:10 ../data/ui/song-infos.ui.h:14
-#: ../src/ario-util.c:48 ../src/ario-util.c:70
-#: ../plugins/information/information.ui.h:7
+#: ../data/ui/server-prefs.ui.h:10 ../src/ario-util.c:50 ../src/ario-util.c:71
+#: ../src/ario-util.c:93 ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
 msgstr "mevcut değil"
@@ -345,87 +347,109 @@ msgstr "İstatistikler"
 msgid "Uptime :"
 msgstr "Çalışabilirlik süresi :"
 
-#: ../data/ui/song-infos.ui.h:3
+#: ../data/ui/song-infos.ui.h:2
+#, fuzzy
+msgid "Album Artist :"
+msgstr "Sanatçı :"
+
+#: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
 msgstr "Yorum :"
 
-#: ../data/ui/song-infos.ui.h:4
+#: ../data/ui/song-infos.ui.h:5
 msgid "Composer :"
 msgstr "Besteleyen :"
 
-#: ../data/ui/song-infos.ui.h:5
+#: ../data/ui/song-infos.ui.h:6
 msgid "Date :"
 msgstr "Tarih :"
 
-#: ../data/ui/song-infos.ui.h:6
+#: ../data/ui/song-infos.ui.h:7
 msgid "Disc :"
 msgstr "Disk :"
 
-#: ../data/ui/song-infos.ui.h:7
+#: ../data/ui/song-infos.ui.h:8
 msgid "Filename :"
 msgstr "Dosya Adı :"
 
-#: ../data/ui/song-infos.ui.h:8
+#: ../data/ui/song-infos.ui.h:9
 msgid "Genre :"
 msgstr "Tarz :"
 
-#: ../data/ui/song-infos.ui.h:9 ../plugins/information/information.ui.h:4
+#: ../data/ui/song-infos.ui.h:10 ../plugins/information/information.ui.h:4
 msgid "Length :"
 msgstr "Uzunluk :"
 
-#: ../data/ui/song-infos.ui.h:10
+#: ../data/ui/song-infos.ui.h:11
 msgid "Performer :"
 msgstr "Sanatçı :"
 
-#: ../data/ui/song-infos.ui.h:11
+#: ../data/ui/song-infos.ui.h:12
 msgid "Song"
 msgstr "Şarkı"
 
-#: ../data/ui/song-infos.ui.h:13
+#: ../data/ui/song-infos.ui.h:14
 msgid "Track :"
 msgstr "Parça :"
 
-#: ../data/ui/trayicon-prefs.ui.h:1 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:1
+msgid "Do nothing"
+msgstr "Hiçbir şey yapma"
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Mute"
+msgstr ""
+
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
 msgstr "Bildirim"
 
-#: ../data/ui/trayicon-prefs.ui.h:2
+#: ../data/ui/trayicon-prefs.ui.h:4
 msgid "Notification on song change"
 msgstr "Şarkı değişiminde bildirim"
 
-#: ../data/ui/trayicon-prefs.ui.h:3
+#: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Notification time: "
 msgstr "Bildirim süresi: "
 
-#: ../data/ui/trayicon-prefs.ui.h:4
+#: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
 msgstr "sistem tepsisindeyken orta fare tuşu ile tıkla :"
 
-#: ../data/ui/trayicon-prefs.ui.h:5
+#: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:243
+msgid "Play next song"
+msgstr "Sonraki şarkıyı çal"
+
+#: ../data/ui/trayicon-prefs.ui.h:8
+msgid "Play/Pause"
+msgstr "Oynat/Durakla"
+
+#: ../data/ui/trayicon-prefs.ui.h:9
 msgid "Tray icon"
 msgstr "Sistem tepsisi simgesi"
 
-#: ../src/ario-main.c:60
+#: ../src/ario-main.c:61
 msgid "Start minimized window"
 msgstr "Küçültülmüş pencerede başlat"
 
-#: ../src/ario-util.c:81
+#. Format result string
+#: ../src/ario-util.c:110
 msgid "seconds"
 msgstr "saniye"
 
-#: ../src/ario-util.c:84
+#: ../src/ario-util.c:112
 msgid "minutes"
 msgstr "dakika"
 
-#: ../src/ario-util.c:92
+#: ../src/ario-util.c:118
 msgid "hours"
 msgstr "saat"
 
-#: ../src/ario-util.c:100
+#: ../src/ario-util.c:124
 msgid "days"
 msgstr "gün"
 
-#: ../src/covers/ario-cover.c:158
+#: ../src/covers/ario-cover.c:149
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Bu albüm kapağı zaten var. Yerine koymak ister misin?"
 
@@ -433,35 +457,35 @@ msgstr "Bu albüm kapağı zaten var. Yerine koymak ister misin?"
 msgid "Music Directory"
 msgstr "Müzik Dizini"
 
-#: ../src/playlist/ario-playlist-dynamic.c:55
+#: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same artist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:56
+#: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of same album"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:57
+#: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "songs of similar artists"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:58
+#: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of same artists"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:59
+#: ../src/playlist/ario-playlist-dynamic.c:54
 msgid "albums of similar artists"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:99
+#: ../src/playlist/ario-playlist-dynamic.c:94
 msgid "Dynamic Playlist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-queue.c:79
+#: ../src/playlist/ario-playlist-queue.c:74
 msgid "Queue Mode"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-normal.c:77
+#: ../src/playlist/ario-playlist-normal.c:72
 msgid "Normal"
 msgstr ""
 
@@ -470,13 +494,10 @@ msgid "Plugin"
 msgstr "Eklenti"
 
 #: ../src/plugins/ario-plugin-manager.c:46
-#: ../src/preferences/ario-cover-preferences.c:156
-#: ../src/preferences/ario-lyrics-preferences.c:107
-#: ../src/preferences/ario-server-preferences.c:163
 msgid "Enabled"
 msgstr "Etkin"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:183
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:184
 msgid "_About"
 msgstr "_Hakkında"
 
@@ -500,23 +521,7 @@ msgstr "Tümünü _Etkisizleştir"
 msgid "Active plugins"
 msgstr "Etkin eklentiler"
 
-#: ../src/preferences/ario-browser-preferences.c:44
-msgid "Alphabetically"
-msgstr "Alfabetik olarak"
-
-#. SORT_ALPHABETICALLY
-#: ../src/preferences/ario-browser-preferences.c:45
-msgid "By year"
-msgstr "Yıla göre"
-
-#: ../src/preferences/ario-cover-preferences.c:167
-#: ../src/preferences/ario-lyrics-preferences.c:118
-#: ../src/preferences/ario-server-preferences.c:174
-#: ../src/widgets/ario-connection-widget.c:551
-msgid "Name"
-msgstr "Ad"
-
-#: ../src/preferences/ario-server-preferences.c:209
+#: ../src/preferences/ario-server-preferences.c:183
 #: ../src/preferences/ario-stats-preferences.c:151
 #: ../src/preferences/ario-stats-preferences.c:152
 #: ../src/preferences/ario-stats-preferences.c:153
@@ -526,32 +531,17 @@ msgstr "Ad"
 msgid "Not connected"
 msgstr "Bağlı değil"
 
-#: ../src/preferences/ario-server-preferences.c:214
-#: ../src/preferences/ario-server-preferences.c:305
+#: ../src/preferences/ario-server-preferences.c:188
+#: ../src/preferences/ario-server-preferences.c:279
 #: ../src/widgets/ario-status-bar.c:95
 msgid "Updating..."
 msgstr "Güncelleniyor..."
 
-#: ../src/preferences/ario-trayicon-preferences.c:46
-msgid "Play/Pause"
-msgstr "Oynat/Durakla"
-
-#. TRAY_ICON_PLAY_PAUSE
-#: ../src/preferences/ario-trayicon-preferences.c:47
-#: ../src/widgets/ario-header.c:240
-msgid "Play next song"
-msgstr "Sonraki şarkıyı çal"
-
-#. TRAY_ICON_NEXT_SONG
-#: ../src/preferences/ario-trayicon-preferences.c:48
-msgid "Do nothing"
-msgstr "Hiçbir şey yapma"
-
-#: ../src/servers/ario-mpd.c:388
+#: ../src/servers/ario-mpd.c:378
 msgid "Connecting to server..."
 msgstr "Sunucuya bağlanılıyor..."
 
-#: ../src/servers/ario-mpd.c:413
+#: ../src/servers/ario-mpd.c:403
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Sunucuya bağlanmak olanaksız. Bağlantı seçeneklerini denetleyin."
 
@@ -574,59 +564,65 @@ msgstr "Dosya adı"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/servers/ario-server.c:56
+#, fuzzy
+msgid "Album Artist"
+msgstr "Sanatçı"
+
+#. MPD_TAG_ITEM_ALBUMARTIST
+#: ../src/servers/ario-server.c:57
 msgid "Any"
 msgstr "Herhangi Birisi"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:29
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1235
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: ../src/sources/ario-browser.c:79 ../src/sources/ario-search.c:76
-#: ../src/sources/ario-storedplaylists.c:101
-#: ../src/sources/ario-storedplaylists.c:118
-#: ../plugins/filesystem/ario-filesystem.c:104
-#: ../plugins/filesystem/ario-filesystem.c:118
-#: ../plugins/radios/ario-radio.c:114
+#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:76
+#: ../src/sources/ario-storedplaylists.c:91
+#: ../src/sources/ario-storedplaylists.c:108
+#: ../plugins/filesystem/ario-filesystem.c:92
+#: ../plugins/filesystem/ario-filesystem.c:106
+#: ../plugins/radios/ario-radio.c:102
 msgid "_Add to playlist"
 msgstr "_Çalma listesine ekle"
 
-#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:79
-#: ../src/sources/ario-storedplaylists.c:104
-#: ../src/sources/ario-storedplaylists.c:121
-#: ../plugins/filesystem/ario-filesystem.c:107
-#: ../plugins/filesystem/ario-filesystem.c:121
-#: ../plugins/radios/ario-radio.c:117
+#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:79
+#: ../src/sources/ario-storedplaylists.c:94
+#: ../src/sources/ario-storedplaylists.c:111
+#: ../plugins/filesystem/ario-filesystem.c:95
+#: ../plugins/filesystem/ario-filesystem.c:109
+#: ../plugins/radios/ario-radio.c:105
 msgid "Add and _play"
 msgstr "Ekle ve _oynat"
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:82
-#: ../src/sources/ario-storedplaylists.c:107
-#: ../src/sources/ario-storedplaylists.c:124
-#: ../plugins/filesystem/ario-filesystem.c:110
-#: ../plugins/filesystem/ario-filesystem.c:124
-#: ../plugins/radios/ario-radio.c:120
+#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:82
+#: ../src/sources/ario-storedplaylists.c:97
+#: ../src/sources/ario-storedplaylists.c:114
+#: ../plugins/filesystem/ario-filesystem.c:98
+#: ../plugins/filesystem/ario-filesystem.c:112
+#: ../plugins/radios/ario-radio.c:108
 msgid "_Replace in playlist"
 msgstr "_Çalma listesinde yerine koy"
 
-#: ../src/sources/ario-browser.c:88
+#: ../src/sources/ario-browser.c:90
 msgid "Get the covers"
 msgstr "Albüm kapaklarını al"
 
-#: ../src/sources/ario-browser.c:91
+#: ../src/sources/ario-browser.c:93
 msgid "_Delete the covers"
 msgstr "_Albüm kapaklarını sil"
 
-#: ../src/sources/ario-browser.c:94 ../src/sources/ario-browser.c:97
-#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:127
+#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
+#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:117
 #: ../src/widgets/ario-playlist.c:151
-#: ../plugins/filesystem/ario-filesystem.c:127
-#: ../plugins/radios/ario-radio.c:129
+#: ../plugins/filesystem/ario-filesystem.c:115
+#: ../plugins/radios/ario-radio.c:117
 msgid "_Properties"
 msgstr "_Özellikler"
 
-#: ../src/sources/ario-browser.c:121 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Kütüphane"
 
@@ -638,100 +634,100 @@ msgstr "Bir arama kısıtı ekle"
 msgid "Search songs in the library"
 msgstr "Şarkıyı kütüphanede ara"
 
-#: ../src/sources/ario-search.c:362
+#: ../src/sources/ario-search.c:356
 msgid "Remove a search criteria"
 msgstr "Bir arama kısıtını kaldır"
 
-#: ../src/sources/ario-storedplaylists.c:110
+#: ../src/sources/ario-storedplaylists.c:100
 msgid "_Delete"
 msgstr "_Sil"
 
-#: ../src/sources/ario-storedplaylists.c:161
+#: ../src/sources/ario-storedplaylists.c:151
 msgid "Playlists"
 msgstr "Çalma Listeleri"
 
-#: ../src/sources/ario-storedplaylists.c:565
+#: ../src/sources/ario-storedplaylists.c:554
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Seçilen tüm çalma listelerini silmek istediğinize emin misiniz?"
 
-#. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree.c:373
-msgid "Cover"
-msgstr "Kapak"
-
-#: ../src/sources/ario-tree.c:1236
+#: ../src/sources/ario-tree.c:762
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Bütün kapakları kaldırmak istediğinize emin misiniz?"
 
-#: ../src/shell/ario-shell.c:147
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-tree-albums.c:183
+msgid "Cover"
+msgstr "Kapak"
+
+#: ../src/shell/ario-shell.c:148
 msgid "_File"
 msgstr "_Dosya"
 
-#: ../src/shell/ario-shell.c:148
+#: ../src/shell/ario-shell.c:149
 msgid "_Edit"
 msgstr "_Düzenle"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:150
 msgid "_View"
 msgstr "_Görünüm"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:151
 msgid "_Tool"
 msgstr "_Araç"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:152
 msgid "_Help"
 msgstr "_Yardım"
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:160
 msgid "_Quit"
 msgstr "_Çık"
 
-#: ../src/shell/ario-shell.c:162
+#: ../src/shell/ario-shell.c:163
 msgid "Plu_gins"
 msgstr "E_klentiler"
 
-#: ../src/shell/ario-shell.c:165
+#: ../src/shell/ario-shell.c:166
 msgid "Prefere_nces"
 msgstr "Yeğlene_nler"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:169
 msgid "_Change current album cover"
 msgstr "_Geçerli albüm kapağını değiştir"
 
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:172
 msgid "Download album _covers"
 msgstr "Albüm _Kapaklarını indir"
 
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:175
 msgid "Find similar artists"
 msgstr "Benzer sanatçıları bul"
 
-#: ../src/shell/ario-shell.c:177
+#: ../src/shell/ario-shell.c:178
 msgid "Add similar songs to playlist"
 msgstr "Benzer şarkıları çalma listesine ekle"
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:181
 msgid "Show _lyrics"
 msgstr "_Şarkı sözlerini göster"
 
-#: ../src/shell/ario-shell.c:186
+#: ../src/shell/ario-shell.c:187
 msgid "_Translate this application..."
 msgstr "_Bu uygulamayı tercüme et."
 
-#: ../src/shell/ario-shell.c:193
+#: ../src/shell/ario-shell.c:194
 msgid "S_tatusbar"
 msgstr "_Durum çubuğu"
 
-#: ../src/shell/ario-shell.c:196
+#: ../src/shell/ario-shell.c:197
 msgid "Upper part"
 msgstr "Üst tarafı"
 
-#: ../src/shell/ario-shell.c:703
+#: ../src/shell/ario-shell.c:768
 msgid "GTK client for MPD"
 msgstr "MPD için GTK istemcisi"
 
-#: ../src/shell/ario-shell.c:704
+#: ../src/shell/ario-shell.c:769
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -752,7 +748,8 @@ msgstr ""
 "  Hasan Yılmaz https://launchpad.net/~hasanyilmaz\n"
 "  Yahuda https://launchpad.net/~judaskro"
 
-#: ../src/shell/ario-shell.c:1022
+#. Create plugins configuration dialog window
+#: ../src/shell/ario-shell.c:1109
 msgid "Configure Plugins"
 msgstr "Eklentileri Yapılandır"
 
@@ -776,31 +773,27 @@ msgstr ""
 "%i kapak bulunamadı\n"
 "%i kapak zaten var"
 
-#: ../src/shell/ario-shell-coverselect.c:247
+#: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
 msgstr "Kapak İndir"
 
-#: ../src/shell/ario-shell-coverselect.c:563
+#: ../src/shell/ario-shell-coverselect.c:547
 msgid "Error reading file"
 msgstr "Dosya okumada hata"
 
-#: ../src/shell/ario-shell-coverselect.c:586
+#: ../src/shell/ario-shell-coverselect.c:570
 msgid "Error saving file"
 msgstr "Dosya kaydetmede hata"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:246
+#: ../src/shell/ario-shell-songinfos.c:258
 msgid "Lyrics"
 msgstr "Şarkı sözleri"
 
-#: ../src/shell/ario-shell-lyricsselect.c:163
+#: ../src/shell/ario-shell-lyricsselect.c:152
 msgid "Lyrics Download"
 msgstr "Şarkı Sözleri İndir"
-
-#: ../src/shell/ario-shell-lyricsselect.c:201
-msgid "Source"
-msgstr "Kaynak"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
@@ -814,39 +807,28 @@ msgstr "Sunucu"
 msgid "Others"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:309
+#: ../src/shell/ario-shell-similarartists.c:307
 #, c-format
 msgid "%d songs"
 msgstr "%d şarkı"
 
-#: ../src/shell/ario-shell-similarartists.c:368
-msgid "Image"
-msgstr "Görüntü"
-
-#: ../src/shell/ario-shell-similarartists.c:386
-#: ../src/widgets/ario-status-bar.c:91
-msgid "Songs"
-msgstr "Şarkılar"
-
-#: ../src/shell/ario-shell-songinfos.c:224
-#: ../src/shell/ario-shell-songinfos.c:241
-#: ../src/shell/ario-shell-songinfos.c:474
+#: ../src/shell/ario-shell-songinfos.c:236
+#: ../src/shell/ario-shell-songinfos.c:253
+#: ../src/shell/ario-shell-songinfos.c:498
 msgid "Song Properties"
 msgstr "Şarkı Özellikleri"
 
-#: ../src/shell/ario-shell-songinfos.c:409
+#: ../src/shell/ario-shell-songinfos.c:421
 msgid "Error saving tags of file:"
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:344
-msgid "Profile"
-msgstr "Profil"
-
-#: ../src/widgets/ario-connection-widget.c:530
+#. Create hosts selection dialog
+#: ../src/widgets/ario-connection-widget.c:569
 msgid "Server autodetection"
 msgstr "Otomatik sunucu saptaması"
 
-#: ../src/widgets/ario-connection-widget.c:541
+#. Description label
+#: ../src/widgets/ario-connection-widget.c:584
 msgid ""
 "If you don't see your MPD server thanks to the automatic detection, you "
 "should check that zeroconf is activated in your MPD configuration or use the "
@@ -856,27 +838,31 @@ msgstr ""
 "yapılandırmanızda zeroconf'un etkinleştirilmiş olduğunu denetleyin ya da "
 "kişisel yapılandırmanızı kullanın."
 
-#: ../src/widgets/ario-connection-widget.c:559
+#: ../src/widgets/ario-connection-widget.c:598
+msgid "Name"
+msgstr "Ad"
+
+#: ../src/widgets/ario-connection-widget.c:608
 msgid "Host"
 msgstr "Sunucu"
 
-#: ../src/widgets/ario-connection-widget.c:567
+#: ../src/widgets/ario-connection-widget.c:618
 msgid "Port"
 msgstr "Kapı"
 
-#: ../src/widgets/ario-connection-widget.c:630
+#: ../src/widgets/ario-connection-widget.c:692
 msgid "You must select a server."
 msgstr "Bir sunucu seçmelisiniz."
 
-#: ../src/widgets/ario-connection-widget.c:677
+#: ../src/widgets/ario-connection-widget.c:742
 msgid "New Profile"
 msgstr "Yeni Profil"
 
-#: ../src/widgets/ario-firstlaunch.c:77
+#: ../src/widgets/ario-firstlaunch.c:82
 msgid "The following configuration will be used:"
 msgstr "İzleyen yapılandırma kullanılacak:"
 
-#: ../src/widgets/ario-firstlaunch.c:101
+#: ../src/widgets/ario-firstlaunch.c:106
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
@@ -884,15 +870,15 @@ msgstr ""
 "İlk kez Ario'yu çalıştırıyorsunuz.\n"
 "Bu asistan, programı yapılandırmanıza yardım edecek."
 
-#: ../src/widgets/ario-firstlaunch.c:106
+#: ../src/widgets/ario-firstlaunch.c:111
 msgid "Welcome to Ario"
 msgstr "Ario'ya hoşgeldiniz"
 
-#: ../src/widgets/ario-firstlaunch.c:124
+#: ../src/widgets/ario-firstlaunch.c:129
 msgid "Configuration"
 msgstr "Yapılandırma"
 
-#: ../src/widgets/ario-firstlaunch.c:136
+#: ../src/widgets/ario-firstlaunch.c:141
 msgid "Confirmation"
 msgstr "Doğrulama"
 
@@ -901,55 +887,62 @@ msgstr "Doğrulama"
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "%s <i>içinden</i> %s <i>tarafından</i>"
 
-#: ../src/widgets/ario-header.c:195
+#: ../src/widgets/ario-header.c:198
 msgid "Play previous song"
 msgstr "Önceki şarkıyı çal"
 
-#: ../src/widgets/ario-header.c:216
+#: ../src/widgets/ario-header.c:219
 msgid "Play/Pause the music"
 msgstr "Müziği Oynat/Duraklat"
 
-#: ../src/widgets/ario-header.c:228
+#: ../src/widgets/ario-header.c:231
 msgid "Stop the music"
 msgstr "Müziği durdur"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:307 ../src/widgets/ario-tray-icon.c:798
+#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:797
 msgid " of "
 msgstr " / "
 
-#: ../src/widgets/ario-header.c:320
+#: ../src/widgets/ario-header.c:325
 msgid "Toggle random on/off"
 msgstr "Rastgele aç/kapa"
 
-#: ../src/widgets/ario-header.c:332
+#: ../src/widgets/ario-header.c:337
 msgid "Toggle repeat on/off"
 msgstr "Yinele aç/kapa"
 
-#: ../src/widgets/ario-header.c:337
+#: ../src/widgets/ario-header.c:342
 msgid "Change the music volume"
 msgstr "Müziğin ses düzeyini değiştir"
 
-#: ../src/widgets/ario-lyrics-editor.c:272
+#. Set temporary text for lyrics download
+#: ../src/widgets/ario-lyrics-editor.c:305
 msgid "Downloading lyrics..."
 msgstr "Şarkı sözleri indiriliyor..."
 
-#: ../src/widgets/ario-lyrics-editor.c:289
+#. Lyrics not found
+#: ../src/widgets/ario-lyrics-editor.c:326
 msgid "Lyrics not found"
 msgstr "Şarkı sözleri bulunamadı"
 
-#: ../src/widgets/ario-playlist.c:136
+#: ../src/widgets/ario-playlist.c:133
 msgid "_Clear"
 msgstr "_Temizle"
 
-#: ../src/widgets/ario-playlist.c:139
+#: ../src/widgets/ario-playlist.c:136
 msgid "_Shuffle"
 msgstr "_Karıştır"
 
-#: ../src/widgets/ario-playlist.c:142
+#: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
 msgstr "Kır_p"
+
+#: ../src/widgets/ario-playlist.c:142
+#, fuzzy
+msgid "_Search in playlist"
+msgstr "_Çalma listesinde yerine koy"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -963,40 +956,44 @@ msgstr "_Kaydet"
 msgid "_Go to playing song"
 msgstr "Çalan şarkıya _git"
 
-#: ../src/widgets/ario-playlist.c:560
+#: ../src/widgets/ario-playlist.c:631
 msgid "Filter:"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1401
+#: ../src/widgets/ario-playlist.c:1589
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
 
-#: ../src/widgets/ario-playlist.c:1411
+#: ../src/widgets/ario-playlist.c:1599
 msgid "Playlist name :"
 msgstr "Çalma listesi adı :"
 
-#: ../src/widgets/ario-playlist.c:1436
+#: ../src/widgets/ario-playlist.c:1629
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Çalma listesi zaten var. Üzerine yazmak istiyor musunuz?"
 
-#: ../src/widgets/ario-tray-icon.c:134
+#: ../src/widgets/ario-status-bar.c:91
+msgid "Songs"
+msgstr "Şarkılar"
+
+#: ../src/widgets/ario-tray-icon.c:136
 msgid "_Play"
 msgstr "Ç_al"
 
-#: ../src/widgets/ario-tray-icon.c:137
+#: ../src/widgets/ario-tray-icon.c:139
 msgid "_Pause"
 msgstr "_Duraklat"
 
-#: ../src/widgets/ario-tray-icon.c:140
+#: ../src/widgets/ario-tray-icon.c:142
 msgid "_Stop"
 msgstr "D_urdur"
 
-#: ../src/widgets/ario-tray-icon.c:143
+#: ../src/widgets/ario-tray-icon.c:145
 msgid "_Next"
 msgstr "_Sonraki"
 
-#: ../src/widgets/ario-tray-icon.c:146
+#: ../src/widgets/ario-tray-icon.c:148
 msgid "P_revious"
 msgstr "_Önceki"
 
@@ -1005,84 +1002,84 @@ msgid "Not playing"
 msgstr "Çalmıyor"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1152
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1179
 msgid "Today %I:%M %p"
 msgstr "Bugün %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1165
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Dün %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1181
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1193
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d %b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1198
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1282
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Never"
 msgstr "Asla"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1305
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1335
 msgid "OK"
 msgstr "Tamam"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1308
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1338
 msgid "Logging in"
 msgstr "Giriş yapılıyor"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1341
 msgid "Request failed"
 msgstr "İstek başarısız"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1314
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1344
 msgid "Incorrect username"
 msgstr "Geçersiz kullanıcı adı"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1317
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1347
 msgid "Incorrect password"
 msgstr "Geçersiz parola"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1320
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1350
 msgid "Handshake failed"
 msgstr "Anlaşma başarısız oldu"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1323
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1353
 msgid "Client update required"
 msgstr "İstemci güncellemesi gerekiyor"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1326
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
 msgid "Track submission failed"
 msgstr "Parça gönderme başarısız"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1329
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1359
 msgid "Queue is too long"
 msgstr "Kuyruk çok uzun"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1332
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
 msgid "Track submission failed too many times"
 msgstr "Parça gönderme birçok kez başarısız oldu"
 
-#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1384
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1417
 msgid "Audioscrobbler preferences"
 msgstr "Audioscrobbler yeğlenenleri"
 
@@ -1130,11 +1127,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Şarkı bilgisini Last.fm'e gönderir"
 
-#: ../plugins/filesystem/ario-filesystem.c:164
+#: ../plugins/filesystem/ario-filesystem.c:152
 msgid "File System"
 msgstr "Dosya Sistemi"
 
-#: ../plugins/filesystem/ario-filesystem.c:414
+#: ../plugins/filesystem/ario-filesystem.c:393
 msgid "Music"
 msgstr "Müzik"
 
@@ -1182,42 +1179,40 @@ msgstr "Çoklu ortam tuşları desteği ekle"
 msgid "Multimedia Keys"
 msgstr "Çoklu Ortam Tuşları"
 
-#: ../plugins/radios/ario-radio.c:123
+#: ../plugins/radios/ario-radio.c:111
 msgid "Add a _new radio"
 msgstr "_Yeni bir radyo ekle"
 
-#: ../plugins/radios/ario-radio.c:126
+#: ../plugins/radios/ario-radio.c:114
 msgid "_Delete this radios"
 msgstr "Bu radyoları _sil"
 
-#: ../plugins/radios/ario-radio.c:164
+#: ../plugins/radios/ario-radio.c:152
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Ağ Radyoları"
 
-#: ../plugins/radios/ario-radio.c:219
+#: ../plugins/radios/ario-radio.c:211
 msgid "Internet Radios"
 msgstr "İnternet Radyoları"
 
-#. Create the widgets
-#: ../plugins/radios/ario-radio.c:830
-msgid "Add a WebRadio"
-msgstr "Bir Ağ Radyosu ekle"
-
-#: ../plugins/radios/ario-radio.c:841 ../plugins/radios/ario-radio.c:1040
+#: ../plugins/radios/ario-radio.c:713
 msgid "URL :"
 msgstr "Adres :"
 
-#: ../plugins/radios/ario-radio.c:895 ../plugins/radios/ario-radio.c:1095
+#: ../plugins/radios/ario-radio.c:771
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Kötü parametreler. Radyo için yeni bir ad ve adres belirtmelisiniz."
 
-#: ../plugins/radios/ario-radio.c:957
+#: ../plugins/radios/ario-radio.c:793
+msgid "Add a WebRadio"
+msgstr "Bir Ağ Radyosu ekle"
+
+#: ../plugins/radios/ario-radio.c:852
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Seçilmiş tüm radyoları silmek istediğinize emin misiniz?"
 
-#. Create the widgets
-#: ../plugins/radios/ario-radio.c:1029
+#: ../plugins/radios/ario-radio.c:920
 msgid "Edit a WebRadio"
 msgstr "Bir Ağ Radyo'sunu düzenle"
 
@@ -1230,11 +1225,11 @@ msgstr "Ağ Radyo'larını dinle"
 msgid "Find artist on Wikipedia"
 msgstr "Sanatçıyı Vikipedi'de bul"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:173
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:172
 msgid "Wikipedia Plugin - Configuration"
 msgstr "Vikipedi Eklentisi - Yapılandırma"
 
-#: ../plugins/wikipedia/ario-wikipedia-plugin.c:182
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia language :"
 msgstr "Vikipedi dili :"
 
@@ -1245,6 +1240,15 @@ msgstr "Mevcut sanatçıyı Vikipedi'de aramak için bir eklenti"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Vikipedi"
+
+#~ msgid "Source"
+#~ msgstr "Kaynak"
+
+#~ msgid "Image"
+#~ msgstr "Görüntü"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
 
 #~ msgid "Automatic configuration"
 #~ msgstr "Otomatik ayarlama"

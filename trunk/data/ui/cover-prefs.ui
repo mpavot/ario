@@ -1,15 +1,52 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="amazon_model">
+    <columns>
+      <!-- column-name country -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">com</col>
+      </row>
+      <row>
+        <col id="0">fr</col>
+      </row>
+      <row>
+        <col id="0">de</col>
+      </row>
+      <row>
+        <col id="0">uk</col>
+      </row>
+      <row>
+        <col id="0">ca</col>
+      </row>
+      <row>
+        <col id="0">jp</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="covers_model">
+    <columns>
+      <!-- column-name enabled -->
+      <column type="gboolean"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkVBox" id="covers_vbox">
     <property name="visible">True</property>
     <child>
       <object class="GtkFrame" id="frame1">
         <property name="visible">True</property>
-        <property name="extension_events">GDK_EXTENSION_EVENTS_CURSOR</property>
+        <property name="extension_events">cursor</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
@@ -21,27 +58,30 @@
                 <property name="spacing">5</property>
                 <child>
                   <object class="GtkCheckButton" id="covertree_checkbutton">
+                    <property name="label" translatable="yes">Show the covers in the albums list</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Show the covers in the albums list</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="active">True</property>
                     <property name="draw_indicator">True</property>
-                    <signal handler="ario_cover_preferences_covertree_check_changed_cb" name="toggled"/>
+                    <signal name="toggled" handler="ario_cover_preferences_covertree_check_changed_cb"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="automatic_checkbutton">
+                    <property name="label" translatable="yes">Automatically download the album cover of the playing song</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="label" translatable="yes">Automatically download the album cover of the playing song</property>
                     <property name="draw_indicator">True</property>
-                    <signal handler="ario_cover_preferences_automatic_check_changed_cb" name="toggled"/>
+                    <signal name="toggled" handler="ario_cover_preferences_automatic_check_changed_cb"/>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -58,12 +98,20 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkComboBox" id="amazon_country_combobox">
                         <property name="visible">True</property>
-                        <signal handler="ario_cover_preferences_amazon_country_changed_cb" name="changed"/>
+                        <property name="model">amazon_model</property>
+                        <signal name="changed" handler="ario_cover_preferences_amazon_country_changed_cb"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="country_cellrenderer"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -90,6 +138,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
+        <property name="position">0</property>
       </packing>
     </child>
     <child>
@@ -98,7 +147,7 @@
         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
-        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment2">
             <property name="visible">True</property>
@@ -115,18 +164,48 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="shadow_type">GTK_SHADOW_IN</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
                     <child>
                       <object class="GtkTreeView" id="covers_treeview">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="headers_clickable">True</property>
+                        <property name="model">covers_model</property>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                            <property name="sizing">fixed</property>
+                            <property name="fixed_width">80</property>
+                            <property name="title">Enabled</property>
+                            <child>
+                              <object class="GtkCellRendererToggle" id="cellrenderercombo1">
+                                <signal name="toggled" handler="ario_cover_preferences_cover_toggled_cb"/>
+                              </object>
+                              <attributes>
+                                <attribute name="active">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                            <property name="sizing">fixed</property>
+                            <property name="title">Name</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GtkVBox" id="vbox1">
@@ -139,7 +218,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_cover_preferences_top_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_cover_preferences_top_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
@@ -151,6 +230,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
@@ -159,7 +239,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_cover_preferences_up_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_cover_preferences_up_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
@@ -178,7 +258,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_cover_preferences_down_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_cover_preferences_down_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image3">
                             <property name="visible">True</property>
@@ -197,7 +277,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <signal handler="ario_cover_preferences_bottom_button_cb" name="clicked"/>
+                        <signal name="clicked" handler="ario_cover_preferences_bottom_button_cb"/>
                         <child>
                           <object class="GtkImage" id="image4">
                             <property name="visible">True</property>
@@ -237,4 +317,3 @@
     </child>
   </object>
 </interface>
-

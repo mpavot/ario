@@ -93,7 +93,6 @@ ario_playlist_preferences_new (void)
         ArioPlaylistPreferences *playlist_preferences;
         GtkBuilder *builder;
         GtkListStore *list_store;
-        GtkCellRenderer *renderer;
         GtkTreeIter iter;
         GSList *playlist_modes;
         ArioPlaylistMode *playlist_mode;
@@ -105,33 +104,34 @@ ario_playlist_preferences_new (void)
         builder = gtk_builder_helpers_new (UI_PATH "playlist-prefs.ui",
                                            playlist_preferences);
 
-        playlist_preferences->priv->track_checkbutton = 
+        playlist_preferences->priv->track_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "track_checkbutton"));
-        playlist_preferences->priv->title_checkbutton = 
+        playlist_preferences->priv->title_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "title_checkbutton"));
-        playlist_preferences->priv->artist_checkbutton = 
+        playlist_preferences->priv->artist_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "artist_checkbutton"));
-        playlist_preferences->priv->album_checkbutton = 
+        playlist_preferences->priv->album_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "album_checkbutton"));
-        playlist_preferences->priv->genre_checkbutton = 
+        playlist_preferences->priv->genre_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "genre_checkbutton"));
-        playlist_preferences->priv->duration_checkbutton = 
+        playlist_preferences->priv->duration_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "duration_checkbutton"));
-        playlist_preferences->priv->file_checkbutton = 
+        playlist_preferences->priv->file_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "file_checkbutton"));
-        playlist_preferences->priv->date_checkbutton = 
+        playlist_preferences->priv->date_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "date_checkbutton"));
-        playlist_preferences->priv->autoscroll_checkbutton = 
+        playlist_preferences->priv->autoscroll_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "autoscroll_checkbutton"));
-        playlist_preferences->priv->playlist_combobox = 
+        playlist_preferences->priv->playlist_combobox =
                 GTK_WIDGET (gtk_builder_get_object (builder, "playlist_combobox"));
-        playlist_preferences->priv->vbox = 
+        playlist_preferences->priv->vbox =
                 GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
+        list_store =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "liststore"));
 
         gtk_builder_helpers_boldify_label (builder, "playlist_label");
         gtk_builder_helpers_boldify_label (builder, "mode_label");
 
-        list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
         playlist_modes = ario_playlist_manager_get_modes (ario_playlist_manager_get_instance ());
         for (; playlist_modes; playlist_modes = g_slist_next (playlist_modes)) {
                 playlist_mode = playlist_modes->data;
@@ -141,15 +141,6 @@ ario_playlist_preferences_new (void)
                                     1, ario_playlist_mode_get_id (playlist_mode),
                                     -1);
         }
-        gtk_combo_box_set_model (GTK_COMBO_BOX (playlist_preferences->priv->playlist_combobox),
-                                 GTK_TREE_MODEL (list_store));
-        g_object_unref (list_store);
-
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (playlist_preferences->priv->playlist_combobox));
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (playlist_preferences->priv->playlist_combobox), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (playlist_preferences->priv->playlist_combobox), renderer,
-                                        "text", 0, NULL);
 
         ario_playlist_preferences_sync_playlist (playlist_preferences);
 
@@ -198,7 +189,6 @@ ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_prefe
 
         id = ario_conf_get_string (PREF_PLAYLIST_MODE, PREF_PLAYLIST_MODE_DEFAULT);
         playlist_modes = ario_playlist_manager_get_modes (ario_playlist_manager_get_instance ());
-        gtk_combo_box_set_active (GTK_COMBO_BOX (playlist_preferences->priv->playlist_combobox), 0);
         for (; playlist_modes; playlist_modes = g_slist_next (playlist_modes)) {
                 playlist_mode = playlist_modes->data;
                 if (!strcmp (ario_playlist_mode_get_id (playlist_mode), id)) {

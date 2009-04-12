@@ -39,14 +39,13 @@ G_MODULE_EXPORT void ario_lyrics_preferences_down_button_cb (GtkWidget *widget,
                                                              ArioLyricsPreferences *lyrics_preferences);
 G_MODULE_EXPORT void ario_lyrics_preferences_bottom_button_cb (GtkWidget *widget,
                                                                ArioLyricsPreferences *lyrics_preferences);
-static void ario_lyrics_preferences_lyrics_toggled_cb (GtkCellRendererToggle *cell,
-                                                       gchar *path_str,
-                                                       ArioLyricsPreferences *lyrics_preferences);
+G_MODULE_EXPORT void ario_lyrics_preferences_lyrics_toggled_cb (GtkCellRendererToggle *cell,
+                                                                gchar *path_str,
+                                                                ArioLyricsPreferences *lyrics_preferences);
 
 
 struct ArioLyricsPreferencesPrivate
 {
-        GtkWidget *lyrics_treeview;
         GtkListStore *lyrics_model;
         GtkTreeSelection *lyrics_selection;
 };
@@ -82,8 +81,7 @@ ario_lyrics_preferences_new (void)
         ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioLyricsPreferences *lyrics_preferences;
-        GtkCellRenderer *renderer;
-        GtkTreeViewColumn *column;
+        GtkWidget *lyrics_treeview;
 
         lyrics_preferences = g_object_new (TYPE_ARIO_LYRICS_PREFERENCES, NULL);
 
@@ -92,37 +90,14 @@ ario_lyrics_preferences_new (void)
         builder = gtk_builder_helpers_new (UI_PATH "lyrics-prefs.ui",
                                            lyrics_preferences);
 
-        lyrics_preferences->priv->lyrics_treeview = 
+        lyrics_treeview =
                 GTK_WIDGET (gtk_builder_get_object (builder, "lyrics_treeview"));
+        lyrics_preferences->priv->lyrics_model =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "lyrics_model"));
 
         gtk_builder_helpers_boldify_label (builder, "lyrics_sources_frame_label");
 
-        lyrics_preferences->priv->lyrics_model = gtk_list_store_new (N_COLUMN,
-                                                                     G_TYPE_BOOLEAN,
-                                                                     G_TYPE_STRING,
-                                                                     G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (lyrics_preferences->priv->lyrics_treeview),
-                                 GTK_TREE_MODEL (lyrics_preferences->priv->lyrics_model));
-        renderer = gtk_cell_renderer_toggle_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Enabled"),
-                                                           renderer,
-                                                           "active", ENABLED_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 80);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (lyrics_preferences->priv->lyrics_treeview), column);
-        g_signal_connect (GTK_OBJECT (renderer),
-                          "toggled",
-                          G_CALLBACK (ario_lyrics_preferences_lyrics_toggled_cb), lyrics_preferences);
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Name"),
-                                                           renderer,
-                                                           "text", NAME_COLUMN,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (lyrics_preferences->priv->lyrics_treeview), column);
-
-        lyrics_preferences->priv->lyrics_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (lyrics_preferences->priv->lyrics_treeview));
+        lyrics_preferences->priv->lyrics_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (lyrics_treeview));
         gtk_tree_selection_set_mode (lyrics_preferences->priv->lyrics_selection,
                                      GTK_SELECTION_BROWSE);
 
@@ -294,7 +269,7 @@ ario_lyrics_preferences_bottom_button_cb (GtkWidget *widget,
         ario_lyrics_preferences_sync_lyrics_providers (lyrics_preferences);
 }
 
-static void
+void
 ario_lyrics_preferences_lyrics_toggled_cb (GtkCellRendererToggle *cell,
                                            gchar *path_str,
                                            ArioLyricsPreferences *lyrics_preferences)

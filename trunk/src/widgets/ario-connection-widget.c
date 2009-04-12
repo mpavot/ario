@@ -68,7 +68,6 @@ static guint ario_connection_widget_signals[LAST_SIGNAL] = { 0 };
 
 struct ArioConnectionWidgetPrivate
 {
-        GtkWidget *profile_treeview;
         GtkListStore *profile_model;
         GtkTreeSelection *profile_selection;
         GSList *profiles;
@@ -313,8 +312,7 @@ ario_connection_widget_new (void)
         ARIO_LOG_FUNCTION_START;
         GtkBuilder *builder;
         ArioConnectionWidget *connection_widget;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
+        GtkWidget *profile_treeview;
 
         connection_widget = g_object_new (TYPE_ARIO_CONNECTION_WIDGET,
                                           NULL);
@@ -326,7 +324,7 @@ ario_connection_widget_new (void)
                                            connection_widget);
 
         /* Get pointers to the different widgets */
-        connection_widget->priv->profile_treeview =
+        profile_treeview =
                 GTK_WIDGET (gtk_builder_get_object (builder, "profile_treeview"));
         connection_widget->priv->name_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "name_entry"));
@@ -350,6 +348,8 @@ ario_connection_widget_new (void)
                 GTK_WIDGET (gtk_builder_get_object (builder, "mpd_radiobutton"));
         connection_widget->priv->xmms_radiobutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "xmms_radiobutton"));
+        connection_widget->priv->profile_model =
+                GTK_LIST_STORE (gtk_builder_get_object (builder, "profile_model"));
 
         /* Show all widgets except musicdir_box (shown only if Ario is on same computer as
          * music server */
@@ -357,24 +357,10 @@ ario_connection_widget_new (void)
         gtk_widget_hide (connection_widget->priv->musicdir_hbox);
         gtk_widget_set_no_show_all (connection_widget->priv->musicdir_hbox, TRUE);
 
-        /* Create the model for profile list */
-        connection_widget->priv->profile_model = gtk_list_store_new (1, G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (connection_widget->priv->profile_treeview),
-                                 GTK_TREE_MODEL (connection_widget->priv->profile_model));
-        connection_widget->priv->profile_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (connection_widget->priv->profile_treeview));
+        /* Get the model selection */
+        connection_widget->priv->profile_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (profile_treeview));
         gtk_tree_selection_set_mode (connection_widget->priv->profile_selection,
                                      GTK_SELECTION_BROWSE);
-
-        /* Append Profile column */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes (_("Profile"),
-                                                           renderer,
-                                                           "text", 0,
-                                                           NULL);
-        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
-        gtk_tree_view_column_set_fixed_width (column, 120);
-        gtk_tree_view_column_set_expand (column, TRUE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (connection_widget->priv->profile_treeview), column);
 
         /* Get the list of profiles */
         connection_widget->priv->profiles = ario_profiles_get ();

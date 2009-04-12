@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<!--*- mode: xml -*-->
 <interface>
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkVBox" id="vbox">
     <property name="visible">True</property>
     <property name="border_width">6</property>
@@ -21,6 +22,7 @@
               </object>
               <packing>
                 <property name="padding">12</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -39,7 +41,9 @@
           </object>
         </child>
       </object>
+      <packing>
+        <property name="position">0</property>
+      </packing>
     </child>
   </object>
 </interface>
-
