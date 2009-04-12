@@ -36,6 +36,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioBrowserPrivate ArioBrowserPrivate;
 
+/**
+ * ArioBrowser is a ArioSource reprensenting music library.
+ * It contains a configurable number of ArioTree and the type
+ * of ArioTrees can be configured
+ */
 typedef struct
 {
         ArioSource parent;
