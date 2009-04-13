@@ -579,7 +579,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         /* Set playlist as drag & drop destination */
         gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (playlist->priv->tree),
                                               targets, G_N_ELEMENTS (targets),
-                                              GDK_ACTION_MOVE);
+                                              GDK_ACTION_MOVE | GDK_ACTION_COPY);
 
         /* Add the tree in the scrolled window */
         gtk_container_add (GTK_CONTAINER (scrolled_window), playlist->priv->tree);
@@ -1152,6 +1152,60 @@ ario_playlist_move_rows (const int x, const int y)
         ario_server_queue_commit ();
 }
 
+static void
+ario_playlist_copy_rows (const int x, const int y)
+{
+        ARIO_LOG_FUNCTION_START;
+        GtkTreePath *path = NULL;
+        GtkTreeViewDropPosition drop_pos;
+        gint pos;
+        gint *indice;
+        GList *list;
+        GSList *songs = NULL;
+        GtkTreeModel *model = GTK_TREE_MODEL (instance->priv->model);
+        GtkTreeIter iter;
+        gchar *filename;
+
+        /* Get drop location */
+        gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (instance->priv->tree), x, y, &path, &drop_pos);
+        if (path == NULL) {
+                pos = instance->priv->playlist_length;
+        } else {
+                indice = gtk_tree_path_get_indices (path);
+                pos = indice[0];
+
+                /* Adjust position acording to drop after */
+                if ((drop_pos == GTK_TREE_VIEW_DROP_AFTER
+                     || drop_pos == GTK_TREE_VIEW_DROP_INTO_OR_AFTER)
+                    && pos < instance->priv->playlist_length)
+                        ++pos;
+
+                gtk_tree_path_free (path);
+        }
+
+        /* Get all selected rows */
+        list = gtk_tree_selection_get_selected_rows (instance->priv->selection, &model);
+
+        /* Unselect all rows */
+        gtk_tree_selection_unselect_all (instance->priv->selection);
+
+        /* For each selected row (starting from the end) */
+        for (; list; list = g_list_next (list)) {
+                /* Get start pos */
+                gtk_tree_model_get_iter (model, &iter, (GtkTreePath *) list->data);
+                gtk_tree_model_get (model, &iter, FILE_COLUMN, &filename, -1);
+                songs = g_slist_append (songs, filename);
+        }
+        /* Insert songs in playlist */
+        ario_server_insert_at (songs, pos - 1);
+
+        g_slist_foreach (songs, (GFunc) g_free, NULL);
+        g_slist_free (songs);
+
+        g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
+        g_list_free (list);
+}
+
 static gint
 ario_playlist_get_drop_position (const int x,
                                  const int y)
@@ -1273,16 +1327,20 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
 
         /* Call the appropriate functions depending on data type */
-        if (data->type == gdk_atom_intern ("text/internal-list", TRUE))
-                ario_playlist_move_rows (x, y);
-        else if (data->type == gdk_atom_intern ("text/songs-list", TRUE))
+        if (data->type == gdk_atom_intern ("text/internal-list", TRUE)) {
+                if (context->action & GDK_ACTION_COPY)
+                        ario_playlist_copy_rows (x, y);
+                else
+                        ario_playlist_move_rows (x, y);
+        } else if (data->type == gdk_atom_intern ("text/songs-list", TRUE)) {
                 ario_playlist_drop_songs (x, y, data);
-        else if (data->type == gdk_atom_intern ("text/radios-list", TRUE))
+        } else if (data->type == gdk_atom_intern ("text/radios-list", TRUE)) {
                 ario_playlist_drop_songs (x, y, data);
-        else if (data->type == gdk_atom_intern ("text/directory", TRUE))
+        } else if (data->type == gdk_atom_intern ("text/directory", TRUE)) {
                 ario_playlist_drop_dir (x, y, data);
-        else if (data->type == gdk_atom_intern ("text/criterias-list", TRUE))
+        } else if (data->type == gdk_atom_intern ("text/criterias-list", TRUE)) {
                 ario_playlist_drop_criterias (x, y, data);
+        }
 
         /* Finish the drag */
         gtk_drag_finish (context, TRUE, FALSE, time);
