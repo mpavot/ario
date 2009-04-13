@@ -68,6 +68,7 @@ ario_server_class_init (ArioServerClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Object Signals */
         ario_server_signals[SERVER_SONG_CHANGED] =
                 g_signal_new ("song_changed",
                               G_OBJECT_CLASS_TYPE (object_class),
@@ -194,24 +195,33 @@ ario_server_reset_interface (void)
         static ArioServerType interface_type = -1;
         ArioServerType new_interface_type;
 
+        /* Get new interface type */
         new_interface_type = ario_profiles_get_current (ario_profiles_get ())->type;
 
+        /* Same type as before: do nothing */
         if (new_interface_type == interface_type)
                 return;
 
+        /* Change type */
         interface_type = new_interface_type;
 
+        /* destroy previous insterface */
         if (interface) {
                 ario_server_disconnect ();
                 g_object_unref (interface);
         }
+
+        /* Create new interface */
         if (interface_type == ArioServerMpd) {
+                /* MPD interface */
                 interface = ARIO_SERVER_INTERFACE (ario_mpd_get_instance (instance));
 #ifdef ENABLE_XMMS2
         } else if (interface_type == ArioServerXmms) {
+                /* XMMS2 interface */
                 interface = ARIO_SERVER_INTERFACE (ario_xmms_get_instance (instance));
 #endif
         } else {
+                /* Unknown interface */
                 ARIO_LOG_ERROR ("Unknown server type: %d", interface_type);
                 interface = ARIO_SERVER_INTERFACE (ario_mpd_get_instance (instance));
         }
@@ -221,6 +231,7 @@ ArioServer *
 ario_server_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Singleton instanciation if needed */
         if (!instance) {
                 instance = g_object_new (ARIO_TYPE_SERVER, NULL);
         }
@@ -236,6 +247,7 @@ ario_server_connect (void)
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Make sure we have the right interface type */
         ario_server_reset_interface ();
 
         /* check if there is a connection */
@@ -243,6 +255,8 @@ ario_server_connect (void)
                 return FALSE;
 
         interface->connecting = TRUE;
+
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->connect ();
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_CONNECTIVITY_CHANGED], 0);
         return FALSE;
@@ -252,6 +266,7 @@ void
 ario_server_disconnect (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->disconnect ();
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_CONNECTIVITY_CHANGED], 0);
 }
@@ -285,6 +300,7 @@ ario_server_is_connected (void)
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START;
 
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->is_connected ();
 }
 
@@ -293,6 +309,7 @@ ario_server_list_tags (const ArioServerTag tag,
                        const ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->list_tags (tag, criteria);
 }
 
@@ -300,6 +317,7 @@ GSList *
 ario_server_get_albums (const ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_albums (criteria);
 }
 
@@ -308,6 +326,7 @@ ario_server_get_songs (const ArioServerCriteria *criteria,
                        const gboolean exact)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_songs (criteria, exact);
 }
 
@@ -315,6 +334,7 @@ GSList *
 ario_server_get_songs_from_playlist (char *playlist)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_songs_from_playlist (playlist);
 }
 
@@ -322,6 +342,7 @@ GSList *
 ario_server_get_playlists (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_playlists ();
 }
 
@@ -329,12 +350,14 @@ GSList *
 ario_server_get_playlist_changes (gint64 playlist_id)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_playlist_changes (playlist_id);
 }
 
 gboolean
 ario_server_update_status (void)
 {
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_status ();
 }
 
@@ -362,6 +385,7 @@ ArioServerSong *
 ario_server_get_current_song_on_server (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_current_song_on_server ();
 }
 
@@ -461,6 +485,7 @@ int
 ario_server_get_current_playlist_total_time (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_current_playlist_total_time ();
 }
 
@@ -498,6 +523,7 @@ ario_server_get_updating (void)
 unsigned long
 ario_server_get_last_update (void)
 {
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_last_update ();
 }
 
@@ -512,6 +538,7 @@ void
 ario_server_do_next (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_next ();
 }
 
@@ -519,6 +546,7 @@ void
 ario_server_do_prev (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_prev ();
 }
 
@@ -526,6 +554,7 @@ void
 ario_server_do_play (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_play ();
 }
 
@@ -533,6 +562,7 @@ void
 ario_server_do_play_pos (gint id)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_play_pos (id);
 }
 
@@ -540,6 +570,7 @@ void
 ario_server_do_pause (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_pause ();
 }
 
@@ -547,6 +578,7 @@ void
 ario_server_do_stop (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->do_stop ();
 }
 
@@ -584,6 +616,7 @@ void
 ario_server_set_current_elapsed (const gint elapsed)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_elapsed (elapsed);
 }
 
@@ -591,6 +624,7 @@ void
 ario_server_set_current_volume (const gint volume)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_volume (volume);
 }
 
@@ -598,6 +632,7 @@ void
 ario_server_set_current_random (const gboolean random)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_random (random);
 }
 
@@ -605,6 +640,7 @@ void
 ario_server_set_current_repeat (const gboolean repeat)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_repeat (repeat);
 }
 
@@ -612,6 +648,7 @@ void
 ario_server_set_crossfadetime (const int crossfadetime)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_crossfadetime (crossfadetime);
 }
 
@@ -619,6 +656,7 @@ void
 ario_server_clear (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->clear ();
 }
 
@@ -626,6 +664,7 @@ void
 ario_server_shuffle (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->shuffle ();
 }
 
@@ -634,6 +673,7 @@ ario_server_queue_add (const char *path)
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Append a queue action to list */
         ArioServerQueueAction *queue_action = (ArioServerQueueAction *) g_malloc (sizeof (ArioServerQueueAction));
         queue_action->type = ARIO_SERVER_ACTION_ADD;
         queue_action->path = path;
@@ -644,6 +684,7 @@ ario_server_queue_add (const char *path)
 void
 ario_server_queue_delete_id (const int id)
 {
+        /* Append a queue action to list */
         ArioServerQueueAction *queue_action = (ArioServerQueueAction *) g_malloc (sizeof (ArioServerQueueAction));
         queue_action->type = ARIO_SERVER_ACTION_DELETE_ID;
         queue_action->id = id;
@@ -655,6 +696,7 @@ void
 ario_server_queue_delete_pos (const int pos)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Append a queue action to list */
         ArioServerQueueAction *queue_action = (ArioServerQueueAction *) g_malloc (sizeof (ArioServerQueueAction));
         queue_action->type = ARIO_SERVER_ACTION_DELETE_POS;
         queue_action->pos = pos;
@@ -667,6 +709,7 @@ ario_server_queue_move (const int old_pos,
                         const int new_pos)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Append a queue action to list */
         ArioServerQueueAction *queue_action = (ArioServerQueueAction *) g_malloc (sizeof (ArioServerQueueAction));
         queue_action->type = ARIO_SERVER_ACTION_MOVE;
         queue_action->old_pos = old_pos;
@@ -680,6 +723,7 @@ ario_server_queue_moveid (const int id,
                           const int pos)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Append a queue action to list */
         ArioServerQueueAction *queue_action = (ArioServerQueueAction *) g_malloc (sizeof (ArioServerQueueAction));
         queue_action->type = ARIO_SERVER_ACTION_MOVEID;
         queue_action->old_pos = id;
@@ -692,6 +736,7 @@ void
 ario_server_queue_commit (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->queue_commit ();
 }
 
@@ -700,6 +745,7 @@ ario_server_insert_at (const GSList *songs,
                        const gint pos)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->insert_at (songs, pos);
 }
 
@@ -707,6 +753,7 @@ int
 ario_server_save_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         int ret = ARIO_SERVER_INTERFACE_GET_CLASS (interface)->save_playlist (name);
 
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
@@ -718,6 +765,7 @@ void
 ario_server_delete_playlist (const char *name)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->delete_playlist (name);
 
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
@@ -727,6 +775,7 @@ GSList *
 ario_server_get_outputs (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_outputs ();
 }
 
@@ -735,6 +784,7 @@ ario_server_enable_output (int id,
                            gboolean enabled)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->enable_output (id, enabled);
 }
 
@@ -742,6 +792,7 @@ ArioServerStats *
 ario_server_get_stats (void)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_stats ();
 }
 
@@ -749,6 +800,7 @@ GList *
 ario_server_get_songs_info (GSList *paths)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->get_songs_info (paths);
 }
 
@@ -757,6 +809,7 @@ ario_server_list_files (const char *path,
                         gboolean recursive)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->list_files (path, recursive);
 }
 
@@ -850,6 +903,7 @@ ario_server_playlist_add_songs (const GSList *songs,
         end = ario_server_get_current_playlist_length ();
 
         if (pos >= 0) {
+                /* Insert songs at a given position */
                 ario_server_insert_at (songs, pos);
         } else {
                 /* For each filename :*/
@@ -857,9 +911,11 @@ ario_server_playlist_add_songs (const GSList *songs,
                         /* Add it in the playlist*/
                         ario_server_queue_add (tmp->data);
                 }
+                /* Commit song additions */
                 ario_server_queue_commit ();
         }
 
+        /* Start playing if needed */
         if (play) {
                 ario_server_do_play_pos (end);
         }
@@ -876,12 +932,17 @@ ario_server_playlist_add_dir (const gchar *dir,
         ArioServerSong *song;
         GSList *char_songs = NULL;
 
+        /* List files in dir */
         files = ario_server_list_files (dir, TRUE);
+
+        /* For each file */
         for (tmp = files->songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
+                /* Append file to list */
                 char_songs = g_slist_append (char_songs, song->file);
         }
 
+        /* Append all files to playlist */
         ario_server_playlist_add_songs (char_songs, pos, play);
         g_slist_free (char_songs);
         ario_server_free_file_list (files);
@@ -906,6 +967,7 @@ ario_server_playlist_add_criterias (const GSList *criterias,
 
                 /* For each song */
                 for (tmp_songs = songs; tmp_songs; tmp_songs = g_slist_next (tmp_songs)) {
+                        /* Append song filename to list */
                         server_song = tmp_songs->data;
                         filenames = g_slist_append (filenames, server_song->file);
                         server_song->file = NULL;
@@ -915,7 +977,9 @@ ario_server_playlist_add_criterias (const GSList *criterias,
                 g_slist_free (songs);
         }
 
+        /* Need to only add a limited number of songs */
         if (nb_entries > 0 && filenames) {
+                /* Randomly get some songs in list */
                 tmp_filenames = ario_util_gslist_randomize (&filenames, nb_entries);
                 g_slist_foreach (filenames, (GFunc) g_free, NULL);
                 g_slist_free (filenames);
@@ -923,6 +987,7 @@ ario_server_playlist_add_criterias (const GSList *criterias,
                 filenames = tmp_filenames;
         }
 
+        /* Add songs to playlist */
         ario_server_playlist_add_songs (filenames,
                                         pos,
                                         play);
@@ -936,6 +1001,7 @@ ario_server_playlist_append_songs (const GSList *songs,
                                    const gboolean play)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Add songs to playlist */
         ario_server_playlist_add_songs (songs, -1, play);
 }
 
@@ -948,11 +1014,14 @@ ario_server_playlist_append_server_songs (const GSList *songs,
         GSList *char_songs = NULL;
         ArioServerSong *song;
 
+        /* For each song */
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
+                /* Append song filename to list */
                 song = tmp->data;
                 char_songs = g_slist_append (char_songs, song->file);
         }
 
+        /* Add songs to playlist */
         ario_server_playlist_add_songs (char_songs, -1, play);
         g_slist_free (char_songs);
 }
@@ -968,7 +1037,9 @@ ario_server_playlist_append_artists (const GSList *artists,
         GSList *criterias = NULL;
         const GSList *tmp;
 
+        /* For each artist */
         for (tmp = artists; tmp; tmp = g_slist_next (tmp)) {
+                /* Create a criteria corresponding to artist */
                 criteria = NULL;
                 atomic_criteria = (ArioServerAtomicCriteria *) g_malloc0 (sizeof (ArioServerAtomicCriteria));
                 atomic_criteria->tag = MPD_TAG_ITEM_ARTIST;
@@ -978,6 +1049,7 @@ ario_server_playlist_append_artists (const GSList *artists,
                 criterias = g_slist_append (criterias, criteria);
         }
 
+        /* Add songs matching criteria to playlist */
         ario_server_playlist_append_criterias (criterias, play, nb_entries);
 
         g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
@@ -989,6 +1061,7 @@ ario_server_playlist_append_dir (const gchar *dir,
                                  const gboolean play)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Append all files in dir to playlist */
         ario_server_playlist_add_dir (dir, -1, play);
 }
 
@@ -998,6 +1071,7 @@ ario_server_playlist_append_criterias (const GSList *criterias,
                                        const gint nb_entries)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Append all songs matching criteria to playlist */
         ario_server_playlist_add_criterias (criterias, -1, play, nb_entries);
 }
 
