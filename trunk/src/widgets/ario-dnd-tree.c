@@ -111,7 +111,7 @@ ario_dnd_tree_new (const GtkTargetEntry* targets,
                              GDK_BUTTON1_MASK,
                              targets,
                              n_targets,
-                             GDK_ACTION_MOVE);
+                             GDK_ACTION_MOVE | GDK_ACTION_COPY);
 
         dnd_tree->priv->browse_mode = browse_mode;
 
