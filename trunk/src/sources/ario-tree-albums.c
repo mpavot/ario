@@ -22,12 +22,13 @@
 #include <string.h>
 #include "lib/ario-conf.h"
 #include <glib/gi18n.h>
+
+#include "ario-debug.h"
 #include "ario-util.h"
 #include "covers/ario-cover.h"
-#include "shell/ario-shell-coverselect.h"
-#include "preferences/ario-preferences.h"
 #include "covers/ario-cover-handler.h"
-#include "ario-debug.h"
+#include "preferences/ario-preferences.h"
+#include "shell/ario-shell-coverselect.h"
 
 static void ario_tree_albums_finalize (GObject *object);
 static void ario_tree_albums_build_tree (ArioTree *parent_tree,
@@ -49,6 +50,7 @@ struct ArioTreeAlbumsPrivate
         guint sort_notif;
 };
 
+/* Tree view columns */
 enum
 {
         ALBUM_VALUE_COLUMN,
@@ -69,12 +71,15 @@ ario_tree_albums_class_init (ArioTreeAlbumsClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioTreeClass *tree_class = ARIO_TREE_CLASS (klass);
 
+        /* GObject virtual methods */
         object_class->finalize = ario_tree_albums_finalize;
 
+        /* ArioTree virtual methods */
         tree_class->build_tree = ario_tree_albums_build_tree;
         tree_class->fill_tree = ario_tree_albums_fill_tree;
         tree_class->get_dnd_pixbuf = ario_tree_albums_get_dnd_pixbuf;
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioTreeAlbumsPrivate));
 }
 
