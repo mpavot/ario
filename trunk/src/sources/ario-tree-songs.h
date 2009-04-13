@@ -31,6 +31,10 @@ G_BEGIN_DECLS
 #define IS_ARIO_TREE_SONGS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_TREE_SONGS))
 #define ARIO_TREE_SONGS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_TREE_SONGS, ArioTreeSongsClass))
 
+/**
+ * ArioTreeSongs is a specialization of ArioTree to have a nicer
+ * display of songs arts and special menus.
+ */
 typedef struct
 {
         ArioTree parent;

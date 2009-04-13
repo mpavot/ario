@@ -233,13 +233,13 @@ ario_shell_lyricsselect_search_cb (GtkWidget *widget,
                                    ArioShellLyricsselect *shell_lyricsselect)
 {
         ARIO_LOG_FUNCTION_START;
-        gchar *artist;
-        gchar *title;
+        const gchar *artist;
+        const gchar *title;
 
         ario_shell_lyricsselect_set_sensitive (shell_lyricsselect, FALSE);
 
-        artist = gtk_editable_get_chars (GTK_EDITABLE (shell_lyricsselect->priv->artist_entry), 0, -1);
-        title = gtk_editable_get_chars (GTK_EDITABLE (shell_lyricsselect->priv->title_entry), 0, -1);
+        artist = gtk_entry_get_text (GTK_ENTRY (shell_lyricsselect->priv->artist_entry));
+        title = gtk_entry_get_text (GTK_ENTRY (shell_lyricsselect->priv->title_entry));
 
         g_slist_foreach (shell_lyricsselect->priv->lyrics, (GFunc) ario_lyrics_candidate_free, NULL);
         g_slist_free (shell_lyricsselect->priv->lyrics);
@@ -248,8 +248,6 @@ ario_shell_lyricsselect_search_cb (GtkWidget *widget,
         ario_lyrics_manager_get_lyrics_candidates (ario_lyrics_manager_get_instance(),
                                                    artist, title,
                                                    &shell_lyricsselect->priv->lyrics);
-        g_free (artist);
-        g_free (title);
 
         ario_shell_lyricsselect_show_lyrics (shell_lyricsselect);
 
@@ -262,7 +260,6 @@ ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *shell_lyricsselect)
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
         GSList *tmp;
-        GtkTreePath *tree_path;
         ArioLyricsCandidate *candidate;
 
         gtk_list_store_clear (shell_lyricsselect->priv->liststore);
@@ -283,9 +280,9 @@ ario_shell_lyricsselect_show_lyrics (ArioShellLyricsselect *shell_lyricsselect)
                                     candidate, -1);
         }
 
-        tree_path = gtk_tree_path_new_from_indices (0, -1);
-        gtk_tree_selection_select_path (gtk_tree_view_get_selection (GTK_TREE_VIEW (shell_lyricsselect->priv->treeview)), tree_path);
-        gtk_tree_path_free(tree_path);
+        /* Select first item in list */
+        if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (shell_lyricsselect->priv->liststore), &iter))
+                gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (shell_lyricsselect->priv->treeview)), &iter);
 }
 
 ArioLyricsCandidate *

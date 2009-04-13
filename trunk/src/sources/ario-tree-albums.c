@@ -93,26 +93,35 @@ ario_tree_albums_sort_func (GtkTreeModel *model,
         ArioServerAlbum *balbum;
         int ret;
 
+        /* Get info about frist album */
         gtk_tree_model_get (model, a,
                             ALBUM_ALBUM_COLUMN, &aalbum,
                             -1);
+
+        /* Get infoabout second album */
         gtk_tree_model_get (model, b,
                             ALBUM_ALBUM_COLUMN, &balbum,
                             -1);
 
         if (tree->priv->album_sort == SORT_YEAR) {
+                /* Albums with no year set are at the end */
                 if (aalbum->date && !balbum->date)
                         ret = -1;
                 else if (balbum->date && !aalbum->date)
                         ret = 1;
                 else if (aalbum->date && balbum->date) {
+                        /* Compare date of the two albums */
                         ret = g_utf8_collate (aalbum->date, balbum->date);
-                        if (ret == 0)
+                        if (ret == 0) {
+                                /* Date is the same, sort albums alphabetically */
                                 ret = g_utf8_collate (aalbum->album, balbum->album);
+                        }
                 } else {
+                        /* No date is set, sort albums alphabetically */
                         ret = g_utf8_collate (aalbum->album, balbum->album);
                 }
         } else {
+                /* Sort albums alphabetically */
                 ret = g_utf8_collate (aalbum->album, balbum->album);
         }
 
@@ -157,12 +166,14 @@ ario_tree_albums_finalize (GObject *object)
         tree = ARIO_TREE_ALBUMS (object);
 
         g_return_if_fail (tree->priv != NULL);
+        /* Remove notificqtions */
         if (tree->priv->covertree_notif)
                 ario_conf_notification_remove (tree->priv->covertree_notif);
 
         if (tree->priv->sort_notif)
                 ario_conf_notification_remove (tree->priv->sort_notif);
 
+        /* Free tree data */
         gtk_tree_model_foreach (GTK_TREE_MODEL (tree->parent.model),
                                 (GtkTreeModelForeachFunc) ario_tree_albums_album_free,
                                 tree);
@@ -182,7 +193,7 @@ ario_tree_albums_build_tree (ArioTree *parent_tree,
         g_return_if_fail (IS_ARIO_TREE_ALBUMS (parent_tree));
         tree = ARIO_TREE_ALBUMS (parent_tree);
 
-        /* Cover column */
+        /* Create cover column */
         renderer = gtk_cell_renderer_pixbuf_new ();
         /* Translators - This "Cover" refers to an album cover art */
         column = gtk_tree_view_column_new_with_attributes (_("Cover"),
@@ -196,7 +207,8 @@ ario_tree_albums_build_tree (ArioTree *parent_tree,
                                      column);
         gtk_tree_view_column_set_visible (column,
                                           !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
-        /* Text column */
+
+        /* Create text column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Album"),
                                                            renderer,
@@ -205,7 +217,8 @@ ario_tree_albums_build_tree (ArioTree *parent_tree,
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (tree->parent.tree), column);
-        /* Model */
+
+        /* Create model */
         tree->parent.model = gtk_list_store_new (ALBUM_N_COLUMN,
                                                  G_TYPE_STRING,
                                                  G_TYPE_POINTER,
@@ -220,6 +233,7 @@ ario_tree_albums_build_tree (ArioTree *parent_tree,
                                          tree,
                                          NULL);
 
+        /* Connect signal to update covers when they change */
         g_signal_connect_object (ario_cover_handler_get_instance (),
                                  "cover_changed", G_CALLBACK (ario_tree_albums_cover_changed_cb),
                                  tree, 0);
@@ -245,6 +259,7 @@ get_selected_albums_foreach (GtkTreeModel *model,
 
         ArioServerAlbum *server_album;
 
+        /* Append album to the list */
         gtk_tree_model_get (model, iter,
                             ALBUM_ALBUM_COLUMN, &server_album, -1);
 
@@ -267,6 +282,7 @@ ario_tree_albums_covers_update (GtkTreeModel *model,
 
         gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &album, -1);
 
+        /* Get cover path */
         cover_path = ario_cover_make_cover_path (album->artist, album->album, SMALL_COVER);
 
         /* The small cover exists, we show it */
@@ -279,6 +295,7 @@ ario_tree_albums_covers_update (GtkTreeModel *model,
                 gdk_pixbuf_fill (cover, 0);
         }
 
+        /* Set cover in tree */
         gtk_list_store_set (tree->parent.model, iter,
                             ALBUM_COVER_COLUMN, cover,
                             -1);
@@ -293,6 +310,7 @@ ario_tree_albums_cover_changed_cb (ArioCoverHandler *cover_handler,
                                    ArioTreeAlbums *tree)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Update all covers */
         gtk_tree_model_foreach (GTK_TREE_MODEL (tree->parent.model),
                                 (GtkTreeModelForeachFunc) ario_tree_albums_covers_update,
                                 tree);
@@ -302,6 +320,7 @@ static void
 ario_tree_albums_album_sort_changed_cb (guint notification_id,
                                         ArioTreeAlbums *tree)
 {
+        /* Change albums sort order */
         tree->priv->album_sort = ario_conf_get_integer (PREF_ALBUM_SORT, PREF_ALBUM_SORT_DEFAULT);
         gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (tree->parent.model),
                                          ALBUM_TEXT_COLUMN,
@@ -324,10 +343,12 @@ ario_tree_albums_add_next_albums (ArioTreeAlbums *tree,
         gchar *album_date;
         GdkPixbuf *cover;
 
+        /* For each album */
         for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
                 server_album = tmp->data;
                 album_date = NULL;
 
+                /* Get cover path */
                 cover_path = ario_cover_make_cover_path (server_album->artist, server_album->album, SMALL_COVER);
 
                 /* The small cover exists, we show it */
@@ -340,6 +361,7 @@ ario_tree_albums_add_next_albums (ArioTreeAlbums *tree,
                         gdk_pixbuf_fill (cover, 0);
                 }
 
+                /* Display date if any */
                 if (server_album->date) {
                         album_date = g_strdup_printf ("%s (%s)", server_album->album, server_album->date);
                         album = album_date;
@@ -347,6 +369,7 @@ ario_tree_albums_add_next_albums (ArioTreeAlbums *tree,
                         album = server_album->album;
                 }
 
+                /* Append album to tree */
                 gtk_list_store_append (tree->parent.model, &album_iter);
                 gtk_list_store_set (tree->parent.model, &album_iter,
                                     ALBUM_VALUE_COLUMN, server_album->album,
@@ -355,7 +378,7 @@ ario_tree_albums_add_next_albums (ArioTreeAlbums *tree,
                                     ALBUM_ALBUM_COLUMN, server_album,
                                     ALBUM_COVER_COLUMN, cover,
                                     -1);
-                g_object_unref (G_OBJECT (cover));
+                g_object_unref (cover);
                 g_free (album_date);
         }
 }
@@ -370,12 +393,17 @@ ario_tree_albums_fill_tree (ArioTree *parent_tree)
         g_return_if_fail (IS_ARIO_TREE_ALBUMS (parent_tree));
         tree = ARIO_TREE_ALBUMS (parent_tree);
 
+        /* Free tree data */
         gtk_tree_model_foreach (GTK_TREE_MODEL (tree->parent.model),
                                 (GtkTreeModelForeachFunc) ario_tree_albums_album_free,
                                 tree);
+
+        /* Empty tree */
         gtk_list_store_clear (tree->parent.model);
 
+        /* For each criteria */
         for (tmp = tree->parent.criterias; tmp; tmp = g_slist_next (tmp)) {
+                /* Append albums corresponding to criteria */
                 albums = ario_server_get_albums (tmp->data);
                 ario_tree_albums_add_next_albums (tree, albums, tmp->data);
                 g_slist_free (albums);
@@ -389,9 +417,12 @@ ario_tree_albums_get_dnd_pixbuf (ArioTree *tree)
         GSList *albums = NULL;
         GdkPixbuf *pixbuf;
 
+        /* Get list of selected albums */
         gtk_tree_selection_selected_foreach (tree->selection,
                                              get_selected_albums_foreach,
                                              &albums);
+
+        /* Get dnd pixbuf using list of albums */
         pixbuf = ario_util_get_dnd_pixbuf_from_albums (albums);
         g_slist_free (albums);
 
@@ -406,10 +437,12 @@ ario_tree_albums_cmd_albums_properties (ArioTreeAlbums *tree)
         GSList *albums = NULL;
         ArioServerAlbum *ario_server_album;
 
+        /* Get list of selected albums */
         gtk_tree_selection_selected_foreach (tree->parent.selection,
                                              get_selected_albums_foreach,
                                              &albums);
 
+        /* Launch coverselect dialog using first album */
         ario_server_album = albums->data;
         coverselect = ario_shell_coverselect_new (ario_server_album);
         gtk_dialog_run (GTK_DIALOG (coverselect));
@@ -423,6 +456,7 @@ ario_tree_albums_covertree_visible_changed_cb (guint notification_id,
                                                ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Change cover column visibility */
         gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (tree->tree), 0),
                                           !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
         /* Update display */

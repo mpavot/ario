@@ -34,6 +34,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioShellCoverdownloaderPrivate ArioShellCoverdownloaderPrivate;
 
+/**
+ * ArioShellCoverdownloader is a dialog window used to see the
+ * progress of cover arts downloading.
+ */
 typedef struct
 {
         GtkWindow parent;
