@@ -20,13 +20,13 @@
 #include "shell/ario-shell-coverdownloader.h"
 #include <gtk/gtk.h>
 #include <string.h>
-
 #include <glib/gi18n.h>
-#include "covers/ario-cover.h"
-#include "covers/ario-cover-manager.h"
-#include "covers/ario-cover-handler.h"
-#include "lib/gtk-builder-helpers.h"
+
 #include "ario-debug.h"
+#include "covers/ario-cover.h"
+#include "covers/ario-cover-handler.h"
+#include "covers/ario-cover-manager.h"
+#include "lib/gtk-builder-helpers.h"
 #include "servers/ario-server.h"
 
 static void ario_shell_coverdownloader_finalize (GObject *object);
@@ -81,9 +81,11 @@ ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Virtual methods */
         object_class->finalize = ario_shell_coverdownloader_finalize;
         object_class->constructor = ario_shell_coverdownloader_constructor;
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioShellCoverdownloaderPrivate));
 }
 
@@ -108,6 +110,7 @@ ario_shell_coverdownloader_finalize (GObject *object)
 
         g_return_if_fail (ario_shell_coverdownloader->priv != NULL);
 
+        /* Wait for thread to finish */
         if (ario_shell_coverdownloader->priv->thread)
                 g_thread_join (ario_shell_coverdownloader->priv->thread);
 
@@ -126,6 +129,7 @@ ario_shell_coverdownloader_new (void)
         ARIO_LOG_FUNCTION_START;
         ArioShellCoverdownloader *ario_shell_coverdownloader;
 
+        /* Ensure that only one coverdownloader is instantiated at the same time */
         if (is_instantiated)
                 return NULL;
         else
@@ -150,14 +154,17 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
         GtkBuilder *builder;
         GtkWidget *vbox;
 
+        /* Call parent constructor */
         klass = ARIO_SHELL_COVERDOWNLOADER_CLASS (g_type_class_peek (TYPE_ARIO_SHELL_COVERDOWNLOADER));
-
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         ario_shell_coverdownloader = ARIO_SHELL_COVERDOWNLOADER (parent_class->constructor (type, n_construct_properties,
                                                                                             construct_properties));
 
+        /* Create UI using GtkBuilder */
         builder = gtk_builder_helpers_new (UI_PATH "cover-progress.ui",
                                            NULL);
+
+        /* Get pointers to various widgets */
         vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
         ario_shell_coverdownloader->priv->progress_artist_label =
                 GTK_WIDGET (gtk_builder_get_object (builder, "artist_label"));
@@ -176,12 +183,14 @@ ario_shell_coverdownloader_constructor (GType type, guint n_construct_properties
 
         gtk_builder_helpers_boldify_label (builder, "operation_label");
 
+        /* Set window properties */
         gtk_window_set_title (GTK_WINDOW (ario_shell_coverdownloader), _("Music Player Cover Download"));
-        gtk_container_add (GTK_CONTAINER (ario_shell_coverdownloader), 
+        gtk_container_add (GTK_CONTAINER (ario_shell_coverdownloader),
                            vbox);
         gtk_window_set_position (GTK_WINDOW (ario_shell_coverdownloader),
                                  GTK_WIN_POS_CENTER);
 
+        /* Connect signals for user actions */
         g_signal_connect (ario_shell_coverdownloader->priv->cancel_button,
                           "clicked",
                           G_CALLBACK (ario_shell_coverdownloader_cancel_cb),
@@ -229,10 +238,10 @@ ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
 {
         ARIO_LOG_FUNCTION_START;
         if (!ario_shell_coverdownloader->priv->cancelled) {
-                /* window destroyed for the first time : we wait until the end of the current download and we stop the search */
+                /* Window destroyed for the first time : we wait until the end of the current download and we stop the search */
                 ario_shell_coverdownloader->priv->cancelled = TRUE;
         } else {
-                /* window destroyed for the second time : we close and destroy the window */
+                /* Window destroyed for the second time : we close and destroy the window */
                 gtk_widget_hide (GTK_WIDGET (ario_shell_coverdownloader));
                 gtk_widget_destroy (GTK_WIDGET (ario_shell_coverdownloader));
         }
@@ -243,19 +252,19 @@ ario_shell_coverdownloader_window_delete_cb (GtkWidget *window,
 static gboolean
 ario_shell_coverdownloader_refresh (gpointer data)
 {
+        /* Wait for UI refresh */
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 
         return FALSE;
 }
 
-static gboolean 
+static gboolean
 ario_shell_coverdownloader_progress_start (ArioShellCoverdownloader *ario_shell_coverdownloader)
 {
         ARIO_LOG_FUNCTION_START;
         gtk_window_resize (GTK_WINDOW (ario_shell_coverdownloader), 350, 150);
 
-        /*gtk_window_set_policy (GTK_WINDOW (ario_shell_coverdownloader), FALSE, TRUE, FALSE);*/
         gtk_window_set_resizable (GTK_WINDOW (ario_shell_coverdownloader),
                                   FALSE);
 
@@ -283,12 +292,12 @@ ario_shell_coverdownloader_progress_update (ArioShellCoverdownloaderIdleData *da
 {
         ARIO_LOG_FUNCTION_START;
         /* We have already searched for nb_covers_done covers */
-        gdouble nb_covers_done = (data->ario_shell_coverdownloader->priv->nb_covers_found 
-                                  + data->ario_shell_coverdownloader->priv->nb_covers_not_found 
+        gdouble nb_covers_done = (data->ario_shell_coverdownloader->priv->nb_covers_found
+                                  + data->ario_shell_coverdownloader->priv->nb_covers_not_found
                                   + data->ario_shell_coverdownloader->priv->nb_covers_already_exist);
 
         /* We update the progress bar */
-        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (data->ario_shell_coverdownloader->priv->progressbar), 
+        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (data->ario_shell_coverdownloader->priv->progressbar),
                                        nb_covers_done / data->ario_shell_coverdownloader->priv->nb_covers);
 
         /* We update the artist and the album label */
@@ -323,8 +332,8 @@ ario_shell_coverdownloader_progress_end (ArioShellCoverdownloader *ario_shell_co
                             _("Download Finished!"));
 
         /* We show the numbers of covers found and not found */
-        label_text = g_strdup_printf (_("%i covers found\n%i covers not found\n%i covers already exist"), 
-                                      ario_shell_coverdownloader->priv->nb_covers_found, 
+        label_text = g_strdup_printf (_("%i covers found\n%i covers not found\n%i covers already exist"),
+                                      ario_shell_coverdownloader->priv->nb_covers_found,
                                       ario_shell_coverdownloader->priv->nb_covers_not_found,
                                       ario_shell_coverdownloader->priv->nb_covers_already_exist);
 
@@ -343,8 +352,12 @@ ario_shell_coverdownloader_get_covers (ArioShellCoverdownloader *ario_shell_cove
                                        const ArioShellCoverdownloaderOperation operation)
 {
         ARIO_LOG_FUNCTION_START;
-        GSList *albums = ario_server_get_albums (NULL);
+        GSList *albums;
 
+        /* Get list of all albums of server */
+        albums = ario_server_get_albums (NULL);
+
+        /* Get covers of albums */
         ario_shell_coverdownloader_get_covers_from_albums (ario_shell_coverdownloader,
                                                            albums,
                                                            operation);
@@ -410,6 +423,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         if (!albums)
                 return;
 
+        /* Copy the list of albums */
         ario_shell_coverdownloader->priv->albums = NULL;
         for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
                 ario_shell_coverdownloader->priv->albums = g_slist_append (ario_shell_coverdownloader->priv->albums, ario_server_copy_album (tmp->data));
@@ -417,6 +431,7 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
 
         ario_shell_coverdownloader->priv->operation = operation;
 
+        /* Launch thread for cover download */
         ario_shell_coverdownloader->priv->thread = g_thread_create ((GThreadFunc) ario_shell_coverdownloader_get_covers_from_albums_thread,
                                                                     ario_shell_coverdownloader,
                                                                     TRUE,

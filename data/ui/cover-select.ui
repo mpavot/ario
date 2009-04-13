@@ -202,6 +202,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_stock">True</property>
+                    <signal name="clicked" handler="ario_shell_coverselect_get_covers_cb"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -285,6 +286,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_stock">True</property>
+                    <signal name="clicked" handler="ario_shell_coverselect_local_open_button_cb"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

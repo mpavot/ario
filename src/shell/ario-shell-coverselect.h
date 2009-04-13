@@ -36,6 +36,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioShellCoverselectPrivate ArioShellCoverselectPrivate;
 
+/**
+ * ArioShellCoverselect is a dialog window that can be used
+ * to change the cover of an album.
+ */
 typedef struct
 {
         GtkDialog parent;

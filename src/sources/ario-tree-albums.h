@@ -33,6 +33,10 @@ G_BEGIN_DECLS
 
 typedef struct ArioTreeAlbumsPrivate ArioTreeAlbumsPrivate;
 
+/**
+ * ArioTreeAlbums is a specialization of ArioTree to have a nicer
+ * display of albums with cover arts and special menus.
+ */
 typedef struct
 {
         ArioTree parent;

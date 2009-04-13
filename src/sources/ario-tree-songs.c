@@ -20,13 +20,14 @@
 #include "sources/ario-tree-songs.h"
 #include <gtk/gtk.h>
 #include <string.h>
-#include "lib/ario-conf.h"
 #include <glib/gi18n.h>
+
+#include "ario-debug.h"
 #include "ario-util.h"
 #include "covers/ario-cover.h"
-#include "shell/ario-shell-songinfos.h"
+#include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
-#include "ario-debug.h"
+#include "shell/ario-shell-songinfos.h"
 
 static void ario_tree_songs_build_tree (ArioTree *parent_tree,
                                         GtkTreeView *treeview);
@@ -40,6 +41,7 @@ static void ario_tree_songs_append_drag_data (ArioTree *tree,
 static void ario_tree_songs_add_to_playlist (ArioTree *tree,
                                              const gboolean play);
 
+/* Tree columns */
 enum
 {
         SONG_VALUE_COLUMN,
@@ -49,6 +51,7 @@ enum
         SONG_N_COLUMN
 };
 
+/* Drag and drop targets */
 static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
@@ -61,6 +64,7 @@ ario_tree_songs_class_init (ArioTreeSongsClass *klass)
         ARIO_LOG_FUNCTION_START;
         ArioTreeClass *tree_class = ARIO_TREE_CLASS (klass);
 
+        /* ArioTree virtual methods */
         tree_class->build_tree = ario_tree_songs_build_tree;
         tree_class->fill_tree = ario_tree_songs_fill_tree;
         tree_class->get_drag_source = ario_tree_songs_get_drag_source;
@@ -86,14 +90,14 @@ ario_tree_songs_build_tree (ArioTree *parent_tree,
         g_return_if_fail (IS_ARIO_TREE_SONGS (parent_tree));
         tree = ARIO_TREE_SONGS (parent_tree);
 
-        /* Track column */
+        /* Create track column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Track"),
                                                            renderer,
                                                            "text", SONG_TRACK_COLUMN,
                                                            NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (tree->parent.tree), column);
-        /* Title column */
+        /* Create title column */
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes (_("Title"),
                                                            renderer,
@@ -102,6 +106,7 @@ ario_tree_songs_build_tree (ArioTree *parent_tree,
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
         gtk_tree_view_append_column (GTK_TREE_VIEW (tree->parent.tree), column);
 
+        /* Create model */
         tree->parent.model = gtk_list_store_new (SONG_N_COLUMN,
                                                  G_TYPE_STRING,
                                                  G_TYPE_POINTER,
@@ -124,8 +129,10 @@ ario_tree_songs_add_next_songs (ArioTreeSongs *tree,
         gchar track[ARIO_MAX_TRACK_SIZE];
         gchar *title;
 
+        /* For each song */
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 song = tmp->data;
+                /* Append song to tree */
                 gtk_list_store_append (tree->parent.model, &iter);
 
                 ario_util_format_track_buf (song->track, track, ARIO_MAX_TRACK_SIZE);
@@ -149,10 +156,15 @@ ario_tree_songs_fill_tree (ArioTree *parent_tree)
         g_return_if_fail (IS_ARIO_TREE_SONGS (parent_tree));
         tree = ARIO_TREE_SONGS (parent_tree);
 
+        /* Empty tree */
         gtk_list_store_clear (tree->parent.model);
 
+        /* For each criteria */
         for (tmp = tree->parent.criterias; tmp; tmp = g_slist_next (tmp)) {
+                /* Get songs corresponding to criteria */
                 songs = ario_server_get_songs (tmp->data, TRUE);
+
+                /* Add songs to playlist */
                 ario_tree_songs_add_next_songs (tree, songs, tmp->data);
                 g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
                 g_slist_free (songs);
@@ -177,6 +189,7 @@ ario_tree_songs_append_drag_data (ArioTree *tree,
         ARIO_LOG_FUNCTION_START;
         gchar *val;
 
+        /* Append filename to drag data */
         gtk_tree_model_get (model, iter, SONG_FILENAME_COLUMN, &val, -1);
         g_string_append (data->string, val);
         g_string_append (data->string, "\n");
@@ -194,8 +207,8 @@ get_selected_songs_foreach (GtkTreeModel *model,
         GSList **songs = (GSList **) userdata;
         gchar *val = NULL;
 
+        /* Append filename to list */
         gtk_tree_model_get (model, iter, SONG_FILENAME_COLUMN, &val, -1);
-
         *songs = g_slist_append (*songs, val);
 }
 
@@ -206,11 +219,13 @@ ario_tree_songs_cmd_songs_properties (ArioTreeSongs *tree)
         GSList *paths = NULL;
         GtkWidget *songinfos;
 
+        /* Get filenames of each selected songs */
         gtk_tree_selection_selected_foreach (tree->parent.selection,
                                              get_selected_songs_foreach,
                                              &paths);
 
         if (paths) {
+                /* Launch songinfos dialog on slected songs */
                 songinfos = ario_shell_songinfos_new (paths);
                 if (songinfos)
                         gtk_widget_show_all (songinfos);
@@ -227,11 +242,13 @@ ario_tree_songs_add_to_playlist (ArioTree *tree,
         ARIO_LOG_FUNCTION_START;
         GSList *songs = NULL;
 
+        /* Get filenames of each selected songs */
         gtk_tree_selection_selected_foreach (tree->selection,
                                              get_selected_songs_foreach,
                                              &songs);
 
         if (songs) {
+                /* Append songs to playlist */
                 ario_server_playlist_append_songs (songs, play);
 
                 g_slist_foreach (songs, (GFunc) g_free, NULL);
