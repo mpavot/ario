@@ -23,6 +23,7 @@
 #include <gtk/gtkhbox.h>
 #include "servers/ario-server.h"
 #include "sources/ario-source.h"
+#include "shell/ario-shell-coverdownloader.h"
 
 G_BEGIN_DECLS
 
@@ -35,6 +36,11 @@ G_BEGIN_DECLS
 
 typedef struct ArioTreePrivate ArioTreePrivate;
 
+/**
+ * ArioTree is used by ArioBrowser to list one kind of tag on
+ * music server. Criteria are associated to ArioTree to filter
+ * items in the list.
+ */
 typedef struct
 {
         GtkScrolledWindow parent;
@@ -98,16 +104,13 @@ GSList*                 ario_tree_get_criterias         (ArioTree *tree);
 
 void                    ario_tree_cmd_add               (ArioTree *tree,
                                                          const gboolean play);
-void                    ario_tree_cmd_get_cover         (ArioTree *tree);
-
-void                    ario_tree_cmd_remove_cover      (ArioTree *tree);
-
 void                    ario_tree_goto_playling_song    (ArioTree *tree,
                                                          const ArioServerSong *song);
 void                    ario_tree_add_tags              (ArioTree *tree,
                                                          ArioServerCriteria *criteria,
                                                          GSList *tags);
-
+void                    ario_tree_get_cover             (ArioTree *tree,
+                                                         const ArioShellCoverdownloaderOperation operation);
 G_END_DECLS
 
 #endif /* __ARIO_TREE_H */

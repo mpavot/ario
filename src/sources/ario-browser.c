@@ -455,7 +455,7 @@ ario_browser_cmd_get_cover (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         /* Get cover arts for selected entries */
         if (browser->priv->popup_tree)
-                ario_tree_cmd_get_cover (browser->priv->popup_tree);
+                ario_tree_get_cover (browser->priv->popup_tree, GET_COVERS);
 }
 
 static void
@@ -465,7 +465,7 @@ ario_browser_cmd_remove_cover (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         /* Remove cover arts for selected entries */
         if (browser->priv->popup_tree)
-                ario_tree_cmd_remove_cover (browser->priv->popup_tree);
+                ario_tree_get_cover (browser->priv->popup_tree, REMOVE_COVERS);
 }
 
 static void
