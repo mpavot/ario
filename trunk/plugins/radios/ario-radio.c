@@ -601,10 +601,16 @@ ario_radio_popup_menu_cb (ArioDndTree* tree,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
-        if (gtk_tree_selection_count_selected_rows (radio->priv->selection) == 1) {
+        switch (gtk_tree_selection_count_selected_rows (radio->priv->selection)) {
+        case 0:
+                menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupNone");
+                break;
+        case 1:
                 menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupSingle");
-        } else {
+                break;
+        default:
                 menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupMultiple");
+                break;
         }
 
         gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,

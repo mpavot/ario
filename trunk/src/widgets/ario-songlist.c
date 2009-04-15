@@ -364,7 +364,8 @@ ario_songlist_popup_menu_cb (ArioDndTree* tree,
         GtkWidget *menu;
 
         /* Show popup */
-        if (songlist->priv->popup) {
+        if (songlist->priv->popup
+            && gtk_tree_selection_count_selected_rows (songlist->priv->selection) > 0) {
                 menu = gtk_ui_manager_get_widget (songlist->priv->ui_manager, songlist->priv->popup);
 
                 gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,

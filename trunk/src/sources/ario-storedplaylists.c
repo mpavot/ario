@@ -621,10 +621,12 @@ ario_storedplaylists_popup_menu_cb (ArioDndTree* tree,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;
 
-        /* Show popup menu */
-        menu = gtk_ui_manager_get_widget (storedplaylists->priv->ui_manager, "/StoredplaylistsPopup");
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                        gtk_get_current_event_time ());
+        if (gtk_tree_selection_count_selected_rows (storedplaylists->priv->selection) > 0) {
+                /* Show popup menu */
+                menu = gtk_ui_manager_get_widget (storedplaylists->priv->ui_manager, "/StoredplaylistsPopup");
+                gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
+                                gtk_get_current_event_time ());
+        }
 }
 
 static void
