@@ -1,4 +1,9 @@
 <ui>
+        <popup name="RadioPopupNone">
+                <menuitem name="RadioNewRadio" action="RadioNewRadio"/>
+                <placeholder name="RadioPopupNonePluginPlaceholder" />
+        </popup>
+
         <popup name="RadioPopupSingle">
                 <menuitem name="RadioAddRadios" action="RadioAddRadios"/>
                 <menuitem name="RadioAddPlayRadios" action="RadioAddPlayRadios"/>

@@ -200,12 +200,12 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
                                 gtk_tree_selection_unselect_all (selection);
                                 gtk_tree_selection_select_path (selection, path);
                         }
-
-                        /* Emit the popup signal */
-                        g_signal_emit (G_OBJECT (dnd_tree), ario_dnd_tree_signals[POPUP], 0);
                         gtk_tree_path_free (path);
-                        return TRUE;
                 }
+
+                /* Emit the popup signal */
+                g_signal_emit (G_OBJECT (dnd_tree), ario_dnd_tree_signals[POPUP], 0);
+                return TRUE;
         }
 
         return FALSE;
