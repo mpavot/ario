@@ -35,6 +35,13 @@
 /* Minimum number of items to fill tree asynchonously */
 #define LIMIT_FOR_IDLE 800
 
+typedef struct ArioTreeAddData
+{
+        ArioServerCriteria *criteria;
+        GSList *tags;
+        GSList *tmp;
+}ArioTreeAddData;
+
 static GObject *ario_tree_constructor (GType type, guint n_construct_properties,
                                        GObjectConstructParam *construct_properties);
 static void ario_tree_finalize (GObject *object);
@@ -75,10 +82,13 @@ static void ario_tree_append_drag_data (ArioTree *tree,
                                         ArioTreeStringData *data);
 static void ario_tree_add_to_playlist (ArioTree *tree,
                                        const gboolean play);
+static void ario_tree_add_data_free (ArioTreeAddData *data);
 
 struct ArioTreePrivate
 {
         GtkUIManager *ui_manager;
+        gboolean idle_fill_running;
+        ArioTreeAddData *data;
 };
 
 typedef struct
@@ -196,6 +206,9 @@ ario_tree_finalize (GObject *object)
         gtk_list_store_clear (tree->model);
         g_slist_foreach (tree->criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (tree->criterias);
+
+        ario_tree_add_data_free (tree->priv->data);
+        tree->priv->data = NULL;
 
         G_OBJECT_CLASS (ario_tree_parent_class)->finalize (object);
 }
@@ -536,46 +549,58 @@ ario_tree_selection_changed_cb (GtkTreeSelection *selection,
         g_signal_emit (G_OBJECT (tree), ario_tree_signals[SELECTION_CHANGED], 0);
 }
 
-typedef struct ArioTreeAddData
-{
-        ArioTree *tree;
-        ArioServerCriteria *criteria;
-        GSList *tags;
-        GSList *tmp;
-}ArioTreeAddData;
-
-static gboolean
-ario_tree_add_tags_idle (ArioTreeAddData *data)
+static void
+ario_tree_add_data_free (ArioTreeAddData *data)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkTreeIter iter;
-
-        if (!data->tmp) {
-                /* Last element reached, we free all data */
+        if (data) {
                 g_slist_foreach (data->tags, (GFunc) g_free, NULL);
                 g_slist_free (data->tags);
                 ario_server_criteria_free (data->criteria);
                 g_free (data);
+        }
+}
+
+static gboolean
+ario_tree_add_tags_idle (ArioTree *tree)
+{
+        ARIO_LOG_FUNCTION_START;
+        GtkTreeIter iter;
+        ArioTreeAddData *data = tree->priv->data;
+
+        if (!data) {
                 /* Stop iterations */
+                tree->priv->idle_fill_running = FALSE;
+                return FALSE;
+        }
+
+        if (!data->tmp) {
+                /* Last element reached, we free all data */
+                ario_tree_add_data_free (tree->priv->data);
+                tree->priv->data = NULL;
+
+                /* Stop iterations */
+                tree->priv->idle_fill_running = FALSE;
                 return FALSE;
         }
 
         /* Append row */
-        gtk_list_store_append (data->tree->model, &iter);
-        gtk_list_store_set (data->tree->model, &iter,
+        gtk_list_store_append (tree->model, &iter);
+        gtk_list_store_set (tree->model, &iter,
                             VALUE_COLUMN, data->tmp->data,
                             CRITERIA_COLUMN, data->criteria,
                             -1);
 
         /* Select first item in row when we add it */
         if (data->tmp == data->tags) {
-                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (data->tree->model), &iter))
-                        gtk_tree_selection_select_iter (data->tree->selection, &iter);
+                if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (tree->model), &iter))
+                        gtk_tree_selection_select_iter (tree->selection, &iter);
         }
 
         data->tmp = g_slist_next (data->tmp);
 
         /* Continue iterations */
+        tree->priv->idle_fill_running = TRUE;
         return TRUE;
 }
 
@@ -589,18 +614,25 @@ ario_tree_add_tags (ArioTree *tree,
         GSList *tmp;
         GtkTreeIter iter;
 
-        if (tree->is_first && g_slist_length (tags) > LIMIT_FOR_IDLE) {
+        /* Free previous async data */
+        ario_tree_add_data_free (tree->priv->data);
+        tree->priv->data = NULL;
+
+        if (g_slist_length (tags) > LIMIT_FOR_IDLE) {
                 /* Asynchronous fill of tree */
                 data = (ArioTreeAddData *) g_malloc0 (sizeof (ArioTreeAddData));
-                data->tree = tree;
-
-                /* Copy criteria as they could be destroyed before the end */
-                data->criteria = ario_server_criteria_copy (criteria);
                 data->tags = tags;
                 data->tmp = tags;
 
-                /* Launch asynchronous fill */
-                g_idle_add ((GSourceFunc) ario_tree_add_tags_idle, data);
+                /* Copy criteria as they could be destroyed before the end */
+                data->criteria = ario_server_criteria_copy (criteria);
+
+                /*Replace previous data with new ones */
+                tree->priv->data = data;
+
+                /* Launch asynchronous fill if needed */
+                if (!tree->priv->idle_fill_running)
+                        g_idle_add ((GSourceFunc) ario_tree_add_tags_idle, tree);
         } else {
                 /* Synchronous fill of tree */
                 for (tmp = tags; tmp; tmp = g_slist_next (tmp)) {
