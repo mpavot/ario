@@ -669,6 +669,20 @@
 		<Unit filename="src\sources\ario-storedplaylists.h">
 			<Option target="ariodll" />
 		</Unit>
+		<Unit filename="src\sources\ario-tree-albums.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-tree-albums.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-tree-songs.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\sources\ario-tree-songs.h">
+			<Option target="ariodll" />
+		</Unit>
 		<Unit filename="src\sources\ario-tree.c">
 			<Option compilerVar="CC" />
 			<Option target="ariodll" />
@@ -681,6 +695,13 @@
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\widgets\ario-connection-widget.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-dnd-tree.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-dnd-tree.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\widgets\ario-firstlaunch.c">
