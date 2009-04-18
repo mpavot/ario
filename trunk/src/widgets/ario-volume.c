@@ -74,13 +74,15 @@ ario_volume_init (ArioVolume *volume)
 
         /* Set adjustments values */
         volume->priv->loading = TRUE;
-        gtk_adjustment_configure (adj,
-                                  50,
-                                  0.0,
-                                  (gdouble) ARIO_VOLUME_MAX,
-                                  (gdouble) ARIO_VOLUME_MAX/20,
-                                  (gdouble) ARIO_VOLUME_MAX/10,
-                                  0.0);
+        gtk_adjustment_set_value (adj, 50);
+        g_object_set (adj,
+                      "lower", (gdouble) 0.0,
+                      "upper", (gdouble) ARIO_VOLUME_MAX,
+                      "step-increment", (gdouble) ARIO_VOLUME_MAX/20,
+                      "page-increment", (gdouble) ARIO_VOLUME_MAX/10,
+                      "page-size", (gdouble) 0.0,
+                      NULL);
+
         volume->priv->loading = FALSE;
 }
 
