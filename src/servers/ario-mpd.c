@@ -34,6 +34,10 @@
 #define ONE_SECOND 1000
 #define NORMAL_TIMEOUT 500
 
+#define RECONNECT_INIT_TIMEOUT 500
+#define RECONNECT_FACTOR 2
+#define RECONNECT_TENTATIVES 5
+
 static void ario_mpd_finalize (GObject *object);
 static gboolean ario_mpd_connect_to (ArioMpd *mpd,
                                      gchar *hostname,
@@ -42,7 +46,7 @@ static gboolean ario_mpd_connect_to (ArioMpd *mpd,
 static void ario_mpd_connect (void);
 static void ario_mpd_disconnect (void);
 static void ario_mpd_update_db (void);
-static void ario_mpd_check_errors (void);
+static gboolean ario_mpd_check_errors (void);
 static gboolean ario_mpd_is_connected (void);
 static GSList * ario_mpd_list_tags (const ArioServerTag tag,
                                     const ArioServerCriteria *criteria);
@@ -100,6 +104,7 @@ struct ArioMpdPrivate
         gboolean is_updating;
 
         int elapsed;
+        int reconnect_time;
 };
 
 #define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
@@ -365,38 +370,43 @@ static void
 ario_mpd_connect (void)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *win, *vbox,*label, *bar;
+        GtkWidget *win = NULL, *vbox,*label, *bar;
         GThread* thread;
         GtkWidget *dialog;
+        gboolean is_in_error = (instance->priv->reconnect_time > 0);
 
         thread = g_thread_create ((GThreadFunc) ario_mpd_connect_thread,
                                   instance, TRUE, NULL);
 
-        win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_modal (GTK_WINDOW (win), TRUE);
-        vbox = gtk_vbox_new (FALSE, 0);
-        label = gtk_label_new (_("Connecting to server..."));
-        bar = gtk_progress_bar_new ();
+        if (!is_in_error) {
+                win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+                gtk_window_set_modal (GTK_WINDOW (win), TRUE);
+                vbox = gtk_vbox_new (FALSE, 0);
+                label = gtk_label_new (_("Connecting to server..."));
+                bar = gtk_progress_bar_new ();
 
-        gtk_container_add (GTK_CONTAINER (win), vbox);
-        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
-        gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
+                gtk_container_add (GTK_CONTAINER (win), vbox);
+                gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
+                gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
 
-        gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
-        gtk_window_set_title (GTK_WINDOW (win), "Ario");
-        gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
-        gtk_widget_show_all (win);
+                gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
+                gtk_window_set_title (GTK_WINDOW (win), "Ario");
+                gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
+                gtk_widget_show_all (win);
 
-        while (instance->parent.connecting) {
-                gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
-                while (gtk_events_pending ())
-                        gtk_main_iteration ();
-                g_usleep (200000);
+                while (instance->parent.connecting) {
+                        gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
+                        while (gtk_events_pending ())
+                                gtk_main_iteration ();
+                        g_usleep (200000);
+                }
         }
 
         g_thread_join (thread);
 
-        if (!ario_server_is_connected ()) {
+        if (ario_server_is_connected ()) {
+                instance->priv->reconnect_time = 0;
+        } else if (!is_in_error) {
                 dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
                                                  GTK_MESSAGE_ERROR,
                                                  GTK_BUTTONS_OK,
@@ -406,8 +416,10 @@ ario_mpd_connect (void)
                 g_signal_emit_by_name (G_OBJECT (server_instance), "state_changed");
         }
 
-        gtk_widget_hide (win);
-        gtk_widget_destroy (win);
+        if (win) {
+                gtk_widget_hide (win);
+                gtk_widget_destroy (win);
+        }
 }
 
 static void
@@ -451,16 +463,25 @@ ario_mpd_try_reconnect (gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         ario_server_connect ();
+
+        if (!instance->priv->connection
+            && instance->priv->reconnect_time <= RECONNECT_TENTATIVES) {
+                /* Try to reconnect */
+                ++instance->priv->reconnect_time;
+                g_timeout_add (RECONNECT_INIT_TIMEOUT * instance->priv->reconnect_time * RECONNECT_FACTOR,
+                               ario_mpd_try_reconnect, NULL);
+        }
+
         return FALSE;
 }
 
-static void
+static gboolean
 ario_mpd_check_errors (void)
 {
         // desactivated to make the logs more readable
         //ARIO_LOG_FUNCTION_START;
         if (!instance->priv->connection)
-                return;
+                return FALSE;
 
         if  (instance->priv->connection->error) {
                 ARIO_LOG_ERROR("%s", instance->priv->connection->errorStr);
@@ -468,8 +489,12 @@ ario_mpd_check_errors (void)
                 ario_server_disconnect ();
 
                 /* Try to reconnect */
-                g_timeout_add (500, ario_mpd_try_reconnect, NULL);
+                instance->priv->reconnect_time = 1;
+                g_timeout_add (RECONNECT_INIT_TIMEOUT * instance->priv->reconnect_time * RECONNECT_FACTOR,
+                               ario_mpd_try_reconnect, NULL);
+                return TRUE;
         }
+        return FALSE;
 }
 
 static gboolean
@@ -784,9 +809,9 @@ ario_mpd_update_status (void)
                 mpd_sendStatusCommand (instance->priv->connection);
                 instance->priv->status = mpd_getStatus (instance->priv->connection);
 
-                ario_mpd_check_errors ();
-
-                if (instance->priv->status) {
+                if (ario_mpd_check_errors ()) {
+                        ario_server_interface_set_default (ARIO_SERVER_INTERFACE (instance));
+                } else if (instance->priv->status) {
                         if (instance->parent.song_id != instance->priv->status->songid
                             || instance->parent.playlist_id != (gint64) instance->priv->status->playlist)
                                 g_object_set (G_OBJECT (instance), "song_id", instance->priv->status->songid, NULL);
