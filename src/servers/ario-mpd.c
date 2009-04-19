@@ -45,7 +45,7 @@ static gboolean ario_mpd_connect_to (ArioMpd *mpd,
                                      float timeout);
 static void ario_mpd_connect (void);
 static void ario_mpd_disconnect (void);
-static void ario_mpd_update_db (void);
+static void ario_mpd_update_db (const gchar *path);
 static gboolean ario_mpd_check_errors (void);
 static gboolean ario_mpd_is_connected (void);
 static GSList * ario_mpd_list_tags (const ArioServerTag tag,
@@ -444,14 +444,18 @@ ario_mpd_disconnect (void)
 }
 
 static void
-ario_mpd_update_db (void)
+ario_mpd_update_db (const gchar *path)
 {
         ARIO_LOG_FUNCTION_START;
         /* check if there is a connection */
         if (!instance->priv->connection)
                 return;
 
-        mpd_sendUpdateCommand (instance->priv->connection, "");
+        if (!path)
+                mpd_sendUpdateCommand (instance->priv->connection, "");
+        else
+                mpd_sendUpdateCommand (instance->priv->connection, path);
+
         mpd_finishCommand (instance->priv->connection);
 
         if (instance->priv->support_idle && instance->priv->connection)

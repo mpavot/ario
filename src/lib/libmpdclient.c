@@ -1415,7 +1415,7 @@ int mpd_sendAddIdCommand(mpd_Connection *connection, const char *file)
 		retval = atoi(string);
 		free(string);
 	}
-	
+
 	return retval;
 }
 
@@ -1567,7 +1567,7 @@ void mpd_sendSeekIdCommand(mpd_Connection * connection, int id, int time) {
 	free(string);
 }
 
-void mpd_sendUpdateCommand(mpd_Connection * connection, char * path) {
+void mpd_sendUpdateCommand(mpd_Connection * connection, const char * path) {
 	char * sPath = mpd_sanitizeArg(path);
 	int len = strlen("update")+2+strlen(sPath)+3;
 	char *string = malloc(len);

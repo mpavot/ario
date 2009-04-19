@@ -173,7 +173,7 @@ gboolean                ario_server_is_connected                           (void
 
 gboolean                ario_server_update_status                          (void);
 
-void                    ario_server_update_db                              (void);
+void                    ario_server_update_db                              (const gchar *path);
 
 GSList *                ario_server_list_tags                              (const ArioServerTag tag,
                                                                             const ArioServerCriteria *criteria);

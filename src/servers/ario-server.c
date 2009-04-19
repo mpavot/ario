@@ -287,11 +287,11 @@ ario_server_shutdown (void)
 }
 
 void
-ario_server_update_db (void)
+ario_server_update_db (const gchar *path)
 {
         ARIO_LOG_FUNCTION_START;
         interface->updatingdb = 1;
-        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_db ();
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_db (path);
 }
 
 gboolean

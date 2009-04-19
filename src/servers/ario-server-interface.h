@@ -71,7 +71,7 @@ typedef struct
 
         gboolean            (*update_status)                          (void);
 
-        void                (*update_db)                              (void);
+        void                (*update_db)                              (const gchar* path);
 
         GSList *            (*list_tags)                              (const ArioServerTag tag,
                                                                        const ArioServerCriteria *criteria);

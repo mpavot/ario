@@ -143,7 +143,7 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         klass->disconnect = dummy_void_void;
         klass->is_connected = dummy_int_void;
         klass->update_status = dummy_int_void;
-        klass->update_db = dummy_void_void;
+        klass->update_db = (void (*) (const char *)) dummy_void_pointer;
         klass->list_tags = (GSList* (*) (const ArioServerTag, const ArioServerCriteria *)) dummy_pointer_tag_pointer;
         klass->get_albums = (GSList* (*) (const ArioServerCriteria *)) dummy_pointer_pointer;
         klass->get_songs = (GSList* (*) (const ArioServerCriteria *, const gboolean)) dummy_pointer_pointer_int;
@@ -362,7 +362,7 @@ ario_server_interface_set_property (GObject *object,
         }
 }
 
-static void 
+static void
 ario_server_interface_get_property (GObject *object,
                           guint prop_id,
                           GValue *value,
