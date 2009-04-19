@@ -52,7 +52,7 @@ static gboolean ario_xmms_connect_to (ArioXmms *xmms,
                                       float timeout);
 static void ario_xmms_connect (void);
 static void ario_xmms_disconnect (void);
-static void ario_xmms_update_db (void);
+static void ario_xmms_update_db (const gchar *path);
 static gboolean ario_xmms_is_connected (void);
 static GSList * ario_xmms_list_tags (const ArioServerTag tag,
                                      const ArioServerCriteria *criteria);
@@ -457,7 +457,7 @@ ario_xmms_sync (ArioXmms *xmms)
            */
 }
 
-static void 
+static void
 disconnect_not (ArioXmms *xmms)
 {
         ARIO_LOG_FUNCTION_START;
@@ -586,7 +586,7 @@ ario_xmms_disconnect (void)
 }
 
 static void
-ario_xmms_update_db (void)
+ario_xmms_update_db (const gchar *path)
 {
         ARIO_LOG_FUNCTION_START;
         xmmsc_result_t *res;
@@ -863,7 +863,7 @@ ario_xmms_get_playlists (void)
         return playlists;
 }
 
-static gboolean 
+static gboolean
 ario_xmms_playlist_exists (const gchar *name)
 {
         const gchar *playlist;

@@ -634,7 +634,7 @@ ario_shell_show (ArioShell *shell,
 
         /* Update server db on startup if needed */
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
-                ario_server_update_db ();
+                ario_server_update_db (NULL);
 }
 
 void

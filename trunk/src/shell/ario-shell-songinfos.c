@@ -439,7 +439,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                                 song->comment = g_strdup (taglib_tag_comment (tag));
 
                                 /* Update server database */
-                                ario_server_update_db ();
+                                ario_server_update_db (song->file);
                         }
 
                         taglib_tag_free_strings ();

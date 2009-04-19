@@ -277,7 +277,7 @@ ario_server_preferences_updatedb_button_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
         gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, FALSE);
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), _("Updating..."));
-        ario_server_update_db ();
+        ario_server_update_db (NULL);
 }
 
 void
