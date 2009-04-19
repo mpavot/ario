@@ -20,15 +20,13 @@
 #include "preferences/ario-cover-preferences.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <stdlib.h>
 #include <string.h>
-#include <time.h>
-#include <glib/gi18n.h>
-#include "preferences/ario-preferences.h"
-#include "covers/ario-cover-manager.h"
-#include "lib/gtk-builder-helpers.h"
-#include "lib/ario-conf.h"
+
 #include "ario-debug.h"
+#include "covers/ario-cover-manager.h"
+#include "lib/ario-conf.h"
+#include "lib/gtk-builder-helpers.h"
+#include "preferences/ario-preferences.h"
 
 static void ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences);
 G_MODULE_EXPORT void ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
@@ -49,7 +47,7 @@ G_MODULE_EXPORT void ario_cover_preferences_cover_toggled_cb (GtkCellRendererTog
                                                               gchar *path_str,
                                                               ArioCoverPreferences *cover_preferences);
 
-
+/* Private attributes */
 struct ArioCoverPreferencesPrivate
 {
         GtkWidget *covertree_check;
@@ -60,6 +58,7 @@ struct ArioCoverPreferencesPrivate
         GtkTreeSelection *covers_selection;
 };
 
+/* Tree model columns */
 enum
 {
         ENABLED_COLUMN,
@@ -75,6 +74,7 @@ static void
 ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioCoverPreferencesPrivate));
 }
 
@@ -97,9 +97,11 @@ ario_cover_preferences_new (void)
 
         g_return_val_if_fail (cover_preferences->priv != NULL, NULL);
 
+        /* Generate UI using GtkBuilder */
         builder = gtk_builder_helpers_new (UI_PATH "cover-prefs.ui",
                                            cover_preferences);
 
+        /* Get pointers to various widgets */
         cover_preferences->priv->covertree_check =
                 GTK_WIDGET (gtk_builder_get_object (builder, "covertree_checkbutton"));
         cover_preferences->priv->automatic_check =
@@ -111,13 +113,16 @@ ario_cover_preferences_new (void)
         covers_treeview =
                 GTK_WIDGET (gtk_builder_get_object (builder, "covers_treeview"));
 
+        /* Set style for labels */
         gtk_builder_helpers_boldify_label (builder, "cover_frame_label");
         gtk_builder_helpers_boldify_label (builder, "cover_sources_frame_label");
 
+        /* Get model selection */
         cover_preferences->priv->covers_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (covers_treeview));
         gtk_tree_selection_set_mode (cover_preferences->priv->covers_selection,
                                      GTK_SELECTION_BROWSE);
 
+        /* Synchronize widgets with configuration */
         ario_cover_preferences_sync_cover (cover_preferences);
 
         gtk_box_pack_start (GTK_BOX (cover_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "covers_vbox")), TRUE, TRUE, 0);
@@ -138,16 +143,24 @@ ario_cover_preferences_sync_cover_providers (ArioCoverPreferences *cover_prefere
         gchar *tmp_id;
         GtkTreeModel *model = GTK_TREE_MODEL (cover_preferences->priv->covers_model);
 
+        /* Remember id of currently selected row */
         if (gtk_tree_selection_get_selected (cover_preferences->priv->covers_selection,
                                              &model,
                                              &iter)) {
                 gtk_tree_model_get (model, &iter, ID_COLUMN, &id, -1);
         }
 
+        /* Empty list */
         gtk_list_store_clear (cover_preferences->priv->covers_model);
+
+        /* Get all covers providers */
         providers = ario_cover_manager_get_providers (ario_cover_manager_get_instance ());
+
+        /* For each covers provider */
         for (tmp = providers; tmp; tmp = g_slist_next (tmp)) {
                 cover_provider = (ArioCoverProvider *) tmp->data;
+
+                /* Append cover provider to tree */
                 gtk_list_store_append (cover_preferences->priv->covers_model, &iter);
                 gtk_list_store_set (cover_preferences->priv->covers_model, &iter,
                                     ENABLED_COLUMN, ario_cover_provider_is_active (cover_provider),
@@ -156,6 +169,7 @@ ario_cover_preferences_sync_cover_providers (ArioCoverPreferences *cover_prefere
                                     -1);
         }
 
+        /* Select again previously selected row */
         if (id) {
                 if (gtk_tree_model_get_iter_first (model, &iter)) {
                         do {
@@ -179,17 +193,21 @@ ario_cover_preferences_sync_cover_foreach (GtkTreeModel *model,
         ARIO_LOG_FUNCTION_START;
         gchar *country;
 
+        /* Get country of current row */
         gtk_tree_model_get (model, iter,
                             0, &country,
                             -1);
 
         if (!strcmp (country, ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT))) {
+                /* Row of current country foud: activate this row */
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (cover_preferences->priv->amazon_country), iter);
                 g_free (country);
+                /* Stop iterations */
                 return TRUE;
         }
         g_free (country);
 
+        /* Continue iterations */
         return FALSE;
 }
 
@@ -198,16 +216,20 @@ ario_cover_preferences_sync_cover (ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Activate covertre_check */
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check),
                                       !ario_conf_get_boolean (PREF_COVER_TREE_HIDDEN, PREF_COVER_TREE_HIDDEN_DEFAULT));
 
+        /* Activate automatic_check */
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check),
                                       ario_conf_get_boolean (PREF_AUTOMATIC_GET_COVER, PREF_AUTOMATIC_GET_COVER_DEFAULT));
 
+        /* Select activate amazon country */
         gtk_tree_model_foreach (gtk_combo_box_get_model (GTK_COMBO_BOX (cover_preferences->priv->amazon_country)),
                                 (GtkTreeModelForeachFunc) ario_cover_preferences_sync_cover_foreach,
                                 cover_preferences);
 
+        /* Synchonize covers providers */
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }
 
@@ -216,6 +238,7 @@ ario_cover_preferences_covertree_check_changed_cb (GtkCheckButton *butt,
                                                    ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Update configuration */
         ario_conf_set_boolean (PREF_COVER_TREE_HIDDEN,
                                !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->covertree_check)));
 }
@@ -225,6 +248,7 @@ ario_cover_preferences_automatic_check_changed_cb (GtkCheckButton *butt,
                                                    ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Update configuration */
         ario_conf_set_boolean (PREF_AUTOMATIC_GET_COVER,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cover_preferences->priv->automatic_check)));
 }
@@ -238,6 +262,7 @@ ario_cover_preferences_amazon_country_changed_cb (GtkComboBox *combobox,
         GtkTreeIter iter;
         gchar *country;
 
+        /* Get country of activated row */
         treemodel = gtk_combo_box_get_model (combobox);
         gtk_combo_box_get_active_iter (combobox,
                                        &iter);
@@ -245,6 +270,7 @@ ario_cover_preferences_amazon_country_changed_cb (GtkComboBox *combobox,
                             0, &country,
                             -1);
 
+        /* Update configuration */
         ario_conf_set_string (PREF_COVER_AMAZON_COUNTRY,
                               country);
         g_free (country);
@@ -261,20 +287,31 @@ ario_cover_preferences_top_button_cb (GtkWidget *widget,
         ArioCoverProvider *cover_provider;
         GSList *providers;
 
+        /* Stop here if no row is selected */
         if (!gtk_tree_selection_get_selected (cover_preferences->priv->covers_selection,
                                               &model,
                                               &iter))
                 return;
+
+        /* Get ID of selected provider */
         gtk_tree_model_get (model, &iter, ID_COLUMN, &id, -1);
+
+        /* Get selected covers provider */
         cover_provider = ario_cover_manager_get_provider_from_id (ario_cover_manager_get_instance (), id);
         g_free (id);
+
+        /* Get list of covers providers */
         providers = ario_cover_manager_get_providers (ario_cover_manager_get_instance ());
 
+        /* Remove provider from list */
         providers = g_slist_remove (providers, cover_provider);
+
+        /* Add provider to head of list */
         providers = g_slist_prepend (providers, cover_provider);
 
         ario_cover_manager_set_providers (ario_cover_manager_get_instance (), providers);
 
+        /* Synchronize tree */
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }
 
@@ -290,21 +327,33 @@ ario_cover_preferences_up_button_cb (GtkWidget *widget,
         GSList *providers;
         gint index;
 
+        /* Stop here if no row is selected */
         if (!gtk_tree_selection_get_selected (cover_preferences->priv->covers_selection,
                                               &model,
                                               &iter))
                 return;
+
+        /* Get ID of selected provider */
         gtk_tree_model_get (model, &iter, ID_COLUMN, &id, -1);
+
+        /* Get selected covers provider */
         cover_provider = ario_cover_manager_get_provider_from_id (ario_cover_manager_get_instance (), id);
         g_free (id);
+
+        /* Get list of covers providers */
         providers = ario_cover_manager_get_providers (ario_cover_manager_get_instance ());
 
+        /* Get index of selected provider */
         index = g_slist_index (providers, cover_provider);
         if (index > 0) {
+                /* Remove provider from list */
                 providers = g_slist_remove (providers, cover_provider);
+
+                /* Insert provider at previous position */
                 providers = g_slist_insert (providers, cover_provider, index - 1);
                 ario_cover_manager_set_providers (ario_cover_manager_get_instance (), providers);
 
+                /* Synchronize tree */
                 ario_cover_preferences_sync_cover_providers (cover_preferences);
         }
 }
@@ -321,20 +370,33 @@ ario_cover_preferences_down_button_cb (GtkWidget *widget,
         GSList *providers;
         gint index;
 
+        /* Stop here if no row is selected */
         if (!gtk_tree_selection_get_selected (cover_preferences->priv->covers_selection,
                                               &model,
                                               &iter))
                 return;
+
+        /* Get ID of selected provider */
         gtk_tree_model_get (model, &iter, ID_COLUMN, &id, -1);
+
+        /* Get selected covers provider */
         cover_provider = ario_cover_manager_get_provider_from_id (ario_cover_manager_get_instance (), id);
         g_free (id);
+
+        /* Get list of covers providers */
         providers = ario_cover_manager_get_providers (ario_cover_manager_get_instance ());
 
+        /* Get index of selected provider */
         index = g_slist_index (providers, cover_provider);
+
+        /* Remove provider from list */
         providers = g_slist_remove (providers, cover_provider);
+
+        /* Insert provider at next position */
         providers = g_slist_insert (providers, cover_provider, index + 1);
         ario_cover_manager_set_providers (ario_cover_manager_get_instance (), providers);
 
+        /* Synchronize tree */
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }
 
@@ -349,20 +411,31 @@ ario_cover_preferences_bottom_button_cb (GtkWidget *widget,
         ArioCoverProvider *cover_provider;
         GSList *providers;
 
+        /* Stop here if no row is selected */
         if (!gtk_tree_selection_get_selected (cover_preferences->priv->covers_selection,
                                               &model,
                                               &iter))
                 return;
+
+        /* Get ID of selected provider */
         gtk_tree_model_get (model, &iter, ID_COLUMN, &id, -1);
+
+        /* Get selected covers provider */
         cover_provider = ario_cover_manager_get_provider_from_id (ario_cover_manager_get_instance (), id);
         g_free (id);
+
+        /* Get list of covers providers */
         providers = ario_cover_manager_get_providers (ario_cover_manager_get_instance ());
 
+        /* Remove provider from list */
         providers = g_slist_remove (providers, cover_provider);
+
+        /* Add provider to end of list */
         providers = g_slist_append (providers, cover_provider);
 
         ario_cover_manager_set_providers (ario_cover_manager_get_instance (), providers);
 
+        /* Synchronize tree */
         ario_cover_preferences_sync_cover_providers (cover_preferences);
 }
 
@@ -380,11 +453,18 @@ ario_cover_preferences_cover_toggled_cb (GtkCellRendererToggle *cell,
         ArioCoverProvider *cover_provider;
 
         if (gtk_tree_model_get_iter (model, &iter, path)) {
+                /* Get info from toggled row */
                 gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id, -1);
                 state = !state;
+
+                /* Get covers provider corresponding to toggled row */
                 cover_provider = ario_cover_manager_get_provider_from_id (ario_cover_manager_get_instance (), id);
+
+                /* (De)activate cover provider */
                 ario_cover_provider_set_active (cover_provider, state);
                 g_free (id);
+
+                /* Update tree */
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, ENABLED_COLUMN, state, -1);
         }
         gtk_tree_path_free (path);

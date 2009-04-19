@@ -19,23 +19,21 @@
 
 #include "servers/ario-server-interface.h"
 #include <gtk/gtk.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <glib/gi18n.h>
+
 #include "ario-debug.h"
 #include "ario-util.h"
 
 static void ario_server_interface_finalize (GObject *object);
 static void ario_server_interface_set_property (GObject *object,
-                                      guint prop_id,
-                                      const GValue *value,
-                                      GParamSpec *pspec);
+                                                guint prop_id,
+                                                const GValue *value,
+                                                GParamSpec *pspec);
 static void ario_server_interface_get_property (GObject *object,
-                                      guint prop_id,
-                                      GValue *value,
-                                      GParamSpec *pspec);
+                                                guint prop_id,
+                                                GValue *value,
+                                                GParamSpec *pspec);
 
+/* Object properties */
 enum
 {
         PROP_0,
@@ -51,6 +49,7 @@ enum
 
 G_DEFINE_TYPE (ArioServerInterface, ario_server_interface, G_TYPE_OBJECT)
 
+/* Dummy methods for default behavior */
 static void
 dummy_void_void (void)
 {
@@ -134,11 +133,12 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* GObject virtual methods */
         object_class->finalize = ario_server_interface_finalize;
-
         object_class->set_property = ario_server_interface_set_property;
         object_class->get_property = ario_server_interface_get_property;
 
+        /* Default virtual methods for ArioServerInterface */
         klass->connect = dummy_void_void;
         klass->disconnect = dummy_void_void;
         klass->is_connected = dummy_int_void;
@@ -176,6 +176,7 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         klass->get_songs_info = (GList* (*) (GSList *)) dummy_pointer_pointer;
         klass->list_files = (ArioServerFileList* (*) (const char *, const int)) dummy_pointer_pointer_int;
 
+        /* Object properties */
         g_object_class_install_property (object_class,
                                          PROP_SONGID,
                                          g_param_spec_int ("song_id",
@@ -245,6 +246,7 @@ static void
 ario_server_interface_init (ArioServerInterface *server_interface)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Initialization of attributes */
         server_interface->song_id = -1;
         server_interface->playlist_id = -1;
         server_interface->volume = -1;
@@ -261,6 +263,7 @@ ario_server_interface_finalize (GObject *object)
 
         server_interface = ARIO_SERVER_INTERFACE (object);
 
+        /* Free current song */
         if (server_interface->server_song)
                 ario_server_free_song (server_interface->server_song);
 
@@ -281,13 +284,14 @@ ario_server_interface_set_property (GObject *object,
         switch (prop_id) {
         case PROP_SONGID:
                 song_id = g_value_get_int (value);
+                /* Detect if song has changed */
                 if (server_interface->song_id != song_id) {
                         server_interface->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
                         server_interface->song_id = song_id;
                         song_changed = TRUE;
                 }
 
-                /* check if there is a connection */
+                /* Check if there is a connection */
                 if (ario_server_is_connected ()) {
                         ArioServerSong *new_song;
                         ArioServerSong *old_song = server_interface->server_song;
@@ -295,31 +299,35 @@ ario_server_interface_set_property (GObject *object,
                         gboolean artist_changed = FALSE;
                         gboolean album_changed = FALSE;
 
+                        /* Get new song on server */
                         new_song = ario_server_get_current_song_on_server ();
+
+                        /* Detect is state has changed */
                         state_changed = (!old_song || !new_song);
                         if (!state_changed) {
+                                /* Detect if artist has changed */
                                 artist_changed = ario_util_strcmp (old_song->artist, new_song->artist) != 0;
                                 if (!artist_changed)
                                         album_changed = ario_util_strcmp (old_song->album, new_song->album) != 0;
+                                /* Detect if song has changed */
                                 if (!song_changed)
                                         song_changed = ario_util_strcmp (old_song->name, new_song->name) != 0;
                         }
 
+                        /* Remember to emit album-changed signal */
                         if (state_changed || artist_changed || album_changed)
                                 server_interface->signals_to_emit |= SERVER_ALBUM_CHANGED_FLAG;
 
+                        /* Remember to emit song-changed signal */
                         if (song_changed)
                                 server_interface->signals_to_emit |= SERVER_SONG_CHANGED_FLAG;
 
+                        /* Change current song */
                         if (server_interface->server_song)
                                 ario_server_free_song (server_interface->server_song);
-
-                        if (new_song) {
-                                server_interface->server_song = new_song;
-                        } else {
-                                server_interface->server_song = NULL;
-                        }
+                        server_interface->server_song = new_song;
                 } else {
+                        /* Not connected: free song */
                         if (server_interface->server_song) {
                                 ario_server_free_song (server_interface->server_song);
                                 server_interface->server_song = NULL;
@@ -327,32 +335,39 @@ ario_server_interface_set_property (GObject *object,
                 }
                 break;
         case PROP_STATE:
+                /* Change value and flag signal to emit */
                 server_interface->state = g_value_get_int (value);
                 server_interface->signals_to_emit |= SERVER_STATE_CHANGED_FLAG;
                 break;
         case PROP_VOLUME:
+                /* Change value and flag signal to emit */
                 server_interface->volume = g_value_get_int (value);
                 server_interface->signals_to_emit |= SERVER_VOLUME_CHANGED_FLAG;
                 break;
         case PROP_ELAPSED:
+                /* Change value and flag signal to emit */
                 server_interface->elapsed = g_value_get_int (value);
                 server_interface->signals_to_emit |= SERVER_ELAPSED_CHANGED_FLAG;
                 break;
         case PROP_PLAYLISTID:
+                /* Change value and flag signal to emit */
                 server_interface->playlist_id = g_value_get_int64 (value);
                 if (!ario_server_is_connected ())
                         server_interface->playlist_length = 0;
                 server_interface->signals_to_emit |= SERVER_PLAYLIST_CHANGED_FLAG;
                 break;
         case PROP_RANDOM:
+                /* Change value and flag signal to emit */
                 server_interface->random = g_value_get_boolean (value);
                 server_interface->signals_to_emit |= SERVER_RANDOM_CHANGED_FLAG;
                 break;
         case PROP_REPEAT:
+                /* Change value and flag signal to emit */
                 server_interface->repeat = g_value_get_boolean (value);
                 server_interface->signals_to_emit |= SERVER_REPEAT_CHANGED_FLAG;
                 break;
         case PROP_UPDATINGDB:
+                /* Change value and flag signal to emit */
                 server_interface->updatingdb = g_value_get_int (value);
                 server_interface->signals_to_emit |= SERVER_UPDATINGDB_CHANGED_FLAG;
                 break;
@@ -364,9 +379,9 @@ ario_server_interface_set_property (GObject *object,
 
 static void
 ario_server_interface_get_property (GObject *object,
-                          guint prop_id,
-                          GValue *value,
-                          GParamSpec *pspec)
+                                    guint prop_id,
+                                    GValue *value,
+                                    GParamSpec *pspec)
 {
         ARIO_LOG_FUNCTION_START;
         ArioServerInterface *server_interface = ARIO_SERVER_INTERFACE (object);
@@ -406,26 +421,34 @@ void
 ario_server_interface_set_default (ArioServerInterface *server_interface)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Set default song ID */
         if (server_interface->song_id != 0)
                 g_object_set (G_OBJECT (server_interface), "song_id", 0, NULL);
 
+        /* Set default state */
         if (server_interface->state != MPD_STATUS_STATE_UNKNOWN)
                 g_object_set (G_OBJECT (server_interface), "state", MPD_STATUS_STATE_UNKNOWN, NULL);
 
+        /* Set default volume */
         if (server_interface->volume != MPD_STATUS_NO_VOLUME)
                 g_object_set (G_OBJECT (server_interface), "volume", MPD_STATUS_NO_VOLUME, NULL);
 
+        /* Set default elapsed time */
         if (server_interface->elapsed != 0)
                 g_object_set (G_OBJECT (server_interface), "elapsed", 0, NULL);
 
+        /* Set default playlist ID */
         g_object_set (G_OBJECT (server_interface), "playlist_id", (gint64) -1, NULL);
 
+        /* Set default random value */
         if (server_interface->random != FALSE)
                 g_object_set (G_OBJECT (server_interface), "random", FALSE, NULL);
 
+        /* Set default repeat value */
         if (server_interface->repeat != FALSE)
                 g_object_set (G_OBJECT (server_interface), "repeat", FALSE, NULL);
 
+        /* Set default updatingdb value */
         if (server_interface->updatingdb != 0)
                 g_object_set (G_OBJECT (server_interface), "updatingdb", 0, NULL);
 }
@@ -435,6 +458,7 @@ ario_server_interface_emit (ArioServerInterface *server_interface,
                             ArioServer *server)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Emit signals depending of flags set in signals_to_emit */
         if (server_interface->signals_to_emit & SERVER_SONG_CHANGED_FLAG)
                 g_signal_emit_by_name (G_OBJECT (server), "song_changed");
         if (server_interface->signals_to_emit & SERVER_ALBUM_CHANGED_FLAG)
