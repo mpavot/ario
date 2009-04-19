@@ -20,18 +20,17 @@
 #include "shell/ario-shell-songinfos.h"
 #include <config.h>
 #include <gtk/gtk.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
 #include <glib/gi18n.h>
-#include "lib/gtk-builder-helpers.h"
-#include "ario-debug.h"
-#include "ario-util.h"
-#include "ario-profiles.h"
-#include "widgets/ario-lyrics-editor.h"
+#include <stdlib.h>
 #ifdef ENABLE_TAGLIB
 #include "taglib/tag_c.h"
 #endif
+
+#include "ario-debug.h"
+#include "ario-profiles.h"
+#include "ario-util.h"
+#include "lib/gtk-builder-helpers.h"
+#include "widgets/ario-lyrics-editor.h"
 
 #define ARIO_PREVIOUS 987
 #define ARIO_NEXT 998
@@ -49,6 +48,8 @@ static void ario_shell_songinfos_response_cb (GtkDialog *dial,
 static void ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos);
 G_MODULE_EXPORT void ario_shell_songinfos_text_changed_cb (GtkWidget *widget,
                                                            ArioShellSonginfos *shell_songinfos);
+
+/* Private attributes */
 struct ArioShellSonginfosPrivate
 {
         GtkWidget *notebook;
@@ -63,7 +64,6 @@ struct ArioShellSonginfosPrivate
         GtkWidget *date_entry;
         GtkWidget *genre_entry;
         GtkWidget *comment_entry;
-
         GtkWidget *file_entry;
         GtkWidget *length_entry;
         GtkWidget *composer_entry;
@@ -86,8 +86,10 @@ ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+        /* Virtual methods */
         object_class->finalize = ario_shell_songinfos_finalize;
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioShellSonginfosPrivate));
 }
 
@@ -103,6 +105,9 @@ ario_shell_songinfos_can_edit_tags ()
 {
         ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_TAGLIB
+        /* User can edit tags only if TABGLIB is enabled and Ario is on the same
+         * computer as music server and music directory is filled
+         */
         return (ario_profiles_get_current (ario_profiles_get ())->local
                         && ario_profiles_get_current (ario_profiles_get ())->musicdir);
 #else
@@ -120,11 +125,15 @@ ario_shell_songinfos_fill_tags (ArioServerSong *song)
         TagLib_Tag *tag;
         const TagLib_AudioProperties *properties;
 
+        /* Get song full path */
         filename = g_strconcat (ario_profiles_get_current (ario_profiles_get ())->musicdir, "/", song->file, NULL);
+
+        /* Get taglib file */
         file = taglib_file_new (filename);
         g_free (filename);
 
         if (file && taglib_file_is_valid (file)) {
+                /* Replace ArioServerSong tags by 'real' tags from taglib */
                 tag = taglib_file_tag (file);
                 properties = taglib_file_audioproperties (file);
                 if (tag) {
@@ -166,11 +175,12 @@ ario_shell_songinfos_new (GSList *paths)
 
         g_return_val_if_fail (shell_songinfos->priv != NULL, NULL);
 
+        /* Build UI using GtkBuilder */
         builder = gtk_builder_helpers_new (UI_PATH "song-infos.ui",
                                            shell_songinfos);
 
+        /* Get pointers to various widgets */
         widget = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
-
         shell_songinfos->priv->title_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "title_entry"));
         shell_songinfos->priv->artist_entry =
@@ -198,6 +208,7 @@ ario_shell_songinfos_new (GSList *paths)
         shell_songinfos->priv->comment_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "comment_entry"));
 
+        /* Disable not editable text boxes */
         gtk_widget_set_sensitive (shell_songinfos->priv->album_artist_entry, FALSE);
         gtk_widget_set_sensitive (shell_songinfos->priv->length_entry, FALSE);
         gtk_widget_set_sensitive (shell_songinfos->priv->file_entry, FALSE);
@@ -205,6 +216,7 @@ ario_shell_songinfos_new (GSList *paths)
         gtk_widget_set_sensitive (shell_songinfos->priv->performer_entry, FALSE);
         gtk_widget_set_sensitive (shell_songinfos->priv->disc_entry, FALSE);
 
+        /* Change style of a labels */
         gtk_builder_helpers_boldify_label (builder, "frame_label");
         gtk_builder_helpers_boldify_label (builder, "title_const_label");
         gtk_builder_helpers_boldify_label (builder, "artist_const_label");
@@ -233,30 +245,34 @@ ario_shell_songinfos_new (GSList *paths)
         gtk_widget_set_size_request(shell_songinfos->priv->disc_entry, 280, -1);
         gtk_widget_set_size_request(shell_songinfos->priv->comment_entry, 280, -1);
 
+        /* Set window properties */
         gtk_window_set_title (GTK_WINDOW (shell_songinfos), _("Song Properties"));
         gtk_window_set_resizable (GTK_WINDOW (shell_songinfos), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (shell_songinfos), 450, 350);
 
+        /* Create notebook */
         shell_songinfos->priv->notebook = GTK_WIDGET (gtk_notebook_new ());
         gtk_container_set_border_width (GTK_CONTAINER (shell_songinfos->priv->notebook), 5);
-
         gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell_songinfos)->vbox),
                            shell_songinfos->priv->notebook);
 
+        /* Set songinfos properties */
         gtk_container_set_border_width (GTK_CONTAINER (shell_songinfos), 5);
         gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell_songinfos)->vbox), 2);
         gtk_dialog_set_has_separator (GTK_DIALOG (shell_songinfos), FALSE);
 
-
+        /* Append tags page to notebook */
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_songinfos->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Song Properties")));
 
+        /* Append lyrics page to notebook */
         shell_songinfos->priv->lyrics_editor = ario_lyrics_editor_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_songinfos->priv->notebook),
                                   shell_songinfos->priv->lyrics_editor,
                                   gtk_label_new (_("Lyrics")));
 
+        /* Connect signals for window deletion */
         g_signal_connect (shell_songinfos,
                           "delete_event",
                           G_CALLBACK (ario_shell_songinfos_window_delete_cb),
@@ -268,6 +284,7 @@ ario_shell_songinfos_new (GSList *paths)
 
         shell_songinfos->priv->songs = ario_server_get_songs_info (paths);
         if (ario_shell_songinfos_can_edit_tags ()) {
+                /* Activate edition of text boxes */
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->title_entry), TRUE);
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->artist_entry), TRUE);
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->album_entry), TRUE);
@@ -276,15 +293,18 @@ ario_shell_songinfos_new (GSList *paths)
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->genre_entry), TRUE);
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->comment_entry), TRUE);
 
+                /* Add save button */
                 shell_songinfos->priv->save_button = gtk_button_new_from_stock (GTK_STOCK_SAVE);
                 gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),
                                               shell_songinfos->priv->save_button,
                                               ARIO_SAVE);
 
+                /* Fill tags of all songs with 'real' tags from tablib */
                 for (tmp = shell_songinfos->priv->songs; tmp; tmp = g_list_next (tmp)) {
                         ario_shell_songinfos_fill_tags (tmp->data);
                 }
         } else {
+                /* Deactivate edition of text boxes */
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->title_entry), FALSE);
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->artist_entry), FALSE);
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->album_entry), FALSE);
@@ -294,16 +314,19 @@ ario_shell_songinfos_new (GSList *paths)
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->comment_entry), FALSE);
         }
 
+        /* Add previous button */
         shell_songinfos->priv->previous_button = gtk_button_new_from_stock (GTK_STOCK_GO_BACK);
         gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),
                                       shell_songinfos->priv->previous_button,
                                       ARIO_PREVIOUS);
 
+        /* Add next button */
         shell_songinfos->priv->next_button = gtk_button_new_from_stock (GTK_STOCK_GO_FORWARD);
         gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),
                                       shell_songinfos->priv->next_button,
                                       ARIO_NEXT);
 
+        /* Add close button */
         gtk_dialog_add_button (GTK_DIALOG (shell_songinfos),
                                GTK_STOCK_CLOSE,
                                GTK_RESPONSE_CLOSE);
@@ -311,6 +334,7 @@ ario_shell_songinfos_new (GSList *paths)
         gtk_dialog_set_default_response (GTK_DIALOG (shell_songinfos),
                                          GTK_RESPONSE_CLOSE);
 
+        /* Display first song */
         ario_shell_songinfos_set_current_song (shell_songinfos);
 
         g_object_unref (builder);
@@ -331,6 +355,7 @@ ario_shell_songinfos_finalize (GObject *object)
 
         g_return_if_fail (shell_songinfos->priv != NULL);
 
+        /* Delete songs list */
         shell_songinfos->priv->songs = g_list_first (shell_songinfos->priv->songs);
         g_list_foreach (shell_songinfos->priv->songs, (GFunc) ario_server_free_song, NULL);
         g_list_free (shell_songinfos->priv->songs);
@@ -356,7 +381,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                                   ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START;
-#ifdef ENABLE_TAGLIB 
+#ifdef ENABLE_TAGLIB
         gchar *filename;
         TagLib_File *file;
         TagLib_Tag *tag;
@@ -367,18 +392,22 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
 
         switch (response_id) {
         case GTK_RESPONSE_CLOSE:
+                /* Destroy window */
                 gtk_widget_hide (GTK_WIDGET (shell_songinfos));
                 gtk_widget_destroy (GTK_WIDGET (shell_songinfos));
                 break;
-#ifdef ENABLE_TAGLIB 
+#ifdef ENABLE_TAGLIB
         case ARIO_SAVE:
                 /* Save tags */
                 success = FALSE;
                 song = shell_songinfos->priv->songs->data;
-                filename = g_strconcat (ario_profiles_get_current (ario_profiles_get ())->musicdir, "/", song->file, NULL);
-                file = taglib_file_new (filename);
 
+                /* Get full file path */
+                filename = g_strconcat (ario_profiles_get_current (ario_profiles_get ())->musicdir, "/", song->file, NULL);
+
+                file = taglib_file_new (filename);
                 if (file && taglib_file_is_valid (file)) {
+                        /* Fill taglib taglib tags with text boxes value */
                         tag = taglib_file_tag (file);
                         if (tag) {
                                 taglib_tag_set_title (tag, gtk_entry_get_text (GTK_ENTRY (shell_songinfos->priv->title_entry)));
@@ -390,7 +419,9 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                                 taglib_tag_set_comment (tag, gtk_entry_get_text (GTK_ENTRY (shell_songinfos->priv->comment_entry)));
                         }
 
+                        /* Save tags in file */
                         if (taglib_file_save (file)) {
+                                /* Update song values with 'real' tags from taglib */
                                 success = TRUE;
                                 g_free (song->title);
                                 song->title = g_strdup (taglib_tag_title (tag));
@@ -406,6 +437,8 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                                 song->genre = g_strdup (taglib_tag_genre (tag));
                                 g_free (song->comment);
                                 song->comment = g_strdup (taglib_tag_comment (tag));
+
+                                /* Update server database */
                                 ario_server_update_db ();
                         }
 
@@ -413,6 +446,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                         taglib_file_free (file);
                 }
                 if (!success) {
+                        /* Run error dialog */
                         dialog = gtk_message_dialog_new (GTK_WINDOW (shell_songinfos),
                                                          GTK_DIALOG_MODAL,
                                                          GTK_MESSAGE_ERROR,
@@ -422,6 +456,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
                         gtk_dialog_run (GTK_DIALOG (dialog));
                         gtk_widget_destroy (dialog);
                 } else if (shell_songinfos->priv->save_button) {
+                        /* Deactivate save button until next tag modification */
                         gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), FALSE);
                 }
 
@@ -430,12 +465,14 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
 #endif
         case ARIO_PREVIOUS:
                 if (g_list_previous (shell_songinfos->priv->songs)) {
+                        /* Display previous song */
                         shell_songinfos->priv->songs = g_list_previous (shell_songinfos->priv->songs);
                         ario_shell_songinfos_set_current_song (shell_songinfos);
                 }
                 break;
         case ARIO_NEXT:
                 if (g_list_next (shell_songinfos->priv->songs)) {
+                        /* Display next song */
                         shell_songinfos->priv->songs = g_list_next (shell_songinfos->priv->songs);
                         ario_shell_songinfos_set_current_song (shell_songinfos);
                 }
@@ -456,10 +493,12 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         if (!shell_songinfos->priv->songs)
                 return;
 
+        /* Get current song */
         song = shell_songinfos->priv->songs->data;
         if (!song)
                 return;
 
+        /* Fill text boxes with song tags */
         gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->title_entry), VALUE (song->title));
         gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->artist_entry), VALUE (song->artist));
         gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->album_entry), VALUE (song->album));
@@ -476,6 +515,7 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->performer_entry), VALUE (song->performer));
         gtk_entry_set_text (GTK_ENTRY (shell_songinfos->priv->disc_entry), VALUE (song->disc));
 
+        /* Set text boxes sensitivity */
         gtk_widget_set_sensitive (shell_songinfos->priv->title_entry, can_edit);
         gtk_widget_set_sensitive (shell_songinfos->priv->artist_entry, can_edit);
         gtk_widget_set_sensitive (shell_songinfos->priv->album_entry, can_edit);
@@ -484,19 +524,26 @@ ario_shell_songinfos_set_current_song (ArioShellSonginfos *shell_songinfos)
         gtk_widget_set_sensitive (shell_songinfos->priv->genre_entry, can_edit);
         gtk_widget_set_sensitive (shell_songinfos->priv->comment_entry, can_edit);
 
+        /* Deactivate save button until next tag modification */
         if (shell_songinfos->priv->save_button)
                 gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), FALSE);
 
+        /* Deactivate previous button if first song is displayed */
         gtk_widget_set_sensitive (shell_songinfos->priv->previous_button, g_list_previous (shell_songinfos->priv->songs) != NULL);
+
+        /* Deactivate next button if last song is displayed */
         gtk_widget_set_sensitive (shell_songinfos->priv->next_button, g_list_next (shell_songinfos->priv->songs) != NULL);
 
+        /* Get song lyrics */
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
         data->artist = g_strdup (song->artist);
         data->title = g_strdup (ario_util_format_title (song));
         ario_lyrics_editor_push (ARIO_LYRICS_EDITOR (shell_songinfos->priv->lyrics_editor), data);
 
+        /* Set window title */
         window_title = g_strdup_printf ("%s - %s", _("Song Properties"), data->title);
         gtk_window_set_title (GTK_WINDOW (shell_songinfos), window_title);
+
         g_free (window_title);
 }
 
@@ -505,6 +552,7 @@ ario_shell_songinfos_text_changed_cb (GtkWidget *widget,
                                       ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START;
+        /* One tag has been modified, activate save button */
         if (shell_songinfos->priv->save_button)
                 gtk_widget_set_sensitive (GTK_WIDGET (shell_songinfos->priv->save_button), TRUE);
 }
