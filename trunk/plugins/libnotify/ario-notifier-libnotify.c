@@ -56,11 +56,7 @@ ario_notifier_libnotify_set_string_property (ArioNotifierLibnotify *notifier_lib
                                              const gchar *str)
 {
         ARIO_LOG_FUNCTION_START;
-        GValue value = { 0, };
-        g_value_init (&value, G_TYPE_STRING);
-        g_value_set_string (&value, str);
-        g_object_set_property (G_OBJECT (notifier_libnotify->priv->notification), prop, &value);
-        g_value_unset (&value);
+        g_object_set (G_OBJECT (notifier_libnotify->priv->notification), prop, str);
 }
 
 static void
