@@ -36,7 +36,7 @@
 #define ARIO_LOG_FUNCTION_START      ARIO_LOG_DBG("Function start")
 #else
 /* If DEBUG is not activated we don't log debug info */
-#define ARIO_LOG_DBG(x,args...)
+#define ARIO_LOG_DBG(x,args...) {}
 #define ARIO_LOG_FUNCTION_START
 #endif
 
