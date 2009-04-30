@@ -767,9 +767,12 @@ ario_header_slider_release_cb (GtkWidget *widget,
                                ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
+        gdouble scale;
+
         header->priv->slider_dragging = FALSE;
         /* Change elapsed time on server */
-        ario_server_set_current_elapsed ((int) gtk_range_get_value (GTK_RANGE (header->priv->scale)));
+        scale = gtk_range_get_value (GTK_RANGE (header->priv->scale));
+        ario_server_set_current_elapsed ((int) scale);
         return FALSE;
 }
 
@@ -779,10 +782,12 @@ static void ario_header_slider_value_changed_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
         gchar time[ARIO_MAX_TIME_SIZE];
         int elapsed;
+        gdouble scale;
 
         if (header->priv->slider_dragging) {
                 /* If user is dragging the slider, we update displayed value */
-                elapsed = (int) gtk_range_get_value (GTK_RANGE (header->priv->scale));
+                scale = gtk_range_get_value (GTK_RANGE (header->priv->scale));
+                elapsed = (int) scale;
                 ario_util_format_time_buf (elapsed, time, ARIO_MAX_TIME_SIZE);
                 gtk_label_set_text (GTK_LABEL (header->priv->elapsed), time);
         }

@@ -206,7 +206,7 @@ load_plugin_module (ArioPluginInfo *info)
         switch (info->loader)
         {
         case ARIO_PLUGIN_LOADER_C:
-                dirname = g_path_get_dirname (info->file);        
+                dirname = g_path_get_dirname (info->file);
                 g_return_val_if_fail (dirname != NULL, FALSE);
 
                 path = g_module_build_path (dirname, info->module_name);
@@ -255,18 +255,18 @@ load_plugin_module (ArioPluginInfo *info)
                 {
                 case ARIO_PLUGIN_LOADER_C:
                         g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
-                                   info->name,                                   
+                                   info->name,
                                    ario_module_get_path (ARIO_MODULE (info->module)));
                         break;
 
                 case ARIO_PLUGIN_LOADER_PY:
                         g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
-                                   info->name,                                   
+                                   info->name,
                                    info->module_name);
                         break;
 
                 default:
-                        g_return_val_if_reached (FALSE);                                
+                        g_return_val_if_reached (FALSE);
                 }
 
                 g_object_unref (G_OBJECT (info->module));
@@ -281,13 +281,13 @@ load_plugin_module (ArioPluginInfo *info)
         switch (info->loader)
         {
         case ARIO_PLUGIN_LOADER_C:
-                info->plugin = 
+                info->plugin =
                         ARIO_PLUGIN (ario_module_new_object (ARIO_MODULE (info->module)));
                 break;
 
 #ifdef ENABLE_PYTHON
         case ARIO_PLUGIN_LOADER_PY:
-                info->plugin = 
+                info->plugin =
                         ARIO_PLUGIN (ario_python_module_new_object (ARIO_PYTHON_MODULE (info->module)));
                 break;
 #endif
@@ -304,7 +304,7 @@ load_plugin_module (ArioPluginInfo *info)
 }
 
 static void
-reactivate_all ()
+reactivate_all (void)
 {
         GList *pl;
 
@@ -314,13 +314,13 @@ reactivate_all ()
                 ArioPluginInfo *info = (ArioPluginInfo*)pl->data;
 
                 /* If plugin is not available, don't try to activate/load it */
-                if (info->available && info->active) {                
+                if (info->available && info->active) {
                         if (info->plugin == NULL)
                                 res = load_plugin_module (info);
 
                         if (res)
                                 ario_plugin_activate (info->plugin,
-                                                      static_shell);                        
+                                                      static_shell);
                 }
         }
 
@@ -336,11 +336,11 @@ ario_plugins_engine_init (ArioShell *shell)
 
         ario_plugins_engine_load_icons_all ();
 
-        reactivate_all (shell);
+        reactivate_all ();
 }
 
 void
-ario_plugins_engine_shutdown ()
+ario_plugins_engine_shutdown (void)
 {
 #ifdef ENABLE_PYTHON
         /* Note: that this may cause finalization of objects (typically
@@ -358,13 +358,13 @@ ario_plugins_engine_shutdown ()
 }
 
 const GList *
-ario_plugins_engine_get_plugin_list ()
+ario_plugins_engine_get_plugin_list (void)
 {
         return plugin_list;
 }
 
 static void
-save_active_plugin_list ()
+save_active_plugin_list (void)
 {
         GSList *active_plugins = NULL;
         GList *l;
@@ -446,7 +446,7 @@ ario_plugins_engine_deactivate_plugin (ArioPluginInfo    *info)
         return !info->active;
 }
 
-void          
+void
 ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
                                       GtkWindow          *parent)
 {
@@ -461,7 +461,7 @@ ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
         gtk_window_set_transient_for (GTK_WINDOW (conf_dlg),
                                       parent);
 
-        wg = parent->group;                      
+        wg = parent->group;
         if (wg == NULL) {
                 wg = gtk_window_group_new ();
                 gtk_window_group_add_window (wg, parent);
@@ -470,11 +470,11 @@ ario_plugins_engine_configure_plugin (ArioPluginInfo    *info,
         gtk_window_group_add_window (wg,
                                      GTK_WINDOW (conf_dlg));
 
-        gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);                     
+        gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);
         gtk_widget_show (conf_dlg);
 }
 
-static void 
+static void
 ario_plugins_engine_active_plugins_changed (void)
 {
         GList *pl;

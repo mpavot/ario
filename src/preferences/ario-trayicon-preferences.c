@@ -135,6 +135,7 @@ ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_prefe
         int i = 0;
         GSList *notifiers;
         ArioNotifier *notifier;
+        int notification_time;
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (trayicon_preferences->priv->trayicon_combobox),
                                   ario_conf_get_integer (PREF_TRAYICON_BEHAVIOR, PREF_TRAYICON_BEHAVIOR_DEFAULT));
@@ -145,7 +146,8 @@ ario_trayicon_preferences_sync_trayicon (ArioTrayiconPreferences *trayicon_prefe
 
         gtk_widget_set_sensitive (trayicon_preferences->priv->notificationtime_spinbutton, ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT));
         gtk_widget_set_sensitive (trayicon_preferences->priv->notification_combobox, ario_conf_get_boolean (PREF_HAVE_NOTIFICATION, PREF_HAVE_NOTIFICATION_DEFAULT));
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (trayicon_preferences->priv->notificationtime_spinbutton), (gdouble) ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT));
+        notification_time = ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (trayicon_preferences->priv->notificationtime_spinbutton), (gdouble) notification_time);
 
 
         id = ario_conf_get_string (PREF_NOTIFIER, PREF_NOTIFIER_DEFAULT);

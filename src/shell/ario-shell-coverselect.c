@@ -143,8 +143,7 @@ ario_shell_coverselect_finalize (GObject *object)
 static void
 ario_shell_coverselect_drag_leave_cb (GtkWidget *widget,
                                       GdkDragContext *context,
-                                      gint x,
-                                      gint y,
+                                      gint x, gint y,
                                       GtkSelectionData *data,
                                       guint info,
                                       guint time,

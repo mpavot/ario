@@ -185,7 +185,7 @@ ario_avahi_new (void)
  * Returns a list of local IP address
  */
 static GSList *
-ario_avahi_get_local_addr ()
+ario_avahi_get_local_addr (void)
 {
         char ip[200];
         socklen_t salen;

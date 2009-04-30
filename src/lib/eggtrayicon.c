@@ -102,7 +102,8 @@ egg_tray_icon_get_type (void)
                         NULL, /* class_data */
                         sizeof (EggTrayIcon),
                         0,    /* n_preallocs */
-                        (GInstanceInitFunc) egg_tray_icon_init
+                        (GInstanceInitFunc) egg_tray_icon_init,
+                        NULL
                 };
 
                 our_type = g_type_register_static (GTK_TYPE_PLUG, "EggTrayIcon", &our_info, 0);
@@ -237,7 +238,7 @@ egg_tray_icon_manager_filter (GdkXEvent *xevent, GdkEvent *event, gpointer user_
 
         if (xev->xany.type == ClientMessage &&
             xev->xclient.message_type == icon->manager_atom &&
-            xev->xclient.data.l[1] == icon->selection_atom)
+            (Atom) xev->xclient.data.l[1] == icon->selection_atom)
         {
                 egg_tray_icon_update_manager_window (icon, TRUE);
         }
@@ -402,7 +403,7 @@ make_transparent (GtkWidget *widget, gpointer user_data)
                           G_CALLBACK (transparent_expose_event), NULL);
         g_signal_connect_after (widget, "style_set",
                                 G_CALLBACK (make_transparent_again), NULL);
-}	
+}
 
 static void
 egg_tray_icon_manager_window_destroyed (EggTrayIcon *icon)

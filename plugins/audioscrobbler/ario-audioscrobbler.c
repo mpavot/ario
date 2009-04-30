@@ -248,7 +248,7 @@ ario_audioscrobbler_constructor (GType type,
 
         /* Invoke parent constructor. */
         ArioAudioscrobblerClass *klass;
-        GObjectClass *parent_class;  
+        GObjectClass *parent_class;
         klass = ARIO_AUDIOSCROBBLER_CLASS (g_type_class_peek (ARIO_TYPE_AUDIOSCROBBLER));
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         obj = parent_class->constructor (type,
@@ -395,7 +395,7 @@ ario_audioscrobbler_new (void)
 
 #if defined(HAVE_LIBSOUP_2_4)
 static SoupURI *
-ario_audioscrobbler_get_libsoup_uri ()
+ario_audioscrobbler_get_libsoup_uri (void)
 {
         ARIO_LOG_FUNCTION_START
         SoupURI *uri = NULL;
@@ -414,7 +414,7 @@ ario_audioscrobbler_get_libsoup_uri ()
 }
 #elif defined(HAVE_LIBSOUP_2_2)
 static SoupUri *
-ario_audioscrobbler_get_libsoup_uri ()
+ario_audioscrobbler_get_libsoup_uri (void)
 {
         ARIO_LOG_FUNCTION_START
         SoupUri *uri = NULL;
@@ -439,7 +439,7 @@ ario_audioscrobbler_add_timeout (ArioAudioscrobbler *audioscrobbler)
         ARIO_LOG_FUNCTION_START
         if (!audioscrobbler->priv->timeout_id) {
                 ARIO_LOG_DBG ("Adding Audioscrobbler timer (15 seconds)");
-                audioscrobbler->priv->timeout_id = 
+                audioscrobbler->priv->timeout_id =
                         g_timeout_add (15000, (GSourceFunc) ario_audioscrobbler_timeout_cb,
                                        audioscrobbler);
         }
@@ -453,7 +453,7 @@ ario_audioscrobbler_is_queueable (ArioServerSong *song)
         const char *artist;
         gulong duration;
 
-        /* TODO: check if the entry is appropriate for sending to 
+        /* TODO: check if the entry is appropriate for sending to
          * audioscrobbler
          */
 
@@ -510,7 +510,7 @@ ario_audioscrobbler_create_entry (ArioServerSong *song)
 static gboolean
 ario_audioscrobbler_add_to_queue (ArioAudioscrobbler *audioscrobbler,
                                   AudioscrobblerEntry *entry)
-{        
+{
         ARIO_LOG_FUNCTION_START
         if (g_queue_get_length (audioscrobbler->priv->queue) < MAX_QUEUE_SIZE){
                 g_queue_push_tail (audioscrobbler->priv->queue, entry);
@@ -579,7 +579,7 @@ ario_audioscrobbler_timeout_cb (ArioAudioscrobbler *audioscrobbler)
                 else
                         ario_audioscrobbler_save_queue (audioscrobbler);
         } else {
-                ARIO_LOG_DBG ("the queue is empty"); 
+                ARIO_LOG_DBG ("the queue is empty");
         }
         return TRUE;
 }
@@ -857,13 +857,13 @@ ario_audioscrobbler_build_authentication_data (ArioAudioscrobbler *audioscrobble
          *   - Must have md5_challenge
          *   - Queue must not be empty
          */
-        if ((audioscrobbler->priv->username == NULL) 
+        if ((audioscrobbler->priv->username == NULL)
             || (*audioscrobbler->priv->username == '\0')) {
                 ARIO_LOG_DBG ("No username set");
                 return NULL;
         }
 
-        if ((audioscrobbler->priv->password == NULL) 
+        if ((audioscrobbler->priv->password == NULL)
             || (*audioscrobbler->priv->password == '\0')) {
                 ARIO_LOG_DBG ("No password set");
                 return NULL;
@@ -892,7 +892,7 @@ ario_audioscrobbler_build_authentication_data (ArioAudioscrobbler *audioscrobble
                                 NULL);
         md5_response = ario_util_md5 (md5_temp);
 
-        username = soup_uri_encode (audioscrobbler->priv->username, 
+        username = soup_uri_encode (audioscrobbler->priv->username,
                                     EXTRA_URI_ENCODE_CHARS);
         post_data = g_strdup_printf ("u=%s&s=%s&", username, md5_response);
 
@@ -934,7 +934,7 @@ ario_audioscrobbler_build_post_data (ArioAudioscrobbler *audioscrobbler,
                 post_data = new;
 
                 /* add to submission list */
-                g_queue_push_tail (audioscrobbler->priv->submission, 
+                g_queue_push_tail (audioscrobbler->priv->submission,
                                    entry);
                 i++;
         } while ((!g_queue_is_empty(audioscrobbler->priv->queue)) && (i < MAX_SUBMIT_SIZE));
@@ -1150,7 +1150,7 @@ inline struct tm* localtime_r (const time_t *clock, struct tm *result)
         memcpy(result,localtime(clock),sizeof(*result));
         return result;
 }
-#endif 
+#endif
 
 /* Based on evolution/mail/message-list.c:filter_date() */
 static char *
@@ -1267,7 +1267,7 @@ ario_audioscrobbler_submit_queue_cb (SoupMessage *msg, gpointer user_data)
                 ++audioscrobbler->priv->failures;
 
                 /* add failed submission entries back to queue */
-                ario_g_queue_concat (audioscrobbler->priv->submission, 
+                ario_g_queue_concat (audioscrobbler->priv->submission,
                                      audioscrobbler->priv->queue);
                 g_assert (g_queue_is_empty (audioscrobbler->priv->queue));
                 g_queue_free (audioscrobbler->priv->queue);
@@ -1604,18 +1604,18 @@ audioscrobbler_entry_encode (AudioscrobblerEntry *entry)
 
         encoded = g_new0 (AudioscrobblerEncodedEntry, 1);
 
-        encoded->artist = soup_uri_encode (entry->artist, 
+        encoded->artist = soup_uri_encode (entry->artist,
                                            EXTRA_URI_ENCODE_CHARS);
         encoded->title = soup_uri_encode (entry->title,
                                           EXTRA_URI_ENCODE_CHARS);
-        encoded->album = soup_uri_encode (entry->album, 
+        encoded->album = soup_uri_encode (entry->album,
                                           EXTRA_URI_ENCODE_CHARS);
 
         encoded->timestamp = g_new0 (gchar, 30);
         if (entry->encoded_play_time) {
                 encoded->timestamp = g_strndup (entry->encoded_play_time, 30);
         } else {
-                strftime (encoded->timestamp, 30, SCROBBLER_DATE_FORMAT, 
+                strftime (encoded->timestamp, 30, SCROBBLER_DATE_FORMAT,
                                 gmtime (&entry->play_time));
         }
 
@@ -1624,7 +1624,7 @@ audioscrobbler_entry_encode (AudioscrobblerEntry *entry)
         return encoded;
 }
 
-static 
+static
 void audioscrobbler_encoded_entry_free (AudioscrobblerEncodedEntry *entry)
 {
         ARIO_LOG_FUNCTION_START
@@ -1748,7 +1748,7 @@ ario_audioscrobbler_save_entry_to_string (AudioscrobblerEntry *entry)
 
         encoded = audioscrobbler_entry_encode (entry);
         result = g_strdup_printf ("a=%s&t=%s&b=%s&m=&l=%d&i=%s\n",
-                                  encoded->artist, 
+                                  encoded->artist,
                                   encoded->title,
                                   encoded->album,
                                   encoded->length,
@@ -1804,12 +1804,12 @@ ario_audioscrobbler_print_queue (ArioAudioscrobbler *audioscrobbler, gboolean su
 
         if (submission) {
                 l = audioscrobbler->priv->submission->head;
-                ARIO_LOG_DBG ("Audioscrobbler submission (%d entries): ", 
+                ARIO_LOG_DBG ("Audioscrobbler submission (%d entries): ",
                               g_queue_get_length (audioscrobbler->priv->submission));
 
         } else {
                 l = audioscrobbler->priv->queue->head;
-                ARIO_LOG_DBG ("Audioscrobbler queue (%d entries): ", 
+                ARIO_LOG_DBG ("Audioscrobbler queue (%d entries): ",
                               g_queue_get_length (audioscrobbler->priv->queue));
         }
 
@@ -1824,7 +1824,7 @@ ario_audioscrobbler_print_queue (ArioAudioscrobbler *audioscrobbler, gboolean su
                 if (entry->encoded_play_time) {
                         ARIO_LOG_DBG ("  timestamp: %s", entry->encoded_play_time);
                 } else {
-                        strftime (timestamp, 30, SCROBBLER_DATE_FORMAT, 
+                        strftime (timestamp, 30, SCROBBLER_DATE_FORMAT,
                                         gmtime (&entry->play_time));
                         ARIO_LOG_DBG ("  timestamp: %s", timestamp);
                 }
