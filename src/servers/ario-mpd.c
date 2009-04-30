@@ -18,24 +18,27 @@
  */
 
 #include "servers/ario-mpd.h"
+#include "config.h"
 #include <gtk/gtk.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <limits.h>
 #include <glib/gi18n.h>
-#include "lib/ario-conf.h"
+
+#include "ario-debug.h"
 #include "ario-profiles.h"
 #include "preferences/ario-preferences.h"
-#include "ario-debug.h"
+#include "lib/ario-conf.h"
 #include "widgets/ario-playlist.h"
-#include "config.h"
 
+/* Number of milliseconds in 1 second */
 #define ONE_SECOND 1000
+
+/* Timeout for retrieve of data on MPD */
 #define NORMAL_TIMEOUT 500
 
+/* Reconnect after 0.5 second in case of error */
 #define RECONNECT_INIT_TIMEOUT 500
+/* Multiply reconnection timeout by 2 after each tentative */
 #define RECONNECT_FACTOR 2
+/* Try to reconnect 5 times */
 #define RECONNECT_TENTATIVES 5
 
 static void ario_mpd_finalize (GObject *object);
@@ -89,13 +92,13 @@ static GList * ario_mpd_get_songs_info (GSList *paths);
 static ArioServerFileList * ario_mpd_list_files (const char *path,
                                                  gboolean recursive);
 
+/* Private attributes */
 struct ArioMpdPrivate
 {
         mpd_Status *status;
         mpd_Connection *connection;
         mpd_Stats *stats;
 
-        int use_count;
         guint timeout_id;
 
         gboolean support_empty_tags;
@@ -120,8 +123,10 @@ ario_mpd_class_init (ArioMpdClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioServerInterfaceClass *server_class = ARIO_SERVER_INTERFACE_CLASS (klass);
 
+        /* GObject virtual methods */
         object_class->finalize = ario_mpd_finalize;
 
+        /* ArioServerInterface virtual methods */
         server_class->connect = ario_mpd_connect;
         server_class->disconnect = ario_mpd_disconnect;
         server_class->is_connected = ario_mpd_is_connected;
@@ -159,6 +164,7 @@ ario_mpd_class_init (ArioMpdClass *klass)
         server_class->get_songs_info = ario_mpd_get_songs_info;
         server_class->list_files = ario_mpd_list_files;
 
+        /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioMpdPrivate));
 }
 
@@ -168,7 +174,6 @@ ario_mpd_init (ArioMpd *mpd)
         ARIO_LOG_FUNCTION_START;
         mpd->priv = ARIO_MPD_GET_PRIVATE (mpd);
 
-        mpd->priv->use_count = 0;
         mpd->priv->timeout_id = 0;
 }
 
@@ -184,15 +189,18 @@ ario_mpd_finalize (GObject *object)
         mpd = ARIO_MPD (object);
         g_return_if_fail (mpd->priv != NULL);
 
+        /* Close connection to MPD */
         if (mpd->priv->connection)
                 mpd_closeConnection (mpd->priv->connection);
 
+        /* Free a few data */
         if (mpd->priv->status)
                 mpd_freeStatus (mpd->priv->status);
 
         if (mpd->priv->stats)
                 mpd_freeStats (mpd->priv->stats);
 
+        /* Stop retrieving data from MPD */
         if (mpd->priv->timeout_id)
                 g_source_remove (mpd->priv->timeout_id);
 
@@ -205,6 +213,7 @@ ArioMpd *
 ario_mpd_get_instance (ArioServer *server)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Create instance if needed */
         if (!instance) {
                 instance = g_object_new (TYPE_ARIO_MPD, NULL);
                 g_return_val_if_fail (instance->priv != NULL, NULL);
@@ -221,8 +230,10 @@ ario_mpd_check_idle (ArioMpd *mpd)
 #ifdef ENABLE_MPDIDLE
         char *command;
 
+        /* Get list of supported commands */
         mpd_sendCommandsCommand (mpd->priv->connection);
         while ((command = mpd_getNextCommand (mpd->priv->connection))) {
+                /* Detect if idle command is supported */
                 if (!strcmp (command, "idle"))
                         mpd->priv->support_idle = TRUE;
                 g_free (command);
@@ -245,6 +256,7 @@ ario_mpd_update_elapsed (gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* If in idle mode: update elapsed time every seconds when MPD is playing */
         if (ario_server_get_current_state() == MPD_STATUS_STATE_PLAY) {
                 ++instance->priv->elapsed;
                 g_object_set (G_OBJECT (instance), "elapsed", instance->priv->elapsed, NULL);
@@ -271,6 +283,7 @@ ario_mpd_idle_cb (mpd_Connection *connection,
 {
         ARIO_LOG_FUNCTION_START;
 
+        /* Update MPD status */
         /* TODO: Be more selective depending on flags */
         if (flags & IDLE_DATABASE
             || flags & IDLE_PLAYLIST
@@ -279,9 +292,11 @@ ario_mpd_idle_cb (mpd_Connection *connection,
             || flags & IDLE_OPTIONS)
                 ario_mpd_update_status ();
 
+        /* Stored playlists changed, update list */
         if (flags & IDLE_STORED_PLAYLIST)
                 g_signal_emit_by_name (G_OBJECT (server_instance), "storedplaylists_changed");
 
+        /* Diconnected from MPD: check errors */
         if (flags & IDLE_DISCONNECT)
                 ario_mpd_check_errors ();
 
@@ -300,11 +315,12 @@ ario_mpd_connect_to (ArioMpd *mpd,
         gchar *password;
         mpd_Connection *connection;
 
+        /* Connect to MPD */
         connection = mpd_newConnection (hostname, port, timeout);
-
         if (!connection)
                 return FALSE;
 
+        /* Check connection errors */
         if  (connection->error) {
                 ARIO_LOG_ERROR("%s", connection->errorStr);
                 mpd_clearError (connection);
@@ -312,6 +328,7 @@ ario_mpd_connect_to (ArioMpd *mpd,
                 return FALSE;
         }
 
+        /* Send password if one is set in profile */
         password = ario_profiles_get_current (ario_profiles_get ())->password;
         if (password) {
                 mpd_sendPasswordCommand (connection, password);
@@ -320,16 +337,21 @@ ario_mpd_connect_to (ArioMpd *mpd,
 
         mpd->priv->connection = connection;
 
+        /* Check if idle is supported by MPD server */
         ario_mpd_check_idle (mpd);
 
         if (instance->priv->support_idle && instance->priv->connection) {
 #ifdef ENABLE_MPDIDLE
+                /* Initialise Idle mode */
                 mpd_glibInit (instance->priv->connection);
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
                 g_idle_add ((GSourceFunc) ario_mpd_update_status, NULL);
+
+                /* Launch timeout to update elapsed time */
                 ario_mpd_launch_idle_timeout ();
 #endif
         } else {
+                /* Launch timeout for data retrieve from MPD */
                 ario_mpd_launch_timeout ();
         }
 
