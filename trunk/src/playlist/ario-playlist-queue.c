@@ -29,38 +29,13 @@
 
 static void ario_playlist_queue_class_init (ArioPlaylistQueueClass *klass);
 static void ario_playlist_queue_init (ArioPlaylistQueue *playlist_queue);
-static void ario_playlist_queue_finalize (GObject *object);
 static void ario_playlist_queue_next_song (ArioPlaylistMode *playlist_mode,
                                            ArioPlaylist *playlist);
 
 static GObjectClass *parent_class = NULL;
 
-GType
-ario_playlist_queue_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START;
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPlaylistQueueClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_playlist_queue_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPlaylistQueue),
-                        0,
-                        (GInstanceInitFunc) ario_playlist_queue_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_PLAYLIST_MODE,
-                                               "ArioPlaylistQueue",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_PLAYLIST_QUEUE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_QUEUE, ArioPlaylistQueuePrivate))
+G_DEFINE_TYPE (ArioPlaylistQueue, ario_playlist_queue, ARIO_TYPE_PLAYLIST_MODE)
 
 static gchar *
 ario_playlist_queue_get_id (ArioPlaylistMode *playlist_mode)
@@ -78,12 +53,9 @@ static void
 ario_playlist_queue_class_init (ArioPlaylistQueueClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPlaylistModeClass *playlist_mode_class = ARIO_PLAYLIST_MODE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_playlist_queue_finalize;
 
         playlist_mode_class->get_id = ario_playlist_queue_get_id;
         playlist_mode_class->get_name = ario_playlist_queue_get_name;
@@ -94,20 +66,6 @@ static void
 ario_playlist_queue_init (ArioPlaylistQueue *playlist_queue)
 {
         ARIO_LOG_FUNCTION_START;
-}
-
-static void
-ario_playlist_queue_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioPlaylistQueue *playlist_queue;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_PLAYLIST_QUEUE (object));
-
-        playlist_queue = ARIO_PLAYLIST_QUEUE (object);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioPlaylistMode*

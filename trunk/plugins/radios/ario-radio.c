@@ -260,7 +260,7 @@ ario_radio_finalize (GObject *object)
 {
         ARIO_LOG_FUNCTION_START;
         ArioRadio *radio;
-        int i;
+        guint i;
 
         g_return_if_fail (object != NULL);
         g_return_if_fail (IS_ARIO_RADIO (object));

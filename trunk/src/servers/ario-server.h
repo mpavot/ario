@@ -142,10 +142,10 @@ typedef struct
 
         void (*state_changed)           (ArioServer *server);
 
-        void (*volume_changed)          (ArioServer *server);
-
-        void (*elapsed_changed)         (ArioServer *server);
-
+        void (*volume_changed)          (ArioServer *server,
+                                         int volume);
+        void (*elapsed_changed)         (ArioServer *server,
+                                         int elapsed);
         void (*playlist_changed)        (ArioServer *server);
 
         void (*random_changed)          (ArioServer *server);

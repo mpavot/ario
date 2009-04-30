@@ -145,11 +145,11 @@ enum
 
 static GtkActionEntry shell_actions [] =
 {
-        { "File", NULL, N_("_File") },
-        { "Edit", NULL, N_("_Edit") },
-        { "View", NULL, N_("_View") },
-        { "Tool", NULL, N_("_Tool") },
-        { "Help", NULL, N_("_Help") },
+        { "File", NULL, N_("_File"), NULL, NULL, NULL },
+        { "Edit", NULL, N_("_Edit"), NULL, NULL, NULL },
+        { "View", NULL, N_("_View"), NULL, NULL, NULL },
+        { "Tool", NULL, N_("_Tool"), NULL, NULL, NULL },
+        { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
         { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>C",
                 NULL,

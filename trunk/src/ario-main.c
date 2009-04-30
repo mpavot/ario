@@ -43,8 +43,8 @@ static gboolean minimized = FALSE;
 
 #ifndef WIN32
 static void
-ario_main_on_message_received (const char *message,
-                               gpointer data)
+ario_main_on_message_received (G_GNUC_UNUSED const char *message,
+                               G_GNUC_UNUSED gpointer data)
 {
         ario_shell_present (shell);
 }
@@ -58,8 +58,8 @@ main (int argc, char *argv[])
         /* Parse options */
         GOptionContext *context;
         static const GOptionEntry options []  = {
-                { "minimized",           'm', 0, G_OPTION_ARG_NONE,         &minimized,           N_("Start minimized window"), NULL },
-                { NULL }
+                { "minimized", 'm', 0, G_OPTION_ARG_NONE, &minimized, N_("Start minimized window"), NULL },
+                { NULL, 0, 0, 0, NULL, NULL, NULL }
         };
 
         context = g_option_context_new (NULL);

@@ -240,11 +240,11 @@ static void ario_avahi_resolve_callback (AvahiServiceResolver *r,
                                          const char *name,
                                          const char *type,
                                          const char *domain,
-                                         const char *host_name,
+                                         AVAHI_GCC_UNUSED const char *host_name,
                                          const AvahiAddress *address,
                                          uint16_t port,
-                                         AvahiStringList *txt,
-                                         AvahiLookupResultFlags flags,
+                                         AVAHI_GCC_UNUSED AvahiStringList *txt,
+                                         AVAHI_GCC_UNUSED AvahiLookupResultFlags flags,
                                          AVAHI_GCC_UNUSED void *userdata)
 {
         ARIO_LOG_FUNCTION_START;

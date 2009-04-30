@@ -29,36 +29,11 @@
 
 static void ario_playlist_normal_class_init (ArioPlaylistNormalClass *klass);
 static void ario_playlist_normal_init (ArioPlaylistNormal *playlist_normal);
-static void ario_playlist_normal_finalize (GObject *object);
 
 static GObjectClass *parent_class = NULL;
 
-GType
-ario_playlist_normal_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START;
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPlaylistNormalClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_playlist_normal_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPlaylistNormal),
-                        0,
-                        (GInstanceInitFunc) ario_playlist_normal_init
-                };
-
-                type = g_type_register_static (ARIO_TYPE_PLAYLIST_MODE,
-                                               "ArioPlaylistNormal",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_PLAYLIST_NORMAL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_NORMAL, ArioPlaylistNormalPrivate))
+G_DEFINE_TYPE (ArioPlaylistNormal, ario_playlist_normal, ARIO_TYPE_PLAYLIST_MODE)
 
 static gchar *
 ario_playlist_normal_get_id (ArioPlaylistMode *playlist_mode)
@@ -76,12 +51,9 @@ static void
 ario_playlist_normal_class_init (ArioPlaylistNormalClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPlaylistModeClass *playlist_mode_class = ARIO_PLAYLIST_MODE_CLASS (klass);
 
         parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_playlist_normal_finalize;
 
         playlist_mode_class->get_id = ario_playlist_normal_get_id;
         playlist_mode_class->get_name = ario_playlist_normal_get_name;
@@ -91,20 +63,6 @@ static void
 ario_playlist_normal_init (ArioPlaylistNormal *playlist_normal)
 {
         ARIO_LOG_FUNCTION_START;
-}
-
-static void
-ario_playlist_normal_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioPlaylistNormal *playlist_normal;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_PLAYLIST_NORMAL (object));
-
-        playlist_normal = ARIO_PLAYLIST_NORMAL (object);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 ArioPlaylistMode*

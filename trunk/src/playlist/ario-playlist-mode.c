@@ -24,31 +24,8 @@
 static void ario_playlist_mode_class_init (ArioPlaylistModeClass *klass);
 static void ario_playlist_mode_init (ArioPlaylistMode *playlist_mode);
 
-GType
-ario_playlist_mode_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPlaylistModeClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_playlist_mode_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPlaylistMode),
-                        0,
-                        (GInstanceInitFunc) ario_playlist_mode_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioPlaylistMode",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_PLAYLIST_MODE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_MODE, ArioPlaylistModePrivate))
+G_DEFINE_TYPE (ArioPlaylistMode, ario_playlist_mode, G_TYPE_OBJECT)
 
 static void
 dummy_void (ArioPlaylistMode *playlist_mode,
@@ -68,7 +45,7 @@ dummy_char (ArioPlaylistMode *playlist_mode)
         return NULL;
 }
 
-static void 
+static void
 ario_playlist_mode_class_init (ArioPlaylistModeClass *klass)
 {
         klass->next_song = dummy_void;
