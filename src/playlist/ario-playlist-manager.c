@@ -32,7 +32,6 @@
 
 static void ario_playlist_manager_class_init (ArioPlaylistManagerClass *klass);
 static void ario_playlist_manager_init (ArioPlaylistManager *playlist_manager);
-static void ario_playlist_manager_finalize (GObject *object);
 
 struct ArioPlaylistManagerPrivate
 {
@@ -41,67 +40,21 @@ struct ArioPlaylistManagerPrivate
 
 static GObjectClass *parent_class = NULL;
 
-GType
-ario_playlist_manager_get_type (void)
-{
-        ARIO_LOG_FUNCTION_START;
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo our_info =
-                {
-                        sizeof (ArioPlaylistManagerClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) ario_playlist_manager_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (ArioPlaylistManager),
-                        0,
-                        (GInstanceInitFunc) ario_playlist_manager_init
-                };
-
-                type = g_type_register_static (G_TYPE_OBJECT,
-                                               "ArioPlaylistManager",
-                                               &our_info, 0);
-        }
-        return type;
-}
+#define ARIO_PLAYLIST_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_MANAGER, ArioPlaylistManagerPrivate))
+G_DEFINE_TYPE (ArioPlaylistManager, ario_playlist_manager, G_TYPE_OBJECT)
 
 static void
 ario_playlist_manager_class_init (ArioPlaylistManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
         parent_class = g_type_class_peek_parent (klass);
-
-        object_class->finalize = ario_playlist_manager_finalize;
 }
 
 static void
 ario_playlist_manager_init (ArioPlaylistManager *playlist_manager)
 {
         ARIO_LOG_FUNCTION_START;
-
         playlist_manager->priv = g_new0 (ArioPlaylistManagerPrivate, 1);
-}
-
-static void
-ario_playlist_manager_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioPlaylistManager *playlist_manager;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_PLAYLIST_MANAGER (object));
-
-        playlist_manager = ARIO_PLAYLIST_MANAGER (object);
-
-        g_return_if_fail (playlist_manager->priv != NULL);
-        g_free (playlist_manager->priv);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void

@@ -300,7 +300,7 @@ ario_filesystem_shutdown (ArioSource *source)
 {
         ArioFilesystem *filesystem = ARIO_FILESYSTEM (source);
         int pos;
-        int i;
+        guint i;
 
         /* Save hpaned position */
         pos = gtk_paned_get_position (GTK_PANED (filesystem->priv->paned));
