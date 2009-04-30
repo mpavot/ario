@@ -189,13 +189,15 @@ ario_browser_preferences_treesnb_changed_idle (ArioBrowserPreferences *browser_p
         const gchar *conf;
         gchar *new_conf, *tmp;
         int old_nb, new_nb, i;
+        gdouble new_nb_double;
 
         conf = ario_conf_get_string (PREF_BROWSER_TREES, PREF_BROWSER_TREES_DEFAULT);
 
         splited_conf = g_strsplit (conf, ",", MAX_TREE_NB);
         for (old_nb = 0; splited_conf[old_nb]; ++old_nb) {}
 
-        new_nb = (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (browser_preferences->priv->treesnb_spinbutton));
+        new_nb_double = gtk_spin_button_get_value (GTK_SPIN_BUTTON (browser_preferences->priv->treesnb_spinbutton));
+        new_nb = (int) new_nb_double;
         if (new_nb > old_nb) {
                 new_conf = g_strdup_printf ("%s,0", conf);
                 ario_conf_set_string (PREF_BROWSER_TREES, new_conf);

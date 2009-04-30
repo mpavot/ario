@@ -1067,7 +1067,7 @@ ario_playlist_get_indice (GtkTreePath *path)
 }
 
 static void
-ario_playlist_activate_selected ()
+ario_playlist_activate_selected (void)
 {
         ARIO_LOG_FUNCTION_START;
         GList *paths;

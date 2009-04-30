@@ -244,7 +244,7 @@ ario_conf_save_foreach (gchar *key,
 }
 
 static gboolean
-ario_conf_save (gpointer data)
+ario_conf_save (G_GNUC_UNUSED gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         xmlNodePtr cur;

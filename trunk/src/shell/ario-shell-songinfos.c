@@ -101,7 +101,7 @@ ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos)
 }
 
 static gboolean
-ario_shell_songinfos_can_edit_tags ()
+ario_shell_songinfos_can_edit_tags (void)
 {
         ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_TAGLIB

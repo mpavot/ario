@@ -441,7 +441,8 @@ ario_connection_widget_port_changed_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         /* Modify current profile */
-        connection_widget->priv->current_profile->port = (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_widget->priv->port_spinbutton));
+        gdouble port = gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_widget->priv->port_spinbutton));
+        connection_widget->priv->current_profile->port = (int) port;
 }
 
 void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,

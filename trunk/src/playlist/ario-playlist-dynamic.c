@@ -246,8 +246,8 @@ ario_playlist_dynamic_nbitems_changed_cb (GtkWidget *widget,
                                           ArioPlaylistMode *playlist_mode)
 {
         ARIO_LOG_FUNCTION_START;
-        ario_conf_set_integer (PREF_DYNAMIC_NBITEMS,
-                               (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
+        gdouble nbitems = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+        ario_conf_set_integer (PREF_DYNAMIC_NBITEMS, (int) nbitems);
 }
 
 static GtkWidget*
@@ -261,6 +261,7 @@ ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode)
         GtkCellRenderer *renderer;
         GtkTreeIter iter;
         int i;
+        int nbitems;
 
         hbox = gtk_hbox_new (FALSE, 4);
         gtk_box_pack_start (GTK_BOX (hbox),
@@ -277,8 +278,8 @@ ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode)
 
         spinbutton = gtk_spin_button_new (adj,
                                           1.0, 0);
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinbutton),
-                                   (double) ario_conf_get_integer (PREF_DYNAMIC_NBITEMS, PREF_DYNAMIC_NBITEMS_DEFAULT));
+        nbitems = ario_conf_get_integer (PREF_DYNAMIC_NBITEMS, PREF_DYNAMIC_NBITEMS_DEFAULT);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spinbutton), (double) nbitems);
 
         g_signal_connect (G_OBJECT (spinbutton),
                           "value_changed",

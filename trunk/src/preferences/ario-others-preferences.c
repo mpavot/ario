@@ -93,9 +93,9 @@ ario_others_preferences_new (void)
                 GTK_WIDGET (gtk_builder_get_object (builder, "instance_checkbutton"));
         others_preferences->priv->proxy_check =
                 GTK_WIDGET (gtk_builder_get_object (builder, "proxy_checkbutton"));
-        others_preferences->priv->proxy_address_entry = 
+        others_preferences->priv->proxy_address_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "proxy_address_entry"));
-        others_preferences->priv->proxy_port_spinbutton = 
+        others_preferences->priv->proxy_port_spinbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "proxy_port_spinbutton"));
 
         gtk_builder_helpers_boldify_label (builder, "interface_label");
@@ -126,7 +126,7 @@ ario_others_preferences_sync_others (ArioOthersPreferences *others_preferences)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (others_preferences->priv->oneinstance_check),
                                       ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT));
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (others_preferences->priv->proxy_check), 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (others_preferences->priv->proxy_check),
                                       ario_conf_get_boolean (PREF_USE_PROXY, PREF_USE_PROXY_DEFAULT));
 
         proxy_address = ario_conf_get_string (PREF_PROXY_ADDRESS, PREF_PROXY_ADDRESS_DEFAULT);
@@ -177,8 +177,8 @@ ario_others_preferences_proxy_port_changed_cb (GtkWidget *widget,
                                                ArioOthersPreferences *others_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        ario_conf_set_integer (PREF_PROXY_PORT,
-                               (int) gtk_spin_button_get_value (GTK_SPIN_BUTTON (others_preferences->priv->proxy_port_spinbutton)));
+        gdouble port = gtk_spin_button_get_value (GTK_SPIN_BUTTON (others_preferences->priv->proxy_port_spinbutton));
+        ario_conf_set_integer (PREF_PROXY_PORT, (int) port);
 }
 
 void

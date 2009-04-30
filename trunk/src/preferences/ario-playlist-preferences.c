@@ -32,25 +32,25 @@
 
 static void ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_track_toogled_cb (GtkCheckButton *butt,
-                                                               ArioPlaylistPreferences *playlist_preferences);
+                                                                 ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_title_toogled_cb (GtkCheckButton *butt,
-                                                               ArioPlaylistPreferences *playlist_preferences);
+                                                                 ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_artist_toogled_cb (GtkCheckButton *butt,
-                                                                ArioPlaylistPreferences *playlist_preferences);
-G_MODULE_EXPORT void ario_playlist_preferences_album_toogled_cb (GtkCheckButton *butt,
-                                                               ArioPlaylistPreferences *playlist_preferences);
-G_MODULE_EXPORT void ario_playlist_preferences_genre_toogled_cb (GtkCheckButton *butt,
-                                                               ArioPlaylistPreferences *playlist_preferences);
-G_MODULE_EXPORT void ario_playlist_preferences_duration_toogled_cb (GtkCheckButton *butt,
                                                                   ArioPlaylistPreferences *playlist_preferences);
-G_MODULE_EXPORT void ario_playlist_preferences_file_toogled_cb (GtkCheckButton *butt,
-                                                              ArioPlaylistPreferences *playlist_preferences);
-G_MODULE_EXPORT void ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
-                                                              ArioPlaylistPreferences *playlist_preferences);
-G_MODULE_EXPORT void ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
+G_MODULE_EXPORT void ario_playlist_preferences_album_toogled_cb (GtkCheckButton *butt,
+                                                                 ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_genre_toogled_cb (GtkCheckButton *butt,
+                                                                 ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_duration_toogled_cb (GtkCheckButton *butt,
                                                                     ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_file_toogled_cb (GtkCheckButton *butt,
+                                                                ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
+                                                                ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
+                                                                      ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
-                                                                             ArioPlaylistPreferences *playlist_preferences);
+                                                                         ArioPlaylistPreferences *playlist_preferences);
 
 struct ArioPlaylistPreferencesPrivate
 {
@@ -201,7 +201,7 @@ ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_prefe
 
 void
 ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
-                                                        ArioPlaylistPreferences *playlist_preferences)
+                                                    ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         GtkTreeIter iter;
@@ -236,7 +236,7 @@ ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
 
 void
 ario_playlist_preferences_track_toogled_cb (GtkCheckButton *butt,
-                                          ArioPlaylistPreferences *playlist_preferences)
+                                            ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_TRACK_COLUMN_VISIBLE,
@@ -245,7 +245,7 @@ ario_playlist_preferences_track_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_title_toogled_cb (GtkCheckButton *butt,
-                                          ArioPlaylistPreferences *playlist_preferences)
+                                            ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_TITLE_COLUMN_VISIBLE,
@@ -254,7 +254,7 @@ ario_playlist_preferences_title_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_artist_toogled_cb (GtkCheckButton *butt,
-                                           ArioPlaylistPreferences *playlist_preferences)
+                                             ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_ARTIST_COLUMN_VISIBLE,
@@ -263,7 +263,7 @@ ario_playlist_preferences_artist_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_album_toogled_cb (GtkCheckButton *butt,
-                                          ArioPlaylistPreferences *playlist_preferences)
+                                            ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_ALBUM_COLUMN_VISIBLE,
@@ -272,7 +272,7 @@ ario_playlist_preferences_album_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_genre_toogled_cb (GtkCheckButton *butt,
-                                          ArioPlaylistPreferences *playlist_preferences)
+                                            ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_GENRE_COLUMN_VISIBLE,
@@ -281,7 +281,7 @@ ario_playlist_preferences_genre_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_duration_toogled_cb (GtkCheckButton *butt,
-                                             ArioPlaylistPreferences *playlist_preferences)
+                                               ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_DURATION_COLUMN_VISIBLE,
@@ -290,7 +290,7 @@ ario_playlist_preferences_duration_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_file_toogled_cb (GtkCheckButton *butt,
-                                         ArioPlaylistPreferences *playlist_preferences)
+                                           ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_FILE_COLUMN_VISIBLE,
@@ -299,7 +299,7 @@ ario_playlist_preferences_file_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
-                                         ArioPlaylistPreferences *playlist_preferences)
+                                           ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_DATE_COLUMN_VISIBLE,
@@ -308,7 +308,7 @@ ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
 
 void
 ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
-                                               ArioPlaylistPreferences *playlist_preferences)
+                                                 ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_PLAYLIST_AUTOSCROLL,
