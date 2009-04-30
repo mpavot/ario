@@ -45,7 +45,7 @@ G_BEGIN_DECLS
  */
 typedef struct _ArioPlugin ArioPlugin;
 
-struct _ArioPlugin 
+struct _ArioPlugin
 {
         GObject parent;
 };
@@ -55,7 +55,7 @@ struct _ArioPlugin
  */
 typedef struct _ArioPluginClass ArioPluginClass;
 
-struct _ArioPluginClass 
+struct _ArioPluginClass
 {
         GObjectClass parent_class;
 
@@ -135,7 +135,8 @@ register_ario_plugin (GTypeModule *module)                                      
                 NULL, /* class_data */                                          \
                 sizeof (PluginName),                                            \
                 0, /* n_preallocs */                                            \
-                (GInstanceInitFunc) plugin_name##_init                          \
+                (GInstanceInitFunc) plugin_name##_init,                         \
+                NULL                                                            \
         };                                                                      \
         \
         ARIO_LOG_DBG ("Registering " #PluginName);                              \
