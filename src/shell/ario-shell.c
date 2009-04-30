@@ -652,8 +652,11 @@ ario_shell_set_visibility (ArioShell *shell,
         switch (state)
         {
         case VISIBILITY_HIDDEN:
+                if (shell->priv->visible)
+                        ario_shell_set_visibility (shell, VISIBILITY_TOGGLE);
+                break;
         case VISIBILITY_VISIBLE:
-                if (shell->priv->visible != state)
+                if (!shell->priv->visible)
                         ario_shell_set_visibility (shell, VISIBILITY_TOGGLE);
                 break;
         case VISIBILITY_TOGGLE:
@@ -675,7 +678,7 @@ ario_shell_set_visibility (ArioShell *shell,
 
                         if (shell->priv->maximized)
                                 gtk_window_maximize (GTK_WINDOW (shell));
-                        gtk_widget_show (GTK_WIDGET(shell));
+                        gtk_widget_show_all (GTK_WIDGET(shell));
                 } else {
                         /* Save window state, size and position */
                         shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
