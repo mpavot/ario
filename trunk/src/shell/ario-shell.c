@@ -522,9 +522,6 @@ ario_shell_construct (ArioShell *shell,
                             shell->priv->status_bar,
                             FALSE, FALSE, 0);
 
-        /* Synchronize main window state with preferences */
-        ario_shell_sync_window_state (shell);
-
         /* Add vbox to main window */
         gtk_container_add (GTK_CONTAINER (shell), vbox);
 
@@ -539,6 +536,9 @@ ario_shell_construct (ArioShell *shell,
         } else {
                 ario_shell_show (shell, minimized);
         }
+
+        /* Synchronize main window state with preferences */
+        ario_shell_sync_window_state (shell);
 
         /* Synchronize status bar visibility with preferences */
         ario_shell_sync_statusbar_visibility (shell);
