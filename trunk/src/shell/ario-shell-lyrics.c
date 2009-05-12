@@ -43,7 +43,7 @@ static void ario_shell_lyrics_state_changed_cb (ArioServer *server,
 #define BASE_TITLE _("Lyrics")
 
 struct ArioShellLyricsPrivate
-{      
+{
         GtkWidget *lyrics_editor;
 };
 
@@ -113,7 +113,9 @@ ario_shell_lyrics_new (void)
         shell_lyrics->priv->lyrics_editor = ario_lyrics_editor_new ();
 
         childs_list = gtk_container_get_children (GTK_CONTAINER (shell_lyrics->priv->lyrics_editor));
+        g_return_val_if_fail (childs_list, NULL);
         hbox = g_list_last (childs_list)->data;
+        g_list_free (childs_list);
         gtk_box_pack_end (GTK_BOX (hbox),
                           close_button,
                           FALSE, FALSE, 0);
