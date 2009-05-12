@@ -892,9 +892,14 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
 #ifdef ENABLE_EGGTRAYICON
+        GList *childs_list;
+
         /* Remove current icon */
+        childs_list = gtk_container_get_children (GTK_CONTAINER (icon->priv->ebox));
+        g_return_if_fail (childs_list);
         gtk_container_remove (GTK_CONTAINER (icon->priv->ebox),
-                              GTK_WIDGET (gtk_container_get_children (GTK_CONTAINER (icon->priv->ebox))->data));
+                              GTK_WIDGET (childs_list->data));
+        g_list_free (childs_list);
 
         switch (ario_server_get_current_state ()) {
         case MPD_STATUS_STATE_PLAY:
