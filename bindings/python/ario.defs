@@ -16,7 +16,7 @@
 
 (define-object Shell
   (in-module "Ario")
-  (parent "GObject")
+  (parent "GtkWindow")
   (c-name "ArioShell")
   (gtype-id "ARIO_TYPE_SHELL")
 )
@@ -100,6 +100,11 @@
   (return-type "GSList*")
 )
 
+(define-function ario_plugin_get_plugin_data_paths
+  (c-name "ario_plugin_get_plugin_data_paths")
+  (return-type "GSList*")
+)
+
 (define-function ario_plugin_find_file
   (c-name "ario_plugin_find_file")
   (return-type "char*")
@@ -155,6 +160,9 @@
 (define-function ario_server_update_db
   (c-name "ario_server_update_db")
   (return-type "none")
+  (parameters
+    '("const-gchar*" "path")
+  )
 )
 
 (define-function ario_server_list_tags
@@ -200,7 +208,7 @@
   (c-name "ario_server_get_playlist_changes")
   (return-type "GSList*")
   (parameters
-    '("int" "playlist_id")
+    '("gint64" "playlist_id")
   )
 )
 
@@ -266,7 +274,7 @@
 
 (define-function ario_server_get_current_playlist_id
   (c-name "ario_server_get_current_playlist_id")
-  (return-type "int")
+  (return-type "gint64")
 )
 
 (define-function ario_server_get_current_playlist_length
@@ -533,6 +541,93 @@
   (return-type "gchar**")
 )
 
+(define-method get_tag
+  (of-object "ArioServerSong")
+  (c-name "ario_server_song_get_tag")
+  (return-type "const-gchar*")
+  (parameters
+    '("ArioServerTag" "tag")
+  )
+)
+
+(define-function ario_server_playlist_add_songs
+  (c-name "ario_server_playlist_add_songs")
+  (return-type "none")
+  (parameters
+    '("const-GSList*" "songs")
+    '("const-gint" "pos")
+    '("const-gboolean" "play")
+  )
+)
+
+(define-function ario_server_playlist_add_dir
+  (c-name "ario_server_playlist_add_dir")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "dir")
+    '("const-gint" "pos")
+    '("const-gboolean" "play")
+  )
+)
+
+(define-function ario_server_playlist_add_criterias
+  (c-name "ario_server_playlist_add_criterias")
+  (return-type "none")
+  (parameters
+    '("const-GSList*" "criterias")
+    '("const-gint" "pos")
+    '("const-gboolean" "play")
+    '("const-gint" "nb_entries")
+  )
+)
+
+(define-function ario_server_playlist_append_artists
+  (c-name "ario_server_playlist_append_artists")
+  (return-type "none")
+  (parameters
+    '("const-GSList*" "artists")
+    '("const-gboolean" "play")
+    '("const-gint" "nb_entries")
+  )
+)
+
+(define-function ario_server_playlist_append_songs
+  (c-name "ario_server_playlist_append_songs")
+  (return-type "none")
+  (parameters
+    '("const-GSList*" "songs")
+    '("const-gboolean" "play")
+  )
+)
+
+(define-function ario_server_playlist_append_server_songs
+  (c-name "ario_server_playlist_append_server_songs")
+  (return-type "none")
+  (parameters
+    '("const-GSList*" "songs")
+    '("const-gboolean" "play")
+  )
+)
+
+(define-function ario_server_playlist_append_dir
+  (c-name "ario_server_playlist_append_dir")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "dir")
+    '("const-gboolean" "play")
+  )
+)
+
+(define-function ario_server_playlist_append_criterias
+  (c-name "ario_server_playlist_append_criterias")
+  (return-type "none")
+  (parameters
+    '("const-GSList*" "criterias")
+    '("const-gboolean" "play")
+    '("const-gint" "nb_entries")
+  )
+)
+
 
 
 ;; From ario-shell.h
@@ -576,12 +671,6 @@
   (parameters
     '("ArioVisibility" "state")
   )
-)
-
-(define-method restore_main_window
-  (of-object "ArioShell")
-  (c-name "ario_shell_restore_main_window")
-  (return-type "none")
 )
 
 
