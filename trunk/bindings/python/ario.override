@@ -16,5 +16,6 @@ modulename ario
 %%
 import gtk.Widget as PyGtkWidget_Type
 import gobject.GObject as PyGObject_Type
+import gtk.Window as PyGtkWindow_Type
 import gtk.VBox as PyGtkVBox_Type
 %%

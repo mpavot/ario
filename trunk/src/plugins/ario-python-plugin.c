@@ -244,6 +244,7 @@ ario_python_object_get_type (GTypeModule *module,
                 sizeof (ArioPythonObject),
                 0,              /* n_preallocs */
                 (GInstanceInitFunc) ario_python_object_init,
+                NULL
         };
 
         Py_INCREF (type);
