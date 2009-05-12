@@ -343,7 +343,7 @@ ario_storedplaylists_new (GtkUIManager *mgr,
 
         /* Signals to synchronize the storedplaylists with server */
         g_signal_connect_object (server,
-                                 "state_changed", G_CALLBACK (ario_storedplaylists_connectivity_changed_cb),
+                                 "connectivity_changed", G_CALLBACK (ario_storedplaylists_connectivity_changed_cb),
                                  storedplaylists, 0);
         g_signal_connect_object (server,
                                  "storedplaylists_changed", G_CALLBACK (ario_storedplaylists_storedplaylists_changed_cb),
