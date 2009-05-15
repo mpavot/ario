@@ -283,9 +283,9 @@ else
         echo "XMMS2 support (VERY EXPERIMENTAL) is:     DISABLED (--enable-xmms2)"
 fi
 if test x${enable_python} = xyes; then
-        echo "Python plugins support is:                ENABLED"
+        echo "Python plugins support (Experimental) is: ENABLED"
 else
-        echo "Python plugins support is:                DISABLED (--enable-python)"
+        echo "Python plugins support (Experimental) is: DISABLED (--enable-python)"
 fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"
@@ -318,9 +318,9 @@ else
         echo "Audioscrobbler support is:                DISABLED"
 fi
 if test x${enable_mpdidle} = xyes; then
-        echo "MPD 'idle' mode support is:               ENABLED"
+        echo "MPD 'idle' mode support (Experimental) is:ENABLED"
 else
-        echo "MPD 'idle' mode support is:               DISABLED (--enable-mpdidle)"
+        echo "MPD 'idle' mode support (Experimental) is:DISABLED (--enable-mpdidle)"
 fi
 if test x${enable_taglib} != xno; then
         echo "Taglib support is:                        ENABLED  (--disable-taglib)"
