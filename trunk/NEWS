@@ -1,38 +1,36 @@
-At revision 537
+At revision 606
 
 New features:
 Support tags edition if Ario is on the same computer as MPD
-Update elapsed text field when slider is moved (patch from Samuel Cuella <samuel.cuella@supinfo.com>)
 Improve XMMS 2 support (based on a patch from Samuel Cuella)
-2544475: go to currently playing: focus at middle of playlist
-Put plugins data files in /usr/share/ario/plugins instead of /usr/lib/ario/plugins
-Improve resizing of song-info window
+Feature request 2544475: go to currently playing song: focus at middle of playlist
+Goto playing song in library browser
 Add different playlists modes:
 - Normal
-- Queue
-- Dynamic playlist
-[2490517] "DJ Playlist" Option
-[1945679] Dynamic playlist with last fm
-Goto playing song in library browser
-2483907 : Add search panel in Playlist
-New organisation for preferences
-2212482 Use without a right-button
-2603132 Sort by track number instead of title
-Use wikipedia icon for menu entry
-Improve tray icon minimization
-#2671689 : tray icon: mute sound option on middle button click
+- Queue (Fetaure request 2490517)
+- Dynamic playlist (Feature request 1945679)
+Feature request 2483907: Add search panel in Playlist
+Feature request 2212482: Use Ario without a right-button
+Feature request 2603132: Sort songs by track number instead of title in library browser
+Feature request 2671689: tray icon: mute sound option on middle button click
+Update radio list (Patch from Emmanuel Lacour <elacour at users.sourceforge.net>
+Add possibility to copy songs in playlist instead of move
+Add AlbumArtist tag support
 
-Bug fixes and techniacal improvements:
-Audioscrobbler plug-in on W32.
+Bug fixes and technical improvements:
 Set song total time to 0 when music stopped
 Empty playlist on deconnection
 Replace Glade by GtkBuilder
-Remove deprecated GtkTooltips
 Fix drag & drop of several artists/genres/...
+Remove forbidden caracters in filenames
+Fix bug 2790479: "x-www-browser" is not common in Linux
+Fix bug 2790473: Cannot replace current playlist with 2nd or lower playlist
+Fix bug 2764239: (Unable to add a new radio when the list is empty)
+Fix bug 2691076: Drag drop not working (on 64 bits systems)
+Use GtkVolume instead of custom widget
 Improve performances and memory usage
-Remove forbidden caracters to filenames
+New translation: japanese
 Update translations
-Add croatian translation
 
 Windows:
 Move W32 compilation to CodeBlocks
