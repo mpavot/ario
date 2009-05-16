@@ -41,7 +41,7 @@ for %%a in (po\*.gmo) do (
 
 copy ..\deps\libgcrypt-1.2.2\bin\libgcrypt-11.dll bin
 copy ..\deps\libgcrypt-1.2.2\bin\libgpg-error-0.dll bin
-copy ..\deps\glib-2.16.6-1\bin\libgio-2.0-0.dll bin
+copy ..\deps\glib-2.20.1-1\bin\libgio-2.0-0.dll bin
 copy ..\deps\libsoup-2.4-1\bin\libsoup-2.4-1.dll bin
 copy ..\deps\curl-7.19.2\bin\libcurl.dll bin
 copy ..\deps\curl-7.19.2\bin\libeay32.dll bin
