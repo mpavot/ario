@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 13:25+0200\n"
-"PO-Revision-Date: 2009-03-01 07:20+0000\n"
+"POT-Creation-Date: 2009-05-16 15:34+0200\n"
+"PO-Revision-Date: 2009-03-23 22:28+0000\n"
 "Last-Translator: Manuel R. Ciosici <manuelciosici@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
+"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -79,7 +79,8 @@ msgstr "Directorul cu muzică:"
 msgid "Music server is on the same computer as Ario"
 msgstr "Server-ul de muzică este pe același computer ca și Ario"
 
-#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:712
+#. Create the widgets
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:766
 msgid "Name :"
 msgstr "Nume:"
 
@@ -166,7 +167,7 @@ msgstr "Descărcare copertă în curs"
 msgid "Local search"
 msgstr "Căutare locală"
 
-#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:120
 msgid "Search"
 msgstr "Căutare"
 
@@ -213,14 +214,14 @@ msgstr "Titlu :"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree-albums.c:196 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:219 ../src/widgets/ario-tray-icon.c:681
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:508
+#: ../src/widgets/ario-songlist.c:226 ../src/widgets/ario-tray-icon.c:740
 msgid "Album"
 msgstr "Album"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
-#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:204
-#: ../src/widgets/ario-tray-icon.c:679
+#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:211
+#: ../src/widgets/ario-tray-icon.c:738
 msgid "Artist"
 msgstr "Artist"
 
@@ -253,7 +254,7 @@ msgstr "Sari la cîntecul curent cînd un cantec nou este redat"
 msgid "Mode"
 msgstr ""
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:221
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Listă redare"
@@ -268,14 +269,14 @@ msgstr "Arată rîndurile"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-songs.c:98 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:189 ../src/widgets/ario-tray-icon.c:683
+#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:508
+#: ../src/widgets/ario-songlist.c:196 ../src/widgets/ario-tray-icon.c:742
 msgid "Title"
 msgstr "Titlu"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
-#: ../src/sources/ario-tree-songs.c:91 ../src/widgets/ario-playlist.c:508
+#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:508
 msgid "Track"
 msgstr "Piesă"
 
@@ -362,9 +363,8 @@ msgid "Uptime :"
 msgstr "Timp de la pornire :"
 
 #: ../data/ui/song-infos.ui.h:2
-#, fuzzy
 msgid "Album Artist :"
-msgstr "Artist:"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -471,35 +471,35 @@ msgstr "Coperta există deja. Doriţi să o înlocuiţi?"
 msgid "Music Directory"
 msgstr "Directorul de muzică"
 
-#: ../src/playlist/ario-playlist-dynamic.c:50
+#: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:51
+#: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:52
+#: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:53
+#: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:54
+#: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-dynamic.c:94
+#: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-queue.c:74
+#: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
 msgstr ""
 
-#: ../src/playlist/ario-playlist-normal.c:72
+#: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
 msgstr ""
 
@@ -547,15 +547,15 @@ msgstr "Neconectat"
 
 #: ../src/preferences/ario-server-preferences.c:188
 #: ../src/preferences/ario-server-preferences.c:279
-#: ../src/widgets/ario-status-bar.c:95
+#: ../src/widgets/ario-status-bar.c:100
 msgid "Updating..."
 msgstr "În curs de actualizare..."
 
-#: ../src/servers/ario-mpd.c:378
+#: ../src/servers/ario-mpd.c:407
 msgid "Connecting to server..."
 msgstr "Se conectează la server..."
 
-#: ../src/servers/ario-mpd.c:403
+#: ../src/servers/ario-mpd.c:435
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Nu se poate conecta la server. Verifică opțiunile de conectare."
 
@@ -578,9 +578,8 @@ msgstr "Numele fişierului"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/servers/ario-server.c:56
-#, fuzzy
 msgid "Album Artist"
-msgstr "Artist"
+msgstr ""
 
 #. MPD_TAG_ITEM_ALBUMARTIST
 #: ../src/servers/ario-server.c:57
@@ -593,66 +592,66 @@ msgstr "Oricare"
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:76
-#: ../src/sources/ario-storedplaylists.c:91
-#: ../src/sources/ario-storedplaylists.c:108
-#: ../plugins/filesystem/ario-filesystem.c:92
-#: ../plugins/filesystem/ario-filesystem.c:106
-#: ../plugins/radios/ario-radio.c:102
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:82
+#: ../src/sources/ario-storedplaylists.c:88
+#: ../src/sources/ario-storedplaylists.c:106
+#: ../plugins/filesystem/ario-filesystem.c:94
+#: ../plugins/filesystem/ario-filesystem.c:109
+#: ../plugins/radios/ario-radio.c:108
 msgid "_Add to playlist"
 msgstr "_Adaugă la lista de redare"
 
-#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:79
-#: ../src/sources/ario-storedplaylists.c:94
-#: ../src/sources/ario-storedplaylists.c:111
-#: ../plugins/filesystem/ario-filesystem.c:95
-#: ../plugins/filesystem/ario-filesystem.c:109
-#: ../plugins/radios/ario-radio.c:105
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:85
+#: ../src/sources/ario-storedplaylists.c:91
+#: ../src/sources/ario-storedplaylists.c:109
+#: ../plugins/filesystem/ario-filesystem.c:97
+#: ../plugins/filesystem/ario-filesystem.c:112
+#: ../plugins/radios/ario-radio.c:111
 msgid "Add and _play"
 msgstr "Adaugă și _redă"
 
-#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:82
-#: ../src/sources/ario-storedplaylists.c:97
-#: ../src/sources/ario-storedplaylists.c:114
-#: ../plugins/filesystem/ario-filesystem.c:98
-#: ../plugins/filesystem/ario-filesystem.c:112
-#: ../plugins/radios/ario-radio.c:108
+#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
+#: ../src/sources/ario-storedplaylists.c:94
+#: ../src/sources/ario-storedplaylists.c:112
+#: ../plugins/filesystem/ario-filesystem.c:100
+#: ../plugins/filesystem/ario-filesystem.c:115
+#: ../plugins/radios/ario-radio.c:114
 msgid "_Replace in playlist"
 msgstr "_Înlocuiește în lista de redare"
 
-#: ../src/sources/ario-browser.c:90
+#: ../src/sources/ario-browser.c:91
 msgid "Get the covers"
 msgstr "Ia coperţile"
 
-#: ../src/sources/ario-browser.c:93
+#: ../src/sources/ario-browser.c:94
 msgid "_Delete the covers"
 msgstr "_Şterge coperţile"
 
-#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
-#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:117
+#: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
+#: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
-#: ../plugins/filesystem/ario-filesystem.c:115
-#: ../plugins/radios/ario-radio.c:117
+#: ../plugins/filesystem/ario-filesystem.c:118
+#: ../plugins/radios/ario-radio.c:123
 msgid "_Properties"
 msgstr "_Proprietăţi"
 
-#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Colecţie"
 
-#: ../src/sources/ario-search.c:178
+#: ../src/sources/ario-search.c:186
 msgid "Add a search criteria"
 msgstr "Adăugaţi un criteriu de căutare"
 
-#: ../src/sources/ario-search.c:186
+#: ../src/sources/ario-search.c:197
 msgid "Search songs in the library"
 msgstr "Caută melodii in bibliotecă"
 
-#: ../src/sources/ario-search.c:356
+#: ../src/sources/ario-search.c:381
 msgid "Remove a search criteria"
 msgstr "Îndepărtează un criteriu de căutare"
 
-#: ../src/sources/ario-storedplaylists.c:100
+#: ../src/sources/ario-storedplaylists.c:97
 msgid "_Delete"
 msgstr "_Şterge"
 
@@ -660,16 +659,16 @@ msgstr "_Şterge"
 msgid "Playlists"
 msgstr "Liste de redare"
 
-#: ../src/sources/ario-storedplaylists.c:554
+#: ../src/sources/ario-storedplaylists.c:595
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Sigur vreţi să ştergeţi toate listele de redare selectate?"
 
-#: ../src/sources/ario-tree.c:762
+#: ../src/sources/ario-tree.c:838
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Ești sigur că dorești să înlături toate copertele selectate?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree-albums.c:183
+#: ../src/sources/ario-tree-albums.c:199
 msgid "Cover"
 msgstr "Coperta"
 
@@ -737,11 +736,11 @@ msgstr "Bară de s_tare"
 msgid "Upper part"
 msgstr "Partea superioară"
 
-#: ../src/shell/ario-shell.c:768
+#: ../src/shell/ario-shell.c:771
 msgid "GTK client for MPD"
 msgstr "Client GTK pentru MPD"
 
-#: ../src/shell/ario-shell.c:769
+#: ../src/shell/ario-shell.c:772
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -773,23 +772,32 @@ msgstr ""
 "  Bisericaru Sebastian https://launchpad.net/~tweety\n"
 "  Cosmin Stremţan https://launchpad.net/~cosmin-stremtan\n"
 "  Ionuț Jula https://launchpad.net/~ionutjula\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Adrian Harabulă https://launchpad.net/~opensoft\n"
+"  Bisericaru Sebastian https://launchpad.net/~tweety\n"
+"  Cosmin Stremţan https://launchpad.net/~cosmin-stremtan\n"
+"  Ionuț Jula https://launchpad.net/~ionutjula\n"
+"  Manuel R. Ciosici https://launchpad.net/~manuelciosici\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1109
+#: ../src/shell/ario-shell.c:1112
 msgid "Configure Plugins"
 msgstr "Configurează modulele"
 
-#: ../src/shell/ario-shell-coverdownloader.c:179
+#. Set window properties
+#: ../src/shell/ario-shell-coverdownloader.c:187
 msgid "Music Player Cover Download"
 msgstr "Descarcă coperte pentru player-ul de muzică"
 
-#: ../src/shell/ario-shell-coverdownloader.c:323
+#: ../src/shell/ario-shell-coverdownloader.c:332
 msgid "Download Finished!"
 msgstr "Descărcare Terminată!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:326
+#: ../src/shell/ario-shell-coverdownloader.c:335
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -800,21 +808,22 @@ msgstr ""
 "%i coperte nu au fost găsite\n"
 "%i coperte există deja"
 
-#: ../src/shell/ario-shell-coverselect.c:242
+#. Set window properties
+#: ../src/shell/ario-shell-coverselect.c:243
 msgid "Cover Download"
 msgstr "Descarcă coperte"
 
-#: ../src/shell/ario-shell-coverselect.c:547
+#: ../src/shell/ario-shell-coverselect.c:560
 msgid "Error reading file"
 msgstr "Eroare la citirea fişierului"
 
-#: ../src/shell/ario-shell-coverselect.c:570
+#: ../src/shell/ario-shell-coverselect.c:585
 msgid "Error saving file"
 msgstr "Eroare la salvarea fişierului"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:258
+#: ../src/shell/ario-shell-songinfos.c:273
 msgid "Lyrics"
 msgstr "Versuri"
 
@@ -834,26 +843,28 @@ msgstr "Server"
 msgid "Others"
 msgstr ""
 
-#: ../src/shell/ario-shell-similarartists.c:307
+#: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
 msgid "%d songs"
 msgstr "%d cîntece"
 
-#: ../src/shell/ario-shell-songinfos.c:236
-#: ../src/shell/ario-shell-songinfos.c:253
-#: ../src/shell/ario-shell-songinfos.c:498
+#. Set window properties
+#. Set window title
+#: ../src/shell/ario-shell-songinfos.c:249
+#: ../src/shell/ario-shell-songinfos.c:267
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Proprietăţile melodiei"
 
-#: ../src/shell/ario-shell-songinfos.c:421
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:625
+#: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
 msgstr "Trebuie să selectaţi un server."
 
-#: ../src/widgets/ario-connection-widget.c:675
+#: ../src/widgets/ario-connection-widget.c:676
 msgid "New Profile"
 msgstr "Profil nou"
 
@@ -900,7 +911,7 @@ msgstr "Opreşte muzica"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:797
+#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:864
 msgid " of "
 msgstr " din "
 
@@ -939,9 +950,8 @@ msgid "Cr_op"
 msgstr "_Decupează"
 
 #: ../src/widgets/ario-playlist.c:142
-#, fuzzy
 msgid "_Search in playlist"
-msgstr "_Înlocuiește în lista de redare"
+msgstr ""
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -960,39 +970,40 @@ msgid "Filter:"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1589
+#: ../src/widgets/ario-playlist.c:1647
 msgid "Save playlist"
 msgstr "Salvează lista de piese"
 
-#: ../src/widgets/ario-playlist.c:1599
+#: ../src/widgets/ario-playlist.c:1657
 msgid "Playlist name :"
 msgstr "Numele listei de redare :"
 
-#: ../src/widgets/ario-playlist.c:1629
+#: ../src/widgets/ario-playlist.c:1687
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lista de redare există deja. Vreţi să o suprascrieţi?"
 
-#: ../src/widgets/ario-status-bar.c:91
+#. Format status bar message
+#: ../src/widgets/ario-status-bar.c:96
 msgid "Songs"
 msgstr "Melodii"
 
-#: ../src/widgets/ario-tray-icon.c:136
+#: ../src/widgets/ario-tray-icon.c:138
 msgid "_Play"
 msgstr "_Redă"
 
-#: ../src/widgets/ario-tray-icon.c:139
+#: ../src/widgets/ario-tray-icon.c:141
 msgid "_Pause"
 msgstr "_Pauză"
 
-#: ../src/widgets/ario-tray-icon.c:142
+#: ../src/widgets/ario-tray-icon.c:144
 msgid "_Stop"
 msgstr "_Stop"
 
-#: ../src/widgets/ario-tray-icon.c:145
+#: ../src/widgets/ario-tray-icon.c:147
 msgid "_Next"
 msgstr "_Înainte"
 
-#: ../src/widgets/ario-tray-icon.c:148
+#: ../src/widgets/ario-tray-icon.c:150
 msgid "P_revious"
 msgstr "P_recedenta"
 
@@ -1118,11 +1129,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Trimite informaţia melodiei la last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:152
+#: ../plugins/filesystem/ario-filesystem.c:158
 msgid "File System"
 msgstr "Sistem de fișiere"
 
-#: ../plugins/filesystem/ario-filesystem.c:393
+#: ../plugins/filesystem/ario-filesystem.c:418
 msgid "Music"
 msgstr "Muzică"
 
@@ -1134,7 +1145,7 @@ msgstr "Un Navigator de Sistem de Fişiere"
 msgid "File System Browser"
 msgstr "Navigator de Sistem de Fişiere"
 
-#: ../plugins/information/ario-information.c:110
+#: ../plugins/information/ario-information.c:112
 msgid "Information"
 msgstr "Informații"
 
@@ -1170,41 +1181,43 @@ msgstr "Adaugă asistenţa tastelor multimedia"
 msgid "Multimedia Keys"
 msgstr "Taste Multimedia"
 
-#: ../plugins/radios/ario-radio.c:111
+#: ../plugins/radios/ario-radio.c:117
 msgid "Add a _new radio"
 msgstr "Adaugă un _nou radio"
 
-#: ../plugins/radios/ario-radio.c:114
+#: ../plugins/radios/ario-radio.c:120
 msgid "_Delete this radios"
 msgstr "_Şterge aceste radiouri"
 
-#: ../plugins/radios/ario-radio.c:152
+#: ../plugins/radios/ario-radio.c:161
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Radiouri de pe Web"
 
-#: ../plugins/radios/ario-radio.c:211
+#: ../plugins/radios/ario-radio.c:223
 msgid "Internet Radios"
 msgstr "Radiouri de pe Internet"
 
-#: ../plugins/radios/ario-radio.c:713
+#: ../plugins/radios/ario-radio.c:767
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:771
+#: ../plugins/radios/ario-radio.c:833
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Parametrii incorecţi. Trebuie să specificaţi un nume şi un URL pentru radio."
 
-#: ../plugins/radios/ario-radio.c:793
+#. Laucn dialog
+#: ../plugins/radios/ario-radio.c:856
 msgid "Add a WebRadio"
 msgstr "Adaugă un Radio de pe Web"
 
-#: ../plugins/radios/ario-radio.c:852
+#: ../plugins/radios/ario-radio.c:920
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Sigur vreţi să ştergeţi toate radiourile selectate?"
 
-#: ../plugins/radios/ario-radio.c:920
+#. Launch dialog window
+#: ../plugins/radios/ario-radio.c:995
 msgid "Edit a WebRadio"
 msgstr "Editare Radio de pe Web"
 
@@ -1232,64 +1245,3 @@ msgstr "Un modul să caute artistul curent pe wikipedia"
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
-
-#~ msgid "Name"
-#~ msgstr "Nume"
-
-#~ msgid "Host"
-#~ msgstr "Gazda"
-
-#~ msgid "Port"
-#~ msgstr "Port"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "Verifică starea serverului Last.fm la"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "Află despre Last.fm la "
-
-#~ msgid "Source"
-#~ msgstr "Sursă"
-
-#~ msgid "Image"
-#~ msgstr "Imagine"
-
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#~ msgid "Automatic configuration"
-#~ msgstr "Configurare automată"
-
-#~ msgid "Manual configuration"
-#~ msgstr "Configurare manuală"
-
-#~ msgid ""
-#~ "You need to specify an MPD server to connect to. If you don't see your "
-#~ "MPD server thanks to the automatic configuration, you should check that "
-#~ "zeroconf is activated in your MPD configuration or use the manual "
-#~ "configuration."
-#~ msgstr ""
-#~ "Trebuie să specificați un server MPD la care să vă conectați. Dacă nu "
-#~ "vedeți serverul MPD datorită configurației automate, trebuie să vă "
-#~ "asigurați că zeroconf este activat în configurația MPD sau folosiți "
-#~ "configurația manuală."
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "Sigur vreţi să îdepărtaţi toate copertele albumeor selectate?"
-
-#~ msgid "_Save Playlist"
-#~ msgstr "_Salvează lista de redare"
-
-#~ msgid ""
-#~ "Artist: %s\n"
-#~ "Album: %s\n"
-#~ "Title: %s"
-#~ msgstr ""
-#~ "Artist: %s\n"
-#~ "Ablum: %s\n"
-#~ "Titlu: %s"
-
-#~ msgid "Tabs"
-#~ msgstr "Tab-uri"

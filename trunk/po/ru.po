@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-12 13:25+0200\n"
-"PO-Revision-Date: 2009-03-05 22:16+0000\n"
-"Last-Translator: Pavel Dmitriev <dmitrievp@gmail.com>\n"
+"POT-Creation-Date: 2009-05-16 15:34+0200\n"
+"PO-Revision-Date: 2009-04-19 06:02+0000\n"
+"Last-Translator: Mr.Strack <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-23 21:36+0000\n"
+"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -79,7 +79,8 @@ msgstr "Музыкальная директория :"
 msgid "Music server is on the same computer as Ario"
 msgstr "Музыкальный сервер на том же компьютере, что и Ario"
 
-#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:712
+#. Create the widgets
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:766
 msgid "Name :"
 msgstr "Название :"
 
@@ -166,7 +167,7 @@ msgstr "Закачка обложки"
 msgid "Local search"
 msgstr "Местный поиск"
 
-#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:113
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:120
 msgid "Search"
 msgstr "Поиск"
 
@@ -213,14 +214,14 @@ msgstr "Название :"
 
 #. MPD_TAG_ITEM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree-albums.c:196 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:219 ../src/widgets/ario-tray-icon.c:681
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:508
+#: ../src/widgets/ario-songlist.c:226 ../src/widgets/ario-tray-icon.c:740
 msgid "Album"
 msgstr "Альбом"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
-#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:204
-#: ../src/widgets/ario-tray-icon.c:679
+#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:211
+#: ../src/widgets/ario-tray-icon.c:738
 msgid "Artist"
 msgstr "Исполнитель"
 
@@ -253,14 +254,14 @@ msgstr "Переводить курсор на играющую песню"
 msgid "Mode"
 msgstr "Режим"
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:221
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Список воспроизведения"
 
 #: ../data/ui/playlist-prefs.ui.h:10
 msgid "Playlist mode:"
-msgstr ""
+msgstr "Режим списка воспроизведения:"
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Show rows:"
@@ -268,14 +269,14 @@ msgstr "Показать столбцы:"
 
 #. MPD_TAG_ITEM_ALBUM
 #: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-songs.c:98 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:189 ../src/widgets/ario-tray-icon.c:683
+#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:508
+#: ../src/widgets/ario-songlist.c:196 ../src/widgets/ario-tray-icon.c:742
 msgid "Title"
 msgstr "Название"
 
 #. MPD_TAG_ITEM_TITLE
 #: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
-#: ../src/sources/ario-tree-songs.c:91 ../src/widgets/ario-playlist.c:508
+#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:508
 msgid "Track"
 msgstr "Дорожка"
 
@@ -362,9 +363,8 @@ msgid "Uptime :"
 msgstr "Аптайм"
 
 #: ../data/ui/song-infos.ui.h:2
-#, fuzzy
 msgid "Album Artist :"
-msgstr "Исполнитель :"
+msgstr "Исполнитель альбома:"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -424,7 +424,7 @@ msgstr "Уведомление при смене песни"
 
 #: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Notification time: "
-msgstr ""
+msgstr "Время уведомления: "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
@@ -471,37 +471,37 @@ msgstr "Обложка уже существует. Вы точно хотите
 msgid "Music Directory"
 msgstr "Музыкальная директория"
 
-#: ../src/playlist/ario-playlist-dynamic.c:50
+#: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr ""
+msgstr "песни этого исполнителя"
+
+#: ../src/playlist/ario-playlist-dynamic.c:50
+msgid "songs of same album"
+msgstr "песни из этого альбома"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
-msgid "songs of same album"
-msgstr ""
+msgid "songs of similar artists"
+msgstr "песни похожих исполнителей"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
-msgid "songs of similar artists"
-msgstr ""
+msgid "albums of same artists"
+msgstr "альбомы этого исполнителя"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
-msgid "albums of same artists"
-msgstr ""
-
-#: ../src/playlist/ario-playlist-dynamic.c:54
 msgid "albums of similar artists"
-msgstr ""
+msgstr "альбомы похожих исполнителей"
 
-#: ../src/playlist/ario-playlist-dynamic.c:94
+#: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "Динамический список воспроизведения"
 
-#: ../src/playlist/ario-playlist-queue.c:74
+#: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "Режим очереди"
 
-#: ../src/playlist/ario-playlist-normal.c:72
+#: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr ""
+msgstr "Нормальный"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -547,15 +547,15 @@ msgstr "Не подключен"
 
 #: ../src/preferences/ario-server-preferences.c:188
 #: ../src/preferences/ario-server-preferences.c:279
-#: ../src/widgets/ario-status-bar.c:95
+#: ../src/widgets/ario-status-bar.c:100
 msgid "Updating..."
 msgstr "Обновление..."
 
-#: ../src/servers/ario-mpd.c:378
+#: ../src/servers/ario-mpd.c:407
 msgid "Connecting to server..."
 msgstr "Соединяемся с сервером..."
 
-#: ../src/servers/ario-mpd.c:403
+#: ../src/servers/ario-mpd.c:435
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Невозможно соединиться с сервером. Проверте настройки соединения."
 
@@ -578,9 +578,8 @@ msgstr "Имя файла"
 
 #. MPD_TAG_ITEM_FILENAME
 #: ../src/servers/ario-server.c:56
-#, fuzzy
 msgid "Album Artist"
-msgstr "Исполнитель"
+msgstr ""
 
 #. MPD_TAG_ITEM_ALBUMARTIST
 #: ../src/servers/ario-server.c:57
@@ -593,66 +592,66 @@ msgstr "Любой"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../src/sources/ario-browser.c:81 ../src/sources/ario-search.c:76
-#: ../src/sources/ario-storedplaylists.c:91
-#: ../src/sources/ario-storedplaylists.c:108
-#: ../plugins/filesystem/ario-filesystem.c:92
-#: ../plugins/filesystem/ario-filesystem.c:106
-#: ../plugins/radios/ario-radio.c:102
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:82
+#: ../src/sources/ario-storedplaylists.c:88
+#: ../src/sources/ario-storedplaylists.c:106
+#: ../plugins/filesystem/ario-filesystem.c:94
+#: ../plugins/filesystem/ario-filesystem.c:109
+#: ../plugins/radios/ario-radio.c:108
 msgid "_Add to playlist"
 msgstr "_Добавить в плейлист"
 
-#: ../src/sources/ario-browser.c:84 ../src/sources/ario-search.c:79
-#: ../src/sources/ario-storedplaylists.c:94
-#: ../src/sources/ario-storedplaylists.c:111
-#: ../plugins/filesystem/ario-filesystem.c:95
-#: ../plugins/filesystem/ario-filesystem.c:109
-#: ../plugins/radios/ario-radio.c:105
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:85
+#: ../src/sources/ario-storedplaylists.c:91
+#: ../src/sources/ario-storedplaylists.c:109
+#: ../plugins/filesystem/ario-filesystem.c:97
+#: ../plugins/filesystem/ario-filesystem.c:112
+#: ../plugins/radios/ario-radio.c:111
 msgid "Add and _play"
 msgstr "_Добавить в плейлист и играть"
 
-#: ../src/sources/ario-browser.c:87 ../src/sources/ario-search.c:82
-#: ../src/sources/ario-storedplaylists.c:97
-#: ../src/sources/ario-storedplaylists.c:114
-#: ../plugins/filesystem/ario-filesystem.c:98
-#: ../plugins/filesystem/ario-filesystem.c:112
-#: ../plugins/radios/ario-radio.c:108
+#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
+#: ../src/sources/ario-storedplaylists.c:94
+#: ../src/sources/ario-storedplaylists.c:112
+#: ../plugins/filesystem/ario-filesystem.c:100
+#: ../plugins/filesystem/ario-filesystem.c:115
+#: ../plugins/radios/ario-radio.c:114
 msgid "_Replace in playlist"
 msgstr "_Заменить в списке воспроизведения"
 
-#: ../src/sources/ario-browser.c:90
+#: ../src/sources/ario-browser.c:91
 msgid "Get the covers"
 msgstr "Получить обложки"
 
-#: ../src/sources/ario-browser.c:93
+#: ../src/sources/ario-browser.c:94
 msgid "_Delete the covers"
 msgstr "_Удалить обложки"
 
-#: ../src/sources/ario-browser.c:96 ../src/sources/ario-browser.c:99
-#: ../src/sources/ario-search.c:85 ../src/sources/ario-storedplaylists.c:117
+#: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
+#: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
-#: ../plugins/filesystem/ario-filesystem.c:115
-#: ../plugins/radios/ario-radio.c:117
+#: ../plugins/filesystem/ario-filesystem.c:118
+#: ../plugins/radios/ario-radio.c:123
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../src/sources/ario-browser.c:123 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
 msgstr "Библиотека"
 
-#: ../src/sources/ario-search.c:178
+#: ../src/sources/ario-search.c:186
 msgid "Add a search criteria"
 msgstr "Добавить критерии поиска"
 
-#: ../src/sources/ario-search.c:186
+#: ../src/sources/ario-search.c:197
 msgid "Search songs in the library"
 msgstr "Искать песню в библиотеке"
 
-#: ../src/sources/ario-search.c:356
+#: ../src/sources/ario-search.c:381
 msgid "Remove a search criteria"
 msgstr "Удалить критерии поиска"
 
-#: ../src/sources/ario-storedplaylists.c:100
+#: ../src/sources/ario-storedplaylists.c:97
 msgid "_Delete"
 msgstr "_Удалить"
 
@@ -660,16 +659,16 @@ msgstr "_Удалить"
 msgid "Playlists"
 msgstr "Плейлисты"
 
-#: ../src/sources/ario-storedplaylists.c:554
+#: ../src/sources/ario-storedplaylists.c:595
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Вы действительно хотите удалить все выбранные плейлисты?"
 
-#: ../src/sources/ario-tree.c:762
+#: ../src/sources/ario-tree.c:838
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Вы уверены, что хотите удалить все выделенные обложки?"
 
 #. Translators - This "Cover" refers to an album cover art
-#: ../src/sources/ario-tree-albums.c:183
+#: ../src/sources/ario-tree-albums.c:199
 msgid "Cover"
 msgstr "Обложка"
 
@@ -737,11 +736,11 @@ msgstr "_Строка состояния"
 msgid "Upper part"
 msgstr "Верхняя часть"
 
-#: ../src/shell/ario-shell.c:768
+#: ../src/shell/ario-shell.c:771
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:769
+#: ../src/shell/ario-shell.c:772
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -791,23 +790,34 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Nick https://launchpad.net/~homolibere\n"
 "  Pavel Dmitriev https://launchpad.net/~dmitrievp\n"
+"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Alexei Klimenko https://launchpad.net/~nimda7\n"
+"  Andrey Shitov https://launchpad.net/~aa-shtv\n"
+"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Mr.Strack https://launchpad.net/~mr.strack\n"
+"  Nick https://launchpad.net/~homolibere\n"
+"  Pavel Dmitriev https://launchpad.net/~dmitrievp\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1109
+#: ../src/shell/ario-shell.c:1112
 msgid "Configure Plugins"
 msgstr "Настроить расширения"
 
-#: ../src/shell/ario-shell-coverdownloader.c:179
+#. Set window properties
+#: ../src/shell/ario-shell-coverdownloader.c:187
 msgid "Music Player Cover Download"
 msgstr "Загрузка обложки музыкального проигрывателя"
 
-#: ../src/shell/ario-shell-coverdownloader.c:323
+#: ../src/shell/ario-shell-coverdownloader.c:332
 msgid "Download Finished!"
 msgstr "Загрузка завершена!"
 
 #. We show the numbers of covers found and not found
-#: ../src/shell/ario-shell-coverdownloader.c:326
+#: ../src/shell/ario-shell-coverdownloader.c:335
 #, c-format
 msgid ""
 "%i covers found\n"
@@ -818,21 +828,22 @@ msgstr ""
 "%i обложек не найдено\n"
 "%i обложек уже существует"
 
-#: ../src/shell/ario-shell-coverselect.c:242
+#. Set window properties
+#: ../src/shell/ario-shell-coverselect.c:243
 msgid "Cover Download"
 msgstr "Загрузить обложку"
 
-#: ../src/shell/ario-shell-coverselect.c:547
+#: ../src/shell/ario-shell-coverselect.c:560
 msgid "Error reading file"
 msgstr "Ошибка чтения файла"
 
-#: ../src/shell/ario-shell-coverselect.c:570
+#: ../src/shell/ario-shell-coverselect.c:585
 msgid "Error saving file"
 msgstr "Ошибка записи файла"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:258
+#: ../src/shell/ario-shell-songinfos.c:273
 msgid "Lyrics"
 msgstr "Тексты песен"
 
@@ -852,26 +863,28 @@ msgstr "Сервер"
 msgid "Others"
 msgstr "Иные"
 
-#: ../src/shell/ario-shell-similarartists.c:307
+#: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
 msgid "%d songs"
 msgstr "%d композиций"
 
-#: ../src/shell/ario-shell-songinfos.c:236
-#: ../src/shell/ario-shell-songinfos.c:253
-#: ../src/shell/ario-shell-songinfos.c:498
+#. Set window properties
+#. Set window title
+#: ../src/shell/ario-shell-songinfos.c:249
+#: ../src/shell/ario-shell-songinfos.c:267
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Свойства композиции"
 
-#: ../src/shell/ario-shell-songinfos.c:421
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Ошибка сохранения тегов в файле:"
 
-#: ../src/widgets/ario-connection-widget.c:625
+#: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/widgets/ario-connection-widget.c:675
+#: ../src/widgets/ario-connection-widget.c:676
 msgid "New Profile"
 msgstr "Новый профиль"
 
@@ -918,7 +931,7 @@ msgstr "Остановить музыку"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:797
+#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:864
 msgid " of "
 msgstr " из "
 
@@ -957,9 +970,8 @@ msgid "Cr_op"
 msgstr "_Обрезать"
 
 #: ../src/widgets/ario-playlist.c:142
-#, fuzzy
 msgid "_Search in playlist"
-msgstr "_Заменить в списке воспроизведения"
+msgstr "_Поиск в плейлисте"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -978,39 +990,40 @@ msgid "Filter:"
 msgstr "Фильтр:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1589
+#: ../src/widgets/ario-playlist.c:1647
 msgid "Save playlist"
 msgstr "Сохранить плейлист"
 
-#: ../src/widgets/ario-playlist.c:1599
+#: ../src/widgets/ario-playlist.c:1657
 msgid "Playlist name :"
 msgstr "Название плейлиста :"
 
-#: ../src/widgets/ario-playlist.c:1629
+#: ../src/widgets/ario-playlist.c:1687
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 
-#: ../src/widgets/ario-status-bar.c:91
+#. Format status bar message
+#: ../src/widgets/ario-status-bar.c:96
 msgid "Songs"
 msgstr "Композиций"
 
-#: ../src/widgets/ario-tray-icon.c:136
+#: ../src/widgets/ario-tray-icon.c:138
 msgid "_Play"
 msgstr "_Играть"
 
-#: ../src/widgets/ario-tray-icon.c:139
+#: ../src/widgets/ario-tray-icon.c:141
 msgid "_Pause"
 msgstr "_Пауза"
 
-#: ../src/widgets/ario-tray-icon.c:142
+#: ../src/widgets/ario-tray-icon.c:144
 msgid "_Stop"
 msgstr "_Остановить"
 
-#: ../src/widgets/ario-tray-icon.c:145
+#: ../src/widgets/ario-tray-icon.c:147
 msgid "_Next"
 msgstr "_Далее"
 
-#: ../src/widgets/ario-tray-icon.c:148
+#: ../src/widgets/ario-tray-icon.c:150
 msgid "P_revious"
 msgstr "П_ред."
 
@@ -1136,11 +1149,11 @@ msgstr "Last.fm"
 msgid "Submits song information to last.fm"
 msgstr "Отослать информацию о песне на last.fm"
 
-#: ../plugins/filesystem/ario-filesystem.c:152
+#: ../plugins/filesystem/ario-filesystem.c:158
 msgid "File System"
 msgstr "Файловая система"
 
-#: ../plugins/filesystem/ario-filesystem.c:393
+#: ../plugins/filesystem/ario-filesystem.c:418
 msgid "Music"
 msgstr "Музыка"
 
@@ -1152,7 +1165,7 @@ msgstr "Браузер системных файлов"
 msgid "File System Browser"
 msgstr "Браузер системных файлов"
 
-#: ../plugins/information/ario-information.c:110
+#: ../plugins/information/ario-information.c:112
 msgid "Information"
 msgstr "Информация"
 
@@ -1188,40 +1201,42 @@ msgstr "Добавить поддержку мультимедийных кла�
 msgid "Multimedia Keys"
 msgstr "Мультимедийные клавиши"
 
-#: ../plugins/radios/ario-radio.c:111
+#: ../plugins/radios/ario-radio.c:117
 msgid "Add a _new radio"
 msgstr "Добавить _новое радио"
 
-#: ../plugins/radios/ario-radio.c:114
+#: ../plugins/radios/ario-radio.c:120
 msgid "_Delete this radios"
 msgstr "_Удалить эти радиостанции"
 
-#: ../plugins/radios/ario-radio.c:152
+#: ../plugins/radios/ario-radio.c:161
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "ВебРадиостанции"
 
-#: ../plugins/radios/ario-radio.c:211
+#: ../plugins/radios/ario-radio.c:223
 msgid "Internet Radios"
 msgstr "Интернет-Радио"
 
-#: ../plugins/radios/ario-radio.c:713
+#: ../plugins/radios/ario-radio.c:767
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:771
+#: ../plugins/radios/ario-radio.c:833
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Неверные параметры. Вы должны обязательно указать имя и URL радио."
 
-#: ../plugins/radios/ario-radio.c:793
+#. Laucn dialog
+#: ../plugins/radios/ario-radio.c:856
 msgid "Add a WebRadio"
 msgstr "Добавить ВебРадио"
 
-#: ../plugins/radios/ario-radio.c:852
+#: ../plugins/radios/ario-radio.c:920
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Вы уверены, что хотите удалить все выбранные радио-станции?"
 
-#: ../plugins/radios/ario-radio.c:920
+#. Launch dialog window
+#: ../plugins/radios/ario-radio.c:995
 msgid "Edit a WebRadio"
 msgstr "Редактировать ВебРадио"
 
@@ -1249,180 +1264,3 @@ msgstr "Плагин для поиска текущего артиста на wi
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Википедия"
-
-#~ msgid "Name"
-#~ msgstr "Название"
-
-#~ msgid "Host"
-#~ msgstr "Хост"
-
-#~ msgid "Port"
-#~ msgstr "Порт"
-
-#~ msgid "Check Last.fm server status at"
-#~ msgstr "Проверка состояния сервера Last.fm на"
-
-#~ msgid "Find out about Last.fm at "
-#~ msgstr "Узнайте больше о Last.fm на "
-
-#~ msgid "Source"
-#~ msgstr "Обложки"
-
-#~ msgid "Image"
-#~ msgstr "Рисунок"
-
-#, fuzzy
-#~ msgid "de"
-#~ msgstr "Режим"
-
-#~ msgid "Profile"
-#~ msgstr "Профиль"
-
-#~ msgid "0 for 'play/pause', 1 for 'play next song', 2 for 'do nothing'."
-#~ msgstr ""
-#~ "0 для 'играть/пауза', 1 для 'играть следующую песню', 2 для 'ничего не "
-#~ "делать'."
-
-#~ msgid "0 for the library, 1 for the radios, etc..."
-#~ msgstr "0 для библиотеки, 1 для радио и т.д..."
-
-#~ msgid "Define if Ario must autoconnect to mpd or not"
-#~ msgstr "Проверить автосоединен ли Ario обязательно с mpd или нет"
-
-#~ msgid "Define if Ario must use a proxy for remote connections"
-#~ msgstr ""
-#~ "Проверить использует ли обязательно Ario прокси для удаленных соединений"
-
-#~ msgid "Define if the view tabs are shown."
-#~ msgstr "Проверить показан ли вид вкладок"
-
-#~ msgid "Define the address of the proxy"
-#~ msgstr "Проверить адрес прокси"
-
-#~ msgid "Define the behavior of a double click on the tray icon."
-#~ msgstr "Проверить поведение двойного щелчка на иконку в трее."
-
-#~ msgid "Define the port of the proxy"
-#~ msgstr "Проверить порт прокси"
-
-#~ msgid "Define the size of the album column."
-#~ msgstr "Проверить размер колонки альбома."
-
-#~ msgid "Define the size of the artist column."
-#~ msgstr "Проверить размер колонки исполнителя."
-
-#~ msgid "Define the size of the title column."
-#~ msgstr "Проверить размер колонки загаловка."
-
-#~ msgid "Define the size of the track column."
-#~ msgstr "Проверить размер колонки дорожки."
-
-#~ msgid "Define the source used in Ario"
-#~ msgstr "Проверить исходные коды, использованные в Ario"
-
-#~ msgid "Hide the covers in the albums treeview"
-#~ msgstr "Скрыть обложки в дереве просмотра альбомов"
-
-#~ msgid "Host to connect to"
-#~ msgstr "Хост соединения к"
-
-#~ msgid "If true, the main window is maximized."
-#~ msgstr "Если этот ключ установлен, главное окно будет развёрнуто."
-
-#~ msgid "Main window height"
-#~ msgstr "Высота главного окна"
-
-#~ msgid "Main window maximization state"
-#~ msgstr "Состояние развёрнутости главного окна"
-
-#~ msgid "Main window width"
-#~ msgstr "Ширина главного окна"
-
-#~ msgid "Port to connect to"
-#~ msgstr "Порт соединения к"
-
-#~ msgid "Position of main window pane"
-#~ msgstr "Положение панели главного окна"
-
-#~ msgid "Position of playlists pane"
-#~ msgstr "Положение панели плэйлиста"
-
-#~ msgid "The amazon country to use to get the covers"
-#~ msgstr "Страна на Amazon.Com для получения обложек"
-
-#~ msgid "The password to connect to mpd"
-#~ msgstr "Пароль для соединения к mpd"
-
-#~ msgid "The timeout for the connection to mpd"
-#~ msgstr "Время"
-
-#~ msgid "When enabled, ario hide the covers in the albums treeview"
-#~ msgstr "Когда включено, Ario скрывает обложки в дереве просмотра"
-
-#~ msgid ""
-#~ "You can search for your cover on amazon.com .fr .de .uk or .ca to have "
-#~ "more accurate results"
-#~ msgstr ""
-#~ "Вы можете найти для Вашей обложки на amazon.com .fr .de .uk or .ca более "
-#~ "точные результаты"
-
-#~ msgid "Automatic configuration"
-#~ msgstr "Автоматическая настройка"
-
-#~ msgid "Manual configuration"
-#~ msgstr "Ручная настройка"
-
-#~ msgid ""
-#~ "You need to specify an MPD server to connect to. If you don't see your "
-#~ "MPD server thanks to the automatic configuration, you should check that "
-#~ "zeroconf is activated in your MPD configuration or use the manual "
-#~ "configuration."
-#~ msgstr ""
-#~ "Вам нужно точно определить MPD-сервер для соединения. Если Вы не знаете "
-#~ "Ваш MPD-сервер, воспользуйтесь автоматической настройкой, проверьте "
-#~ "активно ли zeroconf на Вашей конфигурации MPD или используйте ручную "
-#~ "настройку."
-
-#~ msgid "Amazon search"
-#~ msgstr "Amazon поиск"
-
-#~ msgid "Large cover (Slower)"
-#~ msgstr "Большая обложка (Медленнее)"
-
-#~ msgid "Medium cover"
-#~ msgstr "Средняя обложка"
-
-#~ msgid "Small cover (Faster)"
-#~ msgstr "Маленькая обложка (Быстрее)"
-
-#~ msgid "Get the covers from _Amazon"
-#~ msgstr "Получить обложку с _Amazon"
-
-#~ msgid ""
-#~ "Are you sure that you want to remove all the covers of the selected "
-#~ "albums?"
-#~ msgstr "Вы действительно хотите удалить все обложки выбранных альбомов?"
-
-#~ msgid "_Save Playlist"
-#~ msgstr "_Сохранить плейлист"
-
-#~ msgid ""
-#~ "Artist: %s\n"
-#~ "Album: %s\n"
-#~ "Title: %s"
-#~ msgstr ""
-#~ "Исполнитель: %s\n"
-#~ "Альбом: %s\n"
-#~ "Название: %s"
-
-#~ msgid "Select a file"
-#~ msgstr "Выбрать файл"
-
-#~ msgid "Tabs"
-#~ msgstr "Вкладки"
-
-#~ msgid "Hide on close"
-#~ msgstr "Свернуть при закрытии"
-
-#~ msgid "Window"
-#~ msgstr "Окно"
