@@ -366,7 +366,6 @@ ario_shell_construct (ArioShell *shell,
         GtkWidget *menubar;
         GtkWidget *separator;
         GtkWidget *vbox;
-        GdkPixbuf *pixbuf;
         GtkAction *action;
         ArioFirstlaunch *firstlaunch;
 
@@ -377,8 +376,7 @@ ario_shell_construct (ArioShell *shell,
         gtk_window_set_position (GTK_WINDOW (shell), GTK_WIN_POS_CENTER);
 
         /* Create program icon */
-        pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
-        gtk_window_set_default_icon (pixbuf);
+        gtk_window_set_default_icon_name ("ario");
 
         /* Connect window destruction signal to exit program */
         g_signal_connect (shell,
