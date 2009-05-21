@@ -1,11 +1,11 @@
 themedir = $(datadir)/icons/hicolor
-size = scalable
+size = 64x64
 context = apps
 
 iconsdir = $(themedir)/$(size)/$(context)
 
 icons_DATA = \
-	ario.svg
+	ario.png
 
 noinst_DATA =
 

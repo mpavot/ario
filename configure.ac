@@ -203,7 +203,7 @@ AC_ARG_ENABLE(audioscrobbler,
                              [Disable support of audioscrobbler]))
 if test x"$enable_audioscrobbler" != xno; then
         PKG_CHECK_MODULES(SOUP,                            \
-			  libsoup-2.4,
+                          libsoup-2.4,
 	 		  have_libsoup24=yes,
 	 	          have_libsoup24=no)
 	 if test x"$have_libsoup24" = "xno"; then
@@ -270,6 +270,16 @@ data/icons/hicolor/32x32/Makefile
 data/icons/hicolor/32x32/apps/Makefile
 data/icons/hicolor/48x48/Makefile
 data/icons/hicolor/48x48/apps/Makefile
+data/icons/hicolor/64x64/Makefile
+data/icons/hicolor/64x64/apps/Makefile
+data/icons/hicolor/72x72/Makefile
+data/icons/hicolor/72x72/apps/Makefile
+data/icons/hicolor/96x96/Makefile
+data/icons/hicolor/96x96/apps/Makefile
+data/icons/hicolor/128x128/Makefile
+data/icons/hicolor/128x128/apps/Makefile
+data/icons/hicolor/256x256/Makefile
+data/icons/hicolor/256x256/apps/Makefile
 data/icons/hicolor/scalable/Makefile
 data/icons/hicolor/scalable/apps/Makefile
 plugins/Makefile
