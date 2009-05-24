@@ -16,6 +16,7 @@ Feature request 2671689: tray icon: mute sound option on middle button click
 Update radio list (Patch from Emmanuel Lacour <elacour at users.sourceforge.net>
 Add possibility to copy songs in playlist instead of move
 Add AlbumArtist tag support
+New SVG icon for better rendering
 
 Bug fixes and technical improvements:
 Set song total time to 0 when music stopped

@@ -1,6 +1,2 @@
 # menu icon is in ario-common
 ario: menu-icon-missing /usr/share/pixmaps/ario.xpm
-# Plug-ins icons are in the same directory as plug-ins libraries (to allow stand-alone plug-in distribution) 
-# This should be changed in future upstream release
-ario: image-file-in-usr-lib usr/lib/ario/plugins/icons/audioscrobbler.png
-ario: image-file-in-usr-lib usr/lib/ario/plugins/icons/wikipedia.png
