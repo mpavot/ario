@@ -349,6 +349,7 @@ ario_plugins_engine_shutdown (void)
          * finalization (typically they need to free the WindowData)
          * it must run before we get rid of the plugins.
          */
+        ario_python_garbage_collect ();
         ario_python_shutdown ();
 #endif
 
@@ -502,13 +503,4 @@ ario_plugins_engine_active_plugins_changed (void)
         g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
         g_slist_free (active_plugins);
 }
-
-#ifdef ENABLE_PYTHON
-void
-ario_plugins_engine_garbage_collect (void)
-{
-        ario_python_garbage_collect ();
-}
-#endif
-
 

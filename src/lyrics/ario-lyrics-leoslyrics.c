@@ -438,8 +438,8 @@ ario_lyrics_leoslyrics_get_lyrics_candidates (ArioLyricsProvider *lyrics_provide
                 return;
 
         if (g_strrstr (xml_data, " - Error report</title>")) {
-                return;
                 g_free (xml_data);
+                return;
         }
 
         /* We parse the xml file to extract the lyrics hid */

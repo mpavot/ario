@@ -39,8 +39,5 @@ gboolean                ario_plugins_engine_deactivate_plugin   (ArioPluginInfo 
 
 void                    ario_plugins_engine_configure_plugin    (ArioPluginInfo    *info,
                                                                  GtkWindow          *parent);
-#ifdef ENABLE_PYTHON
-void                    ario_plugins_engine_garbage_collect     (void);
-#endif
 
 #endif  /* __ARIO_PLUGINS_ENGINE_H__ */

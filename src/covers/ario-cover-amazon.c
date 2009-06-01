@@ -247,8 +247,8 @@ ario_cover_amazon_get_covers (ArioCoverProvider *cover_provider,
         }
 
         if (g_strrstr (xml_data, "<ErrorMsg>") || g_strrstr (xml_data, "<html>")) {
-                return FALSE;
                 g_free (xml_data);
+                return FALSE;
         }
 
         /* We parse the xml file to extract the cover uris */
