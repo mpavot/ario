@@ -25,6 +25,7 @@
 #include <stdint.h>
 #include <limits.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
