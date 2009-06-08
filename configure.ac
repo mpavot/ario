@@ -47,6 +47,38 @@ AC_SUBST(LDFLAGS)
 AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
 dnl ================================================================
+dnl Warnings
+dnl ================================================================
+WARN_CFLAGS="-Wall \ 
+-Wall -Wimplicit -Wunused-label \
+-Wmissing-declarations -Wmissing-prototypes \
+-Wnested-externs -Wpointer-arith \
+-Wcast-align -Wpointer-sign \
+-Wclobbered -Wempty-body -Wignored-qualifiers \
+-Wmissing-field-initializers -Wmissing-parameter-type \
+-Wold-style-declaration -Woverride-init \
+-Wsign-compare -Wtype-limits -Wuninitialized \
+-Wbad-function-cast -Wold-style-definition"
+
+for option in $WARN_CFLAGS; do
+        SAVE_CFLAGS="$CFLAGS"
+        CFLAGS="$CFLAGS $option"
+        AC_MSG_CHECKING([whether gcc understands $option])
+        AC_TRY_COMPILE([], [],
+                       has_option=yes,
+                       has_option=no,)
+        if test x$has_option = xyes; then
+                WARNINGS="$WARNINGS $option"
+        fi
+        AC_MSG_RESULT($has_option)
+        CFLAGS="$SAVE_CFLAGS"
+        unset has_option
+        unset SAVE_CFLAGS
+done
+unset option
+AC_SUBST(WARNINGS)
+
+dnl ================================================================
 dnl Debugging information
 dnl ================================================================
 AC_ARG_ENABLE(debug,
