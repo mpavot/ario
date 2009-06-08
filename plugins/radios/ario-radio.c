@@ -709,7 +709,7 @@ ario_radio_drag_data_get_cb (GtkWidget * widget,
                                              radios);
 
         /* Set drag data */
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) radios->str,
+        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8, (const guchar *) radios->str,
                                 strlen (radios->str) * sizeof(guchar));
 
         g_string_free (radios, TRUE);
@@ -806,7 +806,7 @@ ario_radio_launch_dialog (const gchar *title,
                                    0, 4);
 
         /* Add table to dialog */
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
                            table);
         gtk_widget_show_all (dialog);
 

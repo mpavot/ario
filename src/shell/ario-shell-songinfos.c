@@ -253,12 +253,12 @@ ario_shell_songinfos_new (GSList *paths)
         /* Create notebook */
         shell_songinfos->priv->notebook = GTK_WIDGET (gtk_notebook_new ());
         gtk_container_set_border_width (GTK_CONTAINER (shell_songinfos->priv->notebook), 5);
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell_songinfos)->vbox),
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (shell_songinfos))),
                            shell_songinfos->priv->notebook);
 
         /* Set songinfos properties */
         gtk_container_set_border_width (GTK_CONTAINER (shell_songinfos), 5);
-        gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell_songinfos)->vbox), 2);
+        gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (shell_songinfos))), 2);
         gtk_dialog_set_has_separator (GTK_DIALOG (shell_songinfos), FALSE);
 
         /* Append tags page to notebook */

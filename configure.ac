@@ -28,7 +28,7 @@ if test "${have_libgcrypt}" != "yes"; then
 	AC_MSG_ERROR([Missing dependency: libgcrypt])
 fi
 
-PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.12
+PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.16
                          glib-2.0 >= 2.4
                          gobject-2.0 >= 2.4
                          gmodule-2.0

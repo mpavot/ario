@@ -424,7 +424,7 @@ ario_songlist_drag_data_get_cb (GtkWidget * widget,
                                              songlists);
 
         /* Set drag data */
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) songlists->str,
+        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8, (const guchar *) songlists->str,
                                 strlen (songlists->str) * sizeof(guchar));
 
         g_string_free (songlists, TRUE);

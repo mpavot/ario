@@ -158,10 +158,9 @@ ario_shell_coverselect_drag_leave_cb (GtkWidget *widget,
                 /* Drag of image */
                 printf ("image  DND : TODO\n");
         } else if (info == 2) {
-                /* Drag of file */
-                data->data[data->length - 2] = 0;
+                const guchar *udata = gtk_selection_data_get_data (data);
                 /* Remove 'file://' */
-                url = g_strdup ((gchar *) data->data + 7);
+                url = g_strndup ((gchar *) udata + 7, gtk_selection_data_get_length (data) - 2 - 7);
                 if (ario_util_uri_exists (url)) {
                         /* Get file content */
                         if (ario_file_get_contents (url,
@@ -236,7 +235,7 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         gtk_builder_helpers_boldify_label (builder, "static_artist_label");
         gtk_builder_helpers_boldify_label (builder, "static_album_label");
 
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell_coverselect)->vbox),
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (shell_coverselect))),
                            vbox);
 
         /* Set window properties */

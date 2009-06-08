@@ -1444,7 +1444,8 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
 
                         gtk_builder_helpers_boldify_label (builder, "audioscrobbler_label");
 
-                        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (audioscrobbler->priv->preferences)->vbox), config_widget);
+                        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (audioscrobbler->priv->preferences))),
+                                           config_widget);
                         g_free (file);
 
                         g_object_unref (builder);

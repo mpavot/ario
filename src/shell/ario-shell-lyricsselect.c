@@ -146,7 +146,7 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
         gtk_builder_helpers_boldify_label (builder, "static_artist_label");
         gtk_builder_helpers_boldify_label (builder, "static_title_label");
 
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell_lyricsselect)->vbox),
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (shell_lyricsselect))),
                            vbox);
 
         gtk_window_set_title (GTK_WINDOW (shell_lyricsselect), _("Lyrics Download"));
