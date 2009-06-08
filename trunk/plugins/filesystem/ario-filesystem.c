@@ -681,7 +681,7 @@ ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
                             FILETREE_DIR_COLUMN, &dir, -1);
 
         /* Set drag data */
-        gtk_selection_data_set (selection_data, selection_data->target, 8, dir,
+        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8, dir,
                                 strlen ((const gchar*) dir) * sizeof(guchar));
         g_free (dir);
 }

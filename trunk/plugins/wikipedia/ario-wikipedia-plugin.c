@@ -208,13 +208,19 @@ impl_create_configure_dialog (ArioPlugin *plugin)
                 gtk_combo_box_set_active (GTK_COMBO_BOX (combobox), 0);
         }
 
-        gtk_box_pack_start_defaults (GTK_BOX (hbox),
-                                     label);
-        gtk_box_pack_start_defaults (GTK_BOX (hbox),
-                                     combobox);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            label,
+                            TRUE, TRUE,
+                            0);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            combobox,
+                            TRUE, TRUE,
+                            0);
 
-        gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dialog)->vbox),
-                                     hbox);
+        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+                            hbox,
+                            TRUE, TRUE,
+                            0);
 
         g_signal_connect (combobox,
                           "changed",

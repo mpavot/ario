@@ -140,9 +140,9 @@ ario_header_drag_leave_cb (GtkWidget *widget,
                 /* Image dropped */
                 ARIO_LOG_INFO ("image  DND : TODO\n");
         } else if (info == 2) {
+                const guchar *udata = gtk_selection_data_get_data (data);
                 /* URL dropped */
-                data->data[data->length - 2] = 0;
-                url = g_strdup ((gchar *) data->data + 7);
+                url = g_strndup ((gchar *) udata + 7, gtk_selection_data_get_length (data) - 2 - 7);
                 if (ario_util_uri_exists (url)) {
                         /* Get file content and save it as the cover */
                         if (ario_file_get_contents (url,
@@ -469,7 +469,7 @@ ario_header_change_total_time (ArioHeader *header)
         }
 
         /* Change slider higher value */
-        header->priv->adjustment->upper = total_time;
+        gtk_adjustment_set_upper (header->priv->adjustment, total_time);
 }
 
 static void

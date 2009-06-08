@@ -681,7 +681,7 @@ ario_storedplaylists_playlists_drag_data_get_cb (GtkWidget * widget,
         g_slist_free (playlists);
 
         /* Set drag data */
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) str_playlists->str,
+        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8, (const guchar *) str_playlists->str,
                                 strlen (str_playlists->str) * sizeof(guchar));
 
         g_string_free (str_playlists, TRUE);

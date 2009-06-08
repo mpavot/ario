@@ -1247,7 +1247,7 @@ ario_playlist_drop_songs (const int x, const int y,
         GSList *filenames = NULL;
         int i;
 
-        songs = g_strsplit ((const gchar *) data->data, "\n", 0);
+        songs = g_strsplit ((const gchar *) gtk_selection_data_get_data (data), "\n", 0);
 
         /* Get a list of filenames */
         for (i=0; songs[i]!=NULL && g_utf8_collate (songs[i], ""); ++i)
@@ -1267,7 +1267,7 @@ ario_playlist_drop_dir (const int x, const int y,
                         const GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START;
-        const gchar *dir = (const gchar *) data->data;
+        const gchar *dir = (const gchar *) gtk_selection_data_get_data (data);
 
         /* Add a whole directory to the playlist */
         ario_server_playlist_add_dir (dir,
@@ -1288,7 +1288,7 @@ ario_playlist_drop_criterias (const int x, const int y,
         GSList *filenames = NULL, *criterias = NULL;
 
         /* Get a list of criteria from drag data */
-        criterias_str = g_strsplit ((const gchar *) data->data, "\n", 0);
+        criterias_str = g_strsplit ((const gchar *) gtk_selection_data_get_data (data), "\n", 0);
         while (criterias_str[i] && *criterias_str[i] != '\0') {
                 nb = atoi (criterias_str[i]);
                 criteria = NULL;
@@ -1327,18 +1327,18 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
 
         /* Call the appropriate functions depending on data type */
-        if (data->type == gdk_atom_intern ("text/internal-list", TRUE)) {
+        if (gtk_selection_data_get_selection (data) == gdk_atom_intern ("text/internal-list", TRUE)) {
                 if (context->action & GDK_ACTION_COPY)
                         ario_playlist_copy_rows (x, y);
                 else
                         ario_playlist_move_rows (x, y);
-        } else if (data->type == gdk_atom_intern ("text/songs-list", TRUE)) {
+        } else if (gtk_selection_data_get_selection (data) == gdk_atom_intern ("text/songs-list", TRUE)) {
                 ario_playlist_drop_songs (x, y, data);
-        } else if (data->type == gdk_atom_intern ("text/radios-list", TRUE)) {
+        } else if (gtk_selection_data_get_selection (data) == gdk_atom_intern ("text/radios-list", TRUE)) {
                 ario_playlist_drop_songs (x, y, data);
-        } else if (data->type == gdk_atom_intern ("text/directory", TRUE)) {
+        } else if (gtk_selection_data_get_selection (data) == gdk_atom_intern ("text/directory", TRUE)) {
                 ario_playlist_drop_dir (x, y, data);
-        } else if (data->type == gdk_atom_intern ("text/criterias-list", TRUE)) {
+        } else if (gtk_selection_data_get_selection (data) == gdk_atom_intern ("text/criterias-list", TRUE)) {
                 ario_playlist_drop_criterias (x, y, data);
         }
 
@@ -1356,7 +1356,7 @@ ario_playlist_drag_data_get_cb (GtkWidget * widget,
 
         g_return_if_fail (selection_data != NULL);
 
-        gtk_selection_data_set (selection_data, selection_data->target, 8,
+        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8,
                                 NULL, 0);
 }
 
@@ -1658,11 +1658,17 @@ ario_playlist_cmd_save (GtkAction *action,
         entry = gtk_entry_new ();
         hbox = gtk_hbox_new (FALSE, 5);
 
-        gtk_box_pack_start_defaults (GTK_BOX (hbox), label);
-        gtk_box_pack_start_defaults (GTK_BOX (hbox), entry);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            label,
+                            TRUE, TRUE,
+                            0);
+        gtk_box_pack_start (GTK_BOX (hbox),
+                            entry,
+                            TRUE, TRUE,
+                            0);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 10);
         gtk_box_set_spacing (GTK_BOX (hbox), 4);
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox),
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
                            hbox);
         gtk_widget_show_all (dialog);
 

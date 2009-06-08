@@ -182,7 +182,7 @@ static void ario_information_style_set_cb (GtkWidget *vbox,
                                            GtkWidget *vp)
 {
         /* Set white background */
-        gtk_widget_modify_bg (vp, GTK_STATE_NORMAL, &(GTK_WIDGET(vbox)->style->light[GTK_STATE_NORMAL]));
+        gtk_widget_modify_bg (vp, GTK_STATE_NORMAL, &(gtk_widget_get_style (GTK_WIDGET(vbox))->light[GTK_STATE_NORMAL]));
 }
 
 static gboolean
@@ -599,7 +599,7 @@ ario_information_cover_drag_data_get_cb (GtkWidget *widget,
 
         /* Get drag data corresponding to dragged album */
         str = g_strdup_printf ("2\n%d\n%s\n%d\n%s\n", MPD_TAG_ITEM_ARTIST, album->artist, MPD_TAG_ITEM_ALBUM, album->album);
-        gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) str,
+        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8, (const guchar *) str,
                                 strlen (str) * sizeof(guchar));
 
         g_free (str);

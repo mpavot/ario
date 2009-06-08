@@ -84,11 +84,11 @@ ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
         shell_preferences->priv->notebook = GTK_WIDGET (gtk_notebook_new ());
         gtk_container_set_border_width (GTK_CONTAINER (shell_preferences->priv->notebook), 5);
 
-        gtk_container_add (GTK_CONTAINER (GTK_DIALOG (shell_preferences)->vbox),
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (shell_preferences))),
                            shell_preferences->priv->notebook);
 
         gtk_container_set_border_width (GTK_CONTAINER (shell_preferences), 5);
-        gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (shell_preferences)->vbox), 2);
+        gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (shell_preferences))), 2);
         gtk_dialog_set_has_separator (GTK_DIALOG (shell_preferences), FALSE);
 }
 
