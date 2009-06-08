@@ -1240,7 +1240,7 @@ ario_playlist_get_drop_position (const int x,
 
 static void
 ario_playlist_drop_songs (const int x, const int y,
-                          const GtkSelectionData *data)
+                          GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START;
         gchar **songs;
@@ -1264,7 +1264,7 @@ ario_playlist_drop_songs (const int x, const int y,
 
 static void
 ario_playlist_drop_dir (const int x, const int y,
-                        const GtkSelectionData *data)
+                        GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START;
         const gchar *dir = (const gchar *) gtk_selection_data_get_data (data);
@@ -1277,7 +1277,7 @@ ario_playlist_drop_dir (const int x, const int y,
 
 static void
 ario_playlist_drop_criterias (const int x, const int y,
-                              const GtkSelectionData *data)
+                              GtkSelectionData *data)
 {
         ARIO_LOG_FUNCTION_START;
         gchar **criterias_str;
