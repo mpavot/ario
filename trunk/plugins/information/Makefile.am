@@ -19,15 +19,7 @@ INCLUDES = 						\
 	-I$(top_srcdir)/src/plugins                   	\
 	-I$(top_srcdir)/src/sources                   	\
 	-I$(top_srcdir)/src/shell                       \
-	-Wall -Wimplicit -Wunused-label \
-	-Wmissing-declarations -Wmissing-prototypes \
-	-Wnested-externs -Wpointer-arith \
-	-Wcast-align -Wpointer-sign \
-	-Wclobbered -Wempty-body -Wignored-qualifiers \
-	-Wmissing-field-initializers -Wmissing-parameter-type \
-	-Wold-style-declaration -Woverride-init \
-	-Wsign-compare -Wtype-limits -Wuninitialized \
-	-Wbad-function-cast -Wold-style-definition
+	$(WARNINGS)
 
 uidir = $(plugindatadir)
 ui_DATA = information.ui

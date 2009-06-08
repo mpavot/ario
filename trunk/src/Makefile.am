@@ -3,15 +3,7 @@ bin_PROGRAMS = ario
 
 noinst_LTLIBRARIES = libario.la
 
-INCLUDES = -Wall -Wimplicit -Wunused-label \
-	   -Wmissing-declarations -Wmissing-prototypes \
-	   -Wnested-externs -Wpointer-arith \
-	   -Wcast-align -Wpointer-sign \
-           -Wclobbered -Wempty-body -Wignored-qualifiers \
-	   -Wmissing-field-initializers -Wmissing-parameter-type \
-	   -Wold-style-declaration -Woverride-init \
-           -Wsign-compare -Wtype-limits -Wuninitialized \
-	   -Wbad-function-cast -Wold-style-definition
+INCLUDES = $(WARNINGS)
 
 ario_SOURCES = ario-main.c
 ario_LDADD = libario.la $(DEPS_LIBS)
