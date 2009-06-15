@@ -31,7 +31,7 @@
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-#define AMAZON_URI  "http://webservices.amazon.%s/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SearchIndex=Music&ResponseGroup=Images&SubscriptionId=%s&Keywords=%s"
+#define AMAZON_URI  "http://ecs.amazonaws.%s/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SearchIndex=Music&ResponseGroup=Images&AWSAccessKeyId=%s&Keywords=%s"
 
 #define COVER_SMALL "SmallImage"
 #define COVER_MEDIUM "MediumImage"
@@ -196,11 +196,6 @@ ario_cover_amazon_make_xml_uri (const char *artist,
 
         /* What is the amazon country choosen in the preferences? */
         ext = ario_conf_get_string (PREF_COVER_AMAZON_COUNTRY, PREF_COVER_AMAZON_COUNTRY_DEFAULT);
-
-        /* The japanese amazon need a different extension */
-        if (!strcmp (ext, "jp")) {
-                ext = "co.jp";
-        }
 
         /* We make the xml uri with all the parameters */
         xml_uri = g_strdup_printf (AMAZON_URI, ext, mykey, keywords);
