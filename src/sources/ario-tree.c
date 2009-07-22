@@ -101,7 +101,8 @@ typedef struct
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
+        PROP_UI_MANAGER,
+        PROP_TAG
 };
 
 /* Object signals */
@@ -157,6 +158,15 @@ ario_tree_class_init (ArioTreeClass *klass)
                                                               "GtkUIManager object",
                                                               GTK_TYPE_UI_MANAGER,
                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_object_class_install_property (object_class,
+                                         PROP_TAG,
+                                         g_param_spec_uint ("tag",
+                                                            "Tag",
+                                                            "Tag ID",
+                                                            0, G_MAXUINT,
+                                                            0,
+                                                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Object signals */
         ario_tree_signals[SELECTION_CHANGED] =
@@ -226,6 +236,9 @@ ario_tree_set_property (GObject *object,
         case PROP_UI_MANAGER:
                 tree->priv->ui_manager = g_value_get_object (value);
                 break;
+        case PROP_TAG:
+                tree->tag = g_value_get_uint (value);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -244,6 +257,9 @@ ario_tree_get_property (GObject *object,
         switch (prop_id) {
         case PROP_UI_MANAGER:
                 g_value_set_object (value, tree->priv->ui_manager);
+                break;
+        case PROP_TAG:
+                g_value_set_uint (value, tree->tag);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -368,10 +384,10 @@ ario_tree_new (GtkUIManager *mgr,
 
         tree = ARIO_TREE (g_object_new (type,
                                         "ui-manager", mgr,
+                                        "tag", tag,
                                         NULL));
 
         g_return_val_if_fail (tree->priv != NULL, NULL);
-        tree->tag = tag;
         tree->is_first = is_first;
 
         return GTK_WIDGET (tree);
