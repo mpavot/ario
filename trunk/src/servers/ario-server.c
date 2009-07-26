@@ -361,26 +361,6 @@ ario_server_update_status (void)
         return ARIO_SERVER_INTERFACE_GET_CLASS (interface)->update_status ();
 }
 
-char *
-ario_server_get_current_title (void)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (interface->server_song)
-                return interface->server_song->title;
-        else
-                return NULL;
-}
-
-char *
-ario_server_get_current_name (void)
-{
-        ARIO_LOG_FUNCTION_START;
-        if (interface->server_song)
-                return interface->server_song->name;
-        else
-                return NULL;
-}
-
 ArioServerSong *
 ario_server_get_current_song_on_server (void)
 {
