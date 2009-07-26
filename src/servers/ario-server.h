@@ -185,10 +185,6 @@ GSList *                ario_server_get_playlists                          (void
 
 GSList *                ario_server_get_playlist_changes                   (gint64 playlist_id);
 
-char *                  ario_server_get_current_title                      (void);
-
-char *                  ario_server_get_current_name                       (void);
-
 ArioServerSong *        ario_server_get_current_song_on_server             (void);
 
 ArioServerSong *        ario_server_get_current_song                       (void);
