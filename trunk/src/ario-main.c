@@ -35,18 +35,19 @@
 #ifdef WIN32
 #include <windows.h>
 #else
-#include "lib/bacon-message-connection.h"
+#include <unique/unique.h>
 #endif
 
-static ArioShell *shell;
-static gboolean minimized = FALSE;
-
 #ifndef WIN32
-static void
-ario_main_on_message_received (G_GNUC_UNUSED const char *message,
-                               G_GNUC_UNUSED gpointer data)
+static UniqueResponse
+ario_main_on_message_received (G_GNUC_UNUSED UniqueApp *app,
+                               G_GNUC_UNUSED UniqueCommand command,
+                               G_GNUC_UNUSED UniqueMessageData *message,
+                               G_GNUC_UNUSED guint time_,
+                               ArioShell *shell)
 {
         ario_shell_present (shell);
+        return UNIQUE_RESPONSE_OK;
 }
 #endif
 
@@ -54,10 +55,12 @@ int
 main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START;
+        ArioShell *shell;
 
         /* Parse options */
         GOptionContext *context;
-        static const GOptionEntry options []  = {
+        gboolean minimized = FALSE;
+        const GOptionEntry options []  = {
                 { "minimized", 'm', 0, G_OPTION_ARG_NONE, &minimized, N_("Start minimized window"), NULL },
                 { NULL, 0, 0, 0, NULL, NULL, NULL }
         };
@@ -82,17 +85,14 @@ main (int argc, char *argv[])
                 return 0;
         }
 #else
-        BaconMessageConnection *bacon_connection = bacon_message_connection_new ("ario");
-        if (bacon_connection) {
-                if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)
-                    && !bacon_message_connection_get_is_server (bacon_connection)) {
-                        ARIO_LOG_INFO ("Ario is already running\n");
-                        bacon_message_connection_send (bacon_connection, "PRESENT");
+        UniqueApp *app;
+        app = unique_app_new ("org.Ario", NULL);
+        if (unique_app_is_running (app)) {
+                if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)) {
+                        unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
+                        g_object_unref (app);
                         return 0;
                 }
-                bacon_message_connection_set_callback (bacon_connection,
-                                                       ario_main_on_message_received,
-                                                       NULL);
         }
 #endif
 
@@ -121,6 +121,10 @@ main (int argc, char *argv[])
         shell = ario_shell_new ();
         ario_shell_construct (shell, minimized);
 
+#ifndef WIN32
+        unique_app_watch_window (app, GTK_WINDOW (shell));
+        g_signal_connect (app, "message-received", G_CALLBACK (ario_main_on_message_received), shell);
+#endif
         /* Initialisation of plugins engine */
         ario_plugins_engine_init (shell);
 
@@ -136,6 +140,10 @@ main (int argc, char *argv[])
 
         /* Shutdown configurations engine */
         ario_conf_shutdown ();
+
+#ifndef WIN32
+        g_object_unref (app);
+#endif
 
         /* Clean libxml stuff */
         xmlCleanupParser ();
