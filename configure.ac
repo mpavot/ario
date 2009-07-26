@@ -35,6 +35,7 @@ PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.16
                          gthread-2.0
                          gio-2.0
                          libxml-2.0
+                         unique-1.0
                          libcurl
                          gnutls])
 
