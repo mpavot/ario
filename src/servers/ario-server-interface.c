@@ -311,7 +311,8 @@ ario_server_interface_set_property (GObject *object,
                                         album_changed = ario_util_strcmp (old_song->album, new_song->album) != 0;
                                 /* Detect if song has changed */
                                 if (!song_changed)
-                                        song_changed = ario_util_strcmp (old_song->name, new_song->name) != 0;
+                                        song_changed = ario_util_strcmp (old_song->name, new_song->name) != 0
+                                                || ario_util_strcmp (old_song->title, new_song->title) != 0;
                         }
 
                         /* Remember to emit album-changed signal */
