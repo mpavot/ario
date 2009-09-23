@@ -212,16 +212,6 @@
   )
 )
 
-(define-function ario_server_get_current_title
-  (c-name "ario_server_get_current_title")
-  (return-type "char*")
-)
-
-(define-function ario_server_get_current_name
-  (c-name "ario_server_get_current_name")
-  (return-type "char*")
-)
-
 (define-function ario_server_get_current_song_on_server
   (c-name "ario_server_get_current_song_on_server")
   (return-type "ArioServerSong*")
