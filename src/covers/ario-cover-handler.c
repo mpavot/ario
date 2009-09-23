@@ -274,14 +274,17 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                 data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
                                 data->artist = g_strdup (artist);
                                 data->album = g_strdup (album);
-                                data->path = g_path_get_dirname (ario_server_get_current_song_path ());
-                                g_async_queue_push (cover_handler->priv->queue, data);
+                                if (ario_server_get_current_song_path ())
+                                {
+                                        data->path = g_path_get_dirname (ario_server_get_current_song_path ());
+                                        g_async_queue_push (cover_handler->priv->queue, data);
 
-                                if (!cover_handler->priv->thread) {
-                                        cover_handler->priv->thread = g_thread_create ((GThreadFunc) ario_cover_handler_get_covers,
-                                                                                       cover_handler,
-                                                                                       TRUE,
-                                                                                       NULL);
+                                        if (!cover_handler->priv->thread) {
+                                                cover_handler->priv->thread = g_thread_create ((GThreadFunc) ario_cover_handler_get_covers,
+                                                                                               cover_handler,
+                                                                                               TRUE,
+                                                                                               NULL);
+                                        }
                                 }
                         }
                 }
