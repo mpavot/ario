@@ -80,10 +80,10 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
                 artist = ario_server_get_current_artist ();
                 album = ario_server_get_current_album ();
 
-                if (!album)
-                        album = ARIO_SERVER_UNKNOWN;
                 if (!artist)
                         artist = ARIO_SERVER_UNKNOWN;
+                if (!album)
+                        album = ARIO_SERVER_UNKNOWN;
 
                 secondary = TRAY_ICON_FROM_MARKUP (album, artist);
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "body", secondary);
