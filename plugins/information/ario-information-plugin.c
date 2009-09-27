@@ -62,8 +62,8 @@ impl_activate (ArioPlugin *plugin,
 
         g_object_unref (uimanager);
 
-        ario_sourcemanager_append (ARIO_SOURCE (pi->priv->source));
-        ario_sourcemanager_reorder ();
+        ario_source_manager_append (ARIO_SOURCE (pi->priv->source));
+        ario_source_manager_reorder ();
 }
 
 static void
@@ -71,7 +71,7 @@ impl_deactivate (ArioPlugin *plugin,
                  ArioShell *shell)
 {
         ArioInformationPlugin *pi = ARIO_INFORMATION_PLUGIN (plugin);
-        ario_sourcemanager_remove (ARIO_SOURCE (pi->priv->source));
+        ario_source_manager_remove (ARIO_SOURCE (pi->priv->source));
 }
 
 static void

@@ -191,6 +191,8 @@ endif
 INST_H_FILES = \
         plugins/ario-plugin.h \
         servers/ario-server.h \
+        sources/ario-source-manager.h \
+        sources/ario-source.h \
         shell/ario-shell.h
 
 regenerate-enum-types:

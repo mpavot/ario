@@ -61,6 +61,41 @@ ario_server_action_type_get_type (void)
 	return the_type;
 }
 
+/* enumerations from "sources/ario-source-manager.h" */
+#include "sources/ario-source-manager.h"
+
+GType
+ario_source_type_get_type (void)
+{
+	static GType the_type = 0;
+	
+	if (the_type == 0)
+	{
+		static const GEnumValue values[] = {
+			{ ARIO_SOURCE_BROWSER,
+			  "ARIO_SOURCE_BROWSER",
+			  "browser" },
+			{ ARIO_SOURCE_RADIO,
+			  "ARIO_SOURCE_RADIO",
+			  "radio" },
+			{ ARIO_SOURCE_SEARCH,
+			  "ARIO_SOURCE_SEARCH",
+			  "search" },
+			{ ARIO_SOURCE_PLAYLISTS,
+			  "ARIO_SOURCE_PLAYLISTS",
+			  "playlists" },
+			{ ARIO_SOURCE_FILESYSTEM,
+			  "ARIO_SOURCE_FILESYSTEM",
+			  "filesystem" },
+			{ 0, NULL, NULL }
+		};
+		the_type = g_enum_register_static (
+				g_intern_static_string ("ArioSourceType"),
+				values);
+	}
+	return the_type;
+}
+
 /* enumerations from "shell/ario-shell.h" */
 #include "shell/ario-shell.h"
 

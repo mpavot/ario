@@ -1629,7 +1629,7 @@ ario_playlist_cmd_goto_playing_song (GtkAction *action,
         }
 
         /* Also go to the playing song in the souces */
-        ario_sourcemanager_goto_playling_song ();
+        ario_source_manager_goto_playling_song ();
 }
 
 void
