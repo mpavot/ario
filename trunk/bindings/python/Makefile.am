@@ -6,6 +6,8 @@ noinst_LTLIBRARIES = \
 nodist_ario_la_SOURCES = \
 	ario.c
 
+ario_la_SOURCES = override_common.c override_common.h
+
 ario_la_LDFLAGS = \
 	-module -avoid-version
 
@@ -39,6 +41,8 @@ ario.c: ario.defs ario.override $(top_builddir)/src/ario-enum-types.h
 
 BINDING_ARIO_HEADERS_SRCDIR_IN = \
 	src/plugins/ario-plugin.h \
+	src/sources/ario-source-manager.h \
+	src/sources/ario-source.h \
 	src/servers/ario-server.h \
         src/shell/ario-shell.h
 

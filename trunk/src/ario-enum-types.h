@@ -16,6 +16,11 @@ GType ario_server_type_get_type	(void) G_GNUC_CONST;
 #define ARIO_TYPE_SERVER_ACTION_TYPE	(ario_server_action_type_get_type())
 GType ario_server_action_type_get_type	(void) G_GNUC_CONST;
 
+/* Enumerations from "sources/ario-source-manager.h" */
+
+#define ARIO_TYPE_SOURCE_TYPE	(ario_source_type_get_type())
+GType ario_source_type_get_type	(void) G_GNUC_CONST;
+
 /* Enumerations from "shell/ario-shell.h" */
 
 #define ARIO_TYPE_VISIBILITY	(ario_visibility_get_type())

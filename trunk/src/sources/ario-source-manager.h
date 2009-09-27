@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __ARIO_SOURCEMANAGER_H
-#define __ARIO_SOURCEMANAGER_H
+#ifndef __ARIO_SOURCE_MANAGER_H
+#define __ARIO_SOURCE_MANAGER_H
 
 #include <gtk/gtknotebook.h>
 #include "sources/ario-source.h"
@@ -34,12 +34,12 @@ typedef enum
         ARIO_SOURCE_FILESYSTEM
 }ArioSourceType;
 
-#define TYPE_ARIO_SOURCEMANAGER         (ario_sourcemanager_get_type ())
-#define ARIO_SOURCEMANAGER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), TYPE_ARIO_SOURCEMANAGER, ArioSourceManager))
-#define ARIO_SOURCEMANAGER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), TYPE_ARIO_SOURCEMANAGER, ArioSourceManagerClass))
-#define IS_ARIO_SOURCEMANAGER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), TYPE_ARIO_SOURCEMANAGER))
-#define IS_ARIO_SOURCEMANAGER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_SOURCEMANAGER))
-#define ARIO_SOURCEMANAGER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_SOURCEMANAGER, ArioSourceManagerClass))
+#define ARIO_TYPE_SOURCE_MANAGER         (ario_source_manager_get_type ())
+#define ARIO_SOURCE_MANAGER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManager))
+#define ARIO_SOURCE_MANAGER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManagerClass))
+#define ARIO_IS_SOURCE_MANAGER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), ARIO_TYPE_SOURCE_MANAGER))
+#define ARIO_IS_SOURCE_MANAGER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), ARIO_TYPE_SOURCE_MANAGER))
+#define ARIO_SOURCE_MANAGER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManagerClass))
 
 typedef struct ArioSourceManagerPrivate ArioSourceManagerPrivate;
 
@@ -61,17 +61,17 @@ typedef struct
 
 } ArioSourceManagerClass;
 
-GType                   ario_sourcemanager_get_type     (void) G_GNUC_CONST;
+GType                   ario_source_manager_get_type     (void) G_GNUC_CONST;
 
-GtkWidget*              ario_sourcemanager_get_instance (GtkUIManager *mgr,
-                                                         GtkActionGroup *group);
+GtkWidget*              ario_source_manager_get_instance (GtkUIManager *mgr,
+                                                          GtkActionGroup *group);
 
-void                    ario_sourcemanager_append       (ArioSource *source);
-void                    ario_sourcemanager_remove       (ArioSource *source);
-void                    ario_sourcemanager_reorder      (void);
-void                    ario_sourcemanager_shutdown     (void);
-void                    ario_sourcemanager_goto_playling_song (void);
+void                    ario_source_manager_append       (ArioSource *source);
+void                    ario_source_manager_remove       (ArioSource *source);
+void                    ario_source_manager_reorder      (void);
+void                    ario_source_manager_shutdown     (void);
+void                    ario_source_manager_goto_playling_song (void);
 
 G_END_DECLS
 
-#endif /* __ARIO_SOURCEMANAGER_H */
+#endif /* __ARIO_SOURCE_MANAGER_H */

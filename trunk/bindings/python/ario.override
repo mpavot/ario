@@ -4,10 +4,13 @@ headers
 #include "pygobject.h"
 #include <pygtk/pygtk.h>
 
+#include "override_common.h"
 #include "ario-plugin.h"
 #include "servers/ario-server.h"
 #include "shell/ario-shell.h"
 #include "ario-enum-types.h"
+#include "sources/ario-source-manager.h"
+#include "sources/ario-source.h"
 
 void pyario_register_classes (PyObject *d); 
 void pyario_add_constants (PyObject *module, const gchar *strip_prefix);
@@ -18,4 +21,28 @@ import gtk.Widget as PyGtkWidget_Type
 import gobject.GObject as PyGObject_Type
 import gtk.Window as PyGtkWindow_Type
 import gtk.VBox as PyGtkVBox_Type
+import gtk.HBox as PyGtkHBox_Type
+import gtk.ActionGroup as PyGtkActionGroup_Type
+import gtk.UIManager as PyGtkUIManager_Type
+import gtk.Notebook as PyGtkNotebook_Type
 %%
+new-constructor ARIO_TYPE_SOURCE
+%%
+override ario_server_playlist_append_songs kwargs
+static PyObject *
+_wrap_ario_server_playlist_append_songs (PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+        static char *kwlist[] = { "songs", "play", NULL };
+        PyObject *py_songs = NULL;
+        GSList *songs;
+        gboolean play = FALSE;
+
+        if (!PyArg_ParseTupleAndKeywords(args, kwargs, "Ob:Server.append_songs", kwlist, &py_songs, &play))
+                return NULL;
+
+        songs = _helper_unwrap_string_pyslist (py_songs, FALSE);
+        ario_server_playlist_append_songs (songs, play);
+        g_slist_free (songs);
+
+        Py_RETURN_NONE;
+}

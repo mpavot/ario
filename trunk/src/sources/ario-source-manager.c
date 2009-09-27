@@ -31,13 +31,13 @@
 #include "sources/ario-storedplaylists.h"
 #include "widgets/ario-playlist.h"
 
-static void ario_sourcemanager_sync (ArioSourceManager *sourcemanager);
-static void ario_sourcemanager_showtabs_changed_cb (guint notification_id,
+static void ario_source_manager_sync (ArioSourceManager *sourcemanager);
+static void ario_source_manager_showtabs_changed_cb (guint notification_id,
                                                     ArioSourceManager *sourcemanager);
-static gboolean ario_sourcemanager_button_press_cb (GtkWidget *widget,
+static gboolean ario_source_manager_button_press_cb (GtkWidget *widget,
                                                     GdkEventButton *event,
                                                     ArioSourceManager *sourcemanager);
-static gboolean ario_sourcemanager_switch_page_cb (GtkNotebook *notebook,
+static gboolean ario_source_manager_switch_page_cb (GtkNotebook *notebook,
                                                    GtkNotebookPage *notebook_page,
                                                    gint page,
                                                    ArioSourceManager *sourcemanager);
@@ -59,11 +59,11 @@ typedef struct ArioSourceData
         guint ui_merge_id;
 } ArioSourceData;
 
-#define ARIO_SOURCEMANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SOURCEMANAGER, ArioSourceManagerPrivate))
-G_DEFINE_TYPE (ArioSourceManager, ario_sourcemanager, GTK_TYPE_NOTEBOOK)
+#define ARIO_SOURCE_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManagerPrivate))
+G_DEFINE_TYPE (ArioSourceManager, ario_source_manager, GTK_TYPE_NOTEBOOK)
 
 static void
-ario_sourcemanager_class_init (ArioSourceManagerClass *klass)
+ario_source_manager_class_init (ArioSourceManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
         /* Private attributes */
@@ -71,14 +71,14 @@ ario_sourcemanager_class_init (ArioSourceManagerClass *klass)
 }
 
 static void
-ario_sourcemanager_init (ArioSourceManager *sourcemanager)
+ario_source_manager_init (ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
-        sourcemanager->priv = ARIO_SOURCEMANAGER_GET_PRIVATE (sourcemanager);
+        sourcemanager->priv = ARIO_SOURCE_MANAGER_GET_PRIVATE (sourcemanager);
 }
 
 GtkWidget *
-ario_sourcemanager_get_instance (GtkUIManager *mgr,
+ario_source_manager_get_instance (GtkUIManager *mgr,
                                  GtkActionGroup *group)
 {
         ARIO_LOG_FUNCTION_START;
@@ -88,7 +88,7 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
         if (instance)
                 return GTK_WIDGET (instance);
 
-        instance = g_object_new (TYPE_ARIO_SOURCEMANAGER,
+        instance = g_object_new (ARIO_TYPE_SOURCE_MANAGER,
                                  NULL);
         g_return_val_if_fail (instance->priv != NULL, NULL);
 
@@ -98,38 +98,38 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
         /* Create browser */
         source = ario_browser_new (mgr,
                                    group);
-        ario_sourcemanager_append (ARIO_SOURCE (source));
+        ario_source_manager_append (ARIO_SOURCE (source));
 
 #ifdef ENABLE_SEARCH
         /* Create search */
         source = ario_search_new (mgr,
                                   group);
-        ario_sourcemanager_append (ARIO_SOURCE (source));
+        ario_source_manager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         /* Create stored playlists source */
         source = ario_storedplaylists_new (mgr,
                                            group);
-        ario_sourcemanager_append (ARIO_SOURCE (source));
+        ario_source_manager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
         /* Connect signlas for actions on notebook */
         g_signal_connect (instance,
                           "button_press_event",
-                          G_CALLBACK (ario_sourcemanager_button_press_cb),
+                          G_CALLBACK (ario_source_manager_button_press_cb),
                           instance);
 
         g_signal_connect_after (instance,
                                 "switch-page",
-                                G_CALLBACK (ario_sourcemanager_switch_page_cb),
+                                G_CALLBACK (ario_source_manager_switch_page_cb),
                                 instance);
 
         /* Reorder sources according to preferences */
-        ario_sourcemanager_reorder ();
+        ario_source_manager_reorder ();
 
         /* Notification for preference changes */
         ario_conf_notification_add (PREF_SHOW_TABS,
-                                    (ArioNotifyFunc) ario_sourcemanager_showtabs_changed_cb,
+                                    (ArioNotifyFunc) ario_source_manager_showtabs_changed_cb,
                                     instance);
 
         /* Set tabs visibility according to preferences */
@@ -140,7 +140,7 @@ ario_sourcemanager_get_instance (GtkUIManager *mgr,
 }
 
 static void
-ario_sourcemanager_shutdown_foreach (ArioSource *source,
+ario_source_manager_shutdown_foreach (ArioSource *source,
                                      GSList **ordered_sources)
 {
         ARIO_LOG_FUNCTION_START;
@@ -152,7 +152,7 @@ ario_sourcemanager_shutdown_foreach (ArioSource *source,
 }
 
 void
-ario_sourcemanager_shutdown (void)
+ario_source_manager_shutdown (void)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *ordered_sources = NULL;
@@ -163,7 +163,7 @@ ario_sourcemanager_shutdown (void)
 
         /* Shutdown each source and get an ordered list of sources */
         gtk_container_foreach (GTK_CONTAINER (instance),
-                               (GtkCallback) ario_sourcemanager_shutdown_foreach,
+                               (GtkCallback) ario_source_manager_shutdown_foreach,
                                &ordered_sources);
 
         /* Save ordered list of sources */
@@ -172,7 +172,7 @@ ario_sourcemanager_shutdown (void)
 }
 
 void
-ario_sourcemanager_goto_playling_song (void)
+ario_source_manager_goto_playling_song (void)
 {
         ARIO_LOG_FUNCTION_START;
         /* Go to playing song on active source */
@@ -182,7 +182,7 @@ ario_sourcemanager_goto_playling_song (void)
 }
 
 void
-ario_sourcemanager_reorder (void)
+ario_source_manager_reorder (void)
 {
         ARIO_LOG_FUNCTION_START;
         int i = 0;
@@ -209,11 +209,11 @@ ario_sourcemanager_reorder (void)
         g_slist_foreach (ordered_sources, (GFunc) g_free, NULL);
         g_slist_free (ordered_sources);
 
-        ario_sourcemanager_sync (instance);
+        ario_source_manager_sync (instance);
 }
 
 static void
-ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
+ario_source_manager_sync (ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
         gint page;
@@ -224,7 +224,7 @@ ario_sourcemanager_sync (ArioSourceManager *sourcemanager)
 }
 
 static void
-ario_sourcemanager_showtabs_changed_cb (guint notification_id,
+ario_source_manager_showtabs_changed_cb (guint notification_id,
                                         ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
@@ -234,7 +234,7 @@ ario_sourcemanager_showtabs_changed_cb (guint notification_id,
 }
 
 static void
-ario_sourcemanager_set_source_active (ArioSource *source,
+ario_source_manager_set_source_active (ArioSource *source,
                                       gboolean active)
 {
         ARIO_LOG_FUNCTION_START;
@@ -262,25 +262,25 @@ ario_sourcemanager_set_source_active (ArioSource *source,
 }
 
 static void
-ario_sourcemanager_menu_source_cb (GtkToggleAction *action,
+ario_source_manager_menu_source_cb (GtkToggleAction *action,
                                    ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START;
         /* Select source as in menu */
-        ario_sourcemanager_set_source_active (source, gtk_toggle_action_get_active (action));
+        ario_source_manager_set_source_active (source, gtk_toggle_action_get_active (action));
 }
 
 static void
-ario_sourcemanager_menu_cb (GtkCheckMenuItem *checkmenuitem,
+ario_source_manager_menu_cb (GtkCheckMenuItem *checkmenuitem,
                             ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START;
         /* Select source as in menu */
-        ario_sourcemanager_set_source_active (source, gtk_check_menu_item_get_active (checkmenuitem));
+        ario_source_manager_set_source_active (source, gtk_check_menu_item_get_active (checkmenuitem));
 }
 
 void
-ario_sourcemanager_append (ArioSource *source)
+ario_source_manager_append (ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *hbox;
@@ -333,7 +333,7 @@ ario_sourcemanager_append (ArioSource *source)
         GtkToggleActionEntry actions [] =
         {
                 { ario_source_get_id (source), NULL, ario_source_get_name (source), NULL,
-                        NULL, G_CALLBACK (ario_sourcemanager_menu_source_cb), ario_conf_get_boolean (conf_name, TRUE) }
+                        NULL, G_CALLBACK (ario_source_manager_menu_source_cb), ario_conf_get_boolean (conf_name, TRUE) }
         };
         g_free (conf_name);
         gtk_action_group_add_toggle_actions (instance->priv->group,
@@ -349,7 +349,7 @@ ario_sourcemanager_append (ArioSource *source)
 }
 
 void
-ario_sourcemanager_remove (ArioSource *source)
+ario_source_manager_remove (ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *tmp;
@@ -384,7 +384,7 @@ ario_sourcemanager_remove (ArioSource *source)
 }
 
 static gboolean
-ario_sourcemanager_button_press_cb (GtkWidget *widget,
+ario_source_manager_button_press_cb (GtkWidget *widget,
                                     GdkEventButton *event,
                                     ArioSourceManager *sourcemanager)
 {
@@ -411,7 +411,7 @@ ario_sourcemanager_button_press_cb (GtkWidget *widget,
 
                         /* Connect signal for activation/deactivation of sources in popup menu */
                         g_signal_connect (item, "toggled",
-                                          G_CALLBACK (ario_sourcemanager_menu_cb), data->source);
+                                          G_CALLBACK (ario_source_manager_menu_cb), data->source);
                         gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
                 }
 
@@ -425,7 +425,7 @@ ario_sourcemanager_button_press_cb (GtkWidget *widget,
 }
 
 static gboolean
-ario_sourcemanager_switch_page_cb (GtkNotebook *notebook,
+ario_source_manager_switch_page_cb (GtkNotebook *notebook,
                                    GtkNotebookPage *notebook_page,
                                    gint page,
                                    ArioSourceManager *sourcemanager)

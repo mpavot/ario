@@ -21,6 +21,20 @@
   (gtype-id "ARIO_TYPE_SHELL")
 )
 
+(define-object Source
+  (in-module "Ario")
+  (parent "GtkHBox")
+  (c-name "ArioSource")
+  (gtype-id "ARIO_TYPE_SOURCE")
+)
+
+(define-object SourceManager
+  (in-module "Ario")
+  (parent "GtkNotebook")
+  (c-name "ArioSourceManager")
+  (gtype-id "ARIO_TYPE_SOURCE_MANAGER")
+)
+
 ;; Enumerations and flags ...
 
 (define-enum ServerType
@@ -54,6 +68,19 @@
     '("hidden" "VISIBILITY_HIDDEN")
     '("visible" "VISIBILITY_VISIBLE")
     '("toggle" "VISIBILITY_TOGGLE")
+  )
+)
+
+(define-enum SourceType
+  (in-module "Ario")
+  (c-name "ArioSourceType")
+  (gtype-id "ARIO_TYPE_SOURCE_TYPE")
+  (values
+    '("browser" "ARIO_SOURCE_BROWSER")
+    '("radio" "ARIO_SOURCE_RADIO")
+    '("search" "ARIO_SOURCE_SEARCH")
+    '("playlists" "ARIO_SOURCE_PLAYLISTS")
+    '("filesystem" "ARIO_SOURCE_FILESYSTEM")
   )
 )
 
@@ -661,6 +688,102 @@
   (parameters
     '("ArioVisibility" "state")
   )
+)
+
+
+
+;; From ario-source-manager.h
+
+(define-function ario_source_manager_get_type
+  (c-name "ario_source_manager_get_type")
+  (return-type "GType")
+)
+
+(define-function ario_source_manager_get_instance
+  (c-name "ario_source_manager_get_instance")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GtkUIManager*" "mgr")
+    '("GtkActionGroup*" "group")
+  )
+)
+
+(define-method manager_append
+  (of-object "ArioSource")
+  (c-name "ario_source_manager_append")
+  (return-type "none")
+)
+
+(define-method manager_remove
+  (of-object "ArioSource")
+  (c-name "ario_source_manager_remove")
+  (return-type "none")
+)
+
+(define-function ario_source_manager_reorder
+  (c-name "ario_source_manager_reorder")
+  (return-type "none")
+)
+
+(define-function ario_source_manager_shutdown
+  (c-name "ario_source_manager_shutdown")
+  (return-type "none")
+)
+
+(define-function ario_source_manager_goto_playling_song
+  (c-name "ario_source_manager_goto_playling_song")
+  (return-type "none")
+)
+
+
+
+;; From ario-source.h
+
+(define-function ario_source_get_type
+  (c-name "ario_source_get_type")
+  (return-type "GType")
+)
+
+(define-method get_id
+  (of-object "ArioSource")
+  (c-name "ario_source_get_id")
+  (return-type "gchar*")
+)
+
+(define-method get_name
+  (of-object "ArioSource")
+  (c-name "ario_source_get_name")
+  (return-type "gchar*")
+)
+
+(define-method get_icon
+  (of-object "ArioSource")
+  (c-name "ario_source_get_icon")
+  (return-type "gchar*")
+)
+
+(define-method shutdown
+  (of-object "ArioSource")
+  (c-name "ario_source_shutdown")
+  (return-type "none")
+)
+
+(define-method select
+  (of-object "ArioSource")
+  (c-name "ario_source_select")
+  (return-type "none")
+)
+
+(define-method unselect
+  (of-object "ArioSource")
+  (c-name "ario_source_unselect")
+  (return-type "none")
+)
+
+(define-method goto_playling_song
+  (of-object "ArioSource")
+  (c-name "ario_source_goto_playling_song")
+  (return-type "none")
 )
 
 

@@ -458,7 +458,7 @@ ario_shell_construct (ArioShell *shell,
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);
 
         /* Create source manager */
-        shell->priv->sourcemanager = ario_sourcemanager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
+        shell->priv->sourcemanager = ario_source_manager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
 
         /* Create vpaned (separation between upper part and plyalist) */
         shell->priv->vpaned = gtk_vpaned_new ();
@@ -575,7 +575,7 @@ ario_shell_shutdown (ArioShell *shell)
         ario_playlist_shutdown ();
 
         /* Shutdown the source manager */
-        ario_sourcemanager_shutdown ();
+        ario_source_manager_shutdown ();
 
         /* Shutdown the cover_manager */
         ario_cover_manager_shutdown (ario_cover_manager_get_instance ());
