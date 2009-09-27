@@ -177,6 +177,7 @@ enum
         FILE_COLUMN,
         GENRE_COLUMN,
         DATE_COLUMN,
+        DISC_COLUMN,
         ID_COLUMN,
         TIME_COLUMN,
         N_COLUMN
@@ -238,6 +239,7 @@ static ArioPlaylistColumn all_columns []  = {
         { FILE_COLUMN, PREF_FILE_COLUMN_SIZE, PREF_FILE_COLUMN_SIZE_DEFAULT, PREF_FILE_COLUMN_ORDER, PREF_FILE_COLUMN_ORDER_DEFAULT, PREF_FILE_COLUMN_VISIBLE, PREF_FILE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE, NULL },
         { GENRE_COLUMN, PREF_GENRE_COLUMN_SIZE, PREF_GENRE_COLUMN_SIZE_DEFAULT, PREF_GENRE_COLUMN_ORDER, PREF_GENRE_COLUMN_ORDER_DEFAULT, PREF_GENRE_COLUMN_VISIBLE, PREF_GENRE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE, NULL },
         { DATE_COLUMN, PREF_DATE_COLUMN_SIZE, PREF_DATE_COLUMN_SIZE_DEFAULT, PREF_DATE_COLUMN_ORDER, PREF_DATE_COLUMN_ORDER_DEFAULT, PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE, NULL },
+        { DISC_COLUMN, PREF_DISC_COLUMN_SIZE, PREF_DISC_COLUMN_SIZE_DEFAULT, PREF_DISC_COLUMN_ORDER, PREF_DISC_COLUMN_ORDER_DEFAULT, PREF_DISC_COLUMN_VISIBLE, PREF_DISC_COLUMN_VISIBLE_DEFAULT, FALSE, TRUE, TRUE, NULL },
         { -1, NULL, 0, NULL, 0, NULL, FALSE, FALSE, FALSE, FALSE, NULL }
 };
 
@@ -345,11 +347,15 @@ ario_playlist_reorder_columns (void)
         ARIO_LOG_FUNCTION_START;
         GtkTreeViewColumn *orders[N_COLUMN] = {NULL};
         GtkTreeViewColumn *current, *prev = NULL;
-        int i;
+        int i, order;
 
         /* Get an ordered list of column in orders[] thanks to the preferences */
         for (i = 0; all_columns[i].columnnb != -1; ++i)
-                orders[ario_conf_get_integer (all_columns[i].pref_order, all_columns[i].default_order)] = all_columns[i].column;
+        {
+                order = ario_conf_get_integer (all_columns[i].pref_order, all_columns[i].default_order);
+                if (order < N_COLUMN)
+                        orders[order] = all_columns[i].column;
+        }
 
         /* Move columns in the order computed in orders[] */
         for (i = 0; i < N_COLUMN; ++i) {
@@ -505,7 +511,7 @@ ario_playlist_init (ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START;
         int i;
-        const gchar *column_names []  = { " ", _("Track"), _("Title"), _("Artist"), _("Album"), _("Duration"), _("File"), _("Genre"), _("Date") };
+        const gchar *column_names []  = { " ", _("Track"), _("Title"), _("Artist"), _("Album"), _("Duration"), _("File"), _("Genre"), _("Date"), _("Disc") };
         GtkWidget *image, *close_button;
         GtkScrolledWindow *scrolled_window;
 
@@ -533,12 +539,12 @@ ario_playlist_init (ArioPlaylist *playlist)
                 ario_playlist_append_column (&all_columns[i], column_names[i]);
 
         /* Reorder columns */
-
         ario_playlist_reorder_columns ();
 
         /* Create tree model */
         playlist->priv->model = gtk_list_store_new (N_COLUMN,
                                                     GDK_TYPE_PIXBUF,
+                                                    G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
                                                     G_TYPE_STRING,
@@ -873,6 +879,7 @@ ario_playlist_changed_cb (ArioServer *server,
                                             DATE_COLUMN, song->date,
                                             ID_COLUMN, song->id,
                                             TIME_COLUMN, song->time,
+                                            DISC_COLUMN, song->disc,
                                             -1);
                 }
         }

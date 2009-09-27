@@ -47,6 +47,8 @@ G_MODULE_EXPORT void ario_playlist_preferences_file_toogled_cb (GtkCheckButton *
                                                                 ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
                                                                 ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_disc_toogled_cb (GtkCheckButton *butt,
+                                                                ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckButton *butt,
                                                                       ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
@@ -62,6 +64,7 @@ struct ArioPlaylistPreferencesPrivate
         GtkWidget *duration_checkbutton;
         GtkWidget *file_checkbutton;
         GtkWidget *date_checkbutton;
+        GtkWidget *disc_checkbutton;
         GtkWidget *autoscroll_checkbutton;
 
         GtkWidget *playlist_combobox;
@@ -120,6 +123,8 @@ ario_playlist_preferences_new (void)
                 GTK_WIDGET (gtk_builder_get_object (builder, "file_checkbutton"));
         playlist_preferences->priv->date_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "date_checkbutton"));
+        playlist_preferences->priv->disc_checkbutton =
+                GTK_WIDGET (gtk_builder_get_object (builder, "disc_checkbutton"));
         playlist_preferences->priv->autoscroll_checkbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "autoscroll_checkbutton"));
         playlist_preferences->priv->playlist_combobox =
@@ -183,6 +188,9 @@ ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_prefe
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->date_checkbutton),
                                       ario_conf_get_boolean (PREF_DATE_COLUMN_VISIBLE, PREF_DATE_COLUMN_VISIBLE_DEFAULT));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->disc_checkbutton),
+                                      ario_conf_get_boolean (PREF_DISC_COLUMN_VISIBLE, PREF_DISC_COLUMN_VISIBLE_DEFAULT));
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (playlist_preferences->priv->autoscroll_checkbutton),
                                       ario_conf_get_boolean (PREF_PLAYLIST_AUTOSCROLL, PREF_PLAYLIST_AUTOSCROLL_DEFAULT));
@@ -303,6 +311,15 @@ ario_playlist_preferences_date_toogled_cb (GtkCheckButton *butt,
 {
         ARIO_LOG_FUNCTION_START;
         ario_conf_set_boolean (PREF_DATE_COLUMN_VISIBLE,
+                               gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
+}
+
+void
+ario_playlist_preferences_disc_toogled_cb (GtkCheckButton *butt,
+                                           ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START;
+        ario_conf_set_boolean (PREF_DISC_COLUMN_VISIBLE,
                                gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (butt)));
 }
 
