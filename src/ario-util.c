@@ -169,8 +169,10 @@ ario_util_format_title (ArioServerSong *server_song)
                 res = server_song->name;
         } else {
                 /* Original format is : "path/to/filename.extension" or http://path/to/address:port
-                 * We only want to display filename or http address */
-                if (!g_ascii_strncasecmp (server_song->file, "http://", 7)) {
+                 * or lastfm://path/to/address
+                 * We only want to display filename or http/last.fm address */
+                if (!g_ascii_strncasecmp (server_song->file, "http://", 7)
+                    || !g_ascii_strncasecmp (server_song->file, "lastfm://", 7)) {
                         res = server_song->file;
                 } else {
                         slash = g_strrstr (server_song->file, "/");
