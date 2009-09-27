@@ -540,12 +540,10 @@ ario_tray_icon_button_press_event_cb (GtkWidget *ebox, GdkEventButton *event,
                 /* First button shows/hides Ario */
                 ario_shell_set_visibility (icon->priv->shell, VISIBILITY_TOGGLE);
                 break;
-
         case 2:
                 /* Second button action is configurable */
                 ario_tray_icon_middle_click (icon);
                 break;
-
         case 3:
                 /* Third button shows popup menu */
                 popup = gtk_ui_manager_get_widget (GTK_UI_MANAGER (icon->priv->ui_manager),
