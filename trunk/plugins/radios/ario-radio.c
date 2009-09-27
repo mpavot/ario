@@ -86,6 +86,8 @@ static void ario_radio_popup_menu_cb (ArioDndTree* tree,
                                       ArioRadio *radio);
 static void ario_radio_activate_cb (ArioDndTree* tree,
                                     ArioRadio *radio);
+static void ario_radio_adder_changed_cb (GtkWidget *combobox,
+                                         ArioRadio *radio);
 
 /* Private attributes */
 struct ArioRadioPrivate
@@ -100,6 +102,10 @@ struct ArioRadioPrivate
         GtkActionGroup *actiongroup;
 
         xmlDocPtr doc;
+
+        GtkWidget *name_entry;
+        GtkWidget *data_label;
+        GtkWidget *data_entry;
 };
 
 /* Actions on radios */
@@ -144,6 +150,21 @@ enum
 /* Drag and drop targets */
 static const GtkTargetEntry radios_targets  [] = {
         { "text/radios-list", 0, 0 },
+};
+
+typedef struct
+{
+        gchar *name;
+        gchar *data_label;
+        gchar *url;
+} ArioRadioAdder;
+
+static ArioRadioAdder radio_adders [] = {
+        {"URL", "URL :", "%s"},
+        {N_("Last.fm: Radio of similar artists"), N_("Artist :"), "lastfm://artist/%s/similarartists"},
+        {N_("Last.fm: Radio of group"), N_("Group :"), "lastfm://artist/%s"},
+        {N_("Last.fm: Personal radio"), N_("Username :"), "lastfm://user/%s"},
+        {N_("Last.fm: Radio of genre"), N_("Genre :"), "lastfm://genre/%s"},
 };
 
 #define ARIO_RADIO_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_RADIO, ArioRadioPrivate))
@@ -249,7 +270,7 @@ ario_radio_init (ArioRadio *radio)
                           G_CALLBACK (ario_radio_activate_cb), radio);
 
         /* Hbox properties */
-        gtk_box_set_homogeneous (GTK_BOX (radio), TRUE);
+        gtk_box_set_homogeneous (GTK_BOX (radio), FALSE);
         gtk_box_set_spacing (GTK_BOX (radio), 4);
 
         gtk_box_pack_start (GTK_BOX (radio), scrolledwindow_radios, TRUE, TRUE, 0);
@@ -740,8 +761,7 @@ ario_radio_add_new_radio (ArioRadio *radio,
 }
 
 static gboolean
-ario_radio_launch_dialog (const gchar *title,
-                          ArioInternetRadio *internet_radio,
+ario_radio_launch_dialog (ArioInternetRadio *internet_radio,
                           ArioInternetRadio *new_internet_radio)
 {
         GtkWidget *dialog, *error_dialog;
@@ -751,7 +771,7 @@ ario_radio_launch_dialog (const gchar *title,
         gint retval = GTK_RESPONSE_CANCEL;
 
         /* Create dialog window */
-        dialog = gtk_dialog_new_with_buttons (title,
+        dialog = gtk_dialog_new_with_buttons (_("Edit a WebRadio"),
                                               NULL,
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
                                               GTK_STOCK_CANCEL,
@@ -842,6 +862,150 @@ ario_radio_launch_dialog (const gchar *title,
         return TRUE;
 }
 
+static gboolean
+ario_radio_launch_creation_dialog (ArioRadio * radio,
+                                   ArioInternetRadio *new_internet_radio)
+{
+        GtkWidget *dialog, *error_dialog;
+        GtkWidget *table;
+        gint retval = GTK_RESPONSE_CANCEL;
+
+        GtkWidget *vbox;
+        GtkTreeIter iter;
+        GtkWidget *combo_box;
+        GtkCellRenderer *renderer;
+        guint i;
+        GtkWidget *label1;
+
+        GtkListStore *list_store;
+
+        /* Create dialog window */
+        dialog = gtk_dialog_new_with_buttons (_("Add a WebRadio"),
+                                              NULL,
+                                              GTK_DIALOG_DESTROY_WITH_PARENT,
+                                              GTK_STOCK_CANCEL,
+                                              GTK_RESPONSE_CANCEL,
+                                              GTK_STOCK_OK,
+                                              GTK_RESPONSE_OK,
+                                              NULL);
+        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+                                         GTK_RESPONSE_OK);
+
+        /* Main vbox */
+        vbox = gtk_vbox_new (FALSE, 5);
+        gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);
+
+        /* Create model */
+        list_store = gtk_list_store_new (1, G_TYPE_STRING);
+
+        /* Add tags to model */
+        for (i = 0; i < G_N_ELEMENTS (radio_adders); ++i) {
+                gtk_list_store_append (list_store, &iter);
+                gtk_list_store_set (list_store, &iter,
+                                    0, gettext (radio_adders[i].name),
+                                    -1);
+        }
+        combo_box = gtk_combo_box_new_with_model (GTK_TREE_MODEL (list_store));
+
+        /* Create renderer */
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_clear (GTK_CELL_LAYOUT (combo_box));
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
+                                        "text", 0, NULL);
+
+        gtk_box_pack_start (GTK_BOX (vbox),
+                            combo_box,
+                            FALSE, FALSE, 0);
+
+        /* Create the widgets */
+        label1 = gtk_label_new (_("Name :"));
+        radio->priv->data_label = gtk_label_new (_("URL :"));
+
+        radio->priv->name_entry = gtk_entry_new ();
+        radio->priv->data_entry = gtk_entry_new ();
+
+        gtk_entry_set_activates_default (GTK_ENTRY (radio->priv->name_entry), TRUE);
+        gtk_entry_set_activates_default (GTK_ENTRY (radio->priv->data_entry), TRUE);
+
+        /* Create table */
+        table = gtk_table_new (2, 2 , FALSE);
+        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
+
+        /* Add widgets to table */
+        gtk_table_attach_defaults (GTK_TABLE(table),
+                                   label1,
+                                   0, 1,
+                                   0, 1);
+
+        gtk_table_attach_defaults (GTK_TABLE(table),
+                                   radio->priv->data_label,
+                                   0, 1,
+                                   1, 2);
+
+        gtk_table_attach_defaults (GTK_TABLE(table),
+                                   radio->priv->name_entry,
+                                   1, 2,
+                                   0, 1);
+
+        gtk_table_attach_defaults (GTK_TABLE(table),
+                                   radio->priv->data_entry,
+                                   1, 2,
+                                   1, 2);
+
+        gtk_table_set_col_spacing (GTK_TABLE(table),
+                                   0, 4);
+
+        /* Add table to vbox */
+        gtk_box_pack_start (GTK_BOX (vbox),
+                            table,
+                            FALSE, FALSE, 0);
+
+        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+                           vbox);
+
+        /* Select first item */
+        g_signal_connect (combo_box,
+                          "changed",
+                          G_CALLBACK (ario_radio_adder_changed_cb), radio);
+        gtk_tree_model_get_iter_first (GTK_TREE_MODEL (list_store), &iter);
+        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo_box),
+                                       &iter);
+
+        /* Run dialog */
+        gtk_widget_show_all (dialog);
+        retval = gtk_dialog_run (GTK_DIALOG(dialog));
+        if (retval != GTK_RESPONSE_OK) {
+                gtk_widget_destroy (dialog);
+                return FALSE;
+        }
+
+        /* Get text boxes content */
+        new_internet_radio->name = g_strdup (gtk_entry_get_text (GTK_ENTRY(radio->priv->name_entry)));
+        new_internet_radio->url = g_strdup_printf (radio_adders[gtk_combo_box_get_active (GTK_COMBO_BOX (combo_box))].url,
+                                                   gtk_entry_get_text (GTK_ENTRY(radio->priv->data_entry)));
+
+        /* Detect bad values */
+        if (!new_internet_radio->name
+            || !new_internet_radio->url
+            || !strcmp(new_internet_radio->name, "")
+            || !strcmp(new_internet_radio->url, "")) {
+                error_dialog = gtk_message_dialog_new(NULL,
+                                                      GTK_DIALOG_MODAL,
+                                                      GTK_MESSAGE_ERROR,
+                                                      GTK_BUTTONS_OK,
+                                                      _("Bad parameters. You must specify a name and a URL for the radio."));
+                gtk_dialog_run(GTK_DIALOG(error_dialog));
+                gtk_widget_destroy(error_dialog);
+                gtk_widget_destroy(dialog);
+                return FALSE;
+        }
+
+        gtk_widget_destroy (dialog);
+
+        return TRUE;
+}
+
 static void
 ario_radio_cmd_new_radio (GtkAction *action,
                           ArioRadio *radio)
@@ -853,9 +1017,8 @@ ario_radio_cmd_new_radio (GtkAction *action,
         new_internet_radio.url = NULL;
 
         /* Laucn dialog */
-        if (ario_radio_launch_dialog (_("Add a WebRadio"),
-                                      NULL,
-                                      &new_internet_radio)) {
+        if (ario_radio_launch_creation_dialog (radio,
+                                               &new_internet_radio)) {
                 /* Add radio to config */
                 ario_radio_add_new_radio(radio,
                                          &new_internet_radio);
@@ -992,8 +1155,7 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
         new_internet_radio.url = NULL;
 
         /* Launch dialog window */
-        if (ario_radio_launch_dialog (_("Edit a WebRadio"),
-                                      internet_radio,
+        if (ario_radio_launch_dialog (internet_radio,
                                       &new_internet_radio)) {
                 /* Update radio config if needed */
                 ario_radio_modify_radio (radio,
@@ -1040,3 +1202,10 @@ ario_radio_cmd_radio_properties (GtkAction *action,
         ario_radio_free_internet_radio (internet_radio);
 }
 
+static void
+ario_radio_adder_changed_cb (GtkWidget *combo_box,
+                             ArioRadio *radio)
+{
+        gtk_label_set_text (GTK_LABEL (radio->priv->data_label),
+                            radio_adders[gtk_combo_box_get_active (GTK_COMBO_BOX (combo_box))].data_label);
+}
