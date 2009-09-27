@@ -677,6 +677,11 @@ ario_shell_set_visibility (ArioShell *shell,
                         if (shell->priv->maximized)
                                 gtk_window_maximize (GTK_WINDOW (shell));
                         gtk_widget_show_all (GTK_WIDGET(shell));
+
+                        /* Restore vpaned position
+                         * This is in a g_timeout_add because there seems to have a bug (#2798748) if I call 
+                         * ario_shell_sync_paned directly. I really don't understand why but this seems to work...*/
+                         g_timeout_add (100, (GSourceFunc) ario_shell_sync_paned, shell);
                 } else {
                         /* Save window state, size and position */
                         shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
@@ -686,6 +691,11 @@ ario_shell_set_visibility (ArioShell *shell,
                         gtk_window_get_size (GTK_WINDOW (shell),
                                              &shell->priv->window_w,
                                              &shell->priv->window_h);
+
+                        /* Save vpaned position */
+                        ario_conf_set_integer (PREF_VPANED_POSITION,
+                                               gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
+
                         gtk_widget_hide (GTK_WIDGET(shell));
                 }
         }
