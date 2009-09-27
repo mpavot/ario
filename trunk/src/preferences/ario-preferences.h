@@ -172,6 +172,14 @@
 #define PREF_DATE_COLUMN_ORDER                  "date_column_order"
 #define PREF_DATE_COLUMN_ORDER_DEFAULT          9
 
+/* Disc column properties */
+#define PREF_DISC_COLUMN_SIZE                   "disc_column_size"
+#define PREF_DISC_COLUMN_SIZE_DEFAULT           70
+#define PREF_DISC_COLUMN_VISIBLE                "disc_column_visible"
+#define PREF_DISC_COLUMN_VISIBLE_DEFAULT        FALSE
+#define PREF_DISC_COLUMN_ORDER                  "disc_column_order"
+#define PREF_DISC_COLUMN_ORDER_DEFAULT          10
+
 /* List of active plugins. It contains the "Location" of the active plugins. See the .ario-plugin file for obtaining the "Location" of a given plugin. */
 #define PREF_PLUGINS_LIST                       "active-plugins"
 #define PREF_PLUGINS_LIST_DEFAULT               "filesystem,radios,wikipedia"
