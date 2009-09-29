@@ -144,7 +144,7 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
         gboolean selected;
 
         /* Grab focus if needed */
-        if (!GTK_WIDGET_HAS_FOCUS (widget))
+        if (!gtk_widget_is_focus (widget))
                 gtk_widget_grab_focus (widget);
 
         /* Already in drag & drop we do nothing */
