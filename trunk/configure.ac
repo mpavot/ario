@@ -1,10 +1,11 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,1.3)
+m4_define(ario_version,1.3svn)
 
 AC_INIT([Ario], [ario_version], [marc.pavot@gmail.com], [ario])
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -77,7 +78,6 @@ for option in $WARN_CFLAGS; do
         unset SAVE_CFLAGS
 done
 unset option
-AC_SUBST(WARNINGS)
 
 dnl ================================================================
 dnl Debugging information
@@ -279,6 +279,21 @@ if test x"$enable_taglib" != xno; then
    AC_SUBST(TAGLIB_CFLAGS)
    AC_SUBST(TAGLIB_LIBS)
 fi
+
+dnl ================================================================
+dnl Deprecations
+dnl ================================================================
+AC_ARG_ENABLE(deprecations,
+              AC_HELP_STRING([--enable-deprecations],
+                             [Warn about deprecated usages]))
+if test x"$enable_deprecations" = xyes; then
+        WARNINGS="$WARNINGS -DG_DISABLE_DEPRECATED \
+-DGDK_DISABLE_DEPRECATED \
+-DGDK_PIXBUF_DISABLE_DEPRECATED \
+-DGTK_DISABLE_DEPRECATED \
+-DGSEAL_ENABLE"
+fi
+AC_SUBST(WARNINGS)
 
 PLUGINDIR='${libdir}/ario/plugins'
 AC_SUBST(PLUGINDIR)
