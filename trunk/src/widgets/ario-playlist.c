@@ -1334,18 +1334,18 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
 
         /* Call the appropriate functions depending on data type */
-        if (data->type == gdk_atom_intern ("text/internal-list", TRUE)) {
+        if (gtk_selection_data_get_data_type (data) == gdk_atom_intern ("text/internal-list", TRUE)) {
                 if (context->action & GDK_ACTION_COPY)
                         ario_playlist_copy_rows (x, y);
                 else
                         ario_playlist_move_rows (x, y);
-        } else if (data->type == gdk_atom_intern ("text/songs-list", TRUE)) {
+        } else if (gtk_selection_data_get_data_type (data) == gdk_atom_intern ("text/songs-list", TRUE)) {
                 ario_playlist_drop_songs (x, y, data);
-        } else if (data->type == gdk_atom_intern ("text/radios-list", TRUE)) {
+        } else if (gtk_selection_data_get_data_type (data) == gdk_atom_intern ("text/radios-list", TRUE)) {
                 ario_playlist_drop_songs (x, y, data);
-        } else if (data->type == gdk_atom_intern ("text/directory", TRUE)) {
+        } else if (gtk_selection_data_get_data_type (data) == gdk_atom_intern ("text/directory", TRUE)) {
                 ario_playlist_drop_dir (x, y, data);
-        } else if (data->type == gdk_atom_intern ("text/criterias-list", TRUE)) {
+        } else if (gtk_selection_data_get_data_type (data) == gdk_atom_intern ("text/criterias-list", TRUE)) {
                 ario_playlist_drop_criterias (x, y, data);
         }
 
