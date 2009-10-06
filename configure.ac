@@ -193,17 +193,6 @@ if test x"$enable_playlists" != xno; then
 fi
 
 dnl ================================================================
-dnl Eggtrayicon
-dnl ================================================================
-AC_ARG_ENABLE(eggtrayicon,
-              AC_HELP_STRING([--disable-eggtrayicon],
-                             [Disable support of eggtrayicon]))
-if test x"$enable_eggtrayicon" != xno; then
-   AC_DEFINE(ENABLE_EGGTRAYICON, 1, [Add support of eggtrayicon])
-fi
-AM_CONDITIONAL(USE_EGGTRAYICON, test x"$enable_eggtrayicon" != xno)
-
-dnl ================================================================
 dnl DBUS
 dnl ================================================================
 AC_ARG_ENABLE(dbus,
@@ -225,7 +214,7 @@ AC_ARG_ENABLE(notify,
                              [Disable support of libnotify]))
 if test x"$enable_notify" != xno; then
    PKG_CHECK_MODULES(NOTIFY, libnotify)
-
+   AC_DEFINE(ENABLE_LIBNOTIFY, 1, [Add support of libnotify])
 fi
 AM_CONDITIONAL(USE_NOTIFY, test x"$enable_notify" != xno)
 

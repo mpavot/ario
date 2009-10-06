@@ -39,14 +39,10 @@ libario_la_SOURCES = \
 	covers/ario-cover-provider.h\
         lib/ario-conf.c\
 	lib/ario-conf.h\
-	lib/eggtrayicon.c\
-	lib/eggtrayicon.h\
 	lib/gtk-builder-helpers.c\
 	lib/gtk-builder-helpers.h\
 	lib/libmpdclient.c\
 	lib/libmpdclient.h\
-	lib/libsexy/sexy-tooltip.c\
-	lib/libsexy/sexy-tooltip.h\
         lyrics/ario-lyrics-leoslyrics.c\
         lyrics/ario-lyrics-leoslyrics.h\
         lyrics/ario-lyrics-lyricwiki.c\
@@ -157,6 +153,8 @@ libario_la_SOURCES = \
 	widgets/ario-songlist.h\
 	widgets/ario-status-bar.c\
 	widgets/ario-status-bar.h\
+	widgets/ario-tooltip.c\
+	widgets/ario-tooltip.h\
 	widgets/ario-tray-icon.c\
 	widgets/ario-tray-icon.h\
 	widgets/ario-volume.c\

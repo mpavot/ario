@@ -182,7 +182,11 @@
 
 /* List of active plugins. It contains the "Location" of the active plugins. See the .ario-plugin file for obtaining the "Location" of a given plugin. */
 #define PREF_PLUGINS_LIST                       "active-plugins"
+#ifdef ENABLE_LIBNOTIFY
+#define PREF_PLUGINS_LIST_DEFAULT               "filesystem,radios,wikipedia,liblibnotify"
+#else
 #define PREF_PLUGINS_LIST_DEFAULT               "filesystem,radios,wikipedia"
+#endif
 
 /* Ordered list of sources */
 #define PREF_SOURCE_LIST                        "sources-order"
@@ -222,7 +226,11 @@
 
 /* The notifier id */
 #define PREF_NOTIFIER                           "notifier"
+#ifdef ENABLE_LIBNOTIFY
+#define PREF_NOTIFIER_DEFAULT                   "libnotify"
+#else
 #define PREF_NOTIFIER_DEFAULT                   "tooltip"
+#endif
 
 /* The duration of the notification (in seconds) */
 #define PREF_NOTIFICATION_TIME                  "notification-time"
