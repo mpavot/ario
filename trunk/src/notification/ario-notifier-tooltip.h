@@ -32,9 +32,13 @@ G_BEGIN_DECLS
 #define IS_ARIO_NOTIFIER_TOOLTIP_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), TYPE_ARIO_NOTIFIER_TOOLTIP))
 #define ARIO_NOTIFIER_TOOLTIP_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), TYPE_ARIO_NOTIFIER_TOOLTIP, ArioNotifierTooltipClass))
 
+typedef struct ArioNotifierTooltipPrivate ArioNotifierTooltipPrivate;
+
 typedef struct
 {
         ArioNotifier parent;
+
+        ArioNotifierTooltipPrivate *priv;
 } ArioNotifierTooltip;
 
 typedef struct

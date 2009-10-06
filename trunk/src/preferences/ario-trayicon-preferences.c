@@ -114,12 +114,6 @@ ario_trayicon_preferences_new (void)
 
         ario_trayicon_preferences_sync_trayicon (trayicon_preferences);
 
-#ifndef ENABLE_EGGTRAYICON
-        GtkWidget *tray_frame = GTK_WIDGET (gtk_builder_get_object (builder, "tray_frame"));
-        gtk_widget_hide (tray_frame);
-        gtk_widget_set_no_show_all (tray_frame, TRUE);
-#endif
-
         gtk_box_pack_start (GTK_BOX (trayicon_preferences), GTK_WIDGET (gtk_builder_get_object (builder, "trayicon_vbox")), TRUE, TRUE, 0);
 
         g_object_unref (builder);

@@ -123,11 +123,8 @@ ario_notifier_libnotify_init (ArioNotifierLibnotify *notifier_libnotify)
         notifier_libnotify->priv = ARIO_NOTIFIER_LIBNOTIFY_GET_PRIVATE (notifier_libnotify);
 
         notifier_libnotify->priv->notification = notify_notification_new ("Ario",  NULL, NULL, NULL);
-#ifdef ENABLE_EGGTRAYICON
-        notify_notification_attach_to_widget (notifier_libnotify->priv->notification, GTK_WIDGET (ario_tray_icon_get_instance ()));
-#else
-        notify_notification_attach_to_status_icon (notifier_libnotify->priv->notification, GTK_STATUS_ICON (ario_tray_icon_get_instance ()));
-#endif
+        notify_notification_attach_to_status_icon (notifier_libnotify->priv->notification,
+                                                   GTK_STATUS_ICON (ario_tray_icon_get_instance ()));
 }
 
 static void

@@ -263,11 +263,7 @@ ario_shell_finalize (GObject *object)
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->playlist_manager);
         g_object_unref (shell->priv->notification_manager);
-#ifdef ENABLE_EGGTRAYICON
-        gtk_widget_destroy (GTK_WIDGET (shell->priv->tray_icon));;
-#else
         g_object_unref (G_OBJECT (shell->priv->tray_icon));
-#endif
 
         g_object_unref (shell->priv->ui_manager);
         g_object_unref (shell->priv->actiongroup);
@@ -421,12 +417,7 @@ ario_shell_construct (ArioShell *shell,
         shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
                                                      shell->priv->ui_manager,
                                                      shell);
-        /* Egg tray icon can be hidden*/
-#ifdef ENABLE_EGGTRAYICON
-        gtk_widget_show_all (GTK_WIDGET (shell->priv->tray_icon));
-        if (!ario_conf_get_boolean (PREF_TRAY_ICON, PREF_TRAY_ICON_DEFAULT))
-                gtk_widget_hide (GTK_WIDGET (shell->priv->tray_icon));
-#endif
+
         /* Initialize playlist manager */
         shell->priv->playlist_manager = ario_playlist_manager_get_instance ();
 
