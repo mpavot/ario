@@ -479,7 +479,6 @@ ario_radio_get_radios (ArioRadio *radio)
                         xmlFree(xml_name);
 
                         /* Set radio URL */
-                        xml_name = xmlNodeGetContent (cur);
                         xml_url = xmlGetProp (cur, (const unsigned char *)"url");
                         internet_radio->url = g_strdup ((char *) xml_url);
                         xmlFree(xml_url);
@@ -1104,8 +1103,6 @@ ario_radio_modify_radio (ArioRadio *radio,
                          ArioInternetRadio *old_internet_radio,
                          ArioInternetRadio *new_internet_radio)
 {
-        ARIO_LOG_FUNCTION_START;
-
         ARIO_LOG_FUNCTION_START;
         xmlNodePtr cur, next_cur;
         xmlChar *xml_name;
