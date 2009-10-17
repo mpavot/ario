@@ -81,7 +81,7 @@ static void ario_tree_append_drag_data (ArioTree *tree,
                                         GtkTreeIter *iter,
                                         ArioTreeStringData *data);
 static void ario_tree_add_to_playlist (ArioTree *tree,
-                                       const gboolean play);
+                                       const PlaylistAction action);
 static void ario_tree_add_data_free (ArioTreeAddData *data);
 
 struct ArioTreePrivate
@@ -424,7 +424,9 @@ ario_tree_activate_cb (ArioDndTree* dnd_tree,
 {
         ARIO_LOG_FUNCTION_START;
         /* Add songs to main playlist */
-        ario_tree_cmd_add (tree, FALSE);
+        ario_tree_cmd_add (tree, 
+                           ario_conf_get_integer (PREF_DOUBLECLICK_BEHAVIOR,
+                                                  PREF_DOUBLECLICK_BEHAVIOR_DEFAULT));
 }
 
 static void
@@ -811,7 +813,7 @@ ario_tree_get_criterias (ArioTree *tree)
 
 static void
 ario_tree_add_to_playlist (ArioTree *tree,
-                           const gboolean play)
+                           const PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *criterias = NULL;
@@ -819,7 +821,7 @@ ario_tree_add_to_playlist (ArioTree *tree,
         criterias = ario_tree_get_criterias (tree);
 
         /* Append songs corresponfind to current criteria to main playlist */
-        ario_server_playlist_append_criterias (criterias, play, -1);
+        ario_server_playlist_append_criterias (criterias, action, -1);
 
         g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);
@@ -827,11 +829,11 @@ ario_tree_add_to_playlist (ArioTree *tree,
 
 void
 ario_tree_cmd_add (ArioTree *tree,
-                   const gboolean play)
+                   const PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         /* Call virtual method for songs addition in main playlist */
-        ARIO_TREE_GET_CLASS (tree)->add_to_playlist (tree, play);
+        ARIO_TREE_GET_CLASS (tree)->add_to_playlist (tree, action);
 }
 
 void

@@ -60,6 +60,10 @@
 #define PREF_TRAYICON_BEHAVIOR                  "trayicon_behavior"
 #define PREF_TRAYICON_BEHAVIOR_DEFAULT          0
 
+/* Define the behavior of a double click on a song/album/artist... */
+#define PREF_DOUBLECLICK_BEHAVIOR               "doubleclick_behavior"
+#define PREF_DOUBLECLICK_BEHAVIOR_DEFAULT       0
+
 /* True if the initial assistant has already been run */
 #define PREF_FIRST_TIME                         "first_time_flag"
 #define PREF_FIRST_TIME_DEFAULT                 FALSE

@@ -1263,7 +1263,7 @@ ario_playlist_drop_songs (const int x, const int y,
         /* Add songs to the playlist */
         ario_server_playlist_add_songs (filenames,
                                         ario_playlist_get_drop_position (x, y),
-                                        FALSE);
+                                        PLAYLIST_ADD);
 
         g_strfreev (songs);
         g_slist_free (filenames);
@@ -1279,7 +1279,7 @@ ario_playlist_drop_dir (const int x, const int y,
         /* Add a whole directory to the playlist */
         ario_server_playlist_add_dir (dir,
                                       ario_playlist_get_drop_position (x, y),
-                                      FALSE);
+                                      PLAYLIST_ADD);
 }
 
 static void
@@ -1316,7 +1316,7 @@ ario_playlist_drop_criterias (const int x, const int y,
         /* Add all songs matching the list of criteria to the playlist */
         ario_server_playlist_add_criterias (criterias,
                                             ario_playlist_get_drop_position (x, y),
-                                            FALSE, -1);
+                                            PLAYLIST_ADD, -1);
 
         g_slist_foreach (criterias, (GFunc) ario_server_criteria_free, NULL);
         g_slist_free (criterias);
