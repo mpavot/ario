@@ -117,7 +117,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
         switch (ario_conf_get_integer (PREF_DYNAMIC_TYPE, PREF_DYNAMIC_TYPE_DEFAULT)) {
         case SONGS_FROM_SAME_ARTIST:
                 artists = g_slist_append (artists, ario_server_get_current_artist ());
-                ario_server_playlist_append_artists (artists, FALSE, nbitems);
+                ario_server_playlist_append_artists (artists, PLAYLIST_ADD, nbitems);
                 g_slist_free (artists);
                 break;
         case SONGS_FROM_SAME_ALBUM:
@@ -131,7 +131,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
 
                 criterias = g_slist_append (criterias, criteria);
 
-                ario_server_playlist_append_criterias (criterias, FALSE, nbitems);
+                ario_server_playlist_append_criterias (criterias, PLAYLIST_ADD, nbitems);
 
                 g_slist_free (criteria);
                 g_slist_free (criterias);
@@ -168,7 +168,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                         criterias = NULL;
                         criterias = g_slist_append (criterias, criteria);
 
-                        ario_server_playlist_append_criterias (criterias, FALSE, -1);
+                        ario_server_playlist_append_criterias (criterias, PLAYLIST_ADD, -1);
 
                         g_slist_free (criteria);
                         g_slist_free (criterias);
@@ -212,7 +212,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                         criterias = NULL;
                         criterias = g_slist_append (criterias, criteria);
 
-                        ario_server_playlist_append_criterias (criterias, FALSE, -1);
+                        ario_server_playlist_append_criterias (criterias, PLAYLIST_ADD, -1);
 
                         g_slist_free (criteria);
                         g_slist_free (criterias);

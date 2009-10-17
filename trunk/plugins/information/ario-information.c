@@ -27,6 +27,8 @@
 #include "ario-util.h"
 #include "covers/ario-cover.h"
 #include "covers/ario-cover-handler.h"
+#include "preferences/ario-preferences.h"
+#include "lib/ario-conf.h"
 #include "lib/gtk-builder-helpers.h"
 #include "lyrics/ario-lyrics.h"
 #include "plugins/ario-plugin.h"
@@ -629,7 +631,9 @@ ario_information_cover_button_press_cb (GtkWidget *widget,
                 criterias = g_slist_append (criterias, criteria);
 
                 /* Add album to playlist */
-                ario_server_playlist_append_criterias (criterias, FALSE, -1);
+                ario_server_playlist_append_criterias (criterias,
+                                                       ario_conf_get_integer (PREF_DOUBLECLICK_BEHAVIOR, PREF_DOUBLECLICK_BEHAVIOR_DEFAULT),
+                                                       -1);
 
                 g_slist_free (criteria);
                 g_slist_free (criterias);

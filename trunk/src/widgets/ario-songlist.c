@@ -25,6 +25,8 @@
 
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "preferences/ario-preferences.h"
+#include "lib/ario-conf.h"
 #include "shell/ario-shell-songinfos.h"
 #include "widgets/ario-dnd-tree.h"
 #include "widgets/ario-playlist.h"
@@ -39,7 +41,7 @@ static void ario_songlist_get_property (GObject *object,
                                         GValue *value,
                                         GParamSpec *pspec);
 static void ario_songlist_add_in_playlist (ArioSonglist *songlist,
-                                           gboolean play);
+                                           PlaylistAction action);
 static void ario_songlist_popup_menu_cb (ArioDndTree* tree,
                                          ArioSonglist *songlist);
 static void ario_songlist_activate_cb (ArioDndTree* tree,
@@ -285,7 +287,7 @@ songlists_foreach (GtkTreeModel *model,
 
 static void
 ario_songlist_add_in_playlist (ArioSonglist *songlist,
-                               gboolean play)
+                               PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *songlists = NULL;
@@ -296,7 +298,7 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist,
                                              &songlists);
 
         /* Append songs to playlist */
-        ario_server_playlist_append_songs (songlists, play);
+        ario_server_playlist_append_songs (songlists, action);
 
         g_slist_foreach (songlists, (GFunc) g_free, NULL);
         g_slist_free (songlists);
@@ -308,7 +310,7 @@ ario_songlist_cmd_add_songlists (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Add songs to playlist */
-        ario_songlist_add_in_playlist (songlist, FALSE);
+        ario_songlist_add_in_playlist (songlist, PLAYLIST_ADD);
 }
 
 void
@@ -317,7 +319,7 @@ ario_songlist_cmd_add_play_songlists (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Add songs to playlist and play */
-        ario_songlist_add_in_playlist (songlist, TRUE);
+        ario_songlist_add_in_playlist (songlist, PLAYLIST_ADD_PLAY);
 }
 
 void
@@ -325,11 +327,8 @@ ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
                                             ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Cleat playlist */
-        ario_server_clear ();
-
-        /* Add songs to playlist and play */
-        ario_songlist_add_in_playlist (songlist, TRUE);
+        /* Clear playlist, add songs and play */
+        ario_songlist_add_in_playlist (songlist, PLAYLIST_REPLACE);
 }
 
 void
@@ -379,7 +378,9 @@ ario_songlist_activate_cb (ArioDndTree* tree,
 {
         ARIO_LOG_FUNCTION_START;
         /* Add selected songs to playlist */
-        ario_songlist_add_in_playlist (songlist, FALSE);
+        ario_songlist_add_in_playlist (songlist,
+                                       ario_conf_get_integer (PREF_DOUBLECLICK_BEHAVIOR,
+                                                              PREF_DOUBLECLICK_BEHAVIOR_DEFAULT));
 }
 
 static void

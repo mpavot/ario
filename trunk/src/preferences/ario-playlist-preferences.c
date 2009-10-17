@@ -53,6 +53,8 @@ G_MODULE_EXPORT void ario_playlist_preferences_autoscroll_toogled_cb (GtkCheckBu
                                                                       ArioPlaylistPreferences *playlist_preferences);
 G_MODULE_EXPORT void ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
                                                                          ArioPlaylistPreferences *playlist_preferences);
+G_MODULE_EXPORT void ario_playlist_preferences_doubleclick_changed_cb (GtkComboBox *combobox,
+                                                                       ArioPlaylistPreferences *playlist_preferences);
 
 struct ArioPlaylistPreferencesPrivate
 {
@@ -68,6 +70,7 @@ struct ArioPlaylistPreferencesPrivate
         GtkWidget *autoscroll_checkbutton;
 
         GtkWidget *playlist_combobox;
+        GtkWidget *doubleclick_combobox;
         GtkWidget *vbox;
         GtkWidget *config;
 };
@@ -129,6 +132,8 @@ ario_playlist_preferences_new (void)
                 GTK_WIDGET (gtk_builder_get_object (builder, "autoscroll_checkbutton"));
         playlist_preferences->priv->playlist_combobox =
                 GTK_WIDGET (gtk_builder_get_object (builder, "playlist_combobox"));
+        playlist_preferences->priv->doubleclick_combobox =
+                GTK_WIDGET (gtk_builder_get_object (builder, "doubleclick_combobox"));
         playlist_preferences->priv->vbox =
                 GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
         list_store =
@@ -136,6 +141,7 @@ ario_playlist_preferences_new (void)
 
         gtk_builder_helpers_boldify_label (builder, "playlist_label");
         gtk_builder_helpers_boldify_label (builder, "mode_label");
+        gtk_builder_helpers_boldify_label (builder, "doubleclick_label");
 
         playlist_modes = ario_playlist_manager_get_modes (ario_playlist_manager_get_instance ());
         for (; playlist_modes; playlist_modes = g_slist_next (playlist_modes)) {
@@ -205,6 +211,9 @@ ario_playlist_preferences_sync_playlist (ArioPlaylistPreferences *playlist_prefe
                 }
                 ++i;
         }
+
+        gtk_combo_box_set_active (GTK_COMBO_BOX (playlist_preferences->priv->doubleclick_combobox),
+                                  ario_conf_get_integer (PREF_DOUBLECLICK_BEHAVIOR, PREF_DOUBLECLICK_BEHAVIOR_DEFAULT));
 }
 
 void
@@ -240,6 +249,17 @@ ario_playlist_preferences_playlist_mode_changed_cb (GtkComboBox *combobox,
                 }
         }
         g_free (id);
+}
+
+void ario_playlist_preferences_doubleclick_changed_cb (GtkComboBox *combobox,
+                                                       ArioPlaylistPreferences *playlist_preferences)
+{
+        ARIO_LOG_FUNCTION_START;
+        int i;
+
+        i = gtk_combo_box_get_active (GTK_COMBO_BOX (combobox));
+
+        ario_conf_set_integer (PREF_DOUBLECLICK_BEHAVIOR, i);
 }
 
 void

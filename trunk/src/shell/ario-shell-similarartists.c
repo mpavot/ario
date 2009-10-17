@@ -472,7 +472,7 @@ ario_shell_similarartists_add_cb (GtkButton *button,
 
                 /* Append artist songs to playlist */
                 artists = g_slist_append (artists, artist);
-                ario_server_playlist_append_artists (artists, FALSE, -1);
+                ario_server_playlist_append_artists (artists, PLAYLIST_ADD, -1);
 
                 g_slist_foreach (artists, (GFunc) g_free, NULL);
                 g_slist_free (artists);
@@ -513,7 +513,7 @@ ario_shell_similarartists_addall_cb (GtkButton *button,
                                 &artists);
 
         /* Appends songs of all artists to playlist */
-        ario_server_playlist_append_artists (artists, FALSE, -1);
+        ario_server_playlist_append_artists (artists, PLAYLIST_ADD, -1);
 
         g_slist_foreach (artists, (GFunc) g_free, NULL);
         g_slist_free (artists);
@@ -538,7 +538,7 @@ ario_shell_similarartists_add_similar_to_playlist (const gchar *artist,
         }
 
         /* Append songs of artists to playlist */
-        ario_server_playlist_append_artists (artists, FALSE, nb_entries);
+        ario_server_playlist_append_artists (artists, PLAYLIST_ADD, nb_entries);
 
         g_slist_foreach (similar_artists, (GFunc) ario_shell_similarartists_free_similarartist, NULL);
         g_slist_free (similar_artists);

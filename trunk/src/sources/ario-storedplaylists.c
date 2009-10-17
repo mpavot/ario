@@ -514,7 +514,7 @@ storedplaylists_foreach (GtkTreeModel *model,
 
 static void
 ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
-                                    gboolean play)
+                                    PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *playlists = NULL;
@@ -531,7 +531,7 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
                 songs = ario_server_get_songs_from_playlist (tmp->data);
 
                 /* Append songs to main playlist */
-                ario_server_playlist_append_server_songs (songs, play);
+                ario_server_playlist_append_server_songs (songs, action);
 
                 g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
                 g_slist_free (songs);
@@ -544,11 +544,8 @@ ario_storedplaylists_add_playlists (ArioStoredplaylists *storedplaylists,
 static void
 ario_storedplaylists_clear_add_play_playlists (ArioStoredplaylists *storedplaylists)
 {
-        /* Empty playlist */
-        ario_server_clear ();
-
-        /* Add songs to playlist and play */
-        ario_storedplaylists_add_playlists (storedplaylists, TRUE);
+        /* Empty playlist, add songs to playlist and play */
+        ario_storedplaylists_add_playlists (storedplaylists, PLAYLIST_REPLACE);
 }
 
 static void
@@ -557,7 +554,7 @@ ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Add songs to playlist */
-        ario_storedplaylists_add_playlists (storedplaylists, FALSE);
+        ario_storedplaylists_add_playlists (storedplaylists, PLAYLIST_ADD);
 }
 
 static void
@@ -566,7 +563,7 @@ ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Add songs to playlist and play */
-        ario_storedplaylists_add_playlists (storedplaylists, TRUE);
+        ario_storedplaylists_add_playlists (storedplaylists, PLAYLIST_ADD_PLAY);
 }
 
 static void
@@ -634,7 +631,9 @@ ario_storedplaylists_playlists_activate_cb (ArioDndTree* tree,
                                             ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START;
-        ario_storedplaylists_add_playlists (storedplaylists, FALSE);
+        ario_storedplaylists_add_playlists (storedplaylists,
+                                            ario_conf_get_integer (PREF_DOUBLECLICK_BEHAVIOR,
+                                                                   PREF_DOUBLECLICK_BEHAVIOR_DEFAULT));
 }
 
 static void

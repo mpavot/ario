@@ -26,6 +26,8 @@
 
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "preferences/ario-preferences.h"
+#include "lib/ario-conf.h"
 #include "plugins/ario-plugin.h"
 #include "servers/ario-server.h"
 #include "widgets/ario-dnd-tree.h"
@@ -56,7 +58,7 @@ static void ario_radio_get_property (GObject *object,
 static void ario_radio_state_changed_cb (ArioServer *server,
                                          ArioRadio *radio);
 static void ario_radio_add_in_playlist (ArioRadio *radio,
-                                        gboolean play);
+                                        PlaylistAction action);
 static void ario_radio_cmd_add_radios (GtkAction *action,
                                        ArioRadio *radio);
 static void ario_radio_cmd_add_play_radios (GtkAction *action,
@@ -604,7 +606,7 @@ radios_foreach2 (GtkTreeModel *model,
 
 static void
 ario_radio_add_in_playlist (ArioRadio *radio,
-                            gboolean play)
+                            PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *radios = NULL;
@@ -615,7 +617,7 @@ ario_radio_add_in_playlist (ArioRadio *radio,
                                              &radios);
 
         /* Append radios to playlist */
-        ario_server_playlist_append_songs (radios, play);
+        ario_server_playlist_append_songs (radios, action);
 
         g_slist_foreach (radios, (GFunc) g_free, NULL);
         g_slist_free (radios);
@@ -627,7 +629,7 @@ ario_radio_cmd_add_radios (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Append radios to playlist */
-        ario_radio_add_in_playlist (radio, FALSE);
+        ario_radio_add_in_playlist (radio, PLAYLIST_ADD);
 }
 
 static void
@@ -636,7 +638,7 @@ ario_radio_cmd_add_play_radios (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Append radios to playlist and play */
-        ario_radio_add_in_playlist (radio, TRUE);
+        ario_radio_add_in_playlist (radio, PLAYLIST_ADD_PLAY);
 }
 
 static void
@@ -644,11 +646,8 @@ ario_radio_cmd_clear_add_play_radios (GtkAction *action,
                                       ArioRadio *radio)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Empty playlist */
-        ario_server_clear ();
-
-        /* Append radios to playlist and play */
-        ario_radio_add_in_playlist (radio, TRUE);
+        /* Empyt playlist, append radios to playlist and play */
+        ario_radio_add_in_playlist (radio, PLAYLIST_REPLACE);
 }
 
 static void
@@ -684,7 +683,9 @@ ario_radio_activate_cb (ArioDndTree* tree,
 {
         ARIO_LOG_FUNCTION_START;
         /* Append radios to playlist */
-        ario_radio_add_in_playlist (radio, FALSE);
+        ario_radio_add_in_playlist (radio,
+                                    ario_conf_get_integer (PREF_DOUBLECLICK_BEHAVIOR,
+                                                           PREF_DOUBLECLICK_BEHAVIOR_DEFAULT));
 }
 
 static void

@@ -124,6 +124,14 @@ enum
         SERVER_STOREDPLAYLISTS_CHANGED_FLAG = 2 << SERVER_STOREDPLAYLISTS_CHANGED
 };
 
+typedef enum
+{
+        PLAYLIST_ADD,
+        PLAYLIST_ADD_PLAY,
+        PLAYLIST_REPLACE,
+        PLAYLIST_N_BEHAVIOR
+} PlaylistAction;
+
 typedef struct
 {
         GObject parent;
@@ -285,25 +293,25 @@ const gchar*            ario_server_song_get_tag                           (cons
                                                                             ArioServerTag tag);
 void                    ario_server_playlist_add_songs                     (const GSList *songs,
                                                                             const gint pos,
-                                                                            const gboolean play);
+                                                                            const PlaylistAction action);
 void                    ario_server_playlist_add_dir                       (const gchar *dir,
                                                                             const gint pos,
-                                                                            const gboolean play);
+                                                                            const PlaylistAction action);
 void                    ario_server_playlist_add_criterias                 (const GSList *criterias,
                                                                             const gint pos,
-                                                                            const gboolean play,
+                                                                            const PlaylistAction action,
                                                                             const gint nb_entries);
 void                    ario_server_playlist_append_artists                (const GSList *artists,
-                                                                            const gboolean play,
+                                                                            const PlaylistAction action,
                                                                             const gint nb_entries);
 void                    ario_server_playlist_append_songs                  (const GSList *songs,
-                                                                            const gboolean play);
+                                                                            const PlaylistAction action);
 void                    ario_server_playlist_append_server_songs           (const GSList *songs,
-                                                                            const gboolean play);
+                                                                            const PlaylistAction action);
 void                    ario_server_playlist_append_dir                    (const gchar *dir,
-                                                                            const gboolean play);
+                                                                            const PlaylistAction action);
 void                    ario_server_playlist_append_criterias              (const GSList *criterias,
-                                                                            const gboolean play,
+                                                                            const PlaylistAction action,
                                                                             const gint nb_entries);
 
 G_END_DECLS

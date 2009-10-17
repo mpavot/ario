@@ -39,7 +39,7 @@ static void ario_tree_songs_append_drag_data (ArioTree *tree,
                                               GtkTreeIter *iter,
                                               ArioTreeStringData *data);
 static void ario_tree_songs_add_to_playlist (ArioTree *tree,
-                                             const gboolean play);
+                                             const PlaylistAction action);
 
 /* Tree columns */
 enum
@@ -237,7 +237,7 @@ ario_tree_songs_cmd_songs_properties (ArioTreeSongs *tree)
 
 static void
 ario_tree_songs_add_to_playlist (ArioTree *tree,
-                                 const gboolean play)
+                                 const PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *songs = NULL;
@@ -249,7 +249,7 @@ ario_tree_songs_add_to_playlist (ArioTree *tree,
 
         if (songs) {
                 /* Append songs to playlist */
-                ario_server_playlist_append_songs (songs, play);
+                ario_server_playlist_append_songs (songs, action);
 
                 g_slist_foreach (songs, (GFunc) g_free, NULL);
                 g_slist_free (songs);

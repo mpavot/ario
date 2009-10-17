@@ -583,7 +583,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
 
 static void
 ario_filesystem_add_filetree (ArioFilesystem *filesystem,
-                              gboolean play)
+                              PlaylistAction action)
 {
         ARIO_LOG_FUNCTION_START;
         gchar *dir;
@@ -603,7 +603,7 @@ ario_filesystem_add_filetree (ArioFilesystem *filesystem,
         g_return_if_fail (dir);
 
         /* Append songs in folder to playlist */
-        ario_server_playlist_append_dir (dir, play);
+        ario_server_playlist_append_dir (dir, action);
         g_free (dir);
 }
 
@@ -613,7 +613,7 @@ ario_filesystem_cmd_add_filesystem (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Append songs in selected folder to playlist */
-        ario_filesystem_add_filetree (filesystem, FALSE);
+        ario_filesystem_add_filetree (filesystem, PLAYLIST_ADD);
 }
 
 static void
@@ -622,7 +622,7 @@ ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         /* Append songs in selected folder to playlist */
-        ario_filesystem_add_filetree (filesystem, TRUE);
+        ario_filesystem_add_filetree (filesystem, PLAYLIST_ADD_PLAY);
 }
 
 static void
@@ -630,11 +630,8 @@ ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
                                                ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Empty playlist */
-        ario_server_clear ();
-
-        /* Append songs in selected folder to playlist */
-        ario_filesystem_add_filetree (filesystem, TRUE);
+        /* Clear playlist, append songs in selected folder to playlist */
+        ario_filesystem_add_filetree (filesystem, PLAYLIST_REPLACE);
 }
 
 static void

@@ -82,7 +82,7 @@ typedef struct
                                                  GtkTreeIter *iter,
                                                  ArioTreeStringData *data);
         void            (*add_to_playlist)      (ArioTree *tree,
-                                                 gboolean play);
+                                                 const PlaylistAction action);
         /* Signals */
         void            (*selection_changed)    (ArioTree *tree);
 
@@ -103,7 +103,7 @@ void                    ario_tree_add_criteria          (ArioTree *tree,
 GSList*                 ario_tree_get_criterias         (ArioTree *tree);
 
 void                    ario_tree_cmd_add               (ArioTree *tree,
-                                                         const gboolean play);
+                                                         const PlaylistAction action);
 void                    ario_tree_goto_playling_song    (ArioTree *tree,
                                                          const ArioServerSong *song);
 void                    ario_tree_add_tags              (ArioTree *tree,
