@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 15:34+0200\n"
+"POT-Creation-Date: 2009-10-19 20:36+0200\n"
 "PO-Revision-Date: 2009-04-13 04:34+0000\n"
 "Last-Translator: Miro Glavić <glavicmiro@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -80,7 +80,8 @@ msgid "Music server is on the same computer as Ario"
 msgstr "Glazbeni server je na istom racunalu kao i Ario"
 
 #. Create the widgets
-#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:766
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
+#: ../plugins/radios/ario-radio.c:922
 msgid "Name :"
 msgstr "Naziv :"
 
@@ -156,6 +157,7 @@ msgstr "Album :"
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
 #: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
 #: ../plugins/information/information.ui.h:3
+#: ../plugins/radios/ario-radio.c:166
 msgid "Artist :"
 msgstr "Izvodjac :"
 
@@ -212,71 +214,98 @@ msgstr "Izvori Teksta"
 msgid "Title :"
 msgstr "Naslov :"
 
+#: ../data/ui/playlist-prefs.ui.h:1
+#, fuzzy
+msgid "Add and play"
+msgstr "Dodaj i _sviraj"
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Dodaj na popis pjesama"
+
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:226 ../src/widgets/ario-tray-icon.c:740
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
 msgid "Album"
 msgstr "Album"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
-#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:211
-#: ../src/widgets/ario-tray-icon.c:738
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:44
+#: ../src/widgets/ario-playlist.c:514 ../src/widgets/ario-songlist.c:213
+#: ../src/widgets/ario-tray-icon.c:579
 msgid "Artist"
 msgstr "Izvodjac"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
-#: ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:514
 msgid "Date"
 msgstr "Datum"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
+#, fuzzy
+msgid "Disc"
+msgstr "Disk :"
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Double click"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
 msgstr "Trajanje"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:514
 msgid "File"
 msgstr "Mapa"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
 msgstr "Vrsta"
 
-#: ../data/ui/playlist-prefs.ui.h:7
+#: ../data/ui/playlist-prefs.ui.h:11
 msgid "Go to current song when a new song is played"
 msgstr "Nova pjesma treba da bude trenutna pjesma"
 
-#: ../data/ui/playlist-prefs.ui.h:8
+#: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
 msgstr "Mod"
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:229
+#: ../data/ui/playlist-prefs.ui.h:13
+msgid "On double click:"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Popis pjesama"
 
-#: ../data/ui/playlist-prefs.ui.h:10
+#: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
 msgstr "Mod Liste Igranja:"
 
-#: ../data/ui/playlist-prefs.ui.h:11
+#: ../data/ui/playlist-prefs.ui.h:16
+#, fuzzy
+msgid "Replace in playlist"
+msgstr "_Zamijeni u popisu pjesama"
+
+#: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
 msgstr "Prikazi redove:"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:196 ../src/widgets/ario-tray-icon.c:742
+#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
 msgid "Title"
 msgstr "Naslov"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
-#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
 msgid "Track"
 msgstr "Pjesma"
 
@@ -325,10 +354,6 @@ msgstr "nema"
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
 msgstr "Dodaj sve na popis pjesama"
-
-#: ../data/ui/similar-artists.ui.h:2
-msgid "Add to playlist"
-msgstr "Dodaj na popis pjesama"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
@@ -386,7 +411,7 @@ msgstr "Disk :"
 msgid "Filename :"
 msgstr "Naziv mape :"
 
-#: ../data/ui/song-infos.ui.h:9
+#: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
 msgid "Genre :"
 msgstr "Vrsta :"
 
@@ -442,7 +467,7 @@ msgstr "Sviraj/Pauziraj"
 msgid "Tray icon"
 msgstr "Simbol posluzavnika"
 
-#: ../src/ario-main.c:61
+#: ../src/ario-main.c:64
 msgid "Start minimized window"
 msgstr "Pokreni umanjeni prozor"
 
@@ -597,7 +622,7 @@ msgstr "Nepoznat"
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../plugins/filesystem/ario-filesystem.c:94
 #: ../plugins/filesystem/ario-filesystem.c:109
-#: ../plugins/radios/ario-radio.c:108
+#: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
 msgstr "_Dodaj na popis pjesama"
 
@@ -606,7 +631,7 @@ msgstr "_Dodaj na popis pjesama"
 #: ../src/sources/ario-storedplaylists.c:109
 #: ../plugins/filesystem/ario-filesystem.c:97
 #: ../plugins/filesystem/ario-filesystem.c:112
-#: ../plugins/radios/ario-radio.c:111
+#: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
 msgstr "Dodaj i _sviraj"
 
@@ -615,7 +640,7 @@ msgstr "Dodaj i _sviraj"
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:100
 #: ../plugins/filesystem/ario-filesystem.c:115
-#: ../plugins/radios/ario-radio.c:114
+#: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
 msgstr "_Zamijeni u popisu pjesama"
 
@@ -631,7 +656,7 @@ msgstr "_Izbrisi naslovnice"
 #: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:118
-#: ../plugins/radios/ario-radio.c:123
+#: ../plugins/radios/ario-radio.c:131
 msgid "_Properties"
 msgstr "_Svojstva"
 
@@ -659,11 +684,11 @@ msgstr "_Obrisi"
 msgid "Playlists"
 msgstr "Popisi pjesama"
 
-#: ../src/sources/ario-storedplaylists.c:595
+#: ../src/sources/ario-storedplaylists.c:592
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Jeste li sigurni da zelite obrisati sve odabrane popise pjesama?"
 
-#: ../src/sources/ario-tree.c:838
+#: ../src/sources/ario-tree.c:856
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Jeste li sigurni da zelite ukloniti sve odabrane naslovnice?"
 
@@ -736,11 +761,11 @@ msgstr "S_tatusna traka"
 msgid "Upper part"
 msgstr "Gornji dio"
 
-#: ../src/shell/ario-shell.c:771
+#: ../src/shell/ario-shell.c:770
 msgid "GTK client for MPD"
 msgstr "GTK klijent za MPD"
 
-#: ../src/shell/ario-shell.c:772
+#: ../src/shell/ario-shell.c:771
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -762,7 +787,7 @@ msgstr ""
 "  Miro Glavić https://launchpad.net/~klek"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1112
+#: ../src/shell/ario-shell.c:1111
 msgid "Configure Plugins"
 msgstr "Podesi Prikljucke"
 
@@ -788,15 +813,15 @@ msgstr ""
 "%i naslovnica vec postoji"
 
 #. Set window properties
-#: ../src/shell/ario-shell-coverselect.c:243
+#: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
 msgstr "Skidanje Naslovnica"
 
-#: ../src/shell/ario-shell-coverselect.c:560
+#: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
 msgstr "Greska u citanju mape"
 
-#: ../src/shell/ario-shell-coverselect.c:585
+#: ../src/shell/ario-shell-coverselect.c:584
 msgid "Error saving file"
 msgstr "Greska u pohrani mape"
 
@@ -871,7 +896,7 @@ msgstr "Konfiguracija"
 msgid "Confirmation"
 msgstr "Potvrda"
 
-#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>od</i>%s<i>od</i>%s"
@@ -890,7 +915,7 @@ msgstr "Zaustavi glazbu"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:864
+#: ../src/widgets/ario-header.c:312
 msgid " of "
 msgstr " od "
 
@@ -944,20 +969,20 @@ msgstr "_Pohrani"
 msgid "_Go to playing song"
 msgstr "_Idi do aktivne pjesme"
 
-#: ../src/widgets/ario-playlist.c:631
+#: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
 msgstr "Filter:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1647
+#: ../src/widgets/ario-playlist.c:1654
 msgid "Save playlist"
 msgstr "Pohrani listu pjesama"
 
-#: ../src/widgets/ario-playlist.c:1657
+#: ../src/widgets/ario-playlist.c:1664
 msgid "Playlist name :"
 msgstr "Naziv liste pjesama :"
 
-#: ../src/widgets/ario-playlist.c:1687
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Popis pjesama vec postoji. Zelite li da ga prepisete?"
 
@@ -966,27 +991,27 @@ msgstr "Popis pjesama vec postoji. Zelite li da ga prepisete?"
 msgid "Songs"
 msgstr "Pjesma"
 
-#: ../src/widgets/ario-tray-icon.c:138
+#: ../src/widgets/ario-tray-icon.c:103
 msgid "_Play"
 msgstr "_Sviraj"
 
-#: ../src/widgets/ario-tray-icon.c:141
+#: ../src/widgets/ario-tray-icon.c:106
 msgid "_Pause"
 msgstr "_Pauza"
 
-#: ../src/widgets/ario-tray-icon.c:144
+#: ../src/widgets/ario-tray-icon.c:109
 msgid "_Stop"
 msgstr "_Zaustavi"
 
-#: ../src/widgets/ario-tray-icon.c:147
+#: ../src/widgets/ario-tray-icon.c:112
 msgid "_Next"
 msgstr "_Slijedeci"
 
-#: ../src/widgets/ario-tray-icon.c:150
+#: ../src/widgets/ario-tray-icon.c:115
 msgid "P_revious"
 msgstr "P_rethodni"
 
-#: ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-tray-icon.h:41
 msgid "Not playing"
 msgstr "Ne svira"
 
@@ -1097,6 +1122,7 @@ msgid "Tracks submitted:"
 msgstr "Predlozene pjesme:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/radios/ario-radio.c:168
 msgid "Username :"
 msgstr "Korisnicko ime :"
 
@@ -1124,7 +1150,7 @@ msgstr "Pretrazivac Arhivnog Sustava"
 msgid "File System Browser"
 msgstr "Pretrazivac Arhivnog Sustava"
 
-#: ../plugins/information/ario-information.c:112
+#: ../plugins/information/ario-information.c:114
 msgid "Information"
 msgstr "Informacije"
 
@@ -1160,45 +1186,67 @@ msgstr "Dodaj podrsku za multimedijske kljuceve"
 msgid "Multimedia Keys"
 msgstr "Multimedijski Kljucevi"
 
-#: ../plugins/radios/ario-radio.c:117
+#: ../plugins/radios/ario-radio.c:125
 msgid "Add a _new radio"
 msgstr "Dodaj _novi radio"
 
-#: ../plugins/radios/ario-radio.c:120
+#: ../plugins/radios/ario-radio.c:128
 msgid "_Delete this radios"
 msgstr "_Izbrisi ovaj radio"
 
-#: ../plugins/radios/ario-radio.c:161
+#: ../plugins/radios/ario-radio.c:166
+#, fuzzy
+msgid "Last.fm: Radio of similar artists"
+msgstr "Pjesme sličnih umjetnika"
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Last.fm: Radio of group"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Group :"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:168
+#, fuzzy
+msgid "Last.fm: Personal radio"
+msgstr "Profil Last.fm"
+
+#: ../plugins/radios/ario-radio.c:169
+msgid "Last.fm: Radio of genre"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Web Radio stanice"
 
-#: ../plugins/radios/ario-radio.c:223
+#: ../plugins/radios/ario-radio.c:246
 msgid "Internet Radios"
 msgstr "Internet Radio stanice"
 
-#: ../plugins/radios/ario-radio.c:767
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:774
+msgid "Edit a WebRadio"
+msgstr "Uredi WebRadio"
+
+#: ../plugins/radios/ario-radio.c:787 ../plugins/radios/ario-radio.c:923
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:833
+#: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Neodgovarajuci parametri. Morate specificirati ime i URL radio stanice."
 
-#. Laucn dialog
-#: ../plugins/radios/ario-radio.c:856
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:883
 msgid "Add a WebRadio"
 msgstr "Dodaj WebRadio"
 
-#: ../plugins/radios/ario-radio.c:920
+#: ../plugins/radios/ario-radio.c:1083
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Jeste li sigurni da hocete izbrisati sve odabrane radio stanice?"
-
-#. Launch dialog window
-#: ../plugins/radios/ario-radio.c:995
-msgid "Edit a WebRadio"
-msgstr "Uredi WebRadio"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"

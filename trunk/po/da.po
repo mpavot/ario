@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 15:34+0200\n"
+"POT-Creation-Date: 2009-10-19 20:36+0200\n"
 "PO-Revision-Date: 2009-03-23 22:27+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
@@ -79,7 +79,8 @@ msgid "Music server is on the same computer as Ario"
 msgstr "Musikserver er på den samme computer som Ario"
 
 #. Create the widgets
-#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:766
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
+#: ../plugins/radios/ario-radio.c:922
 msgid "Name :"
 msgstr "Navn :"
 
@@ -155,6 +156,7 @@ msgstr "Album :"
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
 #: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
 #: ../plugins/information/information.ui.h:3
+#: ../plugins/radios/ario-radio.c:166
 msgid "Artist :"
 msgstr "Kunstner :"
 
@@ -211,71 +213,98 @@ msgstr "Sangtekst-kilder"
 msgid "Title :"
 msgstr "Titel :"
 
+#: ../data/ui/playlist-prefs.ui.h:1
+#, fuzzy
+msgid "Add and play"
+msgstr "Tilføj og _afspil"
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Føj til afspilningsliste"
+
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:226 ../src/widgets/ario-tray-icon.c:740
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
 msgid "Album"
 msgstr "Album"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
-#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:211
-#: ../src/widgets/ario-tray-icon.c:738
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:44
+#: ../src/widgets/ario-playlist.c:514 ../src/widgets/ario-songlist.c:213
+#: ../src/widgets/ario-tray-icon.c:579
 msgid "Artist"
 msgstr "Kunstner"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
-#: ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:514
 msgid "Date"
 msgstr "Dato"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
+#, fuzzy
+msgid "Disc"
+msgstr "Skive :"
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Double click"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
 msgstr "Varighed"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:514
 msgid "File"
 msgstr "Fil"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
 msgstr "Genre"
 
-#: ../data/ui/playlist-prefs.ui.h:7
+#: ../data/ui/playlist-prefs.ui.h:11
 msgid "Go to current song when a new song is played"
 msgstr "Fokusér den nuværende sang i afspilningslisten"
 
-#: ../data/ui/playlist-prefs.ui.h:8
+#: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
 msgstr "Tilstand"
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:229
+#: ../data/ui/playlist-prefs.ui.h:13
+msgid "On double click:"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Afspilningsliste"
 
-#: ../data/ui/playlist-prefs.ui.h:10
+#: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
 msgstr "Afspilningsliste tilstand:"
 
-#: ../data/ui/playlist-prefs.ui.h:11
+#: ../data/ui/playlist-prefs.ui.h:16
+#, fuzzy
+msgid "Replace in playlist"
+msgstr "_Erstat i afspilningsliste"
+
+#: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
 msgstr "Vis rækker:"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:196 ../src/widgets/ario-tray-icon.c:742
+#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
 msgid "Title"
 msgstr "Titel"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
-#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
 msgid "Track"
 msgstr "Nummer"
 
@@ -324,10 +353,6 @@ msgstr "-"
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
 msgstr "Tilføj alle til afspilningsliste"
-
-#: ../data/ui/similar-artists.ui.h:2
-msgid "Add to playlist"
-msgstr "Føj til afspilningsliste"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
@@ -385,7 +410,7 @@ msgstr "Skive :"
 msgid "Filename :"
 msgstr "Filnavn :"
 
-#: ../data/ui/song-infos.ui.h:9
+#: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
 msgid "Genre :"
 msgstr "Genre :"
 
@@ -441,7 +466,7 @@ msgstr "Afspil/pause"
 msgid "Tray icon"
 msgstr "Statusikon"
 
-#: ../src/ario-main.c:61
+#: ../src/ario-main.c:64
 msgid "Start minimized window"
 msgstr "Start minimeret vindue"
 
@@ -598,7 +623,7 @@ msgstr "Ukendt"
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../plugins/filesystem/ario-filesystem.c:94
 #: ../plugins/filesystem/ario-filesystem.c:109
-#: ../plugins/radios/ario-radio.c:108
+#: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
 msgstr "_Føj til afspilningsliste"
 
@@ -607,7 +632,7 @@ msgstr "_Føj til afspilningsliste"
 #: ../src/sources/ario-storedplaylists.c:109
 #: ../plugins/filesystem/ario-filesystem.c:97
 #: ../plugins/filesystem/ario-filesystem.c:112
-#: ../plugins/radios/ario-radio.c:111
+#: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
 msgstr "Tilføj og _afspil"
 
@@ -616,7 +641,7 @@ msgstr "Tilføj og _afspil"
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:100
 #: ../plugins/filesystem/ario-filesystem.c:115
-#: ../plugins/radios/ario-radio.c:114
+#: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
 msgstr "_Erstat i afspilningsliste"
 
@@ -632,7 +657,7 @@ msgstr "_Slet omslagene"
 #: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:118
-#: ../plugins/radios/ario-radio.c:123
+#: ../plugins/radios/ario-radio.c:131
 msgid "_Properties"
 msgstr "_Egenskaber"
 
@@ -660,11 +685,11 @@ msgstr "_Slet"
 msgid "Playlists"
 msgstr "Afspilningslister"
 
-#: ../src/sources/ario-storedplaylists.c:595
+#: ../src/sources/ario-storedplaylists.c:592
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr "Er du sikker på du vil slette alle de markerede afspilningslister?"
 
-#: ../src/sources/ario-tree.c:838
+#: ../src/sources/ario-tree.c:856
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Er du sikker på du vil slette alle de markerede omslag?"
 
@@ -737,11 +762,11 @@ msgstr "_Statuslinje"
 msgid "Upper part"
 msgstr "Øvre del"
 
-#: ../src/shell/ario-shell.c:771
+#: ../src/shell/ario-shell.c:770
 msgid "GTK client for MPD"
 msgstr "En GTK+ baseret MPD-klient"
 
-#: ../src/shell/ario-shell.c:772
+#: ../src/shell/ario-shell.c:771
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -780,7 +805,7 @@ msgstr ""
 "  nanker https://launchpad.net/~nanker"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1112
+#: ../src/shell/ario-shell.c:1111
 msgid "Configure Plugins"
 msgstr "Konfigurér udvidelsesmoduler"
 
@@ -806,15 +831,15 @@ msgstr ""
 "%i albumomslag fundet i musiksamlingen"
 
 #. Set window properties
-#: ../src/shell/ario-shell-coverselect.c:243
+#: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
 msgstr "Overførsel af albumsomslag"
 
-#: ../src/shell/ario-shell-coverselect.c:560
+#: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
 msgstr "Fejl ved læsning af fil"
 
-#: ../src/shell/ario-shell-coverselect.c:585
+#: ../src/shell/ario-shell-coverselect.c:584
 msgid "Error saving file"
 msgstr "Fejl ved gemning af fil"
 
@@ -889,7 +914,7 @@ msgstr "Indstillinger"
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>fra</i> %s <i>af</i> %s"
@@ -908,7 +933,7 @@ msgstr "Stop"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:864
+#: ../src/widgets/ario-header.c:312
 msgid " of "
 msgstr " ud af "
 
@@ -962,20 +987,20 @@ msgstr "_Gem"
 msgid "_Go to playing song"
 msgstr "_Gå til det nuværende nummer"
 
-#: ../src/widgets/ario-playlist.c:631
+#: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
 msgstr "Filter:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1647
+#: ../src/widgets/ario-playlist.c:1654
 msgid "Save playlist"
 msgstr "Gem afspilningsliste"
 
-#: ../src/widgets/ario-playlist.c:1657
+#: ../src/widgets/ario-playlist.c:1664
 msgid "Playlist name :"
 msgstr "Afspilningslistens navn :"
 
-#: ../src/widgets/ario-playlist.c:1687
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Afspilningsliste findes allerede. Skal denne liste erstatte den?"
 
@@ -984,27 +1009,27 @@ msgstr "Afspilningsliste findes allerede. Skal denne liste erstatte den?"
 msgid "Songs"
 msgstr "Numre"
 
-#: ../src/widgets/ario-tray-icon.c:138
+#: ../src/widgets/ario-tray-icon.c:103
 msgid "_Play"
 msgstr "_Afspil"
 
-#: ../src/widgets/ario-tray-icon.c:141
+#: ../src/widgets/ario-tray-icon.c:106
 msgid "_Pause"
 msgstr "_Pause"
 
-#: ../src/widgets/ario-tray-icon.c:144
+#: ../src/widgets/ario-tray-icon.c:109
 msgid "_Stop"
 msgstr "_Stop"
 
-#: ../src/widgets/ario-tray-icon.c:147
+#: ../src/widgets/ario-tray-icon.c:112
 msgid "_Next"
 msgstr "_Næste"
 
-#: ../src/widgets/ario-tray-icon.c:150
+#: ../src/widgets/ario-tray-icon.c:115
 msgid "P_revious"
 msgstr "Fo_regående"
 
-#: ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-tray-icon.h:41
 msgid "Not playing"
 msgstr "Afspiller ikke"
 
@@ -1115,6 +1140,7 @@ msgid "Tracks submitted:"
 msgstr "Numre indsendt:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/radios/ario-radio.c:168
 msgid "Username :"
 msgstr "Brugernavn:"
 
@@ -1142,7 +1168,7 @@ msgstr "En filsystemsbrowser"
 msgid "File System Browser"
 msgstr "Filsystemsbrowser"
 
-#: ../plugins/information/ario-information.c:112
+#: ../plugins/information/ario-information.c:114
 msgid "Information"
 msgstr "Information"
 
@@ -1178,46 +1204,68 @@ msgstr "Tilføj understøttelse for multimedia-tastatur"
 msgid "Multimedia Keys"
 msgstr "Multimedia-taster"
 
-#: ../plugins/radios/ario-radio.c:117
+#: ../plugins/radios/ario-radio.c:125
 msgid "Add a _new radio"
 msgstr "Tilføj en _ny radio"
 
-#: ../plugins/radios/ario-radio.c:120
+#: ../plugins/radios/ario-radio.c:128
 msgid "_Delete this radios"
 msgstr "Slet denne radiostation"
 
-#: ../plugins/radios/ario-radio.c:161
+#: ../plugins/radios/ario-radio.c:166
+#, fuzzy
+msgid "Last.fm: Radio of similar artists"
+msgstr "sange fra lignende kunstnere"
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Last.fm: Radio of group"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Group :"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:168
+#, fuzzy
+msgid "Last.fm: Personal radio"
+msgstr "Last.fm-profil"
+
+#: ../plugins/radios/ario-radio.c:169
+msgid "Last.fm: Radio of genre"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Netradio"
 
-#: ../plugins/radios/ario-radio.c:223
+#: ../plugins/radios/ario-radio.c:246
 msgid "Internet Radios"
 msgstr "Netradio"
 
-#: ../plugins/radios/ario-radio.c:767
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:774
+msgid "Edit a WebRadio"
+msgstr "Redigér stationens indstilllinger"
+
+#: ../plugins/radios/ario-radio.c:787 ../plugins/radios/ario-radio.c:923
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:833
+#: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr ""
 "Ugyldige parametre. Specificer venligst et navn og en adresse (URL) for "
 "netradiostationen."
 
-#. Laucn dialog
-#: ../plugins/radios/ario-radio.c:856
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:883
 msgid "Add a WebRadio"
 msgstr "Tilføj en station"
 
-#: ../plugins/radios/ario-radio.c:920
+#: ../plugins/radios/ario-radio.c:1083
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Dette vil slette de valgte stationer. Vil du fortsætte?"
-
-#. Launch dialog window
-#: ../plugins/radios/ario-radio.c:995
-msgid "Edit a WebRadio"
-msgstr "Redigér stationens indstilllinger"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
