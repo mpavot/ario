@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 15:34+0200\n"
+"POT-Creation-Date: 2009-10-19 20:36+0200\n"
 "PO-Revision-Date: 2009-03-23 22:28+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -80,7 +80,8 @@ msgid "Music server is on the same computer as Ario"
 msgstr "A zene kiszolgáló ugyanazon a gépen van, mint az Ario"
 
 #. Create the widgets
-#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:766
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
+#: ../plugins/radios/ario-radio.c:922
 msgid "Name :"
 msgstr "Név :"
 
@@ -156,6 +157,7 @@ msgstr "Album :"
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
 #: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
 #: ../plugins/information/information.ui.h:3
+#: ../plugins/radios/ario-radio.c:166
 msgid "Artist :"
 msgstr "Előadó :"
 
@@ -212,71 +214,98 @@ msgstr "Dalszöveg források"
 msgid "Title :"
 msgstr "Cím :"
 
+#: ../data/ui/playlist-prefs.ui.h:1
+#, fuzzy
+msgid "Add and play"
+msgstr "Hozzáadás és lejátszás"
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Hozzáadás a lejátszólistához"
+
 #. MPD_TAG_ITEM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:1 ../src/servers/ario-server.c:45
-#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:226 ../src/widgets/ario-tray-icon.c:740
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
 msgid "Album"
 msgstr "Album"
 
-#: ../data/ui/playlist-prefs.ui.h:2 ../src/servers/ario-server.c:44
-#: ../src/widgets/ario-playlist.c:508 ../src/widgets/ario-songlist.c:211
-#: ../src/widgets/ario-tray-icon.c:738
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:44
+#: ../src/widgets/ario-playlist.c:514 ../src/widgets/ario-songlist.c:213
+#: ../src/widgets/ario-tray-icon.c:579
 msgid "Artist"
 msgstr "Előadó"
 
 #. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:50
-#: ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:514
 msgid "Date"
 msgstr "Dátum"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
+#, fuzzy
+msgid "Disc"
+msgstr "Lemez :"
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Double click"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
 msgstr "Időtartam"
 
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:514
 msgid "File"
 msgstr "Fájl"
 
 #. MPD_TAG_ITEM_TRACK
 #. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:49
-#: ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
 msgstr "Műfaj"
 
-#: ../data/ui/playlist-prefs.ui.h:7
+#: ../data/ui/playlist-prefs.ui.h:11
 msgid "Go to current song when a new song is played"
 msgstr "Ugrás a jelenlegi számra ha új szám kerül lejátszásra"
 
-#: ../data/ui/playlist-prefs.ui.h:8
+#: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
 msgstr ""
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/sources/ario-storedplaylists.c:229
+#: ../data/ui/playlist-prefs.ui.h:13
+msgid "On double click:"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Lejátszólista"
 
-#: ../data/ui/playlist-prefs.ui.h:10
+#: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
 msgstr ""
 
-#: ../data/ui/playlist-prefs.ui.h:11
+#: ../data/ui/playlist-prefs.ui.h:16
+#, fuzzy
+msgid "Replace in playlist"
+msgstr "Lecse_rélés a lejátszólistában"
+
+#: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
 msgstr "Sorok mutatása"
 
 #. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:12 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:508
-#: ../src/widgets/ario-songlist.c:196 ../src/widgets/ario-tray-icon.c:742
+#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
 msgid "Title"
 msgstr "Cím"
 
 #. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:13 ../src/servers/ario-server.c:47
-#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:508
+#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
 msgid "Track"
 msgstr "Szám"
 
@@ -325,10 +354,6 @@ msgstr "n/a"
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
 msgstr "Az összes hozzáadása lejátszólistához"
-
-#: ../data/ui/similar-artists.ui.h:2
-msgid "Add to playlist"
-msgstr "Hozzáadás a lejátszólistához"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
@@ -386,7 +411,7 @@ msgstr "Lemez :"
 msgid "Filename :"
 msgstr "Fájlnév :"
 
-#: ../data/ui/song-infos.ui.h:9
+#: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
 msgid "Genre :"
 msgstr "Év :"
 
@@ -442,7 +467,7 @@ msgstr "Lejátszás/szünet"
 msgid "Tray icon"
 msgstr "Tálcaikon"
 
-#: ../src/ario-main.c:61
+#: ../src/ario-main.c:64
 msgid "Start minimized window"
 msgstr "MInimalizált állapotú ablak indítása"
 
@@ -599,7 +624,7 @@ msgstr "Ismeretlen"
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../plugins/filesystem/ario-filesystem.c:94
 #: ../plugins/filesystem/ario-filesystem.c:109
-#: ../plugins/radios/ario-radio.c:108
+#: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
 msgstr "_Hozzáadás a lejátszási listához"
 
@@ -608,7 +633,7 @@ msgstr "_Hozzáadás a lejátszási listához"
 #: ../src/sources/ario-storedplaylists.c:109
 #: ../plugins/filesystem/ario-filesystem.c:97
 #: ../plugins/filesystem/ario-filesystem.c:112
-#: ../plugins/radios/ario-radio.c:111
+#: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
 msgstr "Hozzáadás és lejátszás"
 
@@ -617,7 +642,7 @@ msgstr "Hozzáadás és lejátszás"
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:100
 #: ../plugins/filesystem/ario-filesystem.c:115
-#: ../plugins/radios/ario-radio.c:114
+#: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
 msgstr "Lecse_rélés a lejátszólistában"
 
@@ -633,7 +658,7 @@ msgstr "Borítók _törlése"
 #: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:118
-#: ../plugins/radios/ario-radio.c:123
+#: ../plugins/radios/ario-radio.c:131
 msgid "_Properties"
 msgstr "_Tulajdonságok"
 
@@ -661,12 +686,12 @@ msgstr "_Törlés"
 msgid "Playlists"
 msgstr "Lejátszólisták"
 
-#: ../src/sources/ario-storedplaylists.c:595
+#: ../src/sources/ario-storedplaylists.c:592
 msgid "Are you sure that you want to delete all the selected playlists?"
 msgstr ""
 "Biztos benne, hogy eltávolítja az összes kiválasztott lejátszási listát?"
 
-#: ../src/sources/ario-tree.c:838
+#: ../src/sources/ario-tree.c:856
 msgid "Are you sure that you want to remove all the selected covers?"
 msgstr "Biztos benne, hogy eltávolítja az összes kiválasztott borítót?"
 
@@ -739,11 +764,11 @@ msgstr "Á_llapotsor"
 msgid "Upper part"
 msgstr "Felső rész"
 
-#: ../src/shell/ario-shell.c:771
+#: ../src/shell/ario-shell.c:770
 msgid "GTK client for MPD"
 msgstr "GTK kliens MPD -hez"
 
-#: ../src/shell/ario-shell.c:772
+#: ../src/shell/ario-shell.c:771
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -806,7 +831,7 @@ msgstr ""
 "  Zoltan Hoppar https://launchpad.net/~hopparz-gmail"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1112
+#: ../src/shell/ario-shell.c:1111
 msgid "Configure Plugins"
 msgstr "Bővítmények beállítása"
 
@@ -832,15 +857,15 @@ msgstr ""
 "%i borító létezik"
 
 #. Set window properties
-#: ../src/shell/ario-shell-coverselect.c:243
+#: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
 msgstr "Borító letöltése"
 
-#: ../src/shell/ario-shell-coverselect.c:560
+#: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
 msgstr "Fájl olvasási hiba"
 
-#: ../src/shell/ario-shell-coverselect.c:585
+#: ../src/shell/ario-shell-coverselect.c:584
 msgid "Error saving file"
 msgstr "Hiba az állomány mentésekor"
 
@@ -915,7 +940,7 @@ msgstr "Beállítás"
 msgid "Confirmation"
 msgstr "Jóváhagyás"
 
-#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:46
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
 msgstr "<i>from</i> %s <i>by</i> %s"
@@ -934,7 +959,7 @@ msgstr "Zene leállítása"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tray-icon.c:864
+#: ../src/widgets/ario-header.c:312
 msgid " of "
 msgstr " / "
 
@@ -988,20 +1013,20 @@ msgstr "_Mentés"
 msgid "_Go to playing song"
 msgstr "Tovább a szám _lejátszásához"
 
-#: ../src/widgets/ario-playlist.c:631
+#: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1647
+#: ../src/widgets/ario-playlist.c:1654
 msgid "Save playlist"
 msgstr "Lejátszólista mentése"
 
-#: ../src/widgets/ario-playlist.c:1657
+#: ../src/widgets/ario-playlist.c:1664
 msgid "Playlist name :"
 msgstr "Lejátszási lista neve :"
 
-#: ../src/widgets/ario-playlist.c:1687
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Playlist already exists. Do you want to ovewrite it?"
 msgstr "Lejátszási lista létezik. Felül akarja írni?"
 
@@ -1010,27 +1035,27 @@ msgstr "Lejátszási lista létezik. Felül akarja írni?"
 msgid "Songs"
 msgstr "Dalok"
 
-#: ../src/widgets/ario-tray-icon.c:138
+#: ../src/widgets/ario-tray-icon.c:103
 msgid "_Play"
 msgstr "Le_játszás"
 
-#: ../src/widgets/ario-tray-icon.c:141
+#: ../src/widgets/ario-tray-icon.c:106
 msgid "_Pause"
 msgstr "_Szünet"
 
-#: ../src/widgets/ario-tray-icon.c:144
+#: ../src/widgets/ario-tray-icon.c:109
 msgid "_Stop"
 msgstr "_Leállítás"
 
-#: ../src/widgets/ario-tray-icon.c:147
+#: ../src/widgets/ario-tray-icon.c:112
 msgid "_Next"
 msgstr "_Következő"
 
-#: ../src/widgets/ario-tray-icon.c:150
+#: ../src/widgets/ario-tray-icon.c:115
 msgid "P_revious"
 msgstr "_Előző"
 
-#: ../src/widgets/ario-tray-icon.h:45
+#: ../src/widgets/ario-tray-icon.h:41
 msgid "Not playing"
 msgstr "Lejátszás áll"
 
@@ -1141,6 +1166,7 @@ msgid "Tracks submitted:"
 msgstr "Beküldött számok:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/radios/ario-radio.c:168
 msgid "Username :"
 msgstr "Felhasználói név:"
 
@@ -1168,7 +1194,7 @@ msgstr "Fájlrendszer böngésző"
 msgid "File System Browser"
 msgstr "Fájlrendszer böngésző"
 
-#: ../plugins/information/ario-information.c:112
+#: ../plugins/information/ario-information.c:114
 msgid "Information"
 msgstr "Információ"
 
@@ -1204,44 +1230,66 @@ msgstr "Multimédia billentyűk támogatásának hozzáadása"
 msgid "Multimedia Keys"
 msgstr "Multimédia billentyűk"
 
-#: ../plugins/radios/ario-radio.c:117
+#: ../plugins/radios/ario-radio.c:125
 msgid "Add a _new radio"
 msgstr "Új rádió _hozzáadása"
 
-#: ../plugins/radios/ario-radio.c:120
+#: ../plugins/radios/ario-radio.c:128
 msgid "_Delete this radios"
 msgstr "Rádió _törlése"
 
-#: ../plugins/radios/ario-radio.c:161
+#: ../plugins/radios/ario-radio.c:166
+#, fuzzy
+msgid "Last.fm: Radio of similar artists"
+msgstr "Hasonló előadók keresése"
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Last.fm: Radio of group"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Group :"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:168
+#, fuzzy
+msgid "Last.fm: Personal radio"
+msgstr "Last.fm profil"
+
+#: ../plugins/radios/ario-radio.c:169
+msgid "Last.fm: Radio of genre"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
 msgstr "Webrádiók"
 
-#: ../plugins/radios/ario-radio.c:223
+#: ../plugins/radios/ario-radio.c:246
 msgid "Internet Radios"
 msgstr "Internetrádiók"
 
-#: ../plugins/radios/ario-radio.c:767
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:774
+msgid "Edit a WebRadio"
+msgstr "Webrádió szerkesztése"
+
+#: ../plugins/radios/ario-radio.c:787 ../plugins/radios/ario-radio.c:923
 msgid "URL :"
 msgstr "URL :"
 
-#: ../plugins/radios/ario-radio.c:833
+#: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
 msgstr "Rossz paraméterek. Meg kell adnia egy nevet és egy URL-t a rádióhoz."
 
-#. Laucn dialog
-#: ../plugins/radios/ario-radio.c:856
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:883
 msgid "Add a WebRadio"
 msgstr "Webrádió hozzáadása"
 
-#: ../plugins/radios/ario-radio.c:920
+#: ../plugins/radios/ario-radio.c:1083
 msgid "Are you sure you want to delete all the selected radios?"
 msgstr "Biztos benne, hogy törli az összes kiválasztott rádiót?"
-
-#. Launch dialog window
-#: ../plugins/radios/ario-radio.c:995
-msgid "Edit a WebRadio"
-msgstr "Webrádió szerkesztése"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"

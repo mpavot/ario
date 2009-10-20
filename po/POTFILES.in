@@ -44,8 +44,6 @@ src/covers/ario-cover-provider.c
 src/covers/ario-cover-provider.h
 src/lib/ario-conf.c
 src/lib/ario-conf.h
-src/lib/eggtrayicon.c
-src/lib/eggtrayicon.h
 src/lib/libmpdclient.c
 src/lib/libmpdclient.h
 src/lib/gtk-builder-helpers.c
@@ -145,6 +143,8 @@ src/widgets/ario-songlist.c
 src/widgets/ario-songlist.h
 src/widgets/ario-status-bar.c
 src/widgets/ario-status-bar.h
+src/widgets/ario-tooltip.c
+src/widgets/ario-tooltip.h
 src/widgets/ario-tray-icon.c
 src/widgets/ario-tray-icon.h
 src/widgets/ario-volume.c
