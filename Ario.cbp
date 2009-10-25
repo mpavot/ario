@@ -157,11 +157,12 @@
 			<Add directory="..\deps\gettext-0.14.4\include" />
 			<Add directory="..\deps\glib-2.20.1-1\include\glib-2.0" />
 			<Add directory="..\deps\glib-2.20.1-1\lib\glib-2.0\include" />
-			<Add directory="..\deps\gtk+-2.14.7-1\include\gtk-2.0" />
-			<Add directory="..\deps\gtk+-2.14.7-1\lib\gtk-2.0\include" />
+			<Add directory="..\deps\gtk+-2.16.6-1\include\gtk-2.0" />
+			<Add directory="..\deps\gtk+-2.16.6-1\lib\gtk-2.0\include" />
 			<Add directory="..\deps\libxml2-2.7.3\include" />
 			<Add directory="..\deps\pango-1.22.4-1\include\pango-1.0" />
 			<Add directory="..\deps\libgcrypt-1.2.2\include" />
+			<Add directory="..\deps\libmpdclient\include" />
 		</Compiler>
 		<Linker>
 			<Add option="-DLIBXML_STATIC" />
@@ -172,21 +173,24 @@
 			<Add library="..\deps\glib-2.20.1-1\lib\gmodule-2.0.lib" />
 			<Add library="..\deps\glib-2.20.1-1\lib\gobject-2.0.lib" />
 			<Add library="..\deps\glib-2.20.1-1\lib\gthread-2.0.lib" />
-			<Add library="..\deps\gtk+-2.14.7-1\lib\gtk-win32-2.0.lib" />
-			<Add library="..\deps\gtk+-2.14.7-1\lib\gdk-win32-2.0.lib" />
-			<Add library="..\deps\gtk+-2.14.7-1\lib\gdk_pixbuf-2.0.lib" />
+			<Add library="..\deps\gtk+-2.16.6-1\lib\gtk-win32-2.0.lib" />
+			<Add library="..\deps\gtk+-2.16.6-1\lib\gdk-win32-2.0.lib" />
+			<Add library="..\deps\gtk+-2.16.6-1\lib\gdk_pixbuf-2.0.lib" />
 			<Add library="..\deps\libgcrypt-1.2.2\lib\libgcrypt.a" />
 			<Add library="..\deps\libgcrypt-1.2.2\lib\libgpg-error.a" />
 			<Add library="..\deps\pango-1.22.4-1\lib\pango-1.0.lib" />
 			<Add library="..\deps\curl-7.19.2\lib\libcurldll.a" />
+			<Add library="..\deps\libmpdclient\bin\Release\libmpdclient.a" />
 			<Add directory="..\deps\atk-1.24.0-1\lib" />
 			<Add directory="..\deps\cairo-1.8.6-1\lib" />
 			<Add directory="..\deps\curl-7.19.2\lib" />
 			<Add directory="..\deps\gettext-0.14.4\lib" />
 			<Add directory="..\deps\glib-2.20.1-1\include" />
-			<Add directory="..\deps\gtk+-2.14.7-1\lib" />
+			<Add directory="..\deps\gtk+-2.16.6-1\lib" />
 			<Add directory="..\deps\libxml2-2.7.3\win32\bin.mingw" />
 			<Add directory="..\deps\pango-1.22.4-1\lib" />
+			<Add directory="..\deps\pango-1.22.4-1\lib" />
+			<Add directory="..\deps\libmpdclient\bin\Release" />
 		</Linker>
 		<ExtraCommands>
 			<Add after="deliver.bat" />
@@ -346,20 +350,6 @@
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\lib\gtk-builder-helpers.h">
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lib\libmpdclient.c">
-			<Option compilerVar="CC" />
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lib\libmpdclient.h">
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lib\libsexy\sexy-tooltip.c">
-			<Option compilerVar="CC" />
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lib\libsexy\sexy-tooltip.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\lyrics\ario-lyrics-leoslyrics.c">
@@ -557,11 +547,11 @@
 		<Unit filename="src\preferences\ario-trayicon-preferences.h">
 			<Option target="ariodll" />
 		</Unit>
-		<Unit filename="src\servers\ario-mpd.c">
+		<Unit filename="src\servers\ario-mpd2.c">
 			<Option compilerVar="CC" />
 			<Option target="ariodll" />
 		</Unit>
-		<Unit filename="src\servers\ario-mpd.h">
+		<Unit filename="src\servers\ario-mpd2.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\servers\ario-server-interface.c">
@@ -744,6 +734,13 @@
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\widgets\ario-status-bar.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-tooltip.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\widgets\ario-tooltip.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\widgets\ario-tray-icon.c">
