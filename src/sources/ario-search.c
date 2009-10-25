@@ -227,7 +227,7 @@ ario_search_init (ArioSearch *search)
 
         /* Add tags to model */
         items = ario_server_get_items_names ();
-        for (i = 0; i < MPD_TAG_NUM_OF_ITEM_TYPES; ++i) {
+        for (i = 0; i < ARIO_TAG_COUNT; ++i) {
                 if (items[i]) {
                         gtk_list_store_append (search->priv->list_store, &iter);
                         gtk_list_store_set (search->priv->list_store, &iter,

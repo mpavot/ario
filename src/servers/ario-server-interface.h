@@ -37,9 +37,9 @@ typedef struct
         GObject parent;
 
         int song_id;
-        int state;
+        guint state;
         int volume;
-        int elapsed;
+        guint elapsed;
 
         ArioServerSong *server_song;
         gint64 playlist_id;
@@ -48,7 +48,7 @@ typedef struct
         gboolean random;
         gboolean repeat;
 
-        int updatingdb;
+        guint updatingdb;
         int crossfade;
 
         GSList *queue;

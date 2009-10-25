@@ -106,6 +106,20 @@ fi
 AM_CONDITIONAL(USE_XMMS2, test x${enable_xmms2} = xyes)
 
 dnl ================================================================
+dnl libmpdclient2
+dnl ================================================================
+AC_ARG_ENABLE(libmpdclient2,
+              AC_HELP_STRING([--enable-libmpdclient2],
+                             [Use libmpdclient2]))
+if test x"$enable_libmpdclient2" = xyes; then
+   AC_DEFINE(ENABLE_LIBMPDCLIENT2, 1, [Use libmpdclient2])
+   PKG_CHECK_MODULES(LIBMPDCLIENT2, [libmpdclient >= 2.0])
+   AC_SUBST(LIBMPDCLIENT2_CFLAGS)
+   AC_SUBST(LIBMPDCLIENT2_LIBS)
+fi
+AM_CONDITIONAL(USE_LIBMPDCLIENT2, test x${enable_libmpdclient2} = xyes)
+
+dnl ================================================================
 dnl Python plugins
 dnl ================================================================
 AC_ARG_ENABLE(python,
@@ -389,3 +403,9 @@ if test x${enable_taglib} != xno; then
 else
         echo "Taglib support is:                        DISABLED"
 fi
+if test x${enable_libmpdclient2} = xyes; then
+        echo "libmpdclient2 support is:                 ENABLED"
+else
+        echo "libmpdclient2 support is:                 DISABLED (--enable-libmpdclient2)"
+fi
+

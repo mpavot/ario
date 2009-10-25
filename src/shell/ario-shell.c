@@ -795,8 +795,8 @@ ario_shell_server_song_set_title (ArioShell *shell)
         gchar *tmp;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Window title containing song name */
                 tmp = ario_util_format_title (ario_server_get_current_song ());
                 window_title = g_strdup_printf ("Ario - %s", tmp);
@@ -981,8 +981,8 @@ ario_shell_sync_server (ArioShell *shell)
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
 
         is_playing = ((shell->priv->connected)
-                      && ((ario_server_get_current_state () == MPD_STATUS_STATE_PLAY)
-                          || (ario_server_get_current_state () == MPD_STATUS_STATE_PAUSE)));
+                      && ((ario_server_get_current_state () == ARIO_STATE_PLAY)
+                          || (ario_server_get_current_state () == ARIO_STATE_PAUSE)));
 
         /* Set lyrics entry sensitivty */
         action = gtk_action_group_get_action (shell->priv->actiongroup,

@@ -222,8 +222,8 @@ ario_tooltip_sync_tooltip_song (ArioTooltip *tooltip)
         gchar *title;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Set title in primary label*/
                 title = ario_util_format_title (ario_server_get_current_song ());
                 gtk_label_set_text (GTK_LABEL (tooltip->priv->tooltip_primary),
@@ -246,8 +246,8 @@ ario_tooltip_sync_tooltip_album (ArioTooltip *tooltip)
         gchar *secondary;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Set Artist - Album in secondary label */
                 artist = ario_server_get_current_artist ();
                 album = ario_server_get_current_album ();
@@ -278,8 +278,8 @@ ario_tooltip_sync_tooltip_cover (ArioTooltip *tooltip)
         GdkPixbuf *cover;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Set cover art */
                 cover = ario_cover_handler_get_cover();
                 if (cover) {
@@ -307,8 +307,8 @@ ario_tooltip_sync_tooltip_time (ArioTooltip *tooltip)
         gchar *time;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Get formated elapsed time */
                 elapsed = ario_server_get_current_elapsed ();
                 ario_util_format_time_buf (elapsed, elapsed_char, ARIO_MAX_TIME_SIZE);

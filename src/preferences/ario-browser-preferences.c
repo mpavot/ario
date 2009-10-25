@@ -131,7 +131,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
                 browser_preferences->priv->tree_comboboxs = g_slist_append (browser_preferences->priv->tree_comboboxs, tree_combobox);
 
                 list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
-                for (j = 0; j < MPD_TAG_NUM_OF_ITEM_TYPES - 1; ++j) {
+                for (j = 0; j < ARIO_TAG_COUNT - 1; ++j) {
                         if (items[j]) {
                                 gtk_list_store_append (list_store, &iter);
                                 gtk_list_store_set (list_store, &iter,
@@ -152,7 +152,7 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
 
                 a = atoi (splited_conf[i]);
                 b = 0;
-                for (j = 0; j < MPD_TAG_NUM_OF_ITEM_TYPES - 1 && j < a; ++j) {
+                for (j = 0; j < ARIO_TAG_COUNT - 1 && j < a; ++j) {
                         if (items[j])
                                 ++b;
                 }

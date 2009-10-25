@@ -11,6 +11,7 @@ ario_LDADD = libario.la $(DEPS_LIBS)
 libario_la_LIBADD = \
         $(DEPS_LIBS)\
         $(AVAHI_LIBS)\
+        $(LIBMPDCLIENT2_LIBS)\
         $(TAGLIB_LIBS)\
         $(XMMS2_LIBS)\
         $(LIBGCRYPT_LIBS)
@@ -41,8 +42,6 @@ libario_la_SOURCES = \
 	lib/ario-conf.h\
 	lib/gtk-builder-helpers.c\
 	lib/gtk-builder-helpers.h\
-	lib/libmpdclient.c\
-	lib/libmpdclient.h\
         lyrics/ario-lyrics-leoslyrics.c\
         lyrics/ario-lyrics-leoslyrics.h\
         lyrics/ario-lyrics-lyricwiki.c\
@@ -99,8 +98,6 @@ libario_la_SOURCES = \
 	preferences/ario-trayicon-preferences.c\
 	preferences/ario-trayicon-preferences.h\
 	preferences/ario-preferences.h\
-	servers/ario-mpd.c\
-	servers/ario-mpd.h\
 	servers/ario-server.c\
 	servers/ario-server.h\
 	servers/ario-server-interface.c\
@@ -165,6 +162,16 @@ if USE_AVAHI
 	                      ario-avahi.h
 endif
 
+if USE_LIBMPDCLIENT2
+        libario_la_SOURCES += servers/ario-mpd2.c\
+			      servers/ario-mpd2.h
+else
+        libario_la_SOURCES += servers/ario-mpd.c\
+			      servers/ario-mpd.h\
+			      lib/libmpdclient.c\
+			      lib/libmpdclient.h
+endif
+
 if USE_XMMS2
         libario_la_SOURCES += servers/ario-xmms.c\
                 	      servers/ario-xmms.h
@@ -200,6 +207,7 @@ regenerate-enum-types:
 AM_CPPFLAGS = \
                 $(DEPS_CFLAGS) \
                 $(AVAHI_CFLAGS) \
+                $(LIBMPDCLIENT2_CFLAGS) \
                 $(TAGLIB_CFLAGS) \
 		$(LIBGCRYPT_CFLAGS) \
                 $(XMMS2_CFLAGS) \

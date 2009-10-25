@@ -770,16 +770,16 @@ ario_playlist_sync_song (void)
         /* If we are still playing and the song has not changed we don't do anything */
         if (song
             && instance->priv->pos == song->pos
-            && (state == MPD_STATUS_STATE_PLAY
-                || state == MPD_STATUS_STATE_PAUSE))
+            && (state == ARIO_STATE_PLAY
+                || state == ARIO_STATE_PAUSE))
                 return;
 
         /* If there is no song playing and it was already the case before, we don't
          * do anything */
         if ((instance->priv->pos == -1
              && (!song
-                 || state == MPD_STATUS_STATE_UNKNOWN
-                 || state == MPD_STATUS_STATE_STOP)))
+                 || state == ARIO_STATE_UNKNOWN
+                 || state == ARIO_STATE_STOP)))
                 return;
 
         /* Remove the 'playing' icon from previous song */
@@ -796,8 +796,8 @@ ario_playlist_sync_song (void)
 
         /* Add 'playing' icon to new song */
         if (song
-            && state != MPD_STATUS_STATE_UNKNOWN
-            && state != MPD_STATUS_STATE_STOP) {
+            && state != ARIO_STATE_UNKNOWN
+            && state != ARIO_STATE_STOP) {
                 path = gtk_tree_path_new_from_indices (song->pos, -1);
                 if (gtk_tree_model_get_iter (GTK_TREE_MODEL (instance->priv->model), &iter, path)) {
                         gtk_list_store_set (instance->priv->model, &iter,
@@ -841,7 +841,7 @@ ario_playlist_changed_cb (ArioServer *server,
 
         /* Get current song */
         state = ario_server_get_current_state ();
-        if (state == MPD_STATUS_STATE_UNKNOWN || state == MPD_STATUS_STATE_STOP)
+        if (state == ARIO_STATE_UNKNOWN || state == ARIO_STATE_STOP)
                 current_song = NULL;
         else
                 current_song = ario_server_get_current_song ();

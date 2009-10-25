@@ -298,7 +298,7 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         /* Get list of similar artists */
         similar_artists = ario_shell_similarartists_get_similar_artists (shell_similarartists->priv->artist);
 
-        atomic_criteria.tag = MPD_TAG_ITEM_ARTIST;
+        atomic_criteria.tag = ARIO_TAG_ARTIST;
         criteria = g_slist_append (criteria, &atomic_criteria);
 
         /* For each similar artist */

@@ -39,22 +39,22 @@
 
 static guint ario_server_signals[SERVER_LAST_SIGNAL] = { 0 };
 
-char * ArioServerItemNames[MPD_TAG_NUM_OF_ITEM_TYPES] =
+char * ArioServerItemNames[ARIO_TAG_COUNT] =
 {
-        N_("Artist"),           // MPD_TAG_ITEM_ARTIST
-        N_("Album"),            // MPD_TAG_ITEM_ALBUM
-        N_("Title"),            // MPD_TAG_ITEM_TITLE
-        N_("Track"),            // MPD_TAG_ITEM_TRACK
-        NULL,                   // MPD_TAG_ITEM_NAME
-        N_("Genre"),            // MPD_TAG_ITEM_GENRE
-        N_("Date"),             // MPD_TAG_ITEM_DATE
-        N_("Composer"),         // MPD_TAG_ITEM_COMPOSER
-        N_("Performer"),        // MPD_TAG_ITEM_PERFORMER
-        NULL,                   // MPD_TAG_ITEM_COMMENT
-        NULL,                   // MPD_TAG_ITEM_DISC
-        N_("Filename"),         // MPD_TAG_ITEM_FILENAME
-        N_("Album Artist"),     // MPD_TAG_ITEM_ALBUMARTIST
-        N_("Any")               // MPD_TAG_ITEM_ANY
+        N_("Artist"),           // ARIO_TAG_ARTIST
+        N_("Album"),            // ARIO_TAG_ALBUM
+        N_("Album Artist"),     // ARIO_TAG_ALBUM_ARTIST
+        N_("Title"),            // ARIO_TAG_TITLE
+        N_("Track"),            // ARIO_TAG_TRACK
+        NULL,                   // ARIO_TAG_NAME
+        N_("Genre"),            // ARIO_TAG_GENRE
+        N_("Date"),             // ARIO_TAG_DATE
+        N_("Composer"),         // ARIO_TAG_COMPOSER
+        N_("Performer"),        // ARIO_TAG_PERFORMER
+        NULL,                   // ARIO_TAG_COMMENT
+        NULL,                   // ARIO_TAG_DISC
+        N_("Filename"),         // ARIO_TAG_FILENAME
+        N_("Any")               // ARIO_TAG_ANY
 };
 
 G_DEFINE_TYPE (ArioServer, ario_server, G_TYPE_OBJECT)
@@ -511,7 +511,7 @@ gboolean
 ario_server_is_paused (void)
 {
         ARIO_LOG_FUNCTION_START;
-        return (interface->state == MPD_STATUS_STATE_PAUSE) || (interface->state == MPD_STATUS_STATE_STOP);
+        return (interface->state == ARIO_STATE_PAUSE) || (interface->state == ARIO_STATE_STOP);
 }
 
 void
@@ -854,19 +854,19 @@ ario_server_song_get_tag (const ArioServerSong *song,
 {
         ARIO_LOG_FUNCTION_START;
         switch (tag) {
-        case MPD_TAG_ITEM_ARTIST: return song->artist;
-        case MPD_TAG_ITEM_ALBUM: return song->album;
-        case MPD_TAG_ITEM_ALBUMARTIST: return song->album_artist;
-        case MPD_TAG_ITEM_TITLE: return song->title;
-        case MPD_TAG_ITEM_TRACK: return song->track;
-        case MPD_TAG_ITEM_NAME: return song->name;
-        case MPD_TAG_ITEM_GENRE: return song->genre;
-        case MPD_TAG_ITEM_DATE: return song->date;
-        case MPD_TAG_ITEM_COMPOSER: return song->composer;
-        case MPD_TAG_ITEM_PERFORMER: return song->performer;
-        case MPD_TAG_ITEM_COMMENT: return song->comment;
-        case MPD_TAG_ITEM_DISC: return song->disc;
-        case MPD_TAG_ITEM_FILENAME: return song->file;
+        case ARIO_TAG_ARTIST: return song->artist;
+        case ARIO_TAG_ALBUM: return song->album;
+        case ARIO_TAG_ALBUM_ARTIST: return song->album_artist;
+        case ARIO_TAG_TITLE: return song->title;
+        case ARIO_TAG_TRACK: return song->track;
+        case ARIO_TAG_NAME: return song->name;
+        case ARIO_TAG_GENRE: return song->genre;
+        case ARIO_TAG_DATE: return song->date;
+        case ARIO_TAG_COMPOSER: return song->composer;
+        case ARIO_TAG_PERFORMER: return song->performer;
+        case ARIO_TAG_COMMENT: return song->comment;
+        case ARIO_TAG_DISC: return song->disc;
+        case ARIO_TAG_FILENAME: return song->file;
         default: return NULL;
         }
 }
@@ -1027,7 +1027,7 @@ ario_server_playlist_append_artists (const GSList *artists,
                 /* Create a criteria corresponding to artist */
                 criteria = NULL;
                 atomic_criteria = (ArioServerAtomicCriteria *) g_malloc0 (sizeof (ArioServerAtomicCriteria));
-                atomic_criteria->tag = MPD_TAG_ITEM_ARTIST;
+                atomic_criteria->tag = ARIO_TAG_ARTIST;
                 atomic_criteria->value = g_strdup (tmp->data);
 
                 criteria = g_slist_append (criteria, atomic_criteria);
@@ -1058,5 +1058,39 @@ ario_server_playlist_append_criterias (const GSList *criterias,
         ARIO_LOG_FUNCTION_START;
         /* Append all songs matching criteria to playlist */
         ario_server_playlist_add_criterias (criterias, -1, action, nb_entries);
+}
+
+void
+ario_server_free_song (ArioServerSong *song)
+{
+        ARIO_LOG_FUNCTION_START;
+        if (song)
+        {
+                g_free (song->file);
+                g_free (song->artist);
+                g_free (song->title);
+                g_free (song->album);
+                g_free (song->album_artist);
+                g_free (song->track);
+                g_free (song->name);
+                g_free (song->date);
+                g_free (song->genre);
+                g_free (song->composer);
+                g_free (song->performer);
+                g_free (song->disc);
+                g_free (song->comment);
+                g_free (song);
+        }
+}
+
+void
+ario_server_free_output (ArioServerOutput *output)
+{
+        ARIO_LOG_FUNCTION_START;
+        if (output)
+        {
+                g_free (output->name);
+                g_free (output);
+        }
 }
 
