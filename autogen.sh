@@ -233,7 +233,7 @@ intltoolize --automake || exit $?
 
 cd $ORIGDIR
 
-$srcdir/configure --enable-maintainer-mode $AUTOGEN_CONFIGURE_ARGS "$@"
+$srcdir/configure $AUTOGEN_CONFIGURE_ARGS "$@"
 RC=$?
 if test $RC -ne 0; then
         echo
