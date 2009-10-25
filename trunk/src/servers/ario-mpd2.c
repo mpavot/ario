@@ -754,8 +754,9 @@ ario_mpd_build_ario_song (const struct mpd_song *song)
         ArioServerSong * ario_song;
 
         ario_song = (ArioServerSong *) g_malloc0 (sizeof (ArioServerSong));
-        ario_song->artist = g_strdup (mpd_song_get_tag (song, MPD_TAG_ARTIST, 0));
         ario_song->file = g_strdup (mpd_song_get_uri (song));
+        ario_song->artist = g_strdup (mpd_song_get_tag (song, MPD_TAG_ARTIST, 0));
+        ario_song->title = g_strdup (mpd_song_get_tag (song, MPD_TAG_TITLE, 0));
         ario_song->album = g_strdup (mpd_song_get_tag (song, MPD_TAG_ALBUM, 0));
         ario_song->album_artist  = g_strdup (mpd_song_get_tag (song, MPD_TAG_ALBUM_ARTIST, 0));
         ario_song->track = g_strdup (mpd_song_get_tag (song, MPD_TAG_TRACK, 0));
