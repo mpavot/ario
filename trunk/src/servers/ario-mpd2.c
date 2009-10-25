@@ -403,8 +403,7 @@ ario_mpd_connect_to (ArioMpd *mpd,
         /* Send password if one is set in profile */
         password = ario_profiles_get_current (ario_profiles_get ())->password;
         if (password) {
-                mpd_send_password (connection, password);
-                mpd_response_finish (connection);
+                mpd_run_password (connection, password);
         }
 
         mpd->priv->connection = connection;
@@ -546,7 +545,7 @@ ario_mpd_update_db (const gchar *path)
         if (ario_mpd_command_preinvoke ())
                 return;
 
-        mpd_response_finish (instance->priv->connection);
+        mpd_run_update (instance->priv->connection, NULL);
 
         ario_mpd_command_postinvoke ();
 }
@@ -790,6 +789,20 @@ ario_mpd_build_ario_stats (struct mpd_stats *stats)
         ario_stats->dbPlayTime = mpd_stats_get_db_play_time (stats);
 
         return ario_stats;
+}
+
+static ArioServerOutput *
+ario_mpd_build_ario_output (struct mpd_output *output)
+{
+        ARIO_LOG_FUNCTION_START;
+        ArioServerOutput * ario_output;
+
+        ario_output = (ArioServerOutput *) g_malloc0 (sizeof (ArioServerOutput));
+        ario_output->id = mpd_output_get_id (output);
+        ario_output->name = g_strdup (mpd_output_get_name (output));
+        ario_output->enabled = mpd_output_get_enabled (output);
+
+        return ario_output;
 }
 
 static GSList *
@@ -1236,21 +1249,23 @@ ario_mpd_insert_at (const GSList *songs,
                     const gint pos)
 {
         ARIO_LOG_FUNCTION_START;
-        int end, offset = 0;
         const GSList *tmp;
 
-        end = instance->parent.playlist_length;
+        if (ario_mpd_command_preinvoke ())
+                return;
+printf ("ario_mpd_insert_at: %d\n", pos);
+        mpd_command_list_begin (instance->priv->connection, FALSE);
 
         /* For each filename :*/
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 /* Add it in the playlist*/
-                ario_server_queue_add (tmp->data);
-                ++offset;
-                /* move it in the right place */
-                ario_server_queue_move (end + offset - 1, pos + offset);
+                mpd_send_add_id_to (instance->priv->connection, tmp->data, pos + 1);
         }
 
-        ario_mpd_queue_commit ();
+        mpd_command_list_end (instance->priv->connection);
+        mpd_response_finish (instance->priv->connection);
+
+        ario_mpd_command_postinvoke ();
 }
 
 static int
@@ -1293,8 +1308,10 @@ ario_mpd_get_outputs (void)
 
         mpd_send_outputs (instance->priv->connection);
 
-        while ((output_ent = mpd_recv_output (instance->priv->connection)))
-                outputs = g_slist_append (outputs, output_ent);
+        while ((output_ent = mpd_recv_output (instance->priv->connection))) {
+                outputs = g_slist_append (outputs, ario_mpd_build_ario_output (output_ent));
+                mpd_output_free (output_ent);
+        }
 
         mpd_response_finish (instance->priv->connection);
 

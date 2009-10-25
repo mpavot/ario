@@ -1064,8 +1064,7 @@ void
 ario_server_free_song (ArioServerSong *song)
 {
         ARIO_LOG_FUNCTION_START;
-        if (song)
-        {
+        if (song) {
                 g_free (song->file);
                 g_free (song->artist);
                 g_free (song->title);
@@ -1087,8 +1086,7 @@ void
 ario_server_free_output (ArioServerOutput *output)
 {
         ARIO_LOG_FUNCTION_START;
-        if (output)
-        {
+        if (output) {
                 g_free (output->name);
                 g_free (output);
         }
