@@ -101,8 +101,7 @@ ario_server_preferences_output_toggled_cb (GtkCellRendererToggle *cell,
         if (gtk_tree_model_get_iter (model, &iter, path)) {
                 gtk_tree_model_get (model, &iter, ENABLED_COLUMN, &state, ID_COLUMN, &id, -1);
                 state = !state;
-                ario_server_enable_output (id,
-                                        state);
+                ario_server_enable_output (id, state);
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, ENABLED_COLUMN, state, -1);
         }
         gtk_tree_path_free (path);
