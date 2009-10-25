@@ -187,8 +187,8 @@ ario_shell_lyrics_add_to_queue (ArioShellLyrics *shell_lyrics)
         data = (ArioLyricsEditorData *) g_malloc0 (sizeof (ArioLyricsEditorData));
 
         if (!ario_server_is_connected ()
-            || ario_server_get_current_state () == MPD_STATUS_STATE_STOP
-            || ario_server_get_current_state () == MPD_STATUS_STATE_UNKNOWN) {
+            || ario_server_get_current_state () == ARIO_STATE_STOP
+            || ario_server_get_current_state () == ARIO_STATE_UNKNOWN) {
                 data->artist = NULL;
                 data->title = NULL;
                 window_title = g_strdup (BASE_TITLE);

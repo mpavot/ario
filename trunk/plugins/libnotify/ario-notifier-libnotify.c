@@ -70,8 +70,8 @@ ario_notifier_libnotify_notify (ArioNotifier *notifier)
         gchar *secondary;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Title */
                 title = ario_util_format_title (ario_server_get_current_song ());
                 ario_notifier_libnotify_set_string_property (notifier_libnotify, "summary", title);

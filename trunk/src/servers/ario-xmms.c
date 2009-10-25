@@ -104,22 +104,22 @@ struct ArioXmmsPrivate
         xmmsc_result_t *res;
 };
 
-char * ArioXmmsPattern[MPD_TAG_NUM_OF_ITEM_TYPES] =
+char * ArioXmmsPattern[ARIO_TAG_COUNT] =
 {
-        "artist",    // MPD_TAG_ITEM_ARTIST
-        "album",     // MPD_TAG_ITEM_ALBUM
-        "title",     // MPD_TAG_ITEM_TITLE
-        "track",     // MPD_TAG_ITEM_TRACK
-        NULL,        // MPD_TAG_ITEM_NAME
-        "genre",     // MPD_TAG_ITEM_GENRE
-        "date",      // MPD_TAG_ITEM_DATE
-        "composer",  // MPD_TAG_ITEM_COMPOSER
-        "performer", // MPD_TAG_ITEM_PERFORMER
-        NULL,        // MPD_TAG_ITEM_COMMENT
-        NULL,        // MPD_TAG_ITEM_DISC
-        "url",       // MPD_TAG_ITEM_FILENAME
-        NULL,        // MPD_TAG_ITEM_ALBUMARTIST
-        NULL         // MPD_TAG_ITEM_ANY
+        "artist",    // ARIO_TAG_ARTIST
+        "album",     // ARIO_TAG_ALBUM
+        NULL,        // ARIO_TAG_ALBUM_ARTIST
+        "title",     // ARIO_TAG_TITLE
+        "track",     // ARIO_TAG_TRACK
+        NULL,        // ARIO_TAG_NAME
+        "genre",     // ARIO_TAG_GENRE
+        "date",      // ARIO_TAG_DATE
+        "composer",  // ARIO_TAG_COMPOSER
+        "performer", // ARIO_TAG_PERFORMER
+        NULL,        // ARIO_TAG_COMMENT
+        NULL,        // ARIO_TAG_DISC
+        "url",       // ARIO_TAG_FILENAME
+        NULL         // ARIO_TAG_ANY
 };
 
 #define ARIO_XMMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_XMMS, ArioXmmsPrivate))

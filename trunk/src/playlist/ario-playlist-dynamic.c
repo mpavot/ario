@@ -121,9 +121,9 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                 g_slist_free (artists);
                 break;
         case SONGS_FROM_SAME_ALBUM:
-                atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                atomic_criteria1.tag = ARIO_TAG_ARTIST;
                 atomic_criteria1.value = ario_server_get_current_artist ();
-                atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                atomic_criteria2.tag = ARIO_TAG_ALBUM;
                 atomic_criteria2.value = ario_server_get_current_album ();
 
                 criteria = g_slist_append (criteria, &atomic_criteria1);
@@ -141,7 +141,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                                                                    nbitems);
                 break;
         case ALBUMS_FROM_SAME_ARTIST:
-                atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                atomic_criteria1.tag = ARIO_TAG_ARTIST;
                 atomic_criteria1.value = ario_server_get_current_artist ();
 
                 criteria = g_slist_append (criteria, &atomic_criteria1);
@@ -156,9 +156,9 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                 for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
                         ArioServerAlbum *album = tmp->data;
 
-                        atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                        atomic_criteria1.tag = ARIO_TAG_ARTIST;
                         atomic_criteria1.value = album->artist;
-                        atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                        atomic_criteria2.tag = ARIO_TAG_ALBUM;
                         atomic_criteria2.value = album->album;
 
                         criteria = NULL;
@@ -181,7 +181,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                 artists = ario_shell_similarartists_get_similar_artists (ario_server_get_current_artist ());
                 for (tmp_artist = artists; tmp_artist; tmp_artist = g_slist_next (tmp_artist)) {
                         ArioSimilarArtist *artist = tmp_artist->data;
-                        atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                        atomic_criteria1.tag = ARIO_TAG_ARTIST;
                         atomic_criteria1.value = (gchar*) artist->name;
 
                         criteria = NULL;
@@ -200,9 +200,9 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                 for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
                         ArioServerAlbum *album = tmp->data;
 
-                        atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                        atomic_criteria1.tag = ARIO_TAG_ARTIST;
                         atomic_criteria1.value = album->artist;
-                        atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                        atomic_criteria2.tag = ARIO_TAG_ALBUM;
                         atomic_criteria2.value = album->album;
 
                         criteria = NULL;

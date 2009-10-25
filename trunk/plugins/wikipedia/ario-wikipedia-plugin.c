@@ -281,8 +281,8 @@ ario_wikipedia_plugin_sync_server (ArioWikipediaPlugin *plugin)
         GtkAction *action;
 
         is_playing = (ario_server_is_connected ()
-                      && ((ario_server_get_current_state () == MPD_STATUS_STATE_PLAY)
-                          || (ario_server_get_current_state () == MPD_STATUS_STATE_PAUSE)));
+                      && ((ario_server_get_current_state () == ARIO_STATE_PLAY)
+                          || (ario_server_get_current_state () == ARIO_STATE_PAUSE)));
 
         action = gtk_action_group_get_action (plugin->priv->actiongroup,
                                               "ToolWikipedia");

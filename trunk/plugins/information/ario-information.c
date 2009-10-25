@@ -389,7 +389,7 @@ ario_information_fill_song (ArioInformation *information)
         /* Hide song widgets in not connected or not playing */
         if (!information->priv->connected
             || !song
-            || (state != MPD_STATUS_STATE_PLAY && state != MPD_STATUS_STATE_PAUSE)) {
+            || (state != ARIO_STATE_PLAY && state != ARIO_STATE_PAUSE)) {
                 gtk_widget_hide (information->priv->properties_hbox);
                 gtk_widget_hide (information->priv->lyrics_textview);
                 gtk_widget_hide (information->priv->lyrics_label);
@@ -487,13 +487,13 @@ ario_information_fill_album (ArioInformation *information)
         /* Stop here is not connected or not playing */
         if (!information->priv->connected
             || !song
-            || (state != MPD_STATUS_STATE_PLAY && state != MPD_STATUS_STATE_PAUSE)) {
+            || (state != ARIO_STATE_PLAY && state != ARIO_STATE_PAUSE)) {
                 return;
         }
 
         /* Get all albums of current artist */
         criteria = g_slist_append (criteria, &atomic_criteria);
-        atomic_criteria.tag = MPD_TAG_ITEM_ARTIST;
+        atomic_criteria.tag = ARIO_TAG_ARTIST;
         atomic_criteria.value = song->artist;
 
         information->priv->albums = ario_server_get_albums (criteria);
@@ -600,7 +600,7 @@ ario_information_cover_drag_data_get_cb (GtkWidget *widget,
         gchar *str;
 
         /* Get drag data corresponding to dragged album */
-        str = g_strdup_printf ("2\n%d\n%s\n%d\n%s\n", MPD_TAG_ITEM_ARTIST, album->artist, MPD_TAG_ITEM_ALBUM, album->album);
+        str = g_strdup_printf ("2\n%d\n%s\n%d\n%s\n", ARIO_TAG_ARTIST, album->artist, ARIO_TAG_ALBUM, album->album);
         gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data), 8, (const guchar *) str,
                                 strlen (str) * sizeof(guchar));
 
@@ -620,9 +620,9 @@ ario_information_cover_button_press_cb (GtkWidget *widget,
 
         if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
                 /* Double click on image */
-                atomic_criteria1.tag = MPD_TAG_ITEM_ARTIST;
+                atomic_criteria1.tag = ARIO_TAG_ARTIST;
                 atomic_criteria1.value = album->artist;
-                atomic_criteria2.tag = MPD_TAG_ITEM_ALBUM;
+                atomic_criteria2.tag = ARIO_TAG_ALBUM;
                 atomic_criteria2.value = album->album;
 
                 criteria = g_slist_append (criteria, &atomic_criteria1);

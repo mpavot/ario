@@ -443,12 +443,12 @@ ario_header_change_total_time (ArioHeader *header)
                 total_time = 0;
         } else {
                 switch (ario_server_get_current_state ()) {
-                case MPD_STATUS_STATE_PLAY:
-                case MPD_STATUS_STATE_PAUSE:
+                case ARIO_STATE_PLAY:
+                case ARIO_STATE_PAUSE:
                         total_time = ario_server_get_current_total_time ();
                         break;
-                case MPD_STATUS_STATE_UNKNOWN:
-                case MPD_STATUS_STATE_STOP:
+                case ARIO_STATE_UNKNOWN:
+                case ARIO_STATE_STOP:
                 default:
                         total_time = 0;
                         break;
@@ -480,8 +480,8 @@ ario_header_change_song_label (ArioHeader *header)
         char *tmp;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Set the label with formated title from server */
                 title = ario_util_format_title (ario_server_get_current_song ());
 
@@ -489,8 +489,8 @@ ario_header_change_song_label (ArioHeader *header)
                 gtk_label_set_markup (GTK_LABEL (header->priv->song), tmp);
                 g_free (tmp);
                 break;
-        case MPD_STATUS_STATE_UNKNOWN:
-        case MPD_STATUS_STATE_STOP:
+        case ARIO_STATE_UNKNOWN:
+        case ARIO_STATE_STOP:
         default:
                 /* Set default label value */
                 gtk_label_set_label (GTK_LABEL (header->priv->song), "");
@@ -507,8 +507,8 @@ ario_header_change_artist_album_label (ArioHeader *header)
         char *tmp;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Set label value with server values */
                 artist = ario_server_get_current_artist ();
                 album = ario_server_get_current_album ();
@@ -523,8 +523,8 @@ ario_header_change_artist_album_label (ArioHeader *header)
                 gtk_label_set_markup (GTK_LABEL (header->priv->artist_album), tmp);
                 g_free (tmp);
                 break;
-        case MPD_STATUS_STATE_UNKNOWN:
-        case MPD_STATUS_STATE_STOP:
+        case ARIO_STATE_UNKNOWN:
+        case ARIO_STATE_STOP:
         default:
                 /* Set default label value */
                 gtk_label_set_label (GTK_LABEL (header->priv->artist_album), "");
@@ -540,8 +540,8 @@ ario_header_change_cover (ArioHeader *header)
         GdkPixbuf *small_cover = NULL;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Get cover from cover handler and display it */
                 cover = ario_cover_handler_get_cover ();
                 if (cover) {
@@ -556,8 +556,8 @@ ario_header_change_cover (ArioHeader *header)
                 if (small_cover)
                         g_object_unref (small_cover);
                 break;
-        case MPD_STATUS_STATE_UNKNOWN:
-        case MPD_STATUS_STATE_STOP:
+        case ARIO_STATE_UNKNOWN:
+        case ARIO_STATE_STOP:
         default:
                 /* Set default cover (empty) */
                 gtk_image_set_from_pixbuf (GTK_IMAGE (header->priv->image), NULL);

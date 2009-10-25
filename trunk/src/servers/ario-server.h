@@ -21,8 +21,6 @@
 #define __ARIO_SERVER_H
 
 #include <glib-object.h>
-#define MPD_GLIB 1
-#include "lib/libmpdclient.h"
 
 G_BEGIN_DECLS
 
@@ -35,7 +33,93 @@ G_BEGIN_DECLS
 #define IS_ARIO_SERVER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), ARIO_TYPE_SERVER))
 #define ARIO_SERVER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), ARIO_TYPE_SERVER, ArioServerClass))
 
-typedef struct ArioServerAlbum
+typedef struct {
+	/* filename of song */
+	char * file;
+	/* artist, maybe NULL if there is no tag */
+	char * artist;
+	/* title, maybe NULL if there is no tag */
+	char * title;
+	/* album, maybe NULL if there is no tag */
+	char * album;
+	/* album artist, maybe NULL if there is no tag */
+	char * album_artist;
+	/* track, maybe NULL if there is no tag */
+	char * track;
+	/* name, maybe NULL if there is no tag; it's the name of the current
+	 * song, f.e. the icyName of the stream */
+	char * name;
+	/* date */
+	char *date;
+	/* Genre */
+	char *genre;
+	/* Composer */
+	char *composer;
+	/* Performer */
+	char *performer;
+	/* Disc */
+	char *disc;
+	/* Comment */
+	char *comment;
+	/* length of song in seconds */
+	int time;
+	/* if plchanges/playlistinfo/playlistid used, is the position of the
+	 * song in the playlist */
+	int pos;
+	/* song id for a song in the playlist */
+	int id;
+} ArioServerSong;
+
+typedef struct {
+	int numberOfArtists;
+	int numberOfAlbums;
+	int numberOfSongs;
+	unsigned long uptime;
+	unsigned long dbUpdateTime;
+	unsigned long playTime;
+	unsigned long dbPlayTime;
+} ArioServerStats;
+
+typedef struct {
+	int id;
+	char * name;
+	int enabled;
+} ArioServerOutput;
+
+typedef enum {
+        /** no information available */
+        ARIO_STATE_UNKNOWN = 0,
+
+        /** not playing */
+        ARIO_STATE_STOP = 1,
+
+        /** playing */
+        ARIO_STATE_PLAY = 2,
+
+        /** playing, but paused */
+        ARIO_STATE_PAUSE = 3,
+} ArioServerState;
+
+typedef enum
+{
+	ARIO_TAG_ARTIST,
+	ARIO_TAG_ALBUM,
+	ARIO_TAG_ALBUM_ARTIST,
+	ARIO_TAG_TITLE,
+	ARIO_TAG_TRACK,
+	ARIO_TAG_NAME,
+	ARIO_TAG_GENRE,
+	ARIO_TAG_DATE,
+	ARIO_TAG_COMPOSER,
+	ARIO_TAG_PERFORMER,
+	ARIO_TAG_COMMENT,
+	ARIO_TAG_DISC,
+	ARIO_TAG_FILENAME,
+	ARIO_TAG_ANY,
+	ARIO_TAG_COUNT
+}ArioServerTag;
+
+typedef struct
 {
         gchar *artist;
         gchar *album;
@@ -43,16 +127,11 @@ typedef struct ArioServerAlbum
         gchar *date;
 } ArioServerAlbum;
 
-typedef struct ArioServerFileList
+typedef struct
 {
         GSList *directories;
         GSList *songs;
 } ArioServerFileList;
-
-typedef mpd_Song ArioServerSong;
-typedef mpd_TagItems ArioServerTag;
-typedef mpd_OutputEntity ArioServerOutput;
-typedef mpd_Stats ArioServerStats;
 
 typedef struct
 {
@@ -61,9 +140,6 @@ typedef struct
 } ArioServerAtomicCriteria;
 
 typedef GSList ArioServerCriteria; /* A criteria is a list of atomic criterias */
-
-#define ario_server_free_song mpd_freeSong
-#define ario_server_free_output mpd_freeOutputElement
 
 typedef enum
 {
@@ -313,6 +389,9 @@ void                    ario_server_playlist_append_dir                    (cons
 void                    ario_server_playlist_append_criterias              (const GSList *criterias,
                                                                             const PlaylistAction action,
                                                                             const gint nb_entries);
+void                    ario_server_free_song                              (ArioServerSong *song);
+
+void                    ario_server_free_output                            (ArioServerOutput *output);
 
 G_END_DECLS
 

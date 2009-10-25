@@ -79,9 +79,9 @@ static gboolean ario_tray_icon_query_tooltip_cb (GtkStatusIcon *status_icon,
 static void ario_tray_icon_sync_tooltip_text (ArioTrayIcon *icon);
 static void ario_tray_icon_song_changed_cb (ArioServer *server,
                                             ArioTrayIcon *icon);
+#endif
 static void ario_tray_icon_state_changed_cb (ArioServer *server,
                                              ArioTrayIcon *icon);
-#endif
 
 struct ArioTrayIconPrivate
 {
@@ -301,6 +301,7 @@ ario_tray_icon_new (GtkActionGroup *group,
                                  "song_changed",
                                  G_CALLBACK (ario_tray_icon_song_changed_cb),
                                  icon, 0);
+#endif
         g_signal_connect_object (server,
                                  "state_changed",
                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
@@ -309,7 +310,6 @@ ario_tray_icon_new (GtkActionGroup *group,
                                  "playlist_changed",
                                  G_CALLBACK (ario_tray_icon_state_changed_cb),
                                  icon, 0);
-#endif
 
         /* Synchonization with preferences */
         ario_conf_notification_add (PREF_TRAY_ICON,
@@ -514,11 +514,11 @@ ario_tray_icon_sync_icon (ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
+        case ARIO_STATE_PLAY:
                 /* Add 'play' icon */
                 gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-play");
                 break;
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PAUSE:
                 /* Add 'pause' icon */
                 gtk_status_icon_set_from_stock (GTK_STATUS_ICON (icon), "ario-pause");
                 break;
@@ -537,11 +537,11 @@ ario_tray_icon_sync_popup (ArioTrayIcon *icon)
 
         /* Hide Play button in popup menu if already playing */
         gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPlay"),
-                                state != MPD_STATUS_STATE_PLAY);
+                                state != ARIO_STATE_PLAY);
 
         /* Hide Pause button in popup menu if not playing */
         gtk_action_set_visible (gtk_action_group_get_action (icon->priv->actiongroup, "ControlPause"),
-                                state == MPD_STATUS_STATE_PLAY);
+                                state == ARIO_STATE_PLAY);
 }
 
 #ifdef CUSTOM_TOOLTIP
@@ -571,8 +571,8 @@ ario_tray_icon_sync_tooltip_text (ArioTrayIcon *icon)
         gchar *title;
 
         switch (ario_server_get_current_state ()) {
-        case MPD_STATUS_STATE_PLAY:
-        case MPD_STATUS_STATE_PAUSE:
+        case ARIO_STATE_PLAY:
+        case ARIO_STATE_PAUSE:
                 /* Change tooltip with server information */
                 title = ario_util_format_title(ario_server_get_current_song ());
                 tooltip = g_strdup_printf ("%s: %s\n%s: %s\n%s: %s",
@@ -601,14 +601,21 @@ ario_tray_icon_song_changed_cb (ArioServer *server,
         /* Synchronize tooltip info */
         ario_tray_icon_sync_tooltip_text (icon);
 }
+#endif
 
 static void
 ario_tray_icon_state_changed_cb (ArioServer *server,
                                  ArioTrayIcon *icon)
 {
         ARIO_LOG_FUNCTION_START;
+        /* Synchronize icon */
+        ario_tray_icon_sync_icon (icon);
+
+        /* Synchronize popup menu */
+        ario_tray_icon_sync_popup (icon);
+
+#ifndef CUSTOM_TOOLTIP
         /* Synchronize tooltip info */
         ario_tray_icon_sync_tooltip_text (icon);
-}
 #endif
-
+}

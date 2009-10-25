@@ -374,9 +374,9 @@ ario_tree_new (GtkUIManager *mgr,
         GType type;
 
         /* Tree factory: Create a tree of the appropriate type */
-        if (tag == MPD_TAG_ITEM_ALBUM && !is_first) {
+        if (tag == ARIO_TAG_ALBUM && !is_first) {
                 type = TYPE_ARIO_TREE_ALBUMS;
-        } else if (tag == MPD_TAG_ITEM_TITLE && !is_first) {
+        } else if (tag == ARIO_TAG_TITLE && !is_first) {
                 type = TYPE_ARIO_TREE_SONGS;
         } else {
                 type = TYPE_ARIO_TREE;
@@ -401,10 +401,10 @@ ario_tree_popup_menu_cb (ArioDndTree* dnd_tree,
         GtkWidget *menu;
 
         /* Get the most appropriate menu */
-        if ((tree->tag == MPD_TAG_ITEM_ALBUM)
+        if ((tree->tag == ARIO_TAG_ALBUM)
             && (gtk_tree_selection_count_selected_rows (tree->selection) == 1)) {
                 menu = gtk_ui_manager_get_widget (tree->priv->ui_manager, "/BrowserAlbumsPopupSingle");
-        } else if (tree->tag == MPD_TAG_ITEM_TITLE) {
+        } else if (tree->tag == ARIO_TAG_TITLE) {
                 menu = gtk_ui_manager_get_widget (tree->priv->ui_manager, "/BrowserSongsPopup");
         } else {
                 menu = gtk_ui_manager_get_widget (tree->priv->ui_manager, "/BrowserPopup");

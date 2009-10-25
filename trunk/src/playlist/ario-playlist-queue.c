@@ -89,8 +89,8 @@ ario_playlist_queue_next_song (ArioPlaylistMode *playlist_mode,
         int i;
         int state = ario_server_get_current_state ();
 
-        if (state != MPD_STATUS_STATE_PLAY
-            && state != MPD_STATUS_STATE_PAUSE)
+        if (state != ARIO_STATE_PLAY
+            && state != ARIO_STATE_PAUSE)
                 return;
         if (!song)
                 return;

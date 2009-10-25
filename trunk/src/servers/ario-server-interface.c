@@ -49,7 +49,7 @@ enum
 
 G_DEFINE_TYPE (ArioServerInterface, ario_server_interface, G_TYPE_OBJECT)
 
-/* Dummy methods for default behavior */
+        /* Dummy methods for default behavior */
 static void
 dummy_void_void (void)
 {
@@ -182,16 +182,16 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
                                          g_param_spec_int ("song_id",
                                                            "song_id",
                                                            "song_id",
-                                                           0, INT_MAX, 0,
+                                                           -1, INT_MAX, 0,
                                                            G_PARAM_READWRITE));
 
         g_object_class_install_property (object_class,
                                          PROP_STATE,
-                                         g_param_spec_int ("state",
-                                                           "state",
-                                                           "state",
-                                                           0, 3, 0,
-                                                           G_PARAM_READWRITE));
+                                         g_param_spec_uint ("state",
+                                                            "state",
+                                                            "state",
+                                                            0, 3, 0,
+                                                            G_PARAM_READWRITE));
 
         g_object_class_install_property (object_class,
                                          PROP_VOLUME,
@@ -203,11 +203,11 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
 
         g_object_class_install_property (object_class,
                                          PROP_ELAPSED,
-                                         g_param_spec_int ("elapsed",
-                                                           "elapsed",
-                                                           "elapsed",
-                                                           0, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
+                                         g_param_spec_uint ("elapsed",
+                                                            "elapsed",
+                                                            "elapsed",
+                                                            0, INT_MAX, 0,
+                                                            G_PARAM_READWRITE));
 
         g_object_class_install_property (object_class,
                                          PROP_PLAYLISTID,
@@ -235,11 +235,11 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
 
         g_object_class_install_property (object_class,
                                          PROP_UPDATINGDB,
-                                         g_param_spec_int ("updatingdb",
-                                                           "updatingdb",
-                                                           "updatingdb",
-                                                           -1, INT_MAX, 0,
-                                                           G_PARAM_READWRITE));
+                                         g_param_spec_uint ("updatingdb",
+                                                            "updatingdb",
+                                                            "updatingdb",
+                                                            0, INT_MAX, 0,
+                                                            G_PARAM_READWRITE));
 }
 
 static void
@@ -337,7 +337,7 @@ ario_server_interface_set_property (GObject *object,
                 break;
         case PROP_STATE:
                 /* Change value and flag signal to emit */
-                server_interface->state = g_value_get_int (value);
+                server_interface->state = g_value_get_uint (value);
                 server_interface->signals_to_emit |= SERVER_STATE_CHANGED_FLAG;
                 break;
         case PROP_VOLUME:
@@ -347,7 +347,7 @@ ario_server_interface_set_property (GObject *object,
                 break;
         case PROP_ELAPSED:
                 /* Change value and flag signal to emit */
-                server_interface->elapsed = g_value_get_int (value);
+                server_interface->elapsed = g_value_get_uint (value);
                 server_interface->signals_to_emit |= SERVER_ELAPSED_CHANGED_FLAG;
                 break;
         case PROP_PLAYLISTID:
@@ -369,7 +369,7 @@ ario_server_interface_set_property (GObject *object,
                 break;
         case PROP_UPDATINGDB:
                 /* Change value and flag signal to emit */
-                server_interface->updatingdb = g_value_get_int (value);
+                server_interface->updatingdb = g_value_get_uint (value);
                 server_interface->signals_to_emit |= SERVER_UPDATINGDB_CHANGED_FLAG;
                 break;
         default:
@@ -427,12 +427,12 @@ ario_server_interface_set_default (ArioServerInterface *server_interface)
                 g_object_set (G_OBJECT (server_interface), "song_id", 0, NULL);
 
         /* Set default state */
-        if (server_interface->state != MPD_STATUS_STATE_UNKNOWN)
-                g_object_set (G_OBJECT (server_interface), "state", MPD_STATUS_STATE_UNKNOWN, NULL);
+        if (server_interface->state != ARIO_STATE_UNKNOWN)
+                g_object_set (G_OBJECT (server_interface), "state", ARIO_STATE_UNKNOWN, NULL);
 
         /* Set default volume */
-        if (server_interface->volume != MPD_STATUS_NO_VOLUME)
-                g_object_set (G_OBJECT (server_interface), "volume", MPD_STATUS_NO_VOLUME, NULL);
+        if (server_interface->volume != -1)
+                g_object_set (G_OBJECT (server_interface), "volume", -1, NULL);
 
         /* Set default elapsed time */
         if (server_interface->elapsed != 0)

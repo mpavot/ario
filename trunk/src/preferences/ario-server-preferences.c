@@ -178,7 +178,7 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         state = ario_server_get_current_state ();
         updating = ario_server_get_updating ();
 
-        if (state == MPD_STATUS_STATE_UNKNOWN) {
+        if (state == ARIO_STATE_UNKNOWN) {
                 crossfadetime = 0;
                 last_update_char = _("Not connected");
         } else {
@@ -196,12 +196,12 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         }
 
         server_preferences->priv->sync_server = TRUE;
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton), (crossfadetime != 0) && (state != MPD_STATUS_STATE_UNKNOWN));
-        gtk_widget_set_sensitive (server_preferences->priv->crossfade_checkbutton, state != MPD_STATUS_STATE_UNKNOWN);
-        gtk_widget_set_sensitive (server_preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0) && (state != MPD_STATUS_STATE_UNKNOWN));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (server_preferences->priv->crossfade_checkbutton), (crossfadetime != 0) && (state != ARIO_STATE_UNKNOWN));
+        gtk_widget_set_sensitive (server_preferences->priv->crossfade_checkbutton, state != ARIO_STATE_UNKNOWN);
+        gtk_widget_set_sensitive (server_preferences->priv->crossfadetime_spinbutton, (crossfadetime != 0) && (state != ARIO_STATE_UNKNOWN));
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (server_preferences->priv->crossfadetime_spinbutton), (gdouble) crossfadetime);
 
-        gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, (!updating && state != MPD_STATUS_STATE_UNKNOWN));
+        gtk_widget_set_sensitive (server_preferences->priv->updatedb_button, (!updating && state != ARIO_STATE_UNKNOWN));
         gtk_label_set_label (GTK_LABEL (server_preferences->priv->updatedb_label), last_update_char);
 
         outputs = ario_server_get_outputs ();

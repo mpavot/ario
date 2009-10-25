@@ -101,7 +101,7 @@ static int winsock_dll_error(mpd_Connection *connection)
 			HIBYTE(wsaData.wVersion) != 2 ) {
 		strcpy(connection->errorStr,
 		       "Could not find usable WinSock DLL.");
-		connection->error = MPD_ERROR_SYSTEM;
+		connection->error = MPD_ERROR_1_SYSTEM;
 		return 1;
 	}
 	return 0;
@@ -159,7 +159,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 		snprintf(connection->errorStr, MPD_ERRORSTR_MAX_LENGTH,
 		         "host \"%s\" not found: %s",
 		         host, gai_strerror(error));
-		connection->error = MPD_ERROR_UNKHOST;
+		connection->error = MPD_ERROR_1_UNKHOST;
 		return -1;
 	}
 
@@ -173,7 +173,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 			snprintf(connection->errorStr, MPD_ERRORSTR_MAX_LENGTH,
 			         "problems creating socket: %s",
 			         strerror(errno));
-			connection->error = MPD_ERROR_SYSTEM;
+			connection->error = MPD_ERROR_1_SYSTEM;
 			freeaddrinfo(addrinfo);
 			return -1;
 		}
@@ -198,7 +198,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 		snprintf(connection->errorStr, MPD_ERRORSTR_MAX_LENGTH,
 		         "problems connecting to \"%s\" on port %i: %s",
 		         host, port, strerror(errno));
-		connection->error = MPD_ERROR_CONNPORT;
+		connection->error = MPD_ERROR_1_CONNPORT;
 
 		return -1;
 	}
@@ -217,7 +217,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 	if(!(he=gethostbyname(host))) {
 		snprintf(connection->errorStr,MPD_ERRORSTR_MAX_LENGTH,
 				"host \"%s\" not found",host);
-		connection->error = MPD_ERROR_UNKHOST;
+		connection->error = MPD_ERROR_1_UNKHOST;
 		return -1;
 	}
 
@@ -235,7 +235,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 		break;
 	default:
 		strcpy(connection->errorStr,"address type is not IPv4");
-		connection->error = MPD_ERROR_SYSTEM;
+		connection->error = MPD_ERROR_1_SYSTEM;
 		return -1;
 		break;
 	}
@@ -244,7 +244,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 		closesocket(connection->sock);
 	if((connection->sock = socket(dest->sa_family,SOCK_STREAM,0))<0) {
 		strcpy(connection->errorStr,"problems creating socket");
-		connection->error = MPD_ERROR_SYSTEM;
+		connection->error = MPD_ERROR_1_SYSTEM;
 		return -1;
 	}
 
@@ -255,7 +255,7 @@ static int mpd_connect(mpd_Connection * connection, const char * host, int port,
 		snprintf(connection->errorStr,MPD_ERRORSTR_MAX_LENGTH,
 				"problems connecting to \"%s\" on port"
 				" %i",host,port);
-		connection->error = MPD_ERROR_CONNPORT;
+		connection->error = MPD_ERROR_1_CONNPORT;
 		return -1;
 	}
 
@@ -336,7 +336,7 @@ static int mpd_parseWelcome(mpd_Connection * connection, const char * host, int 
 		snprintf(connection->errorStr,MPD_ERRORSTR_MAX_LENGTH,
 				"mpd not running on port %i on host \"%s\"",
 				port,host);
-		connection->error = MPD_ERROR_NOTMPD;
+		connection->error = MPD_ERROR_1_NOTMPD;
 		return 1;
 	}
 
@@ -351,7 +351,7 @@ static int mpd_parseWelcome(mpd_Connection * connection, const char * host, int 
 			         "error parsing version number at "
 			         "\"%s\"",
 			         &output[strlen(MPD_WELCOME_MESSAGE)]);
-			connection->error = MPD_ERROR_NOTMPD;
+			connection->error = MPD_ERROR_1_NOTMPD;
 			return 1;
 		}
 		tmp = ++test;
@@ -408,7 +408,7 @@ mpd_Connection * mpd_newConnection(const char * host, int port, float timeout) {
 						"problems getting a response from"
 						" \"%s\" on port %i : %s",host,
 						port, strerror(errno));
-				connection->error = MPD_ERROR_NORESPONSE;
+				connection->error = MPD_ERROR_1_NORESPONSE;
 				return connection;
 			}
 			connection->buflen+=readed;
@@ -421,14 +421,14 @@ mpd_Connection * mpd_newConnection(const char * host, int port, float timeout) {
 					MPD_ERRORSTR_MAX_LENGTH,
 					"problems connecting to \"%s\" on port"
 					" %i",host,port);
-			connection->error = MPD_ERROR_CONNPORT;
+			connection->error = MPD_ERROR_1_CONNPORT;
 			return connection;
 		}
 		else {
 			snprintf(connection->errorStr,MPD_ERRORSTR_MAX_LENGTH,
 					"timeout in attempting to get a response from"
 					" \"%s\" on port %i",host,port);
-			connection->error = MPD_ERROR_NORESPONSE;
+			connection->error = MPD_ERROR_1_NORESPONSE;
 			return connection;
 		}
 	}
@@ -489,7 +489,7 @@ static void mpd_executeCommand(mpd_Connection * connection, char * command) {
 			if (SENDRECV_ERRNO_IGNORE) continue;
 			snprintf(connection->errorStr,MPD_ERRORSTR_MAX_LENGTH,
 			         "problems giving command \"%s\"",command);
-			connection->error = MPD_ERROR_SENDING;
+			connection->error = MPD_ERROR_1_SENDING;
 			return;
 		}
 		else {
@@ -504,7 +504,7 @@ static void mpd_executeCommand(mpd_Connection * connection, char * command) {
 		perror("");
 		snprintf(connection->errorStr,MPD_ERRORSTR_MAX_LENGTH,
 		         "timeout sending command \"%s\"",command);
-		connection->error = MPD_ERROR_TIMEOUT;
+		connection->error = MPD_ERROR_1_TIMEOUT;
 		return;
 	}
 
@@ -552,7 +552,7 @@ static void mpd_getNextReturnElement(mpd_Connection * connection) {
 		}
 		if(connection->buflen>=MPD_BUFFER_MAX_LENGTH) {
 			strcpy(connection->errorStr,"buffer overrun");
-			connection->error = MPD_ERROR_BUFFEROVERRUN;
+			connection->error = MPD_ERROR_1_BUFFEROVERRUN;
 			connection->doneProcessing = 1;
 			connection->doneListOk = 0;
 			return;
@@ -573,7 +573,7 @@ static void mpd_getNextReturnElement(mpd_Connection * connection) {
 			if(readed<=0) {
 				strcpy(connection->errorStr,"connection"
 				       " closed");
-				connection->error = MPD_ERROR_CONNCLOSED;
+				connection->error = MPD_ERROR_1_CONNCLOSED;
 				connection->doneProcessing = 1;
 				connection->doneListOk = 0;
 				return;
@@ -584,7 +584,7 @@ static void mpd_getNextReturnElement(mpd_Connection * connection) {
 		else if(err<0 && SELECT_ERRNO_IGNORE) continue;
 		else {
 			strcpy(connection->errorStr,"connection timeout");
-			connection->error = MPD_ERROR_TIMEOUT;
+			connection->error = MPD_ERROR_1_TIMEOUT;
 			connection->doneProcessing = 1;
 			connection->doneListOk = 0;
 			return;
@@ -625,9 +625,9 @@ static void mpd_getNextReturnElement(mpd_Connection * connection) {
 		int val;
 
 		strcpy(connection->errorStr, output);
-		connection->error = MPD_ERROR_ACK;
+		connection->error = MPD_ERROR_1_ACK;
 		connection->errorCode = MPD_ACK_ERROR_UNK;
-		connection->errorAt = MPD_ERROR_AT_UNK;
+		connection->errorAt = MPD_ERROR_1_AT_UNK;
 		connection->doneProcessing = 1;
 		connection->doneListOk = 0;
 
@@ -2004,7 +2004,7 @@ static void mpd_readChanges(mpd_Connection *connection)
 	if (!connection->returnElement)
                 mpd_getNextReturnElement(connection);
 
-        if (connection->error == MPD_ERROR_CONNCLOSED) {
+        if (connection->error == MPD_ERROR_1_CONNCLOSED) {
 		connection->notify_cb (connection, IDLE_DISCONNECT, connection->userdata);
                 return;
         }
