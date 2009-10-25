@@ -97,7 +97,8 @@ static ArioServerFileList * ario_mpd_list_files (const char *path,
 static gboolean ario_mpd_command_preinvoke (void);
 static void ario_mpd_command_postinvoke (void);
 static void ario_mpd_idle_start (void);
-
+static void ario_mpd_server_state_changed_cb (ArioServer *server,
+                                              gpointer data);
 /* Private attributes */
 struct ArioMpdPrivate
 {
@@ -264,22 +265,11 @@ ario_mpd_update_elapsed (gpointer data)
         ARIO_LOG_FUNCTION_START;
 
         /* If in idle mode: update elapsed time every seconds when MPD is playing */
-        if (ario_server_get_current_state () == ARIO_STATE_PLAY) {
-                ++instance->priv->elapsed;
-                g_object_set (G_OBJECT (instance), "elapsed", instance->priv->elapsed, NULL);
-                ario_server_interface_emit (ARIO_SERVER_INTERFACE (instance), server_instance);
-        }
+        ++instance->priv->elapsed;
+        g_object_set (G_OBJECT (instance), "elapsed", instance->priv->elapsed, NULL);
+        ario_server_interface_emit (ARIO_SERVER_INTERFACE (instance), server_instance);
 
         return TRUE;
-}
-
-static void
-ario_mpd_launch_idle_timeout (void)
-{
-        ARIO_LOG_FUNCTION_START;
-        instance->priv->timeout_id = g_timeout_add (ONE_SECOND,
-                                                    (GSourceFunc) ario_mpd_update_elapsed,
-                                                    NULL);
 }
 
 static void
@@ -428,8 +418,11 @@ ario_mpd_connect_to (ArioMpd *mpd,
                 ario_mpd_idle_start ();
                 g_idle_add ((GSourceFunc) ario_mpd_update_status, NULL);
 
-                /* Launch timeout to update elapsed time */
-                ario_mpd_launch_idle_timeout ();
+                /* Connect signal to launch timeout to update elapsed time */
+                g_signal_connect_object (ario_server_get_instance (),
+                                         "state_changed",
+                                         G_CALLBACK (ario_mpd_server_state_changed_cb),
+                                         NULL, 0);
         } else {
                 /* Launch timeout for data retrieve from MPD */
                 ario_mpd_launch_timeout ();
@@ -1446,3 +1439,19 @@ ario_mpd_command_postinvoke (void)
         }
 }
 
+static void
+ario_mpd_server_state_changed_cb (ArioServer *server,
+                                  gpointer data)
+{
+        ARIO_LOG_FUNCTION_START;
+        if (instance->priv->timeout_id) {
+                g_source_remove (instance->priv->timeout_id);
+                instance->priv->timeout_id = 0;
+        }
+
+        if (ario_server_get_current_state () == ARIO_STATE_PLAY) {
+                instance->priv->timeout_id = g_timeout_add (ONE_SECOND,
+                                                            (GSourceFunc) ario_mpd_update_elapsed,
+                                                            NULL);
+        }
+}
