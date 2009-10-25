@@ -47,4 +47,5 @@ copy ..\deps\curl-7.19.2\bin\libeay32.dll bin
 copy ..\deps\curl-7.19.2\bin\libidn-11.dll bin
 copy ..\deps\curl-7.19.2\bin\libssl32.dll bin
 copy ..\deps\gettext-0.14.4\bin\libintl3.dll bin
+copy ..\deps\libmpdclient\bin\Release\libmpdclient.dll bin
 copy ..\bin-deps\libiconv-1.9.2-1-bin\bin\libiconv2.dll bin
