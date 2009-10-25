@@ -54,6 +54,7 @@ ario_notifier_destroy_tooltip (ArioNotifierTooltip *notifier)
 {
         notifier->priv->id = 0;
         gtk_widget_destroy (notifier->priv->window);
+        notifier->priv->window = NULL;
         return FALSE;
 }
 
@@ -61,6 +62,8 @@ static void
 ario_notifier_tooltip_notify (ArioNotifier *notifier_parent)
 {
         GtkWidget *tooltip;
+        gint width;
+        gint height;
         ArioNotifierTooltip *notifier = ARIO_NOTIFIER_TOOLTIP (notifier_parent);
 
         if (notifier->priv->id)
@@ -71,14 +74,20 @@ ario_notifier_tooltip_notify (ArioNotifier *notifier_parent)
         {
                 tooltip = ario_tooltip_new ();
                 notifier->priv->window = gtk_window_new (GTK_WINDOW_POPUP);
-                gtk_widget_set_app_paintable(GTK_WIDGET (notifier->priv->window), TRUE);
-                gtk_window_set_resizable(GTK_WINDOW (notifier->priv->window), FALSE);
-                gtk_container_set_border_width(GTK_CONTAINER (notifier->priv->window), 4);
+                gtk_widget_set_app_paintable (GTK_WIDGET (notifier->priv->window), TRUE);
+                gtk_window_set_resizable (GTK_WINDOW (notifier->priv->window), FALSE);
+                gtk_container_set_border_width (GTK_CONTAINER (notifier->priv->window), 4);
 
                 gtk_container_add (GTK_CONTAINER (notifier->priv->window), tooltip);
-                gtk_widget_show_all (notifier->priv->window);
-                gtk_window_move (GTK_WINDOW (notifier->priv->window), 15, 15);
         }
+        g_return_if_fail (notifier->priv->window);
+        gtk_window_get_size (GTK_WINDOW (notifier->priv->window),
+                             &width,
+                             &height);
+        gtk_window_move (GTK_WINDOW (notifier->priv->window),
+                         gdk_screen_width() - width - 25,
+                         gdk_screen_height() - height - 25);
+        gtk_widget_show_all (notifier->priv->window);
 
         notifier->priv->id = g_timeout_add (ario_conf_get_integer (PREF_NOTIFICATION_TIME, PREF_NOTIFICATION_TIME_DEFAULT) * 1000,
                                             (GSourceFunc) ario_notifier_destroy_tooltip,
