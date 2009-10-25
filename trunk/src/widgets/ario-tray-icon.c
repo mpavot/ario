@@ -293,9 +293,9 @@ ario_tray_icon_new (GtkActionGroup *group,
                                            NULL);
         instance = icon;
 
-#ifndef CUSTOM_TOOLTIP
         ArioServer *server = ario_server_get_instance ();
 
+#ifndef CUSTOM_TOOLTIP
         /* Connect signals for synchonization with server */
         g_signal_connect_object (server,
                                  "song_changed",
