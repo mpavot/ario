@@ -1253,7 +1253,7 @@ ario_mpd_insert_at (const GSList *songs,
 
         if (ario_mpd_command_preinvoke ())
                 return;
-printf ("ario_mpd_insert_at: %d\n", pos);
+
         mpd_command_list_begin (instance->priv->connection, FALSE);
 
         /* For each filename :*/
