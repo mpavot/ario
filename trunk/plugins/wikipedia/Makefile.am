@@ -25,12 +25,7 @@ plugin_in_files = wikipedia.ario-plugin.desktop.in
 
 %.ario-plugin: %.ario-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-BUILT_SOURCES =	\
-	$(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
-
-plugin_DATA =	\
-	$(BUILT_SOURCES)						\
-	$(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
+plugin_DATA = $(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
 
 icondir = $(plugindatadir)/icons
 icon_DATA = wikipedia.png
@@ -40,6 +35,5 @@ EXTRA_DIST = $(plugin_in_files)         \
              $(icon_DATA)               \
              $(uixml_DATA)
 
-CLEANFILES = $(BUILT_SOURCES)
-
-DISTCLEANFILES = $(BUILT_SOURCES)
+CLEANFILES = $(plugin_DATA)
+DISTCLEANFILES = $(plugin_DATA)
