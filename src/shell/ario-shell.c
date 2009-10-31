@@ -65,6 +65,8 @@ static void ario_shell_cmd_connect (GtkAction *action,
                                     ArioShell *shell);
 static void ario_shell_cmd_disconnect (GtkAction *action,
                                        ArioShell *shell);
+static void ario_shell_cmd_update (GtkAction *action,
+                                   ArioShell *shell);
 static void ario_shell_cmd_plugins (GtkAction *action,
                                     ArioShell *shell);
 static void ario_shell_cmd_preferences (GtkAction *action,
@@ -157,6 +159,9 @@ static GtkActionEntry shell_actions [] =
         { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), "<control>D",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_disconnect) },
+        { "FileServerUpdate", GTK_STOCK_REFRESH, N_("_Update database"), "<control>U",
+                NULL,
+                G_CALLBACK (ario_shell_cmd_update) },
         { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
@@ -714,6 +719,14 @@ ario_shell_cmd_disconnect (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         ario_server_disconnect ();
+}
+
+static void
+ario_shell_cmd_update (GtkAction *action,
+                       ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START;
+        ario_server_update_db (NULL);
 }
 
 static void

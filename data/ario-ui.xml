@@ -5,6 +5,8 @@
                         <menuitem name="FileConnect" action="FileConnect"/>
                         <menuitem name="FileDisconnect" action="FileDisconnect"/>
                         <separator/>
+                        <menuitem name="FileServerUpdate" action="FileServerUpdate"/>
+                        <separator/>
                         <menuitem name="FileSave" action="PlaylistSave"/>
                         <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>
                         <placeholder name="FileMenuPluginPlaceholder" />
