@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-19 20:36+0200\n"
+"POT-Creation-Date: 2009-11-03 23:13+0100\n"
 "PO-Revision-Date: 2009-03-23 22:28+0000\n"
 "Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -131,11 +131,11 @@ msgstr "Kapcsolat"
 msgid "_Autoconnect on startup"
 msgstr "_Kapcsolódás indításkor"
 
-#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:154
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:156
 msgid "_Connect"
 msgstr "Kap_csolódás"
 
-#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:157
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:159
 msgid "_Disconnect"
 msgstr "_Kapcsolat bontása"
 
@@ -223,7 +223,7 @@ msgstr "Hozzáadás és lejátszás"
 msgid "Add to playlist"
 msgstr "Hozzáadás a lejátszólistához"
 
-#. MPD_TAG_ITEM_ARTIST
+#. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:45
 #: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
 #: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
@@ -236,8 +236,8 @@ msgstr "Album"
 msgid "Artist"
 msgstr "Előadó"
 
-#. MPD_TAG_ITEM_GENRE
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:50
+#. ARIO_TAG_GENRE
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:51
 #: ../src/widgets/ario-playlist.c:514
 msgid "Date"
 msgstr "Dátum"
@@ -259,9 +259,9 @@ msgstr "Időtartam"
 msgid "File"
 msgstr "Fájl"
 
-#. MPD_TAG_ITEM_TRACK
-#. MPD_TAG_ITEM_NAME
-#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:49
+#. ARIO_TAG_TRACK
+#. ARIO_TAG_NAME
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:50
 #: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
 msgstr "Műfaj"
@@ -279,7 +279,7 @@ msgid "On double click:"
 msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
 msgstr "Lejátszólista"
 
@@ -296,15 +296,15 @@ msgstr "Lecse_rélés a lejátszólistában"
 msgid "Show rows:"
 msgstr "Sorok mutatása"
 
-#. MPD_TAG_ITEM_ALBUM
-#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:46
+#. ARIO_TAG_ALBUM_ARTIST
+#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:47
 #: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
 #: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
 msgid "Title"
 msgstr "Cím"
 
-#. MPD_TAG_ITEM_TITLE
-#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:47
+#. ARIO_TAG_TITLE
+#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:48
 #: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
 msgid "Track"
 msgstr "Szám"
@@ -536,7 +536,7 @@ msgstr "Bővítmény"
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:184
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:189
 msgid "_About"
 msgstr "_Névjegy"
 
@@ -560,7 +560,7 @@ msgstr "Összes l_etiltása"
 msgid "Active plugins"
 msgstr "Aktív bővítmények"
 
-#: ../src/preferences/ario-server-preferences.c:183
+#: ../src/preferences/ario-server-preferences.c:182
 #: ../src/preferences/ario-stats-preferences.c:151
 #: ../src/preferences/ario-stats-preferences.c:152
 #: ../src/preferences/ario-stats-preferences.c:153
@@ -570,51 +570,51 @@ msgstr "Aktív bővítmények"
 msgid "Not connected"
 msgstr "Nincs kapcsolat"
 
-#: ../src/preferences/ario-server-preferences.c:188
-#: ../src/preferences/ario-server-preferences.c:279
+#: ../src/preferences/ario-server-preferences.c:187
+#: ../src/preferences/ario-server-preferences.c:278
 #: ../src/widgets/ario-status-bar.c:100
 msgid "Updating..."
 msgstr "Frissítés..."
 
-#: ../src/servers/ario-mpd.c:407
+#: ../src/servers/ario-mpd.c:410
 msgid "Connecting to server..."
 msgstr "Kapcsolódás a kiszolgálóhoz..."
 
-#: ../src/servers/ario-mpd.c:435
+#: ../src/servers/ario-mpd.c:438
 msgid "Impossible to connect to server. Check the connection options."
 msgstr ""
 "Kapcsolódás a kiszolgálóhoz nem lehetséges. Ellenőrizze a kapcsolódási "
 "opciókat."
 
-#. MPD_TAG_ITEM_DATE
-#: ../src/servers/ario-server.c:51
-msgid "Composer"
-msgstr "Szerző"
-
-#. MPD_TAG_ITEM_COMPOSER
-#: ../src/servers/ario-server.c:52
-msgid "Performer"
-msgstr "Előadó"
-
-#. MPD_TAG_ITEM_PERFORMER
-#. MPD_TAG_ITEM_COMMENT
-#. MPD_TAG_ITEM_DISC
-#: ../src/servers/ario-server.c:55
-msgid "Filename"
-msgstr "Fájlnév"
-
-#. MPD_TAG_ITEM_FILENAME
-#: ../src/servers/ario-server.c:56
+#. ARIO_TAG_ALBUM
+#: ../src/servers/ario-server.c:46
 msgid "Album Artist"
 msgstr ""
 
-#. MPD_TAG_ITEM_ALBUMARTIST
+#. ARIO_TAG_DATE
+#: ../src/servers/ario-server.c:52
+msgid "Composer"
+msgstr "Szerző"
+
+#. ARIO_TAG_COMPOSER
+#: ../src/servers/ario-server.c:53
+msgid "Performer"
+msgstr "Előadó"
+
+#. ARIO_TAG_PERFORMER
+#. ARIO_TAG_COMMENT
+#. ARIO_TAG_DISC
+#: ../src/servers/ario-server.c:56
+msgid "Filename"
+msgstr "Fájlnév"
+
+#. ARIO_TAG_FILENAME
 #: ../src/servers/ario-server.c:57
 msgid "Any"
 msgstr "Bármely"
 
 #. impossible time or broken locale settings
-#: ../src/servers/ario-server.h:29
+#: ../src/servers/ario-server.h:27
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1235
 msgid "Unknown"
 msgstr "Ismeretlen"
@@ -700,75 +700,80 @@ msgstr "Biztos benne, hogy eltávolítja az összes kiválasztott borítót?"
 msgid "Cover"
 msgstr "Borító"
 
-#: ../src/shell/ario-shell.c:148
+#: ../src/shell/ario-shell.c:150
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../src/shell/ario-shell.c:149
+#: ../src/shell/ario-shell.c:151
 msgid "_Edit"
 msgstr "Sz_erkesztés"
 
-#: ../src/shell/ario-shell.c:150
+#: ../src/shell/ario-shell.c:152
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../src/shell/ario-shell.c:151
+#: ../src/shell/ario-shell.c:153
 msgid "_Tool"
 msgstr "_Eszköz"
 
-#: ../src/shell/ario-shell.c:152
+#: ../src/shell/ario-shell.c:154
 msgid "_Help"
 msgstr "Segí_tség"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:162
+#, fuzzy
+msgid "_Update database"
+msgstr "_Frissítés"
+
+#: ../src/shell/ario-shell.c:165
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#: ../src/shell/ario-shell.c:163
+#: ../src/shell/ario-shell.c:168
 msgid "Plu_gins"
 msgstr "Bő_vítmények"
 
-#: ../src/shell/ario-shell.c:166
+#: ../src/shell/ario-shell.c:171
 msgid "Prefere_nces"
 msgstr "_Beállítások"
 
-#: ../src/shell/ario-shell.c:169
+#: ../src/shell/ario-shell.c:174
 msgid "_Change current album cover"
 msgstr "Jelenlegi albumborító _változtatása"
 
-#: ../src/shell/ario-shell.c:172
+#: ../src/shell/ario-shell.c:177
 msgid "Download album _covers"
 msgstr "Albumborítok _letöltése"
 
-#: ../src/shell/ario-shell.c:175
+#: ../src/shell/ario-shell.c:180
 msgid "Find similar artists"
 msgstr "Hasonló előadók keresése"
 
-#: ../src/shell/ario-shell.c:178
+#: ../src/shell/ario-shell.c:183
 msgid "Add similar songs to playlist"
 msgstr "Hasonló számok hozzáadása listához"
 
-#: ../src/shell/ario-shell.c:181
+#: ../src/shell/ario-shell.c:186
 msgid "Show _lyrics"
 msgstr "Dalszövegek _mutatása"
 
-#: ../src/shell/ario-shell.c:187
+#: ../src/shell/ario-shell.c:192
 msgid "_Translate this application..."
 msgstr "Alkalmazás _fordítása"
 
-#: ../src/shell/ario-shell.c:194
+#: ../src/shell/ario-shell.c:199
 msgid "S_tatusbar"
 msgstr "Á_llapotsor"
 
-#: ../src/shell/ario-shell.c:197
+#: ../src/shell/ario-shell.c:202
 msgid "Upper part"
 msgstr "Felső rész"
 
-#: ../src/shell/ario-shell.c:770
+#: ../src/shell/ario-shell.c:783
 msgid "GTK client for MPD"
 msgstr "GTK kliens MPD -hez"
 
-#: ../src/shell/ario-shell.c:771
+#: ../src/shell/ario-shell.c:784
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -831,7 +836,7 @@ msgstr ""
 "  Zoltan Hoppar https://launchpad.net/~hopparz-gmail"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1111
+#: ../src/shell/ario-shell.c:1124
 msgid "Configure Plugins"
 msgstr "Bővítmények beállítása"
 
@@ -959,7 +964,7 @@ msgstr "Zene leállítása"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
-#: ../src/widgets/ario-header.c:312
+#: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tooltip.c:321
 msgid " of "
 msgstr " / "
 

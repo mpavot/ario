@@ -97,6 +97,8 @@ src/preferences/ario-trayicon-preferences.c
 src/preferences/ario-preferences.h
 src/servers/ario-mpd.c
 src/servers/ario-mpd.h
+src/servers/ario-mpd2.c
+src/servers/ario-mpd2.h
 src/servers/ario-server.c
 src/servers/ario-server.h
 src/servers/ario-server-interface.c
