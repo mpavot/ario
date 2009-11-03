@@ -1,0 +1,1253 @@
+# Estonian translation for ario
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the ario package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ario\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-10-19 20:36+0200\n"
+"PO-Revision-Date: 2009-10-10 13:14+0000\n"
+"Last-Translator: lyyser <logard.1961@gmail.com>\n"
+"Language-Team: Estonian <et@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-11-03 22:20+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../data/ario.desktop.in.in.h:1
+msgid "Ario music player"
+msgstr "Ario music player"
+
+#: ../data/ario.desktop.in.in.h:2
+msgid "Client application to mpd"
+msgstr "Mpd kliendi rakendus"
+
+#: ../data/ui/browser-prefs.ui.h:1
+msgid "Alphabetically"
+msgstr "Tähestikuliselt"
+
+#: ../data/ui/browser-prefs.ui.h:2
+msgid "By year"
+msgstr "Ajaliselt"
+
+#: ../data/ui/browser-prefs.ui.h:3
+msgid "Library Options"
+msgstr "Loendi seaded"
+
+#: ../data/ui/browser-prefs.ui.h:4
+msgid "Library Organisation"
+msgstr "Loendi organiseerimine"
+
+#: ../data/ui/browser-prefs.ui.h:5
+msgid "Sort albums: "
+msgstr "Sordi albumid: "
+
+#: ../data/ui/connection-autodetect.ui.h:1
+msgid ""
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
+msgstr ""
+"Kui sa ei näe oma MPD serverit tänu automaatsele tuvastamisele, peaksite "
+"kontrollima, et Zeroconf on aktiveerimata MPD konfiguratsioon või kasutage "
+"käsitsi määramist."
+
+#: ../data/ui/connection-autodetect.ui.h:2
+msgid "Server autodetection"
+msgstr "Serveri automaattuvastus"
+
+#: ../data/ui/connection-widget.ui.h:1
+msgid "Auto detect"
+msgstr "Automaatne tuvastamine"
+
+#: ../data/ui/connection-widget.ui.h:2
+msgid "Default"
+msgstr "Vaikimisi"
+
+#: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
+msgid "Host :"
+msgstr "Host :"
+
+#: ../data/ui/connection-widget.ui.h:4
+msgid "Music directory :"
+msgstr "Muusika kataloog :"
+
+#: ../data/ui/connection-widget.ui.h:5
+msgid "Music server is on the same computer as Ario"
+msgstr "Muusika server on samas arvutis kus ka Ario"
+
+#. Create the widgets
+#: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
+#: ../plugins/radios/ario-radio.c:922
+msgid "Name :"
+msgstr "Nimi :"
+
+#: ../data/ui/connection-widget.ui.h:7
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
+msgid "Password :"
+msgstr "Salasõna :"
+
+#: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:85
+msgid "Port :"
+msgstr "Port :"
+
+#: ../data/ui/connection-widget.ui.h:9
+msgid "Server type : "
+msgstr "Serveri tüüp : "
+
+#: ../data/ui/connection-widget.ui.h:10
+msgid "XMMS 2 (Experimental)"
+msgstr "XMMS 2 (Eksperimentaalne)"
+
+#: ../data/ui/cover-prefs.ui.h:1
+msgid "Automatically download the album cover of the playing song"
+msgstr "Lae automaatselt esitava loo albumi ümbris"
+
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+msgid "Covers"
+msgstr "Ümbrised"
+
+#: ../data/ui/cover-prefs.ui.h:3
+msgid "Covers Sources"
+msgstr "Ümbrise allikad"
+
+#: ../data/ui/cover-prefs.ui.h:4
+msgid "Show the covers in the albums list"
+msgstr "Näita ümbrist albumi lehel"
+
+#: ../data/ui/cover-prefs.ui.h:5
+msgid "Use Amazon."
+msgstr "Kasuta Amazon."
+
+#: ../data/ui/connection-prefs.ui.h:1
+#: ../src/shell/ario-shell-preferences.c:109
+msgid "Connection"
+msgstr "Ühendus"
+
+#: ../data/ui/connection-prefs.ui.h:2
+msgid "_Autoconnect on startup"
+msgstr "_Automaatkäivitus ühendumisel"
+
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:154
+msgid "_Connect"
+msgstr "_Ühenda"
+
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:157
+msgid "_Disconnect"
+msgstr "_Katkesta ühendus"
+
+#: ../data/ui/connection-assistant.ui.h:1
+msgid ""
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
+msgstr ""
+"Sa pead täpsustama serveriga ühendust. Kui sa ei näe serverit tänu "
+"automaattuvastusele, peate kontrollima, et Zeroconf / Avahi aktiveeritakse "
+"teie serveriga või kasutad käsitsi määramist."
+
+#: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
+#: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
+msgid "Album :"
+msgstr "Album :"
+
+#: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
+#: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
+#: ../plugins/information/information.ui.h:3
+#: ../plugins/radios/ario-radio.c:166
+msgid "Artist :"
+msgstr "Artist :"
+
+#: ../data/ui/cover-progress.ui.h:3
+msgid "Downloading cover"
+msgstr "Laen ümbrist"
+
+#: ../data/ui/cover-select.ui.h:3
+msgid "Local search"
+msgstr "Lokaalne otsing"
+
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:120
+msgid "Search"
+msgstr "Otsing"
+
+#: ../data/ui/others-prefs.ui.h:1
+msgid "Allow only one instance of Ario"
+msgstr "Luba ainult üheosana Ario"
+
+#: ../data/ui/others-prefs.ui.h:2
+msgid "Hide window when close button is pressed"
+msgstr "Peida aken sulgemisel"
+
+#: ../data/ui/others-prefs.ui.h:3
+msgid "Interface"
+msgstr "Liides"
+
+#: ../data/ui/others-prefs.ui.h:4
+msgid "Proxy"
+msgstr "Proksi"
+
+#: ../data/ui/others-prefs.ui.h:5
+msgid "Proxy Address :"
+msgstr "Proksi aadress :"
+
+#: ../data/ui/others-prefs.ui.h:6
+msgid "Proxy Port :"
+msgstr "Proksi port :"
+
+#: ../data/ui/others-prefs.ui.h:7
+msgid "Show tabs"
+msgstr "Näita ridu"
+
+#: ../data/ui/others-prefs.ui.h:8
+msgid "Use a proxy"
+msgstr "Kauta proksit"
+
+#: ../data/ui/lyrics-prefs.ui.h:1
+msgid "Lyrics Sources"
+msgstr "Sõnade allikad"
+
+#: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:13
+#: ../plugins/information/information.ui.h:6
+msgid "Title :"
+msgstr "Tiitel :"
+
+#: ../data/ui/playlist-prefs.ui.h:1
+msgid "Add and play"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
+msgid "Add to playlist"
+msgstr "Lisa lugude loendisse"
+
+#. MPD_TAG_ITEM_ARTIST
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:45
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
+msgid "Album"
+msgstr "Album"
+
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:44
+#: ../src/widgets/ario-playlist.c:514 ../src/widgets/ario-songlist.c:213
+#: ../src/widgets/ario-tray-icon.c:579
+msgid "Artist"
+msgstr "Esitaja"
+
+#. MPD_TAG_ITEM_GENRE
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:50
+#: ../src/widgets/ario-playlist.c:514
+msgid "Date"
+msgstr "Kuupäev"
+
+#: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
+msgid "Disc"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:7
+msgid "Double click"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
+msgid "Duration"
+msgstr "Kestvus"
+
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:514
+msgid "File"
+msgstr "Fail"
+
+#. MPD_TAG_ITEM_TRACK
+#. MPD_TAG_ITEM_NAME
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:49
+#: ../src/widgets/ario-playlist.c:514
+msgid "Genre"
+msgstr "Zanr"
+
+#: ../data/ui/playlist-prefs.ui.h:11
+msgid "Go to current song when a new song is played"
+msgstr "Mine töösolevale laulule kui uut laulu mängitakse"
+
+#: ../data/ui/playlist-prefs.ui.h:12
+msgid "Mode"
+msgstr "Olek"
+
+#: ../data/ui/playlist-prefs.ui.h:13
+msgid "On double click:"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
+#: ../src/shell/ario-shell.c:200 ../src/shell/ario-shell-preferences.c:124
+msgid "Playlist"
+msgstr "Lugude nimekiri"
+
+#: ../data/ui/playlist-prefs.ui.h:15
+msgid "Playlist mode:"
+msgstr "Lugude laad:"
+
+#: ../data/ui/playlist-prefs.ui.h:16
+msgid "Replace in playlist"
+msgstr ""
+
+#: ../data/ui/playlist-prefs.ui.h:17
+msgid "Show rows:"
+msgstr "Näita ridu"
+
+#. MPD_TAG_ITEM_ALBUM
+#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:46
+#: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
+#: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
+msgid "Title"
+msgstr "Tiitel"
+
+#. MPD_TAG_ITEM_TITLE
+#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:47
+#: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
+msgid "Track"
+msgstr "Lugu"
+
+#: ../data/ui/server-prefs.ui.h:1
+msgid "Audio outputs"
+msgstr "Heli väljund"
+
+#: ../data/ui/server-prefs.ui.h:2
+msgid "Crossfade"
+msgstr "Siire"
+
+#: ../data/ui/server-prefs.ui.h:3
+msgid "Database"
+msgstr "Andmebaas"
+
+#: ../data/ui/server-prefs.ui.h:4
+msgid "Last updated:"
+msgstr "Viimati uuendatud:"
+
+#: ../data/ui/server-prefs.ui.h:5
+msgid "Stop music on exit"
+msgstr "Peata muusika ja välju"
+
+#: ../data/ui/server-prefs.ui.h:6
+msgid "Update on startup"
+msgstr "Uuenda käivitumisel"
+
+#: ../data/ui/server-prefs.ui.h:7
+msgid "_Update"
+msgstr "_Uuenda"
+
+#: ../data/ui/server-prefs.ui.h:8
+msgid "enable crossfade"
+msgstr "Luba siire"
+
+#: ../data/ui/server-prefs.ui.h:9
+msgid "fade time (s):"
+msgstr "Vaibumise aeg (ajad):"
+
+#: ../data/ui/server-prefs.ui.h:10 ../src/ario-util.c:50 ../src/ario-util.c:71
+#: ../src/ario-util.c:93 ../plugins/information/information.ui.h:7
+#, c-format
+msgid "n/a"
+msgstr "n/a"
+
+#: ../data/ui/similar-artists.ui.h:1
+msgid "Add all to playlist"
+msgstr "Lisa kõik lugude loendisse"
+
+#: ../data/ui/similar-artists.ui.h:3
+msgid "Find on Last.fm"
+msgstr "Leia Last.fm-ist"
+
+#: ../data/ui/stats-prefs.ui.h:1
+msgid "Database play time :"
+msgstr "Esitamise kestvuse andmebaas:"
+
+#: ../data/ui/stats-prefs.ui.h:2
+msgid "Number of albums :"
+msgstr "Albumite arv :"
+
+#: ../data/ui/stats-prefs.ui.h:3
+msgid "Number of artists :"
+msgstr "Esitajate arv:"
+
+#: ../data/ui/stats-prefs.ui.h:4
+msgid "Number of songs :"
+msgstr "Laulude arv:"
+
+#: ../data/ui/stats-prefs.ui.h:5
+msgid "Play time :"
+msgstr "Esitus aeg:"
+
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+msgid "Statistics"
+msgstr "Statistika"
+
+#: ../data/ui/stats-prefs.ui.h:7
+msgid "Uptime :"
+msgstr "Laadimisaeg:"
+
+#: ../data/ui/song-infos.ui.h:2
+msgid "Album Artist :"
+msgstr "Albumi esitaja:"
+
+#: ../data/ui/song-infos.ui.h:4
+msgid "Comment :"
+msgstr "Kommentaar:"
+
+#: ../data/ui/song-infos.ui.h:5
+msgid "Composer :"
+msgstr "Helilooja :"
+
+#: ../data/ui/song-infos.ui.h:6
+msgid "Date :"
+msgstr "Kuupäev :"
+
+#: ../data/ui/song-infos.ui.h:7
+msgid "Disc :"
+msgstr "Pllat :"
+
+#: ../data/ui/song-infos.ui.h:8
+msgid "Filename :"
+msgstr "Failinimi :"
+
+#: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
+msgid "Genre :"
+msgstr "Zanr :"
+
+#: ../data/ui/song-infos.ui.h:10 ../plugins/information/information.ui.h:4
+msgid "Length :"
+msgstr "Piikus :_"
+
+#: ../data/ui/song-infos.ui.h:11
+msgid "Performer :"
+msgstr "Esitaja :"
+
+#: ../data/ui/song-infos.ui.h:12
+msgid "Song"
+msgstr "Laul"
+
+#: ../data/ui/song-infos.ui.h:14
+msgid "Track :"
+msgstr "Lugu :"
+
+#: ../data/ui/trayicon-prefs.ui.h:1
+msgid "Do nothing"
+msgstr "Ära tee midagi"
+
+#: ../data/ui/trayicon-prefs.ui.h:2
+msgid "Mute"
+msgstr "Vaigista"
+
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+msgid "Notification"
+msgstr "Teavitus"
+
+#: ../data/ui/trayicon-prefs.ui.h:4
+msgid "Notification on song change"
+msgstr "Teavita loo muutumisest"
+
+#: ../data/ui/trayicon-prefs.ui.h:5
+msgid "Notification time: "
+msgstr "Muutmise aeg "
+
+#: ../data/ui/trayicon-prefs.ui.h:6
+msgid "On middle button click on tray icon :"
+msgstr ""
+
+#: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:243
+msgid "Play next song"
+msgstr "Esita järgmist lugu"
+
+#: ../data/ui/trayicon-prefs.ui.h:8
+msgid "Play/Pause"
+msgstr "Esita /pausi"
+
+#: ../data/ui/trayicon-prefs.ui.h:9
+msgid "Tray icon"
+msgstr "Paneeli ikoon"
+
+#: ../src/ario-main.c:64
+msgid "Start minimized window"
+msgstr "Alusta minimeeritud akanas"
+
+#. Format result string
+#: ../src/ario-util.c:110
+msgid "seconds"
+msgstr "sekundit"
+
+#: ../src/ario-util.c:112
+msgid "minutes"
+msgstr "minutid"
+
+#: ../src/ario-util.c:118
+msgid "hours"
+msgstr "tunnid"
+
+#: ../src/ario-util.c:124
+msgid "days"
+msgstr "päevad"
+
+#: ../src/covers/ario-cover.c:149
+msgid "The cover already exists. Do you want to replace it?"
+msgstr "See ümbris on juba  olemas.Kas soovid seda asentada?"
+
+#: ../src/covers/ario-cover-local.c:60
+msgid "Music Directory"
+msgstr "Muusika kataloog"
+
+#: ../src/playlist/ario-playlist-dynamic.c:49
+msgid "songs of same artist"
+msgstr "laul samalt esitajalt"
+
+#: ../src/playlist/ario-playlist-dynamic.c:50
+msgid "songs of same album"
+msgstr "laul samalt albumilt"
+
+#: ../src/playlist/ario-playlist-dynamic.c:51
+msgid "songs of similar artists"
+msgstr "Laul sarnaselt esitajalt"
+
+#: ../src/playlist/ario-playlist-dynamic.c:52
+msgid "albums of same artists"
+msgstr "album samalt esitajalt"
+
+#: ../src/playlist/ario-playlist-dynamic.c:53
+msgid "albums of similar artists"
+msgstr "albumeid sarnaste artistidega"
+
+#: ../src/playlist/ario-playlist-dynamic.c:69
+msgid "Dynamic Playlist"
+msgstr "Dünaamiline esitusloend"
+
+#: ../src/playlist/ario-playlist-queue.c:49
+msgid "Queue Mode"
+msgstr "Järjekorras olek"
+
+#: ../src/playlist/ario-playlist-normal.c:47
+msgid "Normal"
+msgstr "Normaalne"
+
+#: ../src/plugins/ario-plugin-manager.c:45
+msgid "Plugin"
+msgstr "Plugin"
+
+#: ../src/plugins/ario-plugin-manager.c:46
+msgid "Enabled"
+msgstr "Lubatud"
+
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:184
+msgid "_About"
+msgstr "_Programmist"
+
+#: ../src/plugins/ario-plugin-manager.c:488
+msgid "C_onfigure"
+msgstr "_Seadista"
+
+#: ../src/plugins/ario-plugin-manager.c:497
+msgid "A_ctivate"
+msgstr "_Aktiveeri"
+
+#: ../src/plugins/ario-plugin-manager.c:508
+msgid "Ac_tivate All"
+msgstr "A_ktiveeri kõik"
+
+#: ../src/plugins/ario-plugin-manager.c:513
+msgid "_Deactivate All"
+msgstr "_Deaktiveeri kõik"
+
+#: ../src/plugins/ario-plugin-manager.c:722
+msgid "Active plugins"
+msgstr "Aktiivsed pluginad"
+
+#: ../src/preferences/ario-server-preferences.c:183
+#: ../src/preferences/ario-stats-preferences.c:151
+#: ../src/preferences/ario-stats-preferences.c:152
+#: ../src/preferences/ario-stats-preferences.c:153
+#: ../src/preferences/ario-stats-preferences.c:154
+#: ../src/preferences/ario-stats-preferences.c:155
+#: ../src/preferences/ario-stats-preferences.c:156
+msgid "Not connected"
+msgstr "Pole ühendatud"
+
+#: ../src/preferences/ario-server-preferences.c:188
+#: ../src/preferences/ario-server-preferences.c:279
+#: ../src/widgets/ario-status-bar.c:100
+msgid "Updating..."
+msgstr "Uuendamine..."
+
+#: ../src/servers/ario-mpd.c:407
+msgid "Connecting to server..."
+msgstr "Ühendan serveriga..."
+
+#: ../src/servers/ario-mpd.c:435
+msgid "Impossible to connect to server. Check the connection options."
+msgstr "Võimatu ühenduda serveriga. Kontrolli ühenduse seadeid."
+
+#. MPD_TAG_ITEM_DATE
+#: ../src/servers/ario-server.c:51
+msgid "Composer"
+msgstr "Helilooja"
+
+#. MPD_TAG_ITEM_COMPOSER
+#: ../src/servers/ario-server.c:52
+msgid "Performer"
+msgstr "Esitaja"
+
+#. MPD_TAG_ITEM_PERFORMER
+#. MPD_TAG_ITEM_COMMENT
+#. MPD_TAG_ITEM_DISC
+#: ../src/servers/ario-server.c:55
+msgid "Filename"
+msgstr "Failinimi"
+
+#. MPD_TAG_ITEM_FILENAME
+#: ../src/servers/ario-server.c:56
+msgid "Album Artist"
+msgstr "Albumi esitaja"
+
+#. MPD_TAG_ITEM_ALBUMARTIST
+#: ../src/servers/ario-server.c:57
+msgid "Any"
+msgstr "Kõik"
+
+#. impossible time or broken locale settings
+#: ../src/servers/ario-server.h:29
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1235
+msgid "Unknown"
+msgstr "Tundmatu"
+
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:82
+#: ../src/sources/ario-storedplaylists.c:88
+#: ../src/sources/ario-storedplaylists.c:106
+#: ../plugins/filesystem/ario-filesystem.c:94
+#: ../plugins/filesystem/ario-filesystem.c:109
+#: ../plugins/radios/ario-radio.c:116
+msgid "_Add to playlist"
+msgstr "_Lisa esitusloendisse"
+
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:85
+#: ../src/sources/ario-storedplaylists.c:91
+#: ../src/sources/ario-storedplaylists.c:109
+#: ../plugins/filesystem/ario-filesystem.c:97
+#: ../plugins/filesystem/ario-filesystem.c:112
+#: ../plugins/radios/ario-radio.c:119
+msgid "Add and _play"
+msgstr "Lisa  ja _esita"
+
+#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
+#: ../src/sources/ario-storedplaylists.c:94
+#: ../src/sources/ario-storedplaylists.c:112
+#: ../plugins/filesystem/ario-filesystem.c:100
+#: ../plugins/filesystem/ario-filesystem.c:115
+#: ../plugins/radios/ario-radio.c:122
+msgid "_Replace in playlist"
+msgstr "_Asenda esitusnimekirjas"
+
+#: ../src/sources/ario-browser.c:91
+msgid "Get the covers"
+msgstr "Omasta need ümbrised"
+
+#: ../src/sources/ario-browser.c:94
+msgid "_Delete the covers"
+msgstr "_Kustuta ümbris"
+
+#: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
+#: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
+#: ../src/widgets/ario-playlist.c:151
+#: ../plugins/filesystem/ario-filesystem.c:118
+#: ../plugins/radios/ario-radio.c:131
+msgid "_Properties"
+msgstr "_Omadused"
+
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+msgid "Library"
+msgstr "Helikogu"
+
+#: ../src/sources/ario-search.c:186
+msgid "Add a search criteria"
+msgstr "Lisa ostingu kriteerumid"
+
+#: ../src/sources/ario-search.c:197
+msgid "Search songs in the library"
+msgstr "Otsi laulu loendist"
+
+#: ../src/sources/ario-search.c:381
+msgid "Remove a search criteria"
+msgstr "Eemalda otsingu kriteeriumid"
+
+#: ../src/sources/ario-storedplaylists.c:97
+msgid "_Delete"
+msgstr "_Kustuta"
+
+#: ../src/sources/ario-storedplaylists.c:151
+msgid "Playlists"
+msgstr "Lugude nimekirjad"
+
+#: ../src/sources/ario-storedplaylists.c:592
+msgid "Are you sure that you want to delete all the selected playlists?"
+msgstr "Kas oled kinnel et soovid kustutada kogu valitu esitusloendist?"
+
+#: ../src/sources/ario-tree.c:856
+msgid "Are you sure that you want to remove all the selected covers?"
+msgstr "Oled kinnel et soovid eemaltada kõik valitud ümbrised"
+
+#. Translators - This "Cover" refers to an album cover art
+#: ../src/sources/ario-tree-albums.c:199
+msgid "Cover"
+msgstr "Plaadiümbris"
+
+#: ../src/shell/ario-shell.c:148
+msgid "_File"
+msgstr "_Fail"
+
+#: ../src/shell/ario-shell.c:149
+msgid "_Edit"
+msgstr "_Redigeeri"
+
+#: ../src/shell/ario-shell.c:150
+msgid "_View"
+msgstr "_Vaata"
+
+#: ../src/shell/ario-shell.c:151
+msgid "_Tool"
+msgstr "_Tööriistad"
+
+#: ../src/shell/ario-shell.c:152
+msgid "_Help"
+msgstr "_Abi"
+
+#: ../src/shell/ario-shell.c:160
+msgid "_Quit"
+msgstr "_Välju"
+
+#: ../src/shell/ario-shell.c:163
+msgid "Plu_gins"
+msgstr "Plu_ginad"
+
+#: ../src/shell/ario-shell.c:166
+msgid "Prefere_nces"
+msgstr "_Häälestus"
+
+#: ../src/shell/ario-shell.c:169
+msgid "_Change current album cover"
+msgstr "_Muuda töösoleva albumi ümbris"
+
+#: ../src/shell/ario-shell.c:172
+msgid "Download album _covers"
+msgstr "Lae alla albumi _ümbrised"
+
+#: ../src/shell/ario-shell.c:175
+msgid "Find similar artists"
+msgstr "Leia sarnased esitajad"
+
+#: ../src/shell/ario-shell.c:178
+msgid "Add similar songs to playlist"
+msgstr "Lisa sarnased laulud esitusloendisse"
+
+#: ../src/shell/ario-shell.c:181
+msgid "Show _lyrics"
+msgstr "Näita _sõnu"
+
+#: ../src/shell/ario-shell.c:187
+msgid "_Translate this application..."
+msgstr "_Tõlgi see rakkendus..."
+
+#: ../src/shell/ario-shell.c:194
+msgid "S_tatusbar"
+msgstr "_Olekuriba"
+
+#: ../src/shell/ario-shell.c:197
+msgid "Upper part"
+msgstr "Ülemine osa"
+
+#: ../src/shell/ario-shell.c:770
+msgid "GTK client for MPD"
+msgstr "GTK klient MPD-le"
+
+#: ../src/shell/ario-shell.c:771
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  lyyser https://launchpad.net/~logard-1961"
+
+#. Create plugins configuration dialog window
+#: ../src/shell/ario-shell.c:1111
+msgid "Configure Plugins"
+msgstr "Pluginate seadistamine"
+
+#. Set window properties
+#: ../src/shell/ario-shell-coverdownloader.c:187
+msgid "Music Player Cover Download"
+msgstr "Music Player-i ümbrise laadimine"
+
+#: ../src/shell/ario-shell-coverdownloader.c:332
+msgid "Download Finished!"
+msgstr "Allaladimine lõpetatud!"
+
+#. We show the numbers of covers found and not found
+#: ../src/shell/ario-shell-coverdownloader.c:335
+#, c-format
+msgid ""
+"%i covers found\n"
+"%i covers not found\n"
+"%i covers already exist"
+msgstr ""
+"%i ümbris leitud\n"
+"%i ümbrist ei leitud\n"
+"%i ümbris on juba olemas"
+
+#. Set window properties
+#: ../src/shell/ario-shell-coverselect.c:242
+msgid "Cover Download"
+msgstr "Ümbrise laadimine"
+
+#: ../src/shell/ario-shell-coverselect.c:559
+msgid "Error reading file"
+msgstr "Viga faili lugemisel"
+
+#: ../src/shell/ario-shell-coverselect.c:584
+msgid "Error saving file"
+msgstr "Viga faili salvestamisel"
+
+#: ../src/shell/ario-shell-lyrics.c:43
+#: ../src/shell/ario-shell-preferences.c:134
+#: ../src/shell/ario-shell-songinfos.c:273
+msgid "Lyrics"
+msgstr "Sõnad"
+
+#: ../src/shell/ario-shell-lyricsselect.c:152
+msgid "Lyrics Download"
+msgstr "Sõnade laadimine"
+
+#: ../src/shell/ario-shell-preferences.c:81
+msgid "Ario Preferences"
+msgstr "Ario seadistused"
+
+#: ../src/shell/ario-shell-preferences.c:114
+msgid "Server"
+msgstr "Server"
+
+#: ../src/shell/ario-shell-preferences.c:144
+msgid "Others"
+msgstr "Muud"
+
+#: ../src/shell/ario-shell-similarartists.c:318
+#, c-format
+msgid "%d songs"
+msgstr "%d laulud"
+
+#. Set window properties
+#. Set window title
+#: ../src/shell/ario-shell-songinfos.c:249
+#: ../src/shell/ario-shell-songinfos.c:267
+#: ../src/shell/ario-shell-songinfos.c:544
+msgid "Song Properties"
+msgstr "Loo omadused"
+
+#: ../src/shell/ario-shell-songinfos.c:455
+msgid "Error saving tags of file:"
+msgstr "Viga faili sildi salvestamisel"
+
+#: ../src/widgets/ario-connection-widget.c:626
+msgid "You must select a server."
+msgstr "Sa pead valima serveri"
+
+#: ../src/widgets/ario-connection-widget.c:676
+msgid "New Profile"
+msgstr "Uus profiil"
+
+#: ../src/widgets/ario-firstlaunch.c:82
+msgid "The following configuration will be used:"
+msgstr "Järgnevad seadistused võetakse kasutusele"
+
+#: ../src/widgets/ario-firstlaunch.c:106
+msgid ""
+"It is the first time you launch Ario.\n"
+"This assistant will help you to configure it."
+msgstr ""
+"Kui see on esmakordne Ariokasutamine.\n"
+"See abimees aitab sul seda seadistada."
+
+#: ../src/widgets/ario-firstlaunch.c:111
+msgid "Welcome to Ario"
+msgstr "Teretulemast  Ario-sse"
+
+#: ../src/widgets/ario-firstlaunch.c:129
+msgid "Configuration"
+msgstr "Seadistused"
+
+#: ../src/widgets/ario-firstlaunch.c:141
+msgid "Confirmation"
+msgstr "Kinnitus"
+
+#: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
+#, c-format
+msgid "<i>from</i> %s <i>by</i> %s"
+msgstr "<i>from</i> %s <i>by</i> %s"
+
+#: ../src/widgets/ario-header.c:198
+msgid "Play previous song"
+msgstr "Esita eelmist lugu"
+
+#: ../src/widgets/ario-header.c:219
+msgid "Play/Pause the music"
+msgstr "Esita/pausi muusika"
+
+#: ../src/widgets/ario-header.c:231
+msgid "Stop the music"
+msgstr "Peata muusikad"
+
+#. Translators - This " of " is used to count the elapsed time
+#. of a song like in "00:59 of 03:24"
+#: ../src/widgets/ario-header.c:312
+msgid " of "
+msgstr " -> "
+
+#: ../src/widgets/ario-header.c:325
+msgid "Toggle random on/off"
+msgstr "Juhuslik lülitus sees/väljas"
+
+#: ../src/widgets/ario-header.c:337
+msgid "Toggle repeat on/off"
+msgstr "Juhuslik kordus sees/väljas"
+
+#: ../src/widgets/ario-header.c:342
+msgid "Change the music volume"
+msgstr "Muuda muusika helitugevust"
+
+#. Set temporary text for lyrics download
+#: ../src/widgets/ario-lyrics-editor.c:305
+msgid "Downloading lyrics..."
+msgstr "Laen alla sõnu....."
+
+#. Lyrics not found
+#: ../src/widgets/ario-lyrics-editor.c:326
+msgid "Lyrics not found"
+msgstr "Sõnu ei leitud"
+
+#: ../src/widgets/ario-playlist.c:133
+msgid "_Clear"
+msgstr "_Nulli"
+
+#: ../src/widgets/ario-playlist.c:136
+msgid "_Shuffle"
+msgstr "_ Lohista"
+
+#: ../src/widgets/ario-playlist.c:139
+msgid "Cr_op"
+msgstr "_Kärbi"
+
+#: ../src/widgets/ario-playlist.c:142
+msgid "_Search in playlist"
+msgstr "_Otsi esitusloendist"
+
+#: ../src/widgets/ario-playlist.c:145
+msgid "_Remove"
+msgstr "_Eemalda"
+
+#: ../src/widgets/ario-playlist.c:148
+msgid "_Save"
+msgstr "_Salvesta"
+
+#: ../src/widgets/ario-playlist.c:154
+msgid "_Go to playing song"
+msgstr "_Alusta laulu esitasmist"
+
+#: ../src/widgets/ario-playlist.c:637
+msgid "Filter:"
+msgstr "Filter:"
+
+#. Create the widgets
+#: ../src/widgets/ario-playlist.c:1654
+msgid "Save playlist"
+msgstr "Lugude nimekirja salvestamine"
+
+#: ../src/widgets/ario-playlist.c:1664
+msgid "Playlist name :"
+msgstr "Esitusloendi nimi :"
+
+#: ../src/widgets/ario-playlist.c:1700
+msgid "Playlist already exists. Do you want to ovewrite it?"
+msgstr "Esitus loen on juba olemas. kas soovid seda ülekirjutada?"
+
+#. Format status bar message
+#: ../src/widgets/ario-status-bar.c:96
+msgid "Songs"
+msgstr "Laulud"
+
+#: ../src/widgets/ario-tray-icon.c:103
+msgid "_Play"
+msgstr "_Esita"
+
+#: ../src/widgets/ario-tray-icon.c:106
+msgid "_Pause"
+msgstr "_Paus"
+
+#: ../src/widgets/ario-tray-icon.c:109
+msgid "_Stop"
+msgstr "_Peata"
+
+#: ../src/widgets/ario-tray-icon.c:112
+msgid "_Next"
+msgstr "_Järgmine"
+
+#: ../src/widgets/ario-tray-icon.c:115
+msgid "P_revious"
+msgstr "_Eelmine"
+
+#: ../src/widgets/ario-tray-icon.h:41
+msgid "Not playing"
+msgstr "Ei mängi"
+
+#. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1179
+msgid "Today %I:%M %p"
+msgstr "Täna %t:%mi"
+
+#. Translators: "friendly time" string for the previous day,
+#. * strftime format. e.g. "Yesterday 12:34 am"
+#. 
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
+msgid "Yesterday %I:%M %p"
+msgstr "Eile %I:%M %p"
+
+#. Translators: "friendly time" string for a day in the current week,
+#. * strftime format. e.g. "Wed 12:34 am"
+#. 
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
+msgid "%a %I:%M %p"
+msgstr "%a %I:%M %p"
+
+#. Translators: "friendly time" string for a day in the current year,
+#. * strftime format. e.g. "Feb 12 12:34 am"
+#. 
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
+msgid "%b %d %I:%M %p"
+msgstr "%b %d %I:%M %p"
+
+#. Translators: "friendly time" string for a day in a different year,
+#. * strftime format. e.g. "Feb 12 1997"
+#. 
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
+msgid "%b %d %Y"
+msgstr "%b %d %Y"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
+msgid "Never"
+msgstr "Mitte kunagi"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1335
+msgid "OK"
+msgstr "OK"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1338
+msgid "Logging in"
+msgstr "Sisselogimine"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1341
+msgid "Request failed"
+msgstr "Taotlus nurjunud"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1344
+msgid "Incorrect username"
+msgstr "Vigane kasutjanimi"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1347
+msgid "Incorrect password"
+msgstr "Vigane salasõna"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1350
+msgid "Handshake failed"
+msgstr "Pigistamine ebaõnnestus"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1353
+msgid "Client update required"
+msgstr "Nõutav kliendi uuendamine"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
+msgid "Track submission failed"
+msgstr "Loo saatmine nurjus"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1359
+msgid "Queue is too long"
+msgstr "Tööjärjekord on liiga pikk"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
+msgid "Track submission failed too many times"
+msgstr "Loo saatmine nurjus liiga mitu korda"
+
+#: ../plugins/audioscrobbler/ario-audioscrobbler.c:1417
+msgid "Audioscrobbler preferences"
+msgstr "Audioscrobbler seadistused"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
+msgid "Disabled"
+msgstr "Keelatud"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
+msgid "Last submission time:"
+msgstr "Viimase saatmise aeg:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
+msgid "Last.fm Profile"
+msgstr "last.fm-i profiil"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
+msgid "Queued tracks:"
+msgstr "Järjekorras lood:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
+msgid "Status:"
+msgstr "Olek:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
+msgid "Tracks submitted:"
+msgstr "Lood saadetud:"
+
+#: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
+#: ../plugins/radios/ario-radio.c:168
+msgid "Username :"
+msgstr "Kasutajanimi:"
+
+#: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
+msgid "Last.fm"
+msgstr "Last.fm"
+
+#: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
+msgid "Submits song information to last.fm"
+msgstr "Saada laulu info last.fm-ile"
+
+#: ../plugins/filesystem/ario-filesystem.c:158
+msgid "File System"
+msgstr "Failisüsteem"
+
+#: ../plugins/filesystem/ario-filesystem.c:418
+msgid "Music"
+msgstr "Muusika"
+
+#: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
+msgid "A File System Browser"
+msgstr "Failisüsteemi sirvija"
+
+#: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
+msgid "File System Browser"
+msgstr "Failisüsteemi sirvija"
+
+#: ../plugins/information/ario-information.c:114
+msgid "Information"
+msgstr "Info"
+
+#: ../plugins/information/information.ario-plugin.desktop.in.h:1
+msgid "Display various information about the playing song"
+msgstr "Kuva esitatava laulu infot"
+
+#: ../plugins/information/information.ario-plugin.desktop.in.h:2
+msgid "Song Information"
+msgstr "Laulu andmed"
+
+#: ../plugins/information/information.ui.h:2
+msgid "Albums from this artist:"
+msgstr "Albumid sellelt esitajalt"
+
+#: ../plugins/information/information.ui.h:5
+msgid "Lyrics:"
+msgstr "Sõnad:"
+
+#: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
+msgid "Add libnotify support"
+msgstr "Lisa libnotify tugi"
+
+#: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
+msgid "Libnotify"
+msgstr "Libnotify"
+
+#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
+msgid "Add multimedia keys support"
+msgstr "Lisa multimeediaklahvide tugi"
+
+#: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
+msgid "Multimedia Keys"
+msgstr "Multimeediaklahvid"
+
+#: ../plugins/radios/ario-radio.c:125
+msgid "Add a _new radio"
+msgstr "Lisa _uus raadio"
+
+#: ../plugins/radios/ario-radio.c:128
+msgid "_Delete this radios"
+msgstr "_Kustuta see raadio"
+
+#: ../plugins/radios/ario-radio.c:166
+msgid "Last.fm: Radio of similar artists"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Last.fm: Radio of group"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:167
+msgid "Group :"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:168
+msgid "Last.fm: Personal radio"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:169
+msgid "Last.fm: Radio of genre"
+msgstr ""
+
+#: ../plugins/radios/ario-radio.c:184
+#: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
+msgid "Web Radios"
+msgstr "Veebi raadiod"
+
+#: ../plugins/radios/ario-radio.c:246
+msgid "Internet Radios"
+msgstr "Interneti raadiod"
+
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:774
+msgid "Edit a WebRadio"
+msgstr "Redigeeri veebi raadiot"
+
+#: ../plugins/radios/ario-radio.c:787 ../plugins/radios/ario-radio.c:923
+msgid "URL :"
+msgstr "URL:"
+
+#: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
+msgid "Bad parameters. You must specify a name and a URL for the radio."
+msgstr "Vigane parameeter. Sa pead täpsemalt määratlema raadio nime ja URL-i"
+
+#. Create dialog window
+#: ../plugins/radios/ario-radio.c:883
+msgid "Add a WebRadio"
+msgstr "Lisa veebi raadio"
+
+#: ../plugins/radios/ario-radio.c:1083
+msgid "Are you sure you want to delete all the selected radios?"
+msgstr "Oled sa kinnel et soovid kustuta valitud raadio jaamad?"
+
+#: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
+msgid "Listen to webradios"
+msgstr "Kuula veebi raadiot"
+
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:50
+msgid "Find artist on Wikipedia"
+msgstr "Leia artist Wikipediast"
+
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:172
+msgid "Wikipedia Plugin - Configuration"
+msgstr "Wikipedia plugina - konfiguratsioon"
+
+#: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
+msgid "Wikipedia language :"
+msgstr "Wikipedia keel :"
+
+#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
+msgid "A plugin to search current artist on wikipedia"
+msgstr "Wikipediast artisti otsimise plugin"
+
+#: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
+msgid "Wikipedia"
+msgstr "Wikipedia"
