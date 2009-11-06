@@ -109,15 +109,15 @@ dnl ================================================================
 dnl libmpdclient2
 dnl ================================================================
 AC_ARG_ENABLE(libmpdclient2,
-              AC_HELP_STRING([--enable-libmpdclient2],
-                             [Use libmpdclient2]))
-if test x"$enable_libmpdclient2" = xyes; then
+              AC_HELP_STRING([--disable-libmpdclient2],
+                             [Disable use libmpdclient2 (embedded version of libmpdclient zill be used)]))
+if test x"$enable_libmpdclient2" != xno; then
    AC_DEFINE(ENABLE_LIBMPDCLIENT2, 1, [Use libmpdclient2])
    PKG_CHECK_MODULES(LIBMPDCLIENT2, [libmpdclient >= 2.0])
    AC_SUBST(LIBMPDCLIENT2_CFLAGS)
    AC_SUBST(LIBMPDCLIENT2_LIBS)
 fi
-AM_CONDITIONAL(USE_LIBMPDCLIENT2, test x${enable_libmpdclient2} = xyes)
+AM_CONDITIONAL(USE_LIBMPDCLIENT2, test x${enable_libmpdclient2} != xno)
 
 dnl ================================================================
 dnl Python plugins
@@ -189,12 +189,12 @@ dnl ================================================================
 dnl MPD idle mode
 dnl ================================================================
 AC_ARG_ENABLE(mpdidle,
-              AC_HELP_STRING([--enable-mpdidle],
-                             [Use MPD idle mode (reduce CPU and network usage but still experimental)]))
-if test x"$enable_mpdidle" = xyes; then
-   AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduce CPU and network usage but still experimental)])
+              AC_HELP_STRING([--disable-mpdidle],
+                             [Disable MPD idle mode (MPD idle mode reduces CPU and network usage)]))
+if test x"$enable_mpdidle" != xno; then
+   AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduces CPU and network usage but still experimental)])
 fi
-AM_CONDITIONAL(MPD_GLIB, test x"$enable_mpdidle" = xyes)
+AM_CONDITIONAL(MPD_GLIB, test x"$enable_mpdidle" != xno)
 
 dnl ================================================================
 dnl Stored Playlists
@@ -393,19 +393,19 @@ if test x${enable_audioscrobbler} != xno; then
 else
         echo "Audioscrobbler support is:                DISABLED"
 fi
-if test x${enable_mpdidle} = xyes; then
-        echo "MPD 'idle' mode support (Experimental) is:ENABLED"
+if test x${enable_mpdidle} != xno; then
+        echo "MPD 'idle' mode support is:               ENABLED  (--enable-mpdidle)"
 else
-        echo "MPD 'idle' mode support (Experimental) is:DISABLED (--enable-mpdidle)"
+        echo "MPD 'idle' mode support is:               DISABLED"
 fi
 if test x${enable_taglib} != xno; then
         echo "Taglib support is:                        ENABLED  (--disable-taglib)"
 else
         echo "Taglib support is:                        DISABLED"
 fi
-if test x${enable_libmpdclient2} = xyes; then
-        echo "libmpdclient2 support is:                 ENABLED"
+if test x${enable_libmpdclient2} != xno; then
+        echo "libmpdclient2 support is:                 ENABLED  (--enable-libmpdclient2)"
 else
-        echo "libmpdclient2 support is:                 DISABLED (--enable-libmpdclient2)"
+        echo "libmpdclient2 support is:                 DISABLED"
 fi
 
