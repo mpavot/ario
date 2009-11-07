@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-03 23:13+0100\n"
+"POT-Creation-Date: 2009-11-07 09:27+0100\n"
 "PO-Revision-Date: 2009-04-27 12:06+0000\n"
 "Last-Translator: Volkan Esgel <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -224,20 +224,20 @@ msgid "Add to playlist"
 msgstr "Çalma listesine ekle"
 
 #. ARIO_TAG_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:45
+#: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
 #: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
 msgid "Album"
 msgstr "Albüm"
 
-#: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:44
+#: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:45
 #: ../src/widgets/ario-playlist.c:514 ../src/widgets/ario-songlist.c:213
 #: ../src/widgets/ario-tray-icon.c:579
 msgid "Artist"
 msgstr "Sanatçı"
 
 #. ARIO_TAG_GENRE
-#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:51
+#: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:52
 #: ../src/widgets/ario-playlist.c:514
 msgid "Date"
 msgstr "Tarih"
@@ -261,7 +261,7 @@ msgstr "Dosya"
 
 #. ARIO_TAG_TRACK
 #. ARIO_TAG_NAME
-#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:50
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:51
 #: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
 msgstr "Tarz"
@@ -297,14 +297,14 @@ msgid "Show rows:"
 msgstr "Satırları göster:"
 
 #. ARIO_TAG_ALBUM_ARTIST
-#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:47
+#: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:48
 #: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
 #: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
 msgid "Title"
 msgstr "Başlık"
 
 #. ARIO_TAG_TITLE
-#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:48
+#: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:49
 #: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
 msgid "Track"
 msgstr "Parça"
@@ -576,38 +576,38 @@ msgstr "Bağlı değil"
 msgid "Updating..."
 msgstr "Güncelleniyor..."
 
-#: ../src/servers/ario-mpd.c:410
+#: ../src/servers/ario-mpd.c:410 ../src/servers/ario-mpd2.c:479
 msgid "Connecting to server..."
 msgstr "Sunucuya bağlanılıyor..."
 
-#: ../src/servers/ario-mpd.c:438
+#: ../src/servers/ario-mpd.c:438 ../src/servers/ario-mpd2.c:507
 msgid "Impossible to connect to server. Check the connection options."
 msgstr "Sunucuya bağlanmak olanaksız. Bağlantı seçeneklerini denetleyin."
 
 #. ARIO_TAG_ALBUM
-#: ../src/servers/ario-server.c:46
+#: ../src/servers/ario-server.c:47
 msgid "Album Artist"
 msgstr ""
 
 #. ARIO_TAG_DATE
-#: ../src/servers/ario-server.c:52
+#: ../src/servers/ario-server.c:53
 msgid "Composer"
 msgstr "Besteci"
 
 #. ARIO_TAG_COMPOSER
-#: ../src/servers/ario-server.c:53
+#: ../src/servers/ario-server.c:54
 msgid "Performer"
 msgstr "Sanatçı"
 
 #. ARIO_TAG_PERFORMER
 #. ARIO_TAG_COMMENT
 #. ARIO_TAG_DISC
-#: ../src/servers/ario-server.c:56
+#: ../src/servers/ario-server.c:57
 msgid "Filename"
 msgstr "Dosya adı"
 
 #. ARIO_TAG_FILENAME
-#: ../src/servers/ario-server.c:57
+#: ../src/servers/ario-server.c:58
 msgid "Any"
 msgstr "Herhangi Birisi"
 
