@@ -400,6 +400,7 @@ ario_shell_songinfos_response_cb (GtkDialog *dial,
         case ARIO_SAVE:
                 /* Save tags */
                 success = FALSE;
+                g_return_if_fail (shell_songinfos->priv->songs);
                 song = shell_songinfos->priv->songs->data;
 
                 /* Get full file path */
