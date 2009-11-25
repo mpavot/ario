@@ -154,12 +154,6 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
         if (event->state & GDK_CONTROL_MASK || event->state & GDK_SHIFT_MASK)
                 return FALSE;
 
-        /* Double click: we emit the activate signal */
-        if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-                g_signal_emit (G_OBJECT (dnd_tree), ario_dnd_tree_signals[ACTIVATE], 0);
-                return FALSE;
-        }
-
         /* First button pressed */
         if (event->button == 1) {
                 /* Get real coordinates */
@@ -170,6 +164,13 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
                         return FALSE;
 
                 if (bx >= 0 && by >= 0) {
+
+                        /* Double click: we emit the activate signal */
+                        if (event->type == GDK_2BUTTON_PRESS) {
+                                g_signal_emit (G_OBJECT (dnd_tree), ario_dnd_tree_signals[ACTIVATE], 0);
+                                return FALSE;
+                        }
+
                         dnd_tree->priv->drag_start_x = x;
                         dnd_tree->priv->drag_start_y = y;
                         dnd_tree->priv->pressed = TRUE;
