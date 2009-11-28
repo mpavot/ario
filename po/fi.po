@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: ario_ario-fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-23 22:27+0000\n"
+"PO-Revision-Date: 2009-11-07 09:01+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -214,9 +214,8 @@ msgid "Title :"
 msgstr "Nimi :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Lisää ja _toista"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -242,9 +241,8 @@ msgid "Date"
 msgstr "Päivämäärä"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Levy"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
@@ -287,9 +285,8 @@ msgid "Playlist mode:"
 msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Korvaa soittolistassa"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -717,9 +714,8 @@ msgid "_Help"
 msgstr "_Ohje"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Päivitä"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -773,37 +769,7 @@ msgstr "GTK-asiakas MPD:lle"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Päivi Pasi https://launchpad.net/~pap26\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Ari Takalo https://launchpad.net/~ajtaka\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
-"  Miia Ranta https://launchpad.net/~myrtti\n"
-"  Päivi Pasi https://launchpad.net/~pap26\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Ari Takalo https://launchpad.net/~ajtaka\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
-"  Miia Ranta https://launchpad.net/~myrtti\n"
-"  Päivi Pasi https://launchpad.net/~pap26\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Ari Takalo https://launchpad.net/~ajtaka\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
-"  Miia Ranta https://launchpad.net/~myrtti\n"
-"  Päivi Pasi https://launchpad.net/~pap26\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Ari Takalo https://launchpad.net/~ajtaka\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
-"  Miia Ranta https://launchpad.net/~myrtti\n"
-"  Päivi Pasi https://launchpad.net/~pap26\n"
-"\n"
-"Launchpad Contributions:\n"
+"  Anne Sorsa https://launchpad.net/~angeni101\n"
 "  Ari Takalo https://launchpad.net/~ajtaka\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
@@ -857,7 +823,7 @@ msgstr "Sanoitukset"
 
 #: ../src/shell/ario-shell-lyricsselect.c:152
 msgid "Lyrics Download"
-msgstr ""
+msgstr "Lyriikoiden lataus"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
@@ -1219,9 +1185,8 @@ msgid "_Delete this radios"
 msgstr "_Poista nämä radiot"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "Etsi vastaavia artisteja"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
@@ -1232,9 +1197,8 @@ msgid "Group :"
 msgstr ""
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm -profiili"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"

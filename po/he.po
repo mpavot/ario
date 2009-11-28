@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-23 22:28+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"PO-Revision-Date: 2009-11-18 13:47+0000\n"
+"Last-Translator: Ddorda <d.dorda@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -27,23 +27,23 @@ msgstr "תוכנת לקוח ל-mpd"
 
 #: ../data/ui/browser-prefs.ui.h:1
 msgid "Alphabetically"
-msgstr ""
+msgstr "אלפבתית"
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "By year"
-msgstr ""
+msgstr "לפי שנה"
 
 #: ../data/ui/browser-prefs.ui.h:3
 msgid "Library Options"
-msgstr ""
+msgstr "אפשרויות ספרייה"
 
 #: ../data/ui/browser-prefs.ui.h:4
 msgid "Library Organisation"
-msgstr ""
+msgstr "אירגון ספרייה"
 
 #: ../data/ui/browser-prefs.ui.h:5
 msgid "Sort albums: "
-msgstr ""
+msgstr "סידור אלבומים: "
 
 #: ../data/ui/connection-autodetect.ui.h:1
 msgid ""
@@ -74,7 +74,7 @@ msgstr "תיקיית מוסיקה :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr ""
+msgstr "שרת המוסיקה נמצא על אותו המחשב בו נמצא Ario"
 
 #. Create the widgets
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
@@ -93,15 +93,15 @@ msgstr "פותחה :"
 
 #: ../data/ui/connection-widget.ui.h:9
 msgid "Server type : "
-msgstr ""
+msgstr "סוג שרת : "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr ""
+msgstr "XMMS 2 (ניסיוני)"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr ""
+msgstr "הורדה אוטומטית של עטיפת האלבום של השיר המנוגן"
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
@@ -173,7 +173,7 @@ msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
-msgstr ""
+msgstr "הסתר חלון כאשר כפתור הסגירה נלחץ"
 
 #: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
@@ -209,13 +209,12 @@ msgid "Title :"
 msgstr "כותרת :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "הוסף ל_רשימת ההשמעה"
+msgstr "הוסף ונגן"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
-msgstr ""
+msgstr "הוסף לרשימת השמעה"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:46
@@ -234,15 +233,15 @@ msgstr "אמן"
 #: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:52
 #: ../src/widgets/ario-playlist.c:514
 msgid "Date"
-msgstr ""
+msgstr "תאריך"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
 msgid "Disc"
-msgstr ""
+msgstr "תקליטור"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "לחיצה כפולה"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -250,26 +249,26 @@ msgstr "משך"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:514
 msgid "File"
-msgstr ""
+msgstr "קובץ"
 
 #. ARIO_TAG_TRACK
 #. ARIO_TAG_NAME
 #: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:51
 #: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
-msgstr ""
+msgstr "ז'אנר"
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Go to current song when a new song is played"
-msgstr ""
+msgstr "עבור לשיר הנוכחי כאשר שיר חדש מתנגן"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
-msgstr ""
+msgstr "Mode"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "בעת לחיצה כפולה:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -278,16 +277,15 @@ msgstr "רשימת השמעה"
 
 #: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
-msgstr ""
+msgstr "מצב רשימת השמעה:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "שמור את רשימת ההשמעה"
+msgstr "החלף רשימת השמעה"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
-msgstr ""
+msgstr "הצג שורות:"
 
 #. ARIO_TAG_ALBUM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:48
@@ -320,11 +318,11 @@ msgstr "עודכן לאחרונה:"
 
 #: ../data/ui/server-prefs.ui.h:5
 msgid "Stop music on exit"
-msgstr ""
+msgstr "עצור מוסיקה בעת יציאה"
 
 #: ../data/ui/server-prefs.ui.h:6
 msgid "Update on startup"
-msgstr ""
+msgstr "עדכן בעת הפעלה"
 
 #: ../data/ui/server-prefs.ui.h:7
 msgid "_Update"
@@ -346,7 +344,7 @@ msgstr "לא זמין"
 
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
-msgstr ""
+msgstr "הוסף הכל לרשימת השמעה"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
@@ -382,7 +380,7 @@ msgstr "זמן הפעלה :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "אלבום אמן :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -398,7 +396,7 @@ msgstr "תאריך :"
 
 #: ../data/ui/song-infos.ui.h:7
 msgid "Disc :"
-msgstr ""
+msgstr "תקליטור :"
 
 #: ../data/ui/song-infos.ui.h:8
 msgid "Filename :"
@@ -430,19 +428,19 @@ msgstr "אל תעשה כלום"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "השתקה"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
-msgstr ""
+msgstr "התראה"
 
 #: ../data/ui/trayicon-prefs.ui.h:4
 msgid "Notification on song change"
-msgstr ""
+msgstr "התראה בעת שינוי שיר"
 
 #: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Notification time: "
-msgstr ""
+msgstr "זמן התראה: "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
@@ -462,7 +460,7 @@ msgstr "סמל בסרגל"
 
 #: ../src/ario-main.c:64
 msgid "Start minimized window"
-msgstr ""
+msgstr "התחל חלון ממוזער"
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -491,27 +489,27 @@ msgstr "ספריית המוסיקה"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr ""
+msgstr "שירים מאותו האמן"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr ""
+msgstr "שירים מאותו האלבום"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr ""
+msgstr "שירים מאמנים דומים"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr ""
+msgstr "אלבומים מאותו האמן"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr ""
+msgstr "אלבומים מאמנים דומים"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "רשימת השמעה דינאמית"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
@@ -519,7 +517,7 @@ msgstr ""
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr ""
+msgstr "רגיל"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -571,26 +569,26 @@ msgstr "מעדכן..."
 
 #: ../src/servers/ario-mpd.c:410 ../src/servers/ario-mpd2.c:479
 msgid "Connecting to server..."
-msgstr ""
+msgstr "מתחבר לשרת..."
 
 #: ../src/servers/ario-mpd.c:438 ../src/servers/ario-mpd2.c:507
 msgid "Impossible to connect to server. Check the connection options."
-msgstr ""
+msgstr "לא ניתן להתחבר לשרת. יש לבדוק את אפשרויות החיבור."
 
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "אמן האלבום"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
 msgid "Composer"
-msgstr ""
+msgstr "מלחין"
 
 #. ARIO_TAG_COMPOSER
 #: ../src/servers/ario-server.c:54
 msgid "Performer"
-msgstr ""
+msgstr "מבצע"
 
 #. ARIO_TAG_PERFORMER
 #. ARIO_TAG_COMMENT
@@ -626,7 +624,7 @@ msgstr "הוסף ל_רשימת ההשמעה"
 #: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
-msgstr ""
+msgstr "הוסף ו_נגן"
 
 #: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
 #: ../src/sources/ario-storedplaylists.c:94
@@ -635,7 +633,7 @@ msgstr ""
 #: ../plugins/filesystem/ario-filesystem.c:115
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
-msgstr ""
+msgstr "ה_חלף ברשימת ההשמעה"
 
 #: ../src/sources/ario-browser.c:91
 msgid "Get the covers"
@@ -683,7 +681,7 @@ msgstr "האם אתה בטוח שברצונך למחוק את כל רשימות 
 
 #: ../src/sources/ario-tree.c:856
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr ""
+msgstr "האם אתה בטוח שברצונך למחוק את כל העטיפות הנבחרות?"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-tree-albums.c:199
@@ -711,9 +709,8 @@ msgid "_Help"
 msgstr "_עזרה"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_עדכן"
+msgstr "_עדכן מסד נתונים"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -741,7 +738,7 @@ msgstr "חפש אמנים דומים"
 
 #: ../src/shell/ario-shell.c:183
 msgid "Add similar songs to playlist"
-msgstr ""
+msgstr "הוסף שירים דומים לרשימת ההשמעה"
 
 #: ../src/shell/ario-shell.c:186
 msgid "Show _lyrics"
@@ -767,24 +764,7 @@ msgstr "לקוח MPD עבור GTK"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Yaron https://launchpad.net/~sh-yaron\n"
-"\n"
-"Launchpad Contributions:\n"
+"  Ddorda https://launchpad.net/~ddorda\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
 #. Create plugins configuration dialog window
@@ -846,12 +826,12 @@ msgstr "שרת"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "אחרים"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
 msgid "%d songs"
-msgstr ""
+msgstr "%d שירים"
 
 #. Set window properties
 #. Set window title
@@ -863,7 +843,7 @@ msgstr "מאפייני השיר"
 
 #: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "שגיאה בעת שמירת תגיות הקובץ:"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
@@ -948,7 +928,7 @@ msgstr "_נקה"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Shuffle"
-msgstr ""
+msgstr "עי_רבוב"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
@@ -956,7 +936,7 @@ msgstr ""
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "ח_יפוש ברשימת ההשמעה"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -972,7 +952,7 @@ msgstr "ע_בור לשיר המתנגן"
 
 #: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
-msgstr ""
+msgstr "מסנן:"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1654
@@ -1141,7 +1121,7 @@ msgstr "מערכת קבצים"
 
 #: ../plugins/filesystem/ario-filesystem.c:418
 msgid "Music"
-msgstr ""
+msgstr "מוסיקה"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
@@ -1153,7 +1133,7 @@ msgstr "סייר מערכת הקבצים"
 
 #: ../plugins/information/ario-information.c:114
 msgid "Information"
-msgstr ""
+msgstr "מידע"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
@@ -1161,23 +1141,23 @@ msgstr ""
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr ""
+msgstr "נתוני השיר"
 
 #: ../plugins/information/information.ui.h:2
 msgid "Albums from this artist:"
-msgstr ""
+msgstr "אלבומים מאמן זה:"
 
 #: ../plugins/information/information.ui.h:5
 msgid "Lyrics:"
-msgstr ""
+msgstr "מילות השיר:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
-msgstr ""
+msgstr "הוסף תמיכת libnotify"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
-msgstr ""
+msgstr "Libnotify"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
@@ -1196,9 +1176,8 @@ msgid "_Delete this radios"
 msgstr "_מחק תחנות אלו"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "חפש אמנים דומים"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
@@ -1206,12 +1185,11 @@ msgstr ""
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "קבוצה :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "פרופיל last.fm"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-06-23 23:06-0300\n"
-"Last-Translator: elega <elega@elega.com.ar>\n"
+"PO-Revision-Date: 2009-11-15 02:46+0000\n"
+"Last-Translator: Schaffino <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Título :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Añadir y re_producir"
+msgstr "Añadir y reproducir"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -243,13 +242,12 @@ msgid "Date"
 msgstr "Fecha"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Disco :"
+msgstr "Disco"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Doble clic"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -276,7 +274,7 @@ msgstr "Modo"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Al hacer doble clic:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -288,9 +286,8 @@ msgid "Playlist mode:"
 msgstr "Modo de lista de reproducción:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Reemplazar en la lista de reproducción"
+msgstr "Reemplazar en la lista de reproducción"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -719,9 +716,8 @@ msgid "_Help"
 msgstr "A_yuda"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Actualizar"
+msgstr "_Update Base de datos"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -775,87 +771,6 @@ msgstr "Cliente GTK para MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alejandro Rochette https://launchpad.net/~alexroc\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Fidelinho https://launchpad.net/~fidel-vales\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alejandro Rochette https://launchpad.net/~alexroc\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Fidelinho https://launchpad.net/~fidel-vales\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alejandro Rochette https://launchpad.net/~alexroc\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Fidelinho https://launchpad.net/~fidel-vales\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
-"  José Luis Flores Pineda https://launchpad.net/~peker\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"  kike4avila https://launchpad.net/~kike4avila\n"
-"  reykiem https://launchpad.net/~ravvsmvl\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alejandro Rochette https://launchpad.net/~alexroc\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  DiegoJ https://launchpad.net/~diegojromerolopez\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Emilio López https://launchpad.net/~turl\n"
-"  Fidelinho https://launchpad.net/~fidel-vales\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  Javier García Díaz https://launchpad.net/~shortname\n"
-"  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
-"  José Luis Flores Pineda https://launchpad.net/~peker\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"  kike4avila https://launchpad.net/~kike4avila\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alejandro Rochette https://launchpad.net/~alexroc\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  David A Páez https://launchpad.net/~orlsend\n"
-"  DiegoJ https://launchpad.net/~diegojromerolopez\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Emilio https://launchpad.net/~turl\n"
-"  Fidelinho https://launchpad.net/~fidel-vales\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  Javier García Díaz https://launchpad.net/~shortname\n"
-"  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
-"  José Luis Flores Pineda https://launchpad.net/~peker\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"  kike4avila https://launchpad.net/~kike4avila\n"
-"\n"
-"Launchpad Contributions:\n"
 "  Alejandro Rochette https://launchpad.net/~alexroc\n"
 "  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
 "  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
@@ -866,36 +781,17 @@ msgstr ""
 "  Feder Sáiz https://launchpad.net/~federsaiz\n"
 "  Fidelinho https://launchpad.net/~fidel-vales\n"
 "  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  Javier García Díaz https://launchpad.net/~shortname\n"
+"  Javier Acuña Ditzel https://launchpad.net/~santoposmoderno\n"
+"  Javier García Díaz https://launchpad.net/~jgd\n"
 "  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
 "  José Luis Flores Pineda https://launchpad.net/~peker\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
 "  Paco Molinero https://launchpad.net/~franciscomol\n"
+"  Schaffino https://launchpad.net/~clowdex\n"
 "  Skiros https://launchpad.net/~magoskiros\n"
-"  kike4avila https://launchpad.net/~kike4avila\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alejandro Rochette https://launchpad.net/~alexroc\n"
-"  Angel Guzman Maeso https://launchpad.net/~shakaran\n"
-"  Bruno Barrera Yever https://launchpad.net/~bbyever\n"
-"  David A Páez https://launchpad.net/~orlsend\n"
-"  DiegoJ https://launchpad.net/~diegojromerolopez\n"
-"  Eduardo Ruiz https://launchpad.net/~eduardo-ruizcarrillo\n"
-"  Emilio https://launchpad.net/~turl\n"
-"  Feder Sáiz https://launchpad.net/~federsaiz\n"
-"  Fidelinho https://launchpad.net/~fidel-vales\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  Javier García Díaz https://launchpad.net/~shortname\n"
-"  Jesús Gómez Fernández https://launchpad.net/~je-gomez\n"
-"  José Luis Flores Pineda https://launchpad.net/~peker\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Maximiliano Marin Bustos https://launchpad.net/~max-debianchile\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  Skiros https://launchpad.net/~magoskiros\n"
-"  kike4avila https://launchpad.net/~kike4avila\n"
-"\n"
-"Elega <elega@elega.com.ar>"
+"  elega https://launchpad.net/~elega\n"
+"  kike4avila https://launchpad.net/~kike4avila"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
@@ -1306,26 +1202,24 @@ msgid "_Delete this radios"
 msgstr "_Borrar éstas radios"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "canciones de artistas similares"
+msgstr "Last.fm: Radio de artistas similares"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Radio de grupo"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Grupo:"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Perfil de Last.fm"
+msgstr "Last.fm: Radio personal"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Radio de género"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

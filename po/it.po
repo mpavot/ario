@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-26 12:00+0000\n"
-"Last-Translator: BrainHell <Unknown>\n"
+"PO-Revision-Date: 2009-11-12 15:54+0000\n"
+"Last-Translator: Vincenzo vikkio88 Ciaccio <vikkio88@yahoo.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -217,9 +217,8 @@ msgid "Title :"
 msgstr "Titolo:"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Aggungi e _gioca"
+msgstr "Aggiungi e riproduci"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -245,13 +244,12 @@ msgid "Date"
 msgstr "Data"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Disco:"
+msgstr "Disco"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Doppio click"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -274,11 +272,11 @@ msgstr "Vai alla canzone in esecuzione quando un nuovo brano viene eseguito"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
-msgstr ""
+msgstr "Modalità"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Con doppio click"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -287,12 +285,11 @@ msgstr "Playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
-msgstr ""
+msgstr "Modo Playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Rimpiazza nella playlist"
+msgstr "Rimpiazza in playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -391,7 +388,7 @@ msgstr "Tempo di attivita':"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Artista Album:"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -439,7 +436,7 @@ msgstr "Non fare nulla"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Silenzioso"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -521,11 +518,11 @@ msgstr "album di artisti simili"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "Playlist Dinamica"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "Modo Coda"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
@@ -591,7 +588,7 @@ msgstr ""
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Interprete album"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -637,7 +634,7 @@ msgstr "_Aggiungi alla playlist"
 #: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
-msgstr "Aggungi e _gioca"
+msgstr "Aggiungi e esegui"
 
 #: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
 #: ../src/sources/ario-storedplaylists.c:94
@@ -722,9 +719,8 @@ msgid "_Help"
 msgstr "Aiuto (_H)"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Aggiorna"
+msgstr "_Aggiorna database"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -778,77 +774,6 @@ msgstr "Client GTK per MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"  StanD_AlOnE https://launchpad.net/~jacxs-lj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrea https://launchpad.net/~seymourskinner-virgilio\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
-"  Guybrush88 https://launchpad.net/~erpizzo\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"  StanD_AlOnE https://launchpad.net/~jacxs-lj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrea https://launchpad.net/~seymourskinner-virgilio\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
-"  Guybrush88 https://launchpad.net/~erpizzo\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"  StanD_AlOnE https://launchpad.net/~jacxs-lj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrea https://launchpad.net/~seymourskinner-virgilio\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
-"  Giasone https://launchpad.net/~giasone\n"
-"  Guybrush88 https://launchpad.net/~erpizzo\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"  StanD_AlOnE https://launchpad.net/~jacxs-lj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrea https://launchpad.net/~seymourskinner-virgilio\n"
-"  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
-"  Giasone https://launchpad.net/~giasone\n"
-"  Guybrush88 https://launchpad.net/~erpizzo\n"
-"  HdS619 https://launchpad.net/~hds619\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
-"  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
-"  Nikopol https://launchpad.net/~aegnor-isilra\n"
-"  StanD_AlOnE https://launchpad.net/~jacxs-lj\n"
-"\n"
-"Launchpad Contributions:\n"
 "  Andrea https://launchpad.net/~seymourskinner-virgilio\n"
 "  BrainHell https://launchpad.net/~linocalvo\n"
 "  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
@@ -860,7 +785,9 @@ msgstr ""
 "  Matteo Ferrabone https://launchpad.net/~desmoteo-gmail\n"
 "  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
 "  Nikopol https://launchpad.net/~aegnor-isilra\n"
-"  StanD_AlOnE https://launchpad.net/~jacxs-lj"
+"  StanD_AlOnE https://launchpad.net/~jacxs-lj\n"
+"  Vincenzo vikkio88 Ciaccio https://launchpad.net/~vikkio88\n"
+"  beppe https://launchpad.net/~tibido"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
@@ -921,7 +848,7 @@ msgstr "Server"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "Altri"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
@@ -938,7 +865,7 @@ msgstr "Proprietà del brano"
 
 #: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "Errore salvando tags del file:"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
@@ -1031,7 +958,7 @@ msgstr "Rita_glia"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "_Cerca nella playlist"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1271,26 +1198,24 @@ msgid "_Delete this radios"
 msgstr "Cancella questa radio (_D)"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "canzoni di artisti simili"
+msgstr "Last.fm: Radio con artisti simili"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Radio con gruppi"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Gruppo :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Profilo Last.fm"
+msgstr "Last.fm: Radio personale"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Radio per genere"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

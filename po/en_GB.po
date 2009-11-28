@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-05-13 21:58+0000\n"
-"Last-Translator: siloroad <Unknown>\n"
+"PO-Revision-Date: 2009-11-17 20:00+0000\n"
+"Last-Translator: pcnerd5 <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Title :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Add and _play"
+msgstr "Add and play"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -243,13 +242,12 @@ msgid "Date"
 msgstr "Date"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Disc :"
+msgstr "Disc"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Double click"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -276,7 +274,7 @@ msgstr "Mode"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "On double click:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -288,9 +286,8 @@ msgid "Playlist mode:"
 msgstr "Playlist mode:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Replace in playlist"
+msgstr "Replace in playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -389,7 +386,7 @@ msgstr "Uptime :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Album Artist :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -437,7 +434,7 @@ msgstr "Do nothing"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Mute"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -587,7 +584,7 @@ msgstr "Impossible to connect to server. Check the connection options."
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Album Artist"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -718,9 +715,8 @@ msgid "_Help"
 msgstr "_Help"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Update"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -774,46 +770,7 @@ msgstr "GTK client for MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Furkan KARA https://launchpad.net/~frkn\n"
-"  James Nealon https://launchpad.net/~kaobear\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Furkan KARA https://launchpad.net/~frkn\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  James Nealon https://launchpad.net/~kaobear\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"  bastianneumann https://launchpad.net/~bastianneu\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Furkan KARA https://launchpad.net/~frkn\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  James Nealon https://launchpad.net/~kaobear\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"  bastianneumann https://launchpad.net/~bastianneu\n"
-"\n"
-"Launchpad Contributions:\n"
+"  Alex Procter https://launchpad.net/~alex-procter\n"
 "  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
 "  Christian Siegert https://launchpad.net/~christian-siegert\n"
 "  Furkan KARA https://launchpad.net/~frkn\n"
@@ -823,28 +780,7 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Oliver Laub https://launchpad.net/~oliver-laub\n"
 "  bastianneumann https://launchpad.net/~bastianneu\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Furkan KARA https://launchpad.net/~frkn\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  James Nealon https://launchpad.net/~kaobear\n"
-"  Jesse Bye https://launchpad.net/~jesse-bye\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"  bastianneumann https://launchpad.net/~bastianneu\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Andrew Barber https://launchpad.net/~andrew-alex-barber\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Furkan KARA https://launchpad.net/~frkn\n"
-"  Gabriel Ruiz https://launchpad.net/~anakron\n"
-"  James Nealon https://launchpad.net/~kaobear\n"
-"  Jesse Bye https://launchpad.net/~jesse-bye\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"  bastianneumann https://launchpad.net/~bastianneu"
+"  bmuluu https://launchpad.net/~bmax-muluu"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
@@ -1015,7 +951,7 @@ msgstr "Cr_op"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "_Search in playlist"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1255,26 +1191,24 @@ msgid "_Delete this radios"
 msgstr "_Delete this radios"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "songs of similar artists"
+msgstr "Last.fm: Radio of similar artists"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Radio of group"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
 msgstr ""
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm Profile"
+msgstr "Last.fm: Personal radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Radio of genre"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

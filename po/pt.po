@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-04-19 20:07+0000\n"
-"Last-Translator: Diogo Lavareda <diogolavareda9@hotmail.com>\n"
+"PO-Revision-Date: 2009-11-23 20:49+0000\n"
+"Last-Translator: asensio <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -216,9 +216,8 @@ msgid "Title :"
 msgstr "Título :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Adicionar e _tocar"
+msgstr "Adicionar e tocar"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -244,13 +243,12 @@ msgid "Date"
 msgstr "Data"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Disco :"
+msgstr "Disco"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Duplo Clique"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -277,7 +275,7 @@ msgstr "Modo"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Com duplo clique:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -289,9 +287,8 @@ msgid "Playlist mode:"
 msgstr "Modo da Lista de Reprodução:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Substituir na lista"
+msgstr "Subtituir na lista"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -720,9 +717,8 @@ msgid "_Help"
 msgstr "_Ajuda"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Actualizar"
+msgstr "Act_ualizar base de dados"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -777,28 +773,12 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Alexandre Jesus https://launchpad.net/~alexandremrj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexandre Jesus https://launchpad.net/~alexandremrj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexandre Jesus https://launchpad.net/~alexandremrj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexandre Jesus https://launchpad.net/~alexandremrj\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexandre Jesus https://launchpad.net/~alexandremrj\n"
-"  Ricardo Martins https://launchpad.net/~meqif\n"
-"  Tiago Silva https://launchpad.net/~tiagosilva\n"
-"  nitrofurano https://launchpad.net/~nitrofurano-3t\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexandre Jesus https://launchpad.net/~alexandremrj\n"
 "  Diogo Lavareda https://launchpad.net/~diogolavareda\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Ricardo Martins https://launchpad.net/~meqif\n"
 "  Tiago Silva https://launchpad.net/~tiagosilva\n"
+"  VCarvalho https://launchpad.net/~v-carvalho\n"
+"  asensio https://launchpad.net/~asensio\n"
 "  nitrofurano https://launchpad.net/~nitrofurano-3t"
 
 #. Create plugins configuration dialog window
@@ -1210,26 +1190,24 @@ msgid "_Delete this radios"
 msgstr "_Eliminar estes rádios"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "músicas de artistas semelhantes"
+msgstr "Last.fm: Rádio ou artistas semelhantes"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Rádio de grupo"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Grupo:"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Perfil do Last.fm"
+msgstr "Last.fm: Rádio pessoal"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Rádio de género"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
