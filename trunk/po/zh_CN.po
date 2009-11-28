@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-23 22:28+0000\n"
+"PO-Revision-Date: 2009-05-17 15:49+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -214,9 +214,8 @@ msgid "Title :"
 msgstr "标题："
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "添加并播放(_p)"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -242,9 +241,8 @@ msgid "Date"
 msgstr "日期"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "盘片："
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
@@ -287,9 +285,8 @@ msgid "Playlist mode:"
 msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "从播放列表中移除(_R)"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -717,9 +714,8 @@ msgid "_Help"
 msgstr "帮助(_H)"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "更新"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -773,63 +769,14 @@ msgstr "MPD 的 GTK 客户端"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Aron Xu https://launchpad.net/~cnfavor\n"
-"  Xiaojun Deng https://launchpad.net/~hktang\n"
-"  inkview https://launchpad.net/~inkview\n"
-"  rainofchaos https://launchpad.net/~rainofchaos\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Aron Xu https://launchpad.net/~cnfavor\n"
-"  Xiaojun Deng https://launchpad.net/~hktang\n"
-"  inkview https://launchpad.net/~inkview\n"
-"  rainofchaos https://launchpad.net/~rainofchaos\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Aron Xu https://launchpad.net/~cnfavor\n"
-"  Xiaojun Deng https://launchpad.net/~hktang\n"
-"  inkview https://launchpad.net/~inkview\n"
-"  luojie-dune https://launchpad.net/~luojie-dune\n"
-"  rainofchaos https://launchpad.net/~rainofchaos\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Aron Xu https://launchpad.net/~cnfavor\n"
+"  Aron Xu https://launchpad.net/~happyaron\n"
 "  Lechuan https://launchpad.net/~lechuan\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Tao Wei https://launchpad.net/~weitao1979\n"
 "  Xiaojun Deng https://launchpad.net/~hktang\n"
 "  inkview https://launchpad.net/~inkview\n"
 "  luojie-dune https://launchpad.net/~luojie-dune\n"
-"  rainofchaos https://launchpad.net/~rainofchaos\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Aron Xu https://launchpad.net/~cnfavor\n"
-"  Lechuan https://launchpad.net/~lechuan\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Tao Wei https://launchpad.net/~weitao1979\n"
-"  Xiaojun Deng https://launchpad.net/~hktang\n"
-"  inkview https://launchpad.net/~inkview\n"
-"  luojie-dune https://launchpad.net/~luojie-dune\n"
-"  rainofchaos https://launchpad.net/~rainofchaos\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Aron https://launchpad.net/~cnfavor\n"
-"  Lechuan https://launchpad.net/~lechuan\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Tao Wei https://launchpad.net/~weitao1979-deactivatedaccount\n"
-"  Xiaojun Deng https://launchpad.net/~hktang\n"
-"  inkview https://launchpad.net/~inkview\n"
-"  luojie-dune https://launchpad.net/~luojie-dune\n"
-"  rainofchaos https://launchpad.net/~rainofchaos\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Aron Xu https://launchpad.net/~cnfavor\n"
-"  Lechuan https://launchpad.net/~lechuan\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Tao Wei https://launchpad.net/~weitao1979\n"
-"  Xiaojun Deng https://launchpad.net/~hktang\n"
-"  inkview https://launchpad.net/~inkview\n"
-"  luojie-dune https://launchpad.net/~luojie-dune\n"
-"  rainofchaos https://launchpad.net/~rainofchaos"
+"  冯超 https://launchpad.net/~rainofchaos"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
@@ -1240,9 +1187,8 @@ msgid "_Delete this radios"
 msgstr "删除这个广播频道"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "查找相似的艺术家"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
@@ -1253,9 +1199,8 @@ msgid "Group :"
 msgstr ""
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm 配置文件"
+msgstr ""
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"

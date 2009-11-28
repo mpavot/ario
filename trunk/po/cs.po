@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-04-23 10:12+0000\n"
+"PO-Revision-Date: 2009-11-27 15:36+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Titul:"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Přidat a _přehrát"
+msgstr "Přidat a přehrát"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -243,13 +242,12 @@ msgid "Date"
 msgstr "Datum"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Disk :"
+msgstr "Disk"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Dvojklik"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -276,7 +274,7 @@ msgstr "Mód"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Bez dvojkliku:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -288,9 +286,8 @@ msgid "Playlist mode:"
 msgstr "Mód seznamu skladeb"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Nahradit v seznamu skladeb"
+msgstr "Přemístit v seznamu stop"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -718,9 +715,8 @@ msgid "_Help"
 msgstr "_Nápověda"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Aktualizace"
+msgstr "_Aktualizovat databázi"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -773,42 +769,6 @@ msgstr "GTK klient pro MPD"
 #: ../src/shell/ario-shell.c:784
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Václav Lešek https://launchpad.net/~vaclav-lesek\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Václav Lešek https://launchpad.net/~vaclav-lesek\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Václav Lešek https://launchpad.net/~vaclav-lesek\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Václav Lešek https://launchpad.net/~vaclav-lesek\n"
-"\n"
 "Launchpad Contributions:\n"
 "  Jaroslav Lichtblau https://launchpad.net/~dragonlord\n"
 "  Konki https://launchpad.net/~pavel-konkol\n"
@@ -1224,26 +1184,24 @@ msgid "_Delete this radios"
 msgstr "_ Smazat tato rádia"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "skladby podobných umělců"
+msgstr "Last.fm: Rádio podobnách umělců"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Rádio skupiny"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Skupina :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Profil Last.fm"
+msgstr "Last.fm: Osobní rádio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Rádio žánru"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

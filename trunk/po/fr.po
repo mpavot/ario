@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: Ario 0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-05-14 00:12+0000\n"
-"Last-Translator: Mathieu Pasquet <Unknown>\n"
+"PO-Revision-Date: 2009-11-07 09:01+0000\n"
+"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -219,9 +219,8 @@ msgid "Title :"
 msgstr "Titre :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Ajouter et _jouer"
+msgstr "Ajouter et jouer"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -247,13 +246,12 @@ msgid "Date"
 msgstr "Date"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Disque :"
+msgstr "Disque"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Double-clic"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -280,7 +278,7 @@ msgstr "Mode"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "En cas de double-clic"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -292,9 +290,8 @@ msgid "Playlist mode:"
 msgstr "Mode de la liste de lecture:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Remplacer dans la playlist"
+msgstr "Remplacer dans la playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -723,9 +720,8 @@ msgid "_Help"
 msgstr "_Aide"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Mettre à jour"
+msgstr "_Mettre à jour la base de données"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -778,56 +774,6 @@ msgstr "Client GTK pour MPD"
 #: ../src/shell/ario-shell.c:784
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Isildur37 https://launchpad.net/~tiifal\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Olotiar https://launchpad.net/~floriandenis\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Isildur37 https://launchpad.net/~tiifal\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Olotiar https://launchpad.net/~floriandenis\n"
-"  dommy9111 https://launchpad.net/~bossboss9111\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Isildur37 https://launchpad.net/~tiifal\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Nicochto https://launchpad.net/~nicochto\n"
-"  Olotiar https://launchpad.net/~floriandenis\n"
-"  dommy9111 https://launchpad.net/~bossboss9111\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Isildur37 https://launchpad.net/~tiifal\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Nicochto https://launchpad.net/~nicochto\n"
-"  Olotiar https://launchpad.net/~floriandenis\n"
-"  dommy9111 https://launchpad.net/~bossboss9111\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Isildur37 https://launchpad.net/~tiifal\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Nicochto https://launchpad.net/~nicochto\n"
-"  Olotiar https://launchpad.net/~floriandenis\n"
-"  dommy9111 https://launchpad.net/~bossboss9111\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Isildur37 https://launchpad.net/~tiifal\n"
-"  Maijin https://launchpad.net/~maijin-live\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Morgan GERMAIN https://launchpad.net/~morgan-germain\n"
-"  Nicochto https://launchpad.net/~nicochto\n"
-"  Olotiar https://launchpad.net/~floriandenis\n"
-"  dommy9111 https://launchpad.net/~bossboss9111\n"
-"\n"
 "Launchpad Contributions:\n"
 "  François FERRANDIS https://launchpad.net/~banana.boy\n"
 "  Isildur37 https://launchpad.net/~tiifal\n"
@@ -1248,26 +1194,24 @@ msgid "_Delete this radios"
 msgstr "_Supprimer les radios"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "chansons d'artistes similaires"
+msgstr "Last.fm: Radio d'artistes similaires"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Radio du groupe"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Groupe :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Profil Last.fm"
+msgstr "Last.fm: Radio personelle"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Radio du genre"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

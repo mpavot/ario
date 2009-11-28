@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-04-19 06:02+0000\n"
-"Last-Translator: Mr.Strack <Unknown>\n"
+"PO-Revision-Date: 2009-10-22 00:44+0000\n"
+"Last-Translator: Alexey Reztsov <ariafan@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,13 +215,12 @@ msgid "Title :"
 msgstr "Название :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "_Добавить в плейлист и играть"
+msgstr "Добавить и играть"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
-msgstr "_Добавить в список воспроизведения"
+msgstr "Добавить в список воспроизведения"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:46
@@ -243,13 +242,12 @@ msgid "Date"
 msgstr "Дата"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Диск :"
+msgstr "Диск"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Двойной щелчок"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -276,7 +274,7 @@ msgstr "Режим"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "По двойному нажатию:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -288,9 +286,8 @@ msgid "Playlist mode:"
 msgstr "Режим списка воспроизведения:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Заменить в списке воспроизведения"
+msgstr "Заменить в списке воспроизведения"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -437,7 +434,7 @@ msgstr "Ничего не делать"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Заглушить"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -587,7 +584,7 @@ msgstr "Невозможно соединиться с сервером. Про�
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Артист"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -624,7 +621,7 @@ msgstr "Неизвестно"
 #: ../plugins/filesystem/ario-filesystem.c:109
 #: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
-msgstr "_Добавить в плейлист"
+msgstr "_Добавить в список воспроизведения"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:85
 #: ../src/sources/ario-storedplaylists.c:91
@@ -633,7 +630,7 @@ msgstr "_Добавить в плейлист"
 #: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
-msgstr "_Добавить в плейлист и играть"
+msgstr "Добавить в список и _играть"
 
 #: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
 #: ../src/sources/ario-storedplaylists.c:94
@@ -718,9 +715,8 @@ msgid "_Help"
 msgstr "_Помощь"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Обновить"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -748,7 +744,7 @@ msgstr "Найти похожих артистов"
 
 #: ../src/shell/ario-shell.c:183
 msgid "Add similar songs to playlist"
-msgstr "Добавить похожие песни в плейлист"
+msgstr "Добавить похожие песни в список"
 
 #: ../src/shell/ario-shell.c:186
 msgid "Show _lyrics"
@@ -774,61 +770,14 @@ msgstr "GTK клиент для MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nick https://launchpad.net/~homolibere\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nick https://launchpad.net/~homolibere\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"\n"
-"Launchpad Contributions:\n"
+"  Alexander Nasonkin https://launchpad.net/~mr.strack\n"
 "  Alexei Klimenko https://launchpad.net/~nimda7\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nick https://launchpad.net/~homolibere\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexei Klimenko https://launchpad.net/~nimda7\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nick https://launchpad.net/~homolibere\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"  pronull https://launchpad.net/~dmitrievp\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexei Klimenko https://launchpad.net/~nimda7\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nick https://launchpad.net/~homolibere\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"  pronull https://launchpad.net/~dmitrievp\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexei Klimenko https://launchpad.net/~nimda7\n"
+"  Alexey Reztsov https://launchpad.net/~ariafan\n"
 "  Andrey Shitov https://launchpad.net/~aa-shtv\n"
 "  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
+"  Egor Bushmelyov https://launchpad.net/~skipper95\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nick https://launchpad.net/~homolibere\n"
-"  Pavel Dmitriev https://launchpad.net/~dmitrievp\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Alexei Klimenko https://launchpad.net/~nimda7\n"
-"  Andrey Shitov https://launchpad.net/~aa-shtv\n"
-"  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mr.Strack https://launchpad.net/~mr.strack\n"
-"  Nick https://launchpad.net/~homolibere\n"
+"  Nick Homolibere https://launchpad.net/~homolibere\n"
 "  Pavel Dmitriev https://launchpad.net/~dmitrievp\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda"
 
@@ -1001,7 +950,7 @@ msgstr "_Обрезать"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr "_Поиск в плейлисте"
+msgstr "_Поиск в списке"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1022,11 +971,11 @@ msgstr "Фильтр:"
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1654
 msgid "Save playlist"
-msgstr "Сохранить плейлист"
+msgstr "Сохранить список"
 
 #: ../src/widgets/ario-playlist.c:1664
 msgid "Playlist name :"
-msgstr "Название плейлиста :"
+msgstr "Название списка :"
 
 #: ../src/widgets/ario-playlist.c:1700
 msgid "Playlist already exists. Do you want to ovewrite it?"
@@ -1241,26 +1190,24 @@ msgid "_Delete this radios"
 msgstr "_Удалить эти радиостанции"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "песни похожих исполнителей"
+msgstr "Last.fm: Радио по артистам"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Радио по группе"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Группа :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Профиль пользователя Last.fm"
+msgstr "Last.fm: Частное радио"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Радио по жанру"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

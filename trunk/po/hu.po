@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-23 22:28+0000\n"
-"Last-Translator: Zoltan Hoppar <hopparz@gmail.com>\n"
+"PO-Revision-Date: 2009-11-20 15:09+0000\n"
+"Last-Translator: Bognár András <bognarandras.mail@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,7 +215,6 @@ msgid "Title :"
 msgstr "Cím :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
 msgstr "Hozzáadás és lejátszás"
 
@@ -243,13 +242,12 @@ msgid "Date"
 msgstr "Dátum"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Lemez :"
+msgstr "Lemez"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Dupla kattintás"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -272,11 +270,11 @@ msgstr "Ugrás a jelenlegi számra ha új szám kerül lejátszásra"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
-msgstr ""
+msgstr "Mód"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Dupla kattintás esetén"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -285,12 +283,11 @@ msgstr "Lejátszólista"
 
 #: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
-msgstr ""
+msgstr "Lejátszólista mód"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "Lecse_rélés a lejátszólistában"
+msgstr "Helyettesítés a lejátszólistában"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -389,7 +386,7 @@ msgstr "Aktív futási idő:"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Album előadó:"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -437,7 +434,7 @@ msgstr "Ne tegyen semmit"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Némítás"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -498,35 +495,35 @@ msgstr "Zene könyvtár"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr ""
+msgstr "az előadó további számai"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr ""
+msgstr "az album további számai"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr ""
+msgstr "hasonló előadók számai"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr ""
+msgstr "az előadó további albumai"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr ""
+msgstr "hasonló előadók albumai"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "Dinamikus lejátszólista"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "Sor Mód"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr ""
+msgstr "Normál"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -589,7 +586,7 @@ msgstr ""
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Előadó"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -721,9 +718,8 @@ msgid "_Help"
 msgstr "Segí_tség"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Frissítés"
+msgstr "Adatbázis _frissítése"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -777,63 +773,16 @@ msgstr "GTK kliens MPD -hez"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Bognár András https://launchpad.net/~bognarandras\n"
 "  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
+"  Gergely Szarka https://launchpad.net/~gszarka\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mice Teeth https://launchpad.net/~micecrosoft\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mice Teeth https://launchpad.net/~micecrosoft\n"
+"  Muszela Balázs https://launchpad.net/~bazsi86\n"
 "  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
 "  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
 "  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mice Teeth https://launchpad.net/~micecrosoft\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mice Teeth https://launchpad.net/~micecrosoft\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mice Teeth https://launchpad.net/~micecrosoft\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Desiderius57 https://launchpad.net/~dezso-juhasz\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Mice Teeth https://launchpad.net/~micecrosoft\n"
-"  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
-"  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail"
+"  evfool https://launchpad.net/~evfool"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
@@ -894,7 +843,7 @@ msgstr "Szerver"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "Egyebek"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
@@ -911,7 +860,7 @@ msgstr "Dal tulajdonságai"
 
 #: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "Hiba a következő fájl cimkéinek mentésekor:"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
@@ -1004,7 +953,7 @@ msgstr "Kivágás"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "_Keresés a lejátszólistában"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1020,7 +969,7 @@ msgstr "Tovább a szám _lejátszásához"
 
 #: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
-msgstr ""
+msgstr "Szűrő:"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1654
@@ -1244,26 +1193,24 @@ msgid "_Delete this radios"
 msgstr "Rádió _törlése"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "Hasonló előadók keresése"
+msgstr "Last.fm: Rádió hasonló előadóktól"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Rádió csoport szerint"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Csoport :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm profil"
+msgstr "Last.fm: Saját rádió"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Rádió műfaj szerint"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-23 22:27+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"PO-Revision-Date: 2009-11-05 19:58+0000\n"
+"Last-Translator: FlowerChild <hejlasse@gmail.com>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -214,9 +214,8 @@ msgid "Title :"
 msgstr "Titel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Tilføj og _afspil"
+msgstr "Tilføj og afspil"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -242,13 +241,12 @@ msgid "Date"
 msgstr "Dato"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Skive :"
+msgstr "Disk"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Dobbeltklik"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -275,7 +273,7 @@ msgstr "Tilstand"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Ved dobbeltklik:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -287,9 +285,8 @@ msgid "Playlist mode:"
 msgstr "Afspilningsliste tilstand:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Erstat i afspilningsliste"
+msgstr "Erstat i afspilningsliste"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -388,7 +385,7 @@ msgstr "Spilletid for nuværende session :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Albumkunstner :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -436,7 +433,7 @@ msgstr "Gør intet"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Lydløs"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -588,7 +585,7 @@ msgstr ""
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Albumkunstner"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -719,9 +716,8 @@ msgid "_Help"
 msgstr "_Hjælp"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Opdatér"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -775,33 +771,9 @@ msgstr "En GTK+ baseret MPD-klient"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  David Laursen https://launchpad.net/~david-laursen\n"
-"  chochem https://launchpad.net/~chochem\n"
-"  nanker https://launchpad.net/~nanker\n"
-"\n"
-"Launchpad Contributions:\n"
-"  David Laursen https://launchpad.net/~david-laursen\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  chochem https://launchpad.net/~chochem\n"
-"  nanker https://launchpad.net/~nanker\n"
-"\n"
-"Launchpad Contributions:\n"
-"  David Laursen https://launchpad.net/~david-laursen\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  chochem https://launchpad.net/~chochem\n"
-"  nanker https://launchpad.net/~nanker\n"
-"\n"
-"Launchpad Contributions:\n"
+"  Christian Funder Sommerlund https://launchpad.net/~zero3\n"
 "  David Laursen https://launchpad.net/~davidlaursen\n"
-"  Joe Hansen https://launchpad.net/~joedalton2\n"
-"  Mads Konradsen https://launchpad.net/~mads-hk\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Sune Keller https://launchpad.net/~sune-keller\n"
-"  chochem https://launchpad.net/~chochem\n"
-"  nanker https://launchpad.net/~nanker\n"
-"\n"
-"Launchpad Contributions:\n"
-"  David Laursen https://launchpad.net/~davidlaursen\n"
+"  FlowerChild https://launchpad.net/~hejlasse\n"
 "  Joe Hansen https://launchpad.net/~joedalton2\n"
 "  Mads Konradsen https://launchpad.net/~mads-hk\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
@@ -978,7 +950,7 @@ msgstr "_Beskær"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "_Søg i spilleliste"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1218,26 +1190,24 @@ msgid "_Delete this radios"
 msgstr "Slet denne radiostation"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "sange fra lignende kunstnere"
+msgstr "Last.fm: Radio med ligende kunstere"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Gruppens radio"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Gruppe :"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm-profil"
+msgstr "Last.fm: Personlig radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Genres radio"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

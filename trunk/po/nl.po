@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-03-23 22:28+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"PO-Revision-Date: 2009-10-22 20:12+0000\n"
+"Last-Translator: R... <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-05-16 12:44+0000\n"
+"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -214,9 +214,8 @@ msgid "Title :"
 msgstr "Titel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add and play"
-msgstr "Toevoegen en _afspelen"
+msgstr "Toevoegen en afspelen"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -242,13 +241,12 @@ msgid "Date"
 msgstr "Datum"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
-#, fuzzy
 msgid "Disc"
-msgstr "Schijf :"
+msgstr "Schijf"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Dubbelklik"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -271,7 +269,7 @@ msgstr "Ga naar huidig liedje wanneer een nieuw liedje wordt gespeeld"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
-msgstr ""
+msgstr "Mode"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
@@ -284,12 +282,11 @@ msgstr "Afspeellijst"
 
 #: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
-msgstr ""
+msgstr "Afspeellijst modus:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
-#, fuzzy
 msgid "Replace in playlist"
-msgstr "_Vervangen in afspeellijst"
+msgstr "Vervang in afspeellijst"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -388,7 +385,7 @@ msgstr "Uptime :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Album Artiest:"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -436,7 +433,7 @@ msgstr "Niets doen"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Dempen"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -498,35 +495,35 @@ msgstr "Muziekmap"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr ""
+msgstr "liedjes van dezelfde artiest"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr ""
+msgstr "liedjes van hetzelfde album"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr ""
+msgstr "liedjes van gelijkaardige artiesten"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr ""
+msgstr "albums van dezelfde artiest"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr ""
+msgstr "albums van gelijkaardige artiesten"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "Dynamische afspeellijst"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "Wachtrij Modus"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -589,7 +586,7 @@ msgstr ""
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Album artiest"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -720,9 +717,8 @@ msgid "_Help"
 msgstr "_Help"
 
 #: ../src/shell/ario-shell.c:162
-#, fuzzy
 msgid "_Update database"
-msgstr "_Bijwerken"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -779,70 +775,7 @@ msgstr ""
 "  Christian Siegert https://launchpad.net/~christian-siegert\n"
 "  Hurne https://launchpad.net/~hurne\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"  stani https://launchpad.net/~stani\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"  stani https://launchpad.net/~stani\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  domkop https://launchpad.net/~jeremy-defrere\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"  stani https://launchpad.net/~stani\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  Wim Champagne https://launchpad.net/~fng\n"
-"  domkop https://launchpad.net/~jeremy-defrere\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"  stani https://launchpad.net/~stani\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  Wim Champagne https://launchpad.net/~fng\n"
-"  domkop https://launchpad.net/~jeremy-defrere\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"  stani https://launchpad.net/~stani\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Robert Wubs https://launchpad.net/~wubsieonline\n"
-"  Visitor.Q https://launchpad.net/~ivo-82\n"
-"  Wim Champagne https://launchpad.net/~fng\n"
-"  domkop https://launchpad.net/~jeremy-defrere\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer\n"
-"  nitrofurano https://launchpad.net/~nitrofurano-3t\n"
-"  stani https://launchpad.net/~stani\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Christian Siegert https://launchpad.net/~christian-siegert\n"
-"  Hurne https://launchpad.net/~hurne\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  R... https://launchpad.net/~relst-nl\n"
 "  Robert Wubs https://launchpad.net/~wubsieonline\n"
 "  Visitor.Q https://launchpad.net/~ivo-82\n"
 "  Wim Champagne https://launchpad.net/~fng\n"
@@ -910,7 +843,7 @@ msgstr "Server"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "Overige"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
@@ -927,7 +860,7 @@ msgstr "Eigenschappen van het Liedje"
 
 #: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "Fout tijdens het opslaan van de tags van dit bestand"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
@@ -1020,7 +953,7 @@ msgstr "_Bijsnijden"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "_Zoek in de afspeellijst"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1036,7 +969,7 @@ msgstr "Naar het afspelende liedje _gaan"
 
 #: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
-msgstr ""
+msgstr "Filter:"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1654
@@ -1260,26 +1193,24 @@ msgid "_Delete this radios"
 msgstr "Radiostations _verwijderen"
 
 #: ../plugins/radios/ario-radio.c:166
-#, fuzzy
 msgid "Last.fm: Radio of similar artists"
-msgstr "Vergelijkbare artiesten zoeken"
+msgstr "Last.fm: Radio van vergelijkbare artiesten"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Groepsradio van"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Groep:"
 
 #: ../plugins/radios/ario-radio.c:168
-#, fuzzy
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm Profiel"
+msgstr "Last.fm: Persoonlijke radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Genre radio"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
