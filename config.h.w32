@@ -84,13 +84,13 @@
 #define PACKAGE_NAME "Ario"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Ario 1.3svn"
+#define PACKAGE_STRING "Ario 1.4.1"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "ario"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.3svn"
+#define PACKAGE_VERSION "1.4.1"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
