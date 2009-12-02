@@ -26,6 +26,7 @@
 
 #include "ario-debug.h"
 #include "ario-profiles.h"
+#include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "lib/ario-conf.h"
 #include "widgets/ario-playlist.h"
@@ -110,6 +111,7 @@ struct ArioMpdPrivate
 
         gboolean support_empty_tags;
         gboolean support_idle;
+        GSList * supported_tags;
 
         gboolean is_updating;
 
@@ -117,6 +119,8 @@ struct ArioMpdPrivate
         int reconnect_time;
         int idle;
         int source_id;
+
+        gboolean supported[ARIO_TAG_COUNT];
 };
 
 #define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
@@ -213,6 +217,11 @@ ario_mpd_finalize (GObject *object)
         if (mpd->priv->timeout_id)
                 g_source_remove (mpd->priv->timeout_id);
 
+        /* Free list of supported tags */
+        g_slist_foreach (mpd->priv->supported_tags, (GFunc) g_free, NULL);
+        g_slist_free (mpd->priv->supported_tags);
+        mpd->priv->supported_tags = NULL;
+
         instance = NULL;
 
         G_OBJECT_CLASS (ario_mpd_parent_class)->finalize (object);
@@ -248,6 +257,31 @@ ario_mpd_check_idle (ArioMpd *mpd)
                 mpd_return_pair (mpd->priv->connection, pair);
         }
 #endif
+}
+
+static void
+ario_mpd_check_tags (ArioMpd *mpd)
+{
+        ARIO_LOG_FUNCTION_START;
+        struct mpd_pair * pair;
+        int i;
+
+        /* Free list of supported tags */
+        g_slist_foreach (mpd->priv->supported_tags, (GFunc) g_free, NULL);
+        g_slist_free (mpd->priv->supported_tags);
+        mpd->priv->supported_tags = NULL;
+        for (i = 0; i < ARIO_TAG_COUNT; ++i)
+        {
+             mpd->priv->supported[i] = FALSE;
+        }
+
+        /* Get list of supported tags */
+        mpd_send_list_tag_types (mpd->priv->connection);
+        while ((pair = mpd_recv_tag_type_pair (mpd->priv->connection))) {
+                /* Add them to the list */
+                mpd->priv->supported_tags = g_slist_append (mpd->priv->supported_tags, g_strdup (pair->value));
+                mpd_return_pair (mpd->priv->connection, pair);
+        }
 }
 
 static void
@@ -410,6 +444,9 @@ ario_mpd_connect_to (ArioMpd *mpd,
 
         /* Check if idle is supported by MPD server */
         ario_mpd_check_idle (mpd);
+
+        /* Check if idle is supported by MPD server */
+        ario_mpd_check_tags (mpd);
 
         if (instance->priv->support_idle && instance->priv->connection) {
                 /* Initialise Idle mode */
@@ -597,8 +634,30 @@ ario_mpd_is_connected (void)
         return (instance->priv->connection != NULL);
 }
 
+static ArioServerTag
+ario_mpd_filter_tag (const ArioServerTag tag)
+{
+        GSList *tmp;
+        if (instance->priv->supported[tag])
+        {
+                return tag;
+        }
+        else
+        {
+                const gchar *tag_name = mpd_tag_name (tag);
+                for (tmp = instance->priv->supported_tags; tmp; tmp = g_slist_next (tmp)) {
+                        if (!ario_util_strcmp (tag_name, tmp->data)) {
+                                instance->priv->supported[tag] = TRUE;
+                                return tag;
+                        }
+                }
+        }
+
+        return ARIO_TAG_ARTIST;
+}
+
 static GSList *
-ario_mpd_list_tags (const ArioServerTag tag,
+ario_mpd_list_tags (const ArioServerTag server_tag,
                     const ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START;
@@ -606,6 +665,7 @@ ario_mpd_list_tags (const ArioServerTag tag,
         GSList *values = NULL;
         ArioServerAtomicCriteria *atomic_criteria;
         struct mpd_pair *pair;
+        ArioServerTag tag = ario_mpd_filter_tag(server_tag);
 
         if (ario_mpd_command_preinvoke ())
                 return NULL;
@@ -617,11 +677,11 @@ ario_mpd_list_tags (const ArioServerTag tag,
                     && !g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
                         mpd_search_add_tag_constraint (instance->priv->connection,
                                                        MPD_OPERATOR_DEFAULT,
-                                                       atomic_criteria->tag, "");
+                                                       ario_mpd_filter_tag (atomic_criteria->tag), "");
                 else
                         mpd_search_add_tag_constraint (instance->priv->connection,
                                                        MPD_OPERATOR_DEFAULT,
-                                                       atomic_criteria->tag, atomic_criteria->value);
+                                                       ario_mpd_filter_tag (atomic_criteria->tag), atomic_criteria->value);
         }
         mpd_search_commit (instance->priv->connection);
 
@@ -681,12 +741,12 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
                             && !g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
                                 mpd_search_add_tag_constraint (instance->priv->connection,
                                                                MPD_OPERATOR_DEFAULT,
-                                                               atomic_criteria->tag,
+                                                               ario_mpd_filter_tag (atomic_criteria->tag),
                                                                "");
                         else
                                 mpd_search_add_tag_constraint (instance->priv->connection,
                                                                MPD_OPERATOR_DEFAULT,
-                                                               atomic_criteria->tag,
+                                                               ario_mpd_filter_tag (atomic_criteria->tag),
                                                                atomic_criteria->value);
                 }
                 mpd_search_commit (instance->priv->connection);
@@ -833,13 +893,13 @@ ario_mpd_get_songs (const ArioServerCriteria *criteria,
                     && !g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
                         mpd_search_add_tag_constraint (instance->priv->connection,
                                                        MPD_OPERATOR_DEFAULT,
-                                                       atomic_criteria->tag,
+                                                       ario_mpd_filter_tag (atomic_criteria->tag),
                                                        "");
                 else if (atomic_criteria->tag != ARIO_TAG_ALBUM
                          || g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
                         mpd_search_add_tag_constraint (instance->priv->connection,
                                                        MPD_OPERATOR_DEFAULT,
-                                                       atomic_criteria->tag,
+                                                       ario_mpd_filter_tag (atomic_criteria->tag),
                                                        atomic_criteria->value);
         }
         mpd_search_commit (instance->priv->connection);
