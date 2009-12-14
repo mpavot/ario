@@ -786,7 +786,7 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
                         mpd_album->artist = g_strdup (ARIO_SERVER_UNKNOWN);
 
                 if (file)
-                        mpd_album->path = g_strdup (file);
+                        mpd_album->path = g_path_get_dirname (file);
                 else
                         mpd_album->path = NULL;
 

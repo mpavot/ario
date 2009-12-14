@@ -660,8 +660,7 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
                 }
 
                 if (entity->info.song->file) {
-                        mpd_album->path = entity->info.song->file;
-                        entity->info.song->file = NULL;
+                        mpd_album->path = g_path_get_dirname (entity->info.song->file);
                 } else {
                         mpd_album->path = NULL;
                 }
