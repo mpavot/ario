@@ -272,7 +272,7 @@ ario_mpd_check_tags (ArioMpd *mpd)
         mpd->priv->supported_tags = NULL;
         for (i = 0; i < ARIO_TAG_COUNT; ++i)
         {
-             mpd->priv->supported[i] = FALSE;
+                mpd->priv->supported[i] = FALSE;
         }
 
         /* Get list of supported tags */
@@ -321,7 +321,7 @@ ario_mpd_idle_read (void)
             || flags & MPD_IDLE_PLAYER
             || flags & MPD_IDLE_MIXER
             || flags & MPD_IDLE_OPTIONS)
-                ario_mpd_update_status ();
+                g_idle_add ((GSourceFunc) ario_mpd_update_status, NULL);
 
         /* Stored playlists changed, update list */
         if (flags & MPD_IDLE_STORED_PLAYLIST)
@@ -999,12 +999,15 @@ ario_mpd_update_status (void)
         instance->priv->is_updating = TRUE;
 
         /* check if there is a connection */
-        if (ario_mpd_command_preinvoke ()) {
+        if (!instance->priv->connection) {
                 ario_server_interface_set_default (ARIO_SERVER_INTERFACE (instance));
         } else {
                 if (instance->priv->status)
                         mpd_status_free (instance->priv->status);
+
+                ario_mpd_command_preinvoke ();
                 instance->priv->status = mpd_run_status (instance->priv->connection);
+                ario_mpd_command_postinvoke ();
 
                 if (ario_mpd_check_errors ()) {
                         ario_server_interface_set_default (ARIO_SERVER_INTERFACE (instance));
@@ -1043,8 +1046,6 @@ ario_mpd_update_status (void)
         ario_server_interface_emit (ARIO_SERVER_INTERFACE (instance), server_instance);
 
         instance->priv->is_updating = FALSE;
-
-        ario_mpd_command_postinvoke ();
 
         return !instance->priv->support_idle;
 }
@@ -1190,9 +1191,9 @@ ario_mpd_set_current_volume (const gint volume)
                 return;
 
         mpd_run_set_volume (instance->priv->connection, volume);
-        ario_mpd_update_status ();
-
         ario_mpd_command_postinvoke ();
+
+        ario_mpd_update_status ();
 }
 
 static void
@@ -1239,9 +1240,9 @@ ario_mpd_clear (void)
                 return;
 
         mpd_run_clear (instance->priv->connection);
-        ario_mpd_update_status ();
-
         ario_mpd_command_postinvoke ();
+
+        ario_mpd_update_status ();
 }
 
 static void
@@ -1252,9 +1253,9 @@ ario_mpd_shuffle (void)
                 return;
 
         mpd_run_shuffle (instance->priv->connection);
-        ario_mpd_update_status ();
-
         ario_mpd_command_postinvoke ();
+
+        ario_mpd_update_status ();
 }
 
 static void
@@ -1295,13 +1296,14 @@ ario_mpd_queue_commit (void)
         }
         mpd_command_list_end (instance->priv->connection);
         mpd_response_finish (instance->priv->connection);
-        ario_mpd_update_status ();
 
         g_slist_foreach (instance->parent.queue, (GFunc) g_free, NULL);
         g_slist_free (instance->parent.queue);
         instance->parent.queue = NULL;
 
         ario_mpd_command_postinvoke ();
+
+        ario_mpd_update_status ();
 }
 
 static void
@@ -1512,6 +1514,7 @@ static void
 ario_mpd_command_postinvoke (void)
 {
         ARIO_LOG_FUNCTION_START;
+
         if (instance->priv->support_idle && instance->priv->connection) {
                 ario_mpd_idle_start ();
         }
