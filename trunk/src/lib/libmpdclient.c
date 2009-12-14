@@ -267,6 +267,7 @@ char * mpdTagItemKeys[MPD_TAG_NUM_OF_ITEM_TYPES] =
 {
 	"Artist",
 	"Album",
+	"AlbumArtist",
 	"Title",
 	"Track",
 	"Name",
@@ -277,7 +278,6 @@ char * mpdTagItemKeys[MPD_TAG_NUM_OF_ITEM_TYPES] =
 	"Comment",
 	"Disc",
 	"Filename",
-	"AlbumArtist",
 	"Any"
 };
 
