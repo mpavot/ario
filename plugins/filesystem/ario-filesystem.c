@@ -256,6 +256,10 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         gtk_tree_view_set_model (GTK_TREE_VIEW (filesystem->priv->tree),
                                  GTK_TREE_MODEL (filesystem->priv->model));
 
+        /* Enable search */
+        gtk_tree_view_set_enable_search (GTK_TREE_VIEW (filesystem->priv->tree), TRUE);
+        gtk_tree_view_set_search_column (GTK_TREE_VIEW (filesystem->priv->tree), FILETREE_NAME_COLUMN);
+
         /* Get tree selection */
         filesystem->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (filesystem->priv->tree));
         gtk_tree_selection_set_mode (filesystem->priv->selection,
