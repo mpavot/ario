@@ -421,7 +421,7 @@ ario_browser_cmd_add (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         /* Add songs to playlist */
         if (browser->priv->popup_tree)
-                ario_tree_cmd_add (browser->priv->popup_tree, FALSE);
+                ario_tree_cmd_add (browser->priv->popup_tree, PLAYLIST_ADD);
 }
 
 static void
@@ -431,7 +431,7 @@ ario_browser_cmd_add_play (GtkAction *action,
         ARIO_LOG_FUNCTION_START;
         /* Add songs to playlist and play */
         if (browser->priv->popup_tree)
-                ario_tree_cmd_add (browser->priv->popup_tree, TRUE);
+                ario_tree_cmd_add (browser->priv->popup_tree, PLAYLIST_ADD_PLAY);
 }
 
 static void
@@ -440,11 +440,8 @@ ario_browser_cmd_clear_add_play (GtkAction *action,
 {
         ARIO_LOG_FUNCTION_START;
         if (browser->priv->popup_tree) {
-                /* Clear playlist */
-                ario_server_clear ();
-
                 /* Add songs to playlist and play */
-                ario_tree_cmd_add (browser->priv->popup_tree, TRUE);
+                ario_tree_cmd_add (browser->priv->popup_tree, PLAYLIST_REPLACE);
         }
 }
 
