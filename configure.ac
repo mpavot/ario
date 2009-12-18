@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,1.4.1)
+m4_define(ario_version,1.4.2)
 
 AC_INIT([Ario], [ario_version], [marc.pavot@gmail.com], [ario])
 AM_CONFIG_HEADER(config.h)
