@@ -889,7 +889,11 @@ ario_mpd_get_songs (const ArioServerCriteria *criteria,
         mpd_search_db_songs (instance->priv->connection, exact);
         for (tmp = criteria; tmp; tmp = g_slist_next (tmp)) {
                 atomic_criteria = tmp->data;
-                if (instance->priv->support_empty_tags
+                if (atomic_criteria->tag == ARIO_TAG_ANY)
+                        mpd_search_add_any_tag_constraint (instance->priv->connection,
+                                                           MPD_OPERATOR_DEFAULT,
+                                                           atomic_criteria->value);
+                else if (instance->priv->support_empty_tags
                     && !g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
                         mpd_search_add_tag_constraint (instance->priv->connection,
                                                        MPD_OPERATOR_DEFAULT,
