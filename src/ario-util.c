@@ -381,7 +381,7 @@ ario_util_download_file (const char *uri,
         /* set callback function */
         curl_easy_setopt (curl, CURLOPT_WRITEFUNCTION, (curl_write_callback)ario_util_write_data);
         /* set timeout */
-        curl_easy_setopt (curl, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_easy_setopt (curl, CURLOPT_CONNECTTIMEOUT, 20);
         /* set redirect */
         curl_easy_setopt (curl, CURLOPT_FOLLOWLOCATION ,1);
         /* set NO SIGNAL */
