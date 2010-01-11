@@ -1659,18 +1659,15 @@ ario_audioscrobbler_load_entry_from_string (const char *string)
                 if (breaks2[0] != NULL && breaks2[1] != NULL) {
                         if (g_str_has_prefix (breaks2[0], "a")) {
                                 g_free (entry->artist);
-                                entry->artist = g_strdup (breaks2[1]);
-                                soup_uri_decode (entry->artist);
+                                entry->artist = soup_uri_decode (breaks2[1]);
                         }
                         if (g_str_has_prefix (breaks2[0], "t")) {
                                 g_free (entry->title);
-                                entry->title = g_strdup (breaks2[1]);
-                                soup_uri_decode (entry->title);
+                                entry->title = soup_uri_decode (breaks2[1]);
                         }
                         if (g_str_has_prefix (breaks2[0], "b")) {
                                 g_free (entry->album);
-                                entry->album = g_strdup (breaks2[1]);
-                                soup_uri_decode (entry->album);
+                                entry->album = soup_uri_decode (breaks2[1]);
                         }
 
                         if (g_str_has_prefix (breaks2[0], "l")) {
