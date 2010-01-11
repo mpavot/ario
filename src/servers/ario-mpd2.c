@@ -307,6 +307,12 @@ ario_mpd_update_elapsed (gpointer data)
 }
 
 static void
+ario_mpd_emit_storedplaylist (gpointer not_used)
+{
+        g_signal_emit_by_name (G_OBJECT (server_instance), "storedplaylists_changed");
+}
+
+static void
 ario_mpd_idle_read (void)
 {
         ARIO_LOG_FUNCTION_START;
@@ -325,7 +331,7 @@ ario_mpd_idle_read (void)
 
         /* Stored playlists changed, update list */
         if (flags & MPD_IDLE_STORED_PLAYLIST)
-                g_signal_emit_by_name (G_OBJECT (server_instance), "storedplaylists_changed");
+                g_idle_add ((GSourceFunc) ario_mpd_emit_storedplaylist, NULL);
 }
 
 static gboolean
@@ -894,7 +900,7 @@ ario_mpd_get_songs (const ArioServerCriteria *criteria,
                                                            MPD_OPERATOR_DEFAULT,
                                                            atomic_criteria->value);
                 else if (instance->priv->support_empty_tags
-                    && !g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
+                         && !g_utf8_collate (atomic_criteria->value, ARIO_SERVER_UNKNOWN))
                         mpd_search_add_tag_constraint (instance->priv->connection,
                                                        MPD_OPERATOR_DEFAULT,
                                                        ario_mpd_filter_tag (atomic_criteria->tag),
@@ -1343,7 +1349,12 @@ ario_mpd_save_playlist (const char *name)
         if (ario_mpd_command_preinvoke ())
                 return 1;
 
-        ret = mpd_run_save (instance->priv->connection, name);
+        ret = !mpd_run_save (instance->priv->connection, name);
+
+        if  (mpd_connection_get_error (instance->priv->connection) != MPD_ERROR_SUCCESS) {
+                ARIO_LOG_ERROR("%s", mpd_connection_get_error_message (instance->priv->connection));
+                mpd_connection_clear_error (instance->priv->connection);
+        }
 
         ario_mpd_command_postinvoke ();
 
