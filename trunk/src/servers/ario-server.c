@@ -737,7 +737,9 @@ ario_server_save_playlist (const char *name)
         /* Call virtual method */
         int ret = ARIO_SERVER_INTERFACE_GET_CLASS (interface)->save_playlist (name);
 
+#ifndef ENABLE_MPDIDLE
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
+#endif
 
         return ret;
 }
@@ -749,7 +751,9 @@ ario_server_delete_playlist (const char *name)
         /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->delete_playlist (name);
 
+#ifndef ENABLE_MPDIDLE
         g_signal_emit (G_OBJECT (instance), ario_server_signals[SERVER_STOREDPLAYLISTS_CHANGED], 0);
+#endif
 }
 
 GSList *
