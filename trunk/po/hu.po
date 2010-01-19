@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-11-20 15:09+0000\n"
+"PO-Revision-Date: 2009-11-29 01:36+0000\n"
 "Last-Translator: Bognár András <bognarandras.mail@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
+"X-Launchpad-Export-Date: 2010-01-19 19:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -780,9 +780,9 @@ msgstr ""
 "  Mice Teeth https://launchpad.net/~micecrosoft\n"
 "  Muszela Balázs https://launchpad.net/~bazsi86\n"
 "  Pittmann Tamás https://launchpad.net/~zaivaldi\n"
+"  Roth Róbert https://launchpad.net/~evfool\n"
 "  Szenográdi Norbert Péter https://launchpad.net/~sevoir\n"
-"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail\n"
-"  evfool https://launchpad.net/~evfool"
+"  Zoltan Hoppar https://launchpad.net/~hopparz-gmail"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124

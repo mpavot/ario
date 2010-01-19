@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-05-17 14:49+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"PO-Revision-Date: 2010-01-11 20:46+0000\n"
+"Last-Translator: Tor Syversen <sol-moe@online.no>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
+"X-Launchpad-Export-Date: 2010-01-19 19:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -77,7 +77,7 @@ msgstr "Musikk mappe :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr ""
+msgstr "Musikk-serveren er på samme datamaskin som Ario"
 
 #. Create the widgets
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
@@ -145,6 +145,9 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
+"Du må angi en server for å koble til. Hvis du ikke ser din server takket "
+"være auto-detektering, bør du sjekke at Zeroconf / avahi er aktivert på "
+"serveren din, eller bruke manuell konfigurering."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -213,7 +216,7 @@ msgstr "Tittel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add and play"
-msgstr ""
+msgstr "Legg til og spill"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -240,11 +243,11 @@ msgstr "Dato"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
 msgid "Disc"
-msgstr ""
+msgstr "Disk"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Dobbeltklikk"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -267,11 +270,11 @@ msgstr "Gå til valgt sang når sangen er ferdig"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
-msgstr ""
+msgstr "Modus"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "På dobbeltklikk:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -280,11 +283,11 @@ msgstr "Spilleliste"
 
 #: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
-msgstr ""
+msgstr "Spilleliste modus:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Replace in playlist"
-msgstr ""
+msgstr "Erstatt i spilleliste"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -383,7 +386,7 @@ msgstr "Oppetid :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Album artist:"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -431,7 +434,7 @@ msgstr "Ikke gjør noe"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Demp"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -512,11 +515,11 @@ msgstr "album fra lignende artister"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "Dynamisk spilleliste"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "Kø-modus"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
@@ -581,7 +584,7 @@ msgstr "Kan ikke koble til tjeneren. Sjekk innstillinger for tilkobling."
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Albumartist"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -713,7 +716,7 @@ msgstr "_Hjelp"
 
 #: ../src/shell/ario-shell.c:162
 msgid "_Update database"
-msgstr ""
+msgstr "_oppdater database"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -772,7 +775,8 @@ msgstr ""
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Rune C. Akselsen https://launchpad.net/~runeakselsen\n"
 "  Steve Pedersen https://launchpad.net/~stevep86\n"
-"  Thor K. H https://launchpad.net/~nitrolinken"
+"  Thor K. H https://launchpad.net/~nitrolinken\n"
+"  Tor Syversen https://launchpad.net/~sol-moe"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
@@ -935,15 +939,15 @@ msgstr "_Tøm"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Shuffle"
-msgstr ""
+msgstr "_Bland tilfeldig"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
-msgstr ""
+msgstr "_Beskjær"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "_Søk i spilleleste"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1192,7 +1196,7 @@ msgstr ""
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Gruppe :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"

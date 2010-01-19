@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-05-17 15:49+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"PO-Revision-Date: 2009-12-21 17:11+0000\n"
+"Last-Translator: Aron Xu <Unknown>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
+"X-Launchpad-Export-Date: 2010-01-19 19:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -345,7 +345,7 @@ msgstr "淡化时长（以秒计）："
 #: ../src/ario-util.c:93 ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
-msgstr "N/A"
+msgstr "不可用"
 
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"

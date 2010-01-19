@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-08-30 22:58+0000\n"
-"Last-Translator: Bernard Potocki <Unknown>\n"
+"PO-Revision-Date: 2010-01-01 23:43+0000\n"
+"Last-Translator: Jarosław Ogrodnik <nobodythere@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
+"X-Launchpad-Export-Date: 2010-01-19 19:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -216,7 +216,7 @@ msgstr "Tytuł :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add and play"
-msgstr ""
+msgstr "Dodaj i odtwarzaj"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -243,11 +243,11 @@ msgstr "Data"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
 msgid "Disc"
-msgstr ""
+msgstr "Płyta"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Podwójne kiknięcie"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -274,7 +274,7 @@ msgstr "Tryb"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr ""
+msgstr "Na podwójne kliknięcie:"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
@@ -287,7 +287,7 @@ msgstr "Tryb listy odtwarzania:"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Replace in playlist"
-msgstr ""
+msgstr "Zastąp na liście odtwarzania"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
@@ -774,6 +774,7 @@ msgstr ""
 "  Andrzej MoST (Marcin Ostajewski) https://launchpad.net/~marcobolo\n"
 "  Bartosz Kaszubowski https://launchpad.net/~simek\n"
 "  Bernard Potocki https://launchpad.net/~imanel\n"
+"  Jarosław Ogrodnik https://launchpad.net/~goz\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mateusz Sz. https://launchpad.net/~mateyko\n"
 "  Michał Trzebiatowski https://launchpad.net/~hippie-1968\n"
@@ -1192,7 +1193,7 @@ msgstr "Usuń tę stację ra_diową"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Last.fm: Radio podobnych artystów"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
@@ -1200,11 +1201,11 @@ msgstr ""
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Grupa :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm: Osobiste radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"

@@ -1,16 +1,16 @@
-# Japanese translation for ario
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# Occitan (post 1500) translation for ario
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the ario package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-11-29 01:18+0000\n"
-"Last-Translator: Masato HASHIMOTO <cabezon.hashimoto@gmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"PO-Revision-Date: 2010-01-10 17:43+0000\n"
+"Last-Translator: Cédric VALMARY <cvalmary@yahoo.fr>\n"
+"Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,31 +19,31 @@ msgstr ""
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Ario ミュージックプレイヤ"
+msgstr "Lector de musica Ario"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
-msgstr "MPD クライアントアプリケーション"
+msgstr "Client per MPD"
 
 #: ../data/ui/browser-prefs.ui.h:1
 msgid "Alphabetically"
-msgstr "アルファベット順"
+msgstr "Òrdre alfabetic"
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "By year"
-msgstr "年順"
+msgstr "Per Annada"
 
 #: ../data/ui/browser-prefs.ui.h:3
 msgid "Library Options"
-msgstr "ライブラリオプション"
+msgstr "Opcions de la bibliotèca"
 
 #: ../data/ui/browser-prefs.ui.h:4
 msgid "Library Organisation"
-msgstr "ライブラリ表示構成"
+msgstr "Organizacion de la bibliotèca"
 
 #: ../data/ui/browser-prefs.ui.h:5
 msgid "Sort albums: "
-msgstr "アルバムの表示順: "
+msgstr "Triar los albums : "
 
 #: ../data/ui/connection-autodetect.ui.h:1
 msgid ""
@@ -51,92 +51,92 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"自動検出で MPD サーバが見つからない場合は、MPD の設定で zeroconf が有効になっ"
-"ているかチェックしてください。または手動で設定してください。"
+"Se vesètz pas vòstre servidor MPD, vos caldriá verificar que zeroconf es "
+"activat sus vòstre servidor MPD o utilizar la configuracion manuala."
 
 #: ../data/ui/connection-autodetect.ui.h:2
 msgid "Server autodetection"
-msgstr "サーバの自動検出"
+msgstr "Autodeteccion de servidor"
 
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
-msgstr "自動検出"
+msgstr "Deteccion automatica"
 
 #: ../data/ui/connection-widget.ui.h:2
 msgid "Default"
-msgstr "デフォルト"
+msgstr "Per defaut"
 
 #: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
 msgid "Host :"
-msgstr "ホスト :"
+msgstr "Òste :"
 
 #: ../data/ui/connection-widget.ui.h:4
 msgid "Music directory :"
-msgstr "音楽ディレクトリ :"
+msgstr "Repertòri de la musica :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr "音楽サーバは Ario と同じコンピュータで動作する"
+msgstr "Lo servidor de musica es sul meteis ordenador qu'Ario"
 
 #. Create the widgets
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
 #: ../plugins/radios/ario-radio.c:922
 msgid "Name :"
-msgstr "名前 :"
+msgstr "Nom :"
 
 #: ../data/ui/connection-widget.ui.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
-msgstr "パスワード :"
+msgstr "Senhal ]:"
 
 #: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:85
 msgid "Port :"
-msgstr "ポート :"
+msgstr "Pòrt :"
 
 #: ../data/ui/connection-widget.ui.h:9
 msgid "Server type : "
-msgstr "サーバタイプ : "
+msgstr "Tipe de servidor "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr "XMMS 2 (試験用)"
+msgstr "XMMS 2 (Experimental)"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr "再生中の曲のアルバムカバーを自動的にダウンロードする"
+msgstr "Telecargar automaticament la pocheta de l'album de la cançon en cors"
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
-msgstr "カバー"
+msgstr "Pochetas"
 
 #: ../data/ui/cover-prefs.ui.h:3
 msgid "Covers Sources"
-msgstr "カバーのソース"
+msgstr "Fonts de pochetas"
 
 #: ../data/ui/cover-prefs.ui.h:4
 msgid "Show the covers in the albums list"
-msgstr "アルバムリストにカバーアートを表示する"
+msgstr "Afichar las pochetas dins la lista dels albums"
 
 #: ../data/ui/cover-prefs.ui.h:5
 msgid "Use Amazon."
-msgstr "Amazon からのダウンロード: www.amazon(.co)."
+msgstr "Utilizar Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
-msgstr "接続"
+msgstr "Connexion"
 
 #: ../data/ui/connection-prefs.ui.h:2
 msgid "_Autoconnect on startup"
-msgstr "起動時に自動接続する(_A)"
+msgstr "_Connexion automatica a l'aviada"
 
 #: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:156
 msgid "_Connect"
-msgstr "接続(_C)"
+msgstr "Se _connectar"
 
 #: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:159
 msgid "_Disconnect"
-msgstr "切断(_D)"
+msgstr "Se _desconnectar"
 
 #: ../data/ui/connection-assistant.ui.h:1
 msgid ""
@@ -144,202 +144,203 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"接続するサーバを設定してください。自動検出でサーバが見つからない場合は、"
-"zeroconf または avahi がサーバで有効になっているか確認してください。または手"
-"動で設定してください。"
+"Vos cal especificar un servidor al qual vos podètz connectar. Se vesètz pas "
+"vòstre servidor amb l'ajuda de l'autodeteccion, vos caldriá verificar que "
+"zeroconf/avahi es activat sus vòstre servidor o utilizar la configuracion "
+"manuala."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
 msgid "Album :"
-msgstr "アルバム :"
+msgstr "Album :"
 
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
 #: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
 #: ../plugins/information/information.ui.h:3
 #: ../plugins/radios/ario-radio.c:166
 msgid "Artist :"
-msgstr "アーティスト :"
+msgstr "Artista :"
 
 #: ../data/ui/cover-progress.ui.h:3
 msgid "Downloading cover"
-msgstr "カバーアートをダウンロードしています"
+msgstr "Telecargar las pochetas"
 
 #: ../data/ui/cover-select.ui.h:3
 msgid "Local search"
-msgstr "ローカル検索"
+msgstr "Recèrca locala"
 
 #: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:120
 msgid "Search"
-msgstr "検索"
+msgstr "Recercar"
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
-msgstr "Ario のインスタンスは一つだけ許可する"
+msgstr "Autorizar pas qu'una instància d'Ario"
 
 #: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
-msgstr "「閉じる」ボタンが押されたときにウィンドウを隠す"
+msgstr "Amagar la fenèstra quand la fenèstra es tampada"
 
 #: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
-msgstr "インターフェイス"
+msgstr "Interfàcia"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Proxy"
-msgstr "プロキシ"
+msgstr "Servidor mandatari (proxy)"
 
 #: ../data/ui/others-prefs.ui.h:5
 msgid "Proxy Address :"
-msgstr "プロキシのアドレス :"
+msgstr "Adreça del proxy :"
 
 #: ../data/ui/others-prefs.ui.h:6
 msgid "Proxy Port :"
-msgstr "プロキシのポート :"
+msgstr "Pòrt del proxy :"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
-msgstr "タブを表示する"
+msgstr "Afichar los onglets"
 
 #: ../data/ui/others-prefs.ui.h:8
 msgid "Use a proxy"
-msgstr "プロキシを使用する"
+msgstr "Utilizar un proxy"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
-msgstr "歌詞のソース"
+msgstr "Fonts de las paraulas"
 
 #: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:13
 #: ../plugins/information/information.ui.h:6
 msgid "Title :"
-msgstr "タイトル :"
+msgstr "Títol :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add and play"
-msgstr "追加して再生"
+msgstr "Apondre e jogar"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
-msgstr "プレイリストに追加"
+msgstr "Apondre a la tièra de lecturas"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:3 ../src/servers/ario-server.c:46
 #: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:514
 #: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:581
 msgid "Album"
-msgstr "アルバム"
+msgstr "Album"
 
 #: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:45
 #: ../src/widgets/ario-playlist.c:514 ../src/widgets/ario-songlist.c:213
 #: ../src/widgets/ario-tray-icon.c:579
 msgid "Artist"
-msgstr "アーティスト"
+msgstr "Artista"
 
 #. ARIO_TAG_GENRE
 #: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:52
 #: ../src/widgets/ario-playlist.c:514
 msgid "Date"
-msgstr "日付"
+msgstr "Data"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
 msgid "Disc"
-msgstr "ディスク"
+msgstr "Disc"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr "ダブルクリック"
+msgstr "Doble clic"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
-msgstr "時間"
+msgstr "Durada"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:514
 msgid "File"
-msgstr "ファイル"
+msgstr "Fichièr"
 
 #. ARIO_TAG_TRACK
 #. ARIO_TAG_NAME
 #: ../data/ui/playlist-prefs.ui.h:10 ../src/servers/ario-server.c:51
 #: ../src/widgets/ario-playlist.c:514
 msgid "Genre"
-msgstr "ジャンル"
+msgstr "Genre"
 
 #: ../data/ui/playlist-prefs.ui.h:11
 msgid "Go to current song when a new song is played"
-msgstr "新しい曲が再生されたらその曲に移動する"
+msgstr "Anar a la cançon en cors quand una cançon novèla es jogada"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Mode"
-msgstr "モード"
+msgstr "Mòde"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "On double click:"
-msgstr "ダブルクリック時の動作:"
+msgstr "En cas de doble clic"
 
 #: ../data/ui/playlist-prefs.ui.h:14 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:205 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
-msgstr "プレイリスト"
+msgstr "Tièra de lectura"
 
 #: ../data/ui/playlist-prefs.ui.h:15
 msgid "Playlist mode:"
-msgstr "プレイリストモード :"
+msgstr "Mòde de la tièra de lectura :"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Replace in playlist"
-msgstr "プレイリストを置換"
+msgstr "Remplaçar dins la tièra de lectura"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Show rows:"
-msgstr "表示するカラム:"
+msgstr "Afichar las colomnas"
 
 #. ARIO_TAG_ALBUM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:18 ../src/servers/ario-server.c:48
 #: ../src/sources/ario-tree-songs.c:102 ../src/widgets/ario-playlist.c:514
 #: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:583
 msgid "Title"
-msgstr "タイトル"
+msgstr "Títol"
 
 #. ARIO_TAG_TITLE
 #: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:49
 #: ../src/sources/ario-tree-songs.c:95 ../src/widgets/ario-playlist.c:514
 msgid "Track"
-msgstr "トラック"
+msgstr "Pista"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
-msgstr "オーディオ出力"
+msgstr "Sortidas àudio"
 
 #: ../data/ui/server-prefs.ui.h:2
 msgid "Crossfade"
-msgstr "クロスフェード"
+msgstr "Fondut"
 
 #: ../data/ui/server-prefs.ui.h:3
 msgid "Database"
-msgstr "データベース"
+msgstr "Banca de donadas"
 
 #: ../data/ui/server-prefs.ui.h:4
 msgid "Last updated:"
-msgstr "最終更新:"
+msgstr "Darrièra mesa a jorn :"
 
 #: ../data/ui/server-prefs.ui.h:5
 msgid "Stop music on exit"
-msgstr "終了時に再生を停止する"
+msgstr "Arrestar la musica quand Ario es arrestat"
 
 #: ../data/ui/server-prefs.ui.h:6
 msgid "Update on startup"
-msgstr "起動時に更新する"
+msgstr "Metre a jorn a l'aviada"
 
 #: ../data/ui/server-prefs.ui.h:7
 msgid "_Update"
-msgstr "更新(_U)"
+msgstr "_Metre a jorn"
 
 #: ../data/ui/server-prefs.ui.h:8
 msgid "enable crossfade"
-msgstr "クロスフェードを有効にする"
+msgstr "Activar lo fondut"
 
 #: ../data/ui/server-prefs.ui.h:9
 msgid "fade time (s):"
-msgstr "フェード時間 (秒):"
+msgstr "Durada del fondut (s):"
 
 #: ../data/ui/server-prefs.ui.h:10 ../src/ario-util.c:50 ../src/ario-util.c:71
 #: ../src/ario-util.c:93 ../plugins/information/information.ui.h:7
@@ -349,212 +350,212 @@ msgstr "n/a"
 
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
-msgstr "全てプレイリストに追加"
+msgstr "Apondre tot a la tièra de lectura"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
-msgstr "Last.fm で検索"
+msgstr "Trobar sus Last.fm"
 
 #: ../data/ui/stats-prefs.ui.h:1
 msgid "Database play time :"
-msgstr "データベース再生時間 :"
+msgstr "Durada totala de la banca de donadas :"
 
 #: ../data/ui/stats-prefs.ui.h:2
 msgid "Number of albums :"
-msgstr "アルバム数 :"
+msgstr "Nombre d'albums :"
 
 #: ../data/ui/stats-prefs.ui.h:3
 msgid "Number of artists :"
-msgstr "アーティスト数 :"
+msgstr "Nombre d'artistas :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
-msgstr "曲数 :"
+msgstr "Nombre de cançons :"
 
 #: ../data/ui/stats-prefs.ui.h:5
 msgid "Play time :"
-msgstr "再生時間 :"
+msgstr "Durada de lectura :"
 
 #: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
-msgstr "統計"
+msgstr "Estatisticas"
 
 #: ../data/ui/stats-prefs.ui.h:7
 msgid "Uptime :"
-msgstr "動作時間 :"
+msgstr "Durada d'activitat :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr "アルバムアーティスト :"
+msgstr "Artista de l'album :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
-msgstr "コメント :"
+msgstr "Comentari :"
 
 #: ../data/ui/song-infos.ui.h:5
 msgid "Composer :"
-msgstr "指揮 :"
+msgstr "Compositor :"
 
 #: ../data/ui/song-infos.ui.h:6
 msgid "Date :"
-msgstr "日付 :"
+msgstr "Data :"
 
 #: ../data/ui/song-infos.ui.h:7
 msgid "Disc :"
-msgstr "ディスク :"
+msgstr "Disc :"
 
 #: ../data/ui/song-infos.ui.h:8
 msgid "Filename :"
-msgstr "ファイル名 :"
+msgstr "Fichièr :"
 
 #: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
 msgid "Genre :"
-msgstr "ジャンル :"
+msgstr "Genre :"
 
 #: ../data/ui/song-infos.ui.h:10 ../plugins/information/information.ui.h:4
 msgid "Length :"
-msgstr "時間 :"
+msgstr "Durada :"
 
 #: ../data/ui/song-infos.ui.h:11
 msgid "Performer :"
-msgstr "演奏 :"
+msgstr "Interprèt :"
 
 #: ../data/ui/song-infos.ui.h:12
 msgid "Song"
-msgstr "楽曲"
+msgstr "Cançon"
 
 #: ../data/ui/song-infos.ui.h:14
 msgid "Track :"
-msgstr "トラック :"
+msgstr "Pista :"
 
 #: ../data/ui/trayicon-prefs.ui.h:1
 msgid "Do nothing"
-msgstr "なにもしない"
+msgstr "Far pas res"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr "ミュート"
+msgstr "Mut"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
-msgstr "通知"
+msgstr "Notificacion"
 
 #: ../data/ui/trayicon-prefs.ui.h:4
 msgid "Notification on song change"
-msgstr "曲の変更時に通知する"
+msgstr "Notificacion del cambiament de cançon"
 
 #: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Notification time: "
-msgstr "通知時間: "
+msgstr "Durada de la notificacion: "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
-msgstr "トレイアイコンを中央クリックしたとき :"
+msgstr "Al moment d'un clic del boton del mitanu sus l'icòna de notificacion :"
 
 #: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:243
 msgid "Play next song"
-msgstr "次の曲を再生"
+msgstr "Jogar la cançon venenta"
 
 #: ../data/ui/trayicon-prefs.ui.h:8
 msgid "Play/Pause"
-msgstr "再生/一時停止"
+msgstr "Legir/Pausa"
 
 #: ../data/ui/trayicon-prefs.ui.h:9
 msgid "Tray icon"
-msgstr "トレイアイコン"
+msgstr "Icòna de notificacion"
 
 #: ../src/ario-main.c:64
 msgid "Start minimized window"
-msgstr "最小化して起動する"
+msgstr "Aviar una fenèstra minimizada"
 
 #. Format result string
 #: ../src/ario-util.c:110
 msgid "seconds"
-msgstr "秒"
+msgstr "milisegondas"
 
 #: ../src/ario-util.c:112
 msgid "minutes"
-msgstr "分"
+msgstr "minutas"
 
 #: ../src/ario-util.c:118
 msgid "hours"
-msgstr "時間"
+msgstr "oras"
 
 #: ../src/ario-util.c:124
 msgid "days"
-msgstr "日"
+msgstr "jorns"
 
 #: ../src/covers/ario-cover.c:149
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "カバーアートはすでに存在します。置き換えますか?"
+msgstr "La pocheta existís déjà. La volètz remplaçar ?"
 
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
-msgstr "音楽ディレクトリ"
+msgstr "Repertòri de la musica"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr "同じアーティストの曲"
+msgstr "cançons del meteis artista"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr "同じアルバムの曲"
+msgstr "cançons del meteis album"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr "同種のアーティストの曲"
+msgstr "cançons d'artistas similars"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr "同じアーティストのアルバム"
+msgstr "albums del meteis artista"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr "同種のアーティストのアルバム"
+msgstr "albums d'artistas similars"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr "ダイナミックプレイリスト"
+msgstr "Tièra de lectura dinamic"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr "キューモード"
+msgstr "Mòde Coa"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr "通常"
+msgstr "Normala"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "プラグイン"
+msgstr "Plugin"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 msgid "Enabled"
-msgstr "有効"
+msgstr "Activat"
 
 #: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:189
 msgid "_About"
-msgstr "情報(_A)"
+msgstr "_A prepaus"
 
 #: ../src/plugins/ario-plugin-manager.c:488
 msgid "C_onfigure"
-msgstr "設定(_O)"
+msgstr "_Configurar"
 
 #: ../src/plugins/ario-plugin-manager.c:497
 msgid "A_ctivate"
-msgstr "有効(_C)"
+msgstr "A_ctivar"
 
 #: ../src/plugins/ario-plugin-manager.c:508
 msgid "Ac_tivate All"
-msgstr "すべて有効(_T)"
+msgstr "_Tot activar"
 
 #: ../src/plugins/ario-plugin-manager.c:513
 msgid "_Deactivate All"
-msgstr "すべて無効(_D)"
+msgstr "_Desactivar tot"
 
 #: ../src/plugins/ario-plugin-manager.c:722
 msgid "Active plugins"
-msgstr "有効なプラグイン"
+msgstr "Ensèrts actius"
 
 #: ../src/preferences/ario-server-preferences.c:182
 #: ../src/preferences/ario-stats-preferences.c:151
@@ -564,54 +565,56 @@ msgstr "有効なプラグイン"
 #: ../src/preferences/ario-stats-preferences.c:155
 #: ../src/preferences/ario-stats-preferences.c:156
 msgid "Not connected"
-msgstr "接続していません"
+msgstr "Pas connectat"
 
 #: ../src/preferences/ario-server-preferences.c:187
 #: ../src/preferences/ario-server-preferences.c:278
 #: ../src/widgets/ario-status-bar.c:100
 msgid "Updating..."
-msgstr "更新しています..."
+msgstr "A s'actualizar..."
 
 #: ../src/servers/ario-mpd.c:410 ../src/servers/ario-mpd2.c:479
 msgid "Connecting to server..."
-msgstr "サーバに接続しています..."
+msgstr "Connexion al servidor..."
 
 #: ../src/servers/ario-mpd.c:438 ../src/servers/ario-mpd2.c:507
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "サーバに接続できませんでした。接続オプションをチェックしてください。"
+msgstr ""
+"Impossible de se connectar al servidor. Verificatz vòstras opcions de "
+"connexion."
 
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr "アルバムアーティスト"
+msgstr "Artista de l'album"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
 msgid "Composer"
-msgstr "指揮"
+msgstr "Compositor"
 
 #. ARIO_TAG_COMPOSER
 #: ../src/servers/ario-server.c:54
 msgid "Performer"
-msgstr "演奏"
+msgstr "Interprèt"
 
 #. ARIO_TAG_PERFORMER
 #. ARIO_TAG_COMMENT
 #. ARIO_TAG_DISC
 #: ../src/servers/ario-server.c:57
 msgid "Filename"
-msgstr "ファイル名"
+msgstr "Nom del fichièr"
 
 #. ARIO_TAG_FILENAME
 #: ../src/servers/ario-server.c:58
 msgid "Any"
-msgstr "すべて"
+msgstr "Totes"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:27
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1235
 msgid "Unknown"
-msgstr "不明"
+msgstr "Desconegut"
 
 #: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:82
 #: ../src/sources/ario-storedplaylists.c:88
@@ -620,7 +623,7 @@ msgstr "不明"
 #: ../plugins/filesystem/ario-filesystem.c:109
 #: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
-msgstr "プレイリストへ追加(_A)"
+msgstr "_Apondre a la tièra de lectura"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:85
 #: ../src/sources/ario-storedplaylists.c:91
@@ -629,7 +632,7 @@ msgstr "プレイリストへ追加(_A)"
 #: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
-msgstr "追加して再生(_P)"
+msgstr "Apondre e _jogar"
 
 #: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:88
 #: ../src/sources/ario-storedplaylists.c:94
@@ -638,15 +641,15 @@ msgstr "追加して再生(_P)"
 #: ../plugins/filesystem/ario-filesystem.c:115
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
-msgstr "プレイリストを置換(_R)"
+msgstr "_Remplaçar dins la tièra de lectura"
 
 #: ../src/sources/ario-browser.c:91
 msgid "Get the covers"
-msgstr "カバーの取得"
+msgstr "Obténer las pochetas"
 
 #: ../src/sources/ario-browser.c:94
 msgid "_Delete the covers"
-msgstr "カバーの削除(_D)"
+msgstr "_Suprimir las pochetas"
 
 #: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
 #: ../src/sources/ario-search.c:91 ../src/sources/ario-storedplaylists.c:115
@@ -654,136 +657,137 @@ msgstr "カバーの削除(_D)"
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:131
 msgid "_Properties"
-msgstr "プロパティ(_P)"
+msgstr "_Proprietats"
 
 #: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
-msgstr "ライブラリ"
+msgstr "Bibliotèca"
 
 #: ../src/sources/ario-search.c:186
 msgid "Add a search criteria"
-msgstr "検索基準を追加します"
+msgstr "Apondre un critèri de recèrca"
 
 #: ../src/sources/ario-search.c:197
 msgid "Search songs in the library"
-msgstr "ライブラリから曲を検索します"
+msgstr "Cercar una cançon dins la bibliotèca"
 
 #: ../src/sources/ario-search.c:381
 msgid "Remove a search criteria"
-msgstr "検索基準を削除します"
+msgstr "Levar un critèri de recèrca"
 
 #: ../src/sources/ario-storedplaylists.c:97
 msgid "_Delete"
-msgstr "削除(_D)"
+msgstr "_Suprimir"
 
 #: ../src/sources/ario-storedplaylists.c:151
 msgid "Playlists"
-msgstr "プレイリスト"
+msgstr "Tièras de lectura"
 
 #: ../src/sources/ario-storedplaylists.c:592
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr "選択した全てのプレイリストを削除してもよろしいですか?"
+msgstr ""
+"Sètz segur que volètz suprimir totas las tièras de lectura seleccionadas?"
 
 #: ../src/sources/ario-tree.c:856
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr "選択したすべてのカバーアートを削除してもよろしいですか?"
+msgstr "Sètz segur que volètz escafar las pochetas seleccionadas?"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-tree-albums.c:199
 msgid "Cover"
-msgstr "カバー"
+msgstr "Pocheta"
 
 #: ../src/shell/ario-shell.c:150
 msgid "_File"
-msgstr "ファイル(_F)"
+msgstr "_Fichièr"
 
 #: ../src/shell/ario-shell.c:151
 msgid "_Edit"
-msgstr "編集(_E)"
+msgstr "E_dicion"
 
 #: ../src/shell/ario-shell.c:152
 msgid "_View"
-msgstr "表示(_V)"
+msgstr "_Afichatge"
 
 #: ../src/shell/ario-shell.c:153
 msgid "_Tool"
-msgstr "ツール(_T)"
+msgstr "_Esplech"
 
 #: ../src/shell/ario-shell.c:154
 msgid "_Help"
-msgstr "ヘルプ(_H)"
+msgstr "_Ajuda"
 
 #: ../src/shell/ario-shell.c:162
 msgid "_Update database"
-msgstr "データベースの更新(_U)"
+msgstr "_Metre a jorn la banca de donadas"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
-msgstr "終了(_Q)"
+msgstr "_Quitar"
 
 #: ../src/shell/ario-shell.c:168
 msgid "Plu_gins"
-msgstr "プラグイン(_G)"
+msgstr "En_sèrts"
 
 #: ../src/shell/ario-shell.c:171
 msgid "Prefere_nces"
-msgstr "設定(_N)"
+msgstr "_Preferéncias"
 
 #: ../src/shell/ario-shell.c:174
 msgid "_Change current album cover"
-msgstr "現在のアルバムカバーの変更(_C)"
+msgstr "_Cambiar la pocheta actuala"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Download album _covers"
-msgstr "アルバムカバーのダウンロード(_C)"
+msgstr "Telecargar las pochetas"
 
 #: ../src/shell/ario-shell.c:180
 msgid "Find similar artists"
-msgstr "同種のアーティストの検索"
+msgstr "Trobar d'artistas similars"
 
 #: ../src/shell/ario-shell.c:183
 msgid "Add similar songs to playlist"
-msgstr "同種の曲をプレイリストに追加"
+msgstr "Apondre de cançons similaras a la tièra de lectura"
 
 #: ../src/shell/ario-shell.c:186
 msgid "Show _lyrics"
-msgstr "歌詞の表示(_L)"
+msgstr "Afichar las _Paraulas"
 
 #: ../src/shell/ario-shell.c:192
 msgid "_Translate this application..."
-msgstr "このアプリケーションを翻訳する(_T)..."
+msgstr "_Traduire aqueste application..."
 
 #: ../src/shell/ario-shell.c:199
 msgid "S_tatusbar"
-msgstr "ステータスバー(_T)"
+msgstr "Barra d'es_tat"
 
 #: ../src/shell/ario-shell.c:202
 msgid "Upper part"
-msgstr "上のペイン"
+msgstr "Partida superiora"
 
 #: ../src/shell/ario-shell.c:783
 msgid "GTK client for MPD"
-msgstr "MPD 用 GTK クライアント"
+msgstr "Client GTK per MPD"
 
 #: ../src/shell/ario-shell.c:784
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Masato HASHIMOTO https://launchpad.net/~hashimo"
+"  Cédric VALMARY https://launchpad.net/~cvalmary"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1124
 msgid "Configure Plugins"
-msgstr "プラグインの設定"
+msgstr "Configurar los ensèrts"
 
 #. Set window properties
 #: ../src/shell/ario-shell-coverdownloader.c:187
 msgid "Music Player Cover Download"
-msgstr "Music Player Cover Download"
+msgstr "Telecargament de pochetas"
 
 #: ../src/shell/ario-shell-coverdownloader.c:332
 msgid "Download Finished!"
-msgstr "ダウンロードが完了しました!"
+msgstr "Telecargament acabat"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:335
@@ -793,49 +797,49 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
-"%i 個のカバーアートが見つかりました\n"
-"%i 個のカバーアートが見つかりませんでした\n"
-"%i 個のカバーアートがすでに存在します"
+"%i pochetas trobadas\n"
+"%i pochetas introbablas\n"
+"%i pochetas qu'existisson pas"
 
 #. Set window properties
 #: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
-msgstr "カバーアートのダウンロード"
+msgstr "Telecargament de pochetas"
 
 #: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
-msgstr "ファイルの読み込みエラーです"
+msgstr "Error al moment de legir lo fichièr"
 
 #: ../src/shell/ario-shell-coverselect.c:584
 msgid "Error saving file"
-msgstr "ファイルの保存エラーです"
+msgstr "Error al moment d'enregistrar lo fichièr"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:134
 #: ../src/shell/ario-shell-songinfos.c:273
 msgid "Lyrics"
-msgstr "歌詞"
+msgstr "Paraulas"
 
 #: ../src/shell/ario-shell-lyricsselect.c:152
 msgid "Lyrics Download"
-msgstr "歌詞のダウンロード"
+msgstr "Telecargament de paraulas"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
-msgstr "Ario の設定"
+msgstr "Preferéncias d'Ario"
 
 #: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
-msgstr "サーバ"
+msgstr "Servidor"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr "その他"
+msgstr "Autres"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
 msgid "%d songs"
-msgstr "%d 曲"
+msgstr "%d Cançons"
 
 #. Set window properties
 #. Set window title
@@ -843,273 +847,273 @@ msgstr "%d 曲"
 #: ../src/shell/ario-shell-songinfos.c:267
 #: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
-msgstr "曲のプロパティ"
+msgstr "Proprietats de la cançon"
 
 #: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
-msgstr "ファイルのタグ保存エラー:"
+msgstr "Error al moment de l'enregistrament dels tags del fichièr :"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
-msgstr "サーバを選択してください。"
+msgstr "Vos cal seleccionar un servidor."
 
 #: ../src/widgets/ario-connection-widget.c:676
 msgid "New Profile"
-msgstr "新しいプロファイル"
+msgstr "Perfil novèl"
 
 #: ../src/widgets/ario-firstlaunch.c:82
 msgid "The following configuration will be used:"
-msgstr "次の設定が使用されます:"
+msgstr "La configuracion seguenta serà utilizada :"
 
 #: ../src/widgets/ario-firstlaunch.c:106
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
-"初めて Ario が起動されました。\n"
-"このアシスタントが設定をお手伝いさせていただきます。"
+"Es lo primièr còp qu'aviatz Ario.\n"
+"Aqueste assistent vos va ajudar a lo configurar."
 
 #: ../src/widgets/ario-firstlaunch.c:111
 msgid "Welcome to Ario"
-msgstr "ようこそ Ario へ"
+msgstr "Benvenguda dins Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:129
 msgid "Configuration"
-msgstr "設定"
+msgstr "Configuracion"
 
 #: ../src/widgets/ario-firstlaunch.c:141
 msgid "Confirmation"
-msgstr "確認"
+msgstr "Confirmacion"
 
 #: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr "<i>from</i> %s <i>by</i> %s"
+msgstr "<i>de</i> %s <i>per</i> %s"
 
 #: ../src/widgets/ario-header.c:198
 msgid "Play previous song"
-msgstr "前の曲を再生"
+msgstr "Jogar la cançon precedenta"
 
 #: ../src/widgets/ario-header.c:219
 msgid "Play/Pause the music"
-msgstr "再生/一時停止"
+msgstr "Jòga/pausa la musica"
 
 #: ../src/widgets/ario-header.c:231
 msgid "Stop the music"
-msgstr "停止"
+msgstr "Arrestar la musica"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:312 ../src/widgets/ario-tooltip.c:321
 msgid " of "
-msgstr " of "
+msgstr " sus "
 
 #: ../src/widgets/ario-header.c:325
 msgid "Toggle random on/off"
-msgstr "ランダムモードのオン/オフ"
+msgstr "Activar/desactivar lo random"
 
 #: ../src/widgets/ario-header.c:337
 msgid "Toggle repeat on/off"
-msgstr "繰り返しモードのオン/オフ"
+msgstr "Activar/desactivar la repeticion"
 
 #: ../src/widgets/ario-header.c:342
 msgid "Change the music volume"
-msgstr "ボリュームの調整"
+msgstr "Càmbia lo volum de la musica"
 
 #. Set temporary text for lyrics download
 #: ../src/widgets/ario-lyrics-editor.c:305
 msgid "Downloading lyrics..."
-msgstr "歌詞をダウンロードしています..."
+msgstr "Telecargament de las paraulas..."
 
 #. Lyrics not found
 #: ../src/widgets/ario-lyrics-editor.c:326
 msgid "Lyrics not found"
-msgstr "歌詞が見つかりませんでした"
+msgstr "Paraulas introbablas"
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Clear"
-msgstr "クリア(_C)"
+msgstr "_Voidar"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Shuffle"
-msgstr "シャッフル(_S)"
+msgstr "_Mesclar"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
-msgstr "切り抜き(_O)"
+msgstr "_Decopar"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr "プレイリスト内を検索(_S)"
+msgstr "Recercar dins la li_sta de lectura"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
-msgstr "除去(_R)"
+msgstr "_Suprimir"
 
 #: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
-msgstr "保存(_S)"
+msgstr "Enregi_strar"
 
 #: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
-msgstr "再生中の曲へ(_G)"
+msgstr "_Anar a la cançon jogada"
 
 #: ../src/widgets/ario-playlist.c:637
 msgid "Filter:"
-msgstr "フィルタ:"
+msgstr "Filtre :"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1654
 msgid "Save playlist"
-msgstr "プレイリストの保存"
+msgstr "Enregistrar la tièra de lectura"
 
 #: ../src/widgets/ario-playlist.c:1664
 msgid "Playlist name :"
-msgstr "プレイリスト名 :"
+msgstr "Nom de la tièra de lectura :"
 
 #: ../src/widgets/ario-playlist.c:1700
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr "プレイリストはすでに存在します。上書きしますか?"
+msgstr "La tièra de lectura existís ja. La volètz remplaçar ?"
 
 #. Format status bar message
 #: ../src/widgets/ario-status-bar.c:96
 msgid "Songs"
-msgstr "曲"
+msgstr "Cançons"
 
 #: ../src/widgets/ario-tray-icon.c:103
 msgid "_Play"
-msgstr "再生(_P)"
+msgstr "_Legir"
 
 #: ../src/widgets/ario-tray-icon.c:106
 msgid "_Pause"
-msgstr "一時停止(_P)"
+msgstr "_Pausa"
 
 #: ../src/widgets/ario-tray-icon.c:109
 msgid "_Stop"
-msgstr "停止(_S)"
+msgstr "_Arrestar"
 
 #: ../src/widgets/ario-tray-icon.c:112
 msgid "_Next"
-msgstr "次(_N)"
+msgstr "_Seguent"
 
 #: ../src/widgets/ario-tray-icon.c:115
 msgid "P_revious"
-msgstr "前(_R)"
+msgstr "_Precedent"
 
 #: ../src/widgets/ario-tray-icon.h:41
 msgid "Not playing"
-msgstr "再生していません"
+msgstr "Jòga pas"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1179
 msgid "Today %I:%M %p"
-msgstr "今日の %p %I:%M"
+msgstr "Uèi a %H:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
-msgstr "昨日の %p %I:%M"
+msgstr "Ièr a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
-msgstr "%a の %p %I:%M"
+msgstr "%a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
-msgstr "%b %d %p %I:%M"
+msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
 #.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
-msgstr "%Y %b %d"
+msgstr "%b %d %Y"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
-msgstr "なし"
+msgstr "Pas jamai"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1335
 msgid "OK"
-msgstr "OK"
+msgstr "D'acòrdi"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1338
 msgid "Logging in"
-msgstr "ログイン中"
+msgstr "Connexion en cors"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1341
 msgid "Request failed"
-msgstr "要求は失敗しました"
+msgstr "Requèsta fracassada"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1344
 msgid "Incorrect username"
-msgstr "ユーザ名が正しくありません"
+msgstr "Nom d'utilizaire incorrècte"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1347
 msgid "Incorrect password"
-msgstr "パスワードが正しくありません"
+msgstr "Senhal incorrècte"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1350
 msgid "Handshake failed"
-msgstr "ハンドシェイクに失敗しました"
+msgstr "Fracàs del dialòg"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1353
 msgid "Client update required"
-msgstr "クライアントのアップデートが要求されました"
+msgstr "Mesa a jorn del client requesida"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
 msgid "Track submission failed"
-msgstr "トラックの送信に失敗しました"
+msgstr "La somission de la pista a fracassat"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1359
 msgid "Queue is too long"
-msgstr "キューが長すぎます"
+msgstr "La fila d'espèra es tròp longa"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
 msgid "Track submission failed too many times"
-msgstr "トラックの送信に失敗しました。送りすぎです。"
+msgstr "La somission del tròç a fracassat tròp de còps"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1417
 msgid "Audioscrobbler preferences"
-msgstr "Audioscrobbler 設定"
+msgstr "Preferéncias d'Audioscrobbler"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
 msgid "Disabled"
-msgstr "無効"
+msgstr "Desactivat"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
-msgstr "最終送信:"
+msgstr "Darrièra somission a :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
-msgstr "Last.fm プロファイル"
+msgstr "Perfil last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
-msgstr "送信待ちのトラック:"
+msgstr "Tròces en fila d'espèra :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
-msgstr "状態:"
+msgstr "Estat :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
-msgstr "送信したトラック:"
+msgstr "Tròces someses :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 #: ../plugins/radios/ario-radio.c:168
 msgid "Username :"
-msgstr "ユーザ名 :"
+msgstr "Nom d'utilizaire :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1117,47 +1121,47 @@ msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr "楽曲情報を Last.fm に送信します"
+msgstr "Mandar las informacions sus las cançons jogadas sus last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:158
 msgid "File System"
-msgstr "ファイルシステム"
+msgstr "Sistèma de fichièrs"
 
 #: ../plugins/filesystem/ario-filesystem.c:418
 msgid "Music"
-msgstr "Music"
+msgstr "Musica"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr "ファイルシステムのブラウザです"
+msgstr "Un explorador de sistèma de fichièrs"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr "ファイルシステムブラウザ"
+msgstr "Navigador del sistèma de fichièrs"
 
 #: ../plugins/information/ario-information.c:114
 msgid "Information"
-msgstr "情報"
+msgstr "Informacion"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr "再生中の曲のいろいろな情報を表示します"
+msgstr "Aficha diferentas informacions sus la cançon en cors"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr "楽曲情報"
+msgstr "Informacions sul tròç"
 
 #: ../plugins/information/information.ui.h:2
 msgid "Albums from this artist:"
-msgstr "このアーティストのアルバム:"
+msgstr "Albums d'aqueste artista :"
 
 #: ../plugins/information/information.ui.h:5
 msgid "Lyrics:"
-msgstr "歌詞:"
+msgstr "Paraulas :"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
-msgstr "libnotify サポートを追加します"
+msgstr "Apond lo supòrt de libnotify"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
@@ -1165,92 +1169,92 @@ msgstr "Libnotify"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr "マルチメディアキーサポートを追加します"
+msgstr "Apond lo supòrt de las tòcas multimèdia."
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr "マルチメディアキー"
+msgstr "Tòcas multimèdia"
 
 #: ../plugins/radios/ario-radio.c:125
 msgid "Add a _new radio"
-msgstr "新しいラジオの追加(_N)"
+msgstr "Apondre una ràdio novèla"
 
 #: ../plugins/radios/ario-radio.c:128
 msgid "_Delete this radios"
-msgstr "このラジオの削除(_D)"
+msgstr "_Suprimir las ràdios"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr "Last.fm: 同種のアーティストのラジオ"
+msgstr "Last.fm : Ràdio d'artistas similars"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr "Last.fm: グループのラジオ"
+msgstr "Last.fm : Ràdio del grop"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr "グループ :"
+msgstr "Grop :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm: パーソナルラジオ"
+msgstr "Last.fm : Ràdio personala"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr "Last.fm: ジャンルのラジオ"
+msgstr "Last.fm : Ràdio del genre"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr "ウェブラジオ"
+msgstr "WebRàdios"
 
 #: ../plugins/radios/ario-radio.c:246
 msgid "Internet Radios"
-msgstr "インターネットラジオ"
+msgstr "Ràdios Internet"
 
 #. Create dialog window
 #: ../plugins/radios/ario-radio.c:774
 msgid "Edit a WebRadio"
-msgstr "ウェブラジオの編集"
+msgstr "Editar una WebRàdio"
 
 #: ../plugins/radios/ario-radio.c:787 ../plugins/radios/ario-radio.c:923
 msgid "URL :"
-msgstr "URL :"
+msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr "パラメタが正しくありません。ラジオの名前と URL を指定してください。"
+msgstr "Paramètres marrits. Vos cal especificar un nom e una URL per la ràdio."
 
 #. Create dialog window
 #: ../plugins/radios/ario-radio.c:883
 msgid "Add a WebRadio"
-msgstr "ウェブラジオの追加"
+msgstr "Apondre una WebRàdio"
 
 #: ../plugins/radios/ario-radio.c:1083
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr "選択したラジオをすべて削除してよろしいですか?"
+msgstr "Sètz segur que volètz suprimir totas las ràdios seleccionadas ?"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr "ウェブラジオを聴きます"
+msgstr "Escotar de Webràdios"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:50
 msgid "Find artist on Wikipedia"
-msgstr "アーティストを Wikipedia で検索"
+msgstr "Trobar l'artista sus Wikipèdia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:172
 msgid "Wikipedia Plugin - Configuration"
-msgstr "Wikipedia プラグイン - 設定"
+msgstr "Ensèrt Wikipèdia - Configuracion"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia language :"
-msgstr "Wikipedia の言語 :"
+msgstr "Lenga de Wikipèdia :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr "現在のアーティストを Wikipedia で検索するプラグインです"
+msgstr "Un plugin per cercar l'artiste en cors sus Wikipèdia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
-msgstr "Wikipedia"
+msgstr "Wikipèdia"
