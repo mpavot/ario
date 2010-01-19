@@ -1322,6 +1322,7 @@ ario_mpd_insert_at (const GSList *songs,
 {
         ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
+        guint offset = 0;
 
         if (ario_mpd_command_preinvoke ())
                 return;
@@ -1331,7 +1332,8 @@ ario_mpd_insert_at (const GSList *songs,
         /* For each filename :*/
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
                 /* Add it in the playlist*/
-                mpd_send_add_id_to (instance->priv->connection, tmp->data, pos + 1);
+                mpd_send_add_id_to (instance->priv->connection, tmp->data, pos + offset + 1);
+                ++offset;
         }
 
         mpd_command_list_end (instance->priv->connection);
