@@ -154,6 +154,25 @@ ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
         return xml_uri;
 }
 
+static char *
+ario_lyrics_leoslyrics_make_second_xml_uri (const gchar *hid)
+{
+        ARIO_LOG_FUNCTION_START;
+        gchar *tmp;
+        gchar *res;
+
+        if (!hid)
+                return NULL;
+
+        // Escape chars not allowed in URI
+        tmp =  g_uri_escape_string (hid, "", TRUE);
+
+        res = g_strdup_printf (LEOSLYRICS_SECOND_URI, tmp);
+        g_free (tmp);
+
+        return res;
+}
+
 static gchar *
 ario_lyrics_leoslyrics_parse_first_xml_file (gchar *xmldata,
                                              int size)
@@ -315,7 +334,7 @@ ario_lyrics_leoslyrics_get_lyrics (ArioLyricsProvider *lyrics_provider,
         if (!hid)
                 return NULL;
 
-        lyrics_uri = g_strdup_printf (LEOSLYRICS_SECOND_URI, hid);
+        lyrics_uri = ario_lyrics_leoslyrics_make_second_xml_uri (hid);
         g_free (hid);
 
         ario_util_download_file (lyrics_uri,
@@ -461,7 +480,7 @@ ario_lyrics_leoslyrics_get_lyrics_from_candidate (ArioLyricsProvider *lyrics_pro
         ArioLyrics *lyrics = NULL;
         gchar *lyrics_uri;
 
-        lyrics_uri = g_strdup_printf (LEOSLYRICS_SECOND_URI, candidate->data);
+        lyrics_uri = ario_lyrics_leoslyrics_make_second_xml_uri (candidate->data);
 
         ario_util_download_file (lyrics_uri,
                                  NULL, 0, NULL,
