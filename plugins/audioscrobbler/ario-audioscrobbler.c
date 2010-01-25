@@ -1637,7 +1637,18 @@ void audioscrobbler_encoded_entry_free (AudioscrobblerEncodedEntry *entry)
         g_free (entry);
 }
 
-
+static char *
+ario_audioscrobbler_uri_encode (const char *string)
+{
+#if defined(HAVE_LIBSOUP_2_4)
+        return soup_uri_decode (string);
+#else
+        char *tmp;
+        tmp = g_strdup (string);
+        soup_uri_decode(tmp);
+        return tmp;
+#endif
+}
 /* Queue functions: */
 
 static AudioscrobblerEntry*
@@ -1659,15 +1670,15 @@ ario_audioscrobbler_load_entry_from_string (const char *string)
                 if (breaks2[0] != NULL && breaks2[1] != NULL) {
                         if (g_str_has_prefix (breaks2[0], "a")) {
                                 g_free (entry->artist);
-                                entry->artist = soup_uri_decode (breaks2[1]);
+                                entry->artist = ario_audioscrobbler_uri_encode (breaks2[1]);
                         }
                         if (g_str_has_prefix (breaks2[0], "t")) {
                                 g_free (entry->title);
-                                entry->title = soup_uri_decode (breaks2[1]);
+                                entry->title = ario_audioscrobbler_uri_encode (breaks2[1]);
                         }
                         if (g_str_has_prefix (breaks2[0], "b")) {
                                 g_free (entry->album);
-                                entry->album = soup_uri_decode (breaks2[1]);
+                                entry->album = ario_audioscrobbler_uri_encode (breaks2[1]);
                         }
 
                         if (g_str_has_prefix (breaks2[0], "l")) {
