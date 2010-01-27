@@ -275,6 +275,22 @@ ario_lyrics_editor_free_data (ArioLyricsEditorData *data)
         }
 }
 
+typedef struct
+{
+        ArioLyricsEditor *lyrics_editor;
+        gchar *text;
+} ArioLyricsEditorTextData;
+
+static gboolean
+ario_lyrics_editor_set_text (ArioLyricsEditorTextData * text_data)
+{
+        gtk_text_buffer_set_text (text_data->lyrics_editor->priv->textbuffer, text_data->text, -1);
+        g_free (text_data->text);
+        g_free (text_data);
+
+        return FALSE;
+}
+
 static void
 ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
 {
@@ -303,6 +319,10 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
 
                 /* Set temporary text for lyrics download */
                 gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Downloading lyrics..."), -1);
+                ArioLyricsEditorTextData * text_data = (ArioLyricsEditorTextData *) g_malloc0 (sizeof (ArioLyricsEditorTextData));
+                text_data->lyrics_editor = lyrics_editor;
+                text_data->text = g_strdup(_("Downloading lyrics..."));
+                g_idle_add ((GSourceFunc) ario_lyrics_editor_set_text, text_data);
 
                 if (data->candidate) {
                         /* We already know which lyrics to use */
@@ -320,10 +340,17 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
                     && lyrics->lyrics
                     && strlen (lyrics->lyrics)) {
                         /* Lyrics found */
-                        gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, lyrics->lyrics, -1);
+                        ArioLyricsEditorTextData * text_data2 = (ArioLyricsEditorTextData *) g_malloc0 (sizeof (ArioLyricsEditorTextData));
+                        text_data2->lyrics_editor = lyrics_editor;
+                        text_data2->text = lyrics->lyrics;
+                        lyrics->lyrics = NULL;
+                        g_idle_add ((GSourceFunc) ario_lyrics_editor_set_text, text_data2);
                 } else {
                         /* Lyrics not found */
-                        gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Lyrics not found"), -1);
+                        ArioLyricsEditorTextData * text_data2 = (ArioLyricsEditorTextData *) g_malloc0 (sizeof (ArioLyricsEditorTextData));
+                        text_data2->lyrics_editor = lyrics_editor;
+                        text_data2->text = g_strdup(_("Lyrics not found"));
+                        g_idle_add ((GSourceFunc) ario_lyrics_editor_set_text, text_data2);
                 }
                 ario_lyrics_free (lyrics);
                 ario_lyrics_editor_free_data (lyrics_editor->priv->data);
