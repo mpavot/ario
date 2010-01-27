@@ -1009,13 +1009,12 @@ ario_mpd_update_status (void)
         instance->priv->is_updating = TRUE;
 
         /* check if there is a connection */
-        if (!instance->priv->connection) {
+        if (ario_mpd_command_preinvoke ()) {
                 ario_server_interface_set_default (ARIO_SERVER_INTERFACE (instance));
         } else {
                 if (instance->priv->status)
                         mpd_status_free (instance->priv->status);
 
-                ario_mpd_command_preinvoke ();
                 instance->priv->status = mpd_run_status (instance->priv->connection);
                 ario_mpd_command_postinvoke ();
 
