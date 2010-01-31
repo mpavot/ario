@@ -318,7 +318,6 @@ ario_lyrics_editor_get_lyrics_thread (ArioLyricsEditor *lyrics_editor)
                                                  lyrics_editor);
 
                 /* Set temporary text for lyrics download */
-                gtk_text_buffer_set_text (lyrics_editor->priv->textbuffer, _("Downloading lyrics..."), -1);
                 ArioLyricsEditorTextData * text_data = (ArioLyricsEditorTextData *) g_malloc0 (sizeof (ArioLyricsEditorTextData));
                 text_data->lyrics_editor = lyrics_editor;
                 text_data->text = g_strdup(_("Downloading lyrics..."));
