@@ -608,13 +608,16 @@ ario_shell_show (ArioShell *shell,
         /* Synchonize the main window with server state */
         ario_shell_sync_server (shell);
 
+        /* Show main window */
+        gtk_widget_show_all (GTK_WIDGET(shell));
+        shell->priv->shown = TRUE;
+
+        /* Synchronize vpaned with preferences */
+        ario_shell_sync_paned (shell);
+
         /* Minimize window if needed */
-        if (minimized) {
+        if (minimized)
                 ario_shell_set_visibility (shell, VISIBILITY_HIDDEN);
-        } else {
-                gtk_widget_show_all (GTK_WIDGET(shell));
-                shell->priv->shown = TRUE;
-        }
 
         /* Connect signal for window state changes */
         g_signal_connect_object (shell,
@@ -622,9 +625,6 @@ ario_shell_show (ArioShell *shell,
                                  G_CALLBACK (ario_shell_window_state_cb),
                                  shell,
                                  G_CONNECT_AFTER);
-
-        /* Synchronize vpaned with preferences */
-        ario_shell_sync_paned (shell);
 
         /* Update server db on startup if needed */
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
@@ -672,7 +672,7 @@ ario_shell_set_visibility (ArioShell *shell,
 
                         if (shell->priv->maximized)
                                 gtk_window_maximize (GTK_WINDOW (shell));
-                        gtk_widget_show_all (GTK_WIDGET(shell));
+                        gtk_widget_show (GTK_WIDGET(shell));
 
                         /* Restore vpaned position
                          * This is in a g_timeout_add because there seems to have a bug (#2798748) if I call 
