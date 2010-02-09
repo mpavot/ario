@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2010-01-01 23:43+0000\n"
+"PO-Revision-Date: 2010-01-19 21:56+0000\n"
 "Last-Translator: Jarosław Ogrodnik <nobodythere@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-19 19:36+0000\n"
+"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -1019,28 +1019,28 @@ msgstr "Dzisiaj %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Wczoraj %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d %b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
@@ -1240,7 +1240,8 @@ msgstr "Dodaj stację radiową"
 
 #: ../plugins/radios/ario-radio.c:1083
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr "Czy jesteś pewny że chcesz usunąć wszyskie zaznaczone stacje radiowe?"
+msgstr ""
+"Czy jesteś pewny że chcesz usunąć wszyskie zaznaczone stacje radiowe?"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"

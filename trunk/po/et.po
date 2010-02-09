@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-11-07 09:02+0000\n"
+"PO-Revision-Date: 2009-11-30 19:48+0000\n"
 "Last-Translator: lyyser <logard.1961@gmail.com>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-28 16:36+0000\n"
+"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -216,7 +216,7 @@ msgstr "Tiitel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add and play"
-msgstr ""
+msgstr "Lisa ja esita"
 
 #: ../data/ui/playlist-prefs.ui.h:2 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -243,11 +243,11 @@ msgstr "Kuupäev"
 
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/widgets/ario-playlist.c:514
 msgid "Disc"
-msgstr ""
+msgstr "Ketas"
 
 #: ../data/ui/playlist-prefs.ui.h:7
 msgid "Double click"
-msgstr ""
+msgstr "Topeltklõps"
 
 #: ../data/ui/playlist-prefs.ui.h:8 ../src/widgets/ario-playlist.c:514
 msgid "Duration"
@@ -716,7 +716,7 @@ msgstr "_Abi"
 
 #: ../src/shell/ario-shell.c:162
 msgid "_Update database"
-msgstr ""
+msgstr "_ Uuenda andmebaasi"
 
 #: ../src/shell/ario-shell.c:165
 msgid "_Quit"
@@ -1008,28 +1008,28 @@ msgstr "Täna %t:%mi"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Eile %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"

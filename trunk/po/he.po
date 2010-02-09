@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-07 09:27+0100\n"
-"PO-Revision-Date: 2009-11-29 01:51+0000\n"
-"Last-Translator: Ddorda <d.dorda@gmail.com>\n"
+"PO-Revision-Date: 2010-01-22 23:05+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-19 19:36+0000\n"
+"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -51,6 +51,8 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
+"אם שרת ה־MPD שלך אינו גלוי הודות לאיתור האוטומטי, יהיה עליך לבדוק שהשירות "
+"zeroconf מופעל בתצורת ה־MPD שלך או לעשות שימוש בתצורה הידנית."
 
 #: ../data/ui/connection-autodetect.ui.h:2
 msgid "Server autodetection"
@@ -142,6 +144,8 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
+"יש לציין שרת להתחברות אליו. אם השרת שלך אינו מופיע הודות לגילוי האוטומטי, "
+"עליך לבדוק שהשירות zeroconf/avahi פעיל בשרת שלך או לעשות שימוש בתצורה הידנית."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -169,7 +173,7 @@ msgstr "חפש"
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
-msgstr ""
+msgstr "יש לאפשר מופע אחד בלבד של Ario"
 
 #: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
@@ -513,7 +517,7 @@ msgstr "רשימת השמעה דינאמית"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "מצב תור"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
@@ -754,7 +758,7 @@ msgstr "_שורת המצב"
 
 #: ../src/shell/ario-shell.c:202
 msgid "Upper part"
-msgstr ""
+msgstr "החלק ה_עליון"
 
 #: ../src/shell/ario-shell.c:783
 msgid "GTK client for MPD"
@@ -932,7 +936,7 @@ msgstr "עי_רבוב"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
-msgstr ""
+msgstr "_חיתוך"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
@@ -1003,28 +1007,28 @@ msgstr "היום %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "אתמול %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d ב%b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d ב%b %Y"
@@ -1137,7 +1141,7 @@ msgstr "מידע"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr ""
+msgstr "הצגת מידע מגוון אודות השיר שמתנגן"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
@@ -1177,11 +1181,11 @@ msgstr "_מחק תחנות אלו"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Last.fm: רדיו של זמרים דומים"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: רדיו של קבוצה"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
@@ -1189,11 +1193,11 @@ msgstr "קבוצה :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm: רדיו אישי"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: רדיו לפי סוג"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
