@@ -34,56 +34,56 @@ G_BEGIN_DECLS
 #define ARIO_SERVER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), ARIO_TYPE_SERVER, ArioServerClass))
 
 typedef struct {
-	/* filename of song */
-	char * file;
-	/* artist, maybe NULL if there is no tag */
-	char * artist;
-	/* title, maybe NULL if there is no tag */
-	char * title;
-	/* album, maybe NULL if there is no tag */
-	char * album;
-	/* album artist, maybe NULL if there is no tag */
-	char * album_artist;
-	/* track, maybe NULL if there is no tag */
-	char * track;
-	/* name, maybe NULL if there is no tag; it's the name of the current
-	 * song, f.e. the icyName of the stream */
-	char * name;
-	/* date */
-	char *date;
-	/* Genre */
-	char *genre;
-	/* Composer */
-	char *composer;
-	/* Performer */
-	char *performer;
-	/* Disc */
-	char *disc;
-	/* Comment */
-	char *comment;
-	/* length of song in seconds */
-	int time;
-	/* if plchanges/playlistinfo/playlistid used, is the position of the
-	 * song in the playlist */
-	int pos;
-	/* song id for a song in the playlist */
-	int id;
+        /* filename of song */
+        char * file;
+        /* artist, maybe NULL if there is no tag */
+        char * artist;
+        /* title, maybe NULL if there is no tag */
+        char * title;
+        /* album, maybe NULL if there is no tag */
+        char * album;
+        /* album artist, maybe NULL if there is no tag */
+        char * album_artist;
+        /* track, maybe NULL if there is no tag */
+        char * track;
+        /* name, maybe NULL if there is no tag; it's the name of the current
+         * song, f.e. the icyName of the stream */
+        char * name;
+        /* date */
+        char *date;
+        /* Genre */
+        char *genre;
+        /* Composer */
+        char *composer;
+        /* Performer */
+        char *performer;
+        /* Disc */
+        char *disc;
+        /* Comment */
+        char *comment;
+        /* length of song in seconds */
+        int time;
+        /* if plchanges/playlistinfo/playlistid used, is the position of the
+         * song in the playlist */
+        int pos;
+        /* song id for a song in the playlist */
+        int id;
 } ArioServerSong;
 
 typedef struct {
-	int numberOfArtists;
-	int numberOfAlbums;
-	int numberOfSongs;
-	unsigned long uptime;
-	unsigned long dbUpdateTime;
-	unsigned long playTime;
-	unsigned long dbPlayTime;
+        int numberOfArtists;
+        int numberOfAlbums;
+        int numberOfSongs;
+        unsigned long uptime;
+        unsigned long dbUpdateTime;
+        unsigned long playTime;
+        unsigned long dbPlayTime;
 } ArioServerStats;
 
 typedef struct {
-	int id;
-	char * name;
-	int enabled;
+        int id;
+        char * name;
+        int enabled;
 } ArioServerOutput;
 
 typedef enum {
@@ -102,21 +102,21 @@ typedef enum {
 
 typedef enum
 {
-	ARIO_TAG_ARTIST,
-	ARIO_TAG_ALBUM,
-	ARIO_TAG_ALBUM_ARTIST,
-	ARIO_TAG_TITLE,
-	ARIO_TAG_TRACK,
-	ARIO_TAG_NAME,
-	ARIO_TAG_GENRE,
-	ARIO_TAG_DATE,
-	ARIO_TAG_COMPOSER,
-	ARIO_TAG_PERFORMER,
-	ARIO_TAG_COMMENT,
-	ARIO_TAG_DISC,
-	ARIO_TAG_FILENAME,
-	ARIO_TAG_ANY,
-	ARIO_TAG_COUNT
+        ARIO_TAG_ARTIST,
+        ARIO_TAG_ALBUM,
+        ARIO_TAG_ALBUM_ARTIST,
+        ARIO_TAG_TITLE,
+        ARIO_TAG_TRACK,
+        ARIO_TAG_NAME,
+        ARIO_TAG_GENRE,
+        ARIO_TAG_DATE,
+        ARIO_TAG_COMPOSER,
+        ARIO_TAG_PERFORMER,
+        ARIO_TAG_COMMENT,
+        ARIO_TAG_DISC,
+        ARIO_TAG_FILENAME,
+        ARIO_TAG_ANY,
+        ARIO_TAG_COUNT
 }ArioServerTag;
 
 typedef struct
