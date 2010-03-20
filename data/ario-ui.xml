@@ -37,6 +37,16 @@
                         <placeholder name="ViewMenuPluginPlaceholder" />
                 </menu>
 
+                <menu name="ControlMenu" action="Control">
+                        <menuitem name="ControlPlay" action="ControlPlay"/>
+                        <menuitem name="ControlPause" action="ControlPause"/>
+                        <menuitem name="ControlStop" action="ControlStop"/>
+                        <separator/>
+                        <menuitem name="ControlNext" action="ControlNext"/>
+                        <menuitem name="ControlPrevious" action="ControlPrevious"/>
+                        <placeholder name="ControlMenuPluginPlaceholder" />
+                </menu>
+
                 <menu name="ToolMenu" action="Tool">
                         <menuitem name="ToolCoverSelectMenu" action="ToolCoverSelect"/>
                         <menuitem name="ToolCoverMenu" action="ToolCover"/>

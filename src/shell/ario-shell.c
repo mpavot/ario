@@ -150,6 +150,7 @@ static GtkActionEntry shell_actions [] =
         { "File", NULL, N_("_File"), NULL, NULL, NULL },
         { "Edit", NULL, N_("_Edit"), NULL, NULL, NULL },
         { "View", NULL, N_("_View"), NULL, NULL, NULL },
+        { "Control", NULL, N_("_Control"), NULL, NULL, NULL },
         { "Tool", NULL, N_("_Tool"), NULL, NULL, NULL },
         { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
