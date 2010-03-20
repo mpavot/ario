@@ -96,11 +96,8 @@ ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
 {
         ARIO_LOG_FUNCTION_START;
         char *xml_uri;
-        int i;
-        int length;
         gchar *conv_artist;
         gchar *conv_song;
-        gchar *tmp;
 
         if (!artist || !song)
                 return NULL;
@@ -109,38 +106,8 @@ ario_lyrics_leoslyrics_make_first_xml_uri (const gchar *artist,
         if (!strcmp (song, ARIO_SERVER_UNKNOWN))
                 return NULL;
 
-        conv_artist = g_strdup (artist);
-        conv_song = g_strdup (song);
-
-        /* Normalize */
-        tmp = g_utf8_normalize (conv_artist, -1, G_NORMALIZE_ALL);
-        g_free (conv_artist);
-        conv_artist = tmp;
-
-        /* Normalize */
-        tmp = g_utf8_normalize (conv_song, -1, G_NORMALIZE_ALL);
-        g_free (conv_song);
-        conv_song = tmp;
-
-        /* We escape special characters */
-        length = g_utf8_strlen (conv_artist, -1);
-        for(i = 0; i < length; ++i)
-        {
-                if (!g_unichar_isalnum (conv_artist[i])) {
-                        conv_artist[i]=' ';
-                }
-        }
-        length = g_utf8_strlen (conv_song, -1);
-        for(i = 0; i < length; ++i)
-        {
-                if (!g_unichar_isalnum (conv_song[i])) {
-                        conv_song[i]=' ';
-                }
-        }
-
-        /* We escape spaces */
-        ario_util_string_replace (&conv_artist, " ", "%20");
-        ario_util_string_replace (&conv_song, " ", "%20");
+        conv_artist = ario_util_format_for_http (artist);
+        conv_song = ario_util_format_for_http (song);
 
         /* We make the xml uri with all the parameters */
         if (strcmp (artist, ARIO_SERVER_UNKNOWN))

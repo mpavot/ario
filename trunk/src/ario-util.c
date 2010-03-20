@@ -830,3 +830,29 @@ ario_util_gslist_randomize (GSList **list,
 
         return ret;
 }
+
+gchar *
+ario_util_format_for_http (const gchar *text)
+{
+        int i;
+        int length;
+        gchar *res;
+
+        /* Normalize */
+        res = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
+
+        /* We escape special characters */
+        length = g_utf8_strlen (res, -1);
+        for(i = 0; i < length; ++i)
+        {
+                if (!g_unichar_isalnum (res[i])) {
+                        res[i]=' ';
+                }
+        }
+
+        /* We escape spaces */
+        ario_util_string_replace (&res, " ", "%20");
+
+        return res;
+}
+

@@ -206,7 +206,7 @@
 
 /* Ordered list of lyrics providers */
 #define PREF_LYRICS_PROVIDERS_LIST              "lyrics-providers"
-#define PREF_LYRICS_PROVIDERS_LIST_DEFAULT      "lyricwiki,leoslyrics"
+#define PREF_LYRICS_PROVIDERS_LIST_DEFAULT      "lyricwiki,leoslyrics,lyrc"
 
 /* List of active lyrics providers */
 #define PREF_LYRICS_ACTIVE_PROVIDERS_LIST         "active-lyrics-providers"

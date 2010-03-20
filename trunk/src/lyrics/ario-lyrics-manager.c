@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "lyrics/ario-lyrics-leoslyrics.h"
+#include "lyrics/ario-lyrics-lyrc.h"
 #include "lyrics/ario-lyrics-lyricwiki.h"
 #include "lyrics/ario-lyrics.h"
 #include "preferences/ario-preferences.h"
@@ -66,6 +67,10 @@ ario_lyrics_manager_get_instance (void)
                 g_return_val_if_fail (lyrics_manager->priv != NULL, NULL);
 
                 lyrics_provider = ario_lyrics_leoslyrics_new ();
+                ario_lyrics_manager_add_provider (lyrics_manager,
+                                                  ARIO_LYRICS_PROVIDER (lyrics_provider));
+
+                lyrics_provider = ario_lyrics_lyrc_new ();
                 ario_lyrics_manager_add_provider (lyrics_manager,
                                                   ARIO_LYRICS_PROVIDER (lyrics_provider));
 
