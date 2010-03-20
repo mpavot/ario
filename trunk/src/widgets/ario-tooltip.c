@@ -326,7 +326,7 @@ ario_tooltip_sync_tooltip_time (ArioTooltip *tooltip)
                         gtk_progress_bar_set_text (GTK_PROGRESS_BAR (tooltip->priv->tooltip_progress_bar), elapsed_char);
                 }
                 /* Adjust progress bar */
-                if (total > 0)
+                if (total > 0 && elapsed > 0 && elapsed <= total)
                         gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (tooltip->priv->tooltip_progress_bar),
                                                        (double) elapsed / (double) total);
                 else
