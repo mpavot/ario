@@ -106,7 +106,7 @@ static GtkActionEntry ario_tray_icon_actions [] =
         { "ControlPause", GTK_STOCK_MEDIA_PAUSE, N_("_Pause"), "<control>Down",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_pause) },
-        { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), NULL,
+        { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), "<control>space",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_stop) },
         { "ControlNext", GTK_STOCK_MEDIA_NEXT, N_("_Next"), "<control>Right",
