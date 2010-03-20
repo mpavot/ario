@@ -44,6 +44,8 @@ libario_la_SOURCES = \
 	lib/gtk-builder-helpers.h\
         lyrics/ario-lyrics-leoslyrics.c\
         lyrics/ario-lyrics-leoslyrics.h\
+        lyrics/ario-lyrics-lyrc.c\
+        lyrics/ario-lyrics-lyrc.h\
         lyrics/ario-lyrics-lyricwiki.c\
         lyrics/ario-lyrics-lyricwiki.h\
         lyrics/ario-lyrics-manager.c\

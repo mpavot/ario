@@ -292,6 +292,15 @@ GSList *                ario_util_gslist_randomize           (GSList **list,
                                                               const int max);
 
 /**
+ * Format a string so that it can be used in an HTTP requests
+ *
+ * @param text The string to format
+ *
+ * @return A newly allocated string formated for HTTP requests
+ */
+gchar *                 ario_util_format_for_http            (const gchar *text);
+
+/**
  * Computes the absolute value of a int
  *
  * @param a An integer
