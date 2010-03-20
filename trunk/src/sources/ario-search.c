@@ -31,7 +31,6 @@
 
 #ifdef ENABLE_SEARCH
 
-static void ario_search_finalize (GObject *object);
 static void ario_search_set_property (GObject *object,
                                       guint prop_id,
                                       const GValue *value,
@@ -42,39 +41,24 @@ static void ario_search_get_property (GObject *object,
                                       GParamSpec *pspec);
 static void ario_search_connectivity_changed_cb (ArioServer *server,
                                                  ArioSearch *search);
-static void ario_search_do_plus (GtkButton *button,
-                                 ArioSearch *search);
-static void ario_search_do_minus (GtkButton *button,
-                                  ArioSearch *search);
-static void ario_search_do_search (GtkButton *button,
-                                   ArioSearch *search);
+static void ario_search_entry_changed (GtkEntry *entry,
+                                       ArioSearch *search);
+static void ario_search_entry_clear (GtkEntry *entry,
+                                     GtkEntryIconPosition icon_pos,
+                                     GdkEvent *event,
+                                     ArioSearch *search);
+static void ario_search_do_search (ArioSearch *search);
 
 struct ArioSearchPrivate
 {
         GtkWidget *searchs;
 
+        GtkWidget *entry;
         GtkWidget *vbox;
-        GtkWidget *plus_button;
-        GtkWidget *search_button;
 
         gboolean connected;
         GtkUIManager *ui_manager;
-
-        GSList *search_constraints;
-        GtkListStore *list_store;
 };
-
-/**
- * Wisgets added when user adds a new search
- * constraint
- */
-typedef struct ArioSearchConstraint
-{
-        GtkWidget *hbox;
-        GtkWidget *combo_box;
-        GtkWidget *entry;
-        GtkWidget *minus_button;
-} ArioSearchConstraint;
 
 /* Actions */
 static GtkActionEntry ario_search_actions [] =
@@ -134,7 +118,6 @@ ario_search_class_init (ArioSearchClass *klass)
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         /* Virtual GObject methods */
-        object_class->finalize = ario_search_finalize;
         object_class->set_property = ario_search_set_property;
         object_class->get_property = ario_search_get_property;
 
@@ -160,12 +143,6 @@ static void
 ario_search_init (ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *hbox;
-        GtkTreeIter iter;
-        GtkWidget *image;
-        gchar **items;
-        int i;
-
         search->priv = ARIO_SEARCH_GET_PRIVATE (search);
 
         search->priv->connected = FALSE;
@@ -174,92 +151,29 @@ ario_search_init (ArioSearch *search)
         search->priv->vbox = gtk_vbox_new (FALSE, 5);
         gtk_container_set_border_width (GTK_CONTAINER (search->priv->vbox), 10);
 
-        /* Buttons for hbox */
-        hbox = gtk_hbox_new (FALSE, 0);
+        /* Search entry */
+        search->priv->entry = gtk_entry_new ();
+        gtk_entry_set_icon_from_stock (GTK_ENTRY (search->priv->entry),
+                                       GTK_ENTRY_ICON_PRIMARY,
+                                       GTK_STOCK_CLEAR);
 
-        /* Plus button */
-        image = gtk_image_new_from_stock (GTK_STOCK_ADD,
-                                          GTK_ICON_SIZE_LARGE_TOOLBAR);
-        search->priv->plus_button = gtk_button_new ();
-        gtk_container_add (GTK_CONTAINER (search->priv->plus_button), image);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (search->priv->plus_button),
-                                     _("Add a search criteria"));
-
-        /* Connect signal for plus button */
-        g_signal_connect (search->priv->plus_button,
-                          "clicked",
-                          G_CALLBACK (ario_search_do_plus),
+        g_signal_connect (search->priv->entry,
+                          "changed",
+                          G_CALLBACK (ario_search_entry_changed),
                           search);
 
-        /* Search button */
-        search->priv->search_button = gtk_button_new_from_stock (GTK_STOCK_FIND);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (search->priv->search_button),
-                                     _("Search songs in the library"));
-
-        /* Connect signal for search button */
-        g_signal_connect (search->priv->search_button,
-                          "clicked",
-                          G_CALLBACK (ario_search_do_search),
+        g_signal_connect (search->priv->entry,
+                          "icon-press",
+                          G_CALLBACK (ario_search_entry_clear),
                           search);
 
-        /* Add buttons for hbox */
-        gtk_box_pack_start (GTK_BOX (hbox),
-                            search->priv->plus_button,
-                            TRUE, TRUE, 0);
-
-        gtk_box_pack_end (GTK_BOX (hbox),
-                          search->priv->search_button,
-                          TRUE, TRUE, 0);
-
-        /* Add widgets to main vbox */
-        gtk_box_pack_end (GTK_BOX (search->priv->vbox),
-                          hbox,
-                          FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (search->priv->vbox),
+                            search->priv->entry,
+                            FALSE, FALSE, 0);
 
         gtk_box_pack_start (GTK_BOX (search),
                             search->priv->vbox,
-                            FALSE, FALSE, 0);
-
-        /* Create model */
-        search->priv->list_store = gtk_list_store_new (2,
-                                                       G_TYPE_STRING,
-                                                       G_TYPE_INT);
-
-        /* Add tags to model */
-        items = ario_server_get_items_names ();
-        for (i = 0; i < ARIO_TAG_COUNT; ++i) {
-                if (items[i]) {
-                        gtk_list_store_append (search->priv->list_store, &iter);
-                        gtk_list_store_set (search->priv->list_store, &iter,
-                                            0, gettext (items[i]),
-                                            1, i,
-                                            -1);
-                }
-        }
-
-        /* Add a search criteria box */
-        ario_search_do_plus (NULL, search);
-
-        /* Search hbox properties */
-        gtk_box_set_homogeneous (GTK_BOX (search), FALSE);
-        gtk_box_set_spacing (GTK_BOX (search), 4);
-}
-
-static void
-ario_search_finalize (GObject *object)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioSearch *search;
-
-        g_return_if_fail (object != NULL);
-        g_return_if_fail (IS_ARIO_SEARCH (object));
-
-        search = ARIO_SEARCH (object);
-
-        g_return_if_fail (search->priv != NULL);
-        g_object_unref (search->priv->list_store);
-
-        G_OBJECT_CLASS (ario_search_parent_class)->finalize (object);
+                            TRUE, TRUE, 0);
 }
 
 static void
@@ -324,7 +238,7 @@ ario_search_new (GtkUIManager *mgr,
                                                    TRUE);
 
         /* Songs list widget */
-        gtk_box_pack_start (GTK_BOX (search),
+        gtk_box_pack_start (GTK_BOX (search->priv->vbox),
                             search->priv->searchs,
                             TRUE, TRUE, 0);
 
@@ -345,149 +259,28 @@ ario_search_connectivity_changed_cb (ArioServer *server,
 }
 
 static void
-ario_search_entry_grab_focus (GtkEntry *entry,
-                              ArioSearch *search)
+ario_search_entry_changed (GtkEntry *entry,
+                           ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
-        GTK_WIDGET_SET_FLAGS (search->priv->search_button, GTK_CAN_DEFAULT);
-        gtk_widget_grab_default (search->priv->search_button);
+        ario_search_do_search (search);
 }
 
 static void
-ario_search_do_plus (GtkButton *button,
-                     ArioSearch *search)
+ario_search_entry_clear (GtkEntry *entry,
+                         GtkEntryIconPosition icon_pos,
+                         GdkEvent *event,
+                         ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkCellRenderer *renderer;
-        GtkTreeIter iter, prev_iter;
-        GtkWidget *image;
-        int len;
-
-        /* Create new search constraint */
-        ArioSearchConstraint *search_constraint = (ArioSearchConstraint *) g_malloc (sizeof (ArioSearchConstraint));
-
-        /* Create search constraint widgets */
-        search_constraint->hbox = gtk_hbox_new (FALSE, 3);
-        search_constraint->combo_box = gtk_combo_box_new_with_model (GTK_TREE_MODEL (search->priv->list_store));
-        search_constraint->entry = gtk_entry_new ();
-        gtk_entry_set_activates_default (GTK_ENTRY (search_constraint->entry), TRUE);
-
-        /* Create minus button */
-        image = gtk_image_new_from_stock (GTK_STOCK_REMOVE,
-                                          GTK_ICON_SIZE_LARGE_TOOLBAR);
-        search_constraint->minus_button = gtk_button_new ();
-        gtk_container_add (GTK_CONTAINER (search_constraint->minus_button), image);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (search_constraint->minus_button),
-                                     _("Remove a search criteria"));
-
-        /* Connect signal for minus signal */
-        g_signal_connect (search_constraint->minus_button,
-                          "clicked",
-                          G_CALLBACK (ario_search_do_minus),
-                          search);
-
-        /* Create renderer */
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_clear (GTK_CELL_LAYOUT (search_constraint->combo_box));
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (search_constraint->combo_box), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (search_constraint->combo_box), renderer,
-                                        "text", 0, NULL);
-
-        /* Select last item in combobox (Any) */
-        gtk_tree_model_get_iter_first (GTK_TREE_MODEL (search->priv->list_store), &iter);
-        do {
-                prev_iter = iter;
-        } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (search->priv->list_store), &iter));
-        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (search_constraint->combo_box),
-                                       &prev_iter);
-
-        /* Add widgets to hbox */
-        gtk_box_pack_start (GTK_BOX (search_constraint->hbox),
-                            search_constraint->combo_box,
-                            FALSE, FALSE, 0);
-
-        gtk_box_pack_start (GTK_BOX (search_constraint->hbox),
-                            search_constraint->entry,
-                            FALSE, FALSE, 0);
-
-        gtk_box_pack_start (GTK_BOX (search_constraint->hbox),
-                            search_constraint->minus_button,
-                            FALSE, FALSE, 0);
-
-        /* Add hbox to main vbox */
-        gtk_box_pack_start (GTK_BOX (search->priv->vbox),
-                            search_constraint->hbox,
-                            FALSE, FALSE, 2);
-
-        gtk_widget_show_all (search_constraint->hbox);
-
-        /* Append search constraint to the list */
-        search->priv->search_constraints = g_slist_append (search->priv->search_constraints,
-                                                           search_constraint);
-
-        len = g_slist_length (search->priv->search_constraints);
-        if (len == 1) {
-                /* Forbid removal of last search constraint */
-                search_constraint = search->priv->search_constraints->data;
-                gtk_widget_set_sensitive (search_constraint->minus_button, FALSE);
-        } else if (len > 4) {
-                /* Limit number of search constraints to 5 */
-                gtk_widget_set_sensitive (search->priv->plus_button, FALSE);
-        } else if (len == 2) {
-                /* Reactivate minus button */
-                search_constraint = search->priv->search_constraints->data;
-                gtk_widget_set_sensitive (search_constraint->minus_button, TRUE);
-        }
-        g_signal_connect (search_constraint->entry,
-                          "grab-focus",
-                           G_CALLBACK (ario_search_entry_grab_focus),
-                           search);
+        /* Clear search entry */
+        gtk_entry_set_text (GTK_ENTRY (search->priv->entry), "");
 }
 
 static void
-ario_search_do_minus (GtkButton *button,
-                      ArioSearch *search)
-
+ario_search_do_search (ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
-        ArioSearchConstraint *search_constraint;
-        GSList *tmp;
-
-        /* Remove search constraint corresponding to pressed minus button */
-        for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
-                search_constraint = tmp->data;
-                if (search_constraint->minus_button == (GtkWidget* ) button)
-                        break;
-        }
-        g_return_if_fail (tmp);
-
-        /* Destroy search constraint widgets */
-        gtk_widget_destroy (search_constraint->combo_box);
-        gtk_widget_destroy (search_constraint->entry);
-        gtk_widget_destroy (search_constraint->minus_button);
-        gtk_widget_destroy (search_constraint->hbox);
-
-        /* Remove search constraint from the list */
-        search->priv->search_constraints = g_slist_remove (search->priv->search_constraints,
-                                                           search_constraint);
-        g_free (search_constraint);
-
-        /* Reactivate plus button if needed */
-        gtk_widget_set_sensitive (search->priv->plus_button, TRUE);
-
-        /* Deactivate minus button if only one search constraint remaining */
-        if (g_slist_length (search->priv->search_constraints) == 1) {
-                search_constraint = search->priv->search_constraints->data;
-                gtk_widget_set_sensitive (search_constraint->minus_button, FALSE);
-        }
-}
-
-static void
-ario_search_do_search (GtkButton *button,
-                       ArioSearch *search)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioSearchConstraint *search_constraint;
         ArioServerAtomicCriteria *atomic_criteria;
         GSList *criteria = NULL;
         GSList *tmp;
@@ -496,30 +289,40 @@ ario_search_do_search (GtkButton *button,
         GtkTreeIter iter;
         gchar *title;
         GtkListStore *liststore;
+        int i;
+        gchar **cmp_str;
 
-        /* Generate a list of ArioServerCriteria thanks to search criteria */
-        for (tmp = search->priv->search_constraints; tmp; tmp = g_slist_next (tmp)) {
-                search_constraint = tmp->data;
+        /* Split on spaces to have multiple filters */
+        cmp_str = g_strsplit (gtk_entry_get_text (GTK_ENTRY (search->priv->entry)), " ", -1);
+        if (!cmp_str)
+                return;
 
-                atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
-                gtk_combo_box_get_active_iter (GTK_COMBO_BOX (search_constraint->combo_box), &iter);
-                gtk_tree_model_get (GTK_TREE_MODEL (search->priv->list_store),
-                                    &iter,
-                                    1, &atomic_criteria->tag,
-                                    -1);
-                atomic_criteria->value = (gchar *) gtk_entry_get_text (GTK_ENTRY (search_constraint->entry));
-                criteria = g_slist_append (criteria, atomic_criteria);
+        /* Loop on every filter */
+        for (i = 0; cmp_str[i]; ++i) {
+                /* Only keep words of at least 3 chars for performance reasons */
+                if (g_utf8_collate (cmp_str[i], "")
+                    && strlen(cmp_str[i]) > 2)
+                {
+                        atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
+                        atomic_criteria->tag = ARIO_TAG_ANY;
+                        atomic_criteria->value = g_strdup(cmp_str[i]);
+                        criteria = g_slist_append (criteria, atomic_criteria);
+                }
         }
+        g_strfreev (cmp_str);
+
+        /* Clear song list */
+        liststore = ario_songlist_get_liststore (ARIO_SONGLIST (search->priv->searchs));
+        gtk_list_store_clear (liststore);
+
+        if (!criteria)
+                return;
 
         /* Get songs corresponding to criteria */
         songs = ario_server_get_songs (criteria, FALSE);
 
         g_slist_foreach (criteria, (GFunc) g_free, NULL);
         g_slist_free (criteria);
-
-        /* Clear song list */
-        liststore = ario_songlist_get_liststore (ARIO_SONGLIST (search->priv->searchs));
-        gtk_list_store_clear (liststore);
 
         /* For each retrieved song */
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
