@@ -95,6 +95,7 @@ static gboolean ario_shell_window_state_cb (GtkWidget *widget,
 static void ario_shell_sync_window_state (ArioShell *shell);
 static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_server (ArioShell *shell);
+static void ario_shell_sync_control (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                               ArioShell *shell);
 static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
@@ -606,12 +607,15 @@ ario_shell_show (ArioShell *shell,
         if (ario_conf_get_boolean (PREF_AUTOCONNECT, PREF_AUTOCONNECT_DEFAULT))
                 ario_server_connect ();
 
-        /* Synchonize the main window with server state */
-        ario_shell_sync_server (shell);
-
         /* Show main window */
         gtk_widget_show_all (GTK_WIDGET(shell));
         shell->priv->shown = TRUE;
+
+        /* Synchronize control menu */
+        ario_shell_sync_control (shell);
+
+        /* Synchonize the main window with server state */
+        ario_shell_sync_server (shell);
 
         /* Synchronize vpaned with preferences */
         ario_shell_sync_paned (shell);
@@ -845,6 +849,9 @@ ario_shell_server_state_changed_cb (ArioServer *server,
 
         /* Change window title on song change */
         ario_shell_server_song_set_title (shell);
+
+        /* Synchronize control menu */
+        ario_shell_sync_control (shell);
 }
 
 static void
@@ -984,14 +991,19 @@ ario_shell_sync_server (ArioShell *shell)
         gboolean is_playing;
         GtkAction *action;
 
-        /* Set connect entry visibility */
+        /* Set connect entry visibility 
+         * I don't know why but I need to first force visibility to TRUE otherwise
+         * the FALSE value is not taken into account at program startup
+         */
         connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                                       "FileConnect");
+        gtk_action_set_visible (connect_action, TRUE);
         gtk_action_set_visible (connect_action, !shell->priv->connected);
 
         /* Set disconnect entry visibility */
         disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                                          "FileDisconnect");
+        gtk_action_set_visible (disconnect_action, TRUE);
         gtk_action_set_visible (disconnect_action, shell->priv->connected);
 
         is_playing = ((shell->priv->connected)
@@ -1017,6 +1029,29 @@ ario_shell_sync_server (ArioShell *shell)
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ToolAddSimilar");
         gtk_action_set_sensitive (action, is_playing);
+}
+
+static void
+ario_shell_sync_control (ArioShell *shell)
+{
+        ARIO_LOG_FUNCTION_START;
+        GtkAction *action;
+        int state = ario_server_get_current_state ();
+
+        /* Set Play entry visibility 
+         * I don't know why but I need to first force visibility to TRUE otherwise
+         * the FALSE value is not taken into account at program startup
+         */
+        action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                              "ControlPlay");
+        gtk_action_set_visible (action, TRUE);
+        gtk_action_set_visible (action, state != ARIO_STATE_PLAY);
+
+        /* Set Pause entry visibility */
+        action = gtk_action_group_get_action (shell->priv->actiongroup,
+                                              "ControlPause");
+        gtk_action_set_visible (action, TRUE);
+        gtk_action_set_visible (action, state == ARIO_STATE_PLAY);
 }
 
 static void
