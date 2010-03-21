@@ -196,6 +196,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->prev_button),
                                      _("Play previous song"));
+        gtk_widget_set_can_focus (header->priv->prev_button, FALSE);
 
         /* Construct button images */
         header->priv->play_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PLAY,
@@ -206,17 +207,15 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                                               GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (header->priv->pause_image);
         gtk_widget_show (header->priv->pause_image);
-
         header->priv->play_pause_button = gtk_button_new ();
-
         gtk_container_add (GTK_CONTAINER (header->priv->play_pause_button), header->priv->pause_image);
-
         g_signal_connect_swapped (header->priv->play_pause_button,
                                   "clicked",
                                   G_CALLBACK (ario_header_playpause),
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->play_pause_button),
                                      _("Play/Pause the music"));
+        gtk_widget_set_can_focus (header->priv->play_pause_button, FALSE);
 
         /* Construct stop button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_STOP,
@@ -229,6 +228,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->stop_button),
                                      _("Stop the music"));
+        gtk_widget_set_can_focus (header->priv->stop_button, FALSE);
 
         /* Construct next button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_NEXT,
@@ -241,6 +241,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->next_button),
                                      _("Play next song"));
+        gtk_widget_set_can_focus (header->priv->next_button, FALSE);
 
         /* Construct cover display */
         cover_event_box = gtk_event_box_new ();
@@ -323,6 +324,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->random_button),
                                      _("Toggle random on/off"));
+        gtk_widget_set_can_focus (header->priv->random_button, FALSE);
 
         /* Construct repeat button */
         image = gtk_image_new_from_stock ("repeat",
@@ -335,6 +337,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->repeat_button),
                                      _("Toggle repeat on/off"));
+        gtk_widget_set_can_focus (header->priv->repeat_button, FALSE);
 
         /* Construct volume button */
         header->priv->volume_button = GTK_WIDGET (ario_volume_new ());

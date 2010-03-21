@@ -73,6 +73,10 @@ static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 static void ario_shell_cmd_lyrics (GtkAction *action,
                                    ArioShell *shell);
+static void ario_shell_cmd_previous_tab (GtkAction *action,
+                                         ArioShell *shell);
+static void ario_shell_cmd_next_tab (GtkAction *action,
+                                     ArioShell *shell);
 static void ario_shell_cmd_cover_select (GtkAction *action,
                                          ArioShell *shell);
 static void ario_shell_cmd_covers (GtkAction *action,
@@ -185,6 +189,12 @@ static GtkActionEntry shell_actions [] =
         { "ToolAddSimilar", GTK_STOCK_ADD, N_("Add similar songs to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_add_similar) },
+        { "ViewGoPrevious", GTK_STOCK_GO_BACK, N_("Go to _previous tab"), "<control>Page_Up",
+                NULL,
+                G_CALLBACK (ario_shell_cmd_previous_tab) },
+        { "ViewGoNext", GTK_STOCK_GO_FORWARD, N_("Go to _next tab"), "<control>Page_Down",
+                NULL,
+                G_CALLBACK (ario_shell_cmd_next_tab) },
         { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
@@ -682,7 +692,7 @@ ario_shell_set_visibility (ArioShell *shell,
                         /* Restore vpaned position
                          * This is in a g_timeout_add because there seems to have a bug (#2798748) if I call 
                          * ario_shell_sync_paned directly. I really don't understand why but this seems to work...*/
-                         g_timeout_add (100, (GSourceFunc) ario_shell_sync_paned, shell);
+                        g_timeout_add (100, (GSourceFunc) ario_shell_sync_paned, shell);
                 } else {
                         /* Save window state, size and position */
                         shell->priv->maximized = ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT);
@@ -761,6 +771,22 @@ ario_shell_cmd_lyrics (GtkAction *action,
         lyrics = ario_shell_lyrics_new ();
         if (lyrics)
                 gtk_widget_show_all (lyrics);
+}
+
+static void
+ario_shell_cmd_previous_tab (GtkAction *action,
+                             ArioShell *shell)
+{
+        gtk_widget_grab_focus (shell->priv->sourcemanager);
+        gtk_notebook_prev_page (GTK_NOTEBOOK (shell->priv->sourcemanager));
+}
+
+static void
+ario_shell_cmd_next_tab (GtkAction *action,
+                         ArioShell *shell)
+{
+        gtk_widget_grab_focus (shell->priv->sourcemanager);
+        gtk_notebook_next_page (GTK_NOTEBOOK (shell->priv->sourcemanager));
 }
 
 static void
