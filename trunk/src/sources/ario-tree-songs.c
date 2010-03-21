@@ -48,6 +48,7 @@ enum
         SONG_CRITERIA_COLUMN,
         SONG_TRACK_COLUMN,
         SONG_FILENAME_COLUMN,
+        SONG_CD_COLUMN,
         SONG_N_COLUMN
 };
 
@@ -76,6 +77,48 @@ static void
 ario_tree_songs_init (ArioTreeSongs *tree)
 {
         ARIO_LOG_FUNCTION_START;
+}
+
+static gint
+ario_tree_songs_sort_func (GtkTreeModel *model,
+                           GtkTreeIter *a,
+                           GtkTreeIter *b,
+                           ArioTreeSongs *tree)
+{
+        gchar *atrack, *btrack;
+        gchar *adisc, *bdisc;
+        int ret;
+
+        /* Get info about frist song */
+        gtk_tree_model_get (model, a,
+                            SONG_TRACK_COLUMN, &atrack,
+                            SONG_CD_COLUMN, &adisc,
+                            -1);
+
+        /* Get info about second song */
+        gtk_tree_model_get (model, b,
+                            SONG_TRACK_COLUMN, &btrack,
+                            SONG_CD_COLUMN, &bdisc,
+                            -1);
+
+        /* Songs with no disc set are at the end */
+        if (adisc && !bdisc)
+                ret = -1;
+        else if (bdisc && !adisc)
+                ret = 1;
+        else if (adisc && bdisc) {
+                /* Compare disc of the two albums */
+                ret = g_utf8_collate (adisc, bdisc);
+                if (ret == 0) {
+                        /* Disc is the same, sort songs by track */
+                        ret = ario_util_strcmp (atrack, btrack);
+                }
+        } else {
+                /* No dsic is set, sort songs by track */
+                ret = ario_util_strcmp (atrack, btrack);
+        }
+
+        return ret;
 }
 
 static void
@@ -111,10 +154,16 @@ ario_tree_songs_build_tree (ArioTree *parent_tree,
                                                  G_TYPE_STRING,
                                                  G_TYPE_POINTER,
                                                  G_TYPE_STRING,
+                                                 G_TYPE_STRING,
                                                  G_TYPE_STRING);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (tree->parent.model),
                                               SONG_TRACK_COLUMN,
                                               GTK_SORT_ASCENDING);
+        gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (tree->parent.model),
+                                         SONG_TRACK_COLUMN,
+                                         (GtkTreeIterCompareFunc) ario_tree_songs_sort_func,
+                                         tree,
+                                         NULL);
 }
 
 static void
@@ -142,6 +191,7 @@ ario_tree_songs_add_next_songs (ArioTreeSongs *tree,
                                     SONG_CRITERIA_COLUMN, criteria,
                                     SONG_TRACK_COLUMN, track,
                                     SONG_FILENAME_COLUMN, song->file,
+                                    SONG_CD_COLUMN, song->disc,
                                     -1);
         }
 }
