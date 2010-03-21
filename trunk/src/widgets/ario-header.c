@@ -177,6 +177,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         GtkTargetEntry *target_entry;
         gint n_elem;
         GtkWidget *image, *hbox, *right_hbox, *vbox, *alignment;
+        GList *focus = NULL;
 
         klass = ARIO_HEADER_CLASS (g_type_class_peek (TYPE_ARIO_HEADER));
 
@@ -196,7 +197,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->prev_button),
                                      _("Play previous song"));
-        gtk_widget_set_can_focus (header->priv->prev_button, FALSE);
 
         /* Construct button images */
         header->priv->play_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PLAY,
@@ -215,7 +215,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->play_pause_button),
                                      _("Play/Pause the music"));
-        gtk_widget_set_can_focus (header->priv->play_pause_button, FALSE);
 
         /* Construct stop button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_STOP,
@@ -228,7 +227,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->stop_button),
                                      _("Stop the music"));
-        gtk_widget_set_can_focus (header->priv->stop_button, FALSE);
 
         /* Construct next button */
         image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_NEXT,
@@ -241,7 +239,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->next_button),
                                      _("Play next song"));
-        gtk_widget_set_can_focus (header->priv->next_button, FALSE);
 
         /* Construct cover display */
         cover_event_box = gtk_event_box_new ();
@@ -324,7 +321,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->random_button),
                                      _("Toggle random on/off"));
-        gtk_widget_set_can_focus (header->priv->random_button, FALSE);
 
         /* Construct repeat button */
         image = gtk_image_new_from_stock ("repeat",
@@ -337,7 +333,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                   header);
         gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->repeat_button),
                                      _("Toggle repeat on/off"));
-        gtk_widget_set_can_focus (header->priv->repeat_button, FALSE);
 
         /* Construct volume button */
         header->priv->volume_button = GTK_WIDGET (ario_volume_new ());
@@ -395,6 +390,10 @@ ario_header_constructor (GType type, guint n_construct_properties,
         alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
         gtk_container_add (GTK_CONTAINER (alignment), right_hbox);
         gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 0);
+
+        /* Set focus chain */
+        focus = g_list_append (focus, header->priv->scale);
+        gtk_container_set_focus_chain (GTK_CONTAINER (header), focus);
 
         return G_OBJECT (header);
 }
