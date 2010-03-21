@@ -205,6 +205,7 @@ typedef enum
         PLAYLIST_ADD,
         PLAYLIST_ADD_PLAY,
         PLAYLIST_REPLACE,
+        PLAYLIST_ADD_AFTER_PLAYING,
         PLAYLIST_N_BEHAVIOR
 } PlaylistAction;
 
