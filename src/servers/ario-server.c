@@ -884,17 +884,25 @@ ario_server_playlist_add_songs (const GSList *songs,
         ARIO_LOG_FUNCTION_START;
         const GSList *tmp;
         int end;
+        int song_pos = pos;
 
         /* Start playing if needed */
         if (action == PLAYLIST_REPLACE)  {
                 ario_server_clear ();
         }
 
+        /* Get current song position */
+        if (action == PLAYLIST_ADD_AFTER_PLAYING
+            && (interface->state == ARIO_STATE_PLAY
+                || interface->state == ARIO_STATE_PAUSE))  {
+                song_pos = ario_server_get_current_song()->pos;
+        }
+
         end = ario_server_get_current_playlist_length ();
 
-        if (pos >= 0) {
+        if (song_pos >= 0) {
                 /* Insert songs at a given position */
-                ario_server_insert_at (songs, pos);
+                ario_server_insert_at (songs, song_pos);
         } else {
                 /* For each filename :*/
                 for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
