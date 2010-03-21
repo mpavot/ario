@@ -933,7 +933,17 @@ ario_playlist_state_changed_cb (ArioServer *server,
                                 ArioPlaylist *playlist)
 {
         ARIO_LOG_FUNCTION_START;
+        static gboolean first_run = TRUE;
+
+        /* Synchronise song information */
         ario_playlist_sync_song ();
+
+        /* Set focus to playlist at first start */
+        if (first_run
+            && ario_server_is_connected()) {
+                gtk_widget_grab_focus (playlist->priv->tree);
+                first_run = FALSE;
+        }
 }
 
 static void

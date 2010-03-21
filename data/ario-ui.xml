@@ -33,6 +33,9 @@
                         <separator/>
                         <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
                         <separator/>
+                        <menuitem name="ViewGoPreviousMenu" action="ViewGoPrevious"/>
+                        <menuitem name="ViewGoNextManu" action="ViewGoNext"/>
+                        <separator/>
                         <menuitem name="LyricsMenu" action="ViewLyrics"/>
                         <placeholder name="ViewMenuPluginPlaceholder" />
                 </menu>
