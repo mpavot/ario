@@ -98,7 +98,7 @@ ario_tree_albums_sort_func (GtkTreeModel *model,
                             ALBUM_ALBUM_COLUMN, &aalbum,
                             -1);
 
-        /* Get infoabout second album */
+        /* Get info about second album */
         gtk_tree_model_get (model, b,
                             ALBUM_ALBUM_COLUMN, &balbum,
                             -1);
