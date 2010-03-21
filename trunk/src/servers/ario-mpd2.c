@@ -41,8 +41,8 @@
 #define RECONNECT_INIT_TIMEOUT 500
 /* Multiply reconnection timeout by 2 after each tentative */
 #define RECONNECT_FACTOR 2
-/* Try to reconnect 5 times */
-#define RECONNECT_TENTATIVES 5
+/* Reconnect timeout will never exceed 8 seconds */
+#define RECONNECT_MAXIMUM_TIMEOUT 8000
 
 static void ario_mpd_finalize (GObject *object);
 static gboolean ario_mpd_connect_to (ArioMpd *mpd,
@@ -599,10 +599,10 @@ ario_mpd_try_reconnect (gpointer data)
         ARIO_LOG_FUNCTION_START;
         ario_server_connect ();
 
-        if (!instance->priv->connection
-            && instance->priv->reconnect_time <= RECONNECT_TENTATIVES) {
+        if (!instance->priv->connection) {
                 /* Try to reconnect */
-                ++instance->priv->reconnect_time;
+                if (RECONNECT_INIT_TIMEOUT * instance->priv->reconnect_time * RECONNECT_FACTOR < RECONNECT_MAXIMUM_TIMEOUT)
+                        ++instance->priv->reconnect_time;
                 g_timeout_add (RECONNECT_INIT_TIMEOUT * instance->priv->reconnect_time * RECONNECT_FACTOR,
                                ario_mpd_try_reconnect, NULL);
         }
