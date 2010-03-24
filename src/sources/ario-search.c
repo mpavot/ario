@@ -47,7 +47,7 @@ static void ario_search_entry_clear (GtkEntry *entry,
                                      GtkEntryIconPosition icon_pos,
                                      GdkEvent *event,
                                      ArioSearch *search);
-static void ario_search_do_search (ArioSearch *search);
+static gboolean ario_search_do_search (ArioSearch *search);
 
 struct ArioSearchPrivate
 {
@@ -58,6 +58,8 @@ struct ArioSearchPrivate
 
         gboolean connected;
         GtkUIManager *ui_manager;
+
+        guint event_id;
 };
 
 /* Actions */
@@ -263,7 +265,9 @@ ario_search_entry_changed (GtkEntry *entry,
                            ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
-        ario_search_do_search (search);
+        if (search->priv->event_id > 0)
+                g_source_remove (search->priv->event_id);
+        search->priv->event_id = g_timeout_add (500, (GSourceFunc) ario_search_do_search, search);
 }
 
 static void
@@ -277,7 +281,7 @@ ario_search_entry_clear (GtkEntry *entry,
         gtk_entry_set_text (GTK_ENTRY (search->priv->entry), "");
 }
 
-static void
+static gboolean
 ario_search_do_search (ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
@@ -295,7 +299,7 @@ ario_search_do_search (ArioSearch *search)
         /* Split on spaces to have multiple filters */
         cmp_str = g_strsplit (gtk_entry_get_text (GTK_ENTRY (search->priv->entry)), " ", -1);
         if (!cmp_str)
-                return;
+                return FALSE;
 
         /* Loop on every filter */
         for (i = 0; cmp_str[i]; ++i) {
@@ -316,7 +320,7 @@ ario_search_do_search (ArioSearch *search)
         gtk_list_store_clear (liststore);
 
         if (!criteria)
-                return;
+                return FALSE;
 
         /* Get songs corresponding to criteria */
         songs = ario_server_get_songs (criteria, FALSE);
@@ -340,6 +344,8 @@ ario_search_do_search (ArioSearch *search)
         }
         g_slist_foreach (songs, (GFunc) ario_server_free_song, NULL);
         g_slist_free (songs);
+
+        return FALSE;
 }
 #endif  /* ENABLE_SEARCH */
 
