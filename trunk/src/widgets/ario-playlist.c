@@ -136,7 +136,7 @@ static GtkActionEntry ario_playlist_actions [] =
         { "PlaylistShuffle", GTK_STOCK_REFRESH, N_("_Shuffle"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_shuffle) },
-        { "PlaylistCrop", GTK_STOCK_CUT, N_("Cr_op"), NULL,
+        { "PlaylistCrop", GTK_STOCK_CUT, N_("Cr_op"), "<control>P",
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_crop) },
         { "PlaylistSearch", GTK_STOCK_FIND, N_("_Search in playlist"), NULL,

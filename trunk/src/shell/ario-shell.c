@@ -159,7 +159,7 @@ static GtkActionEntry shell_actions [] =
         { "Tool", NULL, N_("_Tool"), NULL, NULL, NULL },
         { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
-        { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>C",
+        { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>E",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_connect) },
         { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), "<control>D",
