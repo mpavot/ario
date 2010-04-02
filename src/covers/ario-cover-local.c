@@ -34,18 +34,6 @@ gboolean ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                                       GSList **file_contents,
                                       ArioCoverProviderOperation operation);
 
-static const char *valid_cover_names[] = {
-        "folder.png",
-        ".folder.png",
-        "cover.png",
-        "front.png",
-        "folder.jpg",
-        ".folder.jpg",
-        "cover.jpg",
-        "front.jpg",
-        NULL
-};
-
 G_DEFINE_TYPE (ArioCoverLocal, ario_cover_local, ARIO_TYPE_COVER_PROVIDER)
 
 static gchar *
@@ -100,9 +88,10 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
 {
         ARIO_LOG_FUNCTION_START;
         gchar *musicdir;
-        gchar *filename;
-        int i;
+        gchar *path;
+        const gchar *filename, *full_filename;
         gchar *data;
+        GDir * dir;
         gsize size;
         gboolean ret = FALSE;
         gboolean ret2;
@@ -111,26 +100,30 @@ ario_cover_local_get_covers (ArioCoverProvider *cover_provider,
                 return FALSE;
         musicdir = ario_profiles_get_current (ario_profiles_get ())->musicdir;
         if (musicdir && strlen (musicdir) > 1) {
-                for (i = 0; valid_cover_names[i]; i++) {
-                        filename = g_build_filename (musicdir, file, valid_cover_names[i], NULL);
-                        if (ario_util_uri_exists (filename)) {
-                                ret2 = ario_file_get_contents (filename,
-                                                               &data,
-                                                               &size,
-                                                               NULL);
-                                if (ret2 && ario_cover_size_is_valid (size)) {
-                                        /* If the cover is not too big and not too small (blank image), we append it to file_contents */
-                                        g_array_append_val (*file_size, size);
-                                        *file_contents = g_slist_append (*file_contents, data);
-                                        /* If at least one cover is found, we return OK */
-                                        ret = TRUE;
-                                        if (operation == GET_FIRST_COVER) {
-                                                g_free (filename);
-                                                break;
+                path = g_build_filename (musicdir, file, NULL);
+                dir = g_dir_open (path, 0, NULL);
+                if (dir) {
+                        while ((filename = g_dir_read_name (dir))) {
+                                if (strlen (filename) > 4
+                                    && (g_str_has_suffix (filename, "png")
+                                        ||g_str_has_suffix (filename, "jpg"))) {
+                                        full_filename = g_build_filename (path, filename, NULL);
+                                        ret2 = ario_file_get_contents (full_filename,
+                                                                       &data,
+                                                                       &size,
+                                                                       NULL);
+                                        if (ret2 && ario_cover_size_is_valid (size)) {
+                                                /* If the cover is not too big and not too small (blank image), we append it to file_contents */
+                                                g_array_append_val (*file_size, size);
+                                                *file_contents = g_slist_append (*file_contents, data);
+                                                /* If at least one cover is found, we return OK */
+                                                ret = TRUE;
+                                                if (operation == GET_FIRST_COVER)
+                                                        break;
                                         }
                                 }
                         }
-                        g_free (filename);
+                        g_dir_close (dir);
                 }
         }
 
