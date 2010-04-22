@@ -56,7 +56,7 @@ static gboolean ario_mpd_check_errors (void);
 static gboolean ario_mpd_is_connected (void);
 static GSList * ario_mpd_list_tags (const ArioServerTag tag,
                                     const ArioServerCriteria *criteria);
-static gboolean ario_mpd_album_is_present (const GSList *albums,
+static gboolean ario_mpd_album_is_present (GHashTable *albums,
                                            const char *album);
 static GSList * ario_mpd_get_albums (const ArioServerCriteria *criteria);
 static GSList * ario_mpd_get_songs (const ArioServerCriteria *criteria,
@@ -707,34 +707,29 @@ ario_mpd_list_tags (const ArioServerTag server_tag,
 }
 
 static gboolean
-ario_mpd_album_is_present (const GSList *albums,
+ario_mpd_album_is_present (GHashTable *albums,
                            const char *album)
 {
         ARIO_LOG_FUNCTION_START;
-        const GSList *tmp;
-        ArioServerAlbum *mpd_album;
-
-        for (tmp = albums; tmp; tmp = g_slist_next (tmp)) {
-                mpd_album = tmp->data;
-                if (!g_utf8_collate (album, mpd_album->album)) {
-                        return TRUE;
-                }
-        }
-        return FALSE;
+        return g_hash_table_lookup (albums, album) != NULL;
 }
 
 static GSList *
 ario_mpd_get_albums (const ArioServerCriteria *criteria)
 {
         ARIO_LOG_FUNCTION_START;
-        GSList *albums = NULL;
+        GHashTable *albums;
         const GSList *tmp;
+        GList *values;
+        GSList *result = NULL;
         struct mpd_song *song;
         ArioServerAlbum *mpd_album;
         ArioServerAtomicCriteria *atomic_criteria;
 
         if (ario_mpd_command_preinvoke ())
                 return NULL;
+
+        albums = g_hash_table_new (g_str_hash, g_str_equal);
 
         if (!criteria) {
                 mpd_send_list_all_meta (instance->priv->connection, "/");
@@ -801,7 +796,7 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
                 else
                         mpd_album->date = NULL;
 
-                albums = g_slist_append (albums, mpd_album);
+                g_hash_table_insert (albums, mpd_album->album, (gpointer) mpd_album);
 
                 mpd_song_free (song);
         }
@@ -809,7 +804,16 @@ ario_mpd_get_albums (const ArioServerCriteria *criteria)
 
         ario_mpd_command_postinvoke ();
 
-        return albums;
+        for (values = g_hash_table_get_values (albums); values; values = g_list_next (values))
+                result = g_slist_append (result, values->data);
+
+        /*
+         * we don't need to free neither the keys nor the values since
+         * they are returned within the resulting list
+         */
+        g_hash_table_destroy (albums);
+
+        return result;
 }
 
 static ArioServerSong *
