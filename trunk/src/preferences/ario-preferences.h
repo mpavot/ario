@@ -250,7 +250,7 @@
 
 /* The different lists used in the library browser (0 for artist, 1 for album, 2 for title...) */
 #define PREF_BROWSER_TREES                      "browser-trees"
-#define PREF_BROWSER_TREES_DEFAULT              "0,1,2"
+#define PREF_BROWSER_TREES_DEFAULT              "0,1,3"
 
 /* If true, Ario asks to SERVER to update the database when it is started */
 #define PREF_UPDATE_STARTUP                     "update-startup"
