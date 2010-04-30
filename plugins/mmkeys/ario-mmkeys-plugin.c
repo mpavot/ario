@@ -99,8 +99,7 @@ impl_activate (ArioPlugin *pl,
                                                                  "/org/gnome/SettingsDaemon/MediaKeys",
                                                                  "org.gnome.SettingsDaemon.MediaKeys");
                 if (!plugin->priv->proxy) {
-                        g_warning ("Unable to grab media player keys: %s", error->message);
-                        g_error_free (error);
+                        g_warning ("Unable to grab media player keys");
                 } else {
                         dbus_g_proxy_call (plugin->priv->proxy,
                                            "GrabMediaPlayerKeys", &error,
