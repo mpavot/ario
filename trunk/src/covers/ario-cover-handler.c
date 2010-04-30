@@ -271,11 +271,11 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                         if (!cover_handler->priv->pixbuf
                             && should_get
                             && ario_conf_get_boolean (PREF_AUTOMATIC_GET_COVER, PREF_AUTOMATIC_GET_COVER_DEFAULT)) {
-                                data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
-                                data->artist = g_strdup (artist);
-                                data->album = g_strdup (album);
                                 if (ario_server_get_current_song_path ())
                                 {
+                                        data = (ArioCoverHandlerData *) g_malloc0 (sizeof (ArioCoverHandlerData));
+                                        data->artist = g_strdup (artist);
+                                        data->album = g_strdup (album);
                                         data->path = g_path_get_dirname (ario_server_get_current_song_path ());
                                         g_async_queue_push (cover_handler->priv->queue, data);
 
