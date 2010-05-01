@@ -35,7 +35,6 @@
 
 struct _ArioInformationPluginPrivate
 {
-        guint ui_merge_id;
         GtkWidget *source;
 };
 
