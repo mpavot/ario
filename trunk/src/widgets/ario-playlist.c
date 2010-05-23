@@ -258,18 +258,42 @@ static const GtkTargetEntry internal_targets  [] = {
 };
 
 #define ARIO_PLAYLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST, ArioPlaylistPrivate))
-G_DEFINE_TYPE (ArioPlaylist, ario_playlist, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioPlaylist, ario_playlist, ARIO_TYPE_SOURCE)
+
+static gchar *
+ario_playlist_get_id (ArioSource *source)
+{
+        return "playlist";
+}
+
+static gchar *
+ario_playlist_get_name (ArioSource *source)
+{
+        return _("Playlist");
+}
+
+static gchar *
+ario_playlist_get_icon (ArioSource *source)
+{
+        return GTK_STOCK_INDEX;
+}
 
 static void
 ario_playlist_class_init (ArioPlaylistClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
 
         /* Virtual methods */
         object_class->finalize = ario_playlist_finalize;
         object_class->set_property = ario_playlist_set_property;
         object_class->get_property = ario_playlist_get_property;
+
+        /* Virtual ArioSource methods */
+        source_class->get_id = ario_playlist_get_id;
+        source_class->get_name = ario_playlist_get_name;
+        source_class->get_icon = ario_playlist_get_icon;
 
         /* Properties */
         g_object_class_install_property (object_class,

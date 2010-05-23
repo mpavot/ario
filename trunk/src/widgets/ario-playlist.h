@@ -21,6 +21,7 @@
 #define __ARIO_PLAYLIST_H
 
 #include <gtk/gtk.h>
+#include "sources/ario-source.h"
 
 G_BEGIN_DECLS
 
@@ -40,14 +41,14 @@ typedef struct ArioPlaylistPrivate ArioPlaylistPrivate;
  */
 typedef struct
 {
-        GtkVBox parent;
+        ArioSource parent;
 
         ArioPlaylistPrivate *priv;
 } ArioPlaylist;
 
 typedef struct
 {
-        GtkVBoxClass parent;
+        ArioSourceClass parent;
 } ArioPlaylistClass;
 
 GType           ario_playlist_get_type          (void) G_GNUC_CONST;
