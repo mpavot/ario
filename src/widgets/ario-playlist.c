@@ -539,7 +539,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         ARIO_LOG_FUNCTION_START;
         int i;
         const gchar *column_names []  = { " ", _("Track"), _("Title"), _("Artist"), _("Album"), _("Duration"), _("File"), _("Genre"), _("Date"), _("Disc") };
-        GtkWidget *image, *close_button;
+        GtkWidget *image, *close_button, *vbox;
         GtkScrolledWindow *scrolled_window;
 
         /* Attributes initialization */
@@ -549,6 +549,9 @@ ario_playlist_init (ArioPlaylist *playlist)
         playlist->priv->pos = -1;
         playlist->priv->playlist_length = 0;
         playlist->priv->play_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "play.png", NULL);
+
+        /* Create main vbox */
+        vbox = gtk_vbox_new (FALSE, 0);
 
         /* Create scrolled window */
         scrolled_window = GTK_SCROLLED_WINDOW (gtk_scrolled_window_new (NULL, NULL));
@@ -680,17 +683,19 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_widget_set_no_show_all (playlist->priv->search_hbox, TRUE);
         gtk_widget_hide (playlist->priv->search_hbox);
 
-        gtk_box_set_homogeneous (GTK_BOX (playlist), FALSE);
-
         /* Add scrolled window to playlist */
-        gtk_box_pack_start (GTK_BOX (playlist),
+        gtk_box_pack_start (GTK_BOX (vbox),
                             GTK_WIDGET (scrolled_window),
                             TRUE, TRUE, 0);
 
         /* Add search box to playlist */
-        gtk_box_pack_start (GTK_BOX (playlist),
+        gtk_box_pack_start (GTK_BOX (vbox),
                             playlist->priv->search_hbox,
                             FALSE, FALSE, 0);
+
+        gtk_box_pack_start (GTK_BOX (playlist),
+                            vbox,
+                            TRUE, TRUE, 0);
 }
 
 void
