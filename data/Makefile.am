@@ -12,7 +12,10 @@ art_DATA = ario.png		\
 	   logo.png		\
 	   play.png		\
 	   shuffle.png		\
-	   repeat.png
+	   repeat.png 		\
+	   pl-below.png 	\
+	   pl-right.png 	\
+	   pl-inside.png
 
 uidir = $(pkgdatadir)/ui
 ui_DATA = ario-ui.xml \

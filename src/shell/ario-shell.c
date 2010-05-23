@@ -100,6 +100,7 @@ static void ario_shell_sync_window_state (ArioShell *shell);
 static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_server (ArioShell *shell);
 static void ario_shell_sync_control (ArioShell *shell);
+static void ario_shell_sync_playlist_position (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
                                               ArioShell *shell);
 static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
@@ -111,6 +112,8 @@ static void ario_shell_view_playlist_changed_cb (GtkAction *action,
 static void ario_shell_sync_statusbar_visibility (ArioShell *shell);
 static void ario_shell_sync_upperpart_visibility (ArioShell *shell);
 static void ario_shell_sync_playlist_visibility (ArioShell *shell);
+static void ario_shell_playlist_position_changed_cb (guint notification_id,
+                                                     ArioShell *shell);
 
 struct ArioShellPrivate
 {
@@ -118,10 +121,12 @@ struct ArioShellPrivate
         ArioPlaylistManager *playlist_manager;
         ArioNotificationManager *notification_manager;
         GtkWidget *header;
-        GtkWidget *vpaned;
+        GtkWidget *paned;
         GtkWidget *sourcemanager;
         GtkWidget *playlist;
         GtkWidget *status_bar;
+        GtkWidget *vbox;
+        GtkWidget *hbox;
 
         GtkUIManager *ui_manager;
         GtkActionGroup *actiongroup;
@@ -277,6 +282,8 @@ ario_shell_finalize (GObject *object)
 
         gtk_widget_hide (GTK_WIDGET(shell));
 
+        g_object_unref (shell->priv->playlist);
+        g_object_unref (shell->priv->sourcemanager);
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->playlist_manager);
         g_object_unref (shell->priv->notification_manager);
@@ -378,7 +385,6 @@ ario_shell_construct (ArioShell *shell,
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menubar;
         GtkWidget *separator;
-        GtkWidget *vbox;
         GtkAction *action;
         ArioFirstlaunch *firstlaunch;
 
@@ -447,14 +453,15 @@ ario_shell_construct (ArioShell *shell,
          * ---menubar
          * ---header
          * ---separator
-         * ---vpaned
-         * ------sourcemanager
-         * ------playlist
+         * ---hbox
+         * -----hpaned/vpaned
+         * -------sourcemanager
+         * -------playlist
          * ---status_bar
          */
 
         /* Create main vbox */
-        vbox = gtk_vbox_new (FALSE, 0);
+        shell->priv->vbox = gtk_vbox_new (FALSE, 0);
 
         /* Create header */
         shell->priv->header = ario_header_new ();
@@ -464,12 +471,14 @@ ario_shell_construct (ArioShell *shell,
 
         /* Create playlist */
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);
+        g_object_ref (shell->priv->playlist);
 
         /* Create source manager */
         shell->priv->sourcemanager = ario_source_manager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
+        g_object_ref (shell->priv->sourcemanager);
 
-        /* Create vpaned (separation between upper part and plyalist) */
-        shell->priv->vpaned = gtk_vpaned_new ();
+        /* Create the hbox(for tabs and playlist) */
+        shell->priv->hbox = gtk_hbox_new (FALSE, 0);
 
         /* Create status bar */
         shell->priv->status_bar = ario_status_bar_new ();
@@ -498,38 +507,29 @@ ario_shell_construct (ArioShell *shell,
         /* Create main window menu */
         menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
 
-        /* Add widgets to vpaned */
-        gtk_paned_pack1 (GTK_PANED (shell->priv->vpaned),
-                         shell->priv->sourcemanager,
-                         FALSE, FALSE);
-
-        gtk_paned_pack2 (GTK_PANED (shell->priv->vpaned),
-                         shell->priv->playlist,
-                         TRUE, FALSE);
-
         /* Add widgets to vbox */
-        gtk_box_pack_start (GTK_BOX (vbox),
+        gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
                             menubar,
                             FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox),
+        gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
                             shell->priv->header,
                             FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox),
+        gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
                             separator,
                             FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox),
-                            shell->priv->vpaned,
+        gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
+                            shell->priv->hbox,
                             TRUE, TRUE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox),
+        gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
                             shell->priv->status_bar,
                             FALSE, FALSE, 0);
 
         /* Add vbox to main window */
-        gtk_container_add (GTK_CONTAINER (shell), vbox);
+        gtk_container_add (GTK_CONTAINER (shell), shell->priv->vbox);
 
         /* First launch assistant */
         if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {
@@ -564,9 +564,11 @@ ario_shell_shutdown (ArioShell *shell)
 
         /* If the main window is visible, we save a few preferences */
         if (shell->priv->shown) {
-                /* Save vpaned position */
-                ario_conf_set_integer (PREF_VPANED_POSITION,
-                                       gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
+                if (shell->priv->paned) {
+                        /* Save paned position */
+                        ario_conf_set_integer (PREF_VPANED_POSITION,
+                                               gtk_paned_get_position (GTK_PANED (shell->priv->paned)));
+                }
 
                 /* Save window size */
                 if (!ario_conf_get_boolean (PREF_WINDOW_MAXIMIZED, PREF_WINDOW_MAXIMIZED_DEFAULT)) {
@@ -627,7 +629,10 @@ ario_shell_show (ArioShell *shell,
         /* Synchonize the main window with server state */
         ario_shell_sync_server (shell);
 
-        /* Synchronize vpaned with preferences */
+        /* Synchronize playlist position with preferences */
+        ario_shell_sync_playlist_position (shell);
+
+        /* Synchronize paned with preferences */
         ario_shell_sync_paned (shell);
 
         /* Minimize window if needed */
@@ -644,6 +649,11 @@ ario_shell_show (ArioShell *shell,
         /* Update server db on startup if needed */
         if (ario_conf_get_boolean (PREF_UPDATE_STARTUP, PREF_UPDATE_STARTUP_DEFAULT))
                 ario_server_update_db (NULL);
+
+        /* Notification for trees configuration changes */
+        ario_conf_notification_add (PREF_PLAYLIST_POSITION,
+                                    (ArioNotifyFunc) ario_shell_playlist_position_changed_cb,
+                                    shell);
 }
 
 void
@@ -689,7 +699,7 @@ ario_shell_set_visibility (ArioShell *shell,
                                 gtk_window_maximize (GTK_WINDOW (shell));
                         gtk_widget_show (GTK_WIDGET(shell));
 
-                        /* Restore vpaned position
+                        /* Restore paned position
                          * This is in a g_timeout_add because there seems to have a bug (#2798748) if I call 
                          * ario_shell_sync_paned directly. I really don't understand why but this seems to work...*/
                         g_timeout_add (100, (GSourceFunc) ario_shell_sync_paned, shell);
@@ -703,9 +713,9 @@ ario_shell_set_visibility (ArioShell *shell,
                                              &shell->priv->window_w,
                                              &shell->priv->window_h);
 
-                        /* Save vpaned position */
+                        /* Save paned position */
                         ario_conf_set_integer (PREF_VPANED_POSITION,
-                                               gtk_paned_get_position (GTK_PANED (shell->priv->vpaned)));
+                                               gtk_paned_get_position (GTK_PANED (shell->priv->paned)));
 
                         gtk_widget_hide (GTK_WIDGET(shell));
                 }
@@ -950,10 +960,10 @@ ario_shell_sync_paned (ArioShell *shell)
         ARIO_LOG_FUNCTION_START;
         int pos;
 
-        /* Set vpaned position */
+        /* Set paned position */
         pos = ario_conf_get_integer (PREF_VPANED_POSITION, PREF_VPANED_POSITION_DEFAULT);
-        if (pos > 0)
-                gtk_paned_set_position (GTK_PANED (shell->priv->vpaned),
+        if (pos > 0 && shell->priv->paned)
+                gtk_paned_set_position (GTK_PANED (shell->priv->paned),
                                         pos);
 }
 
@@ -1078,6 +1088,87 @@ ario_shell_sync_control (ArioShell *shell)
                                               "ControlPause");
         gtk_action_set_visible (action, TRUE);
         gtk_action_set_visible (action, state == ARIO_STATE_PLAY);
+}
+
+static void
+ario_shell_sync_playlist_position (ArioShell *shell)
+{
+        if (!shell->priv->playlist)
+                return;
+
+        /* Remove all widgets if playlist is in tabs */
+        int page_num = gtk_notebook_page_num (GTK_NOTEBOOK (shell->priv->sourcemanager), shell->priv->playlist);
+        if (page_num >= 0) {
+                ario_source_manager_remove (ARIO_SOURCE (shell->priv->playlist));
+                gtk_container_remove (GTK_CONTAINER (shell->priv->hbox), shell->priv->sourcemanager);
+        }
+
+        /* Remove all widgets if playlist is in a paned */
+        if (shell->priv->paned) {
+                /* Save paned position */
+                ario_conf_set_integer (PREF_VPANED_POSITION,
+                                       gtk_paned_get_position (GTK_PANED (shell->priv->paned)));
+
+                gtk_container_remove (GTK_CONTAINER (shell->priv->paned), shell->priv->playlist);
+                gtk_container_remove (GTK_CONTAINER (shell->priv->paned), shell->priv->sourcemanager);
+                gtk_container_remove (GTK_CONTAINER (shell->priv->hbox), shell->priv->paned);
+                shell->priv->paned = NULL;
+        }
+
+        switch (ario_conf_get_integer (PREF_PLAYLIST_POSITION, PREF_PLAYLIST_POSITION_DEFAULT))
+        {
+        case PLAYLIST_POSITION_BELOW:
+                /* Create paned (separation between upper part and playlist) */
+                shell->priv->paned = gtk_vpaned_new ();
+
+                /* Add widgets to paned */
+                gtk_paned_pack1 (GTK_PANED (shell->priv->paned),
+                                 shell->priv->sourcemanager,
+                                 FALSE, FALSE);
+
+                gtk_paned_pack2 (GTK_PANED (shell->priv->paned),
+                                 shell->priv->playlist,
+                                 TRUE, FALSE);
+
+                gtk_box_pack_start (GTK_BOX (shell->priv->hbox),
+                                    shell->priv->paned,
+                                    TRUE, TRUE, 0);
+                gtk_widget_show_all (shell->priv->paned);
+
+                /* Synchronize paned with preferences */
+                ario_shell_sync_paned (shell);
+                break;
+        case PLAYLIST_POSITION_RIGHT:
+                /* Create paned (separation between left part and playlist) */
+                shell->priv->paned = gtk_hpaned_new ();
+
+                /* Add widgets to paned */
+                gtk_paned_pack1 (GTK_PANED (shell->priv->paned),
+                                 shell->priv->sourcemanager,
+                                 FALSE, FALSE);
+
+                gtk_paned_pack2 (GTK_PANED (shell->priv->paned),
+                                 shell->priv->playlist,
+                                 TRUE, FALSE);
+
+                gtk_box_pack_start (GTK_BOX (shell->priv->hbox),
+                                    shell->priv->paned,
+                                    TRUE, TRUE, 0);
+                gtk_widget_show_all (shell->priv->paned);
+
+                /* Synchronize paned with preferences */
+                ario_shell_sync_paned (shell);
+                break;
+        case PLAYLIST_POSITION_INSIDE:
+        default:
+                /* Add playlist to tabs */
+                ario_source_manager_append (ARIO_SOURCE (shell->priv->playlist));
+                gtk_box_pack_start (GTK_BOX (shell->priv->hbox),
+                                    shell->priv->sourcemanager,
+                                    TRUE, TRUE, 0);
+                gtk_widget_show_all (shell->priv->sourcemanager);
+                break;
+        }
 }
 
 static void
@@ -1211,4 +1302,11 @@ ario_shell_cmd_plugins (GtkAction *action,
         gtk_window_set_default_size (GTK_WINDOW (window), 300, 350);
 
         gtk_window_present (GTK_WINDOW (window));
+}
+
+static void
+ario_shell_playlist_position_changed_cb (guint notification_id,
+                                         ArioShell *shell)
+{
+        ario_shell_sync_playlist_position(shell);
 }

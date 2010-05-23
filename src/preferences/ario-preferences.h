@@ -272,6 +272,10 @@
 #define PREF_DYNAMIC_TYPE                      "dynamic-type"
 #define PREF_DYNAMIC_TYPE_DEFAULT              0
 
+/* Playlist position */
+#define PREF_PLAYLIST_POSITION                 "playlist-position"
+#define PREF_PLAYLIST_POSITION_DEFAULT         0
+
 enum
 {
         TRAY_ICON_PLAY_PAUSE,
@@ -286,6 +290,14 @@ enum
         SORT_ALPHABETICALLY,
         SORT_YEAR,
         SORT_N_BEHAVIOR
+};
+
+enum
+{
+        PLAYLIST_POSITION_BELOW,
+        PLAYLIST_POSITION_RIGHT,
+        PLAYLIST_POSITION_INSIDE,
+        PLAYLIST_POSITION_N_BEHAVIOR
 };
 
 #endif /* __ARIO_PREFERENCES_H */
