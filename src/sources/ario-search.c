@@ -31,6 +31,8 @@
 
 #ifdef ENABLE_SEARCH
 
+#define SEARCH_DELAY 250
+
 static void ario_search_set_property (GObject *object,
                                       guint prop_id,
                                       const GValue *value,
@@ -267,7 +269,7 @@ ario_search_entry_changed (GtkEntry *entry,
         ARIO_LOG_FUNCTION_START;
         if (search->priv->event_id > 0)
                 g_source_remove (search->priv->event_id);
-        search->priv->event_id = g_timeout_add (550, (GSourceFunc) ario_search_do_search, search);
+        search->priv->event_id = g_timeout_add (SEARCH_DELAY, (GSourceFunc) ario_search_do_search, search);
 }
 
 static void
