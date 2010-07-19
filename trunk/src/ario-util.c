@@ -697,13 +697,21 @@ ario_util_sanitize_filename (char *filename)
 {
         ARIO_LOG_FUNCTION_START;
         const char *to_strip = "#/*\"\\[]:;|=";
-        char *tmp;
+        static unsigned char translate[256];
+        static gboolean initialized = FALSE;
+        int c;
+        unsigned char *tmp;
+
+        if (!initialized) {
+                for (c = 0; c < 256; c++)
+                        translate[c] = strchr (to_strip, c)?
+                                               ' ': (unsigned char) c;
+                initialized = TRUE;
+        }
 
         /* We replace some special characters with spaces. */
-        for (tmp = filename; *tmp != '\0'; ++tmp) {
-                if (strchr (to_strip, *tmp))
-                        *tmp = ' ';
-        }
+        for (tmp = (unsigned char *) filename; *tmp != '\0'; ++tmp)
+                *tmp = translate[*tmp];
 }
 
 gboolean
