@@ -93,7 +93,7 @@ src/preferences/ario-server-preferences.c
 src/preferences/ario-server-preferences.h
 src/preferences/ario-stats-preferences.c
 src/preferences/ario-stats-preferences.h
-src/preferences/ario-trayicon-preferences.c
+src/preferences/ario-taskbar-preferences.c
 src/preferences/ario-preferences.h
 src/servers/ario-mpd.c
 src/servers/ario-mpd.h
