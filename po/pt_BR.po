@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2009-11-29 00:43+0000\n"
-"Last-Translator: Rosiney Gomes Pereira <rosiney.gp@gmail.com>\n"
+"PO-Revision-Date: 2010-05-29 22:21+0000\n"
+"Last-Translator: Mbianchi <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -23,7 +23,7 @@ msgstr "Ario Player de Música"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
-msgstr "Cliente de aplicativo para mpd"
+msgstr "Aplicativo cliente para mpd"
 
 #: ../data/ui/browser-prefs.ui.h:1
 msgid "Alphabetically"
@@ -35,7 +35,7 @@ msgstr "Por ano"
 
 #: ../data/ui/browser-prefs.ui.h:3
 msgid "Library Options"
-msgstr "Opções de Biblioteca"
+msgstr "Opções da Biblioteca"
 
 #: ../data/ui/browser-prefs.ui.h:4
 msgid "Library Organisation"
@@ -43,7 +43,7 @@ msgstr "Organização da Biblioteca"
 
 #: ../data/ui/browser-prefs.ui.h:5
 msgid "Sort albums: "
-msgstr "Classificar albuns: "
+msgstr "Ordenar álbuns: "
 
 #: ../data/ui/connection-autodetect.ui.h:1
 msgid ""
@@ -52,7 +52,7 @@ msgid ""
 "manual configuration."
 msgstr ""
 "Se você não pode ver seu servidor MPD graças à configuração automática, você "
-"deve checar qual zeroconf está ativado, em sua configuração MPD ou usar a "
+"deve checar qual zeroconf está ativado em sua configuração MPD ou usar a "
 "configuração manual."
 
 #: ../data/ui/connection-autodetect.ui.h:2
@@ -112,7 +112,7 @@ msgstr "Capas"
 
 #: ../data/ui/cover-prefs.ui.h:3
 msgid "Covers Sources"
-msgstr "Fonte das Capas"
+msgstr "Fontes das Capas"
 
 #: ../data/ui/cover-prefs.ui.h:4
 msgid "Show the covers in the albums list"
@@ -145,7 +145,7 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Você precisa especificar um servidor para conectá-lo. Se você não vê o seu "
+"Você deve especificar um servidor para se conectar. Se você não vê o seu "
 "servidor graças à detecção automática, você deveria conferir se o zeroconf / "
 "avahi está ativado no seu servidor ou usar a configuração manual."
 
@@ -175,7 +175,7 @@ msgstr "Pesquisar"
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
-msgstr "É permitida apenas uma instância do Ario"
+msgstr "Permitir apenas uma instância do Ario"
 
 #: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
@@ -207,7 +207,7 @@ msgstr "Usar um proxy"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
-msgstr "Fonte de Letras"
+msgstr "Fontes de Letras"
 
 #: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:13
 #: ../plugins/information/information.ui.h:6
@@ -215,13 +215,12 @@ msgid "Title :"
 msgstr "Título :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "_Vá para a canção em execução"
+msgstr "Adicionar depois de reproduzir"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
-msgstr ""
+msgstr "Adicionar e reproduzir"
 
 #: ../data/ui/playlist-prefs.ui.h:3 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -248,11 +247,11 @@ msgstr "Data"
 
 #: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:517
 msgid "Disc"
-msgstr ""
+msgstr "Disco"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Double click"
-msgstr ""
+msgstr "Clique duplo"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:517
 msgid "Duration"
@@ -279,7 +278,7 @@ msgstr "Modo"
 
 #: ../data/ui/playlist-prefs.ui.h:14
 msgid "On double click:"
-msgstr ""
+msgstr "Ao dar duplo clique"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:217 ../src/shell/ario-shell-preferences.c:124
@@ -288,11 +287,11 @@ msgstr "Lista de reprodução"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Playlist mode:"
-msgstr "Modo playlist:"
+msgstr "Modo da lista de reprodução"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Replace in playlist"
-msgstr ""
+msgstr "Substituir na lista de reprodução"
 
 #: ../data/ui/playlist-prefs.ui.h:18
 msgid "Show rows:"
@@ -313,7 +312,7 @@ msgstr "Faixa"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
-msgstr "Saída de áudio"
+msgstr "Saídas de áudio"
 
 #: ../data/ui/server-prefs.ui.h:2
 msgid "Crossfade"
@@ -337,7 +336,7 @@ msgstr "Atualizar ao iniciar"
 
 #: ../data/ui/server-prefs.ui.h:7
 msgid "_Update"
-msgstr "_Atualizar"
+msgstr "At_ualizar"
 
 #: ../data/ui/server-prefs.ui.h:8
 msgid "enable crossfade"
@@ -345,7 +344,7 @@ msgstr "habilitar crossfade"
 
 #: ../data/ui/server-prefs.ui.h:9
 msgid "fade time (s):"
-msgstr "tempo de fade (s):"
+msgstr "tempo(s) de fade:"
 
 #: ../data/ui/server-prefs.ui.h:10 ../src/ario-util.c:50 ../src/ario-util.c:71
 #: ../src/ario-util.c:93 ../plugins/information/information.ui.h:7
@@ -363,7 +362,7 @@ msgstr "Localizar no Last.fm"
 
 #: ../data/ui/stats-prefs.ui.h:1
 msgid "Database play time :"
-msgstr "Tempo de execução da base de dados:"
+msgstr "Tempo de execução do banco de dados:"
 
 #: ../data/ui/stats-prefs.ui.h:2
 msgid "Number of albums :"
@@ -391,11 +390,11 @@ msgstr "Uptime"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Artista do Álbum :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
-msgstr "Comentário"
+msgstr "Comentário :"
 
 #: ../data/ui/song-infos.ui.h:5
 msgid "Composer :"
@@ -439,7 +438,7 @@ msgstr "Não faça nada"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Mudo"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -590,7 +589,7 @@ msgstr ""
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Artista do Álbum"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -703,9 +702,8 @@ msgid "_View"
 msgstr "_Ver"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Conectar"
+msgstr "_Controle"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -717,7 +715,7 @@ msgstr "_Ajuda"
 
 #: ../src/shell/ario-shell.c:168
 msgid "_Update database"
-msgstr ""
+msgstr "At_ualizar banco de dados"
 
 #: ../src/shell/ario-shell.c:171
 msgid "_Quit"
@@ -749,7 +747,7 @@ msgstr "Adicionar músicas similares à lista de execução"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "Ir _para a aba anterior"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
@@ -784,6 +782,8 @@ msgstr ""
 "  Karlos Beto https://launchpad.net/~krezeberto\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Marcos https://launchpad.net/~marcosfsimon\n"
+"  Mbianchi https://launchpad.net/~m-tchelo\n"
+"  Mário Júnior https://launchpad.net/~mjr-02\n"
 "  Rafael Porto Rodrigues https://launchpad.net/~rafporto\n"
 "  Rosiney Gomes Pereira https://launchpad.net/~rosiney-gp\n"
 "  Tydor https://launchpad.net/~eduardo-tydor\n"
@@ -956,7 +956,7 @@ msgstr "C_ortar"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "Procurar a li_sta de reprodução"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1023,28 +1023,28 @@ msgstr "Hoje %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Ontem %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1197,23 +1197,23 @@ msgstr "_Apague esta rádio"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Last.fm: Rádios de artistas similares"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Grupo de rádios"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Grupo :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm: Rádio Pessoal"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Rádio de gênero"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
@@ -1272,11 +1272,11 @@ msgstr "Um plugin para encontrar o artista atual na Wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipédia"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "Adicionar um critério de busca"
-
 #~ msgid "Search songs in the library"
 #~ msgstr "Procurar músicas na biblioteca"
+
+#~ msgid "Add a search criteria"
+#~ msgstr "Adicionar um critério de busca"
 
 #~ msgid "Remove a search criteria"
 #~ msgstr "Remover um critério de busca"

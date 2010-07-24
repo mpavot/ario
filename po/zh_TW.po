@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -142,8 +142,7 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"您必須告訴我要連去哪個伺服器。若自動偵測的清單中沒有您的伺服器，請檢查伺服器"
-"上的 Zeroconf 與 Avahi 是否啟動，或是手動設定伺服器。"
+"您必須告訴我要連去哪個伺服器。若自動偵測的清單中沒有您的伺服器，請檢查伺服器上的 Zeroconf 與 Avahi 是否啟動，或是手動設定伺服器。"
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -211,9 +210,8 @@ msgid "Title :"
 msgstr "標題："
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "移至正在播放的歌曲(_G)"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -696,9 +694,8 @@ msgid "_View"
 msgstr "檢視(_V)"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "連線(_C)"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -1012,28 +1009,28 @@ msgstr "今天%p %I:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "昨天%p %I:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr ""
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr ""
@@ -1260,11 +1257,11 @@ msgstr "一個在維基百科尋找目前演出者的插件"
 msgid "Wikipedia"
 msgstr "維基百科"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "加入搜尋條件"
+#~ msgid "Remove a search criteria"
+#~ msgstr "移除搜尋條件"
 
 #~ msgid "Search songs in the library"
 #~ msgstr "在收藏中尋找歌曲"
 
-#~ msgid "Remove a search criteria"
-#~ msgstr "移除搜尋條件"
+#~ msgid "Add a search criteria"
+#~ msgstr "加入搜尋條件"

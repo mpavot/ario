@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-01-26 19:18+0000\n"
-"Last-Translator: ascenseur <joseph.odell@googlemail.com>\n"
+"PO-Revision-Date: 2010-07-05 20:24+0000\n"
+"Last-Translator: Ken Sharp <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Title :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "_Go to playing song"
+msgstr "Add after playing song"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -471,7 +470,7 @@ msgstr "Tray icon"
 
 #: ../src/ario-main.c:64
 msgid "Start minimized window"
-msgstr "Start minimized window"
+msgstr "Start minimised window"
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -560,7 +559,7 @@ msgstr "_Deactivate All"
 
 #: ../src/plugins/ario-plugin-manager.c:722
 msgid "Active plugins"
-msgstr "Active plugins"
+msgstr "Active plug-ins"
 
 #: ../src/preferences/ario-server-preferences.c:182
 #: ../src/preferences/ario-stats-preferences.c:151
@@ -700,9 +699,8 @@ msgid "_View"
 msgstr "_View"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Connect"
+msgstr "_Control"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -746,11 +744,11 @@ msgstr "Add similar songs to playlist"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "Go to _previous tab"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "Go to _next tab"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
@@ -783,6 +781,7 @@ msgstr ""
 "  Gabriel Ruiz https://launchpad.net/~anakron\n"
 "  James Nealon https://launchpad.net/~kaobear\n"
 "  Jesse Bye https://launchpad.net/~jesse-bye\n"
+"  Ken Sharp https://launchpad.net/~kennybobs\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Oliver Laub https://launchpad.net/~oliver-laub\n"
 "  bastianneumann https://launchpad.net/~bastianneu\n"
@@ -791,7 +790,7 @@ msgstr ""
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1186
 msgid "Configure Plugins"
-msgstr "Configure Plugins"
+msgstr "Configure Plug-ins"
 
 #. Set window properties
 #: ../src/shell/ario-shell-coverdownloader.c:187
@@ -1022,28 +1021,28 @@ msgstr "Today %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Yesterday %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1256,7 +1255,7 @@ msgstr "Find artist on Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:172
 msgid "Wikipedia Plugin - Configuration"
-msgstr "Wikipedia Plugin - Configuration"
+msgstr "Wikipedia Plug-in - Configuration"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia language :"
@@ -1264,7 +1263,7 @@ msgstr "Wikipedia language :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr "A plugin to search current artist on wikipedia"
+msgstr "A plug-in to search current artist on Wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
@@ -1273,8 +1272,8 @@ msgstr "Wikipedia"
 #~ msgid "Add a search criteria"
 #~ msgstr "Add a search criteria"
 
-#~ msgid "Search songs in the library"
-#~ msgstr "Search songs in the library"
-
 #~ msgid "Remove a search criteria"
 #~ msgstr "Remove a search criteria"
+
+#~ msgid "Search songs in the library"
+#~ msgstr "Search songs in the library"

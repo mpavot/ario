@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-01-24 05:09+0000\n"
-"Last-Translator: ArtemZ <zhirkow@yahoo.com>\n"
+"PO-Revision-Date: 2010-06-08 12:56+0000\n"
+"Last-Translator: Anatoliy Rykun <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -163,15 +163,15 @@ msgstr "Исполнитель :"
 
 #: ../data/ui/cover-progress.ui.h:3
 msgid "Downloading cover"
-msgstr "Закачка обложки"
+msgstr ""
 
 #: ../data/ui/cover-select.ui.h:3
 msgid "Local search"
-msgstr "Местный поиск"
+msgstr "Локальный поиск"
 
 #: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:104
 msgid "Search"
-msgstr "Поиск"
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Название :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "Воспроизвести песню"
+msgstr "Добавить после проигрывания"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -387,7 +386,7 @@ msgstr "Статистика"
 
 #: ../data/ui/stats-prefs.ui.h:7
 msgid "Uptime :"
-msgstr "Аптайм"
+msgstr "Время работы:"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
@@ -423,11 +422,11 @@ msgstr "Длительность :"
 
 #: ../data/ui/song-infos.ui.h:11
 msgid "Performer :"
-msgstr "Исполнитель :"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:12
 msgid "Song"
-msgstr "Песня"
+msgstr ""
 
 #: ../data/ui/song-infos.ui.h:14
 msgid "Track :"
@@ -439,7 +438,7 @@ msgstr "Ничего не делать"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr "Заглушить"
+msgstr ""
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -455,7 +454,7 @@ msgstr "Время уведомления: "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
-msgstr "Средний клик по иконке в трее :"
+msgstr "Щелчок средней кнопкой мыши по иконке в трее:"
 
 #: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:241
 msgid "Play next song"
@@ -700,9 +699,8 @@ msgid "_View"
 msgstr "_Вид"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "Под_ключиться"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -722,7 +720,7 @@ msgstr "_Выход"
 
 #: ../src/shell/ario-shell.c:174
 msgid "Plu_gins"
-msgstr "Мод_ули"
+msgstr "_Плагины"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Prefere_nces"
@@ -746,11 +744,11 @@ msgstr "Добавить похожие песни в список"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "На _предыдущую страницу"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "На _следующую страницу"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
@@ -776,23 +774,26 @@ msgstr "GTK клиент для MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Aleksej P. https://launchpad.net/~chaos8\n"
 "  Alexander Nasonkin https://launchpad.net/~mr.strack\n"
 "  Alexei Klimenko https://launchpad.net/~nimda7\n"
 "  Alexey Reztsov https://launchpad.net/~ariafan\n"
+"  Anatoliy Rykun https://launchpad.net/~r-damien\n"
 "  Andrey Shitov https://launchpad.net/~aa-shtv\n"
 "  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
 "  Egor Bushmelyov https://launchpad.net/~skipper95\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Mihail Abrosimov https://launchpad.net/~chaihana\n"
 "  Nick Homolibere https://launchpad.net/~homolibere\n"
 "  Pavel Dmitriev https://launchpad.net/~dmitrievp\n"
 "  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"  Serguey G Basalaev https://launchpad.net/~sbasalaev\n"
+"  Serguey Basalaev https://launchpad.net/~sbasalaev\n"
 "  melksoft https://launchpad.net/~melksoft"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1186
 msgid "Configure Plugins"
-msgstr "Настроить расширения"
+msgstr "Настройка плагинов"
 
 #. Set window properties
 #: ../src/shell/ario-shell-coverdownloader.c:187
@@ -902,7 +903,9 @@ msgstr "Подтверждение"
 #: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr "<i>из альбома </i> %s<br><i>исполняет</i> %s"
+msgstr ""
+"<i>из альбома </i> %s\r\n"
+"<i>исполняет</i> %s"
 
 #: ../src/widgets/ario-header.c:199
 msgid "Play previous song"
@@ -924,7 +927,7 @@ msgstr " из "
 
 #: ../src/widgets/ario-header.c:323
 msgid "Toggle random on/off"
-msgstr "Произвольное проигрывание включить/отключит"
+msgstr "Включить/отключить случайное воспроизведение"
 
 #: ../src/widgets/ario-header.c:335
 msgid "Toggle repeat on/off"
@@ -1023,28 +1026,28 @@ msgstr "Сегодня %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Вчера в %H:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1271,11 +1274,11 @@ msgstr "Плагин для поиска текущего артиста на wi
 msgid "Wikipedia"
 msgstr "Википедия"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "Добавить критерии поиска"
-
 #~ msgid "Search songs in the library"
 #~ msgstr "Искать песню в библиотеке"
+
+#~ msgid "Add a search criteria"
+#~ msgstr "Добавить критерии поиска"
 
 #~ msgid "Remove a search criteria"
 #~ msgstr "Удалить критерии поиска"

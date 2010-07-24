@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -216,9 +216,8 @@ msgid "Title :"
 msgstr "Titel:"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "_Gå till spela sång"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -702,9 +701,8 @@ msgid "_View"
 msgstr "_Visa"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Anslut"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -1022,28 +1020,28 @@ msgstr "Idag %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Igår %I:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %H.%M"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
@@ -1270,11 +1268,11 @@ msgstr "Ett tillägg för att söka artister på wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "Lägg till ett sökkriterium"
-
 #~ msgid "Search songs in the library"
 #~ msgstr "Sök låtar i biblioteket"
 
 #~ msgid "Remove a search criteria"
 #~ msgstr "Ta bort ett sökkriterium"
+
+#~ msgid "Add a search criteria"
+#~ msgstr "Lägg till ett sökkriterium"

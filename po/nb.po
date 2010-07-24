@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-01-19 21:55+0000\n"
-"Last-Translator: Tor Syversen <sol-moe@online.no>\n"
+"PO-Revision-Date: 2010-03-23 13:21+0000\n"
+"Last-Translator: Sulle <fredrikarlsen@hotmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -65,7 +65,7 @@ msgstr "Autooppdag"
 
 #: ../data/ui/connection-widget.ui.h:2
 msgid "Default"
-msgstr "Forvalg"
+msgstr "Standard"
 
 #: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
 msgid "Host :"
@@ -125,7 +125,7 @@ msgstr "Bruk Amazon."
 #: ../data/ui/connection-prefs.ui.h:1
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
-msgstr "Forbindelse"
+msgstr "Tilkobling"
 
 #: ../data/ui/connection-prefs.ui.h:2
 msgid "_Autoconnect on startup"
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Tittel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "_Gå til spillende sang"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -700,9 +699,8 @@ msgid "_View"
 msgstr "_Vis"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Koble til"
+msgstr ""
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -1018,28 +1016,28 @@ msgstr "I dag %H:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "I går %H:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d %b %H:%M"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1269,8 +1267,8 @@ msgstr "Wikipedia"
 #~ msgid "Add a search criteria"
 #~ msgstr "Legg til søkekriterie"
 
-#~ msgid "Search songs in the library"
-#~ msgstr "Søk gjennom sangene i biblioteket"
-
 #~ msgid "Remove a search criteria"
 #~ msgstr "Fjern et søkekriterie"
+
+#~ msgid "Search songs in the library"
+#~ msgstr "Søk gjennom sangene i biblioteket"

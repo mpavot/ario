@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: ario_ario-fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-01-19 21:54+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"PO-Revision-Date: 2010-06-06 13:59+0000\n"
+"Last-Translator: Ari Niemi <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -29,7 +29,7 @@ msgstr "MPD-asiakassovellus"
 
 #: ../data/ui/browser-prefs.ui.h:1
 msgid "Alphabetically"
-msgstr "Aakkosjärjestyksessä"
+msgstr "Aakkosittain"
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "By year"
@@ -79,7 +79,7 @@ msgstr "Musiikkihakemisto :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr ""
+msgstr "Musiikkipalvelin on samalla tietokoneella kuin Ario"
 
 #. Create the widgets
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
@@ -98,11 +98,11 @@ msgstr "Portti :"
 
 #: ../data/ui/connection-widget.ui.h:9
 msgid "Server type : "
-msgstr ""
+msgstr "Palvelimen tyyppi: "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr ""
+msgstr "XMMS 2 (Kokeellinen)"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
@@ -147,6 +147,9 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
+"Kirjoita MPD-palvelimen tiedot, johon otetaan yhteys. Jos "
+"automaattitunnistus ei löydä palvelintasi, tarkista, että zeroconf/avahi on "
+"aktivoituna palvelimessasi tai konfiguroi yhteyden tiedot manuaalisesti."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -214,13 +217,12 @@ msgid "Title :"
 msgstr "Nimi :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "_Siirry parhaillaan soitettavaan kappaleeseen"
+msgstr "Lisää soivan kappaleen jälkeen"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
-msgstr ""
+msgstr "Lisää ja soita"
 
 #: ../data/ui/playlist-prefs.ui.h:3 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -247,11 +249,11 @@ msgstr "Päivämäärä"
 
 #: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:517
 msgid "Disc"
-msgstr ""
+msgstr "Levy"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Double click"
-msgstr ""
+msgstr "Kaksoisnapsautus"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:517
 msgid "Duration"
@@ -274,11 +276,11 @@ msgstr "Siirry kappaleen vaihtuessa nykyiseen"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "Mode"
-msgstr ""
+msgstr "Tila"
 
 #: ../data/ui/playlist-prefs.ui.h:14
 msgid "On double click:"
-msgstr ""
+msgstr "Kaksoisnapsautuksella:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:217 ../src/shell/ario-shell-preferences.c:124
@@ -287,15 +289,15 @@ msgstr "Soittolista"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Playlist mode:"
-msgstr ""
+msgstr "Soittolista tila:"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Replace in playlist"
-msgstr ""
+msgstr "Korvaa soittolistalla"
 
 #: ../data/ui/playlist-prefs.ui.h:18
 msgid "Show rows:"
-msgstr "Näytä rivit:"
+msgstr "Näytä rivit"
 
 #. ARIO_TAG_ALBUM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:48
@@ -340,7 +342,7 @@ msgstr "_Päivitä"
 
 #: ../data/ui/server-prefs.ui.h:8
 msgid "enable crossfade"
-msgstr ""
+msgstr "Salli ristiinhäivytys"
 
 #: ../data/ui/server-prefs.ui.h:9
 msgid "fade time (s):"
@@ -390,7 +392,7 @@ msgstr "Jatkuva toiminta-aika :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "Albumin artisti:"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -438,7 +440,7 @@ msgstr "Älä tee mitään"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Vaimenna"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
@@ -454,7 +456,7 @@ msgstr "Ilmoituksen kesto "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
-msgstr ""
+msgstr "Painettaessa ilmoitusalueen kuvaketta keskinapilla:"
 
 #: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:241
 msgid "Play next song"
@@ -466,16 +468,16 @@ msgstr "Toista/Pysäytä"
 
 #: ../data/ui/trayicon-prefs.ui.h:9
 msgid "Tray icon"
-msgstr ""
+msgstr "Ilmoitusalueen kuvake"
 
 #: ../src/ario-main.c:64
 msgid "Start minimized window"
-msgstr ""
+msgstr "Aloita piennetystä ikkunasta"
 
 #. Format result string
 #: ../src/ario-util.c:110
 msgid "seconds"
-msgstr "sekunti;sekuntia"
+msgstr "Sekuntia"
 
 #: ../src/ario-util.c:112
 msgid "minutes"
@@ -499,47 +501,47 @@ msgstr "Musiikkihakemisto"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr ""
+msgstr "Artistin kaikki kappaleet"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr ""
+msgstr "Albumin kaikki kappaleet"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr ""
+msgstr "Samankaltaisten artistien kappaleet"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr ""
+msgstr "Artistin kaikki albumit"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr ""
+msgstr "Samankaltaisten artistien albumit"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "Dynaaminen soittolista"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "Jonotus tila"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr ""
+msgstr "Tavallinen"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "Liitännäinen"
+msgstr "Lisäosa"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 msgid "Enabled"
-msgstr "Käytössä"
+msgstr "Otettu käyttöön"
 
 #: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:201
 msgid "_About"
-msgstr "_Tietoa"
+msgstr "_Tietoja ohjelmasta"
 
 #: ../src/plugins/ario-plugin-manager.c:488
 msgid "C_onfigure"
@@ -583,12 +585,12 @@ msgstr "Yhdistetään palvelimeen..."
 
 #: ../src/servers/ario-mpd.c:438 ../src/servers/ario-mpd2.c:550
 msgid "Impossible to connect to server. Check the connection options."
-msgstr ""
+msgstr "Palvelimeen ei saada yhteyttä. Tarkasta yhteys vaihtoehdot."
 
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "Albumin artisti"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -699,9 +701,8 @@ msgid "_View"
 msgstr "_Näytä"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Yhdistä"
+msgstr "_Ohjaus"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -721,7 +722,7 @@ msgstr "_Poistu"
 
 #: ../src/shell/ario-shell.c:174
 msgid "Plu_gins"
-msgstr ""
+msgstr "Liitä_nnäiset"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Prefere_nces"
@@ -745,11 +746,11 @@ msgstr "Lisää vastaavia kappaleita soittolistalle"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "Siirry edelliseen välilehteen"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "Siirry seuraavaan välilehteen"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
@@ -761,7 +762,7 @@ msgstr "_Käännä tämä sovellus..."
 
 #: ../src/shell/ario-shell.c:211
 msgid "S_tatusbar"
-msgstr ""
+msgstr "T_ilarivi"
 
 #: ../src/shell/ario-shell.c:214
 msgid "Upper part"
@@ -776,6 +777,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Anne Sorsa https://launchpad.net/~angeni101\n"
+"  Ari Niemi https://launchpad.net/~ari-niemi\n"
 "  Ari Takalo https://launchpad.net/~ajtaka\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
@@ -790,7 +792,7 @@ msgstr "Määrittele liitännäisiä"
 #. Set window properties
 #: ../src/shell/ario-shell-coverdownloader.c:187
 msgid "Music Player Cover Download"
-msgstr ""
+msgstr "Musiikkisoittimen kansien lataus"
 
 #: ../src/shell/ario-shell-coverdownloader.c:332
 msgid "Download Finished!"
@@ -811,7 +813,7 @@ msgstr ""
 #. Set window properties
 #: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
-msgstr ""
+msgstr "Kansien lataus"
 
 #: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
@@ -829,7 +831,7 @@ msgstr "Sanoitukset"
 
 #: ../src/shell/ario-shell-lyricsselect.c:152
 msgid "Lyrics Download"
-msgstr "Lyriikoiden lataus"
+msgstr "Sanoituksien lataus"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
@@ -841,7 +843,7 @@ msgstr "Palvelin"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr ""
+msgstr "Muut"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
@@ -858,7 +860,7 @@ msgstr "Kappaleen ominaisuudet"
 
 #: ../src/shell/ario-shell-songinfos.c:456
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "Virhe tallennettaessa tiedoston tageja:"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
@@ -965,7 +967,7 @@ msgstr "_Siirry parhaillaan soitettavaan kappaleeseen"
 
 #: ../src/widgets/ario-playlist.c:640
 msgid "Filter:"
-msgstr ""
+msgstr "Suodatus:"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1667
@@ -1016,28 +1018,28 @@ msgstr "Tänään %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Eilen %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1190,23 +1192,23 @@ msgstr "_Poista nämä radiot"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Last.fm: Samankaltaisten artistien radio"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Ryhmäradio"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr ""
+msgstr "Ryhmä :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm: Henkilökohtainen radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Genre kohtainen radio"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

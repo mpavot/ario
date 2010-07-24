@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2009-12-08 14:13+0000\n"
-"Last-Translator: MartinK <Unknown>\n"
+"PO-Revision-Date: 2010-06-17 03:12+0000\n"
+"Last-Translator: Jonathan Rauprich <joni@noplu.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -61,11 +61,11 @@ msgstr "Server automatisch ermitteln"
 
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
-msgstr "Automatisch ermitteln"
+msgstr "Automatische Erkennung"
 
 #: ../data/ui/connection-widget.ui.h:2
 msgid "Default"
-msgstr "Vorgabe"
+msgstr "Standard"
 
 #: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
 msgid "Host :"
@@ -216,9 +216,8 @@ msgid "Title :"
 msgstr "Titel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "Zum laufenden Lied _springen"
+msgstr "Reihe nach aktuell gespieltem Titel ein"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -705,9 +704,8 @@ msgid "_View"
 msgstr "_Ansicht"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Verbinden"
+msgstr "Steuerung"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -719,7 +717,7 @@ msgstr "_Hilfe"
 
 #: ../src/shell/ario-shell.c:168
 msgid "_Update database"
-msgstr ""
+msgstr "Datenbank aktualisieren"
 
 #: ../src/shell/ario-shell.c:171
 msgid "_Quit"
@@ -751,11 +749,11 @@ msgstr "Füge ähnliche Lieder zur Wiedergabeliste hinzu"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "Zum vorherigen Tab wechseln"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "Zum nächsten Tab wechseln"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
@@ -784,12 +782,15 @@ msgstr ""
 "  Christian Siegert https://launchpad.net/~christian-siegert\n"
 "  Claudius Henrichs https://launchpad.net/~claudius-h\n"
 "  Dion Timmermann https://launchpad.net/~mail-dion-timmermann\n"
+"  Henning H https://launchpad.net/~hennegwath\n"
 "  Johann Klähn https://launchpad.net/~kljohann\n"
 "  Keruskerfuerst https://launchpad.net/~arminmohring\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Marcel Schmücker https://launchpad.net/~versus666\n"
 "  MartinK https://launchpad.net/~goretekz\n"
 "  Oliver Laub https://launchpad.net/~oliver-laub\n"
-"  Vinzenz Vietzke https://launchpad.net/~v1nz\n"
+"  Phillip T. https://launchpad.net/~viirus92\n"
+"  Vinzenz Vietzke https://launchpad.net/~vinzv\n"
 "  blobbybigwig https://launchpad.net/~wepmaschda-gmx\n"
 "  diego! https://launchpad.net/~sirdiego\n"
 "  izzystradlin https://launchpad.net/~fabianviehmann\n"
@@ -964,7 +965,7 @@ msgstr "_Zuschneiden"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr "Playlist durchsuchen"
+msgstr "Wiedergabeliste durchsuchen"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -1031,28 +1032,28 @@ msgstr "Heute %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Gestern %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1205,11 +1206,11 @@ msgstr "_Diesen Radiosender löschen"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Last.fm: Radio von ähnlichen Künstlern"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Radio der Gruppe"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
@@ -1217,11 +1218,11 @@ msgstr "Gruppe :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm: Persönliches Radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Internetradio des Genres"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
@@ -1281,11 +1282,11 @@ msgstr "Plugin zum Finden des aktuellen Künstlers bei Wikipedia"
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "Suchkriterium hinzufügen"
+#~ msgid "Remove a search criteria"
+#~ msgstr "Suchkriterium entfernen"
 
 #~ msgid "Search songs in the library"
 #~ msgstr "Suche Lieder in der Musiksammlung"
 
-#~ msgid "Remove a search criteria"
-#~ msgstr "Suchkriterium entfernen"
+#~ msgid "Add a search criteria"
+#~ msgstr "Suchkriterium hinzufügen"

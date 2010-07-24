@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2009-11-29 00:17+0000\n"
-"Last-Translator: TurkMame <turkmame@pozitif.net>\n"
+"PO-Revision-Date: 2010-06-17 19:48+0000\n"
+"Last-Translator: utdemir <utdemir@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -215,9 +215,8 @@ msgid "Title :"
 msgstr "Başlık :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "Çalan şarkıya _git"
+msgstr "Şarkı çaldıktan sonra ekle"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -700,9 +699,8 @@ msgid "_View"
 msgstr "_Görünüm"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_Bağlan"
+msgstr "_Kontrol"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -714,7 +712,7 @@ msgstr "_Yardım"
 
 #: ../src/shell/ario-shell.c:168
 msgid "_Update database"
-msgstr ""
+msgstr "_Güncelle veritabanı"
 
 #: ../src/shell/ario-shell.c:171
 msgid "_Quit"
@@ -746,11 +744,11 @@ msgstr "Benzer şarkıları çalma listesine ekle"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "_Önceki sekmeye git"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "_Sonraki sekmeye git"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
@@ -777,13 +775,17 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Enes Albay https://launchpad.net/~albayenes\n"
+"  Fatih Ekin https://launchpad.net/~f-ekin22\n"
 "  Furkan KARA https://launchpad.net/~frkn\n"
+"  GüneyTekfidan https://launchpad.net/~ubuntuturk-hotmail\n"
 "  Hasan Yılmaz https://launchpad.net/~hasanyilmaz\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Murat Bişkin https://launchpad.net/~muratbiskin\n"
 "  TurkMame https://launchpad.net/~turkmame\n"
 "  Volkan Esgel https://launchpad.net/~vesgel\n"
 "  Yahuda https://launchpad.net/~judaskro\n"
-"  celil aydin https://launchpad.net/~celil-aydin"
+"  celil aydin https://launchpad.net/~celil-aydin\n"
+"  utdemir https://launchpad.net/~utdemir"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1186
@@ -1019,28 +1021,28 @@ msgstr "Bugün %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Dün %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d %b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
@@ -1267,11 +1269,11 @@ msgstr "Mevcut sanatçıyı Vikipedi'de aramak için bir eklenti"
 msgid "Wikipedia"
 msgstr "Vikipedi"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "Bir arama kısıtı ekle"
-
 #~ msgid "Search songs in the library"
 #~ msgstr "Şarkıyı kütüphanede ara"
+
+#~ msgid "Add a search criteria"
+#~ msgstr "Bir arama kısıtı ekle"
 
 #~ msgid "Remove a search criteria"
 #~ msgstr "Bir arama kısıtını kaldır"
