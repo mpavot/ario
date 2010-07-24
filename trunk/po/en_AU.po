@@ -1,47 +1,49 @@
+# English (Australia) translation for ario
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the ario package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Ario 1.4.1\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: ario\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-02-15 10:28+0000\n"
-"Last-Translator: Lê Kiến Trúc <Unknown>\n"
-"Language-Team: hn8456 <hn8456@gmail.com>\n"
+"PO-Revision-Date: 2010-07-05 20:24+0000\n"
+"Last-Translator: Ken Sharp <Unknown>\n"
+"Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-"X-Poedit-Country: VIET NAM\n"
-"X-Poedit-Language: Vietnamese\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Trình chơi nhạc Ario"
+msgstr "Ario music player"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
-msgstr "Ứng dụng khách của mpd"
+msgstr "Client application to mpd"
 
 #: ../data/ui/browser-prefs.ui.h:1
 msgid "Alphabetically"
-msgstr "Theo thứ tự abc"
+msgstr "Alphabetically"
 
 #: ../data/ui/browser-prefs.ui.h:2
 msgid "By year"
-msgstr "Theo năm"
+msgstr "By year"
 
 #: ../data/ui/browser-prefs.ui.h:3
 msgid "Library Options"
-msgstr "Tùy chọn thư viện"
+msgstr "Libary Options"
 
 #: ../data/ui/browser-prefs.ui.h:4
 msgid "Library Organisation"
-msgstr "Tổ chức thư viện"
+msgstr "Library Organisation"
 
 #: ../data/ui/browser-prefs.ui.h:5
 msgid "Sort albums: "
-msgstr "Sắp xếp album "
+msgstr "Sort albums: "
 
 #: ../data/ui/connection-autodetect.ui.h:1
 msgid ""
@@ -49,92 +51,93 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Nếu bạn không thấy máy chủ MPD nhờ vào kết nối tự động, bạn nên kiểm tra "
-"rằng zeroconf đã được kích hoạt hoặc dùng thiếp lập bằng tay."
+"If you don't see your MPD server thanks to the automatic detection, you "
+"should check that zeroconf is activated in your MPD configuration or use the "
+"manual configuration."
 
 #: ../data/ui/connection-autodetect.ui.h:2
 msgid "Server autodetection"
-msgstr "Tự động dò máy chủ"
+msgstr "Server autodetection"
 
 #: ../data/ui/connection-widget.ui.h:1
 msgid "Auto detect"
-msgstr "Tự động dò"
+msgstr "Auto detect"
 
 #: ../data/ui/connection-widget.ui.h:2
 msgid "Default"
-msgstr "Mặc định"
+msgstr "Default"
 
 #: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
 msgid "Host :"
-msgstr "Host:"
+msgstr "Host :"
 
 #: ../data/ui/connection-widget.ui.h:4
 msgid "Music directory :"
-msgstr "Thư mục âm nhạc :"
+msgstr "Music directory :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr "Máy chủ nằm trên cùng máy tính với Ario"
+msgstr "Music server is on the same computer as Ario"
 
 #. Create the widgets
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
 #: ../plugins/radios/ario-radio.c:922
 msgid "Name :"
-msgstr "Tên :"
+msgstr "Name :"
 
 #: ../data/ui/connection-widget.ui.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
-msgstr "Mật khẩu :"
+msgstr "Password :"
 
 #: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:85
 msgid "Port :"
-msgstr "Cổng :"
+msgstr "Port :"
 
 #: ../data/ui/connection-widget.ui.h:9
 msgid "Server type : "
-msgstr "Loại máy chủ : "
+msgstr "Server type: "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
-msgstr "XMMS 2 (thử nghiệm)"
+msgstr "XMMS 2 (Experimental)"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
-msgstr "Tự động tải về bìa đĩa album của bài hát đang chơi"
+msgstr "Automatically download the album cover of the playing song"
 
 #: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
 msgid "Covers"
-msgstr "Bìa đĩa"
+msgstr "Covers"
 
 #: ../data/ui/cover-prefs.ui.h:3
 msgid "Covers Sources"
-msgstr "Nguồn bìa đĩa"
+msgstr "Covers Sources"
 
 #: ../data/ui/cover-prefs.ui.h:4
 msgid "Show the covers in the albums list"
-msgstr "Hiện bìa đĩa trong danh sách album"
+msgstr "Show the covers in the albums list"
 
 #: ../data/ui/cover-prefs.ui.h:5
 msgid "Use Amazon."
-msgstr "Dùng Amazon."
+msgstr "Use Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
 #: ../src/shell/ario-shell-preferences.c:109
 msgid "Connection"
-msgstr "Kết nối"
+msgstr "Connection"
 
 #: ../data/ui/connection-prefs.ui.h:2
 msgid "_Autoconnect on startup"
-msgstr "_Tự động kết nối lúc bật"
+msgstr "_Autoconnect on startup"
 
 #: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:162
 msgid "_Connect"
-msgstr "_Kết nối"
+msgstr "_Connect"
 
 #: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:165
 msgid "_Disconnect"
-msgstr "_Ngắt kết nối"
+msgstr "_Disconnect"
 
 #: ../data/ui/connection-assistant.ui.h:1
 msgid ""
@@ -142,9 +145,9 @@ msgid ""
 "thanks to the autodetection, you should check that zeroconf/avahi is "
 "activated in your server or use the manual configuration."
 msgstr ""
-"Bạn cần chỉ định máy chủ để kết nối. Nếu bạn không thể tìm thấy máy chủ nhờ "
-"kết nối tự động, bạn nên kiểm tra lại rằng zeroconf/avahi đã được kích hoạt "
-"hoặc dùng thiếp lập bằng tay."
+"You need to specify a server to connect to. If you don't see your server "
+"thanks to the autodetection, you should check that zeroconf/avahi is "
+"activated in your server or use the manual configuration."
 
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
@@ -156,31 +159,31 @@ msgstr "Album :"
 #: ../plugins/information/information.ui.h:3
 #: ../plugins/radios/ario-radio.c:166
 msgid "Artist :"
-msgstr "Nghệ sĩ :"
+msgstr "Artist :"
 
 #: ../data/ui/cover-progress.ui.h:3
 msgid "Downloading cover"
-msgstr "Tải bìa đĩa"
+msgstr "Downloading cover"
 
 #: ../data/ui/cover-select.ui.h:3
 msgid "Local search"
-msgstr "Tìm cục bộ"
+msgstr "Local search"
 
 #: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:104
 msgid "Search"
-msgstr "Tìm"
+msgstr "Search"
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
-msgstr "Chỉ cho phép Ario chạy đơn"
+msgstr "Allow only one instance of Ario"
 
 #: ../data/ui/others-prefs.ui.h:2
 msgid "Hide window when close button is pressed"
-msgstr "Ẩn cửa sổ khi nhấn nút đóng"
+msgstr "Hide window when close button is pressed"
 
 #: ../data/ui/others-prefs.ui.h:3
 msgid "Interface"
-msgstr "Giao diện"
+msgstr "Interface"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Proxy"
@@ -188,40 +191,40 @@ msgstr "Proxy"
 
 #: ../data/ui/others-prefs.ui.h:5
 msgid "Proxy Address :"
-msgstr "Địa chỉ proxy :"
+msgstr "Proxy Address :"
 
 #: ../data/ui/others-prefs.ui.h:6
 msgid "Proxy Port :"
-msgstr "Cổng proxy :"
+msgstr "Proxy Port :"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
-msgstr "Hiện thẻ"
+msgstr "Show tabs"
 
 #: ../data/ui/others-prefs.ui.h:8
 msgid "Use a proxy"
-msgstr "Dùng một proxy"
+msgstr "Use a proxy"
 
 #: ../data/ui/lyrics-prefs.ui.h:1
 msgid "Lyrics Sources"
-msgstr "Nguồn lời bài hát"
+msgstr "Lyrics Sources"
 
 #: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:13
 #: ../plugins/information/information.ui.h:6
 msgid "Title :"
-msgstr "Tên :"
+msgstr "Title :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add after playing song"
-msgstr ""
+msgstr "Add after playing song"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
-msgstr "Thêm vào và chơi"
+msgstr "Add and play"
 
 #: ../data/ui/playlist-prefs.ui.h:3 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
-msgstr "Thêm vào danh sách"
+msgstr "Add to playlist"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:46
@@ -234,329 +237,329 @@ msgstr "Album"
 #: ../src/widgets/ario-playlist.c:517 ../src/widgets/ario-songlist.c:213
 #: ../src/widgets/ario-tray-icon.c:563
 msgid "Artist"
-msgstr "Nghệ sĩ"
+msgstr "Artist"
 
 #. ARIO_TAG_GENRE
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:52
 #: ../src/widgets/ario-playlist.c:517
 msgid "Date"
-msgstr "Ngày"
+msgstr "Date"
 
 #: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:517
 msgid "Disc"
-msgstr "Đĩa"
+msgstr "Disc"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Double click"
-msgstr "Nhấp đôi"
+msgstr "Double click"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:517
 msgid "Duration"
-msgstr "Khoảng thời gian"
+msgstr "Duration"
 
 #: ../data/ui/playlist-prefs.ui.h:10 ../src/widgets/ario-playlist.c:517
 msgid "File"
-msgstr "Tập tin"
+msgstr "File"
 
 #. ARIO_TAG_TRACK
 #. ARIO_TAG_NAME
 #: ../data/ui/playlist-prefs.ui.h:11 ../src/servers/ario-server.c:51
 #: ../src/widgets/ario-playlist.c:517
 msgid "Genre"
-msgstr "Thể loại"
+msgstr "Genre"
 
 #: ../data/ui/playlist-prefs.ui.h:12
 msgid "Go to current song when a new song is played"
-msgstr "Nhảy tới bài hát hiện tại khi chơi bài hát mới"
+msgstr "Go to current song when a new song is played"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "Mode"
-msgstr "Chế độ"
+msgstr "Mode"
 
 #: ../data/ui/playlist-prefs.ui.h:14
 msgid "On double click:"
-msgstr "Khi nhấp đôi chuột:"
+msgstr "On double click:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:217 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
-msgstr "Danh sách"
+msgstr "Playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Playlist mode:"
-msgstr "Chế độ danh sách:"
+msgstr "Playlist mode:"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Replace in playlist"
-msgstr "Thay thế trong danh sách"
+msgstr "Replace in playlist"
 
 #: ../data/ui/playlist-prefs.ui.h:18
 msgid "Show rows:"
-msgstr "Hiện hàng:"
+msgstr "Show rows:"
 
 #. ARIO_TAG_ALBUM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:48
 #: ../src/sources/ario-tree-songs.c:145 ../src/widgets/ario-playlist.c:517
 #: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:567
 msgid "Title"
-msgstr "Tên"
+msgstr "Title"
 
 #. ARIO_TAG_TITLE
 #: ../data/ui/playlist-prefs.ui.h:20 ../src/servers/ario-server.c:49
 #: ../src/sources/ario-tree-songs.c:138 ../src/widgets/ario-playlist.c:517
 msgid "Track"
-msgstr "Bài số"
+msgstr "Track"
 
 #: ../data/ui/server-prefs.ui.h:1
 msgid "Audio outputs"
-msgstr "Tín hiệu âm thanh ra"
+msgstr "Audio outputs"
 
 #: ../data/ui/server-prefs.ui.h:2
 msgid "Crossfade"
-msgstr "Chuyển bài mượt"
+msgstr "Crossfade"
 
 #: ../data/ui/server-prefs.ui.h:3
 msgid "Database"
-msgstr "Cơ sở dữ liệu"
+msgstr "Database"
 
 #: ../data/ui/server-prefs.ui.h:4
 msgid "Last updated:"
-msgstr "Cập nhập lần cuối:"
+msgstr "Last updated:"
 
 #: ../data/ui/server-prefs.ui.h:5
 msgid "Stop music on exit"
-msgstr "Tắt nhạc khi thoát"
+msgstr "Stop music on exit"
 
 #: ../data/ui/server-prefs.ui.h:6
 msgid "Update on startup"
-msgstr "Cập nhật lúc bật"
+msgstr "Update on startup"
 
 #: ../data/ui/server-prefs.ui.h:7
 msgid "_Update"
-msgstr "_Cập nhật"
+msgstr "_Update"
 
 #: ../data/ui/server-prefs.ui.h:8
 msgid "enable crossfade"
-msgstr "Kích hoạt chuyển bài mượt"
+msgstr "enable crossfade"
 
 #: ../data/ui/server-prefs.ui.h:9
 msgid "fade time (s):"
-msgstr "Thời gian làm mờ âm thanh (giây) :"
+msgstr "fade time (s):"
 
 #: ../data/ui/server-prefs.ui.h:10 ../src/ario-util.c:50 ../src/ario-util.c:71
 #: ../src/ario-util.c:93 ../plugins/information/information.ui.h:7
 #, c-format
 msgid "n/a"
-msgstr "Không phải số"
+msgstr "n/a"
 
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
-msgstr "Thêm tất cả vào danh sách"
+msgstr "Add all to playlist"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
-msgstr "Tìm trên Last.fm"
+msgstr "Find on Last.fm"
 
 #: ../data/ui/stats-prefs.ui.h:1
 msgid "Database play time :"
-msgstr "Thời gian chơi hết cơ sở dữ liệu :"
+msgstr "Database play time :"
 
 #: ../data/ui/stats-prefs.ui.h:2
 msgid "Number of albums :"
-msgstr "Số album :"
+msgstr "Number of albums :"
 
 #: ../data/ui/stats-prefs.ui.h:3
 msgid "Number of artists :"
-msgstr "Số nghệ sĩ :"
+msgstr "Number of artists :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
-msgstr "Số bài hát :"
+msgstr "Number of songs :"
 
 #: ../data/ui/stats-prefs.ui.h:5
 msgid "Play time :"
-msgstr "Thời gian chơi :"
+msgstr "Play time :"
 
 #: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
-msgstr "Thống kê"
+msgstr "Statistics"
 
 #: ../data/ui/stats-prefs.ui.h:7
 msgid "Uptime :"
-msgstr "Thời gian mở :"
+msgstr "Uptime :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr "Tác giả album :"
+msgstr "Album Artist :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
-msgstr "Lời bình :"
+msgstr "Comment :"
 
 #: ../data/ui/song-infos.ui.h:5
 msgid "Composer :"
-msgstr "Người sáng tác :"
+msgstr "Composer :"
 
 #: ../data/ui/song-infos.ui.h:6
 msgid "Date :"
-msgstr "Ngày :"
+msgstr "Date :"
 
 #: ../data/ui/song-infos.ui.h:7
 msgid "Disc :"
-msgstr "Đĩa :"
+msgstr "Disc :"
 
 #: ../data/ui/song-infos.ui.h:8
 msgid "Filename :"
-msgstr "Tên tập tin :"
+msgstr "Filename :"
 
 #: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
 msgid "Genre :"
-msgstr "Thể loại :"
+msgstr "Genre :"
 
 #: ../data/ui/song-infos.ui.h:10 ../plugins/information/information.ui.h:4
 msgid "Length :"
-msgstr "Dài :"
+msgstr "Length :"
 
 #: ../data/ui/song-infos.ui.h:11
 msgid "Performer :"
-msgstr "Người biễu diễn :"
+msgstr "Performer :"
 
 #: ../data/ui/song-infos.ui.h:12
 msgid "Song"
-msgstr "Bài hát"
+msgstr "Song"
 
 #: ../data/ui/song-infos.ui.h:14
 msgid "Track :"
-msgstr "Bài số :"
+msgstr "Track :"
 
 #: ../data/ui/trayicon-prefs.ui.h:1
 msgid "Do nothing"
-msgstr "Không làm gì cả"
+msgstr "Do nothing"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr "Câm"
+msgstr "Mute"
 
 #: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
 msgid "Notification"
-msgstr "Hiện thông báo"
+msgstr "Notification"
 
 #: ../data/ui/trayicon-prefs.ui.h:4
 msgid "Notification on song change"
-msgstr "Hiện thông báo khi đổi bài hát"
+msgstr "Notification on song change"
 
 #: ../data/ui/trayicon-prefs.ui.h:5
 msgid "Notification time: "
-msgstr "Thời gian hiện thông báo "
+msgstr "Notification time: "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
-msgstr "Khi nhấn nút chuột giữa vào biểu tượng khay hệ thống thì :"
+msgstr "On middle button click on tray icon :"
 
 #: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:241
 msgid "Play next song"
-msgstr "Chơi bài tiếp theo"
+msgstr "Play next song"
 
 #: ../data/ui/trayicon-prefs.ui.h:8
 msgid "Play/Pause"
-msgstr "Chơi/Tạm dừng"
+msgstr "Play/Pause"
 
 #: ../data/ui/trayicon-prefs.ui.h:9
 msgid "Tray icon"
-msgstr "Biểu tượng khay hệ thống"
+msgstr "Tray icon"
 
 #: ../src/ario-main.c:64
 msgid "Start minimized window"
-msgstr "Thu nhỏ cửa sổ lúc bật"
+msgstr "Start minimised window"
 
 #. Format result string
 #: ../src/ario-util.c:110
 msgid "seconds"
-msgstr "giây"
+msgstr "seconds"
 
 #: ../src/ario-util.c:112
 msgid "minutes"
-msgstr "phút"
+msgstr "minutes"
 
 #: ../src/ario-util.c:118
 msgid "hours"
-msgstr "giờ"
+msgstr "hours"
 
 #: ../src/ario-util.c:124
 msgid "days"
-msgstr "ngày"
+msgstr "days"
 
 #: ../src/covers/ario-cover.c:149
 msgid "The cover already exists. Do you want to replace it?"
-msgstr "Bìa đĩa đã có sẵn. Thay thế nó ?"
+msgstr "The cover already exists. Do you want to replace it?"
 
 #: ../src/covers/ario-cover-local.c:60
 msgid "Music Directory"
-msgstr "Thư mục chứa âm nhạc"
+msgstr "Music Directory"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr "bài hát cùng nghệ sĩ"
+msgstr "songs of same artist"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr "bài hát cùng album"
+msgstr "songs of same album"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr "bài hát cùng nghệ sĩ"
+msgstr "songs of similar artists"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr "album cùng nghệ sĩ"
+msgstr "albums of same artists"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr "album cùng nghệ sĩ"
+msgstr "albums of similar artists"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr "Danh sách động"
+msgstr "Dynamic Playlist"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr "Chế độ xếp hàng"
+msgstr "Queue Mode"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr "Bình thường"
+msgstr "Normal"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "Phần mở rộng"
+msgstr "Plug-in"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 msgid "Enabled"
-msgstr "Kích hoạt"
+msgstr "Enabled"
 
 #: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:201
 msgid "_About"
-msgstr "_Giới thiệu"
+msgstr "_About"
 
 #: ../src/plugins/ario-plugin-manager.c:488
 msgid "C_onfigure"
-msgstr "_Thiết lập"
+msgstr "C_onfigure"
 
 #: ../src/plugins/ario-plugin-manager.c:497
 msgid "A_ctivate"
-msgstr "_Kích hoạt"
+msgstr "A_ctivate"
 
 #: ../src/plugins/ario-plugin-manager.c:508
 msgid "Ac_tivate All"
-msgstr "Kí_ch hoạt tất cả"
+msgstr "Ac_tivate All"
 
 #: ../src/plugins/ario-plugin-manager.c:513
 msgid "_Deactivate All"
-msgstr "_Bỏ kích hoạt tất cả"
+msgstr "_Deactivate All"
 
 #: ../src/plugins/ario-plugin-manager.c:722
 msgid "Active plugins"
-msgstr "Phần mở rộng được kích hoạt"
+msgstr "Active plug-ins"
 
 #: ../src/preferences/ario-server-preferences.c:182
 #: ../src/preferences/ario-stats-preferences.c:151
@@ -566,54 +569,54 @@ msgstr "Phần mở rộng được kích hoạt"
 #: ../src/preferences/ario-stats-preferences.c:155
 #: ../src/preferences/ario-stats-preferences.c:156
 msgid "Not connected"
-msgstr "Chưa được kết nối"
+msgstr "Not connected"
 
 #: ../src/preferences/ario-server-preferences.c:187
 #: ../src/preferences/ario-server-preferences.c:278
 #: ../src/widgets/ario-status-bar.c:100
 msgid "Updating..."
-msgstr "Đang cập nhật..."
+msgstr "Updating..."
 
 #: ../src/servers/ario-mpd.c:410 ../src/servers/ario-mpd2.c:522
 msgid "Connecting to server..."
-msgstr "Đang kết nối tới máy chủ..."
+msgstr "Connecting to server..."
 
 #: ../src/servers/ario-mpd.c:438 ../src/servers/ario-mpd2.c:550
 msgid "Impossible to connect to server. Check the connection options."
-msgstr "Không thể kết nối máy chủ. Hãy xem lại tùy chỉnh kết nối."
+msgstr "Impossible to connect to server. Check the connection options."
 
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr "Album nghệ sĩ"
+msgstr "Album Artist"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
 msgid "Composer"
-msgstr "Người sáng tác"
+msgstr "Composer"
 
 #. ARIO_TAG_COMPOSER
 #: ../src/servers/ario-server.c:54
 msgid "Performer"
-msgstr "Người biểu diễn"
+msgstr "Performer"
 
 #. ARIO_TAG_PERFORMER
 #. ARIO_TAG_COMMENT
 #. ARIO_TAG_DISC
 #: ../src/servers/ario-server.c:57
 msgid "Filename"
-msgstr "Tên tệp"
+msgstr "Filename"
 
 #. ARIO_TAG_FILENAME
 #: ../src/servers/ario-server.c:58
 msgid "Any"
-msgstr "Bất kì"
+msgstr "Any"
 
 #. impossible time or broken locale settings
 #: ../src/servers/ario-server.h:27
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1235
 msgid "Unknown"
-msgstr "Không rõ"
+msgstr "Unknown"
 
 #: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:66
 #: ../src/sources/ario-storedplaylists.c:88
@@ -622,7 +625,7 @@ msgstr "Không rõ"
 #: ../plugins/filesystem/ario-filesystem.c:109
 #: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
-msgstr "_Thêm vào danh sách"
+msgstr "_Add to playlist"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:69
 #: ../src/sources/ario-storedplaylists.c:91
@@ -631,7 +634,7 @@ msgstr "_Thêm vào danh sách"
 #: ../plugins/filesystem/ario-filesystem.c:112
 #: ../plugins/radios/ario-radio.c:119
 msgid "Add and _play"
-msgstr "Thêm vào và _chơi"
+msgstr "Add and _play"
 
 #: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:72
 #: ../src/sources/ario-storedplaylists.c:94
@@ -640,15 +643,15 @@ msgstr "Thêm vào và _chơi"
 #: ../plugins/filesystem/ario-filesystem.c:115
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
-msgstr "Th_ay thế trong danh sách"
+msgstr "_Replace in playlist"
 
 #: ../src/sources/ario-browser.c:91
 msgid "Get the covers"
-msgstr "Tìm bìa đĩa"
+msgstr "Get the covers"
 
 #: ../src/sources/ario-browser.c:94
 msgid "_Delete the covers"
-msgstr "_Xóa bìa đĩa"
+msgstr "_Delete the covers"
 
 #: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
 #: ../src/sources/ario-search.c:75 ../src/sources/ario-storedplaylists.c:115
@@ -656,139 +659,136 @@ msgstr "_Xóa bìa đĩa"
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:131
 msgid "_Properties"
-msgstr "Thôn_g tin"
+msgstr "_Properties"
 
 #: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
 msgid "Library"
-msgstr "Thư viện"
+msgstr "Library"
 
 #: ../src/sources/ario-storedplaylists.c:97
 msgid "_Delete"
-msgstr "_Xóa"
+msgstr "_Delete"
 
 #: ../src/sources/ario-storedplaylists.c:151
 msgid "Playlists"
-msgstr "Danh sách"
+msgstr "Playlists"
 
 #: ../src/sources/ario-storedplaylists.c:592
 msgid "Are you sure that you want to delete all the selected playlists?"
-msgstr "Bạn có chắc sẽ xóa tất cả danh sách ?"
+msgstr "Are you sure that you want to delete all the selected playlists?"
 
 #: ../src/sources/ario-tree.c:856
 msgid "Are you sure that you want to remove all the selected covers?"
-msgstr "Bạn có chắc sẽ loại bỏ tất cả bìa đĩa ?"
+msgstr "Are you sure that you want to remove all the selected covers?"
 
 #. Translators - This "Cover" refers to an album cover art
 #: ../src/sources/ario-tree-albums.c:199
 msgid "Cover"
-msgstr "Bìa đĩa"
+msgstr "Cover"
 
 #: ../src/shell/ario-shell.c:155
 msgid "_File"
-msgstr "_Tập tin"
+msgstr "_File"
 
 #: ../src/shell/ario-shell.c:156
 msgid "_Edit"
-msgstr "_Biên tập"
+msgstr "_Edit"
 
 #: ../src/shell/ario-shell.c:157
 msgid "_View"
-msgstr "_Xem"
+msgstr "_View"
 
 #: ../src/shell/ario-shell.c:158
 msgid "_Control"
-msgstr ""
+msgstr "_Control"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
-msgstr "_Công cụ"
+msgstr "_Tool"
 
 #: ../src/shell/ario-shell.c:160
 msgid "_Help"
-msgstr "_Giúp đỡ"
+msgstr "_Help"
 
 #: ../src/shell/ario-shell.c:168
 msgid "_Update database"
-msgstr "Cậ_p nhật cơ sở dữ liệu"
+msgstr "_Update database"
 
 #: ../src/shell/ario-shell.c:171
 msgid "_Quit"
-msgstr "_Thoát"
+msgstr "_Quit"
 
 #: ../src/shell/ario-shell.c:174
 msgid "Plu_gins"
-msgstr "Phần bổ trợ"
+msgstr "Plu_gins"
 
 #: ../src/shell/ario-shell.c:177
 msgid "Prefere_nces"
-msgstr "Tùy chỉnh"
+msgstr "Prefere_nces"
 
 #: ../src/shell/ario-shell.c:180
 msgid "_Change current album cover"
-msgstr "Đổi bìa đĩa a_lbum hiện thời"
+msgstr "_Change current album cover"
 
 #: ../src/shell/ario-shell.c:183
 msgid "Download album _covers"
-msgstr "Tải bìa album"
+msgstr "Download album _covers"
 
 #: ../src/shell/ario-shell.c:186
 msgid "Find similar artists"
-msgstr "Tìm nghệ sĩ tương tự"
+msgstr "Find similar artists"
 
 #: ../src/shell/ario-shell.c:189
 msgid "Add similar songs to playlist"
-msgstr "Thêm bài hát giống vào danh sách"
+msgstr "Add similar songs to playlist"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "Go to _previous tab"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "Go to _next tab"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
-msgstr "Hiện lời bài hát"
+msgstr "Show _lyrics"
 
 #: ../src/shell/ario-shell.c:204
 msgid "_Translate this application..."
-msgstr "_Dịch phần mềm này..."
+msgstr "_Translate this application..."
 
 #: ../src/shell/ario-shell.c:211
 msgid "S_tatusbar"
-msgstr "Thanh trạng thái"
+msgstr "S_tatusbar"
 
 #: ../src/shell/ario-shell.c:214
 msgid "Upper part"
-msgstr "Phần trên"
+msgstr "Upper part"
 
 #: ../src/shell/ario-shell.c:814
 msgid "GTK client for MPD"
-msgstr "Một trạm con giao diện GTK cho MPD"
+msgstr "GTK client for MPD"
 
 #: ../src/shell/ario-shell.c:815
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Lê Kiến Trúc https://launchpad.net/~le-kien-truc\n"
-"  Marc Pavot https://launchpad.net/~marc-pavot\n"
-"  Nguyễn Hào Khôi https://launchpad.net/~isaohk\n"
-"  Vo Van Hong Ngoc https://launchpad.net/~hn8456"
+"  Ken Sharp https://launchpad.net/~kennybobs"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1186
 msgid "Configure Plugins"
-msgstr "Thiệp lập phần bổ trợ"
+msgstr "Configure Plug-ins"
 
 #. Set window properties
 #: ../src/shell/ario-shell-coverdownloader.c:187
 msgid "Music Player Cover Download"
-msgstr "Tải bìa đĩa"
+msgstr "Music Player Cover Download"
 
 #: ../src/shell/ario-shell-coverdownloader.c:332
 msgid "Download Finished!"
-msgstr "Đã tải xong!"
+msgstr "Download Finished!"
 
 #. We show the numbers of covers found and not found
 #: ../src/shell/ario-shell-coverdownloader.c:335
@@ -798,49 +798,49 @@ msgid ""
 "%i covers not found\n"
 "%i covers already exist"
 msgstr ""
-"%i tìm được bìa đĩa\n"
-"%i không tìm thấy bìa đĩa\n"
-"%i bìa đĩa đã có sắn"
+"%i covers found\n"
+"%i covers not found\n"
+"%i covers already exist"
 
 #. Set window properties
 #: ../src/shell/ario-shell-coverselect.c:242
 msgid "Cover Download"
-msgstr "Tải bìa đĩa"
+msgstr "Cover Download"
 
 #: ../src/shell/ario-shell-coverselect.c:559
 msgid "Error reading file"
-msgstr "Lỗi đọc tập tin"
+msgstr "Error reading file"
 
 #: ../src/shell/ario-shell-coverselect.c:584
 msgid "Error saving file"
-msgstr "Lỗi lưu tập tin"
+msgstr "Error saving file"
 
 #: ../src/shell/ario-shell-lyrics.c:43
 #: ../src/shell/ario-shell-preferences.c:134
 #: ../src/shell/ario-shell-songinfos.c:273
 msgid "Lyrics"
-msgstr "Lời bài hát"
+msgstr "Lyrics"
 
 #: ../src/shell/ario-shell-lyricsselect.c:152
 msgid "Lyrics Download"
-msgstr "Tải lời bài hát"
+msgstr "Lyrics Download"
 
 #: ../src/shell/ario-shell-preferences.c:81
 msgid "Ario Preferences"
-msgstr "Tùy chỉnh Ario"
+msgstr "Ario Preferences"
 
 #: ../src/shell/ario-shell-preferences.c:114
 msgid "Server"
-msgstr "Máy chủ"
+msgstr "Server"
 
 #: ../src/shell/ario-shell-preferences.c:144
 msgid "Others"
-msgstr "Khác"
+msgstr "Others"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
 msgid "%d songs"
-msgstr "%d bài hát"
+msgstr "%d songs"
 
 #. Set window properties
 #. Set window title
@@ -848,172 +848,172 @@ msgstr "%d bài hát"
 #: ../src/shell/ario-shell-songinfos.c:267
 #: ../src/shell/ario-shell-songinfos.c:545
 msgid "Song Properties"
-msgstr "Thông tin bài hát"
+msgstr "Song Properties"
 
 #: ../src/shell/ario-shell-songinfos.c:456
 msgid "Error saving tags of file:"
-msgstr "Lỗi khi lưu thẻ của file:"
+msgstr "Error saving tags of file:"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
-msgstr "Bạn phải chọn một máy chủ."
+msgstr "You must select a server."
 
 #: ../src/widgets/ario-connection-widget.c:676
 msgid "New Profile"
-msgstr "Hồ sơ mới"
+msgstr "New Profile"
 
 #: ../src/widgets/ario-firstlaunch.c:82
 msgid "The following configuration will be used:"
-msgstr "Những thiếp lập sau sẽ được dùng:"
+msgstr "The following configuration will be used:"
 
 #: ../src/widgets/ario-firstlaunch.c:106
 msgid ""
 "It is the first time you launch Ario.\n"
 "This assistant will help you to configure it."
 msgstr ""
-"Đây là lần đầu bạn dùng Ario.\n"
-"Phần này sẽ giúp bạn thiết lập nó."
+"It is the first time you launch Ario.\n"
+"This assistant will help you to configure it."
 
 #: ../src/widgets/ario-firstlaunch.c:111
 msgid "Welcome to Ario"
-msgstr "Chào mừng với Ario"
+msgstr "Welcome to Ario"
 
 #: ../src/widgets/ario-firstlaunch.c:129
 msgid "Configuration"
-msgstr "Thiếp lập"
+msgstr "Configuration"
 
 #: ../src/widgets/ario-firstlaunch.c:141
 msgid "Confirmation"
-msgstr "Sự chứng thực"
+msgstr "Confirmation"
 
 #: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr "<i>trong</i> %s <i>trình bày bởi</i> %s"
+msgstr "<i>from</i> %s <i>by</i> %s"
 
 #: ../src/widgets/ario-header.c:199
 msgid "Play previous song"
-msgstr "Chơi lại bản nhạc trước"
+msgstr "Play previous song"
 
 #: ../src/widgets/ario-header.c:217
 msgid "Play/Pause the music"
-msgstr "Chơi/Tạm dừng nhạc"
+msgstr "Play/Pause the music"
 
 #: ../src/widgets/ario-header.c:229
 msgid "Stop the music"
-msgstr "Dừng nhạc"
+msgstr "Stop the music"
 
 #. Translators - This " of " is used to count the elapsed time
 #. of a song like in "00:59 of 03:24"
 #: ../src/widgets/ario-header.c:310 ../src/widgets/ario-tooltip.c:321
 msgid " of "
-msgstr " trong "
+msgstr " of "
 
 #: ../src/widgets/ario-header.c:323
 msgid "Toggle random on/off"
-msgstr "Bật/Tắt việc chơi ngẫu nhiên"
+msgstr "Toggle random on/off"
 
 #: ../src/widgets/ario-header.c:335
 msgid "Toggle repeat on/off"
-msgstr "Bật/Tắt chơi lại"
+msgstr "Toggle repeat on/off"
 
 #: ../src/widgets/ario-header.c:340
 msgid "Change the music volume"
-msgstr "Điều chỉnh âm lượng nhạc"
+msgstr "Change the music volume"
 
 #: ../src/widgets/ario-lyrics-editor.c:323
 msgid "Downloading lyrics..."
-msgstr "Đang tải lời bài hát..."
+msgstr "Downloading lyrics..."
 
 #: ../src/widgets/ario-lyrics-editor.c:351
 msgid "Lyrics not found"
-msgstr "Không tìm thấy lời bài hát"
+msgstr "Lyrics not found"
 
 #: ../src/widgets/ario-playlist.c:133
 msgid "_Clear"
-msgstr "_Xóa"
+msgstr "_Clear"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Shuffle"
-msgstr "Xá_o trộn"
+msgstr "_Shuffle"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
-msgstr "Cắ_t"
+msgstr "Cr_op"
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr "_Tìm trong danh sách"
+msgstr "_Search in playlist"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
-msgstr "_Xóa"
+msgstr "_Remove"
 
 #: ../src/widgets/ario-playlist.c:148
 msgid "_Save"
-msgstr "_Lưu"
+msgstr "_Save"
 
 #: ../src/widgets/ario-playlist.c:154
 msgid "_Go to playing song"
-msgstr "_Nhảy tới bài đang chơi"
+msgstr "_Go to playing song"
 
 #: ../src/widgets/ario-playlist.c:640
 msgid "Filter:"
-msgstr "Bộ lọc:"
+msgstr "Filter:"
 
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1667
 msgid "Save playlist"
-msgstr "Lưu danh sách"
+msgstr "Save playlist"
 
 #: ../src/widgets/ario-playlist.c:1677
 msgid "Playlist name :"
-msgstr "Tên danh sách :"
+msgstr "Playlist name :"
 
 #: ../src/widgets/ario-playlist.c:1713
 msgid "Playlist already exists. Do you want to ovewrite it?"
-msgstr "Danh sách đã có sẵn. Ghi đè chứ ?"
+msgstr "Playlist already exists. Do you want to ovewrite it?"
 
 #. Format status bar message
 #: ../src/widgets/ario-status-bar.c:96
 msgid "Songs"
-msgstr "Bài hát"
+msgstr "Songs"
 
 #: ../src/widgets/ario-tray-icon.c:102
 msgid "_Play"
-msgstr "_Chơi"
+msgstr "_Play"
 
 #: ../src/widgets/ario-tray-icon.c:105
 msgid "_Pause"
-msgstr "_Tạm dừng"
+msgstr "_Pause"
 
 #: ../src/widgets/ario-tray-icon.c:108
 msgid "_Stop"
-msgstr "_Dừng"
+msgstr "_Stop"
 
 #: ../src/widgets/ario-tray-icon.c:111
 msgid "_Next"
-msgstr "_Tiếp"
+msgstr "_Next"
 
 #: ../src/widgets/ario-tray-icon.c:114
 msgid "P_revious"
-msgstr "T_rước"
+msgstr "P_revious"
 
 #: ../src/widgets/ario-tray-icon.h:41
 msgid "Not playing"
-msgstr "Hiện không chơi"
+msgstr "Not playing"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1179
 msgid "Today %I:%M %p"
-msgstr "Hôm nay %I:%M %p"
+msgstr "Today %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
 #. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
-msgstr "Hôm qua %I:%M %p"
+msgstr "Yesterday %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
@@ -1039,80 +1039,80 @@ msgstr "%b %d %Y"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1311
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:4
 msgid "Never"
-msgstr "Không bao giờ"
+msgstr "Never"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1335
 msgid "OK"
-msgstr "Đồng ý"
+msgstr "OK"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1338
 msgid "Logging in"
-msgstr "Đang đăng nhập"
+msgstr "Logging in"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1341
 msgid "Request failed"
-msgstr "Yêu cầu thất bại"
+msgstr "Request failed"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1344
 msgid "Incorrect username"
-msgstr "Sai tên đăng nhập"
+msgstr "Incorrect username"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1347
 msgid "Incorrect password"
-msgstr "Sai mật khẩu"
+msgstr "Incorrect password"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1350
 msgid "Handshake failed"
-msgstr "Bắt tay thất bại"
+msgstr "Handshake failed"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1353
 msgid "Client update required"
-msgstr "Cần cập nhật trạm con"
+msgstr "Client update required"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1356
 msgid "Track submission failed"
-msgstr "Đề nghị bài hát thất bại"
+msgstr "Track submission failed"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1359
 msgid "Queue is too long"
-msgstr "Hàng quá dài"
+msgstr "Queue is too long"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
 msgid "Track submission failed too many times"
-msgstr "Đề nghị bài hát thất bại quá nhiều lần"
+msgstr "Track submission failed too many times"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1417
 msgid "Audioscrobbler preferences"
-msgstr "Tùy chỉnh Audioscrobbler"
+msgstr "Audioscrobbler preferences"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:1
 msgid "Disabled"
-msgstr "Tắt"
+msgstr "Disabled"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
-msgstr "Thời gian lần đệ nghị cuối:"
+msgstr "Last submission time:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
-msgstr "Hồ sơ ở Last.fm"
+msgstr "Last.fm Profile"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:6
 msgid "Queued tracks:"
-msgstr "Bài hát đang chờ:"
+msgstr "Queued tracks:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:7
 msgid "Status:"
-msgstr "Trạng thái:"
+msgstr "Status:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
-msgstr "Bài hát đề nghị:"
+msgstr "Tracks submitted:"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 #: ../plugins/radios/ario-radio.c:168
 msgid "Username :"
-msgstr "Tên đăng nhập :"
+msgstr "Username :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1120,101 +1120,101 @@ msgstr "Last.fm"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:2
 msgid "Submits song information to last.fm"
-msgstr "Đề nghị thông tin bài hát tới last.fm"
+msgstr "Submits song information to last.fm"
 
 #: ../plugins/filesystem/ario-filesystem.c:158
 msgid "File System"
-msgstr "Hệ thống tập tin"
+msgstr "File System"
 
 #: ../plugins/filesystem/ario-filesystem.c:422
 msgid "Music"
-msgstr "Âm nhạc"
+msgstr "Music"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:1
 msgid "A File System Browser"
-msgstr "Một trình duyệt hệ thống tập tin"
+msgstr "A File System Browser"
 
 #: ../plugins/filesystem/filesystem.ario-plugin.desktop.in.h:2
 msgid "File System Browser"
-msgstr "Trình duyệt hệ thống tập tin"
+msgstr "File System Browser"
 
 #: ../plugins/information/ario-information.c:114
 msgid "Information"
-msgstr "Thông tin"
+msgstr "Information"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:1
 msgid "Display various information about the playing song"
-msgstr "Hiện nhiều thông tin về bài hát đang chơi"
+msgstr "Display various information about the playing song"
 
 #: ../plugins/information/information.ario-plugin.desktop.in.h:2
 msgid "Song Information"
-msgstr "Thông tin bài hát"
+msgstr "Song Information"
 
 #: ../plugins/information/information.ui.h:2
 msgid "Albums from this artist:"
-msgstr "Album của nghệ sĩ này:"
+msgstr "Albums from this artist:"
 
 #: ../plugins/information/information.ui.h:5
 msgid "Lyrics:"
-msgstr "Lời bài hát:"
+msgstr "Lyrics:"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
-msgstr "Thêm thư viện thông báo"
+msgstr "Add libnotify support"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:2
 msgid "Libnotify"
-msgstr "Thư viện thông báo"
+msgstr "Libnotify"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:1
 msgid "Add multimedia keys support"
-msgstr "Thêm một phím đa phương tiện"
+msgstr "Add multimedia keys support"
 
 #: ../plugins/mmkeys/mmkeys.ario-plugin.desktop.in.h:2
 msgid "Multimedia Keys"
-msgstr "Phím đa phương tiện"
+msgstr "Multimedia Keys"
 
 #: ../plugins/radios/ario-radio.c:125
 msgid "Add a _new radio"
-msgstr "Thêm đài radio"
+msgstr "Add a _new radio"
 
 #: ../plugins/radios/ario-radio.c:128
 msgid "_Delete this radios"
-msgstr "_Xóa radio này"
+msgstr "_Delete this radios"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr "Last.fm: radio cùng nghệ sĩ"
+msgstr "Last.fm: Radio of similar artists"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr "Last.fm: radio của nhóm"
+msgstr "Last.fm: Radio of group"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr "Nhóm :"
+msgstr "Group :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr "Last.fm: radio cá nhân"
+msgstr "Last.fm: Personal radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr "Last.fm: radio của thể loại"
+msgstr "Last.fm: Radio of genre"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2
 msgid "Web Radios"
-msgstr "Radio trên mạng"
+msgstr "Web Radios"
 
 #: ../plugins/radios/ario-radio.c:246
 msgid "Internet Radios"
-msgstr "Internet Radio"
+msgstr "Internet Radios"
 
 #. Create dialog window
 #: ../plugins/radios/ario-radio.c:774
 msgid "Edit a WebRadio"
-msgstr "Chỉnh sửa một WebRadio"
+msgstr "Edit a WebRadio"
 
 #: ../plugins/radios/ario-radio.c:787 ../plugins/radios/ario-radio.c:923
 msgid "URL :"
@@ -1222,47 +1222,38 @@ msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr "Thông số xấu. Bạn phải chỉ định tên hoặc địa chỉ cho radio."
+msgstr "Bad parameters. You must specify a name and a URL for the radio."
 
 #. Create dialog window
 #: ../plugins/radios/ario-radio.c:883
 msgid "Add a WebRadio"
-msgstr "Thêm một WebRadio"
+msgstr "Add a WebRadio"
 
 #: ../plugins/radios/ario-radio.c:1083
 msgid "Are you sure you want to delete all the selected radios?"
-msgstr "Bạn có chắc muốn xóa tất cả những radio đã chọn ?"
+msgstr "Are you sure you want to delete all the selected radios?"
 
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:1
 msgid "Listen to webradios"
-msgstr "Nghe radio trên web"
+msgstr "Listen to webradios"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:49
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:50
 msgid "Find artist on Wikipedia"
-msgstr "Tìm nghệ sĩ trên Wikipedia"
+msgstr "Find artist on Wikipedia"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:172
 msgid "Wikipedia Plugin - Configuration"
-msgstr "Phần bổ trợ Wikipedia - Thiết lập"
+msgstr "Wikipedia Plug-in - Configuration"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia language :"
-msgstr "Ngôn ngữ Wikipedia :"
+msgstr "Wikipedia language :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
-msgstr "Một phần bổ trợ sẽ tìm nghệ sĩ hiện thời trên wikipedia"
+msgstr "A plug-in to search current artist on Wikipedia"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:2
 msgid "Wikipedia"
 msgstr "Wikipedia"
-
-#~ msgid "Add a search criteria"
-#~ msgstr "Thêm một tiêu chuẩn tìm kiếm"
-
-#~ msgid "Search songs in the library"
-#~ msgstr "Tìm bài hát trong thư viện"
-
-#~ msgid "Remove a search criteria"
-#~ msgstr "Bỏ một tiêu chuẩn tìm kiếm"

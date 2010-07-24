@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-01-19 21:55+0000\n"
-"Last-Translator: Cédric VALMARY <cvalmary@yahoo.fr>\n"
+"PO-Revision-Date: 2010-03-23 17:37+0000\n"
+"Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -68,11 +68,11 @@ msgstr "Per defaut"
 
 #: ../data/ui/connection-widget.ui.h:3 ../src/widgets/ario-firstlaunch.c:83
 msgid "Host :"
-msgstr "Òste :"
+msgstr "Òste :"
 
 #: ../data/ui/connection-widget.ui.h:4
 msgid "Music directory :"
-msgstr "Repertòri de la musica :"
+msgstr "Repertòri de la musica :"
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
@@ -82,20 +82,20 @@ msgstr "Lo servidor de musica es sul meteis ordenador qu'Ario"
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
 #: ../plugins/radios/ario-radio.c:922
 msgid "Name :"
-msgstr "Nom :"
+msgstr "Nom :"
 
 #: ../data/ui/connection-widget.ui.h:7
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:5
 msgid "Password :"
-msgstr "Senhal ]:"
+msgstr "Senhal :"
 
 #: ../data/ui/connection-widget.ui.h:8 ../src/widgets/ario-firstlaunch.c:85
 msgid "Port :"
-msgstr "Pòrt :"
+msgstr "Pòrt :"
 
 #: ../data/ui/connection-widget.ui.h:9
 msgid "Server type : "
-msgstr "Tipe de servidor "
+msgstr "Tipe de servidor : "
 
 #: ../data/ui/connection-widget.ui.h:10
 msgid "XMMS 2 (Experimental)"
@@ -152,14 +152,14 @@ msgstr ""
 #: ../data/ui/cover-progress.ui.h:1 ../data/ui/cover-select.ui.h:1
 #: ../data/ui/song-infos.ui.h:1 ../plugins/information/information.ui.h:1
 msgid "Album :"
-msgstr "Album :"
+msgstr "Album :"
 
 #: ../data/ui/cover-progress.ui.h:2 ../data/ui/cover-select.ui.h:2
 #: ../data/ui/lyrics-select.ui.h:1 ../data/ui/song-infos.ui.h:3
 #: ../plugins/information/information.ui.h:3
 #: ../plugins/radios/ario-radio.c:166
 msgid "Artist :"
-msgstr "Artista :"
+msgstr "Artista :"
 
 #: ../data/ui/cover-progress.ui.h:3
 msgid "Downloading cover"
@@ -191,11 +191,11 @@ msgstr "Servidor mandatari (proxy)"
 
 #: ../data/ui/others-prefs.ui.h:5
 msgid "Proxy Address :"
-msgstr "Adreça del proxy :"
+msgstr "Adreça del proxy :"
 
 #: ../data/ui/others-prefs.ui.h:6
 msgid "Proxy Port :"
-msgstr "Pòrt del proxy :"
+msgstr "Pòrt del proxy :"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Show tabs"
@@ -212,12 +212,11 @@ msgstr "Fonts de las paraulas"
 #: ../data/ui/lyrics-select.ui.h:2 ../data/ui/song-infos.ui.h:13
 #: ../plugins/information/information.ui.h:6
 msgid "Title :"
-msgstr "Títol :"
+msgstr "Títol :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "_Anar a la cançon jogada"
+msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -225,7 +224,7 @@ msgstr "Apondre e jogar"
 
 #: ../data/ui/playlist-prefs.ui.h:3 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
-msgstr "Apondre a la tièra de lecturas"
+msgstr "Apondre a la lista de lecturas"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:46
@@ -252,7 +251,7 @@ msgstr "Disc"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Double click"
-msgstr "Doble clic"
+msgstr "Clic doble"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:517
 msgid "Duration"
@@ -279,20 +278,20 @@ msgstr "Mòde"
 
 #: ../data/ui/playlist-prefs.ui.h:14
 msgid "On double click:"
-msgstr "En cas de doble clic"
+msgstr "En cas de clic doble"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
 #: ../src/shell/ario-shell.c:217 ../src/shell/ario-shell-preferences.c:124
 msgid "Playlist"
-msgstr "Tièra de lectura"
+msgstr "Lista de lectura"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Playlist mode:"
-msgstr "Mòde de la tièra de lectura :"
+msgstr "Mòde de la lista de lectura :"
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Replace in playlist"
-msgstr "Remplaçar dins la tièra de lectura"
+msgstr "Remplaçar dins la lista de lectura"
 
 #: ../data/ui/playlist-prefs.ui.h:18
 msgid "Show rows:"
@@ -325,7 +324,7 @@ msgstr "Banca de donadas"
 
 #: ../data/ui/server-prefs.ui.h:4
 msgid "Last updated:"
-msgstr "Darrièra mesa a jorn :"
+msgstr "Darrièra mesa a jorn :"
 
 #: ../data/ui/server-prefs.ui.h:5
 msgid "Stop music on exit"
@@ -355,7 +354,7 @@ msgstr "n/a"
 
 #: ../data/ui/similar-artists.ui.h:1
 msgid "Add all to playlist"
-msgstr "Apondre tot a la tièra de lectura"
+msgstr "Apondre tot a la lista de lectura"
 
 #: ../data/ui/similar-artists.ui.h:3
 msgid "Find on Last.fm"
@@ -363,23 +362,23 @@ msgstr "Trobar sus Last.fm"
 
 #: ../data/ui/stats-prefs.ui.h:1
 msgid "Database play time :"
-msgstr "Durada totala de la banca de donadas :"
+msgstr "Durada totala de la banca de donadas :"
 
 #: ../data/ui/stats-prefs.ui.h:2
 msgid "Number of albums :"
-msgstr "Nombre d'albums :"
+msgstr "Nombre d'albums :"
 
 #: ../data/ui/stats-prefs.ui.h:3
 msgid "Number of artists :"
-msgstr "Nombre d'artistas :"
+msgstr "Nombre d'artistas :"
 
 #: ../data/ui/stats-prefs.ui.h:4
 msgid "Number of songs :"
-msgstr "Nombre de cançons :"
+msgstr "Nombre de cançons :"
 
 #: ../data/ui/stats-prefs.ui.h:5
 msgid "Play time :"
-msgstr "Durada de lectura :"
+msgstr "Durada de lectura :"
 
 #: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
 msgid "Statistics"
@@ -387,43 +386,43 @@ msgstr "Estatisticas"
 
 #: ../data/ui/stats-prefs.ui.h:7
 msgid "Uptime :"
-msgstr "Durada d'activitat :"
+msgstr "Durada d'activitat :"
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr "Artista de l'album :"
+msgstr "Artista de l'album :"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
-msgstr "Comentari :"
+msgstr "Comentari :"
 
 #: ../data/ui/song-infos.ui.h:5
 msgid "Composer :"
-msgstr "Compositor :"
+msgstr "Compositor :"
 
 #: ../data/ui/song-infos.ui.h:6
 msgid "Date :"
-msgstr "Data :"
+msgstr "Data :"
 
 #: ../data/ui/song-infos.ui.h:7
 msgid "Disc :"
-msgstr "Disc :"
+msgstr "Disc :"
 
 #: ../data/ui/song-infos.ui.h:8
 msgid "Filename :"
-msgstr "Fichièr :"
+msgstr "Fichièr :"
 
 #: ../data/ui/song-infos.ui.h:9 ../plugins/radios/ario-radio.c:169
 msgid "Genre :"
-msgstr "Genre :"
+msgstr "Genre :"
 
 #: ../data/ui/song-infos.ui.h:10 ../plugins/information/information.ui.h:4
 msgid "Length :"
-msgstr "Durada :"
+msgstr "Durada :"
 
 #: ../data/ui/song-infos.ui.h:11
 msgid "Performer :"
-msgstr "Interprèt :"
+msgstr "Interprèt :"
 
 #: ../data/ui/song-infos.ui.h:12
 msgid "Song"
@@ -431,7 +430,7 @@ msgstr "Cançon"
 
 #: ../data/ui/song-infos.ui.h:14
 msgid "Track :"
-msgstr "Pista :"
+msgstr "Pista :"
 
 #: ../data/ui/trayicon-prefs.ui.h:1
 msgid "Do nothing"
@@ -455,7 +454,8 @@ msgstr "Durada de la notificacion: "
 
 #: ../data/ui/trayicon-prefs.ui.h:6
 msgid "On middle button click on tray icon :"
-msgstr "Al moment d'un clic del boton del mitanu sus l'icòna de notificacion :"
+msgstr ""
+"Al moment d'un clic del boton del mitanu sus l'icòna de notificacion :"
 
 #: ../data/ui/trayicon-prefs.ui.h:7 ../src/widgets/ario-header.c:241
 msgid "Play next song"
@@ -476,7 +476,7 @@ msgstr "Aviar una fenèstra minimizada"
 #. Format result string
 #: ../src/ario-util.c:110
 msgid "seconds"
-msgstr "milisegondas"
+msgstr "segondas"
 
 #: ../src/ario-util.c:112
 msgid "minutes"
@@ -520,7 +520,7 @@ msgstr "albums d'artistas similars"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr "Tièra de lectura dinamic"
+msgstr "Lista de lectura dinamica"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
@@ -532,7 +532,7 @@ msgstr "Normala"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
-msgstr "Plugin"
+msgstr "Ensèrt"
 
 #: ../src/plugins/ario-plugin-manager.c:46
 msgid "Enabled"
@@ -576,11 +576,11 @@ msgstr "Pas connectat"
 #: ../src/preferences/ario-server-preferences.c:278
 #: ../src/widgets/ario-status-bar.c:100
 msgid "Updating..."
-msgstr "A s'actualizar..."
+msgstr "En cors de mesa a jorn..."
 
 #: ../src/servers/ario-mpd.c:410 ../src/servers/ario-mpd2.c:522
 msgid "Connecting to server..."
-msgstr "Connexion al servidor..."
+msgstr "En cors de connexion al servidor..."
 
 #: ../src/servers/ario-mpd.c:438 ../src/servers/ario-mpd2.c:550
 msgid "Impossible to connect to server. Check the connection options."
@@ -628,7 +628,7 @@ msgstr "Desconegut"
 #: ../plugins/filesystem/ario-filesystem.c:109
 #: ../plugins/radios/ario-radio.c:116
 msgid "_Add to playlist"
-msgstr "_Apondre a la tièra de lectura"
+msgstr "_Apondre a la lista de lectura"
 
 #: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:69
 #: ../src/sources/ario-storedplaylists.c:91
@@ -646,7 +646,7 @@ msgstr "Apondre e _jogar"
 #: ../plugins/filesystem/ario-filesystem.c:115
 #: ../plugins/radios/ario-radio.c:122
 msgid "_Replace in playlist"
-msgstr "_Remplaçar dins la tièra de lectura"
+msgstr "_Remplaçar dins la lista de lectura"
 
 #: ../src/sources/ario-browser.c:91
 msgid "Get the covers"
@@ -674,7 +674,7 @@ msgstr "_Suprimir"
 
 #: ../src/sources/ario-storedplaylists.c:151
 msgid "Playlists"
-msgstr "Tièras de lectura"
+msgstr "Listas de lectura"
 
 #: ../src/sources/ario-storedplaylists.c:592
 msgid "Are you sure that you want to delete all the selected playlists?"
@@ -703,9 +703,8 @@ msgid "_View"
 msgstr "_Afichatge"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "Se _connectar"
+msgstr "_Contraròtle"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -761,7 +760,7 @@ msgstr "Afichar las _Paraulas"
 
 #: ../src/shell/ario-shell.c:204
 msgid "_Translate this application..."
-msgstr "_Traduire aqueste application..."
+msgstr "_Traduire aquesta aplicacion..."
 
 #: ../src/shell/ario-shell.c:211
 msgid "S_tatusbar"
@@ -779,7 +778,7 @@ msgstr "Client GTK per MPD"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Cédric VALMARY https://launchpad.net/~cvalmary"
+"  Cédric VALMARY (Tot en òc) https://launchpad.net/~cvalmary"
 
 #. Create plugins configuration dialog window
 #: ../src/shell/ario-shell.c:1186
@@ -857,7 +856,7 @@ msgstr "Proprietats de la cançon"
 
 #: ../src/shell/ario-shell-songinfos.c:456
 msgid "Error saving tags of file:"
-msgstr "Error al moment de l'enregistrament dels tags del fichièr :"
+msgstr "Error al moment de l'enregistrament dels tags del fichièr :"
 
 #: ../src/widgets/ario-connection-widget.c:626
 msgid "You must select a server."
@@ -869,7 +868,7 @@ msgstr "Perfil novèl"
 
 #: ../src/widgets/ario-firstlaunch.c:82
 msgid "The following configuration will be used:"
-msgstr "La configuracion seguenta serà utilizada :"
+msgstr "La configuracion seguenta serà utilizada :"
 
 #: ../src/widgets/ario-firstlaunch.c:106
 msgid ""
@@ -969,11 +968,11 @@ msgstr "Filtre :"
 #. Create the widgets
 #: ../src/widgets/ario-playlist.c:1667
 msgid "Save playlist"
-msgstr "Enregistrar la tièra de lectura"
+msgstr "Salvar la lista de lectura"
 
 #: ../src/widgets/ario-playlist.c:1677
 msgid "Playlist name :"
-msgstr "Nom de la tièra de lectura :"
+msgstr "Nom de la lista de lectura"
 
 #: ../src/widgets/ario-playlist.c:1713
 msgid "Playlist already exists. Do you want to ovewrite it?"
@@ -1006,7 +1005,7 @@ msgstr "_Precedent"
 
 #: ../src/widgets/ario-tray-icon.h:41
 msgid "Not playing"
-msgstr "Jòga pas"
+msgstr "Pas de lectura en cors"
 
 #. Translators: "friendly time" string for the current day, strftime format. like "Today 12:34 am"
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1179
@@ -1015,28 +1014,28 @@ msgstr "Uèi a %H:%M"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Ièr a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"
@@ -1084,7 +1083,7 @@ msgstr "La fila d'espèra es tròp longa"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1362
 msgid "Track submission failed too many times"
-msgstr "La somission del tròç a fracassat tròp de còps"
+msgstr "La somission del tròç a fracassat tròp sovent"
 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1417
 msgid "Audioscrobbler preferences"
@@ -1096,7 +1095,7 @@ msgstr "Desactivat"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:2
 msgid "Last submission time:"
-msgstr "Darrièra somission a :"
+msgstr "Darrièra somission :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:3
 msgid "Last.fm Profile"
@@ -1112,12 +1111,12 @@ msgstr "Estat :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:8
 msgid "Tracks submitted:"
-msgstr "Tròces someses :"
+msgstr "Tròces someses :"
 
 #: ../plugins/audioscrobbler/audioscrobbler-prefs.ui.h:9
 #: ../plugins/radios/ario-radio.c:168
 msgid "Username :"
-msgstr "Nom d'utilizaire :"
+msgstr "Nom d'utilizaire :"
 
 #: ../plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in.h:1
 msgid "Last.fm"
@@ -1157,11 +1156,11 @@ msgstr "Informacions sul tròç"
 
 #: ../plugins/information/information.ui.h:2
 msgid "Albums from this artist:"
-msgstr "Albums d'aqueste artista :"
+msgstr "Albums d'aqueste artista :"
 
 #: ../plugins/information/information.ui.h:5
 msgid "Lyrics:"
-msgstr "Paraulas :"
+msgstr "Paraulas :"
 
 #: ../plugins/libnotify/libnotify.ario-plugin.desktop.in.h:1
 msgid "Add libnotify support"
@@ -1197,7 +1196,7 @@ msgstr "Last.fm : Ràdio del grop"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
-msgstr "Grop :"
+msgstr "Grop :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
@@ -1227,7 +1226,8 @@ msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr "Paramètres marrits. Vos cal especificar un nom e una URL per la ràdio."
+msgstr ""
+"Paramètres marrits. Vos cal especificar un nom e una URL per la ràdio."
 
 #. Create dialog window
 #: ../plugins/radios/ario-radio.c:883
@@ -1253,7 +1253,7 @@ msgstr "Ensèrt Wikipèdia - Configuracion"
 
 #: ../plugins/wikipedia/ario-wikipedia-plugin.c:181
 msgid "Wikipedia language :"
-msgstr "Lenga de Wikipèdia :"
+msgstr "Lenga de Wikipèdia :"
 
 #: ../plugins/wikipedia/wikipedia.ario-plugin.desktop.in.h:1
 msgid "A plugin to search current artist on wikipedia"
@@ -1263,11 +1263,11 @@ msgstr "Un plugin per cercar l'artiste en cors sus Wikipèdia"
 msgid "Wikipedia"
 msgstr "Wikipèdia"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "Apondre un critèri de recèrca"
+#~ msgid "Remove a search criteria"
+#~ msgstr "Levar un critèri de recèrca"
 
 #~ msgid "Search songs in the library"
 #~ msgstr "Cercar una cançon dins la bibliotèca"
 
-#~ msgid "Remove a search criteria"
-#~ msgstr "Levar un critèri de recèrca"
+#~ msgid "Add a search criteria"
+#~ msgstr "Apondre un critèri de recèrca"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-21 17:11+0100\n"
-"PO-Revision-Date: 2010-01-22 23:05+0000\n"
+"PO-Revision-Date: 2010-04-01 12:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-09 19:12+0000\n"
+"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/ario.desktop.in.in.h:1
@@ -213,9 +213,8 @@ msgid "Title :"
 msgstr "כותרת :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
-#, fuzzy
 msgid "Add after playing song"
-msgstr "ע_בור לשיר המתנגן"
+msgstr "הוספה לאחר נגינת השיר"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -698,9 +697,8 @@ msgid "_View"
 msgstr "_תצוגה"
 
 #: ../src/shell/ario-shell.c:158
-#, fuzzy
 msgid "_Control"
-msgstr "_התחבר"
+msgstr "_בקרה"
 
 #: ../src/shell/ario-shell.c:159
 msgid "_Tool"
@@ -744,11 +742,11 @@ msgstr "הוסף שירים דומים לרשימת ההשמעה"
 
 #: ../src/shell/ario-shell.c:192
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "מעבר ללשונית ה_קודמת"
 
 #: ../src/shell/ario-shell.c:195
 msgid "Go to _next tab"
-msgstr ""
+msgstr "מעבר ללשונית ה_באה"
 
 #: ../src/shell/ario-shell.c:198
 msgid "Show _lyrics"
@@ -1011,28 +1009,28 @@ msgstr "היום %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "אתמול %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d ב%b %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#.
+#. 
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d ב%b %Y"
@@ -1259,11 +1257,11 @@ msgstr "תוסף לחיפוש האמן הנוכחי בויקיפדיה"
 msgid "Wikipedia"
 msgstr "ויקיפדיה"
 
-#~ msgid "Add a search criteria"
-#~ msgstr "הוסף קריטריון לחיפוש"
+#~ msgid "Remove a search criteria"
+#~ msgstr "הסר קריטריון מהחיפוש"
 
 #~ msgid "Search songs in the library"
 #~ msgstr "חפש שירים בספרייה"
 
-#~ msgid "Remove a search criteria"
-#~ msgstr "הסר קריטריון מהחיפוש"
+#~ msgid "Add a search criteria"
+#~ msgstr "הוסף קריטריון לחיפוש"
