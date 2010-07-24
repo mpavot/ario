@@ -189,7 +189,6 @@
 			<Add directory="..\deps\gtk+-2.16.6-1\lib" />
 			<Add directory="..\deps\libxml2-2.7.3\win32\bin.mingw" />
 			<Add directory="..\deps\pango-1.22.4-1\lib" />
-			<Add directory="..\deps\pango-1.22.4-1\lib" />
 			<Add directory="..\deps\libmpdclient\bin\Release" />
 		</Linker>
 		<ExtraCommands>
@@ -357,6 +356,13 @@
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\lyrics\ario-lyrics-leoslyrics.h">
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-lyrc.c">
+			<Option compilerVar="CC" />
+			<Option target="ariodll" />
+		</Unit>
+		<Unit filename="src\lyrics\ario-lyrics-lyrc.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\lyrics\ario-lyrics-lyricwiki.c">
