@@ -54,6 +54,8 @@ ArioProfile*            ario_profiles_get_current       (GSList* profiles);
 void                    ario_profiles_set_current       (GSList* profiles,
                                                          ArioProfile* profile);
 
+void                    ario_profiles_set_current_by_name (const gchar * profile);
+
 G_END_DECLS
 
 #endif /* __ARIO_PROFILES_H */
