@@ -31,6 +31,7 @@
 #include "plugins/ario-plugins-engine.h"
 #include "ario-util.h"
 #include "ario-debug.h"
+#include "ario-profiles.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -59,9 +60,11 @@ main (int argc, char *argv[])
 
         /* Parse options */
         GOptionContext *context;
+        gchar *profile = NULL;
         gboolean minimized = FALSE;
         const GOptionEntry options []  = {
                 { "minimized", 'm', 0, G_OPTION_ARG_NONE, &minimized, N_("Start minimized window"), NULL },
+                { "profile", 'p', 0, G_OPTION_ARG_STRING, &profile, N_("Start with specific profile"), NULL },
                 { NULL, 0, 0, 0, NULL, NULL, NULL }
         };
 
@@ -116,6 +119,10 @@ main (int argc, char *argv[])
 
         /* Initialisation of Curl */
         curl_global_init (CURL_GLOBAL_WIN32);
+
+        /* Set a specific profile */
+        if (profile)
+                ario_profiles_set_current_by_name (profile);
 
         /* Creates Ario main window */
         shell = ario_shell_new ();

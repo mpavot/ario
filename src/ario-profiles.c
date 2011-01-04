@@ -297,4 +297,25 @@ ario_profiles_set_current (GSList* profiles,
         }
 }
 
+void
+ario_profiles_set_current_by_name (const gchar * profile)
+{
+        ARIO_LOG_FUNCTION_START;
+        GSList *profiles, *tmp;
+        ArioProfile *tmp_profile;
 
+        profiles = ario_profiles_get ();
+
+        for (tmp = profiles; tmp; tmp = g_slist_next (tmp)) {
+                tmp_profile = (ArioProfile *) tmp->data;
+                if (!ario_util_strcmp (tmp_profile->name, profile))
+                {
+                        ario_profiles_set_current (profiles, tmp_profile);
+                        ario_profiles_save (profiles);
+                        break;
+                }
+        }
+
+        if (!tmp)
+                g_warning ("Profile %s not found", profile);
+}
