@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-21 17:11+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-24 23:29+0200\n"
 "PO-Revision-Date: 2010-07-02 18:53+0000\n"
 "Last-Translator: Kristjan SCHMIDT <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -131,11 +132,11 @@ msgstr "Konekto"
 msgid "_Autoconnect on startup"
 msgstr "_Aŭtokonekti je startigo"
 
-#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:162
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:167
 msgid "_Connect"
 msgstr "_Konekti"
 
-#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:165
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:170
 msgid "_Disconnect"
 msgstr "_Malkonekti"
 
@@ -169,7 +170,7 @@ msgstr "Elŝuti kovrilon"
 msgid "Local search"
 msgstr "Loka serĉo"
 
-#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:104
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:108
 msgid "Search"
 msgstr "Serĉo"
 
@@ -186,22 +187,36 @@ msgid "Interface"
 msgstr "Interfaco"
 
 #: ../data/ui/others-prefs.ui.h:4
+msgid "Playlist at the right of tabs"
+msgstr ""
+
+#: ../data/ui/others-prefs.ui.h:5
+#, fuzzy
+msgid "Playlist below tabs"
+msgstr "Nomo de ludlisto :"
+
+#: ../data/ui/others-prefs.ui.h:6
+#, fuzzy
+msgid "Playlist within tabs"
+msgstr "Nomo de ludlisto :"
+
+#: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
 msgstr "Prokurilo"
 
-#: ../data/ui/others-prefs.ui.h:5
+#: ../data/ui/others-prefs.ui.h:8
 msgid "Proxy Address :"
 msgstr "Prokurilo-adreso :"
 
-#: ../data/ui/others-prefs.ui.h:6
+#: ../data/ui/others-prefs.ui.h:9
 msgid "Proxy Port :"
 msgstr "Prokurilo-pordo :"
 
-#: ../data/ui/others-prefs.ui.h:7
+#: ../data/ui/others-prefs.ui.h:10
 msgid "Show tabs"
 msgstr "Montri foliojn"
 
-#: ../data/ui/others-prefs.ui.h:8
+#: ../data/ui/others-prefs.ui.h:11
 msgid "Use a proxy"
 msgstr "Uzi prokurilon"
 
@@ -228,24 +243,24 @@ msgstr "Aldonu kun ludlisto"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:517
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:541
 #: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:565
 msgid "Album"
 msgstr "Albumo"
 
 #: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:45
-#: ../src/widgets/ario-playlist.c:517 ../src/widgets/ario-songlist.c:213
+#: ../src/widgets/ario-playlist.c:541 ../src/widgets/ario-songlist.c:213
 #: ../src/widgets/ario-tray-icon.c:563
 msgid "Artist"
 msgstr "Artisto"
 
 #. ARIO_TAG_GENRE
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:52
-#: ../src/widgets/ario-playlist.c:517
+#: ../src/widgets/ario-playlist.c:541
 msgid "Date"
 msgstr "Dato"
 
-#: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:517
+#: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:541
 msgid "Disc"
 msgstr "Disko"
 
@@ -253,18 +268,18 @@ msgstr "Disko"
 msgid "Double click"
 msgstr "Duobla alklako"
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:517
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:541
 msgid "Duration"
 msgstr "Daŭro"
 
-#: ../data/ui/playlist-prefs.ui.h:10 ../src/widgets/ario-playlist.c:517
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/widgets/ario-playlist.c:541
 msgid "File"
 msgstr "Dosiero"
 
 #. ARIO_TAG_TRACK
 #. ARIO_TAG_NAME
 #: ../data/ui/playlist-prefs.ui.h:11 ../src/servers/ario-server.c:51
-#: ../src/widgets/ario-playlist.c:517
+#: ../src/widgets/ario-playlist.c:541
 msgid "Genre"
 msgstr "Ĝenro"
 
@@ -281,7 +296,8 @@ msgid "On double click:"
 msgstr "Je duobla klako:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:217 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Ludlisto"
 
@@ -299,14 +315,14 @@ msgstr "Montri kolumnojn:"
 
 #. ARIO_TAG_ALBUM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:48
-#: ../src/sources/ario-tree-songs.c:145 ../src/widgets/ario-playlist.c:517
+#: ../src/sources/ario-tree-songs.c:145 ../src/widgets/ario-playlist.c:541
 #: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:567
 msgid "Title"
 msgstr "Titolo"
 
 #. ARIO_TAG_TITLE
 #: ../data/ui/playlist-prefs.ui.h:20 ../src/servers/ario-server.c:49
-#: ../src/sources/ario-tree-songs.c:138 ../src/widgets/ario-playlist.c:517
+#: ../src/sources/ario-tree-songs.c:138 ../src/widgets/ario-playlist.c:541
 msgid "Track"
 msgstr "Trako"
 
@@ -493,7 +509,7 @@ msgstr "tagoj"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "La kovrilo jam ekzistas. Ĉu vi volas anstataŭigi ĝin?"
 
-#: ../src/covers/ario-cover-local.c:60
+#: ../src/covers/ario-cover-local.c:48
 msgid "Music Directory"
 msgstr "Muzika Dosierujo"
 
@@ -537,7 +553,7 @@ msgstr "Kromprogramo"
 msgid "Enabled"
 msgstr "Ebligite"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:201
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:206
 msgid "_About"
 msgstr "_Pri"
 
@@ -618,7 +634,7 @@ msgstr "Io ajn"
 msgid "Unknown"
 msgstr "Nekonate"
 
-#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:66
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:70
 #: ../src/sources/ario-storedplaylists.c:88
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../plugins/filesystem/ario-filesystem.c:94
@@ -627,7 +643,7 @@ msgstr "Nekonate"
 msgid "_Add to playlist"
 msgstr "_Aldoni al ludlisto"
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:69
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:73
 #: ../src/sources/ario-storedplaylists.c:91
 #: ../src/sources/ario-storedplaylists.c:109
 #: ../plugins/filesystem/ario-filesystem.c:97
@@ -636,7 +652,7 @@ msgstr "_Aldoni al ludlisto"
 msgid "Add and _play"
 msgstr "Aldoni al ludlisto"
 
-#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:72
+#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:76
 #: ../src/sources/ario-storedplaylists.c:94
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:100
@@ -654,7 +670,7 @@ msgid "_Delete the covers"
 msgstr "_Forigi la kovrilojn"
 
 #: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
-#: ../src/sources/ario-search.c:75 ../src/sources/ario-storedplaylists.c:115
+#: ../src/sources/ario-search.c:79 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:131
@@ -686,91 +702,91 @@ msgstr "Ĉu vi certas ke vi volas forigi ĉiujn selektatajn kovrilojn?"
 msgid "Cover"
 msgstr "Kovrilo"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:160
 msgid "_File"
 msgstr "_Dosiero"
 
-#: ../src/shell/ario-shell.c:156
+#: ../src/shell/ario-shell.c:161
 msgid "_Edit"
 msgstr "R_edakti"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:162
 msgid "_View"
 msgstr "_Vido"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:163
 msgid "_Control"
 msgstr "_Kontrolo"
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:164
 msgid "_Tool"
 msgstr "_Ilo"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:165
 msgid "_Help"
 msgstr "_Helpo"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:173
 msgid "_Update database"
 msgstr "Ĝisdatigu datumbazon"
 
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:176
 msgid "_Quit"
 msgstr "_Eliri"
 
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:179
 msgid "Plu_gins"
 msgstr "Krompro_gramoj"
 
-#: ../src/shell/ario-shell.c:177
+#: ../src/shell/ario-shell.c:182
 msgid "Prefere_nces"
 msgstr "_Agordoj"
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:185
 msgid "_Change current album cover"
 msgstr "Ŝ_anĝi nunan kovrilon"
 
-#: ../src/shell/ario-shell.c:183
+#: ../src/shell/ario-shell.c:188
 msgid "Download album _covers"
 msgstr "_Subenŝarĝi kovrilojn"
 
-#: ../src/shell/ario-shell.c:186
+#: ../src/shell/ario-shell.c:191
 msgid "Find similar artists"
 msgstr "Serĉi kompareblajn artistojn"
 
-#: ../src/shell/ario-shell.c:189
+#: ../src/shell/ario-shell.c:194
 msgid "Add similar songs to playlist"
 msgstr "Aldoni kompareblajn kantojn en ludlisto"
 
-#: ../src/shell/ario-shell.c:192
+#: ../src/shell/ario-shell.c:197
 msgid "Go to _previous tab"
 msgstr "Iri al _antaŭa folio"
 
-#: ../src/shell/ario-shell.c:195
+#: ../src/shell/ario-shell.c:200
 msgid "Go to _next tab"
 msgstr "Iri al _sekva folio"
 
-#: ../src/shell/ario-shell.c:198
+#: ../src/shell/ario-shell.c:203
 msgid "Show _lyrics"
 msgstr "Montri _ludtekstojn"
 
-#: ../src/shell/ario-shell.c:204
+#: ../src/shell/ario-shell.c:209
 msgid "_Translate this application..."
 msgstr "_Traduku ĉi tiun programon..."
 
-#: ../src/shell/ario-shell.c:211
+#: ../src/shell/ario-shell.c:216
 msgid "S_tatusbar"
 msgstr "S_tatobreto"
 
-#: ../src/shell/ario-shell.c:214
+#: ../src/shell/ario-shell.c:219
 msgid "Upper part"
 msgstr "Supra parto"
 
-#: ../src/shell/ario-shell.c:814
+#: ../src/shell/ario-shell.c:824
 msgid "GTK client for MPD"
 msgstr "GTK-kliento por MPD"
 
-#: ../src/shell/ario-shell.c:815
+#: ../src/shell/ario-shell.c:825
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -780,7 +796,7 @@ msgstr ""
 "  nakata https://launchpad.net/~nakata"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1186
+#: ../src/shell/ario-shell.c:1277
 msgid "Configure Plugins"
 msgstr "Agordi kromprogramojn"
 
@@ -960,21 +976,21 @@ msgstr "Kon_servi"
 msgid "_Go to playing song"
 msgstr "_Iri al ludata kanto"
 
-#: ../src/widgets/ario-playlist.c:640
+#: ../src/widgets/ario-playlist.c:667
 msgid "Filter:"
 msgstr "Filtrilo:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1667
+#: ../src/widgets/ario-playlist.c:1696
 msgid "Save playlist"
 msgstr "Konservi ludliston"
 
-#: ../src/widgets/ario-playlist.c:1677
+#: ../src/widgets/ario-playlist.c:1706
 msgid "Playlist name :"
 msgstr "Nomo de ludlisto :"
 
-#: ../src/widgets/ario-playlist.c:1713
-msgid "Playlist already exists. Do you want to ovewrite it?"
+#: ../src/widgets/ario-playlist.c:1742
+msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Ludlisto jam ekzistas. Ĉu vi volas reskribi ĝin?"
 
 #. Format status bar message
@@ -1013,28 +1029,28 @@ msgstr "Hodiaŭ %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Hieraŭ %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %H:%M"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%d-an de %b %H:%M"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%d-an de %b %Y"
@@ -1225,8 +1241,7 @@ msgstr "URL :"
 
 #: ../plugins/radios/ario-radio.c:853 ../plugins/radios/ario-radio.c:997
 msgid "Bad parameters. You must specify a name and a URL for the radio."
-msgstr ""
-"Malkompleta parametro. Vi devas specifi nomon kaj URL-n por la radio."
+msgstr "Malkompleta parametro. Vi devas specifi nomon kaj URL-n por la radio."
 
 #. Create dialog window
 #: ../plugins/radios/ario-radio.c:883
