@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-03-21 17:11+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-24 23:29+0200\n"
 "PO-Revision-Date: 2010-05-05 18:46+0000\n"
 "Last-Translator: Olexandr Ushakov <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -130,11 +131,11 @@ msgstr "З'єднання"
 msgid "_Autoconnect on startup"
 msgstr "_Автоматично з'єднуватись при запуску"
 
-#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:162
+#: ../data/ui/connection-prefs.ui.h:3 ../src/shell/ario-shell.c:167
 msgid "_Connect"
 msgstr "_З'єднатись"
 
-#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:165
+#: ../data/ui/connection-prefs.ui.h:4 ../src/shell/ario-shell.c:170
 msgid "_Disconnect"
 msgstr "_Від'єднатись"
 
@@ -168,7 +169,7 @@ msgstr "Загружаю обкладинку"
 msgid "Local search"
 msgstr "Обрати локально"
 
-#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:104
+#: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:108
 msgid "Search"
 msgstr "Шукати"
 
@@ -185,22 +186,36 @@ msgid "Interface"
 msgstr "Зовнішній вигляд"
 
 #: ../data/ui/others-prefs.ui.h:4
+msgid "Playlist at the right of tabs"
+msgstr ""
+
+#: ../data/ui/others-prefs.ui.h:5
+#, fuzzy
+msgid "Playlist below tabs"
+msgstr "Назва списку відтворення:"
+
+#: ../data/ui/others-prefs.ui.h:6
+#, fuzzy
+msgid "Playlist within tabs"
+msgstr "Назва списку відтворення:"
+
+#: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
 msgstr "Проксі-сервер"
 
-#: ../data/ui/others-prefs.ui.h:5
+#: ../data/ui/others-prefs.ui.h:8
 msgid "Proxy Address :"
 msgstr "Адреса проксі-серверу :"
 
-#: ../data/ui/others-prefs.ui.h:6
+#: ../data/ui/others-prefs.ui.h:9
 msgid "Proxy Port :"
 msgstr "Порт проксі серверу :"
 
-#: ../data/ui/others-prefs.ui.h:7
+#: ../data/ui/others-prefs.ui.h:10
 msgid "Show tabs"
 msgstr "Показувати вкладки"
 
-#: ../data/ui/others-prefs.ui.h:8
+#: ../data/ui/others-prefs.ui.h:11
 msgid "Use a proxy"
 msgstr "Використовувати проксі-сервер"
 
@@ -227,24 +242,24 @@ msgstr "Додати до списку відтворення"
 
 #. ARIO_TAG_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:4 ../src/servers/ario-server.c:46
-#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:517
+#: ../src/sources/ario-tree-albums.c:213 ../src/widgets/ario-playlist.c:541
 #: ../src/widgets/ario-songlist.c:228 ../src/widgets/ario-tray-icon.c:565
 msgid "Album"
 msgstr "Альбом"
 
 #: ../data/ui/playlist-prefs.ui.h:5 ../src/servers/ario-server.c:45
-#: ../src/widgets/ario-playlist.c:517 ../src/widgets/ario-songlist.c:213
+#: ../src/widgets/ario-playlist.c:541 ../src/widgets/ario-songlist.c:213
 #: ../src/widgets/ario-tray-icon.c:563
 msgid "Artist"
 msgstr "Виконавець"
 
 #. ARIO_TAG_GENRE
 #: ../data/ui/playlist-prefs.ui.h:6 ../src/servers/ario-server.c:52
-#: ../src/widgets/ario-playlist.c:517
+#: ../src/widgets/ario-playlist.c:541
 msgid "Date"
 msgstr "Рік"
 
-#: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:517
+#: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:541
 msgid "Disc"
 msgstr "Диск"
 
@@ -252,18 +267,18 @@ msgstr "Диск"
 msgid "Double click"
 msgstr "Подвійне натискання"
 
-#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:517
+#: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:541
 msgid "Duration"
 msgstr "Тривалість"
 
-#: ../data/ui/playlist-prefs.ui.h:10 ../src/widgets/ario-playlist.c:517
+#: ../data/ui/playlist-prefs.ui.h:10 ../src/widgets/ario-playlist.c:541
 msgid "File"
 msgstr "Файл"
 
 #. ARIO_TAG_TRACK
 #. ARIO_TAG_NAME
 #: ../data/ui/playlist-prefs.ui.h:11 ../src/servers/ario-server.c:51
-#: ../src/widgets/ario-playlist.c:517
+#: ../src/widgets/ario-playlist.c:541
 msgid "Genre"
 msgstr "Жанр"
 
@@ -280,7 +295,8 @@ msgid "On double click:"
 msgstr "Під час подвійного натискання:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:217 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Список відтворення"
 
@@ -298,14 +314,14 @@ msgstr "Показати рядки:"
 
 #. ARIO_TAG_ALBUM_ARTIST
 #: ../data/ui/playlist-prefs.ui.h:19 ../src/servers/ario-server.c:48
-#: ../src/sources/ario-tree-songs.c:145 ../src/widgets/ario-playlist.c:517
+#: ../src/sources/ario-tree-songs.c:145 ../src/widgets/ario-playlist.c:541
 #: ../src/widgets/ario-songlist.c:198 ../src/widgets/ario-tray-icon.c:567
 msgid "Title"
 msgstr "Назва"
 
 #. ARIO_TAG_TITLE
 #: ../data/ui/playlist-prefs.ui.h:20 ../src/servers/ario-server.c:49
-#: ../src/sources/ario-tree-songs.c:138 ../src/widgets/ario-playlist.c:517
+#: ../src/sources/ario-tree-songs.c:138 ../src/widgets/ario-playlist.c:541
 msgid "Track"
 msgstr "Доріжка"
 
@@ -492,7 +508,7 @@ msgstr "днів"
 msgid "The cover already exists. Do you want to replace it?"
 msgstr "Обкладинка вже існує. Бажаєте її замінити?"
 
-#: ../src/covers/ario-cover-local.c:60
+#: ../src/covers/ario-cover-local.c:48
 msgid "Music Directory"
 msgstr "Тека з музикою"
 
@@ -536,7 +552,7 @@ msgstr "Модуль"
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:201
+#: ../src/plugins/ario-plugin-manager.c:480 ../src/shell/ario-shell.c:206
 msgid "_About"
 msgstr "_Про програму"
 
@@ -617,7 +633,7 @@ msgstr "Будь-яка"
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:66
+#: ../src/sources/ario-browser.c:82 ../src/sources/ario-search.c:70
 #: ../src/sources/ario-storedplaylists.c:88
 #: ../src/sources/ario-storedplaylists.c:106
 #: ../plugins/filesystem/ario-filesystem.c:94
@@ -626,7 +642,7 @@ msgstr "Невідомо"
 msgid "_Add to playlist"
 msgstr "_Додати до списку відтворення"
 
-#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:69
+#: ../src/sources/ario-browser.c:85 ../src/sources/ario-search.c:73
 #: ../src/sources/ario-storedplaylists.c:91
 #: ../src/sources/ario-storedplaylists.c:109
 #: ../plugins/filesystem/ario-filesystem.c:97
@@ -635,7 +651,7 @@ msgstr "_Додати до списку відтворення"
 msgid "Add and _play"
 msgstr "Додати та _відтворити"
 
-#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:72
+#: ../src/sources/ario-browser.c:88 ../src/sources/ario-search.c:76
 #: ../src/sources/ario-storedplaylists.c:94
 #: ../src/sources/ario-storedplaylists.c:112
 #: ../plugins/filesystem/ario-filesystem.c:100
@@ -653,7 +669,7 @@ msgid "_Delete the covers"
 msgstr "_Вилучити обкладинки"
 
 #: ../src/sources/ario-browser.c:97 ../src/sources/ario-browser.c:100
-#: ../src/sources/ario-search.c:75 ../src/sources/ario-storedplaylists.c:115
+#: ../src/sources/ario-search.c:79 ../src/sources/ario-storedplaylists.c:115
 #: ../src/widgets/ario-playlist.c:151
 #: ../plugins/filesystem/ario-filesystem.c:118
 #: ../plugins/radios/ario-radio.c:131
@@ -685,91 +701,91 @@ msgstr "Ви впевнені, що хочете вилучити усі вид�
 msgid "Cover"
 msgstr "Обкладинка"
 
-#: ../src/shell/ario-shell.c:155
+#: ../src/shell/ario-shell.c:160
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/shell/ario-shell.c:156
+#: ../src/shell/ario-shell.c:161
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../src/shell/ario-shell.c:157
+#: ../src/shell/ario-shell.c:162
 msgid "_View"
 msgstr "_Перегляд"
 
-#: ../src/shell/ario-shell.c:158
+#: ../src/shell/ario-shell.c:163
 msgid "_Control"
 msgstr "_Керування"
 
-#: ../src/shell/ario-shell.c:159
+#: ../src/shell/ario-shell.c:164
 msgid "_Tool"
 msgstr "_Утиліта"
 
-#: ../src/shell/ario-shell.c:160
+#: ../src/shell/ario-shell.c:165
 msgid "_Help"
 msgstr "_Довідка"
 
-#: ../src/shell/ario-shell.c:168
+#: ../src/shell/ario-shell.c:173
 msgid "_Update database"
 msgstr "_Оновити базу"
 
-#: ../src/shell/ario-shell.c:171
+#: ../src/shell/ario-shell.c:176
 msgid "_Quit"
 msgstr "_Вихід"
 
-#: ../src/shell/ario-shell.c:174
+#: ../src/shell/ario-shell.c:179
 msgid "Plu_gins"
 msgstr "_Додатки"
 
-#: ../src/shell/ario-shell.c:177
+#: ../src/shell/ario-shell.c:182
 msgid "Prefere_nces"
 msgstr "_Налаштування"
 
-#: ../src/shell/ario-shell.c:180
+#: ../src/shell/ario-shell.c:185
 msgid "_Change current album cover"
 msgstr "Змінити обкладинку цього альбому"
 
-#: ../src/shell/ario-shell.c:183
+#: ../src/shell/ario-shell.c:188
 msgid "Download album _covers"
 msgstr "Завантажити обкладинку альбому"
 
-#: ../src/shell/ario-shell.c:186
+#: ../src/shell/ario-shell.c:191
 msgid "Find similar artists"
 msgstr "Знайти схожих виконавців"
 
-#: ../src/shell/ario-shell.c:189
+#: ../src/shell/ario-shell.c:194
 msgid "Add similar songs to playlist"
 msgstr "Додати схожі треки до списку"
 
-#: ../src/shell/ario-shell.c:192
+#: ../src/shell/ario-shell.c:197
 msgid "Go to _previous tab"
 msgstr "Перейти до попередньої вкладки"
 
-#: ../src/shell/ario-shell.c:195
+#: ../src/shell/ario-shell.c:200
 msgid "Go to _next tab"
 msgstr "Перейти до наступної вкладки"
 
-#: ../src/shell/ario-shell.c:198
+#: ../src/shell/ario-shell.c:203
 msgid "Show _lyrics"
 msgstr "Показати текст"
 
-#: ../src/shell/ario-shell.c:204
+#: ../src/shell/ario-shell.c:209
 msgid "_Translate this application..."
 msgstr "Перевести дану програму"
 
-#: ../src/shell/ario-shell.c:211
+#: ../src/shell/ario-shell.c:216
 msgid "S_tatusbar"
 msgstr "_Рядок стану"
 
-#: ../src/shell/ario-shell.c:214
+#: ../src/shell/ario-shell.c:219
 msgid "Upper part"
 msgstr "Верхня частина"
 
-#: ../src/shell/ario-shell.c:814
+#: ../src/shell/ario-shell.c:824
 msgid "GTK client for MPD"
 msgstr "Клієнт GTK для MPD"
 
-#: ../src/shell/ario-shell.c:815
+#: ../src/shell/ario-shell.c:825
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -781,7 +797,7 @@ msgstr ""
 "  danilyc https://launchpad.net/~danilyc"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1186
+#: ../src/shell/ario-shell.c:1277
 msgid "Configure Plugins"
 msgstr "Налаштовування модулів"
 
@@ -961,21 +977,21 @@ msgstr "_Зберегти"
 msgid "_Go to playing song"
 msgstr "Перейти до пісні, що програється"
 
-#: ../src/widgets/ario-playlist.c:640
+#: ../src/widgets/ario-playlist.c:667
 msgid "Filter:"
 msgstr "Фільтр:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1667
+#: ../src/widgets/ario-playlist.c:1696
 msgid "Save playlist"
 msgstr "Зберегти список відтворення"
 
-#: ../src/widgets/ario-playlist.c:1677
+#: ../src/widgets/ario-playlist.c:1706
 msgid "Playlist name :"
 msgstr "Назва списку відтворення:"
 
-#: ../src/widgets/ario-playlist.c:1713
-msgid "Playlist already exists. Do you want to ovewrite it?"
+#: ../src/widgets/ario-playlist.c:1742
+msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr ""
 "Список відтворення з таким  іменем вже є в цій теці. Чи бажаєте ви "
 "перезаписати його?"
@@ -1016,28 +1032,28 @@ msgstr "Сьогодні %I:%M %p"
 
 #. Translators: "friendly time" string for the previous day,
 #. * strftime format. e.g. "Yesterday 12:34 am"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1192
 msgid "Yesterday %I:%M %p"
 msgstr "Вчора %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current week,
 #. * strftime format. e.g. "Wed 12:34 am"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1208
 msgid "%a %I:%M %p"
 msgstr "%a %I:%M %p"
 
 #. Translators: "friendly time" string for a day in the current year,
 #. * strftime format. e.g. "Feb 12 12:34 am"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1220
 msgid "%b %d %I:%M %p"
 msgstr "%b %d %I:%M %p"
 
 #. Translators: "friendly time" string for a day in a different year,
 #. * strftime format. e.g. "Feb 12 1997"
-#. 
+#.
 #: ../plugins/audioscrobbler/ario-audioscrobbler.c:1225
 msgid "%b %d %Y"
 msgstr "%b %d %Y"

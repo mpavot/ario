@@ -970,7 +970,7 @@ msgid "Playlist name :"
 msgstr ""
 
 #: ../src/widgets/ario-playlist.c:1742
-msgid "Playlist already exists. Do you want to ovewrite it?"
+msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr ""
 
 #. Format status bar message

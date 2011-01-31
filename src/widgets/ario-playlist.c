@@ -1739,7 +1739,7 @@ ario_playlist_cmd_save (GtkAction *action,
                                                  GTK_DIALOG_MODAL,
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_YES_NO,
-                                                 _("Playlist already exists. Do you want to ovewrite it?"));
+                                                 _("Playlist already exists. Do you want to overwrite it?"));
 
                 retval = gtk_dialog_run (GTK_DIALOG (dialog));
                 gtk_widget_destroy (dialog);
