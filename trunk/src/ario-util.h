@@ -185,6 +185,15 @@ void                    ario_util_load_uri                   (const char *uri);
 char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;
 
 /**
+ * Format a keyword to be used for a search on last.fm
+ *
+ * @param keyword The keyword to format
+ *
+ * @return A newly allocated formated keyword
+ */
+char *                  ario_util_format_keyword_for_lastfm  (const char *keyword) G_GNUC_MALLOC;
+
+/**
  * Compute the MD5 hash of a string
  *
  * @param string The string to use for MD5 computation

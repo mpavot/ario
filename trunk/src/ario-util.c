@@ -526,6 +526,29 @@ ario_util_format_keyword (const char *keyword)
         return ret;
 }
 
+char *
+ario_util_format_keyword_for_lastfm (const char *keyword)
+{
+        ARIO_LOG_FUNCTION_START;
+        int i;
+        gchar *ret;
+
+        /* List of modifications done on the keuword used for the search */
+        const gchar *to_remove[] = {"cd 1", "cd 2", "cd 3", "cd 4", "cd 5",
+                "cd1", "cd2", "cd3", "cd4", "cd5",
+                "disc", "disk", "disque", "remastered", NULL};
+
+        /* Escape string */
+        ret = g_uri_escape_string (keyword, NULL, FALSE);
+
+        /* We remove some useless words to make more accurate requests */
+        for (i = 0; to_remove[i]; ++i) {
+                ario_util_string_replace (&ret, to_remove[i], " ");
+        }
+
+        return ret;
+}
+
 gchar *
 ario_util_md5 (const char *string)
 {
