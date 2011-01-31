@@ -219,7 +219,7 @@ ario_songlist_new (GtkUIManager *mgr,
         gtk_tree_view_column_set_resizable (column, TRUE);
         if (is_sortable) {
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
-                gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
+                gtk_tree_view_column_set_sort_column_id (column, SONGS_ARTIST_COLUMN);
         }
         gtk_tree_view_append_column (songlist->priv->tree, column);
 
@@ -234,7 +234,7 @@ ario_songlist_new (GtkUIManager *mgr,
         gtk_tree_view_column_set_resizable (column, TRUE);
         if (is_sortable) {
                 gtk_tree_view_column_set_sort_indicator (column, TRUE);
-                gtk_tree_view_column_set_sort_column_id (column, SONGS_TITLE_COLUMN);
+                gtk_tree_view_column_set_sort_column_id (column, SONGS_ALBUM_COLUMN);
         }
         gtk_tree_view_append_column (songlist->priv->tree, column);
 
