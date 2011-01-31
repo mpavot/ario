@@ -122,9 +122,14 @@ ario_notifier_libnotify_init (ArioNotifierLibnotify *notifier_libnotify)
         ARIO_LOG_FUNCTION_START;
         notifier_libnotify->priv = ARIO_NOTIFIER_LIBNOTIFY_GET_PRIVATE (notifier_libnotify);
 
-        notifier_libnotify->priv->notification = notify_notification_new ("Ario",  NULL, NULL, NULL);
+        notifier_libnotify->priv->notification = notify_notification_new ("Ario",  NULL, NULL
+#if HAVE_LIBNOTIFY_07
+           );
+#else
+           , NULL);
         notify_notification_attach_to_status_icon (notifier_libnotify->priv->notification,
                                                    GTK_STATUS_ICON (ario_tray_icon_get_instance ()));
+#endif
 }
 
 static void

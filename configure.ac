@@ -229,8 +229,14 @@ AC_ARG_ENABLE(notify,
 if test x"$enable_notify" != xno; then
    PKG_CHECK_MODULES(NOTIFY, libnotify)
    AC_DEFINE(ENABLE_LIBNOTIFY, 1, [Add support of libnotify])
+   # Check for libnotify >= 0.7
+   PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
+   if test x"$have_libnotify_07" = "xyes"; then
+      AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
+   fi
 fi
 AM_CONDITIONAL(USE_NOTIFY, test x"$enable_notify" != xno)
+
 
 dnl ================================================================
 dnl AUDIOSCROBBLER
