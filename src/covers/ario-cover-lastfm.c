@@ -172,11 +172,12 @@ ario_cover_lastfm_make_xml_uri (const char *artist,
         if (!strcmp (album, ARIO_SERVER_UNKNOWN))
                 return NULL;
 
-        formated_artist = ario_util_format_keyword (artist);
-        formated_album = ario_util_format_keyword (album);
+        formated_artist = ario_util_format_keyword_for_lastfm (artist);
+        formated_album = ario_util_format_keyword_for_lastfm (album);
 
         /* We make the xml uri with all the parameters */
         xml_uri = g_strdup_printf (LASTFM_URI, formated_artist, formated_album);
+
         g_free (formated_artist);
         g_free (formated_album);
 
