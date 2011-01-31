@@ -660,6 +660,7 @@ void
 ario_shell_present (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
+        ario_shell_set_visibility(shell, VISIBILITY_VISIBLE);
         gtk_window_present (GTK_WINDOW (shell));
 }
 
