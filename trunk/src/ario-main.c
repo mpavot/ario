@@ -25,6 +25,7 @@
 #include <curl/curl.h>
 #include <libxml/parser.h>
 #include <glib/gi18n.h>
+#include <gcrypt.h>
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 #include "shell/ario-shell.h"
@@ -113,6 +114,9 @@ main (int argc, char *argv[])
         /* Initialisation of GTK */
         gtk_set_locale ();
         gtk_init (&argc, &argv);
+
+        /* Initialisation of libgcrypt */
+        gcry_check_version (NULL);
 
         /* Register Ario icons */
         ario_util_init_stock_icons ();
