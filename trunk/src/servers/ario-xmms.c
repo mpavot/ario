@@ -544,7 +544,7 @@ ario_xmms_connect (void)
         profile = ario_profiles_get_current (ario_profiles_get ());
         hostname = profile->host;
         port = profile->port;
-        timeout = 5.0;
+        timeout = (float) profile->timeout / 1000.0;
 
         if (hostname == NULL)
                 hostname = "localhost";

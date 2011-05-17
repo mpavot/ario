@@ -87,6 +87,7 @@ ario_profiles_get (void)
         xmlChar *xml_name;
         xmlChar *xml_host;
         xmlChar *xml_port;
+        xmlChar *xml_timeout;
         xmlChar *xml_password;
         xmlChar *xml_musicdir;
         xmlChar *xml_local;
@@ -141,6 +142,15 @@ ario_profiles_get (void)
                         xml_port = xmlGetProp (cur, (const unsigned char *)"port");
                         profile->port = atoi ((char *) xml_port);
                         xmlFree(xml_port);
+
+                        /* Get timeout */
+                        xml_timeout = xmlGetProp (cur, (const unsigned char *)"timeout");
+                        if (xml_timeout) {
+                                profile->timeout = atoi ((char *) xml_timeout);
+                        } else {
+                                profile->timeout = 5000;
+                        }
+                        xmlFree(xml_timeout);
 
                         /* Get password */
                         xml_password = xmlGetProp (cur, (const unsigned char *)"password");
@@ -204,6 +214,7 @@ ario_profiles_save (GSList* profiles)
         ArioProfile *profile;
         GSList *tmp;
         gchar *port_char;
+        gchar *timeout_char;
         gchar *type_char;
 
         xml_filename = ario_profiles_get_xml_filename();
@@ -232,6 +243,7 @@ ario_profiles_save (GSList* profiles)
         for (tmp = profiles; tmp; tmp = g_slist_next (tmp)) {
                 profile = (ArioProfile *) tmp->data;
                 port_char = g_strdup_printf ("%d",  profile->port);
+                timeout_char = g_strdup_printf ("%d",  profile->timeout);
                 type_char = g_strdup_printf ("%d",  profile->type);
 
                 /* We add a new "profiles" entry */
@@ -239,6 +251,7 @@ ario_profiles_save (GSList* profiles)
                 xmlNodeAddContent (cur2, (const xmlChar *) profile->name);
                 xmlSetProp (cur2, (const xmlChar *)"host", (const xmlChar *) profile->host);
                 xmlSetProp (cur2, (const xmlChar *)"port", (const xmlChar *) port_char);
+                xmlSetProp (cur2, (const xmlChar *)"timeout", (const xmlChar *) timeout_char);
                 if (profile->password) {
                         xmlSetProp (cur2, (const xmlChar *)"password", (const xmlChar *) profile->password);
                 }
@@ -253,6 +266,7 @@ ario_profiles_save (GSList* profiles)
                 }
                 xmlSetProp (cur2, (const xmlChar *)"type", (const xmlChar *) type_char);
                 g_free (port_char);
+                g_free (timeout_char);
                 g_free (type_char);
         }
 
