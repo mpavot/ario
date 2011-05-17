@@ -22,6 +22,8 @@
 
 #include <gtk/gtkvbox.h>
 
+#define ARIO_DEFAULT_TIMEOUT 5000
+
 G_BEGIN_DECLS
 
 #define TYPE_ARIO_CONNECTION_WIDGET         (ario_connection_widget_get_type ())

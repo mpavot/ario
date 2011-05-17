@@ -36,6 +36,7 @@ typedef struct
         gchar *name;
         gchar *host;
         int port;
+        int timeout;
         gchar *password;
         gchar *musicdir;
         gboolean local;

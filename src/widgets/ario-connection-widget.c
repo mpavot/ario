@@ -41,6 +41,8 @@ G_MODULE_EXPORT void ario_connection_widget_host_changed_cb (GtkWidget *widget,
                                                              ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_port_changed_cb (GtkWidget *widget,
                                                              ArioConnectionWidget *connection_widget);
+G_MODULE_EXPORT void ario_connection_widget_timeout_changed_cb (GtkWidget *widget,
+                                                                ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
                                                              ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_password_changed_cb (GtkWidget *widget,
@@ -76,6 +78,7 @@ struct ArioConnectionWidgetPrivate
         GtkWidget *name_entry;
         GtkWidget *host_entry;
         GtkWidget *port_spinbutton;
+        GtkWidget *timeout_spinbutton;
         GtkWidget *password_entry;
         GtkWidget *local_checkbutton;
         GtkWidget *musicdir_entry;
@@ -185,6 +188,10 @@ ario_connection_widget_profile_selection_update (ArioConnectionWidget *connectio
                                          G_CALLBACK (ario_connection_widget_port_changed_cb),
                                          connection_widget);
 
+        g_signal_handlers_block_by_func (G_OBJECT (connection_widget->priv->timeout_spinbutton),
+                                         G_CALLBACK (ario_connection_widget_timeout_changed_cb),
+                                         connection_widget);
+
         g_signal_handlers_block_by_func (G_OBJECT (connection_widget->priv->mpd_radiobutton),
                                          G_CALLBACK (ario_connection_widget_type_changed_cb),
                                          connection_widget);
@@ -205,6 +212,7 @@ ario_connection_widget_profile_selection_update (ArioConnectionWidget *connectio
         gtk_entry_set_text (GTK_ENTRY (connection_widget->priv->name_entry), profile->name);
         gtk_entry_set_text (GTK_ENTRY (connection_widget->priv->host_entry), profile->host);
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (connection_widget->priv->port_spinbutton), (gdouble) profile->port);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (connection_widget->priv->timeout_spinbutton), (gdouble) profile->timeout / 1000.0);
         if (profile->type == ArioServerXmms)
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (connection_widget->priv->xmms_radiobutton), TRUE);
         else
@@ -232,6 +240,10 @@ ario_connection_widget_profile_selection_update (ArioConnectionWidget *connectio
 
         g_signal_handlers_unblock_by_func (G_OBJECT (connection_widget->priv->port_spinbutton),
                                            G_CALLBACK (ario_connection_widget_port_changed_cb),
+                                           connection_widget);
+
+        g_signal_handlers_unblock_by_func (G_OBJECT (connection_widget->priv->timeout_spinbutton),
+                                           G_CALLBACK (ario_connection_widget_timeout_changed_cb),
                                            connection_widget);
 
         g_signal_handlers_unblock_by_func (G_OBJECT (connection_widget->priv->mpd_radiobutton),
@@ -332,6 +344,8 @@ ario_connection_widget_new (void)
                 GTK_WIDGET (gtk_builder_get_object (builder, "host_entry"));
         connection_widget->priv->port_spinbutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "port_spinbutton"));
+        connection_widget->priv->timeout_spinbutton =
+                GTK_WIDGET (gtk_builder_get_object (builder, "timeout_spinbutton"));
         connection_widget->priv->password_entry =
                 GTK_WIDGET (gtk_builder_get_object (builder, "password_entry"));
         connection_widget->priv->local_checkbutton =
@@ -443,6 +457,17 @@ ario_connection_widget_port_changed_cb (GtkWidget *widget,
         /* Modify current profile */
         gdouble port = gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_widget->priv->port_spinbutton));
         connection_widget->priv->current_profile->port = (int) port;
+}
+
+void
+ario_connection_widget_timeout_changed_cb (GtkWidget *widget,
+                                           ArioConnectionWidget *connection_widget)
+{
+        ARIO_LOG_FUNCTION_START;
+        /* Modify current profile */
+        gdouble timeout = gtk_spin_button_get_value (GTK_SPIN_BUTTON (connection_widget->priv->timeout_spinbutton))
+                          * 1000.0;
+        connection_widget->priv->current_profile->timeout = (int) timeout;
 }
 
 void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
@@ -611,6 +636,7 @@ ario_connection_widget_autodetect_cb (GtkWidget *widget,
                 connection_widget->priv->current_profile->host = g_strdup (host);
                 g_free (host);
                 connection_widget->priv->current_profile->port = port;
+                connection_widget->priv->current_profile->timeout = ARIO_DEFAULT_TIMEOUT;
                 g_free (connection_widget->priv->current_profile->password);
                 connection_widget->priv->current_profile->password = NULL;
                 g_free (connection_widget->priv->current_profile->musicdir);
@@ -676,6 +702,7 @@ ario_connection_widget_new_profile_cb (GtkWidget *widget,
         profile->name = g_strdup (_("New Profile"));
         profile->host = g_strdup ("localhost");
         profile->port = 6600;
+        profile->timeout = ARIO_DEFAULT_TIMEOUT;
         profile->type = ArioServerMpd;
 
         /* Remove 'current' flag from all profiles */

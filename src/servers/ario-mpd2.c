@@ -485,7 +485,7 @@ ario_mpd_connect_thread (ArioServer *server)
         profile = ario_profiles_get_current (ario_profiles_get ());
         hostname = profile->host;
         port = profile->port;
-        timeout = 5000;
+        timeout = profile->timeout;
 
         if (hostname == NULL)
                 hostname = "localhost";
