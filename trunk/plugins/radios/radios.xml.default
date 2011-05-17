@@ -23,4 +23,12 @@
   <radio url="http://mp3.live.tv-radio.com/francemusique/all/francemusiquehautdebit.mp3">France Musique</radio>
   <radio url="http://radiosibir.ru:8090/liveradio">Radio Sibir</radio>
   <radio url="http://broadcast.infomaniak.net/tsfjazz-high.mp3">Tsf Jazz</radio>
+  <radio url="http://213.218.147.9:80">Hotmixradio Rock - La radio Happy et Rock (Paris France) http://www.hotmixradiorock.fr</radio>
+  <radio url="http://91.121.14.16:9070">Hotmixradio Metal - La radio Metal et Hard Rock (Paris France) http://www.hotmixradiometal.fr</radio>
+  <radio url="http://91.121.14.16:9050">Hotmixradio Frenchy - La radio chansons francaises (Paris France) http://www.hotmixradiofrenchy.fr</radio>
+  <radio url="http://91.121.14.16:9060">Hotmixradio Japan - La radio J-Music (Paris France) http://www.hotmixradiojapan.fr</radio>
+  <radio url="http://91.121.14.16:9090">Hot Mix Radio 90s - La radio 100% annee 90 (Paris France) - http://www.hotmixradio90.fr</radio>
+  <radio url="http://91.121.14.16:9100">Hotmixradio VIP - La radio que vous programmez (Paris France) http://www.hotmixradiovip.fr</radio>
+  <radio url="http://91.121.14.16:9030">Hot Mix Radio Funkyhotmix - La radio Disco Funk (Paris France) - http://www.funkyhotmix.fr</radio>
+  <radio url="http://91.121.14.16:9080">Hot Mix Radio 80s - La radio 100% annee 80 (Paris France) - http://www.hotmixradio80.fr</radio>
 </ario-radios>
