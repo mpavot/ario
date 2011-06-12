@@ -113,16 +113,20 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
         ArioServerCriteria *criteria = NULL;
         GSList *criterias = NULL;
         int nbitems = ario_conf_get_integer (PREF_DYNAMIC_NBITEMS, PREF_DYNAMIC_NBITEMS_DEFAULT);
+        char * artist = ario_server_get_current_artist ();
+
+        if (!artist)
+                return;
 
         switch (ario_conf_get_integer (PREF_DYNAMIC_TYPE, PREF_DYNAMIC_TYPE_DEFAULT)) {
         case SONGS_FROM_SAME_ARTIST:
-                artists = g_slist_append (artists, ario_server_get_current_artist ());
+                artists = g_slist_append (artists, artist);
                 ario_server_playlist_append_artists (artists, PLAYLIST_ADD, nbitems);
                 g_slist_free (artists);
                 break;
         case SONGS_FROM_SAME_ALBUM:
                 atomic_criteria1.tag = ARIO_TAG_ARTIST;
-                atomic_criteria1.value = ario_server_get_current_artist ();
+                atomic_criteria1.value = artist;
                 atomic_criteria2.tag = ARIO_TAG_ALBUM;
                 atomic_criteria2.value = ario_server_get_current_album ();
 
@@ -137,7 +141,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                 g_slist_free (criterias);
                 break;
         case SONGS_FROM_SIMILAR_ARTISTS:
-                ario_shell_similarartists_add_similar_to_playlist (ario_server_get_current_artist (),
+                ario_shell_similarartists_add_similar_to_playlist (artist,
                                                                    nbitems);
                 break;
         case ALBUMS_FROM_SAME_ARTIST:
@@ -178,7 +182,7 @@ ario_playlist_dynamic_last_song (ArioPlaylistMode *playlist_mode,
                 g_slist_free (albums);
                 break;
         case ALBUMS_FROM_SIMILAR_ARTISTS:
-                artists = ario_shell_similarartists_get_similar_artists (ario_server_get_current_artist ());
+                artists = ario_shell_similarartists_get_similar_artists (artist);
                 for (tmp_artist = artists; tmp_artist; tmp_artist = g_slist_next (tmp_artist)) {
                         ArioSimilarArtist *artist = tmp_artist->data;
                         atomic_criteria1.tag = ARIO_TAG_ARTIST;
