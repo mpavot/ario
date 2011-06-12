@@ -124,10 +124,11 @@ main (int argc, char *argv[])
         /* Initialisation of Curl */
         curl_global_init (CURL_GLOBAL_WIN32);
 
+#ifndef WIN32
         /* Set a specific profile */
         if (profile)
                 ario_profiles_set_current_by_name (profile);
-
+#endif
         /* Creates Ario main window */
         shell = ario_shell_new ();
         ario_shell_construct (shell, minimized);
