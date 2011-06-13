@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,1.5)
+m4_define(ario_version,1.5.1)
 
 AC_INIT([Ario], [ario_version], [marc.pavot@gmail.com], [ario])
 AM_CONFIG_HEADER(config.h)
@@ -29,7 +29,7 @@ if test "${have_libgcrypt}" != "yes"; then
 	AC_MSG_ERROR([Missing dependency: libgcrypt])
 fi
 
-PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.16
+PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.22
                          glib-2.0 >= 2.4
                          gobject-2.0 >= 2.4
                          gmodule-2.0

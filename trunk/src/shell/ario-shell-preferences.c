@@ -89,7 +89,6 @@ ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
 
         gtk_container_set_border_width (GTK_CONTAINER (shell_preferences), 5);
         gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (shell_preferences))), 2);
-        gtk_dialog_set_has_separator (GTK_DIALOG (shell_preferences), FALSE);
 }
 
 GtkWidget *

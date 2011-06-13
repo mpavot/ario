@@ -1377,7 +1377,7 @@ ario_playlist_drag_leave_cb (GtkWidget *widget,
 
         /* Call the appropriate functions depending on data type */
         if (gtk_selection_data_get_data_type (data) == gdk_atom_intern ("text/internal-list", TRUE)) {
-                if (context->action & GDK_ACTION_COPY)
+                if (gdk_drag_context_get_actions (context) & GDK_ACTION_COPY)
                         ario_playlist_copy_rows (x, y);
                 else
                         ario_playlist_move_rows (x, y);

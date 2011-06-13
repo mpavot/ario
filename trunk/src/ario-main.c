@@ -112,7 +112,7 @@ main (int argc, char *argv[])
         if (!g_thread_supported ()) g_thread_init (NULL);
 
         /* Initialisation of GTK */
-        gtk_set_locale ();
+        setlocale (LC_ALL, "");
         gtk_init (&argc, &argv);
 
         /* Initialisation of libgcrypt */

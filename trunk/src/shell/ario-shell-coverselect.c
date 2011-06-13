@@ -610,6 +610,6 @@ ario_shell_coverselect_set_current_cover (ArioShellCoverselect *shell_coverselec
                 g_object_unref (pixbuf);
         } else {
                 /* No cover, hide cover widget */
-                gtk_widget_hide_all (shell_coverselect->priv->current_cover);
+                gtk_widget_hide (shell_coverselect->priv->current_cover);
         }
 }

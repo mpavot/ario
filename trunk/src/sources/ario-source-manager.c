@@ -33,14 +33,14 @@
 
 static void ario_source_manager_sync (ArioSourceManager *sourcemanager);
 static void ario_source_manager_showtabs_changed_cb (guint notification_id,
-                                                    ArioSourceManager *sourcemanager);
+                                                     ArioSourceManager *sourcemanager);
 static gboolean ario_source_manager_button_press_cb (GtkWidget *widget,
-                                                    GdkEventButton *event,
-                                                    ArioSourceManager *sourcemanager);
+                                                     GdkEventButton *event,
+                                                     ArioSourceManager *sourcemanager);
 static gboolean ario_source_manager_switch_page_cb (GtkNotebook *notebook,
-                                                   GtkNotebookPage *notebook_page,
-                                                   gint page,
-                                                   ArioSourceManager *sourcemanager);
+                                                    gpointer notebook_page,
+                                                    guint page,
+                                                    ArioSourceManager *sourcemanager);
 
 struct ArioSourceManagerPrivate
 {
@@ -426,9 +426,9 @@ ario_source_manager_button_press_cb (GtkWidget *widget,
 
 static gboolean
 ario_source_manager_switch_page_cb (GtkNotebook *notebook,
-                                   GtkNotebookPage *notebook_page,
-                                   gint page,
-                                   ArioSourceManager *sourcemanager)
+                                    gpointer notebook_page,
+                                    guint page,
+                                    ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
         ArioSource *new_source;
