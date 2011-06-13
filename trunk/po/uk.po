@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-05-05 18:46+0000\n"
-"Last-Translator: Olexandr Ushakov <Unknown>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-07-31 07:23+0000\n"
+"Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -52,8 +52,8 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Якщо ви не бачите Ваш MPD сервер, перевірте що опція zeroconf активована в "
-"вашій конфігурації MPD або використайте ручне налаштування."
+"Якщо ви не бачите MPD-сервер дякуючи автоматичному виявленню, перевірте чи "
+"zeroconf активовано у конфігурації MPD або використайте ручне налаштування."
 
 #: ../data/ui/connection-autodetect.ui.h:2
 msgid "Server autodetection"
@@ -95,10 +95,14 @@ msgid "Port :"
 msgstr "Порт :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Тип серверу : "
+msgid "Server type :"
+msgstr "Тип серверу :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Експериментальний)"
 
@@ -106,7 +110,7 @@ msgstr "XMMS 2 (Експериментальний)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Автоматично завантажувати обкладинку альбому пісні, що зараз грає"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Обкладинки"
 
@@ -123,7 +127,7 @@ msgid "Use Amazon."
 msgstr "Використовувати Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "З'єднання"
 
@@ -187,17 +191,15 @@ msgstr "Зовнішній вигляд"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Список відтворення праворуч від вкладок"
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Назва списку відтворення:"
+msgstr "Список відтворення нижче вкладок"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Назва списку відтворення:"
+msgstr "Список відтворення в межах вкладок"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -295,7 +297,7 @@ msgid "On double click:"
 msgstr "Під час подвійного натискання:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Список відтворення"
@@ -395,7 +397,7 @@ msgstr "Кількість пісень :"
 msgid "Play time :"
 msgstr "Час відтворення :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Статистика"
 
@@ -455,7 +457,7 @@ msgstr "Нічого не робити"
 msgid "Mute"
 msgstr "Приглушити"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Сповіщення"
 
@@ -483,9 +485,13 @@ msgstr "Відтворення/пауза"
 msgid "Tray icon"
 msgstr "Піктограма в лотку"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Запускати вікно звернутим"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -676,7 +682,7 @@ msgstr "_Вилучити обкладинки"
 msgid "_Properties"
 msgstr "В_ластивості"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Фонотека"
 
@@ -781,23 +787,25 @@ msgstr "_Рядок стану"
 msgid "Upper part"
 msgstr "Верхня частина"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "Клієнт GTK для MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Alexander https://launchpad.net/~alex-orlov7\n"
+"  Alexander Orlov https://launchpad.net/~alex-orlov7\n"
 "  Maks Lyashuk aka Ma)(imuM https://launchpad.net/~probel\n"
+"  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Sergiy Gavrylov https://launchpad.net/~gavro\n"
 "  Vitalii https://launchpad.net/~vetalkl1\n"
-"  Yakubovsky Dmitriy(Якубовський Д.) https://launchpad.net/~info-ukrxost\n"
+"  Yakubovsky Dmitriy(Якубовський Д.) https://launchpad.net/~dmitriy-"
+"yakubovsky\n"
 "  danilyc https://launchpad.net/~danilyc"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Налаштовування модулів"
 
@@ -836,8 +844,8 @@ msgid "Error saving file"
 msgstr "Помилка збереження файлу"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Текст пісні"
 
@@ -849,11 +857,11 @@ msgstr "Завантаження тексту пісні"
 msgid "Ario Preferences"
 msgstr "Налаштування Ario"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Сервер"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Інші"
 
@@ -865,20 +873,20 @@ msgstr "%d пісень"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Властивості пісні"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Помилка збереження тегів у файл:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Ви повинні вибрати сервер."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Новий профіль"
 
@@ -982,15 +990,15 @@ msgid "Filter:"
 msgstr "Фільтр:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Зберегти список відтворення"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Назва списку відтворення:"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr ""
 "Список відтворення з таким  іменем вже є в цій теці. Чи бажаєте ви "

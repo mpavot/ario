@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
 "PO-Revision-Date: 2009-11-29 01:53+0000\n"
 "Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -96,10 +96,15 @@ msgid "Port :"
 msgstr "Port:"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr ""
+#, fuzzy
+msgid "Server type :"
+msgstr "Freastalaí"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr ""
 
@@ -108,7 +113,7 @@ msgid "Automatically download the album cover of the playing song"
 msgstr ""
 "Íosluchtaigh go huathoibríoch clúdach an albaim den t-amhrán atá ag seinm"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Clúdaithe"
 
@@ -125,7 +130,7 @@ msgid "Use Amazon."
 msgstr "Bain Feidhm As Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Nasc"
 
@@ -189,14 +194,12 @@ msgid "Playlist at the right of tabs"
 msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Ainm na seinmréime :"
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Ainm na seinmréime :"
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -294,7 +297,7 @@ msgid "On double click:"
 msgstr ""
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Seinmréim"
@@ -394,7 +397,7 @@ msgstr "Líon na n-amhráin :"
 msgid "Play time :"
 msgstr "Am seinnte :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Staidreamh"
 
@@ -454,7 +457,7 @@ msgstr "Ná déan faic"
 msgid "Mute"
 msgstr ""
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr ""
 
@@ -482,8 +485,12 @@ msgstr "Seinn/Sos"
 msgid "Tray icon"
 msgstr "Déilbhín an trádaire"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
+msgstr ""
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
 msgstr ""
 
 #. Format result string
@@ -676,7 +683,7 @@ msgstr "_Scrios na clúdaithe"
 msgid "_Properties"
 msgstr "_Airíonna"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Leabharlann"
 
@@ -783,11 +790,11 @@ msgstr "Barra s_tádas"
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "Cliaint GTK do MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -795,7 +802,7 @@ msgstr ""
 "  Seanan https://launchpad.net/~seananoc-gmail"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Cumraigh na mBreiseáin"
 
@@ -834,8 +841,8 @@ msgid "Error saving file"
 msgstr "Tharla botún ag cuir an comhad i dtaisce"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Liricí"
 
@@ -847,11 +854,11 @@ msgstr "Íosluchtú na Liricí"
 msgid "Ario Preferences"
 msgstr "Sainroghanna Ario"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Freastalaí"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr ""
 
@@ -863,20 +870,20 @@ msgstr ""
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Airíonna Amhráin"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Caithfear freastalaí a roghnú."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Beathaisnéisín Nua"
 
@@ -980,15 +987,15 @@ msgid "Filter:"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Cuir an seinmréim i dtaisce"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Ainm na seinmréime :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Tá an seinmréim sin ann cheana? An dteastaíonn uait é a fhorscríobh?"
 

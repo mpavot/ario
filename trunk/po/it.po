@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-07-17 09:52+0000\n"
-"Last-Translator: iTuxer <Unknown>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-10-16 19:39+0000\n"
+"Last-Translator: simone.sandri <lexluxsox@hotmail.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -96,10 +96,14 @@ msgid "Port :"
 msgstr "Porta :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Tipo server: "
+msgid "Server type :"
+msgstr "Tipo server :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Sperimentale)"
 
@@ -109,7 +113,7 @@ msgstr ""
 "Scarica automaticamente la copertina dell'album relativo alla canzone in "
 "esecuzione"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Copertine"
 
@@ -126,7 +130,7 @@ msgid "Use Amazon."
 msgstr "Usa Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Connessione"
 
@@ -190,17 +194,15 @@ msgstr "Interfaccia"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Playlist alla destra della tabella"
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Nome playlist:"
+msgstr "Playlist sotto i tab"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Nome playlist:"
+msgstr "Playlist all'interno della tabella"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -233,7 +235,7 @@ msgstr "Titolo:"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add after playing song"
-msgstr ""
+msgstr "Aggiungi dopo la traccia corrente"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -298,7 +300,7 @@ msgid "On double click:"
 msgstr "Con doppio click"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Playlist"
@@ -398,7 +400,7 @@ msgstr "Numero di canzoni:"
 msgid "Play time :"
 msgstr "Tempo di riproduzione:"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Statistiche"
 
@@ -458,7 +460,7 @@ msgstr "Non fare nulla"
 msgid "Mute"
 msgstr "Silenzioso"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Notifica"
 
@@ -487,9 +489,13 @@ msgstr "Riproduci/Pausa"
 msgid "Tray icon"
 msgstr "Icona sulla traybar"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Avvia in una finestra minimizzata"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -681,7 +687,7 @@ msgstr "Cancella le copertine (_D)"
 msgid "_Properties"
 msgstr "_Proprietà"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Libreria"
 
@@ -720,7 +726,7 @@ msgstr "_Visualizza"
 
 #: ../src/shell/ario-shell.c:163
 msgid "_Control"
-msgstr ""
+msgstr "_Controllo"
 
 #: ../src/shell/ario-shell.c:164
 msgid "_Tool"
@@ -786,18 +792,18 @@ msgstr "Barra di s_tato"
 msgid "Upper part"
 msgstr "Parte superiore"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "Client GTK per MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Andrea https://launchpad.net/~seymourskinner-virgilio\n"
-"  BrainHell https://launchpad.net/~linocalvo\n"
+"  BrainHell https://launchpad.net/~brainhell\n"
 "  Carlo Cifarelli https://launchpad.net/~binary.coded.brain\n"
-"  Daniele de Virgilio https://launchpad.net/~erunamo\n"
+"  Daniele de Virgilio https://launchpad.net/~erunamo-deactivatedaccount\n"
 "  Giacomo Barbalinardo https://launchpad.net/~jacxs-lj\n"
 "  Giasone https://launchpad.net/~giasone\n"
 "  Guybrush88 https://launchpad.net/~erpizzo\n"
@@ -808,12 +814,13 @@ msgstr ""
 "  Milo Casagrande https://launchpad.net/~milo\n"
 "  Nicola Piovesan https://launchpad.net/~piovesannicola\n"
 "  Nikopol https://launchpad.net/~aegnor-isilra\n"
+"  Sergio Spinatelli https://launchpad.net/~ituxer\n"
 "  Vincenzo vikkio88 Ciaccio https://launchpad.net/~vikkio88\n"
 "  beppe https://launchpad.net/~tibido\n"
-"  iTuxer https://launchpad.net/~ituxer"
+"  simone.sandri https://launchpad.net/~lexluxsox"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Configura i plugin"
 
@@ -852,8 +859,8 @@ msgid "Error saving file"
 msgstr "Si è verificato un errore salvando il file"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Testi"
 
@@ -865,11 +872,11 @@ msgstr "Download testi delle canzoni"
 msgid "Ario Preferences"
 msgstr "Ario Preferenze"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Server"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Altri"
 
@@ -881,20 +888,20 @@ msgstr "%d canzoni"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Proprietà del brano"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Errore salvando tags del file:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Devi selezionare un server."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Nuovo Profilo"
 
@@ -998,15 +1005,15 @@ msgid "Filter:"
 msgstr "Filtro:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Salva playlist"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Nome playlist:"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "La playlist esiste già. Vuoi sovrascriverla?"
 

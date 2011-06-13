@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-02-09 23:41+0000\n"
-"Last-Translator: Marc Pavot <marc.pavot@gmail.com>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2011-03-17 08:27+0000\n"
+"Last-Translator: Hong Hao <Unknown>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -78,7 +78,7 @@ msgstr "音乐目录："
 
 #: ../data/ui/connection-widget.ui.h:5
 msgid "Music server is on the same computer as Ario"
-msgstr ""
+msgstr "Ario和音乐服务器处于同一电脑之上"
 
 #. Create the widgets
 #: ../data/ui/connection-widget.ui.h:6 ../plugins/radios/ario-radio.c:786
@@ -96,18 +96,23 @@ msgid "Port :"
 msgstr "端口："
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr ""
+#, fuzzy
+msgid "Server type :"
+msgstr "服务器类型： "
 
 #: ../data/ui/connection-widget.ui.h:10
-msgid "XMMS 2 (Experimental)"
+msgid "Timeout :"
 msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
+msgid "XMMS 2 (Experimental)"
+msgstr "XMMS 2（试验性）"
 
 #: ../data/ui/cover-prefs.ui.h:1
 msgid "Automatically download the album cover of the playing song"
 msgstr "自动下载正在播放歌曲的专辑封面"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "封面"
 
@@ -124,7 +129,7 @@ msgid "Use Amazon."
 msgstr "使用 Amazon"
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "连接"
 
@@ -190,14 +195,12 @@ msgid "Playlist at the right of tabs"
 msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "播放列表名称："
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "播放列表名称："
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -230,11 +233,11 @@ msgstr "标题："
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add after playing song"
-msgstr ""
+msgstr "播放后添加歌曲"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
-msgstr ""
+msgstr "添加播放"
 
 #: ../data/ui/playlist-prefs.ui.h:3 ../data/ui/similar-artists.ui.h:2
 msgid "Add to playlist"
@@ -261,11 +264,11 @@ msgstr "日期"
 
 #: ../data/ui/playlist-prefs.ui.h:7 ../src/widgets/ario-playlist.c:541
 msgid "Disc"
-msgstr ""
+msgstr "碟片"
 
 #: ../data/ui/playlist-prefs.ui.h:8
 msgid "Double click"
-msgstr ""
+msgstr "双击"
 
 #: ../data/ui/playlist-prefs.ui.h:9 ../src/widgets/ario-playlist.c:541
 msgid "Duration"
@@ -288,25 +291,25 @@ msgstr "当一首新的歌曲被播放时转到当前歌曲"
 
 #: ../data/ui/playlist-prefs.ui.h:13
 msgid "Mode"
-msgstr ""
+msgstr "模式"
 
 #: ../data/ui/playlist-prefs.ui.h:14
 msgid "On double click:"
-msgstr ""
+msgstr "双击后："
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "播放列表"
 
 #: ../data/ui/playlist-prefs.ui.h:16
 msgid "Playlist mode:"
-msgstr ""
+msgstr "播放列表模式："
 
 #: ../data/ui/playlist-prefs.ui.h:17
 msgid "Replace in playlist"
-msgstr ""
+msgstr "替换播放列表项目"
 
 #: ../data/ui/playlist-prefs.ui.h:18
 msgid "Show rows:"
@@ -395,7 +398,7 @@ msgstr "歌曲数："
 msgid "Play time :"
 msgstr "播放时间："
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "统计信息"
 
@@ -405,7 +408,7 @@ msgstr "启动时间："
 
 #: ../data/ui/song-infos.ui.h:2
 msgid "Album Artist :"
-msgstr ""
+msgstr "专辑艺人"
 
 #: ../data/ui/song-infos.ui.h:4
 msgid "Comment :"
@@ -453,9 +456,9 @@ msgstr "什么也不做"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "静音"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "提示"
 
@@ -483,9 +486,13 @@ msgstr "播放 / 暂停"
 msgid "Tray icon"
 msgstr "托盘图标"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "启动时最小化"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -514,35 +521,35 @@ msgstr "音乐目录"
 
 #: ../src/playlist/ario-playlist-dynamic.c:49
 msgid "songs of same artist"
-msgstr ""
+msgstr "相同艺人的歌曲"
 
 #: ../src/playlist/ario-playlist-dynamic.c:50
 msgid "songs of same album"
-msgstr ""
+msgstr "相同专辑的歌曲"
 
 #: ../src/playlist/ario-playlist-dynamic.c:51
 msgid "songs of similar artists"
-msgstr ""
+msgstr "相似艺术家的歌曲"
 
 #: ../src/playlist/ario-playlist-dynamic.c:52
 msgid "albums of same artists"
-msgstr ""
+msgstr "相同艺人的专辑"
 
 #: ../src/playlist/ario-playlist-dynamic.c:53
 msgid "albums of similar artists"
-msgstr ""
+msgstr "相似艺人的专辑"
 
 #: ../src/playlist/ario-playlist-dynamic.c:69
 msgid "Dynamic Playlist"
-msgstr ""
+msgstr "动态播放列表"
 
 #: ../src/playlist/ario-playlist-queue.c:49
 msgid "Queue Mode"
-msgstr ""
+msgstr "队列模式"
 
 #: ../src/playlist/ario-playlist-normal.c:47
 msgid "Normal"
-msgstr ""
+msgstr "常规"
 
 #: ../src/plugins/ario-plugin-manager.c:45
 msgid "Plugin"
@@ -603,7 +610,7 @@ msgstr "无法连接到服务器。请检查连接选项。"
 #. ARIO_TAG_ALBUM
 #: ../src/servers/ario-server.c:47
 msgid "Album Artist"
-msgstr ""
+msgstr "专辑艺人"
 
 #. ARIO_TAG_DATE
 #: ../src/servers/ario-server.c:53
@@ -676,7 +683,7 @@ msgstr "删除封面(_D)"
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "媒体库"
 
@@ -715,7 +722,7 @@ msgstr "视图(_V)"
 
 #: ../src/shell/ario-shell.c:163
 msgid "_Control"
-msgstr ""
+msgstr "控制(_C)"
 
 #: ../src/shell/ario-shell.c:164
 msgid "_Tool"
@@ -727,7 +734,7 @@ msgstr "帮助(_H)"
 
 #: ../src/shell/ario-shell.c:173
 msgid "_Update database"
-msgstr ""
+msgstr "更新数据库(_U)"
 
 #: ../src/shell/ario-shell.c:176
 msgid "_Quit"
@@ -759,11 +766,11 @@ msgstr "添加相似的歌曲到播放列表"
 
 #: ../src/shell/ario-shell.c:197
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "转到上一标签页(_p)"
 
 #: ../src/shell/ario-shell.c:200
 msgid "Go to _next tab"
-msgstr ""
+msgstr "转到下一标签页(_n)"
 
 #: ../src/shell/ario-shell.c:203
 msgid "Show _lyrics"
@@ -781,25 +788,27 @@ msgstr "状态栏(_t)"
 msgid "Upper part"
 msgstr "上部分"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "MPD 的 GTK 客户端"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Aron Xu https://launchpad.net/~happyaron\n"
+"  Hong Hao https://launchpad.net/~oahong\n"
 "  Lechuan https://launchpad.net/~lechuan\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Tao Wei https://launchpad.net/~weitao1979\n"
 "  Xiaojun Deng https://launchpad.net/~hktang\n"
 "  inkview https://launchpad.net/~inkview\n"
 "  luojie-dune https://launchpad.net/~luojie-dune\n"
+"  sxdhaoren https://launchpad.net/~hupengnihao\n"
 "  冯超 https://launchpad.net/~rainofchaos"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "配置插件"
 
@@ -838,8 +847,8 @@ msgid "Error saving file"
 msgstr "保存文件时出错"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "歌词"
 
@@ -851,13 +860,13 @@ msgstr "歌词下载"
 msgid "Ario Preferences"
 msgstr "Ario首选项"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "服务器"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
-msgstr ""
+msgstr "其他"
 
 #: ../src/shell/ario-shell-similarartists.c:318
 #, c-format
@@ -867,20 +876,20 @@ msgstr "%d 首歌"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "歌曲属性"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr ""
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "必须选择一个服务器"
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "新建配置"
 
@@ -957,7 +966,7 @@ msgstr "清除(_C)"
 
 #: ../src/widgets/ario-playlist.c:136
 msgid "_Shuffle"
-msgstr ""
+msgstr "随机播放(_S)"
 
 #: ../src/widgets/ario-playlist.c:139
 msgid "Cr_op"
@@ -965,7 +974,7 @@ msgstr ""
 
 #: ../src/widgets/ario-playlist.c:142
 msgid "_Search in playlist"
-msgstr ""
+msgstr "在播放列表中搜索(_S)"
 
 #: ../src/widgets/ario-playlist.c:145
 msgid "_Remove"
@@ -984,15 +993,15 @@ msgid "Filter:"
 msgstr ""
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "保存播放列表"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "播放列表名称："
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "播放列表已存在。是否覆盖？"
 
@@ -1206,7 +1215,7 @@ msgstr "删除这个广播频道"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Last.fm：相似艺人的电台"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
@@ -1218,7 +1227,7 @@ msgstr ""
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm：个人电台"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"

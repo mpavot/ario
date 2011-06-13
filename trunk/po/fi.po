@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario_ario-fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-06-06 13:59+0000\n"
-"Last-Translator: Ari Niemi <Unknown>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2011-05-17 10:13+0000\n"
+"Last-Translator: Jaro Larnos <dignifiedaction@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -56,7 +56,7 @@ msgid ""
 msgstr ""
 "Mikäli et näe automaattisesta tunnistuksesta huolimatta MPD palvelinta, "
 "kannattaa sinun tarkistaa, että zeroconf on aktivoitu MPD kokoonpanossasi, "
-"tai käytä manuaalista konfigurointia."
+"tai tee asetukset käsin."
 
 #: ../data/ui/connection-autodetect.ui.h:2
 msgid "Server autodetection"
@@ -98,10 +98,14 @@ msgid "Port :"
 msgstr "Portti :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Palvelimen tyyppi: "
+msgid "Server type :"
+msgstr "Palvelimen tyyppi :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Kokeellinen)"
 
@@ -109,7 +113,7 @@ msgstr "XMMS 2 (Kokeellinen)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Lataa soivan kappaleen albumikansikuvat automaattisesti"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Kansikuvat"
 
@@ -126,7 +130,7 @@ msgid "Use Amazon."
 msgstr "Käytä Amazon-palvelua."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Yhteys"
 
@@ -193,14 +197,12 @@ msgid "Playlist at the right of tabs"
 msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Soittolistan nimi :"
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Soittolistan nimi :"
+msgstr ""
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -298,7 +300,7 @@ msgid "On double click:"
 msgstr "Kaksoisnapsautuksella:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Soittolista"
@@ -398,7 +400,7 @@ msgstr "Kappaleiden määrä :"
 msgid "Play time :"
 msgstr "Soittoaika :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Tilastot"
 
@@ -458,7 +460,7 @@ msgstr "Älä tee mitään"
 msgid "Mute"
 msgstr "Vaimenna"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Ilmoitus"
 
@@ -486,9 +488,13 @@ msgstr "Toista/Pysäytä"
 msgid "Tray icon"
 msgstr "Ilmoitusalueen kuvake"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Aloita piennetystä ikkunasta"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -679,7 +685,7 @@ msgstr "_Poista kansikuvat"
 msgid "_Properties"
 msgstr "_Ominaisuudet"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Kokoelma"
 
@@ -784,24 +790,25 @@ msgstr "T_ilarivi"
 msgid "Upper part"
 msgstr ""
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "GTK-asiakas MPD:lle"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Anne Sorsa https://launchpad.net/~angeni101\n"
 "  Ari Niemi https://launchpad.net/~ari-niemi\n"
 "  Ari Takalo https://launchpad.net/~ajtaka\n"
+"  Jaro Larnos https://launchpad.net/~ambyr00\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mats Rauhala https://launchpad.net/~mats-rauhala\n"
 "  Miia Ranta https://launchpad.net/~myrtti\n"
 "  Päivi Pasi https://launchpad.net/~pap26"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Määrittele liitännäisiä"
 
@@ -840,8 +847,8 @@ msgid "Error saving file"
 msgstr "Virhe tallennettaessa tiedostoa"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Sanoitukset"
 
@@ -853,11 +860,11 @@ msgstr "Sanoituksien lataus"
 msgid "Ario Preferences"
 msgstr "Arion asetukset"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Palvelin"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Muut"
 
@@ -869,20 +876,20 @@ msgstr "%d kappaletta"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Kappaleen ominaisuudet"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Virhe tallennettaessa tiedoston tageja:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Sinun täytyy valita palvelin."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Uusi profiili"
 
@@ -986,15 +993,15 @@ msgid "Filter:"
 msgstr "Suodatus:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Tallenna soittolista"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Soittolistan nimi :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Soittolista on jo olemassa. Haluatko korvata sen?"
 

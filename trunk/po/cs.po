@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-04-10 20:22+0000\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-07-26 13:48+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -96,10 +96,14 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Typ serveru : "
+msgid "Server type :"
+msgstr "Typ serveru :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Zkušební)"
 
@@ -107,7 +111,7 @@ msgstr "XMMS 2 (Zkušební)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Automaticky stáhnout obrázek právě hrajícího alba"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Obrázky alb"
 
@@ -124,7 +128,7 @@ msgid "Use Amazon."
 msgstr "Použít Amazon"
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Spojení"
 
@@ -188,17 +192,15 @@ msgstr "Uživatelské prostředí"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Seznam skladeb na pravé straně záložek"
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Název seznamu stop :"
+msgstr "Seznam skladeb pod záložkami"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Název seznamu stop :"
+msgstr "Seznam skladeb v záložkách"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -296,7 +298,7 @@ msgid "On double click:"
 msgstr "Bez dvojkliku:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Seznam skladeb"
@@ -396,7 +398,7 @@ msgstr "Počet skladeb :"
 msgid "Play time :"
 msgstr "Doba hraní :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Statistiky"
 
@@ -456,7 +458,7 @@ msgstr "Nedělat nic"
 msgid "Mute"
 msgstr "Ztlumit"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Oznámení"
 
@@ -484,9 +486,13 @@ msgstr "Hrát/Pozastavit"
 msgid "Tray icon"
 msgstr "Ikona v panelu na ploše"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Spusť minimalizované okno"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -677,7 +683,7 @@ msgstr "_Smazat obrázky alb"
 msgid "_Properties"
 msgstr "Vlast_nosti"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Knihovna"
 
@@ -782,11 +788,11 @@ msgstr "S_tavový řádek"
 msgid "Upper part"
 msgstr "Horní část"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "GTK klient pro MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -796,7 +802,7 @@ msgstr ""
 "  Václav Lešek https://launchpad.net/~vaclav-lesek"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Konfigurovat zásuvné moduly"
 
@@ -835,8 +841,8 @@ msgid "Error saving file"
 msgstr "Chyba při ukládání souboru"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Text skladby"
 
@@ -848,11 +854,11 @@ msgstr "Stažení textů skladeb"
 msgid "Ario Preferences"
 msgstr "Vlastnosti Aria"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Server"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Jiní"
 
@@ -864,20 +870,20 @@ msgstr "%d skladeb"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Vlastnosti skladby"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Chyba při ukládání souboru:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Musíte vybrat server."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Nový profil"
 
@@ -981,15 +987,15 @@ msgid "Filter:"
 msgstr "Filtr:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Uložit seznam skladeb"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Název seznamu stop :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Seznam stop již existuje. Chcete ho přepsat ?"
 
