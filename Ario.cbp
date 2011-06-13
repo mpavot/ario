@@ -351,25 +351,11 @@
 		<Unit filename="src\lib\gtk-builder-helpers.h">
 			<Option target="ariodll" />
 		</Unit>
-		<Unit filename="src\lyrics\ario-lyrics-leoslyrics.c">
+		<Unit filename="src\lyrics\ario-lyrics-letras.c">
 			<Option compilerVar="CC" />
 			<Option target="ariodll" />
 		</Unit>
-		<Unit filename="src\lyrics\ario-lyrics-leoslyrics.h">
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lyrics\ario-lyrics-lyrc.c">
-			<Option compilerVar="CC" />
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lyrics\ario-lyrics-lyrc.h">
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lyrics\ario-lyrics-lyricwiki.c">
-			<Option compilerVar="CC" />
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\lyrics\ario-lyrics-lyricwiki.h">
+		<Unit filename="src\lyrics\ario-lyrics-letras.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\lyrics\ario-lyrics-manager.c">
@@ -546,11 +532,11 @@
 		<Unit filename="src\preferences\ario-stats-preferences.h">
 			<Option target="ariodll" />
 		</Unit>
-		<Unit filename="src\preferences\ario-trayicon-preferences.c">
+		<Unit filename="src\preferences\ario-taskbar-preferences.c">
 			<Option compilerVar="CC" />
 			<Option target="ariodll" />
 		</Unit>
-		<Unit filename="src\preferences\ario-trayicon-preferences.h">
+		<Unit filename="src\preferences\ario-taskbar-preferences.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\servers\ario-mpd2.c">
