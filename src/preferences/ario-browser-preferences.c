@@ -32,7 +32,7 @@
 #include "ario-debug.h"
 
 static void ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferences);
-G_MODULE_EXPORT void ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
+G_MODULE_EXPORT void ario_browser_preferences_sort_changed_cb (GtkComboBox *combobox,
                                                                ArioBrowserPreferences *browser_preferences);
 G_MODULE_EXPORT void ario_browser_preferences_treesnb_changed_cb (GtkWidget *widget,
                                                                   ArioBrowserPreferences *browser_preferences);
@@ -170,13 +170,13 @@ ario_browser_preferences_sync_browser (ArioBrowserPreferences *browser_preferenc
 }
 
 void
-ario_browser_preferences_sort_changed_cb (GtkComboBoxEntry *combobox,
+ario_browser_preferences_sort_changed_cb (GtkComboBox *combobox,
                                           ArioBrowserPreferences *browser_preferences)
 {
         ARIO_LOG_FUNCTION_START;
         int i;
 
-        i = gtk_combo_box_get_active (GTK_COMBO_BOX (browser_preferences->priv->sort_combobox));
+        i = gtk_combo_box_get_active (combobox);
 
         ario_conf_set_integer (PREF_ALBUM_SORT, i);
 }

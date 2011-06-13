@@ -259,7 +259,6 @@ ario_shell_songinfos_new (GSList *paths)
         /* Set songinfos properties */
         gtk_container_set_border_width (GTK_CONTAINER (shell_songinfos), 5);
         gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (shell_songinfos))), 2);
-        gtk_dialog_set_has_separator (GTK_DIALOG (shell_songinfos), FALSE);
 
         /* Append tags page to notebook */
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_songinfos->priv->notebook),

@@ -1283,7 +1283,6 @@ ario_shell_cmd_plugins (GtkAction *action,
                                               NULL);
         gtk_container_set_border_width (GTK_CONTAINER (window), 5);
         gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (window))), 2);
-        gtk_dialog_set_has_separator (GTK_DIALOG (window), FALSE);
 
         /* Connect signals for window destruction */
         g_signal_connect (window,
