@@ -104,4 +104,4 @@
 #define LOCALE_DIR "po\\"
 #define ARIO_PLUGIN_DIR "plugins\\"
 #define ARIO_PLUGIN_DATA_DIR "plugins\\"
-#define CURRENT_DATE 2010
+#define CURRENT_DATE 2011
