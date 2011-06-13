@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-05-29 22:21+0000\n"
-"Last-Translator: Mbianchi <Unknown>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-09-26 22:03+0000\n"
+"Last-Translator: André Gondim <andregondim@ubuntu.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
-msgstr "Ario Player de Música"
+msgstr "Player de Música Ario"
 
 #: ../data/ario.desktop.in.in.h:2
 msgid "Client application to mpd"
@@ -52,9 +52,9 @@ msgid ""
 "should check that zeroconf is activated in your MPD configuration or use the "
 "manual configuration."
 msgstr ""
-"Se você não pode ver seu servidor MPD graças à configuração automática, você "
-"deve checar qual zeroconf está ativado em sua configuração MPD ou usar a "
-"configuração manual."
+"Caso você não veja seu servidor MPD usando a configuração automática, check "
+"se o zeroconf está ativado na configuração do MPD ou use a configuração "
+"manual."
 
 #: ../data/ui/connection-autodetect.ui.h:2
 msgid "Server autodetection"
@@ -96,10 +96,14 @@ msgid "Port :"
 msgstr "Porta :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Tipo de servidor : "
+msgid "Server type :"
+msgstr "Tipo de servidor :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Experimental)"
 
@@ -107,7 +111,7 @@ msgstr "XMMS 2 (Experimental)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Fazer download automático da capa do álbum do som em execução"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Capas"
 
@@ -124,7 +128,7 @@ msgid "Use Amazon."
 msgstr "Usar Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Conexão"
 
@@ -188,17 +192,15 @@ msgstr "Interface"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Lista de reprodução à direita das abas"
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Nome da lista de execução :"
+msgstr "Lista de reprodução abaixo das abas"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Nome da lista de execução :"
+msgstr "Lista de reprodução junto às abas"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -296,7 +298,7 @@ msgid "On double click:"
 msgstr "Ao dar duplo clique"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Lista de reprodução"
@@ -396,7 +398,7 @@ msgstr "Número de músicas :"
 msgid "Play time :"
 msgstr "Tempo de execução :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Estatísticas"
 
@@ -456,7 +458,7 @@ msgstr "Não faça nada"
 msgid "Mute"
 msgstr "Mudo"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Notificação"
 
@@ -484,9 +486,13 @@ msgstr "Reproduzir/Pausar"
 msgid "Tray icon"
 msgstr "Icone no Tray"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Iniciar minimizado"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -678,7 +684,7 @@ msgstr "_Apagar as capas"
 msgid "_Properties"
 msgstr "_Propriedades"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Biblioteca"
 
@@ -767,7 +773,7 @@ msgstr "Ir _para a aba anterior"
 
 #: ../src/shell/ario-shell.c:200
 msgid "Go to _next tab"
-msgstr ""
+msgstr "Ir para a próxi_ma aba"
 
 #: ../src/shell/ario-shell.c:203
 msgid "Show _lyrics"
@@ -785,20 +791,22 @@ msgstr "Barra de _Status"
 msgid "Upper part"
 msgstr "Parte de cima"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "Cliente GTK para MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Acabias https://launchpad.net/~acabiasmluiz-deactivatedaccount\n"
+"  Acabias https://launchpad.net/~acabiasml\n"
+"  Aluísio Augusto Silva Gonçalves https://launchpad.net/~kalug\n"
+"  André Gondim https://launchpad.net/~andregondim\n"
 "  Enrico Nicoletto https://launchpad.net/~liverig\n"
 "  Karlos Beto https://launchpad.net/~krezeberto\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
+"  Marcelo Bianchi https://launchpad.net/~m-tchelo\n"
 "  Marcos https://launchpad.net/~marcosfsimon\n"
-"  Mbianchi https://launchpad.net/~m-tchelo\n"
 "  Mário Júnior https://launchpad.net/~mjr-02\n"
 "  Rafael Porto Rodrigues https://launchpad.net/~rafporto\n"
 "  Rosiney Gomes Pereira https://launchpad.net/~rosiney-gp\n"
@@ -806,7 +814,7 @@ msgstr ""
 "  Wesley Soares https://launchpad.net/~wesley.soares"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Configurar Plugins"
 
@@ -845,8 +853,8 @@ msgid "Error saving file"
 msgstr "Erro ao salvar o arquivo"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Letras"
 
@@ -858,11 +866,11 @@ msgstr "Download de letras"
 msgid "Ario Preferences"
 msgstr "Preferncias do Ario"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Servidor"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Outros"
 
@@ -874,20 +882,20 @@ msgstr "%d músicas"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Propriedades da Música"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Erro ao salvar aquivos de tags:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Você deve selecionar um servidor"
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Novo Perfil"
 
@@ -991,15 +999,15 @@ msgid "Filter:"
 msgstr "Filtro:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Salvar lista de execução"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Nome da lista de execução :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "A lista de execução já existe. Deeja sobreescrevê-la?"
 

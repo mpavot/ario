@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-03-23 13:21+0000\n"
-"Last-Translator: Sulle <fredrikarlsen@hotmail.com>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-11-08 15:39+0000\n"
+"Last-Translator: Steinar Barbakken <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:33+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -96,10 +96,14 @@ msgid "Port :"
 msgstr "Port :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Servertype: "
+msgid "Server type :"
+msgstr "Servertype :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (eksperimentell)"
 
@@ -107,7 +111,7 @@ msgstr "XMMS 2 (eksperimentell)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Automatisk nedlasting av omslag for valgt sang"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Omslag"
 
@@ -124,7 +128,7 @@ msgid "Use Amazon."
 msgstr "Bruk Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Tilkobling"
 
@@ -188,17 +192,15 @@ msgstr "Grensesnitt"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Spilleliste til høyre for fanene"
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Spillelistens navn :"
+msgstr "Spilleliste under fanene"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Spillelistens navn :"
+msgstr "Spilleliste i fane"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -231,7 +233,7 @@ msgstr "Tittel :"
 
 #: ../data/ui/playlist-prefs.ui.h:1
 msgid "Add after playing song"
-msgstr ""
+msgstr "Legg til etter sang som spilles"
 
 #: ../data/ui/playlist-prefs.ui.h:2
 msgid "Add and play"
@@ -296,7 +298,7 @@ msgid "On double click:"
 msgstr "På dobbeltklikk:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Spilleliste"
@@ -396,7 +398,7 @@ msgstr "Antall sanger :"
 msgid "Play time :"
 msgstr "Spilletid :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Statistikk"
 
@@ -456,7 +458,7 @@ msgstr "Ikke gjør noe"
 msgid "Mute"
 msgstr "Demp"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Beskjed"
 
@@ -484,9 +486,13 @@ msgstr "Spill/Pause"
 msgid "Tray icon"
 msgstr "Ikon i systemkurv"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Start minimert"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -677,7 +683,7 @@ msgstr "_Slett omslagene"
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Bibliotek"
 
@@ -716,7 +722,7 @@ msgstr "_Vis"
 
 #: ../src/shell/ario-shell.c:163
 msgid "_Control"
-msgstr ""
+msgstr "_Kontroll"
 
 #: ../src/shell/ario-shell.c:164
 msgid "_Tool"
@@ -760,11 +766,11 @@ msgstr "Legg til lignende sanger i spillelisten"
 
 #: ../src/shell/ario-shell.c:197
 msgid "Go to _previous tab"
-msgstr ""
+msgstr "Gå til _forrige fane"
 
 #: ../src/shell/ario-shell.c:200
 msgid "Go to _next tab"
-msgstr ""
+msgstr "Gå til _neste fane"
 
 #: ../src/shell/ario-shell.c:203
 msgid "Show _lyrics"
@@ -782,11 +788,11 @@ msgstr "S_tatuslinje"
 msgid "Upper part"
 msgstr "Øvre del"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "GTK klient for MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -794,12 +800,13 @@ msgstr ""
 "  Lars Tandle Kyllingstad https://launchpad.net/~kyllingstad\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Rune C. Akselsen https://launchpad.net/~runeakselsen\n"
+"  Steinar Barbakken https://launchpad.net/~topguyz\n"
 "  Steve Pedersen https://launchpad.net/~stevep86\n"
 "  Thor K. H https://launchpad.net/~nitrolinken\n"
 "  Tor Syversen https://launchpad.net/~sol-moe"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Konfigurer Programtillegg"
 
@@ -838,8 +845,8 @@ msgid "Error saving file"
 msgstr "Feil oppstod ved lagring av filen"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Sangtekster"
 
@@ -851,11 +858,11 @@ msgstr "Nedlasting av Sangtekster"
 msgid "Ario Preferences"
 msgstr "Ario Innstillinger"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Tjener"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Andre"
 
@@ -867,20 +874,20 @@ msgstr "%d sanger"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Egenskaper for sang"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
-msgstr ""
+msgstr "Feil ved lagring av tags i filen:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Du må velge en tjener."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Ny profil"
 
@@ -984,15 +991,15 @@ msgid "Filter:"
 msgstr "Filter:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Lagre spilleliste"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Spillelistens navn :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Spillelisten finnes allerede. Vil du erstatte den?"
 
@@ -1206,11 +1213,11 @@ msgstr "_Slett valgt radio"
 
 #: ../plugins/radios/ario-radio.c:166
 msgid "Last.fm: Radio of similar artists"
-msgstr ""
+msgstr "Kopiere tekst Last.fm: Radio til liknende artister"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Last.fm: Radio of group"
-msgstr ""
+msgstr "Last.fm: Radio av gruppen"
 
 #: ../plugins/radios/ario-radio.c:167
 msgid "Group :"
@@ -1218,11 +1225,11 @@ msgstr "Gruppe :"
 
 #: ../plugins/radios/ario-radio.c:168
 msgid "Last.fm: Personal radio"
-msgstr ""
+msgstr "Last.fm: Personlig radio"
 
 #: ../plugins/radios/ario-radio.c:169
 msgid "Last.fm: Radio of genre"
-msgstr ""
+msgstr "Last.fm: Radio sjanger"
 
 #: ../plugins/radios/ario-radio.c:184
 #: ../plugins/radios/radios.ario-plugin.desktop.in.h:2

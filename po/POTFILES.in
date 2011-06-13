@@ -48,14 +48,12 @@ src/lib/libmpdclient.c
 src/lib/libmpdclient.h
 src/lib/gtk-builder-helpers.c
 src/lib/gtk-builder-helpers.h
-src/lyrics/ario-lyrics-leoslyrics.c
-src/lyrics/ario-lyrics-leoslyrics.h
-src/lyrics/ario-lyrics-lyricwiki.c
-src/lyrics/ario-lyrics-lyricwiki.h
 src/lyrics/ario-lyrics-manager.c
 src/lyrics/ario-lyrics-manager.h
 src/lyrics/ario-lyrics-provider.c
 src/lyrics/ario-lyrics-provider.h
+src/lyrics/ario-lyrics-letras.c
+src/lyrics/ario-lyrics-letras.h
 src/lyrics/ario-lyrics.c
 src/lyrics/ario-lyrics.h
 src/notification/ario-notification-manager.c

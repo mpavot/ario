@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-06-08 12:56+0000\n"
-"Last-Translator: Anatoliy Rykun <Unknown>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-09-26 22:04+0000\n"
+"Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -96,10 +96,14 @@ msgid "Port :"
 msgstr "Порт :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Тип сервера : "
+msgid "Server type :"
+msgstr "Тип сервера :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Экспериментальное)"
 
@@ -107,7 +111,7 @@ msgstr "XMMS 2 (Экспериментальное)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Автоматически скачивать обложку альбома играющей песни"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Обложки"
 
@@ -124,7 +128,7 @@ msgid "Use Amazon."
 msgstr "Использовать Amazon."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Соединение"
 
@@ -164,7 +168,7 @@ msgstr "Исполнитель :"
 
 #: ../data/ui/cover-progress.ui.h:3
 msgid "Downloading cover"
-msgstr ""
+msgstr "Идёт загрузка обложек"
 
 #: ../data/ui/cover-select.ui.h:3
 msgid "Local search"
@@ -172,7 +176,7 @@ msgstr "Локальный поиск"
 
 #: ../data/ui/cover-select.ui.h:4 ../src/sources/ario-search.c:108
 msgid "Search"
-msgstr ""
+msgstr "Поиск"
 
 #: ../data/ui/others-prefs.ui.h:1
 msgid "Allow only one instance of Ario"
@@ -188,17 +192,15 @@ msgstr "Внешний вид"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Список воспроизведения справа от библиотеки"
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Название списка :"
+msgstr "Список воспроизведения под библиотекой"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Название списка :"
+msgstr "Список воспроизведения в отдельной вкладке"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -296,7 +298,7 @@ msgid "On double click:"
 msgstr "По двойному нажатию:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Список воспроизведения"
@@ -396,7 +398,7 @@ msgstr "Кличество песен"
 msgid "Play time :"
 msgstr "Время проигрывания :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "Статистика"
 
@@ -438,11 +440,11 @@ msgstr "Длительность :"
 
 #: ../data/ui/song-infos.ui.h:11
 msgid "Performer :"
-msgstr ""
+msgstr "Исполнитель"
 
 #: ../data/ui/song-infos.ui.h:12
 msgid "Song"
-msgstr ""
+msgstr "Песня"
 
 #: ../data/ui/song-infos.ui.h:14
 msgid "Track :"
@@ -454,9 +456,9 @@ msgstr "Ничего не делать"
 
 #: ../data/ui/trayicon-prefs.ui.h:2
 msgid "Mute"
-msgstr ""
+msgstr "Выключить звук"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Уведомление"
 
@@ -484,9 +486,13 @@ msgstr "Играть/Пауза"
 msgid "Tray icon"
 msgstr "Иконка в трее"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Запускать минимизированным"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -677,7 +683,7 @@ msgstr "_Удалить обложки"
 msgid "_Properties"
 msgstr "_Свойства"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Библиотека"
 
@@ -716,7 +722,7 @@ msgstr "_Вид"
 
 #: ../src/shell/ario-shell.c:163
 msgid "_Control"
-msgstr ""
+msgstr "_Управление"
 
 #: ../src/shell/ario-shell.c:164
 msgid "_Tool"
@@ -782,32 +788,35 @@ msgstr "_Строка состояния"
 msgid "Upper part"
 msgstr "Верхняя часть"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "GTK клиент для MPD"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  #D|zeR by RSIS https://launchpad.net/~riqqer\n"
 "  Aleksej P. https://launchpad.net/~chaos8\n"
 "  Alexander Nasonkin https://launchpad.net/~mr.strack\n"
 "  Alexei Klimenko https://launchpad.net/~nimda7\n"
+"  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
 "  Alexey Reztsov https://launchpad.net/~ariafan\n"
 "  Anatoliy Rykun https://launchpad.net/~r-damien\n"
 "  Andrey Shitov https://launchpad.net/~aa-shtv\n"
+"  Anton A. https://launchpad.net/~dogberrt\n"
 "  Dmitry  DeXPeriX  Hrabrov https://launchpad.net/~dexperix\n"
 "  Egor Bushmelyov https://launchpad.net/~skipper95\n"
 "  Marc Pavot https://launchpad.net/~marc-pavot\n"
 "  Mihail Abrosimov https://launchpad.net/~chaihana\n"
 "  Nick Homolibere https://launchpad.net/~homolibere\n"
 "  Pavel Dmitriev https://launchpad.net/~dmitrievp\n"
-"  Sergei Zivukov https://launchpad.net/~ekonomvygoda\n"
-"  Serguey Basalaev https://launchpad.net/~sbasalaev\n"
+"  Sergey Basalaev https://launchpad.net/~sbasalaev\n"
+"  Sergey Makhtanov https://launchpad.net/~makhtanov\n"
 "  melksoft https://launchpad.net/~melksoft"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Настройка плагинов"
 
@@ -846,8 +855,8 @@ msgid "Error saving file"
 msgstr "Ошибка записи файла"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Тексты песен"
 
@@ -859,11 +868,11 @@ msgstr "Загрузить тексты песен"
 msgid "Ario Preferences"
 msgstr "Ario Настройки"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Сервер"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Иные"
 
@@ -875,20 +884,20 @@ msgstr "%d композиций"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Свойства композиции"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Ошибка сохранения тегов в файле:"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Вы должны обязательно выбрать сервер."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Новый профиль"
 
@@ -919,9 +928,7 @@ msgstr "Подтверждение"
 #: ../src/widgets/ario-header.c:66 ../src/widgets/ario-tray-icon.h:42
 #, c-format
 msgid "<i>from</i> %s <i>by</i> %s"
-msgstr ""
-"<i>из альбома </i> %s\r\n"
-"<i>исполняет</i> %s"
+msgstr "<i>из альбома </i> %s <i>исполняет</i> %s"
 
 #: ../src/widgets/ario-header.c:199
 msgid "Play previous song"
@@ -994,15 +1001,15 @@ msgid "Filter:"
 msgstr "Фильтр:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Сохранить список"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Название списка :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Плейлист уже существует. Вы хотите его перезаписать?"
 

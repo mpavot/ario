@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ario\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-24 23:29+0200\n"
-"PO-Revision-Date: 2010-06-17 19:48+0000\n"
-"Last-Translator: utdemir <utdemir@gmail.com>\n"
+"POT-Creation-Date: 2011-06-13 18:15+0200\n"
+"PO-Revision-Date: 2010-08-09 16:14+0000\n"
+"Last-Translator: can kaçan <cankacan.47@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-24 21:12+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-13 16:32+0000\n"
+"X-Generator: Launchpad (build 13175)\n"
 
 #: ../data/ario.desktop.in.in.h:1
 msgid "Ario music player"
@@ -96,10 +96,14 @@ msgid "Port :"
 msgstr "Kapı :"
 
 #: ../data/ui/connection-widget.ui.h:9
-msgid "Server type : "
-msgstr "Sunucu türü : "
+msgid "Server type :"
+msgstr "Sunucu türü :"
 
 #: ../data/ui/connection-widget.ui.h:10
+msgid "Timeout :"
+msgstr ""
+
+#: ../data/ui/connection-widget.ui.h:11
 msgid "XMMS 2 (Experimental)"
 msgstr "XMMS 2 (Deneysel)"
 
@@ -107,7 +111,7 @@ msgstr "XMMS 2 (Deneysel)"
 msgid "Automatically download the album cover of the playing song"
 msgstr "Çalan şarkının albüm kapağını otomatik olarak indir"
 
-#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:129
+#: ../data/ui/cover-prefs.ui.h:2 ../src/shell/ario-shell-preferences.c:128
 msgid "Covers"
 msgstr "Albüm Kapakları"
 
@@ -124,7 +128,7 @@ msgid "Use Amazon."
 msgstr "Amazon'u kullan."
 
 #: ../data/ui/connection-prefs.ui.h:1
-#: ../src/shell/ario-shell-preferences.c:109
+#: ../src/shell/ario-shell-preferences.c:108
 msgid "Connection"
 msgstr "Bağlantı"
 
@@ -188,17 +192,15 @@ msgstr "Arayüz"
 
 #: ../data/ui/others-prefs.ui.h:4
 msgid "Playlist at the right of tabs"
-msgstr ""
+msgstr "Çalma listsi sekmenin sağında."
 
 #: ../data/ui/others-prefs.ui.h:5
-#, fuzzy
 msgid "Playlist below tabs"
-msgstr "Çalma listesi adı :"
+msgstr "Çalma listesi sekmenin altında"
 
 #: ../data/ui/others-prefs.ui.h:6
-#, fuzzy
 msgid "Playlist within tabs"
-msgstr "Çalma listesi adı :"
+msgstr "Çalma listesi sekmenin içinde"
 
 #: ../data/ui/others-prefs.ui.h:7
 msgid "Proxy"
@@ -296,7 +298,7 @@ msgid "On double click:"
 msgstr "Çift tıklamada:"
 
 #: ../data/ui/playlist-prefs.ui.h:15 ../src/sources/ario-storedplaylists.c:229
-#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:124
+#: ../src/shell/ario-shell.c:222 ../src/shell/ario-shell-preferences.c:123
 #: ../src/widgets/ario-playlist.c:272
 msgid "Playlist"
 msgstr "Çalma Listesi"
@@ -396,7 +398,7 @@ msgstr "Şarkı sayısı :"
 msgid "Play time :"
 msgstr "Çalma süresi :"
 
-#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:149
+#: ../data/ui/stats-prefs.ui.h:6 ../src/shell/ario-shell-preferences.c:148
 msgid "Statistics"
 msgstr "İstatistikler"
 
@@ -456,7 +458,7 @@ msgstr "Hiçbir şey yapma"
 msgid "Mute"
 msgstr "Sesi Kapat"
 
-#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:139
+#: ../data/ui/trayicon-prefs.ui.h:3 ../src/shell/ario-shell-preferences.c:138
 msgid "Notification"
 msgstr "Bildirim"
 
@@ -484,9 +486,13 @@ msgstr "Oynat/Durakla"
 msgid "Tray icon"
 msgstr "Sistem tepsisi simgesi"
 
-#: ../src/ario-main.c:64
+#: ../src/ario-main.c:67
 msgid "Start minimized window"
 msgstr "Küçültülmüş pencerede başlat"
+
+#: ../src/ario-main.c:68
+msgid "Start with specific profile"
+msgstr ""
 
 #. Format result string
 #: ../src/ario-util.c:110
@@ -677,7 +683,7 @@ msgstr "_Albüm kapaklarını sil"
 msgid "_Properties"
 msgstr "_Özellikler"
 
-#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:119
+#: ../src/sources/ario-browser.c:125 ../src/shell/ario-shell-preferences.c:118
 msgid "Library"
 msgstr "Kütüphane"
 
@@ -782,11 +788,11 @@ msgstr "_Durum çubuğu"
 msgid "Upper part"
 msgstr "Üst tarafı"
 
-#: ../src/shell/ario-shell.c:824
+#: ../src/shell/ario-shell.c:825
 msgid "GTK client for MPD"
 msgstr "MPD için GTK istemcisi"
 
-#: ../src/shell/ario-shell.c:825
+#: ../src/shell/ario-shell.c:826
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -800,11 +806,12 @@ msgstr ""
 "  TurkMame https://launchpad.net/~turkmame\n"
 "  Volkan Esgel https://launchpad.net/~vesgel\n"
 "  Yahuda https://launchpad.net/~judaskro\n"
+"  can kaçan https://launchpad.net/~amon-ra\n"
 "  celil aydin https://launchpad.net/~celil-aydin\n"
 "  utdemir https://launchpad.net/~utdemir"
 
 #. Create plugins configuration dialog window
-#: ../src/shell/ario-shell.c:1277
+#: ../src/shell/ario-shell.c:1278
 msgid "Configure Plugins"
 msgstr "Eklentileri Yapılandır"
 
@@ -843,8 +850,8 @@ msgid "Error saving file"
 msgstr "Dosya kaydetmede hata"
 
 #: ../src/shell/ario-shell-lyrics.c:43
-#: ../src/shell/ario-shell-preferences.c:134
-#: ../src/shell/ario-shell-songinfos.c:273
+#: ../src/shell/ario-shell-preferences.c:133
+#: ../src/shell/ario-shell-songinfos.c:272
 msgid "Lyrics"
 msgstr "Şarkı sözleri"
 
@@ -856,11 +863,11 @@ msgstr "Şarkı Sözleri İndir"
 msgid "Ario Preferences"
 msgstr "Ario Yeğlenenleri"
 
-#: ../src/shell/ario-shell-preferences.c:114
+#: ../src/shell/ario-shell-preferences.c:113
 msgid "Server"
 msgstr "Sunucu"
 
-#: ../src/shell/ario-shell-preferences.c:144
+#: ../src/shell/ario-shell-preferences.c:143
 msgid "Others"
 msgstr "Diğerleri"
 
@@ -872,20 +879,20 @@ msgstr "%d şarkı"
 #. Set window properties
 #. Set window title
 #: ../src/shell/ario-shell-songinfos.c:249
-#: ../src/shell/ario-shell-songinfos.c:267
-#: ../src/shell/ario-shell-songinfos.c:545
+#: ../src/shell/ario-shell-songinfos.c:266
+#: ../src/shell/ario-shell-songinfos.c:544
 msgid "Song Properties"
 msgstr "Şarkı Özellikleri"
 
-#: ../src/shell/ario-shell-songinfos.c:456
+#: ../src/shell/ario-shell-songinfos.c:455
 msgid "Error saving tags of file:"
 msgstr "Dosya etiketi kaydı hatası"
 
-#: ../src/widgets/ario-connection-widget.c:626
+#: ../src/widgets/ario-connection-widget.c:652
 msgid "You must select a server."
 msgstr "Bir sunucu seçmelisiniz."
 
-#: ../src/widgets/ario-connection-widget.c:676
+#: ../src/widgets/ario-connection-widget.c:702
 msgid "New Profile"
 msgstr "Yeni Profil"
 
@@ -989,15 +996,15 @@ msgid "Filter:"
 msgstr "Filtre:"
 
 #. Create the widgets
-#: ../src/widgets/ario-playlist.c:1696
+#: ../src/widgets/ario-playlist.c:1700
 msgid "Save playlist"
 msgstr "Çalma listesini kaydet"
 
-#: ../src/widgets/ario-playlist.c:1706
+#: ../src/widgets/ario-playlist.c:1710
 msgid "Playlist name :"
 msgstr "Çalma listesi adı :"
 
-#: ../src/widgets/ario-playlist.c:1742
+#: ../src/widgets/ario-playlist.c:1746
 msgid "Playlist already exists. Do you want to overwrite it?"
 msgstr "Çalma listesi zaten var. Üzerine yazmak istiyor musunuz?"
 
