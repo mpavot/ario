@@ -31,7 +31,8 @@
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
-#define LASTFM_URI  "http://ws.audioscrobbler.com/1.0/album/%s/%s/info.xml"
+#define LASTFM_API_KEY "93bea35d40c4a58e034d14eb85e840c2"
+#define LASTFM_URI  "http://ws.audioscrobbler.com/2.0/?api_key=%s&artist=%s&album=%s&method=album.getinfo"
 
 #define COVER_SMALL "small"
 #define COVER_MEDIUM "medium"
@@ -104,6 +105,7 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
         xmlDocPtr doc;
         xmlNodePtr cur;
         xmlChar *key;
+        xmlChar *attr;
         GSList *ario_cover_uris = NULL;
 
         doc = xmlParseMemory (xmldata, size);
@@ -119,6 +121,17 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
                 return NULL;
         }
 
+        /* The root node is "lfm" and we check its status attribute */
+        if (xmlStrcmp (cur->name, (const xmlChar *) "lfm") &&
+            (attr = xmlGetProp (cur, (const xmlChar *) "status")) != NULL &&
+            xmlStrcmp (attr, (const xmlChar *) "ok")) {
+                xmlFreeDoc (doc);
+                return NULL;
+        }
+
+        /* The real representation is the first children of the "lfm" node */
+        cur = cur->xmlChildrenNode->next;
+
         /* We check that the root node name is "album" */
         if (xmlStrcmp (cur->name, (const xmlChar *) "album")) {
                 xmlFreeDoc (doc);
@@ -126,7 +139,7 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
         }
 
         for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
-                if (!xmlStrcmp (cur->name, (const xmlChar *) "coverart"))
+                if (!xmlStrcmp (cur->name, (const xmlChar *) "image"))
                         break;
         }
 
@@ -135,15 +148,19 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
                 return NULL;
         }
 
-        for (cur = cur->xmlChildrenNode; cur; cur = cur->next) {
-                if (!xmlStrcmp (cur->name, (const xmlChar *) cover_size)){
+        for (; cur; cur = cur->next) {
+                if ((attr = xmlGetProp (cur, (const xmlChar *) "size")) != NULL &&
+                     !xmlStrcmp (attr, (const xmlChar *) cover_size)) {
                         /* A possible cover uri has been found, we add it to the list*/
                         key = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
-                        ario_cover_uris = g_slist_append (ario_cover_uris, key);
-                        if (operation == GET_FIRST_COVER) {
-                                /* If we only want one cover, we now stop to parse the file */
-                                xmlFreeDoc (doc);
-                                return ario_cover_uris;
+                        /* lastfm doesn't give any link if there isn't a cover for this size */
+                        if (xmlStrcmp (key, (const xmlChar *) "")) {
+                                ario_cover_uris = g_slist_append (ario_cover_uris, key);
+                                if (operation == GET_FIRST_COVER) {
+                                        /* If we only want one cover, we now stop to parse the file */
+                                        xmlFreeDoc (doc);
+                                        return ario_cover_uris;
+                                }
                         }
                 }
         }
@@ -176,7 +193,8 @@ ario_cover_lastfm_make_xml_uri (const char *artist,
         formated_album = ario_util_format_keyword_for_lastfm (album);
 
         /* We make the xml uri with all the parameters */
-        xml_uri = g_strdup_printf (LASTFM_URI, formated_artist, formated_album);
+        xml_uri = g_strdup_printf (LASTFM_URI, LASTFM_API_KEY,
+                                   formated_artist, formated_album);
 
         g_free (formated_artist);
         g_free (formated_album);
@@ -221,11 +239,6 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
                 return FALSE;
         }
 
-        if (!g_strrstr (xml_data, "<coverart>")) {
-                g_free (xml_data);
-                return FALSE;
-        }
-
         /* We parse the xml file to extract the cover uris */
         ario_cover_uris = ario_cover_lastfm_parse_xml_file (xml_data,
                                                             xml_size,
@@ -244,13 +257,11 @@ ario_cover_lastfm_get_covers (ArioCoverProvider *cover_provider,
                                                  NULL, 0, NULL,
                                                  &temp_size,
                                                  &temp_contents);
-                        if (ario_cover_size_is_valid (temp_size)) {
-                                /* If the cover is not too big and not too small (blank lastfm image), we append it to file_contents */
-                                g_array_append_val (*file_size, temp_size);
-                                *file_contents = g_slist_append (*file_contents, temp_contents);
-                                /* If at least one cover is found, we return OK */
-                                ret = TRUE;
-                        }
+                        /* We append the cover to file_contents */
+                        g_array_append_val (*file_size, temp_size);
+                        *file_contents = g_slist_append (*file_contents, temp_contents);
+                        /* If at least one cover is found, we return OK */
+                        ret = TRUE;
                 }
         }
 
