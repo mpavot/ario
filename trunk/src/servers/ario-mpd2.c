@@ -569,6 +569,20 @@ ario_mpd_disconnect (void)
 
         if (instance->priv->support_idle)
                 ario_mpd_idle_free ();
+
+        /*
+         * check if there is a connection again
+         *
+         * if the connection has been cut, a call to ario_mpd_idle_free
+         * might time out and cause ario_mpd_disconnect to be called a
+         * second time and free the connection and set the pointer
+         * to NULL, causing the first invocation of this function
+         * to segfault. Since the second invocation cleaned everything
+         * up, we can just return.
+         */
+        if (!instance->priv->connection)
+                return;
+
         mpd_connection_free (instance->priv->connection);
         instance->priv->connection = NULL;
 
