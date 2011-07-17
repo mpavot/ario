@@ -209,9 +209,7 @@ active_toggled_cb (GtkCellRendererToggle *cell,
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
         g_return_if_fail (model != NULL);
 
-        gtk_tree_model_get_iter (model, &iter, path);
-
-        if (&iter != NULL)
+        if (gtk_tree_model_get_iter (model, &iter, path))
                 plugin_manager_toggle_active (pm, &iter, model);
 
         gtk_tree_path_free (path);
@@ -247,9 +245,7 @@ row_activated_cb (GtkTreeView       *tree_view,
 
         g_return_if_fail (model != NULL);
 
-        gtk_tree_model_get_iter (model, &iter, path);
-
-        g_return_if_fail (&iter != NULL);
+        g_return_if_fail (gtk_tree_model_get_iter (model, &iter, path));
 
         plugin_manager_toggle_active (pm, &iter, model);
 }
