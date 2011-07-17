@@ -411,7 +411,6 @@ ario_shell_coverselect_get_covers_cb (GtkWidget *widget,
         ARIO_LOG_FUNCTION_START;
         const gchar *artist;
         const gchar *album;
-        gboolean ret;
 
         /* Set widgets insensitive during cover download */
         ario_shell_coverselect_set_sensitive (shell_coverselect, FALSE);
@@ -429,13 +428,13 @@ ario_shell_coverselect_get_covers_cb (GtkWidget *widget,
         /* Get covers */
         shell_coverselect->priv->file_size = g_array_new (TRUE, TRUE, sizeof (int));
 
-        ret = ario_cover_manager_get_covers (ario_cover_manager_get_instance (),
-                                             artist,
-                                             album,
-                                             shell_coverselect->priv->path,
-                                             &shell_coverselect->priv->file_size,
-                                             &shell_coverselect->priv->file_contents,
-                                             GET_ALL_COVERS);
+        ario_cover_manager_get_covers (ario_cover_manager_get_instance (),
+                                       artist,
+                                       album,
+                                       shell_coverselect->priv->path,
+                                       &shell_coverselect->priv->file_size,
+                                       &shell_coverselect->priv->file_contents,
+                                       GET_ALL_COVERS);
 
         /* Show downloaded covers */
         ario_shell_coverselect_show_covers (shell_coverselect);

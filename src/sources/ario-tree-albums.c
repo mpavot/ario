@@ -142,11 +142,8 @@ ario_tree_albums_album_free (GtkTreeModel *model,
                              gpointer userdata)
 {
         ARIO_LOG_FUNCTION_START;
-        ArioTreeAlbums *tree;
         ArioServerAlbum *album;
         g_return_val_if_fail (IS_ARIO_TREE_ALBUMS (userdata), FALSE);
-
-        tree = ARIO_TREE_ALBUMS (userdata);
 
         gtk_tree_model_get (model, iter, ALBUM_ALBUM_COLUMN, &album, -1);
 

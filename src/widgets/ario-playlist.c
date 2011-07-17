@@ -852,10 +852,9 @@ ario_playlist_changed_cb (ArioServer *server,
         gchar time[ARIO_MAX_TIME_SIZE];
         gchar *title;
         GSList *songs, *tmp;
-        ArioServerSong *song, *current_song;
+        ArioServerSong *song;
         gboolean need_set;
         GtkTreePath *path;
-        int state;
 
         /* Clear the playlist if ario is not connected to the server */
         if (!ario_server_is_connected ()) {
@@ -870,13 +869,6 @@ ario_playlist_changed_cb (ArioServer *server,
         playlist->priv->playlist_id = ario_server_get_current_playlist_id ();
 
         old_length = playlist->priv->playlist_length;
-
-        /* Get current song */
-        state = ario_server_get_current_state ();
-        if (state == ARIO_STATE_UNKNOWN || state == ARIO_STATE_STOP)
-                current_song = NULL;
-        else
-                current_song = ario_server_get_current_song ();
 
         /* For each change in playlist */
         for (tmp = songs; tmp; tmp = g_slist_next (tmp)) {
@@ -1334,14 +1326,13 @@ ario_playlist_drop_criterias (const int x, const int y,
         ArioServerAtomicCriteria *atomic_criteria;
         int i = 0, j;
         int nb;
-        GSList *filenames = NULL, *criterias = NULL;
+        GSList *criterias = NULL;
 
         /* Get a list of criteria from drag data */
         criterias_str = g_strsplit ((const gchar *) gtk_selection_data_get_data (data), "\n", 0);
         while (criterias_str[i] && *criterias_str[i] != '\0') {
                 nb = atoi (criterias_str[i]);
                 criteria = NULL;
-                filenames = NULL;
 
                 for (j=0; j<nb; ++j) {
                         atomic_criteria = (ArioServerAtomicCriteria *) g_malloc0 (sizeof (ArioServerAtomicCriteria));
