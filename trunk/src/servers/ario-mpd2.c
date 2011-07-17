@@ -29,6 +29,7 @@
 #include "ario-util.h"
 #include "preferences/ario-preferences.h"
 #include "lib/ario-conf.h"
+#include "lib/gtk-builder-helpers.h"
 #include "widgets/ario-playlist.h"
 
 /* Number of milliseconds in 1 second */
@@ -513,7 +514,9 @@ static void
 ario_mpd_connect (void)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *win = NULL, *vbox,*label, *bar;
+        GtkBuilder *builder;
+        GtkWidget *win = NULL;
+        static GtkProgressBar *bar;
         GThread* thread;
         GtkWidget *dialog;
         gboolean is_in_error = (instance->priv->reconnect_time > 0);
@@ -522,23 +525,18 @@ ario_mpd_connect (void)
                                   instance, TRUE, NULL);
 
         if (!is_in_error) {
-                win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-                gtk_window_set_modal (GTK_WINDOW (win), TRUE);
-                vbox = gtk_vbox_new (FALSE, 0);
-                label = gtk_label_new (_("Connecting to server..."));
-                bar = gtk_progress_bar_new ();
+                builder = gtk_builder_new ();
+                gtk_builder_add_from_file (builder, UI_PATH "connection-dialog.ui", NULL);
 
-                gtk_container_add (GTK_CONTAINER (win), vbox);
-                gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 6);
-                gtk_box_pack_start (GTK_BOX (vbox), bar, FALSE, FALSE, 6);
+                win = GTK_WIDGET (gtk_builder_get_object (builder, "ario_connection_dialog"));
+                bar = GTK_PROGRESS_BAR (gtk_builder_get_object (builder, "connection_progressbar"));
 
-                gtk_window_set_resizable (GTK_WINDOW (win), FALSE);
-                gtk_window_set_title (GTK_WINDOW (win), "Ario");
-                gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_CENTER);
+                g_object_unref (builder);
+
                 gtk_widget_show_all (win);
 
                 while (instance->parent.connecting) {
-                        gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
+                        gtk_progress_bar_pulse (bar);
                         while (gtk_events_pending ())
                                 gtk_main_iteration ();
                         g_usleep (200000);
