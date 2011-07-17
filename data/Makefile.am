@@ -24,6 +24,7 @@ ui_DATA = ario-ui.xml \
 	     ui/connection-prefs.ui	\
 	     ui/connection-assistant.ui	\
 	     ui/connection-widget.ui	\
+	     ui/connection-dialog.ui	\
 	     ui/cover-prefs.ui		\
 	     ui/cover-progress.ui       \
 	     ui/cover-select.ui	        \
