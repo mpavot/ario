@@ -886,7 +886,7 @@ ario_server_playlist_add_songs (const GSList *songs,
         int end;
         int song_pos = pos;
 
-        /* Start playing if needed */
+        /* Clear playlist if needed */
         if (action == PLAYLIST_REPLACE)  {
                 ario_server_clear ();
         }
