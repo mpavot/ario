@@ -295,8 +295,12 @@ ario_search_do_search (ArioSearch *search)
         GtkTreeIter iter;
         gchar *title;
         GtkListStore *liststore;
-        int i;
+        int i, j;
         gchar **cmp_str;
+        gboolean tagged_search;
+        gchar *sep, *tag, *value;
+        gchar **items;
+        gint len;
 
         /* Split on spaces to have multiple filters */
         cmp_str = g_strsplit (gtk_entry_get_text (GTK_ENTRY (search->priv->entry)), " ", -1);
@@ -305,14 +309,52 @@ ario_search_do_search (ArioSearch *search)
 
         /* Loop on every filter */
         for (i = 0; cmp_str[i]; ++i) {
+                len = strlen(cmp_str[i]);
                 /* Only keep words of at least 3 chars for performance reasons */
                 if (g_utf8_collate (cmp_str[i], "")
-                    && strlen(cmp_str[i]) > 2)
+                    && len > 2)
                 {
-                        atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
-                        atomic_criteria->tag = ARIO_TAG_ANY;
-                        atomic_criteria->value = g_strdup(cmp_str[i]);
-                        criteria = g_slist_append (criteria, atomic_criteria);
+                        /* Check if we are in the case of a search by tag (like title:foo or artist:bar) */
+                        tagged_search = FALSE;
+                        sep = g_strstr_len (cmp_str[i], len, ":");
+                        if (sep)
+                        {
+                                if (sep - cmp_str[i] == len - 1)
+                                {
+                                        /* separator is the last character (for example: 'title:') 
+                                         * We don't take this string into account */
+                                        tagged_search = TRUE;
+                                }
+                                else
+                                {
+                                        tag = g_strndup (cmp_str[i], sep - cmp_str[i]);
+                                        value = g_strdup (sep + 1);
+
+                                        items = ario_server_get_items_names ();
+                                        for (j = 0; j < ARIO_TAG_COUNT; ++j) {
+                                                if (items[j] && tag
+                                                && (! g_ascii_strcasecmp (tag, items[j])
+                                                        || ! g_ascii_strcasecmp (tag, gettext (items[j]))))
+                                                {
+                                                        atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
+                                                        atomic_criteria->tag = j;
+                                                        atomic_criteria->value = g_strdup (value);
+                                                        criteria = g_slist_append (criteria, atomic_criteria);
+                                                        tagged_search = TRUE;
+                                                        break;
+                                                }
+                                        }
+                                }
+                        }
+
+                        /* Not a search by tag: search in any tag */
+                        if (!tagged_search)
+                        {
+                                atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));
+                                atomic_criteria->tag = ARIO_TAG_ANY;
+                                atomic_criteria->value = g_strdup (cmp_str[i]);
+                                criteria = g_slist_append (criteria, atomic_criteria);
+                        }
                 }
         }
         g_strfreev (cmp_str);
