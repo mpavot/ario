@@ -306,10 +306,16 @@ ario_mpd_update_elapsed (gpointer data)
         return TRUE;
 }
 
-static void
+static gboolean
 ario_mpd_emit_storedplaylist (gpointer not_used)
 {
         g_signal_emit_by_name (G_OBJECT (server_instance), "storedplaylists_changed");
+
+        /*
+         * We're being hooked into the main loop using g_idle_add and
+         * want to be called just once
+         */
+        return FALSE;
 }
 
 static void
