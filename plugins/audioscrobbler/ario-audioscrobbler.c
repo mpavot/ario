@@ -243,7 +243,6 @@ ario_audioscrobbler_constructor (GType type,
                                  GObjectConstructParam *construct_properties)
 {
         ARIO_LOG_FUNCTION_START
-        GObject *obj;
         ArioAudioscrobbler *audioscrobbler;
 
         /* Invoke parent constructor. */
@@ -251,13 +250,11 @@ ario_audioscrobbler_constructor (GType type,
         GObjectClass *parent_class;
         klass = ARIO_AUDIOSCROBBLER_CLASS (g_type_class_peek (ARIO_TYPE_AUDIOSCROBBLER));
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
-        obj = parent_class->constructor (type,
-                                         n_construct_properties,
-                                         construct_properties);
+        audioscrobbler = ARIO_AUDIOSCROBBLER (parent_class->constructor (type,
+                                                                        n_construct_properties,
+                                                                        construct_properties));
 
-        audioscrobbler = ARIO_AUDIOSCROBBLER (obj);
-
-        return obj;
+        return G_OBJECT (audioscrobbler);
 }
 
 /* Class-related functions: */
