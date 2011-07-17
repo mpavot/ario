@@ -296,7 +296,7 @@ ario_source_manager_append (ArioSource *source)
                             gtk_image_new_from_stock (ario_source_get_icon (source), GTK_ICON_SIZE_MENU),
                             TRUE, TRUE, 0);
 
-        /* Add source nqme to hbox */
+        /* Add source name to hbox */
         gtk_box_pack_start (GTK_BOX (hbox),
                             gtk_label_new (ario_source_get_name (source)),
                             TRUE, TRUE, 0);
