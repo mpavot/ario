@@ -206,11 +206,11 @@
 
 /* Ordered list of lyrics providers */
 #define PREF_LYRICS_PROVIDERS_LIST              "lyrics-providers"
-#define PREF_LYRICS_PROVIDERS_LIST_DEFAULT      "lyricwiki,leoslyrics,lyrc"
+#define PREF_LYRICS_PROVIDERS_LIST_DEFAULT      "letras"
 
 /* List of active lyrics providers */
 #define PREF_LYRICS_ACTIVE_PROVIDERS_LIST         "active-lyrics-providers"
-#define PREF_LYRICS_ACTIVE_PROVIDERS_LIST_DEFAULT "lyricwiki,leoslyrics"
+#define PREF_LYRICS_ACTIVE_PROVIDERS_LIST_DEFAULT "letras"
 
 /* If true, Ario windows is hidden when closed */
 #define PREF_HIDE_ON_CLOSE                      "hide-on-close"
