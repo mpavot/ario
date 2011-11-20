@@ -160,18 +160,20 @@ ario_lyrics_letras_get_lyrics (ArioLyricsProvider *lyrics_provider,
         char *uri;
         int size;
         char *data;
-        gchar *conv_artist;
-        gchar *conv_title;
+        gchar *conv_artist = NULL;
+        gchar *conv_title = NULL;
         ArioLyrics *lyrics = NULL;
 
-        conv_artist = ario_util_format_for_http (artist);
-        conv_title = ario_util_format_for_http (title);
+        if (artist)
+            conv_artist = ario_util_format_for_http (artist);
+        if (title)
+            conv_title = ario_util_format_for_http (title);
 
-        if (artist && title)
+        if (conv_artist && conv_title)
                 uri = g_strdup_printf(LETRAS_URI, conv_artist, conv_title);
-        else if (artist)
+        else if (conv_artist)
                 uri = g_strdup_printf(LETRAS_ARTIST_URI, conv_artist);
-        else if (title)
+        else if (conv_title)
                 uri = g_strdup_printf(LETRAS_SONG_URI, conv_title);
         else
                 return NULL;
