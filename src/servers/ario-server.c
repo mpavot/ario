@@ -142,6 +142,16 @@ ario_server_class_init (ArioServerClass *klass)
                               G_TYPE_NONE,
                               0);
 
+        ario_server_signals[SERVER_CONSUME_CHANGED] =
+                g_signal_new ("consume_changed",
+                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (ArioServerClass, consume_changed),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
+
         ario_server_signals[SERVER_RANDOM_CHANGED] =
                 g_signal_new ("random_changed",
                               G_OBJECT_CLASS_TYPE (object_class),
@@ -481,6 +491,13 @@ ario_server_get_crossfadetime (void)
 }
 
 gboolean
+ario_server_get_current_consume (void)
+{
+        ARIO_LOG_FUNCTION_START;
+        return interface->consume;
+}
+
+gboolean
 ario_server_get_current_random (void)
 {
         ARIO_LOG_FUNCTION_START;
@@ -607,6 +624,14 @@ ario_server_set_current_volume (const gint volume)
         ARIO_LOG_FUNCTION_START;
         /* Call virtual method */
         ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_volume (volume);
+}
+
+void
+ario_server_set_current_consume (const gboolean consume)
+{
+        ARIO_LOG_FUNCTION_START;
+        /* Call virtual method */
+        ARIO_SERVER_INTERFACE_GET_CLASS (interface)->set_current_consume (consume);
 }
 
 void

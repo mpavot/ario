@@ -74,6 +74,7 @@ static void ario_xmms_do_pause (void);
 static void ario_xmms_do_stop (void);
 static void ario_xmms_set_current_elapsed (const gint elapsed);
 static void ario_xmms_set_current_volume (const gint volume);
+static void ario_xmms_set_current_consume (const gboolean consume);
 static void ario_xmms_set_current_random (const gboolean random);
 static void ario_xmms_set_current_repeat (const gboolean repeat);
 static void ario_xmms_set_crossfadetime (const int crossfadetime);
@@ -164,6 +165,7 @@ ario_xmms_class_init (ArioXmmsClass *klass)
         server_class->do_stop = ario_xmms_do_stop;
         server_class->set_current_elapsed = ario_xmms_set_current_elapsed;
         server_class->set_current_volume = ario_xmms_set_current_volume;
+        server_class->set_current_consume = ario_xmms_set_current_consume;
         server_class->set_current_random = ario_xmms_set_current_random;
         server_class->set_current_repeat = ario_xmms_set_current_repeat;
         server_class->set_crossfadetime = ario_xmms_set_crossfadetime;
@@ -1067,6 +1069,17 @@ ario_xmms_set_current_volume (const gint volume)
         ario_xmms_result_wait (res2);
         xmmsc_result_unref (res);
         xmmsc_result_unref (res2);
+}
+
+void
+ario_xmms_set_current_consume (const gboolean consume)
+{
+        ARIO_LOG_FUNCTION_START;
+        /* check if there is a connection */
+        if (!instance->priv->connection)
+                return;
+
+        ARIO_LOG_ERROR ("Not yet implemented for XMMS");
 }
 
 void

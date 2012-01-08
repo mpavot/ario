@@ -225,6 +225,7 @@ ario_util_init_stock_icons (void)
         ario_util_add_stock_icons ("ario-pause", PIXMAP_PATH "ario-pause.png");
         ario_util_add_stock_icons ("repeat", PIXMAP_PATH "repeat.png");
         ario_util_add_stock_icons ("random", PIXMAP_PATH "shuffle.png");
+        ario_util_add_stock_icons ("consume", PIXMAP_PATH "consume.png");
         ario_util_add_stock_icons ("pl-below", PIXMAP_PATH "pl-below.png");
         ario_util_add_stock_icons ("pl-right", PIXMAP_PATH "pl-right.png");
         ario_util_add_stock_icons ("pl-inside", PIXMAP_PATH "pl-inside.png");

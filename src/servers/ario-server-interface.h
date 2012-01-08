@@ -45,6 +45,7 @@ typedef struct
         gint64 playlist_id;
         int playlist_length;
 
+        gboolean consume;
         gboolean random;
         gboolean repeat;
 
@@ -104,6 +105,7 @@ typedef struct
         void                (*do_stop)                                (void);
         void                (*set_current_elapsed)                    (const gint elapsed);
         void                (*set_current_volume)                     (const gint volume);
+        void                (*set_current_consume)                    (const gboolean consume);
         void                (*set_current_random)                     (const gboolean random);
         void                (*set_current_repeat)                     (const gboolean repeat);
         void                (*set_crossfadetime)                      (const int crossfadetime);

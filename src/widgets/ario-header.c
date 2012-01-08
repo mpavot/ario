@@ -55,10 +55,13 @@ static void ario_header_cover_changed_cb (ArioCoverHandler *cover_handler,
 static void ario_header_elapsed_changed_cb (ArioServer *server,
                                             int elapsed,
                                             ArioHeader *header);
+static void ario_header_consume_changed_cb (ArioServer *server,
+                                           ArioHeader *header);
 static void ario_header_random_changed_cb (ArioServer *server,
                                            ArioHeader *header);
 static void ario_header_repeat_changed_cb (ArioServer *server,
                                            ArioHeader *header);
+static void ario_header_do_consume (ArioHeader *header);
 static void ario_header_do_random (ArioHeader *header);
 static void ario_header_do_repeat (ArioHeader *header);
 
@@ -69,6 +72,7 @@ struct ArioHeaderPrivate
 {
         GtkWidget *prev_button;
         GtkWidget *play_pause_button;
+        GtkWidget *consume_button;
         GtkWidget *random_button;
         GtkWidget *repeat_button;
 
@@ -310,6 +314,18 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->of = gtk_label_new (_(" of "));
         header->priv->total = gtk_label_new ("0:00");
 
+        /* Construct consume button */
+        image = gtk_image_new_from_stock ("consume",
+                                          GTK_ICON_SIZE_LARGE_TOOLBAR);
+        header->priv->consume_button = gtk_toggle_button_new ();
+        gtk_container_add (GTK_CONTAINER (header->priv->consume_button), image);
+        g_signal_connect_swapped (header->priv->consume_button,
+                                  "clicked",
+                                  G_CALLBACK (ario_header_do_consume),
+                                  header);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (header->priv->consume_button),
+                                     _("Toggle 'consume' (remove played song from playlist) on/off"));
+
         /* Construct random button */
         image = gtk_image_new_from_stock ("random",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
@@ -380,7 +396,8 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (right_hbox), vbox, FALSE, TRUE, 0);
 
-        /* Add random/repeat buttons */
+        /* Add consume/random/repeat buttons */
+        gtk_box_pack_start (GTK_BOX (right_hbox), header->priv->consume_button, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (right_hbox), header->priv->random_button, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (right_hbox), header->priv->repeat_button, FALSE, TRUE, 0);
 
@@ -422,6 +439,9 @@ ario_header_new (void)
                                  header, 0);
         g_signal_connect_object (server,
                                  "elapsed_changed", G_CALLBACK (ario_header_elapsed_changed_cb),
+                                 header, 0);
+        g_signal_connect_object (server,
+                                 "consume_changed", G_CALLBACK (ario_header_consume_changed_cb),
                                  header, 0);
         g_signal_connect_object (server,
                                  "random_changed", G_CALLBACK (ario_header_random_changed_cb),
@@ -629,6 +649,7 @@ ario_header_state_changed_cb (ArioServer *server,
                 gtk_widget_set_sensitive (header->priv->prev_button, FALSE);
                 gtk_widget_set_sensitive (header->priv->play_pause_button, FALSE);
 
+                gtk_widget_set_sensitive (header->priv->consume_button, FALSE);
                 gtk_widget_set_sensitive (header->priv->random_button, FALSE);
                 gtk_widget_set_sensitive (header->priv->repeat_button, FALSE);
 
@@ -643,6 +664,7 @@ ario_header_state_changed_cb (ArioServer *server,
                 gtk_widget_set_sensitive (header->priv->prev_button, TRUE);
                 gtk_widget_set_sensitive (header->priv->play_pause_button, TRUE);
 
+                gtk_widget_set_sensitive (header->priv->consume_button, TRUE);
                 gtk_widget_set_sensitive (header->priv->random_button, TRUE);
                 gtk_widget_set_sensitive (header->priv->repeat_button, TRUE);
 
@@ -672,6 +694,31 @@ ario_header_elapsed_changed_cb (ArioServer *server,
 
         /* Update slider value */
         gtk_adjustment_set_value (header->priv->adjustment, (gdouble) elapsed);
+}
+
+static void
+ario_header_consume_changed_cb (ArioServer *server,
+                               ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START;
+        gboolean consume;
+
+        /* Get consume state on server */
+        consume = ario_server_get_current_consume ();
+
+        /* Block consume button signal */
+        g_signal_handlers_block_by_func (G_OBJECT (header->priv->consume_button),
+                                         G_CALLBACK (ario_header_do_consume),
+                                         header);
+
+        /* Change button state depending on consume value */
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (header->priv->consume_button),
+                                      consume);
+
+        /* Unblock consume button signal */
+        g_signal_handlers_unblock_by_func (G_OBJECT (header->priv->consume_button),
+                                           G_CALLBACK (ario_header_do_consume),
+                                           header);
 }
 
 static void
@@ -832,6 +879,15 @@ ario_header_stop (ArioHeader *header)
         g_return_if_fail (IS_ARIO_HEADER (header));
         /* Stop music */
         ario_server_do_stop ();
+}
+
+static void
+ario_header_do_consume (ArioHeader *header)
+{
+        ARIO_LOG_FUNCTION_START;
+        g_return_if_fail (IS_ARIO_HEADER (header));
+        /* Change consume on server */
+        ario_server_set_current_consume (!ario_server_get_current_consume ());
 }
 
 static void

@@ -42,6 +42,7 @@ enum
         PROP_VOLUME,
         PROP_ELAPSED,
         PROP_PLAYLISTID,
+        PROP_CONSUME,
         PROP_RANDOM,
         PROP_UPDATINGDB,
         PROP_REPEAT
@@ -161,6 +162,7 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
         klass->do_stop = dummy_void_void;
         klass->set_current_elapsed = dummy_void_int;
         klass->set_current_volume = dummy_void_int;
+        klass->set_current_consume = dummy_void_int;
         klass->set_current_random = dummy_void_int;
         klass->set_current_repeat = dummy_void_int;
         klass->set_crossfadetime = dummy_void_int;
@@ -222,6 +224,14 @@ ario_server_interface_class_init (ArioServerInterfaceClass *klass)
                                          g_param_spec_boolean ("random",
                                                                "random",
                                                                "random",
+                                                               FALSE,
+                                                               G_PARAM_READWRITE));
+
+        g_object_class_install_property (object_class,
+                                         PROP_CONSUME,
+                                         g_param_spec_boolean ("consume",
+                                                               "consume",
+                                                               "consume",
                                                                FALSE,
                                                                G_PARAM_READWRITE));
 
@@ -357,6 +367,11 @@ ario_server_interface_set_property (GObject *object,
                         server_interface->playlist_length = 0;
                 server_interface->signals_to_emit |= SERVER_PLAYLIST_CHANGED_FLAG;
                 break;
+        case PROP_CONSUME:
+                /* Change value and flag signal to emit */
+                server_interface->consume = g_value_get_boolean (value);
+                server_interface->signals_to_emit |= SERVER_CONSUME_CHANGED_FLAG;
+                break;
         case PROP_RANDOM:
                 /* Change value and flag signal to emit */
                 server_interface->random = g_value_get_boolean (value);
@@ -403,6 +418,9 @@ ario_server_interface_get_property (GObject *object,
         case PROP_PLAYLISTID:
                 g_value_set_int64 (value, server_interface->playlist_id);
                 break;
+        case PROP_CONSUME:
+                g_value_set_boolean (value, server_interface->consume);
+                break;
         case PROP_RANDOM:
                 g_value_set_boolean (value, server_interface->random);
                 break;
@@ -441,6 +459,10 @@ ario_server_interface_set_default (ArioServerInterface *server_interface)
         /* Set default playlist ID */
         g_object_set (G_OBJECT (server_interface), "playlist_id", (gint64) -1, NULL);
 
+        /* Set default consume value */
+        if (server_interface->consume != FALSE)
+                g_object_set (G_OBJECT (server_interface), "consume", FALSE, NULL);
+
         /* Set default random value */
         if (server_interface->random != FALSE)
                 g_object_set (G_OBJECT (server_interface), "random", FALSE, NULL);
@@ -472,6 +494,8 @@ ario_server_interface_emit (ArioServerInterface *server_interface,
                 g_signal_emit_by_name (G_OBJECT (server), "elapsed_changed", server_interface->elapsed);
         if (server_interface->signals_to_emit & SERVER_PLAYLIST_CHANGED_FLAG)
                 g_signal_emit_by_name (G_OBJECT (server), "playlist_changed");
+        if (server_interface->signals_to_emit & SERVER_CONSUME_CHANGED_FLAG)
+                g_signal_emit_by_name (G_OBJECT (server), "consume_changed");
         if (server_interface->signals_to_emit & SERVER_RANDOM_CHANGED_FLAG)
                 g_signal_emit_by_name (G_OBJECT (server), "random_changed");
         if (server_interface->signals_to_emit & SERVER_REPEAT_CHANGED_FLAG)

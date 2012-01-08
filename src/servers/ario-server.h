@@ -178,6 +178,7 @@ enum
         SERVER_VOLUME_CHANGED,
         SERVER_ELAPSED_CHANGED,
         SERVER_PLAYLIST_CHANGED,
+        SERVER_CONSUME_CHANGED,
         SERVER_RANDOM_CHANGED,
         SERVER_REPEAT_CHANGED,
         SERVER_UPDATINGDB_CHANGED,
@@ -194,6 +195,7 @@ enum
         SERVER_VOLUME_CHANGED_FLAG = 2 << SERVER_VOLUME_CHANGED,
         SERVER_ELAPSED_CHANGED_FLAG = 2 << SERVER_ELAPSED_CHANGED,
         SERVER_PLAYLIST_CHANGED_FLAG = 2 << SERVER_PLAYLIST_CHANGED,
+        SERVER_CONSUME_CHANGED_FLAG = 2 << SERVER_CONSUME_CHANGED,
         SERVER_RANDOM_CHANGED_FLAG = 2 << SERVER_RANDOM_CHANGED,
         SERVER_REPEAT_CHANGED_FLAG = 2 << SERVER_REPEAT_CHANGED,
         SERVER_UPDATINGDB_CHANGED_FLAG = 2 << SERVER_UPDATINGDB_CHANGED,
@@ -232,6 +234,8 @@ typedef struct
         void (*elapsed_changed)         (ArioServer *server,
                                          int elapsed);
         void (*playlist_changed)        (ArioServer *server);
+
+        void (*consume_changed)         (ArioServer *server);
 
         void (*random_changed)          (ArioServer *server);
 
@@ -298,6 +302,8 @@ int                     ario_server_get_current_playlist_total_time        (void
 
 int                     ario_server_get_crossfadetime                      (void);
 
+gboolean                ario_server_get_current_consume                     (void);
+
 gboolean                ario_server_get_current_random                     (void);
 
 gboolean                ario_server_get_current_repeat                     (void);
@@ -310,6 +316,7 @@ void                    ario_server_set_current_elapsed                    (cons
 void                    ario_server_set_current_volume                     (const gint volume);
 GSList *                ario_server_get_outputs                            (void);
 
+void                    ario_server_set_current_consume                     (const gboolean consume);
 void                    ario_server_set_current_random                     (const gboolean random);
 void                    ario_server_set_current_repeat                     (const gboolean repeat);
 void                    ario_server_set_crossfadetime                      (const int crossfadetime);
