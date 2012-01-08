@@ -76,6 +76,7 @@ static void ario_mpd_do_pause (void);
 static void ario_mpd_do_stop (void);
 static void ario_mpd_set_current_elapsed (const gint elapsed);
 static void ario_mpd_set_current_volume (const gint volume);
+static void ario_mpd_set_current_consume (const gboolean consume);
 static void ario_mpd_set_current_random (const gboolean random);
 static void ario_mpd_set_current_repeat (const gboolean repeat);
 static void ario_mpd_set_crossfadetime (const int crossfadetime);
@@ -152,6 +153,7 @@ ario_mpd_class_init (ArioMpdClass *klass)
         server_class->do_stop = ario_mpd_do_stop;
         server_class->set_current_elapsed = ario_mpd_set_current_elapsed;
         server_class->set_current_volume = ario_mpd_set_current_volume;
+        server_class->set_current_consume = ario_mpd_set_current_consume;
         server_class->set_current_random = ario_mpd_set_current_random;
         server_class->set_current_repeat = ario_mpd_set_current_repeat;
         server_class->set_crossfadetime = ario_mpd_set_crossfadetime;
@@ -867,6 +869,9 @@ ario_mpd_update_status (void)
                         if (instance->parent.random != (gboolean) instance->priv->status->random)
                                 g_object_set (G_OBJECT (instance), "random", instance->priv->status->random, NULL);
 
+                        if (instance->parent.consume != (gboolean) instance->priv->status->consume)
+                                g_object_set (G_OBJECT (instance), "consume", instance->priv->status->consume, NULL);
+
                         if (instance->parent.repeat != (gboolean) instance->priv->status->repeat)
                                 g_object_set (G_OBJECT (instance), "repeat", instance->priv->status->repeat, NULL);
 
@@ -1061,6 +1066,21 @@ ario_mpd_set_current_volume (const gint volume)
         mpd_sendSetvolCommand (instance->priv->connection, volume);
         mpd_finishCommand (instance->priv->connection);
         ario_mpd_update_status ();
+
+        if (instance->priv->support_idle && instance->priv->connection)
+                mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);
+}
+
+static void
+ario_mpd_set_current_consume (const gboolean consume)
+{
+        ARIO_LOG_FUNCTION_START;
+        /* check if there is a connection */
+        if (!instance->priv->connection)
+                return;
+
+        mpd_sendConsumeCommand (instance->priv->connection, consume);
+        mpd_finishCommand (instance->priv->connection);
 
         if (instance->priv->support_idle && instance->priv->connection)
                 mpd_startIdle (instance->priv->connection, ario_mpd_idle_cb, NULL);

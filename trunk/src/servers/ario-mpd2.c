@@ -77,6 +77,7 @@ static void ario_mpd_do_pause (void);
 static void ario_mpd_do_stop (void);
 static void ario_mpd_set_current_elapsed (const gint elapsed);
 static void ario_mpd_set_current_volume (const gint volume);
+static void ario_mpd_set_current_consume (const gboolean consume);
 static void ario_mpd_set_current_random (const gboolean random);
 static void ario_mpd_set_current_repeat (const gboolean repeat);
 static void ario_mpd_set_crossfadetime (const int crossfadetime);
@@ -163,6 +164,7 @@ ario_mpd_class_init (ArioMpdClass *klass)
         server_class->do_stop = ario_mpd_do_stop;
         server_class->set_current_elapsed = ario_mpd_set_current_elapsed;
         server_class->set_current_volume = ario_mpd_set_current_volume;
+        server_class->set_current_consume = ario_mpd_set_current_consume;
         server_class->set_current_random = ario_mpd_set_current_random;
         server_class->set_current_repeat = ario_mpd_set_current_repeat;
         server_class->set_crossfadetime = ario_mpd_set_crossfadetime;
@@ -1063,6 +1065,9 @@ ario_mpd_update_status (void)
                                 instance->parent.playlist_length = mpd_status_get_queue_length (instance->priv->status);
                         }
 
+                        if (instance->parent.consume != mpd_status_get_consume (instance->priv->status))
+                                g_object_set (G_OBJECT (instance), "consume", mpd_status_get_consume (instance->priv->status), NULL);
+
                         if (instance->parent.random != mpd_status_get_random (instance->priv->status))
                                 g_object_set (G_OBJECT (instance), "random", mpd_status_get_random (instance->priv->status), NULL);
 
@@ -1225,6 +1230,18 @@ ario_mpd_set_current_volume (const gint volume)
         ario_mpd_command_postinvoke ();
 
         ario_mpd_update_status ();
+}
+
+static void
+ario_mpd_set_current_consume (const gboolean consume)
+{
+        ARIO_LOG_FUNCTION_START;
+        if (ario_mpd_command_preinvoke ())
+                return;
+
+        mpd_run_consume (instance->priv->connection, consume);
+
+        ario_mpd_command_postinvoke ();
 }
 
 static void

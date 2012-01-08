@@ -13,6 +13,7 @@ art_DATA = ario.png		\
 	   play.png		\
 	   shuffle.png		\
 	   repeat.png 		\
+	   consume.png 		\
 	   pl-below.png 	\
 	   pl-right.png 	\
 	   pl-inside.png
