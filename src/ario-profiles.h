@@ -20,7 +20,7 @@
 #ifndef __ARIO_PROFILES_H
 #define __ARIO_PROFILES_H
 
-#include <glib/gslist.h>
+#include <glib.h>
 #include "servers/ario-server.h"
 
 G_BEGIN_DECLS
