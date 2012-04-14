@@ -17,7 +17,7 @@
  *
  */
 
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 
 #ifndef __ARIO_SHELL_SIMILARARTISTS_H
 #define __ARIO_SHELL_SIMILARARTISTS_H

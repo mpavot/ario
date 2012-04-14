@@ -19,8 +19,7 @@
 
 #include "covers/ario-cover.h"
 #include <glib.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtkmessagedialog.h>
+#include <gtk/gtk.h>
 #include <string.h>
 #include <glib/gi18n.h>
 #include "ario-util.h"

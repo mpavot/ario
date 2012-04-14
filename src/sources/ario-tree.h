@@ -20,7 +20,7 @@
 #ifndef __ARIO_TREE_H
 #define __ARIO_TREE_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 #include "servers/ario-server.h"
 #include "sources/ario-source.h"
 #include "shell/ario-shell-coverdownloader.h"

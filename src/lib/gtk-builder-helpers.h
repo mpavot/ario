@@ -17,7 +17,7 @@
  *
  */
 
-#include <gtk/gtkbuilder.h>
+#include <gtk/gtk.h>
 
 #ifndef __GTK_BUILDER_HELPERS_H
 #define __GTK_BUILDER_HELPERS_H

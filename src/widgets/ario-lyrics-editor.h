@@ -17,7 +17,7 @@
  *
  */
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 #include "lyrics/ario-lyrics-provider.h"
 
 #ifndef __ARIO_LYRICS_EDITOR_H

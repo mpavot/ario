@@ -21,7 +21,7 @@
 #define __ARIO_SERVER_PREFERENCES_H
 
 #include <glib.h>
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

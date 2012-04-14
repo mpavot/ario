@@ -21,10 +21,7 @@
 #define __ARIO_SONGLIST_H
 
 #include <glib.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtkliststore.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtkuimanager.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

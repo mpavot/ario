@@ -22,7 +22,7 @@
 #define __ARIO_SHELL_LYRICSSELECT_H
 
 #include <glib.h>
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
 #include "lyrics/ario-lyrics.h"
 
 G_BEGIN_DECLS

@@ -20,7 +20,7 @@
 #ifndef __ARIO_FIRSTLAUNCH_H
 #define __ARIO_FIRSTLAUNCH_H
 
-#include <gtk/gtkassistant.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

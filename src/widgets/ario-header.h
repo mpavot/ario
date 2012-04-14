@@ -20,7 +20,7 @@
 #ifndef __ARIO_HEADER_H
 #define __ARIO_HEADER_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

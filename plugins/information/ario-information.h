@@ -20,7 +20,7 @@
 #ifndef __ARIO_INFORMATION_H
 #define __ARIO_INFORMATION_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 #include <config.h>
 #include "sources/ario-source.h"
 

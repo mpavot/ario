@@ -20,7 +20,7 @@
 #ifndef __ARIO_SOURCE_MANAGER_H
 #define __ARIO_SOURCE_MANAGER_H
 
-#include <gtk/gtknotebook.h>
+#include <gtk/gtk.h>
 #include "sources/ario-source.h"
 
 G_BEGIN_DECLS

@@ -20,7 +20,7 @@
 #ifndef __ARIO_VOLUME_H
 #define __ARIO_VOLUME_H
 
-#include <gtk/gtkeventbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

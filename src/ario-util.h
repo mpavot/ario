@@ -19,7 +19,7 @@
 
 #include "servers/ario-server.h"
 #include "glib/gslist.h"
-#include "gdk/gdkpixbuf.h"
+#include <gdk/gdk.h>
 
 /* Number of covers used to generate the drag & drop image */
 #define MAX_COVERS_IN_DRAG 3

@@ -21,7 +21,7 @@
 #define __ARIO_TOOLTIP_H
 
 #include <config.h>
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
