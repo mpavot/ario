@@ -20,7 +20,7 @@
 #ifndef __ARIO_BROWSER_H
 #define __ARIO_BROWSER_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 #include "sources/ario-source.h"
 
 #define MAX_TREE_NB 5

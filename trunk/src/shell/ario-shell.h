@@ -20,7 +20,7 @@
 #ifndef __ARIO_SHELL_H
 #define __ARIO_SHELL_H
 
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

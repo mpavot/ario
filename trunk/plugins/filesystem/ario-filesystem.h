@@ -20,7 +20,7 @@
 #ifndef __ARIO_FILESYSTEM_H
 #define __ARIO_FILESYSTEM_H
 
-#include <gtk/gtkhpaned.h>
+#include <gtk/gtk.h>
 #include <config.h>
 #include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"

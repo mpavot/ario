@@ -17,7 +17,7 @@
  *
  */
 
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
 
 #ifndef __ARIO_SHELL_PREFERENCES_H
 #define __ARIO_SHELL_PREFERENCES_H

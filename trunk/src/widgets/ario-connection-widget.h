@@ -20,7 +20,7 @@
 #ifndef __ARIO_CONNECTION_WIDGET_H
 #define __ARIO_CONNECTION_WIDGET_H
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 #define ARIO_DEFAULT_TIMEOUT 5000
 

@@ -20,7 +20,7 @@
 #ifndef __ARIO_STOREDPLAYLISTS_H
 #define __ARIO_STOREDPLAYLISTS_H
 
-#include <gtk/gtkhpaned.h>
+#include <gtk/gtk.h>
 #include <config.h>
 #include "sources/ario-source.h"
 

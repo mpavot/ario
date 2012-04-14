@@ -20,7 +20,7 @@
 #ifndef __ARIO_RADIO_H
 #define __ARIO_RADIO_H
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 #include <config.h>
 #include "widgets/ario-playlist.h"
 #include "sources/ario-source.h"

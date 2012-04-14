@@ -26,8 +26,7 @@
 
 #include <config.h>
 #include "shell/ario-shell.h"
-#include <gtk/gtkuimanager.h>
-#include <gtk/gtkstatusicon.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

@@ -21,7 +21,7 @@
 #include <locale.h>
 #include <libintl.h>
 #include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
+#include <gdk/gdk.h>
 #include <curl/curl.h>
 #include <libxml/parser.h>
 #include <glib/gi18n.h>

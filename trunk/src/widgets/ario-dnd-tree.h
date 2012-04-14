@@ -20,7 +20,7 @@
 #ifndef __ARIO_DND_TREE_H
 #define __ARIO_DND_TREE_H
 
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include <config.h>
 
 G_BEGIN_DECLS
