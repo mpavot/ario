@@ -114,7 +114,7 @@ ario_tree_songs_sort_func (GtkTreeModel *model,
                         ret = ario_util_strcmp (atrack, btrack);
                 }
         } else {
-                /* No dsic is set, sort songs by track */
+                /* No disc is set, sort songs by track */
                 ret = ario_util_strcmp (atrack, btrack);
         }
 
