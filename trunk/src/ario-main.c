@@ -58,6 +58,7 @@ main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START;
         ArioShell *shell;
+        GError *error = NULL;
 
         /* Parse options */
         GOptionContext *context;
@@ -73,7 +74,10 @@ main (int argc, char *argv[])
         g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
         g_option_context_add_group (context, gtk_get_option_group (TRUE));
 
-        g_option_context_parse (context, &argc, &argv, NULL);
+        if (!g_option_context_parse (context, &argc, &argv, &error)) {
+                g_print ("option parsing failed: %s\n", error->message);
+                exit (1);
+        }
         g_option_context_free (context);
 
         /* Initialisation of configurations engine */
