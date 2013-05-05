@@ -80,6 +80,23 @@ ario_tree_songs_init (ArioTreeSongs *tree)
 }
 
 static gint
+ario_tree_songs_try_numeric_compare(gchar *a_char, gchar *b_char)
+{
+        gint a, b;
+        gchar *end_a, *end_b;
+
+        /* Try to convert to int */
+        a = g_ascii_strtoll(a_char, &end_a, 10);
+        b = g_ascii_strtoll(b_char, &end_b, 10);
+
+        if (a_char != end_a && b_char != end_b) {
+                return a == b? 0: (a < b? -1: 1);
+        }
+
+        return ario_util_strcmp (a_char, b_char);
+}
+
+static gint
 ario_tree_songs_sort_func (GtkTreeModel *model,
                            GtkTreeIter *a,
                            GtkTreeIter *b,
@@ -108,14 +125,14 @@ ario_tree_songs_sort_func (GtkTreeModel *model,
                 ret = 1;
         else if (adisc && bdisc) {
                 /* Compare disc of the two albums */
-                ret = g_utf8_collate (adisc, bdisc);
+                ret = ario_tree_songs_try_numeric_compare (adisc, bdisc);
                 if (ret == 0) {
                         /* Disc is the same, sort songs by track */
-                        ret = ario_util_strcmp (atrack, btrack);
+                        ret = ario_tree_songs_try_numeric_compare (atrack, btrack);
                 }
         } else {
                 /* No disc is set, sort songs by track */
-                ret = ario_util_strcmp (atrack, btrack);
+                ret = ario_tree_songs_try_numeric_compare (atrack, btrack);
         }
 
         return ret;
