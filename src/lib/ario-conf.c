@@ -229,7 +229,7 @@ ario_conf_get_string_slist (const char *key,
         return ret;
 }
 
-static void
+static gboolean
 ario_conf_save_foreach (gchar *key,
                         gchar *value,
                         xmlNodePtr root)
@@ -241,6 +241,25 @@ ario_conf_save_foreach (gchar *key,
         cur = xmlNewChild (root, NULL, (const xmlChar *) "option", NULL);
         xmlSetProp (cur, (const xmlChar *) "key", (const xmlChar *) key);
         xmlNodeAddContent (cur, (const xmlChar *) value);
+
+        return FALSE;
+}
+
+static gint
+ario_conf_compare_keys (gconstpointer a,
+                        gconstpointer b)
+{
+        const xmlChar * str1 = (const xmlChar *) a;
+        const xmlChar * str2 = (const xmlChar *) b;
+        return xmlStrcmp (str1, str2);
+}
+
+static void
+ario_conf_sorted_save_foreach (gchar *key,
+                               gchar *value,
+                               GTree *sorted_pairs)
+{
+        g_tree_insert(sorted_pairs, key, value);
 }
 
 static gboolean
@@ -250,6 +269,7 @@ ario_conf_save (G_GNUC_UNUSED gpointer data)
         xmlNodePtr cur;
         xmlDocPtr doc;
         char *xml_filename;
+        GTree *sorted_pairs;
 
         if (!modified)
                 return TRUE;
@@ -259,9 +279,16 @@ ario_conf_save (G_GNUC_UNUSED gpointer data)
         cur = xmlNewNode (NULL, (const xmlChar *) XML_ROOT_NAME);
         xmlDocSetRootElement (doc, cur);
 
+        /* We sort the keys before saving to avoid changing the
+           configuration file if only the order changes */
+        sorted_pairs = g_tree_new(ario_conf_compare_keys);
         g_hash_table_foreach (hash,
-                              (GHFunc) ario_conf_save_foreach,
-                              cur);
+                              (GHFunc) ario_conf_sorted_save_foreach,
+                              sorted_pairs);
+        g_tree_foreach (sorted_pairs,
+                        (GTraverseFunc) ario_conf_save_foreach,
+                        cur);
+        g_tree_destroy (sorted_pairs);
 
         xml_filename = g_build_filename (ario_util_config_dir (), "options.xml", NULL);
 
