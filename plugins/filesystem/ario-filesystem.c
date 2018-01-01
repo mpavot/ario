@@ -91,13 +91,13 @@ struct ArioFilesystemPrivate
 /* Actions on directories */
 static GtkActionEntry ario_filesystem_actions [] =
 {
-        { "FilesystemAddDir", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "FilesystemAddDir", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_filesystem_cmd_add_filesystem) },
-        { "FilesystemAddPlayDir", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "FilesystemAddPlayDir", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_filesystem_cmd_add_play_filesystem) },
-        { "FilesystemClearAddPlayDir", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "FilesystemClearAddPlayDir", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_filesystem_cmd_clear_add_play_filesystem) }
 };
@@ -106,16 +106,16 @@ static guint ario_filesystem_n_actions = G_N_ELEMENTS (ario_filesystem_actions);
 /* Actions on songs */
 static GtkActionEntry ario_filesystem_songs_actions [] =
 {
-        { "FilesystemAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "FilesystemAddSongs", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
-        { "FilesystemAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "FilesystemAddPlaySongs", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
-        { "FilesystemClearAddPlaySongs", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "FilesystemClearAddPlaySongs", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
-        { "FilesystemSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "FilesystemSongsProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
@@ -161,7 +161,7 @@ ario_filesystem_get_name (ArioSource *source)
 static gchar *
 ario_filesystem_get_icon (ArioSource *source)
 {
-        return GTK_STOCK_HARDDISK;
+        return "drive-harddisk";
 }
 
 static void
@@ -289,7 +289,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
                           filesystem);
 
         /* Create hpaned */
-        filesystem->priv->paned = gtk_hpaned_new ();
+        filesystem->priv->paned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_paned_pack1 (GTK_PANED (filesystem->priv->paned), scrolledwindow_filesystem, FALSE, FALSE);
 
         pos = ario_conf_get_integer (PREF_FILSYSTEM_HPANED_SIZE, PREF_FILSYSTEM_HPANED_SIZE_DEFAULT);
@@ -417,7 +417,7 @@ ario_filesystem_fill_filesystem (ArioFilesystem *filesystem)
         /* Append Root folder */
         gtk_tree_store_append (filesystem->priv->model, &iter, NULL);
         gtk_tree_store_set (filesystem->priv->model, &iter,
-                            FILETREE_ICON_COLUMN, GTK_STOCK_HARDDISK,
+                            FILETREE_ICON_COLUMN, "drive-harddisk",
                             FILETREE_ICONSIZE_COLUMN, 1,
                             FILETREE_NAME_COLUMN, _("Music"),
                             FILETREE_DIR_COLUMN, ROOT, -1);
@@ -547,7 +547,7 @@ ario_filesystem_cursor_moved_cb (GtkTreeView *tree_view,
 
                 /* Set tree values */
                 gtk_tree_store_set (filesystem->priv->model, &child,
-                                    FILETREE_ICON_COLUMN, GTK_STOCK_DIRECTORY,
+                                    FILETREE_ICON_COLUMN, "folder",
                                     FILETREE_ICONSIZE_COLUMN, 1,
                                     FILETREE_NAME_COLUMN, display_path,
                                     FILETREE_DIR_COLUMN, path, -1);

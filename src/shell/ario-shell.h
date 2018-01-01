@@ -61,7 +61,7 @@ typedef enum
 
 GType           ario_shell_get_type             (void) G_GNUC_CONST;
 
-ArioShell *     ario_shell_new                  (void);
+ArioShell *     ario_shell_new                  (GtkApplication *app);
 
 void            ario_shell_construct            (ArioShell *shell,
                                                  gboolean minimized);

@@ -99,19 +99,19 @@ static ArioTrayIcon *instance = NULL;
 /* Actions */
 static GtkActionEntry ario_tray_icon_actions [] =
 {
-        { "ControlPlay", GTK_STOCK_MEDIA_PLAY, N_("_Play"), "<control>Up",
+        { "ControlPlay", "media-playback-start", N_("_Play"), "<control>Up",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_play) },
-        { "ControlPause", GTK_STOCK_MEDIA_PAUSE, N_("_Pause"), "<control>Down",
+        { "ControlPause", "media-playback-pause", N_("_Pause"), "<control>Down",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_pause) },
-        { "ControlStop", GTK_STOCK_MEDIA_STOP, N_("_Stop"), "<control><shift>Down",
+        { "ControlStop", "media-playback-stop", N_("_Stop"), "<control><shift>Down",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_stop) },
-        { "ControlNext", GTK_STOCK_MEDIA_NEXT, N_("_Next"), "<control>Right",
+        { "ControlNext", "media-skip-forward", N_("_Next"), "<control>Right",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_next) },
-        { "ControlPrevious", GTK_STOCK_MEDIA_PREVIOUS, N_("P_revious"), "<control>Left",
+        { "ControlPrevious", "media-skip-backward", N_("P_revious"), "<control>Left",
                 NULL,
                 G_CALLBACK (ario_tray_icon_cmd_previous) },
 };
@@ -219,7 +219,7 @@ ario_tray_icon_finalize (GObject *object)
         g_return_if_fail (tray->priv != NULL);
 
         if (tray->priv->tooltip)
-                gtk_object_destroy (GTK_OBJECT (tray->priv->tooltip));
+                g_object_unref (G_OBJECT (tray->priv->tooltip));
 
         G_OBJECT_CLASS (ario_tray_icon_parent_class)->finalize (object);
 }

@@ -289,11 +289,11 @@ ario_source_manager_append (ArioSource *source)
         guint ui_merge_id;
 
         /* Create hbox for tab header */
-        hbox = gtk_hbox_new (FALSE, 4);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
 
         /* Add source icon to hbox */
         gtk_box_pack_start (GTK_BOX (hbox),
-                            gtk_image_new_from_stock (ario_source_get_icon (source), GTK_ICON_SIZE_MENU),
+                            gtk_image_new_from_icon_name (ario_source_get_icon (source), GTK_ICON_SIZE_MENU),
                             TRUE, TRUE, 0);
 
         /* Add source name to hbox */

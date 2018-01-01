@@ -172,11 +172,11 @@ impl_create_configure_dialog (ArioPlugin *plugin)
         dialog = gtk_dialog_new_with_buttons (_("Wikipedia Plugin - Configuration"),
                                               NULL,
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              GTK_STOCK_CLOSE,
+                                              "window-close",
                                               GTK_RESPONSE_CLOSE,
                                               NULL);
 
-        hbox = gtk_hbox_new (FALSE, 6);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
         label = gtk_label_new (_("Wikipedia language :"));
 

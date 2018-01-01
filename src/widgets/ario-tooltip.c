@@ -185,7 +185,7 @@ ario_tooltip_construct_tooltip (ArioTooltip *tooltip)
 
         /* Create cover art image */
         tooltip->priv->cover_image = gtk_image_new ();
-        tooltip->priv->tooltip_image_box = gtk_vbox_new (FALSE, 0);
+        tooltip->priv->tooltip_image_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         gtk_box_pack_start (GTK_BOX (tooltip->priv->tooltip_image_box), tooltip->priv->cover_image,
                             TRUE, FALSE, 0);
 
@@ -194,7 +194,7 @@ ario_tooltip_construct_tooltip (ArioTooltip *tooltip)
         gtk_box_set_spacing (GTK_BOX (tooltip), 6);
 
         /* Create vbox for labels */
-        vbox = gtk_vbox_new (FALSE, 2);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
 
         /* Create progress bar */
         tooltip->priv->tooltip_progress_bar = gtk_progress_bar_new ();

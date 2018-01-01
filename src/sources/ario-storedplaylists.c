@@ -85,16 +85,16 @@ struct ArioStoredplaylistsPrivate
 /* Actions on playlists list */
 static GtkActionEntry ario_storedplaylists_actions [] =
 {
-        { "StoredplaylistsAddPlaylists", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "StoredplaylistsAddPlaylists", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_add_storedplaylists) },
-        { "StoredplaylistsAddPlayPlaylists", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "StoredplaylistsAddPlayPlaylists", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_add_play_storedplaylists) },
-        { "StoredplaylistsClearAddPlayPlaylists", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "StoredplaylistsClearAddPlayPlaylists", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_clear_add_play_storedplaylists) },
-        { "StoredplaylistsDelete", GTK_STOCK_DELETE, N_("_Delete"), NULL,
+        { "StoredplaylistsDelete", "edit-delete", N_("_Delete"), NULL,
                 NULL,
                 G_CALLBACK (ario_storedplaylists_cmd_delete_storedplaylists) }
 };
@@ -103,16 +103,16 @@ static guint ario_storedplaylists_n_actions = G_N_ELEMENTS (ario_storedplaylists
 /* Actions on songs list */
 static GtkActionEntry ario_storedplaylists_songs_actions [] =
 {
-        { "StoredplaylistsAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "StoredplaylistsAddSongs", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
-        { "StoredplaylistsAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "StoredplaylistsAddPlaySongs", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
-        { "StoredplaylistsClearAddPlaySongs", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "StoredplaylistsClearAddPlaySongs", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
-        { "StoredplaylistsSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "StoredplaylistsSongsProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
@@ -265,7 +265,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                           storedplaylists);
 
         /* Hpaned properties */
-        storedplaylists->priv->paned = gtk_hpaned_new ();
+        storedplaylists->priv->paned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_paned_pack1 (GTK_PANED (storedplaylists->priv->paned), scrolledwindow_storedplaylists, FALSE, FALSE);
 
         pos = ario_conf_get_integer (PREF_PLAYLISTS_HPANED_SIZE, PREF_PLAYLISTS_HPANED_SIZE_DEFAULT);

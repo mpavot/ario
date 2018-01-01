@@ -113,22 +113,22 @@ struct ArioRadioPrivate
 /* Actions on radios */
 static GtkActionEntry ario_radio_actions [] =
 {
-        { "RadioAddRadios", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "RadioAddRadios", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_add_radios) },
-        { "RadioAddPlayRadios", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "RadioAddPlayRadios", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_add_play_radios) },
-        { "RadioClearAddPlayRadios", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "RadioClearAddPlayRadios", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_clear_add_play_radios) },
-        { "RadioNewRadio", GTK_STOCK_ADD, N_("Add a _new radio"), NULL,
+        { "RadioNewRadio", "list-add", N_("Add a _new radio"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_new_radio) },
-        { "RadioDeleteRadios", GTK_STOCK_DELETE, N_("_Delete this radios"), NULL,
+        { "RadioDeleteRadios", "edit-delete", N_("_Delete this radios"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_delete_radios) },
-        { "RadioProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "RadioProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_radio_cmd_radio_properties) }
 };
@@ -187,7 +187,7 @@ ario_radio_get_name (ArioSource *source)
 static gchar *
 ario_radio_get_icon (ArioSource *source)
 {
-        return GTK_STOCK_NETWORK;
+        return "network-workgroup";
 }
 
 static void
@@ -892,7 +892,7 @@ ario_radio_launch_creation_dialog (ArioRadio * radio,
                                          GTK_RESPONSE_OK);
 
         /* Main vbox */
-        vbox = gtk_vbox_new (FALSE, 5);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);
 
         /* Create model */

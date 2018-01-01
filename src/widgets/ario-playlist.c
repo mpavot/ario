@@ -130,28 +130,28 @@ struct ArioPlaylistPrivate
 
 static GtkActionEntry ario_playlist_actions [] =
 {
-        { "PlaylistClear", GTK_STOCK_CLEAR, N_("_Clear"), NULL,
+        { "PlaylistClear", "edit-clear", N_("_Clear"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_clear) },
-        { "PlaylistShuffle", GTK_STOCK_REFRESH, N_("_Shuffle"), NULL,
+        { "PlaylistShuffle", "view-refresh", N_("_Shuffle"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_shuffle) },
-        { "PlaylistCrop", GTK_STOCK_CUT, N_("Cr_op"), "<control>P",
+        { "PlaylistCrop", "edit-cut", N_("Cr_op"), "<control>P",
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_crop) },
-        { "PlaylistSearch", GTK_STOCK_FIND, N_("_Search in playlist"), NULL,
+        { "PlaylistSearch", "edit-find", N_("_Search in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_search) },
-        { "PlaylistRemove", GTK_STOCK_REMOVE, N_("_Remove"), NULL,
+        { "PlaylistRemove", "list-remove", N_("_Remove"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_remove) },
-        { "PlaylistSave", GTK_STOCK_SAVE, N_("_Save"), "<control>S",
+        { "PlaylistSave", "document-save", N_("_Save"), "<control>S",
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_save) },
-        { "PlaylistSongProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "PlaylistSongProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_songs_properties) },
-        { "PlaylistGotoPlaying", GTK_STOCK_JUMP_TO, N_("_Go to playing song"), "<control>L",
+        { "PlaylistGotoPlaying", "go-jump", N_("_Go to playing song"), "<control>L",
                 NULL,
                 G_CALLBACK (ario_playlist_cmd_goto_playing_song) }
 };
@@ -525,7 +525,7 @@ ario_playlist_search_entry_key_press_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         /* Escape key closes the search box */
-        if (event->keyval == GDK_Escape) {
+        if (event->keyval == GDK_KEY_Escape) {
                 ario_playlist_search_close (NULL, playlist);
                 return TRUE;
         }
@@ -551,7 +551,7 @@ ario_playlist_init (ArioPlaylist *playlist)
         playlist->priv->play_pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "play.png", NULL);
 
         /* Create main vbox */
-        vbox = gtk_vbox_new (FALSE, 0);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
         /* Create scrolled window */
         scrolled_window = GTK_SCROLLED_WINDOW (gtk_scrolled_window_new (NULL, NULL));
@@ -647,9 +647,9 @@ ario_playlist_init (ArioPlaylist *playlist)
                           playlist);
 
         /* Creation of search box */
-        playlist->priv->search_hbox = gtk_hbox_new (FALSE, 6);
+        playlist->priv->search_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
-        image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
+        image = gtk_image_new_from_icon_name ("window-close",
                                           GTK_ICON_SIZE_MENU);
         close_button = gtk_button_new ();
         gtk_button_set_relief (GTK_BUTTON (close_button), GTK_RELIEF_NONE);
@@ -1700,7 +1700,7 @@ ario_playlist_cmd_save (GtkAction *action,
                                          GTK_RESPONSE_OK);
         label = gtk_label_new (_("Playlist name :"));
         entry = gtk_entry_new ();
-        hbox = gtk_hbox_new (FALSE, 5);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
 
         gtk_box_pack_start (GTK_BOX (hbox),
                             label,
@@ -1753,16 +1753,16 @@ ario_playlist_view_key_press_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
 
-        if (event->keyval == GDK_Delete) {
+        if (event->keyval == GDK_KEY_Delete) {
                 /* Del key removes songs from playlist */
                 ario_playlist_remove ();
-        } else if (event->keyval == GDK_Return) {
+        } else if (event->keyval == GDK_KEY_Return) {
                 /* Enter key activate a song */
                 ario_playlist_activate_selected ();
                 return TRUE;
         } else if (event->string
                    && event->length > 0
-                   && event->keyval != GDK_Escape
+                   && event->keyval != GDK_KEY_Escape
                    && !(event->state & GDK_CONTROL_MASK)) {
                 /* Other keys start the search in playlist */
                 ario_playlist_search (playlist, event->string);

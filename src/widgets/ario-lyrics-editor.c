@@ -93,14 +93,14 @@ ario_lyrics_editor_new (void)
         gtk_box_set_spacing (GTK_BOX (lyrics_editor), 5);
 
         /* Create button hbox */
-        hbox = gtk_hbox_new (FALSE, 5);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
 
         /* Create separator */
         separator = gtk_hseparator_new ();
 
         /* Create buttons */
-        lyrics_editor->priv->save_button = gtk_button_new_from_stock (GTK_STOCK_SAVE);
-        lyrics_editor->priv->search_button = gtk_button_new_from_stock (GTK_STOCK_FIND);
+        lyrics_editor->priv->save_button = gtk_button_new_from_stock ("document-save");
+        lyrics_editor->priv->search_button = gtk_button_new_from_stock ("edit-find");
 
         /* Create scrolled window */
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);

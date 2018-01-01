@@ -109,7 +109,7 @@ ario_shell_lyrics_new (void)
                                  G_CALLBACK (ario_shell_lyrics_state_changed_cb),
                                  shell_lyrics, 0);
 
-        close_button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+        close_button = gtk_button_new_from_stock ("window-close");
         shell_lyrics->priv->lyrics_editor = ario_lyrics_editor_new ();
 
         childs_list = gtk_container_get_children (GTK_CONTAINER (shell_lyrics->priv->lyrics_editor));

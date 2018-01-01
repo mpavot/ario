@@ -72,7 +72,7 @@ ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
                           shell_preferences);
 
         gtk_dialog_add_button (GTK_DIALOG (shell_preferences),
-                               GTK_STOCK_CLOSE,
+                               "window-close",
                                GTK_RESPONSE_CLOSE);
 
         gtk_dialog_set_default_response (GTK_DIALOG (shell_preferences),

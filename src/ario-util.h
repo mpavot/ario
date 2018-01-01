@@ -83,14 +83,6 @@ void                    ario_util_format_track_buf           (const gchar *track
 gchar*                  ario_util_format_title               (ArioServerSong *server_song);
 
 /**
- * Add an icon to the default icon factory
- *
- * @param stock_id The id of the icon to add
- * @param filename The icon filename
- */
-void                    ario_util_add_stock_icons            (const char *stock_id,
-                                                              const char *filename);
-/**
  * Initialise default icon factory with a few icons
  */
 void                    ario_util_init_stock_icons           (void);

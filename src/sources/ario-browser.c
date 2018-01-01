@@ -79,25 +79,25 @@ struct ArioBrowserPrivate
 /* Actions */
 static GtkActionEntry ario_browser_actions [] =
 {
-        { "BrowserAdd", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "BrowserAdd", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_add) },
-        { "BrowserAddPlay", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "BrowserAddPlay", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_add_play) },
-        { "BrowserClearAddPlay", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "BrowserClearAddPlay", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_clear_add_play) },
-        { "BrowserGetCover", GTK_STOCK_CDROM, N_("Get the covers"), NULL,
+        { "BrowserGetCover", "media-optical", N_("Get the covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_get_cover) },
-        { "BrowserRemoveCover", GTK_STOCK_DELETE, N_("_Delete the covers"), NULL,
+        { "BrowserRemoveCover", "edit-delete", N_("_Delete the covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_remove_cover) },
-        { "BrowserAlbumsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "BrowserAlbumsProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_albums_properties) },
-        { "BrowserSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "BrowserSongsProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_browser_cmd_songs_properties) },
 };
@@ -128,7 +128,7 @@ ario_browser_get_name (ArioSource *source)
 static gchar *
 ario_browser_get_icon (ArioSource *source)
 {
-        return GTK_STOCK_HOME;
+        return "go-home";
 }
 
 static void ario_browser_goto_playling_song (ArioSource *source)

@@ -98,8 +98,9 @@ about_button_cb (GtkWidget* button,
                                         "logo", pb,
                                         NULL);
 
-        pb = gtk_widget_render_icon (pm->priv->about, ario_plugin_info_get_icon_name (info),
-                                     -1, NULL);
+        pb = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+                                       ario_plugin_info_get_icon_name (info),
+                                       -1, 0, NULL);
         if (pb) {
                 gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG (pm->priv->about), pb);
                 g_object_unref (pb);
@@ -189,7 +190,7 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
                 return;
 
         g_object_set (G_OBJECT (cell),
-                      "stock-id", ario_plugin_info_get_icon_name (info),
+                      "icon-name", ario_plugin_info_get_icon_name (info),
                       "sensitive", ario_plugin_info_is_available (info),
                       NULL);
 }
@@ -474,7 +475,7 @@ create_tree_popup_menu (ArioPluginManager *pm)
         menu = gtk_menu_new ();
 
         item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
-        image = gtk_image_new_from_stock (GTK_STOCK_ABOUT,
+        image = gtk_image_new_from_icon_name ("help-about",
                                           GTK_ICON_SIZE_MENU);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
         g_signal_connect (item, "activate",
@@ -482,7 +483,7 @@ create_tree_popup_menu (ArioPluginManager *pm)
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
         item = gtk_image_menu_item_new_with_mnemonic (_("C_onfigure"));
-        image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES,
+        image = gtk_image_new_from_icon_name ("preferences-system",
                                           GTK_ICON_SIZE_MENU);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
         g_signal_connect (item, "activate",
@@ -744,10 +745,10 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox), GTK_BUTTONBOX_END);
         gtk_box_set_spacing (GTK_BOX (hbuttonbox), 8);
 
-        pm->priv->about_button = gtk_button_new_from_stock (GTK_STOCK_ABOUT);
+        pm->priv->about_button = gtk_button_new_from_stock ("help-about");
         gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->about_button);
 
-        pm->priv->configure_button = gtk_button_new_from_stock (GTK_STOCK_PREFERENCES);
+        pm->priv->configure_button = gtk_button_new_from_stock ("preferences-system");
         gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->configure_button);
 
         /* setup a window of a sane size. */

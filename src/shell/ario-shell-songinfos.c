@@ -293,7 +293,7 @@ ario_shell_songinfos_new (GSList *paths)
                 gtk_editable_set_editable (GTK_EDITABLE (shell_songinfos->priv->comment_entry), TRUE);
 
                 /* Add save button */
-                shell_songinfos->priv->save_button = gtk_button_new_from_stock (GTK_STOCK_SAVE);
+                shell_songinfos->priv->save_button = gtk_button_new_from_stock ("document-save");
                 gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),
                                               shell_songinfos->priv->save_button,
                                               ARIO_SAVE);
@@ -314,20 +314,20 @@ ario_shell_songinfos_new (GSList *paths)
         }
 
         /* Add previous button */
-        shell_songinfos->priv->previous_button = gtk_button_new_from_stock (GTK_STOCK_GO_BACK);
+        shell_songinfos->priv->previous_button = gtk_button_new_from_stock ("go-previous");
         gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),
                                       shell_songinfos->priv->previous_button,
                                       ARIO_PREVIOUS);
 
         /* Add next button */
-        shell_songinfos->priv->next_button = gtk_button_new_from_stock (GTK_STOCK_GO_FORWARD);
+        shell_songinfos->priv->next_button = gtk_button_new_from_stock ("go-next");
         gtk_dialog_add_action_widget (GTK_DIALOG (shell_songinfos),
                                       shell_songinfos->priv->next_button,
                                       ARIO_NEXT);
 
         /* Add close button */
         gtk_dialog_add_button (GTK_DIALOG (shell_songinfos),
-                               GTK_STOCK_CLOSE,
+                               "window-close",
                                GTK_RESPONSE_CLOSE);
 
         gtk_dialog_set_default_response (GTK_DIALOG (shell_songinfos),

@@ -36,34 +36,37 @@
 
 #ifdef WIN32
 #include <windows.h>
-#else
-#include <unique/unique.h>
 #endif
 
-#ifndef WIN32
-static UniqueResponse
-ario_main_on_message_received (G_GNUC_UNUSED UniqueApp *app,
-                               G_GNUC_UNUSED UniqueCommand command,
-                               G_GNUC_UNUSED UniqueMessageData *message,
-                               G_GNUC_UNUSED guint time_,
-                               ArioShell *shell)
+static ArioShell *shell = NULL;
+static gboolean minimized = FALSE;
+
+static void
+activate (GtkApplication *app)
 {
-        ario_shell_present (shell);
-        return UNIQUE_RESPONSE_OK;
+        GList *list;
+
+        list = gtk_application_get_windows (app);
+
+        if (list
+            && ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)) {
+                /* Show existing window */
+                ario_shell_present (shell);
+        } else {
+                gtk_window_set_application (GTK_WINDOW (shell), app);
+        }
 }
-#endif
 
 int
 main (int argc, char *argv[])
 {
         ARIO_LOG_FUNCTION_START;
-        ArioShell *shell;
         GError *error = NULL;
+        gint status = 0;
 
         /* Parse options */
         GOptionContext *context;
         gchar *profile = NULL;
-        gboolean minimized = FALSE;
         const GOptionEntry options []  = {
                 { "minimized", 'm', 0, G_OPTION_ARG_NONE, &minimized, N_("Start minimized window"), NULL },
                 { "profile", 'p', 0, G_OPTION_ARG_STRING, &profile, N_("Start with specific profile"), NULL },
@@ -92,16 +95,6 @@ main (int argc, char *argv[])
                 ARIO_LOG_INFO ("Ario is already running\n");
                 return 0;
         }
-#else
-        UniqueApp *app;
-        app = unique_app_new ("org.Ario", NULL);
-        if (unique_app_is_running (app)) {
-                if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)) {
-                        unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
-                        g_object_unref (app);
-                        return 0;
-                }
-        }
 #endif
 
         /* Initialisation of translation */
@@ -111,13 +104,6 @@ main (int argc, char *argv[])
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 #endif
-
-        /* Initialisation of threads */
-        if (!g_thread_supported ()) g_thread_init (NULL);
-
-        /* Initialisation of GTK */
-        setlocale (LC_ALL, "");
-        gtk_init (&argc, &argv);
 
         /* Initialisation of libgcrypt */
         gcry_check_version (NULL);
@@ -134,18 +120,17 @@ main (int argc, char *argv[])
                 ario_profiles_set_current_by_name (profile);
 #endif
         /* Creates Ario main window */
-        shell = ario_shell_new ();
+        GtkApplication *app;
+        app = gtk_application_new ("org.Ario", 0);
+        shell = ario_shell_new (app);
         ario_shell_construct (shell, minimized);
+        g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
 
-#ifndef WIN32
-        unique_app_watch_window (app, GTK_WINDOW (shell));
-        g_signal_connect (app, "message-received", G_CALLBACK (ario_main_on_message_received), shell);
-#endif
         /* Initialisation of plugins engine */
         ario_plugins_engine_init (shell);
 
         /* Starts GTK main loop */
-        gtk_main ();
+        status = g_application_run (G_APPLICATION (app), argc, argv);
 
         /* Shutdown main window */
         ario_shell_shutdown (shell);
@@ -164,6 +149,6 @@ main (int argc, char *argv[])
         /* Clean libxml stuff */
         xmlCleanupParser ();
 
-        return 0;
+        return status;
 }
 

@@ -408,7 +408,7 @@ ario_mpd_connect (void)
         if (!is_in_error) {
                 win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
                 gtk_window_set_modal (GTK_WINDOW (win), TRUE);
-                vbox = gtk_vbox_new (FALSE, 0);
+                vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
                 label = gtk_label_new (_("Connecting to server..."));
                 bar = gtk_progress_bar_new ();
 

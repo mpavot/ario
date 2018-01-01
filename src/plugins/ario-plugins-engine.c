@@ -160,11 +160,10 @@ ario_plugins_engine_load_icons_dir (const gchar        *dir)
 
         while ((dirent = g_dir_read_name (d))) {
                 if (g_str_has_suffix (dirent, "png") || g_str_has_suffix (dirent, "jpg")) {
-                        gchar *icon_file;
 
-                        icon_file = g_build_filename (dir, dirent, NULL);
-                        ario_util_add_stock_icons (dirent, icon_file);
-                        g_free (icon_file);
+                        GtkIconTheme *icon_theme;
+                        icon_theme = gtk_icon_theme_get_default ();
+                        gtk_icon_theme_append_search_path (icon_theme, dir);
                 }
         }
 

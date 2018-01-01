@@ -190,7 +190,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                                          construct_properties));
 
         /* Construct previous button */
-        image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PREVIOUS,
+        image = gtk_image_new_from_icon_name ("media-skip-backward",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
 
         header->priv->prev_button = gtk_button_new ();
@@ -203,11 +203,11 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                      _("Play previous song"));
 
         /* Construct button images */
-        header->priv->play_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PLAY,
+        header->priv->play_image = gtk_image_new_from_icon_name ("media-playback-start",
                                                              GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (header->priv->play_image);
         gtk_widget_show (header->priv->play_image);
-        header->priv->pause_image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PAUSE,
+        header->priv->pause_image = gtk_image_new_from_icon_name ("media-playback-pause",
                                                               GTK_ICON_SIZE_LARGE_TOOLBAR);
         g_object_ref (header->priv->pause_image);
         gtk_widget_show (header->priv->pause_image);
@@ -221,7 +221,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                      _("Play/Pause the music"));
 
         /* Construct stop button */
-        image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_STOP,
+        image = gtk_image_new_from_icon_name ("media-playback-stop",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->stop_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->stop_button), image);
@@ -233,7 +233,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                      _("Stop the music"));
 
         /* Construct next button */
-        image = gtk_image_new_from_stock (GTK_STOCK_MEDIA_NEXT,
+        image = gtk_image_new_from_icon_name ("media-skip-forward",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->next_button = gtk_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->next_button), image);
@@ -315,7 +315,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->total = gtk_label_new ("0:00");
 
         /* Construct consume button */
-        image = gtk_image_new_from_stock ("consume",
+        image = gtk_image_new_from_icon_name ("consume",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->consume_button = gtk_toggle_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->consume_button), image);
@@ -327,7 +327,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                      _("Toggle 'consume' (remove played song from playlist) on/off"));
 
         /* Construct random button */
-        image = gtk_image_new_from_stock ("random",
+        image = gtk_image_new_from_icon_name ("shuffle",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->random_button = gtk_toggle_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->random_button), image);
@@ -339,7 +339,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
                                      _("Toggle random on/off"));
 
         /* Construct repeat button */
-        image = gtk_image_new_from_stock ("repeat",
+        image = gtk_image_new_from_icon_name ("repeat",
                                           GTK_ICON_SIZE_LARGE_TOOLBAR);
         header->priv->repeat_button = gtk_toggle_button_new ();
         gtk_container_add (GTK_CONTAINER (header->priv->repeat_button), image);
@@ -359,7 +359,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_set_spacing (GTK_BOX (header), 12);
 
         /* Add command Buttons */
-        hbox = gtk_hbox_new (FALSE, 5);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
 
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->prev_button, FALSE, TRUE, 0);
@@ -375,7 +375,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (header), cover_event_box, FALSE, TRUE, 0);
 
         /* Add song labels */
-        vbox = gtk_vbox_new (FALSE, 0);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         gtk_box_pack_start (GTK_BOX (vbox), header->priv->song, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (vbox), header->priv->artist_album, TRUE, TRUE, 0);
 
@@ -384,9 +384,9 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (header), alignment, TRUE, TRUE, 0);
 
         /* Add time slider */
-        vbox = gtk_vbox_new (FALSE, 0);
-        hbox = gtk_hbox_new (FALSE, 0);
-        right_hbox = gtk_hbox_new (FALSE, 5);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        right_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
 
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->elapsed, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->of, FALSE, TRUE, 0);
