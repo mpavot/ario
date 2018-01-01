@@ -191,52 +191,14 @@ ario_util_format_title (ArioServerSong *server_song)
         return res;
 }
 
-static GtkIconFactory *factory = NULL;
-
-void
-ario_util_add_stock_icons (const char *stock_id,
-                           const char *filename)
-{
-        ARIO_LOG_FUNCTION_START;
-
-        static int icon_size = 0;
-        GdkPixbuf *pb;
-        GtkIconSet *set;
-
-        if (!icon_size)
-                gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &icon_size, NULL);
-
-        pb = gdk_pixbuf_new_from_file (filename,
-                                       NULL);
-        set = gtk_icon_set_new_from_pixbuf (pb);
-        gtk_icon_factory_add (factory, stock_id, set);
-        g_object_unref (pb);
-}
-
 void
 ario_util_init_stock_icons (void)
 {
         ARIO_LOG_FUNCTION_START;
 
-        factory = gtk_icon_factory_new ();
-
-        ario_util_add_stock_icons ("ario", PIXMAP_PATH "ario.png");
-        ario_util_add_stock_icons ("ario-play", PIXMAP_PATH "ario-play.png");
-        ario_util_add_stock_icons ("ario-pause", PIXMAP_PATH "ario-pause.png");
-        ario_util_add_stock_icons ("repeat", PIXMAP_PATH "repeat.png");
-        ario_util_add_stock_icons ("random", PIXMAP_PATH "shuffle.png");
-        ario_util_add_stock_icons ("consume", PIXMAP_PATH "consume.png");
-        ario_util_add_stock_icons ("pl-below", PIXMAP_PATH "pl-below.png");
-        ario_util_add_stock_icons ("pl-right", PIXMAP_PATH "pl-right.png");
-        ario_util_add_stock_icons ("pl-inside", PIXMAP_PATH "pl-inside.png");
-
-        gtk_icon_factory_add_default (factory);
-}
-
-gboolean
-ario_util_has_stock_icons (const char *stock_id)
-{
-        return (gtk_icon_factory_lookup_default (stock_id) != NULL);
+        GtkIconTheme *icon_theme;
+        icon_theme = gtk_icon_theme_get_default ();
+        gtk_icon_theme_append_search_path (icon_theme, PIXMAP_PATH);
 }
 
 const char *

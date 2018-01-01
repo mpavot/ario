@@ -1414,7 +1414,7 @@ ario_audioscrobbler_get_config_widget (ArioAudioscrobbler *audioscrobbler,
                 audioscrobbler->priv->preferences = gtk_dialog_new_with_buttons (_("Audioscrobbler preferences"),
                                                                                  NULL,
                                                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                                                 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+                                                                                 "window-close", GTK_RESPONSE_CLOSE,
                                                                                  NULL);
                 g_signal_connect (audioscrobbler->priv->preferences,
                                   "response",

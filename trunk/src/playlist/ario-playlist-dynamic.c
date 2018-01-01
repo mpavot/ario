@@ -267,7 +267,7 @@ ario_playlist_dynamic_get_config (ArioPlaylistMode *playlist_mode)
         int i;
         int nbitems;
 
-        hbox = gtk_hbox_new (FALSE, 4);
+        hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
         gtk_box_pack_start (GTK_BOX (hbox),
                             gtk_label_new ("Automatically add"),
                             FALSE, FALSE,

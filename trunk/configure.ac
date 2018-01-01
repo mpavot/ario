@@ -29,14 +29,13 @@ if test "${have_libgcrypt}" != "yes"; then
 	AC_MSG_ERROR([Missing dependency: libgcrypt])
 fi
 
-PKG_CHECK_MODULES(DEPS, [gtk+-2.0 >= 2.16
+PKG_CHECK_MODULES(DEPS, [gtk+-3.0
                          glib-2.0 >= 2.4
                          gobject-2.0 >= 2.4
                          gmodule-2.0
                          gthread-2.0
                          gio-2.0
                          libxml-2.0
-                         unique-1.0
                          libcurl
                          gnutls])
 
@@ -60,7 +59,7 @@ WARN_CFLAGS="-Wall \
 -Wmissing-field-initializers -Wmissing-parameter-type \
 -Wold-style-declaration -Woverride-init \
 -Wsign-compare -Wtype-limits -Wuninitialized \
--Wbad-function-cast -Wold-style-definition"
+-Wold-style-definition"
 
 for option in $WARN_CFLAGS; do
         SAVE_CFLAGS="$CFLAGS"

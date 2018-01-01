@@ -355,7 +355,7 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
                                               NULL,
                                               GTK_FILE_CHOOSER_ACTION_OPEN,
                                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                              "document-open", GTK_RESPONSE_ACCEPT,
                                               NULL);
 
         /* Set folder to the album folder if possible */

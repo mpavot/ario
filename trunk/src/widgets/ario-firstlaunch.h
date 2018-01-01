@@ -52,7 +52,7 @@ typedef struct
 
 GType                   ario_firstlaunch_get_type     (void) G_GNUC_CONST;
 
-ArioFirstlaunch *       ario_firstlaunch_new          (void);
+ArioFirstlaunch *       ario_firstlaunch_new          (GtkApplication *app);
 
 G_END_DECLS
 

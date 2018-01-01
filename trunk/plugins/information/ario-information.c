@@ -117,7 +117,7 @@ ario_information_get_name (ArioSource *source)
 static gchar *
 ario_information_get_icon (ArioSource *source)
 {
-        return GTK_STOCK_CDROM;
+        return "media-optical";
 }
 
 static void

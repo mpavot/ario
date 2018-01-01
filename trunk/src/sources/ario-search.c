@@ -67,16 +67,16 @@ struct ArioSearchPrivate
 /* Actions */
 static GtkActionEntry ario_search_actions [] =
 {
-        { "SearchAddSongs", GTK_STOCK_ADD, N_("_Add to playlist"), NULL,
+        { "SearchAddSongs", "list-add", N_("_Add to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_songlists) },
-        { "SearchAddPlaySongs", GTK_STOCK_MEDIA_PLAY, N_("Add and _play"), NULL,
+        { "SearchAddPlaySongs", "media-playback-start", N_("Add and _play"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
-        { "SearchClearAddPlaySongs", GTK_STOCK_REFRESH, N_("_Replace in playlist"), NULL,
+        { "SearchClearAddPlaySongs", "view-refresh", N_("_Replace in playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
-        { "SearchSongsProperties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL,
+        { "SearchSongsProperties", "document-properties", N_("_Properties"), NULL,
                 NULL,
                 G_CALLBACK (ario_songlist_cmd_songs_properties) }
 };
@@ -111,7 +111,7 @@ ario_search_get_name (ArioSource *source)
 static gchar *
 ario_search_get_icon (ArioSource *source)
 {
-        return GTK_STOCK_FIND;
+        return "edit-find";
 }
 
 static void
@@ -152,14 +152,14 @@ ario_search_init (ArioSearch *search)
         search->priv->connected = FALSE;
 
         /* Main vbox */
-        search->priv->vbox = gtk_vbox_new (FALSE, 5);
+        search->priv->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
         gtk_container_set_border_width (GTK_CONTAINER (search->priv->vbox), 10);
 
         /* Search entry */
         search->priv->entry = gtk_entry_new ();
         gtk_entry_set_icon_from_stock (GTK_ENTRY (search->priv->entry),
                                        GTK_ENTRY_ICON_PRIMARY,
-                                       GTK_STOCK_CLEAR);
+                                       "edit-clear");
 
         g_signal_connect (search->priv->entry,
                           "changed",

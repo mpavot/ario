@@ -334,10 +334,11 @@ ario_plugin_info_get_icon_name (ArioPluginInfo *info)
         /* use the ario icon as a default if the plugin does not
            have its own */
 
-        if (info->icon_name && ario_util_has_stock_icons (info->icon_name))
+        if (info->icon_name) {
                 return info->icon_name;
-        else
+        } else {
                 return "ario";
+        }
 }
 
 const gchar **

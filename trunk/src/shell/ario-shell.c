@@ -101,7 +101,7 @@ static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_server (ArioShell *shell);
 static void ario_shell_sync_control (ArioShell *shell);
 static void ario_shell_sync_playlist_position (ArioShell *shell);
-static void ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
+static void ario_shell_firstlaunch_delete_cb (ArioFirstlaunch *firstlaunch,
                                               ArioShell *shell);
 static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
                                                   ArioShell *shell);
@@ -117,6 +117,8 @@ static void ario_shell_playlist_position_changed_cb (guint notification_id,
 
 struct ArioShellPrivate
 {
+        GtkApplication * app;
+
         ArioCoverHandler *cover_handler;
         ArioPlaylistManager *playlist_manager;
         ArioNotificationManager *notification_manager;
@@ -170,40 +172,40 @@ static GtkActionEntry shell_actions [] =
         { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), "<control>D",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_disconnect) },
-        { "FileServerUpdate", GTK_STOCK_REFRESH, N_("_Update database"), "<control>U",
+        { "FileServerUpdate", "view-refresh", N_("_Update database"), "<control>U",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_update) },
-        { "FileQuit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
+        { "FileQuit", "application-exit", N_("_Quit"), "<control>Q",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_quit) },
-        { "EditPlugins", GTK_STOCK_EXECUTE, N_("Plu_gins"), NULL,
+        { "EditPlugins", "system-run", N_("Plu_gins"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_plugins) },
-        { "EditPreferences", GTK_STOCK_PREFERENCES, N_("Prefere_nces"), NULL,
+        { "EditPreferences", "preferences-system", N_("Prefere_nces"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_preferences) },
-        { "ToolCoverSelect", GTK_STOCK_CDROM, N_("_Change current album cover"), NULL,
+        { "ToolCoverSelect", "media-optical", N_("_Change current album cover"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_cover_select) },
-        { "ToolCover", GTK_STOCK_EXECUTE, N_("Download album _covers"), NULL,
+        { "ToolCover", "system-run", N_("Download album _covers"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_covers) },
         { "ToolSimilarArtist", GTK_STOCK_INDEX, N_("Find similar artists"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_similar_artists) },
-        { "ToolAddSimilar", GTK_STOCK_ADD, N_("Add similar songs to playlist"), NULL,
+        { "ToolAddSimilar", "list-add", N_("Add similar songs to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_add_similar) },
-        { "ViewGoPrevious", GTK_STOCK_GO_BACK, N_("Go to _previous tab"), "<control>Page_Up",
+        { "ViewGoPrevious", "go-previous", N_("Go to _previous tab"), "<control>Page_Up",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_previous_tab) },
-        { "ViewGoNext", GTK_STOCK_GO_FORWARD, N_("Go to _next tab"), "<control>Page_Down",
+        { "ViewGoNext", "go-next", N_("Go to _next tab"), "<control>Page_Down",
                 NULL,
                 G_CALLBACK (ario_shell_cmd_next_tab) },
         { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
-        { "HelpAbout", GTK_STOCK_ABOUT, N_("_About"), NULL,
+        { "HelpAbout", "help-about", N_("_About"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_about) },
         { "HelpTranslate", GTK_STOCK_EDIT, N_("_Translate this application..."), NULL,
@@ -341,12 +343,13 @@ ario_shell_get_property (GObject *object,
 }
 
 ArioShell *
-ario_shell_new (void)
+ario_shell_new (GtkApplication * app)
 {
         ARIO_LOG_FUNCTION_START;
         ArioShell *shell;
 
         shell = g_object_new (ARIO_TYPE_SHELL, NULL);
+        shell->priv->app = app;
 
         return shell;
 }
@@ -361,7 +364,7 @@ ario_shell_quit (ArioShell *shell)
                 ario_server_do_stop ();
 
         /* Stop main loop */
-        gtk_main_quit ();
+        g_application_quit (shell->priv->app);
 }
 
 static gboolean
@@ -461,7 +464,7 @@ ario_shell_construct (ArioShell *shell,
          */
 
         /* Create main vbox */
-        shell->priv->vbox = gtk_vbox_new (FALSE, 0);
+        shell->priv->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
         /* Create header */
         shell->priv->header = ario_header_new ();
@@ -478,7 +481,7 @@ ario_shell_construct (ArioShell *shell,
         g_object_ref (shell->priv->sourcemanager);
 
         /* Create the hbox(for tabs and playlist) */
-        shell->priv->hbox = gtk_hbox_new (FALSE, 0);
+        shell->priv->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
         /* Create status bar */
         shell->priv->status_bar = ario_status_bar_new ();
@@ -533,7 +536,7 @@ ario_shell_construct (ArioShell *shell,
 
         /* First launch assistant */
         if (!ario_conf_get_boolean (PREF_FIRST_TIME, PREF_FIRST_TIME_DEFAULT)) {
-                firstlaunch = ario_firstlaunch_new ();
+                firstlaunch = ario_firstlaunch_new (shell->priv->app);
                 g_signal_connect (firstlaunch,
                                   "destroy",
                                   G_CALLBACK (ario_shell_firstlaunch_delete_cb),
@@ -1120,7 +1123,7 @@ ario_shell_sync_playlist_position (ArioShell *shell)
         {
         case PLAYLIST_POSITION_BELOW:
                 /* Create paned (separation between upper part and playlist) */
-                shell->priv->paned = gtk_vpaned_new ();
+                shell->priv->paned = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
 
                 /* Add widgets to paned */
                 gtk_paned_pack1 (GTK_PANED (shell->priv->paned),
@@ -1141,7 +1144,7 @@ ario_shell_sync_playlist_position (ArioShell *shell)
                 break;
         case PLAYLIST_POSITION_RIGHT:
                 /* Create paned (separation between left part and playlist) */
-                shell->priv->paned = gtk_hpaned_new ();
+                shell->priv->paned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
 
                 /* Add widgets to paned */
                 gtk_paned_pack1 (GTK_PANED (shell->priv->paned),
@@ -1173,7 +1176,7 @@ ario_shell_sync_playlist_position (ArioShell *shell)
 }
 
 static void
-ario_shell_firstlaunch_delete_cb (GtkObject *firstlaunch,
+ario_shell_firstlaunch_delete_cb (ArioFirstlaunch *firstlaunch,
                                   ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
@@ -1278,7 +1281,7 @@ ario_shell_cmd_plugins (GtkAction *action,
         window = gtk_dialog_new_with_buttons (_("Configure Plugins"),
                                               GTK_WINDOW (shell),
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              GTK_STOCK_CLOSE,
+                                              "window-close",
                                               GTK_RESPONSE_CLOSE,
                                               NULL);
         gtk_container_set_border_width (GTK_CONTAINER (window), 5);

@@ -32,6 +32,7 @@
 
 struct ArioFirstlaunchPrivate
 {
+        GtkApplication * app;
         GtkWidget *final_label;
 };
 
@@ -53,7 +54,7 @@ ario_firstlaunch_cancel_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         /* Exit Ario if user click on cancel */
-        gtk_main_quit ();
+        g_application_quit (firstlaunch->priv->app);
 }
 
 static void
@@ -100,7 +101,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
 
         /* Page 1 - Presentation of first launch assistant */
-        vbox = gtk_vbox_new (FALSE, 12);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 
         label = gtk_label_new (_("It is the first time you launch Ario.\nThis assistant will help you to configure it."));
@@ -134,7 +135,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         /* Page 3 - Confirmation */
         firstlaunch->priv->final_label = gtk_label_new (NULL);
         gtk_label_set_line_wrap (GTK_LABEL (firstlaunch->priv->final_label), TRUE);
-        vbox = gtk_vbox_new (FALSE, 12);
+        vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
         gtk_box_pack_start (GTK_BOX (vbox), firstlaunch->priv->final_label, FALSE, FALSE, 0);
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
@@ -166,12 +167,13 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 }
 
 ArioFirstlaunch *
-ario_firstlaunch_new (void)
+ario_firstlaunch_new (GtkApplication * app)
 {
         ARIO_LOG_FUNCTION_START;
         ArioFirstlaunch *firstlaunch;
 
         firstlaunch = g_object_new (TYPE_ARIO_FIRSTLAUNCH, NULL);
+        firstlaunch->priv->app = app;
 
         return firstlaunch;
 }

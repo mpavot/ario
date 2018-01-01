@@ -671,7 +671,7 @@ ario_connection_widget_open_cb (GtkWidget *widget,
                                               NULL,
                                               GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                              "document-open", GTK_RESPONSE_ACCEPT,
                                               NULL);
 
         if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
