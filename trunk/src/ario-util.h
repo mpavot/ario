@@ -85,16 +85,7 @@ gchar*                  ario_util_format_title               (ArioServerSong *se
 /**
  * Initialise default icon factory with a few icons
  */
-void                    ario_util_init_stock_icons           (void);
-
-/**
- * Check if an icon is already present
- *
- * @param stock_id The id of the icon to check
- *
- * @return True if the icon is present, FALSE otherwise
- */
-gboolean                ario_util_has_stock_icons            (const char *stock_id);
+void                    ario_util_init_icons                 (void);
 
 /**
  * Get the path of Ario configuration

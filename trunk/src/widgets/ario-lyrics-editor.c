@@ -99,8 +99,8 @@ ario_lyrics_editor_new (void)
         separator = gtk_hseparator_new ();
 
         /* Create buttons */
-        lyrics_editor->priv->save_button = gtk_button_new_from_stock ("document-save");
-        lyrics_editor->priv->search_button = gtk_button_new_from_stock ("edit-find");
+        lyrics_editor->priv->save_button = gtk_button_new_from_icon_name ("document-save", GTK_ICON_SIZE_BUTTON);
+        lyrics_editor->priv->search_button = gtk_button_new_from_icon_name ("edit-find", GTK_ICON_SIZE_BUTTON);
 
         /* Create scrolled window */
         scrolledwindow = gtk_scrolled_window_new (NULL, NULL);

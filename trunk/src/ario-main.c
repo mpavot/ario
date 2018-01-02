@@ -109,7 +109,7 @@ main (int argc, char *argv[])
         gcry_check_version (NULL);
 
         /* Register Ario icons */
-        ario_util_init_stock_icons ();
+        ario_util_init_icons ();
 
         /* Initialisation of Curl */
         curl_global_init (CURL_GLOBAL_WIN32);
