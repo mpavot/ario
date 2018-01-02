@@ -53,8 +53,6 @@ struct _ArioPluginManagerPrivate
         GtkWidget* configure_button;
 
         GtkWidget* about;
-
-        GtkWidget* popup_menu;
 };
 
 static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm);
@@ -62,7 +60,7 @@ static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *it
 static void ario_plugin_manager_finalize (GObject *object);
 
 #define ARIO_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_PLUGIN_MANAGER, ArioPluginManagerPrivate))
-G_DEFINE_TYPE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_BOX)
 
 static void
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
@@ -371,25 +369,6 @@ plugin_manager_get_selected_plugin (ArioPluginManager *pm)
         return info;
 }
 
-static void
-plugin_manager_set_active_all (ArioPluginManager *pm,
-                               gboolean active)
-{
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
-
-        g_return_if_fail (model != NULL);
-
-        gtk_tree_model_get_iter_first (model, &iter);
-
-        do {
-                plugin_manager_set_active (pm, &iter, model, active);
-        }
-        while (gtk_tree_model_iter_next (model, &iter));
-}
-
 /* Callback used as the interactive search comparison function */
 static gboolean
 name_search_cb (GtkTreeModel *model,
@@ -428,168 +407,6 @@ name_search_cb (GtkTreeModel *model,
         g_free (case_normalized_string);
 
         return retval;
-}
-
-static void
-enable_plugin_menu_cb (GtkCheckMenuItem *checkmenuitem,
-                       ArioPluginManager *pm)
-{
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        GtkTreeSelection *selection;
-
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
-        g_return_if_fail (model != NULL);
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
-        g_return_if_fail (selection != NULL);
-
-        if (gtk_tree_selection_get_selected (selection, NULL, &iter))
-                plugin_manager_toggle_active (pm, &iter, model);
-}
-
-static void
-enable_all_menu_cb (GtkMenu *menu,
-                    ArioPluginManager *pm)
-{
-        plugin_manager_set_active_all (pm, TRUE);
-}
-
-static void
-disable_all_menu_cb (GtkMenu *menu,
-                     ArioPluginManager *pm)
-{
-        plugin_manager_set_active_all (pm, FALSE);
-}
-
-static GtkWidget *
-create_tree_popup_menu (ArioPluginManager *pm)
-{
-        GtkWidget *menu;
-        GtkWidget *item;
-        GtkWidget *image;
-        ArioPluginInfo *info;
-
-        info = plugin_manager_get_selected_plugin (pm);
-
-        menu = gtk_menu_new ();
-
-        item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
-        image = gtk_image_new_from_icon_name ("help-about",
-                                          GTK_ICON_SIZE_MENU);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-        g_signal_connect (item, "activate",
-                          G_CALLBACK (about_button_cb), pm);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-        item = gtk_image_menu_item_new_with_mnemonic (_("C_onfigure"));
-        image = gtk_image_new_from_icon_name ("preferences-system",
-                                          GTK_ICON_SIZE_MENU);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-        g_signal_connect (item, "activate",
-                          G_CALLBACK (configure_button_cb), pm);
-        gtk_widget_set_sensitive (item, ario_plugin_info_is_configurable (info));
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-        item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
-        gtk_widget_set_sensitive (item, ario_plugin_info_is_available (info));
-        gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
-                                        ario_plugin_info_is_active (info));
-        g_signal_connect (item, "toggled",
-                          G_CALLBACK (enable_plugin_menu_cb), pm);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-        item = gtk_separator_menu_item_new ();
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-        item = gtk_menu_item_new_with_mnemonic (_("Ac_tivate All"));
-        g_signal_connect (item, "activate",
-                          G_CALLBACK (enable_all_menu_cb), pm);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-        item = gtk_menu_item_new_with_mnemonic (_("_Deactivate All"));
-        g_signal_connect (item, "activate",
-                          G_CALLBACK (disable_all_menu_cb), pm);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-        gtk_widget_show_all (menu);
-
-        return menu;
-}
-
-static void
-tree_popup_menu_detach (ArioPluginManager *pm,
-                        GtkMenu *menu)
-{
-        pm->priv->popup_menu = NULL;
-}
-
-static void
-show_tree_popup_menu (GtkTreeView *tree,
-                      ArioPluginManager *pm,
-                      GdkEventButton *event)
-{
-        if (pm->priv->popup_menu)
-                gtk_widget_destroy (pm->priv->popup_menu);
-
-        pm->priv->popup_menu = create_tree_popup_menu (pm);
-
-        gtk_menu_attach_to_widget (GTK_MENU (pm->priv->popup_menu),
-                                   GTK_WIDGET (pm),
-                                   (GtkMenuDetachFunc) tree_popup_menu_detach);
-
-        if (event != NULL) {
-                gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
-                                NULL, NULL,
-                                event->button, event->time);
-        } else {
-                gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
-                                NULL, tree,
-                                0, gtk_get_current_event_time ());
-
-                gtk_menu_shell_select_first (GTK_MENU_SHELL (pm->priv->popup_menu),
-                                             FALSE);
-        }
-}
-
-static gboolean
-button_press_event_cb (GtkWidget *tree,
-                       GdkEventButton *event,
-                       ArioPluginManager *pm)
-{
-        /* We want the treeview selection to be updated before showing the menu.
-         * This code is evil, thanks to Federico Mena Quintero's black magic.
-         * See: http://mail.gnome.org/archives/gtk-devel-list/2006-February/msg00168.html
-         * FIXME: Let's remove it asap.
-         */
-
-        static gboolean in_press = FALSE;
-        gboolean handled;
-
-        if (in_press)
-                return FALSE; /* we re-entered */
-
-        if (GDK_BUTTON_PRESS != event->type || 3 != event->button)
-                return FALSE; /* let the normal handler run */
-
-        in_press = TRUE;
-        handled = gtk_widget_event (tree, (GdkEvent *) event);
-        in_press = FALSE;
-
-        if (!handled)
-                return FALSE;
-
-        /* The selection is fully updated by now */
-        show_tree_popup_menu (GTK_TREE_VIEW (tree), pm, event);
-        return TRUE;
-}
-
-static gboolean
-popup_menu_cb (GtkTreeView *tree,
-               ArioPluginManager *pm)
-{
-        show_tree_popup_menu (tree, pm, NULL);
-        return TRUE;
 }
 
 static gint
@@ -690,14 +507,6 @@ plugin_manager_construct_tree (ArioPluginManager *pm)
                           G_CALLBACK (row_activated_cb),
                           pm);
 
-        g_signal_connect (pm->priv->tree,
-                          "button-press-event",
-                          G_CALLBACK (button_press_event_cb),
-                          pm);
-        g_signal_connect (pm->priv->tree,
-                          "popup-menu",
-                          G_CALLBACK (popup_menu_cb),
-                          pm);
         gtk_widget_show (pm->priv->tree);
 }
 
@@ -712,6 +521,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
 
         pm->priv = ARIO_PLUGIN_MANAGER_GET_PRIVATE (pm);
 
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (pm), GTK_ORIENTATION_VERTICAL);
         gtk_box_set_spacing (GTK_BOX (pm), 6);
 
         label = gtk_label_new (NULL);
@@ -740,7 +550,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         pm->priv->tree = gtk_tree_view_new ();
         gtk_container_add (GTK_CONTAINER (viewport), pm->priv->tree);
 
-        hbuttonbox = gtk_hbutton_box_new ();
+        hbuttonbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_box_pack_start (GTK_BOX (pm), hbuttonbox, FALSE, FALSE, 0);
         gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox), GTK_BUTTONBOX_END);
         gtk_box_set_spacing (GTK_BOX (hbuttonbox), 8);
@@ -776,11 +586,6 @@ ario_plugin_manager_init (ArioPluginManager *pm)
 static void
 ario_plugin_manager_finalize (GObject *object)
 {
-        ArioPluginManager *pm = ARIO_PLUGIN_MANAGER (object);
-
-        if (pm->priv->popup_menu)
-                gtk_widget_destroy (pm->priv->popup_menu);
-
         G_OBJECT_CLASS (ario_plugin_manager_parent_class)->finalize (object);
 }
 

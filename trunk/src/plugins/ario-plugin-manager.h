@@ -47,7 +47,7 @@ typedef struct _ArioPluginManager ArioPluginManager;
 
 struct _ArioPluginManager 
 {
-        GtkVBox vbox;
+        GtkBox box;
 
         /*< private > */
         ArioPluginManagerPrivate *priv;
@@ -60,7 +60,7 @@ typedef struct _ArioPluginManagerClass ArioPluginManagerClass;
 
 struct _ArioPluginManagerClass 
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 };
 
 /*
