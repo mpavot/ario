@@ -40,14 +40,14 @@ typedef struct ArioLyricsEditorPrivate ArioLyricsEditorPrivate;
  */
 typedef struct
 {
-        GtkVBox parent;
+        GtkBox parent;
 
         ArioLyricsEditorPrivate *priv;
 } ArioLyricsEditor;
 
 typedef struct
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 } ArioLyricsEditorClass;
 
 typedef struct ArioLyricsEditorData

@@ -55,7 +55,7 @@ struct ArioLyricsEditorPrivate
 };
 
 #define ARIO_LYRICS_EDITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_EDITOR, ArioLyricsEditorPrivate))
-G_DEFINE_TYPE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_BOX)
 
 static void
 ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
@@ -90,13 +90,14 @@ ario_lyrics_editor_new (void)
                                       NULL);
         g_return_val_if_fail (lyrics_editor->priv != NULL, NULL);
 
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (lyrics_editor), GTK_ORIENTATION_VERTICAL);
         gtk_box_set_spacing (GTK_BOX (lyrics_editor), 5);
 
         /* Create button hbox */
         hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
 
         /* Create separator */
-        separator = gtk_hseparator_new ();
+        separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 
         /* Create buttons */
         lyrics_editor->priv->save_button = gtk_button_new_from_icon_name ("document-save", GTK_ICON_SIZE_BUTTON);
@@ -158,10 +159,9 @@ ario_lyrics_editor_new (void)
         lyrics_editor->priv->queue = g_async_queue_new ();
 
         /* Thread for lyrics download */
-        lyrics_editor->priv->thread = g_thread_create ((GThreadFunc) ario_lyrics_editor_get_lyrics_thread,
-                                                       lyrics_editor,
-                                                       TRUE,
-                                                       NULL);
+        lyrics_editor->priv->thread = g_thread_new ("lyricsdl",
+                                                    (GThreadFunc) ario_lyrics_editor_get_lyrics_thread,
+                                                    lyrics_editor);
         return GTK_WIDGET (lyrics_editor);
 }
 

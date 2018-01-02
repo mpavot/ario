@@ -42,14 +42,14 @@ typedef struct ArioConnectionWidgetPrivate ArioConnectionWidgetPrivate;
  */
 typedef struct
 {
-        GtkVBox parent;
+        GtkBox parent;
 
         ArioConnectionWidgetPrivate *priv;
 } ArioConnectionWidget;
 
 typedef struct
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 
         /* Signals */
         void (*profile_changed)            (ArioConnectionWidget *connection_widget);

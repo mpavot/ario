@@ -101,7 +101,7 @@ enum
 };
 
 #define ARIO_CONNECTION_WIDGET_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_WIDGET, ArioConnectionWidgetPrivate))
-G_DEFINE_TYPE (ArioConnectionWidget, ario_connection_widget, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioConnectionWidget, ario_connection_widget, GTK_TYPE_BOX)
 
 static void
 ario_connection_widget_class_init (ArioConnectionWidgetClass *klass)
@@ -330,6 +330,7 @@ ario_connection_widget_new (void)
                                           NULL);
 
         g_return_val_if_fail (connection_widget->priv != NULL, NULL);
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (connection_widget), GTK_ORIENTATION_VERTICAL);
 
         /* Create UI using GtkBuilder */
         builder = gtk_builder_helpers_new (UI_PATH "connection-widget.ui",
@@ -670,8 +671,8 @@ ario_connection_widget_open_cb (GtkWidget *widget,
         dialog = gtk_file_chooser_dialog_new (NULL,
                                               NULL,
                                               GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                              "document-open", GTK_RESPONSE_ACCEPT,
+                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                              _("_Open"), GTK_RESPONSE_ACCEPT,
                                               NULL);
 
         if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {

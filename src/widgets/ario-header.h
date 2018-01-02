@@ -40,14 +40,14 @@ typedef struct ArioHeaderPrivate ArioHeaderPrivate;
  */
 typedef struct
 {
-        GtkHBox parent;
+        GtkBox parent;
 
         ArioHeaderPrivate *priv;
 } ArioHeader;
 
 typedef struct
 {
-        GtkHBoxClass parent;
+        GtkBoxClass parent;
 } ArioHeaderClass;
 
 GType           ario_header_get_type                 (void) G_GNUC_CONST;

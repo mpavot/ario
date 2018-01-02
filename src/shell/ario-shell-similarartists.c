@@ -336,10 +336,9 @@ ario_shell_similarartists_get_artists (ArioShellSimilarartists *shell_similarart
         g_slist_free (similar_artists);
 
         /* Launch a thread to download artist images */
-        shell_similarartists->priv->thread = g_thread_create ((GThreadFunc) ario_shell_similarartists_get_images,
-                                                              shell_similarartists,
-                                                              TRUE,
-                                                              NULL);
+        shell_similarartists->priv->thread = g_thread_new ("artistimage",
+                                                           (GThreadFunc) ario_shell_similarartists_get_images,
+                                                           shell_similarartists);
         g_slist_free (criteria);
 }
 
