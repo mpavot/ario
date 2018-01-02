@@ -277,7 +277,7 @@ ario_playlist_get_name (ArioSource *source)
 static gchar *
 ario_playlist_get_icon (ArioSource *source)
 {
-        return GTK_STOCK_INDEX;
+        return "";
 }
 
 static void
@@ -601,8 +601,6 @@ ario_playlist_init (ArioPlaylist *playlist)
         gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (playlist->priv->model),
                                                  ario_playlist_no_sort,
                                                  NULL, NULL);
-        gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (playlist->priv->tree),
-                                      TRUE);
         gtk_tree_view_set_enable_search (GTK_TREE_VIEW (playlist->priv->tree), FALSE);
         playlist->priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (playlist->priv->tree));
         gtk_tree_selection_set_mode (playlist->priv->selection,
@@ -1693,9 +1691,9 @@ ario_playlist_cmd_save (GtkAction *action,
         dialog = gtk_dialog_new_with_buttons (_("Save playlist"),
                                               NULL,
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              GTK_STOCK_CANCEL,
+                                              _("_Cancel"),
                                               GTK_RESPONSE_CANCEL,
-                                              GTK_STOCK_OK,
+                                              _("_OK"),
                                               GTK_RESPONSE_OK,
                                               NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog),

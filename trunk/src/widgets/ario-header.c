@@ -103,7 +103,7 @@ struct ArioHeaderPrivate
 };
 
 #define ARIO_HEADER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_HEADER, ArioHeaderPrivate))
-G_DEFINE_TYPE (ArioHeader, ario_header, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (ArioHeader, ario_header, GTK_TYPE_BOX)
 
 static void
 ario_header_class_init (ArioHeaderClass *klass)
@@ -180,7 +180,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         GtkTargetList *targets;
         GtkTargetEntry *target_entry;
         gint n_elem;
-        GtkWidget *image, *hbox, *right_hbox, *vbox, *alignment;
+        GtkWidget *image, *hbox, *right_hbox, *vbox;
         GList *focus = NULL;
 
         klass = ARIO_HEADER_CLASS (g_type_class_peek (TYPE_ARIO_HEADER));
@@ -188,6 +188,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
         header = ARIO_HEADER (parent_class->constructor (type, n_construct_properties,
                                                          construct_properties));
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (header), GTK_ORIENTATION_HORIZONTAL);
 
         /* Construct previous button */
         image = gtk_image_new_from_icon_name ("media-skip-backward",
@@ -282,15 +283,13 @@ ario_header_constructor (GType type, guint n_construct_properties,
         header->priv->song = gtk_label_new ("");
         gtk_label_set_ellipsize (GTK_LABEL (header->priv->song), PANGO_ELLIPSIZE_END);
         gtk_label_set_use_markup (GTK_LABEL (header->priv->song), TRUE);
-        gtk_misc_set_alignment (GTK_MISC (header->priv->song), 0, 0);
 
         header->priv->artist_album = gtk_label_new ("");
         gtk_label_set_ellipsize (GTK_LABEL (header->priv->artist_album), PANGO_ELLIPSIZE_END);
-        gtk_misc_set_alignment (GTK_MISC (header->priv->artist_album), 0, 0);
 
         /* Construct time slider */
         header->priv->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 10.0, 1.0, 10.0, 0.0));
-        header->priv->scale = gtk_hscale_new (header->priv->adjustment);
+        header->priv->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, header->priv->adjustment);
 
         g_signal_connect (header->priv->scale,
                           "button_press_event",
@@ -367,9 +366,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->stop_button, FALSE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), header->priv->next_button, FALSE, TRUE, 0);
 
-        alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
-        gtk_container_add (GTK_CONTAINER (alignment), hbox);
-        gtk_box_pack_start (GTK_BOX (header), alignment, FALSE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (header), hbox, FALSE, TRUE, 0);
 
         /* Add cover */
         gtk_box_pack_start (GTK_BOX (header), cover_event_box, FALSE, TRUE, 0);
@@ -379,9 +376,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (vbox), header->priv->song, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (vbox), header->priv->artist_album, TRUE, TRUE, 0);
 
-        alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
-        gtk_container_add (GTK_CONTAINER (alignment), vbox);
-        gtk_box_pack_start (GTK_BOX (header), alignment, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (header), vbox, TRUE, TRUE, 0);
 
         /* Add time slider */
         vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -404,9 +399,7 @@ ario_header_constructor (GType type, guint n_construct_properties,
         /* Add volume button */
         gtk_box_pack_start (GTK_BOX (right_hbox), header->priv->volume_button, FALSE, TRUE, 5);
 
-        alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
-        gtk_container_add (GTK_CONTAINER (alignment), right_hbox);
-        gtk_box_pack_end (GTK_BOX (header), alignment, FALSE, TRUE, 0);
+        gtk_box_pack_end (GTK_BOX (header), right_hbox, FALSE, TRUE, 0);
 
         /* Set focus chain */
         focus = g_list_append (focus, header->priv->scale);

@@ -432,10 +432,9 @@ ario_shell_coverdownloader_get_covers_from_albums (ArioShellCoverdownloader *ari
         ario_shell_coverdownloader->priv->operation = operation;
 
         /* Launch thread for cover download */
-        ario_shell_coverdownloader->priv->thread = g_thread_create ((GThreadFunc) ario_shell_coverdownloader_get_covers_from_albums_thread,
-                                                                    ario_shell_coverdownloader,
-                                                                    TRUE,
-                                                                    NULL);
+        ario_shell_coverdownloader->priv->thread = g_thread_new ("coverdl",
+                                                                 (GThreadFunc) ario_shell_coverdownloader_get_covers_from_albums_thread,
+                                                                 ario_shell_coverdownloader);
 }
 
 static void

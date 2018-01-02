@@ -157,7 +157,7 @@ ario_dnd_tree_button_press_cb (GtkWidget *widget,
         /* First button pressed */
         if (event->button == 1) {
                 /* Get real coordinates */
-                gdk_window_get_pointer (gtk_widget_get_window (widget), &x, &y, &mods);
+                gdk_window_get_device_position (gtk_widget_get_window (widget), event->device, &x, &y, &mods);
                 gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget), x, y, &bx, &by);
 
                 if (dnd_tree->priv->browse_mode)
@@ -256,7 +256,7 @@ ario_dnd_tree_motion_notify (GtkWidget *widget,
         if ((dnd_tree->priv->dragging) || !(dnd_tree->priv->pressed))
                 return FALSE;
 
-        gdk_window_get_pointer (gtk_widget_get_window (widget), &x, &y, &mods);
+        gdk_window_get_device_position (gtk_widget_get_window (widget), event->device, &x, &y, &mods);
 
         dx = x - dnd_tree->priv->drag_start_x;
         dy = y - dnd_tree->priv->drag_start_y;

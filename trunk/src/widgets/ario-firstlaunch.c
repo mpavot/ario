@@ -54,7 +54,7 @@ ario_firstlaunch_cancel_cb (GtkWidget *widget,
 {
         ARIO_LOG_FUNCTION_START;
         /* Exit Ario if user click on cancel */
-        g_application_quit (firstlaunch->priv->app);
+        g_application_quit (G_APPLICATION (firstlaunch->priv->app));
 }
 
 static void
@@ -93,12 +93,10 @@ static void
 ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
 {
         ARIO_LOG_FUNCTION_START;
-        GdkPixbuf *pixbuf;
         GtkWidget *label, *vbox, *connection_vbox;
         GtkBuilder *builder;
 
         firstlaunch->priv = ARIO_FIRSTLAUNCH_GET_PRIVATE (firstlaunch);
-        pixbuf = gdk_pixbuf_new_from_file (PIXMAP_PATH "ario.png", NULL);
 
         /* Page 1 - Presentation of first launch assistant */
         vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
@@ -111,7 +109,6 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Welcome to Ario"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_INTRO);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
 
         /* Page 2 - Connection configuration */
@@ -129,7 +126,6 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         g_object_unref (builder);
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Configuration"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_CONTENT);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
 
         /* Page 3 - Confirmation */
@@ -141,10 +137,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         gtk_assistant_append_page (GTK_ASSISTANT (firstlaunch), vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (firstlaunch), vbox, _("Confirmation"));
         gtk_assistant_set_page_type (GTK_ASSISTANT (firstlaunch), vbox, GTK_ASSISTANT_PAGE_CONFIRM);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (firstlaunch), vbox, pixbuf);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (firstlaunch), vbox, TRUE);
-
-        g_object_unref (pixbuf);
 
         /* Connect signals for actions on assistant */
         g_signal_connect (firstlaunch,

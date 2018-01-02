@@ -36,14 +36,14 @@ typedef struct ArioConnectionPreferencesPrivate ArioConnectionPreferencesPrivate
 
 typedef struct
 {
-        GtkVBox parent;
+        GtkBox parent;
 
         ArioConnectionPreferencesPrivate *priv;
 } ArioConnectionPreferences;
 
 typedef struct
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 } ArioConnectionPreferencesClass;
 
 GType              ario_connection_preferences_get_type         (void) G_GNUC_CONST;

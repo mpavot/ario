@@ -402,8 +402,9 @@ ario_mpd_connect (void)
         GtkWidget *dialog;
         gboolean is_in_error = (instance->priv->reconnect_time > 0);
 
-        thread = g_thread_create ((GThreadFunc) ario_mpd_connect_thread,
-                                  instance, TRUE, NULL);
+        thread = g_thread_new ("connect",
+                               (GThreadFunc) ario_mpd_connect_thread,
+                               instance);
 
         if (!is_in_error) {
                 win = gtk_window_new (GTK_WINDOW_TOPLEVEL);

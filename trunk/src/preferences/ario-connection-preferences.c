@@ -50,7 +50,7 @@ struct ArioConnectionPreferencesPrivate
 };
 
 #define ARIO_CONNECTION_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_PREFERENCES, ArioConnectionPreferencesPrivate))
-G_DEFINE_TYPE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_BOX)
 
 static void
 ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
@@ -89,6 +89,7 @@ ario_connection_preferences_new (void)
                                                NULL);
 
         g_return_val_if_fail (connection_preferences->priv != NULL, NULL);
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (connection_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "connection-prefs.ui",
                                            connection_preferences);
