@@ -280,10 +280,9 @@ ario_cover_handler_load_pixbuf (ArioCoverHandler *cover_handler,
                                         g_async_queue_push (cover_handler->priv->queue, data);
 
                                         if (!cover_handler->priv->thread) {
-                                                cover_handler->priv->thread = g_thread_create ((GThreadFunc) ario_cover_handler_get_covers,
-                                                                                               cover_handler,
-                                                                                               TRUE,
-                                                                                               NULL);
+                                                cover_handler->priv->thread = g_thread_new ("cover",
+                                                                                            (GThreadFunc) ario_cover_handler_get_covers,
+                                                                                            cover_handler);
                                         }
                                 }
                         }
