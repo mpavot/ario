@@ -192,7 +192,7 @@ ario_util_format_title (ArioServerSong *server_song)
 }
 
 void
-ario_util_init_stock_icons (void)
+ario_util_init_icons (void)
 {
         ARIO_LOG_FUNCTION_START;
 

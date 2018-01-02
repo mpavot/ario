@@ -89,10 +89,6 @@ enum
         PROP_UI_MANAGER
 };
 
-static const GtkTargetEntry songs_targets  [] = {
-        { "text/songs-list", 0, 0 },
-};
-
 #define ARIO_SEARCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SEARCH, ArioSearchPrivate))
 G_DEFINE_TYPE (ArioSearch, ario_search, ARIO_TYPE_SOURCE)
 
@@ -157,9 +153,9 @@ ario_search_init (ArioSearch *search)
 
         /* Search entry */
         search->priv->entry = gtk_entry_new ();
-        gtk_entry_set_icon_from_stock (GTK_ENTRY (search->priv->entry),
-                                       GTK_ENTRY_ICON_PRIMARY,
-                                       "edit-clear");
+        gtk_entry_set_icon_from_icon_name (GTK_ENTRY (search->priv->entry),
+                                           GTK_ENTRY_ICON_PRIMARY,
+                                           "edit-clear");
 
         g_signal_connect (search->priv->entry,
                           "changed",

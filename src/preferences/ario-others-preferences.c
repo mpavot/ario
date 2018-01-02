@@ -110,14 +110,14 @@ ario_others_preferences_new (void)
         others_preferences->priv->in_radiobutton =
                 GTK_WIDGET (gtk_builder_get_object (builder, "pl_in_radiobutton"));
 
-        gtk_image_set_from_stock (GTK_IMAGE (gtk_builder_get_object (builder, "pl_below_image")),
-                                  "pl-below", GTK_ICON_SIZE_LARGE_TOOLBAR);
+        gtk_image_set_from_icon_name (GTK_IMAGE (gtk_builder_get_object (builder, "pl_below_image")),
+                                      "pl-below", GTK_ICON_SIZE_LARGE_TOOLBAR);
 
-        gtk_image_set_from_stock (GTK_IMAGE (gtk_builder_get_object (builder, "pl_right_image")),
-                                  "pl-right", GTK_ICON_SIZE_LARGE_TOOLBAR);
+        gtk_image_set_from_icon_name (GTK_IMAGE (gtk_builder_get_object (builder, "pl_right_image")),
+                                      "pl-right", GTK_ICON_SIZE_LARGE_TOOLBAR);
 
-        gtk_image_set_from_stock (GTK_IMAGE (gtk_builder_get_object (builder, "pl_in_image")),
-                                  "pl-inside", GTK_ICON_SIZE_LARGE_TOOLBAR);
+        gtk_image_set_from_icon_name (GTK_IMAGE (gtk_builder_get_object (builder, "pl_in_image")),
+                                      "pl-inside", GTK_ICON_SIZE_LARGE_TOOLBAR);
 
         gtk_builder_helpers_boldify_label (builder, "interface_label");
         gtk_builder_helpers_boldify_label (builder, "proxy_frame_label");

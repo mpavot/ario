@@ -552,9 +552,6 @@ void ario_tree_drag_begin_cb (GtkWidget *widget,
                 /* Set icon */
                 gtk_drag_source_set_icon_pixbuf (widget, pixbuf);
                 g_object_unref (pixbuf);
-        } else {
-                /* Set default icon */
-                gtk_drag_source_set_icon_stock (widget, GTK_STOCK_DND);
         }
 }
 
