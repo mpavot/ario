@@ -1281,7 +1281,7 @@ ario_shell_cmd_plugins (GtkAction *action,
         window = gtk_dialog_new_with_buttons (_("Configure Plugins"),
                                               GTK_WINDOW (shell),
                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                              "window-close",
+                                              _("_Close"),
                                               GTK_RESPONSE_CLOSE,
                                               NULL);
         gtk_container_set_border_width (GTK_CONTAINER (window), 5);
