@@ -61,7 +61,7 @@ struct ArioOthersPreferencesPrivate
 };
 
 #define ARIO_OTHERS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_OTHERS_PREFERENCES, ArioOthersPreferencesPrivate))
-G_DEFINE_TYPE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_BOX)
 
 static void
 ario_others_preferences_class_init (ArioOthersPreferencesClass *klass)
@@ -87,6 +87,8 @@ ario_others_preferences_new (void)
         others_preferences = g_object_new (TYPE_ARIO_OTHERS_PREFERENCES, NULL);
 
         g_return_val_if_fail (others_preferences->priv != NULL, NULL);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (others_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "others-prefs.ui",
                                            others_preferences);

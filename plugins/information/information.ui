@@ -1,27 +1,34 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
-  <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkVBox" id="vbox">
+  <requires lib="gtk+" version="3.8"/>
+  <object class="GtkBox" id="vbox">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
     <child>
       <object class="GtkAlignment" id="alignment1">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <property name="border_width">12</property>
         <child>
-          <object class="GtkVBox" id="vbox2">
+          <object class="GtkBox" id="vbox2">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkHBox" id="properties_hbox">
+              <object class="GtkBox" id="properties_hbox">
                 <property name="visible">True</property>
-                <property name="extension_events">cursor</property>
+                <property name="can_focus">False</property>
                 <child>
                   <object class="GtkAlignment" id="alignment2">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="right_padding">12</property>
                     <child>
                       <object class="GtkImage" id="cover_image">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="stock">gtk-missing-image</property>
                       </object>
                     </child>
@@ -35,16 +42,18 @@
                 <child>
                   <object class="GtkTable" id="table2">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="n_rows">4</property>
                     <property name="n_columns">2</property>
                     <property name="column_spacing">4</property>
                     <child>
                       <object class="GtkLabel" id="length_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">n/a</property>
                         <property name="wrap">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -56,9 +65,10 @@
                     <child>
                       <object class="GtkLabel" id="title_const_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Title :</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="top_attach">2</property>
@@ -68,10 +78,11 @@
                     <child>
                       <object class="GtkLabel" id="title_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">n/a</property>
                         <property name="wrap">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -83,9 +94,10 @@
                     <child>
                       <object class="GtkLabel" id="album_const_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Album :</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="top_attach">1</property>
@@ -95,9 +107,10 @@
                     <child>
                       <object class="GtkLabel" id="length_const_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Length :</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="top_attach">3</property>
@@ -107,13 +120,14 @@
                     <child>
                       <object class="GtkLabel" id="album_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
-                        <property name="yalign">0.49000000953674316</property>
                         <property name="label" translatable="yes">n/a</property>
                         <property name="wrap">True</property>
                         <property name="wrap_mode">word-char</property>
                         <property name="ellipsize">middle</property>
+                        <property name="xalign">0</property>
+                        <property name="yalign">0.49000000953674316</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -125,10 +139,11 @@
                     <child>
                       <object class="GtkLabel" id="artist_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">n/a</property>
                         <property name="wrap">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -138,9 +153,10 @@
                     <child>
                       <object class="GtkLabel" id="artist_const_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Artist :</property>
+                        <property name="xalign">0</property>
                       </object>
                     </child>
                   </object>
@@ -160,14 +176,16 @@
             <child>
               <object class="GtkAlignment" id="alignment4">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="top_padding">36</property>
                 <child>
                   <object class="GtkLabel" id="albums_const_label">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Albums from this artist:</property>
                     <property name="ellipsize">end</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
                   </object>
                 </child>
               </object>
@@ -179,8 +197,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="albums_hbox">
+              <object class="GtkBox" id="albums_hbox">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="spacing">12</property>
               </object>
               <packing>
@@ -192,14 +211,16 @@
             <child>
               <object class="GtkAlignment" id="alignment3">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="top_padding">36</property>
                 <child>
                   <object class="GtkLabel" id="lyrics_const_label">
                     <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Lyrics:</property>
                     <property name="ellipsize">end</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
                   </object>
                 </child>
               </object>
@@ -225,6 +246,8 @@
         </child>
       </object>
       <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
         <property name="position">0</property>
       </packing>
     </child>

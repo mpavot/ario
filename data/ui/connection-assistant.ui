@@ -1,37 +1,46 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
-  <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkVBox" id="vbox">
+  <requires lib="gtk+" version="3.8"/>
+  <object class="GtkBox" id="vbox">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
     <property name="border_width">6</property>
+    <property name="orientation">vertical</property>
     <child>
       <object class="GtkAlignment" id="alignment4">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <property name="left_padding">12</property>
         <child>
-          <object class="GtkVBox" id="connection_vbox">
+          <object class="GtkBox" id="connection_vbox">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="label" translatable="yes">You need to specify a server to connect to. If you don't see your server thanks to the autodetection, you should check that zeroconf/avahi is activated in your server or use the manual configuration.</property>
                 <property name="wrap">True</property>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="padding">12</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkHSeparator" id="hseparator1">
+              <object class="GtkSeparator">
                 <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="can_focus">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -42,6 +51,8 @@
         </child>
       </object>
       <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
         <property name="position">0</property>
       </packing>
     </child>

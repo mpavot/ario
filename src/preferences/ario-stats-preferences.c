@@ -44,7 +44,7 @@ struct ArioStatsPreferencesPrivate
 };
 
 #define ARIO_STATS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATS_PREFERENCES, ArioStatsPreferencesPrivate))
-G_DEFINE_TYPE (ArioStatsPreferences, ario_stats_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioStatsPreferences, ario_stats_preferences, GTK_TYPE_BOX)
 
 static void
 ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
@@ -76,6 +76,8 @@ ario_stats_preferences_new (void)
                                  "state_changed",
                                  G_CALLBACK (ario_stats_preferences_stats_changed_cb),
                                  stats_preferences, 0);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (stats_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "stats-prefs.ui",
                                            stats_preferences);

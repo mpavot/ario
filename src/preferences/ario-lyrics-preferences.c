@@ -59,7 +59,7 @@ enum
 };
 
 #define ARIO_LYRICS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_PREFERENCES, ArioLyricsPreferencesPrivate))
-G_DEFINE_TYPE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_BOX)
 
 static void
 ario_lyrics_preferences_class_init (ArioLyricsPreferencesClass *klass)
@@ -86,6 +86,8 @@ ario_lyrics_preferences_new (void)
         lyrics_preferences = g_object_new (TYPE_ARIO_LYRICS_PREFERENCES, NULL);
 
         g_return_val_if_fail (lyrics_preferences->priv != NULL, NULL);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (lyrics_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "lyrics-prefs.ui",
                                            lyrics_preferences);

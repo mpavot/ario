@@ -100,7 +100,7 @@ gboolean
 ario_cover_size_is_valid (const int size)
 {
         ARIO_LOG_FUNCTION_START;
-        /* return true if the cover isn't too big or too small (blank amazon image) */
+        /* return true if the cover isn't too big or too small (blank image) */
         return (size < 1024 * 1024 * 10 && size > 900);
 }
 

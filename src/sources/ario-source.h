@@ -42,7 +42,7 @@ G_BEGIN_DECLS
  */
 typedef struct _ArioSource
 {
-        GtkHBox parent;
+        GtkBox parent;
 } ArioSource;
 
 /*
@@ -50,7 +50,7 @@ typedef struct _ArioSource
  */
 typedef struct
 {
-        GtkHBoxClass parent;
+        GtkBoxClass parent;
 
         /* Virtual public methods */
 

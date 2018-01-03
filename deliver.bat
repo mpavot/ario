@@ -27,10 +27,6 @@ copy plugins\radios\radios.ario-plugin.w32 bin\plugins\radios.ario-plugin
 copy plugins\information\information.ui bin\plugins
 copy plugins\information\information.ario-plugin.w32 bin\plugins\information.ario-plugin
 
-copy plugins\audioscrobbler\audioscrobbler-prefs.ui bin\plugins
-copy plugins\audioscrobbler\audioscrobbler.ario-plugin.w32 bin\plugins\audioscrobbler.ario-plugin
-copy plugins\audioscrobbler\audioscrobbler.png bin\plugins\icons
-
 mkdir bin\po
 
 for %%a in (po\*.gmo) do (
@@ -41,7 +37,6 @@ for %%a in (po\*.gmo) do (
 
 copy ..\deps\libgcrypt-1.2.2\bin\libgcrypt-11.dll bin
 copy ..\deps\libgcrypt-1.2.2\bin\libgpg-error-0.dll bin
-copy ..\deps\libsoup-2.4-1\bin\libsoup-2.4-1.dll bin
 copy ..\deps\curl-7.19.2\bin\libcurl.dll bin
 copy ..\deps\curl-7.19.2\bin\libeay32.dll bin
 copy ..\deps\curl-7.19.2\bin\libidn-11.dll bin

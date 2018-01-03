@@ -24,8 +24,6 @@ libario_la_SOURCES = \
 	ario-profiles.h\
 	ario-util.c\
 	ario-util.h\
-	covers/ario-cover-amazon.c\
-	covers/ario-cover-amazon.h\
 	covers/ario-cover.c\
 	covers/ario-cover.h\
 	covers/ario-cover-handler.c\

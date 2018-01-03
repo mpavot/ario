@@ -40,9 +40,6 @@
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #define HAVE_LC_MESSAGES 1
 
-/* Define if libsoup 2.4 support is enabled */
-#define HAVE_LIBSOUP_2_4 1
-
 /* Define to 1 if you have the <locale.h> header file. */
 #define HAVE_LOCALE_H 1
 

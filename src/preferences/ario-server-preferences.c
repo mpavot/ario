@@ -70,7 +70,7 @@ enum
 };
 
 #define ARIO_SERVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SERVER_PREFERENCES, ArioServerPreferencesPrivate))
-G_DEFINE_TYPE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_BOX)
 
 static void
 ario_server_preferences_class_init (ArioServerPreferencesClass *klass)
@@ -128,6 +128,8 @@ ario_server_preferences_new (void)
                                  "updatingdb_changed",
                                  G_CALLBACK (ario_server_preferences_server_changed_cb),
                                  server_preferences, 0);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (server_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "server-prefs.ui",
                                            server_preferences);

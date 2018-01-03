@@ -1,28 +1,35 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
-  <!-- interface-naming-policy toplevel-contextual -->
+  <requires lib="gtk+" version="3.8"/>
   <object class="GtkListStore" id="liststore">
     <columns>
       <!-- column-name bmp -->
       <column type="GdkPixbuf"/>
     </columns>
   </object>
-  <object class="GtkVBox" id="vbox">
+  <object class="GtkBox" id="vbox">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
     <child>
-      <object class="GtkHBox" id="hbox1">
+      <object class="GtkBox" id="hbox1">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <child>
-          <object class="GtkVBox" id="vbox2">
+          <object class="GtkBox" id="vbox2">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkHBox" id="hbox2">
+              <object class="GtkBox" id="hbox2">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="spacing">4</property>
                 <child>
                   <object class="GtkLabel" id="static_artist_label">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Artist :</property>
                   </object>
                   <packing>
@@ -34,6 +41,7 @@
                 <child>
                   <object class="GtkLabel" id="artist_label">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label">...</property>
                   </object>
                   <packing>
@@ -50,12 +58,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="hbox3">
+              <object class="GtkBox" id="hbox3">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="spacing">4</property>
                 <child>
                   <object class="GtkLabel" id="static_album_label">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Album :</property>
                   </object>
                   <packing>
@@ -67,6 +77,7 @@
                 <child>
                   <object class="GtkLabel" id="album_label">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label">...</property>
                   </object>
                   <packing>
@@ -93,6 +104,7 @@
         <child>
           <object class="GtkImage" id="current_cover">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="stock">gtk-missing-image</property>
           </object>
           <packing>
@@ -112,12 +124,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkHSeparator" id="hseparator1">
+      <object class="GtkSeparator">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
       </object>
       <packing>
         <property name="expand">False</property>
-        <property name="padding">6</property>
+        <property name="fill">True</property>
         <property name="position">1</property>
       </packing>
     </child>
@@ -126,41 +139,40 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <child>
-          <object class="GtkHBox" id="hbox4">
+          <object class="GtkBox" id="hbox4">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <child>
-              <object class="GtkVBox" id="vbox3">
+              <object class="GtkBox" id="vbox3">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="border_width">11</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">16</property>
                 <child>
-                  <object class="GtkTable" id="table1">
+                  <object class="GtkGrid">
                     <property name="visible">True</property>
-                    <property name="n_rows">2</property>
-                    <property name="n_columns">2</property>
-                    <property name="row_spacing">4</property>
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkLabel" id="label7">
                         <property name="visible">True</property>
-                        <property name="xalign">0</property>
+                        <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Artist :</property>
                       </object>
                       <packing>
-                        <property name="x_options">GTK_FILL</property>
-                        <property name="y_options"></property>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel" id="label8">
                         <property name="visible">True</property>
-                        <property name="xalign">0</property>
+                        <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Album :</property>
                       </object>
                       <packing>
+                        <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options">GTK_FILL</property>
-                        <property name="y_options"></property>
                       </packing>
                     </child>
                     <child>
@@ -171,8 +183,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="y_options"></property>
+                        <property name="top_attach">0</property>
                       </packing>
                     </child>
                     <child>
@@ -183,15 +194,13 @@
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
                         <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="y_options"></property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -202,7 +211,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="ario_shell_coverselect_get_covers_cb"/>
+                    <signal name="clicked" handler="ario_shell_coverselect_get_covers_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -224,13 +233,15 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hscrollbar_policy">never</property>
-                <property name="vscrollbar_policy">automatic</property>
                 <property name="shadow_type">in</property>
                 <child>
                   <object class="GtkTreeView" id="listview">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">liststore</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                         <property name="title">Covers</property>
@@ -246,6 +257,8 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -254,6 +267,7 @@
         <child type="tab">
           <object class="GtkLabel" id="label6">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Search</property>
           </object>
           <packing>
@@ -261,13 +275,16 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox5">
+          <object class="GtkBox" id="vbox5">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="border_width">12</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">20</property>
             <child>
-              <object class="GtkHBox" id="hbox5">
+              <object class="GtkBox" id="hbox5">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="spacing">9</property>
                 <child>
                   <object class="GtkEntry" id="local_file_entry">
@@ -276,6 +293,8 @@
                     <property name="invisible_char">*</property>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -286,7 +305,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="ario_shell_coverselect_local_open_button_cb"/>
+                    <signal name="clicked" handler="ario_shell_coverselect_local_open_button_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -310,6 +329,7 @@
         <child type="tab">
           <object class="GtkLabel" id="static_local_label">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Local search</property>
           </object>
           <packing>
@@ -319,6 +339,8 @@
         </child>
       </object>
       <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
         <property name="position">2</property>
       </packing>
     </child>

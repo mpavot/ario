@@ -470,7 +470,7 @@ ario_shell_construct (ArioShell *shell,
         shell->priv->header = ario_header_new ();
 
         /* Create separator */
-        separator = gtk_hseparator_new ();
+        separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 
         /* Create playlist */
         shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);

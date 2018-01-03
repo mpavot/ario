@@ -50,26 +50,6 @@
 					<Add library="bin\libario.a" />
 				</Linker>
 			</Target>
-			<Target title="audioscrobbler">
-				<Option output="bin\plugins\libaudioscrobbler" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin\plugins\" />
-				<Option object_output="obj\audioscrobbler\" />
-				<Option type="3" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-					<Add option="-Wall" />
-					<Add option="-DBUILD_DLL" />
-					<Add option="-DHAVE_LIBSOUP_2_4" />
-					<Add directory="..\deps\libsoup-2.4-1\" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-					<Add library="user32" />
-					<Add library="bin\libario.a" />
-					<Add library="..\deps\libsoup-2.4-1\bin\libsoup-2.4-1.a" />
-				</Linker>
-			</Target>
 			<Target title="filesystem">
 				<Option output="bin\plugins\libfilesystem" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin\filesystem\" />
@@ -140,7 +120,7 @@
 			</Target>
 		</Build>
 		<VirtualTargets>
-			<Add alias="all" targets="ariodll;Debug;Release;audioscrobbler;filesystem;information;radios;wikipedia;" />
+			<Add alias="all" targets="ariodll;Debug;Release;filesystem;information;radios;wikipedia;" />
 		</VirtualTargets>
 		<Compiler>
 			<Add option="-Wall" />
@@ -197,17 +177,6 @@
 		</ExtraCommands>
 		<Unit filename="config.h">
 			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="plugins\audioscrobbler\ario-audioscrobbler-plugin.c">
-			<Option compilerVar="CC" />
-			<Option target="audioscrobbler" />
-		</Unit>
-		<Unit filename="plugins\audioscrobbler\ario-audioscrobbler.c">
-			<Option compilerVar="CC" />
-			<Option target="audioscrobbler" />
-		</Unit>
-		<Unit filename="plugins\audioscrobbler\ario-audioscrobbler.h">
-			<Option target="audioscrobbler" />
 		</Unit>
 		<Unit filename="plugins\filesystem\ario-filesystem-plugin.c">
 			<Option compilerVar="CC" />
@@ -286,13 +255,6 @@
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\ario-util.h">
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\covers\ario-cover-amazon.c">
-			<Option compilerVar="CC" />
-			<Option target="ariodll" />
-		</Unit>
-		<Unit filename="src\covers\ario-cover-amazon.h">
 			<Option target="ariodll" />
 		</Unit>
 		<Unit filename="src\covers\ario-cover-handler.c">

@@ -36,14 +36,14 @@ typedef struct ArioPlaylistPreferencesPrivate ArioPlaylistPreferencesPrivate;
 
 typedef struct
 {
-        GtkVBox parent;
+        GtkBox parent;
 
         ArioPlaylistPreferencesPrivate *priv;
 } ArioPlaylistPreferences;
 
 typedef struct
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 } ArioPlaylistPreferencesClass;
 
 GType              ario_playlist_preferences_get_type         (void) G_GNUC_CONST;

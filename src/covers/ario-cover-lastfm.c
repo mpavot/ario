@@ -108,6 +108,7 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
         xmlChar *attr;
         GSList *ario_cover_uris = NULL;
 
+        xmlKeepBlanksDefault(0);
         doc = xmlParseMemory (xmldata, size);
 
         if (doc == NULL ) {
@@ -130,7 +131,7 @@ ario_cover_lastfm_parse_xml_file (char *xmldata,
         }
 
         /* The real representation is the first children of the "lfm" node */
-        cur = cur->xmlChildrenNode->next;
+        cur = cur->xmlChildrenNode;
 
         /* We check that the root node name is "album" */
         if (xmlStrcmp (cur->name, (const xmlChar *) "album")) {
