@@ -179,14 +179,6 @@ ario_information_class_init (ArioInformationClass *klass)
         g_type_class_add_private (klass, sizeof (ArioInformationPrivate));
 }
 
-static void ario_information_style_set_cb (GtkWidget *vbox,
-                                           GtkStyle *style,
-                                           GtkWidget *vp)
-{
-        /* Set white background */
-        gtk_widget_modify_bg (vp, GTK_STATE_NORMAL, &(gtk_widget_get_style (GTK_WIDGET(vbox))->light[GTK_STATE_NORMAL]));
-}
-
 static gboolean
 ario_information_button_press_cb (GtkWidget *widget,
                                   GdkEventButton *event,
@@ -226,10 +218,6 @@ ario_information_init (ArioInformation *information)
 
         /* Get main vbox */
         vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
-        g_signal_connect (vbox,
-                          "style-set",
-                          G_CALLBACK (ario_information_style_set_cb),
-                          vp);
 
         /* Get pointers to various widgets */
         information->priv->artist_label = GTK_WIDGET (gtk_builder_get_object (builder, "artist_label"));

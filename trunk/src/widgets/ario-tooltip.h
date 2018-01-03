@@ -40,14 +40,14 @@ typedef struct ArioTooltipPrivate ArioTooltipPrivate;
  */
 typedef struct
 {
-        GtkHBox parent;
+        GtkBox parent;
 
         ArioTooltipPrivate *priv;
 } ArioTooltip;
 
 typedef struct
 {
-        GtkHBoxClass parent_class;
+        GtkBoxClass parent_class;
 } ArioTooltipClass;
 
 GType                  ario_tooltip_get_type         (void) G_GNUC_CONST;

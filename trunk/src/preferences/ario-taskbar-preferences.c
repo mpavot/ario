@@ -52,7 +52,7 @@ struct ArioTaskbarPreferencesPrivate
 };
 
 #define ARIO_TASKBAR_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TASKBAR_PREFERENCES, ArioTaskbarPreferencesPrivate))
-G_DEFINE_TYPE (ArioTaskbarPreferences, ario_taskbar_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioTaskbarPreferences, ario_taskbar_preferences, GTK_TYPE_BOX)
 
 static void
 ario_taskbar_preferences_class_init (ArioTaskbarPreferencesClass *klass)
@@ -82,6 +82,8 @@ ario_taskbar_preferences_new (void)
         taskbar_preferences = g_object_new (TYPE_ARIO_TASKBAR_PREFERENCES, NULL);
 
         g_return_val_if_fail (taskbar_preferences->priv != NULL, NULL);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (taskbar_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "trayicon-prefs.ui",
                                            taskbar_preferences);

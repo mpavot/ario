@@ -12,7 +12,3 @@ if USE_NOTIFY
         SUBDIRS += libnotify
 endif
 
-if USE_AUDIOSCROBBLER
-        SUBDIRS += audioscrobbler
-endif
-

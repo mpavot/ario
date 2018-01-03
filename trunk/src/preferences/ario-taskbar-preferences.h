@@ -36,14 +36,14 @@ typedef struct ArioTaskbarPreferencesPrivate ArioTaskbarPreferencesPrivate;
 
 typedef struct
 {
-        GtkVBox parent;
+        GtkBox parent;
 
         ArioTaskbarPreferencesPrivate *priv;
 } ArioTaskbarPreferences;
 
 typedef struct
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 } ArioTaskbarPreferencesClass;
 
 GType              ario_taskbar_preferences_get_type         (void) G_GNUC_CONST;

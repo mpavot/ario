@@ -1,40 +1,61 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
-  <!-- interface-naming-policy toplevel-contextual -->
+  <requires lib="gtk+" version="3.8"/>
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="value">1</property>
     <property name="lower">1</property>
     <property name="upper">5</property>
+    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkVBox" id="browser_vbox">
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name sort -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Alphabetically</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">By year</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkBox" id="browser_vbox">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
     <child>
       <object class="GtkFrame" id="organisation_frame">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
         <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="left_padding">12</property>
             <child>
-              <object class="GtkVBox" id="vbox">
+              <object class="GtkBox" id="vbox">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkBox" id="hbox1">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkSpinButton" id="treesnb_spinbutton">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="adjustment">adjustment1</property>
-                        <signal name="value_changed" handler="ario_browser_preferences_treesnb_changed_cb"/>
+                        <signal name="value-changed" handler="ario_browser_preferences_treesnb_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -50,11 +71,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="trees_hbox">
+                  <object class="GtkBox" id="trees_hbox">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="spacing">6</property>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -65,6 +89,7 @@
         <child type="label">
           <object class="GtkLabel" id="organisation_label">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Library Organisation</property>
           </object>
         </child>
@@ -78,24 +103,30 @@
     <child>
       <object class="GtkFrame" id="options_frame">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <property name="border_width">10</property>
         <property name="label_xalign">0</property>
         <property name="shadow_type">in</property>
         <child>
           <object class="GtkAlignment" id="alignment">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="left_padding">12</property>
             <child>
-              <object class="GtkVBox" id="vbox1">
+              <object class="GtkBox" id="vbox1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkHBox" id="hbox3">
+                  <object class="GtkBox" id="hbox3">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkLabel" id="sort_label">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Sort albums: </property>
                       </object>
                       <packing>
@@ -107,8 +138,9 @@
                     <child>
                       <object class="GtkComboBox" id="sort_combobox">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="model">liststore</property>
-                        <signal name="changed" handler="ario_browser_preferences_sort_changed_cb"/>
+                        <signal name="changed" handler="ario_browser_preferences_sort_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="sort_renderer"/>
                           <attributes>
@@ -124,6 +156,8 @@
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -134,6 +168,7 @@
         <child type="label">
           <object class="GtkLabel" id="options_label">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Library Options</property>
           </object>
         </child>
@@ -144,19 +179,5 @@
         <property name="position">1</property>
       </packing>
     </child>
-  </object>
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name sort -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Alphabetically</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">By year</col>
-      </row>
-    </data>
   </object>
 </interface>

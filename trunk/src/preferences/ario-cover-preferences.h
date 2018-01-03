@@ -36,14 +36,14 @@ typedef struct ArioCoverPreferencesPrivate ArioCoverPreferencesPrivate;
 
 typedef struct
 {
-        GtkVBox parent;
+        GtkBox parent;
 
         ArioCoverPreferencesPrivate *priv;
 } ArioCoverPreferences;
 
 typedef struct
 {
-        GtkVBoxClass parent_class;
+        GtkBoxClass parent_class;
 } ArioCoverPreferencesClass;
 
 GType              ario_cover_preferences_get_type         (void) G_GNUC_CONST;

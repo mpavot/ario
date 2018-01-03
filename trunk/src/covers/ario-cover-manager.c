@@ -23,7 +23,6 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
-#include "covers/ario-cover-amazon.h"
 #include "covers/ario-cover-lastfm.h"
 #include "covers/ario-cover-local.h"
 #include "preferences/ario-preferences.h"
@@ -66,10 +65,6 @@ ario_cover_manager_get_instance (void)
                 g_return_val_if_fail (cover_manager->priv != NULL, NULL);
 
                 cover_provider = ario_cover_local_new ();
-                ario_cover_manager_add_provider (cover_manager,
-                                                 ARIO_COVER_PROVIDER (cover_provider));
-
-                cover_provider = ario_cover_amazon_new ();
                 ario_cover_manager_add_provider (cover_manager,
                                                  ARIO_COVER_PROVIDER (cover_provider));
 

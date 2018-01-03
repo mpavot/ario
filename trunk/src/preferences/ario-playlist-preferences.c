@@ -76,7 +76,7 @@ struct ArioPlaylistPreferencesPrivate
 };
 
 #define ARIO_PLAYLIST_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_PREFERENCES, ArioPlaylistPreferencesPrivate))
-G_DEFINE_TYPE (ArioPlaylistPreferences, ario_playlist_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioPlaylistPreferences, ario_playlist_preferences, GTK_TYPE_BOX)
 
 static void
 ario_playlist_preferences_class_init (ArioPlaylistPreferencesClass *klass)
@@ -106,6 +106,8 @@ ario_playlist_preferences_new (void)
         playlist_preferences = g_object_new (TYPE_ARIO_PLAYLIST_PREFERENCES, NULL);
 
         g_return_val_if_fail (playlist_preferences->priv != NULL, NULL);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (playlist_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "playlist-prefs.ui",
                                            playlist_preferences);

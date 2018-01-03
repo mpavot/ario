@@ -32,10 +32,6 @@
 #define PREF_AUTOMATIC_GET_COVER                "automatic_get_cover"
 #define PREF_AUTOMATIC_GET_COVER_DEFAULT        TRUE
 
-/* The amazon country to use to get the covers (.com .fr .de .uk or .ca..) */
-#define PREF_COVER_AMAZON_COUNTRY               "ario_cover_amazon_country"
-#define PREF_COVER_AMAZON_COUNTRY_DEFAULT       "com"
-
 /* Define if Ario must use a proxy for remote connections */
 #define PREF_USE_PROXY                          "use_proxy"
 #define PREF_USE_PROXY_DEFAULT                  FALSE
@@ -198,11 +194,11 @@
 
 /* Ordered list of covers providers */
 #define PREF_COVER_PROVIDERS_LIST               "cover-providers"
-#define PREF_COVER_PROVIDERS_LIST_DEFAULT       "local,amazon,lastfm"
+#define PREF_COVER_PROVIDERS_LIST_DEFAULT       "local,lastfm"
 
 /* List of active covers providers */
 #define PREF_COVER_ACTIVE_PROVIDERS_LIST         "active-cover-providers"
-#define PREF_COVER_ACTIVE_PROVIDERS_LIST_DEFAULT "local,amazon,lastfm"
+#define PREF_COVER_ACTIVE_PROVIDERS_LIST_DEFAULT "local,lastfm"
 
 /* Ordered list of lyrics providers */
 #define PREF_LYRICS_PROVIDERS_LIST              "lyrics-providers"

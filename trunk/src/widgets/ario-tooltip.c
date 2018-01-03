@@ -59,7 +59,7 @@ struct ArioTooltipPrivate
 };
 
 #define ARIO_TOOLTIP_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TOOLTIP, ArioTooltipPrivate))
-G_DEFINE_TYPE (ArioTooltip, ario_tooltip, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (ArioTooltip, ario_tooltip, GTK_TYPE_BOX)
 
 static void
 ario_tooltip_class_init (ArioTooltipClass *klass)
@@ -159,6 +159,8 @@ ario_tooltip_construct_tooltip (ArioTooltip *tooltip)
         GtkWidget *vbox;
         gint size;
         PangoFontDescription *font_desc;
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (tooltip), GTK_ORIENTATION_HORIZONTAL);
 
         /* Create primary label */
         tooltip->priv->tooltip_primary = gtk_label_new (TRAY_ICON_DEFAULT_TOOLTIP);
