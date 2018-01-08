@@ -56,7 +56,7 @@ WARN_CFLAGS="-Wall \
 -Wnested-externs -Wpointer-arith \
 -Wcast-align -Wpointer-sign \
 -Wclobbered -Wempty-body -Wignored-qualifiers \
--Wmissing-field-initializers -Wmissing-parameter-type \
+-Wmissing-parameter-type \
 -Wold-style-declaration -Woverride-init \
 -Wsign-compare -Wtype-limits -Wuninitialized \
 -Wold-style-definition"
@@ -173,6 +173,9 @@ if test "x$enable_python" = "xyes"; then
 	AC_SUBST([PYGTK_H2DEF])
 fi
 AM_CONDITIONAL(ENABLE_PYTHON, test x"$enable_python" = xyes)
+
+# Silence warning: ar: 'u' modifier ignored since 'D' is the default
+AC_SUBST(AR_FLAGS, [cr])
 
 dnl ================================================================
 dnl Search
