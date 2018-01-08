@@ -29,9 +29,9 @@
 #include "ario-debug.h"
 #include <curl/curl.h>
 
-#define LETRAS_URI "http://letras.terra.com.br/winamp.php?t=%s%%20-%%20%s"
-#define LETRAS_ARTIST_URI "http://letras.terra.com.br/winamp.php?t=%s"
-#define LETRAS_SONG_URI "http://letras.terra.com.br/winamp.php?t=%s"
+#define LETRAS_URI "http://letras.mus.br/winamp.php?t=%s%%20-%%20%s"
+#define LETRAS_ARTIST_URI "http://letras.mus.br/winamp.php?t=%s"
+#define LETRAS_SONG_URI "http://letras.mus.br/winamp.php?t=%s"
 
 ArioLyrics* ario_lyrics_letras_get_lyrics (ArioLyricsProvider *lyrics_provider,
                                            const char *artist,
@@ -106,16 +106,17 @@ ario_lyrics_letras_parse_file (gchar *data,
         if (!begin)
                 return NULL;
 
-        begin = strstr (begin, "<p>");
-        begin += strlen("<p>");
+        begin = strstr (begin, "<p><p>");
+        begin += strlen("<p><p>");
 
-        end = strstr (begin, "</p>");
+        end = strstr (begin, "</p></p>");
         if (!end)
                 return NULL;
 
         lyrics = (ArioLyrics *) g_malloc0 (sizeof (ArioLyrics));
         lyrics->lyrics = g_strndup (begin, end - begin);
-        ario_util_string_replace (&lyrics->lyrics, "<br/>", "");
+        ario_util_string_replace (&lyrics->lyrics, "<br/>", "\n");
+        ario_util_string_replace (&lyrics->lyrics, "</p><p>", "\n\n");
 
         tmp = ario_util_convert_from_iso8859 (lyrics->lyrics);
         g_free (lyrics->lyrics);
