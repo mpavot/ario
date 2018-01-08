@@ -538,10 +538,10 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (viewport),
                                              GTK_SHADOW_IN);
 
-        gtk_box_pack_start (GTK_BOX (pm), viewport, TRUE, TRUE, 0);
 
         pm->priv->tree = gtk_tree_view_new ();
         gtk_container_add (GTK_CONTAINER (viewport), pm->priv->tree);
+        gtk_box_pack_start (GTK_BOX (pm), viewport, TRUE, TRUE, 0);
 
         hbuttonbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
         gtk_box_pack_start (GTK_BOX (pm), hbuttonbox, FALSE, FALSE, 0);
@@ -555,7 +555,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->configure_button);
 
         /* setup a window of a sane size. */
-        gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 100);
+        gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 300);
 
         g_signal_connect (pm->priv->about_button,
                           "clicked",
