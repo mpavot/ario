@@ -20,6 +20,11 @@ art_DATA = ario.png		\
 
 uidir = $(pkgdatadir)/ui
 ui_DATA = ario-ui.xml \
+	     ui/ario-shell-menu.ui      \
+	     ui/ario-playlist-menu.ui   \
+	     ui/ario-browser-menu.ui   	\
+	     ui/ario-search-menu.ui   	\
+	     ui/ario-storedpl-menu.ui   \
 	     ui/browser-prefs.ui	\
 	     ui/connection-autodetect.ui	\
 	     ui/connection-prefs.ui	\

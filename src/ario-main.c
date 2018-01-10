@@ -38,12 +38,14 @@
 #include <windows.h>
 #endif
 
-static ArioShell *shell = NULL;
+static GtkWidget *shell = NULL;
 static gboolean minimized = FALSE;
 
 static void
 activate (GtkApplication *app)
 {
+        //TODO
+#if 0
         GList *list;
 
         list = gtk_application_get_windows (app);
@@ -55,6 +57,8 @@ activate (GtkApplication *app)
         } else {
                 gtk_window_set_application (GTK_WINDOW (shell), app);
         }
+#endif
+        gtk_window_present (GTK_WINDOW (shell));
 }
 
 int
@@ -121,13 +125,15 @@ main (int argc, char *argv[])
 #endif
         /* Creates Ario main window */
         GtkApplication *app;
-        app = gtk_application_new ("org.Ario", 0);
+        app = gtk_application_new ("org.Ario", G_APPLICATION_FLAGS_NONE);
+        g_application_register (G_APPLICATION (app), NULL, NULL);
         shell = ario_shell_new (app);
         ario_shell_construct (shell, minimized);
         g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
 
         /* Initialisation of plugins engine */
-        ario_plugins_engine_init (shell);
+        // TODO
+        // ario_plugins_engine_init (shell);
 
         /* Starts GTK main loop */
         status = g_application_run (G_APPLICATION (app), argc, argv);

@@ -41,14 +41,14 @@ typedef struct ArioShellPrivate ArioShellPrivate;
 
 typedef struct
 {
-        GtkWindow parent;
+        GtkApplicationWindow parent;
 
         ArioShellPrivate *priv;
 } ArioShell;
 
 typedef struct
 {
-        GtkWindowClass parent_class;
+        GtkApplicationWindowClass parent_class;
 } ArioShellClass;
 
 /* Main Window visibility */

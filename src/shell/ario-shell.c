@@ -73,10 +73,6 @@ static void ario_shell_cmd_preferences (GtkAction *action,
                                         ArioShell *shell);
 static void ario_shell_cmd_lyrics (GtkAction *action,
                                    ArioShell *shell);
-static void ario_shell_cmd_previous_tab (GtkAction *action,
-                                         ArioShell *shell);
-static void ario_shell_cmd_next_tab (GtkAction *action,
-                                     ArioShell *shell);
 static void ario_shell_cmd_cover_select (GtkAction *action,
                                          ArioShell *shell);
 static void ario_shell_cmd_covers (GtkAction *action,
@@ -87,8 +83,6 @@ static void ario_shell_cmd_add_similar (GtkAction *action,
                                         ArioShell *shell);
 static void ario_shell_cmd_about (GtkAction *action,
                                   ArioShell *shell);
-static void ario_shell_cmd_translate (GtkAction *action,
-                                      ArioShell *shell);
 static void ario_shell_server_state_changed_cb (ArioServer *server,
                                                 ArioShell *shell);
 static void ario_shell_server_song_changed_cb (ArioServer *server,
@@ -130,9 +124,6 @@ struct ArioShellPrivate
         GtkWidget *vbox;
         GtkWidget *hbox;
 
-        GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
-
         ArioTrayIcon *tray_icon;
 
         gboolean statusbar_hidden;
@@ -153,8 +144,6 @@ struct ArioShellPrivate
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER,
-        PROP_ACTION_GROUP
 };
 
 static GtkActionEntry shell_actions [] =
@@ -196,21 +185,12 @@ static GtkActionEntry shell_actions [] =
         { "ToolAddSimilar", "list-add", N_("Add similar songs to playlist"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_add_similar) },
-        { "ViewGoPrevious", "go-previous", N_("Go to _previous tab"), "<control>Page_Up",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_previous_tab) },
-        { "ViewGoNext", "go-next", N_("Go to _next tab"), "<control>Page_Down",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_next_tab) },
         { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_lyrics) },
         { "HelpAbout", "help-about", N_("_About"), NULL,
                 NULL,
                 G_CALLBACK (ario_shell_cmd_about) },
-        { "HelpTranslate", GTK_STOCK_EDIT, N_("_Translate this application..."), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_translate) },
 };
 
 static GtkToggleActionEntry shell_toggle [] =
@@ -227,7 +207,7 @@ static GtkToggleActionEntry shell_toggle [] =
 };
 
 #define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SHELL, ArioShellPrivate))
-G_DEFINE_TYPE (ArioShell, ario_shell, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (ArioShell, ario_shell, GTK_TYPE_APPLICATION_WINDOW)
 
 static void
 ario_shell_class_init (ArioShellClass *klass)
@@ -239,22 +219,6 @@ ario_shell_class_init (ArioShellClass *klass)
         object_class->set_property = ario_shell_set_property;
         object_class->get_property = ario_shell_get_property;
         object_class->finalize = ario_shell_finalize;
-
-        /* Properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-        g_object_class_install_property (object_class,
-                                         PROP_ACTION_GROUP,
-                                         g_param_spec_object ("action-group",
-                                                              "GtkActionGroup",
-                                                              "GtkActionGroup object",
-                                                              GTK_TYPE_ACTION_GROUP,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioShellPrivate));
@@ -291,8 +255,6 @@ ario_shell_finalize (GObject *object)
         g_object_unref (shell->priv->notification_manager);
         g_object_unref (G_OBJECT (shell->priv->tray_icon));
 
-        g_object_unref (shell->priv->ui_manager);
-        g_object_unref (shell->priv->actiongroup);
         g_object_unref (ario_server_get_instance ());
 
         G_OBJECT_CLASS (ario_shell_parent_class)->finalize (object);
@@ -308,12 +270,6 @@ ario_shell_set_property (GObject *object,
         ArioShell *shell = ARIO_SHELL (object);
 
         switch (prop_id) {
-        case PROP_UI_MANAGER:
-                shell->priv->ui_manager = g_value_get_object (value);
-                break;
-        case PROP_ACTION_GROUP:
-                shell->priv->actiongroup = g_value_get_object (value);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -330,12 +286,6 @@ ario_shell_get_property (GObject *object,
         ArioShell *shell = ARIO_SHELL (object);
 
         switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, shell->priv->ui_manager);
-                break;
-        case PROP_ACTION_GROUP:
-                g_value_set_object (value, shell->priv->actiongroup);
-                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -364,7 +314,7 @@ ario_shell_quit (ArioShell *shell)
                 ario_server_do_stop ();
 
         /* Stop main loop */
-        g_application_quit (shell->priv->app);
+        g_application_quit (G_APPLICATION (shell->priv->app));
 }
 
 static gboolean
@@ -381,17 +331,32 @@ ario_shell_window_delete_cb (GtkWidget *win,
         return TRUE;
 };
 
+static void
+quit_cb (GSimpleAction *action,
+         GVariant *parameter,
+         ArioShell *shell)
+{
+        ario_shell_quit (shell);
+}
+
+const GActionEntry app_actions[] = {
+          { "quit", quit_cb }
+};
+
 void
 ario_shell_construct (ArioShell *shell,
                       gboolean minimized)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *menubar;
         GtkWidget *separator;
-        GtkAction *action;
+        GtkAction *gtk_action;
+        GAction *action;
         ArioFirstlaunch *firstlaunch;
+        GtkBuilder *builder;
+        GMenu *menu;
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
+        gtk_window_set_application (GTK_WINDOW (shell), shell->priv->app);
 
         /* Set main window properties */
         gtk_window_set_title (GTK_WINDOW (shell), "Ario");
@@ -407,31 +372,13 @@ ario_shell_construct (ArioShell *shell,
                           shell);
 
         /* Initialize UI */
-        shell->priv->ui_manager = gtk_ui_manager_new ();
-        gtk_ui_manager_add_ui_from_file (shell->priv->ui_manager,
-                                         UI_PATH "ario-ui.xml", NULL);
+        g_action_map_add_action_entries (G_ACTION_MAP (shell->priv->app), app_actions, G_N_ELEMENTS (app_actions), shell);
 
-        /* Create Action Group */
-        shell->priv->actiongroup = gtk_action_group_new ("MainActions");
-        gtk_window_add_accel_group (GTK_WINDOW (shell),
-                                    gtk_ui_manager_get_accel_group (shell->priv->ui_manager));
-        gtk_action_group_set_translation_domain (shell->priv->actiongroup,
-                                                 GETTEXT_PACKAGE);
-        gtk_ui_manager_insert_action_group (shell->priv->ui_manager,
-                                            shell->priv->actiongroup, 0);
-#ifdef WIN32
-        /* This seems to be needed on win32 */
-        gtk_action_group_set_translate_func (shell->priv->actiongroup,
-                                             (GtkTranslateFunc) gettext,
-                                             NULL, NULL);
-#endif
-        /* Main window actions */
-        gtk_action_group_add_actions (shell->priv->actiongroup,
-                                      shell_actions, G_N_ELEMENTS (shell_actions),
-                                      shell);
-        gtk_action_group_add_toggle_actions (shell->priv->actiongroup,
-                                             shell_toggle, G_N_ELEMENTS (shell_toggle),
-                                             shell);
+        builder = gtk_builder_new_from_file (UI_PATH "ario-shell-menu.ui");
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "menu"));
+        gtk_application_set_app_menu (shell->priv->app,
+                                      G_MENU_MODEL (menu));
+        g_object_unref (builder);
 
         /* Initialize server object (MPD, XMMS, ....) */
         ario_server_get_instance ();
@@ -440,9 +387,10 @@ ario_shell_construct (ArioShell *shell,
         shell->priv->cover_handler = ario_cover_handler_new ();
 
         /* Initialize tray icon */
-        shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
-                                                     shell->priv->ui_manager,
-                                                     shell);
+        // TODO
+        //shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
+        //                                             shell->priv->ui_manager,
+        //                                             shell);
 
         /* Initialize playlist manager */
         shell->priv->playlist_manager = ario_playlist_manager_get_instance ();
@@ -453,7 +401,6 @@ ario_shell_construct (ArioShell *shell,
         /* Add widgets to main window.
          * Structure is:
          * vbox
-         * ---menubar
          * ---header
          * ---separator
          * ---hbox
@@ -473,12 +420,13 @@ ario_shell_construct (ArioShell *shell,
         separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 
         /* Create playlist */
-        shell->priv->playlist = ario_playlist_new (shell->priv->ui_manager, shell->priv->actiongroup);
+        shell->priv->playlist = ario_playlist_new ();
         g_object_ref (shell->priv->playlist);
 
         /* Create source manager */
-        shell->priv->sourcemanager = ario_source_manager_get_instance (shell->priv->ui_manager, shell->priv->actiongroup);
-        g_object_ref (shell->priv->sourcemanager);
+        // TODO
+        // shell->priv->sourcemanager = ario_source_manager_get_instance ();
+        // g_object_ref (shell->priv->sourcemanager);
 
         /* Create the hbox(for tabs and playlist) */
         shell->priv->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -486,35 +434,29 @@ ario_shell_construct (ArioShell *shell,
         /* Create status bar */
         shell->priv->status_bar = ario_status_bar_new ();
 
+#if 0// TODO
         /* Synchronize status bar checkbox in menu with preferences */
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
+        gtk_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewStatusbar");
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action),
                                       !shell->priv->statusbar_hidden);
 
         /* Synchronize upper part checkbox in menu with preferences */
         shell->priv->upperpart_hidden = ario_conf_get_boolean (PREF_UPPERPART_HIDDEN, PREF_UPPERPART_HIDDEN_DEFAULT);
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
+        gtk_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewUpperPart");
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action),
                                       !shell->priv->upperpart_hidden);
 
         /* Synchronize playlist checkbox in menu with preferences */
         shell->priv->playlist_hidden = ario_conf_get_boolean (PREF_PLAYLIST_HIDDEN, PREF_PLAYLIST_HIDDEN_DEFAULT);
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
+        gtk_action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ViewPlaylist");
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action),
                                       !shell->priv->playlist_hidden);
-
-        /* Create main window menu */
-        menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MenuBar");
-
+#endif
         /* Add widgets to vbox */
-        gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
-                            menubar,
-                            FALSE, FALSE, 0);
-
         gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
                             shell->priv->header,
                             FALSE, FALSE, 0);
@@ -788,22 +730,6 @@ ario_shell_cmd_lyrics (GtkAction *action,
 }
 
 static void
-ario_shell_cmd_previous_tab (GtkAction *action,
-                             ArioShell *shell)
-{
-        gtk_widget_grab_focus (shell->priv->sourcemanager);
-        gtk_notebook_prev_page (GTK_NOTEBOOK (shell->priv->sourcemanager));
-}
-
-static void
-ario_shell_cmd_next_tab (GtkAction *action,
-                         ArioShell *shell)
-{
-        gtk_widget_grab_focus (shell->priv->sourcemanager);
-        gtk_notebook_next_page (GTK_NOTEBOOK (shell->priv->sourcemanager));
-}
-
-static void
 ario_shell_cmd_about (GtkAction *action,
                       ArioShell *shell)
 {
@@ -833,16 +759,6 @@ ario_shell_cmd_about (GtkAction *action,
                                NULL);
         if (logo_pixbuf)
                 g_object_unref (logo_pixbuf);
-}
-
-static void
-ario_shell_cmd_translate (GtkAction *action,
-                          ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START;
-        /* Load launchpad translation page */
-        const gchar *uri = "https://translations.launchpad.net/ario/trunk/";
-        ario_util_load_uri (uri);
 }
 
 static void
@@ -1030,7 +946,7 @@ ario_shell_sync_server (ArioShell *shell)
         GtkAction *disconnect_action;
         gboolean is_playing;
         GtkAction *action;
-
+#if 0// TODO
         /* Set connect entry visibility 
          * I don't know why but I need to first force visibility to TRUE otherwise
          * the FALSE value is not taken into account at program startup
@@ -1069,6 +985,7 @@ ario_shell_sync_server (ArioShell *shell)
         action = gtk_action_group_get_action (shell->priv->actiongroup,
                                               "ToolAddSimilar");
         gtk_action_set_sensitive (action, is_playing);
+#endif
 }
 
 static void
@@ -1077,7 +994,7 @@ ario_shell_sync_control (ArioShell *shell)
         ARIO_LOG_FUNCTION_START;
         GtkAction *action;
         int state = ario_server_get_current_state ();
-
+#if 0// TODO
         /* Set Play entry visibility 
          * I don't know why but I need to first force visibility to TRUE otherwise
          * the FALSE value is not taken into account at program startup
@@ -1092,6 +1009,7 @@ ario_shell_sync_control (ArioShell *shell)
                                               "ControlPause");
         gtk_action_set_visible (action, TRUE);
         gtk_action_set_visible (action, state == ARIO_STATE_PLAY);
+#endif
 }
 
 static void

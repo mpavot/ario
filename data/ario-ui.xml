@@ -1,72 +1,4 @@
 <ui>
-        <menubar name="MenuBar">
-
-                <menu name="FileMenu" action="File">
-                        <menuitem name="FileConnect" action="FileConnect"/>
-                        <menuitem name="FileDisconnect" action="FileDisconnect"/>
-                        <separator/>
-                        <menuitem name="FileServerUpdate" action="FileServerUpdate"/>
-                        <separator/>
-                        <menuitem name="FileSave" action="PlaylistSave"/>
-                        <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>
-                        <placeholder name="FileMenuPluginPlaceholder" />
-                        <separator/>
-                        <menuitem name="FileQuit" action="FileQuit"/>
-                </menu>
-
-                <menu name="EditMenu" action="Edit">
-                        <menuitem name="EditPlaylistRemove" action="PlaylistRemove"/>
-                        <menuitem name="EditPlaylistCrop" action="PlaylistCrop"/>
-                        <menuitem name="EditPlaylistClear" action="PlaylistClear"/>
-                        <menuitem name="EditPlaylistSearch" action="PlaylistSearch"/>
-                        <separator/>
-                        <menuitem name="EditPluginsMenu" action="EditPlugins"/>
-                        <menuitem name="EditPreferencesMenu" action="EditPreferences"/>
-                        <placeholder name="EditMenuPluginPlaceholder" />
-                </menu>
-
-                <menu name="ViewMenu" action="View">
-                        <menuitem name="ViewUpperPartMenu" action="ViewUpperPart"/>
-                        <menuitem name="ViewPlaylistMenu" action="ViewPlaylist"/>
-                        <separator/>
-                        <placeholder name="ViewMenuSourcesPlaceholder" />
-                        <separator/>
-                        <menuitem name="ViewStatusbarMenu" action="ViewStatusbar"/>
-                        <separator/>
-                        <menuitem name="ViewGoPreviousMenu" action="ViewGoPrevious"/>
-                        <menuitem name="ViewGoNextManu" action="ViewGoNext"/>
-                        <separator/>
-                        <menuitem name="LyricsMenu" action="ViewLyrics"/>
-                        <placeholder name="ViewMenuPluginPlaceholder" />
-                </menu>
-
-                <menu name="ControlMenu" action="Control">
-                        <menuitem name="ControlPlay" action="ControlPlay"/>
-                        <menuitem name="ControlPause" action="ControlPause"/>
-                        <menuitem name="ControlStop" action="ControlStop"/>
-                        <separator/>
-                        <menuitem name="ControlNext" action="ControlNext"/>
-                        <menuitem name="ControlPrevious" action="ControlPrevious"/>
-                        <placeholder name="ControlMenuPluginPlaceholder" />
-                </menu>
-
-                <menu name="ToolMenu" action="Tool">
-                        <menuitem name="ToolCoverSelectMenu" action="ToolCoverSelect"/>
-                        <menuitem name="ToolCoverMenu" action="ToolCover"/>
-                        <menuitem name="ToolSimilarArtistMenu" action="ToolSimilarArtist"/>
-                        <menuitem name="ToolAddSimilarMenu" action="ToolAddSimilar"/>
-                        <placeholder name="ToolMenuPluginPlaceholder" />
-                </menu>
-
-                <menu name="HelpMenu" action="Help">
-                        <menuitem name="HelpTranslateMenu" action="HelpTranslate"/>
-                        <separator/>
-                        <menuitem name="HelpAboutMenu" action="HelpAbout"/>
-                        <placeholder name="HelpMenuPluginPlaceholder" />
-                </menu>
-
-        </menubar>
-
         <popup name="TrayPopup">
                 <menuitem name="PlayTray" action="ControlPlay"/>
                 <menuitem name="PauseTray" action="ControlPause"/>
@@ -77,19 +9,6 @@
                 <placeholder name="TrayPopupPluginPlaceholder" />
                 <separator/>
                 <menuitem name="FileQuit" action="FileQuit"/>
-        </popup>
-
-        <popup name="PlaylistPopup">
-                <menuitem name="PlaylistRemove" action="PlaylistRemove"/>
-                <menuitem name="PlaylistCrop" action="PlaylistCrop"/>
-                <menuitem name="PlaylistClear" action="PlaylistClear"/>
-                <separator/>
-                <menuitem name="PlaylistGotoPlaying" action="PlaylistGotoPlaying"/>
-                <menuitem name="PlaylistShuffle" action="PlaylistShuffle"/>
-                <menuitem name="PlaylistSave" action="PlaylistSave"/>
-                <placeholder name="PlaylistPopupPluginPlaceholder" />
-                <separator/>
-                <menuitem name="PlaylistSongProperties" action="PlaylistSongProperties"/>
         </popup>
 
         <popup name="BrowserPopup">
