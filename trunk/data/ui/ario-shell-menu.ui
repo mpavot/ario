@@ -1,0 +1,88 @@
+<interface>
+        <menu id="menu">
+                <section>
+                        <submenu>
+                                <attribute name="label" translatable="yes">Music server</attribute>
+                                <section>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Connect</attribute>
+                                                <attribute name="action">app.connect</attribute>
+                                                <!-- <attribute name="icon">/usr/share/my-app/poof!.png</attribute> -->
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Disconnect</attribute>
+                                                <attribute name="action">app.disconnect</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Update database</attribute>
+                                                <attribute name="action">app.update</attribute>
+                                        </item>
+                                </section> 
+                        </submenu>
+                        <submenu>
+                                <attribute name="label" translatable="yes">_View</attribute>
+                                <section>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Upper part</attribute>
+                                                <attribute name="action">app.view-upperpart</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Playlist</attribute>
+                                                <attribute name="action">app.view-playlist</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Status bar</attribute>
+                                                <attribute name="action">app.view-statusbar</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Show _lyrics</attribute>
+                                                <attribute name="action">app.view-lyrics</attribute>
+                                        </item>
+                                </section> 
+                        </submenu>
+                        <submenu>
+                                <attribute name="label" translatable="yes">_Music</attribute>
+                                <section>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Change current album cover</attribute>
+                                                <attribute name="action">app.cover-select</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Download album covers</attribute>
+                                                <attribute name="action">app.dlcovers</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Find similar artists</attribute>
+                                                <attribute name="action">app.similar-artists</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Add similar songs to playlist</attribute>
+                                                <attribute name="action">app.add-similar</attribute>
+                                        </item>
+                                </section> 
+                        </submenu>
+
+
+                        <item>
+                                <attribute name="label" translatable="yes">Preferences</attribute>
+                                <attribute name="action">app.preferences</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Plugins</attribute>
+                                <attribute name="action">app.plugins</attribute>
+                        </item>
+                        <section>
+                                <item>
+                                        <attribute name="label" translatable="yes">_About</attribute>
+                                        <attribute name="action">app.about</attribute>
+                                </item>
+                                <item>
+                                        <attribute name="label" translatable="yes">_Quit</attribute>
+                                        <attribute name="action">app.quit</attribute>
+                                </item>
+                        </section> 
+                </section> 
+        </menu>
+</interface>
+
+

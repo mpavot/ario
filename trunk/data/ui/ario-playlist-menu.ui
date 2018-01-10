@@ -1,0 +1,40 @@
+<interface>
+        <menu id="menu">
+                <section>
+                        <section>
+                                <item>
+                                        <attribute name="label" translatable="yes">_Remove</attribute>
+                                        <attribute name="action">app.playlist-remove</attribute>
+                                </item>
+                                <item>
+                                        <attribute name="label" translatable="yes">Crop</attribute>
+                                        <attribute name="action">app.playlist-crop</attribute>
+                                </item>
+                                <item>
+                                        <attribute name="label" translatable="yes">Clear</attribute>
+                                        <attribute name="action">app.playlist-clear</attribute>
+                                </item>
+                        </section> 
+                        <section>
+                                <item>
+                                        <attribute name="label" translatable="yes">Go to playing song</attribute>
+                                        <attribute name="action">app.playlist-goto</attribute>
+                                </item>
+                                <item>
+                                        <attribute name="label" translatable="yes">Shuffle</attribute>
+                                        <attribute name="action">app.playlist-shuffle</attribute>
+                                </item>
+                                <item>
+                                        <attribute name="label" translatable="yes">_Save</attribute>
+                                        <attribute name="action">app.playlist-save</attribute>
+                                </item>
+                        </section> 
+                        <section>
+                                <item>
+                                        <attribute name="label" translatable="yes">_Properties</attribute>
+                                        <attribute name="action">app.playlist-properties</attribute>
+                                </item>
+                        </section> 
+                </section> 
+        </menu>
+</interface>

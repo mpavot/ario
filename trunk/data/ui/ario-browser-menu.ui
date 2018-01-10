@@ -1,0 +1,82 @@
+<interface>
+        <menu id="menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.clear-add-play</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Get the covers</attribute>
+                                <attribute name="action">app.get-covers</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Delete the covers</attribute>
+                                <attribute name="action">app.remove-covers</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="album-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.clear-add-play</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Get the covers</attribute>
+                                <attribute name="action">app.get-covers</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Delete the covers</attribute>
+                                <attribute name="action">app.remove-covers</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Properties</attribute>
+                                <attribute name="action">app.albums-properties</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="song-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.clear-add-play</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Properties</attribute>
+                                <attribute name="action">app.songs-properties</attribute>
+                        </item>
+                </section> 
+        </menu>
+</interface>
