@@ -32,14 +32,6 @@
 #include "ario-debug.h"
 
 static void ario_browser_finalize (GObject *object);
-static void ario_browser_set_property (GObject *object,
-                                       guint prop_id,
-                                       const GValue *value,
-                                       GParamSpec *pspec);
-static void ario_browser_get_property (GObject *object,
-                                       guint prop_id,
-                                       GValue *value,
-                                       GParamSpec *pspec);
 static void ario_browser_reload_trees (ArioBrowser *browser);
 static void ario_browser_trees_changed_cb (guint notification_id,
                                            ArioBrowser *browser);
@@ -52,54 +44,44 @@ static void ario_browser_tree_selection_changed_cb (ArioTree *tree,
                                                     ArioBrowser *browser);
 static void ario_browser_menu_popup_cb (ArioTree *tree,
                                         ArioBrowser *browser);
-static void ario_browser_cmd_add (GtkAction *action,
-                                  ArioBrowser *browser);
-static void ario_browser_cmd_add_play (GtkAction *action,
-                                       ArioBrowser *browser);
-static void ario_browser_cmd_clear_add_play (GtkAction *action,
-                                             ArioBrowser *browser);
-static void ario_browser_cmd_get_cover (GtkAction *action,
-                                        ArioBrowser *browser);
-static void ario_browser_cmd_remove_cover (GtkAction *action,
-                                           ArioBrowser *browser);
-static void ario_browser_cmd_albums_properties (GtkAction *action,
-                                                ArioBrowser *browser);
-static void ario_browser_cmd_songs_properties (GtkAction *action,
-                                               ArioBrowser *browser);
+static void ario_browser_cmd_add (GSimpleAction *action,
+                                  GVariant *parameter,
+                                  gpointer data);
+static void ario_browser_cmd_add_play (GSimpleAction *action,
+                                       GVariant *parameter,
+                                       gpointer data);
+static void ario_browser_cmd_clear_add_play (GSimpleAction *action,
+                                             GVariant *parameter,
+                                             gpointer data);
+static void ario_browser_cmd_get_cover (GSimpleAction *action,
+                                        GVariant *parameter,
+                                        gpointer data);
+static void ario_browser_cmd_remove_cover (GSimpleAction *action,
+                                           GVariant *parameter,
+                                           gpointer data);
+static void ario_browser_cmd_albums_properties (GSimpleAction *action,
+                                                GVariant *parameter,
+                                                gpointer data);
+static void ario_browser_cmd_songs_properties (GSimpleAction *action,
+                                               GVariant *parameter,
+                                               gpointer data);
 
 struct ArioBrowserPrivate
 {
         GSList *trees;
 
-        GtkUIManager *ui_manager;
-
         ArioTree *popup_tree;
 };
 
 /* Actions */
-static GtkActionEntry ario_browser_actions [] =
-{
-        { "BrowserAdd", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_add) },
-        { "BrowserAddPlay", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_add_play) },
-        { "BrowserClearAddPlay", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_clear_add_play) },
-        { "BrowserGetCover", "media-optical", N_("Get the covers"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_get_cover) },
-        { "BrowserRemoveCover", "edit-delete", N_("_Delete the covers"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_remove_cover) },
-        { "BrowserAlbumsProperties", "document-properties", N_("_Properties"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_albums_properties) },
-        { "BrowserSongsProperties", "document-properties", N_("_Properties"), NULL,
-                NULL,
-                G_CALLBACK (ario_browser_cmd_songs_properties) },
+static const GActionEntry ario_browser_actions[] = {
+        { "add-to-pl", ario_browser_cmd_add },
+        { "add-play", ario_browser_cmd_add_play },
+        { "clear-add-play", ario_browser_cmd_clear_add_play },
+        { "get-covers", ario_browser_cmd_get_cover },
+        { "remove-covers", ario_browser_cmd_remove_cover },
+        { "albums-properties", ario_browser_cmd_albums_properties },
+        { "songs-properties", ario_browser_cmd_songs_properties },
 };
 static guint ario_browser_n_actions = G_N_ELEMENTS (ario_browser_actions);
 
@@ -107,7 +89,6 @@ static guint ario_browser_n_actions = G_N_ELEMENTS (ario_browser_actions);
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 #define ARIO_BROWSER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER, ArioBrowserPrivate))
@@ -157,23 +138,12 @@ ario_browser_class_init (ArioBrowserClass *klass)
 
         /* Virtual GObject methods */
         object_class->finalize = ario_browser_finalize;
-        object_class->set_property = ario_browser_set_property;
-        object_class->get_property = ario_browser_get_property;
 
         /* Virtual ArioSource methods */
         source_class->get_id = ario_browser_get_id;
         source_class->get_name = ario_browser_get_name;
         source_class->get_icon = ario_browser_get_icon;
         source_class->goto_playling_song = ario_browser_goto_playling_song;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioBrowserPrivate));
@@ -204,54 +174,14 @@ ario_browser_finalize (GObject *object)
         G_OBJECT_CLASS (ario_browser_parent_class)->finalize (object);
 }
 
-static void
-ario_browser_set_property (GObject *object,
-                           guint prop_id,
-                           const GValue *value,
-                           GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioBrowser *browser = ARIO_BROWSER (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                browser->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_browser_get_property (GObject *object,
-                           guint prop_id,
-                           GValue *value,
-                           GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioBrowser *browser = ARIO_BROWSER (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, browser->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_browser_new (GtkUIManager *mgr,
-                  GtkActionGroup *group)
+ario_browser_new ()
 {
         ARIO_LOG_FUNCTION_START;
         ArioBrowser *browser;
         ArioServer *server = ario_server_get_instance ();
 
         browser = ARIO_BROWSER (g_object_new (TYPE_ARIO_BROWSER,
-                                              "ui-manager", mgr,
                                               NULL));
 
         g_return_val_if_fail (browser->priv != NULL, NULL);
@@ -265,9 +195,10 @@ ario_browser_new (GtkUIManager *mgr,
                                  "updatingdb_changed", G_CALLBACK (ario_browser_dbtime_changed_cb),
                                  browser, 0);
 
-        gtk_action_group_add_actions (group,
-                                      ario_browser_actions,
-                                      ario_browser_n_actions, browser);
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_browser_actions,
+                                         ario_browser_n_actions,
+                                         browser);
 
         /* Hbox properties */
         gtk_box_set_homogeneous (GTK_BOX (browser), TRUE);
@@ -310,8 +241,7 @@ ario_browser_reload_trees (ArioBrowser *browser)
         for (i = 0; splited_conf[i]; ++i) {
                 /* Create new tree */
                 tag = atoi (splited_conf[i]);
-                tree = ario_tree_new (browser->priv->ui_manager,
-                                      tag,
+                tree = ario_tree_new (tag,
                                       is_first);
 
                 /* Append tree to the list */
@@ -415,30 +345,36 @@ ario_browser_menu_popup_cb (ArioTree *tree,
 }
 
 static void
-ario_browser_cmd_add (GtkAction *action,
-                      ArioBrowser *browser)
+ario_browser_cmd_add (GSimpleAction *action,
+                      GVariant *parameter,
+                      gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioBrowser *browser = ARIO_BROWSER (data);
         /* Add songs to playlist */
         if (browser->priv->popup_tree)
                 ario_tree_cmd_add (browser->priv->popup_tree, PLAYLIST_ADD);
 }
 
 static void
-ario_browser_cmd_add_play (GtkAction *action,
-                           ArioBrowser *browser)
+ario_browser_cmd_add_play (GSimpleAction *action,
+                           GVariant *parameter,
+                           gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioBrowser *browser = ARIO_BROWSER (data);
         /* Add songs to playlist and play */
         if (browser->priv->popup_tree)
                 ario_tree_cmd_add (browser->priv->popup_tree, PLAYLIST_ADD_PLAY);
 }
 
 static void
-ario_browser_cmd_clear_add_play (GtkAction *action,
-                                 ArioBrowser *browser)
+ario_browser_cmd_clear_add_play (GSimpleAction *action,
+                                 GVariant *parameter,
+                                 gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioBrowser *browser = ARIO_BROWSER (data);
         if (browser->priv->popup_tree) {
                 /* Add songs to playlist and play */
                 ario_tree_cmd_add (browser->priv->popup_tree, PLAYLIST_REPLACE);
@@ -446,30 +382,36 @@ ario_browser_cmd_clear_add_play (GtkAction *action,
 }
 
 static void
-ario_browser_cmd_get_cover (GtkAction *action,
-                            ArioBrowser *browser)
+ario_browser_cmd_get_cover (GSimpleAction *action,
+                            GVariant *parameter,
+                            gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioBrowser *browser = ARIO_BROWSER (data);
         /* Get cover arts for selected entries */
         if (browser->priv->popup_tree)
                 ario_tree_get_cover (browser->priv->popup_tree, GET_COVERS);
 }
 
 static void
-ario_browser_cmd_remove_cover (GtkAction *action,
-                               ArioBrowser *browser)
+ario_browser_cmd_remove_cover (GSimpleAction *action,
+                               GVariant *parameter,
+                               gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         /* Remove cover arts for selected entries */
+        ArioBrowser *browser = ARIO_BROWSER (data);
         if (browser->priv->popup_tree)
                 ario_tree_get_cover (browser->priv->popup_tree, REMOVE_COVERS);
 }
 
 static void
-ario_browser_cmd_albums_properties (GtkAction *action,
-                                    ArioBrowser *browser)
+ario_browser_cmd_albums_properties (GSimpleAction *action,
+                                    GVariant *parameter,
+                                    gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioBrowser *browser = ARIO_BROWSER (data);
         g_return_if_fail (IS_ARIO_TREE_ALBUMS (browser->priv->popup_tree));
 
         /* Show album properties */
@@ -478,10 +420,12 @@ ario_browser_cmd_albums_properties (GtkAction *action,
 }
 
 static void
-ario_browser_cmd_songs_properties (GtkAction *action,
-                                   ArioBrowser *browser)
+ario_browser_cmd_songs_properties (GSimpleAction *action,
+                                   GVariant *parameter,
+                                   gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioBrowser *browser = ARIO_BROWSER (data);
         g_return_if_fail (IS_ARIO_TREE_SONGS (browser->priv->popup_tree));
 
         /* Show songs properties */

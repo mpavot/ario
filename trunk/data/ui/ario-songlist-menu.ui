@@ -1,0 +1,63 @@
+<interface>
+        <menu id="search-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.search-add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.search-add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.search-replace-in-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Properties</attribute>
+                                <attribute name="action">app.search-properties</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="storedpl-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.storedpl-add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.storedpl-add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.storedpl-clear-add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Delete</attribute>
+                                <attribute name="action">app.storedpl-delete</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="storedpl-songs-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.storedpl-add-to-pl-songs</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.storedpl-add-play-songs</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.storedpl-clear-add-play-songs</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Properties</attribute>
+                                <attribute name="action">app.storedpl-songs-properties</attribute>
+                        </item>
+                </section> 
+        </menu>
+
+</interface>

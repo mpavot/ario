@@ -345,8 +345,8 @@ ario_shell_construct (ArioShell *shell,
 
         /* Create source manager */
         // TODO
-        // shell->priv->sourcemanager = ario_source_manager_get_instance ();
-        // g_object_ref (shell->priv->sourcemanager);
+        shell->priv->sourcemanager = ario_source_manager_get_instance ();
+        g_object_ref (shell->priv->sourcemanager);
 
         /* Create the hbox(for tabs and playlist) */
         shell->priv->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
