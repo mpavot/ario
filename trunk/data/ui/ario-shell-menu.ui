@@ -34,10 +34,6 @@
                                                 <attribute name="label" translatable="yes">Status bar</attribute>
                                                 <attribute name="action">app.view-statusbar</attribute>
                                         </item>
-                                        <item>
-                                                <attribute name="label" translatable="yes">Show _lyrics</attribute>
-                                                <attribute name="action">app.view-lyrics</attribute>
-                                        </item>
                                 </section> 
                         </submenu>
                         <submenu>
@@ -58,6 +54,10 @@
                                         <item>
                                                 <attribute name="label" translatable="yes">Add similar songs to playlist</attribute>
                                                 <attribute name="action">app.add-similar</attribute>
+                                        </item>
+                                        <item>
+                                                <attribute name="label" translatable="yes">Show _lyrics</attribute>
+                                                <attribute name="action">app.view-lyrics</attribute>
                                         </item>
                                 </section> 
                         </submenu>
