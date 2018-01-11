@@ -49,40 +49,44 @@
 #include "widgets/ario-tray-icon.h"
 
 static void ario_shell_finalize (GObject *object);
-static void ario_shell_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec);
-static void ario_shell_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec);
 static void ario_shell_show (ArioShell *shell,
                              gboolean minimized);
-static void ario_shell_cmd_quit (GtkAction *action,
-                                 ArioShell *shell);
-static void ario_shell_cmd_connect (GtkAction *action,
-                                    ArioShell *shell);
-static void ario_shell_cmd_disconnect (GtkAction *action,
-                                       ArioShell *shell);
-static void ario_shell_cmd_update (GtkAction *action,
-                                   ArioShell *shell);
-static void ario_shell_cmd_plugins (GtkAction *action,
-                                    ArioShell *shell);
-static void ario_shell_cmd_preferences (GtkAction *action,
-                                        ArioShell *shell);
-static void ario_shell_cmd_lyrics (GtkAction *action,
-                                   ArioShell *shell);
-static void ario_shell_cmd_cover_select (GtkAction *action,
-                                         ArioShell *shell);
-static void ario_shell_cmd_covers (GtkAction *action,
-                                   ArioShell *shell);
-static void ario_shell_cmd_similar_artists (GtkAction *action,
-                                            ArioShell *shell);
-static void ario_shell_cmd_add_similar (GtkAction *action,
-                                        ArioShell *shell);
-static void ario_shell_cmd_about (GtkAction *action,
-                                  ArioShell *shell);
+static void ario_shell_cmd_quit (GSimpleAction *action,
+                                 GVariant *parameter,
+                                 gpointer data);
+static void ario_shell_cmd_connect (GSimpleAction *action,
+                                    GVariant *parameter,
+                                    gpointer data);
+static void ario_shell_cmd_disconnect (GSimpleAction *action,
+                                       GVariant *parameter,
+                                       gpointer data);
+static void ario_shell_cmd_update (GSimpleAction *action,
+                                   GVariant *parameter,
+                                   gpointer data);
+static void ario_shell_cmd_plugins (GSimpleAction *action,
+                                    GVariant *parameter,
+                                    gpointer data);
+static void ario_shell_cmd_preferences (GSimpleAction *action,
+                                        GVariant *parameter,
+                                        gpointer data);
+static void ario_shell_cmd_lyrics (GSimpleAction *action,
+                                   GVariant *parameter,
+                                   gpointer data);
+static void ario_shell_cmd_cover_select (GSimpleAction *action,
+                                         GVariant *parameter,
+                                         gpointer data);
+static void ario_shell_cmd_covers (GSimpleAction *action,
+                                   GVariant *parameter,
+                                   gpointer data);
+static void ario_shell_cmd_similar_artists (GSimpleAction *action,
+                                            GVariant *parameter,
+                                            gpointer data);
+static void ario_shell_cmd_add_similar (GSimpleAction *action,
+                                        GVariant *parameter,
+                                        gpointer data);
+static void ario_shell_cmd_about (GSimpleAction *action,
+                                  GVariant *parameter,
+                                  gpointer data);
 static void ario_shell_server_state_changed_cb (ArioServer *server,
                                                 ArioShell *shell);
 static void ario_shell_server_song_changed_cb (ArioServer *server,
@@ -93,16 +97,18 @@ static gboolean ario_shell_window_state_cb (GtkWidget *widget,
 static void ario_shell_sync_window_state (ArioShell *shell);
 static void ario_shell_sync_paned (ArioShell *shell);
 static void ario_shell_sync_server (ArioShell *shell);
-static void ario_shell_sync_control (ArioShell *shell);
 static void ario_shell_sync_playlist_position (ArioShell *shell);
 static void ario_shell_firstlaunch_delete_cb (ArioFirstlaunch *firstlaunch,
                                               ArioShell *shell);
-static void ario_shell_view_statusbar_changed_cb (GtkAction *action,
-                                                  ArioShell *shell);
-static void ario_shell_view_upperpart_changed_cb (GtkAction *action,
-                                                  ArioShell *shell);
-static void ario_shell_view_playlist_changed_cb (GtkAction *action,
-                                                 ArioShell *shell);
+static void ario_shell_view_statusbar_changed_cb (GSimpleAction *action,
+                                                  GVariant *parameter,
+                                                  gpointer data);
+static void ario_shell_view_upperpart_changed_cb (GSimpleAction *action,
+                                                  GVariant *parameter,
+                                                  gpointer data);
+static void ario_shell_view_playlist_changed_cb (GSimpleAction *action,
+                                                 GVariant *parameter,
+                                                 gpointer data);
 static void ario_shell_sync_statusbar_visibility (ArioShell *shell);
 static void ario_shell_sync_upperpart_visibility (ArioShell *shell);
 static void ario_shell_sync_playlist_visibility (ArioShell *shell);
@@ -146,64 +152,22 @@ enum
         PROP_0,
 };
 
-static GtkActionEntry shell_actions [] =
-{
-        { "File", NULL, N_("_File"), NULL, NULL, NULL },
-        { "Edit", NULL, N_("_Edit"), NULL, NULL, NULL },
-        { "View", NULL, N_("_View"), NULL, NULL, NULL },
-        { "Control", NULL, N_("_Control"), NULL, NULL, NULL },
-        { "Tool", NULL, N_("_Tool"), NULL, NULL, NULL },
-        { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
-
-        { "FileConnect", GTK_STOCK_CONNECT, N_("_Connect"), "<control>E",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_connect) },
-        { "FileDisconnect", GTK_STOCK_DISCONNECT, N_("_Disconnect"), "<control>D",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_disconnect) },
-        { "FileServerUpdate", "view-refresh", N_("_Update database"), "<control>U",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_update) },
-        { "FileQuit", "application-exit", N_("_Quit"), "<control>Q",
-                NULL,
-                G_CALLBACK (ario_shell_cmd_quit) },
-        { "EditPlugins", "system-run", N_("Plu_gins"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_plugins) },
-        { "EditPreferences", "preferences-system", N_("Prefere_nces"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_preferences) },
-        { "ToolCoverSelect", "media-optical", N_("_Change current album cover"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_cover_select) },
-        { "ToolCover", "system-run", N_("Download album _covers"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_covers) },
-        { "ToolSimilarArtist", GTK_STOCK_INDEX, N_("Find similar artists"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_similar_artists) },
-        { "ToolAddSimilar", "list-add", N_("Add similar songs to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_add_similar) },
-        { "ViewLyrics", GTK_STOCK_EDIT, N_("Show _lyrics"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_lyrics) },
-        { "HelpAbout", "help-about", N_("_About"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_cmd_about) },
-};
-
-static GtkToggleActionEntry shell_toggle [] =
-{
-        { "ViewStatusbar", NULL, N_("S_tatusbar"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_view_statusbar_changed_cb), TRUE },
-        { "ViewUpperPart", NULL, N_("Upper part"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_view_upperpart_changed_cb), TRUE },
-        { "ViewPlaylist", NULL, N_("Playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_shell_view_playlist_changed_cb), TRUE }
+static const GActionEntry shell_actions[] = {
+        { "connect", ario_shell_cmd_connect},
+        { "disconnect", ario_shell_cmd_disconnect},
+        { "update", ario_shell_cmd_update},
+        { "view-upperpart", ario_shell_view_upperpart_changed_cb, NULL, "false" },
+        { "view-playlist", ario_shell_view_playlist_changed_cb, NULL, "false" },
+        { "view-statusbar", ario_shell_view_statusbar_changed_cb, NULL, "false" },
+        { "view-lyrics", ario_shell_cmd_lyrics},
+        { "cover-select", ario_shell_cmd_cover_select},
+        { "dlcovers", ario_shell_cmd_covers},
+        { "similar-artists", ario_shell_cmd_similar_artists},
+        { "add-similar", ario_shell_cmd_add_similar},
+        { "preferences", ario_shell_cmd_preferences},
+        { "plugins", ario_shell_cmd_plugins},
+        { "about", ario_shell_cmd_about},
+        { "quit", ario_shell_cmd_quit},
 };
 
 #define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SHELL, ArioShellPrivate))
@@ -216,8 +180,6 @@ ario_shell_class_init (ArioShellClass *klass)
         GObjectClass *object_class = (GObjectClass *) klass;
 
         /* Virtual methods */
-        object_class->set_property = ario_shell_set_property;
-        object_class->get_property = ario_shell_get_property;
         object_class->finalize = ario_shell_finalize;
 
         /* Private attributes */
@@ -260,38 +222,6 @@ ario_shell_finalize (GObject *object)
         G_OBJECT_CLASS (ario_shell_parent_class)->finalize (object);
 }
 
-static void
-ario_shell_set_property (GObject *object,
-                         guint prop_id,
-                         const GValue *value,
-                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioShell *shell = ARIO_SHELL (object);
-
-        switch (prop_id) {
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_shell_get_property (GObject *object,
-                         guint prop_id,
-                         GValue *value,
-                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioShell *shell = ARIO_SHELL (object);
-
-        switch (prop_id) {
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 ArioShell *
 ario_shell_new (GtkApplication * app)
 {
@@ -331,29 +261,16 @@ ario_shell_window_delete_cb (GtkWidget *win,
         return TRUE;
 };
 
-static void
-quit_cb (GSimpleAction *action,
-         GVariant *parameter,
-         ArioShell *shell)
-{
-        ario_shell_quit (shell);
-}
-
-const GActionEntry app_actions[] = {
-          { "quit", quit_cb }
-};
-
 void
 ario_shell_construct (ArioShell *shell,
                       gboolean minimized)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *separator;
-        GtkAction *gtk_action;
         GAction *action;
         ArioFirstlaunch *firstlaunch;
         GtkBuilder *builder;
-        GMenu *menu;
+        GMenuModel *menu;
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
         gtk_window_set_application (GTK_WINDOW (shell), shell->priv->app);
@@ -372,13 +289,16 @@ ario_shell_construct (ArioShell *shell,
                           shell);
 
         /* Initialize UI */
-        g_action_map_add_action_entries (G_ACTION_MAP (shell->priv->app), app_actions, G_N_ELEMENTS (app_actions), shell);
-
         builder = gtk_builder_new_from_file (UI_PATH "ario-shell-menu.ui");
         menu = G_MENU_MODEL (gtk_builder_get_object (builder, "menu"));
         gtk_application_set_app_menu (shell->priv->app,
-                                      G_MENU_MODEL (menu));
+                                      menu);
         g_object_unref (builder);
+
+        /* Main window actions */
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         shell_actions, G_N_ELEMENTS (shell_actions),
+                                         shell);
 
         /* Initialize server object (MPD, XMMS, ....) */
         ario_server_get_instance ();
@@ -434,28 +354,24 @@ ario_shell_construct (ArioShell *shell,
         /* Create status bar */
         shell->priv->status_bar = ario_status_bar_new ();
 
-#if 0// TODO
         /* Synchronize status bar checkbox in menu with preferences */
         shell->priv->statusbar_hidden = ario_conf_get_boolean (PREF_STATUSBAR_HIDDEN, PREF_STATUSBAR_HIDDEN_DEFAULT);
-        gtk_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ViewStatusbar");
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action),
-                                      !shell->priv->statusbar_hidden);
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                             "view-statusbar");
+        g_simple_action_set_state (G_SIMPLE_ACTION (action), g_variant_new_boolean (!shell->priv->statusbar_hidden));
 
         /* Synchronize upper part checkbox in menu with preferences */
         shell->priv->upperpart_hidden = ario_conf_get_boolean (PREF_UPPERPART_HIDDEN, PREF_UPPERPART_HIDDEN_DEFAULT);
-        gtk_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ViewUpperPart");
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action),
-                                      !shell->priv->upperpart_hidden);
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                             "view-upperpart");
+        g_simple_action_set_state (G_SIMPLE_ACTION (action), g_variant_new_boolean (!shell->priv->upperpart_hidden));
 
         /* Synchronize playlist checkbox in menu with preferences */
         shell->priv->playlist_hidden = ario_conf_get_boolean (PREF_PLAYLIST_HIDDEN, PREF_PLAYLIST_HIDDEN_DEFAULT);
-        gtk_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ViewPlaylist");
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action),
-                                      !shell->priv->playlist_hidden);
-#endif
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                             "view-playlist");
+        g_simple_action_set_state (G_SIMPLE_ACTION (action), g_variant_new_boolean (!shell->priv->playlist_hidden));
+
         /* Add widgets to vbox */
         gtk_box_pack_start (GTK_BOX (shell->priv->vbox),
                             shell->priv->header,
@@ -568,9 +484,6 @@ ario_shell_show (ArioShell *shell,
         gtk_widget_show_all (GTK_WIDGET(shell));
         shell->priv->shown = TRUE;
 
-        /* Synchronize control menu */
-        ario_shell_sync_control (shell);
-
         /* Synchonize the main window with server state */
         ario_shell_sync_server (shell);
 
@@ -669,43 +582,50 @@ ario_shell_set_visibility (ArioShell *shell,
 }
 
 static void
-ario_shell_cmd_quit (GtkAction *action,
-                     ArioShell *shell)
+ario_shell_cmd_quit (GSimpleAction *action,
+                     GVariant *parameter,
+                     gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioShell *shell = ARIO_SHELL (data);
         ario_shell_quit (shell);
 }
 
 static void
-ario_shell_cmd_connect (GtkAction *action,
-                        ArioShell *shell)
+ario_shell_cmd_connect (GSimpleAction *action,
+                        GVariant *parameter,
+                        gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         ario_server_connect ();
 }
 
 static void
-ario_shell_cmd_disconnect (GtkAction *action,
-                           ArioShell *shell)
+ario_shell_cmd_disconnect (GSimpleAction *action,
+                           GVariant *parameter,
+                           gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         ario_server_disconnect ();
 }
 
 static void
-ario_shell_cmd_update (GtkAction *action,
-                       ArioShell *shell)
+ario_shell_cmd_update (GSimpleAction *action,
+                       GVariant *parameter,
+                       gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         ario_server_update_db (NULL);
 }
 
 static void
-ario_shell_cmd_preferences (GtkAction *action,
-                            ArioShell *shell)
+ario_shell_cmd_preferences (GSimpleAction *action,
+                            GVariant *parameter,
+                            gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *prefs;
+        ArioShell *shell = ARIO_SHELL (data);
 
         /* Create preferences dialog window */
         prefs = ario_shell_preferences_new ();
@@ -717,8 +637,9 @@ ario_shell_cmd_preferences (GtkAction *action,
 }
 
 static void
-ario_shell_cmd_lyrics (GtkAction *action,
-                       ArioShell *shell)
+ario_shell_cmd_lyrics (GSimpleAction *action,
+                       GVariant *parameter,
+                       gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *lyrics;
@@ -730,10 +651,12 @@ ario_shell_cmd_lyrics (GtkAction *action,
 }
 
 static void
-ario_shell_cmd_about (GtkAction *action,
-                      ArioShell *shell)
+ario_shell_cmd_about (GSimpleAction *action,
+                      GVariant *parameter,
+                      gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioShell *shell = ARIO_SHELL (data);
 
         /* Create about dialog window */
         const char *authors[] = {
@@ -805,14 +728,12 @@ ario_shell_server_state_changed_cb (ArioServer *server,
 
         /* Change window title on song change */
         ario_shell_server_song_set_title (shell);
-
-        /* Synchronize control menu */
-        ario_shell_sync_control (shell);
 }
 
 static void
-ario_shell_cmd_cover_select (GtkAction *action,
-                             ArioShell *shell)
+ario_shell_cmd_cover_select (GSimpleAction *action,
+                             GVariant *parameter,
+                             gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *coverselect;
@@ -836,8 +757,9 @@ ario_shell_cmd_cover_select (GtkAction *action,
 }
 
 static void
-ario_shell_cmd_covers (GtkAction *action,
-                       ArioShell *shell)
+ario_shell_cmd_covers (GSimpleAction *action,
+                       GVariant *parameter,
+                       gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *coverdownloader;
@@ -852,8 +774,9 @@ ario_shell_cmd_covers (GtkAction *action,
 }
 
 static void
-ario_shell_cmd_similar_artists (GtkAction *action,
-                                ArioShell *shell)
+ario_shell_cmd_similar_artists (GSimpleAction *action,
+                                GVariant *parameter,
+                                gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *similarartists;
@@ -865,8 +788,9 @@ ario_shell_cmd_similar_artists (GtkAction *action,
 }
 
 static void
-ario_shell_cmd_add_similar (GtkAction *action,
-                            ArioShell *shell)
+ario_shell_cmd_add_similar (GSimpleAction *action,
+                            GVariant *parameter,
+                            gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
 
@@ -942,74 +866,44 @@ static void
 ario_shell_sync_server (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkAction *connect_action;
-        GtkAction *disconnect_action;
+        GAction *connect_action;
+        GAction *disconnect_action;
         gboolean is_playing;
-        GtkAction *action;
-#if 0// TODO
-        /* Set connect entry visibility 
-         * I don't know why but I need to first force visibility to TRUE otherwise
-         * the FALSE value is not taken into account at program startup
-         */
-        connect_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                                      "FileConnect");
-        gtk_action_set_visible (connect_action, TRUE);
-        gtk_action_set_visible (connect_action, !shell->priv->connected);
+        GAction *action;
+
+        /* Set connect entry visibility */
+        connect_action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                                      "connect");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (connect_action), !shell->priv->connected);
 
         /* Set disconnect entry visibility */
-        disconnect_action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                                         "FileDisconnect");
-        gtk_action_set_visible (disconnect_action, TRUE);
-        gtk_action_set_visible (disconnect_action, shell->priv->connected);
+        disconnect_action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                                         "disconnect");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (disconnect_action), shell->priv->connected);
 
         is_playing = ((shell->priv->connected)
                       && ((ario_server_get_current_state () == ARIO_STATE_PLAY)
                           || (ario_server_get_current_state () == ARIO_STATE_PAUSE)));
 
         /* Set lyrics entry sensitivty */
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ViewLyrics");
-        gtk_action_set_sensitive (action, is_playing);
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                              "view-lyrics");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_playing);
 
         /* Set cover selection entry sensitivty */
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ToolCoverSelect");
-        gtk_action_set_sensitive (action, is_playing);
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                              "cover-select");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_playing);
 
         /* Set similar artists entry sensitivty */
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ToolSimilarArtist");
-        gtk_action_set_sensitive (action, is_playing);
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                              "similar-artists");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_playing);
 
         /* Set similar artists addition entry sensitivty */
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ToolAddSimilar");
-        gtk_action_set_sensitive (action, is_playing);
-#endif
-}
-
-static void
-ario_shell_sync_control (ArioShell *shell)
-{
-        ARIO_LOG_FUNCTION_START;
-        GtkAction *action;
-        int state = ario_server_get_current_state ();
-#if 0// TODO
-        /* Set Play entry visibility 
-         * I don't know why but I need to first force visibility to TRUE otherwise
-         * the FALSE value is not taken into account at program startup
-         */
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ControlPlay");
-        gtk_action_set_visible (action, TRUE);
-        gtk_action_set_visible (action, state != ARIO_STATE_PLAY);
-
-        /* Set Pause entry visibility */
-        action = gtk_action_group_get_action (shell->priv->actiongroup,
-                                              "ControlPause");
-        gtk_action_set_visible (action, TRUE);
-        gtk_action_set_visible (action, state == ARIO_STATE_PLAY);
-#endif
+        action = g_action_map_lookup_action (G_ACTION_MAP (g_application_get_default ()),
+                                              "add-similar");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_playing);
 }
 
 static void
@@ -1103,23 +997,41 @@ ario_shell_firstlaunch_delete_cb (ArioFirstlaunch *firstlaunch,
 }
 
 static void
-ario_shell_view_statusbar_changed_cb (GtkAction *action,
-                                      ArioShell *shell)
+ario_shell_view_statusbar_changed_cb (GSimpleAction *action,
+                                      GVariant *parameter,
+                                      gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
-        shell->priv->statusbar_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-        ario_conf_set_boolean (PREF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
+        GVariant *old_state, *new_state;
+        ArioShell *shell = ARIO_SHELL (data);
 
+        old_state = g_action_get_state (G_ACTION (action));
+        new_state = g_variant_new_boolean (!g_variant_get_boolean (old_state));
+        g_simple_action_set_state (action, new_state);
+        g_variant_unref (old_state);
+
+        shell->priv->statusbar_hidden = !g_variant_get_boolean (new_state);
+        ario_conf_set_boolean (PREF_STATUSBAR_HIDDEN, shell->priv->statusbar_hidden);
+ 
         /* Synchronize status bar visibility */
         ario_shell_sync_statusbar_visibility (shell);
 }
 
 static void
-ario_shell_view_upperpart_changed_cb (GtkAction *action,
-                                      ArioShell *shell)
+ario_shell_view_upperpart_changed_cb (GSimpleAction *action,
+                                      GVariant *parameter,
+                                      gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
-        shell->priv->upperpart_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+        GVariant *old_state, *new_state;
+        ArioShell *shell = ARIO_SHELL (data);
+
+        old_state = g_action_get_state (G_ACTION (action));
+        new_state = g_variant_new_boolean (!g_variant_get_boolean (old_state));
+        g_simple_action_set_state (action, new_state);
+        g_variant_unref (old_state);
+
+        shell->priv->upperpart_hidden = !g_variant_get_boolean (new_state);
         ario_conf_set_boolean (PREF_UPPERPART_HIDDEN, shell->priv->upperpart_hidden);
 
         /* Synchronize upper part visibility */
@@ -1127,11 +1039,20 @@ ario_shell_view_upperpart_changed_cb (GtkAction *action,
 }
 
 static void
-ario_shell_view_playlist_changed_cb (GtkAction *action,
-                                     ArioShell *shell)
+ario_shell_view_playlist_changed_cb (GSimpleAction *action,
+                                     GVariant *parameter,
+                                     gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
-        shell->priv->playlist_hidden = !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+        GVariant *old_state, *new_state;
+        ArioShell *shell = ARIO_SHELL (data);
+
+        old_state = g_action_get_state (G_ACTION (action));
+        new_state = g_variant_new_boolean (!g_variant_get_boolean (old_state));
+        g_simple_action_set_state (action, new_state);
+        g_variant_unref (old_state);
+
+        shell->priv->playlist_hidden = !g_variant_get_boolean (new_state);
         ario_conf_set_boolean (PREF_PLAYLIST_HIDDEN, shell->priv->playlist_hidden);
 
         /* Synchronize playlist visibility */
@@ -1188,12 +1109,14 @@ ario_shell_plugins_response_cb (GtkDialog *dialog,
 }
 
 static void
-ario_shell_cmd_plugins (GtkAction *action,
-                        ArioShell *shell)
+ario_shell_cmd_plugins (GSimpleAction *action,
+                        GVariant *parameter,
+                        gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *window;
         GtkWidget *manager;
+        ArioShell *shell = ARIO_SHELL (data);
 
         /* Create plugins configuration dialog window */
         window = gtk_dialog_new_with_buttons (_("Configure Plugins"),
