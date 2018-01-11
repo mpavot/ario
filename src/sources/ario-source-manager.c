@@ -45,10 +45,8 @@ static gboolean ario_source_manager_switch_page_cb (GtkNotebook *notebook,
 struct ArioSourceManagerPrivate
 {
         GSList *sources;
-        GtkUIManager *ui_manager;
 
         ArioSource *source;
-        GtkActionGroup *group;
 };
 
 static ArioSourceManager *instance = NULL;
@@ -78,8 +76,7 @@ ario_source_manager_init (ArioSourceManager *sourcemanager)
 }
 
 GtkWidget *
-ario_source_manager_get_instance (GtkUIManager *mgr,
-                                 GtkActionGroup *group)
+ario_source_manager_get_instance ()
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *source;
@@ -92,24 +89,18 @@ ario_source_manager_get_instance (GtkUIManager *mgr,
                                  NULL);
         g_return_val_if_fail (instance->priv != NULL, NULL);
 
-        instance->priv->ui_manager = mgr;
-        instance->priv->group = group;
-
         /* Create browser */
-        source = ario_browser_new (mgr,
-                                   group);
+        source = ario_browser_new ();
         ario_source_manager_append (ARIO_SOURCE (source));
 
 #ifdef ENABLE_SEARCH
         /* Create search */
-        source = ario_search_new (mgr,
-                                  group);
+        source = ario_search_new ();
         ario_source_manager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_SEARCH */
 #ifdef ENABLE_STOREDPLAYLISTS
         /* Create stored playlists source */
-        source = ario_storedplaylists_new (mgr,
-                                           group);
+        source = ario_storedplaylists_new ();
         ario_source_manager_append (ARIO_SOURCE (source));
 #endif  /* ENABLE_STOREDPLAYLISTS */
 
@@ -141,7 +132,7 @@ ario_source_manager_get_instance (GtkUIManager *mgr,
 
 static void
 ario_source_manager_shutdown_foreach (ArioSource *source,
-                                     GSList **ordered_sources)
+                                      GSList **ordered_sources)
 {
         ARIO_LOG_FUNCTION_START;
         /* Shutdown source */
@@ -225,7 +216,7 @@ ario_source_manager_sync (ArioSourceManager *sourcemanager)
 
 static void
 ario_source_manager_showtabs_changed_cb (guint notification_id,
-                                        ArioSourceManager *sourcemanager)
+                                         ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
         /* Set tabs visibility */
@@ -235,7 +226,7 @@ ario_source_manager_showtabs_changed_cb (guint notification_id,
 
 static void
 ario_source_manager_set_source_active (ArioSource *source,
-                                      gboolean active)
+                                       gboolean active)
 {
         ARIO_LOG_FUNCTION_START;
         gchar *conf_name;
@@ -257,13 +248,14 @@ ario_source_manager_set_source_active (ArioSource *source,
         }
 
         /* Select source in menu */
-        action = gtk_action_group_get_action (instance->priv->group, ario_source_get_id (source));
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), active);
+        // TODO
+        //action = gtk_action_group_get_action (instance->priv->group, ario_source_get_id (source));
+        //gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), active);
 }
 
 static void
 ario_source_manager_menu_source_cb (GtkToggleAction *action,
-                                   ArioSource *source)
+                                    ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START;
         /* Select source as in menu */
@@ -272,7 +264,7 @@ ario_source_manager_menu_source_cb (GtkToggleAction *action,
 
 static void
 ario_source_manager_menu_cb (GtkCheckMenuItem *checkmenuitem,
-                            ArioSource *source)
+                             ArioSource *source)
 {
         ARIO_LOG_FUNCTION_START;
         /* Select source as in menu */
@@ -319,16 +311,6 @@ ario_source_manager_append (ArioSource *source)
                 gtk_widget_hide (GTK_WIDGET (source));
         gtk_widget_set_no_show_all (GTK_WIDGET (source), TRUE);
 
-        /* Add source in menu for selection */
-        ui_merge_id = gtk_ui_manager_new_merge_id (instance->priv->ui_manager);
-        gtk_ui_manager_add_ui (instance->priv->ui_manager,
-                               ui_merge_id,
-                               "/MenuBar/ViewMenu/ViewMenuSourcesPlaceholder",
-                               ario_source_get_id (source),
-                               ario_source_get_id (source),
-                               GTK_UI_MANAGER_MENUITEM,
-                               FALSE);
-
         /* Add source to popup menu for selection */
         GtkToggleActionEntry actions [] =
         {
@@ -336,9 +318,6 @@ ario_source_manager_append (ArioSource *source)
                         NULL, G_CALLBACK (ario_source_manager_menu_source_cb), ario_conf_get_boolean (conf_name, TRUE) }
         };
         g_free (conf_name);
-        gtk_action_group_add_toggle_actions (instance->priv->group,
-                                             actions, 1,
-                                             source);
 
         /* Add source data to list */
         data = (ArioSourceData *) g_malloc (sizeof (ArioSourceData));
@@ -368,13 +347,6 @@ ario_source_manager_remove (ArioSource *source)
                 if (data->source == source) {
                         /* Remove the source from the list */
                         instance->priv->sources = g_slist_remove (instance->priv->sources, data);
-
-                        /* Remove the source from UI manager */
-                        gtk_ui_manager_remove_ui (instance->priv->ui_manager, data->ui_merge_id);
-
-                        /* Remove the source from popup menu */
-                        gtk_action_group_remove_action (instance->priv->group,
-                                                        gtk_action_group_get_action (instance->priv->group, ario_source_get_id (source)));
                         g_free (data);
                         break;
                 }
@@ -385,8 +357,8 @@ ario_source_manager_remove (ArioSource *source)
 
 static gboolean
 ario_source_manager_button_press_cb (GtkWidget *widget,
-                                    GdkEventButton *event,
-                                    ArioSourceManager *sourcemanager)
+                                     GdkEventButton *event,
+                                     ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *menu;

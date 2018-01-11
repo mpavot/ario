@@ -32,14 +32,6 @@
 #include "widgets/ario-playlist.h"
 
 static void ario_songlist_finalize (GObject *object);
-static void ario_songlist_set_property (GObject *object,
-                                        guint prop_id,
-                                        const GValue *value,
-                                        GParamSpec *pspec);
-static void ario_songlist_get_property (GObject *object,
-                                        guint prop_id,
-                                        GValue *value,
-                                        GParamSpec *pspec);
 static void ario_songlist_add_in_playlist (ArioSonglist *songlist,
                                            PlaylistAction action);
 static void ario_songlist_popup_menu_cb (ArioDndTree* tree,
@@ -61,16 +53,13 @@ struct ArioSonglistPrivate
         GtkListStore *model;
         GtkTreeSelection *selection;
 
-        GtkUIManager *ui_manager;
-
-        gchar *popup;
+        GtkWidget *popup;
 };
 
 /* Properties */
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 /* Drag and drop targets */
@@ -89,17 +78,6 @@ ario_songlist_class_init (ArioSonglistClass *klass)
 
         /* Virtual Methods */
         object_class->finalize = ario_songlist_finalize;
-        object_class->set_property = ario_songlist_set_property;
-        object_class->get_property = ario_songlist_get_property;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioSonglistPrivate));
@@ -125,61 +103,22 @@ ario_songlist_finalize (GObject *object)
         songlist = ARIO_SONGLIST (object);
 
         g_return_if_fail (songlist->priv != NULL);
-        g_free (songlist->priv->popup);
 
         G_OBJECT_CLASS (ario_songlist_parent_class)->finalize (object);
 }
 
-static void
-ario_songlist_set_property (GObject *object,
-                            guint prop_id,
-                            const GValue *value,
-                            GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioSonglist *songlist = ARIO_SONGLIST (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                songlist->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_songlist_get_property (GObject *object,
-                            guint prop_id,
-                            GValue *value,
-                            GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioSonglist *songlist = ARIO_SONGLIST (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, songlist->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_songlist_new (GtkUIManager *mgr,
-                   gchar *popup,
+ario_songlist_new (gchar *popup,
                    gboolean is_sortable)
 {
         ARIO_LOG_FUNCTION_START;
         ArioSonglist *songlist;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
+        GtkBuilder *builder;
+        GMenuModel *menu;
 
         songlist = g_object_new (TYPE_ARIO_SONGLIST,
-                                 "ui-manager", mgr,
                                  NULL);
 
         g_return_val_if_fail (songlist->priv != NULL, NULL);
@@ -263,7 +202,13 @@ ario_songlist_new (GtkUIManager *mgr,
                           "activate",
                           G_CALLBACK (ario_songlist_activate_cb), songlist);
 
-        songlist->priv->popup = g_strdup (popup);
+        builder = gtk_builder_new_from_file (UI_PATH "ario-songlist-menu.ui");
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, popup));
+        songlist->priv->popup = gtk_menu_new_from_model (menu);
+        gtk_menu_attach_to_widget  (GTK_MENU (songlist->priv->popup),
+                                    GTK_WIDGET (songlist),
+                                    NULL);
+        g_object_unref (builder);
 
         gtk_container_add (GTK_CONTAINER (songlist), GTK_WIDGET (songlist->priv->tree));
 
@@ -305,39 +250,47 @@ ario_songlist_add_in_playlist (ArioSonglist *songlist,
 }
 
 void
-ario_songlist_cmd_add_songlists (GtkAction *action,
-                                 ArioSonglist *songlist)
+ario_songlist_cmd_add_songlists (GSimpleAction *action,
+                                 GVariant *parameter,
+                                 gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioSonglist *songlist = ARIO_SONGLIST (data);
         /* Add songs to playlist */
         ario_songlist_add_in_playlist (songlist, PLAYLIST_ADD);
 }
 
 void
-ario_songlist_cmd_add_play_songlists (GtkAction *action,
-                                      ArioSonglist *songlist)
+ario_songlist_cmd_add_play_songlists (GSimpleAction *action,
+                                      GVariant *parameter,
+                                      gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioSonglist *songlist = ARIO_SONGLIST (data);
         /* Add songs to playlist and play */
         ario_songlist_add_in_playlist (songlist, PLAYLIST_ADD_PLAY);
 }
 
 void
-ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
-                                            ArioSonglist *songlist)
+ario_songlist_cmd_clear_add_play_songlists (GSimpleAction *action,
+                                            GVariant *parameter,
+                                            gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioSonglist *songlist = ARIO_SONGLIST (data);
         /* Clear playlist, add songs and play */
         ario_songlist_add_in_playlist (songlist, PLAYLIST_REPLACE);
 }
 
 void
-ario_songlist_cmd_songs_properties (GtkAction *action,
-                                    ArioSonglist *songlist)
+ario_songlist_cmd_songs_properties (GSimpleAction *action,
+                                    GVariant *parameter,
+                                    gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *paths = NULL;
         GtkWidget *songinfos;
+        ArioSonglist *songlist = ARIO_SONGLIST (data);
 
         /* Get list of selected songs */
         gtk_tree_selection_selected_foreach (songlist->priv->selection,
@@ -360,15 +313,9 @@ ario_songlist_popup_menu_cb (ArioDndTree* tree,
                              ArioSonglist *songlist)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *menu;
-
         /* Show popup */
-        if (songlist->priv->popup
-            && gtk_tree_selection_count_selected_rows (songlist->priv->selection) > 0) {
-                menu = gtk_ui_manager_get_widget (songlist->priv->ui_manager, songlist->priv->popup);
-
-                gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                                gtk_get_current_event_time ());
+        if (gtk_tree_selection_count_selected_rows (songlist->priv->selection) > 0) {
+                gtk_menu_popup_at_pointer (GTK_MENU (songlist->priv->popup), NULL);
         }
 }
 

@@ -387,8 +387,7 @@ ario_filesystem_new (GtkUIManager *mgr,
                                  filesystem, 0);
 
         /* Create songs list */
-        filesystem->priv->songs = ario_songlist_new (mgr,
-                                                     "/FilesystemSongsPopup",
+        filesystem->priv->songs = ario_songlist_new ("/FilesystemSongsPopup",
                                                      FALSE);
         gtk_paned_pack2 (GTK_PANED (filesystem->priv->paned), filesystem->priv->songs, TRUE, FALSE);
 

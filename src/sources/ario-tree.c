@@ -86,9 +86,12 @@ static void ario_tree_add_data_free (ArioTreeAddData *data);
 
 struct ArioTreePrivate
 {
-        GtkUIManager *ui_manager;
         gboolean idle_fill_running;
         ArioTreeAddData *data;
+
+        GtkWidget *popup;
+        GtkWidget *album_popup;
+        GtkWidget *song_popup;
 };
 
 typedef struct
@@ -101,7 +104,6 @@ typedef struct
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER,
         PROP_TAG
 };
 
@@ -151,14 +153,6 @@ ario_tree_class_init (ArioTreeClass *klass)
         klass->add_to_playlist = ario_tree_add_to_playlist;
 
         /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-
         g_object_class_install_property (object_class,
                                          PROP_TAG,
                                          g_param_spec_uint ("tag",
@@ -233,9 +227,6 @@ ario_tree_set_property (GObject *object,
         ArioTree *tree = ARIO_TREE (object);
 
         switch (prop_id) {
-        case PROP_UI_MANAGER:
-                tree->priv->ui_manager = g_value_get_object (value);
-                break;
         case PROP_TAG:
                 tree->tag = g_value_get_uint (value);
                 break;
@@ -255,9 +246,6 @@ ario_tree_get_property (GObject *object,
         ArioTree *tree = ARIO_TREE (object);
 
         switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, tree->priv->ui_manager);
-                break;
         case PROP_TAG:
                 g_value_set_uint (value, tree->tag);
                 break;
@@ -277,6 +265,8 @@ ario_tree_constructor (GType type, guint n_construct_properties,
         GObjectClass *parent_class;
         const GtkTargetEntry* targets;
         int n_targets;
+        GtkBuilder *builder;
+        GMenuModel *menu;
 
         /* Call parent constructor */
         klass = ARIO_TREE_CLASS (g_type_class_peek (TYPE_ARIO_TREE));
@@ -306,6 +296,16 @@ ario_tree_constructor (GType type, guint n_construct_properties,
                                      GTK_SELECTION_MULTIPLE);
 
         gtk_container_add (GTK_CONTAINER (tree), tree->tree);
+
+        /* Create menu */
+        builder = gtk_builder_new_from_file (UI_PATH "ario-browser-menu.ui");
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "menu"));
+        tree->priv->popup = gtk_menu_new_from_model (menu);
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "album-menu"));
+        tree->priv->album_popup = gtk_menu_new_from_model (menu);
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "song-menu"));
+        tree->priv->song_popup = gtk_menu_new_from_model (menu);
+        g_object_unref (builder);
 
         /* Connect signals for actions on dnd tree */
         g_signal_connect (tree->selection,
@@ -365,8 +365,7 @@ ario_tree_build_tree (ArioTree *tree,
 }
 
 GtkWidget *
-ario_tree_new (GtkUIManager *mgr,
-               ArioServerTag tag,
+ario_tree_new (ArioServerTag tag,
                gboolean is_first)
 {
         ARIO_LOG_FUNCTION_START;
@@ -383,7 +382,6 @@ ario_tree_new (GtkUIManager *mgr,
         }
 
         tree = ARIO_TREE (g_object_new (type,
-                                        "ui-manager", mgr,
                                         "tag", tag,
                                         NULL));
 
@@ -403,19 +401,21 @@ ario_tree_popup_menu_cb (ArioDndTree* dnd_tree,
         /* Get the most appropriate menu */
         if ((tree->tag == ARIO_TAG_ALBUM)
             && (gtk_tree_selection_count_selected_rows (tree->selection) == 1)) {
-                menu = gtk_ui_manager_get_widget (tree->priv->ui_manager, "/BrowserAlbumsPopupSingle");
+                menu = tree->priv->album_popup;
         } else if (tree->tag == ARIO_TAG_TITLE) {
-                menu = gtk_ui_manager_get_widget (tree->priv->ui_manager, "/BrowserSongsPopup");
+                menu = tree->priv->song_popup;
         } else {
-                menu = gtk_ui_manager_get_widget (tree->priv->ui_manager, "/BrowserPopup");
+                menu = tree->priv->popup;
         }
+        gtk_menu_attach_to_widget  (GTK_MENU (menu),
+                                    GTK_WIDGET (tree),
+                                    NULL);
 
         /* Emit popup signal */
         g_signal_emit (G_OBJECT (tree), ario_tree_signals[MENU_POPUP], 0);
 
         /* Show popup menu */
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                        gtk_get_current_event_time ());
+        gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
 }
 
 static void

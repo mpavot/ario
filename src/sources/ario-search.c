@@ -33,14 +33,6 @@
 
 #define SEARCH_DELAY 250
 
-static void ario_search_set_property (GObject *object,
-                                      guint prop_id,
-                                      const GValue *value,
-                                      GParamSpec *pspec);
-static void ario_search_get_property (GObject *object,
-                                      guint prop_id,
-                                      GValue *value,
-                                      GParamSpec *pspec);
 static void ario_search_connectivity_changed_cb (ArioServer *server,
                                                  ArioSearch *search);
 static void ario_search_entry_changed (GtkEntry *entry,
@@ -59,26 +51,16 @@ struct ArioSearchPrivate
         GtkWidget *vbox;
 
         gboolean connected;
-        GtkUIManager *ui_manager;
 
         guint event_id;
 };
 
 /* Actions */
-static GtkActionEntry ario_search_actions [] =
-{
-        { "SearchAddSongs", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_add_songlists) },
-        { "SearchAddPlaySongs", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
-        { "SearchClearAddPlaySongs", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
-        { "SearchSongsProperties", "document-properties", N_("_Properties"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_songs_properties) }
+static const GActionEntry ario_search_actions[] = {
+        { "search-add-to-pl", ario_songlist_cmd_add_songlists },
+        { "search-add-play", ario_songlist_cmd_add_play_songlists },
+        { "search-replace-in-pl", ario_songlist_cmd_clear_add_play_songlists },
+        { "search-properties", ario_songlist_cmd_songs_properties },
 };
 static guint ario_search_n_actions = G_N_ELEMENTS (ario_search_actions);
 
@@ -86,7 +68,6 @@ static guint ario_search_n_actions = G_N_ELEMENTS (ario_search_actions);
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 #define ARIO_SEARCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SEARCH, ArioSearchPrivate))
@@ -114,26 +95,12 @@ static void
 ario_search_class_init (ArioSearchClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        /* Virtual GObject methods */
-        object_class->set_property = ario_search_set_property;
-        object_class->get_property = ario_search_get_property;
 
         /* Virtual ArioSource methods */
         source_class->get_id = ario_search_get_id;
         source_class->get_name = ario_search_get_name;
         source_class->get_icon = ario_search_get_icon;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioSearchPrivate));
@@ -176,53 +143,13 @@ ario_search_init (ArioSearch *search)
                             TRUE, TRUE, 0);
 }
 
-static void
-ario_search_set_property (GObject *object,
-                          guint prop_id,
-                          const GValue *value,
-                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioSearch *search = ARIO_SEARCH (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                search->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_search_get_property (GObject *object,
-                          guint prop_id,
-                          GValue *value,
-                          GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioSearch *search = ARIO_SEARCH (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, search->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_search_new (GtkUIManager *mgr,
-                 GtkActionGroup *group)
+ario_search_new (void)
 {
         ARIO_LOG_FUNCTION_START;
         ArioSearch *search;
 
         search = g_object_new (TYPE_ARIO_SEARCH,
-                               "ui-manager", mgr,
                                NULL);
 
         g_return_val_if_fail (search->priv != NULL, NULL);
@@ -233,8 +160,7 @@ ario_search_new (GtkUIManager *mgr,
                                  search, 0);
 
         /* Search songs list */
-        search->priv->searchs = ario_songlist_new (mgr,
-                                                   "/SearchPopup",
+        search->priv->searchs = ario_songlist_new ("search-menu",
                                                    TRUE);
 
         /* Songs list widget */
@@ -243,9 +169,10 @@ ario_search_new (GtkUIManager *mgr,
                             TRUE, TRUE, 0);
 
         /* Add actions */
-        gtk_action_group_add_actions (group,
-                                      ario_search_actions,
-                                      ario_search_n_actions, search->priv->searchs);
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_search_actions,
+                                         ario_search_n_actions,
+                                         search->priv->searchs);
 
         return GTK_WIDGET (search);
 }
@@ -329,7 +256,7 @@ ario_search_do_search (ArioSearch *search)
                                         items = ario_server_get_items_names ();
                                         for (j = 0; j < ARIO_TAG_COUNT; ++j) {
                                                 if (items[j] && tag
-                                                && (! g_ascii_strcasecmp (tag, items[j])
+                                                    && (! g_ascii_strcasecmp (tag, items[j])
                                                         || ! g_ascii_strcasecmp (tag, gettext (items[j]))))
                                                 {
                                                         atomic_criteria = (ArioServerAtomicCriteria *) g_malloc (sizeof (ArioServerAtomicCriteria));

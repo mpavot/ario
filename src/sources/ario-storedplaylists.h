@@ -55,8 +55,8 @@ typedef struct
 
 GType                   ario_storedplaylists_get_type   (void) G_GNUC_CONST;
 
-GtkWidget*              ario_storedplaylists_new        (GtkUIManager *mgr,
-                                                         GtkActionGroup *group);
+GtkWidget*              ario_storedplaylists_new        (void);
+
 G_END_DECLS
 
 #endif  /* ENABLE_STOREDPLAYLISTS */

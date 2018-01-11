@@ -62,24 +62,27 @@ enum
 
 GType                   ario_songlist_get_type                  (void) G_GNUC_CONST;
 
-GtkWidget*              ario_songlist_new                       (GtkUIManager *mgr,
-                                                                 gchar *popup,
+GtkWidget*              ario_songlist_new                       (gchar *popup,
                                                                  gboolean is_sortable);
 GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *songlist);
 
 GtkTreeSelection*       ario_songlist_get_selection             (ArioSonglist *songlist);
 
-void                    ario_songlist_cmd_add_songlists         (GtkAction *action,
-                                                                 ArioSonglist *songlist);
+void                    ario_songlist_cmd_add_songlists         (GSimpleAction *action,
+                                                                 GVariant *parameter,
+                                                                 gpointer data);
 
-void                    ario_songlist_cmd_add_play_songlists    (GtkAction *action,
-                                                                 ArioSonglist *songlist);
+void                    ario_songlist_cmd_add_play_songlists    (GSimpleAction *action,
+                                                                 GVariant *parameter,
+                                                                 gpointer data);
 
-void                    ario_songlist_cmd_songs_properties      (GtkAction *action,
-                                                                 ArioSonglist *songlist);
+void                    ario_songlist_cmd_songs_properties      (GSimpleAction *action,
+                                                                 GVariant *parameter,
+                                                                 gpointer data);
 
-void                    ario_songlist_cmd_clear_add_play_songlists (GtkAction *action,
-                                                                    ArioSonglist *songlist);
+void                    ario_songlist_cmd_clear_add_play_songlists (GSimpleAction *action,
+                                                                    GVariant *parameter,
+                                                                    gpointer data);
 
 G_END_DECLS
 

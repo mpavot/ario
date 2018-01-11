@@ -36,26 +36,22 @@
 #ifdef ENABLE_STOREDPLAYLISTS
 
 static void ario_storedplaylists_shutdown (ArioSource *source);
-static void ario_storedplaylists_set_property (GObject *object,
-                                               guint prop_id,
-                                               const GValue *value,
-                                               GParamSpec *pspec);
-static void ario_storedplaylists_get_property (GObject *object,
-                                               guint prop_id,
-                                               GValue *value,
-                                               GParamSpec *pspec);
 static void ario_storedplaylists_connectivity_changed_cb (ArioServer *server,
                                                           ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_storedplaylists_changed_cb (ArioServer *server,
                                                              ArioStoredplaylists *storedplaylists);
-static void ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
-                                                          ArioStoredplaylists *storedplaylists);
-static void ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
-                                                               ArioStoredplaylists *storedplaylists);
-static void ario_storedplaylists_cmd_clear_add_play_storedplaylists (GtkAction *action,
-                                                                     ArioStoredplaylists *storedplaylists);
-static void ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
-                                                             ArioStoredplaylists *storedplaylists);
+static void ario_storedplaylists_cmd_add_storedplaylists (GSimpleAction *action,
+                                                          GVariant *parameter,
+                                                          gpointer data);
+static void ario_storedplaylists_cmd_add_play_storedplaylists (GSimpleAction *action,
+                                                               GVariant *parameter,
+                                                               gpointer data);
+static void ario_storedplaylists_cmd_clear_add_play_storedplaylists (GSimpleAction *action,
+                                                                     GVariant *parameter,
+                                                                     gpointer data);
+static void ario_storedplaylists_cmd_delete_storedplaylists (GSimpleAction *action,
+                                                             GVariant *parameter,
+                                                             gpointer data);
 static void ario_storedplaylists_popup_menu_cb (ArioDndTree* tree,
                                                 ArioStoredplaylists *storedplaylists);
 static void ario_storedplaylists_playlists_activate_cb (ArioDndTree* tree,
@@ -79,42 +75,24 @@ struct ArioStoredplaylistsPrivate
         gboolean connected;
         gboolean empty;
 
-        GtkUIManager *ui_manager;
+        GtkWidget *popup;
 };
 
+
 /* Actions on playlists list */
-static GtkActionEntry ario_storedplaylists_actions [] =
-{
-        { "StoredplaylistsAddPlaylists", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_storedplaylists_cmd_add_storedplaylists) },
-        { "StoredplaylistsAddPlayPlaylists", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_storedplaylists_cmd_add_play_storedplaylists) },
-        { "StoredplaylistsClearAddPlayPlaylists", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_storedplaylists_cmd_clear_add_play_storedplaylists) },
-        { "StoredplaylistsDelete", "edit-delete", N_("_Delete"), NULL,
-                NULL,
-                G_CALLBACK (ario_storedplaylists_cmd_delete_storedplaylists) }
+static const GActionEntry ario_storedplaylists_actions [] = {
+        { "storedpl-add-to-pl", ario_storedplaylists_cmd_add_storedplaylists },
+        { "storedpl-add-play", ario_storedplaylists_cmd_add_play_storedplaylists },
+        { "storedpl-clear-add-play", ario_storedplaylists_cmd_clear_add_play_storedplaylists },
+        { "storedpl-delete", ario_storedplaylists_cmd_delete_storedplaylists },
 };
 static guint ario_storedplaylists_n_actions = G_N_ELEMENTS (ario_storedplaylists_actions);
 
-/* Actions on songs list */
-static GtkActionEntry ario_storedplaylists_songs_actions [] =
-{
-        { "StoredplaylistsAddSongs", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_add_songlists) },
-        { "StoredplaylistsAddPlaySongs", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
-        { "StoredplaylistsClearAddPlaySongs", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
-        { "StoredplaylistsSongsProperties", "document-properties", N_("_Properties"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_songs_properties) }
+static const GActionEntry ario_storedplaylists_songs_actions [] = {
+        { "storedpl-add-to-pl-songs", ario_songlist_cmd_add_songlists },
+        { "storedpl-add-play-songs", ario_songlist_cmd_add_play_songlists },
+        { "storedpl-clear-add-play-songs", ario_songlist_cmd_clear_add_play_songlists },
+        { "storedpl-songs-properties", ario_songlist_cmd_songs_properties },
 };
 static guint ario_storedplaylists_n_songs_actions = G_N_ELEMENTS (ario_storedplaylists_songs_actions);
 
@@ -122,7 +100,6 @@ static guint ario_storedplaylists_n_songs_actions = G_N_ELEMENTS (ario_storedpla
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 enum
@@ -171,12 +148,7 @@ static void
 ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        /* GObject virtual methods */
-        object_class->set_property = ario_storedplaylists_set_property;
-        object_class->get_property = ario_storedplaylists_get_property;
 
         /* ArioSource virtual methods */
         source_class->get_id = ario_storedplaylists_get_id;
@@ -184,15 +156,6 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
         source_class->get_icon = ario_storedplaylists_get_icon;
         source_class->shutdown = ario_storedplaylists_shutdown;
         source_class->select = ario_storedplaylists_select;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
@@ -206,6 +169,8 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         GtkCellRenderer *renderer;
         GtkWidget *scrolledwindow_storedplaylists;
         GtkWidget *tree;
+        GtkBuilder *builder;
+        GMenuModel *menu;
         int pos;
 
         storedplaylists->priv = ARIO_STOREDPLAYLISTS_GET_PRIVATE (storedplaylists);
@@ -274,6 +239,15 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
                                         pos);
 
         gtk_box_pack_start (GTK_BOX (storedplaylists), storedplaylists->priv->paned, TRUE, TRUE, 0);
+
+        /* Popup menu */
+        builder = gtk_builder_new_from_file (UI_PATH "ario-songlist-menu.ui");
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "storedpl-menu"));
+        storedplaylists->priv->popup = gtk_menu_new_from_model (menu);
+        gtk_menu_attach_to_widget  (GTK_MENU (storedplaylists->priv->popup),
+                                    GTK_WIDGET (storedplaylists),
+                                    NULL);
+        g_object_unref (builder);
 }
 
 void
@@ -289,54 +263,14 @@ ario_storedplaylists_shutdown (ArioSource *source)
                                        pos);
 }
 
-static void
-ario_storedplaylists_set_property (GObject *object,
-                                   guint prop_id,
-                                   const GValue *value,
-                                   GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                storedplaylists->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_storedplaylists_get_property (GObject *object,
-                                   guint prop_id,
-                                   GValue *value,
-                                   GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, storedplaylists->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_storedplaylists_new (GtkUIManager *mgr,
-                          GtkActionGroup *group)
+ario_storedplaylists_new (void)
 {
         ARIO_LOG_FUNCTION_START;
         ArioStoredplaylists *storedplaylists;
         ArioServer *server = ario_server_get_instance ();
 
         storedplaylists = g_object_new (TYPE_ARIO_STOREDPLAYLISTS,
-                                        "ui-manager", mgr,
                                         NULL);
 
         g_return_val_if_fail (storedplaylists->priv != NULL, NULL);
@@ -350,18 +284,19 @@ ario_storedplaylists_new (GtkUIManager *mgr,
                                  storedplaylists, 0);
 
         /* Create songs list */
-        storedplaylists->priv->songs = ario_songlist_new (mgr,
-                                                          "/StoredplaylistsSongsPopup",
+        storedplaylists->priv->songs = ario_songlist_new ("storedpl-songs-menu",
                                                           FALSE);
         gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), storedplaylists->priv->songs, TRUE, FALSE);
 
         /* Register actions */
-        gtk_action_group_add_actions (group,
-                                      ario_storedplaylists_actions,
-                                      ario_storedplaylists_n_actions, storedplaylists);
-        gtk_action_group_add_actions (group,
-                                      ario_storedplaylists_songs_actions,
-                                      ario_storedplaylists_n_songs_actions, storedplaylists->priv->songs);
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_storedplaylists_actions,
+                                         ario_storedplaylists_n_actions,
+                                         storedplaylists);
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_storedplaylists_songs_actions,
+                                         ario_storedplaylists_n_songs_actions,
+                                         storedplaylists->priv->songs);
 
         return GTK_WIDGET (storedplaylists);
 }
@@ -549,40 +484,48 @@ ario_storedplaylists_clear_add_play_playlists (ArioStoredplaylists *storedplayli
 }
 
 static void
-ario_storedplaylists_cmd_add_storedplaylists (GtkAction *action,
-                                              ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_cmd_add_storedplaylists (GSimpleAction *action,
+                                              GVariant *parameter,
+                                              gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (data);
         /* Add songs to playlist */
         ario_storedplaylists_add_playlists (storedplaylists, PLAYLIST_ADD);
 }
 
 static void
-ario_storedplaylists_cmd_add_play_storedplaylists (GtkAction *action,
-                                                   ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_cmd_add_play_storedplaylists (GSimpleAction *action,
+                                                   GVariant *parameter,
+                                                   gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (data);
         /* Add songs to playlist and play */
         ario_storedplaylists_add_playlists (storedplaylists, PLAYLIST_ADD_PLAY);
 }
 
 static void
-ario_storedplaylists_cmd_clear_add_play_storedplaylists (GtkAction *action,
-                                                         ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_cmd_clear_add_play_storedplaylists (GSimpleAction *action,
+                                                         GVariant *parameter,
+                                                         gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (data);
         ario_storedplaylists_clear_add_play_playlists (storedplaylists);
 }
 
 static void
-ario_storedplaylists_cmd_delete_storedplaylists (GtkAction *action,
-                                                 ArioStoredplaylists *storedplaylists)
+ario_storedplaylists_cmd_delete_storedplaylists (GSimpleAction *action,
+                                                 GVariant *parameter,
+                                                 gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
         GSList *playlists = NULL;
         GSList *tmp;
+        ArioStoredplaylists *storedplaylists = ARIO_STOREDPLAYLISTS (data);
 
         /* Create confirmation dialog for playlist deletion */
         dialog = gtk_message_dialog_new (NULL,
@@ -616,13 +559,10 @@ ario_storedplaylists_popup_menu_cb (ArioDndTree* tree,
                                     ArioStoredplaylists *storedplaylists)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *menu;
 
         if (gtk_tree_selection_count_selected_rows (storedplaylists->priv->selection) > 0) {
                 /* Show popup menu */
-                menu = gtk_ui_manager_get_widget (storedplaylists->priv->ui_manager, "/StoredplaylistsPopup");
-                gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                                gtk_get_current_event_time ());
+                gtk_menu_popup_at_pointer (GTK_MENU (storedplaylists->priv->popup), NULL);
         }
 }
 
