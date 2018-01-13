@@ -175,7 +175,7 @@ ario_browser_finalize (GObject *object)
 }
 
 GtkWidget *
-ario_browser_new ()
+ario_browser_new (void)
 {
         ARIO_LOG_FUNCTION_START;
         ArioBrowser *browser;

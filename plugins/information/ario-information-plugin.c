@@ -50,16 +50,9 @@ static void
 impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
-        GtkUIManager *uimanager;
         ArioInformationPlugin *pi = ARIO_INFORMATION_PLUGIN (plugin);
-        g_object_get (shell,
-                      "ui-manager", &uimanager,
-                      NULL);
-
-        pi->priv->source = ario_information_new (uimanager);
+        pi->priv->source = ario_information_new ();
         g_return_if_fail (IS_ARIO_INFORMATION (pi->priv->source));
-
-        g_object_unref (uimanager);
 
         ario_source_manager_append (ARIO_SOURCE (pi->priv->source));
         ario_source_manager_reorder ();

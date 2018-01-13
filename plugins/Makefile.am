@@ -1,8 +1,7 @@
 SUBDIRS = \
         filesystem\
         information\
-        radios\
-        wikipedia
+        radios
 
 if USE_DBUS
         SUBDIRS += mmkeys

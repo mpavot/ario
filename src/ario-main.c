@@ -38,7 +38,7 @@
 #include <windows.h>
 #endif
 
-static GtkWidget *shell = NULL;
+static ArioShell *shell = NULL;
 static gboolean minimized = FALSE;
 
 static void
@@ -132,8 +132,7 @@ main (int argc, char *argv[])
         g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
 
         /* Initialisation of plugins engine */
-        // TODO
-        // ario_plugins_engine_init (shell);
+        ario_plugins_engine_init (shell);
 
         /* Starts GTK main loop */
         status = g_application_run (G_APPLICATION (app), argc, argv);

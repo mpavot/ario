@@ -284,7 +284,8 @@ ario_storedplaylists_new (void)
                                  storedplaylists, 0);
 
         /* Create songs list */
-        storedplaylists->priv->songs = ario_songlist_new ("storedpl-songs-menu",
+        storedplaylists->priv->songs = ario_songlist_new (UI_PATH "ario-songlist-menu.ui",
+                                                          "storedpl-songs-menu",
                                                           FALSE);
         gtk_paned_pack2 (GTK_PANED (storedplaylists->priv->paned), storedplaylists->priv->songs, TRUE, FALSE);
 

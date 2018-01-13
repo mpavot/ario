@@ -35,14 +35,6 @@
 #include "servers/ario-server.h"
 
 static void ario_information_finalize (GObject *object);
-static void ario_information_set_property (GObject *object,
-                                           guint prop_id,
-                                           const GValue *value,
-                                           GParamSpec *pspec);
-static void ario_information_get_property (GObject *object,
-                                           guint prop_id,
-                                           GValue *value,
-                                           GParamSpec *pspec);
 static void ario_information_fill_song (ArioInformation *information);
 static void ario_information_fill_cover (ArioInformation *information);
 static void ario_information_album_foreach (GtkWidget *widget,
@@ -67,8 +59,6 @@ static gboolean ario_information_cover_button_press_cb (GtkWidget *widget,
 struct ArioInformationPrivate
 {
         gboolean connected;
-
-        GtkUIManager *ui_manager;
 
         GtkWidget *artist_label;
         GtkWidget *album_label;
@@ -96,7 +86,6 @@ static const GtkTargetEntry criterias_targets  [] = {
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 #define ARIO_INFORMATION_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_INFORMATION, ArioInformationPrivate))
@@ -156,8 +145,6 @@ ario_information_class_init (ArioInformationClass *klass)
 
         /* GObject virtual methods */
         object_class->finalize = ario_information_finalize;
-        object_class->set_property = ario_information_set_property;
-        object_class->get_property = ario_information_get_property;
 
         /* ArioSource virtual methods */
         source_class->get_id = ario_information_get_id;
@@ -165,15 +152,6 @@ ario_information_class_init (ArioInformationClass *klass)
         source_class->get_icon = ario_information_get_icon;
         source_class->select = ario_information_select;
         source_class->unselect = ario_information_unselect;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioInformationPrivate));
@@ -287,53 +265,14 @@ ario_information_finalize (GObject *object)
         G_OBJECT_CLASS (ario_information_parent_class)->finalize (object);
 }
 
-static void
-ario_information_set_property (GObject *object,
-                               guint prop_id,
-                               const GValue *value,
-                               GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioInformation *information = ARIO_INFORMATION (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                information->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_information_get_property (GObject *object,
-                               guint prop_id,
-                               GValue *value,
-                               GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioInformation *information = ARIO_INFORMATION (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, information->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_information_new (GtkUIManager *mgr)
+ario_information_new (void)
 {
         ARIO_LOG_FUNCTION_START;
         ArioInformation *information;
         ArioServer *server = ario_server_get_instance ();
 
         information = g_object_new (TYPE_ARIO_INFORMATION,
-                                    "ui-manager", mgr,
                                     NULL);
 
         g_return_val_if_fail (information->priv != NULL, NULL);

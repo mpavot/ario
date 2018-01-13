@@ -11,7 +11,7 @@ libradios_la_SOURCES = \
 libradios_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 uixmldir = $(plugindatadir)
-uixml_DATA = radios-ui.xml
+uixml_DATA = ario-radios-menu.ui
 
 alldatadir = $(plugindatadir)
 alldata_DATA = radios.xml.default

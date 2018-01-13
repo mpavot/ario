@@ -62,7 +62,8 @@ enum
 
 GType                   ario_songlist_get_type                  (void) G_GNUC_CONST;
 
-GtkWidget*              ario_songlist_new                       (gchar *popup,
+GtkWidget*              ario_songlist_new                       (const gchar *menu_file,
+                                                                 const gchar *popup,
                                                                  gboolean is_sortable);
 GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *songlist);
 

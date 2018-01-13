@@ -11,7 +11,7 @@ libfilesystem_la_SOURCES = \
 libfilesystem_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 uixmldir = $(plugindatadir)
-uixml_DATA = filesystem-ui.xml
+uixml_DATA = ario-filesystem-menu.ui
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\

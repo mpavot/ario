@@ -160,7 +160,8 @@ ario_search_new (void)
                                  search, 0);
 
         /* Search songs list */
-        search->priv->searchs = ario_songlist_new ("search-menu",
+        search->priv->searchs = ario_songlist_new (UI_PATH "ario-songlist-menu.ui",
+                                                   "search-menu",
                                                    TRUE);
 
         /* Songs list widget */

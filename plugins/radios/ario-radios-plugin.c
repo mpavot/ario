@@ -37,7 +37,6 @@
 
 struct _ArioRadiosPluginPrivate
 {
-        guint ui_merge_id;
         GtkWidget *source;
 };
 
@@ -53,29 +52,10 @@ static void
 impl_activate (ArioPlugin *plugin,
                ArioShell *shell)
 {
-        GtkUIManager *uimanager;
-        GtkActionGroup *actiongroup;
         ArioRadiosPlugin *pi = ARIO_RADIOS_PLUGIN (plugin);
-        gchar *file;
 
-        g_object_get (shell,
-                      "ui-manager", &uimanager,
-                      "action-group", &actiongroup,
-                      NULL);
-
-        pi->priv->source = ario_radio_new (uimanager,
-                                           actiongroup);
+        pi->priv->source = ario_radio_new ();
         g_return_if_fail (IS_ARIO_RADIO (pi->priv->source));
-
-        file = ario_plugin_find_file ("radios-ui.xml");
-        if (file) {
-                pi->priv->ui_merge_id = gtk_ui_manager_add_ui_from_file (uimanager,
-                                                                         file, NULL);
-                g_free (file);
-        }
-
-        g_object_unref (uimanager);
-        g_object_unref (actiongroup);
 
         ario_source_manager_append (ARIO_SOURCE (pi->priv->source));
         ario_source_manager_reorder ();
@@ -85,13 +65,7 @@ static void
 impl_deactivate (ArioPlugin *plugin,
                  ArioShell *shell)
 {
-        GtkUIManager *uimanager;
-
         ArioRadiosPlugin *pi = ARIO_RADIOS_PLUGIN (plugin);
-
-        g_object_get (shell, "ui-manager", &uimanager, NULL);
-        gtk_ui_manager_remove_ui (uimanager, pi->priv->ui_merge_id);
-        g_object_unref (uimanager);
 
         ario_source_manager_remove (ARIO_SOURCE (pi->priv->source));
 }

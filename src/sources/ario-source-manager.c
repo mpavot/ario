@@ -54,7 +54,6 @@ static ArioSourceManager *instance = NULL;
 typedef struct ArioSourceData
 {
         ArioSource *source;
-        guint ui_merge_id;
 } ArioSourceData;
 
 #define ARIO_SOURCE_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManagerPrivate))
@@ -76,7 +75,7 @@ ario_source_manager_init (ArioSourceManager *sourcemanager)
 }
 
 GtkWidget *
-ario_source_manager_get_instance ()
+ario_source_manager_get_instance (void)
 {
         ARIO_LOG_FUNCTION_START;
         GtkWidget *source;
@@ -230,7 +229,6 @@ ario_source_manager_set_source_active (ArioSource *source,
 {
         ARIO_LOG_FUNCTION_START;
         gchar *conf_name;
-        GtkAction *action;
 
         /* Set source activity in preferences */
         conf_name = g_strconcat (ario_source_get_id (source), "-active", NULL);
@@ -246,20 +244,6 @@ ario_source_manager_set_source_active (ArioSource *source,
                 /* Hide source */
                 gtk_widget_hide (GTK_WIDGET (source));
         }
-
-        /* Select source in menu */
-        // TODO
-        //action = gtk_action_group_get_action (instance->priv->group, ario_source_get_id (source));
-        //gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), active);
-}
-
-static void
-ario_source_manager_menu_source_cb (GtkToggleAction *action,
-                                    ArioSource *source)
-{
-        ARIO_LOG_FUNCTION_START;
-        /* Select source as in menu */
-        ario_source_manager_set_source_active (source, gtk_toggle_action_get_active (action));
 }
 
 static void
@@ -278,7 +262,6 @@ ario_source_manager_append (ArioSource *source)
         GtkWidget *hbox;
         gchar *conf_name;
         ArioSourceData *data;
-        guint ui_merge_id;
 
         /* Create hbox for tab header */
         hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
@@ -310,19 +293,11 @@ ario_source_manager_append (ArioSource *source)
         else
                 gtk_widget_hide (GTK_WIDGET (source));
         gtk_widget_set_no_show_all (GTK_WIDGET (source), TRUE);
-
-        /* Add source to popup menu for selection */
-        GtkToggleActionEntry actions [] =
-        {
-                { ario_source_get_id (source), NULL, ario_source_get_name (source), NULL,
-                        NULL, G_CALLBACK (ario_source_manager_menu_source_cb), ario_conf_get_boolean (conf_name, TRUE) }
-        };
         g_free (conf_name);
 
         /* Add source data to list */
         data = (ArioSourceData *) g_malloc (sizeof (ArioSourceData));
         data->source = source;
-        data->ui_merge_id = ui_merge_id;
 
         instance->priv->sources = g_slist_append (instance->priv->sources, data);
 }
@@ -389,8 +364,7 @@ ario_source_manager_button_press_cb (GtkWidget *widget,
 
                 /* Show popup menu */
                 gtk_widget_show_all (menu);
-                gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                                gtk_get_current_event_time ());
+                gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
         }
 
         return FALSE;

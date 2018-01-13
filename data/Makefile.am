@@ -19,8 +19,7 @@ art_DATA = ario.png		\
 	   pl-inside.png
 
 uidir = $(pkgdatadir)/ui
-ui_DATA = ario-ui.xml \
-	     ui/ario-shell-menu.ui      \
+ui_DATA = ui/ario-shell-menu.ui      	\
 	     ui/ario-playlist-menu.ui   \
 	     ui/ario-browser-menu.ui   	\
 	     ui/ario-songlist-menu.ui  	\

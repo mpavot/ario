@@ -47,30 +47,28 @@ typedef struct ArioInternetRadio
 static void ario_radio_class_init (ArioRadioClass *klass);
 static void ario_radio_init (ArioRadio *radio);
 static void ario_radio_finalize (GObject *object);
-static void ario_radio_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec);
-static void ario_radio_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec);
 static void ario_radio_state_changed_cb (ArioServer *server,
                                          ArioRadio *radio);
 static void ario_radio_add_in_playlist (ArioRadio *radio,
                                         PlaylistAction action);
-static void ario_radio_cmd_add_radios (GtkAction *action,
-                                       ArioRadio *radio);
-static void ario_radio_cmd_add_play_radios (GtkAction *action,
-                                            ArioRadio *radio);
-static void ario_radio_cmd_clear_add_play_radios (GtkAction *action,
-                                                  ArioRadio *radio);
-static void ario_radio_cmd_new_radio (GtkAction *action,
-                                      ArioRadio *radio);
-static void ario_radio_cmd_delete_radios (GtkAction *action,
-                                          ArioRadio *radio);
-static void ario_radio_cmd_radio_properties (GtkAction *action,
-                                             ArioRadio *radio);
+static void ario_radio_cmd_add_radios (GSimpleAction *action,
+                                       GVariant *parameter,
+                                       gpointer data);
+static void ario_radio_cmd_add_play_radios (GSimpleAction *action,
+                                            GVariant *parameter,
+                                            gpointer data);
+static void ario_radio_cmd_clear_add_play_radios (GSimpleAction *action,
+                                                  GVariant *parameter,
+                                                  gpointer data);
+static void ario_radio_cmd_new_radio (GSimpleAction *action,
+                                      GVariant *parameter,
+                                      gpointer data);
+static void ario_radio_cmd_delete_radios (GSimpleAction *action,
+                                          GVariant *parameter,
+                                          gpointer data);
+static void ario_radio_cmd_radio_properties (GSimpleAction *action,
+                                             GVariant *parameter,
+                                             gpointer data);
 static void ario_radio_radios_selection_drag_foreach (GtkTreeModel *model,
                                                       GtkTreePath *path,
                                                       GtkTreeIter *iter,
@@ -100,37 +98,26 @@ struct ArioRadioPrivate
 
         gboolean connected;
 
-        GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
-
         xmlDocPtr doc;
 
         GtkWidget *name_entry;
         GtkWidget *data_label;
         GtkWidget *data_entry;
+
+        GtkWidget *none_popup;
+        GtkWidget *single_popup;
+        GtkWidget *multiple_popup;
 };
 
 /* Actions on radios */
-static GtkActionEntry ario_radio_actions [] =
+static const GActionEntry ario_radio_actions [] =
 {
-        { "RadioAddRadios", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_radio_cmd_add_radios) },
-        { "RadioAddPlayRadios", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_radio_cmd_add_play_radios) },
-        { "RadioClearAddPlayRadios", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_radio_cmd_clear_add_play_radios) },
-        { "RadioNewRadio", "list-add", N_("Add a _new radio"), NULL,
-                NULL,
-                G_CALLBACK (ario_radio_cmd_new_radio) },
-        { "RadioDeleteRadios", "edit-delete", N_("_Delete this radios"), NULL,
-                NULL,
-                G_CALLBACK (ario_radio_cmd_delete_radios) },
-        { "RadioProperties", "document-properties", N_("_Properties"), NULL,
-                NULL,
-                G_CALLBACK (ario_radio_cmd_radio_properties) }
+        { "radio-new", ario_radio_cmd_new_radio },
+        { "radio-add-to-pl", ario_radio_cmd_add_radios },
+        { "radio-add-play", ario_radio_cmd_add_play_radios },
+        { "radio-clear-add-play", ario_radio_cmd_clear_add_play_radios },
+        { "radio-delete", ario_radio_cmd_delete_radios },
+        { "radio-properties", ario_radio_cmd_radio_properties },
 };
 static guint ario_radio_n_actions = G_N_ELEMENTS (ario_radio_actions);
 
@@ -138,7 +125,6 @@ static guint ario_radio_n_actions = G_N_ELEMENTS (ario_radio_actions);
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 /* Tree columns */
@@ -199,22 +185,11 @@ ario_radio_class_init (ArioRadioClass *klass)
 
         /* GObject virtual methods */
         object_class->finalize = ario_radio_finalize;
-        object_class->set_property = ario_radio_set_property;
-        object_class->get_property = ario_radio_get_property;
 
         /* ArioSource virtual methods */
         source_class->get_id = ario_radio_get_id;
         source_class->get_name = ario_radio_get_name;
         source_class->get_icon = ario_radio_get_icon;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioRadioPrivate));
@@ -226,7 +201,6 @@ ario_radio_init (ArioRadio *radio)
         ARIO_LOG_FUNCTION_START;
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
-
         GtkWidget *scrolledwindow_radios;
 
         radio->priv = ARIO_RADIO_GET_PRIVATE (radio);
@@ -296,64 +270,26 @@ ario_radio_finalize (GObject *object)
         radio->priv->doc = NULL;
 
         for (i = 0; i < ario_radio_n_actions; ++i) {
-                gtk_action_group_remove_action (radio->priv->actiongroup,
-                                                gtk_action_group_get_action (radio->priv->actiongroup, ario_radio_actions[i].name));
+                g_action_map_remove_action (G_ACTION_MAP (g_application_get_default ()),
+                                            ario_radio_actions[i].name);
         }
 
         G_OBJECT_CLASS (ario_radio_parent_class)->finalize (object);
 }
 
-static void
-ario_radio_set_property (GObject *object,
-                         guint prop_id,
-                         const GValue *value,
-                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioRadio *radio = ARIO_RADIO (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                radio->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_radio_get_property (GObject *object,
-                         guint prop_id,
-                         GValue *value,
-                         GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioRadio *radio = ARIO_RADIO (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, radio->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
 GtkWidget *
-ario_radio_new (GtkUIManager *mgr,
-                GtkActionGroup *group)
+ario_radio_new (void)
 {
         ARIO_LOG_FUNCTION_START;
         ArioRadio *radio;
+        GtkBuilder *builder;
+        GMenuModel *menu;
+        gchar *file;
 
         radio = g_object_new (TYPE_ARIO_RADIO,
-                              "ui-manager", mgr,
                               NULL);
 
         g_return_val_if_fail (radio->priv != NULL, NULL);
-        radio->priv->actiongroup = group;
 
         /* Signals to synchronize the radio with server */
         g_signal_connect_object (ario_server_get_instance (),
@@ -362,9 +298,30 @@ ario_radio_new (GtkUIManager *mgr,
                                  radio, 0);
         radio->priv->connected = ario_server_is_connected ();
 
-        gtk_action_group_add_actions (group,
-                                      ario_radio_actions,
-                                      ario_radio_n_actions, radio);
+        /* Create menu */
+        file = ario_plugin_find_file ("ario-radios-menu.ui");
+        g_return_val_if_fail (file != NULL, NULL);
+        builder = gtk_builder_new_from_file (file);
+        g_free (file);
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "none-menu"));
+        radio->priv->none_popup = gtk_menu_new_from_model (menu);
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "single-menu"));
+        radio->priv->single_popup = gtk_menu_new_from_model (menu);
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "multiple-menu"));
+        radio->priv->multiple_popup = gtk_menu_new_from_model (menu);
+        gtk_menu_attach_to_widget  (GTK_MENU (radio->priv->none_popup),
+                                    GTK_WIDGET (radio->priv->tree),
+                                    NULL);
+        gtk_menu_attach_to_widget  (GTK_MENU (radio->priv->single_popup),
+                                    GTK_WIDGET (radio->priv->tree),
+                                    NULL);
+        gtk_menu_attach_to_widget  (GTK_MENU (radio->priv->multiple_popup),
+                                    GTK_WIDGET (radio->priv->tree),
+                                    NULL);
+
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_radio_actions,
+                                         ario_radio_n_actions, radio);
 
         ario_radio_fill_radios (radio);
 
@@ -624,28 +581,34 @@ ario_radio_add_in_playlist (ArioRadio *radio,
 }
 
 static void
-ario_radio_cmd_add_radios (GtkAction *action,
-                           ArioRadio *radio)
+ario_radio_cmd_add_radios (GSimpleAction *action,
+                           GVariant *parameter,
+                           gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioRadio *radio = ARIO_RADIO (data);
         /* Append radios to playlist */
         ario_radio_add_in_playlist (radio, PLAYLIST_ADD);
 }
 
 static void
-ario_radio_cmd_add_play_radios (GtkAction *action,
-                                ArioRadio *radio)
+ario_radio_cmd_add_play_radios (GSimpleAction *action,
+                                GVariant *parameter,
+                                gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioRadio *radio = ARIO_RADIO (data);
         /* Append radios to playlist and play */
         ario_radio_add_in_playlist (radio, PLAYLIST_ADD_PLAY);
 }
 
 static void
-ario_radio_cmd_clear_add_play_radios (GtkAction *action,
-                                      ArioRadio *radio)
+ario_radio_cmd_clear_add_play_radios (GSimpleAction *action,
+                                      GVariant *parameter,
+                                      gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioRadio *radio = ARIO_RADIO (data);
         /* Empyt playlist, append radios to playlist and play */
         ario_radio_add_in_playlist (radio, PLAYLIST_REPLACE);
 }
@@ -660,21 +623,20 @@ ario_radio_popup_menu_cb (ArioDndTree* tree,
         switch (gtk_tree_selection_count_selected_rows (radio->priv->selection)) {
         case 0:
                 /* No selected row */
-                menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupNone");
+                menu = radio->priv->none_popup;
                 break;
         case 1:
                 /* One row selected */
-                menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupSingle");
+                menu = radio->priv->single_popup;
                 break;
         default:
                 /* Multiple rows */
-                menu = gtk_ui_manager_get_widget (radio->priv->ui_manager, "/RadioPopupMultiple");
+                menu = radio->priv->multiple_popup;
                 break;
         }
 
         /* Show popup menu */
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                        gtk_get_current_event_time ());
+        gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
 }
 
 static void
@@ -1007,11 +969,13 @@ ario_radio_launch_creation_dialog (ArioRadio * radio,
 }
 
 static void
-ario_radio_cmd_new_radio (GtkAction *action,
-                          ArioRadio *radio)
+ario_radio_cmd_new_radio (GSimpleAction *action,
+                          GVariant *parameter,
+                          gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         ArioInternetRadio new_internet_radio;
+        ArioRadio *radio = ARIO_RADIO (data);
 
         new_internet_radio.name = NULL;
         new_internet_radio.url = NULL;
@@ -1067,13 +1031,15 @@ ario_radio_delete_radio (ArioInternetRadio *internet_radio,
 }
 
 static void
-ario_radio_cmd_delete_radios (GtkAction *action,
-                              ArioRadio *radio)
+ario_radio_cmd_delete_radios (GSimpleAction *action,
+                              GVariant *parameter,
+                              gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GSList *internet_radios = NULL;
         GtkWidget *dialog;
         gint retval = GTK_RESPONSE_NO;
+        ArioRadio *radio = ARIO_RADIO (data);
 
         /* Create confirmation dialog window */
         dialog = gtk_message_dialog_new (NULL,
@@ -1165,15 +1131,17 @@ ario_radio_edit_radio_properties (ArioRadio *radio,
 }
 
 static void
-ario_radio_cmd_radio_properties (GtkAction *action,
-                                 ArioRadio *radio)
+ario_radio_cmd_radio_properties (GSimpleAction *action,
+                                 GVariant *parameter,
+                                 gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
         GList* paths;
         GtkTreeIter iter;
         ArioInternetRadio *internet_radio;
-        GtkTreeModel *tree_model = GTK_TREE_MODEL (radio->priv->model);
         GtkTreePath *path;
+        ArioRadio *radio = ARIO_RADIO (data);
+        GtkTreeModel *tree_model = GTK_TREE_MODEL (radio->priv->model);
 
         /* Get path to first selected radio */
         paths = gtk_tree_selection_get_selected_rows (radio->priv->selection,
