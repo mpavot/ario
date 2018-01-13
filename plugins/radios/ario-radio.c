@@ -727,7 +727,7 @@ ario_radio_launch_dialog (ArioInternetRadio *internet_radio,
                           ArioInternetRadio *new_internet_radio)
 {
         GtkWidget *dialog, *error_dialog;
-        GtkWidget *table;
+        GtkWidget *grid;
         GtkWidget *label1, *label2;
         GtkWidget *entry1, *entry2;
         gint retval = GTK_RESPONSE_CANCEL;
@@ -759,37 +759,34 @@ ario_radio_launch_dialog (ArioInternetRadio *internet_radio,
         gtk_entry_set_activates_default (GTK_ENTRY (entry1), TRUE);
         gtk_entry_set_activates_default (GTK_ENTRY (entry2), TRUE);
 
-        /* Create table */
-        table = gtk_table_new (2, 2 , FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
+        /* Create grid */
+        grid = gtk_grid_new ();
+        gtk_container_set_border_width (GTK_CONTAINER (grid), 12);
 
-        /* Add widgets to table */
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   label1,
-                                   0, 1,
-                                   0, 1);
+        /* Add widgets to grid */
+        gtk_grid_attach (GTK_GRID(grid),
+                         label1,
+                         0, 0,
+                         1, 1);
 
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   label2,
-                                   0, 1,
-                                   1, 2);
+        gtk_grid_attach (GTK_GRID(grid),
+                         label2,
+                         0, 1,
+                         1, 1);
 
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   entry1,
-                                   1, 2,
-                                   0, 1);
+        gtk_grid_attach (GTK_GRID(grid),
+                         entry1,
+                         1, 0,
+                         1, 1);
 
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   entry2,
-                                   1, 2,
-                                   1, 2);
+        gtk_grid_attach (GTK_GRID(grid),
+                         entry2,
+                         1, 1,
+                         1, 1);
 
-        gtk_table_set_col_spacing (GTK_TABLE(table),
-                                   0, 4);
-
-        /* Add table to dialog */
+        /* Add grid to dialog */
         gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-                           table);
+                           grid);
         gtk_widget_show_all (dialog);
 
         /* Run dialog */
@@ -829,7 +826,7 @@ ario_radio_launch_creation_dialog (ArioRadio * radio,
                                    ArioInternetRadio *new_internet_radio)
 {
         GtkWidget *dialog, *error_dialog;
-        GtkWidget *table;
+        GtkWidget *grid;
         gint retval = GTK_RESPONSE_CANCEL;
 
         GtkWidget *vbox;
@@ -890,37 +887,31 @@ ario_radio_launch_creation_dialog (ArioRadio * radio,
         gtk_entry_set_activates_default (GTK_ENTRY (radio->priv->name_entry), TRUE);
         gtk_entry_set_activates_default (GTK_ENTRY (radio->priv->data_entry), TRUE);
 
-        /* Create table */
-        table = gtk_table_new (2, 2 , FALSE);
-        gtk_container_set_border_width (GTK_CONTAINER (table), 12);
+        /* Create grid */
+        grid = gtk_grid_new ();
+        gtk_container_set_border_width (GTK_CONTAINER (grid), 12);
 
-        /* Add widgets to table */
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   label1,
-                                   0, 1,
-                                   0, 1);
+        /* Add widgets to grid */
+        gtk_grid_attach (GTK_GRID (grid),
+                         label1,
+                         0, 0,
+                         1, 1);
+        gtk_grid_attach (GTK_GRID (grid),
+                         radio->priv->name_entry,
+                         1, 0,
+                         1, 1);
+        gtk_grid_attach (GTK_GRID (grid),
+                         radio->priv->data_label,
+                         0, 1,
+                         1, 1);
+        gtk_grid_attach (GTK_GRID (grid),
+                         radio->priv->data_entry,
+                         1, 1,
+                         1, 1);
 
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   radio->priv->data_label,
-                                   0, 1,
-                                   1, 2);
-
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   radio->priv->name_entry,
-                                   1, 2,
-                                   0, 1);
-
-        gtk_table_attach_defaults (GTK_TABLE(table),
-                                   radio->priv->data_entry,
-                                   1, 2,
-                                   1, 2);
-
-        gtk_table_set_col_spacing (GTK_TABLE(table),
-                                   0, 4);
-
-        /* Add table to vbox */
+        /* Add grid to vbox */
         gtk_box_pack_start (GTK_BOX (vbox),
-                            table,
+                            grid,
                             FALSE, FALSE, 0);
 
         gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
