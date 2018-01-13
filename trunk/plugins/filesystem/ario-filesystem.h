@@ -50,8 +50,8 @@ typedef struct
 
 GType                   ario_filesystem_get_type   (void) G_GNUC_CONST;
 
-GtkWidget*              ario_filesystem_new        (GtkUIManager *mgr,
-                                                    GtkActionGroup *group);
+GtkWidget*              ario_filesystem_new        (void);
+
 G_END_DECLS
 
 #endif /* __ARIO_FILESYSTEM_H */

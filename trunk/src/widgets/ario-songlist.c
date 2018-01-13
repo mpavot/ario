@@ -108,7 +108,8 @@ ario_songlist_finalize (GObject *object)
 }
 
 GtkWidget *
-ario_songlist_new (gchar *popup,
+ario_songlist_new (const gchar *menu_file,
+                   const gchar *popup,
                    gboolean is_sortable)
 {
         ARIO_LOG_FUNCTION_START;
@@ -202,7 +203,7 @@ ario_songlist_new (gchar *popup,
                           "activate",
                           G_CALLBACK (ario_songlist_activate_cb), songlist);
 
-        builder = gtk_builder_new_from_file (UI_PATH "ario-songlist-menu.ui");
+        builder = gtk_builder_new_from_file (menu_file);
         menu = G_MENU_MODEL (gtk_builder_get_object (builder, popup));
         songlist->priv->popup = gtk_menu_new_from_model (menu);
         gtk_menu_attach_to_widget  (GTK_MENU (songlist->priv->popup),

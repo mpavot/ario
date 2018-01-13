@@ -1,0 +1,38 @@
+<interface>
+        <menu id="menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.filesystem-add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.filesystem-add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.filesystem-clear-add-play</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="songs-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.filesystem-add-to-pl-songs</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.filesystem-add-play-songs</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.filesystem-clear-add-play-songs</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Properties</attribute>
+                                <attribute name="action">app.filesystem-properties-songs</attribute>
+                        </item>
+                </section> 
+        </menu>
+</interface>

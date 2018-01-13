@@ -1,0 +1,68 @@
+<interface>
+        <menu id="none-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add a new radio</attribute>
+                                <attribute name="action">app.radio-new</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="single-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.radio-add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.radio-add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.radio-clear-add-play</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add a new radio</attribute>
+                                <attribute name="action">app.radio-new</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Delete this radio</attribute>
+                                <attribute name="action">app.radio-delete</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Properties</attribute>
+                                <attribute name="action">app.radio-properties</attribute>
+                        </item>
+                </section> 
+        </menu>
+        <menu id="multiple-menu">
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add to playlist</attribute>
+                                <attribute name="action">app.radio-add-to-pl</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Add and play</attribute>
+                                <attribute name="action">app.radio-add-play</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Replace in playlist</attribute>
+                                <attribute name="action">app.radio-clear-add-play</attribute>
+                        </item>
+                </section> 
+                <section>
+                        <item>
+                                <attribute name="label" translatable="yes">Add a new radio</attribute>
+                                <attribute name="action">app.radio-new</attribute>
+                        </item>
+                        <item>
+                                <attribute name="label" translatable="yes">Delete this radio</attribute>
+                                <attribute name="action">app.radio-delete</attribute>
+                        </item>
+                </section> 
+        </menu>
+</interface>

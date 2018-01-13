@@ -26,6 +26,7 @@
 
 #include "ario-debug.h"
 #include "ario-util.h"
+#include "plugins/ario-plugin.h"
 #include "lib/ario-conf.h"
 #include "preferences/ario-preferences.h"
 #include "servers/ario-server.h"
@@ -36,24 +37,19 @@
 #define ROOT "/"
 
 static void ario_filesystem_shutdown (ArioSource *source);
-static void ario_filesystem_set_property (GObject *object,
-                                          guint prop_id,
-                                          const GValue *value,
-                                          GParamSpec *pspec);
-static void ario_filesystem_get_property (GObject *object,
-                                          guint prop_id,
-                                          GValue *value,
-                                          GParamSpec *pspec);
 static void ario_filesystem_state_changed_cb (ArioServer *server,
                                               ArioFilesystem *filesystem);
 static void ario_filesystem_filesystem_changed_cb (ArioServer *server,
                                                    ArioFilesystem *filesystem);
-static void ario_filesystem_cmd_add_filesystem (GtkAction *action,
-                                                ArioFilesystem *filesystem);
-static void ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
-                                                     ArioFilesystem *filesystem);
-static void ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
-                                                           ArioFilesystem *filesystem);
+static void ario_filesystem_cmd_add_filesystem (GSimpleAction *action,
+                                                GVariant *parameter,
+                                                gpointer data);
+static void ario_filesystem_cmd_add_play_filesystem (GSimpleAction *action,
+                                                     GVariant *parameter,
+                                                     gpointer data);
+static void ario_filesystem_cmd_clear_add_play_filesystem (GSimpleAction *action,
+                                                           GVariant *parameter,
+                                                           gpointer data);
 static void ario_filesystem_popup_menu_cb (ArioDndTree* tree,
                                            ArioFilesystem *filesystem);
 static void ario_filesystem_filetree_drag_data_get_cb (GtkWidget * widget,
@@ -84,40 +80,24 @@ struct ArioFilesystemPrivate
         gboolean connected;
         gboolean empty;
 
-        GtkUIManager *ui_manager;
-        GtkActionGroup *actiongroup;
+        GtkWidget *menu;
 };
 
 /* Actions on directories */
-static GtkActionEntry ario_filesystem_actions [] =
+static const GActionEntry ario_filesystem_actions [] =
 {
-        { "FilesystemAddDir", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_filesystem_cmd_add_filesystem) },
-        { "FilesystemAddPlayDir", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_filesystem_cmd_add_play_filesystem) },
-        { "FilesystemClearAddPlayDir", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_filesystem_cmd_clear_add_play_filesystem) }
+        { "filesystem-add-to-pl", ario_filesystem_cmd_add_filesystem },
+        { "filesystem-add-play", ario_filesystem_cmd_add_play_filesystem },
+        { "filesystem-clear-add-play", ario_filesystem_cmd_clear_add_play_filesystem },
 };
 static guint ario_filesystem_n_actions = G_N_ELEMENTS (ario_filesystem_actions);
 
 /* Actions on songs */
-static GtkActionEntry ario_filesystem_songs_actions [] =
-{
-        { "FilesystemAddSongs", "list-add", N_("_Add to playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_add_songlists) },
-        { "FilesystemAddPlaySongs", "media-playback-start", N_("Add and _play"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_add_play_songlists) },
-        { "FilesystemClearAddPlaySongs", "view-refresh", N_("_Replace in playlist"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_clear_add_play_songlists) },
-        { "FilesystemSongsProperties", "document-properties", N_("_Properties"), NULL,
-                NULL,
-                G_CALLBACK (ario_songlist_cmd_songs_properties) }
+static const GActionEntry ario_filesystem_songs_actions[] = {
+        { "filesystem-add-to-pl-songs", ario_songlist_cmd_add_songlists },
+        { "filesystem-add-play-songs", ario_songlist_cmd_add_play_songlists },
+        { "filesystem-clear-add-play-songs", ario_songlist_cmd_clear_add_play_songlists },
+        { "filesystem-properties-songs", ario_songlist_cmd_songs_properties },
 };
 static guint ario_filesystem_songs_n_actions = G_N_ELEMENTS (ario_filesystem_songs_actions);
 
@@ -125,7 +105,6 @@ static guint ario_filesystem_songs_n_actions = G_N_ELEMENTS (ario_filesystem_son
 enum
 {
         PROP_0,
-        PROP_UI_MANAGER
 };
 
 /* Directory tree columns */
@@ -178,12 +157,7 @@ static void
 ario_filesystem_class_init (ArioFilesystemClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioSourceClass *source_class = ARIO_SOURCE_CLASS (klass);
-
-        /* GObject virtual methods */
-        object_class->set_property = ario_filesystem_set_property;
-        object_class->get_property = ario_filesystem_get_property;
 
         /* ArioSource virtual methods */
         source_class->get_id = ario_filesystem_get_id;
@@ -191,15 +165,6 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
         source_class->get_icon = ario_filesystem_get_icon;
         source_class->shutdown = ario_filesystem_shutdown;
         source_class->select = ario_filesystem_select;
-
-        /* Object properties */
-        g_object_class_install_property (object_class,
-                                         PROP_UI_MANAGER,
-                                         g_param_spec_object ("ui-manager",
-                                                              "GtkUIManager",
-                                                              "GtkUIManager object",
-                                                              GTK_TYPE_UI_MANAGER,
-                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
         /* Private attributes */
         g_type_class_add_private (klass, sizeof (ArioFilesystemPrivate));
@@ -314,67 +279,29 @@ ario_filesystem_shutdown (ArioSource *source)
 
         /* Unregister actions */
         for (i = 0; i < ario_filesystem_n_actions; ++i) {
-                gtk_action_group_remove_action (filesystem->priv->actiongroup,
-                                                gtk_action_group_get_action (filesystem->priv->actiongroup, ario_filesystem_actions[i].name));
+                g_action_map_remove_action (G_ACTION_MAP (g_application_get_default ()),
+                                            ario_filesystem_actions[i].name);
         }
         for (i = 0; i < ario_filesystem_songs_n_actions; ++i) {
-                gtk_action_group_remove_action (filesystem->priv->actiongroup,
-                                                gtk_action_group_get_action (filesystem->priv->actiongroup, ario_filesystem_songs_actions[i].name));
-        }
-}
-
-static void
-ario_filesystem_set_property (GObject *object,
-                              guint prop_id,
-                              const GValue *value,
-                              GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioFilesystem *filesystem = ARIO_FILESYSTEM (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                filesystem->priv->ui_manager = g_value_get_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ario_filesystem_get_property (GObject *object,
-                              guint prop_id,
-                              GValue *value,
-                              GParamSpec *pspec)
-{
-        ARIO_LOG_FUNCTION_START;
-        ArioFilesystem *filesystem = ARIO_FILESYSTEM (object);
-
-        switch (prop_id) {
-        case PROP_UI_MANAGER:
-                g_value_set_object (value, filesystem->priv->ui_manager);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
+                g_action_map_remove_action (G_ACTION_MAP (g_application_get_default ()),
+                                            ario_filesystem_songs_actions[i].name);
         }
 }
 
 GtkWidget *
-ario_filesystem_new (GtkUIManager *mgr,
-                     GtkActionGroup *group)
+ario_filesystem_new (void)
 {
         ARIO_LOG_FUNCTION_START;
         ArioFilesystem *filesystem;
+        GtkBuilder *builder;
+        GMenuModel *menu;
+        gchar *file;
         ArioServer *server = ario_server_get_instance ();
 
         filesystem = g_object_new (TYPE_ARIO_FILESYSTEM,
-                                   "ui-manager", mgr,
                                    NULL);
 
         g_return_val_if_fail (filesystem->priv != NULL, NULL);
-        filesystem->priv->actiongroup = group;
 
         /* Signals to synchronize the filesystem with server */
         g_signal_connect_object (server,
@@ -387,17 +314,30 @@ ario_filesystem_new (GtkUIManager *mgr,
                                  filesystem, 0);
 
         /* Create songs list */
-        filesystem->priv->songs = ario_songlist_new ("/FilesystemSongsPopup",
+        file = ario_plugin_find_file ("ario-filesystem-menu.ui");
+        g_return_val_if_fail (file != NULL, NULL);
+
+        filesystem->priv->songs = ario_songlist_new (file,
+                                                     "songs-menu",
                                                      FALSE);
         gtk_paned_pack2 (GTK_PANED (filesystem->priv->paned), filesystem->priv->songs, TRUE, FALSE);
 
+        /* Create menu */
+        builder = gtk_builder_new_from_file (file);
+        menu = G_MENU_MODEL (gtk_builder_get_object (builder, "menu"));
+        filesystem->priv->menu = gtk_menu_new_from_model (menu);
+        gtk_menu_attach_to_widget  (GTK_MENU (filesystem->priv->menu),
+                                    GTK_WIDGET (filesystem),
+                                    NULL);
+        g_free (file);
+
         /* Register actions */
-        gtk_action_group_add_actions (group,
-                                      ario_filesystem_actions,
-                                      ario_filesystem_n_actions, filesystem);
-        gtk_action_group_add_actions (group,
-                                      ario_filesystem_songs_actions,
-                                      ario_filesystem_songs_n_actions, filesystem->priv->songs);
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_filesystem_actions,
+                                         ario_filesystem_n_actions, filesystem);
+        g_action_map_add_action_entries (G_ACTION_MAP (g_application_get_default ()),
+                                         ario_filesystem_songs_actions,
+                                         ario_filesystem_songs_n_actions, filesystem->priv->songs);
 
         filesystem->priv->connected = ario_server_is_connected ();
 
@@ -611,28 +551,34 @@ ario_filesystem_add_filetree (ArioFilesystem *filesystem,
 }
 
 static void
-ario_filesystem_cmd_add_filesystem (GtkAction *action,
-                                    ArioFilesystem *filesystem)
+ario_filesystem_cmd_add_filesystem (GSimpleAction *action,
+                                    GVariant *parameter,
+                                    gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioFilesystem *filesystem = ARIO_FILESYSTEM (data);
         /* Append songs in selected folder to playlist */
         ario_filesystem_add_filetree (filesystem, PLAYLIST_ADD);
 }
 
 static void
-ario_filesystem_cmd_add_play_filesystem (GtkAction *action,
-                                         ArioFilesystem *filesystem)
+ario_filesystem_cmd_add_play_filesystem (GSimpleAction *action,
+                                         GVariant *parameter,
+                                         gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioFilesystem *filesystem = ARIO_FILESYSTEM (data);
         /* Append songs in selected folder to playlist */
         ario_filesystem_add_filetree (filesystem, PLAYLIST_ADD_PLAY);
 }
 
 static void
-ario_filesystem_cmd_clear_add_play_filesystem (GtkAction *action,
-                                               ArioFilesystem *filesystem)
+ario_filesystem_cmd_clear_add_play_filesystem (GSimpleAction *action,
+                                               GVariant *parameter,
+                                               gpointer data)
 {
         ARIO_LOG_FUNCTION_START;
+        ArioFilesystem *filesystem = ARIO_FILESYSTEM (data);
         /* Clear playlist, append songs in selected folder to playlist */
         ario_filesystem_add_filetree (filesystem, PLAYLIST_REPLACE);
 }
@@ -642,12 +588,8 @@ ario_filesystem_popup_menu_cb (ArioDndTree* tree,
                                ArioFilesystem *filesystem)
 {
         ARIO_LOG_FUNCTION_START;
-        GtkWidget *menu;
-
         /* Show popup menu */
-        menu = gtk_ui_manager_get_widget (filesystem->priv->ui_manager, "/FilesystemPopup");
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3,
-                        gtk_get_current_event_time ());
+        gtk_menu_popup_at_pointer (GTK_MENU (filesystem->priv->menu), NULL);
 }
 
 static void

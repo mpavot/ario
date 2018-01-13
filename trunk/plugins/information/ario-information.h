@@ -49,7 +49,7 @@ typedef struct
 
 GType                   ario_information_get_type   (void) G_GNUC_CONST;
 
-GtkWidget*              ario_information_new        (GtkUIManager *mgr);
+GtkWidget*              ario_information_new        (void);
 
 G_END_DECLS
 

@@ -306,6 +306,15 @@ ario_tree_constructor (GType type, guint n_construct_properties,
         menu = G_MENU_MODEL (gtk_builder_get_object (builder, "song-menu"));
         tree->priv->song_popup = gtk_menu_new_from_model (menu);
         g_object_unref (builder);
+        gtk_menu_attach_to_widget  (GTK_MENU (tree->priv->popup),
+                                    GTK_WIDGET (tree),
+                                    NULL);
+        gtk_menu_attach_to_widget  (GTK_MENU (tree->priv->album_popup),
+                                    GTK_WIDGET (tree),
+                                    NULL);
+        gtk_menu_attach_to_widget  (GTK_MENU (tree->priv->song_popup),
+                                    GTK_WIDGET (tree),
+                                    NULL);
 
         /* Connect signals for actions on dnd tree */
         g_signal_connect (tree->selection,
@@ -407,9 +416,6 @@ ario_tree_popup_menu_cb (ArioDndTree* dnd_tree,
         } else {
                 menu = tree->priv->popup;
         }
-        gtk_menu_attach_to_widget  (GTK_MENU (menu),
-                                    GTK_WIDGET (tree),
-                                    NULL);
 
         /* Emit popup signal */
         g_signal_emit (G_OBJECT (tree), ario_tree_signals[MENU_POPUP], 0);
