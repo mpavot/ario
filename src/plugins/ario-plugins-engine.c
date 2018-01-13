@@ -88,6 +88,11 @@ ario_plugins_engine_load_dir (const gchar        *dir,
                         if (info == NULL)
                                 continue;
 
+                        // Do not activate deprecated plugins
+                        if (!strcmp(info->module_name, "wikipedia")
+                            || !strcmp(info->module_name, "audioscrobbler"))
+                            continue;
+
                         /* If a plugin with this name has already been loaded
                          * drop this one (user plugins override system plugins) */
                         if (g_list_find_custom (plugin_list,
