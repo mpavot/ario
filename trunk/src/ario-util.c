@@ -27,7 +27,6 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <glib/gi18n.h>
-#include <gcrypt.h>
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -496,26 +495,6 @@ ario_util_format_keyword_for_lastfm (const char *keyword)
 
         /* Escape string */
         return g_uri_escape_string (keyword, NULL, FALSE);
-}
-
-gchar *
-ario_util_md5 (const char *string)
-{
-        ARIO_LOG_FUNCTION_START;
-        guchar md5pword[16];
-        gchar md5_response[33] = {0};
-        int j;
-
-        gcry_md_hash_buffer (GCRY_MD_MD5, md5pword, string, strlen (string));
-
-        for (j = 0; j < 16; j++) {
-                char a[3];
-                sprintf (a, "%02x", md5pword[j]);
-                md5_response[2*j] = a[0];
-                md5_response[2*j+1] = a[1];
-        }
-
-        return (g_strdup (md5_response));
 }
 
 #define DRAG_SIZE 70

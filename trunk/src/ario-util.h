@@ -177,15 +177,6 @@ char *                  ario_util_format_keyword             (const char *keywor
 char *                  ario_util_format_keyword_for_lastfm  (const char *keyword) G_GNUC_MALLOC;
 
 /**
- * Compute the MD5 hash of a string
- *
- * @param string The string to use for MD5 computation
- *
- * @return A newly allocated hash
- */
-gchar *                 ario_util_md5                        (const char *string) G_GNUC_MALLOC;
-
-/**
  * Generate an icon to use for Drag & Drop from a list of albums
  *
  * @param albums The list of albums
