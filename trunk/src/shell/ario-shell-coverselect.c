@@ -242,10 +242,10 @@ ario_shell_coverselect_constructor (GType type, guint n_construct_properties,
         gtk_window_set_title (GTK_WINDOW (shell_coverselect), _("Cover Download"));
         gtk_window_set_default_size (GTK_WINDOW (shell_coverselect), 520, 620);
         gtk_dialog_add_button (GTK_DIALOG (shell_coverselect),
-                               GTK_STOCK_CANCEL,
+                               _("_Cancel"),
                                GTK_RESPONSE_CANCEL);
         gtk_dialog_add_button (GTK_DIALOG (shell_coverselect),
-                               GTK_STOCK_OK,
+                               _("_OK"),
                                GTK_RESPONSE_OK);
         gtk_dialog_set_default_response (GTK_DIALOG (shell_coverselect),
                                          GTK_RESPONSE_OK);
@@ -354,8 +354,10 @@ ario_shell_coverselect_local_open_button_cb (GtkWidget *widget,
         dialog = gtk_file_chooser_dialog_new (NULL,
                                               NULL,
                                               GTK_FILE_CHOOSER_ACTION_OPEN,
-                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                              "document-open", GTK_RESPONSE_ACCEPT,
+                                              _("_Cancel"),
+                                              GTK_RESPONSE_CANCEL,
+                                              _("_Open"),
+                                              GTK_RESPONSE_ACCEPT,
                                               NULL);
 
         /* Set folder to the album folder if possible */

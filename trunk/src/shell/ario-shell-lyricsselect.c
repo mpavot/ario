@@ -152,10 +152,10 @@ ario_shell_lyricsselect_constructor (GType type, guint n_construct_properties,
         gtk_window_set_title (GTK_WINDOW (shell_lyricsselect), _("Lyrics Download"));
         gtk_window_set_default_size (GTK_WINDOW (shell_lyricsselect), 520, 350);
         gtk_dialog_add_button (GTK_DIALOG (shell_lyricsselect),
-                               GTK_STOCK_CANCEL,
+                               _("_Cancel"),
                                GTK_RESPONSE_CANCEL);
         gtk_dialog_add_button (GTK_DIALOG (shell_lyricsselect),
-                               GTK_STOCK_OK,
+                               _("_OK"),
                                GTK_RESPONSE_OK);
         gtk_dialog_set_default_response (GTK_DIALOG (shell_lyricsselect),
                                          GTK_RESPONSE_OK);
