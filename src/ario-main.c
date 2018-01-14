@@ -57,7 +57,7 @@ activate (GtkApplication *app)
                 gtk_window_set_application (GTK_WINDOW (shell), app);
         }
 #endif
-        gtk_window_present (GTK_WINDOW (shell));
+        ario_shell_present (shell);
 }
 
 int
