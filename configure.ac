@@ -1,10 +1,10 @@
 AC_PREREQ(2.59)
 
-m4_define(ario_version,1.5.1)
+m4_define(ario_version,1.6)
 
 AC_INIT([Ario], [ario_version], [marc.pavot@gmail.com], [ario])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([subdir-objects])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_PROG_CC
