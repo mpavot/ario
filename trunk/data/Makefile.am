@@ -39,8 +39,7 @@ ui_DATA = ui/ario-shell-menu.ui      	\
 	     ui/server-prefs.ui		\
 	     ui/similar-artists.ui      \
 	     ui/song-infos.ui	        \
-	     ui/stats-prefs.ui 		\
-	     ui/trayicon-prefs.ui
+	     ui/stats-prefs.ui
 
 
 
