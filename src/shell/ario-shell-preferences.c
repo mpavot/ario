@@ -31,7 +31,6 @@
 #include "preferences/ario-others-preferences.h"
 #include "preferences/ario-playlist-preferences.h"
 #include "preferences/ario-server-preferences.h"
-#include "preferences/ario-taskbar-preferences.h"
 #include "preferences/ario-stats-preferences.h"
 #include "ario-debug.h"
 
@@ -131,11 +130,6 @@ ario_shell_preferences_new (void)
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
                                   widget,
                                   gtk_label_new (_("Lyrics")));
-
-        widget = ario_taskbar_preferences_new ();
-        gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),
-                                  widget,
-                                  gtk_label_new (_("Notification")));
 
         widget = ario_others_preferences_new ();
         gtk_notebook_append_page (GTK_NOTEBOOK (shell_preferences->priv->notebook),

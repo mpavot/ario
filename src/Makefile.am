@@ -91,8 +91,6 @@ libario_la_SOURCES = \
 	preferences/ario-server-preferences.h\
         preferences/ario-stats-preferences.c\
         preferences/ario-stats-preferences.h\
-	preferences/ario-taskbar-preferences.c\
-	preferences/ario-taskbar-preferences.h\
 	preferences/ario-preferences.h\
 	servers/ario-server.c\
 	servers/ario-server.h\
