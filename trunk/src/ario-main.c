@@ -43,17 +43,7 @@ static gboolean minimized = FALSE;
 static void
 activate (GtkApplication *app)
 {
-        GList *list;
-
-        list = gtk_application_get_windows (app);
-        if (list
-            && ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)) {
-                /* Show existing window */
-                ario_shell_present (shell);
-        } else {
-                gtk_window_set_application (GTK_WINDOW (shell), app);
-                ario_shell_present (shell);
-        }
+        ario_shell_present (shell);
 }
 
 int
@@ -119,7 +109,13 @@ main (int argc, char *argv[])
         GtkApplication *app;
         app = gtk_application_new ("org.Ario", G_APPLICATION_FLAGS_NONE);
         g_application_register (G_APPLICATION (app), NULL, NULL);
+        if (g_application_get_is_remote (G_APPLICATION (app))) {
+                g_application_activate (G_APPLICATION (app));
+                g_object_unref (app);
+                return 0;
+        }
         shell = ario_shell_new (app);
+        gtk_window_set_application (GTK_WINDOW (shell), app);
         ario_shell_construct (shell, minimized);
         g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
 
