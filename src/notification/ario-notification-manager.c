@@ -24,7 +24,7 @@
 #include <glib/gi18n.h>
 #include "lib/ario-conf.h"
 #include "servers/ario-server.h"
-#include "notification/ario-notifier-tooltip.h"
+#include "notification/ario-notifier-gnotif.h"
 #include "preferences/ario-preferences.h"
 #include "ario-debug.h"
 
@@ -68,7 +68,7 @@ ario_notification_manager_get_instance (void)
                                                      NULL);
                 g_return_val_if_fail (notification_manager->priv != NULL, NULL);
 
-                notifier = ario_notifier_tooltip_new ();
+                notifier = ario_notifier_gnotif_new ();
                 ario_notification_manager_add_notifier (notification_manager,
                                                         ARIO_NOTIFIER (notifier));
 

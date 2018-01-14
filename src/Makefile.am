@@ -52,8 +52,8 @@ libario_la_SOURCES = \
 	notification/ario-notification-manager.h\
 	notification/ario-notifier.c\
 	notification/ario-notifier.h\
-	notification/ario-notifier-tooltip.c\
-	notification/ario-notifier-tooltip.h\
+	notification/ario-notifier-gnotif.c\
+	notification/ario-notifier-gnotif.h\
 	playlist/ario-playlist-manager.c\
 	playlist/ario-playlist-manager.h\
 	playlist/ario-playlist-mode.c\
@@ -146,10 +146,6 @@ libario_la_SOURCES = \
 	widgets/ario-songlist.h\
 	widgets/ario-status-bar.c\
 	widgets/ario-status-bar.h\
-	widgets/ario-tooltip.c\
-	widgets/ario-tooltip.h\
-	widgets/ario-tray-icon.c\
-	widgets/ario-tray-icon.h\
 	widgets/ario-volume.c\
 	widgets/ario-volume.h
 

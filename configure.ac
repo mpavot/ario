@@ -223,24 +223,6 @@ fi
 AM_CONDITIONAL(USE_DBUS, test x"$enable_dbus" != xno)
 
 dnl ================================================================
-dnl Libnotify
-dnl ================================================================
-AC_ARG_ENABLE(notify,
-              AC_HELP_STRING([--disable-notify],
-                             [Disable support of libnotify]))
-if test x"$enable_notify" != xno; then
-   PKG_CHECK_MODULES(NOTIFY, libnotify)
-   AC_DEFINE(ENABLE_LIBNOTIFY, 1, [Add support of libnotify])
-   # Check for libnotify >= 0.7
-   PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
-   if test x"$have_libnotify_07" = "xyes"; then
-      AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
-   fi
-fi
-AM_CONDITIONAL(USE_NOTIFY, test x"$enable_notify" != xno)
-
-
-dnl ================================================================
 dnl Avahi
 dnl ================================================================
 AC_ARG_ENABLE(avahi,
@@ -324,10 +306,8 @@ data/icons/hicolor/scalable/apps/Makefile
 plugins/Makefile
 plugins/filesystem/Makefile
 plugins/information/Makefile
-plugins/libnotify/Makefile
 plugins/mmkeys/Makefile
 plugins/radios/Makefile
-plugins/wikipedia/Makefile
 po/Makefile.in
 data/ario.desktop.in
 ])
@@ -363,11 +343,6 @@ if test x${enable_dbus} != xno; then
         echo "DBUS support is:                          ENABLED  (--disable-dbus)"
 else
         echo "DBUS support is:                          DISABLED"
-fi
-if test x${enable_notify} != xno; then
-        echo "Libnotify support is:                     ENABLED  (--disable-notify)"
-else
-        echo "Libnotify support is:                     DISABLED"
 fi
 if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"
