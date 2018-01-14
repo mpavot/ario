@@ -17,10 +17,10 @@
  *
  */
 
-#include <gtk/gtk.h>
-
 #ifndef __ARIO_BROWSER_PREFERENCES_H
 #define __ARIO_BROWSER_PREFERENCES_H
+
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -35,14 +35,14 @@ typedef struct ArioBrowserPreferencesPrivate ArioBrowserPreferencesPrivate;
 
 typedef struct
 {
-        GtkDialog parent;
+        GtkBox parent;
 
         ArioBrowserPreferencesPrivate *priv;
 } ArioBrowserPreferences;
 
 typedef struct
 {
-        GtkDialogClass parent_class;
+        GtkBoxClass parent_class;
 } ArioBrowserPreferencesClass;
 
 GType              ario_browser_preferences_get_type         (void) G_GNUC_CONST;
