@@ -49,7 +49,7 @@ struct ArioBrowserPreferencesPrivate
 };
 
 #define ARIO_BROWSER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER_PREFERENCES, ArioBrowserPreferencesPrivate))
-G_DEFINE_TYPE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_BOX)
 
 static void
 ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass)
@@ -75,6 +75,8 @@ ario_browser_preferences_new (void)
         browser_preferences = g_object_new (TYPE_ARIO_BROWSER_PREFERENCES, NULL);
 
         g_return_val_if_fail (browser_preferences->priv != NULL, NULL);
+
+        gtk_orientable_set_orientation (GTK_ORIENTABLE (browser_preferences), GTK_ORIENTATION_VERTICAL);
 
         builder = gtk_builder_helpers_new (UI_PATH "browser-prefs.ui",
                                            browser_preferences);
