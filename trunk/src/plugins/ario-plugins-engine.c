@@ -90,7 +90,9 @@ ario_plugins_engine_load_dir (const gchar        *dir,
 
                         // Do not activate deprecated plugins
                         if (!strcmp(info->module_name, "wikipedia")
-                            || !strcmp(info->module_name, "audioscrobbler"))
+                            || !strcmp(info->module_name, "audioscrobbler")
+                            || !strcmp(info->module_name, "libnotify")
+                            || !strcmp(info->module_name, "liblibnotify"))
                             continue;
 
                         /* If a plugin with this name has already been loaded

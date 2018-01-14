@@ -46,7 +46,6 @@
 #include "widgets/ario-header.h"
 #include "widgets/ario-playlist.h"
 #include "widgets/ario-status-bar.h"
-#include "widgets/ario-tray-icon.h"
 
 static void ario_shell_finalize (GObject *object);
 static void ario_shell_show (ArioShell *shell,
@@ -129,8 +128,6 @@ struct ArioShellPrivate
         GtkWidget *status_bar;
         GtkWidget *vbox;
         GtkWidget *hbox;
-
-        ArioTrayIcon *tray_icon;
 
         gboolean statusbar_hidden;
         gboolean upperpart_hidden;
@@ -215,7 +212,6 @@ ario_shell_finalize (GObject *object)
         g_object_unref (shell->priv->cover_handler);
         g_object_unref (shell->priv->playlist_manager);
         g_object_unref (shell->priv->notification_manager);
-        g_object_unref (G_OBJECT (shell->priv->tray_icon));
 
         g_object_unref (ario_server_get_instance ());
 
@@ -306,12 +302,6 @@ ario_shell_construct (ArioShell *shell,
         /* Initialize cover art handler */
         shell->priv->cover_handler = ario_cover_handler_new ();
 
-        /* Initialize tray icon */
-        // TODO
-        //shell->priv->tray_icon = ario_tray_icon_new (shell->priv->actiongroup,
-        //                                             shell->priv->ui_manager,
-        //                                             shell);
-
         /* Initialize playlist manager */
         shell->priv->playlist_manager = ario_playlist_manager_get_instance ();
 
@@ -344,7 +334,6 @@ ario_shell_construct (ArioShell *shell,
         g_object_ref (shell->priv->playlist);
 
         /* Create source manager */
-        // TODO
         shell->priv->sourcemanager = ario_source_manager_get_instance ();
         g_object_ref (shell->priv->sourcemanager);
 
