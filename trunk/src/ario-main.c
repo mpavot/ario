@@ -43,21 +43,17 @@ static gboolean minimized = FALSE;
 static void
 activate (GtkApplication *app)
 {
-        //TODO
-#if 0
         GList *list;
 
         list = gtk_application_get_windows (app);
-
         if (list
             && ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)) {
                 /* Show existing window */
                 ario_shell_present (shell);
         } else {
                 gtk_window_set_application (GTK_WINDOW (shell), app);
+                ario_shell_present (shell);
         }
-#endif
-        ario_shell_present (shell);
 }
 
 int

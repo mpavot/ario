@@ -269,7 +269,6 @@ ario_shell_construct (ArioShell *shell,
         GMenuModel *menu;
 
         g_return_if_fail (IS_ARIO_SHELL (shell));
-        gtk_window_set_application (GTK_WINDOW (shell), shell->priv->app);
 
         /* Set main window properties */
         gtk_window_set_title (GTK_WINDOW (shell), "Ario");
@@ -287,8 +286,10 @@ ario_shell_construct (ArioShell *shell,
         /* Initialize UI */
         builder = gtk_builder_new_from_file (UI_PATH "ario-shell-menu.ui");
         menu = G_MENU_MODEL (gtk_builder_get_object (builder, "menu"));
-        gtk_application_set_app_menu (shell->priv->app,
-                                      menu);
+        if (!g_application_get_is_remote (G_APPLICATION (shell->priv->app))) {
+                gtk_application_set_app_menu (shell->priv->app,
+                                              menu);
+        }
         g_object_unref (builder);
 
         /* Main window actions */
