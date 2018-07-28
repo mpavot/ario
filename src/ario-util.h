@@ -42,6 +42,7 @@ struct curl_slist;
  *
  * @return A newly allocated string with the formated time
  */
+G_MODULE_EXPORT
 char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
 /**
@@ -51,6 +52,7 @@ char*                   ario_util_format_time                (const int time) G_
  * @param buf The buffer to fill
  * @param buf_len The len of the buffer
  */
+G_MODULE_EXPORT
 void                    ario_util_format_time_buf            (const int time,
                                                               char *buf,
                                                               int buf_len);
@@ -61,6 +63,7 @@ void                    ario_util_format_time_buf            (const int time,
  *
  * @return A newly allocated string with the formated time
  */
+G_MODULE_EXPORT
 char*                   ario_util_format_total_time          (const int time) G_GNUC_CONST G_GNUC_MALLOC;
 
 /**
@@ -70,6 +73,7 @@ char*                   ario_util_format_total_time          (const int time) G_
  * @param buf The buffer to fill
  * @param buf_len The len of the buffer
  */
+G_MODULE_EXPORT
 void                    ario_util_format_track_buf           (const gchar *track,
                                                               char *buf,
                                                               int buf_len);
@@ -80,11 +84,13 @@ void                    ario_util_format_track_buf           (const gchar *track
  *
  * @return A pointer to the title (should not be freed)
  */
+G_MODULE_EXPORT
 gchar*                  ario_util_format_title               (ArioServerSong *server_song);
 
 /**
  * Initialise default icon factory with a few icons
  */
+G_MODULE_EXPORT
 void                    ario_util_init_icons                 (void);
 
 /**
@@ -92,6 +98,7 @@ void                    ario_util_init_icons                 (void);
  *
  * @return The path of the directory. It should not be freed.
  */
+G_MODULE_EXPORT
 const char*             ario_util_config_dir                 (void);
 
 /**
@@ -101,6 +108,7 @@ const char*             ario_util_config_dir                 (void);
  *
  * @return True if the file exists, FALSE otherwise
  */
+G_MODULE_EXPORT
 gboolean                ario_util_uri_exists                 (const char *uri);
 
 /**
@@ -108,6 +116,7 @@ gboolean                ario_util_uri_exists                 (const char *uri);
  *
  * @param uri The uri of the file to delete
  */
+G_MODULE_EXPORT
 void                    ario_util_unlink_uri                 (const char *uri);
 
 /**
@@ -115,6 +124,7 @@ void                    ario_util_unlink_uri                 (const char *uri);
  *
  * @param uri The uri of the directory to create
  */
+G_MODULE_EXPORT
 void                    ario_util_mkdir                      (const char *uri);
 
 /**
@@ -123,6 +133,7 @@ void                    ario_util_mkdir                      (const char *uri);
  * @param src_uri The source file to copy
  * @param dest_uri The destination place to copy the file
  */
+G_MODULE_EXPORT
 void                    ario_util_copy_file                  (const char *src_uri,
                                                               const char *dest_uri);
 /**
@@ -135,6 +146,7 @@ void                    ario_util_copy_file                  (const char *src_ur
  * @param size A pointer to a int that will contain the size of the downloaded data
  * @param data Newly allocated data containing the downloaded file
  */
+G_MODULE_EXPORT
 void                    ario_util_download_file              (const char *uri,
                                                               const char *post_data,
                                                               const int post_size,
@@ -148,6 +160,7 @@ void                    ario_util_download_file              (const char *uri,
  * @param old The string to replace
  * @param new The string that will replace 'old'
  */
+G_MODULE_EXPORT
 void                    ario_util_string_replace             (char **string,
                                                               const char *old,
                                                               const char *new);
@@ -156,6 +169,7 @@ void                    ario_util_string_replace             (char **string,
  *
  * @param uri The URL to load
  */
+G_MODULE_EXPORT
 void                    ario_util_load_uri                   (const char *uri);
 
 /**
@@ -165,6 +179,7 @@ void                    ario_util_load_uri                   (const char *uri);
  *
  * @return A newly allocated formated keyword
  */
+G_MODULE_EXPORT
 char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;
 
 /**
@@ -174,6 +189,7 @@ char *                  ario_util_format_keyword             (const char *keywor
  *
  * @return A newly allocated formated keyword
  */
+G_MODULE_EXPORT
 char *                  ario_util_format_keyword_for_lastfm  (const char *keyword) G_GNUC_MALLOC;
 
 /**
@@ -183,6 +199,7 @@ char *                  ario_util_format_keyword_for_lastfm  (const char *keywor
  *
  * @return A newly allocated pixbuf
  */
+G_MODULE_EXPORT
 GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albums) G_GNUC_MALLOC;
 
 /**
@@ -192,6 +209,7 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albu
  *
  * @return A newly allocated pixbuf
  */
+G_MODULE_EXPORT
 GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *criterias) G_GNUC_MALLOC;
 
 /**
@@ -201,6 +219,7 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *crit
  *
  * @return A newly allocated string
  */
+G_MODULE_EXPORT
 gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
 
 /**
@@ -208,6 +227,7 @@ gchar *                 ario_util_convert_from_iso8859       (const char *string
  *
  * @param filename The filename to convert
  */
+G_MODULE_EXPORT
 void                    ario_util_sanitize_filename          (char *filename);
 
 /**
@@ -220,6 +240,7 @@ void                    ario_util_sanitize_filename          (char *filename);
  *
  * @return TRUE on success, FALSE if an error occurred
  */
+G_MODULE_EXPORT
 gboolean                ario_file_get_contents               (const gchar *filename,
                                                               gchar **contents,
                                                               gsize *length,
@@ -234,6 +255,7 @@ gboolean                ario_file_get_contents               (const gchar *filen
  *
  * @return TRUE on success, FALSE if an error occurred
  */
+G_MODULE_EXPORT
 gboolean                ario_file_set_contents               (const gchar *filename,
                                                               const gchar *contents,
                                                               gsize length,
@@ -246,6 +268,7 @@ gboolean                ario_file_set_contents               (const gchar *filen
  *
  * @return whether a test was TRUE
  */
+G_MODULE_EXPORT
 gboolean                ario_file_test                       (const gchar *filename,
                                                               GFileTest test);
 
@@ -257,6 +280,7 @@ gboolean                ario_file_test                       (const gchar *filen
  *
  * @return
  */
+G_MODULE_EXPORT
 const char *            ario_util_stristr                    (const char *haystack,
                                                               const char *needle);
 
@@ -271,6 +295,7 @@ const char *            ario_util_stristr                    (const char *haysta
  *
  * @return A pointer to the GSList to use instead of 'list'
  */
+G_MODULE_EXPORT
 GSList *                ario_util_gslist_randomize           (GSList **list,
                                                               const int max);
 
@@ -281,6 +306,7 @@ GSList *                ario_util_gslist_randomize           (GSList **list,
  *
  * @return A newly allocated string formated for HTTP requests
  */
+G_MODULE_EXPORT
 gchar *                 ario_util_format_for_http            (const gchar *text);
 
 /**

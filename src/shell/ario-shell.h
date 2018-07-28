@@ -61,14 +61,18 @@ typedef enum
 
 GType           ario_shell_get_type             (void) G_GNUC_CONST;
 
+G_MODULE_EXPORT
 ArioShell *     ario_shell_new                  (GtkApplication *app);
-
+G_MODULE_EXPORT
 void            ario_shell_construct            (ArioShell *shell,
                                                  gboolean minimized);
+G_MODULE_EXPORT
 void            ario_shell_shutdown             (ArioShell *shell);
 
+G_MODULE_EXPORT
 void            ario_shell_present              (ArioShell *shell);
 
+G_MODULE_EXPORT
 void            ario_shell_set_visibility       (ArioShell *shell,
                                                  ArioVisibility state);
 

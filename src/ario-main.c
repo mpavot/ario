@@ -52,7 +52,9 @@ main (int argc, char *argv[])
         ARIO_LOG_FUNCTION_START;
         GError *error = NULL;
         gint status = 0;
-
+#ifdef WIN32
+        ShowWindow (GetConsoleWindow(), SW_HIDE);
+#endif
         /* Parse options */
         GOptionContext *context;
         gchar *profile = NULL;

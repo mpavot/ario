@@ -24,9 +24,11 @@
 
 G_BEGIN_DECLS
 
+G_MODULE_EXPORT
 GtkBuilder *gtk_builder_helpers_new (const char *file,
                                      gpointer user_data);
 
+G_MODULE_EXPORT
 void gtk_builder_helpers_boldify_label (GtkBuilder *builder,
                                         const char *name);
 

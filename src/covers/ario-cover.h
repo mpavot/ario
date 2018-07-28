@@ -24,6 +24,7 @@
 #define COVER_SIZE 70
 
 #include <glib.h>
+#include <gmodule.h>
 
 G_BEGIN_DECLS
 
@@ -39,18 +40,22 @@ typedef enum
         OVERWRITE_MODE_REPLACE,
         OVERWRITE_MODE_SKIP
 }ArioCoverOverwriteMode;
-
+G_MODULE_EXPORT
 gboolean                     ario_cover_save_cover           (const gchar *artist,
                                                               const gchar *album,
                                                               const gchar *data,
                                                               const int size,
                                                               const ArioCoverOverwriteMode overwrite_mode);
+
+G_MODULE_EXPORT
 void                         ario_cover_remove_cover         (const gchar *artist,
                                                               const gchar *album);
+G_MODULE_EXPORT
 gboolean                     ario_cover_size_is_valid        (const int size);
-
+G_MODULE_EXPORT
 gboolean                     ario_cover_cover_exists         (const gchar *artist,
                                                               const gchar *album);
+G_MODULE_EXPORT
 gchar*                       ario_cover_make_cover_path      (const gchar *artist,
                                                               const gchar *album,
                                                               const ArioCoverHomeCoversSize ario_cover_size);

@@ -28,8 +28,10 @@
 #include "plugins/ario-plugin-info.h"
 #include "plugins/ario-plugin.h"
 
+G_MODULE_EXPORT
 void                    ario_plugins_engine_init                (ArioShell *shell);
 
+G_MODULE_EXPORT
 void                    ario_plugins_engine_shutdown            (void);
 
 const GList             *ario_plugins_engine_get_plugin_list    (void);

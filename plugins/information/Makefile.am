@@ -8,7 +8,8 @@ libinformation_la_SOURCES = \
 	ario-information-plugin.c \
         ario-information-plugin.h
 	
-libinformation_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libinformation_la_LIBADD = $(DEPS_LIBS) -L$(top_srcdir)/src/.libs
+libinformation_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) -no-undefined
 
 INCLUDES = 						\
 	-DLOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
@@ -24,9 +25,13 @@ INCLUDES = 						\
 uidir = $(plugindatadir)
 ui_DATA = information.ui
 
+if WINDOWS
+libinformation_la_LIBADD += -lario-0
+INCLUDES += -mwindows
+else
 plugin_in_files = information.ario-plugin.desktop.in
-
 %.ario-plugin: %.ario-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+endif
 
 plugin_DATA = $(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
 

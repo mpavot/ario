@@ -5,7 +5,7 @@ if ENABLE_PYTHON
 else
         SUBDIRS =
 endif
-SUBDIRS += data\
-           plugins\
-           po\
-           src
+SUBDIRS += src\
+		plugins\
+		data\
+		po 

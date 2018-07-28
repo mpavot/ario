@@ -72,6 +72,7 @@ typedef struct
 /*
  * Public methods
  */
+G_MODULE_EXPORT
 GType           ario_source_get_type            (void) G_GNUC_CONST;
 
 gchar*          ario_source_get_id              (ArioSource *source);
