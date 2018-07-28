@@ -21,6 +21,7 @@
 #define __ARIO_SERVER_H
 
 #include <glib-object.h>
+#include <gmodule.h>
 
 G_BEGIN_DECLS
 
@@ -245,160 +246,190 @@ typedef struct
 
         void (*storedplaylists_changed) (ArioServer *server);
 } ArioServerClass;
-
+G_MODULE_EXPORT
 GType                   ario_server_get_type                               (void) G_GNUC_CONST;
-
+G_MODULE_EXPORT
 ArioServer *            ario_server_get_instance                           (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_connect                                (void);
-
+G_MODULE_EXPORT
 void                    ario_server_disconnect                             (void);
-
+G_MODULE_EXPORT
 void                    ario_server_reconnect                              (void);
-
+G_MODULE_EXPORT
 void                    ario_server_shutdown                               (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_is_connected                           (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_update_status                          (void);
-
+G_MODULE_EXPORT
 void                    ario_server_update_db                              (const gchar *path);
-
+G_MODULE_EXPORT
 GSList *                ario_server_list_tags                              (const ArioServerTag tag,
                                                                             const ArioServerCriteria *criteria);
+G_MODULE_EXPORT
 GSList *                ario_server_get_albums                             (const ArioServerCriteria *criteria);
+G_MODULE_EXPORT
 GSList *                ario_server_get_songs                              (const ArioServerCriteria *criteria,
                                                                             const gboolean exact);
+G_MODULE_EXPORT
 GSList *                ario_server_get_songs_from_playlist                (char *playlist);
+G_MODULE_EXPORT
 GSList *                ario_server_get_playlists                          (void);
-
+G_MODULE_EXPORT
 GSList *                ario_server_get_playlist_changes                   (gint64 playlist_id);
-
+G_MODULE_EXPORT
 ArioServerSong *        ario_server_get_current_song_on_server             (void);
-
+G_MODULE_EXPORT
 ArioServerSong *        ario_server_get_current_song                       (void);
-
+G_MODULE_EXPORT
 char *                  ario_server_get_current_artist                     (void);
-
+G_MODULE_EXPORT
 char *                  ario_server_get_current_album                      (void);
-
+G_MODULE_EXPORT
 char *                  ario_server_get_current_song_path                  (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_song_id                    (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_state                      (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_elapsed                    (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_volume                     (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_total_time                 (void);
-
+G_MODULE_EXPORT
 gint64                  ario_server_get_current_playlist_id                (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_playlist_length            (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_current_playlist_total_time        (void);
-
+G_MODULE_EXPORT
 int                     ario_server_get_crossfadetime                      (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_get_current_consume                     (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_get_current_random                     (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_get_current_repeat                     (void);
-
+G_MODULE_EXPORT
 gboolean                ario_server_get_updating                           (void);
-
+G_MODULE_EXPORT
 unsigned long           ario_server_get_last_update                        (void);
-
+G_MODULE_EXPORT
 void                    ario_server_set_current_elapsed                    (const gint elapsed);
+G_MODULE_EXPORT
 void                    ario_server_set_current_volume                     (const gint volume);
+G_MODULE_EXPORT
 GSList *                ario_server_get_outputs                            (void);
-
+G_MODULE_EXPORT
 void                    ario_server_set_current_consume                     (const gboolean consume);
+G_MODULE_EXPORT
 void                    ario_server_set_current_random                     (const gboolean random);
+G_MODULE_EXPORT
 void                    ario_server_set_current_repeat                     (const gboolean repeat);
+G_MODULE_EXPORT
 void                    ario_server_set_crossfadetime                      (const int crossfadetime);
+G_MODULE_EXPORT
 gboolean                ario_server_is_paused                              (void);
-
+G_MODULE_EXPORT
 void                    ario_server_do_next                                (void);
-
+G_MODULE_EXPORT
 void                    ario_server_do_prev                                (void);
-
+G_MODULE_EXPORT
 void                    ario_server_do_play                                (void);
-
+G_MODULE_EXPORT
 void                    ario_server_do_play_pos                            (gint id);
+G_MODULE_EXPORT
 void                    ario_server_do_pause                               (void);
-
+G_MODULE_EXPORT
 void                    ario_server_do_stop                                (void);
-
+G_MODULE_EXPORT
 void                    ario_server_free_album                             (ArioServerAlbum *server_album);
-
+G_MODULE_EXPORT
 ArioServerAlbum *       ario_server_copy_album                             (const ArioServerAlbum *server_album);
-
+G_MODULE_EXPORT
 void                    ario_server_clear                                  (void);
+G_MODULE_EXPORT
 void                    ario_server_shuffle                                (void);
-
+G_MODULE_EXPORT
 void                    ario_server_queue_add                              (const char *path);
+G_MODULE_EXPORT
 void                    ario_server_queue_delete_id                        (const int id);
+G_MODULE_EXPORT
 void                    ario_server_queue_delete_pos                       (const int pos);
+G_MODULE_EXPORT
 void                    ario_server_queue_move                             (const int old_pos,
                                                                             const int new_pos);
+G_MODULE_EXPORT
 void                    ario_server_queue_moveid                           (const int id,
                                                                             const int pos);
+G_MODULE_EXPORT
 void                    ario_server_queue_commit                           (void);
-
+G_MODULE_EXPORT
 void                    ario_server_insert_at                              (const GSList *songs,
                                                                             const gint pos);
+G_MODULE_EXPORT
 // returns 0 if OK, 1 if playlist already exists
 int                     ario_server_save_playlist                          (const char *name);
+G_MODULE_EXPORT
 void                    ario_server_delete_playlist                        (const char *name);
-
+G_MODULE_EXPORT
 GSList *                ario_server_get_outputs                            (void);
-
+G_MODULE_EXPORT
 void                    ario_server_enable_output                          (const int id,
                                                                             const gboolean enabled);
+G_MODULE_EXPORT
 ArioServerStats *       ario_server_get_stats                              (void);
-
+G_MODULE_EXPORT
 GList *                 ario_server_get_songs_info                         (GSList *paths);
-
+G_MODULE_EXPORT
 ArioServerFileList*     ario_server_list_files                             (const char *path,
                                                                             const gboolean recursive);
+G_MODULE_EXPORT
 void                    ario_server_free_file_list                         (ArioServerFileList *files);
-
+G_MODULE_EXPORT
 ArioServerCriteria *    ario_server_criteria_copy                          (const ArioServerCriteria *criteria);
-
+G_MODULE_EXPORT
 void                    ario_server_criteria_free                          (ArioServerCriteria *criteria);
-
+G_MODULE_EXPORT
 gchar **                ario_server_get_items_names                        (void);
-
+G_MODULE_EXPORT
 const gchar*            ario_server_song_get_tag                           (const ArioServerSong *song,
                                                                             ArioServerTag tag);
+G_MODULE_EXPORT
 void                    ario_server_playlist_add_songs                     (const GSList *songs,
                                                                             const gint pos,
                                                                             const PlaylistAction action);
+G_MODULE_EXPORT
 void                    ario_server_playlist_add_dir                       (const gchar *dir,
                                                                             const gint pos,
                                                                             const PlaylistAction action);
+G_MODULE_EXPORT
 void                    ario_server_playlist_add_criterias                 (const GSList *criterias,
                                                                             const gint pos,
                                                                             const PlaylistAction action,
                                                                             const gint nb_entries);
+G_MODULE_EXPORT
 void                    ario_server_playlist_append_artists                (const GSList *artists,
                                                                             const PlaylistAction action,
                                                                             const gint nb_entries);
+G_MODULE_EXPORT
 void                    ario_server_playlist_append_songs                  (const GSList *songs,
                                                                             const PlaylistAction action);
+G_MODULE_EXPORT
 void                    ario_server_playlist_append_server_songs           (const GSList *songs,
                                                                             const PlaylistAction action);
+G_MODULE_EXPORT
 void                    ario_server_playlist_append_dir                    (const gchar *dir,
                                                                             const PlaylistAction action);
+G_MODULE_EXPORT
 void                    ario_server_playlist_append_criterias              (const GSList *criterias,
                                                                             const PlaylistAction action,
                                                                             const gint nb_entries);
+G_MODULE_EXPORT
 void                    ario_server_free_song                              (ArioServerSong *song);
-
+G_MODULE_EXPORT
 void                    ario_server_free_output                            (ArioServerOutput *output);
 
 G_END_DECLS

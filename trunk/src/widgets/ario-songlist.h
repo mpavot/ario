@@ -59,28 +59,29 @@ enum
         SONGS_FILENAME_COLUMN,
         SONGS_N_COLUMN
 };
-
+G_MODULE_EXPORT
 GType                   ario_songlist_get_type                  (void) G_GNUC_CONST;
-
+G_MODULE_EXPORT
 GtkWidget*              ario_songlist_new                       (const gchar *menu_file,
                                                                  const gchar *popup,
                                                                  gboolean is_sortable);
+G_MODULE_EXPORT
 GtkListStore*           ario_songlist_get_liststore             (ArioSonglist *songlist);
-
+G_MODULE_EXPORT
 GtkTreeSelection*       ario_songlist_get_selection             (ArioSonglist *songlist);
-
+G_MODULE_EXPORT
 void                    ario_songlist_cmd_add_songlists         (GSimpleAction *action,
                                                                  GVariant *parameter,
                                                                  gpointer data);
-
+G_MODULE_EXPORT
 void                    ario_songlist_cmd_add_play_songlists    (GSimpleAction *action,
                                                                  GVariant *parameter,
                                                                  gpointer data);
-
+G_MODULE_EXPORT
 void                    ario_songlist_cmd_songs_properties      (GSimpleAction *action,
                                                                  GVariant *parameter,
                                                                  gpointer data);
-
+G_MODULE_EXPORT
 void                    ario_songlist_cmd_clear_add_play_songlists (GSimpleAction *action,
                                                                     GVariant *parameter,
                                                                     gpointer data);

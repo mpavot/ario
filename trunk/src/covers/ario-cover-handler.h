@@ -51,15 +51,15 @@ typedef struct
 GType              ario_cover_handler_get_type         (void) G_GNUC_CONST;
 
 ArioCoverHandler * ario_cover_handler_new              (void);
-
+G_MODULE_EXPORT
 void               ario_cover_handler_force_reload     (void);
-
+G_MODULE_EXPORT
 ArioCoverHandler * ario_cover_handler_get_instance     (void);
-
+G_MODULE_EXPORT
 GdkPixbuf *        ario_cover_handler_get_cover        (void);
-
+G_MODULE_EXPORT
 gchar *            ario_cover_handler_get_cover_path   (void);
-
+G_MODULE_EXPORT
 GdkPixbuf *        ario_cover_handler_get_large_cover  (void);
 
 G_END_DECLS

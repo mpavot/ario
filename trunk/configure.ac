@@ -22,6 +22,17 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 AM_GLIB_GNU_GETTEXT
 
 dnl ================================================================
+dnl Host
+dnl ================================================================
+AC_ARG_ENABLE(mswin,
+              AC_HELP_STRING([--enable-mswin],
+                             [Compile for MS Windows]))
+if test x"$enable_mswin" = xyes; then
+   AC_DEFINE(WINDOWS, 1, [Compile for MS Windows)])
+fi
+AM_CONDITIONAL(WINDOWS, test x"$enable_mswin" = xyes)
+
+dnl ================================================================
 dnl Dependencies
 dnl ================================================================
 
@@ -345,7 +356,7 @@ else
         echo "Playlists support is:                     DISABLED"
 fi
 if test x${enable_mpdidle} != xno; then
-        echo "MPD 'idle' mode support is:               ENABLED  (--enable-mpdidle)"
+        echo "MPD 'idle' mode support is:               ENABLED  (--disable-mpdidle)"
 else
         echo "MPD 'idle' mode support is:               DISABLED"
 fi
@@ -355,8 +366,12 @@ else
         echo "Taglib support is:                        DISABLED"
 fi
 if test x${enable_libmpdclient2} != xno; then
-        echo "libmpdclient2 support is:                 ENABLED  (--enable-libmpdclient2)"
+        echo "libmpdclient2 support is:                 ENABLED  (--disable-libmpdclient2)"
 else
         echo "libmpdclient2 support is:                 DISABLED"
 fi
-
+if test x${enable_mswin} = xyes; then
+        echo "Compilation for MS Windows is:            ENABLED"
+else
+        echo "Compilation for MS Windows is:            DISABLED (--enable-mswin)"
+fi

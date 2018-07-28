@@ -23,6 +23,7 @@
 typedef struct _ArioLyricsProvider ArioLyricsProvider;
 
 #include <glib-object.h>
+#include <gmodule.h>
 #include "lyrics/ario-lyrics.h"
 
 G_BEGIN_DECLS
@@ -77,6 +78,7 @@ typedef struct
 /*
  * Public methods
  */
+G_MODULE_EXPORT
 GType           ario_lyrics_provider_get_type                   (void) G_GNUC_CONST;
 
 gchar*          ario_lyrics_provider_get_id                     (ArioLyricsProvider *lyrics_provider);

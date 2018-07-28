@@ -1,12 +1,21 @@
 BUILT_SOURCES = 
 bin_PROGRAMS = ario
 
-noinst_LTLIBRARIES = libario.la
+libariodir = $(libdir)/ario
+libariodatadir = $(pkgdatadir)
+libario_LTLIBRARIES = libario.la
 
 INCLUDES = $(WARNINGS)
 
 ario_SOURCES = ario-main.c
 ario_LDADD = libario.la $(DEPS_LIBS)
+
+if WINDOWS
+.rc.o:
+	windres ario.rc -O coff -o ario.o
+
+ario_SOURCES += ario.rc
+endif
 
 libario_la_LIBADD = \
         $(DEPS_LIBS)\
@@ -15,6 +24,8 @@ libario_la_LIBADD = \
         $(TAGLIB_LIBS)\
         $(XMMS2_LIBS)\
         $(LIBGCRYPT_LIBS)
+
+libario_la_LDFLAGS = -no-undefined
 
 libario_la_SOURCES = \
 	ario-enum-types.c\
@@ -36,18 +47,18 @@ libario_la_SOURCES = \
 	covers/ario-cover-manager.h\
 	covers/ario-cover-provider.c\
 	covers/ario-cover-provider.h\
-        lib/ario-conf.c\
+	lib/ario-conf.c\
 	lib/ario-conf.h\
 	lib/gtk-builder-helpers.c\
 	lib/gtk-builder-helpers.h\
-        lyrics/ario-lyrics-letras.c\
-        lyrics/ario-lyrics-letras.h\
-        lyrics/ario-lyrics-manager.c\
-        lyrics/ario-lyrics-manager.h\
-        lyrics/ario-lyrics-provider.c\
-        lyrics/ario-lyrics-provider.h\
-        lyrics/ario-lyrics.c\
-        lyrics/ario-lyrics.h\
+	lyrics/ario-lyrics-letras.c\
+	lyrics/ario-lyrics-letras.h\
+	lyrics/ario-lyrics-manager.c\
+	lyrics/ario-lyrics-manager.h\
+	lyrics/ario-lyrics-provider.c\
+	lyrics/ario-lyrics-provider.h\
+	lyrics/ario-lyrics.c\
+	lyrics/ario-lyrics.h\
 	notification/ario-notification-manager.c\
 	notification/ario-notification-manager.h\
 	notification/ario-notifier.c\
@@ -89,8 +100,8 @@ libario_la_SOURCES = \
 	preferences/ario-playlist-preferences.h\
 	preferences/ario-server-preferences.c\
 	preferences/ario-server-preferences.h\
-        preferences/ario-stats-preferences.c\
-        preferences/ario-stats-preferences.h\
+	preferences/ario-stats-preferences.c\
+	preferences/ario-stats-preferences.h\
 	preferences/ario-preferences.h\
 	servers/ario-server.c\
 	servers/ario-server.h\
@@ -140,7 +151,7 @@ libario_la_SOURCES = \
 	widgets/ario-lyrics-editor.h\
 	widgets/ario-playlist.c\
 	widgets/ario-playlist.h\
-        widgets/ario-songlist.c\
+	widgets/ario-songlist.c\
 	widgets/ario-songlist.h\
 	widgets/ario-status-bar.c\
 	widgets/ario-status-bar.h\
@@ -199,15 +210,26 @@ AM_CPPFLAGS = \
                 $(AVAHI_CFLAGS) \
                 $(LIBMPDCLIENT2_CFLAGS) \
                 $(TAGLIB_CFLAGS) \
-		$(LIBGCRYPT_CFLAGS) \
+                $(LIBGCRYPT_CFLAGS) \
                 $(XMMS2_CFLAGS) \
-                -DLOCALE_DIR=\""$(datadir)/locale"\"\
+                -DCURRENT_DATE="\"`date +%G`\""
+
+if WINDOWS
+AM_CPPFLAGS += -DLOCALE_DIR=\"locale/\"\
+                -DPIXMAP_PATH=\"art/\"\
+                -DDATA_PATH=\"data/\"\
+                -DUI_PATH=\"ui/\"\
+                -DARIO_PLUGIN_DIR=\"plugins/\"\
+                -DARIO_PLUGIN_DATA_DIR=\"plugins/\"\
+				-mwindows
+else
+AM_CPPFLAGS += -DLOCALE_DIR=\""$(datadir)/locale"\"\
                 -DPIXMAP_PATH=\""$(pkgdatadir)/art/"\"\
                 -DDATA_PATH=\""$(pkgdatadir)/data/"\"\
                 -DUI_PATH=\""$(pkgdatadir)/ui/"\"\
-        	-DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
-        	-DARIO_PLUGIN_DATA_DIR=\"$(PLUGIN_DATA_DIR)\"\
-		-DCURRENT_DATE="\"`date +%G`\""
+                -DARIO_PLUGIN_DIR=\"$(PLUGINDIR)\"\
+                -DARIO_PLUGIN_DATA_DIR=\"$(PLUGIN_DATA_DIR)\"
+endif
 
 if MPD_GLIB
 AM_CPPFLAGS += -DMPD_GLIB

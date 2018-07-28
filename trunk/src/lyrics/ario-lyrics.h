@@ -24,6 +24,7 @@
 typedef struct _ArioLyrics ArioLyrics;
 typedef struct _ArioLyricsCandidate ArioLyricsCandidate;
 
+#include <gmodule.h>
 #include "lyrics/ario-lyrics-provider.h"
 
 struct _ArioLyrics
@@ -40,26 +41,26 @@ struct _ArioLyricsCandidate
         gchar *data;
         ArioLyricsProvider *lyrics_provider;
 };
-
+G_MODULE_EXPORT
 ArioLyrics *            ario_lyrics_get_local_lyrics            (const gchar *artist,
                                                                  const gchar *title);
-
+G_MODULE_EXPORT
 void                    ario_lyrics_free                        (ArioLyrics *lyrics);
 
 void                    ario_lyrics_candidate_free              (ArioLyricsCandidate *candidate);
 
 ArioLyricsCandidate *   ario_lyrics_candidate_copy              (const ArioLyricsCandidate *candidate);
-
+G_MODULE_EXPORT
 gboolean                ario_lyrics_save_lyrics                 (const gchar *artist,
                                                                  const gchar *title,
                                                                  const gchar *lyrics);
-
+G_MODULE_EXPORT
 void                    ario_lyrics_remove_lyrics               (const gchar *artist,
                                                                  const gchar *title);
-
+G_MODULE_EXPORT
 gboolean                ario_lyrics_lyrics_exists               (const gchar *artist,
                                                                  const gchar *title);
-
+G_MODULE_EXPORT
 gchar*                  ario_lyrics_make_lyrics_path            (const gchar *artist,
                                                                  const gchar *title);
 void                    ario_lyrics_prepend_infos               (ArioLyrics *lyrics);

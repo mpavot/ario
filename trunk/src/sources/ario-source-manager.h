@@ -64,11 +64,14 @@ typedef struct
 GType                   ario_source_manager_get_type     (void) G_GNUC_CONST;
 
 GtkWidget*              ario_source_manager_get_instance (void);
-
+G_MODULE_EXPORT
 void                    ario_source_manager_append       (ArioSource *source);
+G_MODULE_EXPORT
 void                    ario_source_manager_remove       (ArioSource *source);
+G_MODULE_EXPORT
 void                    ario_source_manager_reorder      (void);
 void                    ario_source_manager_shutdown     (void);
+G_MODULE_EXPORT
 void                    ario_source_manager_goto_playling_song (void);
 
 G_END_DECLS

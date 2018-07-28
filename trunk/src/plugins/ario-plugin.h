@@ -81,6 +81,7 @@ struct _ArioPluginClass
 /*
  * Public methods
  */
+G_MODULE_EXPORT
 GType           ario_plugin_get_type                    (void) G_GNUC_CONST;
 
 void            ario_plugin_activate                    (ArioPlugin *plugin,
@@ -91,11 +92,11 @@ void            ario_plugin_deactivate                  (ArioPlugin *plugin,
 gboolean        ario_plugin_is_configurable             (ArioPlugin *plugin);
 
 GtkWidget*      ario_plugin_create_configure_dialog     (ArioPlugin *plugin);
-
+G_MODULE_EXPORT
 GSList *        ario_plugin_get_plugin_paths            (void);
-
+G_MODULE_EXPORT
 GSList *        ario_plugin_get_plugin_data_paths       (void);
-
+G_MODULE_EXPORT
 char *          ario_plugin_find_file                   (const char *file);
 
 /*

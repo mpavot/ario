@@ -1,9 +1,12 @@
 SUBDIRS = icons
 
+if WINDOWS
+else
 desktopdir 	 = $(datadir)/applications
 desktop_in_files = ario.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
+endif
 
 artdir = $(pkgdatadir)/art
 art_DATA = ario.png		\

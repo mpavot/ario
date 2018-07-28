@@ -54,9 +54,9 @@ typedef struct
 
         void (*activate)        (ArioDndTree *tree);
 } ArioDndTreeClass;
-
+G_MODULE_EXPORT
 GType                   ario_dnd_tree_get_type   (void) G_GNUC_CONST;
-
+G_MODULE_EXPORT
 GtkWidget*              ario_dnd_tree_new        (const GtkTargetEntry* targets,
                                                   const gint n_targets,
                                                   const gboolean browse_mode);
