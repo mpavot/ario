@@ -26,7 +26,7 @@ INCLUDES = 						\
 	$(WARNINGS)
 
 if WINDOWS
-libfilesystem_la_LIBADD = -lario-0
+libfilesystem_la_LIBADD += -lario-0
 INCLUDES += -mwindows
 else
 plugin_in_files = filesystem.ario-plugin.desktop.in

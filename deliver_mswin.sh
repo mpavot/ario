@@ -25,8 +25,11 @@ cp plugins/radios/radios.ario-plugin.w32 msbuild/plugins/radios.ario-plugin
 cp plugins/radios/.libs/libradios-0.dll msbuild/plugins/libradios.dll
 
 #deps
-cp /mingw64/bin/libbrotlicommon.dll msbuild
-cp /mingw64/bin/libbrotlidec.dll msbuild
-cp /mingw64/bin/libcurl-4.dll msbuild
-cp /mingw64/bin/libmpdclient-2.dll msbuild
-cp /mingw64/bin/libnghttp2-14.dll msbuild
+ldd src/.libs/libario-0.dll | grep '\/mingw.*\.dll' -o | xargs -I{} cp "{}" msbuild
+
+#icons
+cp -R /mingw64/share/icons/* msbuild/art
+
+#pixbuf loaders
+mkdir -p msbuild/lib/gdk-pixbuf-2.0/2.10.0
+cp -r /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders* msbuild/lib/gdk-pixbuf-2.0/2.10.0
