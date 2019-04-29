@@ -28,8 +28,27 @@ cp plugins/radios/.libs/libradios-0.dll msbuild/plugins/libradios.dll
 ldd src/.libs/libario-0.dll | grep '\/mingw.*\.dll' -o | xargs -I{} cp "{}" msbuild
 
 #icons
-cp -R /mingw64/share/icons/* msbuild/art
+cp -R /mingw64/share/icons/Adwaita msbuild/art
+find msbuild/art/Adwaita -name apps -type d | xargs rm -rf
+find msbuild/art/Adwaita -name emotes -type d | xargs rm -rf
+find msbuild/art/Adwaita -name mimetypes -type d | xargs rm -rf
+gtk-update-icon-cache-3.0.exe msbuild/art/Adwaita
+
+
+mkdir -p msbuild/art/hicolor
+cp /mingw64/share/icons/hicolor/index.theme msbuild/art/hicolor
+
+for f in `find /mingw64/share/icons/hicolor -name '*ario*'`
+do
+	abspath=`dirname $f`
+	path=`realpath --relative-to=/mingw64/share/icons/hicolor $abspath`
+	mkdir -p msbuild/art/hicolor/$path
+	cp $f msbuild/art/hicolor/$path
+done
+gtk-update-icon-cache-3.0.exe msbuild/art/hicolor
 
 #pixbuf loaders
-mkdir -p msbuild/lib/gdk-pixbuf-2.0/2.10.0
-cp -r /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders* msbuild/lib/gdk-pixbuf-2.0/2.10.0
+mkdir -p msbuild/lib/gdk-pixbuf-2.0/2.10.0/loaders
+cp /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache msbuild/lib/gdk-pixbuf-2.0/2.10.0
+cp /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.dll msbuild/lib/gdk-pixbuf-2.0/2.10.0/loaders
+cp /mingw64/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.dll msbuild/lib/gdk-pixbuf-2.0/2.10.0/loaders
