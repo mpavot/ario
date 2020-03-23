@@ -92,7 +92,7 @@ enum
 };
 
 #define ARIO_BROWSER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER, ArioBrowserPrivate))
-G_DEFINE_TYPE (ArioBrowser, ario_browser, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioBrowser, ario_browser, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_browser_get_id (ArioSource *source)
@@ -144,9 +144,6 @@ ario_browser_class_init (ArioBrowserClass *klass)
         source_class->get_name = ario_browser_get_name;
         source_class->get_icon = ario_browser_get_icon;
         source_class->goto_playling_song = ario_browser_goto_playling_song;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioBrowserPrivate));
 }
 
 static void

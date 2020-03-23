@@ -82,7 +82,7 @@ enum
 static guint ario_avahi_signals[LAST_SIGNAL] = { 0 };
 
 #define ARIO_AVAHI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_AVAHI, ArioAvahiPrivate))
-G_DEFINE_TYPE (ArioAvahi, ario_avahi, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioAvahi, ario_avahi, G_TYPE_OBJECT)
 
 static void
 ario_avahi_class_init (ArioAvahiClass *klass)
@@ -103,9 +103,6 @@ ario_avahi_class_init (ArioAvahiClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioAvahiPrivate));
 }
 
 static void

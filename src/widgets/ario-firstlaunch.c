@@ -37,15 +37,12 @@ struct ArioFirstlaunchPrivate
 };
 
 #define ARIO_FIRSTLAUNCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_FIRSTLAUNCH, ArioFirstlaunchPrivate))
-G_DEFINE_TYPE (ArioFirstlaunch, ario_firstlaunch, GTK_TYPE_ASSISTANT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioFirstlaunch, ario_firstlaunch, GTK_TYPE_ASSISTANT)
 
 static void
 ario_firstlaunch_class_init (ArioFirstlaunchClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioFirstlaunchPrivate));
 }
 
 static void

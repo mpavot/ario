@@ -124,7 +124,7 @@ char * ArioXmmsPattern[ARIO_TAG_COUNT] =
 };
 
 #define ARIO_XMMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_XMMS, ArioXmmsPrivate))
-G_DEFINE_TYPE (ArioXmms, ario_xmms, TYPE_ARIO_SERVER_INTERFACE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioXmms, ario_xmms, TYPE_ARIO_SERVER_INTERFACE)
 
 static ArioXmms *instance = NULL;
 static ArioServer *server_instance = NULL;
@@ -180,8 +180,6 @@ ario_xmms_class_init (ArioXmmsClass *klass)
         server_class->get_stats = ario_xmms_get_stats;
         server_class->get_songs_info = ario_xmms_get_songs_info;
         server_class->list_files = ario_xmms_list_files;
-
-        g_type_class_add_private (klass, sizeof (ArioXmmsPrivate));
 }
 
 static void

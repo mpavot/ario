@@ -71,7 +71,7 @@ enum
 };
 
 #define ARIO_SEARCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SEARCH, ArioSearchPrivate))
-G_DEFINE_TYPE (ArioSearch, ario_search, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioSearch, ario_search, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_search_get_id (ArioSource *source)
@@ -101,9 +101,6 @@ ario_search_class_init (ArioSearchClass *klass)
         source_class->get_id = ario_search_get_id;
         source_class->get_name = ario_search_get_name;
         source_class->get_icon = ario_search_get_icon;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioSearchPrivate));
 }
 
 static void

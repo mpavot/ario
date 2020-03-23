@@ -64,7 +64,7 @@ extern PyMethodDef pyario_functions[];
 /* We retreive this to check for correct class hierarchy */
 static PyTypeObject *PyArioPlugin_Type;
 
-G_DEFINE_TYPE (ArioPythonModule, ario_python_module, G_TYPE_TYPE_MODULE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioPythonModule, ario_python_module, G_TYPE_TYPE_MODULE)
 
 static gboolean
 ario_python_module_load (GTypeModule *gmodule)
@@ -225,8 +225,6 @@ ario_python_module_class_init (ArioPythonModuleClass *class)
                                               G_PARAM_READWRITE |
                                               G_PARAM_CONSTRUCT_ONLY |
                                               G_PARAM_STATIC_STRINGS));
-
-        g_type_class_add_private (object_class, sizeof (ArioPythonModulePrivate));
         
         module_class->load = ario_python_module_load;
         module_class->unload = ario_python_module_unload;

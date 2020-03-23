@@ -89,7 +89,7 @@ enum
 };
 
 #define ARIO_INFORMATION_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_INFORMATION, ArioInformationPrivate))
-G_DEFINE_TYPE (ArioInformation, ario_information, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioInformation, ario_information, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_information_get_id (ArioSource *source)
@@ -152,9 +152,6 @@ ario_information_class_init (ArioInformationClass *klass)
         source_class->get_icon = ario_information_get_icon;
         source_class->select = ario_information_select;
         source_class->unselect = ario_information_unselect;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioInformationPrivate));
 }
 
 static gboolean

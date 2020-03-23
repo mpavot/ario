@@ -65,7 +65,7 @@ typedef struct ArioCoverHandlerData
 } ArioCoverHandlerData;
 
 #define ARIO_COVER_HANDLER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_HANDLER, ArioCoverHandlerPrivate))
-G_DEFINE_TYPE (ArioCoverHandler, ario_cover_handler, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioCoverHandler, ario_cover_handler, G_TYPE_OBJECT)
 
 static ArioCoverHandler *instance = NULL;
 
@@ -86,7 +86,6 @@ ario_cover_handler_class_init (ArioCoverHandlerClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
-        g_type_class_add_private (klass, sizeof (ArioCoverHandlerPrivate));
 }
 
 static void

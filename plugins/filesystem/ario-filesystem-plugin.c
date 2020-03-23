@@ -71,11 +71,8 @@ impl_deactivate (ArioPlugin *plugin,
 static void
 ario_filesystem_plugin_class_init (ArioFilesystemPluginClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-
-        g_type_class_add_private (object_class, sizeof (ArioFilesystemPluginPrivate));
 }

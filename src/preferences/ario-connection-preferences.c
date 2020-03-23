@@ -50,13 +50,12 @@ struct ArioConnectionPreferencesPrivate
 };
 
 #define ARIO_CONNECTION_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_PREFERENCES, ArioConnectionPreferencesPrivate))
-G_DEFINE_TYPE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_BOX)
 
 static void
 ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioConnectionPreferencesPrivate));
 }
 
 static void

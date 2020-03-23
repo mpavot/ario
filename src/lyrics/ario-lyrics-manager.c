@@ -34,13 +34,12 @@ struct ArioLyricsManagerPrivate
 };
 
 #define ARIO_LYRICS_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_MANAGER, ArioLyricsManagerPrivate))
-G_DEFINE_TYPE (ArioLyricsManager, ario_lyrics_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioLyricsManager, ario_lyrics_manager, G_TYPE_OBJECT)
 
 static void
 ario_lyrics_manager_class_init (ArioLyricsManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioLyricsManagerPrivate));
 }
 
 static void

@@ -50,7 +50,7 @@ struct ArioShellLyricsPrivate
 static gboolean is_instantiated = FALSE;
 
 #define ARIO_SHELL_LYRICS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_LYRICS, ArioShellLyricsPrivate))
-G_DEFINE_TYPE (ArioShellLyrics, ario_shell_lyrics, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShellLyrics, ario_shell_lyrics, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
@@ -59,8 +59,6 @@ ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_shell_lyrics_finalize;
-
-        g_type_class_add_private (klass, sizeof (ArioShellLyricsPrivate));
 }
 
 static void

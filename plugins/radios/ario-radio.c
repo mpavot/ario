@@ -156,7 +156,7 @@ static ArioRadioAdder radio_adders [] = {
 };
 
 #define ARIO_RADIO_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_RADIO, ArioRadioPrivate))
-G_DEFINE_TYPE (ArioRadio, ario_radio, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioRadio, ario_radio, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_radio_get_id (ArioSource *source)
@@ -190,9 +190,6 @@ ario_radio_class_init (ArioRadioClass *klass)
         source_class->get_id = ario_radio_get_id;
         source_class->get_name = ario_radio_get_name;
         source_class->get_icon = ario_radio_get_icon;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioRadioPrivate));
 }
 
 static void

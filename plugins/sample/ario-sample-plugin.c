@@ -83,6 +83,4 @@ ario_sample_plugin_class_init (ArioSamplePluginClass *klass)
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-
-        g_type_class_add_private (object_class, sizeof (ArioSamplePluginPrivate));
 }

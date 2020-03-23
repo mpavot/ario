@@ -76,13 +76,12 @@ struct ArioPlaylistPreferencesPrivate
 };
 
 #define ARIO_PLAYLIST_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_PREFERENCES, ArioPlaylistPreferencesPrivate))
-G_DEFINE_TYPE (ArioPlaylistPreferences, ario_playlist_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioPlaylistPreferences, ario_playlist_preferences, GTK_TYPE_BOX)
 
 static void
 ario_playlist_preferences_class_init (ArioPlaylistPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioPlaylistPreferencesPrivate));
 }
 
 static void
