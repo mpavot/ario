@@ -43,7 +43,7 @@ struct curl_slist;
  * @return A newly allocated string with the formated time
  */
 G_MODULE_EXPORT
-char*                   ario_util_format_time                (const int time) G_GNUC_CONST G_GNUC_MALLOC;
+char*                   ario_util_format_time                (const int time) G_GNUC_CONST;
 
 /**
  * Format a track time to the form 1:23:45 in a buffer
@@ -64,7 +64,7 @@ void                    ario_util_format_time_buf            (const int time,
  * @return A newly allocated string with the formated time
  */
 G_MODULE_EXPORT
-char*                   ario_util_format_total_time          (const int time) G_GNUC_CONST G_GNUC_MALLOC;
+char*                   ario_util_format_total_time          (const int time) G_GNUC_CONST;
 
 /**
  * Format a track number to be displayed
@@ -180,7 +180,7 @@ void                    ario_util_load_uri                   (const char *uri);
  * @return A newly allocated formated keyword
  */
 G_MODULE_EXPORT
-char *                  ario_util_format_keyword             (const char *keyword) G_GNUC_MALLOC;
+char *                  ario_util_format_keyword             (const char *keyword);
 
 /**
  * Format a keyword to be used for a search on last.fm
@@ -190,7 +190,7 @@ char *                  ario_util_format_keyword             (const char *keywor
  * @return A newly allocated formated keyword
  */
 G_MODULE_EXPORT
-char *                  ario_util_format_keyword_for_lastfm  (const char *keyword) G_GNUC_MALLOC;
+char *                  ario_util_format_keyword_for_lastfm  (const char *keyword);
 
 /**
  * Generate an icon to use for Drag & Drop from a list of albums
@@ -200,7 +200,7 @@ char *                  ario_util_format_keyword_for_lastfm  (const char *keywor
  * @return A newly allocated pixbuf
  */
 G_MODULE_EXPORT
-GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albums) G_GNUC_MALLOC;
+GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albums);
 
 /**
  * Generate an icon to use for Drag & Drop from a list of criteria
@@ -210,7 +210,7 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf_from_albums (const GSList *albu
  * @return A newly allocated pixbuf
  */
 G_MODULE_EXPORT
-GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *criterias) G_GNUC_MALLOC;
+GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *criterias);
 
 /**
  * Convert a string from iso8859 to locale
@@ -220,7 +220,7 @@ GdkPixbuf *             ario_util_get_dnd_pixbuf             (const GSList *crit
  * @return A newly allocated string
  */
 G_MODULE_EXPORT
-gchar *                 ario_util_convert_from_iso8859       (const char *string) G_GNUC_MALLOC;
+gchar *                 ario_util_convert_from_iso8859       (const char *string);
 
 /**
  * Remove bad caracters from a filename
