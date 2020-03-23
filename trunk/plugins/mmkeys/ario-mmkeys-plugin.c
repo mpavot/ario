@@ -165,11 +165,8 @@ impl_deactivate (ArioPlugin *pl,
 static void
 ario_mmkeys_plugin_class_init (ArioMmkeysPluginClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         ArioPluginClass *plugin_class = ARIO_PLUGIN_CLASS (klass);
 
         plugin_class->activate = impl_activate;
         plugin_class->deactivate = impl_deactivate;
-
-        g_type_class_add_private (object_class, sizeof (ArioMmkeysPluginPrivate));
 }

@@ -70,13 +70,12 @@ enum
 };
 
 #define ARIO_SERVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SERVER_PREFERENCES, ArioServerPreferencesPrivate))
-G_DEFINE_TYPE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_BOX)
 
 static void
 ario_server_preferences_class_init (ArioServerPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioServerPreferencesPrivate));
 }
 
 static void

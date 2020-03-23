@@ -55,7 +55,7 @@ struct ArioDndTreePrivate
 };
 
 #define ARIO_DND_TREE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_DND_TREE, ArioDndTreePrivate))
-G_DEFINE_TYPE (ArioDndTree, ario_dnd_tree, GTK_TYPE_TREE_VIEW)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioDndTree, ario_dnd_tree, GTK_TYPE_TREE_VIEW)
 
 static void
 ario_dnd_tree_class_init (ArioDndTreeClass *klass)
@@ -83,9 +83,6 @@ ario_dnd_tree_class_init (ArioDndTreeClass *klass)
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE,
                               0);
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioDndTreePrivate));
 }
 
 static void

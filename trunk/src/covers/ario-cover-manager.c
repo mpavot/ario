@@ -34,13 +34,12 @@ struct ArioCoverManagerPrivate
 };
 
 #define ARIO_COVER_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_MANAGER, ArioCoverManagerPrivate))
-G_DEFINE_TYPE (ArioCoverManager, ario_cover_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioCoverManager, ario_cover_manager, G_TYPE_OBJECT)
 
 static void
 ario_cover_manager_class_init (ArioCoverManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioCoverManagerPrivate));
 }
 
 static void

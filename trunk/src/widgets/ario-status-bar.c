@@ -33,14 +33,12 @@ struct ArioStatusBarPrivate
 };
 
 #define ARIO_STATUS_BAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATUS_BAR, ArioStatusBarPrivate))
-G_DEFINE_TYPE (ArioStatusBar, ario_status_bar, GTK_TYPE_STATUSBAR)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioStatusBar, ario_status_bar, GTK_TYPE_STATUSBAR)
 
 static void
 ario_status_bar_class_init (ArioStatusBarClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioStatusBarPrivate));
 }
 
 static void

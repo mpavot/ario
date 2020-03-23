@@ -65,14 +65,12 @@ enum
 };
 
 #define ARIO_COVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_PREFERENCES, ArioCoverPreferencesPrivate))
-G_DEFINE_TYPE (ArioCoverPreferences, ario_cover_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioCoverPreferences, ario_cover_preferences, GTK_TYPE_BOX)
 
 static void
 ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioCoverPreferencesPrivate));
 }
 
 static void

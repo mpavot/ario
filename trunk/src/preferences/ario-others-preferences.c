@@ -61,13 +61,12 @@ struct ArioOthersPreferencesPrivate
 };
 
 #define ARIO_OTHERS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_OTHERS_PREFERENCES, ArioOthersPreferencesPrivate))
-G_DEFINE_TYPE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_BOX)
 
 static void
 ario_others_preferences_class_init (ArioOthersPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioOthersPreferencesPrivate));
 }
 
 static void

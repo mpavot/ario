@@ -73,7 +73,7 @@ struct ArioShellCoverdownloaderPrivate
 static gboolean is_instantiated = FALSE;
 
 #define ARIO_SHELL_COVERDOWNLOADER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_COVERDOWNLOADER, ArioShellCoverdownloaderPrivate))
-G_DEFINE_TYPE (ArioShellCoverdownloader, ario_shell_coverdownloader, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShellCoverdownloader, ario_shell_coverdownloader, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
@@ -84,9 +84,6 @@ ario_shell_coverdownloader_class_init (ArioShellCoverdownloaderClass *klass)
         /* Virtual methods */
         object_class->finalize = ario_shell_coverdownloader_finalize;
         object_class->constructor = ario_shell_coverdownloader_constructor;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioShellCoverdownloaderPrivate));
 }
 
 static void

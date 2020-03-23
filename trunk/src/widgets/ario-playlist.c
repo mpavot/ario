@@ -240,7 +240,7 @@ static const GtkTargetEntry internal_targets  [] = {
 };
 
 #define ARIO_PLAYLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST, ArioPlaylistPrivate))
-G_DEFINE_TYPE (ArioPlaylist, ario_playlist, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioPlaylist, ario_playlist, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_playlist_get_id (ArioSource *source)
@@ -274,9 +274,6 @@ ario_playlist_class_init (ArioPlaylistClass *klass)
         source_class->get_id = ario_playlist_get_id;
         source_class->get_name = ario_playlist_get_name;
         source_class->get_icon = ario_playlist_get_icon;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioPlaylistPrivate));
 }
 
 static void

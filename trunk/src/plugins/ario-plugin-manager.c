@@ -60,7 +60,7 @@ static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *it
 static void ario_plugin_manager_finalize (GObject *object);
 
 #define ARIO_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_PLUGIN_MANAGER, ArioPluginManagerPrivate))
-G_DEFINE_TYPE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_BOX)
 
 static void
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
@@ -68,8 +68,6 @@ ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = ario_plugin_manager_finalize;
-
-        g_type_class_add_private (object_class, sizeof (ArioPluginManagerPrivate));
 }
 
 static void

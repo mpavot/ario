@@ -57,14 +57,12 @@ typedef struct ArioSourceData
 } ArioSourceData;
 
 #define ARIO_SOURCE_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManagerPrivate))
-G_DEFINE_TYPE (ArioSourceManager, ario_source_manager, GTK_TYPE_NOTEBOOK)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioSourceManager, ario_source_manager, GTK_TYPE_NOTEBOOK)
 
 static void
 ario_source_manager_class_init (ArioSourceManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioSourceManagerPrivate));
 }
 
 static void

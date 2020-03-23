@@ -49,13 +49,12 @@ struct ArioBrowserPreferencesPrivate
 };
 
 #define ARIO_BROWSER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER_PREFERENCES, ArioBrowserPreferencesPrivate))
-G_DEFINE_TYPE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_BOX)
 
 static void
 ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioBrowserPreferencesPrivate));
 }
 
 static void

@@ -46,13 +46,12 @@ struct ArioShellPreferencesPrivate
 };
 
 #define ARIO_SHELL_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_PREFERENCES, ArioShellPreferencesPrivate))
-G_DEFINE_TYPE (ArioShellPreferences, ario_shell_preferences, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShellPreferences, ario_shell_preferences, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_preferences_class_init (ArioShellPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioShellPreferencesPrivate));
 }
 
 static void

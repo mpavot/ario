@@ -123,7 +123,7 @@ static const GtkTargetEntry dirs_targets  [] = {
 };
 
 #define ARIO_FILESYSTEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_FILESYSTEM, ArioFilesystemPrivate))
-G_DEFINE_TYPE (ArioFilesystem, ario_filesystem, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioFilesystem, ario_filesystem, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_filesystem_get_id (ArioSource *source)
@@ -165,9 +165,6 @@ ario_filesystem_class_init (ArioFilesystemClass *klass)
         source_class->get_icon = ario_filesystem_get_icon;
         source_class->shutdown = ario_filesystem_shutdown;
         source_class->select = ario_filesystem_select;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioFilesystemPrivate));
 }
 
 static void

@@ -55,7 +55,7 @@ struct ArioLyricsEditorPrivate
 };
 
 #define ARIO_LYRICS_EDITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_EDITOR, ArioLyricsEditorPrivate))
-G_DEFINE_TYPE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_BOX)
 
 static void
 ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
@@ -65,9 +65,6 @@ ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
 
         /* Virtual methods */
         object_class->finalize = ario_lyrics_editor_finalize;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioLyricsEditorPrivate));
 }
 
 static void

@@ -37,13 +37,12 @@ struct ArioNotificationManagerPrivate
 };
 
 #define ARIO_NOTIFICATION_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_NOTIFICATION_MANAGER, ArioNotificationManagerPrivate))
-G_DEFINE_TYPE (ArioNotificationManager, ario_notification_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioNotificationManager, ario_notification_manager, G_TYPE_OBJECT)
 
 static void
 ario_notification_manager_class_init (ArioNotificationManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioNotificationManagerPrivate));
 }
 
 static void

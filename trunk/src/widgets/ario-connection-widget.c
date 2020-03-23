@@ -101,7 +101,7 @@ enum
 };
 
 #define ARIO_CONNECTION_WIDGET_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_WIDGET, ArioConnectionWidgetPrivate))
-G_DEFINE_TYPE (ArioConnectionWidget, ario_connection_widget, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioConnectionWidget, ario_connection_widget, GTK_TYPE_BOX)
 
 static void
 ario_connection_widget_class_init (ArioConnectionWidgetClass *klass)
@@ -122,9 +122,6 @@ ario_connection_widget_class_init (ArioConnectionWidgetClass *klass)
 
         /* Virtual methods */
         object_class->finalize = ario_connection_widget_finalize;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioConnectionWidgetPrivate));
 }
 
 static void

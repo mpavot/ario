@@ -39,15 +39,12 @@ struct ArioPlaylistManagerPrivate
 };
 
 #define ARIO_PLAYLIST_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_MANAGER, ArioPlaylistManagerPrivate))
-G_DEFINE_TYPE (ArioPlaylistManager, ario_playlist_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioPlaylistManager, ario_playlist_manager, G_TYPE_OBJECT)
 
 static void
 ario_playlist_manager_class_init (ArioPlaylistManagerClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioPlaylistManagerPrivate));
 }
 
 static void

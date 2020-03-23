@@ -41,13 +41,12 @@ struct ArioVolumePrivate
 };
 
 #define ARIO_VOLUME_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_VOLUME, ArioVolumePrivate))
-G_DEFINE_TYPE (ArioVolume, ario_volume, GTK_TYPE_EVENT_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioVolume, ario_volume, GTK_TYPE_EVENT_BOX)
 
 static void
 ario_volume_class_init (ArioVolumeClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioVolumePrivate));
 }
 
 static void

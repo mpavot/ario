@@ -93,7 +93,7 @@ struct ArioShellCoverselectPrivate
 };
 
 #define ARIO_SHELL_COVERSELECT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_COVERSELECT, ArioShellCoverselectPrivate))
-G_DEFINE_TYPE (ArioShellCoverselect, ario_shell_coverselect, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShellCoverselect, ario_shell_coverselect, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
@@ -104,9 +104,6 @@ ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
         /* Virtual methods */
         object_class->finalize = ario_shell_coverselect_finalize;
         object_class->constructor = ario_shell_coverselect_constructor;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioShellCoverselectPrivate));
 }
 
 static void

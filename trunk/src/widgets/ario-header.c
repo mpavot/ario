@@ -103,19 +103,15 @@ struct ArioHeaderPrivate
 };
 
 #define ARIO_HEADER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_HEADER, ArioHeaderPrivate))
-G_DEFINE_TYPE (ArioHeader, ario_header, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioHeader, ario_header, GTK_TYPE_BOX)
 
 static void
 ario_header_class_init (ArioHeaderClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
         /* Virtual methods */
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         object_class->constructor = ario_header_constructor;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioHeaderPrivate));
 }
 
 static void
@@ -181,7 +177,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
         GtkTargetEntry *target_entry;
         gint n_elem;
         GtkWidget *image, *hbox, *right_hbox, *vbox;
-        GList *focus = NULL;
 
         klass = ARIO_HEADER_CLASS (g_type_class_peek (TYPE_ARIO_HEADER));
 
@@ -400,10 +395,6 @@ ario_header_constructor (GType type, guint n_construct_properties,
         gtk_box_pack_start (GTK_BOX (right_hbox), header->priv->volume_button, FALSE, TRUE, 5);
 
         gtk_box_pack_end (GTK_BOX (header), right_hbox, FALSE, TRUE, 0);
-
-        /* Set focus chain */
-        focus = g_list_append (focus, header->priv->scale);
-        gtk_container_set_focus_chain (GTK_CONTAINER (header), focus);
 
         return G_OBJECT (header);
 }

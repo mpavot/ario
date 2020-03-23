@@ -114,7 +114,7 @@ static const GtkTargetEntry songs_targets  [] = {
 };
 
 #define ARIO_STOREDPLAYLISTS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STOREDPLAYLISTS, ArioStoredplaylistsPrivate))
-G_DEFINE_TYPE (ArioStoredplaylists, ario_storedplaylists, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioStoredplaylists, ario_storedplaylists, ARIO_TYPE_SOURCE)
 
 static gchar *
 ario_storedplaylists_get_id (ArioSource *source)
@@ -156,9 +156,6 @@ ario_storedplaylists_class_init (ArioStoredplaylistsClass *klass)
         source_class->get_icon = ario_storedplaylists_get_icon;
         source_class->shutdown = ario_storedplaylists_shutdown;
         source_class->select = ario_storedplaylists_select;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioStoredplaylistsPrivate));
 }
 
 static void

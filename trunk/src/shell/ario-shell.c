@@ -168,7 +168,7 @@ static const GActionEntry shell_actions[] = {
 };
 
 #define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SHELL, ArioShellPrivate))
-G_DEFINE_TYPE (ArioShell, ario_shell, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShell, ario_shell, GTK_TYPE_APPLICATION_WINDOW)
 
 static void
 ario_shell_class_init (ArioShellClass *klass)
@@ -178,9 +178,6 @@ ario_shell_class_init (ArioShellClass *klass)
 
         /* Virtual methods */
         object_class->finalize = ario_shell_finalize;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioShellPrivate));
 }
 
 static void

@@ -69,14 +69,12 @@ enum
 };
 
 #define ARIO_SHELL_SIMILARARTISTS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_SIMILARARTISTS, ArioShellSimilarartistsPrivate))
-G_DEFINE_TYPE (ArioShellSimilarartists, ario_shell_similarartists, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShellSimilarartists, ario_shell_similarartists, GTK_TYPE_WINDOW)
 
 static void
 ario_shell_similarartists_class_init (ArioShellSimilarartistsClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioShellSimilarartistsPrivate));
 }
 
 static void

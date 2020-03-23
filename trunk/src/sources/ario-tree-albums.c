@@ -62,7 +62,7 @@ enum
 };
 
 #define ARIO_TREE_ALBUMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TREE_ALBUMS, ArioTreeAlbumsPrivate))
-G_DEFINE_TYPE (ArioTreeAlbums, ario_tree_albums, TYPE_ARIO_TREE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioTreeAlbums, ario_tree_albums, TYPE_ARIO_TREE)
 
 static void
 ario_tree_albums_class_init (ArioTreeAlbumsClass *klass)
@@ -78,9 +78,6 @@ ario_tree_albums_class_init (ArioTreeAlbumsClass *klass)
         tree_class->build_tree = ario_tree_albums_build_tree;
         tree_class->fill_tree = ario_tree_albums_fill_tree;
         tree_class->get_dnd_pixbuf = ario_tree_albums_get_dnd_pixbuf;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioTreeAlbumsPrivate));
 }
 
 static gint

@@ -115,7 +115,7 @@ struct ArioMpdPrivate
 };
 
 #define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
-G_DEFINE_TYPE (ArioMpd, ario_mpd, TYPE_ARIO_SERVER_INTERFACE)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioMpd, ario_mpd, TYPE_ARIO_SERVER_INTERFACE)
 
 static ArioMpd *instance = NULL;
 static ArioServer *server_instance = NULL;
@@ -168,9 +168,6 @@ ario_mpd_class_init (ArioMpdClass *klass)
         server_class->get_stats = ario_mpd_get_stats;
         server_class->get_songs_info = ario_mpd_get_songs_info;
         server_class->list_files = ario_mpd_list_files;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioMpdPrivate));
 }
 
 static void

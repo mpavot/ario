@@ -78,7 +78,7 @@ struct ArioShellSonginfosPrivate
 };
 
 #define ARIO_SHELL_SONGINFOS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_SONGINFOS, ArioShellSonginfosPrivate))
-G_DEFINE_TYPE (ArioShellSonginfos, ario_shell_songinfos, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioShellSonginfos, ario_shell_songinfos, GTK_TYPE_DIALOG)
 
 static void
 ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
@@ -88,9 +88,6 @@ ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
 
         /* Virtual methods */
         object_class->finalize = ario_shell_songinfos_finalize;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioShellSonginfosPrivate));
 }
 
 static void

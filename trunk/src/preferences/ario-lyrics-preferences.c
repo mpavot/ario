@@ -59,13 +59,12 @@ enum
 };
 
 #define ARIO_LYRICS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_PREFERENCES, ArioLyricsPreferencesPrivate))
-G_DEFINE_TYPE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_BOX)
 
 static void
 ario_lyrics_preferences_class_init (ArioLyricsPreferencesClass *klass)
 {
         ARIO_LOG_FUNCTION_START;
-        g_type_class_add_private (klass, sizeof (ArioLyricsPreferencesPrivate));
 }
 
 static void

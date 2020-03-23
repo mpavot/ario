@@ -68,7 +68,7 @@ static const GtkTargetEntry songs_targets  [] = {
 };
 
 #define ARIO_SONGLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SONGLIST, ArioSonglistPrivate))
-G_DEFINE_TYPE (ArioSonglist, ario_songlist, GTK_TYPE_SCROLLED_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (ArioSonglist, ario_songlist, GTK_TYPE_SCROLLED_WINDOW)
 
 static void
 ario_songlist_class_init (ArioSonglistClass *klass)
@@ -78,9 +78,6 @@ ario_songlist_class_init (ArioSonglistClass *klass)
 
         /* Virtual Methods */
         object_class->finalize = ario_songlist_finalize;
-
-        /* Private attributes */
-        g_type_class_add_private (klass, sizeof (ArioSonglistPrivate));
 }
 
 static void
