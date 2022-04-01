@@ -19,7 +19,6 @@ data/ario.desktop.in.in
 [type: gettext/glade]data/ui/similar-artists.ui
 [type: gettext/glade]data/ui/stats-prefs.ui
 [type: gettext/glade]data/ui/song-infos.ui
-[type: gettext/glade]data/ui/trayicon-prefs.ui
 src/ario-avahi.c
 src/ario-avahi.h
 src/ario-debug.h
@@ -28,8 +27,6 @@ src/ario-profiles.c
 src/ario-profiles.h
 src/ario-util.c
 src/ario-util.h
-src/covers/ario-cover-amazon.c
-src/covers/ario-cover-amazon.h
 src/covers/ario-cover.c
 src/covers/ario-cover.h
 src/covers/ario-cover-handler.c
@@ -60,8 +57,6 @@ src/notification/ario-notification-manager.c
 src/notification/ario-notification-manager.h
 src/notification/ario-notifier.c
 src/notification/ario-notifier.h
-src/notification/ario-notifier-tooltip.c
-src/notification/ario-notifier-tooltip.h
 src/playlist/ario-playlist-dynamic.c
 src/playlist/ario-playlist-mode.c
 src/playlist/ario-playlist-queue.c
@@ -91,7 +86,6 @@ src/preferences/ario-server-preferences.c
 src/preferences/ario-server-preferences.h
 src/preferences/ario-stats-preferences.c
 src/preferences/ario-stats-preferences.h
-src/preferences/ario-taskbar-preferences.c
 src/preferences/ario-preferences.h
 src/servers/ario-mpd.c
 src/servers/ario-mpd.h
@@ -143,17 +137,8 @@ src/widgets/ario-songlist.c
 src/widgets/ario-songlist.h
 src/widgets/ario-status-bar.c
 src/widgets/ario-status-bar.h
-src/widgets/ario-tooltip.c
-src/widgets/ario-tooltip.h
-src/widgets/ario-tray-icon.c
-src/widgets/ario-tray-icon.h
 src/widgets/ario-volume.c
 src/widgets/ario-volume.h
-plugins/audioscrobbler/ario-audioscrobbler.c
-plugins/audioscrobbler/ario-audioscrobbler.h
-plugins/audioscrobbler/ario-audioscrobbler-plugin.c
-[type: gettext/glade]plugins/audioscrobbler/audioscrobbler-prefs.ui
-plugins/audioscrobbler/audioscrobbler.ario-plugin.desktop.in
 plugins/filesystem/ario-filesystem.c
 plugins/filesystem/ario-filesystem.h
 plugins/filesystem/ario-filesystem-plugin.c
@@ -165,19 +150,18 @@ plugins/information/ario-information-plugin.c
 plugins/information/ario-information-plugin.h
 plugins/information/information.ario-plugin.desktop.in
 [type: gettext/glade]plugins/information/information.ui
-plugins/libnotify/libnotify.ario-plugin.desktop.in
-plugins/libnotify/ario-libnotify-plugin.c
-plugins/libnotify/ario-libnotify-plugin.h
-plugins/libnotify/ario-notifier-libnotify.c
-plugins/libnotify/ario-notifier-libnotify.h
-plugins/mmkeys/ario-mmkeys-plugin.c
-plugins/mmkeys/ario-mmkeys-plugin.h
-plugins/mmkeys/mmkeys.ario-plugin.desktop.in
 plugins/radios/ario-radio.c
 plugins/radios/ario-radio.h
 plugins/radios/ario-radios-plugin.c
 plugins/radios/ario-radios-plugin.h
 plugins/radios/radios.ario-plugin.desktop.in
-plugins/wikipedia/ario-wikipedia-plugin.c
-plugins/wikipedia/ario-wikipedia-plugin.h
-plugins/wikipedia/wikipedia.ario-plugin.desktop.in
+data/ui/ario-browser-menu.ui
+data/ui/ario-playlist-menu.ui
+data/ui/ario-shell-menu.ui
+data/ui/ario-songlist-menu.ui
+data/ui/connection-dialog.ui
+plugins/filesystem/ario-filesystem-menu.ui
+plugins/radios/ario-radios-menu.ui
+src/notification/ario-notifier-gnotif.c
+
+
