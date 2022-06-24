@@ -1,0 +1,43 @@
+name: Windows
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: ./autogen.sh
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck
+  
+  runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl
+
+      - name: CI-Build
+        run: |
+          echo 'Running in MSYS2!'
+          ./autogen.sh --disable-taglib --disable-avahi --disable-dbus --disable-dependency-tracking  --disable-silent-rules --enable-mswin
+          make
+          make install
+          ./deliver_mswin.sh
