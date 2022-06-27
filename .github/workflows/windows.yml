@@ -18,7 +18,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl
+          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl
 
       - name: CI-Build
         run: |
