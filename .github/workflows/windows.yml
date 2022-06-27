@@ -18,13 +18,12 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl
+          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl mingw-w64-x86_64-meson mingw-w64-x86_64-ninja
 
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
-          wget https://www.musicpd.org/download/libmpdclient/2/libmpdclient-2.16.tar.xz && tar xvzf libmpdclient-2.16.tar.xz && pacman -S mingw-w64-x86_64-meson mingw-w64-x86_64-ninja
- && meson . output && ninja -C output && ninja -C output install
+          wget https://www.musicpd.org/download/libmpdclient/2/libmpdclient-2.16.tar.xz && tar xvzf libmpdclient-2.16.tar.xz && meson . output && ninja -C output && ninja -C output install
           ./autogen.sh --disable-taglib --disable-avahi --disable-dbus --disable-dependency-tracking  --disable-silent-rules --enable-mswin
           make
           make install
