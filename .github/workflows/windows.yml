@@ -23,7 +23,7 @@ jobs:
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
-          wget https://www.musicpd.org/download/libmpdclient/2/libmpdclient-2.16.tar.xz && tar xvf libmpdclient-2.16.tar.xz && meson . output && ninja -C output && ninja -C output install
+          wget https://www.musicpd.org/download/libmpdclient/2/libmpdclient-2.16.tar.xz && tar xvf libmpdclient-2.16.tar.xz && cd libmpdclient-2.16 && meson . output && ninja -C output && ninja -C output install
           ./autogen.sh --disable-taglib --disable-avahi --disable-dbus --disable-dependency-tracking  --disable-silent-rules --enable-mswin
           make
           make install
