@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    -name: Install deps
+    - name: Install deps
       run: sudo apt-get install -y libgtk-3-dev libglib2.0-dev libglib2.0-dev libtagc0-dev libavahi-glib-dev automake autoconf libtool build-essential
     - name: configure
       run: ./autogen.sh
