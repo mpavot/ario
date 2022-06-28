@@ -123,8 +123,7 @@ char * ArioXmmsPattern[ARIO_TAG_COUNT] =
         NULL         // ARIO_TAG_ANY
 };
 
-#define ARIO_XMMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_XMMS, ArioXmmsPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioXmms, ario_xmms, TYPE_ARIO_SERVER_INTERFACE)
+G_DEFINE_TYPE_WITH_CODE (ArioXmms, ario_xmms, TYPE_ARIO_SERVER_INTERFACE, G_ADD_PRIVATE(ArioXmms))
 
 static ArioXmms *instance = NULL;
 static ArioServer *server_instance = NULL;
@@ -186,7 +185,7 @@ static void
 ario_xmms_init (ArioXmms *xmms)
 {
         ARIO_LOG_FUNCTION_START;
-        xmms->priv = ARIO_XMMS_GET_PRIVATE (xmms);
+        xmms->priv = ario_xmms_get_instance_private (xmms);
 }
 
 static void

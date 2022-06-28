@@ -37,9 +37,6 @@
 #include "lib/ario-conf.h"
 
 #include "ario-module.h"
-#ifdef ENABLE_PYTHON
-#include "ario-python-module.h"
-#endif
 
 #define PLUGIN_EXT ".ario-plugin"
 
@@ -92,6 +89,7 @@ ario_plugins_engine_load_dir (const gchar        *dir,
                         if (!strcmp(info->module_name, "wikipedia")
                             || !strcmp(info->module_name, "audioscrobbler")
                             || !strcmp(info->module_name, "libnotify")
+                            || !strcmp(info->module_name, "mmkeys")
                             || !strcmp(info->module_name, "liblibnotify"))
                             continue;
 
@@ -224,34 +222,6 @@ load_plugin_module (ArioPluginInfo *info)
 
                 break;
 
-#ifdef ENABLE_PYTHON
-        case ARIO_PLUGIN_LOADER_PY:
-                {
-                        gchar *dir;
-
-                        if (!ario_python_init ()) {
-                                /* Mark plugin as unavailable and fails */
-                                info->available = FALSE;
-
-                                g_warning ("Cannot load Python plugin '%s' since ario "
-                                           "was not able to initialize the Python interpreter.",
-                                           info->name);
-
-                                return FALSE;
-                        }
-
-                        dir = g_path_get_dirname (info->file);
-
-                        g_return_val_if_fail ((info->module_name != NULL) &&
-                                              (info->module_name[0] != '\0'),
-                                              FALSE);
-
-                        info->module = G_TYPE_MODULE (ario_python_module_new (dir, info->module_name));
-
-                        g_free (dir);
-                        break;
-                }
-#endif
         default:
                 g_return_val_if_reached (FALSE);
         }
@@ -263,12 +233,6 @@ load_plugin_module (ArioPluginInfo *info)
                         g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
                                    info->name,
                                    ario_module_get_path (ARIO_MODULE (info->module)));
-                        break;
-
-                case ARIO_PLUGIN_LOADER_PY:
-                        g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
-                                   info->name,
-                                   info->module_name);
                         break;
 
                 default:
@@ -290,13 +254,6 @@ load_plugin_module (ArioPluginInfo *info)
                 info->plugin =
                         ARIO_PLUGIN (ario_module_new_object (ARIO_MODULE (info->module)));
                 break;
-
-#ifdef ENABLE_PYTHON
-        case ARIO_PLUGIN_LOADER_PY:
-                info->plugin =
-                        ARIO_PLUGIN (ario_python_module_new_object (ARIO_PYTHON_MODULE (info->module)));
-                break;
-#endif
 
         default:
                 g_return_val_if_reached (FALSE);
@@ -348,17 +305,6 @@ ario_plugins_engine_init (ArioShell *shell)
 void
 ario_plugins_engine_shutdown (void)
 {
-#ifdef ENABLE_PYTHON
-        /* Note: that this may cause finalization of objects (typically
-         * the ArioShell) by running the garbage collector. Since some
-         * of the plugin may have installed callbacks upon object
-         * finalization (typically they need to free the WindowData)
-         * it must run before we get rid of the plugins.
-         */
-        ario_python_garbage_collect ();
-        ario_python_shutdown ();
-#endif
-
         g_list_foreach (plugin_list,
                         (GFunc) _ario_plugin_info_unref, NULL);
         g_list_free (plugin_list);

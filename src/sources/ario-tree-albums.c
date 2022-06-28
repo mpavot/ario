@@ -61,8 +61,7 @@ enum
         ALBUM_N_COLUMN
 };
 
-#define ARIO_TREE_ALBUMS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TREE_ALBUMS, ArioTreeAlbumsPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioTreeAlbums, ario_tree_albums, TYPE_ARIO_TREE)
+G_DEFINE_TYPE_WITH_CODE (ArioTreeAlbums, ario_tree_albums, TYPE_ARIO_TREE, G_ADD_PRIVATE(ArioTreeAlbums))
 
 static void
 ario_tree_albums_class_init (ArioTreeAlbumsClass *klass)
@@ -129,7 +128,7 @@ static void
 ario_tree_albums_init (ArioTreeAlbums *tree)
 {
         ARIO_LOG_FUNCTION_START;
-        tree->priv = ARIO_TREE_ALBUMS_GET_PRIVATE (tree);
+        tree->priv = ario_tree_albums_get_instance_private (tree);
 }
 
 static gboolean

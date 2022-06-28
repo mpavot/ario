@@ -81,8 +81,7 @@ enum
 };
 static guint ario_avahi_signals[LAST_SIGNAL] = { 0 };
 
-#define ARIO_AVAHI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_AVAHI, ArioAvahiPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioAvahi, ario_avahi, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (ArioAvahi, ario_avahi, G_TYPE_OBJECT, G_ADD_PRIVATE(ArioAvahi))
 
 static void
 ario_avahi_class_init (ArioAvahiClass *klass)
@@ -111,7 +110,7 @@ ario_avahi_init (ArioAvahi *avahi)
         ARIO_LOG_FUNCTION_START;
         int error;
 
-        avahi->priv = ARIO_AVAHI_GET_PRIVATE (avahi);
+        avahi->priv = ario_avahi_get_instance_private (avahi);
         avahi->priv->hosts = NULL;
 
         /* Allocate main loop object */

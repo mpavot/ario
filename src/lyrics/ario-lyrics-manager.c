@@ -33,8 +33,7 @@ struct ArioLyricsManagerPrivate
         GSList *providers;
 };
 
-#define ARIO_LYRICS_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_MANAGER, ArioLyricsManagerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioLyricsManager, ario_lyrics_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (ArioLyricsManager, ario_lyrics_manager, G_TYPE_OBJECT, G_ADD_PRIVATE(ArioLyricsManager))
 
 static void
 ario_lyrics_manager_class_init (ArioLyricsManagerClass *klass)
@@ -47,7 +46,7 @@ ario_lyrics_manager_init (ArioLyricsManager *lyrics_manager)
 {
         ARIO_LOG_FUNCTION_START;
 
-        lyrics_manager->priv = ARIO_LYRICS_MANAGER_GET_PRIVATE (lyrics_manager);
+        lyrics_manager->priv = ario_lyrics_manager_get_instance_private (lyrics_manager);
 }
 
 ArioLyricsManager *

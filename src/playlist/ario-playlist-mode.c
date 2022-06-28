@@ -24,7 +24,6 @@
 static void ario_playlist_mode_class_init (ArioPlaylistModeClass *klass);
 static void ario_playlist_mode_init (ArioPlaylistMode *playlist_mode);
 
-#define ARIO_PLAYLIST_MODE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_MODE, ArioPlaylistModePrivate))
 G_DEFINE_TYPE (ArioPlaylistMode, ario_playlist_mode, G_TYPE_OBJECT)
 
 static void

@@ -49,8 +49,7 @@ struct ArioShellLyricsPrivate
 
 static gboolean is_instantiated = FALSE;
 
-#define ARIO_SHELL_LYRICS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_LYRICS, ArioShellLyricsPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShellLyrics, ario_shell_lyrics, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_CODE (ArioShellLyrics, ario_shell_lyrics, GTK_TYPE_WINDOW, G_ADD_PRIVATE(ArioShellLyrics))
 
 static void
 ario_shell_lyrics_class_init (ArioShellLyricsClass *klass)
@@ -65,7 +64,7 @@ static void
 ario_shell_lyrics_init (ArioShellLyrics *shell_lyrics)
 {
         ARIO_LOG_FUNCTION_START;
-        shell_lyrics->priv = ARIO_SHELL_LYRICS_GET_PRIVATE (shell_lyrics);
+        shell_lyrics->priv = ario_shell_lyrics_get_instance_private (shell_lyrics);
 
         g_signal_connect(shell_lyrics,
                          "delete_event",

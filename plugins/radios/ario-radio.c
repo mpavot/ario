@@ -155,8 +155,7 @@ static ArioRadioAdder radio_adders [] = {
         {N_("Last.fm: Radio of genre"), N_("Genre :"), "lastfm://genre/%s"},
 };
 
-#define ARIO_RADIO_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_RADIO, ArioRadioPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioRadio, ario_radio, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioRadio, ario_radio, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioRadio))
 
 static gchar *
 ario_radio_get_id (ArioSource *source)
@@ -200,7 +199,7 @@ ario_radio_init (ArioRadio *radio)
         GtkCellRenderer *renderer;
         GtkWidget *scrolledwindow_radios;
 
-        radio->priv = ARIO_RADIO_GET_PRIVATE (radio);
+        radio->priv = ario_radio_get_instance_private (radio);
 
         /* Radios list */
         scrolledwindow_radios = gtk_scrolled_window_new (NULL, NULL);

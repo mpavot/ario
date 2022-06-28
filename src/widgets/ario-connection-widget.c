@@ -43,7 +43,7 @@ G_MODULE_EXPORT void ario_connection_widget_port_changed_cb (GtkWidget *widget,
                                                              ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_timeout_changed_cb (GtkWidget *widget,
                                                                 ArioConnectionWidget *connection_widget);
-G_MODULE_EXPORT void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
+G_MODULE_EXPORT void ario_connection_widget_type_changed_cb (GtkToggleButton *togglebutton,
                                                              ArioConnectionWidget *connection_widget);
 G_MODULE_EXPORT void ario_connection_widget_password_changed_cb (GtkWidget *widget,
                                                                  ArioConnectionWidget *connection_widget);
@@ -100,8 +100,7 @@ enum
         N_COLUMN
 };
 
-#define ARIO_CONNECTION_WIDGET_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_WIDGET, ArioConnectionWidgetPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioConnectionWidget, ario_connection_widget, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioConnectionWidget, ario_connection_widget, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioConnectionWidget))
 
 static void
 ario_connection_widget_class_init (ArioConnectionWidgetClass *klass)
@@ -128,7 +127,7 @@ static void
 ario_connection_widget_init (ArioConnectionWidget *connection_widget)
 {
         ARIO_LOG_FUNCTION_START;
-        connection_widget->priv = ARIO_CONNECTION_WIDGET_GET_PRIVATE (connection_widget);
+        connection_widget->priv = ario_connection_widget_get_instance_private (connection_widget);
 
         connection_widget->priv->current_profile = NULL;
 }
@@ -468,7 +467,7 @@ ario_connection_widget_timeout_changed_cb (GtkWidget *widget,
         connection_widget->priv->current_profile->timeout = (int) timeout;
 }
 
-void ario_connection_widget_type_changed_cb (GtkToggleAction *toggleaction,
+void ario_connection_widget_type_changed_cb (GtkToggleButton *togglebutton,
                                              ArioConnectionWidget *connection_widget)
 
 {

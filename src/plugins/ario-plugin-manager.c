@@ -59,8 +59,7 @@ static ArioPluginInfo *plugin_manager_get_selected_plugin (ArioPluginManager *pm
 static void plugin_manager_toggle_active (ArioPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
 static void ario_plugin_manager_finalize (GObject *object);
 
-#define ARIO_PLUGIN_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_PLUGIN_MANAGER, ArioPluginManagerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioPluginManager, ario_plugin_manager, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioPluginManager))
 
 static void
 ario_plugin_manager_class_init (ArioPluginManagerClass *klass)
@@ -515,7 +514,7 @@ ario_plugin_manager_init (ArioPluginManager *pm)
         GtkWidget *hbuttonbox;
         gchar *markup;
 
-        pm->priv = ARIO_PLUGIN_MANAGER_GET_PRIVATE (pm);
+        pm->priv = ario_plugin_manager_get_instance_private (pm);
 
         gtk_orientable_set_orientation (GTK_ORIENTABLE (pm), GTK_ORIENTATION_VERTICAL);
         gtk_box_set_spacing (GTK_BOX (pm), 6);

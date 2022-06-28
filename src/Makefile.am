@@ -178,22 +178,6 @@ if USE_XMMS2
                 	      servers/ario-xmms.h
 endif
 
-if ENABLE_PYTHON
-        ario_SOURCES += plugins/ario-python-module.c\
-                        plugins/ario-python-module.h\
-                        plugins/ario-python-plugin.c\
-                        plugins/ario-python-plugin.h
-
-        INCLUDES += \
-	        $(NO_STRICT_ALIASING_CFLAGS)	\
-	        $(PYGTK_CFLAGS)			\
-	        $(PYTHON_CFLAGS)		\
-	        $(AM_CFLAGS)
-
-        libario_la_LIBADD += \
-	        $(top_builddir)/bindings/python/ario.la
-endif
-
 INST_H_FILES = \
         plugins/ario-plugin.h \
         servers/ario-server.h \
@@ -212,7 +196,7 @@ AM_CPPFLAGS = \
                 $(TAGLIB_CFLAGS) \
                 $(LIBGCRYPT_CFLAGS) \
                 $(XMMS2_CFLAGS) \
-                -DCURRENT_DATE="\"`date +%G`\""
+                -DCURRENT_DATE="\"2022\""
 
 if WINDOWS
 AM_CPPFLAGS += -DLOCALE_DIR=\"locale/\"\

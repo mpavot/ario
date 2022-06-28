@@ -66,8 +66,7 @@ struct ArioShellLyricsselectPrivate
         GSList *lyrics;
 };
 
-#define ARIO_SHELL_LYRICSSELECT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_LYRICSSELECT, ArioShellLyricsselectPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShellLyricsselect, ario_shell_lyricsselect, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_CODE (ArioShellLyricsselect, ario_shell_lyricsselect, GTK_TYPE_DIALOG, G_ADD_PRIVATE(ArioShellLyricsselect))
 
 static void
 ario_shell_lyricsselect_class_init (ArioShellLyricsselectClass *klass)
@@ -83,7 +82,7 @@ static void
 ario_shell_lyricsselect_init (ArioShellLyricsselect *shell_lyricsselect)
 {
         ARIO_LOG_FUNCTION_START;
-        shell_lyricsselect->priv = ARIO_SHELL_LYRICSSELECT_GET_PRIVATE (shell_lyricsselect);
+        shell_lyricsselect->priv = ario_shell_lyricsselect_get_instance_private (shell_lyricsselect);
         shell_lyricsselect->priv->lyrics = NULL;
 }
 

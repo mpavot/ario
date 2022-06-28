@@ -58,8 +58,7 @@ enum
         N_COLUMN
 };
 
-#define ARIO_LYRICS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_PREFERENCES, ArioLyricsPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioLyricsPreferences, ario_lyrics_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioLyricsPreferences))
 
 static void
 ario_lyrics_preferences_class_init (ArioLyricsPreferencesClass *klass)
@@ -71,7 +70,7 @@ static void
 ario_lyrics_preferences_init (ArioLyricsPreferences *lyrics_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        lyrics_preferences->priv = ARIO_LYRICS_PREFERENCES_GET_PRIVATE (lyrics_preferences);
+        lyrics_preferences->priv = ario_lyrics_preferences_get_instance_private (lyrics_preferences);
 }
 
 GtkWidget *

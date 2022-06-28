@@ -45,8 +45,7 @@ struct ArioShellPreferencesPrivate
         GtkWidget *notebook;
 };
 
-#define ARIO_SHELL_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_PREFERENCES, ArioShellPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShellPreferences, ario_shell_preferences, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_CODE (ArioShellPreferences, ario_shell_preferences, GTK_TYPE_DIALOG, G_ADD_PRIVATE(ArioShellPreferences))
 
 static void
 ario_shell_preferences_class_init (ArioShellPreferencesClass *klass)
@@ -58,7 +57,7 @@ static void
 ario_shell_preferences_init (ArioShellPreferences *shell_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        shell_preferences->priv = ARIO_SHELL_PREFERENCES_GET_PRIVATE (shell_preferences);
+        shell_preferences->priv = ario_shell_preferences_get_instance_private(shell_preferences);
 
         g_signal_connect (shell_preferences,
                           "delete_event",

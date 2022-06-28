@@ -124,62 +124,6 @@ if test x"$enable_libmpdclient2" != xno; then
 fi
 AM_CONDITIONAL(USE_LIBMPDCLIENT2, test x${enable_libmpdclient2} != xno)
 
-dnl ================================================================
-dnl Python plugins
-dnl ================================================================
-AC_ARG_ENABLE(python,
-              AC_HELP_STRING([--enable-python],
-                             [Enable python plugins support]))
-if test x"$enable_python" = xyes; then
-   AC_DEFINE(ENABLE_PYTHON, 1, [Enable python plugins support])
-fi
-
-if test "x$enable_python" = "xyes"; then
-	AM_PATH_PYTHON([2.3],[],[no])
-	if test "x$PYTHON" = "x:"; then
-		enable_python=no
-	fi
-fi
-
-if test "x$enable_python" = "xyes"; then
-	PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
-	PY_EXEC_PREFIX=`$PYTHON -c 'import sys ; print sys.exec_prefix'`
-	PYTHON_LIBS="-lpython$PYTHON_VERSION"
-	PYTHON_LIB_LOC="-L$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config"
-	PYTHON_CFLAGS="-I$PY_PREFIX/include/python$PYTHON_VERSION"
-	PYTHON_MAKEFILE="$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config/Makefile"
-	PYTHON_LOCALMODLIBS=`sed -n -e 's/^LOCALMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-	PYTHON_BASEMODLIBS=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-	PYTHON_OTHER_LIBS=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-	PYTHON_EXTRA_LIBS="$PYTHON_LOCALMODLIBS $PYTHON_BASEMODLIBS $PYTHON_OTHER_LIBS"
-	AC_SUBST([PYTHON_LIBS])
-	AC_SUBST([PYTHON_LIB_LOC])
-	AC_SUBST([PYTHON_CFLAGS])
-	AC_SUBST([PYTHON_EXTRA_LIBS])
-
-	PKG_CHECK_MODULES([PYGTK], [pygobject-2.0 >= 2.11.5
-                                    pygtk-2.0 >= 2.8.0])
-
-	AC_SUBST([PYGTK_CFLAGS])
-	AC_SUBST([PYGTK_LIBS])
-	AC_MSG_CHECKING([for pygtk defs])
-	PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
-	AC_MSG_RESULT([$PYGTK_DEFSDIR])
-
-	AC_MSG_CHECKING([for pygtk codegen])
-	PYGTK_CODEGEN="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/codegen.py"
-	AC_MSG_RESULT([$PYGTK_CODEGEN])
-
-	AC_MSG_CHECKING([for pygtk h2def])
-	PYGTK_H2DEF="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/h2def.py"
-	AC_MSG_RESULT([$PYGTK_H2DEF])
-
-	AC_SUBST([PYGTK_DEFSDIR])
-	AC_SUBST([PYGTK_CODEGEN])
-	AC_SUBST([PYGTK_H2DEF])
-fi
-AM_CONDITIONAL(ENABLE_PYTHON, test x"$enable_python" = xyes)
-
 # Silence warning: ar: 'u' modifier ignored since 'D' is the default
 AC_SUBST(AR_FLAGS, [cr])
 
@@ -213,20 +157,6 @@ AC_ARG_ENABLE(playlists,
 if test x"$enable_playlists" != xno; then
    AC_DEFINE(ENABLE_STOREDPLAYLISTS, 1, [Add support of playlists])
 fi
-
-dnl ================================================================
-dnl DBUS
-dnl ================================================================
-AC_ARG_ENABLE(dbus,
-              AC_HELP_STRING([--disable-dbus],
-                             [Disable support of dbus]))
-if test x"$enable_dbus" != xno; then
-   PKG_CHECK_MODULES(DBUS, [dbus-glib-1 >= 0.35])
-   DBUS_CFLAGS="$DBUS_CFLAGS -DDBUS_API_SUBJECT_TO_CHANGE"
-   DBUS_GLIB_BIN="`$PKG_CONFIG --variable=exec_prefix dbus-glib-1`/bin"
-   AC_SUBST(DBUS_GLIB_BIN)
-fi
-AM_CONDITIONAL(USE_DBUS, test x"$enable_dbus" != xno)
 
 dnl ================================================================
 dnl Avahi
@@ -281,8 +211,6 @@ AC_SUBST(PLUGIN_DATA_DIR)
 
 AC_OUTPUT([
 Makefile
-bindings/Makefile
-bindings/python/Makefile
 src/Makefile
 data/Makefile
 data/icons/Makefile
@@ -312,7 +240,6 @@ data/icons/hicolor/scalable/apps/Makefile
 plugins/Makefile
 plugins/filesystem/Makefile
 plugins/information/Makefile
-plugins/mmkeys/Makefile
 plugins/radios/Makefile
 po/Makefile.in
 data/ario.desktop.in
@@ -330,11 +257,6 @@ if test x${enable_xmms2} = xyes; then
 else
         echo "XMMS2 support (VERY EXPERIMENTAL) is:     DISABLED (--enable-xmms2)"
 fi
-if test x${enable_python} = xyes; then
-        echo "Python plugins support (Experimental) is: ENABLED"
-else
-        echo "Python plugins support (Experimental) is: DISABLED (--enable-python)"
-fi
 if test x${enable_search} != xno; then
         echo "Search view support is:                   ENABLED  (--disable-search)"
 else
@@ -344,11 +266,6 @@ if test x${enable_avahi} != xno; then
         echo "Avahi support is:                         ENABLED  (--disable-avahi)"
 else
         echo "Avahi support is:                         DISABLED"
-fi
-if test x${enable_dbus} != xno; then
-        echo "DBUS support is:                          ENABLED  (--disable-dbus)"
-else
-        echo "DBUS support is:                          DISABLED"
 fi
 if test x${enable_playlists} != xno; then
         echo "Playlists support is:                     ENABLED  (--disable-playlists)"

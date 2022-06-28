@@ -34,7 +34,6 @@ static void ario_playlist_queue_next_song (ArioPlaylistMode *playlist_mode,
 
 static GObjectClass *parent_class = NULL;
 
-#define ARIO_PLAYLIST_QUEUE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_QUEUE, ArioPlaylistQueuePrivate))
 G_DEFINE_TYPE (ArioPlaylistQueue, ario_playlist_queue, ARIO_TYPE_PLAYLIST_MODE)
 
 static gchar *

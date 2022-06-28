@@ -102,8 +102,7 @@ struct ArioHeaderPrivate
         gint image_height;
 };
 
-#define ARIO_HEADER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_HEADER, ArioHeaderPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioHeader, ario_header, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioHeader, ario_header, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioHeader))
 
 static void
 ario_header_class_init (ArioHeaderClass *klass)
@@ -118,7 +117,7 @@ static void
 ario_header_init (ArioHeader *header)
 {
         ARIO_LOG_FUNCTION_START;
-        header->priv = ARIO_HEADER_GET_PRIVATE (header);
+        header->priv = ario_header_get_instance_private (header);
 }
 
 static void

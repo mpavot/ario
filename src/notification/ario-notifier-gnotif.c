@@ -35,8 +35,7 @@ struct ArioNotifierGnotifPrivate
         gint dummy;
 };
 
-#define ARIO_NOTIFIER_GNOTIF_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_NOTIFIER_GNOTIF, ArioNotifierGnotifPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioNotifierGnotif, ario_notifier_gnotif, ARIO_TYPE_NOTIFIER)
+G_DEFINE_TYPE_WITH_CODE (ArioNotifierGnotif, ario_notifier_gnotif, ARIO_TYPE_NOTIFIER, G_ADD_PRIVATE(ArioNotifierGnotif))
 
 static gchar *
 ario_notifier_gnotif_get_id (ArioNotifier *notifier)
@@ -124,7 +123,7 @@ ario_notifier_gnotif_init (ArioNotifierGnotif *notifier_gnotif)
 {
         ARIO_LOG_FUNCTION_START;
 
-        notifier_gnotif->priv = ARIO_NOTIFIER_GNOTIF_GET_PRIVATE (notifier_gnotif);
+        notifier_gnotif->priv = ario_notifier_gnotif_get_instance_private (notifier_gnotif);
 }
 
 ArioNotifier*

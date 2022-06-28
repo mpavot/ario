@@ -48,8 +48,7 @@ struct ArioBrowserPreferencesPrivate
         GSList *tree_comboboxs;
 };
 
-#define ARIO_BROWSER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER_PREFERENCES, ArioBrowserPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioBrowserPreferences, ario_browser_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioBrowserPreferences))
 
 static void
 ario_browser_preferences_class_init (ArioBrowserPreferencesClass *klass)
@@ -61,7 +60,7 @@ static void
 ario_browser_preferences_init (ArioBrowserPreferences *browser_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        browser_preferences->priv = ARIO_BROWSER_PREFERENCES_GET_PRIVATE (browser_preferences);
+        browser_preferences->priv = ario_browser_preferences_get_instance_private (browser_preferences);
 }
 
 GtkWidget *

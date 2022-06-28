@@ -179,16 +179,7 @@ _ario_plugin_info_new (const gchar *file)
                                      "Ario Plugin",
                                      "Loader",
                                      NULL);
-        if (str && strcmp(str, "python") == 0) {
-                info->loader = ARIO_PLUGIN_LOADER_PY;
-#ifndef ENABLE_PYTHON
-                g_warning ("Cannot load Python plugin '%s' since ario was not "
-                           "compiled with Python support.", file);
-                goto error;
-#endif
-        } else {
-                info->loader = ARIO_PLUGIN_LOADER_C;
-        }
+	info->loader = ARIO_PLUGIN_LOADER_C;
         g_free (str);
 
         /* Get Name */

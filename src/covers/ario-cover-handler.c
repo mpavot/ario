@@ -64,8 +64,7 @@ typedef struct ArioCoverHandlerData
         gchar *path;
 } ArioCoverHandlerData;
 
-#define ARIO_COVER_HANDLER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_HANDLER, ArioCoverHandlerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioCoverHandler, ario_cover_handler, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (ArioCoverHandler, ario_cover_handler, G_TYPE_OBJECT, G_ADD_PRIVATE(ArioCoverHandler))
 
 static ArioCoverHandler *instance = NULL;
 
@@ -92,7 +91,7 @@ static void
 ario_cover_handler_init (ArioCoverHandler *cover_handler)
 {
         ARIO_LOG_FUNCTION_START;
-        cover_handler->priv = ARIO_COVER_HANDLER_GET_PRIVATE (cover_handler);
+        cover_handler->priv = ario_cover_handler_get_instance_private (cover_handler);
         cover_handler->priv->thread = NULL;
         cover_handler->priv->queue = g_async_queue_new ();
 }

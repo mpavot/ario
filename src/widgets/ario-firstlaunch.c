@@ -36,8 +36,7 @@ struct ArioFirstlaunchPrivate
         GtkWidget *final_label;
 };
 
-#define ARIO_FIRSTLAUNCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_FIRSTLAUNCH, ArioFirstlaunchPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioFirstlaunch, ario_firstlaunch, GTK_TYPE_ASSISTANT)
+G_DEFINE_TYPE_WITH_CODE (ArioFirstlaunch, ario_firstlaunch, GTK_TYPE_ASSISTANT, G_ADD_PRIVATE(ArioFirstlaunch))
 
 static void
 ario_firstlaunch_class_init (ArioFirstlaunchClass *klass)
@@ -93,7 +92,7 @@ ario_firstlaunch_init (ArioFirstlaunch *firstlaunch)
         GtkWidget *label, *vbox, *connection_vbox;
         GtkBuilder *builder;
 
-        firstlaunch->priv = ARIO_FIRSTLAUNCH_GET_PRIVATE (firstlaunch);
+        firstlaunch->priv = ario_firstlaunch_get_instance_private (firstlaunch);
 
         /* Page 1 - Presentation of first launch assistant */
         vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);

@@ -38,8 +38,7 @@ struct ArioPlaylistManagerPrivate
         GSList *modes;
 };
 
-#define ARIO_PLAYLIST_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_MANAGER, ArioPlaylistManagerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioPlaylistManager, ario_playlist_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (ArioPlaylistManager, ario_playlist_manager, G_TYPE_OBJECT, G_ADD_PRIVATE(ArioPlaylistManager))
 
 static void
 ario_playlist_manager_class_init (ArioPlaylistManagerClass *klass)
@@ -51,7 +50,7 @@ static void
 ario_playlist_manager_init (ArioPlaylistManager *playlist_manager)
 {
         ARIO_LOG_FUNCTION_START;
-        playlist_manager->priv = ARIO_PLAYLIST_MANAGER_GET_PRIVATE (playlist_manager);
+        playlist_manager->priv = ario_playlist_manager_get_instance_private (playlist_manager);
 }
 
 static void

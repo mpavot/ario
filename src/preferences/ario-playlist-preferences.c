@@ -75,8 +75,7 @@ struct ArioPlaylistPreferencesPrivate
         GtkWidget *config;
 };
 
-#define ARIO_PLAYLIST_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_PREFERENCES, ArioPlaylistPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioPlaylistPreferences, ario_playlist_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioPlaylistPreferences, ario_playlist_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioPlaylistPreferences))
 
 static void
 ario_playlist_preferences_class_init (ArioPlaylistPreferencesClass *klass)
@@ -88,7 +87,7 @@ static void
 ario_playlist_preferences_init (ArioPlaylistPreferences *playlist_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        playlist_preferences->priv = ARIO_PLAYLIST_PREFERENCES_GET_PRIVATE (playlist_preferences);
+        playlist_preferences->priv = ario_playlist_preferences_get_instance_private (playlist_preferences);
 }
 
 GtkWidget *

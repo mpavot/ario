@@ -69,8 +69,7 @@ enum
         N_COLUMN
 };
 
-#define ARIO_SERVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SERVER_PREFERENCES, ArioServerPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioServerPreferences, ario_server_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioServerPreferences))
 
 static void
 ario_server_preferences_class_init (ArioServerPreferencesClass *klass)
@@ -82,7 +81,7 @@ static void
 ario_server_preferences_init (ArioServerPreferences *server_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        server_preferences->priv = ARIO_SERVER_PREFERENCES_GET_PRIVATE (server_preferences);
+        server_preferences->priv = ario_server_preferences_get_instance_private (server_preferences);
 }
 
 void

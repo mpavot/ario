@@ -43,8 +43,7 @@ struct ArioStatsPreferencesPrivate
         GtkWidget *dbplay_time_label;
 };
 
-#define ARIO_STATS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATS_PREFERENCES, ArioStatsPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioStatsPreferences, ario_stats_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioStatsPreferences, ario_stats_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioStatsPreferences))
 
 static void
 ario_stats_preferences_class_init (ArioStatsPreferencesClass *klass)
@@ -56,7 +55,7 @@ static void
 ario_stats_preferences_init (ArioStatsPreferences *stats_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        stats_preferences->priv = ARIO_STATS_PREFERENCES_GET_PRIVATE (stats_preferences);
+        stats_preferences->priv = ario_stats_preferences_get_instance_private (stats_preferences);
 }
 
 GtkWidget *

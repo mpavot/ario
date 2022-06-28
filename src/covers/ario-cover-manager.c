@@ -33,8 +33,7 @@ struct ArioCoverManagerPrivate
         GSList *providers;
 };
 
-#define ARIO_COVER_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_MANAGER, ArioCoverManagerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioCoverManager, ario_cover_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (ArioCoverManager, ario_cover_manager, G_TYPE_OBJECT, G_ADD_PRIVATE(ArioCoverManager))
 
 static void
 ario_cover_manager_class_init (ArioCoverManagerClass *klass)
@@ -47,7 +46,7 @@ ario_cover_manager_init (ArioCoverManager *cover_manager)
 {
         ARIO_LOG_FUNCTION_START;
 
-        cover_manager->priv = ARIO_COVER_MANAGER_GET_PRIVATE (cover_manager);
+        cover_manager->priv = ario_cover_manager_get_instance_private (cover_manager);
 }
 
 ArioCoverManager *

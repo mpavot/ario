@@ -40,8 +40,7 @@ struct ArioVolumePrivate
         gboolean loading;
 };
 
-#define ARIO_VOLUME_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_VOLUME, ArioVolumePrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioVolume, ario_volume, GTK_TYPE_EVENT_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioVolume, ario_volume, GTK_TYPE_EVENT_BOX, G_ADD_PRIVATE(ArioVolume))
 
 static void
 ario_volume_class_init (ArioVolumeClass *klass)
@@ -55,7 +54,7 @@ ario_volume_init (ArioVolume *volume)
         ARIO_LOG_FUNCTION_START;
         GtkAdjustment *adj;
 
-        volume->priv = ARIO_VOLUME_GET_PRIVATE (volume);
+        volume->priv = ario_volume_get_instance_private (volume);
 
         /* Volume button */
         volume->priv->volume_button = gtk_volume_button_new ();

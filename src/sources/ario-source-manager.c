@@ -56,8 +56,7 @@ typedef struct ArioSourceData
         ArioSource *source;
 } ArioSourceData;
 
-#define ARIO_SOURCE_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SOURCE_MANAGER, ArioSourceManagerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioSourceManager, ario_source_manager, GTK_TYPE_NOTEBOOK)
+G_DEFINE_TYPE_WITH_CODE (ArioSourceManager, ario_source_manager, GTK_TYPE_NOTEBOOK, G_ADD_PRIVATE(ArioSourceManager))
 
 static void
 ario_source_manager_class_init (ArioSourceManagerClass *klass)
@@ -69,7 +68,7 @@ static void
 ario_source_manager_init (ArioSourceManager *sourcemanager)
 {
         ARIO_LOG_FUNCTION_START;
-        sourcemanager->priv = ARIO_SOURCE_MANAGER_GET_PRIVATE (sourcemanager);
+        sourcemanager->priv = ario_source_manager_get_instance_private (sourcemanager);
 }
 
 GtkWidget *

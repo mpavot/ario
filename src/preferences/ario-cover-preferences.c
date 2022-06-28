@@ -64,8 +64,7 @@ enum
         N_COLUMN
 };
 
-#define ARIO_COVER_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_COVER_PREFERENCES, ArioCoverPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioCoverPreferences, ario_cover_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioCoverPreferences, ario_cover_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioCoverPreferences))
 
 static void
 ario_cover_preferences_class_init (ArioCoverPreferencesClass *klass)
@@ -77,7 +76,7 @@ static void
 ario_cover_preferences_init (ArioCoverPreferences *cover_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        cover_preferences->priv = ARIO_COVER_PREFERENCES_GET_PRIVATE (cover_preferences);
+        cover_preferences->priv = ario_cover_preferences_get_instance_private (cover_preferences);
 }
 
 GtkWidget *

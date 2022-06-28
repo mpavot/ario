@@ -122,8 +122,7 @@ static const GtkTargetEntry dirs_targets  [] = {
         { "text/directory", 0, 0 },
 };
 
-#define ARIO_FILESYSTEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_FILESYSTEM, ArioFilesystemPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioFilesystem, ario_filesystem, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioFilesystem, ario_filesystem, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioFilesystem))
 
 static gchar *
 ario_filesystem_get_id (ArioSource *source)
@@ -176,7 +175,7 @@ ario_filesystem_init (ArioFilesystem *filesystem)
         int pos;
         GtkWidget *scrolledwindow_filesystem;
 
-        filesystem->priv = ARIO_FILESYSTEM_GET_PRIVATE (filesystem);
+        filesystem->priv = ario_filesystem_get_instance_private (filesystem);
 
         filesystem->priv->connected = FALSE;
         filesystem->priv->empty = TRUE;

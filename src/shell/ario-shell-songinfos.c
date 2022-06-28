@@ -77,8 +77,7 @@ struct ArioShellSonginfosPrivate
         GtkWidget *save_button;
 };
 
-#define ARIO_SHELL_SONGINFOS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_SONGINFOS, ArioShellSonginfosPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShellSonginfos, ario_shell_songinfos, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_CODE (ArioShellSonginfos, ario_shell_songinfos, GTK_TYPE_DIALOG, G_ADD_PRIVATE(ArioShellSonginfos))
 
 static void
 ario_shell_songinfos_class_init (ArioShellSonginfosClass *klass)
@@ -94,7 +93,7 @@ static void
 ario_shell_songinfos_init (ArioShellSonginfos *shell_songinfos)
 {
         ARIO_LOG_FUNCTION_START;
-        shell_songinfos->priv = ARIO_SHELL_SONGINFOS_GET_PRIVATE (shell_songinfos);
+        shell_songinfos->priv = ario_shell_songinfos_get_instance_private (shell_songinfos);
 }
 
 static gboolean

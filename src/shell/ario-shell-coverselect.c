@@ -92,8 +92,7 @@ struct ArioShellCoverselectPrivate
         GSList *file_contents;
 };
 
-#define ARIO_SHELL_COVERSELECT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_COVERSELECT, ArioShellCoverselectPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShellCoverselect, ario_shell_coverselect, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_CODE (ArioShellCoverselect, ario_shell_coverselect, GTK_TYPE_DIALOG, G_ADD_PRIVATE(ArioShellCoverselect))
 
 static void
 ario_shell_coverselect_class_init (ArioShellCoverselectClass *klass)
@@ -110,7 +109,7 @@ static void
 ario_shell_coverselect_init (ArioShellCoverselect *shell_coverselect)
 {
         ARIO_LOG_FUNCTION_START;
-        shell_coverselect->priv = ARIO_SHELL_COVERSELECT_GET_PRIVATE (shell_coverselect);
+        shell_coverselect->priv = ario_shell_coverselect_get_instance_private (shell_coverselect);
         shell_coverselect->priv->liststore = gtk_list_store_new (N_COLUMN, GDK_TYPE_PIXBUF);
         shell_coverselect->priv->file_contents = NULL;
 }

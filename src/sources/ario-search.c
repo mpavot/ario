@@ -70,8 +70,7 @@ enum
         PROP_0,
 };
 
-#define ARIO_SEARCH_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SEARCH, ArioSearchPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioSearch, ario_search, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioSearch, ario_search, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioSearch))
 
 static gchar *
 ario_search_get_id (ArioSource *source)
@@ -107,7 +106,7 @@ static void
 ario_search_init (ArioSearch *search)
 {
         ARIO_LOG_FUNCTION_START;
-        search->priv = ARIO_SEARCH_GET_PRIVATE (search);
+        search->priv = ario_search_get_instance_private (search);
 
         search->priv->connected = FALSE;
 

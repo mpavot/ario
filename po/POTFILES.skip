@@ -1,10 +1,8 @@
 data/ario.desktop.in
-plugins/audioscrobbler/audioscrobbler-prefs.glade
 plugins/information/information.glade
 plugins/sample/ario-sample-plugin.c
 plugins/sample/ario-sample-plugin.h
 plugins/sample/sample.ario-plugin.desktop.in
-plugins/sample-python/sample-python.ario-plugin.desktop.in
 data/glade/browser-prefs.glade
 data/glade/connection-assistant.glade
 data/glade/connection-prefs.glade

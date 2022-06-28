@@ -28,8 +28,7 @@
 
 typedef enum
 {
-        ARIO_PLUGIN_LOADER_C,
-        ARIO_PLUGIN_LOADER_PY,
+        ARIO_PLUGIN_LOADER_C
 } ArioPluginLoader;
 
 struct _ArioPluginInfo

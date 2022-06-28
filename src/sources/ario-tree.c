@@ -129,8 +129,7 @@ static const GtkTargetEntry criterias_targets  [] = {
         { "text/criterias-list", 0, 0 },
 };
 
-#define ARIO_TREE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_TREE, ArioTreePrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioTree, ario_tree, GTK_TYPE_SCROLLED_WINDOW)
+G_DEFINE_TYPE_WITH_CODE (ArioTree, ario_tree, GTK_TYPE_SCROLLED_WINDOW, G_ADD_PRIVATE(ArioTree))
 
 static void
 ario_tree_class_init (ArioTreeClass *klass)
@@ -188,7 +187,7 @@ static void
 ario_tree_init (ArioTree *tree)
 {
         ARIO_LOG_FUNCTION_START;
-        tree->priv = ARIO_TREE_GET_PRIVATE (tree);
+        tree->priv = ario_tree_get_instance_private (tree);
 }
 
 static void

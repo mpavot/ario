@@ -31,19 +31,18 @@
 #include <ario-debug.h>
 #include <ario-shell.h>
 
-#define ARIO_SAMPLE_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_SAMPLE_PLUGIN, ArioSamplePluginPrivate))
 
 struct _ArioSamplePluginPrivate
 {
         gpointer dummy;
 };
 
-ARIO_PLUGIN_REGISTER_TYPE(ArioSamplePlugin, ario_sample_plugin)
+ARIO_PLUGIN_REGISTER_TYPE(ArioSamplePlugin, ario_sample_plugin, G_ADD_PRIVATE_DYNAMIC (ArioSamplePlugin))
 
 static void
 ario_sample_plugin_init (ArioSamplePlugin *plugin)
 {
-        plugin->priv = ARIO_SAMPLE_PLUGIN_GET_PRIVATE (plugin);
+        plugin->priv = ario_sample_plugin_get_instance_private (plugin);
 
         printf ("ArioSamplePlugin initialising\n");
 }

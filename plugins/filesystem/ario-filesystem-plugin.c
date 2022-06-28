@@ -30,7 +30,6 @@
 #include <ario-source-manager.h>
 #include "ario-filesystem.h"
 
-#define ARIO_FILESYSTEM_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_FILESYSTEM_PLUGIN, ArioFilesystemPluginPrivate))
 
 struct _ArioFilesystemPluginPrivate
 {
@@ -39,12 +38,12 @@ struct _ArioFilesystemPluginPrivate
         GtkWidget *source;
 };
 
-ARIO_PLUGIN_REGISTER_TYPE(ArioFilesystemPlugin, ario_filesystem_plugin)
+ARIO_PLUGIN_REGISTER_TYPE(ArioFilesystemPlugin, ario_filesystem_plugin, G_ADD_PRIVATE_DYNAMIC (ArioFilesystemPlugin))
 
 static void
 ario_filesystem_plugin_init (ArioFilesystemPlugin *plugin)
 {
-        plugin->priv = ARIO_FILESYSTEM_PLUGIN_GET_PRIVATE (plugin);
+        plugin->priv = ario_filesystem_plugin_get_instance_private (plugin);
 }
 
 static void

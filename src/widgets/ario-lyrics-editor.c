@@ -54,8 +54,7 @@ struct ArioLyricsEditorPrivate
         ArioLyricsEditorData *data;
 };
 
-#define ARIO_LYRICS_EDITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_LYRICS_EDITOR, ArioLyricsEditorPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioLyricsEditor, ario_lyrics_editor, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioLyricsEditor))
 
 static void
 ario_lyrics_editor_class_init (ArioLyricsEditorClass *klass)
@@ -71,7 +70,7 @@ static void
 ario_lyrics_editor_init (ArioLyricsEditor *lyrics_editor)
 {
         ARIO_LOG_FUNCTION_START;
-        lyrics_editor->priv = ARIO_LYRICS_EDITOR_GET_PRIVATE (lyrics_editor);
+        lyrics_editor->priv = ario_lyrics_editor_get_instance_private (lyrics_editor);
 }
 
 GtkWidget *

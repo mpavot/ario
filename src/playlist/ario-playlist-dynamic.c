@@ -54,7 +54,6 @@ static const char *dynamic_type[] = {
         NULL
 };
 
-#define ARIO_PLAYLIST_DYNAMIC_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_DYNAMIC, ArioPlaylistDynamicPrivate))
 G_DEFINE_TYPE (ArioPlaylistDynamic, ario_playlist_dynamic, ARIO_TYPE_PLAYLIST_MODE)
 
 static gchar *

@@ -88,8 +88,7 @@ enum
         PROP_0,
 };
 
-#define ARIO_INFORMATION_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_INFORMATION, ArioInformationPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioInformation, ario_information, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioInformation, ario_information, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioInformation))
 
 static gchar *
 ario_information_get_id (ArioSource *source)
@@ -172,7 +171,7 @@ ario_information_init (ArioInformation *information)
         GtkBuilder *builder;
         gchar *file;
 
-        information->priv = ARIO_INFORMATION_GET_PRIVATE (information);
+        information->priv = ario_information_get_instance_private (information);
 
         /* Get UI file in one of plugins directory */
         file = ario_plugin_find_file ("information.ui");

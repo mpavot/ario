@@ -125,8 +125,7 @@ struct ArioMpdPrivate
         gboolean supported[ARIO_TAG_COUNT];
 };
 
-#define ARIO_MPD_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_MPD, ArioMpdPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioMpd, ario_mpd, TYPE_ARIO_SERVER_INTERFACE)
+G_DEFINE_TYPE_WITH_CODE (ArioMpd, ario_mpd, TYPE_ARIO_SERVER_INTERFACE, G_ADD_PRIVATE(ArioMpd))
 
         static ArioMpd *instance = NULL;
         static ArioServer *server_instance = NULL;
@@ -185,7 +184,7 @@ static void
 ario_mpd_init (ArioMpd *mpd)
 {
         ARIO_LOG_FUNCTION_START;
-        mpd->priv = ARIO_MPD_GET_PRIVATE (mpd);
+        mpd->priv = ario_mpd_get_instance_private (mpd);
 
         mpd->priv->timeout_id = 0;
 }

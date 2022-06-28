@@ -68,8 +68,7 @@ enum
         N_COLUMN
 };
 
-#define ARIO_SHELL_SIMILARARTISTS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_SHELL_SIMILARARTISTS, ArioShellSimilarartistsPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShellSimilarartists, ario_shell_similarartists, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_CODE (ArioShellSimilarartists, ario_shell_similarartists, GTK_TYPE_WINDOW, G_ADD_PRIVATE(ArioShellSimilarartists))
 
 static void
 ario_shell_similarartists_class_init (ArioShellSimilarartistsClass *klass)
@@ -81,7 +80,7 @@ static void
 ario_shell_similarartists_init (ArioShellSimilarartists *shell_similarartists)
 {
         ARIO_LOG_FUNCTION_START;
-        shell_similarartists->priv = ARIO_SHELL_SIMILARARTISTS_GET_PRIVATE (shell_similarartists);
+        shell_similarartists->priv = ario_shell_similarartists_get_instance_private (shell_similarartists);
 
         /* Connect signal for window deletion */
         g_signal_connect (shell_similarartists,

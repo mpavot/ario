@@ -167,8 +167,7 @@ static const GActionEntry shell_actions[] = {
         { "quit", ario_shell_cmd_quit},
 };
 
-#define ARIO_SHELL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), ARIO_TYPE_SHELL, ArioShellPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioShell, ario_shell, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE_WITH_CODE (ArioShell, ario_shell, GTK_TYPE_APPLICATION_WINDOW, G_ADD_PRIVATE(ArioShell))
 
 static void
 ario_shell_class_init (ArioShellClass *klass)
@@ -184,7 +183,7 @@ static void
 ario_shell_init (ArioShell *shell)
 {
         ARIO_LOG_FUNCTION_START;
-        shell->priv = ARIO_SHELL_GET_PRIVATE (shell);
+        shell->priv = ario_shell_get_instance_private (shell);
         shell->priv->connected = FALSE;
         shell->priv->shown = FALSE;
 

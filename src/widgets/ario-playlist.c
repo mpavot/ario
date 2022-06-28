@@ -239,8 +239,7 @@ static const GtkTargetEntry internal_targets  [] = {
         { "text/internal-list", 0, 10 },
 };
 
-#define ARIO_PLAYLIST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST, ArioPlaylistPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioPlaylist, ario_playlist, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioPlaylist, ario_playlist, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioPlaylist))
 
 static gchar *
 ario_playlist_get_id (ArioSource *source)
@@ -514,7 +513,7 @@ ario_playlist_init (ArioPlaylist *playlist)
 
         /* Attributes initialization */
         instance = playlist;
-        playlist->priv = ARIO_PLAYLIST_GET_PRIVATE (playlist);
+        playlist->priv = ario_playlist_get_instance_private (playlist);
         playlist->priv->playlist_id = -1;
         playlist->priv->pos = -1;
         playlist->priv->playlist_length = 0;

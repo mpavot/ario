@@ -49,8 +49,7 @@ struct ArioConnectionPreferencesPrivate
         gboolean loading;
 };
 
-#define ARIO_CONNECTION_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_CONNECTION_PREFERENCES, ArioConnectionPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioConnectionPreferences, ario_connection_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioConnectionPreferences))
 
 static void
 ario_connection_preferences_class_init (ArioConnectionPreferencesClass *klass)
@@ -62,7 +61,7 @@ static void
 ario_connection_preferences_init (ArioConnectionPreferences *connection_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        connection_preferences->priv = ARIO_CONNECTION_PREFERENCES_GET_PRIVATE (connection_preferences);
+        connection_preferences->priv = ario_connection_preferences_get_instance_private (connection_preferences);
 
         connection_preferences->priv->loading = FALSE;
 }

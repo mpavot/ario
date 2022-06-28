@@ -36,8 +36,7 @@ struct ArioNotificationManagerPrivate
         GSList *notifiers;
 };
 
-#define ARIO_NOTIFICATION_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_NOTIFICATION_MANAGER, ArioNotificationManagerPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioNotificationManager, ario_notification_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (ArioNotificationManager, ario_notification_manager, G_TYPE_OBJECT, G_ADD_PRIVATE(ArioNotificationManager))
 
 static void
 ario_notification_manager_class_init (ArioNotificationManagerClass *klass)
@@ -50,7 +49,7 @@ ario_notification_manager_init (ArioNotificationManager *notification_manager)
 {
         ARIO_LOG_FUNCTION_START;
 
-        notification_manager->priv = ARIO_NOTIFICATION_MANAGER_GET_PRIVATE (notification_manager);
+        notification_manager->priv = ario_notification_manager_get_instance_private (notification_manager);
 }
 
 ArioNotificationManager *

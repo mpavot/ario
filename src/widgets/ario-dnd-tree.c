@@ -54,8 +54,7 @@ struct ArioDndTreePrivate
         gboolean browse_mode;
 };
 
-#define ARIO_DND_TREE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_DND_TREE, ArioDndTreePrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioDndTree, ario_dnd_tree, GTK_TYPE_TREE_VIEW)
+G_DEFINE_TYPE_WITH_CODE (ArioDndTree, ario_dnd_tree, GTK_TYPE_TREE_VIEW, G_ADD_PRIVATE(ArioDndTree))
 
 static void
 ario_dnd_tree_class_init (ArioDndTreeClass *klass)
@@ -89,7 +88,7 @@ static void
 ario_dnd_tree_init (ArioDndTree *dnd_tree)
 {
         ARIO_LOG_FUNCTION_START;
-        dnd_tree->priv = ARIO_DND_TREE_GET_PRIVATE (dnd_tree);
+        dnd_tree->priv = ario_dnd_tree_get_instance_private (dnd_tree);
 }
 
 GtkWidget *

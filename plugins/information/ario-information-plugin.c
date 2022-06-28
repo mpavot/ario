@@ -31,19 +31,18 @@
 #include <ario-source-manager.h>
 #include "ario-information.h"
 
-#define ARIO_INFORMATION_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_INFORMATION_PLUGIN, ArioInformationPluginPrivate))
 
 struct _ArioInformationPluginPrivate
 {
         GtkWidget *source;
 };
 
-ARIO_PLUGIN_REGISTER_TYPE(ArioInformationPlugin, ario_information_plugin)
+ARIO_PLUGIN_REGISTER_TYPE (ArioInformationPlugin, ario_information_plugin, G_ADD_PRIVATE_DYNAMIC (ArioInformationPlugin))
 
 static void
 ario_information_plugin_init (ArioInformationPlugin *plugin)
 {
-        plugin->priv = ARIO_INFORMATION_PLUGIN_GET_PRIVATE (plugin);
+        plugin->priv = ario_information_plugin_get_instance_private (plugin);
 }
 
 static void

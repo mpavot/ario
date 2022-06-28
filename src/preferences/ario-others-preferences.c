@@ -60,8 +60,7 @@ struct ArioOthersPreferencesPrivate
         GtkWidget *in_radiobutton;
 };
 
-#define ARIO_OTHERS_PREFERENCES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_OTHERS_PREFERENCES, ArioOthersPreferencesPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_CODE (ArioOthersPreferences, ario_others_preferences, GTK_TYPE_BOX, G_ADD_PRIVATE(ArioOthersPreferences))
 
 static void
 ario_others_preferences_class_init (ArioOthersPreferencesClass *klass)
@@ -73,7 +72,7 @@ static void
 ario_others_preferences_init (ArioOthersPreferences *others_preferences)
 {
         ARIO_LOG_FUNCTION_START;
-        others_preferences->priv = ARIO_OTHERS_PREFERENCES_GET_PRIVATE (others_preferences);
+        others_preferences->priv = ario_others_preferences_get_instance_private (others_preferences);
 }
 
 GtkWidget *

@@ -91,8 +91,7 @@ enum
         PROP_0,
 };
 
-#define ARIO_BROWSER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_BROWSER, ArioBrowserPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioBrowser, ario_browser, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioBrowser, ario_browser, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioBrowser))
 
 static gchar *
 ario_browser_get_id (ArioSource *source)
@@ -150,7 +149,7 @@ static void
 ario_browser_init (ArioBrowser *browser)
 {
         ARIO_LOG_FUNCTION_START;
-        browser->priv = ARIO_BROWSER_GET_PRIVATE (browser);
+        browser->priv = ario_browser_get_instance_private (browser);
         browser->priv->trees = NULL;
 }
 

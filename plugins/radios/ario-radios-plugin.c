@@ -33,19 +33,18 @@
 #include <ario-source-manager.h>
 #include "ario-radio.h"
 
-#define ARIO_RADIOS_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), ARIO_TYPE_RADIOS_PLUGIN, ArioRadiosPluginPrivate))
 
 struct _ArioRadiosPluginPrivate
 {
         GtkWidget *source;
 };
 
-ARIO_PLUGIN_REGISTER_TYPE(ArioRadiosPlugin, ario_radios_plugin)
+ARIO_PLUGIN_REGISTER_TYPE(ArioRadiosPlugin, ario_radios_plugin, G_ADD_PRIVATE_DYNAMIC (ArioRadiosPlugin))
 
 static void
 ario_radios_plugin_init (ArioRadiosPlugin *plugin)
 {
-        plugin->priv = ARIO_RADIOS_PLUGIN_GET_PRIVATE (plugin);
+        plugin->priv = ario_radios_plugin_get_instance_private (plugin);
 }
 
 static void

@@ -32,8 +32,7 @@ struct ArioStatusBarPrivate
         guint playlist_context_id;
 };
 
-#define ARIO_STATUS_BAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STATUS_BAR, ArioStatusBarPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioStatusBar, ario_status_bar, GTK_TYPE_STATUSBAR)
+G_DEFINE_TYPE_WITH_CODE (ArioStatusBar, ario_status_bar, GTK_TYPE_STATUSBAR, G_ADD_PRIVATE(ArioStatusBar))
 
 static void
 ario_status_bar_class_init (ArioStatusBarClass *klass)
@@ -45,7 +44,7 @@ static void
 ario_status_bar_init (ArioStatusBar *status_bar)
 {
         ARIO_LOG_FUNCTION_START;
-        status_bar->priv = ARIO_STATUS_BAR_GET_PRIVATE (status_bar);
+        status_bar->priv = ario_status_bar_get_instance_private (status_bar);
         status_bar->priv->playlist_context_id = gtk_statusbar_get_context_id (GTK_STATUSBAR (status_bar), "PlaylistMsg");
 }
 

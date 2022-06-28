@@ -102,68 +102,25 @@ char *          ario_plugin_find_file                   (const char *file);
 /*
  * Utility macro used to register plugins
  *
- * use: ARIO_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)
+ * use: ARIO_PLUGIN_REGISTER_TYPE(PluginName, plugin_name, CODE)
  */
-#define ARIO_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)      \
-        \
-static GType plugin_name##_type = 0;                                            \
-\
-GType                                                                           \
-plugin_name##_get_type (void)                                                   \
+#define ARIO_PLUGIN_REGISTER_TYPE(PluginName, plugin_name, CODE)                \
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (PluginName,                                     \
+                                plugin_name,                                    \
+                                ARIO_TYPE_PLUGIN,                               \
+                                0,                                              \
+                                CODE)                                           \
+                                                                                \
+GType register_ario_plugin (GTypeModule *module)                                \
 {                                                                               \
-        return plugin_name##_type;                                              \
+        plugin_name##_register_type (module);                                   \
+        return plugin_name##_type_id;                                           \
 }                                                                               \
-\
-static void     plugin_name##_init              (PluginName        *self);      \
-static void     plugin_name##_class_init        (PluginName##Class *klass);     \
-static gpointer plugin_name##_parent_class = NULL;                              \
-static void     plugin_name##_class_intern_init (gpointer klass)                \
+                                                                                \
+static void                                                                     \
+plugin_name##_class_finalize (PluginName##Class *klass)                         \
 {                                                                               \
-        plugin_name##_parent_class = g_type_class_peek_parent (klass);          \
-        plugin_name##_class_init ((PluginName##Class *) klass);                 \
-}                                                                               \
-\
-G_MODULE_EXPORT GType                                                           \
-register_ario_plugin (GTypeModule *module)                                      \
-{                                                                               \
-        static const GTypeInfo our_info =                                       \
-        {                                                                       \
-                sizeof (PluginName##Class),                                     \
-                NULL, /* base_init */                                           \
-                NULL, /* base_finalize */                                       \
-                (GClassInitFunc) plugin_name##_class_intern_init,               \
-                NULL,                                                           \
-                NULL, /* class_data */                                          \
-                sizeof (PluginName),                                            \
-                0, /* n_preallocs */                                            \
-                (GInstanceInitFunc) plugin_name##_init,                         \
-                NULL                                                            \
-        };                                                                      \
-        \
-        ARIO_LOG_DBG ("Registering " #PluginName);                              \
-        \
-        /* Initialise the i18n stuff */                                         \
-        bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);                           \
-        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");                     \
-        \
-        plugin_name##_type = g_type_module_register_type (module,               \
-                                                          ARIO_TYPE_PLUGIN,                   \
-#PluginName,                        \
-                                                          &our_info,                          \
-                                                          0);                                 \
-        \
-        CODE                                                                    \
-        \
-        return plugin_name##_type;                                              \
 }
-
-/*
- * Utility macro used to register plugins
- *
- * use: ARIO_PLUGIN_REGISTER_TYPE(PluginName, plugin_name)
- */
-#define ARIO_PLUGIN_REGISTER_TYPE(PluginName, plugin_name)                        \
-        ARIO_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, ;)
 
 G_END_DECLS
 

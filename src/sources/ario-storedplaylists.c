@@ -113,8 +113,7 @@ static const GtkTargetEntry songs_targets  [] = {
         { "text/songs-list", 0, 0 },
 };
 
-#define ARIO_STOREDPLAYLISTS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_STOREDPLAYLISTS, ArioStoredplaylistsPrivate))
-G_DEFINE_TYPE_WITH_PRIVATE (ArioStoredplaylists, ario_storedplaylists, ARIO_TYPE_SOURCE)
+G_DEFINE_TYPE_WITH_CODE (ArioStoredplaylists, ario_storedplaylists, ARIO_TYPE_SOURCE, G_ADD_PRIVATE(ArioStoredplaylists))
 
 static gchar *
 ario_storedplaylists_get_id (ArioSource *source)
@@ -170,7 +169,7 @@ ario_storedplaylists_init (ArioStoredplaylists *storedplaylists)
         GMenuModel *menu;
         int pos;
 
-        storedplaylists->priv = ARIO_STOREDPLAYLISTS_GET_PRIVATE (storedplaylists);
+        storedplaylists->priv = ario_storedplaylists_get_instance_private (storedplaylists);
 
         storedplaylists->priv->connected = FALSE;
         storedplaylists->priv->empty = TRUE;

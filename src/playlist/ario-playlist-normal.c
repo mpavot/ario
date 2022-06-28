@@ -32,7 +32,6 @@ static void ario_playlist_normal_init (ArioPlaylistNormal *playlist_normal);
 
 static GObjectClass *parent_class = NULL;
 
-#define ARIO_PLAYLIST_NORMAL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_ARIO_PLAYLIST_NORMAL, ArioPlaylistNormalPrivate))
 G_DEFINE_TYPE (ArioPlaylistNormal, ario_playlist_normal, ARIO_TYPE_PLAYLIST_MODE)
 
 static gchar *
