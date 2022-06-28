@@ -28,3 +28,8 @@ jobs:
           make
           make install
           ./deliver_mswin.sh
+          tar cvzf ario-win.tar.gz msbuild
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ario-win.tar.gz
+          path: ario-win.tar.gz
