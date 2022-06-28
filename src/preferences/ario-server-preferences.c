@@ -167,7 +167,7 @@ ario_server_preferences_sync_server (ArioServerPreferences *server_preferences)
         int crossfadetime;
         int state;
         gboolean updating;
-        long last_update;
+        time_t last_update;
         gchar *last_update_char;
         GtkTreeIter iter;
         GSList *tmp;
