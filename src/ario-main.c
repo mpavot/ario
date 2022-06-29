@@ -79,8 +79,7 @@ main (int argc, char *argv[])
 
         /* Check in an instance of Ario is already running */
 #ifdef WIN32
-        HANDLE hMutex;
-        hMutex = CreateMutex (NULL, FALSE, "ArioMain");
+        CreateMutex (NULL, FALSE, "ArioMain");
         if (ario_conf_get_boolean (PREF_ONE_INSTANCE, PREF_ONE_INSTANCE_DEFAULT)
             && (GetLastError() == ERROR_ALREADY_EXISTS)) {
                 ARIO_LOG_INFO ("Ario is already running\n");
