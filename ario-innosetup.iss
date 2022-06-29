@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ario"
-#define MyAppVersion "1.6"
+#define MyAppVersion "1.6.1"
 #define MyAppExeName "ario.exe"
 
 [Setup]
