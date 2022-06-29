@@ -23,3 +23,11 @@ jobs:
       run: make check
     - name: make install
       run: sudo make install
+    - name: make dist
+      run: |
+        make dist
+        mv ario-*.tar.gz ario-latest.tar.gz
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ario-latest.tar.gz
+        path: ario-latest.tar.gz
