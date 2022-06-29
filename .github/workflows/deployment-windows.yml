@@ -27,7 +27,7 @@ jobs:
           make
           make install
           ./deliver_mswin.sh
-          tar cvzf ario-win-{{ github.event.release.tag_name }}.tar.gz msbuild
+          tar cvzf ario-win-${{ github.event.release.tag_name }}.tar.gz msbuild
       - name: Upload
         uses: actions/upload-release-asset@v1.0.1
         env:
