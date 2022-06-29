@@ -27,6 +27,8 @@ jobs:
         make dist
     - name: Upload
       uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ario-${{ github.event.release.tag_name }}.tar.gz
