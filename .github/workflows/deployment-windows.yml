@@ -1,0 +1,37 @@
+name: Deployment Windows
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool make libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl mingw-w64-x86_64-meson mingw-w64-x86_64-ninja
+
+      - name: Build
+        run: |
+          echo 'Running in MSYS2!'
+          wget https://www.musicpd.org/download/libmpdclient/2/libmpdclient-2.16.tar.xz && tar xvf libmpdclient-2.16.tar.xz && cd libmpdclient-2.16 && meson . output && ninja -C output && ninja -C output install && cd ..
+          ./autogen.sh --disable-taglib --disable-avahi --disable-dbus --disable-dependency-tracking  --disable-silent-rules --enable-mswin
+          make
+          make install
+          ./deliver_mswin.sh
+          tar cvzf ario-win-{{ github.event.release.tag_name }}.tar.gz msbuild
+    - name: Upload
+      uses: actions/upload-release-asset@v1.0.1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ario-win-{{ github.event.release.tag_name }}.tar.gz
+        asset_name: ario-win-{{ github.event.release.tag_name }}.tar.gz
+        asset_content_type: binary/octet-stream
