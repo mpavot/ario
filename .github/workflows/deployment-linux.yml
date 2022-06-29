@@ -29,6 +29,6 @@ jobs:
       uses: actions/upload-release-asset@v1.0.1
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ario-*.tar.gz
-        asset_name: ario-${{ github.event.release.tag_name }}-.tar.gz
+        asset_path: ario-${{ github.event.release.tag_name }}.tar.gz
+        asset_name: ario-${{ github.event.release.tag_name }}.tar.gz
         asset_content_type: binary/octet-stream
