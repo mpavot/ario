@@ -13,7 +13,7 @@ It runs on various Unixes (Linux, OpenBSD, Mac OS X...) and Microsoft Windows.
 Easiest way to install Ario is to use packages provided by your Linux distribution.
 
 ### Microsoft Windows
-You need to install GTK+ Runtime Environment and then to install Ario with the last version of the MSI installer.
+You can install Ario with the EXE installer provided with each release.
 
 ## Compile
 ### Linux
