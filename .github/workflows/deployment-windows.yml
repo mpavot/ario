@@ -27,13 +27,14 @@ jobs:
           make
           make install
           ./deliver_mswin.sh
-          tar cvzf ario-win-${{ github.event.release.tag_name }}.tar.gz msbuild
+          makensis ario.nsi
+          mv ario-installer.exe ario-win-${{ github.event.release.tag_name }}.exe
       - name: Upload
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ario-win-${{ github.event.release.tag_name }}.tar.gz
-          asset_name: ario-win-${{ github.event.release.tag_name }}.tar.gz
+          asset_path: ario-win-${{ github.event.release.tag_name }}.exe
+          asset_name: ario-win-${{ github.event.release.tag_name }}.exe
           asset_content_type: binary/octet-stream

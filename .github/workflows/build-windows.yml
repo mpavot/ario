@@ -18,7 +18,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool make libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl mingw-w64-x86_64-meson mingw-w64-x86_64-ninja
+          install: git mingw-w64-x86_64-cc mingw-w64-x86_64-libtool make libtool autoconf automake intltool mingw-w64-x86_64-gcc mingw-w64-x86_64-make pkg-config mingw-w64-x86_64-glib2 mingw-w64-x86_64-gtk3 mingw-w64-x86_64-curl mingw-w64-x86_64-meson mingw-w64-x86_64-ninja mingw-w64-x86_64-nsis
 
       - name: Build
         run: |
@@ -28,8 +28,8 @@ jobs:
           make
           make install
           ./deliver_mswin.sh
-          tar cvzf ario-win.tar.gz msbuild
+          makensis ario.nsi
       - uses: actions/upload-artifact@v3
         with:
-          name: ario-win.tar.gz
-          path: ario-win-latest.tar.gz
+          name: ario-installer.exe
+          path: ario-win-latest.exe
