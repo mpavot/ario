@@ -29,7 +29,10 @@ jobs:
           make install
           ./deliver_mswin.sh
           makensis ario.nsi
+          mv ario-installer.exe ario-win-latest.exe
       - uses: actions/upload-artifact@v3
         with:
-          name: ario-installer.exe
+          name: ario-win-latest.exe
           path: ario-win-latest.exe
+
+
