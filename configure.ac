@@ -1,4 +1,4 @@
-AC_PREREQ([2.71])
+AC_PREREQ([2.60])
 
 m4_define(ario_version,1.6.1)
 
