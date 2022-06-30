@@ -1,16 +1,16 @@
-AC_PREREQ(2.59)
+AC_PREREQ([2.71])
 
 m4_define(ario_version,1.6.1)
 
-AC_INIT([Ario], [ario_version], [marc.pavot@gmail.com], [ario])
+AC_INIT([Ario],[ario_version],[marc.pavot@gmail.com],[ario])
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE([subdir-objects])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_PROG_CC
 AC_PROG_INSTALL
-AC_STDC_HEADERS
-AM_PROG_LIBTOOL
+
+LT_INIT
 
 dnl ================================================================
 dnl i18n
@@ -25,8 +25,7 @@ dnl ================================================================
 dnl Host
 dnl ================================================================
 AC_ARG_ENABLE(mswin,
-              AC_HELP_STRING([--enable-mswin],
-                             [Compile for MS Windows]))
+              AS_HELP_STRING([--enable-mswin],[Compile for MS Windows]))
 if test x"$enable_mswin" = xyes; then
    AC_DEFINE(WINDOWS, 1, [Compile for MS Windows)])
 fi
@@ -71,9 +70,7 @@ for option in $WARN_CFLAGS; do
         SAVE_CFLAGS="$CFLAGS"
         CFLAGS="$CFLAGS $option"
         AC_MSG_CHECKING([whether gcc understands $option])
-        AC_TRY_COMPILE([], [],
-                       has_option=yes,
-                       has_option=no,)
+        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],[has_option=yes],[has_option=no])
         if test x$has_option = xyes; then
                 WARNINGS="$WARNINGS $option"
         fi
@@ -88,8 +85,7 @@ dnl ================================================================
 dnl Debugging information
 dnl ================================================================
 AC_ARG_ENABLE(debug,
-              AC_HELP_STRING([--enable-debug],
-                             [Add runtime debugging information (slower)]))
+              AS_HELP_STRING([--enable-debug],[Add runtime debugging information (slower)]))
 if test x"$enable_debug" = xyes; then
    AC_DEFINE(DEBUG, 1, [Add runtime debugging information (slower)])
 fi
@@ -98,8 +94,7 @@ dnl ================================================================
 dnl XMMS2 support
 dnl ================================================================
 AC_ARG_ENABLE(xmms2,
-              AC_HELP_STRING([--enable-xmms2],
-                             [Add support of XMMS2 (VERY EXPERIMENTAL)]))
+              AS_HELP_STRING([--enable-xmms2],[Add support of XMMS2 (VERY EXPERIMENTAL)]))
 if test x"$enable_xmms2" = xyes; then
    AC_DEFINE(ENABLE_XMMS2, 1, [Add support of XMMS2 (VERY EXPERIMENTAL)])
    PKG_CHECK_MODULES(XMMS2,
@@ -114,8 +109,7 @@ dnl ================================================================
 dnl libmpdclient2
 dnl ================================================================
 AC_ARG_ENABLE(libmpdclient2,
-              AC_HELP_STRING([--disable-libmpdclient2],
-                             [Disable use libmpdclient2 (embedded version of libmpdclient zill be used)]))
+              AS_HELP_STRING([--disable-libmpdclient2],[Disable use libmpdclient2 (embedded version of libmpdclient zill be used)]))
 if test x"$enable_libmpdclient2" != xno; then
    AC_DEFINE(ENABLE_LIBMPDCLIENT2, 1, [Use libmpdclient2])
    PKG_CHECK_MODULES(LIBMPDCLIENT2, [libmpdclient >= 2.0])
@@ -131,8 +125,7 @@ dnl ================================================================
 dnl Search
 dnl ================================================================
 AC_ARG_ENABLE(search,
-              AC_HELP_STRING([--disable-search],
-                             [Disable support of search view]))
+              AS_HELP_STRING([--disable-search],[Disable support of search view]))
 if test x"$enable_search" != xno; then
    AC_DEFINE(ENABLE_SEARCH, 1, [Add support of search view])
 fi
@@ -141,8 +134,7 @@ dnl ================================================================
 dnl MPD idle mode
 dnl ================================================================
 AC_ARG_ENABLE(mpdidle,
-              AC_HELP_STRING([--disable-mpdidle],
-                             [Disable MPD idle mode (MPD idle mode reduces CPU and network usage)]))
+              AS_HELP_STRING([--disable-mpdidle],[Disable MPD idle mode (MPD idle mode reduces CPU and network usage)]))
 if test x"$enable_mpdidle" != xno; then
    AC_DEFINE(ENABLE_MPDIDLE, 1, [Use MPD idle mode (reduces CPU and network usage but still experimental)])
 fi
@@ -152,8 +144,7 @@ dnl ================================================================
 dnl Stored Playlists
 dnl ================================================================
 AC_ARG_ENABLE(playlists,
-              AC_HELP_STRING([--disable-playlists],
-                             [Disable support of playlists]))
+              AS_HELP_STRING([--disable-playlists],[Disable support of playlists]))
 if test x"$enable_playlists" != xno; then
    AC_DEFINE(ENABLE_STOREDPLAYLISTS, 1, [Add support of playlists])
 fi
@@ -162,8 +153,7 @@ dnl ================================================================
 dnl Avahi
 dnl ================================================================
 AC_ARG_ENABLE(avahi,
-              AC_HELP_STRING([--disable-avahi],
-                             [Disable support of avahi]))
+              AS_HELP_STRING([--disable-avahi],[Disable support of avahi]))
 if test x"$enable_avahi" != xno; then
    AC_DEFINE(ENABLE_AVAHI, 1, [Add support of avahi])
    PKG_CHECK_MODULES(AVAHI, [avahi-client
@@ -177,8 +167,7 @@ dnl ================================================================
 dnl Taglib
 dnl ================================================================
 AC_ARG_ENABLE(taglib,
-              AC_HELP_STRING([--disable-taglib],
-                             [Disable support of Taglib]))
+              AS_HELP_STRING([--disable-taglib],[Disable support of Taglib]))
 if test x"$enable_taglib" != xno; then
    AC_DEFINE(ENABLE_TAGLIB, 1, [Add support of taglib])
    PKG_CHECK_MODULES(TAGLIB, [taglib_c])
@@ -190,8 +179,7 @@ dnl ================================================================
 dnl Deprecations
 dnl ================================================================
 AC_ARG_ENABLE(deprecations,
-              AC_HELP_STRING([--enable-deprecations],
-                             [Warn about deprecated usages]))
+              AS_HELP_STRING([--enable-deprecations],[Warn about deprecated usages]))
 if test x"$enable_deprecations" = xyes; then
         WARNINGS="$WARNINGS -DG_DISABLE_DEPRECATED \
 -DGDK_DISABLE_DEPRECATED \
@@ -209,7 +197,7 @@ AC_SUBST(PLUGINDIR)
 PLUGIN_DATA_DIR='${pkgdatadir}/plugins'
 AC_SUBST(PLUGIN_DATA_DIR)
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 src/Makefile
 data/Makefile
@@ -244,6 +232,7 @@ plugins/radios/Makefile
 po/Makefile.in
 data/ario.desktop.in
 ])
+AC_OUTPUT
 echo ""
 echo ""
 echo "-------------- Options --------------"
