@@ -30,6 +30,13 @@ if test x"$enable_mswin" = xyes; then
    AC_DEFINE(WINDOWS, 1, [Compile for MS Windows)])
 fi
 AM_CONDITIONAL(WINDOWS, test x"$enable_mswin" = xyes)
+AC_ARG_ENABLE(macos,
+              AS_HELP_STRING([--enable-macos],[Compile for MacOS]))
+if test x"$enable_macos" = xyes; then
+   AC_DEFINE(MACOS, 1, [Compile for MacOS)])
+fi
+AM_CONDITIONAL(MACOS, test x"$enable_macos" = xyes)
+
 
 dnl ================================================================
 dnl Dependencies
@@ -280,4 +287,9 @@ if test x${enable_mswin} = xyes; then
         echo "Compilation for MS Windows is:            ENABLED"
 else
         echo "Compilation for MS Windows is:            DISABLED (--enable-mswin)"
+fi
+if test x${enable_macos} = xyes; then
+        echo "Compilation for MacOS is:            	ENABLED"
+else
+        echo "Compilation for MacOS is:                 DISABLED (--enable-macos)"
 fi

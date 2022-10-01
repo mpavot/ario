@@ -29,8 +29,12 @@ if WINDOWS
 libfilesystem_la_LIBADD += -lario-0
 INCLUDES += -mwindows
 else
+if MACOS 
+libfilesystem_la_LIBADD += -lario
+else
 plugin_in_files = filesystem.ario-plugin.desktop.in
 %.ario-plugin: %.ario-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+endif
 endif
 
 plugin_DATA = $(plugin_in_files:.ario-plugin.desktop.in=.ario-plugin)
